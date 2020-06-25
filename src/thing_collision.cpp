@@ -471,6 +471,51 @@ static int circle_circle_collision (Thingp A,
     return (true);
 }
 
+static int circle_circle_collision_attack (Thingp A,
+                                           fpoint A_at,
+                                           Thingp B,
+                                           fpoint B_at,
+                                           fpoint *intersect)
+{
+    //fpoint A0, A1, A2, A3;
+    //A->to_coords(&A0, &A1, &A2, &A3);
+    //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
+    float A_radius = A->tp()->collision_radius();
+    float B_radius = B->tp()->collision_attack_radius();
+    if (!B_radius) {
+        B_radius = B->tp()->collision_radius();
+    }
+
+    //fpoint B0, B1, B2, B3;
+    //B->to_coords(&B0, &B1, &B2, &B3);
+    //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
+
+    fpoint n = B_at - A_at;
+    float touching_dist = A_radius + B_radius;
+    float dist_squared = n.x*n.x + n.y*n.y;
+
+    float diff = dist_squared - touching_dist * touching_dist;
+    if (diff > 0.0) {
+        //
+        // Circles are not touching
+        //
+        return (false);
+    }
+
+    diff = sqrt(fabs(diff));
+    diff /= 2.0;
+
+    n = unit(n);
+    n *= (A_radius - diff);
+    n += A_at;
+
+    if (intersect) {
+        *intersect = n;
+    }
+
+    return (true);
+}
+
 //
 // Add a thing to the list of things that could be hit on this attack.
 //
@@ -765,6 +810,36 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
     return (false);
 }
 
+bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
+{
+    if (A->tp()->collision_circle() &&
+        B->tp()->collision_circle()) {
+        if (circle_circle_collision_attack(A, // circle
+                                           A_at,
+                                           B, // box
+                                           B->mid_at,
+                                           nullptr)) {
+            return (true);
+        }
+        if (circle_circle_collision_attack(A, // circle
+                                           A_at,
+                                           B, // box
+                                           B->get_interpolated_mid_at(),
+                                           nullptr)) {
+            return (true);
+        }
+        if (circle_circle_collision_attack(A, // circle
+                                           A->get_interpolated_mid_at(),
+                                           B, // box
+                                           B->get_interpolated_mid_at(),
+                                           nullptr)) {
+            return (true);
+        }
+    }
+
+    return (false);
+}
+
 //
 // handle a single collision between two things
 //
@@ -798,7 +873,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
     // Sword use hits?
     //
     if (possible_to_attack(it)) {
-        if (things_overlap(me, future_pos, it)) {
+        if (things_overlap_attack(me, future_pos, it)) {
             if (is_loggable_for_unimportant_stuff()) {
                 log("candidate to attack %s", it->to_string().c_str());
             }
@@ -908,7 +983,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
     }
 
     if (is_loggable_for_unimportant_stuff()) {
-        log("collision check @%f,%f with %s", 
+        log("collision check @%f,%f with %s",
             A_at.x, A_at.y, it->to_string().c_str());
     }
 _
@@ -921,7 +996,7 @@ _
             // Weapon hits monster or generator.
             //
             log("try to attack %s", it->to_string().c_str());
-            if (things_overlap(me, A_at, it)) {
+            if (things_overlap_attack(me, A_at, it)) {
                 return (true);
             }
         }

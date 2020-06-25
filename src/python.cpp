@@ -519,6 +519,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(collision_circle)
     TP_SET_DECL(collision_hit_priority)
     TP_SET_DECL(collision_radius)
+    TP_SET_DECL(collision_attack_radius)
     TP_SET_DECL(gfx_an_animation_only)
     TP_SET_DECL(gfx_animated)
     TP_SET_DECL(gfx_animated_can_hflip)
