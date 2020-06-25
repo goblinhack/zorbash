@@ -281,6 +281,9 @@ class Tp:
     def set_is_jumper_chance_d1000(self, value):
         zx.tp_set_is_jumper_chance_d1000(self, value)
 
+    def set_is_jumper_on_low_hp_chance_d1000(self, value):
+        zx.tp_set_is_jumper_on_low_hp_chance_d1000(self, value)
+
     def set_is_chasm(self, value):
         zx.tp_set_is_chasm(self, value)
 

@@ -124,6 +124,7 @@ public:
     timestamp_t  timestamp_move_end {};
     uint32_t     tick = {};                  // Increments on completion of move
     uint32_t     tick_last_did_something {};
+    uint32_t     tick_last_escape {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -596,6 +597,13 @@ public:
     uint32_t decr_tick_last_did_something(void);
     uint32_t incr_tick_last_did_something(void);
 
+    uint32_t set_tick_last_escape(uint32_t);
+    uint32_t get_tick_last_escape(void) const;
+    uint32_t decr_tick_last_escape(uint32_t);
+    uint32_t incr_tick_last_escape(uint32_t);
+    uint32_t decr_tick_last_escape(void);
+    uint32_t incr_tick_last_escape(void);
+
     ThingId set_on_fire_anim_id(ThingId);
     ThingId get_on_fire_anim_id(void) const;
 
@@ -649,6 +657,7 @@ public:
     const Dice& get_resurrect_dice(void) const;
 
     bool try_to_jump(void);
+    bool try_to_escape(void);
 
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
@@ -806,6 +815,7 @@ public:
     int is_interesting(void) const;
     int is_jumper(void) const;
     int is_jumper_chance_d1000(void) const;
+    int is_jumper_on_low_hp_chance_d1000(void) const;
     int is_jumper_distance(void) const;
     int is_key(void) const;
     int is_lava(void) const;

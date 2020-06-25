@@ -129,6 +129,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_init.o 		\
     $(OBJDIR)/thing_items.o 		\
     $(OBJDIR)/thing_jump.o 		\
+    $(OBJDIR)/thing_escape.o 		\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\

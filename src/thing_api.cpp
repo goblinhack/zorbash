@@ -613,6 +613,11 @@ int Thing::is_jumper_chance_d1000(void) const
     return (tp()->is_jumper_chance_d1000());
 }
 
+int Thing::is_jumper_on_low_hp_chance_d1000(void) const
+{_
+    return (tp()->is_jumper_on_low_hp_chance_d1000());
+}
+
 int Thing::is_hazard(void) const
 {_
     return (tp()->is_hazard());
@@ -2729,6 +2734,54 @@ uint32_t Thing::incr_tick_last_did_something (void)
     new_monst();
 //con("%s", __FUNCTION__);
     return (monstp->tick_last_did_something++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// tick_last_escape
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_tick_last_escape (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->tick_last_escape);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_tick_last_escape (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_escape = v);
+}
+
+uint32_t Thing::decr_tick_last_escape (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_escape -= v);
+}
+
+uint32_t Thing::incr_tick_last_escape (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_escape += v);
+}
+
+uint32_t Thing::decr_tick_last_escape (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_escape--);
+}
+
+uint32_t Thing::incr_tick_last_escape (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_escape++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

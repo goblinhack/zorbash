@@ -31,44 +31,53 @@ bool Thing::achieve_goals_in_life (void)
         get_tick(), game->tick_current);
 
     if (is_falling) {
+        is_tick_done = true;
         return true;
     }
 
     lifespan_tick();
     if (is_dead) {
+        is_tick_done = true;
         return true;
     }
 
     hunger_clock();
     if (is_dead) {
+        is_tick_done = true;
         return true;
     }
 
     water_tick();
     if (is_dead) {
+        is_tick_done = true;
         return true;
     }
 
     chasm_tick();
     if (is_dead) {
+        is_tick_done = true;
         return true;
     }
 
     lava_tick();
     if (is_dead) {
+        is_tick_done = true;
         return true;
     }
 
     if (exit_tick()) {
+        is_tick_done = true;
         return true;
     }
 
     if (entrance_tick()) {
+        is_tick_done = true;
         return true;
     }
 
     collision_check_do();
     if (is_dead) {
+        is_tick_done = true;
         return true;
     }
 
@@ -90,6 +99,12 @@ bool Thing::achieve_goals_in_life (void)
     // If there is a next hop to go to, do it.
     //
     if (cursor_path_pop_next_and_move()) {
+        is_tick_done = true;
+        return true;
+    }
+
+    if (try_to_escape()) {
+        is_tick_done = true;
         return true;
     }
 
