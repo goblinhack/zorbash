@@ -13,7 +13,7 @@
 #include "my_python.h"
 #include "my_log.h"
 
-void Thing::kill (const char *reason)
+void Thing::kill (Thingp killer, const char *reason)
 {_
     if (is_dead) {
         return;
@@ -30,7 +30,11 @@ void Thing::kill (const char *reason)
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
     } else if (is_loggable_for_important_stuff()) {
-        MINICON("%s is dead, %s", text_The().c_str(), reason);
+        if (!killer) {
+            MINICON("%s is dead, %s", text_The().c_str(), reason);
+        } else if (killer != this) {
+            MINICON("%s is dead, %s", text_The().c_str(), reason);
+        }
     }
 
     if (is_resurrectable()) {
@@ -82,16 +86,16 @@ void Thing::kill (const char *reason)
         }
     }
 
-    log("need to gc");
+    dbg("need to gc");
     auto result = level->all_gc_things.insert(std::pair(id, this));
     if (result.second == false) {
         err("failed to insert into gc thing map");
     }
 }
 
-void Thing::kill (std::string &reason)
+void Thing::kill (Thingp killer, std::string &reason)
 {_
-    kill(reason.c_str());
+    kill(killer, reason.c_str());
 }
 
 void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
@@ -123,9 +127,9 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 
         char reason[MAXSTR];
         vsnprintf(reason, MAXSTR, fmt, args);
-        kill(reason);
+        kill(killer, reason);
     } else {
-        kill("no reason");
+        kill(killer, "no reason");
     }
 }
 
@@ -161,9 +165,9 @@ void Thing::dead_ (const char *fmt, va_list args)
         putf(MY_STDOUT, buf);
         char reason[MAXSTR];
         vsnprintf(reason, MAXSTR, fmt, args);
-        kill(reason);
+        kill(nullptr, reason);
     } else {
-        kill("no reason");
+        kill(nullptr, "no reason");
     }
 }
 
@@ -190,9 +194,9 @@ void Thing::dead (Thingp killer, std::string &reason)
         }
 
         putf(MY_STDOUT, reason.c_str());
-        kill(reason);
+        kill(killer, reason);
     } else {
-        kill("no reason");
+        kill(killer, "no reason");
     }
 }
 
@@ -212,9 +216,9 @@ void Thing::dead (std::string &reason)
                  t->to_string().c_str());
 
         putf(MY_STDOUT, reason.c_str());
-        kill(reason);
+        kill(nullptr, reason);
     } else {
-        kill("no reason");
+        kill(nullptr, "no reason");
     }
 }
 

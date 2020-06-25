@@ -133,7 +133,7 @@ int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_lava(void) const { return _is_lava; }
 int Tp::is_light_strength(void) const { return _is_light_strength; }
 int Tp::is_loggable_for_unimportant_stuff(void) const { return _is_loggable_for_unimportant_stuff; }
-int Tp::is_made_of_meat(void) const { return _is_made_of_meat; }
+int Tp::is_meat(void) const { return _is_meat; }
 int Tp::is_meat_eater(void) const { return _is_meat_eater; }
 int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_movable(void) const { return _is_movable; }
@@ -145,8 +145,8 @@ int Tp::is_projectile(void) const { return _is_projectile; }
 int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rrr1(void) const { return _is_rrr1; }
-int Tp::is_baby_slime_eater(void) const { return _is_baby_slime_eater; }
-int Tp::is_baby_slime(void) const { return _is_baby_slime; }
+int Tp::is_slime_baby_eater(void) const { return _is_slime_baby_eater; }
+int Tp::is_slime_baby(void) const { return _is_slime_baby; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_gold(void) const { return _is_gold; }
@@ -159,13 +159,13 @@ int Tp::is_collectable(void) const { return _is_collectable; }
 int Tp::is_resurrectable(void) const { return _is_resurrectable; }
 int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_double_damage_from_fire(void) const { return _is_double_damage_from_fire; }
-int Tp::is_rrr3(void) const { return _is_rrr3; }
-int Tp::is_rrr4(void) const { return _is_rrr4; }
-int Tp::is_rrr5(void) const { return _is_rrr5; }
-int Tp::is_rrr6(void) const { return _is_rrr6; }
+int Tp::is_slime_parent(void) const { return _is_slime_parent; }
+int Tp::is_slime_eater(void) const { return _is_slime_eater; }
+int Tp::is_slime(void) const { return _is_slime; }
+int Tp::is_attack_eater(void) const { return _is_attack_eater; }
 int Tp::is_jumper_distance(void) const { return _is_jumper_distance; }
 int Tp::is_jumper(void) const { return _is_jumper; }
-int Tp::is_parent_slime(void) const { return _is_parent_slime; }
+int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_torch(void) const { return _is_torch; }
@@ -277,7 +277,7 @@ void Tp::set_is_smoke(int v) { _is_smoke = v; }
 void Tp::set_is_lava(int v) { _is_lava = v; }
 void Tp::set_is_light_strength(int v) { _is_light_strength = v; }
 void Tp::set_is_loggable_for_unimportant_stuff(int v) { _is_loggable_for_unimportant_stuff = v; }
-void Tp::set_is_made_of_meat(int v) { _is_made_of_meat = v; }
+void Tp::set_is_meat(int v) { _is_meat = v; }
 void Tp::set_is_meat_eater(int v) { _is_meat_eater = v; }
 void Tp::set_is_monst(int v) { _is_monst = v; }
 void Tp::set_is_movable(int v) { _is_movable = v; }
@@ -289,8 +289,8 @@ void Tp::set_is_projectile(int v) { _is_projectile = v; }
 void Tp::set_is_ripple(int v) { _is_ripple = v; }
 void Tp::set_is_rock(int v) { _is_rock = v; }
 void Tp::set_is_rrr1(int v) { _is_rrr1 = v; }
-void Tp::set_is_baby_slime_eater(int v) { _is_baby_slime_eater = v; }
-void Tp::set_is_baby_slime(int v) { _is_baby_slime = v; }
+void Tp::set_is_slime_baby_eater(int v) { _is_slime_baby_eater = v; }
+void Tp::set_is_slime_baby(int v) { _is_slime_baby = v; }
 void Tp::set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
 void Tp::set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
 void Tp::set_is_gold(int v) { _is_gold = v; }
@@ -303,13 +303,13 @@ void Tp::set_is_collectable(int v) { _is_collectable = v; }
 void Tp::set_is_resurrectable(int v) { _is_resurrectable = v; }
 void Tp::set_is_intelligent(int v) { _is_intelligent = v; }
 void Tp::set_is_double_damage_from_fire(int v) { _is_double_damage_from_fire = v; }
-void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
-void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
-void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
-void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
+void Tp::set_is_slime_parent(int v) { _is_slime_parent = v; }
+void Tp::set_is_slime_eater(int v) { _is_slime_eater = v; }
+void Tp::set_is_slime(int v) { _is_slime = v; }
+void Tp::set_is_attack_eater(int v) { _is_attack_eater = v; }
 void Tp::set_is_jumper_distance(int v) { _is_jumper_distance = v; }
 void Tp::set_is_jumper(int v) { _is_jumper = v; }
-void Tp::set_is_parent_slime(int v) { _is_parent_slime = v; }
+void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
 void Tp::set_is_shovable(int v) { _is_shovable = v; }
 void Tp::set_is_torch(int v) { _is_torch = v; }

@@ -24,7 +24,7 @@ Thing::~Thing_ (void)
 void Thing::destroy (void)
 {_
     verify(this);
-    log("~Thing");
+    dbg("~Thing");
 
     if (is_loggable_for_unimportant_stuff()) {
         log("destroy");
@@ -62,10 +62,10 @@ void Thing::destroy (void)
     {
         auto f = level->all_gc_things.find(id);
         if (f != level->all_gc_things.end()) {
-            log("remove from gc");
+            dbg("remove from gc");
             level->all_gc_things.erase(f);
         } else {
-            log("no need to gc");
+            dbg("no need to gc");
         }
     }
 

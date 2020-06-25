@@ -418,9 +418,9 @@ int Thing::is_light_strength(void) const
     return (tp()->is_light_strength());
 }
 
-int Thing::is_made_of_meat(void) const
+int Thing::is_meat(void) const
 {_
-    return (tp()->is_made_of_meat());
+    return (tp()->is_meat());
 }
 
 int Thing::is_meat_eater(void) const
@@ -478,14 +478,14 @@ int Thing::is_rrr1(void) const
     return (tp()->is_rrr1());
 }
 
-int Thing::is_baby_slime_eater(void) const
+int Thing::is_slime_baby_eater(void) const
 {_
-    return (tp()->is_baby_slime_eater());
+    return (tp()->is_slime_baby_eater());
 }
 
-int Thing::is_baby_slime(void) const
+int Thing::is_slime_baby(void) const
 {_
-    return (tp()->is_baby_slime());
+    return (tp()->is_slime_baby());
 }
 
 int Thing::is_able_to_change_levels(void) const
@@ -583,9 +583,9 @@ int Thing::gfx_bounce_always(void) const
     return (tp()->gfx_bounce_always());
 }
 
-int Thing::is_rrr3(void) const
+int Thing::is_slime_parent(void) const
 {_
-    return (tp()->is_rrr3());
+    return (tp()->is_slime_parent());
 }
 
 int Thing::normal_placement_rules(void) const
@@ -638,9 +638,9 @@ int Thing::is_cursor_path(void) const
     return (tp()->is_cursor_path());
 }
 
-int Thing::is_rrr4(void) const
+int Thing::is_slime_eater(void) const
 {_
-    return (tp()->is_rrr4());
+    return (tp()->is_slime_eater());
 }
 
 int Thing::is_blood_splatter(void) const
@@ -683,9 +683,9 @@ int Thing::is_cursor(void) const
     return (tp()->is_cursor());
 }
 
-int Thing::is_rrr5(void) const
+int Thing::is_slime(void) const
 {_
-    return (tp()->is_rrr5());
+    return (tp()->is_slime());
 }
 
 int Thing::gfx_dead_anim(void) const
@@ -693,9 +693,9 @@ int Thing::gfx_dead_anim(void) const
     return (tp()->gfx_dead_anim());
 }
 
-int Thing::is_rrr6(void) const
+int Thing::is_attack_eater(void) const
 {_
-    return (tp()->is_rrr6());
+    return (tp()->is_attack_eater());
 }
 
 int Thing::is_jumper_distance(void) const
@@ -708,9 +708,9 @@ int Thing::is_jumper(void) const
     return (tp()->is_jumper());
 }
 
-int Thing::is_parent_slime(void) const
+int Thing::is_rrr4(void) const
 {_
-    return (tp()->is_parent_slime());
+    return (tp()->is_rrr4());
 }
 
 int Thing::is_undead(void) const

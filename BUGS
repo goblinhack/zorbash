@@ -1,6 +1,6 @@
+drainpipes spawn slime
 eat food
 player jump
-drainpipes spawn stuff
 sewer level
 floor spikes that pop up every other round
 monst rarity
@@ -11,3 +11,4 @@ door close
 hover over things text
 drag between items
 drop frog
+monster healing

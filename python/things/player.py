@@ -28,7 +28,7 @@ def tp_init(name, text_name):
     x.set_is_jumper_distance(2)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_is_made_of_meat(True)
+    x.set_is_meat(True)
     x.set_is_movable(True)
     x.set_is_player(True)
     x.set_is_shovable(True)

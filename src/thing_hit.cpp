@@ -23,11 +23,12 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         return (false);
     }
 
-    if (is_baby_slime()) {
-        if (hitter->is_baby_slime()) {
+    if (is_slime_baby()) {
+        if (hitter->is_slime_baby()) {
             level->thing_new("slime2", mid_at);
-            dead("combined");
-            hitter->dead("combined");
+            log("slimes combine!");
+            dead(this, "combined");
+            hitter->dead(hitter, "combined");
             return (true);
         }
     }
@@ -84,14 +85,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (damage > THING_DAMAGE_SHAKE_ABOVE) {
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
             MINICON("%%fg=red$%s %s for %d damage!%%fg=reset$",
-                       real_hitter->text_The().c_str(),
-                       real_hitter->text_hits().c_str(),
-                       damage);
+                    real_hitter->text_The().c_str(),
+                    real_hitter->text_hits().c_str(),
+                    damage);
         } else {
             MINICON("%%fg=yellow$%s %s for %d damage!%%fg=reset$",
-                       real_hitter->text_The().c_str(),
-                       real_hitter->text_hits().c_str(),
-                       damage);
+                    real_hitter->text_The().c_str(),
+                    real_hitter->text_hits().c_str(),
+                    damage);
         }
 
         if (is_bloodied()) {
@@ -100,7 +101,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     } else {
         if (real_hitter->is_player()) {
             MINICON("You hit the %s for %d damage!",
-                       text_The().c_str(), damage);
+                    text_The().c_str(), damage);
         }
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
@@ -164,6 +165,11 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         std::string killer = real_hitter->text_a_or_an();
         auto reason = "Killed by " + killer;
         dead(real_hitter, reason);
+
+        //
+        // Does the attacker feast on success?
+        //
+        real_hitter->eat(this);
     } else {
         log("is hit by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);

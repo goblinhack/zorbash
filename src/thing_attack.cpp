@@ -29,14 +29,14 @@ bool Thing::possible_to_attack (const Thingp itp)
 
     if (is_alive_monst()) {
         if (me->is_meat_eater()) {
-            if (it->is_made_of_meat() || it->is_blood()) {
+            if (it->is_meat() || it->is_blood()) {
                 log("can attack %s", itp->to_string().c_str());
                 return (true);
             }
         }
 
-        if (me->is_baby_slime_eater()) {
-            if (it->is_baby_slime()) {
+        if (me->is_slime_baby_eater()) {
+            if (it->is_slime_baby()) {
                 log("can attack %s", itp->to_string().c_str());
                 return (true);
             }
