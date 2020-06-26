@@ -34,7 +34,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
-    delay=50
+    delay=100
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 

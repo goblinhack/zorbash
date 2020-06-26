@@ -332,6 +332,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.gfx_zoom);
     in >> bits(my.t.gfx_vsync_enable);
     in >> bits(my.t.debug_mode);
+    in >> bits(my.t.ascii_mode);
     in >> bits(my.t.sound_volume);
     in >> bits(my.t.music_volume);
     in >> bits(my.t.fullscreen);
@@ -522,6 +523,14 @@ Game::load_config (void)
     std::ifstream in(filename);
     in >> bits(*(&game->config));
     game->config.log("READ:");
+
+    if (g_opt_debug_mode) {
+        game->config.debug_mode = g_opt_debug_mode;
+    }
+
+    if (g_opt_ascii_mode) {
+        game->config.ascii_mode = g_opt_ascii_mode;
+    }
 }
 
 void
