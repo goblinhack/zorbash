@@ -2,11 +2,6 @@ import builtins
 import zx
 import tp
 
-def spawn(me, x, y):
-    zx.tp_spawn_next_to(me, "slime1")
-    zx.tp_spawn_next_to(me, "slime1")
-    zx.tp_spawn_next_to(me, "slime1")
-
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
@@ -47,11 +42,12 @@ def tp_init(name, text_name):
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
     x.set_is_movable(True)
+    x.set_is_acid_dweller(True)
+    x.set_is_acid(True)
     x.set_is_movement_blocking(True)
     x.set_is_acid(True)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
-    x.set_on_death_do("slime2.spawn()")
     x.set_stats_attack_dice("1d5")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)
@@ -68,36 +64,12 @@ def tp_init(name, text_name):
     delay = 200
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".5.100", is_hp_100_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".6.100", is_hp_100_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".7.100", is_hp_100_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".8.100", is_hp_100_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".1.75", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".2.75", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".3.75", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".4.75", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".5.75", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".6.75", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".7.75", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".8.75", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".1.50", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".3.50", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".4.50", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".5.50", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".6.50", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".7.50", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".8.50", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".2.25", is_hp_25_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".3.25", is_hp_25_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".4.25", is_hp_25_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".5.25", is_hp_25_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".6.25", is_hp_25_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".7.25", is_hp_25_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".8.25", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.100", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.100", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.100", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.100", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.100", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.100", is_hp_25_percent=True, delay_ms=delay)
 
     delay=10
     x.set_tile("splat1.1", is_dead=True, delay_ms=delay)
@@ -118,6 +90,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="slime2", text_name="slimer")
+    tp_init(name="cube1", text_name="acid cube")
 
 init()
