@@ -14,11 +14,12 @@ def acid_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_is_acid(True)
     x.set_is_active(True)
     x.set_is_hazard(True)
-    x.set_is_interesting(True)
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_lifespan_dice("1d1+10")
+    x.set_is_meat_eater(True)
+    x.set_lifespan_dice("1d10+10")
+    x.set_stats_attack_dice("1d3+1")
     x.set_light_color("green")
     x.set_text_a_or_an("");
     x.set_text_hits("dissolves");

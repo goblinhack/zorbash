@@ -11,7 +11,7 @@
 
 void Thing::acid_tick (void)
 {_
-    if (is_fire_hater()) {
+    if (is_acid_hater()) {
         if (level->is_acid(mid_at.x, mid_at.y)) {
             if (!level->is_smoke(mid_at.x, mid_at.y)) {
                 if (is_player()) {
