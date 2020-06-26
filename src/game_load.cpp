@@ -523,14 +523,6 @@ Game::load_config (void)
     std::ifstream in(filename);
     in >> bits(*(&game->config));
     game->config.log("READ:");
-
-    if (g_opt_debug_mode) {
-        game->config.debug_mode = g_opt_debug_mode;
-    }
-
-    if (g_opt_ascii_mode) {
-        game->config.ascii_mode = g_opt_ascii_mode;
-    }
 }
 
 void
