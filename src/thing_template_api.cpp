@@ -241,7 +241,7 @@ int Tp::is_rrr94(void) const { return _is_rrr94; }
 int Tp::is_rrr95(void) const { return _is_rrr95; }
 int Tp::is_rrr96(void) const { return _is_rrr96; }
 int Tp::is_rrr97(void) const { return _is_rrr97; }
-int Tp::is_rrr98(void) const { return _is_rrr98; }
+int Tp::is_double_damage_from_acid(void) const { return _is_double_damage_from_acid; }
 int Tp::is_acid_dweller(void) const { return _is_acid_dweller; }
 int Tp::is_slime_baby_eater(void) const { return _is_slime_baby_eater; }
 int Tp::is_slime_baby(void) const { return _is_slime_baby; }
@@ -483,7 +483,7 @@ void Tp::set_is_rrr94(int v) { _is_rrr94 = v; }
 void Tp::set_is_rrr95(int v) { _is_rrr95 = v; }
 void Tp::set_is_rrr96(int v) { _is_rrr96 = v; }
 void Tp::set_is_rrr97(int v) { _is_rrr97 = v; }
-void Tp::set_is_rrr98(int v) { _is_rrr98 = v; }
+void Tp::set_is_double_damage_from_acid(int v) { _is_double_damage_from_acid = v; }
 void Tp::set_is_acid_dweller(int v) { _is_acid_dweller = v; }
 void Tp::set_is_slime_baby_eater(int v) { _is_slime_baby_eater = v; }
 void Tp::set_is_slime_baby(int v) { _is_slime_baby = v; }

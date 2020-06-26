@@ -13,6 +13,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_spawn_fire(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tp_spawn_under(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define TP_SET_PROTO(__field__)                                                     \
 PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds);
@@ -211,7 +212,7 @@ TP_SET_PROTO(is_rrr94)
 TP_SET_PROTO(is_rrr95)
 TP_SET_PROTO(is_rrr96)
 TP_SET_PROTO(is_rrr97)
-TP_SET_PROTO(is_rrr98)
+TP_SET_PROTO(is_double_damage_from_acid)
 TP_SET_PROTO(is_acid_dweller)
 TP_SET_PROTO(is_slime_baby_eater)
 TP_SET_PROTO(is_slime_baby)

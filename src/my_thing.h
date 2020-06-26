@@ -712,6 +712,7 @@ public:
     bool open_door(Thingp door);
     bool possible_to_attack(const Thingp it);
     bool spawn_fire(const std::string& what);
+    bool spawn_under(const std::string& what);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
     bool will_avoid(const Thingp it);
@@ -932,7 +933,7 @@ public:
     int is_rrr95(void) const;
     int is_rrr96(void) const;
     int is_rrr97(void) const;
-    int is_rrr98(void) const;
+    int is_double_damage_from_acid(void) const;
     int is_acid_dweller(void) const;
     int is_acid_hater(void) const;
     int is_slime_parent(void) const;
@@ -1038,6 +1039,7 @@ public:
     void kill(Thingp killer, const char *reason);
     void kill(Thingp killer, std::string &reason);
     void lava_tick();
+    void acid_tick();
     void level_change(Levelp);
     void level_enter(void);
     void level_leave(void);

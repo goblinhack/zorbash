@@ -2,6 +2,9 @@ import builtins
 import zx
 import tp
 
+def spawn(me, x, y):
+    zx.tp_spawn_under(me, "acid1")
+
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
@@ -19,14 +22,12 @@ def tp_init(name, text_name):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_acid(True)
+    x.set_is_acid_dweller(True)
     x.set_is_active(True)
-    x.set_is_attack_lunge(True)
     x.set_is_attack_eater(True)
+    x.set_is_attack_lunge(True)
     x.set_is_attackable(True)
-    x.set_is_slime(True)
-    x.set_is_slime_eater(True)
-    x.set_is_slime_parent(True)
-    x.set_is_slime_baby_eater(True)
     x.set_is_combustible(True)
     x.set_is_corpse_on_death(True)
     x.set_is_double_damage_from_fire(True)
@@ -42,12 +43,14 @@ def tp_init(name, text_name):
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
     x.set_is_movable(True)
-    x.set_is_acid_dweller(True)
-    x.set_is_acid(True)
     x.set_is_movement_blocking(True)
-    x.set_is_acid(True)
+    x.set_is_slime(True)
+    x.set_is_slime_baby_eater(True)
+    x.set_is_slime_eater(True)
+    x.set_is_slime_parent(True)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
+    x.set_on_idle_dice_do("1d0:cube1.spawn()")
     x.set_stats_attack_dice("1d5")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)
@@ -55,7 +58,7 @@ def tp_init(name, text_name):
     x.set_stats_move_speed_ms(1000)
     x.set_stats_strength(1)
     x.set_text_a_or_an("a");
-    x.set_text_hits("splats");
+    x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
     x.set_weapon_use_anim("splat1")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

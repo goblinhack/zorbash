@@ -681,7 +681,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr95)
     TP_SET_DECL(is_rrr96)
     TP_SET_DECL(is_rrr97)
-    TP_SET_DECL(is_rrr98)
+    TP_SET_DECL(is_double_damage_from_acid)
     TP_SET_DECL(is_acid_dweller)
     TP_SET_DECL(is_slime_baby_eater)
     TP_SET_DECL(is_slime_baby)
@@ -802,6 +802,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"tp_spawn_next_to",                        (PyCFunction)tp_spawn_next_to_,                         METH_VARARGS | METH_KEYWORDS, "spawn a thing"},
     {"tp_spawn_next_to_or_on_monst",            (PyCFunction)tp_spawn_next_to_or_on_monst_,             METH_VARARGS | METH_KEYWORDS, "spawn a thing"},
     {"tp_spawn_fire",                           (PyCFunction)tp_spawn_fire,                             METH_VARARGS | METH_KEYWORDS, "spawn fire"},
+    {"tp_spawn_under",                          (PyCFunction)tp_spawn_under,                             METH_VARARGS | METH_KEYWORDS, "spawn under"},
     {"tp_update",                               (PyCFunction)tp_update_,                                METH_VARARGS | METH_KEYWORDS, "update template"},
     PYFUNC_REF(SDLGetKeyState),
 

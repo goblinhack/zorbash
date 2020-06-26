@@ -467,8 +467,8 @@ class Tp:
     def set_is_rrr97(self, value):
         zx.tp_set_is_rrr97(self, value)
 
-    def set_is_rrr98(self, value):
-        zx.tp_set_is_rrr98(self, value)
+    def set_is_double_damage_from_acid(self, value):
+        zx.tp_set_is_double_damage_from_acid(self, value)
 
     def set_is_acid_dweller(self, value):
         zx.tp_set_is_acid_dweller(self, value)

@@ -31,6 +31,7 @@ void Level::clear (void)
     _is_food = {};
     _is_gold = {};
     _is_lava = {};
+    _is_acid = {};
     _is_light_blocker = {};
     _is_monst = {};
     _is_rock = {};

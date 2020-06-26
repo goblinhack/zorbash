@@ -288,7 +288,7 @@ private:
     int _is_rrr95 {};
     int _is_rrr96 {};
     int _is_rrr97 {};
-    int _is_rrr98 {};
+    int _is_double_damage_from_acid {};
     int _is_acid_dweller {};
     int _is_rrr100 {};
     int _is_acid_hater {};
@@ -627,7 +627,7 @@ public:
     int is_rrr95(void) const;
     int is_rrr96(void) const;
     int is_rrr97(void) const;
-    int is_rrr98(void) const;
+    int is_double_damage_from_acid(void) const;
     int is_acid_dweller(void) const;
     int is_slime_baby_eater(void) const;
     int is_slime_baby(void) const;
@@ -874,7 +874,7 @@ public:
     void set_is_rrr95(int);
     void set_is_rrr96(int);
     void set_is_rrr97(int);
-    void set_is_rrr98(int);
+    void set_is_double_damage_from_acid(int);
     void set_is_acid_dweller(int);
     void set_is_rrr100(int);
     void set_is_slime_baby_eater(int);

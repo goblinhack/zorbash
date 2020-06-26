@@ -978,7 +978,7 @@ TP_BODY_SET_INT(is_rrr94)
 TP_BODY_SET_INT(is_rrr95)
 TP_BODY_SET_INT(is_rrr96)
 TP_BODY_SET_INT(is_rrr97)
-TP_BODY_SET_INT(is_rrr98)
+TP_BODY_SET_INT(is_double_damage_from_acid)
 TP_BODY_SET_INT(is_acid_dweller)
 TP_BODY_SET_INT(is_slime_baby_eater)
 TP_BODY_SET_INT(is_slime_baby)
@@ -1228,6 +1228,46 @@ PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     t->spawn_fire(std::string(what));
+
+    Py_RETURN_NONE;
+}
+
+PyObject *tp_spawn_under (PyObject *obj, PyObject *args, PyObject *keywds)
+{
+    char *what = nullptr;
+    uint32_t id = 0;
+
+    static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+        Py_RETURN_NONE;
+    }
+
+    if (!id) {
+        ERR("%s, missing 'id'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (!what) {
+        ERR("%s, missing 'what'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    DBG("python-to-c: %s(%x, %s)", __FUNCTION__, id, what);
+
+    auto level = game->level;
+    if (!level) {
+        ERR("%s, cannot spawn thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    auto t = level->thing_find(ThingId(id));
+    if (!t) {
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    t->spawn_under(std::string(what));
 
     Py_RETURN_NONE;
 }
