@@ -65,10 +65,19 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 break;
         }
     }
+
     if (is_fire_hater()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
             if (is_double_damage_from_fire()) {
+                damage *= 2;
+            }
+        }
+    }
+
+    if (is_acid_hater()) {
+        if (real_hitter->is_acid()) {
+            if (is_double_damage_from_acid()) {
                 damage *= 2;
             }
         }

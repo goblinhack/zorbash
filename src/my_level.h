@@ -36,6 +36,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
@@ -277,6 +278,11 @@ public:
     bool is_lava(const point &p);
     void set_is_lava(const int x, const int y);
     void unset_is_lava(const int x, const int y);
+
+    bool is_acid(const int x, const int y);
+    bool is_acid(const point &p);
+    void set_is_acid(const int x, const int y);
+    void unset_is_acid(const int x, const int y);
 
     bool is_chasm(const int x, const int y);
     bool is_chasm(const point &p);

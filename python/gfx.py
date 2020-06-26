@@ -217,13 +217,13 @@ def init_16x16():
       "slime1.1.75",         "slime1.2.75",         "slime1.3.75",         "slime1.4.75",
       "slime1.1.50",         "slime1.2.50",         "slime1.3.50",         "slime1.4.50",
       "slime1.1.25",         "slime1.2.25",         "slime1.3.25",         "slime1.4.25",
-      "slime1.dead",         "",                    "",
+      "acid1.1",             "acid1.2",             "acid1.3",
       ##############################################################################################################################################
       "ascii.slime1.1.100",  "ascii.slime1.2.100",  "ascii.slime1.3.100",  "ascii.slime1.4.100",
       "ascii.slime1.1.75",   "ascii.slime1.2.75",   "ascii.slime1.3.75",   "ascii.slime1.4.75",
       "ascii.slime1.1.50",   "ascii.slime1.2.50",   "ascii.slime1.3.50",   "ascii.slime1.4.50",
       "ascii.slime1.1.25",   "ascii.slime1.2.25",   "ascii.slime1.3.25",   "ascii.slime1.4.25",
-      "ascii.slime1.dead",   "",                    "",
+      "acid1.4",             "acid1.5",             "acid1.6",
       ##############################################################################################################################################
       "torch1.1",            "torch1.2",            "torch1.3",            "torch1.4",
       "torch1.5",            "torch1.6",            "torch1.7",            "torch1.8",

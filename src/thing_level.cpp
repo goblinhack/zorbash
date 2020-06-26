@@ -164,6 +164,7 @@ void Thing::level_push (void)
     if (is_hazard())        { level->set_is_hazard(mx, my); }
     if (is_key())           { level->set_is_key(mx, my); }
     if (is_lava())          { level->set_is_lava(mx, my); }
+    if (is_acid())          { level->set_is_acid(mx, my); }
     if (is_monst())         { level->set_is_monst(mx, my); }
     if (is_rock())          { level->set_is_rock(mx, my); }
     if (is_secret_door())   { level->set_is_secret_door(mx, my); }
@@ -208,6 +209,7 @@ void Thing::level_pop (void)
     if (is_key())           { level->unset_is_key(mx, my); }
     if (is_light_blocker()) { level->unset_is_light_blocker(mx, my); }
     if (is_lava())          { level->unset_is_lava(mx, my); }
+    if (is_acid())          { level->unset_is_acid(mx, my); }
     if (is_monst())         { level->unset_is_monst(mx, my); }
     if (is_rock())          { level->unset_is_rock(mx, my); }
     if (is_secret_door())   { level->unset_is_secret_door(mx, my); }

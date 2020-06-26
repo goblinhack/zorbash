@@ -108,6 +108,40 @@ void Level::unset_is_lava (const int x, const int y)
     set(_is_lava, x, y, false);
 }
 
+bool Level::is_acid (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_acid, p.x, p.y));
+}
+
+bool Level::is_acid (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_acid, x, y));
+}
+
+void Level::set_is_acid (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    map_changed = true;
+    set(_is_acid, x, y, true);
+}
+
+void Level::unset_is_acid (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    map_changed = true;
+    set(_is_acid, x, y, false);
+}
+
 bool Level::is_chasm (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
