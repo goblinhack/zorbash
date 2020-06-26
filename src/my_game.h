@@ -27,6 +27,7 @@ public:
     uint32_t           gfx_zoom                     = 4;
     bool               gfx_vsync_enable             = true;
     bool               debug_mode                   = false;
+    bool               ascii_mode                   = false;
     uint32_t           sound_volume                 = {MIX_MAX_VOLUME / 2};
     uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
     bool               fullscreen                   = false;

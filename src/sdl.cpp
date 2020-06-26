@@ -1162,6 +1162,28 @@ uint8_t config_debug_mode (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
+uint8_t config_ascii_mode (tokens_t *tokens, void *context)
+{_
+    char *s = tokens->args[2];
+
+    if (!s || (*s == '\0')) {
+        game->config.ascii_mode = true;
+    } else {
+        game->config.ascii_mode = strtol(s, 0, 10) ? 1 : 0;
+    }
+
+    if (game->config.ascii_mode) {
+        CON("USERCFG: ascii mode enabled");
+    } else {
+        CON("USERCFG: ascii mode disabled");
+    }
+
+    return (true);
+}
+
+//
+// User has entered a command, run it
+//
 uint8_t config_errored (tokens_t *tokens, void *context)
 {_
     g_errored = false;
@@ -1176,8 +1198,17 @@ void config_update_all (void)
     config_gfx_vsync_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
+
     if (game->level) {
         game->level->scroll_map_to_player();
+    }
+
+    if (g_opt_debug_mode) {
+        game->config.debug_mode = g_opt_debug_mode;
+    }
+
+    if (g_opt_ascii_mode) {
+        game->config.ascii_mode = g_opt_ascii_mode;
     }
 }
 

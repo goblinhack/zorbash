@@ -28,9 +28,9 @@ def key_init(name, text_name):
     x.set_tile(tile=name + ".3", delay_ms=100)
     x.set_tile(tile=name + ".4", delay_ms=100)
     x.set_tile(tile=name + ".5", delay_ms=100)
-    x.set_tile(tile=name + ".4", delay_ms=100)
-    x.set_tile(tile=name + ".3", delay_ms=100)
-    x.set_tile(tile=name + ".2", delay_ms=100)
+    x.set_tile(tile=name + ".6", delay_ms=100)
+    x.set_tile(tile=name + ".7", delay_ms=100)
+    x.set_tile(tile=name + ".8", delay_ms=100)
 
     x.update()
 

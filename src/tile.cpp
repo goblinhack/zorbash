@@ -13,6 +13,7 @@
 #include "my_string.h"
 #include "my_thing_template.h"
 #include "my_dmap.h"
+#include "my_game.h"
 
 std::map<std::string, class Tile* > all_tiles;
 std::vector<class Tile* > all_tiles_array;
@@ -143,7 +144,6 @@ void tile_load_arr (std::string file, std::string name,
         std::string name = arr[idx++];
 
         if (name != "") {
-
             if (tile_find(name)) {
                 ERR("tile name [%s] already used", name.c_str());
             }
@@ -472,7 +472,6 @@ void tile_load_arr_color_and_black_and_white (std::string file,
         std::string name = arr[idx++];
 
         if (name != "") {
-
             if (tile_find(name)) {
                 ERR("tile name [%s] already used", name.c_str());
             }
@@ -619,8 +618,15 @@ Tilep tile_find (std::string name)
         return (0);
     }
 
-    auto result = all_tiles.find(name);
+    if (game && game->config.ascii_mode) {
+        auto ascii_name = "ascii." + name;
+        auto result = all_tiles.find(ascii_name);
+        if (result != all_tiles.end()) {
+            return (result->second);
+        }
+    }
 
+    auto result = all_tiles.find(name);
     if (result == all_tiles.end()) {
         return (0);
     }
@@ -635,8 +641,15 @@ Tilep tile_find_mand (std::string name)
         return (0);
     }
 
-    auto result = all_tiles.find(name);
+    if (game && game->config.ascii_mode) {
+        auto ascii_name = "ascii." + name;
+        auto result = all_tiles.find(ascii_name);
+        if (result != all_tiles.end()) {
+            return (result->second);
+        }
+    }
 
+    auto result = all_tiles.find(name);
     if (result == all_tiles.end()) {
         ERR("tile name %s not found", name.c_str());
         return (0);
@@ -680,12 +693,12 @@ void tile_get_coords (Tilep tile, float *x1, float *y1, float *x2, float *y2)
 
 Tilep string2tile (const char **s)
 {_
-    static char tmp[MAXSHORTSTR];
-    static const char * eo_tmp = tmp + MAXSHORTSTR;
+    static char name[MAXSHORTSTR];
+    static const char * eo_name = name + MAXSHORTSTR;
     const char * c = *s;
-    char *t = tmp;
+    char *t = name;
 
-    while (t < eo_tmp) {
+    while (t < eo_name) {
         if ((*c == '\0') || (*c == '$')) {
             break;
         }
@@ -693,16 +706,24 @@ Tilep string2tile (const char **s)
         *t++ = *c++;
     }
 
-    if (c == eo_tmp) {
+    if (c == eo_name) {
         return (0);
     }
 
     *t++ = '\0';
-    *s += (t - tmp);
+    *s += (t - name);
 
-    auto result = all_tiles.find(tmp);
+    if (game && game->config.ascii_mode) {
+        auto ascii_name = "ascii." + std::string(name);
+        auto result = all_tiles.find(ascii_name);
+        if (result != all_tiles.end()) {
+            return (result->second);
+        }
+    }
+
+    auto result = all_tiles.find(name);
     if (result == all_tiles.end()) {
-        ERR("unknown tile [%s]", tmp);
+        ERR("unknown tile [%s]", name);
         return (0);
     }
 
@@ -712,7 +733,7 @@ Tilep string2tile (const char **s)
 Tilep string2tile (std::string &s, int *len)
 {_
     auto iter = s.begin();
-    std::string out;
+    std::string name;
 
     while (iter != s.end()) {
         auto c = *iter;
@@ -721,21 +742,29 @@ Tilep string2tile (std::string &s, int *len)
             break;
         }
 
-        out += c;
+        name += c;
         iter++;
     }
 
     if (iter == s.end()) {
-        ERR("unknown tile [%s]", out.c_str());
+        ERR("unknown tile [%s]", name.c_str());
     }
 
     if (len) {
         *len = iter - s.begin();
     }
 
-    auto result = all_tiles.find(out);
+    if (game && game->config.ascii_mode) {
+        auto ascii_name = "ascii." + name;
+        auto result = all_tiles.find(ascii_name);
+        if (result != all_tiles.end()) {
+            return (result->second);
+        }
+    }
+
+    auto result = all_tiles.find(name);
     if (result == all_tiles.end()) {
-        ERR("unknown tile [%s]", out.c_str());
+        ERR("unknown tile [%s]", name.c_str());
     }
 
     return (result->second);

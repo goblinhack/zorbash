@@ -469,6 +469,7 @@ static void usage (void)
     CON(" ");
     CON(" --new-game");
     CON(" --debug-mode");
+    CON(" --ascii-mode // pseudo ascii mode");
     CON(" --seed <number>");
     CON(" ");
     CON("Written by goblinhack@gmail.com");
@@ -506,6 +507,12 @@ static void parse_args (int32_t argc, char *argv[])
             continue;
         }
 
+        if (!strcasecmp(argv[i], "--ascii-mode") ||
+            !strcasecmp(argv[i], "-ascii-mode")) {
+            g_opt_ascii_mode = true;
+            continue;
+        }
+
         if (!strcasecmp(argv[i], "--seed") ||
             !strcasecmp(argv[i], "-seed") ||
             !strcasecmp(argv[i], "-s")) {
@@ -525,6 +532,14 @@ static void parse_args (int32_t argc, char *argv[])
 
         usage();
         DIE("unknown format argument, %s", argv[i]);
+    }
+
+    if (g_opt_debug_mode) {
+        game->config.debug_mode = g_opt_debug_mode;
+    }
+
+    if (g_opt_ascii_mode) {
+        game->config.ascii_mode = g_opt_ascii_mode;
     }
 }
 
@@ -609,10 +624,6 @@ int32_t main (int32_t argc, char *argv[])
     CON("INIT: Load game config");
     game = new Game(std::string(appdata));
     game->load_config();
-
-    if (g_opt_debug_mode) {
-        game->config.debug_mode = g_opt_debug_mode;
-    }
 
     CON("INIT: SDL create window");
     if (!sdl_init()) {

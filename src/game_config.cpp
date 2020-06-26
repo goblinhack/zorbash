@@ -8,4 +8,3 @@
 void Config::fini (void)
 {_
 }
-

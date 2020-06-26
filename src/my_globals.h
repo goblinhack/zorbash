@@ -60,6 +60,7 @@ extern bool g_errored;
 extern bool g_grab_next_key;
 extern bool g_need_restart;
 extern bool g_opt_debug_mode;
+extern bool g_opt_ascii_mode;
 extern bool g_opt_fast_start;
 extern bool g_opt_new_game;
 extern bool g_quitting;
