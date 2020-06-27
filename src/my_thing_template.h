@@ -283,7 +283,7 @@ private:
     int _is_rrr90 {};
     int _is_rrr91 {};
     int _is_rrr92 {};
-    int _is_rrr93 {};
+    int _is_floating {};
     int _is_double_damage_from_water {};
     int _is_generator {};
     int _is_treasure_eater {};
@@ -621,7 +621,7 @@ public:
     int is_rrr90(void) const;
     int is_rrr91(void) const;
     int is_rrr92(void) const;
-    int is_rrr93(void) const;
+    int is_floating(void) const;
     int is_double_damage_from_acid(void) const;
     int is_double_damage_from_water(void) const;
     int is_generator(void) const;
@@ -867,7 +867,7 @@ public:
     void set_is_rrr90(int);
     void set_is_rrr91(int);
     void set_is_rrr92(int);
-    void set_is_rrr93(int);
+    void set_is_floating(int);
     void set_is_double_damage_from_acid(int);
     void set_is_double_damage_from_water(int);
     void set_is_generator(int);

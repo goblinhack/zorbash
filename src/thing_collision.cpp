@@ -907,6 +907,14 @@ bool Thing::collision_obstacle (Thingp it)
     if (it->is_hidden || it->is_falling || it->is_jumping) {
         return (false);
     }
+    //
+    // Stop ghosts piling on top of each other
+    //
+    if (it->is_floating()) {
+        if (is_floating()) {
+            return (true);
+        }
+    }
     if (it->is_movement_blocking()) {
         if (!it->is_open) {
             return (true);

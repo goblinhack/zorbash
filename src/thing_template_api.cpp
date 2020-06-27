@@ -252,7 +252,7 @@ int Tp::is_rrr9(void) const { return _is_rrr9; }
 int Tp::is_rrr90(void) const { return _is_rrr90; }
 int Tp::is_rrr91(void) const { return _is_rrr91; }
 int Tp::is_rrr92(void) const { return _is_rrr92; }
-int Tp::is_rrr93(void) const { return _is_rrr93; }
+int Tp::is_floating(void) const { return _is_floating; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_slime(void) const { return _is_slime; }
@@ -493,7 +493,7 @@ void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }
 void Tp::set_is_rrr90(int v) { _is_rrr90 = v; }
 void Tp::set_is_rrr91(int v) { _is_rrr91 = v; }
 void Tp::set_is_rrr92(int v) { _is_rrr92 = v; }
-void Tp::set_is_rrr93(int v) { _is_rrr93 = v; }
+void Tp::set_is_floating(int v) { _is_floating = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
 void Tp::set_is_shovable(int v) { _is_shovable = v; }
 void Tp::set_is_slime(int v) { _is_slime = v; }
