@@ -33,7 +33,7 @@ def tp_init(name, text_name):
     x.set_is_movable(True)
     x.set_is_player(True)
     x.set_is_shovable(True)
-    x.set_stats_attack_dice("1d1+1")
+    x.set_stats_attack_dice("1d6+1")
     x.set_stats_defence(3)
     x.set_stats_health_hunger_pct(5)
     x.set_stats_health_initial(100)

@@ -938,29 +938,24 @@ int Thing::is_rrr93(void) const
     return (tp()->is_rrr93());
 }
 
-int Thing::is_rrr94(void) const
+int Thing::is_double_damage_from_acid(void) const
 {_
-    return (tp()->is_rrr94());
+    return (tp()->is_double_damage_from_acid());
 }
 
-int Thing::is_rrr95(void) const
+int Thing::is_double_damage_from_water(void) const
 {_
-    return (tp()->is_rrr95());
+    return (tp()->is_double_damage_from_water());
 }
 
-int Thing::is_rrr96(void) const
+int Thing::is_generator(void) const
 {_
-    return (tp()->is_rrr96());
+    return (tp()->is_generator());
 }
 
 int Thing::is_treasure_eater(void) const
 {_
     return (tp()->is_treasure_eater());
-}
-
-int Thing::is_double_damage_from_acid(void) const
-{_
-    return (tp()->is_double_damage_from_acid());
 }
 
 int Thing::is_acid_dweller(void) const

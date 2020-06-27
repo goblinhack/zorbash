@@ -220,7 +220,7 @@ public:
             err("no tp set for tp_id %d", tp_id);
             return (nullptr);
         }
-        err("no tp for tp_id %d", tp_id);
+        DIE("no tp for tp_id %d", tp_id);
         return (nullptr);
     }
 
@@ -898,6 +898,13 @@ public:
     int is_rrr60(void) const;
     int is_rrr61(void) const;
     int is_rrr62(void) const;
+    int is_acid(void) const;
+    int is_acid_dweller(void) const;
+    int is_acid_hater(void) const;
+    int is_double_damage_from_acid(void) const;
+    int is_double_damage_from_water(void) const;
+    int is_generator(void) const;
+    int is_meat_eater(void) const;
     int is_rrr63(void) const;
     int is_rrr64(void) const;
     int is_rrr65(void) const;
@@ -929,25 +936,18 @@ public:
     int is_rrr91(void) const;
     int is_rrr92(void) const;
     int is_rrr93(void) const;
-    int is_rrr94(void) const;
-    int is_rrr95(void) const;
-    int is_rrr96(void) const;
-    int is_treasure_eater(void) const;
-    int is_double_damage_from_acid(void) const;
-    int is_acid_dweller(void) const;
-    int is_acid_hater(void) const;
-    int is_slime_parent(void) const;
     int is_secret_door(void) const;
     int is_shovable(void) const;
     int is_slime(void) const;
-    int is_acid(void) const;
     int is_slime_baby(void) const;
     int is_slime_baby_eater(void) const;
     int is_slime_eater(void) const;
+    int is_slime_parent(void) const;
     int is_smoke(void) const;
     int is_temporary(void) const;
     int is_torch(void) const;
     int is_treasure(void) const;
+    int is_treasure_eater(void) const;
     int is_undead(void) const;
     int is_wall(void) const;
     int is_wall_deco(void) const;
@@ -955,7 +955,6 @@ public:
     int is_water_dweller(void) const;
     int is_water_hater(void) const;
     int is_weapon(void) const;
-    int is_meat_eater(void) const;
     int normal_placement_rules(void) const;
     int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;

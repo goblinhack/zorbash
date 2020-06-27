@@ -87,7 +87,6 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             std::string lava_string;
             std::string chasm_string;
             std::string walls_string;
-            std::string monst_string;
             std::string obj_strings;
 
             for (auto& c : py_obj_to_string(o)) {
@@ -110,6 +109,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_key         ||
                            m.is_lava        ||
                            m.is_monst       ||
+                           m.is_generator   ||
                            m.is_secret_door ||
                            m.is_trap        ||
                            m.is_water
@@ -147,17 +147,18 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     walls_string += Charmap::SPACE;
                 }
 
-                if (m.is_blood ||
-                    m.is_torch ||
-                    m.is_entrance ||
-                    m.is_exit ||
+                if (m.is_blood      ||
+                    m.is_torch      ||
+                    m.is_entrance   ||
+                    m.is_exit       ||
                     m.is_floor_deco ||
-                    m.is_food ||
-                    m.is_key ||
-                    m.is_monst ||
-                    m.is_trap ||
-                    m.is_treasure ||
-                    m.is_gold ||
+                    m.is_food       ||
+                    m.is_key        ||
+                    m.is_monst      ||
+                    m.is_generator  ||
+                    m.is_trap       ||
+                    m.is_treasure   ||
+                    m.is_gold       ||
                     m.is_wall_deco) {
                     obj_strings += c;
                 } else {

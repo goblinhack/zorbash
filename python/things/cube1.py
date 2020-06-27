@@ -34,7 +34,7 @@ def tp_init(name, text_name):
     x.set_is_fire_hater(100)
     x.set_is_hunger_insatiable(True)
     x.set_is_interesting(True)
-    x.set_is_light_strength(1)
+    x.set_is_light_strength(20)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
@@ -66,12 +66,12 @@ def tp_init(name, text_name):
     delay = 200
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".1.100", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".2.100", is_hp_75_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".1.100", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".2.100", is_hp_50_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".1.100", is_hp_25_percent=True, delay_ms=delay)
-    x.set_tile(tile=name + ".1.100", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.75", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.75", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.50", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
 
     delay=10
     x.set_tile("splat1.1", is_dead=True, delay_ms=delay)
