@@ -39,7 +39,10 @@ bool Thing::try_to_jump (point to)
         to = make_point(fto);
         x = to.x;
         y = to.y;
-        check_dest = true;
+        //
+        // Not sure I want to. This allows for more fun.
+        //
+        // check_dest = true;
         log("jump instead to %d,%d", x, y);
     }
 
@@ -55,28 +58,40 @@ bool Thing::try_to_jump (point to)
     if (level->is_rock(x, y) ||
         level->is_door(x, y) ||
         level->is_wall(x, y)) {
+        log("jump failed, into obstacle");
         return false;
     }
 
     if (check_dest) {
         if (!level->is_dungeon(x, y)) {
+            log("jump failed, not dungeon");
             return false;
         }
 
         if (level->is_entrance(x, y) ||
             level->is_monst(x, y)    ||
             level->is_exit(x, y)) {
+            log("jump failed, onto monst");
             return false;
         }
 
         if (is_water_hater()) {
             if (level->is_water(x, y)) {
+                log("jump failed, onto water");
                 return false;
             }
         }
 
         if (is_fire_hater()) {
-            if (level->is_fire(x, y)) {
+            if (level->is_fire(x, y) || level->is_lava(x, y)) {
+                log("jump failed, onto fire");
+                return false;
+            }
+        }
+
+        if (is_acid_hater()) {
+            if (level->is_acid(x, y)) {
+                log("jump failed, onto acid");
                 return false;
             }
         }
