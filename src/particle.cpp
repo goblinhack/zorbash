@@ -60,7 +60,6 @@ void Level::display_internal_particles (void)
                     if (t) {
                         t->log("end of jump");
                         t->is_jumping = false;
-                        t->visible();
                     }
                 }
                 return true;
@@ -133,7 +132,6 @@ void Level::display_external_particles (void)
                     if (t) {
                         t->log("end of jump");
                         t->is_jumping = false;
-                        t->visible();
                     }
                 }
                 return true;

@@ -102,7 +102,6 @@ bool Thing::try_to_jump (point to)
     }
 
     is_jumping = true;
-    hide();
     move_to_immediately(fpoint(x, y));
     wobble(25);
 

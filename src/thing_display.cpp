@@ -663,6 +663,13 @@ void Thing::blit_internal (point &blit_tl,
                            bool reflection)
 {_
     auto tpp = tp();
+ 
+    //
+    // Displayed as a particles
+    //
+    if (is_jumping) {
+        return;
+    }
 
     if (g_render_black_and_white) {
 #if 0
