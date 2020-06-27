@@ -935,7 +935,7 @@ public:
     int is_rrr90(void) const;
     int is_rrr91(void) const;
     int is_rrr92(void) const;
-    int is_rrr93(void) const;
+    int is_floating(void) const;
     int is_secret_door(void) const;
     int is_shovable(void) const;
     int is_slime(void) const;

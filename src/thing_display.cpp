@@ -532,24 +532,29 @@ bool Thing::get_coords (point &blit_tl,
                  tpp->gfx_on_fire_anim() ||
                  tpp->gfx_weapon_carry_anim())) {
         //
-        // Render the weapon and player on the same tile rules
+        // Ghosts do not sink into lava
         //
-        auto map_loc = at;
-        if (owner) {
-            map_loc = owner->mid_at;
-        }
+        if (likely(!is_floating())) {
+            //
+            // Render the weapon and player on the same tile rules
+            //
+            auto map_loc = at;
+            if (owner) {
+                map_loc = owner->mid_at;
+            }
 
-        set_submerged_offset(0);
+            set_submerged_offset(0);
 
-        if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
-            is_in_water = true;
-            set_submerged_offset(8);
-        } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
-            is_in_lava = true;
-            set_submerged_offset(TILE_HEIGHT / 2);
-        } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
-            set_submerged_offset(4);
-            is_in_water = true;
+            if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
+                is_in_water = true;
+                set_submerged_offset(8);
+            } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
+                is_in_lava = true;
+                set_submerged_offset(TILE_HEIGHT / 2);
+            } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
+                set_submerged_offset(4);
+                is_in_water = true;
+            }
         }
     }
 

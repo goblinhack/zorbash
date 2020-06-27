@@ -933,9 +933,9 @@ int Thing::is_rrr92(void) const
     return (tp()->is_rrr92());
 }
 
-int Thing::is_rrr93(void) const
+int Thing::is_floating(void) const
 {_
-    return (tp()->is_rrr93());
+    return (tp()->is_floating());
 }
 
 int Thing::is_double_damage_from_acid(void) const

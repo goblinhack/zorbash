@@ -452,8 +452,8 @@ class Tp:
     def set_is_rrr92(self, value):
         zx.tp_set_is_rrr92(self, value)
 
-    def set_is_rrr93(self, value):
-        zx.tp_set_is_rrr93(self, value)
+    def set_is_floating(self, value):
+        zx.tp_set_is_floating(self, value)
 
     def set_is_double_damage_from_acid(self, value):
         zx.tp_set_is_double_damage_from_acid(self, value)

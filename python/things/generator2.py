@@ -2,7 +2,7 @@ import zx
 import tp
 
 def spawn(me, x, y):
-    zx.tp_spawn_next_to(me, "skeleton1")
+    zx.tp_spawn_next_to(me, "ghost1")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -34,7 +34,7 @@ def tp_init(name, text_name):
     x.set_is_water_hater(100)
     x.set_light_color("cyan")
     x.set_normal_placement_rules(True)
-    x.set_on_idle_dice_do("1d10+20:generator1.spawn()")
+    x.set_on_idle_dice_do("1d10+20:generator2.spawn()")
     x.set_stats_defence(1)
     x.set_stats_health_initial(30)
     x.set_stats_strength(15)
@@ -46,17 +46,25 @@ def tp_init(name, text_name):
     delay = 200
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".1.75", is_hp_75_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".2.75", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.75", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.75", is_hp_75_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".1.50", is_hp_50_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.50", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.50", is_hp_50_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".2.25", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.25", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.25", is_hp_25_percent=True, delay_ms=delay)
 
     x.update()
 
 def init():
-    tp_init(name="generator1", text_name="pile of bones")
+    tp_init(name="generator2", text_name="pile of bones")
 
 init()
 
