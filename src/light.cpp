@@ -174,7 +174,7 @@ void Light::calculate (int last)
         // a point hitting on or near a corner will light the corner tile.
         //
         float step2 = step;
-        for (; step2 < step + 0.5; step2 += step_delta2) {
+        for (; step2 < step + 0.75; step2 += step_delta2) {
             float rad = step2;
             float p1x = light_pos.x + r->cosr * rad;
             float p1y = light_pos.y + r->sinr * rad;

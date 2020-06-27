@@ -65,8 +65,9 @@ void Level::cursor_path_draw (point start, point end)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if ((is_monst(x,y) && !is_corpse(x,y)) ||
-                    is_secret_door(x,y)                       ||
-                    is_rock(x, y)                             ||
+                    is_secret_door(x,y)                ||
+                    is_movement_blocking(x, y)         ||
+                    is_rock(x, y)                      ||
                     is_wall(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
@@ -82,8 +83,9 @@ void Level::cursor_path_draw (point start, point end)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if ((is_monst(x,y) && !is_corpse(x,y)) ||
-                    is_secret_door(x,y)                       ||
-                    is_rock(x, y)                             ||
+                    is_secret_door(x,y)                ||
+                    is_movement_blocking(x, y)         ||
+                    is_rock(x, y)                      ||
                     is_wall(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
@@ -98,9 +100,10 @@ void Level::cursor_path_draw (point start, point end)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if ((is_monst(x,y) && !is_corpse(x,y)) ||
-                    is_secret_door(x,y)                       ||
-                    is_hazard(x,y)                            ||
-                    is_rock(x, y)                             ||
+                    is_secret_door(x,y)                ||
+                    is_movement_blocking(x, y)         ||
+                    is_hazard(x,y)                     ||
+                    is_rock(x, y)                      ||
                     is_wall(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
