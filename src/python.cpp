@@ -680,7 +680,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr94)
     TP_SET_DECL(is_rrr95)
     TP_SET_DECL(is_rrr96)
-    TP_SET_DECL(is_rrr97)
+    TP_SET_DECL(is_treasure_eater)
     TP_SET_DECL(is_double_damage_from_acid)
     TP_SET_DECL(is_acid_dweller)
     TP_SET_DECL(is_slime_baby_eater)

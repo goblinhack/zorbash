@@ -21,6 +21,11 @@ bool Thing::will_avoid (const Thingp itp)
             return (true);
         }
     }
+    if (me->is_treasure()) {
+        if (it->is_treasure_eater()) {
+            return (true);
+        }
+    }
     if (me->is_slime_baby()) {
         if (it->is_slime_parent()) {
             return (true);
@@ -41,6 +46,11 @@ bool Thing::will_eat (const Thingp itp)
 
     if (me->is_meat_eater()) {
         if (it->is_meat() || it->is_blood()) {
+            return (true);
+        }
+    }
+    if (me->is_treasure_eater()) {
+        if (it->is_treasure() || it->is_blood()) {
             return (true);
         }
     }

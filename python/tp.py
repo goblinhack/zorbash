@@ -464,8 +464,8 @@ class Tp:
     def set_is_rrr96(self, value):
         zx.tp_set_is_rrr96(self, value)
 
-    def set_is_rrr97(self, value):
-        zx.tp_set_is_rrr97(self, value)
+    def set_is_treasure_eater(self, value):
+        zx.tp_set_is_treasure_eater(self, value)
 
     def set_is_double_damage_from_acid(self, value):
         zx.tp_set_is_double_damage_from_acid(self, value)

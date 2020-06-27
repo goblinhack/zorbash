@@ -41,6 +41,13 @@ bool Thing::possible_to_attack (const Thingp itp)
                 return (true);
             }
         }
+
+        if (me->is_treasure_eater()) {
+            if (it->is_treasure()) {
+                log("can attack %s", itp->to_string().c_str());
+                return (true);
+            }
+        }
     }
 
     if (is_player()) {

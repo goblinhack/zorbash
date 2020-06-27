@@ -932,7 +932,7 @@ public:
     int is_rrr94(void) const;
     int is_rrr95(void) const;
     int is_rrr96(void) const;
-    int is_rrr97(void) const;
+    int is_treasure_eater(void) const;
     int is_double_damage_from_acid(void) const;
     int is_acid_dweller(void) const;
     int is_acid_hater(void) const;

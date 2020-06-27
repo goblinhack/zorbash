@@ -15,9 +15,13 @@ bool Thing::eat (Thingp it)
     // Does the attacker feast on success?
     //
     if (is_attack_eater()) {
-        if ((is_slime_eater() && it->is_slime()) ||
-            (is_meat_eater()  && it->is_meat())) {
+        if ((is_slime_eater()     && it->is_slime()) ||
+            (is_meat_eater()      && it->is_meat())  ||
+            (is_treasure_eater()  && it->is_treasure())) {
             log("eats %s", it->text_The().c_str());
+            //
+            // For treasure what should the boost be?
+            //
             health_boost(it->get_nutrition());
             return (true);
         }
