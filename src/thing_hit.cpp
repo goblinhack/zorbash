@@ -83,6 +83,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+    if (is_water_hater()) {
+        if (real_hitter->is_water()) {
+            if (is_double_damage_from_water()) {
+                damage *= 2;
+            }
+        }
+    }
+
     if (is_player()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {

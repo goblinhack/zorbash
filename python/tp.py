@@ -455,14 +455,14 @@ class Tp:
     def set_is_rrr93(self, value):
         zx.tp_set_is_rrr93(self, value)
 
-    def set_is_rrr94(self, value):
-        zx.tp_set_is_rrr94(self, value)
+    def set_is_double_damage_from_acid(self, value):
+        zx.tp_set_is_double_damage_from_acid(self, value)
 
-    def set_is_rrr95(self, value):
-        zx.tp_set_is_rrr95(self, value)
+    def set_is_double_damage_from_water(self, value):
+        zx.tp_set_is_double_damage_from_water(self, value)
 
-    def set_is_rrr96(self, value):
-        zx.tp_set_is_rrr96(self, value)
+    def set_is_generator(self, value):
+        zx.tp_set_is_generator(self, value)
 
     def set_is_treasure_eater(self, value):
         zx.tp_set_is_treasure_eater(self, value)

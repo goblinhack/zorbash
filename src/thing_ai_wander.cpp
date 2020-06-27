@@ -60,6 +60,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
             if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
                 level->is_door(x,y)                              ||
                 level->is_secret_door(x,y)                       ||
+                level->is_generator(x,y)                         ||
                 level->is_hazard(x,y)                            ||
                 level->is_rock(x, y)                             ||
                 level->is_wall(x, y)) {

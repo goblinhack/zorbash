@@ -42,6 +42,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
@@ -299,6 +300,11 @@ public:
     bool is_secret_door(const point &p);
     void set_is_secret_door(const int x, const int y);
     void unset_is_secret_door(const int x, const int y);
+
+    bool is_generator(const int x, const int y);
+    bool is_generator(const point &p);
+    void set_is_generator(const int x, const int y);
+    void unset_is_generator(const int x, const int y);
 
     bool is_corpse(const int x, const int y);
     bool is_corpse(const point &p);

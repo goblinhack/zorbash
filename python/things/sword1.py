@@ -96,7 +96,7 @@ def init_weapon(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
     x.set_is_weapon(True)
-    x.set_stats_attack_dice("1d6+1")
+    x.set_stats_attack_dice("1d8+1")
     x.set_text_a_or_an("a");
     x.set_weapon_carry_anim("sword1_carry")
     x.set_weapon_use_anim("sword1_swing")

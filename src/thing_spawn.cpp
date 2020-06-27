@@ -33,6 +33,7 @@ bool Thing::spawn_next_to (const std::string& what)
         if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
             level->is_door(x,y)                              ||
             level->is_secret_door(x,y)                       ||
+            level->is_generator(x,y)                         ||
             level->is_hazard(x,y)                            ||
             level->is_rock(x, y)                             ||
             level->is_wall(x, y)) {
@@ -76,6 +77,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
 
         if (level->is_door(x,y)         ||
             level->is_secret_door(x,y)  ||
+            level->is_generator(x,y)    ||
             level->is_hazard(x,y)       ||
             level->is_rock(x, y)        ||
             level->is_wall(x, y)) {

@@ -566,6 +566,7 @@ void Level::place_normal_placement_rules (Dungeonp d)
             if (d->is_key(x, y))         { tp = tp_random_key(); }
             if (d->is_monst(x, y))       { tp = tp_random_monst(); }
             if (d->is_secret_door(x, y)) { tp = tp_random_secret_door(); }
+            if (d->is_generator(x, y))   { tp = tp_random_generator(); }
             if (d->is_torch(x, y))       { tp = tp_random_torch(); }
             if (d->is_treasure(x, y))    { tp = tp_random_treasure(); }
             if (tp) {
@@ -772,11 +773,14 @@ void Level::place_random_floor_deco (Dungeonp d)
             }
 
             if (d->is_food(x, y)        ||
-                d->is_treasure(x, y)    ||
-                d->is_door(x, y)        ||
-                d->is_key(x, y)         ||
                 d->is_blood(x, y)       ||
+                d->is_door(x, y)        ||
+                d->is_entrance(x, y)    ||
+                d->is_exit(x, y)        ||
+                d->is_generator(x, y)   ||
+                d->is_key(x, y)         ||
                 d->is_secret_door(x, y) ||
+                d->is_treasure(x, y)    ||
                 d->is_monst(x, y)) {
                 continue;
             }

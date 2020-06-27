@@ -106,6 +106,7 @@ public:
     bool is_lava(const int x, const int y);
     bool is_lava_no_check(const int x, const int y);
     bool is_monst(const int x, const int y);
+    bool is_generator(const int x, const int y);
     bool is_rock(const int x, const int y);
     bool is_secret_corridor_at(const int x, const int y);
     bool is_secret_door(const int x, const int y);

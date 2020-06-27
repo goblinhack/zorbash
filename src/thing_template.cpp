@@ -29,6 +29,7 @@ static Tpidmap tp_monst;
 static Tpidmap tp_ripples;
 static Tpidmap tp_rock;
 static Tpidmap tp_secret_door;
+static Tpidmap tp_generator;
 static Tpidmap tp_torch;
 static Tpidmap tp_treasure;
 static Tpidmap tp_wall;
@@ -120,6 +121,7 @@ void tp_init_after_loading (void)
         if (tp->is_ripple())         { tp_ripples.push_back(tp); }
         if (tp->is_rock())           { tp_rock.push_back(tp); }
         if (tp->is_secret_door())    { tp_secret_door.push_back(tp); }
+        if (tp->is_generator())      { tp_generator.push_back(tp); }
         if (tp->is_torch())          { tp_torch.push_back(tp); }
         if (tp->is_treasure())       { tp_treasure.push_back(tp); }
         if (tp->is_gold())           { tp_gold.push_back(tp); }
@@ -245,6 +247,15 @@ Tpp tp_random_secret_door (void)
         return (nullptr);
     }
     return get(tp_secret_door, myrand() % tp_secret_door.size());
+}
+
+Tpp tp_random_generator (void)
+{_
+    if (unlikely(!tp_generator.size())) {
+        ERR("no generator found");
+        return (nullptr);
+    }
+    return get(tp_generator, myrand() % tp_generator.size());
 }
 
 Tpp tp_random_blood (void)

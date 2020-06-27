@@ -97,6 +97,7 @@ bool Thing::ai_create_on_fire_path (point &nh,
             if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
                 level->is_door(x,y)                              ||
                 level->is_secret_door(x,y)                       ||
+                level->is_generator(x,y)                         ||
                 level->is_chasm(x,y)                             ||
                 level->is_rock(x, y)                             ||
                 level->is_wall(x, y)) {

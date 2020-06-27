@@ -41,6 +41,7 @@ public:
         TREASURE        = '$',
         WALL            = 'x',
         WATER           = 'w',
+        GENERATOR       = '%',
     };
 
     char                      c;
@@ -68,6 +69,7 @@ public:
     bool                      is_wall              {false};
     bool                      is_wall_deco         {false};
     bool                      is_water             {false};
+    bool                      is_generator         {false};
 
     static std::vector<Charmap> all_charmaps;
     static void init_charmaps(void);

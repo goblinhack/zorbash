@@ -236,6 +236,40 @@ void Level::unset_is_secret_door (const int x, const int y)
     set(_is_secret_door, x, y, false);
 }
 
+bool Level::is_generator (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_generator, p.x, p.y));
+}
+
+bool Level::is_generator (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_generator, x, y));
+}
+
+void Level::set_is_generator (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    map_changed = true;
+    set(_is_generator, x, y, true);
+}
+
+void Level::unset_is_generator (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    map_changed = true;
+    set(_is_generator, x, y, false);
+}
+
 bool Level::is_blood (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
