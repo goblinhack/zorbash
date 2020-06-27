@@ -917,25 +917,7 @@ bool Thing::collision_obstacle (Thingp it)
             return (true);
         }
     } else if (is_monst()) {
-        if (is_water_hater()) {
-            if (it->is_water()) {
-                return (true);
-            }
-        }
-
-        if (is_fire_hater()) {
-            if (it->is_lava() || it->is_fire()) {
-                return (true);
-            }
-        }
-
-        if (is_acid_hater()) {
-            if (it->is_acid()) {
-                return (true);
-            }
-        }
-
-        if (it->is_hazard()) {
+        if (it->is_chasm()) {
             return (true);
         }
 
