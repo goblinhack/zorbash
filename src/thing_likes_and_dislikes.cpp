@@ -27,12 +27,28 @@ bool Thing::will_avoid (const Thingp itp)
         }
     }
     if (me->is_slime_baby()) {
+        //
+        // But allow baby slimes to attack each other!
+        //
         if (it->is_slime_parent()) {
             return (true);
         }
     }
-    if (me->is_slime_baby()) {
-        if (it->is_slime_baby()) {
+    if (me->is_acid_hater()) {
+        if (it->is_acid()) {
+            return (true);
+        }
+    }
+    if (me->is_fire_hater()) {
+        if (it->is_fire()) {
+            return (true);
+        }
+        if (it->is_lava()) {
+            return (true);
+        }
+    }
+    if (me->is_water_hater()) {
+        if (it->is_water()) {
             return (true);
         }
     }
@@ -50,7 +66,7 @@ bool Thing::will_eat (const Thingp itp)
         }
     }
     if (me->is_treasure_eater()) {
-        if (it->is_treasure() || it->is_blood()) {
+        if (it->is_treasure()) {
             return (true);
         }
     }
