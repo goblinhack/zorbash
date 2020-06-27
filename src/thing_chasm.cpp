@@ -95,11 +95,20 @@ bool Thing::fall_to_next_level (void)
             wobble(90);
             visible();
 
-            auto damage = random_range(20, 50);
-            auto h = decr_stats_health(damage);
-            if (is_player()) {
-                MINICON("%%fg=red$You take %u fall damage!%%fg=reset$", damage);
+
+            //
+            // Allow generators to fall without damage
+            //
+            int fall_damage = 0;
+            if (is_monst() || is_player()) {
+                fall_damage = random_range(20, 50);
             }
+
+            auto h = decr_stats_health(fall_damage);
+            if (is_player()) {
+                MINICON("%%fg=red$You take %u fall damage!%%fg=reset$", fall_damage);
+            }
+
             bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
             level->thing_new(tp_random_blood_splatter()->name(), mid_at);
             if (h <= 0) {
@@ -108,7 +117,7 @@ bool Thing::fall_to_next_level (void)
                 dead(nullptr, reason);
             }
 
-            log("finish fall to next level");
+            log("finished fall to next level");
             return true;
         }
     }

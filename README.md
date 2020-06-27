@@ -44,6 +44,8 @@ Comments and suggestions welcome at this early stage.
 ![Alt text](pics/screenshot.5.png?raw=true "")
 ![Alt text](pics/screenshot.6.png?raw=true "")
 ![Alt text](pics/screenshot.7.png?raw=true "")
+![Alt text](pics/screenshot.8.png?raw=true "")
+![Alt text](pics/screenshot.9.png?raw=true "")
 <!--```diff -->
 <!--                       Hark! Hear now a tale untold -->
 <!--                       since ancient times of yore -->
