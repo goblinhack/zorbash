@@ -38,6 +38,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
@@ -582,6 +583,61 @@ public:
     inline void unset_is_light_blocker_no_check (const int x, const int y)
     {
         set_no_check(_is_light_blocker, x, y, false);
+    }
+
+    //
+    // Used in lighting, so inlined
+    //
+    inline bool is_movement_blocking (const point &p)
+    {
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_movement_blocking, p.x, p.y));
+    }
+
+    inline bool is_movement_blocking_no_check (const point &p)
+    {
+        return (get_no_check(_is_movement_blocking, p.x, p.y));
+    }
+
+    inline bool is_movement_blocking (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_movement_blocking, x, y));
+    }
+
+    inline bool is_movement_blocking_no_check (const int x, const int y)
+    {
+        return (get_no_check(_is_movement_blocking, x, y));
+    }
+
+    inline void set_is_movement_blocking (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_movement_blocking, x, y, true);
+    }
+
+    inline void set_is_movement_blocking_no_check (const int x, const int y)
+    {
+        set_no_check(_is_movement_blocking, x, y, true);
+    }
+
+    inline void unset_is_movement_blocking (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_movement_blocking, x, y, false);
+    }
+
+    inline void unset_is_movement_blocking_no_check (const int x, const int y)
+    {
+        set_no_check(_is_movement_blocking, x, y, false);
     }
 
     inline bool is_lit (const point &p)

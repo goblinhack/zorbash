@@ -33,6 +33,7 @@ void Level::clear (void)
     _is_lava = {};
     _is_acid = {};
     _is_light_blocker = {};
+    _is_movement_blocking = {};
     _is_monst = {};
     _is_rock = {};
     _is_smoke = {};

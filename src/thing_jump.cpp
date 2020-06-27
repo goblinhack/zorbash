@@ -29,9 +29,6 @@ bool Thing::try_to_jump (point to)
 
     auto fto = make_fpoint(to);
     if (distance(mid_at, fto) > is_jumper_distance()) {
-        if (is_player()) {
-            MINICON("You jump too far!");
-        }
         auto u = (fto - mid_at);
         u.unit();
         u *= is_jumper_distance();
@@ -59,6 +56,9 @@ bool Thing::try_to_jump (point to)
         level->is_door(x, y) ||
         level->is_wall(x, y)) {
         log("jump failed, into obstacle");
+        if (is_player()) {
+            MINICON("You cannot jump onto that");
+        }
         return false;
     }
 
