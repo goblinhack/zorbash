@@ -953,9 +953,9 @@ int Thing::is_rrr96(void) const
     return (tp()->is_rrr96());
 }
 
-int Thing::is_rrr97(void) const
+int Thing::is_treasure_eater(void) const
 {_
-    return (tp()->is_rrr97());
+    return (tp()->is_treasure_eater());
 }
 
 int Thing::is_double_damage_from_acid(void) const
