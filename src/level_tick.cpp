@@ -30,9 +30,9 @@ void Level::tick (void)
     if (wid_console_window && wid_console_window->visible) {
         return;
     }
-_
+
     player_tick();
-_
+
     // LOG("-");
 
     //
@@ -44,8 +44,11 @@ _
     // Active things are generally things that move or have a life span
     //
     auto c = all_active_things;
-    for (auto& i : all_active_things) {
-        auto t = i.second;
+    auto i = all_active_things.begin();
+    while (i != all_active_things.end()) {
+        auto t = i->second;
+        auto n = ++i;
+
         //t->log("tick");
         verify(t);
         if (t->is_monst()) {
@@ -54,6 +57,7 @@ _
             }
         }
         t->tick();
+        i = n;
     }
 
     if (!game->things_are_moving) {

@@ -14,6 +14,7 @@ def tp_init(name, text_name):
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_bounce_on_move(True)
+    x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_change_levels(True)
@@ -44,10 +45,10 @@ def tp_init(name, text_name):
     x.set_is_water_hater(100)
     x.set_normal_placement_rules(True)
     x.set_resurrect_dice("1d10+30")
-    x.set_stats_attack_dice("1d4")
-    x.set_stats_defence(1)
+    x.set_stats_attack_dice("1d12")
+    x.set_stats_defence(4)
     x.set_stats_health_hunger_pct(95)
-    x.set_stats_health_initial(10)
+    x.set_stats_health_initial(50)
     x.set_stats_move_speed_ms(500)
     x.set_stats_strength(9)
     x.set_text_a_or_an("a");
@@ -116,7 +117,7 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="skeleton1", text_name="skeleton")
+    tp_init(name="giant-skeleton1", text_name="giant-skeleton")
 
 init()
 
