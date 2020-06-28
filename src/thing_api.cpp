@@ -94,6 +94,16 @@ void Thing::delete_age_map (void)
     }
 }
 
+void Thing::clear_age_map (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        if (monstp->_age_map) {
+            *monstp->_age_map = {};
+        }
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // _dmap_scent
 ////////////////////////////////////////////////////////////////////////////
@@ -131,6 +141,16 @@ void Thing::delete_dmap_scent (void)
             oldptr(monstp->_dmap_scent);
             delete monstp->_dmap_scent;
             monstp->_dmap_scent = 0;
+        }
+    }
+}
+
+void Thing::clear_dmap_scent (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        if (monstp->_dmap_scent) {
+            *monstp->_dmap_scent = {};
         }
     }
 }

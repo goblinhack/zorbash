@@ -35,8 +35,8 @@ void Thing::level_change (Levelp l)
 
     if (monstp) {
         monstp->move_path = {};
-        delete_age_map();
-        delete_dmap_scent();
+        clear_age_map();
+        clear_dmap_scent();
         move_finish();
     }
 
@@ -93,6 +93,10 @@ void Thing::level_change (Levelp l)
     }
 
     log("changed level");
+
+    if (is_player()) {
+        l->scroll_map_to_player();
+    }
 }
 
 void Thing::level_enter (void)

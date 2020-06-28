@@ -69,9 +69,9 @@ bool time_have_x_hundredths_passed_since (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
-    /*
-     * Cater for negative future times.
-     */
+    //
+    // Cater for negative future times.
+    //
     timestamp_t delay = time_now - since;
 
     return ((timestamp_t)(delay / 10) > (timestamp_t)val);
@@ -81,9 +81,9 @@ bool time_have_x_ms_passed_since (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
-    /*
-     * Cater for negative future times.
-     */
+    //
+    // Cater for negative future times.
+    //
     timestamp_t delay = time_now - since;
 
     return ((timestamp_t)(delay) >= (timestamp_t)val);
@@ -93,9 +93,9 @@ bool time_have_x_tenths_passed_since (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
-    /*
-     * Cater for negative future times.
-     */
+    //
+    // Cater for negative future times.
+    //
     timestamp_t delay = time_now - since;
 
     return ((timestamp_t)(delay / 100) >= (timestamp_t)val);
@@ -105,9 +105,9 @@ bool time_have_x_secs_passed_since (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
-    /*
-     * Cater for negative future times.
-     */
+    //
+    // Cater for negative future times.
+    //
     timestamp_t delay = time_now - since;
 
     return ((timestamp_t)(delay / ONESEC) >= (timestamp_t)val);

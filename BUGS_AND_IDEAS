@@ -1,20 +1,19 @@
 bugs
 ----
-- allow map pan when dead
+animation of skeleton stops 
 
 upcoming work
 -------------
-- gravestone
 - monst rarity
 - eat food
 - drop frog
-- chasm drop of items to next level / check works
 - drainpipes spawn slime
 - sewer level
 - brogue like monster sidebar
 
 future work
 -----------
+- gravestone
 - bear trap/sticky trap holds player still so time catches up / have a click indicator for how long to go
 - bibles and stuff lean to new gods
 - blessed items resist explosion
