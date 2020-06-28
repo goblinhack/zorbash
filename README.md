@@ -20,9 +20,9 @@ Credits
 -------
 The graphics are a mixture of my own programmer-art efforts combined with
 a selection of the amazing Oryx tilesets [found here link](https://www.oryxdesignlab.com/).
+
 Screenshots
 -----------
-```
 ![Alt text](pics/screenshot.1.png?raw=true "")
 ![Alt text](pics/screenshot.2.png?raw=true "")
 ![Alt text](pics/screenshot.3.png?raw=true "")
@@ -32,50 +32,6 @@ Screenshots
 ![Alt text](pics/screenshot.7.png?raw=true "")
 ![Alt text](pics/screenshot.8.png?raw=true "")
 ![Alt text](pics/screenshot.9.png?raw=true "")
-<!--```diff -->
-<!--                       Hark! Hear now a tale untold -->
-<!--                       since ancient times of yore -->
-<!--                       of Zorbash, forgotten beast of old,  -->
-<!--                       who dwelled deep near the Earth’s core -->
-<!--                        -->
-<!--                       ‘Twas from the Abyss he first arose, -->
-<!--                       Forged treasures gold and gleaming.  -->
-<!--                       A deadly lure to tempt all those -->
-<!--                       Prone to greed and scheming -->
-<!--                        -->
-<!--                       Many fell before his throne,  -->
-<!--                       Heroes fell asunder. -->
-<!--                       His lightning gaze turned flesh to bone -->
-<!--                       His roar was loud as thunder. -->
-<!--                        -->
-<!--                       Quenchless, thirsting, dripping gore -->
-<!--                       His thousand eyes unmatched -->
-<!--                       Until one tenacious band of four -->
-<!--                       From him vict’ry snatched.  -->
-<!--                        -->
-<!--                       Although, ‘twas not an easy fight - -->
-<!--                       A sacrifice was made. -->
-<!--                       A volunteer, their faithful knight, -->
-<!--                       Made sure the price was paid.  -->
-<!--                        -->
-<!--                       As godlings, the remaining three -->
-<!--                       rose with fame and glory -->
-<!--                       But that’s not yet the finale -->
-<!--                       Of Zorbanadu’s dark story. -->
-<!--                        -->
-<!--                       For in the depths of Zorbash’s den,  -->
-<!--                       A necromancer schemed. -->
-<!--                       She planned to raise the beast again, -->
-<!--                       And rule as his Dark Queen. -->
-<!--                        -->
-<!--                       So now Zorbash has come to life -  -->
-<!--                       (Though ‘tis more like life’s dark shadow) -->
-<!--                       With his fiersome undead wife -->
-<!--                       Can you save us all, dear hero?  -->
-<!--                        -->
-<!--``` -->
-
-![#1589F0](https://placehold.it/15/1589F0/000000?text=+) To build:
 
 How to build
 ------------
@@ -129,6 +85,47 @@ SDL2 is needed. SDL1 is too old.
 <!-- Whether this is true or not, cannot be said but to strike at the heart of their rule -->
 <!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
 <!--  -->
+<!--                       Hark! Hear now a tale untold -->
+<!--                       since ancient times of yore -->
+<!--                       of Zorbash, forgotten beast of old,  -->
+<!--                       who dwelled deep near the Earth’s core -->
+<!--                        -->
+<!--                       ‘Twas from the Abyss he first arose, -->
+<!--                       Forged treasures gold and gleaming.  -->
+<!--                       A deadly lure to tempt all those -->
+<!--                       Prone to greed and scheming -->
+<!--                        -->
+<!--                       Many fell before his throne,  -->
+<!--                       Heroes fell asunder. -->
+<!--                       His lightning gaze turned flesh to bone -->
+<!--                       His roar was loud as thunder. -->
+<!--                        -->
+<!--                       Quenchless, thirsting, dripping gore -->
+<!--                       His thousand eyes unmatched -->
+<!--                       Until one tenacious band of four -->
+<!--                       From him vict’ry snatched.  -->
+<!--                        -->
+<!--                       Although, ‘twas not an easy fight - -->
+<!--                       A sacrifice was made. -->
+<!--                       A volunteer, their faithful knight, -->
+<!--                       Made sure the price was paid.  -->
+<!--                        -->
+<!--                       As godlings, the remaining three -->
+<!--                       rose with fame and glory -->
+<!--                       But that’s not yet the finale -->
+<!--                       Of Zorbanadu’s dark story. -->
+<!--                        -->
+<!--                       For in the depths of Zorbash’s den,  -->
+<!--                       A necromancer schemed. -->
+<!--                       She planned to raise the beast again, -->
+<!--                       And rule as his Dark Queen. -->
+<!--                        -->
+<!--                       So now Zorbash has come to life -  -->
+<!--                       (Though ‘tis more like life’s dark shadow) -->
+<!--                       With his fiersome undead wife -->
+<!--                       Can you save us all, dear hero?  -->
+<!--                        -->
+<!--``` -->
 <!--                       Secret Verses:                                         -->
 <!--                       Twas not an easy fight, it’s true                      -->
 <!--                       But not in the way you think.                          -->
