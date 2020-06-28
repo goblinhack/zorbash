@@ -16,7 +16,7 @@ static void wid_dead_destroy (void)
     game->soft_unpause();
     game->fini();
     game->main_menu_select();
-    wid_hide(wid_minicon_window);
+    wid_not_visible(wid_minicon_window);
 }
 
 uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)

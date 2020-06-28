@@ -72,10 +72,8 @@ void Level::scroll_map (void)
 
     map_at.x = std::max(map_at.x, (float)0.0);
     map_at.y = std::max(map_at.y, (float)0.0);
-    map_at.x = std::min(map_at.x,
-                             (float)MAP_WIDTH - TILES_ACROSS);
-    map_at.y = std::min(map_at.y,
-                             (float)MAP_HEIGHT - TILES_DOWN);
+    map_at.x = std::min(map_at.x, (float)MAP_WIDTH - TILES_ACROSS);
+    map_at.y = std::min(map_at.y, (float)MAP_HEIGHT - TILES_DOWN);
 }
 
 void Level::scroll_map_to_player (void)

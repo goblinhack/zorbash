@@ -19,9 +19,16 @@ void Level::tick (void)
         return;
     }
 
+    //
+    // Update the cursor position. Allow this even when paused so you can
+    // look around.
+    //
+    cursor_move();
+
     if (game->paused()) {
         return;
     }
+
     game->things_are_moving = false;
 
     //
@@ -34,11 +41,6 @@ void Level::tick (void)
     player_tick();
 
     // LOG("-");
-
-    //
-    // Update the cursor position
-    //
-    cursor_move();
 
     //
     // Active things are generally things that move or have a life span

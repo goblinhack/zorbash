@@ -926,7 +926,9 @@ bool Thing::collision_obstacle (Thingp it)
         }
     } else if (is_monst()) {
         if (it->is_chasm()) {
-            return (true);
+            if (!is_floating()) {
+                return (true);
+            }
         }
 
         //

@@ -1,9 +1,9 @@
+bugs
+----
+- allow map pan when dead
+
 upcoming work
 -------------
-- chasms not an obstacle for ghosts
-- no ghost fall into chasm
-- generator fall, half damage
-- allow map pan when dead
 - gravestone
 - monst rarity
 - eat food

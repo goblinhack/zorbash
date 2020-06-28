@@ -22,6 +22,10 @@ bool Thing::chasm_tick (void)
         return true;
     }
 
+    if (is_floating()) {
+        return false;
+    }
+
     if (level->is_chasm(mid_at.x, mid_at.y)) {
         fall(1, 750);
         wobble(360);
@@ -100,8 +104,12 @@ bool Thing::fall_to_next_level (void)
             // Allow generators to fall without damage
             //
             int fall_damage = 0;
-            if (is_monst() || is_player()) {
+            if (is_player()) {
                 fall_damage = random_range(20, 50);
+            }
+
+            if (is_generator() || is_monst()) {
+                fall_damage = get_stats_health() / 2;
             }
 
             auto h = decr_stats_health(fall_damage);
