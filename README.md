@@ -1,5 +1,5 @@
-# Zorbash
-                        
+Zorbash
+-------
 <!-- In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage -->
 <!-- upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness. -->
 <!--  -->
@@ -19,7 +19,6 @@
 <!-- Legend says that there is a master base somewhere, where the Emperor Zorbash resides. -->
 <!-- Whether this is true or not, cannot be said but to strike at the heart of their rule -->
 <!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
-
 ```diff
 Zorbash is a roguelike that lets you choose the way you play, turn-based or real-time.
 
@@ -36,6 +35,14 @@ free attacks waiting.
 
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.
+
+Credits
+-------
+The graphics are a mixture of my own programmer-art efforts combined with
+a selection of the amazing Oryx tilesets [found here link](https://www.oryxdesignlab.com/).
+
+Screenshots
+-----------
 ```
 ![Alt text](pics/screenshot.1.png?raw=true "")
 ![Alt text](pics/screenshot.2.png?raw=true "")
@@ -91,14 +98,22 @@ Comments and suggestions welcome at this early stage.
 
 ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) To build:
 
-    On Linux:
-        sh ./RUNME
+How to build
+------------
+- On Linux: (last tried ubuntu 19.04 on Sun Jun 28 07:25:22 BST 2020)
+<pre>
+    sh ./RUNME
+</pre>
 
-    On MacOS:
-        sh ./RUNME
+- On MacOS:
+<pre>
+    sh ./RUNME
+</pre>
 
-    On Windows: (install msys2 first via https://www.msys2.org/)
-        sh ./RUNME.windows.mingw64
+- On Windows: (install msys2 first via https://www.msys2.org/)
+<pre>
+    sh ./RUNME.windows.mingw64
+</pre>
 
 If it doesn't build, just email goblinhack@gmail.com for help
 <!--                       Secret Verses:                                         -->
@@ -136,4 +151,3 @@ If it doesn't build, just email goblinhack@gmail.com for help
 <!--                       To resort to the darkest extremes.                     -->
 <!--                       My weakness, my pity had provided                      -->
 <!--                       An excuse for our glorious team.                       -->
-
