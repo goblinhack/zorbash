@@ -139,7 +139,7 @@ typedef unsigned int         uint32_t;
 
 #ifndef _UINT64_T
 #define _UINT64_T
-typedef unsigned long long   uint64_t;
+typedef unsigned long int   uint64_t;
 #endif // _UINT64_T
 #endif
 

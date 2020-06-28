@@ -22,6 +22,7 @@
 case `uname` in
     *MING*|*MSYS*)
         for i in \
+            $(which sdl2-config) \
             /mingw/bin/sdl2-config \
             /mingw64/bin/sdl2-config
         do
@@ -34,9 +35,9 @@ case `uname` in
     ;;
     *)
         for i in \
+            $(which sdl2-config) \
             /opt/local/bin/sdl2-config \
-            /usr/local/bin/sdl2-config \
-            /usr/bin/sdl2-config 
+            /usr/bin/sdl2-config
         do
             if [ -x $i ]
             then
@@ -140,8 +141,9 @@ LDLIBS="$LDLIBS -lSDL2_ttf"
 case `uname` in
     *MING*|*MSYS*)
         for i in \
+            $(which python3-config) \
             /mingw/bin/python3-config \
-            /mingw64/bin/python3-config 
+            /mingw64/bin/python3-config
         do
             if [ -x $i ]
             then
@@ -152,9 +154,9 @@ case `uname` in
     ;;
     *)
         for i in \
+            $(which python3-config) \
             /usr/local/bin/python3-config \
-            /opt/local/bin/python3-config \
-            /usr/bin/python3-config 
+            /usr/bin/python3-config
         do
             if [ -x $i ]
             then
@@ -168,6 +170,7 @@ esac
 case `uname` in
     *MING*|*MSYS*)
         for i in \
+            $(which python3) \
             /mingw/bin/python3 \
             /mingw64/bin/python3 
         do
@@ -180,7 +183,7 @@ case `uname` in
     ;;
     *)
         for i in \
-            /usr/local/bin/python3 \
+            $(which python3) \
             /opt/local/bin/python3 \
             /usr/bin/python3 
         do
@@ -196,6 +199,7 @@ esac
 case `uname` in
     *MING*|*MSYS*)
         for i in \
+            $(which python-config) \
             /mingw/bin/python-config \
             /mingw64/bin/python-config 
         do
@@ -208,7 +212,7 @@ case `uname` in
     ;;
     *)
         for i in \
-            /opt/local/bin/python-config \
+            $(which python-config) \
             /usr/local/bin/python-config \
             /usr/bin/python-config
         do
@@ -224,6 +228,7 @@ esac
 case `uname` in
     *MING*|*MSYS*)
         for i in \
+            $(which python) \
             /mingw/bin/python \
             /mingw64/bin/python 
         do
@@ -236,7 +241,7 @@ case `uname` in
     ;;
     *)
         for i in \
-            /opt/local/bin/python \
+            $(which python) \
             /usr/local/bin/python \
             /usr/bin/python
         do
