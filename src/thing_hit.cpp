@@ -118,7 +118,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     } else {
         if (real_hitter->is_player()) {
             MINICON("You hit the %s for %d damage!",
-                    text_The().c_str(), damage);
+                    text_the().c_str(), damage);
         }
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {

@@ -18,7 +18,7 @@ bool Thing::eat (Thingp it)
         if ((is_slime_eater()     && it->is_slime()) ||
             (is_meat_eater()      && it->is_meat())  ||
             (is_treasure_eater()  && it->is_treasure())) {
-            log("eats %s", it->text_The().c_str());
+            log("eats %s", it->text_the().c_str());
             //
             // For treasure what should the boost be?
             //
