@@ -948,9 +948,9 @@ int Thing::is_rrr91(void) const
     return (tp()->is_rrr91());
 }
 
-int Thing::is_rrr92(void) const
+int Thing::is_sidebar_item(void) const
 {_
-    return (tp()->is_rrr92());
+    return (tp()->is_sidebar_item());
 }
 
 int Thing::is_floating(void) const

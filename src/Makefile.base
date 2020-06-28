@@ -39,6 +39,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_quit.o 		\
     $(OBJDIR)/game_save.o 		\
     $(OBJDIR)/game_status.o 		\
+    $(OBJDIR)/game_items.o 		\
     $(OBJDIR)/game_tick.o 		\
     $(OBJDIR)/gauss.o 			\
     $(OBJDIR)/gfx.o			\

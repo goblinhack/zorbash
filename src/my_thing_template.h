@@ -282,7 +282,7 @@ private:
     int _is_rrr89 {};
     int _is_rrr90 {};
     int _is_rrr91 {};
-    int _is_rrr92 {};
+    int _is_sidebar_item {};
     int _is_floating {};
     int _is_double_damage_from_water {};
     int _is_generator {};
@@ -620,7 +620,7 @@ public:
     int is_rrr89(void) const;
     int is_rrr90(void) const;
     int is_rrr91(void) const;
-    int is_rrr92(void) const;
+    int is_sidebar_item(void) const;
     int is_floating(void) const;
     int is_double_damage_from_acid(void) const;
     int is_double_damage_from_water(void) const;
@@ -866,7 +866,7 @@ public:
     void set_is_rrr89(int);
     void set_is_rrr90(int);
     void set_is_rrr91(int);
-    void set_is_rrr92(int);
+    void set_is_sidebar_item(int);
     void set_is_floating(int);
     void set_is_double_damage_from_acid(int);
     void set_is_double_damage_from_water(int);

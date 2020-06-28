@@ -7,6 +7,7 @@ def tp_init(name, text_name):
 
     x.set_gold_value_dice("1d300")
     x.set_collision_circle(True)
+    x.set_is_sidebar_item(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
     x.set_gfx_animated(True)

@@ -675,7 +675,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr89)
     TP_SET_DECL(is_rrr90)
     TP_SET_DECL(is_rrr91)
-    TP_SET_DECL(is_rrr92)
+    TP_SET_DECL(is_sidebar_item)
     TP_SET_DECL(is_floating)
     TP_SET_DECL(is_double_damage_from_acid)
     TP_SET_DECL(is_double_damage_from_water)
