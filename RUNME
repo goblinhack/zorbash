@@ -81,7 +81,7 @@ run() {
     return $MY_RET
 }
 
-run ./.RUNME $LOG
+run scripts/build.sh $LOG
 
 if [ $? -ne 0 ]; then
     log_err "Build failed."
