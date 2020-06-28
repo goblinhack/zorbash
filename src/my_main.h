@@ -94,6 +94,7 @@
 #define UI_SCROLL_WHEEL_SCALE      1.0 // How much the wheel mouse moves.
 #define UI_SCROLL_WHEEL_SCALE_MAX  10
 #define UI_SIDEBAR_WIDTH           12
+#define UI_ITEMBAR_WIDTH           16
 #define UI_TEXT_COLOR              GRAY // Default text color
 #define UI_TEXT_COLOR_STR          "gray"
 #define UI_WID_POPUP_WIDTH_NORMAL  24

@@ -449,8 +449,8 @@ class Tp:
     def set_is_rrr91(self, value):
         zx.tp_set_is_rrr91(self, value)
 
-    def set_is_rrr92(self, value):
-        zx.tp_set_is_rrr92(self, value)
+    def set_is_sidebar_item(self, value):
+        zx.tp_set_is_sidebar_item(self, value)
 
     def set_is_floating(self, value):
         zx.tp_set_is_floating(self, value)

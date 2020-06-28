@@ -19,6 +19,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_corpse_on_death(True)
     x.set_is_dead_on_shove(True)
     x.set_is_flammable(True)
+    x.set_is_sidebar_item(True)
     x.set_is_floor_deco(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)

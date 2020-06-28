@@ -25,6 +25,7 @@ def tp_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_light_blocker(True)
     x.set_is_movement_blocking(True)
+    x.set_is_sidebar_item(True)
     x.set_normal_placement_rules(True)
     x.set_stats_defence(2)
     x.set_stats_health_initial(100)
