@@ -33,9 +33,9 @@ void Thing::animate (void)
                 is_resurrecting = false;
                 is_resurrected = true;
                 is_dead = false;
+            } else {
+                return;
             }
-
-            return;
         }
     }
 
