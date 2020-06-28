@@ -14,6 +14,7 @@
 #include <execinfo.h>
 #endif
 #include <cxxabi.h>
+#include <memory>
 
 void Traceback::init (void) {
 #ifndef _WIN32
