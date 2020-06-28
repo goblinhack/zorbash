@@ -54,7 +54,8 @@ void Level::scroll_map (void)
         }
     } else {
         //
-        // Else following the mouse. Bigger chunks are less sick inducing.
+        // Else following the cursor or mouse. Bigger chunks are less sick 
+        // inducing.
         //
         map_at.x -= dx / bigstep;
         map_at.y -= dy / bigstep;

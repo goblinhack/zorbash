@@ -113,9 +113,16 @@ void Thing::level_enter (void)
         }
     }
 
-    if (!level->cursor) {
-        if (!is_cursor()) {
-            level->cursor = level->thing_new("cursor", mid_at);
+    //
+    // If this is the player create a new cursor for us.
+    // If this is something else, do not, else the cursor winds up
+    // following whatever fell in.
+    //
+    if (is_player()) {
+        if (!level->cursor) {
+            if (!is_cursor()) {
+                level->cursor = level->thing_new("cursor", mid_at);
+            }
         }
     }
     level_push();
