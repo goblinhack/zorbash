@@ -19,7 +19,7 @@ Comments and suggestions welcome at this early stage.
 Credits
 -------
 The graphics are a mixture of my own programmer-art efforts combined with
-a selection of the amazing Oryx tilesets [found here link](https://www.oryxdesignlab.com/).
+a selection of the amazing Oryx tilesets [found here](https://www.oryxdesignlab.com/).
 
 Screenshots
 -----------
@@ -52,18 +52,23 @@ If it doesn't build, just email goblinhack@gmail.com for help
 
 Dependancies
 ------------
-SDL2 is needed. SDL1 is too old.
+SDL2 and Python3 is needed.
 - Ubuntu
 <pre>
+    sudo apt-get install xutils-dev
     sudo apt-get install libsdl2-dev
     sudo apt-get install libsdl2-mixer-dev
     sudo apt-get install libsdl2-ttf-dev
+    sudo apt-get install python3-dev
+    sudo apt-get install python3-pip
 </pre>
-- MacOS (install Mac Ports first [found here link](https://www.macports.org/))
+- MacOS (install Mac Ports first [found here](https://www.macports.org/))
 <pre>
+    sudo port install makedepend
     sudo port install libsdl2
     sudo port install libsdl2_mixer
     sudo port install libsdl2_ttf
+    sudo port install python3*
 </pre>
 <!-- In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage -->
 <!-- upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness. -->
