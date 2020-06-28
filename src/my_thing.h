@@ -122,6 +122,7 @@ public:
     timestamp_t  timestamp_lunge_end {};
     timestamp_t  timestamp_move_begin {};
     timestamp_t  timestamp_move_end {};
+    timestamp_t  timestamp_last_wander_try {};
     uint32_t     tick = {};                  // Increments on completion of move
     uint32_t     tick_last_did_something {};
     uint32_t     tick_last_escape {};
@@ -562,6 +563,13 @@ public:
     timestamp_t decr_timestamp_move_end(void);
     timestamp_t incr_timestamp_move_end(void);
 
+    timestamp_t set_timestamp_last_wander_try(timestamp_t);
+    timestamp_t get_timestamp_last_wander_try(void) const;
+    timestamp_t decr_timestamp_last_wander_try(timestamp_t);
+    timestamp_t incr_timestamp_last_wander_try(timestamp_t);
+    timestamp_t decr_timestamp_last_wander_try(void);
+    timestamp_t incr_timestamp_last_wander_try(void);
+
     timestamp_t set_timestamp_born(timestamp_t);
     timestamp_t get_timestamp_born(void) const;
     timestamp_t decr_timestamp_born(timestamp_t);
@@ -671,6 +679,7 @@ public:
     bool achieve_goals_in_life();
     bool ai_choose_wander(point& nh);
     bool ai_create_on_fire_path(point &nh, const point start, const point end);
+    bool ai_blocked(void);
     bool ai_create_path(point &nh, const point start, const point end);
     bool ai_escape(void);
     bool ai_on_fire(void);

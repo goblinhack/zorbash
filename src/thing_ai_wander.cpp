@@ -11,6 +11,34 @@
 #include "my_math.h"
 #include "my_thing.h"
 
+bool Thing::ai_blocked (void)
+{_
+    static const std::vector<point> move_deltas = {
+        point(0, -1),
+        point(-1, 0),
+        point(1, 0),
+        point(0, 1),
+    };
+
+    auto at = make_point(mid_at);
+    auto count = 0;
+    for (const auto& d : move_deltas) {
+        auto t = at + d;
+        auto x = t.x;
+        auto y = t.y;
+        if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
+            level->is_door(x,y)                              ||
+            level->is_secret_door(x,y)                       ||
+            level->is_generator(x,y)                         ||
+            level->is_hazard(x,y)                            ||
+            level->is_rock(x, y)                             ||
+            level->is_wall(x, y)) {
+            count++;
+        }
+    }
+    return count >= 4;
+}
+
 bool Thing::ai_create_path (point &nh, const point start, const point end)
 {_
     Dmap dmap {};
@@ -170,6 +198,17 @@ bool Thing::ai_choose_wander (point& nh)
 
 bool Thing::ai_wander (void)
 {_
+    if (!time_have_x_tenths_passed_since(10, get_timestamp_last_wander_try())) {
+        log("ai wander blocked; too frequent");
+        return false;
+    }
+    set_timestamp_last_wander_try(time_get_time_ms_cached());
+
+    if (ai_blocked()) {
+        log("ai wander blocked");
+        return false;
+    }
+
     log("ai wander");
     auto tries = 100;
     while (tries--) {
@@ -194,6 +233,11 @@ _
 
 bool Thing::ai_escape (void)
 {_
+    if (ai_blocked()) {
+        log("ai escape blocked");
+        return false;
+    }
+
     log("ai escape");
     auto tries = 100;
     while (tries--) {
