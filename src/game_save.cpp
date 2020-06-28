@@ -88,6 +88,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t */ out << bits(my.t->timestamp_lunge_end);
     /* timestamp_t */ out << bits(my.t->timestamp_move_begin);
     /* timestamp_t */ out << bits(my.t->timestamp_move_end);
+    /* timestamp_t */ out << bits(my.t->timestamp_last_wander_try);
     /* uint32_t    */ out << bits(my.t->owner_id);
     /* uint32_t    */ out << bits(my.t->tick);
     /* uint32_t    */ out << bits(my.t->weapon_id);

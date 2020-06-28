@@ -32,6 +32,7 @@ Screenshots
 ![Alt text](pics/screenshot.7.png?raw=true "")
 ![Alt text](pics/screenshot.8.png?raw=true "")
 ![Alt text](pics/screenshot.9.png?raw=true "")
+![Alt text](pics/screenshot.10.png?raw=true "")
 
 How to build
 ------------

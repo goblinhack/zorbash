@@ -3798,6 +3798,54 @@ timestamp_t Thing::incr_timestamp_move_end (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// timestamp_last_wander_try
+////////////////////////////////////////////////////////////////////////////
+timestamp_t Thing::get_timestamp_last_wander_try (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->timestamp_last_wander_try);
+    } else {
+        return (0);
+    }
+}
+
+timestamp_t Thing::set_timestamp_last_wander_try (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_last_wander_try = v);
+}
+
+timestamp_t Thing::decr_timestamp_last_wander_try (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_last_wander_try -= v);
+}
+
+timestamp_t Thing::incr_timestamp_last_wander_try (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_last_wander_try += v);
+}
+
+timestamp_t Thing::decr_timestamp_last_wander_try (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_last_wander_try--);
+}
+
+timestamp_t Thing::incr_timestamp_last_wander_try (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_last_wander_try++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // timestamp_born
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_born (void) const

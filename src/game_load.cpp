@@ -105,6 +105,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t */ in >> bits(T); my.t->timestamp_lunge_end     = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_move_begin    = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_move_end      = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_last_wander_try = load(T);
     /* uint32_t    */ in >> bits(my.t->owner_id);
     /* uint32_t    */ in >> bits(my.t->tick);
     /* uint32_t    */ in >> bits(my.t->weapon_id);
