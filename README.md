@@ -1,25 +1,5 @@
 Zorbash
 -------
-<!-- In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage -->
-<!-- upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness. -->
-<!--  -->
-<!-- Those that remain, scavenge amongst the ruins of once great cities. Religious zealotry -->
-<!-- has taken hold and all technology is viewed as demonic magic and forbidden. To be found -->
-<!-- with Zorbashian tech is a death sentence. -->
-<!--  -->
-<!-- The planet is now a hellscape. Lava flows freely from the gushing wounds in the soil -->
-<!-- and deserts grow larger every year. The animals have mutated into fearsome beasts and -->
-<!-- the only safety is to be found in the undercities. -->
-<!--  -->
-<!-- Your task, nobel one, is only to survive, for in surviving we continue to resist. -->
-<!-- If you are able to strike a blow against the Zorbashian demons then seek out their -->
-<!-- many underground bases. It is from here they spawn from their far off realm. But -->
-<!-- beware, they have many dread beasts guarding their bases. -->
-<!--  -->
-<!-- Legend says that there is a master base somewhere, where the Emperor Zorbash resides. -->
-<!-- Whether this is true or not, cannot be said but to strike at the heart of their rule -->
-<!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
-```diff
 Zorbash is a roguelike that lets you choose the way you play, turn-based or real-time.
 
 How it works.
@@ -40,7 +20,6 @@ Credits
 -------
 The graphics are a mixture of my own programmer-art efforts combined with
 a selection of the amazing Oryx tilesets [found here link](https://www.oryxdesignlab.com/).
-
 Screenshots
 -----------
 ```
@@ -104,18 +83,52 @@ How to build
 <pre>
     sh ./RUNME
 </pre>
-
 - On MacOS:
 <pre>
     sh ./RUNME
 </pre>
-
 - On Windows: (install msys2 first via https://www.msys2.org/)
 <pre>
     sh ./RUNME.windows.mingw64
 </pre>
 
 If it doesn't build, just email goblinhack@gmail.com for help
+
+Dependancies
+------------
+SDL2 is needed. SDL1 is too old.
+- Ubuntu
+<pre>
+    sudo apt-get install libsdl2-dev
+    sudo apt-get install libsdl2-mixer-dev
+    sudo apt-get install libsdl2-ttf-dev
+</pre>
+- MacOS (install Mac Ports first [found here link](https://www.macports.org/))
+<pre>
+    sudo port install libsdl2
+    sudo port install libsdl2_mixer
+    sudo port install libsdl2_ttf
+</pre>
+<!-- In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage -->
+<!-- upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness. -->
+<!--  -->
+<!-- Those that remain, scavenge amongst the ruins of once great cities. Religious zealotry -->
+<!-- has taken hold and all technology is viewed as demonic magic and forbidden. To be found -->
+<!-- with Zorbashian tech is a death sentence. -->
+<!--  -->
+<!-- The planet is now a hellscape. Lava flows freely from the gushing wounds in the soil -->
+<!-- and deserts grow larger every year. The animals have mutated into fearsome beasts and -->
+<!-- the only safety is to be found in the undercities. -->
+<!--  -->
+<!-- Your task, nobel one, is only to survive, for in surviving we continue to resist. -->
+<!-- If you are able to strike a blow against the Zorbashian demons then seek out their -->
+<!-- many underground bases. It is from here they spawn from their far off realm. But -->
+<!-- beware, they have many dread beasts guarding their bases. -->
+<!--  -->
+<!-- Legend says that there is a master base somewhere, where the Emperor Zorbash resides. -->
+<!-- Whether this is true or not, cannot be said but to strike at the heart of their rule -->
+<!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
+<!--  -->
 <!--                       Secret Verses:                                         -->
 <!--                       Twas not an easy fight, it’s true                      -->
 <!--                       But not in the way you think.                          -->
