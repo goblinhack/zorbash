@@ -46,16 +46,16 @@ void Level::cursor_find_on_visible_things (
 //
 void Level::cursor_move (void)
 {
-    if (game->paused()) {
-        return;
-    }
-
     if (is_mouse_over_actionbar()) {
         return;
     }
 
     if ((wheel_x != 0) || (wheel_y != 0)) {
         map_wanted_at += fpoint(wheel_x, -wheel_y);
+    }
+
+    if (game->paused()) {
+        return;
     }
 
     //

@@ -29,6 +29,7 @@ void Thing::kill (Thingp killer, const char *reason)
         MINICON("%s", reason);
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
+        level->map_follow_player = false;
     } else if (is_loggable_for_important_stuff()) {
         if (!killer) {
             MINICON("%s is dead, %s", text_The().c_str(), reason);
