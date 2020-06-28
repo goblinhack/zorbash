@@ -18,8 +18,9 @@ Comments and suggestions welcome at this early stage.
 
 Credits
 -------
-The graphics are a mixture of my own programmer-art efforts combined with
-a selection of the amazing Oryx tilesets [found here](https://www.oryxdesignlab.com/).
+The graphics are a mixture of my own terrible programmer-art efforts combined with
+a selection of the amazing Oryx tilesets [found here](https://www.oryxdesignlab.com/)
+some modified in size.
 
 Screenshots
 -----------

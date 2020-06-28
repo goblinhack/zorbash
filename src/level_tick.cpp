@@ -51,13 +51,15 @@ void Level::tick (void)
         auto t = i->second;
         auto n = ++i;
 
-        //t->log("tick");
         verify(t);
+
         if (t->is_monst()) {
+            // t->log("tick me %d game %d", t->get_tick(), game->tick_current);
             if (t->get_tick() != game->tick_current) {
                 game->things_are_moving = true;
             }
         }
+
         t->tick();
         i = n;
     }

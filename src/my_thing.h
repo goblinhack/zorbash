@@ -231,10 +231,12 @@ public:
     AgeMap *get_age_map(void);
     void new_age_map(void);
     void delete_age_map(void);
+    void clear_age_map(void);
 
     Dmap *get_dmap_scent(void);
     void new_dmap_scent(void);
     void delete_dmap_scent(void);
+    void clear_dmap_scent(void);
 
     std::vector<Lightp> & get_light(void);
     std::size_t get_light_count(void) const;
