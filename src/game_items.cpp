@@ -7,6 +7,7 @@
 #include "my_game_items.h"
 #include "my_thing.h"
 #include "my_level.h"
+#include "my_sprintf.h"
 
 static void game_items_wid_create(void);
 
@@ -79,6 +80,9 @@ static void game_items_wid_create (void)
         if (!t->is_sidebar_item()) {
             continue;
         }
+        if (t->is_dead) {
+            continue;
+        }
 
         auto p = make_point(t->mid_at.x, t->mid_at.y);
         if (!level->is_lit(p)) {
@@ -104,6 +108,21 @@ static void game_items_wid_create (void)
         } else {
             wid_set_color(w, WID_COLOR_TEXT, GRAY);
         }
+        wid_set_color(w, WID_COLOR_BG, RED);
+        y++;
+
+        tl.y++;
+        br.y++;
+        s = string_sprintf("%d/%d",
+                           t->get_stats_health(),
+                           t->get_stats_health_max());
+        w = wid_new_square_button(wid_items, "item");
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, UI_WID_STYLE_NONE);
+        wid_set_text(w, s);
+        wid_set_text_rhs(w, true);
+
+        wid_set_color(w, WID_COLOR_BG, RED);
         y++;
     }
 
