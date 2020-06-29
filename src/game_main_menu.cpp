@@ -26,7 +26,7 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_main_menu_destroy();
     game->init();
-    game_status_fini();
+    game_status_wid_fini();
     game_status_wid_init();
     wid_minicon_fini();
     wid_minicon_init();
@@ -150,7 +150,7 @@ void Game::main_menu_select (void)
     if (game_main_menu_window) {
         game_main_menu_destroy();
     }
-    game_status_fini();
+    game_status_wid_fini();
 
     point tl = make_point(ASCII_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 16);
     point br = make_point(ASCII_WIDTH - 7, ASCII_HEIGHT - 1);

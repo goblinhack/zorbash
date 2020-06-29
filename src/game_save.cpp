@@ -319,6 +319,27 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.key_pause);
     out << bits(my.t.key_help);
     out << bits(my.t.key_quit);
+    out << bits(my.t.key_screenshot);
+    out << bits(my.t.key_unused1);
+    out << bits(my.t.key_unused2);
+    out << bits(my.t.key_unused3);
+    out << bits(my.t.key_unused4);
+    out << bits(my.t.key_unused5);
+    out << bits(my.t.key_unused6);
+    out << bits(my.t.key_unused7);
+    out << bits(my.t.key_unused8);
+    out << bits(my.t.key_unused9);
+    out << bits(my.t.key_unused10);
+    out << bits(my.t.key_unused11);
+    out << bits(my.t.key_unused12);
+    out << bits(my.t.key_unused13);
+    out << bits(my.t.key_unused14);
+    out << bits(my.t.key_unused15);
+    out << bits(my.t.key_unused16);
+    out << bits(my.t.key_unused17);
+    out << bits(my.t.key_unused18);
+    out << bits(my.t.key_unused19);
+    out << bits(my.t.key_unused20);
     return (out);
 }
 

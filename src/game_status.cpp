@@ -16,12 +16,13 @@ Widp wid_item_popup {};
 Widp wid_sidebar {};
 static auto highlight_slot = 0U;
 
-void game_status_fini (void)
+void game_status_wid_fini (void)
 {_
     wid_destroy(&wid_actionbar);
     wid_destroy(&wid_fake_itembar);
     wid_destroy(&wid_item_popup);
     wid_destroy(&wid_sidebar);
+    game_items_wid_fini();
 }
 
 uint8_t game_status_wid_init (void)
@@ -69,7 +70,7 @@ static void game_status_wid_create (void)
         return;
     }
 
-    game_status_fini();
+    game_status_wid_fini();
 
     auto actionbar_items = player->monstp->actionbar_id.size();
 

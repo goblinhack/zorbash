@@ -202,11 +202,6 @@ void Level::init (point3d at, int seed)
                         auto t = thing_new("player1", fpoint(x, y));
                         auto w = thing_new("sword1", fpoint(x, y));
                         t->carry(w);
-                        cursor = thing_new("cursor", fpoint(x, y));
-                        map_follow_player = true;
-                        mouse = -1;
-                        mouse_old = -1;
-                        minimap_valid = false;
                         goto placed_player;
                     }
                 }

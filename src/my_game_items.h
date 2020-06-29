@@ -4,7 +4,7 @@
 //
 
 #pragma once
-void game_items_fini(void);
+void game_items_wid_fini(void);
 uint8_t game_items_wid_init(void);
 
 #include "my_wid.h"

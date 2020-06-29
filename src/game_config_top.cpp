@@ -123,7 +123,7 @@ void Game::config_top_select (void)
     if (game_config_top_window) {
         game_config_top_destroy();
     }
-    game_status_fini();
+    game_status_wid_fini();
 
     point tl = make_point(
                 ASCII_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2,

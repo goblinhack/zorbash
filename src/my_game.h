@@ -74,6 +74,27 @@ public:
     uint32_t           key_pause                    = {SDL_SCANCODE_P};
     uint32_t           key_help                     = {SDL_SCANCODE_H};
     uint32_t           key_quit                     = {SDL_SCANCODE_Q};
+    uint32_t           key_screenshot               = {SDL_SCANCODE_BACKSLASH};
+    uint32_t           key_unused1                  = 0;
+    uint32_t           key_unused2                  = 0;
+    uint32_t           key_unused3                  = 0;
+    uint32_t           key_unused4                  = 0;
+    uint32_t           key_unused5                  = 0;
+    uint32_t           key_unused6                  = 0;
+    uint32_t           key_unused7                  = 0;
+    uint32_t           key_unused8                  = 0;
+    uint32_t           key_unused9                  = 0;
+    uint32_t           key_unused10                  = 0;
+    uint32_t           key_unused11                  = 0;
+    uint32_t           key_unused12                  = 0;
+    uint32_t           key_unused13                  = 0;
+    uint32_t           key_unused14                  = 0;
+    uint32_t           key_unused15                  = 0;
+    uint32_t           key_unused16                  = 0;
+    uint32_t           key_unused17                  = 0;
+    uint32_t           key_unused18                  = 0;
+    uint32_t           key_unused19                  = 0;
+    uint32_t           key_unused20                  = 0;
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
