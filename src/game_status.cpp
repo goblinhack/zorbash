@@ -83,7 +83,7 @@ static void game_status_wid_create (void)
         point br = make_point(x2, UI_ACTIONBAR_BR_Y);
         color c;
 
-        wid_actionbar = wid_new_square_window("actionbar");
+        wid_actionbar = wid_new_square_window("actionbar (bottom)");
         wid_set_pos(wid_actionbar, tl, br);
         wid_set_style(wid_actionbar, -1);
     }
@@ -91,7 +91,7 @@ static void game_status_wid_create (void)
     std::vector<Widp> wid_actionbar_items;
 
     for (auto i = 0U, x = 0U; i < actionbar_items; i++) {
-        auto s = "actionbar" + std::to_string(0);
+        auto s = "actionbar item" + std::to_string(0);
         auto w = wid_new_square_button(wid_actionbar, s);
         wid_actionbar_items.push_back(w);
         point tl = make_point(x, 0);
@@ -162,7 +162,8 @@ static void game_status_wid_create (void)
         point br = make_point(ASCII_WIDTH - 1, ASCII_HEIGHT);
         color c;
 
-        wid_sidebar = wid_new_square_window("text container2");
+        wid_sidebar = wid_new_square_window("right sidebar");
+        wid_set_ignore_events(wid_sidebar, true);
         wid_set_pos(wid_sidebar, tl, br);
         wid_set_shape_none(wid_sidebar);
         wid_set_style(wid_sidebar, UI_WID_STYLE_OUTLINE);
@@ -173,6 +174,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "zorbash-0");
         point tl = make_point(0, y_at);
         point br = make_point(UI_SIDEBAR_WIDTH - 1, y_at+1);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "zorbash-0");
@@ -183,6 +185,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "zorbash-1");
         point tl = make_point(0, y_at);
         point br = make_point(UI_SIDEBAR_WIDTH - 1, y_at+1);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "zorbash-1");
@@ -193,6 +196,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "zorbash-2");
         point tl = make_point(0, y_at);
         point br = make_point(UI_SIDEBAR_WIDTH - 1, y_at+1);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "zorbash-2");
@@ -206,6 +210,7 @@ static void game_status_wid_create (void)
         point br = make_point(UI_SIDEBAR_WIDTH, y_at + 1);
 
         auto s = dynprintf("Level %03d", level->world_at.z);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_text(w, s);
@@ -219,6 +224,7 @@ static void game_status_wid_create (void)
         point tl = make_point(1, y_at);
         point br = make_point(3, y_at + 2);
 
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_status_mouse_down);
         wid_set_style(w, UI_WID_STYLE_NONE);
@@ -232,6 +238,7 @@ static void game_status_wid_create (void)
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_WIDTH, y_at + 1);
 
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_text(w, L"Ser Hackalot");
@@ -243,6 +250,7 @@ static void game_status_wid_create (void)
         point tl = make_point(5, y_at-3);
         point br = make_point(UI_SIDEBAR_WIDTH, y_at-3);
 
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         auto g = std::to_string(player->get_gold());
         wid_set_text(w, "%tile=dollar-icon$%fg=gold$" + g);
@@ -255,6 +263,7 @@ static void game_status_wid_create (void)
         point tl = make_point(5, y_at-2);
         point br = make_point(UI_SIDEBAR_WIDTH, y_at-2);
 
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=weight-icon$%fg=green$150");
         wid_set_text_lhs(w, true);
@@ -270,6 +279,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "health-icon");
         point tl = make_point(0, y_at);
         point br = make_point(1, y_at + 1);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         int i = ((float)player->get_stats_health() /
@@ -285,6 +295,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
         point tl = make_point(2, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
 
@@ -301,6 +312,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "health-status");
         point tl = make_point(2, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH, tl.y);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "health-status");
@@ -310,6 +322,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "health-value");
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -382,6 +395,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "defence-icon");
         point tl = make_point(0, y_at);
         point br = make_point(1, y_at + 1);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "defence-icon");
@@ -391,6 +405,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "defence-status-bar");
         point tl = make_point(2, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
 
@@ -407,6 +422,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "defence-status");
         point tl = make_point(2, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH, tl.y);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "defence-status");
@@ -416,6 +432,7 @@ static void game_status_wid_create (void)
         auto w = wid_new_square_button(wid_sidebar, "defence-value");
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
+        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -433,10 +450,6 @@ static void game_status_wid_create (void)
 bool is_mouse_over_actionbar (void)
 {
     extern Widp wid_actionbar;
-
-    if (wid_over) {
-        return false;
-    }
 
     if (!wid_actionbar) {
         return false;

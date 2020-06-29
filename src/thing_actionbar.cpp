@@ -73,7 +73,7 @@ void Thing::actionbar_particle (Thingp what, int slot, Thingp target)
 
     point where_to = (target->last_blit_tl + target->last_blit_br) / 2;
 
-    std::string name = "actionbar icon" + std::to_string(slot);
+    std::string name = "actionbar particle" + std::to_string(slot);
     auto w = wid_find(name);
     if (!w) {
         con("could not find wid %s", name.c_str());
