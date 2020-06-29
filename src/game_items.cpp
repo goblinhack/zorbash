@@ -13,7 +13,7 @@ static void game_items_wid_create(void);
 
 Widp wid_items {};
 
-void game_items_fini (void)
+void game_items_wid_fini (void)
 {_
     wid_destroy(&wid_items);
 }
@@ -61,7 +61,7 @@ static void game_items_wid_create (void)
         return;
     }
 
-    game_items_fini();
+    game_items_wid_fini();
 
     {_
         point tl = make_point(0,  UI_MINICON_VIS_HEIGHT + 2);

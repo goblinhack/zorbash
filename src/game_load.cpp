@@ -374,6 +374,27 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.key_pause);
     in >> bits(my.t.key_help);
     in >> bits(my.t.key_quit);
+    in >> bits(my.t.key_screenshot);
+    in >> bits(my.t.key_unused1);
+    in >> bits(my.t.key_unused2);
+    in >> bits(my.t.key_unused3);
+    in >> bits(my.t.key_unused4);
+    in >> bits(my.t.key_unused5);
+    in >> bits(my.t.key_unused6);
+    in >> bits(my.t.key_unused7);
+    in >> bits(my.t.key_unused8);
+    in >> bits(my.t.key_unused9);
+    in >> bits(my.t.key_unused10);
+    in >> bits(my.t.key_unused11);
+    in >> bits(my.t.key_unused12);
+    in >> bits(my.t.key_unused13);
+    in >> bits(my.t.key_unused14);
+    in >> bits(my.t.key_unused15);
+    in >> bits(my.t.key_unused16);
+    in >> bits(my.t.key_unused17);
+    in >> bits(my.t.key_unused18);
+    in >> bits(my.t.key_unused19);
+    in >> bits(my.t.key_unused20);
     return (in);
 }
 
@@ -511,7 +532,7 @@ Game::load (std::string file_to_load, class Game &target)
 
     if (!game_load_headers_only) {
         wid_visible(wid_minicon_window);
-        game_status_fini();
+        game_status_wid_fini();
         game_status_wid_init();
     }
 //

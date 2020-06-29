@@ -3552,13 +3552,15 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     break;
             }
         default:
-            switch ((int32_t)key->sym) {
-                case '\\':
-                    sdl_screenshot();
-                    MINICON("Screenshot taken");
-                    MINICON("USERCFG: screenshot taken");
-                    break;
 
+            if (key->scancode == (SDL_Scancode)game->config.key_screenshot) {
+                sdl_screenshot();
+                MINICON("Screenshot taken");
+                CON("USERCFG: screenshot taken");
+                return true;
+            }
+
+            switch ((int32_t)key->sym) {
                 case '?':
                     game->config_keyboard_select();
                     break;
