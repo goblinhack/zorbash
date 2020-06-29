@@ -18,6 +18,10 @@ void Level::scroll_map (void)
     const float medstep = 2.0 / TILE_WIDTH;
     const float smallstep = 1.0 / TILE_WIDTH;
 
+    if (wid_find_under_mouse()) {
+        return;
+    }
+
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
 
@@ -99,6 +103,10 @@ void Level::scroll_map_set_target (void)
     float sensitivity;
     float x_sensitivity;
     float y_sensitivity;
+
+    if (wid_find_under_mouse()) {
+        return;
+    }
 
     if (player && map_follow_player) {
         follow = player->mid_at;

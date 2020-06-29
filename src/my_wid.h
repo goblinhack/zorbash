@@ -42,6 +42,8 @@ typedef enum {
 
 #define WID_MODE_FIRST WID_MODE_NORMAL
 
+Widp wid_find_at(int32_t x, int32_t y);
+Widp wid_find_under_mouse(void);
 Widp wid_find(Widp, const std::string& name);
 Widp wid_find(const std::string& name);
 Widp wid_get_current_focus(void);

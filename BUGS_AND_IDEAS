@@ -1,15 +1,18 @@
 bugs
 ----
 scrolling map when looking at help
+text bg color broken
 
 upcoming work
 -------------
 - monst rarity
+- carry eat slime mold and gain acid resis?
 - eat food
 - drop frog
 - drainpipes spawn slime
 - sewer level
 - brogue like monster sidebar
+- hit door, summon monst chance
 
 future work
 -----------

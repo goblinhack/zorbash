@@ -637,6 +637,10 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
         return (true);
     }
 
+    if (wid_ignore_events(w)) {
+        return (false);
+    }
+
     if (!(w->on_mouse_over_b) && !(w->on_mouse_down)) {
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] ||
             get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT]) {
@@ -649,7 +653,13 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
             // Can ignore. It doesn't really do anything when the mouse
             // is over.
             //
-            return (false);
+            if (!wid_over && get(wid_on_screen_at, x, y)) {
+                //
+                // But if we have nothing else, use this
+                //
+            } else {
+                return (false);
+            }
         }
     }
 
@@ -660,6 +670,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
     wid_m_over_e();
 
     wid_over = w;
+    // MINICON("mouse over %s", wid_over->name.c_str());
 
     wid_set_mode(w, WID_MODE_OVER);
 
@@ -3628,9 +3639,9 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
     return (true);
 }
 
-static Widp wid_find_at (Widp w, int32_t x, int32_t y)
+Widp wid_find_at (int32_t x, int32_t y)
 {_
-    w = get(wid_on_screen_at, x, y);
+    auto w = get(wid_on_screen_at, x, y);
     if (!w) {
         return nullptr;
     }
@@ -3641,6 +3652,11 @@ static Widp wid_find_at (Widp w, int32_t x, int32_t y)
     }
 
     return (w);
+}
+
+Widp wid_find_under_mouse (void)
+{_
+    return wid_find_at(ascii_mouse_x, ascii_mouse_y);
 }
 
 static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
@@ -4343,6 +4359,8 @@ void wid_mouse_motion (int32_t x, int32_t y,
     if (!ascii_ok(x, y)) {
         return;
     }
+    ascii_mouse_x = x;
+    ascii_mouse_y = y;
 
     wid_refresh_overlay_count += 1;
 
@@ -4371,7 +4389,7 @@ void wid_mouse_motion (int32_t x, int32_t y,
         // Allow wheel events to go everywhere
         //
         if (!wheelx && !wheely) {
-            w = wid_find_at(w, x, y);
+            w = wid_find_at(x, y);
             if (!w) {
                 continue;
             }
@@ -4419,7 +4437,6 @@ void wid_mouse_motion (int32_t x, int32_t y,
 
         w = wid_mouse_motion_handler(x, y, relx, rely, wheelx, wheely);
         if (w) {
-
             if (wid_m_over_b(w, x, y, relx, rely, wheelx, wheely)) {
                 over = true;
             }
@@ -4579,6 +4596,8 @@ void wid_joy_button (int32_t x, int32_t y)
     if (!ascii_ok(x, y)) {
         return;
     }
+    ascii_mouse_x = x;
+    ascii_mouse_y = y;
 
     //
     // Only if there is a change in status, send an event.
@@ -4661,6 +4680,8 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     if (!ascii_ok(x, y)) {
         return;
     }
+    ascii_mouse_x = x;
+    ascii_mouse_y = y;
 
     w = wid_mouse_down_handler(x, y);
     if (!w) {
@@ -4708,6 +4729,8 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
     if (!ascii_ok(x, y)) {
         return;
     }
+    ascii_mouse_x = x;
+    ascii_mouse_y = y;
 
     wid_mouse_motion_end();
 
@@ -5192,9 +5215,9 @@ void wid_move_end (Widp w)
 // Display one wid and its children
 //
 static void wid_display (Widp w,
-                        uint8_t disable_scissor,
-                        uint8_t *updated_scissors,
-                        int clip)
+                         uint8_t disable_scissor,
+                         uint8_t *updated_scissors,
+                         int clip)
 {_
     int32_t clip_height = 0;
     int32_t clip_width = 0;
@@ -5350,8 +5373,22 @@ static void wid_display (Widp w,
 
     if (w == wid_over) {
         w_box_args.over = true;
-        w_box_args.col_text = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
-        w_box_args.col_bg   = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
+
+        if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_TEXT]) {
+            w_box_args.col_text =
+              get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
+        } else {
+            w_box_args.col_text =
+              get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT];
+        }
+
+        if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG]) {
+            w_box_args.col_bg =
+              get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
+        } else {
+            w_box_args.col_bg =
+              get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
+        }
     } else {
         w_box_args.col_text = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT];
         w_box_args.col_bg   = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
@@ -5663,6 +5700,11 @@ void wid_display_all (void)
     ascii_display();
 
     blit_fbo_unbind();
+
+    //
+    // Need this to reset wid_over after display
+    //
+    wid_update_mouse();
 }
 
 uint8_t wid_is_hidden (Widp w)

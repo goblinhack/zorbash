@@ -13,6 +13,8 @@ struct ascii_ ascii;
 
 int ASCII_WIDTH;
 int ASCII_HEIGHT;
+int ascii_mouse_x;
+int ascii_mouse_y;
 
 class AsciiCell {
 public:

@@ -182,8 +182,8 @@ static void wid_minicon_wid_create (void)
         point tl = make_point(0, 0);
         point br = make_point(UI_MINICON_VIS_WIDTH - 1, h);
 
-        wid_minicon_window = wid_new_square_window("wid_minicon");
-        wid_set_name(wid_minicon_window, "wid_minicon window");
+        wid_minicon_window = wid_new_square_window("wid minicon");
+        wid_set_name(wid_minicon_window, "wid minicon window");
         wid_set_pos(wid_minicon_window, tl, br);
         wid_set_shape_none(wid_minicon_window);
     }

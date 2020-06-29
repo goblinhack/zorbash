@@ -51,6 +51,9 @@ void Level::cursor_move (void)
     }
 
     if ((wheel_x != 0) || (wheel_y != 0)) {
+        if (wid_find_under_mouse()) {
+            return;
+        }
         map_wanted_at += fpoint(wheel_x, -wheel_y);
     }
 
