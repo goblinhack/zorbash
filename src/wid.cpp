@@ -5307,11 +5307,6 @@ static void wid_display (Widp w,
     }
 
     //
-    // Draw the wid frame
-    //
-    color col_text = wid_get_color(w, WID_COLOR_TEXT);
-
-    //
     // If inputting text, show a cursor.
     //
     std::wstring text;
@@ -5462,9 +5457,13 @@ static void wid_display (Widp w,
             }
         }
 
-        ascii_putf__(x, y, col_text, COLOR_NONE, text);
-    }
 
+        if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG]) {
+            ascii_putf__(x, y, w_box_args.col_text, w_box_args.col_bg, text);
+        } else {
+            ascii_putf__(x, y, w_box_args.col_text, COLOR_NONE, text);
+        }
+    }
 
     for (auto iter = w->children_display_sorted.begin();
         iter != w->children_display_sorted.end(); ++iter) {
@@ -5480,11 +5479,7 @@ static void wid_display (Widp w,
         // their own bit of scissoring?
         //
         if (!disable_scissor && child_updated_scissors) {
-            wid_set_scissors(
-                tlx,
-                tly,
-                brx,
-                bry);
+            wid_set_scissors(tlx, tly, brx, bry);
         }
     }
 }
