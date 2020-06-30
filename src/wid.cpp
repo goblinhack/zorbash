@@ -5476,7 +5476,7 @@ static void wid_display (Widp w,
             } else if (wid_get_text_centerx(w)) {
                 x = ((owidth - (int32_t)width) / 2) + otlx;
             } else if (wid_get_text_rhs(w)) {
-                x = obrx - (int32_t)width;
+                x = obrx - (int32_t)width + 1;
             } else {
                 x = ((owidth - (int32_t)width) / 2) + otlx;
             }
@@ -5486,7 +5486,7 @@ static void wid_display (Widp w,
             } else if (wid_get_text_centery(w)) {
                 y = ((oheight - (int32_t)height) / 2) + otly;
             } else if (wid_get_text_bot(w)) {
-                y = obry - (int32_t)height;
+                y = obry - (int32_t)height + 1;
             } else {
                 y = ((oheight - (int32_t)height) / 2) + otly;
             }
