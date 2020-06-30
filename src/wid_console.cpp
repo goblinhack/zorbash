@@ -191,7 +191,7 @@ static void wid_console_wid_create (void)
         wid_console_window = wid_new_square_window("wid console");
         wid_set_pos(wid_console_window, tl, br);
         wid_set_color(wid_console_window, WID_COLOR_BG, WHITE);
-        wid_set_color(wid_console_window, WID_COLOR_TEXT, WHITE);
+        wid_set_color(wid_console_window, WID_COLOR_TEXT_FG, WHITE);
     }
 
     {
@@ -240,9 +240,11 @@ static void wid_console_wid_create (void)
                 wid_set_text_lhs(prefix, true);
                 wid_set_shape_none(prefix);
                 wid_set_text(prefix, L"\u0084");
-                wid_set_color(child, WID_COLOR_TEXT, UI_CONSOLE_INPUT_COLOR);
+                wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
+                wid_set_color(child, WID_COLOR_TEXT_FG, UI_CONSOLE_INPUT_COLOR);
             } else {
-                wid_set_color(child, WID_COLOR_TEXT, UI_CONSOLE_TEXT_COLOR);
+                wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
+                wid_set_color(child, WID_COLOR_TEXT_FG, UI_CONSOLE_TEXT_COLOR);
                 wid_set_name(child, "console output");
             }
         }

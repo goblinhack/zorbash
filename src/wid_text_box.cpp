@@ -86,7 +86,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
                 wid_text_last = child;
             }
 
-            wid_set_color(child, WID_COLOR_TEXT, UI_POPUP_TEXT_COLOR);
+            wid_set_color(child, WID_COLOR_TEXT_FG, UI_POPUP_TEXT_COLOR);
             wid_set_name(child, "text_box output");
         }
 
