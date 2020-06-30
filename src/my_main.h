@@ -58,7 +58,7 @@
 #define TILE_HEIGHT_MAX            64
 #define TILE_WIDTH                 16   // Tile size of the player
 #define TILE_WIDTH_MAX             64   // Largest tile for collisions
-#define TTF_CURSOR_CHAR            127
+#define TTF_GLYPH_BAR              127  // For status / progress bars
 #define TTF_GLYPH_MAX              134
 #define TTF_GLYPH_MIN              ' '
 #define TTF_GLYPH_PER_ROW          60
