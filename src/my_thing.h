@@ -69,7 +69,7 @@ public:
     fpoint       lunge_to;                   // When a monst attacks something
     int          bounce_count = {};
     int          gold = {};
-    int          lifespan = {};           // How many things this thing owns.
+    int          lifespan = {};              // How many things this thing owns.
     int          light_quality {};
     int          light_strength {};
     int          owned_count = {};           // How many things this thing owns.
@@ -102,27 +102,27 @@ public:
     int          tick_resurrect_when = {};
     point        level_changed_at;           // Avoid level change loops
     point        wander_target;
-    std::list<ThingId> carrying;
-    std::string  msg;                        // Text that floats on screen
+    std::list<ThingId>   carrying;
+    std::string          msg;                // Text that floats on screen
     std::vector<ThingId> actionbar_id;
     std::vector<ThingId> enemies;            // List of things that wronged us
-    std::vector<point> move_path;
-    timestamp_t  timestamp_fall_begin {};
-    timestamp_t  timestamp_fall_end {};
+    std::vector<point>   move_path;
     timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
     timestamp_t  timestamp_fadeup_begin {};
     timestamp_t  timestamp_fadeup_end {};
+    timestamp_t  timestamp_fall_begin {};
+    timestamp_t  timestamp_fall_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
     timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
     timestamp_t  timestamp_last_tick {};
     timestamp_t  timestamp_last_ticked {};
+    timestamp_t  timestamp_last_wander_try {};
     timestamp_t  timestamp_lunge_begin {};
     timestamp_t  timestamp_lunge_end {};
     timestamp_t  timestamp_move_begin {};
     timestamp_t  timestamp_move_end {};
-    timestamp_t  timestamp_last_wander_try {};
     uint32_t     tick = {};                  // Increments on completion of move
     uint32_t     tick_last_did_something {};
     uint32_t     tick_last_escape {};
