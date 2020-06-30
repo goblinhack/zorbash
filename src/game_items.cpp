@@ -113,7 +113,7 @@ static void game_items_wid_create (void)
             p *= UI_ITEMBAR_WIDTH;
             std::string s;
             while (p > 0) {
-                s += ".";
+                s += (unsigned char)TTF_GLYPH_BAR;
                 p--;
             }
 #if 0
@@ -127,7 +127,7 @@ static void game_items_wid_create (void)
                 wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
             }
 #endif
-            wid_set_color(w, WID_COLOR_TEXT_BG, BLUE);
+            wid_set_color(w, WID_COLOR_TEXT_FG, BLUE);
             wid_set_text(w, s);
             wid_set_text_lhs(w, true);
         }
