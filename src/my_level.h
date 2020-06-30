@@ -101,7 +101,6 @@ public:
                     lava_tile_map = {};
     std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
                     chasm_tile_map = {};
-
     //
     // All thing IDs
     //

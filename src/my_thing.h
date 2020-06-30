@@ -143,11 +143,11 @@ public:
     ~Thing_ (void);
     Monst       *monstp              {};
     Level       *level               {};
+    int16_t     tp_id                {-1};  // Common settings
     ThingId     id;                         // Unique per thing.
     ThingTiles  tiles                {};
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
-    int16_t     tp_id                {-1};  // Common settings
     point       last_attached;
     point       last_blit_br;
     point       last_blit_tl;        // Last blit coords
@@ -221,7 +221,15 @@ public:
             err("no tp set for tp_id %d", tp_id);
             return (nullptr);
         }
-        DIE("no tp for tp_id %d", tp_id);
+
+        //
+        // Means a missing call to tp_or_update
+        //
+        if (tp_id_map[tp_id - 1]) {
+            ERR("no tp has been set yet for tp_id %d", tp_id);
+        } else {
+            DIE("no tp has been set for invalid tp_id %d", tp_id);
+        }
         return (nullptr);
     }
 
