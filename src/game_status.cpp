@@ -171,7 +171,7 @@ static void game_status_wid_create (void)
 
     int y_at = 0;
     {_
-        auto w = wid_new_square_button(wid_sidebar, "zorbash-0");
+        auto w = wid_new_plain(wid_sidebar, "zorbash-0");
         point tl = make_point(0, y_at);
         point br = make_point(UI_SIDEBAR_WIDTH - 1, y_at+1);
         wid_set_ignore_events(w, true);
@@ -182,7 +182,7 @@ static void game_status_wid_create (void)
     }
     y_at += 2;
     {_
-        auto w = wid_new_square_button(wid_sidebar, "zorbash-1");
+        auto w = wid_new_plain(wid_sidebar, "zorbash-1");
         point tl = make_point(0, y_at);
         point br = make_point(UI_SIDEBAR_WIDTH - 1, y_at+1);
         wid_set_ignore_events(w, true);
@@ -193,7 +193,7 @@ static void game_status_wid_create (void)
     }
     y_at += 2;
     {_
-        auto w = wid_new_square_button(wid_sidebar, "zorbash-2");
+        auto w = wid_new_plain(wid_sidebar, "zorbash-2");
         point tl = make_point(0, y_at);
         point br = make_point(UI_SIDEBAR_WIDTH - 1, y_at+1);
         wid_set_ignore_events(w, true);
@@ -205,7 +205,7 @@ static void game_status_wid_create (void)
 
     y_at += 2;
     {_
-        auto w = wid_new_square_button(wid_sidebar, "level no");
+        auto w = wid_new_plain(wid_sidebar, "level no");
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_WIDTH, y_at + 1);
 
@@ -220,7 +220,7 @@ static void game_status_wid_create (void)
 
     y_at += 1;
     {_
-        auto w = wid_new_square_button(wid_sidebar, "title box");
+        auto w = wid_new_plain(wid_sidebar, "title box");
         point tl = make_point(1, y_at);
         point br = make_point(3, y_at + 2);
 
@@ -234,7 +234,7 @@ static void game_status_wid_create (void)
 
     y_at += 3;
     {_
-        auto w = wid_new_square_button(wid_sidebar, "title name");
+        auto w = wid_new_plain(wid_sidebar, "title name");
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_WIDTH, y_at + 1);
 
@@ -246,7 +246,7 @@ static void game_status_wid_create (void)
     }
 
     {_
-        auto w = wid_new_square_button(wid_sidebar, "gold");
+        auto w = wid_new_plain(wid_sidebar, "gold");
         point tl = make_point(5, y_at-3);
         point br = make_point(UI_SIDEBAR_WIDTH, y_at-3);
 
@@ -259,7 +259,7 @@ static void game_status_wid_create (void)
     }
 
     {_
-        auto w = wid_new_square_button(wid_sidebar, "weight");
+        auto w = wid_new_plain(wid_sidebar, "weight");
         point tl = make_point(5, y_at-2);
         point br = make_point(UI_SIDEBAR_WIDTH, y_at-2);
 
@@ -276,7 +276,7 @@ static void game_status_wid_create (void)
     // Health
     ///////////////////////////////////////////////////////////////////////////
     {_
-        auto w = wid_new_square_button(wid_sidebar, "health-icon");
+        auto w = wid_new_plain(wid_sidebar, "health-icon");
         point tl = make_point(0, y_at);
         point br = make_point(1, y_at + 1);
         wid_set_ignore_events(w, true);
@@ -292,7 +292,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
+        auto w = wid_new_plain(wid_sidebar, "Health-status-bar");
         point tl = make_point(2, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
         wid_set_ignore_events(w, true);
@@ -309,7 +309,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "health-status");
+        auto w = wid_new_plain(wid_sidebar, "health-status");
         point tl = make_point(2, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
@@ -319,7 +319,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "health-value");
+        auto w = wid_new_plain(wid_sidebar, "health-value");
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
         wid_set_ignore_events(w, true);
@@ -339,7 +339,7 @@ static void game_status_wid_create (void)
     // Attack
     ///////////////////////////////////////////////////////////////////////////
     {_
-        auto w = wid_new_square_button(wid_sidebar, "attack-icon");
+        auto w = wid_new_plain(wid_sidebar, "attack-icon");
         point tl = make_point(0, y_at);
         point br = make_point(1, y_at + 1);
         wid_set_pos(w, tl, br);
@@ -348,7 +348,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "attack-status-bar");
+        auto w = wid_new_plain(wid_sidebar, "attack-status-bar");
         point tl = make_point(2, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
         wid_set_pos(w, tl, br);
@@ -364,7 +364,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "attack-status");
+        auto w = wid_new_plain(wid_sidebar, "attack-status");
         point tl = make_point(2, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
@@ -373,7 +373,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "attack-value");
+        auto w = wid_new_plain(wid_sidebar, "attack-value");
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
         wid_set_pos(w, tl, br);
@@ -392,7 +392,7 @@ static void game_status_wid_create (void)
     // Defence
     ///////////////////////////////////////////////////////////////////////////
     {_
-        auto w = wid_new_square_button(wid_sidebar, "defence-icon");
+        auto w = wid_new_plain(wid_sidebar, "defence-icon");
         point tl = make_point(0, y_at);
         point br = make_point(1, y_at + 1);
         wid_set_ignore_events(w, true);
@@ -402,7 +402,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "defence-status-bar");
+        auto w = wid_new_plain(wid_sidebar, "defence-status-bar");
         point tl = make_point(2, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
         wid_set_ignore_events(w, true);
@@ -419,7 +419,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "defence-status");
+        auto w = wid_new_plain(wid_sidebar, "defence-status");
         point tl = make_point(2, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
@@ -429,7 +429,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_square_button(wid_sidebar, "defence-value");
+        auto w = wid_new_plain(wid_sidebar, "defence-value");
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_WIDTH - 3, tl.y);
         wid_set_ignore_events(w, true);

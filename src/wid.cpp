@@ -643,7 +643,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
 
     if (!(w->on_mouse_over_b) && !(w->on_mouse_down)) {
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] ||
-            get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT]) {
+            get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT_FG]) {
             //
             // Changes appearance on mouse over, so choose this wid even
             // if it has no over callback.
@@ -2012,7 +2012,7 @@ Widp wid_new_window (std::string name)
 
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_color(w, WID_COLOR_BG, WHITE);
-    wid_set_color(w, WID_COLOR_TEXT, WHITE);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
     wid_set_shape_square(w);
 
     return (w);
@@ -2041,7 +2041,7 @@ Widp wid_new_container (Widp parent, std::string name)
 
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_color(w, WID_COLOR_BG, WHITE);
-    wid_set_color(w, WID_COLOR_TEXT, WHITE);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
     wid_set_shape_square(w);
 
     return (w);
@@ -2062,7 +2062,7 @@ Widp wid_new_square_window (std::string name)
     wid_set_name(w, name);
     wid_set_shape_square(w);
     wid_set_color(w, WID_COLOR_BG, WHITE);
-    wid_set_color(w, WID_COLOR_TEXT, WHITE);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
     wid_raise(w);
 
     return (w);
@@ -2093,11 +2093,43 @@ Widp wid_new_square_button (Widp parent, std::string name)
 
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_color(w, WID_COLOR_BG, GRAY90);
-    wid_set_color(w, WID_COLOR_TEXT, WHITE);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_color(w, WID_COLOR_BG, WHITE);
-    wid_set_color(w, WID_COLOR_TEXT, WHITE);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+    return (w);
+}
+
+Widp wid_new_plain (Widp parent, std::string name)
+{_
+    if (!parent) {
+        ERR("no parent");
+    }
+
+    Widp w = wid_new(parent);
+
+#ifdef ENABLE_UI_DEBUG
+#ifdef ENABLE_UI_DEBUG_EXTRA
+    w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
+                                  name.c_str(), w,
+                                  parent->to_string.c_str(), parent);
+#else
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
+#endif
+#endif
+
+    WID_DBG(w, "%s", __FUNCTION__);
+
+    wid_set_name(w, name);
+    wid_set_shape_square(w);
+
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
     return (w);
 }
@@ -5300,7 +5332,8 @@ static void wid_display (Widp w,
     //
     // If this widget was active and the time has elapsed, make it normal.
     //
-    if (wid_get_mode(w) == WID_MODE_ACTIVE) {
+    auto mode = wid_get_mode(w);
+    if (mode == WID_MODE_ACTIVE) {
         if ((wid_time - w->timestamp_last_mode_change) > 250) {
             wid_set_mode(w, WID_MODE_NORMAL);
         }
@@ -5369,12 +5402,12 @@ static void wid_display (Widp w,
     if (w == wid_over) {
         w_box_args.over = true;
 
-        if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_TEXT]) {
+        if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_TEXT_FG]) {
             w_box_args.col_text =
-              get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
+              get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT_FG];
         } else {
             w_box_args.col_text =
-              get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT];
+              get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT_FG];
         }
 
         if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG]) {
@@ -5385,8 +5418,10 @@ static void wid_display (Widp w,
               get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
         }
     } else {
-        w_box_args.col_text = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT];
-        w_box_args.col_bg   = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
+        w_box_args.col_text =
+          get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT_FG];
+        w_box_args.col_bg   =
+          get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
     }
 
     if (w->square) {
@@ -5457,8 +5492,7 @@ static void wid_display (Widp w,
             }
         }
 
-
-        if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG]) {
+        if (w->cfg[mode].color_set[WID_COLOR_TEXT_BG]) {
             ascii_putf__(x, y, w_box_args.col_text, w_box_args.col_bg, text);
         } else {
             ascii_putf__(x, y, w_box_args.col_text, COLOR_NONE, text);

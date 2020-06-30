@@ -28,7 +28,8 @@ void WID_DBG(Widp, const char *fmt, ...) \
 
 typedef enum {
     WID_COLOR_BG,
-    WID_COLOR_TEXT,
+    WID_COLOR_TEXT_FG,
+    WID_COLOR_TEXT_BG,
     WID_COLOR_MAX,
 } wid_color;
 
@@ -59,6 +60,7 @@ Widp wid_get_top_parent(Widp);
 Widp wid_new_container(Widp, std::string name);
 Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
 Widp wid_new_square_button(Widp parent, std::string name);
+Widp wid_new_plain(Widp parent, std::string name);
 Widp wid_new_square_window(std::string name);
 Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
 Widp wid_new_window(std::string name);

@@ -93,38 +93,57 @@ static void game_items_wid_create (void)
         auto s = tp->text_name();
 
         {
-            auto w = wid_new_square_button(wid_items, "item");
+            auto w = wid_new_plain(wid_items, "item");
             point tl = make_point(0, y);
             point br = make_point(0, y);
             wid_set_pos(w, tl, br);
             wid_set_style(w, UI_WID_STYLE_NONE);
             wid_set_fg_tile(w, tile_index_to_tile(t->tile_curr));
+            wid_set_color(w, WID_COLOR_BG, WHITE);
         }
 
         {
-            auto w = wid_new_square_button(wid_items, "item");
+            auto w = wid_new_plain(wid_items, "item");
             point tl = make_point(1, y);
             point br = make_point(UI_ITEMBAR_WIDTH - 1, y);
             wid_set_pos(w, tl, br);
             wid_set_style(w, UI_WID_STYLE_NONE);
+            float p = t->get_stats_health_pct();
+            p /= 100.0;
+            p *= UI_ITEMBAR_WIDTH;
+            std::string s;
+            while (p > 0) {
+                s += ".";
+                p--;
+            }
 #if 0
             if (t->is_monst()) {
-                wid_set_color(w, WID_COLOR_TEXT, ORANGE);
+                wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
             } if (t->is_generator()) {
-                wid_set_color(w, WID_COLOR_TEXT, RED);
+                wid_set_color(w, WID_COLOR_TEXT_FG, RED);
             } else if (t->is_food()) {
-                wid_set_color(w, WID_COLOR_TEXT, GREEN);
+                wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
             } else {
-                wid_set_color(w, WID_COLOR_TEXT, GRAY);
+                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
             }
 #endif
+            wid_set_color(w, WID_COLOR_TEXT_BG, BLUE);
+            wid_set_text(w, s);
+            wid_set_text_lhs(w, true);
+        }
 
+        {
+            auto w = wid_new_plain(wid_items, "item");
+            point tl = make_point(1, y);
+            point br = make_point(UI_ITEMBAR_WIDTH - 1, y);
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, UI_WID_STYLE_NONE);
+            wid_set_shape_none(w);
             s = string_sprintf("%d/%d",
                                t->get_stats_health(),
                                t->get_stats_health_max());
             wid_set_text(w, s);
             wid_set_text_rhs(w, true);
-            //wid_set_color(w, WID_COLOR_BG, BLUE);
         }
 
         y++;

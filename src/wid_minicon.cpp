@@ -227,7 +227,8 @@ static void wid_minicon_wid_create (void)
                 wid_minicon_input_line = child;
             }
 
-            wid_set_color(child, WID_COLOR_TEXT, UI_MINICON_TEXT_COLOR);
+            wid_set_color(child, WID_COLOR_TEXT_FG, UI_MINICON_TEXT_COLOR);
+            wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
             wid_set_name(child, "minicon output");
         }
 
