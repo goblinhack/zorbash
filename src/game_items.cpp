@@ -65,7 +65,7 @@ static void game_items_wid_create (void)
 
     {_
         point tl = make_point(0,  UI_MINICON_VIS_HEIGHT + 2);
-        point br = make_point(UI_ITEMBAR_WIDTH - 1, UI_ACTIONBAR_TL_Y - 1);
+        point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, UI_ACTIONBAR_TL_Y - 1);
         color c;
 
         wid_items = wid_new_square_window("text container2");
@@ -105,17 +105,22 @@ static void game_items_wid_create (void)
         {
             auto w = wid_new_plain(wid_items, "item");
             point tl = make_point(1, y);
-            point br = make_point(UI_ITEMBAR_WIDTH - 1, y);
+            point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, y);
             wid_set_pos(w, tl, br);
             wid_set_style(w, UI_WID_STYLE_NONE);
             float p = t->get_stats_health_pct();
-            p /= 100.0;
-            p *= UI_ITEMBAR_WIDTH;
-            std::string s;
-            while (p > 0) {
-                s += (unsigned char)TTF_GLYPH_BAR;
-                p--;
+
+            color c;
+            if (p < 25) {
+                c = RED;
+            } else if (p < 50) {
+                c = ORANGE;
+            } else if (p < 75) {
+                c = BLUE;
+            } else {
+                c = GREEN;
             }
+            c.a = 150;
 #if 0
             if (t->is_monst()) {
                 wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
@@ -127,7 +132,14 @@ static void game_items_wid_create (void)
                 wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
             }
 #endif
-            wid_set_color(w, WID_COLOR_TEXT_FG, BLUE);
+            p /= 100.0;
+            p *= UI_SIDEBAR_LEFT_WIDTH;
+            std::string s;
+            while (p > 0) {
+                s += (unsigned char)TTF_GLYPH_BAR;
+                p--;
+            }
+            wid_set_color(w, WID_COLOR_TEXT_FG, c);
             wid_set_text(w, s);
             wid_set_text_lhs(w, true);
         }
@@ -135,7 +147,7 @@ static void game_items_wid_create (void)
         {
             auto w = wid_new_plain(wid_items, "item");
             point tl = make_point(1, y);
-            point br = make_point(UI_ITEMBAR_WIDTH - 1, y);
+            point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, y);
             wid_set_pos(w, tl, br);
             wid_set_style(w, UI_WID_STYLE_NONE);
             wid_set_shape_none(w);
