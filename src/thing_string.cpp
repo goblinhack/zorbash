@@ -14,8 +14,10 @@
 std::string Thing::to_string (void) const
 {_
     auto tpp = tp();
+
     verify(this);
     verify(tpp);
+
     if (unlikely(!tpp)) {
         return (string_sprintf("L%d,%d,%d %" PRIx32 "(<no tp>%s%s @%g,%g)",
                                level->world_at.x,

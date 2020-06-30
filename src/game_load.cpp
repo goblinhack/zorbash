@@ -143,17 +143,23 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
         in >> bits(my.t->monstp);
     }
 
-    in >> bits(my.t->last_attached);
-    in >> bits(my.t->mid_at);
-    in >> bits(my.t->last_mid_at);
+    /////////////////////////////////////////////////////////////////////////
+    // Keep these in the same order as my_thing.h and save/load
+    /////////////////////////////////////////////////////////////////////////
+    in >> bits(my.t->tp_id); if (my.t->tp_id <= 0) { ERR("loaded a thing with no TP ID"); }
     in >> bits(my.t->id.id); if (!my.t->id.id) { ERR("loaded a thing with no ID"); }
-    in >> bits(my.t->tile_curr);
+    in >> bits(my.t->last_mid_at);
+    in >> bits(my.t->mid_at);
+    in >> bits(my.t->last_attached);
+    in >> bits(my.t->last_blit_br);
+    in >> bits(my.t->last_blit_tl);
     in >> bits(T); my.t->timestamp_next_frame = load(T);
+    in >> bits(my.t->tile_curr);
+    in >> bits(my.t->alpha);
     uint8_t dir; in >> dir; my.t->dir = dir;
 
     in >> bits(bits32);
     int shift = 0;
-
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
@@ -190,85 +196,85 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
 
-    if (my.t->has_light) {
-        my.t->new_light(my.t->mid_at,
-                        fpoint(0, 0),
-                        my.t->monstp->light_strength,
-                        my.t->monstp->light_col);
-    }
-
     return (in);
 }
 
 std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 {_
-    my.t->player = nullptr;
-    my.t->cursor = nullptr;
-    my.t->all_thing_ids_at = {};
-    my.t->all_thing_ptrs_at = {};
-    my.t->all_things = {};
-    my.t->all_active_things = {};
-    my.t->all_gc_things = {};
+    auto l = my.t;
 
-    in >> bits(my.t->timestamp_dungeon_created); old_timestamp_dungeon_created = my.t->timestamp_dungeon_created;
-    in >> bits(my.t->timestamp_dungeon_saved);
-    auto dungeon_age = my.t->timestamp_dungeon_saved -
-                       my.t->timestamp_dungeon_created;
+    l->player = nullptr;
+    l->cursor = nullptr;
+    l->all_thing_ids_at = {};
+    l->all_thing_ptrs_at = {};
+    l->all_things = {};
+    l->all_active_things = {};
+    l->all_gc_things = {};
+
+    in >> bits(l->timestamp_dungeon_created); old_timestamp_dungeon_created = l->timestamp_dungeon_created;
+    in >> bits(l->timestamp_dungeon_saved);
+    auto dungeon_age = l->timestamp_dungeon_saved -
+                       l->timestamp_dungeon_created;
     new_timestamp_dungeon_created = time_get_time_ms() - dungeon_age;
-    my.t->timestamp_dungeon_created = new_timestamp_dungeon_created;
-    my.t->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
+    l->timestamp_dungeon_created = new_timestamp_dungeon_created;
+    l->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
 
-    /* _fade_in_map */          in >> bits(my.t->_fade_in_map);
-    /* _heatmap */              in >> bits(my.t->_heatmap);
-    /* _is_blood */             in >> bits(my.t->_is_blood);
-    /* _is_corpse */            in >> bits(my.t->_is_corpse);
-    /* _is_corridor */          in >> bits(my.t->_is_corridor);
-    /* _is_deep_water */        in >> bits(my.t->_is_deep_water);
-    /* _is_dirt */              in >> bits(my.t->_is_dirt);
-    /* _is_door */              in >> bits(my.t->_is_door);
-    /* _is_dungeon */           in >> bits(my.t->_is_dungeon);
-    /* _is_entrance */          in >> bits(my.t->_is_entrance);
-    /* _is_exit */              in >> bits(my.t->_is_exit);
-    /* _is_fire */              in >> bits(my.t->_is_fire);
-    /* _is_floor */             in >> bits(my.t->_is_floor);
-    /* _is_food */              in >> bits(my.t->_is_food);
-    /* _is_gold */              in >> bits(my.t->_is_gold);
-    /* _is_hazard */            in >> bits(my.t->_is_hazard);
-    /* _is_key */               in >> bits(my.t->_is_key);
-    /* _is_lava */              in >> bits(my.t->_is_lava);
-    /* _is_acid */              in >> bits(my.t->_is_acid);
-    /* _is_light_blocker */     in >> bits(my.t->_is_light_blocker);
-    /* _is_movement_blocking */ in >> bits(my.t->_is_movement_blocking);
-    /* _is_monst */             in >> bits(my.t->_is_monst);
-    /* _is_rock */              in >> bits(my.t->_is_rock);
-    /* _is_secret_door */       in >> bits(my.t->_is_secret_door);
-    /* _is_generator */         in >> bits(my.t->_is_generator);
-    /* _is_smoke */             in >> bits(my.t->_is_smoke);
-    /* _is_treasure */          in >> bits(my.t->_is_treasure);
-    /* _is_visited */           in >> bits(my.t->_is_visited);
-    /* _is_lit */               in >> bits(my.t->_is_lit);
-    /* _is_wall */              in >> bits(my.t->_is_wall);
-    /* _is_water */             in >> bits(my.t->_is_water);
-    /* all_thing_ids_at */      in >> bits(my.t->all_thing_ids_at);
-    /* cursor_at */             in >> bits(my.t->cursor_at);
-    /* cursor_at_old */         in >> bits(my.t->cursor_at_old);
-    /* cursor_found */          in >> bits(my.t->cursor_found);
-    /* cursor_needs_update */   in >> bits(my.t->cursor_needs_update);
-    /* heatmap_valid */         in >> bits(my.t->heatmap_valid);
-    /* map_at */                in >> bits(my.t->map_at);
-    /* map_follow_player */     in >> bits(my.t->map_follow_player);
-    /* map_wanted_at */         in >> bits(my.t->map_wanted_at);
-    /* minimap_valid */         in >> bits(my.t->minimap_valid);
-    /* mouse */                 in >> bits(my.t->mouse);
-    /* mouse_old */             in >> bits(my.t->mouse_old);
-    /* seed */                  in >> bits(my.t->seed);
-    /* world_at */              in >> bits(my.t->world_at);
+    /* _fade_in_map */          in >> bits(l->_fade_in_map);
+    /* _heatmap */              in >> bits(l->_heatmap);
+    /* _is_acid */              in >> bits(l->_is_acid);
+    /* _is_blood */             in >> bits(l->_is_blood);
+    /* _is_corpse */            in >> bits(l->_is_corpse);
+    /* _is_corridor */          in >> bits(l->_is_corridor);
+    /* _is_deep_water */        in >> bits(l->_is_deep_water);
+    /* _is_dirt */              in >> bits(l->_is_dirt);
+    /* _is_door */              in >> bits(l->_is_door);
+    /* _is_dungeon */           in >> bits(l->_is_dungeon);
+    /* _is_entrance */          in >> bits(l->_is_entrance);
+    /* _is_exit */              in >> bits(l->_is_exit);
+    /* _is_fire */              in >> bits(l->_is_fire);
+    /* _is_floor */             in >> bits(l->_is_floor);
+    /* _is_food */              in >> bits(l->_is_food);
+    /* _is_generator */         in >> bits(l->_is_generator);
+    /* _is_gold */              in >> bits(l->_is_gold);
+    /* _is_hazard */            in >> bits(l->_is_hazard);
+    /* _is_key */               in >> bits(l->_is_key);
+    /* _is_lava */              in >> bits(l->_is_lava);
+    /* _is_light_blocker */     in >> bits(l->_is_light_blocker);
+    /* _is_lit */               in >> bits(l->_is_lit);
+    /* _is_monst */             in >> bits(l->_is_monst);
+    /* _is_movement_blocking */ in >> bits(l->_is_movement_blocking);
+    /* _is_rock */              in >> bits(l->_is_rock);
+    /* _is_secret_door */       in >> bits(l->_is_secret_door);
+    /* _is_smoke */             in >> bits(l->_is_smoke);
+    /* _is_treasure */          in >> bits(l->_is_treasure);
+    /* _is_visited */           in >> bits(l->_is_visited);
+    /* _is_wall */              in >> bits(l->_is_wall);
+    /* _is_water */             in >> bits(l->_is_water);
+    /* all_thing_ids_at */      in >> bits(l->all_thing_ids_at);
+    /* cursor_at */             in >> bits(l->cursor_at);
+    /* cursor_at_old */         in >> bits(l->cursor_at_old);
+    /* cursor_found */          in >> bits(l->cursor_found);
+    /* cursor_needs_update */   in >> bits(l->cursor_needs_update);
+    /* heatmap_valid */         in >> bits(l->heatmap_valid);
+    /* is_starting */           in >> bits(l->is_starting);
+    /* map_at */                in >> bits(l->map_at);
+    /* map_br */                in >> bits(l->map_br);
+    /* map_changed */           in >> bits(l->map_changed);
+    /* map_follow_player */     in >> bits(l->map_follow_player);
+    /* map_tl */                in >> bits(l->map_tl);
+    /* map_wanted_at */         in >> bits(l->map_wanted_at);
+    /* minimap_valid */         in >> bits(l->minimap_valid);
+    /* mouse */                 in >> bits(l->mouse);
+    /* mouse_old */             in >> bits(l->mouse_old);
+    /* pixel_map_at */          in >> bits(l->pixel_map_at);
+    /* seed */                  in >> bits(l->seed);
+    /* world_at */              in >> bits(l->world_at);
 
-    my.t->minimap_valid = false;
-    my.t->heatmap_valid = false;
-    my.t->map_changed = true;
-    my.t->cursor_needs_update = true;
-    my.t->map_follow_player = true;
+    l->minimap_valid = false;
+    l->heatmap_valid = false;
+    l->map_changed = true;
+    l->cursor_needs_update = true;
+    l->map_follow_player = true;
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
@@ -277,10 +283,20 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
                 if (id.ok()) {
                     auto t = new Thing();
                     in >> bits(t);
-#ifdef ENABLE_THING_ID_LOGS
-                    t->log("load");
-#endif
+                    //
+                    // Cannot use t->log here as thing is no inited yet
+                    //
+                    t->level = l;
                     t->reinit();
+#ifdef ENABLE_THING_ID_LOGS
+                    t->log("loaded");
+#endif
+                    if (t->has_light) {
+                        t->new_light(t->mid_at,
+                                     fpoint(0, 0),
+                                     t->monstp->light_strength,
+                                     t->monstp->light_col);
+                    }
                 }
             }
         }

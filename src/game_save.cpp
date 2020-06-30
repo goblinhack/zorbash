@@ -117,13 +117,19 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
         out << bits(my.t->monstp);
     }
 
-    out << bits(my.t->last_attached);
-    out << bits(my.t->mid_at);
-    out << bits(my.t->last_mid_at);
+    /////////////////////////////////////////////////////////////////////////
+    // Keep these in the same order as my_thing.h and save/load
+    /////////////////////////////////////////////////////////////////////////
+    out << bits(my.t->tp_id);
     out << bits(my.t->id);
-    out << bits(my.t->tile_curr);
+    out << bits(my.t->last_mid_at);
+    out << bits(my.t->mid_at);
+    out << bits(my.t->last_attached);
+    out << bits(my.t->last_blit_br);
+    out << bits(my.t->last_blit_tl);
     out << bits(my.t->timestamp_next_frame);
-
+    out << bits(my.t->tile_curr);
+    out << bits(my.t->alpha);
     uint8_t dir = my.t->dir; out << bits(dir);
 
     uint32_t bits32 = 0;
@@ -181,6 +187,7 @@ std::ostream& operator<<(std::ostream &out,
 
     /* _fade_in_map */          out << bits(my.t->_fade_in_map);
     /* _heatmap */              out << bits(my.t->_heatmap);
+    /* _is_acid */              out << bits(my.t->_is_acid);
     /* _is_blood */             out << bits(my.t->_is_blood);
     /* _is_corpse */            out << bits(my.t->_is_corpse);
     /* _is_corridor */          out << bits(my.t->_is_corridor);
@@ -193,21 +200,20 @@ std::ostream& operator<<(std::ostream &out,
     /* _is_fire */              out << bits(my.t->_is_fire);
     /* _is_floor */             out << bits(my.t->_is_floor);
     /* _is_food */              out << bits(my.t->_is_food);
+    /* _is_generator */         out << bits(my.t->_is_generator);
     /* _is_gold */              out << bits(my.t->_is_gold);
     /* _is_hazard */            out << bits(my.t->_is_hazard);
     /* _is_key */               out << bits(my.t->_is_key);
     /* _is_lava */              out << bits(my.t->_is_lava);
-    /* _is_acid */              out << bits(my.t->_is_acid);
     /* _is_light_blocker */     out << bits(my.t->_is_light_blocker);
-    /* _is_movement_blocking */ out << bits(my.t->_is_movement_blocking);
+    /* _is_lit */               out << bits(my.t->_is_lit);
     /* _is_monst */             out << bits(my.t->_is_monst);
+    /* _is_movement_blocking */ out << bits(my.t->_is_movement_blocking);
     /* _is_rock */              out << bits(my.t->_is_rock);
     /* _is_secret_door */       out << bits(my.t->_is_secret_door);
-    /* _is_generator */         out << bits(my.t->_is_generator);
     /* _is_smoke */             out << bits(my.t->_is_smoke);
     /* _is_treasure */          out << bits(my.t->_is_treasure);
     /* _is_visited */           out << bits(my.t->_is_visited);
-    /* _is_lit */               out << bits(my.t->_is_lit);
     /* _is_wall */              out << bits(my.t->_is_wall);
     /* _is_water */             out << bits(my.t->_is_water);
     /* all_thing_ids_at */      out << bits(my.t->all_thing_ids_at);
@@ -215,13 +221,18 @@ std::ostream& operator<<(std::ostream &out,
     /* cursor_at_old */         out << bits(my.t->cursor_at_old);
     /* cursor_found */          out << bits(my.t->cursor_found);
     /* cursor_needs_update */   out << bits(my.t->cursor_needs_update);
+    /* heatmap_valid */         out << bits(my.t->heatmap_valid);
+    /* is_starting */           out << bits(my.t->is_starting);
     /* map_at */                out << bits(my.t->map_at);
+    /* map_br */                out << bits(my.t->map_br);
+    /* map_changed */           out << bits(my.t->map_changed);
     /* map_follow_player */     out << bits(my.t->map_follow_player);
+    /* map_tl */                out << bits(my.t->map_tl);
     /* map_wanted_at */         out << bits(my.t->map_wanted_at);
     /* minimap_valid */         out << bits(my.t->minimap_valid);
-    /* heatmap_valid */         out << bits(my.t->heatmap_valid);
     /* mouse */                 out << bits(my.t->mouse);
     /* mouse_old */             out << bits(my.t->mouse_old);
+    /* pixel_map_at */          out << bits(my.t->pixel_map_at);
     /* seed */                  out << bits(my.t->seed);
     /* world_at */              out << bits(my.t->world_at);
 

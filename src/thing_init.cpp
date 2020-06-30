@@ -47,7 +47,7 @@ void Thing::init (Levelp level,
     timestamp_next_frame = 0;
     const auto tpp = tp_find(name);
     if (unlikely(!tpp)) {
-        ERR("thing template [%s] not found", name.c_str());
+        DIE("thing template [%s] not found", name.c_str());
         return;
     }
 
@@ -284,7 +284,7 @@ void Thing::init (Levelp level,
 
     if (unlikely(tpp->is_player())) {
         if (level->player && (level->player != this)) {
-            ERR("player exists in multiple places on map, %f, %f and %f, %f",
+            DIE("player exists in multiple places on map, %f, %f and %f, %f",
                 level->player->mid_at.x, level->player->mid_at.y, 
                 mid_at.x, mid_at.y);
             return;
@@ -387,13 +387,13 @@ void Thing::init (Levelp level,
 void Thing::reinit (void)
 {_
     verify(this);
-
-    game->world.realloc_thing_id(this);
-    const auto tpp = tp();
+    const auto tpp = tp_or_update();
     if (unlikely(!tpp)) {
-        ERR("no tp");
+        DIE("no tp");
         return;
     }
+
+    game->world.realloc_thing_id(this);
 
     //
     // Probably safest to reset this else things might expire on load
@@ -405,7 +405,7 @@ void Thing::reinit (void)
 
     if (unlikely(tpp->is_player())) {
         if (level->player && (level->player != this)) {
-            ERR("player exists in multiple places on map, %f, %f and %f, %f",
+            DIE("player exists in multiple places on map, %f, %f and %f, %f",
                 level->player->mid_at.x, level->player->mid_at.y,
                 mid_at.x, mid_at.y);
             return;
@@ -416,7 +416,7 @@ void Thing::reinit (void)
 
     point new_at((int)mid_at.x, (int)mid_at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
-        ERR("new thing is oob at %d, %d", new_at.x, new_at.y);
+        DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
         return;
     }
 

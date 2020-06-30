@@ -1,20 +1,25 @@
 bugs
 ----
 no invisible anim tiles in sidebar
+no jump on save
 
 upcoming work
 -------------
 - brogue like monster sidebar
 - monst rarity
-- carry eat slime mold and gain acid resis?
+- playback possible?
 - eat food
 - drop frog
 - drainpipes spawn slime
 - sewer level
 - hit door, summon monst chance
+- hit door, wake sleeping monsters
 
 future work
 -----------
+- chasm trap / potion of descent
+- carry eat slime mold and gain acid resis?
+- thief that will steal cash but can be distracted by dropped money
 - gravestone
 - bear trap/sticky trap holds player still so time catches up / have a click indicator for how long to go
 - bibles and stuff lean to new gods

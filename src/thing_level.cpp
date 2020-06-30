@@ -238,6 +238,6 @@ void Thing::level_pop (void)
     }
 
     level->remove_thing((int)last_attached.x, (int)last_attached.y, id);
-
+_
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }
 }
