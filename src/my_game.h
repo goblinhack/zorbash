@@ -15,68 +15,60 @@
 
 typedef class Config_ {
 public:
+    bool               allow_highdpi                = false;
+    bool               ascii_mode                   = false;
+    bool               debug_mode                   = false;
     bool               fps_counter                  = true;
-#ifdef ENABLE_GFX_INVERSE_COLORS
-    bool               gfx_inverted                 = true;
-#else
+    bool               fullscreen                   = false;
     bool               gfx_inverted                 = false;
-#endif
+    bool               gfx_lights                   = true;
     bool               gfx_minimap                  = true;
     bool               gfx_show_hidden              = false;
-    bool               gfx_lights                   = true;
-    uint32_t           gfx_zoom                     = 4;
     bool               gfx_vsync_enable             = true;
-    bool               debug_mode                   = false;
-    bool               ascii_mode                   = false;
-    uint32_t           sound_volume                 = {MIX_MAX_VOLUME / 2};
-    uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
-    bool               fullscreen                   = false;
-    bool               allow_highdpi                = false;
-    //
-    // This is the window size.
-    //
-    int32_t            outer_pix_width              = {};
-    int32_t            outer_pix_height             = {};
-    //
-    // This is the virtual size of the game within the above window.
-    //
-    int32_t            inner_pix_width              = {};
-    int32_t            inner_pix_height             = {};
-    //
-    // The ratiou of outer to inner
-    //
-    int32_t            scale_pix_width              = {};
-    int32_t            scale_pix_height             = {};
-    double             video_w_h_ratio              = {};
-    double             tile_pix_width               = {};
-    double             tile_pix_height              = {};
-    double             one_pixel_width              = {};
-    double             one_pixel_height             = {};
-    double             ascii_gl_width               = {};
     double             ascii_gl_height              = {};
-    double             tile_pixel_width             = {};
+    double             ascii_gl_width               = {};
+    double             one_pixel_height             = {};
+    double             one_pixel_width              = {};
+    double             tile_pix_height              = {};
+    double             tile_pix_width               = {};
     double             tile_pixel_height            = {};
-    uint32_t           sdl_delay                    = 1;
-    uint32_t           key_map_up                   = {SDL_SCANCODE_UP};
+    double             tile_pixel_width             = {};
+    double             video_w_h_ratio              = {};
+    int32_t            inner_pix_height             = {};
+    int32_t            inner_pix_width              = {};
+    int32_t            outer_pix_height             = {};
+    int32_t            outer_pix_width              = {};
+    int32_t            scale_pix_height             = {};
+    int32_t            scale_pix_width              = {};
+    uint32_t           gfx_zoom                     = 4;
+    uint32_t           key_attack                   = {SDL_SCANCODE_SPACE};
+    uint32_t           key_help                     = {SDL_SCANCODE_H};
+    uint32_t           key_load                     = {SDL_SCANCODE_F11};
     uint32_t           key_map_down                 = {SDL_SCANCODE_DOWN};
     uint32_t           key_map_left                 = {SDL_SCANCODE_LEFT};
     uint32_t           key_map_right                = {SDL_SCANCODE_RIGHT};
-    uint32_t           key_move_up                  = {SDL_SCANCODE_W};
+    uint32_t           key_map_up                   = {SDL_SCANCODE_UP};
     uint32_t           key_move_down                = {SDL_SCANCODE_S};
     uint32_t           key_move_left                = {SDL_SCANCODE_A};
     uint32_t           key_move_right               = {SDL_SCANCODE_D};
-    uint32_t           key_attack                   = {SDL_SCANCODE_SPACE};
-    uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
-    uint32_t           key_load                     = {SDL_SCANCODE_F11};
-    uint32_t           key_save                     = {SDL_SCANCODE_F12};
-    uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};
-    uint32_t           key_zoom_out                 = {SDL_SCANCODE_X};
+    uint32_t           key_move_up                  = {SDL_SCANCODE_W};
     uint32_t           key_pause                    = {SDL_SCANCODE_P};
-    uint32_t           key_help                     = {SDL_SCANCODE_H};
     uint32_t           key_quit                     = {SDL_SCANCODE_Q};
+    uint32_t           key_save                     = {SDL_SCANCODE_F12};
     uint32_t           key_screenshot               = {SDL_SCANCODE_BACKSLASH};
     uint32_t           key_unused1                  = 0;
+    uint32_t           key_unused10                 = 0;
+    uint32_t           key_unused11                 = 0;
+    uint32_t           key_unused12                 = 0;
+    uint32_t           key_unused13                 = 0;
+    uint32_t           key_unused14                 = 0;
+    uint32_t           key_unused15                 = 0;
+    uint32_t           key_unused16                 = 0;
+    uint32_t           key_unused17                 = 0;
+    uint32_t           key_unused18                 = 0;
+    uint32_t           key_unused19                 = 0;
     uint32_t           key_unused2                  = 0;
+    uint32_t           key_unused20                 = 0;
     uint32_t           key_unused3                  = 0;
     uint32_t           key_unused4                  = 0;
     uint32_t           key_unused5                  = 0;
@@ -84,17 +76,12 @@ public:
     uint32_t           key_unused7                  = 0;
     uint32_t           key_unused8                  = 0;
     uint32_t           key_unused9                  = 0;
-    uint32_t           key_unused10                  = 0;
-    uint32_t           key_unused11                  = 0;
-    uint32_t           key_unused12                  = 0;
-    uint32_t           key_unused13                  = 0;
-    uint32_t           key_unused14                  = 0;
-    uint32_t           key_unused15                  = 0;
-    uint32_t           key_unused16                  = 0;
-    uint32_t           key_unused17                  = 0;
-    uint32_t           key_unused18                  = 0;
-    uint32_t           key_unused19                  = 0;
-    uint32_t           key_unused20                  = 0;
+    uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
+    uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};
+    uint32_t           key_zoom_out                 = {SDL_SCANCODE_X};
+    uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
+    uint32_t           sdl_delay                    = 1;
+    uint32_t           sound_volume                 = {MIX_MAX_VOLUME / 2};
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
