@@ -428,6 +428,7 @@ void Thing::reinit (void)
     // Upon a load it was attached at save time but not now
     //
     if (is_attached) {
+        level_enter();
         level_push();
     }
 
