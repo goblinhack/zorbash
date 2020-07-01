@@ -352,7 +352,7 @@ void Thing::init (Levelp level,
     set_interpolated_mid_at(mid_at);
 
     //
-    // If not the player and has a light source, create the ligh
+    // If not the player and has a light source, create the light
     //
     if (unlikely(!tpp->is_player())) {
         if (unlikely(tpp->is_light_strength())) {
