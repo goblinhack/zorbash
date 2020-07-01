@@ -145,18 +145,20 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /////////////////////////////////////////////////////////////////////////
     /* uint32_t */ bits32 |= my.t->has_ever_moved     << shift; shift++;
     /* uint32_t */ bits32 |= my.t->has_light          << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->inited_tiles       << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_attached        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_being_destroyed << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_bouncing        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_falling         << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_jumping         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_dead            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_facing_left     << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_fadeup          << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_falling         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_hidden          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_hungry          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_in_lava         << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_in_water        << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_jumping         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_moving          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_open            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_resurrected     << shift; shift++;
