@@ -171,18 +171,20 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /////////////////////////////////////////////////////////////////////////
     /* uint32_t */ my.t->has_ever_moved     = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->has_light          = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->inited_tiles       = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_attached        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_falling         = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_jumping         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_dead            = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_falling         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_hidden          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_hungry          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_in_lava         = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_in_water        = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_jumping         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_moving          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_open            = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_resurrected     = (bits32 >> shift) & 1; shift++;
