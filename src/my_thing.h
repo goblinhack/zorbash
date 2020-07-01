@@ -144,7 +144,7 @@ public:
     Monst       *monstp              {};
     Level       *level               {};
     int16_t     tp_id                {-1};  // Common settings
-    ThingId     id;                         // Unique per thing.
+    ThingId     id                   {};    // Unique per thing.
     ThingTiles  tiles                {};
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.

@@ -131,7 +131,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(name);
     auto tpp = tp_find(name);
     if (!tpp) {
-        ERR("could not find thing template [%s]", name.c_str());
+        DIE("could not find Thingp template name [%s]", name.c_str());
         return (in);
     }
 
@@ -446,6 +446,8 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* uint32_t           tick_completed    */ in >> bits(my.t.tick_completed);
     /* uint32_t           tick_current      */ in >> bits(my.t.tick_current);
 
+CON("me->tick_completed%d", my.t.tick_completed);
+CON("me->tick_current%d", my.t.tick_current);
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
     my.t.level = get(my.t.world.levels,
