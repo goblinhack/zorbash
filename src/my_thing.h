@@ -1080,6 +1080,7 @@ public:
     void move_to_immediately_delta(fpoint delta);
     void msg(const std::string&);
     void reinit(void);
+    void init_lights(void);
     void remove_owner(void);
     void resurrect_tick();
     void set_owner(Thingp owner);
