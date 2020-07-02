@@ -389,7 +389,7 @@ void Thing::reinit (void)
     verify(this);
     const auto tpp = tp_or_update();
     if (unlikely(!tpp)) {
-        DIE("no tp");
+        ERR("no tp found for reinitialized thing ID %x tp_id %d", id.id, tp_id);
         return;
     }
 
@@ -411,7 +411,6 @@ void Thing::reinit (void)
             return;
         }
         level->player = this;
-        log("player recreated");
     }
 
     point new_at((int)mid_at.x, (int)mid_at.y);

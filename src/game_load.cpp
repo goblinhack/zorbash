@@ -12,6 +12,7 @@
 #include "my_game_status.h"
 #include "my_thing.h"
 #include "my_alloc.h"
+#include "my_sprintf.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
@@ -19,6 +20,16 @@ static timestamp_t T;
 static std::string game_load_error;
 bool game_load_headers_only;
 extern int GAME_SAVE_MARKER_EOL;
+
+#define READ_MAGIC(m) { \
+    uint32_t magic; \
+    in >> bits(magic); \
+    if (magic != m) { \
+        game_load_error = \
+          "bad final thing magic expected: " + std::to_string(m) + " got " + std::to_string(magic); \
+        return (in); \
+    } \
+}
 
 //
 // Save timestamps as a delta we can restore.
@@ -127,11 +138,17 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
 
 std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 {_
+#ifdef ENABLE_DEBUG_SAVE_LOAD
+    auto start = in.tellg();
+#endif
+
+    READ_MAGIC(THING_MAGIC_BEGIN);
+
     std::string name;
     in >> bits(name);
     auto tpp = tp_find(name);
     if (!tpp) {
-        DIE("could not find Thingp template name [%s]", name.c_str());
+        game_load_error = "unknown thing name '" + name;
         return (in);
     }
 
@@ -148,8 +165,14 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /////////////////////////////////////////////////////////////////////////
     // Keep these in the same order as my_thing.h and save/load
     /////////////////////////////////////////////////////////////////////////
-    in >> bits(my.t->tp_id); if (my.t->tp_id <= 0) { ERR("loaded a thing with no TP ID"); }
-    in >> bits(my.t->id.id); if (!my.t->id.id) { ERR("loaded a thing with no ID"); }
+    in >> bits(my.t->tp_id); if (my.t->tp_id <= 0) {
+        game_load_error = "loaded a thing with no TP ID";
+        return in;
+    }
+    in >> bits(my.t->id.id); if (!my.t->id.id) {
+        game_load_error = "loaded a thing with no ID";
+        return in;
+    }
     in >> bits(my.t->last_mid_at);
     in >> bits(my.t->mid_at);
     in >> bits(my.t->last_attached);
@@ -200,6 +223,13 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
 
+    READ_MAGIC(THING_MAGIC_END);
+
+#ifdef ENABLE_DEBUG_SAVE_LOAD
+    auto diff = in.tellg() - start;
+    LOG("LOAD %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p", 
+        (int)diff, name.c_str(), my.t->tp_id, my.t->id.id, my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
+#endif
     return (in);
 }
 
@@ -280,32 +310,56 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     l->cursor_needs_update = true;
     l->map_follow_player = true;
 
-    for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_WIDTH; ++y) {
-            for (auto slot = 0; slot < MAP_SLOTS; ++slot) {
-                auto id = get(my.t->all_thing_ids_at, x, y, slot);
+    auto p = l->world_at;
+    LOG("DUNGEON: loading things for level %d,%d,%d", p.x, p.y, p.z);
+_
+    //
+    // Operate on a copy, not live data that might change as we add things
+    //
+    auto ids = my.t->all_thing_ids_at;
+
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+                auto id = get(ids, x, y, slot);
                 if (id.ok()) {
                     auto t = new Thing();
                     in >> bits(t);
+
+                    if (game_load_error != "") {
+                        return in;
+                    }
+
                     //
                     // Cannot use t->log here as thing is no inited yet
                     //
                     t->level = l;
+                    if (t->id != id) {
+                        game_load_error =
+                          string_sprintf("found different thing than expected at map position %d,%d slot %d: %x expected %x",
+                             x, y, slot, t->id.id, id.id);
+                        return in;
+                    }
+
                     t->reinit();
-#ifdef ENABLE_THING_ID_LOGS
                     t->log("loaded");
-#endif
                     if (t->has_light) {
                         t->new_light(t->mid_at,
                                      fpoint(0, 0),
                                      t->monstp->light_strength,
                                      t->monstp->light_col);
+                        t->log("added light");
                     }
                 }
             }
         }
     }
+
+    READ_MAGIC(THING_MAGIC_FINAL);
+    LOG("DUNGEON: loaded things for level %d,%d,%d", p.x, p.y, p.z);
+
     my.t->update_map();
+    LOG("DUNGEON: updated map for level %d,%d,%d", p.x, p.y, p.z);
     return (in);
 }
 
@@ -322,20 +376,27 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
                 in >> bits(p);
                 in >> bits(exists);
                 if (p != point3d(x, y, z)) {
-                    ERR("level mismatch expected %d,%d,%d vs found %d,%d,%d",
-                        x, y, z, p.x, p.y, p.z);
+                    game_load_error =
+                        string_sprintf("level mismatch expected %d,%d,%d vs found %d,%d,%d",
+                                       x, y, z, p.x, p.y, p.z);
                     return (in);
                 }
 
-                if (exists) {
+                if (exists) {_
                     CON("DUNGEON: loading level %d,%d,%d", p.x, p.y, p.z);
                     auto l = new Level();
                     set(my.t.levels, x, y, z, l);
                     in >> bits(l);
+                    if (game_load_error != "") {
+                        return in;
+                    }
+
                     int eol;
                     in >> bits(eol);
                     if (eol != GAME_SAVE_MARKER_EOL) {
-                        ERR("end of level %d,%d,%d not found", x, y, z);
+                        game_load_error =
+                            string_sprintf("end of level %d,%d,%d not found",
+                                           x, y, z);
                         return (in);
                     }
                     CON("DUNGEON: loaded level %d,%d,%d", p.x, p.y, p.z);
@@ -432,7 +493,13 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.appdata);
     in >> bits(my.t.saved_dir);
     in >> bits(my.t.config);
+    if (game_load_error != "") {
+        return in;
+    }
     in >> bits(my.t.world);
+    if (game_load_error != "") {
+        return in;
+    }
 
     /* bool               hard_paused       */ in >> bits(my.t.hard_paused);
     /* bool               soft_paused       */ in >> bits(my.t.soft_paused);
@@ -445,9 +512,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* uint32_t           things_are_moving */ in >> bits(my.t.things_are_moving);
     /* uint32_t           tick_completed    */ in >> bits(my.t.tick_completed);
     /* uint32_t           tick_current      */ in >> bits(my.t.tick_current);
-
-CON("me->tick_completed%d", my.t.tick_completed);
-CON("me->tick_current%d", my.t.tick_current);
+_
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
     my.t.level = get(my.t.world.levels,
@@ -474,7 +539,8 @@ std::vector<char> read_file (const std::string filename)
 }
 
 static std::vector<char> read_lzo_file (const std::string filename,
-                                        lzo_uint *uncompressed_sz)
+                                        lzo_uint *uncompressed_sz,
+                                        uint32_t *cs)
 {_
     std::ifstream ifs(filename,
                       std::ios::in | std::ios::binary | std::ios::ate);
@@ -486,13 +552,26 @@ static std::vector<char> read_lzo_file (const std::string filename,
 
     ifs.seekg(0, std::ios::beg);
     ifs.unsetf(std::ios::skipws);
-    ifs.read((char*) uncompressed_sz, sizeof(lzo_uint));
+    ifs.read((char*) uncompressed_sz, sizeof(*uncompressed_sz));
+    ifs.read((char*) cs, sizeof(*cs));
 
-    sz -= (int) sizeof(lzo_uint);
+    sz -= (int) sizeof(*uncompressed_sz);
+    sz -= (int) sizeof(*cs);
     std::vector<char> bytes(sz);
     ifs.read(bytes.data(), sz);
 
     return (bytes);
+}
+
+uint32_t csum (char *mem, uint32_t len)
+{
+    uint32_t ret = 0;
+    while (len--) {
+        ret <<= 1;
+        ret ^= *mem;
+        mem++;
+    }
+    return ret;
 }
 
 bool
@@ -502,7 +581,8 @@ Game::load (std::string file_to_load, class Game &target)
     // Read to a vector and then copy to a C buffer for LZO to use
     //
     lzo_uint uncompressed_len;
-    auto vec = read_lzo_file(file_to_load, &uncompressed_len);
+    uint32_t cs;
+    auto vec = read_lzo_file(file_to_load, &uncompressed_len, &cs);
     if (vec.size() <= 0) {
         if (!game_load_headers_only) {
             game_error("load error, empty file?");
@@ -532,8 +612,16 @@ Game::load (std::string file_to_load, class Game &target)
         return (false);
     }
 
-//    std::cout << "decompressed as ";
-//    hexdump((const unsigned char *)uncompressed, uncompressed_len);
+    uint32_t csin = csum((char*)uncompressed, (uint32_t)uncompressed_len);
+    if (cs != csin) {
+        ERR("Corrupt file, checksum mismatch");
+        return (false);
+    }
+
+#ifdef ENABLE_DEBUG_SAVE_LOAD_HEX
+    std::cout << "decompressed as ";
+    hexdump((const unsigned char *)uncompressed, uncompressed_len);
+#endif
 
     std::string s((const char*)uncompressed, (size_t)uncompressed_len);
     std::istringstream in(s);
@@ -545,7 +633,6 @@ Game::load (std::string file_to_load, class Game &target)
 
     game_load_error = "";
     in >> bits(target);
-//    this->dump("", std::cout);
     if (game_load_error != "") {
         if (!game_load_headers_only) {
             game_error("load error, " + game_load_error);
@@ -558,7 +645,7 @@ Game::load (std::string file_to_load, class Game &target)
         game_status_wid_fini();
         game_status_wid_init();
     }
-//
+
     free(uncompressed);
     free(compressed);
     return (true);
@@ -619,6 +706,8 @@ Game::load (int slot)
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     CON("DUNGEON: loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
+
+    MINICON("Loaded the game from %s", save_file.c_str());
 }
 
 static WidPopup *wid_load;
@@ -736,7 +825,7 @@ void Game::load_select (void)
         Game tmp;
         auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
         auto p = wid_load->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "save slot");
+        auto w = wid_new_square_button(p, "LOAD slot");
         point tl = make_point(0, y_at);
         point br = make_point(width - 2, y_at + 2);
 

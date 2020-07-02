@@ -14,6 +14,10 @@
 #include "my_thing_ai.h"
 #include "my_thing_id.h"
 
+constexpr uint32_t THING_MAGIC_BEGIN = 11221122;
+constexpr uint32_t THING_MAGIC_END   = 22112211;
+constexpr uint32_t THING_MAGIC_FINAL = 33333333;
+
 typedef struct {
     uint16_t tile_outline;
     uint16_t bl1_tile;

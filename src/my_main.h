@@ -17,6 +17,9 @@
 #undef  ENABLE_DEBUG_AI_WANDER     // AI wander path selection
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
 #undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
+#undef  ENABLE_DEBUG_SAVE_LOAD     // Map saving and loading
+#undef  ENABLE_DEBUG_SAVE_LOAD_HEX // Hex dump of save files
+#undef  ENABLE_DEBUG_SAVE_CHECK    // Verify compressed file
 #undef  ENABLE_GFX_TILE_COLLISIONS // Not needed for roguelike
 #undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
 #undef  ENABLE_MAP_DEBUG           // Visible map, no lighting
