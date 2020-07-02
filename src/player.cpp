@@ -102,7 +102,6 @@ void player_tick (void)
     }
 
     if (state[game->config.key_save]) {
-        MINICON("Saving the game");
         CON("USERCFG: saving the game");
         game->save_select();
         some_key_event_was_pressed = true;

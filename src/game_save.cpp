@@ -14,6 +14,9 @@
 extern bool game_load_headers_only;
 bool game_save_config_only;
 int GAME_SAVE_MARKER_EOL = 123456;
+extern uint32_t csum(char *mem, uint32_t len);
+
+#define WRITE_MAGIC(m) { uint32_t magic = m; out << bits(magic); }
 
 std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 {_
@@ -110,6 +113,11 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 
 std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 {_
+#ifdef ENABLE_DEBUG_SAVE_LOAD
+    auto start = out.tellp();
+#endif
+    WRITE_MAGIC(THING_MAGIC_BEGIN);
+
     const std::string name(tp_id_map[my.t->tp_id - 1]->name());
     out << bits(name);
 
@@ -178,13 +186,22 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     }
     out << bits(bits32);
 
+    WRITE_MAGIC(THING_MAGIC_END);
+
+#ifdef ENABLE_DEBUG_SAVE_LOAD
+    auto diff = out.tellp() - start;
+    LOG("SAVE %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p", 
+        (int)diff, name.c_str(), my.t->tp_id, my.t->id.id, my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
+#endif
     return (out);
 }
 
 std::ostream& operator<<(std::ostream &out,
                          Bits<Level* & > const my)
 {_
+#ifdef ENABLE_DEBUG_SAVE_LOAD
     my.t->log("save");
+#endif
     out << bits(my.t->timestamp_dungeon_created);
     timestamp_t timestamp_dungeon_saved = time_get_time_ms();
     out << bits(timestamp_dungeon_saved);
@@ -240,13 +257,13 @@ std::ostream& operator<<(std::ostream &out,
     /* seed */                  out << bits(my.t->seed);
     /* world_at */              out << bits(my.t->world_at);
 
-    for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_HEIGHT; ++y) {
-            for (auto slot = 0; slot < MAP_SLOTS; ++slot) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto slot = 0; slot < MAP_SLOTS; slot++) {
                 auto id = get(my.t->all_thing_ids_at, x, y, slot);
                 if (id.ok()) {
                     const Thingp t = my.t->thing_find(id);
-#ifdef ENABLE_THING_ID_LOGS
+#ifdef ENABLE_DEBUG_SAVE_LOAD
                     t->log("save");
 #endif
                     out << bits(t);
@@ -254,6 +271,8 @@ std::ostream& operator<<(std::ostream &out,
             }
         }
     }
+    WRITE_MAGIC(THING_MAGIC_FINAL);
+
     return (out);
 }
 
@@ -407,8 +426,10 @@ bool Game::save (std::string file_to_save)
     HEAP_ALLOC(compressed, uncompressed_len);
     memcpy(uncompressed, data.c_str(), uncompressed_len);
 
-//    std::cout << "before compression ";
-//    (void) hexdump((const unsigned char*)uncompressed, uncompressed_len);
+#ifdef ENABLE_DEBUG_SAVE_LOAD_HEX
+    std::cout << "before compression ";
+    (void) hexdump((const unsigned char*)uncompressed, uncompressed_len);
+#endif
 
     if (lzo_init() != LZO_E_OK) {
         ERR("LZO init fail: enable '-DLZO_DEBUG' for diagnostics)");
@@ -429,17 +450,46 @@ bool Game::save (std::string file_to_save)
         return (false);
     }
 
+#ifdef ENABLE_DEBUG_SAVE_CHECK
+    //
+    // Uncompress and check the data matches
+    //
+    {
+        HEAP_ALLOC(tmp_compressed, compressed_len);
+        HEAP_ALLOC(tmp_uncompressed, uncompressed_len);
+        memcpy(tmp_compressed, compressed, compressed_len);
+
+        lzo_uint new_len = 0;
+        int r = lzo1x_decompress((lzo_bytep)tmp_compressed, compressed_len,
+                                 (lzo_bytep)tmp_uncompressed, &new_len, NULL);
+        if (r == LZO_E_OK && new_len == uncompressed_len) {
+            if (memcmp(tmp_uncompressed, uncompressed, uncompressed_len)) {
+                ERR("LZO compress-decompress failed");
+            }
+        } else {
+            /* this should NEVER happen */
+            ERR("LZO internal error - decompression failed: %d", r);
+            return (false);
+        }
+    }
+#endif
+
     //
     // Dump the post compress buffer
     //
-//    std::cout << "after compression ";
-//    (void) hexdump((const unsigned char *)compressed, compressed_len);
+#ifdef ENABLE_DEBUG_SAVE_LOAD_HEX
+    std::cout << "after compression ";
+    (void) hexdump((const unsigned char *)compressed, compressed_len);
+#endif
 
     //
     // Save the post compress buffer
     //
+    uint32_t cs = csum((char*)uncompressed, uncompressed_len);
+
     auto ofile = fopen(file_to_save.c_str(), "wb");
     fwrite((char*) &uncompressed_len, sizeof(uncompressed_len), 1, ofile);
+    fwrite((char*) &cs, sizeof(cs), 1, ofile);
     fwrite(compressed, compressed_len, 1, ofile);
     fclose(ofile);
 
@@ -490,6 +540,8 @@ Game::save (int slot)
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     CON("DUNGEON: saved %s, seed %d", save_file.c_str(), seed);
     LOG("-");
+
+    MINICON("Saved the game to %s", save_file.c_str());
 }
 
 void
