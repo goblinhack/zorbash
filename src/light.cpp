@@ -137,8 +137,8 @@ void Light::calculate (int last)
     // walls.
     //
     bool do_set_visited = (player && (owner == player));
-    float step_delta1 = 0.02;
-    float step_delta2 = 0.05;
+    float step_delta1 = 0.05;
+    float step_delta2 = 0.01;
 
     level->_is_lit = {};
     for (int i = 0; i < max_light_rays; i++) {

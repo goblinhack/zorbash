@@ -30,6 +30,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_error.o 		\
     $(OBJDIR)/game_fini.o 		\
     $(OBJDIR)/game_init.o 		\
+    $(OBJDIR)/game_items.o 		\
     $(OBJDIR)/game_load.o 		\
     $(OBJDIR)/game_log.o 		\
     $(OBJDIR)/game_main_menu.o 		\
@@ -39,7 +40,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_quit.o 		\
     $(OBJDIR)/game_save.o 		\
     $(OBJDIR)/game_status.o 		\
-    $(OBJDIR)/game_items.o 		\
     $(OBJDIR)/game_tick.o 		\
     $(OBJDIR)/gauss.o 			\
     $(OBJDIR)/gfx.o			\
@@ -74,13 +74,13 @@ GAME_OBJECTS=				\
     $(OBJDIR)/main.o 			\
     $(OBJDIR)/map.o 			\
     $(OBJDIR)/minilzo.o 		\
+    $(OBJDIR)/particle.o 		\
     $(OBJDIR)/pcg_basic.o 		\
     $(OBJDIR)/player.o 			\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_level.o 		\
     $(OBJDIR)/py_room.o 		\
     $(OBJDIR)/py_sdl.o 			\
-    $(OBJDIR)/particle.o 		\
     $(OBJDIR)/py_tex.o 			\
     $(OBJDIR)/py_tile.o 		\
     $(OBJDIR)/py_tp.o 			\
@@ -94,6 +94,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/stb_image.o 		\
     $(OBJDIR)/string.o 			\
     $(OBJDIR)/tex.o 			\
+    $(OBJDIR)/thing_acid.o 		\
     $(OBJDIR)/thing_actionbar.o 	\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_ai_goals.o 		\
@@ -133,9 +134,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_items.o 		\
     $(OBJDIR)/thing_jump.o 		\
     $(OBJDIR)/thing_lava.o 		\
-    $(OBJDIR)/thing_acid.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
+    $(OBJDIR)/thing_light.o 		\
     $(OBJDIR)/thing_likes_and_dislikes.o \
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\

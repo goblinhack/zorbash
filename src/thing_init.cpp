@@ -282,45 +282,6 @@ void Thing::init (Levelp level,
         }
     }
 
-    if (unlikely(tpp->is_player())) {
-        if (level->player && (level->player != this)) {
-            DIE("player exists in multiple places on map, %f, %f and %f, %f",
-                level->player->mid_at.x, level->player->mid_at.y, 
-                mid_at.x, mid_at.y);
-            return;
-        }
-        level->player = this;
-
-        //
-        // keep the light strength half the tiles drawn or we get artifacts
-        // at the edges of the fbo
-        //
-        color col = WHITE;
-        new_light(mid_at, TILE_WIDTH, col);
-
-        float d1 = 0.2;
-        float d2 = 0.15;
-        new_light(mid_at, fpoint(d1, d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d1, d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d2, d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d2, d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d1, -d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d1, -d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d2, -d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d2, -d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d1, d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d1, d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d2, d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d2, d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d1, -d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d1, -d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d2, -d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d2, -d2), TILE_WIDTH, col);
-
-        has_light = true;
-        log("player created");
-    }
-
     if (tpp->is_loggable_for_unimportant_stuff()) {
         log("created");
     }
@@ -351,27 +312,6 @@ void Thing::init (Levelp level,
     //
     set_interpolated_mid_at(mid_at);
 
-    //
-    // If not the player and has a light source, create the light
-    //
-    if (unlikely(!tpp->is_player())) {
-        if (unlikely(tpp->is_light_strength())) {
-            std::string l = tpp->light_color();
-            bool add_light = true;
-            if (is_lava()) {
-                if (random_range(0, 100) < 50) {
-                    add_light = false;
-                }
-            }
-            if (add_light) {
-                color c = string2color(l);
-                new_light(mid_at, (double) tpp->is_light_strength(), c);
-                has_light = true;
-            }
-        }
-    }
-    update_light();
-
     if (gfx_bounce_always()) {
         bounce(0.2, 1.0, 500 + random_range(0, 50), 99999);
     }
@@ -382,6 +322,8 @@ void Thing::init (Levelp level,
     set_timestamp_last_tick(
        time_get_time_ms_cached() +
        random_range(0, get_tick_rate_tenths() * 100));
+
+    init_lights();
 }
 
 void Thing::reinit (void)
@@ -399,11 +341,11 @@ void Thing::reinit (void)
     // Probably safest to reset this else things might expire on load
     //
     timestamp_next_frame = 0;
-    if (tpp->is_monst() || tpp->is_player()) {
+    if (is_monst() || is_player()) {
         set_timestamp_born(time_get_time_ms_cached());
     }
 
-    if (unlikely(tpp->is_player())) {
+    if (unlikely(is_player())) {
         if (level->player && (level->player != this)) {
             DIE("player exists in multiple places on map, %f, %f and %f, %f",
                 level->player->mid_at.x, level->player->mid_at.y,
@@ -419,7 +361,7 @@ void Thing::reinit (void)
         return;
     }
 
-    if (tpp->is_loggable_for_unimportant_stuff()) {
+    if (is_loggable_for_unimportant_stuff()) {
         log("recreated");
     }
 
@@ -431,15 +373,12 @@ void Thing::reinit (void)
         level_push();
     }
 
-    update_light();
-
     //
     // Relearn the cursor after loading.
     //
     if (is_cursor()) {
         level->cursor = this;
     }
-    if (is_player()) {
-        level->player = this;
-    }
+
+    init_lights();
 }

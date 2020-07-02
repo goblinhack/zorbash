@@ -342,14 +342,6 @@ _
                     }
 
                     t->reinit();
-                    t->log("loaded");
-                    if (t->has_light) {
-                        t->new_light(t->mid_at,
-                                     fpoint(0, 0),
-                                     t->monstp->light_strength,
-                                     t->monstp->light_col);
-                        t->log("added light");
-                    }
                 }
             }
         }
