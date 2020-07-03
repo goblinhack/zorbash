@@ -419,6 +419,10 @@ public:
     uint8_t do_not_lower                {};
     uint8_t disable_scissors            {};
     uint8_t square                      {};
+    uint8_t is_scrollbar_vert_trough    {};
+    uint8_t is_scrollbar_vert           {};
+    uint8_t is_scrollbar_horiz_trough   {};
+    uint8_t is_scrollbar_horiz          {};
 
     //
     // Optionally set to the previous wid in a list
