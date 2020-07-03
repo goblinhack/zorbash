@@ -111,7 +111,7 @@ public:
     bool is_yyy7 {};
     bool is_yyy8 {};
     bool is_yyy9 {};
-    bool is_yyy10 {};
+    bool is_invisible {};
     bool is_hp_25_percent {};
     bool is_hp_50_percent {};
     bool is_hp_75_percent {};
@@ -331,7 +331,7 @@ uint8_t tile_is_yyy6(Tilep);
 uint8_t tile_is_yyy7(Tilep);
 uint8_t tile_is_yyy8(Tilep);
 uint8_t tile_is_yyy9(Tilep);
-uint8_t tile_is_yyy10(Tilep);
+uint8_t tile_is_invisible(Tilep);
 uint8_t tile_is_hp_25_percent(Tilep);
 uint8_t tile_is_hp_50_percent(Tilep);
 uint8_t tile_is_hp_75_percent(Tilep);

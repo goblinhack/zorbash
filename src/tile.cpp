@@ -93,7 +93,7 @@ Tile::Tile (const class Tile *tile)
     is_yyy7 = tile->is_yyy7;
     is_yyy8 = tile->is_yyy8;
     is_yyy9 = tile->is_yyy9;
-    is_yyy10 = tile->is_yyy10;
+    is_invisible = tile->is_invisible;
     is_hp_25_percent = tile->is_hp_25_percent;
     is_hp_50_percent = tile->is_hp_50_percent;
     is_hp_75_percent = tile->is_hp_75_percent;
@@ -895,9 +895,9 @@ uint8_t tile_is_yyy9 (Tilep t)
     return (t->is_yyy9);
 }
 
-uint8_t tile_is_yyy10 (Tilep t)
+uint8_t tile_is_invisible (Tilep t)
 {
-    return (t->is_yyy10);
+    return (t->is_invisible);
 }
 
 uint8_t tile_is_hp_25_percent (Tilep t)
