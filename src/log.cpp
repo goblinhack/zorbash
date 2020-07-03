@@ -142,7 +142,7 @@ static void minicon_ (const char *fmt, va_list args)
 
     buf[0] = '\0';
     get_timestamp(ts, MAXSTR);
-    snprintf(buf, sizeof(buf) - 1, "%sUI_MINICON: ", ts);
+    snprintf(buf, sizeof(buf) - 1, "%sMINICON: ", ts);
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
@@ -162,7 +162,7 @@ static void minicon_ (const wchar_t *fmt, va_list args)
         char ts[MAXSTR];
         ts[0] = '\0';
         get_timestamp(ts, MAXSTR);
-        fprintf(MY_STDOUT, "%sUI_MINICON: ", ts);
+        fprintf(MY_STDOUT, "%sMINICON: ", ts);
         term_log(ts);
     }
 

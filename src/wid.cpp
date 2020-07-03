@@ -2207,7 +2207,6 @@ static Widp wid_new_scroll_bar (Widp parent,
 
     wid_set_movable(w, true);
     wid_set_movable_bounded(w, true);
-    wid_set_shape_square(w);
 
     if (vertical) {
         wid_set_movable_vert(w, true);
@@ -2273,6 +2272,9 @@ Widp wid_new_vert_scroll_bar (Widp parent,
         wid_visible(wid_get_parent(scrollbar));
         wid_visible(scrollbar);
 
+        trough->is_scrollbar_vert_trough = true;
+        scrollbar->is_scrollbar_vert = true;
+
         return (scrollbar);
     }
 }
@@ -2321,6 +2323,9 @@ Widp wid_new_horiz_scroll_bar (Widp parent, std::string name,
         wid_update_internal(scrollbar);
         wid_visible(wid_get_parent(scrollbar));
         wid_visible(scrollbar);
+
+        trough->is_scrollbar_horiz_trough = true;
+        scrollbar->is_scrollbar_horiz = true;
 
         return (scrollbar);
     }
