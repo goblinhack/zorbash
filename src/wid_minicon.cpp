@@ -14,6 +14,7 @@
 #include "my_wid.h"
 #include "my_ascii.h"
 #include "my_game.h"
+#include "my_thing.h"
 
 static void wid_minicon_wid_create(void);
 
@@ -53,6 +54,15 @@ uint8_t wid_minicon_init (void)
 //
 uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
 {_
+    if (!game) {
+        return false;
+    }
+
+    auto level = game->level;
+    if (!level) {
+        return false;
+    }
+
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_out) {
         MINICON("Zoom out");
         CON("USERCFG: zoom out");
@@ -65,6 +75,14 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         CON("USERCFG: zoom in");
         config_gfx_zoom_in();
         return true;
+    }
+
+    //
+    // Events after this cannot be invoked when dead
+    //
+    auto player = level->player;
+    if (player && player->is_dead) {
+        return false;
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_load) {

@@ -118,7 +118,7 @@ static void game_monsts_wid_create (void)
         {
             auto w = wid_new_plain(wid_items, "item");
             point tl = make_point(1, y);
-            point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, y);
+            point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 4, y);
             wid_set_pos(w, tl, br);
             wid_set_style(w, UI_WID_STYLE_NONE);
             float p = t->get_stats_health_pct();
@@ -160,13 +160,44 @@ static void game_monsts_wid_create (void)
         {
             auto w = wid_new_plain(wid_items, "item");
             point tl = make_point(1, y);
+            point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 5, y);
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, UI_WID_STYLE_NONE);
+            wid_set_shape_none(w);
+
+            s = string_sprintf("%d", t->get_stats_health());
+            wid_set_text(w, s);
+            wid_set_text_rhs(w, true);
+        }
+
+        {
+            auto w = wid_new_plain(wid_items, "health-icon");
+            point tl = make_point(UI_SIDEBAR_LEFT_WIDTH - 4, y);
+            point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 4, y);
+            wid_set_ignore_events(w, true);
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, UI_WID_STYLE_NONE);
+            int i = ((float)t->get_stats_health() /
+                    (float)t->get_stats_health_max()) *
+                    (float)UI_HEALTH_ICON_STEPS;
+            i = std::min(i, UI_HEALTH_ICON_STEPS);
+            i = std::max(i, 1);
+            auto icon = "health" + std::to_string(i) + "-icon";
+            wid_set_bg_tilename(w, icon);
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+
+        auto diff = game->tick_current - t->get_tick();
+        if (diff) {
+            auto w = wid_new_plain(wid_items, "item");
+            point tl = make_point(1, y);
             point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, y);
             wid_set_pos(w, tl, br);
             wid_set_style(w, UI_WID_STYLE_NONE);
             wid_set_shape_none(w);
-            s = string_sprintf("%d/%d",
-                               t->get_stats_health(),
-                               t->get_stats_health_max());
+
+            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);
+            s = string_sprintf("+%d", diff);
             wid_set_text(w, s);
             wid_set_text_rhs(w, true);
         }

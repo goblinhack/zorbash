@@ -11,6 +11,7 @@
 #include "my_level.h"
 #include "my_wid_console.h"
 #include "stb_image_write.h"
+#include "my_game_status.h"
 
 static int sdl_get_mouse(void);
 
@@ -872,7 +873,7 @@ uint8_t config_fps_counter_set (tokens_t *tokens, void *context)
 
     if (!s || (*s == '\0')) {
         game->config.fps_counter = true;
-        CON("FSP counter enabled (default)");
+        CON("FPS counter enabled (default)");
     } else {
         game->config.fps_counter = strtol(s, 0, 10) ? 1 : 0;
         if (game->config.fps_counter) {
@@ -1240,8 +1241,8 @@ void sdl_loop (void)
     //
     // Wait for events
     //
-    int timestamp_then = time_get_time_ms();
-    int timestamp_then2 = timestamp_then;
+    int ui_timestamp_fast_last = time_get_time_ms();
+    int ui_timestamp_slow_last = ui_timestamp_fast_last;
 
     sdl_main_loop_running = true;
 
@@ -1304,13 +1305,9 @@ void sdl_loop (void)
         // stuff with widgets only occasionally if we do not need to.
         //
         int timestamp_now = time_update_time_milli();
-
-        if (unlikely(timestamp_now - timestamp_then > UI_POLL_EVENTS_MS)) {
-            //
-            // Give up some CPU to allow events to arrive and time for the GPU
-            // to process the above.
-            //
-            timestamp_then = timestamp_now;
+        if (unlikely(timestamp_now - ui_timestamp_fast_last > 
+                       UI_POLL_EVENTS_MS)) {
+            ui_timestamp_fast_last = timestamp_now;
 
             //
             // Clean up dead widgets.
@@ -1390,27 +1387,39 @@ void sdl_loop (void)
         }
 
         //
-        // FPS counter.
+        // Less frequent updates
         //
-        {
-            //
-            // Very occasional.
-            //
-            if (unlikely(timestamp_now - timestamp_then2 >= 1000)) {
-                timestamp_then2 = timestamp_now;
+        if (unlikely(timestamp_now - ui_timestamp_slow_last >= 
+                       UI_UPDATE_SLOW_MS)) {
+            ui_timestamp_slow_last = timestamp_now;
 
-                if (game->config.fps_counter) {
+            //
+            // Update status and sidebars
+            //
+            if (game && !game->paused()) {
+                if (wid_console_window && wid_console_window->visible) {
                     //
-                    // Update FPS counter.
+                    // Not when console is in front
                     //
-                    game->fps_value = frames;
-                    frames = 0;
+                } else {
+                    game_status_wid_init();
                 }
+            }
 
-                if (unlikely(g_do_screenshot)) {
-                    g_do_screenshot = 0;
-                    sdl_screenshot_do();
-                }
+            //
+            // Update FPS counter.
+            //
+            if (game->config.fps_counter) {
+                game->fps_value = (1000 / UI_UPDATE_SLOW_MS) * frames;
+                frames = 0;
+            }
+
+            //
+            // Screenshot?
+            //
+            if (unlikely(g_do_screenshot)) {
+                g_do_screenshot = 0;
+                sdl_screenshot_do();
             }
         }
 
