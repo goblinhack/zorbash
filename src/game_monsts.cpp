@@ -4,29 +4,29 @@
 //
 
 #include "my_game.h"
-#include "my_game_items.h"
+#include "my_game_monsts.h"
 #include "my_thing.h"
 #include "my_level.h"
 #include "my_sprintf.h"
 
-static void game_items_wid_create(void);
+static void game_monsts_wid_create(void);
 
 Widp wid_items {};
 
-void game_items_wid_fini (void)
+void game_monsts_wid_fini (void)
 {_
     wid_destroy(&wid_items);
 }
 
-uint8_t game_items_wid_init (void)
+uint8_t game_monsts_wid_init (void)
 {_
-    game_items_wid_create();
+    game_monsts_wid_create();
 
     return (true);
 }
 
 #if 0
-static uint8_t game_items_mouse_down (Widp w,
+static uint8_t game_monsts_mouse_down (Widp w,
                                        int32_t x,
                                        int32_t y,
                                        uint32_t button)
@@ -35,22 +35,22 @@ static uint8_t game_items_mouse_down (Widp w,
     return (true);
 }
 
-static void game_items_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void game_monsts_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
     auto slot = wid_get_int_context(w);
     highlight_slot = slot;
-    game_items_wid_create();
+    game_monsts_wid_create();
 }
 
-static void game_items_mouse_over_e (Widp w)
+static void game_monsts_mouse_over_e (Widp w)
 {
     auto slot = wid_get_int_context(w);
     highlight_slot = slot;
-    game_items_wid_create();
+    game_monsts_wid_create();
 }
 #endif
 
-static void game_items_wid_create (void)
+static void game_monsts_wid_create (void)
 {_
     auto level = game->level;
     if (!level) {
@@ -61,7 +61,7 @@ static void game_items_wid_create (void)
         return;
     }
 
-    game_items_wid_fini();
+    game_monsts_wid_fini();
 
     {_
         point tl = make_point(0,  UI_MINICON_VIS_HEIGHT + 2);
