@@ -4,12 +4,12 @@
 //
 
 #pragma once
-void game_items_wid_fini(void);
-uint8_t game_items_wid_init(void);
+void game_monsts_wid_fini(void);
+uint8_t game_monsts_wid_init(void);
 
 #include "my_wid.h"
 
 //
 // Global widgets.
 //
-extern Widp game_items_window;
+extern Widp game_monsts_window;

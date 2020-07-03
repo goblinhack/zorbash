@@ -5,7 +5,7 @@
 
 #include "my_game.h"
 #include "my_game_status.h"
-#include "my_game_items.h"
+#include "my_game_monsts.h"
 #include "my_thing.h"
 
 static void game_status_wid_create(void);
@@ -22,13 +22,13 @@ void game_status_wid_fini (void)
     wid_destroy(&wid_fake_itembar);
     wid_destroy(&wid_item_popup);
     wid_destroy(&wid_sidebar);
-    game_items_wid_fini();
+    game_monsts_wid_fini();
 }
 
 uint8_t game_status_wid_init (void)
 {_
     game_status_wid_create();
-    game_items_wid_init();
+    game_monsts_wid_init();
 
     return (true);
 }
