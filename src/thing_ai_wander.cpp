@@ -26,13 +26,7 @@ bool Thing::ai_blocked (void)
         auto t = at + d;
         auto x = t.x;
         auto y = t.y;
-        if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-            level->is_door(x,y)                              ||
-            level->is_secret_door(x,y)                       ||
-            level->is_generator(x,y)                         ||
-            level->is_hazard(x,y)                            ||
-            level->is_rock(x, y)                             ||
-            level->is_wall(x, y)) {
+        if (will_avoid(point(x, y))) {
             count++;
         }
     }
@@ -61,7 +55,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
         maxy = dmap_start.y;
     }
 
-    auto border = TILES_ACROSS / 2;
+    auto border = 4;
     minx -= border;
     miny -= border;
     maxx += border;
@@ -85,13 +79,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-                level->is_door(x,y)                              ||
-                level->is_secret_door(x,y)                       ||
-                level->is_generator(x,y)                         ||
-                level->is_hazard(x,y)                            ||
-                level->is_rock(x, y)                             ||
-                level->is_wall(x, y)) {
+            if (will_avoid(point(x, y))) {
                 set(dmap.val, x, y, DMAP_IS_WALL);
             } else {
                 auto c = is_less_preferred_terrain(point(x, y));
@@ -199,17 +187,19 @@ bool Thing::ai_choose_wander (point& nh)
 bool Thing::ai_wander (void)
 {_
     if (!time_have_x_tenths_passed_since(10, get_timestamp_last_wander_try())) {
-        log("ai wander blocked; too frequent");
+        log("AI wander blocked; too frequent, last try %u, %u ms ago",
+            get_timestamp_last_wander_try(),
+            time_get_time_ms_cached() - get_timestamp_last_wander_try());
         return false;
     }
     set_timestamp_last_wander_try(time_get_time_ms_cached());
 
     if (ai_blocked()) {
-        log("ai wander blocked");
+        log("AI wander blocked");
         return false;
     }
 
-    log("ai wander");
+    log("AI wander");
     auto tries = 100;
     while (tries--) {
         point nh;
@@ -239,7 +229,7 @@ bool Thing::ai_escape (void)
     }
 
     log("ai escape");
-    auto tries = 100;
+    auto tries = 4;
     while (tries--) {
         point nh;
         if (ai_choose_wander(nh)) {

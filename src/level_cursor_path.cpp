@@ -19,6 +19,10 @@ void Level::cursor_path_draw (point start, point end)
     point dmap_start = start;
     point dmap_end = end;
 
+    if (!player) {
+        return;
+    }
+
     int minx, miny, maxx, maxy;
     if (dmap_start.x < dmap_end.x) {
         minx = dmap_start.x;
@@ -57,8 +61,8 @@ void Level::cursor_path_draw (point start, point end)
     //
     // Set up obstacles for the search
     //
-    if (player &&
-        is_hazard((int)player->mid_at.x, (int)player->mid_at.y)) {
+    if (is_hazard((int)player->mid_at.x, (int)player->mid_at.y) ||
+        player->is_on_fire()) {
         //
         // If already on a hazard we can plot a course via hazards.
         //
@@ -76,8 +80,9 @@ void Level::cursor_path_draw (point start, point end)
                 }
             }
         }
-    } else if (cursor &&
-        is_hazard((int)cursor->mid_at.x, (int)cursor->mid_at.y)) {
+    } else if ((cursor &&
+               is_hazard((int)cursor->mid_at.x, (int)cursor->mid_at.y)) ||
+              player->is_on_fire()) {
         //
         // If the cursor is on a hazard we can plot a course via hazards.
         //

@@ -66,6 +66,9 @@ void Thing::init (Levelp level,
     level_enter();
     level_push();
 
+    //
+    // Add AI ability
+    //
     if (tpp->is_monst()) {
         new_dmap_scent();
         new_age_map();
@@ -371,6 +374,14 @@ void Thing::reinit (void)
     if (is_attached) {
         level_enter();
         level_push();
+    }
+
+    //
+    // Add AI ability
+    //
+    if (tpp->is_monst()) {
+        new_dmap_scent();
+        new_age_map();
     }
 
     //

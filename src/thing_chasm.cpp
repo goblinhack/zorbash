@@ -121,7 +121,7 @@ bool Thing::fall_to_next_level (void)
             level->thing_new(tp_random_blood_splatter()->name(), mid_at);
             if (h <= 0) {
                 h = set_stats_health(0);
-                auto reason = std::string("Killed by falling");
+                auto reason = std::string("killed by falling");
                 dead(nullptr, reason);
             }
 

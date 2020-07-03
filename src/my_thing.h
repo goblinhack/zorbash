@@ -710,6 +710,7 @@ public:
     bool collision_check_only(Thingp it, fpoint future_pos, int x, int y);
     bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
     bool collision_check_only(fpoint);
+    bool collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_only(void);
     bool collision_find_best_target(bool *, bool *);
     bool collision_obstacle(Thingp);
@@ -738,9 +739,11 @@ public:
     bool spawn_under(const std::string& what);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
-    bool will_avoid(const Thingp it);
+    bool will_avoid(const Thingp it) const;
+    bool will_avoid(const point p) const;
     bool will_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
+    bool is_blocking_terrain(const Thingp it);
     const char *to_cstring(void) const;
     const std::string& light_color(void) const;
     const std::string& on_death_do(void) const;

@@ -191,7 +191,7 @@ void Level::display_map (void)
     if (debug) {
         game->config.gfx_lights = 0;
         game->config.gfx_show_hidden = 1;
-        update_hazard_map();
+        update_hazard_tile_map();
     }
 
     if (unlikely(game->config.gfx_show_hidden)) {

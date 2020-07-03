@@ -6,7 +6,7 @@
 #include "my_game.h"
 #include "my_thing.h"
 
-void Level::update_hazard_map (void)
+void Level::update_hazard_tile_map (void)
 {
     //
     // The water tiles are twice the size of normal tiles, so work out
@@ -51,7 +51,7 @@ void Level::update_hazard_map (void)
 
 void Level::update_map (void)
 {
-    update_hazard_map();
+    update_hazard_tile_map();
 }
 
 bool Level::is_anything_at (const int x, const int y)
@@ -148,6 +148,14 @@ bool Level::is_chasm (const int x, const int y)
         return (false);
     }
     return (get(_is_chasm, x, y));
+}
+
+bool Level::is_chasm (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_chasm, p.x, p.y));
 }
 
 void Level::set_is_chasm (const int x, const int y)

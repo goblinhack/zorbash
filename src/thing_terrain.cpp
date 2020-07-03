@@ -15,16 +15,14 @@ uint8_t Thing::is_less_preferred_terrain (point p) const
 {_
     int pref = 0;
 
-    if (level->is_water(p)) {
-        if (is_water_hater()) {
-            pref += is_water_hater();
-        }
+    if (will_avoid(p)) {
+        pref++;
     }
 
     int heat = level->heatmap(p);
     if (heat > 3) {
-        int hate_how_much = is_fire_hater();
         if (is_fire_hater()) {
+            int hate_how_much = is_fire_hater();
             pref += hate_how_much + heat;
         }
     }
@@ -43,6 +41,11 @@ bool Thing::will_prefer_terrain (const Thingp itp)
 
     if (me->is_water_dweller()) {
         if (it->is_water() || it->is_deep_water()) {
+            return (true);
+        }
+    }
+    if (me->is_acid_dweller()) {
+        if (it->is_acid()) {
             return (true);
         }
     }
