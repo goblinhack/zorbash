@@ -50,10 +50,13 @@ void Thing::move_carried_items (void)
     // If something moves on the water, make a ripple
     //
     if (is_monst() || is_player()) {
-        if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
-            fpoint at(mid_at.x, mid_at.y);
-            if (random_range(0, 1000) > 500) {
-                level->thing_new(tp_random_ripple()->name(), at);
+        if (!is_floating()) {
+            if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
+                fpoint at(mid_at.x, mid_at.y);
+                log("causes ripples");
+                if (random_range(0, 1000) > 500) {
+                    level->thing_new(tp_random_ripple()->name(), at);
+                }
             }
         }
     }

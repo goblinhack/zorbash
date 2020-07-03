@@ -24,13 +24,7 @@ point Thing::get_random_scent_target (void)
         auto y = std::min(
                  std::max(MAP_BORDER, start.y + dy), MAP_HEIGHT - MAP_BORDER);
 
-        if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-            level->is_door(x,y)                              ||
-            level->is_secret_door(x,y)                       ||
-            level->is_generator(x,y)                         ||
-            level->is_hazard(x,y)                            ||
-            level->is_rock(x, y)                             ||
-            level->is_wall(x, y)) {
+        if (will_avoid(point(x, y))) {
             continue;
         } else {
             auto c = is_less_preferred_terrain(point(x, y));

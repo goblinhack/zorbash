@@ -11,7 +11,47 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-bool Thing::will_avoid (const Thingp itp)
+bool Thing::will_avoid (point p) const
+{_
+    if (level->is_water(p)) {
+        if (is_water_hater()) {
+            return true;
+        }
+    }
+
+    if (level->is_acid(p)) {
+        if (is_acid_hater()) {
+            return true;
+        }
+    }
+
+    if (!is_floating()) {
+        if (level->is_chasm(p)) {
+            return true;
+        }
+    }
+
+    if ((level->is_monst(p) && !level->is_corpse(p)) ||
+        level->is_door(p)                            ||
+        level->is_secret_door(p)                     ||
+        level->is_generator(p)                       ||
+        level->is_movement_blocking(p)               ||
+        level->is_rock(p)                            ||
+        level->is_wall(p)) {
+        return true;
+    }
+
+    int heat = level->heatmap(p);
+    if (heat > 3) {
+        if (is_fire_hater()) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool Thing::will_avoid (const Thingp itp) const
 {_
     auto me = tp();
     auto it = itp->tp();

@@ -573,6 +573,10 @@ bool Thing::collision_find_best_target (bool *target_attacked,
     auto me = this;
     ThingColl *best = nullptr;
 
+    if (is_loggable_for_unimportant_stuff()) {
+        log("collided with something, find best target");
+    }
+
     *target_attacked = false;
     *target_overlaps = false;
 
@@ -845,8 +849,8 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
 //
 // false aborts the walk
 //
-bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
-                                        int x, int y, int dx, int dy)
+bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
+                                      int x, int y, int dx, int dy)
 {
     auto me = this;
 
@@ -857,6 +861,10 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
     Thingp owner_it = it->owner_get();
     Thingp owner_me = me->owner_get();
 
+    if (is_loggable_for_unimportant_stuff()) {
+        log("cand %s", it->to_string().c_str());
+    }
+
     //
     // Need this or shields attack the player.
     //
@@ -865,6 +873,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
         // If on fire, allow fire to burn its owner - you!
         //
         if (!is_fire()) {
+            log("allow fire to burn owner");
             return (true);
         }
     }
@@ -904,9 +913,14 @@ bool Thing::collision_obstacle (Thingp it)
     if (it == this) {
         return (false);
     }
+
+    //
+    // Skip things we cannot collide with
+    //
     if (it->is_hidden || it->is_falling || it->is_jumping) {
         return (false);
     }
+
     //
     // Stop ghosts piling on top of each other
     //
@@ -915,11 +929,16 @@ bool Thing::collision_obstacle (Thingp it)
             return (true);
         }
     }
+
+    //
+    // Allow movement through open doors only
+    //
     if (it->is_movement_blocking()) {
         if (!it->is_open) {
             return (true);
         }
     }
+
     if (is_player()) {
         if (it->is_alive_monst()) {
             return (true);
@@ -955,6 +974,10 @@ bool Thing::collision_obstacle (fpoint p)
         if (!it) {
             continue;
         }
+
+        //
+        // "true" on collision
+        //
         if (collision_obstacle(it)) {
             return (true);
         }
@@ -963,6 +986,9 @@ bool Thing::collision_obstacle (fpoint p)
     return (false);
 }
 
+//
+// "true" on collision
+//
 bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
 {
     auto me = this;
@@ -1029,6 +1055,9 @@ _
     } else {
         if (things_overlap(me, A_at, it)) {
             log("consider %s", it->to_string().c_str());
+            //
+            // "true" on collision
+            //
             if (collision_obstacle(it)) {
                 return (true);
             }
@@ -1077,14 +1106,15 @@ _
                 }
 
                 if (it->is_hidden || it->is_falling || it->is_jumping) {
+                    log("ignore as hidden/falling/jumping");
                     continue;
                 }
 
                 //
                 // false is used to abort the walk
                 //
-                if (!collision_check_and_handle(it, future_pos,
-                                                x, y, dx, dy)) {
+                if (!collision_add_candidates(it, future_pos, x, y, dx, dy)) {
+                    log("collision, abort walk");
                     return (false);
                 }
             } FOR_ALL_THINGS_END()
@@ -1125,6 +1155,11 @@ bool Thing::collision_check_and_handle_at (bool *target_attacked,
                                           target_attacked, target_overlaps));
 }
 
+
+//
+// "true" on overlap/collision at the specified position. This might be
+// a speculative move on behalf of the thing.
+//
 bool Thing::collision_check_only (fpoint future_pos)
 {
     if (is_loggable_for_unimportant_stuff()) {
@@ -1158,6 +1193,9 @@ _
                     continue;
                 }
 
+                //
+                // Skip things we cannot collide with
+                //
                 if (it->is_hidden || it->is_falling || it->is_jumping) {
                     continue;
                 }
@@ -1171,6 +1209,9 @@ _
     return (false);
 }
 
+//
+// "true" on overlap/collision at the current position
+//
 bool Thing::collision_check_only (void)
 {
     return (collision_check_only(mid_at));

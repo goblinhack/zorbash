@@ -18,6 +18,7 @@ void Thing::resurrect_tick (void)
 
     //
     // No respawn onto lava or things like that if we don't like that.
+    // Or no respawn if something we don't like is standing on us!
     //
     if (is_less_preferred_terrain(make_point(mid_at))) {
         return;
@@ -31,8 +32,7 @@ void Thing::resurrect_tick (void)
         if (v > 0) {
             is_resurrecting = true;
             tile_curr = 0;
-            MINICON("%%fg=red$%s rises from the grave!",
-                    text_The().c_str());
+            MINICON("%%fg=red$%s rises from the grave!", text_The().c_str());
             set_stats_health(v);
             set_stats_health_max(v);
 

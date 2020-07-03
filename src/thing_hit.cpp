@@ -180,7 +180,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         log("is killed by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->text_a_or_an();
-        auto reason = "Killed by " + killer;
+        auto reason = "killed by " + killer;
         dead(real_hitter, reason);
 
         //

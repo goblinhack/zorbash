@@ -13,6 +13,7 @@
 #include "my_string.h"
 #include "my_wid.h"
 #include "my_ascii.h"
+#include "my_game.h"
 
 static void wid_minicon_wid_create(void);
 
@@ -45,6 +46,57 @@ uint8_t wid_minicon_init (void)
     last_msg_count = 0;
 
     return (true);
+}
+
+//
+// Key down etc...
+//
+uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
+{_
+    if (key->scancode == (SDL_Scancode)game->config.key_zoom_out) {
+        MINICON("Zoom out");
+        CON("USERCFG: zoom out");
+        config_gfx_zoom_out();
+        return true;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_zoom_in) {
+        MINICON("Zoom in");
+        CON("USERCFG: zoom in");
+        config_gfx_zoom_in();
+        return true;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_load) {
+        CON("USERCFG: loading game");
+        game->load_select();
+        return true;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_save) {
+        CON("USERCFG: saving the game");
+        game->save_select();
+        return true;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_pause) {
+        MINICON("Pausing the game");
+        CON("USERCFG: pausing the game");
+        game->pause_select();
+        return true;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_help) {
+        game->config_keyboard_select();
+        return true;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_quit) {
+        game->quit_select();
+        return true;
+    }
+
+    return false;
 }
 
 //
@@ -186,6 +238,9 @@ static void wid_minicon_wid_create (void)
         wid_set_name(wid_minicon_window, "wid minicon window");
         wid_set_pos(wid_minicon_window, tl, br);
         wid_set_shape_none(wid_minicon_window);
+        wid_set_on_key_down(wid_minicon_window, wid_minicon_input);
+        wid_set_focusable(wid_minicon_window, 1);
+        wid_set_focus(wid_minicon_window);
     }
 
     {

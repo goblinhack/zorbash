@@ -4788,30 +4788,30 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
 {_
     Widp w {};
 
-//CON("key down");
+//MINICON("key down");
     w = wid_key_down_handler_at(wid_focus, x, y, true /* strict */);
     if (w) {
-//CON("%s %d",to_string(w),__LINE__);
+//MINICON("%s %d",to_cstring(w).c_str(),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(
                 wid_get_top_parent(wid_focus), x, y, false /* strict */);
     if (w) {
-//CON("%s %d",to_string(w),__LINE__);
+//MINICON("%s %d",to_string(w).c_str(),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(wid_over, x, y, true /* strict */);
     if (w) {
-//CON("%s %d",to_string(w),__LINE__);
+//MINICON("%s %d",to_string(w).c_str(),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(
                 wid_get_top_parent(wid_over), x, y, false /* strict */);
     if (w) {
-//CON("%s %d",to_string(w),__LINE__);
+//MINICON("%s %d",to_string(w).c_str(),__LINE__);
         return (w);
     }
 
@@ -4821,7 +4821,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-//CON("  focus is locked");
+//MINICON("  focus is locked");
             continue;
         }
 
@@ -4829,7 +4829,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
         if (!w) {
             continue;
         }
-//CON("     got top level strict handler%s",to_string(w));
+//MINICON("     got top level strict handler%s",to_string(w).c_str());
 
         return (w);
     }
@@ -4840,7 +4840,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-//CON("  focus is locked");
+//MINICON("  focus is locked");
             continue;
         }
 
@@ -4849,7 +4849,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
             continue;
         }
 
-//CON("     got top level loose handler%s",to_string(w));
+//MINICON("     got top level loose handler%s",to_string(w));
         return (w);
     }
 

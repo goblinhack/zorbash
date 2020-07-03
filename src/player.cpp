@@ -81,49 +81,6 @@ void player_tick (void)
         some_key_event_was_pressed = true;
     }
 
-    if (state[game->config.key_zoom_out]) {
-        MINICON("Zoom out");
-        CON("USERCFG: zoom out");
-        config_gfx_zoom_out();
-        some_key_event_was_pressed = true;
-    }
-
-    if (state[game->config.key_zoom_in]) {
-        MINICON("Zoom in");
-        CON("USERCFG: zoom in");
-        config_gfx_zoom_in();
-        some_key_event_was_pressed = true;
-    }
-
-    if (state[game->config.key_load]) {
-        CON("USERCFG: loading game");
-        game->load_select();
-        some_key_event_was_pressed = true;
-    }
-
-    if (state[game->config.key_save]) {
-        CON("USERCFG: saving the game");
-        game->save_select();
-        some_key_event_was_pressed = true;
-    }
-
-    if (state[game->config.key_pause]) {
-        MINICON("Pausing the game");
-        CON("USERCFG: pausing the game");
-        game->pause_select();
-        some_key_event_was_pressed = true;
-    }
-
-    if (state[game->config.key_help]) {
-        game->config_keyboard_select();
-        some_key_event_was_pressed = true;
-    }
-
-    if (state[game->config.key_quit]) {
-        game->quit_select();
-        some_key_event_was_pressed = true;
-    }
-
     if (some_key_event_was_pressed) {
         return;
     }

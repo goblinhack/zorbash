@@ -75,25 +75,9 @@ bool Thing::try_to_jump (point to)
             return false;
         }
 
-        if (is_water_hater()) {
-            if (level->is_water(x, y)) {
-                log("jump failed, onto water");
-                return false;
-            }
-        }
-
-        if (is_fire_hater()) {
-            if (level->is_fire(x, y) || level->is_lava(x, y)) {
-                log("jump failed, onto fire");
-                return false;
-            }
-        }
-
-        if (is_acid_hater()) {
-            if (level->is_acid(x, y)) {
-                log("jump failed, onto acid");
-                return false;
-            }
+        if (will_avoid(point(x, y))) {
+            log("jump failed, avoid destination");
+            return false;
         }
     }
 

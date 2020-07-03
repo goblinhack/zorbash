@@ -30,13 +30,7 @@ bool Thing::spawn_next_to (const std::string& what)
         auto y = mid_at.y + d.y;
         auto p = point(x, y);
 
-        if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-            level->is_door(x,y)                              ||
-            level->is_secret_door(x,y)                       ||
-            level->is_generator(x,y)                         ||
-            level->is_hazard(x,y)                            ||
-            level->is_rock(x, y)                             ||
-            level->is_wall(x, y)) {
+        if (will_avoid(point(x, y))) {
             continue;
         }
 

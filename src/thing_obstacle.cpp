@@ -21,6 +21,9 @@ bool Thing::is_obstacle_for_me (const point &p)
             continue;
         }
 
+        //
+        // "true" on collision
+        //
         if (collision_obstacle(t)) {
             return (true);
         }
