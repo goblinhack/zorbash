@@ -90,12 +90,13 @@
 #define UI_MINICON_VIS_WIDTH       UI_MINICON_WIDTH
 #define UI_MINICON_WIDTH           (ASCII_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
 #define UI_POLL_EVENTS_MS          10
+#define UI_UPDATE_SLOW_MS          250 // FPS and game status
 #define UI_POPUP_TEXT_COLOR        UI_TEXT_COLOR
 #define UI_SCROLL_JOY_SCALE        1.0
 #define UI_SCROLL_JOY_SCALE_MAX    1.5
 #define UI_SCROLL_WHEEL_SCALE      1.0 // How much the wheel mouse moves.
 #define UI_SCROLL_WHEEL_SCALE_MAX  10
-#define UI_SIDEBAR_RIGHT_WIDTH     12
+#define UI_SIDEBAR_RIGHT_WIDTH     14
 #define UI_SIDEBAR_LEFT_WIDTH      12
 #define UI_TEXT_COLOR              GRAY // Default text color
 #define UI_TEXT_COLOR_STR          "gray"
