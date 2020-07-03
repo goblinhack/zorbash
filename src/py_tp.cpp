@@ -335,7 +335,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_yyy7 = 0;
     int is_yyy8 = 0;
     int is_yyy9 = 0;
-    int is_yyy10 = 0;
+    int is_invisible = 0;
     int is_hp_25_percent = 0;
     int is_hp_50_percent = 0;
     int is_hp_75_percent = 0;
@@ -390,7 +390,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_yyy7",
         (char*) "is_yyy8",
         (char*) "is_yyy9",
-        (char*) "is_yyy10",
+        (char*) "is_invisible",
         (char*) "is_hp_25_percent",
         (char*) "is_hp_50_percent",
         (char*) "is_hp_75_percent",
@@ -447,7 +447,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_yyy7,
                                      &is_yyy8,
                                      &is_yyy9,
-                                     &is_yyy10,
+                                     &is_invisible,
                                      &is_hp_25_percent,
                                      &is_hp_50_percent,
                                      &is_hp_75_percent,
@@ -666,7 +666,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tile->is_yyy7 = is_yyy7;
         tile->is_yyy8 = is_yyy8;
         tile->is_yyy9 = is_yyy9;
-        tile->is_yyy10 = is_yyy10;
+        tile->is_invisible = is_invisible;
         tile->is_hp_25_percent = is_hp_25_percent;
         tile->is_hp_50_percent = is_hp_50_percent;
         tile->is_hp_75_percent = is_hp_75_percent;

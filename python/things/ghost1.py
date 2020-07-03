@@ -50,10 +50,11 @@ def tp_init(name, text_name):
     x.set_tile(tile=name + ".4", delay_ms=delay)
     x.set_tile(tile=name + ".5", delay_ms=delay)
     x.set_tile(tile=name + ".6", delay_ms=delay)
-    x.set_tile(tile=name + ".8", delay_ms=delay)
-    x.set_tile(tile=name + ".9", delay_ms=delay)
-    x.set_tile(tile=name + ".10", delay_ms=delay)
-    x.set_tile(tile=name + ".11", delay_ms=delay)
+    x.set_tile(tile=name + ".7", delay_ms=delay, is_invisible=True)
+    x.set_tile(tile=name + ".8", delay_ms=delay, is_invisible=True)
+    x.set_tile(tile=name + ".9", delay_ms=delay, is_invisible=True)
+    x.set_tile(tile=name + ".10", delay_ms=delay, is_invisible=True)
+    x.set_tile(tile=name + ".11", delay_ms=delay, is_invisible=True)
 
     delay=10
     x.set_tile("splat1.1", is_dead=True, delay_ms=delay)

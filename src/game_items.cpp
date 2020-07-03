@@ -98,7 +98,20 @@ static void game_items_wid_create (void)
             point br = make_point(0, y);
             wid_set_pos(w, tl, br);
             wid_set_style(w, UI_WID_STYLE_NONE);
-            wid_set_fg_tile(w, tile_index_to_tile(t->tile_curr));
+            auto tile = tile_index_to_tile(t->tile_curr);
+            if (tile->is_invisible) {
+                //
+                // Should we hide invisible things?
+                //
+                continue;
+                //
+                // Or just show as first tile?
+                //
+                auto tpp = t->tp();
+                auto tiles = &tpp->tiles;
+                tile = tile_first(tiles);
+            }
+            wid_set_fg_tile(w, tile);
             wid_set_color(w, WID_COLOR_BG, WHITE);
         }
 
