@@ -435,7 +435,6 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             } else if (std::string(text_iter, text_iter + 5) == "tile=") {
                 text_iter += 5;
                 auto tmp = std::string(text_iter, text.end());
-
                 int len = 0;
                 tile = string2tile(tmp, &len);
                 text_iter += len;
@@ -560,7 +559,6 @@ int ascii_strlen (std::wstring const& text)
             } else if (std::string(text_iter, text_iter + 5) == "tile=") {
                 text_iter += 5;
                 auto tmp = std::string(text_iter, text.end());
-
                 int len = 0;
                 (void) string2tile(tmp, &len);
                 text_iter += len + 1;
@@ -626,7 +624,6 @@ int ascii_strlen (std::wstring const& text, std::wstring *col)
             } else if (std::string(text_iter, text_iter + 5) == "tile=") {
                 text_iter += 5;
                 auto tmp = std::string(text_iter, text.end());
-
                 int len = 0;
                 (void) string2tile(tmp, &len);
                 text_iter += len + 1;

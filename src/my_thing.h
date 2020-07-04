@@ -1016,7 +1016,7 @@ public:
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
     void blit_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
-    void blit_text(std::string const&, point &tl, point &br);
+    void blit_text(std::string const&, color c, point tl, point br);
     void blit_upside_down();
     void blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles);
     void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);

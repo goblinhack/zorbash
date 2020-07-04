@@ -1,22 +1,22 @@
 bugs
 ----
+- brogue like monster sidebar higlight
 
 upcoming work
 -------------
-- brogue like monster sidebar
 - monst rarity
-- (blunt/warhamma?) slime specific weapon does not cause slimes to split
 - playback possible?
 - eat food
 - drop frog
 - drainpipes spawn slime
 - sewer level
-- hit door, summon monst chance
-- hit door, wake sleeping monsters
 
 future work
 -----------
-- make ripples do something, summon fish chance?
+- hit door, summon monst chance
+- hit door, wake sleeping monsters
+- make ripples, summon monsters
+- (blunt/warhamma?) slime specific weapon does not cause slimes to split
 - chasm trap / potion of descent
 - carry eat slime mold and gain acid resis?
 - thief that will steal cash but can be distracted by dropped money
