@@ -1,7 +1,9 @@
 bugs
 ----
-- step off exit onto chasm and no falling
+- chasm fall sometimes into darkness
+- move skel to 24x24
 - oversized monster stats
+- step off exit onto chasm and no falling
 
 upcoming work
 -------------

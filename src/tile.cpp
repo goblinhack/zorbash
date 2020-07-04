@@ -54,7 +54,7 @@ Tile::Tile (const class Tile *tile)
     y1 = tile->y1;
     x2 = tile->x2;
     y2 = tile->y2;
-#ifdef ENABLE_GFX_TILE_COLLISIONS
+#ifdef ENABLE_TILE_BOUNDS
     ox1 = tile->ox1;
     oy1 = tile->oy1;
     ox2 = tile->ox2;
@@ -172,7 +172,7 @@ void tile_load_arr (std::string file, std::string name,
             t->x2 = t->x1 + fw;
             t->y2 = t->y1 + fh;
 
-#ifdef ENABLE_GFX_TILE_COLLISIONS
+#ifdef ENABLE_TILE_BOUNDS
             t->ox1 = t->x1;
             t->oy1 = t->y1;
             t->ox2 = t->x2;
@@ -182,16 +182,16 @@ void tile_load_arr (std::string file, std::string name,
             t->pct_width = fw;
             t->pct_height = fh;
 
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
-#ifdef ENABLE_GFX_TILE_COLLISIONS
+#ifdef ENABLE_TILE_BOUNDS
             if ((pixel_size.w <= TILE_WIDTH_MAX) &&
                 (pixel_size.h <= TILE_HEIGHT_MAX)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
-                point AT = make_point(
+                point off = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
                 );
@@ -226,36 +226,36 @@ void tile_load_arr (std::string file, std::string name,
                             MIN.y = std::min(at.y, MIN.y);
                             MAX.x = std::max(at.x, MAX.x);
                             MAX.y = std::max(at.y, MAX.y);
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf("X");
 #endif
                             if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
                                 set(t->pix, x1, y1, (uint8_t)1);
                             }
                         } else if (p.a > 0) {
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf(".");
 #endif
                         } else {
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf(" ");
 #endif
                         }
                     }
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                     printf("\n");
 #endif
                 }
 
-                t->px1 = ((double) (MIN.x - AT.x)) / (double) pixel_size.w;
-                t->px2 = ((double) (MAX.x - AT.x + 1)) / (double) pixel_size.w;
-                t->py1 = ((double) (MIN.y - AT.y)) / (double) pixel_size.h;
-                t->py2 = ((double) (MAX.y - AT.y + 1)) / (double) pixel_size.h;
+                t->px1 = ((float) (MIN.x - off.x)) / (float) pixel_size.w;
+                t->px2 = ((float) (MAX.x - off.x + 1)) / (float) pixel_size.w;
+                t->py1 = ((float) (MIN.y - off.y)) / (float) pixel_size.h;
+                t->py2 = ((float) (MAX.y - off.y + 1)) / (float) pixel_size.h;
             }
 #endif
 
-#ifdef DEBUG_TILE
-            printf("^^^  %s %f %f %f %f min x %d %d min y %d %d\n",name.c_str(),t->px1,t->py1,t->px2,t->py2, MIN.x,MAX.x,MIN.y,MAX.y);
+#ifdef ENABLE_DEBUG_TILE
+            printf("^^^  %s %f %f %f %f\n",name.c_str(),t->px1,t->py1,t->px2,t->py2);
 #endif
         }
 
@@ -333,7 +333,7 @@ void tile_load_arr (std::string file, std::string name,
             t->x2 = t->x1 + fw;
             t->y2 = t->y1 + fh;
 
-#ifdef ENABLE_GFX_TILE_COLLISIONS
+#ifdef ENABLE_TILE_BOUNDS
             t->ox1 = t->x1;
             t->oy1 = t->y1;
             t->ox2 = t->x2;
@@ -343,16 +343,16 @@ void tile_load_arr (std::string file, std::string name,
             t->pct_width = fw;
             t->pct_height = fh;
 
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
-#ifdef ENABLE_GFX_TILE_COLLISIONS
+#ifdef ENABLE_TILE_BOUNDS
             if ((pixel_size.w <= TILE_WIDTH_MAX) &&
                 (pixel_size.h <= TILE_HEIGHT_MAX)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
-                point AT = make_point(
+                point off = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
                 );
@@ -387,36 +387,36 @@ void tile_load_arr (std::string file, std::string name,
                             MIN.y = std::min(at.y, MIN.y);
                             MAX.x = std::max(at.x, MAX.x);
                             MAX.y = std::max(at.y, MAX.y);
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf("X");
 #endif
                             if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
                                 set(t->pix, x1, y1, (uint8_t)1);
                             }
                         } else if (p.a > 0) {
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf(".");
 #endif
                         } else {
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf(" ");
 #endif
                         }
                     }
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                     printf("\n");
 #endif
                 }
 
-                t->px1 = ((double) (MIN.x - AT.x)) / (double) pixel_size.w;
-                t->px2 = ((double) (MAX.x - AT.x + 1)) / (double) pixel_size.w;
-                t->py1 = ((double) (MIN.y - AT.y)) / (double) pixel_size.h;
-                t->py2 = ((double) (MAX.y - AT.y + 1)) / (double) pixel_size.h;
+                t->px1 = ((float) (MIN.x - off.x)) / (float) pixel_size.w;
+                t->px2 = ((float) (MAX.x - off.x + 1)) / (float) pixel_size.w;
+                t->py1 = ((float) (MIN.y - off.y)) / (float) pixel_size.h;
+                t->py2 = ((float) (MAX.y - off.y + 1)) / (float) pixel_size.h;
             }
 #endif
 
-#ifdef DEBUG_TILE
-            printf("^^^  %s %f %f %f %f min x %d %d min y %d %d\n",name.c_str(),t->px1,t->py1,t->px2,t->py2, MIN.x,MAX.x,MIN.y,MAX.y);
+#ifdef ENABLE_DEBUG_TILE
+            printf("^^^  %s %f %f %f %f\n",name.c_str(),t->px1,t->py1,t->px2,t->py2);
 #endif
         }
 
@@ -502,7 +502,7 @@ void tile_load_arr_color_and_black_and_white (std::string file,
             t->x2 = t->x1 + fw;
             t->y2 = t->y1 + fh;
 
-#ifdef ENABLE_GFX_TILE_COLLISIONS
+#ifdef ENABLE_TILE_BOUNDS
             t->ox1 = t->x1;
             t->oy1 = t->y1;
             t->ox2 = t->x2;
@@ -512,16 +512,16 @@ void tile_load_arr_color_and_black_and_white (std::string file,
             t->pct_width = fw;
             t->pct_height = fh;
 
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
-#ifdef ENABLE_GFX_TILE_COLLISIONS
+#ifdef ENABLE_TILE_BOUNDS
             if ((pixel_size.w <= TILE_WIDTH_MAX) &&
                 (pixel_size.h <= TILE_HEIGHT_MAX)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
-                point AT = make_point(
+                point off = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
                 );
@@ -556,36 +556,36 @@ void tile_load_arr_color_and_black_and_white (std::string file,
                             MIN.y = std::min(at.y, MIN.y);
                             MAX.x = std::max(at.x, MAX.x);
                             MAX.y = std::max(at.y, MAX.y);
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf("X");
 #endif
                             if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
                                 set(t->pix, x1, y1, (uint8_t)1);
                             }
                         } else if (p.a > 0) {
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf(".");
 #endif
                         } else {
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                             printf(" ");
 #endif
                         }
                     }
-#ifdef DEBUG_TILE
+#ifdef ENABLE_DEBUG_TILE
                     printf("\n");
 #endif
                 }
 
-                t->px1 = ((double) (MIN.x - AT.x)) / (double) pixel_size.w;
-                t->px2 = ((double) (MAX.x - AT.x + 1)) / (double) pixel_size.w;
-                t->py1 = ((double) (MIN.y - AT.y)) / (double) pixel_size.h;
-                t->py2 = ((double) (MAX.y - AT.y + 1)) / (double) pixel_size.h;
+                t->px1 = ((float) (MIN.x - off.x)) / (float) pixel_size.w;
+                t->px2 = ((float) (MAX.x - off.x + 1)) / (float) pixel_size.w;
+                t->py1 = ((float) (MIN.y - off.y)) / (float) pixel_size.h;
+                t->py2 = ((float) (MAX.y - off.y + 1)) / (float) pixel_size.h;
             }
 #endif
 
-#ifdef DEBUG_TILE
-            printf("^^^  %s %f %f %f %f min x %d %d min y %d %d\n",name.c_str(),t->px1,t->py1,t->px2,t->py2, MIN.x,MAX.x,MIN.y,MAX.y);
+#ifdef ENABLE_DEBUG_TILE
+            printf("^^^  %s %f %f %f %f\n",name.c_str(),t->px1,t->py1,t->px2,t->py2);
 #endif
         }
 
@@ -797,21 +797,21 @@ void tile_blit_colored_fat (Tpp tp,
                             color color_bl,
                             color color_br)
 {
-    double x1 = tile->x1;
-    double x2 = tile->x2;
-    double y1 = tile->y1;
-    double y2 = tile->y2;
+    float x1 = tile->x1;
+    float x2 = tile->x2;
+    float y1 = tile->y1;
+    float y2 = tile->y2;
 
     if (unlikely(tp != 0)) {
-        double left_off  = (double)tp->blit_left_off();
-        double right_off = (double)tp->blit_right_off();
-        double top_off   = (double)tp->blit_top_off();
-        double bot_off   = (double)tp->blit_bot_off();
+        float left_off  = (float)tp->blit_left_off();
+        float right_off = (float)tp->blit_right_off();
+        float top_off   = (float)tp->blit_top_off();
+        float bot_off   = (float)tp->blit_bot_off();
 
-        double pct_w     = tile->pct_width;
-        double pct_h     = tile->pct_height;
-        double pix_w     = br.x - tl.x;
-        double pix_h     = br.y - tl.y;
+        float pct_w     = tile->pct_width;
+        float pct_h     = tile->pct_height;
+        float pix_w     = br.x - tl.x;
+        float pix_h     = br.y - tl.y;
 
         tl.x -= left_off  * pix_w;
         br.x += right_off * pix_w;
@@ -841,10 +841,10 @@ void tile_blit_colored (Tilep tile,
                         color color_bl,
                         color color_br)
 {
-    double x1 = tile->x1;
-    double x2 = tile->x2;
-    double y1 = tile->y1;
-    double y2 = tile->y2;
+    float x1 = tile->x1;
+    float x2 = tile->x2;
+    float y1 = tile->y1;
+    float y2 = tile->y2;
 
     blit_colored(tile->gl_binding(),
                  x1, y2, x2, y1,

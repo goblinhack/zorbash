@@ -11,16 +11,17 @@
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #define ENABLE_TRACING             // Function tracing
 
+#define ENABLE_TILE_BOUNDS         // Scan tiles for bounds
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
 #undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
 #undef  ENABLE_DEBUG_AI_GOALS      // AI goal selection
 #undef  ENABLE_DEBUG_AI_WANDER     // AI wander path selection
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
-#undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
+#undef  ENABLE_DEBUG_SAVE_CHECK    // Verify compressed file
 #undef  ENABLE_DEBUG_SAVE_LOAD     // Map saving and loading
 #undef  ENABLE_DEBUG_SAVE_LOAD_HEX // Hex dump of save files
-#undef  ENABLE_DEBUG_SAVE_CHECK    // Verify compressed file
-#undef  ENABLE_GFX_TILE_COLLISIONS // Not needed for roguelike
+#undef  ENABLE_DEBUG_TILE          // Astar AI path costs
+#undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
 #undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
 #undef  ENABLE_MAP_DEBUG           // Visible map, no lighting
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
