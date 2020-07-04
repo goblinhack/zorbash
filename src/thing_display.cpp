@@ -221,12 +221,11 @@ static int blit_msg_strlen (std::string const& text)
     return (x);
 }
 
-void Thing::blit_text (std::string const& text,
-                       point& blit_tl, point& blit_br)
+void Thing::blit_text (std::string const& text, color fg,
+                       point blit_tl, point blit_br)
 {_
     Tilep tile;
     auto text_iter = text.begin();
-    color fg = WHITE;
     fg.a = alpha;
 
     tile = nullptr;
@@ -267,7 +266,6 @@ void Thing::blit_text (std::string const& text,
             } else if (std::string(text_iter, text_iter + 5) == "tile=") {
                 text_iter += 5;
                 auto tmp = std::string(text_iter, text.end());
-
                 int len = 0;
                 tile = string2tile(tmp, &len);
                 text_iter += len;
@@ -276,7 +274,9 @@ void Thing::blit_text (std::string const& text,
             continue;
         }
 
-        tile = fixed_font->unicode_to_tile(c);
+        if (!tile) {
+            tile = fixed_font->unicode_to_tile(c);
+        }
 
         tile_blit_outline(tile, blit_tl, blit_br, fg);
 
@@ -284,6 +284,7 @@ void Thing::blit_text (std::string const& text,
         blit_tl.x += UI_FONT_PIXEL_SIZE;
         blit_br.x += UI_FONT_PIXEL_SIZE;
     }
+    glcolor(WHITE);
 }
 
 bool Thing::get_coords (point &blit_tl,
@@ -697,8 +698,25 @@ void Thing::blit_internal (point &blit_tl,
     }
 
     if (unlikely(is_msg())) {
-        blit_text(get_msg(), blit_tl, blit_br);
+        blit_text(get_msg(), WHITE, blit_tl, blit_br);
     }
+
+    if (!reflection) {
+        if (is_monst() && !is_dead) {
+            auto height = blit_br.y - blit_tl.y;
+            auto h = get_stats_health();
+            int i = ((float)h / (float)get_stats_health_max()) *
+                    (float)UI_HEALTH_ICON_STEPS;
+            i = std::min(i, UI_HEALTH_ICON_STEPS);
+            i = std::max(i, 1);
+            std::string t = "%tile=health" + std::to_string(i) + "-icon$";
+            std::string s = std::to_string(h) + t;
+            blit_text(s, GRAY80, point(blit_tl.x, blit_tl.y - height),
+                    point(blit_br.x, blit_br.y - height));
+        }
+    }
+
+    glcolor(WHITE);
 
     if (unlikely(is_on_fire())) {
         static uint32_t ts;
@@ -770,8 +788,6 @@ void Thing::blit_internal (point &blit_tl,
         glPopMatrix();
         blit_init();
     }
-
-    glcolor(WHITE);
 
     is_blitted = true;
 }
