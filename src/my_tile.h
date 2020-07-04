@@ -45,35 +45,35 @@ public:
     uint16_t pix_width {};
     uint16_t pix_height {};
 
-    double pct_width {};
-    double pct_height {};
+    float pct_width {};
+    float pct_height {};
 
     //
     // Texture co-ordinates within the image.
     //
-    double x1 {};
-    double y1 {};
-    double x2 {};
-    double y2 {};
+    float x1 {};
+    float y1 {};
+    float x2 {};
+    float y2 {};
 
-#ifdef ENABLE_GFX_TILE_COLLISIONS
+#ifdef ENABLE_TILE_BOUNDS
     //
     // As above but not clipped 0.5 pixels. Actually we do not clip anymore,
     // it didn't help. Best to choose a resolution that works.
     //
-    double ox1 {};
-    double oy1 {};
-    double ox2 {};
-    double oy2 {};
+    float ox1 {};
+    float oy1 {};
+    float ox2 {};
+    float oy2 {};
 
     //
     // Percentage points that indicate the start of the pixels within the tile
     // texture for use in collisions.
     //
-    double px1 {};
-    double py1 {};
-    double px2 {};
-    double py2 {};
+    float px1 {};
+    float py1 {};
+    float px2 {};
+    float py2 {};
 #endif
 
     Texp tex {};

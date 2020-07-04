@@ -9,6 +9,7 @@
 #include "my_thing.h"
 #include "my_font.h"
 #include "my_level.h"
+#include "my_tex.h"
 #include "my_gl.h"
 
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
@@ -234,7 +235,7 @@ void Thing::blit_text (std::string const& text, color fg,
 
     blit_tl.x = ((blit_br.x + blit_tl.x) / 2) - (UI_FONT_PIXEL_SIZE * l / 2);
     blit_br.x = blit_tl.x + UI_FONT_PIXEL_SIZE - 1;
-    blit_tl.y = ((blit_br.y + blit_tl.y) / 2) - (UI_FONT_PIXEL_SIZE * l / 2);
+    blit_tl.y = blit_tl.y - UI_FONT_PIXEL_SIZE - 1;
     blit_br.y = blit_tl.y + UI_FONT_PIXEL_SIZE - 1;
 
     while (text_iter != text.end()) {
@@ -703,7 +704,6 @@ void Thing::blit_internal (point &blit_tl,
 
     if (!reflection) {
         if (is_monst() && !is_dead) {
-            auto height = blit_br.y - blit_tl.y;
             auto h = get_stats_health();
             int i = ((float)h / (float)get_stats_health_max()) *
                     (float)UI_HEALTH_ICON_STEPS;
@@ -711,8 +711,11 @@ void Thing::blit_internal (point &blit_tl,
             i = std::max(i, 1);
             std::string t = "%tile=health" + std::to_string(i) + "-icon$";
             std::string s = std::to_string(h) + t;
-            blit_text(s, GRAY80, point(blit_tl.x, blit_tl.y - height),
-                    point(blit_br.x, blit_br.y - height));
+
+            auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
+            blit_text(s, GRAY80,
+                      point(blit_tl.x, y),
+                      point(blit_br.x, y));
         }
     }
 
