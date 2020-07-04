@@ -2226,7 +2226,12 @@ bool Dungeon::rooms_move_closer_together (void)
 
     auto failed_to_place_all_corridors = 0;
     auto failed_to_make_shorter_corridors = 0;
-    auto attempts_to_move_rooms_closer = 20;
+
+    //
+    // This is slow and causes jitter in the game when a monst falls
+    // into a chasm.
+    //
+    auto attempts_to_move_rooms_closer = 10;
 
     choose_room_doors();
 
