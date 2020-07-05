@@ -96,7 +96,7 @@ void Thing::animate (void)
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_player()) { log("choose tiles"); }
+if (is_monst()) { log("choose tiles"); }
 #endif
     if (!chose_tile) {
         while (tries < size) {
@@ -110,7 +110,7 @@ if (is_player()) { log("choose tiles"); }
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log("tile %s moving %d up %d down %d left %d right %d dirnone %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
+if (is_monst()) { log("tile %s moving %d up %d down %d left %d right %d dirnone %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
                        tile_is_moving(tile),
                        tile_is_dir_up(tile),
                        tile_is_dir_down(tile),
@@ -123,6 +123,13 @@ if (is_player()) { log("tile %s moving %d up %d down %d left %d right %d dirnone
                        tile_is_dir_br(tile));
                   }
 #endif
+            if (!is_resurrected) {
+                if (tile_is_resurrecting(tile)) {
+                    tile = tile_next(tiles, tile);
+                    continue;
+                }
+            }
+
             if (!is_dead) {
                 if (tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
@@ -134,13 +141,13 @@ if (is_player()) { log("tile %s moving %d up %d down %d left %d right %d dirnone
 
                 if (tpp->internal_has_hp_anim()) {
 #ifdef DEBUG_ANIM
-if (is_player()) { log("  has hp anim tiles hp %d max %d", health, health_max); }
+if (is_monst()) { log("  has hp anim tiles hp %d max %d", health, health_max); }
 #endif
                     if (health < health_max / 4) {
                         if (!tile_is_hp_25_percent(tile)) {
                             tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
@@ -148,7 +155,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                         if (!tile_is_hp_50_percent(tile)) {
                             tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
@@ -156,14 +163,14 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                         if (!tile_is_hp_75_percent(tile)) {
                             tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
                     } else {
                         if (!tile_is_hp_100_percent(tile)) {
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             tile = tile_next(tiles, tile);
                             continue;
@@ -175,7 +182,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                     if (tile_is_moving(tile)) {
                         tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                         continue;
                     }
@@ -186,7 +193,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_resurrecting(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -194,7 +201,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -202,7 +209,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_sleeping(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -210,7 +217,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_up(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -218,7 +225,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_down(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -226,7 +233,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_left(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -234,7 +241,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_right(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -242,7 +249,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_none(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -250,7 +257,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_open(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -258,7 +265,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_sleeping(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -266,7 +273,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -274,7 +281,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_open(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -305,7 +312,7 @@ if (is_player()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
     }
 
 #ifdef DEBUG_ANIM
-    if (is_player()) { log("set %s", tile_name(tile).c_str()); }
+    if (is_monst()) { log("set %s", tile_name(tile).c_str()); }
 #endif
 
     tile_curr = tile->global_index;
