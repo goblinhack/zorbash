@@ -41,6 +41,7 @@ void Thing::resurrect_tick (void)
             //
             set_tick_last_did_something(game->tick_current);
             set_tick(game->tick_current);
+            is_dead = false;
         }
     }
 }
