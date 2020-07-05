@@ -31,6 +31,10 @@ bool Thing::will_avoid (point p) const
         }
     }
 
+    if (level->is_monst(p) > 1) {
+        return true;
+    }
+
     if ((level->is_monst(p) && !level->is_corpse(p)) ||
         level->is_door(p)                            ||
         level->is_secret_door(p)                     ||

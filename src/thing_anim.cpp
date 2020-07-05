@@ -96,7 +96,46 @@ void Thing::animate (void)
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_monst()) { log("choose tiles"); }
+if (is_monst()) { log("choose tiles hp %d "
+                      "is_attached %d "
+                      "is_being_destroyed %d "
+                      "is_blitted %d "
+                      "is_bouncing %d "
+                      "is_dead %d "
+                      "is_facing_left %d "
+                      "is_fadeup %d "
+                      "is_falling %d "
+                      "is_hidden %d "
+                      "is_hungry %d "
+                      "is_in_lava %d "
+                      "is_in_water %d "
+                      "is_jumping %d "
+                      "is_moving %d "
+                      "is_open %d "
+                      "is_resurrected %d "
+                      "is_resurrecting %d "
+                      "is_sleeping %d "
+                      "is_starving %d ",
+                      get_stats_health(),
+                      is_attached,
+                      is_being_destroyed,
+                      is_blitted,
+                      is_bouncing,
+                      is_dead,
+                      is_facing_left,
+                      is_fadeup,
+                      is_falling,
+                      is_hidden,
+                      is_hungry,
+                      is_in_lava,
+                      is_in_water,
+                      is_jumping,
+                      is_moving,
+                      is_open,
+                      is_resurrected,
+                      is_resurrecting,
+                      is_sleeping,
+                      is_starving); }
 #endif
     if (!chose_tile) {
         while (tries < size) {
@@ -301,9 +340,48 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
             // ignore
             //
         } else {
-            die("could not find a good animation tile after %d tries; has %d tiles, have tile %s",
-                tries, size, tile_name(tile).c_str());
-            return;
+            die("could not find a good animation tile after %d tries; has %d tiles, have tile %s for "
+                "hp %d "
+                "is_attached %d "
+                "is_being_destroyed %d "
+                "is_blitted %d "
+                "is_bouncing %d "
+                "is_dead %d "
+                "is_facing_left %d "
+                "is_fadeup %d "
+                "is_falling %d "
+                "is_hidden %d "
+                "is_hungry %d "
+                "is_in_lava %d "
+                "is_in_water %d "
+                "is_jumping %d "
+                "is_moving %d "
+                "is_open %d "
+                "is_resurrected %d "
+                "is_resurrecting %d "
+                "is_sleeping %d "
+                "is_starving %d ",
+                tries, size, tile_name(tile).c_str(),
+                get_stats_health(),
+                is_attached,
+                is_being_destroyed,
+                is_blitted,
+                is_bouncing,
+                is_dead,
+                is_facing_left,
+                is_fadeup,
+                is_falling,
+                is_hidden,
+                is_hungry,
+                is_in_lava,
+                is_in_water,
+                is_jumping,
+                is_moving,
+                is_open,
+                is_resurrected,
+                is_resurrecting,
+                is_sleeping,
+                is_starving);
         }
     }
 
