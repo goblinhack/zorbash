@@ -22,9 +22,9 @@ void Level::update_hazard_tile_map (void)
             if (is_water(x, y) || is_deep_water(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
-                        set(water_tile_map, x+dx, y+dy, true);
+                        incr(water_tile_map, x+dx, y+dy, (uint8_t)1);
                         if (is_deep_water(x, y)) {
-                            set(deep_water_tile_map, x+dx, y+dy, true);
+                            incr(deep_water_tile_map, x+dx, y+dy, (uint8_t)1);
                         }
                     }
                 }
@@ -33,7 +33,7 @@ void Level::update_hazard_tile_map (void)
             if (is_lava(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
-                        set(lava_tile_map, x+dx, y+dy, true);
+                        incr(lava_tile_map, x+dx, y+dy, (uint8_t)1);
                     }
                 }
             }
@@ -41,7 +41,7 @@ void Level::update_hazard_tile_map (void)
             if (is_chasm(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
-                        set(chasm_tile_map, x+dx, y+dy, true);
+                        incr(chasm_tile_map, x+dx, y+dy, (uint8_t)1);
                     }
                 }
             }
@@ -74,7 +74,7 @@ bool Level::is_anything_at (const point &p)
     return (is_anything_at(p.x, p.y));
 }
 
-bool Level::is_lava (const point &p)
+uint8_t Level::is_lava (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -82,7 +82,7 @@ bool Level::is_lava (const point &p)
     return (get(_is_lava, p.x, p.y));
 }
 
-bool Level::is_lava (const int x, const int y)
+uint8_t Level::is_lava (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -96,7 +96,7 @@ void Level::set_is_lava (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_lava, x, y, true);
+    incr(_is_lava, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_lava (const int x, const int y)
@@ -105,10 +105,10 @@ void Level::unset_is_lava (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_lava, x, y, false);
+    decr(_is_lava, x, y, (uint8_t)1);
 }
 
-bool Level::is_acid (const point &p)
+uint8_t Level::is_acid (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -116,7 +116,7 @@ bool Level::is_acid (const point &p)
     return (get(_is_acid, p.x, p.y));
 }
 
-bool Level::is_acid (const int x, const int y)
+uint8_t Level::is_acid (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -130,7 +130,7 @@ void Level::set_is_acid (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_acid, x, y, true);
+    incr(_is_acid, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_acid (const int x, const int y)
@@ -139,10 +139,10 @@ void Level::unset_is_acid (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_acid, x, y, false);
+    decr(_is_acid, x, y, (uint8_t)1);
 }
 
-bool Level::is_chasm (const int x, const int y)
+uint8_t Level::is_chasm (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -150,7 +150,7 @@ bool Level::is_chasm (const int x, const int y)
     return (get(_is_chasm, x, y));
 }
 
-bool Level::is_chasm (const point &p)
+uint8_t Level::is_chasm (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -164,7 +164,7 @@ void Level::set_is_chasm (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_chasm, x, y, true);
+    incr(_is_chasm, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_chasm (const int x, const int y)
@@ -173,10 +173,10 @@ void Level::unset_is_chasm (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_chasm, x, y, false);
+    decr(_is_chasm, x, y, (uint8_t)1);
 }
 
-bool Level::is_hazard (const point &p)
+uint8_t Level::is_hazard (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -184,7 +184,7 @@ bool Level::is_hazard (const point &p)
     return (get(_is_hazard, p.x, p.y));
 }
 
-bool Level::is_hazard (const int x, const int y)
+uint8_t Level::is_hazard (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -198,7 +198,7 @@ void Level::set_is_hazard (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_hazard, x, y, true);
+    incr(_is_hazard, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_hazard (const int x, const int y)
@@ -207,10 +207,10 @@ void Level::unset_is_hazard (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_hazard, x, y, false);
+    decr(_is_hazard, x, y, (uint8_t)1);
 }
 
-bool Level::is_secret_door (const point &p)
+uint8_t Level::is_secret_door (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -218,7 +218,7 @@ bool Level::is_secret_door (const point &p)
     return (get(_is_secret_door, p.x, p.y));
 }
 
-bool Level::is_secret_door (const int x, const int y)
+uint8_t Level::is_secret_door (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -232,7 +232,7 @@ void Level::set_is_secret_door (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_secret_door, x, y, true);
+    incr(_is_secret_door, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_secret_door (const int x, const int y)
@@ -241,10 +241,10 @@ void Level::unset_is_secret_door (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_secret_door, x, y, false);
+    decr(_is_secret_door, x, y, (uint8_t)1);
 }
 
-bool Level::is_generator (const point &p)
+uint8_t Level::is_generator (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -252,7 +252,7 @@ bool Level::is_generator (const point &p)
     return (get(_is_generator, p.x, p.y));
 }
 
-bool Level::is_generator (const int x, const int y)
+uint8_t Level::is_generator (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -266,7 +266,7 @@ void Level::set_is_generator (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_generator, x, y, true);
+    incr(_is_generator, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_generator (const int x, const int y)
@@ -275,10 +275,10 @@ void Level::unset_is_generator (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_generator, x, y, false);
+    decr(_is_generator, x, y, (uint8_t)1);
 }
 
-bool Level::is_blood (const point &p)
+uint8_t Level::is_blood (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -286,7 +286,7 @@ bool Level::is_blood (const point &p)
     return (get(_is_blood, p.x, p.y));
 }
 
-bool Level::is_blood (const int x, const int y)
+uint8_t Level::is_blood (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -299,7 +299,7 @@ void Level::set_is_blood (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_blood, x, y, true);
+    incr(_is_blood, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_blood (const int x, const int y)
@@ -307,10 +307,10 @@ void Level::unset_is_blood (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_blood, x, y, false);
+    decr(_is_blood, x, y, (uint8_t)1);
 }
 
-bool Level::is_water (const point &p)
+uint8_t Level::is_water (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -318,7 +318,7 @@ bool Level::is_water (const point &p)
     return (get(_is_water, p.x, p.y));
 }
 
-bool Level::is_water (const int x, const int y)
+uint8_t Level::is_water (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -332,7 +332,7 @@ void Level::set_is_water (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_water, x, y, true);
+    incr(_is_water, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_water (const int x, const int y)
@@ -341,10 +341,10 @@ void Level::unset_is_water (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_water, x, y, false);
+    decr(_is_water, x, y, (uint8_t)1);
 }
 
-bool Level::is_deep_water (const point &p)
+uint8_t Level::is_deep_water (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -352,7 +352,7 @@ bool Level::is_deep_water (const point &p)
     return (get(_is_deep_water, p.x, p.y));
 }
 
-bool Level::is_deep_water (const int x, const int y)
+uint8_t Level::is_deep_water (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -366,7 +366,7 @@ void Level::set_is_deep_water (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_deep_water, x, y, true);
+    incr(_is_deep_water, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_deep_water (const int x, const int y)
@@ -375,10 +375,10 @@ void Level::unset_is_deep_water (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_deep_water, x, y, false);
+    decr(_is_deep_water, x, y, (uint8_t)1);
 }
 
-bool Level::is_wall (const point &p)
+uint8_t Level::is_wall (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -386,7 +386,7 @@ bool Level::is_wall (const point &p)
     return (get(_is_wall, p.x, p.y));
 }
 
-bool Level::is_wall (const int x, const int y)
+uint8_t Level::is_wall (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -400,7 +400,7 @@ void Level::set_is_wall (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_wall, x, y, true);
+    incr(_is_wall, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_wall (const int x, const int y)
@@ -409,10 +409,10 @@ void Level::unset_is_wall (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_wall, x, y, false);
+    decr(_is_wall, x, y, (uint8_t)1);
 }
 
-bool Level::is_corridor (const point &p)
+uint8_t Level::is_corridor (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -420,7 +420,7 @@ bool Level::is_corridor (const point &p)
     return (get(_is_corridor, p.x, p.y));
 }
 
-bool Level::is_corridor (const int x, const int y)
+uint8_t Level::is_corridor (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -434,7 +434,7 @@ void Level::set_is_corridor (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_corridor, x, y, true);
+    incr(_is_corridor, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_corridor (const int x, const int y)
@@ -443,10 +443,10 @@ void Level::unset_is_corridor (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_corridor, x, y, false);
+    decr(_is_corridor, x, y, (uint8_t)1);
 }
 
-bool Level::is_dirt (const point &p)
+uint8_t Level::is_dirt (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -454,7 +454,7 @@ bool Level::is_dirt (const point &p)
     return (get(_is_dirt, p.x, p.y));
 }
 
-bool Level::is_dirt (const int x, const int y)
+uint8_t Level::is_dirt (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -468,7 +468,7 @@ void Level::set_is_dirt (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_dirt, x, y, true);
+    incr(_is_dirt, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_dirt (const int x, const int y)
@@ -477,10 +477,10 @@ void Level::unset_is_dirt (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_dirt, x, y, false);
+    decr(_is_dirt, x, y, (uint8_t)1);
 }
 
-bool Level::is_floor (const int x, const int y)
+uint8_t Level::is_floor (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -494,7 +494,7 @@ void Level::set_is_floor (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_floor, x, y, true);
+    incr(_is_floor, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_floor (const int x, const int y)
@@ -503,10 +503,10 @@ void Level::unset_is_floor (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_floor, x, y, false);
+    decr(_is_floor, x, y, (uint8_t)1);
 }
 
-bool Level::is_rock (const point &p)
+uint8_t Level::is_rock (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -514,7 +514,7 @@ bool Level::is_rock (const point &p)
     return (get(_is_rock, p.x, p.y));
 }
 
-bool Level::is_rock (const int x, const int y)
+uint8_t Level::is_rock (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -528,7 +528,7 @@ void Level::set_is_rock (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_rock, x, y, true);
+    incr(_is_rock, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_rock (const int x, const int y)
@@ -537,10 +537,10 @@ void Level::unset_is_rock (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_rock, x, y, false);
+    decr(_is_rock, x, y, (uint8_t)1);
 }
 
-bool Level::is_dungeon (const point &p)
+uint8_t Level::is_dungeon (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -548,7 +548,7 @@ bool Level::is_dungeon (const point &p)
     return (get(_is_dungeon, p.x, p.y));
 }
 
-bool Level::is_dungeon (const int x, const int y)
+uint8_t Level::is_dungeon (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -562,7 +562,7 @@ void Level::set_dungeon (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_dungeon, x, y, true);
+    incr(_is_dungeon, x, y, (uint8_t)1);
 }
 
 void Level::unset_dungeon (const int x, const int y)
@@ -571,10 +571,10 @@ void Level::unset_dungeon (const int x, const int y)
         return;
     }
     map_changed = true;
-    set(_is_dungeon, x, y, false);
+    decr(_is_dungeon, x, y, (uint8_t)1);
 }
 
-bool Level::is_corpse (const point &p)
+uint8_t Level::is_corpse (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -582,7 +582,7 @@ bool Level::is_corpse (const point &p)
     return (get(_is_corpse, p.x, p.y));
 }
 
-bool Level::is_corpse (const int x, const int y)
+uint8_t Level::is_corpse (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -595,7 +595,7 @@ void Level::set_is_corpse (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_corpse, x, y, true);
+    incr(_is_corpse, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_corpse (const int x, const int y)
@@ -603,10 +603,10 @@ void Level::unset_is_corpse (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_corpse, x, y, false);
+    decr(_is_corpse, x, y, (uint8_t)1);
 }
 
-bool Level::is_fire (const point &p)
+uint8_t Level::is_fire (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -614,7 +614,7 @@ bool Level::is_fire (const point &p)
     return (get(_is_fire, p.x, p.y));
 }
 
-bool Level::is_fire (const int x, const int y)
+uint8_t Level::is_fire (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -627,7 +627,7 @@ void Level::set_is_fire (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_fire, x, y, true);
+    incr(_is_fire, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_fire (const int x, const int y)
@@ -635,10 +635,10 @@ void Level::unset_is_fire (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_fire, x, y, false);
+    decr(_is_fire, x, y, (uint8_t)1);
 }
 
-bool Level::is_monst (const point &p)
+uint8_t Level::is_monst (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -646,7 +646,7 @@ bool Level::is_monst (const point &p)
     return (get(_is_monst, p.x, p.y));
 }
 
-bool Level::is_monst (const int x, const int y)
+uint8_t Level::is_monst (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -659,7 +659,7 @@ void Level::set_is_monst (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_monst, x, y, true);
+    incr(_is_monst, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_monst (const int x, const int y)
@@ -667,10 +667,10 @@ void Level::unset_is_monst (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_monst, x, y, false);
+    decr(_is_monst, x, y, (uint8_t)1);
 }
 
-bool Level::is_door (const point &p)
+uint8_t Level::is_door (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -678,7 +678,7 @@ bool Level::is_door (const point &p)
     return (get(_is_door, p.x, p.y));
 }
 
-bool Level::is_door (const int x, const int y)
+uint8_t Level::is_door (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -691,7 +691,7 @@ void Level::set_is_door (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_door, x, y, true);
+    incr(_is_door, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_door (const int x, const int y)
@@ -699,10 +699,10 @@ void Level::unset_is_door (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_door, x, y, false);
+    decr(_is_door, x, y, (uint8_t)1);
 }
 
-bool Level::is_key (const point &p)
+uint8_t Level::is_key (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -710,7 +710,7 @@ bool Level::is_key (const point &p)
     return (get(_is_key, p.x, p.y));
 }
 
-bool Level::is_key (const int x, const int y)
+uint8_t Level::is_key (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -723,7 +723,7 @@ void Level::set_is_key (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_key, x, y, true);
+    incr(_is_key, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_key (const int x, const int y)
@@ -731,10 +731,10 @@ void Level::unset_is_key (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_key, x, y, false);
+    decr(_is_key, x, y, (uint8_t)1);
 }
 
-bool Level::is_food (const point &p)
+uint8_t Level::is_food (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -742,7 +742,7 @@ bool Level::is_food (const point &p)
     return (get(_is_food, p.x, p.y));
 }
 
-bool Level::is_food (const int x, const int y)
+uint8_t Level::is_food (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -755,7 +755,7 @@ void Level::set_is_food (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_food, x, y, true);
+    incr(_is_food, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_food (const int x, const int y)
@@ -763,10 +763,10 @@ void Level::unset_is_food (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_food, x, y, false);
+    decr(_is_food, x, y, (uint8_t)1);
 }
 
-bool Level::is_treasure (const point &p)
+uint8_t Level::is_treasure (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -774,7 +774,7 @@ bool Level::is_treasure (const point &p)
     return (get(_is_treasure, p.x, p.y));
 }
 
-bool Level::is_treasure (const int x, const int y)
+uint8_t Level::is_treasure (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -787,7 +787,7 @@ void Level::set_is_treasure (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_treasure, x, y, true);
+    incr(_is_treasure, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_treasure (const int x, const int y)
@@ -795,10 +795,10 @@ void Level::unset_is_treasure (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_treasure, x, y, false);
+    decr(_is_treasure, x, y, (uint8_t)1);
 }
 
-bool Level::is_gold (const point &p)
+uint8_t Level::is_gold (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -806,7 +806,7 @@ bool Level::is_gold (const point &p)
     return (get(_is_gold, p.x, p.y));
 }
 
-bool Level::is_gold (const int x, const int y)
+uint8_t Level::is_gold (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -819,7 +819,7 @@ void Level::set_is_gold (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_gold, x, y, true);
+    incr(_is_gold, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_gold (const int x, const int y)
@@ -827,10 +827,10 @@ void Level::unset_is_gold (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_gold, x, y, false);
+    decr(_is_gold, x, y, (uint8_t)1);
 }
 
-bool Level::is_entrance (const point &p)
+uint8_t Level::is_entrance (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -838,7 +838,7 @@ bool Level::is_entrance (const point &p)
     return (get(_is_entrance, p.x, p.y));
 }
 
-bool Level::is_entrance (const int x, const int y)
+uint8_t Level::is_entrance (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -851,7 +851,7 @@ void Level::set_is_entrance (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_entrance, x, y, true);
+    incr(_is_entrance, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_entrance (const int x, const int y)
@@ -859,10 +859,10 @@ void Level::unset_is_entrance (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_entrance, x, y, false);
+    decr(_is_entrance, x, y, (uint8_t)1);
 }
 
-bool Level::is_exit (const point &p)
+uint8_t Level::is_exit (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -870,7 +870,7 @@ bool Level::is_exit (const point &p)
     return (get(_is_exit, p.x, p.y));
 }
 
-bool Level::is_exit (const int x, const int y)
+uint8_t Level::is_exit (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -883,7 +883,7 @@ void Level::set_is_exit (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_exit, x, y, true);
+    incr(_is_exit, x, y, (uint8_t)1);
 }
 
 void Level::unset_is_exit (const int x, const int y)
@@ -891,5 +891,37 @@ void Level::unset_is_exit (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_exit, x, y, false);
+    decr(_is_exit, x, y, (uint8_t)1);
+}
+
+uint8_t Level::is_smoke (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_smoke, p.x, p.y));
+}
+
+uint8_t Level::is_smoke (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_smoke, x, y));
+}
+
+void Level::set_is_smoke (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    incr(_is_smoke, x, y, (uint8_t)1);
+}
+
+void Level::unset_is_smoke (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    decr(_is_smoke, x, y, (uint8_t)1);
 }
