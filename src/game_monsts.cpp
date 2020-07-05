@@ -90,7 +90,7 @@ static void game_monsts_wid_create (void)
         }
 
         auto diff = game->tick_current - t->get_tick();
-        if (diff) {
+        if (diff > 1) {
             auto tp = t->tp();
             auto s = tp->text_name();
 

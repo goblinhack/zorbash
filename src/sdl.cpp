@@ -1396,6 +1396,7 @@ void sdl_loop (void)
             //
             // Update status and sidebars
             //
+#if 0
             if (game && !game->paused()) {
                 if (wid_console_window && wid_console_window->visible) {
                     //
@@ -1405,6 +1406,7 @@ void sdl_loop (void)
                     game_status_wid_init();
                 }
             }
+#endif
 
             //
             // Update FPS counter.
