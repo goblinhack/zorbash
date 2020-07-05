@@ -19,38 +19,38 @@ public:
     //
     // These are caches for fast lookup in display code
     //
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
 
     //
     // When this Level was made. Used to restore timestamps relative to this.
@@ -93,13 +93,13 @@ public:
     //
     // Tile maps for rendering solid blocks of water etc...
     //
-    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
                     water_tile_map = {};
-    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
                     deep_water_tile_map = {};
-    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
                     lava_tile_map = {};
-    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
                     chasm_tile_map = {};
     //
     // All thing IDs
@@ -250,128 +250,133 @@ public:
     bool screen_shake_begin(void);
     void screen_shake_end(void);
 
-    bool is_floor(const int x, const int y);
-    bool is_floor(const point &p);
+    uint8_t is_floor(const int x, const int y);
+    uint8_t is_floor(const point &p);
     void set_is_floor(const int x, const int y);
     void unset_is_floor(const int x, const int y);
 
-    bool is_corridor(const int x, const int y);
-    bool is_corridor(const point &p);
+    uint8_t is_corridor(const int x, const int y);
+    uint8_t is_corridor(const point &p);
     void set_is_corridor(const int x, const int y);
     void unset_is_corridor(const int x, const int y);
 
-    bool is_blood(const int x, const int y);
-    bool is_blood(const point &p);
+    uint8_t is_blood(const int x, const int y);
+    uint8_t is_blood(const point &p);
     void set_is_blood(const int x, const int y);
     void unset_is_blood(const int x, const int y);
 
-    bool is_wall(const int x, const int y);
-    bool is_wall(const point &p);
+    uint8_t is_wall(const int x, const int y);
+    uint8_t is_wall(const point &p);
     void set_is_wall(const int x, const int y);
     void unset_is_wall(const int x, const int y);
 
-    bool is_water(const int x, const int y);
-    bool is_water(const point &p);
+    uint8_t is_smoke(const int x, const int y);
+    uint8_t is_smoke(const point &p);
+    void set_is_smoke(const int x, const int y);
+    void unset_is_smoke(const int x, const int y);
+
+    uint8_t is_water(const int x, const int y);
+    uint8_t is_water(const point &p);
     void set_is_water(const int x, const int y);
     void unset_is_water(const int x, const int y);
 
-    bool is_lava(const int x, const int y);
-    bool is_lava(const point &p);
+    uint8_t is_lava(const int x, const int y);
+    uint8_t is_lava(const point &p);
     void set_is_lava(const int x, const int y);
     void unset_is_lava(const int x, const int y);
 
-    bool is_acid(const int x, const int y);
-    bool is_acid(const point &p);
+    uint8_t is_acid(const int x, const int y);
+    uint8_t is_acid(const point &p);
     void set_is_acid(const int x, const int y);
     void unset_is_acid(const int x, const int y);
 
-    bool is_chasm(const int x, const int y);
-    bool is_chasm(const point &p);
+    uint8_t is_chasm(const int x, const int y);
+    uint8_t is_chasm(const point &p);
     void set_is_chasm(const int x, const int y);
     void unset_is_chasm(const int x, const int y);
 
-    bool is_hazard(const int x, const int y);
-    bool is_hazard(const point &p);
+    uint8_t is_hazard(const int x, const int y);
+    uint8_t is_hazard(const point &p);
     void set_is_hazard(const int x, const int y);
     void unset_is_hazard(const int x, const int y);
 
-    bool is_secret_door(const int x, const int y);
-    bool is_secret_door(const point &p);
+    uint8_t is_secret_door(const int x, const int y);
+    uint8_t is_secret_door(const point &p);
     void set_is_secret_door(const int x, const int y);
     void unset_is_secret_door(const int x, const int y);
 
-    bool is_generator(const int x, const int y);
-    bool is_generator(const point &p);
+    uint8_t is_generator(const int x, const int y);
+    uint8_t is_generator(const point &p);
     void set_is_generator(const int x, const int y);
     void unset_is_generator(const int x, const int y);
 
-    bool is_corpse(const int x, const int y);
-    bool is_corpse(const point &p);
+    uint8_t is_corpse(const int x, const int y);
+    uint8_t is_corpse(const point &p);
     void set_is_corpse(const int x, const int y);
     void unset_is_corpse(const int x, const int y);
 
-    bool is_fire(const int x, const int y);
-    bool is_fire(const point &p);
+    uint8_t is_fire(const int x, const int y);
+    uint8_t is_fire(const point &p);
     void set_is_fire(const int x, const int y);
     void unset_is_fire(const int x, const int y);
 
-    bool is_monst(const int x, const int y);
-    bool is_monst(const point &p);
+    uint8_t is_monst(const int x, const int y);
+    uint8_t is_monst(const point &p);
     void set_is_monst(const int x, const int y);
     void unset_is_monst(const int x, const int y);
 
-    bool is_door(const int x, const int y);
-    bool is_door(const point &p);
+    uint8_t is_door(const int x, const int y);
+    uint8_t is_door(const point &p);
     void set_is_door(const int x, const int y);
     void unset_is_door(const int x, const int y);
 
-    bool is_key(const int x, const int y);
-    bool is_key(const point &p);
+    uint8_t is_key(const int x, const int y);
+    uint8_t is_key(const point &p);
     void set_is_key(const int x, const int y);
     void unset_is_key(const int x, const int y);
 
-    bool is_food(const int x, const int y);
-    bool is_food(const point &p);
+    uint8_t is_food(const int x, const int y);
+    uint8_t is_food(const point &p);
     void set_is_food(const int x, const int y);
     void unset_is_food(const int x, const int y);
 
-    bool is_treasure(const int x, const int y);
-    bool is_treasure(const point &p);
+    uint8_t is_treasure(const int x, const int y);
+    uint8_t is_treasure(const point &p);
     void set_is_treasure(const int x, const int y);
     void unset_is_treasure(const int x, const int y);
 
-    bool is_gold(const int x, const int y);
-    bool is_gold(const point &p);
+    uint8_t is_gold(const int x, const int y);
+    uint8_t is_gold(const point &p);
     void set_is_gold(const int x, const int y);
     void unset_is_gold(const int x, const int y);
 
-    bool is_entrance(const int x, const int y);
-    bool is_entrance(const point &p);
+    uint8_t is_entrance(const int x, const int y);
+    uint8_t is_entrance(const point &p);
     void set_is_entrance(const int x, const int y);
     void unset_is_entrance(const int x, const int y);
 
-    bool is_exit(const int x, const int y);
-    bool is_exit(const point &p);
+    uint8_t is_exit(const int x, const int y);
+    uint8_t is_exit(const point &p);
     void set_is_exit(const int x, const int y);
     void unset_is_exit(const int x, const int y);
 
-    bool is_deep_water(const int x, const int y);
-    bool is_deep_water(const point &p);
+    uint8_t is_deep_water(const int x, const int y);
+    uint8_t is_deep_water(const point &p);
     void set_is_deep_water(const int x, const int y);
     void unset_is_deep_water(const int x, const int y);
 
-    bool is_dirt(const int x, const int y);
-    bool is_dirt(const point &p);
+    uint8_t is_dirt(const int x, const int y);
+    uint8_t is_dirt(const point &p);
     void set_is_dirt(const int x, const int y);
     void unset_is_dirt(const int x, const int y);
 
-    bool is_rock(const int x, const int y);
-    bool is_rock(const point &p);
+    uint8_t is_rock(const int x, const int y);
+    uint8_t is_rock(const point &p);
     void set_is_rock(const int x, const int y);
     void unset_is_rock(const int x, const int y);
 
-    bool is_dungeon(const int x, const int y);
-    bool is_dungeon(const point &p);
+    uint8_t is_dungeon(const int x, const int y);
+    uint8_t is_dungeon(const point &p);
     void set_dungeon(const int x, const int y);
     void unset_dungeon(const int x, const int y);
 
@@ -695,61 +700,6 @@ public:
     inline void unset_is_lit_no_check (const int x, const int y)
     {
         set_no_check(_is_lit, x, y, false);
-    }
-
-    //
-    // Used in lighting, so inlined
-    //
-    inline bool is_smoke (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_smoke, p.x, p.y));
-    }
-
-    inline bool is_smoke_no_check (const point &p)
-    {
-        return (get_no_check(_is_smoke, p.x, p.y));
-    }
-
-    inline bool is_smoke (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_smoke, x, y));
-    }
-
-    inline bool is_smoke_no_check (const int x, const int y)
-    {
-        return (get_no_check(_is_smoke, x, y));
-    }
-
-    inline void set_is_smoke (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_smoke, x, y, true);
-    }
-
-    inline void set_is_smoke_no_check (const int x, const int y)
-    {
-        set_no_check(_is_smoke, x, y, true);
-    }
-
-    inline void unset_is_smoke (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_smoke, x, y, false);
-    }
-
-    inline void unset_is_smoke_no_check (const int x, const int y)
-    {
-        set_no_check(_is_smoke, x, y, false);
     }
 
     void new_internal_particle(point start, point end, size sz, uint32_t dur, Tilep tile);

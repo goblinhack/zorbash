@@ -48,6 +48,8 @@ bool Thing::descend (void)
         game->current_level = next_level;
     }
 
+    log("is trying to descend");
+
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
         if (is_player()) {
