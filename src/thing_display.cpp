@@ -702,20 +702,27 @@ void Thing::blit_internal (point &blit_tl,
         blit_text(get_msg(), WHITE, blit_tl, blit_br);
     }
 
-    if (!reflection) {
-        if (is_monst() && !is_dead) {
-            auto h = get_stats_health();
-            int i = ((float)h / (float)get_stats_health_max()) *
-                    (float)UI_HEALTH_ICON_STEPS;
-            i = std::min(i, UI_HEALTH_ICON_STEPS);
-            i = std::max(i, 1);
-            std::string t = "%tile=health" + std::to_string(i) + "-icon$";
-            std::string s = std::to_string(h) + t;
+    //
+    // Reflections have not tile
+    //
+    if (tile) {
+        //
+        // If visible, show the things healthbar
+        //
+        if (!reflection && !tile->is_invisible) {
+            if (is_monst() && !is_dead) {
+                auto h = get_stats_health();
+                int i = ((float)h / (float)get_stats_health_max()) *
+                        (float)UI_HEALTH_ICON_STEPS;
+                i = std::min(i, UI_HEALTH_ICON_STEPS);
+                i = std::max(i, 1);
+                std::string s = "%tile=health" + std::to_string(i) + "-icon$";
 
-            auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
-            blit_text(s, GRAY80,
-                      point(blit_tl.x, y),
-                      point(blit_br.x, y));
+                auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
+                blit_text(s, GRAY80,
+                          point(blit_tl.x, y),
+                          point(blit_br.x, y));
+            }
         }
     }
 
