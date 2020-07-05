@@ -28,6 +28,10 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         return (false);
     }
 
+    if (player->is_dead) {
+        return true;
+    }
+
     //
     // If mid air, we're done. Let other things move.
     //
