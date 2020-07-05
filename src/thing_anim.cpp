@@ -162,7 +162,7 @@ if (is_monst()) { log("tile %s moving %d up %d down %d left %d right %d dirnone 
                        tile_is_dir_br(tile));
                   }
 #endif
-            if (!is_resurrected) {
+            if (!is_resurrecting) {
                 if (tile_is_resurrecting(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
