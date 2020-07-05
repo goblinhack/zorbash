@@ -1914,7 +1914,7 @@ int Thing::incr_tick_rate_tenths (void)
 ////////////////////////////////////////////////////////////////////////////
 // attack_resurrect_when
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_tick_resurrect_when (void) const
+uint32_t Thing::get_tick_resurrect_when (void) const
 {_
     if (monstp) {
         verify(monstp);
@@ -1924,7 +1924,7 @@ int Thing::get_tick_resurrect_when (void) const
     }
 }
 
-int Thing::set_tick_resurrect_when (int v)
+uint32_t Thing::set_tick_resurrect_when (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1933,7 +1933,7 @@ int Thing::set_tick_resurrect_when (int v)
     return (n);
 }
 
-int Thing::decr_tick_resurrect_when (int v)
+uint32_t Thing::decr_tick_resurrect_when (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1942,7 +1942,7 @@ int Thing::decr_tick_resurrect_when (int v)
     return (n);
 }
 
-int Thing::incr_tick_resurrect_when (int v)
+uint32_t Thing::incr_tick_resurrect_when (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1951,7 +1951,7 @@ int Thing::incr_tick_resurrect_when (int v)
     return (n);
 }
 
-int Thing::decr_tick_resurrect_when (void)
+uint32_t Thing::decr_tick_resurrect_when (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1960,7 +1960,7 @@ int Thing::decr_tick_resurrect_when (void)
     return (n);
 }
 
-int Thing::incr_tick_resurrect_when (void)
+uint32_t Thing::incr_tick_resurrect_when (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);

@@ -340,12 +340,12 @@ public:
     int decr_tick_rate_tenths(void);
     int incr_tick_rate_tenths(void);
 
-    int set_tick_resurrect_when(int);
-    int get_tick_resurrect_when(void) const;
-    int decr_tick_resurrect_when(int);
-    int incr_tick_resurrect_when(int);
-    int decr_tick_resurrect_when(void);
-    int incr_tick_resurrect_when(void);
+    uint32_t set_tick_resurrect_when(int);
+    uint32_t get_tick_resurrect_when(void) const;
+    uint32_t decr_tick_resurrect_when(int);
+    uint32_t incr_tick_resurrect_when(int);
+    uint32_t decr_tick_resurrect_when(void);
+    uint32_t incr_tick_resurrect_when(void);
 
     int set_stats01(int);
     int get_stats01(void) const;
