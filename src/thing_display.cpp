@@ -719,9 +719,19 @@ void Thing::blit_internal (point &blit_tl,
                     UI_MONST_HEALTH_BAR_STEPS;
             i = std::min(i, UI_MONST_HEALTH_BAR_STEPS);
             i = std::max(i, 1);
-            std::string s = "health" + std::to_string(i);
             auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
             auto x = (blit_tl.x + blit_br.x) / 2;
+
+            auto diff = game->tick_current - get_tick();
+            if ((diff > 0) && (diff <= THING_TICK_MAX_MOVES_AHEAD)) {
+                std::string s = "clock" + std::to_string(diff);
+                auto tile = tile_find_mand(s);
+                tile_blit(tile,
+                        point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
+                        point(x + TILE_WIDTH / 2, y));
+            }
+
+            std::string s = "health" + std::to_string(i);
             auto tile = tile_find_mand(s);
             tile_blit(tile,
                       point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
