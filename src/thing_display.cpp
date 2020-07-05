@@ -709,20 +709,23 @@ void Thing::blit_internal (point &blit_tl,
         //
         // If visible, show the things healthbar
         //
-        if (!reflection && !tile->is_invisible) {
-            if (is_monst() && !is_dead) {
-                auto h = get_stats_health();
-                int i = (1.0 - ((float)h / (float)get_stats_health_max())) *
-                        UI_MONST_HEALTH_BAR_STEPS;
-                i = std::min(i, UI_MONST_HEALTH_BAR_STEPS);
-                i = std::max(i, 1);
-                std::string s = "%tile=health" + std::to_string(i) + "$";
-
-                auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
-                blit_text(s, GRAY80,
-                          point(blit_tl.x, y),
-                          point(blit_br.x, y));
-            }
+        if (!reflection &&
+            !tile->is_invisible &&
+            is_monst() &&
+            !is_dead &&
+            level->is_lit_no_check(mid_at.x, mid_at.y)) {
+            auto h = get_stats_health();
+            int i = (1.0 - ((float)h / (float)get_stats_health_max())) *
+                    UI_MONST_HEALTH_BAR_STEPS;
+            i = std::min(i, UI_MONST_HEALTH_BAR_STEPS);
+            i = std::max(i, 1);
+            std::string s = "health" + std::to_string(i);
+            auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
+            auto x = (blit_tl.x + blit_br.x) / 2;
+            auto tile = tile_find_mand(s);
+            tile_blit(tile,
+                      point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
+                      point(x + TILE_WIDTH / 2, y));
         }
     }
 

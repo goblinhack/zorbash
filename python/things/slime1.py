@@ -35,7 +35,6 @@ def tp_init(name, text_name):
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
     x.set_is_movable(True)
-    x.set_is_movement_blocking(True)
     x.set_is_sidebar_item(True)
     x.set_is_slime(True)
     x.set_is_slime_baby(True)
