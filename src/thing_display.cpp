@@ -234,7 +234,6 @@ void Thing::blit_text (std::string const& text, color fg,
     int l = blit_msg_strlen(text);
 
     blit_tl.x = ((blit_br.x + blit_tl.x) / 2) - (UI_FONT_PIXEL_SIZE * l / 2);
-    blit_br.x = blit_tl.x + UI_FONT_PIXEL_SIZE - 1;
     blit_tl.y = blit_tl.y - UI_FONT_PIXEL_SIZE - 1;
     blit_br.y = blit_tl.y + UI_FONT_PIXEL_SIZE - 1;
 
@@ -712,11 +711,11 @@ void Thing::blit_internal (point &blit_tl,
         if (!reflection && !tile->is_invisible) {
             if (is_monst() && !is_dead) {
                 auto h = get_stats_health();
-                int i = ((float)h / (float)get_stats_health_max()) *
-                        (float)UI_HEALTH_ICON_STEPS;
-                i = std::min(i, UI_HEALTH_ICON_STEPS);
+                int i = (1.0 - ((float)h / (float)get_stats_health_max())) *
+                        UI_MONST_HEALTH_BAR_STEPS;
+                i = std::min(i, UI_MONST_HEALTH_BAR_STEPS);
                 i = std::max(i, 1);
-                std::string s = "%tile=health" + std::to_string(i) + "-icon$";
+                std::string s = "%tile=health" + std::to_string(i) + "$";
 
                 auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
                 blit_text(s, GRAY80,
