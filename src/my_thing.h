@@ -682,6 +682,7 @@ public:
     bool try_to_jump(void);
     bool try_to_jump(point p);
     bool try_to_escape(void);
+    void jump_end(void);
 
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);

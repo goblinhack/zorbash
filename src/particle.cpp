@@ -130,8 +130,7 @@ void Level::display_external_particles (void)
                 if (p.id.id) {
                     auto t = thing_find(p.id);
                     if (t) {
-                        t->log("end of jump");
-                        t->is_jumping = false;
+                        t->jump_end();
                     }
                 }
                 return true;

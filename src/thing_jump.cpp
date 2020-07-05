@@ -28,7 +28,14 @@ bool Thing::try_to_jump (point to)
     }
 
     auto fto = make_fpoint(to);
-    if (distance(mid_at, fto) > is_jumper_distance()) {
+
+    //
+    // Add some random delta for fun and some for diagonals
+    //
+    auto how_far_i_can_jump = (float) is_jumper_distance() +
+        0.5 + (random_range(0, 100) / 100.0);
+
+    if (distance(mid_at, fto) > how_far_i_can_jump) {
         auto u = (fto - mid_at);
         u.unit();
         u *= is_jumper_distance();
@@ -40,7 +47,7 @@ bool Thing::try_to_jump (point to)
         // Not sure I want to. This allows for more fun.
         //
         // check_dest = true;
-        log("jump instead to %d,%d", x, y);
+        log("too far, jump instead to %d,%d", x, y);
     }
 
     if (is_monst()) {
@@ -102,6 +109,62 @@ bool Thing::try_to_jump (point to)
 
     is_jumping = true;
     move_to_immediately(fpoint(x, y));
+
+    //
+    // Weapons follow also.
+    //
+    if (get_weapon_id_carry_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_carry_anim());
+        if (w) {
+            w->move_to_immediately(mid_at);
+            w->is_jumping = true;
+        }
+    }
+
+    if (get_weapon_id_use_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_use_anim());
+        if (w) {
+            w->move_to_immediately(mid_at);
+            w->is_jumping = true;
+        }
+    }
+
+    //
+    // Move carried items too as when we attack, we will use say the
+    // carried sword and so it had better be in the same location.
+    //
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (o) {
+            o->move_to_immediately(mid_at);
+            o->is_jumping = true;
+        }
+    }
+
+    auto on_fire_anim_id = get_on_fire_anim_id();
+    if (on_fire_anim_id.ok()) {_
+        auto w = level->thing_find(on_fire_anim_id);
+        if (w) {
+            w->move_to_immediately(mid_at);
+            w->is_jumping = true;
+        }
+    }
+
+    //
+    // If something moves on the water, make a ripple
+    //
+    if (is_monst() || is_player()) {
+        if (!is_floating()) {
+            if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
+                fpoint at(mid_at.x, mid_at.y);
+                log("causes ripples");
+                if (random_range(0, 1000) > 500) {
+                    level->thing_new(tp_random_ripple()->name(), at);
+                }
+            }
+        }
+    }
+
     wobble(25);
 
     return (true);
@@ -120,4 +183,63 @@ bool Thing::try_to_jump (void)
         }
     }
     return (false);
+}
+
+void Thing::jump_end (void)
+{
+    log("end of jump");
+    is_jumping = false;
+
+    //
+    // Weapons follow also.
+    //
+    if (get_weapon_id_carry_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_carry_anim());
+        if (w) {
+            w->is_jumping = false;
+        }
+    }
+
+    if (get_weapon_id_use_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_use_anim());
+        if (w) {
+            w->is_jumping = false;
+        }
+    }
+
+    //
+    // Move carried items too as when we attack, we will use say the
+    // carried sword and so it had better be in the same location.
+    //
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (o) {
+            o->is_jumping = false;
+        }
+    }
+
+    auto on_fire_anim_id = get_on_fire_anim_id();
+    if (on_fire_anim_id.ok()) {_
+        auto w = level->thing_find(on_fire_anim_id);
+        if (w) {
+            w->is_jumping = false;
+        }
+    }
+
+    //
+    // If something moves on the water, make a ripple
+    //
+    if (is_monst() || is_player()) {
+        if (!is_floating()) {
+            if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
+                fpoint at(mid_at.x, mid_at.y);
+                log("causes ripples");
+                if (random_range(0, 1000) > 500) {
+                    level->thing_new(tp_random_ripple()->name(), at);
+                }
+            }
+        }
+    }
+
+    wobble(25);
 }
