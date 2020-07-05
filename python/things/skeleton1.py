@@ -5,7 +5,7 @@ def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
     x.set_ai_delay_after_moving_ms(100)
-    x.set_ai_scent_distance(20)
+    x.set_ai_scent_distance(10)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)

@@ -10,6 +10,7 @@
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
+#include "my_game.h"
 
 bool Thing::ai_blocked (void)
 {_
@@ -186,12 +187,33 @@ bool Thing::ai_choose_wander (point& nh)
 
 bool Thing::ai_wander (void)
 {_
-    if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS,
-                                         get_timestamp_last_wander_try())) {
-        log("AI wander blocked; too frequent, last try %u, %u ms ago",
-            get_timestamp_last_wander_try(),
-            time_get_time_ms_cached() - get_timestamp_last_wander_try());
-        return false;
+    //
+    // If AI is making us too slow, use a longer delay
+    //
+    if (game->fps_value < 55) {
+        if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS * 4,
+                                            get_timestamp_last_wander_try())) {
+            log("AI wander vdamped; too frequent, last try %u, %u ms ago",
+                get_timestamp_last_wander_try(),
+                time_get_time_ms_cached() - get_timestamp_last_wander_try());
+            return false;
+        }
+    } else if (game->fps_value < 60) {
+        if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS * 2,
+                                            get_timestamp_last_wander_try())) {
+            log("AI wander damped; too frequent, last try %u, %u ms ago",
+                get_timestamp_last_wander_try(),
+                time_get_time_ms_cached() - get_timestamp_last_wander_try());
+            return false;
+        }
+    } else {
+        if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS,
+                                            get_timestamp_last_wander_try())) {
+            log("AI wander blocked; too frequent, last try %u, %u ms ago",
+                get_timestamp_last_wander_try(),
+                time_get_time_ms_cached() - get_timestamp_last_wander_try());
+            return false;
+        }
     }
     set_timestamp_last_wander_try(time_get_time_ms_cached());
 
