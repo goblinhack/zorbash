@@ -58,6 +58,7 @@
 #define THING_HEALTH_BLOODIED_PCT3 15   // More...
 #define THING_HEALTH_BLOODIED_PCT4 5    // Lots of blood on screen
 #define THING_TICK_MAX_MOVES_AHEAD 10   // How many moves ahead things get
+#define THING_AI_WANDER_FREQ_TENTHS 3   // How often we can wander
 #define TILE_HEIGHT                16
 #define TILE_HEIGHT_MAX            64
 #define TILE_WIDTH                 16   // Tile size of the player
