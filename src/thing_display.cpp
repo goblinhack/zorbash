@@ -234,6 +234,7 @@ void Thing::blit_text (std::string const& text, color fg,
     int l = blit_msg_strlen(text);
 
     blit_tl.x = ((blit_br.x + blit_tl.x) / 2) - (UI_FONT_PIXEL_SIZE * l / 2);
+    blit_br.x = blit_tl.x + UI_FONT_PIXEL_SIZE - 1;
     blit_tl.y = blit_tl.y - UI_FONT_PIXEL_SIZE - 1;
     blit_br.y = blit_tl.y + UI_FONT_PIXEL_SIZE - 1;
 
