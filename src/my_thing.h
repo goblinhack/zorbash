@@ -288,11 +288,12 @@ public:
     void set_submerged_offset(int);
     int get_submerged_offset(void) const;
     uint32_t set_tick(uint32_t);
-    uint32_t get_tick(void) const;
+    uint32_t get_tick(void);
     uint32_t decr_tick(uint32_t);
     uint32_t incr_tick(uint32_t);
     uint32_t decr_tick(void);
     uint32_t incr_tick(void);
+    uint32_t set_max_tick_difference();
 
     int set_gold(int);
     int get_gold(void) const;

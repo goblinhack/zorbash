@@ -57,6 +57,7 @@
 #define THING_HEALTH_BLOODIED_PCT2 25   // More...
 #define THING_HEALTH_BLOODIED_PCT3 15   // More...
 #define THING_HEALTH_BLOODIED_PCT4 5    // Lots of blood on screen
+#define THING_TICK_MAX_MOVES_AHEAD 10   // How many moves ahead things get
 #define TILE_HEIGHT                16
 #define TILE_HEIGHT_MAX            64
 #define TILE_WIDTH                 16   // Tile size of the player
@@ -91,16 +92,16 @@
 #define UI_MINICON_VIS_WIDTH       UI_MINICON_WIDTH
 #define UI_MINICON_WIDTH           (ASCII_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
 #define UI_POLL_EVENTS_MS          10
-#define UI_UPDATE_SLOW_MS          250 // FPS and game status
 #define UI_POPUP_TEXT_COLOR        UI_TEXT_COLOR
 #define UI_SCROLL_JOY_SCALE        1.0
 #define UI_SCROLL_JOY_SCALE_MAX    1.5
 #define UI_SCROLL_WHEEL_SCALE      1.0 // How much the wheel mouse moves.
 #define UI_SCROLL_WHEEL_SCALE_MAX  10
-#define UI_SIDEBAR_RIGHT_WIDTH     14
 #define UI_SIDEBAR_LEFT_WIDTH      12
+#define UI_SIDEBAR_RIGHT_WIDTH     14
 #define UI_TEXT_COLOR              GRAY // Default text color
 #define UI_TEXT_COLOR_STR          "gray"
+#define UI_UPDATE_SLOW_MS          250 // FPS and game status
 #define UI_WID_POPUP_WIDTH_NORMAL  24
 #define UI_WID_POPUP_WIDTH_WIDE    38
 #define UI_WID_POPUP_WIDTH_WIDEST  48

@@ -121,4 +121,3 @@ def init():
     tp_init(name="giant-skeleton1", text_name="giant skeleton")
 
 init()
-

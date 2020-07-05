@@ -9,6 +9,7 @@
 #include "my_color.h"
 #include "my_dmap.h"
 #include "my_game_status.h"
+#include "my_game.h"
 #include "my_thing.h"
 
 //
@@ -1534,10 +1535,20 @@ int Thing::incr_gold (void)
 ////////////////////////////////////////////////////////////////////////////
 // tick
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick (void) const
+uint32_t Thing::set_max_tick_difference (void)
+{_
+    if (game->tick_current > THING_TICK_MAX_MOVES_AHEAD) {
+        monstp->tick = std::max(monstp->tick,
+                                game->tick_current - THING_TICK_MAX_MOVES_AHEAD);
+    }
+    return (monstp->tick);
+}
+
+uint32_t Thing::get_tick (void)
 {_
     if (monstp) {
         verify(monstp);
+        set_max_tick_difference();
         return (monstp->tick);
     } else {
         return (0);
@@ -1549,6 +1560,7 @@ uint32_t Thing::set_tick (uint32_t v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick = v);
+    n = set_max_tick_difference();
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1557,7 +1569,12 @@ uint32_t Thing::decr_tick (uint32_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->tick -= v);
+    auto o = monstp->tick;
+    auto n = set_max_tick_difference();
+    if (n != o) {
+        return n;
+    }
+    n = (monstp->tick -= v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1566,7 +1583,12 @@ uint32_t Thing::incr_tick (uint32_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->tick += v);
+    auto o = monstp->tick;
+    auto n = set_max_tick_difference();
+    if (n != o) {
+        return n;
+    }
+    n = (monstp->tick += v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1575,7 +1597,12 @@ uint32_t Thing::decr_tick (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->tick--);
+    auto o = monstp->tick;
+    auto n = set_max_tick_difference();
+    if (n != o) {
+        return n;
+    }
+    n = (monstp->tick--);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1584,7 +1611,12 @@ uint32_t Thing::incr_tick (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->tick++);
+    auto o = monstp->tick;
+    auto n = set_max_tick_difference();
+    if (n != o) {
+        return n;
+    }
+    n = (monstp->tick++);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }

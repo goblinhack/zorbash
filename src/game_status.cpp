@@ -321,7 +321,7 @@ static void game_status_wid_create (void)
     {_
         auto w = wid_new_plain(wid_sidebar, "health-value");
         point tl = make_point(3, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
@@ -404,7 +404,7 @@ static void game_status_wid_create (void)
     {_
         auto w = wid_new_plain(wid_sidebar, "defence-status-bar");
         point tl = make_point(2, y_at);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
@@ -431,7 +431,7 @@ static void game_status_wid_create (void)
     {_
         auto w = wid_new_plain(wid_sidebar, "defence-value");
         point tl = make_point(3, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
