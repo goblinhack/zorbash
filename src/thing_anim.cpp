@@ -5,7 +5,7 @@
 
 #include "my_thing.h"
 
-#define DEBUG_ANIM
+#undef DEBUG_ANIM
 
 void Thing::animate (void)
 {_
@@ -169,7 +169,7 @@ if (is_monst()) { log("tile %s moving %d up %d down %d left %d right %d dirnone 
                 }
             }
 
-            if (!is_dead) {
+            if (!is_dead && !is_resurrecting) {
                 if (tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
@@ -179,9 +179,6 @@ if (is_monst()) { log("tile %s moving %d up %d down %d left %d right %d dirnone 
                 auto health = get_stats_health();
 
                 if (tpp->internal_has_hp_anim()) {
-#ifdef DEBUG_ANIM
-if (is_monst()) { log("  has hp anim tiles hp %d max %d", health, health_max); }
-#endif
                     if (health < health_max / 4) {
                         if (!tile_is_hp_25_percent(tile)) {
                             tile = tile_next(tiles, tile);
