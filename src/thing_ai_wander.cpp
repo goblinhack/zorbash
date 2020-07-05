@@ -186,7 +186,8 @@ bool Thing::ai_choose_wander (point& nh)
 
 bool Thing::ai_wander (void)
 {_
-    if (!time_have_x_tenths_passed_since(10, get_timestamp_last_wander_try())) {
+    if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS,
+                                         get_timestamp_last_wander_try())) {
         log("AI wander blocked; too frequent, last try %u, %u ms ago",
             get_timestamp_last_wander_try(),
             time_get_time_ms_cached() - get_timestamp_last_wander_try());
