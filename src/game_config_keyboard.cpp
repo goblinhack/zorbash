@@ -799,7 +799,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "jump to mouse target");
+        wid_set_text(w, "Jump");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
