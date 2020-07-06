@@ -22,9 +22,20 @@ void Thing::hide (void)
     //
     // Hide the weapon too or it just floats in the air.
     //
-    auto weapon_carry_anim = weapon_get_carry_anim();
-    if (weapon_carry_anim) {
-        weapon_carry_anim->hide();
+    if (get_weapon_id_carry_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_carry_anim());
+        if (w) { w->hide(); }
+    }
+
+    if (get_weapon_id_use_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_use_anim());
+        if (w) { w->hide(); }
+    }
+
+    auto on_fire_anim_id = get_on_fire_anim_id();
+    if (on_fire_anim_id.ok()) {_
+        auto w = level->thing_find(on_fire_anim_id);
+        if (w) { w->hide(); }
     }
 
     log("is now hidden");
@@ -57,9 +68,20 @@ void Thing::visible (void)
     //
     // Reveal the weapon again too.
     //
-    auto weapon_carry_anim = weapon_get_carry_anim();
-    if (weapon_carry_anim) {
-        weapon_carry_anim->visible();
+    if (get_weapon_id_carry_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_carry_anim());
+        if (w) { w->visible(); }
+    }
+
+    if (get_weapon_id_use_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_use_anim());
+        if (w) { w->visible(); }
+    }
+
+    auto on_fire_anim_id = get_on_fire_anim_id();
+    if (on_fire_anim_id.ok()) {_
+        auto w = level->thing_find(on_fire_anim_id);
+        if (w) { w->visible(); }
     }
 }
 

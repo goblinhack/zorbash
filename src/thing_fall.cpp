@@ -37,7 +37,7 @@ float Thing::get_fall (void)
         (float)(t - get_timestamp_bounce_begin()) /
         (float)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
 
-    if (time_step > 0.9) {
+    if (time_step > 0.8) {
         hide();
     }
 
