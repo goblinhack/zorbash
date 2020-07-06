@@ -11,7 +11,7 @@
 
 static WidPopup *game_main_menu_window;
 
-static void game_main_menu_destroy (void)
+void game_main_menu_destroy (void)
 {_
     delete game_main_menu_window;
     game_main_menu_window = nullptr;
@@ -49,6 +49,13 @@ uint8_t game_main_menu_config (Widp w, int32_t x, int32_t y, uint32_t button)
     return (false);
 }
 
+uint8_t game_main_menu_credits_game (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    game->credits_select();
+    game_main_menu_destroy();
+    return (false);
+}
+
 uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->quit_select();
@@ -80,6 +87,9 @@ uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
                         return (true);
                     case 'o':
                         game_main_menu_config(nullptr, 0, 0, 0);
+                        return (true);
+                    case 'c':
+                        game_main_menu_credits_game(nullptr, 0, 0, 0);
                         return (true);
                     case 'q':
                         game_main_menu_quit_game(nullptr, 0, 0, 0);
@@ -134,7 +144,7 @@ void game_main_menu_tick (Widp w)
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
               point(game->config.outer_pix_width,
-                     game->config.outer_pix_height));
+                    game->config.outer_pix_height));
     blit_flush();
 
     ascii_putf(1, ASCII_HEIGHT - 2, GREEN, BLACK, L"Version " VERSION);
@@ -153,7 +163,7 @@ void Game::main_menu_select (void)
     }
     game_status_wid_fini();
 
-    point tl = make_point(ASCII_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 16);
+    point tl = make_point(ASCII_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 19);
     point br = make_point(ASCII_WIDTH - 7, ASCII_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
@@ -200,6 +210,18 @@ void Game::main_menu_select (void)
         wid_set_on_mouse_up(w, game_main_menu_config);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$O%%fg=reset$ptions");
+    }
+    y_at += 3;
+    {_
+        auto p = game_main_menu_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Credits");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, game_main_menu_credits_game);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "%%fg=white$C%%fg=reset$redits");
     }
     y_at += 3;
     {_

@@ -25,6 +25,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_config_sound.o	\
     $(OBJDIR)/game_config_top.o 	\
     $(OBJDIR)/game_dead.o 		\
+    $(OBJDIR)/game_credits.o 		\
     $(OBJDIR)/game_display.o 		\
     $(OBJDIR)/game_dump.o 		\
     $(OBJDIR)/game_error.o 		\

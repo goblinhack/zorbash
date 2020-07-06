@@ -17,8 +17,12 @@
 
 WidTextBox::~WidTextBox()
 {
-    wid_destroy(&wid_vert_scroll);
-    wid_destroy(&wid_horiz_scroll);
+    if (wid_horiz_scroll) {
+        wid_destroy(&wid_horiz_scroll);
+    }
+    if (wid_vert_scroll) {
+        wid_destroy(&wid_vert_scroll);
+    }
     wid_destroy(&wid_text_last);
     wid_destroy(&wid_text_area);
 }
@@ -134,13 +138,20 @@ void WidTextBox::log_ (std::wstring str)
             wid_set_text(tmp, str);
         }
     }
-    wid_move_to_top(wid_vert_scroll);
+
+    if (wid_vert_scroll) {
+        wid_move_to_top(wid_vert_scroll);
+    }
     line_count++;
 
     int show_scrollbars_at = wid_get_height(wid_text_area);
     if (line_count > show_scrollbars_at) {
-        wid_visible(wid_get_parent(wid_horiz_scroll));
-        wid_visible(wid_get_parent(wid_vert_scroll));
+        if (wid_horiz_scroll) {
+            wid_visible(wid_get_parent(wid_horiz_scroll));
+        }
+        if (wid_vert_scroll) {
+            wid_visible(wid_get_parent(wid_vert_scroll));
+        }
     }
 }
 

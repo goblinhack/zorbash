@@ -32,6 +32,7 @@ def tp_init(name, text_name):
     x.set_is_movement_blocking(True)
     x.set_is_resurrectable(True)
     x.set_is_shovable(True)
+    x.set_is_sidebar_item(True)
     x.set_is_water_hater(100)
     x.set_light_color("cyan")
     x.set_normal_placement_rules(True)

@@ -87,8 +87,16 @@ def init_ui_dead():
         "ui_dead",
     ]
     zx.tile_load_arr(
-        file="data/gfx/rip.tga",
+        file="data/gfx/ui_dead.tga",
         name="ui_dead", width=80, height=100, arr=tiles)
+
+def init_ui_credits():
+    tiles = [
+        "ui_credits",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_credits.tga",
+        name="ui_credits", width=112, height=84, arr=tiles)
 
 def init_ui_action_bar():
     tiles = [
@@ -1377,6 +1385,7 @@ init_bloom()
 init_ui_status_bar()
 init_ui_status_bar_title()
 init_ui_dead()
+init_ui_credits()
 init_ui_action_bar()
 init_ui_action_bar_highlight()
 init_16x16()

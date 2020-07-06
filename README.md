@@ -16,11 +16,13 @@ free attacks waiting.
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.
 
-Credits
--------
-The graphics are a mixture of my own terrible programmer-art efforts combined with
-a selection of the amazing Oryx tilesets [found here](https://www.oryxdesignlab.com/)
-some modified in size.
+Graphics
+--------
+Oryx tilesets [found here](https://www.oryxdesignlab.com/)
+
+Music
+-----
+Markus Heichelbech (deceased senior technician): [found here](http://nosoapradio.us)
 
 Screenshots
 -----------
@@ -34,6 +36,7 @@ Screenshots
 ![Alt text](pics/screenshot.8.png?raw=true "")
 ![Alt text](pics/screenshot.9.png?raw=true "")
 ![Alt text](pics/screenshot.10.png?raw=true "")
+![Alt text](pics/screenshot.11.png?raw=true "")
 
 How to build
 ------------
