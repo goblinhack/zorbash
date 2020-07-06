@@ -238,13 +238,23 @@ public:
     }
 
     uint8_t z_depth (void) const
-    {_
+    {
         return (tp()->z_depth);
     }
 
     uint8_t z_prio (void) const
-    {_
+    {
         return (tp()->z_prio);
+    }
+
+    std::size_t get_light_count (void) const
+    {
+        if (monstp) {
+            verify(monstp);
+            return (monstp->light.size());
+        } else {
+            return (0);
+        }
     }
 
     void new_monst(void);
@@ -261,7 +271,6 @@ public:
     void clear_dmap_scent(void);
 
     std::vector<Lightp> & get_light(void);
-    std::size_t get_light_count(void) const;
     void new_light(fpoint at, fpoint offset, float strength, color col = WHITE);
     void new_light(fpoint at, float strength, color col = WHITE);
     void delete_light(void);

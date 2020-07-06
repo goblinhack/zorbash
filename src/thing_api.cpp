@@ -170,16 +170,6 @@ std::vector<Lightp> &Thing::get_light (void)
     }
 }
 
-std::size_t Thing::get_light_count (void) const
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->light.size());
-    } else {
-        return (0);
-    }
-}
-
 void Thing::new_light (fpoint at, fpoint offset, float strength, color col)
 {_
     new_monst();
