@@ -237,6 +237,16 @@ public:
         return (nullptr);
     }
 
+    uint8_t z_depth (void) const
+    {_
+        return (tp()->z_depth);
+    }
+
+    uint8_t z_prio (void) const
+    {_
+        return (tp()->z_prio);
+    }
+
     void new_monst(void);
     void get_tiles(void);
 
@@ -989,8 +999,6 @@ public:
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
-    int z_depth(void) const;
-    int z_prio(void) const;
     point get_random_scent_target(void);
     std::string text_The(void) const;
     std::string text_a_or_an(void) const;
