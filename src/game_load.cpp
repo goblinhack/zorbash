@@ -456,7 +456,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_unused18                 */ in >> bits(my.t.key_unused18                 );
     /* uint32_t           key_unused19                 */ in >> bits(my.t.key_unused19                 );
     /* uint32_t           key_unused2                  */ in >> bits(my.t.key_unused2                  );
-    /* uint32_t           key_unused20                 */ in >> bits(my.t.key_unused20                 );
+    /* uint32_t           key_jump                 */ in >> bits(my.t.key_jump                 );
     /* uint32_t           key_unused3                  */ in >> bits(my.t.key_unused3                  );
     /* uint32_t           key_unused4                  */ in >> bits(my.t.key_unused4                  );
     /* uint32_t           key_unused5                  */ in >> bits(my.t.key_unused5                  );
