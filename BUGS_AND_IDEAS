@@ -1,9 +1,12 @@
 bugs
 ----
 - optimize healthbar tiles
+- potion break on fall
+- explosion needed; creates chasm?
 
 upcoming work
 -------------
+- descent potion, that can be taken or thrown
 - monst rarity
 - playback possible?
 - eat food
@@ -13,9 +16,10 @@ upcoming work
 
 future work
 -----------
+- water, kraken, eels
+- make ripples, summon monsters
 - hit door, summon monst chance
 - hit door, wake sleeping monsters
-- make ripples, summon monsters
 - (blunt/warhamma?) slime specific weapon does not cause slimes to split
 - chasm trap / potion of descent
 - carry eat slime mold and gain acid resis?

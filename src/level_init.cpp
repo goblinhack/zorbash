@@ -513,6 +513,7 @@ void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
             if (d->is_monst(x, y + 1) ||
                 d->is_food(x, y + 1) ||
                 d->is_treasure(x, y + 1) ||
+                d->is_potion(x, y + 1) ||
                 d->is_key(x, y + 1)) {
                 if (!is_floor(x, y + 1)) {
                     thing_new(what, fpoint(x, y + 1));
@@ -521,6 +522,7 @@ void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
             if (d->is_monst(x, y - 1) ||
                 d->is_food(x, y - 1) ||
                 d->is_treasure(x, y - 1) ||
+                d->is_potion(x, y - 1) ||
                 d->is_key(x, y - 1)) {
                 if (!is_floor(x, y - 1)) {
                     thing_new(what, fpoint(x, y - 1));
@@ -529,6 +531,7 @@ void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
             if (d->is_monst(x + 1, y) ||
                 d->is_food(x + 1, y) ||
                 d->is_treasure(x + 1, y) ||
+                d->is_potion(x + 1, y) ||
                 d->is_key(x + 1, y)) {
                 if (!is_floor(x + 1, y)) {
                     thing_new(what, fpoint(x + 1, y));
@@ -537,6 +540,7 @@ void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
             if (d->is_monst(x - 1, y) ||
                 d->is_food(x - 1, y) ||
                 d->is_treasure(x - 1, y) ||
+                d->is_potion(x - 1, y) ||
                 d->is_key(x - 1, y)) {
                 if (!is_floor(x - 1, y)) {
                     thing_new(what, fpoint(x - 1, y));
@@ -559,6 +563,7 @@ void Level::place_normal_placement_rules (Dungeonp d)
             if (d->is_food(x, y))        { tp = tp_random_food(); }
             if (d->is_gold(x, y))        { tp = tp_random_gold(); }
             if (d->is_key(x, y))         { tp = tp_random_key(); }
+            if (d->is_potion(x, y))      { tp = tp_random_potion(); }
             if (d->is_monst(x, y))       { tp = tp_random_monst(); }
             if (d->is_secret_door(x, y)) { tp = tp_random_secret_door(); }
             if (d->is_generator(x, y))   { tp = tp_random_generator(); }
@@ -774,6 +779,7 @@ void Level::place_random_floor_deco (Dungeonp d)
                 d->is_exit(x, y)        ||
                 d->is_generator(x, y)   ||
                 d->is_key(x, y)         ||
+                d->is_potion(x, y)      ||
                 d->is_secret_door(x, y) ||
                 d->is_treasure(x, y)    ||
                 d->is_monst(x, y)) {

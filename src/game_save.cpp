@@ -227,6 +227,7 @@ std::ostream& operator<<(std::ostream &out,
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};          */ out << bits(my.t->_is_floor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};           */ out << bits(my.t->_is_food);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};      */ out << bits(my.t->_is_generator);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};      */ out << bits(my.t->_is_potion);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};           */ out << bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};         */ out << bits(my.t->_is_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};            */ out << bits(my.t->_is_key);

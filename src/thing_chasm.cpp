@@ -108,7 +108,7 @@ bool Thing::fall_to_next_level (void)
                 fall_damage = random_range(20, 50);
             }
 
-            if (is_generator() || is_monst()) {
+            if (is_potion() || is_generator() || is_monst()) {
                 fall_damage = get_stats_health() / 2;
             }
 

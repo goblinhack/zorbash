@@ -103,6 +103,7 @@ public:
     bool is_torch(const int x, const int y);
     bool is_hazard(const int x, const int y);
     bool is_key(const int x, const int y);
+    bool is_potion(const int x, const int y);
     bool is_lava(const int x, const int y);
     bool is_lava_no_check(const int x, const int y);
     bool is_monst(const int x, const int y);

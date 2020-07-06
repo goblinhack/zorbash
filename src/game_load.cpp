@@ -274,6 +274,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};          */ in >> bits(my.t->_is_floor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};           */ in >> bits(my.t->_is_food);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};      */ in >> bits(my.t->_is_generator);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};      */ in >> bits(my.t->_is_potion);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};           */ in >> bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};         */ in >> bits(my.t->_is_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};            */ in >> bits(my.t->_is_key);

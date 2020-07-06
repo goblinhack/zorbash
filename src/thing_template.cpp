@@ -25,6 +25,7 @@ static Tpidmap tp_floor;
 static Tpidmap tp_food;
 static Tpidmap tp_gold;
 static Tpidmap tp_key;
+static Tpidmap tp_potion;
 static Tpidmap tp_monst;
 static Tpidmap tp_ripples;
 static Tpidmap tp_rock;
@@ -122,6 +123,7 @@ void tp_init_after_loading (void)
         if (tp->is_rock())           { tp_rock.push_back(tp); }
         if (tp->is_secret_door())    { tp_secret_door.push_back(tp); }
         if (tp->is_generator())      { tp_generator.push_back(tp); }
+        if (tp->is_potion())      { tp_potion.push_back(tp); }
         if (tp->is_torch())          { tp_torch.push_back(tp); }
         if (tp->is_treasure())       { tp_treasure.push_back(tp); }
         if (tp->is_gold())           { tp_gold.push_back(tp); }
@@ -202,6 +204,15 @@ Tpp tp_random_key (void)
         return (nullptr);
     }
     return get(tp_key, myrand() % tp_key.size());
+}
+
+Tpp tp_random_potion (void)
+{_
+    if (unlikely(!tp_potion.size())) {
+        ERR("no potion found");
+        return (nullptr);
+    }
+    return get(tp_potion, myrand() % tp_potion.size());
 }
 
 Tpp tp_random_entrance (void)

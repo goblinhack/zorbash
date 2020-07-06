@@ -31,6 +31,7 @@ public:
         FOOD            = 'f',
         GOLD            = 'g',
         KEY             = 'k',
+        POTION          = 'p',
         LAVA            = 'L',
         MONST           = 'm',
         ROCK            = 'r',
@@ -58,6 +59,7 @@ public:
     bool                      is_food              {false};
     bool                      is_gold              {false};
     bool                      is_key               {false};
+    bool                      is_potion            {false};
     bool                      is_lava              {false};
     bool                      is_monst             {false};
     bool                      is_rock              {false};
