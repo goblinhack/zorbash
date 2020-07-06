@@ -1264,16 +1264,6 @@ int Thing::weapon_use_distance(void) const
     return (tp()->weapon_use_distance());
 }
 
-int Thing::z_depth(void) const
-{_
-    return (tp()->z_depth);
-}
-
-int Thing::z_prio(void) const
-{_
-    return (tp()->z_prio);
-}
-
 ////////////////////////////////////////////////////////////////////////////
 // lunge_to
 ////////////////////////////////////////////////////////////////////////////

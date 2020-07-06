@@ -70,7 +70,7 @@ void Thing::destroy (void)
     }
 
     if (is_loggable_for_unimportant_stuff()) {
-        log("destroyed");
+        dbg("destroyed");
     }
 
     game->world.free_thing_id(this);

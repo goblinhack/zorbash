@@ -106,7 +106,7 @@ static void game_monsts_wid_create (void)
                     wid_set_pos(w, tl, br);
                     wid_set_style(w, UI_WID_STYLE_NONE);
                     auto tile = tile_index_to_tile(t->tile_curr);
-                    if (tile->is_invisible) {
+                    if (tile && tile->is_invisible) {
                         //
                         // Should we hide invisible things?
                         //
@@ -131,6 +131,15 @@ static void game_monsts_wid_create (void)
 
                         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);
                         auto s = t->text_name();
+                        if (t->is_resurrected) {
+                            if (t->is_dead) {
+                                s += " (dead again)";
+                            } else {
+                                s += " (alive again)";
+                            }
+                        } else if (t->is_dead) {
+                            s += " (dead)";
+                        }
                         wid_set_text(w, s);
                         wid_set_text_lhs(w, true);
                     }
