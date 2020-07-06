@@ -173,18 +173,14 @@ void player_tick (void)
 
     if (jump) {
         bool jumped = false;
-MINICON("%f %f", player->mid_at.x, player->mid_at.y);
         if (game->cursor_move_path.size()) {
-MINICON("JUMP path");
             //
             // A path to the target exists.
             //
-            for (auto i = game->cursor_move_path.end();
-                 i != game->cursor_move_path.begin(); i--) {
+            for (auto i = game->cursor_move_path.rbegin();
+                 i != game->cursor_move_path.rend(); i--) {
                 auto p = *i;
-MINICON("  %d,%d", p.x,p.y);
                 if (player->try_to_jump(make_point(p.x, p.y))) {
-MINICON("    JUMPED");
                     game->tick_begin();
                     jumped = true;
                     break;
@@ -192,7 +188,6 @@ MINICON("    JUMPED");
             }
             game->cursor_move_path.clear();
         } else if (level->cursor->mid_at == player->mid_at) {
-MINICON("JUMP path");
             auto delta = player->dir_to_direction();
             point p = make_point(player->mid_at.x + delta.x,
                                  player->mid_at.y + delta.y);
@@ -200,7 +195,6 @@ MINICON("JUMP path");
                 game->tick_begin();
             }
         } else if (level->cursor) {
-MINICON("JUMP cursor");
             point p = make_point(level->cursor->mid_at.x,
                                  level->cursor->mid_at.y);
             if (player->try_to_jump(p)) {

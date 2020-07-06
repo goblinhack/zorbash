@@ -118,6 +118,8 @@ bool Thing::try_to_jump (point to)
         if (w) {
             w->move_to_immediately(mid_at);
             w->is_jumping = true;
+            level->new_external_particle(id, src, dst, sz, 500,
+                                        tile_index_to_tile(w->tile_curr));
         }
     }
 
@@ -126,6 +128,11 @@ bool Thing::try_to_jump (point to)
         if (w) {
             w->move_to_immediately(mid_at);
             w->is_jumping = true;
+            //
+            // No, the weapon is shown as carry anim
+            //
+            level->new_external_particle(id, src, dst, sz, 500,
+                                        tile_index_to_tile(w->tile_curr));
         }
     }
 
@@ -134,10 +141,10 @@ bool Thing::try_to_jump (point to)
     // carried sword and so it had better be in the same location.
     //
     for (auto oid : monstp->carrying) {
-        auto o = level->thing_find(oid);
-        if (o) {
-            o->move_to_immediately(mid_at);
-            o->is_jumping = true;
+        auto w = level->thing_find(oid);
+        if (w) {
+            w->move_to_immediately(mid_at);
+            w->is_jumping = true;
         }
     }
 
@@ -147,6 +154,8 @@ bool Thing::try_to_jump (point to)
         if (w) {
             w->move_to_immediately(mid_at);
             w->is_jumping = true;
+            level->new_external_particle(id, src, dst, sz, 500,
+                                        tile_index_to_tile(w->tile_curr));
         }
     }
 
@@ -237,6 +246,37 @@ void Thing::jump_end (void)
                 if (random_range(0, 1000) > 500) {
                     level->thing_new(tp_random_ripple()->name(), at);
                 }
+            }
+
+            if (is_player()) {
+                if (level->is_deep_water((int)mid_at.x, (int)mid_at.y)) {
+                    MINICON("You plunge into the icy water!");
+                    //
+                    // Ensure things in the water get a chance to attack!
+                    //
+                    game->tick_begin();
+                }
+            }
+        }
+    }
+
+    //
+    // Plunging into lava? bad idea
+    //
+    if (is_fire_hater()) {
+        if (level->is_lava(mid_at.x, mid_at.y)) {
+            if (is_player()) {
+                MINICON("You plunge into the lava!");
+
+                //
+                // Ensure lava gets a chance to attack!
+                //
+                game->tick_begin();
+            }
+
+            if (!level->is_smoke(mid_at.x, mid_at.y)) {
+                auto smoke = level->thing_new("smoke1", mid_at);
+                smoke->set_lifespan(4);
             }
         }
     }
