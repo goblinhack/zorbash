@@ -944,9 +944,9 @@ int Thing::is_rrr90(void) const
     return (tp()->is_rrr90());
 }
 
-int Thing::is_rrr91(void) const
+int Thing::is_potion(void) const
 {_
-    return (tp()->is_rrr91());
+    return (tp()->is_potion());
 }
 
 int Thing::is_sidebar_item(void) const

@@ -180,6 +180,7 @@ void Thing::level_push (void)
     if (is_rock())              { level->set_is_rock(mx, my); }
     if (is_secret_door())       { level->set_is_secret_door(mx, my); }
     if (is_generator())         { level->set_is_generator(mx, my); }
+    if (is_potion())         { level->set_is_potion(mx, my); }
     if (is_smoke())             { level->set_is_smoke(mx, my); }
     if (is_treasure())          { level->set_is_treasure(mx, my); }
     if (is_wall())              { level->set_is_wall(mx, my); }
@@ -227,6 +228,7 @@ void Thing::level_pop (void)
     if (is_rock())              { level->unset_is_rock(mx, my); }
     if (is_secret_door())       { level->unset_is_secret_door(mx, my); }
     if (is_generator())         { level->unset_is_generator(mx, my); }
+    if (is_potion())         { level->unset_is_potion(mx, my); }
     if (is_smoke())             { level->unset_is_smoke(mx, my); }
     if (is_wall())              { level->unset_is_wall(mx, my); }
     if (is_water())             { level->unset_is_water(mx, my); }

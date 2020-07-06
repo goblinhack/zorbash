@@ -281,7 +281,7 @@ private:
     int _is_rrr88 {};
     int _is_rrr89 {};
     int _is_rrr90 {};
-    int _is_rrr91 {};
+    int _is_potion {};
     int _is_sidebar_item {};
     int _is_floating {};
     int _is_double_damage_from_water {};
@@ -619,7 +619,7 @@ public:
     int is_rrr88(void) const;
     int is_rrr89(void) const;
     int is_rrr90(void) const;
-    int is_rrr91(void) const;
+    int is_potion(void) const;
     int is_sidebar_item(void) const;
     int is_floating(void) const;
     int is_double_damage_from_acid(void) const;
@@ -865,7 +865,7 @@ public:
     void set_is_rrr88(int);
     void set_is_rrr89(int);
     void set_is_rrr90(int);
-    void set_is_rrr91(int);
+    void set_is_potion(int);
     void set_is_sidebar_item(int);
     void set_is_floating(int);
     void set_is_double_damage_from_acid(int);
@@ -971,6 +971,7 @@ Tpp tp_random_floor(void);
 Tpp tp_random_food(void);
 Tpp tp_random_gold(void);
 Tpp tp_random_key(void);
+Tpp tp_random_potion(void);
 Tpp tp_random_monst(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_rock(void);

@@ -40,6 +40,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
@@ -309,6 +310,11 @@ public:
     uint8_t is_generator(const point &p);
     void set_is_generator(const int x, const int y);
     void unset_is_generator(const int x, const int y);
+
+    uint8_t is_potion(const int x, const int y);
+    uint8_t is_potion(const point &p);
+    void set_is_potion(const int x, const int y);
+    void unset_is_potion(const int x, const int y);
 
     uint8_t is_corpse(const int x, const int y);
     uint8_t is_corpse(const point &p);

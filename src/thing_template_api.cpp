@@ -250,7 +250,7 @@ int Tp::is_rrr88(void) const { return _is_rrr88; }
 int Tp::is_rrr89(void) const { return _is_rrr89; }
 int Tp::is_rrr9(void) const { return _is_rrr9; }
 int Tp::is_rrr90(void) const { return _is_rrr90; }
-int Tp::is_rrr91(void) const { return _is_rrr91; }
+int Tp::is_potion(void) const { return _is_potion; }
 int Tp::is_sidebar_item(void) const { return _is_sidebar_item; }
 int Tp::is_floating(void) const { return _is_floating; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
@@ -491,7 +491,7 @@ void Tp::set_is_rrr88(int v) { _is_rrr88 = v; }
 void Tp::set_is_rrr89(int v) { _is_rrr89 = v; }
 void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }
 void Tp::set_is_rrr90(int v) { _is_rrr90 = v; }
-void Tp::set_is_rrr91(int v) { _is_rrr91 = v; }
+void Tp::set_is_potion(int v) { _is_potion = v; }
 void Tp::set_is_sidebar_item(int v) { _is_sidebar_item = v; }
 void Tp::set_is_floating(int v) { _is_floating = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
