@@ -105,6 +105,7 @@ public:
     void config_keyboard_select(void);
     void config_top_select(void);
     void dead_select(const char *reason);
+    void credits_select(void);
     void display(void);
     void fini(void);
     void hard_pause(void);
@@ -181,5 +182,6 @@ public:
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
 extern uint8_t game_mouse_up(int32_t x, int32_t y, uint32_t button);
 extern void game_main_menu_hide(void);
+extern void game_main_menu_destroy(void);
 
 #endif
