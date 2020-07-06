@@ -74,125 +74,71 @@ static void game_monsts_wid_create (void)
         wid_set_style(wid_items, UI_WID_STYLE_OUTLINE);
     }
 
-    auto y = 0;
-    for (auto& i : level->all_active_things) {
-        auto t = i.second;
-        if (!t->is_sidebar_item()) {
-            continue;
-        }
-        if (t->is_dead) {
-            continue;
-        }
+    auto minx = std::max(0, (int) level->map_at.x);
+    auto maxx = std::min(MAP_WIDTH, (int)level->map_at.x + TILES_ACROSS);
 
-        auto p = make_point(t->mid_at.x, t->mid_at.y);
-        if (!level->is_lit(p)) {
-            continue;
-        }
+    auto miny = std::max(0, (int) level->map_at.y);
+    auto maxy = std::min(MAP_HEIGHT, (int)level->map_at.y + TILES_DOWN);
 
-        auto diff = game->tick_current - t->get_tick();
-        if (diff > 1) {
-            auto tp = t->tp();
-            auto s = tp->text_name();
+    auto row = 0;
 
-            {
-                auto w = wid_new_plain(wid_items, "item");
-                point tl = make_point(0, y);
-                point br = make_point(0, y);
-                wid_set_pos(w, tl, br);
-                wid_set_style(w, UI_WID_STYLE_NONE);
-                auto tile = tile_index_to_tile(t->tile_curr);
-                if (tile->is_invisible) {
-                    //
-                    // Should we hide invisible things?
-                    //
-                    continue;
-                    //
-                    // Or just show as first tile?
-                    //
-                    auto tpp = t->tp();
-                    auto tiles = &tpp->tiles;
-                    tile = tile_first(tiles);
-                }
-                wid_set_fg_tile(w, tile);
-                wid_set_color(w, WID_COLOR_BG, WHITE);
+    for (auto z = 0; z < MAP_DEPTH; z++) {
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+
+                    if (!t->is_sidebar_item()) {
+                        continue;
+                    }
+
+                    if (t->get_owner_id().ok()) {
+                        continue;
+                    }
+
+                    auto p = make_point(t->mid_at.x, t->mid_at.y);
+                    if (!level->is_lit(p)) {
+                        continue;
+                    }
+
+                    auto w = wid_new_plain(wid_items, "item");
+                    point tl = make_point(0, row);
+                    point br = make_point(0, row);
+                    wid_set_pos(w, tl, br);
+                    wid_set_style(w, UI_WID_STYLE_NONE);
+                    auto tile = tile_index_to_tile(t->tile_curr);
+                    if (tile->is_invisible) {
+                        //
+                        // Should we hide invisible things?
+                        //
+                        continue;
+                        //
+                        // Or just show as first tile?
+                        //
+                        auto tpp = t->tp();
+                        auto tiles = &tpp->tiles;
+                        tile = tile_first(tiles);
+                    }
+                    wid_set_fg_tile(w, tile);
+                    wid_set_color(w, WID_COLOR_BG, WHITE);
+
+                    {
+                        auto w = wid_new_plain(wid_items, "item");
+                        point tl = make_point(2, row);
+                        point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, row);
+                        wid_set_pos(w, tl, br);
+                        wid_set_style(w, UI_WID_STYLE_NONE);
+                        wid_set_shape_none(w);
+
+                        wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);
+                        auto s = t->text_name();
+                        wid_set_text(w, s);
+                        wid_set_text_lhs(w, true);
+                    }
+
+                    row++;
+                } FOR_ALL_THINGS_END()
             }
-
-    #if 0
-            {
-                auto w = wid_new_plain(wid_items, "item");
-                point tl = make_point(1, y);
-                point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 4, y);
-                wid_set_pos(w, tl, br);
-                wid_set_style(w, UI_WID_STYLE_NONE);
-                float p = t->get_stats_health_pct();
-
-                color c;
-                if (p < 25) {
-                    c = RED;
-                } else if (p < 50) {
-                    c = ORANGE;
-                } else if (p < 75) {
-                    c = BLUE;
-                } else {
-                    c = GREEN;
-                }
-                c.a = 150;
-                p /= 100.0;
-                p *= UI_SIDEBAR_LEFT_WIDTH;
-                std::string s;
-                while (p > 0) {
-                    s += (unsigned char)TTF_GLYPH_BAR;
-                    p--;
-                }
-                wid_set_color(w, WID_COLOR_TEXT_FG, c);
-                wid_set_text(w, s);
-                wid_set_text_lhs(w, true);
-            }
-
-            {
-                auto w = wid_new_plain(wid_items, "item");
-                point tl = make_point(1, y);
-                point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 5, y);
-                wid_set_pos(w, tl, br);
-                wid_set_style(w, UI_WID_STYLE_NONE);
-                wid_set_shape_none(w);
-
-                s = string_sprintf("%d", t->get_stats_health());
-                wid_set_text(w, s);
-                wid_set_text_rhs(w, true);
-            }
-
-            {
-                auto w = wid_new_plain(wid_items, "health-icon");
-                point tl = make_point(UI_SIDEBAR_LEFT_WIDTH - 4, y);
-                point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 4, y);
-                wid_set_ignore_events(w, true);
-                wid_set_pos(w, tl, br);
-                wid_set_style(w, UI_WID_STYLE_NONE);
-                int i = ((float)t->get_stats_health() /
-                        (float)t->get_stats_health_max()) *
-                        (float)UI_HEALTH_ICON_STEPS;
-                i = std::min(i, UI_HEALTH_ICON_STEPS);
-                i = std::max(i, 1);
-                auto icon = "health" + std::to_string(i) + "-icon";
-                wid_set_bg_tilename(w, icon);
-                wid_set_color(w, WID_COLOR_BG, WHITE);
-            }
-#endif
-            auto w = wid_new_plain(wid_items, "item");
-            point tl = make_point(2, y);
-            point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, y);
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, UI_WID_STYLE_NONE);
-            wid_set_shape_none(w);
-
-            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);
-            s = string_sprintf("+%dmv", diff);
-            wid_set_text(w, s);
-            wid_set_text_lhs(w, true);
         }
-
-        y++;
     }
 
     wid_update(wid_items);

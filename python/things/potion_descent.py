@@ -16,6 +16,7 @@ def potion_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_potion(True)
     x.set_is_light_strength(2)
+    x.set_is_sidebar_item(True)
     x.set_is_movable(True)
     x.set_light_color("cyan")
     x.set_normal_placement_rules(True)
