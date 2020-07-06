@@ -124,6 +124,12 @@ static void game_config_key_wait_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
+static void game_config_key_jump_set (SDL_Scancode code)
+{_
+    game->config.key_jump = code;
+    game->config_keyboard_select();
+}
+
 static void game_config_key_save_set (SDL_Scancode code)
 {_
     game->config.key_save = code;
@@ -275,6 +281,13 @@ uint8_t game_config_key_wait (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
     on_sdl_key_grab = game_config_key_wait_set;
+    return (true);
+}
+
+uint8_t game_config_key_jump (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_jump_set;
     return (true);
 }
 
@@ -772,6 +785,33 @@ void Game::config_keyboard_select (void)
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_wait));
         wid_set_on_mouse_up(w, game_config_key_wait);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // jump
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "jump");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "jump to mouse target");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_jump));
+        wid_set_on_mouse_up(w, game_config_key_jump);
     }
 
     ///////////////////////////////////////////////////////////////////////

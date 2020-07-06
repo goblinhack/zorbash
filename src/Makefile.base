@@ -110,6 +110,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
     $(OBJDIR)/thing_dead.o 		\
+    $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_distance.o 		\
     $(OBJDIR)/thing_door.o 		\

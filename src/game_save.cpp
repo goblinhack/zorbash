@@ -362,7 +362,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* uint32_t           key_unused18                 */ out << bits(my.t.key_unused18                 );
     /* uint32_t           key_unused19                 */ out << bits(my.t.key_unused19                 );
     /* uint32_t           key_unused2                  */ out << bits(my.t.key_unused2                  );
-    /* uint32_t           key_unused20                 */ out << bits(my.t.key_unused20                 );
+    /* uint32_t           key_jump                 */ out << bits(my.t.key_jump                 );
     /* uint32_t           key_unused3                  */ out << bits(my.t.key_unused3                  );
     /* uint32_t           key_unused4                  */ out << bits(my.t.key_unused4                  );
     /* uint32_t           key_unused5                  */ out << bits(my.t.key_unused5                  );

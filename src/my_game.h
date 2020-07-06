@@ -56,6 +56,7 @@ public:
     uint32_t           key_quit                     = {SDL_SCANCODE_Q};
     uint32_t           key_save                     = {SDL_SCANCODE_F12};
     uint32_t           key_screenshot               = {SDL_SCANCODE_BACKSLASH};
+    uint32_t           key_jump                     = {SDL_SCANCODE_J};
     uint32_t           key_unused1                  = 0;
     uint32_t           key_unused10                 = 0;
     uint32_t           key_unused11                 = 0;
@@ -68,7 +69,6 @@ public:
     uint32_t           key_unused18                 = 0;
     uint32_t           key_unused19                 = 0;
     uint32_t           key_unused2                  = 0;
-    uint32_t           key_unused20                 = 0;
     uint32_t           key_unused3                  = 0;
     uint32_t           key_unused4                  = 0;
     uint32_t           key_unused5                  = 0;

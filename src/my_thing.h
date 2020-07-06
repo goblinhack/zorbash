@@ -737,6 +737,7 @@ public:
     bool move_to_or_escape(const point&);
     bool open_door(Thingp door);
     bool possible_to_attack(const Thingp it);
+    point dir_to_direction() const;
     bool spawn_fire(const std::string& what);
     bool spawn_under(const std::string& what);
     bool spawn_next_to(const std::string& what);
@@ -1027,6 +1028,8 @@ public:
     void collision_check_do();
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
+    void minicon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
+    void minicon_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
     void cursor_path_pop_first_move(void);
     void cursor_path_stop(void);

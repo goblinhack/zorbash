@@ -38,6 +38,7 @@ void player_tick (void)
     uint8_t down   = 0;
     uint8_t attack = 0;
     uint8_t wait   = 0;
+    uint8_t jump   = 0;
 
     const uint8_t *state = SDL_GetKeyboardState(0);
 
@@ -47,6 +48,7 @@ void player_tick (void)
     down   = state[game->config.key_move_down] ? 1 : 0;
     attack = state[game->config.key_attack] ? 1 : 0;
     wait   = state[game->config.key_wait] ? 1 : 0;
+    jump   = state[game->config.key_jump] ? 1 : 0;
     bool some_key_event_was_pressed = false;
 
     if (state[game->config.key_map_left]) {
@@ -85,7 +87,6 @@ void player_tick (void)
         return;
     }
 
-    bool key_pressed = false;
     static uint32_t last_key_pressed_when;
     if (!last_key_pressed_when) {
         last_key_pressed_when = time_get_time_ms_cached() - 1000;
@@ -170,11 +171,47 @@ void player_tick (void)
         dy = d;
     }
 
-    if (up || down || left || right || attack || wait) {
-        key_pressed = true;
-    }
-
-    if (key_pressed) {
+    if (jump) {
+        bool jumped = false;
+MINICON("%f %f", player->mid_at.x, player->mid_at.y);
+        if (game->cursor_move_path.size()) {
+MINICON("JUMP path");
+            //
+            // A path to the target exists.
+            //
+            for (auto i = game->cursor_move_path.end();
+                 i != game->cursor_move_path.begin(); i--) {
+                auto p = *i;
+MINICON("  %d,%d", p.x,p.y);
+                if (player->try_to_jump(make_point(p.x, p.y))) {
+MINICON("    JUMPED");
+                    game->tick_begin();
+                    jumped = true;
+                    break;
+                }
+            }
+            game->cursor_move_path.clear();
+        } else if (level->cursor->mid_at == player->mid_at) {
+MINICON("JUMP path");
+            auto delta = player->dir_to_direction();
+            point p = make_point(player->mid_at.x + delta.x,
+                                 player->mid_at.y + delta.y);
+            if (player->try_to_jump(p)) {
+                game->tick_begin();
+            }
+        } else if (level->cursor) {
+MINICON("JUMP cursor");
+            point p = make_point(level->cursor->mid_at.x,
+                                 level->cursor->mid_at.y);
+            if (player->try_to_jump(p)) {
+                game->tick_begin();
+            }
+        }
+        last_key_pressed_when = time_get_time_ms_cached();
+        player->monstp->move_path.clear();
+        game->cursor_move_path.clear();
+        level->cursor_path_clear();
+    } else if (up || down || left || right || attack || wait) {
         //
         // If we move manually, clear the path as it visually gets
         // in the way
