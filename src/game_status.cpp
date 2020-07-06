@@ -22,17 +22,13 @@ void game_status_wid_fini (void)
     wid_destroy(&wid_fake_itembar);
     wid_destroy(&wid_item_popup);
     wid_destroy(&wid_sidebar);
-#if 0
     game_monsts_wid_fini();
-#endif
 }
 
 uint8_t game_status_wid_init (void)
 {_
     game_status_wid_create();
-#if 0
     game_monsts_wid_init();
-#endif
 
     return (true);
 }
