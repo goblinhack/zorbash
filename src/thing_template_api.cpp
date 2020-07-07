@@ -242,9 +242,9 @@ int Tp::is_rrr80(void) const { return _is_rrr80; }
 int Tp::is_rrr81(void) const { return _is_rrr81; }
 int Tp::is_rrr82(void) const { return _is_rrr82; }
 int Tp::is_rrr83(void) const { return _is_rrr83; }
-int Tp::is_rrr84(void) const { return _is_rrr84; }
-int Tp::is_rrr85(void) const { return _is_rrr85; }
-int Tp::is_rrr86(void) const { return _is_rrr86; }
+int Tp::is_throwable(void) const { return _is_throwable; }
+int Tp::is_usable(void) const { return _is_usable; }
+int Tp::is_droppable(void) const { return _is_droppable; }
 int Tp::is_not_stackable(void) const { return _is_not_stackable; }
 int Tp::is_mundane_item(void) const { return _is_mundane_item; }
 int Tp::is_bag(void) const { return _is_bag; }
@@ -483,9 +483,9 @@ void Tp::set_is_rrr80(int v) { _is_rrr80 = v; }
 void Tp::set_is_rrr81(int v) { _is_rrr81 = v; }
 void Tp::set_is_rrr82(int v) { _is_rrr82 = v; }
 void Tp::set_is_rrr83(int v) { _is_rrr83 = v; }
-void Tp::set_is_rrr84(int v) { _is_rrr84 = v; }
-void Tp::set_is_rrr85(int v) { _is_rrr85 = v; }
-void Tp::set_is_rrr86(int v) { _is_rrr86 = v; }
+void Tp::set_is_throwable(int v) { _is_throwable = v; }
+void Tp::set_is_usable(int v) { _is_usable = v; }
+void Tp::set_is_droppable(int v) { _is_droppable = v; }
 void Tp::set_is_not_stackable(int v) { _is_not_stackable = v; }
 void Tp::set_is_mundane_item(int v) { _is_mundane_item = v; }
 void Tp::set_is_bag(int v) { _is_bag = v; }

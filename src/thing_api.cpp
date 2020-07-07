@@ -899,19 +899,19 @@ int Thing::is_rrr83(void) const
     return (tp()->is_rrr83());
 }
 
-int Thing::is_rrr84(void) const
+int Thing::is_throwable(void) const
 {_
-    return (tp()->is_rrr84());
+    return (tp()->is_throwable());
 }
 
-int Thing::is_rrr85(void) const
+int Thing::is_usable(void) const
 {_
-    return (tp()->is_rrr85());
+    return (tp()->is_usable());
 }
 
-int Thing::is_rrr86(void) const
+int Thing::is_droppable(void) const
 {_
-    return (tp()->is_rrr86());
+    return (tp()->is_droppable());
 }
 
 int Thing::is_not_stackable(void) const

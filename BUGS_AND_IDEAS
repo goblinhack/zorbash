@@ -1,14 +1,14 @@
 bugs
 ----
-- extra inventory?
-- potion mouseover
 - potion action keys 'd' 't' 'u'
 - descent potion, that can be taken or thrown
 - potion break on fall
 - explosion needed; creates chasm?
+- extra inventory?
 
 upcoming work
 -------------
+- moving floor
 - choose name / player
 - monst rarity
 - playback possible?

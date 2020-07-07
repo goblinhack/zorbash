@@ -274,9 +274,9 @@ private:
     int _is_rrr81 {};
     int _is_rrr82 {};
     int _is_rrr83 {};
-    int _is_rrr84 {};
-    int _is_rrr85 {};
-    int _is_rrr86 {};
+    int _is_throwable {};
+    int _is_usable {};
+    int _is_droppable {};
     int _is_not_stackable {};
     int _is_mundane_item {};
     int _is_bag {};
@@ -612,9 +612,9 @@ public:
     int is_rrr81(void) const;
     int is_rrr82(void) const;
     int is_rrr83(void) const;
-    int is_rrr84(void) const;
-    int is_rrr85(void) const;
-    int is_rrr86(void) const;
+    int is_throwable(void) const;
+    int is_usable(void) const;
+    int is_droppable(void) const;
     int is_not_stackable(void) const;
     int is_mundane_item(void) const;
     int is_bag(void) const;
@@ -858,9 +858,9 @@ public:
     void set_is_rrr81(int);
     void set_is_rrr82(int);
     void set_is_rrr83(int);
-    void set_is_rrr84(int);
-    void set_is_rrr85(int);
-    void set_is_rrr86(int);
+    void set_is_throwable(int);
+    void set_is_usable(int);
+    void set_is_droppable(int);
     void set_is_not_stackable(int);
     void set_is_mundane_item(int);
     void set_is_bag(int);

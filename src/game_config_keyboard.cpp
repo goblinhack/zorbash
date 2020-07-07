@@ -130,6 +130,66 @@ static void game_config_key_jump_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
+static void game_config_key_action0_set (SDL_Scancode code)
+{_
+    game->config.key_action0 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action1_set (SDL_Scancode code)
+{_
+    game->config.key_action1 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action2_set (SDL_Scancode code)
+{_
+    game->config.key_action2 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action3_set (SDL_Scancode code)
+{_
+    game->config.key_action3 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action4_set (SDL_Scancode code)
+{_
+    game->config.key_action4 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action5_set (SDL_Scancode code)
+{_
+    game->config.key_action5 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action6_set (SDL_Scancode code)
+{_
+    game->config.key_action6 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action7_set (SDL_Scancode code)
+{_
+    game->config.key_action7 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action8_set (SDL_Scancode code)
+{_
+    game->config.key_action8 = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_action9_set (SDL_Scancode code)
+{_
+    game->config.key_action9 = code;
+    game->config_keyboard_select();
+}
+
 static void game_config_key_save_set (SDL_Scancode code)
 {_
     game->config.key_save = code;
@@ -288,6 +348,76 @@ uint8_t game_config_key_jump (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
     on_sdl_key_grab = game_config_key_jump_set;
+    return (true);
+}
+
+uint8_t game_config_key_action0 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action0_set;
+    return (true);
+}
+
+uint8_t game_config_key_action1 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action1_set;
+    return (true);
+}
+
+uint8_t game_config_key_action2 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action2_set;
+    return (true);
+}
+
+uint8_t game_config_key_action3 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action3_set;
+    return (true);
+}
+
+uint8_t game_config_key_action4 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action4_set;
+    return (true);
+}
+
+uint8_t game_config_key_action5 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action5_set;
+    return (true);
+}
+
+uint8_t game_config_key_action6 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action6_set;
+    return (true);
+}
+
+uint8_t game_config_key_action7 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action7_set;
+    return (true);
+}
+
+uint8_t game_config_key_action8 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action8_set;
+    return (true);
+}
+
+uint8_t game_config_key_action9 (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_action9_set;
     return (true);
 }
 
@@ -813,6 +943,276 @@ void Game::config_keyboard_select (void)
           SDL_GetScancodeName((SDL_Scancode)game->config.key_jump));
         wid_set_on_mouse_up(w, game_config_key_jump);
     }
+    ///////////////////////////////////////////////////////////////////////
+    // action0
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 0");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 0");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action0));
+        wid_set_on_mouse_up(w, game_config_key_action0);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action1
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 1");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 1");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action1));
+        wid_set_on_mouse_up(w, game_config_key_action1);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action2
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 2");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 2");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action2));
+        wid_set_on_mouse_up(w, game_config_key_action2);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action3
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 3");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 3");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action3));
+        wid_set_on_mouse_up(w, game_config_key_action3);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action4
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 4");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 4");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action4));
+        wid_set_on_mouse_up(w, game_config_key_action4);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action5
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 5");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 5");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action5));
+        wid_set_on_mouse_up(w, game_config_key_action5);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action6
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 6");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 6");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action6));
+        wid_set_on_mouse_up(w, game_config_key_action6);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action7
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 7");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 7");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action7));
+        wid_set_on_mouse_up(w, game_config_key_action7);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action8
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 8");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 8");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action8));
+        wid_set_on_mouse_up(w, game_config_key_action8);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // action9
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Inventory action 9");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory action 9");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_action9));
+        wid_set_on_mouse_up(w, game_config_key_action9);
+    }
 
     ///////////////////////////////////////////////////////////////////////
     y_at++;
@@ -996,14 +1396,14 @@ void Game::config_keyboard_select (void)
     y_at += 3;
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "screenshot");
+        auto w = wid_new_square_button(p, "Take a screenshot");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "screenshot");
+        wid_set_text(w, "Take a screenshot");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1030,7 +1430,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "This help");
+        wid_set_text(w, "This useless help");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
