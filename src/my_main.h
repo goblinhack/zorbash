@@ -67,11 +67,11 @@
 #define TTF_GLYPH_MAX              134
 #define TTF_GLYPH_MIN              ' '
 #define TTF_GLYPH_PER_ROW          60
-#define UI_ACTIONBAR_BR_Y          (ASCII_HEIGHT - 1)
+#define UI_ACTIONBAR_BR_Y          (ASCII_HEIGHT - 2)
 #define UI_ACTIONBAR_ITEM_HEIGHT   3
 #define UI_ACTIONBAR_ITEM_WIDTH    3
-#define UI_ACTIONBAR_MAX_ITEMS     20
-#define UI_ACTIONBAR_TL_Y          (ASCII_HEIGHT - 4)
+#define UI_ACTIONBAR_MAX_ITEMS     10
+#define UI_ACTIONBAR_TL_Y          (ASCII_HEIGHT - 5)
 #define UI_CONSOLE_HEIGHT          200
 #define UI_CONSOLE_INPUT_COLOR     ORANGE
 #define UI_CONSOLE_KEY1            '`'
@@ -97,7 +97,7 @@
 #define UI_BOTCON_TEXT_COLOR       UI_TEXT_COLOR
 #define UI_BOTCON_VIS_HEIGHT       1
 #define UI_BOTCON_VIS_WIDTH        UI_BOTCON_WIDTH
-#define UI_BOTCON_WIDTH            (ASCII_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
+#define UI_BOTCON_WIDTH            (ASCII_WIDTH)
 #define UI_POLL_EVENTS_MS          10
 #define UI_POLL_EVENTS_MS          10
 #define UI_POPUP_TEXT_COLOR        UI_TEXT_COLOR

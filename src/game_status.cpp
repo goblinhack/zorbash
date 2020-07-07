@@ -28,7 +28,6 @@ void game_status_wid_fini (void)
 uint8_t game_status_wid_init (void)
 {_
     game_status_wid_create();
-    game_monsts_wid_init();
 
     return (true);
 }
@@ -46,6 +45,29 @@ static void game_status_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_
 {
     auto slot = wid_get_int_context(w);
     highlight_slot = slot;
+
+    if (game->level) {
+        auto t = game->level->actionbar_get(highlight_slot);
+        if (t) {
+            auto s = t->text_name();
+
+            if (t->is_droppable()){
+                s += ", %%fg=orange$d%%fg=reset$rop";
+            }
+            if (t->is_usable()){
+                s += ", %%fg=cyan$u%%fg=reset$se";
+            }
+            if (t->is_food()){
+                s += ", %%fg=green$e%%fg=reset$at";
+            }
+            if (t->is_throwable()){
+                s += ", %%fg=purple$t%%fg=reset$hrow";
+            }
+
+            BOTCON("%s", s.c_str());
+        }
+    }
+
     game_status_wid_create();
 }
 
@@ -53,6 +75,7 @@ static void game_status_mouse_over_e (Widp w)
 {
     auto slot = wid_get_int_context(w);
     highlight_slot = slot;
+
     game_status_wid_create();
 }
 
@@ -71,6 +94,7 @@ static void game_status_wid_create (void)
     }
 
     game_status_wid_fini();
+    game_monsts_wid_init();
 
     auto actionbar_items = player->monstp->actionbar_id.size();
 

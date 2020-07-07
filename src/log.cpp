@@ -491,14 +491,13 @@ static void botcon_ (const char *fmt, va_list args)
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
-    putf(MY_STDOUT, buf);
-
-    term_log(buf);
-    putchar('\n');
+    //putf(MY_STDOUT, buf);
+    //term_log(buf);
+    //putchar('\n');
 
     wid_botcon_log(buf + len);
-    wid_console_log(buf + len);
-    FLUSH_THE_CONSOLE();
+    //wid_console_log(buf + len);
+    //FLUSH_THE_CONSOLE();
 }
 
 static void botcon_ (const wchar_t *fmt, va_list args)
@@ -524,18 +523,19 @@ static void botcon_ (const wchar_t *fmt, va_list args)
             fprintf(stderr, "Failed to botcon log: [%S]\n", fmt);
         }
 
-        fwprintf(MY_STDOUT, L"%S\n", buf);
-        term_log(buf);
+        // fwprintf(MY_STDOUT, L"%S\n", buf);
+        // term_log(buf);
         wid_botcon_log(buf);
         //wid_console_log(buf);
     }
 
-    putchar('\n');
-    FLUSH_THE_CONSOLE();
+    //putchar('\n');
+    //FLUSH_THE_CONSOLE();
 }
 
 void botcon (const wchar_t *fmt)
 {
+    if (0)
     {
         char buf[MAXSTR];
 
@@ -546,13 +546,14 @@ void botcon (const wchar_t *fmt)
     }
 
     {
-        fwprintf(MY_STDOUT, L"%S\n", fmt);
-        term_log(fmt);
+        // fwprintf(MY_STDOUT, L"%S\n", fmt);
+        // term_log(fmt);
         wid_botcon_log(fmt);
         //wid_console_log(fmt);
     }
-    putchar('\n');
-    FLUSH_THE_CONSOLE();
+
+    //putchar('\n');
+    //FLUSH_THE_CONSOLE();
 }
 
 void BOTCON (const char *fmt, ...)

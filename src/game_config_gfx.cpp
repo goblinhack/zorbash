@@ -351,6 +351,10 @@ void Game::config_gfx_select (void)
         }
     }
 
+#if 0
+    //
+    // Not sure I want this enabled; more to debug
+    //
     y_at += 3;
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
@@ -379,7 +383,7 @@ void Game::config_gfx_select (void)
             wid_set_text(w, "False");
         }
     }
-
+#endif
     y_at += 3;
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;

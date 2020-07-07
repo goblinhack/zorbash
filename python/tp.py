@@ -425,14 +425,14 @@ class Tp:
     def set_is_rrr83(self, value):
         zx.tp_set_is_rrr83(self, value)
 
-    def set_is_rrr84(self, value):
-        zx.tp_set_is_rrr84(self, value)
+    def set_is_throwable(self, value):
+        zx.tp_set_is_throwable(self, value)
 
-    def set_is_rrr85(self, value):
-        zx.tp_set_is_rrr85(self, value)
+    def set_is_usable(self, value):
+        zx.tp_set_is_usable(self, value)
 
-    def set_is_rrr86(self, value):
-        zx.tp_set_is_rrr86(self, value)
+    def set_is_droppable(self, value):
+        zx.tp_set_is_droppable(self, value)
 
     def set_is_not_stackable(self, value):
         zx.tp_set_is_not_stackable(self, value)

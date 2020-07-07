@@ -974,9 +974,9 @@ public:
     int is_rrr81(void) const;
     int is_rrr82(void) const;
     int is_rrr83(void) const;
-    int is_rrr84(void) const;
-    int is_rrr85(void) const;
-    int is_rrr86(void) const;
+    int is_throwable(void) const;
+    int is_usable(void) const;
+    int is_droppable(void) const;
     int is_not_stackable(void) const;
     int is_mundane_item(void) const;
     int is_bag(void) const;

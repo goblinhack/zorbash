@@ -50,74 +50,6 @@ uint8_t wid_botcon_init (void)
 }
 
 //
-// Key down etc...
-//
-uint8_t wid_botcon_input (Widp w, const SDL_KEYSYM *key)
-{_
-    if (!game) {
-        return false;
-    }
-
-    auto level = game->level;
-    if (!level) {
-        return false;
-    }
-
-    if (key->scancode == (SDL_Scancode)game->config.key_zoom_out) {
-        BOTCON("Zoom out");
-        CON("USERCFG: zoom out");
-        config_gfx_zoom_out();
-        return true;
-    }
-
-    if (key->scancode == (SDL_Scancode)game->config.key_zoom_in) {
-        BOTCON("Zoom in");
-        CON("USERCFG: zoom in");
-        config_gfx_zoom_in();
-        return true;
-    }
-
-    //
-    // Events after this cannot be invoked when dead
-    //
-    auto player = level->player;
-    if (player && player->is_dead) {
-        return false;
-    }
-
-    if (key->scancode == (SDL_Scancode)game->config.key_load) {
-        CON("USERCFG: loading game");
-        game->load_select();
-        return true;
-    }
-
-    if (key->scancode == (SDL_Scancode)game->config.key_save) {
-        CON("USERCFG: saving the game");
-        game->save_select();
-        return true;
-    }
-
-    if (key->scancode == (SDL_Scancode)game->config.key_pause) {
-        BOTCON("Pausing the game");
-        CON("USERCFG: pausing the game");
-        game->pause_select();
-        return true;
-    }
-
-    if (key->scancode == (SDL_Scancode)game->config.key_help) {
-        game->config_keyboard_select();
-        return true;
-    }
-
-    if (key->scancode == (SDL_Scancode)game->config.key_quit) {
-        game->quit_select();
-        return true;
-    }
-
-    return false;
-}
-
-//
 // Scroll back to the bottom of the screen.
 //
 static void wid_botcon_reset_scroll (void)
@@ -187,9 +119,9 @@ static void wid_botcon_log_ (std::wstring s)
     wid_botcon_flush();
 
     if (last_msg == s) {
-        s = last_msg + L" (x" + std::to_wstring(last_msg_count + 2) + L")";
-        last_msg_count++;
-        wid_botcon_replace(wid_botcon_input_line, s);
+        if (0) {
+            wid_botcon_replace(wid_botcon_input_line, s);
+        }
     } else {
         last_msg = s;
         last_msg_count = 0;
@@ -256,7 +188,6 @@ static void wid_botcon_wid_create (void)
         wid_set_name(wid_botcon_window, "wid botcon window");
         wid_set_pos(wid_botcon_window, tl, br);
         wid_set_shape_none(wid_botcon_window);
-        wid_set_on_key_down(wid_botcon_window, wid_botcon_input);
         wid_set_focusable(wid_botcon_window, 1);
         wid_set_focus(wid_botcon_window);
     }

@@ -236,3 +236,17 @@ int Thing::actionbar_id_slot_count (const int slot)
 
     return count;
 }
+
+Thingp Level::actionbar_get (const int slot)
+{_
+    if (!player) {
+        return nullptr;
+    }
+
+    auto oid = get(player->monstp->actionbar_id, slot);
+    if (!oid) {
+        return nullptr;
+    }
+
+    return thing_find(oid);
+}
