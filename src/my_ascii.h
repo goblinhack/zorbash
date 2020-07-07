@@ -110,6 +110,7 @@ int ascii_strlen(std::wstring const&);
 int ascii_strlen(std::wstring const& buf, std::wstring *col);
 
 void ascii_clear_scissors(void);
+void ascii_clear_display(void);
 void ascii_set_scissors(point tl, point br);
 
 typedef struct {
@@ -158,6 +159,7 @@ void ascii_blit_layer(int z, int no_color);
 void ascii_put_box(box_args b, int style, Tilep bg_tile, Tilep fg_tile, const wchar_t *fmt, ...);
 void ascii_set_context(int x, int y, void *context);
 void ascii_shade(void);
+bool ascii_is_empty(int x, int y);
 std::string ascii_strip(std::string const& text);
 
 static inline int ascii_ok (int x, int y)

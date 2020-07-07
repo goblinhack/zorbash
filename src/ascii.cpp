@@ -129,6 +129,27 @@ static int ascii_ok_for_scissors (int x, int y)
     return (ascii_ok(x, y));
 }
 
+bool ascii_is_empty (int x, int y)
+{
+    AsciiCell *cell = &getref(cells, x, y);
+    if (cell->fg_tile) {
+        return false;
+    }
+    if (cell->bg_tile) {
+        return false;
+    }
+    if (cell->bg2_tile) {
+        return false;
+    }
+    if (cell->fg2_tile) {
+        return false;
+    }
+    if (cell->tex) {
+        return false;
+    }
+    return true;
+}
+
 void ascii_set_fg (int x, int y, color c)
 {
     if (!ascii_ok_for_scissors(x, y)) {
@@ -381,8 +402,8 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
     int bg_set = false;
     auto text_iter = text.begin();
 
-//printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", 
-//text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, 
+//printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n",
+//text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y,
 //scissors_br.x, scissors_br.y, scissors_enabled);
     if (unlikely(y < 0)) {
         return;
@@ -1155,11 +1176,18 @@ void ascii_display (void)
         ascii_display_mouse(mouse_tile_tl, mouse_tile_br, ascii.mouse_at);
     }
 #endif
+}
 
+void ascii_clear_display (void)
+{_
     for (auto y = 0; y < ASCII_HEIGHT; y++) {
         for (auto x = 0; x < ASCII_WIDTH; x++) {
+#ifdef ENABLE_DEBUG_CRASH
             AsciiCell *cell = &getref(cells, x, y);
             *cell = {};
+#else
+            cells[x][y] = {};
+#endif
         }
     }
 }

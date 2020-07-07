@@ -3693,6 +3693,9 @@ Widp wid_find_at (int32_t x, int32_t y)
 
 Widp wid_find_under_mouse (void)
 {_
+    if (ascii_is_empty(ascii_mouse_x, ascii_mouse_y)) {
+        return nullptr;
+    }
     return wid_find_at(ascii_mouse_x, ascii_mouse_y);
 }
 
@@ -5687,6 +5690,8 @@ void wid_mouse_move (Widp w)
 //
 void wid_display_all (void)
 {_
+    ascii_clear_display();
+
     blit_fbo_bind(FBO_WID);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
