@@ -400,7 +400,9 @@ bool Thing::get_coords (point &blit_tl,
             //
             // Confusing in ascii mode
             //
-            if (!game->config.ascii_mode) {
+            if (is_player() ||
+                (level->player && (get_owner_id() == level->player->id)) ||
+                !game->config.ascii_mode) {
                 if (get_timestamp_flip_start()) {
                     //
                     // Slow flip
