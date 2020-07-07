@@ -12,6 +12,7 @@ def gold_init(name, text_name):
     x.set_gfx_animated(True)
     x.set_gfx_bounce_always(True)
     x.set_gfx_show_outlined(True)
+    x.set_is_mundane_item(False) # not a boring item
     x.set_is_sidebar_item(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_collectable(True)

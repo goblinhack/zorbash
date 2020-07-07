@@ -15,6 +15,7 @@ def tp_init(name, text_name):
     x.set_is_collectable(True)
     x.set_is_collected_as_gold(True)
     x.set_is_interesting(True)
+    x.set_is_mundane_item(False) # not a boring item
     x.set_is_sidebar_item(True)
     x.set_is_treasure(True)
     x.set_normal_placement_rules(True)

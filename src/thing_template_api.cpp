@@ -246,10 +246,10 @@ int Tp::is_rrr84(void) const { return _is_rrr84; }
 int Tp::is_rrr85(void) const { return _is_rrr85; }
 int Tp::is_rrr86(void) const { return _is_rrr86; }
 int Tp::is_rrr87(void) const { return _is_rrr87; }
-int Tp::is_rrr88(void) const { return _is_rrr88; }
-int Tp::is_rrr89(void) const { return _is_rrr89; }
+int Tp::is_mundane_item(void) const { return _is_mundane_item; }
+int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_rrr9(void) const { return _is_rrr9; }
-int Tp::is_rrr90(void) const { return _is_rrr90; }
+int Tp::has_capacity(void) const { return _has_capacity; }
 int Tp::is_potion(void) const { return _is_potion; }
 int Tp::is_sidebar_item(void) const { return _is_sidebar_item; }
 int Tp::is_floating(void) const { return _is_floating; }
@@ -487,10 +487,10 @@ void Tp::set_is_rrr84(int v) { _is_rrr84 = v; }
 void Tp::set_is_rrr85(int v) { _is_rrr85 = v; }
 void Tp::set_is_rrr86(int v) { _is_rrr86 = v; }
 void Tp::set_is_rrr87(int v) { _is_rrr87 = v; }
-void Tp::set_is_rrr88(int v) { _is_rrr88 = v; }
-void Tp::set_is_rrr89(int v) { _is_rrr89 = v; }
+void Tp::set_is_mundane_item(int v) { _is_mundane_item = v; }
+void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }
-void Tp::set_is_rrr90(int v) { _is_rrr90 = v; }
+void Tp::set_has_capacity(int v) { _has_capacity = v; }
 void Tp::set_is_potion(int v) { _is_potion = v; }
 void Tp::set_is_sidebar_item(int v) { _is_sidebar_item = v; }
 void Tp::set_is_floating(int v) { _is_floating = v; }

@@ -200,8 +200,13 @@ void Level::init (point3d at, int seed)
                 for (auto y = 0; y < MAP_HEIGHT; y++) {
                     if (dungeon->is_entrance(x, y)) {
                         auto t = thing_new("player1", fpoint(x, y));
+
                         auto w = thing_new("sword1", fpoint(x, y));
                         t->carry(w);
+
+                        auto b = thing_new("bag_small", fpoint(x, y));
+                        t->carry(b);
+
                         goto placed_player;
                     }
                 }

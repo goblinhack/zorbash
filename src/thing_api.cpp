@@ -919,19 +919,19 @@ int Thing::is_rrr87(void) const
     return (tp()->is_rrr87());
 }
 
-int Thing::is_rrr88(void) const
+int Thing::is_mundane_item(void) const
 {_
-    return (tp()->is_rrr88());
+    return (tp()->is_mundane_item());
 }
 
-int Thing::is_rrr89(void) const
+int Thing::is_bag(void) const
 {_
-    return (tp()->is_rrr89());
+    return (tp()->is_bag());
 }
 
-int Thing::is_rrr90(void) const
+int Thing::has_capacity(void) const
 {_
-    return (tp()->is_rrr90());
+    return (tp()->has_capacity());
 }
 
 int Thing::is_potion(void) const

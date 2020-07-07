@@ -437,14 +437,14 @@ class Tp:
     def set_is_rrr87(self, value):
         zx.tp_set_is_rrr87(self, value)
 
-    def set_is_rrr88(self, value):
-        zx.tp_set_is_rrr88(self, value)
+    def set_is_mundane_item(self, value):
+        zx.tp_set_is_mundane_item(self, value)
 
-    def set_is_rrr89(self, value):
-        zx.tp_set_is_rrr89(self, value)
+    def set_is_bag(self, value):
+        zx.tp_set_is_bag(self, value)
 
-    def set_is_rrr90(self, value):
-        zx.tp_set_is_rrr90(self, value)
+    def set_has_capacity(self, value):
+        zx.tp_set_has_capacity(self, value)
 
     def set_is_potion(self, value):
         zx.tp_set_is_potion(self, value)

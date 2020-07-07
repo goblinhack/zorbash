@@ -978,9 +978,9 @@ public:
     int is_rrr85(void) const;
     int is_rrr86(void) const;
     int is_rrr87(void) const;
-    int is_rrr88(void) const;
-    int is_rrr89(void) const;
-    int is_rrr90(void) const;
+    int is_mundane_item(void) const;
+    int is_bag(void) const;
+    int has_capacity(void) const;
     int is_potion(void) const;
     int is_sidebar_item(void) const;
     int is_floating(void) const;
