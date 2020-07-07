@@ -40,12 +40,13 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_mundane_item {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
@@ -1025,6 +1026,38 @@ public:
             return;
         }
         decr(_is_treasure, x, y, (uint8_t)1);
+    }
+
+    uint8_t is_mundane_item (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_mundane_item, p.x, p.y));
+    }
+
+    uint8_t is_mundane_item (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_mundane_item, x, y));
+    }
+
+    void set_is_mundane_item (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        incr(_is_mundane_item, x, y, (uint8_t)1);
+    }
+
+    void unset_is_mundane_item (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        decr(_is_mundane_item, x, y, (uint8_t)1);
     }
 
     uint8_t is_gold (const point &p)

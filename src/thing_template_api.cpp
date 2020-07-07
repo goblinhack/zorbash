@@ -245,7 +245,7 @@ int Tp::is_rrr83(void) const { return _is_rrr83; }
 int Tp::is_rrr84(void) const { return _is_rrr84; }
 int Tp::is_rrr85(void) const { return _is_rrr85; }
 int Tp::is_rrr86(void) const { return _is_rrr86; }
-int Tp::is_rrr87(void) const { return _is_rrr87; }
+int Tp::is_not_stackable(void) const { return _is_not_stackable; }
 int Tp::is_mundane_item(void) const { return _is_mundane_item; }
 int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_rrr9(void) const { return _is_rrr9; }
@@ -486,7 +486,7 @@ void Tp::set_is_rrr83(int v) { _is_rrr83 = v; }
 void Tp::set_is_rrr84(int v) { _is_rrr84 = v; }
 void Tp::set_is_rrr85(int v) { _is_rrr85 = v; }
 void Tp::set_is_rrr86(int v) { _is_rrr86 = v; }
-void Tp::set_is_rrr87(int v) { _is_rrr87 = v; }
+void Tp::set_is_not_stackable(int v) { _is_not_stackable = v; }
 void Tp::set_is_mundane_item(int v) { _is_mundane_item = v; }
 void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }

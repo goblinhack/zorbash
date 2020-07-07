@@ -58,24 +58,25 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_secret_corridor ||
                     m.is_dirt) {
                     floor_string += c;
-                } else if (m.is_blood       ||
-                           m.is_torch       ||
-                           m.is_deep_water  ||
-                           m.is_door        ||
-                           m.is_entrance    ||
-                           m.is_exit        ||
-                           m.is_floor_deco  ||
-                           m.is_food        ||
-                           m.is_treasure    ||
-                           m.is_gold        ||
-                           m.is_key         ||
-                           m.is_potion      ||
-                           m.is_lava        ||
-                           m.is_monst       ||
-                           m.is_generator   ||
-                           m.is_secret_door ||
-                           m.is_trap        ||
-                           m.is_water       ||
+                } else if (m.is_blood        ||
+                           m.is_deep_water   ||
+                           m.is_door         ||
+                           m.is_entrance     ||
+                           m.is_exit         ||
+                           m.is_floor_deco   ||
+                           m.is_food         ||
+                           m.is_generator    ||
+                           m.is_gold         ||
+                           m.is_key          ||
+                           m.is_lava         ||
+                           m.is_monst        ||
+                           m.is_mundane_item ||
+                           m.is_potion       ||
+                           m.is_secret_door  ||
+                           m.is_torch        ||
+                           m.is_trap         ||
+                           m.is_treasure     ||
+                           m.is_water        ||
                            m.is_floor_deco) {
                     floor_string += Charmap::FLOOR;
                 } else {
@@ -112,19 +113,20 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     walls_string += Charmap::SPACE;
                 }
 
-                if (m.is_blood       ||
-                    m.is_torch       ||
-                    m.is_entrance    ||
-                    m.is_exit        ||
-                    m.is_floor_deco  ||
-                    m.is_food        ||
-                    m.is_key         ||
-                    m.is_potion      ||
-                    m.is_monst       ||
-                    m.is_generator   ||
-                    m.is_trap        ||
-                    m.is_treasure    ||
-                    m.is_gold        ||
+                if (m.is_blood        ||
+                    m.is_entrance     ||
+                    m.is_exit         ||
+                    m.is_floor_deco   ||
+                    m.is_food         ||
+                    m.is_generator    ||
+                    m.is_gold         ||
+                    m.is_key          ||
+                    m.is_monst        ||
+                    m.is_mundane_item ||
+                    m.is_potion       ||
+                    m.is_torch        ||
+                    m.is_trap         ||
+                    m.is_treasure     ||
                     m.is_wall_deco) {
                     obj_strings += c;
                 } else {

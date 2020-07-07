@@ -854,6 +854,23 @@ bool Dungeon::is_treasure (const int x, const int y)
     return false;
 }
 
+bool Dungeon::is_mundane_item (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_mundane_item) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Dungeon::is_gold (const int x, const int y)
 {
     if (is_oob(x, y)) {

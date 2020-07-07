@@ -112,6 +112,7 @@ public:
     bool is_secret_corridor_at(const int x, const int y);
     bool is_secret_door(const int x, const int y);
     bool is_treasure(const int x, const int y);
+    bool is_mundane_item(const int x, const int y);
     bool is_gold(const int x, const int y);
     bool is_wall(const int x, const int y);
     bool is_wall_deco_at(const int x, const int y);

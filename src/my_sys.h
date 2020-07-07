@@ -199,12 +199,15 @@ void LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 //
 // Consoles
 //
+void BOTCON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void BOTCON(const wchar_t *fmt, ...);
 void CON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CON(const wchar_t *fmt, ...);
+void MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void MINICON(const wchar_t *fmt, ...);
 void con(const wchar_t *fmt);
 void minicon(const wchar_t *fmt);
+void botcon(const wchar_t *fmt);
 
 //
 // Enabled only when debug_mode is on

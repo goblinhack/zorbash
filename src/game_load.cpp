@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "minilzo.h"
 #include "my_wid_minicon.h"
+#include "my_wid_botcon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_game_error.h"
@@ -274,12 +275,13 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};          */ in >> bits(my.t->_is_floor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};           */ in >> bits(my.t->_is_food);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};      */ in >> bits(my.t->_is_generator);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};      */ in >> bits(my.t->_is_potion);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};           */ in >> bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};         */ in >> bits(my.t->_is_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};            */ in >> bits(my.t->_is_key);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};           */ in >> bits(my.t->_is_lava);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};          */ in >> bits(my.t->_is_monst);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_mundane_item {};   */ in >> bits(my.t->_is_mundane_item);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};         */ in >> bits(my.t->_is_potion);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};           */ in >> bits(my.t->_is_rock);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};    */ in >> bits(my.t->_is_secret_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};          */ in >> bits(my.t->_is_smoke);
@@ -637,6 +639,7 @@ Game::load (std::string file_to_load, class Game &target)
 
     if (!game_load_headers_only) {
         wid_visible(wid_minicon_window);
+        wid_visible(wid_botcon_window);
         game_status_wid_fini();
         game_status_wid_init();
     }

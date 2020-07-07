@@ -38,6 +38,7 @@ void Level::clear (void)
     _is_rock = {};
     _is_smoke = {};
     _is_treasure = {};
+    _is_mundane_item = {};
     _is_visited = {};
     _is_lit = {};
     _is_wall = {};
@@ -518,6 +519,7 @@ void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
             if (d->is_monst(x, y + 1) ||
                 d->is_food(x, y + 1) ||
                 d->is_treasure(x, y + 1) ||
+                d->is_mundane_item(x, y + 1) ||
                 d->is_potion(x, y + 1) ||
                 d->is_key(x, y + 1)) {
                 if (!is_floor(x, y + 1)) {
@@ -527,6 +529,7 @@ void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
             if (d->is_monst(x, y - 1) ||
                 d->is_food(x, y - 1) ||
                 d->is_treasure(x, y - 1) ||
+                d->is_mundane_item(x, y - 1) ||
                 d->is_potion(x, y - 1) ||
                 d->is_key(x, y - 1)) {
                 if (!is_floor(x, y - 1)) {
@@ -536,6 +539,7 @@ void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
             if (d->is_monst(x + 1, y) ||
                 d->is_food(x + 1, y) ||
                 d->is_treasure(x + 1, y) ||
+                d->is_mundane_item(x + 1, y) ||
                 d->is_potion(x + 1, y) ||
                 d->is_key(x + 1, y)) {
                 if (!is_floor(x + 1, y)) {
@@ -545,6 +549,7 @@ void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
             if (d->is_monst(x - 1, y) ||
                 d->is_food(x - 1, y) ||
                 d->is_treasure(x - 1, y) ||
+                d->is_mundane_item(x - 1, y) ||
                 d->is_potion(x - 1, y) ||
                 d->is_key(x - 1, y)) {
                 if (!is_floor(x - 1, y)) {
@@ -561,19 +566,20 @@ void Level::place_normal_placement_rules (Dungeonp d)
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             Tpp tp {};
 
-            if (d->is_blood(x, y))       { tp = tp_random_blood(); }
-            if (d->is_door(x, y))        { tp = tp_random_door(); }
-            if (d->is_entrance(x, y))    { tp = tp_random_entrance(); }
-            if (d->is_exit(x, y))        { tp = tp_random_exit(); }
-            if (d->is_food(x, y))        { tp = tp_random_food(); }
-            if (d->is_gold(x, y))        { tp = tp_random_gold(); }
-            if (d->is_key(x, y))         { tp = tp_random_key(); }
-            if (d->is_potion(x, y))      { tp = tp_random_potion(); }
-            if (d->is_monst(x, y))       { tp = tp_random_monst(); }
-            if (d->is_secret_door(x, y)) { tp = tp_random_secret_door(); }
-            if (d->is_generator(x, y))   { tp = tp_random_generator(); }
-            if (d->is_torch(x, y))       { tp = tp_random_torch(); }
-            if (d->is_treasure(x, y))    { tp = tp_random_treasure(); }
+            if (d->is_blood(x, y))        { tp = tp_random_blood(); }
+            if (d->is_door(x, y))         { tp = tp_random_door(); }
+            if (d->is_entrance(x, y))     { tp = tp_random_entrance(); }
+            if (d->is_exit(x, y))         { tp = tp_random_exit(); }
+            if (d->is_food(x, y))         { tp = tp_random_food(); }
+            if (d->is_gold(x, y))         { tp = tp_random_gold(); }
+            if (d->is_key(x, y))          { tp = tp_random_key(); }
+            if (d->is_potion(x, y))       { tp = tp_random_potion(); }
+            if (d->is_monst(x, y))        { tp = tp_random_monst(); }
+            if (d->is_secret_door(x, y))  { tp = tp_random_secret_door(); }
+            if (d->is_generator(x, y))    { tp = tp_random_generator(); }
+            if (d->is_torch(x, y))        { tp = tp_random_torch(); }
+            if (d->is_treasure(x, y))     { tp = tp_random_treasure(); }
+            if (d->is_mundane_item(x, y)) { tp = tp_random_mundane_item(); }
             if (tp) {
                 (void) thing_new(tp->name(), fpoint(x, y));
             }
@@ -777,16 +783,17 @@ void Level::place_random_floor_deco (Dungeonp d)
                 continue;
             }
 
-            if (d->is_food(x, y)        ||
-                d->is_blood(x, y)       ||
-                d->is_door(x, y)        ||
-                d->is_entrance(x, y)    ||
-                d->is_exit(x, y)        ||
-                d->is_generator(x, y)   ||
-                d->is_key(x, y)         ||
-                d->is_potion(x, y)      ||
-                d->is_secret_door(x, y) ||
-                d->is_treasure(x, y)    ||
+            if (d->is_food(x, y)         ||
+                d->is_blood(x, y)        ||
+                d->is_door(x, y)         ||
+                d->is_entrance(x, y)     ||
+                d->is_exit(x, y)         ||
+                d->is_generator(x, y)    ||
+                d->is_key(x, y)          ||
+                d->is_potion(x, y)       ||
+                d->is_secret_door(x, y)  ||
+                d->is_treasure(x, y)     ||
+                d->is_mundane_item(x, y) ||
                 d->is_monst(x, y)) {
                 continue;
             }
