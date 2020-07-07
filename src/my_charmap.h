@@ -38,8 +38,9 @@ public:
         SECRET_CORRIDOR = '?',
         SECRET_DOOR     = 'd',
         SPACE           = ' ',
-        TRAP            = 'i',
+        TRAP            = 't',
         TREASURE        = '$',
+        ITEM            = 'i',
         WALL            = 'x',
         WATER           = 'w',
         GENERATOR       = '%',
@@ -68,6 +69,7 @@ public:
     bool                      is_torch             {false};
     bool                      is_trap              {false};
     bool                      is_treasure          {false};
+    bool                      is_mundane_item              {false};
     bool                      is_wall              {false};
     bool                      is_wall_deco         {false};
     bool                      is_water             {false};

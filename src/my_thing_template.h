@@ -278,9 +278,9 @@ private:
     int _is_rrr85 {};
     int _is_rrr86 {};
     int _is_rrr87 {};
-    int _is_rrr88 {};
-    int _is_rrr89 {};
-    int _is_rrr90 {};
+    int _is_mundane_item {};
+    int _is_bag {};
+    int _has_capacity {};
     int _is_potion {};
     int _is_sidebar_item {};
     int _is_floating {};
@@ -616,9 +616,9 @@ public:
     int is_rrr85(void) const;
     int is_rrr86(void) const;
     int is_rrr87(void) const;
-    int is_rrr88(void) const;
-    int is_rrr89(void) const;
-    int is_rrr90(void) const;
+    int is_mundane_item(void) const;
+    int is_bag(void) const;
+    int has_capacity(void) const;
     int is_potion(void) const;
     int is_sidebar_item(void) const;
     int is_floating(void) const;
@@ -862,9 +862,9 @@ public:
     void set_is_rrr85(int);
     void set_is_rrr86(int);
     void set_is_rrr87(int);
-    void set_is_rrr88(int);
-    void set_is_rrr89(int);
-    void set_is_rrr90(int);
+    void set_is_mundane_item(int);
+    void set_is_bag(int);
+    void set_has_capacity(int);
     void set_is_potion(int);
     void set_is_sidebar_item(int);
     void set_is_floating(int);
