@@ -434,8 +434,8 @@ class Tp:
     def set_is_rrr86(self, value):
         zx.tp_set_is_rrr86(self, value)
 
-    def set_is_rrr87(self, value):
-        zx.tp_set_is_rrr87(self, value)
+    def set_is_not_stackable(self, value):
+        zx.tp_set_is_not_stackable(self, value)
 
     def set_is_mundane_item(self, value):
         zx.tp_set_is_mundane_item(self, value)

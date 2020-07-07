@@ -914,9 +914,9 @@ int Thing::is_rrr86(void) const
     return (tp()->is_rrr86());
 }
 
-int Thing::is_rrr87(void) const
+int Thing::is_not_stackable(void) const
 {_
-    return (tp()->is_rrr87());
+    return (tp()->is_not_stackable());
 }
 
 int Thing::is_mundane_item(void) const

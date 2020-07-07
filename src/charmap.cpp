@@ -139,7 +139,7 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::ITEM;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_mundane_item              = true;
+    c->is_mundane_item      = true;
 
     char_index              = Charmap::MONST;
     c = &all_charmaps[char_index];

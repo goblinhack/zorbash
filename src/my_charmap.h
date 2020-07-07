@@ -11,7 +11,6 @@ class Charmap;
 class Charmap {
 public:
     enum {
-        NONE            = '\0',
         BLOOD           = 'b',
         BRAZIER         = 'B',
         CHASM           = 'C',
@@ -29,21 +28,22 @@ public:
         EXIT            = 'E',
         FLOOR           = '.',
         FOOD            = 'f',
+        GENERATOR       = '%',
         GOLD            = 'g',
+        ITEM            = 'i',
         KEY             = 'k',
-        POTION          = 'p',
         LAVA            = 'L',
         MONST           = 'm',
+        NONE            = '\0',
+        POTION          = 'p',
         ROCK            = 'r',
         SECRET_CORRIDOR = '?',
         SECRET_DOOR     = 'd',
         SPACE           = ' ',
         TRAP            = 't',
         TREASURE        = '$',
-        ITEM            = 'i',
         WALL            = 'x',
         WATER           = 'w',
-        GENERATOR       = '%',
     };
 
     char                      c;
@@ -58,22 +58,22 @@ public:
     bool                      is_floor             {false};
     bool                      is_floor_deco        {false};
     bool                      is_food              {false};
+    bool                      is_generator         {false};
     bool                      is_gold              {false};
     bool                      is_key               {false};
-    bool                      is_potion            {false};
     bool                      is_lava              {false};
     bool                      is_monst             {false};
+    bool                      is_mundane_item      {false};
+    bool                      is_potion            {false};
     bool                      is_rock              {false};
     bool                      is_secret_corridor   {false};
     bool                      is_secret_door       {false};
     bool                      is_torch             {false};
     bool                      is_trap              {false};
     bool                      is_treasure          {false};
-    bool                      is_mundane_item              {false};
     bool                      is_wall              {false};
     bool                      is_wall_deco         {false};
     bool                      is_water             {false};
-    bool                      is_generator         {false};
 
     static std::vector<Charmap> all_charmaps;
     static void init_charmaps(void);

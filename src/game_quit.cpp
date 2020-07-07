@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_wid_minicon.h"
+#include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 
 static WidPopup *game_quit_window;
@@ -23,6 +24,8 @@ uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
         LOG("USERCFG: restart game");
         wid_minicon_fini();
         wid_minicon_init();
+        wid_botcon_fini();
+        wid_botcon_init();
         game->fini();
         game->main_menu_select();
     } else {

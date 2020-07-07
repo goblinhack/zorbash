@@ -977,7 +977,7 @@ public:
     int is_rrr84(void) const;
     int is_rrr85(void) const;
     int is_rrr86(void) const;
-    int is_rrr87(void) const;
+    int is_not_stackable(void) const;
     int is_mundane_item(void) const;
     int is_bag(void) const;
     int has_capacity(void) const;
@@ -1047,6 +1047,8 @@ public:
     void con_(const char *fmt, va_list args) const; // compile error without
     void minicon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void minicon_(const char *fmt, va_list args) const; // compile error without
+    void botcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
+    void botcon_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
     void cursor_path_pop_first_move(void);
     void cursor_path_stop(void);

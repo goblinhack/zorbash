@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_wid_minicon.h"
+#include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 
 static WidPopup *wid_dead_window;
@@ -17,6 +18,7 @@ static void wid_dead_destroy (void)
     game->fini();
     game->main_menu_select();
     wid_not_visible(wid_minicon_window);
+    wid_not_visible(wid_botcon_window);
 }
 
 uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)

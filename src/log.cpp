@@ -7,6 +7,7 @@
 #include "my_traceback.h"
 #include "my_wid_console.h"
 #include "my_wid_minicon.h"
+#include "my_wid_botcon.h"
 #include "my_python.h"
 #include "my_console.h"
 #include "my_log.h"
@@ -475,5 +476,99 @@ void SDL_MSG_BOX (const char *fmt, ...)
 
     va_start(args, fmt);
     sdl_msgerr_(fmt, args);
+    va_end(args);
+}
+
+static void botcon_ (const char *fmt, va_list args)
+{
+    char buf[MAXSTR];
+    char ts[MAXSTR/2];
+    int len;
+
+    buf[0] = '\0';
+    get_timestamp(ts, MAXSTR);
+    snprintf(buf, sizeof(buf) - 1, "%sBOTCON: ", ts);
+    len = (int)strlen(buf);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+
+    term_log(buf);
+    putchar('\n');
+
+    wid_botcon_log(buf + len);
+    wid_console_log(buf + len);
+    FLUSH_THE_CONSOLE();
+}
+
+static void botcon_ (const wchar_t *fmt, va_list args)
+{
+    {
+        char ts[MAXSTR];
+        ts[0] = '\0';
+        get_timestamp(ts, MAXSTR);
+        fprintf(MY_STDOUT, "%sBOTCON: ", ts);
+        term_log(ts);
+    }
+
+    {
+        wchar_t buf[MAXSTR];
+        auto wrote = vswprintf(buf, MAXSTR, fmt, args);
+
+        //
+        // Only a single nul is written, but as we read 2 at a time...
+        //
+        if (wrote && (wrote < MAXSTR - 1)) {
+            buf[wrote+1] = '\0';
+        } else {
+            fprintf(stderr, "Failed to botcon log: [%S]\n", fmt);
+        }
+
+        fwprintf(MY_STDOUT, L"%S\n", buf);
+        term_log(buf);
+        wid_botcon_log(buf);
+        //wid_console_log(buf);
+    }
+
+    putchar('\n');
+    FLUSH_THE_CONSOLE();
+}
+
+void botcon (const wchar_t *fmt)
+{
+    {
+        char buf[MAXSTR];
+
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSTR);
+        fprintf(MY_STDOUT, "%s", buf);
+        term_log(buf);
+    }
+
+    {
+        fwprintf(MY_STDOUT, L"%S\n", fmt);
+        term_log(fmt);
+        wid_botcon_log(fmt);
+        //wid_console_log(fmt);
+    }
+    putchar('\n');
+    FLUSH_THE_CONSOLE();
+}
+
+void BOTCON (const char *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    botcon_(fmt, args);
+    va_end(args);
+}
+
+void BOTCON (const wchar_t *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    botcon_(fmt, args);
     va_end(args);
 }

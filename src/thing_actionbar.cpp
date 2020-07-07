@@ -120,9 +120,15 @@ bool Thing::actionbar_id_insert (Thingp what)
         }
         auto t = level->thing_find(a);
         if (t->tp() == what->tp()) {
-            game_status_wid_init();
-            actionbar_particle(what, i);
-            return true;
+            if (t->is_not_stackable()) {
+                //
+                // Needs its own slot
+                //
+            } else {
+                game_status_wid_init();
+                actionbar_particle(what, i);
+                return true;
+            }
         }
     }
 
@@ -222,6 +228,9 @@ int Thing::actionbar_id_slot_count (const int slot)
         auto o = level->thing_find(oid);
         if (o->tp() == t->tp()) {
             count++;
+            if (o->is_not_stackable()) {
+                count = 1;
+            }
         }
     }
 

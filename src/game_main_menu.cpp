@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_wid_minicon.h"
+#include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_game_status.h"
 #include "my_gl.h"
@@ -28,11 +29,19 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     game->init();
     game_status_wid_fini();
     game_status_wid_init();
+
     wid_minicon_fini();
     wid_minicon_init();
+
     wid_visible(wid_minicon_window);
     MINICON("Welcome to the lair of the dread beholder, %%fg=red$Zorbash%%fg=reset$.");
     MINICON("Liberate the %%fg=yellow$Orb of Zorb%%fg=reset$ and defeat Zorbash to win.");
+
+    wid_botcon_fini();
+    wid_botcon_init();
+
+    wid_visible(wid_botcon_window);
+    BOTCON("Press 'h' for help");
     return (false);
 }
 

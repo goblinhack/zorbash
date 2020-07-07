@@ -670,7 +670,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr84)
     TP_SET_DECL(is_rrr85)
     TP_SET_DECL(is_rrr86)
-    TP_SET_DECL(is_rrr87)
+    TP_SET_DECL(is_not_stackable)
     TP_SET_DECL(is_mundane_item)
     TP_SET_DECL(is_bag)
     TP_SET_DECL(has_capacity)

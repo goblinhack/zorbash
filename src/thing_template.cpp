@@ -33,6 +33,7 @@ static Tpidmap tp_secret_door;
 static Tpidmap tp_generator;
 static Tpidmap tp_torch;
 static Tpidmap tp_treasure;
+static Tpidmap tp_mundane_item;
 static Tpidmap tp_wall;
 static Tpidmap tp_wall_deco;
 
@@ -117,16 +118,17 @@ void tp_init_after_loading (void)
         if (tp->is_floor())          { tp_floor.push_back(tp); }
         if (tp->is_floor_deco())     { tp_deco.push_back(tp); }
         if (tp->is_food())           { tp_food.push_back(tp); }
+        if (tp->is_generator())      { tp_generator.push_back(tp); }
+        if (tp->is_gold())           { tp_gold.push_back(tp); }
         if (tp->is_key())            { tp_key.push_back(tp); }
         if (tp->is_monst())          { tp_monst.push_back(tp); }
+        if (tp->is_mundane_item())   { tp_mundane_item.push_back(tp); }
+        if (tp->is_potion())         { tp_potion.push_back(tp); }
         if (tp->is_ripple())         { tp_ripples.push_back(tp); }
         if (tp->is_rock())           { tp_rock.push_back(tp); }
         if (tp->is_secret_door())    { tp_secret_door.push_back(tp); }
-        if (tp->is_generator())      { tp_generator.push_back(tp); }
-        if (tp->is_potion())      { tp_potion.push_back(tp); }
         if (tp->is_torch())          { tp_torch.push_back(tp); }
         if (tp->is_treasure())       { tp_treasure.push_back(tp); }
-        if (tp->is_gold())           { tp_gold.push_back(tp); }
         if (tp->is_wall())           { tp_wall.push_back(tp); }
         if (tp->is_wall_deco())      { tp_wall_deco.push_back(tp); }
     }
@@ -168,6 +170,15 @@ Tpp tp_random_treasure (void)
         return (nullptr);
     }
     return get(tp_treasure, myrand() % tp_treasure.size());
+}
+
+Tpp tp_random_mundane_item (void)
+{_
+    if (unlikely(!tp_mundane_item.size())) {
+        ERR("no mundane_items found");
+        return (nullptr);
+    }
+    return get(tp_mundane_item, myrand() % tp_mundane_item.size());
 }
 
 Tpp tp_random_dirt (void)

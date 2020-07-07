@@ -20,6 +20,7 @@ std::default_random_engine rng;
 #include "my_gl.h"
 #include "my_wid_console.h"
 #include "my_wid_minicon.h"
+#include "my_wid_botcon.h"
 #include "my_wid_test.h"
 #include "my_font.h"
 #include "my_dir.h"
@@ -118,6 +119,9 @@ void quit (void)
 
     LOG("FINI: wid_minicon_fini");
     wid_minicon_fini();
+
+    LOG("FINI: wid_botcon_fini");
+    wid_botcon_fini();
 
     LOG("FINI: wid_test_fini");
     wid_test_fini();
@@ -726,6 +730,12 @@ int32_t main (int32_t argc, char *argv[])
         ERR("wid_minicon init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    CON("INIT: Load UI botcon");
+    if (!wid_botcon_init()) {
+        ERR("wid_botcon init");
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     CON("INIT: Find resource locations for gfx and music");
     find_file_locations();
@@ -774,8 +784,9 @@ int32_t main (int32_t argc, char *argv[])
     }
 #endif
 
-    CON("INIT: Clear minicon");
+    CON("INIT: Clear minicons");
     wid_minicon_flush();
+    wid_botcon_flush();
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
