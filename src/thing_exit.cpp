@@ -34,6 +34,15 @@ bool Thing::descend (void)
         return false;
     }
 
+    if (is_monst()) {
+        if (level->player) {
+            //
+            // Don't descend if player is on the same level
+            //
+            return false;
+        }
+    }
+
     //
     // No level change if we've not moved
     //
