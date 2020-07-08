@@ -14,7 +14,6 @@ Widp wid_actionbar {};
 Widp wid_fake_itembar {};
 Widp wid_item_popup {};
 Widp wid_sidebar {};
-static auto highlight_slot = 0U;
 
 void game_status_wid_fini (void)
 {_
@@ -43,38 +42,31 @@ static uint8_t game_status_mouse_down (Widp w,
 
 static void game_status_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-    auto slot = wid_get_int_context(w);
-    highlight_slot = slot;
-
-    if (game->level) {
-        auto t = game->level->actionbar_get(highlight_slot);
-        if (t) {
-            auto s = t->text_name();
-
-            if (t->is_droppable()){
-                s += ", %%fg=orange$d%%fg=reset$rop";
-            }
-            if (t->is_usable()){
-                s += ", %%fg=cyan$u%%fg=reset$se";
-            }
-            if (t->is_food()){
-                s += ", %%fg=green$e%%fg=reset$at";
-            }
-            if (t->is_throwable()){
-                s += ", %%fg=purple$t%%fg=reset$hrow";
-            }
-
-            BOTCON("%s", s.c_str());
-        }
+    auto level = game->level;
+    if (!level) {
+        return;
     }
 
+    auto slot = wid_get_int_context(w);
+    if (!level->actionbar_select(slot)) {
+        return;
+    }
+
+    level->actionbar_describe(slot);
     game_status_wid_create();
 }
 
 static void game_status_mouse_over_e (Widp w)
 {
+    auto level = game->level;
+    if (!level) {
+        return;
+    }
+
     auto slot = wid_get_int_context(w);
-    highlight_slot = slot;
+    if (!level->actionbar_select(slot)) {
+        return;
+    }
 
     //
     // Do not create new wids in here
@@ -126,7 +118,7 @@ static void game_status_wid_create (void)
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_NONE);
 
-        if (i == highlight_slot) {
+        if (i == game->actionbar_highlight_slot) {
             std::string tile = "ui_action_bar_highlight" + std::to_string(i);
             wid_set_bg_tilename(w, tile.c_str());
         } else {

@@ -1537,11 +1537,13 @@ public:
     void place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void place_water(Dungeonp d, const std::string &what);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
-    Thingp actionbar_get(const int slot);
+    Thingp actionbar_get(const uint32_t slot);
     Thingp thing_find(const ThingId id);
     Thingp thing_new(const std::string& tp_name, Thingp owner);
     Thingp thing_new(const std::string& tp_name, const point at);
     Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
+    bool actionbar_select(const uint32_t slot);
+    bool actionbar_describe(const uint32_t slot);
     void things_gc(void);
     void things_tick(void);
 

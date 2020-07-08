@@ -149,6 +149,7 @@ public:
     int                seed {};             // All randomness jumps off of this
     point3d            current_level;       // Where we are in the world.
     timestamp_t        last_pause {};
+    uint32_t           actionbar_highlight_slot {};
     uint32_t           fps_value = {};      // Current framerate
     uint32_t           things_are_moving {};
     uint32_t           tick_completed {};

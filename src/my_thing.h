@@ -664,12 +664,12 @@ public:
     ThingId set_weapon_id(ThingId);
     ThingId get_weapon_id(void) const;
 
-    void actionbar_particle(Thingp what, int slot);
-    void actionbar_particle(Thingp what, int slot, Thingp target);
+    void actionbar_particle(Thingp what, uint32_t slot);
+    void actionbar_particle(Thingp what, uint32_t slot, Thingp target);
     bool actionbar_id_remove(Thingp what);
     bool actionbar_id_remove(Thingp what, Thingp target);
     bool actionbar_id_insert(Thingp what);
-    int actionbar_id_slot_count(const int slot);
+    int actionbar_id_slot_count(const uint32_t slot);
 
     //
     // Dice

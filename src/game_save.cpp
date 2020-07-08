@@ -393,17 +393,18 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.config);
     out << bits(my.t.world);
 
-    /* bool               hard_paused       */ out << bits(my.t.hard_paused);
-    /* bool               soft_paused       */ out << bits(my.t.soft_paused);
-    /* bool               started           */ out << bits(my.t.started);
-    /* fpoint             mouse_over        */ out << bits(my.t.mouse_over);
-    /* int                seed              */ out << bits(my.t.seed);
-    /* point3d            current_level     */ out << bits(my.t.current_level);
-    /* timestamp_t        last_pause        */ out << bits(my.t.last_pause);
-    /* uint32_t           fps_value         */ out << bits(my.t.fps_value);
-    /* uint32_t           things_are_moving */ out << bits(my.t.things_are_moving);
-    /* uint32_t           tick_completed    */ out << bits(my.t.tick_completed);
-    /* uint32_t           tick_current      */ out << bits(my.t.tick_current);
+    /* bool               hard_paused                  */ out << bits(my.t.hard_paused);
+    /* bool               soft_paused                  */ out << bits(my.t.soft_paused);
+    /* bool               started                      */ out << bits(my.t.started);
+    /* fpoint             mouse_over                   */ out << bits(my.t.mouse_over);
+    /* int                seed                         */ out << bits(my.t.seed);
+    /* point3d            current_level                */ out << bits(my.t.current_level);
+    /* timestamp_t        last_pause                   */ out << bits(my.t.last_pause);
+    /* uint32_t           actionbar_highlight_slot     */ out << bits(my.t.actionbar_highlight_slot);
+    /* uint32_t           fps_value                    */ out << bits(my.t.fps_value);
+    /* uint32_t           things_are_moving            */ out << bits(my.t.things_are_moving);
+    /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);
+    /* uint32_t           tick_current                 */ out << bits(my.t.tick_current);
 
     out << bits(wid_minicon_serialize());
     out << bits(wid_console_serialize());
