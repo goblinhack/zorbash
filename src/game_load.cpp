@@ -836,12 +836,12 @@ void Game::load_select (void)
             } else {
                 s += "<empty>";
             }
-            wid_set_style(w, UI_WID_STYLE_RED);
+            wid_set_style(w, UI_WID_STYLE_GRAY);
         } else {
             s += tmp.save_meta;
             wid_set_style(w, UI_WID_STYLE_GREEN);
+            wid_set_on_mouse_up(w, wid_load_mouse_up);
         }
-        wid_set_on_mouse_up(w, wid_load_mouse_up);
         wid_set_int_context(w, slot);
 
         wid_set_pos(w, tl, br);

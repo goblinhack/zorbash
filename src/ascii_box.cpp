@@ -28,7 +28,7 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
 
     if (!init) {
         init = true;
-        for (auto styles = 0; styles < 5; styles++) {
+        for (auto styles = 0; styles < UI_WID_STYLE_MAX; styles++) {
             for (auto x = 0; x < MAX_UI_SIZE; x++) {
                 for (auto y = 0; y < MAX_UI_SIZE; y++) {
                     std::string name =
