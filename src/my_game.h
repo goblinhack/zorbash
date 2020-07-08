@@ -52,6 +52,7 @@ public:
     uint32_t           key_action8                  = {SDL_SCANCODE_8};
     uint32_t           key_action9                  = {SDL_SCANCODE_9};
     uint32_t           key_attack                   = {SDL_SCANCODE_SPACE};
+    uint32_t           key_drop                     = {SDL_SCANCODE_BACKSPACE};
     uint32_t           key_help                     = {SDL_SCANCODE_H};
     uint32_t           key_jump                     = {SDL_SCANCODE_J};
     uint32_t           key_load                     = {SDL_SCANCODE_F11};
@@ -67,15 +68,14 @@ public:
     uint32_t           key_quit                     = {SDL_SCANCODE_Q};
     uint32_t           key_save                     = {SDL_SCANCODE_F12};
     uint32_t           key_screenshot               = {SDL_SCANCODE_BACKSLASH};
+    uint32_t           key_throw                    = {SDL_SCANCODE_T};
     uint32_t           key_unused1                  = 0;
     uint32_t           key_unused2                  = 0;
     uint32_t           key_unused3                  = 0;
     uint32_t           key_unused4                  = 0;
     uint32_t           key_unused5                  = 0;
     uint32_t           key_unused6                  = 0;
-    uint32_t           key_unused7                  = 0;
-    uint32_t           key_unused8                  = 0;
-    uint32_t           key_unused9                  = 0;
+    uint32_t           key_use                      = {SDL_SCANCODE_U};
     uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
     uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};
     uint32_t           key_zoom_out                 = {SDL_SCANCODE_X};

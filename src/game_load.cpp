@@ -464,9 +464,9 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_unused4                  */ in >> bits(my.t.key_unused4                  );
     /* uint32_t           key_unused5                  */ in >> bits(my.t.key_unused5                  );
     /* uint32_t           key_unused6                  */ in >> bits(my.t.key_unused6                  );
-    /* uint32_t           key_unused7                  */ in >> bits(my.t.key_unused7                  );
-    /* uint32_t           key_unused8                  */ in >> bits(my.t.key_unused8                  );
-    /* uint32_t           key_unused9                  */ in >> bits(my.t.key_unused9                  );
+    /* uint32_t           key_throw                    */ in >> bits(my.t.key_throw                    );
+    /* uint32_t           key_drop                     */ in >> bits(my.t.key_drop                     );
+    /* uint32_t           key_use                      */ in >> bits(my.t.key_use                      );
     /* uint32_t           key_wait                     */ in >> bits(my.t.key_wait                     );
     /* uint32_t           key_zoom_in                  */ in >> bits(my.t.key_zoom_in                  );
     /* uint32_t           key_zoom_out                 */ in >> bits(my.t.key_zoom_out                 );
