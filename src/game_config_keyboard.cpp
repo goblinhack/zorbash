@@ -14,6 +14,238 @@ static WidPopup *game_config_keyboard_window;
 //
 static_assert(sizeof(SDL_Scancode) <= sizeof(game->config.key_move_left));
 
+static void game_config_check_for_conflicts (SDL_Scancode code)
+{_
+    if (game->config.key_action0) {
+        if (game->config.key_action0 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action0");
+            game->config.key_action0 = 0;
+        }
+    }
+    if (game->config.key_action1) {
+        if (game->config.key_action1 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action1");
+            game->config.key_action1 = 0;
+        }
+    }
+    if (game->config.key_action2) {
+        if (game->config.key_action2 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action2");
+            game->config.key_action2 = 0;
+        }
+    }
+    if (game->config.key_action3) {
+        if (game->config.key_action3 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action3");
+            game->config.key_action3 = 0;
+        }
+    }
+    if (game->config.key_action4) {
+        if (game->config.key_action4 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action4");
+            game->config.key_action4 = 0;
+        }
+    }
+    if (game->config.key_action5) {
+        if (game->config.key_action5 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action5");
+            game->config.key_action5 = 0;
+        }
+    }
+    if (game->config.key_action6) {
+        if (game->config.key_action6 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action6");
+            game->config.key_action6 = 0;
+        }
+    }
+    if (game->config.key_action7) {
+        if (game->config.key_action7 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action7");
+            game->config.key_action7 = 0;
+        }
+    }
+    if (game->config.key_action8) {
+        if (game->config.key_action8 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action8");
+            game->config.key_action8 = 0;
+        }
+    }
+    if (game->config.key_action9) {
+        if (game->config.key_action9 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key action9");
+            game->config.key_action9 = 0;
+        }
+    }
+    if (game->config.key_attack) {
+        if (game->config.key_attack == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key attack");
+            game->config.key_attack = 0;
+        }
+    }
+    if (game->config.key_drop) {
+        if (game->config.key_drop == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key drop");
+            game->config.key_drop = 0;
+        }
+    }
+    if (game->config.key_help) {
+        if (game->config.key_help == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key help");
+            game->config.key_help = 0;
+        }
+    }
+    if (game->config.key_jump) {
+        if (game->config.key_jump == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key jump");
+            game->config.key_jump = 0;
+        }
+    }
+    if (game->config.key_load) {
+        if (game->config.key_load == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key load");
+            game->config.key_load = 0;
+        }
+    }
+    if (game->config.key_map_down) {
+        if (game->config.key_map_down == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key map down");
+            game->config.key_map_down = 0;
+        }
+    }
+    if (game->config.key_map_left) {
+        if (game->config.key_map_left == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key map left");
+            game->config.key_map_left = 0;
+        }
+    }
+    if (game->config.key_map_right) {
+        if (game->config.key_map_right == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key map right");
+            game->config.key_map_right = 0;
+        }
+    }
+    if (game->config.key_map_up) {
+        if (game->config.key_map_up == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key map up");
+            game->config.key_map_up = 0;
+        }
+    }
+    if (game->config.key_move_down) {
+        if (game->config.key_move_down == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key move down");
+            game->config.key_move_down = 0;
+        }
+    }
+    if (game->config.key_move_left) {
+        if (game->config.key_move_left == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key move left");
+            game->config.key_move_left = 0;
+        }
+    }
+    if (game->config.key_move_right) {
+        if (game->config.key_move_right == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key move right");
+            game->config.key_move_right = 0;
+        }
+    }
+    if (game->config.key_move_up) {
+        if (game->config.key_move_up == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key move up");
+            game->config.key_move_up = 0;
+        }
+    }
+    if (game->config.key_pause) {
+        if (game->config.key_pause == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key pause");
+            game->config.key_pause = 0;
+        }
+    }
+    if (game->config.key_quit) {
+        if (game->config.key_quit == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key quit");
+            game->config.key_quit = 0;
+        }
+    }
+    if (game->config.key_save) {
+        if (game->config.key_save == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key save");
+            game->config.key_save = 0;
+        }
+    }
+    if (game->config.key_screenshot) {
+        if (game->config.key_screenshot == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key screenshot");
+            game->config.key_screenshot = 0;
+        }
+    }
+    if (game->config.key_throw) {
+        if (game->config.key_throw == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key throw");
+            game->config.key_throw = 0;
+        }
+    }
+    if (game->config.key_unused1) {
+        if (game->config.key_unused1 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key unused1");
+            game->config.key_unused1 = 0;
+        }
+    }
+    if (game->config.key_unused2) {
+        if (game->config.key_unused2 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key unused2");
+            game->config.key_unused2 = 0;
+        }
+    }
+    if (game->config.key_unused3) {
+        if (game->config.key_unused3 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key unused3");
+            game->config.key_unused3 = 0;
+        }
+    }
+    if (game->config.key_unused4) {
+        if (game->config.key_unused4 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key unused4");
+            game->config.key_unused4 = 0;
+        }
+    }
+    if (game->config.key_unused5) {
+        if (game->config.key_unused5 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key unused5");
+            game->config.key_unused5 = 0;
+        }
+    }
+    if (game->config.key_unused6) {
+        if (game->config.key_unused6 == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key unused6");
+            game->config.key_unused6 = 0;
+        }
+    }
+    if (game->config.key_use) {
+        if (game->config.key_use == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key use");
+            game->config.key_use = 0;
+        }
+    }
+    if (game->config.key_wait) {
+        if (game->config.key_wait == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key wait");
+            game->config.key_wait = 0;
+        }
+    }
+    if (game->config.key_zoom_in) {
+        if (game->config.key_zoom_in == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key zoom in");
+            game->config.key_zoom_in = 0;
+        }
+    }
+    if (game->config.key_zoom_out) {
+        if (game->config.key_zoom_out == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key zoom out");
+            game->config.key_zoom_out = 0;
+        }
+    }
+}
+
 static void game_config_keyboard_destroy (void)
 {_
     delete game_config_keyboard_window;
@@ -66,179 +298,208 @@ uint8_t game_config_keyboard_back (Widp w, int32_t x, int32_t y, uint32_t button
 
 static void game_config_key_move_left_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_move_left = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_move_right_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_move_right = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_move_up_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_move_up = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_move_down_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_move_down = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_map_left_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_map_left = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_map_right_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_map_right = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_map_up_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_map_up = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_map_down_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_map_down = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_attack_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_attack = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_wait_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_wait = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_jump_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_jump = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action0_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action0 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action1_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action1 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action2_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action2 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action3_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action3 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action4_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action4 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action5_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action5 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action6_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action6 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action7_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action7 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action8_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action8 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_action9_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_action9 = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_save_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_save = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_load_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_load = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_zoom_in_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_zoom_in = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_zoom_out_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_zoom_out = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_pause_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_pause = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_help_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_help = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_quit_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_quit = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_screenshot_set (SDL_Scancode code)
 {_
+    game_config_check_for_conflicts(code);
     game->config.key_screenshot = code;
     game->config_keyboard_select();
 }
 
-static void grab_key (void) 
+static void grab_key (void)
 {_
     game_notice("Press any key");
     g_grab_next_key = true;
