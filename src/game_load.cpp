@@ -379,7 +379,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
                     return (in);
                 }
 
-                if (exists) {_
+                if (exists) {
                     CON("DUNGEON: loading level %d,%d,%d", p.x, p.y, p.z);
                     auto l = new Level();
                     set(my.t.levels, x, y, z, l);
@@ -498,20 +498,22 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
         return in;
     }
 
-    /* bool               hard_paused       */ in >> bits(my.t.hard_paused);
-    /* bool               soft_paused       */ in >> bits(my.t.soft_paused);
-    /* bool               started           */ in >> bits(my.t.started);
-    /* fpoint             mouse_over        */ in >> bits(my.t.mouse_over);
-    /* int                seed              */ in >> bits(my.t.seed);
-    /* point3d            current_level     */ in >> bits(my.t.current_level);
-    /* timestamp_t        last_pause        */ in >> bits(my.t.last_pause);
-    /* uint32_t           fps_value         */ in >> bits(my.t.fps_value);
-    /* uint32_t           things_are_moving */ in >> bits(my.t.things_are_moving);
-    /* uint32_t           tick_completed    */ in >> bits(my.t.tick_completed);
-    /* uint32_t           tick_current      */ in >> bits(my.t.tick_current);
+    /* bool               hard_paused                  */ in >> bits(my.t.hard_paused);
+    /* bool               soft_paused                  */ in >> bits(my.t.soft_paused);
+    /* bool               started                      */ in >> bits(my.t.started);
+    /* fpoint             mouse_over                   */ in >> bits(my.t.mouse_over);
+    /* int                seed                         */ in >> bits(my.t.seed);
+    /* point3d            current_level                */ in >> bits(my.t.current_level);
+    /* timestamp_t        last_pause                   */ in >> bits(my.t.last_pause);
+    /* uint32_t           actionbar_highlight_slot     */ in >> bits(my.t.actionbar_highlight_slot);
+    /* uint32_t           fps_value                    */ in >> bits(my.t.fps_value);
+    /* uint32_t           things_are_moving            */ in >> bits(my.t.things_are_moving);
+    /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
+    /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);
 _
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
+_
     my.t.level = get(my.t.world.levels,
                      my.t.current_level.x,
                      my.t.current_level.y,
@@ -561,7 +563,7 @@ static std::vector<char> read_lzo_file (const std::string filename,
 }
 
 uint32_t csum (char *mem, uint32_t len)
-{
+{_
     uint32_t ret = 0;
     while (len--) {
         ret <<= 1;
@@ -724,7 +726,7 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {_
+            default: {
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case UI_CONSOLE_KEY1:
@@ -743,13 +745,13 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case '6':
                     case '7':
                     case '8':
-                    case '9': {_
+                    case '9': {
                         int slot = c - '0';
                         game->load(slot);
                         wid_load_destroy();
                         return (true);
                     }
-                    case SDLK_ESCAPE: {_
+                    case SDLK_ESCAPE: {
                         CON("PLAYER: load game cancelled");
                         wid_load_destroy();
                         return (true);
@@ -769,7 +771,7 @@ uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {_
+            default: {
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case UI_CONSOLE_KEY1:

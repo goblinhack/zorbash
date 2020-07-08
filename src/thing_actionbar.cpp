@@ -8,7 +8,7 @@
 #include "my_thing.h"
 #include "my_game_status.h"
 
-void Thing::actionbar_particle (Thingp what, int slot)
+void Thing::actionbar_particle (Thingp what, uint32_t slot)
 {_
     //
     // No animations at the start
@@ -62,7 +62,7 @@ void Thing::actionbar_particle (Thingp what, int slot)
 //
 // Particle from the actionbar to a target
 //
-void Thing::actionbar_particle (Thingp what, int slot, Thingp target)
+void Thing::actionbar_particle (Thingp what, uint32_t slot, Thingp target)
 {_
     //
     // No animations at the start
@@ -207,7 +207,7 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp target)
     return false;
 }
 
-int Thing::actionbar_id_slot_count (const int slot)
+int Thing::actionbar_id_slot_count (const uint32_t slot)
 {_
     auto a = monstp->actionbar_id[slot];
     if (!a) {
@@ -237,7 +237,7 @@ int Thing::actionbar_id_slot_count (const int slot)
     return count;
 }
 
-Thingp Level::actionbar_get (const int slot)
+Thingp Level::actionbar_get (const uint32_t slot)
 {_
     if (!player) {
         return nullptr;
@@ -249,4 +249,50 @@ Thingp Level::actionbar_get (const int slot)
     }
 
     return thing_find(oid);
+}
+
+bool Level::actionbar_select (const uint32_t slot)
+{_
+    if (!player) {
+        return false;
+    }
+
+    auto oid = get(player->monstp->actionbar_id, slot);
+    if (!oid) {
+        return false;
+    }
+
+    if (slot != game->actionbar_highlight_slot) {
+        game->actionbar_highlight_slot = slot;
+        actionbar_describe(slot);
+        game_status_wid_init();
+    }
+
+    return true;
+}
+
+bool Level::actionbar_describe (const uint32_t slot)
+{_
+    auto t = actionbar_get(game->actionbar_highlight_slot);
+    if (!t) {
+        return false;
+    }
+    auto s = t->text_name();
+
+    if (t->is_droppable()){
+        s += ", %%fg=orange$d%%fg=reset$rop";
+    }
+    if (t->is_usable()){
+        s += ", %%fg=cyan$u%%fg=reset$se";
+    }
+    if (t->is_food()){
+        s += ", %%fg=green$e%%fg=reset$at";
+    }
+    if (t->is_throwable()){
+        s += ", %%fg=purple$t%%fg=reset$hrow";
+    }
+
+    BOTCON("%s", s.c_str());
+
+    return true;
 }

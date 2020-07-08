@@ -115,43 +115,43 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_action0) {
-        MINICON("action0");
+        level->actionbar_select(0);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action1) {
-        MINICON("action1");
+        level->actionbar_select(1);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action2) {
-        MINICON("action2");
+        level->actionbar_select(2);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action3) {
-        MINICON("action3");
+        level->actionbar_select(3);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action4) {
-        MINICON("action4");
+        level->actionbar_select(4);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action5) {
-        MINICON("action5");
+        level->actionbar_select(5);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action6) {
-        MINICON("action6");
+        level->actionbar_select(6);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action7) {
-        MINICON("action7");
+        level->actionbar_select(7);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action8) {
-        MINICON("action8");
+        level->actionbar_select(8);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action9) {
-        MINICON("action9");
+        level->actionbar_select(9);
         return true;
     }
 
