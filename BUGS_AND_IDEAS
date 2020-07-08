@@ -1,7 +1,6 @@
 bugs
 ----
-- disable conflicting keys
-- load - do not show empty slots
+- key config scroll memory
 - equip
 - potion action keys 'd' 't' 'u'
 - descent potion, that can be taken or thrown
