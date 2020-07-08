@@ -76,7 +76,9 @@ static void game_status_mouse_over_e (Widp w)
     auto slot = wid_get_int_context(w);
     highlight_slot = slot;
 
-    game_status_wid_create();
+    //
+    // Do not create new wids in here
+    //
 }
 
 //
