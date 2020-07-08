@@ -52,7 +52,14 @@ public:
     uint32_t           key_action8                  = {SDL_SCANCODE_8};
     uint32_t           key_action9                  = {SDL_SCANCODE_9};
     uint32_t           key_attack                   = {SDL_SCANCODE_SPACE};
+#ifdef __APPLE__
+    //
+    // Delete on mac seems to map to backspace...
+    //
     uint32_t           key_drop                     = {SDL_SCANCODE_BACKSPACE};
+#else
+    uint32_t           key_drop                     = {SDL_SCANCODE_DELETE};
+#endif
     uint32_t           key_help                     = {SDL_SCANCODE_H};
     uint32_t           key_jump                     = {SDL_SCANCODE_J};
     uint32_t           key_load                     = {SDL_SCANCODE_F11};
