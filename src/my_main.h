@@ -114,13 +114,14 @@
 #define UI_WID_POPUP_WIDTH_WIDE    38
 #define UI_WID_POPUP_WIDTH_WIDEST  48
 #define UI_WID_SAVE_SLOTS          10 // How many save game slots
-#define UI_WID_STYLE_DARK          4
 #define UI_WID_STYLE_GREEN         1
-#define UI_WID_STYLE_MAX           6
-#define UI_WID_STYLE_NONE          5
-#define UI_WID_STYLE_NORMAL        3
-#define UI_WID_STYLE_OUTLINE       0
 #define UI_WID_STYLE_RED           2
+#define UI_WID_STYLE_NORMAL        3
+#define UI_WID_STYLE_DARK          4
+#define UI_WID_STYLE_NONE          5
+#define UI_WID_STYLE_GRAY          6
+#define UI_WID_STYLE_OUTLINE       0
+#define UI_WID_STYLE_MAX           7
 
 #include "my_sys.h"
 
