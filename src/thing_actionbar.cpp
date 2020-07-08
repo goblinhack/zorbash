@@ -283,10 +283,13 @@ bool Level::actionbar_describe (const uint32_t slot)
         s += ", %%fg=orange$d%%fg=reset$rop";
     }
     if (t->is_usable()){
-        s += ", %%fg=cyan$u%%fg=reset$se";
-    }
-    if (t->is_food()){
-        s += ", %%fg=green$e%%fg=reset$at";
+        if (t->is_food()){
+            s += ", %%fg=green$u%%fg=reset$ eat";
+        } else if (t->is_potion()){
+            s += ", %%fg=green$u%%fg=reset$ drink";
+        } else {
+            s += ", %%fg=cyan$u%%fg=reset$se";
+        }
     }
     if (t->is_throwable()){
         s += ", %%fg=purple$t%%fg=reset$hrow";
