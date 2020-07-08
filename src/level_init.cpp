@@ -565,6 +565,12 @@ void Level::place_normal_placement_rules (Dungeonp d)
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             Tpp tp {};
+            //
+            // Reset the seed for each cell to increase the chances
+            // of repeatability if other small things change in the
+            // game
+            //
+            mysrand(seed + x + (y * MAP_WIDTH));
 
             if (d->is_blood(x, y))        { tp = tp_random_blood(); }
             if (d->is_door(x, y))         { tp = tp_random_door(); }
@@ -757,6 +763,13 @@ void Level::place_floor_deco (Dungeonp d)
                 continue;
             }
 
+            //
+            // Reset the seed for each cell to increase the chances
+            // of repeatability if other small things change in the
+            // game
+            //
+            mysrand(seed + x + (y * MAP_WIDTH));
+
             auto tp = tp_random_deco();
             if (!tp) {
                 return;
@@ -821,6 +834,13 @@ void Level::place_random_floor_deco (Dungeonp d)
                 continue;
             }
 
+            //
+            // Reset the seed for each cell to increase the chances
+            // of repeatability if other small things change in the
+            // game
+            //
+            mysrand(seed + x + (y * MAP_WIDTH));
+
             auto tp = tp_random_deco();
             if (!tp) {
                 return;
@@ -851,6 +871,13 @@ void Level::place_wall_deco (Dungeonp d)
             if (random_range(0, 100) < 90) {
                 continue;
             }
+
+            //
+            // Reset the seed for each cell to increase the chances
+            // of repeatability if other small things change in the
+            // game
+            //
+            mysrand(seed + x + (y * MAP_WIDTH));
 
             auto tp = tp_random_wall_deco();
             if (!tp) {

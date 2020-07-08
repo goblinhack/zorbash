@@ -731,7 +731,7 @@ void Thing::blit_internal (point &blit_tl,
 
             auto diff = game->tick_current - get_tick();
             if ((diff > 0) && (diff <= THING_TICK_MAX_MOVES_AHEAD)) {
-                static std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD> cache;
+                static std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> cache;
                 auto tile = get(cache, diff);
                 if (!tile) {
                     std::string s = "clock" + std::to_string(diff);

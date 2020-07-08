@@ -32,3 +32,23 @@ void Thing::used (Thingp what, Thingp target)
     what->level_pop();
     what->dead("used");
 }
+
+bool Thing::use (Thingp what)
+{_
+    if (what->is_weapon()) {
+        MINICON("You weild the %s", what->text_the().c_str());
+        MINICON("TODO");
+    } else if (what->is_food()) {
+        MINICON("You munch the %s", what->text_the().c_str());
+        MINICON("TODO");
+    } else if (what->is_potion()) {
+        MINICON("You quaff the %s", what->text_the().c_str());
+        MINICON("TODO");
+    } else if (!what->is_usable()) {
+        if (is_player()) {
+            MINICON("I don't know how to use %s", what->text_the().c_str());
+        }
+        return false;
+    }
+    return true;
+}

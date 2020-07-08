@@ -273,7 +273,7 @@ private:
     int _is_rrr80 {};
     int _is_rrr81 {};
     int _is_rrr82 {};
-    int _is_rrr83 {};
+    int _is_potion_eater {};
     int _is_throwable {};
     int _is_usable {};
     int _is_droppable {};
@@ -611,7 +611,7 @@ public:
     int is_rrr80(void) const;
     int is_rrr81(void) const;
     int is_rrr82(void) const;
-    int is_rrr83(void) const;
+    int is_potion_eater(void) const;
     int is_throwable(void) const;
     int is_usable(void) const;
     int is_droppable(void) const;
@@ -857,7 +857,7 @@ public:
     void set_is_rrr80(int);
     void set_is_rrr81(int);
     void set_is_rrr82(int);
-    void set_is_rrr83(int);
+    void set_is_potion_eater(int);
     void set_is_throwable(int);
     void set_is_usable(int);
     void set_is_droppable(int);

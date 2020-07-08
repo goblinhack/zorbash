@@ -894,9 +894,9 @@ int Thing::is_rrr82(void) const
     return (tp()->is_rrr82());
 }
 
-int Thing::is_rrr83(void) const
+int Thing::is_potion_eater(void) const
 {_
-    return (tp()->is_rrr83());
+    return (tp()->is_potion_eater());
 }
 
 int Thing::is_throwable(void) const

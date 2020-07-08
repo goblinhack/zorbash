@@ -973,7 +973,7 @@ public:
     int is_rrr80(void) const;
     int is_rrr81(void) const;
     int is_rrr82(void) const;
-    int is_rrr83(void) const;
+    int is_potion_eater(void) const;
     int is_throwable(void) const;
     int is_usable(void) const;
     int is_droppable(void) const;
@@ -1119,6 +1119,7 @@ public:
     void update_pos(fpoint, bool immediately);
     void use(void);
     void used(Thingp w, Thingp target);
+    bool use(Thingp w);
     void visible();
     void water_tick();
     void weapon_get_use_offset(float *dx, float *dy) const;

@@ -1,10 +1,15 @@
 bugs
 ----
+- disable conflicting keys
+- load - do not show empty slots
+- equip
 - potion action keys 'd' 't' 'u'
 - descent potion, that can be taken or thrown
 - potion break on fall
 - explosion needed; creates chasm?
 - extra inventory?
+- gems to ascii
+- cube can eat treasure on player
 
 upcoming work
 -------------
