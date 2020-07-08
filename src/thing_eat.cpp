@@ -15,9 +15,10 @@ bool Thing::eat (Thingp it)
     // Does the attacker feast on success?
     //
     if (is_attack_eater()) {
-        if ((is_slime_eater()     && it->is_slime()) ||
-            (is_meat_eater()      && it->is_meat())  ||
-            (is_treasure_eater()  && it->is_treasure())) {
+        if ((is_slime_eater()    && it->is_slime())    ||
+            (is_meat_eater()     && it->is_meat())     ||
+            (is_treasure_eater() && it->is_treasure()) ||
+            (is_potion_eater()   && it->is_potion())) {
             log("eats %s", it->text_the().c_str());
             //
             // For treasure what should the boost be?

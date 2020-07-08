@@ -75,6 +75,11 @@ bool Thing::will_avoid (const Thingp itp) const
             return (true);
         }
     }
+    if (me->is_potion()) {
+        if (it->is_potion_eater()) {
+            return (true);
+        }
+    }
     if (me->is_slime_baby()) {
         //
         // But allow baby slimes to attack each other!
@@ -116,6 +121,11 @@ bool Thing::will_eat (const Thingp itp)
     }
     if (me->is_treasure_eater()) {
         if (it->is_treasure()) {
+            return (true);
+        }
+    }
+    if (me->is_potion_eater()) {
+        if (it->is_potion()) {
             return (true);
         }
     }

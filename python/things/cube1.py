@@ -46,6 +46,7 @@ def tp_init(name, text_name):
     x.set_is_slime_eater(True)
     x.set_is_slime_parent(True)
     x.set_is_treasure_eater(True)
+    x.set_is_potion_eater(True)
     x.set_light_color("green")
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")

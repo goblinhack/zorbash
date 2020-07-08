@@ -155,15 +155,16 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
-        MINICON("DROP");
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
-        MINICON("USE");
+        auto what = level->actionbar_get();
+        if (what) {
+            player->use(what);
+        }
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_throw) {
-        MINICON("THROW");
         return true;
     }
 

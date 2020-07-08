@@ -62,7 +62,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
 //
 // Particle from the actionbar to a target
 //
-void Thing::actionbar_particle (Thingp what, uint32_t slot, Thingp target)
+void Thing::actionbar_particle (Thingp what, uint32_t slot, Thingp particle_target)
 {_
     //
     // No animations at the start
@@ -71,7 +71,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot, Thingp target)
         return;
     }
 
-    point where_to = (target->last_blit_tl + target->last_blit_br) / 2;
+    point where_to = (particle_target->last_blit_tl + 
+                      particle_target->last_blit_br) / 2;
 
     std::string name = "actionbar particle" + std::to_string(slot);
     auto w = wid_find(name);
@@ -175,7 +176,7 @@ bool Thing::actionbar_id_remove (Thingp what)
     return false;
 }
 
-bool Thing::actionbar_id_remove (Thingp what, Thingp target)
+bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
 {_
     auto player = level->player;
     if (!player) {
@@ -200,7 +201,9 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp target)
         if (t->tp() == what->tp()) {
             monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
             game_status_wid_init();
-            actionbar_particle(what, i, target);
+            if (particle_target) {
+                actionbar_particle(what, i, particle_target);
+            }
             return true;
         }
     }
@@ -249,6 +252,11 @@ Thingp Level::actionbar_get (const uint32_t slot)
     }
 
     return thing_find(oid);
+}
+
+Thingp Level::actionbar_get (void)
+{_
+    return actionbar_get(game->actionbar_highlight_slot);
 }
 
 bool Level::actionbar_select (const uint32_t slot)
