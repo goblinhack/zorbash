@@ -1174,9 +1174,9 @@ uint8_t config_ascii_mode (tokens_t *tokens, void *context)
     }
 
     if (game->config.ascii_mode) {
-        CON("USERCFG: ascii mode enabled");
+        CON("USERCFG: ASCII mode enabled");
     } else {
-        CON("USERCFG: ascii mode disabled");
+        CON("USERCFG: ASCII mode disabled");
     }
 
     return (true);

@@ -62,7 +62,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
 //
 // Particle from the actionbar to a target
 //
-void Thing::actionbar_particle (Thingp what, uint32_t slot, Thingp particle_target)
+void Thing::actionbar_particle (Thingp what, uint32_t slot,
+                                Thingp particle_target)
 {_
     //
     // No animations at the start
@@ -71,10 +72,10 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot, Thingp particle_targ
         return;
     }
 
-    point where_to = (particle_target->last_blit_tl + 
+    point where_to = (particle_target->last_blit_tl +
                       particle_target->last_blit_br) / 2;
 
-    std::string name = "actionbar particle" + std::to_string(slot);
+    std::string name = "actionbar icon" + std::to_string(slot);
     auto w = wid_find(name);
     if (!w) {
         con("could not find wid %s", name.c_str());
@@ -212,7 +213,7 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
 
 int Thing::actionbar_id_slot_count (const uint32_t slot)
 {_
-    auto a = monstp->actionbar_id[slot];
+    auto a = get(monstp->actionbar_id, slot);
     if (!a) {
         return 0;
     }

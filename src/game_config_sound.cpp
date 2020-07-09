@@ -181,8 +181,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
-        point tl = make_point(width - 16, y_at);
-        point br = make_point(width - 11, y_at + 2);
+        point tl = make_point(width - 17, y_at);
+        point br = make_point(width - 12, y_at + 2);
         wid_set_style(w, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_sound_save);
         wid_set_pos(w, tl, br);
@@ -192,8 +192,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
-        point tl = make_point(width - 9, y_at);
-        point br = make_point(width - 2, y_at + 2);
+        point tl = make_point(width - 10, y_at);
+        point br = make_point(width - 3, y_at + 2);
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_sound_cancel);
         wid_set_pos(w, tl, br);

@@ -55,6 +55,15 @@ uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint3
     return (true);
 }
 
+uint8_t game_config_gfx_ascii_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    CON("USERCFG: toggle vsync");
+    game->config.ascii_mode = !game->config.ascii_mode;
+    game->config_gfx_select();
+    local_g_need_restart = true;
+    return (true);
+}
+
 uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle fullscreen");
@@ -274,8 +283,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
-        point tl = make_point(width - 14, y_at);
-        point br = make_point(width - 9, y_at + 2);
+        point tl = make_point(width - 15, y_at);
+        point br = make_point(width - 10, y_at + 2);
         wid_set_style(w, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_gfx_save);
         wid_set_pos(w, tl, br);
@@ -285,12 +294,41 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
-        point tl = make_point(width - 7, y_at);
-        point br = make_point(width - 0, y_at + 2);
+        point tl = make_point(width - 8, y_at);
+        point br = make_point(width - 1, y_at + 2);
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_gfx_cancel);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$C%%fg=reset$ancel");
+    }
+
+    y_at += 3;
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "ASCII mode (restart)");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "ASCII mode (restart)");
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "ASCII mode value");
+
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_gfx_ascii_mode_toggle);
+
+        if (game->config.ascii_mode) {
+            wid_set_text(w, "True");
+        } else {
+            wid_set_text(w, "False");
+        }
     }
 
     y_at += 3;

@@ -7,6 +7,7 @@
 #include "my_wid_popup.h"
 #include "my_game_notice.h"
 
+static int last_vert_scroll_offset = -1;
 static WidPopup *game_config_keyboard_window;
 
 //
@@ -248,6 +249,9 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
 
 static void game_config_keyboard_destroy (void)
 {_
+    auto w = game_config_keyboard_window->wid_text_area->wid_vert_scroll;
+    last_vert_scroll_offset = wid_get_tl_y(w) - wid_get_tl_y(w->parent);
+
     delete game_config_keyboard_window;
     game_config_keyboard_window = nullptr;
     game->soft_unpause();
@@ -809,7 +813,7 @@ void Game::config_keyboard_select (void)
 
     game_config_keyboard_window =
                     new WidPopup(tl, br, nullptr, "ui_popup_widest",
-                                 false, false);
+                                 false, true);
     {_
         Widp w = game_config_keyboard_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_keyboard_key_up);
@@ -1710,4 +1714,9 @@ void Game::config_keyboard_select (void)
     }
 
     wid_update(game_config_keyboard_window->wid_text_area->wid_text_area);
+
+    if (last_vert_scroll_offset != -1) {
+        auto w = game_config_keyboard_window->wid_text_area->wid_vert_scroll;
+        wid_move_to_y_off(w, last_vert_scroll_offset);
+    }
 }
