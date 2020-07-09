@@ -62,10 +62,11 @@ void game_notice (std::string s)
     auto m = ASCII_WIDTH / 2;
     auto n = ASCII_HEIGHT / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_NORMAL / 2, n - 5);
-    point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2, n + 5);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2, n + 4);
     auto width = br.x - tl.x;
 
-    game_notice_window = new WidPopup(tl, br, nullptr, "ui_popup_notice");
+    game_notice_window = new WidPopup(tl, br, nullptr, "ui_popup_notice",
+                                      false, false);
     {_
         Widp w = game_notice_window->wid_popup_container;
         wid_set_on_key_up(w, game_notice_key_up);

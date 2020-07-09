@@ -233,6 +233,11 @@ void wid_update(Widp);
 void wid_update_mouse(void);
 void wid_visible(Widp);
 wid_mode wid_get_mode(Widp);
+int32_t wid_get_tl_x(Widp w);
+int32_t wid_get_tl_y(Widp w);
+int32_t wid_get_br_x(Widp w);
+int32_t wid_get_br_y(Widp w);
+void wid_move_to_y_off(Widp w, int32_t off);
 
 typedef struct {
     //

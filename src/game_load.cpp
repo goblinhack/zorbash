@@ -808,8 +808,10 @@ void Game::load_select (void)
     game->hard_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2, UI_MINICON_VIS_HEIGHT + 2);
-    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2, UI_ACTIONBAR_TL_Y - 2);
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
+                          UI_MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
+                          UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     wid_load = new WidPopup(tl, br, tile_find_mand("load"), "ui_popup_wide");
@@ -827,7 +829,7 @@ void Game::load_select (void)
         auto p = wid_load->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "LOAD slot");
         point tl = make_point(0, y_at);
-        point br = make_point(width - 2, y_at + 2);
+        point br = make_point(width - 3, y_at + 2);
 
         std::string s = std::to_string(slot) + ": ";
         if (!load(tmp_file, tmp)) {

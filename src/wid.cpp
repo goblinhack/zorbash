@@ -4167,6 +4167,11 @@ void wid_move_to_bottom (Widp w)
     }
 }
 
+void wid_move_to_y_off (Widp w, int32_t off)
+{_
+    wid_move_delta(w, 0, off);
+}
+
 void wid_move_to_left (Widp w)
 {_
     if (w->parent) {

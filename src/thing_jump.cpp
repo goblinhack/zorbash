@@ -47,7 +47,7 @@ bool Thing::try_to_jump (point to)
         // Not sure I want to. This allows for more fun.
         //
         // check_dest = true;
-        MINICON("too far, jump instead to %d,%d", x, y);
+        MINICON("You can't jump quite that far");
     }
 
     if (is_monst()) {

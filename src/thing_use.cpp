@@ -20,7 +20,8 @@ void Thing::used (Thingp what, Thingp target)
 
     auto existing_owner = what->owner_get();
     if (existing_owner != this) {
-        err("attempt to use %s which is not carried", what->to_string().c_str());
+        err("attempt to use %s which is not carried",
+            what->to_string().c_str());
         return;
     }
 
@@ -39,8 +40,8 @@ bool Thing::use (Thingp what)
         MINICON("You weild the %s", what->text_the().c_str());
         MINICON("TODO");
     } else if (what->is_food()) {
-        MINICON("You munch the %s", what->text_the().c_str());
-        MINICON("TODO");
+        eat(what);
+        used(what, this);
     } else if (what->is_potion()) {
         MINICON("You quaff the %s", what->text_the().c_str());
         MINICON("TODO");
