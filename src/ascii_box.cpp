@@ -62,15 +62,37 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
     }
 
     if (unlikely(y1 == y2)) {
+        //
+        // Horizontal
+        //
         y = y1;
         for (x = x1; x <= x2; x++) {
+            if (style >= 0) {
+                ascii_set_bg(x, y,
+                             tiles[style][(x % MAX_UI_BG_SIZE)+1][0]);
+            }
             ascii_set_bg(x, y, col_bg);
+        }
+        if (style >= 0) {
+            ascii_set_bg(x, x1, tiles[style][0][0]);
+            ascii_set_bg(x, x2, tiles[style][MAX_UI_SIZE - 1][0]);
         }
         return;
     } else if (unlikely(x1 == x2)) {
+        //
+        // Vertical
+        //
         x = x1;
         for (y = y1; y <= y2; y++) {
+            if (style >= 0) {
+                ascii_set_bg(x, y,
+                             tiles[style][0][(y % MAX_UI_BG_SIZE)+1]);
+            }
             ascii_set_bg(x, y, col_bg);
+        }
+        if (style >= 0) {
+            ascii_set_bg(x, y1, tiles[style][0][0]);
+            ascii_set_bg(x, y2, tiles[style][0][MAX_UI_SIZE - 1]);
         }
         return;
     } else {
@@ -211,9 +233,9 @@ void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const w
 
     va_end(args);
 
-    /*
-     * Populate the ascii callbacks for this box.
-     */
+    //
+    // Populate the ascii callbacks for this box.
+    //
     int x1, x2, y1, y2;
 
     x1 = x;
@@ -234,9 +256,9 @@ void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const w
             set(ascii.sdl_key, x, y, b.sdl_key);
             set(ascii.mouse_button, x, y, b.mouse_button);
 
-            /*
-             * Callbacks for ascii co-ords.
-             */
+            //
+            // Callbacks for ascii co-ords.
+            //
             set(ascii.key_down, x, y, b.key_down);
             set(ascii.mouse_down, x, y, b.mouse_down);
             set(ascii.mouse_over, x, y, b.mouse_over);

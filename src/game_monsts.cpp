@@ -107,7 +107,6 @@ static void game_monsts_wid_create (void)
                     point tl = make_point(0, row);
                     point br = make_point(0, row);
                     wid_set_pos(w, tl, br);
-                    wid_set_style(w, UI_WID_STYLE_NONE);
                     auto tile = tile_index_to_tile(t->tile_curr);
                     if (tile && tile->is_invisible) {
                         //
@@ -129,7 +128,6 @@ static void game_monsts_wid_create (void)
                         point tl = make_point(2, row);
                         point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, row);
                         wid_set_pos(w, tl, br);
-                        wid_set_style(w, UI_WID_STYLE_NONE);
                         wid_set_shape_none(w);
 
                         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);

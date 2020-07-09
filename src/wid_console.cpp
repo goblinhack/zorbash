@@ -196,10 +196,10 @@ static void wid_console_wid_create (void)
 
     {
         point tl = make_point(0, 0);
-        point br = make_point(w, h);
+        point br = make_point(w - 1, h);
 
         wid_console_container = wid_new_container(wid_console_window,
-                                                      "wid console inner area");
+                                                  "wid console inner area");
         wid_set_pos(wid_console_container, tl, br);
         wid_set_style(wid_console_container, UI_WID_STYLE_DARK);
     }
@@ -257,7 +257,7 @@ static void wid_console_wid_create (void)
     wid_console_horiz_scroll =
         wid_new_horiz_scroll_bar(wid_console_window, "", wid_console_container);
 
-    wid_not_visible(wid_get_parent(wid_console_vert_scroll));
+    wid_visible(wid_get_parent(wid_console_vert_scroll));
     wid_not_visible(wid_get_parent(wid_console_horiz_scroll));
     wid_not_visible(wid_console_window);
 

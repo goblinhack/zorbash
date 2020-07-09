@@ -117,8 +117,8 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
     }
 
     if (vert_scoll) {
-        wid_not_visible(wid_get_parent(wid_vert_scroll));
-        wid_not_visible(wid_vert_scroll);
+        wid_visible(wid_get_parent(wid_vert_scroll));
+        wid_visible(wid_vert_scroll);
     }
 }
 

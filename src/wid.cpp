@@ -1782,6 +1782,7 @@ static Widp wid_new (Widp parent)
     wid_set_mode(w, WID_MODE_NORMAL);
 
     w->visible = true;
+    w->style = -1;
 
     return (w);
 }
@@ -1804,6 +1805,7 @@ static Widp wid_new (void)
     wid_set_mode(w, WID_MODE_NORMAL);
 
     w->visible = true;
+    w->style = -1;
 
     return (w);
 }
@@ -2160,6 +2162,16 @@ static Widp wid_new_scroll_trough (Widp parent)
     wid_set_on_mouse_motion(w, wid_scroll_trough_mouse_motion);
     wid_set_shape_square(w);
 
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_color(w, WID_COLOR_BG, GRAY90);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_color(w, WID_COLOR_BG, WHITE);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+    wid_set_style(w, UI_WID_STYLE_DARK);
+
     return (w);
 }
 
@@ -2220,7 +2232,20 @@ static Widp wid_new_scroll_bar (Widp parent,
 
     w->scrollbar_owner = scrollbar_owner;
 
+#if 0
     wid_not_visible(w);
+#endif
+    wid_set_shape_square(w);
+
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_color(w, WID_COLOR_BG, RED);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_color(w, WID_COLOR_BG, GREEN);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+    wid_set_style(w, UI_WID_STYLE_DARK);
 
     return (w);
 }
@@ -2260,6 +2285,7 @@ Widp wid_new_vert_scroll_bar (Widp parent,
     Widp trough = wid_new_scroll_trough(parent);
     wid_set_pos(trough, tl, br);
     wid_set_shape_square(trough);
+    wid_set_style(trough, UI_WID_STYLE_VERT_DARK);
 
     {
         fpoint tl(0, 0);
@@ -2271,6 +2297,7 @@ Widp wid_new_vert_scroll_bar (Widp parent,
         wid_update_internal(scrollbar);
         wid_visible(wid_get_parent(scrollbar));
         wid_visible(scrollbar);
+        wid_set_style(scrollbar, UI_WID_STYLE_VERT_LIGHT);
 
         trough->is_scrollbar_vert_trough = true;
         scrollbar->is_scrollbar_vert = true;
@@ -2313,16 +2340,19 @@ Widp wid_new_horiz_scroll_bar (Widp parent, std::string name,
     Widp trough = wid_new_scroll_trough(parent);
     wid_set_pos(trough, tl, br);
     wid_set_shape_square(trough);
+    wid_set_style(trough, UI_WID_STYLE_HORIZ_DARK);
 
     {
         fpoint tl(0, 0);
         fpoint br(1, 1);
-        Widp scrollbar = wid_new_scroll_bar(trough, name, scrollbar_owner, false);
+        Widp scrollbar =
+            wid_new_scroll_bar(trough, name, scrollbar_owner, false);
         wid_set_pos_pct(scrollbar, tl, br);
 
         wid_update_internal(scrollbar);
         wid_visible(wid_get_parent(scrollbar));
         wid_visible(scrollbar);
+        wid_set_style(scrollbar, UI_WID_STYLE_HORIZ_LIGHT);
 
         trough->is_scrollbar_horiz_trough = true;
         scrollbar->is_scrollbar_horiz = true;

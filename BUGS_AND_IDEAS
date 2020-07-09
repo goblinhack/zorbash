@@ -1,5 +1,6 @@
 bugs
 ----
+- blue line
 - key config scroll memory
 - equip
 - potion action keys 'd' 't' 'u'
@@ -7,7 +8,6 @@ bugs
 - potion break on fall
 - explosion needed; creates chasm?
 - extra inventory?
-- gems to ascii
 - cube can eat treasure on player
 
 upcoming work

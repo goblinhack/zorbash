@@ -116,7 +116,6 @@ static void game_status_wid_create (void)
         point br = make_point(x + UI_ACTIONBAR_ITEM_WIDTH - 1, UI_ACTIONBAR_ITEM_HEIGHT);
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
 
         if (i == game->actionbar_highlight_slot) {
             std::string tile = "ui_action_bar_highlight" + std::to_string(i);
@@ -136,7 +135,6 @@ static void game_status_wid_create (void)
         point br = make_point(UI_ACTIONBAR_ITEM_WIDTH - 1, UI_ACTIONBAR_ITEM_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_text_lhs(w, true);
         wid_set_text_top(w, true);
 
@@ -194,7 +192,6 @@ static void game_status_wid_create (void)
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "zorbash-0");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
@@ -205,7 +202,6 @@ static void game_status_wid_create (void)
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "zorbash-1");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
@@ -216,7 +212,6 @@ static void game_status_wid_create (void)
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "zorbash-2");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
@@ -230,7 +225,6 @@ static void game_status_wid_create (void)
         auto s = dynprintf("Level %03d", level->world_at.z);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_text(w, s);
         wid_set_shape_none(w);
         myfree(s);
@@ -245,7 +239,6 @@ static void game_status_wid_create (void)
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "player1.pose");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
@@ -258,7 +251,6 @@ static void game_status_wid_create (void)
 
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_text(w, L"Ser Hackalot");
         wid_set_shape_none(w);
     }
@@ -299,7 +291,6 @@ static void game_status_wid_create (void)
         point br = make_point(1, y_at + 1);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         int i = ((float)player->get_stats_health() /
                  (float)player->get_stats_health_max()) *
                  (float)UI_HEALTH_ICON_STEPS;
@@ -315,7 +306,6 @@ static void game_status_wid_create (void)
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
 
         int i = ((float)player->get_stats_health() /
                  (float)player->get_stats_health_max()) *
@@ -332,7 +322,6 @@ static void game_status_wid_create (void)
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "health-status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
@@ -352,60 +341,6 @@ static void game_status_wid_create (void)
     }
     y_at += 3;
 
-#if 0
-    ///////////////////////////////////////////////////////////////////////////
-    // Attack
-    ///////////////////////////////////////////////////////////////////////////
-    {_
-        auto w = wid_new_plain(wid_sidebar, "attack-icon");
-        point tl = make_point(0, y_at);
-        point br = make_point(1, y_at + 1);
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
-        wid_set_bg_tilename(w, "attack-icon");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
-    {_
-        auto w = wid_new_plain(wid_sidebar, "attack-status-bar");
-        point tl = make_point(2, y_at);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
-
-        int i = ((float)player->get_stats_attack() /
-                 (float)player->get_stats_attack_max()) *
-                 (float)UI_HEALTH_BAR_STEPS - 1;
-        i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
-        i = std::max(i, 0);
-        auto icon = "status-bar-" + std::to_string(i);
-        wid_set_bg_tilename(w, icon);
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
-    {_
-        auto w = wid_new_plain(wid_sidebar, "attack-status");
-        point tl = make_point(2, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
-        wid_set_bg_tilename(w, "attack-status");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
-    {_
-        auto w = wid_new_plain(wid_sidebar, "attack-value");
-        point tl = make_point(3, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
-        wid_set_pos(w, tl, br);
-        wid_set_shape_none(w);
-
-        std::string s =
-            std::to_string(player->get_stats_attack()) + "/" +
-            std::to_string(player->get_stats_attack_max());
-        wid_set_text(w, s);
-        wid_set_text_rhs(w, true);
-    }
-    y_at += 3;
-#endif
-
     ///////////////////////////////////////////////////////////////////////////
     // Defence
     ///////////////////////////////////////////////////////////////////////////
@@ -415,17 +350,15 @@ static void game_status_wid_create (void)
         point br = make_point(1, y_at + 1);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "defence-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
         auto w = wid_new_plain(wid_sidebar, "defence-status-bar");
         point tl = make_point(2, y_at);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
 
         int i = ((float)player->get_stats_defence() /
                  (float)player->get_stats_defence_max()) *
@@ -442,7 +375,6 @@ static void game_status_wid_create (void)
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_style(w, UI_WID_STYLE_NONE);
         wid_set_bg_tilename(w, "defence-status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
