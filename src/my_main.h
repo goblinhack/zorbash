@@ -78,7 +78,7 @@
 #define UI_CONSOLE_KEY2            '~'
 #define UI_CONSOLE_KEY3            '\\'
 #define UI_CONSOLE_TEXT_COLOR      GRAY
-#define UI_CONSOLE_WIDTH           ASCII_WIDTH
+#define UI_CONSOLE_WIDTH           (ASCII_WIDTH - 3)
 #define UI_CURSOR_COLOR            GRAY
 #define UI_CURSOR_OTHER_COLOR      WHITE
 #define UI_FONT_HEIGHT             24
@@ -118,10 +118,14 @@
 #define UI_WID_STYLE_RED           2
 #define UI_WID_STYLE_NORMAL        3
 #define UI_WID_STYLE_DARK          4
-#define UI_WID_STYLE_NONE          5
+#define UI_WID_STYLE_SOLID_DEFAULT 5
 #define UI_WID_STYLE_GRAY          6
-#define UI_WID_STYLE_OUTLINE       0
-#define UI_WID_STYLE_MAX           7
+#define UI_WID_STYLE_OUTLINE       7
+#define UI_WID_STYLE_VERT_DARK     8
+#define UI_WID_STYLE_VERT_LIGHT    9
+#define UI_WID_STYLE_HORIZ_DARK    10
+#define UI_WID_STYLE_HORIZ_LIGHT   11
+#define UI_WID_STYLE_MAX           12
 
 #include "my_sys.h"
 
