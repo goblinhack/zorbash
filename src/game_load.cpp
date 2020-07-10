@@ -21,6 +21,7 @@ static timestamp_t T;
 static std::string game_load_error;
 bool game_load_headers_only;
 extern int GAME_SAVE_MARKER_EOL;
+std::array<bool, UI_WID_SAVE_SLOTS> slot_valid;
 
 #define READ_MAGIC(m) { \
     uint32_t magic; \
@@ -463,7 +464,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_unused3                  */ in >> bits(my.t.key_unused3                  );
     /* uint32_t           key_unused4                  */ in >> bits(my.t.key_unused4                  );
     /* uint32_t           key_unused5                  */ in >> bits(my.t.key_unused5                  );
-    /* uint32_t           key_unused6                  */ in >> bits(my.t.key_unused6                  );
+    /* uint32_t           key_eat                      */ in >> bits(my.t.key_eat                      );
     /* uint32_t           key_throw                    */ in >> bits(my.t.key_throw                    );
     /* uint32_t           key_drop                     */ in >> bits(my.t.key_drop                     );
     /* uint32_t           key_use                      */ in >> bits(my.t.key_use                      );
@@ -689,6 +690,11 @@ Game::load (int slot)
         return;
     }
 
+    if  (!get(slot_valid, slot)) {
+        MINICON("No game at that slot");
+        return;
+    }
+
     game->fini();
 
     auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
@@ -747,8 +753,12 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case '8':
                     case '9': {
                         int slot = c - '0';
-                        game->load(slot);
-                        wid_load_destroy();
+                        if  (!get(slot_valid, slot)) {
+                            MINICON("No game at that slot");
+                        } else {
+                            game->load(slot);
+                            wid_load_destroy();
+                        }
                         return (true);
                     }
                     case SDLK_ESCAPE: {
@@ -838,11 +848,13 @@ void Game::load_select (void)
             } else {
                 s += "<empty>";
             }
+            set(slot_valid, slot, false);
             wid_set_style(w, UI_WID_STYLE_GRAY);
         } else {
             s += tmp.save_meta;
             wid_set_style(w, UI_WID_STYLE_GREEN);
             wid_set_on_mouse_up(w, wid_load_mouse_up);
+            set(slot_valid, slot, true);
         }
         wid_set_int_context(w, slot);
 

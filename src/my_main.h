@@ -7,7 +7,7 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define ENABLE_DEBUG_CRASH         // Enable this for lots of sanity checks
+#undef  ENABLE_DEBUG_CRASH         // Enable this for lots of sanity checks
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #define ENABLE_TRACING             // Function tracing
 

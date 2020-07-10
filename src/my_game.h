@@ -81,7 +81,7 @@ public:
     uint32_t           key_unused3                  = 0;
     uint32_t           key_unused4                  = 0;
     uint32_t           key_unused5                  = 0;
-    uint32_t           key_unused6                  = 0;
+    uint32_t           key_eat                      = 0;
     uint32_t           key_use                      = {SDL_SCANCODE_U};
     uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
     uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};

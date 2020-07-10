@@ -215,10 +215,10 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
             game->config.key_unused5 = 0;
         }
     }
-    if (game->config.key_unused6) {
-        if (game->config.key_unused6 == code) {
+    if (game->config.key_eat    ) {
+        if (game->config.key_eat     == code) {
             MINICON("%%fg=orange$Conflicting key, disabling key unused6");
-            game->config.key_unused6 = 0;
+            game->config.key_eat     = 0;
         }
     }
     if (game->config.key_use) {

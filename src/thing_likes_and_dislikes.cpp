@@ -51,7 +51,7 @@ bool Thing::will_avoid (point p) const
     }
 
     int heat = level->heatmap(p);
-    if (heat > 3) {
+    if (heat > 1) {
         if (is_fire_hater()) {
             return true;
         }

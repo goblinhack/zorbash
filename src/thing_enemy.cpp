@@ -29,6 +29,10 @@ void Thing::add_enemy (Thingp attacker)
         return;
     }
 
+    if (unlikely(!attacker->is_monst())) {
+        return;
+    }
+
     if (unlikely(!monstp)) {
         return;
     }
