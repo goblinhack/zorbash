@@ -1,8 +1,9 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
+#include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
 
@@ -39,17 +40,20 @@ bool Thing::use (Thingp what)
     if (what->is_weapon()) {
         MINICON("You weild the %s", what->text_the().c_str());
         MINICON("TODO");
+        game->tick_begin();
     } else if (what->is_food()) {
         eat(what);
         used(what, this);
+        game->tick_begin();
     } else if (what->is_potion()) {
         MINICON("You quaff the %s", what->text_the().c_str());
         MINICON("TODO");
+        game->tick_begin();
     } else if (!what->is_usable()) {
         if (is_player()) {
             MINICON("I don't know how to use %s", what->text_the().c_str());
         }
-        return false;
+        game->tick_begin();
     }
     return true;
 }

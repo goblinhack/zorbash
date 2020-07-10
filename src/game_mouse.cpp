@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_game.h"
@@ -59,9 +59,11 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
             int x = level->cursor->mid_at.x;
             int y = level->cursor->mid_at.y;
             FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
-                if (t != level->player) {
-                    level->player->attack(level->cursor->mid_at);
-                    return (true);
+                if (t->is_monst()) {
+                    if (t != level->player) {
+                        level->player->attack(level->cursor->mid_at);
+                        return (true);
+                    }
                 }
             }
             FOR_ALL_THINGS_END()

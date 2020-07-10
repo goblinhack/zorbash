@@ -6,13 +6,7 @@ def acid_init(name, text_name, tiles=[], left_tiles=[]):
     x = tp.Tp(name, text_name)
 
     x.set_ai_obstacle(True)
-    x.set_collision_attack(True)
-    x.set_collision_check(True)
-    x.set_collision_circle(True)
-    x.set_collision_hit_priority(100)
-    x.set_collision_radius(0.40)
     x.set_is_acid(True)
-    x.set_is_active(True)
     x.set_is_hazard(True)
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(False)

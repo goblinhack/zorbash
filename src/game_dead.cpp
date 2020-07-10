@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_game.h"
@@ -99,6 +99,9 @@ void Game::dead_select (const char *reason)
     wid_set_on_key_down(
       wid_dead_window->wid_popup_container, wid_dead_key_down);
 
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");

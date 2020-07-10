@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_game.h"
@@ -248,7 +248,7 @@ static void gl_init_fbo_ (int fbo,
                           GLuint tex_width,
                           GLuint tex_height)
 {_
-    CON("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
+    LOG("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
     GL_ERROR_CHECK();
 
     DBG("INIT: - glGenTextures");

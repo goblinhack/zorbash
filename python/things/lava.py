@@ -6,13 +6,8 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x = tp.Tp(name, text_name)
 
     x.set_ai_obstacle(True)
-    x.set_collision_attack(True)
-    x.set_collision_check(True)
-    x.set_collision_circle(True)
-    x.set_collision_hit_priority(100)
-    x.set_collision_radius(0.40)
     x.set_gfx_animated(True)
-    x.set_is_active(True)
+    # x.set_is_active(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_lava(True)
@@ -35,7 +30,7 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.update()
 
 def init():
-    lava_init(name="lava1", text_name="lovely lava",
+    lava_init(name="lava1", text_name="broiling lava",
             tiles=[
                 "lava1.1",
                 "lava1.2",

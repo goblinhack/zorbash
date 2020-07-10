@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -84,16 +84,7 @@ void Level::cursor_move (void)
         if (cursor_at != cursor_at_old) {
             cursor_at_old = cursor_at;
             cursor->move(cursor_at);
-
-            //
-            // If the cursor has moved, update the cursor path as long
-            // as the move was not initiated by the player manually moving.
-            //
-            if (player) {
-                if (!map_follow_player) {
-                    cursor_path_create();
-                }
-            }
+            cursor_path_create();
         }
     }
 }

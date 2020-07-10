@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_game.h"
@@ -38,7 +38,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
             level->new_external_particle(
                      s + j, p,
                      size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
-                     tile_find_mand(name));
+                     tile_find_mand(name), false);
         }
     } else {
         std::string name = "actionbar icon" + std::to_string(slot);
@@ -55,7 +55,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         level->new_external_particle(
                  (last_blit_tl + last_blit_br) / 2, p,
                  size(TILE_WIDTH, TILE_HEIGHT), 500,
-                 tile_index_to_tile(what->tile_curr));
+                 tile_index_to_tile(what->tile_curr),
+                 (what->is_dir_br() || what->is_dir_right() || what->is_dir_tr()));
     }
 }
 
@@ -88,7 +89,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot,
 
     level->new_external_particle(p, where_to,
                                  size(TILE_WIDTH, TILE_HEIGHT), 500,
-                                 tile_index_to_tile(what->tile_curr));
+                                 tile_index_to_tile(what->tile_curr),
+                                 (what->is_dir_br() || what->is_dir_right() || what->is_dir_tr()));
 }
 
 bool Thing::actionbar_id_insert (Thingp what)

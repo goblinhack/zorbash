@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -13,12 +13,34 @@ void Thing::lava_tick (void)
 {_
     if (is_fire_hater()) {
         if (level->is_lava(mid_at.x, mid_at.y)) {
+            bool hit = false;
+
+            //
+            // Give the player a chance
+            //
             if (!level->is_smoke(mid_at.x, mid_at.y)) {
-                if (is_player()) {
-                    MINICON("Your feet burn!");
-                }
                 auto smoke = level->thing_new("smoke1", mid_at);
                 smoke->set_lifespan(4);
+
+                hit = ((int)random_range(0, 100) < 80);
+            } else {
+                hit = true;
+            }
+
+            if (hit) {
+                FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_LAVA) {
+                    auto tpp = t->tp();
+                    if (!tpp->is_lava()) {
+                        continue;
+                    }
+                    ai_hit_me_if_possible(t, t->get_stats_attack());
+                    break;
+                } FOR_ALL_THINGS_END()
+            } else {
+                if (is_player()) {
+                    MINICON("You stand on a sightly cooler rock in the lava!");
+                    MINICON("Your feet are warm and toasty!");
+                }
             }
         }
     }

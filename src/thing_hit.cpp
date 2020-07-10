@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -198,7 +198,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::ai_hit_if_possible (Thingp hitter, int damage)
+int Thing::ai_hit_me_if_possible (Thingp hitter, int damage)
 {_
     hitter->log("possible hit %s for %u", to_string().c_str(), damage);
 _
@@ -360,7 +360,7 @@ _
     return (hit_and_killed);
 }
 
-int Thing::ai_hit_if_possible (Thingp hitter)
+int Thing::ai_hit_me_if_possible (Thingp hitter)
 {_
-    return (ai_hit_if_possible(hitter, 0));
+    return (ai_hit_me_if_possible(hitter, 0));
 }

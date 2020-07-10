@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_game.h"
@@ -27,7 +27,20 @@ bool Thing::move (fpoint future_pos)
     bool idle   = false;
 
     verify(this);
-    return (move(future_pos, up, down, left, right, attack, idle));
+    return (move(future_pos, up, down, left, right, attack, idle, true));
+}
+
+bool Thing::move_no_shove (fpoint future_pos)
+{
+    bool up     = future_pos.y < mid_at.y;
+    bool down   = future_pos.y > mid_at.y;
+    bool left   = future_pos.x < mid_at.x;
+    bool right  = future_pos.x > mid_at.x;
+    bool attack = false;
+    bool idle   = false;
+
+    verify(this);
+    return (move(future_pos, up, down, left, right, attack, idle, false));
 }
 
 bool Thing::attack (fpoint future_pos)
@@ -40,7 +53,7 @@ bool Thing::attack (fpoint future_pos)
     bool idle   = false;
 
     verify(this);
-    return (move(future_pos, up, down, left, right, attack, idle));
+    return (move(future_pos, up, down, left, right, attack, idle, true));
 }
 
 bool Thing::move (fpoint future_pos,
@@ -49,7 +62,8 @@ bool Thing::move (fpoint future_pos,
                   uint8_t left,
                   uint8_t right,
                   uint8_t attack,
-                  uint8_t idle)
+                  uint8_t idle,
+                  bool shove_allowed)
 {
     if (is_dead) {
         return (false);
@@ -103,7 +117,9 @@ _
     if (is_player()) {
         if (mid_at != future_pos) {
             if (collision_check_only(future_pos)) {
-                try_to_shove(future_pos);
+                if (shove_allowed) {
+                    try_to_shove(future_pos);
+                }
                 lunge(future_pos);
                 return (false);
             }
@@ -154,6 +170,7 @@ void Thing::update_interpolated_position (void)
             update_pos = true;
             new_pos = mid_at;
             last_mid_at = mid_at;
+            location_check();
         }
     } else {
         float t = get_timestamp_move_end() - get_timestamp_move_begin();
@@ -320,6 +337,13 @@ void Thing::move_to_immediately (fpoint to)
     move_set_dir_from_delta(delta);
     update_pos(to, true);
     move_finish();
+
+    //
+    // End of jump handles this
+    //
+    if (!is_jumping) {
+        location_check();
+    }
 }
 
 void Thing::move_to_immediately_delta (fpoint delta)
@@ -328,6 +352,13 @@ void Thing::move_to_immediately_delta (fpoint delta)
     move_set_dir_from_delta(delta);
     update_pos(mid_at + delta, true);
     move_finish();
+
+    //
+    // End of jump handles this
+    //
+    if (!is_jumping) {
+        location_check();
+    }
 }
 
 bool Thing::move_to_check (const point& nh, const bool escaping)

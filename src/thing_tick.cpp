@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -41,16 +41,13 @@ bool Thing::achieve_goals_in_life (void)
     if (is_dead) { is_tick_done = true; return true; }
     hunger_clock();
     if (is_dead) { is_tick_done = true; return true; }
-    water_tick();
-    if (is_dead) { is_tick_done = true; return true; }
-    chasm_tick();
-    if (is_dead) { is_tick_done = true; return true; }
-    lava_tick();
-    if (is_dead) { is_tick_done = true; return true; }
-    acid_tick();
-    if (is_dead) { is_tick_done = true; return true; }
-    if (exit_tick()) { is_tick_done = true; return true; }
-    if (entrance_tick()) { is_tick_done = true; return true; }
+
+#if 0
+    if (!location_check()) {
+        is_tick_done = true;
+        return true;
+    }
+#endif
 
     collision_check_do();
     if (is_dead) {

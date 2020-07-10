@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include <algorithm>
@@ -16,20 +16,22 @@
 void Level::new_internal_particle (
                           ThingId id,
                           point start, point stop, size sz, uint32_t dur,
-                          const Tilep tile)
+                          const Tilep tile,
+                          bool hflip)
 {
     uint32_t now = time_update_time_milli();
     all_internal_particles.push_back(Particle(id, start, stop, pixel_map_at,
-                                     sz, now, now + dur, tile));
+                                     sz, now, now + dur, tile, hflip));
 }
 
 void Level::new_internal_particle (
                           point start, point stop, size sz, uint32_t dur,
-                          const Tilep tile)
+                          const Tilep tile,
+                          bool hflip)
 {
     uint32_t now = time_update_time_milli();
     all_internal_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
-                                     sz, now, now + dur, tile));
+                                     sz, now, now + dur, tile, hflip));
 }
 
 void Level::display_internal_particles (void)
@@ -86,21 +88,22 @@ void Level::display_internal_particles (void)
     blit_flush();
 }
 
-void Level::new_external_particle (ThingId id,
+void Level::new_external_particle (
+                          ThingId id,
                           point start, point stop, size sz, uint32_t dur,
-                          const Tilep tile)
+                          const Tilep tile, bool hflip)
 {
     uint32_t now = time_update_time_milli();
     all_external_particles.push_back(Particle(id, start, stop, pixel_map_at,
-                                     sz, now, now + dur, tile));
+                                     sz, now, now + dur, tile, hflip));
 }
 
 void Level::new_external_particle (point start, point stop, size sz, uint32_t dur,
-                          const Tilep tile)
+                                   const Tilep tile, bool hflip)
 {
     uint32_t now = time_update_time_milli();
     all_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
-                                     sz, now, now + dur, tile));
+                                     sz, now, now + dur, tile, hflip));
 }
 
 void Level::display_external_particles (void)
@@ -149,6 +152,9 @@ void Level::display_external_particles (void)
             blit_tl -= pixel_map_at - p.pixel_map_at;
             blit_br -= pixel_map_at - p.pixel_map_at;
 
+            if (p.hflip) {
+                std::swap(blit_tl.x, blit_br.x);
+            }
             tile_blit_outline(p.tile, blit_tl, blit_br, WHITE);
 
             return false;

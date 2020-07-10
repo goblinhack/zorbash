@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #pragma once
@@ -723,6 +723,7 @@ public:
     bool ascend(void);
     bool attack(fpoint future_pos);
     bool chasm_tick();
+    bool location_check();
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(fpoint, bool *, bool *, float radius);
     bool collision_check_and_handle_at(bool *, bool *);
@@ -750,7 +751,8 @@ public:
     bool is_obstacle_for_me(const point&);
     bool is_on_fire(void);
     bool move(fpoint future_pos);
-    bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle);
+    bool move_no_shove(fpoint future_pos);
+    bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
     bool move_to_check(const point&, const bool escaping);
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
@@ -794,8 +796,8 @@ public:
     int ai_choose_goal(void);
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
-    int ai_hit_if_possible(Thingp hitter);
-    int ai_hit_if_possible(Thingp hitter, int damage);
+    int ai_hit_me_if_possible(Thingp hitter);
+    int ai_hit_me_if_possible(Thingp hitter, int damage);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
@@ -1088,6 +1090,7 @@ public:
     void kill(Thingp killer, const char *reason);
     void kill(Thingp killer, std::string &reason);
     void lava_tick();
+    void torch_tick();
     void acid_tick();
     void level_change(Levelp);
     void level_enter(void);

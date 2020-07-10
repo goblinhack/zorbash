@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #pragma once
@@ -50,6 +50,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_torch {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
@@ -438,6 +439,40 @@ public:
         }
         map_changed = true;
         decr(_is_secret_door, x, y, (uint8_t)1);
+    }
+
+    uint8_t is_torch (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_torch, p.x, p.y));
+    }
+
+    uint8_t is_torch (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_torch, x, y));
+    }
+
+    void set_is_torch (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        map_changed = true;
+        incr(_is_torch, x, y, (uint8_t)1);
+    }
+
+    void unset_is_torch (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        map_changed = true;
+        decr(_is_torch, x, y, (uint8_t)1);
     }
 
     uint8_t is_generator (const point &p)
@@ -1510,10 +1545,10 @@ public:
         set_no_check(_is_lit, x, y, false);
     }
 
-    void new_internal_particle(point start, point end, size sz, uint32_t dur, Tilep tile);
-    void new_internal_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile);
-    void new_external_particle(point start, point end, size sz, uint32_t dur, Tilep tile);
-    void new_external_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile);
+    void new_internal_particle(point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
+    void new_internal_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
+    void new_external_particle(point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
+    void new_external_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
     void display_internal_particles(void);
     void display_external_particles(void);
 
