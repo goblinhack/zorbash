@@ -1,15 +1,20 @@
 bugs
 ----
-- equip
-- potion action keys 'd' 't' 'u'
-- descent potion, that can be taken or thrown
-- potion break on fall
-- explosion needed; creates chasm?
-- extra inventory?
-- cube can eat treasure on player
+- no jump over doors
+- jump onto frog should collect
 
 upcoming work
 -------------
+- bag inventory
+- drag items
+- drop bag
+- use descent potion, that can be taken or thrown
+- potion descent creates chasm
+- potion break on fall
+- potion enchant radius
+- equip
+- throw
+- cube can eat treasure on player
 - moving floor
 - choose name / player
 - monst rarity
