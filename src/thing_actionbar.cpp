@@ -293,7 +293,7 @@ bool Level::actionbar_describe (const uint32_t slot)
     }
     if (t->is_usable()){
         if (t->is_food()){
-            s += ", %%fg=green$u%%fg=reset$ eat";
+            s += ", %%fg=green$e%%fg=reset$at";
         } else if (t->is_potion()){
             s += ", %%fg=green$u%%fg=reset$ drink";
         } else {
