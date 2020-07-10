@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -22,7 +22,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
             t->dead("end of life");
         } FOR_ALL_THINGS_END()
         monstp->move_path.erase(monstp->move_path.begin());
-        if (!move(future_pos)) {
+        if (!move_no_shove(future_pos)) {
             cursor_path_stop();
             return (false);
         } else {
@@ -44,13 +44,27 @@ void Thing::cursor_path_pop_first_move (void)
         game->cursor_move_path.clear();
         cursor_path_pop_next_and_move();
     } else if (level->cursor) {
-        //
-        // A path to the target does not exist. Jump?
-        //
-        point p = make_point(level->cursor->mid_at.x,
-                             level->cursor->mid_at.y);
-        if (try_to_jump(p)) {
-            game->tick_begin();
+#if 0
+        level->cursor_path_create();
+        if (game->cursor_move_path.size()) {
+            //
+            // A path to the target exists.
+            //
+            new_monst();
+            monstp->move_path = game->cursor_move_path;
+            game->cursor_move_path.clear();
+            cursor_path_pop_next_and_move();
+        } else 
+#endif
+        if (level->cursor) {
+            //
+            // A path to the target does not exist. Jump?
+            //
+            point p = make_point(level->cursor->mid_at.x,
+                                level->cursor->mid_at.y);
+            if (try_to_jump(p)) {
+                game->tick_begin();
+            }
         }
     }
 }

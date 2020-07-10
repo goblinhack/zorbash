@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -134,8 +134,6 @@ void Level::cursor_path_draw (point start, point end)
 
     for (auto& c : p) {
         thing_new("cursor_path", fpoint(c.x , c.y));
-log("new path");
-log("%d %d", c.x, c.y);
     }
 }
 

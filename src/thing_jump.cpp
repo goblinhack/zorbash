@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_game.h"
@@ -101,10 +101,12 @@ bool Thing::try_to_jump (point to)
         // So the player is visible above light
         //
         level->new_external_particle(id, src, dst, sz, 500,
-                                     tile_index_to_tile(tile_curr));
+                                     tile_index_to_tile(tile_curr),
+                                     false);
     } else {
         level->new_internal_particle(id, src, dst, sz, 500,
-                                     tile_index_to_tile(tile_curr));
+                                     tile_index_to_tile(tile_curr),
+                                     false);
     }
 
     is_jumping = true;
@@ -119,7 +121,8 @@ bool Thing::try_to_jump (point to)
             w->move_to_immediately(mid_at);
             w->is_jumping = true;
             level->new_external_particle(id, src, dst, sz, 500,
-                                        tile_index_to_tile(w->tile_curr));
+                                        tile_index_to_tile(w->tile_curr),
+                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
         }
     }
 
@@ -132,7 +135,8 @@ bool Thing::try_to_jump (point to)
             // No, the weapon is shown as carry anim
             //
             level->new_external_particle(id, src, dst, sz, 500,
-                                        tile_index_to_tile(w->tile_curr));
+                                        tile_index_to_tile(w->tile_curr),
+                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
         }
     }
 
@@ -155,7 +159,8 @@ bool Thing::try_to_jump (point to)
             w->move_to_immediately(mid_at);
             w->is_jumping = true;
             level->new_external_particle(id, src, dst, sz, 500,
-                                        tile_index_to_tile(w->tile_curr));
+                                        tile_index_to_tile(w->tile_curr),
+                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
         }
     }
 
@@ -235,51 +240,9 @@ void Thing::jump_end (void)
         }
     }
 
-    //
-    // If something moves on the water, make a ripple
-    //
-    if (is_monst() || is_player()) {
-        if (!is_floating()) {
-            if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
-                fpoint at(mid_at.x, mid_at.y);
-                log("causes ripples");
-                if (random_range(0, 1000) > 500) {
-                    level->thing_new(tp_random_ripple()->name(), at);
-                }
-            }
+    collision_check_only(mid_at);
 
-            if (is_player()) {
-                if (level->is_deep_water((int)mid_at.x, (int)mid_at.y)) {
-                    MINICON("You plunge into the icy water!");
-                    //
-                    // Ensure things in the water get a chance to attack!
-                    //
-                    game->tick_begin();
-                }
-            }
-        }
-    }
-
-    //
-    // Plunging into lava? bad idea
-    //
-    if (is_fire_hater()) {
-        if (level->is_lava(mid_at.x, mid_at.y)) {
-            if (is_player()) {
-                MINICON("You plunge into the lava!");
-
-                //
-                // Ensure lava gets a chance to attack!
-                //
-                game->tick_begin();
-            }
-
-            if (!level->is_smoke(mid_at.x, mid_at.y)) {
-                auto smoke = level->thing_new("smoke1", mid_at);
-                smoke->set_lifespan(4);
-            }
-        }
-    }
+    location_check();
 
     wobble(25);
 }

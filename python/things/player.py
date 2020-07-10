@@ -116,5 +116,6 @@ def tp_init(name, text_name):
 
 def init():
     tp_init(name="player1", text_name="noble warrior")
+    tp_init(name="player2", text_name="noble warrior")
 
 init()

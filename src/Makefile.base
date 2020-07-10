@@ -139,6 +139,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_light.o 		\
     $(OBJDIR)/thing_likes_and_dislikes.o \
+    $(OBJDIR)/thing_location.o 		\
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\
     $(OBJDIR)/thing_minimap.o 		\
@@ -158,6 +159,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_text.o 		\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_tile.o 		\
+    $(OBJDIR)/thing_torch.o 		\
     $(OBJDIR)/thing_update.o 		\
     $(OBJDIR)/thing_use.o 		\
     $(OBJDIR)/thing_water.o 		\

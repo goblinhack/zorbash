@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "minilzo.h"
@@ -237,6 +237,7 @@ std::ostream& operator<<(std::ostream &out,
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};           */ out << bits(my.t->_is_rock);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};    */ out << bits(my.t->_is_secret_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};          */ out << bits(my.t->_is_smoke);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_torch {};          */ out << bits(my.t->_is_torch);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};       */ out << bits(my.t->_is_treasure);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};           */ out << bits(my.t->_is_wall);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_water {};          */ out << bits(my.t->_is_water);

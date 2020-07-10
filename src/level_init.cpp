@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_game.h"
@@ -200,7 +200,7 @@ void Level::init (point3d at, int seed)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 for (auto y = 0; y < MAP_HEIGHT; y++) {
                     if (dungeon->is_entrance(x, y)) {
-                        auto t = thing_new("player1", fpoint(x, y));
+                        auto t = thing_new("player2", fpoint(x, y));
 
                         auto w = thing_new("sword1", fpoint(x, y));
                         t->carry(w);

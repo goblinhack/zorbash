@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -81,9 +81,10 @@ bool Thing::fall_to_next_level (void)
                 MINICON("%s tumbles into the void!", text_The().c_str());
             }
 
-            log("fall to next level");
-            move_to_immediately(fpoint(x, y));
+            log("fall to the next level");
             level_change(l);
+            move_to_immediately(fpoint(x, y));
+
             if (is_player()) {
                 l->player = this;
                 l->scroll_map_to_player();
@@ -98,7 +99,6 @@ bool Thing::fall_to_next_level (void)
             set_fall_height(0);
             wobble(90);
             visible();
-
 
             //
             // Allow generators to fall without damage

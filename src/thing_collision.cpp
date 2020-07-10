@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -660,7 +660,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             carry(it);
             log("collect %s", it->to_string().c_str());
             ret = true;
-        } else if (it->ai_hit_if_possible(me, damage)) {
+        } else if (it->ai_hit_me_if_possible(me, damage)) {
             if (is_loggable_for_unimportant_stuff()) {
                 log("collision: will hit %s for %d damage",
                     it->to_string().c_str(), damage);

@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -213,7 +213,7 @@ void player_tick (void)
         level->cursor_path_clear();
 
         fpoint future_pos = player->mid_at + fpoint(dx, dy);
-        player->move(future_pos, up, down, left, right, attack, wait);
+        player->move(future_pos, up, down, left, right, attack, wait, true);
         last_key_pressed_when = time_get_time_ms_cached();
     }
 }

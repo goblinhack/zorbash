@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include <SDL.h>
@@ -129,28 +129,38 @@ void WidTextBox::log_ (std::wstring str)
 {_
     Widp tmp {};
 
-    if (line_count < scroll_height) {
-        wid_set_text(get(children, scroll_height - line_count - 1), str);
+    if (!wid_vert_scroll) {
+        if (line_count < scroll_height) {
+            wid_set_text(get(children, height - line_count - 1), str);
+            line_count++;
+            wid_update(wid_text_box_container);
+        } else {
+            ERR("text box overflow");
+        }
     } else {
-        wid_scroll_text(wid_text_last);
-        tmp = wid_get_head(wid_text_last);
-        if (tmp) {
-            wid_set_text(tmp, str);
+        if (line_count < scroll_height) {
+            wid_set_text(get(children, scroll_height - line_count - 1), str);
+        } else {
+            wid_scroll_text(wid_text_last);
+            tmp = wid_get_head(wid_text_last);
+            if (tmp) {
+                wid_set_text(tmp, str);
+            }
         }
-    }
 
-    if (wid_vert_scroll) {
-        wid_move_to_top(wid_vert_scroll);
-    }
-    line_count++;
-
-    int show_scrollbars_at = wid_get_height(wid_text_area);
-    if (line_count > show_scrollbars_at) {
-        if (wid_horiz_scroll) {
-            wid_visible(wid_get_parent(wid_horiz_scroll));
-        }
         if (wid_vert_scroll) {
-            wid_visible(wid_get_parent(wid_vert_scroll));
+            wid_move_to_top(wid_vert_scroll);
+        }
+        line_count++;
+
+        int show_scrollbars_at = wid_get_height(wid_text_area);
+        if (line_count > show_scrollbars_at) {
+            if (wid_horiz_scroll) {
+                wid_visible(wid_get_parent(wid_horiz_scroll));
+            }
+            if (wid_vert_scroll) {
+                wid_visible(wid_get_parent(wid_vert_scroll));
+            }
         }
     }
 }

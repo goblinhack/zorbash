@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_game.h"
@@ -286,6 +286,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};           */ in >> bits(my.t->_is_rock);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};    */ in >> bits(my.t->_is_secret_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};          */ in >> bits(my.t->_is_smoke);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_torch {};          */ in >> bits(my.t->_is_torch);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};       */ in >> bits(my.t->_is_treasure);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};           */ in >> bits(my.t->_is_wall);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_water {};          */ in >> bits(my.t->_is_water);

@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -26,7 +26,7 @@ void Thing::kill (Thingp killer, const char *reason)
     unwield("owner is dead");
 
     if (is_player()) {
-        MINICON("%s", reason);
+        MINICON("RIP: %s", reason);
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
         level->map_follow_player = false;

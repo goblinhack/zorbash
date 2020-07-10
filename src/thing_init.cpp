@@ -1,6 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
+// See the README.md file for license info.
 //
 
 #include "my_main.h"
@@ -388,7 +388,11 @@ void Thing::reinit (void)
     // Relearn the cursor after loading.
     //
     if (is_cursor()) {
-        level->cursor = this;
+        if (level->cursor) {
+            dead("already exists");
+        } else {
+            level->cursor = this;
+        }
     }
 
     init_lights();
