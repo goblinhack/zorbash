@@ -152,6 +152,15 @@ def init_ui_action_bar_highlight():
         file="data/gfx/ui_action_bar_highlight.tga",
         name="ui_action_bar_highlight", width=60, height=72, arr=tiles)
 
+def init_ui_inventory():
+    tiles = [
+        "ui_inventory0",
+        "ui_inventory1",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_inventory.tga",
+        name="ui_inventory", width=60, height=72, arr=tiles)
+
 def init_16x16():
     tiles = [
       "health5-icon",        "health4-icon",        "health3-icon",        "health2-icon",
@@ -1388,6 +1397,7 @@ init_ui_dead()
 init_ui_credits()
 init_ui_action_bar()
 init_ui_action_bar_highlight()
+init_ui_inventory()
 init_16x16()
 init_24x24()
 init_32x32()
