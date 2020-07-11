@@ -60,6 +60,7 @@ public:
 #else
     uint32_t           key_drop                     = {SDL_SCANCODE_DELETE};
 #endif
+    uint32_t           key_eat                      = {SDL_SCANCODE_E};
     uint32_t           key_help                     = {SDL_SCANCODE_H};
     uint32_t           key_jump                     = {SDL_SCANCODE_J};
     uint32_t           key_load                     = {SDL_SCANCODE_F11};
@@ -81,7 +82,6 @@ public:
     uint32_t           key_unused3                  = 0;
     uint32_t           key_unused4                  = 0;
     uint32_t           key_unused5                  = 0;
-    uint32_t           key_eat                      = 0;
     uint32_t           key_use                      = {SDL_SCANCODE_U};
     uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
     uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};

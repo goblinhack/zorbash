@@ -377,6 +377,27 @@ static void game_config_key_jump_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
+static void game_config_key_drop_set (SDL_Scancode code)
+{_
+    game_config_check_for_conflicts(code);
+    game->config.key_drop = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_use_set (SDL_Scancode code)
+{_
+    game_config_check_for_conflicts(code);
+    game->config.key_use = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_eat_set (SDL_Scancode code)
+{_
+    game_config_check_for_conflicts(code);
+    game->config.key_eat = code;
+    game->config_keyboard_select();
+}
+
 static void game_config_key_action0_set (SDL_Scancode code)
 {_
     game_config_check_for_conflicts(code);
@@ -613,6 +634,27 @@ uint8_t game_config_key_jump (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
     on_sdl_key_grab = game_config_key_jump_set;
+    return (true);
+}
+
+uint8_t game_config_key_drop (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_drop_set;
+    return (true);
+}
+
+uint8_t game_config_key_use (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_use_set;
+    return (true);
+}
+
+uint8_t game_config_key_eat (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_eat_set;
     return (true);
 }
 
@@ -1210,6 +1252,87 @@ void Game::config_keyboard_select (void)
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_jump));
         wid_set_on_mouse_up(w, game_config_key_jump);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // drop
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "drop");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "drop");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 21, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_drop));
+        wid_set_on_mouse_up(w, game_config_key_drop);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // use
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "use");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "use");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 21, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_use));
+        wid_set_on_mouse_up(w, game_config_key_use);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // eat
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "eat");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "eat");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 21, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_eat));
+        wid_set_on_mouse_up(w, game_config_key_eat);
     }
     ///////////////////////////////////////////////////////////////////////
     // action0
