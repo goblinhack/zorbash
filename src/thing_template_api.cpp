@@ -240,7 +240,7 @@ int Tp::is_rrr79(void) const { return _is_rrr79; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
 int Tp::is_rrr80(void) const { return _is_rrr80; }
 int Tp::is_rrr81(void) const { return _is_rrr81; }
-int Tp::is_rrr82(void) const { return _is_rrr82; }
+int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_potion_eater(void) const { return _is_potion_eater; }
 int Tp::is_throwable(void) const { return _is_throwable; }
 int Tp::is_usable(void) const { return _is_usable; }
@@ -481,7 +481,7 @@ void Tp::set_is_rrr79(int v) { _is_rrr79 = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
 void Tp::set_is_rrr80(int v) { _is_rrr80 = v; }
 void Tp::set_is_rrr81(int v) { _is_rrr81 = v; }
-void Tp::set_is_rrr82(int v) { _is_rrr82 = v; }
+void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
 void Tp::set_is_potion_eater(int v) { _is_potion_eater = v; }
 void Tp::set_is_throwable(int v) { _is_throwable = v; }
 void Tp::set_is_usable(int v) { _is_usable = v; }

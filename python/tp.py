@@ -419,8 +419,8 @@ class Tp:
     def set_is_rrr81(self, value):
         zx.tp_set_is_rrr81(self, value)
 
-    def set_is_rrr82(self, value):
-        zx.tp_set_is_rrr82(self, value)
+    def set_is_ethereal(self, value):
+        zx.tp_set_is_ethereal(self, value)
 
     def set_is_potion_eater(self, value):
         zx.tp_set_is_potion_eater(self, value)
