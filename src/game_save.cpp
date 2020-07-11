@@ -74,7 +74,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int          submerged_offset          */ out << bits(my.t->submerged_offset);
     /* int          tick_rate_tenths          */ out << bits(my.t->tick_rate_tenths);
     /* int          tick_resurrect_when       */ out << bits(my.t->tick_resurrect_when);
-    /* point        level_changed_at          */ out << bits(my.t->level_changed_at);
     /* point        wander_target             */ out << bits(my.t->wander_target);
     /* std::list<ThingId>   carrying          */ out << bits(my.t->carrying);
     /* std::string          msg               */ out << bits(my.t->msg);
@@ -100,6 +99,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* uint32_t     tick                      */ out << bits(my.t->tick);
     /* uint32_t     tick_last_did_something   */ out << bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_escape          */ out << bits(my.t->tick_last_escape);
+    /* uint32_t     tick_last_level_change    */ out << bits(my.t->tick_last_level_change);
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

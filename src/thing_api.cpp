@@ -3302,6 +3302,54 @@ uint32_t Thing::incr_tick_last_escape (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_last_level_change
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_tick_last_level_change (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->tick_last_level_change);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_tick_last_level_change (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_level_change = v);
+}
+
+uint32_t Thing::decr_tick_last_level_change (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_level_change -= v);
+}
+
+uint32_t Thing::incr_tick_last_level_change (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_level_change += v);
+}
+
+uint32_t Thing::decr_tick_last_level_change (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_level_change--);
+}
+
+uint32_t Thing::incr_tick_last_level_change (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_level_change++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // timestamp_lunge_begin
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_lunge_begin (void) const

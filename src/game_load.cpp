@@ -101,7 +101,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          submerged_offset          */ in >> bits(my.t->submerged_offset);
     /* int          tick_rate_tenths          */ in >> bits(my.t->tick_rate_tenths);
     /* int          tick_resurrect_when       */ in >> bits(my.t->tick_resurrect_when);
-    /* point        level_changed_at          */ in >> bits(my.t->level_changed_at);
     /* point        wander_target             */ in >> bits(my.t->wander_target);
     /* std::list<ThingId>   carrying          */ in >> bits(my.t->carrying);
     /* std::string          msg               */ in >> bits(my.t->msg);
@@ -127,6 +126,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* uint32_t     tick                      */ in >> bits(my.t->tick);
     /* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);
+    /* uint32_t     tick_last_level_change    */ in >> bits(my.t->tick_last_level_change);
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
