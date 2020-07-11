@@ -10,6 +10,13 @@
 
 bool Thing::try_to_jump (point to)
 {
+    //
+    // No rapid boinging
+    //
+    if (is_jumping) {
+        return false;
+    }
+
     auto x = to.x;
     auto y = to.y;
 
@@ -18,6 +25,13 @@ bool Thing::try_to_jump (point to)
     }
 
     if (level->is_oob(x, y)) {
+        return false;
+    }
+
+    //
+    // Block jumping over doors
+    //
+    if (!level->is_visited(x, y)) {
         return false;
     }
 
@@ -186,10 +200,17 @@ bool Thing::try_to_jump (point to)
 
 bool Thing::try_to_jump (void)
 {
+    //
+    // No rapid boinging
+    //
+    if (is_jumping) {
+        return false;
+    }
+
     int d = is_jumper_distance() / 2;
     int tries = d * d;
 
-    while (tries--) {
+    while (tries-- > 0) {
         int x = random_range(mid_at.x - d, mid_at.x + d);
         int y = random_range(mid_at.y - d, mid_at.y + d);
         if (try_to_jump(point(x, y))) {
