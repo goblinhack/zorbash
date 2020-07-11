@@ -96,6 +96,10 @@ bool Thing::descend (void)
                 location_check();
                 update_light();
 
+                if (is_player()) {
+                    level->cursor->move_to_immediately(mid_at);
+                }
+
                 log("moved to next level entrance");
                 return true;
             }
