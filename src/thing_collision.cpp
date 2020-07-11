@@ -922,10 +922,19 @@ bool Thing::collision_obstacle (Thingp it)
     }
 
     //
-    // Stop ghosts piling on top of each other
+    // Stop beholders piling on top of each other
     //
     if (it->is_floating()) {
         if (is_floating()) {
+            return (true);
+        }
+    }
+
+    //
+    // Stop ghosts piling on top of each other
+    //
+    if (it->is_ethereal()) {
+        if (is_ethereal()) {
             return (true);
         }
     }
@@ -941,7 +950,9 @@ bool Thing::collision_obstacle (Thingp it)
 
     if (is_player()) {
         if (it->is_alive_monst()) {
-            return (true);
+            if (!it->is_ethereal()) {
+                return (true);
+            }
         }
     } else if (is_monst()) {
         if (it->is_chasm()) {
@@ -1032,6 +1043,8 @@ _
             log("can open %s", it->to_string().c_str());
             return !open_door(it);
         }
+    } else if (it->is_ethereal()) {
+        log("can pass through %s", it->to_string().c_str());
     } else if (it->is_exit()) {
         if (things_overlap(me, A_at, it)) {
             log("can exit %s", it->to_string().c_str());

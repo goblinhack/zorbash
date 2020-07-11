@@ -665,7 +665,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr79)
     TP_SET_DECL(is_rrr80)
     TP_SET_DECL(is_rrr81)
-    TP_SET_DECL(is_rrr82)
+    TP_SET_DECL(is_ethereal)
     TP_SET_DECL(is_potion_eater)
     TP_SET_DECL(is_throwable)
     TP_SET_DECL(is_usable)

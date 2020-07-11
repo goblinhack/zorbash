@@ -981,7 +981,7 @@ public:
     int is_rrr79(void) const;
     int is_rrr80(void) const;
     int is_rrr81(void) const;
-    int is_rrr82(void) const;
+    int is_ethereal(void) const;
     int is_potion_eater(void) const;
     int is_throwable(void) const;
     int is_usable(void) const;

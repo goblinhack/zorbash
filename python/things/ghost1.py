@@ -27,6 +27,7 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
+    x.set_is_ethereal(True)
     x.set_is_movable(True)
     x.set_is_undead(True)
     x.set_normal_placement_rules(True)

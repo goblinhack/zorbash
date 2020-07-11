@@ -889,9 +889,9 @@ int Thing::is_rrr81(void) const
     return (tp()->is_rrr81());
 }
 
-int Thing::is_rrr82(void) const
+int Thing::is_ethereal(void) const
 {_
-    return (tp()->is_rrr82());
+    return (tp()->is_ethereal());
 }
 
 int Thing::is_potion_eater(void) const
