@@ -178,7 +178,7 @@ void player_tick (void)
             // A path to the target exists.
             //
             for (auto i = game->cursor_move_path.rbegin();
-                 i != game->cursor_move_path.rend(); i--) {
+                 i != game->cursor_move_path.rend(); i++) {
                 auto p = *i;
                 if (player->try_to_jump(make_point(p.x, p.y))) {
                     game->tick_begin();
