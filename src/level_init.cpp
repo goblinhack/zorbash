@@ -792,7 +792,7 @@ void Level::place_random_floor_deco (Dungeonp d)
                 continue;
             }
 
-            if (random_range(0, 100) < 95) {
+            if (random_range(0, 100) < 99) {
                 continue;
             }
 
