@@ -72,10 +72,6 @@ uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
                         // Magic keys we use to toggle the console.
                         //
                         return (false);
-                    case SDLK_ESCAPE:
-                        game_config_top_destroy();
-                        game->main_menu_select();
-                        return (true);
                     case 'g':
                         game_config_top_graphics(nullptr, 0, 0, 0);
                         return (true);
@@ -87,6 +83,10 @@ uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
                         return (true);
                     case 'o':
                         game_config_top_other(nullptr, 0, 0, 0);
+                        return (true);
+                    case 'b':
+                    case SDLK_ESCAPE:
+                        game_config_top_back(nullptr, 0, 0, 0);
                         return (true);
                 }
             }

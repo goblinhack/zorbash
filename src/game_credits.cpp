@@ -38,6 +38,7 @@ uint8_t wid_credits_key_up (Widp w, const struct SDL_KEYSYM *key)
                         // Magic keys we use to toggle the console.
                         //
                         return (false);
+                    case 'b':
                     case SDLK_ESCAPE: {_
                         wid_credits_destroy();
                         return (true);

@@ -601,6 +601,7 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
                         wid_save_destroy();
                         return (true);
                     }
+                    case 'b':
                     case SDLK_ESCAPE: {_
                         CON("PLAYER: save game cancelled");
                         wid_save_destroy();

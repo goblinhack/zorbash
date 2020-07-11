@@ -801,6 +801,7 @@ uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
                         // Magic keys we use to toggle the console.
                         //
                         return (false);
+                    case 'b':
                     case SDLK_ESCAPE:
                         game_config_keyboard_cancel(nullptr, 0, 0, 0);
                         return (true);
