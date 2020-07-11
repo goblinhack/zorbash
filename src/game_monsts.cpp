@@ -141,6 +141,9 @@ static void game_monsts_wid_create (void)
                         } else if (t->is_dead) {
                             s += " (dead)";
                         }
+
+                        // s += " " + std::to_string(t->get_stats_health());
+
                         wid_set_text(w, s);
                         wid_set_text_lhs(w, true);
                     }
