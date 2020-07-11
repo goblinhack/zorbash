@@ -104,7 +104,6 @@ public:
     int          submerged_offset = {};      // GL co-orids
     int          tick_rate_tenths = {};
     int          tick_resurrect_when = {};
-    point        level_changed_at;           // Avoid level change loops
     point        wander_target;
     std::list<ThingId>   carrying;
     std::string          msg;                // Text that floats on screen
@@ -130,6 +129,7 @@ public:
     uint32_t     tick = {};                  // Increments on completion of move
     uint32_t     tick_last_did_something {};
     uint32_t     tick_last_escape {};
+    uint32_t     tick_last_level_change {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -645,6 +645,13 @@ public:
     uint32_t incr_tick_last_escape(uint32_t);
     uint32_t decr_tick_last_escape(void);
     uint32_t incr_tick_last_escape(void);
+
+    uint32_t set_tick_last_level_change(uint32_t);
+    uint32_t get_tick_last_level_change(void) const;
+    uint32_t decr_tick_last_level_change(uint32_t);
+    uint32_t incr_tick_last_level_change(uint32_t);
+    uint32_t decr_tick_last_level_change(void);
+    uint32_t incr_tick_last_level_change(void);
 
     ThingId set_on_fire_anim_id(ThingId);
     ThingId get_on_fire_anim_id(void) const;

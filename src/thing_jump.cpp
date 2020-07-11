@@ -240,8 +240,8 @@ void Thing::jump_end (void)
         }
     }
 
+MINICON("location check eoj");
     collision_check_only(mid_at);
-
     location_check();
 
     wobble(25);

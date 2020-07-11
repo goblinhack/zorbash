@@ -37,9 +37,12 @@ bool Thing::ascend (void)
     }
 
     //
-    // No level change if we've not moved
+    // No level change if too rapid
     //
-    if (make_point(mid_at) == monstp->level_changed_at) {
+    if (get_tick() - get_tick_last_level_change() < 1) {
+        if (is_player()) {
+            MINICON("The entrance is temporarily blocked; try again");
+        }
         return false;
     }
 
@@ -78,8 +81,9 @@ bool Thing::ascend (void)
                     // same tick or they will get lots of free attacks
                     //
                     l->update_all_ticks();
-                    monstp->level_changed_at = make_point(mid_at);
                 }
+                set_tick_last_level_change(get_tick());
+                location_check();
                 update_light();
 
                 log("moved to previous level exit");

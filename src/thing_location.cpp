@@ -34,11 +34,12 @@ bool Thing::location_check (void)
     if (is_dead) {
         return (false);
     }
+
+    auto ret = true;
     if (exit_tick()) {
-        return (false);
+        ret = false;
+    } else if (entrance_tick()) {
+        ret = false;
     }
-    if (entrance_tick()) {
-        return (false);
-    }
-    return (true);
+    return (ret);
 }
