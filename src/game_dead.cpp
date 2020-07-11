@@ -132,7 +132,7 @@ void Game::dead_select (const char *reason)
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 
-        point tl = make_point(4, 16);
+        point tl = make_point(3, 16);
         point br = make_point(width - 5, 18);
 
         wid_set_style(w, UI_WID_STYLE_RED);
