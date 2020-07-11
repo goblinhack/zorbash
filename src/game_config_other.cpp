@@ -97,15 +97,13 @@ uint8_t game_config_other_key_up (Widp w, const struct SDL_KEYSYM *key)
                         // Magic keys we use to toggle the console.
                         //
                         return (false);
-                    case 'b':
-                        game_config_other_back(nullptr, 0, 0, 0);
-                        return (true);
                     case 'c':
                         game_config_other_cancel(nullptr, 0, 0, 0);
                         return (true);
                     case 's':
                         game_config_other_save(nullptr, 0, 0, 0);
                         return (true);
+                    case 'b':
                     case SDLK_ESCAPE:
                         game_config_other_cancel(nullptr, 0, 0, 0);
                         return (true);
@@ -240,18 +238,18 @@ void Game::config_other_select (void)
     y_at += 3;
     {_
         auto p = game_config_other_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "ascii mode");
+        auto w = wid_new_square_button(p, "ASCII mode");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "ascii mode");
+        wid_set_text(w, "ASCII mode");
     }
     {_
         auto p = game_config_other_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "ascii mode value");
+        auto w = wid_new_square_button(p, "ASCII mode value");
 
         point tl = make_point(width / 2 , y_at);
         point br = make_point(width / 2 + 6, y_at + 2);

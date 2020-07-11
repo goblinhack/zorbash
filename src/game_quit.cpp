@@ -63,6 +63,7 @@ uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case 'n':
                         game_quit_no(nullptr, 0, 0, 0);
                         return (true);
+                    case 'b':
                     case SDLK_ESCAPE:
                         game_quit_no(nullptr, 0, 0, 0);
                         return (true);

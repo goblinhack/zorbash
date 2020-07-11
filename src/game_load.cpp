@@ -762,7 +762,8 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
                         }
                         return (true);
                     }
-                    case SDLK_ESCAPE: {
+                    case 'b':
+                    case SDLK_ESCAPE: {_
                         CON("PLAYER: load game cancelled");
                         wid_load_destroy();
                         return (true);

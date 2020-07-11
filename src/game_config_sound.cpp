@@ -89,15 +89,13 @@ uint8_t game_config_sound_key_up (Widp w, const struct SDL_KEYSYM *key)
                         // Magic keys we use to toggle the console.
                         //
                         return (false);
-                    case 'b':
-                        game_config_sound_back(nullptr, 0, 0, 0);
-                        return (true);
                     case 'c':
                         game_config_sound_cancel(nullptr, 0, 0, 0);
                         return (true);
                     case 's':
                         game_config_sound_save(nullptr, 0, 0, 0);
                         return (true);
+                    case 'b':
                     case SDLK_ESCAPE:
                         game_config_sound_cancel(nullptr, 0, 0, 0);
                         return (true);
