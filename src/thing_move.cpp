@@ -169,6 +169,12 @@ void Thing::update_interpolated_position (void)
             new_pos = mid_at;
             last_mid_at = mid_at;
             location_check();
+
+            //
+            // In case we changed level, update these
+            //
+            new_pos = mid_at;
+            last_mid_at = mid_at;
         }
     } else {
         float t = get_timestamp_move_end() - get_timestamp_move_begin();

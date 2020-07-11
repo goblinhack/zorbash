@@ -193,11 +193,16 @@ void Level::display_map (void)
         game->config.gfx_show_hidden = 1;
         update_hazard_tile_map();
     }
+#ifdef ENABLE_DEBUG_LIGHT
+    game->config.gfx_lights = 1;
+    game->config.gfx_show_hidden = 1;
+#endif
 
     if (unlikely(game->config.gfx_show_hidden)) {
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
         display_map_things(FBO_MAP, minx, miny, maxx, maxy);
+        lights_render(light_minx, light_miny, light_maxx, light_maxy, FBO_MAP);
     } else if (game->config.gfx_lights) {
         {
             //
