@@ -46,10 +46,7 @@ bool Thing::descend (void)
     //
     // No level change if too rapid
     //
-    if (get_tick() - get_tick_last_level_change() < 1) {
-        if (is_player()) {
-            MINICON("The exit is temporarily blocked; try again");
-        }
+    if (get_tick() - get_tick_last_level_change() <= 1) {
         return false;
     }
 
@@ -79,8 +76,9 @@ bool Thing::descend (void)
                 }
 
                 log("move to next level entrance");
-                move_to_immediately(fpoint(x, y));
                 level_change(l);
+                set_tick_last_level_change(get_tick());
+                move_to_immediately(fpoint(x, y));
                 if (is_player()) {
                     l->player = this;
                     l->scroll_map_to_player();
@@ -91,7 +89,6 @@ bool Thing::descend (void)
                     //
                     l->update_all_ticks();
                 }
-                set_tick_last_level_change(get_tick());
                 location_check();
                 update_light();
 
