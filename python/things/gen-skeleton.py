@@ -36,7 +36,7 @@ def tp_init(name, text_name):
     x.set_is_water_hater(100)
     x.set_light_color("cyan")
     x.set_normal_placement_rules(True)
-    x.set_on_idle_dice_do("1d1+2:gen-skeleton.spawn()")
+    x.set_on_idle_dice_do("1d10+25:gen-skeleton.spawn()")
     x.set_stats_defence(1)
     x.set_stats_health_initial(30)
     x.set_stats_strength(15)
