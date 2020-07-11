@@ -14,8 +14,6 @@ static int g_light_overlay_texid;
 static Texp g_bloom_overlay_tex;
 static int g_bloom_overlay_texid;
 
-#undef DEBUG_LIGHT
-
 Light::Light (void)
 {_
     newptr(this, "Light");
@@ -271,10 +269,14 @@ void Light::render_triangle_fans (int last, int count)
 
     auto light_offset = light_pos - cached_light_pos;
 
-#ifdef DEBUG_LIGHT
+#ifdef ENABLE_DEBUG_LIGHT
+    if (!last) {
+        return;
+    }
+
     blit_fbo_bind(FBO_MAP);
     color c = RED;
-    c.a = 150;
+    c.a = 255;
     glcolor(c);
     gl_blitline(blit_tl.x, blit_tl.y, blit_br.x, blit_tl.y);
     gl_blitline(blit_tl.x, blit_tl.y, blit_tl.x, blit_br.y);
@@ -285,8 +287,8 @@ void Light::render_triangle_fans (int last, int count)
     gl_blitline(blit_tl.x, blit_br.y, light_pos.x, light_pos.y);
     gl_blitline(blit_br.x, blit_br.y, light_pos.x, light_pos.y);
 
-    c = GREEN;
-    c.a = 150;
+    c = WHITE;
+    c.a = 200;
     glcolor(c);
 
     if (1) {
@@ -326,7 +328,7 @@ void Light::render_triangle_fans (int last, int count)
                 float p1y = light_pos.y + r->sinr * radius * tileh;
 
                 push_point(p1x, p1y, red, green, blue, alpha);
-#ifdef DEBUG_LIGHT
+#ifdef ENABLE_DEBUG_LIGHT
                 gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
 #endif
             }
@@ -341,7 +343,7 @@ void Light::render_triangle_fans (int last, int count)
                 float p1y = light_pos.y + r->sinr * radius * tileh;
 
                 push_point(p1x, p1y, red, green, blue, alpha);
-#ifdef DEBUG_LIGHT
+#ifdef ENABLE_DEBUG_LIGHT
                 gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
 #endif
             }
@@ -350,7 +352,7 @@ void Light::render_triangle_fans (int last, int count)
         auto sz = bufp - gl_array_buf;
         cached_gl_cmds.resize(sz);
         std::copy(gl_array_buf, bufp, cached_gl_cmds.begin());
-#ifndef DEBUG_LIGHT
+#ifndef ENABLE_DEBUG_LIGHT
         blit_flush_triangle_fan();
         //
         // Makes non player lights more intense

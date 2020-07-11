@@ -12,6 +12,7 @@
 #define ENABLE_TRACING             // Function tracing
 
 #define ENABLE_TILE_BOUNDS         // Scan tiles for bounds
+#undef  ENABLE_DEBUG_LIGHT         // Lighting algorithm for player
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
 #undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
 #undef  ENABLE_DEBUG_AI_GOALS      // AI goal selection

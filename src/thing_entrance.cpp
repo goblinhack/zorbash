@@ -80,6 +80,10 @@ bool Thing::ascend (void)
                     //
                     l->update_all_ticks();
                 }
+
+                move_finish();
+                set_interpolated_mid_at(mid_at);
+                update_interpolated_position();
                 location_check();
                 update_light();
 
