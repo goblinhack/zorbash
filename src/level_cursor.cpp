@@ -55,6 +55,11 @@ void Level::cursor_move (void)
             return;
         }
         map_wanted_at += fpoint(wheel_x, -wheel_y);
+
+        if (player->is_dead) {
+            map_follow_player = false;
+        }
+
     }
 
     if (game->paused()) {

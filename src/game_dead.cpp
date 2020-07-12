@@ -86,7 +86,9 @@ void Game::dead_select (const char *reason)
     if (wid_dead_window) {
         wid_dead_destroy();
     }
+
     game->soft_pause();
+    game->level->scroll_map_to_player();
 
     point tl = make_point(0, ASCII_HEIGHT - 24);
     point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, ASCII_HEIGHT - 1);

@@ -4467,6 +4467,9 @@ static Widp wid_mouse_motion_handler (int32_t x, int32_t y,
     w = get(wid_on_screen_at, x, y);
     if (w) {
         verify(w);
+        if (w->hidden) {
+            return nullptr;
+        }
         return (w);
     }
 
@@ -4637,14 +4640,16 @@ void wid_mouse_motion (int32_t x, int32_t y,
     // of the console.
     //
     if (!got_one){
-        if (wid_console_container && (wheelx || wheely)) {
-            Widp w = wid_console_container->scrollbar_vert;
-            if (w) {
-                w = w->parent;
-            }
+        if (wid_console_window && wid_console_window->visible) {
+            if (wid_console_container && (wheelx || wheely)) {
+                Widp w = wid_console_container->scrollbar_vert;
+                if (w) {
+                    w = w->parent;
+                }
 
-            if (w && w->on_mouse_motion) {
-                (w->on_mouse_motion)(w, x, y, relx, rely, wheelx, wheely);
+                if (w && w->on_mouse_motion) {
+                    (w->on_mouse_motion)(w, x, y, relx, rely, wheelx, wheely);
+                }
             }
         }
     }
