@@ -53,7 +53,7 @@ void Level::display_internal_particles (void)
     auto now = time_update_time_milli();
     auto e = std::remove_if(all_internal_particles.begin(),
                             all_internal_particles.end(),
-        [=] (Particle &p) {
+        [=, this] (Particle &p) {
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
             if (dt > 1) {
@@ -126,7 +126,7 @@ void Level::display_external_particles (void)
     auto now = time_update_time_milli();
     auto e = std::remove_if(all_external_particles.begin(),
                             all_external_particles.end(),
-        [=] (Particle &p) {
+        [=, this] (Particle &p) {
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
             if (dt > 1) {
