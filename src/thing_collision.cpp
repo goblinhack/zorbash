@@ -41,11 +41,11 @@ things_tile_overlap (Thingp A, Thingp B)
 {
     auto A_tile = tile_index_to_tile(A->tile_curr);
     if (!A_tile) {
-        return (false);
+        return false;
     }
     auto B_tile = tile_index_to_tile(B->tile_curr);
     if (!B_tile) {
-        return (false);
+        return false;
     }
 
     float A_width  = (A->last_blit_br.x - A->last_blit_tl.x);
@@ -88,7 +88,7 @@ things_tile_overlap (Thingp A, Thingp B)
             }
 
             if (get(B_tile->pix, dx, dy)) {
-                return (true);
+                return true;
             }
         }
 #ifdef DEBUG_COLLISION
@@ -132,7 +132,7 @@ things_tile_overlap (Thingp A, Thingp B)
     }
     printf("\n");
 #endif
-    return (false);
+    return false;
 }
 
 static bool
@@ -140,11 +140,11 @@ things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
 {
     auto A_tile = tile_index_to_tile(A->tile_curr);
     if (!A_tile) {
-        return (false);
+        return false;
     }
     auto B_tile = tile_index_to_tile(B->tile_curr);
     if (!B_tile) {
-        return (false);
+        return false;
     }
 
     float A_width  = (A->last_blit_br.x - A->last_blit_tl.x);
@@ -194,7 +194,7 @@ things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
             }
 
             if (get(B_tile->pix, dx, dy)) {
-                return (true);
+                return true;
             }
         }
 #ifdef DEBUG_COLLISION
@@ -238,7 +238,7 @@ things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
     }
     printf("\n");
 #endif
-    return (false);
+    return false;
 }
 #endif
 
@@ -277,7 +277,7 @@ static int circle_box_collision (Thingp C,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B0.x;
             normal->y = C_at.y - B0.y;
-            return (true);
+            return true;
         }
     }
 
@@ -286,7 +286,7 @@ static int circle_box_collision (Thingp C,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B1.x;
             normal->y = C_at.y - B1.y;
-            return (true);
+            return true;
         }
     }
 
@@ -295,7 +295,7 @@ static int circle_box_collision (Thingp C,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B2.x;
             normal->y = C_at.y - B2.y;
-            return (true);
+            return true;
         }
     }
 
@@ -304,7 +304,7 @@ static int circle_box_collision (Thingp C,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B3.x;
             normal->y = C_at.y - B3.y;
-            return (true);
+            return true;
         }
     }
 
@@ -333,12 +333,12 @@ static int circle_box_collision (Thingp C,
         }
     }
 
-    return (false);
+    return false;
 
 collided:
 
     if (check_only) {
-        return (true);
+        return true;
     }
 
     fpoint delta;
@@ -348,7 +348,7 @@ collided:
         delta.y = B0.y - B1.y;
         normal->x = -delta.y;
         normal->y = delta.x;
-        return (true);
+        return true;
     }
 
     if (get_line_intersection(C_at, B_at, B1, B2, intersect)) {
@@ -356,7 +356,7 @@ collided:
         delta.y = B1.y - B2.y;
         normal->x = -delta.y;
         normal->y = delta.x;
-        return (true);
+        return true;
     }
 
     if (get_line_intersection(C_at, B_at, B2, B3, intersect)) {
@@ -364,7 +364,7 @@ collided:
         delta.y = B2.y - B3.y;
         normal->x = -delta.y;
         normal->y = delta.x;
-        return (true);
+        return true;
     }
 
     if (get_line_intersection(C_at, B_at, B3, B0, intersect)) {
@@ -372,13 +372,13 @@ collided:
         delta.y = B3.y - B0.y;
         normal->x = -delta.y;
         normal->y = delta.x;
-        return (true);
+        return true;
     }
 
     //
     // Sphere may be inside box.
     //
-    return (false);
+    return false;
 }
 #endif
 
@@ -412,7 +412,7 @@ static int circle_circle_collision (Thingp A,
         //
         // Circles are not touching
         //
-        return (false);
+        return false;
     }
 
     diff = sqrt(fabs(diff));
@@ -426,7 +426,7 @@ static int circle_circle_collision (Thingp A,
         *intersect = n;
     }
 
-    return (true);
+    return true;
 }
 
 static int circle_circle_collision (Thingp A,
@@ -454,7 +454,7 @@ static int circle_circle_collision (Thingp A,
         //
         // Circles are not touching
         //
-        return (false);
+        return false;
     }
 
     diff = sqrt(fabs(diff));
@@ -468,7 +468,7 @@ static int circle_circle_collision (Thingp A,
         *intersect = n;
     }
 
-    return (true);
+    return true;
 }
 
 static int circle_circle_collision_attack (Thingp A,
@@ -499,7 +499,7 @@ static int circle_circle_collision_attack (Thingp A,
         //
         // Circles are not touching
         //
-        return (false);
+        return false;
     }
 
     diff = sqrt(fabs(diff));
@@ -513,7 +513,7 @@ static int circle_circle_collision_attack (Thingp A,
         *intersect = n;
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -721,7 +721,7 @@ bool things_overlap (const Thingp A, const Thingp B)
                                  check_only)) {
             return (things_tile_overlap(A, B));
         }
-        return (false);
+        return false;
     }
 
     if (!tp_collision_circle(A->tp) &&
@@ -735,7 +735,7 @@ bool things_overlap (const Thingp A, const Thingp B)
                                  check_only)) {
             return (things_tile_overlap(A, B));
         }
-        return (false);
+        return false;
     }
 
 #endif
@@ -744,15 +744,15 @@ bool things_overlap (const Thingp A, const Thingp B)
         if (circle_circle_collision(A, // circle
                                     B, // box
                                     nullptr)) {
-            return (true);
+            return true;
         }
-        return (false);
+        return false;
     }
 
 #if 0
     return (things_tile_overlap(A, B));
 #endif
-    return (false);
+    return false;
 }
 
 bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
@@ -778,7 +778,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
                                  check_only)) {
             return (things_tile_overlap(A, B));
         }
-        return (false);
+        return false;
     }
 
     if (!tp_collision_circle(A->tp) &&
@@ -792,7 +792,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
                                  check_only)) {
             return (things_tile_overlap(A, B));
         }
-        return (false);
+        return false;
     }
 
 #endif
@@ -803,15 +803,15 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
                                     B, // box
                                     B->mid_at,
                                     nullptr)) {
-            return (true);
+            return true;
         }
-        return (false);
+        return false;
     }
 
 #if 0
     return (things_tile_overlap(A, A_at, B));
 #endif
-    return (false);
+    return false;
 }
 
 bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
@@ -823,25 +823,25 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
                                            B, // box
                                            B->mid_at,
                                            nullptr)) {
-            return (true);
+            return true;
         }
         if (circle_circle_collision_attack(A, // circle
                                            A_at,
                                            B, // box
                                            B->get_interpolated_mid_at(),
                                            nullptr)) {
-            return (true);
+            return true;
         }
         if (circle_circle_collision_attack(A, // circle
                                            A->get_interpolated_mid_at(),
                                            B, // box
                                            B->get_interpolated_mid_at(),
                                            nullptr)) {
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }
 
 //
@@ -855,7 +855,7 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
     auto me = this;
 
     if (it->is_dead) {
-        return (true);
+        return true;
     }
 
     Thingp owner_it = it->owner_get();
@@ -874,7 +874,7 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
         //
         if (!is_fire()) {
             log("allow fire to burn owner");
-            return (true);
+            return true;
         }
     }
 
@@ -905,20 +905,20 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
         }
     }
 
-    return (true);
+    return true;
 }
 
 bool Thing::collision_obstacle (Thingp it)
 {
     if (it == this) {
-        return (false);
+        return false;
     }
 
     //
     // Skip things we cannot collide with
     //
     if (it->is_hidden || it->is_falling || it->is_jumping) {
-        return (false);
+        return false;
     }
 
     //
@@ -926,7 +926,7 @@ bool Thing::collision_obstacle (Thingp it)
     //
     if (it->is_floating()) {
         if (is_floating()) {
-            return (true);
+            return true;
         }
     }
 
@@ -935,7 +935,7 @@ bool Thing::collision_obstacle (Thingp it)
     //
     if (it->is_ethereal()) {
         if (is_ethereal()) {
-            return (true);
+            return true;
         }
     }
 
@@ -944,20 +944,20 @@ bool Thing::collision_obstacle (Thingp it)
     //
     if (it->is_movement_blocking()) {
         if (!it->is_open) {
-            return (true);
+            return true;
         }
     }
 
     if (is_player()) {
         if (it->is_alive_monst()) {
             if (!it->is_ethereal()) {
-                return (true);
+                return true;
             }
         }
     } else if (is_monst()) {
         if (it->is_chasm()) {
             if (!is_floating()) {
-                return (true);
+                return true;
             }
         }
 
@@ -966,14 +966,14 @@ bool Thing::collision_obstacle (Thingp it)
         // with a monst already in it
         //
         // if (it->is_alive_monst()) {
-        //     return (true);
+        //     return true;
         // }
         if (will_avoid(it)) {
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }
 
 bool Thing::collision_obstacle (fpoint p)
@@ -990,11 +990,11 @@ bool Thing::collision_obstacle (fpoint p)
         // "true" on collision
         //
         if (collision_obstacle(it)) {
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }
 
 //
@@ -1006,8 +1006,24 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
     auto it_tp = it->tp();
     auto me_tp = me->tp();
 
-    if (it->is_dead) {
-        return (false);
+    if (is_falling) {
+        log("falling, ignore collisions");
+        return false;
+    }
+
+    if (it->is_monst()) {
+        if (is_torch()) {
+            //
+            // Torches always hit monsters
+            //
+        } else {
+            //
+            // Allow walking over the dead
+            //
+            if (it->is_dead) {
+                return false;
+            }
+        }
     }
 
     Thingp owner_it = it->owner_get();
@@ -1017,7 +1033,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
     // Need this or shields attack the player.
     //
     if ((owner_it == me) || (owner_me == it)) {
-        return (false);
+        return false;
     }
 
     if (is_loggable_for_unimportant_stuff()) {
@@ -1035,7 +1051,7 @@ _
             //
             log("try to attack %s", it->to_string().c_str());
             if (things_overlap_attack(me, A_at, it)) {
-                return (true);
+                return true;
             }
         }
     } else if (it->is_door() && !it->is_open) {
@@ -1054,14 +1070,14 @@ _
     } else if (possible_to_attack(it)) {
         if (things_overlap(me, A_at, it)) {
             log("can attack %s", it->to_string().c_str());
-            return (true);
+            return true;
         } else {
             log("cannot attack %s, no overlap", it->to_string().c_str());
         }
     } else if (will_eat(it)) {
         if (things_overlap(me, me->mid_at, it)) {
             log("can eat %s", it->to_string().c_str());
-            return (true);
+            return true;
         } else {
             log("cannot eat %s, no overlap", it->to_string().c_str());
         }
@@ -1072,12 +1088,12 @@ _
             // "true" on collision
             //
             if (collision_obstacle(it)) {
-                return (true);
+                return true;
             }
         }
     }
 
-    return (false);
+    return false;
 }
 
 bool Thing::collision_check_and_handle (fpoint future_pos,
@@ -1085,6 +1101,11 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
                                         bool *target_overlaps,
                                         float radius)
 {
+    if (is_falling) {
+        log("falling, ignore collisions");
+        return false;
+    }
+
     if (is_loggable_for_unimportant_stuff()) {
         log("collision handle");
     }
@@ -1128,7 +1149,7 @@ _
                 //
                 if (!collision_add_candidates(it, future_pos, x, y, dx, dy)) {
                     log("collision, abort walk");
-                    return (false);
+                    return false;
                 }
             } FOR_ALL_THINGS_END()
         }
@@ -1214,12 +1235,12 @@ _
                 }
 
                 if (collision_check_only(it, future_pos, x, y)) {
-                    return (true);
+                    return true;
                 }
             } FOR_ALL_THINGS_END()
         }
     }
-    return (false);
+    return false;
 }
 
 //

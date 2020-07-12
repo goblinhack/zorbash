@@ -11,6 +11,9 @@
 
 void Thing::torch_tick (void)
 {_
+    //
+    // This is for if you land on a torch
+    //
     if (level->is_torch(mid_at.x, mid_at.y)) {
         static const std::vector<fpoint> all_deltas = {
             fpoint(-1, -1),
@@ -29,19 +32,27 @@ void Thing::torch_tick (void)
                 continue;
             }
 
+            if (t->is_dead) {
+                continue;
+            }
+
             for (auto i = 0; i < 9; i++) {
                 auto delta = get(all_deltas, random_range(0, (int)all_deltas.size()));
                 if (try_to_shove(t, delta)) {
-                    if (is_player()) {
-                        MINICON("You knock over the torch!");
+                    if (!is_dead) {
+                        if (is_player()) {
+                            MINICON("You knock over the torch!");
+                        }
                     }
                     return;
                 }
             }
 
-            if (random_range(0, 100) < 20) {
-                MINICON("You stumble into the flames!");
-                set_on_fire();
+            if (!is_dead) {
+                if (random_range(0, 100) < 20) {
+                    MINICON("You stumble into the flames!");
+                    set_on_fire();
+                }
             }
         } FOR_ALL_THINGS_END()
     }
