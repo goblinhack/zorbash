@@ -139,7 +139,13 @@ static void game_monsts_wid_create (void)
                                 s += " (alive again)";
                             }
                         } else if (t->is_dead) {
-                            s += " (dead)";
+                            if (t->is_door()) {
+                                s += " (broken)";
+                            } else if (t->is_torch()) {
+                                s += " (kicked over)";
+                            } else {
+                                s += " (dead)";
+                            }
                         }
 
                         // s += " " + std::to_string(t->get_stats_health());
