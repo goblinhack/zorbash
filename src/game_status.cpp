@@ -183,6 +183,7 @@ static void game_status_wid_create (void)
         wid_set_pos(wid_sidebar, tl, br);
         wid_set_shape_none(wid_sidebar);
         wid_set_style(wid_sidebar, UI_WID_STYLE_OUTLINE);
+        wid_set_ignore_events(wid_sidebar, true);
     }
 
     int y_at = 0;

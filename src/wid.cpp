@@ -3726,7 +3726,16 @@ Widp wid_find_under_mouse (void)
     if (ascii_is_empty(ascii_mouse_x, ascii_mouse_y)) {
         return nullptr;
     }
-    return wid_find_at(ascii_mouse_x, ascii_mouse_y);
+    auto w = wid_find_at(ascii_mouse_x, ascii_mouse_y);
+    if (w) {
+        w = wid_get_top_parent(w);
+        if (wid_ignore_events(w)) {
+            return nullptr;
+        } else {
+            return w;
+        }
+    }
+    return w;
 }
 
 static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,

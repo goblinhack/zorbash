@@ -318,8 +318,7 @@ static void wid_minicon_wid_create (void)
         wid_set_pos(wid_minicon_window, tl, br);
         wid_set_shape_none(wid_minicon_window);
         wid_set_on_key_down(wid_minicon_window, wid_minicon_input);
-        wid_set_focusable(wid_minicon_window, 1);
-        wid_set_focus(wid_minicon_window);
+        wid_set_ignore_events(wid_minicon_window, true);
     }
 
     {
