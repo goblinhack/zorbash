@@ -177,14 +177,15 @@ void Thing::level_push (void)
     if (is_hazard())            { level->set_is_hazard(mx, my); }
     if (is_key())               { level->set_is_key(mx, my); }
     if (is_lava())              { level->set_is_lava(mx, my); }
+    if (is_light_blocker())     { level->set_is_light_blocker(mx, my); }
     if (is_monst())             { level->set_is_monst(mx, my); }
     if (is_movement_blocking()) { level->set_is_movement_blocking(mx, my); }
     if (is_mundane_item())      { level->set_is_mundane_item(mx, my); }
     if (is_potion())            { level->set_is_potion(mx, my); }
     if (is_rock())              { level->set_is_rock(mx, my); }
     if (is_secret_door())       { level->set_is_secret_door(mx, my); }
-    if (is_torch())       { level->set_is_torch(mx, my); }
     if (is_smoke())             { level->set_is_smoke(mx, my); }
+    if (is_torch())             { level->set_is_torch(mx, my); }
     if (is_treasure())          { level->set_is_treasure(mx, my); }
     if (is_wall())              { level->set_is_wall(mx, my); }
     if (is_water())             { level->set_is_water(mx, my); }
@@ -217,6 +218,8 @@ void Thing::level_pop (void)
     if (is_deep_water())        { level->unset_is_water(mx, my); }
     if (is_dirt())              { level->unset_is_dirt(mx, my); }
     if (is_door())              { level->unset_is_door(mx, my); }
+    if (is_entrance())          { level->unset_is_entrance(mx, my); }
+    if (is_exit())              { level->unset_is_exit(mx, my); }
     if (is_fire())              { level->unset_is_fire(mx, my); }
     if (is_floor())             { level->unset_is_floor(mx, my); }
     if (is_food())              { level->unset_is_food(mx, my); }
@@ -237,11 +240,6 @@ void Thing::level_pop (void)
     if (is_treasure())          { level->unset_is_treasure(mx, my); }
     if (is_wall())              { level->unset_is_wall(mx, my); }
     if (is_water())             { level->unset_is_water(mx, my); }
-
-    if (is_deep_water()) {
-        level->unset_is_water(mx, my);
-        level->unset_is_deep_water(mx, my);
-    }
 
     level->remove_thing((int)last_attached.x, (int)last_attached.y, id);
 _

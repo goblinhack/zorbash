@@ -15,6 +15,13 @@ void Thing::fall (float fall_height, timestamp_t ms)
 
     set_fall_height(fall_height);
     is_falling = true;
+
+    if (is_on_fire()) {
+        if (is_player()) {
+            MINICON("%%fg=green$The fall puts out the flames!%%fg=reset$");
+        }
+        unset_on_fire();
+    }
 }
 
 float Thing::get_fall (void)

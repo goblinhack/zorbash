@@ -76,7 +76,7 @@ bool Thing::fall_to_next_level (void)
 
             if (is_player()) {
                 game->level = l;
-                MINICON("You tumble into the void!");
+                MINICON("%%fg=red$You tumble into the void!");
             } else {
                 MINICON("%s tumbles into the void!", text_The().c_str());
             }
@@ -110,6 +110,24 @@ bool Thing::fall_to_next_level (void)
 
             if (is_potion() || is_generator() || is_monst()) {
                 fall_damage = get_stats_health() / 2;
+            }
+
+            auto new_pos = make_point(mid_at);
+            if (level->is_lava(new_pos)) {
+                if (is_player()) {
+                    MINICON("%%fg=green$You plunge into lava! This must be the end for you!%%fg=reset$");
+                }
+                fall_damage *= 2;
+            } else if (level->is_deep_water(new_pos)) {
+                if (is_player()) {
+                    MINICON("%%fg=green$The deep water lessens the fall!%%fg=reset$");
+                }
+                fall_damage /= 4;
+            } else if (level->is_water(new_pos)) {
+                if (is_player()) {
+                    MINICON("%%fg=green$The water lessens the fall!%%fg=reset$");
+                }
+                fall_damage /= 2;
             }
 
             auto h = decr_stats_health(fall_damage);
