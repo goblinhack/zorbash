@@ -18,7 +18,7 @@ void Level::scroll_map (void)
     const float medstep = 2.0 / TILE_WIDTH;
     const float smallstep = 1.0 / TILE_WIDTH;
 
-    if (wid_find_under_mouse()) {
+    if (wid_find_under_mouse_when_scrolling()) {
         return;
     }
 
@@ -104,7 +104,7 @@ void Level::scroll_map_set_target (void)
     float x_sensitivity;
     float y_sensitivity;
 
-    if (wid_find_under_mouse()) {
+    if (wid_find_under_mouse_when_scrolling()) {
         return;
     }
 

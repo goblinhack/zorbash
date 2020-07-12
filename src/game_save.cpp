@@ -292,13 +292,13 @@ std::ostream& operator<<(std::ostream &out,
                 auto l = get(my.t.levels, x, y, z);
                 if (l) {
                     exists = true;
-                    CON("DUNGEON: save level %d,%d,%d", p.x, p.y, p.z);
+                    CON("DUNGEON: Save level %d,%d,%d", p.x, p.y, p.z);
                     out << bits(p);
                     out << bits(exists);
                     out << bits(l);
                     auto eol = GAME_SAVE_MARKER_EOL;
                     out << bits(eol);
-                    CON("DUNGEON: saved level %d,%d,%d", p.x, p.y, p.z);
+                    CON("DUNGEON: Saved level %d,%d,%d", p.x, p.y, p.z);
                 } else {
                     exists = false;
                     out << bits(p);
@@ -447,7 +447,7 @@ bool Game::save (std::string file_to_save)
     int r = lzo1x_1_compress((lzo_bytep)uncompressed, uncompressed_len,
                              (lzo_bytep)compressed, &compressed_len, wrkmem);
     if (r == LZO_E_OK) {
-        CON("DUNGEON: saved as %s, compress %luMb -> %luMb",
+        CON("DUNGEON: Saved as %s, compress %luMb -> %luMb",
             file_to_save.c_str(),
             (unsigned long) uncompressed_len / (1024 * 1024),
             (unsigned long) compressed_len / (1024 * 1024));
@@ -510,7 +510,7 @@ void
 Game::save (void)
 {_
     LOG("-");
-    CON("DUNGEON: saving %s", save_file.c_str());
+    CON("DUNGEON: Saving %s", save_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -518,7 +518,7 @@ Game::save (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: saved %s, seed %d", save_file.c_str(), seed);
+    CON("DUNGEON: Saved %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 }
 
@@ -536,7 +536,7 @@ Game::save (int slot)
     auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
     LOG("-");
-    CON("DUNGEON: saving %s", save_file.c_str());
+    CON("DUNGEON: Saving %s", save_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -544,7 +544,7 @@ Game::save (int slot)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: saved %s, seed %d", save_file.c_str(), seed);
+    CON("DUNGEON: Saved %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 
     MINICON("Saved the game to %s", save_file.c_str());
@@ -603,7 +603,7 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
                     }
                     case 'b':
                     case SDLK_ESCAPE: {_
-                        CON("PLAYER: save game cancelled");
+                        CON("PLAYER: Save game cancelled");
                         wid_save_destroy();
                         return (true);
                     }

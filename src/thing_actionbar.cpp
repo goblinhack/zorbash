@@ -145,6 +145,7 @@ bool Thing::actionbar_id_insert (Thingp what)
     monstp->actionbar_id.push_back(what->id);
     game_status_wid_init();
     actionbar_particle(what, monstp->actionbar_id.size() - 1);
+    level->actionbar_describe(game->actionbar_highlight_slot);
     return true;
 }
 
@@ -173,6 +174,12 @@ bool Thing::actionbar_id_remove (Thingp what)
         if (t->tp() == what->tp()) {
             monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
             game_status_wid_init();
+
+            while (game->actionbar_highlight_slot >= monstp->actionbar_id.size()) {
+                game->actionbar_highlight_slot--;
+            }
+
+            level->actionbar_describe(game->actionbar_highlight_slot);
             return true;
         }
     }
@@ -207,9 +214,16 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
             if (particle_target) {
                 actionbar_particle(what, i, particle_target);
             }
+
+            while (game->actionbar_highlight_slot >= monstp->actionbar_id.size()) {
+                game->actionbar_highlight_slot--;
+            }
+
+            level->actionbar_describe(game->actionbar_highlight_slot);
             return true;
         }
     }
+
     return false;
 }
 
@@ -277,6 +291,8 @@ bool Level::actionbar_select (const uint32_t slot)
         game->actionbar_highlight_slot = slot;
         actionbar_describe(slot);
         game_status_wid_init();
+    } else {
+        actionbar_describe(game->actionbar_highlight_slot);
     }
 
     return true;

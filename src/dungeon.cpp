@@ -1020,8 +1020,8 @@ void Dungeon::dump (void)
     }
 
     if (0) {
-    LOG("DUNGEON: seed %u (with room depth)", seed);
-    //printf("DUNGEON: seed %u (with room depth)\n", seed);
+    LOG("DUNGEON: Seed %u (with room depth)", seed);
+    //printf("DUNGEON: Seed %u (with room depth)\n", seed);
     return;
     for (auto y = 0; y < map_height; y++) {
         std::string s;
@@ -1078,8 +1078,8 @@ void Dungeon::dump (void)
     //
     // Pass 2 without room depths
     //
-    LOG("DUNGEON: seed %u (more readable version)", seed);
-    //printf("DUNGEON: seed %u (more readable version)\n", seed);
+    LOG("DUNGEON: Seed %u (more readable version)", seed);
+    //printf("DUNGEON: Seed %u (more readable version)\n", seed);
     for (auto y = 0; y < map_height; y++) {
         std::string s;
         for (auto x = 0; x < map_width; x++) {

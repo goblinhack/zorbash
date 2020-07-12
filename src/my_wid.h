@@ -45,6 +45,7 @@ typedef enum {
 
 Widp wid_find_at(int32_t x, int32_t y);
 Widp wid_find_under_mouse(void);
+Widp wid_find_under_mouse_when_scrolling(void);
 Widp wid_find(Widp, const std::string& name);
 Widp wid_find(const std::string& name);
 Widp wid_get_current_focus(void);
@@ -111,6 +112,7 @@ uint8_t wid_get_text_rhs(Widp);
 uint8_t wid_get_text_top(Widp);
 uint8_t wid_ignore_being_destroyed(Widp);
 uint8_t wid_ignore_events(Widp);
+uint8_t wid_ignore_scroll_events(Widp);
 uint8_t wid_ignore_for_focus(Widp);
 uint8_t wid_init(void);
 uint8_t wid_is_always_hidden(Widp w);
@@ -184,6 +186,7 @@ void wid_set_fg_tilename(Widp, std::string name);
 void wid_set_focus(Widp);
 void wid_set_focusable(Widp, uint8_t val);
 void wid_set_ignore_events(Widp, uint8_t);
+void wid_set_ignore_scroll_events(Widp, uint8_t);
 void wid_set_mode(Widp, wid_mode mode);
 void wid_set_movable(Widp, uint8_t val);
 void wid_set_movable_bounded(Widp, uint8_t val);
@@ -409,6 +412,7 @@ public:
     uint8_t movable_no_user_scroll      {};
     uint8_t movable_no_user_scroll_set  {};
     uint8_t ignore_events               {};
+    uint8_t ignore_scroll_events        {};
     uint8_t ignore_for_mouse_down       {};
     uint8_t first_update                {};
     uint8_t show_cursor                 {};

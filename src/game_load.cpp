@@ -318,7 +318,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     l->map_follow_player = true;
 
     auto p = l->world_at;
-    LOG("DUNGEON: loading things for level %d,%d,%d", p.x, p.y, p.z);
+    LOG("DUNGEON: Loading things for level %d,%d,%d", p.x, p.y, p.z);
 _
     //
     // Operate on a copy, not live data that might change as we add things
@@ -355,7 +355,7 @@ _
     }
 
     READ_MAGIC(THING_MAGIC_FINAL);
-    LOG("DUNGEON: loaded things for level %d,%d,%d", p.x, p.y, p.z);
+    LOG("DUNGEON: Loaded things for level %d,%d,%d", p.x, p.y, p.z);
 
     my.t->update_map();
     LOG("DUNGEON: updated map for level %d,%d,%d", p.x, p.y, p.z);
@@ -382,7 +382,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
                 }
 
                 if (exists) {
-                    CON("DUNGEON: loading level %d,%d,%d", p.x, p.y, p.z);
+                    CON("DUNGEON: Loading level %d,%d,%d", p.x, p.y, p.z);
                     auto l = new Level();
                     set(my.t.levels, x, y, z, l);
                     in >> bits(l);
@@ -398,7 +398,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
                                            x, y, z);
                         return (in);
                     }
-                    CON("DUNGEON: loaded level %d,%d,%d", p.x, p.y, p.z);
+                    CON("DUNGEON: Loaded level %d,%d,%d", p.x, p.y, p.z);
                 }
             }
         }
@@ -602,7 +602,7 @@ Game::load (std::string file_to_load, class Game &target)
                              (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
         if (!game_load_headers_only) {
-            CON("DUNGEON: loading %s, decompress %luMb -> %luMb",
+            CON("DUNGEON: Loading %s, decompress %luMb -> %luMb",
                 file_to_load.c_str(),
                 (unsigned long) compressed_len / (1024 * 1024),
                 (unsigned long) uncompressed_len / (1024 * 1024));
@@ -666,7 +666,7 @@ void
 Game::load (void)
 {_
     LOG("-");
-    CON("DUNGEON: loading %s", save_file.c_str());
+    CON("DUNGEON: Loading %s", save_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -676,7 +676,7 @@ Game::load (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: loaded %s, seed %d", save_file.c_str(), seed);
+    CON("DUNGEON: Loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 }
 
@@ -701,7 +701,7 @@ Game::load (int slot)
     auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
     LOG("-");
-    CON("DUNGEON: loading %s", save_file.c_str());
+    CON("DUNGEON: Loading %s", save_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -711,7 +711,7 @@ Game::load (int slot)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: loaded %s, seed %d", save_file.c_str(), seed);
+    CON("DUNGEON: Loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 
     MINICON("Loaded the game from %s", save_file.c_str());
@@ -764,7 +764,7 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
                     }
                     case 'b':
                     case SDLK_ESCAPE: {_
-                        CON("PLAYER: load game cancelled");
+                        CON("PLAYER: Load game cancelled");
                         wid_load_destroy();
                         return (true);
                     }

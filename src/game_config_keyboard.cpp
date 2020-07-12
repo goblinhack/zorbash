@@ -848,7 +848,7 @@ void Game::config_keyboard_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, 
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2,
                           UI_MINICON_VIS_HEIGHT + 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2,
                           UI_ACTIONBAR_TL_Y - 2);
@@ -1260,14 +1260,14 @@ void Game::config_keyboard_select (void)
     y_at += 3;
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "drop");
+        auto w = wid_new_square_button(p, "Drop");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "drop");
+        wid_set_text(w, "Drop");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1287,14 +1287,14 @@ void Game::config_keyboard_select (void)
     y_at += 3;
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "use");
+        auto w = wid_new_square_button(p, "Use");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "use");
+        wid_set_text(w, "Use");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1314,14 +1314,14 @@ void Game::config_keyboard_select (void)
     y_at += 3;
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "eat");
+        auto w = wid_new_square_button(p, "Eat");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "eat");
+        wid_set_text(w, "Eat");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;

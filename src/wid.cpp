@@ -455,6 +455,11 @@ void wid_set_ignore_events (Widp w, uint8_t val)
     w->ignore_events = val;
 }
 
+void wid_set_ignore_scroll_events (Widp w, uint8_t val)
+{_
+    w->ignore_scroll_events = val;
+}
+
 static void wid_set_scissors (int tlx, int tly, int brx, int bry)
 {_
     ascii_set_scissors(point(tlx, tly), point(brx, bry));
@@ -472,6 +477,29 @@ uint8_t wid_ignore_events (Widp w)
     }
 
     if (w->ignore_events || w->moving || w->hidden || w->being_destroyed) {
+        return (true);
+    }
+
+    if (w->parent) {
+        top = wid_get_top_parent(w);
+
+        if (top->moving || top->hidden || top->being_destroyed) {
+            return (true);
+        }
+    }
+
+    return (false);
+}
+
+uint8_t wid_ignore_scroll_events (Widp w)
+{_
+    Widp top {};
+
+    if (!w) {
+        return (true);
+    }
+
+    if (w->ignore_scroll_events || w->moving || w->hidden || w->being_destroyed) {
         return (true);
     }
 
@@ -3730,6 +3758,23 @@ Widp wid_find_under_mouse (void)
     if (w) {
         w = wid_get_top_parent(w);
         if (wid_ignore_events(w)) {
+            return nullptr;
+        } else {
+            return w;
+        }
+    }
+    return w;
+}
+
+Widp wid_find_under_mouse_when_scrolling (void)
+{_
+    if (ascii_is_empty(ascii_mouse_x, ascii_mouse_y)) {
+        return nullptr;
+    }
+    auto w = wid_find_at(ascii_mouse_x, ascii_mouse_y);
+    if (w) {
+        w = wid_get_top_parent(w);
+        if (wid_ignore_scroll_events(w)) {
             return nullptr;
         } else {
             return w;
