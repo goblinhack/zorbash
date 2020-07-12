@@ -1,5 +1,3 @@
-//
-// Copyright goblinhack@gmail.com
 // See the README.md file for license info.
 //
 
@@ -172,7 +170,6 @@ void player_tick (void)
     }
 
     if (jump) {
-        bool jumped = false;
         if (game->cursor_move_path.size()) {
             //
             // A path to the target exists.
@@ -182,7 +179,6 @@ void player_tick (void)
                 auto p = *i;
                 if (player->try_to_jump(make_point(p.x, p.y))) {
                     game->tick_begin();
-                    jumped = true;
                     break;
                 }
             }
