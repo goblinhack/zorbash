@@ -1,9 +1,7 @@
 bugs
 ----
-add more food
-add stuff in secret rooms
+blackness on falling
 auto target surrounding enemies
-actionbar text not updated after eating
 keys should be in right sidebar
 you munch the undead ghost
 jump should allow monst to move
@@ -11,6 +9,7 @@ click on monst or door should attack
 
 upcoming work
 -------------
+- add stuff in secret rooms
 - bag inventory
 - drag items
 - drop bag

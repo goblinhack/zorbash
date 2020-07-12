@@ -315,7 +315,7 @@ static void gfx_init_ui_box (void)
             "ui_popup_widest",
         };
         std::vector<std::string> arr(tiles);
-        tile_load_arr("data/gfx/ui_popup_widest.tga", "ui_popup_widest", 160, 152, arr);
+        tile_load_arr("data/gfx/ui_popup_widest.tga", "ui_popup_widest", 320, 152, arr);
     }
 }
 
