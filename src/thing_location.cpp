@@ -14,15 +14,18 @@
 //
 bool Thing::location_check (void)
 {
+    //
+    // Put chasm checks first as you can still fall when dead!
+    //
+    chasm_tick();
+    if (is_dead) {
+        return (false);
+    }
     torch_tick();
     if (is_dead) {
         return (false);
     }
     water_tick();
-    if (is_dead) {
-        return (false);
-    }
-    chasm_tick();
     if (is_dead) {
         return (false);
     }

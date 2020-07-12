@@ -10,7 +10,7 @@
 #include "my_sprintf.h"
 
 ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
-{
+{_
     if (!is_attack_shove()) {
         return (THING_SHOVE_NEVER_TRIED);
     }
@@ -32,6 +32,8 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         }
     }
 
+    bool was_dead = it->is_dead;
+
     //
     // If I'm on fire. set it on fire too!
     //
@@ -46,65 +48,98 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     fpoint shove_delta = delta;
     fpoint shove_pos = it->mid_at + shove_delta;
+    if (!it->is_torch()) {
+        if (it->collision_check_only(shove_pos)) {
+            if (is_player()) {
+                MINICON("%s cannot be shoved!", it->text_The().c_str());
+            } else if (it->is_player()) {
+                MINICON("%s fails to shove you!", text_The().c_str());
+            }
+            return (THING_SHOVE_TRIED_AND_FAILED);
+        }
+    }
+
+    if (!it->is_dead) {
+        log("shove: it strength %d vs me %d + %d",
+            it->get_stats_strength(), get_stats_strength(), get_stats_attack());
+
+        if (it->get_stats_strength() > get_stats_strength() + get_stats_attack()) {
+            if (is_player()) {
+                MINICON("%s is too strong to be shoved!", it->text_The().c_str());
+            } else if (it->is_player()) {
+                MINICON("%s is too weak to shove you!", text_The().c_str());
+            }
+            return (THING_SHOVE_TRIED_AND_FAILED);
+        }
+
+        if (is_player()) {
+            if (it->is_torch()) {
+                MINICON("You knock over %s!", it->text_the().c_str());
+            } else {
+                MINICON("You shove %s!", it->text_the().c_str());
+            }
+        } else if (it->is_player()) {
+            MINICON("%s shoves you!", text_The().c_str());
+        }
+
+        if (it->is_monst()) {
+            it->msg(string_sprintf("%%fg=red$!"));
+        }
+    }
+
+    //
+    // If pushed into a chasm, move the thing first and then
+    // let it spawn dead things
+    //
+    log("make the shoved thing fall first");
     if (it->collision_check_only(shove_pos)) {
         if (is_player()) {
-            MINICON("%s cannot be shoved!", it->text_The().c_str());
-        } else if (it->is_player()) {
-            MINICON("%s fails to shove you!", text_The().c_str());
-        }
-        return (THING_SHOVE_TRIED_AND_FAILED);
-    }
-
-    log("shove: it strength %d vs me %d + %d",
-        it->get_stats_strength(), get_stats_strength(), get_stats_attack());
-
-    if (it->get_stats_strength() > get_stats_strength() + get_stats_attack()) {
-        if (is_player()) {
-            MINICON("%s is too strong to be shoved!", it->text_The().c_str());
-        } else if (it->is_player()) {
-            MINICON("%s is too weak to shove you!", text_The().c_str());
-        }
-        return (THING_SHOVE_TRIED_AND_FAILED);
-    }
-
-    if (is_player()) {
-        if (it->is_torch()) {
-            MINICON("You knock over %s!", it->text_the().c_str());
-        } else {
-            MINICON("You shove %s!", it->text_the().c_str());
-        }
-    } else if (it->is_player()) {
-        MINICON("%s shoves you!", text_The().c_str());
-    }
-
-    if (it->is_dead_on_shove()) {
-        it->dead("shoved");
-        auto spawn_what = it->spawn_on_shoved();
-        if (spawn_what != "") {
-            auto spawn_at = it->mid_at + shove_delta;
-            if (it->collision_check_only(spawn_at)) {
-                spawn_at = mid_at;
+            if (it->is_torch()) {
+                MINICON("The torch falls back on you!");
             }
-            if (spawn_at.x > mid_at.x) {
-                it->dir_set_left();
-            } else {
-                it->dir_set_right();
-            }
-            level->thing_new(spawn_what, spawn_at);
+            it->move_to_immediately(mid_at);
         }
-        return (THING_SHOVE_TRIED_AND_PASSED);
+    } else {
+        it->move_to_immediately(shove_pos);
     }
 
-    it->move_to_immediately(shove_pos);
-    if (it->is_monst()) {
-        it->msg(string_sprintf("%%fg=red$!"));
+    if (!it->is_dead) {
+        if (it->is_dead_on_shove()) {
+            log("shove and kill");
+            it->dead("shoved");
+            auto spawn_what = it->spawn_on_shoved();
+            if (spawn_what != "") {
+                auto spawn_at = it->mid_at;
+                if (spawn_at.x > mid_at.x) {
+                    it->dir_set_left();
+                } else {
+                    it->dir_set_right();
+                }
+                auto n = level->thing_new(spawn_what, spawn_at);
+                n->location_check();
+            }
+        }
     }
+
+    log("handle location for shoved thing");
+    it->location_check();
 
     //
     // If shoving somehing on fire! set yourself on fire!
     //
-    if (it->is_flammable()) {
-        set_on_fire();
+    if (!was_dead) {
+        if (it->is_flammable()) {
+            if (random_range(0, 100) < 20) {
+                if (is_player()) {
+                    MINICON("%%fg=red$It burns and you set yourself on fire!");
+                    set_on_fire();
+                }
+            } else {
+                if (is_player()) {
+                    MINICON("%%fg=orange$It burns but you luckily avoid the flames");
+                }
+            }
+        }
     }
 
     return (THING_SHOVE_TRIED_AND_PASSED);
