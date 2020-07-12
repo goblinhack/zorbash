@@ -142,6 +142,7 @@ void Level::display_map_things (int fbo,
         }
     }
     blit_flush();
+    glcolor(WHITE);
 }
 
 void Level::display_map (void)

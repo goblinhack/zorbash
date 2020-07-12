@@ -49,8 +49,9 @@ void player_tick (void)
     jump   = state[game->config.key_jump] ? 1 : 0;
     bool some_key_event_was_pressed = false;
 
+    float delta = 0.5;
     if (state[game->config.key_map_left]) {
-        level->map_wanted_at.x--;
+        level->map_wanted_at.x -= delta;
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
@@ -58,7 +59,7 @@ void player_tick (void)
     }
 
     if (state[game->config.key_map_right]) {
-        level->map_wanted_at.x++;
+        level->map_wanted_at.x += delta;
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
@@ -66,7 +67,7 @@ void player_tick (void)
     }
 
     if (state[game->config.key_map_up]) {
-        level->map_wanted_at.y--;
+        level->map_wanted_at.y -= delta;
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
@@ -74,7 +75,7 @@ void player_tick (void)
     }
 
     if (state[game->config.key_map_down]) {
-        level->map_wanted_at.y++;
+        level->map_wanted_at.y += delta;
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
