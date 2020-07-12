@@ -1056,8 +1056,10 @@ _
         }
     } else if (it->is_door() && !it->is_open) {
         if (things_overlap(me, A_at, it)) {
-            log("can open %s", it->to_string().c_str());
-            return !open_door(it);
+            if (!it->is_dead) {
+                log("can open %s", it->to_string().c_str());
+                return !open_door(it);
+            }
         }
     } else if (it->is_ethereal()) {
         log("can pass through %s", it->to_string().c_str());

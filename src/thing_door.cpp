@@ -21,6 +21,10 @@ bool Thing::open_door (Thingp it)
         return false;
     }
 
+    if (it->is_dead) {
+        return false;
+    }
+
     for (const auto& item : monstp->carrying) {
         auto k = level->thing_find(item);
         if (k->is_key()) {
