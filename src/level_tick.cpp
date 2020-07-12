@@ -25,10 +25,6 @@ void Level::tick (void)
     //
     cursor_move();
 
-    if (game->paused()) {
-        return;
-    }
-
     game->things_are_moving = false;
 
     //
@@ -39,6 +35,10 @@ void Level::tick (void)
     }
 
     player_tick();
+
+    if (game->paused()) {
+        return;
+    }
 
     // LOG("-");
 

@@ -89,7 +89,7 @@
 #define UI_HEALTH_BAR_STEPS        12 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5
 #define UI_MONST_HEALTH_BAR_STEPS  16
-#define UI_MINICON_HEIGHT          20 // Scrollbar limit
+#define UI_MINICON_HEIGHT          6 // Scrollbar limit
 #define UI_MINICON_TEXT_COLOR      UI_TEXT_COLOR
 #define UI_MINICON_VIS_HEIGHT      5
 #define UI_MINICON_VIS_WIDTH       UI_MINICON_WIDTH

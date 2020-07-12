@@ -115,17 +115,17 @@ bool Thing::fall_to_next_level (void)
             auto new_pos = make_point(mid_at);
             if (level->is_lava(new_pos)) {
                 if (is_player()) {
-                    MINICON("%%fg=green$You plunge into lava! This must be the end for you!%%fg=reset$");
+                    MINICON("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
                 }
                 fall_damage *= 2;
             } else if (level->is_deep_water(new_pos)) {
                 if (is_player()) {
-                    MINICON("%%fg=green$The deep water lessens the fall!%%fg=reset$");
+                    MINICON("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
                 }
                 fall_damage /= 4;
             } else if (level->is_water(new_pos)) {
                 if (is_player()) {
-                    MINICON("%%fg=green$The water lessens the fall!%%fg=reset$");
+                    MINICON("%%fg=yellow$The water lessens the fall!%%fg=reset$");
                 }
                 fall_damage /= 2;
             }
@@ -142,6 +142,8 @@ bool Thing::fall_to_next_level (void)
                 auto reason = std::string("killed by falling");
                 dead(nullptr, reason);
             }
+
+            level->scroll_map_to_player();
 
             log("finished fall to next level");
             return true;

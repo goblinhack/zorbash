@@ -12,18 +12,24 @@
 #include "my_wid.h"
 #include "my_game_status.h"
 
-void Level::scroll_map (void)
+void Level::scroll_map_do (void)
 {_
     const float bigstep = 6.0;
     const float medstep = 2.0 / TILE_WIDTH;
     const float smallstep = 1.0 / TILE_WIDTH;
 
-    if (wid_find_under_mouse_when_scrolling()) {
-        return;
-    }
-
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
+
+#if 0
+if (player) {
+    player->minicon("map_at %f %f map_wanted_at %f %f", 
+                    map_at.x,
+                    map_at.y,
+                    map_wanted_at.x,
+                    map_wanted_at.y);
+}
+#endif
 
     //
     // If following the player scroll in smaller chunks
@@ -81,16 +87,31 @@ void Level::scroll_map (void)
     map_at.y = std::min(map_at.y, (float)MAP_HEIGHT - TILES_DOWN);
 }
 
+void Level::scroll_map (void)
+{_
+    if (wid_find_under_mouse_when_scrolling()) {
+        return;
+    }
+
+    scroll_map_do();
+}
+
 void Level::scroll_map_to_player (void)
 {_
+    if (!player) {
+        return;
+    }
+
     mouse = -1;
     mouse_old = -1;
     minimap_valid = false;
     map_follow_player = true;
 
-    for (auto x = 0; x < 1000; x++) {
+    map_wanted_at = player->mid_at - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);
+
+    for (auto x = 0; x < 100; x++) {
         scroll_map_set_target();
-        scroll_map();
+        scroll_map_do();
     }
 }
 
@@ -118,6 +139,14 @@ void Level::scroll_map_set_target (void)
         // If over a widget, do not scroll
         //
         if (is_mouse_over_actionbar()) {
+            return;
+        }
+
+        //
+        // Allow the player to scroll around the scene of carnage
+        // once dead
+        //
+        if (player && player->is_dead) {
             return;
         }
 

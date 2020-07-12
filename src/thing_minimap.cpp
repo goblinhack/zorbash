@@ -42,7 +42,7 @@ void Level::update_minimap (void)
                 if (player &&
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
-                    c = PINK;
+                    c = WHITE;
                 } else if (is_door(x, y)) {
                     c = RED;
                 } else if (is_lava(x, y)) {
@@ -118,7 +118,7 @@ void Level::update_minimap (void)
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
-                    c = PINK;
+                    c = WHITE;
                 } else if (is_door(x, y)) {
                     c = RED;
                 } else if (is_lava(x, y)) {

@@ -12,44 +12,20 @@ void player_tick (void)
         return;
     }
 
-    if (game->paused()) {
-        return;
-    }
-
     auto level = game->level;
     if (!level) {
         return;
     }
 
     auto player = level->player;
-    if (!player || player->is_dead || player->is_hidden) {
+    if (!player) {
         return;
     }
 
-    g_thing_callframes_depth = callframes_depth;
-
-    auto delay = PLAYER_MOVE_SPEED_MS;
-
-    uint8_t right  = 0;
-    uint8_t left   = 0;
-    uint8_t up     = 0;
-    uint8_t down   = 0;
-    uint8_t attack = 0;
-    uint8_t wait   = 0;
-    uint8_t jump   = 0;
-
+    float delta = 0.5;
+    bool some_key_event_was_pressed = false;
     const uint8_t *state = SDL_GetKeyboardState(0);
 
-    right  = state[game->config.key_move_right] ? 1 : 0;
-    left   = state[game->config.key_move_left] ? 1 : 0;
-    up     = state[game->config.key_move_up] ? 1 : 0;
-    down   = state[game->config.key_move_down] ? 1 : 0;
-    attack = state[game->config.key_attack] ? 1 : 0;
-    wait   = state[game->config.key_wait] ? 1 : 0;
-    jump   = state[game->config.key_jump] ? 1 : 0;
-    bool some_key_event_was_pressed = false;
-
-    float delta = 0.5;
     if (state[game->config.key_map_left]) {
         level->map_wanted_at.x -= delta;
         level->cursor_needs_update = true;
@@ -81,6 +57,34 @@ void player_tick (void)
         level->map_follow_player = false;
         some_key_event_was_pressed = true;
     }
+
+    if (player->is_dead || player->is_hidden) {
+        return;
+    }
+
+    if (game->paused()) {
+        return;
+    }
+
+    g_thing_callframes_depth = callframes_depth;
+
+    auto delay = PLAYER_MOVE_SPEED_MS;
+
+    uint8_t right  = 0;
+    uint8_t left   = 0;
+    uint8_t up     = 0;
+    uint8_t down   = 0;
+    uint8_t attack = 0;
+    uint8_t wait   = 0;
+    uint8_t jump   = 0;
+
+    right  = state[game->config.key_move_right] ? 1 : 0;
+    left   = state[game->config.key_move_left] ? 1 : 0;
+    up     = state[game->config.key_move_up] ? 1 : 0;
+    down   = state[game->config.key_move_down] ? 1 : 0;
+    attack = state[game->config.key_attack] ? 1 : 0;
+    wait   = state[game->config.key_wait] ? 1 : 0;
+    jump   = state[game->config.key_jump] ? 1 : 0;
 
     if (some_key_event_was_pressed) {
         return;
