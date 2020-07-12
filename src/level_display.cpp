@@ -202,7 +202,9 @@ void Level::display_map (void)
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
         display_map_things(FBO_MAP, minx, miny, maxx, maxy);
+#ifdef ENABLE_DEBUG_LIGHT
         lights_render(light_minx, light_miny, light_maxx, light_maxy, FBO_MAP);
+#endif
     } else if (game->config.gfx_lights) {
         {
             //
