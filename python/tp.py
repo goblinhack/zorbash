@@ -416,8 +416,8 @@ class Tp:
     def set_is_rrr80(self, value):
         zx.tp_set_is_rrr80(self, value)
 
-    def set_is_rrr81(self, value):
-        zx.tp_set_is_rrr81(self, value)
+    def set_is_collect_as_keys(self, value):
+        zx.tp_set_is_collect_as_keys(self, value)
 
     def set_is_ethereal(self, value):
         zx.tp_set_is_ethereal(self, value)
@@ -530,8 +530,8 @@ class Tp:
     def set_is_treasure(self, value):
         zx.tp_set_is_treasure(self, value)
 
-    def set_is_collectable(self, value):
-        zx.tp_set_is_collectable(self, value)
+    def set_collectable(self, value):
+        zx.tp_set_collectable(self, value)
 
     def set_is_resurrectable(self, value):
         zx.tp_set_is_resurrectable(self, value)

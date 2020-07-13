@@ -15,7 +15,7 @@ def gold_init(name, text_name):
     x.set_is_mundane_item(False) # not a boring item
     x.set_is_sidebar_item(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_is_collectable(True)
+    x.set_collectable(True)
     x.set_is_collected_as_gold(True)
     x.set_is_gold(True)
     x.set_is_interesting(True)

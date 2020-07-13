@@ -20,7 +20,6 @@ static void wid_minicon_wid_create(void);
 
 Widp wid_minicon_container {};
 Widp wid_minicon_vert_scroll {};
-Widp wid_minicon_horiz_scroll {};
 Widp wid_minicon_input_line {};
 Widp wid_minicon_window {};
 
@@ -33,7 +32,6 @@ void wid_minicon_fini (void)
 {_
     wid_destroy(&wid_minicon_container);
     wid_destroy(&wid_minicon_vert_scroll);
-    wid_destroy(&wid_minicon_horiz_scroll);
     wid_destroy(&wid_minicon_input_line);
     wid_destroy(&wid_minicon_window);
 }
@@ -370,11 +368,8 @@ static void wid_minicon_wid_create (void)
 
     wid_minicon_vert_scroll =
         wid_new_vert_scroll_bar(wid_minicon_window, "", wid_minicon_container);
-    wid_minicon_horiz_scroll =
-        wid_new_horiz_scroll_bar(wid_minicon_window, "", wid_minicon_container);
 
     wid_not_visible(wid_get_parent(wid_minicon_vert_scroll));
-    wid_not_visible(wid_get_parent(wid_minicon_horiz_scroll));
 
     wid_update(wid_minicon_window);
 }

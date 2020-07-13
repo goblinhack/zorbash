@@ -1,30 +1,33 @@
 bugs
 ----
 keys should be in right sidebar
+if on fire and bump into door, door burns
+if push brazier onto door, same
 you munch the undead ghost
 jump should allow monst to move
 click on monst or door should attack
 
 upcoming work
 -------------
-- add stuff in secret rooms
-- bag inventory
-- drag items
-- drop bag
-- use descent potion, that can be taken or thrown
+- weight factors into jumping
+- show seed on sidebar
+- allow seed selection on menu
+- equip
+- throw
+- drop
 - potion descent creates chasm
 - potion break on fall
 - potion enchant radius
-- equip
-- throw
-- cube can eat treasure on player
+- use descent potion, that can be taken or thrown
 - moving floor
-- choose name / player
-- monst rarity
-- playback possible?
-- eat food
-- drop frog
 - drainpipes spawn slime
+- monst rarity
+- add stuff in secret rooms
+- drag items
+- bag inventory
+- cube can eat treasure on player
+- choose name / player
+- playback possible?
 - sewer level
 
 future work

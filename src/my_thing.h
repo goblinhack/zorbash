@@ -73,6 +73,7 @@ public:
     fpoint       lunge_to;                   // When a monst attacks something
     int          bounce_count = {};
     int          gold = {};
+    int          keys = {};
     int          lifespan = {};              // How many things this thing owns.
     int          light_quality {};
     int          light_strength {};
@@ -320,6 +321,13 @@ public:
     int incr_gold(int);
     int decr_gold(void);
     int incr_gold(void);
+
+    int set_keys(int);
+    int get_keys(void) const;
+    int decr_keys(int);
+    int incr_keys(int);
+    int decr_keys(void);
+    int incr_keys(void);
 
     int set_stats_health(int);
     int get_stats_health(void) const;
@@ -844,7 +852,7 @@ public:
     int is_blood(void) const;
     int is_blood_splatter(void) const;
     int is_chasm(void) const;
-    int is_collectable(void) const;
+    int collectable(void) const;
     int is_collected_as_gold(void) const;
     int is_combustible(void) const;
     int is_corpse(void) const;
@@ -980,7 +988,7 @@ public:
     int is_rrr78(void) const;
     int is_rrr79(void) const;
     int is_rrr80(void) const;
-    int is_rrr81(void) const;
+    int is_collect_as_keys(void) const;
     int is_ethereal(void) const;
     int is_potion_eater(void) const;
     int is_throwable(void) const;
