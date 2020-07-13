@@ -223,7 +223,7 @@ static void game_status_wid_create (void)
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
 
-        auto s = dynprintf("Level %03d", level->world_at.z);
+        auto s = dynprintf("Lvl %u", level->world_at.z);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);
@@ -232,6 +232,20 @@ static void game_status_wid_create (void)
     }
 
     y_at += 1;
+    {_
+        auto w = wid_new_plain(wid_sidebar, "Seed");
+        point tl = make_point(0, y_at - 1);
+        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
+
+        auto s = dynprintf("Dun %u", game->seed);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, s);
+        wid_set_shape_none(w);
+        myfree(s);
+    }
+
+    y_at += 2;
     {_
         auto w = wid_new_plain(wid_sidebar, "title box");
         point tl = make_point(1, y_at);
@@ -264,19 +278,32 @@ static void game_status_wid_create (void)
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         auto g = std::to_string(player->get_gold());
-        wid_set_text(w, "%tile=dollar-icon$%fg=gold$" + g);
+        wid_set_text(w, "%tile=dollar-icon$%fg=gray$" + g);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }
 
     {_
         auto w = wid_new_plain(wid_sidebar, "weight");
+        point tl = make_point(5, y_at-1);
+        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-1);
+
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, L"%tile=weight-icon$%fg=green$150");
+        wid_set_text_lhs(w, true);
+        wid_set_shape_none(w);
+    }
+
+    {_
+        auto w = wid_new_plain(wid_sidebar, "keys");
         point tl = make_point(5, y_at-2);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-2);
 
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, L"%tile=weight-icon$%fg=green$150");
+        auto k = std::to_string(player->get_keys());
+        wid_set_text(w, "%tile=key1.1$%fg=gray$" + k);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }

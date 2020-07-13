@@ -142,7 +142,7 @@ private:
     int _is_blood {};
     int _is_blood_splatter {};
     int _is_chasm {};
-    int _is_collectable {};
+    int _collectable {};
     int _is_collected_as_gold {};
     int _is_combustible {};
     int _is_corpse_on_death {};
@@ -271,7 +271,7 @@ private:
     int _is_rrr78 {};
     int _is_rrr79 {};
     int _is_rrr80 {};
-    int _is_rrr81 {};
+    int _is_collect_as_keys {};
     int _is_ethereal {};
     int _is_potion_eater {};
     int _is_throwable {};
@@ -609,7 +609,7 @@ public:
     int is_rrr78(void) const;
     int is_rrr79(void) const;
     int is_rrr80(void) const;
-    int is_rrr81(void) const;
+    int is_collect_as_keys(void) const;
     int is_ethereal(void) const;
     int is_potion_eater(void) const;
     int is_throwable(void) const;
@@ -638,7 +638,7 @@ public:
     int is_smoke(void) const;
     int is_acid_hater(void) const;
     int is_treasure(void) const;
-    int is_collectable(void) const;
+    int collectable(void) const;
     int is_resurrectable(void) const;
     int is_intelligent(void) const;
     int is_double_damage_from_fire(void) const;
@@ -732,7 +732,7 @@ public:
     void set_is_blood(int);
     void set_is_blood_splatter(int);
     void set_is_chasm(int);
-    void set_is_collectable(int);
+    void set_collectable(int);
     void set_is_combustible(int);
     void set_is_corpse_on_death(int);
     void set_is_corridor(int);
@@ -855,7 +855,7 @@ public:
     void set_is_rrr78(int);
     void set_is_rrr79(int);
     void set_is_rrr80(int);
-    void set_is_rrr81(int);
+    void set_is_collect_as_keys(int);
     void set_is_ethereal(int);
     void set_is_potion_eater(int);
     void set_is_throwable(int);

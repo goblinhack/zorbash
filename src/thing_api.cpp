@@ -884,9 +884,9 @@ int Thing::is_rrr80(void) const
     return (tp()->is_rrr80());
 }
 
-int Thing::is_rrr81(void) const
+int Thing::is_collect_as_keys(void) const
 {_
-    return (tp()->is_rrr81());
+    return (tp()->is_collect_as_keys());
 }
 
 int Thing::is_ethereal(void) const
@@ -1034,9 +1034,9 @@ int Thing::is_treasure(void) const
     return (tp()->is_treasure());
 }
 
-int Thing::is_collectable(void) const
+int Thing::collectable(void) const
 {_
-    return (tp()->is_collectable());
+    return (tp()->collectable());
 }
 
 int Thing::is_resurrectable(void) const
@@ -1508,6 +1508,64 @@ int Thing::incr_gold (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->gold++);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// keys
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_keys (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->keys);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_keys (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->keys = v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::decr_keys (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->keys -= v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::incr_keys (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->keys += v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::decr_keys (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->keys--);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::incr_keys (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->keys++);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }

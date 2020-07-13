@@ -40,7 +40,32 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
                      size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
                      tile_find_mand(name), false);
         }
-    } else {
+        return;
+    }
+
+    if (what->is_collect_as_keys()) {
+        std::string name = "key";
+        auto w = wid_find(name);
+        if (!w) {
+            con("could not find wid %s", name.c_str());
+            return;
+        }
+
+        auto p = (w->abs_tl + w->abs_br) / 2;
+        p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
+        p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
+
+        point s = (last_blit_tl + last_blit_br) / 2;
+        point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
+                random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
+        level->new_external_particle(
+                 s + j, p,
+                 size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
+                 tile_find_mand("key1.1"), false);
+        return;
+    }
+
+    {
         std::string name = "actionbar icon" + std::to_string(slot);
         auto w = wid_find(name);
         if (!w) {
@@ -111,6 +136,14 @@ bool Thing::actionbar_id_insert (Thingp what)
     if (what->is_collected_as_gold()) {
         game_status_wid_init();
         incr_gold(what->get_gold_value());
+        actionbar_particle(what, monstp->actionbar_id.size() - 1);
+        what->dead("collected");
+        return false;
+    }
+
+    if (what->is_collect_as_keys()) {
+        game_status_wid_init();
+        incr_keys(1);
         actionbar_particle(what, monstp->actionbar_id.size() - 1);
         what->dead("collected");
         return false;

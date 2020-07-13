@@ -108,7 +108,7 @@ int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
 int Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
 int Tp::is_chasm(void) const { return _is_chasm; }
-int Tp::is_collectable(void) const { return _is_collectable; }
+int Tp::collectable(void) const { return _collectable; }
 int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_combustible(void) const { return _is_combustible; }
 int Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
@@ -239,7 +239,7 @@ int Tp::is_rrr78(void) const { return _is_rrr78; }
 int Tp::is_rrr79(void) const { return _is_rrr79; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
 int Tp::is_rrr80(void) const { return _is_rrr80; }
-int Tp::is_rrr81(void) const { return _is_rrr81; }
+int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
 int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_potion_eater(void) const { return _is_potion_eater; }
 int Tp::is_throwable(void) const { return _is_throwable; }
@@ -349,7 +349,7 @@ void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
 void Tp::set_is_blood_splatter(int v) { _is_blood_splatter = v; }
 void Tp::set_is_chasm(int v) { _is_chasm = v; }
-void Tp::set_is_collectable(int v) { _is_collectable = v; }
+void Tp::set_collectable(int v) { _collectable = v; }
 void Tp::set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
 void Tp::set_is_combustible(int v) { _is_combustible = v; }
 void Tp::set_is_corpse_on_death(int v) { _is_corpse_on_death = v; }
@@ -480,7 +480,7 @@ void Tp::set_is_rrr78(int v) { _is_rrr78 = v; }
 void Tp::set_is_rrr79(int v) { _is_rrr79 = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
 void Tp::set_is_rrr80(int v) { _is_rrr80 = v; }
-void Tp::set_is_rrr81(int v) { _is_rrr81 = v; }
+void Tp::set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
 void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
 void Tp::set_is_potion_eater(int v) { _is_potion_eater = v; }
 void Tp::set_is_throwable(int v) { _is_throwable = v; }
