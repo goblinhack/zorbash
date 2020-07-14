@@ -10,4 +10,4 @@ docker build --no-cache \
     --file $DOCKER_FILE .
 # remove intermediate images with SSH info
 docker rmi -f $(docker images -q --filter label=stage=intermediate)
-docker run --rm -it $DOCKER_FILE
+docker run --rm -it $DOCKER_IMAGE
