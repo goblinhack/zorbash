@@ -40,9 +40,14 @@ Screenshots
 
 How to build
 ------------
+
 - On Linux: (last tried ubuntu 19.04 on Sun Jun 28 07:25:22 BST 2020)
 <pre>
     sh ./RUNME
+</pre>
+- Ubuntu docker:
+<pre>
+    sh ./RUNME.docker.ubuntu
 </pre>
 - On MacOS:
 <pre>
