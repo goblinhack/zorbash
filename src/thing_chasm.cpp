@@ -55,9 +55,34 @@ bool Thing::fall_to_next_level (void)
         return false;
     }
 
+    auto tries = 0;
     for (;;) {
-        auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
-        auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
+        int x;
+        int y;
+
+        //
+        // Try close to where we are first; failing that anywhere will do.
+        //
+        if (tries < 1) {
+            x = mid_at.x;
+            y = mid_at.y;
+        } else if (tries < 10) {
+            x = mid_at.x + random_range(-MAP_BORDER, MAP_BORDER);
+            y = mid_at.y + random_range(-MAP_BORDER, MAP_BORDER);
+        } else if (tries < 100) {
+            x = mid_at.x + random_range(-MAP_BORDER * 2, MAP_BORDER * 2);
+            y = mid_at.y + random_range(-MAP_BORDER * 2, MAP_BORDER * 2);
+        } else if (tries < 1000) {
+            x = mid_at.x + random_range(-MAP_BORDER * 4, MAP_BORDER * 4);
+            y = mid_at.y + random_range(-MAP_BORDER * 4, MAP_BORDER * 4);
+        } else {
+            x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
+            y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
+        }
+
+        if (l->is_oob(x, y)) {
+            continue;
+        }
 
         if (!l->is_dungeon(x, y)) {
             continue;

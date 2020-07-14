@@ -129,9 +129,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     //
     if (!was_dead) {
         if (it->is_flammable()) {
-            if (random_range(0, 100) < 20) {
+            if (random_range(0, 100) < 5) {
                 if (is_player()) {
-                    MINICON("%%fg=red$It burns and you set yourself on fire!");
+                    MINICON("%%fg=red$Clumsy! You set yourself on fire!");
                     set_on_fire();
                 }
             } else {

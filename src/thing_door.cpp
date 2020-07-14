@@ -13,6 +13,15 @@
 
 bool Thing::open_door (Thingp it)
 {_
+    if (is_on_fire()) {
+        if (!it->is_on_fire()) {
+            if (is_player()) {
+                MINICON("The door is ablaze!");
+            }
+            it->set_on_fire();
+        }
+    }
+
     if (!it->is_door()) {
         return false;
     }
@@ -25,19 +34,16 @@ bool Thing::open_door (Thingp it)
         return false;
     }
 
-    for (const auto& item : monstp->carrying) {
-        auto k = level->thing_find(item);
-        if (k->is_key()) {
-            used(k, it);
-            it->level_pop();
-            it->is_open = true;
-            it->level_push();
-            MINICON("The door opens");
-            if (get_light_count()) {
-                update_light();
-            }
-            return true;
+    if (get_keys()) {
+        decr_keys();
+        it->level_pop();
+        it->is_open = true;
+        it->level_push();
+        MINICON("The door creaks open");
+        if (get_light_count()) {
+            update_light();
         }
+        return true;
     }
     MINICON("You need a key");
     return false;
