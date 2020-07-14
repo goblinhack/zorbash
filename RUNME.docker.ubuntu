@@ -1,4 +1,5 @@
 #!/bin/sh
+# Credit to https://janakerman.co.uk/docker-git-clone/ for this idea
 cd docker
 DOCKER_FILE=ubuntu.dockerfile
 DOCKER_IMAGE=zorbash.ubuntu
