@@ -189,7 +189,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         //
         // Does the attacker feast on success?
         //
-        real_hitter->eat(this);
+        if (real_hitter->will_eat(this)) {
+            real_hitter->eat(this);
+        }
     } else {
         log("is hit by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);

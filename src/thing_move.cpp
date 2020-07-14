@@ -43,19 +43,6 @@ bool Thing::move_no_shove (fpoint future_pos)
     return (move(future_pos, up, down, left, right, attack, idle, false));
 }
 
-bool Thing::attack (fpoint future_pos)
-{
-    bool up     = future_pos.y < mid_at.y;
-    bool down   = future_pos.y > mid_at.y;
-    bool left   = future_pos.x < mid_at.x;
-    bool right  = future_pos.x > mid_at.x;
-    bool attack = true;
-    bool idle   = false;
-
-    verify(this);
-    return (move(future_pos, up, down, left, right, attack, idle, true));
-}
-
 bool Thing::move (fpoint future_pos,
                   uint8_t up,
                   uint8_t down,
@@ -142,6 +129,23 @@ _
         } else if (future_pos.x < mid_at.x) {
             if (!is_facing_left && !get_timestamp_flip_start()) {
                 set_timestamp_flip_start(time_get_time_ms_cached());
+            }
+        }
+    }
+
+    if (is_player()) {
+        auto t = nearby_most_dangerous_thing_get();
+        if (t) {
+            auto free_attack =
+                 ((t->mid_at.x >= mid_at.x) && left) ||
+                 ((t->mid_at.x <= mid_at.x) && right) ||
+                 ((t->mid_at.y >= mid_at.y) && up) ||
+                 ((t->mid_at.y <= mid_at.y) && down);
+
+            if (free_attack) {
+                std::string s = t->text_The() + " attacks as you run";
+                MINICON("%s", s.c_str());
+                game->tick_begin();
             }
         }
     }
@@ -386,7 +390,7 @@ bool Thing::move_to_check (const point& nh, const bool escaping)
         // We would hit something and cannot do this move. However,
         // see if we can hit the thing that is in the way.
         //
-        log("move to %d,%d hit obstacle", nh.x, nh.y);
+        log("move to %d,%d will hit obstacle or monst", nh.x, nh.y);
 _
         bool target_attacked = false;
         bool target_overlaps = false;

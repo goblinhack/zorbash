@@ -222,6 +222,10 @@ bool Thing::try_to_jump (void)
 
 void Thing::jump_end (void)
 {
+    if (!is_jumping) {
+        return;
+    }
+
     log("end of jump");
     is_jumping = false;
 
@@ -264,5 +268,16 @@ void Thing::jump_end (void)
     collision_check_only(mid_at);
     location_check();
 
+    //
+    // Attack of opportunity
+    //
+    if (is_player()) {
+        auto t = nearby_most_dangerous_thing_get();
+        if (t) {
+            std::string s = t->text_The() + " attacks as you land";
+            MINICON("%s", s.c_str());
+            game->tick_begin();
+        }
+    }
     wobble(25);
 }

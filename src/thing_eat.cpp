@@ -36,3 +36,36 @@ bool Thing::eat (Thingp it)
     }
     return (false);
 }
+
+bool Thing::will_eat (const Thingp itp)
+{_
+    auto me = tp();
+    auto it = itp->tp();
+
+    if (me->is_meat_eater()) {
+        if (it->is_meat() || it->is_blood()) {
+            return (true);
+        }
+    }
+    if (me->is_treasure_eater()) {
+        if (it->is_treasure()) {
+            return (true);
+        }
+    }
+    if (me->is_potion_eater()) {
+        if (it->is_potion()) {
+            return (true);
+        }
+    }
+    if (me->is_slime_baby_eater()) {
+        if (it->is_slime_baby()) {
+            return (true);
+        }
+    }
+    if (is_player()) {
+        if (it->collectable()) {
+            return (true);
+        }
+    }
+    return (false);
+}

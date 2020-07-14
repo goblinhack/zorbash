@@ -573,10 +573,8 @@ bool Thing::collision_find_best_target (bool *target_attacked,
     auto me = this;
     ThingColl *best = nullptr;
 
-    if (is_loggable_for_unimportant_stuff()) {
-        log("collided with something, find best target");
-    }
-
+    log("collided with or can attack or eat something, find the best");
+_
     *target_attacked = false;
     *target_overlaps = false;
 
@@ -660,6 +658,18 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             carry(it);
             log("collect %s", it->to_string().c_str());
             ret = true;
+        } else if (it->is_dead && will_eat(it)) {
+            //
+            // Eat the corpse!
+            //
+            if (eat(it)) {
+                //
+                // Can't kill it twice, so hide it
+                //
+                it->hide();
+                *target_attacked = true;
+                ret = true;
+            }
         } else if (it->ai_hit_me_if_possible(me, damage)) {
             if (is_loggable_for_unimportant_stuff()) {
                 log("collision: will hit %s for %d damage",
@@ -854,10 +864,6 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
 {
     auto me = this;
 
-    if (it->is_dead) {
-        return true;
-    }
-
     Thingp owner_it = it->owner_get();
     Thingp owner_me = me->owner_get();
 
@@ -881,7 +887,8 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
     //
     // Sword use hits?
     //
-    if (possible_to_attack(it)) {
+    if (!it->is_dead && possible_to_attack(it)) {
+        log("possible to attack %s", it->to_string().c_str());
         if (things_overlap_attack(me, future_pos, it)) {
             if (is_loggable_for_unimportant_stuff()) {
                 log("candidate to attack %s", it->to_string().c_str());
@@ -898,6 +905,10 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
         }
         if (things_overlap(me, me->mid_at, it)) {
             thing_ai_possible_hit_add(it, "eat");
+        }
+    } else if (it->is_dead) {
+        if (is_loggable_for_unimportant_stuff()) {
+            log("cand ignore corpse %s", it->to_string().c_str());
         }
     } else {
         if (is_loggable_for_unimportant_stuff()) {
@@ -1010,6 +1021,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
         log("falling, ignore collisions");
         return false;
     }
+    log("check %s", it->to_string().c_str());
 
     if (it->is_monst()) {
         if (is_torch()) {
@@ -1020,7 +1032,15 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
             //
             // Allow walking over the dead
             //
+            if (will_eat(it)) {
+                if (things_overlap(me, me->mid_at, it)) {
+                    log("can eat %s", it->to_string().c_str());
+                    return true;
+                }
+            }
+
             if (it->is_dead) {
+                log("ignore corpse %s", it->to_string().c_str());
                 return false;
             }
         }
@@ -1232,7 +1252,12 @@ _
                 //
                 // Skip things we cannot collide with
                 //
-                if (it->is_hidden || it->is_falling || it->is_jumping) {
+                if (it->is_jumping) {
+                    log("ignore jumping %s", it->to_string().c_str());
+                    continue;
+                }
+                if (it->is_hidden || it->is_falling) {
+                    log("ignore %s", it->to_string().c_str());
                     continue;
                 }
 

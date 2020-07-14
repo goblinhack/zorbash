@@ -1,19 +1,23 @@
 #!/bin/sh
-# Credit to https://janakerman.co.uk/docker-git-clone/ for this idea
+# Credit to https://janakerman.co.uk/docker-git-clone/ for the SSH idea
 cd docker
 DOCKER_FILE=ubuntu.dockerfile
 DOCKER_IMAGE=zorbash.ubuntu
 MY_KEY=$(cat ~/.ssh/id_rsa)
-docker build --no-cache \
+
+docker build \
+    --no-cache \
     --build-arg SSH_KEY="$MY_KEY" \
     -t $DOCKER_IMAGE \
     --file $DOCKER_FILE .
+
 # remove intermediate images with SSH info
-
-docker rmi -f $(docker images -q --filter label=stage=intermediate)
-
-# NOTE: needs docker > 19 for --gpus and doesn't seem to work (on macos)
-docker run --rm -it --gpus all $DOCKER_IMAGE
 if [[ $? -ne 0 ]]; then
-    docker run --rm -it $DOCKER_IMAGE
+    docker rmi -f $(docker images -q --filter label=stage=intermediate)
+
+    # NOTE: needs docker > 19 for --gpus and doesn't seem to work (on macos)
+    docker run --rm -it --gpus all $DOCKER_IMAGE
+    if [[ $? -ne 0 ]]; then
+        docker run --rm -it $DOCKER_IMAGE
+    fi
 fi

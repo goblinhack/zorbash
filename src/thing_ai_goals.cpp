@@ -55,7 +55,7 @@ _
     //
     std::multiset<Goal> goals;
 
-    log("choose goals (higher scores are preferred):");
+    log("choose goals (higher scores, lower costs are preferred):");
 
     auto tpp = tp();
     for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
@@ -79,8 +79,8 @@ _
 #define GOAL_ADD(score, msg) \
         total_score += (score); \
         got_one = true; \
-        log(" goal (%d,%d) score %d %s, %s", \
-            p.x, p.y, score, msg, it->to_string().c_str());
+        log(" add goal (%d,%d) score %d %s, %s", \
+            p.x + minx, p.y + miny, score, msg, it->to_string().c_str());
 #else
 #define GOAL_ADD(score, msg) \
         total_score += (score); \
@@ -197,7 +197,7 @@ _
         }
     }
 
-#ifdef ENABLE_DEBUG_AI
+#ifdef ENABLE_DEBUG_AI_GOALS
     log("sorted goals, %d (best) .. %d (worst)",
         (int)most_preferred, (int)least_preferred);
 #endif
@@ -267,10 +267,14 @@ _
         astar_debug = {};
 #endif
         auto astar_end = goal.at;
-        auto result = astar_solve(path_debug, astar_start, astar_end, dmap_scent);
+        auto result = astar_solve(path_debug,
+                                  astar_start,
+                                  astar_end,
+                                  dmap_scent);
         paths.insert(result);
 
-        log(" goal (%d,%d) score %d -> cost %d", goal.at.x, goal.at.y,
+        log(" goal (%d,%d) score %d -> cost %d", 
+            goal.at.x + minx, goal.at.y + miny,
             (int)goal.score, (int)result.cost);
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
@@ -296,16 +300,23 @@ _
             } else {
                 best = hop0;
             }
+            log("best is %d,%d with cost %d, %d hops away",
+                best.x, best.y, result.cost, (int)hops_len);
         } else if (hops_len >= 1) {
             auto hop0 = get(hops, hops_len - 1);
             best = hop0;
+            log("best is %d,%d with cost %d, %d hops away",
+                best.x, best.y, result.cost, (int)hops_len);
         } else {
-            continue;
+            log("best is where we are, cost %d, %d hops away",
+                result.cost, (int)hops_len);
+            best = point(mid_at.x - minx, mid_at.y - miny);
         }
 
         auto nh = point(best.x + minx, best.y + miny);
 
         if (move_to_or_attack(nh)) {
+            log("we can move to or attack or eat this next-hop");
             return true;
         }
     }
