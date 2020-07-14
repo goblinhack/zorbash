@@ -29,19 +29,6 @@ RUN mkdir -p /root/.ssh/ && \
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 RUN git clone git@github.com:goblinhack/zorbash.git
-
+RUN /bin/rm -rf /root/.ssh/id_rsa
 RUN cd zorbash && sh ./RUNME
-# Add files.
-#ADD root/.bashrc /root/.bashrc
-#ADD root/.gitconfig /root/.gitconfig
-#ADD root/.scripts /root/.scripts
-###
-#### Set environment variables.
-#ENV HOME /root
-###
-#### Define working directory.
-#WORKDIR /root
-###
-#### Define default command.
 RUN bash
-###
