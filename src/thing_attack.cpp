@@ -79,3 +79,16 @@ bool Thing::possible_to_attack (const Thingp itp)
     log("ignore attack %s", itp->to_string().c_str());
     return (false);
 }
+
+bool Thing::attack (fpoint future_pos)
+{
+    bool up     = future_pos.y < mid_at.y;
+    bool down   = future_pos.y > mid_at.y;
+    bool left   = future_pos.x < mid_at.x;
+    bool right  = future_pos.x > mid_at.x;
+    bool attack = true;
+    bool idle   = false;
+
+    verify(this);
+    return (move(future_pos, up, down, left, right, attack, idle, true));
+}

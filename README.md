@@ -45,7 +45,7 @@ How to build
 <pre>
     sh ./RUNME
 </pre>
-- Ubuntu docker:
+- Ubuntu docker (experimental):
 <pre>
     sh ./RUNME.docker.ubuntu
 </pre>

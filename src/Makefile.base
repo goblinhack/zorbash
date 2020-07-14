@@ -27,17 +27,17 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_config_keyboard.o	\
     $(OBJDIR)/game_config_other.o	\
     $(OBJDIR)/game_config_sound.o	\
-    $(OBJDIR)/game_dead.o 		\
     $(OBJDIR)/game_credits.o 		\
+    $(OBJDIR)/game_dead.o 		\
     $(OBJDIR)/game_display.o 		\
     $(OBJDIR)/game_dump.o 		\
     $(OBJDIR)/game_error.o 		\
     $(OBJDIR)/game_fini.o 		\
     $(OBJDIR)/game_init.o 		\
-    $(OBJDIR)/game_monsts.o 		\
     $(OBJDIR)/game_load.o 		\
     $(OBJDIR)/game_log.o 		\
     $(OBJDIR)/game_main_menu.o 		\
+    $(OBJDIR)/game_monsts.o 		\
     $(OBJDIR)/game_mouse.o		\
     $(OBJDIR)/game_notice.o 		\
     $(OBJDIR)/game_paused.o 		\
@@ -46,8 +46,11 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_status.o 		\
     $(OBJDIR)/game_tick.o 		\
     $(OBJDIR)/gauss.o 			\
+    $(OBJDIR)/gfx.o			\
     $(OBJDIR)/gfx0.o			\
     $(OBJDIR)/gfx1.o			\
+    $(OBJDIR)/gfx10.o			\
+    $(OBJDIR)/gfx11.o			\
     $(OBJDIR)/gfx2.o			\
     $(OBJDIR)/gfx3.o			\
     $(OBJDIR)/gfx4.o			\
@@ -56,9 +59,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/gfx7.o			\
     $(OBJDIR)/gfx8.o			\
     $(OBJDIR)/gfx9.o			\
-    $(OBJDIR)/gfx10.o			\
-    $(OBJDIR)/gfx11.o			\
-    $(OBJDIR)/gfx.o			\
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/globals.o 		\
     $(OBJDIR)/hacklib.o 		\
@@ -162,6 +162,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_move_dir.o 		\
     $(OBJDIR)/thing_msg.o 		\
+    $(OBJDIR)/thing_nearby.o 		\
     $(OBJDIR)/thing_obstacle.o 		\
     $(OBJDIR)/thing_on_fire.o 		\
     $(OBJDIR)/thing_path.o 		\
@@ -188,10 +189,10 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ttf.o 			\
     $(OBJDIR)/util.o 			\
     $(OBJDIR)/wid.o 			\
+    $(OBJDIR)/wid_botcon.o 		\
     $(OBJDIR)/wid_console.o 		\
     $(OBJDIR)/wid_log.o 		\
     $(OBJDIR)/wid_minicon.o 		\
-    $(OBJDIR)/wid_botcon.o 		\
     $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_test.o 		\
     $(OBJDIR)/wid_text_box.o 		\

@@ -61,7 +61,7 @@ void Thing::cursor_path_pop_first_move (void)
             // A path to the target does not exist. Jump?
             //
             point p = make_point(level->cursor->mid_at.x,
-                                level->cursor->mid_at.y);
+                                 level->cursor->mid_at.y);
             if (try_to_jump(p)) {
                 game->tick_begin();
             }
