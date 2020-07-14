@@ -7,6 +7,10 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ascii_box.o 		\
     $(OBJDIR)/charmap.o 		\
     $(OBJDIR)/color.o			\
+    $(OBJDIR)/color1.o			\
+    $(OBJDIR)/color2.o			\
+    $(OBJDIR)/color3.o			\
+    $(OBJDIR)/color4.o			\
     $(OBJDIR)/command.o 		\
     $(OBJDIR)/console.o 		\
     $(OBJDIR)/dice.o			\

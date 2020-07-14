@@ -39,9 +39,9 @@ Lightp light_new (Thingp owner,
     uint16_t max_light_rays;
 
     if (owner->is_player()) {
-        max_light_rays = LIGHT_RAYS;
+        max_light_rays = MAX_RAY_LIGHTING;
     } else {
-        max_light_rays = LIGHT_RAYS / 16;
+        max_light_rays = MAX_RAY_LIGHTING / 16;
         max_light_rays = 32;
         max_light_rays = std::max(8, (int)max_light_rays);
     }
