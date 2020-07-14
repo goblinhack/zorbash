@@ -9,5 +9,11 @@ docker build --no-cache \
     -t $DOCKER_IMAGE \
     --file $DOCKER_FILE .
 # remove intermediate images with SSH info
+
 docker rmi -f $(docker images -q --filter label=stage=intermediate)
-docker run --rm -it $DOCKER_IMAGE
+
+# NOTE: needs docker > 19 for --gpus and doesn't seem to work (on macos)
+docker run --rm -it --gpus all $DOCKER_IMAGE
+if [[ $? -ne 0 ]]; then
+    docker run --rm -it $DOCKER_IMAGE
+fi
