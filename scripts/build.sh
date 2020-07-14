@@ -48,6 +48,22 @@ case `uname` in
     ;;
 esac
 
+ubuntu_help_full()
+{
+    log_warn "For ubuntu, install:"
+    log_warn "  apt install -y build-essential"
+    log_warn "  apt install -y vim"
+    log_warn "  apt install -y g++"
+    log_warn "  apt install -y libsdl2-dev libsdl2-2.0-0"
+    log_warn "  apt install -y libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0"
+    log_warn "  apt install -y libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev libsdl2-mixer-2.0-0"
+    log_warn "  apt install -y libfreetype6-dev libsdl2-ttf-dev libsdl2-ttf-2.0-0"
+    log_warn "  apt install -y python3 python3-dev python3-pip"
+    log_warn "  apt install -y git"
+    log_warn "  apt install -y ssh"
+    log_warn "  apt install -y xutils-dev"
+}
+
 sdl_help()
 {
     log_warn "Is SDL2 installed? (not SDL1) If not:"
@@ -59,19 +75,14 @@ sdl_help()
         log_err "Cannot find SDL2"
         exit 1
         ;;
-
     *Darwin*)
         log_warn "Install MAC ports then install:"
-        log_warn "   sudo port install libsdl2"
-        log_warn "   sudo port install libsdl2_mixer"
-        log_warn "   sudo port install libsdl2_ttf"
+        log_warn "  sudo port install libsdl2"
+        log_warn "  sudo port install libsdl2_mixer"
+        log_warn "  sudo port install libsdl2_ttf"
         ;;
-
     *)
-        log_warn "  For ubuntu SDL2 do: "
-        log_warn "   sudo apt-get install libsdl2-dev"
-        log_warn "   sudo apt-get install libsdl2-mixer-dev"
-        log_warn "   sudo apt-get install libsdl2-ttf-dev"
+        ubuntu_help_full
         ;;
     esac
 }
@@ -265,16 +276,12 @@ python_help()
         log_err "Cannot find python3"
         exit 1
         ;;
-
     *Darwin*)
         log_warn "Install MAC ports then install:"
         log_warn "   sudo port install python3*"
         ;;
-
     *)
-        log_warn "  For ubuntu Python3 do: "
-        log_warn "   sudo apt-get install python3-dev"
-        log_warn "   sudo apt-get install python3-pip"
+        ubuntu_help_full
         ;;
     esac
 }

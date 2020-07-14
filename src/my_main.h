@@ -43,7 +43,7 @@
 #define LEVELS_ACROSS              MAP_WIDTH // World size
 #define LEVELS_DEEP                32
 #define LEVELS_DOWN                MAP_HEIGHT
-#define LIGHT_RAYS                 90  // Max light rays cast
+#define MAX_RAY_LIGHTING           90   // Max light rays cast
 #define MAP_BORDER                 10   // Room border padding
 #define MAP_HEIGHT                 ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 #define MAP_ROCK_BORDER            1    // Map rock border
