@@ -101,7 +101,7 @@ bool Thing::fall_to_next_level (void)
 
             if (is_player()) {
                 game->level = l;
-                MINICON("%%fg=red$You tumble into the void!");
+                MINICON("%%fg=red$You tumble into the void!%%fg=reset$");
             } else {
                 MINICON("%s tumbles into the void!", text_The().c_str());
             }

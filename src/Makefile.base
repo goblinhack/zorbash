@@ -46,11 +46,18 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_status.o 		\
     $(OBJDIR)/game_tick.o 		\
     $(OBJDIR)/gauss.o 			\
+    $(OBJDIR)/gfx0.o			\
     $(OBJDIR)/gfx1.o			\
     $(OBJDIR)/gfx2.o			\
     $(OBJDIR)/gfx3.o			\
     $(OBJDIR)/gfx4.o			\
     $(OBJDIR)/gfx5.o			\
+    $(OBJDIR)/gfx6.o			\
+    $(OBJDIR)/gfx7.o			\
+    $(OBJDIR)/gfx8.o			\
+    $(OBJDIR)/gfx9.o			\
+    $(OBJDIR)/gfx10.o			\
+    $(OBJDIR)/gfx11.o			\
     $(OBJDIR)/gfx.o			\
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/globals.o 		\

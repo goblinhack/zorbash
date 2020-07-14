@@ -386,7 +386,7 @@ uint8_t command_handle (const char *input,
             if (*input) {
                 CON(">%%fg=red$Multiple matches, \"%s\"%%fg=reset$. Try:", input);
             } else {
-                CON(">%%fg=red$Commands:");
+                CON(">%%fg=red$Commands:%%fg=reset$");
             }
         }
 

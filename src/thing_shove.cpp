@@ -83,7 +83,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         }
 
         if (it->is_monst()) {
-            it->msg(string_sprintf("%%fg=red$!"));
+            it->msg(string_sprintf("%%fg=orange$!"));
         }
     }
 
@@ -131,7 +131,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         if (it->is_flammable()) {
             if (random_range(0, 100) < 5) {
                 if (is_player()) {
-                    MINICON("%%fg=red$Clumsy! You set yourself on fire!");
+                    MINICON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
                     set_on_fire();
                 }
             } else {

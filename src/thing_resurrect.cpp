@@ -35,7 +35,7 @@ void Thing::resurrect_tick (void)
         if (v > 0) {
             is_resurrecting = true;
             tile_curr = 0;
-            log("%%fg=red$%s rises from the grave!", text_The().c_str());
+            log("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
             set_stats_health(v);
             set_stats_health_max(v);
 

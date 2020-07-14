@@ -68,14 +68,65 @@ static void gfx_init_text (void)
                   UI_FONT_WIDTH, UI_FONT_HEIGHT, arr);
 }
 
+static void gfx_init_ui (void)
+{
+    {
+        std::initializer_list<std::string> tiles = {
+            "ui_popup",
+        };
+        std::vector<std::string> arr(tiles);
+        tile_load_arr("data/gfx/ui_popup.tga", "ui_popup", 80, 152, arr);
+    }
+
+    {
+        std::initializer_list<std::string> tiles = {
+            "ui_popup_short",
+        };
+        std::vector<std::string> arr(tiles);
+        tile_load_arr("data/gfx/ui_popup_short.tga", "ui_popup_short", 80, 34, arr);
+    }
+
+    {
+        std::initializer_list<std::string> tiles = {
+            "ui_popup_notice",
+        };
+        std::vector<std::string> arr(tiles);
+        tile_load_arr("data/gfx/ui_popup_notice.tga", "ui_popup_notice", 80, 34, arr);
+    }
+
+    {
+        std::initializer_list<std::string> tiles = {
+            "ui_popup_wide",
+        };
+        std::vector<std::string> arr(tiles);
+        tile_load_arr("data/gfx/ui_popup_wide.tga", "ui_popup_wide", 120, 152, arr);
+    }
+
+    {
+        std::initializer_list<std::string> tiles = {
+            "ui_popup_widest",
+        };
+        std::vector<std::string> arr(tiles);
+        tile_load_arr("data/gfx/ui_popup_widest.tga", "ui_popup_widest", 320, 152, arr);
+    }
+}
+
 void gfx_init (void)
 {
     gfx_init_text();
+    gfx_init_ui();
+    gfx_init0();
     gfx_init1();
     gfx_init2();
     gfx_init3();
     gfx_init4();
     gfx_init5();
+    gfx_init6();
+    gfx_init7();
+    gfx_init8();
+    gfx_init9();
+    gfx_init10();
+    gfx_init11();
 }
 
 void gfx_fini (void)
