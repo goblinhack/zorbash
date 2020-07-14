@@ -29,7 +29,6 @@ Thingp Thing::nearby_most_dangerous_thing_get (void)
     for (const auto& d : all_deltas) {
         auto x = mid_at.x + d.x;
         auto y = mid_at.y + d.y;
-        auto p = point(x, y);
 
         FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, MAP_DEPTH_OBJ) {
             auto tpp = t->tp();
