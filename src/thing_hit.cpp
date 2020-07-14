@@ -71,6 +71,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->is_lava()) {
             if (is_double_damage_from_fire()) {
                 damage *= 2;
+                log("double damage from fire");
             }
         }
     }
@@ -79,6 +80,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_acid()) {
             if (is_double_damage_from_acid()) {
                 damage *= 2;
+                log("double damage from acid");
             }
         }
     }
@@ -87,6 +89,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_water()) {
             if (is_double_damage_from_water()) {
                 damage *= 2;
+                log("double damage from water");
             }
         }
     }

@@ -58,6 +58,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="fire", text_name="burning fire")
+    tp_init(name="fire", text_name="fire")
 
 init()
