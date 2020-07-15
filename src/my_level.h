@@ -89,6 +89,7 @@ public:
     point                      pixel_map_at;  // map pixel location
     Thingp                     player = {};
     Thingp                     cursor = {};
+    Thingp                     highlight = {};
     std::map<ThingId, Thingp> all_things {};
     std::map<ThingId, Thingp> all_active_things {};
     std::map<ThingId, Thingp> all_gc_things {};

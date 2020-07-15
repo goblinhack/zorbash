@@ -809,10 +809,18 @@ void Thing::blit_internal (point &blit_tl,
                 tile_blit(tile, blit_tl, blit_br);
             }
         } else if (auto submerged = blit_begin_submerged()) {
-            tile_blit_outline(tile, blit_tl, blit_br, c);
+            if (level->highlight == this) {
+                tile_blit_outline(tile, blit_tl, blit_br, c, RED);
+            } else {
+                tile_blit_outline(tile, blit_tl, blit_br, c);
+            }
             blit_end_submerged(submerged);
         } else {
-            tile_blit_outline(tile, blit_tl, blit_br, c);
+            if (level->highlight == this) {
+                tile_blit_outline(tile, blit_tl, blit_br, c, RED);
+            } else {
+                tile_blit_outline(tile, blit_tl, blit_br, c);
+            }
         }
     } else {
         tile_blit(tile, blit_tl, blit_br);

@@ -273,6 +273,11 @@ void tile_blit_outline(const Tilep &tile,
                        const point &tl,
                        const point &br,
                        const color &c);
+void tile_blit_outline(const Tilep &tile,
+                       const point &tl,
+                       const point &br,
+                       const color &c,
+                       const color &o);
 void tile_blit_outline(uint16_t index,
                        const point &tl,
                        const point &br,

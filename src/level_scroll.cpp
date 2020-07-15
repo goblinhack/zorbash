@@ -21,6 +21,10 @@ void Level::scroll_map_do (void)
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
 
+    if (wid_find_under_mouse_when_scrolling()) {
+        return;
+    }
+
 #if 0
 if (player) {
     player->minicon("map_at %f %f map_wanted_at %f %f", 
@@ -135,13 +139,6 @@ void Level::scroll_map_set_target (void)
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
     } else if (cursor && !map_follow_player) {
-        //
-        // If over a widget, do not scroll
-        //
-        if (is_mouse_over_actionbar()) {
-            return;
-        }
-
         //
         // Allow the player to scroll around the scene of carnage
         // once dead

@@ -1241,6 +1241,53 @@ void tile_blit_outline (const Tilep &tile, const point &tl, const point &br,
     blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
+void tile_blit_outline (const Tilep &tile, const point &tl, const point &br,
+                        const color &c, const color &outline)
+{
+    float x1, x2, y1, y2;
+
+    if (!tile) {
+        return;
+    }
+
+    x1 = tile->x1;
+    x2 = tile->x2;
+    y1 = tile->y1;
+    y2 = tile->y2;
+
+    glcolor(outline);
+
+    const float dx = game->config.one_pixel_width;
+    const float dy = game->config.one_pixel_height;
+
+    blit_flush();
+    blit_init();
+
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_CONSTANT_ALPHA);
+    blit(tile->gl_binding(), x1, y2, x2, y1,
+         tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
+    blit(tile->gl_binding(), x1, y2, x2, y1,
+         tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
+    blit(tile->gl_binding(), x1, y2, x2, y1,
+         tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
+    blit(tile->gl_binding(), x1, y2, x2, y1,
+         tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
+    blit(tile->gl_binding(), x1, y2, x2, y1,
+         tl.x + dx, br.y, br.x + dx, tl.y);
+    blit(tile->gl_binding(), x1, y2, x2, y1,
+         tl.x - dx, br.y, br.x - dx, tl.y);
+    blit(tile->gl_binding(), x1, y2, x2, y1,
+         tl.x, br.y + dy, br.x, tl.y + dy);
+    blit(tile->gl_binding(), x1, y2, x2, y1,
+         tl.x, br.y - dy, br.x, tl.y - dy);
+    blit_flush();
+    blit_init();
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(c);
+    blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+}
+
 void tile_blit_outline (uint16_t index, const point &tl, const point &br,
                         const color &c)
 {
