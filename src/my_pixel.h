@@ -115,10 +115,14 @@ static inline void unlock (SDL_Surface *surface)
 //
 static void inline putPixel (SDL_Surface * surface, uint32_t x, uint32_t y, color col)
 {
-    uint8_t   bpp = surface->format->BytesPerPixel;
+    uint8_t  bpp = surface->format->BytesPerPixel;
     uint16_t pitch = surface->pitch/bpp;
     uint32_t rgb;
 
+#if 0
+    //
+    // Optimize these out
+    //
     if (x >= (uint32_t)surface->w) {
         ERR("out of range x %u, max %u", x, surface->w);
     }
@@ -128,6 +132,7 @@ static void inline putPixel (SDL_Surface * surface, uint32_t x, uint32_t y, colo
     }
 
     lock(surface);
+#endif
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
     rgb = ((col.r << 24) | (col.g << 16) | (col.b << 8) | col.a);
@@ -174,7 +179,9 @@ static void inline putPixel (SDL_Surface * surface, uint32_t x, uint32_t y, colo
             break;
     }
 
+#if 0
     unlock(surface);
+#endif
 }
 
 //

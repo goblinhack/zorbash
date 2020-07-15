@@ -48,7 +48,8 @@ public:
 };
 
 static std::map<std::string, Texp> textures;
-static std::map<std::string, Texp> black_and_white_textures;
+static std::map<std::string, Texp> textures_black_and_white;
+static std::map<std::string, Texp> textures_mask;
 
 uint8_t tex_init (void)
 {_
@@ -60,7 +61,10 @@ void tex_fini (void)
     for (auto& t : textures) {
         delete t.second;
     }
-    for (auto& t : black_and_white_textures) {
+    for (auto& t : textures_black_and_white) {
+        delete t.second;
+    }
+    for (auto& t : textures_mask) {
         delete t.second;
     }
 }
@@ -68,7 +72,8 @@ void tex_fini (void)
 void tex_free (Texp tex)
 {_
     textures.erase(tex->name);
-    black_and_white_textures.erase(tex->name);
+    textures_black_and_white.erase(tex->name);
+    textures_mask.erase(tex->name);
     delete(tex);
 }
 
@@ -160,14 +165,16 @@ static SDL_Surface *load_image (std::string filename)
     return (surf);
 }
 
-static void load_image_pair (SDL_Surface **surf1_out,
-                             SDL_Surface **surf2_out,
-                             std::string filename)
+static void load_images (SDL_Surface **surf1_out,
+                         SDL_Surface **surf2_out,
+                         SDL_Surface **surf3_out,
+                         std::string filename)
 {_
     uint32_t rmask, gmask, bmask, amask;
     unsigned char *image_data;
     SDL_Surface *surf1 = 0;
     SDL_Surface *surf2 = 0;
+    SDL_Surface *surf3 = 0;
     int32_t x, y, comp;
 
     image_data = load_raw_image(filename, &x, &y, &comp);
@@ -214,8 +221,22 @@ static void load_image_pair (SDL_Surface **surf1_out,
         ERR("could not handle image with %d components", comp);
     }
 
+    if (comp == 4) {
+        surf3 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
+        newptr(surf3, "SDL_CreateRGBSurface");
+    } else if (comp == 3) {
+        surf3 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
+        newptr(surf3, "SDL_CreateRGBSurface");
+    } else if (comp == 2) {
+        surf3 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
+        newptr(surf3, "SDL_CreateRGBSurface");
+    } else {
+        ERR("could not handle image with %d components", comp);
+    }
+
     memcpy(surf1->pixels, image_data, comp * x * y);
     memcpy(surf2->pixels, image_data, comp * x * y);
+    memcpy(surf3->pixels, image_data, comp * x * y);
 
     if (comp == 2) {
         SDL_Surface *old_surf = surf1;
@@ -237,10 +258,21 @@ static void load_image_pair (SDL_Surface **surf1_out,
         SDL_SaveBMP(surf2, filename.c_str());
     }
 
+    if (comp == 2) {
+        SDL_Surface *old_surf = surf3;
+        LOG("- SDL_ConvertSurfaceFormat");
+        surf3 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
+        newptr(surf3, "SDL_CreateRGBSurface");
+        oldptr(old_surf);
+        SDL_FreeSurface(old_surf);
+        SDL_SaveBMP(surf3, filename.c_str());
+    }
+
     free_raw_image(image_data);
 
     *surf1_out = surf1;
     *surf2_out = surf2;
+    *surf3_out = surf3;
 }
 
 //
@@ -280,13 +312,17 @@ Texp tex_load (std::string file, std::string name, int mode)
     return (t);
 }
 
-static Texp tex_from_surface_black_and_white (SDL_Surface *in,
-                                              std::string file,
-                                              std::string name,
-                                              int mode)
+static std::pair<Texp, Texp> tex_sprite (SDL_Surface *in,
+                                         std::string file,
+                                         std::string name,
+                                         int mode)
 {
-    Texp t = new Tex(name);
-    black_and_white_textures.insert(std::make_pair(name, t));
+    auto n1 = name + "_black_and_white";
+    auto n2 = name + "_mask";
+    Texp t1 = new Tex(n1);
+    Texp t2 = new Tex(n2);
+    textures_black_and_white.insert(std::make_pair(n1, t1));
+    textures_mask.insert(std::make_pair(n2, t2));
     uint32_t rmask, gmask, bmask, amask;
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -315,8 +351,10 @@ static Texp tex_from_surface_black_and_white (SDL_Surface *in,
     uint32_t ox;
     uint32_t oy;
 
-    SDL_Surface *out = SDL_CreateRGBSurface(0, owidth, oheight, 32,
-                                            rmask, gmask, bmask, amask);
+    SDL_Surface *out1 = SDL_CreateRGBSurface(0, owidth, oheight, 32,
+                                             rmask, gmask, bmask, amask);
+    SDL_Surface *out2 = SDL_CreateRGBSurface(0, owidth, oheight, 32,
+                                             rmask, gmask, bmask, amask);
     newptr(out, "SDL_CreateRGBSurface");
 
     //
@@ -325,41 +363,49 @@ static Texp tex_from_surface_black_and_white (SDL_Surface *in,
     ox = 0;
 
     for (ix = 0; ix < (int32_t) iwidth; ix++) {
-
         oy = 0;
-
         for (iy = 0; iy < (int32_t) iheight; iy++) {
-
-            color c;
-
-            c = getPixel(in, ix, iy);
-
+            color c = getPixel(in, ix, iy);
             uint8_t avg = ((int)c.r + (int)c.g + (int)c.b) / 3;
             c.r = avg;
             c.g = avg;
             c.b = avg;
 
-            putPixel(out, ox, oy, c);
+            putPixel(out1, ox, oy, c);
 
+            if ((c.r > 10) || (c.g > 10) || (c.b > 10)) {
+                c.r = 255;
+                c.g = 255;
+                c.b = 255;
+                c.a = 255;
+            } else {
+                c.r = 0;
+                c.g = 0;
+                c.b = 0;
+                c.a = 0;
+            }
+
+            putPixel(out2, ox, oy, c);
             oy++;
         }
-
         ox++;
     }
 
     SDL_FreeSurface(in);
     oldptr(in);
 
-    t = tex_from_surface(out, file, name, mode);
+    t1 = tex_from_surface(out1, file, n1, mode);
+    t2 = tex_from_surface(out2, file, n2, mode);
 
-    return (t);
+    return (std::make_pair(t1, t2));
 }
 
-void tex_load_color_and_black_and_white (Texp *tex,
-                                         Texp *tex_black_and_white,
-                                         std::string file,
-                                         std::string name,
-                                         int mode)
+void tex_load (Texp *tex,
+               Texp *tex_black_and_white,
+               Texp *tex_mask,
+               std::string file,
+               std::string name,
+               int mode)
 {_
     Texp t = tex_find(name);
     if (t) {
@@ -378,7 +424,9 @@ void tex_load_color_and_black_and_white (Texp *tex,
     LOG("- create textures '%s', '%s'", file.c_str(), name.c_str());
     SDL_Surface *surface = 0;
     SDL_Surface *surface_black_and_white = 0;
-    load_image_pair(&surface, &surface_black_and_white, file);
+    SDL_Surface *surface_mask = 0;
+
+    load_images(&surface, &surface_black_and_white, &surface_mask, file);
 
     if (!surface) {
         ERR("could not make surface from file '%s'", file.c_str());
@@ -389,10 +437,15 @@ void tex_load_color_and_black_and_white (Texp *tex,
             file.c_str());
     }
 
+    if (!surface_mask) {
+        ERR("could not make mask surface from file '%s'",
+            file.c_str());
+    }
+
     *tex = tex_from_surface(surface, file, name, mode);
-    *tex_black_and_white =
-        tex_from_surface_black_and_white(surface_black_and_white, file,
-                                         name + "_black_and_white", mode);
+    auto p = tex_sprite(surface_black_and_white, file, name, mode);
+    *tex_black_and_white = p.first;
+    *tex_mask = p.second;
 
     LOG("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
 }

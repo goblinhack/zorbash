@@ -78,6 +78,7 @@ public:
 
     Texp tex {};
     Texp tex_black_and_white {};
+    Texp tex_mask {};
 
     std::array<std::array<uint8_t, TILE_HEIGHT_MAX>, TILE_WIDTH_MAX> pix {};
 
@@ -128,11 +129,14 @@ public:
 private:
     int32_t _gl_binding {};
     int32_t _gl_binding_black_and_white {};
+    int32_t _gl_binding_mask {};
 public:
-    int32_t gl_binding (void) const;
-    void set_gl_binding (int32_t v);
-    int32_t gl_binding_black_and_white (void) const;
-    void set_gl_binding_black_and_white (int32_t v);
+    int32_t gl_binding(void) const;
+    int32_t gl_binding_black_and_white(void) const;
+    int32_t gl_binding_mask(void) const;
+    void set_gl_binding(int32_t v);
+    void set_gl_binding_black_and_white(int32_t v);
+    void set_gl_binding_mask(int32_t v);
 };
 
 typedef class Tile* Tilep;
@@ -158,11 +162,11 @@ void tile_load_arr(std::string file,
                    std::string tex_name,
                    uint32_t width, uint32_t height,
                    std::vector<std::string> arr);
-void tile_load_arr_color_and_black_and_white(std::string file,
-                                             std::string tex_name,
-                                             uint32_t width, uint32_t height,
-                                             uint32_t nargs,
-                                             const char * arr[]);
+void tile_load_arr_sprites(std::string file,
+                           std::string tex_name,
+                           uint32_t width, uint32_t height,
+                           uint32_t nargs,
+                           const char * arr[]);
 Tilep tile_find(std::string name);
 Tilep tile_find_mand(std::string name);
 Tilep tile_from_surface(SDL_Surface *surface,
