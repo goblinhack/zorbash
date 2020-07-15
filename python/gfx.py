@@ -833,7 +833,7 @@ def init_16x16():
       "ascii.player2.pose",  "ascii.player2.dead",  "",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/16x16.tga",
         name="16x16", width=16, height=16, arr=tiles)
 
@@ -994,7 +994,7 @@ def init_24x24():
             ##############################################################################################################################################
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/24x24.tga",
         name="24x24", width=24, height=24, arr=tiles)
 
@@ -1307,7 +1307,7 @@ def init_32x32():
             "",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/32x32.tga",
         name="32x32", width=32, height=32, arr=tiles)
 
@@ -1333,7 +1333,7 @@ def init_32x32_surface_effects():
             "", "", "", "", "", "", "", "",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/32x32_surface_effects.tga",
         name="32x32_surface_effects", width=32, height=32, arr=tiles)
 
@@ -1349,7 +1349,7 @@ def init_32x32_water():
         "water1h", "water2h", "water3h", "water4h", "water5h", "water6h", "water7h", "water8h",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/32x32_water.tga",
         name="32x32_water", width=32, height=32, arr=tiles)
 
@@ -1366,7 +1366,7 @@ def init_32x32_deep_water():
         "deep_water1h", "deep_water2h", "deep_water3h", "deep_water4h", "deep_water5h", "deep_water6h", "deep_water7h", "deep_water8h",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/32x32_deep_water.tga",
         name="32x32_deep_water", width=32, height=32, arr=tiles)
 
@@ -1383,7 +1383,7 @@ def init_32x32_lava():
         "lava1h", "lava2h", "lava3h", "lava4h", "lava5h", "lava6h", "lava7h", "lava8h",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/32x32_lava.tga",
         name="32x32_lava", width=32, height=32, arr=tiles)
 
@@ -1400,7 +1400,7 @@ def init_32x32_chasm():
         "chasm1h", "chasm2h", "chasm3h", "chasm4h", "chasm5h", "chasm6h", "chasm7h", "chasm8h",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/32x32_chasm.tga",
         name="32x32_chasm", width=32, height=32, arr=tiles)
 
@@ -1428,7 +1428,7 @@ def init_weapons_tiles():
             "sword1_swing_up.6",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/weapons.tga",
         name="weapons", width=48, height=48, arr=tiles)
 
@@ -1443,7 +1443,7 @@ def init_claws_tiles():
         "claws1.49", "claws1.50", "claws1.51", "claws1.52",
     ]
 
-    zx.tile_load_arr_color_and_black_and_white(
+    zx.tile_load_arr_sprites(
         file="data/gfx/hit_claws_50x50px.tga",
         name="claws", width=25, height=25, arr=tiles)
 

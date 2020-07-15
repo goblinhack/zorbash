@@ -80,7 +80,7 @@ PyObject *tile_load_arr_ (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
 }
 
-PyObject *tile_load_arr_color_and_black_and_white_ (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *file = 0;
     char *name = 0;
@@ -97,27 +97,27 @@ PyObject *tile_load_arr_color_and_black_and_white_ (PyObject *obj, PyObject *arg
     }
 
     if (!file) {
-        ERR("tile_load_arr, missing file attr");
+        ERR("tile_load_arr_sprites, missing file attr");
         Py_RETURN_NONE;
     }
 
     if (!name) {
-        ERR("tile_load_arr_color_and_black_and_white, missing name attr");
+        ERR("tile_load_arr_sprites, missing name attr");
         Py_RETURN_NONE;
     }
 
     if (!width) {
-        ERR("tile_load_arr_color_and_black_and_white, missing width attr");
+        ERR("tile_load_arr_sprites, missing width attr");
         Py_RETURN_NONE;
     }
 
     if (!height) {
-        ERR("tile_load_arr_color_and_black_and_white, missing height attr");
+        ERR("tile_load_arr_sprites, missing height attr");
         Py_RETURN_NONE;
     }
 
     if (!e) {
-        ERR("tile_load_arr_color_and_black_and_white, missing arr attr");
+        ERR("tile_load_arr_sprites, missing arr attr");
         Py_RETURN_NONE;
     }
 
@@ -127,7 +127,7 @@ PyObject *tile_load_arr_color_and_black_and_white_ (PyObject *obj, PyObject *arg
 
     memset(arr, 0, sizeof(arr));
 
-    DBG("Python: tile_load_arr_color_and_black_and_white(file=%s, name=%s, width=%d, height=%d, ...)", file, name, width, height);
+    DBG("Python: tile_load_arr_sprites(file=%s, name=%s, width=%d, height=%d, ...)", file, name, width, height);
 
     for (i=0; i<numLines; i++){
         PyObject * strObj;
@@ -139,7 +139,7 @@ PyObject *tile_load_arr_color_and_black_and_white_ (PyObject *obj, PyObject *arg
         arr[i] = py_obj_to_str(strObj);
     }
 
-    tile_load_arr_color_and_black_and_white(
+    tile_load_arr_sprites(
             std::string(file ? file : ""),
             std::string(name ? name : ""),
             width, height, numLines, arr);

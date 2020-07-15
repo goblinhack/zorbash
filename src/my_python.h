@@ -19,7 +19,7 @@ PyObject *py_obj_attr(const PyObject *py_str, const char *attr);
 PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tile_load_arr_color_and_black_and_white_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds);
 char *py_obj_attr_str(const PyObject *py_obj, const char *attr);
 char *py_obj_to_str(const PyObject *py_str);
 double py_obj_attr_double(const PyObject *py_obj, const char *attr);

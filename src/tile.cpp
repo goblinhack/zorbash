@@ -65,9 +65,13 @@ Tile::Tile (const class Tile *tile)
     py2 = tile->py2;
 #endif
     set_gl_binding(tile->gl_binding());
-    set_gl_binding_black_and_white(tile->gl_binding_black_and_white());
+    set_gl_binding_black_and_white(
+        tile->gl_binding_black_and_white());
+    set_gl_binding_mask(
+        tile->gl_binding_mask());
     tex = tile->tex;
     tex_black_and_white = tile->tex_black_and_white;
+    tex_mask = tile->tex_mask;
     std::copy(mbegin(tile->pix), mend(tile->pix), mbegin(pix));
     delay_ms = tile->delay_ms;
     dir = tile->dir;
@@ -440,7 +444,7 @@ void tile_load_arr (std::string file, std::string name,
     }
 }
 
-void tile_load_arr_color_and_black_and_white (std::string file,
+void tile_load_arr_sprites (std::string file,
                                               std::string name,
                                               uint32_t width, uint32_t height,
                                               uint32_t nargs,
@@ -448,8 +452,12 @@ void tile_load_arr_color_and_black_and_white (std::string file,
 {_
     Texp tex;
     Texp tex_black_and_white;
-    tex_load_color_and_black_and_white(&tex, &tex_black_and_white,
-                                       file, name, GL_NEAREST);
+    Texp tex_mask;
+
+    tex_load(&tex,
+             &tex_black_and_white,
+             &tex_mask,
+             file, name, GL_NEAREST);
 
     float fw = 1.0 / (((float)tex_get_width(tex)) / ((float)width));
     float fh = 1.0 / (((float)tex_get_height(tex)) / ((float)height));
@@ -494,8 +502,12 @@ void tile_load_arr_color_and_black_and_white (std::string file,
             t->pix_height = height;
             t->tex = tex;
             t->tex_black_and_white = tex_black_and_white;
+            t->tex_mask = tex_mask;
             t->set_gl_binding(tex_get_gl_binding(tex));
-            t->set_gl_binding_black_and_white(tex_get_gl_binding(tex_black_and_white));
+            t->set_gl_binding_black_and_white(
+                 tex_get_gl_binding(tex_black_and_white));
+            t->set_gl_binding_mask(
+                 tex_get_gl_binding(tex_mask));
 
             t->x1 = fw * (float)(x);
             t->y1 = fh * (float)(y);
@@ -1027,4 +1039,14 @@ int32_t Tile::gl_binding_black_and_white (void) const
 void Tile::set_gl_binding_black_and_white (int32_t v) 
 {
     _gl_binding_black_and_white = v;
+}
+
+int32_t Tile::gl_binding_mask (void) const 
+{
+    return (_gl_binding_mask);
+}
+
+void Tile::set_gl_binding_mask (int32_t v) 
+{
+    _gl_binding_mask = v;
 }
