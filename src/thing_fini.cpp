@@ -75,8 +75,12 @@ void Thing::destroy (void)
 
     game->world.free_thing_id(this);
 
-    if (this == level->player) {
+    if (level->player == this) {
         level->player = nullptr;
+    }
+
+    if (level->cursor == this) {
+        level->cursor = nullptr;
     }
 
     if (monstp) {

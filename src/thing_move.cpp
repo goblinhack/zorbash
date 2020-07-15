@@ -115,17 +115,19 @@ bool Thing::move (fpoint future_pos,
             level->map_follow_player = true;
             level->cursor_needs_update = true;
         }
+    }
+_
+    auto t = nearby_most_dangerous_thing_get();
+    if (t) {_
+        auto free_attack =
+             ((t->mid_at.x >= mid_at.x) && left) ||
+             ((t->mid_at.x <= mid_at.x) && right) ||
+             ((t->mid_at.y >= mid_at.y) && up) ||
+             ((t->mid_at.y <= mid_at.y) && down);
 
-        auto t = nearby_most_dangerous_thing_get();
-        if (t) {
-            auto free_attack =
-                 ((t->mid_at.x >= mid_at.x) && left) ||
-                 ((t->mid_at.x <= mid_at.x) && right) ||
-                 ((t->mid_at.y >= mid_at.y) && up) ||
-                 ((t->mid_at.y <= mid_at.y) && down);
-
-            if (free_attack) {
-                if (t->attack(this)) {
+        if (free_attack) {_
+            if (t->attack(this)) {_
+                if (is_player()) {
                     std::string s = t->text_The() + " attacks as you run";
                     MINICON("%s", s.c_str());
                 }
