@@ -118,6 +118,10 @@ bool Thing::attack (Thingp it)
         }
     }
 
+    if (!possible_to_attack(it)) {
+        return false;
+    }
+
     auto damage = get_stats_attack();
     if (it->is_hit_by(this, damage)) {
         if (is_loggable_for_unimportant_stuff()) {

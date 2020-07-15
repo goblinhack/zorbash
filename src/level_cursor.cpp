@@ -12,7 +12,7 @@
 #include "my_game_status.h"
 
 void Level::cursor_check_if_scroll_needed (void)
-{
+{_
     if (map_follow_player) {
         if (cursor) {
             if (player) {
@@ -45,7 +45,7 @@ void Level::cursor_find_on_visible_things (
 // Move the cursor to whatever thing it is now over
 //
 void Level::cursor_move (void)
-{
+{_
     if (is_mouse_over_actionbar()) {
         return;
     }
@@ -85,7 +85,8 @@ void Level::cursor_move (void)
         cursor_needs_update = false;
     }
 
-    if (cursor) {
+    if (cursor) {_
+        verify(cursor);
         if (cursor_at != cursor_at_old) {
             cursor_at_old = cursor_at;
             cursor->move(cursor_at);
