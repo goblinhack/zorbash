@@ -269,8 +269,8 @@ private:
     int _is_rrr76 {};
     int _is_rrr77 {};
     int _is_rrr78 {};
-    int _is_rrr79 {};
-    int _is_rrr80 {};
+    int _is_killed_on_hit_or_miss {};
+    int _is_killed_on_hitting {};
     int _is_collect_as_keys {};
     int _is_ethereal {};
     int _is_potion_eater {};
@@ -607,8 +607,8 @@ public:
     int is_rrr76(void) const;
     int is_rrr77(void) const;
     int is_rrr78(void) const;
-    int is_rrr79(void) const;
-    int is_rrr80(void) const;
+    int is_killed_on_hit_or_miss(void) const;
+    int is_killed_on_hitting(void) const;
     int is_collect_as_keys(void) const;
     int is_ethereal(void) const;
     int is_potion_eater(void) const;
@@ -853,8 +853,8 @@ public:
     void set_is_rrr76(int);
     void set_is_rrr77(int);
     void set_is_rrr78(int);
-    void set_is_rrr79(int);
-    void set_is_rrr80(int);
+    void set_is_killed_on_hit_or_miss(int);
+    void set_is_killed_on_hitting(int);
     void set_is_collect_as_keys(int);
     void set_is_ethereal(int);
     void set_is_potion_eater(int);

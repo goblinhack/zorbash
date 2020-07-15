@@ -57,7 +57,7 @@ Thingp Thing::nearby_most_dangerous_thing_get (void)
          possible.end(),
          [](const std::pair<Thingp, int> &a,
             const std::pair<Thingp, int> &b) -> bool {
-             return a.second < b.second;
+             return a.second > b.second;
          });
 
     return possible[0].first;

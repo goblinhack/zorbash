@@ -236,9 +236,9 @@ int Tp::is_rrr75(void) const { return _is_rrr75; }
 int Tp::is_rrr76(void) const { return _is_rrr76; }
 int Tp::is_rrr77(void) const { return _is_rrr77; }
 int Tp::is_rrr78(void) const { return _is_rrr78; }
-int Tp::is_rrr79(void) const { return _is_rrr79; }
+int Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
-int Tp::is_rrr80(void) const { return _is_rrr80; }
+int Tp::is_killed_on_hitting(void) const { return _is_killed_on_hitting; }
 int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
 int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_potion_eater(void) const { return _is_potion_eater; }
@@ -477,9 +477,9 @@ void Tp::set_is_rrr75(int v) { _is_rrr75 = v; }
 void Tp::set_is_rrr76(int v) { _is_rrr76 = v; }
 void Tp::set_is_rrr77(int v) { _is_rrr77 = v; }
 void Tp::set_is_rrr78(int v) { _is_rrr78 = v; }
-void Tp::set_is_rrr79(int v) { _is_rrr79 = v; }
+void Tp::set_is_killed_on_hit_or_miss(int v) { _is_killed_on_hit_or_miss = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
-void Tp::set_is_rrr80(int v) { _is_rrr80 = v; }
+void Tp::set_is_killed_on_hitting(int v) { _is_killed_on_hitting = v; }
 void Tp::set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
 void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
 void Tp::set_is_potion_eater(int v) { _is_potion_eater = v; }

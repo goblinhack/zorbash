@@ -33,7 +33,7 @@ void Thing::lava_tick (void)
                     if (!tpp->is_lava()) {
                         continue;
                     }
-                    ai_hit_me_if_possible(t, t->get_stats_attack());
+                    is_hit_by(t, t->get_stats_attack());
                     break;
                 } FOR_ALL_THINGS_END()
             } else {

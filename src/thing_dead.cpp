@@ -18,7 +18,6 @@ void Thing::kill (Thingp killer, const char *reason)
     if (is_dead) {
         return;
     }
-    is_dead = true;
 
     //
     // Unwield weapons
@@ -37,6 +36,11 @@ void Thing::kill (Thingp killer, const char *reason)
             MINICON("%s is dead, %s", text_The().c_str(), reason);
         }
     }
+
+    //
+    // Set is_dead after the log message or we print it as dead
+    //
+    is_dead = true;
 
     if (is_resurrectable()) {
         set_tick_resurrect_when(game->tick_current + get_resurrect());

@@ -738,6 +738,7 @@ public:
     bool ai_wander(void);
     bool ascend(void);
     bool attack(fpoint future_pos);
+    bool attack(Thingp it);
     bool chasm_tick();
     bool collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
@@ -812,8 +813,8 @@ public:
     int ai_choose_goal(void);
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
-    int ai_hit_me_if_possible(Thingp hitter);
-    int ai_hit_me_if_possible(Thingp hitter, int damage);
+    int is_hit_by(Thingp hitter);
+    int is_hit_by(Thingp hitter, int damage);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
@@ -995,9 +996,9 @@ public:
     int is_rrr76(void) const;
     int is_rrr77(void) const;
     int is_rrr78(void) const;
-    int is_rrr79(void) const;
+    int is_killed_on_hit_or_miss(void) const;
     int is_rrr8(void) const;
-    int is_rrr80(void) const;
+    int is_killed_on_hitting(void) const;
     int is_rrr9(void) const;
     int is_secret_door(void) const;
     int is_shovable(void) const;

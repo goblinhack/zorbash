@@ -874,14 +874,14 @@ int Thing::is_rrr78(void) const
     return (tp()->is_rrr78());
 }
 
-int Thing::is_rrr79(void) const
+int Thing::is_killed_on_hit_or_miss(void) const
 {_
-    return (tp()->is_rrr79());
+    return (tp()->is_killed_on_hit_or_miss());
 }
 
-int Thing::is_rrr80(void) const
+int Thing::is_killed_on_hitting(void) const
 {_
-    return (tp()->is_rrr80());
+    return (tp()->is_killed_on_hitting());
 }
 
 int Thing::is_collect_as_keys(void) const
