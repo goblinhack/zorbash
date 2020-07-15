@@ -15,21 +15,15 @@ public:
     ThingColl(void) {}
     ThingColl(Thingp      target,
               std::string reason,
-              uint16_t    priority,
-              uint8_t     hitter_killed_on_hitting,
-              uint8_t     hitter_killed_on_hit_or_miss) :
+              uint16_t    priority) :
         target(target),
         reason(reason),
-        priority(priority),
-        hitter_killed_on_hitting(hitter_killed_on_hitting),
-        hitter_killed_on_hit_or_miss(hitter_killed_on_hit_or_miss)
+        priority(priority)
     { }
 
     Thingp      target {nullptr};
     std::string reason;
     uint16_t    priority {0};
-    uint8_t     hitter_killed_on_hitting { false };
-    uint8_t     hitter_killed_on_hit_or_miss { false };
 };
 
 static std::vector<class ThingColl> thing_colls;
@@ -520,40 +514,13 @@ static int circle_circle_collision_attack (Thingp A,
 // Add a thing to the list of things that could be hit on this attack.
 //
 static void
-thing_add_ai_possible_hit (Thingp target,
-                           std::string reason,
-                           int hitter_killed_on_hitting,
-                           int hitter_killed_on_hit_or_miss)
+thing_add_ai_possible_hit (Thingp target, std::string reason)
 {
     thing_colls.push_back(
       ThingColl(target,
                 reason,
-                target->tp()->collision_hit_priority(),
-                hitter_killed_on_hitting,
-                hitter_killed_on_hit_or_miss));
+                target->tp()->collision_hit_priority()));
 }
-
-static void
-thing_ai_possible_hit_add (Thingp target, std::string reason)
-{
-    thing_add_ai_possible_hit(target, reason, false, false);
-}
-
-#if 0
-static void
-thing_ai_possible_hit_add_hitter_killed_on_hitting (Thingp target,
-                                                    std::string reason)
-{
-    thing_add_ai_possible_hit(target, reason, true, false);
-}
-
-static void
-thing_ai_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
-                                                     std::string reason)
-{
-    thing_add_ai_possible_hit(target, reason, false, true);
-}
-#endif
 
 //
 // Reset the list of things we can possibly hit.
@@ -654,49 +621,7 @@ _
             log("best cand %s, damage %d", it->to_string().c_str(), damage);
         }
 
-        if (is_player() && will_eat(it)) {
-            carry(it);
-            log("collect %s", it->to_string().c_str());
-            ret = true;
-        } else if (it->is_dead && will_eat(it)) {
-            //
-            // Eat the corpse!
-            //
-            if (eat(it)) {
-                //
-                // Can't kill it twice, so hide it
-                //
-                it->hide();
-                *target_attacked = true;
-                ret = true;
-            }
-        } else if (it->ai_hit_me_if_possible(me, damage)) {
-            if (is_loggable_for_unimportant_stuff()) {
-                log("collision: will hit %s for %d damage",
-                    it->to_string().c_str(), damage);
-            }
-            if (me->is_attack_lunge()) {
-                me->lunge(it->get_interpolated_mid_at());
-            }
-            if (me->is_attack_eater()) {
-                health_boost(it->get_nutrition());
-            }
-            if (best->hitter_killed_on_hitting) {
-                me->dead("suicide");
-            }
-            *target_attacked = true;
-        } else if (best->hitter_killed_on_hit_or_miss) {
-            //
-            // Missiles?
-            //
-            if (is_loggable_for_unimportant_stuff()) {
-                log("collision: will hit %s and kill self",
-                    it->to_string().c_str());
-            }
-            if (me->is_attack_lunge()) {
-                me->lunge(it->get_interpolated_mid_at());
-            }
-            me->dead("suicide");
+        if (attack(it)) {
             *target_attacked = true;
             ret = true;
         } else {
@@ -895,7 +820,7 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
             if (is_loggable_for_unimportant_stuff()) {
                 log("candidate to attack %s", it->to_string().c_str());
             }
-            thing_ai_possible_hit_add(it, "battle");
+            thing_add_ai_possible_hit(it, "battle");
         } else {
             if (is_loggable_for_unimportant_stuff()) {
                 log("cannot attack %s, no overlap", it->to_string().c_str());
@@ -906,7 +831,7 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
             log("candidate to eat %s", it->to_string().c_str());
         }
         if (things_overlap(me, me->mid_at, it)) {
-            thing_ai_possible_hit_add(it, "eat");
+            thing_add_ai_possible_hit(it, "eat");
         }
     } else if (it->is_dead) {
         if (is_loggable_for_unimportant_stuff()) {
@@ -1023,7 +948,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
         log("falling, ignore collisions");
         return false;
     }
-    log("check %s", it->to_string().c_str());
+    // log("check %s", it->to_string().c_str());
 
     if (it->is_monst()) {
         if (is_torch()) {
@@ -1258,8 +1183,12 @@ _
                     log("ignore jumping %s", it->to_string().c_str());
                     continue;
                 }
-                if (it->is_hidden || it->is_falling) {
-                    log("ignore %s", it->to_string().c_str());
+                if (it->is_hidden) {
+                    log("ignore hidden %s", it->to_string().c_str());
+                    continue;
+                }
+                if (it->is_falling) {
+                    log("ignore falling %s", it->to_string().c_str());
                     continue;
                 }
 

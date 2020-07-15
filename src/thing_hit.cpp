@@ -203,7 +203,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::ai_hit_me_if_possible (Thingp hitter, int damage)
+int Thing::is_hit_by (Thingp hitter, int damage)
 {_
     hitter->log("possible hit %s for %u", to_string().c_str(), damage);
 _
@@ -365,7 +365,7 @@ _
     return (hit_and_killed);
 }
 
-int Thing::ai_hit_me_if_possible (Thingp hitter)
+int Thing::is_hit_by (Thingp hitter)
 {_
-    return (ai_hit_me_if_possible(hitter, 0));
+    return (is_hit_by(hitter, 0));
 }

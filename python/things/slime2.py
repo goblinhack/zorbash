@@ -118,6 +118,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="slime2", text_name="slimer")
+    tp_init(name="slime2", text_name="mucoid")
 
 init()

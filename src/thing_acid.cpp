@@ -33,7 +33,7 @@ void Thing::acid_tick (void)
                     if (!tpp->is_acid()) {
                         continue;
                     }
-                    ai_hit_me_if_possible(t, t->get_stats_attack());
+                    is_hit_by(t, t->get_stats_attack());
                     break;
                 } FOR_ALL_THINGS_END()
             } else {

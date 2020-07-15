@@ -662,8 +662,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr76)
     TP_SET_DECL(is_rrr77)
     TP_SET_DECL(is_rrr78)
-    TP_SET_DECL(is_rrr79)
-    TP_SET_DECL(is_rrr80)
+    TP_SET_DECL(is_killed_on_hit_or_miss)
+    TP_SET_DECL(is_killed_on_hitting)
     TP_SET_DECL(is_collect_as_keys)
     TP_SET_DECL(is_ethereal)
     TP_SET_DECL(is_potion_eater)
@@ -1072,6 +1072,7 @@ static void python_add_consts (void)
 
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_NORMAL", MAP_PRIO_NORMAL);
+    PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
 
     PyModule_AddIntConstant(zx_mod, "KMOD_LSHIFT", KMOD_LSHIFT);
     PyModule_AddIntConstant(zx_mod, "KMOD_RSHIFT", KMOD_RSHIFT);

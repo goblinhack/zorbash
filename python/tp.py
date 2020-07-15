@@ -410,11 +410,11 @@ class Tp:
     def set_is_rrr78(self, value):
         zx.tp_set_is_rrr78(self, value)
 
-    def set_is_rrr79(self, value):
-        zx.tp_set_is_rrr79(self, value)
+    def set_is_killed_on_hit_or_miss(self, value):
+        zx.tp_set_is_killed_on_hit_or_miss(self, value)
 
-    def set_is_rrr80(self, value):
-        zx.tp_set_is_rrr80(self, value)
+    def set_is_killed_on_hitting(self, value):
+        zx.tp_set_is_killed_on_hitting(self, value)
 
     def set_is_collect_as_keys(self, value):
         zx.tp_set_is_collect_as_keys(self, value)

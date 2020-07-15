@@ -38,7 +38,7 @@ void Thing::used (Thingp what, Thingp target)
 bool Thing::use (Thingp what)
 {_
     if (what->is_weapon()) {
-        MINICON("You weild the %s", what->text_the().c_str());
+        MINICON("You wield the %s", what->text_the().c_str());
         MINICON("TODO");
         game->tick_begin();
     } else if (what->is_food()) {

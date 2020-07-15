@@ -125,12 +125,10 @@ bool Thing::move (fpoint future_pos,
                  ((t->mid_at.y <= mid_at.y) && down);
 
             if (free_attack) {
-#if 0
                 if (t->attack(this)) {
                     std::string s = t->text_The() + " attacks as you run";
                     MINICON("%s", s.c_str());
                 }
-#endif
             }
         }
     }

@@ -93,43 +93,61 @@ bool Thing::attack (fpoint future_pos)
     return (move(future_pos, up, down, left, right, attack, idle, true));
 }
 
-#if 0
 bool Thing::attack (Thingp it)
 {
-        auto damage = get_stats_attack();
-        if (is_loggable_for_unimportant_stuff()) {
-            log("best cand %s, damage %d", it->to_string().c_str(), damage);
-        }
+    //
+    // Carry to eat later
+    //
+    if (is_player() && will_eat(it)) {
+        carry(it);
+        log("carry to eat later %s", it->to_string().c_str());
+        return true;
+    }
 
-        if (is_player() && will_eat(it)) {
-            carry(it);
-            log("collect %s", it->to_string().c_str());
-            ret = true;
-        } else if (it->is_dead && will_eat(it)) {
+    //
+    // Eat corpse?
+    //
+    if (it->is_dead && will_eat(it)) {
+        if (eat(it)) {
             //
-            // Eat the corpse!
+            // Can't kill it twice, so hide it
             //
-            if (eat(it)) {
-                //
-                // Can't kill it twice, so hide it
-                //
-                it->hide();
-                *target_attacked = true;
-                ret = true;
-            }
-        } else if (it->ai_hit_me_if_possible(me, damage)) {
-            if (is_loggable_for_unimportant_stuff()) {
-                log("collision: will hit %s for %d damage",
-                    it->to_string().c_str(), damage);
-            }
-            if (me->is_attack_lunge()) {
-                me->lunge(it->get_interpolated_mid_at());
-            }
-            if (me->is_attack_eater()) {
-                health_boost(it->get_nutrition());
-            }
-            if (best->hitter_killed_on_hitting) {
-                me->dead("suicide");
-            }
-            *target_attacked = true;
-#endif
+            log("eat corpse %s", it->to_string().c_str());
+            it->hide();
+            return true;
+        }
+    }
+
+    auto damage = get_stats_attack();
+    if (it->is_hit_by(this, damage)) {
+        if (is_loggable_for_unimportant_stuff()) {
+            log("attack hit %s for %d", it->to_string().c_str(), damage);
+        }
+        if (is_attack_lunge()) {
+            lunge(it->get_interpolated_mid_at());
+        }
+        if (is_attack_eater()) {
+            health_boost(it->get_nutrition());
+        }
+        if (is_killed_on_hitting() || is_killed_on_hit_or_miss()) {
+            dead("suicide");
+        }
+        return true;
+    }
+
+    //
+    // Missiles?
+    //
+    if (is_killed_on_hit_or_miss()) {
+        if (is_loggable_for_unimportant_stuff()) {
+            log("attack missed %s", it->to_string().c_str());
+        }
+        if (is_attack_lunge()) {
+            lunge(it->get_interpolated_mid_at());
+        }
+        dead("suicide");
+        return true;
+    }
+
+    return false;
+}

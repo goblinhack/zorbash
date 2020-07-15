@@ -92,7 +92,7 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="slime1", text_name="baby slimer")
+    tp_init(name="slime1", text_name="baby mucoid")
 
 init()
 
