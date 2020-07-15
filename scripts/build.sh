@@ -1,5 +1,5 @@
 #!/bin/bash
-# 
+#
 # Copyright (C) 2014 Neil McGill
 #
 # This game is free software; you can redistribute it and/or
@@ -183,7 +183,7 @@ case `uname` in
         for i in \
             $(which python3) \
             /mingw/bin/python3 \
-            /mingw64/bin/python3 
+            /mingw64/bin/python3
         do
             if [ -x $i ]
             then
@@ -196,7 +196,7 @@ case `uname` in
         for i in \
             $(which python3) \
             /opt/local/bin/python3 \
-            /usr/bin/python3 
+            /usr/bin/python3
         do
             if [ -x $i ]
             then
@@ -212,7 +212,7 @@ case `uname` in
         for i in \
             $(which python-config) \
             /mingw/bin/python-config \
-            /mingw64/bin/python-config 
+            /mingw64/bin/python-config
         do
             if [ -x $i ]
             then
@@ -241,7 +241,7 @@ case `uname` in
         for i in \
             $(which python) \
             /mingw/bin/python \
-            /mingw64/bin/python 
+            /mingw64/bin/python
         do
             if [ -x $i ]
             then
@@ -428,14 +428,15 @@ fi
 cd ..
 
 #
-# Gives warings at runtime on MACOS
+# 3.8 added --embed for -lpython
 #
-Python_LIBS=`$Python_CONFIG --ldflags`
-
-if [ $? -ne 0 ]
-then
-    log_err "Please install Python 3. $Python_CONFIG failed."
-    exit 1
+Python_LIBS=`$Python_CONFIG --ldflags --embed 2>/dev/null`
+if [ $? -ne 0 ]; then
+    Python_LIBS=`$Python_CONFIG --ldflags`
+    if [ $? -ne 0 ]; then
+        log_err "Please install Python 3. $Python_CONFIG failed."
+        exit 1
+    fi
 fi
 
 #
@@ -606,7 +607,7 @@ then
         log_err "No makefile?!"
         exit 1
     fi
-else 
+else
     log_err "Makefile create fail?!"
     exit 1
 fi

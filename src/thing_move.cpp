@@ -100,9 +100,7 @@ bool Thing::move (fpoint future_pos,
         game->tick_begin();
         g_thing_callframes_depth = callframes_depth - 1;
         log("player tick");
-    }
-_
-    if (is_player()) {
+
         if (mid_at != future_pos) {
             if (collision_check_only(future_pos)) {
                 if (shove_allowed) {
@@ -112,12 +110,28 @@ _
                 return (false);
             }
         }
-    }
 
-    if (is_player()) {
         if (!level->map_follow_player) {
             level->map_follow_player = true;
             level->cursor_needs_update = true;
+        }
+
+        auto t = nearby_most_dangerous_thing_get();
+        if (t) {
+            auto free_attack =
+                 ((t->mid_at.x >= mid_at.x) && left) ||
+                 ((t->mid_at.x <= mid_at.x) && right) ||
+                 ((t->mid_at.y >= mid_at.y) && up) ||
+                 ((t->mid_at.y <= mid_at.y) && down);
+
+            if (free_attack) {
+#if 0
+                if (t->attack(this)) {
+                    std::string s = t->text_The() + " attacks as you run";
+                    MINICON("%s", s.c_str());
+                }
+#endif
+            }
         }
     }
 
@@ -129,23 +143,6 @@ _
         } else if (future_pos.x < mid_at.x) {
             if (!is_facing_left && !get_timestamp_flip_start()) {
                 set_timestamp_flip_start(time_get_time_ms_cached());
-            }
-        }
-    }
-
-    if (is_player()) {
-        auto t = nearby_most_dangerous_thing_get();
-        if (t) {
-            auto free_attack =
-                 ((t->mid_at.x >= mid_at.x) && left) ||
-                 ((t->mid_at.x <= mid_at.x) && right) ||
-                 ((t->mid_at.y >= mid_at.y) && up) ||
-                 ((t->mid_at.y <= mid_at.y) && down);
-
-            if (free_attack) {
-                std::string s = t->text_The() + " attacks as you run";
-                MINICON("%s", s.c_str());
-                game->tick_begin();
             }
         }
     }

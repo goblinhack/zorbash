@@ -678,10 +678,12 @@ _
             if (me->is_attack_lunge()) {
                 me->lunge(it->get_interpolated_mid_at());
             }
+            if (me->is_attack_eater()) {
+                health_boost(it->get_nutrition());
+            }
             if (best->hitter_killed_on_hitting) {
                 me->dead("suicide");
             }
-            health_boost(it->get_nutrition());
             *target_attacked = true;
         } else if (best->hitter_killed_on_hit_or_miss) {
             //

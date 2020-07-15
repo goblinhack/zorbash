@@ -92,3 +92,44 @@ bool Thing::attack (fpoint future_pos)
     verify(this);
     return (move(future_pos, up, down, left, right, attack, idle, true));
 }
+
+#if 0
+bool Thing::attack (Thingp it)
+{
+        auto damage = get_stats_attack();
+        if (is_loggable_for_unimportant_stuff()) {
+            log("best cand %s, damage %d", it->to_string().c_str(), damage);
+        }
+
+        if (is_player() && will_eat(it)) {
+            carry(it);
+            log("collect %s", it->to_string().c_str());
+            ret = true;
+        } else if (it->is_dead && will_eat(it)) {
+            //
+            // Eat the corpse!
+            //
+            if (eat(it)) {
+                //
+                // Can't kill it twice, so hide it
+                //
+                it->hide();
+                *target_attacked = true;
+                ret = true;
+            }
+        } else if (it->ai_hit_me_if_possible(me, damage)) {
+            if (is_loggable_for_unimportant_stuff()) {
+                log("collision: will hit %s for %d damage",
+                    it->to_string().c_str(), damage);
+            }
+            if (me->is_attack_lunge()) {
+                me->lunge(it->get_interpolated_mid_at());
+            }
+            if (me->is_attack_eater()) {
+                health_boost(it->get_nutrition());
+            }
+            if (best->hitter_killed_on_hitting) {
+                me->dead("suicide");
+            }
+            *target_attacked = true;
+#endif
