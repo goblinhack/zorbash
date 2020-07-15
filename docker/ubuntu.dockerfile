@@ -37,5 +37,5 @@ RUN mkdir -p /root/.ssh/ && \
 
 RUN git clone git@github.com:goblinhack/zorbash.git
 RUN /bin/rm -rf /root/.ssh/id_rsa
-RUN cd zorbash && sh ./RUNME && ./zorbash
+#RUN cd zorbash && sh ./RUNME && ./zorbash
 RUN bash
