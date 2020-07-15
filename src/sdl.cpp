@@ -1301,18 +1301,63 @@ void sdl_loop (void)
                          game->config.outer_pix_height);
 
         //
+        // Less frequent updates
+        //
+        int timestamp_now = time_update_time_milli();
+        auto update_slow = (timestamp_now - ui_timestamp_slow_last >=
+                              UI_UPDATE_SLOW_MS);
+        auto update_fast = (timestamp_now - ui_timestamp_fast_last >=
+                              UI_POLL_EVENTS_MS);
+        //
+        // Less frequent updates
+        //
+        if (unlikely(update_slow)) {
+            ui_timestamp_slow_last = timestamp_now;
+
+            //
+            // Update status and sidebars
+            //
+            if (game && !game->paused()) {
+                if (wid_console_window && wid_console_window->visible) {
+                    //
+                    // Not when console is in front
+                    //
+                } else {
+                    //
+                    // Must do this before wid_display_all so that the
+                    // on screen widgets are updated with the new wid
+                    // we are about to make.
+                    //
+                    game_status_wid_init();
+                    wid_display_all();
+                }
+            }
+
+            //
+            // Update FPS counter.
+            //
+            if (game->config.fps_counter) {
+                game->fps_value = (1000 / UI_UPDATE_SLOW_MS) * frames;
+                frames = 0;
+            }
+        }
+
+        //
         // Do processing of some things, like reading the keyboard or doing
         // stuff with widgets only occasionally if we do not need to.
         //
-        int timestamp_now = time_update_time_milli();
-        if (unlikely(timestamp_now - ui_timestamp_fast_last > 
-                       UI_POLL_EVENTS_MS)) {
+        if (unlikely(update_fast)) {
             ui_timestamp_fast_last = timestamp_now;
 
             //
             // Clean up dead widgets.
             //
             wid_gc_all();
+
+            //
+            // Display UI.
+            //
+            wid_display_all();
 
             //
             // Read events
@@ -1338,24 +1383,18 @@ void sdl_loop (void)
                     game->level->tick();
                 }
             }
-
-            //
-            // Display UI.
-            //
-            wid_display_all();
         }
 
         blit_fbo_bind(FBO_FINAL);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
         glBlendFunc(GL_ONE, GL_ZERO);
         blit_fbo_outer(FBO_MAP);
 
         //
         // Draw the map
         //
-        if (game->config.gfx_minimap) {
+        if (unlikely(game->config.gfx_minimap)) {
             float mx = 0.2;
             float my = mx * game->config.video_w_h_ratio;
             mx *= game->config.outer_pix_width;
@@ -1376,51 +1415,22 @@ void sdl_loop (void)
         blit_fbo_unbind();
 
         glBlendFunc(GL_ONE, GL_ZERO);
-        if (game->config.gfx_inverted) {
+        if (unlikely(game->config.gfx_inverted)) {
             glLogicOp(GL_COPY_INVERTED);
             glEnable(GL_COLOR_LOGIC_OP);
-        }
-        blit_fbo_outer(FBO_FINAL);
-        if (game->config.gfx_inverted) {
+            blit_fbo_outer(FBO_FINAL);
             glLogicOp(GL_COPY);
             glDisable(GL_COLOR_LOGIC_OP);
+        } else {
+            blit_fbo_outer(FBO_FINAL);
         }
 
         //
-        // Less frequent updates
+        // Screenshot?
         //
-        if (unlikely(timestamp_now - ui_timestamp_slow_last >= 
-                       UI_UPDATE_SLOW_MS)) {
-            ui_timestamp_slow_last = timestamp_now;
-
-            //
-            // Update status and sidebars
-            //
-            if (game && !game->paused()) {
-                if (wid_console_window && wid_console_window->visible) {
-                    //
-                    // Not when console is in front
-                    //
-                } else {
-                    game_status_wid_init();
-                }
-            }
-
-            //
-            // Update FPS counter.
-            //
-            if (game->config.fps_counter) {
-                game->fps_value = (1000 / UI_UPDATE_SLOW_MS) * frames;
-                frames = 0;
-            }
-
-            //
-            // Screenshot?
-            //
-            if (unlikely(g_do_screenshot)) {
-                g_do_screenshot = 0;
-                sdl_screenshot_do();
-            }
+        if (unlikely(g_do_screenshot)) {
+            g_do_screenshot = 0;
+            sdl_screenshot_do();
         }
 
         SDL_Delay(game->config.sdl_delay);

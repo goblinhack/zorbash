@@ -107,14 +107,12 @@ void Level::update_minimap (void)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
 
-                if (!is_visited(x, y)) {
-                    if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
-                        c = DARKGREEN;
-                        c.a = 100;
-                    } else {
-                        c = DARKGREEN;
-                        c.a = 30;
-                    }
+                if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
+                    c = GRAY;
+                    c.a = 200;
+                } else if (!is_visited(x, y)) {
+                    c = BLACK;
+                    c.a = 50;
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
@@ -150,6 +148,7 @@ void Level::update_minimap (void)
                     c = BLACK;
                 }
 
+#if 0
                 if ((x >= map_tl.x) && (x <= map_br.x) &&
                     (y >= map_tl.y) && (y <= map_br.y)) {
                 } else {
@@ -157,7 +156,7 @@ void Level::update_minimap (void)
                     c.g /= 2;
                     c.b /= 2;
                 }
-
+#endif
                 glcolor(c);
 
                 auto X = x;
