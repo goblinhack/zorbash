@@ -398,14 +398,14 @@ class Tp:
     def set_is_rrr74(self, value):
         zx.tp_set_is_rrr74(self, value)
 
-    def set_is_rrr75(self, value):
-        zx.tp_set_is_rrr75(self, value)
+    def set_is_gfx_moves_ahead_shown(self, value):
+        zx.tp_set_is_gfx_moves_ahead_shown(self, value)
 
-    def set_is_rrr76(self, value):
-        zx.tp_set_is_rrr76(self, value)
+    def set_is_gfx_health_bar_shown_only_when_injured(self, value):
+        zx.tp_set_is_gfx_health_bar_shown_only_when_injured(self, value)
 
-    def set_is_rrr77(self, value):
-        zx.tp_set_is_rrr77(self, value)
+    def set_is_gfx_health_bar_shown(self, value):
+        zx.tp_set_is_gfx_health_bar_shown(self, value)
 
     def set_is_open_on_death(self, value):
         zx.tp_set_is_open_on_death(self, value)

@@ -2,6 +2,7 @@ bugs
 ----
 description text
 highlight object in red outline when selected in sidebar
+eat blood?
 sidebar has player 1 not 2
 click on monst or door should attack
 click on minimap to move

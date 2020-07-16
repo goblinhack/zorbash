@@ -232,9 +232,9 @@ int Tp::is_rrr71(void) const { return _is_rrr71; }
 int Tp::is_rrr72(void) const { return _is_rrr72; }
 int Tp::is_rrr73(void) const { return _is_rrr73; }
 int Tp::is_rrr74(void) const { return _is_rrr74; }
-int Tp::is_rrr75(void) const { return _is_rrr75; }
-int Tp::is_rrr76(void) const { return _is_rrr76; }
-int Tp::is_rrr77(void) const { return _is_rrr77; }
+int Tp::is_gfx_moves_ahead_shown(void) const { return _is_gfx_moves_ahead_shown; }
+int Tp::is_gfx_health_bar_shown_only_when_injured(void) const { return _is_gfx_health_bar_shown_only_when_injured; }
+int Tp::is_gfx_health_bar_shown(void) const { return _is_gfx_health_bar_shown; }
 int Tp::is_open_on_death(void) const { return _is_open_on_death; }
 int Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
@@ -473,9 +473,9 @@ void Tp::set_is_rrr71(int v) { _is_rrr71 = v; }
 void Tp::set_is_rrr72(int v) { _is_rrr72 = v; }
 void Tp::set_is_rrr73(int v) { _is_rrr73 = v; }
 void Tp::set_is_rrr74(int v) { _is_rrr74 = v; }
-void Tp::set_is_rrr75(int v) { _is_rrr75 = v; }
-void Tp::set_is_rrr76(int v) { _is_rrr76 = v; }
-void Tp::set_is_rrr77(int v) { _is_rrr77 = v; }
+void Tp::set_is_gfx_moves_ahead_shown(int v) { _is_gfx_moves_ahead_shown = v; }
+void Tp::set_is_gfx_health_bar_shown_only_when_injured(int v) { _is_gfx_health_bar_shown_only_when_injured = v; }
+void Tp::set_is_gfx_health_bar_shown(int v) { _is_gfx_health_bar_shown = v; }
 void Tp::set_is_open_on_death(int v) { _is_open_on_death = v; }
 void Tp::set_is_killed_on_hit_or_miss(int v) { _is_killed_on_hit_or_miss = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }

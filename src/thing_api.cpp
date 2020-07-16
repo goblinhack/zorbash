@@ -854,19 +854,19 @@ int Thing::is_rrr74(void) const
     return (tp()->is_rrr74());
 }
 
-int Thing::is_rrr75(void) const
+int Thing::is_gfx_moves_ahead_shown(void) const
 {_
-    return (tp()->is_rrr75());
+    return (tp()->is_gfx_moves_ahead_shown());
 }
 
-int Thing::is_rrr76(void) const
+int Thing::is_gfx_health_bar_shown_only_when_injured(void) const
 {_
-    return (tp()->is_rrr76());
+    return (tp()->is_gfx_health_bar_shown_only_when_injured());
 }
 
-int Thing::is_rrr77(void) const
+int Thing::is_gfx_health_bar_shown(void) const
 {_
-    return (tp()->is_rrr77());
+    return (tp()->is_gfx_health_bar_shown());
 }
 
 int Thing::is_open_on_death(void) const

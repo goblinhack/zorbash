@@ -265,9 +265,9 @@ private:
     int _is_rrr72 {};
     int _is_rrr73 {};
     int _is_rrr74 {};
-    int _is_rrr75 {};
-    int _is_rrr76 {};
-    int _is_rrr77 {};
+    int _is_gfx_moves_ahead_shown {};
+    int _is_gfx_health_bar_shown_only_when_injured {};
+    int _is_gfx_health_bar_shown {};
     int _is_open_on_death {};
     int _is_killed_on_hit_or_miss {};
     int _is_killed_on_hitting {};
@@ -603,9 +603,9 @@ public:
     int is_rrr72(void) const;
     int is_rrr73(void) const;
     int is_rrr74(void) const;
-    int is_rrr75(void) const;
-    int is_rrr76(void) const;
-    int is_rrr77(void) const;
+    int is_gfx_moves_ahead_shown(void) const;
+    int is_gfx_health_bar_shown_only_when_injured(void) const;
+    int is_gfx_health_bar_shown(void) const;
     int is_open_on_death(void) const;
     int is_killed_on_hit_or_miss(void) const;
     int is_killed_on_hitting(void) const;
@@ -849,9 +849,9 @@ public:
     void set_is_rrr72(int);
     void set_is_rrr73(int);
     void set_is_rrr74(int);
-    void set_is_rrr75(int);
-    void set_is_rrr76(int);
-    void set_is_rrr77(int);
+    void set_is_gfx_moves_ahead_shown(int);
+    void set_is_gfx_health_bar_shown_only_when_injured(int);
+    void set_is_gfx_health_bar_shown(int);
     void set_is_open_on_death(int);
     void set_is_killed_on_hit_or_miss(int);
     void set_is_killed_on_hitting(int);
