@@ -107,10 +107,7 @@ void Level::update_minimap (void)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
 
-                if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
-                    c = GRAY;
-                    c.a = 200;
-                } else if (!is_visited(x, y)) {
+                if (!is_visited(x, y)) {
                     c = GRAY;
                     c.a = 100;
                 } else if (player &&
@@ -154,6 +151,14 @@ void Level::update_minimap (void)
                     c.r /= 2;
                     c.g /= 2;
                     c.b /= 2;
+                }
+
+                if (!x || !y) {
+                    c = GRAY;
+                    c.a = 200;
+                } else if ((x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
+                    c = DARKGRAY;
+                    c.a = 200;
                 }
 
                 glcolor(c);

@@ -79,6 +79,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level_init.o 		\
     $(OBJDIR)/level_log.o 		\
     $(OBJDIR)/level_map.o 		\
+    $(OBJDIR)/level_minimap.o 		\
     $(OBJDIR)/level_scroll.o 		\
     $(OBJDIR)/level_static.o 		\
     $(OBJDIR)/level_thing.o 		\
@@ -158,7 +159,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_location.o 		\
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\
-    $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_move_dir.o 		\
     $(OBJDIR)/thing_msg.o 		\
