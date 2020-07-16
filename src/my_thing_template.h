@@ -268,7 +268,7 @@ private:
     int _is_rrr75 {};
     int _is_rrr76 {};
     int _is_rrr77 {};
-    int _is_rrr78 {};
+    int _is_open_on_death {};
     int _is_killed_on_hit_or_miss {};
     int _is_killed_on_hitting {};
     int _is_collect_as_keys {};
@@ -606,7 +606,7 @@ public:
     int is_rrr75(void) const;
     int is_rrr76(void) const;
     int is_rrr77(void) const;
-    int is_rrr78(void) const;
+    int is_open_on_death(void) const;
     int is_killed_on_hit_or_miss(void) const;
     int is_killed_on_hitting(void) const;
     int is_collect_as_keys(void) const;
@@ -852,7 +852,7 @@ public:
     void set_is_rrr75(int);
     void set_is_rrr76(int);
     void set_is_rrr77(int);
-    void set_is_rrr78(int);
+    void set_is_open_on_death(int);
     void set_is_killed_on_hit_or_miss(int);
     void set_is_killed_on_hitting(int);
     void set_is_collect_as_keys(int);
