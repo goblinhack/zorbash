@@ -14,16 +14,16 @@
 
 void Level::scroll_map_do (void)
 {_
+    if (wid_find_under_mouse_when_scrolling()) {
+        return;
+    }
+
     const float bigstep = 6.0;
     const float medstep = 2.0 / TILE_WIDTH;
     const float smallstep = 1.0 / TILE_WIDTH;
 
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
-
-    if (wid_find_under_mouse_when_scrolling()) {
-        return;
-    }
 
 #if 0
 if (player) {
@@ -153,7 +153,10 @@ void Level::scroll_map_set_target (void)
         // How many tiles away from the edge at each zoom level we use
         // to auto scroll
         //
-        sensitivity = TILES_ACROSS / 2; // larger N -> more sensitive
+        sensitivity = (float)TILES_ACROSS / 1.5; // larger N -> more sensitive
+        if (sensitivity < 1) {
+            sensitivity = 1;
+        }
 
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
@@ -174,8 +177,8 @@ void Level::scroll_map_set_target (void)
     //
     if (y1 < 2) { y1 = 2; }
     if (x1 < 2) { x1 = 2; }
-    if (y2 > TILES_DOWN - 1) { y2 = TILES_DOWN - 2; }
-    if (x2 > TILES_ACROSS - 1) { x2 = TILES_ACROSS - 2; }
+    if (y2 > TILES_DOWN - 2) { y2 = TILES_DOWN - 2; }
+    if (x2 > TILES_ACROSS - 2) { x2 = TILES_ACROSS - 2; }
 
     //
     // Auto scroll

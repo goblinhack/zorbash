@@ -111,8 +111,8 @@ void Level::update_minimap (void)
                     c = GRAY;
                     c.a = 200;
                 } else if (!is_visited(x, y)) {
-                    c = BLACK;
-                    c.a = 50;
+                    c = GRAY;
+                    c.a = 100;
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
@@ -148,7 +148,6 @@ void Level::update_minimap (void)
                     c = BLACK;
                 }
 
-#if 0
                 if ((x >= map_tl.x) && (x <= map_br.x) &&
                     (y >= map_tl.y) && (y <= map_br.y)) {
                 } else {
@@ -156,7 +155,7 @@ void Level::update_minimap (void)
                     c.g /= 2;
                     c.b /= 2;
                 }
-#endif
+
                 glcolor(c);
 
                 auto X = x;
