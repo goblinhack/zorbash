@@ -26,7 +26,6 @@ def tp_init(name, text_name):
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=2000)
     x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=50)
     x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=50)
-    x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=50)
 
     x.update()
 
