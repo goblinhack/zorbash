@@ -19,6 +19,7 @@ def tp_init(name, text_name):
     x.set_is_corpse_on_death(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_door(True)
+    x.set_is_gfx_health_bar_shown_only_when_injured(True)
     x.set_is_open_on_death(True)
     x.set_is_double_damage_from_fire(True)
     x.set_is_fire_hater(100)

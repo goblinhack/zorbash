@@ -992,9 +992,9 @@ public:
     int is_rrr72(void) const;
     int is_rrr73(void) const;
     int is_rrr74(void) const;
-    int is_rrr75(void) const;
-    int is_rrr76(void) const;
-    int is_rrr77(void) const;
+    int is_gfx_moves_ahead_shown(void) const;
+    int is_gfx_health_bar_shown_only_when_injured(void) const;
+    int is_gfx_health_bar_shown(void) const;
     int is_open_on_death(void) const;
     int is_killed_on_hit_or_miss(void) const;
     int is_rrr8(void) const;

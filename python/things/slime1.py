@@ -34,6 +34,8 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
+    x.set_is_gfx_moves_ahead_shown(True)
+    x.set_is_gfx_health_bar_shown(True)
     x.set_is_movable(True)
     x.set_is_sidebar_item(True)
     x.set_is_slime(True)

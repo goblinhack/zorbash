@@ -710,25 +710,27 @@ void Thing::blit_internal (point &blit_tl,
     }
 
     //
-    // Reflections have not tile
+    // Show a health bar over the thing?
     //
-    if (tile) {
-        //
-        // If visible, show the things healthbar
-        //
-        if (!reflection &&
-            !tile->is_invisible &&
-            is_monst() &&
-            !is_dead &&
-            level->is_lit_no_check(mid_at.x, mid_at.y)) {
-            auto h = get_stats_health();
-            int i = (1.0 - ((float)h / (float)get_stats_health_max())) *
-                    UI_MONST_HEALTH_BAR_STEPS;
-            i = std::min(i, UI_MONST_HEALTH_BAR_STEPS);
-            i = std::max(i, 1);
-            auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
-            auto x = (blit_tl.x + blit_br.x) / 2;
+    auto h = get_stats_health();
+    auto m = get_stats_health_max();
+    if (tile &&
+        !tile->is_invisible &&
+        !is_dead &&
+        !reflection &&
+        level->is_lit_no_check(mid_at.x, mid_at.y) &&
+        (
+         is_gfx_health_bar_shown() ||
+         (is_gfx_health_bar_shown_only_when_injured() && (h < m))
+        )) {
 
+        int h_step = (1.0 - ((float)h / (float)m)) * UI_MONST_HEALTH_BAR_STEPS;
+        h_step = std::min(h_step, UI_MONST_HEALTH_BAR_STEPS);
+        h_step = std::max(h_step, 1);
+        auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
+        auto x = (blit_tl.x + blit_br.x) / 2;
+
+        if (is_gfx_moves_ahead_shown()) {
             auto diff = game->tick_current - get_tick();
             if ((diff > 0) && (diff <= THING_TICK_MAX_MOVES_AHEAD)) {
                 static std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> cache;
@@ -742,20 +744,20 @@ void Thing::blit_internal (point &blit_tl,
                         point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
                         point(x + TILE_WIDTH / 2, y));
             }
+        }
 
-            {
-                static std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS> cache;
-                auto tile = get(cache, diff);
-                if (!tile) {
-                    std::string s = "health" + std::to_string(i);
-                    tile = tile_find_mand(s);
-                    set(cache, diff, tile);
-                }
-
-                tile_blit(tile,
-                          point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
-                          point(x + TILE_WIDTH / 2, y));
+        {
+            static std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS> cache;
+            auto tile = get(cache, h_step);
+            if (!tile) {
+                std::string s = "health" + std::to_string(h_step);
+                tile = tile_find_mand(s);
+                set(cache, h_step, tile);
             }
+
+            tile_blit(tile,
+                      point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
+                      point(x + TILE_WIDTH / 2, y));
         }
     }
 
