@@ -407,8 +407,8 @@ class Tp:
     def set_is_rrr77(self, value):
         zx.tp_set_is_rrr77(self, value)
 
-    def set_is_rrr78(self, value):
-        zx.tp_set_is_rrr78(self, value)
+    def set_is_open_on_death(self, value):
+        zx.tp_set_is_open_on_death(self, value)
 
     def set_is_killed_on_hit_or_miss(self, value):
         zx.tp_set_is_killed_on_hit_or_miss(self, value)

@@ -235,7 +235,7 @@ int Tp::is_rrr74(void) const { return _is_rrr74; }
 int Tp::is_rrr75(void) const { return _is_rrr75; }
 int Tp::is_rrr76(void) const { return _is_rrr76; }
 int Tp::is_rrr77(void) const { return _is_rrr77; }
-int Tp::is_rrr78(void) const { return _is_rrr78; }
+int Tp::is_open_on_death(void) const { return _is_open_on_death; }
 int Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
 int Tp::is_killed_on_hitting(void) const { return _is_killed_on_hitting; }
@@ -476,7 +476,7 @@ void Tp::set_is_rrr74(int v) { _is_rrr74 = v; }
 void Tp::set_is_rrr75(int v) { _is_rrr75 = v; }
 void Tp::set_is_rrr76(int v) { _is_rrr76 = v; }
 void Tp::set_is_rrr77(int v) { _is_rrr77 = v; }
-void Tp::set_is_rrr78(int v) { _is_rrr78 = v; }
+void Tp::set_is_open_on_death(int v) { _is_open_on_death = v; }
 void Tp::set_is_killed_on_hit_or_miss(int v) { _is_killed_on_hit_or_miss = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
 void Tp::set_is_killed_on_hitting(int v) { _is_killed_on_hitting = v; }

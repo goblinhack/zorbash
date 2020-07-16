@@ -661,7 +661,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr75)
     TP_SET_DECL(is_rrr76)
     TP_SET_DECL(is_rrr77)
-    TP_SET_DECL(is_rrr78)
+    TP_SET_DECL(is_open_on_death)
     TP_SET_DECL(is_killed_on_hit_or_miss)
     TP_SET_DECL(is_killed_on_hitting)
     TP_SET_DECL(is_collect_as_keys)

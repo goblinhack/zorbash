@@ -869,9 +869,9 @@ int Thing::is_rrr77(void) const
     return (tp()->is_rrr77());
 }
 
-int Thing::is_rrr78(void) const
+int Thing::is_open_on_death(void) const
 {_
-    return (tp()->is_rrr78());
+    return (tp()->is_open_on_death());
 }
 
 int Thing::is_killed_on_hit_or_miss(void) const
