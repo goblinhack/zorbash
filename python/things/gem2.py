@@ -24,9 +24,8 @@ def tp_init(name, text_name):
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=2000)
-    x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=1000)
-    x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=1000)
-    x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=1000)
+    x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=100)
+    x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=100)
 
     x.update()
 
