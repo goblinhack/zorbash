@@ -19,6 +19,7 @@ def tp_init(name, text_name):
     x.set_text_a_or_an("the");
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("The way down...")
 
     delay = 50
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=delay)

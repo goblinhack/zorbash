@@ -36,6 +36,7 @@ def tp_init(name,
     x.set_ai_obstacle(True)
     x.set_is_wall(True)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("A moss covered wall.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     if tiles is not None:

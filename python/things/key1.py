@@ -25,6 +25,7 @@ def key_init(name, text_name):
     x.set_text_a_or_an("an");
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("A key that leadeth places undreamt, or next door")
 
     x.set_tile(tile=name + ".1", delay_ms=100)
     x.set_tile(tile=name + ".2", delay_ms=100)

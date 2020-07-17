@@ -94,7 +94,7 @@
 #define UI_MINICON_VIS_HEIGHT      5
 #define UI_MINICON_VIS_WIDTH       UI_MINICON_WIDTH
 #define UI_MINICON_WIDTH           (ASCII_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
-#define UI_BOTCON_HEIGHT           20 // Scrollbar limit
+#define UI_BOTCON_HEIGHT           1 // Scrollbar limit
 #define UI_BOTCON_TEXT_COLOR       UI_TEXT_COLOR
 #define UI_BOTCON_VIS_HEIGHT       1
 #define UI_BOTCON_VIS_WIDTH        UI_BOTCON_WIDTH

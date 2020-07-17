@@ -766,7 +766,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(str6)
     TP_SET_DECL(str7)
     TP_SET_DECL(str8)
-    TP_SET_DECL(str9)
+    TP_SET_DECL(text_description)
     TP_SET_DECL(text_a_or_an)
     TP_SET_DECL(text_hits)
     TP_SET_DECL(text_name)

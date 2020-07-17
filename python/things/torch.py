@@ -33,6 +33,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_normal_placement_rules(True)
     x.set_spawn_on_shoved("fire")
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("A beacon of light in this blighted place")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay=100

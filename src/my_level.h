@@ -186,40 +186,51 @@ public:
                 }
 
     //
+    // Things that move around
+    //
+    #define FOR_ALL_ACTIVE_THINGS(level, t, x, y)                   \
+        if (!(level)->is_oob(x, y)) {                               \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
+                verify(t);                                          \
+                if (!t->is_active()) {                              \
+                    continue;                                       \
+                }                                                   \
+
+    //
     // Things that move around and things that do not, but are interesting,
     // like food
     //
-    #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)                    \
-        if (!(level)->is_oob(x, y)) {                                     \
-            for (auto t : getref(level->all_thing_ptrs_at, x, y)) {       \
-                verify(t);                                                \
-                if (!t->is_interesting()) {                               \
-                    continue;                                             \
-                }                                                         \
+    #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)              \
+        if (!(level)->is_oob(x, y)) {                               \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
+                verify(t);                                          \
+                if (!t->is_interesting()) {                         \
+                    continue;                                       \
+                }                                                   \
 
     //
     // Things you can bump into
     //
-    #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                      \
-        if (!(level)->is_oob(x, y)) {                                     \
-            for (auto t : getref(level->all_thing_ptrs_at, x, y)) {       \
-                verify(t);                                                \
-                if (!t->is_interesting() &&                               \
-                    !t->is_attackable() &&                                \
-                    !t->ai_obstacle()) {                                  \
-                    continue;                                             \
-                }                                                         \
+    #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                \
+        if (!(level)->is_oob(x, y)) {                               \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
+                verify(t);                                          \
+                if (!t->is_interesting() &&                         \
+                    !t->is_attackable() &&                          \
+                    !t->ai_obstacle()) {                            \
+                    continue;                                       \
+                }                                                   \
 
     //
     // Cursor path is the highlighted path the player follows.
     //
-    #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                    \
-        if (!(level)->is_oob(x, y)) {                                     \
-            for (auto t : getref(level->all_thing_ptrs_at, x, y)) {       \
-                verify(t);                                                \
-                if (!t->is_cursor_path()) {                               \
-                    continue;                                             \
-                }                                                         \
+    #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)              \
+        if (!(level)->is_oob(x, y)) {                               \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
+                verify(t);                                          \
+                if (!t->is_cursor_path()) {                         \
+                    continue;                                       \
+                }                                                   \
 
     void clear(void);
     void cursor_check_if_scroll_needed(void);

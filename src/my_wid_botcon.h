@@ -13,6 +13,7 @@ uint8_t wid_botcon_init(void);
 void wid_botcon_log(std::wstring s);
 void wid_botcon_log(std::string s);
 void wid_botcon_flush(void);
+void wid_botcon_clear(void);
 
 #include "my_wid.h"
 

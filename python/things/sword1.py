@@ -24,6 +24,7 @@ def init_swing(name):
     x.set_is_movable(True)
     x.set_text_a_or_an("a");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("Thy shining pointy mechanism of justice")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 20
@@ -72,6 +73,7 @@ def init_carry(name):
     x.set_is_movable(True)
     x.set_text_a_or_an("a");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("Thy shining pointy mechanism of justice")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 550
@@ -106,6 +108,7 @@ def init_weapon(name, text_name):
     x.set_weapon_use_distance(1)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("Thy shining pointy mechanism of justice")
 
     x.set_tile(tile=name + ".1")
 

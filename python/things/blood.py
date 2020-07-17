@@ -21,6 +21,7 @@ def tp_init(name, text_name):
     x.set_stats_health_initial(4)
     x.set_text_a_or_an("a");
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
+    x.set_text_description("An artwork comprised mainly of blood")
     x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
 
     x.set_tile(tile=name + ".100", is_hp_100_percent=True)

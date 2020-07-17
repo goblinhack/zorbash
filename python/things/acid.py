@@ -21,6 +21,7 @@ def acid_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_tick_rate_tenths(1)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("A pool of hissing organic acid")
 
     for t in tiles:
         x.set_tile(tile=t)

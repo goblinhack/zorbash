@@ -5,13 +5,15 @@ import tp
 def chasm_init(name, text_name, tiles=[], left_tiles=[]):
     x = tp.Tp(name, text_name)
 
-    x.set_text_a_or_an("a");
     x.set_ai_obstacle(True)
     x.set_is_chasm(True)
+    x.set_is_cursor_can_hover_over(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_a_or_an("a");
+    x.set_text_description("A yawning chasm to the unknown below")
     x.set_z_depth(zx.MAP_DEPTH_CHASM)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     delay = 1250
     for t in tiles:
