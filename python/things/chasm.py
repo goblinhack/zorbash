@@ -11,7 +11,7 @@ def chasm_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_text_a_or_an("a");
-    x.set_text_description("A yawning chasm to the unknown below")
+    x.set_text_description("%%fg=red$A yawning chasm to the unknown below")
     x.set_z_depth(zx.MAP_DEPTH_CHASM)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
