@@ -20,7 +20,6 @@ static void wid_botcon_wid_create(void);
 
 Widp wid_botcon_container {};
 Widp wid_botcon_vert_scroll {};
-Widp wid_botcon_horiz_scroll {};
 Widp wid_botcon_input_line {};
 Widp wid_botcon_window {};
 
@@ -33,7 +32,6 @@ void wid_botcon_fini (void)
 {_
     wid_destroy(&wid_botcon_container);
     wid_destroy(&wid_botcon_vert_scroll);
-    wid_destroy(&wid_botcon_horiz_scroll);
     wid_destroy(&wid_botcon_input_line);
     wid_destroy(&wid_botcon_window);
 }
@@ -87,6 +85,16 @@ static void wid_botcon_replace (Widp w, std::wstring str)
     if (tmp) {
         wid_set_text(tmp, str);
     }
+}
+
+void wid_botcon_clear (void)
+{_
+    auto tmp = wid_get_head(wid_botcon_input_line);
+    while (tmp) {
+        wid_set_text(tmp, "");
+        tmp = wid_get_next(tmp);
+    }
+    wid_botcon_reset_scroll();
 }
 
 //
@@ -187,8 +195,9 @@ static void wid_botcon_wid_create (void)
         wid_botcon_window = wid_new_square_window("wid botcon");
         wid_set_name(wid_botcon_window, "wid botcon window");
         wid_set_pos(wid_botcon_window, tl, br);
-        wid_set_shape_none(wid_botcon_window);
         wid_set_ignore_events(wid_botcon_window, true);
+        wid_set_shape_none(wid_botcon_window);
+        // wid_set_style(wid_botcon_window, UI_WID_STYLE_GREEN);
     }
 
     {
@@ -236,11 +245,8 @@ static void wid_botcon_wid_create (void)
 
     wid_botcon_vert_scroll =
         wid_new_vert_scroll_bar(wid_botcon_window, "", wid_botcon_container);
-    wid_botcon_horiz_scroll =
-        wid_new_horiz_scroll_bar(wid_botcon_window, "", wid_botcon_container);
 
     wid_not_visible(wid_get_parent(wid_botcon_vert_scroll));
-    wid_not_visible(wid_get_parent(wid_botcon_horiz_scroll));
 
     wid_update(wid_botcon_window);
 }

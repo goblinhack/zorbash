@@ -16,6 +16,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_text_a_or_an("the");
     x.set_z_depth(zx.MAP_DEPTH_WATER)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("Some shallow water")
 
     delay = 1250
     for t in tiles:

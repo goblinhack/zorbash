@@ -12,6 +12,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_is_loggable_for_important_stuff(False)
     x.set_text_a_or_an("the");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("Some dirt, what more can I say?")
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
 
     for t in tiles:

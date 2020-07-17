@@ -11,6 +11,7 @@ def tp_init(name):
     x.set_is_ripple(True)
     x.set_text_a_or_an("a");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("An ominous ripple")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 100

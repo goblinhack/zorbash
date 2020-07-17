@@ -66,6 +66,7 @@ def tp_init(name, text_name):
     x.set_weapon_use_anim("splat1")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("%%fg=limegreen$A gargantuan pile of sentient mucus")
 
     delay = 200
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

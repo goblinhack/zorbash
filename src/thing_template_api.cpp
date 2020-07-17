@@ -58,7 +58,7 @@ const std::string& Tp::str5(void) const { return _str5; }
 const std::string& Tp::str6(void) const { return _str6; }
 const std::string& Tp::str7(void) const { return _str7; }
 const std::string& Tp::str8(void) const { return _str8; }
-const std::string& Tp::str9(void) const { return _str9; }
+const std::string& Tp::text_description(void) const { return _text_description; }
 const std::string& Tp::text_hits(void) const { return _text_hits; }
 const std::string& Tp::text_name(void) const { return _text_name; }
 const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
@@ -553,7 +553,7 @@ void Tp::set_str5(const std::string &v) { _str5 = v; }
 void Tp::set_str6(const std::string &v) { _str6 = v; }
 void Tp::set_str7(const std::string &v) { _str7 = v; }
 void Tp::set_str8(const std::string &v) { _str8 = v; }
-void Tp::set_str9(const std::string &v) { _str9 = v; }
+void Tp::set_text_description(const std::string &v) { _text_description = v; }
 void Tp::set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
 void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
 void Tp::set_text_name(const std::string &v) { _text_name = v; }

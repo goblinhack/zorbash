@@ -34,6 +34,7 @@ def tp_init(name, text_name):
     x.set_text_a_or_an("the");
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("A door covered in claw marks")
 
     x.set_tile(tile=name + ".100", is_hp_100_percent=True)
     x.set_tile(tile=name + ".75", is_hp_75_percent=True)

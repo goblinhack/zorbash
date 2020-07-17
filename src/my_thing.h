@@ -799,7 +799,7 @@ public:
     const std::string& str6(void) const;
     const std::string& str7(void) const;
     const std::string& str8(void) const;
-    const std::string& str9(void) const;
+    const std::string& text_description(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
     const std::string& weapon_carry_anim(void) const;

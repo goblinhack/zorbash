@@ -37,6 +37,7 @@ def tp_init(name, text_name):
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_INFRONT)
+    x.set_text_description("Fire")
 
     delay = 75
     x.set_tile(tile=name + ".1", delay_ms=delay)

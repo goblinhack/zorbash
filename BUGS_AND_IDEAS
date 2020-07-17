@@ -2,7 +2,6 @@ bugs
 ----
 description text
 highlight object in red outline when selected in sidebar
-eat blood?
 sidebar has player 1 not 2
 click on monst or door should attack
 click on minimap to move
@@ -10,7 +9,6 @@ click on minimap to move
 upcoming work
 -------------
 - weight factors into jumping
-- show seed on sidebar
 - allow seed selection on menu
 - equip
 - throw
@@ -32,6 +30,7 @@ upcoming work
 
 future work
 -----------
+- eat blood?
 - water, kraken, eels
 - make ripples, summon monsters
 - hit door, summon monst chance

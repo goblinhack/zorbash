@@ -11,6 +11,7 @@ def tp_init(name):
     x.set_is_temporary(True)
     x.set_is_movable(True)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("AI path")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 50

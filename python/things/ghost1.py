@@ -45,6 +45,7 @@ def tp_init(name, text_name):
     x.set_weapon_use_anim("claws1")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("The angry spirit of one long passed")
 
     delay = 200
     x.set_tile(tile=name + ".1", delay_ms=delay)

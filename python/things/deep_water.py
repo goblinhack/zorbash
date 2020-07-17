@@ -15,6 +15,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_ai_obstacle(True)
     x.set_is_water(True)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("A pool of deep dank water, with things in it")
     x.set_z_depth(zx.MAP_DEPTH_WATER)
 
     delay = 1250

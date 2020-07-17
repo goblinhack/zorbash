@@ -22,6 +22,7 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("%%fg=orange$Freshly scented lava")
 
     delay = 1250
     for t in tiles:
