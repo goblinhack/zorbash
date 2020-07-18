@@ -90,6 +90,7 @@ public:
     Thingp                     player = {};
     Thingp                     cursor = {};
     Thingp                     highlight = {};
+    Thingp                     hover_over = {};
     std::map<ThingId, Thingp> all_things {};
     std::map<ThingId, Thingp> all_active_things {};
     std::map<ThingId, Thingp> all_gc_things {};

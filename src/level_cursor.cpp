@@ -30,14 +30,54 @@ void Level::cursor_find_on_visible_things (
                         const uint16_t minx, const uint16_t miny,
                         const uint16_t maxx, const uint16_t maxy)
 {
-    if (cursor_needs_update) {
+    if (!cursor_needs_update) {
+        return;
+    }
+
+    //
+    // Depth order so things in front are chosen in preference, like
+    // the larger entrance/exit.
+    //
+    for (auto z = 0; z < MAP_DEPTH; z++) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS(game->level, t, x, y) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                     t->cursor_hover_over_check();
                 } FOR_ALL_THINGS_END();
             }
         }
+    }
+
+    if (cursor) {
+        auto p = cursor->mid_at;
+        hover_over = nullptr;
+
+        FOR_ALL_ACTIVE_THINGS(this, t, p.x, p.y) {
+            if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
+                continue;
+            }
+            BOTCON("%s", t->text_description().c_str());
+            hover_over = t;
+            return;
+        } FOR_ALL_THINGS_END()
+
+        FOR_ALL_INTERESTING_THINGS(this, t, p.x, p.y) {
+            if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
+                continue;
+            }
+            BOTCON("%s", t->text_description().c_str());
+            hover_over = t;
+            return;
+        } FOR_ALL_THINGS_END()
+
+        FOR_ALL_THINGS(this, t, p.x, p.y) {
+            if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
+                continue;
+            }
+            BOTCON("%s", t->text_description().c_str());
+            hover_over = t;
+            return;
+        } FOR_ALL_THINGS_END()
     }
 }
 
