@@ -149,7 +149,6 @@ static void game_monsts_wid_create (void)
             wid_set_pos(w, tl, br);
             wid_set_shape_none(w);
 
-            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);
             auto s = t->text_name();
             if (t->is_resurrected) {
                 if (t->is_dead) {
@@ -168,6 +167,11 @@ static void game_monsts_wid_create (void)
             }
 
             // s += " " + std::to_string(t->get_stats_health());
+            if (level->hover_over == t) {
+                wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+            } else {
+                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);
+            }
 
             wid_set_text(w, s);
             wid_set_text_lhs(w, true);

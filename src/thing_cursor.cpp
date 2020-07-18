@@ -39,30 +39,6 @@ void Thing::cursor_hover_over_check (void)
             }
             level->cursor_at = mid_at;
             level->cursor_found = true;
-
-            FOR_ALL_ACTIVE_THINGS(level, t, mid_at.x, mid_at.y) {
-                if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
-                    continue;
-                }
-                BOTCON("%s", t->text_description().c_str());
-                return;
-            } FOR_ALL_THINGS_END()
-
-            FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {
-                if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
-                    continue;
-                }
-                BOTCON("%s", t->text_description().c_str());
-                return;
-            } FOR_ALL_THINGS_END()
-
-            FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
-                if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
-                    continue;
-                }
-                BOTCON("%s", t->text_description().c_str());
-                return;
-            } FOR_ALL_THINGS_END()
         }
     }
 }
