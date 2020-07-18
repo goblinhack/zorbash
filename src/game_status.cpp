@@ -254,7 +254,7 @@ static void game_status_wid_create (void)
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_bg_tilename(w, "player1.pose");
+        wid_set_bg_tilename(w, player->tp()->name() + ".pose");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
 
