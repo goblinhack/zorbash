@@ -19,7 +19,7 @@ uint8_t sdl_main_loop_running;
 uint8_t sdl_shift_held;
 uint8_t sdl_init_video;
 uint32_t mouse_down;
-timestamp_t mouse_down_when;
+uint32_t mouse_down_when;
 
 int mouse_x;
 int mouse_y;
@@ -403,6 +403,8 @@ static void sdl_event (SDL_Event * event)
 {_
     SDL_KEYSYM *key;
 
+    wid_mouse_double_click = false;
+
     switch (event->type) {
     case SDL_KEYDOWN:
         if (g_grab_next_key) {
@@ -477,10 +479,10 @@ static void sdl_event (SDL_Event * event)
             if (time_have_x_tenths_passed_since(5, ts)) {
                 accel = 1.0;
             } else {
-                accel *= UI_SCROLL_WHEEL_SCALE;
+                accel *= UI_MOUSE_WHEEL_SCALE;
 
-                if (accel > UI_SCROLL_WHEEL_SCALE_MAX) {
-                    accel = UI_SCROLL_WHEEL_SCALE_MAX;
+                if (accel > UI_MOUSE_WHEEL_SCALE_MAX) {
+                    accel = UI_MOUSE_WHEEL_SCALE_MAX;
                 }
             }
 
@@ -517,22 +519,25 @@ static void sdl_event (SDL_Event * event)
                          0, 0);
         break;
 
-    case SDL_MOUSEBUTTONDOWN:
+    case SDL_MOUSEBUTTONDOWN: {
         mouse_down = sdl_get_mouse();
-        mouse_down_when = time_get_time_ms_cached();
 
         DBG("Mouse DOWN: button %d pressed at %d,%d state %x",
             event->button.button, event->button.x, event->button.y,
             mouse_down);
 
+        auto now = time_get_time_ms_cached();
         wid_mouse_visible = 1;
+        wid_mouse_double_click =
+          (now - mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
 
         wid_mouse_down(event->button.button, mouse_x, mouse_y);
+        mouse_down_when = now;
         break;
+    }
 
     case SDL_MOUSEBUTTONUP:
         mouse_down = sdl_get_mouse();
-        mouse_down_when = 0;
 
         DBG("Mouse UP: button %d released at %d,%d state %d",
             event->button.button, event->button.x, event->button.y,

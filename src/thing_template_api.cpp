@@ -231,7 +231,7 @@ int Tp::is_rrr70(void) const { return _is_rrr70; }
 int Tp::is_rrr71(void) const { return _is_rrr71; }
 int Tp::is_rrr72(void) const { return _is_rrr72; }
 int Tp::is_rrr73(void) const { return _is_rrr73; }
-int Tp::is_rrr74(void) const { return _is_rrr74; }
+int Tp::is_cursor_can_hover_over_but_needs_double_click(void) const { return _is_cursor_can_hover_over_but_needs_double_click; }
 int Tp::is_gfx_moves_ahead_shown(void) const { return _is_gfx_moves_ahead_shown; }
 int Tp::is_gfx_health_bar_shown_only_when_injured(void) const { return _is_gfx_health_bar_shown_only_when_injured; }
 int Tp::is_gfx_health_bar_shown(void) const { return _is_gfx_health_bar_shown; }
@@ -472,7 +472,7 @@ void Tp::set_is_rrr70(int v) { _is_rrr70 = v; }
 void Tp::set_is_rrr71(int v) { _is_rrr71 = v; }
 void Tp::set_is_rrr72(int v) { _is_rrr72 = v; }
 void Tp::set_is_rrr73(int v) { _is_rrr73 = v; }
-void Tp::set_is_rrr74(int v) { _is_rrr74 = v; }
+void Tp::set_is_cursor_can_hover_over_but_needs_double_click(int v) { _is_cursor_can_hover_over_but_needs_double_click = v; }
 void Tp::set_is_gfx_moves_ahead_shown(int v) { _is_gfx_moves_ahead_shown = v; }
 void Tp::set_is_gfx_health_bar_shown_only_when_injured(int v) { _is_gfx_health_bar_shown_only_when_injured = v; }
 void Tp::set_is_gfx_health_bar_shown(int v) { _is_gfx_health_bar_shown = v; }

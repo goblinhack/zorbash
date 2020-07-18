@@ -42,6 +42,22 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     player->log("mouse move");
 
     //
+    // If hovering over a double click thing then don't jump in unless
+    // the user really means it.
+    //
+    if (!wid_mouse_double_click) {
+        if (level->cursor) {_
+            auto to = level->cursor->mid_at;
+            FOR_ALL_THINGS(level, t, to.x, to.y) {
+                if (t->is_cursor_can_hover_over_but_needs_double_click()) {
+                    MINICON("NEEDS DC");
+                    return true;
+                }
+            } FOR_ALL_THINGS_END()
+        }
+    }
+
+    //
     // Grab the current move path and start walking toward it. This will
     // consume one move by the player.
     //
