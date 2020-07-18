@@ -758,7 +758,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(str1)
     TP_SET_DECL(str10)
     TP_SET_DECL(on_death_do)
-    TP_SET_DECL(str12)
+    TP_SET_DECL(text_title)
     TP_SET_DECL(str2)
     TP_SET_DECL(str3)
     TP_SET_DECL(str4)
