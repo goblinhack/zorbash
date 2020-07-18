@@ -560,7 +560,7 @@ extern int wid_mouse_visible;
 extern Widp wid_mouse_template;
 extern Widp wid_over;
 extern Widp wid_focus;
-
+extern bool wid_mouse_double_click;
 extern const int32_t wid_destroy_delay_ms;
 extern std::array<
          std::array<Widp, ASCII_HEIGHT_MAX>,

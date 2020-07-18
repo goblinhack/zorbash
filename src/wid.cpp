@@ -65,6 +65,7 @@ Widp wid_over {};
 // Mouse
 //
 int wid_mouse_visible = 1;
+bool wid_mouse_double_click;
 
 //
 // Widget moving

@@ -395,8 +395,8 @@ class Tp:
     def set_is_rrr73(self, value):
         zx.tp_set_is_rrr73(self, value)
 
-    def set_is_rrr74(self, value):
-        zx.tp_set_is_rrr74(self, value)
+    def set_is_cursor_can_hover_over_but_needs_double_click(self, value):
+        zx.tp_set_is_cursor_can_hover_over_but_needs_double_click(self, value)
 
     def set_is_gfx_moves_ahead_shown(self, value):
         zx.tp_set_is_gfx_moves_ahead_shown(self, value)

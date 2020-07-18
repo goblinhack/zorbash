@@ -7,9 +7,9 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
 
     x.set_ai_obstacle(True)
     x.set_gfx_animated(True)
-    # x.set_is_active(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
+    x.set_is_cursor_can_hover_over_but_needs_double_click(True)
     x.set_is_lava(True)
     x.set_is_light_strength(3)
     x.set_is_loggable_for_important_stuff(True)
@@ -22,7 +22,7 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
-    x.set_text_description("%%fg=orange$Freshly scented lava")
+    x.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move)")
 
     delay = 1250
     for t in tiles:

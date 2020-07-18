@@ -1,6 +1,5 @@
 bugs
 ----
-do not select chasm as target but can hover
 highlight object in red outline when selected in sidebar
 sidebar has player 1 not 2
 click on monst or door should attack

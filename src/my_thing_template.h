@@ -264,7 +264,7 @@ private:
     int _is_rrr71 {};
     int _is_rrr72 {};
     int _is_rrr73 {};
-    int _is_rrr74 {};
+    int _is_cursor_can_hover_over_but_needs_double_click {};
     int _is_gfx_moves_ahead_shown {};
     int _is_gfx_health_bar_shown_only_when_injured {};
     int _is_gfx_health_bar_shown {};
@@ -602,7 +602,7 @@ public:
     int is_rrr71(void) const;
     int is_rrr72(void) const;
     int is_rrr73(void) const;
-    int is_rrr74(void) const;
+    int is_cursor_can_hover_over_but_needs_double_click(void) const;
     int is_gfx_moves_ahead_shown(void) const;
     int is_gfx_health_bar_shown_only_when_injured(void) const;
     int is_gfx_health_bar_shown(void) const;
@@ -848,7 +848,7 @@ public:
     void set_is_rrr71(int);
     void set_is_rrr72(int);
     void set_is_rrr73(int);
-    void set_is_rrr74(int);
+    void set_is_cursor_can_hover_over_but_needs_double_click(int);
     void set_is_gfx_moves_ahead_shown(int);
     void set_is_gfx_health_bar_shown_only_when_injured(int);
     void set_is_gfx_health_bar_shown(int);

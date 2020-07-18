@@ -61,7 +61,6 @@ void sdl_mouse_center(void);
 void sdl_mouse_warp(int x, int y);
 
 extern uint32_t mouse_down;
-extern timestamp_t mouse_down_when;
 extern int mouse_x;
 extern int mouse_y;
 extern int wheel_x;

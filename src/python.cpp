@@ -657,7 +657,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr71)
     TP_SET_DECL(is_rrr72)
     TP_SET_DECL(is_rrr73)
-    TP_SET_DECL(is_rrr74)
+    TP_SET_DECL(is_cursor_can_hover_over_but_needs_double_click)
     TP_SET_DECL(is_gfx_moves_ahead_shown)
     TP_SET_DECL(is_gfx_health_bar_shown_only_when_injured)
     TP_SET_DECL(is_gfx_health_bar_shown)

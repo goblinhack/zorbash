@@ -991,7 +991,7 @@ public:
     int is_rrr71(void) const;
     int is_rrr72(void) const;
     int is_rrr73(void) const;
-    int is_rrr74(void) const;
+    int is_cursor_can_hover_over_but_needs_double_click(void) const;
     int is_gfx_moves_ahead_shown(void) const;
     int is_gfx_health_bar_shown_only_when_injured(void) const;
     int is_gfx_health_bar_shown(void) const;

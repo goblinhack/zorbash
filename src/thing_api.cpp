@@ -849,9 +849,9 @@ int Thing::is_rrr73(void) const
     return (tp()->is_rrr73());
 }
 
-int Thing::is_rrr74(void) const
+int Thing::is_cursor_can_hover_over_but_needs_double_click(void) const
 {_
-    return (tp()->is_rrr74());
+    return (tp()->is_cursor_can_hover_over_but_needs_double_click());
 }
 
 int Thing::is_gfx_moves_ahead_shown(void) const
