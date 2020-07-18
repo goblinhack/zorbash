@@ -266,7 +266,7 @@ static void game_status_wid_create (void)
 
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, L"Ser Hackalot");
+        wid_set_text(w, player->text_title());
         wid_set_shape_none(w);
     }
 

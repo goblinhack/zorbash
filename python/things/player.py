@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, text_name):
+def tp_init(name, text_name, title):
     x = tp.Tp(name, text_name)
 
     x.set_collision_attack(True)
@@ -40,8 +40,9 @@ def tp_init(name, text_name):
     x.set_stats_health_starving_pct(5)
     x.set_stats_move_speed_ms(75)
     x.set_stats_strength(10)
-    x.set_text_a_or_an("the");
-    x.set_text_hits("hits");
+    x.set_text_a_or_an("the")
+    x.set_text_hits("hits")
+    x.set_text_title(title)
     x.set_tick_rate_tenths(1)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
@@ -116,7 +117,7 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="player1", text_name="noble warrior")
-    tp_init(name="player2", text_name="noble warrior")
+    tp_init(name="player1", text_name="noble warrior", title="Ser Hackalot")
+    tp_init(name="player2", text_name="noble warrior", title="Ser Deadalot")
 
 init()

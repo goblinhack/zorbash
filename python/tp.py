@@ -149,8 +149,8 @@ class Tp:
     def set_on_death_do(self, value):
         zx.tp_set_on_death_do(self, value)
 
-    def set_str12(self, value):
-        zx.tp_set_str12(self, value)
+    def set_text_title(self, value):
+        zx.tp_set_text_title(self, value)
 
     def set_on_idle_dice_do(self, value):
         zx.tp_set_on_idle_dice_do(self, value)
