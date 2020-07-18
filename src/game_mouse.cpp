@@ -50,7 +50,6 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
             auto to = level->cursor->mid_at;
             FOR_ALL_THINGS(level, t, to.x, to.y) {
                 if (t->is_cursor_can_hover_over_but_needs_double_click()) {
-                    MINICON("NEEDS DC");
                     return true;
                 }
             } FOR_ALL_THINGS_END()

@@ -990,7 +990,7 @@ public:
     int is_rrr70(void) const;
     int is_rrr71(void) const;
     int is_rrr72(void) const;
-    int is_rrr73(void) const;
+    int is_the_grid(void) const;
     int is_cursor_can_hover_over_but_needs_double_click(void) const;
     int is_gfx_moves_ahead_shown(void) const;
     int is_gfx_health_bar_shown_only_when_injured(void) const;
@@ -1009,7 +1009,7 @@ public:
     int is_slime_eater(void) const;
     int is_slime_parent(void) const;
     int is_smoke(void) const;
-    int is_temporary(void) const;
+    int is_removable_if_out_of_slots(void) const;
     int is_throwable(void) const;
     int is_torch(void) const;
     int is_treasure(void) const;

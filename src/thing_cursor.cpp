@@ -16,10 +16,6 @@
 
 void Thing::cursor_hover_over_check (void)
 {
-    if (!is_cursor_can_hover_over()) {
-        return;
-    }
-
     if (!is_blitted) {
         return;
     }

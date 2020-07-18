@@ -9,7 +9,7 @@ def tp_init(name):
     x.set_gfx_show_outlined(True)
     x.set_is_movable(True)
     x.set_is_msg(True)
-    x.set_is_temporary(True)
+    x.set_is_removable_if_out_of_slots(True)
     x.set_is_no_tile(True)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_text_description("A message")

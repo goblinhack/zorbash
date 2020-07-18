@@ -10,7 +10,7 @@ def tp_init(name):
     x.set_is_interesting(False)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_loggable_for_important_stuff(False)
-    x.set_is_temporary(True)
+    x.set_is_removable_if_out_of_slots(True)
     x.set_is_active(True) # for lifespan tick
     x.set_is_interesting(True)
     x.set_is_smoke(True)

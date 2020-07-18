@@ -316,10 +316,9 @@ bool Thing::get_coords (point &blit_tl,
         if (is_dead) {
             blit = false;
         }
-    } else if (unlikely(is_cursor() || is_cursor_path())) {
-        //
-        // Blit only if we need the cursor
-        //
+    } else if (is_cursor() ||
+               is_cursor_path() ||
+               is_the_grid()) {
         blit = true;
     } else if (unlikely(game->config.gfx_show_hidden)) {
         if (level->is_visited(x, y)) {
