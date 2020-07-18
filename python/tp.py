@@ -392,8 +392,8 @@ class Tp:
     def set_is_rrr72(self, value):
         zx.tp_set_is_rrr72(self, value)
 
-    def set_is_rrr73(self, value):
-        zx.tp_set_is_rrr73(self, value)
+    def set_is_the_grid(self, value):
+        zx.tp_set_is_the_grid(self, value)
 
     def set_is_cursor_can_hover_over_but_needs_double_click(self, value):
         zx.tp_set_is_cursor_can_hover_over_but_needs_double_click(self, value)
@@ -518,8 +518,8 @@ class Tp:
     def set_tick_catches_up_on_attack(self, value):
         zx.tp_set_tick_catches_up_on_attack(self, value)
 
-    def set_is_temporary(self, value):
-        zx.tp_set_is_temporary(self, value)
+    def set_is_removable_if_out_of_slots(self, value):
+        zx.tp_set_is_removable_if_out_of_slots(self, value)
 
     def set_is_smoke(self, value):
         zx.tp_set_is_smoke(self, value)

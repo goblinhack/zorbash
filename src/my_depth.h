@@ -8,6 +8,7 @@
 #define _MY_DEPTH_H_
 
 enum {
+    MAP_DEPTH_THE_GRID,
     MAP_DEPTH_FLOOR,
     MAP_DEPTH_FLOOR2,
     MAP_DEPTH_WATER,

@@ -70,7 +70,7 @@ do_retry:
             if (idp->id) {
                 auto t = thing_find(*idp);
                 t->log("- slot %u", slot);
-                if (t->is_temporary()) {
+                if (t->is_removable_if_out_of_slots()) {
                     t->dead("out of slots");
                     t->level_pop();
                     retry++;

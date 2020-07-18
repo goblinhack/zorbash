@@ -11,7 +11,7 @@ def tp_init(name):
     x.set_is_cursor_path(True)
     x.set_is_floating(True)
     x.set_is_movable(True)
-    x.set_is_temporary(True)
+    x.set_is_removable_if_out_of_slots(True)
     x.set_text_a_or_an("the");
     x.set_text_description("Cursor path")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

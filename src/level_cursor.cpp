@@ -35,16 +35,13 @@ void Level::cursor_find_on_visible_things (
     }
 
     //
-    // Depth order so things in front are chosen in preference, like
-    // the larger entrance/exit.
+    // What tile are we over?
     //
-    for (auto z = 0; z < MAP_DEPTH; z++) {
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                    t->cursor_hover_over_check();
-                } FOR_ALL_THINGS_END();
-            }
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, MAP_DEPTH_THE_GRID) {
+                t->cursor_hover_over_check();
+            } FOR_ALL_THINGS_END();
         }
     }
 
@@ -53,7 +50,10 @@ void Level::cursor_find_on_visible_things (
         hover_over = nullptr;
 
         FOR_ALL_ACTIVE_THINGS(this, t, p.x, p.y) {
-            if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
+            if (t->owner_get() ||
+                t->is_cursor() ||
+                t->is_cursor_path() ||
+                t->is_the_grid()) {
                 continue;
             }
             BOTCON("%s", t->text_description().c_str());
@@ -62,7 +62,10 @@ void Level::cursor_find_on_visible_things (
         } FOR_ALL_THINGS_END()
 
         FOR_ALL_INTERESTING_THINGS(this, t, p.x, p.y) {
-            if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
+            if (t->owner_get() ||
+                t->is_cursor() ||
+                t->is_cursor_path() ||
+                t->is_the_grid()) {
                 continue;
             }
             BOTCON("%s", t->text_description().c_str());
@@ -71,7 +74,10 @@ void Level::cursor_find_on_visible_things (
         } FOR_ALL_THINGS_END()
 
         FOR_ALL_THINGS(this, t, p.x, p.y) {
-            if (t->owner_get() || t->is_cursor() || t->is_cursor_path()) {
+            if (t->owner_get() ||
+                t->is_cursor() ||
+                t->is_cursor_path() ||
+                t->is_the_grid()) {
                 continue;
             }
             BOTCON("%s", t->text_description().c_str());

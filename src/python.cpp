@@ -656,7 +656,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr70)
     TP_SET_DECL(is_rrr71)
     TP_SET_DECL(is_rrr72)
-    TP_SET_DECL(is_rrr73)
+    TP_SET_DECL(is_the_grid)
     TP_SET_DECL(is_cursor_can_hover_over_but_needs_double_click)
     TP_SET_DECL(is_gfx_moves_ahead_shown)
     TP_SET_DECL(is_gfx_health_bar_shown_only_when_injured)
@@ -690,7 +690,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_gold)
     TP_SET_DECL(is_loggable_for_important_stuff)
     TP_SET_DECL(tick_catches_up_on_attack)
-    TP_SET_DECL(is_temporary)
+    TP_SET_DECL(is_removable_if_out_of_slots)
     TP_SET_DECL(is_smoke)
     TP_SET_DECL(is_acid_hater)
     TP_SET_DECL(is_treasure)
@@ -1054,25 +1054,22 @@ PyObject *pct_to_abs_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
 static void python_add_consts (void)
 {_
-    PyModule_AddStringConstant(zx_mod, "VERSION", VERSION);
-
-    PyModule_AddIntConstant(zx_mod, "ASCII_WIDTH", ASCII_WIDTH);
     PyModule_AddIntConstant(zx_mod, "ASCII_HEIGHT", ASCII_HEIGHT);
-
-    PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
-    PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
-
+    PyModule_AddIntConstant(zx_mod, "ASCII_WIDTH", ASCII_WIDTH);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_CHASM", MAP_DEPTH_CHASM);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR2", MAP_DEPTH_FLOOR2);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_THE_GRID", MAP_DEPTH_THE_GRID);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_LAVA", MAP_DEPTH_LAVA);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_OBJ", MAP_DEPTH_OBJ);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WEAPON", MAP_DEPTH_WEAPON);
-
+    PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
+    PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_NORMAL", MAP_PRIO_NORMAL);
-    PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
+    PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
+    PyModule_AddStringConstant(zx_mod, "VERSION", VERSION);
 
     PyModule_AddIntConstant(zx_mod, "KMOD_LSHIFT", KMOD_LSHIFT);
     PyModule_AddIntConstant(zx_mod, "KMOD_RSHIFT", KMOD_RSHIFT);

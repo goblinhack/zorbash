@@ -1559,14 +1559,36 @@ public:
         set_no_check(_is_lit, x, y, false);
     }
 
-    void new_internal_particle(point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
-    void new_internal_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
-    void new_external_particle(point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
-    void new_external_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
-    void display_internal_particles(void);
+    Thingp actionbar_get(const uint32_t slot);
+    Thingp actionbar_get(void);
+    Thingp thing_find(const ThingId id);
+    Thingp thing_new(const std::string& tp_name, Thingp owner);
+    Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
+    Thingp thing_new(const std::string& tp_name, const point at);
+    bool actionbar_describe(const uint32_t slot);
+    bool actionbar_select(const uint32_t slot);
+    const char *to_cstring(void);
+    std::string to_string(void);
+    void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void con_(const char *fmt, va_list args); // compile error without
+    void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void dbg_(const char *fmt, va_list args); // compile error without
     void display_external_particles(void);
-
+    void display_internal_particles(void);
+    void dump(std::string prefix, std::ostream &out);
+    void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void err_(const char *fmt, va_list args); // compile error without
+    void fini(void);
     void game_mark_dungeon_tiles(Dungeonp d);
+    void init(point3d at, int seed);
+    void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
+    void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void log(std::string prefix);
+    void log_(const char *fmt, va_list args); // compile error without
+    void new_external_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
+    void new_external_particle(point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
+    void new_internal_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
+    void new_internal_particle(point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip);
     void place_chasm(Dungeonp d, const std::string &what);
     void place_corridor(Dungeonp d, const std::string what, int depth);
     void place_deep_water(Dungeonp d, const std::string &what);
@@ -1582,35 +1604,12 @@ public:
     void place_remaining_rocks(Dungeonp d, const std::string &what);
     void place_remaining_walls(Dungeonp d, const std::string &what);
     void place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
+    void place_the_grid(Dungeonp d);
     void place_wall_deco(Dungeonp d);
     void place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void place_water(Dungeonp d, const std::string &what);
-    void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
-    Thingp actionbar_get(const uint32_t slot);
-    Thingp actionbar_get(void);
-    Thingp thing_find(const ThingId id);
-    Thingp thing_new(const std::string& tp_name, Thingp owner);
-    Thingp thing_new(const std::string& tp_name, const point at);
-    Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
-    bool actionbar_select(const uint32_t slot);
-    bool actionbar_describe(const uint32_t slot);
     void things_gc(void);
     void things_tick(void);
-
-    void init(point3d at, int seed);
-    const char *to_cstring(void);
-    std::string to_string(void);
-    void fini(void);
-    void dump(std::string prefix, std::ostream &out);
-    void log(std::string prefix);
-    void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
-    void log_(const char *fmt, va_list args); // compile error without
-    void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
-    void con_(const char *fmt, va_list args); // compile error without
-    void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
-    void err_(const char *fmt, va_list args); // compile error without
-    void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
-    void dbg_(const char *fmt, va_list args); // compile error without
     friend std::ostream& operator<<(std::ostream &out, Bits<const Level & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<Level &> my);
 };

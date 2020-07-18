@@ -844,9 +844,9 @@ int Thing::is_rrr72(void) const
     return (tp()->is_rrr72());
 }
 
-int Thing::is_rrr73(void) const
+int Thing::is_the_grid(void) const
 {_
-    return (tp()->is_rrr73());
+    return (tp()->is_the_grid());
 }
 
 int Thing::is_cursor_can_hover_over_but_needs_double_click(void) const
@@ -1009,9 +1009,9 @@ int Thing::tick_catches_up_on_attack(void) const
     return (tp()->tick_catches_up_on_attack());
 }
 
-int Thing::is_temporary(void) const
+int Thing::is_removable_if_out_of_slots(void) const
 {_
-    return (tp()->is_temporary());
+    return (tp()->is_removable_if_out_of_slots());
 }
 
 int Thing::is_smoke(void) const

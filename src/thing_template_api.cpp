@@ -230,7 +230,7 @@ int Tp::is_rrr7(void) const { return _is_rrr7; }
 int Tp::is_rrr70(void) const { return _is_rrr70; }
 int Tp::is_rrr71(void) const { return _is_rrr71; }
 int Tp::is_rrr72(void) const { return _is_rrr72; }
-int Tp::is_rrr73(void) const { return _is_rrr73; }
+int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_cursor_can_hover_over_but_needs_double_click(void) const { return _is_cursor_can_hover_over_but_needs_double_click; }
 int Tp::is_gfx_moves_ahead_shown(void) const { return _is_gfx_moves_ahead_shown; }
 int Tp::is_gfx_health_bar_shown_only_when_injured(void) const { return _is_gfx_health_bar_shown_only_when_injured; }
@@ -261,7 +261,7 @@ int Tp::is_slime_baby_eater(void) const { return _is_slime_baby_eater; }
 int Tp::is_slime_eater(void) const { return _is_slime_eater; }
 int Tp::is_slime_parent(void) const { return _is_slime_parent; }
 int Tp::is_smoke(void) const { return _is_smoke; }
-int Tp::is_temporary(void) const { return _is_temporary; }
+int Tp::is_removable_if_out_of_slots(void) const { return _is_removable_if_out_of_slots; }
 int Tp::is_torch(void) const { return _is_torch; }
 int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_treasure_eater(void) const { return _is_treasure_eater; }
@@ -471,7 +471,7 @@ void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
 void Tp::set_is_rrr70(int v) { _is_rrr70 = v; }
 void Tp::set_is_rrr71(int v) { _is_rrr71 = v; }
 void Tp::set_is_rrr72(int v) { _is_rrr72 = v; }
-void Tp::set_is_rrr73(int v) { _is_rrr73 = v; }
+void Tp::set_is_the_grid(int v) { _is_the_grid = v; }
 void Tp::set_is_cursor_can_hover_over_but_needs_double_click(int v) { _is_cursor_can_hover_over_but_needs_double_click = v; }
 void Tp::set_is_gfx_moves_ahead_shown(int v) { _is_gfx_moves_ahead_shown = v; }
 void Tp::set_is_gfx_health_bar_shown_only_when_injured(int v) { _is_gfx_health_bar_shown_only_when_injured = v; }
@@ -502,7 +502,7 @@ void Tp::set_is_slime_baby_eater(int v) { _is_slime_baby_eater = v; }
 void Tp::set_is_slime_eater(int v) { _is_slime_eater = v; }
 void Tp::set_is_slime_parent(int v) { _is_slime_parent = v; }
 void Tp::set_is_smoke(int v) { _is_smoke = v; }
-void Tp::set_is_temporary(int v) { _is_temporary = v; }
+void Tp::set_is_removable_if_out_of_slots(int v) { _is_removable_if_out_of_slots = v; }
 void Tp::set_is_torch(int v) { _is_torch = v; }
 void Tp::set_is_treasure(int v) { _is_treasure = v; }
 void Tp::set_is_treasure_eater(int v) { _is_treasure_eater = v; }

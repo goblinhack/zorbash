@@ -71,6 +71,11 @@ void Level::init (point3d at, int seed)
             continue;
         }
 
+        //
+        // The grid is the basis of all reality.
+        //
+        place_the_grid(dungeon);
+
         if (g_errored) { return; }
 #if 0
         //
@@ -492,6 +497,15 @@ void Level::place_floors (Dungeonp d, std::string what, int depth,
                 }
                 t->tile_curr = tile->global_index;
             }
+        }
+    }
+}
+
+void Level::place_the_grid (Dungeonp d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            (void) thing_new("the_grid", fpoint(x, y));
         }
     }
 }

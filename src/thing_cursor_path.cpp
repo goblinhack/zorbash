@@ -22,15 +22,32 @@ bool Thing::cursor_path_pop_next_and_move (void)
             t->dead("end of life");
         } FOR_ALL_THINGS_END()
         monstp->move_path.erase(monstp->move_path.begin());
+
         if (!move_no_shove(future_pos)) {
             cursor_path_stop();
             return (false);
         } else {
-            return (true);
+#if 0
+            if (attack(future_pos)) {
+                game->tick_begin();
+                return (true);
+            }
+#endif
         }
     } else {
-        return (false);
+#if 0
+        if (is_player()) {
+minicon("jump to %f,%f", level->cursor->mid_at.x,level->cursor->mid_at.y);
+            point p = make_point(level->cursor->mid_at.x,
+                                 level->cursor->mid_at.y);
+            if (try_to_jump(p)) {
+                game->tick_begin();
+                return true;
+            }
+        }
+#endif
     }
+    return false;
 }
 
 void Thing::cursor_path_pop_first_move (void)

@@ -27,6 +27,7 @@ bool Thing::chasm_tick (void)
     }
 
     if (level->is_chasm(mid_at.x, mid_at.y)) {
+        log("over a chasm");
         fall(1, 750);
         wobble(360);
         return true;

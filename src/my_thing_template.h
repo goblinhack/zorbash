@@ -263,7 +263,7 @@ private:
     int _is_rrr70 {};
     int _is_rrr71 {};
     int _is_rrr72 {};
-    int _is_rrr73 {};
+    int _is_the_grid {};
     int _is_cursor_can_hover_over_but_needs_double_click {};
     int _is_gfx_moves_ahead_shown {};
     int _is_gfx_health_bar_shown_only_when_injured {};
@@ -297,7 +297,7 @@ private:
     int _is_slime {};
     int _is_slime_eater {};
     int _is_smoke {};
-    int _is_temporary {};
+    int _is_removable_if_out_of_slots {};
     int _is_torch {};
     int _is_treasure {};
     int _is_undead {};
@@ -601,7 +601,7 @@ public:
     int is_rrr70(void) const;
     int is_rrr71(void) const;
     int is_rrr72(void) const;
-    int is_rrr73(void) const;
+    int is_the_grid(void) const;
     int is_cursor_can_hover_over_but_needs_double_click(void) const;
     int is_gfx_moves_ahead_shown(void) const;
     int is_gfx_health_bar_shown_only_when_injured(void) const;
@@ -634,7 +634,7 @@ public:
     int is_gold(void) const;
     int is_loggable_for_important_stuff(void) const;
     int tick_catches_up_on_attack(void) const;
-    int is_temporary(void) const;
+    int is_removable_if_out_of_slots(void) const;
     int is_smoke(void) const;
     int is_acid_hater(void) const;
     int is_treasure(void) const;
@@ -847,7 +847,7 @@ public:
     void set_is_rrr70(int);
     void set_is_rrr71(int);
     void set_is_rrr72(int);
-    void set_is_rrr73(int);
+    void set_is_the_grid(int);
     void set_is_cursor_can_hover_over_but_needs_double_click(int);
     void set_is_gfx_moves_ahead_shown(int);
     void set_is_gfx_health_bar_shown_only_when_injured(int);
@@ -890,7 +890,7 @@ public:
     void set_is_secret_door(int);
     void set_is_shovable(int);
     void set_is_smoke(int);
-    void set_is_temporary(int);
+    void set_is_removable_if_out_of_slots(int);
     void set_is_torch(int);
     void set_is_treasure(int);
     void set_is_undead(int);
