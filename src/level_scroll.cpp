@@ -138,6 +138,41 @@ void Level::scroll_map_set_target (void)
         sensitivity = 0.5;
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
+
+        //
+        // Auto scroll if we cross these limits
+        //
+        float x1 = ((float)TILES_ACROSS / 2) - x_sensitivity;
+        float x2 = ((float)TILES_ACROSS / 2) + x_sensitivity;
+        float y1 = ((float)TILES_DOWN / 2) - y_sensitivity;
+        float y2 = ((float)TILES_DOWN / 2) + y_sensitivity;
+
+        //
+        // Make sure we have a couple of tiles always at the edge to scroll
+        //
+        if (y1 <= 0.1) { y1 = 0.1; }
+        if (x1 <= 0.1) { x1 = 0.1; }
+        if (y2 >= TILES_DOWN - 1.1) { y2 = TILES_DOWN - 1.1; }
+        if (x2 >= TILES_ACROSS - 1.1) { x2 = TILES_ACROSS - 1.1; }
+
+        //
+        // Auto scroll
+        //
+        float dx = follow.x - map_wanted_at.x;
+        if (dx > x2) {
+            map_wanted_at.x++;
+        }
+        if (dx < x1) {
+            map_wanted_at.x--;
+        }
+
+        float dy = follow.y - map_wanted_at.y;
+        if (dy > y2) {
+            map_wanted_at.y++;
+        }
+        if (dy < y1) {
+            map_wanted_at.y--;
+        }
     } else if (cursor && !map_follow_player) {
         //
         // Allow the player to scroll around the scene of carnage
@@ -147,55 +182,18 @@ void Level::scroll_map_set_target (void)
             return;
         }
 
-        follow = cursor->mid_at;
-
-        //
-        // How many tiles away from the edge at each zoom level we use
-        // to auto scroll
-        //
-        sensitivity = (float)TILES_ACROSS / 1.5; // larger N -> more sensitive
-        if (sensitivity < 0.5) {
-            sensitivity = 0.5;
+        auto d = 0.3;
+        if (mouse_x >= game->config.outer_pix_width - 1) {
+            map_wanted_at.x += d;
         }
-
-        x_sensitivity = sensitivity * game->config.video_w_h_ratio;
-        y_sensitivity = sensitivity;
-    } else {
-        return;
-    }
-
-    //
-    // Auto scroll if we cross these limits
-    //
-    float x1 = ((float)TILES_ACROSS / 2) - x_sensitivity;
-    float x2 = ((float)TILES_ACROSS / 2) + x_sensitivity;
-    float y1 = ((float)TILES_DOWN / 2) - y_sensitivity;
-    float y2 = ((float)TILES_DOWN / 2) + y_sensitivity;
-
-    //
-    // Make sure we have a couple of tiles always at the edge to scroll
-    //
-    if (y1 <= 0.5) { y1 = 0.5; }
-    if (x1 <= 0.5) { x1 = 0.5; }
-    if (y2 >= TILES_DOWN - 1.5) { y2 = TILES_DOWN - 1.5; }
-    if (x2 >= TILES_ACROSS - 1.5) { x2 = TILES_ACROSS - 1.5; }
-
-    //
-    // Auto scroll
-    //
-    float dx = follow.x - map_wanted_at.x;
-    if (dx > x2) {
-        map_wanted_at.x++;
-    }
-    if (dx < x1) {
-        map_wanted_at.x--;
-    }
-
-    float dy = follow.y - map_wanted_at.y;
-    if (dy > y2) {
-        map_wanted_at.y++;
-    }
-    if (dy < y1) {
-        map_wanted_at.y--;
+        if (mouse_x <= 1) {
+            map_wanted_at.x -= d;
+        }
+        if (mouse_y >= game->config.outer_pix_height - 1) {
+            map_wanted_at.y += d;
+        }
+        if (mouse_y <= 1) {
+            map_wanted_at.y -= d;
+        }
     }
 }
