@@ -1400,7 +1400,7 @@ void sdl_loop (void)
         // Draw the map
         //
         if (unlikely(game->config.gfx_minimap)) {
-            float mx = 0.2;
+            float mx = 0.25;
             float my = mx * game->config.video_w_h_ratio;
             mx *= game->config.outer_pix_width;
             my *= game->config.outer_pix_height;
@@ -1417,19 +1417,30 @@ void sdl_loop (void)
             //
             // Over minimap?
             //
-            if ((mouse_x >= game->config.outer_pix_width - mx) &&
-                (mouse_y >= game->config.outer_pix_height - my)) {
-                game->minimap_over =
-                  make_point(
-                    ((float)(mouse_x - (game->config.outer_pix_width - mx))
-                     / mx) * MAP_WIDTH,
-                    ((float)(mouse_y - (game->config.outer_pix_height - my))
-                     / my) * MAP_HEIGHT
-                  );
-            } else {
-                game->minimap_over      = point(-1, -1);
+            if (game->level) {
+                auto old_minimap_over = game->minimap_over;
+                if ((mouse_x >= game->config.outer_pix_width - mx) &&
+                    (mouse_y >= game->config.outer_pix_height - my)) {
+                    game->minimap_over =
+                      make_point(
+                        ((float)(mouse_x - (game->config.outer_pix_width - mx))
+                         / mx) * MAP_WIDTH,
+                        ((float)(mouse_y - (game->config.outer_pix_height - my))
+                         / my) * MAP_HEIGHT
+                      );
+                    if (game->level->cursor) {
+                        game->level->cursor_needs_update = true;
+                        game->level->cursor_found = false;
+                        game->level->cursor_move();
+                    }
+                } else {
+                    game->minimap_over = point(-1, -1);
+                }
+
+                if (old_minimap_over != game->minimap_over) {
+                    game->level->minimap_valid = false;
+                }
             }
-//MINICON("%d %d", game->minimap_over.x, game->minimap_over.y);
         }
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

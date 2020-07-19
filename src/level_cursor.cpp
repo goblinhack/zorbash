@@ -34,14 +34,18 @@ void Level::cursor_find_on_visible_things (
         return;
     }
 
-    //
-    // What tile are we over?
-    //
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, MAP_DEPTH_THE_GRID) {
-                t->cursor_hover_over_check();
-            } FOR_ALL_THINGS_END();
+    if ((game->minimap_over.x > 0) && (game->minimap_over.y > 0)) {
+        cursor->mid_at = make_fpoint(game->minimap_over);
+    } else {
+        //
+        // What tile are we over?
+        //
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, MAP_DEPTH_THE_GRID) {
+                    t->cursor_hover_over_check();
+                } FOR_ALL_THINGS_END();
+            }
         }
     }
 
