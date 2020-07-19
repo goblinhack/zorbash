@@ -1417,7 +1417,8 @@ void sdl_loop (void)
             //
             // Over minimap?
             //
-            if (game->level) {
+            auto level = game->level;
+            if (level) {
                 auto old_minimap_over = game->minimap_over;
                 if ((mouse_x >= game->config.outer_pix_width - mx) &&
                     (mouse_y >= game->config.outer_pix_height - my)) {
@@ -1428,10 +1429,16 @@ void sdl_loop (void)
                         ((float)(mouse_y - (game->config.outer_pix_height - my))
                          / my) * MAP_HEIGHT
                       );
-                    if (game->level->cursor) {
-                        game->level->cursor_needs_update = true;
-                        game->level->cursor_found = false;
-                        game->level->cursor_move();
+                    auto cursor = game->level->cursor;
+                    fpoint to(game->minimap_over.x, game->minimap_over.y);
+                    if (cursor) {_
+                        verify(cursor);
+                        level->cursor_at = to;
+                        if (level->cursor_at != level->cursor_at_old) {
+                            level->cursor_at_old = to;
+                            cursor->move(make_fpoint(game->minimap_over));
+                            level->cursor_path_create();
+                        }
                     }
                 } else {
                     game->minimap_over = point(-1, -1);
