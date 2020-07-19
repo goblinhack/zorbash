@@ -1413,6 +1413,14 @@ void sdl_loop (void)
             blit(fbo_tex_id[FBO_MINIMAP], 0.0, 1.0, 1.0, 0.0, 0, my, mx, 0.0);
             blit_flush();
             glPopMatrix();
+
+            //
+            // Over minimap?
+            //
+            if ((mouse_x >= game->config.outer_pix_width - mx) &&
+                (mouse_y >= game->config.outer_pix_height - my)) {
+            } else {
+            }
         }
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
