@@ -196,6 +196,7 @@ static void wid_botcon_wid_create (void)
         wid_set_name(wid_botcon_window, "wid botcon window");
         wid_set_pos(wid_botcon_window, tl, br);
         wid_set_ignore_events(wid_botcon_window, true);
+        wid_set_ignore_scroll_events(wid_botcon_window, true);
         wid_set_shape_none(wid_botcon_window);
         // wid_set_style(wid_botcon_window, UI_WID_STYLE_GREEN);
     }

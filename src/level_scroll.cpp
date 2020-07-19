@@ -154,8 +154,8 @@ void Level::scroll_map_set_target (void)
         // to auto scroll
         //
         sensitivity = (float)TILES_ACROSS / 1.5; // larger N -> more sensitive
-        if (sensitivity < 1) {
-            sensitivity = 1;
+        if (sensitivity < 0.5) {
+            sensitivity = 0.5;
         }
 
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
@@ -175,10 +175,10 @@ void Level::scroll_map_set_target (void)
     //
     // Make sure we have a couple of tiles always at the edge to scroll
     //
-    if (y1 < 2) { y1 = 2; }
-    if (x1 < 2) { x1 = 2; }
-    if (y2 > TILES_DOWN - 2) { y2 = TILES_DOWN - 2; }
-    if (x2 > TILES_ACROSS - 2) { x2 = TILES_ACROSS - 2; }
+    if (y1 <= 0.5) { y1 = 0.5; }
+    if (x1 <= 0.5) { x1 = 0.5; }
+    if (y2 >= TILES_DOWN - 1.5) { y2 = TILES_DOWN - 1.5; }
+    if (x2 >= TILES_ACROSS - 1.5) { x2 = TILES_ACROSS - 1.5; }
 
     //
     // Auto scroll
