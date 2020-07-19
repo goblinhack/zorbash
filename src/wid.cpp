@@ -3759,8 +3759,10 @@ Widp wid_find_under_mouse (void)
     if (w) {
         w = wid_get_top_parent(w);
         if (wid_ignore_events(w)) {
+//MINICON("ign1 %s", wid_name(w).c_str());
             return nullptr;
         } else {
+//MINICON("over1 %s", wid_name(w).c_str());
             return w;
         }
     }
@@ -3776,8 +3778,10 @@ Widp wid_find_under_mouse_when_scrolling (void)
     if (w) {
         w = wid_get_top_parent(w);
         if (wid_ignore_scroll_events(w)) {
+//MINICON("ign2 %s", wid_name(w).c_str());
             return nullptr;
         } else {
+//MINICON("over2 %s", wid_name(w).c_str());
             return w;
         }
     }

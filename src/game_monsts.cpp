@@ -124,6 +124,7 @@ static void game_monsts_wid_create (void)
         // wid_set_style(wid_items, UI_WID_STYLE_OUTLINE);
         // wid_set_style(wid_items, UI_WID_STYLE_GREEN);
         wid_set_shape_square(wid_items);
+        wid_set_ignore_scroll_events(wid_items, true);
     }
 
     sort(items.begin(),

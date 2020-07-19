@@ -10,7 +10,7 @@
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
-    if (wid_find_under_mouse()) {
+    if (wid_find_under_mouse_when_scrolling()) {
         return (false);
     }
 
@@ -90,9 +90,5 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
 uint8_t
 game_mouse_up (int32_t x, int32_t y, uint32_t button)
 {_
-    if (wid_find_under_mouse()) {
-        return (false);
-    }
-
     return (false);
 }
