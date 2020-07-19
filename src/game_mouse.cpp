@@ -74,7 +74,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
             int x = level->cursor->mid_at.x;
             int y = level->cursor->mid_at.y;
             FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
-                if (t->is_monst()) {
+                if (t->is_monst() || t->is_generator()) {
                     if (t != level->player) {
                         level->player->attack(level->cursor->mid_at);
                         return (true);

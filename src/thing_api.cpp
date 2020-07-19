@@ -454,9 +454,9 @@ int Thing::is_movable(void) const
     return (tp()->is_movable());
 }
 
-int Thing::is_movement_blocking(void) const
+int Thing::is_movement_blocking_hard(void) const
 {_
-    return (tp()->is_movement_blocking());
+    return (tp()->is_movement_blocking_hard());
 }
 
 int Thing::ai_obstacle(void) const
@@ -839,9 +839,9 @@ int Thing::is_rrr71(void) const
     return (tp()->is_rrr71());
 }
 
-int Thing::is_rrr72(void) const
+int Thing::is_movement_blocking_soft(void) const
 {_
-    return (tp()->is_rrr72());
+    return (tp()->is_movement_blocking_soft());
 }
 
 int Thing::is_the_grid(void) const

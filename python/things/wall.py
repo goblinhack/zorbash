@@ -32,7 +32,7 @@ def tp_init(name,
     x.set_is_interesting(False)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_loggable_for_important_stuff(False)
-    x.set_is_movement_blocking(True)
+    x.set_is_movement_blocking_hard(True)
     x.set_ai_obstacle(True)
     x.set_is_wall(True)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
