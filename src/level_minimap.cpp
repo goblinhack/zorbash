@@ -113,7 +113,7 @@ void Level::update_minimap (void)
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
-                    c = WHITE;
+                    c = PINK;
                 } else if (is_door(x, y)) {
                     c = RED;
                 } else if (is_lava(x, y)) {
@@ -156,9 +156,16 @@ void Level::update_minimap (void)
                 if (!x || !y) {
                     c = GRAY;
                     c.a = 200;
-                } else if ((x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
+                } else if ((x == MAP_WIDTH - 1) || (y == MAP_HEIGHT - 1)) {
                     c = DARKGRAY;
                     c.a = 200;
+                }
+
+                if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
+                    if ((game->minimap_over.x == x) &&
+                        (game->minimap_over.y == y)) {
+                        c = RED;
+                    }
                 }
 
                 glcolor(c);
