@@ -148,14 +148,6 @@ void Level::scroll_map_set_target (void)
         float y2 = ((float)TILES_DOWN / 2) + y_sensitivity;
 
         //
-        // Make sure we have a couple of tiles always at the edge to scroll
-        //
-        if (y1 <= 0.1) { y1 = 0.1; }
-        if (x1 <= 0.1) { x1 = 0.1; }
-        if (y2 >= TILES_DOWN - 1.1) { y2 = TILES_DOWN - 1.1; }
-        if (x2 >= TILES_ACROSS - 1.1) { x2 = TILES_ACROSS - 1.1; }
-
-        //
         // Auto scroll
         //
         float dx = follow.x - map_wanted_at.x;

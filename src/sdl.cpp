@@ -1419,8 +1419,17 @@ void sdl_loop (void)
             //
             if ((mouse_x >= game->config.outer_pix_width - mx) &&
                 (mouse_y >= game->config.outer_pix_height - my)) {
+                game->minimap_over =
+                  make_point(
+                    ((float)(mouse_x - (game->config.outer_pix_width - mx))
+                     / mx) * MAP_WIDTH,
+                    ((float)(mouse_y - (game->config.outer_pix_height - my))
+                     / my) * MAP_HEIGHT
+                  );
             } else {
+                game->minimap_over      = point(-1, -1);
             }
+//MINICON("%d %d", game->minimap_over.x, game->minimap_over.y);
         }
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
