@@ -21,7 +21,8 @@ public:
     //
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_soft {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};
@@ -1455,56 +1456,111 @@ public:
     //
     // Used in lighting, so inlined
     //
-    inline bool is_movement_blocking (const point &p)
+    inline bool is_movement_blocking_hard (const point &p)
     {
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_movement_blocking, p.x, p.y));
+        return (get(_is_movement_blocking_hard, p.x, p.y));
     }
 
-    inline bool is_movement_blocking_no_check (const point &p)
+    inline bool is_movement_blocking_hard_no_check (const point &p)
     {
-        return (get_no_check(_is_movement_blocking, p.x, p.y));
+        return (get_no_check(_is_movement_blocking_hard, p.x, p.y));
     }
 
-    inline bool is_movement_blocking (const int x, const int y)
+    inline bool is_movement_blocking_hard (const int x, const int y)
     {
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_movement_blocking, x, y));
+        return (get(_is_movement_blocking_hard, x, y));
     }
 
-    inline bool is_movement_blocking_no_check (const int x, const int y)
+    inline bool is_movement_blocking_hard_no_check (const int x, const int y)
     {
-        return (get_no_check(_is_movement_blocking, x, y));
+        return (get_no_check(_is_movement_blocking_hard, x, y));
     }
 
-    inline void set_is_movement_blocking (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_movement_blocking, x, y, true);
-    }
-
-    inline void set_is_movement_blocking_no_check (const int x, const int y)
-    {
-        set_no_check(_is_movement_blocking, x, y, true);
-    }
-
-    inline void unset_is_movement_blocking (const int x, const int y)
+    inline void set_is_movement_blocking_hard (const int x, const int y)
     {
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_is_movement_blocking, x, y, false);
+        set(_is_movement_blocking_hard, x, y, true);
     }
 
-    inline void unset_is_movement_blocking_no_check (const int x, const int y)
+    inline void set_is_movement_blocking_hard_no_check (const int x, const int y)
     {
-        set_no_check(_is_movement_blocking, x, y, false);
+        set_no_check(_is_movement_blocking_hard, x, y, true);
+    }
+
+    inline void unset_is_movement_blocking_hard (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_movement_blocking_hard, x, y, false);
+    }
+
+    inline void unset_is_movement_blocking_hard_no_check (const int x, const int y)
+    {
+        set_no_check(_is_movement_blocking_hard, x, y, false);
+    }
+
+    //
+    // Used in lighting, so inlined
+    //
+    inline bool is_movement_blocking_soft (const point &p)
+    {
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_movement_blocking_soft, p.x, p.y));
+    }
+
+    inline bool is_movement_blocking_soft_no_check (const point &p)
+    {
+        return (get_no_check(_is_movement_blocking_soft, p.x, p.y));
+    }
+
+    inline bool is_movement_blocking_soft (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_movement_blocking_soft, x, y));
+    }
+
+    inline bool is_movement_blocking_soft_no_check (const int x, const int y)
+    {
+        return (get_no_check(_is_movement_blocking_soft, x, y));
+    }
+
+    inline void set_is_movement_blocking_soft (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_movement_blocking_soft, x, y, true);
+    }
+
+    inline void set_is_movement_blocking_soft_no_check (const int x, const int y)
+    {
+        set_no_check(_is_movement_blocking_soft, x, y, true);
+    }
+
+    inline void unset_is_movement_blocking_soft (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_movement_blocking_soft, x, y, false);
+    }
+
+    inline void unset_is_movement_blocking_soft_no_check (const int x, const int y)
+    {
+        set_no_check(_is_movement_blocking_soft, x, y, false);
     }
 
     inline bool is_lit (const point &p)

@@ -18,7 +18,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_interesting(True)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_loggable_for_important_stuff(False)
-    x.set_is_movement_blocking(True)
+    x.set_is_movement_blocking_hard(True)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_text_description("An aged and moss-covered stone pillar")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

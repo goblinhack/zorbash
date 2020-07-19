@@ -33,6 +33,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
                 return (true);
             }
 #endif
+            return (true);
         }
     } else {
 #if 0
@@ -59,29 +60,34 @@ void Thing::cursor_path_pop_first_move (void)
         new_monst();
         monstp->move_path = game->cursor_move_path;
         game->cursor_move_path.clear();
-        cursor_path_pop_next_and_move();
-    } else if (level->cursor) {
-#if 0
-        level->cursor_path_create();
-        if (game->cursor_move_path.size()) {
-            //
-            // A path to the target exists.
-            //
-            new_monst();
-            monstp->move_path = game->cursor_move_path;
-            game->cursor_move_path.clear();
-            cursor_path_pop_next_and_move();
-        } else 
-#endif
-        if (level->cursor) {
-            //
-            // A path to the target does not exist. Jump?
-            //
-            point p = make_point(level->cursor->mid_at.x,
-                                 level->cursor->mid_at.y);
-            if (try_to_jump(p)) {
-                game->tick_begin();
+        if (cursor_path_pop_next_and_move()) {
+            if (!game->cursor_move_path.size()) {
+                level->cursor_path_create();
             }
+            return;
+        }
+    }
+
+    if (level->cursor) {
+        //
+        // A path to the target does not exist. Jump?
+        //
+        point p = make_point(level->cursor->mid_at.x,
+                             level->cursor->mid_at.y);
+        if (try_to_jump(p)) {
+            game->tick_begin();
+        } else if ((fabs(p.x - mid_at.x) <= 1) &&
+                   (fabs(p.y - mid_at.y) <= 1)) {
+            log("is adjacent, try to attack %f,%F",
+                level->cursor->mid_at.x, level->cursor->mid_at.y);
+
+            if (attack(level->cursor->mid_at)) {
+                game->tick_begin();
+            } else {
+                MINICON("You cannot jump or move there");
+            }
+        } else {
+            MINICON("You cannot jump or move there");
         }
     }
 }

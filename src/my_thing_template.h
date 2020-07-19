@@ -182,7 +182,7 @@ private:
     int _is_meat {};
     int _is_monst {};
     int _is_movable {};
-    int _is_movement_blocking {};
+    int _is_movement_blocking_hard {};
     int _is_msg {};
     int _is_no_tile {};
     int _is_acid {};
@@ -262,7 +262,7 @@ private:
     int _is_rrr69 {};
     int _is_rrr70 {};
     int _is_rrr71 {};
-    int _is_rrr72 {};
+    int _is_movement_blocking_soft {};
     int _is_the_grid {};
     int _is_cursor_can_hover_over_but_needs_double_click {};
     int _is_gfx_moves_ahead_shown {};
@@ -522,7 +522,7 @@ public:
     int is_meat_eater(void) const;
     int is_monst(void) const;
     int is_movable(void) const;
-    int is_movement_blocking(void) const;
+    int is_movement_blocking_hard(void) const;
     int is_msg(void) const;
     int is_no_tile(void) const;
     int is_player(void) const;
@@ -600,7 +600,7 @@ public:
     int is_rrr69(void) const;
     int is_rrr70(void) const;
     int is_rrr71(void) const;
-    int is_rrr72(void) const;
+    int is_movement_blocking_soft(void) const;
     int is_the_grid(void) const;
     int is_cursor_can_hover_over_but_needs_double_click(void) const;
     int is_gfx_moves_ahead_shown(void) const;
@@ -767,7 +767,7 @@ public:
     void set_is_meat_eater(int);
     void set_is_monst(int);
     void set_is_movable(int);
-    void set_is_movement_blocking(int);
+    void set_is_movement_blocking_hard(int);
     void set_is_msg(int);
     void set_is_no_tile(int);
     void set_is_player(int);
@@ -846,7 +846,7 @@ public:
     void set_is_rrr69(int);
     void set_is_rrr70(int);
     void set_is_rrr71(int);
-    void set_is_rrr72(int);
+    void set_is_movement_blocking_soft(int);
     void set_is_the_grid(int);
     void set_is_cursor_can_hover_over_but_needs_double_click(int);
     void set_is_gfx_moves_ahead_shown(int);

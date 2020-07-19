@@ -880,7 +880,13 @@ bool Thing::collision_obstacle (Thingp it)
     //
     // Allow movement through open doors only
     //
-    if (it->is_movement_blocking()) {
+    if (it->is_movement_blocking_hard()) {
+        if (!it->is_open) {
+            return true;
+        }
+    }
+
+    if (it->is_movement_blocking_soft()) {
         if (!it->is_open) {
             return true;
         }

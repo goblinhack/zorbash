@@ -389,8 +389,8 @@ class Tp:
     def set_is_rrr71(self, value):
         zx.tp_set_is_rrr71(self, value)
 
-    def set_is_rrr72(self, value):
-        zx.tp_set_is_rrr72(self, value)
+    def set_is_movement_blocking_soft(self, value):
+        zx.tp_set_is_movement_blocking_soft(self, value)
 
     def set_is_the_grid(self, value):
         zx.tp_set_is_the_grid(self, value)
@@ -815,8 +815,8 @@ class Tp:
     def set_gfx_animated_can_vflip(self, value):
         zx.tp_set_gfx_animated_can_vflip(self, value)
 
-    def set_is_movement_blocking(self, value):
-        zx.tp_set_is_movement_blocking(self, value)
+    def set_is_movement_blocking_hard(self, value):
+        zx.tp_set_is_movement_blocking_hard(self, value)
 
     def set_is_treasure(self, value):
         zx.tp_set_is_treasure(self, value)

@@ -152,7 +152,7 @@ int Tp::is_meat(void) const { return _is_meat; }
 int Tp::is_meat_eater(void) const { return _is_meat_eater; }
 int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_movable(void) const { return _is_movable; }
-int Tp::is_movement_blocking(void) const { return _is_movement_blocking; }
+int Tp::is_movement_blocking_hard(void) const { return _is_movement_blocking_hard; }
 int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_player(void) const { return _is_player; }
@@ -229,7 +229,7 @@ int Tp::is_rrr69(void) const { return _is_rrr69; }
 int Tp::is_rrr7(void) const { return _is_rrr7; }
 int Tp::is_rrr70(void) const { return _is_rrr70; }
 int Tp::is_rrr71(void) const { return _is_rrr71; }
-int Tp::is_rrr72(void) const { return _is_rrr72; }
+int Tp::is_movement_blocking_soft(void) const { return _is_movement_blocking_soft; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_cursor_can_hover_over_but_needs_double_click(void) const { return _is_cursor_can_hover_over_but_needs_double_click; }
 int Tp::is_gfx_moves_ahead_shown(void) const { return _is_gfx_moves_ahead_shown; }
@@ -393,7 +393,7 @@ void Tp::set_is_meat(int v) { _is_meat = v; }
 void Tp::set_is_meat_eater(int v) { _is_meat_eater = v; }
 void Tp::set_is_monst(int v) { _is_monst = v; }
 void Tp::set_is_movable(int v) { _is_movable = v; }
-void Tp::set_is_movement_blocking(int v) { _is_movement_blocking = v; }
+void Tp::set_is_movement_blocking_hard(int v) { _is_movement_blocking_hard = v; }
 void Tp::set_is_msg(int v) { _is_msg = v; }
 void Tp::set_is_no_tile(int v) { _is_no_tile = v; }
 void Tp::set_is_player(int v) { _is_player = v; }
@@ -470,7 +470,7 @@ void Tp::set_is_rrr69(int v) { _is_rrr69 = v; }
 void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
 void Tp::set_is_rrr70(int v) { _is_rrr70 = v; }
 void Tp::set_is_rrr71(int v) { _is_rrr71 = v; }
-void Tp::set_is_rrr72(int v) { _is_rrr72 = v; }
+void Tp::set_is_movement_blocking_soft(int v) { _is_movement_blocking_soft = v; }
 void Tp::set_is_the_grid(int v) { _is_the_grid = v; }
 void Tp::set_is_cursor_can_hover_over_but_needs_double_click(int v) { _is_cursor_can_hover_over_but_needs_double_click = v; }
 void Tp::set_is_gfx_moves_ahead_shown(int v) { _is_gfx_moves_ahead_shown = v; }

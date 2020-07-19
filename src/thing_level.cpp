@@ -158,39 +158,40 @@ void Thing::level_push (void)
     is_attached = true;
     last_attached = point(mx, my);
 
-    if (is_acid())                      { level->set_is_acid(mx, my); }
-    if (is_blood())                     { level->set_is_blood(mx, my); }
-    if (is_chasm())                     { level->set_is_chasm(mx, my); }
-    if (is_corpse())                    { level->set_is_corpse(mx, my); }
-    if (is_corridor())                  { level->set_is_corridor(mx, my); }
-    if (is_deep_water())                { level->set_is_deep_water(mx, my); }
-    if (is_deep_water())                { level->set_is_water(mx, my); }
-    if (is_dirt())                      { level->set_is_dirt(mx, my); }
-    if (is_door() && !is_open)          { level->set_is_door(mx, my); }
-    if (is_entrance())                  { level->set_is_entrance(mx, my); }
-    if (is_exit())                      { level->set_is_exit(mx, my); }
-    if (is_fire())                      { level->set_is_fire(mx, my); }
-    if (is_floor())                     { level->set_is_floor(mx, my); }
-    if (is_food())                      { level->set_is_food(mx, my); }
-    if (is_generator())                 { level->set_is_generator(mx, my); }
-    if (is_gold())                      { level->set_is_gold(mx, my); }
-    if (is_hazard())                    { level->set_is_hazard(mx, my); }
-    if (is_key())                       { level->set_is_key(mx, my); }
-    if (is_lava())                      { level->set_is_lava(mx, my); }
-    if (is_light_blocker() && !is_open) { level->set_is_light_blocker(mx, my); }
-    if (is_monst())                     { level->set_is_monst(mx, my); }
-    if (is_movement_blocking())         { level->set_is_movement_blocking(mx, my); }
-    if (is_mundane_item())              { level->set_is_mundane_item(mx, my); }
-    if (is_potion())                    { level->set_is_potion(mx, my); }
-    if (is_rock())                      { level->set_is_rock(mx, my); }
-    if (is_secret_door())               { level->set_is_secret_door(mx, my); }
-    if (is_smoke())                     { level->set_is_smoke(mx, my); }
-    if (is_torch())                     { level->set_is_torch(mx, my); }
-    if (is_treasure())                  { level->set_is_treasure(mx, my); }
-    if (is_wall())                      { level->set_is_wall(mx, my); }
-    if (is_water())                     { level->set_is_water(mx, my); }
+    if (is_acid())                               { level->set_is_acid(mx, my); }
+    if (is_blood())                              { level->set_is_blood(mx, my); }
+    if (is_chasm())                              { level->set_is_chasm(mx, my); }
+    if (is_corpse())                             { level->set_is_corpse(mx, my); }
+    if (is_corridor())                           { level->set_is_corridor(mx, my); }
+    if (is_deep_water())                         { level->set_is_deep_water(mx, my); }
+    if (is_deep_water())                         { level->set_is_water(mx, my); }
+    if (is_dirt())                               { level->set_is_dirt(mx, my); }
+    if (is_door() && !is_open)                   { level->set_is_door(mx, my); }
+    if (is_entrance())                           { level->set_is_entrance(mx, my); }
+    if (is_exit())                               { level->set_is_exit(mx, my); }
+    if (is_fire())                               { level->set_is_fire(mx, my); }
+    if (is_floor())                              { level->set_is_floor(mx, my); }
+    if (is_food())                               { level->set_is_food(mx, my); }
+    if (is_generator())                          { level->set_is_generator(mx, my); }
+    if (is_gold())                               { level->set_is_gold(mx, my); }
+    if (is_hazard())                             { level->set_is_hazard(mx, my); }
+    if (is_key())                                { level->set_is_key(mx, my); }
+    if (is_lava())                               { level->set_is_lava(mx, my); }
+    if (is_light_blocker() && !is_open)          { level->set_is_light_blocker(mx, my); }
+    if (is_monst())                              { level->set_is_monst(mx, my); }
+    if (is_movement_blocking_hard() && !is_open) { level->set_is_movement_blocking_hard(mx, my); }
+    if (is_movement_blocking_soft() && !is_open) { level->set_is_movement_blocking_soft(mx, my); }
+    if (is_mundane_item())                       { level->set_is_mundane_item(mx, my); }
+    if (is_potion())                             { level->set_is_potion(mx, my); }
+    if (is_rock())                               { level->set_is_rock(mx, my); }
+    if (is_secret_door())                        { level->set_is_secret_door(mx, my); }
+    if (is_smoke())                              { level->set_is_smoke(mx, my); }
+    if (is_torch())                              { level->set_is_torch(mx, my); }
+    if (is_treasure())                           { level->set_is_treasure(mx, my); }
+    if (is_wall())                               { level->set_is_wall(mx, my); }
+    if (is_water())                              { level->set_is_water(mx, my); }
 
-    if (is_lava() || is_fire()) { level->heatmap_valid = false; }
+    if (is_lava() || is_fire())                  { level->heatmap_valid = false; }
 }
 
 void Thing::level_pop (void)
@@ -203,37 +204,38 @@ void Thing::level_pop (void)
     auto mx = (int16_t)(int)last_attached.x;
     auto my = (int16_t)(int)last_attached.y;
 
-    if (is_acid())                      { level->unset_is_acid(mx, my); }
-    if (is_blood())                     { level->unset_is_blood(mx, my); }
-    if (is_chasm())                     { level->unset_is_chasm(mx, my); }
-    if (is_corpse())                    { level->unset_is_corpse(mx, my); }
-    if (is_corridor())                  { level->unset_is_corridor(mx, my); }
-    if (is_deep_water())                { level->unset_is_deep_water(mx, my); }
-    if (is_deep_water())                { level->unset_is_water(mx, my); }
-    if (is_dirt())                      { level->unset_is_dirt(mx, my); }
-    if (is_door() && !is_open)          { level->unset_is_door(mx, my); }
-    if (is_entrance())                  { level->unset_is_entrance(mx, my); }
-    if (is_exit())                      { level->unset_is_exit(mx, my); }
-    if (is_fire())                      { level->unset_is_fire(mx, my); }
-    if (is_floor())                     { level->unset_is_floor(mx, my); }
-    if (is_food())                      { level->unset_is_food(mx, my); }
-    if (is_generator())                 { level->unset_is_generator(mx, my); }
-    if (is_gold())                      { level->unset_is_gold(mx, my); }
-    if (is_hazard())                    { level->unset_is_hazard(mx, my); }
-    if (is_key())                       { level->unset_is_key(mx, my); }
-    if (is_lava())                      { level->unset_is_lava(mx, my); }
-    if (is_light_blocker() && !is_open) { level->unset_is_light_blocker(mx, my); }
-    if (is_monst())                     { level->unset_is_monst(mx, my); }
-    if (is_movement_blocking())         { level->unset_is_movement_blocking(mx, my); }
-    if (is_mundane_item())              { level->unset_is_mundane_item(mx, my); }
-    if (is_potion())                    { level->unset_is_potion(mx, my); }
-    if (is_rock())                      { level->unset_is_rock(mx, my); }
-    if (is_secret_door())               { level->unset_is_secret_door(mx, my); }
-    if (is_smoke())                     { level->unset_is_smoke(mx, my); }
-    if (is_torch())                     { level->unset_is_torch(mx, my); }
-    if (is_treasure())                  { level->unset_is_treasure(mx, my); }
-    if (is_wall())                      { level->unset_is_wall(mx, my); }
-    if (is_water())                     { level->unset_is_water(mx, my); }
+    if (is_acid())                               { level->unset_is_acid(mx, my); }
+    if (is_blood())                              { level->unset_is_blood(mx, my); }
+    if (is_chasm())                              { level->unset_is_chasm(mx, my); }
+    if (is_corpse())                             { level->unset_is_corpse(mx, my); }
+    if (is_corridor())                           { level->unset_is_corridor(mx, my); }
+    if (is_deep_water())                         { level->unset_is_deep_water(mx, my); }
+    if (is_deep_water())                         { level->unset_is_water(mx, my); }
+    if (is_dirt())                               { level->unset_is_dirt(mx, my); }
+    if (is_door() && !is_open)                   { level->unset_is_door(mx, my); }
+    if (is_entrance())                           { level->unset_is_entrance(mx, my); }
+    if (is_exit())                               { level->unset_is_exit(mx, my); }
+    if (is_fire())                               { level->unset_is_fire(mx, my); }
+    if (is_floor())                              { level->unset_is_floor(mx, my); }
+    if (is_food())                               { level->unset_is_food(mx, my); }
+    if (is_generator())                          { level->unset_is_generator(mx, my); }
+    if (is_gold())                               { level->unset_is_gold(mx, my); }
+    if (is_hazard())                             { level->unset_is_hazard(mx, my); }
+    if (is_key())                                { level->unset_is_key(mx, my); }
+    if (is_lava())                               { level->unset_is_lava(mx, my); }
+    if (is_light_blocker() && !is_open)          { level->unset_is_light_blocker(mx, my); }
+    if (is_monst())                              { level->unset_is_monst(mx, my); }
+    if (is_movement_blocking_hard() && !is_open) { level->unset_is_movement_blocking_hard(mx, my); }
+    if (is_movement_blocking_soft() && !is_open) { level->unset_is_movement_blocking_soft(mx, my); }
+    if (is_mundane_item())                       { level->unset_is_mundane_item(mx, my); }
+    if (is_potion())                             { level->unset_is_potion(mx, my); }
+    if (is_rock())                               { level->unset_is_rock(mx, my); }
+    if (is_secret_door())                        { level->unset_is_secret_door(mx, my); }
+    if (is_smoke())                              { level->unset_is_smoke(mx, my); }
+    if (is_torch())                              { level->unset_is_torch(mx, my); }
+    if (is_treasure())                           { level->unset_is_treasure(mx, my); }
+    if (is_wall())                               { level->unset_is_wall(mx, my); }
+    if (is_water())                              { level->unset_is_water(mx, my); }
 
     level->remove_thing((int)last_attached.x, (int)last_attached.y, id);
 _

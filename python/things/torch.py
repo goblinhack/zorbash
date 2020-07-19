@@ -25,7 +25,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_light_strength(2)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_movement_blocking(True)
+    x.set_is_movement_blocking_soft(True)
     x.set_is_shovable(True)
     x.set_is_sidebar_item(True)
     x.set_is_torch(True)

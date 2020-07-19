@@ -21,17 +21,19 @@ bool Thing::try_to_jump (point to)
     auto y = to.y;
 
     if (is_player()) {
-        log("jump to %d,%d", x, y);
+        log("try jump to %d,%d", x, y);
     }
 
-    if (level->is_oob(x, y)) {
+    if (level->is_oob(x, y)) {_
+        log("no, oob");
         return false;
     }
 
     //
     // Block jumping over doors
     //
-    if (!level->is_visited(x, y)) {
+    if (!level->is_lit(x, y) && !level->is_visited(x, y)) {_
+        log("no, is not lit or visited");
         return false;
     }
 
@@ -65,7 +67,8 @@ bool Thing::try_to_jump (point to)
     }
 
     if (is_monst()) {
-        if (distance(mid_at, fpoint(x, y)) < 2) {
+        if (distance(mid_at, fpoint(x, y)) < 2) {_
+            log("no, too far");
             return false;
         }
     }
@@ -73,31 +76,27 @@ bool Thing::try_to_jump (point to)
     //
     // No sneaky jumping onto doors to get passed them
     //
-    if (level->is_rock(x, y) ||
-        level->is_door(x, y) ||
-        level->is_wall(x, y)) {
-        log("jump failed, into obstacle");
-        if (is_player()) {
-            MINICON("You cannot jump onto that");
-        }
+    if (level->is_movement_blocking_hard(x, y) ||
+        level->is_movement_blocking_soft(x, y)) {_
+        log("no, jump failed, into obstacle");
         return false;
     }
 
     if (check_dest) {
-        if (!level->is_dungeon(x, y)) {
-            log("jump failed, not dungeon");
+        if (!level->is_dungeon(x, y)) {_
+            log("no, jump failed, not dungeon");
             return false;
         }
 
         if (level->is_entrance(x, y) ||
             level->is_monst(x, y)    ||
-            level->is_exit(x, y)) {
-            log("jump failed, onto monst");
+            level->is_exit(x, y)) {_
+            log("no, jump failed, onto monst");
             return false;
         }
 
-        if (will_avoid(point(x, y))) {
-            log("jump failed, avoid destination");
+        if (will_avoid(point(x, y))) {_
+            log("no, jump failed, avoid destination");
             return false;
         }
     }

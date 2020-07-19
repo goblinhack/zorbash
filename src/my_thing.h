@@ -908,7 +908,7 @@ public:
     int is_meat_eater(void) const;
     int is_monst(void) const;
     int is_movable(void) const;
-    int is_movement_blocking(void) const;
+    int is_movement_blocking_hard(void) const;
     int is_msg(void) const;
     int is_mundane_item(void) const;
     int is_no_tile(void) const;
@@ -989,7 +989,7 @@ public:
     int is_rrr7(void) const;
     int is_rrr70(void) const;
     int is_rrr71(void) const;
-    int is_rrr72(void) const;
+    int is_movement_blocking_soft(void) const;
     int is_the_grid(void) const;
     int is_cursor_can_hover_over_but_needs_double_click(void) const;
     int is_gfx_moves_ahead_shown(void) const;

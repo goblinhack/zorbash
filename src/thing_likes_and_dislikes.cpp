@@ -41,12 +41,8 @@ bool Thing::will_avoid (point p) const
         }
     }
 
-    if (level->is_door(p)                            ||
-        level->is_secret_door(p)                     ||
-        level->is_generator(p)                       ||
-        level->is_movement_blocking(p)               ||
-        level->is_rock(p)                            ||
-        level->is_wall(p)) {
+    if (level->is_movement_blocking_soft(p) ||
+        level->is_movement_blocking_hard(p)) {
         return true;
     }
 
