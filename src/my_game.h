@@ -153,6 +153,7 @@ public:
     bool               soft_paused {};      // Soft pause is user initiated
     bool               started {};          // Game is afoot
     fpoint             mouse_over;          // Mouse cursor
+    point              minimap_over;        // Which tile in the minimap
     int                seed {};             // All randomness jumps off of this
     point3d            current_level;       // Where we are in the world.
     timestamp_t        last_pause {};
