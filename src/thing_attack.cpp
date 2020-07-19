@@ -27,7 +27,7 @@ bool Thing::possible_to_attack (const Thingp itp)
         return (false);
     }
 
-    if (is_alive_monst()) {
+    if (is_alive_monst() || is_resurrected) {
         if (me->is_meat_eater()) {
             if (it->is_meat() || it->is_blood()) {
                 log("can attack %s", itp->to_string().c_str());
