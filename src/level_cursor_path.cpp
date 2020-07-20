@@ -112,14 +112,13 @@ void Level::cursor_path_draw (point start, point end)
     set(d.val, end.x, end.y, DMAP_IS_GOAL);
     set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-//player->minicon("create path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+//log("make path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
     dmap_process(&d, dmap_start, dmap_end);
-    dmap_print(&d, start, dmap_start, dmap_end);
+    //dmap_print(&d, start, dmap_start, dmap_end);
     auto p = dmap_solve_allow_diagonal(&d, start);
     game->cursor_move_path = p;
 
     for (auto& c : p) {
-//CON("%d %d", c.x, c.y);
         thing_new("cursor_path", fpoint(c.x , c.y));
     }
 }

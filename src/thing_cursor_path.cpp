@@ -23,7 +23,6 @@ bool Thing::cursor_path_pop_next_and_move (void)
         } FOR_ALL_THINGS_END()
         monstp->move_path.erase(monstp->move_path.begin());
         if (move_no_shove(future_pos)) {
-            cursor_path_stop();
             return (true);
         }
     }
