@@ -108,7 +108,7 @@ int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
 int Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
 int Tp::is_chasm(void) const { return _is_chasm; }
-int Tp::collectable(void) const { return _collectable; }
+int Tp::is_collectable(void) const { return _is_collectable; }
 int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_combustible(void) const { return _is_combustible; }
 int Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
@@ -349,7 +349,7 @@ void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
 void Tp::set_is_blood_splatter(int v) { _is_blood_splatter = v; }
 void Tp::set_is_chasm(int v) { _is_chasm = v; }
-void Tp::set_collectable(int v) { _collectable = v; }
+void Tp::set_is_collectable(int v) { _is_collectable = v; }
 void Tp::set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
 void Tp::set_is_combustible(int v) { _is_combustible = v; }
 void Tp::set_is_corpse_on_death(int v) { _is_corpse_on_death = v; }

@@ -135,13 +135,13 @@ static SDL_Surface *load_image (std::string filename)
     LOG("- SDL_CreateRGBSurface");
     if (comp == 4) {
         surf = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-        newptr(surf, "SDL_CreateRGBSurface");
+        newptr(surf, "SDL_CreateRGBSurface1");
     } else if (comp == 3) {
         surf = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-        newptr(surf, "SDL_CreateRGBSurface");
+        newptr(surf, "SDL_CreateRGBSurface2");
     } else if (comp == 2) {
         surf = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
-        newptr(surf, "SDL_CreateRGBSurface");
+        newptr(surf, "SDL_CreateRGBSurface3");
     } else {
         ERR("could not handle image with %d components", comp);
         free_raw_image(image_data);
@@ -154,7 +154,7 @@ static SDL_Surface *load_image (std::string filename)
         SDL_Surface *old_surf = surf;
         LOG("- SDL_ConvertSurfaceFormat");
         surf = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
-        newptr(surf, "SDL_CreateRGBSurface");
+        newptr(surf, "SDL_CreateRGBSurface4");
         oldptr(old_surf);
         SDL_FreeSurface(old_surf);
         SDL_SaveBMP(surf, filename.c_str());
@@ -197,39 +197,39 @@ static void load_images (SDL_Surface **surf1_out,
     LOG("- SDL_CreateRGBSurface");
     if (comp == 4) {
         surf1 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-        newptr(surf1, "SDL_CreateRGBSurface");
+        newptr(surf1, "SDL_CreateRGBSurface5");
     } else if (comp == 3) {
         surf1 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-        newptr(surf1, "SDL_CreateRGBSurface");
+        newptr(surf1, "SDL_CreateRGBSurface6");
     } else if (comp == 2) {
         surf1 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
-        newptr(surf1, "SDL_CreateRGBSurface");
+        newptr(surf1, "SDL_CreateRGBSurface7");
     } else {
         ERR("could not handle image with %d components", comp);
     }
 
     if (comp == 4) {
         surf2 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-        newptr(surf2, "SDL_CreateRGBSurface");
+        newptr(surf2, "SDL_CreateRGBSurface8");
     } else if (comp == 3) {
         surf2 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-        newptr(surf2, "SDL_CreateRGBSurface");
+        newptr(surf2, "SDL_CreateRGBSurface9");
     } else if (comp == 2) {
         surf2 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
-        newptr(surf2, "SDL_CreateRGBSurface");
+        newptr(surf2, "SDL_CreateRGBSurface10");
     } else {
         ERR("could not handle image with %d components", comp);
     }
 
     if (comp == 4) {
         surf3 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-        newptr(surf3, "SDL_CreateRGBSurface");
+        newptr(surf3, "SDL_CreateRGBSurface11");
     } else if (comp == 3) {
         surf3 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-        newptr(surf3, "SDL_CreateRGBSurface");
+        newptr(surf3, "SDL_CreateRGBSurface12");
     } else if (comp == 2) {
         surf3 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
-        newptr(surf3, "SDL_CreateRGBSurface");
+        newptr(surf3, "SDL_CreateRGBSurface13");
     } else {
         ERR("could not handle image with %d components", comp);
     }
@@ -242,7 +242,7 @@ static void load_images (SDL_Surface **surf1_out,
         SDL_Surface *old_surf = surf1;
         LOG("- SDL_ConvertSurfaceFormat");
         surf1 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
-        newptr(surf1, "SDL_CreateRGBSurface");
+        newptr(surf1, "SDL_CreateRGBSurface14");
         oldptr(old_surf);
         SDL_FreeSurface(old_surf);
         SDL_SaveBMP(surf1, filename.c_str());
@@ -252,7 +252,7 @@ static void load_images (SDL_Surface **surf1_out,
         SDL_Surface *old_surf = surf2;
         LOG("- SDL_ConvertSurfaceFormat");
         surf2 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
-        newptr(surf2, "SDL_CreateRGBSurface");
+        newptr(surf2, "SDL_CreateRGBSurface15");
         oldptr(old_surf);
         SDL_FreeSurface(old_surf);
         SDL_SaveBMP(surf2, filename.c_str());
@@ -262,7 +262,7 @@ static void load_images (SDL_Surface **surf1_out,
         SDL_Surface *old_surf = surf3;
         LOG("- SDL_ConvertSurfaceFormat");
         surf3 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
-        newptr(surf3, "SDL_CreateRGBSurface");
+        newptr(surf3, "SDL_CreateRGBSurface16");
         oldptr(old_surf);
         SDL_FreeSurface(old_surf);
         SDL_SaveBMP(surf3, filename.c_str());
@@ -353,9 +353,10 @@ static std::pair<Texp, Texp> tex_sprite (SDL_Surface *in,
 
     SDL_Surface *out1 = SDL_CreateRGBSurface(0, owidth, oheight, 32,
                                              rmask, gmask, bmask, amask);
+    newptr(out1, "SDL_CreateRGBSurface17");
     SDL_Surface *out2 = SDL_CreateRGBSurface(0, owidth, oheight, 32,
                                              rmask, gmask, bmask, amask);
-    newptr(out, "SDL_CreateRGBSurface");
+    newptr(out2, "SDL_CreateRGBSurface18");
 
     //
     // Omit every grid pixel between tiles.

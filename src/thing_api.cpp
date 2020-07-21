@@ -1034,9 +1034,9 @@ int Thing::is_treasure(void) const
     return (tp()->is_treasure());
 }
 
-int Thing::collectable(void) const
+int Thing::is_collectable(void) const
 {_
-    return (tp()->collectable());
+    return (tp()->is_collectable());
 }
 
 int Thing::is_resurrectable(void) const

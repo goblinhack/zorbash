@@ -94,7 +94,9 @@ bool Thing::attack (fpoint future_pos)
 }
 
 bool Thing::attack (Thingp it)
-{
+{_
+    log("attacking %s", it->to_string().c_str());
+_
     //
     // Carry to eat later
     //

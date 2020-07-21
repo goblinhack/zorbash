@@ -175,6 +175,9 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
+                if (t->is_hidden ||                                 \
+                    t->is_falling ||                                \
+                    t->is_jumping) { continue; }                    \
                 if (t->z_depth() != z) {                            \
                     continue;                                       \
                 }
@@ -183,6 +186,9 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
+                if (t->is_hidden ||                                 \
+                    t->is_falling ||                                \
+                    t->is_jumping) { continue; }                    \
                 if (!t->get_light_count()) {                        \
                     continue;                                       \
                 }
@@ -194,6 +200,9 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
+                if (t->is_hidden ||                                 \
+                    t->is_falling ||                                \
+                    t->is_jumping) { continue; }                    \
                 if (!t->is_active()) {                              \
                     continue;                                       \
                 }                                                   \
@@ -206,6 +215,9 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
+                if (t->is_hidden ||                                 \
+                    t->is_falling ||                                \
+                    t->is_jumping) { continue; }                    \
                 if (!t->is_interesting()) {                         \
                     continue;                                       \
                 }                                                   \
@@ -217,6 +229,9 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
+                if (t->is_hidden ||                                 \
+                    t->is_falling ||                                \
+                    t->is_jumping) { continue; }                    \
                 if (!t->is_interesting() &&                         \
                     !t->is_attackable() &&                          \
                     !t->ai_obstacle()) {                            \

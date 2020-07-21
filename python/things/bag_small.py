@@ -13,7 +13,7 @@ def potion_init(name, text_name):
     x.set_gfx_small_shadow_caster(True)
     x.set_has_capacity(20)
     x.set_is_bag(True)
-    x.set_collectable(True)
+    x.set_is_collectable(True)
     x.set_is_combustible(True)
     x.set_is_droppable(True)
     x.set_is_interesting(True)

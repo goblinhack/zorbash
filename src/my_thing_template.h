@@ -142,7 +142,7 @@ private:
     int _is_blood {};
     int _is_blood_splatter {};
     int _is_chasm {};
-    int _collectable {};
+    int _is_collectable {};
     int _is_collected_as_gold {};
     int _is_combustible {};
     int _is_corpse_on_death {};
@@ -638,7 +638,7 @@ public:
     int is_smoke(void) const;
     int is_acid_hater(void) const;
     int is_treasure(void) const;
-    int collectable(void) const;
+    int is_collectable(void) const;
     int is_resurrectable(void) const;
     int is_intelligent(void) const;
     int is_double_damage_from_fire(void) const;
@@ -732,7 +732,7 @@ public:
     void set_is_blood(int);
     void set_is_blood_splatter(int);
     void set_is_chasm(int);
-    void set_collectable(int);
+    void set_is_collectable(int);
     void set_is_combustible(int);
     void set_is_corpse_on_death(int);
     void set_is_corridor(int);

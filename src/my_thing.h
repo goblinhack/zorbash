@@ -818,7 +818,7 @@ public:
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
-    int collectable(void) const;
+    int is_collectable(void) const;
     int collision_attack(void) const;
     int collision_box(void) const;
     int collision_check(void) const;

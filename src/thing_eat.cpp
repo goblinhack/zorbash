@@ -63,7 +63,10 @@ bool Thing::will_eat (const Thingp itp)
         }
     }
     if (is_player()) {
-        if (it->collectable()) {
+        if (it->is_food()) {
+            return (true);
+        }
+        if (it->is_collectable()) {
             return (true);
         }
     }

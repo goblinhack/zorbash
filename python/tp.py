@@ -530,8 +530,8 @@ class Tp:
     def set_is_treasure(self, value):
         zx.tp_set_is_treasure(self, value)
 
-    def set_collectable(self, value):
-        zx.tp_set_collectable(self, value)
+    def set_is_collectable(self, value):
+        zx.tp_set_is_collectable(self, value)
 
     def set_is_resurrectable(self, value):
         zx.tp_set_is_resurrectable(self, value)

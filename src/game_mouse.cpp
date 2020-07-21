@@ -74,11 +74,17 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
             int x = level->cursor->mid_at.x;
             int y = level->cursor->mid_at.y;
             FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
-                if (t->is_monst() || t->is_generator()) {
-                    if (t != level->player) {
-                        level->player->attack(level->cursor->mid_at);
-                        return (true);
-                    }
+                if (t == level->player) {
+                    continue;
+                }
+                if (t->is_food() || t->is_potion()) {
+                    player->log("close enough to collect");
+                    player->carry(t);
+                    return (true);
+                } else if (t->is_monst() || t->is_generator()) {
+                    player->log("close enough to attack");
+                    player->attack(level->cursor->mid_at);
+                    return (true);
                 }
             }
             FOR_ALL_THINGS_END()
