@@ -38,78 +38,10 @@ void Level::update_minimap (void)
     if (unlikely(game->config.gfx_show_hidden)) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
-                color c = WHITE;
-                if (player &&
-                    (x == (int)player->mid_at.x) &&
-                    (y == (int)player->mid_at.y)) {
-                    c = WHITE;
-                } else if (is_door(x, y)) {
+                color c;
+
+                if (is_monst(x, y) || is_generator(x, y)) {
                     c = RED;
-                } else if (is_lava(x, y)) {
-                    c = ORANGE;
-                } else if (is_wall(x, y)) {
-                    if (is_visited(x, y)) {
-                        c = GRAY80;
-                    } else {
-                        c = GRAY70;
-                    }
-                } else if (is_rock(x, y)) {
-                    if (is_visited(x, y)) {
-                        c = GRAY70;
-                    } else {
-                        c = GRAY60;
-                    }
-                } else if (is_floor(x, y) ||
-                           is_corridor(x, y)) {
-                    if (is_visited(x, y)) {
-                        c = GRAY40;
-                    } else {
-                        c = GRAY20;
-                    }
-                } else if (is_water(x, y)) {
-                    c = BLUE2;
-                } else if (is_dirt(x, y)) {
-                    c = GRAY20;
-                } else {
-                    if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
-                        c = DARKGREEN;
-                        c.a = 100;
-                    } else {
-                        c = DARKGREEN;
-                        c.a = 30;
-                    }
-                }
-
-                if ((x >= map_tl.x) && (x <= map_br.x) &&
-                    (y >= map_tl.y) && (y <= map_br.y)) {
-                } else {
-                    c.r /= 2;
-                    c.g /= 2;
-                    c.b /= 2;
-                }
-
-                glcolor(c);
-
-                auto X = x;
-                auto Y = MAP_HEIGHT - y;
-                auto tlx = X * dx;
-                auto tly = Y * dy;
-                auto brx = tlx + dx;
-                auto bry = tly + dy;
-                blit(solid_tex_id, tlx, tly, brx, bry);
-            }
-        }
-    } else {
-        //
-        // Normal mode
-        //
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            for (auto x = 0; x < MAP_WIDTH; x++) {
-                color c = WHITE;
-
-                if (!is_visited(x, y)) {
-                    c = GRAY;
-                    c.a = 100;
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
@@ -145,9 +77,7 @@ void Level::update_minimap (void)
                     c = BLACK;
                 }
 
-                if ((x >= map_tl.x) && (x <= map_br.x) &&
-                    (y >= map_tl.y) && (y <= map_br.y)) {
-                } else {
+                if (!is_lit(x, y)) {
                     c.r /= 2;
                     c.g /= 2;
                     c.b /= 2;
@@ -164,7 +94,147 @@ void Level::update_minimap (void)
                 if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
                     if ((game->minimap_over.x == x) &&
                         (game->minimap_over.y == y)) {
-                        c = RED;
+                        c = BLUE;
+                    }
+                }
+
+                glcolor(c);
+
+                auto X = x;
+                auto Y = MAP_HEIGHT - y;
+                auto tlx = X * dx;
+                auto tly = Y * dy;
+                auto brx = tlx + dx;
+                auto bry = tly + dy;
+                blit(solid_tex_id, tlx, tly, brx, bry);
+            }
+        }
+    } else {
+        //
+        // Normal mode
+        //
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                color c = WHITE;
+                if (!is_visited(x, y)) {
+                    c = GRAY;
+                    c.a = 100;
+                } else if (is_monst(x, y) || is_generator(x, y)) {
+                    c = RED;
+                } else if (player &&
+                    (x == (int)player->mid_at.x) &&
+                    (y == (int)player->mid_at.y)) {
+                    c = PINK;
+                } else if (is_door(x, y)) {
+                    c = RED;
+                } else if (is_lava(x, y)) {
+                    c = ORANGE;
+                } else if (is_wall(x, y)) {
+                       if (is_visited(x, y)) {
+                        c = GRAY80;
+                    } else {
+                        c = GRAY70;
+                    }
+                } else if (is_rock(x, y)) {
+                       if (is_visited(x, y)) {
+                        c = GRAY70;
+                    } else {
+                        c = GRAY60;
+                    }
+                } else if (is_floor(x, y) ||
+                           is_corridor(x, y)) {
+                    if (is_visited(x, y)) {
+                        c = GRAY40;
+                    } else {
+                        c = GRAY20;
+                    }
+                } else if (is_water(x, y)) {
+                    c = BLUE2;
+                } else if (is_dirt(x, y)) {
+                    c = GRAY20;
+                } else {
+                    c = BLACK;
+                }
+
+                if (!is_lit(x, y)) {
+                    c.r /= 2;
+                    c.g /= 2;
+                    c.b /= 2;
+                }
+
+                if (!x || !y) {
+                    c = GRAY;
+                    c.a = 200;
+                } else if ((x == MAP_WIDTH - 1) || (y == MAP_HEIGHT - 1)) {
+                    c = DARKGRAY;
+                    c.a = 200;
+                }
+
+                if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
+                    if ((game->minimap_over.x == x) &&
+                        (game->minimap_over.y == y)) {
+                        c = BLUE;
+                    }
+                }
+
+                if (!is_visited(x, y)) {
+                    c = GRAY;
+                    c.a = 100;
+                } else if (is_monst(x, y) || is_generator(x, y)) {
+                    c = RED;
+                } else if (player &&
+                    (x == (int)player->mid_at.x) &&
+                    (y == (int)player->mid_at.y)) {
+                    c = PINK;
+                } else if (is_door(x, y)) {
+                    c = RED;
+                } else if (is_lava(x, y)) {
+                    c = ORANGE;
+                } else if (is_wall(x, y)) {
+                       if (is_visited(x, y)) {
+                        c = GRAY80;
+                    } else {
+                        c = GRAY70;
+                    }
+                } else if (is_rock(x, y)) {
+                       if (is_visited(x, y)) {
+                        c = GRAY70;
+                    } else {
+                        c = GRAY60;
+                    }
+                } else if (is_floor(x, y) ||
+                           is_corridor(x, y)) {
+                    if (is_visited(x, y)) {
+                        c = GRAY40;
+                    } else {
+                        c = GRAY20;
+                    }
+                } else if (is_water(x, y)) {
+                    c = BLUE2;
+                } else if (is_dirt(x, y)) {
+                    c = GRAY20;
+                } else {
+                    c = BLACK;
+                }
+
+                if (!is_lit(x, y)) {
+                    c.r /= 2;
+                    c.g /= 2;
+                    c.b /= 2;
+                }
+
+                if (!x || !y) {
+                    c = GRAY;
+                    c.a = 200;
+                } else if ((x == MAP_WIDTH - 1) || (y == MAP_HEIGHT - 1)) {
+                    c = DARKGRAY;
+                    c.a = 200;
+                }
+
+                if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
+                    if ((game->minimap_over.x == x) &&
+                        (game->minimap_over.y == y)) {
+                        c = BLUE;
                     }
                 }
 
