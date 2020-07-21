@@ -100,10 +100,9 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (is_loggable_for_important_stuff()) {
-        log("killed");
+        log("killed, need to gc");
     }
 
-    dbg("need to gc");
     auto result = level->all_gc_things.insert(std::pair(id, this));
     if (result.second == false) {
         err("failed to insert into gc thing map");

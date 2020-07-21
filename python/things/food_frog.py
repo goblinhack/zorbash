@@ -5,7 +5,7 @@ import tp
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
-    x.set_collectable(True)
+    x.set_is_collectable(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
@@ -15,8 +15,8 @@ def tp_init(name, text_name):
     x.set_is_combustible(True)
     x.set_is_food(True)
     x.set_is_interesting(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_important_stuff(True)
+    x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_mundane_item(False)
     x.set_is_sidebar_item(True)
     x.set_is_throwable(True)
