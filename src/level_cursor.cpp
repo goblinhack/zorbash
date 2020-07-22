@@ -60,7 +60,12 @@ void Level::cursor_find_on_visible_things (
                 t->is_the_grid()) {
                 continue;
             }
-            BOTCON("%s", t->text_description().c_str());
+            if (t->is_on_fire()) {
+                BOTCON("%%fg=red$Burning! %s", t->text_description().c_str());
+            } else {
+                BOTCON("%s", t->text_description().c_str());
+            }
+
             hover_over = t;
             return;
         } FOR_ALL_THINGS_END()
@@ -89,6 +94,7 @@ void Level::cursor_find_on_visible_things (
             return;
         } FOR_ALL_THINGS_END()
     }
+    cursor_needs_update = false;
 }
 
 //
