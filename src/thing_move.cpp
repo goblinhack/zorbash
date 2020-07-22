@@ -176,6 +176,10 @@ void Thing::update_interpolated_position (void)
             //
             new_pos = mid_at;
             last_mid_at = mid_at;
+
+            if (is_player()) {
+                level->cursor_needs_update = true;
+            }
         }
     } else {
         float t = get_timestamp_move_end() - get_timestamp_move_begin();
