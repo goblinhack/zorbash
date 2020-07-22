@@ -49,6 +49,8 @@ void Level::cursor_find_on_visible_things (
         }
     }
 
+    cursor_needs_update = false;
+
     if (cursor) {
         auto p = cursor->mid_at;
         hover_over = nullptr;
@@ -94,7 +96,6 @@ void Level::cursor_find_on_visible_things (
             return;
         } FOR_ALL_THINGS_END()
     }
-    cursor_needs_update = false;
 }
 
 //
