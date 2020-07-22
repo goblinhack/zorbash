@@ -10,8 +10,8 @@
 
 void Thing::fall (float fall_height, timestamp_t ms)
 {
-    auto t = set_timestamp_bounce_begin(time_get_time_ms_cached());
-    set_timestamp_bounce_end(t + ms);
+    auto t = set_timestamp_fall_begin(time_get_time_ms_cached());
+    set_timestamp_fall_end(t + ms);
 
     set_fall_height(fall_height);
     is_falling = true;
@@ -32,7 +32,7 @@ float Thing::get_fall (void)
 
     auto t = time_get_time_ms_cached();
 
-    if (t >= get_timestamp_bounce_end()) {
+    if (t >= get_timestamp_fall_end()) {
         is_falling = false;
         log("end of falling");
         hide();
@@ -41,8 +41,8 @@ float Thing::get_fall (void)
     }
 
     float time_step =
-        (float)(t - get_timestamp_bounce_begin()) /
-        (float)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
+        (float)(t - get_timestamp_fall_begin()) /
+        (float)(get_timestamp_fall_end() - get_timestamp_fall_begin());
 
     if (time_step > 0.8) {
         hide();

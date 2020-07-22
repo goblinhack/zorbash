@@ -98,28 +98,64 @@ bool Thing::attack (Thingp it)
     log("attacking %s", it->to_string().c_str());
 _
     //
-    // Carry to eat later
+    // Carry to eat later. Monsts attack their food.
     //
-    if (is_player() && will_eat(it)) {
-        carry(it);
-        log("carry to eat later %s", it->to_string().c_str());
-        return true;
-    }
-
-    //
-    // Eat corpse?
-    //
-    if (it->is_dead && will_eat(it)) {
-        if (eat(it)) {
+    auto owner = owner_get();
+    if (owner) {
+        //
+        // We hit this path for swords. We don't really want the sword to
+        // do the eating, so pass control to the owner.
+        //
+       
+        //
+        // Owner eat food?
+        //
+        if (owner->will_eat(it)) {
             //
-            // Can't kill it twice, so hide it
+            // Eat corpse?
             //
-            log("eat corpse %s", it->to_string().c_str());
-            it->hide();
-            return true;
+            if (it->is_dead) {
+                if (owner->eat(it)) {
+                    //
+                    // Can't kill it twice, so hide it
+                    //
+                    owner->log("eat corpse %s", it->to_string().c_str());
+                    it->hide();
+                    return true;
+                }
+            } else if (owner->is_player()) {
+                owner->log("carry to eat later %s", it->to_string().c_str());
+                owner->carry(it);
+                return true;
+            }
+        }
+    } else {
+        //
+        // As above, but not for owner.
+        //
+       
+        if (will_eat(it)) {
+            //
+            // Eat corpse?
+            //
+            if (it->is_dead) {
+                if (eat(it)) {
+                    //
+                    // Can't kill it twice, so hide it
+                    //
+                    log("eat corpse %s", it->to_string().c_str());
+                    it->hide();
+                    return true;
+                }
+            } else if (is_player()) {
+                log("carry to eat later %s", it->to_string().c_str());
+                carry(it);
+                return true;
+            }
         }
     }
 
+    log("check is possible to attack %s", it->to_string().c_str());
     if (!possible_to_attack(it)) {
         return false;
     }
@@ -127,7 +163,7 @@ _
     auto damage = get_stats_attack();
     if (it->is_hit_by(this, damage)) {
         if (is_loggable_for_unimportant_stuff()) {
-            log("attack hit %s for %d", it->to_string().c_str(), damage);
+            log("the attack hit %s for %d", it->to_string().c_str(), damage);
         }
         if (is_attack_lunge()) {
             lunge(it->get_interpolated_mid_at());
