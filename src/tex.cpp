@@ -167,14 +167,12 @@ static SDL_Surface *load_image (std::string filename)
 
 static void load_images (SDL_Surface **surf1_out,
                          SDL_Surface **surf2_out,
-                         SDL_Surface **surf3_out,
                          std::string filename)
 {_
     uint32_t rmask, gmask, bmask, amask;
     unsigned char *image_data;
     SDL_Surface *surf1 = 0;
     SDL_Surface *surf2 = 0;
-    SDL_Surface *surf3 = 0;
     int32_t x, y, comp;
 
     image_data = load_raw_image(filename, &x, &y, &comp);
@@ -221,22 +219,8 @@ static void load_images (SDL_Surface **surf1_out,
         ERR("could not handle image with %d components", comp);
     }
 
-    if (comp == 4) {
-        surf3 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-        newptr(surf3, "SDL_CreateRGBSurface11");
-    } else if (comp == 3) {
-        surf3 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-        newptr(surf3, "SDL_CreateRGBSurface12");
-    } else if (comp == 2) {
-        surf3 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
-        newptr(surf3, "SDL_CreateRGBSurface13");
-    } else {
-        ERR("could not handle image with %d components", comp);
-    }
-
     memcpy(surf1->pixels, image_data, comp * x * y);
     memcpy(surf2->pixels, image_data, comp * x * y);
-    memcpy(surf3->pixels, image_data, comp * x * y);
 
     if (comp == 2) {
         SDL_Surface *old_surf = surf1;
@@ -258,21 +242,10 @@ static void load_images (SDL_Surface **surf1_out,
         SDL_SaveBMP(surf2, filename.c_str());
     }
 
-    if (comp == 2) {
-        SDL_Surface *old_surf = surf3;
-        LOG("- SDL_ConvertSurfaceFormat");
-        surf3 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
-        newptr(surf3, "SDL_CreateRGBSurface16");
-        oldptr(old_surf);
-        SDL_FreeSurface(old_surf);
-        SDL_SaveBMP(surf3, filename.c_str());
-    }
-
     free_raw_image(image_data);
 
     *surf1_out = surf1;
     *surf2_out = surf2;
-    *surf3_out = surf3;
 }
 
 //
@@ -425,9 +398,8 @@ void tex_load (Texp *tex,
     LOG("- create textures '%s', '%s'", file.c_str(), name.c_str());
     SDL_Surface *surface = 0;
     SDL_Surface *surface_black_and_white = 0;
-    SDL_Surface *surface_mask = 0;
 
-    load_images(&surface, &surface_black_and_white, &surface_mask, file);
+    load_images(&surface, &surface_black_and_white, file);
 
     if (!surface) {
         ERR("could not make surface from file '%s'", file.c_str());
@@ -435,11 +407,6 @@ void tex_load (Texp *tex,
 
     if (!surface_black_and_white) {
         ERR("could not make black and white surface from file '%s'",
-            file.c_str());
-    }
-
-    if (!surface_mask) {
-        ERR("could not make mask surface from file '%s'",
             file.c_str());
     }
 
