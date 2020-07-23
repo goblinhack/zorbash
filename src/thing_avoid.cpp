@@ -11,6 +11,59 @@
 #include "my_math.h"
 #include "my_thing.h"
 
+bool Tp::will_avoid (Levelp level, point p) const
+{_
+    if (level->is_water(p)) {
+        if (is_water_hater()) {
+            return true;
+        }
+    }
+
+    if (level->is_acid(p)) {
+        if (is_acid_hater()) {
+            return true;
+        }
+    }
+
+    if (!is_floating()) {
+        if (level->is_chasm(p)) {
+            return true;
+        }
+    }
+
+    if (level->is_corpse(p)) {
+        if (level->is_monst(p) > 1) {
+            return true;
+        }
+    } else {
+        if (level->is_monst(p) > 0) {
+            return true;
+        }
+    }
+
+    if (level->is_movement_blocking_soft(p) ||
+        level->is_movement_blocking_hard(p)) {
+        return true;
+    }
+
+    int heat = level->heatmap(p);
+    if (is_double_damage_from_fire()) {
+        if (heat > 0) {
+            if (is_fire_hater()) {
+                return true;
+            }
+        }
+    } else {
+        if (heat > 1) {
+            if (is_fire_hater()) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 bool Thing::will_avoid (point p) const
 {_
     if (level->is_water(p)) {
