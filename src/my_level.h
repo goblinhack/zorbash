@@ -223,7 +223,8 @@ public:
                 verify(t);                                          \
                 if (t->is_hidden) { continue; }                     \
                 if (!t->is_interesting() &&                         \
-                    !t->is_attackable() &&                          \
+                    !t->is_attackable_by_monst() &&                 \
+                    !t->is_attackable_by_player() &&                \
                     !t->ai_obstacle()) {                            \
                     continue;                                       \
                 }                                                   \

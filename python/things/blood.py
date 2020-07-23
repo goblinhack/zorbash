@@ -12,7 +12,7 @@ def tp_init(name, text_name):
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_animated_can_vflip(True)
     x.set_gfx_show_outlined(True)
-    x.set_is_attackable(True)
+    x.set_is_attackable_by_monst(True)
     x.set_is_blood(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)

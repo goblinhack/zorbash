@@ -13,6 +13,8 @@
 
 bool Thing::spawn_next_to (const std::string& what)
 {
+    log("spawn %s next to", what.c_str());
+
     std::vector<point> possible;
     static const std::vector<point> all_deltas = {
         point(-1, -1),
@@ -53,6 +55,8 @@ bool Thing::spawn_next_to (const std::string& what)
 
 bool Thing::spawn_next_to_or_on_monst (const std::string& what)
 {
+    log("spawn %s next to or on monst", what.c_str());
+
     std::vector<point> possible;
     static const std::vector<point> all_deltas = {
         point(-1, -1),
@@ -98,6 +102,8 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
 
 bool Thing::spawn_fire (const std::string& what)
 {
+    log("spawn fire: %s", what.c_str());
+
     std::vector<point> possible;
     static const std::vector<point> all_deltas = {
         point(-1, -1),
@@ -141,6 +147,8 @@ bool Thing::spawn_fire (const std::string& what)
 
 bool Thing::spawn_under (const std::string& what)
 {
+    log("spawn under: %s", what.c_str());
+
     std::vector<point> possible;
     auto x = mid_at.x;
     auto y = mid_at.y;

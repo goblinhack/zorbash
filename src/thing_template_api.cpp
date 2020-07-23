@@ -103,7 +103,7 @@ int Tp::is_attack_eater(void) const { return _is_attack_eater; }
 int Tp::is_attack_lunge(void) const { return _is_attack_lunge; }
 int Tp::is_attack_shove(void) const { return _is_attack_shove; }
 int Tp::is_attack_shove_chance_d1000(void) const { return _is_attack_shove_chance_d1000; }
-int Tp::is_attackable(void) const { return _is_attackable; }
+int Tp::is_attackable_by_monst(void) const { return _is_attackable_by_monst; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
 int Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
@@ -225,7 +225,7 @@ int Tp::is_rrr65(void) const { return _is_rrr65; }
 int Tp::is_rrr66(void) const { return _is_rrr66; }
 int Tp::is_rrr67(void) const { return _is_rrr67; }
 int Tp::is_rrr68(void) const { return _is_rrr68; }
-int Tp::is_rrr69(void) const { return _is_rrr69; }
+int Tp::is_attackable_by_player(void) const { return _is_attackable_by_player; }
 int Tp::is_rrr7(void) const { return _is_rrr7; }
 int Tp::is_rrr70(void) const { return _is_rrr70; }
 int Tp::is_rrr71(void) const { return _is_rrr71; }
@@ -344,7 +344,7 @@ void Tp::set_is_attack_eater(int v) { _is_attack_eater = v; }
 void Tp::set_is_attack_lunge(int v) { _is_attack_lunge = v; }
 void Tp::set_is_attack_shove(int v) { _is_attack_shove = v; }
 void Tp::set_is_attack_shove_chance_d1000(int v) { _is_attack_shove_chance_d1000 = v; }
-void Tp::set_is_attackable(int v) { _is_attackable = v; }
+void Tp::set_is_attackable_by_monst(int v) { _is_attackable_by_monst = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
 void Tp::set_is_blood_splatter(int v) { _is_blood_splatter = v; }
@@ -466,7 +466,7 @@ void Tp::set_is_rrr65(int v) { _is_rrr65 = v; }
 void Tp::set_is_rrr66(int v) { _is_rrr66 = v; }
 void Tp::set_is_rrr67(int v) { _is_rrr67 = v; }
 void Tp::set_is_rrr68(int v) { _is_rrr68 = v; }
-void Tp::set_is_rrr69(int v) { _is_rrr69 = v; }
+void Tp::set_is_attackable_by_player(int v) { _is_attackable_by_player = v; }
 void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
 void Tp::set_is_rrr70(int v) { _is_rrr70 = v; }
 void Tp::set_is_rrr71(int v) { _is_rrr71 = v; }

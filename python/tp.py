@@ -380,8 +380,8 @@ class Tp:
     def set_is_rrr68(self, value):
         zx.tp_set_is_rrr68(self, value)
 
-    def set_is_rrr69(self, value):
-        zx.tp_set_is_rrr69(self, value)
+    def set_is_attackable_by_player(self, value):
+        zx.tp_set_is_attackable_by_player(self, value)
 
     def set_is_rrr70(self, value):
         zx.tp_set_is_rrr70(self, value)
@@ -635,8 +635,8 @@ class Tp:
     def set_ai_obstacle(self, value):
         zx.tp_set_ai_obstacle(self, value)
 
-    def set_is_attackable(self, value):
-        zx.tp_set_is_attackable(self, value)
+    def set_is_attackable_by_monst(self, value):
+        zx.tp_set_is_attackable_by_monst(self, value)
 
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)
