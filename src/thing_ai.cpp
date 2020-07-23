@@ -48,7 +48,7 @@ _
     // If going somewhere, continue
     //
     if (monstp->wander_target != point(0, 0)) {
-        if (random_range(0, 100) < 90) {
+        if (random_range(0, 100) < 50) {
             log("try to continue wander");
             if (ai_wander()) {
                 return;

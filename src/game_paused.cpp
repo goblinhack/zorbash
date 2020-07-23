@@ -127,7 +127,8 @@ void Game::pause_select (void)
     auto width = br.x - tl.x - 1;
 
     wid_paused_window =
-      new WidPopup(tl, br, tile_find_mand("pause"), "ui_popup_short");
+      new WidPopup(tl, br, tile_find_mand("pause"), "ui_popup_short",
+                   false, false);
     wid_set_on_key_up(
       wid_paused_window->wid_popup_container, wid_paused_key_up);
     wid_set_on_key_down(

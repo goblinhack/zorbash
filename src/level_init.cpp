@@ -883,7 +883,7 @@ void Level::place_wall_deco (Dungeonp d)
             if (d->is_rock(x, y + 1)) {
                 continue;
             }
-            if (random_range(0, 100) < 90) {
+            if (random_range(0, 100) < 95) {
                 continue;
             }
 

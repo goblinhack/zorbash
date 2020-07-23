@@ -339,20 +339,36 @@ bool Level::actionbar_describe (const uint32_t slot)
     }
     auto s = t->text_name();
 
+
     if (t->is_droppable()){
-        s += ", %%fg=orange$d%%fg=reset$rop";
+        s += ", %%fg=orange$" +
+             std::string(
+                 SDL_GetScancodeName((SDL_Scancode)game->config.key_drop)) +
+             "%%fg=reset$ drop";
     }
     if (t->is_usable()){
         if (t->is_food()){
-            s += ", %%fg=green$e%%fg=reset$at";
+            s += ", %%fg=green$" +
+                 std::string(
+                     SDL_GetScancodeName((SDL_Scancode)game->config.key_eat)) +
+                 "%%fg=reset$ eat";
         } else if (t->is_potion()){
-            s += ", %%fg=green$u%%fg=reset$ drink";
+            s += ", %%fg=green$" +
+                 std::string(
+                     SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
+                 "%%fg=reset$ drink";
         } else {
-            s += ", %%fg=cyan$u%%fg=reset$se";
+            s += ", %%fg=cyan$" +
+                 std::string(
+                     SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
+                 "%%fg=reset$ use";
         }
     }
     if (t->is_throwable()){
-        s += ", %%fg=purple$t%%fg=reset$hrow";
+        s += ", %%fg=purple$" +
+             std::string(
+                 SDL_GetScancodeName((SDL_Scancode)game->config.key_throw)) +
+             "%%fg=reset$ throw";
     }
 
     BOTCON("%s", s.c_str());
