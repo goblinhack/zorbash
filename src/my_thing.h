@@ -790,7 +790,7 @@ public:
     const std::string& on_death_do(void) const;
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
-    const std::string& str10(void) const;
+    const std::string& on_birth_do(void) const;
     const std::string& text_title(void) const;
     const std::string& str2(void) const;
     const std::string& str3(void) const;

@@ -1,6 +1,10 @@
 import zx
 import tp
 
+def spawn(me, x, y):
+    zx.tp_spawn_next_to(me, "splat1")
+
+
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
@@ -24,6 +28,8 @@ def tp_init(name, text_name):
     x.set_is_corpse_on_death(True)
     x.set_is_double_damage_from_fire(True)
     x.set_is_fire_hater(100)
+    x.set_is_gfx_health_bar_shown(True)
+    x.set_is_gfx_moves_ahead_shown(True)
     x.set_is_hunger_insatiable(True)
     x.set_is_interesting(True)
     x.set_is_jumper(True)
@@ -34,8 +40,6 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
-    x.set_is_gfx_moves_ahead_shown(True)
-    x.set_is_gfx_health_bar_shown(True)
     x.set_is_movable(True)
     x.set_is_sidebar_item(True)
     x.set_is_slime(True)
@@ -44,6 +48,7 @@ def tp_init(name, text_name):
     x.set_is_slime_eater(True)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
+    x.set_on_birth_do("slime1.spawn()")
     x.set_stats_attack_dice("1d3")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)

@@ -47,9 +47,17 @@ bool Thing::will_avoid (point p) const
     }
 
     int heat = level->heatmap(p);
-    if (heat > 1) {
-        if (is_fire_hater()) {
-            return true;
+    if (is_double_damage_from_fire()) {
+        if (heat > 0) {
+            if (is_fire_hater()) {
+                return true;
+            }
+        }
+    } else {
+        if (heat > 1) {
+            if (is_fire_hater()) {
+                return true;
+            }
         }
     }
 

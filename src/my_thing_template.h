@@ -343,7 +343,7 @@ private:
     std::string _name;
     std::string _on_death_do;
     std::string _spawn_on_shoved;
-    std::string _str10;
+    std::string _on_birth_do;
     std::string _text_title;
     std::string _str1;
     std::string _str2;
@@ -434,7 +434,7 @@ public:
     const std::string& name(void) const;
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
-    const std::string& str10(void) const;
+    const std::string& on_birth_do(void) const;
     const std::string& on_death_do(void) const;
     const std::string& text_title(void) const;
     const std::string& str2(void) const;
@@ -930,7 +930,7 @@ public:
     void set_stats_move_speed_ms(int);
     void set_stats_strength(int);
     void set_str1(const std::string &);
-    void set_str10(const std::string &);
+    void set_on_birth_do(const std::string &);
     void set_on_death_do(const std::string &);
     void set_text_title(const std::string &);
     void set_str2(const std::string &);

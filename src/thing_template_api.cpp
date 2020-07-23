@@ -49,7 +49,7 @@ const std::string& Tp::name(void) const { return _name; }
 const std::string& Tp::on_death_do(void) const { return _on_death_do; }
 const std::string& Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
 const std::string& Tp::str1(void) const { return _str1; }
-const std::string& Tp::str10(void) const { return _str10; }
+const std::string& Tp::on_birth_do(void) const { return _on_birth_do; }
 const std::string& Tp::text_title(void) const { return _text_title; }
 const std::string& Tp::str2(void) const { return _str2; }
 const std::string& Tp::str3(void) const { return _str3; }
@@ -544,7 +544,7 @@ void Tp::set_stats_health_starving_pct(int v) { _stats_health_starving_pct = v; 
 void Tp::set_stats_move_speed_ms(int v) { _stats_move_speed_ms = v; }
 void Tp::set_stats_strength(int v) { _stats_strength = v; }
 void Tp::set_str1(const std::string &v) { _str1 = v; }
-void Tp::set_str10(const std::string &v) { _str10 = v; }
+void Tp::set_on_birth_do(const std::string &v) { _on_birth_do = v; }
 void Tp::set_text_title(const std::string &v) { _text_title = v; }
 void Tp::set_str2(const std::string &v) { _str2 = v; }
 void Tp::set_str3(const std::string &v) { _str3 = v; }
