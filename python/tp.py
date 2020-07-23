@@ -143,8 +143,8 @@ class Tp:
     def set_text_description(self, value):
         zx.tp_set_text_description(self, value)
 
-    def set_str10(self, value):
-        zx.tp_set_str10(self, value)
+    def set_on_birth_do(self, value):
+        zx.tp_set_on_birth_do(self, value)
 
     def set_on_death_do(self, value):
         zx.tp_set_on_death_do(self, value)

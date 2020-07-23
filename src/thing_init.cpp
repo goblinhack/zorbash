@@ -4,13 +4,14 @@
 //
 
 #include "my_main.h"
+#include "my_game.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_color.h"
 #include "my_dmap.h"
 #include "my_sprintf.h"
 #include "my_thing.h"
-#include "my_game.h"
+#include "my_python.h"
 
 Thingp Level::thing_new (const std::string& tp_name, Thingp owner)
 {_
@@ -327,6 +328,24 @@ void Thing::init (Levelp level,
        random_range(0, get_tick_rate_tenths() * 100));
 
     init_lights();
+
+    auto on_birth = on_birth_do();
+    if (!std::empty(on_birth)) {
+        auto t = split_tokens(on_birth, '.');
+        if (t.size() == 2) {
+            auto mod = t[0];
+            auto fn = t[1];
+            std::size_t found = fn.find("()");
+            if (found != std::string::npos) {
+                fn = fn.replace(found, 2, "");
+            }
+            py_call_void_fn(mod.c_str(), fn.c_str(),
+                            id.id, (int)mid_at.x, (int)mid_at.y);
+        } else {
+            ERR("bad on_birth call [%s] expected mod:function, got %d elems",
+                on_birth.c_str(), (int)on_birth.size());
+        }
+    }
 }
 
 void Thing::reinit (void)

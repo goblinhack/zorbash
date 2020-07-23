@@ -4301,7 +4301,7 @@ const std::string& Thing::str6 (void) const {_ return (tp()->str6()); }
 const std::string& Thing::str7 (void) const {_ return (tp()->str7()); }
 const std::string& Thing::str8 (void) const {_ return (tp()->str8()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }
-const std::string& Thing::str10 (void) const {_ return (tp()->str10()); }
+const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
 const std::string& Thing::text_title (void) const {_ return (tp()->text_title()); }
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }

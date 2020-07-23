@@ -756,7 +756,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(stats_move_speed_ms)
     TP_SET_DECL(stats_strength)
     TP_SET_DECL(str1)
-    TP_SET_DECL(str10)
+    TP_SET_DECL(on_birth_do)
     TP_SET_DECL(on_death_do)
     TP_SET_DECL(text_title)
     TP_SET_DECL(str2)

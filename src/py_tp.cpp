@@ -1054,7 +1054,7 @@ TP_BODY_SET_STRING(resurrect_dice)
 TP_BODY_SET_STRING(spawn_on_shoved)
 TP_BODY_SET_STRING(stats_attack_dice)
 TP_BODY_SET_STRING(str1)
-TP_BODY_SET_STRING(str10)
+TP_BODY_SET_STRING(on_birth_do)
 TP_BODY_SET_STRING(text_title)
 TP_BODY_SET_STRING(str2)
 TP_BODY_SET_STRING(str3)
@@ -1136,7 +1136,6 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     auto level = game->level;
     if (!level) {
-        ERR("%s, cannot spawn thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
@@ -1176,13 +1175,11 @@ PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject
 
     auto level = game->level;
     if (!level) {
-        ERR("%s, cannot spawn thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
@@ -1216,7 +1213,6 @@ PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
 
     auto level = game->level;
     if (!level) {
-        ERR("%s, cannot spawn thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
@@ -1256,7 +1252,6 @@ PyObject *tp_spawn_under (PyObject *obj, PyObject *args, PyObject *keywds)
 
     auto level = game->level;
     if (!level) {
-        ERR("%s, cannot spawn thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 

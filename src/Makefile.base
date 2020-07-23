@@ -155,7 +155,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_light.o 		\
-    $(OBJDIR)/thing_likes_and_dislikes.o \
+    $(OBJDIR)/thing_avoid.o             \
     $(OBJDIR)/thing_location.o 		\
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\
