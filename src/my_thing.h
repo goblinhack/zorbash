@@ -854,7 +854,7 @@ public:
     int is_attack_lunge(void) const;
     int is_attack_shove(void) const;
     int is_attack_shove_chance_d1000(void) const;
-    int is_attackable(void) const;
+    int is_attackable_by_monst(void) const;
     int is_bag(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
@@ -985,7 +985,7 @@ public:
     int is_rrr66(void) const;
     int is_rrr67(void) const;
     int is_rrr68(void) const;
-    int is_rrr69(void) const;
+    int is_attackable_by_player(void) const;
     int is_rrr7(void) const;
     int is_rrr70(void) const;
     int is_rrr71(void) const;

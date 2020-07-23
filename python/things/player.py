@@ -19,7 +19,7 @@ def tp_init(name, text_name, title):
     x.set_is_acid_hater(True)
     x.set_is_active(True)
     x.set_is_attack_shove(True)
-    x.set_is_attackable(True)
+    x.set_is_attackable_by_monst(True)
     x.set_is_bleeder(True)
     x.set_is_combustible(True)
     x.set_is_corpse_on_death(True)

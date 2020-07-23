@@ -16,8 +16,14 @@ bool Thing::possible_to_attack (const Thingp itp)
     auto me = tp();
     auto it = itp->tp();
 
-    if (!it->is_attackable()) {
-        return (false);
+    if (is_monst()) {
+        if (!it->is_attackable_by_monst()) {
+            return (false);
+        }
+    } else {
+        if (!it->is_attackable_by_player()) {
+            return (false);
+        }
     }
 
     //

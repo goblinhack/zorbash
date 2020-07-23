@@ -334,9 +334,9 @@ int Thing::is_active(void) const
     return (tp()->is_active());
 }
 
-int Thing::is_attackable(void) const
+int Thing::is_attackable_by_monst(void) const
 {_
-    return (tp()->is_attackable());
+    return (tp()->is_attackable_by_monst());
 }
 
 int Thing::is_bleeder(void) const
@@ -824,9 +824,9 @@ int Thing::is_rrr68(void) const
     return (tp()->is_rrr68());
 }
 
-int Thing::is_rrr69(void) const
+int Thing::is_attackable_by_player(void) const
 {_
-    return (tp()->is_rrr69());
+    return (tp()->is_attackable_by_player());
 }
 
 int Thing::is_rrr70(void) const

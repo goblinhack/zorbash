@@ -135,7 +135,7 @@ private:
     int _is_attack_lunge {};
     int _is_attack_shove {};
     int _is_attack_shove_chance_d1000 {};
-    int _is_attackable {};
+    int _is_attackable_by_monst {};
     int _is_slime_baby {};
     int _is_slime_baby_eater {};
     int _is_bleeder {};
@@ -259,7 +259,7 @@ private:
     int _is_rrr66 {};
     int _is_rrr67 {};
     int _is_rrr68 {};
-    int _is_rrr69 {};
+    int _is_attackable_by_player {};
     int _is_rrr70 {};
     int _is_rrr71 {};
     int _is_movement_blocking_soft {};
@@ -486,7 +486,7 @@ public:
     int is_attack_shove_chance_d1000(void) const;
     int is_jumper_chance_d1000(void) const;
     int is_jumper_on_low_hp_chance_d1000(void) const;
-    int is_attackable(void) const;
+    int is_attackable_by_monst(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
     int is_blood_splatter(void) const;
@@ -597,7 +597,7 @@ public:
     int is_rrr66(void) const;
     int is_rrr67(void) const;
     int is_rrr68(void) const;
-    int is_rrr69(void) const;
+    int is_attackable_by_player(void) const;
     int is_rrr70(void) const;
     int is_rrr71(void) const;
     int is_movement_blocking_soft(void) const;
@@ -727,7 +727,7 @@ public:
     void set_is_attack_shove_chance_d1000(int);
     void set_is_jumper_chance_d1000(int);
     void set_is_jumper_on_low_hp_chance_d1000(int);
-    void set_is_attackable(int);
+    void set_is_attackable_by_monst(int);
     void set_is_bleeder(int);
     void set_is_blood(int);
     void set_is_blood_splatter(int);
@@ -843,7 +843,7 @@ public:
     void set_is_rrr66(int);
     void set_is_rrr67(int);
     void set_is_rrr68(int);
-    void set_is_rrr69(int);
+    void set_is_attackable_by_player(int);
     void set_is_rrr70(int);
     void set_is_rrr71(int);
     void set_is_movement_blocking_soft(int);
