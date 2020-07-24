@@ -1,5 +1,7 @@
 bugs
 ----
+- fall hang
+- cube can eat treasure on player
 
 upcoming work
 -------------
@@ -17,14 +19,12 @@ upcoming work
 - add stuff in secret rooms
 - drag items
 - bag inventory
-- cube can eat treasure on player
 - choose name / player
 - playback possible?
 - sewer level
 
 future work
 -----------
-- eat blood?
 - water, kraken, eels
 - make ripples, summon monsters
 - hit door, summon monst chance

@@ -16,8 +16,7 @@ def init1(name, text_name):
     x.set_is_movable(True)
     x.set_lifespan_dice("1d30+10")
     x.set_text_a_or_an("a");
-    x.set_z_depth(zx.MAP_DEPTH_WEAPON)
-    x.set_z_prio(zx.MAP_PRIO_BEHIND)
+    x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
     x.set_text_description("A splatter of slime stuff. Don't look closely")
 
     delay = 10
