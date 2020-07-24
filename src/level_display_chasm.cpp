@@ -19,74 +19,6 @@ void Level::display_chasm (int fbo,
 #define CHASM_ACROSS 8
 #define CHASM_DOWN   8
 
-    static std::array<std::array<Tilep, CHASM_DOWN>, CHASM_ACROSS> chasm;
-    if (!chasm[0][0]) {
-        set(chasm, 0, 0, tile_find("chasm1a"));
-        set(chasm, 1, 0, tile_find("chasm2a"));
-        set(chasm, 2, 0, tile_find("chasm3a"));
-        set(chasm, 3, 0, tile_find("chasm4a"));
-        set(chasm, 4, 0, tile_find("chasm5a"));
-        set(chasm, 5, 0, tile_find("chasm6a"));
-        set(chasm, 6, 0, tile_find("chasm7a"));
-        set(chasm, 7, 0, tile_find("chasm8a"));
-        set(chasm, 0, 1, tile_find("chasm1b"));
-        set(chasm, 1, 1, tile_find("chasm2b"));
-        set(chasm, 2, 1, tile_find("chasm3b"));
-        set(chasm, 3, 1, tile_find("chasm4b"));
-        set(chasm, 4, 1, tile_find("chasm5b"));
-        set(chasm, 5, 1, tile_find("chasm6b"));
-        set(chasm, 6, 1, tile_find("chasm7b"));
-        set(chasm, 7, 1, tile_find("chasm8b"));
-        set(chasm, 0, 2, tile_find("chasm1c"));
-        set(chasm, 1, 2, tile_find("chasm2c"));
-        set(chasm, 2, 2, tile_find("chasm3c"));
-        set(chasm, 3, 2, tile_find("chasm4c"));
-        set(chasm, 4, 2, tile_find("chasm5c"));
-        set(chasm, 5, 2, tile_find("chasm6c"));
-        set(chasm, 6, 2, tile_find("chasm7c"));
-        set(chasm, 7, 2, tile_find("chasm8c"));
-        set(chasm, 0, 3, tile_find("chasm1d"));
-        set(chasm, 1, 3, tile_find("chasm2d"));
-        set(chasm, 2, 3, tile_find("chasm3d"));
-        set(chasm, 3, 3, tile_find("chasm4d"));
-        set(chasm, 4, 3, tile_find("chasm5d"));
-        set(chasm, 5, 3, tile_find("chasm6d"));
-        set(chasm, 6, 3, tile_find("chasm7d"));
-        set(chasm, 7, 3, tile_find("chasm8d"));
-        set(chasm, 0, 4, tile_find("chasm1e"));
-        set(chasm, 1, 4, tile_find("chasm2e"));
-        set(chasm, 2, 4, tile_find("chasm3e"));
-        set(chasm, 3, 4, tile_find("chasm4e"));
-        set(chasm, 4, 4, tile_find("chasm5e"));
-        set(chasm, 5, 4, tile_find("chasm6e"));
-        set(chasm, 6, 4, tile_find("chasm7e"));
-        set(chasm, 7, 4, tile_find("chasm8e"));
-        set(chasm, 0, 5, tile_find("chasm1f"));
-        set(chasm, 1, 5, tile_find("chasm2f"));
-        set(chasm, 2, 5, tile_find("chasm3f"));
-        set(chasm, 3, 5, tile_find("chasm4f"));
-        set(chasm, 4, 5, tile_find("chasm5f"));
-        set(chasm, 5, 5, tile_find("chasm6f"));
-        set(chasm, 6, 5, tile_find("chasm7f"));
-        set(chasm, 7, 5, tile_find("chasm8f"));
-        set(chasm, 0, 6, tile_find("chasm1g"));
-        set(chasm, 1, 6, tile_find("chasm2g"));
-        set(chasm, 2, 6, tile_find("chasm3g"));
-        set(chasm, 3, 6, tile_find("chasm4g"));
-        set(chasm, 4, 6, tile_find("chasm5g"));
-        set(chasm, 5, 6, tile_find("chasm6g"));
-        set(chasm, 6, 6, tile_find("chasm7g"));
-        set(chasm, 7, 6, tile_find("chasm8g"));
-        set(chasm, 0, 7, tile_find("chasm1h"));
-        set(chasm, 1, 7, tile_find("chasm2h"));
-        set(chasm, 2, 7, tile_find("chasm3h"));
-        set(chasm, 3, 7, tile_find("chasm4h"));
-        set(chasm, 4, 7, tile_find("chasm5h"));
-        set(chasm, 5, 7, tile_find("chasm6h"));
-        set(chasm, 6, 7, tile_find("chasm7h"));
-        set(chasm, 7, 7, tile_find("chasm8h"));
-    }
-
     auto z = MAP_DEPTH_CHASM;
 
     /////////////////////////////////////////////////////////////////////
@@ -123,6 +55,7 @@ void Level::display_chasm (int fbo,
     /////////////////////////////////////////////////////////////////////
     // Draw the tiles that we will want to combine with the mask later
     /////////////////////////////////////////////////////////////////////
+#if 0
     blit_init();
     glcolor(WHITE);
     blit_fbo_bind(FBO_MASK2);
@@ -157,14 +90,11 @@ void Level::display_chasm (int fbo,
             auto y1 = tile->y1;
             auto y2 = tile->y2;
 
-//            float one_pix = (1.0 / tex_get_height(tile->tex));
-//            y1 += one_pix * chasm_step2;
-//            y2 += one_pix * chasm_step2;
-
             blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
         }
     }
     blit_flush();
+#endif
 
     /////////////////////////////////////////////////////////////////////
     // Merge the mask and tiles
@@ -174,7 +104,26 @@ void Level::display_chasm (int fbo,
     glcolor(WHITE);
     blit_fbo(FBO_MASK1);
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
-    blit_fbo(FBO_MASK2);
+//    blit_fbo(FBO_MASK2);
+    //
+    // Parallax
+    //
+    auto tex = tex_find("chasm");
+    float s = -2.0;
+    glTranslatef(pixel_map_at.x / s, pixel_map_at.y / s, 0);
+    blit_init();
+
+    float tlx = -game->config.inner_pix_width * 2;
+    float brx =  game->config.inner_pix_width * 2;
+    float tly = -game->config.inner_pix_height * 2;
+    float bry =  game->config.inner_pix_height * 2;
+    float w = tex_get_width(tex);
+    float h = tex_get_height(tex);
+
+    blit(tex_get_gl_binding(tex), 0, (brx - tlx) / w, (bry - tly) / h, 0, 
+         tlx, tly, brx, bry);
+    blit_flush();
+    glTranslatef(-pixel_map_at.x / s, -pixel_map_at.y / s, 0);
 
     /////////////////////////////////////////////////////////////////////
     // Create an outline mask
@@ -183,13 +132,13 @@ void Level::display_chasm (int fbo,
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     color c = BLACK;
-    c.a = 200;
+    c.a = 150;
     if (g_render_black_and_white) {
         c = BLACK;
     }
     glcolor(c);
     glTranslatef(-1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  1, 0);
-    glTranslatef( 0, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  1, 0);
+    glTranslatef( 0, -4, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  4, 0);
     glTranslatef( 1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef(-1,  1, 0);
     glTranslatef(-1,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  0, 0);
     glTranslatef( 1,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-1,  0, 0);

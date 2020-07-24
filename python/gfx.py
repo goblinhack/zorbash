@@ -1389,20 +1389,7 @@ def init_32x32_lava():
 
 
 def init_32x32_chasm():
-    tiles = [
-        "chasm1a", "chasm2a", "chasm3a", "chasm4a", "chasm5a", "chasm6a", "chasm7a", "chasm8a",
-        "chasm1b", "chasm2b", "chasm3b", "chasm4b", "chasm5b", "chasm6b", "chasm7b", "chasm8b",
-        "chasm1c", "chasm2c", "chasm3c", "chasm4c", "chasm5c", "chasm6c", "chasm7c", "chasm8c",
-        "chasm1d", "chasm2d", "chasm3d", "chasm4d", "chasm5d", "chasm6d", "chasm7d", "chasm8d",
-        "chasm1e", "chasm2e", "chasm3e", "chasm4e", "chasm5e", "chasm6e", "chasm7e", "chasm8e",
-        "chasm1f", "chasm2f", "chasm3f", "chasm4f", "chasm5f", "chasm6f", "chasm7f", "chasm8f",
-        "chasm1g", "chasm2g", "chasm3g", "chasm4g", "chasm5g", "chasm6g", "chasm7g", "chasm8g",
-        "chasm1h", "chasm2h", "chasm3h", "chasm4h", "chasm5h", "chasm6h", "chasm7h", "chasm8h",
-    ]
-
-    zx.tile_load_arr_sprites(
-        file="data/gfx/32x32_chasm.tga",
-        name="32x32_chasm", width=32, height=32, arr=tiles)
+    zx.tex_load(file="data/gfx/chasm.tga", name="chasm")
 
 
 def init_weapons_tiles():
