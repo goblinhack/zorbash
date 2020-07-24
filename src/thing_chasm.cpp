@@ -80,12 +80,16 @@ bool Thing::fall_to_next_level (void)
             x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
             y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
         }
+        tries++;
 
-        if (l->is_oob(x, y)) {
+        log("try to fall to %d,%d", x, y);
+        if (l->is_oob(x, y)) {_
+            log("no, oob");
             continue;
         }
 
-        if (!l->is_dungeon(x, y)) {
+        if (!l->is_dungeon(x, y)) {_
+            log("no, out of dungeon");
             continue;
         }
 
@@ -93,7 +97,8 @@ bool Thing::fall_to_next_level (void)
             l->is_monst(x, y)    ||
             l->is_rock(x, y)     ||
             l->is_wall(x, y)     ||
-            l->is_exit(x, y)) {
+            l->is_exit(x, y)) {_
+            log("no, special tile");
             continue;
         }
 
@@ -174,5 +179,7 @@ bool Thing::fall_to_next_level (void)
             log("finished fall to next level");
             return true;
         }
+
+        log("no, not floor or lava");
     }
 }
