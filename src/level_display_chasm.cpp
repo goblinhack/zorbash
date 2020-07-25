@@ -109,7 +109,7 @@ void Level::display_chasm (int fbo,
     // Parallax
     //
     auto tex = tex_find("chasm");
-    float s = -2.0;
+    float s = 2.0;
     glTranslatef(pixel_map_at.x / s, pixel_map_at.y / s, 0);
     blit_init();
 
