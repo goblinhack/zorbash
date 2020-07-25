@@ -30,7 +30,8 @@ public:
         FOOD            = 'f',
         GENERATOR       = '%',
         GOLD            = 'g',
-        ITEM            = 'i',
+        ITEM_CLASS_A    = 'i',
+        ITEM_CLASS_B    = 'I',
         KEY             = 'k',
         LAVA            = 'L',
         MONST           = 'm',
@@ -63,7 +64,8 @@ public:
     bool                      is_key               {false};
     bool                      is_lava              {false};
     bool                      is_monst             {false};
-    bool                      is_mundane_item      {false};
+    bool                      is_item_class_a      {false};
+    bool                      is_item_class_b      {false};
     bool                      is_potion            {false};
     bool                      is_rock              {false};
     bool                      is_secret_corridor   {false};

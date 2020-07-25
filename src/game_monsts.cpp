@@ -83,7 +83,7 @@ static void game_monsts_wid_create (void)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                    if (!t->is_sidebar_item()) {
+                    if (!t->is_shown_on_monstbar()) {
                         continue;
                     }
 

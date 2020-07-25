@@ -120,6 +120,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_astar.o 		\
     $(OBJDIR)/thing_attack.o 		\
+    $(OBJDIR)/thing_avoid.o             \
     $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_chasm.o 		\
@@ -155,7 +156,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_light.o 		\
-    $(OBJDIR)/thing_avoid.o             \
     $(OBJDIR)/thing_location.o 		\
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\
@@ -165,10 +165,12 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_nearby.o 		\
     $(OBJDIR)/thing_obstacle.o 		\
     $(OBJDIR)/thing_on_fire.o 		\
+    $(OBJDIR)/thing_owner.o 		\
     $(OBJDIR)/thing_path.o 		\
     $(OBJDIR)/thing_resurrect.o 	\
     $(OBJDIR)/thing_shove.o 		\
     $(OBJDIR)/thing_spawn.o 		\
+    $(OBJDIR)/thing_steal.o 		\
     $(OBJDIR)/thing_string.o 		\
     $(OBJDIR)/thing_template.o 		\
     $(OBJDIR)/thing_template_api.o 	\

@@ -108,7 +108,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_key          ||
                            m.is_lava         ||
                            m.is_monst        ||
-                           m.is_mundane_item ||
+                           m.is_item_class_a ||
+                           m.is_item_class_b ||
                            m.is_potion       ||
                            m.is_secret_door  ||
                            m.is_torch        ||
@@ -158,7 +159,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_gold         ||
                     m.is_key          ||
                     m.is_monst        ||
-                    m.is_mundane_item ||
+                    m.is_item_class_a ||
+                    m.is_item_class_b ||
                     m.is_potion       ||
                     m.is_torch        ||
                     m.is_trap         ||
@@ -207,10 +209,10 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     set(r->data, x, y, MAP_DEPTH_CHASM, chasm_string[x]);
                 }
                 if (walls_string[x] != ' ') {
-                    set(r->data, x, y, MAP_DEPTH_OBJ,  walls_string[x]);
+                    set(r->data, x, y, MAP_DEPTH_OBJ,   walls_string[x]);
                 }
                 if (obj_strings[x] != ' ') {
-                    set(r->data, x, y, MAP_DEPTH_OBJ,  obj_strings[x]);
+                    set(r->data, x, y, MAP_DEPTH_OBJ,   obj_strings[x]);
                 }
             }
         }

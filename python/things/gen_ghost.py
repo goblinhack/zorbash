@@ -27,13 +27,13 @@ def tp_init(name, text_name):
     x.set_is_fire_hater(100)
     x.set_is_generator(True)
     x.set_is_interesting(True)
+    x.set_is_shown_on_monstbar(True)
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movement_blocking_soft(True)
     x.set_is_resurrectable(True)
     x.set_is_shovable(True)
-    x.set_is_sidebar_item(True)
     x.set_is_water_hater(100)
     x.set_light_color("cyan")
     x.set_normal_placement_rules(True)
@@ -42,10 +42,10 @@ def tp_init(name, text_name):
     x.set_stats_health_initial(30)
     x.set_stats_strength(15)
     x.set_text_a_or_an("a");
+    x.set_text_description("A cursed pile of bones, spawning spirits")
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
-    x.set_text_description("A cursed pile of bones, spawning spirits")
 
     delay = 200
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

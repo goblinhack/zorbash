@@ -94,6 +94,17 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+    //
+    // Try to steal
+    //
+    if (real_hitter->is_item_eater()) {
+        if (is_carrying_item()) {
+            if (real_hitter->steal_item_from(this)) {
+                return (true);
+            }
+        }
+    }
+
     if (is_player()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
