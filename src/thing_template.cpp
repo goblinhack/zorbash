@@ -33,7 +33,8 @@ static Tpidmap tp_secret_door;
 static Tpidmap tp_generator;
 static Tpidmap tp_torch;
 static Tpidmap tp_treasure;
-static Tpidmap tp_mundane_item;
+static Tpidmap tp_item_class_a;
+static Tpidmap tp_item_class_b;
 static Tpidmap tp_wall;
 static Tpidmap tp_wall_deco;
 
@@ -120,9 +121,10 @@ void tp_init_after_loading (void)
         if (tp->is_food())           { tp_food.push_back(tp); }
         if (tp->is_generator())      { tp_generator.push_back(tp); }
         if (tp->is_gold())           { tp_gold.push_back(tp); }
+        if (tp->is_item_class_a())   { tp_item_class_a.push_back(tp); }
+        if (tp->is_item_class_b())   { tp_item_class_b.push_back(tp); }
         if (tp->is_key())            { tp_key.push_back(tp); }
         if (tp->is_monst())          { tp_monst.push_back(tp); }
-        if (tp->is_mundane_item())   { tp_mundane_item.push_back(tp); }
         if (tp->is_potion())         { tp_potion.push_back(tp); }
         if (tp->is_ripple())         { tp_ripples.push_back(tp); }
         if (tp->is_rock())           { tp_rock.push_back(tp); }
@@ -172,13 +174,22 @@ Tpp tp_random_treasure (void)
     return get(tp_treasure, myrand() % tp_treasure.size());
 }
 
-Tpp tp_random_mundane_item (void)
+Tpp tp_random_item_class_a (void)
 {_
-    if (unlikely(!tp_mundane_item.size())) {
-        ERR("no mundane_items found");
+    if (unlikely(!tp_item_class_a.size())) {
+        ERR("no item_class_a found");
         return (nullptr);
     }
-    return get(tp_mundane_item, myrand() % tp_mundane_item.size());
+    return get(tp_item_class_a, myrand() % tp_item_class_a.size());
+}
+
+Tpp tp_random_item_class_b (void)
+{_
+    if (unlikely(!tp_item_class_b.size())) {
+        ERR("no item_class_b found");
+        return (nullptr);
+    }
+    return get(tp_item_class_b, myrand() % tp_item_class_b.size());
 }
 
 Tpp tp_random_dirt (void)

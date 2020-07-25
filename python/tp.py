@@ -377,17 +377,17 @@ class Tp:
     def set_is_rrr67(self, value):
         zx.tp_set_is_rrr67(self, value)
 
-    def set_is_rrr68(self, value):
-        zx.tp_set_is_rrr68(self, value)
+    def set_is_item(self, value):
+        zx.tp_set_is_item(self, value)
 
     def set_is_attackable_by_player(self, value):
         zx.tp_set_is_attackable_by_player(self, value)
 
-    def set_is_rrr70(self, value):
-        zx.tp_set_is_rrr70(self, value)
+    def set_is_item_class_b(self, value):
+        zx.tp_set_is_item_class_b(self, value)
 
-    def set_is_rrr71(self, value):
-        zx.tp_set_is_rrr71(self, value)
+    def set_is_item_eater(self, value):
+        zx.tp_set_is_item_eater(self, value)
 
     def set_is_movement_blocking_soft(self, value):
         zx.tp_set_is_movement_blocking_soft(self, value)
@@ -434,11 +434,11 @@ class Tp:
     def set_is_droppable(self, value):
         zx.tp_set_is_droppable(self, value)
 
-    def set_is_not_stackable(self, value):
-        zx.tp_set_is_not_stackable(self, value)
+    def set_is_item_not_stackable(self, value):
+        zx.tp_set_is_item_not_stackable(self, value)
 
-    def set_is_mundane_item(self, value):
-        zx.tp_set_is_mundane_item(self, value)
+    def set_is_item_class_a(self, value):
+        zx.tp_set_is_item_class_a(self, value)
 
     def set_is_bag(self, value):
         zx.tp_set_is_bag(self, value)
@@ -449,8 +449,8 @@ class Tp:
     def set_is_potion(self, value):
         zx.tp_set_is_potion(self, value)
 
-    def set_is_sidebar_item(self, value):
-        zx.tp_set_is_sidebar_item(self, value)
+    def set_is_shown_on_monstbar(self, value):
+        zx.tp_set_is_shown_on_monstbar(self, value)
 
     def set_is_floating(self, value):
         zx.tp_set_is_floating(self, value)
@@ -506,8 +506,8 @@ class Tp:
     def set_is_able_to_change_levels(self, value):
         zx.tp_set_is_able_to_change_levels(self, value)
 
-    def set_is_collected_as_gold(self, value):
-        zx.tp_set_is_collected_as_gold(self, value)
+    def set_is_item_collected_as_gold(self, value):
+        zx.tp_set_is_item_collected_as_gold(self, value)
 
     def set_is_gold(self, value):
         zx.tp_set_is_gold(self, value)

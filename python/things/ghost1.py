@@ -14,7 +14,7 @@ def tp_init(name, text_name):
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_is_sidebar_item(True)
+    x.set_is_shown_on_monstbar(True)
     x.set_is_able_to_change_levels(True)
     x.set_is_active(True)
     x.set_is_attack_lunge(True)

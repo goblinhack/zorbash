@@ -17,7 +17,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         return;
     }
 
-    if (what->is_collected_as_gold()) {
+    if (what->is_item_collected_as_gold()) {
         std::string name = "gold";
         auto w = wid_find(name);
         if (!w) {
@@ -133,7 +133,7 @@ bool Thing::actionbar_id_insert (Thingp what)
         return false;
     }
 
-    if (what->is_collected_as_gold()) {
+    if (what->is_item_collected_as_gold()) {
         game_status_wid_init();
         incr_gold(what->get_gold_value());
         actionbar_particle(what, monstp->actionbar_id.size() - 1);
@@ -157,7 +157,7 @@ bool Thing::actionbar_id_insert (Thingp what)
         }
         auto t = level->thing_find(a);
         if (t->tp() == what->tp()) {
-            if (t->is_not_stackable()) {
+            if (t->is_item_not_stackable()) {
                 //
                 // Needs its own slot
                 //
@@ -281,7 +281,7 @@ int Thing::actionbar_id_slot_count (const uint32_t slot)
         auto o = level->thing_find(oid);
         if (o->tp() == t->tp()) {
             count++;
-            if (o->is_not_stackable()) {
+            if (o->is_item_not_stackable()) {
                 count = 1;
             }
         }

@@ -53,6 +53,10 @@ bool Thing::possible_to_attack (const Thingp itp)
                 log("can attack %s", itp->to_string().c_str());
                 return (true);
             }
+            if (itp->is_carrying_treasure()) {
+                log("can steal %s", itp->to_string().c_str());
+                return (true);
+            }
         }
 
         if (me->is_potion_eater()) {

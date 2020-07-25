@@ -91,6 +91,7 @@ int Tp::gfx_oversized_but_sitting_on_the_ground(void) const { return _gfx_oversi
 int Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
 int Tp::gfx_small_shadow_caster(void) const { return _gfx_small_shadow_caster; }
 int Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
+int Tp::has_capacity(void) const { return _has_capacity; }
 int Tp::hunger_clock_freq_ms(void) const { return _hunger_clock_freq_ms; }
 int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
@@ -104,17 +105,20 @@ int Tp::is_attack_lunge(void) const { return _is_attack_lunge; }
 int Tp::is_attack_shove(void) const { return _is_attack_shove; }
 int Tp::is_attack_shove_chance_d1000(void) const { return _is_attack_shove_chance_d1000; }
 int Tp::is_attackable_by_monst(void) const { return _is_attackable_by_monst; }
+int Tp::is_attackable_by_player(void) const { return _is_attackable_by_player; }
+int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
 int Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
 int Tp::is_chasm(void) const { return _is_chasm; }
+int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
 int Tp::is_collectable(void) const { return _is_collectable; }
-int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_combustible(void) const { return _is_combustible; }
 int Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
 int Tp::is_corridor(void) const { return _is_corridor; }
 int Tp::is_cursor(void) const { return _is_cursor; }
 int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
+int Tp::is_cursor_can_hover_over_but_needs_double_click(void) const { return _is_cursor_can_hover_over_but_needs_double_click; }
 int Tp::is_cursor_path(void) const { return _is_cursor_path; }
 int Tp::is_dead_on_shove(void) const { return _is_dead_on_shove; }
 int Tp::is_deep_water(void) const { return _is_deep_water; }
@@ -123,26 +127,39 @@ int Tp::is_door(void) const { return _is_door; }
 int Tp::is_double_damage_from_acid(void) const { return _is_double_damage_from_acid; }
 int Tp::is_double_damage_from_fire(void) const { return _is_double_damage_from_fire; }
 int Tp::is_double_damage_from_water(void) const { return _is_double_damage_from_water; }
+int Tp::is_droppable(void) const { return _is_droppable; }
 int Tp::is_entrance(void) const { return _is_entrance; }
+int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_exit(void) const { return _is_exit; }
 int Tp::is_explosion(void) const { return _is_explosion; }
 int Tp::is_fire(void) const { return _is_fire; }
 int Tp::is_fire_hater(void) const { return _is_fire_hater; }
 int Tp::is_flammable(void) const { return _is_flammable; }
+int Tp::is_floating(void) const { return _is_floating; }
 int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_floor_deco(void) const { return _is_floor_deco; }
 int Tp::is_food(void) const { return _is_food; }
 int Tp::is_generator(void) const { return _is_generator; }
+int Tp::is_gfx_health_bar_shown(void) const { return _is_gfx_health_bar_shown; }
+int Tp::is_gfx_health_bar_shown_only_when_injured(void) const { return _is_gfx_health_bar_shown_only_when_injured; }
+int Tp::is_gfx_moves_ahead_shown(void) const { return _is_gfx_moves_ahead_shown; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_hazard(void) const { return _is_hazard; }
 int Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
 int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_interesting(void) const { return _is_interesting; }
+int Tp::is_item_class_a(void) const { return _is_item_class_a; }
+int Tp::is_item_class_b(void) const { return _is_item_class_b; }
+int Tp::is_item_collected_as_gold(void) const { return _is_item_collected_as_gold; }
+int Tp::is_item_eater(void) const { return _is_item_eater; }
+int Tp::is_item_not_stackable(void) const { return _is_item_not_stackable; }
 int Tp::is_jumper(void) const { return _is_jumper; }
 int Tp::is_jumper_chance_d1000(void) const { return _is_jumper_chance_d1000; }
 int Tp::is_jumper_distance(void) const { return _is_jumper_distance; }
 int Tp::is_jumper_on_low_hp_chance_d1000(void) const { return _is_jumper_on_low_hp_chance_d1000; }
 int Tp::is_key(void) const { return _is_key; }
+int Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
+int Tp::is_killed_on_hitting(void) const { return _is_killed_on_hitting; }
 int Tp::is_lava(void) const { return _is_lava; }
 int Tp::is_light_blocker(void) const { return _is_light_blocker; }
 int Tp::is_light_strength(void) const { return _is_light_strength; }
@@ -153,10 +170,15 @@ int Tp::is_meat_eater(void) const { return _is_meat_eater; }
 int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_movable(void) const { return _is_movable; }
 int Tp::is_movement_blocking_hard(void) const { return _is_movement_blocking_hard; }
+int Tp::is_movement_blocking_soft(void) const { return _is_movement_blocking_soft; }
 int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
+int Tp::is_open_on_death(void) const { return _is_open_on_death; }
 int Tp::is_player(void) const { return _is_player; }
+int Tp::is_potion(void) const { return _is_potion; }
+int Tp::is_potion_eater(void) const { return _is_potion_eater; }
 int Tp::is_projectile(void) const { return _is_projectile; }
+int Tp::is_removable_if_out_of_slots(void) const { return _is_removable_if_out_of_slots; }
 int Tp::is_resurrectable(void) const { return _is_resurrectable; }
 int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock(void) const { return _is_rock; }
@@ -224,48 +246,26 @@ int Tp::is_rrr64(void) const { return _is_rrr64; }
 int Tp::is_rrr65(void) const { return _is_rrr65; }
 int Tp::is_rrr66(void) const { return _is_rrr66; }
 int Tp::is_rrr67(void) const { return _is_rrr67; }
-int Tp::is_rrr68(void) const { return _is_rrr68; }
-int Tp::is_attackable_by_player(void) const { return _is_attackable_by_player; }
+int Tp::is_item(void) const { return _is_item; }
 int Tp::is_rrr7(void) const { return _is_rrr7; }
-int Tp::is_rrr70(void) const { return _is_rrr70; }
-int Tp::is_rrr71(void) const { return _is_rrr71; }
-int Tp::is_movement_blocking_soft(void) const { return _is_movement_blocking_soft; }
-int Tp::is_the_grid(void) const { return _is_the_grid; }
-int Tp::is_cursor_can_hover_over_but_needs_double_click(void) const { return _is_cursor_can_hover_over_but_needs_double_click; }
-int Tp::is_gfx_moves_ahead_shown(void) const { return _is_gfx_moves_ahead_shown; }
-int Tp::is_gfx_health_bar_shown_only_when_injured(void) const { return _is_gfx_health_bar_shown_only_when_injured; }
-int Tp::is_gfx_health_bar_shown(void) const { return _is_gfx_health_bar_shown; }
-int Tp::is_open_on_death(void) const { return _is_open_on_death; }
-int Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
-int Tp::is_killed_on_hitting(void) const { return _is_killed_on_hitting; }
-int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
-int Tp::is_ethereal(void) const { return _is_ethereal; }
-int Tp::is_potion_eater(void) const { return _is_potion_eater; }
-int Tp::is_throwable(void) const { return _is_throwable; }
-int Tp::is_usable(void) const { return _is_usable; }
-int Tp::is_droppable(void) const { return _is_droppable; }
-int Tp::is_not_stackable(void) const { return _is_not_stackable; }
-int Tp::is_mundane_item(void) const { return _is_mundane_item; }
-int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_rrr9(void) const { return _is_rrr9; }
-int Tp::has_capacity(void) const { return _has_capacity; }
-int Tp::is_potion(void) const { return _is_potion; }
-int Tp::is_sidebar_item(void) const { return _is_sidebar_item; }
-int Tp::is_floating(void) const { return _is_floating; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_shovable(void) const { return _is_shovable; }
+int Tp::is_shown_on_monstbar(void) const { return _is_shown_on_monstbar; }
 int Tp::is_slime(void) const { return _is_slime; }
 int Tp::is_slime_baby(void) const { return _is_slime_baby; }
 int Tp::is_slime_baby_eater(void) const { return _is_slime_baby_eater; }
 int Tp::is_slime_eater(void) const { return _is_slime_eater; }
 int Tp::is_slime_parent(void) const { return _is_slime_parent; }
 int Tp::is_smoke(void) const { return _is_smoke; }
-int Tp::is_removable_if_out_of_slots(void) const { return _is_removable_if_out_of_slots; }
+int Tp::is_the_grid(void) const { return _is_the_grid; }
+int Tp::is_throwable(void) const { return _is_throwable; }
 int Tp::is_torch(void) const { return _is_torch; }
 int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_treasure_eater(void) const { return _is_treasure_eater; }
 int Tp::is_undead(void) const { return _is_undead; }
+int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_wall(void) const { return _is_wall; }
 int Tp::is_wall_deco(void) const { return _is_wall_deco; }
 int Tp::is_water(void) const { return _is_water; }
@@ -332,6 +332,7 @@ void Tp::set_gfx_oversized_but_sitting_on_the_ground(int v) { _gfx_oversized_but
 void Tp::set_gfx_show_outlined(int v) { _gfx_show_outlined = v; }
 void Tp::set_gfx_small_shadow_caster(int v) { _gfx_small_shadow_caster = v; }
 void Tp::set_gfx_weapon_carry_anim(int v) { _gfx_weapon_carry_anim = v; }
+void Tp::set_has_capacity(int v) { _has_capacity = v; }
 void Tp::set_hunger_clock_freq_ms(int v) { _hunger_clock_freq_ms = v; }
 void Tp::set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
 void Tp::set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
@@ -345,17 +346,20 @@ void Tp::set_is_attack_lunge(int v) { _is_attack_lunge = v; }
 void Tp::set_is_attack_shove(int v) { _is_attack_shove = v; }
 void Tp::set_is_attack_shove_chance_d1000(int v) { _is_attack_shove_chance_d1000 = v; }
 void Tp::set_is_attackable_by_monst(int v) { _is_attackable_by_monst = v; }
+void Tp::set_is_attackable_by_player(int v) { _is_attackable_by_player = v; }
+void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
 void Tp::set_is_blood_splatter(int v) { _is_blood_splatter = v; }
 void Tp::set_is_chasm(int v) { _is_chasm = v; }
+void Tp::set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
 void Tp::set_is_collectable(int v) { _is_collectable = v; }
-void Tp::set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
 void Tp::set_is_combustible(int v) { _is_combustible = v; }
 void Tp::set_is_corpse_on_death(int v) { _is_corpse_on_death = v; }
 void Tp::set_is_corridor(int v) { _is_corridor = v; }
 void Tp::set_is_cursor(int v) { _is_cursor = v; }
 void Tp::set_is_cursor_can_hover_over(int v) { _is_cursor_can_hover_over = v; }
+void Tp::set_is_cursor_can_hover_over_but_needs_double_click(int v) { _is_cursor_can_hover_over_but_needs_double_click = v; }
 void Tp::set_is_cursor_path(int v) { _is_cursor_path = v; }
 void Tp::set_is_dead_on_shove(int v) { _is_dead_on_shove = v; }
 void Tp::set_is_deep_water(int v) { _is_deep_water = v; }
@@ -364,26 +368,39 @@ void Tp::set_is_door(int v) { _is_door = v; }
 void Tp::set_is_double_damage_from_acid(int v) { _is_double_damage_from_acid = v; }
 void Tp::set_is_double_damage_from_fire(int v) { _is_double_damage_from_fire = v; }
 void Tp::set_is_double_damage_from_water(int v) { _is_double_damage_from_water = v; }
+void Tp::set_is_droppable(int v) { _is_droppable = v; }
 void Tp::set_is_entrance(int v) { _is_entrance = v; }
+void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
 void Tp::set_is_exit(int v) { _is_exit = v; }
 void Tp::set_is_explosion(int v) { _is_explosion = v; }
 void Tp::set_is_fire(int v) { _is_fire = v; }
 void Tp::set_is_fire_hater(int v) { _is_fire_hater = v; }
 void Tp::set_is_flammable(int v) { _is_flammable = v; }
+void Tp::set_is_floating(int v) { _is_floating = v; }
 void Tp::set_is_floor(int v) { _is_floor = v; }
 void Tp::set_is_floor_deco(int v) { _is_floor_deco = v; }
 void Tp::set_is_food(int v) { _is_food = v; }
 void Tp::set_is_generator(int v) { _is_generator = v; }
+void Tp::set_is_gfx_health_bar_shown(int v) { _is_gfx_health_bar_shown = v; }
+void Tp::set_is_gfx_health_bar_shown_only_when_injured(int v) { _is_gfx_health_bar_shown_only_when_injured = v; }
+void Tp::set_is_gfx_moves_ahead_shown(int v) { _is_gfx_moves_ahead_shown = v; }
 void Tp::set_is_gold(int v) { _is_gold = v; }
 void Tp::set_is_hazard(int v) { _is_hazard = v; }
 void Tp::set_is_hunger_insatiable(int v) { _is_hunger_insatiable = v; }
 void Tp::set_is_intelligent(int v) { _is_intelligent = v; }
 void Tp::set_is_interesting(int v) { _is_interesting = v; }
+void Tp::set_is_item_class_a(int v) { _is_item_class_a = v; }
+void Tp::set_is_item_class_b(int v) { _is_item_class_b = v; }
+void Tp::set_is_item_collected_as_gold(int v) { _is_item_collected_as_gold = v; }
+void Tp::set_is_item_eater(int v) { _is_item_eater = v; }
+void Tp::set_is_item_not_stackable(int v) { _is_item_not_stackable = v; }
 void Tp::set_is_jumper(int v) { _is_jumper = v; }
 void Tp::set_is_jumper_chance_d1000(int v) { _is_jumper_chance_d1000 = v; }
 void Tp::set_is_jumper_distance(int v) { _is_jumper_distance = v; }
 void Tp::set_is_jumper_on_low_hp_chance_d1000(int v) { _is_jumper_on_low_hp_chance_d1000 = v; }
 void Tp::set_is_key(int v) { _is_key = v; }
+void Tp::set_is_killed_on_hit_or_miss(int v) { _is_killed_on_hit_or_miss = v; }
+void Tp::set_is_killed_on_hitting(int v) { _is_killed_on_hitting = v; }
 void Tp::set_is_lava(int v) { _is_lava = v; }
 void Tp::set_is_light_blocker(int v) { _is_light_blocker = v; }
 void Tp::set_is_light_strength(int v) { _is_light_strength = v; }
@@ -394,10 +411,15 @@ void Tp::set_is_meat_eater(int v) { _is_meat_eater = v; }
 void Tp::set_is_monst(int v) { _is_monst = v; }
 void Tp::set_is_movable(int v) { _is_movable = v; }
 void Tp::set_is_movement_blocking_hard(int v) { _is_movement_blocking_hard = v; }
+void Tp::set_is_movement_blocking_soft(int v) { _is_movement_blocking_soft = v; }
 void Tp::set_is_msg(int v) { _is_msg = v; }
 void Tp::set_is_no_tile(int v) { _is_no_tile = v; }
+void Tp::set_is_open_on_death(int v) { _is_open_on_death = v; }
 void Tp::set_is_player(int v) { _is_player = v; }
+void Tp::set_is_potion(int v) { _is_potion = v; }
+void Tp::set_is_potion_eater(int v) { _is_potion_eater = v; }
 void Tp::set_is_projectile(int v) { _is_projectile = v; }
+void Tp::set_is_removable_if_out_of_slots(int v) { _is_removable_if_out_of_slots = v; }
 void Tp::set_is_resurrectable(int v) { _is_resurrectable = v; }
 void Tp::set_is_ripple(int v) { _is_ripple = v; }
 void Tp::set_is_rock(int v) { _is_rock = v; }
@@ -465,48 +487,26 @@ void Tp::set_is_rrr64(int v) { _is_rrr64 = v; }
 void Tp::set_is_rrr65(int v) { _is_rrr65 = v; }
 void Tp::set_is_rrr66(int v) { _is_rrr66 = v; }
 void Tp::set_is_rrr67(int v) { _is_rrr67 = v; }
-void Tp::set_is_rrr68(int v) { _is_rrr68 = v; }
-void Tp::set_is_attackable_by_player(int v) { _is_attackable_by_player = v; }
+void Tp::set_is_item(int v) { _is_item = v; }
 void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
-void Tp::set_is_rrr70(int v) { _is_rrr70 = v; }
-void Tp::set_is_rrr71(int v) { _is_rrr71 = v; }
-void Tp::set_is_movement_blocking_soft(int v) { _is_movement_blocking_soft = v; }
-void Tp::set_is_the_grid(int v) { _is_the_grid = v; }
-void Tp::set_is_cursor_can_hover_over_but_needs_double_click(int v) { _is_cursor_can_hover_over_but_needs_double_click = v; }
-void Tp::set_is_gfx_moves_ahead_shown(int v) { _is_gfx_moves_ahead_shown = v; }
-void Tp::set_is_gfx_health_bar_shown_only_when_injured(int v) { _is_gfx_health_bar_shown_only_when_injured = v; }
-void Tp::set_is_gfx_health_bar_shown(int v) { _is_gfx_health_bar_shown = v; }
-void Tp::set_is_open_on_death(int v) { _is_open_on_death = v; }
-void Tp::set_is_killed_on_hit_or_miss(int v) { _is_killed_on_hit_or_miss = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
-void Tp::set_is_killed_on_hitting(int v) { _is_killed_on_hitting = v; }
-void Tp::set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
-void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
-void Tp::set_is_potion_eater(int v) { _is_potion_eater = v; }
-void Tp::set_is_throwable(int v) { _is_throwable = v; }
-void Tp::set_is_usable(int v) { _is_usable = v; }
-void Tp::set_is_droppable(int v) { _is_droppable = v; }
-void Tp::set_is_not_stackable(int v) { _is_not_stackable = v; }
-void Tp::set_is_mundane_item(int v) { _is_mundane_item = v; }
-void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }
-void Tp::set_has_capacity(int v) { _has_capacity = v; }
-void Tp::set_is_potion(int v) { _is_potion = v; }
-void Tp::set_is_sidebar_item(int v) { _is_sidebar_item = v; }
-void Tp::set_is_floating(int v) { _is_floating = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
 void Tp::set_is_shovable(int v) { _is_shovable = v; }
+void Tp::set_is_shown_on_monstbar(int v) { _is_shown_on_monstbar = v; }
 void Tp::set_is_slime(int v) { _is_slime = v; }
 void Tp::set_is_slime_baby(int v) { _is_slime_baby = v; }
 void Tp::set_is_slime_baby_eater(int v) { _is_slime_baby_eater = v; }
 void Tp::set_is_slime_eater(int v) { _is_slime_eater = v; }
 void Tp::set_is_slime_parent(int v) { _is_slime_parent = v; }
 void Tp::set_is_smoke(int v) { _is_smoke = v; }
-void Tp::set_is_removable_if_out_of_slots(int v) { _is_removable_if_out_of_slots = v; }
+void Tp::set_is_the_grid(int v) { _is_the_grid = v; }
+void Tp::set_is_throwable(int v) { _is_throwable = v; }
 void Tp::set_is_torch(int v) { _is_torch = v; }
 void Tp::set_is_treasure(int v) { _is_treasure = v; }
 void Tp::set_is_treasure_eater(int v) { _is_treasure_eater = v; }
 void Tp::set_is_undead(int v) { _is_undead = v; }
+void Tp::set_is_usable(int v) { _is_usable = v; }
 void Tp::set_is_wall(int v) { _is_wall = v; }
 void Tp::set_is_wall_deco(int v) { _is_wall_deco = v; }
 void Tp::set_is_water(int v) { _is_water = v; }
@@ -516,6 +516,7 @@ void Tp::set_is_weapon(int v) { _is_weapon = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_name(const std::string &v) { _name = v; }
 void Tp::set_normal_placement_rules(int v) { _normal_placement_rules = v; }
+void Tp::set_on_birth_do(const std::string &v) { _on_birth_do = v; }
 void Tp::set_on_death_do(const std::string &v) { _on_death_do = v; }
 void Tp::set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }
 void Tp::set_stats01(int v) { _stats01 = v; }
@@ -544,8 +545,6 @@ void Tp::set_stats_health_starving_pct(int v) { _stats_health_starving_pct = v; 
 void Tp::set_stats_move_speed_ms(int v) { _stats_move_speed_ms = v; }
 void Tp::set_stats_strength(int v) { _stats_strength = v; }
 void Tp::set_str1(const std::string &v) { _str1 = v; }
-void Tp::set_on_birth_do(const std::string &v) { _on_birth_do = v; }
-void Tp::set_text_title(const std::string &v) { _text_title = v; }
 void Tp::set_str2(const std::string &v) { _str2 = v; }
 void Tp::set_str3(const std::string &v) { _str3 = v; }
 void Tp::set_str4(const std::string &v) { _str4 = v; }
@@ -553,10 +552,11 @@ void Tp::set_str5(const std::string &v) { _str5 = v; }
 void Tp::set_str6(const std::string &v) { _str6 = v; }
 void Tp::set_str7(const std::string &v) { _str7 = v; }
 void Tp::set_str8(const std::string &v) { _str8 = v; }
-void Tp::set_text_description(const std::string &v) { _text_description = v; }
 void Tp::set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
+void Tp::set_text_description(const std::string &v) { _text_description = v; }
 void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
 void Tp::set_text_name(const std::string &v) { _text_name = v; }
+void Tp::set_text_title(const std::string &v) { _text_title = v; }
 void Tp::set_tick_catches_up_on_attack(int v) { _tick_catches_up_on_attack = v; }
 void Tp::set_tick_rate_tenths(int v) { _tick_rate_tenths = v; }
 void Tp::set_weapon_carry_anim(const std::string &v) { _weapon_carry_anim = v; }

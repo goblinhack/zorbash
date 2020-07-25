@@ -819,9 +819,9 @@ int Thing::is_rrr67(void) const
     return (tp()->is_rrr67());
 }
 
-int Thing::is_rrr68(void) const
+int Thing::is_item(void) const
 {_
-    return (tp()->is_rrr68());
+    return (tp()->is_item());
 }
 
 int Thing::is_attackable_by_player(void) const
@@ -829,14 +829,9 @@ int Thing::is_attackable_by_player(void) const
     return (tp()->is_attackable_by_player());
 }
 
-int Thing::is_rrr70(void) const
+int Thing::is_item_eater(void) const
 {_
-    return (tp()->is_rrr70());
-}
-
-int Thing::is_rrr71(void) const
-{_
-    return (tp()->is_rrr71());
+    return (tp()->is_item_eater());
 }
 
 int Thing::is_movement_blocking_soft(void) const
@@ -914,14 +909,19 @@ int Thing::is_droppable(void) const
     return (tp()->is_droppable());
 }
 
-int Thing::is_not_stackable(void) const
+int Thing::is_item_not_stackable(void) const
 {_
-    return (tp()->is_not_stackable());
+    return (tp()->is_item_not_stackable());
 }
 
-int Thing::is_mundane_item(void) const
+int Thing::is_item_class_a(void) const
 {_
-    return (tp()->is_mundane_item());
+    return (tp()->is_item_class_a());
+}
+
+int Thing::is_item_class_b(void) const
+{_
+    return (tp()->is_item_class_b());
 }
 
 int Thing::is_bag(void) const
@@ -939,9 +939,9 @@ int Thing::is_potion(void) const
     return (tp()->is_potion());
 }
 
-int Thing::is_sidebar_item(void) const
+int Thing::is_shown_on_monstbar(void) const
 {_
-    return (tp()->is_sidebar_item());
+    return (tp()->is_shown_on_monstbar());
 }
 
 int Thing::is_floating(void) const
@@ -989,9 +989,9 @@ int Thing::is_able_to_change_levels(void) const
     return (tp()->is_able_to_change_levels());
 }
 
-int Thing::is_collected_as_gold(void) const
+int Thing::is_item_collected_as_gold(void) const
 {_
-    return (tp()->is_collected_as_gold());
+    return (tp()->is_item_collected_as_gold());
 }
 
 int Thing::is_gold(void) const

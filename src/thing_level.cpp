@@ -175,13 +175,14 @@ void Thing::level_push (void)
     if (is_generator())                          { level->set_is_generator(mx, my); }
     if (is_gold())                               { level->set_is_gold(mx, my); }
     if (is_hazard())                             { level->set_is_hazard(mx, my); }
+    if (is_item_class_a())                       { level->set_is_item_class_a(mx, my); }
+    if (is_item_class_b())                       { level->set_is_item_class_b(mx, my); }
     if (is_key())                                { level->set_is_key(mx, my); }
     if (is_lava())                               { level->set_is_lava(mx, my); }
     if (is_light_blocker() && !is_open)          { level->set_is_light_blocker(mx, my); }
     if (is_monst())                              { level->set_is_monst(mx, my); }
     if (is_movement_blocking_hard() && !is_open) { level->set_is_movement_blocking_hard(mx, my); }
     if (is_movement_blocking_soft() && !is_open) { level->set_is_movement_blocking_soft(mx, my); }
-    if (is_mundane_item())                       { level->set_is_mundane_item(mx, my); }
     if (is_potion())                             { level->set_is_potion(mx, my); }
     if (is_rock())                               { level->set_is_rock(mx, my); }
     if (is_secret_door())                        { level->set_is_secret_door(mx, my); }
@@ -221,13 +222,14 @@ void Thing::level_pop (void)
     if (is_generator())                          { level->unset_is_generator(mx, my); }
     if (is_gold())                               { level->unset_is_gold(mx, my); }
     if (is_hazard())                             { level->unset_is_hazard(mx, my); }
+    if (is_item_class_a())                       { level->unset_is_item_class_a(mx, my); }
+    if (is_item_class_b())                       { level->unset_is_item_class_b(mx, my); }
     if (is_key())                                { level->unset_is_key(mx, my); }
     if (is_lava())                               { level->unset_is_lava(mx, my); }
     if (is_light_blocker() && !is_open)          { level->unset_is_light_blocker(mx, my); }
     if (is_monst())                              { level->unset_is_monst(mx, my); }
     if (is_movement_blocking_hard() && !is_open) { level->unset_is_movement_blocking_hard(mx, my); }
     if (is_movement_blocking_soft() && !is_open) { level->unset_is_movement_blocking_soft(mx, my); }
-    if (is_mundane_item())                       { level->unset_is_mundane_item(mx, my); }
     if (is_potion())                             { level->unset_is_potion(mx, my); }
     if (is_rock())                               { level->unset_is_rock(mx, my); }
     if (is_secret_door())                        { level->unset_is_secret_door(mx, my); }

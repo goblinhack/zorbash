@@ -70,7 +70,8 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_key          ||
                            m.is_lava         ||
                            m.is_monst        ||
-                           m.is_mundane_item ||
+                           m.is_item_class_a ||
+                           m.is_item_class_b ||
                            m.is_potion       ||
                            m.is_secret_door  ||
                            m.is_torch        ||
@@ -122,7 +123,8 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_gold         ||
                     m.is_key          ||
                     m.is_monst        ||
-                    m.is_mundane_item ||
+                    m.is_item_class_a ||
+                    m.is_item_class_b ||
                     m.is_potion       ||
                     m.is_torch        ||
                     m.is_trap         ||
@@ -198,11 +200,11 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             for (auto x = 0; x < MAP_WIDTH; x++) {
-                set(l->data, x, y, MAP_DEPTH_FLOOR,      floor_string[x]);
-                set(l->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
-                set(l->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
-                set(l->data, x, y, MAP_DEPTH_CHASM,      chasm_string[x]);
-                set(l->data, x, y, MAP_DEPTH_OBJ,      walls_string[x]);
+                set(l->data, x, y, MAP_DEPTH_FLOOR, floor_string[x]);
+                set(l->data, x, y, MAP_DEPTH_WATER, water_string[x]);
+                set(l->data, x, y, MAP_DEPTH_LAVA,  lava_string[x]);
+                set(l->data, x, y, MAP_DEPTH_CHASM, chasm_string[x]);
+                set(l->data, x, y, MAP_DEPTH_OBJ,   walls_string[x]);
             }
         }
     }
