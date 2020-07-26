@@ -26,6 +26,9 @@ void Level::dump (std::string pfx, std::ostream &out)
                 auto id = get(all_thing_ids_at, x, y, z);
                 if (id.ok()) {
                     auto t = thing_find(id);
+                    if (!t) {
+                        continue;
+                    }
                     t->log("dump");
                 }
             }

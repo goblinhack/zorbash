@@ -9,6 +9,9 @@
 void Level::put_thing (int x, int y, ThingId id)
 {_
     auto t = thing_find(id);
+    if (!t) {
+        return;
+    }
 
     if (!id.id) {
         t->err("null id at (%d,%d)", x, y);
@@ -69,6 +72,9 @@ do_retry:
             auto idp = &getref(all_thing_ids_at, x, y, slot);
             if (idp->id) {
                 auto t = thing_find(*idp);
+                if (!t) {
+                    continue;
+                }
                 t->log("- slot %u", slot);
                 if (t->is_removable_if_out_of_slots()) {
                     t->dead("out of slots");
@@ -91,6 +97,9 @@ do_retry:
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (idp->id) {
             auto t = thing_find(*idp);
+            if (!t) {
+                continue;
+            }
             t->log("- slot %u", slot);
         } else {
             t->log("- empty slot %u", slot);
@@ -109,6 +118,7 @@ void Level::remove_thing (int x, int y, ThingId id)
     auto t = thing_find(id);
     if (!t) {
         ERR("oob at (%d,%d) for remove of %" PRIx32 "", x, y, id.id);
+        return;
     }
 
     if (is_oob(x, y)) {

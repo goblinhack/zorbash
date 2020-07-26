@@ -24,6 +24,7 @@ void Thing::drop (Thingp what)
         return;
     }
 
+    what->hooks_remove();
     what->remove_owner();
     what->visible();
 
@@ -39,6 +40,10 @@ void Thing::drop_all (void)
 
     while (!monstp->carrying.empty()) {
         auto id = *monstp->carrying.begin();
-        return (drop(level->thing_find(id)));
+        auto t = level->thing_find(id);
+        if (!t) {
+            return;
+        }
+        drop(t);
     }
 }

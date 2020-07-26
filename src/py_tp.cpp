@@ -1180,6 +1180,7 @@ PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 

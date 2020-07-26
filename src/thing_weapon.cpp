@@ -26,6 +26,9 @@ void Thing::weapon_set_carry_anim_id (ThingId weapon_carry_anim_id)
     }
 
     weapon_carry_anim = level->thing_find(weapon_carry_anim_id);
+    if (!weapon_carry_anim) {
+        return;
+    }
 
     weapon_set_carry_anim(weapon_carry_anim);
 }
@@ -77,6 +80,9 @@ void Thing::weapon_set_use_anim_id (ThingId weapon_use_anim_id)
     }
 
     weapon_use_anim = level->thing_find(weapon_use_anim_id);
+    if (!weapon_use_anim) {
+        return;
+    }
 
     weapon_set_use_anim(weapon_use_anim);
 }
@@ -308,7 +314,9 @@ void Thing::use (void)
 
     auto weapon = weapon_get();
     if (!weapon) {
-        err("no weapon to use");
+        if (is_player()) {
+            MINICON("You have no weapon to use");
+        }
         return;
     }
 

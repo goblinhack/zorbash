@@ -16,6 +16,9 @@ Thingp Thing::owner_get (void) const
     auto id = get_owner_id();
     if (id.ok()) {
         auto i = level->thing_find(id);
+        if (!i) {
+            return nullptr;
+        }
         if (i->get_owner_id().ok()) {
             return i->owner_get();
         }

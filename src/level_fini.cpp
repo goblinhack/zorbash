@@ -36,6 +36,9 @@ void Level::fini (void)
                     LOG("clean thing %" PRIx32 " at %d,%d", id.id, x, y);
 #endif
                     auto t = thing_find(id);
+                    if (!t) {
+                        continue;
+                    }
 #ifdef ENABLE_THING_ID_LOGS
                     t->log("call delete");
 #endif
@@ -59,6 +62,9 @@ void Level::fini (void)
                 if (id.ok()) {
                     err("level fini: did not detach thing id %" PRIx32 " at %d,%d,%d", id.id, x, y, z);
                     auto t = thing_find(id);
+                    if (!t) {
+                        continue;
+                    }
                     t->err("level fini: did not detach thing id from all_thing_ids_at");
                 }
             }

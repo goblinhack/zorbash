@@ -270,6 +270,9 @@ std::ostream& operator<<(std::ostream &out,
                 auto id = get(my.t->all_thing_ids_at, x, y, slot);
                 if (id.ok()) {
                     const Thingp t = my.t->thing_find(id);
+                    if (!t) {
+                        continue;
+                    }
 #ifdef ENABLE_DEBUG_SAVE_LOAD
                     t->log("save");
 #endif
