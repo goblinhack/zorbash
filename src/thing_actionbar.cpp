@@ -220,7 +220,7 @@ bool Thing::actionbar_id_remove (Thingp what)
                 game->actionbar_highlight_slot = {};
             } else {
                 while (game->actionbar_highlight_slot >= 
-                        monstp->actionbar_id.size()) {
+                       monstp->actionbar_id.size()) {
                     game->actionbar_highlight_slot--;
                 }
             }
@@ -268,7 +268,8 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
             if (!monstp->actionbar_id.size()) {
                 game->actionbar_highlight_slot = {};
             } else {
-                while (game->actionbar_highlight_slot >= monstp->actionbar_id.size()) {
+                while (game->actionbar_highlight_slot >= 
+                       monstp->actionbar_id.size()) {
                     game->actionbar_highlight_slot--;
                 }
             }
