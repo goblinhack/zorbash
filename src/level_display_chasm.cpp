@@ -16,9 +16,6 @@ void Level::display_chasm (int fbo,
                            uint16_t minx, uint16_t miny,
                            uint16_t maxx, uint16_t maxy)
 {_
-#define CHASM_ACROSS 8
-#define CHASM_DOWN   8
-
     auto z = MAP_DEPTH_CHASM;
 
     /////////////////////////////////////////////////////////////////////
@@ -53,50 +50,6 @@ void Level::display_chasm (int fbo,
     blit_flush();
 
     /////////////////////////////////////////////////////////////////////
-    // Draw the tiles that we will want to combine with the mask later
-    /////////////////////////////////////////////////////////////////////
-#if 0
-    blit_init();
-    glcolor(WHITE);
-    blit_fbo_bind(FBO_MASK2);
-    glBlendFunc(GL_ONE, GL_ZERO);
-    auto tile_map = chasm_tile_map;
-    for (auto x = minx; x < maxx; x++) {
-        int in_chasm = 0;
-        for (auto y = miny; y < maxy; y++) {
-            if (likely(!get(tile_map, x, y))) {
-                in_chasm = 0;
-                continue;
-            }
-            int tx = (x &~1);
-            int ty = (y &~1);
-            int tlx = tx * TILE_WIDTH;
-            int tly = ty * TILE_HEIGHT;
-            int brx = tlx + (2 * TILE_WIDTH);
-            int bry = tly + (2 * TILE_HEIGHT);
-
-            tlx -= pixel_map_at.x;
-            tly -= pixel_map_at.y;
-            brx -= pixel_map_at.x;
-            bry -= pixel_map_at.y;
-
-            int lx = (x / 2) % CHASM_ACROSS;
-            int ly = (in_chasm / 2) % CHASM_DOWN;
-            in_chasm++;
-            auto tile = get(chasm, lx, ly);
-
-            auto x1 = tile->x1;
-            auto x2 = tile->x2;
-            auto y1 = tile->y1;
-            auto y2 = tile->y2;
-
-            blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
-        }
-    }
-    blit_flush();
-#endif
-
-    /////////////////////////////////////////////////////////////////////
     // Merge the mask and tiles
     /////////////////////////////////////////////////////////////////////
     blit_fbo_bind(FBO_MASK3);
@@ -104,11 +57,13 @@ void Level::display_chasm (int fbo,
     glcolor(WHITE);
     blit_fbo(FBO_MASK1);
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
-//    blit_fbo(FBO_MASK2);
     //
     // Parallax
     //
-    auto tex = tex_find("chasm");
+    static Texp tex;
+    if (!tex) {
+        tex = tex_find("chasm");
+    }
     float s = 2.0;
     glTranslatef(pixel_map_at.x / s, pixel_map_at.y / s, 0);
     blit_init();
