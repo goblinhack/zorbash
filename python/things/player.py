@@ -42,6 +42,7 @@ def tp_init(name, text_name, title):
     x.set_stats_strength(10)
     x.set_text_a_or_an("the")
     x.set_text_hits("hits")
+    x.set_weapon_use_anim("claws1")
     x.set_text_title(title)
     x.set_tick_rate_tenths(1)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
