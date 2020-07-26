@@ -77,14 +77,18 @@ void Thing::level_change (Levelp l)
         auto id = get_on_fire_anim_id();
         if (id.ok()) {
             auto it = level->thing_find(id);
-            it->level_change(l);
+            if (it) {
+                it->level_change(l);
+            }
         }
     }
 
     if (monstp) {
         for (auto id : monstp->carrying) {
             auto it = level->thing_find(id);
-            it->level_change(l);
+            if (it) {
+                it->level_change(l);
+            }
         }
     }
 

@@ -70,3 +70,57 @@ void Thing::move_carried_items (void)
         }
     }
 }
+
+bool Thing::is_carrying_item (void)
+{_
+    if (!monstp) {
+        return false;
+    }
+
+    if (monstp->carrying.size()){
+        return true;
+    }
+
+    auto owner = owner_get();
+    if (owner) {
+        return owner->is_carrying_item();
+    }
+
+    return false;
+}
+
+std::vector<Thingp> Thing::get_item_list (void)
+{_
+    std::vector<Thingp> tr;
+    log("items:");
+_
+    if (!monstp) {
+        log("not carrying");
+        return tr;
+    }
+
+    for (const auto& item : monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
+
+        log("item %s", t->to_string().c_str());
+        if (t->monstp && t->monstp->carrying.size()) {
+            auto tr2 = t->get_item_list();
+            std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));
+        }
+
+        if (t->is_item()) {
+            tr.push_back(t);
+        }
+    }
+
+    auto owner = owner_get();
+    if (owner) {
+        auto tr2 = owner->get_item_list();
+        std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));
+    }
+
+    return tr;
+}

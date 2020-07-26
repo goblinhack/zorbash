@@ -32,17 +32,17 @@ _
 bool Thing::steal_item_from (Thingp it)
 {_
     log("steal item from %s", it->to_string().c_str());
-_
-    auto cands = get_item_list();
+    auto cands = it->get_item_list();
     if (!cands.size()) {
         log("no, nothing to steal");
         return false;
     }
+_
     auto chosen = cands[random_range(0, cands.size())];
 
     log("steal the %s", chosen->to_string().c_str());
     it->drop(chosen);
-    if (!it->is_dead) {
+    if (!chosen->is_dead) {
         carry(chosen);
     }
 

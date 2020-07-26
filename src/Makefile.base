@@ -150,7 +150,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_id.o 		\
     $(OBJDIR)/thing_inherit.o 		\
     $(OBJDIR)/thing_init.o 		\
-    $(OBJDIR)/thing_items.o 		\
+    $(OBJDIR)/thing_item.o 		\
+    $(OBJDIR)/thing_treasure.o 		\
     $(OBJDIR)/thing_jump.o 		\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
