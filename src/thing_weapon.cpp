@@ -312,27 +312,30 @@ void Thing::use (void)
         return;
     }
 
+    std::string swung_as;
+
     auto weapon = weapon_get();
     if (!weapon) {
         if (is_player()) {
             MINICON("You have no weapon to use");
         }
-        return;
-    }
+//        return;
+        swung_as = weapon_use_anim();
+    } else {
+        auto weapon_tp = weapon->tp();
 
-    auto weapon_tp = weapon->tp();
+        swung_as = weapon_tp->weapon_use_anim();
+        if (swung_as == "") {
+            die("could not use %s/%" PRIx32 " has no 'use' animation frame",
+                weapon_tp->name().c_str(), weapon->id.id);
+            return;
+        }
 
-    auto swung_as = weapon_tp->weapon_use_anim();
-    if (swung_as == "") {
-        die("could not use %s/%" PRIx32 " has no 'use' animation frame",
-            weapon_tp->name().c_str(), weapon->id.id);
-        return;
-    }
-
-    auto what = tp_find(swung_as);
-    if (!what) {
-        err("could not find %s to wield", swung_as.c_str());
-        return;
+        auto what = tp_find(swung_as);
+        if (!what) {
+            err("could not find %s to wield", swung_as.c_str());
+            return;
+        }
     }
 
     //

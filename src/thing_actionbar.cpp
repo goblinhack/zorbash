@@ -265,8 +265,12 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
                 actionbar_particle(what, i, particle_target);
             }
 
-            while (game->actionbar_highlight_slot >= monstp->actionbar_id.size()) {
-                game->actionbar_highlight_slot--;
+            if (!monstp->actionbar_id.size()) {
+                game->actionbar_highlight_slot = {};
+            } else {
+                while (game->actionbar_highlight_slot >= monstp->actionbar_id.size()) {
+                    game->actionbar_highlight_slot--;
+                }
             }
 
             level->actionbar_describe(game->actionbar_highlight_slot);
