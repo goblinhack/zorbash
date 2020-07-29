@@ -816,7 +816,7 @@ def init_16x16():
       ##############################################################################################################################################
       "",                    "",                    "",                    "",
       "",                    "",                    "",                    "",
-      "",                    "punch1.1",            "punch1.2",            "punch1.3",
+      "",                    "",                    "",                    "",
       "",                    "",                    "",                    "",
       "",                    "",                    "",
       ##############################################################################################################################################
@@ -1421,18 +1421,13 @@ def init_weapons_tiles():
 
 def init_claws_tiles():
     tiles = [
-        "claws1.1", "claws1.2", "claws1.3", "claws1.4", "claws1.5", "claws1.6", "claws1.7", "claws1.8",
-        "claws1.9", "claws1.10", "claws1.11", "claws1.12", "claws1.13", "claws1.14", "claws1.15", "claws1.16",
-        "claws1.17", "claws1.18", "claws1.19", "claws1.20", "claws1.21", "claws1.22", "claws1.23", "claws1.24",
-        "claws1.25", "claws1.26", "claws1.27", "claws1.28", "claws1.29", "claws1.30", "claws1.31", "claws1.32",
-        "claws1.33", "claws1.34", "claws1.35", "claws1.36", "claws1.37", "claws1.38", "claws1.39", "claws1.40",
-        "claws1.41", "claws1.42", "claws1.43", "claws1.44", "claws1.45", "claws1.46", "claws1.47", "claws1.48",
-        "claws1.49", "claws1.50", "claws1.51", "claws1.52",
+        "claws1.1", "claws1.2", "claws1.3", "claws1.4", "claws1.5", "claws1.6",
+        "punch1.1", "punch1.2", "punch1.3", "punch1.4",
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/hit_claws_50x50px.tga",
-        name="claws", width=25, height=25, arr=tiles)
+        file="data/gfx/attack.tga",
+        name="claws", width=32, height=32, arr=tiles)
 
 init_solid()
 init_title()
