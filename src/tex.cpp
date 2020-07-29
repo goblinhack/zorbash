@@ -331,35 +331,38 @@ static std::pair<Texp, Texp> tex_sprite (SDL_Surface *in,
                                              rmask, gmask, bmask, amask);
     newptr(out2, "SDL_CreateRGBSurface18");
 
-    //
-    // Omit every grid pixel between tiles.
-    //
     ox = 0;
 
     for (ix = 0; ix < (int32_t) iwidth; ix++) {
         oy = 0;
         for (iy = 0; iy < (int32_t) iheight; iy++) {
-            color c = getPixel(in, ix, iy);
-            uint8_t avg = ((int)c.r + (int)c.g + (int)c.b) / 3;
-            c.r = avg;
-            c.g = avg;
-            c.b = avg;
+            color c1 = getPixel(in, ix, iy);
+            color c2 = c1;
+            uint8_t avg = ((int)c1.r + (int)c1.g + (int)c1.b) / 3;
+            c1.r = avg;
+            c1.g = avg;
+            c1.b = avg;
 
-            putPixel(out1, ox, oy, c);
+            putPixel(out1, ox, oy, c1);
 
-            if ((c.r > 10) || (c.g > 10) || (c.b > 10)) {
-                c.r = 255;
-                c.g = 255;
-                c.b = 255;
-                c.a = 255;
+            if (c2.a == 0) {
+                c2.r = 0;
+                c2.g = 0;
+                c2.b = 0;
+                c2.a = 0;
+            } else if ((c2.r > 1) || (c2.g > 1) || (c2.b > 1)) {
+                c2.r = 255;
+                c2.g = 255;
+                c2.b = 255;
+                c2.a = 255;
             } else {
-                c.r = 0;
-                c.g = 0;
-                c.b = 0;
-                c.a = 0;
+                c2.r = 0;
+                c2.g = 0;
+                c2.b = 0;
+                c2.a = 0;
             }
 
-            putPixel(out2, ox, oy, c);
+            putPixel(out2, ox, oy, c2);
             oy++;
         }
         ox++;
