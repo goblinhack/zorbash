@@ -687,7 +687,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr64)
     TP_SET_DECL(is_rrr65)
     TP_SET_DECL(is_rrr66)
-    TP_SET_DECL(is_rrr67)
+    TP_SET_DECL(is_weapon_wielder)
     TP_SET_DECL(is_item)
     TP_SET_DECL(is_rrr7)
     TP_SET_DECL(is_rrr8)

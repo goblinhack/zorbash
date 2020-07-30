@@ -40,7 +40,9 @@ void Thing::carry (Thingp what)
     //
     // If we have no weapon, wield it
     //
-    if (what->is_weapon() && !get_weapon_id()) {
-        wield(what);
+    if (is_weapon_wielder()) {
+        if (what->is_weapon() && !get_weapon_id()) {
+            wield(what);
+        }
     }
 }

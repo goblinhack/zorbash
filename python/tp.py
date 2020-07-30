@@ -374,8 +374,8 @@ class Tp:
     def set_is_rrr66(self, value):
         zx.tp_set_is_rrr66(self, value)
 
-    def set_is_rrr67(self, value):
-        zx.tp_set_is_rrr67(self, value)
+    def set_is_weapon_wielder(self, value):
+        zx.tp_set_is_weapon_wielder(self, value)
 
     def set_is_item(self, value):
         zx.tp_set_is_item(self, value)

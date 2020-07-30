@@ -305,6 +305,8 @@ void Thing::wield (Thingp weapon)
 
 void Thing::use (void)
 {_
+    log("use something");
+_
     if (get_weapon_id_use_anim().ok()) {
         //
         // Still using.
@@ -317,9 +319,8 @@ void Thing::use (void)
     auto weapon = weapon_get();
     if (!weapon) {
         if (is_player()) {
-            MINICON("You have no weapon to use");
+            MINICON("You attack with bare fists!");
         }
-//        return;
         swung_as = weapon_use_anim();
     } else {
         auto weapon_tp = weapon->tp();
@@ -361,7 +362,13 @@ void Thing::use (void)
     move_carried_items();
 
     float dx, dy;
-    weapon_get_use_offset(&dx, &dy);
+    if (!weapon) {
+        auto d = dir_to_direction();
+        dx = d.x;
+        dy = d.y;
+    } else {
+        weapon_get_use_offset(&dx, &dy);
+    }
 
     bool target_attacked = false;
     bool target_overlaps = false;

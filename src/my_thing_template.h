@@ -282,7 +282,7 @@ private:
     int _is_rrr64 {};
     int _is_rrr65 {};
     int _is_rrr66 {};
-    int _is_rrr67 {};
+    int _is_weapon_wielder {};
     int _is_item {};
     int _is_rrr7 {};
     int _is_rrr8 {};
@@ -633,7 +633,7 @@ public:
     int is_rrr64(void) const;
     int is_rrr65(void) const;
     int is_rrr66(void) const;
-    int is_rrr67(void) const;
+    int is_weapon_wielder(void) const;
     int is_item(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
@@ -875,7 +875,7 @@ public:
     void set_is_rrr64(int);
     void set_is_rrr65(int);
     void set_is_rrr66(int);
-    void set_is_rrr67(int);
+    void set_is_weapon_wielder(int);
     void set_is_item(int);
     void set_is_rrr7(int);
     void set_is_rrr8(int);
