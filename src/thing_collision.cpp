@@ -553,9 +553,9 @@ _
             continue;
         }
 
-        if (is_loggable_for_unimportant_stuff()) {
+//        if (is_loggable_for_unimportant_stuff()) {
             log("cand %s", cand.target->to_string().c_str());
-        }
+//        }
 
         //
         // Skip things that aren't really hitable.
@@ -1056,15 +1056,15 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
                                         bool *target_overlaps,
                                         float radius)
 {
+    if (is_loggable_for_unimportant_stuff()) {
+        log("collision handle");
+    }
+_
     if (is_falling) {
         log("falling, ignore collisions");
         return false;
     }
 
-    if (is_loggable_for_unimportant_stuff()) {
-        log("collision handle");
-    }
-_
     int minx = future_pos.x - radius;
     while (minx < 0) {
         minx++;

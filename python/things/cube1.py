@@ -46,10 +46,8 @@ def tp_init(name, text_name):
     x.set_is_movable(True)
     x.set_is_potion_eater(True)
     x.set_is_shown_on_monstbar(True)
-    x.set_is_slime(True)
     x.set_is_slime_baby_eater(True)
     x.set_is_slime_eater(True)
-    x.set_is_slime_parent(True)
     x.set_is_treasure_eater(True)
     x.set_light_color("green")
     x.set_normal_placement_rules(True)
@@ -62,7 +60,7 @@ def tp_init(name, text_name):
     x.set_stats_move_speed_ms(1000)
     x.set_stats_strength(1)
     x.set_text_a_or_an("a");
-    x.set_text_description("A dungeon auto cleaner jelly thingy")
+    x.set_text_description("An dungeon auto cleaner jelly thingy")
     x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
     x.set_weapon_use_anim("splat1")

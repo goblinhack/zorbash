@@ -11,82 +11,80 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-bool Thing::possible_to_attack (const Thingp itp)
+bool Thing::possible_to_attack (const Thingp it)
 {_
     auto me = tp();
-    auto it = itp->tp();
-
-    if (is_monst()) {
-        if (!it->is_attackable_by_monst()) {
-            return (false);
-        }
-    } else {
-        if (!it->is_attackable_by_player()) {
-            return (false);
-        }
-    }
 
     //
     // No attacking of open doors!
     //
-    if (itp->is_open) {
+    if (it->is_open) {
+        log("cannot attack %s, its open", it->to_string().c_str());
         return (false);
     }
 
     if (is_alive_monst() || is_resurrected) {
-        if (me->is_meat_eater()) {
-            if (it->is_meat() || it->is_blood()) {
-                log("can attack %s", itp->to_string().c_str());
-                return (true);
-            }
-        }
-
         if (me->is_slime_baby_eater()) {
             if (it->is_slime_baby()) {
-                log("can attack %s", itp->to_string().c_str());
+                log("can attack %s", it->to_string().c_str());
                 return (true);
             }
         }
 
         if (me->is_treasure_eater()) {
             if (it->is_treasure()) {
-                log("can attack %s", itp->to_string().c_str());
+                log("can attack %s", it->to_string().c_str());
                 return (true);
             }
-            if (itp->is_carrying_treasure()) {
-                log("can steal %s", itp->to_string().c_str());
+            if (it->is_carrying_treasure()) {
+                log("can steal %s", it->to_string().c_str());
                 return (true);
             }
         }
 
         if (me->is_potion_eater()) {
             if (it->is_potion()) {
-                log("can attack %s", itp->to_string().c_str());
+                log("can attack %s", it->to_string().c_str());
+                return (true);
+            }
+        }
+
+        if (me->is_meat_eater()) {
+            if (!it->is_attackable_by_monst()) {
+                log("cannot attack %s, not attackable", it->to_string().c_str());
+                return (false);
+            }
+            if (it->is_meat() || it->is_blood()) {
+                log("can attack %s", it->to_string().c_str());
                 return (true);
             }
         }
     }
 
     if (is_player()) {
-        log("can attack %s", itp->to_string().c_str());
+        if (!it->is_attackable_by_player()) {
+            log("cannot attack %s, not attackable", it->to_string().c_str());
+            return (false);
+        }
+        log("can attack %s", it->to_string().c_str());
         return (true);
     }
 
     if (is_weapon()) {
-        log("can attack %s", itp->to_string().c_str());
+        log("can attack %s", it->to_string().c_str());
         return (true);
     }
 
     if (me->is_fire() || me->is_lava()) {
         if (it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
-                log("can attack %s", itp->to_string().c_str());
+                log("can attack %s", it->to_string().c_str());
                 return (true);
             }
         }
     }
 
-    log("ignore attack %s", itp->to_string().c_str());
+    log("ignore attack %s", it->to_string().c_str());
     return (false);
 }
 

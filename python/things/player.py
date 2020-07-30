@@ -33,6 +33,7 @@ def tp_init(name, text_name, title):
     x.set_is_movable(True)
     x.set_is_player(True)
     x.set_is_shovable(True)
+    x.set_is_weapon_wielder(True)
     x.set_stats_attack_dice("1d6+1")
     x.set_stats_defence(3)
     x.set_stats_health_hunger_pct(5)
@@ -41,13 +42,13 @@ def tp_init(name, text_name, title):
     x.set_stats_move_speed_ms(75)
     x.set_stats_strength(10)
     x.set_text_a_or_an("the")
+    x.set_text_description("Our most noble adventurer or no particular race or gender")
     x.set_text_hits("hits")
-    x.set_weapon_use_anim("punch1")
     x.set_text_title(title)
     x.set_tick_rate_tenths(1)
+    x.set_weapon_use_anim("punch1")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
-    x.set_text_description("Our most noble adventurer or no particular race or gender")
 
     delay = 550
     x.set_tile(tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay)

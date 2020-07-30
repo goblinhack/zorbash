@@ -245,7 +245,7 @@ int Tp::is_rrr63(void) const { return _is_rrr63; }
 int Tp::is_rrr64(void) const { return _is_rrr64; }
 int Tp::is_rrr65(void) const { return _is_rrr65; }
 int Tp::is_rrr66(void) const { return _is_rrr66; }
-int Tp::is_rrr67(void) const { return _is_rrr67; }
+int Tp::is_weapon_wielder(void) const { return _is_weapon_wielder; }
 int Tp::is_item(void) const { return _is_item; }
 int Tp::is_rrr7(void) const { return _is_rrr7; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
@@ -486,7 +486,7 @@ void Tp::set_is_rrr63(int v) { _is_rrr63 = v; }
 void Tp::set_is_rrr64(int v) { _is_rrr64 = v; }
 void Tp::set_is_rrr65(int v) { _is_rrr65 = v; }
 void Tp::set_is_rrr66(int v) { _is_rrr66 = v; }
-void Tp::set_is_rrr67(int v) { _is_rrr67 = v; }
+void Tp::set_is_weapon_wielder(int v) { _is_weapon_wielder = v; }
 void Tp::set_is_item(int v) { _is_item = v; }
 void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }

@@ -814,9 +814,9 @@ int Thing::is_rrr66(void) const
     return (tp()->is_rrr66());
 }
 
-int Thing::is_rrr67(void) const
+int Thing::is_weapon_wielder(void) const
 {_
-    return (tp()->is_rrr67());
+    return (tp()->is_weapon_wielder());
 }
 
 int Thing::is_item(void) const

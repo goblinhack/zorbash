@@ -999,7 +999,7 @@ public:
     int is_rrr64(void) const;
     int is_rrr65(void) const;
     int is_rrr66(void) const;
-    int is_rrr67(void) const;
+    int is_weapon_wielder(void) const;
     int is_item(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;

@@ -5,6 +5,7 @@
 
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_sprintf.h"
 
 bool Thing::steal_treasure_from (Thingp it)
 {_
@@ -24,6 +25,7 @@ _
     }
 
     if (it->is_player()) {
+        it->msg(string_sprintf("%%fg=yellow$!!!"));
         MINICON("You feel lighter...");
     }
     return true;
@@ -47,6 +49,7 @@ _
     }
 
     if (it->is_player()) {
+        it->msg(string_sprintf("%%fg=yellow$!!!"));
         MINICON("You feel lighter...");
     }
     return true;
