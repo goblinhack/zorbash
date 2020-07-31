@@ -866,7 +866,7 @@ public:
     int is_collectable(void) const;
     int is_combustible(void) const;
     int is_corpse(void) const;
-    int is_corpse_on_death(void) const;
+    int on_death_is_corpse(void) const;
     int is_corridor(void) const;
     int is_cursor(void) const;
     int is_cursor_can_hover_over(void) const;
@@ -928,7 +928,7 @@ public:
     int is_movement_blocking_soft(void) const;
     int is_msg(void) const;
     int is_no_tile(void) const;
-    int is_open_on_death(void) const;
+    int on_death_is_open(void) const;
     int is_player(void) const;
     int is_potion(void) const;
     int is_potion_eater(void) const;
@@ -998,7 +998,7 @@ public:
     int is_rrr62(void) const;
     int is_rrr63(void) const;
     int is_rrr64(void) const;
-    int is_rrr65(void) const;
+    int on_death_drop_all_items(void) const;
     int is_steal_item_chance_d1000(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;

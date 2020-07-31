@@ -368,8 +368,8 @@ class Tp:
     def set_is_rrr64(self, value):
         zx.tp_set_is_rrr64(self, value)
 
-    def set_is_rrr65(self, value):
-        zx.tp_set_is_rrr65(self, value)
+    def set_on_death_drop_all_items(self, value):
+        zx.tp_set_on_death_drop_all_items(self, value)
 
     def set_is_steal_item_chance_d1000(self, value):
         zx.tp_set_is_steal_item_chance_d1000(self, value)
@@ -407,8 +407,8 @@ class Tp:
     def set_is_gfx_health_bar_shown(self, value):
         zx.tp_set_is_gfx_health_bar_shown(self, value)
 
-    def set_is_open_on_death(self, value):
-        zx.tp_set_is_open_on_death(self, value)
+    def set_on_death_is_open(self, value):
+        zx.tp_set_on_death_is_open(self, value)
 
     def set_is_killed_on_hit_or_miss(self, value):
         zx.tp_set_is_killed_on_hit_or_miss(self, value)
@@ -695,8 +695,8 @@ class Tp:
     def set_is_bleeder(self, value):
         zx.tp_set_is_bleeder(self, value)
 
-    def set_is_corpse_on_death(self, value):
-        zx.tp_set_is_corpse_on_death(self, value)
+    def set_on_death_is_corpse(self, value):
+        zx.tp_set_on_death_is_corpse(self, value)
 
     def set_is_meat_eater(self, value):
         zx.tp_set_is_meat_eater(self, value)

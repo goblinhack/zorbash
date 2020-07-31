@@ -26,7 +26,7 @@ def tp_init(name, text_name):
     x.set_is_attackable_by_monst(True)
     x.set_is_attackable_by_player(True)
     x.set_is_combustible(True)
-    x.set_is_corpse_on_death(True)
+    x.set_on_death_is_corpse(True)
     x.set_is_double_damage_from_water(True)
     x.set_is_hunger_insatiable(True)
     x.set_is_intelligent(True)

@@ -16,7 +16,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_combustible(True)
-    x.set_is_corpse_on_death(True)
+    x.set_on_death_is_corpse(True)
     x.set_is_dead_on_shove(True)
     x.set_is_fire(True)
     x.set_is_flammable(True)

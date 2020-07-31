@@ -114,7 +114,7 @@ int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
 int Tp::is_collectable(void) const { return _is_collectable; }
 int Tp::is_combustible(void) const { return _is_combustible; }
-int Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
+int Tp::on_death_is_corpse(void) const { return _on_death_is_corpse; }
 int Tp::is_corridor(void) const { return _is_corridor; }
 int Tp::is_cursor(void) const { return _is_cursor; }
 int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
@@ -173,7 +173,7 @@ int Tp::is_movement_blocking_hard(void) const { return _is_movement_blocking_har
 int Tp::is_movement_blocking_soft(void) const { return _is_movement_blocking_soft; }
 int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
-int Tp::is_open_on_death(void) const { return _is_open_on_death; }
+int Tp::on_death_is_open(void) const { return _on_death_is_open; }
 int Tp::is_player(void) const { return _is_player; }
 int Tp::is_potion(void) const { return _is_potion; }
 int Tp::is_potion_eater(void) const { return _is_potion_eater; }
@@ -243,7 +243,7 @@ int Tp::is_rrr61(void) const { return _is_rrr61; }
 int Tp::is_rrr62(void) const { return _is_rrr62; }
 int Tp::is_rrr63(void) const { return _is_rrr63; }
 int Tp::is_rrr64(void) const { return _is_rrr64; }
-int Tp::is_rrr65(void) const { return _is_rrr65; }
+int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
 int Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1000; }
 int Tp::is_weapon_wielder(void) const { return _is_weapon_wielder; }
 int Tp::is_item(void) const { return _is_item; }
@@ -355,7 +355,7 @@ void Tp::set_is_chasm(int v) { _is_chasm = v; }
 void Tp::set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
 void Tp::set_is_collectable(int v) { _is_collectable = v; }
 void Tp::set_is_combustible(int v) { _is_combustible = v; }
-void Tp::set_is_corpse_on_death(int v) { _is_corpse_on_death = v; }
+void Tp::set_on_death_is_corpse(int v) { _on_death_is_corpse = v; }
 void Tp::set_is_corridor(int v) { _is_corridor = v; }
 void Tp::set_is_cursor(int v) { _is_cursor = v; }
 void Tp::set_is_cursor_can_hover_over(int v) { _is_cursor_can_hover_over = v; }
@@ -414,7 +414,7 @@ void Tp::set_is_movement_blocking_hard(int v) { _is_movement_blocking_hard = v; 
 void Tp::set_is_movement_blocking_soft(int v) { _is_movement_blocking_soft = v; }
 void Tp::set_is_msg(int v) { _is_msg = v; }
 void Tp::set_is_no_tile(int v) { _is_no_tile = v; }
-void Tp::set_is_open_on_death(int v) { _is_open_on_death = v; }
+void Tp::set_on_death_is_open(int v) { _on_death_is_open = v; }
 void Tp::set_is_player(int v) { _is_player = v; }
 void Tp::set_is_potion(int v) { _is_potion = v; }
 void Tp::set_is_potion_eater(int v) { _is_potion_eater = v; }
@@ -484,7 +484,7 @@ void Tp::set_is_rrr61(int v) { _is_rrr61 = v; }
 void Tp::set_is_rrr62(int v) { _is_rrr62 = v; }
 void Tp::set_is_rrr63(int v) { _is_rrr63 = v; }
 void Tp::set_is_rrr64(int v) { _is_rrr64 = v; }
-void Tp::set_is_rrr65(int v) { _is_rrr65 = v; }
+void Tp::set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
 void Tp::set_is_steal_item_chance_d1000(int v) { _is_steal_item_chance_d1000 = v; }
 void Tp::set_is_weapon_wielder(int v) { _is_weapon_wielder = v; }
 void Tp::set_is_item(int v) { _is_item = v; }

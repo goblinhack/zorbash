@@ -354,14 +354,14 @@ int Thing::is_combustible(void) const
     return (tp()->is_combustible());
 }
 
-int Thing::is_corpse_on_death(void) const
+int Thing::on_death_is_corpse(void) const
 {_
-    return (tp()->is_corpse_on_death());
+    return (tp()->on_death_is_corpse());
 }
 
 int Thing::is_corpse (void) const
 {_
-    return (is_dead && is_corpse_on_death());
+    return (is_dead && on_death_is_corpse());
 }
 
 int Thing::is_corridor(void) const
@@ -804,9 +804,9 @@ int Thing::is_rrr64(void) const
     return (tp()->is_rrr64());
 }
 
-int Thing::is_rrr65(void) const
+int Thing::on_death_drop_all_items(void) const
 {_
-    return (tp()->is_rrr65());
+    return (tp()->on_death_drop_all_items());
 }
 
 int Thing::is_steal_item_chance_d1000(void) const
@@ -864,9 +864,9 @@ int Thing::is_gfx_health_bar_shown(void) const
     return (tp()->is_gfx_health_bar_shown());
 }
 
-int Thing::is_open_on_death(void) const
+int Thing::on_death_is_open(void) const
 {_
-    return (tp()->is_open_on_death());
+    return (tp()->on_death_is_open());
 }
 
 int Thing::is_killed_on_hit_or_miss(void) const
