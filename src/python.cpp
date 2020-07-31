@@ -778,7 +778,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(tr2_tile)
     TP_SET_DECL(weapon_carry_anim)
     TP_SET_DECL(weapon_damage)
-    TP_SET_DECL(weapon_use_anim)
+    TP_SET_DECL(anim_attack)
     TP_SET_DECL(weapon_use_delay_hundredths)
     TP_SET_DECL(weapon_use_distance)
     TP_SET_DECL(z_depth)

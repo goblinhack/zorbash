@@ -7,6 +7,7 @@
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
+#include "my_thing.h"
 
 static WidPopup *wid_dead_window;
 
@@ -89,6 +90,7 @@ void Game::dead_select (const char *reason)
 
     game->soft_pause();
     game->level->scroll_map_to_player();
+    game->level->cursor->hide();
 
     point tl = make_point(0, ASCII_HEIGHT - 24);
     point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, ASCII_HEIGHT - 1);

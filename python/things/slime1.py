@@ -59,7 +59,7 @@ def tp_init(name, text_name):
     x.set_text_a_or_an("a");
     x.set_text_hits("splats");
     x.set_tick_rate_tenths(3)
-    x.set_weapon_use_anim("splat1")
+    x.set_anim_attack("splat1")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_text_description("%%fg=limegreen$A small pile of semi sentient mucus")

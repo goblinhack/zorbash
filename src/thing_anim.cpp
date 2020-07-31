@@ -96,7 +96,7 @@ void Thing::animate (void)
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_monst()) { log("choose tiles hp %d "
+if (gfx_attack_anim()) { log("choose tiles hp %d "
                       "is_attached %d "
                       "is_being_destroyed %d "
                       "is_blitted %d "
@@ -149,7 +149,7 @@ if (is_monst()) { log("choose tiles hp %d "
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log("tile %s moving %d up %d down %d left %d right %d dirnone %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
+if (gfx_attack_anim()) { log("tile %s moving %d up %d down %d left %d right %d dirnone %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
                        tile_is_moving(tile),
                        tile_is_dir_up(tile),
                        tile_is_dir_down(tile),
@@ -183,7 +183,7 @@ if (is_monst()) { log("tile %s moving %d up %d down %d left %d right %d dirnone 
                         if (!tile_is_hp_25_percent(tile)) {
                             tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
@@ -191,7 +191,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                         if (!tile_is_hp_50_percent(tile)) {
                             tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
@@ -199,14 +199,14 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                         if (!tile_is_hp_75_percent(tile)) {
                             tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
                     } else {
                         if (!tile_is_hp_100_percent(tile)) {
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             tile = tile_next(tiles, tile);
                             continue;
@@ -218,7 +218,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                     if (tile_is_moving(tile)) {
                         tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                         continue;
                     }
@@ -229,7 +229,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_resurrecting(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -237,7 +237,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -245,7 +245,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_sleeping(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -253,7 +253,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_up(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -261,7 +261,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_down(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -269,7 +269,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_left(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -277,7 +277,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_right(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -285,7 +285,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_none(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -293,7 +293,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_open(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -301,7 +301,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_sleeping(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -309,7 +309,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -317,7 +317,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_open(tile)) {
                     tile = tile_next(tiles, tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (gfx_attack_anim()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -387,7 +387,7 @@ if (is_monst()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
     }
 
 #ifdef DEBUG_ANIM
-    if (is_monst()) { log("set %s", tile_name(tile).c_str()); }
+    if (gfx_attack_anim()) { log("set %s", tile_name(tile).c_str()); }
 #endif
 
     tile_curr = tile->global_index;
