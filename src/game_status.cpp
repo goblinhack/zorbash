@@ -104,6 +104,7 @@ static void game_status_wid_create (void)
         wid_actionbar = wid_new_square_window("actionbar (bottom)");
         wid_set_pos(wid_actionbar, tl, br);
         wid_set_style(wid_actionbar, -1);
+        wid_lower(wid_actionbar);
     }
 
     std::vector<Widp> wid_actionbar_items;

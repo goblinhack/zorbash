@@ -9,7 +9,7 @@
 
 bool Thing::steal_treasure_from (Thingp it)
 {_
-    if ((int)random_range(0, 1000) > tp()->is_attack_shove_chance_d1000()) {
+    if ((int)random_range(0, 1000) > tp()->is_steal_item_chance_d1000()) {
         return false;
     }
 
@@ -37,7 +37,7 @@ _
 
 bool Thing::steal_item_from (Thingp it)
 {_
-    if ((int)random_range(0, 1000) > tp()->is_attack_shove_chance_d1000()) {
+    if ((int)random_range(0, 1000) > tp()->is_steal_item_chance_d1000()) {
         return false;
     }
 

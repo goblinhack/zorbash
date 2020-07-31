@@ -67,9 +67,11 @@ void Thing::kill (Thingp killer, const char *reason)
     //
     // Drop everything!
     //
-    drop_all();
+    if (on_death_drop_all_items()) {
+        drop_all();
+    }
 
-    if (is_open_on_death()) {
+    if (on_death_is_open()) {
         if (is_loggable_for_important_stuff()) {
             log("killed, now open");
         }
@@ -86,7 +88,7 @@ void Thing::kill (Thingp killer, const char *reason)
         }
     }
 
-    if (is_corpse_on_death()) {
+    if (on_death_is_corpse()) {
         if (is_loggable_for_important_stuff()) {
             log("killed, leaves corpse");
         }

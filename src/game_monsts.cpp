@@ -184,5 +184,6 @@ static void game_monsts_wid_create (void)
         row++;
     }
 
+    wid_lower(wid_items);
     wid_update(wid_items);
 }

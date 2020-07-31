@@ -150,7 +150,7 @@ private:
     int _is_collectable {};
     int _is_item_collected_as_gold {};
     int _is_combustible {};
-    int _is_corpse_on_death {};
+    int _on_death_is_corpse {};
     int _is_corridor {};
     int _is_cursor {};
     int _is_cursor_can_hover_over {};
@@ -209,7 +209,7 @@ private:
     int _is_msg {};
     int _is_no_tile {};
     int _is_item_not_stackable {};
-    int _is_open_on_death {};
+    int _on_death_is_open {};
     int _is_player {};
     int _is_potion {};
     int _is_potion_eater {};
@@ -280,7 +280,7 @@ private:
     int _is_rrr62 {};
     int _is_rrr63 {};
     int _is_rrr64 {};
-    int _is_rrr65 {};
+    int _on_death_drop_all_items {};
     int _is_steal_item_chance_d1000 {};
     int _is_weapon_wielder {};
     int _is_item {};
@@ -502,7 +502,7 @@ public:
     int is_collectable(void) const;
     int is_item_collected_as_gold(void) const;
     int is_combustible(void) const;
-    int is_corpse_on_death(void) const;
+    int on_death_is_corpse(void) const;
     int is_corridor(void) const;
     int is_cursor(void) const;
     int is_cursor_can_hover_over(void) const;
@@ -561,7 +561,7 @@ public:
     int is_msg(void) const;
     int is_no_tile(void) const;
     int is_item_not_stackable(void) const;
-    int is_open_on_death(void) const;
+    int on_death_is_open(void) const;
     int is_player(void) const;
     int is_potion(void) const;
     int is_potion_eater(void) const;
@@ -631,7 +631,7 @@ public:
     int is_rrr62(void) const;
     int is_rrr63(void) const;
     int is_rrr64(void) const;
-    int is_rrr65(void) const;
+    int on_death_drop_all_items(void) const;
     int is_steal_item_chance_d1000(void) const;
     int is_weapon_wielder(void) const;
     int is_item(void) const;
@@ -743,7 +743,7 @@ public:
     void set_is_collectable(int);
     void set_is_item_collected_as_gold(int);
     void set_is_combustible(int);
-    void set_is_corpse_on_death(int);
+    void set_on_death_is_corpse(int);
     void set_is_corridor(int);
     void set_is_cursor(int);
     void set_is_cursor_can_hover_over(int);
@@ -802,7 +802,7 @@ public:
     void set_is_msg(int);
     void set_is_no_tile(int);
     void set_is_item_not_stackable(int);
-    void set_is_open_on_death(int);
+    void set_on_death_is_open(int);
     void set_is_player(int);
     void set_is_potion(int);
     void set_is_potion_eater(int);
@@ -873,7 +873,7 @@ public:
     void set_is_rrr62(int);
     void set_is_rrr63(int);
     void set_is_rrr64(int);
-    void set_is_rrr65(int);
+    void set_on_death_drop_all_items(int);
     void set_is_steal_item_chance_d1000(int);
     void set_is_weapon_wielder(int);
     void set_is_item(int);
