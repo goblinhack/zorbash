@@ -1,25 +1,22 @@
 import zx
 import tp
 
-
-def init1(name, text_name):
+def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
-    x.set_gfx_animated(True)
-    x.set_gfx_animated_can_hflip(True)
-    x.set_gfx_animated_can_vflip(True)
-    x.set_gfx_attack_anim(True)
-    x.set_gfx_dead_anim(False)
-    x.set_gfx_show_outlined(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_movable(True)
-    x.set_lifespan_dice("1d30+10")
     x.set_text_a_or_an("a");
-    x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
-    x.set_text_description("A splatter of slime stuff. Don't look closely")
+    x.set_gfx_animated(True)
+    x.set_gfx_oversized_but_sitting_on_the_ground(True)
+    x.set_gfx_show_outlined(True)
+    x.set_is_attack_blood(True)
+    x.set_is_interesting(False)
+    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_important_stuff(False)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_description("An artwork comprised mainly of blood")
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
-    delay = 10
+    delay = 20
     x.set_tile(tile=name + ".1", delay_ms=delay)
     x.set_tile(tile=name + ".2", delay_ms=delay)
     x.set_tile(tile=name + ".3", delay_ms=delay)
@@ -33,12 +30,11 @@ def init1(name, text_name):
     x.set_tile(tile=name + ".11", delay_ms=delay)
     x.set_tile(tile=name + ".12", delay_ms=delay)
     x.set_tile(tile=name + ".13", delay_ms=delay)
-    x.set_tile(tile=name + ".14", delay_ms=delay, is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    x.set_tile(tile=name + ".14", delay_ms=delay, is_end_of_anim=True, is_dead_on_end_of_anim=True)
 
     x.update()
 
-
 def init():
-    init1(name="splat1", text_name="splat attack")
+    tp_init(name="attack_blood1", text_name="blood splatter")
 
 init()

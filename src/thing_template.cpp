@@ -15,7 +15,7 @@ Tpnamemap tp_name_map;
 Tpidmap tp_id_map;
 
 static Tpidmap tp_blood;
-static Tpidmap tp_blood_splatter;
+static Tpidmap tp_attack_blood;
 static Tpidmap tp_deco;
 static Tpidmap tp_dirt;
 static Tpidmap tp_door;
@@ -111,7 +111,7 @@ void tp_init_after_loading (void)
 {_
     for (auto& tp : tp_id_map) {
         if (tp->is_blood())          { tp_blood.push_back(tp); }
-        if (tp->is_blood_splatter()) { tp_blood_splatter.push_back(tp); }
+        if (tp->is_attack_blood()) { tp_attack_blood.push_back(tp); }
         if (tp->is_dirt())           { tp_dirt.push_back(tp); }
         if (tp->is_door())           { tp_door.push_back(tp); }
         if (tp->is_entrance())       { tp_entrance.push_back(tp); }
@@ -210,13 +210,13 @@ Tpp tp_random_ripple (void)
     return get(tp_ripples, myrand() % tp_ripples.size());
 }
 
-Tpp tp_random_blood_splatter (void)
+Tpp tp_random_attack_blood (void)
 {_
-    if (unlikely(!tp_blood_splatter.size())) {
-        ERR("no blood_splatter found");
+    if (unlikely(!tp_attack_blood.size())) {
+        ERR("no attack_blood found");
         return (nullptr);
     }
-    return get(tp_blood_splatter, myrand() % tp_blood_splatter.size());
+    return get(tp_attack_blood, myrand() % tp_attack_blood.size());
 }
 
 Tpp tp_random_key (void)

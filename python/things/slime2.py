@@ -64,7 +64,7 @@ def tp_init(name, text_name):
     x.set_text_a_or_an("a");
     x.set_text_hits("splats");
     x.set_tick_rate_tenths(3)
-    x.set_gfx_anim_attack("splat1")
+    x.set_gfx_anim_attack("attack_slime")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_text_description("%%fg=limegreen$A gargantuan pile of sentient mucus")
@@ -104,20 +104,20 @@ def tp_init(name, text_name):
     x.set_tile(tile=name + ".8.25", is_hp_25_percent=True, delay_ms=delay)
 
     delay=10
-    x.set_tile("splat1.1", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.2", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.3", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.4", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.5", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.6", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.7", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.8", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.9", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.10", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.11", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.12", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.13", is_dead=True, delay_ms=delay)
-    x.set_tile("splat1.14", is_dead=True, delay_ms=delay, is_end_of_anim = True)
+    x.set_tile("attack_slime.1", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.2", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.3", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.4", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.5", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.6", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.7", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.8", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.9", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.10", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.11", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.12", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.13", is_dead=True, delay_ms=delay)
+    x.set_tile("attack_slime.14", is_dead=True, delay_ms=delay, is_end_of_anim = True)
 
     x.update()
 
