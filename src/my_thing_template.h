@@ -281,7 +281,7 @@ private:
     int _is_rrr63 {};
     int _is_rrr64 {};
     int _is_rrr65 {};
-    int _is_rrr66 {};
+    int _is_steal_item_chance_d1000 {};
     int _is_weapon_wielder {};
     int _is_item {};
     int _is_rrr7 {};
@@ -358,7 +358,7 @@ private:
     std::string _text_name;
     std::string _text_title;
     std::string _weapon_carry_anim;
-    std::string _anim_attack;
+    std::string _gfx_anim_attack;
 public:
     Tp (void) {
         newptr(this, "Tp");
@@ -449,7 +449,7 @@ public:
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;
     const std::string& weapon_carry_anim(void) const;
-    const std::string& anim_attack(void) const;
+    const std::string& gfx_anim_attack(void) const;
     float collision_attack_radius(void) const;
     float collision_radius(void) const;
     int ai_delay_after_moving_ms(void) const;
@@ -632,7 +632,7 @@ public:
     int is_rrr63(void) const;
     int is_rrr64(void) const;
     int is_rrr65(void) const;
-    int is_rrr66(void) const;
+    int is_steal_item_chance_d1000(void) const;
     int is_weapon_wielder(void) const;
     int is_item(void) const;
     int is_rrr7(void) const;
@@ -874,7 +874,7 @@ public:
     void set_is_rrr63(int);
     void set_is_rrr64(int);
     void set_is_rrr65(int);
-    void set_is_rrr66(int);
+    void set_is_steal_item_chance_d1000(int);
     void set_is_weapon_wielder(int);
     void set_is_item(int);
     void set_is_rrr7(int);
@@ -949,7 +949,7 @@ public:
     void set_tick_rate_tenths(int);
     void set_weapon_carry_anim(const std::string &);
     void set_weapon_damage(int);
-    void set_anim_attack(const std::string &);
+    void set_gfx_anim_attack(const std::string &);
     void set_weapon_use_delay_hundredths(int);
     void set_weapon_use_distance(int);
     void set_z_depth(int);

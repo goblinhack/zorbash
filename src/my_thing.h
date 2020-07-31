@@ -790,7 +790,7 @@ public:
     bool will_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void) const;
-    const std::string& anim_attack(void) const;
+    const std::string& gfx_anim_attack(void) const;
     const std::string& light_color(void) const;
     const std::string& on_birth_do(void) const;
     const std::string& on_death_do(void) const;
@@ -999,7 +999,7 @@ public:
     int is_rrr63(void) const;
     int is_rrr64(void) const;
     int is_rrr65(void) const;
-    int is_rrr66(void) const;
+    int is_steal_item_chance_d1000(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int is_rrr9(void) const;
@@ -1152,8 +1152,8 @@ public:
     void weapon_set_carry_anim(Thingp weapon_carry_anim);
     void weapon_set_carry_anim_id(ThingId weapon_carry_anim_id);
     void weapon_set_placement(void);
-    void weapon_set_use_anim(Thingp anim_attack);
-    void weapon_set_use_anim_id(ThingId anim_attack_id);
+    void weapon_set_use_anim(Thingp gfx_anim_attack);
+    void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
     void weapon_sheath(void);
     void wield(Thingp w);
 } Thing;

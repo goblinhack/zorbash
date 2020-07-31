@@ -70,56 +70,56 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
     }
 }
 
-void Thing::weapon_set_use_anim_id (ThingId anim_attack_id)
+void Thing::weapon_set_use_anim_id (ThingId gfx_anim_attack_id)
 {_
-    Thingp anim_attack;
+    Thingp gfx_anim_attack;
 
-    if (!anim_attack_id) {
+    if (!gfx_anim_attack_id) {
         weapon_set_use_anim(nullptr);
         return;
     }
 
-    anim_attack = level->thing_find(anim_attack_id);
-    if (!anim_attack) {
+    gfx_anim_attack = level->thing_find(gfx_anim_attack_id);
+    if (!gfx_anim_attack) {
         return;
     }
 
-    weapon_set_use_anim(anim_attack);
+    weapon_set_use_anim(gfx_anim_attack);
 }
 
-void Thing::weapon_set_use_anim (Thingp new_anim_attack)
+void Thing::weapon_set_use_anim (Thingp new_gfx_anim_attack)
 {_
-    if (new_anim_attack) {
-        verify(new_anim_attack);
+    if (new_gfx_anim_attack) {
+        verify(new_gfx_anim_attack);
     }
 
-    auto old_anim_attack = weapon_get_use_anim();
+    auto old_gfx_anim_attack = weapon_get_use_anim();
 
-    if (old_anim_attack) {
-        if (old_anim_attack == new_anim_attack) {
+    if (old_gfx_anim_attack) {
+        if (old_gfx_anim_attack == new_gfx_anim_attack) {
             return;
         }
 
-        if (new_anim_attack) {
+        if (new_gfx_anim_attack) {
             log("change weapon use-anim %s->%s",
-                old_anim_attack->to_string().c_str(),
-                new_anim_attack->to_string().c_str());
-            new_anim_attack->set_owner(this);
+                old_gfx_anim_attack->to_string().c_str(),
+                new_gfx_anim_attack->to_string().c_str());
+            new_gfx_anim_attack->set_owner(this);
         } else {
             log("remove weapon use-anim %s",
-                old_anim_attack->to_string().c_str());
+                old_gfx_anim_attack->to_string().c_str());
         }
-        old_anim_attack->remove_owner();
+        old_gfx_anim_attack->remove_owner();
     } else {
-        if (new_anim_attack) {
+        if (new_gfx_anim_attack) {
             log("set weapon use-anim %s",
-                new_anim_attack->to_string().c_str());
-            new_anim_attack->set_owner(this);
+                new_gfx_anim_attack->to_string().c_str());
+            new_gfx_anim_attack->set_owner(this);
         }
     }
 
-    if (new_anim_attack) {
-        set_weapon_id_use_anim(new_anim_attack->id);
+    if (new_gfx_anim_attack) {
+        set_weapon_id_use_anim(new_gfx_anim_attack->id);
     } else {
         set_weapon_id_use_anim(0);
     }
@@ -206,17 +206,17 @@ Thingp Thing::weapon_get_carry_anim (void)
 Thingp Thing::weapon_get_use_anim (void) const
 {_
     //
-    // If this anim_attack has its own thing id for animations then
+    // If this gfx_anim_attack has its own thing id for animations then
     // destroy that.
     //
-    Thingp anim_attack = 0;
+    Thingp gfx_anim_attack = 0;
 
     auto id = get_weapon_id_use_anim();
     if (id.ok()) {
-        anim_attack = level->thing_find(id);
+        gfx_anim_attack = level->thing_find(id);
     }
 
-    return (anim_attack);
+    return (gfx_anim_attack);
 }
 
 void Thing::unwield (const char *why)
@@ -257,9 +257,9 @@ void Thing::sheath (void)
         weapon_set_carry_anim(nullptr);
     }
 
-    auto anim_attack = weapon_get_use_anim();
-    if (anim_attack) {
-        anim_attack->dead("owner sheathed weapon, remove use-anim");
+    auto gfx_anim_attack = weapon_get_use_anim();
+    if (gfx_anim_attack) {
+        gfx_anim_attack->dead("owner sheathed weapon, remove use-anim");
         weapon_set_use_anim(nullptr);
     }
 }
@@ -321,11 +321,11 @@ _
         if (is_player()) {
             MINICON("You attack with bare fists!");
         }
-        swung_as = anim_attack();
+        swung_as = gfx_anim_attack();
     } else {
         auto weapon_tp = weapon->tp();
 
-        swung_as = weapon_tp->anim_attack();
+        swung_as = weapon_tp->gfx_anim_attack();
         if (swung_as == "") {
             die("could not use %s/%" PRIx32 " has no 'use' animation frame",
                 weapon_tp->name().c_str(), weapon->id.id);

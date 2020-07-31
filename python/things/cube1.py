@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
+    x.set_gfx_anim_attack("splat1")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_bounce_on_move(True)
@@ -48,6 +49,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_monstbar(True)
     x.set_is_slime_baby_eater(True)
     x.set_is_slime_eater(True)
+    x.set_is_steal_item_chance_d1000(100)
     x.set_is_treasure_eater(True)
     x.set_light_color("green")
     x.set_normal_placement_rules(True)
@@ -63,7 +65,6 @@ def tp_init(name, text_name):
     x.set_text_description("An dungeon auto cleaner jelly thingy")
     x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
-    x.set_anim_attack("splat1")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 

@@ -62,7 +62,7 @@ const std::string& Tp::text_description(void) const { return _text_description; 
 const std::string& Tp::text_hits(void) const { return _text_hits; }
 const std::string& Tp::text_name(void) const { return _text_name; }
 const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
-const std::string& Tp::anim_attack(void) const { return _anim_attack; }
+const std::string& Tp::gfx_anim_attack(void) const { return _gfx_anim_attack; }
 float Tp::collision_attack_radius(void) const { return _collision_attack_radius; }
 float Tp::collision_radius(void) const { return _collision_radius; }
 int Tp::ai_delay_after_moving_ms(void) const { return _ai_delay_after_moving_ms; }
@@ -244,7 +244,7 @@ int Tp::is_rrr62(void) const { return _is_rrr62; }
 int Tp::is_rrr63(void) const { return _is_rrr63; }
 int Tp::is_rrr64(void) const { return _is_rrr64; }
 int Tp::is_rrr65(void) const { return _is_rrr65; }
-int Tp::is_rrr66(void) const { return _is_rrr66; }
+int Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1000; }
 int Tp::is_weapon_wielder(void) const { return _is_weapon_wielder; }
 int Tp::is_item(void) const { return _is_item; }
 int Tp::is_rrr7(void) const { return _is_rrr7; }
@@ -485,7 +485,7 @@ void Tp::set_is_rrr62(int v) { _is_rrr62 = v; }
 void Tp::set_is_rrr63(int v) { _is_rrr63 = v; }
 void Tp::set_is_rrr64(int v) { _is_rrr64 = v; }
 void Tp::set_is_rrr65(int v) { _is_rrr65 = v; }
-void Tp::set_is_rrr66(int v) { _is_rrr66 = v; }
+void Tp::set_is_steal_item_chance_d1000(int v) { _is_steal_item_chance_d1000 = v; }
 void Tp::set_is_weapon_wielder(int v) { _is_weapon_wielder = v; }
 void Tp::set_is_item(int v) { _is_item = v; }
 void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
@@ -561,7 +561,7 @@ void Tp::set_tick_catches_up_on_attack(int v) { _tick_catches_up_on_attack = v; 
 void Tp::set_tick_rate_tenths(int v) { _tick_rate_tenths = v; }
 void Tp::set_weapon_carry_anim(const std::string &v) { _weapon_carry_anim = v; }
 void Tp::set_weapon_damage(int v) { _weapon_damage = v; }
-void Tp::set_anim_attack(const std::string &v) { _anim_attack = v; }
+void Tp::set_gfx_anim_attack(const std::string &v) { _gfx_anim_attack = v; }
 void Tp::set_weapon_use_delay_hundredths(int v) { _weapon_use_delay_hundredths = v; }
 void Tp::set_weapon_use_distance(int v) { _weapon_use_distance = v; }
 void Tp::set_z_depth(int v) { z_depth = v; }
