@@ -167,7 +167,7 @@ bool Thing::fall_to_next_level (void)
             }
 
             bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
-            level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+            level->thing_new(tp_random_attack_blood()->name(), mid_at);
             if (h <= 0) {
                 h = set_stats_health(0);
                 auto reason = std::string("killed by falling");

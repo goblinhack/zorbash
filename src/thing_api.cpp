@@ -1139,9 +1139,9 @@ int Thing::is_slime_eater(void) const
     return (tp()->is_slime_eater());
 }
 
-int Thing::is_blood_splatter(void) const
+int Thing::is_attack_blood(void) const
 {_
-    return (tp()->is_blood_splatter());
+    return (tp()->is_attack_blood());
 }
 
 int Thing::is_no_tile(void) const

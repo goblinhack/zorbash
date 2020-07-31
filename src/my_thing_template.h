@@ -144,7 +144,7 @@ private:
     int _is_bag {};
     int _is_bleeder {};
     int _is_blood {};
-    int _is_blood_splatter {};
+    int _is_attack_blood {};
     int _is_chasm {};
     int _is_collect_as_keys {};
     int _is_collectable {};
@@ -496,7 +496,7 @@ public:
     int is_bag(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
-    int is_blood_splatter(void) const;
+    int is_attack_blood(void) const;
     int is_chasm(void) const;
     int is_collect_as_keys(void) const;
     int is_collectable(void) const;
@@ -737,7 +737,7 @@ public:
     void set_is_bag(int);
     void set_is_bleeder(int);
     void set_is_blood(int);
-    void set_is_blood_splatter(int);
+    void set_is_attack_blood(int);
     void set_is_chasm(int);
     void set_is_collect_as_keys(int);
     void set_is_collectable(int);
@@ -963,7 +963,7 @@ Tpp string2tp(std::wstring &s, int *len);
 Tpp tp_find(uint32_t id);
 Tpp tp_load(int id, std::string const& file, std::string const& text_name);
 Tpp tp_random_blood(void);
-Tpp tp_random_blood_splatter(void);
+Tpp tp_random_attack_blood(void);
 Tpp tp_random_deco(void);
 Tpp tp_random_dirt(void);
 Tpp tp_random_door(void);

@@ -860,7 +860,7 @@ public:
     int is_bag(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
-    int is_blood_splatter(void) const;
+    int is_attack_blood(void) const;
     int is_chasm(void) const;
     int is_collect_as_keys(void) const;
     int is_collectable(void) const;
