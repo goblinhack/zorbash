@@ -809,9 +809,9 @@ int Thing::is_rrr65(void) const
     return (tp()->is_rrr65());
 }
 
-int Thing::is_rrr66(void) const
+int Thing::is_steal_item_chance_d1000(void) const
 {_
-    return (tp()->is_rrr66());
+    return (tp()->is_steal_item_chance_d1000());
 }
 
 int Thing::is_weapon_wielder(void) const
@@ -4309,4 +4309,4 @@ const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on
 const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }
 const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }
-const std::string& Thing::anim_attack (void) const {_ return (tp()->anim_attack()); }
+const std::string& Thing::gfx_anim_attack (void) const {_ return (tp()->gfx_anim_attack()); }

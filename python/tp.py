@@ -173,8 +173,8 @@ class Tp:
     def set_weapon_carry_anim(self, value):
         zx.tp_set_weapon_carry_anim(self, value)
 
-    def set_anim_attack(self, value):
-        zx.tp_set_anim_attack(self, value)
+    def set_gfx_anim_attack(self, value):
+        zx.tp_set_gfx_anim_attack(self, value)
 
     def set_is_rrr1(self, value):
         zx.tp_set_is_rrr1(self, value)
@@ -371,8 +371,8 @@ class Tp:
     def set_is_rrr65(self, value):
         zx.tp_set_is_rrr65(self, value)
 
-    def set_is_rrr66(self, value):
-        zx.tp_set_is_rrr66(self, value)
+    def set_is_steal_item_chance_d1000(self, value):
+        zx.tp_set_is_steal_item_chance_d1000(self, value)
 
     def set_is_weapon_wielder(self, value):
         zx.tp_set_is_weapon_wielder(self, value)

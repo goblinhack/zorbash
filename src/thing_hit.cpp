@@ -177,7 +177,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     if (!real_hitter->is_player()) {
         if (!real_hitter->get_weapon_id_carry_anim().ok()) {
-            auto claws = real_hitter->tp()->anim_attack();
+            auto claws = real_hitter->tp()->gfx_anim_attack();
             if (claws != "") {
                 auto claw_attack = level->thing_new(claws, mid_at);
                 claw_attack->bounce(0.1, 0.1, 100, 3);

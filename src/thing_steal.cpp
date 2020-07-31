@@ -9,6 +9,10 @@
 
 bool Thing::steal_treasure_from (Thingp it)
 {_
+    if ((int)random_range(0, 1000) > tp()->is_attack_shove_chance_d1000()) {
+        return false;
+    }
+
     log("steal treasure from %s", it->to_string().c_str());
 _
     auto cands = get_treasure_list();
@@ -33,7 +37,12 @@ _
 
 bool Thing::steal_item_from (Thingp it)
 {_
+    if ((int)random_range(0, 1000) > tp()->is_attack_shove_chance_d1000()) {
+        return false;
+    }
+
     log("steal item from %s", it->to_string().c_str());
+_
     auto cands = it->get_item_list();
     if (!cands.size()) {
         log("no, nothing to steal");
