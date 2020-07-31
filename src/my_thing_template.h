@@ -358,7 +358,7 @@ private:
     std::string _text_name;
     std::string _text_title;
     std::string _weapon_carry_anim;
-    std::string _weapon_use_anim;
+    std::string _anim_attack;
 public:
     Tp (void) {
         newptr(this, "Tp");
@@ -449,7 +449,7 @@ public:
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;
     const std::string& weapon_carry_anim(void) const;
-    const std::string& weapon_use_anim(void) const;
+    const std::string& anim_attack(void) const;
     float collision_attack_radius(void) const;
     float collision_radius(void) const;
     int ai_delay_after_moving_ms(void) const;
@@ -949,7 +949,7 @@ public:
     void set_tick_rate_tenths(int);
     void set_weapon_carry_anim(const std::string &);
     void set_weapon_damage(int);
-    void set_weapon_use_anim(const std::string &);
+    void set_anim_attack(const std::string &);
     void set_weapon_use_delay_hundredths(int);
     void set_weapon_use_distance(int);
     void set_z_depth(int);

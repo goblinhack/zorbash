@@ -62,7 +62,7 @@ const std::string& Tp::text_description(void) const { return _text_description; 
 const std::string& Tp::text_hits(void) const { return _text_hits; }
 const std::string& Tp::text_name(void) const { return _text_name; }
 const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
-const std::string& Tp::weapon_use_anim(void) const { return _weapon_use_anim; }
+const std::string& Tp::anim_attack(void) const { return _anim_attack; }
 float Tp::collision_attack_radius(void) const { return _collision_attack_radius; }
 float Tp::collision_radius(void) const { return _collision_radius; }
 int Tp::ai_delay_after_moving_ms(void) const { return _ai_delay_after_moving_ms; }
@@ -561,7 +561,7 @@ void Tp::set_tick_catches_up_on_attack(int v) { _tick_catches_up_on_attack = v; 
 void Tp::set_tick_rate_tenths(int v) { _tick_rate_tenths = v; }
 void Tp::set_weapon_carry_anim(const std::string &v) { _weapon_carry_anim = v; }
 void Tp::set_weapon_damage(int v) { _weapon_damage = v; }
-void Tp::set_weapon_use_anim(const std::string &v) { _weapon_use_anim = v; }
+void Tp::set_anim_attack(const std::string &v) { _anim_attack = v; }
 void Tp::set_weapon_use_delay_hundredths(int v) { _weapon_use_delay_hundredths = v; }
 void Tp::set_weapon_use_distance(int v) { _weapon_use_distance = v; }
 void Tp::set_z_depth(int v) { z_depth = v; }

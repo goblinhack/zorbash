@@ -11,8 +11,8 @@ def init1(name, text_name):
     x.set_gfx_attack_anim(True)
     x.set_gfx_dead_anim(False)
     x.set_gfx_show_outlined(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_important_stuff(TrueTrue
+    x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
     x.set_text_a_or_an("a");
     x.set_text_description("Punch out")

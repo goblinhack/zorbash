@@ -175,12 +175,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // 
     // Are we carrying a weapon? If not, see if we can do a claw attack
     //
-    if (!real_hitter->get_weapon_id_carry_anim().ok()) {
-        auto claws = real_hitter->tp()->weapon_use_anim();
-        if (claws != "") {
-            auto claw_attack = level->thing_new(claws, mid_at);
-            claw_attack->bounce(0.1, 0.1, 100, 3);
-            claw_attack->move_set_dir_from_delta(delta);
+    if (!real_hitter->is_player()) {
+        if (!real_hitter->get_weapon_id_carry_anim().ok()) {
+            auto claws = real_hitter->tp()->anim_attack();
+            if (claws != "") {
+                auto claw_attack = level->thing_new(claws, mid_at);
+                claw_attack->bounce(0.1, 0.1, 100, 3);
+                claw_attack->move_set_dir_from_delta(delta);
+            }
         }
     }
 

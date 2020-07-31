@@ -1068,7 +1068,7 @@ TP_BODY_SET_STRING(text_hits)
 TP_BODY_SET_STRING(text_name)
 TP_BODY_SET_STRING(text_title)
 TP_BODY_SET_STRING(weapon_carry_anim)
-TP_BODY_SET_STRING(weapon_use_anim)
+TP_BODY_SET_STRING(anim_attack)
 
 PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {

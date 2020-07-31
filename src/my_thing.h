@@ -790,6 +790,7 @@ public:
     bool will_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void) const;
+    const std::string& anim_attack(void) const;
     const std::string& light_color(void) const;
     const std::string& on_birth_do(void) const;
     const std::string& on_death_do(void) const;
@@ -807,7 +808,6 @@ public:
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;
     const std::string& weapon_carry_anim(void) const;
-    const std::string& weapon_use_anim(void) const;
     float get_bounce(void);
     float get_fadeup(void);
     float get_fall(void);
@@ -902,6 +902,7 @@ public:
     int is_hunger_insatiable(void) const;
     int is_intelligent(void) const;
     int is_interesting(void) const;
+    int is_item(void) const;
     int is_item_class_a(void) const;
     int is_item_class_b(void) const;
     int is_item_collected_as_gold(void) const;
@@ -999,8 +1000,6 @@ public:
     int is_rrr64(void) const;
     int is_rrr65(void) const;
     int is_rrr66(void) const;
-    int is_weapon_wielder(void) const;
-    int is_item(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int is_rrr9(void) const;
@@ -1026,6 +1025,7 @@ public:
     int is_water_dweller(void) const;
     int is_water_hater(void) const;
     int is_weapon(void) const;
+    int is_weapon_wielder(void) const;
     int normal_placement_rules(void) const;
     int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
@@ -1152,8 +1152,8 @@ public:
     void weapon_set_carry_anim(Thingp weapon_carry_anim);
     void weapon_set_carry_anim_id(ThingId weapon_carry_anim_id);
     void weapon_set_placement(void);
-    void weapon_set_use_anim(Thingp weapon_use_anim);
-    void weapon_set_use_anim_id(ThingId weapon_use_anim_id);
+    void weapon_set_use_anim(Thingp anim_attack);
+    void weapon_set_use_anim_id(ThingId anim_attack_id);
     void weapon_sheath(void);
     void wield(Thingp w);
 } Thing;

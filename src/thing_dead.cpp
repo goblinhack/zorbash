@@ -64,6 +64,11 @@ void Thing::kill (Thingp killer, const char *reason)
         }
     }
 
+    //
+    // Drop everything!
+    //
+    drop_all();
+
     if (is_open_on_death()) {
         if (is_loggable_for_important_stuff()) {
             log("killed, now open");

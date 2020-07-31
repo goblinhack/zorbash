@@ -46,7 +46,7 @@ def tp_init(name, text_name, title):
     x.set_text_hits("hits")
     x.set_text_title(title)
     x.set_tick_rate_tenths(1)
-    x.set_weapon_use_anim("punch1")
+    x.set_anim_attack("punch1")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 

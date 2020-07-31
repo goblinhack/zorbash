@@ -4309,4 +4309,4 @@ const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on
 const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }
 const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }
-const std::string& Thing::weapon_use_anim (void) const {_ return (tp()->weapon_use_anim()); }
+const std::string& Thing::anim_attack (void) const {_ return (tp()->anim_attack()); }

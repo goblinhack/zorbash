@@ -173,8 +173,8 @@ class Tp:
     def set_weapon_carry_anim(self, value):
         zx.tp_set_weapon_carry_anim(self, value)
 
-    def set_weapon_use_anim(self, value):
-        zx.tp_set_weapon_use_anim(self, value)
+    def set_anim_attack(self, value):
+        zx.tp_set_anim_attack(self, value)
 
     def set_is_rrr1(self, value):
         zx.tp_set_is_rrr1(self, value)
