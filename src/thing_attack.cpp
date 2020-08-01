@@ -37,7 +37,7 @@ bool Thing::possible_to_attack (const Thingp it)
                 return (true);
             }
             if (it->is_carrying_treasure()) {
-                log("can steal %s", it->to_string().c_str());
+                log("can steal from %s", it->to_string().c_str());
                 return (true);
             }
         }

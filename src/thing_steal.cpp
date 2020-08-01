@@ -23,14 +23,14 @@ _
     auto chosen = cands[random_range(0, cands.size())];
 
     log("steal the %s", chosen->to_string().c_str());
-    it->drop(chosen);
+    it->drop(chosen, this);
     if (!it->is_dead) {
         carry(chosen);
     }
 
     if (it->is_player()) {
-        it->msg(string_sprintf("%%fg=yellow$!!!"));
-        MINICON("You feel lighter...");
+        it->msg(string_sprintf("%%fg=orange$!!!"));
+        MINICON("%%fg=orange$You feel lighter...");
     }
     return true;
 }
@@ -52,14 +52,14 @@ _
     auto chosen = cands[random_range(0, cands.size())];
 
     log("steal the %s", chosen->to_string().c_str());
-    it->drop(chosen);
+    it->drop(chosen, this);
     if (!chosen->is_dead) {
         carry(chosen);
     }
 
     if (it->is_player()) {
-        it->msg(string_sprintf("%%fg=yellow$!!!"));
-        MINICON("You feel lighter...");
+        it->msg(string_sprintf("%%fg=orange$!!!"));
+        MINICON("%%fg=orange$You feel lighter...");
     }
     return true;
 }

@@ -32,6 +32,32 @@ void Thing::drop (Thingp what)
     log("dropped %s", what->to_string().c_str());
 }
 
+void Thing::drop (Thingp what, Thingp target)
+{_
+    if (is_player()) {
+        if (!actionbar_id_remove(what, target)) {
+            return;
+        }
+    }
+
+    if (!monstp) {
+        return;
+    }
+
+    auto existing_owner = what->owner_get();
+    if (existing_owner != this) {
+        err("attempt to drop %s which is not carried", what->to_string().c_str());
+        return;
+    }
+
+    what->hooks_remove();
+    what->remove_owner();
+    what->visible();
+
+    monstp->carrying.remove(what->id);
+    log("dropped %s", what->to_string().c_str());
+}
+
 void Thing::drop_all (void)
 {_
     if (!monstp) {
