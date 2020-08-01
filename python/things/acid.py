@@ -16,12 +16,12 @@ def acid_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_stats_attack_dice("1d3+1")
     x.set_light_color("green")
     x.set_text_a_or_an("");
-    x.set_text_hits("dissolves");
+    x.set_text_hits("burns");
     x.set_tick_catches_up_on_attack(True)
     x.set_tick_rate_tenths(1)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
-    x.set_text_description("A pool of hissing organic acid")
+    x.set_text_description("A pool of hissing acid")
 
     for t in tiles:
         x.set_tile(tile=t)

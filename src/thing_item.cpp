@@ -92,7 +92,7 @@ bool Thing::is_carrying_item (void)
 std::vector<Thingp> Thing::get_item_list (void)
 {_
     std::vector<Thingp> tr;
-    log("items:");
+    log("carried items:");
 _
     if (!monstp) {
         log("not carrying");

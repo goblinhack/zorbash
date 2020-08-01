@@ -92,6 +92,8 @@ static void game_status_wid_create (void)
 
     auto actionbar_items = player->monstp->actionbar_id.size();
 
+    player->log("action items:");
+_
     for (auto i = 0U; i < actionbar_items; i++) {
         auto a = player->monstp->actionbar_id[i];
         if (!a) {
@@ -99,9 +101,10 @@ static void game_status_wid_create (void)
         }
         auto t = level->thing_find(a);
         if (!t) {
+            player->log("slot %u: %u (invaid)", i, a.id);
             continue;
         }
-        t->log("%d item", i);
+        player->log("slot %u: %s", i, t->to_string().c_str());
     }
 
     {_
