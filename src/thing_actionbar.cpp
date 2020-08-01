@@ -272,9 +272,9 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
                        monstp->actionbar_id.size()) {
                     game->actionbar_highlight_slot--;
                 }
-            }
 
-            level->actionbar_describe(game->actionbar_highlight_slot);
+                level->actionbar_describe(game->actionbar_highlight_slot);
+            }
             return true;
         }
     }
