@@ -1,6 +1,7 @@
 #pragma once
 #include <assert.h>
 #include <iostream>
+#include <sstream>
 
 #ifdef ENABLE_ABORT
 #define DOABORT abort();
@@ -18,9 +19,12 @@
 #undef ASSERT
 #define ASSERT(x) \
     if (! (x)) {_ \
-        std::cerr << "Assert '" << #x << "' failed at line " \
+        std::stringstream ss; \
+        ss << "Assert '" << #x << "' failed at line " \
                   << __LINE__ << ", file " << __FILE__ \
-                  << ", function " << __FUNCTION__ << "()" << std::endl; \
+                  << ", function " << __FUNCTION__ << "()"; \
+        std::cerr << ss.str() << std::endl; \
+        { auto s = ss.str(); ERR("%s", s.c_str()); } \
         DOABORT \
     }
 #else

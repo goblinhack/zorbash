@@ -13,6 +13,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           Thingp real_hitter, // who fired the arrow?
                           int damage)
 {_
+    hitter->log("hit for damage %d", damage);
+
     auto delta = mid_at - hitter->mid_at;
 
     //
@@ -23,6 +25,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         return (false);
     }
 
+log("%d",__LINE__);
     if (is_slime_baby()) {
         if (hitter->is_slime_baby()) {
             level->thing_new("slime2", mid_at);
@@ -33,6 +36,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+log("%d",__LINE__);
     if (!damage) {
         hitter->log("hit fails, no damage");
         return (false);
@@ -43,11 +47,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     cursor_path_stop();
 
+log("%d",__LINE__);
     if (real_hitter->tp()->gfx_bounce_on_move()) {
         real_hitter->bounce(0.5, 0.1, 100, 3);
         real_hitter->move_set_dir_from_delta(delta);
     }
 
+log("%d",__LINE__);
     //
     // Try to push the thing into a hazard if we can just to be sneaky
     //
@@ -65,6 +71,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 break;
         }
     }
+log("%d",__LINE__);
 
     if (is_fire_hater()) {
         if (real_hitter->is_fire() ||
@@ -76,6 +83,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+log("%d",__LINE__);
     if (is_acid_hater()) {
         if (real_hitter->is_acid()) {
             if (is_double_damage_from_acid()) {
@@ -85,6 +93,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+log("%d",__LINE__);
     if (is_water_hater()) {
         if (real_hitter->is_water()) {
             if (is_double_damage_from_water()) {
@@ -93,6 +102,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             }
         }
     }
+log("%d",__LINE__);
 
     //
     // Try to steal
@@ -105,6 +115,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+log("%d",__LINE__);
     if (is_player()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
@@ -115,12 +126,12 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 
         if (damage > THING_DAMAGE_SHAKE_ABOVE) {
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
-            MINICON("%%fg=red$%s %s for %d damage!%%fg=reset$",
+            MINICON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
                     real_hitter->text_The().c_str(),
                     real_hitter->text_hits().c_str(),
                     damage);
         } else {
-            MINICON("%%fg=yellow$%s %s for %d damage!%%fg=reset$",
+            MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
                     real_hitter->text_The().c_str(),
                     real_hitter->text_hits().c_str(),
                     damage);
@@ -140,6 +151,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
         add_enemy(real_hitter);
     }
+log("%d",__LINE__);
 
     //
     // Visible hit indication

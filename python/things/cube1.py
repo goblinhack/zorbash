@@ -62,7 +62,7 @@ def tp_init(name, text_name):
     x.set_stats_health_initial(25)
     x.set_stats_move_speed_ms(1000)
     x.set_stats_strength(1)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("an");
     x.set_text_description("An dungeon auto cleaner jelly thingy")
     x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
