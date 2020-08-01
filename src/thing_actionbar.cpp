@@ -212,7 +212,7 @@ bool Thing::actionbar_id_remove (Thingp what)
             continue;
         }
 
-        if (t->tp() == what->tp()) {
+        if (t == what) {
             monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
             game_status_wid_init();
 
@@ -258,7 +258,7 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
             continue;
         }
 
-        if (t->tp() == what->tp()) {
+        if (t == what) {
             monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
             game_status_wid_init();
             if (particle_target) {
@@ -364,7 +364,6 @@ bool Level::actionbar_describe (const uint32_t slot)
         return false;
     }
     auto s = t->text_name();
-
 
     if (t->is_droppable()){
         s += ", %%fg=orange$" +

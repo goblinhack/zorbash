@@ -92,6 +92,18 @@ static void game_status_wid_create (void)
 
     auto actionbar_items = player->monstp->actionbar_id.size();
 
+    for (auto i = 0U; i < actionbar_items; i++) {
+        auto a = player->monstp->actionbar_id[i];
+        if (!a) {
+            continue;
+        }
+        auto t = level->thing_find(a);
+        if (!t) {
+            continue;
+        }
+        t->log("%d item", i);
+    }
+
     {_
         auto w = UI_ACTIONBAR_ITEM_WIDTH * actionbar_items;
         auto m = (ASCII_WIDTH / 2);

@@ -93,10 +93,13 @@ bool Thing::fall_to_next_level (void)
             continue;
         }
 
-        if (l->is_entrance(x, y) ||
-            l->is_monst(x, y)    ||
-            l->is_rock(x, y)     ||
-            l->is_wall(x, y)     ||
+        if (l->is_entrance(x, y)    ||
+            l->is_monst(x, y)       ||
+            l->is_rock(x, y)        ||
+            l->is_door(x, y)        ||
+            l->is_secret_door(x, y) ||
+            l->is_generator(x, y)   ||
+            l->is_wall(x, y)        ||
             l->is_exit(x, y)) {_
             log("no, special tile");
             continue;
