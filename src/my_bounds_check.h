@@ -21,9 +21,8 @@
     if (! (x)) {_ \
         std::stringstream ss; \
         ss << "Assert '" << #x << "' failed at line " \
-                  << __LINE__ << ", file " << __FILE__ \
-                  << ", function " << __FUNCTION__ << "()"; \
-        std::cerr << ss.str() << std::endl; \
+           << __LINE__ << ", file " << __FILE__ \
+           << ", function " << __FUNCTION__ << "()"; \
         { auto s = ss.str(); ERR("%s", s.c_str()); } \
         DOABORT \
     }

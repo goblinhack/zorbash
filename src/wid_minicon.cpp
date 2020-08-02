@@ -153,6 +153,10 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        auto what = level->actionbar_get();
+        if (what) {
+            player->drop(what);
+        }
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {

@@ -25,7 +25,6 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         return (false);
     }
 
-log("%d",__LINE__);
     if (is_slime_baby()) {
         if (hitter->is_slime_baby()) {
             level->thing_new("slime2", mid_at);
@@ -36,7 +35,6 @@ log("%d",__LINE__);
         }
     }
 
-log("%d",__LINE__);
     if (!damage) {
         hitter->log("hit fails, no damage");
         return (false);
@@ -47,13 +45,11 @@ log("%d",__LINE__);
     //
     cursor_path_stop();
 
-log("%d",__LINE__);
     if (real_hitter->tp()->gfx_bounce_on_move()) {
         real_hitter->bounce(0.5, 0.1, 100, 3);
         real_hitter->move_set_dir_from_delta(delta);
     }
 
-log("%d",__LINE__);
     //
     // Try to push the thing into a hazard if we can just to be sneaky
     //
@@ -71,7 +67,6 @@ log("%d",__LINE__);
                 break;
         }
     }
-log("%d",__LINE__);
 
     if (is_fire_hater()) {
         if (real_hitter->is_fire() ||
@@ -83,7 +78,6 @@ log("%d",__LINE__);
         }
     }
 
-log("%d",__LINE__);
     if (is_acid_hater()) {
         if (real_hitter->is_acid()) {
             if (is_double_damage_from_acid()) {
@@ -93,7 +87,6 @@ log("%d",__LINE__);
         }
     }
 
-log("%d",__LINE__);
     if (is_water_hater()) {
         if (real_hitter->is_water()) {
             if (is_double_damage_from_water()) {
@@ -102,7 +95,6 @@ log("%d",__LINE__);
             }
         }
     }
-log("%d",__LINE__);
 
     //
     // Try to steal
@@ -115,7 +107,6 @@ log("%d",__LINE__);
         }
     }
 
-log("%d",__LINE__);
     if (is_player()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
@@ -151,7 +142,6 @@ log("%d",__LINE__);
         }
         add_enemy(real_hitter);
     }
-log("%d",__LINE__);
 
     //
     // Visible hit indication

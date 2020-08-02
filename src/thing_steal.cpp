@@ -6,6 +6,7 @@
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
+#include "my_game_status.h"
 
 bool Thing::steal_treasure_from (Thingp it)
 {_
@@ -23,14 +24,17 @@ _
     auto chosen = cands[random_range(0, cands.size())];
 
     log("steal treasure %s", chosen->to_string().c_str());
-    it->drop(chosen, this);
+    if (!it->drop(chosen, this)) {
+        return false;
+    }
+
     if (!it->is_dead) {
         carry(chosen);
     }
 
     if (it->is_player()) {
-        it->msg(string_sprintf("%%fg=orange$!!!"));
-        MINICON("%%fg=orange$You feel lighter...");
+        it->msg(string_sprintf("                        %%fg=white$Where's my money?!"));
+        MINICON("%%fg=orange$You feel less wealthy somehow...");
     }
     return true;
 }
@@ -42,7 +46,7 @@ bool Thing::steal_item_from (Thingp it)
         log("no");
         return false;
     }
-
+_
     log("yes, steal out of this list:");
     auto cands = it->get_item_list();
     if (!cands.size()) {
@@ -62,8 +66,13 @@ bool Thing::steal_item_from (Thingp it)
     it->get_item_list();
 
     if (it->is_player()) {
-        it->msg(string_sprintf("%%fg=orange$!!!"));
-        MINICON("%%fg=orange$You feel lighter...");
+        it->msg(string_sprintf("                        %%fg=white$Where's my stuff?!"));
+        MINICON("%%fg=orange$You feel lighter somehow...");
     }
+
+    //
+    // Update the actionbar
+    //
+    game_status_wid_init();
     return true;
 }

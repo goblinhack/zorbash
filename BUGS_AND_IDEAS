@@ -1,6 +1,6 @@
 bugs
 ----
-cube stealing takes both swords
+drop needs to select where
 
 upcoming work
 -------------
@@ -8,7 +8,6 @@ upcoming work
 - allow seed selection on menu
 - equip
 - throw
-- drop
 - potion descent creates chasm
 - potion break on fall
 - potion enchant radius

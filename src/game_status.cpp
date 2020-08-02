@@ -92,7 +92,7 @@ static void game_status_wid_create (void)
 
     auto actionbar_items = player->monstp->actionbar_id.size();
 
-    player->log("action items:");
+    player->log("actionbar items:");
 _
     for (auto i = 0U; i < actionbar_items; i++) {
         auto a = player->monstp->actionbar_id[i];

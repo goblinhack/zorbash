@@ -11,5 +11,5 @@ void Thing::msg (std::string const &m)
 {
     auto msg = level->thing_new("msg", mid_at);
     msg->set_msg(m);
-    msg->fadeup(4.0, 0.05, 2000);
+    msg->fadeup(6.0, 0.05, 3000);
 }

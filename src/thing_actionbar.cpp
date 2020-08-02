@@ -212,20 +212,27 @@ bool Thing::actionbar_id_remove (Thingp what)
             continue;
         }
 
-        if (t == what) {
-            monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
-            game_status_wid_init();
+        if (t->tp() == what->tp()) {
+            auto cnt = actionbar_id_slot_count(i);
+            log("remove slot %d, count %d", cnt, i);
+            if (cnt > 1) {_
+                log("decrement slot count");
+            } else {_
+                log("remove slot");
+                monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
 
-            if (!monstp->actionbar_id.size()) {
-                game->actionbar_highlight_slot = {};
-            } else {
-                while (game->actionbar_highlight_slot >= 
-                       monstp->actionbar_id.size()) {
-                    game->actionbar_highlight_slot--;
+                if (!monstp->actionbar_id.size()) {
+                    game->actionbar_highlight_slot = {};
+                } else {
+                    while (game->actionbar_highlight_slot >= 
+                        monstp->actionbar_id.size()) {
+                        game->actionbar_highlight_slot--;
+                    }
                 }
             }
 
             level->actionbar_describe(game->actionbar_highlight_slot);
+            game_status_wid_init();
             return true;
         }
     }
@@ -258,23 +265,34 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
             continue;
         }
 
-        if (t == what) {
-            monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
-            game_status_wid_init();
+        if (t->tp() == what->tp()) {
             if (particle_target) {
                 actionbar_particle(what, i, particle_target);
             }
 
-            if (!monstp->actionbar_id.size()) {
-                game->actionbar_highlight_slot = {};
-            } else {
-                while (game->actionbar_highlight_slot >= 
-                       monstp->actionbar_id.size()) {
-                    game->actionbar_highlight_slot--;
-                }
+            auto cnt = actionbar_id_slot_count(i);
+            log("remove slot %d, count %d", cnt, i);
+            if (cnt > 1) {_
+                log("decrement slot count");
+                game_status_wid_init();
+                return true;
+            } else {_
+                log("remove slot");
+                monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
 
-                level->actionbar_describe(game->actionbar_highlight_slot);
+                if (!monstp->actionbar_id.size()) {
+                    game->actionbar_highlight_slot = {};
+                } else {
+                    while (game->actionbar_highlight_slot >= 
+                        monstp->actionbar_id.size()) {
+                        game->actionbar_highlight_slot--;
+                    }
+
+                    level->actionbar_describe(game->actionbar_highlight_slot);
+                }
             }
+
+            game_status_wid_init();
             return true;
         }
     }
