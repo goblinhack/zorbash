@@ -131,6 +131,7 @@ public:
     uint32_t     tick_last_did_something {};
     uint32_t     tick_last_escape {};
     uint32_t     tick_last_level_change {};
+    uint32_t     tick_dropped {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -661,6 +662,13 @@ public:
     uint32_t decr_tick_last_level_change(void);
     uint32_t incr_tick_last_level_change(void);
 
+    uint32_t set_tick_dropped(uint32_t);
+    uint32_t get_tick_dropped(void) const;
+    uint32_t decr_tick_dropped(uint32_t);
+    uint32_t incr_tick_dropped(uint32_t);
+    uint32_t decr_tick_dropped(void);
+    uint32_t incr_tick_dropped(void);
+
     ThingId set_on_fire_anim_id(ThingId);
     ThingId get_on_fire_anim_id(void) const;
 
@@ -1070,7 +1078,8 @@ public:
     void botcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void botcon_(const char *fmt, va_list args) const; // compile error without
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
-    void carry(Thingp w);
+    bool carry(Thingp w);
+    bool try_to_carry(Thingp w);
     void collision_check_do();
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without

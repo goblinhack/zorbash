@@ -133,15 +133,15 @@ _
                 }
             } else if (owner->is_player()) {
                 owner->log("carry to eat later %s", it->to_string().c_str());
-                owner->carry(it);
-                return true;
+                if (owner->try_to_carry(it)) {
+                    return true;
+                }
             }
         }
     } else {
         //
         // As above, but not for owner.
         //
-       
         if (will_eat(it)) {
             //
             // Eat corpse?
@@ -157,8 +157,9 @@ _
                 }
             } else if (is_player()) {
                 log("carry to eat later %s", it->to_string().c_str());
-                carry(it);
-                return true;
+                if (try_to_carry(it)) {
+                    return true;
+                }
             }
         }
     }

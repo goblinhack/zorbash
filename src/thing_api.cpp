@@ -3408,6 +3408,54 @@ uint32_t Thing::incr_tick_last_level_change (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_dropped
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_tick_dropped (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->tick_dropped);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_tick_dropped (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_dropped = v);
+}
+
+uint32_t Thing::decr_tick_dropped (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_dropped -= v);
+}
+
+uint32_t Thing::incr_tick_dropped (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_dropped += v);
+}
+
+uint32_t Thing::decr_tick_dropped (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_dropped--);
+}
+
+uint32_t Thing::incr_tick_dropped (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_dropped++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // timestamp_lunge_begin
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_lunge_begin (void) const

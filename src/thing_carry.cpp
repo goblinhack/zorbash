@@ -6,31 +6,32 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-void Thing::carry (Thingp what)
+bool Thing::carry (Thingp what)
 {_
     if (is_player()) {
         if (!actionbar_id_insert(what)) {
-            return;
+            return false;
         }
     }
 
     if (!monstp) {
-        return;
+        return false;
     }
 
     auto existing_owner = what->owner_get();
     if (existing_owner) {
         if (existing_owner == this) {
-            return;
+            return false;
         }
         existing_owner->drop(what);
     }
 
     for (const auto& item : monstp->carrying) {
         if (item == what->id) {
-            return;
+            return false;
         }
     }
+
     monstp->carrying.push_front(what->id);
     what->set_owner(this);
     what->hide();
@@ -45,4 +46,14 @@ void Thing::carry (Thingp what)
             wield(what);
         }
     }
+
+    return true;
+}
+
+bool Thing::try_to_carry (Thingp what)
+{_
+    if (get_tick() - get_tick_last_level_change() <= 1) {
+        return false;
+    }
+    return carry(what);
 }

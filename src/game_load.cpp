@@ -127,6 +127,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);
     /* uint32_t     tick_last_level_change    */ in >> bits(my.t->tick_last_level_change);
+    /* uint32_t     tick_dropped              */ in >> bits(my.t->tick_dropped);
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
