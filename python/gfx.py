@@ -184,14 +184,14 @@ def init_16x16():
       ##############################################################################################################################################
       "key1.1",              "key1.2",              "key1.3",              "key1.4",
       "key1.5",              "key1.6",              "key1.7",              "key1.8",
-      "potion_blue.1",       "potion_blue.2",       "potion_blue.3",       "",
-      "",                    "",                    "",                    "",
+      "potion_blue.1",       "potion_blue.2",       "potion_blue.3",       "potion_blue.4",
+      "potion_blue.5",       "potion_blue.6",       "",                    "",
       "",                    "",                    "",
       ##############################################################################################################################################
       "ascii.key1.1",        "ascii.key1.2",        "ascii.key1.3",        "ascii.key1.4",
       "ascii.key1.5",        "ascii.key1.6",        "ascii.key1.7",        "ascii.key1.8",
-      "ascii.potion_blue.1", "ascii.potion_blue.2", "ascii.potion_blue.3", "",
-      "",                    "",                    "",                    "",
+      "ascii.potion_blue.1", "ascii.potion_blue.2", "ascii.potion_blue.3", "ascii.potion_blue.4",
+      "ascii.potion_blue.5", "ascii.potion_blue.6", "",                    "",
       "",                    "",                    "",
       ##############################################################################################################################################
       "gold1.1",             "gold1.2",             "gold1.3",             "gold1.4",

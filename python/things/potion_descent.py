@@ -35,6 +35,9 @@ def potion_init(name, text_name):
     x.set_tile(tile=name + ".1", delay_ms=1000)
     x.set_tile(tile=name + ".2", delay_ms=1000)
     x.set_tile(tile=name + ".3", delay_ms=1000)
+    x.set_tile(tile=name + ".4", delay_ms=1000)
+    x.set_tile(tile=name + ".5", delay_ms=1000)
+    x.set_tile(tile=name + ".6", delay_ms=1000)
 
     x.update()
 
