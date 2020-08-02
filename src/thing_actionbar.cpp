@@ -340,6 +340,10 @@ Thingp Level::actionbar_get (const uint32_t slot)
         return nullptr;
     }
 
+    if (slot >= player->monstp->actionbar_id.size()) {
+        return nullptr;
+    }
+
     auto oid = get(player->monstp->actionbar_id, slot);
     if (!oid) {
         return nullptr;
