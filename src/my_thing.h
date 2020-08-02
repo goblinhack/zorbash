@@ -1097,8 +1097,8 @@ public:
     void dir_set_tl(void);
     void dir_set_tr(void);
     void dir_set_up(void);
-    void drop(Thingp w);
-    void drop(Thingp w, Thingp target);
+    bool drop(Thingp w);
+    bool drop(Thingp w, Thingp target);
     void drop_all(void);
     void dump(std::string prefix, std::ostream &out);
     void err(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));

@@ -161,12 +161,16 @@ void tile_load_arr(std::string file,
 void tile_load_arr(std::string file,
                    std::string tex_name,
                    uint32_t width, uint32_t height,
-                   std::vector<std::string> arr);
+                   const std::vector<std::string> &arr);
 void tile_load_arr_sprites(std::string file,
                            std::string tex_name,
                            uint32_t width, uint32_t height,
                            uint32_t nargs,
                            const char * arr[]);
+void tile_load_arr_sprites(std::string file,
+                           std::string name,
+                           uint32_t width, uint32_t height,
+                           const std::vector<std::string> &arr);
 Tilep tile_find(std::string name);
 Tilep tile_find_mand(std::string name);
 Tilep tile_from_surface(SDL_Surface *surface,

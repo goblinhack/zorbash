@@ -25,6 +25,6 @@ void gfx_init10 (void)
         "ui10,0,14", "ui10,1,14", "ui10,2,14", "ui10,3,14", "ui10,4,14", "ui10,5,14", "ui10,6,14", "ui10,7,14", "ui10,8,14", "ui10,9,14", "ui10,10,14", "ui10,11,14", "ui10,12,14", "ui10,13,14", "ui10,14,14", "ui10,15,14",
         "ui10,0,15", "ui10,1,15", "ui10,2,15", "ui10,3,15", "ui10,4,15", "ui10,5,15", "ui10,6,15", "ui10,7,15", "ui10,8,15", "ui10,9,15", "ui10,10,15", "ui10,11,15", "ui10,12,15", "ui10,13,15", "ui10,14,15", "ui10,15,15",
     };
-    std::vector<std::string> arr(tiles);
+    const std::vector<std::string> arr(tiles);
     tile_load_arr("data/gfx/ui_horiz1.tga", "ui_box10", 8, 8, arr);
 }
