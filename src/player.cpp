@@ -22,7 +22,7 @@ void player_tick (void)
         return;
     }
 
-    float delta = 0.5;
+    float delta = 0.2;
     bool some_key_event_was_pressed = false;
     const uint8_t *state = SDL_GetKeyboardState(0);
 

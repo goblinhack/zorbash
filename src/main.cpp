@@ -472,7 +472,7 @@ static void usage (void)
     CON("zorbash, options:");
     CON(" ");
     CON(" --new-game");
-    CON(" --debug-mode");
+    CON(" --debug");
     CON(" --ascii-mode // pseudo ascii mode");
     CON(" --seed <number>");
     CON(" ");
@@ -486,9 +486,9 @@ static void parse_args (int32_t argc, char *argv[])
     //
     // Parse format args
     //
-    CON("INIT: Parse command line arguments for '%s'", argv[0]);
+    LOG("INIT: Parse command line arguments for '%s'", argv[0]);
     for (i = 1; i < argc; i++) {
-      CON("INIT: argument: \"%s\"", argv[i]);
+        LOG("INIT: - argument: \"%s\"", argv[i]);
     }
 
     if (argc) {
@@ -505,9 +505,9 @@ static void parse_args (int32_t argc, char *argv[])
             continue;
         }
 
-        if (!strcasecmp(argv[i], "--debug-mode") ||
-            !strcasecmp(argv[i], "-debug-mode")) {
-            g_opt_debug_mode = true;
+        if (!strcasecmp(argv[i], "--debug") ||
+            !strcasecmp(argv[i], "-debug")) {
+            g_opt_debug = true;
             continue;
         }
 
@@ -520,7 +520,6 @@ static void parse_args (int32_t argc, char *argv[])
         if (!strcasecmp(argv[i], "--seed") ||
             !strcasecmp(argv[i], "-seed") ||
             !strcasecmp(argv[i], "-s")) {
-
             g_opt_seed = atoi(argv[i + 1]);
             i++;
             continue;
@@ -537,19 +536,13 @@ static void parse_args (int32_t argc, char *argv[])
         usage();
         DIE("unknown format argument, %s", argv[i]);
     }
-
-    if (g_opt_debug_mode) {
-        game->config.debug_mode = g_opt_debug_mode;
-    }
-
-    if (g_opt_ascii_mode) {
-        game->config.ascii_mode = g_opt_ascii_mode;
-    }
 }
 
 int32_t main (int32_t argc, char *argv[])
 {_
     ARGV = argv;
+    parse_args(argc, argv);
+
     LOG("INIT: Greetings mortal");
 
     //////////////////////////////////////////////////////////////////////////////
@@ -667,7 +660,12 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGPIPE, ctrlc_handler);  // install our handler
 #endif
 
-    parse_args(argc, argv);
+    if (g_opt_ascii_mode) {
+        if (game) {
+            game->config.ascii_mode = g_opt_ascii_mode;
+        }
+    }
+
     color_init();
 
 #if 0

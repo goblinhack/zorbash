@@ -320,7 +320,6 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 {_
     /* bool               allow_highdpi                */ out << bits(my.t.allow_highdpi                );
     /* bool               ascii_mode                   */ out << bits(my.t.ascii_mode                   );
-    /* bool               debug_mode                   */ out << bits(my.t.debug_mode                   );
     /* bool               fps_counter                  */ out << bits(my.t.fps_counter                  );
     /* bool               fullscreen                   */ out << bits(my.t.fullscreen                   );
     /* bool               gfx_inverted                 */ out << bits(my.t.gfx_inverted                 );

@@ -1154,28 +1154,6 @@ void config_gfx_vsync_update (void)
 //
 // User has entered a command, run it
 //
-uint8_t config_debug_mode (tokens_t *tokens, void *context)
-{_
-    char *s = tokens->args[2];
-
-    if (!s || (*s == '\0')) {
-        game->config.debug_mode = true;
-    } else {
-        game->config.debug_mode = strtol(s, 0, 10) ? 1 : 0;
-    }
-
-    if (game->config.debug_mode) {
-        CON("USERCFG: Debug mode enabled");
-    } else {
-        CON("USERCFG: Debug mode disabled");
-    }
-
-    return (true);
-}
-
-//
-// User has entered a command, run it
-//
 uint8_t config_ascii_mode (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[2];
@@ -1215,10 +1193,6 @@ void config_update_all (void)
 
     if (game->level) {
         game->level->scroll_map_to_player();
-    }
-
-    if (g_opt_debug_mode) {
-        game->config.debug_mode = g_opt_debug_mode;
     }
 
     if (g_opt_ascii_mode) {
@@ -1408,7 +1382,7 @@ void sdl_loop (void)
         // Draw the map
         //
         if (unlikely(game->config.gfx_minimap)) {
-            float mx = 0.25;
+            float mx = 0.20;
             float my = mx * game->config.video_w_h_ratio;
             mx *= game->config.outer_pix_width;
             my *= game->config.outer_pix_height;

@@ -17,7 +17,6 @@ typedef class Config_ {
 public:
     bool               allow_highdpi                = false;
     bool               ascii_mode                   = false;
-    bool               debug_mode                   = false;
     bool               fps_counter                  = false;
     bool               fullscreen                   = false;
     bool               gfx_inverted                 = false;
