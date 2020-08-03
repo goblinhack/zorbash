@@ -5,6 +5,7 @@
 
 #include <string>
 #include <ctime>
+#include "my_globals.h"
 
 //
 // __FUNCTION__ is not a preprocessor directive so we can't convert it into a
@@ -13,9 +14,6 @@
 #define PTRCHECK_AT \
   std::string(__FILE__), std::string(__PRETTY_FUNCTION__), __LINE__
 
-//
-// util.c
-//
 void *myzalloc_(int size, std::string what, std::string func, std::string file, int line);
 void *mymalloc_(int size, std::string what, std::string func, std::string file, int line);
 void *myrealloc_(void *ptr, int size, std::string what, std::string func, std::string file, int line);
@@ -46,20 +44,28 @@ int ptrcheck_verify(const void *ptr, std::string &file, std::string &func, int l
 int ptrcheck_free(void *ptr, std::string file, std::string func, int line);
 void ptrcheck_leak_print(void);
 
-#ifdef ENABLE_PTRCHECK
-#define newptr(__ptr__, __what__) \
-    (ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), PTRCHECK_AT))
-#define oldptr(__ptr__) (ptrcheck_free((__ptr__), PTRCHECK_AT))
-#define verify(__ptr__)                                      \
-{                                                            \
-    static std::string a = std::string(__FILE__);            \
-    static std::string b = std::string(__PRETTY_FUNCTION__); \
-    ptrcheck_verify((__ptr__), a, b, __LINE__);              \
+#define newptr(__ptr__, __what__)                                 \
+{                                                                 \
+    if (g_opt_debug) {_                                           \
+        ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), \
+                       PTRCHECK_AT);                              \
+    }                                                             \
 }
-#else
-#define newptr(__ptr__, __what__)
-#define oldptr(__ptr__)
-#define verify(__ptr__)
-#endif
+
+#define oldptr(__ptr__)                                           \
+{                                                                 \
+    if (g_opt_debug) {_                                           \
+        ptrcheck_free((__ptr__), PTRCHECK_AT);                    \
+    }                                                             \
+}
+
+#define verify(__ptr__)                                           \
+{                                                                 \
+    if (g_opt_debug) {_                                           \
+        static std::string a = std::string(__FILE__);             \
+        static std::string b = std::string(__PRETTY_FUNCTION__);  \
+        ptrcheck_verify((__ptr__), a, b, __LINE__);               \
+    }                                                             \
+}
 
 #endif // __PTRCHECK_H__

@@ -7,17 +7,17 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define ENABLE_DEBUG_CRASH         // Enable this for lots of sanity checks
+#define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
-#define ENABLE_TRACING             // Function tracing
-
+#define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_TILE_BOUNDS         // Scan tiles for bounds
-#undef  ENABLE_DEBUG_LIGHT         // Lighting algorithm for player
+#define ENABLE_TRACING             // Function tracing
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
 #undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
 #undef  ENABLE_DEBUG_AI_GOALS      // AI goal selection
 #undef  ENABLE_DEBUG_AI_WANDER     // AI wander path selection
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
+#undef  ENABLE_DEBUG_LIGHT         // Lighting algorithm for player
 #undef  ENABLE_DEBUG_SAVE_CHECK    // Verify compressed file
 #undef  ENABLE_DEBUG_SAVE_LOAD     // Map saving and loading
 #undef  ENABLE_DEBUG_SAVE_LOAD_HEX // Hex dump of save files
@@ -25,18 +25,12 @@
 #undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
 #undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
 #undef  ENABLE_MAP_DEBUG           // Visible map, no lighting
+#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
+#undef  ENABLE_PTRCHECK_LEAK
+#undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
 #undef  ENABLE_UI_DEBUG            // User interface logs
 #undef  ENABLE_UI_DEBUG_EXTRA      // User interface logs with inheritance
-
-#ifdef ENABLE_DEBUG_CRASH
-#define ENABLE_ASSERT              // DIE on errors, like array bound check
-#define ENABLE_PTRCHECK            // Check validity of pointers too
-#define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
-#define ENABLE_PTRCHECK_LEAK
-#define ENABLE_THING_ID_LOGS       // Thing ID allocations
-#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
-#endif
 
 #define GRID_HEIGHT                5
 #define GRID_WIDTH                 5    // Rooms across and down

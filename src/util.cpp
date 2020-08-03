@@ -20,9 +20,9 @@ void *myzalloc_ (int size,
         DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
-#ifdef ENABLE_PTRCHECK
-    ptrcheck_alloc(ptr, what, size, file, func, line);
-#endif
+    if (g_opt_debug) {
+        ptrcheck_alloc(ptr, what, size, file, func, line);
+    }
 
     return (ptr);
 }
@@ -39,9 +39,9 @@ void *mymalloc_ (int size,
         DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
-#ifdef ENABLE_PTRCHECK
-    ptrcheck_alloc(ptr, what, size, file, func, line);
-#endif
+    if (g_opt_debug) {
+        ptrcheck_alloc(ptr, what, size, file, func, line);
+    }
 
     return (ptr);
 }
@@ -53,18 +53,18 @@ void *myrealloc_ (void *ptr,
                   std::string func,
                   int line)
 {_
-#ifdef ENABLE_PTRCHECK
-    ptrcheck_free(ptr, file, func, line);
-#endif
+    if (g_opt_debug) {
+        ptrcheck_free(ptr, file, func, line);
+    }
 
     ptr = realloc(ptr, size);
     if (!ptr) {
         DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
-#ifdef ENABLE_PTRCHECK
-    ptrcheck_alloc(ptr, what, size, file, func, line);
-#endif
+    if (g_opt_debug) {
+        ptrcheck_alloc(ptr, what, size, file, func, line);
+    }
 
     return (ptr);
 }
@@ -74,9 +74,9 @@ void myfree_ (void *ptr,
               std::string func,
               int line)
 {_
-#ifdef ENABLE_PTRCHECK
-    ptrcheck_free(ptr, file, func, line);
-#endif
+    if (g_opt_debug) {
+        ptrcheck_free(ptr, file, func, line);
+    }
 
     free(ptr);
 }
@@ -93,17 +93,15 @@ char *dupstr_ (const char *in,
     }
 
     char *ptr = strdup(in);
-#ifdef ENABLE_PTRCHECK
-    int size = (__typeof__(size)) strlen(in);
-#endif
-
     if (!ptr) {
         DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
-#ifdef ENABLE_PTRCHECK
-    ptrcheck_alloc(ptr, what, size, file, func, line);
-#endif
+    int size = (__typeof__(size)) strlen(in);
+
+    if (g_opt_debug) {
+        ptrcheck_alloc(ptr, what, size, file, func, line);
+    }
 
     return (ptr);
 }

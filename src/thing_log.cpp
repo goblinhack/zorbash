@@ -193,7 +193,7 @@ void Thing::err (const char *fmt, ...) const
 void Thing::dbg (const char *fmt, ...) const
 {
     verify(this);
-    if (game && !game->config.debug_mode) {
+    if (!g_opt_debug) {
         return;
     }
     auto t = this;

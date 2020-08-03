@@ -73,7 +73,6 @@ void Config::log (std::string pfx)
     LOG("%s gfx_show_hidden     %u", pfx.c_str(), gfx_show_hidden);
     LOG("%s gfx_lights          %u", pfx.c_str(), gfx_lights);
     LOG("%s gfx_zoom            %u", pfx.c_str(), gfx_zoom);
-    LOG("%s debug_mode          %u", pfx.c_str(), debug_mode);
     LOG("%s ascii_mode          %u", pfx.c_str(), ascii_mode);
     LOG("%s sound_volume        %u", pfx.c_str(), sound_volume);
     LOG("%s music_volume        %u", pfx.c_str(), music_volume);

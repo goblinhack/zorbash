@@ -4,6 +4,7 @@
 //
 
 #include "my_game.h"
+#include "my_globals.h"
 #include "my_traceback.h"
 #include "my_console.h"
 #include "my_wid_console.h"
@@ -116,7 +117,7 @@ void Level::err (const char *fmt, ...)
 void Level::dbg (const char *fmt, ...)
 {
     verify(this);
-    if (game && !game->config.debug_mode) {
+    if (!g_opt_debug) {
         return;
     }
     auto t = this;

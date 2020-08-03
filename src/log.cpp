@@ -393,7 +393,7 @@ void DYING (const char *fmt, ...)
 
 void DBG (const char *fmt, ...)
 {
-    if (game && !game->config.debug_mode) {
+    if (!g_opt_debug) {
         return;
     }
     va_list args;
