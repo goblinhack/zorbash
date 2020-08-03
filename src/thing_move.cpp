@@ -353,6 +353,13 @@ void Thing::move_to_immediately (fpoint to)
     if (!is_jumping) {
         location_check();
     }
+
+    if (is_player()) {
+        if (!level->map_follow_player) {
+            level->map_follow_player = true;
+            level->cursor_needs_update = true;
+        }
+    }
 }
 
 void Thing::move_to_immediately_delta (fpoint delta)
@@ -367,6 +374,13 @@ void Thing::move_to_immediately_delta (fpoint delta)
     //
     if (!is_jumping) {
         location_check();
+    }
+
+    if (is_player()) {
+        if (!level->map_follow_player) {
+            level->map_follow_player = true;
+            level->cursor_needs_update = true;
+        }
     }
 }
 
