@@ -27,10 +27,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 
     if (is_slime_baby()) {
         if (hitter->is_slime_baby()) {
-            level->thing_new("slime2", mid_at);
             log("slimes combine!");
-            dead(this, "combined");
-            hitter->dead(hitter, "combined");
+            dead("combined");
+            hitter->dead("combined");
+            level->thing_new("slime2", mid_at);
             return (true);
         }
     }
