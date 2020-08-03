@@ -71,8 +71,24 @@ bool Thing::possible_to_attack (const Thingp it)
     }
 
     if (is_weapon()) {
-        log("can attack %s", it->to_string().c_str());
-        return (true);
+        auto o = owner_get();
+        if (o) {
+            if (o->is_monst()) {
+                if (!it->is_attackable_by_monst()) {
+                    log("cannot weapon attack %s, not attackable", it->to_string().c_str());
+                    return (false);
+                }
+                log("can attack %s", it->to_string().c_str());
+                return (true);
+            } else {
+                if (!it->is_attackable_by_player()) {
+                    log("cannot weapon attack %s, not attackable", it->to_string().c_str());
+                    return (false);
+                }
+                log("can attack %s", it->to_string().c_str());
+                return (true);
+            }
+        }
     }
 
     if (me->is_fire() || me->is_lava()) {
