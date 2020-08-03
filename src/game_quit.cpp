@@ -29,7 +29,7 @@ uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
         game->fini();
         game->main_menu_select();
     } else {
-        DIE("USERCFG: quit");
+        DIE_CLEAN("USERCFG: quit");
     }
     return (false);
 }

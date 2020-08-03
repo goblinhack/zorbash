@@ -95,16 +95,17 @@ static void game_status_wid_create (void)
     player->log("actionbar items:");
 _
     for (auto i = 0U; i < actionbar_items; i++) {
-        auto a = player->monstp->actionbar_id[i];
-        if (!a) {
+        auto tp_id = player->monstp->actionbar_id[i];
+        if (!tp_id) {
             continue;
         }
-        auto t = level->thing_find(a);
-        if (!t) {
-            player->log("slot %u: %u (invaid)", i, a.id);
+
+        auto tpp = tp_find(tp_id);
+        if (!tpp) {
+            player->log("slot %u: %u (invaid)", i, tp_id);
             continue;
         }
-        player->log("slot %u: %s", i, t->to_string().c_str());
+        player->log("slot %u: %s", i, tpp->name().c_str());
     }
 
     {_
@@ -165,17 +166,14 @@ _
         }
 
         if (player->monstp) {
-            auto a = player->monstp->actionbar_id[i];
-            if (a.id) {
-                auto it = level->thing_find(a.id);
-                if (it) {
-                    auto tpp = it->tp();
-                    auto tiles = &tpp->tiles;
-                    if (tiles) {
-                        auto tile = tile_first(tiles);
-                        if (tile) {
-                            wid_set_fg_tile(w, tile);
-                        }
+            auto tp_id = player->monstp->actionbar_id[i];
+            if (tp_id) {
+                auto tpp = tp_find(tp_id);
+                auto tiles = &tpp->tiles;
+                if (tiles) {
+                    auto tile = tile_first(tiles);
+                    if (tile) {
+                        wid_set_fg_tile(w, tile);
                     }
                 }
             }
