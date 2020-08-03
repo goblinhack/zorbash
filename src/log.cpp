@@ -301,7 +301,6 @@ static void err_ (const char *fmt, va_list args)
 
 static void croak_ (const char *fmt, va_list args)
 {
-    static int g_croaked;
     if (g_croaked) {
         fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
         exit(1);
@@ -341,6 +340,48 @@ static void croak_ (const char *fmt, va_list args)
     die();
 }
 
+void CROAK (const char *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    croak_(fmt, args);
+    va_end(args);
+
+    // quit();
+}
+
+static void croak_clean_ (const char *fmt, va_list args)
+{
+    if (g_croaked) {
+        fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
+        exit(1);
+    }
+    g_croaked = 1;
+
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
+
+    if (g_croaked) {
+        return;
+    }
+
+    g_croaked = true;
+
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
+    die();
+}
+
+void CROAK_CLEAN (const char *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    croak_clean_(fmt, args);
+    va_end(args);
+
+    // quit();
+}
+
 void DYING (const char *fmt, ...)
 {
     va_list args;
@@ -374,17 +415,6 @@ void myerr (const char *fmt, ...)
 
     wid_unset_focus();
     wid_unset_focus_lock();
-}
-
-void CROAK (const char *fmt, ...)
-{
-    va_list args;
-
-    va_start(args, fmt);
-    croak_(fmt, args);
-    va_end(args);
-
-    // quit();
 }
 
 static void msgerr_ (const char *fmt, va_list args)

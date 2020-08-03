@@ -132,7 +132,6 @@ static SDL_Surface *load_image (std::string filename)
     amask = 0xff000000;
 #endif
 
-    LOG("- SDL_CreateRGBSurface");
     if (comp == 4) {
         surf = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
         newptr(surf, "SDL_CreateRGBSurface1");
@@ -192,7 +191,6 @@ static void load_images (SDL_Surface **surf1_out,
     amask = 0xff000000;
 #endif
 
-    LOG("- SDL_CreateRGBSurface");
     if (comp == 4) {
         surf1 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
         newptr(surf1, "SDL_CreateRGBSurface5");
@@ -277,7 +275,6 @@ Texp tex_load (std::string file, std::string name, int mode)
         ERR("could not make surface from file '%s'", file.c_str());
     }
 
-    LOG("- create texture '%s', '%s'", file.c_str(), name.c_str());
     t = tex_from_surface(surface, file, name, mode);
 
     LOG("- loaded texture '%s', '%s'", file.c_str(), name.c_str());

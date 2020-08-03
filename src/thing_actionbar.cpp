@@ -86,7 +86,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
 }
 
 //
-// Particle from the actionbar to a target
+// Particle from the actionbar to tp_id target
 //
 void Thing::actionbar_particle (Thingp what, uint32_t slot,
                                 Thingp particle_target)
@@ -151,17 +151,18 @@ bool Thing::actionbar_id_insert (Thingp what)
 
     auto actionbar_items = player->monstp->actionbar_id.size();
     for (auto i = 0U; i < actionbar_items; i++) {
-        auto a = monstp->actionbar_id[i];
-        if (!a) {
-            continue;
-        }
-        auto t = level->thing_find(a);
-        if (!t) {
+        auto tp_id = monstp->actionbar_id[i];
+        if (!tp_id) {
             continue;
         }
 
-        if (t->tp() == what->tp()) {
-            if (t->is_item_not_stackable()) {
+        auto tpp = tp_find(tp_id);
+        if (!tpp) {
+            continue;
+        }
+
+        if (what->tp() == tpp) {
+            if (what->is_item_not_stackable()) {
                 //
                 // Needs its own slot
                 //
@@ -179,7 +180,7 @@ bool Thing::actionbar_id_insert (Thingp what)
         return false;
     }
 
-    monstp->actionbar_id.push_back(what->id);
+    monstp->actionbar_id.push_back(what->tp_id);
     game_status_wid_init();
     actionbar_particle(what, monstp->actionbar_id.size() - 1);
     level->actionbar_describe(game->actionbar_highlight_slot);
@@ -203,16 +204,16 @@ bool Thing::actionbar_id_remove (Thingp what)
 
     auto actionbar_items = player->monstp->actionbar_id.size();
     for (auto i = 0U; i < actionbar_items; i++) {
-        auto a = monstp->actionbar_id[i];
-        if (!a) {
+        auto tp_id = monstp->actionbar_id[i];
+        if (!tp_id) {
             continue;
         }
-        auto t = level->thing_find(a);
-        if (!t) {
+        auto tpp = tp_find(tp_id);
+        if (!tpp) {
             continue;
         }
 
-        if (t->tp() == what->tp()) {
+        if (what->tp() == tpp) {
             auto cnt = actionbar_id_slot_count(i);
             log("remove slot %d, count %d", cnt, i);
             if (cnt > 1) {_
@@ -256,16 +257,16 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
 
     auto actionbar_items = player->monstp->actionbar_id.size();
     for (auto i = 0U; i < actionbar_items; i++) {
-        auto a = monstp->actionbar_id[i];
-        if (!a) {
+        auto tp_id = monstp->actionbar_id[i];
+        if (!tp_id) {
             continue;
         }
-        auto t = level->thing_find(a);
-        if (!t) {
+        auto tpp = tp_find(tp_id);
+        if (!tpp) {
             continue;
         }
 
-        if (t->tp() == what->tp()) {
+        if (what->tp() == tpp) {
             if (particle_target) {
                 actionbar_particle(what, i, particle_target);
             }
@@ -302,8 +303,8 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
 
 int Thing::actionbar_id_slot_count (const uint32_t slot)
 {_
-    auto a = get(monstp->actionbar_id, slot);
-    if (!a) {
+    auto tp_id = get(monstp->actionbar_id, slot);
+    if (!tp_id) {
         return 0;
     }
 
@@ -311,8 +312,8 @@ int Thing::actionbar_id_slot_count (const uint32_t slot)
         return 0;
     }
 
-    auto t = level->thing_find(a);
-    if (!t) {
+    auto tpp = tp_find(tp_id);
+    if (!tpp) {
         return 0;
     }
 
@@ -323,7 +324,7 @@ int Thing::actionbar_id_slot_count (const uint32_t slot)
             continue;
         }
 
-        if (o->tp() == t->tp()) {
+        if (o->tp() == tpp) {
             count++;
             if (o->is_item_not_stackable()) {
                 count = 1;
@@ -337,19 +338,36 @@ int Thing::actionbar_id_slot_count (const uint32_t slot)
 Thingp Level::actionbar_get (const uint32_t slot)
 {_
     if (!player) {
+        return 0;
+    }
+
+    auto monstp = player->monstp;
+    if (!monstp) {
+        return 0;
+    }
+
+    if (slot >= monstp->actionbar_id.size()) {
         return nullptr;
     }
 
-    if (slot >= player->monstp->actionbar_id.size()) {
+    auto tp_id = get(monstp->actionbar_id, slot);
+    if (!tp_id) {
         return nullptr;
     }
 
-    auto oid = get(player->monstp->actionbar_id, slot);
-    if (!oid) {
+    auto tpp = tp_find(tp_id);
+    if (!tpp) {
         return nullptr;
     }
 
-    return thing_find(oid);
+    for (auto oid : monstp->carrying) {
+        auto o = thing_find(oid);
+        if (o->tp() == tpp) {
+            return o;
+        }
+    }
+
+    return nullptr;
 }
 
 Thingp Level::actionbar_get (void)

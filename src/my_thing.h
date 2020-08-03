@@ -108,7 +108,7 @@ public:
     point        wander_target;
     std::list<ThingId>   carrying;
     std::string          msg;                // Text that floats on screen
-    std::vector<ThingId> actionbar_id;
+    std::vector<uint16_t> actionbar_id;      // Vector of tp_id
     std::vector<ThingId> enemies;            // List of things that wronged us
     std::vector<point>   move_path;
     timestamp_t  timestamp_born {};

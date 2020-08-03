@@ -72,7 +72,7 @@ static void segv_handler (int sig)
 static void ctrlc_handler (int sig)
 {_
     fprintf(MY_STDERR, "Interrupted!!!");
-    DIE("Interrupted");
+    DIE_CLEAN("Interrupted");
 }
 #endif
 

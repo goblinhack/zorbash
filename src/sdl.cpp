@@ -283,6 +283,7 @@ uint8_t sdl_init (void)
         ERR("Couldn't set windowed display %ux%u: %s",
             video_width, video_height,
             SDL_GetError());
+        return false;
     }
 
     if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
@@ -295,23 +296,30 @@ uint8_t sdl_init (void)
                           &game->config.outer_pix_height);
     }
 
-    LOG("INIT: SDL_GL_CreateContext (%dx%d)",
+    LOG("INIT: SDL_GL_CreateContext(%dx%d)",
         game->config.outer_pix_width,
         game->config.outer_pix_height);
 
     context = SDL_GL_CreateContext(window);
-
     if (!context) {
         SDL_MSG_BOX("SDL_GL_CreateContext failed %s", SDL_GetError());
         SDL_ClearError();
         ERR("SDL_GL_CreateContext failed %s", SDL_GetError());
+        return false;
     }
+
+    LOG("INIT: SDL_GL_CreateContext(%dx%d) done",
+        game->config.outer_pix_width,
+        game->config.outer_pix_height);
 
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
         SDL_ClearError();
         ERR("SDL_GL_MakeCurrent failed %s", SDL_GetError());
+        return false;
     }
+
+    LOG("INIT: SDL_GL_MakeCurrent() done");
 
     SDL_ClearError();
 

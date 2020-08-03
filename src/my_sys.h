@@ -157,11 +157,17 @@ typedef unsigned long int   uint64_t;
 #endif
 
 void CROAK(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void CROAK_CLEAN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+
 #define DIE(args...)                                                          \
-    _                                                                         \
     DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
     CROAK(args);                                                              \
+    exit(1);
+
+#define DIE_CLEAN(args...)                                                    \
+    DYING("Exiting at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
+    CROAK_CLEAN(args);                                                              \
     exit(1);
 
 #ifdef ENABLE_ASSERT
