@@ -119,6 +119,9 @@ void Game::credits_select (void)
     wid_credits_window->log(" ");
     wid_credits_window->log("Sound");
     wid_credits_window->log("%%fg=purple$Markus Heichelbech (deceased senior technician) http://nosoapradio.us");
+    wid_credits_window->log(" ");
+    wid_credits_window->log("Debugging");
+    wid_credits_window->log("%%fg=red$Stuicy");
 
     {_
         auto p = wid_credits_window->wid_text_area->wid_text_area;
