@@ -53,4 +53,3 @@ void Level::update_map (void)
 {
     update_hazard_tile_map();
 }
-

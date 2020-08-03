@@ -14,6 +14,7 @@ def init1(name, text_name):
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_movable(True)
+    x.set_is_removable_if_out_of_slots(True)
     x.set_lifespan_dice("1d30+10")
     x.set_text_a_or_an("a");
     x.set_text_description("A splatter of slime stuff. Don't look closely")

@@ -17,6 +17,7 @@ def tp_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_removable_if_out_of_slots(True)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_stats_health_initial(4)

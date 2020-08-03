@@ -25,6 +25,10 @@ void Level::scroll_map_do (void)
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
 
+    if ((fabs(dx) < 0.1) && (fabs(dy) < 0.1)) {
+        return;
+    }
+
 #if 0
 if (player) {
     player->minicon("map_at %f %f map_wanted_at %f %f", 

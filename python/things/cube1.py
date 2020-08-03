@@ -50,7 +50,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_monstbar(True)
     x.set_is_slime_baby_eater(True)
     x.set_is_slime_eater(True)
-    x.set_is_steal_item_chance_d1000(1000)
+    x.set_is_steal_item_chance_d1000(100)
     x.set_is_treasure_eater(True)
     x.set_light_color("green")
     x.set_normal_placement_rules(True)
