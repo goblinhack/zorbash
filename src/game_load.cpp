@@ -417,7 +417,6 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* bool               fps_counter                  */ in >> bits(my.t.fps_counter                  );
     /* bool               fullscreen                   */ in >> bits(my.t.fullscreen                   );
     /* bool               gfx_inverted                 */ in >> bits(my.t.gfx_inverted                 );
-    /* bool               gfx_lights                   */ in >> bits(my.t.gfx_lights                   );
     /* bool               gfx_minimap                  */ in >> bits(my.t.gfx_minimap                  );
     /* bool               gfx_show_hidden              */ in >> bits(my.t.gfx_show_hidden              );
     /* bool               gfx_vsync_enable             */ in >> bits(my.t.gfx_vsync_enable             );

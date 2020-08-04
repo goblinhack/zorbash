@@ -144,10 +144,6 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
         return;
     }
 
-    if (unlikely(!game->config.gfx_lights)) {
-        return;
-    }
-
     if (!level->player) {
         blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
         return;
@@ -296,8 +292,6 @@ bool Thing::get_coords (point &blit_tl,
                         bool reflection)
 {_
     fpoint at = get_interpolated_mid_at();
-    int x = (int)at.x;
-    int y = (int)at.y;
 
     //
     // We render these offset form their owner, so if dead, then it is
@@ -320,16 +314,6 @@ bool Thing::get_coords (point &blit_tl,
                is_cursor_path() ||
                is_the_grid()) {
         blit = true;
-    } else if (unlikely(game->config.gfx_show_hidden)) {
-        if (level->is_visited(x, y)) {
-            if (is_wall()) {
-                glcolor(RED);
-            }
-        } else {
-            if (is_wall()) {
-                glcolor(BLUE);
-            }
-        }
     }
 
     //
@@ -776,16 +760,12 @@ void Thing::blit_internal (point &blit_tl,
         }
     }
 
-    if (game->config.gfx_show_hidden) {
-        c.a = 255;
+    uint8_t fade = level->fade_in_map_no_check(mid_at.x, mid_at.y);
+    if (fade) {
+        level->incr_fade_in_no_check(mid_at.x, mid_at.y);
+        c.a = std::min(c.a, fade);
     } else {
-        uint8_t fade = level->fade_in_map_no_check(mid_at.x, mid_at.y);
-        if (fade) {
-            level->incr_fade_in_no_check(mid_at.x, mid_at.y);
-            c.a = std::min(c.a, fade);
-        } else {
-            c.a = 0;
-        }
+        c.a = 0;
     }
 
     glcolor(c);

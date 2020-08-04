@@ -3626,30 +3626,6 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
         case KMOD_LCTRL:
         case KMOD_RCTRL:
             switch ((int32_t)key->sym) {
-                case '1':
-                    if (g_opt_debug) {
-                        MINICON("Show inverted toggle");
-                        CON("USERCFG: gfx show inverted toggle");
-                        config_gfx_inverted_toggle();
-                    }
-                    break;
-
-                case '2':
-                    if (g_opt_debug) {
-                        MINICON("Show lights toggle");
-                        CON("USERCFG: gfx show lights toggle");
-                        config_gfx_lights_toggle();
-                    }
-                    break;
-
-                case '3':
-                    if (g_opt_debug) {
-                        MINICON("Show hidden objects toggle");
-                        CON("USERCFG: gfx show hidden toggle");
-                        config_gfx_show_hidden_toggle();
-                    }
-                    break;
-
                 case 'r':
                     MINICON("Creating a new dungeon");
                     CON("USERCFG: reloading dungeon, destroy old");

@@ -381,6 +381,10 @@ bool Level::actionbar_select (const uint32_t slot)
         return false;
     }
 
+    if (slot >= player->monstp->actionbar_id.size()) {
+        return false;
+    }
+
     auto oid = get(player->monstp->actionbar_id, slot);
     if (!oid) {
         return false;
