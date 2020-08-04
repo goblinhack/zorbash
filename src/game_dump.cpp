@@ -71,7 +71,6 @@ void Config::dump (std::string pfx, std::ostream &out)
     out << pfx << "gfx_inverted       " << gfx_inverted << std::endl;
     out << pfx << "gfx_minimap        " << gfx_minimap << std::endl;
     out << pfx << "gfx_show_hidden    " << gfx_show_hidden << std::endl;
-    out << pfx << "gfx_lights         " << gfx_lights << std::endl;
     out << pfx << "gfx_zoom           " << gfx_zoom << std::endl;
     out << pfx << "ascii_mode         " << ascii_mode << std::endl;
     out << pfx << "sound_volume       " << sound_volume << std::endl;

@@ -160,8 +160,10 @@ void Light::calculate (int last)
 
             level->set_is_lit_no_check(x, y);
 
-            if (level->is_light_blocker_no_check(x, y)) {
-                break;
+            if (!game->config.gfx_show_hidden) {
+                if (level->is_light_blocker_no_check(x, y)) {
+                    break;
+                }
             }
         }
 
@@ -188,8 +190,10 @@ void Light::calculate (int last)
                 level->set_visited_no_check(x, y);
             }
 
-            if (!level->is_light_blocker_no_check(x, y)) {
-                break;
+            if (!game->config.gfx_show_hidden) {
+                if (level->is_light_blocker_no_check(x, y)) {
+                    break;
+                }
             }
 
             set_no_check(is_nearest_wall, x, y, is_nearest_wall_val);

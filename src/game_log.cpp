@@ -71,7 +71,6 @@ void Config::log (std::string pfx)
     LOG("%s gfx_inverted        %u", pfx.c_str(), gfx_inverted);
     LOG("%s gfx_minimap         %u", pfx.c_str(), gfx_minimap);
     LOG("%s gfx_show_hidden     %u", pfx.c_str(), gfx_show_hidden);
-    LOG("%s gfx_lights          %u", pfx.c_str(), gfx_lights);
     LOG("%s gfx_zoom            %u", pfx.c_str(), gfx_zoom);
     LOG("%s ascii_mode          %u", pfx.c_str(), ascii_mode);
     LOG("%s sound_volume        %u", pfx.c_str(), sound_volume);

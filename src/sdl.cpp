@@ -996,7 +996,7 @@ void config_gfx_show_hidden_toggle (void)
 //
 uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
 {_
-    char *s = tokens->args[3];
+    char *s = tokens->args[4];
 
     if (!s || (*s == '\0')) {
         game->config.gfx_show_hidden = true;
@@ -1008,43 +1008,6 @@ uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
             CON("gfx show hidden enabled");
         } else {
             CON("gfx show hidden disabled");
-        }
-    }
-
-    return (true);
-}
-
-//
-// User has entered a command, run it
-//
-void config_gfx_lights_toggle (void)
-{_
-    if (!game->config.gfx_lights) {
-        game->config.gfx_lights = true;
-        CON("gfx lights enabled");
-    } else {
-        game->config.gfx_lights = false;
-        CON("gfx lights disabled");
-    }
-}
-
-//
-// User has entered a command, run it
-//
-uint8_t config_gfx_lights_set (tokens_t *tokens, void *context)
-{_
-    char *s = tokens->args[3];
-
-    if (!s || (*s == '\0')) {
-        game->config.gfx_lights = true;
-        CON("gfx lights enabled (default)");
-    } else {
-        int val = strtol(s, 0, 10) ? 1 : 0;
-        game->config.gfx_lights = val;
-        if (game->config.gfx_lights) {
-            CON("gfx lights enabled");
-        } else {
-            CON("gfx lights disabled");
         }
     }
 

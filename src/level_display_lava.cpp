@@ -103,10 +103,8 @@ void Level::display_lava (int fbo,
             if (likely(!is_lava(x, y))) {
                 continue;
             }
-            if (likely(!game->config.gfx_show_hidden)) {
-                if (!is_visited(x, y)) {
-                    continue;
-                }
+            if (!is_visited(x, y)) {
+                continue;
             }
             FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                 auto tpp = t->tp();

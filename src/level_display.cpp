@@ -43,31 +43,7 @@ void Level::display_map_things (int fbo,
 
     blit_fbo_bind(fbo);
     blit_init();
-    if (game->config.gfx_show_hidden) {
-        for (auto z = 0; z < MAP_DEPTH; z++) {
-            for (auto y = miny; y < maxy; y++) {
-                for (auto x = minx; x < maxx; x++) {
-                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (g_render_black_and_white) {
-                            if (t->is_monst() ||
-                                t->owner_get() ||
-                                t->get_light_count()) {
-                                continue;
-                            }
-                        }
-                        if (z <= MAP_DEPTH_FLOOR2) {
-                            t->blit();
-                        }
-
-                        auto tpp = t->tp();
-                        if (unlikely(tpp->gfx_animated())) {
-                            t->animate();
-                        }
-                    } FOR_ALL_THINGS_END()
-                }
-            }
-        }
-    } else if (g_render_black_and_white) {
+    if (g_render_black_and_white) {
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
@@ -184,89 +160,61 @@ void Level::display_map (void)
 
     pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
-#ifdef ENABLE_MAP_DEBUG
-    int debug = true;
-#else
-    int debug = false;
-#endif
-    if (debug) {
-        game->config.gfx_lights = 0;
-        game->config.gfx_show_hidden = 1;
-        update_hazard_tile_map();
+    {
+        //
+        // Generate an FBO with all light sources merged together
+        //
+        blit_fbo_bind(FBO_LIGHT);
+        glClear(GL_COLOR_BUFFER_BIT);
+        lights_render(light_minx, light_miny, light_maxx, light_maxy,
+                      FBO_LIGHT);
     }
-#ifdef ENABLE_DEBUG_LIGHT
-    game->config.gfx_lights = 1;
-    game->config.gfx_show_hidden = 1;
-#endif
 
-    if (unlikely(game->config.gfx_show_hidden)) {
+    {
+        //
+        // Generate the non visited map with the light inverted on it
+        // to hide visible areas
+        //
+        blit_fbo_bind(FBO_MAP_HIDDEN);
+        glClear(GL_COLOR_BUFFER_BIT);
+        g_render_black_and_white = true;
+        display_map_things(FBO_MAP_HIDDEN, minx, miny, maxx, maxy);
+        g_render_black_and_white = false;
+        glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
+        blit_fbo(FBO_LIGHT);
+    }
+
+    {
+        //
+        // Generate the visited map
+        //
+        blit_fbo_bind(FBO_MAP_VISIBLE);
+        glClear(GL_COLOR_BUFFER_BIT);
+        display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+        display_internal_particles();
+        glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
+        blit_fbo(FBO_LIGHT);
+    }
+
+    {
+        //
+        // This is the final map output
+        //
+        // Generate the merged map with the black and white portions
+        // under the visible map
+        //
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        display_map_things(FBO_MAP, minx, miny, maxx, maxy);
-#ifdef ENABLE_DEBUG_LIGHT
-        lights_render(light_minx, light_miny, light_maxx, light_maxy, FBO_MAP);
-#endif
-    } else if (game->config.gfx_lights) {
-        {
-            //
-            // Generate an FBO with all light sources merged together
-            //
-            blit_fbo_bind(FBO_LIGHT);
-            glClear(GL_COLOR_BUFFER_BIT);
-            lights_render(light_minx, light_miny, light_maxx, light_maxy,
-                          FBO_LIGHT);
-        }
-
-        {
-            //
-            // Generate the non visited map with the light inverted on it
-            // to hide visible areas
-            //
-            blit_fbo_bind(FBO_MAP_HIDDEN);
-            glClear(GL_COLOR_BUFFER_BIT);
-            g_render_black_and_white = true;
-            display_map_things(FBO_MAP_HIDDEN, minx, miny, maxx, maxy);
-            g_render_black_and_white = false;
-            glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
-            blit_fbo(FBO_LIGHT);
-        }
-
-        {
-            //
-            // Generate the visited map
-            //
-            blit_fbo_bind(FBO_MAP_VISIBLE);
-            glClear(GL_COLOR_BUFFER_BIT);
-            display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-            display_internal_particles();
-            glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
-            blit_fbo(FBO_LIGHT);
-        }
-
-        {
-            //
-            // This is the final map output
-            //
-            // Generate the merged map with the black and white portions
-            // under the visible map
-            //
-            blit_fbo_bind(FBO_MAP);
-            glClear(GL_COLOR_BUFFER_BIT);
-            glcolor(WHITE);
-            glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-            glcolor(GRAY50);
-            blit_fbo(FBO_MAP_HIDDEN);
-            glBlendFunc(GL_ONE, GL_ONE);
-            glcolor(WHITE);
-            blit_fbo(FBO_MAP_VISIBLE);
-        }
-
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    } else {
-        blit_fbo_bind(FBO_MAP);
-        glClear(GL_COLOR_BUFFER_BIT);
-        display_map_things(FBO_MAP, minx, miny, maxx, maxy);
+        glcolor(WHITE);
+        glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+        glcolor(GRAY50);
+        blit_fbo(FBO_MAP_HIDDEN);
+        glBlendFunc(GL_ONE, GL_ONE);
+        glcolor(WHITE);
+        blit_fbo(FBO_MAP_VISIBLE);
     }
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     //
     // If the cursor is too far away, warp it

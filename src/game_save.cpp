@@ -324,7 +324,6 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* bool               fps_counter                  */ out << bits(my.t.fps_counter                  );
     /* bool               fullscreen                   */ out << bits(my.t.fullscreen                   );
     /* bool               gfx_inverted                 */ out << bits(my.t.gfx_inverted                 );
-    /* bool               gfx_lights                   */ out << bits(my.t.gfx_lights                   );
     /* bool               gfx_minimap                  */ out << bits(my.t.gfx_minimap                  );
     /* bool               gfx_show_hidden              */ out << bits(my.t.gfx_show_hidden              );
     /* bool               gfx_vsync_enable             */ out << bits(my.t.gfx_vsync_enable             );
