@@ -260,30 +260,24 @@ void player_tick (void)
             for (auto i = game->cursor_move_path.rbegin();
                  i != game->cursor_move_path.rend(); i++) {
                 auto p = *i;
-                if (player->try_to_jump(make_point(p.x, p.y))) {
-                    game->tick_begin();
-                    break;
-                }
+                player->try_to_jump(make_point(p.x, p.y));
             }
             game->cursor_move_path.clear();
         } else if (level->cursor->mid_at == player->mid_at) {
             auto delta = player->dir_to_direction();
             point p = make_point(player->mid_at.x + delta.x,
                                  player->mid_at.y + delta.y);
-            if (player->try_to_jump(p)) {
-                game->tick_begin();
-            }
+            player->try_to_jump(p);
         } else if (level->cursor) {
             point p = make_point(level->cursor->mid_at.x,
                                  level->cursor->mid_at.y);
-            if (player->try_to_jump(p)) {
-                game->tick_begin();
-            }
+            player->try_to_jump(p);
         }
         last_key_pressed_when = time_get_time_ms_cached();
         player->monstp->move_path.clear();
         game->cursor_move_path.clear();
         level->cursor_path_clear();
+        game->tick_begin();
     } else if (up || down || left || right || attack || wait) {
         //
         // If we move manually, clear the path as it visually gets

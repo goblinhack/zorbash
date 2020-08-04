@@ -76,7 +76,7 @@ void Thing::cursor_path_pop_first_move (void)
         return;
     }
 
-    MINICON("You cannot move there");
+    game->tick_begin();
 }
 
 void Thing::cursor_path_stop (void)
