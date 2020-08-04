@@ -32,6 +32,8 @@
 #undef  ENABLE_UI_DEBUG            // User interface logs
 #undef  ENABLE_UI_DEBUG_EXTRA      // User interface logs with inheritance
 
+#define ASCII_HEIGHT_MAX           ASCII_WIDTH_MAX
+#define ASCII_WIDTH_MAX            256
 #define GRID_HEIGHT                5
 #define GRID_WIDTH                 5    // Rooms across and down
 #define LEVELS_ACROSS              MAP_WIDTH // World size
