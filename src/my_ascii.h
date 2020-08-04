@@ -17,7 +17,7 @@
 //
 // Dimentions of the fixed text on screen
 //
-#define ASCII_WIDTH_MAX  80
+#define ASCII_WIDTH_MAX  256
 #define ASCII_HEIGHT_MAX ASCII_WIDTH_MAX
 
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_KEYSYM * key);
