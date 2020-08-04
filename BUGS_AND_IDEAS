@@ -1,7 +1,6 @@
 bugs
 ----
 - show hidden should update immediately; refresh lighs
-- gfx look stretched on linux
 - mummy gets 2 attacks
 - slime combine crash
 - blood flash should be time limited
