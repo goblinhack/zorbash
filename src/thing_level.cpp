@@ -188,6 +188,7 @@ void Thing::level_push (void)
     if (is_movement_blocking_hard() && !is_open) { level->set_is_movement_blocking_hard(mx, my); }
     if (is_movement_blocking_soft() && !is_open) { level->set_is_movement_blocking_soft(mx, my); }
     if (is_potion())                             { level->set_is_potion(mx, my); }
+    if (is_ripple())                             { level->set_is_ripple(mx, my); }
     if (is_rock())                               { level->set_is_rock(mx, my); }
     if (is_secret_door())                        { level->set_is_secret_door(mx, my); }
     if (is_smoke())                              { level->set_is_smoke(mx, my); }
@@ -235,6 +236,7 @@ void Thing::level_pop (void)
     if (is_movement_blocking_hard() && !is_open) { level->unset_is_movement_blocking_hard(mx, my); }
     if (is_movement_blocking_soft() && !is_open) { level->unset_is_movement_blocking_soft(mx, my); }
     if (is_potion())                             { level->unset_is_potion(mx, my); }
+    if (is_ripple())                             { level->unset_is_ripple(mx, my); }
     if (is_rock())                               { level->unset_is_rock(mx, my); }
     if (is_secret_door())                        { level->unset_is_secret_door(mx, my); }
     if (is_smoke())                              { level->unset_is_smoke(mx, my); }

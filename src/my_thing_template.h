@@ -135,6 +135,7 @@ private:
     int _is_acid_dweller {};
     int _is_acid_hater {};
     int _is_active {}; // e.g. a monst or player or something movable
+    int _is_attack_blood {};
     int _is_attack_eater {};
     int _is_attack_lunge {};
     int _is_attack_shove {};
@@ -144,13 +145,10 @@ private:
     int _is_bag {};
     int _is_bleeder {};
     int _is_blood {};
-    int _is_attack_blood {};
     int _is_chasm {};
     int _is_collect_as_keys {};
     int _is_collectable {};
-    int _is_item_collected_as_gold {};
     int _is_combustible {};
-    int _on_death_is_corpse {};
     int _is_corridor {};
     int _is_cursor {};
     int _is_cursor_can_hover_over {};
@@ -184,10 +182,12 @@ private:
     int _is_hunger_insatiable {};
     int _is_intelligent {};
     int _is_interesting {}; // e.g. something edible or a monst or lava
+    int _is_item {};
     int _is_item_class_a {};
     int _is_item_class_b {};
+    int _is_item_collected_as_gold {};
     int _is_item_eater {};
-    int _is_shown_on_monstbar {};
+    int _is_item_not_stackable {};
     int _is_jumper {};
     int _is_jumper_chance_d1000 {};
     int _is_jumper_distance {};
@@ -208,8 +208,6 @@ private:
     int _is_movement_blocking_soft {};
     int _is_msg {};
     int _is_no_tile {};
-    int _is_item_not_stackable {};
-    int _on_death_is_open {};
     int _is_player {};
     int _is_potion {};
     int _is_potion_eater {};
@@ -280,21 +278,19 @@ private:
     int _is_rrr62 {};
     int _is_rrr63 {};
     int _is_rrr64 {};
-    int _on_death_drop_all_items {};
-    int _is_steal_item_chance_d1000 {};
-    int _is_weapon_wielder {};
-    int _is_item {};
     int _is_rrr7 {};
     int _is_rrr8 {};
     int _is_rrr9 {};
     int _is_secret_door {};
     int _is_shovable {};
+    int _is_shown_on_monstbar {};
     int _is_slime {};
     int _is_slime_baby {};
     int _is_slime_baby_eater {};
     int _is_slime_eater {};
     int _is_slime_parent {};
     int _is_smoke {};
+    int _is_steal_item_chance_d1000 {};
     int _is_the_grid {};
     int _is_throwable {};
     int _is_torch {};
@@ -308,7 +304,11 @@ private:
     int _is_water_dweller {};
     int _is_water_hater {};
     int _is_weapon {};
+    int _is_weapon_wielder {};
     int _normal_placement_rules {};
+    int _on_death_drop_all_items {};
+    int _on_death_is_corpse {};
+    int _on_death_is_open {};
     int _stats01 {};
     int _stats02 {};
     int _stats03 {};
@@ -339,6 +339,7 @@ private:
     int _weapon_damage {};
     int _weapon_use_delay_hundredths {};
     int _weapon_use_distance {};
+    std::string _gfx_anim_attack;
     std::string _light_color;
     std::string _name;
     std::string _on_birth_do;
@@ -358,7 +359,6 @@ private:
     std::string _text_name;
     std::string _text_title;
     std::string _weapon_carry_anim;
-    std::string _gfx_anim_attack;
 public:
     Tp (void) {
         newptr(this, "Tp");
