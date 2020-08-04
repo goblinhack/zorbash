@@ -263,6 +263,8 @@ public:
     void scroll_map_set_target(void);
     void scroll_map_to_player(void);
     void tick(void);
+    void update(void);
+    void update_all_things(void);
     void update_all_ticks(void);
     void update_hazard_tile_map(void);
     void update_map(void);
