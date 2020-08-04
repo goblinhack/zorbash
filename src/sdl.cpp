@@ -987,7 +987,7 @@ void config_gfx_show_hidden_toggle (void)
     }
 
     if (game->level) {
-        game->level->minimap_valid = false;
+        game->level->update();
     }
 }
 
@@ -1009,6 +1009,10 @@ uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
         } else {
             CON("gfx show hidden disabled");
         }
+    }
+
+    if (game->level) {
+        game->level->update();
     }
 
     return (true);

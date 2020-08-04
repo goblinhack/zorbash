@@ -1154,6 +1154,7 @@ public:
     void update_interpolated_position(void);
     void update_light(void);
     void update_pos(fpoint, bool immediately);
+    void update_all(void);
     void use(void);
     void used(Thingp w, Thingp target);
     void visible();
