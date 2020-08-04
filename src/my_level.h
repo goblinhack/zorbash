@@ -43,12 +43,13 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_a {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_b {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_a {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_b {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
@@ -461,6 +462,40 @@ public:
         }
         map_changed = true;
         decr(_is_secret_door, x, y, (uint8_t)1);
+    }
+
+    uint8_t is_ripple (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_ripple, p.x, p.y));
+    }
+
+    uint8_t is_ripple (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_ripple, x, y));
+    }
+
+    void set_is_ripple (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        map_changed = true;
+        incr(_is_ripple, x, y, (uint8_t)1);
+    }
+
+    void unset_is_ripple (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        map_changed = true;
+        decr(_is_ripple, x, y, (uint8_t)1);
     }
 
     uint8_t is_torch (const point &p)
