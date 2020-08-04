@@ -26,6 +26,9 @@ bool Thing::try_to_jump (point to)
 
     if (level->is_oob(x, y)) {_
         log("no, oob");
+        if (is_player()) {
+            MINICON("You can't jump into the void");
+        }
         return false;
     }
 
@@ -34,6 +37,9 @@ bool Thing::try_to_jump (point to)
     //
     if (!level->is_lit(x, y) && !level->is_visited(x, y)) {_
         log("no, is not lit or visited");
+        if (is_player()) {
+            MINICON("You can't jump into the unknown");
+        }
         return false;
     }
 
@@ -63,12 +69,14 @@ bool Thing::try_to_jump (point to)
         // Not sure I want to. This allows for more fun.
         //
         // check_dest = true;
-        MINICON("You can't jump quite that far");
     }
 
     if (is_monst()) {
         if (distance(mid_at, fpoint(x, y)) < 2) {_
             log("no, too far");
+            if (is_player()) {
+                MINICON("You can't jump quite that far");
+            }
             return false;
         }
     }
@@ -79,12 +87,18 @@ bool Thing::try_to_jump (point to)
     if (level->is_movement_blocking_hard(x, y) ||
         level->is_movement_blocking_soft(x, y)) {_
         log("no, jump failed, into obstacle");
+        if (is_player()) {
+            MINICON("You can't jump quite into solid objects");
+        }
         return false;
     }
 
     if (check_dest) {
         if (!level->is_dungeon(x, y)) {_
             log("no, jump failed, not dungeon");
+            if (is_player()) {
+                MINICON("You can't jump outside the dungeon");
+            }
             return false;
         }
 
@@ -92,11 +106,17 @@ bool Thing::try_to_jump (point to)
             level->is_monst(x, y)    ||
             level->is_exit(x, y)) {_
             log("no, jump failed, onto monst");
+            if (is_player()) {
+                MINICON("You can't quite into that");
+            }
             return false;
         }
 
         if (will_avoid(point(x, y))) {_
             log("no, jump failed, avoid destination");
+            if (is_player()) {
+                MINICON("You can't quite onto that");
+            }
             return false;
         }
     }
@@ -216,6 +236,7 @@ bool Thing::try_to_jump (void)
             return true;
         }
     }
+
     return (false);
 }
 

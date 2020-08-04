@@ -1283,7 +1283,7 @@ void Game::config_keyboard_select (void)
         wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_jump));
+        SDL_GetScancodeName((SDL_Scancode)game->config.key_jump));
         wid_set_on_mouse_up(w, game_config_key_jump);
     }
     ///////////////////////////////////////////////////////////////////////
