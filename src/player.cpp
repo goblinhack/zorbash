@@ -149,7 +149,7 @@ void player_tick (void)
         }
     }
 
-    auto delay = PLAYER_MOVE_SPEED_MS;
+    auto delay = PLAYER_KEY_REPEAT_MS;
 
     uint8_t attack = 0;
     uint8_t wait   = 0;
