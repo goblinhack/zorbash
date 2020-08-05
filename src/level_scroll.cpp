@@ -18,15 +18,20 @@ void Level::scroll_map_do (void)
         return;
     }
 
-    const float bigstep = 6.0;
-    const float medstep = 2.0 / TILE_WIDTH;
-    const float smallstep = 1.0 / TILE_WIDTH;
+    const float vbigstep = 2;
+    const float bigstep = 4;
+    const float medstep = 32;
+    const float smallstep = 64;
 
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
 
-    if ((fabs(dx) < 0.1) && (fabs(dy) < 0.1)) {
-        return;
+    if (fabs(dx) < 0.1) {
+        dx = 0;
+    }
+
+    if (fabs(dy) < 0.1) {
+        dy = 0;
     }
 
 #if 0
@@ -43,32 +48,38 @@ if (player) {
     // If following the player scroll in smaller chunks
     //
     if (map_follow_player) {
-        if (fabs(dx) > 5) {
-            map_at.x -= dx / bigstep;
-        } else if (fabs(dx) > 3) {
-            if (map_at.x > map_wanted_at.x) {
-                map_at.x -= medstep;
-            } else if (map_at.x < map_wanted_at.x) {
-                map_at.x += medstep;
-            }
-        } else if (map_at.x > map_wanted_at.x) {
-            map_at.x -= smallstep;
-        } else if (map_at.x < map_wanted_at.x) {
-            map_at.x += smallstep;
+        float step;
+
+        if (fabs(dx) > 15) {
+            step = vbigstep;
+        } else if (fabs(dx) > 10) {
+            step = bigstep;
+        } else if (fabs(dx) > 5) {
+            step = medstep;
+        } else if (fabs(dx) > 0) {
+            step = smallstep;
+        } else {
+            step = 0;
         }
 
-        if (fabs(dy) > 5) {
-            map_at.y -= dy / bigstep;
-        } else if (fabs(dy) > 3) {
-            if (map_at.y > map_wanted_at.y) {
-                map_at.y -= medstep;
-            } else if (map_at.y < map_wanted_at.y) {
-                map_at.y += medstep;
-            }
-        } else if (map_at.y > map_wanted_at.y) {
-            map_at.y -= smallstep;
-        } else if (map_at.y < map_wanted_at.y) {
-            map_at.y += smallstep;
+        if (step > 0) {
+            map_at.x += (map_wanted_at.x - map_at.x) / step;
+        }
+
+        if (fabs(dy) > 15) {
+            step = vbigstep;
+        } else if (fabs(dy) > 10) {
+            step = bigstep;
+        } else if (fabs(dy) > 5) {
+            step = medstep;
+        } else if (fabs(dy) > 0) {
+            step = smallstep;
+        } else {
+            step = 0;
+        }
+
+        if (step > 0) {
+            map_at.y += (map_wanted_at.y - map_at.y) / step;
         }
     } else {
         //
