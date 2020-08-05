@@ -12,16 +12,16 @@
 #include "my_wid.h"
 #include "my_game_status.h"
 
-void Level::scroll_map_do (void)
+void Level::scroll_map_do (bool fast)
 {_
     if (wid_find_under_mouse_when_scrolling()) {
         return;
     }
 
-    const float vbigstep = 2;
+    const float vbigstep = 1;
     const float bigstep = 4;
-    const float medstep = 32;
-    const float smallstep = 64;
+    const float medstep = 16;
+    const float smallstep = 32;
 
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
@@ -48,46 +48,56 @@ if (player) {
     // If following the player scroll in smaller chunks
     //
     if (map_follow_player) {
-        float step;
-
-        if (fabs(dx) > 15) {
-            step = vbigstep;
-        } else if (fabs(dx) > 10) {
-            step = bigstep;
-        } else if (fabs(dx) > 5) {
-            step = medstep;
-        } else if (fabs(dx) > 0) {
-            step = smallstep;
+        if (fast) {
+            map_at.x -= dx;
+            map_at.y -= dy;
         } else {
-            step = 0;
-        }
+            float step;
 
-        if (step > 0) {
-            map_at.x += (map_wanted_at.x - map_at.x) / step;
-        }
+            if (fabs(dx) > 15) {
+                step = vbigstep;
+            } else if (fabs(dx) > 10) {
+                step = bigstep;
+            } else if (fabs(dx) > 5) {
+                step = medstep;
+            } else if (fabs(dx) > 0) {
+                step = smallstep;
+            } else {
+                step = 0;
+            }
 
-        if (fabs(dy) > 15) {
-            step = vbigstep;
-        } else if (fabs(dy) > 10) {
-            step = bigstep;
-        } else if (fabs(dy) > 5) {
-            step = medstep;
-        } else if (fabs(dy) > 0) {
-            step = smallstep;
-        } else {
-            step = 0;
-        }
+            if (step > 0) {
+                map_at.x += (map_wanted_at.x - map_at.x) / step;
+            }
 
-        if (step > 0) {
-            map_at.y += (map_wanted_at.y - map_at.y) / step;
+            if (fabs(dy) > 15) {
+                step = vbigstep;
+            } else if (fabs(dy) > 10) {
+                step = bigstep;
+            } else if (fabs(dy) > 5) {
+                step = medstep;
+            } else if (fabs(dy) > 0) {
+                step = smallstep;
+            } else {
+                step = 0;
+            }
+
+            if (step > 0) {
+                map_at.y += (map_wanted_at.y - map_at.y) / step;
+            }
         }
     } else {
         //
         // Else following the cursor or mouse. Bigger chunks are less sick 
         // inducing.
         //
-        map_at.x -= dx / bigstep;
-        map_at.y -= dy / bigstep;
+        if (fast) {
+            map_at.x -= dx;
+            map_at.y -= dy;
+        } else {
+            map_at.x -= dx / bigstep;
+            map_at.y -= dy / bigstep;
+        }
     }
 
     //
@@ -112,7 +122,7 @@ void Level::scroll_map (void)
         return;
     }
 
-    scroll_map_do();
+    scroll_map_do(false);
 }
 
 void Level::scroll_map_to_player (void)
@@ -128,17 +138,15 @@ void Level::scroll_map_to_player (void)
 
     map_wanted_at = player->mid_at - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);
 
-    for (auto x = 0; x < 100; x++) {
-        scroll_map_set_target();
-        scroll_map_do();
-    }
+    scroll_map_set_target();
+    scroll_map_do(true);
 }
 
 //
 // Make the map scroll to the cursor (or the player)
 //
 void Level::scroll_map_set_target (void)
-{
+{_
     fpoint follow;
     float sensitivity;
     float x_sensitivity;

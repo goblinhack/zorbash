@@ -259,7 +259,7 @@ public:
     void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void scroll_map(void);
-    void scroll_map_do(void);
+    void scroll_map_do(bool fast);
     void scroll_map_set_target(void);
     void scroll_map_to_player(void);
     void tick(void);

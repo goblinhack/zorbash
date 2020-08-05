@@ -160,7 +160,7 @@ void Level::display_map (void)
 
     pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
-    {
+    {_
         //
         // Generate an FBO with all light sources merged together
         //
@@ -170,7 +170,7 @@ void Level::display_map (void)
                       FBO_LIGHT);
     }
 
-    {
+    {_
         //
         // Generate the non visited map with the light inverted on it
         // to hide visible areas
@@ -184,7 +184,7 @@ void Level::display_map (void)
         blit_fbo(FBO_LIGHT);
     }
 
-    {
+    {_
         //
         // Generate the visited map
         //
@@ -196,7 +196,7 @@ void Level::display_map (void)
         blit_fbo(FBO_LIGHT);
     }
 
-    {
+    {_
         //
         // This is the final map output
         //
@@ -228,7 +228,7 @@ void Level::display_map (void)
 }
 
 void Level::display_anim (void)
-{
+{_
     static uint32_t anim_speed;
     if (!anim_speed) {
         anim_speed = time_get_time_ms_cached();
