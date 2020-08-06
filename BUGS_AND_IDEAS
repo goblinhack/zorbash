@@ -1,7 +1,8 @@
 bugs
 ----
+- hide cursor when moving by keyboard
+- chasm tearing
 - large monsts shown under wall
-- light edges look odd
 - mummy gets 2 attacks
 - slime combine crash
 
