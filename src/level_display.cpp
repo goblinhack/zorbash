@@ -253,7 +253,7 @@ void Level::display_anim (void)
     //
     // Slow timer to scroll the deep_water.
     //
-    if (deep_water_step1++ >= 10) {
+    if (deep_water_step1++ >= 40) {
         deep_water_step1 = 0;
         if (deep_water_step2++ >= (TILE_HEIGHT * 2) - 1) {
             deep_water_step2 = 0;
