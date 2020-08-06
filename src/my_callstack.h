@@ -34,35 +34,39 @@ struct callframe {
 // this was unreliable for tracing classes as they are destroyed after
 // the callstack vector
 //
-#define MAXCALLFRAME 1024
+#define MAXCALLFRAME 255
 #ifdef __MAIN__
 struct callframe callframes[MAXCALLFRAME];
-unsigned short callframes_depth;
+unsigned char callframes_depth;
 #else
 extern struct callframe callframes[MAXCALLFRAME];
-extern unsigned short callframes_depth;
+extern unsigned char callframes_depth;
 #endif
 extern void callstack_dump(void);
 
 struct tracer_t {
-    tracer_t (const char *file,
-              const char *func,
-              const unsigned short line)
+    inline tracer_t (const char *file,
+                     const char *func,
+                     const unsigned short line)
     {
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-        if (callframes_depth < MAXCALLFRAME) {
-            callframe *c = &callframes[callframes_depth++];
-            c->file = file;
-            c->func = func;
-            c->line = line;
+        if (unlikely(g_opt_debug)) {
+            if (unlikely(callframes_depth < MAXCALLFRAME)) {
+                callframe *c = &callframes[callframes_depth++];
+                c->file = file;
+                c->func = func;
+                c->line = line;
+            }
         }
     }
 
-    ~tracer_t()
+    inline ~tracer_t()
     {
-        if (callframes_depth > 0) {
-            callframes_depth--;
+        if (unlikely(g_opt_debug)) {
+            if (callframes_depth > 0) {
+                callframes_depth--;
+            }
         }
     }
 };

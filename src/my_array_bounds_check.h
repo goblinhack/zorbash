@@ -284,49 +284,49 @@ TYPE* getptr(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void set_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
+void set_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){
     container[X] = v;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void incr_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
+void incr_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){
     container[X] += v;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void decr_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
+void decr_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){
     container[X] -= v;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void incr_no_check(std::array<TYPE,XDIM>& container, std::size_t X){_
+void incr_no_check(std::array<TYPE,XDIM>& container, std::size_t X){
     container[X] ++;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void decr_no_check(std::array<TYPE,XDIM>& container, std::size_t X){_
+void decr_no_check(std::array<TYPE,XDIM>& container, std::size_t X){
     container[X] --;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE get_no_check(std::array<TYPE,XDIM> const &container, std::size_t X){_
+TYPE get_no_check(std::array<TYPE,XDIM> const &container, std::size_t X){
     return (container[X]);
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE& getref_no_check(std::array<TYPE,XDIM> &container, std::size_t X){_
+TYPE& getref_no_check(std::array<TYPE,XDIM> &container, std::size_t X){
     return (container[X]);
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE* getptr_no_check(std::array<TYPE,XDIM> &container, std::size_t X){_
+TYPE* getptr_no_check(std::array<TYPE,XDIM> &container, std::size_t X){
     return (&container[X]);
 }
 
@@ -336,35 +336,35 @@ TYPE* getptr_no_check(std::array<TYPE,XDIM> &container, std::size_t X){_
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 void set_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-                std::size_t X, std::size_t Y, TYPE v){_
+                std::size_t X, std::size_t Y, TYPE v){
     container[X][Y] = v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 void incr_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-                 std::size_t X, std::size_t Y, TYPE v){_
+                 std::size_t X, std::size_t Y, TYPE v){
     container[X][Y] += v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 void decr_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-                 std::size_t X, std::size_t Y, TYPE v){_
+                 std::size_t X, std::size_t Y, TYPE v){
     container[X][Y] -= v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 TYPE& getref_no_check(std::array<std::array<TYPE,YDIM>,XDIM> &container,
-                    std::size_t X, std::size_t Y){_
+                    std::size_t X, std::size_t Y){
     return (container[X][Y]);
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 TYPE get_no_check(std::array<std::array<TYPE,YDIM>,XDIM> const &container,
-                std::size_t X, std::size_t Y){_
+                std::size_t X, std::size_t Y){
     return (container[X][Y]);
 }
 
@@ -374,21 +374,21 @@ TYPE get_no_check(std::array<std::array<TYPE,YDIM>,XDIM> const &container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 void set_no_check(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM>& container,
-                std::size_t X, std::size_t Y, std::size_t Z, TYPE v){_
+                std::size_t X, std::size_t Y, std::size_t Z, TYPE v){
     container[X][Y][Z] = v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 TYPE get_no_check(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> const &container,
-                std::size_t X, std::size_t Y, std::size_t Z){_
+                std::size_t X, std::size_t Y, std::size_t Z){
     return (container[X][Y][Z]);
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 TYPE& getref_no_check(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &container,
-                    std::size_t X, std::size_t Y, std::size_t Z){_
+                    std::size_t X, std::size_t Y, std::size_t Z){
     return (container[X][Y][Z]);
 }
 
@@ -398,20 +398,20 @@ TYPE& getref_no_check(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &c
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 void set_no_check(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM>& container,
-                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){_
+                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){
     container[X][Y][Z][I] = v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 TYPE get_no_check(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> const &container,
-                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
     return (container[X][Y][Z][I]);
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 TYPE& getref_no_check(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> &container,
-                    std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+                    std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
     return (container[X][Y][Z][I]);
 }
