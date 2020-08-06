@@ -191,7 +191,7 @@ void Light::calculate (int last)
             }
 
             if (!game->config.gfx_show_hidden) {
-                if (level->is_light_blocker_no_check(x, y)) {
+                if (!level->is_light_blocker_no_check(x, y)) {
                     break;
                 }
             }
