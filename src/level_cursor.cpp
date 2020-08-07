@@ -18,8 +18,8 @@ void Level::cursor_check_if_scroll_needed (void)
             if (player) {
                 auto d = distance(player->mid_at,
                                   cursor->mid_at);
-                if (d > std::min(TILES_ACROSS/4, TILES_DOWN/4)) {
-                    cursor_needs_update = true;
+                if (d > std::min(TILES_ACROSS/2, TILES_DOWN/2)) {
+                    cursor->move(player->mid_at);
                 }
             }
         }
@@ -112,11 +112,7 @@ void Level::cursor_move (void)
             return;
         }
         map_wanted_at += fpoint(wheel_x, -wheel_y);
-
-        if (player->is_dead) {
-            map_follow_player = false;
-        }
-
+        map_follow_player = false;
     }
 
     if (game->paused()) {
@@ -133,7 +129,6 @@ void Level::cursor_move (void)
             mouse_old = mouse;
             cursor_needs_update = true;
             cursor_found = false;
-            map_follow_player = false;
         }
     } else {
         mouse = mouse_tick;
