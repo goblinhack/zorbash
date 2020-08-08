@@ -1075,6 +1075,7 @@ public:
     void blit_upside_down();
     void blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles);
     void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
+    void blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);
     void botcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void botcon_(const char *fmt, va_list args) const; // compile error without
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);

@@ -1325,12 +1325,6 @@ def init_32x32_surface_effects():
             "deep_water1.9", "deep_water1.10", "deep_water1.11", "deep_water1.12", "deep_water1.13", "deep_water1.14", "deep_water1.15", "deep_water1.16",
             "lava1.1", "lava1.2", "lava1.3", "lava1.4", "lava1.5", "lava1.6", "lava1.7", "lava1.8",
             "lava1.9", "lava1.10", "lava1.11", "lava1.12", "lava1.13", "lava1.14", "lava1.15", "lava1.16",
-            "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5", "chasm1.6", "chasm1.7", "chasm1.8",
-            "chasm1.9", "chasm1.10", "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15", "chasm1.16",
-            "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "",
     ]
 
     zx.tile_load_arr_sprites(
@@ -1388,8 +1382,17 @@ def init_32x32_lava():
         name="32x32_lava", width=32, height=32, arr=tiles)
 
 
-def init_32x32_chasm():
-    zx.tex_load(file="data/gfx/chasm.tga", name="chasm")
+def init_chasm():
+    tiles = [
+        "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+        "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+        "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+        "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
+    ]
+
+    zx.tile_load_arr_sprites(
+        file="data/gfx/chasm.tga",
+        name="chasm", width=16, height=512, arr=tiles)
 
 
 def init_weapons_tiles():
@@ -1445,7 +1448,7 @@ init_24x24()
 init_32x32()
 init_32x32_water()
 init_32x32_lava()
-init_32x32_chasm()
+init_chasm()
 init_32x32_deep_water()
 init_32x32_surface_effects()
 init_weapons_tiles()
