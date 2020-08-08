@@ -815,6 +815,10 @@ void Thing::blit_internal (point &blit_tl,
         blit_wall_cladding(blit_tl, blit_br, &tiles);
     }
 
+    if (is_floor()) {
+        blit_floor_chasm(blit_tl, blit_br, &tiles);
+    }
+
     if (wobble != 0.0) {
         blit_flush();
         glPopMatrix();

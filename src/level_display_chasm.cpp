@@ -115,3 +115,33 @@ void Level::display_chasm (int fbo,
     blit_fbo(FBO_MASK4);
     blit_fbo(FBO_MASK3);
 }
+
+void Thing::blit_floor_chasm (point &tl, point &br, const ThingTiles *tiles)
+{_
+    float dh = game->config.one_pixel_height * 1;
+    float th = game->config.tile_pix_height;
+
+    int x = (int) mid_at.x;
+    int y = (int) mid_at.y;
+
+    if (unlikely(x <= 0) ||
+        unlikely(y <= 0) ||
+        unlikely(x >= MAP_WIDTH - 1) ||
+        unlikely(y >= MAP_HEIGHT - 1)) {
+        return;
+    }
+
+    if (tiles->bot1_tile && level->is_chasm(x, y + 1)) {
+        auto tilen = tiles->bot1_tile;
+        auto tile = tile_index_to_tile(tilen);
+        auto h = tex_get_width(tile->tex) / TILE_HEIGHT;
+
+        point tl2 = tl;
+        point br2 = br;
+        tl2.y += th;
+        br2.y += th * h;
+        tl2.y += dh;
+        br2.y += dh * h;
+        tile_blit(tilen, tl2, br2);
+    }
+}
