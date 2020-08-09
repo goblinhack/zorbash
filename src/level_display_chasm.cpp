@@ -118,7 +118,6 @@ void Level::display_chasm (int fbo,
 
 void Thing::blit_floor_chasm (point &tl, point &br, const ThingTiles *tiles)
 {_
-    float dh = game->config.one_pixel_height * 1;
     float th = game->config.tile_pix_height;
 
     int x = (int) mid_at.x;
@@ -131,17 +130,34 @@ void Thing::blit_floor_chasm (point &tl, point &br, const ThingTiles *tiles)
         return;
     }
 
-    if (tiles->bot1_tile && level->is_chasm(x, y + 1)) {
-        auto tilen = tiles->bot1_tile;
-        auto tile = tile_index_to_tile(tilen);
-        auto h = tex_get_width(tile->tex) / TILE_HEIGHT;
+    auto tilen = tiles->bot3_tile;
+    auto tile = tile_index_to_tile(tilen);
+    auto maxdepth = tex_get_height(tile->tex) / TILE_HEIGHT;
+    auto depth = 0U;
+    while ((y < MAP_HEIGHT - 1) && 
+           level->is_chasm(x, y + 1) && 
+           (depth < maxdepth)) {
+        depth++;
+        y++;
+    }
 
+    auto dh = 5;
+    float fdh = ((1.0 / maxdepth) / (float) TILE_HEIGHT) * dh;
+
+    if (depth) {
         point tl2 = tl;
         point br2 = br;
         tl2.y += th;
-        br2.y += th * h;
-        tl2.y += dh;
-        br2.y += dh * h;
-        tile_blit(tilen, tl2, br2);
+        br2.y += th * depth;
+        tl2.y -= dh;
+        br2.y += dh;
+        tile_blit_section_colored(tilen,
+                          fpoint(0, 0),
+                          fpoint(1, ((1.0 / maxdepth) * depth) + fdh),
+                          tl2, br2,
+                          WHITE,
+                          WHITE,
+                          WHITE,
+                          WHITE);
     }
 }

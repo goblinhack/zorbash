@@ -56,6 +56,9 @@ class Tp:
     def set_bot2_tile(self, bot2_tile=None, **kw):
         zx.tp_set_bot2_tile(self, bot2_tile, **kw)
 
+    def set_bot3_tile(self, bot3_tile=None, **kw):
+        zx.tp_set_bot3_tile(self, bot3_tile, **kw)
+
     def set_top2_tile(self, top2_tile=None, **kw):
         zx.tp_set_top2_tile(self, top2_tile, **kw)
 

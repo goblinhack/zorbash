@@ -511,6 +511,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(blit_top_off)
     TP_SET_DECL(bot1_tile)
     TP_SET_DECL(bot2_tile)
+    TP_SET_DECL(bot3_tile)
     TP_SET_DECL(br1_tile)
     TP_SET_DECL(br2_tile)
     TP_SET_DECL(collision_attack)

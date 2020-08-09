@@ -815,7 +815,7 @@ void Thing::blit_internal (point &blit_tl,
         blit_wall_cladding(blit_tl, blit_br, &tiles);
     }
 
-    if (is_floor()) {
+    if (tiles.bot3_tile) {
         blit_floor_chasm(blit_tl, blit_br, &tiles);
     }
 

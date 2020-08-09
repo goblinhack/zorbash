@@ -123,6 +123,14 @@ void Thing::get_tiles ()
         out->bot2_tile = 0;
     }
 
+    tiles = &tpp->bot3_tiles;
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->bot3_tile = tile->global_index;
+    } else {
+        out->bot3_tile = 0;
+    }
+
     tiles = &tpp->tl2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
