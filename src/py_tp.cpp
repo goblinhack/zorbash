@@ -496,6 +496,8 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
             tiles = &tp->bot1_tiles;
         } else if (level == 2) {
             tiles = &tp->bot2_tiles;
+        } else if (level == 3) {
+            tiles = &tp->bot3_tiles;
         } else {
             DIE("bug");
         }
@@ -777,6 +779,10 @@ PyObject *tp_set_top2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *tp_set_bot2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 2));
+}
+PyObject *tp_set_bot3_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 3));
 }
 PyObject *tp_set_left2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_

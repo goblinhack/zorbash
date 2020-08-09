@@ -49,6 +49,7 @@ public:
     Tilemap bl2_tiles;
     Tilemap bot1_tiles;
     Tilemap bot2_tiles;
+    Tilemap bot3_tiles;
     Tilemap br1_tiles;
     Tilemap br2_tiles;
     Tilemap horiz_tiles;
@@ -406,6 +407,7 @@ public:
     const Tilemap *tp_bl2_tiles(void) const;
     const Tilemap *tp_bot1_tiles(void) const;
     const Tilemap *tp_bot2_tiles(void) const;
+    const Tilemap *tp_bot3_tiles(void) const;
     const Tilemap *tp_br1_tiles(void) const;
     const Tilemap *tp_br2_tiles(void) const;
     const Tilemap *tp_horiz_tiles(void) const;

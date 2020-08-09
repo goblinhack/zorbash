@@ -608,7 +608,11 @@ void blit (int tex, point tl, point tr, point bl, point br)
 }
 
 static inline
-void blit_colored (int tex, GLushort left, GLushort top, GLushort right, float bottom,
+void blit_colored (int tex, 
+                   GLushort left, 
+                   GLushort top, 
+                   GLushort right, 
+                   float bottom,
                    color color_bl, color color_br,
                    color color_tl, color color_tr)
 {

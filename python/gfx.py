@@ -1394,6 +1394,17 @@ def init_chasm():
         file="data/gfx/chasm.tga",
         name="chasm", width=16, height=512, arr=tiles)
 
+    tiles = [
+        "chasm2.1", "chasm2.2", "chasm2.3", "chasm2.4", "chasm2.5",
+        "chasm2.6", "chasm2.7", "chasm2.8", "chasm2.9", "chasm2.10",
+        "chasm2.11", "chasm2.12", "chasm2.13", "chasm2.14", "chasm2.15",
+        "chasm2.16", "chasm2.17", "chasm2.18", "chasm2.19",
+    ]
+
+    zx.tile_load_arr_sprites(
+        file="data/gfx/chasm2.tga",
+        name="chasm2", width=16, height=512, arr=tiles)
+
 
 def init_weapons_tiles():
     tiles = [

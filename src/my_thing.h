@@ -30,6 +30,7 @@ typedef struct {
     uint16_t tr1_tile;
     uint16_t bl2_tile;
     uint16_t bot2_tile;
+    uint16_t bot3_tile;
     uint16_t br2_tile;
     uint16_t left2_tile;
     uint16_t right2_tile;
