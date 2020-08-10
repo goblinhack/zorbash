@@ -1,7 +1,7 @@
 bugs
 ----
+- objects are dropped in odd location
 - key collect at start
-- large monsts shown under wall
 - mummy gets 2 attacks
 - slime combine crash
 

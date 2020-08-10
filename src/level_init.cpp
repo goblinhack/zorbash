@@ -331,7 +331,13 @@ void Level::place_walls (Dungeonp d, int variant, int block_width,
                     ERR("wall tile %s not found", tilename.c_str());
                     return;
                 }
+
                 t->tile_curr = tile->global_index;
+
+                //
+                // Need this so we can display chasms under walls
+                //
+                (void) thing_new("wall_floor1", fpoint(X, Y));
             }
         }
     }
@@ -411,6 +417,11 @@ void Level::place_rocks (Dungeonp d, int variant, int block_width,
                     return;
                 }
                 t->tile_curr = tile->global_index;
+
+                //
+                // Need this so we can display chasms under walls
+                //
+                (void) thing_new("wall_floor1", fpoint(X, Y));
             }
         }
     }
@@ -977,6 +988,11 @@ void Level::place_remaining_walls (Dungeonp d, const std::string &what)
             }
 
             (void) thing_new(what, fpoint(x, y));
+
+            //
+            // Need this so we can display chasms under walls
+            //
+            (void) thing_new("wall_floor1", fpoint(x, y));
         }
     }
 }
@@ -994,6 +1010,11 @@ void Level::place_remaining_rocks (Dungeonp d, const std::string &what)
             }
 
             (void) thing_new(what, fpoint(x, y));
+
+            //
+            // Need this so we can display chasms under walls
+            //
+            (void) thing_new("wall_floor1", fpoint(x, y));
         }
     }
 }
