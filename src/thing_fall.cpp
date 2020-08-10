@@ -10,11 +10,18 @@
 
 void Thing::fall (float fall_height, timestamp_t ms)
 {
+    if (is_falling) {
+        return;
+    }
+
     auto t = set_timestamp_fall_begin(time_get_time_ms_cached());
     set_timestamp_fall_end(t + ms);
 
     set_fall_height(fall_height);
+
+    level_pop();
     is_falling = true;
+    level_push();
 
     if (is_on_fire()) {
         if (is_player()) {
@@ -34,6 +41,7 @@ float Thing::get_fall (void)
 
     if (t >= get_timestamp_fall_end()) {
         is_falling = false;
+        level_push();
         log("end of falling");
         hide();
         fall_to_next_level();

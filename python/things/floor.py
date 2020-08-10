@@ -8,12 +8,12 @@ def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     x.set_is_cursor_can_hover_over(True)
     x.set_is_floor(True)
     x.set_is_interesting(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_loggable_for_important_stuff(False)
+    x.set_is_loggable_for_unimportant_stuff(False)
     x.set_text_a_or_an("the");
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_text_description("The unwashed dungeon floor")
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
+    x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     for t in tiles:
         x.set_tile(t)

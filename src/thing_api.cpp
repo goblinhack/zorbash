@@ -4358,3 +4358,13 @@ const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); 
 const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }
 const std::string& Thing::gfx_anim_attack (void) const {_ return (tp()->gfx_anim_attack()); }
+
+uint8_t Thing::z_depth (void) const
+{
+    auto p = owner_get();
+    if ((p && p->is_falling) || (is_falling)) {
+        return (MAP_DEPTH_FLOOR);
+    } else {
+        return (tp()->z_depth);
+    }
+}

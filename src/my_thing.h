@@ -13,6 +13,7 @@
 #include "my_light.h"
 #include "my_thing_ai.h"
 #include "my_thing_id.h"
+#include "my_depth.h"
 
 constexpr uint32_t THING_MAGIC_BEGIN = 11221122;
 constexpr uint32_t THING_MAGIC_END   = 22112211;
@@ -240,11 +241,7 @@ public:
         return (nullptr);
     }
 
-    uint8_t z_depth (void) const
-    {
-        return (tp()->z_depth);
-    }
-
+    uint8_t z_depth(void) const;
     uint8_t z_prio (void) const
     {
         return (tp()->z_prio);
