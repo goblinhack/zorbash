@@ -1,5 +1,6 @@
 bugs
 ----
+- start with the cursor not over the player
 - objects are dropped in odd location
 - key collect at start
 - mummy gets 2 attacks
