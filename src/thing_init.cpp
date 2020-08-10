@@ -48,7 +48,7 @@ void Thing::init (Levelp level,
     timestamp_next_frame = 0;
     const auto tpp = tp_find(name);
     if (unlikely(!tpp)) {
-        DIE("thing template [%s] not found", name.c_str());
+        ERR("thing template [%s] not found", name.c_str());
         return;
     }
 

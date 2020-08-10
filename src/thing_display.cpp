@@ -466,6 +466,9 @@ bool Thing::get_coords (point &blit_tl,
         blit_br.x -= s;
         blit_tl.y += s;
         blit_br.y -= s;
+
+        blit_tl.y += fall * 40;
+        blit_br.y += fall * 40;
     }
 
     //
