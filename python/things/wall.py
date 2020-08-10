@@ -19,8 +19,7 @@ def tp_init(name,
             tl2_tiles=[],
             tr2_tiles=[],
             bl2_tiles=[],
-            br2_tiles=[],
-            bot3_tiles=[]):
+            br2_tiles=[]):
 
     x = tp.Tp(name)
 
@@ -118,12 +117,6 @@ def tp_init(name,
     else:
         x.set_bot2_tile(bot2_tile=name)
 
-    if bot3_tiles is not None:
-        for t in bot3_tiles:
-            x.set_bot3_tile(t)
-    else:
-        x.set_bot3_tile(bot3_tile=name)
-
     if tl2_tiles is not None:
         for t in tl2_tiles:
             x.set_tl2_tile(t)
@@ -209,11 +202,6 @@ def init():
             bl2_tiles=[    "wall_shadow_deco1.bl.1", "wall_shadow_deco1.bl.2",
                           "wall_shadow_deco1.bl.3", "wall_shadow_deco1.bl.4",
                           "wall_shadow_deco1.bl.5", "wall_shadow_deco1.bl.6", ],
-            bot3_tiles=[ 
-                        "chasm2.1", "chasm2.2", "chasm2.3", "chasm2.4", "chasm2.5",
-                        "chasm2.6", "chasm2.7", "chasm2.8", "chasm2.9", "chasm2.10",
-                        "chasm2.11", "chasm2.12", "chasm2.13", "chasm2.14", "chasm2.15",
-                        "chasm2.16", "chasm2.17", "chasm2.18", "chasm2.19"],
             )
 
 init()
