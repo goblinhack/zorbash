@@ -52,8 +52,10 @@ bool Thing::carry (Thingp what)
 
 bool Thing::try_to_carry (Thingp what)
 {_
-    if (get_tick() - get_tick_last_level_change() <= 1) {
-        return false;
+    if (get_tick_dropped()) {
+        if (get_tick() - get_tick_dropped() <= 1) {
+            return false;
+        }
     }
     return carry(what);
 }

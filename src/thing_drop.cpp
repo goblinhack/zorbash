@@ -5,6 +5,7 @@
 
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_game.h"
 
 bool Thing::drop (Thingp what)
 {_
@@ -29,6 +30,12 @@ bool Thing::drop (Thingp what)
 
     monstp->carrying.remove(what->id);
     log("dropped %s", what->to_string().c_str());
+
+    //
+    // Prevent too soon re-carry
+    //
+    set_tick_dropped(game->tick_current);
+
     return true;
 }
 
@@ -56,6 +63,12 @@ bool Thing::drop (Thingp what, Thingp target)
 
     monstp->carrying.remove(what->id);
     log("dropped %s", what->to_string().c_str());
+
+    //
+    // Prevent too soon re-carry
+    //
+    set_tick_dropped(game->tick_current);
+
     return true;
 }
 
