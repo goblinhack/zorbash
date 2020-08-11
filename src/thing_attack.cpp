@@ -152,6 +152,7 @@ _
                 if (owner->try_to_carry(it)) {
                     return true;
                 }
+                return false;
             }
         }
     } else {
@@ -176,6 +177,7 @@ _
                 if (try_to_carry(it)) {
                     return true;
                 }
+                return false;
             }
         }
     }
