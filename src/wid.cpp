@@ -699,7 +699,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
     wid_m_over_e();
 
     wid_over = w;
-    // MINICON("mouse over %s", wid_over->name.c_str());
+    // MINICON("mouse over %s mouse %d,%d", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
 
     wid_set_mode(w, WID_MODE_OVER);
 
@@ -2046,6 +2046,12 @@ Widp wid_new_window (std::string name)
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
     wid_set_shape_square(w);
 
+    //
+    // Raise it so if there were other widgets with the same parent
+    // then this will be in front
+    //
+    wid_raise(w);
+
     return (w);
 }
 
@@ -2075,6 +2081,12 @@ Widp wid_new_container (Widp parent, std::string name)
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
     wid_set_shape_square(w);
 
+    //
+    // Raise it so if there were other widgets with the same parent
+    // then this will be in front
+    //
+    wid_raise(w);
+
     return (w);
 }
 
@@ -2094,6 +2106,12 @@ Widp wid_new_square_window (std::string name)
     wid_set_shape_square(w);
     wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+    wid_raise(w);
+
+    //
+    // Raise it so if there were other widgets with the same parent
+    // then this will be in front
+    //
     wid_raise(w);
 
     return (w);
@@ -2130,6 +2148,12 @@ Widp wid_new_square_button (Widp parent, std::string name)
     wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
+    //
+    // Raise it so if there were other widgets with the same parent
+    // then this will be in front
+    //
+    wid_raise(w);
+
     return (w);
 }
 
@@ -2161,6 +2185,12 @@ Widp wid_new_plain (Widp parent, std::string name)
 
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+    //
+    // Raise it so if there were other widgets with the same parent
+    // then this will be in front
+    //
+    wid_raise(w);
 
     return (w);
 }
@@ -4636,6 +4666,12 @@ void wid_mouse_motion (int32_t x, int32_t y,
     }
 
     wid_mouse_motion_recursion = 0;
+
+    if (relx || rely || wheelx || wheely) {
+        if (game_mouse_motion(x, y, relx, rely, wheelx, wheely)) {_
+            return;
+        }
+    }
 }
 
 //
@@ -5514,11 +5550,11 @@ static void wid_display (Widp w,
     }
 
     {
-        for (auto x = tl.x; x <= br.x; x++) {
+        for (auto x = tl.x; x < br.x; x++) {
             if (unlikely(!ascii_x_ok(x))) {
                 continue;
             }
-            for (auto y = tl.y; y <= br.y; y++) {
+            for (auto y = tl.y; y < br.y; y++) {
                 if (unlikely(!ascii_y_ok(y))) {
                     continue;
                 }

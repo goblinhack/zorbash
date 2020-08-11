@@ -106,8 +106,30 @@ void ascii_set_scissors (point tl, point br)
 
 void pixel_to_ascii (int *x, int *y)
 {
-    *x = (int)(floor((float)(*x) / ((float)game->config.outer_pix_width / ASCII_WIDTH)));
-    *y = (int)(floor((float)(*y) / ((float)game->config.outer_pix_height / ASCII_HEIGHT)));
+    float mx = *x;
+    float my = *y;
+
+    float w = game->config.ascii_gl_width * (float)ASCII_WIDTH;
+    float h = game->config.ascii_gl_height * (float)ASCII_HEIGHT;
+
+    mx /= w;
+    my /= h;
+
+    mx *= ASCII_WIDTH;
+    my *= ASCII_HEIGHT;
+
+    if (mx >= ASCII_WIDTH - 1) {
+        mx = ASCII_WIDTH - 1;
+    }
+
+    if (my >= ASCII_HEIGHT - 1) {
+        my = ASCII_HEIGHT - 1;
+    }
+
+    *x = mx;
+    *y = my;
+
+    // MINICON("%f %f -> %d %d", mx, my, *x, *y); 
 }
 
 static int ascii_ok_for_scissors (int x, int y)

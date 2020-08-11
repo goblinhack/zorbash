@@ -1535,6 +1535,6 @@ void config_gfx_zoom_update (void)
             (float)game->config.outer_pix_height / (float)ASCII_HEIGHT;
     }
 
-    CON("INIT: - console size         : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
+    CON("INIT: - ascii size           : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
     CON("INIT: - width to height ratio: %f", game->config.video_w_h_ratio);
 }

@@ -126,6 +126,7 @@ void Thing::level_enter (void)
         if (!level->cursor) {
             if (!is_cursor()) {
                 level->cursor = level->thing_new("cursor", mid_at);
+                level->cursor->hide();
             }
         }
     }

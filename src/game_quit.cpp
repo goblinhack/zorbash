@@ -130,9 +130,8 @@ void Game::quit_select (void)
         auto w = wid_new_square_button(p, "Quit");
 
         point tl = make_point(0, y_at);
-        point br = make_point(width, y_at + 2);
+        point br = make_point(width, y_at);
         wid_set_shape_none(w);
-        wid_set_on_mouse_up(w, game_quit_yes);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Quit game?");
     }
