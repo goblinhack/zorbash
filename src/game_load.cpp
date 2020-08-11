@@ -514,10 +514,10 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* uint32_t           things_are_moving            */ in >> bits(my.t.things_are_moving);
     /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);
-_
+
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
-_
+
     my.t.level = get(my.t.world.levels,
                      my.t.current_level.x,
                      my.t.current_level.y,

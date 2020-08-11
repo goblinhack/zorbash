@@ -1198,6 +1198,16 @@ _
                     continue;
                 }
 
+                if (is_player()) {
+                    if (it->get_tick_dropped()) {
+                        if (game->tick_current - it->get_tick_dropped() <= 1) {
+                            log("ignore recently dropped %s", 
+                                it->to_string().c_str());
+                            continue;
+                        }
+                    }
+                }
+
                 if (collision_check_only(it, future_pos, x, y)) {
                     return true;
                 }

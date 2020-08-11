@@ -1577,7 +1577,8 @@ uint32_t Thing::set_max_tick_difference (void)
 {_
     if (game->tick_current > THING_TICK_MAX_MOVES_AHEAD) {
         monstp->tick = std::max(monstp->tick,
-                                game->tick_current - THING_TICK_MAX_MOVES_AHEAD);
+                                game->tick_current - 
+                                THING_TICK_MAX_MOVES_AHEAD);
     }
     return (monstp->tick);
 }

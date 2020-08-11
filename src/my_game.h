@@ -159,8 +159,8 @@ public:
     uint32_t           actionbar_highlight_slot {};
     uint32_t           fps_value = {};      // Current framerate
     uint32_t           things_are_moving {};
-    uint32_t           tick_completed {};
-    uint32_t           tick_current {};
+    uint32_t           tick_completed {1};
+    uint32_t           tick_current {1};
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving

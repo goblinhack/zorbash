@@ -7,69 +7,58 @@
 #include "my_thing.h"
 #include "my_game.h"
 
-bool Thing::drop (Thingp what)
+bool Thing::drop (Thingp what, Thingp target)
 {_
-    log("drop %s", what->to_string().c_str());
+    if (target) {
+        log("drop %s at %s", what->to_string().c_str(),
+            target->to_string().c_str());
+    } else {
+        log("drop %s", what->to_string().c_str());
+    }
 
     auto existing_owner = what->owner_get();
     if (existing_owner != this) {
-        err("attempt to drop %s which is not carried", what->to_string().c_str());
+        err("attempt to drop %s which is not carried", 
+            what->to_string().c_str());
         return false;
     }
 
     if (is_player()) {
-        if (!actionbar_id_remove(what)) {
-            err("failed to drop %s from actionbar", what->to_string().c_str());
-            return false;
+        if (target) {
+            if (!actionbar_id_remove(what, target)) {
+                err("failed to drop %s from actionbar", 
+                    what->to_string().c_str());
+                return false;
+            }
+        } else {
+            if (!actionbar_id_remove(what)) {
+                err("failed to drop %s from actionbar", 
+                    what->to_string().c_str());
+                return false;
+            }
         }
     }
 
     what->hooks_remove();
     what->remove_owner();
     what->visible();
+    what->move_to_immediately(mid_at);
 
     monstp->carrying.remove(what->id);
-    log("dropped %s", what->to_string().c_str());
 
     //
     // Prevent too soon re-carry
     //
-    set_tick_dropped(game->tick_current);
+    what->set_tick_dropped(game->tick_current);
+
+    log("dropped %s", what->to_string().c_str());
 
     return true;
 }
 
-bool Thing::drop (Thingp what, Thingp target)
+bool Thing::drop (Thingp what)
 {_
-    log("drop %s at %s", what->to_string().c_str(),
-                         target->to_string().c_str());
-
-    auto existing_owner = what->owner_get();
-    if (existing_owner != this) {
-        err("attempt to drop %s which is not carried", what->to_string().c_str());
-        return false;
-    }
-
-    if (is_player()) {
-        if (!actionbar_id_remove(what, target)) {
-            err("failed to drop %s from actionbar", what->to_string().c_str());
-            return false;
-        }
-    }
-
-    what->hooks_remove();
-    what->remove_owner();
-    what->visible();
-
-    monstp->carrying.remove(what->id);
-    log("dropped %s", what->to_string().c_str());
-
-    //
-    // Prevent too soon re-carry
-    //
-    set_tick_dropped(game->tick_current);
-
-    return true;
+    return drop(what, nullptr);
 }
 
 void Thing::drop_all (void)

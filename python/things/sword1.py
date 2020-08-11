@@ -112,7 +112,7 @@ def init_weapon(name, text_name):
     x.set_gfx_anim_attack("sword1_swing")
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)
-    x.set_z_depth(zx.MAP_DEPTH_WEAPON)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     x.set_tile(tile=name + ".1")
