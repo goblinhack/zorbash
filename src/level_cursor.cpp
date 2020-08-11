@@ -16,8 +16,7 @@ void Level::cursor_check_if_scroll_needed (void)
     if (map_follow_player) {
         if (cursor) {
             if (player) {
-                auto d = distance(player->mid_at,
-                                  cursor->mid_at);
+                auto d = distance(player->mid_at, cursor->mid_at);
                 if (d > std::min(TILES_ACROSS/2, TILES_DOWN/2)) {
                     cursor->move(player->mid_at);
                 }

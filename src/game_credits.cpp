@@ -120,15 +120,15 @@ void Game::credits_select (void)
     wid_credits_window->log("Sound");
     wid_credits_window->log("%%fg=purple$Markus Heichelbech (deceased senior technician) http://nosoapradio.us");
     wid_credits_window->log(" ");
-    wid_credits_window->log("Debugging");
+    wid_credits_window->log("Testing");
     wid_credits_window->log("%%fg=red$Stuicy");
 
     {_
         auto p = wid_credits_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "credits");
 
-        point tl = make_point(24, 20);
-        point br = make_point(width - 25, 22);
+        point tl = make_point(24, 24);
+        point br = make_point(width - 25, 26);
 
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_credits_mouse_up);

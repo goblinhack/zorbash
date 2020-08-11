@@ -106,7 +106,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
     if (horiz_scroll) {
         wid_horiz_scroll =
             wid_new_horiz_scroll_bar(wid_text_box_container,
-                                    "text box horiz scroll", wid_text_area);
+                                     "text box horiz scroll", wid_text_area);
     }
 
     wid_update(wid_text_box_container);
