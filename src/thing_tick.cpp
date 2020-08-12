@@ -28,7 +28,7 @@ bool Thing::achieve_goals_in_life (void)
     set_timestamp_last_tick(time_get_time_ms_cached());
 
     if (is_loggable_for_unimportant_stuff()) {
-        log("achieve goals at tick %d, game tick %u",
+        log("achieve goals at tick %d, game %u",
             get_tick(), game->tick_current);
     }
 
@@ -115,7 +115,7 @@ bool Thing::achieve_goals_in_death (void)
 
     set_timestamp_last_tick(time_get_time_ms_cached());
 
-    log("achieve death goals at tick %d, game tick %u",
+    log("achieve death goals at tick %d, tick %u",
         get_tick(), game->tick_current);
 
     resurrect_tick();
