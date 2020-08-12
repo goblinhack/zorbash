@@ -277,7 +277,7 @@ void player_tick (void)
         player->monstp->move_path.clear();
         game->cursor_move_path.clear();
         level->cursor_path_clear();
-        game->tick_begin();
+        game->tick_begin("player jumped");
     } else if (up || down || left || right || attack || wait) {
         //
         // If we move manually, clear the path as it visually gets

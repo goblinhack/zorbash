@@ -101,7 +101,7 @@ public:
     Game (void) {}
     Game (std::string appdata);
     bool load(std::string save_file, class Game &target);
-    void tick_begin();
+    void tick_begin(const std::string &);
     void tick_end();
     bool paused(void);
     bool save(std::string save_file);

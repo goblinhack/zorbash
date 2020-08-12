@@ -40,20 +40,20 @@ bool Thing::use (Thingp what)
     if (what->is_weapon()) {
         MINICON("You wield the %s", what->text_the().c_str());
         MINICON("TODO");
-        game->tick_begin();
+        game->tick_begin("player used an item");
     } else if (what->is_food()) {
         eat(what);
         used(what, this);
-        game->tick_begin();
+        game->tick_begin("player ate an item");
     } else if (what->is_potion()) {
         MINICON("You quaff the %s", what->text_the().c_str());
         MINICON("TODO");
-        game->tick_begin();
+        game->tick_begin("player drunk an item");
     } else if (!what->is_usable()) {
         if (is_player()) {
             MINICON("I don't know how to use %s", what->text_the().c_str());
         }
-        game->tick_begin();
+        game->tick_begin("player tried to use something they could not");
     }
     return true;
 }
