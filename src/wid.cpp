@@ -2297,11 +2297,11 @@ static Widp wid_new_scroll_bar (Widp parent,
     wid_set_shape_square(w);
 
     wid_set_mode(w, WID_MODE_OVER);
-    wid_set_color(w, WID_COLOR_BG, RED);
+    wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
     wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_color(w, WID_COLOR_BG, GREEN);
+    wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
     wid_set_style(w, UI_WID_STYLE_DARK);
