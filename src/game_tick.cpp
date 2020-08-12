@@ -6,14 +6,14 @@
 #include "my_game.h"
 #include "my_dungeon.h"
 
-void Game::tick_begin (void)
+void Game::tick_begin (const std::string &why)
 {_
     //
     // Move when all things are done moving
     //
     game->tick_current++;
     LOG("-");
-    LOG("game tick %d begin", game->tick_current);
+    LOG("game tick %d begin (%s)", game->tick_current, why.c_str());
 }
 
 void Game::tick_end (void)

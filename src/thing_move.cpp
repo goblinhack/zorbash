@@ -62,7 +62,7 @@ bool Thing::move (fpoint future_pos,
 
     if (idle) {
         if (is_player()) {
-            game->tick_begin();
+            game->tick_begin("player idled");
         }
         location_check();
         return (false);
@@ -84,7 +84,7 @@ bool Thing::move (fpoint future_pos,
         use();
 
         if (is_player()) {
-            game->tick_begin();
+            game->tick_begin("player attacked");
         }
 
         if ((x == mid_at.x) && (y == mid_at.y)) {
@@ -97,7 +97,7 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (is_player()) {
-        game->tick_begin();
+        game->tick_begin("player moved");
         g_thing_callframes_depth = callframes_depth - 1;
         log("player tick");
 

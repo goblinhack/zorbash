@@ -74,8 +74,8 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
             ascii_set_bg(x, y, col_bg);
         }
         if (style >= 0) {
-            ascii_set_bg(x, x1, tiles[style][0][0]);
-            ascii_set_bg(x, x2, tiles[style][MAX_UI_SIZE - 1][0]);
+            ascii_set_bg(x1, y, tiles[style][0][0]);
+            ascii_set_bg(x2, y, tiles[style][MAX_UI_SIZE - 1][0]);
         }
         return;
     } else if (unlikely(x1 == x2)) {
@@ -180,9 +180,9 @@ static void ascii_put_box_ (int style,
         wchar_t buf[MAXSHORTSTR];
         auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
-        /*
-         * Only a single nul is written, but as we read 2 at a time...
-         */
+        //
+        // Only a single nul is written, but as we read 2 at a time...
+        //
         if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         }
@@ -214,9 +214,9 @@ void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const w
     int w = b.width;
     int h = b.height;
 
-    /*
-     * Draw the box
-     */
+    //
+    // Draw the box
+    //
     va_start(args, fmt);
 
     ascii_put_box_(style,

@@ -296,7 +296,7 @@ void Thing::jump_end (void)
         if (t) {
             std::string s = t->text_The() + " attacks as you land";
             MINICON("%s", s.c_str());
-            game->tick_begin();
+            game->tick_begin("monst attack as player landed");
         }
     }
     wobble(25);

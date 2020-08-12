@@ -72,11 +72,11 @@ void Thing::cursor_path_pop_first_move (void)
     // If not adjacent, try and jump.
     //
     if (try_to_jump(future_pos)) {
-        game->tick_begin();
+        game->tick_begin("player tried to jump");
         return;
     }
 
-    game->tick_begin();
+    game->tick_begin("player move popped off cursor path");
 }
 
 void Thing::cursor_path_stop (void)
