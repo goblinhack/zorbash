@@ -45,7 +45,6 @@
 #define MAP_SLOTS                  32   // Max things per map slot
 #define MAP_WIDTH                  ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define MAX_RAY_LIGHTING           180  // Max light rays cast
-#define PLAYER_KEY_REPEAT_MS       100  // Key repeat rate
 #define ROOM_HEIGHT                13
 #define ROOM_WIDTH                 13
 #define THING_AI_WANDER_FREQ_TENTHS 3   // How often we can wander

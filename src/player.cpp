@@ -149,7 +149,10 @@ void player_tick (void)
         }
     }
 
-    auto delay = PLAYER_KEY_REPEAT_MS;
+    auto delay = player->tp()->stats_move_speed_ms();
+    if (sdl_shift_held) {
+        delay = delay / 2;
+    }
 
     uint8_t attack = 0;
     uint8_t wait   = 0;
