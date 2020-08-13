@@ -919,8 +919,10 @@ void Level::place_wall_deco (Dungeonp d)
 
             thing_new(tp->name(), fpoint(x, y));
 
-            tp = tp_random_wall();
-            thing_new(tp->name(), fpoint(x, y));
+            if (!d->is_wall(x, y)) {
+                tp = tp_random_wall();
+                thing_new(tp->name(), fpoint(x, y));
+            }
         }
     }
 }
