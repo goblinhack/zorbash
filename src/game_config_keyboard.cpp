@@ -976,9 +976,17 @@ void Game::config_keyboard_select (void)
         wid_set_text(w, "Use arrow keys for moving, W,A,S,D for map");
     }
 
-    ///////////////////////////////////////////////////////////////////////
-    y_at++;
-    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(45, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Press SHIFT to run");
+    }
 
     ///////////////////////////////////////////////////////////////////////
     // Move up
