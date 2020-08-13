@@ -1,6 +1,8 @@
 bugs
 ----
-- double shadow under serer
+- can mouse click on lava
+- no fall into chasm
+- mouse pixel too dark
 - slime combine crash
 
 upcoming work

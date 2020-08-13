@@ -16,7 +16,6 @@ def chasm_init(name, text_name):
     x.set_z_depth(zx.MAP_DEPTH_CHASM)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    delay = 1250
     x.update()
 
 def init():
