@@ -898,16 +898,16 @@ void Game::config_keyboard_select (void)
     int y_at = 0;
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "The keys of mighty power");
+        auto w = wid_new_square_button(p, "Thine keys of mighty power");
 
         point tl = make_point(0, y_at);
-        point br = make_point(width - 2, y_at + 2);
+        point br = make_point(width - 2, y_at);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "The keys of mighty power");
+        wid_set_text(w, "Thine keys of mighty power");
     }
 
-    y_at = 3;
+    y_at = 2;
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
@@ -985,7 +985,7 @@ void Game::config_keyboard_select (void)
         point br = make_point(45, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "Press SHIFT to run");
+        wid_set_text(w, "(SHIFT to run, double click to jump in chasms)");
     }
 
     ///////////////////////////////////////////////////////////////////////

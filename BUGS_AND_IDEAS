@@ -1,8 +1,6 @@
 bugs
 ----
-- can mouse click on lava
-- no fall into chasm
-- mouse pixel too dark
+- no fall into chasm when running
 - slime combine crash
 
 upcoming work

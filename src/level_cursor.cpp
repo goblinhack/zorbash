@@ -34,7 +34,20 @@ void Level::cursor_find_on_visible_things (
     }
 
     if ((game->minimap_over.x > 0) && (game->minimap_over.y > 0)) {
-        cursor->mid_at = make_fpoint(game->minimap_over);
+        //
+        // Don't move onto lava unless double click
+        //
+        auto to = make_fpoint(game->minimap_over);
+        if (!wid_mouse_double_click) {
+            if (cursor) {_
+                FOR_ALL_THINGS(this, t, to.x, to.y) {
+                    if (t->is_cursor_can_hover_over_but_needs_double_click()) {
+                        return;
+                    }
+                } FOR_ALL_THINGS_END()
+            }
+        }
+        cursor->mid_at = to;
     } else {
         //
         // What tile are we over?
