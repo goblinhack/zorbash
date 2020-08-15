@@ -15,10 +15,13 @@
 
 typedef class Config_ {
 public:
-    bool               allow_highdpi                = false;
+    uint32_t           header_size                  = {};
     bool               ascii_mode                   = false;
     bool               fps_counter                  = false;
-    bool               fullscreen                   = false;
+    bool               gfx_allow_highdpi            = false;
+    bool               gfx_borderless               = true;
+    bool               gfx_fullscreen               = false;
+    bool               gfx_fullscreen_desktop       = true;
     bool               gfx_inverted                 = false;
     bool               gfx_lights                   = true;
     bool               gfx_minimap                  = true;
@@ -139,6 +142,7 @@ public:
     // Save file name, contains the date and other useful save slot info
     //
     std::string        version = "" VERSION "";
+    uint32_t           header_size {};
     int                save_slot {};
     std::string        save_meta;
     std::string        save_file;

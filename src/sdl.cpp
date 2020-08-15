@@ -245,15 +245,24 @@ uint8_t sdl_init (void)
     uint32_t video_flags;
 
     LOG("INIT: SDL_WINDOW_OPENGL");
-    LOG("INIT: SDL_WINDOW_BORDERLESS");
-    video_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS;
+    video_flags = SDL_WINDOW_OPENGL;
 
-    if (game->config.fullscreen) {
-        LOG("INIT: SDL_WINDOW_FULLSCREEN");
-        video_flags |= SDL_WINDOW_FULLSCREEN;
+    if (game->config.gfx_borderless) {
+        LOG("INIT: SDL_WINDOW_BORDERLESS");
+        video_flags |= SDL_WINDOW_BORDERLESS;
     }
 
-    if (game->config.allow_highdpi) {
+    if (game->config.gfx_fullscreen) {
+        LOG("INIT: SDL_WINDOW_FULLSCREEN");
+        video_flags |= SDL_WINDOW_FULLSCREEN;
+    } 
+
+    if (game->config.gfx_fullscreen_desktop) {
+        LOG("INIT: SDL_WINDOW_FULLSCREEN_DESKTOP");
+        video_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    }
+
+    if (game->config.gfx_allow_highdpi) {
         //
         // For a lo pixel game this makes no sense as the frame
         // buffers are really large and slows things down.

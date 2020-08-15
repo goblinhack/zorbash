@@ -64,19 +64,43 @@ uint8_t game_config_gfx_ascii_mode_toggle (Widp w, int32_t x, int32_t y, uint32_
     return (true);
 }
 
-uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_gfx_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: toggle fullscreen");
-    game->config.fullscreen = !game->config.fullscreen;
+    CON("USERCFG: toggle gfx_fullscreen");
+    game->config.gfx_fullscreen = !game->config.gfx_fullscreen;
+    if (game->config.gfx_fullscreen) {
+        game->config.gfx_fullscreen_desktop = false;
+    }
     game->config_gfx_select();
     local_g_need_restart = true;
     return (true);
 }
 
-uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_gfx_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: toggle allow_highdpi");
-    game->config.allow_highdpi = !game->config.allow_highdpi;
+    CON("USERCFG: toggle gfx_fullscreen_desktop");
+    game->config.gfx_fullscreen_desktop = !game->config.gfx_fullscreen_desktop;
+    if (game->config.gfx_fullscreen_desktop) {
+        game->config.gfx_fullscreen = false;
+    }
+    game->config_gfx_select();
+    local_g_need_restart = true;
+    return (true);
+}
+
+uint8_t game_config_gfx_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    CON("USERCFG: toggle gfx_allow_highdpi");
+    game->config.gfx_allow_highdpi = !game->config.gfx_allow_highdpi;
+    game->config_gfx_select();
+    local_g_need_restart = true;
+    return (true);
+}
+
+uint8_t game_config_gfx_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    CON("USERCFG: toggle gfx_borderless");
+    game->config.gfx_borderless = !game->config.gfx_borderless;
     game->config_gfx_select();
     local_g_need_restart = true;
     return (true);
@@ -242,8 +266,10 @@ void Game::config_gfx_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_MINICON_VIS_HEIGHT - 2);
-    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, 
+                          UI_MINICON_VIS_HEIGHT - 2);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, 
+                          UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x - 2;
 
     game_config_gfx_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
@@ -303,14 +329,14 @@ void Game::config_gfx_select (void)
     y_at += 3;
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "ASCII mode (restart)");
+        auto w = wid_new_square_button(p, "ASCII mode");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "ASCII mode (restart)");
+        wid_set_text(w, "ASCII mode");
     }
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
@@ -368,7 +394,7 @@ void Game::config_gfx_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Full screen (restart)");
+        wid_set_text(w, "Full screen video");
     }
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
@@ -378,9 +404,38 @@ void Game::config_gfx_select (void)
         point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_gfx_fullscreen_toggle);
+        wid_set_on_mouse_up(w, game_config_gfx_gfx_fullscreen_toggle);
 
-        if (game->config.fullscreen) {
+        if (game->config.gfx_fullscreen) {
+            wid_set_text(w, "True");
+        } else {
+            wid_set_text(w, "False");
+        }
+    }
+
+    y_at += 3;
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Full screen desktop");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Full screen desktop");
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Full screen value");
+
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_gfx_gfx_fullscreen_desktop_toggle);
+
+        if (game->config.gfx_fullscreen_desktop) {
             wid_set_text(w, "True");
         } else {
             wid_set_text(w, "False");
@@ -401,7 +456,7 @@ void Game::config_gfx_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Allow high DPI (restart)");
+        wid_set_text(w, "Allow high DPI");
     }
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
@@ -411,15 +466,46 @@ void Game::config_gfx_select (void)
         point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_gfx_allow_highdpi_toggle);
+        wid_set_on_mouse_up(w, game_config_gfx_gfx_allow_highdpi_toggle);
 
-        if (game->config.allow_highdpi) {
+        if (game->config.gfx_allow_highdpi) {
             wid_set_text(w, "True");
         } else {
             wid_set_text(w, "False");
         }
     }
 #endif
+    //
+    // Not sure I want this enabled; more to debug
+    //
+    y_at += 3;
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Borderless");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Borderless window");
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Borderless");
+
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_gfx_gfx_borderless_toggle);
+
+        if (game->config.gfx_borderless) {
+            wid_set_text(w, "True");
+        } else {
+            wid_set_text(w, "False");
+        }
+    }
     y_at += 3;
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;

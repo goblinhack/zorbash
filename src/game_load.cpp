@@ -417,10 +417,18 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
 
 std::istream& operator>>(std::istream &in, Bits<Config &> my)
 {_
-    /* bool               allow_highdpi                */ in >> bits(my.t.allow_highdpi                );
+    /* uint32_t           header_size                  */ in >> bits(my.t.header_size                  );
+    if (my.t.header_size != sizeof(Config)) {
+        game_load_error = "incompatible save file header version";
+        return in;
+    }
+
     /* bool               ascii_mode                   */ in >> bits(my.t.ascii_mode                   );
     /* bool               fps_counter                  */ in >> bits(my.t.fps_counter                  );
-    /* bool               fullscreen                   */ in >> bits(my.t.fullscreen                   );
+    /* bool               gfx_allow_highdpi            */ in >> bits(my.t.gfx_allow_highdpi            );
+    /* bool               gfx_borderless               */ in >> bits(my.t.gfx_borderless               );
+    /* bool               gfx_fullscreen               */ in >> bits(my.t.gfx_fullscreen               );
+    /* bool               gfx_fullscreen_desktop       */ in >> bits(my.t.gfx_fullscreen_desktop       );
     /* bool               gfx_inverted                 */ in >> bits(my.t.gfx_inverted                 );
     /* bool               gfx_minimap                  */ in >> bits(my.t.gfx_minimap                  );
     /* bool               gfx_show_hidden              */ in >> bits(my.t.gfx_show_hidden              );
@@ -491,6 +499,12 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     if (my.t.version != VERSION) {
         game_load_error =
           "bad version '" VERSION "' v '" + my.t.version + "'";
+        return (in);
+    }
+    in >> bits(my.t.header_size);
+    if (my.t.header_size != (uint32_t) sizeof(Game)) {
+        game_load_error =
+          "incompatible save file version '" VERSION "' v '" + my.t.version + "'";
         return (in);
     }
     in >> bits(my.t.save_slot);
