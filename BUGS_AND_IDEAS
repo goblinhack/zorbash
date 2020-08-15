@@ -5,27 +5,27 @@ bugs
 
 upcoming work
 -------------
+- moving floor
+- monst rarity
+- sewer level
+- water, kraken, eels
+- make ripples, summon monsters
 - weight factors into jumping
-- allow seed selection on menu
 - equip
 - throw
 - potion descent creates chasm
 - potion break on fall
 - potion enchant radius
 - use descent potion, that can be taken or thrown
-- moving floor
-- monst rarity
 - add stuff in secret rooms
 - drag items
 - bag inventory
 - choose name / player
 - playback possible?
-- sewer level
+- allow seed selection on menu
 
 future work
 -----------
-- water, kraken, eels
-- make ripples, summon monsters
 - hit door, summon monst chance
 - hit door, wake sleeping monsters
 - (blunt/warhamma?) slime specific weapon does not cause slimes to split
