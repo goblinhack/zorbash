@@ -31,9 +31,11 @@ void Thing::kill (Thingp killer, const char *reason)
         level->map_follow_player = false;
     } else if (is_loggable_for_important_stuff()) {
         if (!killer) {
-            MINICON("%s is dead, %s", text_The().c_str(), reason);
+            LOG("%s is dead, %s", text_The().c_str(), reason);
         } else if (killer != this) {
-            MINICON("%s is dead, %s", text_The().c_str(), reason);
+            if (killer->is_player()) {
+                MINICON("%s is dead, %s", text_The().c_str(), reason);
+            }
         }
     }
 
@@ -209,11 +211,11 @@ void Thing::dead (Thingp killer, std::string &reason)
 
         if (killer) {
             snprintf(buf + len, MAXSTR - len, "%s: killed by %s: ",
-                    t->to_string().c_str(),
-                    killer->to_string().c_str());
+                     t->to_string().c_str(),
+                     killer->to_string().c_str());
         } else {
             snprintf(buf + len, MAXSTR - len, "%s: killed: ",
-                    t->to_string().c_str());
+                     t->to_string().c_str());
         }
 
         putf(MY_STDOUT, reason.c_str());

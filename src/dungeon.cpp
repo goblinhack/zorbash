@@ -2313,7 +2313,7 @@ bool Dungeon::rooms_move_closer_together (void)
             for (auto x = 0; x < nodes->grid_width; x++) {
                 for (auto y = 0; y < nodes->grid_height; y++) {
                     auto n = nodes->getn(x, y);
-                    if (n->depth <= 0 ) {
+                    if (n->depth <= 0) {
                         continue;
                     }
 
