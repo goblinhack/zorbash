@@ -319,10 +319,14 @@ std::ostream& operator<<(std::ostream &out,
 
 std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 {_
-    /* bool               allow_highdpi                */ out << bits(my.t.allow_highdpi                );
+    uint32_t header_size = sizeof(Config);
+    /* uint32_t           header_size                  */ out << bits(header_size                       );
     /* bool               ascii_mode                   */ out << bits(my.t.ascii_mode                   );
     /* bool               fps_counter                  */ out << bits(my.t.fps_counter                  );
-    /* bool               fullscreen                   */ out << bits(my.t.fullscreen                   );
+    /* bool               gfx_allow_highdpi            */ out << bits(my.t.gfx_allow_highdpi            );
+    /* bool               gfx_borderless               */ out << bits(my.t.gfx_borderless               );
+    /* bool               gfx_fullscreen               */ out << bits(my.t.gfx_fullscreen               );
+    /* bool               gfx_fullscreen_desktop       */ out << bits(my.t.gfx_fullscreen_desktop       );
     /* bool               gfx_inverted                 */ out << bits(my.t.gfx_inverted                 );
     /* bool               gfx_minimap                  */ out << bits(my.t.gfx_minimap                  );
     /* bool               gfx_show_hidden              */ out << bits(my.t.gfx_show_hidden              );
@@ -390,7 +394,9 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 std::ostream& operator<<(std::ostream &out,
                          Bits<const class Game & > const my)
 {_
+    uint32_t header_size = sizeof(Game);
     out << bits(my.t.version);
+    out << bits(header_size);
     out << bits(my.t.save_slot);
     out << bits(my.t.save_meta);
     out << bits(my.t.save_file);

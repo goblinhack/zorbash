@@ -1,5 +1,12 @@
 bugs
 ----
+- gfx options make them narrow
+- multiple jumps visible
+- sword lags on jump
+- diagonal jump via single light ray
+- dropped items vanish sometimes
+- some kind of buffering of events on rapid restart of new game
+- pressing tab when dead should hide dead windoe
 - slime combine crash
 
 upcoming work
