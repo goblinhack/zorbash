@@ -19,6 +19,7 @@ void Thing::fall (float fall_height, timestamp_t ms)
 
     set_fall_height(fall_height);
 
+    log("begin falling");
     level_pop();
     is_falling = true;
     level_push();
