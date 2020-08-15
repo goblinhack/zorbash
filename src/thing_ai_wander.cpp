@@ -168,12 +168,12 @@ bool Thing::ai_choose_wander (point& nh)
 
     target = get_random_scent_target();
     if (!ai_create_path(nh, make_point(mid_at), target)) {
-        dbg("wander failed");
+        dbg("could not wander");
         return false;
     }
 
     if (target == make_point(mid_at)) {
-        dbg("wander failed");
+        dbg("could not wander; at target");
         return false;
     }
 

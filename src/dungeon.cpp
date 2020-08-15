@@ -5,8 +5,6 @@
 
 #include "my_dungeon.h"
 
-static bool dungeon_debug = true;
-
 //
 // The algorithm
 //
@@ -157,7 +155,7 @@ void Dungeon::make_dungeon (void)
             break;
         }
 
-        debug("failed");
+        debug("failed to place dungeon");
         failed = true;
         return;
     }
@@ -1032,10 +1030,6 @@ void Dungeon::create_node_map (void)
 
 void Dungeon::dump (void)
 {_
-    if (!dungeon_debug) {
-        return;
-    }
-
     if (0) {
     LOG("DUNGEON: Seed %u (with room depth)", seed);
     //printf("DUNGEON: Seed %u (with room depth)\n", seed);
@@ -1095,8 +1089,8 @@ void Dungeon::dump (void)
     //
     // Pass 2 without room depths
     //
-    LOG("DUNGEON: Seed %u (more readable version)", seed);
-    //printf("DUNGEON: Seed %u (more readable version)\n", seed);
+    LOG("DUNGEON: Seed %u", seed);
+    //printf("DUNGEON: Seed %u\n", seed);
     for (auto y = 0; y < map_height; y++) {
         std::string s;
         for (auto x = 0; x < map_width; x++) {
@@ -1380,8 +1374,8 @@ bool Dungeon::solve (int x, int y, Grid *g)
         ncandidates = candidates.size();
         if (!ncandidates) {
             rooms_print_all(g);
-            dump();
             ERR("no grid room candidates at (%d,%d)", x, y);
+            dump();
             return (false);
         }
     }
@@ -1430,8 +1424,8 @@ bool Dungeon::create_cyclic_rooms (Grid *g)
                 continue;
             }
             if (!solve(x, y, g)) {
-                dump();
                 ERR("could not solve level at %d,%d", x, y);
+                dump();
             }
             break;
         }
@@ -1714,6 +1708,7 @@ void Dungeon::restore_level (void)
 int Dungeon::draw_corridor (point start, point end, char w)
 {
     Dmap d {};
+
 #if 0
     if (w == Charmap::CORRIDOR) {
         LOG("create corridor, between %d,%d and %d,%d",
@@ -1859,7 +1854,7 @@ int Dungeon::draw_corridor (point start, point end, char w)
         for (auto c : p) {
             putc(c.x, c.y, MAP_DEPTH_FLOOR, Charmap::DEBUG);
         }
-        DBG("failed to create corridor, too long a corridor");
+        DBG("cannot create corridor, too long a corridor");
         return (0);
     }
 
@@ -1881,8 +1876,11 @@ int Dungeon::draw_corridor (point start, point end, char w)
         putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DEBUG);
         putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DEBUG);
 
-        DBG("DUNGEON: failed to create corridor, end not found between %d,%d and %d,%d",
+#if 0
+        DBG("DUNGEON: cannot create corridor, end not found between %d,%d and %d,%d",
             start.x, start.y, end.x, end.y);
+        dump();
+#endif
         return (0);
     }
 
@@ -1892,7 +1890,12 @@ int Dungeon::draw_corridor (point start, point end, char w)
 
     putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
     putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+
+#if 0
     DBG("DUNGEON: placed corridor len %d", (int)p.size());
+    dump();
+#endif
+
     return (p.size());
 }
 
@@ -1901,6 +1904,11 @@ int Dungeon::draw_corridor (point start, point end, char w)
 //
 int Dungeon::draw_corridors (void)
 {
+#if 0
+    LOG("draw corridors");
+    dump();
+#endif
+
     for (auto x = 0; x < map_width; x++) {
         for (auto y = 0; y < map_height; y++) {
             auto c = getc(x, y, MAP_DEPTH_OBJ);
@@ -2236,6 +2244,11 @@ bool Dungeon::can_place_room (Roomp r, int x, int y)
 
 bool Dungeon::rooms_move_closer_together (void)
 {
+#if 0
+    LOG("rooms_move_closer_together");
+    dump();
+#endif
+
     auto delta = 1;
 
     all_placed_rooms.resize(0);
@@ -2271,7 +2284,6 @@ bool Dungeon::rooms_move_closer_together (void)
         return (false);
     }
 
-    dump();
     _ debug("level before adding shorter corridors is solvable");
     restore_level();
 
@@ -2475,6 +2487,7 @@ bool Dungeon::rooms_move_closer_together (void)
             }
 
             if (!moved) {
+                restore_level();
                 continue;
             }
 
@@ -2494,7 +2507,7 @@ bool Dungeon::rooms_move_closer_together (void)
                 }
 
                 if (failed_to_make_shorter_corridors ++ > 1000) {
-                    _ debug("failed to place shorter corridor layout");
+                    _ debug("cannot place shorter corridor layout");
                     return (true);
                 }
 
@@ -2506,7 +2519,7 @@ bool Dungeon::rooms_move_closer_together (void)
                 }
 
                 if (failed_to_place_all_corridors ++ > 1000) {
-                    _ debug("failed to place shorter corridor layout");
+                    _ debug("cannot place shorter corridor layout");
                     return (true);
                 }
 

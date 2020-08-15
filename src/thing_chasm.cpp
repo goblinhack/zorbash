@@ -42,17 +42,14 @@ bool Thing::fall_to_next_level (void)
         return false;
     }
 
-    log("fall to next level");
-    move_finish();
-
-    auto next_level = level->world_at + point3d(0, 0, 1);
-    game->init_level(next_level);
+    auto where_to = level->world_at + point3d(0, 0, 1);
+    game->init_level(where_to);
     if (is_player()) {
-        game->current_level = next_level;
+        game->current_level = where_to;
     }
 
-    auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
-    if (!l) {
+    auto next_level = get(game->world.levels, where_to.x, where_to.y, where_to.z);
+    if (!next_level) {
         MINICON("The chasm is permanently blocked!");
         return false;
     }
@@ -84,52 +81,54 @@ bool Thing::fall_to_next_level (void)
         tries++;
 
         log("try to fall to %d,%d", x, y);
-        if (l->is_oob(x, y)) {_
+        if (next_level->is_oob(x, y)) {_
             log("no, oob");
             continue;
         }
 
-        if (!l->is_dungeon(x, y)) {_
+        if (!next_level->is_dungeon(x, y)) {_
             log("no, out of dungeon");
             continue;
         }
 
-        if (l->is_entrance(x, y)    ||
-            l->is_monst(x, y)       ||
-            l->is_rock(x, y)        ||
-            l->is_door(x, y)        ||
-            l->is_secret_door(x, y) ||
-            l->is_generator(x, y)   ||
-            l->is_wall(x, y)        ||
-            l->is_exit(x, y)) {_
+        if (next_level->is_entrance(x, y)    ||
+            next_level->is_monst(x, y)       ||
+            next_level->is_rock(x, y)        ||
+            next_level->is_door(x, y)        ||
+            next_level->is_secret_door(x, y) ||
+            next_level->is_generator(x, y)   ||
+            next_level->is_chasm(x, y)       ||
+            next_level->is_wall(x, y)        ||
+            next_level->is_exit(x, y)) {_
             log("no, special tile");
             continue;
         }
 
-        if (l->is_floor(x, y) ||
-            l->is_lava(x, y)) {
+        if (next_level->is_floor(x, y) ||
+            next_level->is_lava(x, y)) {
 
             if (is_player()) {
-                game->level = l;
+                game->level = next_level;
                 MINICON("%%fg=red$You tumble into the void!%%fg=reset$");
             } else {
                 MINICON("%s tumbles into the void!", text_The().c_str());
             }
 
-            log("fall to the next level");
-            level_change(l);
+            log("land on the next level");
+            level_change(next_level);
             move_to_immediately(fpoint(x, y));
 
             if (is_player()) {
-                l->player = this;
-                l->scroll_map_to_player();
-                l->minimap_valid = false;
+                next_level->player = this;
+                next_level->scroll_map_to_player();
+                next_level->minimap_valid = false;
                 //
                 // Make sure all monsts on the new level are at the
                 // same tick or they will get lots of free attacks
                 //
-                l->update_all_ticks();
+                next_level->update_all_ticks();
             }
+
             update_light();
             set_fall_height(0);
             wobble(90);
@@ -148,17 +147,17 @@ bool Thing::fall_to_next_level (void)
             }
 
             auto new_pos = make_point(mid_at);
-            if (level->is_lava(new_pos)) {
+            if (next_level->is_lava(new_pos)) {
                 if (is_player()) {
                     MINICON("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
                 }
                 fall_damage *= 2;
-            } else if (level->is_deep_water(new_pos)) {
+            } else if (next_level->is_deep_water(new_pos)) {
                 if (is_player()) {
                     MINICON("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
                 }
                 fall_damage /= 4;
-            } else if (level->is_water(new_pos)) {
+            } else if (next_level->is_water(new_pos)) {
                 if (is_player()) {
                     MINICON("%%fg=yellow$The water lessens the fall!%%fg=reset$");
                 }
@@ -171,14 +170,14 @@ bool Thing::fall_to_next_level (void)
             }
 
             bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
-            level->thing_new(tp_random_attack_blood()->name(), mid_at);
+            next_level->thing_new(tp_random_attack_blood()->name(), mid_at);
             if (h <= 0) {
                 h = set_stats_health(0);
                 auto reason = std::string("killed by falling");
                 dead(nullptr, reason);
             }
 
-            level->scroll_map_to_player();
+            next_level->scroll_map_to_player();
 
             log("finished fall to next level");
             return true;
