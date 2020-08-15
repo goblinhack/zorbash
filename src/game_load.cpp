@@ -226,6 +226,11 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
 
+    //
+    // Need to reinit tiles
+    //
+    my.t->inited_tiles       = false;
+
     READ_MAGIC(THING_MAGIC_END);
 
 #ifdef ENABLE_DEBUG_SAVE_LOAD
@@ -286,7 +291,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};                */ in >> bits(my.t->_is_lava);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};               */ in >> bits(my.t->_is_monst);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};              */ in >> bits(my.t->_is_potion);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};         */ in >> bits(my.t->_is_ripple);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};              */ in >> bits(my.t->_is_ripple);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};                */ in >> bits(my.t->_is_rock);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};         */ in >> bits(my.t->_is_secret_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};               */ in >> bits(my.t->_is_smoke);
