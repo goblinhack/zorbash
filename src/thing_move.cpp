@@ -163,13 +163,13 @@ void Thing::update_interpolated_position (void)
         update_pos = true;
         new_pos = mid_at;
         last_mid_at = mid_at;
+
         set_timestamp_move_end(time_get_time_ms_cached());
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
             update_pos = true;
             new_pos = mid_at;
             last_mid_at = mid_at;
-            location_check();
 
             //
             // In case we changed level, update these
@@ -197,6 +197,8 @@ void Thing::update_interpolated_position (void)
         if (get_light_count()) {
             update_light();
         }
+
+        location_check();
     }
 }
 
