@@ -85,6 +85,13 @@ void Light::calculate (int last)
     }
 
     //
+    // This stops lighting things up when moving to the player on a new level
+    //
+    if (player->is_hidden) {
+        return;
+    }
+
+    //
     // Non player lights are just blitted textures
     //
     if (!owner->is_player()) {
