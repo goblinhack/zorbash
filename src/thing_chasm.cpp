@@ -43,6 +43,7 @@ bool Thing::fall_to_next_level (void)
     }
 
     log("fall to next level");
+    move_finish();
 
     auto next_level = level->world_at + point3d(0, 0, 1);
     game->init_level(next_level);
