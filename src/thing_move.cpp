@@ -160,6 +160,13 @@ void Thing::update_interpolated_position (void)
     bool update_pos = false;
     fpoint new_pos;
 
+    auto p = owner_get();
+    if ((p && p->is_falling) || is_falling) {
+        z_depth = MAP_DEPTH_FLOOR;
+    } else {
+        z_depth = tp()->z_depth;
+    }
+
     if (!get_timestamp_move_end()) {
         update_pos = true;
         new_pos = mid_at;

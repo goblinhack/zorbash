@@ -39,6 +39,7 @@
 #define LEVELS_ACROSS              MAP_WIDTH // World size
 #define LEVELS_DEEP                32
 #define LEVELS_DOWN                MAP_HEIGHT
+#define LEVELS_MONST_COUNT         100
 #define MAP_BORDER                 10   // Room border padding
 #define MAP_HEIGHT                 ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 #define MAP_ROCK_BORDER            1    // Map rock border

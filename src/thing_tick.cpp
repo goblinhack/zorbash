@@ -42,13 +42,6 @@ bool Thing::achieve_goals_in_life (void)
     hunger_clock();
     if (is_dead) { is_tick_done = true; return true; }
 
-#if 0
-    if (!location_check()) {
-        is_tick_done = true;
-        return true;
-    }
-#endif
-
     collision_check_do();
     if (is_dead) {
         is_tick_done = true;

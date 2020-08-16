@@ -184,6 +184,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(T); my.t->timestamp_next_frame = load(T);
     in >> bits(my.t->tile_curr);
     in >> bits(my.t->alpha);
+    in >> bits(my.t->z_depth);
     uint8_t dir; in >> dir; my.t->dir = dir;
 
     in >> bits(bits32);
@@ -314,6 +315,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* map_tl */                in >> bits(l->map_tl);
     /* map_wanted_at */         in >> bits(l->map_wanted_at);
     /* minimap_valid */         in >> bits(l->minimap_valid);
+    /* monst_count */           in >> bits(l->monst_count);
     /* mouse */                 in >> bits(l->mouse);
     /* mouse_old */             in >> bits(l->mouse_old);
     /* pixel_map_at */          in >> bits(l->pixel_map_at);

@@ -162,6 +162,7 @@ public:
     timestamp_t timestamp_next_frame {};
     uint16_t    tile_curr            {};
     uint8_t     alpha                {255}; // For fading
+    uint8_t     z_depth              {};
     uint32_t    dir:4                {};    // Direction
 
     /////////////////////////////////////////////////////////////////////////
@@ -241,7 +242,6 @@ public:
         return (nullptr);
     }
 
-    uint8_t z_depth(void) const;
     uint8_t z_prio (void) const
     {
         return (tp()->z_prio);

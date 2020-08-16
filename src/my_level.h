@@ -87,6 +87,7 @@ public:
     int                        mouse {-1};    // ticks for every move
     int                        mouse_old {-1};
     int                        seed {};
+    int                        monst_count {};
     point                      map_br;        // visible map br
     point                      map_tl;        // visible map tl
     point                      pixel_map_at;  // map pixel location
@@ -178,7 +179,7 @@ public:
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
                 if (t->is_hidden) { continue; }                     \
-                if (t->z_depth() != z) {                            \
+                if (t->z_depth != z) {                              \
                     continue;                                       \
                 }
 
