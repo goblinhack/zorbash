@@ -28,6 +28,16 @@ _
     };
 
     auto tpp = tp_find(what);
+
+    //
+    // Don't spawn too many monsts
+    //
+    if (tpp->is_monst()) {
+        if (level->monst_count >= LEVELS_MONST_COUNT) {
+            return false;
+        }
+    }
+
     for (const auto& d : all_deltas) {
         auto x = mid_at.x + d.x;
         auto y = mid_at.y + d.y;
@@ -73,6 +83,16 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     };
 
     auto tpp = tp_find(what);
+
+    //
+    // Don't spawn too many monsts
+    //
+    if (tpp->is_monst()) {
+        if (level->monst_count >= LEVELS_MONST_COUNT) {
+            return false;
+        }
+    }
+
     for (const auto& d : all_deltas) {
         auto x = mid_at.x + d.x;
         auto y = mid_at.y + d.y;

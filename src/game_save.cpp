@@ -141,6 +141,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     out << bits(my.t->timestamp_next_frame);
     out << bits(my.t->tile_curr);
     out << bits(my.t->alpha);
+    out << bits(my.t->z_depth);
     uint8_t dir = my.t->dir; out << bits(dir);
 
     uint32_t bits32 = 0;
@@ -260,6 +261,7 @@ std::ostream& operator<<(std::ostream &out,
     /* map_tl */                out << bits(my.t->map_tl);
     /* map_wanted_at */         out << bits(my.t->map_wanted_at);
     /* minimap_valid */         out << bits(my.t->minimap_valid);
+    /* monst_count */           out << bits(my.t->monst_count);
     /* mouse */                 out << bits(my.t->mouse);
     /* mouse_old */             out << bits(my.t->mouse_old);
     /* pixel_map_at */          out << bits(my.t->pixel_map_at);

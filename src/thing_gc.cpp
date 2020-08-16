@@ -27,9 +27,14 @@ void Level::things_gc (void)
             continue;
         }
 
+        if (t->is_monst()) {
+            monst_count--;
+        }
+
         if (t->is_loggable_for_unimportant_stuff()) {
             t->log("garbage collect");
         }
+
         delete t;
     }
 

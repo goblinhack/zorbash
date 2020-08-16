@@ -15,6 +15,7 @@
 void Level::tick (void)
 {_
     // log("tick");
+    // MINICON("monsts %d", monst_count);
     if (!game->started) {
         return;
     }

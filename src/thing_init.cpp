@@ -56,6 +56,11 @@ void Thing::init (Levelp level,
     tp_or_update();
 
     //
+    // Init the z depth
+    //
+    z_depth = tp()->z_depth;
+ 
+    //
     // Start off up to data with the player
     //
     set_tick(game->tick_current);
@@ -345,6 +350,10 @@ void Thing::init (Levelp level,
             ERR("bad on_birth call [%s] expected mod:function, got %d elems",
                 on_birth.c_str(), (int)on_birth.size());
         }
+    }
+
+    if (is_monst()) {
+        level->monst_count++;
     }
 }
 

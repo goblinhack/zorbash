@@ -5,9 +5,7 @@ def spawn(me, x, y):
     zx.tp_spawn_next_to(me, "slime1")
 
 
-def tp_init(name,
-              tiles=[],
-              left1_tiles=[]):
+def tp_init(name, tiles=[], left1_tiles=[]):
 
     x = tp.Tp(name)
 
