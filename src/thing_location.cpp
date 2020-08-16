@@ -14,6 +14,9 @@
 //
 bool Thing::location_check (void)
 {
+    if (is_hidden) {
+        return (false);
+    }
     //
     // Put chasm checks first as you can still fall when dead!
     //
