@@ -157,6 +157,9 @@ void Thing::level_leave (void)
 void Thing::level_push (void)
 {_
     level_pop();
+    if (is_loggable_for_unimportant_stuff()) {
+        log("push");
+    }
     level->put_thing((int)mid_at.x, (int)mid_at.y, id);
     auto mx = (int16_t)(int)mid_at.x;
     auto my = (int16_t)(int)mid_at.y;
@@ -207,6 +210,10 @@ void Thing::level_pop (void)
         return;
     }
     is_attached = false;
+
+    if (is_loggable_for_unimportant_stuff()) {
+        log("pop");
+    }
 
     auto mx = (int16_t)(int)last_attached.x;
     auto my = (int16_t)(int)last_attached.y;

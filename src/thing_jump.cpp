@@ -9,7 +9,7 @@
 #include "my_gl.h"
 
 bool Thing::try_to_jump (point to)
-{
+{_
     //
     // No rapid boinging
     //
@@ -241,7 +241,7 @@ bool Thing::try_to_jump (point to)
 }
 
 bool Thing::try_to_jump (void)
-{
+{_
     //
     // No rapid boinging
     //
@@ -267,7 +267,7 @@ bool Thing::try_to_jump (void)
 }
 
 void Thing::jump_end (void)
-{
+{_
     if (!is_jumping) {
         return;
     }

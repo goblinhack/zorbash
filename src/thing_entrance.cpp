@@ -14,6 +14,10 @@
 
 bool Thing::entrance_tick (void)
 {_
+    if (is_falling || is_jumping) {
+        return false;
+    }
+
     if (owner_get()) {
         return false;
     }
@@ -32,6 +36,10 @@ bool Thing::entrance_tick (void)
 
 bool Thing::ascend (void)
 {_
+    if (is_falling || is_jumping) {
+        return false;
+    }
+
     if (!monstp) {
         return false;
     }
