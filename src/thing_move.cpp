@@ -118,7 +118,7 @@ bool Thing::move (fpoint future_pos,
     }
 _
     auto t = nearby_most_dangerous_thing_get();
-    if (t) {_
+    if (t) {
         auto free_attack =
              ((t->mid_at.x >= mid_at.x) && left) ||
              ((t->mid_at.x <= mid_at.x) && right) ||
@@ -126,7 +126,8 @@ _
              ((t->mid_at.y <= mid_at.y) && down);
 
         if (free_attack) {_
-            if (t->attack(this)) {_
+            log("free attack by %s", t->to_string().c_str());
+            if (t->attack(this)) {
                 if (is_player()) {
                     std::string s = t->text_The() + " attacks as you run";
                     MINICON("%s", s.c_str());
@@ -203,9 +204,12 @@ void Thing::update_interpolated_position (void)
 }
 
 void Thing::update_pos (fpoint to, bool immediately)
-{
-    auto tpp = tp();
+{_
+    if (is_loggable_for_unimportant_stuff()) {
+        log("update pos");
+    }
 
+    auto tpp = tp();
     point new_at((int)to.x, (int)to.y);
     if (level->is_oob(new_at)) {
         return;
@@ -255,7 +259,7 @@ void Thing::update_pos (fpoint to, bool immediately)
     move_carried_items();
 
     if (tpp->is_loggable_for_unimportant_stuff()) {
-        dbg("moved");
+        log("moved");
     }
 }
 

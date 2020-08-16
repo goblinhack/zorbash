@@ -1,13 +1,14 @@
 bugs
 ----
+- slime combine crash
+- jump onto entrance is immediate
+- pick up / drop particle frenzy
 - jump on the spot
-- multiple jumps visible
-- sword lags on jump
 - diagonal jump via single light ray
 - dropped items vanish sometimes
 - some kind of buffering of events on rapid restart of new game
 - pressing tab when dead should hide dead windoe
-- slime combine crash
+- make the player icon small and outlined
 
 upcoming work
 -------------
