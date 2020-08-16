@@ -80,12 +80,11 @@ bool Thing::fall_to_next_level (void)
         }
         tries++;
 
-        log("try to fall to %d,%d", x, y);
         if (next_level->is_oob(x, y)) {_
-            log("no, oob");
             continue;
         }
 
+        log("try to fall to %d,%d", x, y);
         if (!next_level->is_dungeon(x, y)) {_
             log("no, out of dungeon");
             continue;
@@ -114,8 +113,10 @@ bool Thing::fall_to_next_level (void)
                 MINICON("%s tumbles into the void!", text_The().c_str());
             }
 
-            log("land on the next level");
+            log("land on the next level, change level then move to %d,%d", x, y);
             level_change(next_level);
+
+            log("land on the next level, move to %d,%d", x, y);
             move_to_immediately(fpoint(x, y));
 
             if (is_player()) {
