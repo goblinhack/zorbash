@@ -138,8 +138,7 @@ void Game::config_top_select (void)
                 ASCII_HEIGHT / 2 + 14);
     auto width = br.x - tl.x - 2;
 
-    game_config_top_window = new WidPopup(tl, br, nullptr, "",
-                                          false, false);
+    game_config_top_window = new WidPopup(tl, br, nullptr, "", false, false);
     {_
         Widp w = game_config_top_window->wid_popup_container;
         wid_set_do_not_lower(w, true);

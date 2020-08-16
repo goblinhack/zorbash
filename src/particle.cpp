@@ -12,6 +12,7 @@
 #include "my_point.h"
 #include "my_gl.h"
 #include "my_thing.h"
+#include "my_game.h"
 
 void Level::new_internal_particle (
                           ThingId id,
@@ -149,13 +150,44 @@ void Level::display_external_particles (void)
             blit_tl.y -= oy;
             blit_br.y -= oy;
 
+            Tpp tpp = {};
+            if (p.id.id) {
+                auto t = thing_find(p.id);
+                if (t) {
+                    tpp = t->tp();
+                }
+            }
+
+            auto tile = p.tile;
+            float tile_pix_width = tile->pix_width;
+            float tile_pix_height = tile->pix_height;
+            float tilew = game->config.tile_pix_width;
+            float tileh = game->config.tile_pix_height;
+            if (unlikely((tile_pix_width != TILE_WIDTH) ||
+                         (tile_pix_height != TILE_HEIGHT))) {
+                auto xtiles = tile_pix_width / TILE_WIDTH;
+                blit_tl.x -= ((xtiles-1) * tilew) / 2;
+                blit_br.x += ((xtiles-1) * tilew) / 2;
+
+                auto ytiles = tile_pix_height / TILE_HEIGHT;
+                blit_tl.y -= ((ytiles-1) * tileh) / 2;
+                blit_br.y += ((ytiles-1) * tileh) / 2;
+            }
+
+            if (unlikely(tpp->gfx_oversized_but_sitting_on_the_ground())) {
+                float y_offset =
+                    (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
+                blit_tl.y -= y_offset;
+                blit_br.y -= y_offset;
+            }
+
             blit_tl -= pixel_map_at - p.pixel_map_at;
             blit_br -= pixel_map_at - p.pixel_map_at;
 
             if (p.hflip) {
                 std::swap(blit_tl.x, blit_br.x);
             }
-            tile_blit_outline(p.tile, blit_tl, blit_br, WHITE);
+            tile_blit_outline(tile, blit_tl, blit_br, WHITE);
 
             return false;
         });
