@@ -49,7 +49,7 @@
 #define ROOM_WIDTH                 13
 #define THING_AI_WANDER_FREQ_TENTHS 3   // How often we can wander
 #define THING_DAMAGE_SHAKE_ABOVE   10   // Damage above this causes shakes
-#define THING_DAMAGE_SHAKE_SCALE   20.0 // Smaller means more shaking
+#define THING_DAMAGE_SHAKE_SCALE   40.0 // Smaller means more shaking
 #define THING_HEALTH_BLOODIED_PCT1 35   // Some blood on the screen
 #define THING_HEALTH_BLOODIED_PCT2 15   // More...
 #define THING_HEALTH_BLOODIED_PCT3 15   // More...

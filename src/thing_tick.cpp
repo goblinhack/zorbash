@@ -32,7 +32,7 @@ bool Thing::achieve_goals_in_life (void)
             get_tick(), game->tick_current);
     }
 
-    if (is_falling) {
+    if (is_falling || is_jumping) {
         is_tick_done = true;
         return true;
     }

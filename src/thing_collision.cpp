@@ -950,8 +950,8 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
     auto it_tp = it->tp();
     auto me_tp = me->tp();
 
-    if (is_falling) {
-        log("falling, ignore collisions");
+    if (is_falling || is_jumping) {
+        log("ignore collisions");
         return false;
     }
     // log("check %s", it->to_string().c_str());
@@ -1060,8 +1060,8 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
         log("collision handle");
     }
 _
-    if (is_falling) {
-        log("falling, ignore collisions");
+    if (is_falling || is_jumping) {
+        log("ignore collisions");
         return false;
     }
 

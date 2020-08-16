@@ -10,7 +10,7 @@
 
 void Thing::fall (float fall_height, timestamp_t ms)
 {
-    if (is_falling) {
+    if (is_falling || is_jumping) {
         return;
     }
 
