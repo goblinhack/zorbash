@@ -71,12 +71,48 @@ void Level::display_internal_particles (void)
             auto d = p.stop - p.start;
             point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
 
-            point blit_tl(at.x - (p.sz.w / 2), at.y - (p.sz.h / 2));
-            point blit_br(at.x + (p.sz.w / 2), at.y + (p.sz.h / 2));
+            auto sz = p.sz;
+            if (sz.w < 0) { sz.w = -sz.w; }
+            if (sz.h < 0) { sz.h = -sz.h; }
+
+            point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
+            point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
             int oy = sin(RAD_180 * dt) * 50;
             blit_tl.y -= oy;
             blit_br.y -= oy;
+
+            Tpp tpp = {};
+            if (p.id.id) {
+                auto t = thing_find(p.id);
+                if (t) {
+                    tpp = t->tp();
+                }
+            }
+
+            auto tile = p.tile;
+            float tile_pix_width = tile->pix_width;
+            float tile_pix_height = tile->pix_height;
+            float tilew = game->config.tile_pix_width;
+            float tileh = game->config.tile_pix_height;
+            if (unlikely((tile_pix_width != TILE_WIDTH) ||
+                         (tile_pix_height != TILE_HEIGHT))) {
+                auto xtiles = tile_pix_width / TILE_WIDTH;
+                blit_tl.x -= ((xtiles-1) * tilew) / 2;
+                blit_br.x += ((xtiles-1) * tilew) / 2;
+
+                auto ytiles = tile_pix_height / TILE_HEIGHT;
+                blit_tl.y -= ((ytiles-1) * tileh) / 2;
+                blit_br.y += ((ytiles-1) * tileh) / 2;
+            }
+
+            if (unlikely(tpp &&
+                         tpp->gfx_oversized_but_sitting_on_the_ground())) {
+                float y_offset =
+                    (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
+                blit_tl.y -= y_offset;
+                blit_br.y -= y_offset;
+            }
 
             blit_tl -= pixel_map_at - p.pixel_map_at;
             blit_br -= pixel_map_at - p.pixel_map_at;
@@ -143,8 +179,12 @@ void Level::display_external_particles (void)
             auto d = p.stop - p.start;
             point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
 
-            point blit_tl(at.x - (p.sz.w / 2), at.y - (p.sz.h / 2));
-            point blit_br(at.x + (p.sz.w / 2), at.y + (p.sz.h / 2));
+            auto sz = p.sz;
+            if (sz.w < 0) { sz.w = -sz.w; }
+            if (sz.h < 0) { sz.h = -sz.h; }
+
+            point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
+            point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
             int oy = sin(RAD_180 * dt) * 50;
             blit_tl.y -= oy;
@@ -174,7 +214,8 @@ void Level::display_external_particles (void)
                 blit_br.y += ((ytiles-1) * tileh) / 2;
             }
 
-            if (unlikely(tpp->gfx_oversized_but_sitting_on_the_ground())) {
+            if (unlikely(tpp &&
+                         tpp->gfx_oversized_but_sitting_on_the_ground())) {
                 float y_offset =
                     (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
                 blit_tl.y -= y_offset;
@@ -187,6 +228,7 @@ void Level::display_external_particles (void)
             if (p.hflip) {
                 std::swap(blit_tl.x, blit_br.x);
             }
+
             tile_blit_outline(tile, blit_tl, blit_br, WHITE);
 
             return false;
