@@ -149,17 +149,25 @@ bool Thing::try_to_jump (point to)
     // Weapons follow also.
     //
     if (get_weapon_id_carry_anim().ok()) {
-        auto w = level->thing_find(get_weapon_id_carry_anim());
+        auto id = get_weapon_id_carry_anim();
+        auto w = level->thing_find(id);
         if (w) {
             w->move_to_immediately(mid_at);
             w->is_jumping = true;
-            level->new_external_particle(id, src, dst, sz, 500,
-                                        tile_index_to_tile(w->tile_curr),
-                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            if (is_player()) {
+                level->new_external_particle(id, src, dst, sz, 490,
+                                             tile_index_to_tile(w->tile_curr),
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            } else {
+                level->new_internal_particle(id, src, dst, sz, 490,
+                                             tile_index_to_tile(w->tile_curr),
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            }
         }
     }
 
     if (get_weapon_id_use_anim().ok()) {
+        auto id = get_weapon_id_use_anim();
         auto w = level->thing_find(get_weapon_id_use_anim());
         if (w) {
             w->move_to_immediately(mid_at);
@@ -167,9 +175,15 @@ bool Thing::try_to_jump (point to)
             //
             // No, the weapon is shown as carry anim
             //
-            level->new_external_particle(id, src, dst, sz, 500,
-                                        tile_index_to_tile(w->tile_curr),
-                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            if (is_player()) {
+                level->new_external_particle(id, src, dst, sz, 490,
+                                             tile_index_to_tile(w->tile_curr),
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            } else {
+                level->new_internal_particle(id, src, dst, sz, 490,
+                                             tile_index_to_tile(w->tile_curr),
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            }
         }
     }
 
@@ -187,13 +201,20 @@ bool Thing::try_to_jump (point to)
 
     auto on_fire_anim_id = get_on_fire_anim_id();
     if (on_fire_anim_id.ok()) {_
-        auto w = level->thing_find(on_fire_anim_id);
+        auto id = on_fire_anim_id;
+        auto w = level->thing_find(id);
         if (w) {
             w->move_to_immediately(mid_at);
             w->is_jumping = true;
-            level->new_external_particle(id, src, dst, sz, 500,
-                                        tile_index_to_tile(w->tile_curr),
-                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            if (is_player()) {
+                level->new_external_particle(id, src, dst, sz, 500,
+                                             tile_index_to_tile(w->tile_curr),
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            } else {
+                level->new_internal_particle(id, src, dst, sz, 500,
+                                             tile_index_to_tile(w->tile_curr),
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+            }
         }
     }
 
@@ -235,6 +256,9 @@ bool Thing::try_to_jump (void)
         if (try_to_jump(point(x, y))) {
             return true;
         }
+    if (is_jumping) {
+        DIE("x");
+    }
     }
 
     return (false);
@@ -295,7 +319,6 @@ void Thing::jump_end (void)
         auto t = nearby_most_dangerous_thing_get();
         if (t) {
             std::string s = t->text_The() + " attacks as you land";
-            MINICON("%s", s.c_str());
             game->tick_begin("monst attack as player landed");
         }
     }
