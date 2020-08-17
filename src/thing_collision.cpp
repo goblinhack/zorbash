@@ -855,7 +855,10 @@ bool Thing::collision_obstacle (Thingp it)
     //
     // Skip things we cannot collide with
     //
-    if (it->is_hidden || it->is_falling || it->is_jumping) {
+    if (it->is_hidden ||
+        it->is_falling ||
+        it->is_jumping ||
+        it->is_changing_level) {
         return false;
     }
 
@@ -950,7 +953,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
     auto it_tp = it->tp();
     auto me_tp = me->tp();
 
-    if (is_falling || is_jumping) {
+    if (is_falling || is_jumping || is_changing_level) {
         log("ignore collisions");
         return false;
     }
@@ -1060,7 +1063,7 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
         log("collision handle");
     }
 _
-    if (is_falling || is_jumping) {
+    if (is_falling || is_jumping || is_changing_level) {
         log("ignore collisions");
         return false;
     }
@@ -1094,7 +1097,10 @@ _
                     continue;
                 }
 
-                if (it->is_hidden || it->is_falling || it->is_jumping) {
+                if (it->is_hidden ||
+                    it->is_falling ||
+                    it->is_jumping ||
+                    it->is_changing_level) {
                     log("ignore as hidden/falling/jumping");
                     continue;
                 }
@@ -1185,15 +1191,10 @@ _
                 //
                 // Skip things we cannot collide with
                 //
-                if (it->is_jumping) {
-                    log("ignore jumping %s", it->to_string().c_str());
-                    continue;
-                }
-                if (it->is_hidden) {
-                    log("ignore hidden %s", it->to_string().c_str());
-                    continue;
-                }
-                if (it->is_falling) {
+                if (it->is_hidden ||
+                    it->is_falling ||
+                    it->is_jumping ||
+                    it->is_changing_level) {
                     log("ignore falling %s", it->to_string().c_str());
                     continue;
                 }
