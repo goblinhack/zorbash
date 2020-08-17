@@ -88,7 +88,13 @@ _
 #endif
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
-            if (it->is_hidden || it->is_falling || it->is_jumping) { continue; }
+
+            if (it->is_changing_level ||
+                it->is_hidden || 
+                it->is_falling || 
+                it->is_jumping) { 
+                continue; 
+            }
 
             //
             // Worse terrain, less preferred. Higher score, more preferred.

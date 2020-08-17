@@ -622,6 +622,18 @@ int32_t main (int32_t argc, char *argv[])
     game = new Game(std::string(appdata));
     game->load_config();
 
+    if (g_opt_ascii_mode) {
+        if (game) {
+            game->config.ascii_mode = g_opt_ascii_mode;
+        }
+    }
+
+    if (g_opt_debug) {
+        if (game) {
+            game->config.debug_mode = g_opt_debug;
+        }
+    }
+
     CON("INIT: SDL create window");
     if (!sdl_init()) {
         ERR("SDL init");
@@ -659,12 +671,6 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGINT, ctrlc_handler);   // install our handler
     signal(SIGPIPE, ctrlc_handler);  // install our handler
 #endif
-
-    if (g_opt_ascii_mode) {
-        if (game) {
-            game->config.ascii_mode = g_opt_ascii_mode;
-        }
-    }
 
     color_init();
 

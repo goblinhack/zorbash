@@ -160,6 +160,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_being_destroyed << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_bouncing        << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_changing_level  << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_dead            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_facing_left     << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_fadeup          << shift; shift++;
@@ -323,16 +324,17 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 {_
     uint32_t header_size = sizeof(Config);
     /* uint32_t           header_size                  */ out << bits(header_size                       );
-    /* bool               ascii_mode                   */ out << bits(my.t.ascii_mode                   );
-    /* bool               fps_counter                  */ out << bits(my.t.fps_counter                  );
-    /* bool               gfx_allow_highdpi            */ out << bits(my.t.gfx_allow_highdpi            );
-    /* bool               gfx_borderless               */ out << bits(my.t.gfx_borderless               );
-    /* bool               gfx_fullscreen               */ out << bits(my.t.gfx_fullscreen               );
-    /* bool               gfx_fullscreen_desktop       */ out << bits(my.t.gfx_fullscreen_desktop       );
-    /* bool               gfx_inverted                 */ out << bits(my.t.gfx_inverted                 );
-    /* bool               gfx_minimap                  */ out << bits(my.t.gfx_minimap                  );
-    /* bool               gfx_show_hidden              */ out << bits(my.t.gfx_show_hidden              );
-    /* bool               gfx_vsync_enable             */ out << bits(my.t.gfx_vsync_enable             );
+    /* int                ascii_mode                   */ out << bits(my.t.ascii_mode                   );
+    /* int                debug_mode                   */ out << bits(my.t.debug_mode                   );
+    /* int                fps_counter                  */ out << bits(my.t.fps_counter                  );
+    /* int                gfx_allow_highdpi            */ out << bits(my.t.gfx_allow_highdpi            );
+    /* int                gfx_borderless               */ out << bits(my.t.gfx_borderless               );
+    /* int                gfx_fullscreen               */ out << bits(my.t.gfx_fullscreen               );
+    /* int                gfx_fullscreen_desktop       */ out << bits(my.t.gfx_fullscreen_desktop       );
+    /* int                gfx_inverted                 */ out << bits(my.t.gfx_inverted                 );
+    /* int                gfx_minimap                  */ out << bits(my.t.gfx_minimap                  );
+    /* int                gfx_show_hidden              */ out << bits(my.t.gfx_show_hidden              );
+    /* int                gfx_vsync_enable             */ out << bits(my.t.gfx_vsync_enable             );
     /* double             ascii_gl_height              */ out << bits(my.t.ascii_gl_height              );
     /* double             ascii_gl_width               */ out << bits(my.t.ascii_gl_width               );
     /* double             one_pixel_height             */ out << bits(my.t.one_pixel_height             );

@@ -16,17 +16,22 @@
 typedef class Config_ {
 public:
     uint32_t           header_size                  = {};
-    bool               ascii_mode                   = false;
-    bool               fps_counter                  = false;
-    bool               gfx_allow_highdpi            = false;
-    bool               gfx_borderless               = true;
-    bool               gfx_fullscreen               = false;
-    bool               gfx_fullscreen_desktop       = true;
-    bool               gfx_inverted                 = false;
-    bool               gfx_lights                   = true;
-    bool               gfx_minimap                  = true;
-    bool               gfx_show_hidden              = false;
-    bool               gfx_vsync_enable             = true;
+    //
+    // Keep flags int size so the header size will change on a new flag.
+    // It does not always for new bools.
+    //
+    int                ascii_mode                   = false;
+    int                debug_mode                   = false;
+    int                fps_counter                  = false;
+    int                gfx_allow_highdpi            = false;
+    int                gfx_borderless               = true;
+    int                gfx_fullscreen               = false;
+    int                gfx_fullscreen_desktop       = true;
+    int                gfx_inverted                 = false;
+    int                gfx_lights                   = true;
+    int                gfx_minimap                  = true;
+    int                gfx_show_hidden              = false;
+    int                gfx_vsync_enable             = true;
     double             ascii_gl_height              = {};
     double             ascii_gl_width               = {};
     double             one_pixel_height             = {};

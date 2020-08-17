@@ -18,7 +18,10 @@ bool Thing::chasm_tick (void)
         return false;
     }
 
-    if (is_falling || is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
         return true;
     }
 

@@ -40,11 +40,13 @@ uint8_t game_config_other_back (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
-uint8_t game_config_ascii_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: toggle ascii_mode");
-    game->config.ascii_mode = !game->config.ascii_mode;
-    game->config_other_select();
+    CON("USERCFG: toggle debug_mode");
+    game->config.debug_mode = !game->config.debug_mode;
+    CON("USERCFG: save config");
+    game->save_config();
+    g_need_restart = true;
     return (true);
 }
 
@@ -198,35 +200,41 @@ void Game::config_other_select (void)
         wid_set_text(w, "%%fg=white$C%%fg=reset$ancel");
     }
 
+    //////////////////////////////////////////////////////////////////////
+    // fps
+    //////////////////////////////////////////////////////////////////////
     y_at += 3;
     {_
         auto p = game_config_other_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "ASCII mode");
+        auto w = wid_new_square_button(p, "debug mode");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "ASCII mode");
+        wid_set_text(w, "Debug mode (restart)");
     }
     {_
         auto p = game_config_other_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "ASCII mode value");
+        auto w = wid_new_square_button(p, "debug mode value");
 
         point tl = make_point(width / 2 , y_at);
         point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_ascii_mode_toggle);
+        wid_set_on_mouse_up(w, game_config_debug_mode_toggle);
 
-        if (game->config.ascii_mode) {
+        if (game->config.debug_mode) {
             wid_set_text(w, "True");
         } else {
             wid_set_text(w, "False");
         }
     }
 
+    //////////////////////////////////////////////////////////////////////
+    // fps
+    //////////////////////////////////////////////////////////////////////
     y_at += 3;
     {_
         auto p = game_config_other_window->wid_text_area->wid_text_area;
@@ -256,17 +264,20 @@ void Game::config_other_select (void)
         }
     }
 
+    //////////////////////////////////////////////////////////////////////
+    // delay
+    //////////////////////////////////////////////////////////////////////
     y_at += 3;
     {_
         auto p = game_config_other_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "SDL delay ms per frame");
+        auto w = wid_new_square_button(p, "Delay ms per frame");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "SDL delay ms per frame");
+        wid_set_text(w, "Delay ms per frame");
     }
     {_
         auto p = game_config_other_window->wid_text_area->wid_text_area;

@@ -14,7 +14,10 @@
 
 bool Thing::entrance_tick (void)
 {_
-    if (is_falling || is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
         return false;
     }
 
@@ -36,7 +39,10 @@ bool Thing::entrance_tick (void)
 
 bool Thing::ascend (void)
 {_
-    if (is_falling || is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
         return false;
     }
 
@@ -75,6 +81,8 @@ bool Thing::ascend (void)
                 }
 
                 log("move to previous level exit");
+                is_changing_level = true;
+
                 level_change(l);
                 set_tick_last_level_change(get_tick());
                 move_to_immediately(fpoint(x, y));
@@ -99,6 +107,7 @@ bool Thing::ascend (void)
                     level->cursor->move_to_immediately(mid_at);
                 }
 
+                is_changing_level = false;
                 log("moved to previous level exit");
                 return true;
             }

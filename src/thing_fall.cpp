@@ -10,7 +10,10 @@
 
 void Thing::fall (float fall_height, timestamp_t ms)
 {
-    if (is_falling || is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
         return;
     }
 

@@ -48,6 +48,21 @@ zx.map_load_room(entrance=True, room_data=[
 "      .L     ","             ","             ","             ","  CCCCCCCCC  ",
 "      v      ","             ","             ","             ","             ",
 ])
+zx.map_load_room(entrance=True, room_data=[
+"      ^      ","             ","             ","             ","             ",
+"      .  $.. ","             ","  CC    ^    ","      ^      ","      ^      ",
+"     www xx. ","      ^      ","  CCC   ..   ","      .      ","  .$ ....Sw  ",
+"     wWw C.C ","     ....CCC ","   CC.....   ","   %...CCCC  ","  . .....ww  ",
+"     www CCC ","    ...B.C.. ","    .B.B..   ","   CC.....CC "," C.....w..w  ",
+"  <..... ...>"," <....S.....>"," <....S.....>"," <....CCC..C "," ....wwWw..  ",
+"    ....  .. ","    ...BCC.. ","    .B..C.   ","  CCCCCCCC.. ","<...wWWWWw   ",
+"    ww.....B ","     ......  ","  .C...CCC   ","  CS.......m ","  .wWWWWWw..>",
+"     ww....  ","     www..ww ","   CCC..     ","  CCCCCCC.CC "," w..wwwww..  ",
+"     Ww....S ","     wWwW.wW ","       v     ","    CCCCC.C  "," ww..m...w.. ",
+"    W ..w    ","         v   ","             ","         v   "," wwww...www. ",
+"      .wW    ","             ","             ","             ","  wwwwwwwww  ",
+"      v      ","             ","             ","             ","             ",
+])
 
 #
 # exit rooms

@@ -179,6 +179,7 @@ public:
     uint32_t is_being_destroyed:1 {};
     uint32_t is_blitted:1         {};
     uint32_t is_bouncing:1        {};
+    uint32_t is_changing_level:1  {};
     uint32_t is_dead:1            {};
     uint32_t is_facing_left:1     {};
     uint32_t is_fadeup:1          {};
