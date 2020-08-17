@@ -203,6 +203,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_changing_level  = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_dead            = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;
@@ -420,21 +421,24 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
 std::istream& operator>>(std::istream &in, Bits<Config &> my)
 {_
     /* uint32_t           header_size                  */ in >> bits(my.t.header_size                  );
+CON("my.t.header_size %d", my.t.header_size);
+CON(" sizeof(Config) %d", (int) sizeof(Config));
     if (my.t.header_size != sizeof(Config)) {
         game_load_error = "incompatible save file header version";
         return in;
     }
 
-    /* bool               ascii_mode                   */ in >> bits(my.t.ascii_mode                   );
-    /* bool               fps_counter                  */ in >> bits(my.t.fps_counter                  );
-    /* bool               gfx_allow_highdpi            */ in >> bits(my.t.gfx_allow_highdpi            );
-    /* bool               gfx_borderless               */ in >> bits(my.t.gfx_borderless               );
-    /* bool               gfx_fullscreen               */ in >> bits(my.t.gfx_fullscreen               );
-    /* bool               gfx_fullscreen_desktop       */ in >> bits(my.t.gfx_fullscreen_desktop       );
-    /* bool               gfx_inverted                 */ in >> bits(my.t.gfx_inverted                 );
-    /* bool               gfx_minimap                  */ in >> bits(my.t.gfx_minimap                  );
-    /* bool               gfx_show_hidden              */ in >> bits(my.t.gfx_show_hidden              );
-    /* bool               gfx_vsync_enable             */ in >> bits(my.t.gfx_vsync_enable             );
+    /* int                ascii_mode                   */ in >> bits(my.t.ascii_mode                   );
+    /* int                debug_mode                   */ in >> bits(my.t.debug_mode                   );
+    /* int                fps_counter                  */ in >> bits(my.t.fps_counter                  );
+    /* int                gfx_allow_highdpi            */ in >> bits(my.t.gfx_allow_highdpi            );
+    /* int                gfx_borderless               */ in >> bits(my.t.gfx_borderless               );
+    /* int                gfx_fullscreen               */ in >> bits(my.t.gfx_fullscreen               );
+    /* int                gfx_fullscreen_desktop       */ in >> bits(my.t.gfx_fullscreen_desktop       );
+    /* int                gfx_inverted                 */ in >> bits(my.t.gfx_inverted                 );
+    /* int                gfx_minimap                  */ in >> bits(my.t.gfx_minimap                  );
+    /* int                gfx_show_hidden              */ in >> bits(my.t.gfx_show_hidden              );
+    /* int                gfx_vsync_enable             */ in >> bits(my.t.gfx_vsync_enable             );
     /* double             ascii_gl_height              */ in >> bits(my.t.ascii_gl_height              );
     /* double             ascii_gl_width               */ in >> bits(my.t.ascii_gl_width               );
     /* double             one_pixel_height             */ in >> bits(my.t.one_pixel_height             );

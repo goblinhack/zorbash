@@ -56,7 +56,10 @@ bool Thing::move (fpoint future_pos,
         return (false);
     }
 
-    if (is_falling || is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
         return (false);
     }
 

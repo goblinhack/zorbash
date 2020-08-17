@@ -87,13 +87,14 @@ static void game_monsts_wid_create (void)
                         continue;
                     }
 
-                    if (t->get_owner_id().ok()) {
-                        continue;
-                    }
                     if (t->is_monst()) {
                         if (t->is_dead) {
                             continue;
                         }
+                    }
+
+                    if (t->get_owner_id().ok()) {
+                        continue;
                     }
 
                     auto p = make_point(t->mid_at.x, t->mid_at.y);
