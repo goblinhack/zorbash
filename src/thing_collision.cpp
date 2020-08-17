@@ -953,11 +953,14 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
     auto it_tp = it->tp();
     auto me_tp = me->tp();
 
+    //
+    // Do not include hidden as we use the sword being carried here
+    // and when swinging, it is hidden
+    //
     if (is_falling || is_jumping || is_changing_level) {
         log("ignore collisions");
         return false;
     }
-    // log("check %s", it->to_string().c_str());
 
     if (it->is_monst()) {
         if (is_torch()) {
@@ -1063,6 +1066,10 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
         log("collision handle");
     }
 _
+    //
+    // Do not include hidden as we use the sword being carried here
+    // and when swinging, it is hidden
+    //
     if (is_falling || is_jumping || is_changing_level) {
         log("ignore collisions");
         return false;
