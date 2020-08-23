@@ -263,7 +263,7 @@ void Level::display_anim (void)
     //
     // Slow timer to scroll the lava.
     //
-    if (lava_step1++ >= 2) {
+    if (lava_step1++ >= 4) {
         lava_step1 = 0;
         if (lava_step2++ >= (TILE_HEIGHT * 2) - 1) {
             lava_step2 = 0;
