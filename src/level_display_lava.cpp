@@ -177,8 +177,24 @@ void Level::display_lava (int fbo,
     blit_fbo_bind(FBO_MASK4);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(BLACK);
-    glTranslatef( 0, -4, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  4, 0);
+
+    color b = BLACK;
+    b.a = 250;
+    glcolor(b);
+    glTranslatef( 0, -5, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  5, 0);
+    glTranslatef(-3, -3, 0); blit_fbo(FBO_MASK1); glTranslatef( 3,  3, 0);
+    glTranslatef( 0, -3, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  3, 0);
+    glTranslatef( 3, -3, 0); blit_fbo(FBO_MASK1); glTranslatef(-3,  3, 0);
+    glTranslatef(-3,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 3,  0, 0);
+    glTranslatef( 3,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-3,  0, 0);
+    glTranslatef(-3,  3, 0); blit_fbo(FBO_MASK1); glTranslatef( 3, -3, 0);
+    glTranslatef( 3,  3, 0); blit_fbo(FBO_MASK1); glTranslatef(-3, -3, 0);
+    glTranslatef( 0,  5, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -5, 0);
+
+    color y = ORANGE;
+    y.a = 200;
+    glcolor(y);
+    glTranslatef( 0, -3, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  4, 0);
     glTranslatef(-2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  2, 0);
     glTranslatef( 0, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  2, 0);
     glTranslatef( 2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  2, 0);
@@ -187,13 +203,14 @@ void Level::display_lava (int fbo,
     glTranslatef(-2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2, -2, 0);
     glTranslatef( 0,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -2, 0);
     glTranslatef( 2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2, -2, 0);
+
     color c = RED;
-    c.a = 200;
+    c.a = 100;
     if (g_render_black_and_white) {
         c = BLACK;
     }
     glcolor(c);
-    glTranslatef(-1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  1, 0);
+    glTranslatef(-1, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  1, 0);
     glTranslatef( 0, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  1, 0);
     glTranslatef( 1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef(-1,  1, 0);
     glTranslatef(-1,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  0, 0);
