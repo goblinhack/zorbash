@@ -5,22 +5,38 @@
 
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_game.h"
 
 bool Thing::carry (Thingp what)
 {_
-    if (is_player()) {
-        if (!actionbar_id_insert(what)) {
-            return false;
-        }
+    log("try to carry %s", what->to_string().c_str());
+_
+    if (!monstp) {
+        log("no; not a monst");
+        return false;
     }
 
-    if (!monstp) {
+    if (particle_anim_exists()) {
+        log("no; particle anim exists");
         return false;
+    }
+
+    if (get_where_i_dropped_an_item_last() == make_point(mid_at)) {
+        log("no; was dropped here recently");
+        return false;
+    }
+
+    if (is_player()) {
+        if (!actionbar_id_insert(what)) {
+            log("no; no space in actionbar");
+            return false;
+        }
     }
 
     auto existing_owner = what->owner_get();
     if (existing_owner) {
         if (existing_owner == this) {
+            log("no; same owner");
             return false;
         }
         existing_owner->drop(what);
@@ -28,6 +44,7 @@ bool Thing::carry (Thingp what)
 
     for (const auto& item : monstp->carrying) {
         if (item == what->id) {
+            log("no; already carried");
             return false;
         }
     }
@@ -36,7 +53,7 @@ bool Thing::carry (Thingp what)
     what->set_owner(this);
     what->hide();
 
-    log("is now carrying %s", what->to_string().c_str());
+    log("yes; is now carrying %s", what->to_string().c_str());
 
     //
     // If we have no weapon, wield it
@@ -52,10 +69,5 @@ bool Thing::carry (Thingp what)
 
 bool Thing::try_to_carry (Thingp what)
 {_
-    if (get_tick_dropped()) {
-        if (get_tick() - get_tick_dropped() <= 1) {
-            return false;
-        }
-    }
     return carry(what);
 }

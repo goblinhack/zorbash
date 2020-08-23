@@ -3409,51 +3409,23 @@ uint32_t Thing::incr_tick_last_level_change (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// tick_dropped
+// where_i_dropped_an_item_last
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick_dropped (void) const
+point Thing::get_where_i_dropped_an_item_last (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->tick_dropped);
+        return (monstp->where_i_dropped_an_item_last);
     } else {
-        return (0);
+        return (point(-1, -1));
     }
 }
 
-uint32_t Thing::set_tick_dropped (uint32_t v)
+point Thing::set_where_i_dropped_an_item_last (point v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->tick_dropped = v);
-}
-
-uint32_t Thing::decr_tick_dropped (uint32_t v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->tick_dropped -= v);
-}
-
-uint32_t Thing::incr_tick_dropped (uint32_t v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->tick_dropped += v);
-}
-
-uint32_t Thing::decr_tick_dropped (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->tick_dropped--);
-}
-
-uint32_t Thing::incr_tick_dropped (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->tick_dropped++);
+    return (monstp->where_i_dropped_an_item_last = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////

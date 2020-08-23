@@ -23,7 +23,7 @@ def init_swing(name):
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_movable(True)
     x.set_text_a_or_an("a");
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_z_prio(zx.MAP_PRIO_BEHIND)
     x.set_text_description("Thy shining pointy mechanism of justice")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
@@ -113,7 +113,7 @@ def init_weapon(name, text_name):
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     x.set_tile(tile=name + ".1")
 

@@ -108,6 +108,7 @@ public:
     int          tick_rate_tenths = {};
     int          tick_resurrect_when = {};
     point        wander_target;
+    point        where_i_dropped_an_item_last;
     std::list<ThingId>   carrying;
     std::string          msg;                // Text that floats on screen
     std::vector<uint16_t> actionbar_id;      // Vector of tp_id
@@ -133,7 +134,6 @@ public:
     uint32_t     tick_last_did_something {};
     uint32_t     tick_last_escape {};
     uint32_t     tick_last_level_change {};
-    uint32_t     tick_dropped {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -175,6 +175,7 @@ public:
     uint32_t has_ever_moved:1     {};
     uint32_t has_light:1          {};
     uint32_t inited_tiles:1       {};
+    uint32_t unused_xxx1:1        {};
     uint32_t is_attached:1        {};
     uint32_t is_being_destroyed:1 {};
     uint32_t is_blitted:1         {};
@@ -661,12 +662,8 @@ public:
     uint32_t decr_tick_last_level_change(void);
     uint32_t incr_tick_last_level_change(void);
 
-    uint32_t set_tick_dropped(uint32_t);
-    uint32_t get_tick_dropped(void) const;
-    uint32_t decr_tick_dropped(uint32_t);
-    uint32_t incr_tick_dropped(uint32_t);
-    uint32_t decr_tick_dropped(void);
-    uint32_t incr_tick_dropped(void);
+    point set_where_i_dropped_an_item_last(point);
+    point get_where_i_dropped_an_item_last(void) const;
 
     ThingId set_on_fire_anim_id(ThingId);
     ThingId get_on_fire_anim_id(void) const;
@@ -1167,6 +1164,7 @@ public:
     void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
     void weapon_sheath(void);
     void wield(Thingp w);
+    bool particle_anim_exists(void);
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);

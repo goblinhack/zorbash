@@ -553,9 +553,7 @@ _
             continue;
         }
 
-//        if (is_loggable_for_unimportant_stuff()) {
-            log("cand %s", cand.target->to_string().c_str());
-//        }
+        log("cand %s", cand.target->to_string().c_str());
 
         //
         // Skip things that aren't really hitable.
@@ -788,16 +786,14 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
 //
 bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
                                       int x, int y, int dx, int dy)
-{
+{_
     auto me = this;
 
     Thingp owner_it = it->owner_get();
     Thingp owner_me = me->owner_get();
 
-    if (is_loggable_for_unimportant_stuff()) {
-        log("cand %s", it->to_string().c_str());
-    }
-
+    log("collision candidate? %s", it->to_string().c_str());
+_
     //
     // Need this or shields attack the player.
     //
@@ -806,7 +802,7 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
         // If on fire, allow fire to burn its owner - you!
         //
         if (!is_fire()) {
-            log("allow fire to burn owner");
+            log("yes; allow fire to burn owner");
             return true;
         }
     }
@@ -815,32 +811,26 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
     // Sword use hits?
     //
     if (!it->is_dead && possible_to_attack(it)) {
-        log("possible to attack %s", it->to_string().c_str());
         if (things_overlap_attack(me, future_pos, it)) {
-            if (is_loggable_for_unimportant_stuff()) {
-                log("candidate to attack %s", it->to_string().c_str());
-            }
+            log("yes; candidate to attack");
             thing_add_ai_possible_hit(it, "battle");
         } else {
-            if (is_loggable_for_unimportant_stuff()) {
-                log("cannot attack %s, no overlap", it->to_string().c_str());
-            }
+            log("no; cannot attack, no overlap");
         }
     } else if (will_eat(it)) {
-        if (is_loggable_for_unimportant_stuff()) {
-            log("candidate to eat %s", it->to_string().c_str());
+        if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
+            log("no; can eat but was seen previously");
+            return true;
         }
+
         if (things_overlap(me, me->mid_at, it)) {
+            log("yes; overlaps and can eat");
             thing_add_ai_possible_hit(it, "eat");
         }
     } else if (it->is_dead) {
-        if (is_loggable_for_unimportant_stuff()) {
-            log("cand ignore corpse %s", it->to_string().c_str());
-        }
+        log("no; ignore corpse");
     } else {
-        if (is_loggable_for_unimportant_stuff()) {
-            log("cand ignore %s", it->to_string().c_str());
-        }
+        log("no; ignore");
     }
 
     return true;
@@ -962,6 +952,9 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
         return false;
     }
 
+    log("collision check only? @%f,%f with %s",
+        A_at.x, A_at.y, it->to_string().c_str());
+_
     if (it->is_monst()) {
         if (is_torch()) {
             //
@@ -973,13 +966,13 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
             //
             if (will_eat(it)) {
                 if (things_overlap(me, me->mid_at, it)) {
-                    log("can eat %s", it->to_string().c_str());
+                    log("yes; overlaps and can eat");
                     return true;
                 }
             }
 
             if (it->is_dead) {
-                log("ignore corpse %s", it->to_string().c_str());
+                log("no; ignore corpse");
                 return false;
             }
         }
@@ -992,14 +985,10 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
     // Need this or shields attack the player.
     //
     if ((owner_it == me) || (owner_me == it)) {
+        log("no; collision with myself");
         return false;
     }
 
-    if (is_loggable_for_unimportant_stuff()) {
-        log("collision check @%f,%f with %s",
-            A_at.x, A_at.y, it->to_string().c_str());
-    }
-_
     //
     // Sword use hits?
     //
@@ -1008,47 +997,52 @@ _
             //
             // Weapon hits monster or generator.
             //
-            log("try to attack %s", it->to_string().c_str());
             if (things_overlap_attack(me, A_at, it)) {
+                log("yes; overlaps and can attack");
                 return true;
             }
         }
     } else if (it->is_door() && !it->is_open) {
         if (things_overlap(me, A_at, it)) {
             if (!it->is_dead) {
-                log("can open %s", it->to_string().c_str());
+                log("yes; overlaps and can open");
                 return !open_door(it);
             }
         }
     } else if (it->is_ethereal()) {
-        log("can pass through %s", it->to_string().c_str());
+        log("no; can pass through");
     } else if (it->is_exit()) {
         if (things_overlap(me, A_at, it)) {
-            log("can exit %s", it->to_string().c_str());
+            log("no; overlaps but can exit");
             // open_exit(it);
             return false;
         }
     } else if (possible_to_attack(it)) {
         if (things_overlap(me, A_at, it)) {
-            log("can attack %s", it->to_string().c_str());
+            log("yes; overlaps and can attack");
             return true;
         } else {
-            log("cannot attack %s, no overlap", it->to_string().c_str());
+            log("no; can attack but no overlap");
         }
     } else if (will_eat(it)) {
+        if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
+            log("no; can eat but was seen previously");
+            return false;
+        }
+
         if (things_overlap(me, me->mid_at, it)) {
-            log("can eat %s", it->to_string().c_str());
+            log("yes; can eat and overlaps");
             return true;
         } else {
-            log("cannot eat %s, no overlap", it->to_string().c_str());
+            log("yes; no can eat but no overlap");
         }
     } else {
         if (things_overlap(me, A_at, it)) {
-            log("consider %s", it->to_string().c_str());
             //
             // "true" on collision
             //
             if (collision_obstacle(it)) {
+                log("yes; overlaps and is an obstacle");
                 return true;
             }
         }
@@ -1206,17 +1200,8 @@ _
                     continue;
                 }
 
-                if (is_player()) {
-                    if (it->get_tick_dropped()) {
-                        if (game->tick_current - it->get_tick_dropped() <= 1) {
-                            log("ignore recently dropped %s", 
-                                it->to_string().c_str());
-                            continue;
-                        }
-                    }
-                }
-
                 if (collision_check_only(it, future_pos, x, y)) {
+                    log("cannot move");
                     return true;
                 }
             } FOR_ALL_THINGS_END()

@@ -100,7 +100,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* uint32_t     tick_last_did_something   */ out << bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_escape          */ out << bits(my.t->tick_last_escape);
     /* uint32_t     tick_last_level_change    */ out << bits(my.t->tick_last_level_change);
-    /* uint32_t     tick_dropped              */ out << bits(my.t->tick_dropped);
+    /* uint32_t     where_i_dropped_an_item_last              */ out << bits(my.t->where_i_dropped_an_item_last);
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -156,6 +156,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->has_ever_moved     << shift; shift++;
     /* uint32_t */ bits32 |= my.t->has_light          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->inited_tiles       << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->unused_xxx1        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_attached        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_being_destroyed << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;

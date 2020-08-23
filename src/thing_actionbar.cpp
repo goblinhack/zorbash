@@ -37,8 +37,10 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
             std::string name = "gold1." + std::to_string(random_range(1, 8));
             level->new_external_particle(
                      s + j, p,
-                     size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
-                     tile_find_mand(name), false);
+                     size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 
+                     PARTICLE_SPEED_MS,
+                     tile_find_mand(name), false,
+                     false /* make_visible_at_end */);
         }
         return;
     }
@@ -60,8 +62,10 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
                 random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
         level->new_external_particle(
                  s + j, p,
-                 size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
-                 tile_find_mand("key1.1"), false);
+                 size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 
+                 PARTICLE_SPEED_MS,
+                 tile_find_mand("key1.1"), false,
+                 false /* make_visible_at_end */);
         return;
     }
 
@@ -78,10 +82,13 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
 
         level->new_external_particle(
+                 what->id,
                  (last_blit_tl + last_blit_br) / 2, p,
-                 size(TILE_WIDTH, TILE_HEIGHT), 500,
+                 size(TILE_WIDTH, TILE_HEIGHT), 
+                 PARTICLE_SPEED_MS,
                  tile_index_to_tile(what->tile_curr),
-                 (what->is_dir_br() || what->is_dir_right() || what->is_dir_tr()));
+                 (what->is_dir_br() || what->is_dir_right() || what->is_dir_tr()),
+                 false /* make_visible_at_end */);
     }
 }
 
@@ -112,10 +119,12 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot,
     p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
     p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
 
-    level->new_external_particle(p, where_to,
-                                 size(TILE_WIDTH, TILE_HEIGHT), 500,
+    level->new_external_particle(what->id, p, where_to,
+                                 size(TILE_WIDTH, TILE_HEIGHT), 
+                                 PARTICLE_SPEED_MS,
                                  tile_index_to_tile(what->tile_curr),
-                                 (what->is_dir_br() || what->is_dir_right() || what->is_dir_tr()));
+                                 (what->is_dir_br() || what->is_dir_right() || what->is_dir_tr()),
+                                 true /* make_visible_at_end */);
 }
 
 bool Thing::actionbar_id_insert (Thingp what)
@@ -214,6 +223,8 @@ bool Thing::actionbar_id_remove (Thingp what)
         }
 
         if (what->tp() == tpp) {
+            actionbar_particle(what, i, this);
+
             auto cnt = actionbar_id_slot_count(i);
             log("remove slot %d, count %d", cnt, i);
             if (cnt > 1) {_

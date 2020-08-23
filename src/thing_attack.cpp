@@ -148,7 +148,7 @@ _
                     return true;
                 }
             } else if (owner->is_player()) {
-                owner->log("carry to eat later %s", it->to_string().c_str());
+                owner->log("carry %s", it->to_string().c_str());
                 if (owner->try_to_carry(it)) {
                     return true;
                 }

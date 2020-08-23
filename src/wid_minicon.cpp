@@ -83,6 +83,13 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return false;
     }
 
+    //
+    // Stop rapid pickup/drop events if particles are still in progress
+    //
+    if (player->particle_anim_exists()) {
+        return false;
+    }
+
     if (key->scancode == (SDL_Scancode)game->config.key_load) {
         CON("USERCFG: loading game");
         game->load_select();
@@ -101,17 +108,14 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         game->pause_select();
         return true;
     }
-
     if (key->scancode == (SDL_Scancode)game->config.key_help) {
         game->config_keyboard_select();
         return true;
     }
-
     if (key->scancode == (SDL_Scancode)game->config.key_quit) {
         game->quit_select();
         return true;
     }
-
     if (key->scancode == (SDL_Scancode)game->config.key_action0) {
         level->actionbar_select(0);
         return true;
@@ -153,9 +157,11 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
-        auto what = level->actionbar_get();
-        if (what) {
-            player->drop(what);
+	auto what = level->actionbar_get();
+	if (what) {
+	    if (player->drop(what)) {
+                game->tick_begin("drop");
+            }
         }
         return true;
     }
