@@ -20,7 +20,8 @@ public:
               size sz,
               uint32_t timestamp_start, uint32_t timestamp_stop,
               Tilep tile,
-              bool hflip) :
+              bool hflip,
+              bool make_visible_at_end) :
         id(thing_id),
         start(start),
         stop(stop),
@@ -29,14 +30,16 @@ public:
         timestamp_start(timestamp_start),
         timestamp_stop(timestamp_stop),
         tile(tile),
-        hflip(hflip) { }
+        hflip(hflip),
+        make_visible_at_end(make_visible_at_end) { }
 
     Particle_(point start, point stop,
               point pixel_map_at,
               size sz,
               uint32_t timestamp_start, uint32_t timestamp_stop,
               Tilep tile,
-              bool hflip) :
+              bool hflip,
+              bool make_visible_at_end) :
         start(start),
         stop(stop),
         pixel_map_at(pixel_map_at),
@@ -44,7 +47,8 @@ public:
         timestamp_start(timestamp_start),
         timestamp_stop(timestamp_stop),
         tile(tile),
-        hflip(hflip) { }
+        hflip(hflip),
+        make_visible_at_end(make_visible_at_end) { }
 
     ThingId id {};
     point start;
@@ -55,6 +59,7 @@ public:
     uint32_t timestamp_stop {};
     Tilep tile {};
     bool hflip {};
+    bool make_visible_at_end {};
 } Particle;
 
 #endif // _MY_PARTICLE_H_

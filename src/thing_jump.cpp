@@ -128,7 +128,7 @@ bool Thing::try_to_jump (point to)
     auto th = TILE_HEIGHT;
     auto sz = size(last_blit_br.x - last_blit_tl.x,
                    last_blit_br.y - last_blit_tl.y);
-    auto delay = 500;
+    auto delay = PARTICLE_SPEED_MS;
     auto delay_shorter = delay - (delay / 20);
     point dst(src.x + dx * tw , src.y + dy * th );
     if (is_player()) {
@@ -137,11 +137,13 @@ bool Thing::try_to_jump (point to)
         //
         level->new_external_particle(id, src, dst, sz, delay,
                                      tile_index_to_tile(tile_curr),
-                                     false);
+                                     false,
+                                     true /* make_visible_at_end */);
     } else {
         level->new_internal_particle(id, src, dst, sz, delay,
                                      tile_index_to_tile(tile_curr),
-                                     false);
+                                     false,
+                                     true /* make_visible_at_end */);
     }
 
     is_jumping = true;
@@ -159,11 +161,13 @@ bool Thing::try_to_jump (point to)
             if (is_player()) {
                 level->new_external_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                             true /* make_visible_at_end */);
             } else {
                 level->new_internal_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                             true /* make_visible_at_end */);
             }
         }
     }
@@ -180,11 +184,13 @@ bool Thing::try_to_jump (point to)
             if (is_player()) {
                 level->new_external_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                             true /* make_visible_at_end */);
             } else {
                 level->new_internal_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                             true /* make_visible_at_end */);
             }
         }
     }
@@ -211,11 +217,13 @@ bool Thing::try_to_jump (point to)
             if (is_player()) {
                 level->new_external_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                             false /* make_visible_at_end */);
             } else {
                 level->new_internal_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+                                             (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                             false /* make_visible_at_end */);
             }
         }
     }

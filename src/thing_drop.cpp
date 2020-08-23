@@ -41,15 +41,19 @@ bool Thing::drop (Thingp what, Thingp target)
 
     what->hooks_remove();
     what->remove_owner();
-    what->visible();
-    what->move_to_immediately(mid_at);
+    what->hide();
+    if (target) {
+        what->move_to_immediately(target->mid_at);
+    } else {
+        what->move_to_immediately(mid_at);
+    }
 
     monstp->carrying.remove(what->id);
 
     //
     // Prevent too soon re-carry
     //
-    what->set_tick_dropped(game->tick_current);
+    set_where_i_dropped_an_item_last(make_point(mid_at));
 
     log("dropped %s", what->to_string().c_str());
 

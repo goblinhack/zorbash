@@ -66,6 +66,13 @@ void player_tick (void)
         return;
     }
 
+    //
+    // Stop rapid pickup/drop events if particles are still in progress
+    //
+    if (player->particle_anim_exists()) {
+        return;
+    }
+
     g_thing_callframes_depth = callframes_depth;
 
     static bool left = false;

@@ -18,21 +18,25 @@ void Level::new_internal_particle (
                           ThingId id,
                           point start, point stop, size sz, uint32_t dur,
                           const Tilep tile,
-                          bool hflip)
+                          bool hflip,
+                          bool make_visible_at_end)
 {
     uint32_t now = time_update_time_milli();
     all_internal_particles.push_back(Particle(id, start, stop, pixel_map_at,
-                                     sz, now, now + dur, tile, hflip));
+                                     sz, now, now + dur, tile, hflip,
+                                     make_visible_at_end));
 }
 
 void Level::new_internal_particle (
                           point start, point stop, size sz, uint32_t dur,
                           const Tilep tile,
-                          bool hflip)
+                          bool hflip,
+                          bool make_visible_at_end)
 {
     uint32_t now = time_update_time_milli();
     all_internal_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
-                                     sz, now, now + dur, tile, hflip));
+                                     sz, now, now + dur, tile, hflip,
+                                     make_visible_at_end));
 }
 
 void Level::display_internal_particles (void)
@@ -61,10 +65,15 @@ void Level::display_internal_particles (void)
                 if (p.id.id) {
                     auto t = thing_find(p.id);
                     if (t) {
+t->minicon("internal vhflipisible");
+                        if (p.make_visible_at_end) {
+                            t->visible();
+                        }
                         t->log("end of jump");
                         t->is_jumping = false;
                     }
                 }
+MINICON("remove internal ");
                 return true;
             }
 
@@ -128,19 +137,23 @@ void Level::display_internal_particles (void)
 void Level::new_external_particle (
                           ThingId id,
                           point start, point stop, size sz, uint32_t dur,
-                          const Tilep tile, bool hflip)
+                          const Tilep tile, bool hflip,
+                          bool make_visible_at_end)
 {
     uint32_t now = time_update_time_milli();
     all_external_particles.push_back(Particle(id, start, stop, pixel_map_at,
-                                     sz, now, now + dur, tile, hflip));
+                                     sz, now, now + dur, tile, hflip,
+                                     make_visible_at_end));
 }
 
 void Level::new_external_particle (point start, point stop, size sz, uint32_t dur,
-                                   const Tilep tile, bool hflip)
+                                   const Tilep tile, bool hflip,
+                                   bool make_visible_at_end)
 {
     uint32_t now = time_update_time_milli();
     all_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
-                                     sz, now, now + dur, tile, hflip));
+                                     sz, now, now + dur, tile, hflip,
+                                     make_visible_at_end));
 }
 
 void Level::display_external_particles (void)
@@ -170,6 +183,9 @@ void Level::display_external_particles (void)
                 if (p.id.id) {
                     auto t = thing_find(p.id);
                     if (t) {
+                        if (p.make_visible_at_end) {
+                            t->visible();
+                        }
                         t->jump_end();
                     }
                 }
@@ -235,4 +251,30 @@ void Level::display_external_particles (void)
         });
     all_external_particles.erase(e, all_external_particles.end());
     blit_flush();
+}
+
+bool Thing::particle_anim_exists (void)
+{
+    if (!level) {
+        return false;
+    }
+
+    for (const auto &p : level->all_external_particles) {
+        if (p.id.id) {
+            auto t = level->thing_find(p.id);
+            if ((t == this) || t->get_owner_id() == id) {
+                return true;
+            }
+        }
+    }
+
+    for (const auto &p : level->all_internal_particles) {
+        if (p.id.id) {
+            auto t = level->thing_find(p.id);
+            if ((t == this) || t->get_owner_id() == id) {
+                return true;
+            }
+        }
+    }
+    return false;
 }

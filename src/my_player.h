@@ -2,8 +2,8 @@
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
 //
-
 #pragma once
+
 #ifndef _MY_PLAYER_H_
 #define _MY_PLAYER_H_
 

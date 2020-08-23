@@ -15,6 +15,11 @@ void Thing::move_finish (void)
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);
     update_interpolated_position();
+
+    //
+    // Set this so that we can pick up items again at the last location.
+    //
+    set_where_i_dropped_an_item_last(point(-1, -1));
 }
 
 bool Thing::move (fpoint future_pos)
@@ -106,6 +111,7 @@ bool Thing::move (fpoint future_pos,
 
         if (mid_at != future_pos) {
             if (collision_check_only(future_pos)) {
+                log("cannot move; try to shove");
                 if (shove_allowed) {
                     try_to_shove(future_pos);
                 }
@@ -417,7 +423,7 @@ bool Thing::move_to_check (const point& nh, const bool escaping)
         // We would hit something and cannot do this move. However,
         // see if we can hit the thing that is in the way.
         //
-        log("move to %d,%d will hit obstacle or monst", nh.x, nh.y);
+        log("cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
 _
         bool target_attacked = false;
         bool target_overlaps = false;

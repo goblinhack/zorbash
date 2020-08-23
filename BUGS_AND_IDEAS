@@ -1,10 +1,8 @@
 bugs
 ----
-- diagonal jump via single light ray
+- moving off an entrance changes level
+- giant slime on jumping
 - jump on the spot
-- pick up / drop particle frenzy
-- dropped items vanish sometimes
-- pressing tab when dead should hide dead windoe
 - make the player icon small and outlined
 - slime combine crash
 

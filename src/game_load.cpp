@@ -127,7 +127,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);
     /* uint32_t     tick_last_level_change    */ in >> bits(my.t->tick_last_level_change);
-    /* uint32_t     tick_dropped              */ in >> bits(my.t->tick_dropped);
+    /* uint32_t     where_i_dropped_an_item_last              */ in >> bits(my.t->where_i_dropped_an_item_last);
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -199,6 +199,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->has_ever_moved     = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->has_light          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->inited_tiles       = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->unused_xxx1        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_attached        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;

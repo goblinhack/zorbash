@@ -30,7 +30,7 @@ def potion_init(name, text_name):
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=cyan$A swirling milky blue potion of descent")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     x.set_tile(tile=name + ".1", delay_ms=1000)
     x.set_tile(tile=name + ".2", delay_ms=1000)

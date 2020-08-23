@@ -141,7 +141,6 @@ void Game::config_top_select (void)
     game_config_top_window = new WidPopup(tl, br, nullptr, "", false, false);
     {_
         Widp w = game_config_top_window->wid_popup_container;
-        wid_set_do_not_lower(w, true);
         wid_set_on_key_up(w, game_config_top_key_up);
         wid_set_on_key_down(w, game_config_top_key_down);
     }
