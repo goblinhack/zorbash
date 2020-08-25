@@ -21,10 +21,15 @@ bool Thing::is_obstacle_for_me (const point &p)
             continue;
         }
 
+        if (t->is_the_grid()) { continue; }
+
         //
         // "true" on collision
         //
         if (collision_obstacle(t)) {
+            if (t->is_loggable_for_unimportant_stuff()) {
+                log(" is an obstacle for me %s", t->to_string().c_str());
+            }
             return (true);
         }
     }
