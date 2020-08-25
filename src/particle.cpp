@@ -65,7 +65,6 @@ void Level::display_internal_particles (void)
                 if (p.id.id) {
                     auto t = thing_find(p.id);
                     if (t) {
-t->minicon("internal vhflipisible");
                         if (p.make_visible_at_end) {
                             t->visible();
                         }
@@ -73,7 +72,6 @@ t->minicon("internal vhflipisible");
                         t->is_jumping = false;
                     }
                 }
-MINICON("remove internal ");
                 return true;
             }
 
@@ -126,7 +124,11 @@ MINICON("remove internal ");
             blit_tl -= pixel_map_at - p.pixel_map_at;
             blit_br -= pixel_map_at - p.pixel_map_at;
 
-            tile_blit_outline(p.tile, blit_tl, blit_br, WHITE);
+            if (p.hflip) {
+                std::swap(blit_tl.x, blit_br.x);
+            }
+
+            tile_blit_outline(tile, blit_tl, blit_br, WHITE);
 
             return false;
         });

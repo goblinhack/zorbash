@@ -718,6 +718,7 @@ public:
     const Dice& get_resurrect_dice(void) const;
 
     bool try_to_jump(void);
+    bool try_harder_to_jump(void);
     bool try_to_jump(point p);
     bool try_to_escape(void);
     void jump_end(void);
@@ -733,6 +734,7 @@ public:
     bool achieve_goals_in_death();
     bool achieve_goals_in_life();
     bool ai_blocked(void);
+    bool ai_blocked_completely(void);
     bool ai_choose_wander(point& nh);
     bool ai_create_on_fire_path(point &nh, const point start, const point end);
     bool ai_create_path(point &nh, const point start, const point end);

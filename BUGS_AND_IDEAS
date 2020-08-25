@@ -1,8 +1,7 @@
 bugs
 ----
-- jelloid stuck by lava seed 222
-- moving off an entrance changes level
 - giant slime on jumping
+- moving off an entrance changes level
 - jump on the spot
 - make the player icon small and outlined
 - slime combine crash

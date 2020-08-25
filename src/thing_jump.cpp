@@ -266,9 +266,29 @@ bool Thing::try_to_jump (void)
         if (try_to_jump(point(x, y))) {
             return true;
         }
-    if (is_jumping) {
-        DIE("x");
     }
+
+    return (false);
+}
+
+bool Thing::try_harder_to_jump (void)
+{_
+    //
+    // No rapid boinging
+    //
+    if (is_jumping) {
+        return false;
+    }
+
+    int d = is_jumper_distance() / 2;
+    int tries = 100;
+
+    while (tries-- > 0) {
+        int x = random_range(mid_at.x - d, mid_at.x + d);
+        int y = random_range(mid_at.y - d, mid_at.y + d);
+        if (try_to_jump(point(x, y))) {
+            return true;
+        }
     }
 
     return (false);
