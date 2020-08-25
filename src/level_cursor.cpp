@@ -54,7 +54,7 @@ void Level::cursor_find_on_visible_things (
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, MAP_DEPTH_THE_GRID) {
+                FOR_ALL_GRID_THINGS(this, t, x, y) {
                     t->cursor_hover_over_check();
                 } FOR_ALL_THINGS_END();
             }

@@ -56,7 +56,7 @@ _
     std::multiset<Goal> goals;
 
     log("choose goals (higher scores, lower costs are preferred):");
-
+_
     auto tpp = tp();
     for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
         point p(x, y);
@@ -77,6 +77,7 @@ _
 
 #ifdef ENABLE_DEBUG_AI_GOALS
 #define GOAL_ADD(score, msg) \
+_ \
         total_score += (score); \
         got_one = true; \
         log(" add goal (%d,%d) score %d %s, %s", \
@@ -93,7 +94,14 @@ _
                 it->is_hidden || 
                 it->is_falling || 
                 it->is_jumping) { 
+                if (it->is_loggable_for_unimportant_stuff()) {
+                    log(" ignore %s", it->to_string().c_str());
+                }
                 continue; 
+            }
+
+            if (it->is_loggable_for_unimportant_stuff()) {
+                log(" consider %s", it->to_string().c_str());
             }
 
             //

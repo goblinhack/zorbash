@@ -174,6 +174,15 @@ public:
 
     #define FOR_ALL_THINGS_END() } }
 
+    #define FOR_ALL_GRID_THINGS(level, t, x, y)              	    \
+        if (!(level)->is_oob(x, y)) {                               \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
+                verify(t);                                          \
+                if (t->is_hidden) { continue; }                     \
+                if (t->z_depth != MAP_DEPTH_THE_GRID) {             \
+                    continue;                                       \
+                }
+
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
@@ -188,6 +197,7 @@ public:
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
                 if (t->is_hidden) { continue; }                     \
+                if (t->is_the_grid()) { continue; }                 \
                 if (!t->get_light_count()) {                        \
                     continue;                                       \
                 }
@@ -200,6 +210,7 @@ public:
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
                 if (t->is_hidden) { continue; }                     \
+                if (t->is_the_grid()) { continue; }                 \
                 if (!t->is_active()) {                              \
                     continue;                                       \
                 }                                                   \
@@ -213,6 +224,7 @@ public:
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
                 if (t->is_hidden) { continue; }                     \
+                if (t->is_the_grid()) { continue; }                 \
                 if (!t->is_interesting()) {                         \
                     continue;                                       \
                 }                                                   \
@@ -225,6 +237,7 @@ public:
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
                 if (t->is_hidden) { continue; }                     \
+                if (t->is_the_grid()) { continue; }                 \
                 if (!t->is_interesting() &&                         \
                     !t->is_attackable_by_monst() &&                 \
                     !t->is_attackable_by_player() &&                \
@@ -275,26 +288,6 @@ public:
     float update_wobble(void);
     bool screen_shake_begin(void);
     void screen_shake_end(void);
-
-    bool is_anything_at (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-
-        for (auto& t : get(all_thing_ptrs_at, x, y)) {
-            if (t) {
-                verify(t);
-                return (true);
-            }
-        }
-        return (false);
-    }
-
-    bool is_anything_at (const point &p)
-    {_
-        return (is_anything_at(p.x, p.y));
-    }
 
     uint8_t is_lava (const point &p)
     {_
