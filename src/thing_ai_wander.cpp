@@ -34,6 +34,29 @@ bool Thing::ai_blocked (void)
     return count >= 4;
 }
 
+bool Thing::ai_blocked_completely (void)
+{_
+    static const std::vector<point> move_deltas = {
+        point(0, -1),
+        point(-1, 0),
+        point(1, 0),
+        point(0, 1),
+        point(0, 0),
+    };
+
+    auto at = make_point(mid_at);
+    auto count = 0;
+    for (const auto& d : move_deltas) {
+        auto t = at + d;
+        auto x = t.x;
+        auto y = t.y;
+        if (will_avoid(point(x, y))) {
+            count++;
+        }
+    }
+    return count >= 5;
+}
+
 bool Thing::ai_create_path (point &nh, const point start, const point end)
 {_
     Dmap dmap {};
@@ -208,7 +231,7 @@ bool Thing::ai_wander (void)
         }
     } else {
         if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS,
-                                            get_timestamp_last_wander_try())) {
+                                             get_timestamp_last_wander_try())) {
             log("AI wander blocked; too frequent, last try %u, %u ms ago",
                 get_timestamp_last_wander_try(),
                 time_get_time_ms_cached() - get_timestamp_last_wander_try());
@@ -217,13 +240,36 @@ bool Thing::ai_wander (void)
     }
     set_timestamp_last_wander_try(time_get_time_ms_cached());
 
+    if (ai_blocked_completely()) {
+        log("blocked on all sides, try escape");
+        if (ai_escape()) {
+            return true ;
+        }
+
+        if (is_jumper()) {
+            log("blocked on all sides, try jumping");
+            if (try_harder_to_jump()) {
+                return true;
+            }
+        }
+        log("AI wander blocked");
+        return false;
+    }
+
     if (ai_blocked()) {
+        log("blocked on all sides except current pos, try jumping");
+        if (is_jumper()) {
+            if (try_harder_to_jump()) {
+                return true;
+            }
+        }
+
         log("AI wander blocked");
         return false;
     }
 
     log("AI wander");
-    auto tries = 100;
+    auto tries = 10;
     while (tries--) {
         point nh;
         if (ai_choose_wander(nh)) {
@@ -246,7 +292,7 @@ _
 
 bool Thing::ai_escape (void)
 {_
-    if (ai_blocked()) {
+    if (ai_blocked_completely()) {
         log("ai escape blocked");
         return false;
     }
