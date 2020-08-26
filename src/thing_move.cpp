@@ -207,6 +207,12 @@ void Thing::update_interpolated_position (void)
     }
 
     if (update_pos) {
+#if 0
+    float time_step =
+        (float)(t - get_timestamp_fall_begin()) /
+        (float)(get_timestamp_fall_end() - get_timestamp_fall_begin());
+#endif
+
         level_pop();
         set_interpolated_mid_at(new_pos);
         level_push();
