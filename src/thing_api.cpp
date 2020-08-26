@@ -4197,6 +4197,102 @@ timestamp_t Thing::incr_timestamp_fall_end (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// timestamp_jump_begin
+////////////////////////////////////////////////////////////////////////////
+timestamp_t Thing::get_timestamp_jump_begin (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->timestamp_jump_begin);
+    } else {
+        return (0);
+    }
+}
+
+timestamp_t Thing::set_timestamp_jump_begin (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_begin = v);
+}
+
+timestamp_t Thing::decr_timestamp_jump_begin (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_begin -= v);
+}
+
+timestamp_t Thing::incr_timestamp_jump_begin (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_begin += v);
+}
+
+timestamp_t Thing::decr_timestamp_jump_begin (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_begin--);
+}
+
+timestamp_t Thing::incr_timestamp_jump_begin (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_begin++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_jump_end
+////////////////////////////////////////////////////////////////////////////
+timestamp_t Thing::get_timestamp_jump_end (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->timestamp_jump_end);
+    } else {
+        return (0);
+    }
+}
+
+timestamp_t Thing::set_timestamp_jump_end (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_end = v);
+}
+
+timestamp_t Thing::decr_timestamp_jump_end (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_end -= v);
+}
+
+timestamp_t Thing::incr_timestamp_jump_end (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_end += v);
+}
+
+timestamp_t Thing::decr_timestamp_jump_end (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_end--);
+}
+
+timestamp_t Thing::incr_timestamp_jump_end (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_jump_end++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // owner_id
 ////////////////////////////////////////////////////////////////////////////
 ThingId Thing::get_owner_id (void) const

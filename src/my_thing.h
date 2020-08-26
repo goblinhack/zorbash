@@ -121,6 +121,8 @@ public:
     timestamp_t  timestamp_fadeup_end {};
     timestamp_t  timestamp_fall_begin {};
     timestamp_t  timestamp_fall_end {};
+    timestamp_t  timestamp_jump_begin {};
+    timestamp_t  timestamp_jump_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
     timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
     timestamp_t  timestamp_last_tick {};
@@ -640,6 +642,20 @@ public:
     timestamp_t incr_timestamp_fall_end(timestamp_t);
     timestamp_t decr_timestamp_fall_end(void);
     timestamp_t incr_timestamp_fall_end(void);
+
+    timestamp_t set_timestamp_jump_begin(timestamp_t);
+    timestamp_t get_timestamp_jump_begin(void) const;
+    timestamp_t decr_timestamp_jump_begin(timestamp_t);
+    timestamp_t incr_timestamp_jump_begin(timestamp_t);
+    timestamp_t decr_timestamp_jump_begin(void);
+    timestamp_t incr_timestamp_jump_begin(void);
+
+    timestamp_t set_timestamp_jump_end(timestamp_t);
+    timestamp_t get_timestamp_jump_end(void) const;
+    timestamp_t decr_timestamp_jump_end(timestamp_t);
+    timestamp_t incr_timestamp_jump_end(timestamp_t);
+    timestamp_t decr_timestamp_jump_end(void);
+    timestamp_t incr_timestamp_jump_end(void);
 
     uint32_t set_tick_last_did_something(uint32_t);
     uint32_t get_tick_last_did_something(void) const;
