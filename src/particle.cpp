@@ -98,19 +98,26 @@ void Level::display_internal_particles (void)
             }
 
             auto tile = p.tile;
-            float tile_pix_width = tile->pix_width;
             float tile_pix_height = tile->pix_height;
-            float tilew = game->config.tile_pix_width;
             float tileh = game->config.tile_pix_height;
-            if (unlikely((tile_pix_width != TILE_WIDTH) ||
-                         (tile_pix_height != TILE_HEIGHT))) {
-                auto xtiles = tile_pix_width / TILE_WIDTH;
-                blit_tl.x -= ((xtiles-1) * tilew) / 2;
-                blit_br.x += ((xtiles-1) * tilew) / 2;
 
-                auto ytiles = tile_pix_height / TILE_HEIGHT;
-                blit_tl.y -= ((ytiles-1) * tileh) / 2;
-                blit_br.y += ((ytiles-1) * tileh) / 2;
+            if (0) {
+                //
+                // Not sure why but for internal particles this ends up
+                // making jumping slimes too large
+                //
+                float tile_pix_width = tile->pix_width;
+                float tilew = game->config.tile_pix_width;
+                if (unlikely((tile_pix_width != TILE_WIDTH) ||
+                             (tile_pix_height != TILE_HEIGHT))) {
+                    auto xtiles = tile_pix_width / TILE_WIDTH;
+                    blit_tl.x -= ((xtiles-1) * tilew) / 2;
+                    blit_br.x += ((xtiles-1) * tilew) / 2;
+
+                    auto ytiles = tile_pix_height / TILE_HEIGHT;
+                    blit_tl.y -= ((ytiles-1) * tileh) / 2;
+                    blit_br.y += ((ytiles-1) * tileh) / 2;
+                }
             }
 
             if (unlikely(tpp &&
