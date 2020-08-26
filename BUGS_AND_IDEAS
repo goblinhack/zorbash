@@ -1,6 +1,6 @@
 bugs
 ----
-- giant slime on jumping
+- interp light when moving
 - moving off an entrance changes level
 - jump on the spot
 - make the player icon small and outlined
