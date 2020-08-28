@@ -25,7 +25,7 @@ void Thing::move_carried_items (void)
             w->dir = dir;
         }
     }
-
+_
     if (get_weapon_id_use_anim().ok()) {
         auto w = level->thing_find(get_weapon_id_use_anim());
         if (w) {

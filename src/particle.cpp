@@ -21,6 +21,16 @@ void Level::new_internal_particle (
                           bool hflip,
                           bool make_visible_at_end)
 {
+    if (id.ok()) {
+        auto t = thing_find(id);
+        if (t) {
+            if (t->has_internal_particle) {
+                return;
+            }
+            t->has_internal_particle = true;
+        }
+    }
+
     uint32_t now = time_update_time_milli();
     all_internal_particles.push_back(Particle(id, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
@@ -40,7 +50,7 @@ void Level::new_internal_particle (
 }
 
 void Level::display_internal_particles (void)
-{
+{_
     if (all_internal_particles.empty()) {
         return;
     }
@@ -70,6 +80,7 @@ void Level::display_internal_particles (void)
                         }
                         t->log("end of jump");
                         t->is_jumping = false;
+                        t->has_internal_particle = false;
                     }
                 }
                 return true;
@@ -149,6 +160,16 @@ void Level::new_external_particle (
                           const Tilep tile, bool hflip,
                           bool make_visible_at_end)
 {
+    if (id.ok()) {
+        auto t = thing_find(id);
+        if (t) {
+            if (t->has_external_particle) {
+                return;
+            }
+            t->has_external_particle = true;
+        }
+    }
+
     uint32_t now = time_update_time_milli();
     all_external_particles.push_back(Particle(id, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
@@ -166,7 +187,7 @@ void Level::new_external_particle (point start, point stop, size sz, uint32_t du
 }
 
 void Level::display_external_particles (void)
-{
+{_
     if (all_external_particles.empty()) {
         return;
     }
@@ -196,6 +217,7 @@ void Level::display_external_particles (void)
                             t->visible();
                         }
                         t->jump_end();
+                        t->has_external_particle = false;
                     }
                 }
                 return true;
@@ -263,27 +285,29 @@ void Level::display_external_particles (void)
 }
 
 bool Thing::particle_anim_exists (void)
-{
-    if (!level) {
-        return false;
+{_
+    return has_internal_particle || has_external_particle;
+}
+
+void Thing::delete_particle (void)
+{_
+    if (has_internal_particle) {
+        auto e = std::remove_if(level->all_internal_particles.begin(),
+                                level->all_internal_particles.end(),
+            [=, this] (Particle &p) { return (p.id == id); });
+
+        level->all_internal_particles.erase(e, 
+                                            level->all_internal_particles.end());
+        has_internal_particle = false;
     }
 
-    for (const auto &p : level->all_external_particles) {
-        if (p.id.id) {
-            auto t = level->thing_find(p.id);
-            if ((t == this) || t->get_owner_id() == id) {
-                return true;
-            }
-        }
-    }
+    if (has_external_particle) {
+        auto e = std::remove_if(level->all_external_particles.begin(),
+                                level->all_external_particles.end(),
+            [=, this] (Particle &p) { return (p.id == id); });
 
-    for (const auto &p : level->all_internal_particles) {
-        if (p.id.id) {
-            auto t = level->thing_find(p.id);
-            if ((t == this) || t->get_owner_id() == id) {
-                return true;
-            }
-        }
+        level->all_external_particles.erase(e, 
+                                            level->all_external_particles.end());
+        has_external_particle = false;
     }
-    return false;
 }

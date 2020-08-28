@@ -159,7 +159,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
     my.t->id = tpp->id;
 
-    uint32_t bits32;
+    uint64_t bits64;
     bool monst = (my.t->monstp != nullptr);
     in >> bits(monst);
     if (monst) {
@@ -189,7 +189,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(my.t->z_depth);
     uint8_t dir; in >> dir; my.t->dir = dir;
 
-    in >> bits(bits32);
+    in >> bits(bits64);
     int shift = 0;
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
@@ -198,31 +198,33 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
-    /* uint32_t */ my.t->has_ever_moved     = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->has_light          = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->inited_tiles       = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->unused_xxx1        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_attached        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_changing_level  = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_dead            = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_falling         = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_hidden          = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_hungry          = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_in_lava         = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_in_water        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_jumping         = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_moving          = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_open            = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_resurrected     = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_resurrecting    = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_sleeping        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_starving        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_tick_done       = (bits32 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->has_ever_moved        = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->has_external_particle = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->has_internal_particle = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->has_light             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->inited_tiles          = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_attached           = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_being_destroyed    = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_blitted            = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_bouncing           = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_changing_level     = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_dead               = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_facing_left        = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_fadeup             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_falling            = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_hidden             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_hungry             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_in_lava            = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_in_water           = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_jumping            = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_moving             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_open               = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_resurrected        = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_resurrecting       = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_sleeping           = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_starving           = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_tick_done          = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->unused_xxx1           = (bits64 >> shift) & 1; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

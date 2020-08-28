@@ -84,7 +84,7 @@ color string2color (const char **s)
     auto result = color_map.find(std::string(tmp));
 
     if (result == color_map.end()) {
-        LOG("unknown color [%s]", tmp);
+        ERR("unknown color [%s]", tmp);
         return (WHITE);
     }
 
@@ -121,7 +121,7 @@ color string2color (const wchar_t **s)
     auto result = color_map.find(f);
 
     if (result == color_map.end()) {
-        LOG("unknown color [%s]", f.c_str());
+        ERR("unknown color [%s]", f.c_str());
         return (WHITE);
     }
 
@@ -155,7 +155,7 @@ color string2color (std::string &s, int *len)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        LOG("unknown color [%s]", out.c_str());
+        ERR("unknown color [%s]", out.c_str());
         return (WHITE);
     }
 
@@ -185,7 +185,7 @@ color string2color (std::string &s)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        LOG("unknown color [%s]", out.c_str());
+        ERR("unknown color [%s]", out.c_str());
         return (WHITE);
     }
 
@@ -227,7 +227,7 @@ const char *string2colorname (const char **s)
     auto result = color_map.find(std::string(tmp));
 
     if (result == color_map.end()) {
-        LOG("unknown color [%s]", tmp);
+        ERR("unknown color [%s]", tmp);
         return ("");
     }
 
@@ -261,7 +261,7 @@ std::string string2colorname (std::string &s)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        LOG("unknown color [%s]", out.c_str());
+        ERR("unknown color [%s]", out.c_str());
         return ("");
     }
 
@@ -281,7 +281,7 @@ color color_find (const char *s)
     auto result = color_map.find(std::string(s));
 
     if (result == color_map.end()) {
-        LOG("unknown color [%s]", s);
+        ERR("unknown color [%s]", s);
         return (WHITE);
     }
 

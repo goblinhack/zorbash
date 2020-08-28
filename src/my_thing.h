@@ -165,7 +165,7 @@ public:
     uint16_t    tile_curr            {};
     uint8_t     alpha                {255}; // For fading
     uint8_t     z_depth              {};
-    uint32_t    dir:4                {};    // Direction
+    uint64_t    dir:4                {};    // Direction
 
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
@@ -174,31 +174,33 @@ public:
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
-    uint32_t has_ever_moved:1     {};
-    uint32_t has_light:1          {};
-    uint32_t inited_tiles:1       {};
-    uint32_t unused_xxx1:1        {};
-    uint32_t is_attached:1        {};
-    uint32_t is_being_destroyed:1 {};
-    uint32_t is_blitted:1         {};
-    uint32_t is_bouncing:1        {};
-    uint32_t is_changing_level:1  {};
-    uint32_t is_dead:1            {};
-    uint32_t is_facing_left:1     {};
-    uint32_t is_fadeup:1          {};
-    uint32_t is_falling:1         {};
-    uint32_t is_hidden:1          {};
-    uint32_t is_hungry:1          {};
-    uint32_t is_in_lava:1         {};
-    uint32_t is_in_water:1        {};
-    uint32_t is_jumping:1         {};
-    uint32_t is_moving:1          {};
-    uint32_t is_open:1            {};
-    uint32_t is_resurrected:1     {};
-    uint32_t is_resurrecting:1    {};
-    uint32_t is_sleeping:1        {};
-    uint32_t is_starving:1        {};
-    uint32_t is_tick_done:1       {}; // has moved/hit and finished its move
+    uint64_t has_ever_moved:1          {};
+    uint64_t has_external_particle:1   {}; // current in motion particle
+    uint64_t has_internal_particle:1   {}; // current in motion particle
+    uint64_t has_light:1               {};
+    uint64_t inited_tiles:1            {};
+    uint64_t is_attached:1             {};
+    uint64_t is_being_destroyed:1      {};
+    uint64_t is_blitted:1              {};
+    uint64_t is_bouncing:1             {};
+    uint64_t is_changing_level:1       {};
+    uint64_t is_dead:1                 {};
+    uint64_t is_facing_left:1          {};
+    uint64_t is_fadeup:1               {};
+    uint64_t is_falling:1              {};
+    uint64_t is_hidden:1               {};
+    uint64_t is_hungry:1               {};
+    uint64_t is_in_lava:1              {};
+    uint64_t is_in_water:1             {};
+    uint64_t is_jumping:1              {};
+    uint64_t is_moving:1               {};
+    uint64_t is_open:1                 {};
+    uint64_t is_resurrected:1          {};
+    uint64_t is_resurrecting:1         {};
+    uint64_t is_sleeping:1             {};
+    uint64_t is_starving:1             {};
+    uint64_t is_tick_done:1            {}; // has moved/hit and finished its move
+    uint64_t unused_xxx1:1             {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -1183,6 +1185,7 @@ public:
     void weapon_sheath(void);
     void wield(Thingp w);
     bool particle_anim_exists(void);
+    void delete_particle();
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
