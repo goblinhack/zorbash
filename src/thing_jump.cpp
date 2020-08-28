@@ -146,6 +146,9 @@ bool Thing::try_to_jump (point to)
                                      true /* make_visible_at_end */);
     }
 
+    set_timestamp_jump_begin(time_get_time_ms_cached());
+    set_timestamp_jump_end(time_get_time_ms_cached() + delay);
+
     is_jumping = true;
     move_to_immediately(fpoint(x, y));
 
