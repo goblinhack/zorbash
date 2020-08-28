@@ -87,6 +87,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t  timestamp_fadeup_end      */ out << bits(my.t->timestamp_fadeup_end);
     /* timestamp_t  timestamp_fall_begin      */ out << bits(my.t->timestamp_fall_begin);
     /* timestamp_t  timestamp_fall_end        */ out << bits(my.t->timestamp_fall_end);
+    /* timestamp_t  timestamp_jump_begin      */ out << bits(my.t->timestamp_jump_begin);
+    /* timestamp_t  timestamp_jump_end        */ out << bits(my.t->timestamp_jump_end);
     /* timestamp_t  timestamp_flip_start      */ out << bits(my.t->timestamp_flip_start);
     /* timestamp_t  timestamp_hunger_tick     */ out << bits(my.t->timestamp_hunger_tick);
     /* timestamp_t  timestamp_last_tick       */ out << bits(my.t->timestamp_last_tick);
