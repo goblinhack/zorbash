@@ -80,6 +80,8 @@ void Thing::destroy (void)
         level->cursor = nullptr;
     }
 
+    delete_particle();
+
     if (monstp) {
         oldptr(monstp);
         delete monstp;

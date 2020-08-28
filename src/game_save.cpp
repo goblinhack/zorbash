@@ -146,7 +146,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     out << bits(my.t->z_depth);
     uint8_t dir = my.t->dir; out << bits(dir);
 
-    uint32_t bits32 = 0;
+    uint64_t bits64 = 0;
     int shift = 0;
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
@@ -155,31 +155,33 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
-    /* uint32_t */ bits32 |= my.t->has_ever_moved     << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->has_light          << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->inited_tiles       << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->unused_xxx1        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_attached        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_being_destroyed << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_bouncing        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_changing_level  << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_dead            << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_facing_left     << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_fadeup          << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_falling         << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_hidden          << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_hungry          << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_in_lava         << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_in_water        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_jumping         << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_moving          << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_open            << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_resurrected     << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_resurrecting    << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_sleeping        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_starving        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_tick_done       << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->has_ever_moved        << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->has_external_particle << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->has_internal_particle << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->has_light             << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->inited_tiles          << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_attached           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_being_destroyed    << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_blitted            << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_bouncing           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_changing_level     << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_dead               << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_facing_left        << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_fadeup             << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_falling            << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_hidden             << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_hungry             << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_in_lava            << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_in_water           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_jumping            << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_moving             << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_open               << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_resurrected        << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_resurrecting       << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_sleeping           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_starving           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_tick_done          << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->unused_xxx1           << shift; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -187,10 +189,10 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
-    if (shift >= (int)(sizeof(bits32) * 8)) {
+    if (shift >= (int)(sizeof(bits64) * 8)) {
         ERR("ran out of bits in serialization");
     }
-    out << bits(bits32);
+    out << bits(bits64);
 
     WRITE_MAGIC(THING_MAGIC_END);
 

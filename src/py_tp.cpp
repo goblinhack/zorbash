@@ -1077,7 +1077,7 @@ TP_BODY_SET_STRING(weapon_carry_anim)
 TP_BODY_SET_STRING(gfx_anim_attack)
 
 PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{
+{_
     PyObject *py_class = 0;
     char *tp_name = 0;
     int value = 0;
@@ -1118,7 +1118,7 @@ done:
 }
 
 PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{
+{_
     char *what = nullptr;
     uint32_t id = 0;
 
@@ -1157,7 +1157,7 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{
+{_
     char *what = nullptr;
     uint32_t id = 0;
 
@@ -1196,7 +1196,7 @@ PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject
 }
 
 PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
-{
+{_
     char *what = nullptr;
     uint32_t id = 0;
 
@@ -1235,7 +1235,7 @@ PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *tp_spawn_under (PyObject *obj, PyObject *args, PyObject *keywds)
-{
+{_
     char *what = nullptr;
     uint32_t id = 0;
 

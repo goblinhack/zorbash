@@ -72,12 +72,12 @@ void Thing::visible (void)
         auto w = level->thing_find(get_weapon_id_carry_anim());
         if (w) { w->visible(); }
     }
-
+_
     if (get_weapon_id_use_anim().ok()) {
         auto w = level->thing_find(get_weapon_id_use_anim());
         if (w) { w->visible(); }
     }
-
+_
     auto on_fire_anim_id = get_on_fire_anim_id();
     if (on_fire_anim_id.ok()) {_
         auto w = level->thing_find(on_fire_anim_id);

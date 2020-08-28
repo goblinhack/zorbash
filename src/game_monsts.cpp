@@ -37,7 +37,7 @@ static uint8_t game_monsts_mouse_down (Widp w,
 #endif
 
 static void game_monsts_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
-{
+{_
     if (!game->level) {
         return;
     }

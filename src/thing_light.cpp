@@ -54,6 +54,9 @@ void Thing::init_lights (void)
     } else {
         if (unlikely(is_light_strength())) {
             std::string l = light_color();
+            if (l.empty()) {
+                l = "white";
+            }
             bool add_light = true;
             if (is_lava()) {
                 if (random_range(0, 100) < 50) {
