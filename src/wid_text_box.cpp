@@ -125,13 +125,15 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
 //
 // Get the wid on the bottom of the list/screen.
 //
-void WidTextBox::log_ (std::wstring str)
+void WidTextBox::log_ (std::wstring str, bool lhs, bool rhs)
 {_
     Widp tmp {};
+    Widp text_wid {};
 
     if (!wid_vert_scroll) {
         if (line_count < scroll_height) {
-            wid_set_text(get(children, height - line_count - 1), str);
+            text_wid = get(children, height - line_count - 1);
+            wid_set_text(text_wid, str);
             line_count++;
             wid_update(wid_text_box_container);
         } else {
@@ -139,13 +141,15 @@ void WidTextBox::log_ (std::wstring str)
         }
     } else {
         if (line_count < scroll_height) {
-            wid_set_text(get(children, scroll_height - line_count - 1), str);
+            text_wid = get(children, scroll_height - line_count - 1);
+            wid_set_text(text_wid, str);
         } else {
             wid_scroll_text(wid_text_last);
             tmp = wid_get_head(wid_text_last);
             if (tmp) {
                 wid_set_text(tmp, str);
             }
+            text_wid = tmp;
         }
 
         if (wid_vert_scroll) {
@@ -163,12 +167,17 @@ void WidTextBox::log_ (std::wstring str)
             }
         }
     }
+
+    if (text_wid) {
+        if (lhs) { wid_set_text_lhs(text_wid, true); }
+        if (rhs) { wid_set_text_rhs(text_wid, true); }
+    }
 }
 
 //
 // Log a message to the text_box
 //
-void WidTextBox::log (std::string s)
+void WidTextBox::log (std::string s, bool lhs, bool rhs)
 {_
     int chars_per_line = wid_get_width(wid_text_area);
 
@@ -176,7 +185,7 @@ void WidTextBox::log (std::string s)
 
     if (d) {
         for (const auto& c : *d) {
-            log_(string_to_wstring(c));
+            log_(string_to_wstring(c), lhs, rhs);
         }
     }
 }
@@ -184,7 +193,7 @@ void WidTextBox::log (std::string s)
 //
 // Log a message to the text_box
 //
-void WidTextBox::log (std::wstring s)
+void WidTextBox::log (std::wstring s, bool lhs, bool rhs)
 {_
     int chars_per_line = wid_get_width(wid_text_area);
 
@@ -192,7 +201,7 @@ void WidTextBox::log (std::wstring s)
 
     if (d) {
         for (const auto& c : *d) {
-            log_(c);
+            log_(c, lhs, rhs);
         }
     }
 }

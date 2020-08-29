@@ -68,6 +68,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* float        wobble                    */ in >> bits(my.t->wobble);
     /* fpoint       interpolated_mid_at       */ in >> bits(my.t->interpolated_mid_at);
     /* fpoint       lunge_to                  */ in >> bits(my.t->lunge_to);
+    /* fpoint       last_lit_at               */ in >> bits(my.t->last_lit_at);
     /* int          bounce_count              */ in >> bits(my.t->bounce_count);
     /* int          gold                      */ in >> bits(my.t->gold);
     /* int          lifespan                  */ in >> bits(my.t->lifespan);

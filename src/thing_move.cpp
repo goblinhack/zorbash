@@ -222,9 +222,10 @@ void Thing::update_interpolated_position (void)
         set_interpolated_mid_at(new_pos);
         level_push();
 
-        if (get_light_count()) {
-            update_light();
-        }
+        //
+        // For now only the player has a calculated light
+        //
+        update_light();
 
         location_check();
     }

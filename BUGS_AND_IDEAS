@@ -1,5 +1,6 @@
 bugs
 ----
+- tab to change gfx mode
 - not visible on jump into lava
 - jump on spot does not collect
 - moving off an entrance changes level
@@ -7,6 +8,7 @@ bugs
 - make the player icon small and outlined
 - slime combine crash
 - monst side bar show some items uniquely like torches?
+- should the entrance in next level be close to the prev exit
 
 upcoming work
 -------------

@@ -12,16 +12,31 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-void Thing::update_light (void)
+void Thing::update_light (bool force)
 {_
-    //
-    // Light source follows the thing.
-    //
+    if (!is_player()) {
+        return;
+    }
+
+    if (is_hidden) {
+        return;
+    }
+
+    fpoint interp = get_interpolated_mid_at();
+    point lit_at = make_point((int)(interp.x * TILE_WIDTH),
+                              (int)(interp.y * TILE_HEIGHT)
+                             );
+    if (!force) {
+        if (get_last_lit_at() == lit_at) {
+            return;
+        }
+    }
+    set_last_lit_at(lit_at);
+
     auto lc = get_light_count();
     size_t c = 0;
     for (auto l : get_light()) {
-        fpoint mid_at = l->owner->get_interpolated_mid_at();
-        l->at = mid_at;
+        l->at = interp;
         l->calculate(c == lc - 1);
         c++;
     }

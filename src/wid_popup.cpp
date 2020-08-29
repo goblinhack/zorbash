@@ -85,15 +85,15 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
 //
 // Log a message to the popup
 //
-void WidPopup::log (std::string s)
+void WidPopup::log (std::string s, bool lhs, bool rhs)
 {_
-    wid_text_area->log(s);
+    wid_text_area->log(s, lhs, rhs);
 }
 
 //
 // Log a message to the popup
 //
-void WidPopup::log (std::wstring s)
+void WidPopup::log (std::wstring s, bool lhs, bool rhs)
 {_
-    wid_text_area->log(s);
+    wid_text_area->log(s, lhs, rhs);
 }
