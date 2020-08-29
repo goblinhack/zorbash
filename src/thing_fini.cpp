@@ -57,6 +57,7 @@ void Thing::destroy (void)
     delete_dmap_scent();
     delete_age_map();
     delete_light();
+    delete_particle();
 
     {
         auto f = level->all_gc_things.find(id);
@@ -79,8 +80,6 @@ void Thing::destroy (void)
     if (level->cursor == this) {
         level->cursor = nullptr;
     }
-
-    delete_particle();
 
     if (monstp) {
         oldptr(monstp);
