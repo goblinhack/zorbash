@@ -742,16 +742,18 @@ void Thing::blit_internal (point &blit_tl,
 
     if (unlikely(is_on_fire())) {
         static uint32_t ts;
-        if (time_have_x_tenths_passed_since(1, ts)) {
+        static color fire_color;
+        if (time_have_x_tenths_passed_since(2, ts)) {
             ts = time_get_time_ms_cached();
-            if (random_range(0, 100) < 10) {
-                c = WHITE;
+            if (random_range(0, 100) < 20) {
+                fire_color = YELLOW;
             } else if (random_range(0, 100) < 50) {
-                c = ORANGE;
+                fire_color = ORANGE;
             } else {
-                c = RED;
+                fire_color = RED;
             }
         }
+        c = fire_color;
     }
 
     uint8_t fade = level->fade_in_map_no_check(mid_at.x, mid_at.y);
