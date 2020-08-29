@@ -27,9 +27,9 @@ void Thing::log_ (const char *fmt, va_list args) const
     len = (int)strlen(buf);
 
     if (!callframes_depth) {
-        snprintf(buf + len, MAXSTR - len, "%45s: ", t->to_string().c_str());
+        snprintf(buf + len, MAXSTR - len, "%60s: ", t->to_string().c_str());
     } else {
-        snprintf(buf + len, MAXSTR - len, "%45s: %*s",
+        snprintf(buf + len, MAXSTR - len, "%60s: %*s",
                 t->to_string().c_str(),
                 callframes_depth - g_thing_callframes_depth, "");
     }

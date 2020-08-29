@@ -1313,10 +1313,14 @@ def init_32x32():
 
 def init_32x32_surface_effects():
     tiles = [
-            "water1.1", "water1.2", "water1.3", "water1.4", "water1.5", "water1.6", "water1.7", "water1.8",
-            "water1.9", "water1.10", "water1.11", "water1.12", "water1.13", "water1.14", "water1.15", "water1.16",
-            "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "",
+            "water1.1", "water1.2", "water1.3", "water1.4", 
+            "water1.5", "water1.6", "water1.7", "water1.8",
+            "water1.9", "water1.10", "water1.11", "water1.12", 
+            "water1.13", "water1.14", "water1.15", "water1.16",
+            "water1.17", "water1.18", "water1.19", "water1.20",
+            "water1.21", "water1.22", "water1.23", "water1.24",
+            "water1.25", "water1.26", "water1.27", "water1.28",
+            "water1.29", "water1.30", "water1.31", "water1.32",
             "ripple1.1", "ripple1.2", "ripple1.3", "ripple1.4",
             "ripple1.5", "ripple1.6", "ripple1.7", "ripple1.8",
             "ripple2.1", "ripple2.2", "ripple2.3", "ripple2.4",

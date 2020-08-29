@@ -169,22 +169,10 @@ void Level::display_water (int fbo,
     for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if (g_render_black_and_white) {
-                    if (!is_visited(x, y)) {
-                        continue;
-                    }
-                }
                 if (likely(!get(tile_map, x, y + 1))) {
                     continue;
                 }
                 FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                    if (g_render_black_and_white) {
-                        if (t->is_monst() ||
-                            t->owner_get() ||
-                            t->get_light_count()) {
-                            continue;
-                        }
-                    }
                     t->blit_upside_down();
                 } FOR_ALL_THINGS_END()
             }
@@ -209,7 +197,18 @@ void Level::display_water (int fbo,
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     color c = WHITE;
-    c.a = 200;
+    c.a = 100;
+    glcolor(c);
+    glTranslatef(-2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  2, 0);
+    glTranslatef( 0, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  2, 0);
+    glTranslatef( 2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  2, 0);
+    glTranslatef(-2,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  0, 0);
+    glTranslatef( 2,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  0, 0);
+    glTranslatef(-2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2, -2, 0);
+    glTranslatef( 0,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -2, 0);
+    glTranslatef( 2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2, -2, 0);
+
+    c.a = 150;
     glcolor(c);
     glTranslatef(-1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  1, 0);
     glTranslatef( 0, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  1, 0);

@@ -671,16 +671,7 @@ void Thing::blit_internal (point &blit_tl,
         return;
     }
 
-    if (g_render_black_and_white) {
-#if 0
-        if (is_monst()) {
-            if (!level->is_lit_no_check(mid_at.x, mid_at.y)) {
-                return;
-            }
-            c = BLACK;
-        }
-#endif
-    } else {
+    if (!g_render_black_and_white) {
         if (unlikely(tpp->gfx_small_shadow_caster())) {
             if (auto submerged = blit_begin_submerged()) {
                 blit_shadow(tpp, tile, blit_tl, blit_br);

@@ -36,7 +36,7 @@ std::string Thing::to_string (void) const
 //                               get_stats_health_max(),
 //                               mid_at.x, mid_at.y));
     } else if (get_stats_health_max()) {
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%a @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -53,7 +53,7 @@ std::string Thing::to_string (void) const
 //                               get_stats_health_max(),
 //                               mid_at.x, mid_at.y));
     } else {
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%a @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
