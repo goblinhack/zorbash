@@ -88,7 +88,7 @@ std::string Traceback::to_string (void)
     return ("");
 #else
     auto addrlist = &tb[0];
-    std::string sout = "stack trace:\n===========\n";
+    std::string sout = "stack trace\n===========\n";
 
     if (size == 0) {
         sout +="  <empty, possibly corrupt>\n";

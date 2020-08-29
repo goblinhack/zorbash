@@ -73,6 +73,7 @@ public:
     float        wobble = {};                // Fades when set
     fpoint       interpolated_mid_at;
     fpoint       lunge_to;                   // When a monst attacks something
+    point        last_lit_at;                // Last light calculation
     int          bounce_count = {};
     int          gold = {};
     int          keys = {};
@@ -283,6 +284,9 @@ public:
 
     void set_lunge_to(fpoint);
     fpoint get_lunge_to(void) const;
+
+    void set_last_lit_at(point);
+    point get_last_lit_at(void) const;
 
     void set_bounce_height(float);
     float get_bounce_height(void) const;
@@ -1169,7 +1173,7 @@ public:
     void torch_tick();
     void unwield(const char *why);
     void update_interpolated_position(void);
-    void update_light(void);
+    void update_light(bool force = false);
     void update_pos(fpoint, bool immediately);
     void update_all(void);
     void use(void);

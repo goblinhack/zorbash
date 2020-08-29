@@ -39,15 +39,15 @@ void callstack_dump (void)
     }
     done = true;
 
-    fprintf(MY_STDERR, "code trace:\n");
-    fprintf(MY_STDERR, "==========:\n");
+    fprintf(MY_STDERR, "code trace\n");
+    fprintf(MY_STDERR, "==========\n");
     for (auto depth = 0; depth < callframes_depth; depth++) {
         auto iter = &callframes[depth];
         fprintf(MY_STDERR, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
     }
 
-    CON("code trace:");
-    CON("==========:");
+    CON("code trace");
+    CON("==========");
     for (auto depth = 0; depth < callframes_depth; depth++) {
         auto iter = &callframes[depth];
         CON("(stack) %d %s %s, line %u", depth, iter->file, iter->func, iter->line);

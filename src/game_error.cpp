@@ -86,9 +86,8 @@ void game_error (std::string error)
     }
     game->hard_pause();
 
-    auto m = ASCII_WIDTH / 2;
-    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_MINICON_VIS_HEIGHT + 2);
-    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
+    point tl = make_point(1, 1);
+    point br = make_point(ASCII_WIDTH - 1, ASCII_HEIGHT - 1);
     auto width = br.x - tl.x;
 
     game_error_window =
@@ -104,16 +103,15 @@ void game_error (std::string error)
     game_error_window->log(" ");
     game_error_window->log(" ");
     game_error_window->log(" ");
+    game_error_window->log("Please send a screenshot to %%fg=white$goblinhack@gmail.com");
     game_error_window->log(" ");
-    game_error_window->log(" ");
-    game_error_window->log("If a bug, send a screenshot to %%fg=white$goblinhack@gmail.com");
-    game_error_window->log(" ");
+    sdl_screenshot_do();
 
     {_
         auto tb = new Traceback();
         tb->init();
         auto s = tb->to_string();
-            game_error_window->log(s);
+        game_error_window->log(s, true, false);
     }
 
     {_
@@ -121,9 +119,9 @@ void game_error (std::string error)
         auto w = wid_new_square_button(p, "dismiss");
 
         point tl = make_point(1, 4);
-        point br = make_point(width - 3, 6);
+        point br = make_point(width - 3, 4);
 
-        wid_set_style(w, UI_WID_STYLE_RED);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_on_mouse_up(w, game_error_mouse_up);
 
         wid_set_pos(w, tl, br);

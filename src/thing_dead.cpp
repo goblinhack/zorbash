@@ -83,9 +83,7 @@ void Thing::kill (Thingp killer, const char *reason)
         auto p = level->player;
         if (p) {
             MINICON("The door crashes open");
-            if (p->get_light_count()) {
-                p->update_light();
-            }
+            p->update_light();
         }
     }
 

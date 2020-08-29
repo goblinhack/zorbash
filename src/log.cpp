@@ -405,13 +405,21 @@ void DBG (const char *fmt, ...)
 
 void myerr (const char *fmt, ...)
 {
-    g_errored = true;
-
-    va_list args;
-
-    va_start(args, fmt);
-    err_(fmt, args);
-    va_end(args);
+    if (g_errored) {
+        //
+        // Subsequent errors on quitting, avoid error logging
+        //
+        va_list args;
+        va_start(args, fmt);
+        log_(fmt, args);
+        va_end(args);
+    } else {
+        g_errored = true;
+        va_list args;
+        va_start(args, fmt);
+        err_(fmt, args);
+        va_end(args);
+    }
 
     wid_unset_focus();
     wid_unset_focus_lock();

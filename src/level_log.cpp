@@ -103,15 +103,24 @@ void Level::err_ (const char *fmt, va_list args)
 
 void Level::err (const char *fmt, ...)
 {
-    g_errored = true;
-
     verify(this);
     auto t = this;
-    va_list args;
 
-    va_start(args, fmt);
-    t->err_(fmt, args);
-    va_end(args);
+    if (g_errored) {
+        //
+        // Subsequent errors on quitting, avoid error logging
+        //
+        va_list args;
+        va_start(args, fmt);
+        t->log_(fmt, args);
+        va_end(args);
+    } else {
+        g_errored = true;
+        va_list args;
+        va_start(args, fmt);
+        t->err_(fmt, args);
+        va_end(args);
+    }
 }
 
 void Level::dbg (const char *fmt, ...)

@@ -33,7 +33,7 @@ public:
               bool vert_scoll=true);
 
 public:
-    void log(std::string s);
-    void log(std::wstring s);
+    void log(std::string s, bool lhs = false, bool rhs = false);
+    void log(std::wstring s, bool lhs = false, bool rhs = false);
 };
 #endif

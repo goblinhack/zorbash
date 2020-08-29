@@ -36,10 +36,10 @@ public:
                bool vert_scoll=true);
 
 private:
-    void log_(std::wstring str);
+    void log_(std::wstring str, bool lhs, bool rhs);
 
 public:
-    void log(std::string s);
-    void log(std::wstring s);
+    void log(std::string s, bool lhs = false, bool rhs = false);
+    void log(std::wstring s, bool lhs = false, bool rhs = false);
 };
 #endif

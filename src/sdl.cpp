@@ -1337,8 +1337,10 @@ void sdl_loop (void)
                 sdl_event(&events[i]);
             }
 
-            if (unlikely(!sdl_main_loop_running)) {
-                break;
+            if (unlikely(!g_do_screenshot)) {
+                if (unlikely(!sdl_main_loop_running)) {
+                    break;
+                }
             }
 
             if (!g_errored) {
