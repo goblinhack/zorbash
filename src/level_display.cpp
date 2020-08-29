@@ -84,9 +84,11 @@ void Level::display_map_things (int fbo,
     }
     blit_flush();
 
-//    display_chasm(fbo, minx, miny, maxx, maxy);
-    display_water(fbo, minx, miny, maxx, maxy);
-    display_deep_water(fbo, minx, miny, maxx, maxy);
+    if (!g_render_black_and_white) {
+        display_water(fbo, minx, miny, maxx, maxy);
+        display_deep_water(fbo, minx, miny, maxx, maxy);
+    }
+
     display_lava(fbo, minx, miny, maxx, maxy);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);

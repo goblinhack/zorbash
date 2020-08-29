@@ -1,10 +1,12 @@
 bugs
 ----
+- not visible on jump into lava
 - jump on spot does not collect
 - moving off an entrance changes level
 - jump on the spot
 - make the player icon small and outlined
 - slime combine crash
+- monst side bar show some items uniquely like torches?
 
 upcoming work
 -------------
