@@ -294,7 +294,15 @@ void Thing::delete_particle (void)
     if (has_internal_particle) {
         auto e = std::remove_if(level->all_internal_particles.begin(),
                                 level->all_internal_particles.end(),
-            [=, this] (Particle &p) { return (p.id == id); });
+            [=, this] (Particle &p) { 
+                if (p.id == id) {
+                    log("remove particle");
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        );
 
         level->all_internal_particles.erase(e, 
                                             level->all_internal_particles.end());
@@ -304,7 +312,15 @@ void Thing::delete_particle (void)
     if (has_external_particle) {
         auto e = std::remove_if(level->all_external_particles.begin(),
                                 level->all_external_particles.end(),
-            [=, this] (Particle &p) { return (p.id == id); });
+            [=, this] (Particle &p) { 
+                if (p.id == id) {
+                    log("remove particle");
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        );
 
         level->all_external_particles.erase(e, 
                                             level->all_external_particles.end());
