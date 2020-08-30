@@ -83,6 +83,8 @@ _
         auto w = level->thing_find(on_fire_anim_id);
         if (w) { w->visible(); }
     }
+
+    move_finish();
 }
 
 uint8_t Thing::is_visible (void) const

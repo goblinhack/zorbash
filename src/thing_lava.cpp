@@ -11,6 +11,13 @@
 
 void Thing::lava_tick (void)
 {_
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
+        return;
+    }
+
     if (is_fire_hater()) {
         if (level->is_lava(mid_at.x, mid_at.y)) {
             bool hit = false;

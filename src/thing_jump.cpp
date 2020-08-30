@@ -306,6 +306,10 @@ void Thing::jump_end (void)
     log("end of jump");
     is_jumping = false;
 
+    set_timestamp_jump_begin(0);
+    set_timestamp_jump_end(0);
+    move_finish();
+
     //
     // Weapons follow also.
     //
@@ -342,9 +346,6 @@ void Thing::jump_end (void)
         }
     }
 
-    collision_check_only(mid_at);
-    location_check();
-
     //
     // Attack of opportunity
     //
@@ -356,4 +357,6 @@ void Thing::jump_end (void)
         }
     }
     wobble(25);
+
+    move_carried_items();
 }
