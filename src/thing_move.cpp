@@ -10,8 +10,6 @@
 
 void Thing::move_finish (void)
 {
-    // why?
-    // mid_at = get_interpolated_mid_at();
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);
     update_interpolated_position();
