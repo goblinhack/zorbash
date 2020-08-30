@@ -13,10 +13,13 @@
 // True on something bad - level change or death
 //
 bool Thing::location_check (void)
-{
+{_
     if (is_hidden) {
         return (false);
     }
+
+    log("location check");
+
     //
     // Put chasm checks first as you can still fall when dead!
     //

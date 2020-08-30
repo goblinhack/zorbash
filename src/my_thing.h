@@ -318,6 +318,7 @@ public:
     int get_submerged_offset(void) const;
     uint32_t set_tick(uint32_t);
     uint32_t get_tick(void);
+    uint32_t get_tick_const(void) const;
     uint32_t decr_tick(uint32_t);
     uint32_t incr_tick(uint32_t);
     uint32_t decr_tick(void);

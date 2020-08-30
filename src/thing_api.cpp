@@ -42,7 +42,7 @@ int Thing::get_resurrect (void) const {_ return (tp()->resurrect_dice().roll());
 void Thing::new_monst (void)
 {_
     if (unlikely(!monstp)) {
-//con("new");
+        log("needs monst struct");
         monstp = new Monst();
         // uncomment to see who allocates things
         // err("new monst");
@@ -1608,6 +1608,16 @@ uint32_t Thing::get_tick (void)
     if (monstp) {
         verify(monstp);
         set_max_tick_difference();
+        return (monstp->tick);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::get_tick_const (void) const
+{_
+    if (monstp) {
+        verify(monstp);
         return (monstp->tick);
     } else {
         return (0);

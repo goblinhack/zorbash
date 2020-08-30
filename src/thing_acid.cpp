@@ -11,36 +11,49 @@
 
 void Thing::acid_tick (void)
 {_
-    if (is_acid_hater()) {
-        if (level->is_acid(mid_at.x, mid_at.y)) {
-            bool hit;
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
+        return;
+    }
 
-            //
-            // Give the player a chance
-            //
-            if (!level->is_smoke(mid_at.x, mid_at.y)) {
-                auto smoke = level->thing_new("smoke1", mid_at);
-                smoke->set_lifespan(4);
+    if (!is_acid_hater()) {
+        return;
+    }
 
-                hit = ((int)random_range(0, 100) < 50);
-            } else {
-                hit = true;
+    if (!level->is_acid(mid_at.x, mid_at.y)) {
+        return;
+    }
+
+    bool hit;
+
+    log("acid tick");
+
+    //
+    // Give the player a chance
+    //
+    if (!level->is_smoke(mid_at.x, mid_at.y)) {
+        auto smoke = level->thing_new("smoke1", mid_at);
+        smoke->set_lifespan(4);
+
+        hit = ((int)random_range(0, 100) < 50);
+    } else {
+        hit = true;
+    }
+
+    if (hit) {
+        FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2) {
+            auto tpp = t->tp();
+            if (!tpp->is_acid()) {
+                continue;
             }
-
-            if (hit) {
-                FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2) {
-                    auto tpp = t->tp();
-                    if (!tpp->is_acid()) {
-                        continue;
-                    }
-                    is_hit_by(t, t->get_stats_attack());
-                    break;
-                } FOR_ALL_THINGS_END()
-            } else {
-                if (is_player()) {
-                    MINICON("Your shoes are dissolving!");
-                }
-            }
+            is_hit_by(t, t->get_stats_attack());
+            break;
+        } FOR_ALL_THINGS_END()
+    } else {
+        if (is_player()) {
+            MINICON("Your shoes are dissolving!");
         }
     }
 }
