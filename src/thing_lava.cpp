@@ -18,37 +18,43 @@ void Thing::lava_tick (void)
         return;
     }
 
-    if (is_fire_hater()) {
-        if (level->is_lava(mid_at.x, mid_at.y)) {
-            bool hit = false;
+    if (!is_fire_hater()) {
+        return;
+    }
 
-            //
-            // Give the player a chance
-            //
-            if (!level->is_smoke(mid_at.x, mid_at.y)) {
-                auto smoke = level->thing_new("smoke1", mid_at);
-                smoke->set_lifespan(4);
+    if (!level->is_lava(mid_at.x, mid_at.y)) {
+        return;
+    }
 
-                hit = ((int)random_range(0, 100) < 80);
-            } else {
-                hit = true;
+    bool hit = false;
+
+    log("acid tick");
+
+    //
+    // Give the player a chance
+    //
+    if (!level->is_smoke(mid_at.x, mid_at.y)) {
+        auto smoke = level->thing_new("smoke1", mid_at);
+        smoke->set_lifespan(4);
+
+        hit = ((int)random_range(0, 100) < 80);
+    } else {
+        hit = true;
+    }
+
+    if (hit) {
+        FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_LAVA) {
+            auto tpp = t->tp();
+            if (!tpp->is_lava()) {
+                continue;
             }
-
-            if (hit) {
-                FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_LAVA) {
-                    auto tpp = t->tp();
-                    if (!tpp->is_lava()) {
-                        continue;
-                    }
-                    is_hit_by(t, t->get_stats_attack());
-                    break;
-                } FOR_ALL_THINGS_END()
-            } else {
-                if (is_player()) {
-                    MINICON("You stand on a sightly cooler rock in the lava!");
-                    MINICON("Your feet are warm and toasty!");
-                }
-            }
+            is_hit_by(t, t->get_stats_attack());
+            break;
+        } FOR_ALL_THINGS_END()
+    } else {
+        if (is_player()) {
+            MINICON("You stand on a sightly cooler rock in the lava!");
+            MINICON("Your feet are warm and toasty!");
         }
     }
 }

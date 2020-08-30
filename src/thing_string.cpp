@@ -19,7 +19,7 @@ std::string Thing::to_string (void) const
     verify(tpp);
 
     if (unlikely(!tpp)) {
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(<no tp>%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(<no tp>%s%s%s%s T%u @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -28,15 +28,10 @@ std::string Thing::to_string (void) const
                                is_hidden ? "/hidden" : "",
                                is_jumping ? "/jumping" : "",
                                is_falling ? "/falling" : "",
+                               get_tick_const(),
                                mid_at.x, mid_at.y));
-//        return (string_sprintf("%" PRIx32 "(<no tp>%s hp %d/%d @%g,%g)",
-//                               id,
-//                               is_dead ? "/dead" : "",
-//                               get_stats_health(),
-//                               get_stats_health_max(),
-//                               mid_at.x, mid_at.y));
     } else if (get_stats_health_max()) {
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s T%u @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -45,15 +40,10 @@ std::string Thing::to_string (void) const
                                is_hidden ? "/hidden" : "",
                                is_jumping ? "/jumping" : "",
                                is_falling ? "/falling" : "",
+                               get_tick_const(),
                                mid_at.x, mid_at.y));
-//        return (string_sprintf("%" PRIx32 "(%s%s hp %d/%d @%g,%g)",
-//                               id, tpp->name.c_str(),
-//                               is_dead ? "/dead" : "",
-//                               get_stats_health(),
-//                               get_stats_health_max(),
-//                               mid_at.x, mid_at.y));
     } else {
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s T%u @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -62,6 +52,7 @@ std::string Thing::to_string (void) const
                                is_hidden ? "/hidden" : "",
                                is_jumping ? "/jumping" : "",
                                is_falling ? "/falling" : "",
+                               get_tick_const(),
                                mid_at.x, mid_at.y));
     }
 }
