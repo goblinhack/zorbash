@@ -120,7 +120,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 #ifdef ENABLE_DEBUG_SAVE_LOAD
     auto start = out.tellp();
 #endif
-    WRITE_MAGIC(THING_MAGIC_BEGIN);
+    WRITE_MAGIC(THING_MAGIC_BEGIN + (int) sizeof(Thing));
 
     const std::string name(tp_id_map[my.t->tp_id - 1]->name());
     out << bits(name);

@@ -269,6 +269,12 @@ static void dying_ (const char *fmt, va_list args)
 
 static void err_ (const char *fmt, va_list args)
 {
+    static bool nested_error;
+    if (nested_error) {
+        return;
+    }
+    nested_error = true;
+
     char buf[MAXSTR];
     int len;
 
@@ -297,6 +303,7 @@ static void err_ (const char *fmt, va_list args)
     traceback_dump();
 
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
+    nested_error = false;
 }
 
 static void croak_ (const char *fmt, va_list args)
@@ -405,6 +412,12 @@ void DBG (const char *fmt, ...)
 
 void myerr (const char *fmt, ...)
 {
+    static bool nested_error;
+    if (nested_error) {
+        return;
+    }
+    nested_error = true;
+
     if (g_errored) {
         //
         // Subsequent errors on quitting, avoid error logging
@@ -423,6 +436,8 @@ void myerr (const char *fmt, ...)
 
     wid_unset_focus();
     wid_unset_focus_lock();
+
+    nested_error = false;
 }
 
 static void msgerr_ (const char *fmt, va_list args)

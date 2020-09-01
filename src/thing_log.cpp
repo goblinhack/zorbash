@@ -156,6 +156,12 @@ void Thing::minicon (const char *fmt, ...) const
 
 void Thing::err_ (const char *fmt, va_list args) const
 {
+    static bool nested_error;
+    if (nested_error) {
+        return;
+    }
+    nested_error = true;
+
     verify(this);
     auto t = this;
     char buf[MAXSTR];
@@ -180,10 +186,18 @@ void Thing::err_ (const char *fmt, va_list args) const
 
     wid_console_log(buf);
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
+
+    nested_error = false;
 }
 
 void Thing::err (const char *fmt, ...) const
 {
+    static bool nested_error;
+    if (nested_error) {
+        return;
+    }
+    nested_error = true;
+
     verify(this);
     auto t = this;
 
@@ -202,6 +216,8 @@ void Thing::err (const char *fmt, ...) const
         t->err_(fmt, args);
         va_end(args);
     }
+
+    nested_error = false;
 }
 
 void Thing::dbg (const char *fmt, ...) const
