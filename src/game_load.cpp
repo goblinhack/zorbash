@@ -23,12 +23,12 @@ bool game_load_headers_only;
 extern int GAME_SAVE_MARKER_EOL;
 std::array<bool, UI_WID_SAVE_SLOTS> slot_valid;
 
-#define READ_MAGIC(m) { \
+#define READ_MAGIC(what, m) { \
     uint32_t magic; \
     in >> bits(magic); \
     if (magic != m) { \
         game_load_error = \
-          "bad final thing magic expected: " + std::to_string(m) + " got " + std::to_string(magic); \
+          "bad " what " magic expected: " + std::to_string(m) + " got " + std::to_string(magic); \
         return (in); \
     } \
 }
@@ -148,7 +148,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     auto start = in.tellg();
 #endif
 
-    READ_MAGIC(THING_MAGIC_BEGIN);
+    READ_MAGIC("thing begin", THING_MAGIC_BEGIN + (int) sizeof(Thing));
 
     std::string name;
     in >> bits(name);
@@ -175,6 +175,12 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
         game_load_error = "loaded a thing with no TP ID";
         return in;
     }
+
+    if (!tp_find(my.t->tp_id)) {
+        game_load_error = "loaded a thing with invalid TP ID";
+        return in;
+    }
+
     in >> bits(my.t->id.id); if (!my.t->id.id) {
         game_load_error = "loaded a thing with no ID";
         return in;
@@ -239,7 +245,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     //
     my.t->inited_tiles       = false;
 
-    READ_MAGIC(THING_MAGIC_END);
+    READ_MAGIC("thing end", THING_MAGIC_END);
 
 #ifdef ENABLE_DEBUG_SAVE_LOAD
     auto diff = in.tellg() - start;
@@ -372,7 +378,7 @@ _
         }
     }
 
-    READ_MAGIC(THING_MAGIC_FINAL);
+    READ_MAGIC("level end", THING_MAGIC_FINAL);
     LOG("DUNGEON: Loaded things for level %d,%d,%d", p.x, p.y, p.z);
 
     my.t->update_map();
@@ -427,8 +433,6 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
 std::istream& operator>>(std::istream &in, Bits<Config &> my)
 {_
     /* uint32_t           header_size                  */ in >> bits(my.t.header_size                  );
-CON("my.t.header_size %d", my.t.header_size);
-CON(" sizeof(Config) %d", (int) sizeof(Config));
     if (my.t.header_size != sizeof(Config)) {
         game_load_error = "incompatible save file header version";
         return in;

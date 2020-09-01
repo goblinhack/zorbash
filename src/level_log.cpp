@@ -75,6 +75,12 @@ void Level::con (const char *fmt, ...)
 
 void Level::err_ (const char *fmt, va_list args)
 {
+    static bool nested_error;
+    if (nested_error) {
+        return;
+    }
+    nested_error = true;
+
     verify(this);
     auto t = this;
     char buf[MAXSTR];
@@ -99,10 +105,18 @@ void Level::err_ (const char *fmt, va_list args)
 
     wid_console_log(buf);
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
+
+    nested_error = false;
 }
 
 void Level::err (const char *fmt, ...)
 {
+    static bool nested_error;
+    if (nested_error) {
+        return;
+    }
+    nested_error = true;
+
     verify(this);
     auto t = this;
 
@@ -121,6 +135,7 @@ void Level::err (const char *fmt, ...)
         t->err_(fmt, args);
         va_end(args);
     }
+    nested_error = false;
 }
 
 void Level::dbg (const char *fmt, ...)
