@@ -196,24 +196,22 @@ void Thing::err (const char *fmt, ...) const
     if (nested_error) {
         return;
     }
+    bool old_nested_error = nested_error;
     nested_error = true;
 
-    verify(this);
-    auto t = this;
-
-    if (g_errored) {
+    if (old_nested_error) {
         //
         // Subsequent errors on quitting, avoid error logging
         //
         va_list args;
         va_start(args, fmt);
-        t->log_(fmt, args);
+        log_(fmt, args);
         va_end(args);
     } else {
         g_errored = true;
         va_list args;
         va_start(args, fmt);
-        t->err_(fmt, args);
+        err_(fmt, args);
         va_end(args);
     }
 
