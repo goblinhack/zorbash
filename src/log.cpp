@@ -416,9 +416,10 @@ void myerr (const char *fmt, ...)
     if (nested_error) {
         return;
     }
+    bool old_nested_error = nested_error;
     nested_error = true;
 
-    if (g_errored) {
+    if (old_nested_error) {
         //
         // Subsequent errors on quitting, avoid error logging
         //

@@ -1,6 +1,7 @@
 bugs
 ----
 - acid gets multiple hits
+- chasm seems to be lit when offscreen
 - jump on the spot
 - jump on spot does not collect
 - moving off an entrance changes level
