@@ -71,7 +71,6 @@ public:
     float        fadeup_height = {};         // Percentage of tile height.
     float        fall_height = {};           // y offset for falling
     float        wobble = {};                // Fades when set
-    fpoint       interpolated_mid_at;
     fpoint       lunge_to;                   // When a monst attacks something
     point        last_lit_at;                // Last light calculation
     int          bounce_count = {};
@@ -157,6 +156,7 @@ public:
     int16_t     tp_id                {-1};  // Common settings
     ThingId     id                   {};    // Unique per thing.
     ThingTiles  tiles                {};
+    fpoint      interpolated_mid_at;
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
     point       last_attached;

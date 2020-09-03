@@ -63,7 +63,9 @@ void Thing::init (Levelp level,
     //
     // Start off up to data with the player
     //
-    set_tick(game->tick_current);
+    if (is_active()) {
+        set_tick(game->tick_current);
+    }
 
     //
     // Must do this after TP assignment or logging will fail
@@ -328,9 +330,10 @@ void Thing::init (Levelp level,
     //
     // Jitter the initial ticks so things don't all tick the same time
     //
-    set_timestamp_last_tick(
-       time_get_time_ms_cached() +
-       random_range(0, get_tick_rate_tenths() * 100));
+    if (is_active()) {
+        set_timestamp_last_tick(time_get_time_ms_cached() +
+                                random_range(0, get_tick_rate_tenths() * 100));
+    }
 
     init_lights();
 

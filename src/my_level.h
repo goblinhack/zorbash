@@ -1378,7 +1378,7 @@ public:
         }
         auto v = get(_fade_in_map, x, y);
         if (v < 200) {
-            v+=5;
+            v+=2;
             set(_fade_in_map, x, y, v);
         } else {
             set(_fade_in_map, x, y, (uint8_t)255);
@@ -1389,7 +1389,7 @@ public:
     {
         auto v = get_no_check(_fade_in_map, x, y);
         if (v < 200) {
-            v+=5;
+            v+=2;
             set_no_check(_fade_in_map, x, y, v);
         } else {
             set(_fade_in_map, x, y, (uint8_t)255);
