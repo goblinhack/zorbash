@@ -42,11 +42,16 @@ int Thing::get_resurrect (void) const {_ return (tp()->resurrect_dice().roll());
 void Thing::new_monst (void)
 {_
     if (unlikely(!monstp)) {
-        log("needs monst struct");
         monstp = new Monst();
         // uncomment to see who allocates things
         // err("new monst");
         newptr(monstp, "Monst");
+
+        if (tp_id != -1) {
+            if (is_dirt() || is_the_grid() || is_wall() || is_floor()) {
+                die("unexpectedly needs monst struct");
+            }
+        }
     }
 }
 
@@ -4425,18 +4430,13 @@ ThingId Thing::set_on_fire_anim_id (ThingId v)
 ////////////////////////////////////////////////////////////////////////////
 fpoint Thing::get_interpolated_mid_at (void) const
 {_
-    if (monstp) {
-        return (monstp->interpolated_mid_at);
-    } else {
-        return (mid_at);
-    }
+    return (interpolated_mid_at);
 }
 
 fpoint Thing::set_interpolated_mid_at (fpoint v)
 {_
-    new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->interpolated_mid_at = v);
+    return (interpolated_mid_at = v);
 }
 
 const std::string& Thing::str1 (void) const {_ return (tp()->str1()); }

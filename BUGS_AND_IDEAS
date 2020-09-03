@@ -1,5 +1,7 @@
 bugs
 ----
+- no fade in on new level
+- fade in too slow for water
 - acid gets multiple hits
 - chasm seems to be lit when offscreen
 - jump on the spot

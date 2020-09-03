@@ -132,7 +132,9 @@ void Thing::level_enter (void)
     }
     level_push();
 
-    set_where_i_dropped_an_item_last(point(-1, -1));
+    if (is_player() || is_monst()) {
+        set_where_i_dropped_an_item_last(point(-1, -1));
+    }
 
     //
     // Make sure the light is refreshed.

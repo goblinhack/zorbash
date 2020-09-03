@@ -66,7 +66,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* float        fadeup_height             */ in >> bits(my.t->fadeup_height);
     /* float        fall_height               */ in >> bits(my.t->fall_height);
     /* float        wobble                    */ in >> bits(my.t->wobble);
-    /* fpoint       interpolated_mid_at       */ in >> bits(my.t->interpolated_mid_at);
     /* fpoint       lunge_to                  */ in >> bits(my.t->lunge_to);
     /* fpoint       last_lit_at               */ in >> bits(my.t->last_lit_at);
     /* int          bounce_count              */ in >> bits(my.t->bounce_count);
@@ -185,6 +184,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
         game_load_error = "loaded a thing with no ID";
         return in;
     }
+    in >> bits(my.t->interpolated_mid_at);
     in >> bits(my.t->last_mid_at);
     in >> bits(my.t->mid_at);
     in >> bits(my.t->last_attached);

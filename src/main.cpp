@@ -52,6 +52,7 @@ void callstack_dump (void)
         auto iter = &callframes[depth];
         CON("(stack) %d %s %s, line %u", depth, iter->file, iter->func, iter->line);
     }
+    done = false;
 }
 
 #ifdef ENABLE_CRASH_HANDLER

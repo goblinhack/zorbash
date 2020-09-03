@@ -39,7 +39,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* float        fadeup_height             */ out << bits(my.t->fadeup_height);
     /* float        fall_height               */ out << bits(my.t->fall_height);
     /* float        wobble                    */ out << bits(my.t->wobble);
-    /* fpoint       interpolated_mid_at       */ out << bits(my.t->interpolated_mid_at);
     /* fpoint       lunge_to                  */ out << bits(my.t->lunge_to);
     /* fpoint       last_lit_at               */ out << bits(my.t->last_lit_at);
     /* int          bounce_count              */ out << bits(my.t->bounce_count);
@@ -136,6 +135,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /////////////////////////////////////////////////////////////////////////
     out << bits(my.t->tp_id);
     out << bits(my.t->id);
+    out << bits(my.t->interpolated_mid_at);
     out << bits(my.t->last_mid_at);
     out << bits(my.t->mid_at);
     out << bits(my.t->last_attached);
