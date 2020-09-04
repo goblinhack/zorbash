@@ -757,8 +757,15 @@ void Thing::blit_internal (point &blit_tl,
     }
 
     uint8_t fade = level->fade_in_map_no_check(mid_at.x, mid_at.y);
-    if (fade) {
+    if (fade == 255) {
+    } else if (fade) {
         level->incr_fade_in_no_check(mid_at.x, mid_at.y);
+        if (level->is_hazard(mid_at.x, mid_at.y)) {
+            level->incr_fade_in_no_check(mid_at.x, mid_at.y);
+            level->incr_fade_in_no_check(mid_at.x, mid_at.y);
+            level->incr_fade_in_no_check(mid_at.x, mid_at.y);
+            level->incr_fade_in_no_check(mid_at.x, mid_at.y);
+        }
         c.a = std::min(c.a, fade);
     } else {
         c.a = 0;
