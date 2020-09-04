@@ -1,5 +1,6 @@
 bugs
 ----
+- use larger bitmap for visited level?
 - no fade in on new level
 - fade in too slow for water
 - acid gets multiple hits
@@ -7,13 +8,13 @@ bugs
 - jump on the spot
 - jump on spot does not collect
 - moving off an entrance changes level
-- make the player icon small and outlined
+- remove the player icon, just use monst bar
 - monst side bar show some items uniquely like torches?
-- should the entrance in next level be close to the prev exit
 - tab to change gfx mode
 
 upcoming work
 -------------
+- should the entrance in next level be close to the prev exit
 - moving floor
 - monst rarity
 - sewer level

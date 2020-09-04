@@ -1377,8 +1377,8 @@ public:
             return;
         }
         auto v = get(_fade_in_map, x, y);
-        if (v < 200) {
-            v+=2;
+        if (v < 255) {
+            v+=1;
             set(_fade_in_map, x, y, v);
         } else {
             set(_fade_in_map, x, y, (uint8_t)255);
@@ -1388,8 +1388,8 @@ public:
     inline void incr_fade_in_no_check (const int x, const int y)
     {
         auto v = get_no_check(_fade_in_map, x, y);
-        if (v < 200) {
-            v+=2;
+        if (v < 255) {
+            v+=1;
             set_no_check(_fade_in_map, x, y, v);
         } else {
             set(_fade_in_map, x, y, (uint8_t)255);
