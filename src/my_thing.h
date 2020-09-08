@@ -1026,7 +1026,7 @@ public:
     int is_rrr61(void) const;
     int is_rrr62(void) const;
     int is_rrr63(void) const;
-    int is_rrr64(void) const;
+    int is_gfx_shown_in_bg(void) const;
     int on_death_drop_all_items(void) const;
     int is_steal_item_chance_d1000(void) const;
     int is_rrr7(void) const;
@@ -1085,15 +1085,15 @@ public:
     void add_enemy(Thingp attacker);
     void ai_get_next_hop(void);
     void animate();
-    void blit();
+    void blit(int fbo);
     void blit_end_reflection_submerged(uint8_t submerged) const;
     void blit_end_submerged(uint8_t submerged) const;
-    void blit_internal(point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
+    void blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
     void blit_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
     void blit_text(std::string const&, color c, point tl, point br);
-    void blit_upside_down();
+    void blit_upside_down(int fbo);
     void blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles);
     void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
     void blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);

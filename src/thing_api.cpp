@@ -804,9 +804,9 @@ int Thing::is_rrr63(void) const
     return (tp()->is_rrr63());
 }
 
-int Thing::is_rrr64(void) const
+int Thing::is_gfx_shown_in_bg(void) const
 {_
-    return (tp()->is_rrr64());
+    return (tp()->is_gfx_shown_in_bg());
 }
 
 int Thing::on_death_drop_all_items(void) const

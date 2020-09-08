@@ -242,7 +242,7 @@ int Tp::is_rrr60(void) const { return _is_rrr60; }
 int Tp::is_rrr61(void) const { return _is_rrr61; }
 int Tp::is_rrr62(void) const { return _is_rrr62; }
 int Tp::is_rrr63(void) const { return _is_rrr63; }
-int Tp::is_rrr64(void) const { return _is_rrr64; }
+int Tp::is_gfx_shown_in_bg(void) const { return _is_gfx_shown_in_bg; }
 int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
 int Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1000; }
 int Tp::is_weapon_wielder(void) const { return _is_weapon_wielder; }
@@ -483,7 +483,7 @@ void Tp::set_is_rrr60(int v) { _is_rrr60 = v; }
 void Tp::set_is_rrr61(int v) { _is_rrr61 = v; }
 void Tp::set_is_rrr62(int v) { _is_rrr62 = v; }
 void Tp::set_is_rrr63(int v) { _is_rrr63 = v; }
-void Tp::set_is_rrr64(int v) { _is_rrr64 = v; }
+void Tp::set_is_gfx_shown_in_bg(int v) { _is_gfx_shown_in_bg = v; }
 void Tp::set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
 void Tp::set_is_steal_item_chance_d1000(int v) { _is_steal_item_chance_d1000 = v; }
 void Tp::set_is_weapon_wielder(int v) { _is_weapon_wielder = v; }

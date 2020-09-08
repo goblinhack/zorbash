@@ -22,6 +22,7 @@ def tp_init(name, text_name):
     x.set_is_fire_hater(100)
     x.set_is_flammable(True)
     x.set_is_gfx_health_bar_shown_only_when_injured(True)
+    x.set_is_gfx_shown_in_bg(True)
     x.set_is_interesting(True)
     x.set_is_light_blocker(True)
     x.set_is_movement_blocking_hard(True)

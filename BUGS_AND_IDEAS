@@ -1,5 +1,7 @@
 bugs
 ----
+- key bounce on bg
+- chasm is one pix short
 - use larger bitmap for visited level?
 - no fade in on new level
 - fade in too slow for water

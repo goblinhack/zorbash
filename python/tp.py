@@ -368,8 +368,8 @@ class Tp:
     def set_is_rrr63(self, value):
         zx.tp_set_is_rrr63(self, value)
 
-    def set_is_rrr64(self, value):
-        zx.tp_set_is_rrr64(self, value)
+    def set_is_gfx_shown_in_bg(self, value):
+        zx.tp_set_is_gfx_shown_in_bg(self, value)
 
     def set_on_death_drop_all_items(self, value):
         zx.tp_set_on_death_drop_all_items(self, value)

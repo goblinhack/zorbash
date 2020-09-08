@@ -466,6 +466,10 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy, int fbo)
                         continue;
                     }
 
+                    if (!is_lit_no_check(t->mid_at.x, t->mid_at.y)) {
+                        continue;
+                    }
+
                     auto t = l->owner;
                     point blit_tl, blit_br;
                     Tilep tile = {};

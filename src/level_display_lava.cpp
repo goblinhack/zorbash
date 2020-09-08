@@ -16,9 +16,24 @@ void Level::display_lava (int fbo,
                           uint16_t minx, uint16_t miny,
                           uint16_t maxx, uint16_t maxy)
 {_
+    int fbo_mask1;
+    int fbo_mask2;
+    int fbo_mask3;
+    int fbo_mask4;
+    if (fbo == FBO_BG1) {
+        fbo_mask1 = FBO_BG1_MASK1;
+        fbo_mask2 = FBO_BG1_MASK2;
+        fbo_mask3 = FBO_BG1_MASK3;
+        fbo_mask4 = FBO_BG1_MASK4;
+    } else {
+        fbo_mask1 = FBO_MASK1;
+        fbo_mask2 = FBO_MASK2;
+        fbo_mask3 = FBO_MASK3;
+        fbo_mask4 = FBO_MASK4;
+    }
+
 #define LAVA_ACROSS 8
 #define LAVA_DOWN   8
-
     static std::array<std::array<Tilep, LAVA_DOWN>, LAVA_ACROSS> lava;
     if (!lava[0][0]) {
         set(lava, 0, 0, tile_find("lava1a"));
@@ -95,7 +110,7 @@ void Level::display_lava (int fbo,
     blit_init();
     glcolor(WHITE);
     glDisable(GL_TEXTURE_2D);
-    blit_fbo_bind(FBO_MASK1);
+    blit_fbo_bind(fbo_mask1);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto y = miny; y < maxy; y++) {
@@ -103,15 +118,17 @@ void Level::display_lava (int fbo,
             if (likely(!is_lava(x, y))) {
                 continue;
             }
-            if (!is_visited(x, y)) {
-                continue;
+            if (fbo != FBO_BG1) {
+                if (!is_visited(x, y)) {
+                    continue;
+                }
             }
             FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tpp->is_lava()) {
                     continue;
                 }
-                t->blit();
+                t->blit(fbo);
             } FOR_ALL_THINGS_END()
         }
     }
@@ -123,7 +140,7 @@ void Level::display_lava (int fbo,
     /////////////////////////////////////////////////////////////////////
     blit_init();
     glcolor(WHITE);
-    blit_fbo_bind(FBO_MASK2);
+    blit_fbo_bind(fbo_mask2);
     glBlendFunc(GL_ONE, GL_ZERO);
     auto tile_map = lava_tile_map;
     for (auto y = miny; y < maxy; y+=2) {
@@ -138,10 +155,12 @@ void Level::display_lava (int fbo,
             int brx = tlx + (2 * TILE_WIDTH);
             int bry = tly + (2 * TILE_HEIGHT);
 
-            tlx -= pixel_map_at.x;
-            tly -= pixel_map_at.y;
-            brx -= pixel_map_at.x;
-            bry -= pixel_map_at.y;
+            if (fbo != FBO_BG1) {
+                tlx -= pixel_map_at.x;
+                tly -= pixel_map_at.y;
+                brx -= pixel_map_at.x;
+                bry -= pixel_map_at.y;
+            }
 
             auto tile = get(lava,
                             (x&~1) % LAVA_ACROSS,
@@ -164,67 +183,70 @@ void Level::display_lava (int fbo,
     /////////////////////////////////////////////////////////////////////
     // Merge the mask and tiles
     /////////////////////////////////////////////////////////////////////
-    blit_fbo_bind(FBO_MASK3);
+    blit_fbo_bind(fbo_mask3);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
-    blit_fbo(FBO_MASK1);
+    blit_fbo(fbo_mask1);
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
-    blit_fbo(FBO_MASK2);
+    blit_fbo(fbo_mask2);
 
     /////////////////////////////////////////////////////////////////////
     // Create an outline mask
     /////////////////////////////////////////////////////////////////////
-    blit_fbo_bind(FBO_MASK4);
+    blit_fbo_bind(fbo_mask4);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     color b = BLACK;
     b.a = 250;
     glcolor(b);
-    glTranslatef( 0, -5, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  5, 0);
-    glTranslatef(-3, -3, 0); blit_fbo(FBO_MASK1); glTranslatef( 3,  3, 0);
-    glTranslatef( 0, -3, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  3, 0);
-    glTranslatef( 3, -3, 0); blit_fbo(FBO_MASK1); glTranslatef(-3,  3, 0);
-    glTranslatef(-3,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 3,  0, 0);
-    glTranslatef( 3,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-3,  0, 0);
-    glTranslatef(-3,  3, 0); blit_fbo(FBO_MASK1); glTranslatef( 3, -3, 0);
-    glTranslatef( 3,  3, 0); blit_fbo(FBO_MASK1); glTranslatef(-3, -3, 0);
-    glTranslatef( 0,  5, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -5, 0);
+    glTranslatef( 0, -5, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  5, 0);
+    glTranslatef(-3, -3, 0); blit_fbo(fbo_mask1); glTranslatef( 3,  3, 0);
+    glTranslatef( 0, -3, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  3, 0);
+    glTranslatef( 3, -3, 0); blit_fbo(fbo_mask1); glTranslatef(-3,  3, 0);
+    glTranslatef(-3,  0, 0); blit_fbo(fbo_mask1); glTranslatef( 3,  0, 0);
+    glTranslatef( 3,  0, 0); blit_fbo(fbo_mask1); glTranslatef(-3,  0, 0);
+    glTranslatef(-3,  3, 0); blit_fbo(fbo_mask1); glTranslatef( 3, -3, 0);
+    glTranslatef( 3,  3, 0); blit_fbo(fbo_mask1); glTranslatef(-3, -3, 0);
+    glTranslatef( 0,  5, 0); blit_fbo(fbo_mask1); glTranslatef( 0, -5, 0);
 
     color y = ORANGE;
+    if (g_render_black_and_white) {
+        y = GRAY;
+    }
     y.a = 200;
     glcolor(y);
-    glTranslatef( 0, -3, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  4, 0);
-    glTranslatef(-2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  2, 0);
-    glTranslatef( 0, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  2, 0);
-    glTranslatef( 2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  2, 0);
-    glTranslatef(-2,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  0, 0);
-    glTranslatef( 2,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  0, 0);
-    glTranslatef(-2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2, -2, 0);
-    glTranslatef( 0,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -2, 0);
-    glTranslatef( 2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2, -2, 0);
+    glTranslatef( 0, -3, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  4, 0);
+    glTranslatef(-2, -2, 0); blit_fbo(fbo_mask1); glTranslatef( 2,  2, 0);
+    glTranslatef( 0, -2, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  2, 0);
+    glTranslatef( 2, -2, 0); blit_fbo(fbo_mask1); glTranslatef(-2,  2, 0);
+    glTranslatef(-2,  0, 0); blit_fbo(fbo_mask1); glTranslatef( 2,  0, 0);
+    glTranslatef( 2,  0, 0); blit_fbo(fbo_mask1); glTranslatef(-2,  0, 0);
+    glTranslatef(-2,  2, 0); blit_fbo(fbo_mask1); glTranslatef( 2, -2, 0);
+    glTranslatef( 0,  2, 0); blit_fbo(fbo_mask1); glTranslatef( 0, -2, 0);
+    glTranslatef( 2,  2, 0); blit_fbo(fbo_mask1); glTranslatef(-2, -2, 0);
 
     color c = RED;
     c.a = 100;
     if (g_render_black_and_white) {
-        c = BLACK;
+        c = GRAY;
     }
     glcolor(c);
-    glTranslatef(-1, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  1, 0);
-    glTranslatef( 0, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  1, 0);
-    glTranslatef( 1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef(-1,  1, 0);
-    glTranslatef(-1,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  0, 0);
-    glTranslatef( 1,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-1,  0, 0);
-    glTranslatef(-1,  1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1, -1, 0);
-    glTranslatef( 0,  1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -1, 0);
-    glTranslatef( 1,  1, 0); blit_fbo(FBO_MASK1); glTranslatef(-1, -1, 0);
+    glTranslatef(-1, -2, 0); blit_fbo(fbo_mask1); glTranslatef( 1,  1, 0);
+    glTranslatef( 0, -1, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  1, 0);
+    glTranslatef( 1, -1, 0); blit_fbo(fbo_mask1); glTranslatef(-1,  1, 0);
+    glTranslatef(-1,  0, 0); blit_fbo(fbo_mask1); glTranslatef( 1,  0, 0);
+    glTranslatef( 1,  0, 0); blit_fbo(fbo_mask1); glTranslatef(-1,  0, 0);
+    glTranslatef(-1,  1, 0); blit_fbo(fbo_mask1); glTranslatef( 1, -1, 0);
+    glTranslatef( 0,  1, 0); blit_fbo(fbo_mask1); glTranslatef( 0, -1, 0);
+    glTranslatef( 1,  1, 0); blit_fbo(fbo_mask1); glTranslatef(-1, -1, 0);
 
     /////////////////////////////////////////////////////////////////////
     // Create a hole in the middle of the outline mask
     /////////////////////////////////////////////////////////////////////
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_COLOR);
     glcolor(BLACK);
-    blit_fbo(FBO_MASK3);
+    blit_fbo(fbo_mask3);
 
     /////////////////////////////////////////////////////////////////////
     // Merge the outline mask and the masked tiles
@@ -232,6 +254,6 @@ void Level::display_lava (int fbo,
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     blit_fbo_bind(fbo);
-    blit_fbo(FBO_MASK4);
-    blit_fbo(FBO_MASK3);
+    blit_fbo(fbo_mask4);
+    blit_fbo(fbo_mask3);
 }

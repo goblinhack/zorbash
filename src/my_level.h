@@ -75,6 +75,7 @@ public:
     bool                       cursor_found {};
     bool                       cursor_needs_update {};
     bool                       heatmap_valid {};
+    bool                       bg_valid {};
     bool                       is_starting {}; // Loading level
     bool                       map_changed {}; // Something moved on the map
     bool                       map_follow_player {};
@@ -270,6 +271,7 @@ public:
     void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map(void);
     void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_map_bg_things(void);
     void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void scroll_map(void);
     void scroll_map_do(bool fast);

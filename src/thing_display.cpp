@@ -656,7 +656,8 @@ void Thing::blit_end_reflection_submerged (uint8_t submerged) const
     blit_init();
 }
 
-void Thing::blit_internal (point &blit_tl,
+void Thing::blit_internal (int fbo,
+                           point &blit_tl,
                            point &blit_br,
                            const Tilep tile,
                            color c,
@@ -691,11 +692,13 @@ void Thing::blit_internal (point &blit_tl,
     //
     auto h = get_stats_health();
     auto m = get_stats_health_max();
+
+    auto lit = (fbo == FBO_BG1) || level->is_lit_no_check(mid_at.x, mid_at.y);
     if (tile &&
         !tile->is_invisible &&
         !is_dead &&
         !reflection &&
-        level->is_lit_no_check(mid_at.x, mid_at.y) &&
+        lit &&
         (
          is_gfx_health_bar_shown() ||
          (is_gfx_health_bar_shown_only_when_injured() && (h < m))
@@ -756,11 +759,14 @@ void Thing::blit_internal (point &blit_tl,
         c = fire_color;
     }
 
-    uint8_t fade = level->fade_in_map_no_check(mid_at.x, mid_at.y);
-    if (fade) {
+    uint8_t fade = level->is_lit(mid_at.x, mid_at.y);
+
+    if (fbo == FBO_BG1) {
+        c.a = 255;
+    } else if (fade) {
         c.a = 255;
     } else {
-        c.a = 0;
+        c.a = 255;
     }
 
     glcolor(c);
@@ -823,26 +829,53 @@ void Thing::blit_internal (point &blit_tl,
     is_blitted = true;
 }
 
-void Thing::blit (void)
+void Thing::blit (int fbo)
 {_
     point blit_tl, blit_br;
     Tilep tile = {};
 
-    if (!get_map_offset_coords(blit_tl, blit_br, tile, false)) {
-        return;
+    //
+    // If blitting to the background, ignore scroll
+    //
+    if (fbo == FBO_BG1) {
+        point pre_effect_blit_tl;
+        point pre_effect_blit_br;
+
+        if (!get_coords(blit_tl, blit_br,
+                        pre_effect_blit_tl,
+                        pre_effect_blit_br,
+                        tile, false)) {
+            return;
+        }
+    } else {
+        if (!get_map_offset_coords(blit_tl, blit_br, tile, false)) {
+            return;
+        }
     }
 
-    blit_internal(blit_tl, blit_br, tile, WHITE, false);
+    blit_internal(fbo, blit_tl, blit_br, tile, WHITE, false);
 }
 
-void Thing::blit_upside_down (void)
+void Thing::blit_upside_down (int fbo)
 {_
     point blit_tl, blit_br;
     Tilep tile = {};
     auto tpp = tp();
 
-    if (!get_map_offset_coords(blit_tl, blit_br, tile, true)) {
-        return;
+    if (fbo == FBO_BG1) {
+        point pre_effect_blit_tl;
+        point pre_effect_blit_br;
+
+        if (!get_coords(blit_tl, blit_br,
+                        pre_effect_blit_tl,
+                        pre_effect_blit_br,
+                        tile, false)) {
+            return;
+        }
+    } else {
+        if (!get_map_offset_coords(blit_tl, blit_br, tile, true)) {
+            return;
+        }
     }
 
     auto diff = blit_br.y - blit_tl.y;
@@ -862,5 +895,5 @@ void Thing::blit_upside_down (void)
     }
 
     color reflection = {100,100,100,200};
-    blit_internal(blit_tl, blit_br, tile, reflection, true);
+    blit_internal(fbo, blit_tl, blit_br, tile, reflection, true);
 }

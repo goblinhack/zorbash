@@ -33,6 +33,67 @@ void Level::display (void)
     if (!minimap_valid) {
         update_minimap();
     }
+
+    if (!bg_valid) {
+        g_render_black_and_white = true;
+        display_map_bg_things();
+        g_render_black_and_white = false;
+    }
+}
+
+void Level::display_map_bg_things (void)
+{_
+    auto fbo = FBO_BG1;
+    gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    blit_fbo_bind(fbo);
+    blit_init();
+    glClear(GL_COLOR_BUFFER_BIT);
+    for (auto z = 0; z < MAP_DEPTH; z++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    if (!t->is_gfx_shown_in_bg()) {
+                        continue;
+                    }
+                    if (z <= MAP_DEPTH_FLOOR2) {
+                        t->blit(fbo);
+                    }
+                } FOR_ALL_THINGS_END()
+            }
+        }
+    }
+    blit_flush();
+
+    display_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+    display_deep_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+    display_lava(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
+
+    blit_fbo_bind(fbo);
+    blit_init();
+    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    if (!t->is_gfx_shown_in_bg()) {
+                        continue;
+                    }
+                    t->blit(fbo);
+                } FOR_ALL_THINGS_END()
+            }
+        }
+    }
+    blit_flush();
+
+    blit_fbo_unbind();
+    gl_enter_2d_mode(game->config.inner_pix_width, 
+                     game->config.inner_pix_height);
+
+    bg_valid = true;
 }
 
 void Level::display_map_things (int fbo,
@@ -43,52 +104,26 @@ void Level::display_map_things (int fbo,
 
     blit_fbo_bind(fbo);
     blit_init();
-    if (g_render_black_and_white) {
-        for (auto z = 0; z < MAP_DEPTH; z++) {
-            for (auto y = miny; y < maxy; y++) {
-                for (auto x = minx; x < maxx; x++) {
-                    if (!is_visited(x, y)) {
-                        continue;
+    for (auto z = 0; z < MAP_DEPTH; z++) {
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    if (z <= MAP_DEPTH_FLOOR2) {
+                        t->blit(fbo);
                     }
-                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (t->is_monst() ||
-                            t->is_floor() ||
-                            t->owner_get() ||
-                            t->get_light_count()) {
-                            continue;
-                        }
-                        if (z <= MAP_DEPTH_FLOOR2) {
-                            t->blit();
-                        }
-                    } FOR_ALL_THINGS_END()
-                }
-            }
-        }
-    } else {
-        for (auto z = 0; z < MAP_DEPTH; z++) {
-            for (auto y = miny; y < maxy; y++) {
-                for (auto x = minx; x < maxx; x++) {
-                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (z <= MAP_DEPTH_FLOOR2) {
-                            t->blit();
-                        }
 
-                        auto tpp = t->tp();
-                        if (unlikely(tpp->gfx_animated())) {
-                            t->animate();
-                        }
-                    } FOR_ALL_THINGS_END()
-                }
+                    auto tpp = t->tp();
+                    if (unlikely(tpp->gfx_animated())) {
+                        t->animate();
+                    }
+                } FOR_ALL_THINGS_END()
             }
         }
     }
     blit_flush();
 
-    if (!g_render_black_and_white) {
-        display_water(fbo, minx, miny, maxx, maxy);
-        display_deep_water(fbo, minx, miny, maxx, maxy);
-    }
-
+    display_water(fbo, minx, miny, maxx, maxy);
+    display_deep_water(fbo, minx, miny, maxx, maxy);
     display_lava(fbo, minx, miny, maxx, maxy);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
@@ -101,20 +136,8 @@ void Level::display_map_things (int fbo,
     for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if (g_render_black_and_white) {
-                    if (!is_visited(x, y)) {
-                        continue;
-                    }
-                }
                 FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                    if (g_render_black_and_white) {
-                        if (t->is_monst() ||
-                            t->owner_get() ||
-                            t->get_light_count()) {
-                            continue;
-                        }
-                    }
-                    t->blit();
+                    t->blit(fbo);
                 } FOR_ALL_THINGS_END()
             }
         }
@@ -179,23 +202,42 @@ void Level::display_map (void)
         //
         blit_fbo_bind(FBO_MAP_HIDDEN);
         glClear(GL_COLOR_BUFFER_BIT);
-        g_render_black_and_white = true;
-        display_map_things(FBO_MAP_HIDDEN, minx, miny, maxx, maxy);
-        g_render_black_and_white = false;
-        glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
-        blit_fbo(FBO_LIGHT);
+//        g_render_black_and_white = true;
+//        display_map_things(FBO_MAP_HIDDEN, minx, miny, maxx, maxy);
+//        g_render_black_and_white = false;
+//        glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
+
+        float w = MAP_WIDTH * TILE_WIDTH;
+        float h = MAP_HEIGHT * TILE_HEIGHT;
+        glcolor(WHITE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        blit_init();
+        auto Y = h - pixel_map_at.y - game->config.inner_pix_height;
+        blit(fbo_tex_id[FBO_BG1],
+             (float)(pixel_map_at.x) / w,
+             (float)(Y + game->config.inner_pix_height) / h,
+             (float)(pixel_map_at.x + game->config.inner_pix_width) / w,
+             (float)Y / h,
+             0, 
+             0,
+             game->config.inner_pix_width,
+             game->config.inner_pix_height);
+        blit_flush();
+
+//        blit_fbo_inner(FBO_LIGHT);
     }
 
     {_
         //
-        // Generate the visited map
+        // Generate the currently visible map
         //
         blit_fbo_bind(FBO_MAP_VISIBLE);
         glClear(GL_COLOR_BUFFER_BIT);
         display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         display_internal_particles();
         glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
-        blit_fbo(FBO_LIGHT);
+        blit_fbo_inner(FBO_LIGHT);
     }
 
     {_
@@ -209,11 +251,19 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-        glcolor(GRAY50);
-        blit_fbo(FBO_MAP_HIDDEN);
+        glcolor(GRAY25);
+        blit_fbo_inner(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
-        glcolor(WHITE);
-        blit_fbo(FBO_MAP_VISIBLE);
+        glcolor(GRAY85);
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int g_blend_a;
+extern int g_blend_b;
+CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
+#endif
+        blit_fbo_inner(FBO_MAP_VISIBLE);
     }
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

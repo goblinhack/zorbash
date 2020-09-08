@@ -1475,7 +1475,7 @@ void sdl_flush_display (void)
         glLogicOp(GL_COPY_INVERTED);
         glEnable(GL_COLOR_LOGIC_OP);
     }
-    blit_fbo(FBO_WID);
+    blit_fbo_inner(FBO_WID);
     if (game->config.gfx_inverted) {
         glLogicOp(GL_COPY);
         glDisable(GL_COLOR_LOGIC_OP);

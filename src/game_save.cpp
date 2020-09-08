@@ -260,6 +260,7 @@ std::ostream& operator<<(std::ostream &out,
     /* cursor_found */          out << bits(my.t->cursor_found);
     /* cursor_needs_update */   out << bits(my.t->cursor_needs_update);
     /* heatmap_valid */         out << bits(my.t->heatmap_valid);
+    /* bg_valid */              out << bits(my.t->bg_valid);
     /* is_starting */           out << bits(my.t->is_starting);
     /* map_at */                out << bits(my.t->map_at);
     /* map_br */                out << bits(my.t->map_br);
