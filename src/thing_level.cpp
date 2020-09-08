@@ -216,7 +216,11 @@ void Thing::level_push (void)
     if (is_wall())                               { level->set_is_wall(mx, my); }
     if (is_water())                              { level->set_is_water(mx, my); }
 
-    if (is_lava() || is_fire())                  { level->heatmap_valid = false; }
+    if (is_lava() || is_fire()) { level->heatmap_valid = false; }
+
+    if (!is_hidden) {
+        if (is_gfx_shown_in_bg()) { level->bg_valid = false; }
+    }
 }
 
 void Thing::level_pop (void)
@@ -271,6 +275,10 @@ void Thing::level_pop (void)
     if (is_water())                              { level->unset_is_water(mx, my); }
 
     level->remove_thing((int)last_attached.x, (int)last_attached.y, id);
-_
+
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }
+
+    if (!is_hidden) {
+        if (is_gfx_shown_in_bg()) { level->bg_valid = false; }
+    }
 }

@@ -402,37 +402,10 @@ void gl_init_fbo (void)
     GL_ERROR_CHECK();
 
     for (i = 0; i < MAX_FBO; i++) {
-        GLuint tex_width = game->config.inner_pix_width;
-        GLuint tex_height = game->config.inner_pix_height;
+        int tex_width;
+        int tex_height;
 
-        switch (i) {
-            case FBO_MAP:
-            case FBO_MAP_HIDDEN:
-            case FBO_MAP_VISIBLE:
-            case FBO_MASK1:
-            case FBO_MASK2:
-            case FBO_MASK3:
-            case FBO_MASK4:
-            case FBO_REFLECTION:
-            case FBO_LIGHT:
-                tex_width = game->config.inner_pix_width;
-                tex_height = game->config.inner_pix_height;
-                break;
-            case FBO_MINIMAP:
-                tex_width = MAP_WIDTH;
-                tex_height = MAP_HEIGHT;
-                break;
-            case FBO_WID:
-                //
-                // Outer for the UI allows use to have more detail in
-                // the logo and other things
-                //
-            case FBO_FINAL:
-                tex_width = game->config.outer_pix_width;
-                tex_height = game->config.outer_pix_height;
-                break;
-        }
-
+        fbo_get_size(i, tex_width, tex_height);
         gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i],
                      tex_width, tex_height);
         gl_enter_2d_mode(tex_width, tex_height);
@@ -446,7 +419,62 @@ void gl_init_fbo (void)
     GL_ERROR_CHECK();
 }
 
+void fbo_get_size (int fbo, int &w, int &h)
+{
+    w = game->config.inner_pix_width;
+    h = game->config.inner_pix_height;
+
+    switch (fbo) {
+        case FBO_MAP:
+        case FBO_MAP_HIDDEN:
+        case FBO_MAP_VISIBLE:
+        case FBO_MASK1:
+        case FBO_MASK2:
+        case FBO_MASK3:
+        case FBO_MASK4:
+        case FBO_LIGHT:
+            w = game->config.inner_pix_width;
+            h = game->config.inner_pix_height;
+            break;
+        case FBO_MINIMAP:
+            w = MAP_WIDTH;
+            h = MAP_HEIGHT;
+            break;
+        case FBO_BG1:
+        case FBO_BG1_MASK1:
+        case FBO_BG1_MASK2:
+        case FBO_BG1_MASK3:
+        case FBO_BG1_MASK4:
+        case FBO_BG2:
+            w = TILE_WIDTH * MAP_WIDTH;
+            h = TILE_HEIGHT * MAP_HEIGHT;
+            break;
+        case FBO_WID:
+            //
+            // Outer for the UI allows use to have more detail in
+            // the logo and other things
+            //
+        case FBO_FINAL:
+            w = game->config.outer_pix_width;
+            h = game->config.outer_pix_height;
+            break;
+    }
+}
+
 void blit_fbo (int fbo)
+{
+    int tex_width;
+    int tex_height;
+    fbo_get_size(fbo, tex_width, tex_height);
+    blit_init();
+    blit(fbo_tex_id[fbo],
+         0.0, 1.0, 1.0, 0.0,
+         0, 0,
+         tex_width, tex_height);
+    blit_flush();
+}
+
+void blit_fbo_inner (int fbo)
 {
     blit_init();
     blit(fbo_tex_id[fbo],

@@ -303,15 +303,22 @@ void gl_ortho_set(int32_t width, int32_t height);
 #define FBO_MASK2               7
 #define FBO_MASK3               8
 #define FBO_MASK4               9
-#define FBO_REFLECTION          10
-#define FBO_FINAL               11
-#define MAX_FBO                 12
+#define FBO_BG1                 10
+#define FBO_BG1_MASK1           11
+#define FBO_BG1_MASK2           12
+#define FBO_BG1_MASK3           13
+#define FBO_BG1_MASK4           14
+#define FBO_BG2                 15
+#define FBO_FINAL               16
+#define MAX_FBO                 17
 
 extern std::array<GLuint, MAX_FBO> render_buf_id;
 extern std::array<GLuint, MAX_FBO> fbo_id;
 extern std::array<GLuint, MAX_FBO> fbo_tex_id;
 
+void fbo_get_size(int fbo, int &w, int &h);
 void blit_fbo(int fbo);
+void blit_fbo_inner(int fbo);
 void blit_fbo_outer(int fbo);
 void blit_fbo_bind(int fbo);
 void blit_fbo_unbind(void);

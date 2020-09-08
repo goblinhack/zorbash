@@ -320,6 +320,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* cursor_found */          in >> bits(l->cursor_found);
     /* cursor_needs_update */   in >> bits(l->cursor_needs_update);
     /* heatmap_valid */         in >> bits(l->heatmap_valid);
+    /* bg_valid      */         in >> bits(l->bg_valid);
     /* is_starting */           in >> bits(l->is_starting);
     /* map_at */                in >> bits(l->map_at);
     /* map_br */                in >> bits(l->map_br);
@@ -337,6 +338,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
     l->minimap_valid = false;
     l->heatmap_valid = false;
+    l->bg_valid = false;
     l->map_changed = true;
     l->cursor_needs_update = true;
     l->map_follow_player = true;

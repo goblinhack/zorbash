@@ -278,7 +278,7 @@ private:
     int _is_rrr61 {};
     int _is_rrr62 {};
     int _is_rrr63 {};
-    int _is_rrr64 {};
+    int _is_gfx_shown_in_bg {};
     int _is_rrr7 {};
     int _is_rrr8 {};
     int _is_rrr9 {};
@@ -632,7 +632,7 @@ public:
     int is_rrr61(void) const;
     int is_rrr62(void) const;
     int is_rrr63(void) const;
-    int is_rrr64(void) const;
+    int is_gfx_shown_in_bg(void) const;
     int on_death_drop_all_items(void) const;
     int is_steal_item_chance_d1000(void) const;
     int is_weapon_wielder(void) const;
@@ -874,7 +874,7 @@ public:
     void set_is_rrr61(int);
     void set_is_rrr62(int);
     void set_is_rrr63(int);
-    void set_is_rrr64(int);
+    void set_is_gfx_shown_in_bg(int);
     void set_on_death_drop_all_items(int);
     void set_is_steal_item_chance_d1000(int);
     void set_is_weapon_wielder(int);

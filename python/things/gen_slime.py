@@ -13,6 +13,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
     x.set_is_active(True)
+    x.set_is_gfx_shown_in_bg(True)
     x.set_is_interesting(False)
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(False)
