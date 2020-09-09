@@ -43,7 +43,7 @@ void Level::display (void)
 
 void Level::display_map_bg_things (void)
 {_
-    auto fbo = FBO_BG1;
+    auto fbo = FBO_FULLMAP;
     gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -193,6 +193,10 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         lights_render(light_minx, light_miny, light_maxx, light_maxy,
                       FBO_LIGHT);
+
+        blit_fbo_bind(FBO_FULLMAP_LIGHT);
+        lights_render(light_minx, light_miny, light_maxx, light_maxy,
+                      FBO_FULLMAP_LIGHT);
     }
 
     {_
@@ -202,30 +206,48 @@ void Level::display_map (void)
         //
         blit_fbo_bind(FBO_MAP_HIDDEN);
         glClear(GL_COLOR_BUFFER_BIT);
-//        g_render_black_and_white = true;
-//        display_map_things(FBO_MAP_HIDDEN, minx, miny, maxx, maxy);
-//        g_render_black_and_white = false;
-//        glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
 
         float w = MAP_WIDTH * TILE_WIDTH;
         float h = MAP_HEIGHT * TILE_HEIGHT;
         glcolor(WHITE);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        blit_init();
         auto Y = h - pixel_map_at.y - game->config.inner_pix_height;
-        blit(fbo_tex_id[FBO_BG1],
-             (float)(pixel_map_at.x) / w,
-             (float)(Y + game->config.inner_pix_height) / h,
-             (float)(pixel_map_at.x + game->config.inner_pix_width) / w,
-             (float)Y / h,
+        float left  = (float)(pixel_map_at.x) / w;
+        float top   = (float)(Y + game->config.inner_pix_height) / h;
+        float right = (float)(pixel_map_at.x + game->config.inner_pix_width) / w;
+        float bot   = (float)Y / h;
+
+        blit_init();
+        blit(fbo_tex_id[FBO_FULLMAP],
+             left, top, right, bot,
              0, 
              0,
              game->config.inner_pix_width,
              game->config.inner_pix_height);
         blit_flush();
 
-//        blit_fbo_inner(FBO_LIGHT);
+        glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
+
+        blit_init();
+        blit(fbo_tex_id[FBO_FULLMAP_LIGHT],
+             left, top, right, bot,
+             0, 
+             0,
+             game->config.inner_pix_width,
+             game->config.inner_pix_height);
+        blit_flush();
+
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int g_blend_a;
+extern int g_blend_b;
+CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
+#endif
+        glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
+        blit_fbo_inner(FBO_LIGHT);
     }
 
     {_
@@ -251,10 +273,10 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-        glcolor(GRAY25);
+        glcolor(GRAY65);
         blit_fbo_inner(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
-        glcolor(GRAY85);
+        glcolor(WHITE);
 #if 0
 extern int vals[];
 extern std::string vals_str[];

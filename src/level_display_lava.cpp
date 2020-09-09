@@ -20,11 +20,11 @@ void Level::display_lava (int fbo,
     int fbo_mask2;
     int fbo_mask3;
     int fbo_mask4;
-    if (fbo == FBO_BG1) {
-        fbo_mask1 = FBO_BG1_MASK1;
-        fbo_mask2 = FBO_BG1_MASK2;
-        fbo_mask3 = FBO_BG1_MASK3;
-        fbo_mask4 = FBO_BG1_MASK4;
+    if (fbo == FBO_FULLMAP) {
+        fbo_mask1 = FBO_FULLMAP_MASK1;
+        fbo_mask2 = FBO_FULLMAP_MASK2;
+        fbo_mask3 = FBO_FULLMAP_MASK3;
+        fbo_mask4 = FBO_FULLMAP_MASK4;
     } else {
         fbo_mask1 = FBO_MASK1;
         fbo_mask2 = FBO_MASK2;
@@ -118,7 +118,7 @@ void Level::display_lava (int fbo,
             if (likely(!is_lava(x, y))) {
                 continue;
             }
-            if (fbo != FBO_BG1) {
+            if (fbo != FBO_FULLMAP) {
                 if (!is_visited(x, y)) {
                     continue;
                 }
@@ -155,7 +155,7 @@ void Level::display_lava (int fbo,
             int brx = tlx + (2 * TILE_WIDTH);
             int bry = tly + (2 * TILE_HEIGHT);
 
-            if (fbo != FBO_BG1) {
+            if (fbo != FBO_FULLMAP) {
                 tlx -= pixel_map_at.x;
                 tly -= pixel_map_at.y;
                 brx -= pixel_map_at.x;

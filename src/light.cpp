@@ -34,7 +34,8 @@ Lightp light_new (Thingp owner,
                   fpoint at,
                   fpoint offset,
                   float strength,
-                  color col)
+                  color col,
+                  int fbo)
 {_
     uint16_t max_light_rays;
 
@@ -55,6 +56,7 @@ Lightp light_new (Thingp owner,
     l->owner          = owner;
     l->col            = col;
     l->max_light_rays = max_light_rays;
+    l->fbo            = fbo;
 
     l->ray.resize(max_light_rays);
     std::fill(l->ray.begin(), l->ray.end(), Ray{0});
@@ -271,6 +273,14 @@ void Light::render_triangle_fans (int last, int count)
         return;
     }
 
+    if (fbo == FBO_FULLMAP_LIGHT) {
+        blit_tl.x += level->pixel_map_at.x;
+        blit_tl.y += level->pixel_map_at.y;
+        blit_br.x += level->pixel_map_at.x;
+        blit_br.y += level->pixel_map_at.y;
+        gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
+    }
+
     point sz = blit_tl - blit_br;
     if (sz.x < 0) { sz.x = -sz.x; }
     if (sz.y < 0) { sz.y = -sz.x; }
@@ -403,13 +413,13 @@ void Light::render_triangle_fans (int last, int count)
     // fade off of the light.
     //
     if (last && (player && (owner == player))) {
-        if (flicker > random_range(20, 30)) {
+        if (flicker > random_range(10, 20)) {
             flicker = 0;
         }
 
         if (!flicker) {
             flicker_radius = strength *
-                            (1.0 + ((float)(random_range(0, 5) / 100.0)));
+                            (1.0 + ((float)(random_range(0, 5) / 50.0)));
         }
         flicker++;
 
@@ -426,10 +436,15 @@ void Light::render_triangle_fans (int last, int count)
         blit(g_light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         glTranslatef(-light_offset.x, -light_offset.y, 0);
         blit_flush();
-   }
+    }
+
+    if (fbo == FBO_FULLMAP_LIGHT) {
+        gl_enter_2d_mode(game->config.inner_pix_width, 
+                         game->config.inner_pix_height);
+    }
 }
 
-void Light::render (int fbo, int last, int count)
+void Light::render (int last, int count)
 {
     if (!g_light_overlay_tex) {
         g_light_overlay_tex = tex_load("", "light", GL_NEAREST);
@@ -441,16 +456,32 @@ void Light::render (int fbo, int last, int count)
     render_triangle_fans(last, count);
 }
 
-void Level::lights_render (int minx, int miny, int maxx, int maxy, int fbo)
+void Level::lights_render (int minx, int miny, int maxx, int maxy,
+                           int fbo)
 {
     if (player) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
         auto lc = player->get_light_count();
-        size_t c = 0;
-        for (auto l : player->get_light()) {
-            l->render(fbo, (c == lc - 1), lc);
-            c++;
+        if (fbo == FBO_FULLMAP_LIGHT) {
+            for (auto l : player->get_light()) {
+                if (l->fbo == fbo) {
+                    l->render(false, 1);
+                }
+            }
+        } else {
+            size_t c = 0;
+            for (auto l : player->get_light()) {
+                if (l->fbo == fbo) {
+                    l->render((c == lc - 1), lc - 1);
+                }
+                c++;
+            }
         }
+    }
+
+    if (fbo == FBO_FULLMAP_LIGHT) {
+        return;
     }
 
     // glBlendFunc(GL_ZERO, GL_ONE); // basic

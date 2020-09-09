@@ -440,12 +440,13 @@ void fbo_get_size (int fbo, int &w, int &h)
             w = MAP_WIDTH;
             h = MAP_HEIGHT;
             break;
-        case FBO_BG1:
-        case FBO_BG1_MASK1:
-        case FBO_BG1_MASK2:
-        case FBO_BG1_MASK3:
-        case FBO_BG1_MASK4:
-        case FBO_BG2:
+        case FBO_FULLMAP:
+        case FBO_FULLMAP_MASK1:
+        case FBO_FULLMAP_MASK2:
+        case FBO_FULLMAP_MASK3:
+        case FBO_FULLMAP_MASK4:
+        case FBO_FULLMAP_LIGHT:
+        case FBO_FULLMAP_VISITED:
             w = TILE_WIDTH * MAP_WIDTH;
             h = TILE_HEIGHT * MAP_HEIGHT;
             break;

@@ -7,6 +7,7 @@
 #include "my_world.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_gl.h"
 
 //
 // Find an existing thing.
@@ -129,6 +130,12 @@ void Thing::level_enter (void)
                 level->cursor->hide();
             }
         }
+
+        //
+        // Flush the persistent light map
+        // 
+        blit_fbo_bind(FBO_FULLMAP_LIGHT);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
     level_push();
 
