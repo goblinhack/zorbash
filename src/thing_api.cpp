@@ -175,18 +175,19 @@ std::vector<Lightp> &Thing::get_light (void)
     }
 }
 
-void Thing::new_light (fpoint at, fpoint offset, float strength, color col)
+void Thing::new_light (fpoint at, fpoint offset, float strength, 
+                       color col, int fbo)
 {_
     new_monst();
-    auto l = light_new(this, at, offset, strength, col);
+    auto l = light_new(this, at, offset, strength, col, fbo);
     monstp->light.push_back(l);
     monstp->light_strength = strength;
     monstp->light_col = col;
 }
 
-void Thing::new_light (fpoint at, float strength, color col)
+void Thing::new_light (fpoint at, float strength, color col, int fbo)
 {_
-    new_light(at, fpoint(0, 0), strength, col);
+    new_light(at, fpoint(0, 0), strength, col, fbo);
 }
 
 void Thing::delete_light (void)

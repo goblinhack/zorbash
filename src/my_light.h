@@ -27,6 +27,7 @@ public:
     Levelp             level {};
     Thingp             owner {}; // The owner, so we don't block our own light.
     color              col;
+    int                fbo;
     float              flicker_radius {};
     float              strength {};
     fpoint             at;
@@ -43,7 +44,7 @@ public:
     void reset(void);
     void calculate(int last);
     void render_triangle_fans(int last, int count);
-    void render(int fbo, int last, int count);
+    void render(int last, int count);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -62,6 +63,7 @@ extern Lightp light_new(Thingp owner,
                         fpoint at,
                         fpoint offset,
                         float strength,
-                        color col);
+                        color col,
+                        int fbo);
 
 #endif // LIGHT_H

@@ -11,6 +11,7 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 #include "my_game.h"
+#include "my_gl.h"
 
 void Thing::init_lights (void)
 {_
@@ -23,33 +24,39 @@ void Thing::init_lights (void)
         }
         level->player = this;
 
-	set_last_lit_at(point(-1, -1));
+        set_last_lit_at(point(-1, -1));
 
         //
         // keep the light strength half the tiles drawn or we get artifacts
         // at the edges of the fbo
         //
         color col = WHITE;
-        new_light(mid_at, TILE_WIDTH, col);
+
+        float strength = is_light_strength();
+        float ostrength = (float)strength * 1.2;
 
         float d1 = 1.0 / (float)TILE_WIDTH;
         float d2 = 2.0 / (float)TILE_HEIGHT;
-        new_light(mid_at, fpoint(d1, d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d1, d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d2, d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d2, d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d1, -d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d1, -d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d2, -d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(d2, -d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d1, d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d1, d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d2, d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d2, d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d1, -d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d1, -d2), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d2, -d1), TILE_WIDTH, col);
-        new_light(mid_at, fpoint(-d2, -d2), TILE_WIDTH, col);
+
+        new_light(mid_at, ostrength, col, FBO_FULLMAP_LIGHT);
+
+        new_light(mid_at, strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(d1, d1), ostrength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(d1, d2), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(d2, d1), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(d2, d2), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(d1, -d1), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(d1, -d2), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(d2, -d1), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(d2, -d2), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(-d1, d1), strength, ORANGE, FBO_LIGHT);
+        new_light(mid_at, fpoint(-d1, d2), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(-d2, d1), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(-d2, d2), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(-d1, -d1), strength, RED, FBO_LIGHT);
+        new_light(mid_at, fpoint(-d1, -d2), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(-d2, -d1), strength, col, FBO_LIGHT);
+        new_light(mid_at, fpoint(-d2, -d2), strength, col, FBO_LIGHT);
 
         has_light = true;
         log("player created");
@@ -67,7 +74,7 @@ void Thing::init_lights (void)
             }
             if (add_light) {
                 color c = string2color(l);
-                new_light(mid_at, (double) is_light_strength(), c);
+                new_light(mid_at, (double) is_light_strength(), c, FBO_LIGHT);
                 has_light = true;
             }
         }

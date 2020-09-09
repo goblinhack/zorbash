@@ -16,6 +16,7 @@ def tp_init(name, text_name, title):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_change_levels(True)
+    x.set_is_light_strength(13)
     x.set_is_acid_hater(True)
     x.set_is_active(True)
     x.set_is_attack_shove(True)

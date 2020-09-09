@@ -303,14 +303,15 @@ void gl_ortho_set(int32_t width, int32_t height);
 #define FBO_MASK2               7
 #define FBO_MASK3               8
 #define FBO_MASK4               9
-#define FBO_BG1                 10
-#define FBO_BG1_MASK1           11
-#define FBO_BG1_MASK2           12
-#define FBO_BG1_MASK3           13
-#define FBO_BG1_MASK4           14
-#define FBO_BG2                 15
-#define FBO_FINAL               16
-#define MAX_FBO                 17
+#define FBO_FULLMAP             10
+#define FBO_FULLMAP_MASK1       11
+#define FBO_FULLMAP_MASK2       12
+#define FBO_FULLMAP_MASK3       13
+#define FBO_FULLMAP_MASK4       14
+#define FBO_FULLMAP_LIGHT       15
+#define FBO_FULLMAP_VISITED     16
+#define FBO_FINAL               17
+#define MAX_FBO                 18
 
 extern std::array<GLuint, MAX_FBO> render_buf_id;
 extern std::array<GLuint, MAX_FBO> fbo_id;

@@ -278,8 +278,8 @@ public:
     void clear_dmap_scent(void);
 
     std::vector<Lightp> & get_light(void);
-    void new_light(fpoint at, fpoint offset, float strength, color col = WHITE);
-    void new_light(fpoint at, float strength, color col = WHITE);
+    void new_light(fpoint at, fpoint offset, float strength, color col, int fbo);
+    void new_light(fpoint at, float strength, color col, int fbo);
     void delete_light(void);
 
     void set_lunge_to(fpoint);

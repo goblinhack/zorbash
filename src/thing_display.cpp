@@ -693,7 +693,7 @@ void Thing::blit_internal (int fbo,
     auto h = get_stats_health();
     auto m = get_stats_health_max();
 
-    auto lit = (fbo == FBO_BG1) || level->is_lit_no_check(mid_at.x, mid_at.y);
+    auto lit = (fbo == FBO_FULLMAP) || level->is_lit_no_check(mid_at.x, mid_at.y);
     if (tile &&
         !tile->is_invisible &&
         !is_dead &&
@@ -761,7 +761,7 @@ void Thing::blit_internal (int fbo,
 
     uint8_t fade = level->is_lit(mid_at.x, mid_at.y);
 
-    if (fbo == FBO_BG1) {
+    if (fbo == FBO_FULLMAP) {
         c.a = 255;
     } else if (fade) {
         c.a = 255;
@@ -837,7 +837,7 @@ void Thing::blit (int fbo)
     //
     // If blitting to the background, ignore scroll
     //
-    if (fbo == FBO_BG1) {
+    if (fbo == FBO_FULLMAP) {
         point pre_effect_blit_tl;
         point pre_effect_blit_br;
 
@@ -862,7 +862,7 @@ void Thing::blit_upside_down (int fbo)
     Tilep tile = {};
     auto tpp = tp();
 
-    if (fbo == FBO_BG1) {
+    if (fbo == FBO_FULLMAP) {
         point pre_effect_blit_tl;
         point pre_effect_blit_br;
 
