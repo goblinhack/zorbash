@@ -37,7 +37,7 @@ void Thing::update_light (bool force)
         for (auto x = 0; x < MAP_WIDTH; x++) {
             auto l = level->is_lit_no_check(x, y);
             if (l) {
-                level->set_is_lit_no_check(x, y, l / 2);
+                level->set_is_lit_no_check(x, y, l - 1);
             }
         }
     }

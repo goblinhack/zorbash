@@ -1,14 +1,9 @@
 bugs
 ----
-- sewer in corner with one light ray flickers
 - jump fatigue
-- light edge visible
+- light edge visible at high zoom out
 - chasm is one pix short
-- use larger bitmap for visited level?
-- no fade in on new level
-- fade in too slow for water
 - acid gets multiple hits
-- chasm seems to be lit when offscreen
 - jump on the spot
 - jump on spot does not collect
 - moving off an entrance changes level

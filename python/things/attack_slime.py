@@ -19,6 +19,7 @@ def init1(name, text_name):
     x.set_text_a_or_an("a");
     x.set_text_description("A splatter of slime stuff. Don't look closely")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
+    x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     delay = 10
     x.set_tile(tile=name + ".1", delay_ms=delay)
