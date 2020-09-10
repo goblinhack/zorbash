@@ -216,7 +216,6 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(timestamp_dungeon_saved);
 
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};          */ out << bits(my.t->_is_light_blocker);
-    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};                    */ out << bits(my.t->_is_lit);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {}; */ out << bits(my.t->_is_movement_blocking_hard);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_soft {}; */ out << bits(my.t->_is_movement_blocking_soft);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};                */ out << bits(my.t->_is_visited);
@@ -243,6 +242,7 @@ std::ostream& operator<<(std::ostream &out,
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_a {};        */ out << bits(my.t->_is_item_class_b);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};                 */ out << bits(my.t->_is_key);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};                */ out << bits(my.t->_is_lava);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};                    */ out << bits(my.t->_is_lit);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};               */ out << bits(my.t->_is_monst);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};              */ out << bits(my.t->_is_potion);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};              */ out << bits(my.t->_is_ripple);

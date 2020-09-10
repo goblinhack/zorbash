@@ -276,7 +276,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     l->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
 
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};          */ in >> bits(my.t->_is_light_blocker);
-    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};                    */ in >> bits(my.t->_is_lit);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {}; */ in >> bits(my.t->_is_movement_blocking_hard);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_soft {}; */ in >> bits(my.t->_is_movement_blocking_soft);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};                */ in >> bits(my.t->_is_visited);
@@ -303,6 +302,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_a {};        */ in >> bits(my.t->_is_item_class_b);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};                 */ in >> bits(my.t->_is_key);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};                */ in >> bits(my.t->_is_lava);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};                    */ in >> bits(my.t->_is_lit);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};               */ in >> bits(my.t->_is_monst);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};              */ in >> bits(my.t->_is_potion);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};              */ in >> bits(my.t->_is_ripple);

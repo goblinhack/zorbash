@@ -136,6 +136,7 @@ void Thing::level_enter (void)
         // 
         blit_fbo_bind(FBO_FULLMAP_LIGHT);
         glClear(GL_COLOR_BUFFER_BIT);
+        level->_is_lit = {};
     }
     level_push();
 

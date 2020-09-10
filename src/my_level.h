@@ -20,7 +20,6 @@ public:
     // These are caches for fast lookup in display code
     //
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_soft {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
@@ -47,6 +46,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_b {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};
@@ -1634,7 +1634,7 @@ public:
         set_no_check(_is_movement_blocking_soft, x, y, false);
     }
 
-    inline bool is_lit (const point &p)
+    inline uint8_t is_lit (const point &p)
     {
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
@@ -1642,12 +1642,12 @@ public:
         return (get(_is_lit, p.x, p.y));
     }
 
-    inline bool is_lit_no_check (const point &p)
+    inline uint8_t is_lit_no_check (const point &p)
     {
         return (get_no_check(_is_lit, p.x, p.y));
     }
 
-    inline bool is_lit (const int x, const int y)
+    inline uint8_t is_lit (const int x, const int y)
     {
         if (unlikely(is_oob(x, y))) {
             return (false);
@@ -1655,7 +1655,7 @@ public:
         return (get(_is_lit, x, y));
     }
 
-    inline bool is_lit_no_check (const int x, const int y)
+    inline uint8_t is_lit_no_check (const int x, const int y)
     {
         return (get_no_check(_is_lit, x, y));
     }
@@ -1665,12 +1665,22 @@ public:
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_is_lit, x, y, true);
+
+        if (get(_is_lit, x, y) < (uint8_t)255) {
+            incr(_is_lit, x, y, (uint8_t)1);
+        }
     }
 
     inline void set_is_lit_no_check (const int x, const int y)
     {
-        set_no_check(_is_lit, x, y, true);
+        if (get_no_check(_is_lit, x, y) < (uint8_t)255) {
+            incr_no_check(_is_lit, x, y, (uint8_t)1);
+        }
+    }
+
+    inline void set_is_lit_no_check (const int x, const int y, uint8_t v)
+    {
+        set_no_check(_is_lit, x, y, v);
     }
 
     inline void unset_is_lit (const int x, const int y)
@@ -1678,12 +1688,12 @@ public:
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_is_lit, x, y, false);
+        set(_is_lit, x, y, (uint8_t)0);
     }
 
     inline void unset_is_lit_no_check (const int x, const int y)
     {
-        set_no_check(_is_lit, x, y, false);
+        set_no_check(_is_lit, x, y, (uint8_t)0);
     }
 
     Thingp actionbar_get(const uint32_t slot);

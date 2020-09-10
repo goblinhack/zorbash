@@ -149,7 +149,6 @@ void Light::calculate (int last)
     float step_delta1 = 0.05;
     float step_delta2 = 0.01;
 
-    level->_is_lit = {};
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
         float step = 0.0;
