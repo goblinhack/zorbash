@@ -760,17 +760,13 @@ void Thing::blit_internal (int fbo,
         c = fire_color;
     }
 
-#if 1
     uint8_t fade = level->is_lit(mid_at.x, mid_at.y);
 
     if (fbo == FBO_FULLMAP) {
         c.a = 255;
-    } else if (fade) {
-        c.a = 255;
     } else {
-        c.a = 255;
+        c.a = fade;
     }
-#endif
 
     glcolor(c);
 

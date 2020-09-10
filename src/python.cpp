@@ -1064,6 +1064,7 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_OBJ", MAP_DEPTH_OBJ);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WEAPON", MAP_DEPTH_WEAPON);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MESSAGE", MAP_DEPTH_MESSAGE);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);

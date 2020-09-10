@@ -343,6 +343,10 @@ void Light::render_triangle_fans (int last, int count)
                 alpha = 0.0;
             }
 
+            if (fbo == FBO_FULLMAP_LIGHT) {
+                alpha = 0.0;
+            }
+
             for (i = 0; i < max_light_rays; i++) {
                 auto r = &getref(ray, i);
                 float radius = r->depth_furthest;
@@ -376,34 +380,13 @@ void Light::render_triangle_fans (int last, int count)
         std::copy(gl_array_buf, bufp, cached_gl_cmds.begin());
 #ifndef ENABLE_DEBUG_LIGHT
         blit_flush_triangle_fan();
-        //
-        // Makes non player lights more intense
-        //
-        if (player && (owner != player)) {
-            blit_flush_triangle_fan();
-            blit_flush_triangle_fan();
-            blit_flush_triangle_fan();
-        }
 #endif
     } else {
         float *b = &(*cached_gl_cmds.begin());
         float *e = &(*cached_gl_cmds.end());
 
         glTranslatef(light_offset.x, light_offset.y, 0);
-
-        //
-        // Lights glow more with more blends
-        //
         blit_flush_triangle_fan(b, e);
-
-        //
-        // Makes non player lights more intense
-        //
-        if (player && (owner != player)) {
-            blit_flush_triangle_fan(b, e);
-            blit_flush_triangle_fan(b, e);
-            blit_flush_triangle_fan(b, e);
-        }
         glTranslatef(-light_offset.x, -light_offset.y, 0);
     }
 

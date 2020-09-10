@@ -35,6 +35,15 @@ struct callframe {
 // the callstack vector
 //
 #define MAXCALLFRAME 255
+#ifdef USE_THREADS
+#ifdef __MAIN__
+thread_local struct callframe callframes[MAXCALLFRAME];
+thread_local unsigned char callframes_depth;
+#else
+extern thread_local struct callframe callframes[MAXCALLFRAME];
+extern thread_local unsigned char callframes_depth;
+#endif
+#else
 #ifdef __MAIN__
 struct callframe callframes[MAXCALLFRAME];
 unsigned char callframes_depth;
@@ -42,6 +51,8 @@ unsigned char callframes_depth;
 extern struct callframe callframes[MAXCALLFRAME];
 extern unsigned char callframes_depth;
 #endif
+#endif
+
 extern void callstack_dump(void);
 
 struct tracer_t {
