@@ -1,6 +1,8 @@
 bugs
 ----
-- key bounce on bg
+- sewer in corner with one light ray flickers
+- jump fatigue
+- light edge visible
 - chasm is one pix short
 - use larger bitmap for visited level?
 - no fade in on new level

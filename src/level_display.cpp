@@ -238,14 +238,6 @@ void Level::display_map (void)
              game->config.inner_pix_height);
         blit_flush();
 
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int g_blend_a;
-extern int g_blend_b;
-CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
-glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
-#endif
         glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
         blit_fbo_inner(FBO_LIGHT);
     }

@@ -693,7 +693,8 @@ void Thing::blit_internal (int fbo,
     auto h = get_stats_health();
     auto m = get_stats_health_max();
 
-    auto lit = (fbo == FBO_FULLMAP) || level->is_lit_no_check(mid_at.x, mid_at.y);
+    auto lit = (fbo == FBO_FULLMAP) || 
+                    level->is_lit_no_check(mid_at.x, mid_at.y);
     if (tile &&
         !tile->is_invisible &&
         !is_dead &&
@@ -759,6 +760,7 @@ void Thing::blit_internal (int fbo,
         c = fire_color;
     }
 
+#if 1
     uint8_t fade = level->is_lit(mid_at.x, mid_at.y);
 
     if (fbo == FBO_FULLMAP) {
@@ -768,6 +770,7 @@ void Thing::blit_internal (int fbo,
     } else {
         c.a = 255;
     }
+#endif
 
     glcolor(c);
 

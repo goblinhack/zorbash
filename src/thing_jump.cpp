@@ -10,10 +10,10 @@
 
 bool Thing::try_to_jump (point to)
 {_
-    //
-    // No rapid boinging
-    //
-    if (is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
         return false;
     }
 
@@ -253,10 +253,10 @@ bool Thing::try_to_jump (point to)
 
 bool Thing::try_to_jump (void)
 {_
-    //
-    // No rapid boinging
-    //
-    if (is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
         return false;
     }
 
@@ -276,10 +276,10 @@ bool Thing::try_to_jump (void)
 
 bool Thing::try_harder_to_jump (void)
 {_
-    //
-    // No rapid boinging
-    //
-    if (is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
         return false;
     }
 

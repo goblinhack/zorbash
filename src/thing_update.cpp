@@ -33,6 +33,15 @@ void Thing::update_light (bool force)
     }
     set_last_lit_at(lit_at);
 
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            auto l = level->is_lit_no_check(x, y);
+            if (l) {
+                level->set_is_lit_no_check(x, y, l / 2);
+            }
+        }
+    }
+
     auto lc = get_light_count();
     size_t c = 0;
     for (auto l : get_light()) {
