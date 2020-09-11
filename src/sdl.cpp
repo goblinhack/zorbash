@@ -1037,14 +1037,7 @@ void config_gfx_zoom_in (void)
         game->config.gfx_zoom = 5;
     }
     CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
-
-    CON("INIT: OpenGL leave 2D mode");
-    config_gfx_zoom_update();
-    CON("INIT: OpenGL enter 2D mode");
-    gl_init_2d_mode();
-    if (game->level) {
-        game->level->scroll_map_to_player();
-    }
+    config_update_all();
 }
 
 void config_gfx_zoom_out (void)
@@ -1054,14 +1047,7 @@ void config_gfx_zoom_out (void)
         game->config.gfx_zoom = 1;
     }
     CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
-
-    CON("INIT: OpenGL leave 2D mode");
-    config_gfx_zoom_update();
-    CON("INIT: OpenGL enter 2D mode");
-    gl_init_2d_mode();
-    if (game->level) {
-        game->level->scroll_map_to_player();
-    }
+    config_update_all();
 }
 
 //
@@ -1083,14 +1069,7 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
         CON("USERCFG: gfx zoom set to %d", val);
     }
 
-    CON("INIT: OpenGL leave 2D mode");
-    config_gfx_zoom_update();
-    CON("INIT: OpenGL enter 2D mode");
-    gl_init_2d_mode();
-    if (game->level) {
-        game->level->scroll_map_to_player();
-    }
-
+    config_update_all();
     return (true);
 }
 

@@ -521,7 +521,9 @@ bool Thing::get_coords (point &blit_tl,
         is_in_water = true;
     }
 
-    if (unlikely(is_monst() ||
+    if (unlikely(is_in_water ||
+                 is_monst() ||
+                 is_item() ||
                  is_player() ||
                  tpp->gfx_attack_anim() ||
                  tpp->gfx_on_fire_anim() ||
@@ -761,10 +763,9 @@ void Thing::blit_internal (int fbo,
     }
 
     uint8_t fade = level->is_lit(mid_at.x, mid_at.y);
-
     if (fbo == FBO_FULLMAP) {
         c.a = 255;
-    } else {
+    } else if (is_light_strength()) {
         c.a = fade;
     }
 

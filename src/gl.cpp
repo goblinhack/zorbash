@@ -251,8 +251,9 @@ static void gl_init_fbo_ (int fbo,
     LOG("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
     GL_ERROR_CHECK();
 
-    DBG("INIT: - glGenTextures");
+    LOG("INIT: - glGenTextures");
     if (*fbo_tex_id) {
+        LOG("INIT: - glDeleteTextures");
         glDeleteTextures(1, fbo_tex_id);
         *fbo_tex_id = 0;
     }
