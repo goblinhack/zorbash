@@ -126,7 +126,7 @@ bool Thing::try_to_jump (point to)
     auto dy = y - mid_at.y;
     auto tw = TILE_WIDTH;
     auto th = TILE_HEIGHT;
-    auto sz = size(last_blit_br.x - last_blit_tl.x,
+    auto sz = isize(last_blit_br.x - last_blit_tl.x,
                    last_blit_br.y - last_blit_tl.y);
     auto delay = PARTICLE_SPEED_MS;
     auto delay_shorter = delay - (delay / 20);

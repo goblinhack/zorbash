@@ -16,7 +16,7 @@
 
 void Level::new_internal_particle (
                           ThingId id,
-                          point start, point stop, size sz, uint32_t dur,
+                          point start, point stop, isize sz, uint32_t dur,
                           const Tilep tile,
                           bool hflip,
                           bool make_visible_at_end)
@@ -38,7 +38,7 @@ void Level::new_internal_particle (
 }
 
 void Level::new_internal_particle (
-                          point start, point stop, size sz, uint32_t dur,
+                          point start, point stop, isize sz, uint32_t dur,
                           const Tilep tile,
                           bool hflip,
                           bool make_visible_at_end)
@@ -156,7 +156,7 @@ void Level::display_internal_particles (void)
 
 void Level::new_external_particle (
                           ThingId id,
-                          point start, point stop, size sz, uint32_t dur,
+                          point start, point stop, isize sz, uint32_t dur,
                           const Tilep tile, bool hflip,
                           bool make_visible_at_end)
 {
@@ -176,7 +176,7 @@ void Level::new_external_particle (
                                      make_visible_at_end));
 }
 
-void Level::new_external_particle (point start, point stop, size sz, uint32_t dur,
+void Level::new_external_particle (point start, point stop, isize sz, uint32_t dur,
                                    const Tilep tile, bool hflip,
                                    bool make_visible_at_end)
 {
