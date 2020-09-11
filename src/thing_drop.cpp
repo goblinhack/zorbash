@@ -41,7 +41,16 @@ bool Thing::drop (Thingp what, Thingp target)
 
     what->hooks_remove();
     what->remove_owner();
-    what->hide();
+
+    //
+    // Hide as the particle drop will reveal it
+    //
+    if (is_player()) {
+        what->hide();
+    } else {
+        what->visible();
+    }
+
     if (target) {
         what->move_to_immediately(target->mid_at);
     } else {

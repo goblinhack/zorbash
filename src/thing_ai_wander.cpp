@@ -216,7 +216,7 @@ bool Thing::ai_wander (void)
     if (game->fps_value < 55) {
         if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS * 4,
                                             get_timestamp_last_wander_try())) {
-            log("AI wander vdamped; too frequent, last try %u, %u ms ago",
+            log("AI wander very damped; too frequent, last try %u, %u ms ago",
                 get_timestamp_last_wander_try(),
                 time_get_time_ms_cached() - get_timestamp_last_wander_try());
             return false;
