@@ -406,6 +406,7 @@ void gl_init_fbo (void)
         int tex_width;
         int tex_height;
 
+        // old size check
         fbo_get_size(i, tex_width, tex_height);
         gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i],
                      tex_width, tex_height);
