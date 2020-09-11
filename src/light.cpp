@@ -146,8 +146,8 @@ void Light::calculate (int last)
     // walls.
     //
     bool do_set_visited = (player && (owner == player));
-    float step_delta1 = 0.05;
-    float step_delta2 = 0.01;
+    float step_delta1 = 0.04;
+    float step_delta2 = 0.005;
 
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
@@ -225,8 +225,8 @@ void Light::calculate (int last)
             float fade = pow(strength - radius, 0.05);
             float step = 0.0;
             for (; step < 1.0; step += step_delta2) {
-                fade *= 0.90;
-                if (fade < 0.0001) {
+                fade *= 0.95;
+                if (fade < 0.001) {
                     break;
                 }
 
@@ -394,6 +394,7 @@ void Light::render_triangle_fans (int last, int count)
     // Blend a texture on top of all the above blending so we get smooth
     // fade off of the light.
     //
+    if (0)
     if (last && (player && (owner == player))) {
         if (flicker > random_range(10, 20)) {
             flicker = 0;
