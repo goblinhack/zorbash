@@ -290,20 +290,11 @@ void Level::display_map (void)
         //
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(WHITE);
+        glcolor(DARKGREEN);
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-        glcolor(GRAY65);
         blit_fbo_inner(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
         glcolor(WHITE);
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int g_blend_a;
-extern int g_blend_b;
-CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
-glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
-#endif
         blit_fbo_inner(FBO_MAP_VISIBLE);
     }
 
