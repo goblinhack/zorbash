@@ -1,6 +1,5 @@
 bugs
 ----
-- cube items move jerkily
 - chasm is one pix short
 - acid gets multiple hits
 - moving off an entrance changes level
