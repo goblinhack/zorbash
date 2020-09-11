@@ -33,7 +33,7 @@ void Thing::init_lights (void)
         color col = WHITE;
 
         float strength = TILE_WIDTH;
-        float ostrength = TILE_WIDTH / 2;
+        float ostrength = TILE_WIDTH;
         float d1 = (1.0 / (float)TILE_WIDTH) * 1;
         float d2 = (1.0 / (float)TILE_WIDTH) * 2;
 

@@ -1,7 +1,8 @@
 bugs
 ----
+- cube items move jerkily
+- light does not work at zoom
 - jump fatigue
-- light edge visible at high zoom out
 - chasm is one pix short
 - acid gets multiple hits
 - jump on the spot

@@ -400,7 +400,7 @@ void Light::render_triangle_fans (int last, int count)
         }
 
         if (!flicker) {
-            flicker_radius = strength *
+            flicker_radius = TILE_WIDTH +
                             (1.0 + ((float)(random_range(0, 5) / 50.0)));
         }
         flicker++;
