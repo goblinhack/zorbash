@@ -1,13 +1,13 @@
 bugs
 ----
+- dont reset bg on zoom
 - cube items move jerkily
-- light does not work at zoom
-- jump fatigue
 - chasm is one pix short
 - acid gets multiple hits
+- moving off an entrance changes level
+- jump fatigue
 - jump on the spot
 - jump on spot does not collect
-- moving off an entrance changes level
 - remove the player icon, just use monst bar
 - monst side bar show some items uniquely like torches?
 - tab to change gfx mode

@@ -47,6 +47,7 @@
 
 #include "my_color.h"
 #include "my_point.h"
+#include "my_size.h"
 
 //
 // gl.c
@@ -316,6 +317,7 @@ void gl_ortho_set(int32_t width, int32_t height);
 extern std::array<GLuint, MAX_FBO> render_buf_id;
 extern std::array<GLuint, MAX_FBO> fbo_id;
 extern std::array<GLuint, MAX_FBO> fbo_tex_id;
+extern std::array<isize, MAX_FBO> fbo_size;
 
 void fbo_get_size(int fbo, int &w, int &h);
 void blit_fbo(int fbo);

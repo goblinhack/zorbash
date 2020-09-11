@@ -1723,10 +1723,10 @@ public:
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log(std::string prefix);
     void log_(const char *fmt, va_list args); // compile error without
-    void new_external_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
-    void new_external_particle(point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
-    void new_internal_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
-    void new_internal_particle(point start, point end, size sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
+    void new_external_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
+    void new_external_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
+    void new_internal_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
+    void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
     void place_chasm(Dungeonp d, const std::string &what);
     void place_corridor(Dungeonp d, const std::string what, int depth);
     void place_deep_water(Dungeonp d, const std::string &what);

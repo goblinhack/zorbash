@@ -17,7 +17,7 @@ public:
     Particle_(ThingId thing_id,
               point start, point stop,
               point pixel_map_at,
-              size sz,
+              isize sz,
               uint32_t timestamp_start, uint32_t timestamp_stop,
               Tilep tile,
               bool hflip,
@@ -35,7 +35,7 @@ public:
 
     Particle_(point start, point stop,
               point pixel_map_at,
-              size sz,
+              isize sz,
               uint32_t timestamp_start, uint32_t timestamp_stop,
               Tilep tile,
               bool hflip,
@@ -54,7 +54,7 @@ public:
     point start;
     point stop;
     point pixel_map_at;
-    size sz;
+    isize sz;
     uint32_t timestamp_start {};
     uint32_t timestamp_stop {};
     Tilep tile {};

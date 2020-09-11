@@ -138,7 +138,7 @@ void tile_load_arr (std::string file, std::string name,
     int y = 0;
     int idx = 0;
 
-    size pixel_size;
+    isize pixel_size;
 
     pixel_size.w = width;
     pixel_size.h = height;
@@ -300,7 +300,7 @@ void tile_load_arr (std::string file, std::string name,
     int y = 0;
     int idx = 0;
 
-    size pixel_size;
+    isize pixel_size;
 
     pixel_size.w = width;
     pixel_size.h = height;
@@ -470,7 +470,7 @@ void tile_load_arr_sprites (std::string file,
     int y = 0;
     int idx = 0;
 
-    size pixel_size;
+    isize pixel_size;
 
     pixel_size.w = width;
     pixel_size.h = height;
@@ -645,7 +645,7 @@ void tile_load_arr_sprites (std::string file,
     int y = 0;
     int idx = 0;
 
-    size pixel_size;
+    isize pixel_size;
 
     pixel_size.w = width;
     pixel_size.h = height;

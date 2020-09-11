@@ -13,6 +13,12 @@ GLushort glapi_last_right;
 GLushort glapi_last_bottom;
 static int in_2d_mode;
 
+std::array<GLuint, MAX_FBO> render_buf_id = {};
+std::array<GLuint, MAX_FBO> fbo_id = {};
+std::array<GLuint, MAX_FBO> fbo_tex_id = {};
+std::array<isize, MAX_FBO> fbo_size = {};
+
+
 #define GL_ERROR_CHECK() { \
     auto errCode = glGetError();                                   \
     if (errCode == GL_NO_ERROR) {                                  \
@@ -391,10 +397,6 @@ static void gl_init_fbo_ (int fbo,
     GL_ERROR_CHECK();
 }
 
-std::array<GLuint, MAX_FBO> render_buf_id = {};
-std::array<GLuint, MAX_FBO> fbo_id = {};
-std::array<GLuint, MAX_FBO> fbo_tex_id = {};
-
 void gl_init_fbo (void)
 {
     int i;
@@ -408,8 +410,19 @@ void gl_init_fbo (void)
 
         // old size check
         fbo_get_size(i, tex_width, tex_height);
+
+        //
+        // If no change in size (minimap, bg map) then do not reset the FBO
+        //
+        if (fbo_size[i] == isize(tex_width, tex_height)) {
+            CON("INIT: OpenGL skip init of FBO %d", i);
+            continue;
+        }
+
         gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i],
                      tex_width, tex_height);
+        fbo_size[i] = isize(tex_width, tex_height);
+
         gl_enter_2d_mode(tex_width, tex_height);
         blit_fbo_bind(i);
         glClearColor(0, 0, 0, 0);
