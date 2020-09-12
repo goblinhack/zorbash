@@ -15,6 +15,13 @@ void Thing::animate (void)
 #ifdef DEBUG_ANIM
 if (is_chasm()) { log("animate"); }
 #endif
+    auto tiles = &tpp->tiles;
+    if (!tiles || tiles->empty()) {
+#ifdef DEBUG_ANIM
+if (is_chasm()) { log("has no tiles"); }
+#endif
+        return;
+    }
 
     tile = tile_index_to_tile(tile_curr);
     if (tile) {
@@ -37,18 +44,14 @@ if (is_chasm()) { log("animate"); }
                 is_resurrecting = false;
                 is_resurrected = true;
                 is_dead = false;
+                tile = tile_first(tiles);
             } else {
+                //
+                // Stay dead
+                //
                 return;
             }
         }
-    }
-
-    auto tiles = &tpp->tiles;
-    if (!tiles || tiles->empty()) {
-#ifdef DEBUG_ANIM
-if (is_chasm()) { log("has no tiles"); }
-#endif
-        return;
     }
 
     int chose_tile = false;
