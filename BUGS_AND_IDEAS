@@ -1,7 +1,5 @@
 bugs
 ----
-- chasm is one pix short
-- acid gets multiple hits
 - moving off an entrance changes level
 - jump fatigue
 - jump on the spot
