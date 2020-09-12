@@ -50,7 +50,12 @@ void Level::tick (void)
     auto i = all_active_things.begin();
     while (i != all_active_things.end()) {
         auto t = i->second;
-        auto n = ++i;
+
+        ThingId next_key {};
+        i++;
+        if (i != all_active_things.end()) {
+            next_key = i->first;
+        }
 
         verify(t);
 
@@ -62,7 +67,14 @@ void Level::tick (void)
         }
 
         t->tick();
-        i = n;
+
+        //
+        // Check the walk is not invalidated
+        //
+        if (i == all_active_things.end()) {
+            break;
+        }
+        i = all_active_things.find(next_key);
     }
 
     if (!game->things_are_moving) {

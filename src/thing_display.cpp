@@ -342,9 +342,10 @@ bool Thing::get_coords (point &blit_tl,
         if (!tile) {
             err("has no tile, index %d", tile_curr);
             blit = false;
+        } else {
+            tile_pix_width = tile->pix_width;
+            tile_pix_height = tile->pix_height;
         }
-        tile_pix_width = tile->pix_width;
-        tile_pix_height = tile->pix_height;
     } else {
         tile = {};
     }
