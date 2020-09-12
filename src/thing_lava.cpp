@@ -48,8 +48,11 @@ void Thing::lava_tick (void)
             if (!tpp->is_lava()) {
                 continue;
             }
-            is_hit_by(t, t->get_stats_attack());
-            break;
+            if (t->get_tick() < game->tick_current) {
+                t->set_tick(game->tick_current);
+                is_hit_by(t, t->get_stats_attack());
+                break;
+            }
         } FOR_ALL_THINGS_END()
     } else {
         if (is_player()) {
