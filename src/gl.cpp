@@ -600,9 +600,6 @@ void blit_flush (void)
         return;
     }
 
-    //
-    // Display all the tiles selected above in one blast.
-    //
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
@@ -655,11 +652,8 @@ void blit_flush_triangle_fan (void)
     blit_flush_triangle_fan(gl_array_buf, bufp);
 }
 
-void blit_flush_triangle_fan (float *b, float *e)
+void blit_flush_colored_triangle_fan (float *b, float *e)
 {_
-    //
-    // Display all the tiles selected above in one blast.
-    //
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
 
@@ -692,6 +686,32 @@ void blit_flush_triangle_fan (float *b, float *e)
 
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
+
+    blit_init();
+}
+
+void blit_flush_triangle_fan (float *b, float *e)
+{_
+    glEnableClientState(GL_VERTEX_ARRAY);
+
+    static long nvertices;
+
+    static const GLsizei stride =
+                        sizeof(GLushort) *
+                        NUMBER_DIMENSIONS_PER_COORD_2D;
+
+    nvertices = ((char*)e - (char*)b) / stride;
+
+    glVertexPointer(
+        NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
+        GL_SHORT,
+        stride,
+        b);
+
+    GL_ERROR_CHECK();
+    glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+
+    glDisableClientState(GL_VERTEX_ARRAY);
 
     blit_init();
 }

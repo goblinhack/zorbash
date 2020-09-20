@@ -67,7 +67,11 @@ if (player) {
             }
 
             if (step > 0) {
-                map_at.x += (map_wanted_at.x - map_at.x) / step;
+                auto dx = (map_wanted_at.x - map_at.x) / step;
+                dx *= TILE_WIDTH;
+                dx = (int) dx;
+                dx /= TILE_WIDTH;
+                map_at.x += dx;
             }
 
             if (fabs(dy) > 15) {
@@ -83,7 +87,11 @@ if (player) {
             }
 
             if (step > 0) {
-                map_at.y += (map_wanted_at.y - map_at.y) / step;
+                auto dy = (map_wanted_at.y - map_at.y) / step;
+                dy *= TILE_HEIGHT;
+                dy = (int) dy;
+                dy /= TILE_HEIGHT;
+                map_at.y += dy;
             }
         }
     } else {

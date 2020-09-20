@@ -291,6 +291,7 @@ bool Thing::get_coords (point &blit_tl,
                         Tilep &tile,
                         bool reflection)
 {_
+log("get coords");
     fpoint at = get_interpolated_mid_at();
 
     //
@@ -300,7 +301,9 @@ bool Thing::get_coords (point &blit_tl,
     auto tpp = tp();
     auto blit = true;
 
-    if (unlikely(is_hidden)) {
+    if (unlikely(is_changing_level)) {
+        blit = false;
+    } else if (unlikely(is_hidden)) {
         blit = false;
     } else if (unlikely(tpp->gfx_attack_anim() ||
                         tpp->gfx_weapon_carry_anim())) {
@@ -570,44 +573,23 @@ bool Thing::get_map_offset_coords (point &blit_tl, point &blit_br,
                            pre_effect_blit_br,
                            tile, reflection);
 
-    float dx = - level->pixel_map_at.x;
-    float dy = - level->pixel_map_at.y;
-    blit_tl.x += dx;
-    blit_tl.y += dy;
-    blit_br.x += dx;
-    blit_br.y += dy;
+    float dx = level->pixel_map_at.x;
+    float dy = level->pixel_map_at.y;
+    blit_tl.x -= dx;
+    blit_tl.y -= dy;
+    blit_br.x -= dx;
+    blit_br.y -= dy;
 
     if (!reflection) {
         last_blit_tl = blit_tl;
         last_blit_br = blit_br;
+        pre_effect_blit_tl.x -= dx;
+        pre_effect_blit_tl.y -= dy;
+        pre_effect_blit_br.x -= dx;
+        pre_effect_blit_br.y -= dy;
+        last_pre_effect_blit_tl = pre_effect_blit_tl;
+        last_pre_effect_blit_br = pre_effect_blit_br;
     }
-
-    return (blit);
-}
-
-bool Thing::get_pre_effect_map_offset_coords (point &blit_tl,
-                                              point &blit_br,
-                                              Tilep &tile,
-                                              bool reflection)
-{_
-    point pre_effect_blit_tl;
-    point pre_effect_blit_br;
-
-    auto blit = get_coords(blit_tl, blit_br,
-                           pre_effect_blit_tl,
-                           pre_effect_blit_br,
-                           tile,
-                           false);
-
-    float dx = - level->pixel_map_at.x;
-    float dy = - level->pixel_map_at.y;
-    pre_effect_blit_tl.x += dx;
-    pre_effect_blit_tl.y += dy;
-    pre_effect_blit_br.x += dx;
-    pre_effect_blit_br.y += dy;
-
-    blit_tl = pre_effect_blit_tl;
-    blit_br = pre_effect_blit_br;
 
     return (blit);
 }
@@ -855,6 +837,9 @@ void Thing::blit (int fbo)
     }
 
     blit_internal(fbo, blit_tl, blit_br, tile, WHITE, false);
+
+    update_light(!is_blit_pos);
+    is_blit_pos = true;
 }
 
 void Thing::blit_upside_down (int fbo)

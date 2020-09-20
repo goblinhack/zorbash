@@ -163,6 +163,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->inited_tiles          << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_attached           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_being_destroyed    << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_blit_pos           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_blitted            << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_bouncing           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_changing_level     << shift; shift++;
@@ -182,7 +183,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_sleeping           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_starving           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_tick_done          << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->unused_xxx1           << shift; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

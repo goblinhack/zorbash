@@ -57,7 +57,7 @@ float Thing::get_fall (void)
         (float)(get_timestamp_fall_end() - get_timestamp_fall_begin());
 
     if (time_step > 0.8) {
-        hide();
+        is_changing_level = true;
     }
 
     float height = get_fall_height() * time_step;

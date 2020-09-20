@@ -13,8 +13,15 @@
 
 bool Thing::achieve_goals_in_life (void)
 {_
-    if (is_jumping) {
-        return false;
+    log("achieve goals in life");
+_
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_jumping) { 
+        is_tick_done = true;
+        log("skip achieve goals in life");
+        return true;
     }
 
     //
@@ -30,14 +37,6 @@ bool Thing::achieve_goals_in_life (void)
     if (is_loggable_for_unimportant_stuff()) {
         log("achieve goals at tick %d, game %u",
             get_tick(), game->tick_current);
-    }
-
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_jumping) { 
-        is_tick_done = true;
-        return true;
     }
 
     lifespan_tick();
