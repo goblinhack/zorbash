@@ -30,10 +30,71 @@ Light::~Light (void)
     oldptr(this);
 }
 
+void Light::draw_pixel (int16_t index, const point &p0, const point &p1)
+{
+    RayPoint r;
+    r.p = p1;
+    r.distance = DISTANCE(p0.x, p0.y, p1.x, p1.y);
+    points[index].push_back(r);
+}
+
+// http://www.edepot.com/linee.html
+void Light::draw_line (int16_t index, const point &p0, const point &p1)
+{
+    const point start = p0; 
+    auto x = p0.x;
+    auto y = p0.y;
+    auto x2 = p1.x;
+    auto y2 = p1.y;
+
+    bool yLonger=false;
+    int shortLen=y2-y;
+    int longLen=x2-x;
+    if (abs(shortLen)>abs(longLen)) {
+	int swap=shortLen;
+	shortLen=longLen;
+	longLen=swap;				
+	yLonger=true;
+    }
+    int decInc;
+    if (longLen==0) decInc=0;
+    else decInc = (shortLen << 16) / longLen;
+
+    if (yLonger) {
+	if (longLen>0) {
+	    longLen+=y;
+	    for (int j=0x8000+(x<<16);y<=longLen;++y) {
+		draw_pixel(index, start, point(j >> 16, y));	
+		j+=decInc;
+	    }
+	    return;
+	}
+	longLen+=y;
+	for (int j=0x8000+(x<<16);y>=longLen;--y) {
+	    draw_pixel(index, start, point(j >> 16, y));	
+	    j-=decInc;
+	}
+	return;	
+    }
+
+    if (longLen>0) {
+	longLen+=x;
+	for (int j=0x8000+(y<<16);x<=longLen;++x) {
+	    draw_pixel(index, start, point(x, j >> 16));
+	    j+=decInc;
+	}
+	return;
+    }
+    longLen+=x;
+    for (int j=0x8000+(y<<16);x>=longLen;--x) {
+	draw_pixel(index, start, point(x, j >> 16));
+	j-=decInc;
+    }
+}
+
 Lightp light_new (Thingp owner,
-                  fpoint at,
-                  fpoint offset,
-                  float strength,
+                  point offset,
+                  int strength,
                   color col,
                   int fbo)
 {_
@@ -50,9 +111,8 @@ Lightp light_new (Thingp owner,
     auto l = new Light(); // std::make_shared< class Light >();
 
     l->level          = owner->level;
-    l->at             = at;
     l->offset         = offset;
-    l->strength       = strength;
+    l->strength       = strength * TILE_WIDTH;
     l->owner          = owner;
     l->col            = col;
     l->max_light_rays = max_light_rays;
@@ -66,9 +126,15 @@ Lightp light_new (Thingp owner,
     //
     float dr = RAD_360 / (float) max_light_rays;
     for (auto i = 0; i < max_light_rays; i++) {
-        auto r = &getref(l->ray, i);
-        float rad = dr * (float)i;
-        sincosf(rad, &r->sinr, &r->cosr);
+        double cosr, sinr;
+        sincos(dr * i, &sinr, &cosr);
+        l->draw_line(i, point(0, 0),
+                     point(l->strength * cosr, l->strength * sinr));
+#if 0
+        for (int s = 0; s < l->strength; s++) {
+            l->points[i].push_back(point((int)(s*cosr), (int)(s*sinr)));
+        }
+#endif
     }
 
     //log("created");
@@ -77,6 +143,13 @@ Lightp light_new (Thingp owner,
 
 void Light::destroy (void)
 {_
+}
+
+void Light::reset (void)
+{
+    cached_gl_cmds.clear();
+    cached_pixel_map_at = point(-1, -1);
+    cached_light_pos = point(-1, -1);
 }
 
 void Light::calculate (int last)
@@ -95,74 +168,36 @@ void Light::calculate (int last)
         }
     }
 
-    //
-    // Non player lights are just blitted textures
-    //
-    if (!owner->is_player()) {
-        return;
+    point blit_tl = owner->last_pre_effect_blit_tl;
+    point blit_br = owner->last_pre_effect_blit_br;
+    blit_tl += level->pixel_map_at;
+    blit_br += level->pixel_map_at;
+    point light_pos = (blit_tl + blit_br) / 2;
+
+    if (cached_light_pos != light_pos) {
+	cached_gl_cmds.clear();
+	cached_pixel_map_at = level->pixel_map_at;
     }
-
-    //
-    // We precalculate the walls a light hits partly for efficency but also
-    // to avoid lighting walls behind those immediately visible to us. To
-    // do this we do a flood fill of the level and pick the nearest walls.
-    //
-    static std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> is_nearest_wall = {};
-    static uint16_t is_nearest_wall_val;
-    is_nearest_wall_val++;
-
-    verify(this);
-    cached_gl_cmds.clear();
-
-    auto light_radius = strength;
-    auto visible_width = light_radius + 1;
-    auto visible_height = light_radius + 1;
-
-    auto light_pos = at + fpoint(0.5, 0.5) + offset;
-
-    int16_t maxx = light_pos.x + visible_width;
-    int16_t minx = light_pos.x - visible_width;
-    int16_t maxy = light_pos.y + visible_height;
-    int16_t miny = light_pos.y - visible_height;
-
-    if (unlikely(minx < 0)) {
-        minx = 0;
-    }
-
-    if (unlikely(maxx > MAP_WIDTH)) {
-        maxx = MAP_WIDTH;
-    }
-
-    if (unlikely(miny < 0)) {
-        miny = 0;
-    }
-
-    if (unlikely(maxy > MAP_HEIGHT)) {
-        maxy = MAP_HEIGHT;
-    }
+    cached_light_pos = light_pos;
 
     //
-    // Walk the light rays in a circle. First pass is to find the nearest
-    // walls.
+    // Walk the light rays in a circle. Find the nearest walls and then let
+    // the light leak a little.
     //
     bool do_set_visited = (player && (owner == player));
-    float step_delta1 = 0.04;
-    float step_delta2 = 0.005;
 
-    for (int i = 0; i < max_light_rays; i++) {
+    for (int16_t i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
-        float step = 0.0;
-        for (; step < strength; step += step_delta1) {
-            float rad = step;
-            float p1x = light_pos.x + r->cosr * rad;
-            float p1y = light_pos.y + r->sinr * rad;
-
-            int x = (int)p1x;
-            int y = (int)p1y;
-
-            if (unlikely(level->is_oob(x, y))) {
-                continue;
-            }
+        int16_t step = 0;
+        const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
+	auto rp = points[i].begin();
+        for (; ; step++) {
+	    if (step >= end_of_points) { break; }
+            if (rp->distance > strength) { break; }
+            const int16_t p1x = light_pos.x + rp->p.x;
+            const int16_t p1y = light_pos.y + rp->p.y;
+            const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+            const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
 
             if (do_set_visited) {
                 level->set_visited_no_check(x, y);
@@ -170,91 +205,33 @@ void Light::calculate (int last)
 
             level->set_is_lit_no_check(x, y);
 
-            if (!game->config.gfx_show_hidden) {
-                if (level->is_light_blocker_no_check(x, y)) {
-                    break;
-                }
-            }
-        }
+            rp++;
 
-        r->depth_closest = step;
+	    if (level->is_light_blocker_no_check(x, y)) {
+		//
+		// We hit a wall. Keep walking until we exit the wall or
+                // we reach the light limit.
+		//
+		int16_t step2 = step;
+		for (; step2 < step + TILE_WIDTH - 1; step2++) {
+		    if (step2 >= end_of_points) { break; }
+		    if (rp->distance > strength) { break; }
+		    const int16_t p1x = light_pos.x + rp->p.x;
+		    const int16_t p1y = light_pos.y + rp->p.y;
+		    const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+		    const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
 
-        //
-        // Let the light leak in a little bit. This handles corners so that
-        // a point hitting on or near a corner will light the corner tile.
-        //
-        float step2 = step;
-        for (; step2 < step + 0.75; step2 += step_delta2) {
-            float rad = step2;
-            float p1x = light_pos.x + r->cosr * rad;
-            float p1y = light_pos.y + r->sinr * rad;
+		    if (!level->is_light_blocker_no_check(x, y)) {
+			break;
+		    }
 
-            int x = (int)p1x;
-            int y = (int)p1y;
-
-            if (unlikely(level->is_oob(x, y))) {
-                continue;
-            }
-
-            if (do_set_visited) {
-                level->set_visited_no_check(x, y);
-            }
-
-            if (!game->config.gfx_show_hidden) {
-                if (!level->is_light_blocker_no_check(x, y)) {
-                    break;
-                }
-            }
-
-            set_no_check(is_nearest_wall, x, y, is_nearest_wall_val);
-        }
-    }
-
-    //
-    // Now for light penetrating into rock. We stop a bit short due to the
-    // fuzzing of the light we do when rendering, to avoid light leaking into
-    // tiles we should not see.
-    //
-    // Cannot merge these two loops as we depend on is_nearest_wall being set
-    // for all tiles first.
-    //
-    {
-        for (int i = 0; i < max_light_rays; i++) {
-            auto r = &getref(ray, i);
-            float radius = r->depth_closest;
-            float fade = pow(strength - radius, 0.05);
-            float step = 0.0;
-            for (; step < 1.0; step += step_delta2) {
-                fade *= 0.95;
-                if (fade < 0.001) {
-                    break;
-                }
-
-                float rad = radius + 0.0 + step;
-                float p1x = light_pos.x + r->cosr * rad;
-                float p1y = light_pos.y + r->sinr * rad;
-
-                int x = (int)p1x;
-                int y = (int)p1y;
-
-                if (unlikely(level->is_oob(x, y))) {
-                    continue;
-                }
-
-                if (do_set_visited) {
-                    level->set_visited_no_check(x, y);
-                }
-
-                if (get_no_check(is_nearest_wall, x, y) != is_nearest_wall_val) {
-                    break;
-                }
-            }
-
-            r->depth_furthest = r->depth_closest + step;
-            if (r->depth_furthest < 0.0001) {
-                r->depth_furthest = strength;
-            }
-        }
+		    rp++;
+		}
+		step = step2;
+		break;
+	    }
+	}
+	r->depth_furthest = step;
     }
 }
 
@@ -265,68 +242,34 @@ void Light::render_triangle_fans (int last, int count)
         return;
     }
 
-    point blit_tl, blit_br;
-    Tilep tile = {};
-    if (!owner->get_pre_effect_map_offset_coords(blit_tl, blit_br, tile,
-                                                 false)) {
-        return;
+    //
+    // This stops lighting things up when moving to the player on a new level
+    //
+    if (!player->is_jumping) {
+        if (player->is_hidden) {
+            return;
+        }
     }
 
+    point blit_tl = owner->last_pre_effect_blit_tl;
+    point blit_br = owner->last_pre_effect_blit_br;
+    blit_tl += level->pixel_map_at;
+    blit_br += level->pixel_map_at;
+    point light_pos = (blit_tl + blit_br) / 2;
+
+    auto light_offset = cached_pixel_map_at - level->pixel_map_at;
+
+    blit_tl = owner->last_pre_effect_blit_tl;
+    blit_br = owner->last_pre_effect_blit_br;
+    light_pos = (blit_tl + blit_br) / 2;
+
     if (fbo == FBO_FULLMAP_LIGHT) {
-        blit_tl.x += level->pixel_map_at.x;
-        blit_tl.y += level->pixel_map_at.y;
-        blit_br.x += level->pixel_map_at.x;
-        blit_br.y += level->pixel_map_at.y;
+        blit_tl += level->pixel_map_at;
+        blit_br += level->pixel_map_at;
         gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
     }
 
-    point sz = blit_tl - blit_br;
-    if (sz.x < 0) { sz.x = -sz.x; }
-    if (sz.y < 0) { sz.y = -sz.x; }
-    point light_pos = (blit_tl + blit_br) / 2;
-    float tilew = game->config.tile_pix_width;
-    float tileh = game->config.tile_pix_height;
-    light_pos.x += offset.x * tilew;
-    light_pos.y += offset.y * tileh;
-
-    auto light_offset = light_pos - cached_light_pos;
-
-#ifdef ENABLE_DEBUG_LIGHT
-    if (!last) {
-        return;
-    }
-
-    blit_fbo_bind(FBO_MAP);
-    color c = RED;
-    c.a = 255;
-    glcolor(c);
-    gl_blitline(blit_tl.x, blit_tl.y, blit_br.x, blit_tl.y);
-    gl_blitline(blit_tl.x, blit_tl.y, blit_tl.x, blit_br.y);
-    gl_blitline(blit_br.x, blit_br.y, blit_br.x, blit_tl.y);
-    gl_blitline(blit_br.x, blit_br.y, blit_tl.x, blit_br.y);
-    gl_blitline(blit_tl.x, blit_tl.y, light_pos.x, light_pos.y);
-    gl_blitline(blit_br.x, blit_tl.y, light_pos.x, light_pos.y);
-    gl_blitline(blit_tl.x, blit_br.y, light_pos.x, light_pos.y);
-    gl_blitline(blit_br.x, blit_br.y, light_pos.x, light_pos.y);
-
-    c = WHITE;
-    c.a = 200;
-    glcolor(c);
-
-    if (1) {
-#else
     if (!cached_gl_cmds.size()) {
-#endif
-        auto c = col;
-        uint8_t red   = c.r;
-        uint8_t green = c.g;
-        uint8_t blue  = c.b;
-        uint8_t alpha = c.a;
-
-        cached_light_pos = light_pos;
-
-        alpha *= 1.0 / (float)count;
-
         blit_init();
         {
             int i;
@@ -334,29 +277,14 @@ void Light::render_triangle_fans (int last, int count)
             //
             // Walk the light rays in a circle.
             //
-            push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
-
-            //
-            // Non player lights fade
-            //
-            if (player && (owner != player)) {
-                alpha = 0.0;
-            }
-
-            if (fbo == FBO_FULLMAP_LIGHT) {
-                alpha = 0.0;
-            }
+            push_point(light_pos.x, light_pos.y);
 
             for (i = 0; i < max_light_rays; i++) {
                 auto r = &getref(ray, i);
-                float radius = r->depth_furthest;
-                float p1x = light_pos.x + r->cosr * radius * tilew;
-                float p1y = light_pos.y + r->sinr * radius * tileh;
-
-                push_point(p1x, p1y, red, green, blue, alpha);
-#ifdef ENABLE_DEBUG_LIGHT
-                gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
-#endif
+                point &p = points[i][r->depth_furthest].p;
+                int16_t p1x = light_pos.x + p.x;
+                int16_t p1y = light_pos.y + p.y;
+                push_point(p1x, p1y);
             }
 
             //
@@ -364,61 +292,23 @@ void Light::render_triangle_fans (int last, int count)
             //
             i = 0; {
                 auto r = &getref(ray, i);
-                float radius = r->depth_furthest;
-                float p1x = light_pos.x + r->cosr * radius * tilew;
-                float p1y = light_pos.y + r->sinr * radius * tileh;
-
-                push_point(p1x, p1y, red, green, blue, alpha);
-#ifdef ENABLE_DEBUG_LIGHT
-                gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
-#endif
+                point &p = points[i][r->depth_furthest].p;
+                int16_t p1x = light_pos.x + p.x;
+                int16_t p1y = light_pos.y + p.y;
+                push_point(p1x, p1y);
             }
         }
 
         auto sz = bufp - gl_array_buf;
         cached_gl_cmds.resize(sz);
         std::copy(gl_array_buf, bufp, cached_gl_cmds.begin());
-#ifndef ENABLE_DEBUG_LIGHT
         blit_flush_triangle_fan();
-#endif
     } else {
-        float *b = &(*cached_gl_cmds.begin());
-        float *e = &(*cached_gl_cmds.end());
-
+        auto *b = &(*cached_gl_cmds.begin());
+        auto *e = &(*cached_gl_cmds.end());
         glTranslatef(light_offset.x, light_offset.y, 0);
         blit_flush_triangle_fan(b, e);
         glTranslatef(-light_offset.x, -light_offset.y, 0);
-    }
-
-    //
-    // Blend a texture on top of all the above blending so we get smooth
-    // fade off of the light.
-    //
-    if (0)
-    if (last && (player && (owner == player))) {
-        if (flicker > random_range(10, 20)) {
-            flicker = 0;
-        }
-
-        if (!flicker) {
-            flicker_radius = TILE_WIDTH +
-                            (1.0 + ((float)(random_range(0, 5) / 50.0)));
-        }
-        flicker++;
-
-        float lw = flicker_radius * tilew;
-        float lh = flicker_radius * tileh;
-        float p1x = light_pos.x - lw;
-        float p1y = light_pos.y - lh;
-        float p2x = light_pos.x + lw;
-        float p2y = light_pos.y + lh;
-
-        glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA); // hard black light
-        blit_init();
-        glTranslatef(light_offset.x, light_offset.y, 0);
-        blit(g_light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
-        glTranslatef(-light_offset.x, -light_offset.y, 0);
-        blit_flush();
     }
 
     if (fbo == FBO_FULLMAP_LIGHT) {
@@ -493,7 +383,7 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
                     }
 
                     auto mid = (blit_br + blit_tl) / 2;
-                    auto s = l->strength * TILE_WIDTH;
+                    auto s = l->strength;
                     auto tlx = mid.x - s;
                     auto tly = mid.y - s;
                     auto brx = mid.x + s;

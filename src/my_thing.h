@@ -162,6 +162,8 @@ public:
     point       last_attached;
     point       last_blit_br;
     point       last_blit_tl;        // Last blit coords
+    point       last_pre_effect_blit_br;
+    point       last_pre_effect_blit_tl;
     timestamp_t timestamp_next_frame {};
     uint16_t    tile_curr            {};
     uint8_t     alpha                {255}; // For fading
@@ -182,6 +184,7 @@ public:
     uint64_t inited_tiles:1            {};
     uint64_t is_attached:1             {};
     uint64_t is_being_destroyed:1      {};
+    uint64_t is_blit_pos:1             {};
     uint64_t is_blitted:1              {};
     uint64_t is_bouncing:1             {};
     uint64_t is_changing_level:1       {};
@@ -201,7 +204,6 @@ public:
     uint64_t is_sleeping:1             {};
     uint64_t is_starving:1             {};
     uint64_t is_tick_done:1            {}; // has moved/hit and finished its move
-    uint64_t unused_xxx1:1             {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -278,8 +280,7 @@ public:
     void clear_dmap_scent(void);
 
     std::vector<Lightp> & get_light(void);
-    void new_light(fpoint at, fpoint offset, float strength, color col, int fbo);
-    void new_light(fpoint at, float strength, color col, int fbo);
+    void new_light(point offset, int strength, color col, int fbo);
     void delete_light(void);
 
     void set_lunge_to(fpoint);
@@ -791,7 +792,6 @@ public:
     bool fall_to_next_level(void);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
     bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
-    bool get_pre_effect_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
     bool is_blocking_terrain(const Thingp it);
     bool is_carrying_item(void);
     bool is_carrying_treasure(void);

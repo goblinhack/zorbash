@@ -32,28 +32,30 @@ void Thing::init_lights (void)
         //
         color col = WHITE;
 
-        float strength = TILE_WIDTH;
-        float ostrength = TILE_WIDTH;
-        float d1 = (1.0 / (float)TILE_WIDTH) * 1;
-        float d2 = (1.0 / (float)TILE_WIDTH) * 2;
+        int strength = is_light_strength();
+//        int ostrength = strength;
+//        int d1 = 1;
+//        int d2 = 2;
 
-        new_light(mid_at, ostrength, col, FBO_FULLMAP_LIGHT);
-        new_light(mid_at, strength, col, FBO_LIGHT);
+//        new_light(point(0, 0), mid_at, ostrength, col, FBO_FULLMAP_LIGHT);
+        new_light(point(0, 0), strength, col, FBO_LIGHT);
 
-        new_light(mid_at, fpoint(-d1, -d1), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint( d1, -d1), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint(-d1,  d1), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint( d1,  d1), strength, col, FBO_LIGHT);
+#if 0
+        new_light(point(-d1, -d1), strength, col, FBO_LIGHT);
+        new_light(point( d1, -d1), strength, col, FBO_LIGHT);
+        new_light(point(-d1,  d1), strength, col, FBO_LIGHT);
+        new_light(point( d1,  d1), strength, col, FBO_LIGHT);
 
-        new_light(mid_at, fpoint(-d2, -d1), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint( d2, -d1), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint(-d2,  d1), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint( d2,  d1), strength, col, FBO_LIGHT);
+        new_light(point(-d2, -d1), strength, col, FBO_LIGHT);
+        new_light(point( d2, -d1), strength, col, FBO_LIGHT);
+        new_light(point(-d2,  d1), strength, col, FBO_LIGHT);
+        new_light(point( d2,  d1), strength, col, FBO_LIGHT);
 
-        new_light(mid_at, fpoint(-d1, -d2), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint( d1, -d2), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint(-d1,  d2), strength, col, FBO_LIGHT);
-        new_light(mid_at, fpoint( d1,  d2), strength, col, FBO_LIGHT);
+        new_light(point(-d1, -d2), strength, col, FBO_LIGHT);
+        new_light(point( d1, -d2), strength, col, FBO_LIGHT);
+        new_light(point(-d1,  d2), strength, col, FBO_LIGHT);
+        new_light(point( d1,  d2), strength, col, FBO_LIGHT);
+#endif
 
         has_light = true;
         log("player created");
@@ -71,7 +73,7 @@ void Thing::init_lights (void)
             }
             if (add_light) {
                 color c = string2color(l);
-                new_light(mid_at, (double) is_light_strength(), c, FBO_LIGHT);
+                new_light(point(0, 0), is_light_strength(), c, FBO_LIGHT);
                 has_light = true;
             }
         }

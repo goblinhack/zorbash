@@ -95,6 +95,7 @@ void Thing::level_change (Levelp l)
 
     for (auto l : get_light()) {
         l->level = level;
+        l->reset();
     }
 
     log("changed level");
@@ -150,6 +151,16 @@ void Thing::level_enter (void)
     if (is_player()) {
         set_last_lit_at(point(-1, -1));
     }
+
+    //
+    // Blit location is now invalid
+    //
+    is_blit_pos = false;
+
+    //
+    // Can be shown on screen again.
+    //
+    is_changing_level = false;
 }
 
 void Thing::level_leave (void)
