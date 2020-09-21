@@ -291,7 +291,6 @@ bool Thing::get_coords (point &blit_tl,
                         Tilep &tile,
                         bool reflection)
 {_
-log("get coords");
     fpoint at = get_interpolated_mid_at();
 
     //
