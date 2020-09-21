@@ -56,7 +56,7 @@ float Thing::get_fall (void)
         (float)(t - get_timestamp_fall_begin()) /
         (float)(get_timestamp_fall_end() - get_timestamp_fall_begin());
 
-    if (time_step > 0.8) {
+    if (time_step > 0.95) {
         is_changing_level = true;
     }
 
