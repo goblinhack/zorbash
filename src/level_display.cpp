@@ -307,7 +307,12 @@ void Level::display_map (void)
 //        blit_fbo_inner(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
         glcolor(WHITE);
-        blit_fbo_inner(FBO_MAP_VISIBLE);
+        if (player) {
+            if (!player->is_changing_level) {
+                blit_fbo_inner(FBO_MAP_VISIBLE);
+            }
+        }
+
     }
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
