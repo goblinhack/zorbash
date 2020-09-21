@@ -166,6 +166,9 @@ void Light::calculate (int last)
         if (player->is_hidden) {
             return;
         }
+        if (player->is_changing_level) {
+            return;
+        }
     }
 
     point blit_tl = owner->last_pre_effect_blit_tl;
@@ -249,6 +252,13 @@ void Light::render_triangle_fans (int last, int count)
         if (player->is_hidden) {
             return;
         }
+        if (player->is_changing_level) {
+            return;
+        }
+    }
+
+    if (!player->is_blit_pos) {
+        return;
     }
 
     point blit_tl = owner->last_pre_effect_blit_tl;

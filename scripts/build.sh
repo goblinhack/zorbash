@@ -516,7 +516,6 @@ case `uname` in
         LDLIBS="$LDLIBS -rdynamic"
         LDLIBS="$LDLIBS -Wl,-framework,Opengl"
         DSYM="dsymutil ../zorbash"
-        WERROR="-Werror"
         COMPILER_WARN="-Wmissing-prototypes"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer -static-libstdc++ -static-libgcc "
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
@@ -526,13 +525,17 @@ case `uname` in
         EXE=""
         LDLIBS="$LDLIBS -funwind-tables"
         LDLIBS="$LDLIBS -lGL"
-        #
-        # Better to leave off for production
-        #
-        WERROR="-Werror"
         COMPILER_WARN="-Wmissing-prototypes"
         ;;
 esac
+
+#
+# Better to leave off for production
+#
+WERROR=""
+if [[ $OPT_DEV != "" ]]; then
+    WERROR="-Werror"
+fi
 
 PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
@@ -541,13 +544,6 @@ C_FLAGS="$C_FLAGS -DPYTHONVERSION=\\\"$PYTHONVERSION\\\""
 log_info "PYTHONVERSION              : $PYTHONVERSION"
 log_info "PYTHONPATH                 : $PYTHONPATH"
 log_info "VERSION (game)             : $VERSION"
-
-#
-# Better to leave off for production
-#
-#WERROR=""
-
-#LDLIBS="$LDLIBS -lpthread"
 
 cd src
 

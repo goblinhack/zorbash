@@ -141,7 +141,6 @@ void Level::scroll_map_to_player (void)
 
     mouse = -1;
     mouse_old = -1;
-    minimap_valid = false;
     bg_valid = false;
     map_follow_player = true;
 

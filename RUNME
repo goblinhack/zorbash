@@ -81,6 +81,42 @@ run() {
     return $MY_RET
 }
 
+
+help()
+{
+    cat << %%
+Build options:
+
+usage $0 [options]
+
+        [--dev] Enable development warnings
+%%
+}
+
+OPT_DEV=
+
+read_opts()
+{
+    while [ "$#" -ne 0 ];
+    do
+        local option=$1
+
+        case $option in
+            -*dev)
+                OPT_DEV="yes"
+                export OPT_DEV
+                shift
+                ;;
+            *)
+                help
+                exit 1
+                ;;
+        esac
+    done
+}
+
+read_opts $*
+
 run scripts/build.sh $LOG
 
 if [ $? -ne 0 ]; then

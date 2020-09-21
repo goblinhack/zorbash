@@ -98,7 +98,7 @@ bool Thing::descend (void)
                 if (is_player()) {
                     l->player = this;
                     l->scroll_map_to_player();
-                    l->minimap_valid = false;
+                    l->update();
                     //
                     // Make sure all monsts on the new level are at the
                     // same tick or they will get lots of free attacks
@@ -110,7 +110,7 @@ bool Thing::descend (void)
                 set_interpolated_mid_at(mid_at);
                 update_interpolated_position();
                 location_check();
-                update_light();
+                update_light(true);
 
                 if (is_player()) {
                     level->cursor->move_to_immediately(mid_at);

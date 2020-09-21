@@ -18,8 +18,20 @@ void Thing::update_light (bool force)
         return;
     }
 
+    if (!is_blit_pos) {
+        return;
+    }
+
     if (is_hidden) {
         return;
+    }
+
+    if (!level) {
+        return;
+    }
+
+    if (!level->lighting_valid) {
+        force = true;
     }
 
     fpoint interp = get_interpolated_mid_at();
@@ -48,4 +60,6 @@ void Thing::update_light (bool force)
         l->calculate(c == lc - 1);
         c++;
     }
+
+    level->lighting_valid = true;
 }

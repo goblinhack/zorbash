@@ -40,7 +40,7 @@ bool Thing::open_door (Thingp it)
         it->is_open = true;
         it->level_push();
         MINICON("The door creaks open");
-        update_light();
+        update_light(true);
         return true;
     }
     MINICON("You need a key");

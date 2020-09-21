@@ -125,7 +125,7 @@ bool Thing::fall_to_next_level (void)
             if (is_player()) {
                 next_level->player = this;
                 next_level->scroll_map_to_player();
-                next_level->minimap_valid = false;
+                next_level->update();
                 //
                 // Make sure all monsts on the new level are at the
                 // same tick or they will get lots of free attacks
@@ -133,7 +133,6 @@ bool Thing::fall_to_next_level (void)
                 next_level->update_all_ticks();
             }
 
-            update_light();
             set_fall_height(0);
             wobble(90);
             visible();
@@ -182,8 +181,7 @@ bool Thing::fall_to_next_level (void)
             }
 
             next_level->scroll_map_to_player();
-
-            update_light();
+            update_light(true);
 
             log("finished fall to next level");
             return true;
