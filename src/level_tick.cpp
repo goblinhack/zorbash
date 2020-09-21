@@ -80,10 +80,6 @@ void Level::tick (void)
     if (!game->things_are_moving) {
         game->tick_end();
     }
-
-    if (!heatmap_valid) {
-        update_heatmap();
-    }
 }
 
 void Level::update_all_ticks (void)

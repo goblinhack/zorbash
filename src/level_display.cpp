@@ -30,14 +30,26 @@ void Level::display (void)
 
     display_external_particles();
 
-    if (!minimap_valid) {
-        update_minimap();
-    }
-
     if (!bg_valid) {
         g_render_black_and_white = true;
         display_map_bg_things();
         g_render_black_and_white = false;
+    }
+
+    if (player) {
+        if (!lighting_valid) {
+            player->update_light();
+        }
+
+        if (lighting_valid) {
+            if (!minimap_valid) {
+                update_minimap();
+            }
+
+            if (!heatmap_valid) {
+                update_heatmap();
+            }
+        }
     }
 }
 

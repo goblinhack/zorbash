@@ -269,6 +269,7 @@ std::ostream& operator<<(std::ostream &out,
     /* map_tl */                out << bits(my.t->map_tl);
     /* map_wanted_at */         out << bits(my.t->map_wanted_at);
     /* minimap_valid */         out << bits(my.t->minimap_valid);
+    /* lighting_valid */        out << bits(my.t->lighting_valid);
     /* monst_count */           out << bits(my.t->monst_count);
     /* mouse */                 out << bits(my.t->mouse);
     /* mouse_old */             out << bits(my.t->mouse_old);

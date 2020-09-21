@@ -78,6 +78,4 @@ void Thing::init_lights (void)
             }
         }
     }
-
-    update_light();
 }

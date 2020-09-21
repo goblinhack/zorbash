@@ -80,6 +80,7 @@ public:
     bool                       map_changed {}; // Something moved on the map
     bool                       map_follow_player {};
     bool                       minimap_valid {};
+    bool                       lighting_valid {};
     fpoint                     cursor_at;
     fpoint                     cursor_at_old;
     fpoint                     map_at;        // map tile location
@@ -280,7 +281,6 @@ public:
     void scroll_map_to_player(void);
     void tick(void);
     void update(void);
-    void update_all_things(void);
     void update_all_ticks(void);
     void update_hazard_tile_map(void);
     void update_map(void);

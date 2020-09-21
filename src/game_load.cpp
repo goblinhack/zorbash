@@ -320,7 +320,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* cursor_found */          in >> bits(l->cursor_found);
     /* cursor_needs_update */   in >> bits(l->cursor_needs_update);
     /* heatmap_valid */         in >> bits(l->heatmap_valid);
-    /* bg_valid      */         in >> bits(l->bg_valid);
+    /* bg_valid */              in >> bits(l->bg_valid);
     /* is_starting */           in >> bits(l->is_starting);
     /* map_at */                in >> bits(l->map_at);
     /* map_br */                in >> bits(l->map_br);
@@ -329,6 +329,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* map_tl */                in >> bits(l->map_tl);
     /* map_wanted_at */         in >> bits(l->map_wanted_at);
     /* minimap_valid */         in >> bits(l->minimap_valid);
+    /* lighting_valid */        in >> bits(l->lighting_valid);
     /* monst_count */           in >> bits(l->monst_count);
     /* mouse */                 in >> bits(l->mouse);
     /* mouse_old */             in >> bits(l->mouse_old);
@@ -336,7 +337,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* seed */                  in >> bits(l->seed);
     /* world_at */              in >> bits(l->world_at);
 
-    l->minimap_valid = false;
     l->heatmap_valid = false;
     l->bg_valid = false;
     l->map_changed = true;
@@ -379,6 +379,8 @@ _
             }
         }
     }
+
+    l->update();
 
     READ_MAGIC("level end", THING_MAGIC_FINAL);
     LOG("DUNGEON: Loaded things for level %d,%d,%d", p.x, p.y, p.z);

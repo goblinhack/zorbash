@@ -837,8 +837,6 @@ void Thing::blit (int fbo)
     }
 
     blit_internal(fbo, blit_tl, blit_br, tile, WHITE, false);
-
-    update_light(!is_blit_pos);
     is_blit_pos = true;
 }
 
