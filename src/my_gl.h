@@ -293,7 +293,6 @@ extern PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB_EXT;
 #endif
 
 extern uint32_t NUMBER_BYTES_PER_VERTICE_2D;
-extern uint32_t NUMBER_FLOATS_PER_VERTICE_2D;
 
 void gl_ortho_set(int32_t width, int32_t height);
 

@@ -130,11 +130,6 @@ Lightp light_new (Thingp owner,
         sincos(dr * i, &sinr, &cosr);
         l->draw_line(i, point(0, 0),
                      point(l->strength * cosr, l->strength * sinr));
-#if 0
-        for (int s = 0; s < l->strength; s++) {
-            l->points[i].push_back(point((int)(s*cosr), (int)(s*sinr)));
-        }
-#endif
     }
 
     //log("created");
