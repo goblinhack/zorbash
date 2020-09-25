@@ -143,9 +143,9 @@ void Level::display_lava (int fbo,
     blit_fbo_bind(fbo_mask2);
     glBlendFunc(GL_ONE, GL_ZERO);
     auto tile_map = lava_tile_map;
-    for (auto y = miny; y < maxy; y+=2) {
-        for (auto x = minx; x < maxx; x+=2) {
-            if (likely(!get(tile_map, x, y))) {
+    for (auto y = miny; y < maxy - 1; y+=2) {
+        for (auto x = minx; x < maxx - 1; x+=2) {
+            if (likely(!get_no_check(tile_map, x, y))) {
                 continue;
             }
             int tx = (x & ~1);
@@ -162,10 +162,9 @@ void Level::display_lava (int fbo,
                 bry -= pixel_map_at.y;
             }
 
-            auto tile = get(lava,
-                            (x&~1) % LAVA_ACROSS,
-                            (y&~1) % LAVA_DOWN);
-                            // (y + (int)lava_step2/4) % LAVA_DOWN);
+            auto tile = get_no_check(lava,
+                                     (x&~1) % LAVA_ACROSS,
+                                     (y&~1) % LAVA_DOWN);
             auto x1 = tile->x1;
             auto x2 = tile->x2;
             auto y1 = tile->y1;

@@ -144,9 +144,9 @@ void Level::display_deep_water (int fbo,
     blit_fbo_bind(fbo_mask2);
     glBlendFunc(GL_ONE, GL_ZERO);
     auto tile_map = deep_water_tile_map;
-    for (auto y = miny; y < maxy; y+=2) {
-        for (auto x = minx; x < maxx; x+=2) {
-            if (likely(!get(tile_map, x, y))) {
+    for (auto y = miny; y < maxy - 1; y+=2) {
+        for (auto x = minx; x < maxx - 1; x+=2) {
+            if (likely(!get_no_check(tile_map, x, y))) {
                 continue;
             }
             int tx = (x & ~1);
@@ -163,10 +163,9 @@ void Level::display_deep_water (int fbo,
                 bry -= pixel_map_at.y;
             }
 
-            auto tile = get(deep_water,
-                            (x&~1) % WATER_ACROSS,
-                            (y&~1) % WATER_DOWN);
-                            // (y + (int)deep_water_step2/4) % WATER_DOWN);
+            auto tile = get_no_check(deep_water,
+                                     (x&~1) % WATER_ACROSS,
+                                     (y&~1) % WATER_DOWN);
             auto x1 = tile->x1;
             auto x2 = tile->x2;
             auto y1 = tile->y1;

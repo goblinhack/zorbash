@@ -32,8 +32,6 @@ void Thing::blit_wall_cladding (point &tl, point &br, const ThingTiles *tiles)
         point br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tl2.y -= dh;
-        br2.y -= dh;
         tile_blit(tiles->top1_tile, tl2, br2);
     }
 
