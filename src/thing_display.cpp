@@ -438,8 +438,7 @@ bool Thing::get_coords (point &blit_tl,
         }
     }
 
-    pre_effect_blit_tl = blit_tl;
-    pre_effect_blit_br = blit_br;
+    last_blit_at = ((blit_tl + blit_br) / 2);
 
     //
     // Boing.
@@ -586,8 +585,6 @@ bool Thing::get_map_offset_coords (point &blit_tl, point &blit_br,
         pre_effect_blit_tl.y -= dy;
         pre_effect_blit_br.x -= dx;
         pre_effect_blit_br.y -= dy;
-        last_pre_effect_blit_tl = pre_effect_blit_tl;
-        last_pre_effect_blit_br = pre_effect_blit_br;
     }
 
     return (blit);

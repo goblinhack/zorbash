@@ -160,10 +160,9 @@ public:
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
     point       last_attached;
-    point       last_blit_br;
-    point       last_blit_tl;        // Last blit coords
-    point       last_pre_effect_blit_br;
-    point       last_pre_effect_blit_tl;
+    point       last_blit_br;        // Last blit coords
+    point       last_blit_tl;        // Offset from top left of map
+    point       last_blit_at;        // Center of the above
     timestamp_t timestamp_next_frame {};
     uint16_t    tile_curr            {};
     uint8_t     alpha                {255}; // For fading

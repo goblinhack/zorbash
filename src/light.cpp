@@ -9,8 +9,6 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-static Texp g_light_overlay_tex;
-static int g_light_overlay_texid;
 static Texp g_bloom_overlay_tex;
 static int g_bloom_overlay_texid;
 
@@ -166,16 +164,16 @@ void Light::calculate (int last)
         }
     }
 
-    point blit_tl = owner->last_pre_effect_blit_tl;
-    point blit_br = owner->last_pre_effect_blit_br;
-    blit_tl += level->pixel_map_at;
-    blit_br += level->pixel_map_at;
-    point light_pos = (blit_tl + blit_br) / 2;
+    point light_pos = owner->last_blit_at;
 
-    if (cached_light_pos != light_pos) {
-	cached_gl_cmds.clear();
-	cached_pixel_map_at = level->pixel_map_at;
+    if (cached_light_pos == light_pos) {
+        if (cached_pixel_map_at == level->pixel_map_at) {
+            return;
+        }
     }
+
+    cached_gl_cmds.clear();
+    cached_pixel_map_at = level->pixel_map_at;
     cached_light_pos = light_pos;
 
     //
@@ -256,23 +254,18 @@ void Light::render_triangle_fans (int last, int count)
         return;
     }
 
-    point blit_tl = owner->last_pre_effect_blit_tl;
-    point blit_br = owner->last_pre_effect_blit_br;
-    blit_tl += level->pixel_map_at;
-    blit_br += level->pixel_map_at;
-    point light_pos = (blit_tl + blit_br) / 2;
+    point light_pos = owner->last_blit_at;
+    light_pos -= level->pixel_map_at;
 
     auto light_offset = cached_pixel_map_at - level->pixel_map_at;
 
-    blit_tl = owner->last_pre_effect_blit_tl;
-    blit_br = owner->last_pre_effect_blit_br;
-    light_pos = (blit_tl + blit_br) / 2;
-
+#if 0
     if (fbo == FBO_FULLMAP_LIGHT) {
         blit_tl += level->pixel_map_at;
         blit_br += level->pixel_map_at;
         gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
     }
+#endif
 
     if (!cached_gl_cmds.size()) {
         blit_init();
@@ -324,13 +317,12 @@ void Light::render_triangle_fans (int last, int count)
 
 void Light::render (int last, int count)
 {
-    if (!g_light_overlay_tex) {
-        g_light_overlay_tex = tex_load("", "light", GL_NEAREST);
-        g_light_overlay_texid = tex_get_gl_binding(g_light_overlay_tex);
+    if (!g_bloom_overlay_tex) {
         g_bloom_overlay_tex = tex_load("", "bloom", GL_NEAREST);
         g_bloom_overlay_texid = tex_get_gl_binding(g_bloom_overlay_tex);
     }
 
+    calculate(last);
     render_triangle_fans(last, count);
 }
 
