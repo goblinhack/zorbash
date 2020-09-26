@@ -190,6 +190,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(my.t->last_attached);
     in >> bits(my.t->last_blit_br);
     in >> bits(my.t->last_blit_tl);
+    in >> bits(my.t->last_blit_at);
     in >> bits(T); my.t->timestamp_next_frame = load(T);
     in >> bits(my.t->tile_curr);
     in >> bits(my.t->alpha);

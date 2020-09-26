@@ -141,6 +141,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     out << bits(my.t->last_attached);
     out << bits(my.t->last_blit_br);
     out << bits(my.t->last_blit_tl);
+    out << bits(my.t->last_blit_at);
     out << bits(my.t->timestamp_next_frame);
     out << bits(my.t->tile_curr);
     out << bits(my.t->alpha);
