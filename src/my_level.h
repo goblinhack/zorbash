@@ -80,7 +80,6 @@ public:
     bool                       map_changed {}; // Something moved on the map
     bool                       map_follow_player {};
     bool                       minimap_valid {};
-    bool                       lighting_valid {};
     fpoint                     cursor_at;
     fpoint                     cursor_at_old;
     fpoint                     map_at;        // map tile location

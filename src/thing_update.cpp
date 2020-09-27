@@ -30,10 +30,6 @@ void Thing::update_light (bool force)
         return;
     }
 
-    if (!level->lighting_valid) {
-        force = true;
-    }
-
     fpoint interp = get_interpolated_mid_at();
     point lit_at = make_point((int)(interp.x * TILE_WIDTH),
                               (int)(interp.y * TILE_HEIGHT)
@@ -45,6 +41,9 @@ void Thing::update_light (bool force)
     }
     set_last_lit_at(lit_at);
 
+    //
+    // Alow distant lights to fade
+    //
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
             auto l = level->is_lit_no_check(x, y);
@@ -54,6 +53,7 @@ void Thing::update_light (bool force)
         }
     }
 
+#if 0
     auto lc = get_light_count();
     size_t c = 0;
     for (auto l : get_light()) {
@@ -62,4 +62,5 @@ void Thing::update_light (bool force)
     }
 
     level->lighting_valid = true;
+#endif
 }

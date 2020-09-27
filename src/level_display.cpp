@@ -37,18 +37,12 @@ void Level::display (void)
     }
 
     if (player) {
-        if (!lighting_valid) {
-            player->update_light();
+        if (!minimap_valid) {
+            update_minimap();
         }
 
-        if (lighting_valid) {
-            if (!minimap_valid) {
-                update_minimap();
-            }
-
-            if (!heatmap_valid) {
-                update_heatmap();
-            }
+        if (!heatmap_valid) {
+            update_heatmap();
         }
     }
 }

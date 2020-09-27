@@ -195,12 +195,11 @@ void Light::calculate (int last)
             const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
             const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
 
+            if (level->is_oob(x, y)) { break; }
             if (do_set_visited) {
-                level->set_visited_no_check(x, y);
+                level->set_visited_no_check(x, y); // for AI and jumping
             }
-
-            level->set_is_lit_no_check(x, y);
-
+            level->set_is_lit_no_check(x, y); // allows lights to fade
             rp++;
 
 	    if (level->is_light_blocker_no_check(x, y)) {
@@ -216,11 +215,8 @@ void Light::calculate (int last)
 		    const int16_t p1y = light_pos.y + rp->p.y;
 		    const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
 		    const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
-
-		    if (!level->is_light_blocker_no_check(x, y)) {
-			break;
-		    }
-
+                    if (level->is_oob(x, y)) { break; }
+		    if (!level->is_light_blocker_no_check(x, y)) { break; }
 		    rp++;
 		}
 		step = step2;
