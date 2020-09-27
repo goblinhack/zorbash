@@ -101,7 +101,7 @@ bool Thing::ascend (void)
                 set_interpolated_mid_at(mid_at);
                 update_interpolated_position();
                 location_check();
-                update_light(true);
+                update_light();
 
                 if (is_player()) {
                     level->cursor->move_to_immediately(mid_at);

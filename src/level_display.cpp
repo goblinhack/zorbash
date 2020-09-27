@@ -53,6 +53,8 @@ void Level::display_map_bg_things (void)
     gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
+
     blit_fbo_bind(fbo);
     blit_init();
     glClear(GL_COLOR_BUFFER_BIT);
@@ -108,6 +110,7 @@ void Level::display_map_things (int fbo,
                                 const uint16_t maxx, const uint16_t maxy)
 {_
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
 
     blit_fbo_bind(fbo);
     blit_init();
@@ -159,6 +162,7 @@ void Level::display_map_fg_things (int fbo,
                                    const uint16_t maxx, const uint16_t maxy)
 {_
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
 
     blit_fbo_bind(fbo);
     blit_init();
@@ -296,9 +300,9 @@ void Level::display_map (void)
         //
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(DARKGREEN);
+        glcolor(GRAY40);
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-//        blit_fbo_inner(FBO_MAP_HIDDEN);
+        blit_fbo_inner(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
         glcolor(WHITE);
         if (player) {

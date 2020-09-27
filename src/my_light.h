@@ -44,7 +44,7 @@ public:
     void destroy();
     void destroyed(void);
     void reset(void);
-    void calculate(int last);
+    bool calculate(int last);
     void render_triangle_fans(int last, int count);
     void render(int last, int count);
     void draw_line(const int16_t index, const point &p0, const point &p1);                                    \

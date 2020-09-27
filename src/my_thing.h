@@ -72,7 +72,6 @@ public:
     float        fall_height = {};           // y offset for falling
     float        wobble = {};                // Fades when set
     fpoint       lunge_to;                   // When a monst attacks something
-    point        last_lit_at;                // Last light calculation
     int          bounce_count = {};
     int          gold = {};
     int          keys = {};
@@ -183,7 +182,6 @@ public:
     uint64_t inited_tiles:1            {};
     uint64_t is_attached:1             {};
     uint64_t is_being_destroyed:1      {};
-    uint64_t is_blit_pos:1             {};
     uint64_t is_blitted:1              {};
     uint64_t is_bouncing:1             {};
     uint64_t is_changing_level:1       {};
@@ -281,12 +279,10 @@ public:
     std::vector<Lightp> & get_light(void);
     void new_light(point offset, int strength, color col, int fbo);
     void delete_light(void);
+    void update_light(void);
 
     void set_lunge_to(fpoint);
     fpoint get_lunge_to(void) const;
-
-    void set_last_lit_at(point);
-    point get_last_lit_at(void) const;
 
     void set_bounce_height(float);
     float get_bounce_height(void) const;
@@ -1173,7 +1169,6 @@ public:
     void torch_tick();
     void unwield(const char *why);
     void update_interpolated_position(void);
-    void update_light(bool force = false);
     void update_pos(fpoint, bool immediately);
     void update_all(void);
     void use(void);
