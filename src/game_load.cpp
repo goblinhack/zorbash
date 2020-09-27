@@ -67,7 +67,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* float        fall_height               */ in >> bits(my.t->fall_height);
     /* float        wobble                    */ in >> bits(my.t->wobble);
     /* fpoint       lunge_to                  */ in >> bits(my.t->lunge_to);
-    /* fpoint       last_lit_at               */ in >> bits(my.t->last_lit_at);
     /* int          bounce_count              */ in >> bits(my.t->bounce_count);
     /* int          gold                      */ in >> bits(my.t->gold);
     /* int          lifespan                  */ in >> bits(my.t->lifespan);
@@ -213,7 +212,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->inited_tiles          = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_attached           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_being_destroyed    = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_blit_pos           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_blitted            = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_bouncing           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_changing_level     = (bits64 >> shift) & 1; shift++;

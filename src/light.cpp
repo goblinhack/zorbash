@@ -145,11 +145,14 @@ void Light::reset (void)
     cached_light_pos = point(-1, -1);
 }
 
-void Light::calculate (int last)
+bool Light::calculate (int last)
 {
     auto player = level->player;
     if (!player) {
-        return;
+        return false;
+    }
+    if (!player->is_blitted) {
+        return false;
     }
 
     //
@@ -157,10 +160,10 @@ void Light::calculate (int last)
     //
     if (!player->is_jumping) {
         if (player->is_hidden) {
-            return;
+            return false;
         }
         if (player->is_changing_level) {
-            return;
+            return false;
         }
     }
 
@@ -168,7 +171,19 @@ void Light::calculate (int last)
 
     if (cached_light_pos == light_pos) {
         if (cached_pixel_map_at == level->pixel_map_at) {
-            return;
+            return true;
+        }
+    }
+
+    //
+    // Alow distant lights to fade
+    //
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            auto l = level->is_lit_no_check(x, y);
+            if (l) {
+                level->set_is_lit_no_check(x, y, l - 1);
+            }
         }
     }
 
@@ -180,7 +195,7 @@ void Light::calculate (int last)
     // Walk the light rays in a circle. Find the nearest walls and then let
     // the light leak a little.
     //
-    bool do_set_visited = (player && (owner == player));
+    bool do_set_visited = last && (player && (owner == player));
 
     for (int16_t i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
@@ -225,6 +240,8 @@ void Light::calculate (int last)
 	}
 	r->depth_furthest = step;
     }
+
+    return true;
 }
 
 void Light::render_triangle_fans (int last, int count)
@@ -234,34 +251,15 @@ void Light::render_triangle_fans (int last, int count)
         return;
     }
 
-    //
-    // This stops lighting things up when moving to the player on a new level
-    //
-    if (!player->is_jumping) {
-        if (player->is_hidden) {
-            return;
-        }
-        if (player->is_changing_level) {
-            return;
-        }
-    }
-
-    if (!player->is_blit_pos) {
-        return;
-    }
-
     point light_pos = owner->last_blit_at;
     light_pos -= level->pixel_map_at;
 
     auto light_offset = cached_pixel_map_at - level->pixel_map_at;
 
-#if 0
     if (fbo == FBO_FULLMAP_LIGHT) {
-        blit_tl += level->pixel_map_at;
-        blit_br += level->pixel_map_at;
+        light_offset += level->pixel_map_at;
         gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
     }
-#endif
 
     if (!cached_gl_cmds.size()) {
         blit_init();
@@ -318,7 +316,9 @@ void Light::render (int last, int count)
         g_bloom_overlay_texid = tex_get_gl_binding(g_bloom_overlay_tex);
     }
 
-    calculate(last);
+    if (!calculate(last)) {
+        return;
+    }
     render_triangle_fans(last, count);
 }
 

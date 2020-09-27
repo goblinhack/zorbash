@@ -40,7 +40,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* float        fall_height               */ out << bits(my.t->fall_height);
     /* float        wobble                    */ out << bits(my.t->wobble);
     /* fpoint       lunge_to                  */ out << bits(my.t->lunge_to);
-    /* fpoint       last_lit_at               */ out << bits(my.t->last_lit_at);
     /* int          bounce_count              */ out << bits(my.t->bounce_count);
     /* int          gold                      */ out << bits(my.t->gold);
     /* int          lifespan                  */ out << bits(my.t->lifespan);
@@ -164,7 +163,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->inited_tiles          << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_attached           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_being_destroyed    << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_blit_pos           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_blitted            << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_bouncing           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_changing_level     << shift; shift++;

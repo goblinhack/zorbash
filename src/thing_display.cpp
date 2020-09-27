@@ -833,7 +833,6 @@ void Thing::blit (int fbo)
     }
 
     blit_internal(fbo, blit_tl, blit_br, tile, WHITE, false);
-    is_blit_pos = true;
 }
 
 void Thing::blit_upside_down (int fbo)

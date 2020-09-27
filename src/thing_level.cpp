@@ -149,13 +149,13 @@ void Thing::level_enter (void)
     // Make sure the light is refreshed.
     //
     if (is_player()) {
-        set_last_lit_at(point(-1, -1));
+        update_light();
     }
 
     //
     // Blit location is now invalid
     //
-    is_blit_pos = false;
+    is_blitted = false;
 
     //
     // Can be shown on screen again.

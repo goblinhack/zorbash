@@ -24,8 +24,6 @@ void Thing::init_lights (void)
         }
         level->player = this;
 
-        set_last_lit_at(point(-1, -1));
-
         //
         // keep the light strength half the tiles drawn or we get artifacts
         // at the edges of the fbo
@@ -33,11 +31,10 @@ void Thing::init_lights (void)
         color col = WHITE;
 
         int strength = is_light_strength();
-//        int ostrength = strength;
 //        int d1 = 1;
 //        int d2 = 2;
 
-//        new_light(point(0, 0), mid_at, ostrength, col, FBO_FULLMAP_LIGHT);
+        new_light(point(0, 0), strength, col, FBO_FULLMAP_LIGHT);
         new_light(point(0, 0), strength, col, FBO_LIGHT);
 
 #if 0
