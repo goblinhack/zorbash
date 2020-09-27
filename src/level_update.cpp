@@ -10,6 +10,5 @@
 void Level::update (void)
 {_
     minimap_valid = false;
-    lighting_valid = false;
     heatmap_valid = false;
 }
