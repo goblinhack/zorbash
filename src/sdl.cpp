@@ -1249,7 +1249,7 @@ void sdl_loop (void)
         auto update_slow = (timestamp_now - ui_timestamp_slow_last >=
                               UI_UPDATE_SLOW_MS);
         auto update_fast = (timestamp_now - ui_timestamp_fast_last >=
-                              UI_POLL_EVENTS_MS);
+                              UI_UPDATE_FAST_MS);
         //
         // Less frequent updates
         //
@@ -1264,6 +1264,7 @@ void sdl_loop (void)
                     //
                     // Not when console is in front
                     //
+                    wid_display_all();
                 } else {
                     //
                     // Must do this before wid_display_all so that the
@@ -1295,11 +1296,6 @@ void sdl_loop (void)
             // Clean up dead widgets.
             //
             wid_gc_all();
-
-            //
-            // Display UI.
-            //
-            wid_display_all();
 
             //
             // Read events

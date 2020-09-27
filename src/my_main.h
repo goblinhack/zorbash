@@ -45,7 +45,7 @@
 #define MAP_ROCK_BORDER            1    // Map rock border
 #define MAP_SLOTS                  32   // Max things per map slot
 #define MAP_WIDTH                  ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
-#define MAX_RAY_LIGHTING           720  // Max light rays cast
+#define MAX_RAY_LIGHTING           360  // Max light rays cast
 #define PARTICLE_SPEED_MS          400
 #define ROOM_HEIGHT                13
 #define ROOM_WIDTH                 13
@@ -99,7 +99,6 @@
 #define UI_MOUSE_DOUBLE_CLICK      500 // Double click time
 #define UI_MOUSE_WHEEL_SCALE       1.0 // How much the wheel mouse moves.
 #define UI_MOUSE_WHEEL_SCALE_MAX   10
-#define UI_POLL_EVENTS_MS          5
 #define UI_POPUP_TEXT_COLOR        UI_TEXT_COLOR
 #define UI_SCROLL_JOY_SCALE        1.0
 #define UI_SCROLL_JOY_SCALE_MAX    1.5
@@ -107,7 +106,8 @@
 #define UI_SIDEBAR_RIGHT_WIDTH     14
 #define UI_TEXT_COLOR              GRAY // Default text color
 #define UI_TEXT_COLOR_STR          "gray"
-#define UI_UPDATE_SLOW_MS          500 // FPS and game status
+#define UI_UPDATE_FAST_MS          5
+#define UI_UPDATE_SLOW_MS          50 // FPS and game status
 #define UI_WID_POPUP_WIDTH_NORMAL  24
 #define UI_WID_POPUP_WIDTH_WIDE    38
 #define UI_WID_POPUP_WIDTH_WIDEST  48

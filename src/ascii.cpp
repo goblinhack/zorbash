@@ -1138,10 +1138,9 @@ static void ascii_blit (void)
 
     tile_y = 0;
     for (y = 0; y < ASCII_HEIGHT; y++) {
-
         tile_x = 0;
         for (x = 0; x < ASCII_WIDTH; x++) {
-            const AsciiCell *cell = &getref(cells, x, y);
+            const AsciiCell *cell = &getref_no_check(cells, x, y);
 
             point tile_tl;
             point tile_br;
@@ -1204,12 +1203,7 @@ void ascii_clear_display (void)
 {_
     for (auto y = 0; y < ASCII_HEIGHT; y++) {
         for (auto x = 0; x < ASCII_WIDTH; x++) {
-#ifdef ENABLE_DEBUG_CRASH
-            AsciiCell *cell = &getref(cells, x, y);
-            *cell = {};
-#else
             cells[x][y] = {};
-#endif
         }
     }
 }

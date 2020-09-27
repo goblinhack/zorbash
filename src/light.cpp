@@ -167,23 +167,11 @@ bool Light::calculate (int last)
         }
     }
 
-    point light_pos = owner->last_blit_at;
+    point light_pos = owner->last_blit_at + offset;
 
     if (cached_light_pos == light_pos) {
         if (cached_pixel_map_at == level->pixel_map_at) {
             return true;
-        }
-    }
-
-    //
-    // Alow distant lights to fade
-    //
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-            auto l = level->is_lit_no_check(x, y);
-            if (l) {
-                level->set_is_lit_no_check(x, y, l - 1);
-            }
         }
     }
 
@@ -198,7 +186,7 @@ bool Light::calculate (int last)
     bool do_set_visited = last && (player && (owner == player));
 
     for (int16_t i = 0; i < max_light_rays; i++) {
-        auto r = &getref(ray, i);
+        auto r = &getref_no_check(ray, i);
         int16_t step = 0;
         const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
 	auto rp = points[i].begin();
@@ -252,7 +240,15 @@ void Light::render_triangle_fans (int last, int count)
         light_pos = cached_light_pos;
         gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
     } else {
-        light_pos -= level->pixel_map_at;
+        light_pos -= level->pixel_map_at  - offset;
+    }
+
+
+    if (offset != point(0, 0)) {
+        static color l(255, 255, 255, 50);
+        glcolor(l);
+    } else {
+        glcolor(WHITE);
     }
 
     if (!cached_gl_cmds.size()) {
@@ -266,7 +262,7 @@ void Light::render_triangle_fans (int last, int count)
             push_point(light_pos.x, light_pos.y);
 
             for (i = 0; i < max_light_rays; i++) {
-                auto r = &getref(ray, i);
+                auto r = &getref_no_check(ray, i);
                 point &p = points[i][r->depth_furthest].p;
                 int16_t p1x = light_pos.x + p.x;
                 int16_t p1y = light_pos.y + p.y;
@@ -277,7 +273,7 @@ void Light::render_triangle_fans (int last, int count)
             // Complete the circle with the first point again.
             //
             i = 0; {
-                auto r = &getref(ray, i);
+                auto r = &getref_no_check(ray, i);
                 point &p = points[i][r->depth_furthest].p;
                 int16_t p1x = light_pos.x + p.x;
                 int16_t p1y = light_pos.y + p.y;
@@ -319,7 +315,7 @@ void Light::render (int last, int count)
 
 void Level::lights_render (int minx, int miny, int maxx, int maxy,
                            int fbo)
-{
+{_
     if (player) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -384,4 +380,19 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
         }
     }
     blit_flush();
+}
+
+//
+// Alow distant lights to fade
+//
+void Level::lights_update (void)
+{_
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            auto l = is_lit_no_check(x, y);
+            if (l) {
+                set_is_lit_no_check(x, y, l - 1);
+            }
+        }
+    }
 }
