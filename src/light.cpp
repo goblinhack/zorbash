@@ -246,19 +246,13 @@ bool Light::calculate (int last)
 
 void Light::render_triangle_fans (int last, int count)
 {
-    auto player = level->player;
-    if (!player) {
-        return;
-    }
-
     point light_pos = owner->last_blit_at;
-    light_pos -= level->pixel_map_at;
-
-    auto light_offset = cached_pixel_map_at - level->pixel_map_at;
 
     if (fbo == FBO_FULLMAP_LIGHT) {
-        light_offset += level->pixel_map_at;
+        light_pos = cached_light_pos;
         gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
+    } else {
+        light_pos -= level->pixel_map_at;
     }
 
     if (!cached_gl_cmds.size()) {
@@ -298,6 +292,7 @@ void Light::render_triangle_fans (int last, int count)
     } else {
         auto *b = &(*cached_gl_cmds.begin());
         auto *e = &(*cached_gl_cmds.end());
+        auto light_offset = cached_pixel_map_at - level->pixel_map_at;
         glTranslatef(light_offset.x, light_offset.y, 0);
         blit_flush_triangle_fan(b, e);
         glTranslatef(-light_offset.x, -light_offset.y, 0);
