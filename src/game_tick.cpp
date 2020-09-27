@@ -14,6 +14,10 @@ void Game::tick_begin (const std::string &why)
     game->tick_current++;
     LOG("-");
     LOG("game tick %d begin (%s)", game->tick_current, why.c_str());
+
+    if (level) {
+        level->lights_update();
+    }
 }
 
 void Game::tick_end (void)
