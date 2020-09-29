@@ -1259,20 +1259,21 @@ void sdl_loop (void)
             //
             // Update status and sidebars
             //
-            if (game && !game->paused()) {
-                if (wid_console_window && wid_console_window->visible) {
-                    //
-                    // Not when console is in front
-                    //
+            if (game) {
+                if (game->paused()) {
                     wid_display_all();
                 } else {
-                    //
-                    // Must do this before wid_display_all so that the
-                    // on screen widgets are updated with the new wid
-                    // we are about to make.
-                    //
-                    game_status_wid_init();
-                    wid_display_all();
+                    if (wid_console_window && wid_console_window->visible) {
+                        wid_display_all();
+                    } else {
+                        //
+                        // Must do this before wid_display_all so that the
+                        // on screen widgets are updated with the new wid
+                        // we are about to make.
+                        //
+                        game_status_wid_init();
+                        wid_display_all();
+                    }
                 }
             }
 

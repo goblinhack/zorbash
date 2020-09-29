@@ -5038,7 +5038,6 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
     return nullptr;
 }
 
-#define ENABLE_DEBUG_GFX_GL_BLEND
 #ifdef ENABLE_DEBUG_GFX_GL_BLEND
 int vals[] = {
     GL_ZERO,

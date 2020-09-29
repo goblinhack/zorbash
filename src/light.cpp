@@ -211,9 +211,9 @@ bool Light::calculate (int last)
                 // we reach the light limit.
 		//
 		int16_t step2 = step;
-		for (; step2 < step + TILE_WIDTH - 1; step2++) {
+                for (;;) {
 		    if (step2 >= end_of_points) { break; }
-		    if (rp->distance > strength) { break; }
+		    if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
 		    const int16_t p1x = light_pos.x + rp->p.x;
 		    const int16_t p1y = light_pos.y + rp->p.y;
 		    const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
@@ -221,6 +221,7 @@ bool Light::calculate (int last)
                     if (level->is_oob(x, y)) { break; }
 		    if (!level->is_light_blocker_no_check(x, y)) { break; }
 		    rp++;
+                    step2++;
 		}
 		step = step2;
 		break;
