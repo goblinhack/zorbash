@@ -31,11 +31,29 @@ void Thing::init_lights (void)
         color col = WHITE;
 
         int strength = is_light_strength();
-        int d1 = 2;
-        int d2 = 3;
+        int d1 = 1;
+        int d2 = 2;
 
         new_light(point(0, 0), strength, col, FBO_FULLMAP_LIGHT);
         new_light(point(0, 0), strength, col, FBO_LIGHT);
+
+        new_light(point(-d1, -d1), strength, col, FBO_LIGHT);
+        new_light(point( d1, -d1), strength, col, FBO_LIGHT);
+        new_light(point(-d1,  d1), strength, col, FBO_LIGHT);
+        new_light(point( d1,  d1), strength, col, FBO_LIGHT);
+
+        new_light(point(-d2, -d1), strength, col, FBO_LIGHT);
+        new_light(point( d2, -d1), strength, col, FBO_LIGHT);
+        new_light(point(-d2,  d1), strength, col, FBO_LIGHT);
+        new_light(point( d2,  d1), strength, col, FBO_LIGHT);
+
+        new_light(point(-d1, -d2), strength, col, FBO_LIGHT);
+        new_light(point( d1, -d2), strength, col, FBO_LIGHT);
+        new_light(point(-d1,  d2), strength, col, FBO_LIGHT);
+        new_light(point( d1,  d2), strength, col, FBO_LIGHT);
+
+        d1 = 3;
+        d2 = 5;
 
         new_light(point(-d1, -d1), strength, col, FBO_LIGHT);
         new_light(point( d1, -d1), strength, col, FBO_LIGHT);
