@@ -5,7 +5,6 @@ import tp
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
-    x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_gfx_shown_in_bg(True)
@@ -18,7 +17,14 @@ def tp_init(name, text_name):
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    x.set_tile(tile=name + ".1-closed")
+    x.set_tile(tile=name + ".1")
+    x.set_tile(tile=name + ".2")
+    x.set_tile(tile=name + ".3")
+    x.set_tile(tile=name + ".4")
+    x.set_tile(tile=name + ".5")
+    x.set_tile(tile=name + ".6")
+    x.set_tile(tile=name + ".7")
+    x.set_tile(tile=name + ".8")
 
     x.update()
 
