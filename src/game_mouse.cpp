@@ -112,7 +112,9 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
     if (level->timestamp_dungeon_created &&
       time_have_x_tenths_passed_since(10, level->timestamp_dungeon_created)) {
         if (level->cursor) {_
-            level->cursor->visible();
+            if (level->player && !level->player->is_dead) {
+                level->cursor->visible();
+            }
         }
     }
 
