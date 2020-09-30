@@ -62,6 +62,7 @@ void gl_leave_2_5d_mode(void);
 void blit_flush(void);
 void blit_flush_triangle_fan(void);
 void blit_flush_triangle_fan(float *begin, float *end);
+void blit_flush_colored_triangle_fan(void);
 void blit_flush_colored_triangle_fan(float *begin, float *end);
 void blit_fini(void);
 void gl_blitquad(GLushort tlx, GLushort tly, GLushort brx, GLushort bry);
@@ -179,10 +180,10 @@ extern GLushort glapi_last_bottom;
 
 #define push_colored_point(x1, y1, r1, g1, b1, a1) \
 { \
-    gl_push_point(bufp, \
-                  bufp_end, \
-                  x1, y1, \
-                  r1, g1, b1, a1); \
+    gl_push_colored_point(bufp, \
+                          bufp_end, \
+                          x1, y1, \
+                          r1, g1, b1, a1); \
 } \
 
 #define push_point(x1, y1) \

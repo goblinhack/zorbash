@@ -88,7 +88,17 @@ void Game::dead_select (const char *reason)
         wid_dead_destroy();
     }
 
-    game->soft_pause();
+    if (time_get_time_ms_cached() < level->player->get_timestamp_move_end()) {
+        //
+        // Allow the dead player move to finish and then pause.
+        //
+    } else {
+        //
+        // Stop everything. A moment of silence please.
+        //
+        game->soft_pause();
+    }
+
     game->level->scroll_map_to_player();
     game->level->cursor->hide();
 

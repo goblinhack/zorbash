@@ -17,6 +17,9 @@ bool Thing::exit_tick (void)
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
+        is_waiting_to_ascend || 
+        is_waiting_to_descend || 
+        is_waiting_to_fall || 
         is_jumping) { 
         return false;
     }
@@ -37,9 +40,13 @@ bool Thing::exit_tick (void)
         return false;
     }
 
-    level->timestamp_fade_out_begin = time_get_time_ms_cached();
-    is_waiting_to_descend = true;
-    return true;
+    if (is_player()) {
+        level->timestamp_fade_out_begin = time_get_time_ms_cached();
+        is_waiting_to_descend = true;
+        return true;
+    } else {
+        return descend();
+    }
 }
 
 bool Thing::descend (void)
@@ -47,6 +54,8 @@ bool Thing::descend (void)
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
+        is_waiting_to_ascend || 
+        is_waiting_to_fall || 
         is_jumping) { 
         return false;
     }
@@ -126,11 +135,19 @@ bool Thing::descend (void)
 
                 is_changing_level = false;
                 log("moved to next level entrance");
+                if (is_player()) {
+                    level->timestamp_fade_in_begin = time_get_time_ms_cached();
+                    level->update();
+                }
                 return true;
             }
         }
     }
 
     game->tick_begin("descend to new level");
+    if (is_player()) {
+        level->timestamp_fade_in_begin = time_get_time_ms_cached();
+        level->update();
+    }
     return true;
 }

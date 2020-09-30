@@ -15,6 +15,9 @@ void Thing::lava_tick (void)
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
+        is_waiting_to_ascend || 
+        is_waiting_to_descend || 
+        is_waiting_to_fall || 
         is_jumping) { 
         return;
     }
@@ -23,7 +26,8 @@ void Thing::lava_tick (void)
         return;
     }
 
-    if (!level->is_lava(mid_at.x, mid_at.y)) {
+    fpoint at = get_interpolated_mid_at();
+    if (!level->is_lava(at.x, at.y)) {
         return;
     }
 

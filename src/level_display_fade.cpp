@@ -24,6 +24,7 @@ void Level::display_fade_out (void)
     float step = RAD_360 / (float) lines;
     float ts = (float)(time_get_time_ms_cached() - timestamp_fade_out_begin) / LEVEL_FADE_OUT_MS;
     float rad = (1.0 - ts) * (float) game->config.inner_pix_width / 2;
+    float a = (1.0 - ts) * 255;
 
     blit_init();
 
@@ -32,12 +33,12 @@ void Level::display_fade_out (void)
     //
     // Walk the light rays in a circle.
     //
-    push_point(at.x, at.y);
+    push_colored_point(at.x, at.y, 255, 255, 255, 255);
 
     for (float th = 0; th < RAD_360; th += step) {
         int16_t p1x = at.x + rad * cos(th);
         int16_t p1y = at.y + rad * sin(th);
-        push_point(p1x, p1y);
+        push_colored_point(p1x, p1y, a, a, a, a);
     }
 
     //
@@ -47,10 +48,10 @@ void Level::display_fade_out (void)
         float th = 0;
         int16_t p1x = at.x + rad * cos(th);
         int16_t p1y = at.y + rad * sin(th);
-        push_point(p1x, p1y);
+        push_colored_point(p1x, p1y, a, a, a, a);
     }
 
-    blit_flush_triangle_fan();
+    blit_flush_colored_triangle_fan();
     blit_fbo_unbind();
 }
 
@@ -69,6 +70,7 @@ void Level::display_fade_in (void)
     float step = RAD_360 / (float) lines;
     float ts = (float)(time_get_time_ms_cached() - timestamp_fade_in_begin) / LEVEL_FADE_IN_MS;
     float rad = ts * (float) game->config.inner_pix_width / 2;
+    float a = ts * 255;
 
     blit_init();
 
@@ -77,12 +79,12 @@ void Level::display_fade_in (void)
     //
     // Walk the light rays in a circle.
     //
-    push_point(at.x, at.y);
+    push_colored_point(at.x, at.y, 255, 255, 255, 255);
 
     for (float th = 0; th < RAD_360; th += step) {
         int16_t p1x = at.x + rad * cos(th);
         int16_t p1y = at.y + rad * sin(th);
-        push_point(p1x, p1y);
+        push_colored_point(p1x, p1y, a, a, a, a);
     }
 
     //
@@ -92,9 +94,9 @@ void Level::display_fade_in (void)
         float th = 0;
         int16_t p1x = at.x + rad * cos(th);
         int16_t p1y = at.y + rad * sin(th);
-        push_point(p1x, p1y);
+        push_colored_point(p1x, p1y, a, a, a, a);
     }
 
-    blit_flush_triangle_fan();
+    blit_flush_colored_triangle_fan();
     blit_fbo_unbind();
 }
