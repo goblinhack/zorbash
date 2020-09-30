@@ -29,16 +29,17 @@ bool Thing::exit_tick (void)
         return false;
     }
 
-    if (get_tick() - get_tick_last_level_change() <= 1) {
+    if (!level->is_exit(mid_at.x, mid_at.y)) {
         return false;
     }
 
-    if (level->is_exit(mid_at.x, mid_at.y)) {
-        level->timestamp_fade_out_begin = time_get_time_ms_cached();
-        is_waiting_to_descend = true;
-        return true;
+    if (get_tick() - get_tick_last_level_change() < 1) {
+        return false;
     }
-    return false;
+
+    level->timestamp_fade_out_begin = time_get_time_ms_cached();
+    is_waiting_to_descend = true;
+    return true;
 }
 
 bool Thing::descend (void)
@@ -66,7 +67,7 @@ bool Thing::descend (void)
     //
     // No level change if too rapid
     //
-    if (get_tick() - get_tick_last_level_change() <= 1) {
+    if (get_tick() - get_tick_last_level_change() < 1) {
         return false;
     }
 
@@ -130,6 +131,6 @@ bool Thing::descend (void)
         }
     }
 
-    log("moved to new level entrance");
+    game->tick_begin("descend to new level");
     return true;
 }
