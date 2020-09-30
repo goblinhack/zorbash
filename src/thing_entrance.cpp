@@ -29,11 +29,15 @@ bool Thing::entrance_tick (void)
         return false;
     }
 
+    if (get_tick() - get_tick_last_level_change() <= 1) {
+        return false;
+    }
+
     if (level->world_at.z > 1) {
         if (level->is_entrance(mid_at.x, mid_at.y)) {
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
             is_waiting_to_ascend = true;
-            return ascend();
+            return true;
         }
     }
     return false;
