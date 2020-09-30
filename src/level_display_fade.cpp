@@ -18,7 +18,7 @@ void Level::display_fade_out (void)
 
     point at(game->config.inner_pix_width / 2, game->config.inner_pix_height / 2);
     if (player) {
-        at = player->last_blit_at - pixel_map_at;
+        at = ((player->last_blit_tl + player->last_blit_br) / 2);
     }
     int lines = 1000;
     float step = RAD_360 / (float) lines;
@@ -62,7 +62,7 @@ void Level::display_fade_in (void)
 
     point at(game->config.inner_pix_width / 2, game->config.inner_pix_height / 2);
     if (player) {
-        at = player->last_blit_at - pixel_map_at;
+        at = ((player->last_blit_tl + player->last_blit_br) / 2);
     }
 
     int lines = 1000;

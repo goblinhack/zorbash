@@ -220,6 +220,14 @@ bool Thing::fall_to_next_level (void)
             next_level->scroll_map_to_player();
             update_light();
 
+            //
+            // Update the z depth when falling
+            // 
+            level_pop();
+            is_falling = false;
+            update_interpolated_position();
+            level_push();
+
             log("finished fall to next level");
             return true;
         }
