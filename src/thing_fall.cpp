@@ -228,7 +228,7 @@ bool Thing::fall_to_next_level (void)
             update_interpolated_position();
             level_push();
 
-            log("finished fall to next level");
+            game->tick_begin("finished fall to next level");
             return true;
         }
 
