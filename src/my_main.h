@@ -40,6 +40,8 @@
 #define LEVELS_DEEP                32
 #define LEVELS_DOWN                MAP_HEIGHT
 #define LEVELS_MONST_COUNT         100
+#define LEVEL_FADE_OUT_MS          500
+#define LEVEL_FADE_IN_MS           800
 #define MAP_BORDER                 10   // Room border padding
 #define MAP_HEIGHT                 ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 #define MAP_ROCK_BORDER            1    // Map rock border

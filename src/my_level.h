@@ -63,6 +63,8 @@ public:
     //
     timestamp_t                timestamp_dungeon_created {};
     timestamp_t                timestamp_dungeon_saved {};
+    timestamp_t                timestamp_fade_out_begin {};
+    timestamp_t                timestamp_fade_in_begin {};
 
     //
     // Where we are in the world
@@ -267,6 +269,8 @@ public:
     void display(void);
     void display_anim(void);
     void display_blood(void);
+    void display_fade_out(void);
+    void display_fade_in(void);
     void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map(void);

@@ -162,9 +162,6 @@ bool Light::calculate (int last)
         if (player->is_hidden) {
             return false;
         }
-        if (player->is_changing_level) {
-            return false;
-        }
     }
 
     point light_pos = owner->last_blit_at + offset;

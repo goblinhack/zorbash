@@ -256,6 +256,8 @@ placed_player:
 
         break;
     }
+
+    timestamp_fade_in_begin = time_get_time_ms_cached();
 }
 
 void Level::place_walls (Dungeonp d, int variant, int block_width,

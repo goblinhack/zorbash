@@ -182,6 +182,9 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_sleeping           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_starving           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_tick_done          << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_waiting_to_fall    << shift; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -213,6 +216,8 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t->timestamp_dungeon_created);
     timestamp_t timestamp_dungeon_saved = time_get_time_ms();
     out << bits(timestamp_dungeon_saved);
+    out << bits(my.t->timestamp_fade_out_begin);
+    out << bits(my.t->timestamp_fade_in_begin);
 
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};          */ out << bits(my.t->_is_light_blocker);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {}; */ out << bits(my.t->_is_movement_blocking_hard);

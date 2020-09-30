@@ -448,6 +448,7 @@ void fbo_get_size (int fbo, int &w, int &h)
         case FBO_MASK3:
         case FBO_MASK4:
         case FBO_LIGHT:
+        case FBO_FADE:
             w = game->config.inner_pix_width;
             h = game->config.inner_pix_height;
             break;
