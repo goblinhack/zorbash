@@ -71,6 +71,53 @@ void Thing::move_carried_items (void)
         }
     }
 }
+void Thing::move_carried_items_immediately (void)
+{_
+    //
+    // Light source follows the thing.
+    //
+    update_light();
+
+    //
+    // Weapons follow also.
+    //
+    if (get_weapon_id_carry_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_carry_anim());
+        if (w) {
+            w->move_to_immediately(mid_at);
+            w->dir = dir;
+        }
+    }
+
+    if (get_weapon_id_use_anim().ok()) {
+        auto w = level->thing_find(get_weapon_id_use_anim());
+        if (w) {
+            w->move_to_immediately(mid_at);
+            w->dir = dir;
+        }
+    }
+
+    //
+    // Move carried items too as when we attack, we will use say the
+    // carried sword and so it had better be in the same location.
+    //
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (o) {
+            o->move_to_immediately(mid_at);
+            o->dir = dir;
+        }
+    }
+
+    auto on_fire_anim_id = get_on_fire_anim_id();
+    if (on_fire_anim_id.ok()) {_
+        auto w = level->thing_find(on_fire_anim_id);
+        if (w) {
+            w->move_to_immediately(mid_at);
+            w->dir = dir;
+        }
+    }
+}
 
 bool Thing::is_carrying_item (void)
 {_

@@ -101,6 +101,7 @@ bool Thing::descend (void)
                 level_change(l);
                 set_tick_last_level_change(get_tick());
                 move_to_immediately(fpoint(x, y));
+                move_carried_items_immediately();
                 if (is_player()) {
                     l->player = this;
                     l->scroll_map_to_player();

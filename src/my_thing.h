@@ -1156,6 +1156,7 @@ public:
     void minicon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void minicon_(const char *fmt, va_list args) const; // compile error without
     void move_carried_items(void);
+    void move_carried_items_immediately(void);
     void move_delta(fpoint);
     void move_finish(void);
     void move_set_dir_from_delta(fpoint);
