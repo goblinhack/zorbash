@@ -30,16 +30,6 @@ void Level::display (void)
 
     display_external_particles();
 
-    if (player) {
-        if (!minimap_valid) {
-            update_minimap();
-        }
-
-        if (!heatmap_valid) {
-            update_heatmap();
-        }
-    }
-
     if (!bg_valid) {
         g_render_black_and_white = true;
         display_map_bg_things();
@@ -50,6 +40,16 @@ void Level::display (void)
         //
         if (timestamp_fade_in_begin) {
             timestamp_fade_in_begin = time_get_time_ms_cached();
+        }
+    }
+
+    if (player) {
+        if (!minimap_valid) {
+            update_minimap();
+        }
+
+        if (!heatmap_valid) {
+            update_heatmap();
         }
     }
 }
@@ -232,11 +232,9 @@ void Level::display_map (void)
     bool level_fade_out_finished = false;
 
     if (fade_out) {
-        log("fading out level");
-        if (time_get_time_ms_cached() < timestamp_fade_out_begin) {
-            timestamp_fade_out_begin = 0;
-        }
-        if (time_get_time_ms_cached() - timestamp_fade_out_begin > LEVEL_FADE_OUT_MS) {
+        if ((time_get_time_ms_cached() < timestamp_fade_out_begin) ||
+            (time_get_time_ms_cached() - timestamp_fade_out_begin > LEVEL_FADE_OUT_MS)) {
+            minimap_valid = false;
             timestamp_fade_out_begin = 0;
             level_fade_out_finished = true;
             log("fade out of level finished");
@@ -244,11 +242,9 @@ void Level::display_map (void)
     }
 
     if (fade_in) {
-        log("fading in level");
-        if (time_get_time_ms_cached() < timestamp_fade_in_begin) {
-            timestamp_fade_in_begin = 0;
-        }
-        if (time_get_time_ms_cached() - timestamp_fade_in_begin > LEVEL_FADE_IN_MS) {
+        if ((time_get_time_ms_cached() < timestamp_fade_in_begin) ||
+            (time_get_time_ms_cached() - timestamp_fade_in_begin > LEVEL_FADE_IN_MS)) {
+            minimap_valid = false;
             timestamp_fade_in_begin = 0;
             log("fade in of level finished");
         }

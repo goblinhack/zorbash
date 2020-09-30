@@ -18,6 +18,9 @@ _
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
+        is_waiting_to_ascend || 
+        is_waiting_to_descend || 
+        is_waiting_to_fall || 
         is_jumping) { 
         is_tick_done = true;
         log("skip achieve goals in life");
@@ -147,6 +150,8 @@ void Thing::tick (void)
     //}
     g_thing_callframes_depth = callframes_depth;
 
+    update_interpolated_position();
+
     if (unlikely(is_dead)) {
         if (unlikely(is_resurrectable())) {
             //
@@ -164,8 +169,6 @@ void Thing::tick (void)
         }
         return;
     }
-
-    update_interpolated_position();
 
     if (unlikely(is_dead)) {
         if (is_loggable_for_unimportant_stuff()) {

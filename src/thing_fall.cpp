@@ -13,6 +13,9 @@ void Thing::fall (float fall_height, timestamp_t ms)
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
+        is_waiting_to_ascend || 
+        is_waiting_to_descend || 
+        is_waiting_to_fall || 
         is_jumping) { 
         return;
     }
@@ -229,6 +232,10 @@ bool Thing::fall_to_next_level (void)
             level_push();
 
             game->tick_begin("finished fall to next level");
+            if (is_player()) {
+                level->timestamp_fade_in_begin = time_get_time_ms_cached();
+                level->update();
+            }
             return true;
         }
 

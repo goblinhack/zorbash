@@ -653,6 +653,11 @@ void blit_flush_triangle_fan (void)
     blit_flush_triangle_fan(gl_array_buf, bufp);
 }
 
+void blit_flush_colored_triangle_fan (void)
+{_
+    blit_flush_colored_triangle_fan(gl_array_buf, bufp);
+}
+
 void blit_flush_colored_triangle_fan (float *b, float *e)
 {_
     glEnableClientState(GL_VERTEX_ARRAY);
