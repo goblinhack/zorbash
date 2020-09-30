@@ -30,12 +30,6 @@ void Level::display (void)
 
     display_external_particles();
 
-    if (!bg_valid) {
-        g_render_black_and_white = true;
-        display_map_bg_things();
-        g_render_black_and_white = false;
-    }
-
     if (player) {
         if (!minimap_valid) {
             update_minimap();
@@ -43,6 +37,19 @@ void Level::display (void)
 
         if (!heatmap_valid) {
             update_heatmap();
+        }
+    }
+
+    if (!bg_valid) {
+        g_render_black_and_white = true;
+        display_map_bg_things();
+        g_render_black_and_white = false;
+
+        //
+        // Reset the fade in timestamp as the above is a bit slow
+        //
+        if (timestamp_fade_in_begin) {
+            timestamp_fade_in_begin = time_get_time_ms_cached();
         }
     }
 }
@@ -219,9 +226,37 @@ void Level::display_map (void)
     scroll_map_set_target();
     scroll_map();
 
+    bool fade_out = timestamp_fade_out_begin != 0;
+    bool fade_in = timestamp_fade_in_begin != 0;
+    bool frozen = player ? player->is_changing_level : false;
+    bool level_fade_out_finished = false;
+
+    if (fade_out) {
+        log("fading out level");
+        if (time_get_time_ms_cached() < timestamp_fade_out_begin) {
+            timestamp_fade_out_begin = 0;
+        }
+        if (time_get_time_ms_cached() - timestamp_fade_out_begin > LEVEL_FADE_OUT_MS) {
+            timestamp_fade_out_begin = 0;
+            level_fade_out_finished = true;
+            log("fade out of level finished");
+        }
+    }
+
+    if (fade_in) {
+        log("fading in level");
+        if (time_get_time_ms_cached() < timestamp_fade_in_begin) {
+            timestamp_fade_in_begin = 0;
+        }
+        if (time_get_time_ms_cached() - timestamp_fade_in_begin > LEVEL_FADE_IN_MS) {
+            timestamp_fade_in_begin = 0;
+            log("fade in of level finished");
+        }
+    }
+
     pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
-    {_
+    if (!fade_out && !frozen) {_
         //
         // Generate an FBO with all light sources merged together
         //
@@ -235,7 +270,7 @@ void Level::display_map (void)
                       FBO_FULLMAP_LIGHT);
     }
 
-    {_
+    if (!fade_out && !frozen) {_
         //
         // Generate the non visited map with the light inverted on it
         // to hide visible areas
@@ -278,7 +313,7 @@ void Level::display_map (void)
         blit_fbo_inner(FBO_LIGHT);
     }
 
-    {_
+    if (!fade_out && !frozen) {_
         //
         // Generate the currently visible map
         //
@@ -300,17 +335,28 @@ void Level::display_map (void)
         //
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(GRAY30);
+        glcolor(GRAY50);
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
         blit_fbo_inner(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
         glcolor(WHITE);
-        if (player) {
-            if (!player->is_changing_level) {
-                blit_fbo_inner(FBO_MAP_VISIBLE);
-            }
+        blit_fbo_inner(FBO_MAP_VISIBLE);
+
+        if (fade_out) {
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            display_fade_out();
+            blit_fbo_bind(FBO_MAP);
+            glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
+            blit_fbo_inner(FBO_FADE);
         }
 
+        if (fade_in) {
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            display_fade_in();
+            blit_fbo_bind(FBO_MAP);
+            glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
+            blit_fbo_inner(FBO_FADE);
+        }
     }
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -324,6 +370,34 @@ void Level::display_map (void)
     display_blood();
 
     blit_fbo_unbind();
+
+    if (level_fade_out_finished) {
+        log("level fade out finished");
+
+        blit_fbo_bind(FBO_MAP_HIDDEN);
+        glClear(GL_COLOR_BUFFER_BIT);
+        blit_fbo_bind(FBO_MAP_VISIBLE);
+        glClear(GL_COLOR_BUFFER_BIT);
+        blit_fbo_bind(FBO_FULLMAP);
+        glClear(GL_COLOR_BUFFER_BIT);
+        blit_fbo_bind(FBO_FULLMAP_LIGHT);
+        glClear(GL_COLOR_BUFFER_BIT);
+        blit_fbo_bind(FBO_LIGHT);
+        glClear(GL_COLOR_BUFFER_BIT);
+        blit_fbo_bind(FBO_MAP);
+        glClear(GL_COLOR_BUFFER_BIT);
+        blit_fbo_unbind();
+
+        if (player && player->is_waiting_to_ascend) {
+            player->ascend();
+        }
+        if (player && player->is_waiting_to_descend) {
+            player->descend();
+        }
+        if (player && player->is_waiting_to_fall) {
+            player->fall_to_next_level();
+        }
+    }
 }
 
 void Level::display_anim (void)

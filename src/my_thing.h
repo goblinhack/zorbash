@@ -201,6 +201,9 @@ public:
     uint64_t is_sleeping:1             {};
     uint64_t is_starving:1             {};
     uint64_t is_tick_done:1            {}; // has moved/hit and finished its move
+    uint64_t is_waiting_to_ascend:1    {};
+    uint64_t is_waiting_to_descend:1   {};
+    uint64_t is_waiting_to_fall:1      {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

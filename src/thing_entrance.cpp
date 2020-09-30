@@ -31,6 +31,8 @@ bool Thing::entrance_tick (void)
 
     if (level->world_at.z > 1) {
         if (level->is_entrance(mid_at.x, mid_at.y)) {
+            level->timestamp_fade_out_begin = time_get_time_ms_cached();
+            is_waiting_to_ascend = true;
             return ascend();
         }
     }

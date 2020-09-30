@@ -231,6 +231,9 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->is_sleeping           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_starving           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_tick_done          = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_waiting_to_ascend  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_waiting_to_descend = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_waiting_to_fall    = (bits64 >> shift) & 1; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -273,6 +276,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     new_timestamp_dungeon_created = time_get_time_ms() - dungeon_age;
     l->timestamp_dungeon_created = new_timestamp_dungeon_created;
     l->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
+    in >> bits(l->timestamp_fade_out_begin);
+    in >> bits(l->timestamp_fade_in_begin);
 
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};          */ in >> bits(my.t->_is_light_blocker);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {}; */ in >> bits(my.t->_is_movement_blocking_hard);

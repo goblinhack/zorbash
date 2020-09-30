@@ -30,7 +30,9 @@ bool Thing::exit_tick (void)
     }
 
     if (level->is_exit(mid_at.x, mid_at.y)) {
-        return descend();
+        level->timestamp_fade_out_begin = time_get_time_ms_cached();
+        is_waiting_to_descend = true;
+        return true;
     }
     return false;
 }

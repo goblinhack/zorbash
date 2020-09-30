@@ -18,8 +18,6 @@ bool Thing::location_check (void)
         return (false);
     }
 
-    log("location check");
-
     //
     // Put chasm checks first as you can still fall when dead!
     //

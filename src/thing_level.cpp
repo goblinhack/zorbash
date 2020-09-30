@@ -160,7 +160,10 @@ void Thing::level_enter (void)
     //
     // Can be shown on screen again.
     //
-    is_changing_level = false;
+    is_changing_level     = false;
+    is_waiting_to_ascend  = false;
+    is_waiting_to_descend = false;
+    is_waiting_to_fall    = false;
 }
 
 void Thing::level_leave (void)
