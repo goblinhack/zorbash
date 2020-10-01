@@ -751,12 +751,6 @@ public:
     int get_resurrect(void) const;
     const Dice& get_resurrect_dice(void) const;
 
-    bool try_to_jump(void);
-    bool try_harder_to_jump(void);
-    bool try_to_jump(point p);
-    bool try_to_escape(void);
-    void jump_end(void);
-
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
@@ -779,6 +773,7 @@ public:
     bool ascend(void);
     bool attack(Thingp it);
     bool attack(fpoint future_pos);
+    bool carry(Thingp w);
     bool chasm_tick();
     bool collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
@@ -795,6 +790,8 @@ public:
     bool collision_obstacle(fpoint);
     bool cursor_path_pop_next_and_move(void);
     bool descend(void);
+    bool drop(Thingp w);
+    bool drop(Thingp w, Thingp target);
     bool eat(Thingp it);
     bool entrance_tick();
     bool exit_tick();
@@ -816,6 +813,7 @@ public:
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
     bool open_door(Thingp door);
+    bool particle_anim_exists(void);
     bool possible_to_attack(const Thingp it);
     bool spawn_fire(const std::string& what);
     bool spawn_next_to(const std::string& what);
@@ -823,6 +821,11 @@ public:
     bool spawn_under(const std::string& what);
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);
+    bool try_harder_to_jump(void);
+    bool try_to_carry(Thingp w);
+    bool try_to_escape(void);
+    bool try_to_jump(point p);
+    bool try_to_jump(void);
     bool use(Thingp w);
     bool will_avoid(const Thingp it) const;
     bool will_avoid(const point p) const;
@@ -890,6 +893,7 @@ public:
     int is_acid_hater(void) const;
     int is_active(void) const;
     int is_alive_monst(void) const;
+    int is_attack_blood(void) const;
     int is_attack_eater(void) const;
     int is_attack_lunge(void) const;
     int is_attack_shove(void) const;
@@ -899,13 +903,11 @@ public:
     int is_bag(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
-    int is_attack_blood(void) const;
     int is_chasm(void) const;
     int is_collect_as_keys(void) const;
     int is_collectable(void) const;
     int is_combustible(void) const;
     int is_corpse(void) const;
-    int on_death_is_corpse(void) const;
     int is_corridor(void) const;
     int is_cursor(void) const;
     int is_cursor_can_hover_over(void) const;
@@ -934,6 +936,7 @@ public:
     int is_gfx_health_bar_shown(void) const;
     int is_gfx_health_bar_shown_only_when_injured(void) const;
     int is_gfx_moves_ahead_shown(void) const;
+    int is_gfx_shown_in_bg(void) const;
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hit_by(Thingp hitter);
@@ -967,7 +970,6 @@ public:
     int is_movement_blocking_soft(void) const;
     int is_msg(void) const;
     int is_no_tile(void) const;
-    int on_death_is_open(void) const;
     int is_player(void) const;
     int is_potion(void) const;
     int is_potion_eater(void) const;
@@ -1036,9 +1038,6 @@ public:
     int is_rrr61(void) const;
     int is_rrr62(void) const;
     int is_rrr63(void) const;
-    int is_gfx_shown_in_bg(void) const;
-    int on_death_drop_all_items(void) const;
-    int is_steal_item_chance_d1000(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int is_rrr9(void) const;
@@ -1051,6 +1050,7 @@ public:
     int is_slime_eater(void) const;
     int is_slime_parent(void) const;
     int is_smoke(void) const;
+    int is_steal_item_chance_d1000(void) const;
     int is_the_grid(void) const;
     int is_throwable(void) const;
     int is_torch(void) const;
@@ -1066,6 +1066,9 @@ public:
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;
     int normal_placement_rules(void) const;
+    int on_death_drop_all_items(void) const;
+    int on_death_is_corpse(void) const;
+    int on_death_is_open(void) const;
     int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;
@@ -1098,6 +1101,7 @@ public:
     void blit(int fbo);
     void blit_end_reflection_submerged(uint8_t submerged) const;
     void blit_end_submerged(uint8_t submerged) const;
+    void blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);
     void blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
@@ -1106,12 +1110,9 @@ public:
     void blit_upside_down(int fbo);
     void blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles);
     void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
-    void blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);
     void botcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void botcon_(const char *fmt, va_list args) const; // compile error without
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
-    bool carry(Thingp w);
-    bool try_to_carry(Thingp w);
     void collision_check_do();
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
@@ -1125,6 +1126,7 @@ public:
     void dead(std::string &);
     void dead_(Thingp killer, const char *fmt, va_list args); // compile error without
     void dead_(const char *fmt, va_list args); // compile error without
+    void delete_particle();
     void destroy();
     void destroyed(void);
     void die(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -1138,8 +1140,6 @@ public:
     void dir_set_tl(void);
     void dir_set_tr(void);
     void dir_set_up(void);
-    bool drop(Thingp w);
-    bool drop(Thingp w, Thingp target);
     void drop_all(void);
     void dump(std::string prefix, std::ostream &out);
     void err(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
@@ -1147,12 +1147,12 @@ public:
     void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
     void fall(float fall_height, timestamp_t ms);
     void hide();
-    void rest();
     void hooks_remove();
     void hunger_clock();
     void inherit_from(Thingp it);
     void init(Levelp, const std::string& name, fpoint at, fpoint jitter);
     void init_lights(void);
+    void jump_end(void);
     void kill(Thingp killer, const char *reason);
     void kill(Thingp killer, std::string &reason);
     void lava_tick();
@@ -1178,16 +1178,17 @@ public:
     void msg(const std::string&);
     void reinit(void);
     void remove_owner(void);
+    void rest();
     void resurrect_tick();
     void set_owner(Thingp owner);
     void sheath(void);
     void tick();
     void torch_tick();
     void unwield(const char *why);
+    void update_all(void);
     void update_interpolated_position(void);
     void update_pos(fpoint, bool immediately);
-    void update_all(void);
-    void use(void);
+    void use_weapon(void);
     void used(Thingp w, Thingp target);
     void visible();
     void water_tick();
@@ -1199,8 +1200,6 @@ public:
     void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
     void weapon_sheath(void);
     void wield(Thingp w);
-    bool particle_anim_exists(void);
-    void delete_particle();
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);

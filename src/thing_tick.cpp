@@ -32,6 +32,7 @@ _
     //
     if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
                                          get_timestamp_last_tick())) {
+        log("too often");
         return false;
     }
 
@@ -57,6 +58,7 @@ _
     // Roll the dice and see if we do anything
     //
     if (!std::empty(get_on_idle_dice_do_str())) {
+        log("idle tick");
         auto roll = get_idle_tick();
         if (get_tick() - get_tick_last_did_something() >= (unsigned int)roll) {
             auto d = get_on_idle_dice_do();
@@ -71,16 +73,19 @@ _
     // If there is a next hop to go to, do it.
     //
     if (cursor_path_pop_next_and_move()) {
+        log("pop next move");
         is_tick_done = true;
         return true;
     }
 
     if (try_to_escape()) {
+        log("try to escape");
         is_tick_done = true;
         return true;
     }
 
     if (is_jumper()) {
+        log("try to jump");
         if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
             if (try_to_jump()) {
                 is_tick_done = true;
@@ -93,6 +98,7 @@ _
     // If this thing has AI, it can try and reach goals
     //
     if (get_dmap_scent()) {
+        log("get next hop");
         ai_get_next_hop();
     } else {
         is_tick_done = true;

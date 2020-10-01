@@ -245,6 +245,7 @@ public:
                     !t->is_attackable_by_monst() &&                 \
                     !t->is_attackable_by_player() &&                \
                     !t->ai_obstacle()) {                            \
+                    log("ignore for collision: %s", it->to_string().c_str()); \
                     continue;                                       \
                 }                                                   \
 
