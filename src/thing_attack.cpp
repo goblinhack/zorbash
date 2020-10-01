@@ -187,6 +187,13 @@ _
         return false;
     }
 
+    if (!get_stats_stamina()) {
+        if (is_player()) {
+            MINICON("You are too tired to attack. You need to rest.");
+        }
+        return (false);
+    }
+
     auto damage = get_stats_attack();
     if (it->is_hit_by(this, damage)) {
         if (is_loggable_for_unimportant_stuff()) {
@@ -201,6 +208,8 @@ _
         if (is_killed_on_hitting() || is_killed_on_hit_or_miss()) {
             dead("suicide");
         }
+
+        decr_stats_stamina();
         return true;
     }
 

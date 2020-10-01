@@ -303,7 +303,7 @@ void Thing::wield (Thingp weapon)
     // move_carried_items();
 }
 
-void Thing::use (void)
+void Thing::use_weapon (void)
 {_
     log("use something");
 _
@@ -311,6 +311,13 @@ _
         //
         // Still using.
         //
+        return;
+    }
+
+    if (!get_stats_stamina()) {
+        if (is_player()) {
+            MINICON("You are too tired to attack. You need to rest.");
+        }
         return;
     }
 
@@ -380,6 +387,8 @@ _
     // Lunge at the target
     //
     lunge(hit_at);
+
+    decr_stats_stamina();
 
     if (weapon) {
         if (weapon->collision_check_and_handle_at(hit_at,
