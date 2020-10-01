@@ -26,7 +26,7 @@ def init_ui_status_bar():
       "karma-status",
       "health-status",
       "defence-status",
-      "magick-status",
+      "stamina-status",
       "anxiety-status",
       "attack-status",
     ]
@@ -215,8 +215,8 @@ def init_16x16():
       "dollar-icon",
       "defence-icon",
       "weight-icon",
+      "stamina-icon",
       "attack-icon",
-      "magic-icon",
       "karma-icon",
       "save",
       "load",

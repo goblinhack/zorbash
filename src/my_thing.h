@@ -97,7 +97,8 @@ public:
     int          stats16 = {};
     int          stats17 = {};
     int          stats18 = {};
-    int          stats19 = {};
+    int          stats_stamina = {};
+    int          stats_stamina_max = {};
     int          stats_defence = {};
     int          stats_defence_max = {};
     int          stats_health = {};
@@ -354,6 +355,10 @@ public:
 
     float get_stats_health_pct(void);
     bool is_bloodied(void);
+    void health_boost(int v);
+
+    float get_stamina_health_pct(void);
+    void stamina_boost(int v);
 
     int set_stats_defence(int);
     int get_stats_defence(void) const;
@@ -509,12 +514,19 @@ public:
     int decr_stats18(void);
     int incr_stats18(void);
 
-    int set_stats19(int);
-    int get_stats19(void) const;
-    int decr_stats19(int);
-    int incr_stats19(int);
-    int decr_stats19(void);
-    int incr_stats19(void);
+    int set_stats_stamina(int);
+    int get_stats_stamina(void) const;
+    int decr_stats_stamina(int);
+    int incr_stats_stamina(int);
+    int decr_stats_stamina(void);
+    int incr_stats_stamina(void);
+
+    int set_stats_stamina_max(int);
+    int get_stats_stamina_max(void) const;
+    int decr_stats_stamina_max(int);
+    int incr_stats_stamina_max(int);
+    int decr_stats_stamina_max(void);
+    int incr_stats_stamina_max(void);
 
     int set_stats_strength(int);
     int get_stats_strength(void) const;
@@ -1134,8 +1146,8 @@ public:
     void err_(const char *fmt, va_list args) const; // compile error without
     void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
     void fall(float fall_height, timestamp_t ms);
-    void health_boost(int v);
     void hide();
+    void rest();
     void hooks_remove();
     void hunger_clock();
     void inherit_from(Thingp it);

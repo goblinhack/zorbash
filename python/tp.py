@@ -611,6 +611,9 @@ class Tp:
     def set_stats_strength(self, value):
         zx.tp_set_stats_strength(self, value)
 
+    def set_stats_stamina(self, value):
+        zx.tp_set_stats_stamina(self, value)
+
     def set_stats_defence(self, value):
         zx.tp_set_stats_defence(self, value)
 
