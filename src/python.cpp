@@ -964,9 +964,7 @@ static void py_add_to_path (const char *path)
     wchar_t *wc_new_path;
     char *item;
 
-    LOG("- %s", path);
-
-    LOG("Current system python path:");
+    LOG("Current system python path: (adding %s)", path);
 
     new_path = dupstr(path, __FUNCTION__);
     py_cur_path = PySys_GetObject("path");

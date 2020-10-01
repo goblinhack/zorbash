@@ -77,7 +77,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, value);         \
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);         \
                                                                                 \
     tp = tp_find(tp_name);                                                      \
     if (!tp) {                                                                  \
@@ -127,7 +127,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, value);         \
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);         \
                                                                                 \
     tp = tp_find(tp_name);                                                      \
     if (!tp) {                                                                  \
@@ -190,7 +190,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    DBG("python-to-c: %s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value,      \
+    PY_DBG("%s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value,      \
         tp->__field__());                                                       \
                                                                                 \
     value = 0;                                                                  \
@@ -229,7 +229,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    DBG("python-to-c: %s(%s -> %d)", __FUNCTION__, tp_name, value);             \
+    PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);             \
                                                                                 \
     tp = tp_find(tp_name);                                                      \
     if (!tp) {                                                                  \
@@ -273,7 +273,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    DBG("python-to-c: %s(%s -> %g)", __FUNCTION__, tp_name, value);             \
+    PY_DBG("%s(%s -> %g)", __FUNCTION__, tp_name, value);             \
                                                                                 \
     tp = tp_find(tp_name);                                                      \
     if (!tp) {                                                                  \
@@ -478,7 +478,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         Py_RETURN_NONE;
     }
 
-    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);
 
     tp = tp_find(tp_name);
     if (!tp) {
@@ -1101,7 +1101,7 @@ PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;
     }
 
-    DBG("python-to-c: %s(%s -> %d)", __FUNCTION__, tp_name, value);
+    PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);
 
     tp = tp_find(tp_name);
     if (!tp) {
@@ -1138,7 +1138,7 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    DBG("python-to-c: %s(%x, %s)", __FUNCTION__, id, what);
+    PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
     auto level = game->level;
     if (!level) {
@@ -1177,7 +1177,7 @@ PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject
         Py_RETURN_NONE;
     }
 
-    DBG("python-to-c: %s(%x, %s)", __FUNCTION__, id, what);
+    PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
     auto level = game->level;
     if (!level) {
@@ -1216,7 +1216,7 @@ PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    DBG("python-to-c: %s(%x, %s)", __FUNCTION__, id, what);
+    PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
     auto level = game->level;
     if (!level) {
@@ -1255,7 +1255,7 @@ PyObject *tp_spawn_under (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    DBG("python-to-c: %s(%x, %s)", __FUNCTION__, id, what);
+    PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
     auto level = game->level;
     if (!level) {

@@ -26,4 +26,7 @@ uint8_t file_exists_and_is_newer_than(const char *filename,
 #  define SET_BINARY_MODE(file)
 #endif
 
+void FILE_LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void FILE_DBG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+
 #endif

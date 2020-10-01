@@ -12,17 +12,22 @@
 
 void Level::display_fade_out (void)
 {
-    blit_fbo_bind(FBO_FADE);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glcolor(WHITE);
+    int lines = 1000;
+    float step = RAD_360 / (float) lines;
+    float ts = (float)(time_get_time_ms_cached() - timestamp_fade_out_begin) / LEVEL_FADE_OUT_MS;
+    if (ts >= 1) {
+        return;
+    }
 
     point at(game->config.inner_pix_width / 2, game->config.inner_pix_height / 2);
     if (player) {
         at = ((player->last_blit_tl + player->last_blit_br) / 2);
     }
-    int lines = 1000;
-    float step = RAD_360 / (float) lines;
-    float ts = (float)(time_get_time_ms_cached() - timestamp_fade_out_begin) / LEVEL_FADE_OUT_MS;
+
+    blit_fbo_bind(FBO_FADE);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glcolor(WHITE);
+
     float rad = (1.0 - ts) * (float) game->config.inner_pix_width / 2;
     float a = (1.0 - ts) * 255;
 
@@ -57,18 +62,22 @@ void Level::display_fade_out (void)
 
 void Level::display_fade_in (void)
 {
-    blit_fbo_bind(FBO_FADE);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glcolor(WHITE);
+    int lines = 1000;
+    float step = RAD_360 / (float) lines;
+    float ts = (float)(time_get_time_ms_cached() - timestamp_fade_in_begin) / LEVEL_FADE_IN_MS;
+    if (ts >= 1) {
+        return;
+    }
 
     point at(game->config.inner_pix_width / 2, game->config.inner_pix_height / 2);
     if (player) {
         at = ((player->last_blit_tl + player->last_blit_br) / 2);
     }
 
-    int lines = 1000;
-    float step = RAD_360 / (float) lines;
-    float ts = (float)(time_get_time_ms_cached() - timestamp_fade_in_begin) / LEVEL_FADE_IN_MS;
+    blit_fbo_bind(FBO_FADE);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glcolor(WHITE);
+
     float rad = ts * (float) game->config.inner_pix_width / 2;
     float a = ts * 255;
 

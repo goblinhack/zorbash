@@ -168,4 +168,7 @@ PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds)         
     extern PyObject *pysdl_ ## name(PyObject *self, PyObject *args);
 
 #define PYFUNC_REF(name) {#name, pysdl_ ## name, METH_VARARGS, name ## _doc}
+
+void PY_LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void PY_DBG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 #endif

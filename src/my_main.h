@@ -9,28 +9,29 @@
 
 #define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
+#define ENABLE_DEBUG_TRACE         // Function tracing
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_TILE_BOUNDS         // Scan tiles for bounds
-#define ENABLE_TRACING             // Function tracing
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
 #undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
 #undef  ENABLE_DEBUG_AI_GOALS      // AI goal selection
 #undef  ENABLE_DEBUG_AI_WANDER     // AI wander path selection
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
+#undef  ENABLE_DEBUG_IO            // File i/o
 #undef  ENABLE_DEBUG_LIGHT         // Lighting algorithm for player
+#undef  ENABLE_DEBUG_PTRCHECK      // Debug ptrcheck itself
+#undef  ENABLE_DEBUG_PY            // Python debugs
 #undef  ENABLE_DEBUG_SAVE_CHECK    // Verify compressed file
 #undef  ENABLE_DEBUG_SAVE_LOAD     // Map saving and loading
 #undef  ENABLE_DEBUG_SAVE_LOAD_HEX // Hex dump of save files
 #undef  ENABLE_DEBUG_TILE          // Astar AI path costs
+#undef  ENABLE_DEBUG_UI            // User interface logs
+#undef  ENABLE_DEBUG_UI2           // User interface logs with inheritance
 #undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
 #undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
-#undef  ENABLE_MAP_DEBUG           // Visible map, no lighting
-#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #undef  ENABLE_PTRCHECK_LEAK
 #undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
-#undef  ENABLE_UI_DEBUG            // User interface logs
-#undef  ENABLE_UI_DEBUG_EXTRA      // User interface logs with inheritance
 
 #define ASCII_HEIGHT_MAX           ASCII_WIDTH_MAX
 #define ASCII_WIDTH_MAX            256
