@@ -36,7 +36,7 @@ void FILE_DBG (const char *fmt, ...)
 {
     va_list args;
 
-    if (!g_opt_debug) {
+    if (!g_opt_debug2) {
         return;
     }
 

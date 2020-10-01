@@ -473,8 +473,9 @@ static void usage (void)
     CON("zorbash, options:");
     CON(" ");
     CON(" --new-game");
-    CON(" --debug");
-    CON(" --ascii-mode // pseudo ascii mode");
+    CON(" --debug                     // most debugs");
+    CON(" --debug2                    // rarely used debugs");
+    CON(" --ascii-mode                // pseudo ascii mode");
     CON(" --seed <number>");
     CON(" ");
     CON("Written by goblinhack@gmail.com");
@@ -509,6 +510,12 @@ static void parse_args (int32_t argc, char *argv[])
         if (!strcasecmp(argv[i], "--debug") ||
             !strcasecmp(argv[i], "-debug")) {
             g_opt_debug = true;
+            continue;
+        }
+
+        if (!strcasecmp(argv[i], "--debug2") ||
+            !strcasecmp(argv[i], "-debug2")) {
+            g_opt_debug2 = true;
             continue;
         }
 

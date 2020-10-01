@@ -38,6 +38,7 @@ def tp_init(name, text_name, title):
     x.set_on_death_is_corpse(True)
     x.set_stats_attack_dice("1d6+1")
     x.set_stats_defence(3)
+    x.set_stats_stamina(100)
     x.set_stats_health_hunger_pct(5)
     x.set_stats_health_initial(100)
     x.set_stats_health_starving_pct(5)

@@ -55,6 +55,14 @@ bool Thing::move (fpoint future_pos,
                   uint8_t idle,
                   bool shove_allowed)
 {
+    decr_stats_stamina();
+    if (!get_stats_stamina()) {
+        if (is_player()) {
+            MINICON("You are too tired to move. You need to rest.");
+        }
+        return (false);
+    }
+
     if (is_dead) {
         return (false);
     }

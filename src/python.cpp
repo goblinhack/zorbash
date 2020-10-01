@@ -747,7 +747,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(stats16)
     TP_SET_DECL(stats17)
     TP_SET_DECL(stats18)
-    TP_SET_DECL(stats19)
+    TP_SET_DECL(stats_stamina)
     TP_SET_DECL(stats_attack_dice)
     TP_SET_DECL(stats_defence)
     TP_SET_DECL(stats_health_hunger_pct)

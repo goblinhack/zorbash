@@ -1903,6 +1903,64 @@ int Thing::incr_stats_defence_max (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// stamina_max
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_stats_stamina_max (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->stats_stamina_max);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_stats_stamina_max (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->stats_stamina_max = v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::decr_stats_stamina_max (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->stats_stamina_max -= v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::incr_stats_stamina_max (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->stats_stamina_max += v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::decr_stats_stamina_max (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->stats_stamina_max--);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::incr_stats_stamina_max (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->stats_stamina_max++);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // attack_rate_tenths
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_tick_rate_tenths (void) const
@@ -3063,59 +3121,59 @@ int Thing::incr_stats18 (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats19
+// stats_stamina
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats19 (void) const
+int Thing::get_stats_stamina (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats19);
+        return (monstp->stats_stamina);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats19 (int v)
+int Thing::set_stats_stamina (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats19 = v);
+    auto n = (monstp->stats_stamina = v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::decr_stats19 (int v)
+int Thing::decr_stats_stamina (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats19 -= v);
+    auto n = (monstp->stats_stamina -= v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::incr_stats19 (int v)
+int Thing::incr_stats_stamina (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats19 += v);
+    auto n = (monstp->stats_stamina += v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::decr_stats19 (void)
+int Thing::decr_stats_stamina (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats19--);
+    auto n = (monstp->stats_stamina--);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::incr_stats19 (void)
+int Thing::incr_stats_stamina (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats19++);
+    auto n = (monstp->stats_stamina++);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }

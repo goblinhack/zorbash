@@ -57,6 +57,7 @@ def tp_init(name, text_name):
     x.set_on_death_do("slime2.spawn()")
     x.set_stats_attack_dice("1d5")
     x.set_stats_defence(0)
+    x.set_stats_stamina(100)
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial(25)
     x.set_stats_move_speed_ms(1000)

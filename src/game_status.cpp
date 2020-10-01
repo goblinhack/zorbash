@@ -387,7 +387,7 @@ _
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
-    y_at += 3;
+    y_at += 2;
 
     ///////////////////////////////////////////////////////////////////////////
     // Defence
@@ -440,7 +440,60 @@ _
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
-    y_at += 3;
+    y_at += 2;
+
+    ///////////////////////////////////////////////////////////////////////////
+    // stamina
+    ///////////////////////////////////////////////////////////////////////////
+    {_
+        auto w = wid_new_plain(wid_sidebar, "stamina-icon");
+        point tl = make_point(0, y_at);
+        point br = make_point(1, y_at + 1);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "stamina-icon");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {_
+        auto w = wid_new_plain(wid_sidebar, "stamina-status-bar");
+        point tl = make_point(2, y_at);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+
+        int i = ((float)player->get_stats_stamina() /
+                 (float)player->get_stats_stamina_max()) *
+                 (float)UI_HEALTH_BAR_STEPS - 1;
+        i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
+        i = std::max(i, 0);
+        auto icon = "status-bar-" + std::to_string(i);
+        wid_set_bg_tilename(w, icon);
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {_
+        auto w = wid_new_plain(wid_sidebar, "stamina-status");
+        point tl = make_point(2, y_at + 1);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "stamina-status");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {_
+        auto w = wid_new_plain(wid_sidebar, "stamina-value");
+        point tl = make_point(3, y_at + 1);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_shape_none(w);
+
+        std::string s =
+            std::to_string(player->get_stats_stamina()) + "/" +
+            std::to_string(player->get_stats_stamina_max());
+        wid_set_text(w, s);
+        wid_set_text_rhs(w, true);
+    }
+    y_at += 2;
 
     wid_update(wid_sidebar);
 }

@@ -291,7 +291,7 @@ int Tp::stats15(void) const { return _stats15; }
 int Tp::stats16(void) const { return _stats16; }
 int Tp::stats17(void) const { return _stats17; }
 int Tp::stats18(void) const { return _stats18; }
-int Tp::stats19(void) const { return _stats19; }
+int Tp::stats_stamina(void) const { return _stats_stamina; }
 int Tp::stats_defence(void) const { return _stats_defence; }
 int Tp::stats_health_hunger_pct(void) const { return _stats_health_hunger_pct; }
 int Tp::stats_health_initial(void) const { return _stats_health_initial; }
@@ -537,7 +537,7 @@ void Tp::set_stats15(int v) { _stats15 = v; }
 void Tp::set_stats16(int v) { _stats16 = v; }
 void Tp::set_stats17(int v) { _stats17 = v; }
 void Tp::set_stats18(int v) { _stats18 = v; }
-void Tp::set_stats19(int v) { _stats19 = v; }
+void Tp::set_stats_stamina(int v) { _stats_stamina = v; }
 void Tp::set_stats_defence(int v) { _stats_defence = v; }
 void Tp::set_stats_health_hunger_pct(int v) { _stats_health_hunger_pct = v; }
 void Tp::set_stats_health_initial(int v) { _stats_health_initial = v; }

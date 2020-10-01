@@ -328,7 +328,7 @@ private:
     int _stats16 {};
     int _stats17 {};
     int _stats18 {};
-    int _stats19 {};
+    int _stats_stamina {};
     int _stats_defence {};
     int _stats_health_hunger_pct {};
     int _stats_health_initial {};
@@ -680,7 +680,7 @@ public:
     int stats16(void) const;
     int stats17(void) const;
     int stats18(void) const;
-    int stats19(void) const;
+    int stats_stamina(void) const;
     int stats_defence(void) const;
     int stats_health_hunger_pct(void) const;
     int stats_health_initial(void) const;
@@ -927,7 +927,7 @@ public:
     void set_stats16(int);
     void set_stats17(int);
     void set_stats18(int);
-    void set_stats19(int);
+    void set_stats_stamina(int);
     void set_stats_defence(int);
     void set_stats_health_hunger_pct(int);
     void set_stats_health_initial(int);

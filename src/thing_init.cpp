@@ -109,6 +109,14 @@ void Thing::init (Levelp level,
     }
 
     {_
+        auto v = tpp->stats_stamina();
+        if (unlikely(v)) {
+            set_stats_stamina(v);
+            set_stats_stamina_max(v);
+        }
+    }
+
+    {_
         auto v = tpp->stats_defence();
         if (unlikely(v)) {
             set_stats_defence(v);
@@ -257,9 +265,9 @@ void Thing::init (Levelp level,
     }
 
     {_
-        auto v = tpp->stats19();
+        auto v = tpp->stats_stamina();
         if (unlikely(v)) {
-            set_stats19(v);
+            set_stats_stamina(v);
         }
     }
 

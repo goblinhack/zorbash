@@ -171,9 +171,11 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_on_fire.o 		\
     $(OBJDIR)/thing_owner.o 		\
     $(OBJDIR)/thing_path.o 		\
+    $(OBJDIR)/thing_rest.o 		\
     $(OBJDIR)/thing_resurrect.o 	\
     $(OBJDIR)/thing_shove.o 		\
     $(OBJDIR)/thing_spawn.o 		\
+    $(OBJDIR)/thing_stamina.o 		\
     $(OBJDIR)/thing_steal.o 		\
     $(OBJDIR)/thing_string.o 		\
     $(OBJDIR)/thing_template.o 		\

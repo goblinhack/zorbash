@@ -64,7 +64,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int          stats16                   */ out << bits(my.t->stats16);
     /* int          stats17                   */ out << bits(my.t->stats17);
     /* int          stats18                   */ out << bits(my.t->stats18);
-    /* int          stats19                   */ out << bits(my.t->stats19);
+    /* int          stats_stamina             */ out << bits(my.t->stats_stamina);
+    /* int          stats_stamina_max         */ out << bits(my.t->stats_stamina_max);
     /* int          stats_defence             */ out << bits(my.t->stats_defence);
     /* int          stats_defence_max         */ out << bits(my.t->stats_defence_max);
     /* int          stats_health              */ out << bits(my.t->stats_health);
