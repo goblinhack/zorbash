@@ -519,7 +519,7 @@ void *ptrcheck_alloc (const void *ptr,
 {
     Ptrcheck *pc;
 
-#ifdef ENABLE_PTRCHECK_DEBUG
+#ifdef ENABLE_DEBUG_PTRCHECK
     auto ts = timestamp();
     fprintf(stderr, "%s: PTRCHECK: Alloc %p \"%s\" (%u bytes) at %s:%s line %u\n",
             ts.c_str(),
@@ -600,7 +600,7 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 {
     Ptrcheck *pc;
 
-#ifdef ENABLE_PTRCHECK_DEBUG
+#ifdef ENABLE_DEBUG_PTRCHECK
     auto ts = timestamp();
     fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u\n",
             ts.c_str(),

@@ -1000,8 +1000,8 @@ void wid_set_name (Widp w, std::string name)
         w->name = name;
     }
 
-#ifdef ENABLE_UI_DEBUG
-#ifdef ENABLE_UI_DEBUG_EXTRA
+#ifdef ENABLE_DEBUG_UI
+#ifdef ENABLE_DEBUG_UI2
     if (w->parent) {
         w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                     name.c_str(), w,
@@ -2062,8 +2062,8 @@ Widp wid_new_container (Widp parent, std::string name)
 {_
     Widp w = wid_new(parent);
 
-#ifdef ENABLE_UI_DEBUG
-#ifdef ENABLE_UI_DEBUG_EXTRA
+#ifdef ENABLE_DEBUG_UI
+#ifdef ENABLE_DEBUG_UI2
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                   name.c_str(), w,
                                   parent->to_string.c_str(), parent);
@@ -2125,8 +2125,8 @@ Widp wid_new_square_button (Widp parent, std::string name)
 
     Widp w = wid_new(parent);
 
-#ifdef ENABLE_UI_DEBUG
-#ifdef ENABLE_UI_DEBUG_EXTRA
+#ifdef ENABLE_DEBUG_UI
+#ifdef ENABLE_DEBUG_UI2
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                   name.c_str(), w,
                                   parent->to_string.c_str(), parent);
@@ -2165,8 +2165,8 @@ Widp wid_new_plain (Widp parent, std::string name)
 
     Widp w = wid_new(parent);
 
-#ifdef ENABLE_UI_DEBUG
-#ifdef ENABLE_UI_DEBUG_EXTRA
+#ifdef ENABLE_DEBUG_UI
+#ifdef ENABLE_DEBUG_UI2
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                   name.c_str(), w,
                                   parent->to_string.c_str(), parent);

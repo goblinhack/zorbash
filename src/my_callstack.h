@@ -17,7 +17,7 @@
 
 #undef _
 
-#ifdef ENABLE_TRACING
+#ifdef ENABLE_DEBUG_TRACE
 #define _ tracer_t CAT2(__my_trace__, __LINE__) (__FILE__, __PRETTY_FUNCTION__, __LINE__);
 #else
 #define _

@@ -40,7 +40,7 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
                                               EXEC_FULL_PATH_AND_NAME)) {
                 out = file_read_if_exists(filename, outlen);
                 if (out) {
-                    DBG("file %s (newer than exec)", filename);
+                    FILE_DBG("file %s (newer than exec)", filename);
                     return (out);
                 }
             }
@@ -48,7 +48,7 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
             if (file_exists_and_is_newer_than(filename, ".o/file_data.o")) {
                 out = file_read_if_exists(filename, outlen);
                 if (out) {
-                    DBG("file %s (newer than build)", filename);
+                    FILE_DBG("file %s (newer than build)", filename);
                     return (out);
                 }
             }
@@ -56,14 +56,14 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
             if (file_exists_and_is_newer_than(filename, "src/.o/file_data.o")) {
                 out = file_read_if_exists(filename, outlen);
                 if (out) {
-                    DBG("file %s (newer than src build)", filename);
+                    FILE_DBG("file %s (newer than src build)", filename);
                     return (out);
                 }
             }
         } else {
             out = file_read_if_exists(filename, outlen);
             if (out) {
-                DBG("file %s (exists locally)", filename);
+                FILE_DBG("file %s (exists locally)", filename);
                 return (out);
             }
         }
@@ -77,7 +77,7 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
                                               EXEC_FULL_PATH_AND_NAME)) {
                 out = file_read_if_exists(alt_filename, outlen);
                 if (out) {
-                    DBG("file %s", filename);
+                    FILE_DBG("file %s", filename);
                     myfree(alt_filename);
                     alt_filename = 0;
 
@@ -89,7 +89,7 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
                                             ".o/file_data.o")) {
                 out = file_read_if_exists(alt_filename, outlen);
                 if (out) {
-                    DBG("file %s", filename);
+                    FILE_DBG("file %s", filename);
                     myfree(alt_filename);
                     alt_filename = 0;
 
@@ -101,7 +101,7 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
                                             "src/.o/file_data.o")) {
                 out = file_read_if_exists(alt_filename, outlen);
                 if (out) {
-                    DBG("file %s", filename);
+                    FILE_DBG("file %s", filename);
                     myfree(alt_filename);
                     alt_filename = 0;
 
@@ -116,7 +116,7 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
      */
     out = file_read_if_exists(filename, outlen);
     if (out) {
-        DBG("file %s", filename);
+        FILE_DBG("file %s", filename);
 
         if (alt_filename) {
             myfree(alt_filename);
@@ -128,7 +128,7 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
 
     out = file_read_if_exists(alt_filename, outlen);
     if (out) {
-        DBG("file %s", filename);
+        FILE_DBG("file %s", filename);
 
         if (alt_filename) {
             myfree(alt_filename);
@@ -148,7 +148,7 @@ unsigned char *file_load (const char *filename, int32_t *outlen)
 
         out = file_read_if_exists(alt_filename.c_str(), outlen);
         if (out) {
-            DBG("file %s", alt_filename.c_str());
+            FILE_DBG("file %s", alt_filename.c_str());
 
             return (out);
         }

@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "my_main.h"
+#include "my_file.h"
 
 unsigned char *file_read (const char *filename, int32_t *out_len)
 {_
@@ -67,7 +68,7 @@ unsigned char *file_read (const char *filename, int32_t *out_len)
         *out_len = len;
     }
 
-    LOG("- read %s, %dMb, %d bytes", filename, len / (1024 * 1024), len);
+    FILE_LOG("read %s, %dMb, %d bytes", filename, len / (1024 * 1024), len);
 
     fclose(file);
 
@@ -88,7 +89,7 @@ int32_t file_write (const char *filename, unsigned char *buffer, int32_t len)
 
     rc = fwrite(buffer, len, 1, file);
 
-    LOG("Saved %s, %d bytes", filename, len);
+    FILE_LOG("saved %s, %d bytes", filename, len);
 
     /*
      * Check written one object.
