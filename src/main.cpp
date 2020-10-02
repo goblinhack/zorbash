@@ -529,7 +529,7 @@ static void parse_args (int32_t argc, char *argv[])
         if (!strcasecmp(argv[i], "--seed") ||
             !strcasecmp(argv[i], "-seed") ||
             !strcasecmp(argv[i], "-s")) {
-            g_opt_seed_name = atoi(argv[i + 1]);
+            g_opt_seed_name = argv[i + 1];
             i++;
             continue;
         }
@@ -816,14 +816,6 @@ int32_t main (int32_t argc, char *argv[])
     wid_toggle_hidden(wid_console_window);
 
     config_gfx_vsync_update();
-
-{
-    for (auto i = 0;i < 20; i++) {
-        auto s = random_name(10);
-
-        CON("%s %d",s.c_str(), string_to_hash(s));
-    }
-}
 
     g_opt_fast_start = false;
     sdl_loop();

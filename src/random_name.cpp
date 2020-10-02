@@ -18,7 +18,7 @@ std::string random_name (int len)
             continue;
         }
 
-        if (random_range(0, 100) < 50) {
+        if (random_range(0, 100) < 95) {
             return d1 + d2;
         } else {
             return d2 + d1;
