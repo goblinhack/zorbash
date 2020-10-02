@@ -477,7 +477,7 @@ static void usage (void)
     CON(" --debug                     // most debugs");
     CON(" --debug2                    // rarely used debugs");
     CON(" --ascii-mode                // pseudo ascii mode");
-    CON(" --seed <number>");
+    CON(" --seed <name/number>");
     CON(" ");
     CON("Written by goblinhack@gmail.com");
 }
@@ -529,7 +529,7 @@ static void parse_args (int32_t argc, char *argv[])
         if (!strcasecmp(argv[i], "--seed") ||
             !strcasecmp(argv[i], "-seed") ||
             !strcasecmp(argv[i], "-s")) {
-            g_opt_seed = atoi(argv[i + 1]);
+            g_opt_seed_name = atoi(argv[i + 1]);
             i++;
             continue;
         }
@@ -819,7 +819,9 @@ int32_t main (int32_t argc, char *argv[])
 
 {
     for (auto i = 0;i < 20; i++) {
-        CON("%s",random_name(10).c_str());
+        auto s = random_name(10);
+
+        CON("%s %d",s.c_str(), string_to_hash(s));
     }
 }
 

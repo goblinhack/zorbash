@@ -550,6 +550,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* bool               started                      */ in >> bits(my.t.started);
     /* fpoint             mouse_over                   */ in >> bits(my.t.mouse_over);
     /* int                seed                         */ in >> bits(my.t.seed);
+    /* std::string        seed_name                    */ in >> bits(my.t.seed_name);
     /* point3d            current_level                */ in >> bits(my.t.current_level);
     /* timestamp_t        last_pause                   */ in >> bits(my.t.last_pause);
     /* uint32_t           actionbar_highlight_slot     */ in >> bits(my.t.actionbar_highlight_slot);

@@ -5,6 +5,10 @@
 #include "my_main.h"
 #include "my_random_name.h"
 
+#include <iostream>
+#include <functional> // for std::hash
+#include <string>
+
 std::string random_name (int len)
 {
     for (;;) {
@@ -20,4 +24,11 @@ std::string random_name (int len)
             return d2 + d1;
         }
     }
+}
+
+uint32_t string_to_hash (const std::string &str) 
+{
+    std::hash<std::string> hasher;
+    uint32_t hashed = static_cast<uint32_t>(hasher(str) % 0xffffffff); // returns std::size_t
+    return hashed;
 }

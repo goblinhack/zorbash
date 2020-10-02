@@ -163,6 +163,7 @@ public:
     fpoint             mouse_over;          // Mouse cursor
     point              minimap_over;        // Which tile in the minimap
     int                seed {};             // All randomness jumps off of this
+    std::string        seed_name {};        // Human readable version of the above
     point3d            current_level;       // Where we are in the world.
     timestamp_t        last_pause {};
     uint32_t           actionbar_highlight_slot {};

@@ -6,14 +6,16 @@
 #include "my_game.h"
 #include "my_world.h"
 #include "my_level.h"
+#include "my_random_name.h"
 
 void Game::init (void)
 {_
-    if (g_opt_seed) {
-        seed = g_opt_seed;
+    if (g_opt_seed_name != "") {
+        seed_name = g_opt_seed_name;
     } else {
-        seed = myrand();
+        seed_name = random_name(sizeof("4294967295") - 1);
     }
+    seed = string_to_hash(seed_name);
 
     current_level = point3d(LEVELS_ACROSS / 2, LEVELS_DOWN / 2, 1);
     level = nullptr;
