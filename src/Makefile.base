@@ -123,6 +123,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_astar.o 		\
+    $(OBJDIR)/dict1.o 			\
+    $(OBJDIR)/dict2.o 			\
+    $(OBJDIR)/random_name.o 		\
     $(OBJDIR)/thing_attack.o 		\
     $(OBJDIR)/thing_avoid.o             \
     $(OBJDIR)/thing_bounce.o 		\
