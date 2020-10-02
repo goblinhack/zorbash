@@ -28,6 +28,7 @@ std::default_random_engine rng;
 #include "my_room.h"
 #include "my_level_static.h"
 #include "my_gfx.h"
+#include "my_random_name.h"
 
 static char **ARGV;
 
@@ -815,6 +816,12 @@ int32_t main (int32_t argc, char *argv[])
     wid_toggle_hidden(wid_console_window);
 
     config_gfx_vsync_update();
+
+{
+    for (auto i = 0;i < 20; i++) {
+        CON("%s",random_name(10).c_str());
+    }
+}
 
     g_opt_fast_start = false;
     sdl_loop();
