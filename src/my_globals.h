@@ -11,6 +11,7 @@
 #include <map>
 #include <vector>
 #include <unordered_map>
+#include <string>
 
 //
 // Forward references
@@ -66,7 +67,7 @@ extern bool g_opt_fast_start;
 extern bool g_opt_new_game;
 extern bool g_quitting;
 extern bool g_render_black_and_white;
-extern int g_opt_seed;
+extern std::string g_opt_seed_name;
 
 extern int TILES_ACROSS;
 extern int TILES_DOWN;

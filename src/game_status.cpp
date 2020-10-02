@@ -257,7 +257,7 @@ _
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
 
-        auto s = dynprintf("Dun %u", game->seed);
+        auto s = dynprintf("Dgn:%s", game->seed_name.c_str());
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);

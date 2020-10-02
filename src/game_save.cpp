@@ -426,6 +426,7 @@ std::ostream& operator<<(std::ostream &out,
     /* bool               started                      */ out << bits(my.t.started);
     /* fpoint             mouse_over                   */ out << bits(my.t.mouse_over);
     /* int                seed                         */ out << bits(my.t.seed);
+    /* std::string        seed_name                    */ out << bits(my.t.seed_name);
     /* point3d            current_level                */ out << bits(my.t.current_level);
     /* timestamp_t        last_pause                   */ out << bits(my.t.last_pause);
     /* uint32_t           actionbar_highlight_slot     */ out << bits(my.t.actionbar_highlight_slot);
