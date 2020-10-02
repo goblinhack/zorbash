@@ -1675,12 +1675,17 @@ uint32_t Thing::incr_tick (void)
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_health (void) const
 {_
+    int v = 0;
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_health);
-    } else {
-        return (0);
+        v = monstp->stats_health;
     }
+    auto owner = owner_get();
+    if (owner) {
+        auto owner = owner_get();
+        return v + owner->get_stats_health();
+    }
+    return v;
 }
 
 int Thing::set_stats_health (int v)
@@ -1791,12 +1796,17 @@ int Thing::incr_stats_health_max (void)
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_defence (void) const
 {_
+    int v = 0;
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_defence);
-    } else {
-        return (0);
+        v = monstp->stats_defence;
     }
+    auto owner = owner_get();
+    if (owner) {
+        auto owner = owner_get();
+        return v + owner->get_stats_defence();
+    }
+    return v;
 }
 
 int Thing::set_stats_defence (int v)
@@ -3125,12 +3135,17 @@ int Thing::incr_stats18 (void)
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_stamina (void) const
 {_
+    int v = 0;
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_stamina);
-    } else {
-        return (0);
+        v = monstp->stats_stamina;
     }
+    auto owner = owner_get();
+    if (owner) {
+        auto owner = owner_get();
+        return v + owner->get_stats_stamina();
+    }
+    return v;
 }
 
 int Thing::set_stats_stamina (int v)
