@@ -16,6 +16,10 @@ float Thing::how_far_i_can_jump (void)
         d /= 2;
     }
 
+    if (get_stats_stamina() < get_stats_stamina_max() / 4) {
+        d /= 2;
+    }
+
     return d;
 }
 
