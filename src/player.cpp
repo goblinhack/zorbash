@@ -272,18 +272,30 @@ void player_tick (void)
             for (auto i = game->cursor_move_path.rbegin();
                  i != game->cursor_move_path.rend(); i++) {
                 auto p = *i;
-                player->try_to_jump(make_point(p.x, p.y));
+                if (player->try_to_jump(make_point(p.x, p.y))) {
+                    game->cursor_move_path.clear();
+                    break;
+                }
             }
-            game->cursor_move_path.clear();
         } else if (level->cursor->mid_at == player->mid_at) {
             auto delta = player->dir_to_direction();
             point p = make_point(player->mid_at.x + delta.x,
                                  player->mid_at.y + delta.y);
-            player->try_to_jump(p);
+            if (level->is_movement_blocking_hard(p.x, p.y) ||
+                level->is_movement_blocking_soft(p.x, p.y)) {
+                player->try_to_jump(make_point(player->mid_at));
+            } else {
+                player->try_to_jump(p);
+            }
         } else if (level->cursor) {
             point p = make_point(level->cursor->mid_at.x,
                                  level->cursor->mid_at.y);
-            player->try_to_jump(p);
+            if (level->is_movement_blocking_hard(p.x, p.y) ||
+                level->is_movement_blocking_soft(p.x, p.y)) {
+                player->try_to_jump(make_point(player->mid_at));
+            } else {
+                player->try_to_jump(p);
+            }
         }
         last_key_pressed_when = time_get_time_ms_cached();
         player->monstp->move_path.clear();
