@@ -789,9 +789,9 @@ int Thing::is_rrr61(void) const
     return (tp()->is_rrr61());
 }
 
-int Thing::is_rrr62(void) const
+int Thing::is_shown_uniquely_on_monstbar(void) const
 {_
-    return (tp()->is_rrr62());
+    return (tp()->is_shown_uniquely_on_monstbar());
 }
 
 int Thing::is_stamina_check(void) const

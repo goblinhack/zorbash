@@ -240,7 +240,7 @@ int Tp::is_rrr59(void) const { return _is_rrr59; }
 int Tp::is_rrr6(void) const { return _is_rrr6; }
 int Tp::is_rrr60(void) const { return _is_rrr60; }
 int Tp::is_rrr61(void) const { return _is_rrr61; }
-int Tp::is_rrr62(void) const { return _is_rrr62; }
+int Tp::is_shown_uniquely_on_monstbar(void) const { return _is_shown_uniquely_on_monstbar; }
 int Tp::is_stamina_check(void) const { return _is_stamina_check; }
 int Tp::is_gfx_shown_in_bg(void) const { return _is_gfx_shown_in_bg; }
 int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
@@ -481,7 +481,7 @@ void Tp::set_is_rrr59(int v) { _is_rrr59 = v; }
 void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
 void Tp::set_is_rrr60(int v) { _is_rrr60 = v; }
 void Tp::set_is_rrr61(int v) { _is_rrr61 = v; }
-void Tp::set_is_rrr62(int v) { _is_rrr62 = v; }
+void Tp::set_is_shown_uniquely_on_monstbar(int v) { _is_shown_uniquely_on_monstbar = v; }
 void Tp::set_is_stamina_check(int v) { _is_stamina_check = v; }
 void Tp::set_is_gfx_shown_in_bg(int v) { _is_gfx_shown_in_bg = v; }
 void Tp::set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }

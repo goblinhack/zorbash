@@ -78,6 +78,7 @@ static void game_monsts_wid_create (void)
     auto miny = std::max(0, (int) level->map_at.y);
     auto maxy = std::min(MAP_HEIGHT, (int)level->map_at.y + TILES_DOWN);
 
+    std::map<std::string, bool> shown;
     std::vector<Thingp> items;
     for (auto z = 0; z < MAP_DEPTH; z++) {
         for (auto y = miny; y < maxy; y++) {
@@ -85,6 +86,13 @@ static void game_monsts_wid_create (void)
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                     if (!t->is_shown_on_monstbar()) {
                         continue;
+                    }
+                    if (t->is_shown_uniquely_on_monstbar()) {
+                        auto name = t->tp()->name();
+                        if (shown[name]) {
+                            continue;
+                        }
+                        shown[name] = true;
                     }
 
                     if (t->is_monst()) {
