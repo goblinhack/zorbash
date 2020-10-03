@@ -77,14 +77,16 @@ void Level::update_minimap (void)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c;
 
-                if (is_monst(x, y) || is_generator(x, y)) {
+                if (is_monst(x, y)) {
                     c = RED;
+                } else if (is_generator(x, y)) {
+                    c = PINK;
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
                     c = PINK;
                 } else if (is_door(x, y)) {
-                    c = RED;
+                    c = BROWN;
                 } else if (is_lava(x, y)) {
                     c = ORANGE;
                 } else if (is_wall(x, y)) {
@@ -154,81 +156,21 @@ void Level::update_minimap (void)
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
+
                 if (!is_visited(x, y)) {
                     c = GRAY;
                     c.a = 100;
-                } else if (is_monst(x, y) || is_generator(x, y)) {
+                } else if (is_monst(x, y)) {
                     c = RED;
+                } else if (is_generator(x, y)) {
+                    c = PINK;
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
                     c = WHITE;
 //                    c.a = pulse_color.a;
                 } else if (is_door(x, y)) {
-                    c = RED;
-                } else if (is_lava(x, y)) {
-                    c = ORANGE;
-                } else if (is_wall(x, y)) {
-                       if (is_visited(x, y)) {
-                        c = GRAY80;
-                    } else {
-                        c = GRAY70;
-                    }
-                } else if (is_rock(x, y)) {
-                       if (is_visited(x, y)) {
-                        c = GRAY70;
-                    } else {
-                        c = GRAY60;
-                    }
-                } else if (is_floor(x, y) ||
-                           is_corridor(x, y)) {
-                    if (is_visited(x, y)) {
-                        c = GRAY40;
-                    } else {
-                        c = GRAY20;
-                    }
-                } else if (is_water(x, y)) {
-                    c = BLUE2;
-                } else if (is_dirt(x, y)) {
-                    c = GRAY20;
-                } else {
-                    c = BLACK;
-                }
-
-                if (!is_lit(x, y)) {
-                    c.r /= 2;
-                    c.g /= 2;
-                    c.b /= 2;
-                }
-
-                if (!x || !y) {
-                    c = GRAY;
-                    c.a = 200;
-                } else if ((x == MAP_WIDTH - 1) || (y == MAP_HEIGHT - 1)) {
-                    c = DARKGRAY;
-                    c.a = 200;
-                }
-
-                if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-                    if ((game->minimap_over.x == x) &&
-                        (game->minimap_over.y == y)) {
-                        c = GREEN;
-//                        c.a = pulse_color.a;
-                    }
-                }
-
-                if (!is_visited(x, y)) {
-                    c = GRAY;
-                    c.a = 100;
-                } else if (is_monst(x, y) || is_generator(x, y)) {
-                    c = RED;
-                } else if (player &&
-                    (x == (int)player->mid_at.x) &&
-                    (y == (int)player->mid_at.y)) {
-                    c = WHITE;
-//                    c.a = pulse_color.a;
-                } else if (is_door(x, y)) {
-                    c = RED;
+                    c = BROWN;
                 } else if (is_lava(x, y)) {
                     c = ORANGE;
                 } else if (is_wall(x, y)) {
