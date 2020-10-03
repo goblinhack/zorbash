@@ -1157,6 +1157,7 @@ public:
     void jump_end(void);
     void kill(Thingp killer, const char *reason);
     void kill(Thingp killer, std::string &reason);
+    void gc(void);
     void lava_tick();
     void level_change(Levelp);
     void level_enter(void);

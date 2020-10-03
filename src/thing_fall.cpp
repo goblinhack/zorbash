@@ -48,8 +48,8 @@ float Thing::get_fall (void)
 
     if (t >= get_timestamp_fall_end()) {
         is_falling = false;
-        level_push();
         log("end of falling");
+        level_push();
 
         if (!is_player()) {
             fall_to_next_level();
@@ -225,6 +225,7 @@ bool Thing::fall_to_next_level (void)
             //
             // Update the z depth when falling
             // 
+            log("end of falling");
             level_pop();
             is_falling = false;
             update_interpolated_position();

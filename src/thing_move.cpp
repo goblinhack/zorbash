@@ -229,6 +229,7 @@ void Thing::update_interpolated_position (void)
     }
 
     if (update_pos) {
+        // log("update pos");
         level_pop();
         set_interpolated_mid_at(new_pos);
         level_push();
@@ -286,6 +287,7 @@ void Thing::update_pos (fpoint to, bool immediately)
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
+    // log("move");
     level_pop();
     mid_at = to;
     level_push();

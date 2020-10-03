@@ -170,6 +170,7 @@ _
                     //
                     log("eat corpse %s", it->to_string().c_str());
                     it->hide();
+                    it->gc();
                     return true;
                 }
             } else if (is_player()) {

@@ -289,6 +289,7 @@ public:
     void update_hazard_tile_map(void);
     void update_map(void);
     void update_minimap(void);
+    void sanity_check(void);
 
     void set_wobble(float);
     float get_wobble(void) const;
