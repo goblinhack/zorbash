@@ -73,10 +73,7 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (on_death_is_open()) {
-        if (is_loggable_for_important_stuff()) {
-            log("killed, now open");
-        }
-
+        log("killed, now open");
         level_pop();
         is_open = true;
         level_push();
@@ -109,6 +106,11 @@ void Thing::kill (Thingp killer, const char *reason)
         log("killed, need to gc");
     }
 
+    gc();
+}
+
+void Thing::gc (void)
+{_
     auto result = level->all_gc_things.insert(std::pair(id, this));
     if (result.second == false) {
         err("failed to insert into gc thing map");

@@ -80,6 +80,36 @@ void Level::tick (void)
     if (!game->things_are_moving) {
         game->tick_end();
     }
+
+#if 0
+    if (g_opt_debug){
+	sanity_check();
+    }
+#endif
+}
+
+void Level::sanity_check (void)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+	for (auto y = 0; y < MAP_HEIGHT; y++) {
+            auto monst_count = 0;
+	    FOR_ALL_THINGS(this, t, x, y) {
+		if (t->is_monst()) {
+                    monst_count++;
+		}
+	    } FOR_ALL_THINGS_END()
+
+            if (monst_count) {
+                if (!is_monst(x, y)) {
+                    DIE("level sanity fail. monst count exists, but no monster found, at %d,%d", x, y);
+                }
+            } else {
+                if (is_monst(x, y)) {
+                    DIE("level sanity fail. no monst count exists, but monster found, at %d,%d", x, y);
+                }
+            }
+	}
+    }
 }
 
 void Level::update_all_ticks (void)
