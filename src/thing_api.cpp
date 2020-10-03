@@ -1481,6 +1481,9 @@ int Thing::decr_gold (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->gold -= v);
+    if (monstp->gold < 0) {
+        monstp->gold = 0;
+    }
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1499,6 +1502,9 @@ int Thing::decr_gold (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->gold--);
+    if (monstp->gold < 0) {
+        monstp->gold = 0;
+    }
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1539,6 +1545,9 @@ int Thing::decr_keys (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->keys -= v);
+    if (monstp->keys < 0) {
+        monstp->keys = 0;
+    }
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1557,6 +1566,9 @@ int Thing::decr_keys (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->keys--);
+    if (monstp->keys < 0) {
+        monstp->keys = 0;
+    }
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1823,6 +1835,9 @@ int Thing::decr_stats_defence (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence -= v);
+    if (monstp->stats_defence < 0) {
+        monstp->stats_defence = 0;
+    }
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -1841,6 +1856,9 @@ int Thing::decr_stats_defence (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence--);
+    if (monstp->stats_defence < 0) {
+        monstp->stats_defence = 0;
+    }
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -3162,6 +3180,9 @@ int Thing::decr_stats_stamina (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina -= v);
+    if (monstp->stats_stamina < 0) {
+        monstp->stats_stamina = 0;
+    }
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -3180,6 +3201,9 @@ int Thing::decr_stats_stamina (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina--);
+    if (monstp->stats_stamina < 0) {
+        monstp->stats_stamina = 0;
+    }
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
