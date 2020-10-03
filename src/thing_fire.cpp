@@ -10,7 +10,7 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 
-void Thing::acid_tick (void)
+void Thing::fire_tick (void)
 {_
     if (is_changing_level ||
         is_hidden || 
@@ -22,45 +22,39 @@ void Thing::acid_tick (void)
         return;
     }
 
-    if (!is_acid_hater()) {
+    if (!is_on_fire()) {
         return;
     }
-
-    if (!level->is_acid(mid_at.x, mid_at.y)) {
-        return;
-    }
-
-    bool hit;
-
-    log("acid tick");
 
     //
     // Give the player a chance
     //
+    bool hit = false;
     if (!level->is_smoke(mid_at.x, mid_at.y)) {
         auto smoke = level->thing_new("smoke1", mid_at);
         smoke->set_lifespan(4);
 
-        hit = ((int)random_range(0, 100) < 50);
+        hit = ((int)random_range(0, 100) < 20);
     } else {
         hit = false;
     }
 
     if (hit) {
-        FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2) {
-            auto tpp = t->tp();
-            if (!tpp->is_acid()) {
-                continue;
-            }
-            if (t->get_tick() < game->tick_current) {
-                t->set_tick(game->tick_current);
-                is_hit_by(t, t->get_stats_attack());
-                break;
-            }
-        } FOR_ALL_THINGS_END()
-    } else {
+        auto fire = tp_find("fire");
+        auto damage = fire->get_stats_attack();
+
+        if (is_fire_hater()) {
+            damage *= 2;
+        }
+
+        auto h = decr_stats_health(damage);
         if (is_player()) {
-            MINICON("Your shoes are dissolving!");
+            MINICON("%%fg=red$You take %u burn damage!%%fg=reset$", damage);
+        }
+
+        if (h <= 0) {
+            h = set_stats_health(0);
+            dead("burned to death");
         }
     }
 }

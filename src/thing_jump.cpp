@@ -8,6 +8,17 @@
 #include "my_sprintf.h"
 #include "my_gl.h"
 
+float Thing::how_far_i_can_jump (void)
+{_
+    auto d = (float) is_jumper_distance() + 0.5 + (random_range(0, 100) / 100.0);
+
+    if (get_stats_stamina() < get_stats_stamina_max() / 2) {
+        d /= 2;
+    }
+
+    return d;
+}
+
 bool Thing::try_to_jump (point to)
 {_
     if (is_changing_level ||
@@ -18,6 +29,15 @@ bool Thing::try_to_jump (point to)
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
+    }
+
+    if (is_stamina_check()) {
+        if (!get_stats_stamina()) {
+            if (is_player()) {
+                MINICON("You are too tired to jump. You need to rest.");
+            }
+            return false;
+        }
     }
 
     auto x = to.x;
@@ -57,13 +77,12 @@ bool Thing::try_to_jump (point to)
     //
     // Add some random delta for fun and some for diagonals
     //
-    auto how_far_i_can_jump = (float) is_jumper_distance() +
-        0.5 + (random_range(0, 100) / 100.0);
+    float d = how_far_i_can_jump();
 
-    if (distance(mid_at, fto) > how_far_i_can_jump) {
+    if (distance(mid_at, fto) > d) {
         auto u = (fto - mid_at);
         u.unit();
-        u *= is_jumper_distance();
+        u *= d;
         fto = mid_at + u;
         to = make_point(fto);
         x = to.x;
@@ -250,6 +269,8 @@ bool Thing::try_to_jump (point to)
 
     wobble(25);
 
+    decr_stats_stamina(10);
+
     return (true);
 }
 
@@ -265,7 +286,7 @@ bool Thing::try_to_jump (void)
         return false;
     }
 
-    int d = is_jumper_distance() / 2;
+    float d = how_far_i_can_jump();
     int tries = d * d;
 
     while (tries-- > 0) {
@@ -291,7 +312,7 @@ bool Thing::try_harder_to_jump (void)
         return false;
     }
 
-    int d = is_jumper_distance() / 2;
+    float d = how_far_i_can_jump();
     int tries = 100;
 
     while (tries-- > 0) {

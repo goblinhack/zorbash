@@ -41,6 +41,10 @@ bool Thing::location_check (void)
     if (is_dead) {
         return (false);
     }
+    fire_tick();
+    if (is_dead) {
+        return (false);
+    }
 
     auto ret = true;
     if (exit_tick()) {

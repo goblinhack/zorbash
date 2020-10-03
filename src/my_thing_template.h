@@ -277,7 +277,7 @@ private:
     int _is_rrr60 {};
     int _is_rrr61 {};
     int _is_rrr62 {};
-    int _is_rrr63 {};
+    int _is_stamina_check {};
     int _is_gfx_shown_in_bg {};
     int _is_rrr7 {};
     int _is_rrr8 {};
@@ -387,9 +387,9 @@ public:
     const std::string& nutrition_dice_str(void) const;
     void set_nutrition_dice(const std::string &);
 
-    const Dice& stats_attack_dice(void) const;
-    const int stats_attack(void) const;
-    const std::string& stats_attack_dice_str(void) const;
+    const Dice& get_stats_attack_dice(void) const;
+    const int get_stats_attack(void) const;
+    const std::string& get_stats_attack_dice_str(void) const;
     void set_stats_attack_dice(const std::string &);
 
     const Dice& gold_value_dice(void) const;
@@ -631,7 +631,7 @@ public:
     int is_rrr60(void) const;
     int is_rrr61(void) const;
     int is_rrr62(void) const;
-    int is_rrr63(void) const;
+    int is_stamina_check(void) const;
     int is_gfx_shown_in_bg(void) const;
     int on_death_drop_all_items(void) const;
     int is_steal_item_chance_d1000(void) const;
@@ -873,7 +873,7 @@ public:
     void set_is_rrr60(int);
     void set_is_rrr61(int);
     void set_is_rrr62(int);
-    void set_is_rrr63(int);
+    void set_is_stamina_check(int);
     void set_is_gfx_shown_in_bg(int);
     void set_on_death_drop_all_items(int);
     void set_is_steal_item_chance_d1000(int);

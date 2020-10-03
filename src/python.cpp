@@ -684,7 +684,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr60)
     TP_SET_DECL(is_rrr61)
     TP_SET_DECL(is_rrr62)
-    TP_SET_DECL(is_rrr63)
+    TP_SET_DECL(is_stamina_check)
     TP_SET_DECL(is_gfx_shown_in_bg)
     TP_SET_DECL(on_death_drop_all_items)
     TP_SET_DECL(is_steal_item_chance_d1000)

@@ -365,8 +365,8 @@ class Tp:
     def set_is_rrr62(self, value):
         zx.tp_set_is_rrr62(self, value)
 
-    def set_is_rrr63(self, value):
-        zx.tp_set_is_rrr63(self, value)
+    def set_is_stamina_check(self, value):
+        zx.tp_set_is_stamina_check(self, value)
 
     def set_is_gfx_shown_in_bg(self, value):
         zx.tp_set_is_gfx_shown_in_bg(self, value)

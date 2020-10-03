@@ -801,7 +801,7 @@ _
         //
         // If on fire, allow fire to burn its owner - you!
         //
-        if (is_fire()) {
+        if (!is_fire()) {
             log("yes; allow fire to burn owner");
             return true;
         }

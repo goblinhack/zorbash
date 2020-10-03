@@ -172,6 +172,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_nearby.o 		\
     $(OBJDIR)/thing_obstacle.o 		\
     $(OBJDIR)/thing_on_fire.o 		\
+    $(OBJDIR)/thing_fire.o 		\
     $(OBJDIR)/thing_owner.o 		\
     $(OBJDIR)/thing_path.o 		\
     $(OBJDIR)/thing_rest.o 		\

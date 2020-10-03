@@ -68,6 +68,10 @@ bool Thing::move (fpoint future_pos,
         return (false);
     }
 
+    if (!attack) {
+        rest();
+    }
+
     if (idle) {
         if (is_player()) {
             game->tick_begin("player idled");
@@ -302,7 +306,7 @@ void Thing::move_set_dir_from_delta (fpoint delta)
 {
     //
     // If not moving and this is the first move then break out of the
-    // idle animati.
+    // idle animation.
     //
     if (is_dir_none()) {
         timestamp_next_frame = time_get_time_ms_cached();

@@ -953,6 +953,7 @@ public:
     int is_jumper(void) const;
     int is_jumper_chance_d1000(void) const;
     int is_jumper_distance(void) const;
+    float how_far_i_can_jump(void);
     int is_jumper_on_low_hp_chance_d1000(void) const;
     int is_key(void) const;
     int is_killed_on_hit_or_miss(void) const;
@@ -1037,7 +1038,7 @@ public:
     int is_rrr60(void) const;
     int is_rrr61(void) const;
     int is_rrr62(void) const;
-    int is_rrr63(void) const;
+    int is_stamina_check(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int is_rrr9(void) const;
@@ -1095,6 +1096,7 @@ public:
     uint8_t is_less_preferred_terrain(point p) const;
     uint8_t is_visible() const;
     void acid_tick();
+    void fire_tick();
     void add_enemy(Thingp attacker);
     void ai_get_next_hop(void);
     void animate();

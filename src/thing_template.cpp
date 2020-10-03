@@ -133,6 +133,10 @@ void tp_init_after_loading (void)
         if (tp->is_treasure())       { tp_treasure.push_back(tp); }
         if (tp->is_wall())           { tp_wall.push_back(tp); }
         if (tp->is_wall_deco())      { tp_wall_deco.push_back(tp); }
+
+        if (tp->stats_stamina()) {
+            tp->set_is_stamina_check(true);
+        }
     }
 }
 
