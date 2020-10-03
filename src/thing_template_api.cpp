@@ -29,9 +29,9 @@ const int Tp::nutrition(void) const { return _nutrition_dice.roll(); }
 const std::string& Tp::nutrition_dice_str(void) const { return _nutrition_dice_str; }
 void Tp::set_nutrition_dice(const std::string &v) { _nutrition_dice = v; _nutrition_dice_str = v; }
 
-const Dice& Tp::stats_attack_dice(void) const { return _stats_attack_dice; }
-const int Tp::stats_attack(void) const { return _stats_attack_dice.roll(); }
-const std::string& Tp::stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
+const Dice& Tp::get_stats_attack_dice(void) const { return _stats_attack_dice; }
+const int Tp::get_stats_attack(void) const { return _stats_attack_dice.roll(); }
+const std::string& Tp::get_stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
 void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
 
 const Dice& Tp::gold_value_dice(void) const { return _gold_value_dice; }
@@ -241,7 +241,7 @@ int Tp::is_rrr6(void) const { return _is_rrr6; }
 int Tp::is_rrr60(void) const { return _is_rrr60; }
 int Tp::is_rrr61(void) const { return _is_rrr61; }
 int Tp::is_rrr62(void) const { return _is_rrr62; }
-int Tp::is_rrr63(void) const { return _is_rrr63; }
+int Tp::is_stamina_check(void) const { return _is_stamina_check; }
 int Tp::is_gfx_shown_in_bg(void) const { return _is_gfx_shown_in_bg; }
 int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
 int Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1000; }
@@ -482,7 +482,7 @@ void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
 void Tp::set_is_rrr60(int v) { _is_rrr60 = v; }
 void Tp::set_is_rrr61(int v) { _is_rrr61 = v; }
 void Tp::set_is_rrr62(int v) { _is_rrr62 = v; }
-void Tp::set_is_rrr63(int v) { _is_rrr63 = v; }
+void Tp::set_is_stamina_check(int v) { _is_stamina_check = v; }
 void Tp::set_is_gfx_shown_in_bg(int v) { _is_gfx_shown_in_bg = v; }
 void Tp::set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
 void Tp::set_is_steal_item_chance_d1000(int v) { _is_steal_item_chance_d1000 = v; }

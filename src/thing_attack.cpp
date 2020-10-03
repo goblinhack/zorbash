@@ -187,11 +187,13 @@ _
         return false;
     }
 
-    if (!get_stats_stamina()) {
-        if (is_player()) {
-            MINICON("You are too tired to attack. You need to rest.");
+    if (is_stamina_check()) {
+        if (!get_stats_stamina()) {
+            if (is_player()) {
+                MINICON("You are too tired to attack. You need to rest.");
+            }
+            return (false);
         }
-        return (false);
     }
 
     auto damage = get_stats_attack();

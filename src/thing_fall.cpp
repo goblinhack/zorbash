@@ -216,8 +216,7 @@ bool Thing::fall_to_next_level (void)
             next_level->thing_new(tp_random_attack_blood()->name(), mid_at);
             if (h <= 0) {
                 h = set_stats_health(0);
-                auto reason = std::string("killed by falling");
-                dead(nullptr, reason);
+                dead("killed by falling");
             }
 
             next_level->scroll_map_to_player();

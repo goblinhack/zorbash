@@ -314,11 +314,13 @@ _
         return;
     }
 
-    if (!get_stats_stamina()) {
-        if (is_player()) {
-            MINICON("You are too tired to attack. You need to rest.");
+    if (is_stamina_check()) {
+        if (!get_stats_stamina()) {
+            if (is_player()) {
+                MINICON("You are too tired to attack. You need to rest.");
+            }
+            return;
         }
-        return;
     }
 
     std::string swung_as;

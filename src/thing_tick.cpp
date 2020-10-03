@@ -13,7 +13,7 @@
 
 bool Thing::achieve_goals_in_life (void)
 {_
-    log("achieve goals in life");
+    // log("achieve goals in life");
 _
     if (is_changing_level ||
         is_hidden || 
@@ -23,7 +23,7 @@ _
         is_waiting_to_fall || 
         is_jumping) { 
         is_tick_done = true;
-        log("skip achieve goals in life");
+        // log("skip achieve goals in life");
         return true;
     }
 
@@ -32,7 +32,7 @@ _
     //
     if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
                                          get_timestamp_last_tick())) {
-        log("too often");
+        // log("too often");
         return false;
     }
 

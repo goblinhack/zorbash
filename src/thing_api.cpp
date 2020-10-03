@@ -23,9 +23,9 @@ const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_di
 const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
 int Thing::get_nutrition (void) const {_ return (tp()->nutrition_dice().roll()); }
 
-const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->stats_attack_dice()); }
-const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->stats_attack_dice_str()); }
-int Thing::get_stats_attack (void) const {_ return (tp()->stats_attack_dice().roll()); }
+const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->get_stats_attack_dice()); }
+const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->get_stats_attack_dice_str()); }
+int Thing::get_stats_attack (void) const {_ return (tp()->get_stats_attack_dice().roll()); }
 
 const Dice& Thing::get_gold_value_dice (void) const {_ return (tp()->gold_value_dice()); }
 const std::string& Thing::get_gold_value_dice_str (void) const {_ return (tp()->gold_value_dice_str()); }
@@ -794,9 +794,9 @@ int Thing::is_rrr62(void) const
     return (tp()->is_rrr62());
 }
 
-int Thing::is_rrr63(void) const
+int Thing::is_stamina_check(void) const
 {_
-    return (tp()->is_rrr63());
+    return (tp()->is_stamina_check());
 }
 
 int Thing::is_gfx_shown_in_bg(void) const
