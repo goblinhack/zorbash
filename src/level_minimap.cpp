@@ -212,7 +212,7 @@ void Level::update_minimap (void)
                 if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
                     if ((game->minimap_over.x == x) &&
                         (game->minimap_over.y == y)) {
-                        c = WHITE;
+                        c = GREEN;
 //                        c.a = pulse_color.a;
                     }
                 }

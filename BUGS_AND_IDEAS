@@ -1,5 +1,6 @@
 bugs
 ----
+- is_monst count wrong in water
 - jump on the spot
 - jump on spot does not collect
 - remove the player icon, just use monst bar
