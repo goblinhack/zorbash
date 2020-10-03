@@ -35,43 +35,6 @@ void Level::update_minimap (void)
         solid_tex_id = tex_get_gl_binding(solid_tex);
     }
 
-#if 0
-    //
-    // We only update the map occasionally, so pulsing doesn't work
-    //
-    static int up = 8;
-    static int down = -16;
-    static int delta = up;
-    static int low = 20;
-    static int high = 240;
-    static int pulse = 1;
-    static color pulse_color(255, 255, 255, 255);
-
-    static uint32_t last_pulse_when;
-    if (!last_pulse_when) {
-        last_pulse_when = time_get_time_ms_cached();
-    }
-
-    if ((time_get_time_ms_cached() - last_pulse_when) > (uint)50) {
-        last_pulse_when = time_get_time_ms_cached();
-
-        if (player->is_dead) {
-            pulse_color.a = 255;
-        } else {
-            pulse_color.a += delta * pulse;
-        }
-
-        if (pulse_color.a > high) {
-            pulse_color.a = high;
-            delta = down;
-        }
-        if (pulse_color.a < low) {
-            pulse_color.a = low;
-            delta = up;
-        }
-    }
-#endif
-
     if (unlikely(game->config.gfx_show_hidden)) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -134,7 +97,9 @@ void Level::update_minimap (void)
                     if ((game->minimap_over.x == x) &&
                         (game->minimap_over.y == y)) {
                         c = YELLOW;
-//                        c.a = pulse_color.a;
+                    }
+                    if ((cursor_at.x == x) && (cursor_at.y == y)) {
+                        c = YELLOW;
                     }
                 }
 
@@ -168,7 +133,6 @@ void Level::update_minimap (void)
                     (x == (int)player->mid_at.x) &&
                     (y == (int)player->mid_at.y)) {
                     c = WHITE;
-//                    c.a = pulse_color.a;
                 } else if (is_door(x, y)) {
                     c = BROWN;
                 } else if (is_lava(x, y)) {
@@ -217,6 +181,9 @@ void Level::update_minimap (void)
                 if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
                     if ((game->minimap_over.x == x) &&
                         (game->minimap_over.y == y)) {
+                        c = YELLOW;
+                    }
+                    if ((cursor_at.x == x) && (cursor_at.y == y)) {
                         c = YELLOW;
                     }
                 }

@@ -121,6 +121,11 @@ void Level::cursor_path_draw (point start, point end)
     for (auto& c : p) {
         thing_new("cursor_path", fpoint(c.x , c.y));
     }
+
+    //
+    // Let's see the path
+    //
+    minimap_valid = false;
 }
 
 //
