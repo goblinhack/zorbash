@@ -341,8 +341,9 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* seed */                  in >> bits(l->seed);
     /* world_at */              in >> bits(l->world_at);
 
-    l->heatmap_valid = false;
+    l->update();
     l->bg_valid = false;
+    l->timestamp_fade_in_begin = time_get_time_ms_cached();
     l->map_changed = true;
     l->cursor_needs_update = true;
     l->map_follow_player = true;
