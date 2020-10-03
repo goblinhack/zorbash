@@ -28,6 +28,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_movement_blocking_soft(True)
     x.set_is_shovable(True)
     x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_uniquely_on_monstbar(True)
     x.set_is_torch(True)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)

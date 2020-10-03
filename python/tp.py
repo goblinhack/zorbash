@@ -362,8 +362,8 @@ class Tp:
     def set_is_rrr61(self, value):
         zx.tp_set_is_rrr61(self, value)
 
-    def set_is_rrr62(self, value):
-        zx.tp_set_is_rrr62(self, value)
+    def set_is_shown_uniquely_on_monstbar(self, value):
+        zx.tp_set_is_shown_uniquely_on_monstbar(self, value)
 
     def set_is_stamina_check(self, value):
         zx.tp_set_is_stamina_check(self, value)
