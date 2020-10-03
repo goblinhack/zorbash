@@ -20,7 +20,6 @@ def potion_init(name, text_name):
     x.set_is_item(True)
     x.set_is_item_class_a(True)
     x.set_is_item_not_stackable(True)
-    x.set_is_light_strength(2)
     x.set_is_movable(True)
     x.set_is_shown_on_monstbar(True)
     x.set_normal_placement_rules(True)

@@ -13,7 +13,6 @@ static const char *dict2_names[] = {
     "ail",
     "ails",
     "aim",
-    "aimed",
     "aims",
     "air",
     "airs",
