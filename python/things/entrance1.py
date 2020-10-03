@@ -15,7 +15,7 @@ def tp_init(name, text_name):
     x.set_is_entrance(True)
     x.set_is_gfx_shown_in_bg(True)
     x.set_is_interesting(True)
-    x.set_is_light_strength(4)
+    x.set_is_light_strength(2)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("the");

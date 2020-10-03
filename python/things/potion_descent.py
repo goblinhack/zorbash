@@ -17,7 +17,6 @@ def potion_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_item(True)
     x.set_is_item_class_b(True)
-    x.set_is_light_strength(2)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
@@ -25,7 +24,6 @@ def potion_init(name, text_name):
     x.set_is_shown_on_monstbar(True)
     x.set_is_throwable(True)
     x.set_is_usable(True)
-    x.set_light_color("cyan")
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=cyan$A swirling milky blue potion of descent")
