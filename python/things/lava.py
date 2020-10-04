@@ -8,7 +8,6 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_ai_obstacle(True)
     x.set_gfx_animated(True)
     x.set_is_cursor_can_hover_over_but_needs_double_click(True)
-    x.set_is_gfx_shown_in_bg(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_lava(True)

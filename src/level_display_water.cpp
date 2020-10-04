@@ -119,11 +119,6 @@ void Level::display_water (int fbo,
             if (likely(!is_water(x, y))) {
                 continue;
             }
-            if (fbo != FBO_FULLMAP) {
-                if (!is_visited(x, y)) {
-                    continue;
-                }
-            }
             FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tpp->is_water()) {

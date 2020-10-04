@@ -180,8 +180,6 @@ bool Light::calculate (int last)
     // Walk the light rays in a circle. Find the nearest walls and then let
     // the light leak a little.
     //
-    bool do_set_visited = last && (player && (owner == player));
-
     for (int16_t i = 0; i < max_light_rays; i++) {
         auto r = &getref_no_check(ray, i);
         int16_t step = 0;
@@ -196,9 +194,7 @@ bool Light::calculate (int last)
             const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
 
             if (level->is_oob(x, y)) { break; }
-            if (do_set_visited) {
-                level->set_visited_no_check(x, y); // for AI and jumping
-            }
+            level->set_visited_no_check(x, y); // for AI and jumping
             level->set_is_lit_no_check(x, y); // allows lights to fade
             rp++;
 
