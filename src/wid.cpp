@@ -3663,9 +3663,13 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     game->init();
                     CON("USERCFG: reloaded dungeon");
                     break;
+                case 'm':
+                    game->config.ascii_mode = !game->config.ascii_mode;
+                    g_opt_ascii_mode = game->config.ascii_mode;
+                    // game->level->get_tiles();
+                    break;
             }
         default:
-
             if (key->scancode == (SDL_Scancode)game->config.key_screenshot) {
                 sdl_screenshot();
                 MINICON("Screenshot taken");

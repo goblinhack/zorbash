@@ -36,12 +36,6 @@ public:
     //
     uint16_t index {};
 
-    //
-    // IF this tile has a specific outline pattern, like water ripples,
-    // then this is the jump to that outline within the same texture
-    //
-    uint16_t gfx_outline_index_offset {};
-
     uint16_t pix_width {};
     uint16_t pix_height {};
 

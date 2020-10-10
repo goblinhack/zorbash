@@ -102,7 +102,6 @@ Tile::Tile (const class Tile *tile)
     is_hp_50_percent = tile->is_hp_50_percent;
     is_hp_75_percent = tile->is_hp_75_percent;
     is_hp_100_percent = tile->is_hp_100_percent;
-    gfx_outline_index_offset = tile->gfx_outline_index_offset;
     is_sleeping = tile->is_sleeping;
     is_open = tile->is_open;
     is_dead = tile->is_dead;
@@ -1102,11 +1101,6 @@ uint8_t tile_is_hp_75_percent (Tilep t)
 uint8_t tile_is_hp_100_percent (Tilep t)
 {
     return (t->is_hp_100_percent);
-}
-
-uint8_t tile_gfx_outline_index_offset (Tilep t)
-{
-    return (t->gfx_outline_index_offset);
 }
 
 uint8_t tile_is_sleeping (Tilep t)
