@@ -16,7 +16,7 @@ void Thing::get_tiles ()
     auto curr = tile_index_to_tile(tile_curr);
     auto tiles = &tpp->outline_tiles;
     if (curr) {
-        auto tile = tile_n(tiles, curr->index + curr->gfx_outline_index_offset);
+        auto tile = tile_n(tiles, curr->index);
         if (tile) {
             out->tile_outline = tile->global_index;
         }
