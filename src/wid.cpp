@@ -3666,7 +3666,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 case 'm':
                     game->config.ascii_mode = !game->config.ascii_mode;
                     g_opt_ascii_mode = game->config.ascii_mode;
-                    // game->level->get_tiles();
+                    game->level->get_tiles();
                     break;
             }
         default:

@@ -41,8 +41,11 @@ extern class Game *game;
 
 extern Tpidmap tp_id_map;
 extern Tpnamemap tp_name_map;
+
+#define MAX_GFX_MODES 2
+
 extern std::map<std::string, class Tile* > all_tiles;
-extern std::vector<class Tile* > all_tiles_array;
+extern std::vector<class Tile* > all_tiles_array[MAX_GFX_MODES];
 
 extern char *DATA_PATH;
 extern char *EXEC_DIR;

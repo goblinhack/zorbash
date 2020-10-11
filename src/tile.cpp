@@ -16,7 +16,7 @@
 #include "my_game.h"
 
 std::map<std::string, class Tile* > all_tiles;
-std::vector<class Tile* > all_tiles_array;
+std::vector<class Tile* > all_tiles_array[MAX_GFX_MODES];
 
 static uint8_t tile_init_done;
 
@@ -39,7 +39,9 @@ void tile_fini (void)
     }
 
     all_tiles.clear();
-    all_tiles_array.clear();
+    for (auto mode = 0; mode < MAX_GFX_MODES; mode++) {
+        all_tiles_array[mode].clear();
+    }
 }
 
 Tile::Tile (const class Tile *tile)
@@ -110,14 +112,14 @@ Tile::Tile (const class Tile *tile)
     internal_has_dir_anim = tile->internal_has_dir_anim;
 
     index = 0;
-    global_index = all_tiles_array.size() + 1;
+    global_index = all_tiles_array[0].size() + 1;
     name = tile->name + " " + std::to_string(global_index);
 
     auto result = all_tiles.insert(std::make_pair(name, this));
     if (result.second == false) {
         ERR("tile copy insert name [%s] failed", name.c_str());
     }
-    all_tiles_array.push_back(this);
+    all_tiles_array[0].push_back(this);
 }
 
 void tile_load_arr (std::string file, std::string name,
@@ -143,7 +145,6 @@ void tile_load_arr (std::string file, std::string name,
     pixel_size.h = height;
 
     while (nargs--) {
-
         std::string name = arr[idx++];
 
         if (name != "") {
@@ -160,8 +161,8 @@ void tile_load_arr (std::string file, std::string name,
             //
             // Global array of all tiles
             //
-            all_tiles_array.push_back(t);
-            t->global_index = all_tiles_array.size();
+            all_tiles_array[0].push_back(t);
+            t->global_index = all_tiles_array[0].size();
 
             t->name = name;
             t->index = idx - 1;
@@ -321,8 +322,8 @@ void tile_load_arr (std::string file, std::string name,
             //
             // Global array of all tiles
             //
-            all_tiles_array.push_back(t);
-            t->global_index = all_tiles_array.size();
+            all_tiles_array[0].push_back(t);
+            t->global_index = all_tiles_array[0].size();
 
             t->name = name;
             t->index = idx - 1;
@@ -491,8 +492,8 @@ void tile_load_arr_sprites (std::string file,
             //
             // Global array of all tiles
             //
-            all_tiles_array.push_back(t);
-            t->global_index = all_tiles_array.size();
+            all_tiles_array[0].push_back(t);
+            t->global_index = all_tiles_array[0].size();
 
             t->name = name;
             t->index = idx - 1;
@@ -664,8 +665,8 @@ void tile_load_arr_sprites (std::string file,
             //
             // Global array of all tiles
             //
-            all_tiles_array.push_back(t);
-            t->global_index = all_tiles_array.size();
+            all_tiles_array[0].push_back(t);
+            t->global_index = all_tiles_array[0].size();
 
             t->name = name;
             t->index = idx - 1;
@@ -691,7 +692,6 @@ void tile_load_arr_sprites (std::string file,
             t->ox2 = t->x2;
             t->oy2 = t->y2;
 #endif
-
             t->pct_width = fw;
             t->pct_height = fh;
 
@@ -801,14 +801,6 @@ Tilep tile_find (std::string name)
         return (0);
     }
 
-    if (game && game->config.ascii_mode) {
-        auto ascii_name = "ascii." + name;
-        auto result = all_tiles.find(ascii_name);
-        if (result != all_tiles.end()) {
-            return (result->second);
-        }
-    }
-
     auto result = all_tiles.find(name);
     if (result == all_tiles.end()) {
         return (0);
@@ -822,14 +814,6 @@ Tilep tile_find_mand (std::string name)
     if (name == "") {
         ERR("no tile name give");
         return (0);
-    }
-
-    if (game && game->config.ascii_mode) {
-        auto ascii_name = "ascii." + name;
-        auto result = all_tiles.find(ascii_name);
-        if (result != all_tiles.end()) {
-            return (result->second);
-        }
     }
 
     auto result = all_tiles.find(name);
@@ -1144,7 +1128,8 @@ Tilep tile_first (Tilemap *tiles)
         return (0);
     }
 
-    return ((*tiles)[0]);
+    auto tile = ((*tiles)[0]);
+    return tile_index_to_tile(tile->global_index);
 }
 
 Tilep tile_random (Tilemap *tiles)
@@ -1153,7 +1138,8 @@ Tilep tile_random (Tilemap *tiles)
         return (0);
     }
 
-    return ((*tiles)[myrand() % tiles->size()]);
+    auto tile = ((*tiles)[myrand() % tiles->size()]);
+    return tile_index_to_tile(tile->global_index);
 }
 
 Tilep tile_n (Tilemap *tiles, int n)
@@ -1162,7 +1148,8 @@ Tilep tile_n (Tilemap *tiles, int n)
         return (0);
     }
 
-    return ((*tiles)[n % tiles->size()]);
+    auto tile = ((*tiles)[n % tiles->size()]);
+    return tile_index_to_tile(tile->global_index);
 }
 
 Tilep tile_next (Tilemap *tiles, Tilep in)
@@ -1176,7 +1163,8 @@ Tilep tile_next (Tilemap *tiles, Tilep in)
     if (cursor >= tiles->size()) {
         cursor = 0;
     }
-    return ((*tiles)[cursor]);
+    auto tile = ((*tiles)[cursor]);
+    return tile_index_to_tile(tile->global_index);
 }
 
 int32_t Tile::gl_binding (void) const 
@@ -1567,4 +1555,71 @@ void tile_blit_outline_section_colored (uint16_t index,
                                       tile_tl, tile_br, tl, br,
                                       color_bl, color_br,
                                       color_tl, color_tr, scale);
+}
+
+//
+// Find alternative tiles for other graphics modes
+//
+void tile_update (void)
+{_
+    for (auto mode = 1 ; mode < MAX_GFX_MODES; mode++) {
+        all_tiles_array[mode].resize(all_tiles_array[0].size());
+        for (auto i = 0; i < (int)all_tiles_array[0].size(); i++) {
+            auto tile = all_tiles_array[0][i];
+            if (!tile) {
+                continue;
+            }
+            auto ascii_name = "ascii." + tile->name;
+            auto result = all_tiles.find(ascii_name);
+            if (result == all_tiles.end()) {
+                all_tiles_array[mode][i] = tile;
+                continue;
+            }
+            auto alt = result->second;
+            if (!alt) {
+                DIE("no alt tile");
+            }
+            all_tiles_array[mode][i] = alt;
+
+            alt->index                   = tile->index;
+            alt->delay_ms                = tile->delay_ms;
+            alt->dir                     = tile->dir;
+            alt->internal_has_dir_anim   = tile->internal_has_dir_anim;
+            alt->is_alive_on_end_of_anim = tile->is_alive_on_end_of_anim;
+            alt->is_dead                 = tile->is_dead;
+            alt->is_dead_on_end_of_anim  = tile->is_dead_on_end_of_anim;
+            alt->is_end_of_anim          = tile->is_end_of_anim;
+            alt->is_hp_100_percent       = tile->is_hp_100_percent;
+            alt->is_hp_25_percent        = tile->is_hp_25_percent;
+            alt->is_hp_50_percent        = tile->is_hp_50_percent;
+            alt->is_hp_75_percent        = tile->is_hp_75_percent;
+            alt->is_invisible            = tile->is_invisible;
+            alt->is_join_bot             = tile->is_join_bot;
+            alt->is_join_horiz           = tile->is_join_horiz;
+            alt->is_join_l               = tile->is_join_l;
+            alt->is_join_l180            = tile->is_join_l180;
+            alt->is_join_l270            = tile->is_join_l270;
+            alt->is_join_l90             = tile->is_join_l90;
+            alt->is_join_left            = tile->is_join_left;
+            alt->is_join_node            = tile->is_join_node;
+            alt->is_join_right           = tile->is_join_right;
+            alt->is_join_t               = tile->is_join_t;
+            alt->is_join_t180            = tile->is_join_t180;
+            alt->is_join_t270            = tile->is_join_t270;
+            alt->is_join_t90             = tile->is_join_t90;
+            alt->is_join_top             = tile->is_join_top;
+            alt->is_join_vert            = tile->is_join_vert;
+            alt->is_join_x               = tile->is_join_x;
+            alt->is_moving               = tile->is_moving;
+            alt->is_open                 = tile->is_open;
+            alt->is_outline              = tile->is_outline;
+            alt->is_resurrecting         = tile->is_resurrecting;
+            alt->is_sleeping             = tile->is_sleeping;
+            alt->is_yyy5                 = tile->is_yyy5;
+            alt->is_yyy6                 = tile->is_yyy6;
+            alt->is_yyy7                 = tile->is_yyy7;
+            alt->is_yyy8                 = tile->is_yyy8;
+            alt->is_yyy9                 = tile->is_yyy9;
+        }
+    }
 }

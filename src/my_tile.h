@@ -80,45 +80,44 @@ public:
     // Delay in ms between frames.
     //
     uint32_t delay_ms {};
-    int dir {};
 
-    bool is_join_node {};
-    bool is_join_left {};
+    bool internal_has_dir_anim {};
+    bool is_alive_on_end_of_anim {};
+    bool is_dead {};
+    bool is_dead_on_end_of_anim {};
+    bool is_end_of_anim {};
+    bool is_hp_100_percent {};
+    bool is_hp_25_percent {};
+    bool is_hp_50_percent {};
+    bool is_hp_75_percent {};
+    bool is_invisible {};
     bool is_join_bot {};
-    bool is_join_right {};
-    bool is_join_top {};
     bool is_join_horiz {};
-    bool is_join_vert {};
-    bool is_join_l90 {};
     bool is_join_l {};
-    bool is_join_l270 {};
     bool is_join_l180 {};
-    bool is_join_t270 {};
-    bool is_join_t180 {};
-    bool is_join_t90 {};
+    bool is_join_l270 {};
+    bool is_join_l90 {};
+    bool is_join_left {};
+    bool is_join_node {};
+    bool is_join_right {};
     bool is_join_t {};
+    bool is_join_t180 {};
+    bool is_join_t270 {};
+    bool is_join_t90 {};
+    bool is_join_top {};
+    bool is_join_vert {};
     bool is_join_x {};
-    bool is_outline {};
-
     bool is_moving {};
+    bool is_open {};
+    bool is_outline {};
+    bool is_resurrecting {};
+    bool is_sleeping {};
     bool is_yyy5 {};
     bool is_yyy6 {};
     bool is_yyy7 {};
     bool is_yyy8 {};
     bool is_yyy9 {};
-    bool is_invisible {};
-    bool is_hp_25_percent {};
-    bool is_hp_50_percent {};
-    bool is_hp_75_percent {};
-    bool is_hp_100_percent {};
-    bool is_sleeping {};
-    bool is_open {};
-    bool is_dead {};
-    bool is_end_of_anim {};
-    bool is_dead_on_end_of_anim {};
-    bool is_resurrecting {};
-    bool is_alive_on_end_of_anim {};
-    bool internal_has_dir_anim {};
+    int dir {};
 
 private:
     int32_t _gl_binding {};
@@ -137,15 +136,16 @@ typedef class Tile* Tilep;
 
 static inline Tilep tile_index_to_tile (uint16_t i)
 {
-    if (!i) {
+    if (unlikely(!i)) {
         return (nullptr);
     } else {
-        return all_tiles_array[i - 1 ];
+        return all_tiles_array[g_opt_ascii_mode][i - 1];
     }
 }
 
 uint8_t tile_init(void);
 void tile_fini(void);
+void tile_update(void);
 void tile_load(std::string file, uint32_t width, uint32_t height,
                uint32_t nargs, ...);
 void tile_load_arr(std::string file,

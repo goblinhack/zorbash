@@ -1139,7 +1139,7 @@ uint8_t config_errored (tokens_t *tokens, void *context)
 }
 
 void config_update_all (void)
-{
+{_
     CON("INIT: OpenGL leave 2D mode");
     config_gfx_zoom_update();
     config_gfx_vsync_update();
@@ -1439,7 +1439,7 @@ void sdl_loop (void)
 }
 
 void sdl_flush_display (void)
-{
+{_
     if (g_opt_fast_start) {
         return;
     }
@@ -1460,7 +1460,7 @@ void sdl_flush_display (void)
 }
 
 void config_gfx_zoom_update (void)
-{
+{_
     if (!game->config.gfx_zoom) {
         game->config.gfx_zoom = 1;
     }

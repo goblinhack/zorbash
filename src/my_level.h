@@ -270,15 +270,17 @@ public:
     void display(void);
     void display_anim(void);
     void display_blood(void);
-    void display_fade_out(void);
-    void display_fade_in(void);
     void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_fade_in(void);
+    void display_fade_out(void);
     void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map(void);
-    void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_map_fg_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map_bg_things(void);
+    void display_map_fg_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void get_tiles(void);
+    void sanity_check(void);
     void scroll_map(void);
     void scroll_map_do(bool fast);
     void scroll_map_set_target(void);
@@ -289,7 +291,6 @@ public:
     void update_hazard_tile_map(void);
     void update_map(void);
     void update_minimap(void);
-    void sanity_check(void);
 
     void set_wobble(float);
     float get_wobble(void) const;
