@@ -778,6 +778,10 @@ int32_t main (int32_t argc, char *argv[])
     CON("INIT: Load dungeon rooms");
     room_init();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+    CON("INIT: Find alternative tiles");
+    tile_update();
+
 #if 0
     game->init();
     game->load();
