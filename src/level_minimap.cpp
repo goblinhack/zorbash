@@ -130,7 +130,7 @@ void Level::update_minimap (void)
 
                 if (!is_visited(x, y)) {
                     if (edge_of_sceen) {
-                        c = RED;
+                        c = DARKRED;
                         c.a = 100;
                     } else {
                         c = BLACK;
