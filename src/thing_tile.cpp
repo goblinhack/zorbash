@@ -13,22 +13,12 @@ void Thing::get_tiles ()
     auto tpp = tp();
     auto out = &tiles;
 
-    auto curr = tile_index_to_tile(tile_curr);
-    auto tiles = &tpp->outline_tiles;
-    if (curr) {
-        auto tile = tile_n(tiles, curr->index);
-        if (tile) {
-            out->tile_outline = 
-                tile_index_to_tile(tile->global_index)->global_index;
-        }
-    }
-
     if (inited_tiles) {
         return;
     }
     inited_tiles = true;
 
-    tiles = &tpp->left1_tiles;
+    auto tiles = &tpp->left1_tiles;
     auto tile = tile_n(tiles, n++);
     if (tile) {
         out->left1_tile = tile_index_to_tile(tile->global_index)->global_index;

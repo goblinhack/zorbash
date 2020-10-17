@@ -13,6 +13,8 @@
 #include "my_point.h"
 #include "my_color.h"
 
+#define TILE_MAX_MODES 2
+
 class Tile {
 public:
     Tile (void) {

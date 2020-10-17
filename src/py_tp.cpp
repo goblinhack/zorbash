@@ -308,23 +308,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_jumping = 0;
     int begin_jump = 0;
     int is_outline = 0;
-    int is_join_lock = 0;
-    int is_join_horiz = 0;
-    int is_join_vert = 0;
-    int is_join_node = 0;
-    int is_join_left = 0;
-    int is_join_right = 0;
-    int is_join_top = 0;
-    int is_join_bot = 0;
-    int is_join_l90 = 0;
-    int is_join_l180 = 0;
-    int is_join_l = 0;
-    int is_join_l270 = 0;
-    int is_join_t = 0;
-    int is_join_t90 = 0;
-    int is_join_t180 = 0;
-    int is_join_t270 = 0;
-    int is_join_x = 0;
     int left = 0;
     int right = 0;
     int up = 0;
@@ -362,23 +345,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_jumping",
         (char*) "begin_jump",
         (char*) "is_outline",
-        (char*) "is_join_lock",
-        (char*) "is_join_horiz",
-        (char*) "is_join_vert",
-        (char*) "is_join_node",
-        (char*) "is_join_left",
-        (char*) "is_join_right",
-        (char*) "is_join_top",
-        (char*) "is_join_bot",
-        (char*) "is_join_l90",
-        (char*) "is_join_l180",
-        (char*) "is_join_l",
-        (char*) "is_join_l270",
-        (char*) "is_join_t",
-        (char*) "is_join_t90",
-        (char*) "is_join_t180",
-        (char*) "is_join_t270",
-        (char*) "is_join_x",
         (char*) "is_dir_left",
         (char*) "is_dir_right",
         (char*) "is_dir_up",
@@ -406,7 +372,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     };
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds,
-                                     "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+                                     "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiii",
                                      kwlist, &py_class,
                                      &py_tile_name,
                                      &fg,
@@ -418,23 +384,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_jumping,
                                      &begin_jump,
                                      &is_outline,
-                                     &is_join_lock,
-                                     &is_join_horiz,
-                                     &is_join_vert,
-                                     &is_join_node,
-                                     &is_join_left,
-                                     &is_join_right,
-                                     &is_join_top,
-                                     &is_join_bot,
-                                     &is_join_l90,
-                                     &is_join_l180,
-                                     &is_join_l,
-                                     &is_join_l270,
-                                     &is_join_t,
-                                     &is_join_t90,
-                                     &is_join_t180,
-                                     &is_join_t270,
-                                     &is_join_x,
                                      &left,
                                      &right,
                                      &up,
@@ -564,57 +513,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         break;
     }
 
-    if (is_outline) {
-        tiles = &tp->outline_tiles;
-    }
-    if (is_join_horiz) {
-        tiles = &tp->horiz_tiles;
-    }
-    if (is_join_vert) {
-        tiles = &tp->vert_tiles;
-    }
-    if (is_join_node) {
-        tiles = &tp->tiles;
-    }
-    if (is_join_left) {
-        tiles = &tp->left1_tiles;
-    }
-    if (is_join_right) {
-        tiles = &tp->right1_tiles;
-    }
-    if (is_join_top) {
-        tiles = &tp->top1_tiles;
-    }
-    if (is_join_bot) {
-        tiles = &tp->bot1_tiles;
-    }
-    if (is_join_l90) {
-        tiles = &tp->l90_tiles;
-    }
-    if (is_join_l180) {
-        tiles = &tp->l180_tiles;
-    }
-    if (is_join_l) {
-        tiles = &tp->l_tiles;
-    }
-    if (is_join_l270) {
-        tiles = &tp->l270_tiles;
-    }
-    if (is_join_t) {
-        tiles = &tp->t_tiles;
-    }
-    if (is_join_t90) {
-        tiles = &tp->t90_tiles;
-    }
-    if (is_join_t180) {
-        tiles = &tp->t180_tiles;
-    }
-    if (is_join_t270) {
-        tiles = &tp->t270_tiles;
-    }
-    if (is_join_x) {
-        tiles = &tp->x_tiles;
-    }
     if (!tiles) {
         ERR("no tiles for [%s]", py_tile_name);
         Py_RETURN_NONE;
@@ -641,24 +539,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
 
         tile->delay_ms = delay_ms;
         tile->is_moving = is_moving;
-
-        tile->is_outline = is_outline;
-        tile->is_join_horiz = is_join_horiz;
-        tile->is_join_vert = is_join_vert;
-        tile->is_join_node = is_join_node;
-        tile->is_join_left = is_join_left;
-        tile->is_join_right = is_join_right;
-        tile->is_join_top = is_join_top;
-        tile->is_join_bot = is_join_bot;
-        tile->is_join_l90 = is_join_l90;
-        tile->is_join_l180 = is_join_l180;
-        tile->is_join_l = is_join_l;
-        tile->is_join_l270 = is_join_l270;
-        tile->is_join_t = is_join_t;
-        tile->is_join_t90 = is_join_t90;
-        tile->is_join_t180 = is_join_t180;
-        tile->is_join_t270 = is_join_t270;
-        tile->is_join_x = is_join_x;
 
         tile->is_yyy5 = is_yyy5;
         tile->is_yyy6 = is_yyy6;
