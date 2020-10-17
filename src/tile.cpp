@@ -1122,42 +1122,54 @@ uint8_t tile_is_resurrecting (Tilep t)
     return (t->is_resurrecting);
 }
 
-Tilep tile_first (Tilemap *tiles)
+Tilep tile_first (Tilemap *tmap)
 {
-    if (!tiles || tiles->empty()) {
+    if (unlikely(!tmap)) {
         return (0);
     }
-
-    auto tile = ((*tiles)[0]);
+    std::vector<Tilep> *tiles = &((*tmap)[g_opt_ascii_mode]);
+    if (unlikely(tiles->empty())) {
+        return (0);
+    }
+    Tilep tile = (*tiles)[0];
     return tile_index_to_tile(tile->global_index);
 }
 
-Tilep tile_random (Tilemap *tiles)
+Tilep tile_random (Tilemap *tmap)
 {
-    if (!tiles || tiles->empty()) {
+    if (unlikely(!tmap)) {
         return (0);
     }
-
+    std::vector<Tilep> *tiles = &((*tmap)[g_opt_ascii_mode]);
+    if (unlikely(tiles->empty())) {
+        return (0);
+    }
     auto tile = ((*tiles)[myrand() % tiles->size()]);
     return tile_index_to_tile(tile->global_index);
 }
 
-Tilep tile_n (Tilemap *tiles, int n)
+Tilep tile_n (Tilemap *tmap, int n)
 {
-    if (!tiles || tiles->empty()) {
+    if (unlikely(!tmap)) {
         return (0);
     }
-
+    std::vector<Tilep> *tiles = &((*tmap)[g_opt_ascii_mode]);
+    if (unlikely(tiles->empty())) {
+        return (0);
+    }
     auto tile = ((*tiles)[n % tiles->size()]);
     return tile_index_to_tile(tile->global_index);
 }
 
-Tilep tile_next (Tilemap *tiles, Tilep in)
+Tilep tile_next (Tilemap *tmap, Tilep in)
 {
-    if (!tiles || tiles->empty()) {
+    if (unlikely(!tmap)) {
         return (0);
     }
-
+    std::vector<Tilep> *tiles = &((*tmap)[g_opt_ascii_mode]);
+    if (unlikely(tiles->empty())) {
+        return (0);
+    }
     auto cursor = in->index;
     cursor++;
     if (cursor >= tiles->size()) {
