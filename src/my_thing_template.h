@@ -14,26 +14,6 @@
 #include "my_tile.h"
 #include "my_size.h"
 
-enum {
-    IS_JOIN_HORIZ,
-    IS_JOIN_VERT,
-    IS_JOIN_NODE,
-    IS_JOIN_LEFT,
-    IS_JOIN_RIGHT,
-    IS_JOIN_TOP,
-    IS_JOIN_BOT,
-    IS_JOIN_L90,
-    IS_JOIN_L180,
-    IS_JOIN_L,
-    IS_JOIN_L270,
-    IS_JOIN_T,
-    IS_JOIN_T90,
-    IS_JOIN_T180,
-    IS_JOIN_T270,
-    IS_JOIN_X,
-    IS_JOIN_MAX,
-};
-
 class Tp {
 public:
     //
@@ -52,29 +32,17 @@ public:
     Tilemap bot3_tiles;
     Tilemap br1_tiles;
     Tilemap br2_tiles;
-    Tilemap horiz_tiles;
-    Tilemap l180_tiles;
-    Tilemap l270_tiles;
-    Tilemap l90_tiles;
-    Tilemap l_tiles;
     Tilemap left1_tiles;
     Tilemap left2_tiles;
-    Tilemap outline_tiles; // For water ripples
     Tilemap right1_tiles;
     Tilemap right2_tiles;
-    Tilemap t180_tiles;
-    Tilemap t270_tiles;
-    Tilemap t90_tiles;
-    Tilemap t_tiles;
-    Tilemap tiles; // Animation tiles.
+    Tilemap tiles;
     Tilemap tl1_tiles;
     Tilemap tl2_tiles;
-    Tilemap top1_tiles; // Adjacent tiles.
+    Tilemap top1_tiles;
     Tilemap top2_tiles;
     Tilemap tr1_tiles;
     Tilemap tr2_tiles;
-    Tilemap vert_tiles;
-    Tilemap x_tiles;
 private:
     //
     // Dice
