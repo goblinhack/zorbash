@@ -192,7 +192,6 @@ void Level::display_lava (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     color b = BLACK;
-    b.a = 250;
     glcolor(b);
     glTranslatef( 0, -5, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  5, 0);
     glTranslatef(-3, -3, 0); blit_fbo(fbo_mask1); glTranslatef( 3,  3, 0);
@@ -208,7 +207,6 @@ void Level::display_lava (int fbo,
     if (g_render_black_and_white) {
         y = GRAY;
     }
-    y.a = 200;
     glcolor(y);
     glTranslatef( 0, -3, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  4, 0);
     glTranslatef(-2, -2, 0); blit_fbo(fbo_mask1); glTranslatef( 2,  2, 0);
@@ -221,7 +219,6 @@ void Level::display_lava (int fbo,
     glTranslatef( 2,  2, 0); blit_fbo(fbo_mask1); glTranslatef(-2, -2, 0);
 
     color c = RED;
-    c.a = 100;
     if (g_render_black_and_white) {
         c = GRAY;
     }

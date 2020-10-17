@@ -62,7 +62,7 @@ void game_notice (std::string s)
     auto m = ASCII_WIDTH / 2;
     auto n = ASCII_HEIGHT / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_NORMAL / 2, n - 5);
-    point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2, n + 4);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, n + 5);
     auto width = br.x - tl.x;
 
     game_notice_window = new WidPopup(tl, br, nullptr, "ui_popup_notice",
@@ -96,7 +96,7 @@ void game_notice (std::string s)
         wid_set_style(w, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_notice_ok);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "ok");
+        wid_set_text(w, "ok!");
     }
 
     wid_update(game_notice_window->wid_text_area->wid_text_area);

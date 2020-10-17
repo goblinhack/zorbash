@@ -15,6 +15,7 @@ void Thing::animate (void)
 #ifdef DEBUG_ANIM
 if (is_blood()) { log("animate"); }
 #endif
+
     auto tmap = &tpp->tiles;
     if (unlikely(!tmap)) {
         return;

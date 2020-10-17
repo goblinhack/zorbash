@@ -72,6 +72,13 @@ public:
     point3d                    world_at;
 
     //
+    // Current on screen map limits in tile coords
+    //
+    int                        minx;
+    int                        maxx;
+    int                        miny;
+    int                        maxy;
+    //
     // All randomness jumps off of this as the root
     //
     bool                       cursor_found {};

@@ -191,10 +191,6 @@ void Level::display_map_fg_things (int fbo,
 
 void Level::display_map (void)
 {_
-    int minx;
-    int maxx;
-    int miny;
-    int maxy;
     int light_minx;
     int light_maxx;
     int light_miny;

@@ -280,6 +280,10 @@ std::ostream& operator<<(std::ostream &out,
     /* pixel_map_at */          out << bits(my.t->pixel_map_at);
     /* seed */                  out << bits(my.t->seed);
     /* world_at */              out << bits(my.t->world_at);
+    /* minx */                  out << bits(my.t->minx);
+    /* maxx */                  out << bits(my.t->maxx);
+    /* miny */                  out << bits(my.t->miny);
+    /* maxy */                  out << bits(my.t->maxy);
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
