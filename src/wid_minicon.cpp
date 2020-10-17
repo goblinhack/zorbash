@@ -182,6 +182,12 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
     if (key->scancode == (SDL_Scancode)game->config.key_throw) {
         return true;
     }
+    if (key->scancode == (SDL_Scancode)game->config.key_gfx_mode) {
+        game->config.ascii_mode = !game->config.ascii_mode;
+        g_opt_ascii_mode = game->config.ascii_mode;
+        game->level->get_tiles();
+        return true;
+    }
 
     return false;
 }

@@ -185,10 +185,10 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
             game->config.key_throw = 0;
         }
     }
-    if (game->config.key_unused1) {
-        if (game->config.key_unused1 == code) {
-            MINICON("%%fg=orange$Conflicting key, disabling key unused1");
-            game->config.key_unused1 = 0;
+    if (game->config.key_gfx_mode) {
+        if (game->config.key_gfx_mode == code) {
+            MINICON("%%fg=orange$Conflicting key, disabling key gfx mode");
+            game->config.key_gfx_mode = 0;
         }
     }
     if (game->config.key_unused2) {
@@ -385,6 +385,22 @@ static void game_config_key_jump_set (SDL_Scancode code)
     game->config.key_jump = 0;
     game_config_check_for_conflicts(code);
     game->config.key_jump = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_throw_set (SDL_Scancode code)
+{_
+    game->config.key_throw = 0;
+    game_config_check_for_conflicts(code);
+    game->config.key_throw = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_gfx_mode_set (SDL_Scancode code)
+{_
+    game->config.key_gfx_mode = 0;
+    game_config_check_for_conflicts(code);
+    game->config.key_gfx_mode = code;
     game->config_keyboard_select();
 }
 
@@ -666,6 +682,20 @@ uint8_t game_config_key_jump (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
     on_sdl_key_grab = game_config_key_jump_set;
+    return (true);
+}
+
+uint8_t game_config_key_throw (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_throw_set;
+    return (true);
+}
+
+uint8_t game_config_key_gfx_mode (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_gfx_mode_set;
     return (true);
 }
 
@@ -1299,6 +1329,33 @@ void Game::config_keyboard_select (void)
         wid_set_on_mouse_up(w, game_config_key_jump);
     }
     ///////////////////////////////////////////////////////////////////////
+    // throw
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 1;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "throw");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2,y_at);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Throw");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 20,y_at);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+        SDL_GetScancodeName((SDL_Scancode)game->config.key_throw));
+        wid_set_on_mouse_up(w, game_config_key_throw);
+    }
+    ///////////////////////////////////////////////////////////////////////
     // drop
     ///////////////////////////////////////////////////////////////////////
     y_at += 1;
@@ -1773,6 +1830,34 @@ void Game::config_keyboard_select (void)
     ///////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////
+    // gfx_mode
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 1;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "gfx_mode");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2,y_at);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Graphics mode");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 20,y_at);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_gfx_mode));
+        wid_set_on_mouse_up(w, game_config_key_gfx_mode);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
     // pause
     ///////////////////////////////////////////////////////////////////////
     y_at += 1;
@@ -1799,6 +1884,7 @@ void Game::config_keyboard_select (void)
           SDL_GetScancodeName((SDL_Scancode)game->config.key_pause));
         wid_set_on_mouse_up(w, game_config_key_pause);
     }
+
     ///////////////////////////////////////////////////////////////////////
     // quit
     ///////////////////////////////////////////////////////////////////////

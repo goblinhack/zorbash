@@ -3663,11 +3663,6 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     game->init();
                     CON("USERCFG: reloaded dungeon");
                     break;
-                case 'm':
-                    game->config.ascii_mode = !game->config.ascii_mode;
-                    g_opt_ascii_mode = game->config.ascii_mode;
-                    game->level->get_tiles();
-                    break;
             }
         default:
             if (key->scancode == (SDL_Scancode)game->config.key_screenshot) {
@@ -5042,7 +5037,6 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
     return nullptr;
 }
 
-#define ENABLE_DEBUG_GFX_GL_BLEND
 #ifdef ENABLE_DEBUG_GFX_GL_BLEND
 int vals[] = {
     GL_ZERO,

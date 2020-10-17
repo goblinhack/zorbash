@@ -127,7 +127,7 @@ void Level::get_tiles (void)
 	for (auto y = 0; y < MAP_HEIGHT; y++) {
             FOR_ALL_THINGS(this, t, x, y) {
                 t->inited_tiles = false;
-                t->get_tiles();
+                t->timestamp_next_frame = 0;
             } FOR_ALL_THINGS_END()
         }
     }
