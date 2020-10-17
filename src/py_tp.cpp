@@ -518,91 +518,103 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         Py_RETURN_NONE;
     }
 
-    if (py_tile_name && *py_tile_name) {
-        auto tile = tile_find(std::string(py_tile_name));
-        if (!tile) {
-            ERR("%s, cannot find tile '%s' for tp %s",
-                __FUNCTION__, py_tile_name, tp_name);
-            Py_RETURN_NONE;
-        }
+    for (auto i = 0; i < TILE_MAX_MODES; i++) {
+        if (py_tile_name && *py_tile_name) {
+            Tilep tile;
 
-        //
-        // Copy thie tile and make a unique copy if someone has grabbed it.
-        //
-        if (tile->in_use) {
-            tile = new Tile(tile);
-        }
+            tile = tile_find(std::string(py_tile_name));
+            if (i == TILE_MODE_ASCII) {
+                auto ascii_tile = tile_find("ascii." + std::string(py_tile_name));
+                if (ascii_tile) {
+                    tile = ascii_tile;
+                }
+            }
 
-        tile->index = tiles->size();
-        tiles->push_back(tile);
-        tile->in_use = true;
+            if (!tile) {
+                ERR("%s, cannot find tile '%s' for tp %s",
+                    __FUNCTION__, py_tile_name, tp_name);
+                Py_RETURN_NONE;
+            }
 
-        tile->delay_ms = delay_ms;
-        tile->is_moving = is_moving;
+            //
+            // Copy thie tile and make a unique copy if someone has grabbed it.
+            //
+            if (tile->in_use) {
+                tile = new Tile(tile);
+            }
 
-        tile->is_yyy5 = is_yyy5;
-        tile->is_yyy6 = is_yyy6;
-        tile->is_yyy7 = is_yyy7;
-        tile->is_yyy8 = is_yyy8;
-        tile->is_yyy9 = is_yyy9;
-        tile->is_invisible = is_invisible;
-        tile->is_hp_25_percent = is_hp_25_percent;
-        tile->is_hp_50_percent = is_hp_50_percent;
-        tile->is_hp_75_percent = is_hp_75_percent;
-        tile->is_hp_100_percent = is_hp_100_percent;
-        tile->is_sleeping = is_sleeping;
-        tile->is_open = is_open;
-        tile->is_dead = is_dead;
-        tile->is_end_of_anim = is_end_of_anim;
-        tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
-        tile->is_alive_on_end_of_anim = is_alive_on_end_of_anim;
-        tile->is_resurrecting = is_resurrecting;
+            tile->index = (*tiles)[i].size();
+            (*tiles)[i].push_back(tile);
+            tile->in_use = true;
+LOG("%s index %d i %d", tile->name.c_str(),  tile->index, i);
 
-        if (tile->is_hp_25_percent ||
-            tile->is_hp_50_percent ||
-            tile->is_hp_75_percent ||
-            tile->is_hp_100_percent ) {
-            tp->set_internal_has_hp_anim(true);
-        }
+            tile->delay_ms = delay_ms;
+            tile->is_moving = is_moving;
 
-        if (up) {
-            if (left) {
-                tile->dir = THING_DIR_TL;
+            tile->is_yyy5 = is_yyy5;
+            tile->is_yyy6 = is_yyy6;
+            tile->is_yyy7 = is_yyy7;
+            tile->is_yyy8 = is_yyy8;
+            tile->is_yyy9 = is_yyy9;
+            tile->is_invisible = is_invisible;
+            tile->is_hp_25_percent = is_hp_25_percent;
+            tile->is_hp_50_percent = is_hp_50_percent;
+            tile->is_hp_75_percent = is_hp_75_percent;
+            tile->is_hp_100_percent = is_hp_100_percent;
+            tile->is_sleeping = is_sleeping;
+            tile->is_open = is_open;
+            tile->is_dead = is_dead;
+            tile->is_end_of_anim = is_end_of_anim;
+            tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
+            tile->is_alive_on_end_of_anim = is_alive_on_end_of_anim;
+            tile->is_resurrecting = is_resurrecting;
+
+            if (tile->is_hp_25_percent ||
+                tile->is_hp_50_percent ||
+                tile->is_hp_75_percent ||
+                tile->is_hp_100_percent ) {
+                tp->set_internal_has_hp_anim(true);
+            }
+
+            if (up) {
+                if (left) {
+                    tile->dir = THING_DIR_TL;
+                    tile->internal_has_dir_anim = true;
+                } else if (right) {
+                    tile->dir = THING_DIR_TR;
+                    tile->internal_has_dir_anim = true;
+                } else {
+                    tile->dir = THING_DIR_UP;
+                    tile->internal_has_dir_anim = true;
+                }
+            } else if (down) {
+                if (left) {
+                    tile->dir = THING_DIR_BL;
+                    tile->internal_has_dir_anim = true;
+                } else if (right) {
+                    tile->dir = THING_DIR_BR;
+                    tile->internal_has_dir_anim = true;
+                } else {
+                    tile->dir = THING_DIR_DOWN;
+                    tile->internal_has_dir_anim = true;
+                }
+            } else if (left) {
+                tile->dir = THING_DIR_LEFT;
                 tile->internal_has_dir_anim = true;
             } else if (right) {
-                tile->dir = THING_DIR_TR;
+                tile->dir = THING_DIR_RIGHT;
                 tile->internal_has_dir_anim = true;
-            } else {
-                tile->dir = THING_DIR_UP;
-                tile->internal_has_dir_anim = true;
-            }
-        } else if (down) {
-            if (left) {
-                tile->dir = THING_DIR_BL;
-                tile->internal_has_dir_anim = true;
-            } else if (right) {
-                tile->dir = THING_DIR_BR;
-                tile->internal_has_dir_anim = true;
-            } else {
-                tile->dir = THING_DIR_DOWN;
+            } else if (none) {
+                tile->dir = THING_DIR_NONE;
                 tile->internal_has_dir_anim = true;
             }
-        } else if (left) {
-            tile->dir = THING_DIR_LEFT;
-            tile->internal_has_dir_anim = true;
-        } else if (right) {
-            tile->dir = THING_DIR_RIGHT;
-            tile->internal_has_dir_anim = true;
-        } else if (none) {
-            tile->dir = THING_DIR_NONE;
-            tile->internal_has_dir_anim = true;
-        }
 
-        if (tile->internal_has_dir_anim) {
-            tp->set_internal_has_dir_anim(true);
+            if (tile->internal_has_dir_anim) {
+                tp->set_internal_has_dir_anim(true);
+            }
+        } else {
+            (*tiles)[i].push_back(nullptr);
         }
-    } else {
-        tiles->push_back(nullptr);
     }
 
     if (tp_name) {

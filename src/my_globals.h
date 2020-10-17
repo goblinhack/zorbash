@@ -33,7 +33,11 @@ using Tilep  = class Tile*;
 using Texp   = class Tex*;
 using Tpp    = class Tp*;
 
-using Tilemap = std::vector<Tilep>;
+#define TILE_MODE_NORMAL 0
+#define TILE_MODE_ASCII  1
+#define TILE_MAX_MODES   2
+
+using Tilemap = std::array<std::vector<Tilep>, TILE_MAX_MODES>;
 using Tpidmap = std::vector<Tpp>;
 using Tpnamemap = std::unordered_map< std::string, Tpp >;
 
