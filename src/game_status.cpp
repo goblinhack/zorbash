@@ -87,6 +87,13 @@ static void game_status_wid_create (void)
         return;
     }
 
+    //
+    // Stop this window popping on top of dialogs like when setting keys
+    //
+    if (game->paused()) {
+        return;
+    }
+
     game_status_wid_fini();
     game_monsts_wid_init();
 

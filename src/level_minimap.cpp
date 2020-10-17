@@ -122,9 +122,20 @@ void Level::update_minimap (void)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
 
+                bool edge_of_sceen = 
+                    ((y == miny) && (x >= minx) && (x <= maxx)) ||
+                    ((y == maxy) && (x >= minx) && (x <= maxx)) ||
+                    ((x == minx) && (y >= miny) && (y <= maxy)) ||
+                    ((x == maxx) && (y >= miny) && (y <= maxy));
+
                 if (!is_visited(x, y)) {
-                    c = GRAY;
-                    c.a = 100;
+                    if (edge_of_sceen) {
+                        c = RED;
+                        c.a = 100;
+                    } else {
+                        c = BLACK;
+                        c.a = 100;
+                    }
                 } else if (is_monst(x, y)) {
                     c = RED;
                 } else if (is_generator(x, y)) {
@@ -160,8 +171,16 @@ void Level::update_minimap (void)
                     c = BLUE2;
                 } else if (is_dirt(x, y)) {
                     c = GRAY20;
+                } else if (edge_of_sceen) {
+                    c = GRAY10;
                 } else {
                     c = BLACK;
+                }
+
+                if (edge_of_sceen) {
+                    if (c.a < 255) {
+                        c.a = 255;
+                    }
                 }
 
                 if (!is_lit(x, y)) {
@@ -170,12 +189,14 @@ void Level::update_minimap (void)
                     c.b /= 2;
                 }
 
-                if (!x || !y) {
-                    c = GRAY;
-                    c.a = 200;
-                } else if ((x == MAP_WIDTH - 1) || (y == MAP_HEIGHT - 1)) {
-                    c = DARKGRAY;
-                    c.a = 200;
+                if (!edge_of_sceen) {
+                    if (!x || !y) {
+                        c = GRAY;
+                        c.a = 100;
+                    } else if ((x == MAP_WIDTH - 1) || (y == MAP_HEIGHT - 1)) {
+                        c = DARKGRAY;
+                        c.a = 100;
+                    }
                 }
 
                 if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
@@ -196,6 +217,7 @@ void Level::update_minimap (void)
                 auto tly = Y * dy;
                 auto brx = tlx + dx;
                 auto bry = tly + dy;
+
                 blit(solid_tex_id, tlx, tly, brx, bry);
             }
         }

@@ -340,6 +340,10 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* pixel_map_at */          in >> bits(l->pixel_map_at);
     /* seed */                  in >> bits(l->seed);
     /* world_at */              in >> bits(l->world_at);
+    /* minx */                  in >> bits(l->minx);
+    /* maxx */                  in >> bits(l->maxx);
+    /* miny */                  in >> bits(l->miny);
+    /* maxy */                  in >> bits(l->maxy);
 
     l->update();
     l->bg_valid = false;
