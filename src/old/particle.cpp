@@ -742,9 +742,6 @@ void Level::apply_particle_velocity (void)
         // save the original particle position, then apply velocity.
         // p->old_at = p->at;
         move_particle(p, p->at + p->velocity);
-#if 0
-CON("%f %f   v %f %f", p->at.x,p->at.y, p->velocity.x, p->velocity.y);
-#endif
     }
 
     for (auto p = sop; p <= eop; p++) {
@@ -825,9 +822,6 @@ void Level::apply_density_relaxation (void)
 
         auto sp = particle_to_grid(p);
         auto pidx = p - getptr(all_particles, 0);
-#if 0
-CON("p %d dens %f ndens %f", (int)pidx, p->density, p->near_density);
-#endif
         for (auto ox = sp.x - near_radius; ox <= sp.x + near_radius; ox++) {
             for (auto oy = sp.y - near_radius; oy <= sp.y + near_radius; oy++) {
                 for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
@@ -856,11 +850,7 @@ CON("p %d dens %f ndens %f", (int)pidx, p->density, p->near_density);
 
                     float D = delta * delta * (pressure * a + near_pressure * a * a) * 0.05;
                     fpoint DA = dp * (D / r);
-#if 0
-CON("  q %d r %f DA %f %f", (int)qidx, r, DA.x,DA.y);
-#endif
                     p->force += DA;
-
                     q->force -= DA;
                     p->nebs ++;
 
