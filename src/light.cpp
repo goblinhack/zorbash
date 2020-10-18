@@ -180,47 +180,179 @@ bool Light::calculate (int last)
     // Walk the light rays in a circle. Find the nearest walls and then let
     // the light leak a little.
     //
-    for (int16_t i = 0; i < max_light_rays; i++) {
-        auto r = &getref_no_check(ray, i);
-        int16_t step = 0;
-        const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-	auto rp = points[i].begin();
-        for (; ; step++) {
-	    if (step >= end_of_points) { break; }
-            if (rp->distance > strength) { break; }
-            const int16_t p1x = light_pos.x + rp->p.x;
-            const int16_t p1y = light_pos.y + rp->p.y;
-            const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
-            const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+    auto d = (strength / TILE_WIDTH) + 1;
+    if ((player->mid_at.x >= d) &&
+        (player->mid_at.x <= MAP_WIDTH - d) &&
+        (player->mid_at.y >= d) &&
+        (player->mid_at.y <= MAP_HEIGHT - d)) {
 
-            if (level->is_oob(x, y)) { break; }
-            level->set_visited_no_check(x, y); // for AI and jumping
-            level->set_is_lit_no_check(x, y); // allows lights to fade
-            rp++;
+        if (last) {
+            for (int16_t i = 0; i < max_light_rays; i++) {
+                auto r = &getref_no_check(ray, i);
+                int16_t step = 0;
+                const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
+                auto rp = points[i].begin();
+                for (; ; step++) {
+                    if (step >= end_of_points) { break; }
+                    if (rp->distance > strength) { break; }
+                    const int16_t p1x = light_pos.x + rp->p.x;
+                    const int16_t p1y = light_pos.y + rp->p.y;
+                    const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+                    const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
 
-	    if (level->is_light_blocker_no_check(x, y)) {
-		//
-		// We hit a wall. Keep walking until we exit the wall or
-                // we reach the light limit.
-		//
-		int16_t step2 = step;
-                for (;;) {
-		    if (step2 >= end_of_points) { break; }
-		    if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
-		    const int16_t p1x = light_pos.x + rp->p.x;
-		    const int16_t p1y = light_pos.y + rp->p.y;
-		    const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
-		    const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+                    level->set_visited_no_check(x, y); // for AI and jumping
+                    level->set_is_lit_no_check(x, y); // allows lights to fade
+                    rp++;
+
+                    if (level->is_light_blocker_no_check(x, y)) {
+                        //
+                        // We hit a wall. Keep walking until we exit the wall or
+                        // we reach the light limit.
+                        //
+                        int16_t step2 = step;
+                        for (;;) {
+                            if (step2 >= end_of_points) { break; }
+                            if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
+                            const int16_t p1x = light_pos.x + rp->p.x;
+                            const int16_t p1y = light_pos.y + rp->p.y;
+                            const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+                            const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+                            if (!level->is_light_blocker_no_check(x, y)) { break; }
+                            rp++;
+                            step2++;
+                        }
+                        step = step2;
+                        break;
+                    }
+                }
+                r->depth_furthest = step;
+            }
+        } else {
+            for (int16_t i = 0; i < max_light_rays; i++) {
+                auto r = &getref_no_check(ray, i);
+                int16_t step = 0;
+                const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
+                auto rp = points[i].begin();
+                for (; ; step++) {
+                    if (step >= end_of_points) { break; }
+                    if (rp->distance > strength) { break; }
+                    const int16_t p1x = light_pos.x + rp->p.x;
+                    const int16_t p1y = light_pos.y + rp->p.y;
+                    const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+                    const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+
+                    rp++;
+
+                    if (level->is_light_blocker_no_check(x, y)) {
+                        //
+                        // We hit a wall. Keep walking until we exit the wall or
+                        // we reach the light limit.
+                        //
+                        int16_t step2 = step;
+                        for (;;) {
+                            if (step2 >= end_of_points) { break; }
+                            if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
+                            const int16_t p1x = light_pos.x + rp->p.x;
+                            const int16_t p1y = light_pos.y + rp->p.y;
+                            const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+                            const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+                            if (!level->is_light_blocker_no_check(x, y)) { break; }
+                            rp++;
+                            step2++;
+                        }
+                        step = step2;
+                        break;
+                    }
+                }
+                r->depth_furthest = step;
+            }
+        }
+    } else {
+        if (last) {
+            for (int16_t i = 0; i < max_light_rays; i++) {
+                auto r = &getref_no_check(ray, i);
+                int16_t step = 0;
+                const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
+                auto rp = points[i].begin();
+                for (; ; step++) {
+                    if (step >= end_of_points) { break; }
+                    if (rp->distance > strength) { break; }
+                    const int16_t p1x = light_pos.x + rp->p.x;
+                    const int16_t p1y = light_pos.y + rp->p.y;
+                    const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+                    const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+
                     if (level->is_oob(x, y)) { break; }
-		    if (!level->is_light_blocker_no_check(x, y)) { break; }
-		    rp++;
-                    step2++;
-		}
-		step = step2;
-		break;
-	    }
-	}
-	r->depth_furthest = step;
+                    level->set_visited_no_check(x, y); // for AI and jumping
+                    level->set_is_lit_no_check(x, y); // allows lights to fade
+                    rp++;
+
+                    if (level->is_light_blocker_no_check(x, y)) {
+                        //
+                        // We hit a wall. Keep walking until we exit the wall or
+                        // we reach the light limit.
+                        //
+                        int16_t step2 = step;
+                        for (;;) {
+                            if (step2 >= end_of_points) { break; }
+                            if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
+                            const int16_t p1x = light_pos.x + rp->p.x;
+                            const int16_t p1y = light_pos.y + rp->p.y;
+                            const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+                            const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+                            if (level->is_oob(x, y)) { break; }
+                            if (!level->is_light_blocker_no_check(x, y)) { break; }
+                            rp++;
+                            step2++;
+                        }
+                        step = step2;
+                        break;
+                    }
+                }
+                r->depth_furthest = step;
+            }
+        } else {
+            for (int16_t i = 0; i < max_light_rays; i++) {
+                auto r = &getref_no_check(ray, i);
+                int16_t step = 0;
+                const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
+                auto rp = points[i].begin();
+                for (; ; step++) {
+                    if (step >= end_of_points) { break; }
+                    if (rp->distance > strength) { break; }
+                    const int16_t p1x = light_pos.x + rp->p.x;
+                    const int16_t p1y = light_pos.y + rp->p.y;
+                    const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+                    const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+
+                    if (level->is_oob(x, y)) { break; }
+                    rp++;
+
+                    if (level->is_light_blocker_no_check(x, y)) {
+                        //
+                        // We hit a wall. Keep walking until we exit the wall or
+                        // we reach the light limit.
+                        //
+                        int16_t step2 = step;
+                        for (;;) {
+                            if (step2 >= end_of_points) { break; }
+                            if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
+                            const int16_t p1x = light_pos.x + rp->p.x;
+                            const int16_t p1y = light_pos.y + rp->p.y;
+                            const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
+                            const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+                            if (level->is_oob(x, y)) { break; }
+                            if (!level->is_light_blocker_no_check(x, y)) { break; }
+                            rp++;
+                            step2++;
+                        }
+                        step = step2;
+                        break;
+                    }
+                }
+                r->depth_furthest = step;
+            }
+        }
     }
 
     return true;
