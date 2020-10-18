@@ -131,4 +131,5 @@ void Level::get_tiles (void)
             } FOR_ALL_THINGS_END()
         }
     }
+    bg_valid = false;
 }
