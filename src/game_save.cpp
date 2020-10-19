@@ -394,7 +394,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* uint32_t           key_save                     */ out << bits(my.t.key_save                     );
     /* uint32_t           key_screenshot               */ out << bits(my.t.key_screenshot               );
     /* uint32_t           key_gfx_mode                 */ out << bits(my.t.key_gfx_mode                  );
-    /* uint32_t           key_unused2                  */ out << bits(my.t.key_unused2                  );
+    /* uint32_t           key_console                  */ out << bits(my.t.key_console                  );
     /* uint32_t           key_unused3                  */ out << bits(my.t.key_unused3                  );
     /* uint32_t           key_unused4                  */ out << bits(my.t.key_unused4                  );
     /* uint32_t           key_unused5                  */ out << bits(my.t.key_unused5                  );
@@ -603,6 +603,10 @@ static void wid_save_destroy (void)
 
 uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        return false;
+    }
+
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
@@ -611,13 +615,6 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case UI_CONSOLE_KEY1:
-                    case UI_CONSOLE_KEY2:
-                    case UI_CONSOLE_KEY3:
-                        //
-                        // Magic keys we use to toggle the console.
-                        //
-                        return (false);
                     case '0':
                     case '1':
                     case '2':
@@ -649,24 +646,8 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
 
 uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
-    switch (key->mod) {
-        case KMOD_LCTRL:
-        case KMOD_RCTRL:
-        default:
-        switch (key->sym) {
-            default: {_
-                auto c = wid_event_to_char(key);
-                switch (c) {
-                    case UI_CONSOLE_KEY1:
-                    case UI_CONSOLE_KEY2:
-                    case UI_CONSOLE_KEY3:
-                        //
-                        // Magic keys we use to toggle the console.
-                        //
-                        return (false);
-                }
-            }
-        }
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        return false;
     }
 
     return (true);

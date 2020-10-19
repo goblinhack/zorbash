@@ -80,9 +80,6 @@
 #define UI_BOTCON_WIDTH            (ASCII_WIDTH)
 #define UI_CONSOLE_HEIGHT          200
 #define UI_CONSOLE_INPUT_COLOR     ORANGE
-#define UI_CONSOLE_KEY1            '`'
-#define UI_CONSOLE_KEY2            '~'
-#define UI_CONSOLE_KEY3            '\\'
 #define UI_CONSOLE_TEXT_COLOR      GRAY
 #define UI_CONSOLE_WIDTH           (ASCII_WIDTH - 3)
 #define UI_CURSOR_COLOR            GRAY

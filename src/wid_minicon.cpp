@@ -61,6 +61,10 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return false;
     }
 
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        return false;
+    }
+
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_out) {
         MINICON("Zoom out");
         CON("USERCFG: zoom out");

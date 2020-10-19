@@ -42,6 +42,10 @@ uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
 
 uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        return false;
+    }
+
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
@@ -50,13 +54,6 @@ uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case UI_CONSOLE_KEY1:
-                    case UI_CONSOLE_KEY2:
-                    case UI_CONSOLE_KEY3:
-                        //
-                        // Magic keys we use to toggle the console.
-                        //
-                        return (false);
                     case 'y':
                         game_quit_yes(nullptr, 0, 0, 0);
                         return (true);
@@ -77,24 +74,8 @@ uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
 
 uint8_t game_quit_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
-    switch (key->mod) {
-        case KMOD_LCTRL:
-        case KMOD_RCTRL:
-        default:
-        switch (key->sym) {
-            default: {_
-                auto c = wid_event_to_char(key);
-                switch (c) {
-                    case UI_CONSOLE_KEY1:
-                    case UI_CONSOLE_KEY2:
-                    case UI_CONSOLE_KEY3:
-                        //
-                        // Magic keys we use to toggle the console.
-                        //
-                        return (false);
-                }
-            }
-        }
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        return false;
     }
 
     return (true);
