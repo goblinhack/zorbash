@@ -82,10 +82,10 @@ public:
     uint32_t           key_pause                    = {SDL_SCANCODE_P};
     uint32_t           key_quit                     = {SDL_SCANCODE_Q};
     uint32_t           key_save                     = {SDL_SCANCODE_F12};
-    uint32_t           key_screenshot               = {SDL_SCANCODE_BACKSLASH};
+    uint32_t           key_screenshot               = {SDL_SCANCODE_F10};
     uint32_t           key_throw                    = {SDL_SCANCODE_T};
     uint32_t           key_gfx_mode                 = {SDL_SCANCODE_TAB};
-    uint32_t           key_unused2                  = 0;
+    uint32_t           key_console                  = {SDL_SCANCODE_BACKSLASH};
     uint32_t           key_unused3                  = 0;
     uint32_t           key_unused4                  = 0;
     uint32_t           key_unused5                  = 0;

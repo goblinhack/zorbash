@@ -3401,6 +3401,10 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
     uint32_t origlen;
     uint32_t cnt;
 
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        return false;
+    }
+
     newchar += wid_event_to_char(key);
     origtext = wid_get_text(w);
     origlen = (uint32_t)origtext.length();
@@ -3598,14 +3602,6 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                         break;
                     }
 
-                case UI_CONSOLE_KEY1:
-                case UI_CONSOLE_KEY2:
-                case UI_CONSOLE_KEY3:
-                    //
-                    // Magic keys we use to toggle the console.
-                    //
-                    return (false);
-
                 case '?':
                     if (w != wid_console_input_line) {
                         break;
@@ -3652,6 +3648,23 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 
     w = wid_get_top_parent(wid_console_input_line);
 
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        wid_toggle_hidden(wid_console_window);
+        wid_raise(wid_console_window);
+
+        //
+        // Need this so the console gets focus over the menu.
+        //
+        if (w->visible) {
+            wid_set_focus(w);
+            wid_focus_lock(w);
+        } else {
+            wid_unset_focus();
+            wid_unset_focus_lock();
+        }
+        return true;
+    }
+
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
@@ -3675,22 +3688,6 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             switch ((int32_t)key->sym) {
                 case '?':
                     game->config_keyboard_select();
-                    break;
-
-                case '`':
-                    wid_toggle_hidden(wid_console_window);
-                    wid_raise(wid_console_window);
-
-                    //
-                    // Need this so the console gets focus over the menu.
-                    //
-                    if (w->visible) {
-                        wid_set_focus(w);
-                        wid_focus_lock(w);
-                    } else {
-                        wid_unset_focus();
-                        wid_unset_focus_lock();
-                    }
                     break;
 
                 case SDLK_ESCAPE:

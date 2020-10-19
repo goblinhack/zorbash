@@ -191,10 +191,10 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
             game->config.key_gfx_mode = 0;
         }
     }
-    if (game->config.key_unused2) {
-        if (game->config.key_unused2 == code) {
+    if (game->config.key_console) {
+        if (game->config.key_console == code) {
             MINICON("%%fg=orange$Conflicting key, disabling key unused2");
-            game->config.key_unused2 = 0;
+            game->config.key_console = 0;
         }
     }
     if (game->config.key_unused3) {
@@ -556,6 +556,14 @@ static void game_config_key_help_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
+static void game_config_key_console_set (SDL_Scancode code)
+{_
+    game->config.key_console = 0;
+    game_config_check_for_conflicts(code);
+    game->config.key_console = code;
+    game->config_keyboard_select();
+}
+
 static void game_config_key_quit_set (SDL_Scancode code)
 {_
     game->config.key_quit = 0;
@@ -832,6 +840,13 @@ uint8_t game_config_key_help (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
+uint8_t game_config_key_console (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key();
+    on_sdl_key_grab = game_config_key_console_set;
+    return (true);
+}
+
 uint8_t game_config_key_quit (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
@@ -848,6 +863,10 @@ uint8_t game_config_key_screenshot (Widp w, int32_t x, int32_t y, uint32_t butto
 
 uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        return false;
+    }
+
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
@@ -856,13 +875,6 @@ uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case UI_CONSOLE_KEY1:
-                    case UI_CONSOLE_KEY2:
-                    case UI_CONSOLE_KEY3:
-                        //
-                        // Magic keys we use to toggle the console.
-                        //
-                        return (false);
                     case 'b':
                     case SDLK_ESCAPE:
                         game_config_keyboard_cancel(nullptr, 0, 0, 0);
@@ -877,24 +889,8 @@ uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
 
 uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
-    switch (key->mod) {
-        case KMOD_LCTRL:
-        case KMOD_RCTRL:
-        default:
-        switch (key->sym) {
-            default: {_
-                auto c = wid_event_to_char(key);
-                switch (c) {
-                    case UI_CONSOLE_KEY1:
-                    case UI_CONSOLE_KEY2:
-                    case UI_CONSOLE_KEY3:
-                        //
-                        // Magic keys we use to toggle the console.
-                        //
-                        return (false);
-                }
-            }
-        }
+    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+        return false;
     }
 
     return (true);
@@ -1965,6 +1961,33 @@ void Game::config_keyboard_select (void)
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_help));
         wid_set_on_mouse_up(w, game_config_key_help);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // console
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 1;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "console");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2,y_at);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Debug console");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "console");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 20,y_at);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_console));
+        wid_set_on_mouse_up(w, game_config_key_console);
     }
 
     wid_update(game_config_keyboard_window->wid_text_area->wid_text_area);

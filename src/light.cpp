@@ -181,20 +181,20 @@ bool Light::calculate (int last)
     // the light leak a little.
     //
     auto d = (strength / TILE_WIDTH) + 1;
-    if ((player->mid_at.x >= d) &&
-        (player->mid_at.x <= MAP_WIDTH - d) &&
-        (player->mid_at.y >= d) &&
-        (player->mid_at.y <= MAP_HEIGHT - d)) {
+    if (likely(((player->mid_at.x >= d) &&
+                (player->mid_at.x <= MAP_WIDTH - d) &&
+                (player->mid_at.y >= d) &&
+                (player->mid_at.y <= MAP_HEIGHT - d)))) {
 
-        if (last) {
+        if (unlikely(last)) {
             for (int16_t i = 0; i < max_light_rays; i++) {
                 auto r = &getref_no_check(ray, i);
                 int16_t step = 0;
                 const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
                 auto rp = points[i].begin();
                 for (; ; step++) {
-                    if (step >= end_of_points) { break; }
-                    if (rp->distance > strength) { break; }
+                    if (unlikely(step >= end_of_points)) { break; }
+                    if (unlikely(rp->distance > strength)) { break; }
                     const int16_t p1x = light_pos.x + rp->p.x;
                     const int16_t p1y = light_pos.y + rp->p.y;
                     const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
@@ -211,7 +211,7 @@ bool Light::calculate (int last)
                         //
                         int16_t step2 = step;
                         for (;;) {
-                            if (step2 >= end_of_points) { break; }
+                            if (unlikely(step2 >= end_of_points)) { break; }
                             if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
                             const int16_t p1x = light_pos.x + rp->p.x;
                             const int16_t p1y = light_pos.y + rp->p.y;
@@ -234,8 +234,8 @@ bool Light::calculate (int last)
                 const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
                 auto rp = points[i].begin();
                 for (; ; step++) {
-                    if (step >= end_of_points) { break; }
-                    if (rp->distance > strength) { break; }
+                    if (unlikely(step >= end_of_points)) { break; }
+                    if (unlikely(rp->distance > strength)) { break; }
                     const int16_t p1x = light_pos.x + rp->p.x;
                     const int16_t p1y = light_pos.y + rp->p.y;
                     const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
@@ -250,7 +250,7 @@ bool Light::calculate (int last)
                         //
                         int16_t step2 = step;
                         for (;;) {
-                            if (step2 >= end_of_points) { break; }
+                            if (unlikely(step2 >= end_of_points)) { break; }
                             if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
                             const int16_t p1x = light_pos.x + rp->p.x;
                             const int16_t p1y = light_pos.y + rp->p.y;
