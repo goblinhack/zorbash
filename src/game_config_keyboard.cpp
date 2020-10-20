@@ -1838,7 +1838,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Graphics mode");
+        wid_set_text(w, "Graphics style");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1852,6 +1852,37 @@ void Game::config_keyboard_select (void)
           SDL_GetScancodeName((SDL_Scancode)game->config.key_gfx_mode));
         wid_set_on_mouse_up(w, game_config_key_gfx_mode);
     }
+    ///////////////////////////////////////////////////////////////////////
+    // screenshot
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 1;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Take a screenshot");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2,y_at);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Take a screenshot");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 20,y_at);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_screenshot));
+        wid_set_on_mouse_up(w, game_config_key_screenshot);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////
     // pause
@@ -1909,31 +1940,31 @@ void Game::config_keyboard_select (void)
         wid_set_on_mouse_up(w, game_config_key_quit);
     }
     ///////////////////////////////////////////////////////////////////////
-    // screenshot
+    // console
     ///////////////////////////////////////////////////////////////////////
     y_at += 1;
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Take a screenshot");
+        auto w = wid_new_square_button(p, "console");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2,y_at);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Take a screenshot");
+        wid_set_text(w, "Debug console");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "value");
+        auto w = wid_new_square_button(p, "console");
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 20,y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_screenshot));
-        wid_set_on_mouse_up(w, game_config_key_screenshot);
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_console));
+        wid_set_on_mouse_up(w, game_config_key_console);
     }
     ///////////////////////////////////////////////////////////////////////
     // help
@@ -1961,33 +1992,6 @@ void Game::config_keyboard_select (void)
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_help));
         wid_set_on_mouse_up(w, game_config_key_help);
-    }
-    ///////////////////////////////////////////////////////////////////////
-    // console
-    ///////////////////////////////////////////////////////////////////////
-    y_at += 1;
-    {_
-        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "console");
-
-        point tl = make_point(0, y_at);
-        point br = make_point(width / 2,y_at);
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Debug console");
-    }
-    {_
-        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "console");
-
-        point tl = make_point(width / 2 + 8, y_at);
-        point br = make_point(width / 2 + 20,y_at);
-        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_console));
-        wid_set_on_mouse_up(w, game_config_key_console);
     }
 
     wid_update(game_config_keyboard_window->wid_text_area->wid_text_area);
