@@ -96,6 +96,8 @@ void Config::dump (std::string pfx, std::ostream &out)
     out << pfx << "ascii_gl_height        " << ascii_gl_height << std::endl;
     out << pfx << "tile_pixel_width       " << tile_pixel_width << std::endl;
     out << pfx << "tile_pixel_height      " << tile_pixel_height << std::endl;
+    out << pfx << "tile_width             " << tile_width << std::endl;
+    out << pfx << "tile_height            " << tile_height << std::endl;
     out << pfx << "sdl_delay              " << sdl_delay << std::endl;
     pfx = old_pfx;
     out << pfx << "}" << std::endl;

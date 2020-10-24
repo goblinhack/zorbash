@@ -1036,7 +1036,7 @@ void config_gfx_zoom_in (void)
     if (game->config.gfx_zoom > 5) {
         game->config.gfx_zoom = 5;
     }
-    CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
+    MINICON("Zoom set to %d", game->config.gfx_zoom);
     config_update_all();
 }
 
@@ -1046,7 +1046,7 @@ void config_gfx_zoom_out (void)
     if (game->config.gfx_zoom < 1) {
         game->config.gfx_zoom = 1;
     }
-    CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
+    MINICON("Zoom set to %d", game->config.gfx_zoom);
     config_update_all();
 }
 
@@ -1146,12 +1146,16 @@ void config_update_all (void)
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
 
+    if (g_opt_ascii_mode) {
+        game->config.ascii_mode = g_opt_ascii_mode;
+    }
+
     if (game->level) {
         game->level->scroll_map_to_player();
     }
 
-    if (g_opt_ascii_mode) {
-        game->config.ascii_mode = g_opt_ascii_mode;
+    if (game->level) {
+        game->level->get_tiles();
     }
 }
 
@@ -1465,6 +1469,14 @@ void config_gfx_zoom_update (void)
         game->config.gfx_zoom = 1;
     }
 
+    if (g_opt_ascii_mode) {
+        game->config.tile_width = TILE_WIDTH_ASCII;
+        game->config.tile_height = TILE_HEIGHT_ASCII;
+    } else {
+        game->config.tile_width = TILE_WIDTH_LORES;
+        game->config.tile_height = TILE_HEIGHT_LORES;
+    }
+
     game->config.one_pixel_width = 1;
     game->config.one_pixel_height = 1;
 
@@ -1524,4 +1536,6 @@ void config_gfx_zoom_update (void)
 
     CON("INIT: - ascii size           : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
     CON("INIT: - width to height ratio: %f", game->config.video_w_h_ratio);
+
+    MINICON("Zoom is at %d", game->config.gfx_zoom);
 }

@@ -32,6 +32,8 @@ public:
     int                gfx_minimap                  = true;
     int                gfx_show_hidden              = false;
     int                gfx_vsync_enable             = true;
+    int                tile_width                   = {};
+    int                tile_height                  = {};
     double             ascii_gl_height              = {};
     double             ascii_gl_width               = {};
     double             one_pixel_height             = {};

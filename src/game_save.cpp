@@ -351,6 +351,8 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* int                gfx_minimap                  */ out << bits(my.t.gfx_minimap                  );
     /* int                gfx_show_hidden              */ out << bits(my.t.gfx_show_hidden              );
     /* int                gfx_vsync_enable             */ out << bits(my.t.gfx_vsync_enable             );
+    /* int                tile_width                   */ out << bits(my.t.tile_width                   );
+    /* int                tile_height                  */ out << bits(my.t.tile_height                  );
     /* double             ascii_gl_height              */ out << bits(my.t.ascii_gl_height              );
     /* double             ascii_gl_width               */ out << bits(my.t.ascii_gl_width               );
     /* double             one_pixel_height             */ out << bits(my.t.one_pixel_height             );

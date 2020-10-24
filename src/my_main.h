@@ -60,9 +60,13 @@
 #define THING_HEALTH_BLOODIED_PCT3 15   // More...
 #define THING_HEALTH_BLOODIED_PCT4 5    // Lots of blood on screen
 #define THING_TICK_MAX_MOVES_AHEAD 10   // How many moves ahead things get
-#define TILE_HEIGHT                16
+#define TILE_HEIGHT                game->config.tile_height
+#define TILE_HEIGHT_ASCII          48
+#define TILE_HEIGHT_LORES          16
 #define TILE_HEIGHT_MAX            64
-#define TILE_WIDTH                 16   // Tile size of the player
+#define TILE_WIDTH                 game->config.tile_width
+#define TILE_WIDTH_ASCII           48   // Tile size of the player
+#define TILE_WIDTH_LORES           16   // Tile size of the player
 #define TILE_WIDTH_MAX             64   // Largest tile for collisions
 #define TTF_GLYPH_BAR              127  // For status / progress bars
 #define TTF_GLYPH_MAX              134
