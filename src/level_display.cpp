@@ -213,10 +213,10 @@ void Level::display_map (void)
     // For light sources we need to draw a bit off map as the light
     // has a radius
     //
-    light_minx = std::max(0, minx - TILES_ACROSS / 2);
-    light_maxx = std::min(MAP_HEIGHT, maxx + TILES_ACROSS / 2);
-    light_miny = std::max(0, miny - TILES_DOWN / 2);
-    light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN / 2);
+    light_minx = std::max(0, minx - TILES_ACROSS);
+    light_maxx = std::min(MAP_HEIGHT, maxx + TILES_ACROSS);
+    light_miny = std::max(0, miny - TILES_DOWN);
+    light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN);
 
     display_anim();
     scroll_map_set_target();

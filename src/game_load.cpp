@@ -462,6 +462,8 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* int                gfx_minimap                  */ in >> bits(my.t.gfx_minimap                  );
     /* int                gfx_show_hidden              */ in >> bits(my.t.gfx_show_hidden              );
     /* int                gfx_vsync_enable             */ in >> bits(my.t.gfx_vsync_enable             );
+    /* int                tile_width                   */ in >> bits(my.t.tile_width                   );
+    /* int                tile_height                  */ in >> bits(my.t.tile_height                  );
     /* double             ascii_gl_height              */ in >> bits(my.t.ascii_gl_height              );
     /* double             ascii_gl_width               */ in >> bits(my.t.ascii_gl_width               );
     /* double             one_pixel_height             */ in >> bits(my.t.one_pixel_height             );

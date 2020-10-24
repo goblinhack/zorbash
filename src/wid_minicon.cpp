@@ -66,7 +66,6 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_out) {
-        MINICON("Zoom out");
         CON("USERCFG: zoom out");
         config_gfx_zoom_out();
         return true;
@@ -74,7 +73,6 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_in) {
         MINICON("Zoom in");
-        CON("USERCFG: zoom in");
         config_gfx_zoom_in();
         return true;
     }
@@ -187,9 +185,10 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_gfx_mode) {
-        game->config.ascii_mode = !game->config.ascii_mode;
-        g_opt_ascii_mode = game->config.ascii_mode;
-        game->level->get_tiles();
+        game->config.gfx_zoom = 1;
+        g_opt_ascii_mode = !g_opt_ascii_mode;
+        config_update_all();
+
         return true;
     }
 
