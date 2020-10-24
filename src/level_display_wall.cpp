@@ -14,6 +14,10 @@
 
 void Thing::blit_wall_cladding (point &tl, point &br, const ThingTiles *tiles)
 {_
+    if (g_opt_ascii_mode) {
+        return;
+    }
+
     float dw = game->config.one_pixel_width * 1;
     float dh = game->config.one_pixel_height * 1;
 
