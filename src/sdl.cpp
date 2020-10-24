@@ -1151,11 +1151,7 @@ void config_update_all (void)
     }
 
     if (game->level) {
-        game->level->scroll_map_to_player();
-    }
-
-    if (game->level) {
-        game->level->get_tiles();
+        game->level->update();
     }
 }
 
@@ -1536,6 +1532,4 @@ void config_gfx_zoom_update (void)
 
     CON("INIT: - ascii size           : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
     CON("INIT: - width to height ratio: %f", game->config.video_w_h_ratio);
-
-    MINICON("Zoom is at %d", game->config.gfx_zoom);
 }

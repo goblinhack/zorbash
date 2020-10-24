@@ -108,16 +108,26 @@ Lightp light_new (Thingp owner,
 
     auto l = new Light(); // std::make_shared< class Light >();
 
-    l->level          = owner->level;
     l->offset         = offset;
-    l->strength       = strength * TILE_WIDTH;
+    l->orig_strength  = strength;
     l->owner          = owner;
     l->col            = col;
     l->max_light_rays = max_light_rays;
     l->fbo            = fbo;
 
-    l->ray.resize(max_light_rays);
-    std::fill(l->ray.begin(), l->ray.end(), Ray{0});
+    l->update();
+
+    //log("created");
+    return (l);
+}
+
+void Light::update (void)
+{_
+    level    = owner->level;
+    strength = orig_strength * TILE_WIDTH;
+
+    ray.resize(max_light_rays);
+    std::fill(ray.begin(), ray.end(), Ray{0});
 
     //
     // First generate the right ray lengths.
@@ -126,12 +136,8 @@ Lightp light_new (Thingp owner,
     for (auto i = 0; i < max_light_rays; i++) {
         double cosr, sinr;
         sincos(dr * i, &sinr, &cosr);
-        l->draw_line(i, point(0, 0),
-                     point(l->strength * cosr, l->strength * sinr));
+        draw_line(i, point(0, 0), point(strength * cosr, strength * sinr));
     }
-
-    //log("created");
-    return (l);
 }
 
 void Light::destroy (void)
@@ -511,14 +517,35 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
 //
 // Alow distant lights to fade
 //
+void Level::lights_fade (void)
+{_
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            auto v = is_lit_no_check(x, y);
+            if (v) {
+                set_is_lit_no_check(x, y, v - 1);
+            }
+        }
+    }
+}
+
+//
+// Alow distant lights to fade
+//
 void Level::lights_update (void)
 {_
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            auto l = is_lit_no_check(x, y);
-            if (l) {
-                set_is_lit_no_check(x, y, l - 1);
-            }
+            FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
+                //
+                // Need to do this as light position depends on blitting
+                //
+                t->is_blitted = false;
+                for (auto& l : t->get_light()) {
+                    l->update();
+                    l->reset();
+                }
+            } FOR_ALL_THINGS_END()
         }
     }
 }

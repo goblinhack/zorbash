@@ -185,9 +185,20 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_gfx_mode) {
-        game->config.gfx_zoom = 1;
         g_opt_ascii_mode = !g_opt_ascii_mode;
+        if (g_opt_ascii_mode) {
+            MINICON("Switch to tiled mode");
+            game->config.gfx_zoom = 1;
+        } else {
+            MINICON("Switch to ascii mode");
+            game->config.gfx_zoom = 3;
+        }
         config_update_all();
+
+        //
+        // Looks like a nice transition
+        //
+        game->level->timestamp_fade_in_begin = time_get_time_ms_cached();
 
         return true;
     }
