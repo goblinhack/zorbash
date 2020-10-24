@@ -11,4 +11,8 @@ void Level::update (void)
 {_
     minimap_valid = false;
     heatmap_valid = false;
+
+    lights_update();
+    get_tiles();
+    scroll_map_to_player();
 }

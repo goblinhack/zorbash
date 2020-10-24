@@ -16,7 +16,7 @@ void Game::tick_begin (const std::string &why)
     LOG("game tick %d begin (%s)", game->tick_current, why.c_str());
 
     if (level) {
-        level->lights_update();
+        level->lights_fade();
     }
 }
 

@@ -12,7 +12,6 @@
 
 void Level::display (void)
 {_
-    //log("display");
     if (map_changed) {
         static int last_done;
         if (time_have_x_secs_passed_since(1, last_done)) {
@@ -31,6 +30,11 @@ void Level::display (void)
     display_external_particles();
 
     if (!bg_valid) {
+        auto delta = 0;
+        if (timestamp_fade_in_begin) {
+            delta = time_get_time_ms_cached() - timestamp_fade_in_begin;
+        }
+
         g_render_black_and_white = true;
         display_map_bg_things();
         g_render_black_and_white = false;
@@ -39,7 +43,7 @@ void Level::display (void)
         // Reset the fade in timestamp as the above is a bit slow
         //
         if (timestamp_fade_in_begin) {
-            timestamp_fade_in_begin = time_get_time_ms_cached();
+            timestamp_fade_in_begin = time_get_time_ms_cached() - delta;
         }
     }
 

@@ -36,6 +36,7 @@ public:
     std::vector<Ray>   ray;
     std::vector<float> cached_gl_cmds;
     std::array< std::vector<RayPoint>, MAX_RAY_LIGHTING > points;
+    int16_t            orig_strength {};
     int16_t            strength {};
     uint16_t           max_light_rays {};
     uint8_t            flicker {0};
@@ -44,6 +45,7 @@ public:
     void destroy();
     void destroyed(void);
     void reset(void);
+    void update(void);
     bool calculate(int last);
     void render_triangle_fans(int last, int count);
     void render(int last, int count);

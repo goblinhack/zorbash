@@ -1734,6 +1734,7 @@ public:
     void init(point3d at, int seed);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
     void lights_update(void);
+    void lights_fade(void);
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log(std::string prefix);
     void log_(const char *fmt, va_list args); // compile error without
