@@ -784,9 +784,9 @@ int Thing::is_rrr60(void) const
     return (tp()->is_rrr60());
 }
 
-int Thing::is_rrr61(void) const
+int Thing::ascii_show_outlined(void) const
 {_
-    return (tp()->is_rrr61());
+    return (tp()->ascii_show_outlined());
 }
 
 int Thing::is_shown_uniquely_on_monstbar(void) const

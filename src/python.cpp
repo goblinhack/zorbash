@@ -682,7 +682,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr59)
     TP_SET_DECL(is_rrr6)
     TP_SET_DECL(is_rrr60)
-    TP_SET_DECL(is_rrr61)
+    TP_SET_DECL(ascii_show_outlined)
     TP_SET_DECL(is_shown_uniquely_on_monstbar)
     TP_SET_DECL(is_stamina_check)
     TP_SET_DECL(is_gfx_shown_in_bg)
