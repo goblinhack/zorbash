@@ -1036,7 +1036,7 @@ public:
     int is_rrr59(void) const;
     int is_rrr6(void) const;
     int is_rrr60(void) const;
-    int is_rrr61(void) const;
+    int ascii_show_outlined(void) const;
     int is_shown_uniquely_on_monstbar(void) const;
     int is_stamina_check(void) const;
     int is_rrr7(void) const;

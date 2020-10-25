@@ -761,7 +761,10 @@ void Thing::blit_internal (int fbo,
         glTranslatef(-mid.x, -mid.y, 0);
     }
 
-    if (tpp->gfx_show_outlined() && !g_render_black_and_white) {
+    bool outline = (g_opt_ascii_mode && tpp->ascii_show_outlined()) ||
+                   (!g_opt_ascii_mode && tpp->gfx_show_outlined());
+
+    if (outline && !g_render_black_and_white) {
         if (reflection) {
             if (auto submerged = blit_begin_reflection_submerged()) {
                 tile_blit(tile, blit_tl, blit_br);
