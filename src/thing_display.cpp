@@ -382,7 +382,7 @@ bool Thing::get_coords (point &blit_tl,
     auto owner = owner_get();
     auto falling = is_falling || (owner && owner->is_falling);
     if (likely(!falling)) {
-        if (unlikely(tpp->gfx_animated_can_hflip())) {
+        if (unlikely(tpp->gfx_animated_can_hflip() && !g_opt_ascii_mode)) {
             //
             // Confusing in ascii mode
             //
@@ -431,7 +431,7 @@ bool Thing::get_coords (point &blit_tl,
             }
         }
 
-        if (unlikely(tpp->gfx_animated_can_vflip())) {
+        if (unlikely(tpp->gfx_animated_can_vflip() && !g_opt_ascii_mode)) {
             if (is_dir_down() || is_dir_br() || is_dir_bl()) {
                 std::swap(blit_tl.y, blit_br.y);
             }
@@ -530,30 +530,34 @@ bool Thing::get_coords (point &blit_tl,
                  tpp->gfx_attack_anim() ||
                  tpp->gfx_on_fire_anim() ||
                  tpp->gfx_weapon_carry_anim())) {
-        //
-        // Ghosts do not sink into lava
-        //
-        if (likely(!is_floating())) {
-            //
-            // Render the weapon and player on the same tile rules
-            //
-            auto map_loc = at;
-            if (owner) {
-                map_loc = owner->mid_at;
-            }
 
+        //
+        // Render the weapon and player on the same tile rules
+        //
+        auto map_loc = at;
+        if (owner) {
+            map_loc = owner->mid_at;
+        }
+
+        set_submerged_offset(0);
+
+        if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
+            is_in_water = true;
+            set_submerged_offset(8);
+        } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
+            is_in_lava = true;
+            set_submerged_offset(TILE_HEIGHT / 2);
+        } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
+            set_submerged_offset(4);
+            is_in_water = true;
+        }
+
+        if (is_floating() || g_opt_ascii_mode) {
+            //
+            // Ghosts do not sink into lava
+            // Don't submerge ascii charactars.
+            //
             set_submerged_offset(0);
-
-            if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
-                is_in_water = true;
-                set_submerged_offset(8);
-            } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
-                is_in_lava = true;
-                set_submerged_offset(TILE_HEIGHT / 2);
-            } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
-                set_submerged_offset(4);
-                is_in_water = true;
-            }
         }
     }
 
