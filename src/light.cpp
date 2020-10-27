@@ -39,6 +39,8 @@ void Light::draw_pixel (int16_t index, const point &p0, const point &p1)
 // http://www.edepot.com/linee.html
 void Light::draw_line (int16_t index, const point &p0, const point &p1)
 {
+    points[index].resize(0);
+
     const point start = p0; 
     auto x = p0.x;
     auto y = p0.y;

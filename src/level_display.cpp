@@ -331,7 +331,7 @@ void Level::display_map (void)
         //
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(GRAY50);
+        glcolor(DARKBLUE);
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
         blit_fbo_inner(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
