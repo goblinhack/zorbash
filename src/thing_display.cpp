@@ -699,12 +699,14 @@ void Thing::blit_internal (int fbo,
         if (is_gfx_moves_ahead_shown()) {
             auto diff = game->tick_current - get_tick();
             if ((diff > 0) && (diff <= THING_TICK_MAX_MOVES_AHEAD)) {
-                static std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> cache;
-                auto tile = get(cache, diff);
+                auto tile = get(game->tile_cache_moves_ahead, diff);
                 if (!tile) {
                     std::string s = "clock" + std::to_string(diff);
+                    if (g_opt_ascii_mode) {
+                        s = "ascii." + s;
+                    }
                     tile = tile_find_mand(s);
-                    set(cache, diff, tile);
+                    set(game->tile_cache_moves_ahead, diff, tile);
                 }
                 tile_blit(tile,
                         point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
@@ -713,12 +715,14 @@ void Thing::blit_internal (int fbo,
         }
 
         {
-            static std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS> cache;
-            auto tile = get(cache, h_step);
+            auto tile = get(game->tile_cache_health, h_step);
             if (!tile) {
                 std::string s = "health" + std::to_string(h_step);
+                if (g_opt_ascii_mode) {
+                    s = "ascii." + s;
+                }
                 tile = tile_find_mand(s);
-                set(cache, h_step, tile);
+                set(game->tile_cache_health, h_step, tile);
             }
 
             tile_blit(tile,

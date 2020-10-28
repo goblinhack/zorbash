@@ -185,6 +185,9 @@ public:
     //
     std::vector<point> cursor_move_path;
 
+    std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> tile_cache_moves_ahead;
+    std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS> tile_cache_health;
+
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
