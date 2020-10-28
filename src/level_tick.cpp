@@ -120,16 +120,3 @@ void Level::update_all_ticks (void)
         t->set_tick(game->tick_current);
     }
 }
-
-void Level::get_tiles (void)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-	for (auto y = 0; y < MAP_HEIGHT; y++) {
-            FOR_ALL_THINGS(this, t, x, y) {
-                t->inited_tiles = false;
-                t->timestamp_next_frame = 0;
-            } FOR_ALL_THINGS_END()
-        }
-    }
-    bg_valid = false;
-}
