@@ -205,7 +205,7 @@ def init_ui_inventory():
         file="data/gfx/ui_inventory.tga",
         name="ui_inventory", width=60, height=72, arr=tiles)
 
-def init_16x16():
+def init_tiles1():
     tiles = [
       "health5-icon",
       "health4-icon",
@@ -2185,10 +2185,10 @@ def init_16x16():
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/16x16.tga",
-        name="16x16", width=16, height=16, arr=tiles)
+        file="data/gfx/tiles1.tga",
+        name="tiles1", width=16, height=16, arr=tiles)
 
-def init_16x16_ascii():
+def init_tiles1_ascii():
     tiles = [
       "ascii.health5-icon",
       "ascii.health4-icon",
@@ -4168,10 +4168,10 @@ def init_16x16_ascii():
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/16x16.ascii.tga",
-        name="16x16.ascii", width=48, height=48, arr=tiles)
+        file="data/gfx/tiles1.ascii.tga",
+        name="tiles1.ascii", width=48, height=48, arr=tiles)
 
-def init_24x24():
+def init_tiles2():
     tiles = [
       "slime2.1.100",
       "slime2.2.100",
@@ -4329,11 +4329,11 @@ def init_24x24():
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/24x24.tga",
-        name="24x24", width=24, height=24, arr=tiles)
+        file="data/gfx/tiles2.tga",
+        name="tiles2", width=24, height=24, arr=tiles)
 
 
-def init_32x32():
+def init_tiles3():
     tiles = [
       "exit1.1",
       "exit1.2",
@@ -4694,10 +4694,10 @@ def init_32x32():
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/32x32.tga",
-        name="32x32", width=32, height=32, arr=tiles)
+        file="data/gfx/tiles3.tga",
+        name="tiles3", width=32, height=32, arr=tiles)
 
-def init_32x32_surface_effects():
+def init_tiles3_surface_effects():
     tiles = [
       "water1.1",
       "water1.2",
@@ -4782,10 +4782,10 @@ def init_32x32_surface_effects():
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/32x32_surface_effects.tga",
-        name="32x32_surface_effects", width=32, height=32, arr=tiles)
+        file="data/gfx/tiles3_surface_effects.tga",
+        name="tiles3_surface_effects", width=32, height=32, arr=tiles)
 
-def init_32x32_water():
+def init_tiles3_water():
     tiles = [
       "water1a",
       "water2a",
@@ -4854,10 +4854,10 @@ def init_32x32_water():
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/32x32_water.tga",
-        name="32x32_water", width=32, height=32, arr=tiles)
+        file="data/gfx/tiles3_water.tga",
+        name="tiles3_water", width=32, height=32, arr=tiles)
 
-def init_32x32_deep_water():
+def init_tiles3_deep_water():
     tiles = [
       "deep_water1a",
       "deep_water2a",
@@ -4926,11 +4926,11 @@ def init_32x32_deep_water():
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/32x32_deep_water.tga",
-        name="32x32_deep_water", width=32, height=32, arr=tiles)
+        file="data/gfx/tiles3_deep_water.tga",
+        name="tiles3_deep_water", width=32, height=32, arr=tiles)
 
 
-def init_32x32_lava():
+def init_tiles3_lava():
     tiles = [
       "lava1a",
       "lava2a",
@@ -4999,8 +4999,8 @@ def init_32x32_lava():
     ]
 
     zx.tile_load_arr_sprites(
-        file="data/gfx/32x32_lava.tga",
-        name="32x32_lava", width=32, height=32, arr=tiles)
+        file="data/gfx/tiles3_lava.tga",
+        name="tiles3_lava", width=32, height=32, arr=tiles)
 
 
 def init_chasm():
@@ -5112,15 +5112,15 @@ init_ui_credits()
 init_ui_action_bar()
 init_ui_action_bar_highlight()
 init_ui_inventory()
-init_16x16()
-init_16x16_ascii()
-init_24x24()
-init_32x32()
-init_32x32_water()
-init_32x32_lava()
+init_tiles1()
+init_tiles1_ascii()
+init_tiles2()
+init_tiles3()
+init_tiles3_water()
+init_tiles3_lava()
 init_chasm()
-init_32x32_deep_water()
-init_32x32_surface_effects()
+init_tiles3_deep_water()
+init_tiles3_surface_effects()
 init_weapons_tiles()
 init_claws_tiles()
 init_ui_blood()
