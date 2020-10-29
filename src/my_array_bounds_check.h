@@ -7,7 +7,7 @@
 //
 template<class TYPE, std::size_t XDIM>
 static inline
-void set(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
+void set(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v) {_
     DODEBUG(std::cerr << "set [" << X << "] = " << v << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -16,7 +16,7 @@ void set(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void incr(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
+void incr(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v) {_
     DODEBUG(std::cerr << "incr [" << X << "] = " << v << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -25,7 +25,7 @@ void incr(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void decr(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
+void decr(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v) {_
     DODEBUG(std::cerr << "decr [" << X << "] = " << v << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -34,7 +34,7 @@ void decr(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){_
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void incr(std::array<TYPE,XDIM>& container, std::size_t X){_
+void incr(std::array<TYPE,XDIM>& container, std::size_t X) {_
     DODEBUG(std::cerr << "incr [" << X << "]" << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -43,7 +43,7 @@ void incr(std::array<TYPE,XDIM>& container, std::size_t X){_
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void decr(std::array<TYPE,XDIM>& container, std::size_t X){_
+void decr(std::array<TYPE,XDIM>& container, std::size_t X) {_
     DODEBUG(std::cerr << "decr [" << X << "]" << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -52,7 +52,7 @@ void decr(std::array<TYPE,XDIM>& container, std::size_t X){_
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE get(std::array<TYPE,XDIM> const &container, std::size_t X){_
+TYPE get(std::array<TYPE,XDIM> const &container, std::size_t X) {_
     DODEBUG(std::cerr << "get [" << X << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -62,7 +62,7 @@ TYPE get(std::array<TYPE,XDIM> const &container, std::size_t X){_
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE& getref(std::array<TYPE,XDIM> &container, std::size_t X){_
+TYPE& getref(std::array<TYPE,XDIM> &container, std::size_t X) {_
     DODEBUG(std::cerr << "getref [" << X << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -71,7 +71,7 @@ TYPE& getref(std::array<TYPE,XDIM> &container, std::size_t X){_
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE* getptr(std::array<TYPE,XDIM> &container, std::size_t X){_
+TYPE* getptr(std::array<TYPE,XDIM> &container, std::size_t X) {_
     DODEBUG(std::cerr << "getptr [" << X << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -84,7 +84,7 @@ TYPE* getptr(std::array<TYPE,XDIM> &container, std::size_t X){_
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 void set(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-         std::size_t X, std::size_t Y, TYPE v){_
+         std::size_t X, std::size_t Y, TYPE v) {_
     DODEBUG(std::cerr << "set [" << X << "][" << Y << "] = " << v << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -96,7 +96,7 @@ void set(std::array<std::array<TYPE,YDIM>,XDIM>& container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 void incr(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-          std::size_t X, std::size_t Y, TYPE v){_
+          std::size_t X, std::size_t Y, TYPE v) {_
     DODEBUG(std::cerr << "incr [" << X << "][" << Y << "]" << v << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -108,7 +108,7 @@ void incr(std::array<std::array<TYPE,YDIM>,XDIM>& container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 void decr(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-          std::size_t X, std::size_t Y, TYPE v){_
+          std::size_t X, std::size_t Y, TYPE v) {_
     DODEBUG(std::cerr << "decr [" << X << "][" << Y << "]" << v << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -120,7 +120,7 @@ void decr(std::array<std::array<TYPE,YDIM>,XDIM>& container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 TYPE& getref(std::array<std::array<TYPE,YDIM>,XDIM> &container,
-             std::size_t X, std::size_t Y){_
+             std::size_t X, std::size_t Y) {_
     DODEBUG(std::cerr << "getref [" << X << "][" << Y << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -132,7 +132,7 @@ TYPE& getref(std::array<std::array<TYPE,YDIM>,XDIM> &container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 TYPE* getptr(std::array<std::array<TYPE,YDIM>,XDIM> &container,
-             std::size_t X, std::size_t Y){_
+             std::size_t X, std::size_t Y) {_
     DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -144,7 +144,7 @@ TYPE* getptr(std::array<std::array<TYPE,YDIM>,XDIM> &container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
 TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const &container,
-         std::size_t X, std::size_t Y){_
+         std::size_t X, std::size_t Y) {_
     DODEBUG(std::cerr << "get [" << X << "][" << Y << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -160,7 +160,7 @@ TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const &container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 void set(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM>& container,
-         std::size_t X, std::size_t Y, std::size_t Z, TYPE v){_
+         std::size_t X, std::size_t Y, std::size_t Z, TYPE v) {_
     DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "] = " << v << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -174,7 +174,7 @@ void set(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM>& container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 TYPE get(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> const &container,
-         std::size_t X, std::size_t Y, std::size_t Z){_
+         std::size_t X, std::size_t Y, std::size_t Z) {_
     DODEBUG(std::cerr << "get [" << X << "][" << Y << "][" << Z << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -189,7 +189,7 @@ TYPE get(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> const &containe
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 TYPE& getref(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &container,
-             std::size_t X, std::size_t Y, std::size_t Z){_
+             std::size_t X, std::size_t Y, std::size_t Z) {_
     DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -203,7 +203,7 @@ TYPE& getref(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 TYPE* getptr(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &container,
-             std::size_t X, std::size_t Y, std::size_t Z){_
+             std::size_t X, std::size_t Y, std::size_t Z) {_
     DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -220,7 +220,7 @@ TYPE* getptr(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 void set(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM>& container,
-         std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){_
+         std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v) {_
     DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "][" << I << "] = " << v << std::endl);
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -236,7 +236,7 @@ void set(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 TYPE get(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> const &container,
-          std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+          std::size_t X, std::size_t Y, std::size_t Z, std::size_t I) {_
     DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -253,7 +253,7 @@ TYPE get(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 TYPE& getref(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> &container,
-             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I) {_
     DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -269,7 +269,7 @@ TYPE& getref(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 TYPE* getptr(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> &container,
-             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I) {_
     DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "][" << I << "] = )");
     ASSERT_EX(X,>=,0)
     ASSERT_EX(X,<,container.size())
@@ -284,49 +284,49 @@ TYPE* getptr(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void set_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){
+void set_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v) {
     container[X] = v;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void incr_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){
+void incr_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v) {
     container[X] += v;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void decr_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v){
+void decr_no_check(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v) {
     container[X] -= v;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void incr_no_check(std::array<TYPE,XDIM>& container, std::size_t X){
+void incr_no_check(std::array<TYPE,XDIM>& container, std::size_t X) {
     container[X] ++;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-void decr_no_check(std::array<TYPE,XDIM>& container, std::size_t X){
+void decr_no_check(std::array<TYPE,XDIM>& container, std::size_t X) {
     container[X] --;
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE get_no_check(std::array<TYPE,XDIM> const &container, std::size_t X){
+TYPE get_no_check(std::array<TYPE,XDIM> const &container, std::size_t X) {
     return (container[X]);
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE& getref_no_check(std::array<TYPE,XDIM> &container, std::size_t X){
+TYPE& getref_no_check(std::array<TYPE,XDIM> &container, std::size_t X) {
     return (container[X]);
 }
 
 template<class TYPE, std::size_t XDIM>
 static inline
-TYPE* getptr_no_check(std::array<TYPE,XDIM> &container, std::size_t X){
+TYPE* getptr_no_check(std::array<TYPE,XDIM> &container, std::size_t X) {
     return (&container[X]);
 }
 
@@ -335,37 +335,39 @@ TYPE* getptr_no_check(std::array<TYPE,XDIM> &container, std::size_t X){
 //
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
-void set_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-                std::size_t X, std::size_t Y, TYPE v){
+void set_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container, std::size_t X, std::size_t Y, TYPE v) {
     container[X][Y] = v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
-void incr_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-                 std::size_t X, std::size_t Y, TYPE v){
+void incr_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container, std::size_t X, std::size_t Y, TYPE v) {
     container[X][Y] += v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
-void decr_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container,
-                 std::size_t X, std::size_t Y, TYPE v){
+void decr_no_check(std::array<std::array<TYPE,YDIM>,XDIM>& container, std::size_t X, std::size_t Y, TYPE v) {
     container[X][Y] -= v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
-TYPE& getref_no_check(std::array<std::array<TYPE,YDIM>,XDIM> &container,
-                    std::size_t X, std::size_t Y){
+TYPE& getref_no_check(std::array<std::array<TYPE,YDIM>,XDIM> &container, std::size_t X, std::size_t Y) {
     return (container[X][Y]);
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
-TYPE get_no_check(std::array<std::array<TYPE,YDIM>,XDIM> const &container,
-                std::size_t X, std::size_t Y){
+TYPE get_no_check(std::array<std::array<TYPE,YDIM>,XDIM> const &container, std::size_t X, std::size_t Y) {
     return (container[X][Y]);
+}
+
+
+template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+static inline
+TYPE* getptr_no_check(std::array<std::array<TYPE,YDIM>,XDIM> &container, std::size_t X, std::size_t Y) {
+    return (&(container[X][Y]));
 }
 
 //
@@ -374,21 +376,21 @@ TYPE get_no_check(std::array<std::array<TYPE,YDIM>,XDIM> const &container,
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 void set_no_check(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM>& container,
-                std::size_t X, std::size_t Y, std::size_t Z, TYPE v){
+                std::size_t X, std::size_t Y, std::size_t Z, TYPE v) {
     container[X][Y][Z] = v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 TYPE get_no_check(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> const &container,
-                std::size_t X, std::size_t Y, std::size_t Z){
+                std::size_t X, std::size_t Y, std::size_t Z) {
     return (container[X][Y][Z]);
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
 static inline
 TYPE& getref_no_check(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &container,
-                    std::size_t X, std::size_t Y, std::size_t Z){
+                    std::size_t X, std::size_t Y, std::size_t Z) {
     return (container[X][Y][Z]);
 }
 
@@ -398,20 +400,20 @@ TYPE& getref_no_check(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &c
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 void set_no_check(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM>& container,
-                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){
+                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v) {
     container[X][Y][Z][I] = v;
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 TYPE get_no_check(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> const &container,
-                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
+                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I) {
     return (container[X][Y][Z][I]);
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
 static inline
 TYPE& getref_no_check(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> &container,
-                    std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
+                    std::size_t X, std::size_t Y, std::size_t Z, std::size_t I) {
     return (container[X][Y][Z][I]);
 }
