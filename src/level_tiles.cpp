@@ -11,6 +11,7 @@
 #include "my_thing.h"
 #include "my_python.h"
 #include "my_player.h"
+#include "my_font.h"
 #include "my_game.h"
 
 void Level::get_tiles (void)
@@ -46,4 +47,5 @@ void Level::get_tiles (void)
         }
     }
     bg_valid = false;
+    fixed_font->cache = {};
 }
