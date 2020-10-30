@@ -844,7 +844,7 @@ static void ascii_display_mouse (point mouse_tile_tl,
     glcolor(GREEN);
 
     blit_init();
-    tile_blit(tile_find_mand("C97"),
+    tile_blit(tile_find_mand("F2.97"),
               point(mouse_tile_tl.x, mouse_tile_tl.y),
               point(mouse_tile_br.x, mouse_tile_br.y));
     blit_flush();
