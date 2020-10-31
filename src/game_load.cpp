@@ -452,6 +452,9 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     }
 
     /* int                ascii_mode                   */ in >> bits(my.t.ascii_mode                   );
+
+    g_opt_ascii_mode = my.t.ascii_mode;
+
     /* int                debug_mode                   */ in >> bits(my.t.debug_mode                   );
     /* int                fps_counter                  */ in >> bits(my.t.fps_counter                  );
     /* int                gfx_allow_highdpi            */ in >> bits(my.t.gfx_allow_highdpi            );
