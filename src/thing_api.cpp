@@ -184,13 +184,14 @@ void Thing::new_light (point offset, int strength, color col, int fbo)
     monstp->light_col = col;
 }
 
-void Thing::delete_light (void)
+void Thing::delete_lights (void)
 {_
     if (monstp) {
         verify(monstp);
         for (auto& l : monstp->light) {
             delete l;
         }
+        monstp->light.resize(0);
     }
 }
 

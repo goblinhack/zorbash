@@ -25,6 +25,8 @@ void Level::get_tiles (void)
                 t->inited_tiles = false;
                 t->get_tiles();
                 t->timestamp_next_frame = 0;
+                t->delete_lights();
+                t->init_lights();
 
                 auto tpp = t->tp();
                 auto tiles = &tpp->tiles;

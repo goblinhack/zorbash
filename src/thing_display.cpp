@@ -806,8 +806,10 @@ void Thing::blit_internal (int fbo,
         blit_wall_cladding(blit_tl, blit_br, &tiles);
     }
 
-    if (tiles.bot3_tile) {
-        blit_floor_chasm(blit_tl, blit_br, &tiles);
+    if (!g_opt_ascii_mode) {
+        if (tiles.bot3_tile) {
+            blit_floor_chasm(blit_tl, blit_br, &tiles);
+        }
     }
 
     if (wobble != 0.0) {
