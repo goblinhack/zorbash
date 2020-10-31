@@ -209,7 +209,7 @@ extern int ascii_mouse_x;
 extern int ascii_mouse_y;
 
 #define ASCII_CURSOR_UCHAR ((wchar_t)('z' + 6))
-#define ASCII_CURSOR_TILE  "F2.97" // block
-#define ASCII_UNKNOWN_TILE "F2.31" // ?
+#define ASCII_CURSOR_TILE  "2.97" // block
+#define ASCII_UNKNOWN_TILE "2.31" // ?
 
 #endif

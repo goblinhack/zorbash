@@ -98,23 +98,12 @@ Lightp light_new (Thingp owner,
                   color col,
                   int fbo)
 {_
-    uint16_t max_light_rays;
-
-    if (owner->is_player()) {
-        max_light_rays = MAX_RAY_LIGHTING;
-    } else {
-        max_light_rays = MAX_RAY_LIGHTING / 16;
-        max_light_rays = 32;
-        max_light_rays = std::max(8, (int)max_light_rays);
-    }
-
     auto l = new Light(); // std::make_shared< class Light >();
 
     l->offset         = offset;
     l->orig_strength  = strength;
     l->owner          = owner;
     l->col            = col;
-    l->max_light_rays = max_light_rays;
     l->fbo            = fbo;
 
     l->update();
@@ -127,6 +116,8 @@ void Light::update (void)
 {_
     level    = owner->level;
     strength = orig_strength * TILE_WIDTH;
+
+    max_light_rays = MAX_RAY_LIGHTING;
 
     ray.resize(max_light_rays);
     std::fill(ray.begin(), ray.end(), Ray{0});
@@ -204,8 +195,8 @@ bool Light::calculate (int last)
                 if (unlikely(rp->distance > strength)) { break; }
                 const int16_t p1x = light_pos.x + rp->p.x;
                 const int16_t p1y = light_pos.y + rp->p.y;
-                const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
-                const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+                const int16_t x = p1x / TILE_WIDTH;
+                const int16_t y = p1y / TILE_HEIGHT;
 
                 level->set_visited_no_check(x, y); // for AI and jumping
                 level->set_is_lit_no_check(x, y); // allows lights to fade
@@ -222,8 +213,8 @@ bool Light::calculate (int last)
                         if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
                         const int16_t p1x = light_pos.x + rp->p.x;
                         const int16_t p1y = light_pos.y + rp->p.y;
-                        const int16_t x = (p1x / TILE_WIDTH) % MAP_WIDTH;
-                        const int16_t y = (p1y / TILE_HEIGHT) % MAP_HEIGHT;
+                        const int16_t x = p1x / TILE_WIDTH;
+                        const int16_t y = p1y / TILE_HEIGHT;
                         if (!level->is_light_blocker_no_check(x, y)) { break; }
                         rp++;
                         step2++;
