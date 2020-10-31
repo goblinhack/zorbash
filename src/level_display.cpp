@@ -85,9 +85,11 @@ void Level::display_map_bg_things (void)
     }
     blit_flush();
 
-    display_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
-    display_deep_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
-    display_lava(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+    if (!g_opt_ascii_mode) {
+        display_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+        display_deep_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+        display_lava(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+    }
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);

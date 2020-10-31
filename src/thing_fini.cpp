@@ -56,7 +56,7 @@ void Thing::destroy (void)
 
     delete_dmap_scent();
     delete_age_map();
-    delete_light();
+    delete_lights();
     delete_particle();
 
     {

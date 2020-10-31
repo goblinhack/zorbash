@@ -261,7 +261,13 @@ static void gl_init_fbo_ (int fbo,
     if (*fbo_tex_id) {
         LOG("INIT: - glDeleteTextures");
         glDeleteTextures(1, fbo_tex_id);
+        GL_ERROR_CHECK();
         *fbo_tex_id = 0;
+
+        LOG("INIT: - glDeleteRenderbuffers");
+        glDeleteRenderbuffers(1, fbo_id);
+        GL_ERROR_CHECK();
+        *fbo_id = 0;
     }
     glGenTextures(1, fbo_tex_id);
     GL_ERROR_CHECK();
@@ -443,28 +449,44 @@ void fbo_get_size (int fbo, int &w, int &h)
         case FBO_MAP:
         case FBO_MAP_HIDDEN:
         case FBO_MAP_VISIBLE:
-        case FBO_MASK1:
-        case FBO_MASK2:
-        case FBO_MASK3:
-        case FBO_MASK4:
         case FBO_LIGHT:
         case FBO_FADE:
             w = game->config.inner_pix_width;
             h = game->config.inner_pix_height;
+            break;
+        case FBO_MASK1:
+        case FBO_MASK2:
+        case FBO_MASK3:
+        case FBO_MASK4:
+            if (g_opt_ascii_mode) {
+                w = 1;
+                h = 1;
+            } else {
+                w = game->config.inner_pix_width;
+                h = game->config.inner_pix_height;
+            }
             break;
         case FBO_MINIMAP:
             w = MAP_WIDTH;
             h = MAP_HEIGHT;
             break;
         case FBO_FULLMAP:
-        case FBO_FULLMAP_MASK1:
-        case FBO_FULLMAP_MASK2:
-        case FBO_FULLMAP_MASK3:
-        case FBO_FULLMAP_MASK4:
         case FBO_FULLMAP_LIGHT:
         case FBO_FULLMAP_VISITED:
             w = TILE_WIDTH * MAP_WIDTH;
             h = TILE_HEIGHT * MAP_HEIGHT;
+            break;
+        case FBO_FULLMAP_MASK1:
+        case FBO_FULLMAP_MASK2:
+        case FBO_FULLMAP_MASK3:
+        case FBO_FULLMAP_MASK4:
+            if (g_opt_ascii_mode) {
+                w = 1;
+                h = 1;
+            } else {
+                w = TILE_WIDTH * MAP_WIDTH;
+                h = TILE_HEIGHT * MAP_HEIGHT;
+            }
             break;
         case FBO_WID:
             //

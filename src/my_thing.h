@@ -282,7 +282,7 @@ public:
 
     std::vector<Lightp> & get_light(void);
     void new_light(point offset, int strength, color col, int fbo);
-    void delete_light(void);
+    void delete_lights(void);
     void update_light(void);
 
     void set_lunge_to(fpoint);
