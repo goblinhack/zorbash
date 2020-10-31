@@ -269,6 +269,7 @@ uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32_t butt
     } else {
         game->config_top_select();
     }
+    config_update_all();
     return (true);
 }
 

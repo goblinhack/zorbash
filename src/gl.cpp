@@ -48,14 +48,14 @@ void gl_init_2d_mode (void)
     //
     // Enable Texture Worldping
     //
-    CON("INIT: OpenGL enable textures");
+    CON("OpenGL: enable textures");
     glEnable(GL_TEXTURE_2D);
     GL_ERROR_CHECK();
 
     //
     // Enable alpha blending for sprites
     //
-    CON("INIT: OpenGL enable blending");
+    CON("OpenGL: enable blending");
     glEnable(GL_BLEND);
     GL_ERROR_CHECK();
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -64,7 +64,7 @@ void gl_init_2d_mode (void)
     //
     // Setup our viewport
     //
-    CON("INIT: OpenGL enable viewport");
+    CON("OpenGL: enable viewport");
     glViewport(0, 0,
                game->config.outer_pix_width,
                game->config.outer_pix_height);
@@ -73,13 +73,13 @@ void gl_init_2d_mode (void)
     //
     // Reset the view
     //
-    CON("INIT: OpenGL identity");
+    CON("OpenGL: identity");
     glLoadIdentity();
     GL_ERROR_CHECK();
 
     gl_init_fbo();
 
-    CON("INIT: OpenGL misc");
+    CON("OpenGL: misc");
     glLineWidth(1.0);
     GL_ERROR_CHECK();
     glEnable(GL_LINE_SMOOTH);
@@ -254,29 +254,32 @@ static void gl_init_fbo_ (int fbo,
                           GLuint tex_width,
                           GLuint tex_height)
 {_
-    LOG("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
+    LOG("OpenGL: create FBO, size %dx%d", tex_width, tex_height);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glGenTextures");
+    LOG("OpenGl: - glGenTextures");
     if (*fbo_tex_id) {
-        LOG("INIT: - glDeleteTextures");
+        LOG("OpenGl: - glDeleteTextures");
         glDeleteTextures(1, fbo_tex_id);
         GL_ERROR_CHECK();
         *fbo_tex_id = 0;
+    }
 
-        LOG("INIT: - glDeleteRenderbuffers");
+    if (*fbo_id) {
+        LOG("OpenGl: - glDeleteRenderbuffers");
         glDeleteRenderbuffers(1, fbo_id);
         GL_ERROR_CHECK();
         *fbo_id = 0;
     }
+
     glGenTextures(1, fbo_tex_id);
     GL_ERROR_CHECK();
 
-    DBG("INIT: - glBindTexture");
+    DBG("OpenGl: - glBindTexture");
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
     GL_ERROR_CHECK();
 
-    DBG("INIT: - glTexParameterf");
+    DBG("OpenGl: - glTexParameterf");
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     GL_ERROR_CHECK();
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -286,7 +289,7 @@ static void gl_init_fbo_ (int fbo,
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     GL_ERROR_CHECK();
 
-    DBG("INIT: - glTexImage2D");
+    DBG("OpenGl: - glTexImage2D");
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
                  tex_width, tex_height, 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, 0);
@@ -304,38 +307,38 @@ static void gl_init_fbo_ (int fbo,
     }
 #endif
 
-    DBG("INIT: - glGenRenderbuffers_EXT");
+    DBG("OpenGl: - glGenRenderbuffers_EXT");
     glGenRenderbuffers_EXT(1, render_buf_id);
     GL_ERROR_CHECK();
 
-    DBG("INIT: - glBindRenderbuffer_EXT");
+    DBG("OpenGl: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, *render_buf_id);
     GL_ERROR_CHECK();
 
-    DBG("INIT: - glRenderbufferStorage_EXT");
+    DBG("OpenGl: - glRenderbufferStorage_EXT");
     glRenderbufferStorage_EXT(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
                               tex_width, tex_height);
     GL_ERROR_CHECK();
 
-    DBG("INIT: - glBindRenderbuffer_EXT");
+    DBG("OpenGl: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, 0);
     GL_ERROR_CHECK();
 
     //
     // Create a frame buffer object.
     //
-    DBG("INIT: - glGenFramebuffers_EXT");
+    DBG("OpenGl: - glGenFramebuffers_EXT");
     glGenFramebuffers_EXT(1, fbo_id);
     GL_ERROR_CHECK();
 
-    DBG("INIT: - glBindFramebuffer_EXT");
+    DBG("OpenGl: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, *fbo_id);
     GL_ERROR_CHECK();
 
     //
     // Attach the texture to FBO color attachment point
     //
-    DBG("INIT: - glFramebufferTexture2D_EXT");
+    DBG("OpenGl: - glFramebufferTexture2D_EXT");
     glFramebufferTexture2D_EXT(GL_FRAMEBUFFER,        // 1. fbo target: GL_FRAMEBUFFER
                                GL_COLOR_ATTACHMENT0,  // 2. attachment point
                                GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
@@ -346,7 +349,7 @@ static void gl_init_fbo_ (int fbo,
     //
     // Attach the renderbuffer to depth attachment point
     //
-    DBG("INIT: - glFramebufferRenderbuffer_EXT");
+    DBG("OpenGl: - glFramebufferRenderbuffer_EXT");
     glFramebufferRenderbuffer_EXT(GL_FRAMEBUFFER,      // 1. fbo target: GL_FRAMEBUFFER
                                   GL_DEPTH_ATTACHMENT, // 2. attachment point
                                   GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
@@ -356,39 +359,39 @@ static void gl_init_fbo_ (int fbo,
     //
     // Check FBO status
     //
-    DBG("INIT: - glCheckFramebufferStatus_EXT");
+    DBG("OpenGl: - glCheckFramebufferStatus_EXT");
     GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
     if (status && (status != GL_FRAMEBUFFER_COMPLETE)) {
         ERR("Failed to create framebuffer, error: %d", status);
 
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
         if (status == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) {
-            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points are framebuffer attachment complete. This means that at least one attachment point with a renderbuffer or texture attached has its attached object no longer in existence or has an attached image with a width or height of zero, or the color attachment point has a non-color-renderable image attached, or the depth attachment point has a non-depth-renderable image attached, or the stencil attachment point has a non-stencil-renderable image attached.  Color-renderable formats include GL_RGBA4, GL_RGB5_A1, and GL_RGB565. GL_DEPTH_COMPONENT16 is the only depth-renderable format. GL_STENCIL_INDEX8 is the only stencil-renderable format.");
+            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points are framebuffer attachment complete. This means that at least one attachment point with a renderbuffer or texture attached has its attached object no longer in existence or has an attached image with a width or height of zero, or the color attachment point has a non-color-renderable image attached, or the depth attachment point has a non-depth-renderable image attached, or the stencil attachment point has a non-stencil-renderable image attached.  Color-renderable formats include GL_RGBA4, GL_RGB5_A1, and GL_RGB565. GL_DEPTH_COMPONENT16 is the only depth-renderable format. GL_STENCIL_INDEX8 is the only stencil-renderable format.");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS
         if (status == GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS) {
-            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same width and height.");
+            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same width and height.");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
         if (status == GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT) {
-            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT No images are attached to the framebuffer.");
+            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT No images are attached to the framebuffer.");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_UNSUPPORTED
         if (status == GL_FRAMEBUFFER_UNSUPPORTED) {
-            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images violates an implementation-dependent set of restrictions.");
+            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images violates an implementation-dependent set of restrictions.");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_UNSUPPORTED
         if (status == GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER) {
-            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
+            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER
         if (status == GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER) {
-            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
+            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
         }
 #endif
     }
@@ -398,7 +401,7 @@ static void gl_init_fbo_ (int fbo,
     GL_ERROR_CHECK();
 
     // switch back to window-system-provided framebuffer
-    DBG("INIT: - glBindFramebuffer_EXT");
+    DBG("OpenGl: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
     GL_ERROR_CHECK();
 }
@@ -407,7 +410,7 @@ void gl_init_fbo (void)
 {
     int i;
 
-    CON("INIT: OpenGL create FBOs");
+    CON("OpenGL: create FBOs");
     GL_ERROR_CHECK();
 
     for (i = 0; i < MAX_FBO; i++) {
@@ -421,7 +424,7 @@ void gl_init_fbo (void)
         // If no change in size (minimap, bg map) then do not reset the FBO
         //
         if (fbo_size[i] == isize(tex_width, tex_height)) {
-            CON("INIT: OpenGL skip init of FBO %d", i);
+            CON("OpenGL: skip init of FBO %d", i);
             continue;
         }
 
@@ -436,7 +439,7 @@ void gl_init_fbo (void)
         blit_fbo_unbind();
     }
 
-    CON("INIT: OpenGL created FBOs");
+    CON("OpenGL: created FBOs");
     GL_ERROR_CHECK();
 }
 
@@ -847,273 +850,273 @@ static void gl_ext_load (void)
     glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT))
         wglGetProcAddress("glCreateProgram");
     if (!glCreateProgram_EXT) {
-        CON("INIT: - glCreateProgram_EXT - NOT present");
+        CON("OpenGl: - glCreateProgram_EXT - NOT present");
     } else {
-        CON("INIT: - glCreateProgram_EXT - present");
+        CON("OpenGl: - glCreateProgram_EXT - present");
     }
 
     glDeleteProgram_EXT =
         (__typeof__(glDeleteProgram_EXT)) wglGetProcAddress("glDeleteProgram");
     if (!glDeleteProgram_EXT) {
-        CON("INIT: - glDeleteProgram_EXT - NOT present");
+        CON("OpenGl: - glDeleteProgram_EXT - NOT present");
     } else {
-        CON("INIT: - glDeleteProgram_EXT - present");
+        CON("OpenGl: - glDeleteProgram_EXT - present");
     }
 
     glIsProgram_EXT =
         (__typeof__(glIsProgram_EXT)) wglGetProcAddress("glIsProgram");
     if (!glIsProgram_EXT) {
-        CON("INIT: - glIsProgram_EXT - NOT present");
+        CON("OpenGl: - glIsProgram_EXT - NOT present");
     } else {
-        CON("INIT: - glIsProgram_EXT - present");
+        CON("OpenGl: - glIsProgram_EXT - present");
     }
 
     glCreateShader_EXT =
         (__typeof__(glCreateShader_EXT)) wglGetProcAddress("glCreateShader");
     if (!glCreateShader_EXT) {
-        CON("INIT: - glCreateShader_EXT - NOT present");
+        CON("OpenGl: - glCreateShader_EXT - NOT present");
     } else {
-        CON("INIT: - glCreateShader_EXT - present");
+        CON("OpenGl: - glCreateShader_EXT - present");
     }
 
     glDeleteShader_EXT =
         (__typeof__(glDeleteShader_EXT)) wglGetProcAddress("glDeleteShader");
     if (!glDeleteShader_EXT) {
-        CON("INIT: - glDeleteShader_EXT - NOT present");
+        CON("OpenGl: - glDeleteShader_EXT - NOT present");
     } else {
-        CON("INIT: - glDeleteShader_EXT - present");
+        CON("OpenGl: - glDeleteShader_EXT - present");
     }
 
     glShaderSource_EXT =
         (__typeof__(glShaderSource_EXT)) wglGetProcAddress("glShaderSource");
     if (!glShaderSource_EXT) {
-        CON("INIT: - glShaderSource_EXT - NOT present");
+        CON("OpenGl: - glShaderSource_EXT - NOT present");
     } else {
-        CON("INIT: - glShaderSource_EXT - present");
+        CON("OpenGl: - glShaderSource_EXT - present");
     }
 
     glCompileShader_EXT =
         (__typeof__(glCompileShader_EXT)) wglGetProcAddress("glCompileShader");
     if (!glCompileShader_EXT) {
-        CON("INIT: - glCompileShader_EXT - NOT present");
+        CON("OpenGl: - glCompileShader_EXT - NOT present");
     } else {
-        CON("INIT: - glCompileShader_EXT - present");
+        CON("OpenGl: - glCompileShader_EXT - present");
     }
 
     glAttachShader_EXT =
         (__typeof__(glAttachShader_EXT)) wglGetProcAddress("glAttachShader");
     if (!glAttachShader_EXT) {
-        CON("INIT: - glAttachShader_EXT - NOT present");
+        CON("OpenGl: - glAttachShader_EXT - NOT present");
     } else {
-        CON("INIT: - glAttachShader_EXT - present");
+        CON("OpenGl: - glAttachShader_EXT - present");
     }
 
     glDetachShader_EXT =
         (__typeof__(glDetachShader_EXT)) wglGetProcAddress("glDetachShader");
     if (!glDetachShader_EXT) {
-        CON("INIT: - glDetachShader_EXT - NOT present");
+        CON("OpenGl: - glDetachShader_EXT - NOT present");
     } else {
-        CON("INIT: - glDetachShader_EXT - present");
+        CON("OpenGl: - glDetachShader_EXT - present");
     }
 
     glGetAttachedShaders_EXT =
         (__typeof__(glGetAttachedShaders_EXT)) wglGetProcAddress("glGetAttachedShaders");
     if (!glGetAttachedShaders_EXT) {
-        CON("INIT: - glGetAttachedShaders_EXT - NOT present");
+        CON("OpenGl: - glGetAttachedShaders_EXT - NOT present");
     } else {
-        CON("INIT: - glGetAttachedShaders_EXT - present");
+        CON("OpenGl: - glGetAttachedShaders_EXT - present");
     }
 
     glLinkProgram_EXT =
         (__typeof__(glLinkProgram_EXT)) wglGetProcAddress("glLinkProgram");
     if (!glLinkProgram_EXT) {
-        CON("INIT: - glLinkProgram_EXT - NOT present");
+        CON("OpenGl: - glLinkProgram_EXT - NOT present");
     } else {
-        CON("INIT: - glLinkProgram_EXT - present");
+        CON("OpenGl: - glLinkProgram_EXT - present");
     }
 
     glUseProgram_EXT =
         (__typeof__(glUseProgram_EXT)) wglGetProcAddress("glUseProgram");
     if (!glUseProgram_EXT) {
-        CON("INIT: - glUseProgram_EXT - NOT present");
+        CON("OpenGl: - glUseProgram_EXT - NOT present");
     } else {
-        CON("INIT: - glUseProgram_EXT - present");
+        CON("OpenGl: - glUseProgram_EXT - present");
     }
 
     glGetShaderInfoLog_EXT =
         (__typeof__(glGetShaderInfoLog_EXT)) wglGetProcAddress("glGetShaderInfoLog");
     if (!glGetShaderInfoLog_EXT) {
-        CON("INIT: - glGetShaderInfoLog_EXT - NOT present");
+        CON("OpenGl: - glGetShaderInfoLog_EXT - NOT present");
     } else {
-        CON("INIT: - glGetShaderInfoLog_EXT - present");
+        CON("OpenGl: - glGetShaderInfoLog_EXT - present");
     }
 
     glGetProgramInfoLog_EXT =
         (__typeof__(glGetProgramInfoLog_EXT)) wglGetProcAddress("glGetProgramInfoLog");
     if (!glGetProgramInfoLog_EXT) {
-        CON("INIT: - glGetProgramInfoLog_EXT - NOT present");
+        CON("OpenGl: - glGetProgramInfoLog_EXT - NOT present");
     } else {
-        CON("INIT: - glGetProgramInfoLog_EXT - present");
+        CON("OpenGl: - glGetProgramInfoLog_EXT - present");
     }
 
     glGetUniformLocation_EXT =
         (__typeof__(glGetUniformLocation_EXT)) wglGetProcAddress("glGetUniformLocation");
     if (!glGetUniformLocation_EXT) {
-        CON("INIT: - glGetUniformLocation_EXT - NOT present");
+        CON("OpenGl: - glGetUniformLocation_EXT - NOT present");
     } else {
-        CON("INIT: - glGetUniformLocation_EXT - present");
+        CON("OpenGl: - glGetUniformLocation_EXT - present");
     }
 
     glUniform1f_EXT =
         (__typeof__(glUniform1f_EXT)) wglGetProcAddress("glUniform1f");
     if (!glUniform1f_EXT) {
-        CON("INIT: - glUniform1f_EXT - NOT present");
+        CON("OpenGl: - glUniform1f_EXT - NOT present");
     } else {
-        CON("INIT: - glUniform1f_EXT - present");
+        CON("OpenGl: - glUniform1f_EXT - present");
     }
 
     glUniform1i_EXT =
         (__typeof__(glUniform1i_EXT)) wglGetProcAddress("glUniform1i");
     if (!glUniform1i_EXT) {
-        CON("INIT: - glUniform1i_EXT - NOT present");
+        CON("OpenGl: - glUniform1i_EXT - NOT present");
     } else {
-        CON("INIT: - glUniform1i_EXT - present");
+        CON("OpenGl: - glUniform1i_EXT - present");
     }
 
     glUniform2fv_EXT =
         (__typeof__(glUniform2fv_EXT)) wglGetProcAddress("glUniform2fv");
     if (!glUniform2fv_EXT) {
-        CON("INIT: - glUniform2fv_EXT - NOT present");
+        CON("OpenGl: - glUniform2fv_EXT - NOT present");
     } else {
-        CON("INIT: - glUniform2fv_EXT - present");
+        CON("OpenGl: - glUniform2fv_EXT - present");
     }
 
     glUniform3fv_EXT =
         (__typeof__(glUniform3fv_EXT)) wglGetProcAddress("glUniform3fv");
     if (!glUniform3fv_EXT) {
-        CON("INIT: - glUniform3fv_EXT - NOT present");
+        CON("OpenGl: - glUniform3fv_EXT - NOT present");
     } else {
-        CON("INIT: - glUniform3fv_EXT - present");
+        CON("OpenGl: - glUniform3fv_EXT - present");
     }
 
     glGenerateMipmap_EXT =
         (__typeof__(glGenerateMipmap_EXT)) wglGetProcAddress("glGenerateMipmap");
     if (!glGenerateMipmap_EXT) {
-        CON("INIT: - glGenerateMipmap_EXT - NOT present");
+        CON("OpenGl: - glGenerateMipmap_EXT - NOT present");
     } else {
-        CON("INIT: - glGenerateMipmap_EXT - present");
+        CON("OpenGl: - glGenerateMipmap_EXT - present");
     }
 
     glGenFramebuffers_EXT =
         (__typeof__(glGenFramebuffers_EXT)) wglGetProcAddress("glGenFramebuffers");
     if (!glGenFramebuffers_EXT) {
-        CON("INIT: - glGenFramebuffers_EXT - NOT present");
+        CON("OpenGl: - glGenFramebuffers_EXT - NOT present");
     } else {
-        CON("INIT: - glGenFramebuffers_EXT - present");
+        CON("OpenGl: - glGenFramebuffers_EXT - present");
     }
 
     glDeleteFramebuffers_EXT =
         (__typeof__(glDeleteFramebuffers_EXT)) wglGetProcAddress("glDeleteFramebuffers");
     if (!glDeleteFramebuffers_EXT) {
-        CON("INIT: - glDeleteFramebuffers_EXT - NOT present");
+        CON("OpenGl: - glDeleteFramebuffers_EXT - NOT present");
     } else {
-        CON("INIT: - glDeleteFramebuffers_EXT - present");
+        CON("OpenGl: - glDeleteFramebuffers_EXT - present");
     }
 
     glBindFramebuffer_EXT =
         (__typeof__(glBindFramebuffer_EXT)) wglGetProcAddress("glBindFramebuffer");
     if (!glBindFramebuffer_EXT) {
-        CON("INIT: - glBindFramebuffer_EXT - NOT present");
+        CON("OpenGl: - glBindFramebuffer_EXT - NOT present");
     } else {
-        CON("INIT: - glBindFramebuffer_EXT - present");
+        CON("OpenGl: - glBindFramebuffer_EXT - present");
     }
 
     glGenRenderbuffers_EXT =
         (__typeof__(glGenRenderbuffers_EXT)) wglGetProcAddress("glGenRenderbuffers");
     if (!glGenRenderbuffers_EXT) {
-        CON("INIT: - glGenRenderbuffers_EXT - NOT present");
+        CON("OpenGl: - glGenRenderbuffers_EXT - NOT present");
     } else {
-        CON("INIT: - glGenRenderbuffers_EXT - present");
+        CON("OpenGl: - glGenRenderbuffers_EXT - present");
     }
 
     glDeleteRenderbuffers_EXT =
         (__typeof__(glDeleteRenderbuffers_EXT)) wglGetProcAddress("glDeleteRenderbuffers");
     if (!glDeleteRenderbuffers_EXT) {
-        CON("INIT: - glDeleteRenderbuffers_EXT - NOT present");
+        CON("OpenGl: - glDeleteRenderbuffers_EXT - NOT present");
     } else {
-        CON("INIT: - glDeleteRenderbuffers_EXT - present");
+        CON("OpenGl: - glDeleteRenderbuffers_EXT - present");
     }
 
     glBindRenderbuffer_EXT =
         (__typeof__(glBindRenderbuffer_EXT)) wglGetProcAddress("glBindRenderbuffer");
     if (!glBindRenderbuffer_EXT) {
-        CON("INIT: - glBindRenderbuffer_EXT - NOT present");
+        CON("OpenGl: - glBindRenderbuffer_EXT - NOT present");
     } else {
-        CON("INIT: - glBindRenderbuffer_EXT - present");
+        CON("OpenGl: - glBindRenderbuffer_EXT - present");
     }
 
     glRenderbufferStorage_EXT =
         (__typeof__(glRenderbufferStorage_EXT)) wglGetProcAddress("glRenderbufferStorage");
     if (!glRenderbufferStorage_EXT) {
-        CON("INIT: - glRenderbufferStorage_EXT - NOT present");
+        CON("OpenGl: - glRenderbufferStorage_EXT - NOT present");
     } else {
-        CON("INIT: - glRenderbufferStorage_EXT - present");
+        CON("OpenGl: - glRenderbufferStorage_EXT - present");
     }
 
     glFramebufferRenderbuffer_EXT =
         (__typeof__(glFramebufferRenderbuffer_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
     if (!glFramebufferRenderbuffer_EXT) {
-        CON("INIT: - glFramebufferRenderbuffer_EXT - NOT present");
+        CON("OpenGl: - glFramebufferRenderbuffer_EXT - NOT present");
     } else {
-        CON("INIT: - glFramebufferRenderbuffer_EXT - present");
+        CON("OpenGl: - glFramebufferRenderbuffer_EXT - present");
     }
 
     glCheckFramebufferStatus_EXT =
         (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
     if (!glCheckFramebufferStatus_EXT) {
-        CON("INIT: - glCheckFramebufferStatus_EXT - NOT present");
+        CON("OpenGl: - glCheckFramebufferStatus_EXT - NOT present");
     } else {
-        CON("INIT: - glCheckFramebufferStatus_EXT - present");
+        CON("OpenGl: - glCheckFramebufferStatus_EXT - present");
     }
 
     glFramebufferTexture2D_EXT =
         (__typeof__(glFramebufferTexture2D_EXT)) wglGetProcAddress("glFramebufferTexture2D");
     if (!glFramebufferTexture2D_EXT) {
-        CON("INIT: - glFramebufferTexture2D_EXT - NOT present");
+        CON("OpenGl: - glFramebufferTexture2D_EXT - NOT present");
     } else {
-        CON("INIT: - glFramebufferTexture2D_EXT - present");
+        CON("OpenGl: - glFramebufferTexture2D_EXT - present");
     }
 
     glGenBuffersARB_EXT =
         (__typeof__(glGenBuffersARB_EXT)) wglGetProcAddress("glGenBuffersARB");
     if (!glGenBuffersARB_EXT) {
-        CON("INIT: - glGenBuffersARB_EXT - NOT present");
+        CON("OpenGl: - glGenBuffersARB_EXT - NOT present");
     } else {
-        CON("INIT: - glGenBuffersARB_EXT - present");
+        CON("OpenGl: - glGenBuffersARB_EXT - present");
     }
 
     glBindBufferARB_EXT =
         (__typeof__(glBindBufferARB_EXT)) wglGetProcAddress("glBindBufferARB");
     if (!glBindBufferARB_EXT) {
-        CON("INIT: - glBindBufferARB_EXT - NOT present");
+        CON("OpenGl: - glBindBufferARB_EXT - NOT present");
     } else {
-        CON("INIT: - glBindBufferARB_EXT - present");
+        CON("OpenGl: - glBindBufferARB_EXT - present");
     }
 
     glDeleteBuffersARB_EXT =
         (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
     if (!glDeleteBuffersARB_EXT) {
-        CON("INIT: - glDeleteBuffersARB_EXT - NOT present");
+        CON("OpenGl: - glDeleteBuffersARB_EXT - NOT present");
     } else {
-        CON("INIT: - glDeleteBuffersARB_EXT - present");
+        CON("OpenGl: - glDeleteBuffersARB_EXT - present");
     }
 
     glDeleteBuffersARB_EXT =
         (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
     if (!glDeleteBuffersARB_EXT) {
-        CON("INIT: - glDeleteBuffersARB_EXT - NOT present");
+        CON("OpenGl: - glDeleteBuffersARB_EXT - NOT present");
     } else {
-        CON("INIT: - glDeleteBuffersARB_EXT - present");
+        CON("OpenGl: - glDeleteBuffersARB_EXT - present");
     }
 }
 
@@ -1219,9 +1222,9 @@ void gl_ext_init (void)
     WNDCLASSEX wc;
     HWND hwnd;
 
-    CON("INIT: OpenGL extensions");
+    CON("OpenGL: extensions");
 
-    CON("INIT: - GetModuleHandle");
+    CON("OpenGl: - GetModuleHandle");
     HINSTANCE hInstance = GetModuleHandle(0);
 
     wc.cbSize        = sizeof(WNDCLASSEX);
@@ -1237,14 +1240,14 @@ void gl_ext_init (void)
     wc.lpszClassName = g_szClassName;
     wc.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
 
-    CON("INIT: - RegisterClassEx");
+    CON("OpenGl: - RegisterClassEx");
     if (!RegisterClassEx(&wc)) {
         MessageBox(NULL, "Window Registration Failed!", "Error!",
             MB_ICONEXCLAMATION | MB_OK);
         return;
     }
 
-    CON("INIT: - CreateWindowEx");
+    CON("OpenGl: - CreateWindowEx");
     hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,
                           g_szClassName,
                           "zorbash startup",
