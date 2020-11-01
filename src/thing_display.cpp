@@ -314,7 +314,7 @@ bool Thing::get_coords (point &blit_tl,
         }
     } else if (is_cursor() ||
                is_cursor_path() ||
-               is_the_grid()) {
+               is_the_grid) {
         blit = true;
     }
 

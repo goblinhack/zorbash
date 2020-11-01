@@ -205,6 +205,7 @@ public:
     uint64_t is_waiting_to_ascend:1    {};
     uint64_t is_waiting_to_descend:1   {};
     uint64_t is_waiting_to_fall:1      {};
+    uint64_t is_the_grid:1             {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -259,7 +260,7 @@ public:
 
     std::size_t get_light_count (void) const
     {
-        if (monstp) {
+        if (likely(monstp != nullptr)) {
             verify(monstp);
             return (monstp->light.size());
         } else {
@@ -1066,7 +1067,6 @@ public:
     int is_slime_parent(void) const;
     int is_smoke(void) const;
     int is_steal_item_chance_d1000(void) const;
-    int is_the_grid(void) const;
     int is_throwable(void) const;
     int is_torch(void) const;
     int is_treasure(void) const;

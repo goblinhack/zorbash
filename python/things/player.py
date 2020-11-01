@@ -53,7 +53,7 @@ def tp_init(name, text_name, title):
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    delay = 550
+    delay = 900
     x.set_tile(tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay)
     x.set_tile(tile=name + ".2", is_dir_left=True, is_moving=True, delay_ms=delay)
     x.set_tile(tile=name + ".3", is_dir_left=True, is_moving=True, delay_ms=delay)

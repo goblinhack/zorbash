@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def lava_init(name, text_name, tiles=[], left_tiles=[]):
+def lava_init(name, text_name, tiles=[]):
     x = tp.Tp(name, text_name)
 
     x.set_ai_obstacle(True)

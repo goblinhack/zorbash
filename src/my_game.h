@@ -22,7 +22,7 @@ public:
     //
     float              ascii_gl_height              = {};
     float              ascii_gl_width               = {};
-    float              gfx_zoom                     = 4;
+    float              gfx_zoom                     = 3;
     float              one_pixel_height             = {};
     float              one_pixel_width              = {};
     float              scale_pix_height             = {};

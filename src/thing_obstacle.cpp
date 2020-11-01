@@ -21,7 +21,7 @@ bool Thing::is_obstacle_for_me (const point &p)
             continue;
         }
 
-        if (t->is_the_grid()) { continue; }
+        if (t->is_the_grid) { continue; }
 
         //
         // "true" on collision

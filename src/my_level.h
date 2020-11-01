@@ -188,29 +188,23 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
-                if (t->is_hidden) { continue; }                     \
-                if (t->z_depth != MAP_DEPTH_THE_GRID) {             \
-                    continue;                                       \
-                }
+                if (t->is_the_grid) { continue; }                   \
 
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
-                if (t->is_hidden) { continue; }                     \
                 if (t->z_depth != z) {                              \
                     continue;                                       \
-                }
+                }                                                   \
+                if (t->is_hidden) { continue; }                     \
 
     #define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                 \
-        if (!(level)->is_oob(x, y)) {                               \
-            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
-                verify(t);                                          \
-                if (t->is_hidden) { continue; }                     \
-                if (t->is_the_grid()) { continue; }                 \
-                if (!t->get_light_count()) {                        \
-                    continue;                                       \
-                }
+    {                                                               \
+        for (auto t : getref(level->all_thing_ptrs_at, x, y)) {     \
+            verify(t);                                              \
+            if (likely(!t->has_light)) { continue; }                \
+            if (t->is_hidden) { continue; }                         \
 
     //
     // Things that move around
@@ -219,8 +213,8 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
+                if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \
-                if (t->is_the_grid()) { continue; }                 \
                 if (!t->is_active()) {                              \
                     continue;                                       \
                 }                                                   \
@@ -233,8 +227,8 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
+                if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \
-                if (t->is_the_grid()) { continue; }                 \
                 if (!t->is_interesting()) {                         \
                     continue;                                       \
                 }                                                   \
@@ -246,8 +240,8 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
+                if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \
-                if (t->is_the_grid()) { continue; }                 \
                 if (!t->is_interesting() &&                         \
                     !t->is_attackable_by_monst() &&                 \
                     !t->is_attackable_by_player() &&                \
