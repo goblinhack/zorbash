@@ -4401,26 +4401,6 @@ timestamp_t Thing::incr_timestamp_jump_end (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// owner_id
-////////////////////////////////////////////////////////////////////////////
-ThingId Thing::get_owner_id (void) const
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->owner_id);
-    } else {
-        return (0);
-    }
-}
-
-ThingId Thing::set_owner_id (ThingId v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->owner_id = v);
-}
-
-////////////////////////////////////////////////////////////////////////////
 // weapon_id_carry_anim
 ////////////////////////////////////////////////////////////////////////////
 ThingId Thing::get_weapon_id_carry_anim (void) const

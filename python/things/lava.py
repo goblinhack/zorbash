@@ -24,7 +24,7 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    delay = 1250
+    delay = 200
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 

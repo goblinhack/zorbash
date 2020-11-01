@@ -1033,10 +1033,12 @@ uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
 void config_gfx_zoom_in (void)
 {_
     game->config.gfx_zoom++;
-    if (game->config.gfx_zoom > 5) {
+    if (game->config.gfx_zoom == 1.5) {
+        game->config.gfx_zoom = 1.0;
+    } else if (game->config.gfx_zoom > 5) {
         game->config.gfx_zoom = 5;
     }
-    MINICON("Zoom set to %d", game->config.gfx_zoom);
+    MINICON("Zoom set to %f", game->config.gfx_zoom);
     config_update_all();
 }
 
@@ -1044,9 +1046,9 @@ void config_gfx_zoom_out (void)
 {_
     game->config.gfx_zoom--;
     if (game->config.gfx_zoom < 1) {
-        game->config.gfx_zoom = 1;
+        game->config.gfx_zoom = 0.5;
     }
-    MINICON("Zoom set to %d", game->config.gfx_zoom);
+    MINICON("Zoom set to %f", game->config.gfx_zoom);
     config_update_all();
 }
 
@@ -1476,8 +1478,17 @@ void config_gfx_zoom_update (void)
     game->config.one_pixel_width = 1;
     game->config.one_pixel_height = 1;
 
+    if (!game->config.gfx_zoom) {
+        ERR("game->config.gfx_zoom is zero");
+        return;
+    }
+
     game->config.scale_pix_width = game->config.gfx_zoom;
     game->config.scale_pix_height = game->config.gfx_zoom;
+    if (!game->config.scale_pix_width) {
+        ERR("game->config.scale_pix_width is zero");
+        return;
+    }
 
     game->config.inner_pix_width =
         game->config.outer_pix_width / game->config.scale_pix_width;
@@ -1504,7 +1515,7 @@ void config_gfx_zoom_update (void)
     game->config.tile_pixel_height =
         game->config.inner_pix_height / TILES_DOWN;
 
-    CON("INIT: Graphics zoom          : %d", game->config.gfx_zoom);
+    CON("INIT: Graphics zoom          : %f", game->config.gfx_zoom);
     CON("INIT: - outer    pix size    : %dx%d", game->config.outer_pix_width,
                                                 game->config.outer_pix_height);
     CON("INIT: - inner    pix size    : %dx%d", game->config.inner_pix_width,

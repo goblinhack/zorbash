@@ -43,6 +43,10 @@ bool Level::screen_shake_begin (void)
         return false;
     }
 
+    if (g_opt_ascii_mode) {
+        return false;
+    }
+
     auto wobble = update_wobble();
     if (wobble != 0.0) {
         glPushMatrix();
