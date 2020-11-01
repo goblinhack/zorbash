@@ -705,8 +705,22 @@ public:
     void unset_on_fire(void);
     bool set_on_fire(void);
 
-    ThingId set_owner_id(ThingId);
-    ThingId get_owner_id(void) const;
+    const ThingId& get_owner_id (void) const
+    {_
+        if (likely(monstp != nullptr)) {
+            verify(monstp);
+            return (monstp->owner_id);
+        } else {
+            return (NoThingId);
+        }
+    }
+
+    const ThingId& set_owner_id (const ThingId &v)
+    {_
+        new_monst();
+    //con("%s", __FUNCTION__);
+        return (monstp->owner_id = v);
+    }
 
     ThingId set_weapon_id_carry_anim(ThingId);
     ThingId get_weapon_id_carry_anim(void) const;

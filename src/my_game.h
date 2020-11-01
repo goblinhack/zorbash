@@ -20,6 +20,18 @@ public:
     // Keep flags int size so the header size will change on a new flag.
     // It does not always for new bools.
     //
+    float              ascii_gl_height              = {};
+    float              ascii_gl_width               = {};
+    float              gfx_zoom                     = 4;
+    float              one_pixel_height             = {};
+    float              one_pixel_width              = {};
+    float              scale_pix_height             = {};
+    float              scale_pix_width              = {};
+    float              tile_pix_height              = {};
+    float              tile_pix_width               = {};
+    float              tile_pixel_height            = {};
+    float              tile_pixel_width             = {};
+    float              video_w_h_ratio              = {};
     int                ascii_mode                   = false;
     int                debug_mode                   = false;
     int                fps_counter                  = false;
@@ -32,24 +44,12 @@ public:
     int                gfx_minimap                  = true;
     int                gfx_show_hidden              = false;
     int                gfx_vsync_enable             = true;
-    int                tile_width                   = {};
     int                tile_height                  = {};
-    double             ascii_gl_height              = {};
-    double             ascii_gl_width               = {};
-    double             one_pixel_height             = {};
-    double             one_pixel_width              = {};
-    double             tile_pix_height              = {};
-    double             tile_pix_width               = {};
-    double             tile_pixel_height            = {};
-    double             tile_pixel_width             = {};
-    double             video_w_h_ratio              = {};
+    int                tile_width                   = {};
     int32_t            inner_pix_height             = {};
     int32_t            inner_pix_width              = {};
     int32_t            outer_pix_height             = {};
     int32_t            outer_pix_width              = {};
-    int32_t            scale_pix_height             = {};
-    int32_t            scale_pix_width              = {};
-    uint32_t           gfx_zoom                     = 4;
     uint32_t           key_action0                  = {SDL_SCANCODE_0};
     uint32_t           key_action1                  = {SDL_SCANCODE_1};
     uint32_t           key_action2                  = {SDL_SCANCODE_2};
@@ -186,7 +186,7 @@ public:
     std::vector<point> cursor_move_path;
 
     std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> tile_cache_moves_ahead;
-    std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS> tile_cache_health;
+    std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS + 1> tile_cache_health;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving

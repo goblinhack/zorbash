@@ -340,6 +340,19 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 {_
     uint32_t header_size = sizeof(Config);
     /* uint32_t           header_size                  */ out << bits(header_size                       );
+
+    /* float              ascii_gl_height              */ out << bits(my.t.ascii_gl_height              );
+    /* float              ascii_gl_width               */ out << bits(my.t.ascii_gl_width               );
+    /* float              gfx_zoom                     */ out << bits(my.t.gfx_zoom                     );
+    /* float              one_pixel_height             */ out << bits(my.t.one_pixel_height             );
+    /* float              one_pixel_width              */ out << bits(my.t.one_pixel_width              );
+    /* float              scale_pix_height             */ out << bits(my.t.scale_pix_height             );
+    /* float              scale_pix_width              */ out << bits(my.t.scale_pix_width              );
+    /* float              tile_pix_height              */ out << bits(my.t.tile_pix_height              );
+    /* float              tile_pix_width               */ out << bits(my.t.tile_pix_width               );
+    /* float              tile_pixel_height            */ out << bits(my.t.tile_pixel_height            );
+    /* float              tile_pixel_width             */ out << bits(my.t.tile_pixel_width             );
+    /* float              video_w_h_ratio              */ out << bits(my.t.video_w_h_ratio              );
     /* int                ascii_mode                   */ out << bits(my.t.ascii_mode                   );
     /* int                debug_mode                   */ out << bits(my.t.debug_mode                   );
     /* int                fps_counter                  */ out << bits(my.t.fps_counter                  );
@@ -351,24 +364,12 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* int                gfx_minimap                  */ out << bits(my.t.gfx_minimap                  );
     /* int                gfx_show_hidden              */ out << bits(my.t.gfx_show_hidden              );
     /* int                gfx_vsync_enable             */ out << bits(my.t.gfx_vsync_enable             );
-    /* int                tile_width                   */ out << bits(my.t.tile_width                   );
     /* int                tile_height                  */ out << bits(my.t.tile_height                  );
-    /* double             ascii_gl_height              */ out << bits(my.t.ascii_gl_height              );
-    /* double             ascii_gl_width               */ out << bits(my.t.ascii_gl_width               );
-    /* double             one_pixel_height             */ out << bits(my.t.one_pixel_height             );
-    /* double             one_pixel_width              */ out << bits(my.t.one_pixel_width              );
-    /* double             tile_pix_height              */ out << bits(my.t.tile_pix_height              );
-    /* double             tile_pix_width               */ out << bits(my.t.tile_pix_width               );
-    /* double             tile_pixel_height            */ out << bits(my.t.tile_pixel_height            );
-    /* double             tile_pixel_width             */ out << bits(my.t.tile_pixel_width             );
-    /* double             video_w_h_ratio              */ out << bits(my.t.video_w_h_ratio              );
+    /* int                tile_width                   */ out << bits(my.t.tile_width                   );
     /* int32_t            inner_pix_height             */ out << bits(my.t.inner_pix_height             );
     /* int32_t            inner_pix_width              */ out << bits(my.t.inner_pix_width              );
     /* int32_t            outer_pix_height             */ out << bits(my.t.outer_pix_height             );
     /* int32_t            outer_pix_width              */ out << bits(my.t.outer_pix_width              );
-    /* int32_t            scale_pix_height             */ out << bits(my.t.scale_pix_height             );
-    /* int32_t            scale_pix_width              */ out << bits(my.t.scale_pix_width              );
-    /* uint32_t           gfx_zoom                     */ out << bits(my.t.gfx_zoom                     );
     /* uint32_t           key_action0                  */ out << bits(my.t.key_action0                  );
     /* uint32_t           key_action1                  */ out << bits(my.t.key_action1                  );
     /* uint32_t           key_action2                  */ out << bits(my.t.key_action2                  );

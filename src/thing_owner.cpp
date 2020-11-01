@@ -14,12 +14,12 @@
 Thingp Thing::owner_get (void) const
 {_
     auto id = get_owner_id();
-    if (id.ok()) {
+    if (likely(id.ok())) {
         auto i = level->thing_find(id);
-        if (!i) {
+        if (unlikely(!i)) {
             return nullptr;
         }
-        if (i->get_owner_id().ok()) {
+        if (unlikely(i->get_owner_id().ok())) {
             return i->owner_get();
         }
         return i;

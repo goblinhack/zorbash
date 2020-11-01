@@ -709,8 +709,8 @@ void Thing::blit_internal (int fbo,
                     set(game->tile_cache_moves_ahead, diff, tile);
                 }
                 tile_blit(tile,
-                        point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
-                        point(x + TILE_WIDTH / 2, y));
+                          point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
+                          point(x + TILE_WIDTH / 2, y));
             }
         }
 

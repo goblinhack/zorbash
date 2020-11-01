@@ -78,15 +78,15 @@ void Config::log (std::string pfx)
     LOG("%s gfx_minimap            %u", pfx.c_str(), gfx_minimap);
     LOG("%s gfx_show_hidden        %u", pfx.c_str(), gfx_show_hidden);
     LOG("%s gfx_vsync_enable       %u", pfx.c_str(), gfx_vsync_enable);
-    LOG("%s gfx_zoom               %u", pfx.c_str(), gfx_zoom);
+    LOG("%s gfx_zoom               %f", pfx.c_str(), gfx_zoom);
     LOG("%s music_volume           %u", pfx.c_str(), music_volume);
     LOG("%s sound_volume           %u", pfx.c_str(), sound_volume);
     LOG("%s inner_pix_width        %u", pfx.c_str(), inner_pix_width);
     LOG("%s inner_pix_height       %u", pfx.c_str(), inner_pix_height);
     LOG("%s outer_pix_width        %u", pfx.c_str(), outer_pix_width);
     LOG("%s outer_pix_height       %u", pfx.c_str(), outer_pix_height);
-    LOG("%s scale_pix_width        %u", pfx.c_str(), scale_pix_width);
-    LOG("%s scale_pix_height       %u", pfx.c_str(), scale_pix_height);
+    LOG("%s scale_pix_width        %f", pfx.c_str(), scale_pix_width);
+    LOG("%s scale_pix_height       %f", pfx.c_str(), scale_pix_height);
     LOG("%s video_w_h_ratio        %f", pfx.c_str(), video_w_h_ratio);
     LOG("%s tile_pix_width         %f", pfx.c_str(), tile_pix_width);
     LOG("%s tile_pix_height        %f", pfx.c_str(), tile_pix_height);

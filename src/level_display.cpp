@@ -66,52 +66,70 @@ void Level::display_map_bg_things (void)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 
-    blit_fbo_bind(fbo);
-    blit_init();
-    glClear(GL_COLOR_BUFFER_BIT);
-    for (auto z = 0; z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            for (auto x = 0; x < MAP_WIDTH; x++) {
-                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                    if (!t->is_gfx_shown_in_bg()) {
-                        continue;
-                    }
-                    if (z <= MAP_DEPTH_FLOOR2) {
+    if (g_opt_ascii_mode) {
+        blit_fbo_bind(fbo);
+        blit_init();
+        glClear(GL_COLOR_BUFFER_BIT);
+        for (auto z = 0; z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                for (auto x = 0; x < MAP_WIDTH; x++) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                        if (!t->is_gfx_shown_in_bg()) {
+                            continue;
+                        }
                         t->blit(fbo);
-                    }
-                } FOR_ALL_THINGS_END()
+                    } FOR_ALL_THINGS_END()
+                }
             }
         }
-    }
-    blit_flush();
+        blit_flush();
+        blit_fbo_unbind();
+    } else {
+        blit_fbo_bind(fbo);
+        blit_init();
+        glClear(GL_COLOR_BUFFER_BIT);
+        for (auto z = 0; z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                for (auto x = 0; x < MAP_WIDTH; x++) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                        if (!t->is_gfx_shown_in_bg()) {
+                            continue;
+                        }
+                        if (z <= MAP_DEPTH_FLOOR2) {
+                            t->blit(fbo);
+                        }
+                    } FOR_ALL_THINGS_END()
+                }
+            }
+        }
+        blit_flush();
 
-    if (!g_opt_ascii_mode) {
         display_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
         display_deep_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
         display_lava(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
-    }
 
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(WHITE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glcolor(WHITE);
 
-    blit_fbo_bind(fbo);
-    blit_init();
-    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; 
-         z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            for (auto x = 0; x < MAP_WIDTH; x++) {
-                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                    if (!t->is_gfx_shown_in_bg()) {
-                        continue;
-                    }
-                    t->blit(fbo);
-                } FOR_ALL_THINGS_END()
+        blit_fbo_bind(fbo);
+        blit_init();
+        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; 
+             z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                for (auto x = 0; x < MAP_WIDTH; x++) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                        if (!t->is_gfx_shown_in_bg()) {
+                            continue;
+                        }
+                        t->blit(fbo);
+                    } FOR_ALL_THINGS_END()
+                }
             }
         }
+        blit_flush();
+        blit_fbo_unbind();
     }
-    blit_flush();
 
-    blit_fbo_unbind();
     gl_enter_2d_mode(game->config.inner_pix_width, 
                      game->config.inner_pix_height);
 
@@ -125,48 +143,68 @@ void Level::display_map_things (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 
-    blit_fbo_bind(fbo);
-    blit_init();
-    for (auto z = 0; z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                    if (z <= MAP_DEPTH_FLOOR2) {
+    if (g_opt_ascii_mode) {
+        blit_fbo_bind(fbo);
+        blit_init();
+        for (auto z = 0; z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
+            for (auto y = miny; y < maxy; y++) {
+                for (auto x = minx; x < maxx; x++) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                         t->blit(fbo);
-                    }
 
-                    auto tpp = t->tp();
-                    if (unlikely(tpp->gfx_animated())) {
-                        t->animate();
-                    }
-                } FOR_ALL_THINGS_END()
+                        auto tpp = t->tp();
+                        if (unlikely(tpp->gfx_animated())) {
+                            t->animate();
+                        }
+                    } FOR_ALL_THINGS_END()
+                }
             }
         }
-    }
-    blit_flush();
+        blit_flush();
+    } else {
+        blit_fbo_bind(fbo);
+        blit_init();
+        for (auto z = 0; z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
+            for (auto y = miny; y < maxy; y++) {
+                for (auto x = minx; x < maxx; x++) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                        if (z <= MAP_DEPTH_FLOOR2) {
+                            t->blit(fbo);
+                        }
 
-    display_water(fbo, minx, miny, maxx, maxy);
-    display_deep_water(fbo, minx, miny, maxx, maxy);
-    display_lava(fbo, minx, miny, maxx, maxy);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(WHITE);
-
-    //
-    // Blit effects
-    //
-    blit_fbo_bind(fbo);
-    blit_init();
-    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; 
-         z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                    t->blit(fbo);
-                } FOR_ALL_THINGS_END()
+                        auto tpp = t->tp();
+                        if (unlikely(tpp->gfx_animated())) {
+                            t->animate();
+                        }
+                    } FOR_ALL_THINGS_END()
+                }
             }
         }
+        blit_flush();
+
+        display_water(fbo, minx, miny, maxx, maxy);
+        display_deep_water(fbo, minx, miny, maxx, maxy);
+        display_lava(fbo, minx, miny, maxx, maxy);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glcolor(WHITE);
+
+        //
+        // Blit effects
+        //
+        blit_fbo_bind(fbo);
+        blit_init();
+        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; 
+             z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
+            for (auto y = miny; y < maxy; y++) {
+                for (auto x = minx; x < maxx; x++) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                        t->blit(fbo);
+                    } FOR_ALL_THINGS_END()
+                }
+            }
+        }
+        blit_flush();
     }
-    blit_flush();
     glcolor(WHITE);
 }
 
@@ -174,6 +212,10 @@ void Level::display_map_fg_things (int fbo,
                                    const uint16_t minx, const uint16_t miny,
                                    const uint16_t maxx, const uint16_t maxy)
 {_
+    if (g_opt_ascii_mode) {
+        return;
+    }
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 

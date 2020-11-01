@@ -451,10 +451,19 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
         return in;
     }
 
+    /* float              ascii_gl_height              */ in >> bits(my.t.ascii_gl_height              );
+    /* float              ascii_gl_width               */ in >> bits(my.t.ascii_gl_width               );
+    /* float              gfx_zoom                     */ in >> bits(my.t.gfx_zoom                     );
+    /* float              one_pixel_height             */ in >> bits(my.t.one_pixel_height             );
+    /* float              one_pixel_width              */ in >> bits(my.t.one_pixel_width              );
+    /* float              scale_pix_height             */ in >> bits(my.t.scale_pix_height             );
+    /* float              scale_pix_width              */ in >> bits(my.t.scale_pix_width              );
+    /* float              tile_pix_height              */ in >> bits(my.t.tile_pix_height              );
+    /* float              tile_pix_width               */ in >> bits(my.t.tile_pix_width               );
+    /* float              tile_pixel_height            */ in >> bits(my.t.tile_pixel_height            );
+    /* float              tile_pixel_width             */ in >> bits(my.t.tile_pixel_width             );
+    /* float              video_w_h_ratio              */ in >> bits(my.t.video_w_h_ratio              );
     /* int                ascii_mode                   */ in >> bits(my.t.ascii_mode                   );
-
-    g_opt_ascii_mode = my.t.ascii_mode;
-
     /* int                debug_mode                   */ in >> bits(my.t.debug_mode                   );
     /* int                fps_counter                  */ in >> bits(my.t.fps_counter                  );
     /* int                gfx_allow_highdpi            */ in >> bits(my.t.gfx_allow_highdpi            );
@@ -465,24 +474,12 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* int                gfx_minimap                  */ in >> bits(my.t.gfx_minimap                  );
     /* int                gfx_show_hidden              */ in >> bits(my.t.gfx_show_hidden              );
     /* int                gfx_vsync_enable             */ in >> bits(my.t.gfx_vsync_enable             );
-    /* int                tile_width                   */ in >> bits(my.t.tile_width                   );
     /* int                tile_height                  */ in >> bits(my.t.tile_height                  );
-    /* double             ascii_gl_height              */ in >> bits(my.t.ascii_gl_height              );
-    /* double             ascii_gl_width               */ in >> bits(my.t.ascii_gl_width               );
-    /* double             one_pixel_height             */ in >> bits(my.t.one_pixel_height             );
-    /* double             one_pixel_width              */ in >> bits(my.t.one_pixel_width              );
-    /* double             tile_pix_height              */ in >> bits(my.t.tile_pix_height              );
-    /* double             tile_pix_width               */ in >> bits(my.t.tile_pix_width               );
-    /* double             tile_pixel_height            */ in >> bits(my.t.tile_pixel_height            );
-    /* double             tile_pixel_width             */ in >> bits(my.t.tile_pixel_width             );
-    /* double             video_w_h_ratio              */ in >> bits(my.t.video_w_h_ratio              );
+    /* int                tile_width                   */ in >> bits(my.t.tile_width                   );
     /* int32_t            inner_pix_height             */ in >> bits(my.t.inner_pix_height             );
     /* int32_t            inner_pix_width              */ in >> bits(my.t.inner_pix_width              );
     /* int32_t            outer_pix_height             */ in >> bits(my.t.outer_pix_height             );
     /* int32_t            outer_pix_width              */ in >> bits(my.t.outer_pix_width              );
-    /* int32_t            scale_pix_height             */ in >> bits(my.t.scale_pix_height             );
-    /* int32_t            scale_pix_width              */ in >> bits(my.t.scale_pix_width              );
-    /* uint32_t           gfx_zoom                     */ in >> bits(my.t.gfx_zoom                     );
     /* uint32_t           key_action0                  */ in >> bits(my.t.key_action0                  );
     /* uint32_t           key_action1                  */ in >> bits(my.t.key_action1                  );
     /* uint32_t           key_action2                  */ in >> bits(my.t.key_action2                  );
@@ -524,6 +521,13 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           music_volume                 */ in >> bits(my.t.music_volume                 );
     /* uint32_t           sdl_delay                    */ in >> bits(my.t.sdl_delay                    );
     /* uint32_t           sound_volume                 */ in >> bits(my.t.sound_volume                 );
+
+    if (!my.t.gfx_zoom) {
+        ERR("Loading, gfx_zoom is zero");
+        my.t.gfx_zoom = 1;
+    }
+
+    g_opt_ascii_mode = my.t.ascii_mode;
     return (in);
 }
 

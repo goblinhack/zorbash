@@ -521,6 +521,10 @@ void Level::place_the_grid (Dungeonp d)
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             (void) thing_new("the_grid", fpoint(x, y));
+            if (g_errored) {
+                ERR("Could not create level");
+                return;
+            }
         }
     }
 }
