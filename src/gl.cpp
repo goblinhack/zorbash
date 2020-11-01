@@ -18,7 +18,6 @@ std::array<GLuint, MAX_FBO> fbo_id = {};
 std::array<GLuint, MAX_FBO> fbo_tex_id = {};
 std::array<isize, MAX_FBO> fbo_size = {};
 
-
 #define GL_ERROR_CHECK() { \
     auto errCode = glGetError();                                   \
     if (errCode == GL_NO_ERROR) {                                  \

@@ -117,7 +117,11 @@ void Light::update (void)
     level    = owner->level;
     strength = orig_strength * TILE_WIDTH;
 
-    max_light_rays = MAX_RAY_LIGHTING;
+    if (g_opt_ascii_mode) {
+        max_light_rays = MAX_RAY_LIGHTING / 2;
+    } else {
+        max_light_rays = MAX_RAY_LIGHTING;
+    }
 
     ray.resize(max_light_rays);
     std::fill(ray.begin(), ray.end(), Ray{0});
