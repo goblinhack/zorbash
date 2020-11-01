@@ -546,7 +546,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
             tile->index = (*tiles)[i].size();
             (*tiles)[i].push_back(tile);
             tile->in_use = true;
-LOG("%s index %d i %d", tile->name.c_str(),  tile->index, i);
 
             tile->delay_ms = delay_ms;
             tile->is_moving = is_moving;

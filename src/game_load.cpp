@@ -235,6 +235,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->is_waiting_to_ascend  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_waiting_to_descend = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_waiting_to_fall    = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_the_grid           = (bits64 >> shift) & 1; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

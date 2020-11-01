@@ -186,6 +186,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_descend << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_fall    << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_the_grid           << shift; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

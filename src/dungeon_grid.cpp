@@ -714,7 +714,7 @@ void Nodes::init_nodes (void)
         }
     }
 
-    auto obstacles = ((grid_width * grid_height) / 8) * 7;
+    auto obstacles = ((grid_width * grid_height) / 6) * 4;
 
     while (obstacles--) {
         auto x = random_range(0, grid_width);

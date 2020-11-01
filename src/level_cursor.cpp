@@ -71,7 +71,7 @@ void Level::cursor_find_on_visible_things (
             if (t->owner_get() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
-                t->is_the_grid()) {
+                t->is_the_grid) {
                 continue;
             }
             if (t->is_on_fire()) {
@@ -88,7 +88,7 @@ void Level::cursor_find_on_visible_things (
             if (t->owner_get() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
-                t->is_the_grid()) {
+                t->is_the_grid) {
                 continue;
             }
             BOTCON("%s", t->text_description().c_str());
@@ -100,7 +100,7 @@ void Level::cursor_find_on_visible_things (
             if (t->owner_get() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
-                t->is_the_grid()) {
+                t->is_the_grid) {
                 continue;
             }
             BOTCON("%s", t->text_description().c_str());

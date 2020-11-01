@@ -212,10 +212,6 @@ void Level::display_map_fg_things (int fbo,
                                    const uint16_t minx, const uint16_t miny,
                                    const uint16_t maxx, const uint16_t maxy)
 {_
-    if (g_opt_ascii_mode) {
-        return;
-    }
-
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 

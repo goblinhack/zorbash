@@ -923,7 +923,7 @@ bool Thing::collision_obstacle (fpoint p)
             continue;
         }
 
-        if (it->is_the_grid()) { continue; }
+        if (it->is_the_grid) { continue; }
 
         //
         // "true" on collision

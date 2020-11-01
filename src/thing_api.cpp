@@ -48,7 +48,7 @@ void Thing::new_monst (void)
         newptr(monstp, "Monst");
 
         if (tp_id != -1) {
-            if (is_dirt() || is_the_grid() || is_wall() || is_floor()) {
+            if (is_dirt() || is_the_grid || is_wall() || is_floor()) {
                 die("unexpectedly needs monst struct");
             }
         }
@@ -838,11 +838,6 @@ int Thing::is_item_eater(void) const
 int Thing::is_movement_blocking_soft(void) const
 {_
     return (tp()->is_movement_blocking_soft());
-}
-
-int Thing::is_the_grid(void) const
-{_
-    return (tp()->is_the_grid());
 }
 
 int Thing::is_cursor_can_hover_over_but_needs_double_click(void) const

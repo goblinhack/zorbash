@@ -366,6 +366,8 @@ void Thing::init (Levelp level,
     if (is_monst()) {
         level->monst_count++;
     }
+
+    is_the_grid = tp()->is_the_grid();
 }
 
 void Thing::reinit (void)
