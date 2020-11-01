@@ -4217,12 +4217,12 @@ def init_tiles1_ascii():
       "ascii.deep_water1.30",
       "ascii.deep_water1.31",
       "ascii.deep_water1.32",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "ascii.door1.100",
+      "ascii.door1.75",
+      "ascii.door1.50",
+      "ascii.door1.25",
+      "ascii.door1.dead",
+      "ascii.door1.open",
       #########################################################################
     ]
 
