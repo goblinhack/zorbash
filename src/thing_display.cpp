@@ -355,8 +355,12 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Scale up tiles that are larger to the same pix scale.
     //
-    if (unlikely((tile_pix_width != TILE_WIDTH) ||
-                 (tile_pix_height != TILE_HEIGHT))) {
+    if (g_opt_ascii_mode) {
+        //
+        // All tiles are the same size
+        //
+    } else if (unlikely((tile_pix_width != TILE_WIDTH) ||
+                        (tile_pix_height != TILE_HEIGHT))) {
         auto xtiles = tile_pix_width / TILE_WIDTH;
         blit_tl.x -= ((xtiles-1) * tilew) / 2;
         blit_br.x += ((xtiles-1) * tilew) / 2;
@@ -369,7 +373,11 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Put larger tiles on the same y base as small ones.
     //
-    if (unlikely(tpp->gfx_oversized_but_sitting_on_the_ground())) {
+    if (g_opt_ascii_mode) {
+        //
+        // All tiles are the same size
+        //
+    } else if (unlikely(tpp->gfx_oversized_but_sitting_on_the_ground())) {
         float y_offset =
             (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
         blit_tl.y -= y_offset;
@@ -873,7 +881,10 @@ void Thing::blit_upside_down (int fbo)
     auto diff = blit_br.y - blit_tl.y;
     std::swap(blit_tl.y, blit_br.y);
 
-    if (tile && tile_get_height(tile) != TILE_HEIGHT) {
+    if (g_opt_ascii_mode) {
+        blit_br.y += TILE_HEIGHT;
+        blit_tl.y += TILE_HEIGHT;
+    } else if (tile && tile_get_height(tile) != TILE_HEIGHT) {
         if (tpp->gfx_oversized_but_sitting_on_the_ground()) {
             blit_br.y += diff;
             blit_tl.y += diff;
