@@ -1,9 +1,8 @@
 bugs
 ----
-- press help screws up things
-- odd slowdown
-- ascii mode gfx change oddity
-- shadow depth
+- attack as run should not also allow move
+- ghost ate blood and moved
+- shadow depth overlap
 - reflection of slime in water 
 
 upcoming work
