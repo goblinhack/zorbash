@@ -1,5 +1,7 @@
 bugs
 ----
+- slime health bar too low
+- jump too low in ascii
 - attack as run should not also allow move
 - ghost ate blood and moved
 - shadow depth overlap
