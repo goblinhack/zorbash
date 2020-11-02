@@ -7,7 +7,7 @@ def acid_init(name, text_name, tiles=[], left_tiles=[]):
 
     x.set_ai_obstacle(True)
     x.set_gfx_show_outlined(True)
-    x.set_ascii_show_outlined(False)
+    x.set_gfx_ascii_show_outlined(False)
     x.set_is_acid(True)
     x.set_is_hazard(True)
     x.set_is_light_strength(1)

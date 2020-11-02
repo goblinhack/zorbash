@@ -785,9 +785,9 @@ int Thing::is_rrr60(void) const
     return (tp()->is_rrr60());
 }
 
-int Thing::ascii_show_outlined(void) const
+int Thing::gfx_ascii_show_outlined(void) const
 {_
-    return (tp()->ascii_show_outlined());
+    return (tp()->gfx_ascii_show_outlined());
 }
 
 int Thing::is_shown_uniquely_on_monstbar(void) const
@@ -970,14 +970,14 @@ int Thing::is_acid_dweller(void) const
     return (tp()->is_acid_dweller());
 }
 
-int Thing::is_slime_baby_eater(void) const
+int Thing::is_jelly_baby_eater(void) const
 {_
-    return (tp()->is_slime_baby_eater());
+    return (tp()->is_jelly_baby_eater());
 }
 
-int Thing::is_slime_baby(void) const
+int Thing::is_jelly_baby(void) const
 {_
-    return (tp()->is_slime_baby());
+    return (tp()->is_jelly_baby());
 }
 
 int Thing::is_able_to_change_levels(void) const
@@ -1075,9 +1075,9 @@ int Thing::gfx_bounce_always(void) const
     return (tp()->gfx_bounce_always());
 }
 
-int Thing::is_slime_parent(void) const
+int Thing::is_jelly_parent(void) const
 {_
-    return (tp()->is_slime_parent());
+    return (tp()->is_jelly_parent());
 }
 
 int Thing::normal_placement_rules(void) const
@@ -1130,9 +1130,9 @@ int Thing::is_cursor_path(void) const
     return (tp()->is_cursor_path());
 }
 
-int Thing::is_slime_eater(void) const
+int Thing::is_jelly_eater(void) const
 {_
-    return (tp()->is_slime_eater());
+    return (tp()->is_jelly_eater());
 }
 
 int Thing::is_attack_blood(void) const
@@ -1175,9 +1175,9 @@ int Thing::is_cursor(void) const
     return (tp()->is_cursor());
 }
 
-int Thing::is_slime(void) const
+int Thing::is_jelly(void) const
 {_
-    return (tp()->is_slime());
+    return (tp()->is_jelly());
 }
 
 int Thing::gfx_dead_anim(void) const

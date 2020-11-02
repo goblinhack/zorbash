@@ -137,11 +137,11 @@ bool Thing::will_avoid (const Thingp itp) const
             return (true);
         }
     }
-    if (me->is_slime_baby()) {
+    if (me->is_jelly_baby()) {
         //
         // But allow baby slimes to attack each other!
         //
-        if (it->is_slime_parent()) {
+        if (it->is_jelly_parent()) {
             return (true);
         }
     }

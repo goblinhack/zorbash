@@ -777,7 +777,7 @@ void Thing::blit_internal (int fbo,
         glTranslatef(-mid.x, -mid.y, 0);
     }
 
-    bool outline = (g_opt_ascii_mode && tpp->ascii_show_outlined()) ||
+    bool outline = (g_opt_ascii_mode && tpp->gfx_ascii_show_outlined()) ||
                    (!g_opt_ascii_mode && tpp->gfx_show_outlined());
 
     if (outline && !g_render_black_and_white) {
