@@ -74,7 +74,7 @@ void Level::display_map_bg_things (void)
             for (auto y = 0; y < MAP_HEIGHT; y++) {
                 for (auto x = 0; x < MAP_WIDTH; x++) {
                     FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (!t->is_gfx_shown_in_bg()) {
+                        if (!t->gfx_shown_in_bg()) {
                             continue;
                         }
                         t->blit(fbo);
@@ -92,7 +92,7 @@ void Level::display_map_bg_things (void)
             for (auto y = 0; y < MAP_HEIGHT; y++) {
                 for (auto x = 0; x < MAP_WIDTH; x++) {
                     FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (!t->is_gfx_shown_in_bg()) {
+                        if (!t->gfx_shown_in_bg()) {
                             continue;
                         }
                         if (z <= MAP_DEPTH_FLOOR2) {
@@ -118,7 +118,7 @@ void Level::display_map_bg_things (void)
             for (auto y = 0; y < MAP_HEIGHT; y++) {
                 for (auto x = 0; x < MAP_WIDTH; x++) {
                     FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (!t->is_gfx_shown_in_bg()) {
+                        if (!t->gfx_shown_in_bg()) {
                             continue;
                         }
                         t->blit(fbo);

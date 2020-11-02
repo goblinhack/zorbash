@@ -800,9 +800,9 @@ int Thing::is_stamina_check(void) const
     return (tp()->is_stamina_check());
 }
 
-int Thing::is_gfx_shown_in_bg(void) const
+int Thing::gfx_shown_in_bg(void) const
 {_
-    return (tp()->is_gfx_shown_in_bg());
+    return (tp()->gfx_shown_in_bg());
 }
 
 int Thing::on_death_drop_all_items(void) const
@@ -845,19 +845,19 @@ int Thing::is_cursor_can_hover_over_but_needs_double_click(void) const
     return (tp()->is_cursor_can_hover_over_but_needs_double_click());
 }
 
-int Thing::is_gfx_moves_ahead_shown(void) const
+int Thing::gfx_moves_ahead_shown(void) const
 {_
-    return (tp()->is_gfx_moves_ahead_shown());
+    return (tp()->gfx_moves_ahead_shown());
 }
 
-int Thing::is_gfx_health_bar_shown_only_when_injured(void) const
+int Thing::gfx_health_bar_shown_only_when_injured(void) const
 {_
-    return (tp()->is_gfx_health_bar_shown_only_when_injured());
+    return (tp()->gfx_health_bar_shown_only_when_injured());
 }
 
-int Thing::is_gfx_health_bar_shown(void) const
+int Thing::gfx_health_bar_shown(void) const
 {_
-    return (tp()->is_gfx_health_bar_shown());
+    return (tp()->gfx_health_bar_shown());
 }
 
 int Thing::on_death_is_open(void) const

@@ -140,9 +140,9 @@ int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_floor_deco(void) const { return _is_floor_deco; }
 int Tp::is_food(void) const { return _is_food; }
 int Tp::is_generator(void) const { return _is_generator; }
-int Tp::is_gfx_health_bar_shown(void) const { return _is_gfx_health_bar_shown; }
-int Tp::is_gfx_health_bar_shown_only_when_injured(void) const { return _is_gfx_health_bar_shown_only_when_injured; }
-int Tp::is_gfx_moves_ahead_shown(void) const { return _is_gfx_moves_ahead_shown; }
+int Tp::gfx_health_bar_shown(void) const { return _gfx_health_bar_shown; }
+int Tp::gfx_health_bar_shown_only_when_injured(void) const { return _gfx_health_bar_shown_only_when_injured; }
+int Tp::gfx_moves_ahead_shown(void) const { return _gfx_moves_ahead_shown; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_hazard(void) const { return _is_hazard; }
 int Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
@@ -242,7 +242,7 @@ int Tp::is_rrr60(void) const { return _is_rrr60; }
 int Tp::gfx_ascii_show_outlined(void) const { return _gfx_ascii_show_outlined; }
 int Tp::is_shown_uniquely_on_monstbar(void) const { return _is_shown_uniquely_on_monstbar; }
 int Tp::is_stamina_check(void) const { return _is_stamina_check; }
-int Tp::is_gfx_shown_in_bg(void) const { return _is_gfx_shown_in_bg; }
+int Tp::gfx_shown_in_bg(void) const { return _gfx_shown_in_bg; }
 int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
 int Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1000; }
 int Tp::is_weapon_wielder(void) const { return _is_weapon_wielder; }
@@ -381,9 +381,9 @@ void Tp::set_is_floor(int v) { _is_floor = v; }
 void Tp::set_is_floor_deco(int v) { _is_floor_deco = v; }
 void Tp::set_is_food(int v) { _is_food = v; }
 void Tp::set_is_generator(int v) { _is_generator = v; }
-void Tp::set_is_gfx_health_bar_shown(int v) { _is_gfx_health_bar_shown = v; }
-void Tp::set_is_gfx_health_bar_shown_only_when_injured(int v) { _is_gfx_health_bar_shown_only_when_injured = v; }
-void Tp::set_is_gfx_moves_ahead_shown(int v) { _is_gfx_moves_ahead_shown = v; }
+void Tp::set_gfx_health_bar_shown(int v) { _gfx_health_bar_shown = v; }
+void Tp::set_gfx_health_bar_shown_only_when_injured(int v) { _gfx_health_bar_shown_only_when_injured = v; }
+void Tp::set_gfx_moves_ahead_shown(int v) { _gfx_moves_ahead_shown = v; }
 void Tp::set_is_gold(int v) { _is_gold = v; }
 void Tp::set_is_hazard(int v) { _is_hazard = v; }
 void Tp::set_is_hunger_insatiable(int v) { _is_hunger_insatiable = v; }
@@ -483,7 +483,7 @@ void Tp::set_is_rrr60(int v) { _is_rrr60 = v; }
 void Tp::set_gfx_ascii_show_outlined(int v) { _gfx_ascii_show_outlined = v; }
 void Tp::set_is_shown_uniquely_on_monstbar(int v) { _is_shown_uniquely_on_monstbar = v; }
 void Tp::set_is_stamina_check(int v) { _is_stamina_check = v; }
-void Tp::set_is_gfx_shown_in_bg(int v) { _is_gfx_shown_in_bg = v; }
+void Tp::set_gfx_shown_in_bg(int v) { _gfx_shown_in_bg = v; }
 void Tp::set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
 void Tp::set_is_steal_item_chance_d1000(int v) { _is_steal_item_chance_d1000 = v; }
 void Tp::set_is_weapon_wielder(int v) { _is_weapon_wielder = v; }

@@ -7,7 +7,7 @@ def tp_init(name, text_name):
 
     x.set_gfx_small_shadow_caster(True)
     x.set_is_cursor_can_hover_over(True)
-    x.set_is_gfx_shown_in_bg(True)
+    x.set_gfx_shown_in_bg(True)
     x.set_is_interesting(True)
     x.set_is_light_blocker(True)
     x.set_is_secret_door(True)

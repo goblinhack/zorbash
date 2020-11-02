@@ -7,7 +7,7 @@ def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
 
     x.set_is_cursor_can_hover_over(True)
     x.set_is_floor(True)
-    x.set_is_gfx_shown_in_bg(True)
+    x.set_gfx_shown_in_bg(True)
     x.set_is_interesting(False)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
