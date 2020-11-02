@@ -241,7 +241,7 @@ void Thing::level_push (void)
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }
 
     if (!is_hidden) {
-        if (is_gfx_shown_in_bg()) { level->bg_valid = false; }
+        if (gfx_shown_in_bg()) { level->bg_valid = false; }
     }
     // log("is_monst count %d (after push) at %d,%d", level->is_monst(mx, my), mx, my);
 }
@@ -302,7 +302,7 @@ void Thing::level_pop (void)
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }
 
     if (!is_hidden) {
-        if (is_gfx_shown_in_bg()) { level->bg_valid = false; }
+        if (gfx_shown_in_bg()) { level->bg_valid = false; }
     }
     // log("is_monst count %d (after pop) at %d,%d", level->is_monst(mx, my), mx, my);
 }

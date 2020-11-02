@@ -948,10 +948,10 @@ public:
     int is_floor_deco(void) const;
     int is_food(void) const;
     int is_generator(void) const;
-    int is_gfx_health_bar_shown(void) const;
-    int is_gfx_health_bar_shown_only_when_injured(void) const;
-    int is_gfx_moves_ahead_shown(void) const;
-    int is_gfx_shown_in_bg(void) const;
+    int gfx_health_bar_shown(void) const;
+    int gfx_health_bar_shown_only_when_injured(void) const;
+    int gfx_moves_ahead_shown(void) const;
+    int gfx_shown_in_bg(void) const;
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hit_by(Thingp hitter);

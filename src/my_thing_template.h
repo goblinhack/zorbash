@@ -143,9 +143,9 @@ private:
     int _is_floor_deco {};
     int _is_food {};
     int _is_generator {};
-    int _is_gfx_health_bar_shown {};
-    int _is_gfx_health_bar_shown_only_when_injured {};
-    int _is_gfx_moves_ahead_shown {};
+    int _gfx_health_bar_shown {};
+    int _gfx_health_bar_shown_only_when_injured {};
+    int _gfx_moves_ahead_shown {};
     int _is_gold {};
     int _is_hazard {};
     int _is_hunger_insatiable {};
@@ -246,7 +246,7 @@ private:
     int _gfx_ascii_show_outlined {};
     int _is_shown_uniquely_on_monstbar {};
     int _is_stamina_check {};
-    int _is_gfx_shown_in_bg {};
+    int _gfx_shown_in_bg {};
     int _is_rrr7 {};
     int _is_rrr8 {};
     int _is_rrr9 {};
@@ -498,9 +498,9 @@ public:
     int is_floor_deco(void) const;
     int is_food(void) const;
     int is_generator(void) const;
-    int is_gfx_health_bar_shown(void) const;
-    int is_gfx_health_bar_shown_only_when_injured(void) const;
-    int is_gfx_moves_ahead_shown(void) const;
+    int gfx_health_bar_shown(void) const;
+    int gfx_health_bar_shown_only_when_injured(void) const;
+    int gfx_moves_ahead_shown(void) const;
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hunger_insatiable(void) const;
@@ -600,7 +600,7 @@ public:
     int gfx_ascii_show_outlined(void) const;
     int is_shown_uniquely_on_monstbar(void) const;
     int is_stamina_check(void) const;
-    int is_gfx_shown_in_bg(void) const;
+    int gfx_shown_in_bg(void) const;
     int on_death_drop_all_items(void) const;
     int is_steal_item_chance_d1000(void) const;
     int is_weapon_wielder(void) const;
@@ -739,9 +739,9 @@ public:
     void set_is_floor_deco(int);
     void set_is_food(int);
     void set_is_generator(int);
-    void set_is_gfx_health_bar_shown(int);
-    void set_is_gfx_health_bar_shown_only_when_injured(int);
-    void set_is_gfx_moves_ahead_shown(int);
+    void set_gfx_health_bar_shown(int);
+    void set_gfx_health_bar_shown_only_when_injured(int);
+    void set_gfx_moves_ahead_shown(int);
     void set_is_gold(int);
     void set_is_hazard(int);
     void set_is_hunger_insatiable(int);
@@ -842,7 +842,7 @@ public:
     void set_gfx_ascii_show_outlined(int);
     void set_is_shown_uniquely_on_monstbar(int);
     void set_is_stamina_check(int);
-    void set_is_gfx_shown_in_bg(int);
+    void set_gfx_shown_in_bg(int);
     void set_on_death_drop_all_items(int);
     void set_is_steal_item_chance_d1000(int);
     void set_is_weapon_wielder(int);

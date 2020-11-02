@@ -368,8 +368,8 @@ class Tp:
     def set_is_stamina_check(self, value):
         zx.tp_set_is_stamina_check(self, value)
 
-    def set_is_gfx_shown_in_bg(self, value):
-        zx.tp_set_is_gfx_shown_in_bg(self, value)
+    def set_gfx_shown_in_bg(self, value):
+        zx.tp_set_gfx_shown_in_bg(self, value)
 
     def set_on_death_drop_all_items(self, value):
         zx.tp_set_on_death_drop_all_items(self, value)
@@ -401,14 +401,14 @@ class Tp:
     def set_is_cursor_can_hover_over_but_needs_double_click(self, value):
         zx.tp_set_is_cursor_can_hover_over_but_needs_double_click(self, value)
 
-    def set_is_gfx_moves_ahead_shown(self, value):
-        zx.tp_set_is_gfx_moves_ahead_shown(self, value)
+    def set_gfx_moves_ahead_shown(self, value):
+        zx.tp_set_gfx_moves_ahead_shown(self, value)
 
-    def set_is_gfx_health_bar_shown_only_when_injured(self, value):
-        zx.tp_set_is_gfx_health_bar_shown_only_when_injured(self, value)
+    def set_gfx_health_bar_shown_only_when_injured(self, value):
+        zx.tp_set_gfx_health_bar_shown_only_when_injured(self, value)
 
-    def set_is_gfx_health_bar_shown(self, value):
-        zx.tp_set_is_gfx_health_bar_shown(self, value)
+    def set_gfx_health_bar_shown(self, value):
+        zx.tp_set_gfx_health_bar_shown(self, value)
 
     def set_on_death_is_open(self, value):
         zx.tp_set_on_death_is_open(self, value)

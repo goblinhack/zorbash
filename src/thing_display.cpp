@@ -694,8 +694,8 @@ void Thing::blit_internal (int fbo,
         !reflection &&
         lit &&
         (
-         is_gfx_health_bar_shown() ||
-         (is_gfx_health_bar_shown_only_when_injured() && (h < m))
+         gfx_health_bar_shown() ||
+         (gfx_health_bar_shown_only_when_injured() && (h < m))
         )) {
 
         int h_step = (1.0 - ((float)h / (float)m)) * UI_MONST_HEALTH_BAR_STEPS;
@@ -704,7 +704,7 @@ void Thing::blit_internal (int fbo,
         auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
         auto x = (blit_tl.x + blit_br.x) / 2;
 
-        if (is_gfx_moves_ahead_shown()) {
+        if (gfx_moves_ahead_shown()) {
             auto diff = game->tick_current - get_tick();
             if ((diff > 0) && (diff <= THING_TICK_MAX_MOVES_AHEAD)) {
                 auto tile = get(game->tile_cache_moves_ahead, diff);
