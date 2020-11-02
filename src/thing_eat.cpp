@@ -20,7 +20,7 @@ bool Thing::eat (Thingp it)
         return (true);
     } else {
         if (is_attack_eater()) {
-            if ((is_slime_eater()    && it->is_slime())    ||
+            if ((is_jelly_eater()    && it->is_jelly())    ||
                 (is_meat_eater()     && it->is_meat())     ||
                 (is_treasure_eater() && it->is_treasure()) ||
                 (is_potion_eater()   && it->is_potion())) {
@@ -57,8 +57,8 @@ bool Thing::will_eat (const Thingp itp)
             return (true);
         }
     }
-    if (me->is_slime_baby_eater()) {
-        if (it->is_slime_baby()) {
+    if (me->is_jelly_baby_eater()) {
+        if (it->is_jelly_baby()) {
             return (true);
         }
     }

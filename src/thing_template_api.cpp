@@ -239,7 +239,7 @@ int Tp::is_rrr58(void) const { return _is_rrr58; }
 int Tp::is_rrr59(void) const { return _is_rrr59; }
 int Tp::is_rrr6(void) const { return _is_rrr6; }
 int Tp::is_rrr60(void) const { return _is_rrr60; }
-int Tp::ascii_show_outlined(void) const { return _ascii_show_outlined; }
+int Tp::gfx_ascii_show_outlined(void) const { return _gfx_ascii_show_outlined; }
 int Tp::is_shown_uniquely_on_monstbar(void) const { return _is_shown_uniquely_on_monstbar; }
 int Tp::is_stamina_check(void) const { return _is_stamina_check; }
 int Tp::is_gfx_shown_in_bg(void) const { return _is_gfx_shown_in_bg; }
@@ -253,11 +253,11 @@ int Tp::is_rrr9(void) const { return _is_rrr9; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_shown_on_monstbar(void) const { return _is_shown_on_monstbar; }
-int Tp::is_slime(void) const { return _is_slime; }
-int Tp::is_slime_baby(void) const { return _is_slime_baby; }
-int Tp::is_slime_baby_eater(void) const { return _is_slime_baby_eater; }
-int Tp::is_slime_eater(void) const { return _is_slime_eater; }
-int Tp::is_slime_parent(void) const { return _is_slime_parent; }
+int Tp::is_jelly(void) const { return _is_jelly; }
+int Tp::is_jelly_baby(void) const { return _is_jelly_baby; }
+int Tp::is_jelly_baby_eater(void) const { return _is_jelly_baby_eater; }
+int Tp::is_jelly_eater(void) const { return _is_jelly_eater; }
+int Tp::is_jelly_parent(void) const { return _is_jelly_parent; }
 int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_throwable(void) const { return _is_throwable; }
@@ -480,7 +480,7 @@ void Tp::set_is_rrr58(int v) { _is_rrr58 = v; }
 void Tp::set_is_rrr59(int v) { _is_rrr59 = v; }
 void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
 void Tp::set_is_rrr60(int v) { _is_rrr60 = v; }
-void Tp::set_ascii_show_outlined(int v) { _ascii_show_outlined = v; }
+void Tp::set_gfx_ascii_show_outlined(int v) { _gfx_ascii_show_outlined = v; }
 void Tp::set_is_shown_uniquely_on_monstbar(int v) { _is_shown_uniquely_on_monstbar = v; }
 void Tp::set_is_stamina_check(int v) { _is_stamina_check = v; }
 void Tp::set_is_gfx_shown_in_bg(int v) { _is_gfx_shown_in_bg = v; }
@@ -494,11 +494,11 @@ void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
 void Tp::set_is_shovable(int v) { _is_shovable = v; }
 void Tp::set_is_shown_on_monstbar(int v) { _is_shown_on_monstbar = v; }
-void Tp::set_is_slime(int v) { _is_slime = v; }
-void Tp::set_is_slime_baby(int v) { _is_slime_baby = v; }
-void Tp::set_is_slime_baby_eater(int v) { _is_slime_baby_eater = v; }
-void Tp::set_is_slime_eater(int v) { _is_slime_eater = v; }
-void Tp::set_is_slime_parent(int v) { _is_slime_parent = v; }
+void Tp::set_is_jelly(int v) { _is_jelly = v; }
+void Tp::set_is_jelly_baby(int v) { _is_jelly_baby = v; }
+void Tp::set_is_jelly_baby_eater(int v) { _is_jelly_baby_eater = v; }
+void Tp::set_is_jelly_eater(int v) { _is_jelly_eater = v; }
+void Tp::set_is_jelly_parent(int v) { _is_jelly_parent = v; }
 void Tp::set_is_smoke(int v) { _is_smoke = v; }
 void Tp::set_is_the_grid(int v) { _is_the_grid = v; }
 void Tp::set_is_throwable(int v) { _is_throwable = v; }

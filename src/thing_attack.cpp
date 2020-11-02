@@ -24,8 +24,8 @@ bool Thing::possible_to_attack (const Thingp it)
     }
 
     if (is_alive_monst() || is_resurrected) {
-        if (me->is_slime_baby_eater()) {
-            if (it->is_slime_baby()) {
+        if (me->is_jelly_baby_eater()) {
+            if (it->is_jelly_baby()) {
                 log("can attack %s", it->to_string().c_str());
                 return (true);
             }

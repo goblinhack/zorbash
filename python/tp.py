@@ -359,8 +359,8 @@ class Tp:
     def set_is_rrr60(self, value):
         zx.tp_set_is_rrr60(self, value)
 
-    def set_ascii_show_outlined(self, value):
-        zx.tp_set_ascii_show_outlined(self, value)
+    def set_gfx_ascii_show_outlined(self, value):
+        zx.tp_set_gfx_ascii_show_outlined(self, value)
 
     def set_is_shown_uniquely_on_monstbar(self, value):
         zx.tp_set_is_shown_uniquely_on_monstbar(self, value)
@@ -479,14 +479,14 @@ class Tp:
     def set_is_acid_hater(self, value):
         zx.tp_set_is_acid_hater(self, value)
 
-    def set_is_slime_parent(self, value):
-        zx.tp_set_is_slime_parent(self, value)
+    def set_is_jelly_parent(self, value):
+        zx.tp_set_is_jelly_parent(self, value)
 
-    def set_is_slime_eater(self, value):
-        zx.tp_set_is_slime_eater(self, value)
+    def set_is_jelly_eater(self, value):
+        zx.tp_set_is_jelly_eater(self, value)
 
-    def set_is_slime(self, value):
-        zx.tp_set_is_slime(self, value)
+    def set_is_jelly(self, value):
+        zx.tp_set_is_jelly(self, value)
 
     def set_is_attack_eater(self, value):
         zx.tp_set_is_attack_eater(self, value)
@@ -500,11 +500,11 @@ class Tp:
     def set_is_acid(self, value):
         zx.tp_set_is_acid(self, value)
 
-    def set_is_slime_baby_eater(self, value):
-        zx.tp_set_is_slime_baby_eater(self, value)
+    def set_is_jelly_baby_eater(self, value):
+        zx.tp_set_is_jelly_baby_eater(self, value)
 
-    def set_is_slime_baby(self, value):
-        zx.tp_set_is_slime_baby(self, value)
+    def set_is_jelly_baby(self, value):
+        zx.tp_set_is_jelly_baby(self, value)
 
     def set_is_able_to_change_levels(self, value):
         zx.tp_set_is_able_to_change_levels(self, value)

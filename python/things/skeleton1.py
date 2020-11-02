@@ -16,7 +16,7 @@ def tp_init(name, text_name):
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_bounce_on_move(True)
     x.set_gfx_show_outlined(True)
-    x.set_ascii_show_outlined(True)
+    x.set_gfx_ascii_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_change_levels(True)
     x.set_is_acid_hater(True)

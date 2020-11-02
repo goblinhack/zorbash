@@ -8,7 +8,7 @@ def tp_init(name):
 
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
-    x.set_ascii_show_outlined(False)
+    x.set_gfx_ascii_show_outlined(False)
     x.set_is_active(True)
     x.set_is_cursor(True)
     x.set_is_floating(True)
