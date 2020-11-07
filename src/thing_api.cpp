@@ -1135,9 +1135,9 @@ int Thing::is_jelly_eater(void) const
     return (tp()->is_jelly_eater());
 }
 
-int Thing::is_attack_blood(void) const
+int Thing::is_blood_splatter(void) const
 {_
-    return (tp()->is_attack_blood());
+    return (tp()->is_blood_splatter());
 }
 
 int Thing::is_no_tile(void) const

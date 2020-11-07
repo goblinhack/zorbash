@@ -2,7 +2,7 @@ import zx
 import tp
 
 def spawn(me, x, y):
-    zx.tp_spawn_under(me, "floor_splatter")
+    zx.tp_spawn_under(me, "pink_splatter")
 
 
 def tp_init(name, text_name):
@@ -15,7 +15,7 @@ def tp_init(name, text_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
-    x.set_gfx_anim_attack("attack_splatter")
+    x.set_gfx_anim_attack("pink_splatter")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_ascii_show_outlined(False)
@@ -85,20 +85,20 @@ def tp_init(name, text_name):
     x.set_tile(tile=name + ".4.100", is_hp_25_percent=True, delay_ms=delay)
 
     delay=10
-    x.set_tile("attack_splatter.1", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.2", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.3", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.4", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.5", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.6", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.7", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.8", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.9", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.10", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.11", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.12", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.13", is_dead=True, delay_ms=delay)
-    x.set_tile("attack_splatter.14", is_dead=True, delay_ms=delay, is_end_of_anim = True)
+    x.set_tile("pink_splatter.1", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.2", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.3", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.4", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.5", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.6", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.7", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.8", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.9", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.10", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.11", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.12", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.13", is_dead=True, delay_ms=delay)
+    x.set_tile("pink_splatter.14", is_dead=True, delay_ms=delay, is_end_of_anim = True)
 
     x.update()
 
