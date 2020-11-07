@@ -167,15 +167,15 @@ static void game_monsts_wid_create (void)
             auto s = t->text_name();
             if (t->is_resurrected) {
                 if (t->is_dead) {
-                    s += " (dead again)";
+                    s += " (redead)";
                 } else {
-                    s += " (alive again)";
+                    s += " (alive)";
                 }
             } else if (t->is_dead) {
                 if (t->is_door()) {
                     s += " (broken)";
                 } else if (t->is_torch()) {
-                    s += " (kicked over)";
+                    s += " (fallen)";
                 } else {
                     s += " (dead)";
                 }
