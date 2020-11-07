@@ -167,7 +167,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // Blood splat
     //
     if (is_monst()) {
-        level->thing_new(tp_random_attack_blood()->name(), mid_at);
+        level->thing_new(tp_random_blood_splatter()->name(), mid_at);
     }
 
     if (real_hitter->is_player() ||

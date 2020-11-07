@@ -908,7 +908,7 @@ public:
     int is_acid_hater(void) const;
     int is_active(void) const;
     int is_alive_monst(void) const;
-    int is_attack_blood(void) const;
+    int is_blood_splatter(void) const;
     int is_attack_eater(void) const;
     int is_attack_lunge(void) const;
     int is_attack_shove(void) const;

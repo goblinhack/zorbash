@@ -552,7 +552,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_bag)
     TP_SET_DECL(is_bleeder)
     TP_SET_DECL(is_blood)
-    TP_SET_DECL(is_attack_blood)
+    TP_SET_DECL(is_blood_splatter)
     TP_SET_DECL(is_chasm)
     TP_SET_DECL(is_collect_as_keys)
     TP_SET_DECL(is_collectable)

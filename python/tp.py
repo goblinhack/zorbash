@@ -596,8 +596,8 @@ class Tp:
     def set_is_cursor_path(self, value):
         zx.tp_set_is_cursor_path(self, value)
 
-    def set_is_attack_blood(self, value):
-        zx.tp_set_is_attack_blood(self, value)
+    def set_is_blood_splatter(self, value):
+        zx.tp_set_is_blood_splatter(self, value)
 
     def set_is_no_tile(self, value):
         zx.tp_set_is_no_tile(self, value)

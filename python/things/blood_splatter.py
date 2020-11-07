@@ -5,10 +5,10 @@ def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
     x.set_gfx_animated(True)
+    x.set_gfx_ascii_show_outlined(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
-    x.set_gfx_ascii_show_outlined(True)
-    x.set_is_attack_blood(True)
+    x.set_is_blood_splatter(True)
     x.set_is_interesting(False)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
@@ -37,6 +37,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="attack_blood1", text_name="blood splatter")
+    tp_init(name="blood_splatter", text_name="blood splatter")
 
 init()

@@ -109,7 +109,7 @@ int Tp::is_attackable_by_player(void) const { return _is_attackable_by_player; }
 int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
-int Tp::is_attack_blood(void) const { return _is_attack_blood; }
+int Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
 int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
 int Tp::is_collectable(void) const { return _is_collectable; }
@@ -350,7 +350,7 @@ void Tp::set_is_attackable_by_player(int v) { _is_attackable_by_player = v; }
 void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
-void Tp::set_is_attack_blood(int v) { _is_attack_blood = v; }
+void Tp::set_is_blood_splatter(int v) { _is_blood_splatter = v; }
 void Tp::set_is_chasm(int v) { _is_chasm = v; }
 void Tp::set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
 void Tp::set_is_collectable(int v) { _is_collectable = v; }
