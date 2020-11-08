@@ -41,8 +41,8 @@
 #define LEVELS_DEEP                32
 #define LEVELS_DOWN                MAP_HEIGHT
 #define LEVELS_MONST_COUNT         100
-#define LEVEL_FADE_OUT_MS          500
 #define LEVEL_FADE_IN_MS           800
+#define LEVEL_FADE_OUT_MS          500
 #define MAP_BORDER                 10   // Room border padding
 #define MAP_HEIGHT                 ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 #define MAP_ROCK_BORDER            1    // Map rock border
@@ -88,11 +88,13 @@
 #define UI_CONSOLE_WIDTH           (ASCII_WIDTH - 3)
 #define UI_CURSOR_COLOR            GRAY
 #define UI_CURSOR_OTHER_COLOR      WHITE
-#define UI_FONT_HEIGHT             24
+#define UI_FONT_ORIG_HEIGHT        24
+#define UI_FONT_ORIG_WIDTH         20
+#define UI_FONT_WIDTH              12
+#define UI_FONT_HEIGHT             14
+#define UI_FONT_LARGE_PIXEL_SIZE   24
 #define UI_FONT_NAME               "data/ttf/6x6.tga"
 #define UI_FONT_SMALL_PIXEL_SIZE   6
-#define UI_FONT_LARGE_PIXEL_SIZE   24
-#define UI_FONT_WIDTH              20
 #define UI_HEALTH_BAR_STEPS        12 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5
 #define UI_MINICON_HEIGHT          6 // Scrollbar limit
@@ -100,6 +102,7 @@
 #define UI_MINICON_VIS_HEIGHT      5
 #define UI_MINICON_VIS_WIDTH       UI_MINICON_WIDTH
 #define UI_MINICON_WIDTH           (ASCII_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
+#define UI_MINIMAP_SIZE            0.155
 #define UI_MONST_HEALTH_BAR_STEPS  16
 #define UI_MOUSE_DOUBLE_CLICK      500 // Double click time
 #define UI_MOUSE_WHEEL_SCALE       1.0 // How much the wheel mouse moves.

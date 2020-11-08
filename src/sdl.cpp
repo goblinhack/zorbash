@@ -1338,7 +1338,7 @@ void sdl_loop (void)
         // Draw the map
         //
         if (unlikely(game->config.gfx_minimap)) {
-            float mx = 0.20;
+            float mx = UI_MINIMAP_SIZE;
             float my = mx * game->config.video_w_h_ratio;
             mx *= game->config.outer_pix_width;
             my *= game->config.outer_pix_height;
