@@ -242,7 +242,7 @@ private:
     int _is_rrr58 {};
     int _is_rrr59 {};
     int _is_rrr6 {};
-    int _is_rrr60 {};
+    int _z_ascii_depth {};
     int _gfx_ascii_show_outlined {};
     int _is_shown_uniquely_on_monstbar {};
     int _is_stamina_check {};
@@ -596,7 +596,7 @@ public:
     int is_rrr58(void) const;
     int is_rrr59(void) const;
     int is_rrr6(void) const;
-    int is_rrr60(void) const;
+    int z_ascii_depth(void) const;
     int gfx_ascii_show_outlined(void) const;
     int is_shown_uniquely_on_monstbar(void) const;
     int is_stamina_check(void) const;
@@ -838,7 +838,7 @@ public:
     void set_is_rrr58(int);
     void set_is_rrr59(int);
     void set_is_rrr6(int);
-    void set_is_rrr60(int);
+    void set_z_ascii_depth(int);
     void set_gfx_ascii_show_outlined(int);
     void set_is_shown_uniquely_on_monstbar(int);
     void set_is_stamina_check(int);

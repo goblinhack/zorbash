@@ -356,8 +356,8 @@ class Tp:
     def set_is_rrr59(self, value):
         zx.tp_set_is_rrr59(self, value)
 
-    def set_is_rrr60(self, value):
-        zx.tp_set_is_rrr60(self, value)
+    def set_z_ascii_depth(self, value):
+        zx.tp_set_z_ascii_depth(self, value)
 
     def set_gfx_ascii_show_outlined(self, value):
         zx.tp_set_gfx_ascii_show_outlined(self, value)
@@ -808,6 +808,9 @@ class Tp:
 
     def set_z_depth(self, value):
         zx.tp_set_z_depth(self, value)
+
+    def set_ascii_z_depth(self, value):
+        zx.tp_set_ascii_z_depth(self, value)
 
     def set_z_prio(self, value):
         zx.tp_set_z_prio(self, value)

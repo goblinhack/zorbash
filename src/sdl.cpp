@@ -1470,9 +1470,11 @@ void config_gfx_zoom_update (void)
     if (g_opt_ascii_mode) {
         game->config.tile_width = TILE_WIDTH_ASCII;
         game->config.tile_height = TILE_HEIGHT_ASCII;
+        g_ui_font_pixel_size = UI_FONT_LARGE_PIXEL_SIZE;
     } else {
         game->config.tile_width = TILE_WIDTH_LORES;
         game->config.tile_height = TILE_HEIGHT_LORES;
+        g_ui_font_pixel_size = UI_FONT_SMALL_PIXEL_SIZE;
     }
 
     game->config.one_pixel_width = 1;

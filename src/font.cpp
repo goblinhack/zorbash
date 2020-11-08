@@ -64,7 +64,7 @@ uint8_t font_init (void)
     // Generate bitmaps from TTF.
     //
     auto tmp = std::string(TTF_PATH) + mybasename(UI_FONT_NAME, __FUNCTION__);
-    ttf_write_tga(tmp, UI_FONT_PIXEL_SIZE, TTF_STYLE_NORMAL);
+    ttf_write_tga(tmp, UI_FONT_SMALL_PIXEL_SIZE, TTF_STYLE_NORMAL);
 
     DIE("generated fonts");
 #endif

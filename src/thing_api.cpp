@@ -780,9 +780,9 @@ int Thing::is_rrr59(void) const
     return (tp()->is_rrr59());
 }
 
-int Thing::is_rrr60(void) const
+int Thing::z_ascii_depth(void) const
 {_
-    return (tp()->is_rrr60());
+    return (tp()->z_ascii_depth());
 }
 
 int Thing::gfx_ascii_show_outlined(void) const

@@ -90,7 +90,8 @@
 #define UI_CURSOR_OTHER_COLOR      WHITE
 #define UI_FONT_HEIGHT             24
 #define UI_FONT_NAME               "data/ttf/6x6.tga"
-#define UI_FONT_PIXEL_SIZE         6
+#define UI_FONT_SMALL_PIXEL_SIZE   6
+#define UI_FONT_LARGE_PIXEL_SIZE   24
 #define UI_FONT_WIDTH              20
 #define UI_HEALTH_BAR_STEPS        12 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5

@@ -1050,7 +1050,7 @@ public:
     int is_rrr58(void) const;
     int is_rrr59(void) const;
     int is_rrr6(void) const;
-    int is_rrr60(void) const;
+    int z_ascii_depth(void) const;
     int gfx_ascii_show_outlined(void) const;
     int is_shown_uniquely_on_monstbar(void) const;
     int is_stamina_check(void) const;
