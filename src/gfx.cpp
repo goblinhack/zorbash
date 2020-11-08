@@ -65,7 +65,7 @@ static void gfx_init_font1 (void)
 
     const  std::vector<std::string> arr(tiles);
     tile_load_arr_sprites("data/ttf/font1.tga", "font1",
-                          UI_FONT_WIDTH, UI_FONT_HEIGHT, arr);
+                          UI_FONT_ORIG_WIDTH, UI_FONT_ORIG_HEIGHT, arr);
 }
 
 static void gfx_init_font2 (void)
@@ -127,7 +127,7 @@ static void gfx_init_font2 (void)
 
     const  std::vector<std::string> arr(tiles);
     tile_load_arr_sprites("data/ttf/font2.tga", "font2",
-                          UI_FONT_WIDTH, UI_FONT_HEIGHT, arr);
+                          UI_FONT_ORIG_WIDTH, UI_FONT_ORIG_HEIGHT, arr);
 }
 
 static void gfx_init_ui (void)
