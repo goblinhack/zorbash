@@ -15,6 +15,7 @@ def chasm_init(name, text_name, tiles=[]):
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump)")
     x.set_z_depth(zx.MAP_DEPTH_CHASM)
+    x.set_z_ascii_depth(zx.MAP_DEPTH_FLOOR)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     delay = 200

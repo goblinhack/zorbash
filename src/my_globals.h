@@ -75,6 +75,7 @@ extern bool g_opt_new_game;
 extern bool g_quitting;
 extern bool g_render_black_and_white;
 extern std::string g_opt_seed_name;
+extern int g_ui_font_pixel_size;
 
 extern int TILES_ACROSS;
 extern int TILES_DOWN;

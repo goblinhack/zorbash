@@ -172,12 +172,19 @@ void Thing::update_interpolated_position (void)
 {
     bool update_pos = false;
     fpoint new_pos;
+    auto tpp = tp();
 
     auto p = owner_get();
     if ((p && p->is_falling) || is_falling) {
         z_depth = MAP_DEPTH_FLOOR;
     } else {
-        z_depth = tp()->z_depth;
+        z_depth = tpp->z_depth;
+    }
+
+    if (g_opt_ascii_mode) {
+        if (tpp->z_ascii_depth()) {
+            z_depth = tpp->z_ascii_depth();
+        }
     }
 
     if (is_jumping) {
