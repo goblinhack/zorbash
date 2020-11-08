@@ -334,6 +334,7 @@ void Thing::init (Levelp level,
     // Set position prior to attach
     //
     set_interpolated_mid_at(mid_at);
+    update_interpolated_position();
 
     if (gfx_bounce_always()) {
         bounce(0.2, 1.0, 500 + random_range(0, 50), 99999);
