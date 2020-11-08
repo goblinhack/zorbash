@@ -35,6 +35,9 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
             point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
                     random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
             std::string name = "gold1." + std::to_string(random_range(1, 8));
+            if (g_opt_ascii_mode){
+                name = "ascii." + name;
+            }
             level->new_external_particle(
                      s + j, p,
                      isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), 
@@ -60,11 +63,17 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         point s = (last_blit_tl + last_blit_br) / 2;
         point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
                 random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
+
+        std::string tile_name = "key1.1";
+        if (g_opt_ascii_mode){
+            tile_name = "ascii." + tile_name;
+        }
+
         level->new_external_particle(
                  s + j, p,
                  isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), 
                  PARTICLE_SPEED_MS,
-                 tile_find_mand("key1.1"), false,
+                 tile_find_mand(tile_name), false,
                  false /* make_visible_at_end */);
         return;
     }
