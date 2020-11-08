@@ -96,7 +96,12 @@ void Level::display_internal_particles (void)
             point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
             point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-            int oy = sin(RAD_180 * dt) * 50;
+            int oy = sin(RAD_180 * dt) * 32;
+
+            if (g_opt_ascii_mode) {
+                oy *= UI_FONT_LARGE_PIXEL_SIZE / UI_FONT_SMALL_PIXEL_SIZE;
+            }
+
             blit_tl.y -= oy;
             blit_br.y -= oy;
 
@@ -160,6 +165,10 @@ void Level::new_external_particle (
                           const Tilep tile, bool hflip,
                           bool make_visible_at_end)
 {
+    //
+    // We hit here for player jumps
+    //
+
     if (id.ok()) {
         auto t = thing_find(id);
         if (t) {
@@ -180,6 +189,11 @@ void Level::new_external_particle (point start, point stop, isize sz, uint32_t d
                                    const Tilep tile, bool hflip,
                                    bool make_visible_at_end)
 {
+    if (g_opt_ascii_mode) {
+        sz.w *= UI_FONT_LARGE_PIXEL_SIZE / UI_FONT_SMALL_PIXEL_SIZE;
+        sz.h *= UI_FONT_LARGE_PIXEL_SIZE / UI_FONT_SMALL_PIXEL_SIZE;
+    }
+
     uint32_t now = time_update_time_milli();
     all_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
@@ -235,7 +249,12 @@ void Level::display_external_particles (void)
             point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
             point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-            int oy = sin(RAD_180 * dt) * 50;
+            int oy = sin(RAD_180 * dt) * 32;
+
+            if (g_opt_ascii_mode) {
+                oy *= UI_FONT_LARGE_PIXEL_SIZE / UI_FONT_SMALL_PIXEL_SIZE;
+            }
+
             blit_tl.y -= oy;
             blit_br.y -= oy;
 

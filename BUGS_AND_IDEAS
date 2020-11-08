@@ -1,10 +1,9 @@
 bugs
 ----
-= fix jelloid char and colors
 - slime health bar too low
-- jump too low in ascii
+- rocks on 2nd level are wrong
+- monsts hit twice
 - attack as run should not also allow move
-- ghost ate blood and moved
 - shadow depth overlap
 - reflection of slime in water 
 
