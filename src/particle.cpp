@@ -189,11 +189,6 @@ void Level::new_external_particle (point start, point stop, isize sz, uint32_t d
                                    const Tilep tile, bool hflip,
                                    bool make_visible_at_end)
 {
-    if (g_opt_ascii_mode) {
-        sz.w *= UI_FONT_LARGE_PIXEL_SIZE / UI_FONT_SMALL_PIXEL_SIZE;
-        sz.h *= UI_FONT_LARGE_PIXEL_SIZE / UI_FONT_SMALL_PIXEL_SIZE;
-    }
-
     uint32_t now = time_update_time_milli();
     all_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
