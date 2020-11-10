@@ -371,6 +371,8 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* int32_t            inner_pix_width              */ out << bits(my.t.inner_pix_width              );
     /* int32_t            outer_pix_height             */ out << bits(my.t.outer_pix_height             );
     /* int32_t            outer_pix_width              */ out << bits(my.t.outer_pix_width              );
+    /* int32_t            config_pix_height            */ out << bits(my.t.config_pix_height            );
+    /* int32_t            config_pix_width             */ out << bits(my.t.config_pix_width             );
     /* uint32_t           key_action0                  */ out << bits(my.t.key_action0                  );
     /* uint32_t           key_action1                  */ out << bits(my.t.key_action1                  );
     /* uint32_t           key_action2                  */ out << bits(my.t.key_action2                  );

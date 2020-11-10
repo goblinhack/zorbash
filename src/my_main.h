@@ -88,12 +88,14 @@
 #define UI_CONSOLE_WIDTH           (ASCII_WIDTH - 3)
 #define UI_CURSOR_COLOR            GRAY
 #define UI_CURSOR_OTHER_COLOR      WHITE
-#define UI_FONT_ORIG_HEIGHT        24
-#define UI_FONT_ORIG_WIDTH         20
+#define UI_FONT_SMALL_HEIGHT       26
+#define UI_FONT_SMALL_WIDTH        20
+#define UI_FONT_LARGE_HEIGHT       49
+#define UI_FONT_LARGE_WIDTH        27
 #define UI_FONT_WIDTH              12
 #define UI_FONT_HEIGHT             14
-#define UI_FONT_LARGE_PIXEL_SIZE   24
 #define UI_FONT_NAME               "data/ttf/6x6.tga"
+#define UI_FONT_LARGE_PIXEL_SIZE   24
 #define UI_FONT_SMALL_PIXEL_SIZE   6
 #define UI_HEALTH_BAR_STEPS        12 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5
@@ -110,7 +112,7 @@
 #define UI_POPUP_TEXT_COLOR        UI_TEXT_COLOR
 #define UI_SCROLL_JOY_SCALE        1.0
 #define UI_SCROLL_JOY_SCALE_MAX    1.5
-#define UI_SIDEBAR_LEFT_WIDTH      20
+#define UI_SIDEBAR_LEFT_WIDTH      16
 #define UI_SIDEBAR_RIGHT_WIDTH     14
 #define UI_TEXT_COLOR              GRAY // Default text color
 #define UI_TEXT_COLOR_STR          "gray"

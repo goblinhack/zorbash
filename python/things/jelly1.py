@@ -103,7 +103,7 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="jelly1", text_name="baby jumping jelly")
+    tp_init(name="jelly1", text_name="baby jelly")
 
 init()
 
