@@ -165,19 +165,13 @@ static void game_monsts_wid_create (void)
             wid_set_shape_none(w);
 
             auto s = t->text_name();
-            if (t->is_resurrected) {
-                if (t->is_dead) {
-                    s += " (redead)";
-                } else {
-                    s += " (alive)";
-                }
-            } else if (t->is_dead) {
+            if (t->is_dead) {
                 if (t->is_door()) {
-                    s += " (broken)";
+                    s += ", broken";
                 } else if (t->is_torch()) {
-                    s += " (fallen)";
+                    s += ", fallen";
                 } else {
-                    s += " (dead)";
+                    s += ", dead";
                 }
             }
 

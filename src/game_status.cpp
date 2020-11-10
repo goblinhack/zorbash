@@ -293,7 +293,7 @@ _
 
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        auto g = dynprintf("%%tile=dollar-icon$%%fg=gray$%06d", player->get_gold());
+        auto g = dynprintf("%%fg=green$$%%fg=gray$%06d", player->get_gold());
         wid_set_text(w, g);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
@@ -307,7 +307,7 @@ _
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         auto k = std::to_string(player->get_keys());
-        wid_set_text(w, "%tile=key1.1$%fg=gray$" + k);
+        wid_set_text(w, "%%fg=yellow$K%%fg=gray$" + k);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }
