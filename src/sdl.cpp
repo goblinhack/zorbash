@@ -1340,7 +1340,11 @@ void sdl_loop (void)
         //
         // Draw the map
         //
-        if (unlikely(game->config.gfx_minimap)) {
+        if (unlikely(g_opt_ascii_mode)) {
+            //
+            // No minimap
+            //
+        } else if (likely(game->config.gfx_minimap)) {
             float mx = UI_MINIMAP_SIZE;
             float my = mx * game->config.video_w_h_ratio;
             mx *= game->config.outer_pix_width;

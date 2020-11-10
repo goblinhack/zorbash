@@ -12,6 +12,9 @@
 
 void Level::update_minimap (void)
 {_
+    if (g_opt_ascii_mode) {
+        return;
+    }
     static int last_rendered;
     if (!time_have_x_tenths_passed_since(1, last_rendered)) {
         return;
