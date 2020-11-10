@@ -50,6 +50,8 @@ public:
     int32_t            inner_pix_width              = {};
     int32_t            outer_pix_height             = {};
     int32_t            outer_pix_width              = {};
+    int32_t            config_pix_height            = {};
+    int32_t            config_pix_width             = {};
     uint32_t           key_action0                  = {SDL_SCANCODE_0};
     uint32_t           key_action1                  = {SDL_SCANCODE_1};
     uint32_t           key_action2                  = {SDL_SCANCODE_2};

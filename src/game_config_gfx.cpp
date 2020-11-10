@@ -32,7 +32,6 @@ uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
     game->save_config();
     game_config_gfx_destroy();
     game->config_top_select();
-
     if (local_g_need_restart) {
         g_need_restart = true;
     }
@@ -64,7 +63,7 @@ uint8_t game_config_gfx_ascii_mode_toggle (Widp w, int32_t x, int32_t y, uint32_
     return (true);
 }
 
-uint8_t game_config_gfx_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle gfx_fullscreen");
     game->config.gfx_fullscreen = !game->config.gfx_fullscreen;
@@ -76,7 +75,7 @@ uint8_t game_config_gfx_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uin
     return (true);
 }
 
-uint8_t game_config_gfx_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle gfx_fullscreen_desktop");
     game->config.gfx_fullscreen_desktop = !game->config.gfx_fullscreen_desktop;
@@ -88,7 +87,7 @@ uint8_t game_config_gfx_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_
     return (true);
 }
 
-uint8_t game_config_gfx_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle gfx_allow_highdpi");
     game->config.gfx_allow_highdpi = !game->config.gfx_allow_highdpi;
@@ -97,7 +96,7 @@ uint8_t game_config_gfx_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, 
     return (true);
 }
 
-uint8_t game_config_gfx_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle gfx_borderless");
     game->config.gfx_borderless = !game->config.gfx_borderless;
@@ -396,7 +395,7 @@ void Game::config_gfx_select (void)
         point br = make_point(width / 2 + 6, y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_gfx_gfx_fullscreen_toggle);
+        wid_set_on_mouse_up(w, game_config_gfx_fullscreen_toggle);
 
         if (game->config.gfx_fullscreen) {
             wid_set_text(w, "True");
@@ -428,9 +427,41 @@ void Game::config_gfx_select (void)
         point br = make_point(width / 2 + 6, y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_gfx_gfx_fullscreen_desktop_toggle);
+        wid_set_on_mouse_up(w, game_config_gfx_fullscreen_desktop_toggle);
 
         if (game->config.gfx_fullscreen_desktop) {
+            wid_set_text(w, "True");
+        } else {
+            wid_set_text(w, "False");
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+    // fullscreen desktop
+    /////////////////////////////////////////////////////////////////////////
+    y_at += 1;
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "High DPI");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "High DPI");
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "High DPI value");
+
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_gfx_allow_highdpi_toggle);
+
+        if (game->config.gfx_allow_highdpi) {
             wid_set_text(w, "True");
         } else {
             wid_set_text(w, "False");
@@ -460,7 +491,7 @@ void Game::config_gfx_select (void)
         point br = make_point(width / 2 + 6, y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_gfx_gfx_borderless_toggle);
+        wid_set_on_mouse_up(w, game_config_gfx_borderless_toggle);
 
         if (game->config.gfx_borderless) {
             wid_set_text(w, "True");

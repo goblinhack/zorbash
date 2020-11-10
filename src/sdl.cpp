@@ -215,8 +215,8 @@ uint8_t sdl_init (void)
     // If we have a saved setting, use that.
     //
     if (game->config.outer_pix_width && game->config.outer_pix_height) {
-        video_width = game->config.outer_pix_width;
-        video_height = game->config.outer_pix_height;
+        video_width = game->config.config_pix_width;
+        video_height = game->config.config_pix_height;
     } else {
         //
         // Else guess.
@@ -224,11 +224,11 @@ uint8_t sdl_init (void)
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
 
-        game->config.outer_pix_width = mode.w;
-        game->config.outer_pix_height = mode.h;
+        game->config.config_pix_width = mode.w;
+        game->config.config_pix_height = mode.h;
 
-        video_width = game->config.outer_pix_width;
-        video_height = game->config.outer_pix_height;
+        video_width = game->config.config_pix_width;
+        video_height = game->config.config_pix_height;
     }
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -706,6 +706,9 @@ static int sdl_get_mouse (void)
     if (!x && !y) {
         return (button);
     }
+
+    x *= game->config.outer_pix_width / game->config.config_pix_width;
+    y *= game->config.outer_pix_height / game->config.config_pix_height;
 
     mouse_x = x;
     mouse_y = y;
@@ -1518,16 +1521,17 @@ void config_gfx_zoom_update (void)
         game->config.inner_pix_height / TILES_DOWN;
 
     CON("INIT: Graphics zoom          : %f", game->config.gfx_zoom);
+    CON("INIT: - config   pix size    : %dx%d", game->config.config_pix_width,
+                                                game->config.config_pix_height);
     CON("INIT: - outer    pix size    : %dx%d", game->config.outer_pix_width,
                                                 game->config.outer_pix_height);
     CON("INIT: - inner    pix size    : %dx%d", game->config.inner_pix_width,
                                                 game->config.inner_pix_height);
 
-    game->config.ascii_gl_width = UI_FONT_WIDTH;
-    game->config.ascii_gl_height = UI_FONT_HEIGHT;
-
-    ASCII_WIDTH  = (int)(game->config.outer_pix_width / UI_FONT_WIDTH);
-    ASCII_HEIGHT = (int)(game->config.outer_pix_height / UI_FONT_HEIGHT);
+    ASCII_WIDTH = 100;
+    ASCII_HEIGHT = 36;
+    game->config.ascii_gl_width = game->config.outer_pix_width / ASCII_WIDTH;
+    game->config.ascii_gl_height = game->config.outer_pix_height / ASCII_HEIGHT;
 
     if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
         LOG("INIT: Exceeded console hit max width  : %d", ASCII_WIDTH);
