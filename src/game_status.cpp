@@ -97,108 +97,100 @@ static void game_status_wid_create (void)
     game_status_wid_fini();
     game_monsts_wid_init();
 
-    auto actionbar_items = player->monstp->actionbar_id.size();
+    if (!g_opt_ascii_mode) {
+        auto actionbar_items = player->monstp->actionbar_id.size();
 
-#if 0
-    player->log("actionbar items:");
-#endif
-_
-    for (auto i = 0U; i < actionbar_items; i++) {
-        auto tp_id = player->monstp->actionbar_id[i];
-        if (!tp_id) {
-            continue;
-        }
-
-        auto tpp = tp_find(tp_id);
-        if (!tpp) {
-#if 0
-            player->log("slot %u: %u (invaid)", i, tp_id);
-#endif
-            continue;
-        }
-#if 0
-        player->log("slot %u: %s", i, tpp->name().c_str());
-#endif
-    }
-
-    {_
-        auto w = UI_ACTIONBAR_ITEM_WIDTH * actionbar_items;
-        auto m = (ASCII_WIDTH / 2);
-        auto x1 = m - (w / 2) + (UI_ACTIONBAR_ITEM_WIDTH / 2);
-        auto x2 = w - (m - x1) + m;
-        point tl = make_point(x1, UI_ACTIONBAR_TL_Y);
-        point br = make_point(x2, UI_ACTIONBAR_BR_Y);
-        color c;
-
-        wid_actionbar = wid_new_square_window("actionbar (bottom)");
-        wid_set_pos(wid_actionbar, tl, br);
-        wid_set_style(wid_actionbar, -1);
-        wid_lower(wid_actionbar);
-    }
-
-    std::vector<Widp> wid_actionbar_items;
-
-    for (auto i = 0U, x = 0U; i < actionbar_items; i++) {
-        auto s = "actionbar item" + std::to_string(0);
-        auto w = wid_new_square_button(wid_actionbar, s);
-        wid_actionbar_items.push_back(w);
-        point tl = make_point(x, 0);
-        point br = make_point(x + UI_ACTIONBAR_ITEM_WIDTH - 1, UI_ACTIONBAR_ITEM_HEIGHT);
-
-        wid_set_pos(w, tl, br);
-
-        if (i == game->actionbar_highlight_slot) {
-            std::string tile = "ui_action_bar_highlight" + std::to_string(i);
-            wid_set_bg_tilename(w, tile.c_str());
-        } else {
-            std::string tile = "ui_action_bar" + std::to_string(i);
-            wid_set_bg_tilename(w, tile.c_str());
-        }
-
-        x += UI_ACTIONBAR_ITEM_WIDTH;
-    }
-
-    for (auto i = 0U; i < actionbar_items; i++) {
-        std::string name = "actionbar icon" + std::to_string(i);
-        auto w = wid_new_square_button(wid_actionbar_items[i], name);
-        point tl = make_point(0, 0);
-        point br = make_point(UI_ACTIONBAR_ITEM_WIDTH - 1, UI_ACTIONBAR_ITEM_HEIGHT - 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text_top(w, true);
-
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
-        wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
-        wid_set_int_context(w, i);
-
-        auto count = player->actionbar_id_slot_count(i);
-        if (count > 1) {
-            wid_set_text(w, " x" + std::to_string(count));
-        }
-
-        if (player->monstp) {
+        for (auto i = 0U; i < actionbar_items; i++) {
             auto tp_id = player->monstp->actionbar_id[i];
-            if (tp_id) {
-                auto tpp = tp_find(tp_id);
-                auto tiles = &tpp->tiles;
-                if (tiles) {
-                    auto tile = tile_first(tiles);
-                    if (tile) {
-                        wid_set_fg_tile(w, tile);
-                    }
-                }
+            if (!tp_id) {
+                continue;
+            }
+
+            auto tpp = tp_find(tp_id);
+            if (!tpp) {
+                continue;
             }
         }
 
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
+        {_
+            auto w = UI_ACTIONBAR_ITEM_WIDTH * actionbar_items;
+            auto m = (ASCII_WIDTH / 2);
+            auto x1 = m - (w / 2) + (UI_ACTIONBAR_ITEM_WIDTH / 2);
+            auto x2 = w - (m - x1) + m;
+            point tl = make_point(x1, UI_ACTIONBAR_TL_Y);
+            point br = make_point(x2, UI_ACTIONBAR_BR_Y);
+            color c;
 
-    wid_update(wid_actionbar);
+            wid_actionbar = wid_new_square_window("actionbar (bottom)");
+            wid_set_pos(wid_actionbar, tl, br);
+            wid_set_style(wid_actionbar, -1);
+            wid_lower(wid_actionbar);
+        }
+
+        std::vector<Widp> wid_actionbar_items;
+
+        for (auto i = 0U, x = 0U; i < actionbar_items; i++) {
+            auto s = "actionbar item" + std::to_string(0);
+            auto w = wid_new_square_button(wid_actionbar, s);
+            wid_actionbar_items.push_back(w);
+            point tl = make_point(x, 0);
+            point br = make_point(x + UI_ACTIONBAR_ITEM_WIDTH - 1, UI_ACTIONBAR_ITEM_HEIGHT);
+
+            wid_set_pos(w, tl, br);
+
+            if (i == game->actionbar_highlight_slot) {
+                std::string tile = "ui_action_bar_highlight" + std::to_string(i);
+                wid_set_bg_tilename(w, tile.c_str());
+            } else {
+                std::string tile = "ui_action_bar" + std::to_string(i);
+                wid_set_bg_tilename(w, tile.c_str());
+            }
+
+            x += UI_ACTIONBAR_ITEM_WIDTH;
+        }
+
+        for (auto i = 0U; i < actionbar_items; i++) {
+            std::string name = "actionbar icon" + std::to_string(i);
+            auto w = wid_new_square_button(wid_actionbar_items[i], name);
+            point tl = make_point(0, 0);
+            point br = make_point(UI_ACTIONBAR_ITEM_WIDTH - 1, UI_ACTIONBAR_ITEM_HEIGHT - 1);
+
+            wid_set_pos(w, tl, br);
+            wid_set_text_lhs(w, true);
+            wid_set_text_top(w, true);
+
+            wid_set_on_mouse_down(w, game_status_mouse_down);
+            wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
+            wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
+            wid_set_int_context(w, i);
+
+            auto count = player->actionbar_id_slot_count(i);
+            if (count > 1) {
+                wid_set_text(w, " x" + std::to_string(count));
+            }
+
+            if (player->monstp) {
+                auto tp_id = player->monstp->actionbar_id[i];
+                if (tp_id) {
+                    auto tpp = tp_find(tp_id);
+                    auto tiles = &tpp->tiles;
+                    if (tiles) {
+                        auto tile = tile_first(tiles);
+                        if (tile) {
+                            wid_set_fg_tile(w, tile);
+                        }
+                    }
+                }
+            }
+
+            wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+            wid_set_mode(w, WID_MODE_OVER);
+            wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+            wid_set_mode(w, WID_MODE_NORMAL);
+        }
+
+        wid_update(wid_actionbar);
+    }
 
     {_
         point tl = make_point(ASCII_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
@@ -214,34 +206,37 @@ _
     }
 
     int y_at = 0;
-    {_
-        auto w = wid_new_plain(wid_sidebar, "zorbash-0");
-        point tl = make_point(0, y_at);
-        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "zorbash-0");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
-    y_at += 2;
-    {_
-        auto w = wid_new_plain(wid_sidebar, "zorbash-1");
-        point tl = make_point(0, y_at);
-        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "zorbash-1");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
-    y_at += 2;
-    {_
-        auto w = wid_new_plain(wid_sidebar, "zorbash-2");
-        point tl = make_point(0, y_at);
-        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "zorbash-2");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
+
+    if (!g_opt_ascii_mode) {
+        {_
+            auto w = wid_new_plain(wid_sidebar, "zorbash-0");
+            point tl = make_point(0, y_at);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
+            wid_set_ignore_events(w, true);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "zorbash-0");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        y_at += 2;
+        {_
+            auto w = wid_new_plain(wid_sidebar, "zorbash-1");
+            point tl = make_point(0, y_at);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
+            wid_set_ignore_events(w, true);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "zorbash-1");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        y_at += 2;
+        {_
+            auto w = wid_new_plain(wid_sidebar, "zorbash-2");
+            point tl = make_point(0, y_at);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
+            wid_set_ignore_events(w, true);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "zorbash-2");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
     }
 
     y_at += 2;

@@ -9,6 +9,10 @@
 
 void Thing::msg (std::string const &m)
 {
+    if (g_opt_ascii_mode) {
+        return;
+    }
+
     auto msg = level->thing_new("msg", mid_at);
     msg->set_msg(m);
     msg->fadeup(6.0, 0.05, 3000);
