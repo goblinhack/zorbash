@@ -189,7 +189,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
             MINICON("Switch to tiled mode");
             game->config.gfx_zoom = 3;
         } else {
-            MINICON("Switch to ascii mode. If too large, you can zoom out.");
+            MINICON("Switch to ascii mode.");
             game->config.gfx_zoom = 1.0;
         }
         g_opt_ascii_mode = !g_opt_ascii_mode;
