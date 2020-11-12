@@ -142,7 +142,7 @@ void game_main_menu_tick (Widp w)
     static int frame = 1;
     static timestamp_t ts;
 
-    if (time_have_x_tenths_passed_since(1, ts)) {
+    if (time_have_x_tenths_passed_since(5, ts)) {
         frame++;
         if (frame > 64) {
             frame = 1;
