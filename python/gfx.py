@@ -124,7 +124,7 @@ def init_title():
     ]
     zx.tile_load_arr(
         file="data/gfx/zorbash.tga",
-        name="title", width=100, height=36, arr=tiles)
+        name="title", width=200, height=86, arr=tiles)
 
 def init_ui_dead():
     tiles = [
