@@ -41,7 +41,7 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
 
     int tile_size;
     if (title_tile) {
-        tile_size = 6;
+        tile_size = 3;
     } else {
         tile_size = 0;
     }
@@ -73,7 +73,7 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
     }
 
     {
-        point tl = make_point(0, + tile_size + 2);
+        point tl = make_point(0, + tile_size + 0);
         point br = make_point(inner_w, inner_h + tile_size);
         wid_text_area = new WidTextBox(tl, br, wid_popup_container,
                                        horiz_scroll, vert_scoll);
