@@ -142,7 +142,7 @@ std::array<std::array<color, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> bg2 {};
 
 void game_draw_flames (int w, int h)
 {_
-    float bright = 1.5;
+    float bright = 2.5;
     blit_init();
     auto tile = tile_find_mand("1.97");
     auto tw = game->config.ascii_gl_width / 2;
@@ -176,9 +176,9 @@ void game_draw_flames (int w, int h)
                 cn = RED;
             } else if (r < 150) {
                 cn = ORANGE;
-            } else if (r < 200) {
+            } else if (r < 180) {
                 cn = YELLOW;
-            } else if (r < 250) {
+            } else if (r < 190) {
                 cn = GRAY90;
             } else {
                 cn = WHITE;
@@ -196,16 +196,20 @@ void game_draw_flames (int w, int h)
 
 void game_change_flames (int w, int h)
 {_
+    int flames = 2;
+    while (flames--) 
     {
-        auto xr = random_range(5, w - 5);
+        auto xr = random_range(w / 4, w - w / 4);
         auto r = random_range(0, 100);
 
         if (r < 30) {
-            set(bg, xr - 1, h - 1, GRAY10);
+            set(bg, xr - 3, h - 1, GRAY10);
             set(bg, xr - 2, h - 1, GRAY10);
+            set(bg, xr - 1, h - 1, GRAY10);
             set(bg, xr    , h - 1, WHITE);
             set(bg, xr + 1, h - 1, GRAY10);
             set(bg, xr + 2, h - 1, GRAY10);
+            set(bg, xr + 3, h - 1, GRAY10);
         } else {
             set(bg, xr - 1, h - 1, BLACK);
             set(bg, xr - 2, h - 1, BLACK);
@@ -220,10 +224,10 @@ void game_change_flames (int w, int h)
             continue;
         }
 
-        int sparks = 10;
+        int sparks = 5;
         while (sparks--) {
             for (auto y = 0; y < h - 1; y++) {
-                auto c0 = get(bg, x, y + 3);
+                auto c0 = get(bg, x, y);
                 auto c1 = get(bg, x, y + 1);
 
                 if (c0.r == 0) {
@@ -236,7 +240,7 @@ void game_change_flames (int w, int h)
     }
 
     for (auto x = 0; x < w; x++) {
-        if (random_range(0, 100) < 95) {
+        if (random_range(0, 100) < 99) {
             continue;
         }
 
@@ -250,6 +254,23 @@ void game_change_flames (int w, int h)
     }
 
     for (auto x = 0; x < w; x++) {
+        if (random_range(0, 100) < 95) {
+            continue;
+        }
+
+        int scroll = 5;
+        while (scroll--) {
+            for (auto y = 0; y < h - 1; y++) {
+                auto c1 = get(bg, x, y + 1);
+                set(bg, x, y, c1);
+            }
+        }
+    }
+
+    for (auto x = 0; x < w; x++) {
+        if (random_range(0, 100) < 50) {
+            continue;
+        }
         int scroll = 2;
         while (scroll--) {
             for (auto y = 0; y < h - 1; y++) {
@@ -298,7 +319,12 @@ void game_main_menu_tick (Widp w)
         auto w = ASCII_WIDTH * 2;
         auto h = ASCII_HEIGHT * 2;
         game_draw_flames(w, h);
-        game_change_flames(w, h);
+        static int tick;
+        if (tick) {
+            game_change_flames(w, h);
+            tick = 0;
+        }
+        tick++;
     }
 
     glcolor(WHITE);
