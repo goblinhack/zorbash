@@ -687,6 +687,7 @@ void Game::save_select (void)
 
     game_load_headers_only = true;
 
+    wid_save->log(" ");
     wid_save->log("Choose a save slot. %%fg=red$ESC%%fg=reset$ to cancel");
 
     int y_at = 2;

@@ -93,8 +93,8 @@ void Game::quit_select (void)
     if (game->started) {
         n = ASCII_HEIGHT / 3;
     }
-    point tl = make_point(m - UI_WID_POPUP_WIDTH_NORMAL / 2, n - 4);
-    point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2, n + 5);
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_NORMAL / 2, n - 3);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2, n + 3);
     auto width = br.x - tl.x;
 
     game_quit_window = new WidPopup(tl, br, nullptr, "ui_popup_short",
@@ -117,7 +117,7 @@ void Game::quit_select (void)
         wid_set_text(w, "Quit game?");
     }
 
-    y_at = 3;
+    y_at = 2;
     {_
         auto p = game_quit_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Yes");

@@ -876,9 +876,10 @@ void Game::load_select (void)
 
     game_load_headers_only = true;
 
+    wid_load->log(" ");
     wid_load->log("Choose a load slot. %%fg=red$ESC%%fg=reset$ to cancel");
 
-    int y_at = 2;
+    int y_at = 3;
     for (auto slot = 0; slot < UI_WID_SAVE_SLOTS; slot++) {
         Game tmp;
         auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
