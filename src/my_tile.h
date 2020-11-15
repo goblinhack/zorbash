@@ -139,13 +139,12 @@ static inline Tilep tile_index_to_tile (uint16_t i)
     if (unlikely(!i)) {
         return (nullptr);
     } else {
-        return all_tiles_array[g_opt_ascii_mode][i - 1];
+        return all_tiles_array[i - 1];
     }
 }
 
 uint8_t tile_init(void);
 void tile_fini(void);
-void tile_update(void);
 void tile_load(std::string file, uint32_t width, uint32_t height,
                uint32_t nargs, ...);
 void tile_load_arr(std::string file,

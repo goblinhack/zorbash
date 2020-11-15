@@ -355,12 +355,8 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Scale up tiles that are larger to the same pix scale.
     //
-    if (g_opt_ascii_mode) {
-        //
-        // All tiles are the same size
-        //
-    } else if (unlikely((tile_pix_width != TILE_WIDTH) ||
-                        (tile_pix_height != TILE_HEIGHT))) {
+    if (unlikely((tile_pix_width != TILE_WIDTH) ||
+                 (tile_pix_height != TILE_HEIGHT))) {
         auto xtiles = tile_pix_width / TILE_WIDTH;
         blit_tl.x -= ((xtiles-1) * tilew) / 2;
         blit_br.x += ((xtiles-1) * tilew) / 2;
@@ -373,11 +369,7 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Put larger tiles on the same y base as small ones.
     //
-    if (g_opt_ascii_mode) {
-        //
-        // All tiles are the same size
-        //
-    } else if (unlikely(tpp->gfx_oversized_but_sitting_on_the_ground())) {
+    if (unlikely(tpp->gfx_oversized_but_sitting_on_the_ground())) {
         float y_offset =
             (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
         blit_tl.y -= y_offset;
@@ -390,7 +382,7 @@ bool Thing::get_coords (point &blit_tl,
     auto owner = owner_get();
     auto falling = is_falling || (owner && owner->is_falling);
     if (likely(!falling)) {
-        if (unlikely(tpp->gfx_animated_can_hflip() && !g_opt_ascii_mode)) {
+        if (unlikely(tpp->gfx_animated_can_hflip())) {
             //
             // Confusing in ascii mode
             //
@@ -439,7 +431,7 @@ bool Thing::get_coords (point &blit_tl,
             }
         }
 
-        if (unlikely(tpp->gfx_animated_can_vflip() && !g_opt_ascii_mode)) {
+        if (unlikely(tpp->gfx_animated_can_vflip())) {
             if (is_dir_down() || is_dir_br() || is_dir_bl()) {
                 std::swap(blit_tl.y, blit_br.y);
             }
@@ -560,7 +552,7 @@ bool Thing::get_coords (point &blit_tl,
             is_in_water = true;
         }
 
-        if (is_floating() || g_opt_ascii_mode) {
+        if (is_floating()) {
             //
             // Ghosts do not sink into lava
             // Don't submerge ascii charactars.
@@ -710,9 +702,6 @@ void Thing::blit_internal (int fbo,
                 auto tile = get(game->tile_cache_moves_ahead, diff);
                 if (!tile) {
                     std::string s = "clock" + std::to_string(diff);
-                    if (g_opt_ascii_mode) {
-                        s = "ascii." + s;
-                    }
                     tile = tile_find_mand(s);
                     set(game->tile_cache_moves_ahead, diff, tile);
                 }
@@ -726,9 +715,6 @@ void Thing::blit_internal (int fbo,
             auto tile = get(game->tile_cache_health, h_step);
             if (!tile) {
                 std::string s = "health" + std::to_string(h_step);
-                if (g_opt_ascii_mode) {
-                    s = "ascii." + s;
-                }
                 tile = tile_find_mand(s);
                 set(game->tile_cache_health, h_step, tile);
             }
@@ -777,8 +763,7 @@ void Thing::blit_internal (int fbo,
         glTranslatef(-mid.x, -mid.y, 0);
     }
 
-    bool outline = (g_opt_ascii_mode && tpp->gfx_ascii_show_outlined()) ||
-                   (!g_opt_ascii_mode && tpp->gfx_show_outlined());
+    bool outline = tpp->gfx_show_outlined();
 
     if (outline && !g_render_black_and_white) {
         if (reflection) {
@@ -814,10 +799,8 @@ void Thing::blit_internal (int fbo,
         blit_wall_cladding(blit_tl, blit_br, &tiles);
     }
 
-    if (!g_opt_ascii_mode) {
-        if (tiles.bot3_tile) {
-            blit_floor_chasm(blit_tl, blit_br, &tiles);
-        }
+    if (tiles.bot3_tile) {
+        blit_floor_chasm(blit_tl, blit_br, &tiles);
     }
 
     if (wobble != 0.0) {
@@ -881,10 +864,7 @@ void Thing::blit_upside_down (int fbo)
     auto diff = blit_br.y - blit_tl.y;
     std::swap(blit_tl.y, blit_br.y);
 
-    if (g_opt_ascii_mode) {
-        blit_br.y += TILE_HEIGHT;
-        blit_tl.y += TILE_HEIGHT;
-    } else if (tile && tile_get_height(tile) != TILE_HEIGHT) {
+    if (tile && tile_get_height(tile) != TILE_HEIGHT) {
         if (tpp->gfx_oversized_but_sitting_on_the_ground()) {
             blit_br.y += diff;
             blit_tl.y += diff;

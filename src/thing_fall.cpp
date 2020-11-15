@@ -109,17 +109,17 @@ bool Thing::fall_to_next_level (void)
             x = mid_at.x;
             y = mid_at.y;
         } else if (tries < 10) {
-            x = mid_at.x + random_range(-MAP_BORDER, MAP_BORDER);
-            y = mid_at.y + random_range(-MAP_BORDER, MAP_BORDER);
+            x = mid_at.x + random_range(-MAP_BORDER_TOTAL, MAP_BORDER_TOTAL);
+            y = mid_at.y + random_range(-MAP_BORDER_TOTAL, MAP_BORDER_TOTAL);
         } else if (tries < 100) {
-            x = mid_at.x + random_range(-MAP_BORDER * 2, MAP_BORDER * 2);
-            y = mid_at.y + random_range(-MAP_BORDER * 2, MAP_BORDER * 2);
+            x = mid_at.x + random_range(-MAP_BORDER_TOTAL * 2, MAP_BORDER_TOTAL * 2);
+            y = mid_at.y + random_range(-MAP_BORDER_TOTAL * 2, MAP_BORDER_TOTAL * 2);
         } else if (tries < 1000) {
-            x = mid_at.x + random_range(-MAP_BORDER * 4, MAP_BORDER * 4);
-            y = mid_at.y + random_range(-MAP_BORDER * 4, MAP_BORDER * 4);
+            x = mid_at.x + random_range(-MAP_BORDER_TOTAL * 4, MAP_BORDER_TOTAL * 4);
+            y = mid_at.y + random_range(-MAP_BORDER_TOTAL * 4, MAP_BORDER_TOTAL * 4);
         } else {
-            x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
-            y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
+            x = random_range(MAP_BORDER_TOTAL, MAP_WIDTH - MAP_BORDER_TOTAL);
+            y = random_range(MAP_BORDER_TOTAL, MAP_HEIGHT - MAP_BORDER_TOTAL);
         }
         tries++;
 

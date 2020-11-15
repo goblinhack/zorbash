@@ -181,7 +181,7 @@ uint8_t wid_console_receive_input (Widp w, const SDL_KEYSYM *key)
 static void wid_console_wid_create (void)
 {_
     point tl = make_point(0, 0);
-    point br = make_point(ASCII_WIDTH - 1, ASCII_HEIGHT - 1);
+    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
     int w = br.x - tl.x;
     int h = br.y - tl.y;
 

@@ -399,7 +399,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* uint32_t           key_quit                     */ out << bits(my.t.key_quit                     );
     /* uint32_t           key_save                     */ out << bits(my.t.key_save                     );
     /* uint32_t           key_screenshot               */ out << bits(my.t.key_screenshot               );
-    /* uint32_t           key_gfx_mode                 */ out << bits(my.t.key_gfx_mode                  );
+    /* uint32_t           key_unused99                 */ out << bits(my.t.key_unused99                  );
     /* uint32_t           key_console                  */ out << bits(my.t.key_console                  );
     /* uint32_t           key_unused3                  */ out << bits(my.t.key_unused3                  );
     /* uint32_t           key_unused4                  */ out << bits(my.t.key_unused4                  );
@@ -674,7 +674,7 @@ void Game::save_select (void)
     }
     game->hard_pause();
 
-    auto m = ASCII_WIDTH / 2;
+    auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
                           UI_MINICON_VIS_HEIGHT + 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,

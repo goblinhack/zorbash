@@ -7,7 +7,6 @@ def tp_init(name):
 
     x.set_text_a_or_an("a");
     x.set_gfx_show_outlined(True)
-    x.set_gfx_ascii_show_outlined(True)
     x.set_is_movable(True)
     x.set_is_msg(True)
     x.set_is_removable_if_out_of_slots(True)

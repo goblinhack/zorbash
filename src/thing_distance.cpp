@@ -20,9 +20,9 @@ point Thing::get_random_scent_target (void)
             continue;
         }
         auto x = std::min(
-                 std::max(MAP_BORDER, start.x + dx), MAP_WIDTH - MAP_BORDER);
+                 std::max(MAP_BORDER_TOTAL, start.x + dx), MAP_WIDTH - MAP_BORDER_TOTAL);
         auto y = std::min(
-                 std::max(MAP_BORDER, start.y + dy), MAP_HEIGHT - MAP_BORDER);
+                 std::max(MAP_BORDER_TOTAL, start.y + dy), MAP_HEIGHT - MAP_BORDER_TOTAL);
 
         if (will_avoid(point(x, y))) {
             continue;
@@ -49,9 +49,9 @@ point Thing::get_random_scent_target (void)
             continue;
         }
         auto x = std::min(
-                 std::max(MAP_BORDER, start.x + dx), MAP_WIDTH - MAP_BORDER);
+                 std::max(MAP_BORDER_TOTAL, start.x + dx), MAP_WIDTH - MAP_BORDER_TOTAL);
         auto y = std::min(
-                 std::max(MAP_BORDER, start.y + dy), MAP_HEIGHT - MAP_BORDER);
+                 std::max(MAP_BORDER_TOTAL, start.y + dy), MAP_HEIGHT - MAP_BORDER_TOTAL);
 
         if (level->is_hazard(x,y) ||
             level->is_rock(x, y)  ||
@@ -71,8 +71,8 @@ point Thing::get_random_scent_target (void)
         return start;
     }
     auto x = std::min(
-                std::max(MAP_BORDER, start.x + dx), MAP_WIDTH - MAP_BORDER);
+                std::max(MAP_BORDER_TOTAL, start.x + dx), MAP_WIDTH - MAP_BORDER_TOTAL);
     auto y = std::min(
-                std::max(MAP_BORDER, start.y + dy), MAP_HEIGHT - MAP_BORDER);
+                std::max(MAP_BORDER_TOTAL, start.y + dy), MAP_HEIGHT - MAP_BORDER_TOTAL);
     return point(x, y);
 }

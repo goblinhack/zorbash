@@ -20,7 +20,7 @@ if (is_blood()) { log("animate"); }
     if (unlikely(!tmap)) {
         return;
     }
-    std::vector<Tilep> *tiles = &((*tmap)[g_opt_ascii_mode]);
+    std::vector<Tilep> *tiles = &((*tmap));
     if (unlikely(!tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
 if (is_blood()) { log("has no tiles"); }

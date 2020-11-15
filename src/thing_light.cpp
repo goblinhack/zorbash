@@ -34,11 +34,6 @@ void Thing::init_lights (void)
         int d1 = 1;
         int d2 = 2;
 
-        if (g_opt_ascii_mode) {
-            d1 = 4;
-            d2 = 8;
-        }
-
         new_light(point(0, 0), strength, col, FBO_FULLMAP_LIGHT);
         new_light(point(0, 0), strength, col, FBO_LIGHT);
 
@@ -57,7 +52,7 @@ void Thing::init_lights (void)
         new_light(point(-d1,  d2), strength, col, FBO_LIGHT);
         new_light(point( d1,  d2), strength, col, FBO_LIGHT);
 
-        if (!g_opt_ascii_mode) {
+        {
             d1 = 3;
             d2 = 5;
 

@@ -1151,10 +1151,6 @@ void config_update_all (void)
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
 
-    if (g_opt_ascii_mode) {
-        game->config.ascii_mode = g_opt_ascii_mode;
-    }
-
     if (game->level) {
         game->level->update();
     }
@@ -1340,11 +1336,7 @@ void sdl_loop (void)
         //
         // Draw the map
         //
-        if (unlikely(g_opt_ascii_mode)) {
-            //
-            // No minimap
-            //
-        } else if (likely(game->config.gfx_minimap)) {
+        if (likely(game->config.gfx_minimap)) {
             float mx = UI_MINIMAP_SIZE;
             float my = mx * game->config.video_w_h_ratio;
             mx *= game->config.outer_pix_width;
@@ -1474,15 +1466,9 @@ void config_gfx_zoom_update (void)
         game->config.gfx_zoom = 1;
     }
 
-    if (g_opt_ascii_mode) {
-        game->config.tile_width = TILE_WIDTH_ASCII;
-        game->config.tile_height = TILE_HEIGHT_ASCII;
-        g_ui_font_pixel_size = UI_FONT_LARGE_PIXEL_SIZE;
-    } else {
-        game->config.tile_width = TILE_WIDTH_LORES;
-        game->config.tile_height = TILE_HEIGHT_LORES;
-        g_ui_font_pixel_size = UI_FONT_SMALL_PIXEL_SIZE;
-    }
+    game->config.tile_width = TILE_WIDTH_LORES;
+    game->config.tile_height = TILE_HEIGHT_LORES;
+    g_ui_font_pixel_size = UI_FONT_PIXEL_SIZE;
 
     game->config.one_pixel_width = 1;
     game->config.one_pixel_height = 1;
@@ -1532,25 +1518,25 @@ void config_gfx_zoom_update (void)
     CON("INIT: - inner    pix size    : %dx%d", game->config.inner_pix_width,
                                                 game->config.inner_pix_height);
 
-    ASCII_WIDTH = 100;
-    ASCII_HEIGHT = 36;
-    game->config.ascii_gl_width = game->config.outer_pix_width / ASCII_WIDTH;
-    game->config.ascii_gl_height = game->config.outer_pix_height / ASCII_HEIGHT;
+    TERM_WIDTH = TERM_WIDTH_DEF;
+    TERM_HEIGHT = TERM_HEIGHT_DEF;
+    game->config.ascii_gl_width = game->config.outer_pix_width / TERM_WIDTH;
+    game->config.ascii_gl_height = game->config.outer_pix_height / TERM_HEIGHT;
 
-    if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
-        LOG("INIT: Exceeded console hit max width  : %d", ASCII_WIDTH);
-        ASCII_WIDTH = ASCII_WIDTH_MAX;
+    if (TERM_WIDTH >= TERM_WIDTH_MAX) {
+        LOG("INIT: Exceeded console hit max width  : %d", TERM_WIDTH);
+        TERM_WIDTH = TERM_WIDTH_MAX;
         game->config.ascii_gl_width =
-            (float)game->config.outer_pix_width / (float)ASCII_WIDTH;
+            (float)game->config.outer_pix_width / (float)TERM_WIDTH;
     }
 
-    if (ASCII_HEIGHT >= ASCII_HEIGHT_MAX) {
-        LOG("INIT: Exceeded console hit max height : %d", ASCII_HEIGHT);
-        ASCII_HEIGHT = ASCII_HEIGHT_MAX;
+    if (TERM_HEIGHT >= TERM_HEIGHT_MAX) {
+        LOG("INIT: Exceeded console hit max height : %d", TERM_HEIGHT);
+        TERM_HEIGHT = TERM_HEIGHT_MAX;
         game->config.ascii_gl_height =
-            (float)game->config.outer_pix_height / (float)ASCII_HEIGHT;
+            (float)game->config.outer_pix_height / (float)TERM_HEIGHT;
     }
 
-    CON("INIT: - ascii size           : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
+    CON("INIT: - ascii size           : %dx%d", TERM_WIDTH, TERM_HEIGHT);
     CON("INIT: - width to height ratio: %f", game->config.video_w_h_ratio);
 }

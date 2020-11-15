@@ -33,25 +33,27 @@
 #undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
 
-#define ASCII_HEIGHT_MAX           ASCII_WIDTH_MAX
-#define ASCII_WIDTH_MAX            256
-#define GRID_HEIGHT                4
-#define GRID_WIDTH                 4    // Rooms across and down
 #define LEVELS_ACROSS              MAP_WIDTH // World size
 #define LEVELS_DEEP                32
 #define LEVELS_DOWN                MAP_HEIGHT
 #define LEVELS_MONST_COUNT         100
 #define LEVEL_FADE_IN_MS           800
 #define LEVEL_FADE_OUT_MS          500
-#define MAP_BORDER                 10   // Room border padding
-#define MAP_HEIGHT                 ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
-#define MAP_ROCK_BORDER            1    // Map rock border
-#define MAP_SLOTS                  32   // Max things per map slot
-#define MAP_WIDTH                  ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
-#define MAX_RAY_LIGHTING           180  // Max light rays cast
+#define LIGHT_MAX_RAYS             180  // Max light rays cast
+#define MAP_BORDER_TOTAL                 10   // Room border padding
+#define MAP_GRID_HEIGHT            4
+#define MAP_GRID_WIDTH             4 // Rooms across and down
+#define MAP_HEIGHT                 ((MAP_GRID_HEIGHT*MAP_ROOM_HEIGHT) + (MAP_BORDER_TOTAL*2))
+#define MAP_BORDER_ROCK            1  // Map rock border
+#define MAP_ROOM_HEIGHT            13
+#define MAP_ROOM_WIDTH             13
+#define MAP_SLOTS                  32 // Max things per map slot
+#define MAP_WIDTH                  ((MAP_GRID_WIDTH*MAP_ROOM_WIDTH) + (MAP_BORDER_TOTAL*2))
 #define PARTICLE_SPEED_MS          400
-#define ROOM_HEIGHT                13
-#define ROOM_WIDTH                 13
+#define TERM_HEIGHT_DEF            36
+#define TERM_HEIGHT_MAX            TERM_HEIGHT_DEF
+#define TERM_WIDTH_DEF             100
+#define TERM_WIDTH_MAX             TERM_WIDTH_DEF
 #define THING_AI_WANDER_FREQ_TENTHS 3   // How often we can wander
 #define THING_DAMAGE_SHAKE_ABOVE   10   // Damage above this causes shakes
 #define THING_DAMAGE_SHAKE_SCALE   40.0 // Smaller means more shaking
@@ -60,50 +62,47 @@
 #define THING_HEALTH_BLOODIED_PCT3 15   // More...
 #define THING_HEALTH_BLOODIED_PCT4 5    // Lots of blood on screen
 #define THING_TICK_MAX_MOVES_AHEAD 10   // How many moves ahead things get
+#define TILE_CURSOR                ((wchar_t)('z' + 6))
+#define TILE_CURSOR_NAME           "1.97" // block
 #define TILE_HEIGHT                game->config.tile_height
 #define TILE_HEIGHT_ASCII          48
 #define TILE_HEIGHT_LORES          16
 #define TILE_HEIGHT_MAX            64
+#define TILE_UNKNOWN_NAME               "1.31" // ?
 #define TILE_WIDTH                 game->config.tile_width
 #define TILE_WIDTH_ASCII           48   // Tile size of the player
 #define TILE_WIDTH_LORES           16   // Tile size of the player
 #define TILE_WIDTH_MAX             64   // Largest tile for collisions
-#define TTF_GLYPH_BAR              127  // For status / progress bars
 #define TTF_GLYPH_MAX              134
 #define TTF_GLYPH_MIN              ' '
 #define TTF_GLYPH_PER_ROW          60
-#define UI_ACTIONBAR_BR_Y          (ASCII_HEIGHT - 2)
+#define UI_ACTIONBAR_BR_Y          (TERM_HEIGHT - 2)
 #define UI_ACTIONBAR_ITEM_HEIGHT   3
 #define UI_ACTIONBAR_ITEM_WIDTH    3
 #define UI_ACTIONBAR_MAX_ITEMS     10
-#define UI_ACTIONBAR_TL_Y          (ASCII_HEIGHT - 5)
+#define UI_ACTIONBAR_TL_Y          (TERM_HEIGHT - 5)
 #define UI_BOTCON_HEIGHT           1 // Scrollbar limit
 #define UI_BOTCON_TEXT_COLOR       UI_TEXT_COLOR
 #define UI_BOTCON_VIS_HEIGHT       1
 #define UI_BOTCON_VIS_WIDTH        UI_BOTCON_WIDTH
-#define UI_BOTCON_WIDTH            (ASCII_WIDTH)
+#define UI_BOTCON_WIDTH            (TERM_WIDTH)
 #define UI_CONSOLE_HEIGHT          200
 #define UI_CONSOLE_INPUT_COLOR     ORANGE
 #define UI_CONSOLE_TEXT_COLOR      GRAY
-#define UI_CONSOLE_WIDTH           (ASCII_WIDTH - 3)
+#define UI_CONSOLE_WIDTH           (TERM_WIDTH - 3)
 #define UI_CURSOR_COLOR            GRAY
 #define UI_CURSOR_OTHER_COLOR      WHITE
-#define UI_FONT_SMALL_HEIGHT       26
-#define UI_FONT_SMALL_WIDTH        20
-#define UI_FONT_LARGE_HEIGHT       49
-#define UI_FONT_LARGE_WIDTH        27
-#define UI_FONT_WIDTH              12
-#define UI_FONT_HEIGHT             14
+#define UI_FONT_HEIGHT             26
 #define UI_FONT_NAME               "data/ttf/6x6.tga"
-#define UI_FONT_LARGE_PIXEL_SIZE   24
-#define UI_FONT_SMALL_PIXEL_SIZE   6
+#define UI_FONT_PIXEL_SIZE         6
+#define UI_FONT_WIDTH              20
 #define UI_HEALTH_BAR_STEPS        12 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5
 #define UI_MINICON_HEIGHT          6 // Scrollbar limit
 #define UI_MINICON_TEXT_COLOR      UI_TEXT_COLOR
 #define UI_MINICON_VIS_HEIGHT      5
 #define UI_MINICON_VIS_WIDTH       UI_MINICON_WIDTH
-#define UI_MINICON_WIDTH           (ASCII_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
+#define UI_MINICON_WIDTH           (TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
 #define UI_MINIMAP_SIZE            0.155
 #define UI_MONST_HEALTH_BAR_STEPS  16
 #define UI_MOUSE_DOUBLE_CLICK      500 // Double click time

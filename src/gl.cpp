@@ -460,13 +460,8 @@ void fbo_get_size (int fbo, int &w, int &h)
         case FBO_MASK2:
         case FBO_MASK3:
         case FBO_MASK4:
-            if (g_opt_ascii_mode) {
-                w = 1;
-                h = 1;
-            } else {
-                w = game->config.inner_pix_width;
-                h = game->config.inner_pix_height;
-            }
+            w = game->config.inner_pix_width;
+            h = game->config.inner_pix_height;
             break;
         case FBO_MINIMAP:
             w = MAP_WIDTH;
@@ -482,13 +477,8 @@ void fbo_get_size (int fbo, int &w, int &h)
         case FBO_FULLMAP_MASK2:
         case FBO_FULLMAP_MASK3:
         case FBO_FULLMAP_MASK4:
-            if (g_opt_ascii_mode) {
-                w = 1;
-                h = 1;
-            } else {
-                w = TILE_WIDTH * MAP_WIDTH;
-                h = TILE_HEIGHT * MAP_HEIGHT;
-            }
+            w = TILE_WIDTH * MAP_WIDTH;
+            h = TILE_HEIGHT * MAP_HEIGHT;
             break;
         case FBO_WID:
             //

@@ -7,7 +7,6 @@ def tp_init(name):
 
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
-    x.set_gfx_ascii_show_outlined(True)
     x.set_is_cursor_path(True)
     x.set_is_removable_if_out_of_slots(True)
     x.set_is_movable(True)

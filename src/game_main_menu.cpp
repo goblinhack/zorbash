@@ -137,8 +137,8 @@ uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
     return (true);
 }
 
-std::array<std::array<color, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> bg {};
-std::array<std::array<color, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> bg2 {};
+std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg {};
+std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg2 {};
 
 void game_display_flames_tiles (int w, int h)
 {_
@@ -315,8 +315,8 @@ void game_display_flames_change (int w, int h)
 
 void game_display_flames (void)
 {_
-    auto w = ASCII_WIDTH * 2;
-    auto h = ASCII_HEIGHT * 2;
+    auto w = TERM_WIDTH * 2;
+    auto h = TERM_HEIGHT * 2;
     game_display_flames_tiles(w, h);
     static int tick;
     if (tick) {
@@ -335,8 +335,8 @@ void game_display_title_bg (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(ASCII_WIDTH * game->config.ascii_gl_width,
-                    ASCII_HEIGHT * game->config.ascii_gl_height));
+              point(TERM_WIDTH * game->config.ascii_gl_width,
+                    TERM_HEIGHT * game->config.ascii_gl_height));
     blit_flush();
 }
 
@@ -349,8 +349,8 @@ void game_display_title_fg1 (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(ASCII_WIDTH * game->config.ascii_gl_width,
-                    ASCII_HEIGHT * game->config.ascii_gl_height));
+              point(TERM_WIDTH * game->config.ascii_gl_width,
+                    TERM_HEIGHT * game->config.ascii_gl_height));
     blit_flush();
 }
 
@@ -381,8 +381,8 @@ void game_display_title_fg2 (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(ASCII_WIDTH * game->config.ascii_gl_width,
-                    ASCII_HEIGHT * game->config.ascii_gl_height));
+              point(TERM_WIDTH * game->config.ascii_gl_width,
+                    TERM_HEIGHT * game->config.ascii_gl_height));
     blit_flush();
 }
 
@@ -443,8 +443,8 @@ void game_display_title_fg3 (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(ASCII_WIDTH * game->config.ascii_gl_width,
-                    ASCII_HEIGHT * game->config.ascii_gl_height));
+              point(TERM_WIDTH * game->config.ascii_gl_width,
+                    TERM_HEIGHT * game->config.ascii_gl_height));
     blit_flush();
 }
 
@@ -468,8 +468,8 @@ void game_display_title_fg4 (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(ASCII_WIDTH * game->config.ascii_gl_width,
-                    ASCII_HEIGHT * game->config.ascii_gl_height));
+              point(TERM_WIDTH * game->config.ascii_gl_width,
+                    TERM_HEIGHT * game->config.ascii_gl_height));
     blit_flush();
 }
 
@@ -482,7 +482,7 @@ void game_main_menu_tick (Widp w)
     game_display_title_fg3();
     game_display_title_fg4();
 
-    ascii_putf(1, ASCII_HEIGHT - 2, GREEN, BLACK, L"Version " VERSION);
+    ascii_putf(1, TERM_HEIGHT - 2, GREEN, BLACK, L"Version " VERSION);
 
     if (game->started) {
         game_main_menu_destroy();
@@ -498,8 +498,8 @@ void Game::main_menu_select (void)
     }
     game_status_wid_fini();
 
-    point tl = make_point(ASCII_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 19);
-    point br = make_point(ASCII_WIDTH - 7, ASCII_HEIGHT - 1);
+    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 19);
+    point br = make_point(TERM_WIDTH - 7, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
     game_main_menu_window = new WidPopup(tl, br, nullptr, "", false, false);

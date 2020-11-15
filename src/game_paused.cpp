@@ -103,8 +103,8 @@ void Game::pause_select (void)
     }
     game->soft_pause();
 
-    point tl = make_point(0, ASCII_HEIGHT - 14);
-    point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, ASCII_HEIGHT - 1);
+    point tl = make_point(0, TERM_HEIGHT - 8);
+    point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 1;
 
     wid_paused_window =

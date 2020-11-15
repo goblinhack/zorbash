@@ -780,14 +780,14 @@ int Thing::is_rrr59(void) const
     return (tp()->is_rrr59());
 }
 
-int Thing::z_ascii_depth(void) const
+int Thing::is_rrr_98(void) const
 {_
-    return (tp()->z_ascii_depth());
+    return (tp()->is_rrr_98());
 }
 
-int Thing::gfx_ascii_show_outlined(void) const
+int Thing::gfx_is_rrr99(void) const
 {_
-    return (tp()->gfx_ascii_show_outlined());
+    return (tp()->gfx_is_rrr99());
 }
 
 int Thing::is_shown_uniquely_on_monstbar(void) const

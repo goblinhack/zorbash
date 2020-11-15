@@ -185,10 +185,10 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
             game->config.key_throw = 0;
         }
     }
-    if (game->config.key_gfx_mode) {
-        if (game->config.key_gfx_mode == code) {
+    if (game->config.key_unused99) {
+        if (game->config.key_unused99 == code) {
             MINICON("%%fg=orange$Conflicting key, disabling key gfx mode");
-            game->config.key_gfx_mode = 0;
+            game->config.key_unused99 = 0;
         }
     }
     if (game->config.key_console) {
@@ -397,11 +397,11 @@ static void game_config_key_throw_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
-static void game_config_key_gfx_mode_set (SDL_Scancode code)
+static void game_config_key_unused99_set (SDL_Scancode code)
 {_
-    game->config.key_gfx_mode = 0;
+    game->config.key_unused99 = 0;
     game_config_check_for_conflicts(code);
-    game->config.key_gfx_mode = code;
+    game->config.key_unused99 = code;
     game->config_keyboard_select();
 }
 
@@ -583,7 +583,7 @@ static void game_config_key_screenshot_set (SDL_Scancode code)
 
 static void grab_key (void)
 {_
-    game_notice("Press any key");
+    game_notice("Press a key");
     g_grab_next_key = true;
 }
 
@@ -701,10 +701,10 @@ uint8_t game_config_key_throw (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
-uint8_t game_config_key_gfx_mode (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_key_unused99 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
-    on_sdl_key_grab = game_config_key_gfx_mode_set;
+    on_sdl_key_grab = game_config_key_unused99_set;
     return (true);
 }
 
@@ -906,7 +906,7 @@ void Game::config_keyboard_select (void)
     }
     game->soft_pause();
 
-    auto m = ASCII_WIDTH / 2;
+    auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2,
                           UI_MINICON_VIS_HEIGHT + 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2,
@@ -1850,8 +1850,8 @@ void Game::config_keyboard_select (void)
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_gfx_mode));
-        wid_set_on_mouse_up(w, game_config_key_gfx_mode);
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_unused99));
+        wid_set_on_mouse_up(w, game_config_key_unused99);
     }
     ///////////////////////////////////////////////////////////////////////
     // screenshot

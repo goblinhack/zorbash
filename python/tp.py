@@ -356,11 +356,11 @@ class Tp:
     def set_is_rrr59(self, value):
         zx.tp_set_is_rrr59(self, value)
 
-    def set_z_ascii_depth(self, value):
-        zx.tp_set_z_ascii_depth(self, value)
+    def set_is_rrr_98(self, value):
+        zx.tp_set_is_rrr_98(self, value)
 
-    def set_gfx_ascii_show_outlined(self, value):
-        zx.tp_set_gfx_ascii_show_outlined(self, value)
+    def set_gfx_is_rrr99(self, value):
+        zx.tp_set_gfx_is_rrr99(self, value)
 
     def set_is_shown_uniquely_on_monstbar(self, value):
         zx.tp_set_is_shown_uniquely_on_monstbar(self, value)

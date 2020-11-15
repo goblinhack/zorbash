@@ -681,8 +681,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr58)
     TP_SET_DECL(is_rrr59)
     TP_SET_DECL(is_rrr6)
-    TP_SET_DECL(z_ascii_depth)
-    TP_SET_DECL(gfx_ascii_show_outlined)
+    TP_SET_DECL(is_rrr_98)
+    TP_SET_DECL(gfx_is_rrr99)
     TP_SET_DECL(is_shown_uniquely_on_monstbar)
     TP_SET_DECL(is_stamina_check)
     TP_SET_DECL(gfx_shown_in_bg)
@@ -1024,8 +1024,8 @@ PyObject *abs_to_pct_ (PyObject *obj, PyObject *args, PyObject *keywds)
         return (0);
     }
 
-    x /= (double) ASCII_WIDTH;
-    y /= (double) ASCII_HEIGHT;
+    x /= (double) TERM_WIDTH;
+    y /= (double) TERM_HEIGHT;
 
     return (Py_BuildValue("dd", x, y));
 }
@@ -1044,16 +1044,16 @@ PyObject *pct_to_abs_ (PyObject *obj, PyObject *args, PyObject *keywds)
         return (0);
     }
 
-    x *= (double) ASCII_WIDTH;
-    y *= (double) ASCII_HEIGHT;
+    x *= (double) TERM_WIDTH;
+    y *= (double) TERM_HEIGHT;
 
     return (Py_BuildValue("dd", x, y));
 }
 
 static void python_add_consts (void)
 {_
-    PyModule_AddIntConstant(zx_mod, "ASCII_HEIGHT", ASCII_HEIGHT);
-    PyModule_AddIntConstant(zx_mod, "ASCII_WIDTH", ASCII_WIDTH);
+    PyModule_AddIntConstant(zx_mod, "TERM_HEIGHT", TERM_HEIGHT);
+    PyModule_AddIntConstant(zx_mod, "TERM_WIDTH", TERM_WIDTH);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_CHASM", MAP_DEPTH_CHASM);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR2", MAP_DEPTH_FLOOR2);

@@ -509,7 +509,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_quit                     */ in >> bits(my.t.key_quit                     );
     /* uint32_t           key_save                     */ in >> bits(my.t.key_save                     );
     /* uint32_t           key_screenshot               */ in >> bits(my.t.key_screenshot               );
-    /* uint32_t           key_gfx_mode                 */ in >> bits(my.t.key_gfx_mode                  );
+    /* uint32_t           key_unused99                 */ in >> bits(my.t.key_unused99                  );
     /* uint32_t           key_console                  */ in >> bits(my.t.key_console                  );
     /* uint32_t           key_unused3                  */ in >> bits(my.t.key_unused3                  );
     /* uint32_t           key_unused4                  */ in >> bits(my.t.key_unused4                  );
@@ -530,7 +530,6 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
         my.t.gfx_zoom = 1;
     }
 
-    g_opt_ascii_mode = my.t.ascii_mode;
     return (in);
 }
 
@@ -863,7 +862,7 @@ void Game::load_select (void)
     }
     game->hard_pause();
 
-    auto m = ASCII_WIDTH / 2;
+    auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
                           UI_MINICON_VIS_HEIGHT + 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,

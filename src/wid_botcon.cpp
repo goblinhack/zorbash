@@ -189,8 +189,8 @@ static void wid_botcon_wid_create (void)
     int h = UI_BOTCON_VIS_HEIGHT;
 
     {
-        point tl = make_point(0, ASCII_HEIGHT - h);
-        point br = make_point(UI_BOTCON_VIS_WIDTH - 1, ASCII_HEIGHT - 1);
+        point tl = make_point(0, TERM_HEIGHT - h);
+        point br = make_point(UI_BOTCON_VIS_WIDTH - 1, TERM_HEIGHT - 1);
 
         wid_botcon_window = wid_new_square_window("wid botcon");
         wid_set_name(wid_botcon_window, "wid botcon window");
