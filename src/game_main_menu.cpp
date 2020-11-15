@@ -140,9 +140,10 @@ uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
 std::array<std::array<color, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> bg {};
 std::array<std::array<color, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> bg2 {};
 
-void game_draw_flames (int w, int h)
+void game_display_flames_tiles (int w, int h)
 {_
     float bright = 2.5;
+
     blit_init();
     auto tile = tile_find_mand("1.97");
     auto tw = game->config.ascii_gl_width / 2;
@@ -161,24 +162,26 @@ void game_draw_flames (int w, int h)
 
             color cn(r, g, b, 255);
 
-            if (r < 10) {
+            if (r < 1) {
+                cn = BLACK;
+                continue;
+            } else if (r < 10) {
                 cn = BLACK;
             } else if (r < 15) {
-                if (random_range(0, 100) < 10) {
+                if (random_range(0, 100) < 50) {
                     cn = BLACK;
                 } else {
                     cn = DARKRED;
-                    cn.a = 50;
                 }
             } else if (r < 50) {
                 cn = DARKRED;
-            } else if (r < 100) {
+            } else if (r < 120) {
                 cn = RED;
-            } else if (r < 150) {
+            } else if (r < 140) {
                 cn = ORANGE;
-            } else if (r < 180) {
+            } else if (r < 160) {
                 cn = YELLOW;
-            } else if (r < 190) {
+            } else if (r < 180) {
                 cn = GRAY90;
             } else {
                 cn = WHITE;
@@ -194,9 +197,9 @@ void game_draw_flames (int w, int h)
     blit_flush();
 }
 
-void game_change_flames (int w, int h)
+void game_display_flames_change (int w, int h)
 {_
-    int flames = 2;
+    int flames = 3;
     while (flames--) 
     {
         auto xr = random_range(w / 4, w - w / 4);
@@ -210,7 +213,7 @@ void game_change_flames (int w, int h)
             set(bg, xr + 1, h - 1, GRAY10);
             set(bg, xr + 2, h - 1, GRAY10);
             set(bg, xr + 3, h - 1, GRAY10);
-        } else {
+        } else if (r < 60) {
             set(bg, xr - 1, h - 1, BLACK);
             set(bg, xr - 2, h - 1, BLACK);
             set(bg, xr    , h - 1, BLACK);
@@ -220,11 +223,11 @@ void game_change_flames (int w, int h)
     }
 
     for (auto x = 0; x < w; x++) {
-        if (random_range(0, 100) < 95) {
+        if (random_range(0, 100) < 99) {
             continue;
         }
 
-        int sparks = 5;
+        int sparks = 1;
         while (sparks--) {
             for (auto y = 0; y < h - 1; y++) {
                 auto c0 = get(bg, x, y);
@@ -244,7 +247,7 @@ void game_change_flames (int w, int h)
             continue;
         }
 
-        int scroll = 10;
+        int scroll = 5;
         while (scroll--) {
             for (auto y = 0; y < h - 1; y++) {
                 auto c1 = get(bg, x, y + 1);
@@ -258,7 +261,7 @@ void game_change_flames (int w, int h)
             continue;
         }
 
-        int scroll = 5;
+        int scroll = 3;
         while (scroll--) {
             for (auto y = 0; y < h - 1; y++) {
                 auto c1 = get(bg, x, y + 1);
@@ -271,7 +274,7 @@ void game_change_flames (int w, int h)
         if (random_range(0, 100) < 50) {
             continue;
         }
-        int scroll = 2;
+        int scroll = 3;
         while (scroll--) {
             for (auto y = 0; y < h - 1; y++) {
                 auto c1 = get(bg, x, y + 1);
@@ -308,26 +311,147 @@ void game_change_flames (int w, int h)
             }
         }
     }
-
 }
 
-void game_main_menu_tick (Widp w)
+void game_display_flames (void)
 {_
+    auto w = ASCII_WIDTH * 2;
+    auto h = ASCII_HEIGHT * 2;
+    game_display_flames_tiles(w, h);
+    static int tick;
+    if (tick) {
+        game_display_flames_change(w, h);
+        tick = 0;
+    }
+    tick++;
+}
+
+void game_display_title_bg (void)
+{_
+    glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    {
-        auto w = ASCII_WIDTH * 2;
-        auto h = ASCII_HEIGHT * 2;
-        game_draw_flames(w, h);
-        static int tick;
-        if (tick) {
-            game_change_flames(w, h);
-            tick = 0;
+    std::string t = "title_bg";
+    blit_init();
+    tile_blit(tile_find_mand(t.c_str()),
+              point(0,0),
+              point(ASCII_WIDTH * game->config.ascii_gl_width,
+                    ASCII_HEIGHT * game->config.ascii_gl_height));
+    blit_flush();
+}
+
+void game_display_title_fg1 (void)
+{_
+    glcolor(WHITE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    std::string t = "title_fg1_1";
+    blit_init();
+    tile_blit(tile_find_mand(t.c_str()),
+              point(0,0),
+              point(ASCII_WIDTH * game->config.ascii_gl_width,
+                    ASCII_HEIGHT * game->config.ascii_gl_height));
+    blit_flush();
+}
+
+void game_display_title_fg2 (void)
+{_
+    static color fg = WHITE;
+    static int delta = 10;
+    static int red = 255;
+
+    if (random_range(0, 100) < 50) {
+        red += delta;
+        if (red > 255) {
+            delta = - delta;
+            red = 255;
+        } else if (red < 200) {
+            delta = - delta;
+            red = 200;
         }
-        tick++;
     }
 
+    fg.g = red;
+    fg.b = red;
+    glcolor(fg);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    std::string t = "title_fg2_1";
+    blit_init();
+    tile_blit(tile_find_mand(t.c_str()),
+              point(0,0),
+              point(ASCII_WIDTH * game->config.ascii_gl_width,
+                    ASCII_HEIGHT * game->config.ascii_gl_height));
+    blit_flush();
+}
+
+
+uint8_t clamp(float v) //define a function to bound and round the input float value to 0-255
+{
+    if (v < 0)
+        return 0;
+    if (v > 255)
+        return 255;
+    return (uint8_t)v;
+}
+
+// https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color#8509802
+color TransformH(const color &in, const float fHue)
+{
+    color out;
+    const float cosA = cos(fHue*3.14159265f/180); //convert degrees to radians
+    const float sinA = sin(fHue*3.14159265f/180); //convert degrees to radians
+    //calculate the rotation matrix, only depends on Hue
+    float matrix[3][3] = {{cosA + (1.0f - cosA) / 3.0f, 1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA, 1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA},
+        {1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA, cosA + 1.0f/3.0f*(1.0f - cosA), 1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA},
+        {1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA, 1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA, cosA + 1.0f/3.0f * (1.0f - cosA)}};
+    //Use the rotation matrix to convert the RGB directly
+    out.r = clamp(in.r*matrix[0][0] + in.g*matrix[0][1] + in.b*matrix[0][2]);
+    out.g = clamp(in.r*matrix[1][0] + in.g*matrix[1][1] + in.b*matrix[1][2]);
+    out.b = clamp(in.r*matrix[2][0] + in.g*matrix[2][1] + in.b*matrix[2][2]);
+    return out;
+}
+
+void game_display_title_fg3 (void)
+{_
+    static color fg = RED;
+    static int hue = 0;
+
+	hue=1;
+	if (hue > 255) {
+		hue = 0;
+	}
+
+	fg = TransformH(fg, hue);
+	fg.a = 255;
+
+	if (fg.r + fg.g + fg.b < 100) {
+		fg = RED;
+	}
+
+	float bright = 1.01;
+	int r = (float)fg.r * bright; if (r > 255) { r = 255; } fg.r = r;
+	int g = (float)fg.g * bright; if (g > 255) { g = 255; } fg.g = g;
+	int b = (float)fg.b * bright; if (b > 255) { b = 255; } fg.b = b;
+
+    glcolor(fg);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    std::string t = "title_fg3_1";
+    blit_init();
+    tile_blit(tile_find_mand(t.c_str()),
+              point(0,0),
+              point(ASCII_WIDTH * game->config.ascii_gl_width,
+                    ASCII_HEIGHT * game->config.ascii_gl_height));
+    blit_flush();
+}
+
+void game_display_title_fg4 (void)
+{_
     glcolor(WHITE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     static int frame = 1;
     static timestamp_t ts;
@@ -339,20 +463,30 @@ void game_main_menu_tick (Widp w)
         }
         ts = time_get_time_ms_cached();
     }
-    std::string t = "title" + std::to_string(frame);
+
+    std::string t = "title_fg4_" + std::to_string(frame);
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
               point(ASCII_WIDTH * game->config.ascii_gl_width,
                     ASCII_HEIGHT * game->config.ascii_gl_height));
     blit_flush();
+}
+
+void game_main_menu_tick (Widp w)
+{_
+    game_display_title_bg();
+    game_display_flames();
+    game_display_title_fg1();
+    game_display_title_fg2();
+    game_display_title_fg3();
+    game_display_title_fg4();
 
     ascii_putf(1, ASCII_HEIGHT - 2, GREEN, BLACK, L"Version " VERSION);
 
     if (game->started) {
         game_main_menu_destroy();
     }
-
 }
 
 void Game::main_menu_select (void)

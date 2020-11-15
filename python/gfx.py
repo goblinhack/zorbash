@@ -55,76 +55,108 @@ def init_ui_blood():
         file="data/gfx/blood.tga",
         name="blood", width=360, height=225, arr=tiles)
 
-def init_title():
+def init_title_fg1():
     tiles = [
-      "title1",
-      "title2",
-      "title3",
-      "title4",
-      "title5",
-      "title6",
-      "title7",
-      "title8",
-      "title9",
-      "title10",
-      "title11",
-      "title12",
-      "title13",
-      "title14",
-      "title15",
-      "title16",
-      "title17",
-      "title18",
-      "title19",
-      "title20",
-      "title21",
-      "title22",
-      "title23",
-      "title24",
-      "title25",
-      "title26",
-      "title27",
-      "title28",
-      "title29",
-      "title30",
-      "title31",
-      "title32",
-      "title33",
-      "title34",
-      "title35",
-      "title36",
-      "title37",
-      "title38",
-      "title39",
-      "title40",
-      "title41",
-      "title42",
-      "title43",
-      "title44",
-      "title45",
-      "title46",
-      "title47",
-      "title48",
-      "title49",
-      "title50",
-      "title51",
-      "title52",
-      "title53",
-      "title54",
-      "title55",
-      "title56",
-      "title57",
-      "title58",
-      "title59",
-      "title60",
-      "title61",
-      "title62",
-      "title63",
-      "title64",
+      "title_fg1_1",
     ]
     zx.tile_load_arr(
-        file="data/gfx/zorbash.tga",
-        name="title", width=200, height=86, arr=tiles)
+        file="data/gfx/title_fg1.tga",
+        name="title_fg1", width=200, height=86, arr=tiles)
+
+def init_title_fg2():
+    tiles = [
+      "title_fg2_1",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/title_fg2.tga",
+        name="title_fg2", width=200, height=86, arr=tiles)
+
+def init_title_fg3():
+    tiles = [
+      "title_fg3_1",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/title_fg3.tga",
+        name="title_fg3", width=200, height=86, arr=tiles)
+
+def init_title_fg4():
+    tiles = [
+      "title_fg4_1",
+      "title_fg4_2",
+      "title_fg4_3",
+      "title_fg4_4",
+      "title_fg4_5",
+      "title_fg4_6",
+      "title_fg4_7",
+      "title_fg4_8",
+      "title_fg4_9",
+      "title_fg4_10",
+      "title_fg4_11",
+      "title_fg4_12",
+      "title_fg4_13",
+      "title_fg4_14",
+      "title_fg4_15",
+      "title_fg4_16",
+      "title_fg4_17",
+      "title_fg4_18",
+      "title_fg4_19",
+      "title_fg4_20",
+      "title_fg4_21",
+      "title_fg4_22",
+      "title_fg4_23",
+      "title_fg4_24",
+      "title_fg4_25",
+      "title_fg4_26",
+      "title_fg4_27",
+      "title_fg4_28",
+      "title_fg4_29",
+      "title_fg4_30",
+      "title_fg4_31",
+      "title_fg4_32",
+      "title_fg4_33",
+      "title_fg4_34",
+      "title_fg4_35",
+      "title_fg4_36",
+      "title_fg4_37",
+      "title_fg4_38",
+      "title_fg4_39",
+      "title_fg4_40",
+      "title_fg4_41",
+      "title_fg4_42",
+      "title_fg4_43",
+      "title_fg4_44",
+      "title_fg4_45",
+      "title_fg4_46",
+      "title_fg4_47",
+      "title_fg4_48",
+      "title_fg4_49",
+      "title_fg4_50",
+      "title_fg4_51",
+      "title_fg4_52",
+      "title_fg4_53",
+      "title_fg4_54",
+      "title_fg4_55",
+      "title_fg4_56",
+      "title_fg4_57",
+      "title_fg4_58",
+      "title_fg4_59",
+      "title_fg4_60",
+      "title_fg4_61",
+      "title_fg4_62",
+      "title_fg4_63",
+      "title_fg4_64",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/title_fg4.tga",
+        name="title_fg4", width=200, height=86, arr=tiles)
+
+def init_title_bg():
+    tiles = [
+      "title_bg",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/title_bg.tga",
+        name="title_bg", width=200, height=86, arr=tiles)
 
 def init_ui_dead():
     tiles = [
@@ -5794,7 +5826,11 @@ def init_claws_tiles():
         name="claws", width=32, height=32, arr=tiles)
 
 init_solid()
-init_title()
+init_title_fg1()
+init_title_fg2()
+init_title_fg3()
+init_title_fg4()
+init_title_bg()
 init_bloom()
 init_ui_status_bar()
 init_ui_status_bar_title()
