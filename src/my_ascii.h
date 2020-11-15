@@ -27,30 +27,30 @@ struct ascii_ {
     // UI triggers for ASCII co-ords.
     //
     std::array<std::array<int32_t,
-                    ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> sdl_mod {};
+                    TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> sdl_mod {};
     std::array<std::array<int32_t,
-                    ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> sdl_key {};
+                    TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> sdl_key {};
     std::array<std::array<int32_t,
-                    ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> mouse_button {};
+                    TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> mouse_button {};
 
     //
     // Callbacks for ASCII co-ords.
     //
     std::array<
-      std::array<ascii_key_down_callback, ASCII_HEIGHT_MAX>,
-                    ASCII_WIDTH_MAX> key_down {};
+      std::array<ascii_key_down_callback, TERM_HEIGHT_MAX>,
+                    TERM_WIDTH_MAX> key_down {};
     std::array<
-      std::array<ascii_mouse_down_callback, ASCII_HEIGHT_MAX>,
-                    ASCII_WIDTH_MAX> mouse_down {};
+      std::array<ascii_mouse_down_callback, TERM_HEIGHT_MAX>,
+                    TERM_WIDTH_MAX> mouse_down {};
     std::array<
-      std::array<ascii_mouse_over_callback, ASCII_HEIGHT_MAX>,
-                    ASCII_WIDTH_MAX> mouse_over {};
+      std::array<ascii_mouse_over_callback, TERM_HEIGHT_MAX>,
+                    TERM_WIDTH_MAX> mouse_over {};
 };
 
 extern struct ascii_ ascii;
 
-extern int ASCII_WIDTH;
-extern int ASCII_HEIGHT;
+extern int TERM_WIDTH;
+extern int TERM_HEIGHT;
 extern void ascii_init(void);
 
 void pixel_to_ascii(int *x, int *y);
@@ -162,7 +162,7 @@ static inline int ascii_ok (int x, int y)
         return (false);
     }
 
-    if (unlikely(x >= ASCII_WIDTH)) {
+    if (unlikely(x >= TERM_WIDTH)) {
         return (false);
     }
 
@@ -170,7 +170,7 @@ static inline int ascii_ok (int x, int y)
         return (false);
     }
 
-    if (unlikely(y >= ASCII_HEIGHT)) {
+    if (unlikely(y >= TERM_HEIGHT)) {
         return (false);
     }
 
@@ -183,7 +183,7 @@ static inline int ascii_x_ok (int x)
         return (false);
     }
 
-    if (unlikely(x >= ASCII_WIDTH)) {
+    if (unlikely(x >= TERM_WIDTH)) {
         return (false);
     }
 
@@ -196,7 +196,7 @@ static inline int ascii_y_ok (int y)
         return (false);
     }
 
-    if (unlikely(y >= ASCII_HEIGHT)) {
+    if (unlikely(y >= TERM_HEIGHT)) {
         return (false);
     }
 
@@ -207,9 +207,5 @@ extern float tile_pix_w;
 extern float tile_pix_h;
 extern int ascii_mouse_x;
 extern int ascii_mouse_y;
-
-#define ASCII_CURSOR_UCHAR ((wchar_t)('z' + 6))
-#define ASCII_CURSOR_TILE  "2.97" // block
-#define ASCII_UNKNOWN_TILE "2.31" // ?
 
 #endif

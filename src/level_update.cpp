@@ -13,6 +13,5 @@ void Level::update (void)
     heatmap_valid = false;
 
     lights_update();
-    get_tiles();
     scroll_map_to_player();
 }

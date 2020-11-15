@@ -37,12 +37,12 @@ public:
     // Unique per room.
     //
     uint32_t                roomno {0};
-    uint8_t                 width  {ROOM_WIDTH};
-    uint8_t                 height {ROOM_HEIGHT};
+    uint8_t                 width  {MAP_ROOM_WIDTH};
+    uint8_t                 height {MAP_ROOM_HEIGHT};
 
     std::array<
       std::array<
-        std::array<char, MAP_DEPTH>, ROOM_HEIGHT>, ROOM_WIDTH> data {};
+        std::array<char, MAP_DEPTH>, MAP_ROOM_HEIGHT>, MAP_ROOM_WIDTH> data {};
 
     bool                    has_door_up    {false};
     bool                    has_door_down  {false};

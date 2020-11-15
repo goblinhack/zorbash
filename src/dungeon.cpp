@@ -1015,14 +1015,14 @@ bool Dungeon::is_deep_water_no_check (const int x, const int y)
 
 void Dungeon::create_node_map (void)
 {
-    if (grid_width > GRID_WIDTH) {
+    if (grid_width > MAP_GRID_WIDTH) {
         ERR("nodes width overflow. got %d, max %d",
-            grid_width, GRID_WIDTH);
+            grid_width, MAP_GRID_WIDTH);
     }
 
-    if (grid_height > GRID_HEIGHT) {
+    if (grid_height > MAP_GRID_HEIGHT) {
         ERR("nodes height overflow. got %d, max %d",
-            grid_height, GRID_HEIGHT);
+            grid_height, MAP_GRID_HEIGHT);
     }
 
     nodes = new Nodes(grid_width, grid_height);
@@ -1055,8 +1055,8 @@ void Dungeon::dump (void)
                 if (nodes) {
                     if (!(x % 2) && !(y % 2)) {
                         if (!is_wall(x, y) && is_floor(x, y)) {
-                            auto X = (x - MAP_BORDER) / ROOM_WIDTH;
-                            auto Y = (y - MAP_BORDER) / ROOM_HEIGHT;
+                            auto X = (x - MAP_BORDER_TOTAL) / MAP_ROOM_WIDTH;
+                            auto Y = (y - MAP_BORDER_TOTAL) / MAP_ROOM_HEIGHT;
                             auto n = nodes->getn(X, Y);
                             if (n) {
                                 c = '0' + n->depth;
@@ -1065,8 +1065,8 @@ void Dungeon::dump (void)
                     }
                 }
 
-                if (!((x-MAP_BORDER) % ROOM_WIDTH) ||
-                    !((y-MAP_BORDER) % ROOM_HEIGHT)) {
+                if (!((x-MAP_BORDER_TOTAL) % MAP_ROOM_WIDTH) ||
+                    !((y-MAP_BORDER_TOTAL) % MAP_ROOM_HEIGHT)) {
                     if (is_wall(x, y)) {
                         c = 'X';
                     }
@@ -1218,8 +1218,8 @@ void Dungeon::rooms_print_all (Grid *g)
             }
 
             Roomp r = get(g->node_rooms, x, y);
-            auto rx = x * ROOM_WIDTH + MAP_BORDER;
-            auto ry = y * ROOM_HEIGHT + MAP_BORDER;
+            auto rx = x * MAP_ROOM_WIDTH + MAP_BORDER_TOTAL;
+            auto ry = y * MAP_ROOM_HEIGHT + MAP_BORDER_TOTAL;
             room_print_at(r, rx, ry);
         }
     }
@@ -1449,7 +1449,7 @@ bool Dungeon::create_cyclic_rooms (Grid *g)
 void Dungeon::add_border (void)
 {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_BORDER; x++) {
+        for (auto x = 0; x < MAP_BORDER_TOTAL; x++) {
             if (! is_anything_at_no_check(x, y)) {
                 putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
             }
@@ -1459,7 +1459,7 @@ void Dungeon::add_border (void)
         }
     }
     for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_BORDER; y++) {
+        for (auto y = 0; y < MAP_BORDER_TOTAL; y++) {
             if (! is_anything_at_no_check(x, y)) {
                 putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
             }
@@ -1470,13 +1470,13 @@ void Dungeon::add_border (void)
     }
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_ROCK_BORDER; x++) {
+        for (auto x = 0; x < MAP_BORDER_ROCK; x++) {
             putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
             putc(MAP_WIDTH - (x+1), y, MAP_DEPTH_OBJ, Charmap::ROCK);
         }
     }
     for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_ROCK_BORDER; y++) {
+        for (auto y = 0; y < MAP_BORDER_ROCK; y++) {
             putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
             putc(x, MAP_HEIGHT - (y+1), MAP_DEPTH_OBJ, Charmap::ROCK);
         }
@@ -2205,17 +2205,17 @@ void Dungeon::map_place_room_ptr (Roomp r, int x, int y)
 //
 bool Dungeon::can_place_room (Roomp r, int x, int y)
 {
-    if (x < MAP_BORDER) {
+    if (x < MAP_BORDER_TOTAL) {
         return false;
     }
-    if (x + r->width >= map_width - MAP_BORDER) {
+    if (x + r->width >= map_width - MAP_BORDER_TOTAL) {
         return false;
     }
 
-    if (y < MAP_BORDER) {
+    if (y < MAP_BORDER_TOTAL) {
         return false;
     }
-    if (y + r->height >= map_height - MAP_BORDER) {
+    if (y + r->height >= map_height - MAP_BORDER_TOTAL) {
         return false;
     }
 
@@ -3475,14 +3475,14 @@ Dungeonp dungeon_test (void)
         // smaller node numbers mean larger rooms
         //
         mysrand(x);
-        new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
+        new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH, MAP_GRID_HEIGHT, x);
     }
 
     return (nullptr);
 #else
     int x = 663;
     mysrand(x);
-    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
+    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH, MAP_GRID_HEIGHT, x);
 
     return (d);
 #endif

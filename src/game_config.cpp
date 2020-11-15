@@ -112,11 +112,11 @@ void Game::config_top_select (void)
     game_status_wid_fini();
 
     point tl = make_point(
-                ASCII_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2,
-                ASCII_HEIGHT / 2 - 4);
+                TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2,
+                TERM_HEIGHT / 2 - 4);
     point br = make_point(
-                ASCII_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1,
-                ASCII_HEIGHT / 2 + 14);
+                TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1,
+                TERM_HEIGHT / 2 + 14);
     auto width = br.x - tl.x - 2;
 
     game_config_top_window = new WidPopup(tl, br, nullptr, "", false, false);

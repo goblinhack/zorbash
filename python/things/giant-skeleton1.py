@@ -17,7 +17,6 @@ def tp_init(name, text_name):
     x.set_gfx_bounce_on_move(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
-    x.set_gfx_ascii_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_change_levels(True)
     x.set_is_acid_hater(True)

@@ -60,10 +60,6 @@ void Thing::init (Levelp level,
     //
     z_depth = tp()->z_depth;
 
-    if (g_opt_ascii_mode) {
-        z_depth = tpp->z_ascii_depth();
-    }
- 
     //
     // Start off up to data with the player
     //

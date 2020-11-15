@@ -11,8 +11,8 @@
 
 struct ascii_ ascii;
 
-int ASCII_WIDTH;
-int ASCII_HEIGHT;
+int TERM_WIDTH;
+int TERM_HEIGHT;
 int ascii_mouse_x;
 int ascii_mouse_y;
 
@@ -75,9 +75,9 @@ static std::vector<std::vector<AsciiCell> > cells;
 
 void ascii_init (void)
 {
-    cells.resize(ASCII_WIDTH_MAX);
-    for (auto x = 0; x < ASCII_WIDTH_MAX; x++) {
-        cells[x].resize(ASCII_HEIGHT_MAX);
+    cells.resize(TERM_WIDTH_MAX);
+    for (auto x = 0; x < TERM_WIDTH_MAX; x++) {
+        cells[x].resize(TERM_HEIGHT_MAX);
     }
 }
 
@@ -109,21 +109,21 @@ void pixel_to_ascii (int *x, int *y)
     float mx = *x;
     float my = *y;
 
-    float w = game->config.ascii_gl_width * (float)ASCII_WIDTH;
-    float h = game->config.ascii_gl_height * (float)ASCII_HEIGHT;
+    float w = game->config.ascii_gl_width * (float)TERM_WIDTH;
+    float h = game->config.ascii_gl_height * (float)TERM_HEIGHT;
 
     mx /= w;
     my /= h;
 
-    mx *= ASCII_WIDTH;
-    my *= ASCII_HEIGHT;
+    mx *= TERM_WIDTH;
+    my *= TERM_HEIGHT;
 
-    if (mx >= ASCII_WIDTH - 1) {
-        mx = ASCII_WIDTH - 1;
+    if (mx >= TERM_WIDTH - 1) {
+        mx = TERM_WIDTH - 1;
     }
 
-    if (my >= ASCII_HEIGHT - 1) {
-        my = ASCII_HEIGHT - 1;
+    if (my >= TERM_HEIGHT - 1) {
+        my = TERM_HEIGHT - 1;
     }
 
     *x = mx;
@@ -134,7 +134,7 @@ void pixel_to_ascii (int *x, int *y)
 
 static int ascii_ok_for_scissors (int x, int y)
 {
-    if ((x < 0) || (y < 0) || (x >= ASCII_WIDTH) || (y >= ASCII_HEIGHT)) {
+    if ((x < 0) || (y < 0) || (x >= TERM_WIDTH) || (y >= TERM_HEIGHT)) {
         return (false);
     }
 
@@ -431,7 +431,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
         return;
     }
 
-    if (unlikely(y >= ASCII_HEIGHT)) {
+    if (unlikely(y >= TERM_HEIGHT)) {
         return;
     }
 
@@ -494,13 +494,13 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
         if (!tile) {
             tile = fixed_font->unicode_to_tile(c);
             if (tile == nullptr) {
-                tile = tile_find_mand(ASCII_UNKNOWN_TILE);
+                tile = tile_find_mand(TILE_UNKNOWN_NAME);
             }
         }
 
         auto saved_fg = fg;
 
-        auto is_cursor = (c == ASCII_CURSOR_UCHAR);
+        auto is_cursor = (c == TILE_CURSOR);
         if (unlikely(is_cursor)) {
             static uint32_t last;
             static uint8_t first = true;
@@ -533,7 +533,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             if (bg.r || bg.g || bg.b || bg.a) {
                 static Tilep tile;
                 if (!tile) {
-                    tile = tile_find_mand(ASCII_CURSOR_TILE);
+                    tile = tile_find_mand(TILE_CURSOR_NAME);
                 }
                 cell->bg_tile = tile;
             } else {
@@ -844,7 +844,7 @@ static void ascii_display_mouse (point mouse_tile_tl,
     glcolor(GREEN);
 
     blit_init();
-    tile_blit(tile_find_mand(ASCII_CURSOR_TILE),
+    tile_blit(tile_find_mand(TILE_CURSOR_NAME),
               point(mouse_tile_tl.x, mouse_tile_tl.y),
               point(mouse_tile_br.x, mouse_tile_br.y));
     blit_flush();
@@ -1009,10 +1009,10 @@ static void ascii_blit (void)
     float my = mouse_y;
 
     tile_y = 0;
-    for (y = 0; y < ASCII_HEIGHT; y++) {
+    for (y = 0; y < TERM_HEIGHT; y++) {
 
         tile_x = 0;
-        for (x = 0; x < ASCII_WIDTH; x++) {
+        for (x = 0; x < TERM_WIDTH; x++) {
 
             const AsciiCell *cell = &getref(cells, x, y);
 
@@ -1079,10 +1079,10 @@ static void ascii_blit (void)
     // Tiles
     //
     tile_y = 0;
-    for (y = 0; y < ASCII_HEIGHT; y++) {
+    for (y = 0; y < TERM_HEIGHT; y++) {
 
         tile_x = 0;
-        for (x = 0; x < ASCII_WIDTH; x++) {
+        for (x = 0; x < TERM_WIDTH; x++) {
 
             const AsciiCell *cell = &getref(cells, x, y);
 
@@ -1137,9 +1137,9 @@ static void ascii_blit (void)
     }
 
     tile_y = 0;
-    for (y = 0; y < ASCII_HEIGHT; y++) {
+    for (y = 0; y < TERM_HEIGHT; y++) {
         tile_x = 0;
-        for (x = 0; x < ASCII_WIDTH; x++) {
+        for (x = 0; x < TERM_WIDTH; x++) {
             const AsciiCell *cell = &getref_no_check(cells, x, y);
 
             point tile_tl;
@@ -1201,8 +1201,8 @@ void ascii_display (void)
 
 void ascii_clear_display (void)
 {_
-    for (auto y = 0; y < ASCII_HEIGHT; y++) {
-        for (auto x = 0; x < ASCII_WIDTH; x++) {
+    for (auto y = 0; y < TERM_HEIGHT; y++) {
+        for (auto x = 0; x < TERM_WIDTH; x++) {
             cells[x][y] = {};
         }
     }

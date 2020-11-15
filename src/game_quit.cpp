@@ -88,10 +88,10 @@ void Game::quit_select (void)
     }
     game->soft_pause();
 
-    auto m = ASCII_WIDTH / 2;
-    auto n = ASCII_HEIGHT / 2;
+    auto m = TERM_WIDTH / 2;
+    auto n = TERM_HEIGHT / 2;
     if (game->started) {
-        n = ASCII_HEIGHT / 3;
+        n = TERM_HEIGHT / 3;
     }
     point tl = make_point(m - UI_WID_POPUP_WIDTH_NORMAL / 2, n - 3);
     point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2, n + 3);

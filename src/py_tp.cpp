@@ -518,18 +518,11 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         Py_RETURN_NONE;
     }
 
-    for (auto i = 0; i < TILE_MAX_MODES; i++) {
+    {
         if (py_tile_name && *py_tile_name) {
             Tilep tile;
 
             tile = tile_find(std::string(py_tile_name));
-            if (i == TILE_MODE_ASCII) {
-                auto ascii_tile = tile_find("ascii." + std::string(py_tile_name));
-                if (ascii_tile) {
-                    tile = ascii_tile;
-                }
-            }
-
             if (!tile) {
                 ERR("%s, cannot find tile '%s' for tp %s",
                     __FUNCTION__, py_tile_name, tp_name);
@@ -543,8 +536,8 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                 tile = new Tile(tile);
             }
 
-            tile->index = (*tiles)[i].size();
-            (*tiles)[i].push_back(tile);
+            tile->index = (*tiles).size();
+            (*tiles).push_back(tile);
             tile->in_use = true;
 
             tile->delay_ms = delay_ms;
@@ -612,7 +605,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                 tp->set_internal_has_dir_anim(true);
             }
         } else {
-            (*tiles)[i].push_back(nullptr);
+            (*tiles).push_back(nullptr);
         }
     }
 
@@ -869,8 +862,8 @@ TP_BODY_SET_INT(is_rrr57)
 TP_BODY_SET_INT(is_rrr58)
 TP_BODY_SET_INT(is_rrr59)
 TP_BODY_SET_INT(is_rrr6)
-TP_BODY_SET_INT(z_ascii_depth)
-TP_BODY_SET_INT(gfx_ascii_show_outlined)
+TP_BODY_SET_INT(is_rrr_98)
+TP_BODY_SET_INT(gfx_is_rrr99)
 TP_BODY_SET_INT(is_shown_uniquely_on_monstbar)
 TP_BODY_SET_INT(is_stamina_check)
 TP_BODY_SET_INT(gfx_shown_in_bg)

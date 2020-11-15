@@ -520,12 +520,6 @@ static void parse_args (int32_t argc, char *argv[])
             continue;
         }
 
-        if (!strcasecmp(argv[i], "--ascii-mode") ||
-            !strcasecmp(argv[i], "-ascii-mode")) {
-            g_opt_ascii_mode = true;
-            continue;
-        }
-
         if (!strcasecmp(argv[i], "--seed") ||
             !strcasecmp(argv[i], "-seed") ||
             !strcasecmp(argv[i], "-s")) {
@@ -630,12 +624,6 @@ int32_t main (int32_t argc, char *argv[])
     CON("INIT: Load game config");
     game = new Game(std::string(appdata));
     game->load_config();
-
-    if (g_opt_ascii_mode) {
-        if (game) {
-            game->config.ascii_mode = g_opt_ascii_mode;
-        }
-    }
 
     if (g_opt_debug) {
         if (game) {
@@ -779,9 +767,6 @@ int32_t main (int32_t argc, char *argv[])
     room_init();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
    
-    CON("INIT: Find alternative tiles");
-    tile_update();
-
 #if 0
     game->init();
     game->load();

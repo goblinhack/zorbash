@@ -18,7 +18,6 @@ def tp_init(name, text_name):
     x.set_gfx_anim_attack("pink_splatter")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
-    x.set_gfx_ascii_show_outlined(False)
     x.set_gfx_bounce_on_move(True)
     x.set_gfx_health_bar_shown(True)
     x.set_gfx_moves_ahead_shown(True)

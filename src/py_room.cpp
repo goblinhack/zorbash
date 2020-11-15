@@ -65,17 +65,17 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     int room_data_elems = PyList_Size(py_room_data);
-    if (room_data_elems % ROOM_HEIGHT) {
+    if (room_data_elems % MAP_ROOM_HEIGHT) {
         ERR("room elems needs to be evenly dividable by room height %d, got %d elems",
-            (int) ROOM_HEIGHT, (int) PyList_Size(py_room_data));
+            (int) MAP_ROOM_HEIGHT, (int) PyList_Size(py_room_data));
     }
 
-    int rooms_across = room_data_elems / ROOM_HEIGHT;
+    int rooms_across = room_data_elems / MAP_ROOM_HEIGHT;
 
     for (auto n=0; n < rooms_across; n++) {
         auto r = Room::room_new();
 
-        for (auto y=0; y<ROOM_HEIGHT; y++) {
+        for (auto y=0; y<MAP_ROOM_HEIGHT; y++) {
             auto o = PyList_GetItem(py_room_data,
                                     rooms_across * y + n); /* Can't fail */
             if (!o) {
@@ -173,32 +173,32 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
             }
 
-            if (floor_string.size() != ROOM_WIDTH){
+            if (floor_string.size() != MAP_ROOM_WIDTH){
                 ERR("room floor width mismatch, %d, expected %d",
-                    (int)floor_string.size(), ROOM_WIDTH);
+                    (int)floor_string.size(), MAP_ROOM_WIDTH);
             }
-            if (water_string.size() != ROOM_WIDTH){
+            if (water_string.size() != MAP_ROOM_WIDTH){
                 ERR("room water width mismatch, %d, expected %d",
-                    (int)water_string.size(), ROOM_WIDTH);
+                    (int)water_string.size(), MAP_ROOM_WIDTH);
             }
-            if (lava_string.size() != ROOM_WIDTH){
+            if (lava_string.size() != MAP_ROOM_WIDTH){
                 ERR("room lava width mismatch, %d, expected %d",
-                    (int)lava_string.size(), ROOM_WIDTH);
+                    (int)lava_string.size(), MAP_ROOM_WIDTH);
             }
-            if (chasm_string.size() != ROOM_WIDTH){
+            if (chasm_string.size() != MAP_ROOM_WIDTH){
                 ERR("room chasm width mismatch, %d, expected %d",
-                    (int)chasm_string.size(), ROOM_WIDTH);
+                    (int)chasm_string.size(), MAP_ROOM_WIDTH);
             }
-            if (walls_string.size() != ROOM_WIDTH){
+            if (walls_string.size() != MAP_ROOM_WIDTH){
                 ERR("room walls width mismatch, %d, expected %d",
-                    (int)walls_string.size(), ROOM_WIDTH);
+                    (int)walls_string.size(), MAP_ROOM_WIDTH);
             }
-            if (obj_strings.size() != ROOM_WIDTH){
+            if (obj_strings.size() != MAP_ROOM_WIDTH){
                 ERR("room items width mismatch, %d, expected %d",
-                    (int)obj_strings.size(), ROOM_WIDTH);
+                    (int)obj_strings.size(), MAP_ROOM_WIDTH);
             }
 
-            for (auto x = 0; x < ROOM_WIDTH; x++) {
+            for (auto x = 0; x < MAP_ROOM_WIDTH; x++) {
                 set(r->data, x, y, MAP_DEPTH_FLOOR,     floor_string[x]);
                 if (water_string[x] != ' ') {
                     set(r->data, x, y, MAP_DEPTH_WATER, water_string[x]);

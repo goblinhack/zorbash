@@ -97,7 +97,7 @@ static void game_status_wid_create (void)
     game_status_wid_fini();
     game_monsts_wid_init();
 
-    if (!g_opt_ascii_mode) {
+    {
         auto actionbar_items = player->monstp->actionbar_id.size();
 
         for (auto i = 0U; i < actionbar_items; i++) {
@@ -114,7 +114,7 @@ static void game_status_wid_create (void)
 
         {_
             auto w = UI_ACTIONBAR_ITEM_WIDTH * actionbar_items;
-            auto m = (ASCII_WIDTH / 2);
+            auto m = (TERM_WIDTH / 2);
             auto x1 = m - (w / 2) + (UI_ACTIONBAR_ITEM_WIDTH / 2);
             auto x2 = w - (m - x1) + m;
             point tl = make_point(x1, UI_ACTIONBAR_TL_Y);
@@ -193,8 +193,8 @@ static void game_status_wid_create (void)
     }
 
     {_
-        point tl = make_point(ASCII_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
-        point br = make_point(ASCII_WIDTH - 1, ASCII_HEIGHT);
+        point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
+        point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT);
         color c;
 
         wid_sidebar = wid_new_square_window("right sidebar");
@@ -207,7 +207,7 @@ static void game_status_wid_create (void)
 
     int y_at = 0;
 
-    if (!g_opt_ascii_mode) {
+    {
         {_
             auto w = wid_new_plain(wid_sidebar, "zorbash-0");
             point tl = make_point(0, y_at);
@@ -509,8 +509,8 @@ bool is_mouse_over_actionbar (void)
     pixel_to_ascii(&x, &y);
 
     static int tlx, tly, brx, bry, cached;
-    if (cached != ASCII_HEIGHT) {
-        cached = ASCII_HEIGHT;
+    if (cached != TERM_HEIGHT) {
+        cached = TERM_HEIGHT;
     }
 
     wid_get_tl_x_tl_y_br_x_br_y(wid_actionbar, &tlx, &tly, &brx, &bry);

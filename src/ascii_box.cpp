@@ -205,8 +205,8 @@ void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const w
     if (!b.width || !b.height) {
         b.x = 0;
         b.y = 0;
-        b.width = ASCII_WIDTH;
-        b.height = ASCII_HEIGHT;
+        b.width = TERM_WIDTH;
+        b.height = TERM_HEIGHT;
     }
 
     int x = b.x;

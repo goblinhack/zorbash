@@ -33,11 +33,7 @@ using Tilep  = class Tile*;
 using Texp   = class Tex*;
 using Tpp    = class Tp*;
 
-#define TILE_MODE_NORMAL 0
-#define TILE_MODE_ASCII  1
-#define TILE_MAX_MODES   2
-
-using Tilemap = std::array<std::vector<Tilep>, TILE_MAX_MODES>;
+using Tilemap = std::vector<Tilep>;
 using Tpidmap = std::vector<Tpp>;
 using Tpnamemap = std::unordered_map< std::string, Tpp >;
 
@@ -46,10 +42,8 @@ extern class Game *game;
 extern Tpidmap tp_id_map;
 extern Tpnamemap tp_name_map;
 
-#define MAX_GFX_MODES 2
-
 extern std::map<std::string, class Tile* > all_tiles;
-extern std::vector<class Tile* > all_tiles_array[MAX_GFX_MODES];
+extern std::vector<class Tile* > all_tiles_array;
 
 extern char *DATA_PATH;
 extern char *EXEC_DIR;
@@ -67,7 +61,6 @@ extern bool g_do_screenshot;
 extern bool g_errored;
 extern bool g_grab_next_key;
 extern bool g_need_restart;
-extern bool g_opt_ascii_mode;
 extern bool g_opt_debug;
 extern bool g_opt_debug2;
 extern bool g_opt_fast_start;

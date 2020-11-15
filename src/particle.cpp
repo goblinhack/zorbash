@@ -98,10 +98,6 @@ void Level::display_internal_particles (void)
 
             int oy = sin(RAD_180 * dt) * 32;
 
-            if (g_opt_ascii_mode) {
-                oy *= UI_FONT_LARGE_PIXEL_SIZE / UI_FONT_SMALL_PIXEL_SIZE;
-            }
-
             blit_tl.y -= oy;
             blit_br.y -= oy;
 
@@ -245,10 +241,6 @@ void Level::display_external_particles (void)
             point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
             int oy = sin(RAD_180 * dt) * 32;
-
-            if (g_opt_ascii_mode) {
-                oy *= UI_FONT_LARGE_PIXEL_SIZE / UI_FONT_SMALL_PIXEL_SIZE;
-            }
 
             blit_tl.y -= oy;
             blit_br.y -= oy;

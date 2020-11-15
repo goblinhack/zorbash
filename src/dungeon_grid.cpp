@@ -318,8 +318,8 @@ void Nodes::dump (void)
 {
     const auto step = 5;
     const auto center = 3;
-    const int h = (GRID_HEIGHT+1) * step;
-    const int w = (GRID_WIDTH+1) * step;
+    const int h = (MAP_GRID_HEIGHT+1) * step;
+    const int w = (MAP_GRID_WIDTH+1) * step;
     std::array<std::array<char, h>, w> out;
 
     for (auto y = 0; y < h; y++) {
@@ -2004,7 +2004,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     dmap_process(&d, dmap_start, dmap_end);
     //dmap_print_walls(&d);
 
-    std::array<std::array<bool, GRID_HEIGHT>, GRID_WIDTH> on_critical_path = {};
+    std::array<std::array<bool, MAP_GRID_HEIGHT>, MAP_GRID_WIDTH> on_critical_path = {};
 
     auto p = dmap_solve(&d, start);
     for (auto c : p) {
@@ -2162,7 +2162,7 @@ class Nodes *grid_test (void)
 {
     auto x = 1000 ;
     while (x--) {
-        /* auto d = */ new Nodes(GRID_WIDTH, GRID_HEIGHT);
+        /* auto d = */ new Nodes(MAP_GRID_WIDTH, MAP_GRID_HEIGHT);
 
         continue;
 //        return (d);

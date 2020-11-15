@@ -130,7 +130,7 @@ uint32_t g_history_walk;
 // A tile over the mouse pointer
 //
 Widp wid_mouse_template {};
-std::array<std::array<Widp, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> wid_on_screen_at {};
+std::array<std::array<Widp, TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> wid_on_screen_at {};
 
 static uint8_t wid_init_done;
 static uint8_t wid_exiting;
@@ -275,10 +275,10 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
     wid_tree_detach(w);
 
     if (!w->parent) {
-        tl.x *= ASCII_WIDTH;
-        tl.y *= ASCII_HEIGHT;
-        br.x *= ASCII_WIDTH;
-        br.y *= ASCII_HEIGHT;
+        tl.x *= TERM_WIDTH;
+        tl.y *= TERM_HEIGHT;
+        br.x *= TERM_WIDTH;
+        br.y *= TERM_HEIGHT;
     } else {
         tl.x *= wid_get_width(w->parent);
         tl.y *= wid_get_height(w->parent);
@@ -984,7 +984,7 @@ static std::wstring wid_get_text_with_cursor (Widp w)
     }
 
     std::wstring t = w->text;
-    std::wstring o = t.substr(0, w->cursor) + ASCII_CURSOR_UCHAR +
+    std::wstring o = t.substr(0, w->cursor) + TILE_CURSOR +
                      t.substr(w->cursor);
 
     return (o);
@@ -1938,8 +1938,8 @@ static void wid_destroy_immediate (Widp w)
         wid_moving = nullptr;
     }
 
-    for (auto x = 0; x < ASCII_WIDTH; x++) {
-        for (auto y = 0; y < ASCII_HEIGHT; y++) {
+    for (auto x = 0; x < TERM_WIDTH; x++) {
+        for (auto y = 0; y < TERM_HEIGHT; y++) {
             if (get(wid_on_screen_at, x, y) == w) {
                 set(wid_on_screen_at, x, y, static_cast<Widp>(0));
             }
@@ -4207,8 +4207,8 @@ void wid_move_delta (Widp w, int32_t dx, int32_t dy)
 void wid_move_delta_pct (Widp w, double dx, double dy)
 {_
     if (!w->parent) {
-        dx *= (double)ASCII_WIDTH;
-        dy *= (double)ASCII_HEIGHT;
+        dx *= (double)TERM_WIDTH;
+        dy *= (double)TERM_HEIGHT;
     } else {
         dx *= wid_get_width(w->parent);
         dy *= wid_get_height(w->parent);
@@ -4224,7 +4224,7 @@ void wid_move_to_bottom (Widp w)
     if (w->parent) {
         wid_move_delta(w, 0, wid_get_br_y(w->parent) - wid_get_br_y(w));
     } else {
-        wid_move_delta(w, 0, ASCII_HEIGHT - wid_get_br_y(w));
+        wid_move_delta(w, 0, TERM_HEIGHT - wid_get_br_y(w));
     }
 }
 
@@ -4247,7 +4247,7 @@ void wid_move_to_right (Widp w)
     if (w->parent) {
         wid_move_delta(w, wid_get_br_x(w->parent) - wid_get_br_x(w), 0);
     } else {
-        wid_move_delta(w, ASCII_WIDTH - wid_get_br_x(w), 0);
+        wid_move_delta(w, TERM_WIDTH - wid_get_br_x(w), 0);
     }
 }
 
@@ -5343,8 +5343,8 @@ void wid_get_pct (Widp w, double *px, double *py)
 
     wid_get_abs(w, &x, &y);
 
-    *px = (double)x / (double)ASCII_WIDTH;
-    *py = (double)y / (double)ASCII_HEIGHT;
+    *px = (double)x / (double)TERM_WIDTH;
+    *py = (double)y / (double)TERM_HEIGHT;
 }
 
 //
@@ -5827,10 +5827,10 @@ void wid_display_all (void)
 
 #ifdef ENABLE_DEBUG_UI_FOCUS
     if (wid_focus) {
-        ascii_putf(0, ASCII_HEIGHT-4, WHITE, GRAY, L"focus %s", to_string(wid_focus).c_str());
+        ascii_putf(0, TERM_HEIGHT-4, WHITE, GRAY, L"focus %s", to_string(wid_focus).c_str());
     }
     if (wid_over) {
-        ascii_putf(0, ASCII_HEIGHT-3, WHITE, GRAY, L"over  %s", to_string(wid_over).c_str());
+        ascii_putf(0, TERM_HEIGHT-3, WHITE, GRAY, L"over  %s", to_string(wid_over).c_str());
     }
 #endif
 
@@ -5838,7 +5838,7 @@ void wid_display_all (void)
     // FPS counter.
     //
     if (game->config.fps_counter) {
-        ascii_putf(ASCII_WIDTH - 7, ASCII_HEIGHT - 1, GREEN, BLACK,
+        ascii_putf(TERM_WIDTH - 7, TERM_HEIGHT - 1, GREEN, BLACK,
                    L"%u FPS", game->fps_value);
     }
 
@@ -5885,8 +5885,8 @@ uint8_t wid_is_always_hidden (Widp w)
 void wid_move_to_pct (Widp w, double x, double y)
 {_
     if (!w->parent) {
-        x *= (double)ASCII_WIDTH;
-        y *= (double)ASCII_HEIGHT;
+        x *= (double)TERM_WIDTH;
+        y *= (double)TERM_HEIGHT;
     } else {
         x *= wid_get_width(w->parent);
         y *= wid_get_height(w->parent);
@@ -5909,8 +5909,8 @@ void wid_move_to_abs (Widp w, int32_t x, int32_t y)
 void wid_move_to_pct_centered (Widp w, double x, double y)
 {_
     if (!w->parent) {
-        x *= (double)ASCII_WIDTH;
-        y *= (double)ASCII_HEIGHT;
+        x *= (double)TERM_WIDTH;
+        y *= (double)TERM_HEIGHT;
     } else {
         x *= wid_get_width(w->parent);
         y *= wid_get_height(w->parent);
@@ -6055,8 +6055,8 @@ static void wid_move_dequeue (Widp w)
 void wid_move_to_pct_in (Widp w, double x, double y, uint32_t ms)
 {_
     if (!w->parent) {
-        x *= (double)ASCII_WIDTH;
-        y *= (double)ASCII_HEIGHT;
+        x *= (double)TERM_WIDTH;
+        y *= (double)TERM_HEIGHT;
     } else {
         x *= wid_get_width(w->parent);
         y *= wid_get_height(w->parent);
@@ -6090,8 +6090,8 @@ void wid_move_delta_in (Widp w, int32_t dx, int32_t dy, uint32_t ms)
 void wid_move_to_pct_centered_in (Widp w, double x, double y, uint32_t ms)
 {_
     if (!w->parent) {
-        x *= (double)ASCII_WIDTH;
-        y *= (double)ASCII_HEIGHT;
+        x *= (double)TERM_WIDTH;
+        y *= (double)TERM_HEIGHT;
     } else {
         x *= wid_get_width(w->parent);
         y *= wid_get_height(w->parent);

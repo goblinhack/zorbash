@@ -35,7 +35,7 @@ public:
     point              cached_pixel_map_at;
     std::vector<Ray>   ray;
     std::vector<float> cached_gl_cmds;
-    std::array< std::vector<RayPoint>, MAX_RAY_LIGHTING > points;
+    std::array< std::vector<RayPoint>, LIGHT_MAX_RAYS > points;
     int16_t            orig_strength {};
     int16_t            strength {};
     uint16_t           max_light_rays {};

@@ -86,11 +86,7 @@ public:
         }
 
         char tile_name[10];
-        if (g_opt_ascii_mode) {
-            snprintf(tile_name, sizeof(tile_name), "2.%d", index);
-        } else {
-            snprintf(tile_name, sizeof(tile_name), "1.%d", index);
-        }
+        snprintf(tile_name, sizeof(tile_name), "1.%d", index);
 
         tile = tile_find(tile_name);
         if (!tile) {

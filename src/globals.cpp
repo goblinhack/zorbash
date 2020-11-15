@@ -23,7 +23,6 @@ bool g_do_screenshot;
 bool g_errored;
 bool g_grab_next_key;
 bool g_need_restart;
-bool g_opt_ascii_mode;
 bool g_opt_debug;
 bool g_opt_debug2;
 bool g_opt_fast_start;

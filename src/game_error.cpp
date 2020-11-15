@@ -68,7 +68,7 @@ void game_error (std::string error)
     game->hard_pause();
 
     point tl = make_point(1, 1);
-    point br = make_point(ASCII_WIDTH - 1, ASCII_HEIGHT - 1);
+    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
     auto width = br.x - tl.x;
 
     game_error_window =

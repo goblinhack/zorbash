@@ -85,7 +85,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level_scroll.o 		\
     $(OBJDIR)/level_static.o 		\
     $(OBJDIR)/level_thing.o 		\
-    $(OBJDIR)/level_tiles.o 		\
     $(OBJDIR)/level_tick.o 		\
     $(OBJDIR)/level_update.o 		\
     $(OBJDIR)/light.o 			\

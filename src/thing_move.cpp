@@ -181,12 +181,6 @@ void Thing::update_interpolated_position (void)
         z_depth = tpp->z_depth;
     }
 
-    if (g_opt_ascii_mode) {
-        if (tpp->z_ascii_depth()) {
-            z_depth = tpp->z_ascii_depth();
-        }
-    }
-
     if (is_jumping) {
         float t = get_timestamp_jump_end() - get_timestamp_jump_begin();
         float dt = time_get_time_ms_cached() - get_timestamp_jump_begin();
