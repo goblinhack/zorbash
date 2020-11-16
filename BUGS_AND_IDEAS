@@ -1,10 +1,13 @@
 bugs
 ----
-- quit game too tall
-- ascii mode change on main menu
-- ascii splash
+- mini zorbash width issues, same with health bar
+- make items sidebar?
+- pause menu
+- brazier was visible when falling two floor tiles below
+- credits monst outlines
+- credits menu looks odd
+- splatted slime should stop moving
 - slime health bar too low
-- rocks are wrong when changing mode
 - monsts hit twice
 - attack as run should not also allow move
 - reflection of slime in water 
