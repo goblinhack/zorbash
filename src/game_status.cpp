@@ -97,6 +97,7 @@ static void game_status_wid_create (void)
     game_status_wid_fini();
     game_monsts_wid_init();
 
+    if (0)
     {
         auto actionbar_items = player->monstp->actionbar_id.size();
 
@@ -450,7 +451,7 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_plain(wid_sidebar, "stamina-status-bar");
-        point tl = make_point(2, y_at);
+        point tl = make_point(0, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);

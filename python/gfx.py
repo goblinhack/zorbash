@@ -41,7 +41,7 @@ def init_ui_status_bar_title():
       "zorbash-2",
     ]
     zx.tile_load_arr(
-        file="data/gfx/zorbash_small.tga",
+        file="data/gfx/title_small.tga",
         name="status_bar_title", width=240, height=48, arr=tiles)
 
 def init_ui_blood():
