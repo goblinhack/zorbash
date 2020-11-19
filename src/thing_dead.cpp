@@ -66,6 +66,11 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     //
+    // So that slimes don't keep moving when dead
+    //
+    move_finish();
+
+    //
     // Drop everything!
     //
     if (on_death_drop_all_items()) {
