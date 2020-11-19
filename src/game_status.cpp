@@ -240,7 +240,7 @@ static void game_status_wid_create (void)
         }
     }
 
-    y_at += 2;
+    y_at += 1;
     {_
         auto w = wid_new_plain(wid_sidebar, "level no");
         point tl = make_point(0, y_at - 1);
@@ -325,22 +325,6 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     // Health
     ///////////////////////////////////////////////////////////////////////////
-    if (0)
-    {_
-        auto w = wid_new_plain(wid_sidebar, "health-icon");
-        point tl = make_point(0, y_at);
-        point br = make_point(1, y_at + 1);
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        int i = ((float)player->get_stats_health() /
-                 (float)player->get_stats_health_max()) *
-                 (float)UI_HEALTH_ICON_STEPS;
-        i = std::min(i, UI_HEALTH_ICON_STEPS);
-        i = std::max(i, 1);
-        auto icon = "health" + std::to_string(i) + "-icon";
-        wid_set_bg_tilename(w, icon);
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
     {_
         auto w = wid_new_plain(wid_sidebar, "Health-status-bar");
         point tl = make_point(2, y_at);
@@ -385,16 +369,6 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     // Defence
     ///////////////////////////////////////////////////////////////////////////
-    if (0)
-    {_
-        auto w = wid_new_plain(wid_sidebar, "defence-icon");
-        point tl = make_point(0, y_at);
-        point br = make_point(1, y_at + 1);
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "defence-icon");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
     {_
         auto w = wid_new_plain(wid_sidebar, "defence-status-bar");
         point tl = make_point(2, y_at);
@@ -439,19 +413,9 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     // stamina
     ///////////////////////////////////////////////////////////////////////////
-    if (0)
-    {_
-        auto w = wid_new_plain(wid_sidebar, "stamina-icon");
-        point tl = make_point(0, y_at);
-        point br = make_point(1, y_at + 1);
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "stamina-icon");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
     {_
         auto w = wid_new_plain(wid_sidebar, "stamina-status-bar");
-        point tl = make_point(0, y_at);
+        point tl = make_point(2, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
