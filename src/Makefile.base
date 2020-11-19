@@ -70,6 +70,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level_cursor.o 		\
     $(OBJDIR)/level_cursor_path.o 	\
     $(OBJDIR)/level_display.o 		\
+    $(OBJDIR)/level_display_anim.o 	\
+    $(OBJDIR)/level_display_minimap.o 	\
     $(OBJDIR)/level_display_blood.o 	\
     $(OBJDIR)/level_display_chasm.o 	\
     $(OBJDIR)/level_display_deep_water.o \
