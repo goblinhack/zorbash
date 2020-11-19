@@ -97,10 +97,10 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
             if (it->is_torch()) {
                 MINICON("The torch falls back on you!");
             }
-            it->move_to_immediately(mid_at);
+            it->move_to(mid_at, 100);
         }
     } else {
-        it->move_to_immediately(shove_pos);
+        it->move_to(shove_pos, 100);
     }
 
     if (!it->is_dead) {

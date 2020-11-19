@@ -1,9 +1,9 @@
 bugs
 ----
+- falling into lava when near dead ends up invisible
 - mini zorbash width issues, same with health bar
 - make items sidebar?
 - pause menu
-- brazier was visible when falling two floor tiles below
 - credits monst outlines
 - credits menu looks odd
 - splatted slime should stop moving

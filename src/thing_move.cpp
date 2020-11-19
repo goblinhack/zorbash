@@ -244,7 +244,7 @@ void Thing::update_interpolated_position (void)
     }
 }
 
-void Thing::update_pos (fpoint to, bool immediately)
+void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
 {_
     if (is_loggable_for_unimportant_stuff()) {
         log("update pos");
@@ -276,12 +276,16 @@ void Thing::update_pos (fpoint to, bool immediately)
         }
     }
 
-    int speed;
-    auto owner = owner_get();
-    if (owner) {
-        speed = owner->tp()->stats_move_speed_ms();
-    } else{
-        speed = tpp->stats_move_speed_ms();
+    int move_speed;
+    if (speed) {
+        move_speed = speed;
+    } else {
+        auto owner = owner_get();
+        if (owner) {
+            move_speed = owner->tp()->stats_move_speed_ms();
+        } else{
+            move_speed = tpp->stats_move_speed_ms();
+        }
     }
 
     //
@@ -295,7 +299,7 @@ void Thing::update_pos (fpoint to, bool immediately)
 
     if (!immediately) {
         set_timestamp_move_begin(time_get_time_ms_cached());
-        set_timestamp_move_end(get_timestamp_move_begin() + speed);
+        set_timestamp_move_end(get_timestamp_move_begin() + move_speed);
     }
 
     move_carried_items();
@@ -374,6 +378,14 @@ void Thing::move_to (fpoint to)
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
     update_pos(to, false);
+}
+
+void Thing::move_to (fpoint to, uint32_t speed)
+{
+    move_finish();
+    auto delta = to - mid_at;
+    move_set_dir_from_delta(delta);
+    update_pos(to, false, speed);
 }
 
 void Thing::move_delta (fpoint delta)

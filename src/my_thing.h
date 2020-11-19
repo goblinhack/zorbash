@@ -1190,6 +1190,7 @@ public:
     void move_finish(void);
     void move_set_dir_from_delta(fpoint);
     void move_to(fpoint to);
+    void move_to(fpoint to, uint32_t speed);
     void move_to_immediately(fpoint to);
     void move_to_immediately_delta(fpoint delta);
     void msg(const std::string&);
@@ -1204,7 +1205,7 @@ public:
     void unwield(const char *why);
     void update_all(void);
     void update_interpolated_position(void);
-    void update_pos(fpoint, bool immediately);
+    void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void use_weapon(void);
     void used(Thingp w, Thingp target);
     void visible();
