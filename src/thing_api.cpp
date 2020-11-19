@@ -1437,6 +1437,13 @@ int Thing::get_submerged_offset (void) const
 {_
     if (monstp) {
         verify(monstp);
+        //
+        // Floating when dead?
+        //
+        if (is_dead) {
+            return (monstp->submerged_offset / 2);
+        }
+
         return (monstp->submerged_offset);
     } else {
         return (0);

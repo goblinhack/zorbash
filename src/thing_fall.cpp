@@ -207,17 +207,12 @@ bool Thing::fall_to_next_level (void)
                 fall_damage /= 2;
             }
 
-            auto h = decr_stats_health(fall_damage);
             if (is_player()) {
                 MINICON("%%fg=red$You take %u fall damage!%%fg=reset$", fall_damage);
             }
 
             bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
             next_level->thing_new(tp_random_blood_splatter()->name(), mid_at);
-            if (h <= 0) {
-                h = set_stats_health(0);
-                dead("killed by falling");
-            }
 
             next_level->scroll_map_to_player();
             update_light();
@@ -235,6 +230,12 @@ bool Thing::fall_to_next_level (void)
             if (is_player()) {
                 level->timestamp_fade_in_begin = time_get_time_ms_cached();
                 level->update();
+            }
+
+            auto h = decr_stats_health(fall_damage);
+            if (h <= 0) {
+                h = set_stats_health(0);
+                dead("killed by falling");
             }
             return true;
         }
