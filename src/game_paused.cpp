@@ -103,7 +103,7 @@ void Game::pause_select (void)
     }
     game->soft_pause();
 
-    point tl = make_point(0, TERM_HEIGHT - 8);
+    point tl = make_point(0, TERM_HEIGHT - 10);
     point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 1;
 
@@ -119,8 +119,8 @@ void Game::pause_select (void)
         auto p = wid_paused_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "PAUSED");
 
-        point tl = make_point(0, 0);
-        point br = make_point(width - 1, 2);
+        point tl = make_point(0, 1);
+        point br = make_point(width - 1, 3);
 
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_paused_mouse_up);
