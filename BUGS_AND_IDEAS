@@ -1,36 +1,35 @@
 bugs
 ----
-- make items sidebar?
-- pause menu
 - credits monst outlines
 - credits menu looks odd
-- splatted slime should stop moving
 - slime health bar too low
+- reflection of slime in water 
+- make items sidebar?
 - monsts hit twice
 - attack as run should not also allow move
-- reflection of slime in water 
 
 upcoming work
 -------------
+- throw
+- equip
+- use descent potion, that can be taken or thrown
 - should the entrance in next level be close to the prev exit
+- drag items
+- bag inventory
+- allow seed selection on menu
+
 - moving floor
 - monst rarity
 - sewer level
 - water, kraken, eels
 - make ripples, summon monsters
 - weight factors into jumping
-- equip
-- throw
 - potion descent creates chasm
 - potion break on fall
 - potion enchant radius
-- use descent potion, that can be taken or thrown
 - add stuff in secret rooms
-- drag items
-- bag inventory
 - choose name / player
 - playback possible?
-- allow seed selection on menu
 
 future work
 -----------
