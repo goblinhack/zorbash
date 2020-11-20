@@ -41,7 +41,7 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
 
     int tile_size;
     if (title_tile) {
-        tile_size = 3;
+        tile_size = 4;
     } else {
         tile_size = 0;
     }

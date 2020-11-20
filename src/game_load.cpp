@@ -866,10 +866,10 @@ void Game::load_select (void)
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
                           UI_MINICON_VIS_HEIGHT + 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
-                          UI_ACTIONBAR_TL_Y - 2);
+                          tl.y + 18);
     auto width = br.x - tl.x;
 
-    wid_load = new WidPopup(tl, br, tile_find_mand("load"), "ui_popup_wide");
+    wid_load = new WidPopup(tl, br, tile_find_mand("load"), "ui_popup_wide", false, false);
     wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
     wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);
 
@@ -883,9 +883,9 @@ void Game::load_select (void)
         Game tmp;
         auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
         auto p = wid_load->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "LOAD slot");
+        auto w = wid_new_square_button(p, "load slot");
         point tl = make_point(0, y_at);
-        point br = make_point(width - 3, y_at + 2);
+        point br = make_point(width - 3, y_at);
 
         std::string s = std::to_string(slot) + ": ";
         if (!load(tmp_file, tmp)) {
@@ -895,10 +895,10 @@ void Game::load_select (void)
                 s += "<empty>";
             }
             set(slot_valid, slot, false);
-            wid_set_style(w, UI_WID_STYLE_GRAY);
+            wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         } else {
             s += tmp.save_meta;
-            wid_set_style(w, UI_WID_STYLE_GREEN);
+            wid_set_style(w, UI_WID_STYLE_HORIZ_LIGHT);
             wid_set_on_mouse_up(w, wid_load_mouse_up);
             set(slot_valid, slot, true);
         }
@@ -906,7 +906,7 @@ void Game::load_select (void)
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);
-        y_at += 3;
+        y_at += 1;
     }
     game_load_headers_only = false;
     wid_update(wid_load->wid_text_area->wid_text_area);
