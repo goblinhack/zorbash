@@ -211,5 +211,6 @@ extern uint8_t game_mouse_motion(int32_t x, int32_t y,
                                  int32_t wheelx, int32_t wheely);
 extern void game_main_menu_hide(void);
 extern void game_main_menu_destroy(void);
+extern void game_display_flames(void);
 
 #endif
