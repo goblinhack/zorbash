@@ -7,6 +7,7 @@
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
+#include "my_gl.h"
 
 static WidPopup *wid_credits_window;
 
@@ -63,6 +64,41 @@ uint8_t wid_credits_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
+void game_display_credits_bg (void)
+{_
+    glcolor(WHITE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    std::string t = "ui_credits_bg";
+    blit_init();
+    tile_blit(tile_find_mand(t.c_str()),
+              point(0,0),
+              point(TERM_WIDTH * game->config.ascii_gl_width,
+                    TERM_HEIGHT * game->config.ascii_gl_height));
+    blit_flush();
+}
+
+void game_display_credits_fg (void)
+{_
+    glcolor(WHITE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    std::string t = "ui_credits_fg";
+    blit_init();
+    tile_blit(tile_find_mand(t.c_str()),
+              point(0,0),
+              point(TERM_WIDTH * game->config.ascii_gl_width,
+                    TERM_HEIGHT * game->config.ascii_gl_height));
+    blit_flush();
+}
+
+void game_credits_tick (Widp w)
+{_
+    game_display_credits_bg();
+    game_display_flames();
+    game_display_credits_fg();
+}
+
 void Game::credits_select (void)
 {_
     CON("Credits");
@@ -72,16 +108,21 @@ void Game::credits_select (void)
     }
     game->soft_pause();
 
-    point tl = make_point(0, 0);
+    point tl = make_point(1, 0);
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
     auto width = br.x - tl.x;
 
-    wid_credits_window = new WidPopup(tl, br, nullptr, "ui_credits");
+    wid_credits_window = new WidPopup(tl, br, nullptr, "", false, false);
     wid_set_on_key_up(
       wid_credits_window->wid_popup_container, wid_credits_key_up);
     wid_set_on_key_down(
       wid_credits_window->wid_popup_container, wid_credits_key_down);
 
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
     wid_credits_window->log(" ");
     wid_credits_window->log(" ");
     wid_credits_window->log(" ");
@@ -101,18 +142,19 @@ void Game::credits_select (void)
     wid_credits_window->log("Sound");
     wid_credits_window->log("%%fg=purple$Markus Heichelbech (deceased senior technician) http://nosoapradio.us");
     wid_credits_window->log(" ");
-    wid_credits_window->log("Testing");
-    wid_credits_window->log("%%fg=red$Stuicy");
+    wid_credits_window->log("Testers");
+    wid_credits_window->log("%%fg=red$Stuicy, Goblinhack");
 
     {_
         auto p = wid_credits_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "credits");
 
-        point tl = make_point(24, 24);
-        point br = make_point(width - 25, 26);
+        point tl = make_point(40, 24);
+        point br = make_point(width - 41, 26);
 
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_credits_mouse_up);
+        wid_set_on_tick(w, game_credits_tick);
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, "BACK");

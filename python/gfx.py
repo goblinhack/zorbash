@@ -55,6 +55,22 @@ def init_ui_blood():
         file="data/gfx/blood.tga",
         name="blood", width=360, height=225, arr=tiles)
 
+def init_ui_credits_bg():
+    tiles = [
+      "ui_credits_bg",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_credits_bg.tga",
+        name="ui_credits_bg", width=200, height=86, arr=tiles)
+
+def init_ui_credits_fg():
+    tiles = [
+      "ui_credits_fg",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_credits_fg.tga",
+        name="ui_credits_fg", width=200, height=86, arr=tiles)
+
 def init_title_fg1():
     tiles = [
       "title_fg1_1",
@@ -165,14 +181,6 @@ def init_ui_dead():
     zx.tile_load_arr(
         file="data/gfx/ui_dead.tga",
         name="ui_dead", width=80, height=100, arr=tiles)
-
-def init_ui_credits():
-    tiles = [
-      "ui_credits",
-    ]
-    zx.tile_load_arr(
-        file="data/gfx/ui_credits.tga",
-        name="ui_credits", width=112, height=84, arr=tiles)
 
 def init_ui_action_bar():
     tiles = [
@@ -3194,7 +3202,8 @@ init_bloom()
 init_ui_status_bar()
 init_ui_status_bar_title()
 init_ui_dead()
-init_ui_credits()
+init_ui_credits_bg()
+init_ui_credits_fg()
 init_ui_action_bar()
 init_ui_action_bar_highlight()
 init_ui_inventory()
