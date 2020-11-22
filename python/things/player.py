@@ -41,7 +41,7 @@ def tp_init(name, text_name, title):
     x.set_stats_health_hunger_pct(5)
     x.set_stats_health_initial(100)
     x.set_stats_health_starving_pct(5)
-    x.set_stats_move_speed_ms(100)
+    x.set_stats_move_speed_ms(150)
     x.set_stats_stamina(100)
     x.set_stats_strength(20)
     x.set_text_a_or_an("the")
