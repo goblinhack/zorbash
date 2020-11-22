@@ -636,5 +636,18 @@ void blit_colored (int tex,
     blit_colored(tex, 0, 0, 1, 1, left, top, right, bottom,
                  color_bl, color_br, color_tl, color_tr);
 }
-    extern void gl_init_fbo(void);
+
+extern void gl_init_fbo(void);
+extern void gl_error(GLenum err);
+
+#define GL_ERROR_CHECK() {                                         \
+    auto errCode = glGetError();                                   \
+    if (likely(errCode == GL_NO_ERROR)) {                          \
+    } else {                                                       \
+        ERR("OpenGL: error at %s:%s line %u",                      \
+            __FILE__, __PRETTY_FUNCTION__, __LINE__);              \
+        gl_error(errCode);                                         \
+    }                                                              \
+}
+
 #endif
