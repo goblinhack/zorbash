@@ -33,8 +33,6 @@ void Level::display_fade_out (void)
 
     blit_init();
 
-    int i;
-
     //
     // Walk the light rays in a circle.
     //
@@ -49,7 +47,7 @@ void Level::display_fade_out (void)
     //
     // Complete the circle with the first point again.
     //
-    i = 0; {
+    {
         float th = 0;
         int16_t p1x = at.x + rad * cos(th);
         int16_t p1y = at.y + rad * sin(th);
@@ -83,8 +81,6 @@ void Level::display_fade_in (void)
 
     blit_init();
 
-    int i;
-
     //
     // Walk the light rays in a circle.
     //
@@ -99,7 +95,7 @@ void Level::display_fade_in (void)
     //
     // Complete the circle with the first point again.
     //
-    i = 0; {
+    {
         float th = 0;
         int16_t p1x = at.x + rad * cos(th);
         int16_t p1y = at.y + rad * sin(th);
