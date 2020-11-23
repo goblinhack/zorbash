@@ -116,7 +116,6 @@ void Level::update_all_ticks (void)
 {_
     for (auto& i : all_active_things) {
         auto t = i.second;
-        t->set_tick_last_did_something(game->tick_current);
-        t->set_tick(game->tick_current);
+        t->update_tick();
     }
 }
