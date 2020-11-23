@@ -303,7 +303,7 @@ static void game_status_wid_create (void)
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         auto k = std::to_string(player->get_keys());
-        wid_set_text(w, "%%fg=yellow$K%%fg=gray$" + k);
+        wid_set_text(w, "%%fg=yellow$%%tile=key-icon$%%fg=gray$" + k);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }
