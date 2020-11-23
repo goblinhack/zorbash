@@ -11,6 +11,13 @@
 #include "my_thing.h"
 #include "my_python.h"
 
+void Thing::update_tick (void)
+{_
+    set_timestamp_last_tick(time_get_time_ms_cached());
+    set_tick_last_did_something(game->tick_current);
+    set_tick(game->tick_current);
+}
+
 bool Thing::achieve_goals_in_life (void)
 {_
     // log("achieve goals in life");
@@ -117,15 +124,12 @@ bool Thing::achieve_goals_in_death (void)
         return false;
     }
 
-    set_timestamp_last_tick(time_get_time_ms_cached());
-
     log("achieve death goals at tick %d, tick %u",
         get_tick(), game->tick_current);
 
     resurrect_tick();
 
-    set_tick_last_did_something(game->tick_current);
-    set_tick(game->tick_current);
+    update_tick();
 
     return true;
 }
