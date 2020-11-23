@@ -317,6 +317,7 @@ public:
 
     void set_submerged_offset(int);
     int get_submerged_offset(void) const;
+    void update_tick(void);
     uint32_t set_tick(uint32_t);
     uint32_t get_tick(void);
     uint32_t get_tick_const(void) const;

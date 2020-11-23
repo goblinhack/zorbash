@@ -133,10 +133,11 @@ _
     auto t = nearby_most_dangerous_thing_get();
     if (t) {
         auto free_attack =
-             ((t->mid_at.x >= mid_at.x) && left) ||
-             ((t->mid_at.x <= mid_at.x) && right) ||
-             ((t->mid_at.y >= mid_at.y) && up) ||
-             ((t->mid_at.y <= mid_at.y) && down);
+             (t->get_tick() < game->tick_current) &&
+             (((t->mid_at.x >= mid_at.x) && left) ||
+              ((t->mid_at.x <= mid_at.x) && right) ||
+              ((t->mid_at.y >= mid_at.y) && up) ||
+              ((t->mid_at.y <= mid_at.y) && down));
 
         if (free_attack) {_
             log("free attack by %s", t->to_string().c_str());
@@ -144,6 +145,7 @@ _
                 if (is_player()) {
                     std::string s = t->text_The() + " attacks as you run";
                     MINICON("%s", s.c_str());
+                    t->update_tick();
                 }
             }
         }
