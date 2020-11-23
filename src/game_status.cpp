@@ -97,8 +97,23 @@ static void game_status_wid_create (void)
     game_status_wid_fini();
     game_monsts_wid_init();
 
-    if (0)
     {
+
+        {_
+            auto x1 = TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH;
+            auto x2 = TERM_WIDTH - 1;
+            point tl = make_point(x1, TERM_HEIGHT - 20);
+            point br = make_point(x2, TERM_HEIGHT - 11);
+            color c;
+
+            wid_actionbar = wid_new_square_window("actionbar (bottom)");
+            wid_set_pos(wid_actionbar, tl, br);
+            wid_set_style(wid_actionbar, 0);
+            wid_lower(wid_actionbar);
+        }
+    }
+
+    if (0) {
         auto actionbar_items = player->monstp->actionbar_id.size();
 
         for (auto i = 0U; i < actionbar_items; i++) {
@@ -111,21 +126,6 @@ static void game_status_wid_create (void)
             if (!tpp) {
                 continue;
             }
-        }
-
-        {_
-            auto w = UI_ACTIONBAR_ITEM_WIDTH * actionbar_items;
-            auto m = (TERM_WIDTH / 2);
-            auto x1 = m - (w / 2) + (UI_ACTIONBAR_ITEM_WIDTH / 2);
-            auto x2 = w - (m - x1) + m;
-            point tl = make_point(x1, UI_ACTIONBAR_TL_Y);
-            point br = make_point(x2, UI_ACTIONBAR_BR_Y);
-            color c;
-
-            wid_actionbar = wid_new_square_window("actionbar (bottom)");
-            wid_set_pos(wid_actionbar, tl, br);
-            wid_set_style(wid_actionbar, -1);
-            wid_lower(wid_actionbar);
         }
 
         std::vector<Widp> wid_actionbar_items;
@@ -212,30 +212,20 @@ static void game_status_wid_create (void)
         {_
             auto w = wid_new_plain(wid_sidebar, "zorbash-0");
             point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
             wid_set_ignore_events(w, true);
             wid_set_pos(w, tl, br);
             wid_set_bg_tilename(w, "zorbash-0");
             wid_set_color(w, WID_COLOR_BG, WHITE);
         }
-        y_at += 2;
+        y_at += 1;
         {_
             auto w = wid_new_plain(wid_sidebar, "zorbash-1");
             point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
             wid_set_ignore_events(w, true);
             wid_set_pos(w, tl, br);
             wid_set_bg_tilename(w, "zorbash-1");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        y_at += 2;
-        {_
-            auto w = wid_new_plain(wid_sidebar, "zorbash-2");
-            point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at+1);
-            wid_set_ignore_events(w, true);
-            wid_set_pos(w, tl, br);
-            wid_set_bg_tilename(w, "zorbash-2");
             wid_set_color(w, WID_COLOR_BG, WHITE);
         }
     }

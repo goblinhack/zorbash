@@ -38,7 +38,6 @@ def init_ui_status_bar_title():
     tiles = [
       "zorbash-0",
       "zorbash-1",
-      "zorbash-2",
     ]
     zx.tile_load_arr(
         file="data/gfx/title_small.tga",
