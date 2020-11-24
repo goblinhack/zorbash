@@ -108,12 +108,12 @@ static void game_status_wid_create (void)
 
             wid_actionbar = wid_new_square_window("actionbar (bottom)");
             wid_set_pos(wid_actionbar, tl, br);
-            wid_set_style(wid_actionbar, 0);
+            wid_set_style(wid_actionbar, -1);
             wid_lower(wid_actionbar);
         }
     }
 
-    if (0) {
+    {
         auto actionbar_items = player->monstp->actionbar_id.size();
 
         for (auto i = 0U; i < actionbar_items; i++) {
@@ -130,15 +130,24 @@ static void game_status_wid_create (void)
 
         std::vector<Widp> wid_actionbar_items;
 
-        for (auto i = 0U, x = 0U; i < actionbar_items; i++) {
+        for (auto i = 0U, y = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
             auto s = "actionbar item" + std::to_string(0);
             auto w = wid_new_square_button(wid_actionbar, s);
             wid_actionbar_items.push_back(w);
-            point tl = make_point(x, 0);
-            point br = make_point(x + UI_ACTIONBAR_ITEM_WIDTH - 1, UI_ACTIONBAR_ITEM_HEIGHT);
+            point tl = make_point(0, y);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y);
 
             wid_set_pos(w, tl, br);
+            wid_set_text_lhs(w, true);
 
+            if (y >= actionbar_items) {
+                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+            } else if (i == game->actionbar_highlight_slot) {
+                wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+            } else {
+                wid_set_color(w, WID_COLOR_TEXT_FG, BLUE);
+            }
+#if 0
             if (i == game->actionbar_highlight_slot) {
                 std::string tile = "ui_action_bar_highlight" + std::to_string(i);
                 wid_set_bg_tilename(w, tile.c_str());
@@ -146,10 +155,55 @@ static void game_status_wid_create (void)
                 std::string tile = "ui_action_bar" + std::to_string(i);
                 wid_set_bg_tilename(w, tile.c_str());
             }
+#endif
 
-            x += UI_ACTIONBAR_ITEM_WIDTH;
+            wid_set_on_mouse_down(w, game_status_mouse_down);
+            wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
+            wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
+            wid_set_int_context(w, i);
+
+#if 0
+            auto count = player->actionbar_id_slot_count(i);
+            if (count > 1) {
+                wid_set_text(w, " x" + std::to_string(count));
+            }
+#endif
+
+            char txt[UI_SIDEBAR_RIGHT_WIDTH + 1];
+
+            if (y >= actionbar_items) {
+                snprintf(txt, sizeof(txt) - 1, "%d empty", y);
+            } else {
+                snprintf(txt, sizeof(txt) - 1, "%d none", y);
+
+                if (player->monstp) {
+                    auto tp_id = player->monstp->actionbar_id[i];
+                    if (tp_id) {
+                        auto tpp = tp_find(tp_id);
+    #if 0
+                        auto tiles = &tpp->tiles;
+                        if (tiles) {
+                            auto tile = tile_first(tiles);
+                            if (tile) {
+                                wid_set_fg_tile(w, tile);
+                            }
+                        }
+    #endif
+                        snprintf(txt, sizeof(txt) - 1, "%d %s", y, tpp->text_name().c_str());
+                    }
+                }
+            }
+
+            wid_set_text(w, txt);
+
+            y++;
         }
 
+        wid_update(wid_actionbar);
+    }
+
+#if 0
+    if (0) {
         for (auto i = 0U; i < actionbar_items; i++) {
             std::string name = "actionbar icon" + std::to_string(i);
             auto w = wid_new_square_button(wid_actionbar_items[i], name);
@@ -165,24 +219,6 @@ static void game_status_wid_create (void)
             wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
             wid_set_int_context(w, i);
 
-            auto count = player->actionbar_id_slot_count(i);
-            if (count > 1) {
-                wid_set_text(w, " x" + std::to_string(count));
-            }
-
-            if (player->monstp) {
-                auto tp_id = player->monstp->actionbar_id[i];
-                if (tp_id) {
-                    auto tpp = tp_find(tp_id);
-                    auto tiles = &tpp->tiles;
-                    if (tiles) {
-                        auto tile = tile_first(tiles);
-                        if (tile) {
-                            wid_set_fg_tile(w, tile);
-                        }
-                    }
-                }
-            }
 
             wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
             wid_set_mode(w, WID_MODE_OVER);
@@ -192,6 +228,7 @@ static void game_status_wid_create (void)
 
         wid_update(wid_actionbar);
     }
+#endif
 
     {_
         point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
