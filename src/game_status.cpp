@@ -114,10 +114,11 @@ static void game_status_wid_create (void)
     }
 
     {
-        auto actionbar_items = player->monstp->actionbar_id.size();
+        auto monstp = player->monstp;
+        auto actionbar_items = monstp->actionbar_id.size();
 
         for (auto i = 0U; i < actionbar_items; i++) {
-            auto tp_id = player->monstp->actionbar_id[i];
+            auto tp_id = monstp->actionbar_id[i];
             if (!tp_id) {
                 continue;
             }
@@ -130,22 +131,74 @@ static void game_status_wid_create (void)
 
         std::vector<Widp> wid_actionbar_items;
 
+        for (auto i = 0U, y = 0U; i < actionbar_items; i++) {
+            auto s = "actionbar item" + std::to_string(0);
+            auto w = wid_new_square_button(wid_actionbar, s);
+            point tl = make_point(0, y);
+            point br = make_point(0, y);
+
+            wid_set_pos(w, tl, br);
+            wid_set_text_lhs(w, true);
+
+#if 0
+            if (i == game->actionbar_highlight_slot) {
+                std::string tile = "ui_action_bar_highlight" + std::to_string(i);
+                wid_set_bg_tilename(w, tile.c_str());
+            } else {
+                std::string tile = "ui_action_bar" + std::to_string(i);
+                wid_set_bg_tilename(w, tile.c_str());
+            }
+#endif
+
+#if 0
+            auto count = player->actionbar_id_slot_count(i);
+            if (count > 1) {
+                wid_set_text(w, " x" + std::to_string(count));
+            }
+#endif
+
+            auto tp_id = monstp->actionbar_id[i];
+            if (tp_id) {
+                auto tpp = tp_find(tp_id);
+                auto tiles = &tpp->tiles;
+
+                if (tiles) {
+                    auto tile = tile_first(tiles);
+                    if (tile) {
+                        wid_set_fg_tile(w, tile);
+                    }
+                }
+            }
+
+            y++;
+        }
+
+        for (auto i = 0U, y = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
+            auto s = "actionbar item" + std::to_string(0);
+            auto w = wid_new_square_button(wid_actionbar, s);
+            point tl = make_point(1, y);
+            point br = make_point(1, y);
+            wid_set_pos(w, tl, br);
+            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+            wid_set_text(w, std::to_string(y));
+
+            y++;
+        }
+
         for (auto i = 0U, y = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
             auto s = "actionbar item" + std::to_string(0);
             auto w = wid_new_square_button(wid_actionbar, s);
             wid_actionbar_items.push_back(w);
-            point tl = make_point(0, y);
+            point tl = make_point(3, y);
             point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y);
 
             wid_set_pos(w, tl, br);
             wid_set_text_lhs(w, true);
 
-            if (y >= actionbar_items) {
-                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
-            } else if (i == game->actionbar_highlight_slot) {
+            if (i == game->actionbar_highlight_slot) {
                 wid_set_color(w, WID_COLOR_TEXT_FG, RED);
             } else {
-                wid_set_color(w, WID_COLOR_TEXT_FG, BLUE);
+                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
             }
 #if 0
             if (i == game->actionbar_highlight_slot) {
@@ -169,32 +222,17 @@ static void game_status_wid_create (void)
             }
 #endif
 
-            char txt[UI_SIDEBAR_RIGHT_WIDTH + 1];
-
             if (y >= actionbar_items) {
-                snprintf(txt, sizeof(txt) - 1, "%d empty", y);
+                wid_set_text(w, "-");
             } else {
-                snprintf(txt, sizeof(txt) - 1, "%d none", y);
-
-                if (player->monstp) {
-                    auto tp_id = player->monstp->actionbar_id[i];
-                    if (tp_id) {
-                        auto tpp = tp_find(tp_id);
-    #if 0
-                        auto tiles = &tpp->tiles;
-                        if (tiles) {
-                            auto tile = tile_first(tiles);
-                            if (tile) {
-                                wid_set_fg_tile(w, tile);
-                            }
-                        }
-    #endif
-                        snprintf(txt, sizeof(txt) - 1, "%d %s", y, tpp->text_name().c_str());
-                    }
+                auto tp_id = monstp->actionbar_id[i];
+                if (tp_id) {
+                    auto tpp = tp_find(tp_id);
+                    wid_set_text(w, tpp->text_name());
+                } else {
+                    wid_set_text(w, "?");
                 }
             }
-
-            wid_set_text(w, txt);
 
             y++;
         }
@@ -354,8 +392,8 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_sidebar, "Health-status-bar");
-        point tl = make_point(2, y_at);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
+        point tl = make_point(0, y_at);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
 
@@ -370,7 +408,7 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_plain(wid_sidebar, "health-status");
-        point tl = make_point(2, y_at + 1);
+        point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
@@ -398,8 +436,8 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_sidebar, "defence-status-bar");
-        point tl = make_point(2, y_at);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
+        point tl = make_point(0, y_at);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
 
@@ -414,7 +452,7 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_plain(wid_sidebar, "defence-status");
-        point tl = make_point(2, y_at + 1);
+        point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
@@ -442,8 +480,8 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_sidebar, "stamina-status-bar");
-        point tl = make_point(2, y_at);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 3, tl.y);
+        point tl = make_point(0, y_at);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
 
@@ -458,7 +496,7 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_plain(wid_sidebar, "stamina-status");
-        point tl = make_point(2, y_at + 1);
+        point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
