@@ -132,13 +132,12 @@ static void game_status_wid_create (void)
         std::vector<Widp> wid_actionbar_items;
 
         for (auto i = 0U, y = 0U; i < actionbar_items; i++) {
-            auto s = "actionbar item" + std::to_string(0);
+            auto s = "actionbar icon" + std::to_string(i);
             auto w = wid_new_square_button(wid_actionbar, s);
             point tl = make_point(0, y);
             point br = make_point(0, y);
 
             wid_set_pos(w, tl, br);
-            wid_set_text_lhs(w, true);
 
 #if 0
             if (i == game->actionbar_highlight_slot) {
@@ -174,7 +173,7 @@ static void game_status_wid_create (void)
         }
 
         for (auto i = 0U, y = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
-            auto s = "actionbar item" + std::to_string(0);
+            auto s = "actionbar slot" + std::to_string(i);
             auto w = wid_new_square_button(wid_actionbar, s);
             point tl = make_point(1, y);
             point br = make_point(1, y);
@@ -186,7 +185,7 @@ static void game_status_wid_create (void)
         }
 
         for (auto i = 0U, y = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
-            auto s = "actionbar item" + std::to_string(0);
+            auto s = "actionbar item" + std::to_string(i);
             auto w = wid_new_square_button(wid_actionbar, s);
             wid_actionbar_items.push_back(w);
             point tl = make_point(3, y);

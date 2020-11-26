@@ -26,8 +26,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-        p.x = (game->config.inner_pix_width / TERM_WIDTH) * p.x;
-        p.y = (game->config.inner_pix_height / TERM_HEIGHT) * p.y;
+	p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
+	p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         int cnt = random_range(1, 10);
         for (int c = 0; c < cnt; c++) {
@@ -54,8 +54,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-        p.x = (game->config.inner_pix_width / TERM_WIDTH) * p.x;
-        p.y = (game->config.inner_pix_height / TERM_HEIGHT) * p.y;
+	p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
+	p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         point s = (last_blit_tl + last_blit_br) / 2;
         point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
@@ -72,7 +72,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
     }
 
     {
-        std::string name = "actionbar icon" + std::to_string(slot);
+        std::string name = "actionbar slot" + std::to_string(slot);
         auto w = wid_find(name);
         if (!w) {
             con("could not find wid %s", name.c_str());
@@ -80,8 +80,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-        p.x = (game->config.inner_pix_width / TERM_WIDTH) * p.x;
-        p.y = (game->config.inner_pix_height / TERM_HEIGHT) * p.y;
+	p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
+	p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         level->new_external_particle(
                  what->id,
@@ -110,7 +110,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot,
     point where_to = (particle_target->last_blit_tl +
                       particle_target->last_blit_br) / 2;
 
-    std::string name = "actionbar icon" + std::to_string(slot);
+    std::string name = "actionbar slot" + std::to_string(slot);
     auto w = wid_find(name);
     if (!w) {
         con("could not find wid %s", name.c_str());
@@ -118,8 +118,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot,
     }
 
     auto p = (w->abs_tl + w->abs_br) / 2;
-    p.x = (game->config.inner_pix_width / TERM_WIDTH) * p.x;
-    p.y = (game->config.inner_pix_height / TERM_HEIGHT) * p.y;
+    p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
+    p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
     level->new_external_particle(what->id, p, where_to,
                                  isize(TILE_WIDTH, TILE_HEIGHT), 
