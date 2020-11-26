@@ -11,14 +11,12 @@
 static void game_status_wid_create(void);
 
 Widp wid_actionbar {};
-Widp wid_fake_itembar {};
 Widp wid_item_popup {};
 Widp wid_sidebar {};
 
 void game_status_wid_fini (void)
 {_
     wid_destroy(&wid_actionbar);
-    wid_destroy(&wid_fake_itembar);
     wid_destroy(&wid_item_popup);
     wid_destroy(&wid_sidebar);
     game_monsts_wid_fini();
@@ -173,63 +171,77 @@ static void game_status_wid_create (void)
         }
 
         for (auto i = 0U, y = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
-            auto s = "actionbar slot" + std::to_string(i);
-            auto w = wid_new_square_button(wid_actionbar, s);
-            point tl = make_point(1, y);
-            point br = make_point(1, y);
-            wid_set_pos(w, tl, br);
-            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
-            wid_set_text(w, std::to_string(y));
+            //
+            // slot number
+            //
+            auto slot(std::to_string(i));
 
-            y++;
-        }
-
-        for (auto i = 0U, y = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
-            auto s = "actionbar item" + std::to_string(i);
-            auto w = wid_new_square_button(wid_actionbar, s);
-            wid_actionbar_items.push_back(w);
-            point tl = make_point(3, y);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y);
-
-            wid_set_pos(w, tl, br);
-            wid_set_text_lhs(w, true);
-
-            if (i == game->actionbar_highlight_slot) {
-                wid_set_color(w, WID_COLOR_TEXT_FG, RED);
-            } else {
-                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+            {
+                auto name = "actionbar slot" + slot;
+                auto w = wid_new_square_button(wid_actionbar, name);
+                point tl = make_point(1, y);
+                point br = make_point(1, y);
+                wid_set_pos(w, tl, br);
+                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY40);
+                wid_set_text(w, std::to_string(y));
             }
-#if 0
-            if (i == game->actionbar_highlight_slot) {
-                std::string tile = "ui_action_bar_highlight" + std::to_string(i);
-                wid_set_bg_tilename(w, tile.c_str());
-            } else {
-                std::string tile = "ui_action_bar" + std::to_string(i);
-                wid_set_bg_tilename(w, tile.c_str());
+
+            {
+                if (y < actionbar_items) {
+                    auto w = wid_new_square_button(wid_actionbar, "actionbar item");
+                    wid_actionbar_items.push_back(w);
+                    point tl = make_point(3, y);
+                    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y);
+
+                    wid_set_pos(w, tl, br);
+                    wid_set_text_lhs(w, true);
+
+                    if (i == game->actionbar_highlight_slot) {
+                        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+                    } else {
+                        wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+                    }
+
+                    wid_set_on_mouse_down(w, game_status_mouse_down);
+                    wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
+                    wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
+                    wid_set_int_context(w, i);
+
+                    auto tp_id = monstp->actionbar_id[i];
+                    if (tp_id) {
+                        auto tpp = tp_find(tp_id);
+                        wid_set_text(w, tpp->text_name());
+                    }
+                }
             }
-#endif
 
-            wid_set_on_mouse_down(w, game_status_mouse_down);
-            wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
-            wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
-            wid_set_int_context(w, i);
-
-#if 0
-            auto count = player->actionbar_id_slot_count(i);
-            if (count > 1) {
-                wid_set_text(w, " x" + std::to_string(count));
+            {
+                if (y < actionbar_items) {
+                    auto count = player->actionbar_id_slot_count(i);
+                    if (count > 1) {
+                        auto w = wid_new_square_button(wid_actionbar, "actionbar count");
+                        point tl = make_point(UI_SIDEBAR_RIGHT_WIDTH - 2, y);
+                        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y);
+                        wid_set_pos(w, tl, br);
+                        wid_set_color(w, WID_COLOR_TEXT_FG, LIGHTBLUE);
+                        wid_set_text(w, "x" + std::to_string(count));
+                    }
+                }
             }
-#endif
 
-            if (y >= actionbar_items) {
-                wid_set_text(w, "-");
-            } else {
-                auto tp_id = monstp->actionbar_id[i];
-                if (tp_id) {
-                    auto tpp = tp_find(tp_id);
-                    wid_set_text(w, tpp->text_name());
-                } else {
-                    wid_set_text(w, "?");
+            auto weapon = player->weapon_get();
+            if (weapon) {
+                auto weapon_tp_id = weapon->tp()->id;
+                if (y < actionbar_items) {
+                    auto tp_id = monstp->actionbar_id[i];
+                    if (tp_id == weapon_tp_id) {
+                        auto w = wid_new_square_button(wid_actionbar, "actionbar weapon");
+                        point tl = make_point(2, y);
+                        point br = make_point(2, y);
+                        wid_set_pos(w, tl, br);
+                        wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
+                        wid_set_text(w, "*");
+                    }
                 }
             }
 
