@@ -83,7 +83,7 @@ void Game::dead_select (const char *reason)
     game->level->scroll_map_to_player();
     game->level->cursor->hide();
 
-    point tl = make_point(0, TERM_HEIGHT - 16);
+    point tl = make_point(0, TERM_HEIGHT - 17);
     point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 1;
 
@@ -150,14 +150,14 @@ void Game::dead_select (const char *reason)
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 
-        point tl = make_point(3, 10);
-        point br = make_point(width - 5, 12);
+        point tl = make_point(3, 11);
+        point br = make_point(width - 5, 13);
 
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
 
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "Esc / CONTINUE");
+        wid_set_text(w, "Rise Again?");
     }
 
     wid_update(wid_dead_window->wid_text_area->wid_text_area);
