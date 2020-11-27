@@ -107,7 +107,6 @@ static void game_status_wid_create (void)
             wid_actionbar = wid_new_square_window("actionbar (bottom)");
             wid_set_pos(wid_actionbar, tl, br);
             wid_set_style(wid_actionbar, -1);
-            wid_lower(wid_actionbar);
         }
     }
 
@@ -130,30 +129,6 @@ static void game_status_wid_create (void)
         std::vector<Widp> wid_actionbar_items;
 
         for (auto i = 0U, y = 0U; i < actionbar_items; i++) {
-            auto s = "actionbar icon" + std::to_string(i);
-            auto w = wid_new_square_button(wid_actionbar, s);
-            point tl = make_point(0, y);
-            point br = make_point(0, y);
-
-            wid_set_pos(w, tl, br);
-
-#if 0
-            if (i == game->actionbar_highlight_slot) {
-                std::string tile = "ui_action_bar_highlight" + std::to_string(i);
-                wid_set_bg_tilename(w, tile.c_str());
-            } else {
-                std::string tile = "ui_action_bar" + std::to_string(i);
-                wid_set_bg_tilename(w, tile.c_str());
-            }
-#endif
-
-#if 0
-            auto count = player->actionbar_id_slot_count(i);
-            if (count > 1) {
-                wid_set_text(w, " x" + std::to_string(count));
-            }
-#endif
-
             auto tp_id = monstp->actionbar_id[i];
             if (tp_id) {
                 auto tpp = tp_find(tp_id);
@@ -162,7 +137,19 @@ static void game_status_wid_create (void)
                 if (tiles) {
                     auto tile = tile_first(tiles);
                     if (tile) {
+                        auto s = "actionbar icon" + std::to_string(i);
+                        auto w = wid_new_square_button(wid_actionbar, s);
+                        point tl = make_point(0, y);
+                        point br = make_point(0, y);
+
+                        wid_set_pos(w, tl, br);
+
                         wid_set_fg_tile(w, tile);
+
+                        wid_set_on_mouse_down(w, game_status_mouse_down);
+                        wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
+                        wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
+                        wid_set_int_context(w, i);
                     }
                 }
             }
@@ -184,6 +171,11 @@ static void game_status_wid_create (void)
                 wid_set_pos(w, tl, br);
                 wid_set_color(w, WID_COLOR_TEXT_FG, GRAY40);
                 wid_set_text(w, std::to_string(y));
+
+                wid_set_on_mouse_down(w, game_status_mouse_down);
+                wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
+                wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
+                wid_set_int_context(w, i);
             }
 
             {
@@ -225,6 +217,11 @@ static void game_status_wid_create (void)
                         wid_set_pos(w, tl, br);
                         wid_set_color(w, WID_COLOR_TEXT_FG, LIGHTBLUE);
                         wid_set_text(w, "x" + std::to_string(count));
+
+                        wid_set_on_mouse_down(w, game_status_mouse_down);
+                        wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
+                        wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
+                        wid_set_int_context(w, i);
                     }
                 }
             }
@@ -245,6 +242,11 @@ static void game_status_wid_create (void)
                             tile = tile_find_mand("right-hand");
                         }
                         wid_set_fg_tile(w, tile);
+
+                        wid_set_on_mouse_down(w, game_status_mouse_down);
+                        wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
+                        wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
+                        wid_set_int_context(w, i);
                     }
                 }
             }
@@ -255,41 +257,12 @@ static void game_status_wid_create (void)
         wid_update(wid_actionbar);
     }
 
-#if 0
-    if (0) {
-        for (auto i = 0U; i < actionbar_items; i++) {
-            std::string name = "actionbar icon" + std::to_string(i);
-            auto w = wid_new_square_button(wid_actionbar_items[i], name);
-            point tl = make_point(0, 0);
-            point br = make_point(UI_ACTIONBAR_ITEM_WIDTH - 1, UI_ACTIONBAR_ITEM_HEIGHT - 1);
-
-            wid_set_pos(w, tl, br);
-            wid_set_text_lhs(w, true);
-            wid_set_text_top(w, true);
-
-            wid_set_on_mouse_down(w, game_status_mouse_down);
-            wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
-            wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
-            wid_set_int_context(w, i);
-
-
-            wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-            wid_set_mode(w, WID_MODE_OVER);
-            wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-            wid_set_mode(w, WID_MODE_NORMAL);
-        }
-
-        wid_update(wid_actionbar);
-    }
-#endif
-
     {_
         point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
-        point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT);
+        point br = make_point(TERM_WIDTH - 1, 14);
         color c;
 
         wid_sidebar = wid_new_square_window("right sidebar");
-        wid_set_ignore_events(wid_sidebar, true);
         wid_set_pos(wid_sidebar, tl, br);
         wid_set_shape_none(wid_sidebar);
         wid_set_style(wid_sidebar, UI_WID_STYLE_OUTLINE);
@@ -387,20 +360,6 @@ static void game_status_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }
-
-#if 0
-    {_
-        auto w = wid_new_plain(wid_sidebar, "weight");
-        point tl = make_point(0, y_at-1);
-        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-1);
-
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, L"%tile=weight-icon$%fg=green$ 150");
-        wid_set_text_lhs(w, true);
-        wid_set_shape_none(w);
-    }
-#endif
 
     ///////////////////////////////////////////////////////////////////////////
     // Health
