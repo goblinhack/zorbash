@@ -256,7 +256,7 @@ def init_tiles1():
       "weight-icon",
       "stamina-icon",
       "attack-icon",
-      "karma-icon",
+      "right-hand",
       "save",
       "load",
       "bug",

@@ -239,8 +239,12 @@ static void game_status_wid_create (void)
                         point tl = make_point(2, y);
                         point br = make_point(2, y);
                         wid_set_pos(w, tl, br);
-                        wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
-                        wid_set_text(w, "*");
+
+                        static Tilep tile;
+                        if (!tile) {
+                            tile = tile_find_mand("right-hand");
+                        }
+                        wid_set_fg_tile(w, tile);
                     }
                 }
             }
