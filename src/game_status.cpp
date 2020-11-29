@@ -51,6 +51,12 @@ static void game_status_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_
     }
 
     level->actionbar_describe(slot);
+
+    auto t = level->actionbar_get(slot);
+    if (t) {
+        game->monst_info_create(t);
+    }
+
     game_status_wid_create();
 }
 
@@ -65,6 +71,8 @@ static void game_status_mouse_over_e (Widp w)
     if (!level->actionbar_select(slot)) {
         return;
     }
+
+    game->monst_info_destroy();
 
     //
     // Do not create new wids in here
@@ -145,11 +153,6 @@ static void game_status_wid_create (void)
                         wid_set_pos(w, tl, br);
 
                         wid_set_fg_tile(w, tile);
-
-                        wid_set_on_mouse_down(w, game_status_mouse_down);
-                        wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
-                        wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
-                        wid_set_int_context(w, i);
                     }
                 }
             }
@@ -171,11 +174,6 @@ static void game_status_wid_create (void)
                 wid_set_pos(w, tl, br);
                 wid_set_color(w, WID_COLOR_TEXT_FG, GRAY40);
                 wid_set_text(w, std::to_string(y));
-
-                wid_set_on_mouse_down(w, game_status_mouse_down);
-                wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
-                wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
-                wid_set_int_context(w, i);
             }
 
             {
@@ -217,11 +215,6 @@ static void game_status_wid_create (void)
                         wid_set_pos(w, tl, br);
                         wid_set_color(w, WID_COLOR_TEXT_FG, LIGHTBLUE);
                         wid_set_text(w, "x" + std::to_string(count));
-
-                        wid_set_on_mouse_down(w, game_status_mouse_down);
-                        wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
-                        wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
-                        wid_set_int_context(w, i);
                     }
                 }
             }
@@ -242,11 +235,6 @@ static void game_status_wid_create (void)
                             tile = tile_find_mand("right-hand");
                         }
                         wid_set_fg_tile(w, tile);
-
-                        wid_set_on_mouse_down(w, game_status_mouse_down);
-                        wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
-                        wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
-                        wid_set_int_context(w, i);
                     }
                 }
             }

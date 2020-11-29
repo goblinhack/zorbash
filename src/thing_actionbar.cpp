@@ -26,8 +26,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-	p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
-	p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+        p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
+        p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         int cnt = random_range(1, 10);
         for (int c = 0; c < cnt; c++) {
@@ -80,8 +80,8 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-	p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
-	p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+        p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
+        p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         level->new_external_particle(
                  what->id,

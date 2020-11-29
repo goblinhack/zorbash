@@ -56,6 +56,7 @@ def tp_init(name, text_name):
     x.set_stats_strength(9)
     x.set_text_a_or_an("a");
     x.set_text_description("A staggering corpse, covered in tissue paper")
+    x.set_long_text_description("Possibly the corpse of one who ventured into this dungeon before. All life is gone now, and what remains is a corpse wrapped in rags. Death is no release for this poor creature. Watch, it may rise again. Only flames may end its agony.")
     x.set_text_hits("claws");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

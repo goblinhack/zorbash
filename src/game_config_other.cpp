@@ -127,7 +127,7 @@ void Game::config_other_select (void)
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x - 2;
 
-    game_config_other_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
+    game_config_other_window = new WidPopup(tl, br, nullptr, "");
     {_
         Widp w = game_config_other_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_other_key_up);

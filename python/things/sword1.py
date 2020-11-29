@@ -109,6 +109,7 @@ def init_weapon(name, text_name):
     x.set_stats_attack_dice("1d8+1")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy pointy means of justice")
+    x.set_long_text_description("A gleaming sword. It's edge waits for justice.")
     x.set_weapon_carry_anim("sword1_carry")
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)

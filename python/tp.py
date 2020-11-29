@@ -140,8 +140,8 @@ class Tp:
     def set_str_str7(self, value):
         zx.tp_set_str_str7(self, value)
 
-    def set_str_str8(self, value):
-        zx.tp_set_str_str8(self, value)
+    def set_long_text_description(self, value):
+        zx.tp_set_long_text_description(self, value)
 
     def set_text_description(self, value):
         zx.tp_set_text_description(self, value)

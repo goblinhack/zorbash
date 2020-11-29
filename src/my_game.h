@@ -123,6 +123,8 @@ public:
     void config_keyboard_select(void);
     void config_top_select(void);
     void dead_select(const char *reason);
+    void monst_info_create(Thingp);
+    void monst_info_destroy(void);
     void credits_select(void);
     void display(void);
     void fini(void);

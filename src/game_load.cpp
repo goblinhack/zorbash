@@ -448,7 +448,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 {_
     /* uint32_t           header_size                  */ in >> bits(my.t.header_size                  );
     if (my.t.header_size != sizeof(Config)) {
-        game_load_error = "incompatible save file header version";
+        game_load_error = "bad save file header version";
         return in;
     }
 
@@ -538,13 +538,13 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.version);
     if (my.t.version != VERSION) {
         game_load_error =
-          "bad version '" VERSION "' v '" + my.t.version + "'";
+          "old version '" VERSION "' v '" + my.t.version + "'";
         return (in);
     }
     in >> bits(my.t.header_size);
     if (my.t.header_size != (uint32_t) sizeof(Game)) {
         game_load_error =
-          "incompatible save file version '" VERSION "' v '" + my.t.version + "'";
+          "old save file version '" VERSION "' v '" + my.t.version + "'";
         return (in);
     }
     in >> bits(my.t.save_slot);
@@ -869,12 +869,15 @@ void Game::load_select (void)
                           tl.y + 18);
     auto width = br.x - tl.x;
 
-    wid_load = new WidPopup(tl, br, tile_find_mand("load"), "ui_popup_wide", false, false);
+    wid_load = new WidPopup(tl, br, tile_find_mand("load"), "", false, false);
     wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
     wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);
 
     game_load_headers_only = true;
 
+    wid_load->log(" ");
+    wid_load->log(" ");
+    wid_load->log(" ");
     wid_load->log(" ");
     wid_load->log("Choose a load slot. %%fg=red$ESC%%fg=reset$ to cancel");
 

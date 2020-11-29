@@ -308,12 +308,13 @@ void Game::main_menu_select (void)
         game_main_menu_destroy();
     }
     game_status_wid_fini();
+    game->monst_info_destroy();
 
     point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 19);
     point br = make_point(TERM_WIDTH - 7, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
-    game_main_menu_window = new WidPopup(tl, br, nullptr, "", false, false);
+    game_main_menu_window = new WidPopup(tl, br, nullptr, "nothing", false, false);
     {_
         Widp w = game_main_menu_window->wid_popup_container;
         wid_set_on_key_up(w, game_main_menu_key_up);

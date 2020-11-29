@@ -65,6 +65,7 @@ def tp_init(name, text_name):
     x.set_stats_strength(1)
     x.set_text_a_or_an("an");
     x.set_text_description("An dungeon auto cleaner jelly thingy")
+    x.set_long_text_description("Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners left a trail of corrosive slime in their wake. Avoid this. Actually avoid cleaners completely. They have a habit of eating your hard fought items.")
     x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

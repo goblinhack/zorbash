@@ -681,7 +681,7 @@ void Game::save_select (void)
                           tl.y + 18);
     auto width = br.x - tl.x;
 
-    wid_save = new WidPopup(tl, br, tile_find_mand("save"), "ui_popup_wide");
+    wid_save = new WidPopup(tl, br, tile_find_mand("save"), "");
     wid_set_on_key_up(wid_save->wid_popup_container, wid_save_key_up);
     wid_set_on_key_down(wid_save->wid_popup_container, wid_save_key_down);
 

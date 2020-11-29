@@ -860,7 +860,7 @@ public:
     const std::string& str5(void) const;
     const std::string& str6(void) const;
     const std::string& str7(void) const;
-    const std::string& str8(void) const;
+    const std::string& long_text_description(void) const;
     const std::string& text_description(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
