@@ -914,8 +914,7 @@ void Game::config_keyboard_select (void)
     auto width = br.x - tl.x;
 
     game_config_keyboard_window =
-                    new WidPopup(tl, br, nullptr, "ui_popup_widest",
-                                 false, true);
+                    new WidPopup(tl, br, nullptr, "", false, true);
     {_
         Widp w = game_config_keyboard_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_keyboard_key_up);

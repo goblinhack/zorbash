@@ -57,6 +57,7 @@ def tp_init(name, text_name):
     x.set_stats_strength(9)
     x.set_text_a_or_an("a");
     x.set_text_description("A monstrous skeleton, possibly unfriendly")
+    x.set_long_text_description("A monstrous skeleton. It towers above you. It seems unhappy. Quite what being this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this.")
     x.set_text_hits("claws");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

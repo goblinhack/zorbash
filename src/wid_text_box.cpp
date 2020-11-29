@@ -131,7 +131,7 @@ void WidTextBox::log_ (std::wstring str, bool lhs, bool rhs)
     Widp text_wid {};
 
     if (!wid_vert_scroll) {
-        if (line_count < scroll_height) {
+        if (line_count < height) {
             text_wid = get(children, height - line_count - 1);
             wid_set_text(text_wid, str);
             line_count++;

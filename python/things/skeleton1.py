@@ -54,6 +54,7 @@ def tp_init(name, text_name):
     x.set_stats_strength(9)
     x.set_text_a_or_an("a");
     x.set_text_description("The bones of one surprised to be moving again")
+    x.set_long_text_description("A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     x.set_text_hits("claws");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

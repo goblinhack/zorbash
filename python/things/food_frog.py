@@ -25,7 +25,8 @@ def tp_init(name, text_name):
     x.set_nutrition_dice("1d10")
     x.set_stats_health_initial(4)
     x.set_text_a_or_an("a");
-    x.set_text_description("%%fg=brown$The food of gods: a chocolate frog")
+    x.set_text_description("%%fg=brown$The food of the gods: a chocolate frog")
+    x.set_long_text_description("Chocolate frogs may seem out of place in the dungeon as they are one of the few items the denizens of the dungeon tend not to eat. It is rumored a helpful god left them here for brave adventurers to assist them on their path.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 

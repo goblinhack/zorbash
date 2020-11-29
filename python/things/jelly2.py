@@ -65,6 +65,7 @@ def tp_init(name, text_name):
     x.set_stats_strength(10)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=limegreen$A gargantuan pile of sentient jelly")
+    x.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when attacked and multiplying when attacked. This is an adult. It will eat its own children!")
     x.set_text_hits("splats");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

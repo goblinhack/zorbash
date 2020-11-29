@@ -321,7 +321,7 @@ private:
     std::string _str5;
     std::string _str6;
     std::string _str7;
-    std::string _str8;
+    std::string _long_text_description;
     std::string _text_a_or_an;
     std::string _text_description;
     std::string _text_hits;
@@ -413,7 +413,7 @@ public:
     const std::string& str5(void) const;
     const std::string& str6(void) const;
     const std::string& str7(void) const;
-    const std::string& str8(void) const;
+    const std::string& long_text_description(void) const;
     const std::string& text_description(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
@@ -909,7 +909,7 @@ public:
     void set_str5(const std::string &);
     void set_str6(const std::string &);
     void set_str7(const std::string &);
-    void set_str8(const std::string &);
+    void set_long_text_description(const std::string &);
     void set_text_a_or_an(const std::string &);
     void set_text_description(const std::string &);
     void set_text_hits(const std::string &);
