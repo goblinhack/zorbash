@@ -9,6 +9,23 @@ def init_bloom():
     zx.tex_load(file="data/gfx/bloom.tga", name="bloom")
 
 
+def init_ui_circle():
+    tiles = [
+        "ui_circle"
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_circle.tga",
+        name="ui_circle", width=256, height=256, arr=tiles)
+
+def init_ui_tile_bg():
+    tiles = [
+        "ui_tile_bg"
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_tile_bg.tga",
+        name="ui_tile_bg", width=128, height=128, arr=tiles)
+
+
 def init_ui_status_bar():
     tiles = [
       "status-bar-11",
@@ -3192,6 +3209,8 @@ def init_claws_tiles():
         name="claws", width=32, height=32, arr=tiles)
 
 init_solid()
+init_ui_circle()
+init_ui_tile_bg()
 init_title_fg1()
 init_title_fg2()
 init_title_fg3()
