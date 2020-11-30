@@ -50,9 +50,35 @@ void Game::wid_thing_info_create (Thingp t)
         return;
     }
 
-    wid_thing_info_window = new WidPopup(tl, br, tile, "", true, false);
+    wid_thing_info_window = new WidPopup(tl, br, nullptr, "", true, false);
     wid_raise(wid_thing_info_window->wid_popup_container);
 
+    {_
+        auto w = wid_new_plain(wid_thing_info_window->wid_popup_container, "ui-circle");
+        point tl = make_point(8, 1);
+        point br = make_point(12, 4);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "ui_circle");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+        wid_set_style(w, -1);
+    }
+
+    {_
+        auto w = wid_new_plain(wid_thing_info_window->wid_popup_container, "ui-circle");
+        point tl = make_point(9, 2);
+        point br = make_point(11, 3);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "ui_tile_bg");
+        wid_set_fg_tilename(w, tile->name);
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+        wid_set_style(w, -1);
+    }
+
+    wid_thing_info_window->log(" ");
+    wid_thing_info_window->log(" ");
+    wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
