@@ -9,6 +9,7 @@
 #include "my_tex.h"
 #include "my_gl.h"
 #include "my_thing.h"
+#include "my_wid_thing_info.h"
 #include "my_wid_inventory.h"
 
 void Level::cursor_check_if_scroll_needed (void)
@@ -63,6 +64,8 @@ void Level::cursor_find_on_visible_things (
 
     cursor_needs_update = false;
 
+    game->wid_thing_info_destroy();
+
     if (cursor) {
         auto p = cursor->mid_at;
         hover_over = nullptr;
@@ -78,6 +81,9 @@ void Level::cursor_find_on_visible_things (
                 BOTCON("%%fg=red$Burning! %s", t->text_description().c_str());
             } else {
                 BOTCON("%s", t->text_description().c_str());
+                if (t->tp()->long_text_description() != "") {
+                    game->wid_thing_info_create(t);
+                }
             }
 
             hover_over = t;
@@ -92,6 +98,9 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
             BOTCON("%s", t->text_description().c_str());
+            if (t->tp()->long_text_description() != "") {
+                game->wid_thing_info_create(t);
+            }
             hover_over = t;
             return;
         } FOR_ALL_THINGS_END()
@@ -104,6 +113,9 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
             BOTCON("%s", t->text_description().c_str());
+            if (t->tp()->long_text_description() != "") {
+                game->wid_thing_info_create(t);
+            }
             hover_over = t;
             return;
         } FOR_ALL_THINGS_END()

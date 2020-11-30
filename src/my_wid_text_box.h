@@ -15,12 +15,12 @@ private:
     std::map< unsigned int, std::wstring > wid_text_box_lines;
     int width {};
     int height {};
-    int line_count {};
     int scroll_height {};
 
     std::vector<Widp> children;
 
 public:
+    int line_count {};
     point tl;
     point br;
     Widp wid_horiz_scroll {};

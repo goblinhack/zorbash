@@ -11,7 +11,6 @@
 #include "my_sdl.h"
 #include "my_thing.h"
 #include "my_wid.h"
-#include "my_wid_botcon.h"
 #include "my_wid_console.h"
 
 void Thing::cursor_hover_over_check (void)

@@ -4204,6 +4204,20 @@ void wid_move_delta (Widp w, int32_t dx, int32_t dy)
     wid_update_internal(w);
 }
 
+void wid_resize (Widp w, int32_t width, int32_t height)
+{_
+    wid_tree_detach(w);
+
+    if (width != -1) {
+        w->key.br.x = w->key.tl.x + width;
+    }
+    if (height != -1) {
+        w->key.br.y = w->key.tl.y + height;
+    }
+
+    wid_tree_attach(w);
+}
+
 void wid_move_delta_pct (Widp w, double dx, double dy)
 {_
     if (!w->parent) {

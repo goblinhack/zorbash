@@ -866,7 +866,7 @@ void Game::load_select (void)
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
                           UI_MINICON_VIS_HEIGHT + 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
-                          tl.y + 18);
+                          tl.y + 19);
     auto width = br.x - tl.x;
 
     wid_load = new WidPopup(tl, br, tile_find_mand("load"), "", false, false);

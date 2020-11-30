@@ -233,6 +233,7 @@ int32_t wid_get_tl_y(Widp w);
 int32_t wid_get_br_x(Widp w);
 int32_t wid_get_br_y(Widp w);
 void wid_move_to_y_off(Widp w, int32_t off);
+void wid_resize(Widp w, int32_t width, int32_t height);
 
 typedef struct {
     //
