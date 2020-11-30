@@ -39,7 +39,8 @@ void Game::wid_thing_info_create (Thingp t)
         return;
     }
 
-    point tl = make_point(0, TERM_HEIGHT - 17);
+    int height = 33;
+    point tl = make_point(0, TERM_HEIGHT - 2 - height);
     point br = make_point(20, TERM_HEIGHT - 2);
 
     auto tp = t->tp();
@@ -57,6 +58,10 @@ void Game::wid_thing_info_create (Thingp t)
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(tp->long_text_description());
+
+    int utilized = wid_thing_info_window->wid_text_area->line_count;
+    wid_move_delta(wid_thing_info_window->wid_popup_container, 0, height - utilized - 1);
+    wid_resize(wid_thing_info_window->wid_popup_container, -1, utilized + 1);
 
     wid_update(wid_thing_info_window->wid_text_area->wid_text_area);
 }
