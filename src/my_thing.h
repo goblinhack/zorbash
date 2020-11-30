@@ -111,7 +111,7 @@ public:
     point        where_i_dropped_an_item_last;
     std::list<ThingId>   carrying;
     std::string          msg;                // Text that floats on screen
-    std::vector<uint16_t> actionbar_id;      // Vector of tp_id
+    std::vector<uint16_t> inventory_id;      // Vector of tp_id
     std::vector<ThingId> enemies;            // List of things that wronged us
     std::vector<point>   move_path;
     timestamp_t  timestamp_born {};
@@ -733,12 +733,12 @@ public:
     ThingId set_weapon_id(ThingId);
     ThingId get_weapon_id(void) const;
 
-    void actionbar_particle(Thingp what, uint32_t slot);
-    void actionbar_particle(Thingp what, uint32_t slot, Thingp target);
-    bool actionbar_id_remove(Thingp what);
-    bool actionbar_id_remove(Thingp what, Thingp target);
-    bool actionbar_id_insert(Thingp what);
-    int actionbar_id_slot_count(const uint32_t slot);
+    void inventory_particle(Thingp what, uint32_t slot);
+    void inventory_particle(Thingp what, uint32_t slot, Thingp target);
+    bool inventory_id_remove(Thingp what);
+    bool inventory_id_remove(Thingp what, Thingp target);
+    bool inventory_id_insert(Thingp what);
+    int inventory_id_slot_count(const uint32_t slot);
 
     //
     // Dice
@@ -1053,14 +1053,14 @@ public:
     int is_rrr6(void) const;
     int is_rrr_98(void) const;
     int gfx_is_rrr99(void) const;
-    int is_shown_uniquely_on_monstbar(void) const;
+    int is_shown_uniquely_on_leftbar(void) const;
     int is_stamina_check(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int is_rrr9(void) const;
     int is_secret_door(void) const;
     int is_shovable(void) const;
-    int is_shown_on_monstbar(void) const;
+    int is_shown_on_leftbar(void) const;
     int is_jelly(void) const;
     int is_jelly_baby(void) const;
     int is_jelly_baby_eater(void) const;

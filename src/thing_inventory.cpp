@@ -6,9 +6,10 @@
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
-#include "my_game_status.h"
+#include "my_wid_inventory.h"
+#include "my_wid_thing_info.h"
 
-void Thing::actionbar_particle (Thingp what, uint32_t slot)
+void Thing::inventory_particle (Thingp what, uint32_t slot)
 {_
     //
     // No animations at the start
@@ -72,7 +73,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
     }
 
     {
-        std::string name = "actionbar slot" + std::to_string(slot);
+        std::string name = "inventory slot" + std::to_string(slot);
         auto w = wid_find(name);
         if (!w) {
             con("could not find wid %s", name.c_str());
@@ -95,9 +96,9 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot)
 }
 
 //
-// Particle from the actionbar to tp_id target
+// Particle from the inventory to tp_id target
 //
-void Thing::actionbar_particle (Thingp what, uint32_t slot,
+void Thing::inventory_particle (Thingp what, uint32_t slot,
                                 Thingp particle_target)
 {_
     //
@@ -110,7 +111,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot,
     point where_to = (particle_target->last_blit_tl +
                       particle_target->last_blit_br) / 2;
 
-    std::string name = "actionbar slot" + std::to_string(slot);
+    std::string name = "inventory slot" + std::to_string(slot);
     auto w = wid_find(name);
     if (!w) {
         con("could not find wid %s", name.c_str());
@@ -129,7 +130,7 @@ void Thing::actionbar_particle (Thingp what, uint32_t slot,
                                  true /* make_visible_at_end */);
 }
 
-bool Thing::actionbar_id_insert (Thingp what)
+bool Thing::inventory_id_insert (Thingp what)
 {_
     auto player = level->player;
     if (!player) {
@@ -145,24 +146,26 @@ bool Thing::actionbar_id_insert (Thingp what)
     }
 
     if (what->is_item_collected_as_gold()) {
-        game_status_wid_init();
+        wid_inventory_init();
+        wid_thing_info_fini();
         incr_gold(what->get_gold_value());
-        actionbar_particle(what, monstp->actionbar_id.size() - 1);
+        inventory_particle(what, monstp->inventory_id.size() - 1);
         what->dead("collected");
         return false;
     }
 
     if (what->is_collect_as_keys()) {
-        game_status_wid_init();
+        wid_inventory_init();
+        wid_thing_info_fini();
         incr_keys(1);
-        actionbar_particle(what, monstp->actionbar_id.size() - 1);
+        inventory_particle(what, monstp->inventory_id.size() - 1);
         what->dead("collected");
         return false;
     }
 
-    auto actionbar_items = player->monstp->actionbar_id.size();
-    for (auto i = 0U; i < actionbar_items; i++) {
-        auto tp_id = monstp->actionbar_id[i];
+    auto inventory_items = player->monstp->inventory_id.size();
+    for (auto i = 0U; i < inventory_items; i++) {
+        auto tp_id = monstp->inventory_id[i];
         if (!tp_id) {
             continue;
         }
@@ -178,27 +181,29 @@ bool Thing::actionbar_id_insert (Thingp what)
                 // Needs its own slot
                 //
             } else {
-                game_status_wid_init();
-                actionbar_particle(what, i);
+                wid_inventory_init();
+                wid_thing_info_fini();
+                inventory_particle(what, i);
                 return true;
             }
         }
     }
 
-    if (actionbar_items >= UI_ACTIONBAR_MAX_ITEMS) {
+    if (inventory_items >= UI_ACTIONBAR_MAX_ITEMS) {
         MINICON("No space to carry %s which is not carried",
                 what->text_the().c_str());
         return false;
     }
 
-    monstp->actionbar_id.push_back(what->tp_id);
-    game_status_wid_init();
-    actionbar_particle(what, monstp->actionbar_id.size() - 1);
-    level->actionbar_describe(game->actionbar_highlight_slot);
+    monstp->inventory_id.push_back(what->tp_id);
+    wid_inventory_init();
+    wid_thing_info_fini();
+    inventory_particle(what, monstp->inventory_id.size() - 1);
+    level->inventory_describe(game->inventory_highlight_slot);
     return true;
 }
 
-bool Thing::actionbar_id_remove (Thingp what)
+bool Thing::inventory_id_remove (Thingp what)
 {_
     auto player = level->player;
     if (!player) {
@@ -213,9 +218,9 @@ bool Thing::actionbar_id_remove (Thingp what)
         return false;
     }
 
-    auto actionbar_items = player->monstp->actionbar_id.size();
-    for (auto i = 0U; i < actionbar_items; i++) {
-        auto tp_id = monstp->actionbar_id[i];
+    auto inventory_items = player->monstp->inventory_id.size();
+    for (auto i = 0U; i < inventory_items; i++) {
+        auto tp_id = monstp->inventory_id[i];
         if (!tp_id) {
             continue;
         }
@@ -225,35 +230,36 @@ bool Thing::actionbar_id_remove (Thingp what)
         }
 
         if (what->tp() == tpp) {
-            actionbar_particle(what, i, this);
+            inventory_particle(what, i, this);
 
-            auto cnt = actionbar_id_slot_count(i);
+            auto cnt = inventory_id_slot_count(i);
             log("remove slot %d, count %d", cnt, i);
             if (cnt > 1) {_
                 log("decrement slot count");
             } else {_
                 log("remove slot");
-                monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
+                monstp->inventory_id.erase(monstp->inventory_id.begin() + i);
 
-                if (!monstp->actionbar_id.size()) {
-                    game->actionbar_highlight_slot = {};
+                if (!monstp->inventory_id.size()) {
+                    game->inventory_highlight_slot = {};
                 } else {
-                    while (game->actionbar_highlight_slot >= 
-                        monstp->actionbar_id.size()) {
-                        game->actionbar_highlight_slot--;
+                    while (game->inventory_highlight_slot >= 
+                        monstp->inventory_id.size()) {
+                        game->inventory_highlight_slot--;
                     }
                 }
             }
 
-            level->actionbar_describe(game->actionbar_highlight_slot);
-            game_status_wid_init();
+            level->inventory_describe(game->inventory_highlight_slot);
+            wid_inventory_init();
+            wid_thing_info_fini();
             return true;
         }
     }
     return false;
 }
 
-bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
+bool Thing::inventory_id_remove (Thingp what, Thingp particle_target)
 {_
     auto player = level->player;
     if (!player) {
@@ -268,9 +274,9 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
         return false;
     }
 
-    auto actionbar_items = player->monstp->actionbar_id.size();
-    for (auto i = 0U; i < actionbar_items; i++) {
-        auto tp_id = monstp->actionbar_id[i];
+    auto inventory_items = player->monstp->inventory_id.size();
+    for (auto i = 0U; i < inventory_items; i++) {
+        auto tp_id = monstp->inventory_id[i];
         if (!tp_id) {
             continue;
         }
@@ -281,32 +287,34 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
 
         if (what->tp() == tpp) {
             if (particle_target) {
-                actionbar_particle(what, i, particle_target);
+                inventory_particle(what, i, particle_target);
             }
 
-            auto cnt = actionbar_id_slot_count(i);
+            auto cnt = inventory_id_slot_count(i);
             log("remove slot %d, count %d", cnt, i);
             if (cnt > 1) {_
                 log("decrement slot count");
-                game_status_wid_init();
+                wid_inventory_init();
+                wid_thing_info_fini();
                 return true;
             } else {_
                 log("remove slot");
-                monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
+                monstp->inventory_id.erase(monstp->inventory_id.begin() + i);
 
-                if (!monstp->actionbar_id.size()) {
-                    game->actionbar_highlight_slot = {};
+                if (!monstp->inventory_id.size()) {
+                    game->inventory_highlight_slot = {};
                 } else {
-                    while (game->actionbar_highlight_slot >= 
-                        monstp->actionbar_id.size()) {
-                        game->actionbar_highlight_slot--;
+                    while (game->inventory_highlight_slot >= 
+                        monstp->inventory_id.size()) {
+                        game->inventory_highlight_slot--;
                     }
 
-                    level->actionbar_describe(game->actionbar_highlight_slot);
+                    level->inventory_describe(game->inventory_highlight_slot);
                 }
             }
 
-            game_status_wid_init();
+            wid_inventory_init();
+            wid_thing_info_fini();
             return true;
         }
     }
@@ -314,9 +322,9 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp particle_target)
     return false;
 }
 
-int Thing::actionbar_id_slot_count (const uint32_t slot)
+int Thing::inventory_id_slot_count (const uint32_t slot)
 {_
-    auto tp_id = get(monstp->actionbar_id, slot);
+    auto tp_id = get(monstp->inventory_id, slot);
     if (!tp_id) {
         return 0;
     }
@@ -348,7 +356,7 @@ int Thing::actionbar_id_slot_count (const uint32_t slot)
     return count;
 }
 
-Thingp Level::actionbar_get (const uint32_t slot)
+Thingp Level::inventory_get (const uint32_t slot)
 {_
     if (!player) {
         return 0;
@@ -359,11 +367,11 @@ Thingp Level::actionbar_get (const uint32_t slot)
         return 0;
     }
 
-    if (slot >= monstp->actionbar_id.size()) {
+    if (slot >= monstp->inventory_id.size()) {
         return nullptr;
     }
 
-    auto tp_id = get(monstp->actionbar_id, slot);
+    auto tp_id = get(monstp->inventory_id, slot);
     if (!tp_id) {
         return nullptr;
     }
@@ -383,40 +391,39 @@ Thingp Level::actionbar_get (const uint32_t slot)
     return nullptr;
 }
 
-Thingp Level::actionbar_get (void)
+Thingp Level::inventory_get (void)
 {_
-    return actionbar_get(game->actionbar_highlight_slot);
+    return inventory_get(game->inventory_highlight_slot);
 }
 
-bool Level::actionbar_select (const uint32_t slot)
+bool Level::inventory_select (const uint32_t slot)
 {_
     if (!player) {
         return false;
     }
 
-    if (slot >= player->monstp->actionbar_id.size()) {
+    if (slot >= player->monstp->inventory_id.size()) {
         return false;
     }
 
-    auto oid = get(player->monstp->actionbar_id, slot);
+    auto oid = get(player->monstp->inventory_id, slot);
     if (!oid) {
         return false;
     }
 
-    if (slot != game->actionbar_highlight_slot) {
-        game->actionbar_highlight_slot = slot;
-        actionbar_describe(slot);
-        game_status_wid_init();
+    if (slot != game->inventory_highlight_slot) {
+        game->inventory_highlight_slot = slot;
+        inventory_describe(slot);
     } else {
-        actionbar_describe(game->actionbar_highlight_slot);
+        inventory_describe(game->inventory_highlight_slot);
     }
 
     return true;
 }
 
-bool Level::actionbar_describe (const uint32_t slot)
+bool Level::inventory_describe (const uint32_t slot)
 {_
-    auto t = actionbar_get(game->actionbar_highlight_slot);
+    auto t = inventory_get(game->inventory_highlight_slot);
     if (!t) {
         return false;
     }

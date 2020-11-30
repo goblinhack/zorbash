@@ -11,7 +11,7 @@
 #include "my_level.h"
 #include "my_wid_console.h"
 #include "stb_image_write.h"
-#include "my_game_status.h"
+#include "my_wid_rightbar.h"
 
 static int sdl_get_mouse(void);
 
@@ -1258,7 +1258,7 @@ void sdl_loop (void)
             ui_timestamp_slow_last = timestamp_now;
 
             //
-            // Update status and sidebars
+            // Update status and rightbars
             //
             if (game) {
                 if (game->paused()) {
@@ -1272,7 +1272,7 @@ void sdl_loop (void)
                         // on screen widgets are updated with the new wid
                         // we are about to make.
                         //
-                        game_status_wid_init();
+                        wid_rightbar_init();
                         wid_display_all();
                     }
                 }

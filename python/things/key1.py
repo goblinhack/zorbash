@@ -20,7 +20,7 @@ def key_init(name, text_name):
     x.set_is_key(True)
     x.set_is_light_strength(2)
     x.set_is_movable(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("an");

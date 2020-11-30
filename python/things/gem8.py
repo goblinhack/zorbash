@@ -17,7 +17,7 @@ def tp_init(name, text_name):
     x.set_is_item(True)
     x.set_is_item_class_b(True)
     x.set_is_item_collected_as_gold(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_is_treasure(True)
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");

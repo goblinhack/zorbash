@@ -7,7 +7,7 @@
 #include "my_depth.h"
 #include "my_dmap.h"
 #include "my_game.h"
-#include "my_game_status.h"
+#include "my_wid_inventory.h"
 #include "my_sdl.h"
 #include "my_thing.h"
 #include "my_wid.h"
@@ -30,7 +30,7 @@ void Thing::cursor_hover_over_check (void)
 
     if ((mx >= tblit_tl.x) && (mx <= tblit_br.x)) {
         if ((my >= tblit_tl.y) && (my <= tblit_br.y)) {
-            if (is_mouse_over_actionbar()) {
+            if (is_mouse_over_inventory()) {
                 return;
             }
             level->cursor_at = mid_at;

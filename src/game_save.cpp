@@ -77,7 +77,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* point        wander_target             */ out << bits(my.t->wander_target);
     /* std::list<ThingId>   carrying          */ out << bits(my.t->carrying);
     /* std::string          msg               */ out << bits(my.t->msg);
-    /* std::vector<ThingId> actionbar_id      */ out << bits(my.t->actionbar_id);
+    /* std::vector<ThingId> inventory_id      */ out << bits(my.t->inventory_id);
     /* std::vector<ThingId> enemies           */ out << bits(my.t->enemies);
     /* std::vector<point>   move_path         */ out << bits(my.t->move_path);
     /* timestamp_t  timestamp_born            */ out << bits(my.t->timestamp_born);
@@ -439,7 +439,7 @@ std::ostream& operator<<(std::ostream &out,
     /* std::string        seed_name                    */ out << bits(my.t.seed_name);
     /* point3d            current_level                */ out << bits(my.t.current_level);
     /* timestamp_t        last_pause                   */ out << bits(my.t.last_pause);
-    /* uint32_t           actionbar_highlight_slot     */ out << bits(my.t.actionbar_highlight_slot);
+    /* uint32_t           inventory_highlight_slot     */ out << bits(my.t.inventory_highlight_slot);
     /* uint32_t           fps_value                    */ out << bits(my.t.fps_value);
     /* uint32_t           things_are_moving            */ out << bits(my.t.things_are_moving);
     /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);

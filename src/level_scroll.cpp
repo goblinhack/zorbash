@@ -10,7 +10,7 @@
 #include "my_gl.h"
 #include "my_thing.h"
 #include "my_wid.h"
-#include "my_game_status.h"
+#include "my_wid_rightbar.h"
 
 void Level::scroll_map_do (bool fast)
 {_

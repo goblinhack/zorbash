@@ -6,7 +6,7 @@
 #include "my_game.h"
 #include "my_game.h"
 #include "my_wid_popup.h"
-#include "my_game_status.h"
+#include "my_wid_rightbar.h"
 
 static WidPopup *game_config_top_window;
 
@@ -109,7 +109,7 @@ void Game::config_top_select (void)
     if (game_config_top_window) {
         game_config_top_destroy();
     }
-    game_status_wid_fini();
+    wid_rightbar_fini();
 
     point tl = make_point(
                 TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2,
@@ -119,7 +119,7 @@ void Game::config_top_select (void)
                 TERM_HEIGHT / 2 + 14);
     auto width = br.x - tl.x - 2;
 
-    game_config_top_window = new WidPopup(tl, br, nullptr, "", false, false);
+    game_config_top_window = new WidPopup(tl, br, nullptr, "nothing", false, false);
     {_
         Widp w = game_config_top_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_top_key_up);

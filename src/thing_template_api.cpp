@@ -240,7 +240,7 @@ int Tp::is_rrr59(void) const { return _is_rrr59; }
 int Tp::is_rrr6(void) const { return _is_rrr6; }
 int Tp::is_rrr_98(void) const { return _is_rrr_98; }
 int Tp::gfx_is_rrr99(void) const { return _gfx_is_rrr99; }
-int Tp::is_shown_uniquely_on_monstbar(void) const { return _is_shown_uniquely_on_monstbar; }
+int Tp::is_shown_uniquely_on_leftbar(void) const { return _is_shown_uniquely_on_leftbar; }
 int Tp::is_stamina_check(void) const { return _is_stamina_check; }
 int Tp::gfx_shown_in_bg(void) const { return _gfx_shown_in_bg; }
 int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
@@ -252,7 +252,7 @@ int Tp::is_rrr8(void) const { return _is_rrr8; }
 int Tp::is_rrr9(void) const { return _is_rrr9; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_shovable(void) const { return _is_shovable; }
-int Tp::is_shown_on_monstbar(void) const { return _is_shown_on_monstbar; }
+int Tp::is_shown_on_leftbar(void) const { return _is_shown_on_leftbar; }
 int Tp::is_jelly(void) const { return _is_jelly; }
 int Tp::is_jelly_baby(void) const { return _is_jelly_baby; }
 int Tp::is_jelly_baby_eater(void) const { return _is_jelly_baby_eater; }
@@ -481,7 +481,7 @@ void Tp::set_is_rrr59(int v) { _is_rrr59 = v; }
 void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
 void Tp::set_is_rrr_98(int v) { _is_rrr_98 = v; }
 void Tp::set_gfx_is_rrr99(int v) { _gfx_is_rrr99 = v; }
-void Tp::set_is_shown_uniquely_on_monstbar(int v) { _is_shown_uniquely_on_monstbar = v; }
+void Tp::set_is_shown_uniquely_on_leftbar(int v) { _is_shown_uniquely_on_leftbar = v; }
 void Tp::set_is_stamina_check(int v) { _is_stamina_check = v; }
 void Tp::set_gfx_shown_in_bg(int v) { _gfx_shown_in_bg = v; }
 void Tp::set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
@@ -493,7 +493,7 @@ void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
 void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
 void Tp::set_is_shovable(int v) { _is_shovable = v; }
-void Tp::set_is_shown_on_monstbar(int v) { _is_shown_on_monstbar = v; }
+void Tp::set_is_shown_on_leftbar(int v) { _is_shown_on_leftbar = v; }
 void Tp::set_is_jelly(int v) { _is_jelly = v; }
 void Tp::set_is_jelly_baby(int v) { _is_jelly_baby = v; }
 void Tp::set_is_jelly_baby_eater(int v) { _is_jelly_baby_eater = v; }

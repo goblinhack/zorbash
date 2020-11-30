@@ -6,7 +6,7 @@
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
-#include "my_game_status.h"
+#include "my_wid_rightbar.h"
 
 bool Thing::steal_treasure_from (Thingp it)
 {_
@@ -71,8 +71,8 @@ _
     }
 
     //
-    // Update the actionbar
+    // Update the inventory
     //
-    game_status_wid_init();
+    wid_rightbar_init();
     return true;
 }

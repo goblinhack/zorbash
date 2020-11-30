@@ -46,7 +46,7 @@ def tp_init(name, text_name):
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
     x.set_is_movable(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_on_birth_do("jelly1.spawn()")

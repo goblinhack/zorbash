@@ -119,47 +119,47 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action0) {
-        level->actionbar_select(0);
+        level->inventory_select(0);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action1) {
-        level->actionbar_select(1);
+        level->inventory_select(1);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action2) {
-        level->actionbar_select(2);
+        level->inventory_select(2);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action3) {
-        level->actionbar_select(3);
+        level->inventory_select(3);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action4) {
-        level->actionbar_select(4);
+        level->inventory_select(4);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action5) {
-        level->actionbar_select(5);
+        level->inventory_select(5);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action6) {
-        level->actionbar_select(6);
+        level->inventory_select(6);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action7) {
-        level->actionbar_select(7);
+        level->inventory_select(7);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action8) {
-        level->actionbar_select(8);
+        level->inventory_select(8);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action9) {
-        level->actionbar_select(9);
+        level->inventory_select(9);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
-	auto what = level->actionbar_get();
+	auto what = level->inventory_get();
 	if (what) {
 	    if (player->drop(what)) {
                 game->tick_begin("drop");
@@ -168,14 +168,14 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
-        auto what = level->actionbar_get();
+        auto what = level->inventory_get();
         if (what) {
             player->use(what);
         }
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_eat) {
-        auto what = level->actionbar_get();
+        auto what = level->inventory_get();
         if (what) {
             player->use(what);
         }

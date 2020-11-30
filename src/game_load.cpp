@@ -10,7 +10,7 @@
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_game_error.h"
-#include "my_game_status.h"
+#include "my_wid_rightbar.h"
 #include "my_thing.h"
 #include "my_alloc.h"
 #include "my_sprintf.h"
@@ -104,7 +104,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* point        wander_target             */ in >> bits(my.t->wander_target);
     /* std::list<ThingId>   carrying          */ in >> bits(my.t->carrying);
     /* std::string          msg               */ in >> bits(my.t->msg);
-    /* std::vector<ThingId> actionbar_id      */ in >> bits(my.t->actionbar_id);
+    /* std::vector<ThingId> inventory_id      */ in >> bits(my.t->inventory_id);
     /* std::vector<ThingId> enemies           */ in >> bits(my.t->enemies);
     /* std::vector<point>   move_path         */ in >> bits(my.t->move_path);
     /* timestamp_t  timestamp_born            */ in >> bits(T); my.t->timestamp_born = load(T);
@@ -569,7 +569,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* std::string        seed_name                    */ in >> bits(my.t.seed_name);
     /* point3d            current_level                */ in >> bits(my.t.current_level);
     /* timestamp_t        last_pause                   */ in >> bits(my.t.last_pause);
-    /* uint32_t           actionbar_highlight_slot     */ in >> bits(my.t.actionbar_highlight_slot);
+    /* uint32_t           inventory_highlight_slot     */ in >> bits(my.t.inventory_highlight_slot);
     /* uint32_t           fps_value                    */ in >> bits(my.t.fps_value);
     /* uint32_t           things_are_moving            */ in >> bits(my.t.things_are_moving);
     /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
@@ -706,8 +706,8 @@ Game::load (std::string file_to_load, class Game &target)
     if (!game_load_headers_only) {
         wid_visible(wid_minicon_window);
         wid_visible(wid_botcon_window);
-        game_status_wid_fini();
-        game_status_wid_init();
+        wid_rightbar_fini();
+        wid_rightbar_init();
     }
 
     free(uncompressed);
