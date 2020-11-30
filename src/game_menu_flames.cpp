@@ -7,7 +7,7 @@
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
-#include "my_game_status.h"
+#include "my_wid_rightbar.h"
 #include "my_gl.h"
 
 std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg {};

@@ -362,8 +362,8 @@ class Tp:
     def set_gfx_is_rrr99(self, value):
         zx.tp_set_gfx_is_rrr99(self, value)
 
-    def set_is_shown_uniquely_on_monstbar(self, value):
-        zx.tp_set_is_shown_uniquely_on_monstbar(self, value)
+    def set_is_shown_uniquely_on_leftbar(self, value):
+        zx.tp_set_is_shown_uniquely_on_leftbar(self, value)
 
     def set_is_stamina_check(self, value):
         zx.tp_set_is_stamina_check(self, value)
@@ -452,8 +452,8 @@ class Tp:
     def set_is_potion(self, value):
         zx.tp_set_is_potion(self, value)
 
-    def set_is_shown_on_monstbar(self, value):
-        zx.tp_set_is_shown_on_monstbar(self, value)
+    def set_is_shown_on_leftbar(self, value):
+        zx.tp_set_is_shown_on_leftbar(self, value)
 
     def set_is_floating(self, value):
         zx.tp_set_is_floating(self, value)

@@ -255,8 +255,8 @@ private:
     int _is_rrr_98 {};
     int _is_secret_door {};
     int _is_shovable {};
-    int _is_shown_on_monstbar {};
-    int _is_shown_uniquely_on_monstbar {};
+    int _is_shown_on_leftbar {};
+    int _is_shown_uniquely_on_leftbar {};
     int _is_smoke {};
     int _is_stamina_check {};
     int _is_steal_item_chance_d1000 {};
@@ -509,7 +509,7 @@ public:
     int is_item_class_a(void) const;
     int is_item_class_b(void) const;
     int is_item_eater(void) const;
-    int is_shown_on_monstbar(void) const;
+    int is_shown_on_leftbar(void) const;
     int is_jumper(void) const;
     int is_jumper_chance_d1000(void) const;
     int is_jumper_distance(void) const;
@@ -598,7 +598,7 @@ public:
     int is_rrr6(void) const;
     int is_rrr_98(void) const;
     int gfx_is_rrr99(void) const;
-    int is_shown_uniquely_on_monstbar(void) const;
+    int is_shown_uniquely_on_leftbar(void) const;
     int is_stamina_check(void) const;
     int gfx_shown_in_bg(void) const;
     int on_death_drop_all_items(void) const;
@@ -750,7 +750,7 @@ public:
     void set_is_item_class_a(int);
     void set_is_item_class_b(int);
     void set_is_item_eater(int);
-    void set_is_shown_on_monstbar(int);
+    void set_is_shown_on_leftbar(int);
     void set_is_jumper(int);
     void set_is_jumper_chance_d1000(int);
     void set_is_jumper_distance(int);
@@ -840,7 +840,7 @@ public:
     void set_is_rrr6(int);
     void set_is_rrr_98(int);
     void set_gfx_is_rrr99(int);
-    void set_is_shown_uniquely_on_monstbar(int);
+    void set_is_shown_uniquely_on_leftbar(int);
     void set_is_stamina_check(int);
     void set_gfx_shown_in_bg(int);
     void set_on_death_drop_all_items(int);

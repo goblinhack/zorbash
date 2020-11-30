@@ -25,14 +25,14 @@ bool Thing::drop (Thingp what, Thingp target)
 
     if (is_player()) {
         if (target) {
-            if (!actionbar_id_remove(what, target)) {
-                err("failed to drop %s from actionbar", 
+            if (!inventory_id_remove(what, target)) {
+                err("failed to drop %s from inventory", 
                     what->to_string().c_str());
                 return false;
             }
         } else {
-            if (!actionbar_id_remove(what)) {
-                err("failed to drop %s from actionbar", 
+            if (!inventory_id_remove(what)) {
+                err("failed to drop %s from inventory", 
                     what->to_string().c_str());
                 return false;
             }

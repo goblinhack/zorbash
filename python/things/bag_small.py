@@ -21,7 +21,7 @@ def potion_init(name, text_name):
     x.set_is_item_class_a(True)
     x.set_is_item_not_stackable(True)
     x.set_is_movable(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");
     x.set_text_description("A small brown bag")

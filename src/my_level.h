@@ -1697,14 +1697,14 @@ public:
         set_no_check(_is_lit, x, y, (uint8_t)0);
     }
 
-    Thingp actionbar_get(const uint32_t slot);
-    Thingp actionbar_get(void);
+    Thingp inventory_get(const uint32_t slot);
+    Thingp inventory_get(void);
     Thingp thing_find(const ThingId id);
     Thingp thing_new(const std::string& tp_name, Thingp owner);
     Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
     Thingp thing_new(const std::string& tp_name, const point at);
-    bool actionbar_describe(const uint32_t slot);
-    bool actionbar_select(const uint32_t slot);
+    bool inventory_describe(const uint32_t slot);
+    bool inventory_select(const uint32_t slot);
     const char *to_cstring(void);
     std::string to_string(void);
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

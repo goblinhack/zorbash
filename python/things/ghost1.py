@@ -32,7 +32,7 @@ def tp_init(name, text_name):
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
     x.set_is_movable(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_normal_placement_rules(True)
     x.set_stats_attack_dice("1d1")

@@ -9,7 +9,7 @@
 #include "my_tex.h"
 #include "my_gl.h"
 #include "my_thing.h"
-#include "my_game_status.h"
+#include "my_wid_inventory.h"
 
 void Level::cursor_check_if_scroll_needed (void)
 {_
@@ -115,7 +115,7 @@ void Level::cursor_find_on_visible_things (
 //
 void Level::cursor_move (void)
 {_
-    if (is_mouse_over_actionbar()) {
+    if (is_mouse_over_inventory()) {
         return;
     }
 

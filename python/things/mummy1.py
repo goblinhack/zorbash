@@ -42,7 +42,7 @@ def tp_init(name, text_name):
     x.set_is_movable(True)
     x.set_is_resurrectable(True)
     x.set_is_shovable(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_is_water_hater(100)
     x.set_normal_placement_rules(True)

@@ -4,14 +4,14 @@
 //
 
 #pragma once
-void game_status_wid_fini(void);
-uint8_t game_status_wid_init(void);
+void wid_inventory_fini(void);
+uint8_t wid_inventory_init(void);
 
 #include "my_wid.h"
 
 //
 // Global widgets.
 //
-extern Widp game_status_window;
+extern Widp wid_inventory_window;
 
-extern bool is_mouse_over_actionbar(void);
+extern bool is_mouse_over_inventory(void);

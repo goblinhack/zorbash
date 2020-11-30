@@ -27,8 +27,8 @@ _
     }
 
     if (is_player()) {
-        if (!actionbar_id_insert(what)) {
-            log("no; no space in actionbar");
+        if (!inventory_id_insert(what)) {
+            log("no; no space in inventory");
             return false;
         }
     }

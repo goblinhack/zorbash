@@ -45,7 +45,7 @@ def tp_init(name, text_name):
     x.set_is_monst(True)
     x.set_is_movable(True)
     x.set_is_potion_eater(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_is_jelly_baby_eater(True)
     x.set_is_jelly_eater(True)
     x.set_is_steal_item_chance_d1000(100)

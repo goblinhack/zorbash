@@ -18,7 +18,7 @@ def tp_init(name, text_name):
     x.set_is_item_class_a(False)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_is_throwable(True)
     x.set_is_usable(True)
     x.set_normal_placement_rules(True)

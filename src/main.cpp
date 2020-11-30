@@ -125,9 +125,6 @@ void quit (void)
     LOG("FINI: wid_botcon_fini");
     wid_botcon_fini();
 
-    LOG("FINI: wid_test_fini");
-    wid_test_fini();
-
     LOG("FINI: command_fini");
     command_fini();
 

@@ -26,7 +26,7 @@ def tp_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_light_blocker(True)
     x.set_is_movement_blocking_hard(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_normal_placement_rules(True)
     x.set_on_death_is_corpse(True)
     x.set_on_death_is_open(True)

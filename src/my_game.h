@@ -123,8 +123,8 @@ public:
     void config_keyboard_select(void);
     void config_top_select(void);
     void dead_select(const char *reason);
-    void monst_info_create(Thingp);
-    void monst_info_destroy(void);
+    void wid_thing_info_create(Thingp);
+    void wid_thing_info_destroy(void);
     void credits_select(void);
     void display(void);
     void fini(void);
@@ -172,7 +172,7 @@ public:
     std::string        seed_name {};        // Human readable version of the above
     point3d            current_level;       // Where we are in the world.
     timestamp_t        last_pause {};
-    uint32_t           actionbar_highlight_slot {};
+    uint32_t           inventory_highlight_slot {};
     uint32_t           fps_value = {};      // Current framerate
     uint32_t           things_are_moving {};
     uint32_t           tick_completed {1};

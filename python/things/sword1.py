@@ -103,7 +103,7 @@ def init_weapon(name, text_name):
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_is_treasure(True)
     x.set_is_weapon(True)
     x.set_stats_attack_dice("1d8+1")

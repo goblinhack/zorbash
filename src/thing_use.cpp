@@ -10,7 +10,7 @@
 void Thing::used (Thingp what, Thingp target)
 {_
     if (is_player()) {
-        if (!actionbar_id_remove(what, target)) {
+        if (!inventory_id_remove(what, target)) {
             return;
         }
     }

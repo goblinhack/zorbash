@@ -7,7 +7,9 @@
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
-#include "my_game_status.h"
+#include "my_wid_rightbar.h"
+#include "my_wid_thing_info.h"
+#include "my_wid_inventory.h"
 #include "my_gl.h"
 
 static WidPopup *game_main_menu_window;
@@ -27,11 +29,16 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_main_menu_destroy();
     game->init();
-    game_status_wid_fini();
-    game_status_wid_init();
+    wid_rightbar_fini();
+    wid_rightbar_init();
 
     wid_minicon_fini();
     wid_minicon_init();
+
+    wid_thing_info_fini();
+
+    wid_inventory_fini();
+    wid_inventory_init();
 
     wid_visible(wid_minicon_window);
     MINICON("Welcome to the lair of the dread beholder, %%fg=red$Zorbash%%fg=reset$.");
@@ -307,8 +314,8 @@ void Game::main_menu_select (void)
     if (game_main_menu_window) {
         game_main_menu_destroy();
     }
-    game_status_wid_fini();
-    game->monst_info_destroy();
+    wid_rightbar_fini();
+    game->wid_thing_info_destroy();
 
     point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 19);
     point br = make_point(TERM_WIDTH - 7, TERM_HEIGHT - 1);

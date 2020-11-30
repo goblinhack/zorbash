@@ -21,7 +21,7 @@ def potion_init(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
     x.set_is_potion(True)
-    x.set_is_shown_on_monstbar(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_is_throwable(True)
     x.set_is_usable(True)
     x.set_normal_placement_rules(True)

@@ -8,7 +8,7 @@
 #include "my_depth.h"
 #include "my_color.h"
 #include "my_dmap.h"
-#include "my_game_status.h"
+#include "my_wid_rightbar.h"
 #include "my_game.h"
 #include "my_thing.h"
 
@@ -790,9 +790,9 @@ int Thing::gfx_is_rrr99(void) const
     return (tp()->gfx_is_rrr99());
 }
 
-int Thing::is_shown_uniquely_on_monstbar(void) const
+int Thing::is_shown_uniquely_on_leftbar(void) const
 {_
-    return (tp()->is_shown_uniquely_on_monstbar());
+    return (tp()->is_shown_uniquely_on_leftbar());
 }
 
 int Thing::is_stamina_check(void) const
@@ -935,9 +935,9 @@ int Thing::is_potion(void) const
     return (tp()->is_potion());
 }
 
-int Thing::is_shown_on_monstbar(void) const
+int Thing::is_shown_on_leftbar(void) const
 {_
-    return (tp()->is_shown_on_monstbar());
+    return (tp()->is_shown_on_leftbar());
 }
 
 int Thing::is_floating(void) const
@@ -1475,7 +1475,7 @@ int Thing::set_gold (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->gold = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1487,7 +1487,7 @@ int Thing::decr_gold (int v)
     if (monstp->gold < 0) {
         monstp->gold = 0;
     }
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1496,7 +1496,7 @@ int Thing::incr_gold (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->gold += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1508,7 +1508,7 @@ int Thing::decr_gold (void)
     if (monstp->gold < 0) {
         monstp->gold = 0;
     }
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1517,7 +1517,7 @@ int Thing::incr_gold (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->gold++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1539,7 +1539,7 @@ int Thing::set_keys (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->keys = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1551,7 +1551,7 @@ int Thing::decr_keys (int v)
     if (monstp->keys < 0) {
         monstp->keys = 0;
     }
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1560,7 +1560,7 @@ int Thing::incr_keys (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->keys += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1572,7 +1572,7 @@ int Thing::decr_keys (void)
     if (monstp->keys < 0) {
         monstp->keys = 0;
     }
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1581,7 +1581,7 @@ int Thing::incr_keys (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->keys++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1625,7 +1625,7 @@ uint32_t Thing::set_tick (uint32_t v)
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick = v);
     n = set_max_tick_difference();
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1639,7 +1639,7 @@ uint32_t Thing::decr_tick (uint32_t v)
         return n;
     }
     n = (monstp->tick -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1653,7 +1653,7 @@ uint32_t Thing::incr_tick (uint32_t v)
         return n;
     }
     n = (monstp->tick += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1667,7 +1667,7 @@ uint32_t Thing::decr_tick (void)
         return n;
     }
     n = (monstp->tick--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1681,7 +1681,7 @@ uint32_t Thing::incr_tick (void)
         return n;
     }
     n = (monstp->tick++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1708,7 +1708,7 @@ int Thing::set_stats_health (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1717,7 +1717,7 @@ int Thing::decr_stats_health (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1726,7 +1726,7 @@ int Thing::incr_stats_health (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1735,7 +1735,7 @@ int Thing::decr_stats_health (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1744,7 +1744,7 @@ int Thing::incr_stats_health (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1766,7 +1766,7 @@ int Thing::set_stats_health_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health_max = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1775,7 +1775,7 @@ int Thing::decr_stats_health_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health_max -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1784,7 +1784,7 @@ int Thing::incr_stats_health_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health_max += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1793,7 +1793,7 @@ int Thing::decr_stats_health_max (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health_max--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1802,7 +1802,7 @@ int Thing::incr_stats_health_max (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_health_max++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1829,7 +1829,7 @@ int Thing::set_stats_defence (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1841,7 +1841,7 @@ int Thing::decr_stats_defence (int v)
     if (monstp->stats_defence < 0) {
         monstp->stats_defence = 0;
     }
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1850,7 +1850,7 @@ int Thing::incr_stats_defence (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1862,7 +1862,7 @@ int Thing::decr_stats_defence (void)
     if (monstp->stats_defence < 0) {
         monstp->stats_defence = 0;
     }
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1871,7 +1871,7 @@ int Thing::incr_stats_defence (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1893,7 +1893,7 @@ int Thing::set_stats_defence_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence_max = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1902,7 +1902,7 @@ int Thing::decr_stats_defence_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence_max -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1911,7 +1911,7 @@ int Thing::incr_stats_defence_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence_max += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1920,7 +1920,7 @@ int Thing::decr_stats_defence_max (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence_max--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1929,7 +1929,7 @@ int Thing::incr_stats_defence_max (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_defence_max++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1951,7 +1951,7 @@ int Thing::set_stats_stamina_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina_max = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1960,7 +1960,7 @@ int Thing::decr_stats_stamina_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina_max -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1969,7 +1969,7 @@ int Thing::incr_stats_stamina_max (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina_max += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1978,7 +1978,7 @@ int Thing::decr_stats_stamina_max (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina_max--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -1987,7 +1987,7 @@ int Thing::incr_stats_stamina_max (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina_max++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2009,7 +2009,7 @@ int Thing::set_tick_rate_tenths (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_rate_tenths = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2018,7 +2018,7 @@ int Thing::decr_tick_rate_tenths (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_rate_tenths -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2027,7 +2027,7 @@ int Thing::incr_tick_rate_tenths (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_rate_tenths += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2036,7 +2036,7 @@ int Thing::decr_tick_rate_tenths (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_rate_tenths--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2045,7 +2045,7 @@ int Thing::incr_tick_rate_tenths (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_rate_tenths++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2067,7 +2067,7 @@ uint32_t Thing::set_tick_resurrect_when (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_resurrect_when = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2076,7 +2076,7 @@ uint32_t Thing::decr_tick_resurrect_when (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_resurrect_when -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2085,7 +2085,7 @@ uint32_t Thing::incr_tick_resurrect_when (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_resurrect_when += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2094,7 +2094,7 @@ uint32_t Thing::decr_tick_resurrect_when (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_resurrect_when--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2103,7 +2103,7 @@ uint32_t Thing::incr_tick_resurrect_when (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_resurrect_when++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2125,7 +2125,7 @@ int Thing::set_stats01 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats01 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2134,7 +2134,7 @@ int Thing::decr_stats01 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats01 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2143,7 +2143,7 @@ int Thing::incr_stats01 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats01 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2152,7 +2152,7 @@ int Thing::decr_stats01 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats01--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2161,7 +2161,7 @@ int Thing::incr_stats01 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats01++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2183,7 +2183,7 @@ int Thing::set_stats02 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats02 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2192,7 +2192,7 @@ int Thing::decr_stats02 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats02 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2201,7 +2201,7 @@ int Thing::incr_stats02 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats02 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2210,7 +2210,7 @@ int Thing::decr_stats02 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats02--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2219,7 +2219,7 @@ int Thing::incr_stats02 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats02++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2241,7 +2241,7 @@ int Thing::set_stats03 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats03 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2250,7 +2250,7 @@ int Thing::decr_stats03 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats03 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2259,7 +2259,7 @@ int Thing::incr_stats03 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats03 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2268,7 +2268,7 @@ int Thing::decr_stats03 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats03--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2277,7 +2277,7 @@ int Thing::incr_stats03 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats03++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2299,7 +2299,7 @@ int Thing::set_stats04 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats04 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2308,7 +2308,7 @@ int Thing::decr_stats04 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats04 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2317,7 +2317,7 @@ int Thing::incr_stats04 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats04 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2326,7 +2326,7 @@ int Thing::decr_stats04 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats04--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2335,7 +2335,7 @@ int Thing::incr_stats04 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats04++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2357,7 +2357,7 @@ int Thing::set_stats05 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats05 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2366,7 +2366,7 @@ int Thing::decr_stats05 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats05 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2375,7 +2375,7 @@ int Thing::incr_stats05 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats05 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2384,7 +2384,7 @@ int Thing::decr_stats05 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats05--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2393,7 +2393,7 @@ int Thing::incr_stats05 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats05++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2415,7 +2415,7 @@ int Thing::set_stats06 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats06 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2424,7 +2424,7 @@ int Thing::decr_stats06 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats06 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2433,7 +2433,7 @@ int Thing::incr_stats06 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats06 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2442,7 +2442,7 @@ int Thing::decr_stats06 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats06--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2451,7 +2451,7 @@ int Thing::incr_stats06 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats06++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2473,7 +2473,7 @@ int Thing::set_stats07 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats07 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2482,7 +2482,7 @@ int Thing::decr_stats07 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats07 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2491,7 +2491,7 @@ int Thing::incr_stats07 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats07 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2500,7 +2500,7 @@ int Thing::decr_stats07 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats07--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2509,7 +2509,7 @@ int Thing::incr_stats07 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats07++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2531,7 +2531,7 @@ int Thing::set_stats08 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats08 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2540,7 +2540,7 @@ int Thing::decr_stats08 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats08 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2549,7 +2549,7 @@ int Thing::incr_stats08 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats08 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2558,7 +2558,7 @@ int Thing::decr_stats08 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats08--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2567,7 +2567,7 @@ int Thing::incr_stats08 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats08++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2589,7 +2589,7 @@ int Thing::set_stats09 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats09 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2598,7 +2598,7 @@ int Thing::decr_stats09 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats09 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2607,7 +2607,7 @@ int Thing::incr_stats09 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats09 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2616,7 +2616,7 @@ int Thing::decr_stats09 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats09--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2625,7 +2625,7 @@ int Thing::incr_stats09 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats09++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2647,7 +2647,7 @@ int Thing::set_stats10 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats10 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2656,7 +2656,7 @@ int Thing::decr_stats10 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats10 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2665,7 +2665,7 @@ int Thing::incr_stats10 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats10 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2674,7 +2674,7 @@ int Thing::decr_stats10 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats10--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2683,7 +2683,7 @@ int Thing::incr_stats10 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats10++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2705,7 +2705,7 @@ int Thing::set_stats11 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats11 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2714,7 +2714,7 @@ int Thing::decr_stats11 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats11 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2723,7 +2723,7 @@ int Thing::incr_stats11 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats11 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2732,7 +2732,7 @@ int Thing::decr_stats11 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats11--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2741,7 +2741,7 @@ int Thing::incr_stats11 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats11++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2763,7 +2763,7 @@ int Thing::set_stats12 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats12 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2772,7 +2772,7 @@ int Thing::decr_stats12 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats12 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2781,7 +2781,7 @@ int Thing::incr_stats12 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats12 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2790,7 +2790,7 @@ int Thing::decr_stats12 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats12--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2799,7 +2799,7 @@ int Thing::incr_stats12 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats12++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2821,7 +2821,7 @@ int Thing::set_stats13 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats13 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2830,7 +2830,7 @@ int Thing::decr_stats13 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats13 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2839,7 +2839,7 @@ int Thing::incr_stats13 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats13 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2848,7 +2848,7 @@ int Thing::decr_stats13 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats13--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2857,7 +2857,7 @@ int Thing::incr_stats13 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats13++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2879,7 +2879,7 @@ int Thing::set_stats14 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats14 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2888,7 +2888,7 @@ int Thing::decr_stats14 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats14 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2897,7 +2897,7 @@ int Thing::incr_stats14 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats14 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2906,7 +2906,7 @@ int Thing::decr_stats14 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats14--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2915,7 +2915,7 @@ int Thing::incr_stats14 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats14++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2937,7 +2937,7 @@ int Thing::set_stats15 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats15 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2946,7 +2946,7 @@ int Thing::decr_stats15 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats15 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2955,7 +2955,7 @@ int Thing::incr_stats15 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats15 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2964,7 +2964,7 @@ int Thing::decr_stats15 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats15--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2973,7 +2973,7 @@ int Thing::incr_stats15 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats15++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -2995,7 +2995,7 @@ int Thing::set_stats16 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats16 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3004,7 +3004,7 @@ int Thing::decr_stats16 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats16 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3013,7 +3013,7 @@ int Thing::incr_stats16 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats16 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3022,7 +3022,7 @@ int Thing::decr_stats16 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats16--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3031,7 +3031,7 @@ int Thing::incr_stats16 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats16++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3053,7 +3053,7 @@ int Thing::set_stats17 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats17 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3062,7 +3062,7 @@ int Thing::decr_stats17 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats17 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3071,7 +3071,7 @@ int Thing::incr_stats17 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats17 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3080,7 +3080,7 @@ int Thing::decr_stats17 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats17--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3089,7 +3089,7 @@ int Thing::incr_stats17 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats17++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3111,7 +3111,7 @@ int Thing::set_stats18 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats18 = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3120,7 +3120,7 @@ int Thing::decr_stats18 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats18 -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3129,7 +3129,7 @@ int Thing::incr_stats18 (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats18 += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3138,7 +3138,7 @@ int Thing::decr_stats18 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats18--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3147,7 +3147,7 @@ int Thing::incr_stats18 (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats18++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3174,7 +3174,7 @@ int Thing::set_stats_stamina (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3186,7 +3186,7 @@ int Thing::decr_stats_stamina (int v)
     if (monstp->stats_stamina < 0) {
         monstp->stats_stamina = 0;
     }
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3195,7 +3195,7 @@ int Thing::incr_stats_stamina (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3207,7 +3207,7 @@ int Thing::decr_stats_stamina (void)
     if (monstp->stats_stamina < 0) {
         monstp->stats_stamina = 0;
     }
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3216,7 +3216,7 @@ int Thing::incr_stats_stamina (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_stamina++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3238,7 +3238,7 @@ int Thing::set_stats_strength (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_strength = v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3247,7 +3247,7 @@ int Thing::decr_stats_strength (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_strength -= v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3256,7 +3256,7 @@ int Thing::incr_stats_strength (int v)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_strength += v);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3265,7 +3265,7 @@ int Thing::decr_stats_strength (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_strength--);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
@@ -3274,7 +3274,7 @@ int Thing::incr_stats_strength (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stats_strength++);
-    if (is_player()) { game_status_wid_init(); }
+    if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 

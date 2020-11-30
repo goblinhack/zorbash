@@ -4,23 +4,23 @@
 //
 
 #include "my_game.h"
-#include "my_game_monsts.h"
+#include "my_wid_leftbar.h"
 #include "my_thing.h"
 #include "my_level.h"
 #include "my_sprintf.h"
 
-static void game_monsts_wid_create(void);
+static void wid_leftbar_create(void);
 
-Widp wid_items {};
+Widp wid_monsts {};
 
-void game_monsts_wid_fini (void)
+void wid_leftbar_fini (void)
 {_
-    wid_destroy(&wid_items);
+    wid_destroy(&wid_monsts);
 }
 
-uint8_t game_monsts_wid_init (void)
+uint8_t wid_leftbar_init (void)
 {_
-    game_monsts_wid_create();
+    wid_leftbar_create();
 
     return (true);
 }
@@ -59,7 +59,7 @@ static void game_monsts_mouse_over_e (Widp w)
     game->level->highlight = nullptr;
 }
 
-static void game_monsts_wid_create (void)
+static void wid_leftbar_create (void)
 {_
     auto level = game->level;
     if (!level) {
@@ -70,7 +70,7 @@ static void game_monsts_wid_create (void)
         return;
     }
 
-    game_monsts_wid_fini();
+    wid_leftbar_fini();
 
     auto minx = std::max(0, (int) level->map_at.x);
     auto maxx = std::min(MAP_WIDTH, (int)level->map_at.x + TILES_ACROSS);
@@ -84,10 +84,10 @@ static void game_monsts_wid_create (void)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                    if (!t->is_shown_on_monstbar()) {
+                    if (!t->is_shown_on_leftbar()) {
                         continue;
                     }
-                    if (t->is_shown_uniquely_on_monstbar()) {
+                    if (t->is_shown_uniquely_on_leftbar()) {
                         auto name = t->tp()->name();
                         if (shown[name]) {
                             continue;
@@ -132,13 +132,13 @@ static void game_monsts_wid_create (void)
         point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, tl.y + height + 3);
         color c;
 
-        wid_items = wid_new_square_window("text container2");
-        wid_set_pos(wid_items, tl, br);
-        wid_set_shape_none(wid_items);
-        // wid_set_style(wid_items, UI_WID_STYLE_OUTLINE);
-        // wid_set_style(wid_items, UI_WID_STYLE_GREEN);
-        wid_set_shape_square(wid_items);
-        wid_set_ignore_scroll_events(wid_items, true);
+        wid_monsts = wid_new_square_window("text container2");
+        wid_set_pos(wid_monsts, tl, br);
+        wid_set_shape_none(wid_monsts);
+        // wid_set_style(wid_monsts, UI_WID_STYLE_OUTLINE);
+        // wid_set_style(wid_monsts, UI_WID_STYLE_GREEN);
+        wid_set_shape_square(wid_monsts);
+        wid_set_ignore_scroll_events(wid_monsts, true);
     }
 
     sort(items.begin(),
@@ -149,7 +149,7 @@ static void game_monsts_wid_create (void)
 
     auto row = 1;
     for (auto t : items) {
-        auto w = wid_new_plain(wid_items, "item");
+        auto w = wid_new_plain(wid_monsts, "item");
         point tl = make_point(0, row);
         point br = make_point(0, row);
         wid_set_pos(w, tl, br);
@@ -158,7 +158,7 @@ static void game_monsts_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
 
         {
-            auto w = wid_new_plain(wid_items, "item");
+            auto w = wid_new_plain(wid_monsts, "item");
             point tl = make_point(2, row);
             point br = make_point(UI_SIDEBAR_LEFT_WIDTH - 1, row);
             wid_set_pos(w, tl, br);
@@ -192,6 +192,6 @@ static void game_monsts_wid_create (void)
         row++;
     }
 
-    wid_lower(wid_items);
-    wid_update(wid_items);
+    wid_lower(wid_monsts);
+    wid_update(wid_monsts);
 }
