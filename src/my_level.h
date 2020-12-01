@@ -188,7 +188,7 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
-                if (t->is_the_grid) { continue; }                   \
+                if (!t->is_the_grid) { continue; }                  \
 
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
         if (!(level)->is_oob(x, y)) {                               \
