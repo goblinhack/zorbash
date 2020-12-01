@@ -23,6 +23,7 @@ public:
     const char *to_cstring(void);
     Dice (std::string s);
     int roll(void) const;
+    int max_roll(void) const;
     bool crit_roll(void) const;
     bool crit_roll_minus_modifier(void) const;
     int operator ()() const;
