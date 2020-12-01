@@ -1,0 +1,74 @@
+//
+// Copyright goblinhack@gmail.com
+// See the README.md file for license info.
+//
+
+#include "my_main.h"
+#include "my_level.h"
+#include "my_thing.h"
+
+int Thing::get_danger_level (void)
+{_
+    int danger_level = 0;
+
+    danger_level = get_stats_health() / 10;
+
+    if (is_resurrectable()) {
+        danger_level *= 2;
+    }
+    if (is_attack_shove()) {
+        danger_level ++;
+    }
+    if (is_carrying_item()) {
+        danger_level ++;
+    }
+    if (is_acid()) {
+        danger_level ++;
+    }
+    if (is_fire()) {
+        danger_level ++;
+    }
+    if (is_lava()) {
+        danger_level ++;
+    }
+    if (is_floating()) {
+        danger_level += 2;
+    }
+    if (is_jumper()) {
+        danger_level += 2;
+    }
+    if (is_item_eater()) {
+        danger_level += 20;
+    }
+
+    danger_level += get_stats_attack_dice().max_roll();
+
+    // minicon("level %d", danger_level);
+    return danger_level;
+}
+
+int Thing::is_dangerous(Thingp it)
+{
+    int a = get_danger_level();
+    int b = it->get_danger_level();
+    return b >= a;
+}
+
+std::string Thing::get_danger_level(Thingp it)
+{
+    auto a = get_danger_level();
+    auto b = it->get_danger_level();
+    auto delta = b - a;
+
+    if (delta > 20) {
+        return "%%fg=red$deadly";
+    } else if (delta > 10) {
+        return "%%fg=red$dangerous";
+    } else if (delta >= 0) {
+        return "%%fg=orange$caution advised";
+    } else if (delta <= -10) {
+        return "%%fg=green$harmless";
+    } else {
+        return "%%fg=green$mostly harmless";
+    }
+}

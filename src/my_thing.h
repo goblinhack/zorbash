@@ -847,6 +847,9 @@ public:
     bool will_avoid(const point p) const;
     bool will_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
+    int get_danger_level(void);
+    int is_dangerous(Thingp);
+    std::string get_danger_level(Thingp);
     const char *to_cstring(void) const;
     const std::string& gfx_anim_attack(void) const;
     const std::string& light_color(void) const;

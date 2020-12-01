@@ -35,6 +35,18 @@ void Game::wid_thing_info_create (Thingp t)
         wid_thing_info_destroy();
     }
 
+    if (wid_console_window && wid_console_window->visible) {
+        return;
+    }
+
+    if (!game->level){
+        return;
+    }
+
+    if (!game->level->player){
+        return;
+    }
+
     if (!t) {
         return;
     }
@@ -83,11 +95,16 @@ void Game::wid_thing_info_create (Thingp t)
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
+    wid_thing_info_window->log(" ");
     wid_thing_info_window->log(tp->long_text_description());
+    wid_thing_info_window->log(" ");
+
+    std::string danger_level = game->level->player->get_danger_level(t);
+    wid_thing_info_window->log(danger_level);
 
     int utilized = wid_thing_info_window->wid_text_area->line_count;
-    wid_move_delta(wid_thing_info_window->wid_popup_container, 0, height - utilized - 1);
-    wid_resize(wid_thing_info_window->wid_popup_container, -1, utilized + 1);
+    wid_move_delta(wid_thing_info_window->wid_popup_container, 0, height - utilized + 2);
+    wid_resize(wid_thing_info_window->wid_popup_container, -1, utilized - 2);
 
     wid_update(wid_thing_info_window->wid_text_area->wid_text_area);
 }
