@@ -10,6 +10,7 @@
 #include "my_wid_thing_info.h"
 #include "my_thing.h"
 #include "my_tile.h"
+#include "my_wid_console.h"
 
 static WidPopup *wid_thing_info_window;
 
