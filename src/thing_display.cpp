@@ -789,6 +789,16 @@ void Thing::blit_internal (int fbo,
                 tile_blit(tile, blit_tl, blit_br);
                 blit_end_reflection_submerged(submerged);
             } else {
+                if (tile && tile_get_height(tile) != TILE_HEIGHT) {
+                    if (tpp->gfx_oversized_but_sitting_on_the_ground()) {
+                        //
+                        // Seems to be ok
+                        //
+                    } else {
+                        blit_br.y += TILE_HEIGHT;
+                        blit_tl.y += TILE_HEIGHT;
+                    }
+                }
                 tile_blit(tile, blit_tl, blit_br);
             }
         } else if (auto submerged = blit_begin_submerged()) {
