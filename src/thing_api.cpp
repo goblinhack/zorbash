@@ -780,9 +780,9 @@ int Thing::is_rrr59(void) const
     return (tp()->is_rrr59());
 }
 
-int Thing::is_rrr_98(void) const
+int Thing::rarity(void) const
 {_
-    return (tp()->is_rrr_98());
+    return (tp()->rarity());
 }
 
 int Thing::gfx_is_rrr99(void) const

@@ -1054,7 +1054,7 @@ public:
     int is_rrr58(void) const;
     int is_rrr59(void) const;
     int is_rrr6(void) const;
-    int is_rrr_98(void) const;
+    int rarity(void) const;
     int gfx_is_rrr99(void) const;
     int is_shown_uniquely_on_leftbar(void) const;
     int is_stamina_check(void) const;

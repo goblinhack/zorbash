@@ -61,14 +61,14 @@ std::string Thing::get_danger_level(Thingp it)
     auto delta = b - a;
 
     if (delta > 20) {
-        return "%%fg=red$deadly";
+        return "%%fg=red$Deadly. Avoid!";
     } else if (delta > 10) {
-        return "%%fg=red$dangerous";
+        return "%%fg=red$Dangerous";
     } else if (delta >= 0) {
-        return "%%fg=orange$caution advised";
+        return "%%fg=orange$Caution advised";
     } else if (delta <= -10) {
-        return "%%fg=green$harmless";
+        return "%%fg=green$Harmless";
     } else {
-        return "%%fg=green$mostly harmless";
+        return "%%fg=green$Mostly harmless";
     }
 }

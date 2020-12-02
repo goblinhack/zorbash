@@ -140,6 +140,49 @@ void tp_init_after_loading (void)
     }
 }
 
+static Tpp tp_get_with_rarity_filter (Tpidmap &m)
+{_
+    int tries = 10000;
+    while (tries--) {
+        auto tp = get(m, myrand() % m.size());
+        auto r = random_range(0, 1000);
+        if (r < 800) {
+            if (tp->rarity() != THING_RARITY_COMMON) {
+                continue;
+            }
+            // CON("chose THING_RARITY_COMMON -- %s", tp->name().c_str());
+        } else if (r < 900) {
+            if (tp->rarity() != THING_RARITY_UNCOMMON) {
+                continue;
+            }
+            // CON("chose THING_RARITY_UNCOMMON -- %s", tp->name().c_str());
+        } else if (r < 950) {
+            if (tp->rarity() != THING_RARITY_RARE) {
+                continue;
+            }
+            // CON("chose THING_RARITY_RARE -- %s", tp->name().c_str());
+        } else if (r < 990) {
+            if (tp->rarity() != THING_RARITY_VERY_RARE) {
+                continue;
+            }
+            // CON("chose THING_RARITY_VERY_RARE -- %s", tp->name().c_str());
+        } else if (r == 999) {
+            if (tp->rarity() != THING_RARITY_UNIQUE) {
+                continue;
+            }
+            // CON("chose THING_RARITY_UNIQUE -- %s", tp->name().c_str());
+        }
+        return tp;
+    }
+    ERR("could not find a thing according to rarity");
+    return get(m, myrand() % m.size());
+}
+
+static Tpp tp_get_with_no_rarity_filter (Tpidmap &m)
+{_
+    return get(m, myrand() % m.size());
+}
+
 Tpp tp_random_monst (void)
 {_
 //CON("TODO using debug monster");
@@ -148,7 +191,7 @@ Tpp tp_random_monst (void)
         ERR("no monsts found");
         return (nullptr);
     }
-    return get(tp_monst, myrand() % tp_monst.size());
+    return tp_get_with_rarity_filter(tp_monst);
 }
 
 Tpp tp_random_food (void)
@@ -157,7 +200,7 @@ Tpp tp_random_food (void)
         ERR("no foods found");
         return (nullptr);
     }
-    return get(tp_food, myrand() % tp_food.size());
+    return tp_get_with_rarity_filter(tp_food);
 }
 
 Tpp tp_random_gold (void)
@@ -166,7 +209,7 @@ Tpp tp_random_gold (void)
         ERR("no golds found");
         return (nullptr);
     }
-    return get(tp_gold, myrand() % tp_gold.size());
+    return tp_get_with_rarity_filter(tp_gold);
 }
 
 Tpp tp_random_treasure (void)
@@ -175,7 +218,7 @@ Tpp tp_random_treasure (void)
         ERR("no treasures found");
         return (nullptr);
     }
-    return get(tp_treasure, myrand() % tp_treasure.size());
+    return tp_get_with_rarity_filter(tp_treasure);
 }
 
 Tpp tp_random_item_class_a (void)
@@ -184,7 +227,7 @@ Tpp tp_random_item_class_a (void)
         ERR("no item_class_a found");
         return (nullptr);
     }
-    return get(tp_item_class_a, myrand() % tp_item_class_a.size());
+    return tp_get_with_rarity_filter(tp_item_class_a);
 }
 
 Tpp tp_random_item_class_b (void)
@@ -193,7 +236,7 @@ Tpp tp_random_item_class_b (void)
         ERR("no item_class_b found");
         return (nullptr);
     }
-    return get(tp_item_class_b, myrand() % tp_item_class_b.size());
+    return tp_get_with_rarity_filter(tp_item_class_b);
 }
 
 Tpp tp_random_dirt (void)
@@ -202,7 +245,7 @@ Tpp tp_random_dirt (void)
         ERR("no dirts found");
         return (nullptr);
     }
-    return get(tp_dirt, myrand() % tp_dirt.size());
+    return tp_get_with_no_rarity_filter(tp_dirt);
 }
 
 Tpp tp_random_ripple (void)
@@ -211,7 +254,7 @@ Tpp tp_random_ripple (void)
         ERR("no ripples found");
         return (nullptr);
     }
-    return get(tp_ripples, myrand() % tp_ripples.size());
+    return tp_get_with_no_rarity_filter(tp_ripples);
 }
 
 Tpp tp_random_blood_splatter (void)
@@ -220,7 +263,7 @@ Tpp tp_random_blood_splatter (void)
         ERR("no blood_splatter found");
         return (nullptr);
     }
-    return get(tp_blood_splatter, myrand() % tp_blood_splatter.size());
+    return tp_get_with_no_rarity_filter(tp_blood_splatter);
 }
 
 Tpp tp_random_key (void)
@@ -229,7 +272,7 @@ Tpp tp_random_key (void)
         ERR("no key found");
         return (nullptr);
     }
-    return get(tp_key, myrand() % tp_key.size());
+    return tp_get_with_no_rarity_filter(tp_key);
 }
 
 Tpp tp_random_potion (void)
@@ -238,7 +281,7 @@ Tpp tp_random_potion (void)
         ERR("no potion found");
         return (nullptr);
     }
-    return get(tp_potion, myrand() % tp_potion.size());
+    return tp_get_with_rarity_filter(tp_potion);
 }
 
 Tpp tp_random_entrance (void)
@@ -247,7 +290,7 @@ Tpp tp_random_entrance (void)
         ERR("no entrance found");
         return (nullptr);
     }
-    return get(tp_entrance, myrand() % tp_entrance.size());
+    return tp_get_with_no_rarity_filter(tp_entrance);
 }
 
 Tpp tp_random_exit (void)
@@ -256,7 +299,7 @@ Tpp tp_random_exit (void)
         ERR("no exit found");
         return (nullptr);
     }
-    return get(tp_exit, myrand() % tp_exit.size());
+    return tp_get_with_no_rarity_filter(tp_exit);
 }
 
 Tpp tp_random_torch (void)
@@ -265,7 +308,7 @@ Tpp tp_random_torch (void)
         ERR("no torch found");
         return (nullptr);
     }
-    return get(tp_torch, myrand() % tp_torch.size());
+    return tp_get_with_no_rarity_filter(tp_torch);
 }
 
 Tpp tp_random_door (void)
@@ -274,7 +317,7 @@ Tpp tp_random_door (void)
         ERR("no door found");
         return (nullptr);
     }
-    return get(tp_door, myrand() % tp_door.size());
+    return tp_get_with_no_rarity_filter(tp_door);
 }
 
 Tpp tp_random_secret_door (void)
@@ -283,7 +326,7 @@ Tpp tp_random_secret_door (void)
         ERR("no secret_door found");
         return (nullptr);
     }
-    return get(tp_secret_door, myrand() % tp_secret_door.size());
+    return tp_get_with_no_rarity_filter(tp_secret_door);
 }
 
 Tpp tp_random_generator (void)
@@ -292,7 +335,7 @@ Tpp tp_random_generator (void)
         ERR("no generator found");
         return (nullptr);
     }
-    return get(tp_generator, myrand() % tp_generator.size());
+    return tp_get_with_rarity_filter(tp_generator);
 }
 
 Tpp tp_random_blood (void)
@@ -301,7 +344,7 @@ Tpp tp_random_blood (void)
         ERR("no bloods found");
         return (nullptr);
     }
-    return get(tp_blood, myrand() % tp_blood.size());
+    return tp_get_with_no_rarity_filter(tp_blood);
 }
 
 Tpp tp_random_wall (void)
@@ -310,7 +353,7 @@ Tpp tp_random_wall (void)
         ERR("no walls found");
         return (nullptr);
     }
-    return get(tp_wall, myrand() % tp_wall.size());
+    return tp_get_with_no_rarity_filter(tp_wall);
 }
 
 Tpp tp_random_rock (void)
@@ -319,7 +362,7 @@ Tpp tp_random_rock (void)
         ERR("no rocks found");
         return (nullptr);
     }
-    return get(tp_rock, myrand() % tp_rock.size());
+    return tp_get_with_no_rarity_filter(tp_rock);
 }
 
 Tpp tp_random_floor (void)
@@ -328,7 +371,7 @@ Tpp tp_random_floor (void)
         ERR("no floors found");
         return (nullptr);
     }
-    return get(tp_floor, myrand() % tp_floor.size());
+    return tp_get_with_no_rarity_filter(tp_floor);
 }
 
 Tpp tp_random_deco (void)
@@ -337,7 +380,7 @@ Tpp tp_random_deco (void)
         ERR("no decos found");
         return (nullptr);
     }
-    return get(tp_deco, myrand() % tp_deco.size());
+    return tp_get_with_no_rarity_filter(tp_deco);
 }
 
 Tpp tp_random_wall_deco (void)
@@ -346,5 +389,5 @@ Tpp tp_random_wall_deco (void)
         ERR("no wall_decos found");
         return (nullptr);
     }
-    return get(tp_wall_deco, myrand() % tp_wall_deco.size());
+    return tp_get_with_no_rarity_filter(tp_wall_deco);
 }

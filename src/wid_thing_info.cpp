@@ -98,18 +98,101 @@ void Game::wid_thing_info_create (Thingp t)
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(tp->long_text_description());
+
+    if (t->is_item()) {
+        if (tp->rarity() == THING_RARITY_UNCOMMON) {
+            wid_thing_info_window->log("Uncommon item");
+        } else if (tp->rarity() == THING_RARITY_RARE) {
+            wid_thing_info_window->log("Rare item");
+        } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
+            wid_thing_info_window->log("Very rare item");
+        } else if (tp->rarity() == THING_RARITY_UNIQUE) {
+            wid_thing_info_window->log("Unique item");
+        }
+    }
+
+    if (t->is_monst()) {
+        if (tp->rarity() == THING_RARITY_UNCOMMON) {
+            wid_thing_info_window->log("Uncommon monster");
+        } else if (tp->rarity() == THING_RARITY_RARE) {
+            wid_thing_info_window->log("Rare monster");
+        } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
+            wid_thing_info_window->log("Very rare monster");
+        } else if (tp->rarity() == THING_RARITY_UNIQUE) {
+            wid_thing_info_window->log("Unique monster");
+        }
+    }
+
+    bool need_line = true;
+
+    {
+        auto attack_dice = t->get_stats_attack_dice();
+        auto min_value = attack_dice.min_roll();
+        auto max_value = attack_dice.max_roll();
+        if (min_value > 0) {
+            if (need_line) {
+                wid_thing_info_window->log(" ");
+                need_line = false;
+            }
+            if (min_value == max_value) {
+                wid_thing_info_window->log("Damg: " + 
+                                        t->get_stats_attack_dice_str());
+            } else {
+                wid_thing_info_window->log("Damg: " + 
+                                        std::to_string(min_value) + "-" + 
+                                        std::to_string(max_value) + " (" +
+                                        t->get_stats_attack_dice_str() + ")");
+            }
+        }
+    }
+
+    {
+        auto gold_dice = t->get_gold_value_dice();
+        auto min_value = gold_dice.min_roll();
+        auto max_value = gold_dice.max_roll();
+        if (min_value > 0) {
+            if (need_line) {
+                wid_thing_info_window->log(" ");
+                need_line = false;
+            }
+            if (min_value == max_value) {
+                wid_thing_info_window->log("Gold: " + 
+                                        t->get_gold_value_dice_str());
+            } else {
+                wid_thing_info_window->log("Gold: " + 
+                                        std::to_string(min_value) + "-" + 
+                                        std::to_string(max_value) + " (" +
+                                        t->get_gold_value_dice_str() + ")");
+            }
+        }
+    }
+
+    {
+        auto nutrition_dice = t->get_nutrition_dice();
+        auto min_value = nutrition_dice.min_roll();
+        auto max_value = nutrition_dice.max_roll();
+        if (min_value > 0) {
+            if (need_line) {
+                wid_thing_info_window->log(" ");
+                need_line = false;
+            }
+            if (min_value == max_value) {
+                wid_thing_info_window->log("Nutr: " + 
+                                        t->get_nutrition_dice_str());
+            } else {
+                wid_thing_info_window->log("Nutr: " + 
+                                        std::to_string(min_value) + "-" + 
+                                        std::to_string(max_value) + " (" + 
+                                        t->get_nutrition_dice_str() + ")");
+            }
+        }
+    }
+
     wid_thing_info_window->log(" ");
 
     if (t->is_monst()) {
         std::string danger_level = game->level->player->get_danger_level(t);
         wid_thing_info_window->log(danger_level);
-    }
-
-    auto gold_dice = t->get_gold_value_dice();
-    auto min_value = gold_dice.min_roll();
-    auto max_value = gold_dice.max_roll();
-    if (min_value > 0) {
-        wid_thing_info_window->log("%%fg=gold$Worth " + std::to_string(min_value) + ".." + std::to_string(max_value) + " Zs");
     }
 
     int utilized = wid_thing_info_window->wid_text_area->line_count;
