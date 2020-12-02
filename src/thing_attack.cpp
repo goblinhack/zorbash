@@ -16,6 +16,13 @@ bool Thing::possible_to_attack (const Thingp it)
     auto me = tp();
 
     //
+    // Fire attacks via tick so it can get you when you fall or jump into it.
+    //
+    if (is_fire()) {
+        return false;
+    }
+
+    //
     // No attacking of open doors!
     //
     if (it->is_open) {

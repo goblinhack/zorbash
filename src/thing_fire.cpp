@@ -12,7 +12,6 @@
 
 void Thing::fire_tick (void)
 {_
-CON("%d",__LINE__);
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -23,38 +22,57 @@ CON("%d",__LINE__);
         return;
     }
 
-    bool hit = false;
+    if (!is_fire_hater()) {
+        return;
+    }
 
     fpoint at = get_interpolated_mid_at();
-    if (level->is_fire(at.x, at.y)) {
-        //
-        // Give the player a chance
-        //
-        if (!level->is_smoke(at.x, at.y)) {
-            auto smoke = level->thing_new("smoke1", at);
-            smoke->set_lifespan(4);
-
-            hit = ((int)random_range(0, 100) < 20);
-        } else {
-            hit = false;
-        }
-
-        if (!hit) {
-            if (is_player()) {
-                MINICON("%%fg=red$You dodge the flames");
-            }
-        }
+    if (!level->is_fire(at.x, at.y) && !is_on_fire()) {
+        return;
     }
+
+    bool hit = false;
 
     if (is_on_fire()) {
         //
         // Give the player a chance
         //
         if (!level->is_smoke(at.x, at.y)) {
+            hit = ((int)random_range(0, 100) < 90);
+            if (!hit) {
+                if (is_player()) {
+                    MINICON("%%fg=green$You feel a brief cool breeze and reprieve from the flames!");
+
+                    //
+                    // Smoke ensures a reprieve.
+                    //
+                    if (!level->is_smoke(at.x, at.y)) {
+                        auto smoke = level->thing_new("smoke1", at);
+                        smoke->set_lifespan(4);
+                    }
+                }
+            }
+        } else {
+            hit = false;
+        }
+    } else if (level->is_fire(at.x, at.y)) {
+        //
+        // Give the player a chance
+        //
+        if (!level->is_smoke(at.x, at.y)) {
             auto smoke = level->thing_new("smoke1", at);
             smoke->set_lifespan(4);
 
-            hit = ((int)random_range(0, 100) < 20);
+            hit = ((int)random_range(0, 100) < 90);
+            if (!hit) {
+                if (is_player()) {
+                    MINICON("%%fg=red$You dodge the flames");
+                }
+            } else if ((int)random_range(0, 100) < 20) {
+                if (set_on_fire()) {
+                    MINICON("%%fg=red$The flames wrap around you!%%fg=reset$");
+                }
+            }
         } else {
             hit = false;
         }
@@ -76,6 +94,11 @@ CON("%d",__LINE__);
         if (h <= 0) {
             h = set_stats_health(0);
             dead("burned to death");
+        }
+
+        if (!level->is_smoke(at.x, at.y)) {
+            auto smoke = level->thing_new("smoke1", at);
+            smoke->set_lifespan(4);
         }
     }
 }

@@ -38,10 +38,7 @@ void Thing::lava_tick (void)
     //
     // Give the player a chance
     //
-    if (!level->is_smoke(mid_at.x, mid_at.y)) {
-        auto smoke = level->thing_new("smoke1", mid_at);
-        smoke->set_lifespan(4);
-
+    if (!level->is_smoke(at.x, at.y)) {
         hit = ((int)random_range(0, 100) < 80);
     } else {
         hit = true;
@@ -52,17 +49,13 @@ void Thing::lava_tick (void)
     }
 
     if (hit) {
-        FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_LAVA) {
+        FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LAVA) {
             auto tpp = t->tp();
             if (!tpp->is_lava()) {
                 continue;
             }
             if (t->get_tick() < game->tick_current) {
                 t->set_tick(game->tick_current);
-
-                if (is_fire_hater()) {
-                    damage *= 2;
-                }
                 is_hit_by(t, t->get_stats_attack());
                 break;
             }
@@ -72,5 +65,10 @@ void Thing::lava_tick (void)
             MINICON("You stand on a sightly cooler rock in the lava!");
             MINICON("Your feet are warm and toasty!");
         }
+    }
+
+    if (!level->is_smoke(at.x, at.y)) {
+        auto smoke = level->thing_new("smoke1", at);
+        smoke->set_lifespan(4);
     }
 }
