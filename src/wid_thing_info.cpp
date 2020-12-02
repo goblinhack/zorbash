@@ -100,8 +100,17 @@ void Game::wid_thing_info_create (Thingp t)
     wid_thing_info_window->log(tp->long_text_description());
     wid_thing_info_window->log(" ");
 
-    std::string danger_level = game->level->player->get_danger_level(t);
-    wid_thing_info_window->log(danger_level);
+    if (t->is_monst()) {
+        std::string danger_level = game->level->player->get_danger_level(t);
+        wid_thing_info_window->log(danger_level);
+    }
+
+    auto gold_dice = t->get_gold_value_dice();
+    auto min_value = gold_dice.min_roll();
+    auto max_value = gold_dice.max_roll();
+    if (min_value > 0) {
+        wid_thing_info_window->log("%%fg=gold$Worth " + std::to_string(min_value) + ".." + std::to_string(max_value) + " Zs");
+    }
 
     int utilized = wid_thing_info_window->wid_text_area->line_count;
     wid_move_delta(wid_thing_info_window->wid_popup_container, 0, height - utilized + 2);

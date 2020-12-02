@@ -88,7 +88,7 @@ static void wid_rightbar_create (void)
     {_
         auto w = wid_new_plain(wid_rightbar, "level no");
         point tl = make_point(0, y_at - 1);
-        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
+        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
         auto s = dynprintf("Level %u", level->world_at.z);
         wid_set_ignore_events(w, true);
@@ -102,7 +102,7 @@ static void wid_rightbar_create (void)
     {_
         auto w = wid_new_plain(wid_rightbar, "Seed");
         point tl = make_point(0, y_at - 1);
-        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
+        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
         auto s = dynprintf("%%fg=gray$\"%s\"", game->seed_name.c_str());
         wid_set_ignore_events(w, true);
@@ -128,12 +128,12 @@ static void wid_rightbar_create (void)
 
     {_
         auto w = wid_new_plain(wid_rightbar, "gold");
-        point tl = make_point(2, y_at-2);
+        point tl = make_point(3, y_at-2);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-2);
 
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        auto g = dynprintf("%%fg=green$$%%fg=gray$%06d", player->get_gold());
+        auto g = dynprintf("%%fg=green$$%%fg=gray$%05d", player->get_gold());
         wid_set_text(w, g);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
