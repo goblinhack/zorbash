@@ -78,7 +78,7 @@ void Level::display_internal_particles (void)
                         if (p.make_visible_at_end) {
                             t->visible();
                         }
-                        t->log("end of jump");
+                        t->log("end of jump particle");
                         t->is_jumping = false;
                         t->has_internal_particle = false;
                     }

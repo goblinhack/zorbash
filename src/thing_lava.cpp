@@ -33,7 +33,7 @@ void Thing::lava_tick (void)
 
     bool hit = false;
 
-    log("acid tick");
+    log("lava tick");
 
     //
     // Give the player a chance
@@ -47,6 +47,10 @@ void Thing::lava_tick (void)
         hit = true;
     }
 
+    if (is_on_fire()) {
+        hit = true;
+    }
+
     if (hit) {
         FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_LAVA) {
             auto tpp = t->tp();
@@ -55,6 +59,10 @@ void Thing::lava_tick (void)
             }
             if (t->get_tick() < game->tick_current) {
                 t->set_tick(game->tick_current);
+
+                if (is_fire_hater()) {
+                    damage *= 2;
+                }
                 is_hit_by(t, t->get_stats_attack());
                 break;
             }
