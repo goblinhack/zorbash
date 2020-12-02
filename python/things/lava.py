@@ -18,7 +18,7 @@ def lava_init(name, text_name, tiles=[]):
     x.set_stats_attack_dice("1d12+6")
     x.set_text_a_or_an("");
     x.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move)")
-    x.set_text_hits("BURNS (and tickles)");
+    x.set_text_hits("tickles");
     x.set_tick_catches_up_on_attack(True)
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_LAVA)

@@ -83,6 +83,11 @@ int Dice::max_roll (void) const
     return ndice * sides + modifier;
 }
 
+int Dice::min_roll (void) const
+{
+    return ndice * 1 + modifier;
+}
+
 bool Dice::crit_roll (void) const
 {
     auto r = roll();

@@ -21,6 +21,7 @@ def tp_init(name, text_name):
     x.set_is_treasure(True)
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");
+    x.set_long_text_description("If you are need of luck, adventurine is the stone for you. It has a few drops of blood on it, ignore those. You will be more lucky.")
     x.set_text_description("%%fg=forestgreen$Some adventurine, the luckiest stone")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
