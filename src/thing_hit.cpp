@@ -108,19 +108,19 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     if (is_player()) {
-        if (real_hitter->is_fire() ||
-            real_hitter->is_lava()) {
-            if (set_on_fire()) {
-                MINICON("%%fg=red$You are ON FIRE!%%fg=reset$");
-            }
-        }
-
         if (damage > THING_DAMAGE_SHAKE_ABOVE) {
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
             MINICON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
                     real_hitter->text_The().c_str(),
                     real_hitter->text_hits().c_str(),
                     damage);
+
+            if (real_hitter->is_fire() ||
+                real_hitter->is_lava()) {
+                if (set_on_fire()) {
+                    MINICON("%%fg=red$You are literally ON FIRE!%%fg=reset$");
+                }
+            }
         } else {
             MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
                     real_hitter->text_The().c_str(),

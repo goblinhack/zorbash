@@ -125,18 +125,19 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     it->location_check();
 
     //
-    // If shoving somehing on fire! set yourself on fire!
+    // If shoving something on fire! set yourself on fire!
     //
     if (!was_dead) {
         if (it->is_flammable()) {
             if (random_range(0, 100) < 5) {
                 if (is_player()) {
-                    MINICON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
-                    set_on_fire();
+                    if (set_on_fire()) {
+                        MINICON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
+                    }
                 }
             } else {
                 if (is_player()) {
-                    MINICON("%%fg=orange$It burns but you luckily avoid the flames");
+                    MINICON("%%fg=orange$It burns as you shove it, but you avoid the flames");
                 }
             }
         }
