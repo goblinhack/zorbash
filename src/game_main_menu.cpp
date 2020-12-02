@@ -8,6 +8,7 @@
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
+#include "my_wid_leftbar.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_inventory.h"
 #include "my_gl.h"
@@ -36,6 +37,7 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     wid_minicon_init();
 
     wid_thing_info_fini();
+    wid_leftbar_fini();
 
     wid_inventory_fini();
     wid_inventory_init();

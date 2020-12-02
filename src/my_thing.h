@@ -845,7 +845,7 @@ public:
     bool use(Thingp w);
     bool will_avoid(const Thingp it) const;
     bool will_avoid(const point p) const;
-    bool will_eat(const Thingp it);
+    bool can_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
     int get_danger_level(void);
     int is_dangerous(Thingp);

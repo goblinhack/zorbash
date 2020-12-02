@@ -817,7 +817,7 @@ _
         } else {
             log("no; cannot attack, no overlap");
         }
-    } else if (will_eat(it)) {
+    } else if (can_eat(it)) {
         if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
             log("no; can eat but was seen previously");
             return true;
@@ -966,7 +966,7 @@ _
             //
             // Allow walking over the dead
             //
-            if (will_eat(it)) {
+            if (can_eat(it)) {
                 if (things_overlap(me, me->mid_at, it)) {
                     log("yes; overlaps and can eat");
                     return true;
@@ -1026,7 +1026,7 @@ _
         } else {
             log("no; can attack but no overlap");
         }
-    } else if (will_eat(it)) {
+    } else if (can_eat(it)) {
         if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
             log("no; can eat but was seen previously");
             return false;

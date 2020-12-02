@@ -44,7 +44,8 @@ void Game::wid_thing_info_create (Thingp t)
         return;
     }
 
-    if (!game->level->player){
+    auto player = game->level->player;
+    if (!player){
         return;
     }
 
@@ -167,7 +168,7 @@ void Game::wid_thing_info_create (Thingp t)
         }
     }
 
-    {
+    if (player->can_eat(t)) {
         auto nutrition_dice = t->get_nutrition_dice();
         auto min_value = nutrition_dice.min_roll();
         auto max_value = nutrition_dice.max_roll();
@@ -177,10 +178,10 @@ void Game::wid_thing_info_create (Thingp t)
                 need_line = false;
             }
             if (min_value == max_value) {
-                wid_thing_info_window->log("Nutr: " + 
+                wid_thing_info_window->log("Nutn: " + 
                                         t->get_nutrition_dice_str());
             } else {
-                wid_thing_info_window->log("Nutr: " + 
+                wid_thing_info_window->log("Nutn: " + 
                                         std::to_string(min_value) + "-" + 
                                         std::to_string(max_value) + " (" + 
                                         t->get_nutrition_dice_str() + ")");
@@ -191,8 +192,17 @@ void Game::wid_thing_info_create (Thingp t)
     wid_thing_info_window->log(" ");
 
     if (t->is_monst()) {
-        std::string danger_level = game->level->player->get_danger_level(t);
+        std::string danger_level = player->get_danger_level(t);
         wid_thing_info_window->log(danger_level);
+
+        auto attack_dice = t->get_stats_attack_dice();
+        auto kill_count = player->get_stats_health() / attack_dice.max_roll();
+
+        if (kill_count < 5) {
+            wid_thing_info_window->log(" ");
+            wid_thing_info_window->log("%%fg=red$Warning. Can kill you in " + 
+                                       std::to_string(kill_count) + "moves");
+        }
     }
 
     int utilized = wid_thing_info_window->wid_text_area->line_count;

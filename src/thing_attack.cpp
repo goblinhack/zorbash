@@ -141,7 +141,7 @@ _
         //
         // Owner eat food?
         //
-        if (owner->will_eat(it)) {
+        if (owner->can_eat(it)) {
             //
             // Eat corpse?
             //
@@ -166,7 +166,7 @@ _
         //
         // As above, but not for owner.
         //
-        if (will_eat(it)) {
+        if (can_eat(it)) {
             //
             // Eat corpse?
             //
