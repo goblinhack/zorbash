@@ -1,4 +1,4 @@
-COMPILER_FLAGS= -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -Wsign-compare -fno-common -dynamic -DNDEBUG -g -Wall   -arch x86_64 -g  -DVERSION=\"0.0.4\" -DPYTHONVERSION=\"3.6\" -g -ggdb3 -O3 # AUTOGEN
+COMPILER_FLAGS=-Werror -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -Wsign-compare -fno-common -dynamic -DNDEBUG -g -Wall   -arch x86_64 -g  -DVERSION=\"0.0.4\" -DPYTHONVERSION=\"3.6\" -g -ggdb3 -O3 # AUTOGEN
     
 CLANG_COMPILER_WARNINGS=-Wall -Wmissing-prototypes -std=c++1z -stdlib=libc++ # AUTOGEN
 GCC_COMPILER_WARNINGS=-x c++ -Wall -std=c++2a -ffast-math  # AUTOGEN
@@ -95,6 +95,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level_fini.o 		\
     $(OBJDIR)/level_heatmap.o 		\
     $(OBJDIR)/level_init.o 		\
+    $(OBJDIR)/level_create.o 		\
     $(OBJDIR)/level_log.o 		\
     $(OBJDIR)/level_map.o 		\
     $(OBJDIR)/level_minimap.o 		\
@@ -3824,6 +3825,84 @@ all: $(TARGET_GAME)
 .o/level.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
 .o/level.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/level.o: my_dungeon_grid.h
+.o/level_create.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
+.o/level_create.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
+.o/level_create.o: /usr/include/sys/_symbol_aliasing.h
+.o/level_create.o: /usr/include/sys/_posix_availability.h
+.o/level_create.o: /usr/include/Availability.h
+.o/level_create.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+.o/level_create.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/level_create.o: /usr/include/i386/_types.h
+.o/level_create.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/level_create.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/level_create.o: /usr/include/sys/_types/_int8_t.h
+.o/level_create.o: /usr/include/sys/_types/_int16_t.h
+.o/level_create.o: /usr/include/sys/_types/_int32_t.h
+.o/level_create.o: /usr/include/sys/_types/_int64_t.h
+.o/level_create.o: /usr/include/_types/_uint8_t.h
+.o/level_create.o: /usr/include/_types/_uint16_t.h
+.o/level_create.o: /usr/include/_types/_uint32_t.h
+.o/level_create.o: /usr/include/_types/_uint64_t.h
+.o/level_create.o: /usr/include/sys/_types/_intptr_t.h
+.o/level_create.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/level_create.o: /usr/include/sys/_types/_u_int8_t.h
+.o/level_create.o: /usr/include/sys/_types/_u_int16_t.h
+.o/level_create.o: /usr/include/sys/_types/_u_int32_t.h
+.o/level_create.o: /usr/include/sys/_types/_u_int64_t.h
+.o/level_create.o: /usr/include/sys/_types/_uintptr_t.h
+.o/level_create.o: /usr/include/_types/_intmax_t.h
+.o/level_create.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h
+.o/level_create.o: my_globals.h /usr/include/stdio.h /usr/include/_stdio.h
+.o/level_create.o: /usr/include/sys/_types/_va_list.h
+.o/level_create.o: /usr/include/sys/_types/_size_t.h
+.o/level_create.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/level_create.o: /usr/include/sys/_types/_off_t.h
+.o/level_create.o: /usr/include/sys/_types/_ssize_t.h
+.o/level_create.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+.o/level_create.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
+.o/level_create.o: /usr/include/assert.h my_vector_bounds_check.h
+.o/level_create.o: c_plus_plus_serializer.h my_sdl.h my_command.h my_token.h
+.o/level_create.o: my_string.h /usr/include/wchar.h
+.o/level_create.o: /usr/include/sys/_types/_mbstate_t.h
+.o/level_create.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/level_create.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
+.o/level_create.o: /usr/include/sys/_types/_clock_t.h
+.o/level_create.o: /usr/include/sys/_types/_time_t.h
+.o/level_create.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
+.o/level_create.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/level_create.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/level_create.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_create.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/level_create.o: my_level.h my_time.h /usr/include/unistd.h
+.o/level_create.o: /usr/include/sys/unistd.h
+.o/level_create.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/level_create.o: /usr/include/sys/_types/_seek_set.h
+.o/level_create.o: /usr/include/sys/_types/_uid_t.h
+.o/level_create.o: /usr/include/sys/_types/_gid_t.h
+.o/level_create.o: /usr/include/sys/_types/_pid_t.h
+.o/level_create.o: /usr/include/sys/_types/_useconds_t.h
+.o/level_create.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
+.o/level_create.o: /usr/include/sys/_types/_fd_def.h
+.o/level_create.o: /usr/include/sys/_types/_timeval.h
+.o/level_create.o: /usr/include/sys/_types/_suseconds_t.h
+.o/level_create.o: /usr/include/sys/_types/_sigset_t.h
+.o/level_create.o: /usr/include/sys/_types/_fd_setsize.h
+.o/level_create.o: /usr/include/sys/_types/_fd_set.h
+.o/level_create.o: /usr/include/sys/_types/_fd_clr.h
+.o/level_create.o: /usr/include/sys/_types/_fd_isset.h
+.o/level_create.o: /usr/include/sys/_types/_fd_zero.h
+.o/level_create.o: /usr/include/sys/_types/_fd_copy.h
+.o/level_create.o: /usr/include/sys/_select.h
+.o/level_create.o: /usr/include/sys/_types/_dev_t.h
+.o/level_create.o: /usr/include/sys/_types/_mode_t.h
+.o/level_create.o: /usr/include/sys/_types/_uuid_t.h
+.o/level_create.o: /usr/include/gethostuuid.h /usr/include/sys/time.h
+.o/level_create.o: /usr/include/sys/_types/_timeval64.h my_depth.h
+.o/level_create.o: my_particle.h my_size.h my_thing_id.h my_dungeon.h
+.o/level_create.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
+.o/level_create.o: my_dungeon_grid.h my_thing.h my_light.h
+.o/level_create.o: my_thing_template.h my_dice.h my_tile.h my_color.h
+.o/level_create.o: my_thing_ai.h
 .o/level_cursor.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/level_cursor.o: /usr/include/sys/cdefs.h
 .o/level_cursor.o: /usr/include/sys/_symbol_aliasing.h
@@ -6809,7 +6888,7 @@ all: $(TARGET_GAME)
 .o/python.o: my_ptrcheck.h my_globals.h my_callstack.h
 .o/python.o: my_array_bounds_check.h my_bounds_check.h /usr/include/assert.h
 .o/python.o: my_vector_bounds_check.h my_sdl.h my_command.h my_token.h
-.o/python.o: my_string.h my_slre.h
+.o/python.o: my_string.h my_slre.h my_thing_template.h my_dice.h my_size.h
 .o/random_name.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/random_name.o: /usr/include/sys/cdefs.h
 .o/random_name.o: /usr/include/sys/_symbol_aliasing.h
@@ -14666,6 +14745,7 @@ all: $(TARGET_GAME)
 .o/wid_thing_info.o: my_wid_botcon.h my_wid_popup.h my_wid_text_box.h
 .o/wid_thing_info.o: my_wid_thing_info.h my_thing.h my_light.h
 .o/wid_thing_info.o: my_thing_template.h my_dice.h my_thing_ai.h
+.o/wid_thing_info.o: my_wid_console.h
 .o/wid_tiles.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/wid_tiles.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/wid_tiles.o: /usr/include/sys/_posix_availability.h

@@ -238,7 +238,7 @@ int Tp::is_rrr57(void) const { return _is_rrr57; }
 int Tp::is_rrr58(void) const { return _is_rrr58; }
 int Tp::is_rrr59(void) const { return _is_rrr59; }
 int Tp::is_rrr6(void) const { return _is_rrr6; }
-int Tp::is_rrr_98(void) const { return _is_rrr_98; }
+int Tp::rarity(void) const { return _rarity; }
 int Tp::gfx_is_rrr99(void) const { return _gfx_is_rrr99; }
 int Tp::is_shown_uniquely_on_leftbar(void) const { return _is_shown_uniquely_on_leftbar; }
 int Tp::is_stamina_check(void) const { return _is_stamina_check; }
@@ -479,7 +479,7 @@ void Tp::set_is_rrr57(int v) { _is_rrr57 = v; }
 void Tp::set_is_rrr58(int v) { _is_rrr58 = v; }
 void Tp::set_is_rrr59(int v) { _is_rrr59 = v; }
 void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
-void Tp::set_is_rrr_98(int v) { _is_rrr_98 = v; }
+void Tp::set_rarity(int v) { _rarity = v; }
 void Tp::set_gfx_is_rrr99(int v) { _gfx_is_rrr99 = v; }
 void Tp::set_is_shown_uniquely_on_leftbar(int v) { _is_shown_uniquely_on_leftbar = v; }
 void Tp::set_is_stamina_check(int v) { _is_stamina_check = v; }

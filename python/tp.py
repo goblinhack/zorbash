@@ -356,8 +356,8 @@ class Tp:
     def set_is_rrr59(self, value):
         zx.tp_set_is_rrr59(self, value)
 
-    def set_is_rrr_98(self, value):
-        zx.tp_set_is_rrr_98(self, value)
+    def set_rarity(self, value):
+        zx.tp_set_rarity(self, value)
 
     def set_gfx_is_rrr99(self, value):
         zx.tp_set_gfx_is_rrr99(self, value)

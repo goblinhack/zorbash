@@ -14,6 +14,14 @@
 #include "my_tile.h"
 #include "my_size.h"
 
+enum {
+    THING_RARITY_COMMON,
+    THING_RARITY_UNCOMMON,
+    THING_RARITY_RARE,
+    THING_RARITY_VERY_RARE,
+    THING_RARITY_UNIQUE,
+};
+
 class Tp {
 public:
     //
@@ -252,7 +260,7 @@ private:
     int _is_rrr7 {};
     int _is_rrr8 {};
     int _is_rrr9 {};
-    int _is_rrr_98 {};
+    int _rarity {};
     int _is_secret_door {};
     int _is_shovable {};
     int _is_shown_on_leftbar {};
@@ -596,7 +604,7 @@ public:
     int is_rrr58(void) const;
     int is_rrr59(void) const;
     int is_rrr6(void) const;
-    int is_rrr_98(void) const;
+    int rarity(void) const;
     int gfx_is_rrr99(void) const;
     int is_shown_uniquely_on_leftbar(void) const;
     int is_stamina_check(void) const;
@@ -838,7 +846,7 @@ public:
     void set_is_rrr58(int);
     void set_is_rrr59(int);
     void set_is_rrr6(int);
-    void set_is_rrr_98(int);
+    void set_rarity(int);
     void set_gfx_is_rrr99(int);
     void set_is_shown_uniquely_on_leftbar(int);
     void set_is_stamina_check(int);

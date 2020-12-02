@@ -30,7 +30,7 @@ Levelp World::new_level_at (point3d at, int seed)
 
     auto new_level = new Level();
     set(levels, at.x, at.y, at.z, new_level);
-    new_level->init(at, seed);
+    new_level->create(at, seed);
 
     return new_level;
 }

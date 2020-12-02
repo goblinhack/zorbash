@@ -1718,7 +1718,7 @@ public:
     void err_(const char *fmt, va_list args); // compile error without
     void fini(void);
     void game_mark_dungeon_tiles(Dungeonp d);
-    void init(point3d at, int seed);
+    void create(point3d at, int seed);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
     void lights_update(void);
     void lights_fade(void);

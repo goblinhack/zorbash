@@ -8,6 +8,7 @@
 #include "my_python.h"
 #include "my_py_sdl.h"
 #include "my_ascii.h"
+#include "my_thing_template.h"
 #include "frameobject.h"
 
 static std::map<std::string, PyObject *> py_mods;
@@ -681,7 +682,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr58)
     TP_SET_DECL(is_rrr59)
     TP_SET_DECL(is_rrr6)
-    TP_SET_DECL(is_rrr_98)
+    TP_SET_DECL(rarity)
     TP_SET_DECL(gfx_is_rrr99)
     TP_SET_DECL(is_shown_uniquely_on_leftbar)
     TP_SET_DECL(is_stamina_check)
@@ -1067,6 +1068,11 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_NORMAL", MAP_PRIO_NORMAL);
+    PyModule_AddIntConstant(zx_mod, "RARITY_COMMON", THING_RARITY_COMMON);
+    PyModule_AddIntConstant(zx_mod, "RARITY_UNCOMMON", THING_RARITY_UNCOMMON);
+    PyModule_AddIntConstant(zx_mod, "RARITY_RARE", THING_RARITY_RARE);
+    PyModule_AddIntConstant(zx_mod, "RARITY_VERY_RARE", THING_RARITY_VERY_RARE);
+    PyModule_AddIntConstant(zx_mod, "RARITY_UNIQUE", THING_RARITY_UNIQUE);
     PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
     PyModule_AddStringConstant(zx_mod, "VERSION", VERSION);
 
