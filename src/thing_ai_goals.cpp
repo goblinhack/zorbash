@@ -112,14 +112,14 @@ _ \
             auto health_diff = it_stats_health - my_health;
 
             if (is_starving) {
-                if (will_eat(it)) {
+                if (can_eat(it)) {
                     //
                     // If starving, prefer the thing with most health
                     //
                     GOAL_ADD(it_stats_health, "eat-player");
                 }
             } else if (is_hungry) {
-                if (will_eat(it)) {
+                if (can_eat(it)) {
                     //
                     // Prefer easy food over attacking the player and prefer
                     // the player over a monster. Factor in health so we will

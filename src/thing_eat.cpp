@@ -37,7 +37,7 @@ bool Thing::eat (Thingp it)
     return (false);
 }
 
-bool Thing::will_eat (const Thingp itp)
+bool Thing::can_eat (const Thingp itp)
 {_
     auto me = tp();
     auto it = itp->tp();

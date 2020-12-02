@@ -206,7 +206,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         //
         // Does the attacker feast on success?
         //
-        if (real_hitter->will_eat(this)) {
+        if (real_hitter->can_eat(this)) {
             real_hitter->eat(this);
         }
     } else {
