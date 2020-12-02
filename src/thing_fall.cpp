@@ -147,6 +147,7 @@ bool Thing::fall_to_next_level (void)
         }
 
         if (next_level->is_floor(x, y) ||
+            next_level->is_fire(x, y) ||
             next_level->is_lava(x, y)) {
 
             if (is_player()) {
@@ -193,6 +194,11 @@ bool Thing::fall_to_next_level (void)
             if (next_level->is_lava(new_pos)) {
                 if (is_player()) {
                     MINICON("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
+                }
+                fall_damage *= 3;
+            } else if (next_level->is_fire(new_pos)) {
+                if (is_player()) {
+                    MINICON("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$");
                 }
                 fall_damage *= 2;
             } else if (next_level->is_deep_water(new_pos)) {

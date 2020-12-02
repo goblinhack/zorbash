@@ -12,6 +12,7 @@
 
 void Thing::fire_tick (void)
 {_
+CON("%d",__LINE__);
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -22,21 +23,41 @@ void Thing::fire_tick (void)
         return;
     }
 
-    if (!is_on_fire()) {
-        return;
+    bool hit = false;
+
+    fpoint at = get_interpolated_mid_at();
+    if (level->is_fire(at.x, at.y)) {
+        //
+        // Give the player a chance
+        //
+        if (!level->is_smoke(at.x, at.y)) {
+            auto smoke = level->thing_new("smoke1", at);
+            smoke->set_lifespan(4);
+
+            hit = ((int)random_range(0, 100) < 20);
+        } else {
+            hit = false;
+        }
+
+        if (!hit) {
+            if (is_player()) {
+                MINICON("%%fg=red$You dodge the flames");
+            }
+        }
     }
 
-    //
-    // Give the player a chance
-    //
-    bool hit = false;
-    if (!level->is_smoke(mid_at.x, mid_at.y)) {
-        auto smoke = level->thing_new("smoke1", mid_at);
-        smoke->set_lifespan(4);
+    if (is_on_fire()) {
+        //
+        // Give the player a chance
+        //
+        if (!level->is_smoke(at.x, at.y)) {
+            auto smoke = level->thing_new("smoke1", at);
+            smoke->set_lifespan(4);
 
-        hit = ((int)random_range(0, 100) < 20);
-    } else {
-        hit = false;
+            hit = ((int)random_range(0, 100) < 20);
+        } else {
+            hit = false;
+        }
     }
 
     if (hit) {
