@@ -41,7 +41,7 @@ void Thing::fire_tick (void)
             hit = ((int)random_range(0, 100) < 90);
             if (!hit) {
                 if (is_player()) {
-                    MINICON("%%fg=green$You feel a brief cool breeze and reprieve from the flames!");
+                    MINICON("%%fg=green$You feel a brief cool breeze and reprieve from the flames!%%fg=reset$");
 
                     //
                     // Smoke ensures a reprieve.
@@ -93,7 +93,7 @@ void Thing::fire_tick (void)
 
         if (h <= 0) {
             h = set_stats_health(0);
-            dead("burned to death");
+            dead("Burned to death");
         }
 
         if (!level->is_smoke(at.x, at.y)) {

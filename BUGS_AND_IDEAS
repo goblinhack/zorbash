@@ -1,15 +1,15 @@
 bugs
 ----
 - small brown bag contents
+- bag inventory
+- equip
+- drag items
 
 upcoming work
 -------------
 - throw
-- equip
 - use descent potion, that can be taken or thrown
 - should the entrance in next level be close to the prev exit
-- drag items
-- bag inventory
 - allow seed selection on menu
 
 - moving floor

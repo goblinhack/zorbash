@@ -11,7 +11,7 @@ def potion_init(name, text_name):
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_has_capacity(10)
+    x.set_capacity(5)
     x.set_is_bag(True)
     x.set_is_collectable(True)
     x.set_is_combustible(True)
@@ -25,7 +25,7 @@ def potion_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");
     x.set_text_description("A small brown bag")
-    x.set_long_text_description("A small leathery brown bag. Ideal for storing things. Can store up to ten items.")
+    x.set_long_text_description("A very small leathery brown bag.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 

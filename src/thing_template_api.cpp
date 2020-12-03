@@ -91,7 +91,7 @@ int Tp::gfx_oversized_but_sitting_on_the_ground(void) const { return _gfx_oversi
 int Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
 int Tp::gfx_small_shadow_caster(void) const { return _gfx_small_shadow_caster; }
 int Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
-int Tp::has_capacity(void) const { return _has_capacity; }
+int Tp::is_rrr59(void) const { return _is_rrr59; }
 int Tp::hunger_clock_freq_ms(void) const { return _hunger_clock_freq_ms; }
 int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
@@ -236,7 +236,7 @@ int Tp::is_rrr55(void) const { return _is_rrr55; }
 int Tp::is_rrr56(void) const { return _is_rrr56; }
 int Tp::is_rrr57(void) const { return _is_rrr57; }
 int Tp::is_rrr58(void) const { return _is_rrr58; }
-int Tp::is_rrr59(void) const { return _is_rrr59; }
+int Tp::capacity(void) const { return _capacity; }
 int Tp::is_rrr6(void) const { return _is_rrr6; }
 int Tp::rarity(void) const { return _rarity; }
 int Tp::gfx_is_rrr99(void) const { return _gfx_is_rrr99; }
@@ -332,7 +332,7 @@ void Tp::set_gfx_oversized_but_sitting_on_the_ground(int v) { _gfx_oversized_but
 void Tp::set_gfx_show_outlined(int v) { _gfx_show_outlined = v; }
 void Tp::set_gfx_small_shadow_caster(int v) { _gfx_small_shadow_caster = v; }
 void Tp::set_gfx_weapon_carry_anim(int v) { _gfx_weapon_carry_anim = v; }
-void Tp::set_has_capacity(int v) { _has_capacity = v; }
+void Tp::set_is_rrr59(int v) { _is_rrr59 = v; }
 void Tp::set_hunger_clock_freq_ms(int v) { _hunger_clock_freq_ms = v; }
 void Tp::set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
 void Tp::set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
@@ -477,7 +477,7 @@ void Tp::set_is_rrr55(int v) { _is_rrr55 = v; }
 void Tp::set_is_rrr56(int v) { _is_rrr56 = v; }
 void Tp::set_is_rrr57(int v) { _is_rrr57 = v; }
 void Tp::set_is_rrr58(int v) { _is_rrr58 = v; }
-void Tp::set_is_rrr59(int v) { _is_rrr59 = v; }
+void Tp::set_capacity(int v) { _capacity = v; }
 void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
 void Tp::set_rarity(int v) { _rarity = v; }
 void Tp::set_gfx_is_rrr99(int v) { _gfx_is_rrr99 = v; }
