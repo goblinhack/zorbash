@@ -198,10 +198,21 @@ void Game::wid_thing_info_create (Thingp t)
         auto attack_dice = t->get_stats_attack_dice();
         auto kill_count = player->get_stats_health() / attack_dice.max_roll();
 
-        if (kill_count < 5) {
+        //
+        // Oh dear.
+        //
+        if (kill_count == 0) {
+            kill_count = 1;
+        }
+
+        if (kill_count <= 2) {
             wid_thing_info_window->log(" ");
-            wid_thing_info_window->log("%%fg=red$Warning. Can kill you in " + 
-                                       std::to_string(kill_count) + "moves");
+            wid_thing_info_window->log("%%fg=red$Could kill you in");
+            wid_thing_info_window->log("%%fg=red$" + std::to_string(kill_count) + " hits");
+        } else if (kill_count <= 5) {
+            wid_thing_info_window->log(" ");
+            wid_thing_info_window->log("%%fg=orange$Could kill you in");
+            wid_thing_info_window->log("%%fg=orange$" + std::to_string(kill_count) + " hits");
         }
     }
 

@@ -32,52 +32,6 @@ std::default_random_engine rng;
 
 static char **ARGV;
 
-void callstack_dump (void)
-{_
-    static int done;
-    if (done) {
-        return;
-    }
-    done = true;
-
-    fprintf(MY_STDERR, "code trace\n");
-    fprintf(MY_STDERR, "==========\n");
-    for (auto depth = 0; depth < callframes_depth; depth++) {
-        auto iter = &callframes[depth];
-        fprintf(MY_STDERR, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
-    }
-
-    CON("code trace");
-    CON("==========");
-    for (auto depth = 0; depth < callframes_depth; depth++) {
-        auto iter = &callframes[depth];
-        CON("(stack) %d %s %s, line %u", depth, iter->file, iter->func, iter->line);
-    }
-    done = false;
-}
-
-#ifdef ENABLE_CRASH_HANDLER
-static void segv_handler (int sig)
-{_
-    static int crashed;
-
-    if (crashed) {
-        fprintf(MY_STDERR, "Nested crash!!!");
-        exit(1);
-    }
-
-    crashed = 1;
-    fprintf(MY_STDERR, "Crash!!!");
-    ERR("Crashed");
-}
-
-static void ctrlc_handler (int sig)
-{_
-    fprintf(MY_STDERR, "Interrupted!!!");
-    DIE_CLEAN("Interrupted");
-}
-#endif
-
 void quit (void)
 {_
     if (g_croaked) {

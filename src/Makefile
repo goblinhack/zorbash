@@ -109,6 +109,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/log_util.o 		\
     $(OBJDIR)/main.o 			\
+    $(OBJDIR)/signal.o 			\
     $(OBJDIR)/map.o 			\
     $(OBJDIR)/minilzo.o 		\
     $(OBJDIR)/particle.o 		\
@@ -1395,7 +1396,8 @@ all: $(TARGET_GAME)
 .o/game_config.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/game_config.o: my_dungeon_grid.h my_wid_popup.h my_wid_text_box.h my_wid.h
 .o/game_config.o: my_ascii.h my_color.h my_tex.h my_tile.h my_wid_tiles.h
-.o/game_config.o: my_wid_rightbar.h
+.o/game_config.o: my_wid_rightbar.h my_wid_leftbar.h my_wid_inventory.h
+.o/game_config.o: my_wid_thing_info.h
 .o/game_config_gfx.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/game_config_gfx.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/game_config_gfx.o: /usr/include/sys/_symbol_aliasing.h
@@ -2512,8 +2514,8 @@ all: $(TARGET_GAME)
 .o/game_main_menu.o: my_dungeon_grid.h my_wid_minicon.h my_wid.h my_ascii.h
 .o/game_main_menu.o: my_color.h my_tex.h my_tile.h my_wid_tiles.h
 .o/game_main_menu.o: my_wid_botcon.h my_wid_popup.h my_wid_text_box.h
-.o/game_main_menu.o: my_wid_rightbar.h my_wid_thing_info.h my_wid_inventory.h
-.o/game_main_menu.o: my_gl.h
+.o/game_main_menu.o: my_wid_rightbar.h my_wid_leftbar.h my_wid_thing_info.h
+.o/game_main_menu.o: my_wid_inventory.h my_gl.h
 .o/game_menu_flames.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/game_menu_flames.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/game_menu_flames.o: /usr/include/sys/_symbol_aliasing.h
