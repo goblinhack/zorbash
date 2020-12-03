@@ -418,6 +418,8 @@ bool Level::inventory_select (const uint32_t slot)
         inventory_describe(game->inventory_highlight_slot);
     }
 
+    wid_inventory_init();
+
     return true;
 }
 
@@ -440,6 +442,7 @@ bool Level::inventory_describe (const uint32_t slot)
                  SDL_GetScancodeName((SDL_Scancode)game->config.key_drop)) +
              "%%fg=reset$ to drop";
     }
+
     if (t->is_usable()){
         if (t->is_food()){
             s += ". Press %%fg=green$" +
@@ -458,11 +461,16 @@ bool Level::inventory_describe (const uint32_t slot)
                  "%%fg=reset$ to use";
         }
     }
+
     if (t->is_throwable()){
         s += ". Press %%fg=purple$" +
              std::string(
                  SDL_GetScancodeName((SDL_Scancode)game->config.key_throw)) +
              "%%fg=reset$ to throw";
+    }
+
+    if (t->capacity()){
+        s += ". Select to open";
     }
 
     BOTCON("%s.", s.c_str());

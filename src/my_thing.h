@@ -901,7 +901,7 @@ public:
     int gfx_show_outlined(void) const;
     int gfx_small_shadow_caster(void) const;
     int gfx_weapon_carry_anim(void) const;
-    int has_capacity(void) const;
+    int is_rrr59(void) const;
     int health_hunger_pct(void) const;
     int health_initial(void) const;
     int health_starving_pct(void) const;
@@ -1052,7 +1052,7 @@ public:
     int is_rrr56(void) const;
     int is_rrr57(void) const;
     int is_rrr58(void) const;
-    int is_rrr59(void) const;
+    int capacity(void) const;
     int is_rrr6(void) const;
     int rarity(void) const;
     int gfx_is_rrr99(void) const;

@@ -108,7 +108,7 @@ private:
     int _gfx_shown_in_bg {};
     int _gfx_small_shadow_caster {};
     int _gfx_weapon_carry_anim {};
-    int _has_capacity {};
+    int _is_rrr59 {};
     int _hunger_clock_freq_ms {};
     int _internal_has_dir_anim {};
     int _internal_has_hp_anim {};
@@ -255,7 +255,7 @@ private:
     int _is_rrr56 {};
     int _is_rrr57 {};
     int _is_rrr58 {};
-    int _is_rrr59 {};
+    int _capacity {};
     int _is_rrr6 {};
     int _is_rrr7 {};
     int _is_rrr8 {};
@@ -456,7 +456,7 @@ public:
     int gfx_show_outlined(void) const;
     int gfx_small_shadow_caster(void) const;
     int gfx_weapon_carry_anim(void) const;
-    int has_capacity(void) const;
+    int is_rrr59(void) const;
     int hunger_clock_freq_ms(void) const;
     int internal_has_dir_anim(void) const;
     int internal_has_hp_anim(void) const;
@@ -602,7 +602,7 @@ public:
     int is_rrr56(void) const;
     int is_rrr57(void) const;
     int is_rrr58(void) const;
-    int is_rrr59(void) const;
+    int capacity(void) const;
     int is_rrr6(void) const;
     int rarity(void) const;
     int gfx_is_rrr99(void) const;
@@ -697,7 +697,7 @@ public:
     void set_gfx_show_outlined(int);
     void set_gfx_small_shadow_caster(int);
     void set_gfx_weapon_carry_anim(int);
-    void set_has_capacity(int);
+    void set_is_rrr59(int);
     void set_hunger_clock_freq_ms(int);
     void set_internal_has_dir_anim(int);
     void set_internal_has_hp_anim(int);
@@ -844,7 +844,7 @@ public:
     void set_is_rrr56(int);
     void set_is_rrr57(int);
     void set_is_rrr58(int);
-    void set_is_rrr59(int);
+    void set_capacity(int);
     void set_is_rrr6(int);
     void set_rarity(int);
     void set_gfx_is_rrr99(int);

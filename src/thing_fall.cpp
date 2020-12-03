@@ -241,7 +241,7 @@ bool Thing::fall_to_next_level (void)
             auto h = decr_stats_health(fall_damage);
             if (h <= 0) {
                 h = set_stats_health(0);
-                dead("killed by falling");
+                dead("Flying without wings");
             }
             return true;
         }

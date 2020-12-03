@@ -353,8 +353,8 @@ class Tp:
     def set_is_rrr58(self, value):
         zx.tp_set_is_rrr58(self, value)
 
-    def set_is_rrr59(self, value):
-        zx.tp_set_is_rrr59(self, value)
+    def set_capacity(self, value):
+        zx.tp_set_capacity(self, value)
 
     def set_rarity(self, value):
         zx.tp_set_rarity(self, value)
@@ -446,8 +446,8 @@ class Tp:
     def set_is_bag(self, value):
         zx.tp_set_is_bag(self, value)
 
-    def set_has_capacity(self, value):
-        zx.tp_set_has_capacity(self, value)
+    def set_is_rrr59(self, value):
+        zx.tp_set_is_rrr59(self, value)
 
     def set_is_potion(self, value):
         zx.tp_set_is_potion(self, value)

@@ -189,10 +189,17 @@ void Game::wid_thing_info_create (Thingp t)
         }
     }
 
-    wid_thing_info_window->log(" ");
+    if (t->capacity()) {
+        if (need_line) {
+            wid_thing_info_window->log(" ");
+            need_line = false;
+        }
+        wid_thing_info_window->log("Capacity, " + std::to_string(t->capacity()) + " items");
+    }
 
     if (t->is_monst()) {
         std::string danger_level = player->get_danger_level(t);
+        wid_thing_info_window->log(" ");
         wid_thing_info_window->log(danger_level);
 
         auto attack_dice = t->get_stats_attack_dice();

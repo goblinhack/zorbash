@@ -775,9 +775,9 @@ int Thing::is_rrr58(void) const
     return (tp()->is_rrr58());
 }
 
-int Thing::is_rrr59(void) const
+int Thing::capacity(void) const
 {_
-    return (tp()->is_rrr59());
+    return (tp()->capacity());
 }
 
 int Thing::rarity(void) const
@@ -925,9 +925,9 @@ int Thing::is_bag(void) const
     return (tp()->is_bag());
 }
 
-int Thing::has_capacity(void) const
+int Thing::is_rrr59(void) const
 {_
-    return (tp()->has_capacity());
+    return (tp()->is_rrr59());
 }
 
 int Thing::is_potion(void) const
