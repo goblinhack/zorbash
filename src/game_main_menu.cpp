@@ -317,6 +317,10 @@ void Game::main_menu_select (void)
         game_main_menu_destroy();
     }
     wid_rightbar_fini();
+    wid_leftbar_fini();
+    wid_inventory_fini();
+    wid_thing_info_fini();
+
     game->wid_thing_info_destroy();
 
     point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 19);
