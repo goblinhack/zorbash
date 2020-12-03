@@ -229,6 +229,8 @@ void DBG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 extern void quit(void);
 extern void restart(void);
 extern void die(void);
+extern void segv_handler(int sig);
+extern void ctrlc_handler(int sig);
 
 //
 // Memory debugging

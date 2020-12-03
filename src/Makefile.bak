@@ -96,6 +96,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/log_util.o 		\
     $(OBJDIR)/main.o 			\
+    $(OBJDIR)/signal.o 			\
     $(OBJDIR)/map.o 			\
     $(OBJDIR)/minilzo.o 		\
     $(OBJDIR)/particle.o 		\
