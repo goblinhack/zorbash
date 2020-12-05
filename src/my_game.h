@@ -13,6 +13,8 @@
 #include "my_world.h"
 #include "my_dmap.h"
 
+class WidBag;
+
 typedef class Config_ {
 public:
     uint32_t           header_size                  = {};
@@ -191,6 +193,12 @@ public:
 
     std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> tile_cache_moves_ahead;
     std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS + 1> tile_cache_health;
+
+    //
+    // Temporary
+    //
+    class WidBag *bag1 {};
+    class WidBag *bag2 {};
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving

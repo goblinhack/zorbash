@@ -122,6 +122,7 @@
 #define UI_WID_POPUP_WIDTH_WIDEST  48
 #define UI_WID_SAVE_SLOTS          25 // How many save game slots
 #define UI_WID_STYLE_DARK          4
+#define UI_WID_STYLE_NONE          -1
 #define UI_WID_STYLE_GRAY          6
 #define UI_WID_STYLE_GREEN         1
 #define UI_WID_STYLE_NORMAL        3

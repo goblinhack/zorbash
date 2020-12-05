@@ -11,6 +11,7 @@
 #include "my_thing.h"
 #include "my_tile.h"
 #include "my_wid_console.h"
+#include "my_wid_bag.h"
 
 static WidPopup *wid_thing_info_window;
 
@@ -27,6 +28,16 @@ uint8_t wid_thing_info_init (void)
 
 void Game::wid_thing_info_destroy (void)
 {_
+    if (game->bag1) {
+        delete game->bag1;
+        game->bag1 = nullptr;
+    }
+
+    if (game->bag2) {
+        delete game->bag2;
+        game->bag2 = nullptr;
+    }
+
     wid_thing_info_fini();
 }
 
@@ -75,7 +86,7 @@ void Game::wid_thing_info_create (Thingp t)
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "ui_circle");
         wid_set_color(w, WID_COLOR_BG, WHITE);
-        wid_set_style(w, -1);
+        wid_set_style(w, UI_WID_STYLE_NONE);
     }
 
     {_
@@ -87,7 +98,7 @@ void Game::wid_thing_info_create (Thingp t)
         wid_set_bg_tilename(w, "ui_tile_bg");
         wid_set_fg_tilename(w, tile->name);
         wid_set_color(w, WID_COLOR_BG, WHITE);
-        wid_set_style(w, -1);
+        wid_set_style(w, UI_WID_STYLE_NONE);
     }
 
     wid_thing_info_window->log(" ");
@@ -221,6 +232,33 @@ void Game::wid_thing_info_create (Thingp t)
             wid_thing_info_window->log("%%fg=orange$Could kill you in");
             wid_thing_info_window->log("%%fg=orange$" + std::to_string(kill_count) + " hits");
         }
+    }
+
+    if (tp->bag_capacity_in_items()) {
+        point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
+
+        if (game->bag1) {
+            delete game->bag1;
+            game->bag1 = nullptr;
+        }
+
+        if (game->bag2) {
+            delete game->bag2;
+            game->bag2 = nullptr;
+        }
+
+        {
+            point tl = mid - point(player->bag_width() + 2, player->bag_height() + 1);
+            point br = tl +  point(player->bag_width(), player->bag_height());
+            game->bag1 = new WidBag(tl, br, "inventory");
+        }
+
+        {
+            point tl = mid + point(2, - (t->bag_height() + 1));
+            point br = tl +  point(t->bag_width(), t->bag_height());
+            game->bag2 = new WidBag(tl, br, "your bag");
+        }
+
     }
 
     int utilized = wid_thing_info_window->wid_text_area->line_count;

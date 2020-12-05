@@ -1811,7 +1811,7 @@ static Widp wid_new (Widp parent)
     wid_set_mode(w, WID_MODE_NORMAL);
 
     w->visible = true;
-    w->style = -1;
+    w->style = UI_WID_STYLE_NONE;
 
     return (w);
 }
