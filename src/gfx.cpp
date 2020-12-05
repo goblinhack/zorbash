@@ -88,6 +88,7 @@ void gfx_init (void)
     gfx_init9();
     gfx_init10();
     gfx_init11();
+    gfx_init12();
 }
 
 void gfx_fini (void)

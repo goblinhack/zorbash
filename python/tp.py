@@ -347,14 +347,14 @@ class Tp:
     def set_is_rrr56(self, value):
         zx.tp_set_is_rrr56(self, value)
 
-    def set_is_rrr57(self, value):
-        zx.tp_set_is_rrr57(self, value)
+    def set_bag_height(self, value):
+        zx.tp_set_bag_height(self, value)
 
-    def set_is_rrr58(self, value):
-        zx.tp_set_is_rrr58(self, value)
+    def set_bag_width(self, value):
+        zx.tp_set_bag_width(self, value)
 
-    def set_capacity(self, value):
-        zx.tp_set_capacity(self, value)
+    def set_bag_capacity_in_items(self, value):
+        zx.tp_set_bag_capacity_in_items(self, value)
 
     def set_rarity(self, value):
         zx.tp_set_rarity(self, value)

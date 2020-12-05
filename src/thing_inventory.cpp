@@ -469,7 +469,7 @@ bool Level::inventory_describe (const uint32_t slot)
              "%%fg=reset$ to throw";
     }
 
-    if (t->capacity()){
+    if (t->bag_capacity_in_items()){
         s += ". Select to open";
     }
 

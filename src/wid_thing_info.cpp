@@ -189,12 +189,12 @@ void Game::wid_thing_info_create (Thingp t)
         }
     }
 
-    if (t->capacity()) {
+    if (t->bag_capacity_in_items()) {
         if (need_line) {
             wid_thing_info_window->log(" ");
             need_line = false;
         }
-        wid_thing_info_window->log("Capacity, " + std::to_string(t->capacity()) + " items");
+        wid_thing_info_window->log("Capacity, " + std::to_string(t->bag_capacity_in_items()) + " items");
     }
 
     if (t->is_monst()) {

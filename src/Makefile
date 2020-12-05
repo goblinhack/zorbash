@@ -66,6 +66,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/gfx1.o			\
     $(OBJDIR)/gfx10.o			\
     $(OBJDIR)/gfx11.o			\
+    $(OBJDIR)/gfx12.o			\
     $(OBJDIR)/gfx2.o			\
     $(OBJDIR)/gfx3.o			\
     $(OBJDIR)/gfx4.o			\
@@ -79,6 +80,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/hacklib.o 		\
     $(OBJDIR)/hexdump.o 		\
     $(OBJDIR)/level.o 			\
+    $(OBJDIR)/level_create.o 		\
     $(OBJDIR)/level_cursor.o 		\
     $(OBJDIR)/level_cursor_path.o 	\
     $(OBJDIR)/level_display.o 		\
@@ -95,7 +97,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level_fini.o 		\
     $(OBJDIR)/level_heatmap.o 		\
     $(OBJDIR)/level_init.o 		\
-    $(OBJDIR)/level_create.o 		\
     $(OBJDIR)/level_log.o 		\
     $(OBJDIR)/level_map.o 		\
     $(OBJDIR)/level_minimap.o 		\
@@ -109,7 +110,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/log_util.o 		\
     $(OBJDIR)/main.o 			\
-    $(OBJDIR)/signal.o 			\
     $(OBJDIR)/map.o 			\
     $(OBJDIR)/minilzo.o 		\
     $(OBJDIR)/particle.o 		\
@@ -129,13 +129,13 @@ GAME_OBJECTS=				\
     $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/sdl_screenshot.o 		\
+    $(OBJDIR)/signal.o 			\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/sprintf.o 		\
     $(OBJDIR)/stb_image.o 		\
     $(OBJDIR)/string.o 			\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing_acid.o 		\
-    $(OBJDIR)/thing_danger.o 		\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_ai_goals.o 		\
     $(OBJDIR)/thing_ai_wander.o 	\
@@ -150,6 +150,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
+    $(OBJDIR)/thing_danger.o 		\
     $(OBJDIR)/thing_dead.o 		\
     $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
@@ -220,16 +221,17 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ttf.o 			\
     $(OBJDIR)/util.o 			\
     $(OBJDIR)/wid.o 			\
+    $(OBJDIR)/wid_bag.o 		\
     $(OBJDIR)/wid_botcon.o 		\
     $(OBJDIR)/wid_console.o 		\
+    $(OBJDIR)/wid_inventory.o 		\
     $(OBJDIR)/wid_leftbar.o 		\
     $(OBJDIR)/wid_log.o 		\
-    $(OBJDIR)/wid_inventory.o 		\
     $(OBJDIR)/wid_minicon.o 		\
-    $(OBJDIR)/wid_thing_info.o 		\
     $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_rightbar.o 		\
     $(OBJDIR)/wid_text_box.o 		\
+    $(OBJDIR)/wid_thing_info.o 		\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
     $(OBJDIR)/world_fini.o 		\
@@ -3297,6 +3299,47 @@ all: $(TARGET_GAME)
 .o/gfx11.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
 .o/gfx11.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
 .o/gfx11.o: my_point.h my_math.h /usr/include/math.h my_color.h
+.o/gfx12.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
+.o/gfx12.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
+.o/gfx12.o: /usr/include/sys/_symbol_aliasing.h
+.o/gfx12.o: /usr/include/sys/_posix_availability.h
+.o/gfx12.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
+.o/gfx12.o: /usr/include/_types.h /usr/include/sys/_types.h
+.o/gfx12.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/gfx12.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/gfx12.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/gfx12.o: /usr/include/sys/_types/_int8_t.h
+.o/gfx12.o: /usr/include/sys/_types/_int16_t.h
+.o/gfx12.o: /usr/include/sys/_types/_int32_t.h
+.o/gfx12.o: /usr/include/sys/_types/_int64_t.h /usr/include/_types/_uint8_t.h
+.o/gfx12.o: /usr/include/_types/_uint16_t.h /usr/include/_types/_uint32_t.h
+.o/gfx12.o: /usr/include/_types/_uint64_t.h
+.o/gfx12.o: /usr/include/sys/_types/_intptr_t.h /usr/include/machine/types.h
+.o/gfx12.o: /usr/include/i386/types.h /usr/include/sys/_types/_u_int8_t.h
+.o/gfx12.o: /usr/include/sys/_types/_u_int16_t.h
+.o/gfx12.o: /usr/include/sys/_types/_u_int32_t.h
+.o/gfx12.o: /usr/include/sys/_types/_u_int64_t.h
+.o/gfx12.o: /usr/include/sys/_types/_uintptr_t.h
+.o/gfx12.o: /usr/include/_types/_intmax_t.h /usr/include/_types/_uintmax_t.h
+.o/gfx12.o: my_ptrcheck.h my_globals.h /usr/include/stdio.h
+.o/gfx12.o: /usr/include/_stdio.h /usr/include/sys/_types/_va_list.h
+.o/gfx12.o: /usr/include/sys/_types/_size_t.h /usr/include/sys/_types/_null.h
+.o/gfx12.o: /usr/include/sys/stdio.h /usr/include/sys/_types/_off_t.h
+.o/gfx12.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
+.o/gfx12.o: /usr/include/secure/_common.h my_callstack.h
+.o/gfx12.o: my_array_bounds_check.h my_bounds_check.h /usr/include/assert.h
+.o/gfx12.o: my_vector_bounds_check.h c_plus_plus_serializer.h my_sdl.h
+.o/gfx12.o: my_command.h my_token.h my_string.h /usr/include/wchar.h
+.o/gfx12.o: /usr/include/sys/_types/_mbstate_t.h
+.o/gfx12.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/gfx12.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
+.o/gfx12.o: /usr/include/sys/_types/_clock_t.h
+.o/gfx12.o: /usr/include/sys/_types/_time_t.h
+.o/gfx12.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
+.o/gfx12.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/gfx12.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/gfx12.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/gfx12.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/gfx2.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx2.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/gfx2.o: /usr/include/sys/_symbol_aliasing.h
@@ -7134,6 +7177,91 @@ all: $(TARGET_GAME)
 .o/sdl_screenshot.o: /usr/include/libkern/_OSByteOrder.h
 .o/sdl_screenshot.o: /usr/include/libkern/i386/_OSByteOrder.h
 .o/sdl_screenshot.o: /usr/include/alloca.h
+.o/signal.o: /usr/include/strings.h /usr/include/_types.h
+.o/signal.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
+.o/signal.o: /usr/include/sys/_symbol_aliasing.h
+.o/signal.o: /usr/include/sys/_posix_availability.h
+.o/signal.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/signal.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/signal.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
+.o/signal.o: /usr/include/sys/_types/_size_t.h /usr/include/string.h
+.o/signal.o: /usr/include/sys/_types/_null.h
+.o/signal.o: /usr/include/sys/_types/_rsize_t.h /usr/include/machine/types.h
+.o/signal.o: /usr/include/i386/types.h /usr/include/sys/_types/_int8_t.h
+.o/signal.o: /usr/include/sys/_types/_int16_t.h
+.o/signal.o: /usr/include/sys/_types/_int32_t.h
+.o/signal.o: /usr/include/sys/_types/_int64_t.h
+.o/signal.o: /usr/include/sys/_types/_u_int8_t.h
+.o/signal.o: /usr/include/sys/_types/_u_int16_t.h
+.o/signal.o: /usr/include/sys/_types/_u_int32_t.h
+.o/signal.o: /usr/include/sys/_types/_u_int64_t.h
+.o/signal.o: /usr/include/sys/_types/_intptr_t.h
+.o/signal.o: /usr/include/sys/_types/_uintptr_t.h
+.o/signal.o: /usr/include/sys/_types/_errno_t.h
+.o/signal.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_string.h
+.o/signal.o: /usr/include/secure/_common.h /usr/include/secure/_strings.h
+.o/signal.o: /usr/include/time.h /usr/include/sys/_types/_clock_t.h
+.o/signal.o: /usr/include/sys/_types/_time_t.h
+.o/signal.o: /usr/include/sys/_types/_timespec.h /usr/include/unistd.h
+.o/signal.o: /usr/include/sys/unistd.h
+.o/signal.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/signal.o: /usr/include/sys/_types/_seek_set.h
+.o/signal.o: /usr/include/_types/_uint64_t.h /usr/include/_types/_uint32_t.h
+.o/signal.o: /usr/include/sys/_types/_uid_t.h
+.o/signal.o: /usr/include/sys/_types/_gid_t.h
+.o/signal.o: /usr/include/sys/_types/_off_t.h
+.o/signal.o: /usr/include/sys/_types/_pid_t.h
+.o/signal.o: /usr/include/sys/_types/_useconds_t.h /usr/include/sys/select.h
+.o/signal.o: /usr/include/sys/appleapiopts.h
+.o/signal.o: /usr/include/sys/_types/_fd_def.h
+.o/signal.o: /usr/include/sys/_types/_timeval.h
+.o/signal.o: /usr/include/sys/_types/_suseconds_t.h
+.o/signal.o: /usr/include/sys/_types/_sigset_t.h
+.o/signal.o: /usr/include/sys/_types/_fd_setsize.h
+.o/signal.o: /usr/include/sys/_types/_fd_set.h
+.o/signal.o: /usr/include/sys/_types/_fd_clr.h
+.o/signal.o: /usr/include/sys/_types/_fd_isset.h
+.o/signal.o: /usr/include/sys/_types/_fd_zero.h
+.o/signal.o: /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h
+.o/signal.o: /usr/include/sys/_types/_dev_t.h
+.o/signal.o: /usr/include/sys/_types/_mode_t.h
+.o/signal.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
+.o/signal.o: /usr/include/signal.h /usr/include/sys/signal.h
+.o/signal.o: /usr/include/machine/signal.h /usr/include/i386/signal.h
+.o/signal.o: /usr/include/machine/_mcontext.h /usr/include/i386/_mcontext.h
+.o/signal.o: /usr/include/mach/machine/_structs.h
+.o/signal.o: /usr/include/mach/i386/_structs.h
+.o/signal.o: /usr/include/sys/_pthread/_pthread_attr_t.h
+.o/signal.o: /usr/include/sys/_types/_sigaltstack.h
+.o/signal.o: /usr/include/sys/_types/_ucontext.h
+.o/signal.o: /usr/include/sys/_pthread/_pthread_t.h my_game.h my_main.h
+.o/signal.o: my_sys.h my_pcg_basic.h /usr/include/inttypes.h
+.o/signal.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/signal.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
+.o/signal.o: /usr/include/_types/_intmax_t.h /usr/include/_types/_uintmax_t.h
+.o/signal.o: my_ptrcheck.h my_globals.h /usr/include/stdio.h
+.o/signal.o: /usr/include/_stdio.h /usr/include/sys/_types/_va_list.h
+.o/signal.o: /usr/include/sys/stdio.h /usr/include/secure/_stdio.h
+.o/signal.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
+.o/signal.o: /usr/include/assert.h my_vector_bounds_check.h
+.o/signal.o: c_plus_plus_serializer.h my_sdl.h my_command.h my_token.h
+.o/signal.o: my_string.h /usr/include/wchar.h
+.o/signal.o: /usr/include/sys/_types/_mbstate_t.h
+.o/signal.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/signal.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
+.o/signal.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/signal.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/signal.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/signal.o: my_point.h my_math.h /usr/include/math.h my_world.h my_level.h
+.o/signal.o: my_time.h /usr/include/sys/time.h
+.o/signal.o: /usr/include/sys/_types/_timeval64.h my_depth.h my_particle.h
+.o/signal.o: my_size.h my_thing_id.h my_dungeon.h my_room.h my_charmap.h
+.o/signal.o: my_dmap.h my_level_static.h my_dungeon_grid.h
+.o/signal.o: /usr/include/stdlib.h /usr/include/sys/wait.h
+.o/signal.o: /usr/include/sys/_types/_id_t.h /usr/include/sys/resource.h
+.o/signal.o: /usr/include/machine/endian.h /usr/include/i386/endian.h
+.o/signal.o: /usr/include/sys/_endian.h /usr/include/libkern/_OSByteOrder.h
+.o/signal.o: /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h
 .o/slre.o: /usr/include/stdio.h /usr/include/_stdio.h
 .o/slre.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/slre.o: /usr/include/sys/_posix_availability.h /usr/include/Availability.h
@@ -14054,6 +14182,51 @@ all: $(TARGET_GAME)
 .o/wid.o: /usr/include/sys/_types/_errno_t.h /usr/include/strings.h
 .o/wid.o: /usr/include/secure/_strings.h /usr/include/secure/_string.h
 .o/wid.o: my_gl.h
+.o/wid_bag.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
+.o/wid_bag.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
+.o/wid_bag.o: /usr/include/sys/_posix_availability.h
+.o/wid_bag.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
+.o/wid_bag.o: /usr/include/_types.h /usr/include/sys/_types.h
+.o/wid_bag.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/wid_bag.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/wid_bag.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/wid_bag.o: /usr/include/sys/_types/_int8_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_int16_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_int32_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_int64_t.h
+.o/wid_bag.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
+.o/wid_bag.o: /usr/include/_types/_uint32_t.h /usr/include/_types/_uint64_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_intptr_t.h
+.o/wid_bag.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/wid_bag.o: /usr/include/sys/_types/_u_int8_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_u_int16_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_u_int32_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_u_int64_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_uintptr_t.h
+.o/wid_bag.o: /usr/include/_types/_intmax_t.h
+.o/wid_bag.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
+.o/wid_bag.o: /usr/include/stdio.h /usr/include/_stdio.h
+.o/wid_bag.o: /usr/include/sys/_types/_va_list.h
+.o/wid_bag.o: /usr/include/sys/_types/_size_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/wid_bag.o: /usr/include/sys/_types/_off_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
+.o/wid_bag.o: /usr/include/secure/_common.h my_callstack.h
+.o/wid_bag.o: my_array_bounds_check.h my_bounds_check.h /usr/include/assert.h
+.o/wid_bag.o: my_vector_bounds_check.h c_plus_plus_serializer.h my_sdl.h
+.o/wid_bag.o: my_command.h my_token.h my_string.h /usr/include/wchar.h
+.o/wid_bag.o: /usr/include/sys/_types/_mbstate_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
+.o/wid_bag.o: /usr/include/sys/_types/_clock_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_time_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
+.o/wid_bag.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/wid_bag.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/wid_bag.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_bag.o: my_wid_bag.h my_wid_text_box.h my_wid.h my_point.h my_math.h
+.o/wid_bag.o: /usr/include/math.h my_size.h my_ascii.h my_color.h my_tex.h
+.o/wid_bag.o: my_tile.h my_wid_tiles.h my_ttf.h my_font.h my_wid_popup.h
 .o/wid_botcon.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/wid_botcon.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/wid_botcon.o: /usr/include/sys/_posix_availability.h

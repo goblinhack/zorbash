@@ -1050,9 +1050,9 @@ public:
     int is_rrr54(void) const;
     int is_rrr55(void) const;
     int is_rrr56(void) const;
-    int is_rrr57(void) const;
-    int is_rrr58(void) const;
-    int capacity(void) const;
+    int bag_height(void) const;
+    int bag_width(void) const;
+    int bag_capacity_in_items(void) const;
     int is_rrr6(void) const;
     int rarity(void) const;
     int gfx_is_rrr99(void) const;

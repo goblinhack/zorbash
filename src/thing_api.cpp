@@ -765,19 +765,19 @@ int Thing::is_rrr56(void) const
     return (tp()->is_rrr56());
 }
 
-int Thing::is_rrr57(void) const
+int Thing::bag_height(void) const
 {_
-    return (tp()->is_rrr57());
+    return (tp()->bag_height());
 }
 
-int Thing::is_rrr58(void) const
+int Thing::bag_width(void) const
 {_
-    return (tp()->is_rrr58());
+    return (tp()->bag_width());
 }
 
-int Thing::capacity(void) const
+int Thing::bag_capacity_in_items(void) const
 {_
-    return (tp()->capacity());
+    return (tp()->bag_capacity_in_items());
 }
 
 int Thing::rarity(void) const

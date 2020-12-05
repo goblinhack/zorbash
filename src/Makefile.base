@@ -53,6 +53,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/gfx1.o			\
     $(OBJDIR)/gfx10.o			\
     $(OBJDIR)/gfx11.o			\
+    $(OBJDIR)/gfx12.o			\
     $(OBJDIR)/gfx2.o			\
     $(OBJDIR)/gfx3.o			\
     $(OBJDIR)/gfx4.o			\
@@ -66,6 +67,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/hacklib.o 		\
     $(OBJDIR)/hexdump.o 		\
     $(OBJDIR)/level.o 			\
+    $(OBJDIR)/level_create.o 		\
     $(OBJDIR)/level_cursor.o 		\
     $(OBJDIR)/level_cursor_path.o 	\
     $(OBJDIR)/level_display.o 		\
@@ -82,7 +84,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level_fini.o 		\
     $(OBJDIR)/level_heatmap.o 		\
     $(OBJDIR)/level_init.o 		\
-    $(OBJDIR)/level_create.o 		\
     $(OBJDIR)/level_log.o 		\
     $(OBJDIR)/level_map.o 		\
     $(OBJDIR)/level_minimap.o 		\
@@ -96,7 +97,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/log_util.o 		\
     $(OBJDIR)/main.o 			\
-    $(OBJDIR)/signal.o 			\
     $(OBJDIR)/map.o 			\
     $(OBJDIR)/minilzo.o 		\
     $(OBJDIR)/particle.o 		\
@@ -116,13 +116,13 @@ GAME_OBJECTS=				\
     $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/sdl_screenshot.o 		\
+    $(OBJDIR)/signal.o 			\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/sprintf.o 		\
     $(OBJDIR)/stb_image.o 		\
     $(OBJDIR)/string.o 			\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing_acid.o 		\
-    $(OBJDIR)/thing_danger.o 		\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_ai_goals.o 		\
     $(OBJDIR)/thing_ai_wander.o 	\
@@ -137,6 +137,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
+    $(OBJDIR)/thing_danger.o 		\
     $(OBJDIR)/thing_dead.o 		\
     $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
@@ -207,16 +208,17 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ttf.o 			\
     $(OBJDIR)/util.o 			\
     $(OBJDIR)/wid.o 			\
+    $(OBJDIR)/wid_bag.o 		\
     $(OBJDIR)/wid_botcon.o 		\
     $(OBJDIR)/wid_console.o 		\
+    $(OBJDIR)/wid_inventory.o 		\
     $(OBJDIR)/wid_leftbar.o 		\
     $(OBJDIR)/wid_log.o 		\
-    $(OBJDIR)/wid_inventory.o 		\
     $(OBJDIR)/wid_minicon.o 		\
-    $(OBJDIR)/wid_thing_info.o 		\
     $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_rightbar.o 		\
     $(OBJDIR)/wid_text_box.o 		\
+    $(OBJDIR)/wid_thing_info.o 		\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
     $(OBJDIR)/world_fini.o 		\
