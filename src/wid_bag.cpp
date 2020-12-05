@@ -17,10 +17,11 @@
 
 WidBag::~WidBag()
 {
-    wid_destroy(&wid_popup_container);
+    wid_destroy(&wid_bag_container);
+    wid_destroy(&wid_bag_title);
 }
 
-WidBag::WidBag (point tl, point br) : tl(tl), br(br)
+WidBag::WidBag (point tl, point br, const std::string &title) : tl(tl), br(br)
 {_
 #if 0
     int outer_w = br.x - tl.x;
@@ -35,11 +36,18 @@ WidBag::WidBag (point tl, point br) : tl(tl), br(br)
 #endif
 
     {
-        wid_popup_container = wid_new_square_window("wid_popup");
-        wid_set_pos(wid_popup_container, tl, br);
-        wid_set_style(wid_popup_container, -1);
-        wid_set_style(wid_popup_container, UI_WID_STYLE_BAG);
+        wid_bag_container = wid_new_square_window("wid_bag");
+        wid_set_pos(wid_bag_container, tl, br);
+        wid_set_style(wid_bag_container, UI_WID_STYLE_BAG);
     }
 
-    wid_update(wid_popup_container);
+    {
+        wid_bag_title = wid_new_square_window("wid_bag_title");
+        wid_set_pos(wid_bag_title, point(tl.x, tl.y - 1), point(br.x, tl.y - 1));
+        wid_set_style(wid_bag_title, UI_WID_STYLE_NONE);
+        wid_set_text(wid_bag_title, title);
+    }
+
+    wid_update(wid_bag_container);
+    wid_update(wid_bag_title);
 }

@@ -470,7 +470,7 @@ bool Level::inventory_describe (const uint32_t slot)
     }
 
     if (t->bag_capacity_in_items()){
-        s += ". Select to open";
+        s += ". Select to open. Use mouse to drag items";
     }
 
     BOTCON("%s.", s.c_str());

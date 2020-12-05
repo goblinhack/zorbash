@@ -105,7 +105,7 @@ static void wid_inventory_create (void)
 
             wid_inventory_window = wid_new_square_window("inventory (bottom)");
             wid_set_pos(wid_inventory_window, tl, br);
-            wid_set_style(wid_inventory_window, -1);
+            wid_set_style(wid_inventory_window, UI_WID_STYLE_NONE);
         }
     }
 
