@@ -755,14 +755,14 @@ int Thing::is_rrr54(void) const
     return (tp()->is_rrr54());
 }
 
-int Thing::is_rrr55(void) const
+int Thing::bag_item_height(void) const
 {_
-    return (tp()->is_rrr55());
+    return (tp()->bag_item_height());
 }
 
-int Thing::is_rrr56(void) const
+int Thing::bag_item_width(void) const
 {_
-    return (tp()->is_rrr56());
+    return (tp()->bag_item_width());
 }
 
 int Thing::bag_height(void) const

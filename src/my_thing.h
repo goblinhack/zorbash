@@ -107,6 +107,7 @@ public:
     int          submerged_offset = {};      // GL co-orids
     int          tick_rate_tenths = {};
     int          tick_resurrect_when = {};
+    point        bag_position;
     point        wander_target;
     point        where_i_dropped_an_item_last;
     std::list<ThingId>   carrying;
@@ -1048,8 +1049,8 @@ public:
     int is_rrr52(void) const;
     int is_rrr53(void) const;
     int is_rrr54(void) const;
-    int is_rrr55(void) const;
-    int is_rrr56(void) const;
+    int bag_item_height(void) const;
+    int bag_item_width(void) const;
     int bag_height(void) const;
     int bag_width(void) const;
     int bag_capacity_in_items(void) const;
