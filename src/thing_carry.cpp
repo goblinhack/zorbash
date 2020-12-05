@@ -26,6 +26,11 @@ _
         return false;
     }
 
+    if (!bag_add(what)) {
+        log("no; cannot store");
+        return false;
+    }
+
     if (is_player()) {
         if (!inventory_id_insert(what)) {
             log("no; no space in inventory");

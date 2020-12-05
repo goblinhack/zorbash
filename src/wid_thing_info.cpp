@@ -250,13 +250,13 @@ void Game::wid_thing_info_create (Thingp t)
         {
             point tl = mid - point(player->bag_width() + 2, player->bag_height() + 1);
             point br = tl +  point(player->bag_width(), player->bag_height());
-            game->bag1 = new WidBag(tl, br, "inventory");
+            game->bag1 = new WidBag(player, tl, br, "inventory");
         }
 
         {
             point tl = mid + point(2, - (t->bag_height() + 1));
             point br = tl +  point(t->bag_width(), t->bag_height());
-            game->bag2 = new WidBag(tl, br, "your bag");
+            game->bag2 = new WidBag(t, tl, br, "your bag");
         }
 
     }

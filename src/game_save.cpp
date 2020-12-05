@@ -104,6 +104,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* uint32_t     tick_last_did_something   */ out << bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_escape          */ out << bits(my.t->tick_last_escape);
     /* uint32_t     tick_last_level_change    */ out << bits(my.t->tick_last_level_change);
+    /* bag                                    */ out << bits(my.t->bag);
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
