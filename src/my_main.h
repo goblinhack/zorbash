@@ -124,15 +124,16 @@
 #define UI_WID_STYLE_DARK          4
 #define UI_WID_STYLE_GRAY          6
 #define UI_WID_STYLE_GREEN         1
-#define UI_WID_STYLE_HORIZ_DARK    10
-#define UI_WID_STYLE_HORIZ_LIGHT   11
-#define UI_WID_STYLE_MAX           12
 #define UI_WID_STYLE_NORMAL        3
 #define UI_WID_STYLE_OUTLINE       7
 #define UI_WID_STYLE_RED           2
 #define UI_WID_STYLE_SOLID_DEFAULT 5
 #define UI_WID_STYLE_VERT_DARK     8
 #define UI_WID_STYLE_VERT_LIGHT    9
+#define UI_WID_STYLE_HORIZ_DARK    10
+#define UI_WID_STYLE_HORIZ_LIGHT   11
+#define UI_WID_STYLE_BAG           12
+#define UI_WID_STYLE_MAX           13
 
 #include "my_sys.h"
 
