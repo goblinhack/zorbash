@@ -23,6 +23,6 @@ public:
 
 public:
     ~WidBag();
-    WidBag (point tl, point br, const std::string &title);
+    WidBag (Thingp bag, point tl, point br, const std::string &title);
 };
 #endif

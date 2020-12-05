@@ -135,6 +135,8 @@
 #define UI_WID_STYLE_HORIZ_LIGHT   11
 #define UI_WID_STYLE_BAG           12
 #define UI_WID_STYLE_MAX           13
+#define MAX_BAG_WIDTH              20
+#define MAX_BAG_HEIGHT             20
 
 #include "my_sys.h"
 

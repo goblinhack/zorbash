@@ -4512,3 +4512,13 @@ const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); 
 const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }
 const std::string& Thing::gfx_anim_attack (void) const {_ return (tp()->gfx_anim_attack()); }
+
+std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> & Thing::get_bag (void)
+{_
+    if (monstp) {
+        return (monstp->bag);
+    } else {
+        DIE("no bag");
+    }
+}
+

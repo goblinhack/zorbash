@@ -137,6 +137,7 @@ public:
     uint32_t     tick_last_did_something {};
     uint32_t     tick_last_escape {};
     uint32_t     tick_last_level_change {};
+    std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> bag {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -1050,9 +1051,14 @@ public:
     int is_rrr53(void) const;
     int is_rrr54(void) const;
     int bag_item_height(void) const;
+    bool bag_contains(Thingp item);
     int bag_item_width(void) const;
     int bag_height(void) const;
     int bag_width(void) const;
+    bool bag_compress(void);
+    bool bag_remove_at(Thingp item, point pos);
+    bool bag_place_at(Thingp item, point pos);
+    bool bag_can_place_at(Thingp item, point pos);
     int bag_capacity_in_items(void) const;
     int is_rrr6(void) const;
     int rarity(void) const;
@@ -1223,6 +1229,9 @@ public:
     void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
     void weapon_sheath(void);
     void wield(Thingp w);
+    std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> & get_bag (void);
+    bool bag_add(Thingp);
+    bool bag_remove(Thingp);
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
