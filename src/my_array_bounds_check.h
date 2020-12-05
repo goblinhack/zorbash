@@ -95,6 +95,18 @@ void set(std::array<std::array<TYPE,YDIM>,XDIM>& container,
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
+void set(std::array<std::array<TYPE,YDIM>,XDIM>* container,
+         std::size_t X, std::size_t Y, TYPE v) {_
+    DODEBUG(std::cerr << "set [" << X << "][" << Y << "] = " << v << std::endl);
+    ASSERT_EX(X,>=,0)
+    ASSERT_EX(X,<,container->size())
+    ASSERT_EX(Y,>=,0)
+    ASSERT_EX(Y,<,(*container)[X].size())
+    (*container)[X][Y] = v;
+}
+
+template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+static inline
 void incr(std::array<std::array<TYPE,YDIM>,XDIM>& container,
           std::size_t X, std::size_t Y, TYPE v) {_
     DODEBUG(std::cerr << "incr [" << X << "][" << Y << "]" << v << std::endl);
@@ -152,6 +164,19 @@ TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const &container,
     ASSERT_EX(Y,<,container[X].size())
     DODEBUG(std::cerr << container[X][Y] << std::endl);
     return (container[X][Y]);
+}
+
+template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+static inline
+TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const *container,
+         std::size_t X, std::size_t Y) {_
+    DODEBUG(std::cerr << "get [" << X << "][" << Y << "] = ");
+    ASSERT_EX(X,>=,0)
+    ASSERT_EX(X,<,container->size())
+    ASSERT_EX(Y,>=,0)
+    ASSERT_EX(Y,<,container[X].size())
+    DODEBUG(std::cerr << (*container)[X][Y] << std::endl);
+    return ((*container)[X][Y]);
 }
 
 //

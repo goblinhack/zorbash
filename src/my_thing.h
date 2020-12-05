@@ -1059,7 +1059,7 @@ public:
     bool bag_remove_at(Thingp item, point pos);
     bool bag_place_at(Thingp item, point pos);
     bool bag_can_place_at(Thingp item, point pos);
-    int bag_capacity_in_items(void) const;
+    int rrr58(void) const;
     int is_rrr6(void) const;
     int rarity(void) const;
     int gfx_is_rrr99(void) const;
@@ -1229,7 +1229,7 @@ public:
     void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
     void weapon_sheath(void);
     void wield(Thingp w);
-    std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> & get_bag (void);
+    std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_bag (void);
     bool bag_add(Thingp);
     bool bag_remove(Thingp);
 } Thing;
