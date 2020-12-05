@@ -255,7 +255,7 @@ private:
     int _bag_item_width {};
     int _bag_height {};
     int _bag_width {};
-    int _bag_capacity_in_items {};
+    int _rrr58 {};
     int _is_rrr6 {};
     int _is_rrr7 {};
     int _is_rrr8 {};
@@ -602,7 +602,7 @@ public:
     int bag_item_width(void) const;
     int bag_height(void) const;
     int bag_width(void) const;
-    int bag_capacity_in_items(void) const;
+    int rrr58(void) const;
     int is_rrr6(void) const;
     int rarity(void) const;
     int gfx_is_rrr99(void) const;
@@ -844,7 +844,7 @@ public:
     void set_bag_item_width(int);
     void set_bag_height(int);
     void set_bag_width(int);
-    void set_bag_capacity_in_items(int);
+    void set_rrr58(int);
     void set_is_rrr6(int);
     void set_rarity(int);
     void set_gfx_is_rrr99(int);

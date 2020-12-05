@@ -10,7 +10,6 @@ def tp_init(name, text_name, title):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(20)
     x.set_collision_radius(0.40)
-    x.set_bag_capacity_in_items(10)
     x.set_bag_width(10)
     x.set_bag_height(10)
     x.set_gfx_anim_attack("punch1")

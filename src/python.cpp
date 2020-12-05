@@ -680,7 +680,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(bag_item_width)
     TP_SET_DECL(bag_height)
     TP_SET_DECL(bag_width)
-    TP_SET_DECL(bag_capacity_in_items)
+    TP_SET_DECL(rrr58)
     TP_SET_DECL(is_rrr6)
     TP_SET_DECL(rarity)
     TP_SET_DECL(gfx_is_rrr99)

@@ -96,9 +96,15 @@ bool Thing::bag_compress (void)
 
 	    auto t = game->level->thing_find(id);
 	    if (bag_remove_at(t, t->monstp->bag_position)) {
-		if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
-		    did_something = true;
-		}
+		if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
+                    if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
+                        did_something = true;
+                    } else {
+                        bag_place_at(t, t->monstp->bag_position);
+                    }
+                } else {
+                    bag_place_at(t, t->monstp->bag_position);
+                }
 	    }
 	}
     }
@@ -116,15 +122,24 @@ bool Thing::bag_remove_at (Thingp item, point pos)
 	    set(bag, x, y, NoThingId);
 	}
     }
-    while (bag_compress()) { }
     return true;
 }
 
 bool Thing::bag_can_place_at (Thingp item, point pos)
 {
     auto bag = get_bag();
+    auto bw = bag_width();
+    auto bh = bag_height();
     auto w = item->bag_item_width();
     auto h = item->bag_item_height();
+
+    if (pos.x + w >= bw) {
+        return false;
+    }
+
+    if (pos.y + h >= bh) {
+        return false;
+    }
 
     for (auto x = pos.x; x < pos.x + w; x++) {
 	for (auto y = pos.y; y < pos.y + h; y++) {
@@ -144,8 +159,17 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
 bool Thing::bag_place_at (Thingp item, point pos)
 {
     auto bag = get_bag();
+    auto bw = bag_width();
+    auto bh = bag_height();
     auto w = item->bag_item_width();
     auto h = item->bag_item_height();
+
+    if (pos.y + h >= bh) {
+        return false;
+    }
+    if (pos.x + w >= bw) {
+        return false;
+    }
 
     for (auto x = pos.x; x < pos.x + w; x++) {
 	for (auto y = pos.y; y < pos.y + h; y++) {
@@ -183,23 +207,6 @@ WidBag::~WidBag()
 
 WidBag::WidBag (Thingp bag, point tl, point br, const std::string &title) : tl(tl), br(br)
 {_
-#if 0
-    int outer_w = br.x - tl.x;
-    int outer_h = br.y - tl.y;
-    int width = outer_w;
-    int height = outer_h;
-
-    point inner_tl = point(0, 0);
-    point inner_br = point(width, height);
-    int inner_w = inner_br.x - inner_tl.x;
-    int inner_h = inner_br.y - inner_tl.y;
-#endif
-
-    for (const auto& item : bag->monstp->carrying) {
-        auto t = game->level->thing_find(item.id);
-        t->con("bag pos %d, %d", t->monstp->bag_position.x, t->monstp->bag_position.y);
-    }
-
     {
         wid_bag_container = wid_new_square_window("wid_bag");
         wid_set_pos(wid_bag_container, tl, br);
@@ -211,6 +218,24 @@ WidBag::WidBag (Thingp bag, point tl, point br, const std::string &title) : tl(t
         wid_set_pos(wid_bag_title, point(tl.x, tl.y - 1), point(br.x, tl.y - 1));
         wid_set_style(wid_bag_title, UI_WID_STYLE_NONE);
         wid_set_text(wid_bag_title, title);
+    }
+
+    for (const auto& item : bag->monstp->carrying) {
+        auto t = game->level->thing_find(item.id);
+        auto tl = t->monstp->bag_position + point(1, 1);
+        auto br = tl + point(t->bag_item_width() - 1, t->bag_item_height() - 1);
+
+        auto wid_bag_item = wid_new_square_button(wid_bag_container, "wid_bag item");
+        wid_set_pos(wid_bag_item, tl, br);
+        wid_set_style(wid_bag_item, UI_WID_STYLE_DARK);
+
+        auto tpp = t->tp();
+        auto tiles = &tpp->tiles;
+
+        auto tile = tile_first(tiles);
+        if (tile) {
+            wid_set_fg_tile(wid_bag_item, tile);
+        }
     }
 
     wid_update(wid_bag_container);

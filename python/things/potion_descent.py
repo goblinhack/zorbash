@@ -5,6 +5,8 @@ import tp
 def potion_init(name, text_name):
     x = tp.Tp(name, text_name)
 
+    x.set_bag_item_height(2)
+    x.set_bag_item_width(2)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
@@ -16,8 +18,6 @@ def potion_init(name, text_name):
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_bag_item_width(2)
-    x.set_bag_item_height(2)
     x.set_is_item_class_b(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
@@ -26,10 +26,10 @@ def potion_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_throwable(True)
     x.set_is_usable(True)
+    x.set_long_text_description("This most dangerous potion will transport you to the next level by the most efficacious means possible...")
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=cyan$A swirling milky blue potion of descent")
-    x.set_long_text_description("This most dangerous potion will transport you to the next level by the most efficacious means possible...")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
@@ -43,6 +43,6 @@ def potion_init(name, text_name):
     x.update()
 
 def init():
-    potion_init(name="potion_blue", text_name="potion of descent")
+    potion_init(name="potion_descent", text_name="potion descent")
 
 init()

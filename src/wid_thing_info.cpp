@@ -200,14 +200,6 @@ void Game::wid_thing_info_create (Thingp t)
         }
     }
 
-    if (t->bag_capacity_in_items()) {
-        if (need_line) {
-            wid_thing_info_window->log(" ");
-            need_line = false;
-        }
-        wid_thing_info_window->log("Capacity, " + std::to_string(t->bag_capacity_in_items()) + " items");
-    }
-
     if (t->is_monst()) {
         std::string danger_level = player->get_danger_level(t);
         wid_thing_info_window->log(" ");
@@ -234,7 +226,7 @@ void Game::wid_thing_info_create (Thingp t)
         }
     }
 
-    if (tp->bag_capacity_in_items()) {
+    if (tp->is_bag()) {
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 
         if (game->bag1) {
@@ -248,15 +240,17 @@ void Game::wid_thing_info_create (Thingp t)
         }
 
         {
-            point tl = mid - point(player->bag_width() + 2, player->bag_height() + 1);
+            point tl = mid - point(player->bag_width() + 5, player->bag_height() + 1);
             point br = tl +  point(player->bag_width(), player->bag_height());
-            game->bag1 = new WidBag(player, tl, br, "inventory");
+            game->bag1 = new WidBag(player, tl, br, "Inventory");
         }
 
-        {
-            point tl = mid + point(2, - (t->bag_height() + 1));
-            point br = tl +  point(t->bag_width(), t->bag_height());
-            game->bag2 = new WidBag(t, tl, br, "your bag");
+        point tl = mid + point(0, - (t->bag_height() + 1));
+        point br = tl +  point(t->bag_width(), t->bag_height());
+        if (tp->bag_width() * tp->bag_height() < 100) {
+            game->bag2 = new WidBag(t, tl, br, "Wee bag");
+        } else {
+            game->bag2 = new WidBag(t, tl, br, "Big bag");
         }
 
     }
