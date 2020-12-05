@@ -15,6 +15,8 @@ def tp_init(name, text_name):
     x.set_is_food(True)
     x.set_is_interesting(True)
     x.set_is_item(False)
+    x.set_bag_item_width(1)
+    x.set_bag_item_height(1)
     x.set_is_item_class_a(False)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)

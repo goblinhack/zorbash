@@ -341,11 +341,11 @@ class Tp:
     def set_is_rrr54(self, value):
         zx.tp_set_is_rrr54(self, value)
 
-    def set_is_rrr55(self, value):
-        zx.tp_set_is_rrr55(self, value)
+    def set_bag_item_height(self, value):
+        zx.tp_set_bag_item_height(self, value)
 
-    def set_is_rrr56(self, value):
-        zx.tp_set_is_rrr56(self, value)
+    def set_bag_item_width(self, value):
+        zx.tp_set_bag_item_width(self, value)
 
     def set_bag_height(self, value):
         zx.tp_set_bag_height(self, value)

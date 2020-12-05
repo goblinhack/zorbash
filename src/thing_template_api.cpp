@@ -232,8 +232,8 @@ int Tp::is_rrr51(void) const { return _is_rrr51; }
 int Tp::is_rrr52(void) const { return _is_rrr52; }
 int Tp::is_rrr53(void) const { return _is_rrr53; }
 int Tp::is_rrr54(void) const { return _is_rrr54; }
-int Tp::is_rrr55(void) const { return _is_rrr55; }
-int Tp::is_rrr56(void) const { return _is_rrr56; }
+int Tp::bag_item_height(void) const { return _bag_item_height; }
+int Tp::bag_item_width(void) const { return _bag_item_width; }
 int Tp::bag_height(void) const { return _bag_height; }
 int Tp::bag_width(void) const { return _bag_width; }
 int Tp::bag_capacity_in_items(void) const { return _bag_capacity_in_items; }
@@ -473,8 +473,8 @@ void Tp::set_is_rrr51(int v) { _is_rrr51 = v; }
 void Tp::set_is_rrr52(int v) { _is_rrr52 = v; }
 void Tp::set_is_rrr53(int v) { _is_rrr53 = v; }
 void Tp::set_is_rrr54(int v) { _is_rrr54 = v; }
-void Tp::set_is_rrr55(int v) { _is_rrr55 = v; }
-void Tp::set_is_rrr56(int v) { _is_rrr56 = v; }
+void Tp::set_bag_item_height(int v) { _bag_item_height = v; }
+void Tp::set_bag_item_width(int v) { _bag_item_width = v; }
 void Tp::set_bag_height(int v) { _bag_height = v; }
 void Tp::set_bag_width(int v) { _bag_width = v; }
 void Tp::set_bag_capacity_in_items(int v) { _bag_capacity_in_items = v; }

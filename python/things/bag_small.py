@@ -19,6 +19,8 @@ def potion_init(name, text_name):
     x.set_is_combustible(True)
     x.set_is_droppable(True)
     x.set_is_interesting(True)
+    x.set_bag_item_width(2)
+    x.set_bag_item_height(2)
     x.set_is_item(True)
     x.set_is_item_class_a(True)
     x.set_is_item_not_stackable(True)
