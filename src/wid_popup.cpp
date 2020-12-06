@@ -19,6 +19,7 @@
 WidPopup::~WidPopup()
 {
     wid_destroy(&wid_popup_container);
+    delete wid_text_area;
 }
 
 WidPopup::WidPopup (point tl, point br, Tilep title_tile,
