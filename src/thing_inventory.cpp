@@ -418,8 +418,6 @@ bool Level::inventory_select (const uint32_t slot)
         inventory_describe(game->inventory_highlight_slot);
     }
 
-    wid_inventory_init();
-
     return true;
 }
 

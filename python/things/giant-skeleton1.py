@@ -40,6 +40,7 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
+    x.set_rarity(zx.RARITY_COMMON)
     x.set_is_movable(True)
     x.set_is_resurrectable(True)
     x.set_is_shovable(True)

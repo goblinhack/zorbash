@@ -34,6 +34,10 @@ static uint8_t wid_inventory_mouse_down (Widp w,
 
 static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
+    if (game->paused()) {
+        return;
+    }
+
     auto level = game->level;
     if (!level) {
         return;
@@ -54,6 +58,10 @@ static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int3
 
 static void wid_inventory_mouse_over_e (Widp w)
 {
+    if (game->paused()) {
+        return;
+    }
+
     auto level = game->level;
     if (!level) {
         return;
@@ -91,6 +99,12 @@ static void wid_inventory_create (void)
     if (game->paused()) {
         return;
     }
+
+    static bool recursion;
+    if (recursion) {
+        DIE("recursion");
+    }
+    recursion = true;
 
     wid_inventory_fini();
 
@@ -235,6 +249,7 @@ static void wid_inventory_create (void)
 
         wid_update(wid_inventory_window);
     }
+    recursion = false;
 }
 
 bool is_mouse_over_inventory (void)

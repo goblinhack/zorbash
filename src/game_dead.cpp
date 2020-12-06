@@ -83,8 +83,8 @@ void Game::dead_select (const char *reason)
     game->level->scroll_map_to_player();
     game->level->cursor->hide();
 
-    point tl = make_point(0, TERM_HEIGHT - 17);
-    point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, TERM_HEIGHT - 1);
+    point tl = make_point(0, TERM_HEIGHT - 18);
+    point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, TERM_HEIGHT - 2);
     auto width = br.x - tl.x - 1;
 
     wid_dead_window = new WidPopup(tl, br, nullptr, "ui_dead", false, false);
