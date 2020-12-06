@@ -9,6 +9,8 @@
 #include "my_sdl.h"
 #include "my_slre.h"
 #include "my_wid_minicon.h"
+#include "my_wid_inventory.h"
+#include "my_wid_thing_info.h"
 #include "my_ttf.h"
 #include "my_string.h"
 #include "my_wid.h"
@@ -90,6 +92,15 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
     //
     if (player->particle_anim_exists()) {
         return false;
+    }
+
+    if (game->moving_items) {
+        if (key->scancode == SDL_SCANCODE_ESCAPE) {
+            game->moving_items = false;
+            wid_thing_info_fini();
+            wid_inventory_init();
+            return true;
+        }
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_load) {

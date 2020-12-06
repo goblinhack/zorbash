@@ -1041,7 +1041,7 @@ void config_gfx_zoom_in (void)
     } else if (game->config.gfx_zoom > 5) {
         game->config.gfx_zoom = 5;
     }
-    MINICON("Zoom set to %f", game->config.gfx_zoom);
+    LOG("Zoom set to %f", game->config.gfx_zoom);
     config_update_all();
 }
 
@@ -1051,7 +1051,7 @@ void config_gfx_zoom_out (void)
     if (game->config.gfx_zoom < 1) {
         game->config.gfx_zoom = 0.5;
     }
-    MINICON("Zoom set to %f", game->config.gfx_zoom);
+    LOG("Zoom set to %f", game->config.gfx_zoom);
     config_update_all();
 }
 
@@ -1071,7 +1071,7 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
         if (game->config.gfx_zoom < 1) {
             game->config.gfx_zoom = 1;
         }
-        CON("USERCFG: gfx zoom set to %d", val);
+        LOG("USERCFG: gfx zoom set to %d", val);
     }
 
     config_update_all();
