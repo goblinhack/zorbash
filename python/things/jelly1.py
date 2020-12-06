@@ -47,10 +47,12 @@ def tp_init(name, text_name):
     x.set_is_monst(True)
     x.set_is_movable(True)
     x.set_is_shown_on_leftbar(True)
+    x.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when attacked and multiplying when attacked. This one is a baby jelly. It tends to avoid adults of its kind.")
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_on_birth_do("jelly1.spawn()")
     x.set_on_death_is_corpse(True)
+    x.set_rarity(zx.RARITY_COMMON)
     x.set_stats_attack_dice("1d3")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)
@@ -60,7 +62,6 @@ def tp_init(name, text_name):
     x.set_stats_strength(3)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=limegreen$A small pile of semi sentient jelly")
-    x.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when attacked and multiplying when attacked. This one is a baby jelly. It tends to avoid adults of its kind.")
     x.set_text_hits("splats");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

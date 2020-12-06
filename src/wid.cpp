@@ -5841,7 +5841,7 @@ void wid_display_all (void)
                     true);
     }
 
-    if (wid_count > 300) {
+    if (wid_count > 500) {
         DIE("Too many widgets");
     }
 

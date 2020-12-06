@@ -43,8 +43,10 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_is_water_hater(100)
+    x.set_long_text_description("A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     x.set_normal_placement_rules(True)
     x.set_on_death_is_corpse(True)
+    x.set_rarity(zx.RARITY_COMMON)
     x.set_resurrect_dice("1d10+30")
     x.set_stats_attack_dice("1d3")
     x.set_stats_defence(1)
@@ -54,7 +56,6 @@ def tp_init(name, text_name):
     x.set_stats_strength(9)
     x.set_text_a_or_an("a");
     x.set_text_description("The bones of one surprised to be moving again")
-    x.set_long_text_description("A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     x.set_text_hits("claws");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
