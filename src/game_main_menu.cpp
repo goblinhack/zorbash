@@ -39,6 +39,7 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     wid_thing_info_fini();
     wid_leftbar_fini();
 
+    game->moving_items = false;
     wid_inventory_fini();
     wid_inventory_init();
 
@@ -318,6 +319,7 @@ void Game::main_menu_select (void)
     }
     wid_rightbar_fini();
     wid_leftbar_fini();
+    game->moving_items = false;
     wid_inventory_fini();
     wid_thing_info_fini();
 

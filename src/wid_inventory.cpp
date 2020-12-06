@@ -13,6 +13,10 @@ Widp wid_inventory_window {};
 
 void wid_inventory_fini (void)
 {_
+    if (game->moving_items) {
+        return;
+    }
+
     wid_destroy(&wid_inventory_window);
 }
 
@@ -24,16 +28,21 @@ uint8_t wid_inventory_init (void)
 }
 
 static uint8_t wid_inventory_mouse_down (Widp w,
-                                       int32_t x,
-                                       int32_t y,
-                                       uint32_t button)
+                                         int32_t x,
+                                         int32_t y,
+                                         uint32_t button)
 {_
-    CON("status button %d", button);
+    MINICON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
+    game->moving_items = true;
     return (true);
 }
 
 static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
+    if (game->moving_items) {
+        return;
+    }
+
     if (game->paused()) {
         return;
     }
@@ -58,6 +67,10 @@ static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int3
 
 static void wid_inventory_mouse_over_e (Widp w)
 {
+    if (game->moving_items) {
+        return;
+    }
+
     if (game->paused()) {
         return;
     }
@@ -90,6 +103,10 @@ static void wid_inventory_create (void)
     }
     auto player = level->player;
     if (!player) {
+        return;
+    }
+
+    if (game->moving_items) {
         return;
     }
 
@@ -197,7 +214,6 @@ static void wid_inventory_create (void)
                         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
                     }
 
-                    wid_set_on_mouse_down(w, wid_inventory_mouse_down);
                     wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
                     wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
                     wid_set_int_context(w, i);
@@ -206,6 +222,9 @@ static void wid_inventory_create (void)
                     if (tp_id) {
                         auto tpp = tp_find(tp_id);
                         wid_set_text(w, tpp->text_name());
+                        if (tpp->is_bag()) {
+                            wid_set_on_mouse_down(w, wid_inventory_mouse_down);
+                        }
                     }
                 }
             }

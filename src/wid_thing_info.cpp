@@ -17,6 +17,16 @@ static WidPopup *wid_thing_info_window;
 
 void wid_thing_info_fini (void)
 {_
+    if (game->bag1) {
+        delete game->bag1;
+        game->bag1 = nullptr;
+    }
+
+    if (game->bag2) {
+        delete game->bag2;
+        game->bag2 = nullptr;
+    }
+
     delete wid_thing_info_window;
     wid_thing_info_window = nullptr;
 }
@@ -28,14 +38,8 @@ uint8_t wid_thing_info_init (void)
 
 void Game::wid_thing_info_destroy (void)
 {_
-    if (game->bag1) {
-        delete game->bag1;
-        game->bag1 = nullptr;
-    }
-
-    if (game->bag2) {
-        delete game->bag2;
-        game->bag2 = nullptr;
+    if (game->moving_items) {
+        return;
     }
 
     wid_thing_info_fini();
@@ -43,6 +47,10 @@ void Game::wid_thing_info_destroy (void)
 
 void Game::wid_thing_info_create (Thingp t)
 {_
+    if (game->moving_items) {
+        return;
+    }
+
     if (wid_thing_info_window) {
         wid_thing_info_destroy();
     }

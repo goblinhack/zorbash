@@ -187,6 +187,11 @@ public:
     /////////////////////////////////////////////////////////////////////////
 
     //
+    // Temporary
+    //
+    bool               moving_items {};     // Currently managing inventory
+
+    //
     // Last cursor path shown.
     //
     std::vector<point> cursor_move_path;
