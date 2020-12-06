@@ -5374,11 +5374,13 @@ void wid_move_end (Widp w)
 //
 // Display one wid and its children
 //
+static int wid_count;
 static void wid_display (Widp w,
                          uint8_t disable_scissor,
                          uint8_t *updated_scissors,
                          int clip)
 {_
+    wid_count++;
     int32_t clip_height = 0;
     int32_t clip_width = 0;
     uint8_t hidden;
@@ -5822,6 +5824,8 @@ void wid_display_all (void)
 
     wid_on_screen_at = {};
 
+    wid_count = 0;
+
     for (auto iter = wid_top_level.begin();
         iter != wid_top_level.end(); ++iter) {
 
@@ -5835,6 +5839,10 @@ void wid_display_all (void)
                     false /* disable_scissors */,
                     0 /* updated_scissors */,
                     true);
+    }
+
+    if (wid_count > 300) {
+        DIE("Too many widgets");
     }
 
     ascii_clear_scissors();
