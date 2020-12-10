@@ -229,7 +229,11 @@ void Game::wid_thing_info_create (Thingp t)
             kill_count = 1;
         }
 
-        if (kill_count <= 2) {
+        if (kill_count == 1) {
+            wid_thing_info_window->log(" ");
+            wid_thing_info_window->log("%%fg=red$Could kill you in");
+            wid_thing_info_window->log("%%fg=red$" + std::to_string(kill_count) + " hit!");
+        } else if (kill_count <= 2) {
             wid_thing_info_window->log(" ");
             wid_thing_info_window->log("%%fg=red$Could kill you in");
             wid_thing_info_window->log("%%fg=red$" + std::to_string(kill_count) + " hits");
