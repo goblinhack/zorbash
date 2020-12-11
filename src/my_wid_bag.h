@@ -25,4 +25,7 @@ public:
     ~WidBag();
     WidBag (Thingp bag, point tl, point br, const std::string &title);
 };
+
+bool is_mouse_over_any_bag(void);
+
 #endif

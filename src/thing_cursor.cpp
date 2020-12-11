@@ -12,6 +12,7 @@
 #include "my_thing.h"
 #include "my_wid.h"
 #include "my_wid_console.h"
+#include "my_wid_bag.h"
 
 void Thing::cursor_hover_over_check (void)
 {
@@ -32,6 +33,11 @@ void Thing::cursor_hover_over_check (void)
             if (is_mouse_over_inventory()) {
                 return;
             }
+
+            if (is_mouse_over_any_bag()) {
+                return;
+            }
+
             level->cursor_at = mid_at;
             level->cursor_found = true;
         }

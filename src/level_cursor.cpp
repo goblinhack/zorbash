@@ -11,6 +11,7 @@
 #include "my_thing.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_inventory.h"
+#include "my_wid_bag.h"
 
 void Level::cursor_check_if_scroll_needed (void)
 {_
@@ -128,6 +129,10 @@ void Level::cursor_find_on_visible_things (
 void Level::cursor_move (void)
 {_
     if (is_mouse_over_inventory()) {
+        return;
+    }
+
+    if (is_mouse_over_any_bag()) {
         return;
     }
 

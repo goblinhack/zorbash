@@ -18,6 +18,8 @@
 #include "my_game.h"
 #include "my_level.h"
 
+static std::list<WidBag *> bags;
+
 bool Thing::bag_contains (Thingp item)
 {
     auto bag = get_bag();
@@ -203,6 +205,11 @@ WidBag::~WidBag()
 {
     wid_destroy(&wid_bag_container);
     wid_destroy(&wid_bag_title);
+
+    auto b = std::find(bags.begin(), bags.end(), this);
+    if (b != bags.end()) {
+        bags.erase(b);
+    }
 }
 
 WidBag::WidBag (Thingp bag, point tl, point br, const std::string &title) : tl(tl), br(br)
@@ -240,4 +247,43 @@ WidBag::WidBag (Thingp bag, point tl, point br, const std::string &title) : tl(t
 
     wid_update(wid_bag_container);
     wid_update(wid_bag_title);
+
+    bags.push_back(this);
+}
+
+bool is_mouse_over_any_bag (void)
+{
+    for (auto b : bags) {
+        auto w = b->wid_bag_container;
+
+        //
+        // If we are in the portion of the lower screen above the itembar
+        // then do not scroll
+        //
+        int x = mouse_x;
+        int y = mouse_y;
+        pixel_to_ascii(&x, &y);
+
+        static int tlx, tly, brx, bry, cached;
+        if (cached != TERM_HEIGHT) {
+            cached = TERM_HEIGHT;
+        }
+
+        wid_get_tl_x_tl_y_br_x_br_y(w, &tlx, &tly, &brx, &bry);
+
+        //
+        // Add some border
+        //
+        tlx -= 1;
+        brx += 1;
+        tly -= 1;
+        bry += 1;
+
+        if ((x >= tlx) && (x < brx) && (y >= tly)) {
+            //CON("    inventory %d %d %d", tlx, brx, x);
+            return true;
+        }
+        //CON("NOT inventory %d %d %d", tlx, brx, x);
+    }
+    return false;
 }
