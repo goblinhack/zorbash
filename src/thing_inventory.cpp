@@ -423,55 +423,5 @@ bool Level::inventory_select (const uint32_t slot)
 
 bool Level::inventory_describe (const uint32_t slot)
 {_
-    auto t = inventory_get(game->inventory_highlight_slot);
-    if (!t) {
-        return false;
-    }
-    auto s = t->text_description();
-
-    if (t->is_weapon()){
-        s += ". Damage %%fg=red$" + t->tp()->get_stats_attack_dice_str() +
-             "%%fg=reset$";
-    }
-
-    if (t->is_droppable()){
-        s += ". %%fg=orange$" +
-             std::string(
-                 SDL_GetScancodeName((SDL_Scancode)game->config.key_drop)) +
-             "%%fg=reset$ to drop";
-    }
-
-    if (t->is_usable()){
-        if (t->is_food()){
-            s += ". %%fg=green$" +
-                 std::string(
-                     SDL_GetScancodeName((SDL_Scancode)game->config.key_eat)) +
-                 "%%fg=reset$ to eat";
-        } else if (t->is_potion()){
-            s += ". %%fg=green$" +
-                 std::string(
-                     SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
-                 "%%fg=reset$ to drink";
-        } else {
-            s += ". %%fg=cyan$" +
-                 std::string(
-                     SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
-                 "%%fg=reset$ to use";
-        }
-    }
-
-    if (t->is_throwable()){
-        s += ". %%fg=purple$" +
-             std::string(
-                 SDL_GetScancodeName((SDL_Scancode)game->config.key_throw)) +
-             "%%fg=reset$ to throw";
-    }
-
-    if (t->rrr58()){
-        s += ". Select to open. Use mouse to drag items";
-    }
-
-    BOTCON("%s.", s.c_str());
-
-    return true;
+    return (inventory_get(game->inventory_highlight_slot));
 }

@@ -20,185 +20,27 @@
 
 static std::list<WidBag *> bags;
 
-bool Thing::bag_contains (Thingp item)
-{
-    auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
-
-    for (auto x = 0; x < bw - w; x++) {
-        for (auto y = 0; y < bh - h; y++) {
-            for (auto i = 0; i < w; i++) {
-                for (auto j = 0; j < h; j++) {
-                    if (get(bag, x + i, y + j) == item->id) {
-			return true;
-                    }
-                }
-            }
-	}
-    }
-    return false;
+static uint8_t wid_bag_item_mouse_down (Widp w,
+                                         int32_t x,
+                                         int32_t y,
+                                         uint32_t button)
+{_
+    MINICON("TODO");
+    return (true);
 }
 
-//
-// Place the item somwhere in the bag
-//
-bool Thing::bag_add (Thingp item)
+static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
-    int tries = 0;
-
-    while (tries < bw * bh) {
-	tries++;
-	auto x = random_range(0, bw - w);
-	auto y = random_range(0, bh - h);
-	point p(x, y);
-
-	if (bag_can_place_at(item, p)) {
-	    if (bag_place_at(item, p)) {
-		while (bag_compress()) { }
-		return true;
-	    }
-	}
+    auto id = wid_get_thing_id_context(w);
+    auto t = game->level->thing_find(id);
+    if (t) {
+        t->describe();
     }
-
-    for (auto x = 0; x < bw - w; x++) {
-        for (auto y = 0; y < bh - h; y++) {
-	    point p(x, y);
-	    if (bag_can_place_at(item, p)) {
-		if (bag_place_at(item, p)) {
-		    while (bag_compress()) { }
-		    return true;
-		}
-	    }
-	}
-    }
-
-    return false;
 }
 
-bool Thing::bag_compress (void)
+static void wid_bag_item_mouse_over_e (Widp w)
 {
-    auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto did_something = false;
-
-    for (auto x = 0; x < bw; x++) {
-        for (auto y = 0; y < bh - 1; y++) {
-	    auto id = get(bag, x, y);
-	    if (id == NoThingId) {
-		continue;
-	    }
-
-	    auto t = game->level->thing_find(id);
-	    if (bag_remove_at(t, t->monstp->bag_position)) {
-		if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
-                    if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
-                        did_something = true;
-                    } else {
-                        bag_place_at(t, t->monstp->bag_position);
-                    }
-                } else {
-                    bag_place_at(t, t->monstp->bag_position);
-                }
-	    }
-	}
-    }
-    return did_something;
-}
-
-bool Thing::bag_remove_at (Thingp item, point pos)
-{
-    auto bag = get_bag();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
-
-    for (auto x = pos.x; x < pos.x + w; x++) {
-	for (auto y = pos.y; y < pos.y + h; y++) {
-	    set(bag, x, y, NoThingId);
-	}
-    }
-    return true;
-}
-
-bool Thing::bag_can_place_at (Thingp item, point pos)
-{
-    auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
-
-    if (pos.x + w >= bw) {
-        return false;
-    }
-
-    if (pos.y + h >= bh) {
-        return false;
-    }
-
-    for (auto x = pos.x; x < pos.x + w; x++) {
-	for (auto y = pos.y; y < pos.y + h; y++) {
-	    auto id = get(bag, x, y);
-	    if (id == NoThingId) {
-		continue;
-	    }
-	    if (id == item->id) {
-		continue;
-	    }
-	    return false;
-	}
-    }
-    return true;
-}
-
-bool Thing::bag_place_at (Thingp item, point pos)
-{
-    auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
-
-    if (pos.y + h >= bh) {
-        return false;
-    }
-    if (pos.x + w >= bw) {
-        return false;
-    }
-
-    for (auto x = pos.x; x < pos.x + w; x++) {
-	for (auto y = pos.y; y < pos.y + h; y++) {
-	    set(bag, x, y, item->id);
-	}
-    }
-    item->monstp->bag_position = pos;
-    return true;
-}
-
-bool Thing::bag_remove (Thingp item)
-{
-    bool found = false;
-    auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
-
-    for (auto x = 0; x < bw; x++) {
-        for (auto y = 0; y < bh; y++) {
-	    if (get(bag, x, y) == item->id) {
-		set(bag, x, y, NoThingId);
-		found = true;
-	    }
-	}
-    }
-    item->monstp->bag_position = point(-1, -1);
-    return found;
+    BOTCON("");
 }
 
 WidBag::~WidBag()
@@ -232,16 +74,21 @@ WidBag::WidBag (Thingp bag, point tl, point br, const std::string &title) : tl(t
         auto tl = t->monstp->bag_position + point(1, 1);
         auto br = tl + point(t->bag_item_width() - 1, t->bag_item_height() - 1);
 
-        auto wid_bag_item = wid_new_square_button(wid_bag_container, "wid_bag item");
-        wid_set_pos(wid_bag_item, tl, br);
-        wid_set_style(wid_bag_item, UI_WID_STYLE_DARK);
+        auto w = wid_new_square_button(wid_bag_container, "wid_bag item");
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, UI_WID_STYLE_DARK);
+
+        wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
+        wid_set_thing_id_context(w, item.id);
+        wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
 
         auto tpp = t->tp();
         auto tiles = &tpp->tiles;
 
         auto tile = tile_first(tiles);
         if (tile) {
-            wid_set_fg_tile(wid_bag_item, tile);
+            wid_set_fg_tile(w, tile);
         }
     }
 
