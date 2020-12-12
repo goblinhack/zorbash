@@ -72,12 +72,19 @@ void Level::cursor_find_on_visible_things (
         hover_over = nullptr;
 
         FOR_ALL_ACTIVE_THINGS(this, t, p.x, p.y) {
+            int x = p.x;
+            int y = p.y;
+            if (!is_lit(x, y) && !is_visited(x, y)) {_
+                continue;
+            }
+
             if (t->owner_get() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {
                 continue;
             }
+
             if (t->is_on_fire()) {
                 BOTCON("%%fg=red$Burning! %s", t->text_description().c_str());
             } else {
@@ -92,12 +99,19 @@ void Level::cursor_find_on_visible_things (
         } FOR_ALL_THINGS_END()
 
         FOR_ALL_INTERESTING_THINGS(this, t, p.x, p.y) {
+            int x = p.x;
+            int y = p.y;
+            if (!is_lit(x, y) && !is_visited(x, y)) {_
+                continue;
+            }
+
             if (t->owner_get() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {
                 continue;
             }
+
             BOTCON("%s", t->text_description().c_str());
             if (t->tp()->long_text_description() != "") {
                 game->wid_thing_info_create(t);
@@ -107,12 +121,19 @@ void Level::cursor_find_on_visible_things (
         } FOR_ALL_THINGS_END()
 
         FOR_ALL_THINGS(this, t, p.x, p.y) {
+            int x = p.x;
+            int y = p.y;
+            if (!is_lit(x, y) && !is_visited(x, y)) {_
+                continue;
+            }
+
             if (t->owner_get() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {
                 continue;
             }
+
             BOTCON("%s", t->text_description().c_str());
             if (t->tp()->long_text_description() != "") {
                 game->wid_thing_info_create(t);
