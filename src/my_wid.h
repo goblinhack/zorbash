@@ -40,6 +40,7 @@ Widp wid_find_at(int32_t x, int32_t y);
 Widp wid_find_under_mouse(void);
 Widp wid_find_under_mouse_when_scrolling(void);
 Widp wid_find(Widp, const std::string& name);
+std::list<Widp> wid_find_all(Widp w, const std::string& name);
 Widp wid_find(const std::string& name);
 Widp wid_get_current_focus(void);
 Widp wid_get_focus(Widp);

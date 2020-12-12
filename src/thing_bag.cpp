@@ -198,5 +198,6 @@ bool Thing::bag_remove (Thingp item)
 	}
     }
     item->monstp->bag_position = point(-1, -1);
+    while (bag_compress()) { }
     return found;
 }

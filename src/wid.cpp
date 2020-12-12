@@ -2856,6 +2856,25 @@ Widp wid_find (Widp w, const std::string& name)
     return (nullptr);
 }
 
+static void wid_find_all_ (Widp w, const std::string& name, std::list<Widp> &out)
+{_
+    if (strcasestr_(w->name.c_str(), name.c_str())) {
+        out.push_back(w);
+    }
+
+    for (auto& iter : w->children_display_sorted) {
+        auto child = iter.second;
+        wid_find_all_(child, name, out);
+    }
+}
+
+std::list<Widp> wid_find_all (Widp w, const std::string& name)
+{
+    std::list<Widp> out;
+    wid_find_all_(w, name, out);
+    return out;
+}
+
 Widp wid_find (const std::string& name)
 {_
     for (auto& iter : wid_top_level) {
@@ -5969,11 +5988,11 @@ void wid_move_to_abs_centered (Widp w, int32_t x, int32_t y)
 }
 
 static void wid_move_enqueue (Widp w,
-                            int32_t moving_start_x,
-                            int32_t moving_start_y,
-                            int32_t moving_end_x,
-                            int32_t moving_end_y,
-                            uint32_t ms)
+                              int32_t moving_start_x,
+                              int32_t moving_start_y,
+                              int32_t moving_end_x,
+                              int32_t moving_end_y,
+                              uint32_t ms)
 {_
     if (w->moving) {
         //
