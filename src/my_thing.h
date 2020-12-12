@@ -1232,6 +1232,7 @@ public:
     std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_bag (void);
     bool bag_add(Thingp);
     bool bag_remove(Thingp);
+    bool describe();
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);

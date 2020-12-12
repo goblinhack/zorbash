@@ -1,4 +1,4 @@
-COMPILER_FLAGS=-Werror -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -Wsign-compare -fno-common -dynamic -DNDEBUG -g -Wall   -arch x86_64 -g  -DVERSION=\"0.0.4\" -DPYTHONVERSION=\"3.6\" -g -ggdb3 -O3 # AUTOGEN
+COMPILER_FLAGS=-Werror -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -Wsign-compare -fno-common -dynamic -DNDEBUG -g -Wall   -arch x86_64 -g  -DVERSION=\"0.0.4\" -DPYTHONVERSION=\"3.6\" -g -ggdb3 # AUTOGEN
     
 CLANG_COMPILER_WARNINGS=-Wall -Wmissing-prototypes -std=c++1z -stdlib=libc++ # AUTOGEN
 GCC_COMPILER_WARNINGS=-x c++ -Wall -std=c++2a -ffast-math  # AUTOGEN
@@ -144,6 +144,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_astar.o 		\
     $(OBJDIR)/thing_attack.o 		\
     $(OBJDIR)/thing_avoid.o             \
+    $(OBJDIR)/thing_bag.o 		\
     $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_chasm.o 		\
@@ -152,6 +153,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_cursor_path.o 	\
     $(OBJDIR)/thing_danger.o 		\
     $(OBJDIR)/thing_dead.o 		\
+    $(OBJDIR)/thing_describe.o 		\
     $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_distance.o 		\
@@ -4026,7 +4028,7 @@ all: $(TARGET_GAME)
 .o/level_cursor.o: my_dungeon_grid.h my_tile.h my_color.h my_tex.h my_gl.h
 .o/level_cursor.o: my_thing.h my_light.h my_thing_template.h my_dice.h
 .o/level_cursor.o: my_thing_ai.h my_wid_thing_info.h my_wid.h my_ascii.h
-.o/level_cursor.o: my_wid_tiles.h my_wid_inventory.h
+.o/level_cursor.o: my_wid_tiles.h my_wid_inventory.h my_wid_bag.h
 .o/level_cursor_path.o: my_main.h my_sys.h my_pcg_basic.h
 .o/level_cursor_path.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/level_cursor_path.o: /usr/include/sys/_symbol_aliasing.h
@@ -8227,6 +8229,82 @@ all: $(TARGET_GAME)
 .o/thing_avoid.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
 .o/thing_avoid.o: my_thing_template.h my_dice.h my_tile.h my_color.h
 .o/thing_avoid.o: my_thing_ai.h
+.o/thing_bag.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
+.o/thing_bag.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
+.o/thing_bag.o: /usr/include/sys/_posix_availability.h
+.o/thing_bag.o: /usr/include/Availability.h
+.o/thing_bag.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+.o/thing_bag.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/thing_bag.o: /usr/include/i386/_types.h
+.o/thing_bag.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/thing_bag.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/thing_bag.o: /usr/include/sys/_types/_int8_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_int16_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_int32_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_int64_t.h
+.o/thing_bag.o: /usr/include/_types/_uint8_t.h
+.o/thing_bag.o: /usr/include/_types/_uint16_t.h
+.o/thing_bag.o: /usr/include/_types/_uint32_t.h
+.o/thing_bag.o: /usr/include/_types/_uint64_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_intptr_t.h
+.o/thing_bag.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/thing_bag.o: /usr/include/sys/_types/_u_int8_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_u_int16_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_u_int32_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_u_int64_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_uintptr_t.h
+.o/thing_bag.o: /usr/include/_types/_intmax_t.h
+.o/thing_bag.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
+.o/thing_bag.o: /usr/include/stdio.h /usr/include/_stdio.h
+.o/thing_bag.o: /usr/include/sys/_types/_va_list.h
+.o/thing_bag.o: /usr/include/sys/_types/_size_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/thing_bag.o: /usr/include/sys/_types/_off_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_ssize_t.h
+.o/thing_bag.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+.o/thing_bag.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
+.o/thing_bag.o: /usr/include/assert.h my_vector_bounds_check.h
+.o/thing_bag.o: c_plus_plus_serializer.h my_sdl.h my_command.h my_token.h
+.o/thing_bag.o: my_string.h /usr/include/wchar.h
+.o/thing_bag.o: /usr/include/sys/_types/_mbstate_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
+.o/thing_bag.o: /usr/include/sys/_types/_clock_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_time_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
+.o/thing_bag.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/thing_bag.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/thing_bag.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_bag.o: my_wid_bag.h my_wid.h my_point.h my_math.h
+.o/thing_bag.o: /usr/include/math.h my_size.h my_ascii.h my_color.h my_tex.h
+.o/thing_bag.o: my_tile.h my_wid_tiles.h my_ttf.h my_font.h my_thing.h
+.o/thing_bag.o: my_time.h /usr/include/unistd.h /usr/include/sys/unistd.h
+.o/thing_bag.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/thing_bag.o: /usr/include/sys/_types/_seek_set.h
+.o/thing_bag.o: /usr/include/sys/_types/_uid_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_gid_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_pid_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_useconds_t.h
+.o/thing_bag.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
+.o/thing_bag.o: /usr/include/sys/_types/_fd_def.h
+.o/thing_bag.o: /usr/include/sys/_types/_timeval.h
+.o/thing_bag.o: /usr/include/sys/_types/_suseconds_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_sigset_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_fd_setsize.h
+.o/thing_bag.o: /usr/include/sys/_types/_fd_set.h
+.o/thing_bag.o: /usr/include/sys/_types/_fd_clr.h
+.o/thing_bag.o: /usr/include/sys/_types/_fd_isset.h
+.o/thing_bag.o: /usr/include/sys/_types/_fd_zero.h
+.o/thing_bag.o: /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h
+.o/thing_bag.o: /usr/include/sys/_types/_dev_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_mode_t.h
+.o/thing_bag.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
+.o/thing_bag.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
+.o/thing_bag.o: my_light.h my_thing_template.h my_dice.h my_thing_ai.h
+.o/thing_bag.o: my_dmap.h my_thing_id.h my_depth.h my_wid_popup.h
+.o/thing_bag.o: my_wid_text_box.h my_game.h my_world.h my_level.h
+.o/thing_bag.o: my_particle.h my_dungeon.h my_room.h my_charmap.h
+.o/thing_bag.o: my_level_static.h my_dungeon_grid.h
 .o/thing_bounce.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/thing_bounce.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/thing_bounce.o: /usr/include/sys/_symbol_aliasing.h
@@ -8626,7 +8704,7 @@ all: $(TARGET_GAME)
 .o/thing_cursor.o: my_charmap.h my_level_static.h my_dungeon_grid.h
 .o/thing_cursor.o: my_wid_inventory.h my_wid.h my_wid_tiles.h my_thing.h
 .o/thing_cursor.o: my_light.h my_thing_template.h my_dice.h my_thing_ai.h
-.o/thing_cursor.o: my_wid_console.h
+.o/thing_cursor.o: my_wid_console.h my_wid_bag.h
 .o/thing_cursor_path.o: my_main.h my_sys.h my_pcg_basic.h
 .o/thing_cursor_path.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/thing_cursor_path.o: /usr/include/sys/_symbol_aliasing.h
@@ -8870,6 +8948,87 @@ all: $(TARGET_GAME)
 .o/thing_dead.o: /usr/include/secure/_strings.h /usr/include/secure/_string.h
 .o/thing_dead.o: my_thing.h my_light.h my_thing_template.h my_dice.h
 .o/thing_dead.o: my_tile.h my_thing_ai.h my_python.h my_log.h
+.o/thing_describe.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
+.o/thing_describe.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
+.o/thing_describe.o: /usr/include/sys/_symbol_aliasing.h
+.o/thing_describe.o: /usr/include/sys/_posix_availability.h
+.o/thing_describe.o: /usr/include/Availability.h
+.o/thing_describe.o: /usr/include/AvailabilityInternal.h
+.o/thing_describe.o: /usr/include/_types.h /usr/include/sys/_types.h
+.o/thing_describe.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/thing_describe.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/thing_describe.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/thing_describe.o: /usr/include/sys/_types/_int8_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_int16_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_int32_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_int64_t.h
+.o/thing_describe.o: /usr/include/_types/_uint8_t.h
+.o/thing_describe.o: /usr/include/_types/_uint16_t.h
+.o/thing_describe.o: /usr/include/_types/_uint32_t.h
+.o/thing_describe.o: /usr/include/_types/_uint64_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_intptr_t.h
+.o/thing_describe.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/thing_describe.o: /usr/include/sys/_types/_u_int8_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_u_int16_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_u_int32_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_u_int64_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_uintptr_t.h
+.o/thing_describe.o: /usr/include/_types/_intmax_t.h
+.o/thing_describe.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h
+.o/thing_describe.o: my_globals.h /usr/include/stdio.h /usr/include/_stdio.h
+.o/thing_describe.o: /usr/include/sys/_types/_va_list.h
+.o/thing_describe.o: /usr/include/sys/_types/_size_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/thing_describe.o: /usr/include/sys/_types/_off_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_ssize_t.h
+.o/thing_describe.o: /usr/include/secure/_stdio.h
+.o/thing_describe.o: /usr/include/secure/_common.h my_callstack.h
+.o/thing_describe.o: my_array_bounds_check.h my_bounds_check.h
+.o/thing_describe.o: /usr/include/assert.h my_vector_bounds_check.h
+.o/thing_describe.o: c_plus_plus_serializer.h my_sdl.h my_command.h
+.o/thing_describe.o: my_token.h my_string.h /usr/include/wchar.h
+.o/thing_describe.o: /usr/include/sys/_types/_mbstate_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
+.o/thing_describe.o: /usr/include/sys/_types/_clock_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_time_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_timespec.h
+.o/thing_describe.o: /usr/include/_wctype.h /usr/include/__wctype.h
+.o/thing_describe.o: /usr/include/sys/_types/_wint_t.h
+.o/thing_describe.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/thing_describe.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_describe.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/thing_describe.o: my_level.h my_time.h /usr/include/unistd.h
+.o/thing_describe.o: /usr/include/sys/unistd.h
+.o/thing_describe.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/thing_describe.o: /usr/include/sys/_types/_seek_set.h
+.o/thing_describe.o: /usr/include/sys/_types/_uid_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_gid_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_pid_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_useconds_t.h
+.o/thing_describe.o: /usr/include/sys/select.h
+.o/thing_describe.o: /usr/include/sys/appleapiopts.h
+.o/thing_describe.o: /usr/include/sys/_types/_fd_def.h
+.o/thing_describe.o: /usr/include/sys/_types/_timeval.h
+.o/thing_describe.o: /usr/include/sys/_types/_suseconds_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_sigset_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_fd_setsize.h
+.o/thing_describe.o: /usr/include/sys/_types/_fd_set.h
+.o/thing_describe.o: /usr/include/sys/_types/_fd_clr.h
+.o/thing_describe.o: /usr/include/sys/_types/_fd_isset.h
+.o/thing_describe.o: /usr/include/sys/_types/_fd_zero.h
+.o/thing_describe.o: /usr/include/sys/_types/_fd_copy.h
+.o/thing_describe.o: /usr/include/sys/_select.h
+.o/thing_describe.o: /usr/include/sys/_types/_dev_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_mode_t.h
+.o/thing_describe.o: /usr/include/sys/_types/_uuid_t.h
+.o/thing_describe.o: /usr/include/gethostuuid.h /usr/include/sys/time.h
+.o/thing_describe.o: /usr/include/sys/_types/_timeval64.h my_depth.h
+.o/thing_describe.o: my_particle.h my_size.h my_thing_id.h my_dungeon.h
+.o/thing_describe.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
+.o/thing_describe.o: my_dungeon_grid.h my_thing.h my_light.h
+.o/thing_describe.o: my_thing_template.h my_dice.h my_tile.h my_color.h
+.o/thing_describe.o: my_thing_ai.h
 .o/thing_dir.o: my_level.h my_point.h my_math.h /usr/include/math.h
 .o/thing_dir.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/thing_dir.o: /usr/include/sys/_posix_availability.h
@@ -14224,9 +14383,36 @@ all: $(TARGET_GAME)
 .o/wid_bag.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_bag.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
 .o/wid_bag.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/wid_bag.o: my_wid_bag.h my_wid_text_box.h my_wid.h my_point.h my_math.h
-.o/wid_bag.o: /usr/include/math.h my_size.h my_ascii.h my_color.h my_tex.h
-.o/wid_bag.o: my_tile.h my_wid_tiles.h my_ttf.h my_font.h my_wid_popup.h
+.o/wid_bag.o: my_wid_bag.h my_wid.h my_point.h my_math.h /usr/include/math.h
+.o/wid_bag.o: my_size.h my_ascii.h my_color.h my_tex.h my_tile.h
+.o/wid_bag.o: my_wid_tiles.h my_ttf.h my_font.h my_thing.h my_time.h
+.o/wid_bag.o: /usr/include/unistd.h /usr/include/sys/unistd.h
+.o/wid_bag.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/wid_bag.o: /usr/include/sys/_types/_seek_set.h
+.o/wid_bag.o: /usr/include/sys/_types/_uid_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_gid_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_pid_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_useconds_t.h /usr/include/sys/select.h
+.o/wid_bag.o: /usr/include/sys/appleapiopts.h
+.o/wid_bag.o: /usr/include/sys/_types/_fd_def.h
+.o/wid_bag.o: /usr/include/sys/_types/_timeval.h
+.o/wid_bag.o: /usr/include/sys/_types/_suseconds_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_sigset_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_fd_setsize.h
+.o/wid_bag.o: /usr/include/sys/_types/_fd_set.h
+.o/wid_bag.o: /usr/include/sys/_types/_fd_clr.h
+.o/wid_bag.o: /usr/include/sys/_types/_fd_isset.h
+.o/wid_bag.o: /usr/include/sys/_types/_fd_zero.h
+.o/wid_bag.o: /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h
+.o/wid_bag.o: /usr/include/sys/_types/_dev_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_mode_t.h
+.o/wid_bag.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
+.o/wid_bag.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
+.o/wid_bag.o: my_light.h my_thing_template.h my_dice.h my_thing_ai.h
+.o/wid_bag.o: my_dmap.h my_thing_id.h my_depth.h my_wid_popup.h
+.o/wid_bag.o: my_wid_text_box.h my_game.h my_world.h my_level.h my_particle.h
+.o/wid_bag.o: my_dungeon.h my_room.h my_charmap.h my_level_static.h
+.o/wid_bag.o: my_dungeon_grid.h
 .o/wid_botcon.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/wid_botcon.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/wid_botcon.o: /usr/include/sys/_posix_availability.h
@@ -14631,9 +14817,9 @@ all: $(TARGET_GAME)
 .o/wid_minicon.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
 .o/wid_minicon.o: my_wid_minicon.h my_point.h my_math.h /usr/include/math.h
 .o/wid_minicon.o: my_size.h my_wid.h my_ascii.h my_color.h my_tex.h my_tile.h
-.o/wid_minicon.o: my_wid_tiles.h my_ttf.h my_font.h my_game.h my_world.h
-.o/wid_minicon.o: my_level.h my_time.h /usr/include/unistd.h
-.o/wid_minicon.o: /usr/include/sys/unistd.h
+.o/wid_minicon.o: my_wid_tiles.h my_wid_inventory.h my_wid_thing_info.h
+.o/wid_minicon.o: my_ttf.h my_font.h my_game.h my_world.h my_level.h
+.o/wid_minicon.o: my_time.h /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/wid_minicon.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/wid_minicon.o: /usr/include/sys/_types/_seek_set.h
 .o/wid_minicon.o: /usr/include/sys/_types/_uid_t.h
@@ -14920,7 +15106,7 @@ all: $(TARGET_GAME)
 .o/wid_thing_info.o: my_wid_botcon.h my_wid_popup.h my_wid_text_box.h
 .o/wid_thing_info.o: my_wid_thing_info.h my_thing.h my_light.h
 .o/wid_thing_info.o: my_thing_template.h my_dice.h my_thing_ai.h
-.o/wid_thing_info.o: my_wid_console.h
+.o/wid_thing_info.o: my_wid_console.h my_wid_bag.h
 .o/wid_tiles.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/wid_tiles.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/wid_tiles.o: /usr/include/sys/_posix_availability.h
