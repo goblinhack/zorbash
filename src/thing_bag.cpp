@@ -127,18 +127,23 @@ bool Thing::bag_remove_at (Thingp item, point pos)
     return true;
 }
 
-bool Thing::bag_can_place_at (Thingp item, point pos)
+bool Thing::bag_can_place_at (Thingp item, point pos) const
 {
-    auto bag = get_bag();
+    auto bag = get_const_bag();
     auto bw = bag_width();
     auto bh = bag_height();
     auto w = item->bag_item_width();
     auto h = item->bag_item_height();
 
+    if (pos.x < 0) {
+        return false;
+    }
+    if (pos.y < 0) {
+        return false;
+    }
     if (pos.x + w >= bw) {
         return false;
     }
-
     if (pos.y + h >= bh) {
         return false;
     }
@@ -155,6 +160,10 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
 	    return false;
 	}
     }
+
+    //
+    // Do not set pos ere
+    //
     return true;
 }
 
@@ -166,6 +175,12 @@ bool Thing::bag_place_at (Thingp item, point pos)
     auto w = item->bag_item_width();
     auto h = item->bag_item_height();
 
+    if (pos.x < 0) {
+        return false;
+    }
+    if (pos.y < 0) {
+        return false;
+    }
     if (pos.y + h >= bh) {
         return false;
     }
@@ -198,6 +213,5 @@ bool Thing::bag_remove (Thingp item)
 	}
     }
     item->monstp->bag_position = point(-1, -1);
-    while (bag_compress()) { }
     return found;
 }
