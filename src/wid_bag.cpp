@@ -59,8 +59,74 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
     wid_update(wid_bag_container);
 }
 
+static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    if (!in_transit_item) {
+        return false;
+    }
+
+    auto id = wid_get_thing_id_context(w);
+    auto t = game->level->thing_find(id);
+    if (!t) {
+        return false;
+    }
+
+    auto wid_bag_container = is_mouse_over_any_bag();
+    if (!wid_bag_container) {
+        return false;
+    }
+
+    auto bag_id = wid_get_thing_id_context(wid_bag_container);
+    auto bag = game->level->thing_find(bag_id);
+    if (!bag) {
+        return false;
+    }
+
+    auto at = point(ascii_mouse_x, ascii_mouse_y);
+    static int tlx, tly, brx, bry;
+    wid_get_tl_x_tl_y_br_x_br_y(wid_bag_container, &tlx, &tly, &brx, &bry);
+    at.x -= tlx;
+    at.y -= tly;
+    at.x -= 1;
+    at.y -= 1;
+
+    if (bag->bag_can_place_at(t, at)) {
+        if (bag->bag_place_at(t, at)) {
+            wid_destroy(&in_transit_item);
+            in_transit_item = nullptr;
+
+            for (auto b : bags) {
+                auto w = b->wid_bag_container;
+
+                for (auto item : wid_find_all(w, "wid_bag item")) {
+                    wid_destroy_nodelay(&item);
+                }
+
+                auto bag_id = wid_get_thing_id_context(w);
+                auto bag = game->level->thing_find(bag_id);
+                if (bag) {
+                    while (bag->bag_compress()) { }
+                    wid_bag_add_items(w, bag);
+                }
+
+                wid_update(w);
+            }
+        } else {
+            ERR("Cannot fit that into the bag");
+        }
+    } else {
+        MINICON("Cannot fit that into the bag");
+    }
+
+    return true;
+}
+
 static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    if (in_transit_item) {
+        return false;
+    }
+
     auto id = wid_get_thing_id_context(w);
     auto t = game->level->thing_find(id);
     if (!t) {
@@ -68,13 +134,13 @@ static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t b
     }
 
     auto wid_bag_container = wid_get_parent(w);
-MINICON("mouse down %s", wid_bag_container->name.c_str());
     auto bag_id = wid_get_thing_id_context(wid_bag_container);
     auto bag = game->level->thing_find(bag_id);
     if (!bag) {
         return false;
     }
     bag->bag_remove(t);
+    while (bag->bag_compress()) { }
 
     t->describe();
 
@@ -90,10 +156,8 @@ MINICON("mouse down %s", wid_bag_container->name.c_str());
     wid_set_pos(in_transit_item, tl, br);
     wid_set_style(in_transit_item, UI_WID_STYLE_DARK);
 
-#if 0
     wid_set_thing_id_context(in_transit_item, id);
-    wid_set_on_mouse_down(in_transit_item, wid_bag_item_mouse_down);
-#endif
+    wid_set_on_mouse_up(in_transit_item, wid_in_transit_item_place);
 
     auto tpp = t->tp();
     auto tiles = &tpp->tiles;
@@ -118,6 +182,10 @@ MINICON("mouse down %s", wid_bag_container->name.c_str());
 
 static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
+    if (in_transit_item) {
+        return;
+    }
+
     auto id = wid_get_thing_id_context(w);
     auto t = game->level->thing_find(id);
     if (t) {
@@ -127,6 +195,10 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
 
 static void wid_bag_item_mouse_over_e (Widp w)
 {
+    if (in_transit_item) {
+        return;
+    }
+
     BOTCON("");
 }
 
@@ -173,7 +245,7 @@ WidBag::WidBag (Thingp bag, point tl, point br, const std::string &title) : tl(t
     bags.push_back(this);
 }
 
-bool is_mouse_over_any_bag (void)
+Widp is_mouse_over_any_bag (void)
 {
     for (auto b : bags) {
         auto w = b->wid_bag_container;
@@ -203,9 +275,9 @@ bool is_mouse_over_any_bag (void)
 
         if ((x >= tlx) && (x < brx) && (y >= tly)) {
             //CON("    inventory %d %d %d", tlx, brx, x);
-            return true;
+            return w;
         }
         //CON("NOT inventory %d %d %d", tlx, brx, x);
     }
-    return false;
+    return nullptr;
 }

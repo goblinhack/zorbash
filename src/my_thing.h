@@ -1058,7 +1058,7 @@ public:
     bool bag_compress(void);
     bool bag_remove_at(Thingp item, point pos);
     bool bag_place_at(Thingp item, point pos);
-    bool bag_can_place_at(Thingp item, point pos);
+    bool bag_can_place_at(Thingp item, point pos) const;
     int rrr58(void) const;
     int is_rrr6(void) const;
     int rarity(void) const;
@@ -1230,6 +1230,7 @@ public:
     void weapon_sheath(void);
     void wield(Thingp w);
     std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_bag (void);
+    const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
     bool bag_add(Thingp);
     bool bag_remove(Thingp);
     bool describe();

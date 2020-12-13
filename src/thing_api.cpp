@@ -4522,3 +4522,12 @@ std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * Thing::get_bag 
     }
 }
 
+const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * Thing::get_const_bag (void) const
+{_
+    if (monstp) {
+        return (&monstp->bag);
+    } else {
+        DIE("no bag");
+    }
+}
+
