@@ -176,7 +176,7 @@ void Thing::update_interpolated_position (void)
     fpoint new_pos;
     auto tpp = tp();
 
-    auto p = owner_get();
+    auto p = get_owner();
     if ((p && p->is_falling) || is_falling) {
         z_depth = MAP_DEPTH_FLOOR;
     } else {
@@ -282,7 +282,7 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
     if (speed) {
         move_speed = speed;
     } else {
-        auto owner = owner_get();
+        auto owner = get_owner();
         if (owner) {
             move_speed = owner->tp()->stats_move_speed_ms();
         } else{

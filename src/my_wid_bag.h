@@ -20,6 +20,7 @@ public:
 
     point       tl;
     point       br;
+    Thingp      bag;
 
 public:
     ~WidBag();

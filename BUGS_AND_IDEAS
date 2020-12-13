@@ -1,6 +1,7 @@
 bugs
 ----
-- move items between bags
+- move item back to player and then wield
+- fix count that vanishes when you click on it
 - drop items from bag
 
 upcoming work

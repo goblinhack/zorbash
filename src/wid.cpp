@@ -22,6 +22,7 @@
 #include "my_sprintf.h"
 #include "my_ascii.h"
 #include "my_gl.h"
+#include "my_wid_inventory.h"
 
 //
 // Display sorted.
@@ -5788,6 +5789,11 @@ void wid_tick_all (void)
 
         (w->on_tick)(w);
     }
+    
+    if (game->remake_inventory) {
+        wid_inventory_init();
+        game->remake_inventory = false;
+    }
 }
 
 static int saved_mouse_x;
@@ -5870,7 +5876,7 @@ void wid_display_all (void)
                     true);
     }
 
-    if (wid_count > 500) {
+    if (wid_count > 1000) {
         DIE("Too many widgets");
     }
 

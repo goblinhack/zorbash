@@ -14,7 +14,7 @@
 
 bool Thing::chasm_tick (void)
 {_
-    if (owner_get()) {
+    if (get_owner()) {
         return false;
     }
 

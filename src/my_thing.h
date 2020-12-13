@@ -773,10 +773,11 @@ public:
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
     Thingp nearby_most_dangerous_thing_get(void);
-    Thingp owner_get() const;
+    Thingp get_owner() const;
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void) const;
+    bool change_owner(Thingp new_owner);
     bool achieve_goals_in_death();
     bool achieve_goals_in_life();
     bool ai_blocked(void);

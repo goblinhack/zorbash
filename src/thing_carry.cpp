@@ -38,7 +38,7 @@ _
         }
     }
 
-    auto existing_owner = what->owner_get();
+    auto existing_owner = what->get_owner();
     if (existing_owner) {
         if (existing_owner == this) {
             log("no; same owner");

@@ -12,6 +12,7 @@
 #include "my_point.h"
 #include "my_world.h"
 #include "my_dmap.h"
+#include <list>
 
 class WidBag;
 
@@ -190,6 +191,10 @@ public:
     // Temporary
     //
     bool               moving_items {};     // Currently managing inventory
+    bool               remake_inventory {};
+    std::list<class WidBag *> bags;
+    class Wid *        in_transit_item;
+
 
     //
     // Last cursor path shown.

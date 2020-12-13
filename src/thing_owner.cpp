@@ -11,7 +11,7 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-Thingp Thing::owner_get (void) const
+Thingp Thing::get_owner (void) const
 {_
     auto id = get_owner_id();
     if (likely(id.ok())) {
@@ -20,7 +20,7 @@ Thingp Thing::owner_get (void) const
             return nullptr;
         }
         if (unlikely(i->get_owner_id().ok())) {
-            return i->owner_get();
+            return i->get_owner();
         }
         return i;
     } else {
@@ -34,7 +34,7 @@ void Thing::set_owner (Thingp owner)
         verify(owner);
     }
 
-    auto old_owner = owner_get();
+    auto old_owner = get_owner();
     if (old_owner) {
         if (old_owner == owner) {
             return;
@@ -69,7 +69,7 @@ void Thing::set_owner (Thingp owner)
 
 void Thing::remove_owner (void)
 {_
-    auto old_owner = owner_get();
+    auto old_owner = get_owner();
     if (!old_owner) {
         return;
     }

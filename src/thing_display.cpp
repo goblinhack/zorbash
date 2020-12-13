@@ -379,7 +379,7 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Flipping
     //
-    auto owner = owner_get();
+    auto owner = get_owner();
     auto falling = is_falling || (owner && owner->is_falling);
     if (likely(!falling)) {
         if (unlikely(tpp->gfx_animated_can_hflip())) {
@@ -600,7 +600,7 @@ uint8_t Thing::blit_begin_submerged (void) const
     if (submerged) {
         blit_flush();
         auto waterline = last_blit_br.y;
-        auto owner = owner_get();
+        auto owner = get_owner();
         if (owner) {
             waterline = owner->last_blit_br.y;
         }
@@ -632,7 +632,7 @@ uint8_t Thing::blit_begin_reflection_submerged (void) const
     if (submerged) {
         blit_flush();
         auto waterline = last_blit_br.y;
-        auto owner = owner_get();
+        auto owner = get_owner();
         if (owner) {
             waterline = owner->last_blit_br.y;
         }
