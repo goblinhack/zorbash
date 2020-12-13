@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_wid_inventory.h"
+#include "my_wid_thing_info.h"
 #include "my_thing.h"
 
 static void wid_inventory_create(void);
@@ -24,16 +25,6 @@ uint8_t wid_inventory_init (void)
 {_
     wid_inventory_create();
 
-    return (true);
-}
-
-static uint8_t wid_inventory_mouse_down (Widp w,
-                                         int32_t x,
-                                         int32_t y,
-                                         uint32_t button)
-{_
-    MINICON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
-    game->moving_items = true;
     return (true);
 }
 
@@ -92,21 +83,50 @@ static void wid_inventory_mouse_over_e (Widp w)
     //
 }
 
+static uint8_t wid_inventory_mouse_down_on_bag (Widp w,
+                                                int32_t x,
+                                                int32_t y,
+                                                uint32_t button)
+{_
+    BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
+    game->moving_items = true;
+    return (true);
+}
+
+static uint8_t wid_inventory_mouse_down (Widp w,
+                                         int32_t x,
+                                         int32_t y,
+                                         uint32_t button)
+{_
+    BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
+    game->moving_items = false;
+    wid_thing_info_fini();
+    wid_destroy(&game->in_transit_item);
+    wid_inventory_mouse_over_b(w, 0, 0, 0, 0);
+    return (true);
+}
+
 //
 // Create the test
 //
 static void wid_inventory_create (void)
 {_
+    if (game->remake_inventory) {
+        //
+        // continue
+        //
+    } else {
+        if (game->moving_items) {
+            return;
+        }
+    }
+
     auto level = game->level;
     if (!level) {
         return;
     }
     auto player = level->player;
     if (!player) {
-        return;
-    }
-
-    if (game->moving_items) {
         return;
     }
 
@@ -223,6 +243,8 @@ static void wid_inventory_create (void)
                         auto tpp = tp_find(tp_id);
                         wid_set_text(w, tpp->text_name());
                         if (tpp->is_bag()) {
+                            wid_set_on_mouse_down(w, wid_inventory_mouse_down_on_bag);
+                        } else {
                             wid_set_on_mouse_down(w, wid_inventory_mouse_down);
                         }
                     }
@@ -269,6 +291,16 @@ static void wid_inventory_create (void)
         wid_update(wid_inventory_window);
     }
     recursion = false;
+
+    if (game->remake_inventory) {
+        auto slot = game->inventory_highlight_slot;
+        auto t = level->inventory_get(slot);
+        if (t) {
+            game->wid_thing_info_create(t);
+        } else {
+            game->moving_items = false;
+        }
+    }
 }
 
 bool is_mouse_over_inventory (void)

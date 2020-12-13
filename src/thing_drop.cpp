@@ -16,7 +16,7 @@ bool Thing::drop (Thingp what, Thingp target)
         log("drop %s", what->to_string().c_str());
     }
 
-    auto existing_owner = what->owner_get();
+    auto existing_owner = what->get_owner();
     if (existing_owner != this) {
         err("attempt to drop %s which is not carried", 
             what->to_string().c_str());

@@ -24,7 +24,7 @@ bool Thing::entrance_tick (void)
         return false;
     }
 
-    if (owner_get()) {
+    if (get_owner()) {
         return false;
     }
 

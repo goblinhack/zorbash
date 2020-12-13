@@ -99,6 +99,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
             game->moving_items = false;
             wid_thing_info_fini();
             wid_inventory_init();
+            wid_destroy(&game->in_transit_item);
             return true;
         }
     }

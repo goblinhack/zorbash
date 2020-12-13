@@ -78,7 +78,7 @@ bool Thing::possible_to_attack (const Thingp it)
     }
 
     if (is_weapon()) {
-        auto o = owner_get();
+        auto o = get_owner();
         if (o) {
             if (o->is_monst()) {
                 if (!it->is_attackable_by_monst()) {
@@ -131,7 +131,7 @@ _
     //
     // Carry to eat later. Monsts attack their food.
     //
-    auto owner = owner_get();
+    auto owner = get_owner();
     if (owner) {
         //
         // We hit this path for swords. We don't really want the sword to

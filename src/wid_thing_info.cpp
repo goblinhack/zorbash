@@ -12,6 +12,7 @@
 #include "my_tile.h"
 #include "my_wid_console.h"
 #include "my_wid_bag.h"
+#include "my_traceback.h"
 
 static WidPopup *wid_thing_info_window;
 
@@ -38,7 +39,7 @@ uint8_t wid_thing_info_init (void)
 
 void Game::wid_thing_info_destroy (void)
 {_
-    if (game->moving_items) {
+    if (moving_items) {
         return;
     }
 
@@ -47,8 +48,14 @@ void Game::wid_thing_info_destroy (void)
 
 void Game::wid_thing_info_create (Thingp t)
 {_
-    if (game->moving_items) {
-        return;
+    if (game->remake_inventory) {
+        //
+        // continue
+        //
+    } else {
+        if (game->moving_items) {
+            return;
+        }
     }
 
     if (wid_thing_info_window) {
@@ -59,11 +66,11 @@ void Game::wid_thing_info_create (Thingp t)
         return;
     }
 
-    if (!game->level){
+    if (!level){
         return;
     }
 
-    auto player = game->level->player;
+    auto player = level->player;
     if (!player){
         return;
     }
@@ -247,28 +254,28 @@ void Game::wid_thing_info_create (Thingp t)
     if (tp->is_bag()) {
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 
-        if (game->bag1) {
-            delete game->bag1;
-            game->bag1 = nullptr;
+        if (bag1) {
+            delete bag1;
+            bag1 = nullptr;
         }
 
-        if (game->bag2) {
-            delete game->bag2;
-            game->bag2 = nullptr;
+        if (bag2) {
+            delete bag2;
+            bag2 = nullptr;
         }
 
         {
             point tl = mid - point(player->bag_width() + 5, player->bag_height() + 1);
             point br = tl +  point(player->bag_width(), player->bag_height());
-            game->bag1 = new WidBag(player, tl, br, "Inventory");
+            bag1 = new WidBag(player, tl, br, "Inventory");
         }
 
         point tl = mid + point(0, - (t->bag_height() + 1));
         point br = tl +  point(t->bag_width(), t->bag_height());
         if (tp->bag_width() * tp->bag_height() < 100) {
-            game->bag2 = new WidBag(t, tl, br, "Wee bag");
+            bag2 = new WidBag(t, tl, br, "Wee bag");
         } else {
-            game->bag2 = new WidBag(t, tl, br, "Big bag");
+            bag2 = new WidBag(t, tl, br, "Big bag");
         }
 
     }

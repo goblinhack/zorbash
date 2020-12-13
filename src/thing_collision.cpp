@@ -789,8 +789,8 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
 {_
     auto me = this;
 
-    Thingp owner_it = it->owner_get();
-    Thingp owner_me = me->owner_get();
+    Thingp owner_it = it->get_owner();
+    Thingp owner_me = me->get_owner();
 
     log("collision candidate? %s", it->to_string().c_str());
 _
@@ -980,8 +980,8 @@ _
         }
     }
 
-    Thingp owner_it = it->owner_get();
-    Thingp owner_me = me->owner_get();
+    Thingp owner_it = it->get_owner();
+    Thingp owner_me = me->get_owner();
 
     //
     // Need this or shields attack the player.

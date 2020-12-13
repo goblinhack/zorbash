@@ -78,7 +78,7 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
 
-            if (t->owner_get() ||
+            if (t->get_owner() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {
@@ -105,7 +105,7 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
 
-            if (t->owner_get() ||
+            if (t->get_owner() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {
@@ -127,7 +127,7 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
 
-            if (t->owner_get() ||
+            if (t->get_owner() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {

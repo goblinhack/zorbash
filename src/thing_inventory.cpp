@@ -11,6 +11,13 @@
 
 void Thing::inventory_particle (Thingp what, uint32_t slot)
 {_
+    if (game->moving_items) {
+        //
+        // No animations when moving stuff around
+        //
+        return;
+    }
+
     //
     // No animations at the start
     //
@@ -101,6 +108,13 @@ void Thing::inventory_particle (Thingp what, uint32_t slot)
 void Thing::inventory_particle (Thingp what, uint32_t slot,
                                 Thingp particle_target)
 {_
+    if (game->moving_items) {
+        //
+        // No animations when moving stuff around
+        //
+        return;
+    }
+
     //
     // No animations at the start
     //
@@ -238,7 +252,8 @@ bool Thing::inventory_id_remove (Thingp what)
                 log("decrement slot count");
             } else {_
                 log("remove slot");
-                monstp->inventory_id.erase(monstp->inventory_id.begin() + i);
+//                monstp->inventory_id.erase(monstp->inventory_id.begin() + i);
+                monstp->inventory_id[i] = 0;
 
                 if (!monstp->inventory_id.size()) {
                     game->inventory_highlight_slot = {};

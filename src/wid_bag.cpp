@@ -23,9 +23,6 @@ static void wid_bag_item_mouse_over_e(Widp w);
 static void wid_bag_tick(Widp w);
 static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button);
 
-static std::list<WidBag *> bags;
-static Widp in_transit_item;
-
 static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 {_
     for (const auto& item : bag->monstp->carrying) {
@@ -61,7 +58,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 
 static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    if (!in_transit_item) {
+    if (!game->in_transit_item) {
         return false;
     }
 
@@ -92,25 +89,9 @@ static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t
 
     if (bag->bag_can_place_at(t, at)) {
         if (bag->bag_place_at(t, at)) {
-            wid_destroy(&in_transit_item);
-            in_transit_item = nullptr;
-
-            for (auto b : bags) {
-                auto w = b->wid_bag_container;
-
-                for (auto item : wid_find_all(w, "wid_bag item")) {
-                    wid_destroy_nodelay(&item);
-                }
-
-                auto bag_id = wid_get_thing_id_context(w);
-                auto bag = game->level->thing_find(bag_id);
-                if (bag) {
-                    while (bag->bag_compress()) { }
-                    wid_bag_add_items(w, bag);
-                }
-
-                wid_update(w);
-            }
+            wid_destroy(&game->in_transit_item);
+            t->change_owner(bag);
+            game->remake_inventory = true;
         } else {
             ERR("Cannot fit that into the bag");
         }
@@ -123,7 +104,7 @@ static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t
 
 static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    if (in_transit_item) {
+    if (game->in_transit_item) {
         return false;
     }
 
@@ -144,31 +125,30 @@ static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t b
 
     t->describe();
 
-    if (in_transit_item) {
-        wid_destroy(&in_transit_item);
-        in_transit_item = nullptr;
+    if (game->in_transit_item) {
+        wid_destroy(&game->in_transit_item);
     }
 
     auto tl = point(ascii_mouse_x, ascii_mouse_y);
     auto br = tl + point(t->bag_item_width() - 1, t->bag_item_height() - 1);
 
-    in_transit_item = wid_new_square_window("wid_bag in transit item");
-    wid_set_pos(in_transit_item, tl, br);
-    wid_set_style(in_transit_item, UI_WID_STYLE_DARK);
+    game->in_transit_item = wid_new_square_window("wid_bag in transit item");
+    wid_set_pos(game->in_transit_item, tl, br);
+    wid_set_style(game->in_transit_item, UI_WID_STYLE_DARK);
 
-    wid_set_thing_id_context(in_transit_item, id);
-    wid_set_on_mouse_up(in_transit_item, wid_in_transit_item_place);
+    wid_set_thing_id_context(game->in_transit_item, id);
+    wid_set_on_mouse_up(game->in_transit_item, wid_in_transit_item_place);
 
     auto tpp = t->tp();
     auto tiles = &tpp->tiles;
 
     auto tile = tile_first(tiles);
     if (tile) {
-        wid_set_fg_tile(in_transit_item, tile);
+        wid_set_fg_tile(game->in_transit_item, tile);
     }
 
-    wid_set_movable(in_transit_item, true);
-    wid_update(in_transit_item);
+    wid_set_movable(game->in_transit_item, true);
+    wid_update(game->in_transit_item);
 
     for (auto item : wid_find_all(wid_bag_container, "wid_bag item")) {
         wid_destroy_nodelay(&item);
@@ -182,7 +162,7 @@ static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t b
 
 static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-    if (in_transit_item) {
+    if (game->in_transit_item) {
         return;
     }
 
@@ -195,7 +175,7 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
 
 static void wid_bag_item_mouse_over_e (Widp w)
 {
-    if (in_transit_item) {
+    if (game->in_transit_item) {
         return;
     }
 
@@ -204,8 +184,8 @@ static void wid_bag_item_mouse_over_e (Widp w)
 
 static void wid_bag_tick (Widp w)
 {
-    if (in_transit_item) {
-        wid_move_to_abs(in_transit_item, ascii_mouse_x, ascii_mouse_y);
+    if (game->in_transit_item) {
+        wid_move_to_abs(game->in_transit_item, ascii_mouse_x, ascii_mouse_y);
     }
 }
 
@@ -214,14 +194,16 @@ WidBag::~WidBag()
     wid_destroy(&wid_bag_container);
     wid_destroy(&wid_bag_title);
 
-    auto b = std::find(bags.begin(), bags.end(), this);
-    if (b != bags.end()) {
-        bags.erase(b);
+    auto b = std::find(game->bags.begin(), game->bags.end(), this);
+    if (b != game->bags.end()) {
+        game->bags.erase(b);
     }
 }
 
-WidBag::WidBag (Thingp bag, point tl, point br, const std::string &title) : tl(tl), br(br)
+WidBag::WidBag (Thingp bag_, point tl, point br, const std::string &title) : tl(tl), br(br)
 {_
+    bag = bag_;
+
     {
         wid_bag_container = wid_new_square_window("wid_bag");
         wid_set_pos(wid_bag_container, tl, br);
@@ -242,12 +224,12 @@ WidBag::WidBag (Thingp bag, point tl, point br, const std::string &title) : tl(t
     wid_update(wid_bag_container);
     wid_update(wid_bag_title);
 
-    bags.push_back(this);
+    game->bags.push_back(this);
 }
 
 Widp is_mouse_over_any_bag (void)
 {
-    for (auto b : bags) {
+    for (auto b : game->bags) {
         auto w = b->wid_bag_container;
 
         //
