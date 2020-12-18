@@ -153,7 +153,7 @@ static int ascii_ok_for_scissors (int x, int y)
 
 bool ascii_is_empty (int x, int y)
 {
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
     if (cell->fg_tile) {
         return false;
     }
@@ -178,7 +178,7 @@ void ascii_set_fg (int x, int y, color c)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->fg_color_tl = c;
     cell->fg_color_tr = c;
@@ -192,7 +192,7 @@ void ascii_set_bg (int x, int y, color c)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->bg_color_tl = c;
     cell->bg_color_tr = c;
@@ -206,7 +206,7 @@ void ascii_set_bg2 (int x, int y, color c)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->bg2_color_tl = c;
     cell->bg2_color_tr = c;
@@ -220,7 +220,7 @@ void ascii_set_fg2 (int x, int y, color c)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->fg2_color_tl = c;
     cell->fg2_color_tr = c;
@@ -238,7 +238,7 @@ void ascii_set_context (int x, int y, void *context)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->context = context;
 }
@@ -249,7 +249,7 @@ void *ascii_get_context (int x, int y)
         return (0);
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     return (cell->context);
 }
@@ -261,7 +261,7 @@ void ascii_set_bg (int x, int y, const Texp tex,
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->tex = tex;
     cell->tx = tx;
@@ -276,7 +276,7 @@ void ascii_set_bg (int x, int y, const Tilep tile)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->bg_tile = tile;
     cell->tx = 0;
@@ -291,7 +291,7 @@ void ascii_set_bg2 (int x, int y, const Tilep tile)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->bg2_tile = tile;
     cell->bg2_tx = 0;
@@ -307,7 +307,7 @@ void ascii_set_bg2 (int x, int y, const Tilep tile,
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->bg2_tile = tile;
     cell->bg2_tx = tx;
@@ -343,7 +343,7 @@ void ascii_set_fg (int x, int y, const Texp tex,
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->tex = tex;
     cell->tx = tx;
@@ -358,7 +358,7 @@ void ascii_set_fg (int x, int y, const Tilep tile)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->fg_tile = tile;
     cell->tx = 0;
@@ -373,7 +373,7 @@ void ascii_set_fg2 (int x, int y, const Tilep tile)
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->fg2_tile = tile;
     cell->fg2_tx = 0;
@@ -389,7 +389,7 @@ void ascii_set_fg2 (int x, int y, const Tilep tile,
         return;
     }
 
-    AsciiCell *cell = &getref(cells, x, y);
+    AsciiCell *cell = &getref_no_check(cells, x, y);
 
     cell->fg2_tile = tile;
     cell->fg2_tx = tx;
@@ -520,7 +520,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             }
         }
 
-        AsciiCell *cell = &getref(cells, x++, y);
+        AsciiCell *cell = &getref_no_check(cells, x++, y);
 
         cell->fg_tile = tile;
 
@@ -1014,7 +1014,7 @@ static void ascii_blit (void)
         tile_x = 0;
         for (x = 0; x < TERM_WIDTH; x++) {
 
-            const AsciiCell *cell = &getref(cells, x, y);
+            const AsciiCell *cell = &getref_no_check(cells, x, y);
 
             point tile_tl;
             point tile_br;
@@ -1084,7 +1084,7 @@ static void ascii_blit (void)
         tile_x = 0;
         for (x = 0; x < TERM_WIDTH; x++) {
 
-            const AsciiCell *cell = &getref(cells, x, y);
+            const AsciiCell *cell = &getref_no_check(cells, x, y);
 
             point tile_tl;
             point tile_br;

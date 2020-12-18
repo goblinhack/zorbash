@@ -1,5 +1,6 @@
 bugs
 ----
+- push a torch into a pit, jump after it and you don't fall
 - move item back to player and then wield
 - fix count that vanishes when you click on it
 - drop items from bag
