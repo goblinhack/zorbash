@@ -1679,6 +1679,16 @@ public:
         }
     }
 
+    inline void set_is_lit (const int x, const int y)
+    {
+        auto l = getptr(_is_lit, x, y);
+        if (*l == 0) {
+            *l = 255;
+        } else if (*l < 255) {
+            (*l)++;
+        }
+    }
+
     inline void set_is_lit_no_check (const int x, const int y, uint8_t v)
     {
         set_no_check(_is_lit, x, y, v);

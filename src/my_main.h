@@ -9,7 +9,13 @@
 
 #define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
-#define ENABLE_DEBUG_TRACE         // Function tracing
+
+//
+// RUN with --debug for extra memory checks
+//
+#define ENABLE_DEBUG_TRACE         // (SLOW) Function tracing
+#undef ENABLE_BOUNDS_CHECKS        // (SLOW) Catch out of bounds errors
+
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_TILE_BOUNDS         // Scan tiles for bounds
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
@@ -40,7 +46,7 @@
 #define LEVEL_FADE_IN_MS           800
 #define LEVEL_FADE_OUT_MS          500
 #define LIGHT_MAX_RAYS             180  // Max light rays cast
-#define MAP_BORDER_TOTAL                 10   // Room border padding
+#define MAP_BORDER_TOTAL           10   // Room border padding
 #define MAP_GRID_HEIGHT            4
 #define MAP_GRID_WIDTH             4 // Rooms across and down
 #define MAP_HEIGHT                 ((MAP_GRID_HEIGHT*MAP_ROOM_HEIGHT) + (MAP_BORDER_TOTAL*2))

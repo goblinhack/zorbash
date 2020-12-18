@@ -12,74 +12,118 @@
 //
 template<class TYPE>
 static inline
-void set(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void set(std::vector<TYPE>& container, std::size_t X, TYPE v){
     DODEBUG(std::cerr << "set [" << X << "] = " << v << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#endif
     container[X] = v;
 }
 
 template<class TYPE>
 static inline
-void incr(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void incr(std::vector<TYPE>& container, std::size_t X, TYPE v){
     DODEBUG(std::cerr << "incr [" << X << "] = " << v << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#endif
     container[X] += v;
 }
 
 template<class TYPE>
 static inline
-void decr(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void decr(std::vector<TYPE>& container, std::size_t X, TYPE v){
     DODEBUG(std::cerr << "decr [" << X << "] = " << v << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#endif
     container[X] -= v;
 }
 
 template<class TYPE>
 static inline
-void incr(std::vector<TYPE>& container, std::size_t X){_
+void incr(std::vector<TYPE>& container, std::size_t X){
     DODEBUG(std::cerr << "incr [" << X << "]" << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
     container[X] ++;
 }
 
 template<class TYPE>
 static inline
-void decr(std::vector<TYPE>& container, std::size_t X){_
+void decr(std::vector<TYPE>& container, std::size_t X){
     DODEBUG(std::cerr << "decr [" << X << "]" << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
     container[X] --;
 }
 
 template<class TYPE>
 static inline
-TYPE get(std::vector<TYPE> const &container, std::size_t X){_
+TYPE get(std::vector<TYPE> const &container, std::size_t X){
     DODEBUG(std::cerr << "get [" << X << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
     DODEBUG(std::cerr << container[X] << std::endl);
     return (container[X]);
 }
 
 template<class TYPE>
 static inline
-TYPE& getref(std::vector<TYPE> &container, std::size_t X){_
+TYPE& getref(std::vector<TYPE> &container, std::size_t X){
     DODEBUG(std::cerr << "getref [" << X << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
     return (container[X]);
 }
 
 template<class TYPE>
 static inline
-TYPE* getptr(std::vector<TYPE> &container, std::size_t X){_
+TYPE* getptr(std::vector<TYPE> &container, std::size_t X){
     DODEBUG(std::cerr << "getptr [" << X << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
     return (&container[X]);
 }
 
@@ -89,72 +133,120 @@ TYPE* getptr(std::vector<TYPE> &container, std::size_t X){_
 template<class TYPE>
 static inline
 void set(std::vector<std::vector<TYPE> >& container,
-         std::size_t X, std::size_t Y, TYPE v){_
+         std::size_t X, std::size_t Y, TYPE v){
     DODEBUG(std::cerr << "set [" << X << "][" << Y << "] = " << v << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
     container[X][Y] = v;
 }
 
 template<class TYPE>
 static inline
 void incr(std::vector<std::vector<TYPE> >& container,
-          std::size_t X, std::size_t Y, TYPE v){_
+          std::size_t X, std::size_t Y, TYPE v){
     DODEBUG(std::cerr << "incr [" << X << "][" << Y << "]" << v << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
     container[X][Y] += v;
 }
 
 template<class TYPE>
 static inline
 void decr(std::vector<std::vector<TYPE> >& container,
-          std::size_t X, std::size_t Y, TYPE v){_
+          std::size_t X, std::size_t Y, TYPE v){
     DODEBUG(std::cerr << "decr [" << X << "][" << Y << "]" << v << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
     container[X][Y] -= v;
 }
 
 template<class TYPE>
 static inline
 TYPE& getref(std::vector<std::vector<TYPE> > &container,
-             std::size_t X, std::size_t Y){_
+             std::size_t X, std::size_t Y){
     DODEBUG(std::cerr << "getref [" << X << "][" << Y << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
     return (container[X][Y]);
 }
 
 template<class TYPE>
 static inline
 TYPE* getptr(std::vector<std::vector<TYPE> > &container,
-             std::size_t X, std::size_t Y){_
+             std::size_t X, std::size_t Y){
     DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
     return (&container[X][Y]);
 }
 
 template<class TYPE>
 static inline
 TYPE get(std::vector<std::vector<TYPE> > const &container,
-         std::size_t X, std::size_t Y){_
+         std::size_t X, std::size_t Y){
     DODEBUG(std::cerr << "get [" << X << "][" << Y << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
     DODEBUG(std::cerr << container[X][Y] << std::endl);
     return (container[X][Y]);
 }
@@ -165,28 +257,52 @@ TYPE get(std::vector<std::vector<TYPE> > const &container,
 template<class TYPE>
 static inline
 void set(std::vector<std::vector<std::vector<TYPE> > >& container,
-         std::size_t X, std::size_t Y, std::size_t Z, TYPE v){_
+         std::size_t X, std::size_t Y, std::size_t Z, TYPE v){
     DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "] = " << v << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,<,container[X][Y].size())
+#endif
     container[X][Y][Z] = v;
 }
 
 template<class TYPE>
 static inline
 TYPE get(std::vector<std::vector<std::vector<TYPE> > > const &container,
-         std::size_t X, std::size_t Y, std::size_t Z){_
+         std::size_t X, std::size_t Y, std::size_t Z){
     DODEBUG(std::cerr << "get [" << X << "][" << Y << "][" << Z << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,<,container[X][Y].size())
+#endif
     DODEBUG(std::cerr << container[X][Y][Z] << std::endl);
     return (container[X][Y][Z]);
 }
@@ -194,28 +310,52 @@ TYPE get(std::vector<std::vector<std::vector<TYPE> > > const &container,
 template<class TYPE>
 static inline
 TYPE& getref(std::vector<std::vector<std::vector<TYPE> > > &container,
-             std::size_t X, std::size_t Y, std::size_t Z){_
+             std::size_t X, std::size_t Y, std::size_t Z){
     DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,<,container[X][Y].size())
+#endif
     return (container[X][Y][Z]);
 }
 
 template<class TYPE>
 static inline
 TYPE* getptr(std::vector<std::vector<std::vector<TYPE> > > &container,
-             std::size_t X, std::size_t Y, std::size_t Z){_
+             std::size_t X, std::size_t Y, std::size_t Z){
     DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,<,container[X][Y].size())
+#endif
     return (&container[X][Y][Z]);
 }
 
@@ -225,14 +365,26 @@ TYPE* getptr(std::vector<std::vector<std::vector<TYPE> > > &container,
 template<class TYPE>
 static inline
 void set(std::vector<std::vector<std::vector<std::vector<TYPE> > > >& container,
-         std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){_
+         std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){
     DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "][" << I << "] = " << v << std::endl);
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,<,container[X][Y].size())
+#endif
     ASSERT(I >= 0)
     ASSERT(I < container[X][Y][Z].size())
     container[X][Y][Z][I] = v;
@@ -241,14 +393,26 @@ void set(std::vector<std::vector<std::vector<std::vector<TYPE> > > >& container,
 template<class TYPE>
 static inline
 TYPE get(std::vector<std::vector<std::vector<std::vector<TYPE> > > > const &container,
-          std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+          std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
     DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,<,container[X][Y].size())
+#endif
     ASSERT(I >= 0)
     ASSERT(I < container[X][Y][Z].size())
     DODEBUG(std::cerr << container[X][Y][Z][I] << std::endl);
@@ -258,14 +422,26 @@ TYPE get(std::vector<std::vector<std::vector<std::vector<TYPE> > > > const &cont
 template<class TYPE>
 static inline
 TYPE& getref(std::vector<std::vector<std::vector<std::vector<TYPE> > > > &container,
-             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
     DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,<,container[X][Y].size())
+#endif
     ASSERT(I >= 0)
     ASSERT(I < container[X][Y][Z].size())
     return (container[X][Y][Z][I]);
@@ -274,64 +450,77 @@ TYPE& getref(std::vector<std::vector<std::vector<std::vector<TYPE> > > > &contai
 template<class TYPE>
 static inline
 TYPE* getptr(std::vector<std::vector<std::vector<std::vector<TYPE> > > > &container,
-             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
     DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "][" << I << "] = )");
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,>=,0)
+#endif
+#ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Z,<,container[X][Y].size())
+#endif
     ASSERT(I >= 0)
     ASSERT(I < container[X][Y][Z].size())
     return (&container[X][Y][Z][I]);
 }
 
+#ifndef ENABLE_BOUNDS_CHECKS
 template<class TYPE>
 static inline
-void set_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void set_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){
     container[X] = v;
 }
 
 template<class TYPE>
 static inline
-void incr_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void incr_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){
     container[X] += v;
 }
 
 template<class TYPE>
 static inline
-void decr_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void decr_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){
     container[X] -= v;
 }
 
 template<class TYPE>
 static inline
-void incr_no_check(std::vector<TYPE>& container, std::size_t X){_
+void incr_no_check(std::vector<TYPE>& container, std::size_t X){
     container[X] ++;
 }
 
 template<class TYPE>
 static inline
-void decr_no_check(std::vector<TYPE>& container, std::size_t X){_
+void decr_no_check(std::vector<TYPE>& container, std::size_t X){
     container[X] --;
 }
 
 template<class TYPE>
 static inline
-TYPE get_no_check(std::vector<TYPE> const &container, std::size_t X){_
+TYPE get_no_check(std::vector<TYPE> const &container, std::size_t X){
     return (container[X]);
 }
 
 template<class TYPE>
 static inline
-TYPE& getref_no_check(std::vector<TYPE> &container, std::size_t X){_
+TYPE& getref_no_check(std::vector<TYPE> &container, std::size_t X){
     return (container[X]);
 }
 
 template<class TYPE>
 static inline
-TYPE* getptr_no_check(std::vector<TYPE> &container, std::size_t X){_
+TYPE* getptr_no_check(std::vector<TYPE> &container, std::size_t X){
     return (&container[X]);
 }
 
@@ -341,35 +530,35 @@ TYPE* getptr_no_check(std::vector<TYPE> &container, std::size_t X){_
 template<class TYPE>
 static inline
 void set_no_check(std::vector<std::vector<TYPE> >& container,
-                std::size_t X, std::size_t Y, TYPE v){_
+                std::size_t X, std::size_t Y, TYPE v){
     container[X][Y] = v;
 }
 
 template<class TYPE>
 static inline
 void incr_no_check(std::vector<std::vector<TYPE> >& container,
-                 std::size_t X, std::size_t Y, TYPE v){_
+                 std::size_t X, std::size_t Y, TYPE v){
     container[X][Y] += v;
 }
 
 template<class TYPE>
 static inline
 void decr_no_check(std::vector<std::vector<TYPE> >& container,
-                 std::size_t X, std::size_t Y, TYPE v){_
+                 std::size_t X, std::size_t Y, TYPE v){
     container[X][Y] -= v;
 }
 
 template<class TYPE>
 static inline
 TYPE& getref_no_check(std::vector<std::vector<TYPE> > &container,
-                    std::size_t X, std::size_t Y){_
+                    std::size_t X, std::size_t Y){
     return (container[X][Y]);
 }
 
 template<class TYPE>
 static inline
 TYPE get_no_check(std::vector<std::vector<TYPE> > const &container,
-                std::size_t X, std::size_t Y){_
+                std::size_t X, std::size_t Y){
     return (container[X][Y]);
 }
 
@@ -379,21 +568,21 @@ TYPE get_no_check(std::vector<std::vector<TYPE> > const &container,
 template<class TYPE>
 static inline
 void set_no_check(std::vector<std::vector<std::vector<TYPE> > >& container,
-                std::size_t X, std::size_t Y, std::size_t Z, TYPE v){_
+                std::size_t X, std::size_t Y, std::size_t Z, TYPE v){
     container[X][Y][Z] = v;
 }
 
 template<class TYPE>
 static inline
 TYPE get_no_check(std::vector<std::vector<std::vector<TYPE> > > const &container,
-                std::size_t X, std::size_t Y, std::size_t Z){_
+                std::size_t X, std::size_t Y, std::size_t Z){
     return (container[X][Y][Z]);
 }
 
 template<class TYPE>
 static inline
 TYPE& getref_no_check(std::vector<std::vector<std::vector<TYPE> > > &container,
-                    std::size_t X, std::size_t Y, std::size_t Z){_
+                    std::size_t X, std::size_t Y, std::size_t Z){
     return (container[X][Y][Z]);
 }
 
@@ -403,20 +592,36 @@ TYPE& getref_no_check(std::vector<std::vector<std::vector<TYPE> > > &container,
 template<class TYPE>
 static inline
 void set_no_check(std::vector<std::vector<std::vector<std::vector<TYPE> > > >& container,
-                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){_
+                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){
     container[X][Y][Z][I] = v;
 }
 
 template<class TYPE>
 static inline
 TYPE get_no_check(std::vector<std::vector<std::vector<std::vector<TYPE> > > > const &container,
-                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+                std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
     return (container[X][Y][Z][I]);
 }
 
 template<class TYPE>
 static inline
 TYPE& getref_no_check(std::vector<std::vector<std::vector<std::vector<TYPE> > > > &container,
-                    std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+                    std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){
     return (container[X][Y][Z][I]);
 }
+#endif
+
+#ifdef ENABLE_BOUNDS_CHECKS
+#undef getptr_no_check
+#define getptr_no_check getptr
+#undef getref_no_check
+#define getref_no_check getref
+#undef set_no_check
+#define set_no_check set
+#undef get_no_check
+#define get_no_check get
+#undef incr_no_check
+#define incr_no_check incr
+#undef decr_no_check
+#define decr_no_check decr
+#endif

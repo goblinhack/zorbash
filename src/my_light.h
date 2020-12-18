@@ -47,11 +47,10 @@ public:
     void reset(void);
     void update(void);
     bool calculate(int last);
-    void render_triangle_fans(int last, int count);
-    void render(int last, int count);
-    void draw_line(const int16_t index, const point &p0, const point &p1);                                    \
-    void draw_pixel(const int16_t index, const point &p0, const point &p1);                                    \
-
+    void render_triangle_fans(int first);
+    void render(int first);
+    void draw_line(const int16_t index, const point &p0, const point &p1);
+    void draw_pixel(const int16_t index, const point &p0, const point &p1);
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void die_(const char *fmt, va_list args); // compile error without
