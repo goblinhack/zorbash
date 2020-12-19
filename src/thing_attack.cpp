@@ -181,7 +181,7 @@ _
                     return true;
                 }
             } else if (is_player()) {
-                log("carry to eat later %s", it->to_string().c_str());
+                log("don't attack, try to carry %s", it->to_string().c_str());
                 if (try_to_carry(it)) {
                     return true;
                 }

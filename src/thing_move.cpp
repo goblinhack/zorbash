@@ -112,14 +112,17 @@ bool Thing::move (fpoint future_pos,
         game->tick_begin("player moved");
         g_thing_callframes_depth = callframes_depth - 1;
         log("player tick");
+        _
 
         if (mid_at != future_pos) {
+            log("try to move; collision check");
             if (collision_check_only(future_pos)) {
                 log("cannot move; try to shove");
                 if (shove_allowed) {
                     try_to_shove(future_pos);
                 }
                 lunge(future_pos);
+                log("move failed");
                 return (false);
             }
         }

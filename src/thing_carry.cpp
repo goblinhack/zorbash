@@ -31,6 +31,9 @@ _
 
     if (!bag_add(what)) {
         log("no; cannot store");
+        if (is_player()) {
+            MINICON("No space to carry %s", what->text_the().c_str());
+        }
         return false;
     }
 

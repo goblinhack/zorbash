@@ -1,6 +1,6 @@
 bugs
 ----
-- cannot collect sword
+- count > 10 is truncated
 - move item back to player and yield
 - fix count that vanishes when you click on it
 - drop items from bag

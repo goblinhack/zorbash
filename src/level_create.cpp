@@ -172,27 +172,7 @@ void Level::create (point3d at, int seed)
                         auto b = thing_new("bag_small", fpoint(x, y));
                         t->carry(b);
 
-                        {
-                            auto b = thing_new("potion_descent", fpoint(x, y));
-                            t->carry(b);
-                        }
-
-                        {
-                            auto b = thing_new("potion_descent", fpoint(x, y));
-                            t->carry(b);
-                        }
-
-                        {
-                            auto b = thing_new("potion_descent", fpoint(x, y));
-                            t->carry(b);
-                        }
-
-                        {
-                            auto b = thing_new("potion_descent", fpoint(x, y));
-                            t->carry(b);
-                        }
-
-                        {
+                        for (auto tmp = 0; tmp < 10; tmp++) {
                             auto b = thing_new("potion_descent", fpoint(x, y));
                             t->carry(b);
                         }

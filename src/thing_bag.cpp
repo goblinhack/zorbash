@@ -98,7 +98,19 @@ bool Thing::bag_compress (void)
 
 	    auto t = game->level->thing_find(id);
 	    if (bag_remove_at(t, t->monstp->bag_position)) {
-		if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
+		if (bag_can_place_at(t, t->monstp->bag_position + point(1, 1))) {
+                    if (bag_place_at(t, t->monstp->bag_position + point(1, 1))) {
+                        did_something = true;
+                    } else {
+                        bag_place_at(t, t->monstp->bag_position);
+                    }
+                } else if (bag_can_place_at(t, t->monstp->bag_position + point(-1, 1))) {
+                    if (bag_place_at(t, t->monstp->bag_position + point(-1, 1))) {
+                        did_something = true;
+                    } else {
+                        bag_place_at(t, t->monstp->bag_position);
+                    }
+                } else if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
                     if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
                         did_something = true;
                     } else {
