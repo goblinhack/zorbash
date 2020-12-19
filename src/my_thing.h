@@ -208,6 +208,45 @@ public:
     uint64_t is_waiting_to_descend:1   {};
     uint64_t is_waiting_to_fall:1      {};
     uint64_t is_the_grid:1             {};
+
+    //
+    // These are flags used to make sure we set or unset flags onto
+    // the level only once.
+    //
+    uint64_t i_set_is_acid                   {};
+    uint64_t i_set_is_blood                  {};
+    uint64_t i_set_is_chasm                  {};
+    uint64_t i_set_is_corpse                 {};
+    uint64_t i_set_is_corridor               {};
+    uint64_t i_set_is_deep_water             {};
+    uint64_t i_set_is_dirt                   {};
+    uint64_t i_set_is_door                   {};
+    uint64_t i_set_is_entrance               {};
+    uint64_t i_set_is_exit                   {};
+    uint64_t i_set_is_fire                   {};
+    uint64_t i_set_is_floor                  {};
+    uint64_t i_set_is_food                   {};
+    uint64_t i_set_is_generator              {};
+    uint64_t i_set_is_gold                   {};
+    uint64_t i_set_is_hazard                 {};
+    uint64_t i_set_is_item_class_a           {};
+    uint64_t i_set_is_item_class_b           {};
+    uint64_t i_set_is_key                    {};
+    uint64_t i_set_is_lava                   {};
+    uint64_t i_set_is_light_blocker          {};
+    uint64_t i_set_is_monst                  {};
+    uint64_t i_set_is_movement_blocking_hard {};
+    uint64_t i_set_is_movement_blocking_soft {};
+    uint64_t i_set_is_potion                 {};
+    uint64_t i_set_is_ripple                 {};
+    uint64_t i_set_is_rock                   {};
+    uint64_t i_set_is_secret_door            {};
+    uint64_t i_set_is_smoke                  {};
+    uint64_t i_set_is_torch                  {};
+    uint64_t i_set_is_treasure               {};
+    uint64_t i_set_is_wall                   {};
+    uint64_t i_set_is_water                  {};
+
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -707,7 +746,7 @@ public:
     ThingId get_on_fire_anim_id(void) const;
 
     void unset_on_fire(void);
-    bool set_on_fire(void);
+    bool set_on_fire(const std::string &why);
 
     const ThingId& get_owner_id (void) const
     {_

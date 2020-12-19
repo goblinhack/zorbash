@@ -199,8 +199,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(my.t->z_depth);
     uint8_t dir; in >> dir; my.t->dir = dir;
 
-    in >> bits(bits64);
-    int shift = 0;
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
@@ -208,6 +206,8 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
+    in >> bits(bits64);
+    int shift = 0;
     /* uint64_t */ my.t->has_ever_moved        = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->has_external_particle = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->has_internal_particle = (bits64 >> shift) & 1; shift++;
@@ -238,6 +238,44 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->is_waiting_to_descend = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_waiting_to_fall    = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_the_grid           = (bits64 >> shift) & 1; shift++;
+
+    in >> bits(bits64);
+    shift = 0;
+
+    /* uint64_t */ my.t->i_set_is_acid                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_blood                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_chasm                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_corpse                 = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_corridor               = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_deep_water             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_dirt                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_door                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_entrance               = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_exit                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_fire                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_floor                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_food                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_generator              = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_gold                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_hazard                 = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_item_class_a           = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_item_class_b           = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_key                    = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_lava                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_light_blocker          = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_monst                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_movement_blocking_hard = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_movement_blocking_soft = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_potion                 = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_ripple                 = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_rock                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_secret_door            = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_smoke                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_torch                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_treasure               = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_wall                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_water                  = (bits64 >> shift) & 1; shift++;
+
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

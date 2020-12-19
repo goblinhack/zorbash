@@ -38,7 +38,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     // If I'm on fire. set it on fire too!
     //
     if (get_on_fire_anim_id().ok()) {
-        it->set_on_fire();
+        it->set_on_fire("I am on fire, set it on fire too");
     }
 
     //
@@ -95,7 +95,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     if (it->collision_check_only(shove_pos)) {
         if (is_player()) {
             if (it->is_torch()) {
-                MINICON("The torch falls back on you!");
+                if (!it->is_dead) {
+                    MINICON("The torch falls back on you!");
+                }
             }
             it->move_to(mid_at, 100);
         }
@@ -131,7 +133,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         if (it->is_flammable()) {
             if (random_range(0, 100) < 5) {
                 if (is_player()) {
-                    if (set_on_fire()) {
+                    if (set_on_fire("set youtself on fire")) {
                         MINICON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
                     }
                 }
