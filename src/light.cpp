@@ -178,27 +178,26 @@ bool Light::calculate (int first)
     //
     // Slighly insane optimization
     //
-#define AVOID_LOOKING_AT_THE_SAME_TILE()       \
-    {                                          \
-        static uint8_t last_x;                 \
-        static uint8_t last_y;                 \
-        if ((x == last_x) && (y == last_y)) {  \
-            rp++;                              \
-            continue;                          \
-        }                                      \
-        last_x = x; last_y = y;                \
+    uint8_t last_x;
+    uint8_t last_y;
+
+#define AVOID_LOOKING_AT_THE_SAME_TILE()               \
+    {                                                  \
+        if (likely((x == last_x) && (y == last_y))) {  \
+            rp++;                                      \
+            continue;                                  \
+        }                                              \
+        last_x = x; last_y = y;                        \
     }
 
-#define AVOID_LOOKING_AT_THE_SAME_TILE2()      \
-    {                                          \
-        static uint8_t last_x;                 \
-        static uint8_t last_y;                 \
-        if ((x == last_x) && (y == last_y)) {  \
-            rp++;                              \
-            step2++;                           \
-            continue;                          \
-        }                                      \
-        last_x = x; last_y = y;                \
+#define AVOID_LOOKING_AT_THE_SAME_TILE2()              \
+    {                                                  \
+        if (likely((x == last_x) && (y == last_y))) {  \
+            rp++;                                      \
+            step2++;                                   \
+            continue;                                  \
+        }                                              \
+        last_x = x; last_y = y;                        \
     }
 
     //
@@ -216,6 +215,7 @@ bool Light::calculate (int first)
                 int16_t step = 0;
                 const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
                 auto rp = points[i].begin();
+                last_x = -1;
                 for (; ; step++) {
                     if (unlikely(step >= end_of_points)) { break; }
                     if (unlikely(rp->distance > strength)) { break; }
@@ -259,6 +259,7 @@ bool Light::calculate (int first)
                 int16_t step = 0;
                 const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
                 auto rp = points[i].begin();
+                last_x = -1;
                 for (; ; step++) {
                     if (unlikely(step >= end_of_points)) { break; }
                     if (unlikely(rp->distance > strength)) { break; }
@@ -301,6 +302,7 @@ bool Light::calculate (int first)
             int16_t step = 0;
             const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
             auto rp = points[i].begin();
+            last_x = -1;
             for (; ; step++) {
                 if (step >= end_of_points) { break; }
                 if (rp->distance > strength) { break; }
