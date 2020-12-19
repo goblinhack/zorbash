@@ -1,8 +1,7 @@
 bugs
 ----
 - cannot collect sword
-- landing should auto collect
-- move item back to player and then wield
+- move item back to player and yield
 - fix count that vanishes when you click on it
 - drop items from bag
 

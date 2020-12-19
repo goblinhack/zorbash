@@ -31,10 +31,6 @@ void Thing::fire_tick (void)
         return;
     }
 
-    if (level->is_fire(at.x, at.y)) {
-        log("fire at %d,%d", (int)at.x, (int)at.y);
-    }
-
     bool hit = false;
 
     if (is_on_fire()) {

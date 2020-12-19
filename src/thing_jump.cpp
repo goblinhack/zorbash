@@ -392,4 +392,16 @@ void Thing::jump_end (void)
     wobble(25);
 
     move_carried_items();
+
+    //
+    // We avoid creating particles for item moves when other particles
+    // exist to avoid collection loops. This case is safe though, just
+    // remove the jump particle
+    //
+    delete_particle();
+
+    //
+    // To allow landing on items and collecting in one go
+    //
+    collision_check_do();
 }

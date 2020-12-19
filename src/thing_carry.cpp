@@ -16,6 +16,9 @@ _
         return false;
     }
 
+    //
+    // Stop fast loops in collecting things
+    //
     if (particle_anim_exists()) {
         log("no; particle anim exists");
         return false;
