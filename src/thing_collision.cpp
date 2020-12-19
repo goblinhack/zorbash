@@ -1034,7 +1034,10 @@ _
 
         if (things_overlap(me, me->mid_at, it)) {
             log("yes; can eat and overlaps");
-            return true;
+            //
+            // If can't carry, we don't want to block
+            //
+            return false;
         } else {
             log("yes; no can eat but no overlap");
         }
