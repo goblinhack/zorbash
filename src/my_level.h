@@ -153,11 +153,13 @@ public:
     // For thing effects, like jumping
     //
     std::vector<Particle> all_internal_particles;
+    std::vector<Particle> new_internal_particles;
 
     //
     // For things like move of items into inventory
     //
     std::vector<Particle> all_external_particles;
+    std::vector<Particle> new_external_particles;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving

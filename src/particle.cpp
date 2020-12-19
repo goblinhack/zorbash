@@ -32,7 +32,7 @@ void Level::new_internal_particle (
     }
 
     uint32_t now = time_update_time_milli();
-    all_internal_particles.push_back(Particle(id, start, stop, pixel_map_at,
+    new_internal_particles.push_back(Particle(id, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
                                      make_visible_at_end));
 }
@@ -44,13 +44,28 @@ void Level::new_internal_particle (
                           bool make_visible_at_end)
 {
     uint32_t now = time_update_time_milli();
-    all_internal_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
+    new_internal_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
                                      make_visible_at_end));
 }
 
 void Level::display_internal_particles (void)
 {_
+#if 0
+    CON("-");
+    for (auto p : all_internal_particles) {
+        CON("all int p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    }
+    for (auto p : new_internal_particles) {
+        CON("new int p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    }
+#endif
+
+    all_internal_particles.insert(std::end(all_internal_particles), 
+                                  std::begin(new_internal_particles), 
+                                  std::end(new_internal_particles));
+    new_internal_particles.clear();
+
     if (all_internal_particles.empty()) {
         return;
     }
@@ -152,6 +167,7 @@ void Level::display_internal_particles (void)
             return false;
         });
     all_internal_particles.erase(e, all_internal_particles.end());
+
     blit_flush();
 }
 
@@ -176,7 +192,7 @@ void Level::new_external_particle (
     }
 
     uint32_t now = time_update_time_milli();
-    all_external_particles.push_back(Particle(id, start, stop, pixel_map_at,
+    new_external_particles.push_back(Particle(id, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
                                      make_visible_at_end));
 }
@@ -186,13 +202,28 @@ void Level::new_external_particle (point start, point stop, isize sz, uint32_t d
                                    bool make_visible_at_end)
 {
     uint32_t now = time_update_time_milli();
-    all_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
+    new_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
                                      make_visible_at_end));
 }
 
 void Level::display_external_particles (void)
 {_
+#if 0
+    CON("-");
+    for (auto p : all_external_particles) {
+        CON("all ext p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    }
+    for (auto p : new_external_particles) {
+        CON("new ext p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    }
+#endif
+
+    all_external_particles.insert(std::end(all_external_particles), 
+                                  std::begin(new_external_particles), 
+                                  std::end(new_external_particles));
+    new_external_particles.clear();
+
     if (all_external_particles.empty()) {
         return;
     }
@@ -289,6 +320,7 @@ void Level::display_external_particles (void)
             return false;
         });
     all_external_particles.erase(e, all_external_particles.end());
+
     blit_flush();
 }
 
