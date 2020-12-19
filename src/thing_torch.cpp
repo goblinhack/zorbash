@@ -51,7 +51,7 @@ void Thing::torch_tick (void)
             if (!is_dead) {
                 if (random_range(0, 100) < 20) {
                     MINICON("You stumble into the flames!");
-                    set_on_fire();
+                    set_on_fire("stumedled into flames");
                 }
             }
         } FOR_ALL_THINGS_END()

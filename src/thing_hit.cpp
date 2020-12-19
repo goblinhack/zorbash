@@ -117,7 +117,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 
             if (real_hitter->is_fire() ||
                 real_hitter->is_lava()) {
-                if (set_on_fire()) {
+                if (set_on_fire("hit by fire")) {
                     MINICON("%%fg=red$You are literally ON FIRE!%%fg=reset$");
                 }
             }
@@ -138,7 +138,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
-            set_on_fire();
+            set_on_fire("hit by fire or lava");
         }
         add_enemy(real_hitter);
     }

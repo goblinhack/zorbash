@@ -150,8 +150,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     out << bits(my.t->z_depth);
     uint8_t dir = my.t->dir; out << bits(dir);
 
-    uint64_t bits64 = 0;
-    int shift = 0;
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
@@ -159,6 +157,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
+    uint64_t bits64 = 0;
+    int shift = 0;
     /* uint64_t */ bits64 |= my.t->has_ever_moved        << shift; shift++;
     /* uint64_t */ bits64 |= my.t->has_external_particle << shift; shift++;
     /* uint64_t */ bits64 |= my.t->has_internal_particle << shift; shift++;
@@ -189,6 +189,51 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_waiting_to_descend << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_fall    << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_the_grid           << shift; shift++;
+    if (shift >= (int)(sizeof(bits64) * 8)) {
+        ERR("ran out of bits in serialization");
+    }
+    out << bits(bits64);
+
+    bits64 = 0;
+    shift = 0;
+    /* uint64_t */ bits64 |= my.t->i_set_is_acid                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_blood                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_chasm                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_corpse                 << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_corridor               << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_deep_water             << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_dirt                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_door                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_entrance               << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_exit                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_fire                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_floor                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_food                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_generator              << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_gold                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_hazard                 << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_item_class_a           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_item_class_b           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_key                    << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_lava                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_light_blocker          << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_monst                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_movement_blocking_hard << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_movement_blocking_soft << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_potion                 << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_ripple                 << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_rock                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_secret_door            << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_smoke                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_torch                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_treasure               << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_wall                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_water                  << shift; shift++;
+    if (shift >= (int)(sizeof(bits64) * 8)) {
+        ERR("ran out of bits in serialization");
+    }
+    out << bits(bits64);
+
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -196,10 +241,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
-    if (shift >= (int)(sizeof(bits64) * 8)) {
-        ERR("ran out of bits in serialization");
-    }
-    out << bits(bits64);
 
     WRITE_MAGIC(THING_MAGIC_END);
 

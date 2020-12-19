@@ -18,7 +18,7 @@ bool Thing::open_door (Thingp it)
             if (is_player()) {
                 MINICON("The door is ablaze!");
             }
-            it->set_on_fire();
+            it->set_on_fire("opened flaming door");
         }
     }
 

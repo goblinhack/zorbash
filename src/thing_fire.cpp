@@ -31,6 +31,10 @@ void Thing::fire_tick (void)
         return;
     }
 
+    if (level->is_fire(at.x, at.y)) {
+        log("fire at %d,%d", (int)at.x, (int)at.y);
+    }
+
     bool hit = false;
 
     if (is_on_fire()) {
@@ -69,7 +73,7 @@ void Thing::fire_tick (void)
                     MINICON("%%fg=red$You dodge the flames");
                 }
             } else if ((int)random_range(0, 100) < 20) {
-                if (set_on_fire()) {
+                if (set_on_fire("stepped into fire")) {
                     MINICON("%%fg=red$The flames wrap around you!%%fg=reset$");
                 }
             }

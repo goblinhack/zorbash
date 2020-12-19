@@ -29,13 +29,13 @@ void Thing::unset_on_fire (void)
     }
 }
 
-bool Thing::set_on_fire (void)
+bool Thing::set_on_fire (const std::string &why)
 {_
     if (get_on_fire_anim_id().ok()) {
         return (false);
     }
 
-    log("set on fire");
+    log("set on fire, %s", why.c_str());
     auto on_fire_anim = level->thing_new("fire", this);
     set_on_fire_anim_id(on_fire_anim->id);
     on_fire_anim->set_owner(this);

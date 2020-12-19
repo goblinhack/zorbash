@@ -41,7 +41,9 @@ void decr(std::array<TYPE,XDIM>& container, std::size_t X, TYPE v) {
 #ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(X,<,container.size())
 #endif
-    container[X] -= v;
+    if (container[X]) {
+        container[X] -= v;
+    }
 }
 
 template<class TYPE, std::size_t XDIM>
@@ -190,7 +192,9 @@ void decr(std::array<std::array<TYPE,YDIM>,XDIM>& container,
 #ifdef ENABLE_BOUNDS_CHECKS
     ASSERT_EX(Y,<,container[X].size())
 #endif
-    container[X][Y] -= v;
+    if (container[X][Y]) {
+        container[X][Y] -= v;
+    }
 }
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
