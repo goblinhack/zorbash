@@ -229,8 +229,9 @@ public:
     uint64_t i_set_is_generator              {};
     uint64_t i_set_is_gold                   {};
     uint64_t i_set_is_hazard                 {};
-    uint64_t i_set_is_item_class_a           {};
-    uint64_t i_set_is_item_class_b           {};
+    uint64_t i_set_is_treasure_class_a       {};
+    uint64_t i_set_is_treasure_class_b       {};
+    uint64_t i_set_is_treasure_class_c       {};
     uint64_t i_set_is_key                    {};
     uint64_t i_set_is_lava                   {};
     uint64_t i_set_is_light_blocker          {};
@@ -1006,8 +1007,8 @@ public:
     int is_intelligent(void) const;
     int is_interesting(void) const;
     int is_item(void) const;
-    int is_item_class_a(void) const;
-    int is_item_class_b(void) const;
+    int is_treasure_class_a(void) const;
+    int is_treasure_class_b(void) const;
     int is_item_collected_as_gold(void) const;
     int is_item_eater(void) const;
     int is_item_not_stackable(void) const;
@@ -1089,7 +1090,7 @@ public:
     int is_rrr51(void) const;
     int is_rrr52(void) const;
     int is_rrr53(void) const;
-    int is_rrr54(void) const;
+    int is_treasure_class_c(void) const;
     int bag_item_height(void) const;
     bool bag_contains(Thingp item);
     int bag_item_width(void) const;

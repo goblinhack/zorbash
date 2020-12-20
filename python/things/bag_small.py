@@ -21,7 +21,7 @@ def potion_init(name, text_name):
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_is_item_class_a(True)
+    x.set_is_treasure_class_a(True)
     x.set_is_item_not_stackable(True)
     x.set_is_movable(True)
     x.set_is_shown_on_leftbar(True)

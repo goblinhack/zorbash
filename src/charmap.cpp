@@ -131,20 +131,20 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_deep_water        = true;
 
-    char_index              = Charmap::TREASURE;
+    char_index              = Charmap::TREASURE_CLASS_A;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_treasure          = true;
+    c->is_treasure_class_a  = true;
 
-    char_index              = Charmap::ITEM_CLASS_A;
+    char_index              = Charmap::TREASURE_CLASS_B;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_item_class_a      = true;
+    c->is_treasure_class_b  = true;
 
-    char_index              = Charmap::ITEM_CLASS_B;
+    char_index              = Charmap::TREASURE_CLASS_C;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_item_class_b      = true;
+    c->is_treasure_class_c  = true;
 
     char_index              = Charmap::MONST;
     c = &all_charmaps[char_index];

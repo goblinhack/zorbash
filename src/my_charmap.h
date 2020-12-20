@@ -30,8 +30,9 @@ public:
         FOOD            = 'f',
         GENERATOR       = '%',
         GOLD            = 'g',
-        ITEM_CLASS_A    = 'i',
-        ITEM_CLASS_B    = 'I',
+        TREASURE_CLASS_A = '$',
+        TREASURE_CLASS_B = '2',
+        TREASURE_CLASS_C = '3',
         KEY             = 'k',
         LAVA            = 'L',
         MONST           = 'm',
@@ -42,7 +43,6 @@ public:
         SECRET_DOOR     = 's',
         SPACE           = ' ',
         TRAP            = 't',
-        TREASURE        = '$',
         WALL            = 'x',
         WATER           = 'w',
     };
@@ -64,15 +64,15 @@ public:
     bool                      is_key               {false};
     bool                      is_lava              {false};
     bool                      is_monst             {false};
-    bool                      is_item_class_a      {false};
-    bool                      is_item_class_b      {false};
+    bool                      is_treasure_class_a  {false};
+    bool                      is_treasure_class_b  {false};
+    bool                      is_treasure_class_c  {false};
     bool                      is_potion            {false};
     bool                      is_rock              {false};
     bool                      is_secret_corridor   {false};
     bool                      is_secret_door       {false};
     bool                      is_torch             {false};
     bool                      is_trap              {false};
-    bool                      is_treasure          {false};
     bool                      is_wall              {false};
     bool                      is_wall_deco         {false};
     bool                      is_water             {false};

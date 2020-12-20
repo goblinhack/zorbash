@@ -17,7 +17,7 @@ def gold_init(name, text_name):
     x.set_is_gold(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_is_item_class_b(True)
+    x.set_is_treasure_class_a(True)
     x.set_is_item_collected_as_gold(True)
     x.set_is_light_strength(1)
     x.set_is_movable(True)

@@ -235,10 +235,12 @@ void Thing::level_push (void)
                                                    level->set_is_gold(mx, my); }
     if (is_hazard())                             { i_set_is_hazard = true;
                                                    level->set_is_hazard(mx, my); }
-    if (is_item_class_a())                       { i_set_is_item_class_a = true;
-                                                   level->set_is_item_class_a(mx, my); }
-    if (is_item_class_b())                       { i_set_is_item_class_b = true;
-                                                   level->set_is_item_class_b(mx, my); }
+    if (is_treasure_class_a())                   { i_set_is_treasure_class_a = true;
+                                                   level->set_is_treasure_class_a(mx, my); }
+    if (is_treasure_class_b())                   { i_set_is_treasure_class_b = true;
+                                                   level->set_is_treasure_class_b(mx, my); }
+    if (is_treasure_class_c())                   { i_set_is_treasure_class_c = true;
+                                                   level->set_is_treasure_class_c(mx, my); }
     if (is_key())                                { i_set_is_key = true;
                                                    level->set_is_key(mx, my); }
     if (is_lava())                               { i_set_is_lava = true;
@@ -324,10 +326,12 @@ void Thing::level_pop (void)
                                                          level->unset_is_gold(mx, my); }
     if (i_set_is_hazard)                               { i_set_is_hazard = false;
                                                          level->unset_is_hazard(mx, my); }
-    if (i_set_is_item_class_a)                         { i_set_is_item_class_a = false;
-                                                         level->unset_is_item_class_a(mx, my); }
-    if (i_set_is_item_class_b)                         { i_set_is_item_class_b = false;
-                                                         level->unset_is_item_class_b(mx, my); }
+    if (i_set_is_treasure_class_a)                     { i_set_is_treasure_class_a = false;
+                                                         level->unset_is_treasure_class_a(mx, my); }
+    if (i_set_is_treasure_class_b)                     { i_set_is_treasure_class_b = false;
+                                                         level->unset_is_treasure_class_b(mx, my); }
+    if (i_set_is_treasure_class_c)                     { i_set_is_treasure_class_c = false;
+                                                         level->unset_is_treasure_class_c(mx, my); }
     if (i_set_is_key)                                  { i_set_is_key = false;
                                                          level->unset_is_key(mx, my); }
     if (i_set_is_lava)                                 { i_set_is_lava = false;
