@@ -162,8 +162,8 @@ private:
     int _is_intelligent {};
     int _is_interesting {}; // e.g. something edible or a monst or lava
     int _is_item {};
-    int _is_item_class_a {};
-    int _is_item_class_b {};
+    int _is_treasure_class_a {};
+    int _is_treasure_class_b {};
     int _is_item_collected_as_gold {};
     int _is_item_eater {};
     int _is_item_not_stackable {};
@@ -250,7 +250,7 @@ private:
     int _is_rrr51 {};
     int _is_rrr52 {};
     int _is_rrr53 {};
-    int _is_rrr54 {};
+    int _is_treasure_class_c {};
     int _bag_item_height {};
     int _bag_item_width {};
     int _bag_height {};
@@ -514,8 +514,8 @@ public:
     int is_hunger_insatiable(void) const;
     int is_intelligent(void) const;
     int is_interesting(void) const;
-    int is_item_class_a(void) const;
-    int is_item_class_b(void) const;
+    int is_treasure_class_a(void) const;
+    int is_treasure_class_b(void) const;
     int is_item_eater(void) const;
     int is_shown_on_leftbar(void) const;
     int is_jumper(void) const;
@@ -597,7 +597,7 @@ public:
     int is_rrr51(void) const;
     int is_rrr52(void) const;
     int is_rrr53(void) const;
-    int is_rrr54(void) const;
+    int is_treasure_class_c(void) const;
     int bag_item_height(void) const;
     int bag_item_width(void) const;
     int bag_height(void) const;
@@ -755,8 +755,8 @@ public:
     void set_is_hunger_insatiable(int);
     void set_is_intelligent(int);
     void set_is_interesting(int);
-    void set_is_item_class_a(int);
-    void set_is_item_class_b(int);
+    void set_is_treasure_class_a(int);
+    void set_is_treasure_class_b(int);
     void set_is_item_eater(int);
     void set_is_shown_on_leftbar(int);
     void set_is_jumper(int);
@@ -839,7 +839,7 @@ public:
     void set_is_rrr51(int);
     void set_is_rrr52(int);
     void set_is_rrr53(int);
-    void set_is_rrr54(int);
+    void set_is_treasure_class_c(int);
     void set_bag_item_height(int);
     void set_bag_item_width(int);
     void set_bag_height(int);
@@ -953,6 +953,7 @@ Tpp tp_random_generator(void);
 Tpp tp_random_gold(void);
 Tpp tp_random_item_class_a(void);
 Tpp tp_random_item_class_b(void);
+Tpp tp_random_item_class_c(void);
 Tpp tp_random_key(void);
 Tpp tp_random_monst(void);
 Tpp tp_random_potion(void);

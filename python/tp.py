@@ -338,8 +338,8 @@ class Tp:
     def set_is_rrr53(self, value):
         zx.tp_set_is_rrr53(self, value)
 
-    def set_is_rrr54(self, value):
-        zx.tp_set_is_rrr54(self, value)
+    def set_is_treasure_class_c(self, value):
+        zx.tp_set_is_treasure_class_c(self, value)
 
     def set_bag_item_height(self, value):
         zx.tp_set_bag_item_height(self, value)
@@ -386,8 +386,8 @@ class Tp:
     def set_is_attackable_by_player(self, value):
         zx.tp_set_is_attackable_by_player(self, value)
 
-    def set_is_item_class_b(self, value):
-        zx.tp_set_is_item_class_b(self, value)
+    def set_is_treasure_class_b(self, value):
+        zx.tp_set_is_treasure_class_b(self, value)
 
     def set_is_item_eater(self, value):
         zx.tp_set_is_item_eater(self, value)
@@ -440,8 +440,8 @@ class Tp:
     def set_is_item_not_stackable(self, value):
         zx.tp_set_is_item_not_stackable(self, value)
 
-    def set_is_item_class_a(self, value):
-        zx.tp_set_is_item_class_a(self, value)
+    def set_is_treasure_class_a(self, value):
+        zx.tp_set_is_treasure_class_a(self, value)
 
     def set_is_bag(self, value):
         zx.tp_set_is_bag(self, value)

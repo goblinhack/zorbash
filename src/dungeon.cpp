@@ -845,14 +845,16 @@ bool Dungeon::is_treasure (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_treasure) {
+        if ((v.is_treasure_class_a) ||
+            (v.is_treasure_class_b) ||
+            (v.is_treasure_class_c)) {
             return true;
         }
     }
     return false;
 }
 
-bool Dungeon::is_item_class_a (const int x, const int y)
+bool Dungeon::is_treasure_class_a (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -862,14 +864,14 @@ bool Dungeon::is_item_class_a (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_item_class_a) {
+        if (v.is_treasure_class_a) {
             return true;
         }
     }
     return false;
 }
 
-bool Dungeon::is_item_class_b (const int x, const int y)
+bool Dungeon::is_treasure_class_b (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -879,7 +881,24 @@ bool Dungeon::is_item_class_b (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_item_class_b) {
+        if (v.is_treasure_class_b) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Dungeon::is_treasure_class_c (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_treasure_class_c) {
             return true;
         }
     }

@@ -212,8 +212,9 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_generator              << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_gold                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_hazard                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_item_class_a           << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_item_class_b           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_a       << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_b       << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_c       << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_key                    << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_lava                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_light_blocker          << shift; shift++;
@@ -287,11 +288,12 @@ std::ostream& operator<<(std::ostream &out,
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};           */ out << bits(my.t->_is_generator);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};                */ out << bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};              */ out << bits(my.t->_is_hazard);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_a {};        */ out << bits(my.t->_is_item_class_a);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_item_class_a {};        */ out << bits(my.t->_is_item_class_b);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};    */ out << bits(my.t->_is_treasure_class_a);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};    */ out << bits(my.t->_is_treasure_class_b);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};    */ out << bits(my.t->_is_treasure_class_c);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};                 */ out << bits(my.t->_is_key);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};                */ out << bits(my.t->_is_lava);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};                    */ out << bits(my.t->_is_lit);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};                 */ out << bits(my.t->_is_lit);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};               */ out << bits(my.t->_is_monst);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};              */ out << bits(my.t->_is_potion);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};              */ out << bits(my.t->_is_ripple);

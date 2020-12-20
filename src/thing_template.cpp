@@ -35,6 +35,7 @@ static Tpidmap tp_torch;
 static Tpidmap tp_treasure;
 static Tpidmap tp_item_class_a;
 static Tpidmap tp_item_class_b;
+static Tpidmap tp_item_class_c;
 static Tpidmap tp_wall;
 static Tpidmap tp_wall_deco;
 
@@ -121,8 +122,9 @@ void tp_init_after_loading (void)
         if (tp->is_food())           { tp_food.push_back(tp); }
         if (tp->is_generator())      { tp_generator.push_back(tp); }
         if (tp->is_gold())           { tp_gold.push_back(tp); }
-        if (tp->is_item_class_a())   { tp_item_class_a.push_back(tp); }
-        if (tp->is_item_class_b())   { tp_item_class_b.push_back(tp); }
+        if (tp->is_treasure_class_a())   { tp_item_class_a.push_back(tp); }
+        if (tp->is_treasure_class_b())   { tp_item_class_b.push_back(tp); }
+        if (tp->is_treasure_class_c())   { tp_item_class_c.push_back(tp); }
         if (tp->is_key())            { tp_key.push_back(tp); }
         if (tp->is_monst())          { tp_monst.push_back(tp); }
         if (tp->is_potion())         { tp_potion.push_back(tp); }
@@ -237,6 +239,15 @@ Tpp tp_random_item_class_b (void)
         return (nullptr);
     }
     return tp_get_with_rarity_filter(tp_item_class_b);
+}
+
+Tpp tp_random_item_class_c (void)
+{_
+    if (unlikely(!tp_item_class_c.size())) {
+        ERR("no item_class_c found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_item_class_c);
 }
 
 Tpp tp_random_dirt (void)

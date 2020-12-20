@@ -18,7 +18,7 @@ def potion_init(name, text_name):
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_is_item_class_b(True)
+    x.set_is_treasure_class_c(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)

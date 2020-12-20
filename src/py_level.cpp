@@ -70,13 +70,13 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_key          ||
                            m.is_lava         ||
                            m.is_monst        ||
-                           m.is_item_class_a ||
-                           m.is_item_class_b ||
+                           m.is_treasure_class_a ||
+                           m.is_treasure_class_b ||
+                           m.is_treasure_class_c ||
                            m.is_potion       ||
                            m.is_secret_door  ||
                            m.is_torch        ||
                            m.is_trap         ||
-                           m.is_treasure     ||
                            m.is_water        ||
                            m.is_floor_deco) {
                     floor_string += Charmap::FLOOR;
@@ -122,12 +122,12 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_gold         ||
                     m.is_key          ||
                     m.is_monst        ||
-                    m.is_item_class_a ||
-                    m.is_item_class_b ||
+                    m.is_treasure_class_a ||
+                    m.is_treasure_class_b ||
+                    m.is_treasure_class_c ||
                     m.is_potion       ||
                     m.is_torch        ||
                     m.is_trap         ||
-                    m.is_treasure     ||
                     m.is_wall_deco) {
                     obj_strings += c;
                 } else {

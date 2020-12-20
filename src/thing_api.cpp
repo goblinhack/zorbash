@@ -750,9 +750,9 @@ int Thing::is_rrr53(void) const
     return (tp()->is_rrr53());
 }
 
-int Thing::is_rrr54(void) const
+int Thing::is_treasure_class_c(void) const
 {_
-    return (tp()->is_rrr54());
+    return (tp()->is_treasure_class_c());
 }
 
 int Thing::bag_item_height(void) const
@@ -910,14 +910,14 @@ int Thing::is_item_not_stackable(void) const
     return (tp()->is_item_not_stackable());
 }
 
-int Thing::is_item_class_a(void) const
+int Thing::is_treasure_class_a(void) const
 {_
-    return (tp()->is_item_class_a());
+    return (tp()->is_treasure_class_a());
 }
 
-int Thing::is_item_class_b(void) const
+int Thing::is_treasure_class_b(void) const
 {_
-    return (tp()->is_item_class_b());
+    return (tp()->is_treasure_class_b());
 }
 
 int Thing::is_bag(void) const
