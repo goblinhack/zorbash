@@ -178,35 +178,35 @@ static void wid_inventory_create (void)
 
         std::vector<Widp> wid_inventory_items;
 
-        for (auto i = 0U, y = 0U; i < inventory_items; i++) {
-            auto tp_id = monstp->inventory_id[i];
-            if (tp_id) {
-                auto tpp = tp_find(tp_id);
-                auto tiles = &tpp->tiles;
-
-                if (tiles) {
-                    auto tile = tile_first(tiles);
-                    if (tile) {
-                        auto s = "inventory icon" + std::to_string(i);
-                        auto w = wid_new_square_button(wid_inventory_window, s);
-                        point tl = make_point(0, y);
-                        point br = make_point(0, y);
-
-                        wid_set_pos(w, tl, br);
-
-                        wid_set_fg_tile(w, tile);
-                    }
-                }
-            }
-
-            y++;
-        }
-
-        for (auto i = 0U, y = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
+        uint8_t item = 0;
+        uint8_t y = 0;
+        for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
             //
             // slot number
             //
             auto slot(std::to_string(i));
+
+            if (item < monstp->inventory_id.size()) {
+                auto tp_id = get(monstp->inventory_id, item);
+                if (tp_id) {
+                    auto tpp = tp_find(tp_id);
+                    auto tiles = &tpp->tiles;
+
+                    if (tiles) {
+                        auto tile = tile_first(tiles);
+                        if (tile) {
+                            auto s = "inventory icon" + std::to_string(i);
+                            auto w = wid_new_square_button(wid_inventory_window, s);
+                            point tl = make_point(0, y);
+                            point br = make_point(0, y);
+
+                            wid_set_pos(w, tl, br);
+
+                            wid_set_fg_tile(w, tile);
+                        }
+                    }
+                }
+            }
 
             {
                 auto name = "inventory slot" + slot;
@@ -215,11 +215,11 @@ static void wid_inventory_create (void)
                 point br = make_point(1, y);
                 wid_set_pos(w, tl, br);
                 wid_set_color(w, WID_COLOR_TEXT_FG, GRAY40);
-                wid_set_text(w, std::to_string(y));
+                wid_set_text(w, std::to_string(item));
             }
 
             {
-                if (y < inventory_items) {
+                if (item < inventory_items) {
                     auto w = wid_new_square_button(wid_inventory_window, "inventory item");
                     wid_inventory_items.push_back(w);
                     point tl = make_point(3, y);
@@ -252,10 +252,11 @@ static void wid_inventory_create (void)
             }
 
             {
-                if (y < inventory_items) {
+                if (item < inventory_items) {
                     auto count = player->inventory_id_slot_count(i);
                     if (count > 1) {
-                        auto w = wid_new_square_button(wid_inventory_window, "inventory count");
+                        auto w = wid_new_square_button(wid_inventory_window, 
+                                                       "inventory count");
                         point tl = make_point(UI_SIDEBAR_RIGHT_WIDTH - 2, y);
                         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y);
                         wid_set_pos(w, tl, br);
@@ -268,7 +269,7 @@ static void wid_inventory_create (void)
             auto weapon = player->weapon_get();
             if (weapon) {
                 auto weapon_tp_id = weapon->tp()->id;
-                if (y < inventory_items) {
+                if (item < inventory_items) {
                     auto tp_id = monstp->inventory_id[i];
                     if (tp_id == weapon_tp_id) {
                         auto w = wid_new_square_button(wid_inventory_window, "inventory weapon");
@@ -281,11 +282,26 @@ static void wid_inventory_create (void)
                             tile = tile_find_mand("right-hand");
                         }
                         wid_set_fg_tile(w, tile);
+
+                        y++;
+
+                        {
+                            auto w = wid_new_square_button(wid_inventory_window, 
+                                                           "wid wielded");
+                            point tl = make_point(1, y);
+                            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y);
+                            wid_set_pos(w, tl, br);
+                            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY40);
+                            wid_set_text(w, "(wielded)");
+                            wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
+                            wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
+                            wid_set_int_context(w, i);
+                        }
                     }
                 }
             }
-
             y++;
+            item++;
         }
 
         wid_update(wid_inventory_window);

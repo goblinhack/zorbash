@@ -9,7 +9,7 @@ def init_swing(name):
     x.set_collision_check(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
-    x.set_collision_radius(0.50)
+    x.set_collision_radius(0.40)
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_animated_can_vflip(True)
@@ -110,8 +110,9 @@ def init_weapon(name, text_name):
     x.set_is_weapon(True)
     x.set_stats_attack_dice("1d10+1")
     x.set_text_a_or_an("a");
-    x.set_text_description("Thy pointy means of justice")
-    x.set_weapon_carry_anim("sword1_carry")
+    x.set_text_description("Thy choppy means of justice")
+    x.set_long_text_description("A gleaming axe. It's edge is hungry.")
+    x.set_weapon_carry_anim("axe1_carry")
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
@@ -122,8 +123,8 @@ def init_weapon(name, text_name):
     x.update()
 
 def init():
-    init_swing(name="sword1_swing")
-    init_carry(name="sword1_carry")
-    init_weapon(name="sword1", text_name="sword")
+    init_swing(name="axe1_swing")
+    init_carry(name="axe1_carry")
+    init_weapon(name="axe1", text_name="axe")
 
 init()

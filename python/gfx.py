@@ -374,7 +374,7 @@ def init_tiles1():
       "food_frog1",
       "bag_small",
       "sword1.1",
-      "",
+      "axe1.1",
       "",
       "",
       "",
@@ -3184,6 +3184,27 @@ def init_weapons_tiles():
       "sword1_swing_up.4",
       "sword1_swing_up.5",
       "sword1_swing_up.6",
+      ###########################################################################
+      "",
+      "axe1_carry.1",
+      "axe1_carry.2",
+      "axe1_swing_left.1",
+      "axe1_swing_left.2",
+      "axe1_swing_left.3",
+      "axe1_swing_left.4",
+      "axe1_swing_left.5",
+      "axe1_swing_left.6",
+      ###########################################################################
+      "",
+      "",
+      "",
+      "axe1_swing_up.1",
+      "axe1_swing_up.2",
+      "axe1_swing_up.3",
+      "axe1_swing_up.4",
+      "axe1_swing_up.5",
+      "axe1_swing_up.6",
+      ###########################################################################
     ]
 
     zx.tile_load_arr_sprites(
