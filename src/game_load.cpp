@@ -104,6 +104,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* point        bag_position              */ in >> bits(my.t->bag_position);
     /* point        wander_target             */ in >> bits(my.t->wander_target);
     /* point     where_i_dropped_an_item_last */ in >> bits(my.t->where_i_dropped_an_item_last);
+    /* point   where_i_failed_to_collect_last */ in >> bits(my.t->where_i_failed_to_collect_last);
     /* std::list<ThingId>   carrying          */ in >> bits(my.t->carrying);
     /* std::string          msg               */ in >> bits(my.t->msg);
     /* std::vector<ThingId> inventory_id      */ in >> bits(my.t->inventory_id);
