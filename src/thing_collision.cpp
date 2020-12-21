@@ -714,7 +714,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
             return (things_tile_overlap(A, B));
         }
         return false;
-    }
+    
 
     if (!tp_collision_circle(A->tp) &&
          tp_collision_circle(B->tp)) {
@@ -731,6 +731,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
     }
 
 #endif
+
     if (A->tp()->collision_circle() &&
         B->tp()->collision_circle()) {
         if (circle_circle_collision(A, // circle
@@ -1027,6 +1028,12 @@ _
             log("no; can attack but no overlap");
         }
     } else if (can_eat(it)) {
+        if (get_where_i_failed_to_collect_last() == make_point(it->mid_at)) {
+            log("no; tried to collect previously");
+	    set_where_i_failed_to_collect_last(point(-1, -1));
+            return false;
+        }
+
         if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
             log("no; can eat but was seen previously");
             return false;
@@ -1034,10 +1041,7 @@ _
 
         if (things_overlap(me, me->mid_at, it)) {
             log("yes; can eat and overlaps");
-            //
-            // If can't carry, we don't want to block
-            //
-            return false;
+            return true;
         } else {
             log("yes; no can eat but no overlap");
         }

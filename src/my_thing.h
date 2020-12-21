@@ -110,6 +110,7 @@ public:
     point        bag_position;
     point        wander_target;
     point        where_i_dropped_an_item_last;
+    point        where_i_failed_to_collect_last;
     std::list<ThingId>   carrying;
     std::string          msg;                // Text that floats on screen
     std::vector<uint16_t> inventory_id;      // Vector of tp_id
@@ -742,6 +743,8 @@ public:
 
     point set_where_i_dropped_an_item_last(point);
     point get_where_i_dropped_an_item_last(void) const;
+    point set_where_i_failed_to_collect_last(point);
+    point get_where_i_failed_to_collect_last(void) const;
 
     ThingId set_on_fire_anim_id(ThingId);
     ThingId get_on_fire_anim_id(void) const;

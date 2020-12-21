@@ -143,6 +143,7 @@ void Thing::level_enter (void)
 
     if (is_player() || is_monst()) {
         set_where_i_dropped_an_item_last(point(-1, -1));
+        set_where_i_failed_to_collect_last(point(-1, -1));
     }
 
     //

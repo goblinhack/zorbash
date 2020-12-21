@@ -127,6 +127,8 @@ bool Thing::move (fpoint future_pos,
             }
         }
 
+        set_where_i_failed_to_collect_last(point(-1, -1));
+
         if (!level->map_follow_player) {
             level->map_follow_player = true;
             level->cursor_needs_update = true;

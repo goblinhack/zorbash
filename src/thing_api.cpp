@@ -3539,6 +3539,26 @@ point Thing::set_where_i_dropped_an_item_last (point v)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// where_i_failed_to_collect_last
+////////////////////////////////////////////////////////////////////////////
+point Thing::get_where_i_failed_to_collect_last (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->where_i_failed_to_collect_last);
+    } else {
+        return (point(-1, -1));
+    }
+}
+
+point Thing::set_where_i_failed_to_collect_last (point v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->where_i_failed_to_collect_last = v);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // timestamp_lunge_begin
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_lunge_begin (void) const

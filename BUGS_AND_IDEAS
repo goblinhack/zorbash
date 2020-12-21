@@ -1,6 +1,5 @@
 bugs
 ----
-- move over treasure too fast and doesn't collect
 - count > 10 is truncated
 - move item back to player and yield
 - fix count that vanishes when you click on it
