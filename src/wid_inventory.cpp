@@ -291,7 +291,7 @@ static void wid_inventory_create (void)
                             point tl = make_point(1, y);
                             point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y);
                             wid_set_pos(w, tl, br);
-                            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY40);
+                            wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
                             wid_set_text(w, "(wielded)");
                             wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
                             wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);

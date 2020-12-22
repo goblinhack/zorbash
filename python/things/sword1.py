@@ -27,7 +27,7 @@ def init_swing(name):
     x.set_text_description("Thy shining pointy mechanism of justice")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
-    delay = 20
+    delay = 10
     x.set_tile(tile=name + "_left.1", delay_ms=delay, is_dir_left=True)
     x.set_tile(tile=name + "_left.2", delay_ms=delay, is_dir_left=True)
     x.set_tile(tile=name + "_left.3", delay_ms=delay, is_dir_left=True)
@@ -90,7 +90,7 @@ def init_weapon(name, text_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
-    x.set_gfx_anim_attack("axe1_swing")
+    x.set_gfx_anim_attack("sword1_swing")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_show_outlined(True)
@@ -108,7 +108,7 @@ def init_weapon(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_treasure(True)
     x.set_is_weapon(True)
-    x.set_stats_attack_dice("1d10+1")
+    x.set_stats_attack_dice("1d8+1")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy pointy means of justice")
     x.set_weapon_carry_anim("sword1_carry")

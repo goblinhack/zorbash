@@ -426,17 +426,27 @@ bool Level::inventory_select (const uint32_t slot)
         return false;
     }
 
+    Thingp what;
+
     if (slot != game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
-        inventory_describe(slot);
+        what = inventory_describe(slot);
     } else {
-        inventory_describe(game->inventory_highlight_slot);
+        what = inventory_describe(game->inventory_highlight_slot);
+    }
+
+    if (what && what->is_weapon()) {
+        player->wield(what);
     }
 
     return true;
 }
 
-bool Level::inventory_describe (const uint32_t slot)
+Thingp Level::inventory_describe (const uint32_t slot)
 {_
-    return (inventory_get(game->inventory_highlight_slot));
+    auto what = inventory_get(game->inventory_highlight_slot);
+    if (what) {
+        what->describe();
+    }
+    return what;
 }

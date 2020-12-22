@@ -1747,7 +1747,7 @@ public:
     Thingp thing_new(const std::string& tp_name, Thingp owner);
     Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
     Thingp thing_new(const std::string& tp_name, const point at);
-    bool inventory_describe(const uint32_t slot);
+    Thingp inventory_describe(const uint32_t slot);
     bool inventory_select(const uint32_t slot);
     const char *to_cstring(void);
     std::string to_string(void);
