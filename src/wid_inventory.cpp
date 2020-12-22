@@ -99,7 +99,7 @@ static uint8_t wid_inventory_mouse_down (Widp w,
                                          uint32_t button)
 {_
     BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
-    game->moving_items = false;
+    game->moving_items = true;
     wid_thing_info_fini();
     wid_destroy(&game->in_transit_item);
     wid_inventory_mouse_over_b(w, 0, 0, 0, 0);
