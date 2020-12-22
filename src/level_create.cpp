@@ -169,6 +169,9 @@ void Level::create (point3d at, int seed)
                         auto w = thing_new("sword1", fpoint(x, y));
                         t->carry(w);
 
+                        auto a = thing_new("axe1", fpoint(x, y));
+                        t->carry(a);
+
                         auto b = thing_new("bag_small", fpoint(x, y));
                         t->carry(b);
 
