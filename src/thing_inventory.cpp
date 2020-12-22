@@ -435,8 +435,18 @@ bool Level::inventory_select (const uint32_t slot)
         what = inventory_describe(game->inventory_highlight_slot);
     }
 
-    if (what && what->is_weapon()) {
+    if (!what) {
+        return false;
+    }
+
+    if (what->is_weapon()) {
         player->wield(what);
+        wid_inventory_init();
+    }
+
+    if (what->is_bag()) {
+        game->wid_thing_info_create(what);
+        game->moving_items = true;
     }
 
     return true;

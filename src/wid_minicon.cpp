@@ -132,53 +132,61 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action0) {
-        level->inventory_select(0);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(0);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action1) {
-        level->inventory_select(1);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(1);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action2) {
-        level->inventory_select(2);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(2);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action3) {
-        level->inventory_select(3);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(3);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action4) {
-        level->inventory_select(4);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(4);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action5) {
-        level->inventory_select(5);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(5);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action6) {
-        level->inventory_select(6);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(6);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action7) {
-        level->inventory_select(7);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(7);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action8) {
-        level->inventory_select(8);
         wid_inventory_init();
+        wid_thing_info_fini();
+        level->inventory_select(8);
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action9) {
         level->inventory_select(9);
-        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
