@@ -114,7 +114,6 @@ void Game::config_top_select (void)
     }
     wid_rightbar_fini();
     wid_leftbar_fini();
-    game->moving_items = false;
     wid_inventory_fini();
     wid_thing_info_fini();
 

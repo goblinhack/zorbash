@@ -5,10 +5,13 @@
 
 #include "my_game.h"
 #include "my_wid_popup.h"
+#include "my_wid_thing_info.h"
 
 void Game::soft_pause (void)
 {_
     soft_paused = true;
+
+    wid_thing_info_fini();
 }
 
 void Game::soft_unpause (void)
@@ -22,6 +25,8 @@ void Game::soft_unpause (void)
 void Game::hard_pause (void)
 {_
     hard_paused = true;
+
+    wid_thing_info_fini();
 }
 
 void Game::hard_unpause (void)

@@ -441,11 +441,11 @@ bool Level::inventory_select (const uint32_t slot)
 
     if (what->is_weapon()) {
         player->wield(what);
-        wid_inventory_init();
     }
 
     if (what->is_bag()) {
         game->wid_thing_info_create(what);
+        wid_inventory_init();
         game->moving_items = true;
     }
 
