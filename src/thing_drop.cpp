@@ -6,6 +6,8 @@
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_game.h"
+#include "my_wid_thing_info.h"
+#include "my_wid_inventory.h"
 
 bool Thing::drop (Thingp what, Thingp target)
 {_
@@ -63,6 +65,11 @@ bool Thing::drop (Thingp what, Thingp target)
     // Prevent too soon re-carry
     //
     set_where_i_dropped_an_item_last(make_point(mid_at));
+
+    if (is_player()) {
+        wid_inventory_init();
+        wid_thing_info_fini();
+    }
 
     log("dropped %s", what->to_string().c_str());
 
