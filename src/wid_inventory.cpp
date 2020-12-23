@@ -150,8 +150,8 @@ static void wid_inventory_create (void)
         {_
             auto x1 = TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH;
             auto x2 = TERM_WIDTH - 1;
-            point tl = make_point(x1, TERM_HEIGHT - 20);
-            point br = make_point(x2, TERM_HEIGHT - 11);
+            point tl = make_point(x1, TERM_HEIGHT - 22);
+            point br = make_point(x2, TERM_HEIGHT - 1);
             color c;
 
             wid_inventory_window = wid_new_square_window("inventory (bottom)");
@@ -255,13 +255,15 @@ static void wid_inventory_create (void)
                 if (item < inventory_items) {
                     auto count = player->inventory_id_slot_count(i);
                     if (count > 1) {
+                        y++;
                         auto w = wid_new_square_button(wid_inventory_window, 
                                                        "inventory count");
-                        point tl = make_point(UI_SIDEBAR_RIGHT_WIDTH - 2, y);
+                        auto text = "x" + std::to_string(count);
+                        point tl = make_point(UI_SIDEBAR_RIGHT_WIDTH - text.size(), y);
                         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y);
                         wid_set_pos(w, tl, br);
                         wid_set_color(w, WID_COLOR_TEXT_FG, LIGHTBLUE);
-                        wid_set_text(w, "x" + std::to_string(count));
+                        wid_set_text(w, text);
                     }
                 }
             }

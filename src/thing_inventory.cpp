@@ -29,7 +29,7 @@ void Thing::inventory_particle (Thingp what, uint32_t slot)
         std::string name = "gold";
         auto w = wid_find(name);
         if (!w) {
-            con("could not find wid %s", name.c_str());
+            log("could not find wid %s", name.c_str());
             return;
         }
 
@@ -57,7 +57,7 @@ void Thing::inventory_particle (Thingp what, uint32_t slot)
         std::string name = "key";
         auto w = wid_find(name);
         if (!w) {
-            con("could not find wid %s", name.c_str());
+            log("could not find wid %s", name.c_str());
             return;
         }
 
@@ -83,7 +83,7 @@ void Thing::inventory_particle (Thingp what, uint32_t slot)
         std::string name = "inventory slot" + std::to_string(slot);
         auto w = wid_find(name);
         if (!w) {
-            con("could not find wid %s", name.c_str());
+            log("could not find wid %s", name.c_str());
             return;
         }
 
@@ -128,7 +128,7 @@ void Thing::inventory_particle (Thingp what, uint32_t slot,
     std::string name = "inventory slot" + std::to_string(slot);
     auto w = wid_find(name);
     if (!w) {
-        con("could not find wid %s", name.c_str());
+        log("could not find wid %s", name.c_str());
         return;
     }
 
@@ -247,7 +247,7 @@ bool Thing::inventory_id_remove (Thingp what)
             inventory_particle(what, i, this);
 
             auto cnt = inventory_id_slot_count(i);
-            log("remove slot %d, count %d", cnt, i);
+            log("remove slot %d, count %d", i, cnt);
             if (cnt > 1) {_
                 log("decrement slot count");
             } else {_
@@ -306,12 +306,9 @@ bool Thing::inventory_id_remove (Thingp what, Thingp particle_target)
             }
 
             auto cnt = inventory_id_slot_count(i);
-            log("remove slot %d, count %d", cnt, i);
+            log("remove slot %d, count %d", i, cnt);
             if (cnt > 1) {_
                 log("decrement slot count");
-                wid_inventory_init();
-                wid_thing_info_fini();
-                return true;
             } else {_
                 log("remove slot");
                 monstp->inventory_id.erase(monstp->inventory_id.begin() + i);
