@@ -30,6 +30,8 @@ void wid_thing_info_fini (void)
 
     delete wid_thing_info_window;
     wid_thing_info_window = nullptr;
+
+    game->moving_items = false;
 }
 
 uint8_t wid_thing_info_init (void)

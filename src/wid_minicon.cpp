@@ -97,7 +97,6 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
 
     if (game->moving_items) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
-            game->moving_items = false;
             wid_thing_info_fini();
             wid_inventory_init();
             wid_destroy(&game->in_transit_item);
@@ -106,18 +105,19 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_load) {
+        wid_thing_info_fini(); // To remove bag or other info
         CON("USERCFG: loading game");
         game->load_select();
         return true;
     }
-
     if (key->scancode == (SDL_Scancode)game->config.key_save) {
+        wid_thing_info_fini(); // To remove bag or other info
         CON("USERCFG: saving the game");
         game->save_select();
         return true;
     }
-
     if (key->scancode == (SDL_Scancode)game->config.key_pause) {
+        wid_thing_info_fini(); // To remove bag or other info
         MINICON("Pausing the game");
         CON("USERCFG: pausing the game");
         game->pause_select();
@@ -132,61 +132,63 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action0) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(0);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action1) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(1);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action2) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(2);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action3) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(3);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action4) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(4);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action5) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(5);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action6) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(6);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action7) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(7);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action8) {
-        wid_inventory_init();
-        wid_thing_info_fini();
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(8);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+        wid_thing_info_fini(); // To remove bag or other info
         level->inventory_select(9);
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
