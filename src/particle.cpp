@@ -84,6 +84,13 @@ void Level::display_internal_particles (void)
     auto e = std::remove_if(all_internal_particles.begin(),
                             all_internal_particles.end(),
         [=, this] (Particle &p) {
+            //
+            // Different curve height for each particle
+            //
+            if (!p.height) {
+                p.height = random_range(30, 50);
+            }
+
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
             if (dt > 1) {
@@ -111,7 +118,7 @@ void Level::display_internal_particles (void)
             point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
             point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-            int oy = sin(RAD_180 * dt) * 32;
+            int oy = sin(RAD_180 * dt) * p.height;
 
             blit_tl.y -= oy;
             blit_br.y -= oy;
@@ -243,6 +250,13 @@ void Level::display_external_particles (void)
     auto e = std::remove_if(all_external_particles.begin(),
                             all_external_particles.end(),
         [=, this] (Particle &p) {
+            //
+            // Different curve height for each particle
+            //
+            if (!p.height) {
+                p.height = random_range(30, 50);
+            }
+
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
             if (dt > 1) {
@@ -271,7 +285,7 @@ void Level::display_external_particles (void)
             point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
             point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-            int oy = sin(RAD_180 * dt) * 32;
+            int oy = sin(RAD_180 * dt) * p.height;
 
             blit_tl.y -= oy;
             blit_br.y -= oy;

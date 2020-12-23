@@ -1868,9 +1868,12 @@ static void wid_destroy_immediate_internal (Widp w)
         wid_focus_locked = nullptr;
     }
 
-    if (wid_over == w) {
-        wid_m_over_e();
-    }
+    //
+    // This can easily lead to recursion. Do we need it?
+    //
+    // if (wid_over == w) {
+    //     wid_m_over_e();
+    // }
 
     if (wid_moving == w) {
         wid_mouse_motion_end();
@@ -1994,9 +1997,12 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         wid_mfocus_end();
     }
 
-    if (wid_over == w) {
-        wid_m_over_e();
-    }
+    //
+    // This can easily lead to recursion. Do we need it?
+    //
+    // if (wid_over == w) {
+    //     wid_m_over_e();
+    // }
 
     if (wid_moving == w) {
         wid_mouse_motion_end();

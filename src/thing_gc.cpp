@@ -13,6 +13,12 @@
 
 void Level::things_gc (void)
 {_
+    if (all_gc_things.empty()) {
+        return;
+    }
+
+    log("begin garbage collection");
+_
     for (;;) {
         auto i = all_gc_things.begin();
         if (i == all_gc_things.end()) {

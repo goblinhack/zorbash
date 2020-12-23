@@ -60,6 +60,7 @@ public:
     Tilep tile {};
     bool hflip {};
     bool make_visible_at_end {};
+    int height {};
 } Particle;
 
 #endif // _MY_PARTICLE_H_

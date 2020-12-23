@@ -6,6 +6,7 @@
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_game.h"
+#include "my_wid_inventory.h"
 
 bool Thing::carry (Thingp it)
 {_
@@ -77,10 +78,50 @@ _
         }
     }
 
+    if (is_player()) {
+        wid_inventory_init();
+    }
+
     return true;
 }
 
 bool Thing::try_to_carry (Thingp it)
 {_
+    log("try to carry: %s", it->to_string().c_str());
     return carry(it);
+}
+
+std::list<Thingp> Thing::anything_to_carry (void)
+{
+    std::list<Thingp> items;
+
+    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+        if (t->is_dead) {
+            continue;
+        }
+
+        if (t->is_hidden) {
+            continue;
+        }
+
+        if (t->get_owner()) {
+            continue;
+        }
+
+        if (!t->is_collectable()) {
+            continue;
+        }
+
+        log("potential item to carry: %s", t->to_string().c_str());
+        items.push_back(t);
+    } FOR_ALL_THINGS_END()
+
+    return items;
+}
+
+void Thing::try_to_carry (const std::list<Thingp> &items)
+{
+    for (auto item : items) {
+        try_to_carry(item);
+    }
 }

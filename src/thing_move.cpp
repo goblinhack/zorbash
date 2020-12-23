@@ -27,10 +27,10 @@ bool Thing::move (fpoint future_pos)
     bool left   = future_pos.x < mid_at.x;
     bool right  = future_pos.x > mid_at.x;
     bool attack = false;
-    bool idle   = false;
+    bool wait_or_collect   = false;
 
     verify(this);
-    return (move(future_pos, up, down, left, right, attack, idle, true));
+    return (move(future_pos, up, down, left, right, attack, wait_or_collect, true));
 }
 
 bool Thing::move_no_shove (fpoint future_pos)
@@ -40,10 +40,10 @@ bool Thing::move_no_shove (fpoint future_pos)
     bool left   = future_pos.x < mid_at.x;
     bool right  = future_pos.x > mid_at.x;
     bool attack = false;
-    bool idle   = false;
+    bool wait_or_collect   = false;
 
     verify(this);
-    return (move(future_pos, up, down, left, right, attack, idle, false));
+    return (move(future_pos, up, down, left, right, attack, wait_or_collect, false));
 }
 
 bool Thing::move (fpoint future_pos,
@@ -52,7 +52,7 @@ bool Thing::move (fpoint future_pos,
                   uint8_t left,
                   uint8_t right,
                   uint8_t attack,
-                  uint8_t idle,
+                  uint8_t wait_or_collect,
                   bool shove_allowed)
 {
     if (is_dead) {
@@ -72,10 +72,16 @@ bool Thing::move (fpoint future_pos,
         rest();
     }
 
-    if (idle) {
+    if (wait_or_collect) {
         if (is_player()) {
             game->tick_begin("player idled");
         }
+
+        auto items = anything_to_carry();
+        if (!items.empty()) {
+            try_to_carry(items);
+        }
+
         location_check();
         return (false);
     }
@@ -253,8 +259,10 @@ void Thing::update_interpolated_position (void)
 
 void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
 {_
-    if (is_loggable_for_unimportant_stuff()) {
-        log("update pos");
+    if (!is_hidden) {
+        if (is_loggable_for_unimportant_stuff()) {
+            log("update pos");
+        }
     }
 
     auto tpp = tp();
@@ -311,8 +319,10 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
 
     move_carried_items();
 
-    if (tpp->is_loggable_for_unimportant_stuff()) {
-        log("moved");
+    if (!is_hidden) {
+        if (tpp->is_loggable_for_unimportant_stuff()) {
+            log("moved");
+        }
     }
 }
 

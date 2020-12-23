@@ -123,7 +123,7 @@ static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t b
     bag->bag_remove(t);
     while (bag->bag_compress()) { }
 
-    t->describe();
+    t->describe_when_in_inventory();
 
     if (game->in_transit_item) {
         wid_destroy(&game->in_transit_item);
@@ -169,7 +169,7 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
     auto id = wid_get_thing_id_context(w);
     auto t = game->level->thing_find(id);
     if (t) {
-        t->describe();
+        t->describe_when_in_inventory();
     }
 }
 

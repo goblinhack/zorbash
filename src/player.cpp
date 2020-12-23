@@ -166,7 +166,7 @@ void player_tick (void)
     uint8_t jump   = 0;
 
     attack = state[game->config.key_attack] ? 1 : 0;
-    wait   = state[game->config.key_wait] ? 1 : 0;
+    wait   = state[game->config.key_wait_or_collect] ? 1 : 0;
     jump   = state[game->config.key_jump] ? 1 : 0;
 
     if (some_key_event_was_pressed) {

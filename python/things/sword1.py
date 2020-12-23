@@ -85,11 +85,6 @@ def init_carry(name):
 def init_weapon(name, text_name):
     x = tp.Tp(name, text_name)
 
-    x.set_collision_attack(True)
-    x.set_collision_check(True)
-    x.set_collision_circle(True)
-    x.set_collision_hit_priority(10)
-    x.set_collision_radius(0.40)
     x.set_gfx_anim_attack("sword1_swing")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)

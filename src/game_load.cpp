@@ -561,7 +561,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_throw                    */ in >> bits(my.t.key_throw                    );
     /* uint32_t           key_drop                     */ in >> bits(my.t.key_drop                     );
     /* uint32_t           key_use                      */ in >> bits(my.t.key_use                      );
-    /* uint32_t           key_wait                     */ in >> bits(my.t.key_wait                     );
+    /* uint32_t           key_wait_or_collect                     */ in >> bits(my.t.key_wait_or_collect                     );
     /* uint32_t           key_zoom_in                  */ in >> bits(my.t.key_zoom_in                  );
     /* uint32_t           key_zoom_out                 */ in >> bits(my.t.key_zoom_out                 );
     /* uint32_t           music_volume                 */ in >> bits(my.t.music_volume                 );

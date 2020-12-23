@@ -1241,6 +1241,8 @@ public:
     void minicon_(const char *fmt, va_list args) const; // compile error without
     void move_carried_items(void);
     void move_carried_items_immediately(void);
+    std::list<Thingp> anything_to_carry(void);
+    void try_to_carry(const std::list<Thingp> &items);
     void move_delta(fpoint);
     void move_finish(void);
     void move_set_dir_from_delta(fpoint);
@@ -1277,7 +1279,8 @@ public:
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
     bool bag_add(Thingp);
     bool bag_remove(Thingp);
-    bool describe();
+    bool describe_when_in_inventory(void);
+    bool describe_when_hovering_over(void);
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);

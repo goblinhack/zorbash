@@ -247,20 +247,26 @@ void Thing::sheath (void)
     }
 
     log("sheathing %s", weapon->tp()->name().c_str());
-
+_
     //
     // If this weapon has its own thing id for animations then destroy that.
     //
     auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
+        log("remove carry anim");
         weapon_carry_anim->dead("owner sheathed weapon, remove carry_anim");
         weapon_set_carry_anim(nullptr);
+    } else {
+        log("weapon had no carry anim");
     }
 
     auto gfx_anim_attack = weapon_get_use_anim();
     if (gfx_anim_attack) {
+        log("remove carry anim");
         gfx_anim_attack->dead("owner sheathed weapon, remove use-anim");
         weapon_set_use_anim(nullptr);
+    } else {
+        log("weapon had no use/attack anim");
     }
 }
 
@@ -270,9 +276,9 @@ void Thing::wield (Thingp weapon)
 
     if (weapon_get() == weapon) {
         log("re-wielding: %s", weapon_tp->name().c_str());
+        return;
     } else {
         log("is wielding: %s", weapon_tp->name().c_str());
-
         unwield("wield new weapon");
     }
 
