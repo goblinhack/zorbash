@@ -177,10 +177,14 @@ bool Thing::inventory_id_insert (Thingp what)
         return false;
     }
 
+    int free_slot = -1;
     auto inventory_items = player->monstp->inventory_id.size();
     for (auto i = 0U; i < inventory_items; i++) {
         auto tp_id = monstp->inventory_id[i];
         if (!tp_id) {
+            if (free_slot == -1) {
+                free_slot = i;
+            }
             continue;
         }
 
@@ -203,17 +207,26 @@ bool Thing::inventory_id_insert (Thingp what)
         }
     }
 
-    if (inventory_items >= UI_ACTIONBAR_MAX_ITEMS) {
-        MINICON("No space to carry %s which is not carried",
-                what->text_the().c_str());
-        return false;
+    int item_slot = -1;
+    if (free_slot != -1) {
+        monstp->inventory_id[free_slot] = what->tp_id;
+        item_slot = free_slot;
+    } else {
+        if (inventory_items >= UI_ACTIONBAR_MAX_ITEMS) {
+            MINICON("No space to carry %s which is not carried",
+                    what->text_the().c_str());
+            return false;
+        }
+
+
+        monstp->inventory_id.push_back(what->tp_id);
+        item_slot = monstp->inventory_id.size() - 1;
     }
 
-    monstp->inventory_id.push_back(what->tp_id);
     wid_inventory_init();
     wid_thing_info_fini();
-    inventory_particle(what, monstp->inventory_id.size() - 1);
-    level->inventory_describe(game->inventory_highlight_slot);
+    inventory_particle(what, item_slot);
+    level->inventory_describe(item_slot);
     return true;
 }
 
@@ -442,8 +455,6 @@ bool Level::inventory_select (const uint32_t slot)
 
     if (what->is_bag()) {
         game->wid_thing_info_create(what);
-        wid_inventory_init();
-        game->moving_items = true;
     }
 
     return true;
@@ -453,7 +464,7 @@ Thingp Level::inventory_describe (const uint32_t slot)
 {_
     auto what = inventory_get(game->inventory_highlight_slot);
     if (what) {
-        what->describe();
+        what->describe_when_in_inventory();
     }
     return what;
 }

@@ -192,15 +192,17 @@ void Thing::level_push (void)
 {_
     level_pop();
 
-    if (is_torch()) {
-        log("push");
-    }
-
     level->put_thing((int)mid_at.x, (int)mid_at.y, id);
     auto mx = (int16_t)(int)mid_at.x;
     auto my = (int16_t)(int)mid_at.y;
     is_attached = true;
     last_attached = point(mx, my);
+
+#if 0
+    if (tp()->gfx_weapon_carry_anim()) {
+        con("push at %d,%d", last_attached.x, last_attached.y);
+    }
+#endif
 
     if (is_acid())                               { i_set_is_acid = true;
                                                    level->set_is_acid(mx, my); }
@@ -284,13 +286,14 @@ void Thing::level_push (void)
 void Thing::level_pop (void)
 {_
     if (!is_attached) {
+#if 0
+        if (tp()->gfx_weapon_carry_anim()) {
+            con("cannot pop");
+        }
+#endif
         return;
     }
     is_attached = false;
-
-    if (is_torch()) {
-        log("pop");
-    }
 
     auto mx = (int16_t)(int)last_attached.x;
     auto my = (int16_t)(int)last_attached.y;
@@ -364,7 +367,13 @@ void Thing::level_pop (void)
     if (i_set_is_water)                                { i_set_is_water = false;
                                                          level->unset_is_water(mx, my); }
 
-    level->remove_thing((int)last_attached.x, (int)last_attached.y, id);
+#if 0
+    if (tp()->gfx_weapon_carry_anim()) {
+        con("pop at %d,%d", last_attached.x, last_attached.y);
+    }
+#endif
+
+    level->remove_thing(last_attached.x, last_attached.y, id);
 
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }
 

@@ -88,7 +88,8 @@ void Level::cursor_find_on_visible_things (
             if (t->is_on_fire()) {
                 BOTCON("%%fg=red$Burning! %s", t->text_description().c_str());
             } else {
-                BOTCON("%s", t->text_description().c_str());
+                t->describe_when_hovering_over();
+
                 if (t->tp()->long_text_description() != "") {
                     game->wid_thing_info_create(t);
                 }
@@ -112,7 +113,8 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
 
-            BOTCON("%s", t->text_description().c_str());
+            t->describe_when_hovering_over();
+
             if (t->tp()->long_text_description() != "") {
                 game->wid_thing_info_create(t);
             }
@@ -134,7 +136,8 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
 
-            BOTCON("%s", t->text_description().c_str());
+            t->describe_when_hovering_over();
+
             if (t->tp()->long_text_description() != "") {
                 game->wid_thing_info_create(t);
             }

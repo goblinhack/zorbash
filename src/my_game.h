@@ -97,7 +97,7 @@ public:
     uint32_t           key_unused4                  = 0;
     uint32_t           key_unused5                  = 0;
     uint32_t           key_use                      = {SDL_SCANCODE_U};
-    uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
+    uint32_t           key_wait_or_collect          = {SDL_SCANCODE_PERIOD};
     uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};
     uint32_t           key_zoom_out                 = {SDL_SCANCODE_X};
     uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};

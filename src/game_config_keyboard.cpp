@@ -227,10 +227,10 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
             game->config.key_use = 0;
         }
     }
-    if (game->config.key_wait) {
-        if (game->config.key_wait == code) {
+    if (game->config.key_wait_or_collect) {
+        if (game->config.key_wait_or_collect == code) {
             MINICON("%%fg=orange$Conflicting key, disabling key wait");
-            game->config.key_wait = 0;
+            game->config.key_wait_or_collect = 0;
         }
     }
     if (game->config.key_zoom_in) {
@@ -373,11 +373,11 @@ static void game_config_key_attack_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
-static void game_config_key_wait_set (SDL_Scancode code)
+static void game_config_key_wait_or_collect_set (SDL_Scancode code)
 {_
-    game->config.key_wait = 0;
+    game->config.key_wait_or_collect = 0;
     game_config_check_for_conflicts(code);
-    game->config.key_wait = code;
+    game->config.key_wait_or_collect = code;
     game->config_keyboard_select();
 }
 
@@ -680,10 +680,10 @@ uint8_t game_config_key_attack (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
-uint8_t game_config_key_wait (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_key_wait_or_collect (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
-    on_sdl_key_grab = game_config_key_wait_set;
+    on_sdl_key_grab = game_config_key_wait_or_collect_set;
     return (true);
 }
 
@@ -1271,19 +1271,19 @@ void Game::config_keyboard_select (void)
         wid_set_on_mouse_up(w, game_config_key_attack);
     }
     ///////////////////////////////////////////////////////////////////////
-    // wait
+    // wait / collect
     ///////////////////////////////////////////////////////////////////////
     y_at += 1;
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Wait");
+        auto w = wid_new_square_button(p, "Wait / collect");
 
         point tl = make_point(0, y_at);
         point br = make_point(width / 2,y_at);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Wait / pass time");
+        wid_set_text(w, "Wait / collect");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1294,8 +1294,8 @@ void Game::config_keyboard_select (void)
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_wait));
-        wid_set_on_mouse_up(w, game_config_key_wait);
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect));
+        wid_set_on_mouse_up(w, game_config_key_wait_or_collect);
     }
     ///////////////////////////////////////////////////////////////////////
     // jump
