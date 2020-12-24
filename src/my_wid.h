@@ -121,6 +121,7 @@ void wid_destroy_nodelay(Widp *);
 void wid_destroy_ptr_in(Widp *w, uint32_t ms);
 void wid_display_all(void);
 void wid_dump(Widp w, int depth);
+int wid_count(Widp w, int depth);
 void wid_fake_joy_button(int32_t x, int32_t y);
 void wid_fini(void);
 void wid_focus_lock(Widp);

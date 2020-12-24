@@ -71,7 +71,7 @@ void game_error (std::string error)
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
     auto width = br.x - tl.x;
 
-    game_error_window = new WidPopup(tl, br, tile_find_mand("bug"), "");
+    game_error_window = new WidPopup("Game error", tl, br, tile_find_mand("bug"), "");
     wid_set_on_key_up(
       game_error_window->wid_popup_container, game_error_key_up);
     wid_set_on_key_down(

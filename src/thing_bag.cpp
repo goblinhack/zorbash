@@ -97,31 +97,48 @@ bool Thing::bag_compress (void)
 	    }
 
 	    auto t = game->level->thing_find(id);
+
+#if 0
+            bool bottom = 
+                    (t->monstp->bag_position.y + t->bag_item_height() < 
+                     bh - t->bag_item_height());
+#endif
+
 	    if (bag_remove_at(t, t->monstp->bag_position)) {
-		if (bag_can_place_at(t, t->monstp->bag_position + point(1, 1))) {
-                    if (bag_place_at(t, t->monstp->bag_position + point(1, 1))) {
-                        did_something = true;
-                    } else {
-                        bag_place_at(t, t->monstp->bag_position);
-                    }
-                } else if (bag_can_place_at(t, t->monstp->bag_position + point(-1, 1))) {
-                    if (bag_place_at(t, t->monstp->bag_position + point(-1, 1))) {
-                        did_something = true;
-                    } else {
-                        bag_place_at(t, t->monstp->bag_position);
-                    }
-                } else if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
+                if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
                     if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
+// t->con("moved to %d %d (a)",t->monstp->bag_position.x, t->monstp->bag_position.y + 1);
                         did_something = true;
                     } else {
                         bag_place_at(t, t->monstp->bag_position);
                     }
-                } else {
+                }
+#if 0
+                else if (bottom && bag_can_place_at(t, t->monstp->bag_position + point(1, 0))) {
+                    if (bag_place_at(t, t->monstp->bag_position + point(1, 0))) {
+t->con("moved to %d %d (b)",t->monstp->bag_position.x + 1, t->monstp->bag_position.y);
+                        // did_something = true;
+                    } else {
+                        bag_place_at(t, t->monstp->bag_position);
+                    }
+                } else if (bottom && bag_can_place_at(t, t->monstp->bag_position + point(-1, 0))) {
+                    if (bag_place_at(t, t->monstp->bag_position + point(-1, 0))) {
+t->con("moved to %d %d (c)",t->monstp->bag_position.x - 1, t->monstp->bag_position.y);
+                        // did_something = true;
+                    } else {
+                        bag_place_at(t, t->monstp->bag_position);
+                    }
+                } 
+#endif
+                else {
                     bag_place_at(t, t->monstp->bag_position);
                 }
 	    }
 	}
     }
+
+    game->remake_inventory |= did_something;
+
     return did_something;
 }
 
@@ -141,6 +158,11 @@ bool Thing::bag_remove_at (Thingp item, point pos)
 
 bool Thing::bag_can_place_at (Thingp item, point pos) const
 {
+    if (item == this) {
+        MINICON("Cannot place a bag inside itself!");
+        return false;
+    }
+
     auto bag = get_const_bag();
     auto bw = bag_width();
     auto bh = bag_height();
@@ -148,19 +170,15 @@ bool Thing::bag_can_place_at (Thingp item, point pos) const
     auto h = item->bag_item_height();
 
     if (pos.x < 0) {
-MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
         return false;
     }
     if (pos.y < 0) {
-MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
         return false;
     }
     if (pos.x + w >= bw) {
-MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
         return false;
     }
     if (pos.y + h >= bh) {
-MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
         return false;
     }
 
@@ -173,7 +191,6 @@ MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw
 	    if (id == item->id) {
 		continue;
 	    }
-MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
 	    return false;
 	}
     }
@@ -181,7 +198,6 @@ MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw
     //
     // Do not set pos here
     //
-MINICON("can place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
     return true;
 }
 
@@ -212,7 +228,6 @@ bool Thing::bag_place_at (Thingp item, point pos)
 	}
     }
     item->monstp->bag_position = pos;
-MINICON("place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
     return true;
 }
 

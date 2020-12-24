@@ -912,7 +912,7 @@ void Game::load_select (void)
                           tl.y + 19);
     auto width = br.x - tl.x;
 
-    wid_load = new WidPopup(tl, br, tile_find_mand("load"), "", false, false);
+    wid_load = new WidPopup("Game load", tl, br, tile_find_mand("load"), "", false, false);
     wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
     wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);
 

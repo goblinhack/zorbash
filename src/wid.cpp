@@ -178,13 +178,37 @@ void wid_dump (Widp w, int depth)
 
     wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-    printf("\n          %*s dump: [%s] text [%S] %d,%d to %d,%d ", depth * 2, "", wid_name(w).c_str(), wid_get_text(w).c_str(), tlx, tly, brx, bry);
+    printf("\n          %*s dump: [%s] text [%S] %d,%d to %d,%d %d children", 
+           depth * 2, "", 
+           wid_name(w).c_str(), 
+           wid_get_text(w).c_str(), 
+           tlx, tly, brx, bry, 
+           wid_count(w, depth));
 
+#if 0
     for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         wid_dump(child, depth + 2);
     }
+#endif
+}
+
+int wid_count (Widp w, int depth)
+{_
+    if (!w) {
+        return 0;
+    }
+
+    int count = 1;
+
+    for (auto& iter : w->children_display_sorted) {
+        auto child = iter.second;
+
+        count += wid_count(child, depth + 2);
+    }
+
+    return count;
 }
 
 int32_t wid_get_tl_x (Widp w)
@@ -5410,13 +5434,13 @@ void wid_move_end (Widp w)
 //
 // Display one wid and its children
 //
-static int wid_count;
+static int wid_total_count;
 static void wid_display (Widp w,
                          uint8_t disable_scissor,
                          uint8_t *updated_scissors,
                          int clip)
 {_
-    wid_count++;
+    wid_total_count++;
     int32_t clip_height = 0;
     int32_t clip_width = 0;
     uint8_t hidden;
@@ -5432,6 +5456,12 @@ static void wid_display (Widp w,
     int32_t brx;
     int32_t bry;
     Widp p {};
+
+#if 0
+    if (!w->parent) {
+        wid_dump(w, 0);
+    }
+#endif
 
     //
     // Bounding box for drawing the wid. Co-ords are negative as we
@@ -5865,7 +5895,7 @@ void wid_display_all (void)
 
     wid_on_screen_at = {};
 
-    wid_count = 0;
+    wid_total_count = 0;
 
     for (auto iter = wid_top_level.begin();
         iter != wid_top_level.end(); ++iter) {
@@ -5882,7 +5912,11 @@ void wid_display_all (void)
                     true);
     }
 
-    if (wid_count > 1000) {
+#if 0
+printf("================================================= %d\n", wid_total_count);
+MINICON("%d",wid_total_count);
+#endif
+    if (wid_total_count > 1000) {
         DIE("Too many widgets");
     }
 

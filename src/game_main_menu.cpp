@@ -327,7 +327,8 @@ void Game::main_menu_select (void)
     point br = make_point(TERM_WIDTH - 7, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
-    game_main_menu_window = new WidPopup(tl, br, nullptr, "nothing", false, false);
+    game_main_menu_window = new WidPopup("Main menu",
+                                         tl, br, nullptr, "nothing", false, false);
     {_
         Widp w = game_main_menu_window->wid_popup_container;
         wid_set_on_key_up(w, game_main_menu_key_up);

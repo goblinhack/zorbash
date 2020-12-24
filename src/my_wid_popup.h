@@ -27,8 +27,10 @@ public:
 
 public:
     ~WidPopup();
-    WidPopup (point tl, point br, Tilep title_tile=nullptr,
-              std::string background = "",
+    WidPopup (const std::string name,
+              point tl, point br, 
+              Tilep title_tile=nullptr,
+              const std::string background = "",
               bool horiz_scroll=true,
               bool vert_scoll=true);
 

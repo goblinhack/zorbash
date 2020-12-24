@@ -112,7 +112,7 @@ void Game::credits_select (void)
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
     auto width = br.x - tl.x;
 
-    wid_credits_window = new WidPopup(tl, br, nullptr, "", false, false);
+    wid_credits_window = new WidPopup("Credits", tl, br, nullptr, "", false, false);
     wid_set_on_key_up(
       wid_credits_window->wid_popup_container, wid_credits_key_up);
     wid_set_on_key_down(

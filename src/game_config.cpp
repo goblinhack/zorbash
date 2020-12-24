@@ -125,7 +125,8 @@ void Game::config_top_select (void)
                 TERM_HEIGHT / 2 + 14);
     auto width = br.x - tl.x - 2;
 
-    game_config_top_window = new WidPopup(tl, br, nullptr, "nothing", false, false);
+    game_config_top_window = new WidPopup("Main menu",
+                                          tl, br, nullptr, "nothing", false, false);
     {_
         Widp w = game_config_top_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_top_key_up);

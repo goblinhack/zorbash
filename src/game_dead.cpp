@@ -87,7 +87,8 @@ void Game::dead_select (const char *reason)
     point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, TERM_HEIGHT - 2);
     auto width = br.x - tl.x - 1;
 
-    wid_dead_window = new WidPopup(tl, br, nullptr, "ui_dead", false, false);
+    wid_dead_window = new WidPopup("Game dead",
+                                   tl, br, nullptr, "ui_dead", false, false);
     wid_set_on_key_up(
       wid_dead_window->wid_popup_container, wid_dead_key_up);
     wid_set_on_key_down(

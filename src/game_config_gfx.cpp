@@ -234,7 +234,8 @@ void Game::config_gfx_select (void)
                           UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x - 2;
 
-    game_config_gfx_window = new WidPopup(tl, br, nullptr, "", false, false);
+    game_config_gfx_window = new WidPopup("Gfx select",
+                                          tl, br, nullptr, "", false, false);
     {_
         Widp w = game_config_gfx_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_gfx_key_up);
