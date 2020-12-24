@@ -88,9 +88,11 @@ static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t
     at.y -= 1;
 
     if (bag->bag_can_place_at(t, at)) {
+t->minicon("place at %d,%d", at.x, at.y);
         if (bag->bag_place_at(t, at)) {
             wid_destroy(&game->in_transit_item);
             t->change_owner(bag);
+            while (bag->bag_compress()) { }
             game->remake_inventory = true;
         } else {
             ERR("Cannot fit that into the bag");
@@ -205,7 +207,7 @@ WidBag::WidBag (Thingp bag_, point tl, point br, const std::string &title) : tl(
     bag = bag_;
 
     {
-        wid_bag_container = wid_new_square_window("wid_bag");
+        wid_bag_container = wid_new_square_window("wid_bag " + title);
         wid_set_pos(wid_bag_container, tl, br);
         wid_set_style(wid_bag_container, UI_WID_STYLE_BAG);
         wid_set_on_tick(wid_bag_container, wid_bag_tick);
@@ -213,7 +215,7 @@ WidBag::WidBag (Thingp bag_, point tl, point br, const std::string &title) : tl(
     }
 
     {
-        wid_bag_title = wid_new_square_window("wid_bag_title");
+        wid_bag_title = wid_new_square_window("wid_bag_title " + title);
         wid_set_pos(wid_bag_title, point(tl.x, tl.y - 1), point(br.x, tl.y - 1));
         wid_set_style(wid_bag_title, UI_WID_STYLE_NONE);
         wid_set_text(wid_bag_title, title);

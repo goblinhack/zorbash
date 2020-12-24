@@ -14,11 +14,20 @@ Widp wid_inventory_window {};
 
 void wid_inventory_fini (void)
 {_
-    if (game->moving_items) {
-        return;
+    if (game->remake_inventory) {
+        //
+        // continue
+        //
+    } else {
+        if (game->moving_items) {
+            return;
+        }
     }
 
     wid_destroy(&wid_inventory_window);
+    if (wid_inventory_window) {
+        DIE("wid_inventory_window exists after destroy");
+    }
 }
 
 uint8_t wid_inventory_init (void)
@@ -90,6 +99,7 @@ static uint8_t wid_inventory_mouse_down_on_bag (Widp w,
 {_
     BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
     game->moving_items = true;
+MINICON("NOT MOVING ITEMS %s", __FUNCTION__);
     return true;
 }
 
@@ -174,7 +184,10 @@ static void wid_inventory_create (void)
             point br = make_point(x2, TERM_HEIGHT - 1);
             color c;
 
-            wid_inventory_window = wid_new_square_window("inventory (bottom)");
+            if (wid_inventory_window) {
+                DIE("wid_inventory_window exists");
+            }
+            wid_inventory_window = wid_new_square_window("wid inventory");
             wid_set_pos(wid_inventory_window, tl, br);
             wid_set_style(wid_inventory_window, UI_WID_STYLE_NONE);
         }
@@ -336,8 +349,6 @@ static void wid_inventory_create (void)
         auto t = level->inventory_get(slot);
         if (t) {
             game->wid_thing_info_create(t);
-        } else {
-            game->moving_items = false;
         }
     }
 }

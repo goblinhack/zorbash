@@ -200,7 +200,9 @@ bool Thing::inventory_id_insert (Thingp what)
                 //
             } else {
                 wid_inventory_init();
-                wid_thing_info_fini();
+                if (!game->moving_items) {
+                    wid_thing_info_fini();
+                }
                 inventory_particle(what, i);
                 return true;
             }
@@ -224,7 +226,9 @@ bool Thing::inventory_id_insert (Thingp what)
     }
 
     wid_inventory_init();
-    wid_thing_info_fini();
+    if (!game->moving_items) {
+        wid_thing_info_fini();
+    }
     inventory_particle(what, item_slot);
     level->inventory_describe(item_slot);
     return true;
@@ -280,7 +284,9 @@ bool Thing::inventory_id_remove (Thingp what)
 
             level->inventory_describe(game->inventory_highlight_slot);
             wid_inventory_init();
-            wid_thing_info_fini();
+            if (!game->moving_items) {
+                wid_thing_info_fini();
+            }
             return true;
         }
     }
@@ -339,7 +345,9 @@ bool Thing::inventory_id_remove (Thingp what, Thingp particle_target)
             }
 
             wid_inventory_init();
-            wid_thing_info_fini();
+            if (!game->moving_items) {
+                wid_thing_info_fini();
+            }
             return true;
         }
     }
@@ -489,7 +497,6 @@ bool Level::inventory_chosen (const uint32_t slot)
 
     if (what->is_bag()) {
         game->wid_thing_info_create(what);
-        game->moving_items = true;
     }
 
     return true;

@@ -32,7 +32,6 @@ void wid_thing_info_fini (void)
     wid_thing_info_window = nullptr;
 
     game->moving_items = false;
-    //traceback_dump();
 }
 
 uint8_t wid_thing_info_init (void)
@@ -42,7 +41,11 @@ uint8_t wid_thing_info_init (void)
 
 void Game::wid_thing_info_destroy (void)
 {_
-    if (moving_items) {
+    if (game->remake_inventory) {
+        //
+        // Continue
+        //
+    } else if (game->moving_items) {
         return;
     }
 
@@ -53,12 +56,14 @@ void Game::wid_thing_info_create (Thingp t)
 {_
     if (game->remake_inventory) {
         //
-        // continue
+        // Continue
         //
-    } else {
-        if (game->moving_items) {
-            return;
-        }
+    } else if (game->moving_items) {
+        return;
+    }
+
+    if (game->in_transit_item) {
+        return;
     }
 
     if (wid_thing_info_window) {
@@ -99,7 +104,7 @@ void Game::wid_thing_info_create (Thingp t)
     }
     recursion = true;
 
-    wid_thing_info_window = new WidPopup(tl, br, nullptr, "", true, false);
+    wid_thing_info_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
     wid_raise(wid_thing_info_window->wid_popup_container);
 
     {_
@@ -255,6 +260,9 @@ void Game::wid_thing_info_create (Thingp t)
     }
 
     if (tp->is_bag()) {
+        MINICON("remake bags");
+        game->moving_items = true;
+
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 
         if (bag1) {

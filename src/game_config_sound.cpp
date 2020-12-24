@@ -125,7 +125,8 @@ void Game::config_sound_select (void)
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
-    game_config_sound_window = new WidPopup(tl, br, nullptr, "");
+    game_config_sound_window = new WidPopup("Config sound select",
+                                            tl, br, nullptr, "");
     {_
         Widp w = game_config_sound_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_sound_key_up);
