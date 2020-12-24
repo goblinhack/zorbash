@@ -32,6 +32,7 @@ void wid_thing_info_fini (void)
     wid_thing_info_window = nullptr;
 
     game->moving_items = false;
+    //traceback_dump();
 }
 
 uint8_t wid_thing_info_init (void)

@@ -15,7 +15,7 @@ void Thing::water_tick (void)
         if (level->is_water(mid_at.x, mid_at.y)) {
             dead("A watery end");
             if (is_fire()) {
-                auto owner = get_owner();
+                auto owner = get_top_owner();
                 if (owner) {
                     if (owner->is_player()) {
                         MINICON("%%fg=green$You quench the flames!%%fg=reset$");

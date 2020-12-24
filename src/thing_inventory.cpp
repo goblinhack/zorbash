@@ -489,6 +489,7 @@ bool Level::inventory_chosen (const uint32_t slot)
 
     if (what->is_bag()) {
         game->wid_thing_info_create(what);
+        game->moving_items = true;
     }
 
     return true;

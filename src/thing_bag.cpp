@@ -148,15 +148,19 @@ bool Thing::bag_can_place_at (Thingp item, point pos) const
     auto h = item->bag_item_height();
 
     if (pos.x < 0) {
+MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
         return false;
     }
     if (pos.y < 0) {
+MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
         return false;
     }
     if (pos.x + w >= bw) {
+MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
         return false;
     }
     if (pos.y + h >= bh) {
+MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
         return false;
     }
 
@@ -169,13 +173,15 @@ bool Thing::bag_can_place_at (Thingp item, point pos) const
 	    if (id == item->id) {
 		continue;
 	    }
+MINICON("cannot place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
 	    return false;
 	}
     }
 
     //
-    // Do not set pos ere
+    // Do not set pos here
     //
+MINICON("can place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
     return true;
 }
 
@@ -206,6 +212,7 @@ bool Thing::bag_place_at (Thingp item, point pos)
 	}
     }
     item->monstp->bag_position = pos;
+MINICON("place at %d %d w %d h %d bw %d bh %d %d", pos.x, pos.y, w, h, bw, bh, __LINE__);
     return true;
 }
 
@@ -230,7 +237,17 @@ bool Thing::bag_remove (Thingp item)
 
 bool Thing::change_owner (Thingp new_owner)
 {_
-    auto old_owner = get_owner();
+    if (!new_owner) {
+        err("no new owner");
+	return true;
+    }
+
+    auto old_owner = get_immediate_owner();
+    if (!old_owner) {
+        err("no old owner");
+	return true;
+    }
+
     if (new_owner == old_owner) {
 	return true;
     }
@@ -250,7 +267,23 @@ bool Thing::change_owner (Thingp new_owner)
     hooks_remove();
     remove_owner();
 
-    new_owner->carry(this);
+    if (!new_owner->carry(this)) {
+        err("new owner could not carry");
+        return false;
+    }
+
+    //
+    // Sanity check
+    //
+    auto changed_owner = get_immediate_owner();
+    if (!changed_owner) {
+        err("owner change failed");
+        return false;
+    }
+    if (changed_owner != new_owner) {
+        err("owner change failed, owner is still %s", changed_owner->to_string().c_str());
+        return false;
+    }
 
     return true;
 }

@@ -243,7 +243,7 @@ _
     Thingp real_hitter = nullptr;
 
     if (hitter) {
-        real_hitter = hitter->get_owner();
+        real_hitter = hitter->get_immediate_owner();
 
         //
         // If on fire, the fire is owned by the player. So don't make the
@@ -311,7 +311,7 @@ _
             //
             // Get the player using the weapon as the hitter.
             //
-            hitter = hitter->get_owner();
+            hitter = hitter->get_immediate_owner();
             if (!hitter) {
                 hitter->log("ignore %s, no owner", to_string().c_str());
                 return false;
@@ -338,11 +338,11 @@ _
             hitter->log("fire attack");
         }
 #if 0
-        } else if (hitter->get_owner()) {
+        } else if (hitter->get_immediate_owner()) {
             //
             // Get the player firing the weapon as the hitter.
             //
-            hitter = hitter->get_owner();
+            hitter = hitter->get_immediate_owner();
             if (!hitter) {
                 hitter->log("ignore %s, no owner", to_string().c_str());
                 return false;
