@@ -32,7 +32,7 @@ void Thing::unset_on_fire (void)
 bool Thing::set_on_fire (const std::string &why)
 {_
     if (get_on_fire_anim_id().ok()) {
-        return (false);
+        return false;
     }
 
     log("set on fire, %s", why.c_str());
@@ -40,7 +40,7 @@ bool Thing::set_on_fire (const std::string &why)
     set_on_fire_anim_id(on_fire_anim->id);
     on_fire_anim->set_owner(this);
     move_carried_items();
-    return (true);
+    return true;
 }
 
 //

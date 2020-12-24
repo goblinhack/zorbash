@@ -11,16 +11,16 @@
 bool Thing::is_enemy (Thingp attacker) const
 {_
     if (unlikely(!monstp)) {
-        return (false);
+        return false;
     }
 
     auto enemy = attacker->id;
     for (const auto& e : monstp->enemies) {
         if (e == enemy) {
-            return (true);
+            return true;
         }
     }
-    return (false);
+    return false;
 }
 
 void Thing::add_enemy (Thingp attacker)

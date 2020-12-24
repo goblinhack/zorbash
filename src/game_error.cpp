@@ -33,14 +33,14 @@ uint8_t game_error_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case '\n':
                     case SDLK_ESCAPE: {_
                         game_error_destroy();
-                        return (true);
+                        return true;
                     }
                 }
             }
         }
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t game_error_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -49,13 +49,13 @@ uint8_t game_error_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t game_error_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_error_destroy();
-    return (true);
+    return true;
 }
 
 void game_error (std::string error)

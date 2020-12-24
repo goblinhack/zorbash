@@ -39,14 +39,14 @@ uint8_t wid_credits_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case 'b':
                     case SDLK_ESCAPE: {_
                         wid_credits_destroy();
-                        return (true);
+                        return true;
                     }
                 }
             }
         }
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t wid_credits_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -55,13 +55,13 @@ uint8_t wid_credits_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t wid_credits_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_credits_destroy();
-    return (true);
+    return true;
 }
 
 void game_display_credits_bg (void)

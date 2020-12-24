@@ -60,7 +60,7 @@ uint8_t wid_console_init (void)
 
     wid_console_wid_create();
 
-    return (true);
+    return true;
 }
 
 //

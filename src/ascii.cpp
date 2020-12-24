@@ -135,16 +135,16 @@ void pixel_to_ascii (int *x, int *y)
 static int ascii_ok_for_scissors (int x, int y)
 {
     if ((x < 0) || (y < 0) || (x >= TERM_WIDTH) || (y >= TERM_HEIGHT)) {
-        return (false);
+        return false;
     }
 
     if (scissors_enabled) {
         if ((x < scissors_tl.x) || (x > scissors_br.x)) {
-            return (false);
+            return false;
         }
 
         if ((y < scissors_tl.y) || (y > scissors_br.y)) {
-            return (false);
+            return false;
         }
     }
 

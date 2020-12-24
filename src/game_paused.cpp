@@ -40,13 +40,13 @@ void Game::hard_unpause (void)
 bool Game::paused (void)
 {_
     if (soft_paused || hard_paused) {
-        return (true);
+        return true;
     }
 
     if (!time_have_x_tenths_passed_since(5, last_pause)) {
-        return (true);
+        return true;
     }
-    return (false);
+    return false;
 }
 
 static WidPopup *wid_paused_window;
@@ -76,14 +76,14 @@ uint8_t wid_paused_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case '\n':
                     case SDLK_ESCAPE: {_
                         wid_paused_destroy();
-                        return (true);
+                        return true;
                     }
                 }
             }
         }
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t wid_paused_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -92,13 +92,13 @@ uint8_t wid_paused_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t wid_paused_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_paused_destroy();
-    return (true);
+    return true;
 }
 
 void Game::pause_select (void)

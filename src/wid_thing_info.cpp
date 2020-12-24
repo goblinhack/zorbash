@@ -36,7 +36,7 @@ void wid_thing_info_fini (void)
 
 uint8_t wid_thing_info_init (void)
 {_
-    return (true);
+    return true;
 }
 
 void Game::wid_thing_info_destroy (void)

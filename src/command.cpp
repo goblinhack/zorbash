@@ -116,7 +116,7 @@ uint8_t command_init (void)
 {_
     command_inited = true;
 
-    return (true);
+    return true;
 }
 
 void command_add (command_fn_t callback,
@@ -367,7 +367,7 @@ uint8_t command_handle (const char *input,
         // If unknown, run as python
         //
         // CON(">%%fg=red$Unknown command: \"%s\"%%fg=reset$", input);
-        // return (false);
+        // return false;
         py_exec(input);
 
         history[g_history_at] = string_to_wstring(std::string(input));
@@ -378,7 +378,7 @@ uint8_t command_handle (const char *input,
         }
         g_history_walk = g_history_at;
 
-        return (true);
+        return true;
     }
 
     if (matches > 1) {
@@ -407,7 +407,7 @@ uint8_t command_handle (const char *input,
             }
         }
 
-        return (false);
+        return false;
     }
 
     if (!execute_command && (matches == 1)) {
@@ -417,7 +417,7 @@ uint8_t command_handle (const char *input,
                         execute_command, context);
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t command_handle (std::string input,

@@ -421,7 +421,7 @@ Thingp Level::inventory_get (void)
     return inventory_get(game->inventory_highlight_slot);
 }
 
-bool Level::inventory_select (const uint32_t slot)
+bool Level::inventory_over (const uint32_t slot)
 {_
     if (!player) {
         return false;
@@ -430,6 +430,40 @@ bool Level::inventory_select (const uint32_t slot)
     if (slot >= player->monstp->inventory_id.size()) {
         return false;
     }
+
+    auto oid = get(player->monstp->inventory_id, slot);
+    if (!oid) {
+        return false;
+    }
+
+    Thingp what;
+
+    if (slot != game->inventory_highlight_slot) {
+        game->remake_inventory = true;
+        game->inventory_highlight_slot = slot;
+        what = inventory_describe(slot);
+    } else {
+        what = inventory_describe(game->inventory_highlight_slot);
+    }
+
+    if (!what) {
+        return false;
+    }
+
+    return true;
+}
+
+bool Level::inventory_chosen (const uint32_t slot)
+{_
+    if (!player) {
+        return false;
+    }
+
+    if (slot >= player->monstp->inventory_id.size()) {
+        return false;
+    }
+
+    game->remake_inventory = true;
 
     auto oid = get(player->monstp->inventory_id, slot);
     if (!oid) {

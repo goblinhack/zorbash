@@ -71,33 +71,33 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
 
     wid_visible(wid_botcon_window);
     BOTCON("Press 'h' for help");
-    return (false);
+    return false;
 }
 
 uint8_t game_main_menu_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->load_select();
-    return (false);
+    return false;
 }
 
 uint8_t game_main_menu_config (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->config_top_select();
     game_main_menu_hide();
-    return (false);
+    return false;
 }
 
 uint8_t game_main_menu_credits_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->credits_select();
     game_main_menu_destroy();
-    return (false);
+    return false;
 }
 
 uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->quit_select();
-    return (false);
+    return false;
 }
 
 uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -116,25 +116,25 @@ uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
                 switch (c) {
                     case 'n':
                         game_main_menu_new_game(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 'l':
                         game_main_menu_load_game(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 'o':
                         game_main_menu_config(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 'c':
                         game_main_menu_credits_game(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 'q':
                         game_main_menu_quit_game(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                 }
             }
         }
     }
 
-    return (false);
+    return false;
 }
 
 uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -143,7 +143,7 @@ uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 void game_display_title_bg (void)

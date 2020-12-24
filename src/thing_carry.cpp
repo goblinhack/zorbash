@@ -119,6 +119,31 @@ std::list<Thingp> Thing::anything_to_carry (void)
     return items;
 }
 
+bool Thing::check_anything_to_carry (void)
+{
+    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+        if (t->is_dead) {
+            continue;
+        }
+
+        if (t->is_hidden) {
+            continue;
+        }
+
+        if (t->get_owner()) {
+            continue;
+        }
+
+        if (!t->is_collectable()) {
+            continue;
+        }
+
+        return true;
+    } FOR_ALL_THINGS_END()
+
+    return false;
+}
+
 void Thing::try_to_carry (const std::list<Thingp> &items)
 {
     for (auto item : items) {

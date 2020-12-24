@@ -21,7 +21,7 @@ uint8_t game_config_sound_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
     game->load_config();
     game_config_sound_destroy();
     game->config_top_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_sound_save (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -30,14 +30,14 @@ uint8_t game_config_sound_save (Widp w, int32_t x, int32_t y, uint32_t button)
     game->save_config();
     game_config_sound_destroy();
     game->config_top_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_sound_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_sound_destroy();
     game->config_top_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_sound_effects_volume_incr (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -45,7 +45,7 @@ uint8_t game_config_sound_effects_volume_incr (Widp w, int32_t x, int32_t y, uin
     CON("USERCFG: incr sound_volume");
     game->config.sound_volume++;
     game->config_sound_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_sound_effects_volume_decr (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -53,7 +53,7 @@ uint8_t game_config_sound_effects_volume_decr (Widp w, int32_t x, int32_t y, uin
     CON("USERCFG: incr sound_volume");
     game->config.sound_volume--;
     game->config_sound_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_sound_music_volume_incr (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -61,7 +61,7 @@ uint8_t game_config_sound_music_volume_incr (Widp w, int32_t x, int32_t y, uint3
     CON("USERCFG: incr music_volume");
     game->config.music_volume++;
     game->config_sound_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_sound_music_volume_decr (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -69,7 +69,7 @@ uint8_t game_config_sound_music_volume_decr (Widp w, int32_t x, int32_t y, uint3
     CON("USERCFG: incr music_volume");
     game->config.music_volume--;
     game->config_sound_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_sound_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -88,20 +88,20 @@ uint8_t game_config_sound_key_up (Widp w, const struct SDL_KEYSYM *key)
                 switch (c) {
                     case 'c':
                         game_config_sound_cancel(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 's':
                         game_config_sound_save(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 'b':
                     case SDLK_ESCAPE:
                         game_config_sound_cancel(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                 }
             }
         }
     }
 
-    return (false);
+    return false;
 }
 
 uint8_t game_config_sound_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -110,7 +110,7 @@ uint8_t game_config_sound_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 void Game::config_sound_select (void)

@@ -124,17 +124,17 @@ bool Thing::will_avoid (const Thingp itp) const
 
     if (me->is_meat()) {
         if (it->is_meat_eater()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_treasure()) {
         if (it->is_treasure_eater()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_potion()) {
         if (it->is_potion_eater()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_jelly_baby()) {
@@ -142,26 +142,26 @@ bool Thing::will_avoid (const Thingp itp) const
         // But allow baby slimes to attack each other!
         //
         if (it->is_jelly_parent()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_acid_hater()) {
         if (it->is_acid()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_fire_hater()) {
         if (it->is_fire()) {
-            return (true);
+            return true;
         }
         if (it->is_lava()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_water_hater()) {
         if (it->is_water()) {
-            return (true);
+            return true;
         }
     }
-    return (false);
+    return false;
 }

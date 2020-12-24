@@ -25,7 +25,7 @@ uint8_t wid_inventory_init (void)
 {_
     wid_inventory_create();
 
-    return (true);
+    return true;
 }
 
 static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
@@ -44,7 +44,7 @@ static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int3
     }
 
     auto slot = wid_get_int_context(w);
-    if (!level->inventory_select(slot)) {
+    if (!level->inventory_over(slot)) {
         return;
     }
 
@@ -72,7 +72,7 @@ static void wid_inventory_mouse_over_e (Widp w)
     }
 
     auto slot = wid_get_int_context(w);
-    if (!level->inventory_select(slot)) {
+    if (!level->inventory_over(slot)) {
         return;
     }
 
@@ -90,7 +90,7 @@ static uint8_t wid_inventory_mouse_down_on_bag (Widp w,
 {_
     BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
     game->moving_items = true;
-    return (true);
+    return true;
 }
 
 static uint8_t wid_inventory_mouse_down (Widp w,
@@ -98,12 +98,32 @@ static uint8_t wid_inventory_mouse_down (Widp w,
                                          int32_t y,
                                          uint32_t button)
 {_
-    BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
-    game->moving_items = true;
-    wid_thing_info_fini();
-    wid_destroy(&game->in_transit_item);
-    wid_inventory_mouse_over_b(w, 0, 0, 0, 0);
-    return (true);
+    if (game->moving_items) {
+        wid_thing_info_fini();
+    }
+
+    if (game->paused()) {
+        return false;
+    }
+
+    auto level = game->level;
+    if (!level) {
+        return true;
+    }
+
+    auto slot = wid_get_int_context(w);
+    if (!level->inventory_chosen(slot)) {
+        return true;
+    }
+
+    level->inventory_describe(slot);
+
+    auto t = level->inventory_get(slot);
+    if (t) {
+        game->wid_thing_info_create(t);
+    }
+
+    return true;
 }
 
 //
@@ -163,24 +183,15 @@ static void wid_inventory_create (void)
     {
         auto monstp = player->monstp;
         auto inventory_items = monstp->inventory_id.size();
-
-        for (auto i = 0U; i < inventory_items; i++) {
-            auto tp_id = monstp->inventory_id[i];
-            if (!tp_id) {
-                continue;
-            }
-
-            auto tpp = tp_find(tp_id);
-            if (!tpp) {
-                continue;
-            }
-        }
-
         std::vector<Widp> wid_inventory_items;
 
         uint8_t item = 0;
         uint8_t y = 0;
         for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
+            if (item >= inventory_items) {
+                break;
+            }
+
             //
             // slot number
             //
@@ -214,12 +225,18 @@ static void wid_inventory_create (void)
                 point tl = make_point(1, y);
                 point br = make_point(1, y);
                 wid_set_pos(w, tl, br);
-                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY40);
+
+                if (i == game->inventory_highlight_slot) {
+                    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
+                } else {
+                    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY40);
+                }
+
                 wid_set_text(w, std::to_string(item));
             }
 
             {
-                if (item < inventory_items) {
+                {
                     auto w = wid_new_square_button(wid_inventory_window, "inventory item");
                     wid_inventory_items.push_back(w);
                     point tl = make_point(3, y);
@@ -238,15 +255,19 @@ static void wid_inventory_create (void)
                     wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
                     wid_set_int_context(w, i);
 
-                    auto tp_id = monstp->inventory_id[i];
-                    if (tp_id) {
-                        auto tpp = tp_find(tp_id);
-                        wid_set_text(w, tpp->text_name());
-                        if (tpp->is_bag()) {
-                            wid_set_on_mouse_down(w, wid_inventory_mouse_down_on_bag);
-                        } else {
-                            wid_set_on_mouse_down(w, wid_inventory_mouse_down);
+                    if (item < inventory_items) {
+                        auto tp_id = monstp->inventory_id[i];
+                        if (tp_id) {
+                            auto tpp = tp_find(tp_id);
+                            wid_set_text(w, tpp->text_name());
+                            if (tpp->is_bag()) {
+                                wid_set_on_mouse_down(w, wid_inventory_mouse_down_on_bag);
+                            } else {
+                                wid_set_on_mouse_down(w, wid_inventory_mouse_down);
+                            }
                         }
+                    } else {
+                        wid_set_text(w, "-");
                     }
                 }
             }

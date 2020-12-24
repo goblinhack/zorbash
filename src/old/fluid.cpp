@@ -731,7 +731,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
         }
 
         if (!got) {
-            return (false);
+            return false;
         }
     }
 
@@ -767,11 +767,11 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
         }
 
         if (!got) {
-            return (false);
+            return false;
         }
     }
 
-    return (true);
+    return true;
 }
 #endif
 
@@ -1007,16 +1007,16 @@ int thing_submerged_depth (Thingp t)
     int water = 0;
 
     if (t->mid_at.x >= MAP_WIDTH) {
-        return (false);
+        return false;
     }
     if (t->mid_at.y >= MAP_HEIGHT) {
-        return (false);
+        return false;
     }
     if (t->mid_at.x < 0) {
-        return (false);
+        return false;
     }
     if (t->mid_at.y < 0) {
-        return (false);
+        return false;
     }
 
     while (y > 0) {
@@ -1038,16 +1038,16 @@ int thing_is_in_water (Thingp t)
     int water = 0;
 
     if (t->mid_at.x >= MAP_WIDTH) {
-        return (false);
+        return false;
     }
     if (t->mid_at.y >= MAP_HEIGHT) {
-        return (false);
+        return false;
     }
     if (t->mid_at.x < 0) {
-        return (false);
+        return false;
     }
     if (t->mid_at.y < 0) {
-        return (false);
+        return false;
     }
 
     for (dy = 0; dy < FLUID_RESOLUTION; dy++) {
@@ -1059,10 +1059,10 @@ int thing_is_in_water (Thingp t)
     }
 
     if (water >= FLUID_RESOLUTION * FLUID_RESOLUTION) {
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }
 
 int thing_is_partially_or_fully_submerged (Thingp t)
@@ -1073,16 +1073,16 @@ int thing_is_partially_or_fully_submerged (Thingp t)
     int water = 0;
 
     if (t->mid_at.x >= MAP_WIDTH) {
-        return (false);
+        return false;
     }
     if (t->mid_at.y >= MAP_HEIGHT) {
-        return (false);
+        return false;
     }
     if (t->mid_at.x < 0) {
-        return (false);
+        return false;
     }
     if (t->mid_at.y < 0) {
-        return (false);
+        return false;
     }
 
     for (dy = 0; dy < FLUID_RESOLUTION; dy++) {
@@ -1094,8 +1094,8 @@ int thing_is_partially_or_fully_submerged (Thingp t)
     }
 
     if (water >= (FLUID_RESOLUTION * FLUID_RESOLUTION) / 2) {
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }

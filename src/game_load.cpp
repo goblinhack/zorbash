@@ -693,7 +693,7 @@ Game::load (std::string file_to_load, class Game &target)
         if (!game_load_headers_only) {
             game_error("load error, empty file?");
         }
-        return (false);
+        return false;
     }
     auto data = vec.data();
     lzo_uint compressed_len = vec.size();
@@ -715,13 +715,13 @@ Game::load (std::string file_to_load, class Game &target)
     } else {
         /* this should NEVER happen */
         ERR("LZO internal error - decompression failed: %d", r);
-        return (false);
+        return false;
     }
 
     uint32_t csin = csum((char*)uncompressed, (uint32_t)uncompressed_len);
     if (cs != csin) {
         ERR("Corrupt file, checksum mismatch");
-        return (false);
+        return false;
     }
 
 #ifdef ENABLE_DEBUG_SAVE_LOAD_HEX
@@ -743,7 +743,7 @@ Game::load (std::string file_to_load, class Game &target)
         if (!game_load_headers_only) {
             game_error("load error, " + game_load_error);
         }
-        return (false);
+        return false;
     }
 
     if (!game_load_headers_only) {
@@ -755,7 +755,7 @@ Game::load (std::string file_to_load, class Game &target)
 
     free(uncompressed);
     free(compressed);
-    return (true);
+    return true;
 }
 
 void
@@ -862,20 +862,20 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
                             game->load(slot);
                             wid_load_destroy();
                         }
-                        return (true);
+                        return true;
                     }
                     case 'b':
                     case SDLK_ESCAPE: {_
                         CON("PLAYER: Load game cancelled");
                         wid_load_destroy();
-                        return (true);
+                        return true;
                     }
                 }
             }
         }
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -884,7 +884,7 @@ uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -892,7 +892,7 @@ uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
     auto slot = wid_get_int_context(w);
     game->load(slot);
     wid_load_destroy();
-    return (true);
+    return true;
 }
 
 void Game::load_select (void)

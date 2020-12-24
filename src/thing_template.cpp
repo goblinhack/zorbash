@@ -47,7 +47,7 @@ uint8_t tp_init (void)
 
     tp_init_after_loading();
 
-    return (true);
+    return true;
 }
 
 void tp_fini (void)

@@ -220,14 +220,14 @@ void dmap_process (Dmap *D)
 static bool is_movement_blocking_hard_at (const Dmap *D, int x, int y)
 {
     if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
-        return (true);
+        return true;
     }
 
     if (get(D->val, x, y) == DMAP_IS_WALL) {
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }
 
 //
@@ -246,44 +246,44 @@ bool dmap_can_i_move_diagonally (const Dmap *D, point a, point b, point c)
 
     if (px - 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
         ! is_movement_blocking_hard_at(D, px - 1, py)) {
-        return (true);
+        return true;
     }
 
     if (px - 1 == mx && py + 1 == my && px - 1 == nx && py == ny &&
         ! is_movement_blocking_hard_at(D, px, py + 1)) {
-        return (true);
+        return true;
     }
 
     if (px + 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
         ! is_movement_blocking_hard_at(D, px + 1, py)) {
-        return (true);
+        return true;
     }
 
     if (px + 1 == mx && py + 1 == my && px + 1 == nx && py == ny &&
         ! is_movement_blocking_hard_at(D, px, py + 1)) {
-        return (true);
+        return true;
     }
 
     if (px - 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
         ! is_movement_blocking_hard_at(D, px - 1, py)) {
-        return (true);
+        return true;
     }
 
     if (px - 1 == mx && py - 1 == my && px - 1 == nx && py == ny &&
         ! is_movement_blocking_hard_at(D, px, py - 1)) {
-        return (true);
+        return true;
     }
 
     if (px + 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
         ! is_movement_blocking_hard_at(D, px + 1, py)) {
-        return (true);
+        return true;
     }
 
     if (px + 1 == mx && py - 1 == my && px + 1 == nx && py == ny && \
         ! is_movement_blocking_hard_at(D, px, py - 1)) {
-        return (true);
+        return true;
     }
-    return (false);
+    return false;
 }
 
 static std::vector<point> dmap_solve_ (const Dmap *D, const point start,

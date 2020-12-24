@@ -11,21 +11,21 @@ uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
     if (wid_find_under_mouse_when_scrolling()) {
-        return (false);
+        return false;
     }
 
     if (!game || !game->started) {
-        return (false);
+        return false;
     }
 
     auto level = game->level;
     if (!level) {
-        return (false);
+        return false;
     }
 
     auto player = level->player;
     if (!player) {
-        return (false);
+        return false;
     }
 
     if (player->is_dead) {
@@ -80,23 +80,23 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
                 if (t->is_food() || t->is_potion()) {
                     player->log("close enough to collect");
                     player->try_to_carry(t);
-                    return (true);
+                    return true;
                 } else if (t->is_monst() || t->is_generator()) {
                     player->log("close enough to attack");
                     player->attack(level->cursor->mid_at);
-                    return (true);
+                    return true;
                 }
             }
             FOR_ALL_THINGS_END()
         }
     }
-    return (false);
+    return false;
 }
 
 uint8_t
 game_mouse_up (int32_t x, int32_t y, uint32_t button)
 {
-    return (false);
+    return false;
 }
 
 
@@ -106,7 +106,7 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
 {_
     auto level = game->level;
     if (!level) {
-        return (false);
+        return false;
     }
 
     if (level->timestamp_dungeon_created &&

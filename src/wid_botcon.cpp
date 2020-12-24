@@ -44,7 +44,7 @@ uint8_t wid_botcon_init (void)
     last_msg = L"";
     last_msg_count = 0;
 
-    return (true);
+    return true;
 }
 
 //

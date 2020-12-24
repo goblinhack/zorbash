@@ -41,13 +41,13 @@ bool Thing::will_prefer_terrain (const Thingp itp)
 
     if (me->is_water_dweller()) {
         if (it->is_water() || it->is_deep_water()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_acid_dweller()) {
         if (it->is_acid()) {
-            return (true);
+            return true;
         }
     }
-    return (false);
+    return false;
 }

@@ -27,43 +27,43 @@ bool Thing::possible_to_attack (const Thingp it)
     //
     if (it->is_open) {
         log("cannot attack %s, its open", it->to_string().c_str());
-        return (false);
+        return false;
     }
 
     if (is_alive_monst() || is_resurrected) {
         if (me->is_jelly_baby_eater()) {
             if (it->is_jelly_baby()) {
                 log("can attack %s", it->to_string().c_str());
-                return (true);
+                return true;
             }
         }
 
         if (me->is_treasure_eater()) {
             if (it->is_treasure()) {
                 log("can attack %s", it->to_string().c_str());
-                return (true);
+                return true;
             }
             if (it->is_carrying_treasure()) {
                 log("can steal from %s", it->to_string().c_str());
-                return (true);
+                return true;
             }
         }
 
         if (me->is_potion_eater()) {
             if (it->is_potion()) {
                 log("can attack %s", it->to_string().c_str());
-                return (true);
+                return true;
             }
         }
 
         if (me->is_meat_eater()) {
             if (!it->is_attackable_by_monst()) {
                 log("cannot attack %s, not attackable", it->to_string().c_str());
-                return (false);
+                return false;
             }
             if (it->is_meat() || it->is_blood()) {
                 log("can attack %s", it->to_string().c_str());
-                return (true);
+                return true;
             }
         }
     }
@@ -71,10 +71,10 @@ bool Thing::possible_to_attack (const Thingp it)
     if (is_player()) {
         if (!it->is_attackable_by_player()) {
             log("cannot attack %s, not attackable", it->to_string().c_str());
-            return (false);
+            return false;
         }
         log("can attack %s", it->to_string().c_str());
-        return (true);
+        return true;
     }
 
     if (is_weapon()) {
@@ -83,17 +83,17 @@ bool Thing::possible_to_attack (const Thingp it)
             if (o->is_monst()) {
                 if (!it->is_attackable_by_monst()) {
                     log("cannot weapon attack %s, not attackable", it->to_string().c_str());
-                    return (false);
+                    return false;
                 }
                 log("can attack %s", it->to_string().c_str());
-                return (true);
+                return true;
             } else {
                 if (!it->is_attackable_by_player()) {
                     log("cannot weapon attack %s, not attackable", it->to_string().c_str());
-                    return (false);
+                    return false;
                 }
                 log("can attack %s", it->to_string().c_str());
-                return (true);
+                return true;
             }
         }
     }
@@ -102,13 +102,13 @@ bool Thing::possible_to_attack (const Thingp it)
         if (it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
                 log("can attack %s", it->to_string().c_str());
-                return (true);
+                return true;
             }
         }
     }
 
     log("ignore attack %s", it->to_string().c_str());
-    return (false);
+    return false;
 }
 
 bool Thing::attack (fpoint future_pos)
@@ -200,7 +200,7 @@ _
             if (is_player()) {
                 MINICON("You are too tired to attack. You need to rest.");
             }
-            return (false);
+            return false;
         }
     }
 
