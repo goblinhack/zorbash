@@ -239,7 +239,7 @@ uint8_t sdl_init (void)
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 #ifdef ENABLE_GENERATE_TTF
-    return (true);
+    return true;
 #endif
 
     uint32_t video_flags;
@@ -382,7 +382,7 @@ uint8_t sdl_init (void)
 
     DBG("Vsync       : %d", SDL_GL_GetSwapInterval());
 
-    return (true);
+    return true;
 }
 
 static int sdl_filter_events (void *userdata, SDL_Event *event)
@@ -908,7 +908,7 @@ uint8_t config_fps_counter_set (tokens_t *tokens, void *context)
         }
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -945,7 +945,7 @@ uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
         }
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -982,7 +982,7 @@ uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
         }
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -1027,7 +1027,7 @@ uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
         game->level->update();
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -1075,7 +1075,7 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
     }
 
     config_update_all();
-    return (true);
+    return true;
 }
 
 //
@@ -1099,7 +1099,7 @@ uint8_t config_gfx_vsync_enable (tokens_t *tokens, void *context)
         SDL_GL_SetSwapInterval(0);
     }
 
-    return (true);
+    return true;
 }
 
 void config_gfx_vsync_update (void)
@@ -1130,7 +1130,7 @@ uint8_t config_ascii_mode (tokens_t *tokens, void *context)
         CON("USERCFG: ASCII mode disabled");
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -1140,7 +1140,7 @@ uint8_t config_errored (tokens_t *tokens, void *context)
 {_
     g_errored = false;
     CON("USERCFG: Errored mode cleared");
-    return (true);
+    return true;
 }
 
 void config_update_all (void)
@@ -1163,7 +1163,7 @@ uint8_t sdl_user_exit (tokens_t *tokens, void *context)
 {_
     sdl_exit();
 
-    return (true);
+    return true;
 }
 
 //

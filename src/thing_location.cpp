@@ -15,7 +15,7 @@
 bool Thing::location_check (void)
 {_
     if (is_hidden) {
-        return (false);
+        return false;
     }
 
     //
@@ -23,27 +23,27 @@ bool Thing::location_check (void)
     //
     chasm_tick();
     if (is_dead) {
-        return (false);
+        return false;
     }
     torch_tick();
     if (is_dead) {
-        return (false);
+        return false;
     }
     water_tick();
     if (is_dead) {
-        return (false);
+        return false;
     }
     lava_tick();
     if (is_dead) {
-        return (false);
+        return false;
     }
     acid_tick();
     if (is_dead) {
-        return (false);
+        return false;
     }
     fire_tick();
     if (is_dead) {
-        return (false);
+        return false;
     }
 
     auto ret = true;

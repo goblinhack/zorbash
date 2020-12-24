@@ -63,7 +63,7 @@ _
     c->inherit_from(this);
     c->location_check();
 
-    return (true);
+    return true;
 }
 
 bool Thing::spawn_next_to_or_on_monst (const std::string& what)
@@ -128,7 +128,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     c->inherit_from(this);
     c->location_check();
 
-    return (true);
+    return true;
 }
 
 bool Thing::spawn_fire (const std::string& what)
@@ -181,7 +181,7 @@ bool Thing::spawn_fire (const std::string& what)
     c->inherit_from(this);
     c->location_check();
 
-    return (true);
+    return true;
 }
 
 bool Thing::spawn_under (const std::string& what)
@@ -212,5 +212,5 @@ bool Thing::spawn_under (const std::string& what)
     c->inherit_from(this);
     c->location_check();
 
-    return (true);
+    return true;
 }

@@ -142,7 +142,7 @@ uint8_t wid_init (void)
 {_
     wid_init_done = true;
 
-    return (true);
+    return true;
 }
 
 void wid_fini (void)
@@ -485,22 +485,22 @@ uint8_t wid_ignore_events (Widp w)
     Widp top {};
 
     if (!w) {
-        return (true);
+        return true;
     }
 
     if (w->ignore_events || w->moving || w->hidden || w->being_destroyed) {
-        return (true);
+        return true;
     }
 
     if (w->parent) {
         top = wid_get_top_parent(w);
 
         if (top->moving || top->hidden || top->being_destroyed) {
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }
 
 uint8_t wid_ignore_scroll_events (Widp w)
@@ -508,22 +508,22 @@ uint8_t wid_ignore_scroll_events (Widp w)
     Widp top {};
 
     if (!w) {
-        return (true);
+        return true;
     }
 
     if (w->ignore_scroll_events || w->moving || w->hidden || w->being_destroyed) {
-        return (true);
+        return true;
     }
 
     if (w->parent) {
         top = wid_get_top_parent(w);
 
         if (top->moving || top->hidden || top->being_destroyed) {
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }
 
 uint8_t wid_ignore_for_focus (Widp w)
@@ -532,7 +532,7 @@ uint8_t wid_ignore_for_focus (Widp w)
 
     if (w->hidden ||
         w->being_destroyed) {
-        return (true);
+        return true;
     }
 
     if (w->parent) {
@@ -540,11 +540,11 @@ uint8_t wid_ignore_for_focus (Widp w)
 
         if (top->hidden ||
             top->being_destroyed) {
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }
 
 //
@@ -555,18 +555,18 @@ uint8_t wid_ignore_being_destroyed (Widp w)
     Widp top {};
 
     if (w->being_destroyed) {
-        return (true);
+        return true;
     }
 
     if (w->parent) {
         top = wid_get_top_parent(w);
 
         if (top->being_destroyed) {
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }
 
 static void wid_mouse_motion_begin (Widp w, int32_t x, int32_t y)
@@ -670,15 +670,15 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
                              int32_t wheelx, int32_t wheely)
 {_
     if (!wid_mouse_visible) {
-        return (false);
+        return false;
     }
 
     if (wid_over == w) {
-        return (true);
+        return true;
     }
 
     if (wid_ignore_events(w)) {
-        return (false);
+        return false;
     }
 
     if (!(w->on_mouse_over_b) && !(w->on_mouse_down)) {
@@ -698,13 +698,13 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
                 // But if we have nothing else, use this
                 //
             } else {
-                return (false);
+                return false;
             }
         }
     }
 
     if (wid_ignore_being_destroyed(w)) {
-        return (false);
+        return false;
     }
 
     wid_m_over_e();
@@ -718,7 +718,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
         (w->on_mouse_over_b)(w, relx, rely, wheelx, wheely);
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -1136,7 +1136,7 @@ uint8_t wid_get_movable (Widp w)
         return (w->movable);
     }
 
-    return (false);
+    return false;
 }
 
 void wid_set_movable (Widp w, uint8_t val)
@@ -1154,7 +1154,7 @@ uint8_t wid_get_movable_horiz (Widp w)
         return (w->movable_horiz);
     }
 
-    return (false);
+    return false;
 }
 
 void wid_set_movable_horiz (Widp w, uint8_t val)
@@ -1169,7 +1169,7 @@ uint8_t wid_get_movable_vert (Widp w)
         return (w->movable_vert);
     }
 
-    return (false);
+    return false;
 }
 
 void wid_set_movable_vert (Widp w, uint8_t val)
@@ -1184,7 +1184,7 @@ uint8_t wid_get_movable_bounded (Widp w)
         return (w->movable_bounded);
     }
 
-    return (false);
+    return false;
 }
 
 void wid_set_movable_bounded (Widp w, uint8_t val)
@@ -1199,7 +1199,7 @@ uint8_t wid_get_movable_no_user_scroll (Widp w)
         return (w->movable_no_user_scroll);
     }
 
-    return (false);
+    return false;
 }
 
 void wid_set_movable_no_user_scroll (Widp w, uint8_t val)
@@ -1274,10 +1274,10 @@ uint8_t wid_get_text_pos (Widp w, int32_t *x, int32_t *y)
         *x = w->text_pos.x;
         *y = w->text_pos.y;
 
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }
 
 void wid_set_text_pos (Widp w, uint8_t val, int32_t x, int32_t y)
@@ -3013,7 +3013,7 @@ static uint8_t wid_scroll_trough_mouse_down (Widp w,
         wid_move_delta(child, dx, dy);
     }
 
-    return (true);
+    return true;
 }
 
 static uint8_t wid_scroll_trough_mouse_motion (Widp w,
@@ -3044,7 +3044,7 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
             dy = 1;
         }
     } else {
-        return (false);
+        return false;
     }
 
     std::vector<Widp> worklist;
@@ -3069,7 +3069,7 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
         wid_move_delta(child, dx, dy);
     }
 
-    return (true);
+    return true;
 }
 
 static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
@@ -3507,7 +3507,7 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
 
             case SDLK_TAB:
                 if (w != wid_console_input_line) {
-                    return (true);
+                    return true;
                 }
 
                 command_handle(wid_get_text(w),
@@ -3521,11 +3521,11 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                     wid_set_text(w, updatedtext);
                     w->cursor = updatedtext.length();
                 }
-                return (true);
+                return true;
 
             case SDLK_RETURN:
                 if (w != wid_console_input_line) {
-                    return (false);
+                    return false;
                 }
 
                 if (origlen && (w == wid_console_input_line)) {
@@ -3544,7 +3544,7 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                                         false /* show complete */,
                                         true /* execute command */,
                                         0 /* context */)) {
-                         return (true);
+                         return true;
                     }
 
                     updatedtext = trim(updatedtext);
@@ -3567,7 +3567,7 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                 } else if (w == wid_console_input_line) {
                     wid_scroll_text(w);
                 }
-                return (true);
+                return true;
 
             case SDLK_LEFT:
                 if (w->cursor > 0) {
@@ -3654,7 +3654,7 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                         wid_set_text(w, updatedtext);
                         w->cursor = updatedtext.length();
                     }
-                    return (true);
+                    return true;
                 }
 
                 if (c != '\0') {
@@ -3672,7 +3672,7 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
         }
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -3770,7 +3770,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             }
     }
 
-    return (true);
+    return true;
 }
 
 Widp wid_find_at (int32_t x, int32_t y)
@@ -5918,31 +5918,31 @@ void wid_display_all (void)
 uint8_t wid_is_hidden (Widp w)
 {_
     if (!w) {
-        return (false);
+        return false;
     }
 
     if (w->hidden) {
-        return (true);
+        return true;
     }
 
     while (w->parent) {
         w = w->parent;
 
         if (w->hidden) {
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }
 
 uint8_t wid_is_always_hidden (Widp w)
 {_
     if (w->always_hidden) {
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }
 
 void wid_move_to_pct (Widp w, double x, double y)
@@ -6191,10 +6191,10 @@ void wid_move_to_centered_in (Widp w, int32_t x, int32_t y, uint32_t ms)
 uint8_t wid_is_moving (Widp w)
 {
     if (w->moving) {
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }
 
 void wid_set_style (Widp w, int style)

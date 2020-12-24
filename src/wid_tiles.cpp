@@ -16,7 +16,7 @@ uint8_t wid_tiles_init (void)
 {_
     wid_tiles_init_done = true;
 
-    return (true);
+    return true;
 }
 
 static void wid_tiles_destroy (wid_tilesp w)

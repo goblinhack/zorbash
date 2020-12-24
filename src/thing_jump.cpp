@@ -275,7 +275,7 @@ bool Thing::try_to_jump (point to)
 
     decr_stats_stamina(10);
 
-    return (true);
+    return true;
 }
 
 bool Thing::try_to_jump (void)
@@ -301,7 +301,7 @@ bool Thing::try_to_jump (void)
         }
     }
 
-    return (false);
+    return false;
 }
 
 bool Thing::try_harder_to_jump (void)
@@ -327,7 +327,7 @@ bool Thing::try_harder_to_jump (void)
         }
     }
 
-    return (false);
+    return false;
 }
 
 void Thing::jump_end (void)

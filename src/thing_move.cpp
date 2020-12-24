@@ -8,6 +8,16 @@
 #include "my_sprintf.h"
 #include "my_gl.h"
 
+void Thing::move_completed (void)
+{
+    if (is_player()) {
+        if (check_anything_to_carry()) {
+            BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items",
+                   SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect));
+        }
+    }
+}
+
 void Thing::move_finish (void)
 {
     set_timestamp_move_begin(0);
@@ -18,6 +28,7 @@ void Thing::move_finish (void)
     // Set this so that we can pick up items again at the last location.
     //
     set_where_i_dropped_an_item_last(point(-1, -1));
+    move_completed();
 }
 
 bool Thing::move (fpoint future_pos)
@@ -56,7 +67,7 @@ bool Thing::move (fpoint future_pos,
                   bool shove_allowed)
 {
     if (is_dead) {
-        return (false);
+        return false;
     }
 
     if (is_changing_level ||
@@ -65,7 +76,7 @@ bool Thing::move (fpoint future_pos,
         is_waiting_to_ascend || 
         is_waiting_to_descend || 
         is_jumping) { 
-        return (false);
+        return false;
     }
 
     if (!attack) {
@@ -83,7 +94,7 @@ bool Thing::move (fpoint future_pos,
         }
 
         location_check();
-        return (false);
+        return false;
     }
 
     auto x = future_pos.x;
@@ -106,12 +117,12 @@ bool Thing::move (fpoint future_pos,
         }
 
         if ((x == mid_at.x) && (y == mid_at.y)) {
-            return (false);
+            return false;
         }
     }
 
     if ((x == mid_at.x) && (y == mid_at.y)) {
-        return (false);
+        return false;
     }
 
     if (is_player()) {
@@ -129,7 +140,7 @@ bool Thing::move (fpoint future_pos,
                 }
                 lunge(future_pos);
                 log("move failed");
-                return (false);
+                return false;
             }
         }
 
@@ -178,7 +189,7 @@ _
         move_delta(delta);
     }
 
-    return (true);
+    return true;
 }
 
 void Thing::update_interpolated_position (void)
@@ -222,6 +233,8 @@ void Thing::update_interpolated_position (void)
             //
             new_pos = mid_at;
             last_mid_at = mid_at;
+
+            move_completed();
         }
 
         //
@@ -488,10 +501,10 @@ _
         if (target_attacked) {
             is_tick_done = true;
             log("cannot move to %d,%d, must attack", nh.x, nh.y);
-            return (true);
+            return true;
         } else {
             log("cannot move to %d,%d, obstacle", nh.x, nh.y);
-            return (false);
+            return false;
         }
     } else {
         log("move to %d,%d is ok", nh.x, nh.y);
@@ -499,13 +512,13 @@ _
         if (!escaping) {
             if (is_less_preferred_terrain(nh)) {_
                 log("but %d,%d is less preferred terrain, avoid", nh.x, nh.y);
-                return (false);
+                return false;
             }
         }
 
         is_tick_done = true;
         move(fnh);
-        return (true);
+        return true;
     }
 }
 

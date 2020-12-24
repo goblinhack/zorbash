@@ -22,7 +22,7 @@ uint8_t wid_leftbar_init (void)
 {_
     wid_leftbar_create();
 
-    return (true);
+    return true;
 }
 
 #if 0
@@ -32,7 +32,7 @@ static uint8_t game_monsts_mouse_down (Widp w,
                                        uint32_t button)
 {_
     CON("status button %d", button);
-    return (true);
+    return true;
 }
 #endif
 

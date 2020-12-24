@@ -22,7 +22,7 @@ uint8_t wid_rightbar_init (void)
 {_
     wid_rightbar_create();
 
-    return (true);
+    return true;
 }
 
 //

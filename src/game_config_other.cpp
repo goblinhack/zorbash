@@ -21,7 +21,7 @@ uint8_t game_config_other_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
     game->load_config();
     game_config_other_destroy();
     game->config_top_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_other_save (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -30,14 +30,14 @@ uint8_t game_config_other_save (Widp w, int32_t x, int32_t y, uint32_t button)
     game->save_config();
     game_config_other_destroy();
     game->config_top_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_other_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_other_destroy();
     game->config_top_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -47,7 +47,7 @@ uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t bu
     CON("USERCFG: save config");
     game->save_config();
     g_need_restart = true;
-    return (true);
+    return true;
 }
 
 uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -55,7 +55,7 @@ uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint
     CON("USERCFG: toggle fps_counter");
     game->config.fps_counter = !game->config.fps_counter;
     game->config_other_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_other_sdl_delay_incr (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -63,7 +63,7 @@ uint8_t game_config_other_sdl_delay_incr (Widp w, int32_t x, int32_t y, uint32_t
     CON("USERCFG: incr sdl_delay");
     game->config.sdl_delay++;
     game->config_other_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_other_sdl_delay_decr (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -71,7 +71,7 @@ uint8_t game_config_other_sdl_delay_decr (Widp w, int32_t x, int32_t y, uint32_t
     CON("USERCFG: incr sdl_delay");
     game->config.sdl_delay--;
     game->config_other_select();
-    return (true);
+    return true;
 }
 
 uint8_t game_config_other_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -90,20 +90,20 @@ uint8_t game_config_other_key_up (Widp w, const struct SDL_KEYSYM *key)
                 switch (c) {
                     case 'c':
                         game_config_other_cancel(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 's':
                         game_config_other_save(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 'b':
                     case SDLK_ESCAPE:
                         game_config_other_cancel(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                 }
             }
         }
     }
 
-    return (false);
+    return false;
 }
 
 uint8_t game_config_other_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -112,7 +112,7 @@ uint8_t game_config_other_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 void Game::config_other_select (void)

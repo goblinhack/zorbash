@@ -17,7 +17,7 @@ bool Thing::eat (Thingp it)
     if (is_player()) {
         MINICON("You munch the %s", it->text_the().c_str());
         health_boost(it->get_nutrition());
-        return (true);
+        return true;
     } else {
         if (is_attack_eater()) {
             if ((is_jelly_eater()    && it->is_jelly())    ||
@@ -30,11 +30,11 @@ bool Thing::eat (Thingp it)
                 // For treasure what should the boost be?
                 //
                 health_boost(it->get_nutrition());
-                return (true);
+                return true;
             }
         }
     }
-    return (false);
+    return false;
 }
 
 bool Thing::can_eat (const Thingp itp)
@@ -44,31 +44,31 @@ bool Thing::can_eat (const Thingp itp)
 
     if (me->is_meat_eater()) {
         if (it->is_meat() || it->is_blood()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_treasure_eater()) {
         if (it->is_treasure()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_potion_eater()) {
         if (it->is_potion()) {
-            return (true);
+            return true;
         }
     }
     if (me->is_jelly_baby_eater()) {
         if (it->is_jelly_baby()) {
-            return (true);
+            return true;
         }
     }
     if (is_player()) {
         if (it->is_food()) {
-            return (true);
+            return true;
         }
         if (it->is_collectable()) {
-            return (true);
+            return true;
         }
     }
-    return (false);
+    return false;
 }

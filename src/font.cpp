@@ -73,5 +73,5 @@ uint8_t font_init (void)
                            UI_FONT_WIDTH,
                            TTF_STYLE_NORMAL);
 
-    return (true);
+    return true;
 }

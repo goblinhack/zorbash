@@ -31,13 +31,13 @@ uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
     } else {
         DIE_CLEAN("USERCFG: quit");
     }
-    return (false);
+    return false;
 }
 
 uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_quit_destroy();
-    return (false);
+    return false;
 }
 
 uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -56,20 +56,20 @@ uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
                 switch (c) {
                     case 'y':
                         game_quit_yes(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 'n':
                         game_quit_no(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                     case 'b':
                     case SDLK_ESCAPE:
                         game_quit_no(nullptr, 0, 0, 0);
-                        return (true);
+                        return true;
                 }
             }
         }
     }
 
-    return (false);
+    return false;
 }
 
 uint8_t game_quit_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -78,7 +78,7 @@ uint8_t game_quit_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 void Game::quit_select (void)

@@ -125,7 +125,7 @@ int Level::particle_box_collision (Particlep C,
         (std::min(start.x, end.x) - radius > R) ||
         (std::max(start.y, end.y) + radius < T) ||
         (std::min(start.y, end.y) - radius > B)) {
-        return (false);
+        return false;
     }
 
     const float dx = end.x - start.x;
@@ -153,7 +153,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
                 CON("%d line %d left", idx, __LINE__);
 #endif
-                return (true);
+                return true;
             }
         }
         cornerX = L;
@@ -174,7 +174,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
                 CON("%d line %d right", idx, __LINE__);
 #endif
-                return (true);
+                return true;
             }
         }
         cornerX = R;
@@ -195,7 +195,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
                 CON("%d line %d top", idx, __LINE__);
 #endif
-                return (true);
+                return true;
             }
         }
         cornerY = T;
@@ -216,7 +216,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
                 CON("%d line %d bot", idx, __LINE__);
 #endif
-                return (true);
+                return true;
             }
         }
         cornerY = B;
@@ -227,7 +227,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
         CON("%d line %d no overlap", idx, __LINE__);
 #endif
-        return (false);
+        return false;
     }
 
     // Account for the times where we don't pass over a side but we do hit
@@ -285,7 +285,7 @@ int Level::particle_box_collision (Particlep C,
 #endif
         C->velocity.x = 0;
         C->velocity.y = 0;
-        return (false);
+        return false;
     }
 
     // If inner angle is zero, it's going to hit the corner straight on.
@@ -301,7 +301,7 @@ int Level::particle_box_collision (Particlep C,
 #endif
             normal->x = -C->velocity.x;
             normal->y = -C->velocity.y;
-            return (true);
+            return true;
         }
 
         //float ix = time * dx + start.x;
@@ -317,7 +317,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
         CON("%d line %d hit corner straight on", idx, __LINE__);
 #endif
-        return (true);
+        return true;
     }
 
     float innerAngleSin = sin(innerAngle);
@@ -328,7 +328,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
         CON("%d line %d hit corner, angle too large angle1Sin %f", idx, __LINE__, angle1Sin);
 #endif
-        return (false);
+        return false;
     }
 
     float angle1 = M_PI - asin(angle1Sin);
@@ -346,7 +346,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
         CON("%d line %d hit corner future or past", idx, __LINE__);
 #endif
-        return (false);
+        return false;
     }
 
     // Solve the intersection and normal
@@ -362,7 +362,7 @@ int Level::particle_box_collision (Particlep C,
 #if 0
     CON("%d line %d hit corner a1 %f a2 %f", idx, __LINE__, (angle1 / RAD_360) * 360, (angle2 / RAD_360) * 360);
 #endif
-    return (true);
+    return true;
 }
 
 void Level::new_particle (const fpoint &at)
@@ -550,7 +550,7 @@ bool Level::collision_check_particle (Particlep p, int16_t x, int16_t y)
                                 fpoint((float)x + 0.5, (float)y + 0.5),
                                 &normal,
                                 &intersect)) {
-        return (false);
+        return false;
     }
 
     move_particle(p, p->old_at);
@@ -585,7 +585,7 @@ bool Level::collision_check_particle (Particlep p, int16_t x, int16_t y)
     p->velocity.x *= damping;
     p->velocity.y *= damping;
 
-    return (true);
+    return true;
 }
 
 bool Level::collision_check_particle (Particlep p)
@@ -602,7 +602,7 @@ bool Level::collision_check_particle (Particlep p)
             }
 
             if (collision_check_particle(p, x, y)) {
-                return (true);
+                return true;
             }
         }
     }
@@ -631,7 +631,7 @@ bool Level::collision_check_particle (Particlep p)
         }
     }
 #endif
-    return (false);
+    return false;
 }
 
 void Level::apply_particle_forces (void)

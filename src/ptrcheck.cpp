@@ -612,12 +612,12 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 
     if (!ptr) {
         ERR("null pointer");
-        return (false);
+        return false;
     }
 
     pc = ptrcheck_verify_pointer(ptr, file, func, line, true /* dont store */);
     if (!pc) {
-        return (false);
+        return false;
     }
 
     //
@@ -654,7 +654,7 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 
     hash_free(hash, ptr);
 
-    return (true);
+    return true;
 }
 
 //
@@ -664,7 +664,7 @@ int ptrcheck_verify (const void *ptr, std::string &func, std::string &file,
                      int line)
 {
     if (!ptr_check_some_pointers_changed) {
-        return (true);
+        return true;
     }
 
     return (ptrcheck_verify_pointer(ptr, file, func, line,

@@ -30,9 +30,9 @@ bool Thing::is_obstacle_for_me (const point &p)
             if (t->is_loggable_for_unimportant_stuff()) {
                 log(" is an obstacle for me %s", t->to_string().c_str());
             }
-            return (true);
+            return true;
         }
     }
 
-    return (false);
+    return false;
 }

@@ -22,7 +22,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     if (is_dead) {
         hitter->log("hit fails, it's dead");
-        return (false);
+        return false;
     }
 
     if (is_jelly_baby()) {
@@ -31,13 +31,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             dead("combined");
             hitter->dead("combined");
             level->thing_new("jelly2", mid_at);
-            return (true);
+            return true;
         }
     }
 
     if (!damage) {
         hitter->log("hit fails, no damage");
-        return (false);
+        return false;
     }
 
     //
@@ -60,9 +60,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     } else if (hitter->is_monst()) {
         switch (hitter->try_to_shove_into_hazard(this, delta)) {
             case THING_SHOVE_TRIED_AND_FAILED:
-                return (true);
+                return true;
             case THING_SHOVE_TRIED_AND_PASSED:
-                return (true);
+                return true;
             case THING_SHOVE_NEVER_TRIED:
                 break;
         }
@@ -102,7 +102,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (real_hitter->is_item_eater()) {
         if (is_carrying_item()) {
             if (real_hitter->steal_item_from(this)) {
-                return (true);
+                return true;
             }
         }
     }
@@ -214,7 +214,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->to_string().c_str(), damage, h);
     }
 
-    return (true);
+    return true;
 }
 
 //
@@ -229,12 +229,12 @@ _
     //
     if (is_dead) {
         hitter->log("no, it's dead");
-        return (false);
+        return false;
     }
 
     if (is_resurrecting) {
         hitter->log("no, it's resurrecting");
-        return (false);
+        return false;
     }
 
     //
@@ -267,7 +267,7 @@ _
         // already dead though.
         //
         hitter->log("no, it's dead");
-        return (false);
+        return false;
     }
 
     //
@@ -290,7 +290,7 @@ _
                 // Not something that typically damages walls.
                 //
                 hitter->log("no, it's immune");
-                return (false);
+                return false;
             }
         }
 
@@ -302,7 +302,7 @@ _
                 // Not something that typically damages walls.
                 //
                 hitter->log("no, it's immune");
-                return (false);
+                return false;
             }
         }
 
@@ -314,7 +314,7 @@ _
             hitter = hitter->get_owner();
             if (!hitter) {
                 hitter->log("ignore %s, no owner", to_string().c_str());
-                return (false);
+                return false;
             }
 
             verify(hitter);
@@ -325,7 +325,7 @@ _
             weapon = hitter->weapon_get();
             if (!weapon) {
                 hitter->log("ignore %s, no weapon", to_string().c_str());
-                return (false);
+                return false;
             }
 
             if (!damage) {
@@ -345,7 +345,7 @@ _
             hitter = hitter->get_owner();
             if (!hitter) {
                 hitter->log("ignore %s, no owner", to_string().c_str());
-                return (false);
+                return false;
             }
 
             verify(hitter);
@@ -356,7 +356,7 @@ _
             weapon = hitter->weapon_get();
             if (!weapon) {
                 hitter->log("ignore %s, no weapon", to_string().c_str());
-                return (false);
+                return false;
             }
 
             if (!damage) {
@@ -368,7 +368,7 @@ _
             //
             if (hitter == this) {
                 hitter->log("ignore %s, self attack", to_string().c_str());
-                return (false);
+                return false;
             }
         }
 #endif

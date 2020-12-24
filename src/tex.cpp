@@ -53,7 +53,7 @@ static std::map<std::string, Texp> textures_mask;
 
 uint8_t tex_init (void)
 {_
-    return (true);
+    return true;
 }
 
 void tex_fini (void)

@@ -27,9 +27,9 @@ public:
     bool operator <(const Nodecost& rhs) const
     {
         if (cost < rhs.cost) {
-            return (true);
+            return true;
         } else if (cost > rhs.cost) {
-            return (false);
+            return false;
         } else {
             return (tiebreak < rhs.tiebreak);
         }

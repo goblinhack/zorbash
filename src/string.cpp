@@ -286,7 +286,7 @@ int32_t strisregexp (const char *in)
         }
     }
 
-    return (false);
+    return false;
 }
 
 size_t strlcpy_ (char *dst, const char *src, size_t maxlen)

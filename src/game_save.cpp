@@ -537,7 +537,7 @@ bool Game::save (std::string file_to_save)
             (unsigned long) compressed_len / (1024 * 1024));
     } else {
         ERR("LZO internal error - compression failed: %d", r);
-        return (false);
+        return false;
     }
 
 #ifdef ENABLE_DEBUG_SAVE_CHECK
@@ -559,7 +559,7 @@ bool Game::save (std::string file_to_save)
         } else {
             /* this should NEVER happen */
             ERR("LZO internal error - decompression failed: %d", r);
-            return (false);
+            return false;
         }
     }
 #endif
@@ -587,7 +587,7 @@ bool Game::save (std::string file_to_save)
     free(compressed);
     free(wrkmem);
 
-    return (true);
+    return true;
 }
 
 void
@@ -680,20 +680,20 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
                         int slot = c - '0';
                         game->save(slot);
                         wid_save_destroy();
-                        return (true);
+                        return true;
                     }
                     case 'b':
                     case SDLK_ESCAPE: {_
                         CON("PLAYER: Save game cancelled");
                         wid_save_destroy();
-                        return (true);
+                        return true;
                     }
                 }
             }
         }
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
@@ -702,7 +702,7 @@ uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
         return false;
     }
 
-    return (true);
+    return true;
 }
 
 uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -710,7 +710,7 @@ uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
     auto slot = wid_get_int_context(w);
     game->save(slot);
     wid_save_destroy();
-    return (true);
+    return true;
 }
 
 void Game::save_select (void)

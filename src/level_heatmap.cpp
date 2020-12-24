@@ -8,7 +8,7 @@
 uint8_t Level::heatmap (const point &p)
 {
     if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
+        return false;
     }
     return (get(_heatmap, p.x, p.y));
 }
@@ -21,7 +21,7 @@ uint8_t Level::heatmap_no_check (const point &p)
 uint8_t Level::heatmap (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
-        return (false);
+        return false;
     }
     return (get(_heatmap, x, y));
 }

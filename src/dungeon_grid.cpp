@@ -1357,14 +1357,14 @@ bool Nodes::place_lock (int depth, int pass)
         if (debug_enabled) {
             LOG("no lock placed for depth %d", depth);
         }
-        return (false);
+        return false;
     }
 
     auto i = random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
     n->is_lock = true;
-    return (true);
+    return true;
 }
 
 void Nodes::hide_other_locks (int depth, int pass)
@@ -1455,14 +1455,14 @@ bool Nodes::place_key (int depth, int pass)
         if (debug_enabled) {
             LOG("no key placed for depth %d", depth);
         }
-        return (false);
+        return false;
     }
 
     auto i = random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
     n->is_key = true;
-    return (true);
+    return true;
 }
 
 bool Nodes::place_entrance (void)
@@ -1497,7 +1497,7 @@ bool Nodes::place_entrance (void)
 
     if (!s.size()) {
         debug("entrance not found");
-        return (false);
+        return false;
     }
 
     auto i = random_range(0, s.size());
@@ -1505,7 +1505,7 @@ bool Nodes::place_entrance (void)
     auto n = getn(p.x, p.y);
     n->is_entrance = true;
 
-    return (true);
+    return true;
 }
 
 bool Nodes::place_exit (void)
@@ -1539,7 +1539,7 @@ bool Nodes::place_exit (void)
 
     if (!s.size()) {
         debug("exit is no deep enough");
-        return (false);
+        return false;
     }
 
     auto i = random_range(0, s.size());
@@ -1547,7 +1547,7 @@ bool Nodes::place_exit (void)
     auto n = getn(p.x, p.y);
     n->is_exit = true;
 
-    return (true);
+    return true;
 }
 
 void Nodes::remove_stubs (void)
@@ -1744,7 +1744,7 @@ bool Nodes::create_path_to_exit (int pass)
         auto s = point(start.x*2+1, start.y*2+1);
         auto p = dmap_solve(&d, s);
         if (p.size() < (unsigned)(grid_width * 2)) {
-            return (false);
+            return false;
         }
     }
 
@@ -1799,7 +1799,7 @@ bool Nodes::create_path_to_exit (int pass)
         }
     }
 
-    return (true);
+    return true;
 }
 
 void Nodes::create_path_lock_to_key (int depth)

@@ -1250,58 +1250,58 @@ bool Dungeon::room_is_a_candidate (const Node *n, Roomp r)
         for (auto y = 0; y < nodes->grid_height; y++) {
             auto o = get(grid.node_rooms, x, y);
             if (o == r) {
-                return (false);
+                return false;
             }
         }
     }
 
     if ((n->has_door_down || n->has_secret_exit_down) &&
         !r->doors_down.size()) {
-        return (false);
+        return false;
     }
     if ((n->has_door_up || n->has_secret_exit_up) &&
         !r->doors_up.size()) {
-        return (false);
+        return false;
     }
     if ((n->has_door_left || n->has_secret_exit_left) &&
         !r->doors_left.size()) {
-        return (false);
+        return false;
     }
     if ((n->has_door_right || n->has_secret_exit_right) &&
         !r->doors_right.size()) {
-        return (false);
+        return false;
     }
     if (n->dir_left != r->dir_left) {
-        return (false);
+        return false;
     }
     if (n->dir_right != r->dir_right) {
-        return (false);
+        return false;
     }
     if (n->dir_up != r->dir_up) {
-        return (false);
+        return false;
     }
     if (n->dir_down != r->dir_down) {
-        return (false);
+        return false;
     }
     if (n->is_exit != r->is_exit) {
-        return (false);
+        return false;
     }
     if (n->is_entrance != r->is_entrance) {
-        return (false);
+        return false;
     }
     if (n->is_lock != r->is_lock) {
-        return (false);
+        return false;
     }
     if (n->is_key != r->is_key) {
-        return (false);
+        return false;
     }
     if (n->is_secret != r->is_secret) {
-        return (false);
+        return false;
     }
     if (n->depth != r->depth) {
-        return (false);
+        return false;
     }
-    return (true);
+    return true;
 }
 
 bool Dungeon::room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
@@ -1310,52 +1310,52 @@ bool Dungeon::room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
         for (auto y = 0; y < nodes->grid_height; y++) {
             auto o = get(grid.node_rooms, x, y);
             if (o == r) {
-                return (false);
+                return false;
             }
         }
     }
 
     if ((n->has_door_down || n->has_secret_exit_down) &&
         !r->doors_down.size()) {
-        return (false);
+        return false;
     }
     if ((n->has_door_up || n->has_secret_exit_up) &&
         !r->doors_up.size()) {
-        return (false);
+        return false;
     }
     if ((n->has_door_left || n->has_secret_exit_left) &&
         !r->doors_left.size()) {
-        return (false);
+        return false;
     }
     if ((n->has_door_right || n->has_secret_exit_right) &&
         !r->doors_right.size()) {
-        return (false);
+        return false;
     }
     if (r->dir_left) {
-        return (false);
+        return false;
     }
     if (r->dir_right) {
-        return (false);
+        return false;
     }
     if (r->dir_up) {
-        return (false);
+        return false;
     }
     if (r->dir_down) {
-        return (false);
+        return false;
     }
     if (n->is_exit != r->is_exit) {
-        return (false);
+        return false;
     }
     if (n->is_entrance != r->is_entrance) {
-        return (false);
+        return false;
     }
     if (n->is_lock != r->is_lock) {
-        return (false);
+        return false;
     }
     if (n->is_key != r->is_key) {
-        return (false);
+        return false;
     }
-    return (true);
+    return true;
 }
 
 bool Dungeon::solve (int x, int y, Grid *g)
@@ -1363,11 +1363,11 @@ bool Dungeon::solve (int x, int y, Grid *g)
     auto n = nodes->getn(x, y);
 
     if (!nodes->node_is_a_room(n)) {
-        return (true);
+        return true;
     }
 
     if (get(g->node_rooms, x, y)) {
-        return (true);
+        return true;
     }
 
     std::vector<Roomp> candidates;
@@ -1395,7 +1395,7 @@ bool Dungeon::solve (int x, int y, Grid *g)
             rooms_print_all(g);
             ERR("no grid room candidates at (%d,%d)", x, y);
             dump();
-            return (false);
+            return false;
         }
     }
 
@@ -1431,7 +1431,7 @@ bool Dungeon::solve (int x, int y, Grid *g)
             std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
         }
     }
-    return (true);
+    return true;
 }
 
 bool Dungeon::create_cyclic_rooms (Grid *g)
@@ -1462,7 +1462,7 @@ bool Dungeon::create_cyclic_rooms (Grid *g)
 
     rooms_print_all(g);
 
-    return (true);
+    return true;
 }
 
 void Dungeon::add_border (void)
@@ -2300,7 +2300,7 @@ bool Dungeon::rooms_move_closer_together (void)
     auto corridor_count = draw_corridors();
     if (!corridor_count) {
         _ debug("level before adding corridors is NOT solvable");
-        return (false);
+        return false;
     }
 
     _ debug("level before adding shorter corridors is solvable");
@@ -2527,7 +2527,7 @@ bool Dungeon::rooms_move_closer_together (void)
 
                 if (failed_to_make_shorter_corridors ++ > 1000) {
                     _ debug("cannot place shorter corridor layout");
-                    return (true);
+                    return true;
                 }
 
                 restore_level();
@@ -2539,7 +2539,7 @@ bool Dungeon::rooms_move_closer_together (void)
 
                 if (failed_to_place_all_corridors ++ > 1000) {
                     _ debug("cannot place shorter corridor layout");
-                    return (true);
+                    return true;
                 }
 
                 restore_level();

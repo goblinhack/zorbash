@@ -24,7 +24,7 @@ uint8_t tile_init (void)
 {_
     tile_init_done = true;
 
-    return (true);
+    return true;
 }
 
 void tile_fini (void)
