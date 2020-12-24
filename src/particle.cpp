@@ -264,7 +264,7 @@ void Level::display_external_particles (void)
                     auto t = thing_find(p.id);
                     if (t) {
                         if (p.make_visible_at_end) {
-                            if (!t->get_owner_id().ok()) {
+                            if (!t->get_immediate_owner_id().ok()) {
                                 t->visible();
                             }
                         }

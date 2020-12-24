@@ -11,16 +11,30 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-Thingp Thing::get_owner (void) const
+Thingp Thing::get_top_owner (void) const
 {_
-    auto id = get_owner_id();
+    auto id = get_immediate_owner_id();
     if (likely(id.ok())) {
         auto i = level->thing_find(id);
         if (unlikely(!i)) {
             return nullptr;
         }
-        if (unlikely(i->get_owner_id().ok())) {
-            return i->get_owner();
+        if (unlikely(i->get_immediate_owner_id().ok())) {
+            return i->get_immediate_owner();
+        }
+        return i;
+    } else {
+        return nullptr;
+    }
+}
+
+Thingp Thing::get_immediate_owner (void) const
+{_
+    auto id = get_immediate_owner_id();
+    if (likely(id.ok())) {
+        auto i = level->thing_find(id);
+        if (unlikely(!i)) {
+            return nullptr;
         }
         return i;
     } else {
@@ -34,7 +48,7 @@ void Thing::set_owner (Thingp owner)
         verify(owner);
     }
 
-    auto old_owner = get_owner();
+    auto old_owner = get_immediate_owner();
     if (old_owner) {
         if (old_owner == owner) {
             return;
@@ -42,16 +56,16 @@ void Thing::set_owner (Thingp owner)
 
         if (tp()->is_loggable_for_important_stuff()) {
             if (owner) {
-                log("set owner change %s->%s", old_owner->to_string().c_str(),
+                log("will change owner %s->%s", old_owner->to_string().c_str(),
                     owner->to_string().c_str());
             } else {
-                log("remove owner %s", old_owner->to_string().c_str());
+                log("will remove owner %s", old_owner->to_string().c_str());
             }
         }
     } else {
         if (tp()->is_loggable_for_important_stuff()) {
             if (owner) {
-                log("set owner %s", owner->to_string().c_str());
+                log("will set owner to %s", owner->to_string().c_str());
             }
         }
     }
@@ -69,7 +83,7 @@ void Thing::set_owner (Thingp owner)
 
 void Thing::remove_owner (void)
 {_
-    auto old_owner = get_owner();
+    auto old_owner = get_immediate_owner();
     if (!old_owner) {
         return;
     }

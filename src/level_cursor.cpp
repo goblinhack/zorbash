@@ -31,6 +31,10 @@ void Level::cursor_find_on_visible_things (
                         const uint16_t minx, const uint16_t miny,
                         const uint16_t maxx, const uint16_t maxy)
 {
+    if (game->moving_items) {
+        return;
+    }
+
     if (!cursor_needs_update) {
         return;
     }
@@ -78,7 +82,7 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
 
-            if (t->get_owner() ||
+            if (t->get_immediate_owner() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {
@@ -106,7 +110,7 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
 
-            if (t->get_owner() ||
+            if (t->get_immediate_owner() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {
@@ -129,7 +133,7 @@ void Level::cursor_find_on_visible_things (
                 continue;
             }
 
-            if (t->get_owner() ||
+            if (t->get_immediate_owner() ||
                 t->is_cursor() ||
                 t->is_cursor_path() ||
                 t->is_the_grid) {

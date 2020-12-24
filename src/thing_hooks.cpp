@@ -24,8 +24,8 @@ void Thing::hooks_remove ()
     //
     Thingp owner = nullptr;
 
-    if (get_owner_id().ok()) {
-        owner = get_owner();
+    if (get_immediate_owner_id().ok()) {
+        owner = get_immediate_owner();
     }
 
     if (owner) {
@@ -138,7 +138,7 @@ void Thing::hooks_remove ()
         //
         for (auto p : level->all_things) {
             auto t = p.second;
-            auto o = t->get_owner();
+            auto o = t->get_immediate_owner();
             if (o && (o == this)) {
                 t->remove_owner();
             }

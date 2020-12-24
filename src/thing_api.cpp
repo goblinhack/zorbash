@@ -1695,9 +1695,9 @@ int Thing::get_stats_health (void) const
         verify(monstp);
         v = monstp->stats_health;
     }
-    auto owner = get_owner();
+    auto owner = get_immediate_owner();
     if (owner) {
-        auto owner = get_owner();
+        auto owner = get_immediate_owner();
         return v + owner->get_stats_health();
     }
     return v;
@@ -1816,9 +1816,9 @@ int Thing::get_stats_defence (void) const
         verify(monstp);
         v = monstp->stats_defence;
     }
-    auto owner = get_owner();
+    auto owner = get_immediate_owner();
     if (owner) {
-        auto owner = get_owner();
+        auto owner = get_immediate_owner();
         return v + owner->get_stats_defence();
     }
     return v;
@@ -3161,9 +3161,9 @@ int Thing::get_stats_stamina (void) const
         verify(monstp);
         v = monstp->stats_stamina;
     }
-    auto owner = get_owner();
+    auto owner = get_immediate_owner();
     if (owner) {
-        auto owner = get_owner();
+        auto owner = get_immediate_owner();
         return v + owner->get_stats_stamina();
     }
     return v;

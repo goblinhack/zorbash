@@ -24,7 +24,7 @@ bool Thing::exit_tick (void)
         return false;
     }
 
-    if (get_owner()) {
+    if (get_immediate_owner()) {
         return false;
     }
 

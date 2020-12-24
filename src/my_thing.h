@@ -752,7 +752,7 @@ public:
     void unset_on_fire(void);
     bool set_on_fire(const std::string &why);
 
-    const ThingId& get_owner_id (void) const
+    const ThingId& get_immediate_owner_id (void) const
     {_
         if (likely(monstp != nullptr)) {
             verify(monstp);
@@ -815,7 +815,8 @@ public:
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
-    Thingp get_owner() const;
+    Thingp get_top_owner() const;
+    Thingp get_immediate_owner() const;
     Thingp nearby_most_dangerous_thing_get(void);
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);

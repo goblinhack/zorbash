@@ -28,7 +28,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     float dx = 1.0;
     float dy = 1.0;
     if (level->player) {
-        if (get_owner_id() == level->player->id) {
+        if (get_immediate_owner_id() == level->player->id) {
             // use default shadow for carried items
         } else if (this != level->player) {
             fpoint p = level->player->get_interpolated_mid_at();
@@ -149,7 +149,7 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
         return;
     }
 
-    if (is_player() || (get_owner_id() == level->player->id)) {
+    if (is_player() || (get_immediate_owner_id() == level->player->id)) {
         blit_player_owned_shadow(tpp, tile, blit_tl, blit_br);
     } else {
         blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
@@ -379,7 +379,7 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Flipping
     //
-    auto owner = get_owner();
+    auto owner = get_immediate_owner();
     auto falling = is_falling || (owner && owner->is_falling);
     if (likely(!falling)) {
         if (unlikely(tpp->gfx_animated_can_hflip())) {
@@ -387,7 +387,7 @@ bool Thing::get_coords (point &blit_tl,
             // Confusing in ascii mode
             //
             if (is_player() ||
-                (level->player && (get_owner_id() == level->player->id)) ||
+                (level->player && (get_immediate_owner_id() == level->player->id)) ||
                 !game->config.ascii_mode) {
                 if (get_timestamp_flip_start()) {
                     //
@@ -600,7 +600,7 @@ uint8_t Thing::blit_begin_submerged (void) const
     if (submerged) {
         blit_flush();
         auto waterline = last_blit_br.y;
-        auto owner = get_owner();
+        auto owner = get_immediate_owner();
         if (owner) {
             waterline = owner->last_blit_br.y;
         }
@@ -632,7 +632,7 @@ uint8_t Thing::blit_begin_reflection_submerged (void) const
     if (submerged) {
         blit_flush();
         auto waterline = last_blit_br.y;
-        auto owner = get_owner();
+        auto owner = get_immediate_owner();
         if (owner) {
             waterline = owner->last_blit_br.y;
         }

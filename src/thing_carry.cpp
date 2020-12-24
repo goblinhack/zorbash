@@ -47,7 +47,7 @@ _
         }
     }
 
-    auto existing_owner = it->get_owner();
+    auto existing_owner = it->get_immediate_owner();
     if (existing_owner) {
         if (existing_owner == this) {
             log("no; same owner");
@@ -104,7 +104,7 @@ std::list<Thingp> Thing::anything_to_carry (void)
             continue;
         }
 
-        if (t->get_owner()) {
+        if (t->get_immediate_owner()) {
             continue;
         }
 
@@ -130,7 +130,7 @@ bool Thing::check_anything_to_carry (void)
             continue;
         }
 
-        if (t->get_owner()) {
+        if (t->get_immediate_owner()) {
             continue;
         }
 

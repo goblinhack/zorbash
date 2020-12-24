@@ -101,7 +101,7 @@ static void wid_leftbar_create (void)
                         }
                     }
 
-                    if (t->get_owner_id().ok()) {
+                    if (t->get_immediate_owner_id().ok()) {
                         continue;
                     }
 

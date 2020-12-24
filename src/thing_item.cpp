@@ -129,7 +129,7 @@ bool Thing::is_carrying_item (void)
         return true;
     }
 
-    auto owner = get_owner();
+    auto owner = get_top_owner();
     if (owner) {
         return owner->is_carrying_item();
     }
@@ -164,7 +164,7 @@ _
         }
     }
 
-    auto owner = get_owner();
+    auto owner = get_immediate_owner();
     if (owner) {
         auto tr2 = owner->get_item_list();
         std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));

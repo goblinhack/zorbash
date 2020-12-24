@@ -19,10 +19,9 @@ void Thing::used (Thingp what, Thingp target)
         return;
     }
 
-    auto existing_owner = what->get_owner();
+    auto existing_owner = what->get_top_owner();
     if (existing_owner != this) {
-        err("attempt to use %s which is not carried",
-            what->to_string().c_str());
+        err("attempt to use %s which is not carried", what->to_string().c_str());
         return;
     }
 

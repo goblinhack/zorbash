@@ -23,7 +23,7 @@ void Thing::visible (void)
     //
     // If this thing has an owner, should the thing stay hidden?
     //
-    auto owner = get_owner();
+    auto owner = get_top_owner();
     if (owner) {
         if (this == owner->weapon_get_carry_anim()) {
             if (owner->weapon_get_use_anim()) {
