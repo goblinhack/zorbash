@@ -61,6 +61,7 @@ const std::string& Tp::long_text_description(void) const { return _long_text_des
 const std::string& Tp::text_description(void) const { return _text_description; }
 const std::string& Tp::text_hits(void) const { return _text_hits; }
 const std::string& Tp::text_name(void) const { return _text_name; }
+const std::string& Tp::short_text_name(void) const { return _short_text_name; }
 const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
 const std::string& Tp::gfx_anim_attack(void) const { return _gfx_anim_attack; }
 float Tp::collision_attack_radius(void) const { return _collision_attack_radius; }
@@ -556,6 +557,7 @@ void Tp::set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
 void Tp::set_text_description(const std::string &v) { _text_description = v; }
 void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
 void Tp::set_text_name(const std::string &v) { _text_name = v; }
+void Tp::set_short_text_name(const std::string &v) { _short_text_name = v; }
 void Tp::set_text_title(const std::string &v) { _text_title = v; }
 void Tp::set_tick_catches_up_on_attack(int v) { _tick_catches_up_on_attack = v; }
 void Tp::set_tick_rate_tenths(int v) { _tick_rate_tenths = v; }

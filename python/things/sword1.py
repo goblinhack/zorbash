@@ -82,8 +82,8 @@ def init_carry(name):
 
     x.update()
 
-def init_weapon(name, text_name):
-    x = tp.Tp(name, text_name)
+def init_weapon(name, text_name, short_text_name):
+    x = tp.Tp(name, text_name, short_text_name)
 
     x.set_gfx_anim_attack("sword1_swing")
     x.set_gfx_animated(True)
@@ -119,6 +119,6 @@ def init_weapon(name, text_name):
 def init():
     init_swing(name="sword1_swing")
     init_carry(name="sword1_carry")
-    init_weapon(name="sword1", text_name="sword")
+    init_weapon(name="sword1", text_name="short sword", short_text_name="short sword")
 
 init()

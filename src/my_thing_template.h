@@ -334,6 +334,7 @@ private:
     std::string _text_description;
     std::string _text_hits;
     std::string _text_name;
+    std::string _short_text_name;
     std::string _text_title;
     std::string _weapon_carry_anim;
 public:
@@ -425,6 +426,7 @@ public:
     const std::string& text_description(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
+    const std::string& short_text_name(void) const;
     const std::string& text_title(void) const;
     const std::string& weapon_carry_anim(void) const;
     const std::string& gfx_anim_attack(void) const;
@@ -922,6 +924,7 @@ public:
     void set_text_description(const std::string &);
     void set_text_hits(const std::string &);
     void set_text_name(const std::string &);
+    void set_short_text_name(const std::string &);
     void set_text_title(const std::string &);
     void set_tick_catches_up_on_attack(int);
     void set_tick_rate_tenths(int);
@@ -936,10 +939,13 @@ public:
 
 Tilep tp_first_tile(Tpp);
 Tpp string2tp(const char **s);
-Tpp string2tp(std::string &s, int *len);
-Tpp string2tp(std::wstring &s, int *len);
+Tpp string2tp(const std::string &s, int *len);
+Tpp string2tp(const std::wstring &s, int *len);
 Tpp tp_find(uint32_t id);
-Tpp tp_load(int id, std::string const& file, std::string const& text_name);
+Tpp tp_load(int id, 
+            const std::string & file, 
+            const std::string & text_name,
+            const std::string & text_short_name);
 Tpp tp_random_blood(void);
 Tpp tp_random_blood_splatter(void);
 Tpp tp_random_deco(void);

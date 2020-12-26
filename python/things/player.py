@@ -2,8 +2,8 @@ import zx
 import tp
 
 
-def tp_init(name, text_name, title):
-    x = tp.Tp(name, text_name)
+def tp_init(name, text_name, short_text_name, title):
+    x = tp.Tp(name, text_name, short_text_name)
 
     x.set_collision_attack(True)
     x.set_collision_check(True)
@@ -123,7 +123,7 @@ def tp_init(name, text_name, title):
     x.update()
 
 def init():
-    tp_init(name="player1", text_name="noble warrior", title="Ser Hackalot")
-    tp_init(name="player2", text_name="noble warrior", title="Ser Deadalot")
+    tp_init(name="player1", text_name="noble warrior", title="Ser Hackalot", short_text_name="you")
+    tp_init(name="player2", text_name="noble warrior", title="Ser Deadalot", short_text_name="you")
 
 init()

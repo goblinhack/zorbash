@@ -2,8 +2,8 @@ import zx
 import tp
 
 
-def acid_init(name, text_name, tiles=[], left_tiles=[]):
-    x = tp.Tp(name, text_name)
+def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
+    x = tp.Tp(name, text_name, short_text_name)
 
     x.set_ai_obstacle(True)
     x.set_gfx_show_outlined(True)
@@ -30,7 +30,7 @@ def acid_init(name, text_name, tiles=[], left_tiles=[]):
     x.update()
 
 def init():
-    acid_init(name="acid1", text_name="hissing acid",
+    acid_init(name="acid1", text_name="hissing acid", short_text_name="acid",
             tiles=[
                 "acid1.1",
                 "acid1.2",

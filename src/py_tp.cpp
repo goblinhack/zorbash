@@ -36,12 +36,19 @@ PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
+    char *tp_short_text_name = py_obj_attr_str(py_class, "short_text_name");
+    if (!tp_short_text_name) {
+        ERR("tp_load, missing tp short_text_name");
+        Py_RETURN_NONE;
+    }
+
     static int id;
     id++;
-    tp_load(id, tp_name, tp_text_name);
+    tp_load(id, tp_name, tp_text_name, tp_short_text_name);
 
     myfree(tp_name);
     myfree(tp_text_name);
+    myfree(tp_short_text_name);
 
     Py_RETURN_NONE;
 }

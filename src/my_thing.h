@@ -823,8 +823,8 @@ public:
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
-    Thingp get_top_owner() const;
     Thingp get_immediate_owner() const;
+    Thingp get_top_owner() const;
     Thingp nearby_most_dangerous_thing_get(void);
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);
@@ -873,8 +873,8 @@ public:
     bool describe_when_hovering_over(void);
     bool describe_when_in_inventory(void);
     bool drop(Thingp w);
-    bool drop_into_ether(Thingp w);
     bool drop(Thingp w, Thingp target);
+    bool drop_into_ether(Thingp w);
     bool eat(Thingp it);
     bool entrance_tick();
     bool exit_tick();
@@ -920,6 +920,7 @@ public:
     const std::string& long_text_description(void) const;
     const std::string& on_birth_do(void) const;
     const std::string& on_death_do(void) const;
+    const std::string& short_text_name(void) const;
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
     const std::string& str2(void) const;
@@ -1163,6 +1164,9 @@ public:
     std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_bag (void);
     std::list<Thingp> anything_to_carry(void);
     std::string get_danger_level(Thingp);
+    std::string short_text_The(void) const;
+    std::string short_text_a_or_an(void) const;
+    std::string short_text_the(void) const;
     std::string text_The(void) const;
     std::string text_a_or_an(void) const;
     std::string text_the(void) const;

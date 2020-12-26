@@ -2,8 +2,8 @@ import zx
 import tp
 
 
-def tp_init(name, text_name):
-    x = tp.Tp(name, text_name)
+def tp_init(name, text_name, short_text_name):
+    x = tp.Tp(name, text_name, short_text_name)
 
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
@@ -33,6 +33,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="food_frog1", text_name="chocolate frog")
+    tp_init(name="food_frog1", text_name="chocolate frog", short_text_name="choc frog")
 
 init()

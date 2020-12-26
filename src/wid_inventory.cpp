@@ -271,7 +271,7 @@ static void wid_inventory_create (void)
                         auto tp_id = monstp->inventory_id[i];
                         if (tp_id) {
                             auto tpp = tp_find(tp_id);
-                            wid_set_text(w, tpp->text_name());
+                            wid_set_text(w, tpp->short_text_name());
                             if (tpp->is_bag()) {
                                 wid_set_on_mouse_down(w, wid_inventory_mouse_down_on_bag);
                             } else {
@@ -326,8 +326,8 @@ static void wid_inventory_create (void)
                             point tl = make_point(1, y);
                             point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y);
                             wid_set_pos(w, tl, br);
-                            wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
-                            wid_set_text(w, "(wielded)");
+                            wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+                            wid_set_text(w, "(wielding)");
                             wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
                             wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
                             wid_set_int_context(w, i);

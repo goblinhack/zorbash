@@ -5,8 +5,8 @@ import tp
 def spawn(me, x, y):
     zx.tp_spawn_under(me, "acid1")
 
-def tp_init(name, text_name):
-    x = tp.Tp(name, text_name)
+def tp_init(name, text_name, short_text_name):
+    x = tp.Tp(name, text_name, short_text_name)
 
     x.set_ai_delay_after_moving_ms(1000)
     x.set_ai_scent_distance(5)
@@ -101,6 +101,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="cube1", text_name="dungeon cleaner")
+    tp_init(name="cube1", text_name="dungeon cleaner", short_text_name="cleaner")
 
 init()
