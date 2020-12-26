@@ -41,8 +41,7 @@ static timestamp_t load (timestamp_t T)
     if (!T) {
         return (0);
     }
-    return (T - old_timestamp_dungeon_created +
-            new_timestamp_dungeon_created);
+    return (T - old_timestamp_dungeon_created + new_timestamp_dungeon_created);
 }
 
 std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
@@ -587,7 +586,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.header_size);
     if (my.t.header_size != (uint32_t) sizeof(Game)) {
         game_load_error =
-          "old save file version '" VERSION "' v '" + my.t.version + "'";
+          "old version '" VERSION "' v '" + my.t.version + "'";
         return (in);
     }
     in >> bits(my.t.save_slot);
@@ -633,15 +632,19 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
 std::vector<char> read_file (const std::string filename)
 {_
     std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
-    ifs.unsetf(std::ios::skipws);
+    if (ifs.is_open()) {
+        ifs.unsetf(std::ios::skipws);
 
-    std::ifstream::pos_type sz = ifs.tellg();
-    ifs.seekg(0, std::ios::beg);
+        std::ifstream::pos_type sz = ifs.tellg();
+        ifs.seekg(0, std::ios::beg);
 
-    std::vector<char> bytes(sz);
-    ifs.read(bytes.data(), sz);
-
-    return bytes;
+        std::vector<char> bytes(sz);
+        ifs.read(bytes.data(), sz);
+        return bytes;
+    } else {
+        std::vector<char> bytes;
+        return bytes;
+    }
 }
 
 static std::vector<char> read_lzo_file (const std::string filename,
@@ -650,23 +653,27 @@ static std::vector<char> read_lzo_file (const std::string filename,
 {_
     std::ifstream ifs(filename,
                       std::ios::in | std::ios::binary | std::ios::ate);
-    // tellg is not ideal, look into <filesystem> post mojave
-    std::ifstream::pos_type sz = ifs.tellg();
-    if (sz < 0) {
-        return (std::vector<char> ());
+    if (ifs.is_open()) {
+        // tellg is not ideal, look into <filesystem> post mojave
+        std::ifstream::pos_type sz = ifs.tellg();
+        if (sz < 0) {
+            return (std::vector<char> ());
+        }
+
+        ifs.seekg(0, std::ios::beg);
+        ifs.unsetf(std::ios::skipws);
+        ifs.read((char*) uncompressed_sz, sizeof(*uncompressed_sz));
+        ifs.read((char*) cs, sizeof(*cs));
+
+        sz -= (int) sizeof(*uncompressed_sz);
+        sz -= (int) sizeof(*cs);
+        std::vector<char> bytes(sz);
+        ifs.read(bytes.data(), sz);
+        return (bytes);
+    } else {
+        std::vector<char> bytes;
+        return (bytes);
     }
-
-    ifs.seekg(0, std::ios::beg);
-    ifs.unsetf(std::ios::skipws);
-    ifs.read((char*) uncompressed_sz, sizeof(*uncompressed_sz));
-    ifs.read((char*) cs, sizeof(*cs));
-
-    sz -= (int) sizeof(*uncompressed_sz);
-    sz -= (int) sizeof(*cs);
-    std::vector<char> bytes(sz);
-    ifs.read(bytes.data(), sz);
-
-    return (bytes);
 }
 
 uint32_t csum (char *mem, uint32_t len)
@@ -683,6 +690,8 @@ uint32_t csum (char *mem, uint32_t len)
 bool
 Game::load (std::string file_to_load, class Game &target)
 {_
+    game_load_error = "";
+
     //
     // Read to a vector and then copy to a C buffer for LZO to use
     //
@@ -695,6 +704,7 @@ Game::load (std::string file_to_load, class Game &target)
         }
         return false;
     }
+
     auto data = vec.data();
     lzo_uint compressed_len = vec.size();
 
@@ -763,8 +773,10 @@ Game::load_config (void)
 {_
     auto filename = saved_dir + "config";
     std::ifstream in(filename);
-    in >> bits(*(&game->config));
-    game->config.log("READ:");
+    if (in.is_open()) {
+        in >> bits(*(&game->config));
+        game->config.log("READ:");
+    }
 }
 
 void
