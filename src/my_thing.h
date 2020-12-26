@@ -873,6 +873,7 @@ public:
     bool describe_when_hovering_over(void);
     bool describe_when_in_inventory(void);
     bool drop(Thingp w);
+    bool drop_into_ether(Thingp w);
     bool drop(Thingp w, Thingp target);
     bool eat(Thingp it);
     bool entrance_tick();

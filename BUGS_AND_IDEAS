@@ -1,8 +1,8 @@
 bugs
 ----
 - change level with non empty bag
-- cannot fit when have space
 - move item back to player and yield
+- move item onto inventory
 - drop items from bag
 
 upcoming work

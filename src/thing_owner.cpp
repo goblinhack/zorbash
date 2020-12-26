@@ -105,8 +105,7 @@ bool Thing::change_owner (Thingp new_owner)
 
     auto old_owner = get_immediate_owner();
     if (!old_owner) {
-        err("no old owner");
-	return true;
+        return true;
     }
 
     if (new_owner == old_owner) {
@@ -126,7 +125,6 @@ bool Thing::change_owner (Thingp new_owner)
     old_owner->monstp->carrying.remove(id);
 
     hooks_remove();
-    remove_owner();
 
     if (!new_owner->carry(this)) {
         err("new owner could not carry");

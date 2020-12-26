@@ -114,17 +114,10 @@ bool Thing::bag_compress (void)
                      bh - t->bag_item_height());
 #endif
 
-if (t->debug) {
-t->minicon("pre compress %d,%d", t->monstp->bag_position.x, t->monstp->bag_position.y);
-}
 	    if (bag_remove_at(t, t->monstp->bag_position)) {
                 if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
                     if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
-// t->con("moved to %d %d (a)",t->monstp->bag_position.x, t->monstp->bag_position.y + 1);
                         did_something = true;
-if (t->debug) {
-t->minicon("compressed to %d,%d", t->monstp->bag_position.x, t->monstp->bag_position.y);
-}
                     } else {
                         bag_place_at(t, t->monstp->bag_position);
                     }
@@ -132,14 +125,12 @@ t->minicon("compressed to %d,%d", t->monstp->bag_position.x, t->monstp->bag_posi
 #if 0
                 else if (bottom && bag_can_place_at(t, t->monstp->bag_position + point(1, 0))) {
                     if (bag_place_at(t, t->monstp->bag_position + point(1, 0))) {
-t->con("moved to %d %d (b)",t->monstp->bag_position.x + 1, t->monstp->bag_position.y);
                         // did_something = true;
                     } else {
                         bag_place_at(t, t->monstp->bag_position);
                     }
                 } else if (bottom && bag_can_place_at(t, t->monstp->bag_position + point(-1, 0))) {
                     if (bag_place_at(t, t->monstp->bag_position + point(-1, 0))) {
-t->con("moved to %d %d (c)",t->monstp->bag_position.x - 1, t->monstp->bag_position.y);
                         // did_something = true;
                     } else {
                         bag_place_at(t, t->monstp->bag_position);
@@ -147,16 +138,15 @@ t->con("moved to %d %d (c)",t->monstp->bag_position.x - 1, t->monstp->bag_positi
                 } 
 #endif
                 else {
-if (t->debug) {
-t->minicon("compressed fail %d,%d", t->monstp->bag_position.x, t->monstp->bag_position.y);
-}
                     bag_place_at(t, t->monstp->bag_position);
                 }
 	    }
 	}
     }
 
-    game->remake_inventory |= did_something;
+    if (!level->is_starting) {
+        game->remake_inventory |= did_something;
+    }
 
     return did_something;
 }

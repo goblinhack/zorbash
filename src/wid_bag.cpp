@@ -25,9 +25,11 @@ static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t bu
 
 static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 {_
+    bag->log("create bag with items widget");
     for (const auto& item : bag->monstp->carrying) {
         auto t = game->level->thing_find(item.id);
         auto tl = t->monstp->bag_position + point(1, 1);
+        bag->log("+ item %s", t->to_string().c_str());
 
         if (t->monstp->bag_position == point(-1, -1)) {
             continue;
@@ -90,12 +92,12 @@ static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t
     if (bag->bag_can_place_at(t, at)) {
         wid_destroy(&game->in_transit_item);
         t->monstp->preferred_bag_position = at;
-        t->change_owner(bag);
+        bag->carry(t);
         t->monstp->preferred_bag_position = point(-1, -1);
         while (bag->bag_compress()) { }
         game->remake_inventory = true;
     } else {
-        MINICON("Cannot fit that into the bag");
+        MINICON("Cannot fit the %s into the bag", t->text_the().c_str());
     }
 
     return true;
@@ -119,11 +121,18 @@ static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t b
     if (!bag) {
         return false;
     }
+
+    auto old_owner = t->get_immediate_owner();
+    if (!old_owner) {
+        MINICON("%s has no owner so cannot move it!", t->text_The().c_str());
+        return true;
+    }
+
     bag->bag_remove(t);
+    old_owner->drop_into_ether(t);
     while (bag->bag_compress()) { }
 
     t->describe_when_in_inventory();
-
     if (game->in_transit_item) {
         wid_destroy(&game->in_transit_item);
     }
