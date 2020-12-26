@@ -47,6 +47,16 @@ bool Thing::bag_contains (Thingp item)
 //
 bool Thing::bag_add (Thingp item)
 {
+    if (item->monstp->preferred_bag_position != point(-1, -1)) {
+        auto at = item->monstp->preferred_bag_position;
+	if (bag_can_place_at(item, at)) {
+	    if (bag_place_at(item, at)) {
+		while (bag_compress()) { }
+		return true;
+	    }
+	}
+    }
+
     auto bw = bag_width();
     auto bh = bag_height();
     auto w = item->bag_item_width();
@@ -57,10 +67,10 @@ bool Thing::bag_add (Thingp item)
 	tries++;
 	auto x = random_range(0, bw - w);
 	auto y = random_range(0, bh - h);
-	point p(x, y);
+	point at(x, y);
 
-	if (bag_can_place_at(item, p)) {
-	    if (bag_place_at(item, p)) {
+	if (bag_can_place_at(item, at)) {
+	    if (bag_place_at(item, at)) {
 		while (bag_compress()) { }
 		return true;
 	    }
@@ -69,9 +79,9 @@ bool Thing::bag_add (Thingp item)
 
     for (auto x = 0; x < bw - w; x++) {
         for (auto y = 0; y < bh - h; y++) {
-	    point p(x, y);
-	    if (bag_can_place_at(item, p)) {
-		if (bag_place_at(item, p)) {
+	    point at(x, y);
+	    if (bag_can_place_at(item, at)) {
+		if (bag_place_at(item, at)) {
 		    while (bag_compress()) { }
 		    return true;
 		}
@@ -104,11 +114,17 @@ bool Thing::bag_compress (void)
                      bh - t->bag_item_height());
 #endif
 
+if (t->debug) {
+t->minicon("pre compress %d,%d", t->monstp->bag_position.x, t->monstp->bag_position.y);
+}
 	    if (bag_remove_at(t, t->monstp->bag_position)) {
                 if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
                     if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
 // t->con("moved to %d %d (a)",t->monstp->bag_position.x, t->monstp->bag_position.y + 1);
                         did_something = true;
+if (t->debug) {
+t->minicon("compressed to %d,%d", t->monstp->bag_position.x, t->monstp->bag_position.y);
+}
                     } else {
                         bag_place_at(t, t->monstp->bag_position);
                     }
@@ -131,6 +147,9 @@ t->con("moved to %d %d (c)",t->monstp->bag_position.x - 1, t->monstp->bag_positi
                 } 
 #endif
                 else {
+if (t->debug) {
+t->minicon("compressed fail %d,%d", t->monstp->bag_position.x, t->monstp->bag_position.y);
+}
                     bag_place_at(t, t->monstp->bag_position);
                 }
 	    }
@@ -248,57 +267,4 @@ bool Thing::bag_remove (Thingp item)
     }
     item->monstp->bag_position = point(-1, -1);
     return found;
-}
-
-bool Thing::change_owner (Thingp new_owner)
-{_
-    if (!new_owner) {
-        err("no new owner");
-	return true;
-    }
-
-    auto old_owner = get_immediate_owner();
-    if (!old_owner) {
-        err("no old owner");
-	return true;
-    }
-
-    if (new_owner == old_owner) {
-	return true;
-    }
-
-    log("change owner from %s to %s",
-	old_owner->to_string().c_str(), new_owner->to_string().c_str());
-
-    if (old_owner->is_player()) {
-	if (!old_owner->inventory_id_remove(this)) {
-	    err("failed to remove %s from inventory", to_string().c_str());
-	    return false;
-	}
-    }
-
-    old_owner->monstp->carrying.remove(id);
-
-    hooks_remove();
-    remove_owner();
-
-    if (!new_owner->carry(this)) {
-        err("new owner could not carry");
-        return false;
-    }
-
-    //
-    // Sanity check
-    //
-    auto changed_owner = get_immediate_owner();
-    if (!changed_owner) {
-        err("owner change failed");
-        return false;
-    }
-    if (changed_owner != new_owner) {
-        err("owner change failed, owner is still %s", changed_owner->to_string().c_str());
-        return false;
-    }
-
-    return true;
 }

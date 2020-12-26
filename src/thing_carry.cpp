@@ -17,17 +17,23 @@ _
         return false;
     }
 
-    //
-    // Stop fast loops in collecting things
-    //
-    if (particle_anim_exists()) {
-        log("no; particle anim exists");
-        return false;
-    }
+    if (game->moving_items) {
+        //
+        // Avoid carry checks
+        //
+    } else {
+        //
+        // Stop fast loops in collecting things
+        //
+        if (particle_anim_exists()) {
+            log("no; particle anim exists");
+            return false;
+        }
 
-    if (get_where_i_dropped_an_item_last() == make_point(mid_at)) {
-        log("no; was dropped here recently");
-        return false;
+        if (get_where_i_dropped_an_item_last() == make_point(mid_at)) {
+            log("no; was dropped here recently");
+            return false;
+        }
     }
 
     if (!bag_add(it)) {

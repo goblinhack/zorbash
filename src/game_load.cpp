@@ -781,7 +781,7 @@ Game::load (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: Loaded %s, seed %d", save_file.c_str(), seed);
+    CON("DUNGEON: Loaded %s, seed %u", save_file.c_str(), seed);
     LOG("-");
 }
 
