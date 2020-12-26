@@ -1,8 +1,6 @@
 bugs
 ----
-- axe missing on wield
-- move item back to player and yield
-- move item onto inventory
+- bag in slot 0 hover over doesn't work
 - drop items from bag
 
 upcoming work

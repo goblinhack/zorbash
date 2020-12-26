@@ -43,6 +43,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         wid_set_style(w, UI_WID_STYLE_DARK);
 
         if (t == game->level->player->weapon_get()) {
+            bag->log("+ item %s (wielded)", t->to_string().c_str());
             wid_set_style(w, UI_WID_STYLE_RED);
         }
 
@@ -77,15 +78,13 @@ uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button
 
     int slot;
     if (is_mouse_over_inventory_slot(slot)) {
-        MINICON("placing in inventory");
+        LOG("placing in inventory");
         if (game->level->player->carry(t)) {
-            MINICON("placing in inventory; carried");
+            LOG("placed in inventory");
             wid_destroy(&game->in_transit_item);
             game->remake_inventory = true;
         }
         return true;
-    } else {
-        MINICON("not over inventory");
     }
 
     auto wid_bag_container = is_mouse_over_any_bag();

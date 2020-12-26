@@ -234,8 +234,7 @@ void Thing::unwield (const char *why)
         return;
     }
 
-    log("unwielding current weapon %s, why: %s",
-        weapon->tp()->name().c_str(), why);
+    log("unwielding current weapon %s, why: %s", weapon->tp()->name().c_str(), why);
 
     sheath();
 }
@@ -269,6 +268,8 @@ _
     } else {
         log("weapon had no use/attack anim");
     }
+
+    set_weapon_id(0);
 }
 
 void Thing::wield (Thingp weapon)
