@@ -41,6 +41,10 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_DARK);
 
+        if (t == game->level->player->weapon_get()) {
+            wid_set_style(w, UI_WID_STYLE_RED);
+        }
+
         wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
         wid_set_thing_id_context(w, item.id);
