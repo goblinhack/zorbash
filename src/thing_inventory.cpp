@@ -478,9 +478,12 @@ bool Level::inventory_chosen (const uint32_t slot)
     }
 
     Thingp what;
+    bool changed_highlight_slot = false;
 
     if (slot != game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
+        changed_highlight_slot = true;
+
         what = inventory_describe(slot);
     } else {
         what = inventory_describe(game->inventory_highlight_slot);
@@ -492,6 +495,9 @@ bool Level::inventory_chosen (const uint32_t slot)
 
     if (what->is_weapon()) {
         player->wield(what);
+        if (changed_highlight_slot) {
+            game->tick_begin("player wielded a new weapon");
+        }
     }
 
     if (what->is_bag()) {

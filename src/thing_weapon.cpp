@@ -5,6 +5,7 @@
 
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_game.h"
 
 Thingp Thing::weapon_get () const
 {_
@@ -276,7 +277,10 @@ void Thing::wield (Thingp weapon)
 
     if (weapon_get() == weapon) {
         log("re-wielding: %s", weapon_tp->name().c_str());
-        return;
+        //
+        // Do not return here. We need to set the carry anim post swing
+        //
+        sheath();
     } else {
         log("is wielding: %s", weapon_tp->name().c_str());
         unwield("wield new weapon");
