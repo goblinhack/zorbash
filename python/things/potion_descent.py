@@ -2,8 +2,8 @@ import zx
 import tp
 
 
-def potion_init(name, text_name):
-    x = tp.Tp(name, text_name)
+def tp_init(name, text_name, short_text_name):
+    x = tp.Tp(name, text_name, short_text_name)
 
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
@@ -40,6 +40,6 @@ def potion_init(name, text_name):
     x.update()
 
 def init():
-    potion_init(name="potion_descent", text_name="potion descent")
+    tp_init(name="potion_descent", text_name="potion of descent", short_text_name="pot.descent")
 
 init()

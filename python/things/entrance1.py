@@ -2,8 +2,8 @@ import zx
 import tp
 
 
-def tp_init(name, text_name):
-    x = tp.Tp(name, text_name)
+def tp_init(name, text_name, short_text_name):
+    x = tp.Tp(name, text_name, short_text_name)
 
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
@@ -41,6 +41,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="entrance1", text_name="dungeon entrance")
+    tp_init(name="entrance1", text_name="dungeon entrance", short_text_name="entrance")
 
 init()

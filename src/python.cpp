@@ -798,7 +798,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"tex_load",                                (PyCFunction)tex_load_,                                 METH_VARARGS | METH_KEYWORDS, "load a texture"},
     {"text_size",                               (PyCFunction)text_size_,                                METH_VARARGS | METH_KEYWORDS, "text size in pixels"},
     {"tile_load_arr",                           (PyCFunction)tile_load_arr_,                            METH_VARARGS | METH_KEYWORDS, "load a tile array"},
-    {"tile_load_arr_sprites", (PyCFunction)tile_load_arr_sprites_,  METH_VARARGS | METH_KEYWORDS, "load a tile array in color and black and white"},
+    {"tile_load_arr_sprites",                   (PyCFunction)tile_load_arr_sprites_,  METH_VARARGS | METH_KEYWORDS, "load a tile array in color and black and white"},
     {"tp_load",                                 (PyCFunction)tp_load_,                                  METH_VARARGS | METH_KEYWORDS, "load a thing template"},
     {"tp_spawn_next_to",                        (PyCFunction)tp_spawn_next_to_,                         METH_VARARGS | METH_KEYWORDS, "spawn a thing"},
     {"tp_spawn_next_to_or_on_monst",            (PyCFunction)tp_spawn_next_to_or_on_monst_,             METH_VARARGS | METH_KEYWORDS, "spawn a thing"},

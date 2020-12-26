@@ -2,12 +2,12 @@ import zx
 import tp
 
 
-def potion_init(name, text_name):
+def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
     x.set_bag_height(6)
-    x.set_bag_item_height(2)
-    x.set_bag_item_width(2)
+    x.set_bag_item_height(4)
+    x.set_bag_item_width(4)
     x.set_bag_width(8)
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
@@ -34,6 +34,6 @@ def potion_init(name, text_name):
     x.update()
 
 def init():
-    potion_init(name="bag_small", text_name="small bag")
+    tp_init(name="bag_small", text_name="wee bag")
 
 init()

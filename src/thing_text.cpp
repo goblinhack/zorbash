@@ -74,3 +74,67 @@ std::string Thing::text_The (void) const
     out[0] = toupper(out[0]);
     return (out);
 }
+
+std::string Thing::short_text_a_or_an (void) const
+{_
+    auto tpp = tp();
+    verify(this);
+    verify(tpp);
+    if (unlikely(!tpp)) {
+        return ("<no name>");
+    }
+
+    std::string out = "";
+
+    if (is_undead()) {
+        out += "an undead ";
+    } else {
+        if (is_dead) {
+            out += "a dead ";
+        }
+    }
+
+    if (out == "") {
+        auto prefix = tpp->text_a_or_an();
+        if (prefix == "") {
+            out = tpp->short_text_name();
+        } else {
+            out = prefix + " " + tpp->short_text_name();
+        }
+    } else {
+        out += tpp->short_text_name();
+    }
+
+    return (out);
+}
+
+std::string Thing::short_text_the (void) const
+{_
+    auto tpp = tp();
+    verify(this);
+    verify(tpp);
+    if (unlikely(!tpp)) {
+        return ("<no name>");
+    }
+
+    std::string out = "the ";
+
+    if (is_undead()) {
+        out += "undead ";
+    } else {
+        if (is_dead) {
+            out += "dead ";
+        }
+    }
+
+    out += tpp->short_text_name();
+
+    return (out);
+}
+
+std::string Thing::short_text_The (void) const
+{_
+    auto out = short_text_the();
+    out[0] = toupper(out[0]);
+    return (out);
+}

@@ -1005,7 +1005,7 @@ Tpp string2tp (const char **s)
     return (tp);
 }
 
-Tpp string2tp (std::string &s, int *len)
+Tpp string2tp (const std::string &s, int *len)
 {_
     auto iter = s.begin();
     std::string out;
@@ -1038,7 +1038,7 @@ Tpp string2tp (std::string &s, int *len)
     return (tp);
 }
 
-Tpp string2tp (std::wstring &s, int *len)
+Tpp string2tp (const std::wstring &s, int *len)
 {_
     auto v = wstring_to_string(s);
     return (string2tp(v, len));
