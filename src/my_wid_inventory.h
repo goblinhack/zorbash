@@ -15,3 +15,4 @@ uint8_t wid_inventory_init(void);
 extern Widp wid_inventory_window;
 
 extern bool is_mouse_over_inventory(void);
+extern bool is_mouse_over_inventory_slot(int &slot);
