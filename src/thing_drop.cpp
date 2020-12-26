@@ -27,17 +27,9 @@ bool Thing::drop (Thingp what, Thingp target)
 
     if (is_player()) {
         if (target) {
-            if (!inventory_id_remove(what, target)) {
-                err("failed to drop %s from inventory", 
-                    what->to_string().c_str());
-                return false;
-            }
+            inventory_id_remove(what, target);
         } else {
-            if (!inventory_id_remove(what)) {
-                err("failed to drop %s from inventory", 
-                    what->to_string().c_str());
-                return false;
-            }
+            inventory_id_remove(what);
         }
     }
 
@@ -76,6 +68,9 @@ bool Thing::drop (Thingp what, Thingp target)
     return true;
 }
 
+//
+// An item in between bags
+//
 bool Thing::drop_into_ether (Thingp what)
 {_
     log("drop %s into the ether", what->to_string().c_str());
@@ -87,15 +82,25 @@ bool Thing::drop_into_ether (Thingp what)
         return false;
     }
 
+    Thingp top_owner;
     if (is_player()) {
-        if (!inventory_id_remove(what)) {
-            err("failed to drop %s from inventory", 
-                what->to_string().c_str());
-            return false;
-        }
+        top_owner = this;
+    } else {
+        top_owner = get_top_owner();
     }
 
-    what->hooks_remove();
+    if (top_owner) {
+        if (what == top_owner->weapon_get()) {
+            top_owner->unwield("moved into ether");
+        }
+
+        if (top_owner->is_player()) {
+            top_owner->inventory_id_remove(what);
+        }
+    } else {
+        err("has no top owner");
+    }
+
     what->remove_owner();
 
     monstp->carrying.remove(what->id);
