@@ -77,6 +77,8 @@ void game_error (std::string error)
     wid_set_on_key_down(
       game_error_window->wid_popup_container, game_error_key_down);
 
+    wid_set_do_not_lower(game_error_window->wid_popup_container, true);
+
     game_error_window->log("ERROR: %%fg=red$" + error);
     game_error_window->log("Press ESCAPE to dismiss this window");
     game_error_window->log(" ");

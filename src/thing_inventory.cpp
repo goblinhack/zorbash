@@ -472,7 +472,6 @@ bool Level::inventory_chosen (const uint32_t slot)
     }
 
     game->remake_inventory = true;
-
     auto oid = get(player->monstp->inventory_id, slot);
     if (!oid) {
         return false;

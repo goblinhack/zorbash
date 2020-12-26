@@ -99,7 +99,6 @@ static uint8_t wid_inventory_mouse_down_on_bag (Widp w,
 {_
     BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
     game->moving_items = true;
-MINICON("NOT MOVING ITEMS %s", __FUNCTION__);
     return true;
 }
 

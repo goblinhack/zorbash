@@ -76,6 +76,35 @@ bool Thing::drop (Thingp what, Thingp target)
     return true;
 }
 
+bool Thing::drop_into_ether (Thingp what)
+{_
+    log("drop %s into the ether", what->to_string().c_str());
+
+    auto existing_owner = what->get_immediate_owner();
+    if (existing_owner != this) {
+        err("attempt to drop %s which is not carried", 
+            what->to_string().c_str());
+        return false;
+    }
+
+    if (is_player()) {
+        if (!inventory_id_remove(what)) {
+            err("failed to drop %s from inventory", 
+                what->to_string().c_str());
+            return false;
+        }
+    }
+
+    what->hooks_remove();
+    what->remove_owner();
+
+    monstp->carrying.remove(what->id);
+
+    log("dropped %s", what->to_string().c_str());
+
+    return true;
+}
+
 bool Thing::drop (Thingp what)
 {_
     return drop(what, nullptr);
