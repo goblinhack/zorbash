@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
+#include "my_wid_bag.h"
 #include "my_thing.h"
 
 static void wid_inventory_create(void);
@@ -43,6 +44,10 @@ static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int3
         return;
     }
 
+    if (game->in_transit_item) {
+        return;
+    }
+
     if (game->paused()) {
         return;
     }
@@ -71,6 +76,10 @@ static void wid_inventory_mouse_over_e (Widp w)
         return;
     }
 
+    if (game->in_transit_item) {
+        return;
+    }
+
     if (game->paused()) {
         return;
     }
@@ -92,23 +101,35 @@ static void wid_inventory_mouse_over_e (Widp w)
     //
 }
 
-static uint8_t wid_inventory_mouse_down_on_bag (Widp w,
-                                                int32_t x,
-                                                int32_t y,
-                                                uint32_t button)
+static uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
+                                                   int32_t x,
+                                                   int32_t y,
+                                                   uint32_t button)
 {_
+    if (game->moving_items) {
+        return false;
+    }
+
+    if (game->in_transit_item) {
+        return wid_in_transit_item_place(w, x, y, button);
+    }
+
     BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
     game->moving_items = true;
     return true;
 }
 
-static uint8_t wid_inventory_mouse_down (Widp w,
-                                         int32_t x,
-                                         int32_t y,
-                                         uint32_t button)
+static uint8_t wid_inventory_item_mouse_up (Widp w,
+                                            int32_t x,
+                                            int32_t y,
+                                            uint32_t button)
 {_
     if (game->moving_items) {
         wid_thing_info_fini();
+    }
+
+    if (game->in_transit_item) {
+        return wid_in_transit_item_place(w, x, y, button);
     }
 
     if (game->paused()) {
@@ -133,6 +154,22 @@ static uint8_t wid_inventory_mouse_down (Widp w,
     }
 
     return true;
+}
+
+static uint8_t wid_inventory_mouse_up (Widp w,
+                                       int32_t x,
+                                       int32_t y,
+                                       uint32_t button)
+{_
+    if (game->moving_items) {
+        wid_thing_info_fini();
+    }
+
+    if (game->in_transit_item) {
+        return wid_in_transit_item_place(w, x, y, button);
+    }
+
+    return false;
 }
 
 //
@@ -189,6 +226,7 @@ static void wid_inventory_create (void)
             wid_inventory_window = wid_new_square_window("wid inventory");
             wid_set_pos(wid_inventory_window, tl, br);
             wid_set_style(wid_inventory_window, UI_WID_STYLE_NONE);
+            wid_set_on_mouse_up(wid_inventory_window, wid_inventory_mouse_up);
         }
     }
 
@@ -273,9 +311,9 @@ static void wid_inventory_create (void)
                             auto tpp = tp_find(tp_id);
                             wid_set_text(w, tpp->short_text_name());
                             if (tpp->is_bag()) {
-                                wid_set_on_mouse_down(w, wid_inventory_mouse_down_on_bag);
+                                wid_set_on_mouse_up(w, wid_inventory_item_mouse_up_on_bag);
                             } else {
-                                wid_set_on_mouse_down(w, wid_inventory_mouse_down);
+                                wid_set_on_mouse_up(w, wid_inventory_item_mouse_up);
                             }
                         }
                     } else {
@@ -385,6 +423,47 @@ bool is_mouse_over_inventory (void)
 
     if ((x >= tlx) && (x < brx) && (y >= tly)) {
         //CON("    inventory %d %d %d", tlx, brx, x);
+        return true;
+    }
+    //CON("NOT inventory %d %d %d", tlx, brx, x);
+
+    return false;
+}
+
+bool is_mouse_over_inventory_slot (int &slot)
+{
+    extern Widp wid_inventory_window;
+
+    if (!wid_inventory_window) {
+        return false;
+    }
+
+    //
+    // If we are in the portion of the lower screen above the itembar
+    // then do not scroll
+    //
+    int x = mouse_x;
+    int y = mouse_y;
+    pixel_to_ascii(&x, &y);
+
+    static int tlx, tly, brx, bry, cached;
+    if (cached != TERM_HEIGHT) {
+        cached = TERM_HEIGHT;
+    }
+
+    wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
+
+    //
+    // Add some border
+    //
+    tlx -= 1;
+    brx += 1;
+    tly -= 1;
+    bry += 1;
+
+    if ((x >= tlx) && (x < brx) && (y >= tly)) {
+        //CON("    inventory %d %d %d", tlx, brx, x);
+        slot = y - tly;
         return true;
     }
     //CON("NOT inventory %d %d %d", tlx, brx, x);

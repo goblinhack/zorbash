@@ -4960,6 +4960,7 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
         return;
     }
 
+//MINICON("wid [%s] mouse up", w->name.c_str());
     if ((w->on_mouse_up && (w->on_mouse_up)(w, x, y, button)) ||
         wid_get_movable(w)) {
 

@@ -17,6 +17,7 @@
 #include "my_wid_popup.h"
 #include "my_game.h"
 #include "my_level.h"
+#include "my_wid_inventory.h"
 
 static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
 static void wid_bag_item_mouse_over_e(Widp w);
@@ -62,16 +63,29 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
     wid_update(wid_bag_container);
 }
 
-static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     if (!game->in_transit_item) {
         return false;
     }
 
-    auto id = wid_get_thing_id_context(w);
+    auto id = wid_get_thing_id_context(game->in_transit_item);
     auto t = game->level->thing_find(id);
     if (!t) {
         return false;
+    }
+
+    int slot;
+    if (is_mouse_over_inventory_slot(slot)) {
+        MINICON("placing in inventory");
+        if (game->level->player->carry(t)) {
+            MINICON("placing in inventory; carried");
+            wid_destroy(&game->in_transit_item);
+            game->remake_inventory = true;
+        }
+        return true;
+    } else {
+        MINICON("not over inventory");
     }
 
     auto wid_bag_container = is_mouse_over_any_bag();
@@ -100,8 +114,6 @@ static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t
         t->monstp->preferred_bag_position = point(-1, -1);
         while (bag->bag_compress()) { }
         game->remake_inventory = true;
-    } else {
-        MINICON("Cannot fit the %s into the bag", t->text_the().c_str());
     }
 
     return true;

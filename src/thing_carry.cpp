@@ -36,7 +36,10 @@ _
         }
     }
 
-    if (!bag_add(it)) {
+    if (bag_add(it)) {
+        log("added to bag at %d,%d", 
+            it->monstp->bag_position.x, it->monstp->bag_position.y);
+    } else {
         log("no; cannot store");
         set_where_i_failed_to_collect_last(make_point(it->mid_at));
 
