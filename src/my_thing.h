@@ -107,10 +107,10 @@ public:
     int          submerged_offset = {};      // GL co-orids
     int          tick_rate_tenths = {};
     int          tick_resurrect_when = {};
-    point        bag_position;
-    point        wander_target;
-    point        where_i_dropped_an_item_last;
-    point        where_i_failed_to_collect_last;
+    point        bag_position{-1, -1};
+    point        wander_target{-1, -1};
+    point        where_i_dropped_an_item_last{-1, -1};
+    point        where_i_failed_to_collect_last{-1, -1};
     std::list<ThingId>   carrying;
     std::string          msg;                // Text that floats on screen
     std::vector<uint16_t> inventory_id;      // Vector of tp_id
@@ -146,6 +146,11 @@ public:
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
+ 
+    //
+    // Things not worth saving
+    //
+    point        preferred_bag_position{-1, -1};
 } Monst;
 std::ostream& operator<<(std::ostream &out, Bits<const Monst & > const my);
 std::istream& operator>>(std::istream &in, Bits<Monst &> my);
@@ -214,40 +219,40 @@ public:
     // These are flags used to make sure we set or unset flags onto
     // the level only once.
     //
-    uint64_t i_set_is_acid                   {};
-    uint64_t i_set_is_blood                  {};
-    uint64_t i_set_is_chasm                  {};
-    uint64_t i_set_is_corpse                 {};
-    uint64_t i_set_is_corridor               {};
-    uint64_t i_set_is_deep_water             {};
-    uint64_t i_set_is_dirt                   {};
-    uint64_t i_set_is_door                   {};
-    uint64_t i_set_is_entrance               {};
-    uint64_t i_set_is_exit                   {};
-    uint64_t i_set_is_fire                   {};
-    uint64_t i_set_is_floor                  {};
-    uint64_t i_set_is_food                   {};
-    uint64_t i_set_is_generator              {};
-    uint64_t i_set_is_gold                   {};
-    uint64_t i_set_is_hazard                 {};
-    uint64_t i_set_is_treasure_class_a       {};
-    uint64_t i_set_is_treasure_class_b       {};
-    uint64_t i_set_is_treasure_class_c       {};
-    uint64_t i_set_is_key                    {};
-    uint64_t i_set_is_lava                   {};
-    uint64_t i_set_is_light_blocker          {};
-    uint64_t i_set_is_monst                  {};
-    uint64_t i_set_is_movement_blocking_hard {};
-    uint64_t i_set_is_movement_blocking_soft {};
-    uint64_t i_set_is_potion                 {};
-    uint64_t i_set_is_ripple                 {};
-    uint64_t i_set_is_rock                   {};
-    uint64_t i_set_is_secret_door            {};
-    uint64_t i_set_is_smoke                  {};
-    uint64_t i_set_is_torch                  {};
-    uint64_t i_set_is_treasure               {};
-    uint64_t i_set_is_wall                   {};
-    uint64_t i_set_is_water                  {};
+    uint64_t i_set_is_acid:1                   {};
+    uint64_t i_set_is_blood:1                  {};
+    uint64_t i_set_is_chasm:1                  {};
+    uint64_t i_set_is_corpse:1                 {};
+    uint64_t i_set_is_corridor:1               {};
+    uint64_t i_set_is_deep_water:1             {};
+    uint64_t i_set_is_dirt:1                   {};
+    uint64_t i_set_is_door:1                   {};
+    uint64_t i_set_is_entrance:1               {};
+    uint64_t i_set_is_exit:1                   {};
+    uint64_t i_set_is_fire:1                   {};
+    uint64_t i_set_is_floor:1                  {};
+    uint64_t i_set_is_food:1                   {};
+    uint64_t i_set_is_generator:1              {};
+    uint64_t i_set_is_gold:1                   {};
+    uint64_t i_set_is_hazard:1                 {};
+    uint64_t i_set_is_treasure_class_a:1       {};
+    uint64_t i_set_is_treasure_class_b:1       {};
+    uint64_t i_set_is_treasure_class_c:1       {};
+    uint64_t i_set_is_key:1                    {};
+    uint64_t i_set_is_lava:1                   {};
+    uint64_t i_set_is_light_blocker:1          {};
+    uint64_t i_set_is_monst:1                  {};
+    uint64_t i_set_is_movement_blocking_hard:1 {};
+    uint64_t i_set_is_movement_blocking_soft:1 {};
+    uint64_t i_set_is_potion:1                 {};
+    uint64_t i_set_is_ripple:1                 {};
+    uint64_t i_set_is_rock:1                   {};
+    uint64_t i_set_is_secret_door:1            {};
+    uint64_t i_set_is_smoke:1                  {};
+    uint64_t i_set_is_torch:1                  {};
+    uint64_t i_set_is_treasure:1               {};
+    uint64_t i_set_is_wall:1                   {};
+    uint64_t i_set_is_water:1                  {};
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -256,6 +261,9 @@ public:
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
+    //
+    // Fields not saved
+    uint64_t debug:1                           {};
 private:
     //
     // As this is called a lot, probably worth the memory

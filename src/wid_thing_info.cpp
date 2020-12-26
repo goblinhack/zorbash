@@ -260,7 +260,6 @@ void Game::wid_thing_info_create (Thingp t)
     }
 
     if (tp->is_bag()) {
-        MINICON("remake bags");
         game->moving_items = true;
 
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);

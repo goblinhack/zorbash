@@ -88,15 +88,12 @@ static uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t
     at.y -= 1;
 
     if (bag->bag_can_place_at(t, at)) {
-t->minicon("place at %d,%d", at.x, at.y);
-        if (bag->bag_place_at(t, at)) {
-            wid_destroy(&game->in_transit_item);
-            t->change_owner(bag);
-            while (bag->bag_compress()) { }
-            game->remake_inventory = true;
-        } else {
-            ERR("Cannot fit that into the bag");
-        }
+        wid_destroy(&game->in_transit_item);
+        t->monstp->preferred_bag_position = at;
+        t->change_owner(bag);
+        t->monstp->preferred_bag_position = point(-1, -1);
+        while (bag->bag_compress()) { }
+        game->remake_inventory = true;
     } else {
         MINICON("Cannot fit that into the bag");
     }

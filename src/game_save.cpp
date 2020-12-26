@@ -602,7 +602,7 @@ Game::save (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: Saved %s, seed %d", save_file.c_str(), seed);
+    CON("DUNGEON: Saved %s, seed %u", save_file.c_str(), seed);
     LOG("-");
 }
 
@@ -628,7 +628,7 @@ Game::save (int slot)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: Saved %s, seed %d", save_file.c_str(), seed);
+    CON("DUNGEON: Saved %s, seed %u", save_file.c_str(), seed);
     LOG("-");
 
     MINICON("Saved the game to %s", save_file.c_str());
