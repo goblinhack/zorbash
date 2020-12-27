@@ -66,7 +66,7 @@ _
     }
 
     auto slot = wid_get_int_context(w);
-_
+
     LOG("inventory: begin over inventory slot %d", slot);
 _
     if (!level->inventory_over(slot)) {
@@ -312,7 +312,8 @@ static void wid_inventory_create (void)
 
             {
                 {
-                    auto w = wid_new_square_button(wid_inventory_window, "inventory item");
+                    auto w = wid_new_square_button(wid_inventory_window, 
+                                                   "inventory item");
                     wid_inventory_items.push_back(w);
                     point tl = make_point(3, y);
                     point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y);
@@ -370,7 +371,8 @@ static void wid_inventory_create (void)
                 if (item < inventory_items) {
                     auto tp_id = monstp->inventory_id[i];
                     if (tp_id == weapon_tp_id) {
-                        auto w = wid_new_square_button(wid_inventory_window, "inventory weapon");
+                        auto w = wid_new_square_button(wid_inventory_window, 
+                                                       "inventory weapon");
                         point tl = make_point(2, y);
                         point br = make_point(2, y);
                         wid_set_pos(w, tl, br);
