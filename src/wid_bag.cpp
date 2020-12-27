@@ -90,13 +90,15 @@ _
         return false;
     }
 
+    t->log("in transit item place");
+
     int slot;
     if (is_mouse_over_inventory_slot(slot)) {
-        LOG("is over inventory");
+        t->log("is over inventory");
         if (game->level->player->carry(t)) {
-            LOG("placed in inventory");
+            t->log("placed in inventory");
             wid_destroy(&game->in_transit_item);
-            LOG("request to remake inventory");
+            t->log("request to remake inventory");
             game->remake_inventory = true;
         }
         return true;
@@ -104,14 +106,14 @@ _
 
     auto wid_bag_container = is_mouse_over_any_bag();
     if (!wid_bag_container) {
-        LOG("is not over any bag");
+        t->log("is not over any bag");
         return false;
     }
 
     auto bag_id = wid_get_thing_id_context(wid_bag_container);
     auto bag = game->level->thing_find(bag_id);
     if (!bag) {
-        LOG("bag not found");
+        t->log("bag not found");
         return false;
     }
 
@@ -124,7 +126,7 @@ _
     at.y -= 1;
 
     if (bag->bag_can_place_at(t, at)) {
-        LOG("can place at %d,%d", at.x, at.y);
+        t->log("can place at %d,%d", at.x, at.y);
 
         wid_destroy(&game->in_transit_item);
 
@@ -136,7 +138,7 @@ _
             game->inventory_highlight_slot = game->previous_slot;
         }
 
-        LOG("compress bag and request to remake inventory");
+        t->log("compress bag and request to remake inventory");
         while (bag->bag_compress()) { }
         game->remake_inventory = true;
     }
@@ -160,6 +162,7 @@ _
         return false;
     }
 
+    t->log("drop from ether");
     game->level->player->drop_from_ether(t);
     wid_destroy(&game->in_transit_item);
     game->remake_inventory = true;
