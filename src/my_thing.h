@@ -1243,6 +1243,7 @@ public:
     void gc(void);
     void hide();
     void hooks_remove();
+    void remove_all_references();
     void hunger_clock();
     void inherit_from(Thingp it);
     void init(Levelp, const std::string& name, fpoint at, fpoint jitter);

@@ -132,7 +132,10 @@ _
             item->dead("weapon use-anim owner killed");
         }
     }
+}
 
+void Thing::remove_all_references ()
+{_
     //
     // Some things have lots of things they own
     //

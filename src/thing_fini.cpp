@@ -46,6 +46,11 @@ void Thing::destroy (void)
     hooks_remove();
 
     //
+    // Remove any references still to this item
+    //
+    remove_all_references();
+
+    //
     // Pop from the map
     //
     point old_at((int)mid_at.x, (int)mid_at.y);
