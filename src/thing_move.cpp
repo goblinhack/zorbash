@@ -94,6 +94,8 @@ bool Thing::move (fpoint future_pos,
         auto items = anything_to_carry();
         if (!items.empty()) {
             try_to_carry(items);
+        } else {
+            MINICON("You wait...");
         }
 
         location_check();

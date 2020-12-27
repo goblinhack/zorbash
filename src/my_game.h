@@ -126,7 +126,8 @@ public:
     void config_keyboard_select(void);
     void config_top_select(void);
     void dead_select(const char *reason);
-    void wid_thing_info_create(Thingp);
+    void wid_thing_info_create(Thingp, bool when_hovering_over = false);
+    void wid_thing_info_create_when_hovering_over(Thingp);
     void wid_thing_info_destroy(void);
     void credits_select(void);
     void display(void);

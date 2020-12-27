@@ -187,10 +187,6 @@ void player_tick (void)
         return;
     }
 
-    if (wait) {
-        MINICON("You wait...");
-    }
-
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
         up = true;
     }
