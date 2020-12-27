@@ -49,13 +49,6 @@ _
         return false;
     }
 
-    if (is_player()) {
-        if (!inventory_id_insert(it)) {
-            log("no; no space in inventory");
-            return false;
-        }
-    }
-
     auto existing_owner = it->get_immediate_owner();
     if (existing_owner) {
         if (existing_owner == this) {
@@ -68,6 +61,13 @@ _
     for (const auto& item : monstp->carrying) {
         if (item == it->id) {
             log("no; already carried");
+            return false;
+        }
+    }
+
+    if (is_player()) {
+        if (!inventory_id_insert(it)) {
+            log("no; no space in inventory");
             return false;
         }
     }
@@ -101,7 +101,7 @@ bool Thing::try_to_carry (Thingp it)
 }
 
 std::list<Thingp> Thing::anything_to_carry (void)
-{
+{_
     std::list<Thingp> items;
 
     FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {

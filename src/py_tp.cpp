@@ -84,7 +84,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);         \
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                   \
                                                                                 \
     tp = tp_find(tp_name);                                                      \
     if (!tp) {                                                                  \
@@ -134,7 +134,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);         \
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                   \
                                                                                 \
     tp = tp_find(tp_name);                                                      \
     if (!tp) {                                                                  \
@@ -197,7 +197,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    PY_DBG("%s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value,      \
+    PY_DBG("%s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value,                \
         tp->__field__());                                                       \
                                                                                 \
     value = 0;                                                                  \
@@ -236,7 +236,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);             \
+    PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);                       \
                                                                                 \
     tp = tp_find(tp_name);                                                      \
     if (!tp) {                                                                  \
@@ -280,7 +280,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    PY_DBG("%s(%s -> %g)", __FUNCTION__, tp_name, value);             \
+    PY_DBG("%s(%s -> %g)", __FUNCTION__, tp_name, value);                       \
                                                                                 \
     tp = tp_find(tp_name);                                                      \
     if (!tp) {                                                                  \

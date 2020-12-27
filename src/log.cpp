@@ -14,17 +14,37 @@
 
 static void log_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
-    int len;
+    char buf[MAXSHORTSTR];
+    if (callframes_depth) {
+        int len;
 
-    buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
-    len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSHORTSTR);
+        len = (int)strlen(buf);
 
-    putf(MY_STDOUT, buf);
+        if (!callframes_depth) {
+            snprintf(buf + len, MAXSHORTSTR - len, "%60s: ", "");
+        } else {
+            snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s", "",
+                    callframes_depth - g_thing_callframes_depth, "");
+        }
 
-    // wid_console_log(buf + len);
+        len = (int)strlen(buf);
+        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+
+        putf(MY_STDOUT, buf);
+    } else {
+        int len;
+
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSHORTSTR);
+        len = (int)strlen(buf);
+        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+
+        putf(MY_STDOUT, buf);
+
+        // wid_console_log(buf + len);
+    }
 }
 
 void LOG (const char *fmt, ...)
@@ -38,13 +58,13 @@ void LOG (const char *fmt, ...)
 
 static void warn_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     FLUSH_THE_CONSOLE();
@@ -63,13 +83,13 @@ void WARN (const char *fmt, ...)
 
 static void con_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -84,22 +104,22 @@ static void con_ (const char *fmt, va_list args)
 static void con_ (const wchar_t *fmt, va_list args)
 {
     {
-        char buf[MAXSTR];
+        char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSTR);
+        get_timestamp(buf, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%s", buf);
         term_log(buf);
     }
 
     {
-        wchar_t buf[MAXSTR];
-        auto wrote = vswprintf(buf, MAXSTR, fmt, args);
+        wchar_t buf[MAXSHORTSTR];
+        auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
         //
         // Only a single nul is written, but as we read 2 at a time...
         //
-        if (wrote && (wrote < MAXSTR - 1)) {
+        if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
             fprintf(stderr, "Failed to console log: [%S]\n", fmt);
@@ -117,10 +137,10 @@ static void con_ (const wchar_t *fmt, va_list args)
 void con (const wchar_t *fmt)
 {
     {
-        char buf[MAXSTR];
+        char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSTR);
+        get_timestamp(buf, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%s", buf);
         term_log(buf);
     }
@@ -137,15 +157,15 @@ void con (const wchar_t *fmt)
 
 static void minicon_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
-    char ts[MAXSTR/2];
+    char buf[MAXSHORTSTR];
+    char ts[MAXSHORTSTR/2];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(ts, MAXSTR);
+    get_timestamp(ts, MAXSHORTSTR);
     snprintf(buf, sizeof(buf) - 1, "%sMINICON: ", ts);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -160,21 +180,21 @@ static void minicon_ (const char *fmt, va_list args)
 static void minicon_ (const wchar_t *fmt, va_list args)
 {
     {
-        char ts[MAXSTR];
+        char ts[MAXSHORTSTR];
         ts[0] = '\0';
-        get_timestamp(ts, MAXSTR);
+        get_timestamp(ts, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%sMINICON: ", ts);
         term_log(ts);
     }
 
     {
-        wchar_t buf[MAXSTR];
-        auto wrote = vswprintf(buf, MAXSTR, fmt, args);
+        wchar_t buf[MAXSHORTSTR];
+        auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
         //
         // Only a single nul is written, but as we read 2 at a time...
         //
-        if (wrote && (wrote < MAXSTR - 1)) {
+        if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
             fprintf(stderr, "Failed to minicon log: [%S]\n", fmt);
@@ -193,10 +213,10 @@ static void minicon_ (const wchar_t *fmt, va_list args)
 void minicon (const wchar_t *fmt)
 {
     {
-        char buf[MAXSTR];
+        char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSTR);
+        get_timestamp(buf, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%s", buf);
         term_log(buf);
     }
@@ -249,17 +269,17 @@ void MINICON (const wchar_t *fmt, ...)
 
 static void dying_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSTR - len, "DYING: ");
+    snprintf(buf + len, MAXSHORTSTR - len, "DYING: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     fprintf(stderr, "%s\n", buf);
     putf(MY_STDOUT, buf);
@@ -275,20 +295,20 @@ static void err_ (const char *fmt, va_list args)
     }
     nested_error = true;
 
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSTR - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
 
@@ -314,18 +334,18 @@ static void croak_ (const char *fmt, va_list args)
     }
     g_croaked = 1;
 
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     int len;
     int tslen;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXSHORTSTR);
     tslen = len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSTR - len, "FATAL ERROR: ");
+    snprintf(buf + len, MAXSHORTSTR - len, "FATAL ERROR: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     fprintf(stderr, "%s\n", buf);
 
@@ -443,21 +463,21 @@ void myerr (const char *fmt, ...)
 
 static void msgerr_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSTR - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
 
     len = (int)strlen(buf);
 
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
 
@@ -484,24 +504,24 @@ void GAME_UI_MSG_BOX (const char *fmt, ...)
 
 static void sdl_msgerr_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
 #if SDL_MAJOR_VERSION >= 2
     int ts_len;
 #endif
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSTR - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
 
     len = (int)strlen(buf);
 #if SDL_MAJOR_VERSION >= 2
     ts_len = len;
 #endif
 
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
 #if SDL_MAJOR_VERSION >= 2
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
@@ -509,7 +529,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
 #endif
 
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
 
@@ -535,15 +555,15 @@ void SDL_MSG_BOX (const char *fmt, ...)
 
 static void botcon_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
-    char ts[MAXSTR/2];
+    char buf[MAXSHORTSTR];
+    char ts[MAXSHORTSTR/2];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(ts, MAXSTR);
+    get_timestamp(ts, MAXSHORTSTR);
     snprintf(buf, sizeof(buf) - 1, "%sBOTCON: ", ts);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     //putf(MY_STDOUT, buf);
     //term_log(buf);
@@ -557,21 +577,21 @@ static void botcon_ (const char *fmt, va_list args)
 static void botcon_ (const wchar_t *fmt, va_list args)
 {
     {
-        char ts[MAXSTR];
+        char ts[MAXSHORTSTR];
         ts[0] = '\0';
-        get_timestamp(ts, MAXSTR);
+        get_timestamp(ts, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%sBOTCON: ", ts);
         term_log(ts);
     }
 
     {
-        wchar_t buf[MAXSTR];
-        auto wrote = vswprintf(buf, MAXSTR, fmt, args);
+        wchar_t buf[MAXSHORTSTR];
+        auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
         //
         // Only a single nul is written, but as we read 2 at a time...
         //
-        if (wrote && (wrote < MAXSTR - 1)) {
+        if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
             fprintf(stderr, "Failed to botcon log: [%S]\n", fmt);
@@ -591,10 +611,10 @@ void botcon (const wchar_t *fmt)
 {
     if (0)
     {
-        char buf[MAXSTR];
+        char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSTR);
+        get_timestamp(buf, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%s", buf);
         term_log(buf);
     }

@@ -15,7 +15,7 @@ Widp wid_inventory_window {};
 
 void wid_inventory_fini (void)
 {_
-    LOG("inventory fini");
+    LOG("inventory: fini");
 
     if (game->remake_inventory) {
         //
@@ -41,26 +41,36 @@ uint8_t wid_inventory_init (void)
 }
 
 static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
-{
+{_
+    LOG("inventory: begin over inventory");
+_
     if (game->moving_items) {
+        LOG("inventory: moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
+        LOG("inventory: in transit item; ignore");
         return;
     }
 
     if (game->paused()) {
+        LOG("inventory: game paused; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
+        LOG("inventory: no level; ignore");
         return;
     }
 
     auto slot = wid_get_int_context(w);
+_
+    LOG("inventory: begin over inventory slot %d", slot);
+_
     if (!level->inventory_over(slot)) {
+        LOG("inventory: not over anything");
         return;
     }
 
@@ -73,25 +83,34 @@ static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int3
 }
 
 static void wid_inventory_mouse_over_e (Widp w)
-{
+{_
+    LOG("inventory: end over inventory");
+_
     if (game->moving_items) {
+        LOG("inventory: moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
+        LOG("inventory: in transit item; ignore");
         return;
     }
 
     if (game->paused()) {
+        LOG("inventory: paused; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
+        LOG("inventory: no level; ignore");
         return;
     }
 
     auto slot = wid_get_int_context(w);
+
+    LOG("inventory: over inventory slot %d", slot);
+_
     if (!level->inventory_over(slot)) {
         return;
     }
@@ -108,6 +127,8 @@ static uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
                                                    int32_t y,
                                                    uint32_t button)
 {_
+    LOG("inventory: mouse up over bag");
+_
     if (game->moving_items) {
         return false;
     }
@@ -179,7 +200,7 @@ static uint8_t wid_inventory_mouse_up (Widp w,
 //
 static void wid_inventory_create (void)
 {_
-    LOG("inventory create");
+    LOG("inventory: inventory create");
 
     if (game->remake_inventory) {
         //
@@ -387,14 +408,14 @@ static void wid_inventory_create (void)
 
     if (game->remake_inventory) {
         auto slot = game->inventory_highlight_slot;
-        LOG("remaking inventory for slot %d", slot);
+        LOG("inventory: remaking inventory for slot %d", slot);
 
         auto t = level->inventory_get(slot);
         if (t) {
-            LOG("remaking inventory, remake thing info too");
+            LOG("inventory: remaking inventory, remake thing info too");
             game->wid_thing_info_create(t);
         } else {
-            LOG("remaking inventory, noi thing info");
+            LOG("inventory: remaking inventory, no thing info");
         }
     }
 }
