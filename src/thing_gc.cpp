@@ -17,7 +17,7 @@ void Level::things_gc (void)
         return;
     }
 
-    log("begin garbage collection");
+    log("begin thing garbage collection");
 _
     for (;;) {
         auto i = all_gc_things.begin();
@@ -33,6 +33,7 @@ _
             continue;
         }
 
+        t->log("thing gc");
         if (t->is_monst()) {
             monst_count--;
         }

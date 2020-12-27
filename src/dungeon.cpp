@@ -296,7 +296,7 @@ void Dungeon::putc (const int x, const int y, const int z, const char c)
         ERR("putting nul char at %d,%d,%d", x, y, z);
     }
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
     auto p = cell_addr(x, y, z);
     if (p != nullptr) {
@@ -321,7 +321,7 @@ void Dungeon::putc_no_check (const int x, const int y, const int z, const char c
 char Dungeon::getc (const int x, const int y, const int z)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
     auto p = cell_addr(x, y, z);
     if (p != nullptr) {
@@ -385,7 +385,7 @@ Roomp Dungeon::getr_no_check (const int x, const int y)
 bool Dungeon::is_anything_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -400,7 +400,7 @@ bool Dungeon::is_anything_at (const int x, const int y)
 bool Dungeon::is_anything_at (const int x, const int y, const int z)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     auto c = getc(x, y, z);
@@ -426,7 +426,7 @@ int Dungeon::get_grid_depth_at (const int x, const int y)
 bool Dungeon::is_floor (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -443,7 +443,7 @@ bool Dungeon::is_floor (const int x, const int y)
 bool Dungeon::is_corridor (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -460,7 +460,7 @@ bool Dungeon::is_corridor (const int x, const int y)
 bool Dungeon::is_corridor_no_check (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -477,7 +477,7 @@ bool Dungeon::is_corridor_no_check (const int x, const int y)
 bool Dungeon::is_dirt (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -494,7 +494,7 @@ bool Dungeon::is_dirt (const int x, const int y)
 bool Dungeon::is_dirt_no_check (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -511,7 +511,7 @@ bool Dungeon::is_dirt_no_check (const int x, const int y)
 bool Dungeon::is_secret_corridor_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -528,7 +528,7 @@ bool Dungeon::is_secret_corridor_at (const int x, const int y)
 bool Dungeon::is_wall (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     auto d = MAP_DEPTH_OBJ;
@@ -540,7 +540,7 @@ bool Dungeon::is_wall (const int x, const int y)
 bool Dungeon::is_monst (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -557,7 +557,7 @@ bool Dungeon::is_monst (const int x, const int y)
 bool Dungeon::is_generator (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -574,7 +574,7 @@ bool Dungeon::is_generator (const int x, const int y)
 bool Dungeon::is_food (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -591,7 +591,7 @@ bool Dungeon::is_food (const int x, const int y)
 bool Dungeon::is_torch (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -608,7 +608,7 @@ bool Dungeon::is_torch (const int x, const int y)
 bool Dungeon::is_blood (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -625,7 +625,7 @@ bool Dungeon::is_blood (const int x, const int y)
 bool Dungeon::is_rock (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -642,7 +642,7 @@ bool Dungeon::is_rock (const int x, const int y)
 bool Dungeon::is_door (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -659,7 +659,7 @@ bool Dungeon::is_door (const int x, const int y)
 bool Dungeon::is_secret_door (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -676,7 +676,7 @@ bool Dungeon::is_secret_door (const int x, const int y)
 bool Dungeon::is_entrance (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -693,7 +693,7 @@ bool Dungeon::is_entrance (const int x, const int y)
 bool Dungeon::is_floor_deco_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -710,7 +710,7 @@ bool Dungeon::is_floor_deco_at (const int x, const int y)
 bool Dungeon::is_wall_deco_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -727,7 +727,7 @@ bool Dungeon::is_wall_deco_at (const int x, const int y)
 bool Dungeon::is_exit (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -744,7 +744,7 @@ bool Dungeon::is_exit (const int x, const int y)
 bool Dungeon::is_lava (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -761,7 +761,7 @@ bool Dungeon::is_lava (const int x, const int y)
 bool Dungeon::is_chasm (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -778,7 +778,7 @@ bool Dungeon::is_chasm (const int x, const int y)
 bool Dungeon::is_water (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -795,7 +795,7 @@ bool Dungeon::is_water (const int x, const int y)
 bool Dungeon::is_deep_water (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -812,7 +812,7 @@ bool Dungeon::is_deep_water (const int x, const int y)
 bool Dungeon::is_hazard (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -838,7 +838,7 @@ bool Dungeon::is_hazard (const int x, const int y)
 bool Dungeon::is_treasure (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -857,7 +857,7 @@ bool Dungeon::is_treasure (const int x, const int y)
 bool Dungeon::is_treasure_class_a (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -874,7 +874,7 @@ bool Dungeon::is_treasure_class_a (const int x, const int y)
 bool Dungeon::is_treasure_class_b (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -891,7 +891,7 @@ bool Dungeon::is_treasure_class_b (const int x, const int y)
 bool Dungeon::is_treasure_class_c (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -908,7 +908,7 @@ bool Dungeon::is_treasure_class_c (const int x, const int y)
 bool Dungeon::is_gold (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -925,7 +925,7 @@ bool Dungeon::is_gold (const int x, const int y)
 bool Dungeon::is_key (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -942,7 +942,7 @@ bool Dungeon::is_key (const int x, const int y)
 bool Dungeon::is_potion (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -1393,7 +1393,7 @@ bool Dungeon::solve (int x, int y, Grid *g)
         ncandidates = candidates.size();
         if (!ncandidates) {
             rooms_print_all(g);
-            ERR("no grid room candidates at (%d,%d)", x, y);
+            ERR("no grid room candidates at map (%d,%d)", x, y);
             dump();
             return false;
         }

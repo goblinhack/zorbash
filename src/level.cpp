@@ -7,7 +7,7 @@
 
 std::string Level::to_string (void)
 {_
-    return (world_at.to_string());
+    return ("L" + world_at.to_string());
 }
 
 const char * Level::to_cstring (void)

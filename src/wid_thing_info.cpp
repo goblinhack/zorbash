@@ -14,10 +14,12 @@
 #include "my_wid_bag.h"
 #include "my_traceback.h"
 
-static WidPopup *wid_thing_info_window;
+WidPopup *wid_thing_info_window;
 
 void wid_thing_info_fini (void)
 {_
+    LOG("thing info fini");
+
     if (game->bag1) {
         delete game->bag1;
         game->bag1 = nullptr;
@@ -30,8 +32,6 @@ void wid_thing_info_fini (void)
 
     delete wid_thing_info_window;
     wid_thing_info_window = nullptr;
-
-    game->moving_items = false;
 }
 
 uint8_t wid_thing_info_init (void)
@@ -41,6 +41,8 @@ uint8_t wid_thing_info_init (void)
 
 void Game::wid_thing_info_destroy (void)
 {_
+    LOG("thing info destroy");
+
     if (game->remake_inventory) {
         //
         // Continue
@@ -54,36 +56,37 @@ void Game::wid_thing_info_destroy (void)
 
 void Game::wid_thing_info_create (Thingp t)
 {_
+    t->log("thing info create");
+_
     if (game->remake_inventory) {
         //
         // Continue
         //
+        t->log("remake thing info");
     } else if (game->moving_items) {
+        t->log("ignore, already moving items");
         return;
     }
 
     if (game->in_transit_item) {
+        t->log("ignore, already in transit item0");
+        return;
+    }
+
+    if (wid_console_window && wid_console_window->visible) {
+        t->log("console visible");
         return;
     }
 
     if (wid_thing_info_window) {
+        t->log("destroy window");
         wid_thing_info_destroy();
     }
 
-    if (wid_console_window && wid_console_window->visible) {
-        return;
-    }
-
-    if (!level){
-        return;
-    }
-
-    auto player = level->player;
+    auto player = game->level->player;
     if (!player){
-        return;
-    }
-
-    if (!t) {
+        game->moving_items = false;
+        ERR("no player");
         return;
     }
 
@@ -95,6 +98,8 @@ void Game::wid_thing_info_create (Thingp t)
     auto tiles = &tp->tiles;
     auto tile = tile_first(tiles);
     if (!tile) {
+        t->log("no tile for thing info");
+        game->moving_items = false;
         return;
     }
 
@@ -103,6 +108,8 @@ void Game::wid_thing_info_create (Thingp t)
         DIE("recursion");
     }
     recursion = true;
+
+    t->log("thing info create window");
 
     wid_thing_info_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
     wid_raise(wid_thing_info_window->wid_popup_container);
@@ -260,7 +267,7 @@ void Game::wid_thing_info_create (Thingp t)
     }
 
     if (tp->is_bag()) {
-        game->moving_items = true;
+        t->log("thing info create bags");
 
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 

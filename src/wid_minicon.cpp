@@ -98,6 +98,8 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
 
     if (game->moving_items) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
+            LOG("escape pressed, clear moving items flag");
+            game->moving_items = false;
             wid_inventory_init();
             wid_thing_info_fini();
             wid_destroy(&game->in_transit_item);

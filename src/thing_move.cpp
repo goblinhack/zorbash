@@ -9,8 +9,9 @@
 #include "my_gl.h"
 
 void Thing::move_completed (void)
-{
+{_
     if (is_player()) {
+        log("player move completed");
         if (check_anything_to_carry()) {
             BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items",
                    SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect));
@@ -19,7 +20,7 @@ void Thing::move_completed (void)
 }
 
 void Thing::move_finish (void)
-{
+{_
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);
     update_interpolated_position();
@@ -32,7 +33,8 @@ void Thing::move_finish (void)
 }
 
 bool Thing::move (fpoint future_pos)
-{
+{_
+    log("move to %f,%f", future_pos.x, future_pos.y);
     bool up     = future_pos.y < mid_at.y;
     bool down   = future_pos.y > mid_at.y;
     bool left   = future_pos.x < mid_at.x;
@@ -46,6 +48,7 @@ bool Thing::move (fpoint future_pos)
 
 bool Thing::move_no_shove (fpoint future_pos)
 {
+    log("move, no shove to %f,%f", future_pos.x, future_pos.y);
     bool up     = future_pos.y < mid_at.y;
     bool down   = future_pos.y > mid_at.y;
     bool left   = future_pos.x < mid_at.x;

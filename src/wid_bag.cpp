@@ -266,6 +266,7 @@ static void wid_bag_tick (Widp w)
 
 WidBag::~WidBag()
 {
+    LOG("destroy bag");
     wid_destroy(&wid_bag_container);
     wid_destroy(&wid_bag_title);
 
@@ -277,6 +278,7 @@ WidBag::~WidBag()
 
 WidBag::WidBag (Thingp bag_, point tl, point br, const std::string &title) : tl(tl), br(br)
 {_
+    LOG("create bag");
     bag = bag_;
 
     {

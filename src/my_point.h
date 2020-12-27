@@ -37,13 +37,13 @@ public:
 
     friend std::ostream& operator << (std::ostream &out, const my_apoint &my)
     {
-        out << "(" << my.x << ", " << my.y << ")";
+        out << "(" << my.x << "," << my.y << ")";
         return (out);
     }
 
     std::string to_string(void)
     {
-        return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
+        return "(" + std::to_string(x) + "," + std::to_string(y) + ")";
     }
 
     void operator+= (my_apoint a)
@@ -565,8 +565,8 @@ public:
 
     std::string to_string(void)
     {
-        return "(" + std::to_string(x) + ", " +
-                     std::to_string(y) + ", " +
+        return "(" + std::to_string(x) + "," +
+                     std::to_string(y) + "," +
                      std::to_string(z) + ")";
     }
 };

@@ -11,7 +11,7 @@
 
 void Thing::inventory_particle (Thingp what, uint32_t slot)
 {_
-    log("create inventopry particle");
+    log("inventory particle %s", what->to_string().c_str());
 _
     //
     // No animations at the start
@@ -104,6 +104,9 @@ _
 void Thing::inventory_particle (Thingp what, uint32_t slot,
                                 Thingp particle_target)
 {_
+    log("inventory particle %s with target %s",
+        what->to_string().c_str(), particle_target->to_string().c_str());
+_
     if (game->moving_items) {
         //
         // No animations when moving stuff around
@@ -142,6 +145,8 @@ void Thing::inventory_particle (Thingp what, uint32_t slot,
 
 bool Thing::inventory_id_insert (Thingp what)
 {_
+    log("inventory insert %s", what->to_string().c_str());
+_
     auto player = level->player;
     if (!player) {
         return false;
@@ -234,6 +239,8 @@ bool Thing::inventory_id_insert (Thingp what)
 
 bool Thing::inventory_id_remove (Thingp what)
 {_
+    log("inventory remove %s", what->to_string().c_str());
+_
     auto player = level->player;
     if (!player) {
         return false;
@@ -292,6 +299,9 @@ bool Thing::inventory_id_remove (Thingp what)
 
 bool Thing::inventory_id_remove (Thingp what, Thingp particle_target)
 {_
+    log("inventory remove %s with target %s",
+        what->to_string().c_str(), particle_target->to_string().c_str());
+_
     auto player = level->player;
     if (!player) {
         return false;
@@ -354,6 +364,8 @@ bool Thing::inventory_id_remove (Thingp what, Thingp particle_target)
 
 int Thing::inventory_id_slot_count (const uint32_t slot)
 {_
+    log("inventory get slot count %d", slot);
+_
     auto tp_id = get(monstp->inventory_id, slot);
     if (!tp_id) {
         return 0;
@@ -388,65 +400,79 @@ int Thing::inventory_id_slot_count (const uint32_t slot)
 
 Thingp Level::inventory_get (const uint32_t slot)
 {_
+    log("inventory get slot %d", slot);
+_
     if (!player) {
-        return 0;
+        ERR("no player");
+        return nullptr;
     }
 
     auto monstp = player->monstp;
     if (!monstp) {
-        return 0;
+        ERR("no monstp for player");
+        return nullptr;
     }
 
     if (slot >= monstp->inventory_id.size()) {
+        LOG("slot %d out of range, max %d", slot, (int)monstp->inventory_id.size());
         return nullptr;
     }
 
     auto tp_id = get(monstp->inventory_id, slot);
     if (!tp_id) {
+        LOG("slot %d has no tp", slot);
         return nullptr;
     }
 
     auto tpp = tp_find(tp_id);
     if (!tpp) {
+        LOG("slot %d has no valid tp", slot);
         return nullptr;
     }
+
+    LOG("slot %d has tp %s", slot, tpp->name().c_str());
 
     for (auto oid : monstp->carrying) {
         auto o = thing_find(oid);
         if (o->tp() == tpp) {
+            o->log("got inventory item %s", tpp->name().c_str());
             return o;
         }
     }
 
+    LOG("slot %d has tp %s that is not carried", slot, tpp->name().c_str());
     return nullptr;
 }
 
 Thingp Level::inventory_get (void)
-{_
+{
     return inventory_get(game->inventory_highlight_slot);
 }
 
 bool Level::inventory_over (const uint32_t slot)
 {_
-    LOG("over inventory slot %d", slot);
+    LOG("inventory: over inventory slot %d", slot);
 _
     if (!player) {
+        LOG("inventory: ignore; no player");
         return false;
     }
 
     if (slot >= player->monstp->inventory_id.size()) {
+        LOG("inventory: ignore; slot out of range");
         return false;
     }
 
     auto oid = get(player->monstp->inventory_id, slot);
     if (!oid) {
+        LOG("inventory: ignore; nothing at that slot");
         return false;
     }
 
     Thingp what;
 
     if (slot != game->inventory_highlight_slot) {
-        LOG("request to remake inventory");
+        LOG("inventory: request to remake inventory");
         game->remake_inventory = true;
         game->inventory_highlight_slot = slot;
         what = inventory_describe(slot);
@@ -458,12 +484,13 @@ _
         return false;
     }
 
+    what->log("over inventory item");
     return true;
 }
 
 bool Level::inventory_chosen (const uint32_t slot)
 {_
-    LOG("chosen inventory slot %d", slot);
+    LOG("inventory: chosen inventory slot %d", slot);
 _
     if (!player) {
         return false;
@@ -473,7 +500,7 @@ _
         return false;
     }
 
-    LOG("request to remake inventory");
+    LOG("inventory: request to remake inventory");
     game->remake_inventory = true;
 
     auto oid = get(player->monstp->inventory_id, slot);
@@ -497,6 +524,7 @@ _
         return false;
     }
 
+    what->log("chosen inventory item");
     if (what->is_weapon()) {
         player->wield(what);
         if (changed_highlight_slot) {
@@ -506,6 +534,9 @@ _
 
     if (what->is_bag()) {
         game->wid_thing_info_create(what);
+        what->log("moving items flag set");
+        game->moving_items = true;
+        MINICON("chosen");
     }
 
     return true;
@@ -513,9 +544,14 @@ _
 
 Thingp Level::inventory_describe (const uint32_t slot)
 {_
+    LOG("inventory: describe slot %d", slot);
+_
     auto what = inventory_get(game->inventory_highlight_slot);
     if (what) {
+        what->log("inventory: describe slot %d", slot);
         what->describe_when_in_inventory();
+    } else {
+        LOG("inventory: describe slot %d => nothing there", slot);
     }
     return what;
 }

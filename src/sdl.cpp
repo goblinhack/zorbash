@@ -418,6 +418,8 @@ static int sdl_filter_events (void *userdata, SDL_Event *event)
 
 static void sdl_event (SDL_Event * event)
 {_
+    LOG("SDL event");
+
     SDL_KEYSYM *key;
 
     wid_mouse_double_click = false;

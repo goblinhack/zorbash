@@ -23,6 +23,7 @@
 #include "my_ascii.h"
 #include "my_gl.h"
 #include "my_wid_inventory.h"
+#include "my_wid_thing_info.h"
 
 //
 // Display sorted.
@@ -5834,11 +5835,24 @@ void wid_tick_all (void)
 
         (w->on_tick)(w);
     }
-    
+
+    //
+    // If we need to remake the inventory, do so
+    //
     if (game->remake_inventory) {
-        LOG("remake inventory");
+        LOG("handle request to remake inventory");
         wid_inventory_init();
         game->remake_inventory = false;
+    }
+
+    //
+    // Just in case the window cannot be remade, clean up
+    //
+    if (game->moving_items) {
+        if (!wid_thing_info_window) {
+            LOG("handle end of moving items");
+            game->moving_items = false;
+        }
     }
 }
 
