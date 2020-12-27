@@ -8,6 +8,7 @@
 #include "my_game.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_inventory.h"
+#include "my_level.h"
 
 bool Thing::drop (Thingp what, Thingp target)
 {_
@@ -104,6 +105,55 @@ bool Thing::drop_into_ether (Thingp what)
     what->remove_owner();
 
     monstp->carrying.remove(what->id);
+
+    log("dropped %s", what->to_string().c_str());
+
+    return true;
+}
+
+//
+// An item in between bags
+//
+bool Thing::drop_from_ether (Thingp what)
+{_
+    auto player = game->level->player;
+
+    log("drop from ether %s", what->to_string().c_str());
+
+    what->hooks_remove();
+    what->remove_owner();
+    what->hide();
+    what->visible();
+    what->move_to_immediately(player->mid_at);
+
+    //
+    // Prevent too soon re-carry
+    //
+    set_where_i_dropped_an_item_last(make_point(player->mid_at));
+
+    wid_inventory_init();
+    wid_thing_info_fini();
+
+    point e = (player->last_blit_tl + player->last_blit_br) / 2;
+
+    auto w = game->in_transit_item;
+    if (!w) {
+        ERR("no in transit item");
+        return false;
+    }
+
+    auto s = (w->abs_tl + w->abs_br) / 2;
+    s.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)s.x);
+    s.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)s.y);
+
+    game->level->new_external_particle(
+                id,
+                s, e,
+                isize(TILE_WIDTH, TILE_HEIGHT), 
+                PARTICLE_SPEED_MS,
+                tile_index_to_tile(what->tile_curr),
+                (is_dir_br() || is_dir_right() || is_dir_tr()),
+                true /* make_visible_at_end */);
 
     log("dropped %s", what->to_string().c_str());
 

@@ -144,6 +144,29 @@ _
     return true;
 }
 
+uint8_t wid_in_transit_item_drop (void)
+{_
+    LOG("drop in transit item");
+_
+    if (!game->in_transit_item) {
+        LOG("no");
+        return false;
+    }
+
+    auto id = wid_get_thing_id_context(game->in_transit_item);
+    auto t = game->level->thing_find(id);
+    if (!t) {
+        LOG("cannot find thing");
+        return false;
+    }
+
+    game->level->player->drop_from_ether(t);
+    wid_destroy(&game->in_transit_item);
+    game->remake_inventory = true;
+
+    return true;
+}
+
 static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     if (game->in_transit_item) {
