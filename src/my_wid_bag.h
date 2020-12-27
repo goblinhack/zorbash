@@ -29,5 +29,6 @@ public:
 
 Widp is_mouse_over_any_bag(void);
 uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button);
+uint8_t wid_in_transit_item_drop(void);
 
 #endif

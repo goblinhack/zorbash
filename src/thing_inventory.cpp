@@ -11,17 +11,13 @@
 
 void Thing::inventory_particle (Thingp what, uint32_t slot)
 {_
-    if (game->moving_items) {
-        //
-        // No animations when moving stuff around
-        //
-        return;
-    }
-
+    log("create inventopry particle");
+_
     //
     // No animations at the start
     //
     if (level->is_starting) {
+        log("not while starting the level");
         return;
     }
 

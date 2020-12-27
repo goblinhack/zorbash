@@ -14,6 +14,7 @@
 #include "my_ttf.h"
 #include "my_string.h"
 #include "my_wid.h"
+#include "my_wid_bag.h"
 #include "my_ascii.h"
 #include "my_game.h"
 #include "my_thing.h"
@@ -207,6 +208,12 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        if (game->in_transit_item) {
+            if (wid_in_transit_item_drop()) {
+                game->tick_begin("drop in transit item");
+            }
+            return true;
+        }
         if (game->moving_items) {
             return false;
         }

@@ -875,6 +875,7 @@ public:
     bool drop(Thingp w);
     bool drop(Thingp w, Thingp target);
     bool drop_into_ether(Thingp w);
+    bool drop_from_ether(Thingp w);
     bool eat(Thingp it);
     bool entrance_tick();
     bool exit_tick();
