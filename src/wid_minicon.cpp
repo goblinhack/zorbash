@@ -210,21 +210,28 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        //
+        // Drop whatever we are moving between bags
+        //
         if (game->in_transit_item) {
             if (wid_in_transit_item_drop()) {
                 game->tick_begin("drop in transit item");
             }
             return true;
         }
-        if (game->moving_items) {
-            return false;
-        }
+
+        //
+        // Drop whatever we have highlighted in the inventory
+        //
+        game->moving_items = false;
+
 	auto what = level->inventory_get();
 	if (what) {
 	    if (player->drop(what)) {
                 game->tick_begin("drop");
             }
         }
+        wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {

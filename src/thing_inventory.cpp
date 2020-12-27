@@ -536,7 +536,6 @@ _
         game->wid_thing_info_create(what);
         what->log("moving items flag set");
         game->moving_items = true;
-        MINICON("chosen");
     }
 
     return true;
