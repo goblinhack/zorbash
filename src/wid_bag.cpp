@@ -30,7 +30,8 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
     for (const auto& item : bag->monstp->carrying) {
         auto t = game->level->thing_find(item.id);
         auto tl = t->monstp->bag_position + point(1, 1);
-        bag->log("+ item %s", t->to_string().c_str());
+        bag->log("+ item %s at %d,%d", t->to_string().c_str(),
+                  t->monstp->bag_position.x, t->monstp->bag_position.y);
 
         if (t->monstp->bag_position == point(-1, -1)) {
             continue;
@@ -43,7 +44,8 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         wid_set_style(w, UI_WID_STYLE_DARK);
 
         if (t == game->level->player->weapon_get()) {
-            bag->log("+ item %s (wielded)", t->to_string().c_str());
+            bag->log("+ item %s at %d,%d (wielded)", t->to_string().c_str(),
+                     t->monstp->bag_position.x, t->monstp->bag_position.y);
             wid_set_style(w, UI_WID_STYLE_RED);
         }
 
@@ -66,22 +68,35 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 
 uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("place in transit item");
+_
+    //
+    // Allow click to move and then click to drop / or drag and drop
+    //
+    if (!time_have_x_tenths_passed_since(2, game->last_mouse_down)) {
+        LOG("mouse up too soon; ignore");
+        return true;
+    }
+
     if (!game->in_transit_item) {
+        LOG("no");
         return false;
     }
 
     auto id = wid_get_thing_id_context(game->in_transit_item);
     auto t = game->level->thing_find(id);
     if (!t) {
+        LOG("cannot find thing");
         return false;
     }
 
     int slot;
     if (is_mouse_over_inventory_slot(slot)) {
-        LOG("placing in inventory");
+        LOG("is over inventory");
         if (game->level->player->carry(t)) {
             LOG("placed in inventory");
             wid_destroy(&game->in_transit_item);
+            LOG("request to remake inventory");
             game->remake_inventory = true;
         }
         return true;
@@ -89,12 +104,14 @@ uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button
 
     auto wid_bag_container = is_mouse_over_any_bag();
     if (!wid_bag_container) {
+        LOG("is not over any bag");
         return false;
     }
 
     auto bag_id = wid_get_thing_id_context(wid_bag_container);
     auto bag = game->level->thing_find(bag_id);
     if (!bag) {
+        LOG("bag not found");
         return false;
     }
 
@@ -107,10 +124,19 @@ uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button
     at.y -= 1;
 
     if (bag->bag_can_place_at(t, at)) {
+        LOG("can place at %d,%d", at.x, at.y);
+
         wid_destroy(&game->in_transit_item);
+
         t->monstp->preferred_bag_position = at;
         bag->carry(t);
         t->monstp->preferred_bag_position = point(-1, -1);
+
+        if (t->is_bag()) {
+            game->inventory_highlight_slot = game->previous_slot;
+        }
+
+        LOG("compress bag and request to remake inventory");
         while (bag->bag_compress()) { }
         game->remake_inventory = true;
     }

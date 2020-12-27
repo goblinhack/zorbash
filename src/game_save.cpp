@@ -484,8 +484,8 @@ std::ostream& operator<<(std::ostream &out,
     /* int                seed                         */ out << bits(my.t.seed);
     /* std::string        seed_name                    */ out << bits(my.t.seed_name);
     /* point3d            current_level                */ out << bits(my.t.current_level);
-    /* timestamp_t        last_pause                   */ out << bits(my.t.last_pause);
     /* uint32_t           inventory_highlight_slot     */ out << bits(my.t.inventory_highlight_slot);
+    /* uint32_t           previous_slot                */ out << bits(my.t.previous_slot);
     /* uint32_t           fps_value                    */ out << bits(my.t.fps_value);
     /* uint32_t           things_are_moving            */ out << bits(my.t.things_are_moving);
     /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);

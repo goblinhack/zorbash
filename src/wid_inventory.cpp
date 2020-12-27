@@ -15,6 +15,8 @@ Widp wid_inventory_window {};
 
 void wid_inventory_fini (void)
 {_
+    LOG("inventory fini");
+
     if (game->remake_inventory) {
         //
         // continue
@@ -177,6 +179,8 @@ static uint8_t wid_inventory_mouse_up (Widp w,
 //
 static void wid_inventory_create (void)
 {_
+    LOG("inventory create");
+
     if (game->remake_inventory) {
         //
         // continue
@@ -383,9 +387,14 @@ static void wid_inventory_create (void)
 
     if (game->remake_inventory) {
         auto slot = game->inventory_highlight_slot;
+        LOG("remaking inventory for slot %d", slot);
+
         auto t = level->inventory_get(slot);
         if (t) {
+            LOG("remaking inventory, remake thing info too");
             game->wid_thing_info_create(t);
+        } else {
+            LOG("remaking inventory, noi thing info");
         }
     }
 }
