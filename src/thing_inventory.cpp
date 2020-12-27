@@ -225,6 +225,8 @@ bool Thing::inventory_id_insert (Thingp what)
         item_slot = monstp->inventory_id.size() - 1;
     }
 
+    game->previous_slot = item_slot;
+
     wid_inventory_init();
     if (!game->moving_items) {
         wid_thing_info_fini();
@@ -269,7 +271,6 @@ bool Thing::inventory_id_remove (Thingp what)
                 log("decrement slot count");
             } else {_
                 log("remove slot");
-//                monstp->inventory_id.erase(monstp->inventory_id.begin() + i);
                 monstp->inventory_id[i] = 0;
 
                 if (!monstp->inventory_id.size()) {
@@ -431,6 +432,8 @@ Thingp Level::inventory_get (void)
 
 bool Level::inventory_over (const uint32_t slot)
 {_
+    LOG("over inventory slot %d", slot);
+_
     if (!player) {
         return false;
     }
@@ -447,6 +450,7 @@ bool Level::inventory_over (const uint32_t slot)
     Thingp what;
 
     if (slot != game->inventory_highlight_slot) {
+        LOG("request to remake inventory");
         game->remake_inventory = true;
         game->inventory_highlight_slot = slot;
         what = inventory_describe(slot);
@@ -463,6 +467,8 @@ bool Level::inventory_over (const uint32_t slot)
 
 bool Level::inventory_chosen (const uint32_t slot)
 {_
+    LOG("chosen inventory slot %d", slot);
+_
     if (!player) {
         return false;
     }
@@ -471,7 +477,9 @@ bool Level::inventory_chosen (const uint32_t slot)
         return false;
     }
 
+    LOG("request to remake inventory");
     game->remake_inventory = true;
+
     auto oid = get(player->monstp->inventory_id, slot);
     if (!oid) {
         return false;

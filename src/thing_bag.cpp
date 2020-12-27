@@ -146,6 +146,9 @@ bool Thing::bag_compress (void)
 
     if (!level->is_starting) {
         game->remake_inventory |= did_something;
+        if (game->remake_inventory) {
+            LOG("request to remake inventory");
+        }
     }
 
     return did_something;

@@ -174,8 +174,8 @@ public:
     int                seed {};             // All randomness jumps off of this
     std::string        seed_name {};        // Human readable version of the above
     point3d            current_level;       // Where we are in the world.
-    timestamp_t        last_pause {};
     uint32_t           inventory_highlight_slot {};
+    uint32_t           previous_slot {};
     uint32_t           fps_value = {};      // Current framerate
     uint32_t           things_are_moving {};
     uint32_t           tick_completed {1};
@@ -192,9 +192,10 @@ public:
     //
     bool               moving_items {};     // Currently managing inventory
     bool               remake_inventory {};
-    std::list<class WidBag *> bags;
     class Wid *        in_transit_item;
-
+    std::list<class WidBag *> bags;
+    timestamp_t        last_mouse_down {};
+    timestamp_t        last_pause {};
 
     //
     // Last cursor path shown.

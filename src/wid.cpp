@@ -4927,6 +4927,10 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
             return;
         }
 
+        if (game) {
+            game->last_mouse_down = time_get_time_ms_cached();
+        }
+
         return;
     }
 
@@ -4938,6 +4942,10 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     }
 
     if (game_mouse_down(x, y, button)) {
+        if (game) {
+            game->last_mouse_down = time_get_time_ms_cached();
+        }
+
         return;
     }
 }
@@ -5828,6 +5836,7 @@ void wid_tick_all (void)
     }
     
     if (game->remake_inventory) {
+        LOG("remake inventory");
         wid_inventory_init();
         game->remake_inventory = false;
     }
