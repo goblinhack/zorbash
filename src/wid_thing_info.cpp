@@ -54,7 +54,7 @@ void Game::wid_thing_info_destroy (void)
     wid_thing_info_fini();
 }
 
-void Game::wid_thing_info_create (Thingp t)
+void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 {_
     t->log("thing info create");
 _
@@ -266,7 +266,7 @@ _
         }
     }
 
-    if (tp->is_bag()) {
+    if (!when_hovering_over && tp->is_bag()) {
         t->log("thing info create bags");
 
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
@@ -294,7 +294,6 @@ _
         } else {
             bag2 = new WidBag(t, tl, br, "Big bag");
         }
-
     }
 
     int utilized = wid_thing_info_window->wid_text_area->line_count;
@@ -304,4 +303,9 @@ _
     wid_update(wid_thing_info_window->wid_text_area->wid_text_area);
 
     recursion = false;
+}
+
+void Game::wid_thing_info_create_when_hovering_over (Thingp t)
+{
+    wid_thing_info_create(t, true);
 }
