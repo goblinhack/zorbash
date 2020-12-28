@@ -48,7 +48,7 @@ void Game::wid_thing_collect_destroy (void)
         //
         // Continue
         //
-    } else if (game->moving_items) {
+    } else if (game->collecting_items) {
         return;
     }
 
@@ -64,7 +64,7 @@ _
         // Continue
         //
         LOG("remake thing collect");
-    } else if (game->moving_items) {
+    } else if (game->collecting_items) {
         LOG("ignore, already moving items");
         return;
     }
@@ -86,11 +86,9 @@ _
 
     auto player = game->level->player;
     if (!player){
-        game->moving_items = false;
         ERR("no player");
         return;
     }
-
 
     LOG("thing collect create bags");
 
@@ -106,34 +104,41 @@ _
         bag2 = nullptr;
     }
 
+    collecting_items = true;
+
+    //
+    // bag1
+    //
     {
         point tl = mid - point(player->bag_width() + 5, player->bag_height() + 1);
         point br = tl +  point(player->bag_width(), player->bag_height());
         bag1 = new WidBag(player, tl, br, "Inventory");
     }
 
-    auto volume = bag_estimate_volume(items);
-    auto height = sqrt(volume);
-    if (height >= MAX_BAG_WIDTH) {
-        height = MAX_BAG_WIDTH;
-        ERR("bag size is too large");
+    //
+    // bag2
+    //
+    {
+        auto volume = bag_estimate_volume(items);
+        auto height = sqrt(volume);
+        if (height >= MAX_BAG_WIDTH) {
+            height = MAX_BAG_WIDTH;
+            ERR("bag size is too large");
+        }
+
+        if (height < sizeof("Items found")) {
+            height = sizeof("Items found");
+        }
+
+        point tl = mid + point(0, - (height + 1));
+        point br = tl +  point(height, height);
+
+        auto virtual_bag = level->thing_new("bag_items", fpoint(-1, -1));
+        virtual_bag->new_monst();
+        virtual_bag->monstp->bag_width = height;
+        virtual_bag->monstp->bag_height = height;
+        virtual_bag->try_to_carry(items);
+
+        bag2 = new WidBag(virtual_bag, tl, br, "Items found");
     }
-
-    point tl = mid + point(0, - (height + 1));
-    point br = tl +  point(height, height);
-
-
-    auto virtual_bag = level->thing_new("bag_items", fpoint(-1, -1));
-    virtual_bag->monstp->bag_width = height;
-    virtual_bag->monstp->bag_height = height;
-    virtual_bag->try_to_carry(items);
-
-    bag2 = new WidBag(virtual_bag, tl, br, "Items found");
-
-    int utilized = wid_thing_collect_window->wid_text_area->line_count;
-    wid_move_delta(wid_thing_collect_window->wid_popup_container, 0, 
-                   height - utilized + 2);
-    wid_resize(wid_thing_collect_window->wid_popup_container, -1, utilized - 2);
-
-    wid_update(wid_thing_collect_window->wid_text_area->wid_text_area);
 }

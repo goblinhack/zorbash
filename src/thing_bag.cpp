@@ -99,6 +99,10 @@ bool Thing::bag_compress (void)
     auto bh = bag_height();
     auto did_something = false;
 
+    if (did_something) {
+        log("bag: try to compress");
+    }
+
     for (auto x = 0; x < bw; x++) {
         for (auto y = 0; y < bh - 1; y++) {
 	    auto id = get(bag, x, y);
@@ -145,12 +149,17 @@ bool Thing::bag_compress (void)
     }
 
     if (!level->is_starting) {
-        game->remake_inventory |= did_something;
-        if (game->remake_inventory) {
-            LOG("request to remake inventory");
+        if (!game->remake_inventory) {
+            game->remake_inventory |= did_something;
+            if (game->remake_inventory) {
+                log("bag: request to remake inventory");
+            }
         }
     }
 
+    if (did_something) {
+        log("bag: was compressed");
+    }
     return did_something;
 }
 
@@ -181,16 +190,46 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
     auto w = item->bag_item_width();
     auto h = item->bag_item_height();
 
+    {
+        log("bag: pre bag_can_place_at:");
+_
+        for (auto x = 0; x < bw; x++) {
+            for (auto y = 0; y < bh; y++) {
+                auto id = get(bag, x, y);
+                if (id != NoThingId) {
+                    auto t = game->level->thing_find(id);
+                    log("- %d,%d has %s", x, y, t->to_string().c_str());
+                }
+            }
+        }
+    }
+
     if (pos.x < 0) {
+#if 1
+        log("bag: cannot place %s at %d,%d (x<0)",
+            item->to_string().c_str(), pos.x, pos.y);
+#endif
         return false;
     }
     if (pos.y < 0) {
+#if 1
+        log("bag: cannot place %s at %d,%d (y<0)",
+            item->to_string().c_str(), pos.x, pos.y);
+#endif
         return false;
     }
     if (pos.x + w >= bw) {
+#if 1
+        log("bag: cannot place %s at %d,%d (x>width)",
+            item->to_string().c_str(), pos.x, pos.y);
+#endif
         return false;
     }
     if (pos.y + h >= bh) {
+#if 1
+        log("bag: cannot place %s at %d,%d (y>height)",
+            item->to_string().c_str(), pos.x, pos.y);
+#endif
         return false;
     }
 
@@ -203,6 +242,12 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
 	    if (id == item->id) {
 		continue;
 	    }
+#if 1
+	    auto o = game->level->thing_find(id);
+            log("bag: cannot place %s at %d,%d item %s is in the way",
+                item->to_string().c_str(), pos.x, pos.y,
+                o->to_string().c_str());
+#endif
 	    return false;
 	}
     }
@@ -210,6 +255,7 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
     //
     // Do not set pos here
     //
+    log("bag: can place %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
     return true;
 }
 
@@ -245,6 +291,8 @@ bool Thing::bag_place_at (Thingp item, point pos)
 
 bool Thing::bag_remove (Thingp item)
 {
+    log("bag: remove %s", item->to_string().c_str());
+
     bool found = false;
     auto bag = get_bag();
     auto bw = bag_width();
@@ -258,7 +306,19 @@ bool Thing::bag_remove (Thingp item)
 	    }
 	}
     }
-    item->monstp->bag_position = point(-1, -1);
+
+    log("bag: post bag_remove:");
+_
+    for (auto x = 0; x < bw; x++) {
+        for (auto y = 0; y < bh; y++) {
+            auto id = get(bag, x, y);
+	    if (id != NoThingId) {
+                auto t = game->level->thing_find(id);
+                log("- %d,%d has %s", x, y, t->to_string().c_str());
+	    }
+	}
+    }
+
     return found;
 }
 

@@ -26,7 +26,12 @@ static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t bu
 
 static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 {_
-    bag->log("create bag with items widget");
+    bag->log("empty bag");
+    for (auto item : wid_find_all(wid_bag_container, "wid_bag item")) {
+        wid_destroy_nodelay(&item);
+    }
+
+    bag->log("populate the bag");
     for (const auto& item : bag->monstp->carrying) {
         auto t = game->level->thing_find(item.id);
         auto tl = t->monstp->bag_position + point(1, 1);
@@ -79,7 +84,7 @@ _
     }
 
     if (!game->in_transit_item) {
-        LOG("no");
+        LOG("no in transit item");
         return false;
     }
 
@@ -98,7 +103,7 @@ _
         if (game->level->player->carry(t)) {
             t->log("placed in inventory");
             wid_destroy(&game->in_transit_item);
-            t->log("request to remake inventory");
+            t->log("placed item: request to remake inventory");
             game->remake_inventory = true;
         }
         return true;
@@ -125,6 +130,7 @@ _
     at.x -= 1;
     at.y -= 1;
 
+    t->log("try to place in %s at %d,%d", bag->to_string().c_str(), at.x, at.y);
     if (bag->bag_can_place_at(t, at)) {
         t->log("can place at %d,%d", at.x, at.y);
 
@@ -141,6 +147,12 @@ _
         t->log("compress bag and request to remake inventory");
         while (bag->bag_compress()) { }
         game->remake_inventory = true;
+
+        t->log("in transit item place completed");
+
+        wid_bag_add_items(wid_bag_container, bag);
+    } else {
+        t->log("in transit item place failed");
     }
 
     return true;
@@ -151,7 +163,7 @@ uint8_t wid_in_transit_item_drop (void)
     LOG("drop in transit item");
 _
     if (!game->in_transit_item) {
-        LOG("no");
+        LOG("no in transit item");
         return false;
     }
 
@@ -172,6 +184,8 @@ _
 
 static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("collect in transit item");
+_
     if (game->in_transit_item) {
         return false;
     }
@@ -224,12 +238,8 @@ static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t b
 
     wid_set_movable(game->in_transit_item, true);
     wid_update(game->in_transit_item);
-
-    for (auto item : wid_find_all(wid_bag_container, "wid_bag item")) {
-        wid_destroy_nodelay(&item);
-    }
-
     wid_bag_add_items(wid_bag_container, bag);
+
     wid_update(wid_bag_container);
 
     return true;

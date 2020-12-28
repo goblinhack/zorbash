@@ -17,7 +17,11 @@ _
         return false;
     }
 
-    if (game->moving_items) {
+    if (game->collecting_items) {
+        //
+        // Avoid carry checks
+        //
+    } else if (game->moving_items) {
         //
         // Avoid carry checks
         //

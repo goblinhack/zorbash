@@ -35,6 +35,10 @@ void Level::cursor_find_on_visible_things (
         return;
     }
 
+    if (game->collecting_items) {
+        return;
+    }
+
     if (!cursor_needs_update) {
         return;
     }

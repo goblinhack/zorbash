@@ -107,7 +107,7 @@ void Thing::inventory_particle (Thingp what, uint32_t slot,
     log("inventory particle %s with target %s",
         what->to_string().c_str(), particle_target->to_string().c_str());
 _
-    if (game->moving_items) {
+    if (game->moving_items || game->collecting_items) {
         //
         // No animations when moving stuff around
         //
@@ -201,7 +201,7 @@ _
                 //
             } else {
                 wid_inventory_init();
-                if (!game->moving_items) {
+                if (!game->moving_items && !game->collecting_items) {
                     wid_thing_info_fini();
                 }
                 inventory_particle(what, i);
@@ -229,7 +229,7 @@ _
     game->previous_slot = item_slot;
 
     wid_inventory_init();
-    if (!game->moving_items) {
+    if (!game->moving_items && !game->collecting_items) {
         wid_thing_info_fini();
     }
     inventory_particle(what, item_slot);
@@ -288,7 +288,7 @@ _
 
             level->inventory_describe(game->inventory_highlight_slot);
             wid_inventory_init();
-            if (!game->moving_items) {
+            if (!game->moving_items && !game->collecting_items) {
                 wid_thing_info_fini();
             }
             return true;
@@ -352,7 +352,7 @@ _
             }
 
             wid_inventory_init();
-            if (!game->moving_items) {
+            if (!game->moving_items && !game->collecting_items) {
                 wid_thing_info_fini();
             }
             return true;

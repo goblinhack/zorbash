@@ -194,6 +194,7 @@ public:
     // Temporary
     //
     bool               moving_items {};     // Currently managing inventory
+    bool               collecting_items {}; // Collecting en masse from the level
     bool               remake_inventory {};
     class Wid *        in_transit_item;
     std::list<class WidBag *> bags;
