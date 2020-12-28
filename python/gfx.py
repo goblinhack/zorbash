@@ -372,7 +372,7 @@ def init_tiles1():
       "gold1.7",
       "gold1.8",
       "food_frog1",
-      "bag_small",
+      "bag",
       "sword1.1",
       "axe1.1",
       "",

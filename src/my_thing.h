@@ -72,6 +72,8 @@ public:
     float        fall_height = {};           // y offset for falling
     float        wobble = {};                // Fades when set
     fpoint       lunge_to;                   // When a monst attacks something
+    int          bag_height {};
+    int          bag_width {};
     int          bounce_count = {};
     int          gold = {};
     int          keys = {};
@@ -97,12 +99,12 @@ public:
     int          stats16 = {};
     int          stats17 = {};
     int          stats18 = {};
-    int          stats_stamina = {};
-    int          stats_stamina_max = {};
     int          stats_defence = {};
     int          stats_defence_max = {};
     int          stats_health = {};
     int          stats_health_max = {};
+    int          stats_stamina = {};
+    int          stats_stamina_max = {};
     int          stats_strength = {};
     int          submerged_offset = {};      // GL co-orids
     int          tick_rate_tenths = {};
@@ -111,11 +113,12 @@ public:
     point        wander_target{-1, -1};
     point        where_i_dropped_an_item_last{-1, -1};
     point        where_i_failed_to_collect_last{-1, -1};
+    std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> bag {};
     std::list<ThingId>   carrying;
     std::string          msg;                // Text that floats on screen
-    std::vector<uint16_t> inventory_id;      // Vector of tp_id
     std::vector<ThingId> enemies;            // List of things that wronged us
     std::vector<point>   move_path;
+    std::vector<uint16_t> inventory_id;      // Vector of tp_id
     timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
@@ -123,10 +126,10 @@ public:
     timestamp_t  timestamp_fadeup_end {};
     timestamp_t  timestamp_fall_begin {};
     timestamp_t  timestamp_fall_end {};
-    timestamp_t  timestamp_jump_begin {};
-    timestamp_t  timestamp_jump_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
     timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
+    timestamp_t  timestamp_jump_begin {};
+    timestamp_t  timestamp_jump_end {};
     timestamp_t  timestamp_last_tick {};
     timestamp_t  timestamp_last_ticked {};
     timestamp_t  timestamp_last_wander_try {};
@@ -138,7 +141,6 @@ public:
     uint32_t     tick_last_did_something {};
     uint32_t     tick_last_escape {};
     uint32_t     tick_last_level_change {};
-    std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> bag {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -844,7 +846,7 @@ public:
     bool attack(Thingp it);
     bool attack(fpoint future_pos);
     bool bag_add(Thingp);
-    bool bag_can_place_at(Thingp item, point pos) const;
+    bool bag_can_place_at(Thingp item, point pos);
     bool bag_compress(void);
     bool bag_contains(Thingp item);
     bool bag_place_at(Thingp item, point pos);
@@ -948,10 +950,10 @@ public:
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
-    int bag_height(void) const;
+    int bag_height(void);
     int bag_item_height(void) const;
     int bag_item_width(void) const;
-    int bag_width(void) const;
+    int bag_width(void);
     int collision_attack(void) const;
     int collision_box(void) const;
     int collision_check(void) const;
@@ -1307,5 +1309,6 @@ public:
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
 bool things_overlap_attack(Thingp t, fpoint t_at, Thingp o);
+int bag_estimate_volume(const std::list<Thingp> &items);
 
 #endif // _MY_THING_H_

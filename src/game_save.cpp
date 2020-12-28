@@ -41,6 +41,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* float        wobble                    */ out << bits(my.t->wobble);
     /* fpoint       lunge_to                  */ out << bits(my.t->lunge_to);
     /* int          bounce_count              */ out << bits(my.t->bounce_count);
+    /* int          bag_width                 */ out << bits(my.t->bag_width);
+    /* int          bag_height                */ out << bits(my.t->bag_height);
     /* int          gold                      */ out << bits(my.t->gold);
     /* int          lifespan                  */ out << bits(my.t->lifespan);
     /* int          light_quality             */ out << bits(my.t->light_quality);

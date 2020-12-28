@@ -221,6 +221,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid_rightbar.o 		\
     $(OBJDIR)/wid_text_box.o 		\
     $(OBJDIR)/wid_thing_info.o 		\
+    $(OBJDIR)/wid_thing_collect.o 	\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
     $(OBJDIR)/world_fini.o 		\

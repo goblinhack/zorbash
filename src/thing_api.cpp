@@ -765,13 +765,21 @@ int Thing::bag_item_width(void) const
     return (tp()->bag_item_width());
 }
 
-int Thing::bag_height(void) const
+int Thing::bag_height(void)
 {_
+    new_monst();
+    if (monstp->bag_height) {
+        return monstp->bag_height;
+    }
     return (tp()->bag_height());
 }
 
-int Thing::bag_width(void) const
+int Thing::bag_width(void)
 {_
+    new_monst();
+    if (monstp->bag_width) {
+        return monstp->bag_width;
+    }
     return (tp()->bag_width());
 }
 
