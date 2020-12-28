@@ -168,7 +168,7 @@ bool Thing::bag_remove_at (Thingp item, point pos)
     return true;
 }
 
-bool Thing::bag_can_place_at (Thingp item, point pos) const
+bool Thing::bag_can_place_at (Thingp item, point pos)
 {
     if (item == this) {
         MINICON("Cannot place a bag inside itself!");
@@ -260,4 +260,14 @@ bool Thing::bag_remove (Thingp item)
     }
     item->monstp->bag_position = point(-1, -1);
     return found;
+}
+
+int bag_estimate_volume (const std::list<Thingp> &items)
+{_
+    int volume = 0;
+    for (auto t : items) {
+        volume += t->bag_item_width() * t->bag_item_height();
+    }
+
+    return volume + volume / 2;
 }

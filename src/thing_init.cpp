@@ -71,8 +71,10 @@ void Thing::init (Levelp level,
     // Must do this after TP assignment or logging will fail
     //
     game->world.alloc_thing_id(this);
-    level_enter();
-    level_push();
+    if (mid_at != fpoint(-1, -1)) {
+        level_enter();
+        level_push();
+    }
 
     //
     // Add AI ability
@@ -329,8 +331,10 @@ void Thing::init (Levelp level,
     //
     // Set position prior to attach
     //
-    set_interpolated_mid_at(mid_at);
-    update_interpolated_position();
+    if (mid_at != fpoint(-1, -1)) {
+        set_interpolated_mid_at(mid_at);
+        update_interpolated_position();
+    }
 
     if (gfx_bounce_always()) {
         bounce(0.2, 1.0, 500 + random_range(0, 50), 99999);

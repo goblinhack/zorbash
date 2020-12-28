@@ -7,6 +7,7 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 #include "my_gl.h"
+#include "my_wid_thing_collect.h"
 
 void Thing::move_completed (void)
 {_
