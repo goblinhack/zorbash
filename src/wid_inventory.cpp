@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
+#include "my_wid_thing_collect.h"
 #include "my_wid_bag.h"
 #include "my_thing.h"
 
@@ -22,7 +23,7 @@ void wid_inventory_fini (void)
         // continue
         //
     } else {
-        if (game->moving_items) {
+        if (game->moving_items || game->collecting_items) {
             return;
         }
     }
@@ -44,7 +45,7 @@ static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int3
 {_
     LOG("inventory: begin over inventory");
 _
-    if (game->moving_items) {
+    if (game->moving_items || game->collecting_items) {
         LOG("inventory: moving items; ignore");
         return;
     }
@@ -86,7 +87,7 @@ static void wid_inventory_mouse_over_e (Widp w)
 {_
     LOG("inventory: end over inventory");
 _
-    if (game->moving_items) {
+    if (game->moving_items || game->collecting_items) {
         LOG("inventory: moving items; ignore");
         return;
     }
@@ -129,7 +130,7 @@ static uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
 {_
     LOG("inventory: mouse up over bag");
 _
-    if (game->moving_items) {
+    if (game->moving_items || game->collecting_items) {
         return false;
     }
 
@@ -149,6 +150,10 @@ static uint8_t wid_inventory_item_mouse_up (Widp w,
 {_
     if (game->moving_items) {
         wid_thing_info_fini();
+    }
+
+    if (game->collecting_items) {
+        wid_thing_collect_fini();
     }
 
     if (game->in_transit_item) {
@@ -188,6 +193,10 @@ static uint8_t wid_inventory_mouse_up (Widp w,
         wid_thing_info_fini();
     }
 
+    if (game->collecting_items) {
+        wid_thing_collect_fini();
+    }
+
     if (game->in_transit_item) {
         return wid_in_transit_item_place(w, x, y, button);
     }
@@ -207,7 +216,7 @@ static void wid_inventory_create (void)
         // continue
         //
     } else {
-        if (game->moving_items) {
+        if (game->moving_items || game->collecting_items) {
             return;
         }
     }
@@ -409,15 +418,17 @@ static void wid_inventory_create (void)
     recursion = false;
 
     if (game->remake_inventory) {
-        auto slot = game->inventory_highlight_slot;
-        LOG("inventory: remaking inventory for slot %d", slot);
+        if (game->moving_items) {
+            auto slot = game->inventory_highlight_slot;
+            LOG("inventory: remaking inventory for slot %d", slot);
 
-        auto t = level->inventory_get(slot);
-        if (t) {
-            LOG("inventory: remaking inventory, remake thing info too");
-            game->wid_thing_info_create(t);
-        } else {
-            LOG("inventory: remaking inventory, no thing info");
+            auto t = level->inventory_get(slot);
+            if (t) {
+                LOG("inventory: remaking inventory, remake thing info too");
+                game->wid_thing_info_create(t);
+            } else {
+                LOG("inventory: remaking inventory, no thing info");
+            }
         }
     }
 }

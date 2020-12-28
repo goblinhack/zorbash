@@ -94,7 +94,11 @@ bool Thing::move (fpoint future_pos,
 
         auto items = anything_to_carry();
         if (!items.empty()) {
-            try_to_carry(items);
+            if (items.size() > 1) {
+                game->wid_thing_collect_create(items);
+            } else {
+                try_to_carry(items);
+            }
         } else {
             MINICON("You wait...");
         }

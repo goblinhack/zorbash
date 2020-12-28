@@ -18,7 +18,7 @@ bool Thing::drop (Thingp what, Thingp target)
     } else {
         log("drop %s", what->to_string().c_str());
     }
-
+_
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
         err("attempt to drop %s which is not carried", 
@@ -59,6 +59,12 @@ bool Thing::drop (Thingp what, Thingp target)
     //
     set_where_i_dropped_an_item_last(make_point(mid_at));
 
+    if (is_bag() || is_player()) {
+        log("update bag with drop of: %s", what->to_string().c_str());
+        bag_remove(what);
+        while (bag_compress()) { }
+    }
+
     if (is_player()) {
         wid_inventory_init();
         wid_thing_info_fini();
@@ -75,7 +81,7 @@ bool Thing::drop (Thingp what, Thingp target)
 bool Thing::drop_into_ether (Thingp what)
 {_
     log("drop %s into the ether", what->to_string().c_str());
-
+_
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
         err("attempt to drop %s which is not carried", 
@@ -99,14 +105,22 @@ bool Thing::drop_into_ether (Thingp what)
             top_owner->inventory_id_remove(what);
         }
     } else {
-        err("has no top owner");
+        //
+        // This is ok, if we are moving items from a temporary bag
+        //
+    }
+
+    if (is_bag() || is_player()) {
+        log("update bag with drop of: %s", what->to_string().c_str());
+        bag_remove(what);
+        while (bag_compress()) { }
     }
 
     what->remove_owner();
 
     monstp->carrying.remove(what->id);
 
-    log("dropped %s", what->to_string().c_str());
+    log("dropped %s into the ether", what->to_string().c_str());
 
     return true;
 }
@@ -119,7 +133,7 @@ bool Thing::drop_from_ether (Thingp what)
     auto player = game->level->player;
 
     log("drop from ether %s", what->to_string().c_str());
-
+_
     what->hooks_remove();
     what->remove_owner();
     what->hide();
@@ -155,7 +169,7 @@ bool Thing::drop_from_ether (Thingp what)
                 (is_dir_br() || is_dir_right() || is_dir_tr()),
                 true /* make_visible_at_end */);
 
-    log("dropped %s", what->to_string().c_str());
+    log("dropped from ether %s", what->to_string().c_str());
 
     return true;
 }

@@ -186,7 +186,7 @@ void wid_dump (Widp w, int depth)
            tlx, tly, brx, bry, 
            wid_count(w, depth));
 
-#if 0
+#if 1
     for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
@@ -2005,6 +2005,13 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         return;
     }
 
+#if 0
+    if (w->name == "wid_bag Items found") {
+        wid_dump(w, 0);
+        DIE("xxx");
+    }
+#endif
+
     WID_DBG(w, "destroy delay");
 
     (*wp) = nullptr;
@@ -2333,9 +2340,6 @@ static Widp wid_new_scroll_bar (Widp parent,
 
     w->scrollbar_owner = scrollbar_owner;
 
-#if 0
-    wid_not_visible(w);
-#endif
     wid_set_shape_square(w);
 
     wid_set_mode(w, WID_MODE_OVER);
@@ -2871,7 +2875,7 @@ static void wid_find_prev_focus (void)
 
 Widp wid_find (Widp w, const std::string& name)
 {_
-    if (strcasestr_(w->name.c_str(), name.c_str())) {
+    if (!strcasecmp(w->name.c_str(), name.c_str())) {
         return (w);
     }
 
@@ -2890,7 +2894,7 @@ Widp wid_find (Widp w, const std::string& name)
 
 static void wid_find_all_ (Widp w, const std::string& name, std::list<Widp> &out)
 {_
-    if (strcasestr_(w->name.c_str(), name.c_str())) {
+    if (!strcasecmp(w->name.c_str(), name.c_str())) {
         out.push_back(w);
     }
 
@@ -5849,9 +5853,16 @@ void wid_tick_all (void)
     // Just in case the window cannot be remade, clean up
     //
     if (game->moving_items) {
-        if (!wid_thing_info_window) {
+        if (!game->bag1 && !game->bag2) {
             LOG("handle end of moving items");
             game->moving_items = false;
+        }
+    }
+
+    if (game->collecting_items) {
+        if (!game->bag1 && !game->bag2) {
+            LOG("handle end of collecting items");
+            game->collecting_items = false;
         }
     }
 }
