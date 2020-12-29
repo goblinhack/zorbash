@@ -58,7 +58,8 @@ bool Thing::possible_to_attack (const Thingp it)
 
         if (me->is_meat_eater()) {
             if (!it->is_attackable_by_monst()) {
-                log("Cannot attack %s, not attackable", it->to_string().c_str());
+                log("Cannot attack %s, not attackable by monst",
+                    it->to_string().c_str());
                 return false;
             }
             if (it->is_meat() || it->is_blood()) {
@@ -82,14 +83,17 @@ bool Thing::possible_to_attack (const Thingp it)
         if (o) {
             if (o->is_monst()) {
                 if (!it->is_attackable_by_monst()) {
-                    log("Cannot weapon attack %s, not attackable", it->to_string().c_str());
+                    // Too noisy
+                    // log("Cannot weapon attack %s, not attackable by monst",
+                    //     it->to_string().c_str());
                     return false;
                 }
                 log("Can attack %s", it->to_string().c_str());
                 return true;
             } else {
                 if (!it->is_attackable_by_player()) {
-                    log("Cannot weapon attack %s, not attackable", it->to_string().c_str());
+                    log("Cannot weapon attack %s, not attackable",
+                        it->to_string().c_str());
                     return false;
                 }
                 log("Can attack %s", it->to_string().c_str());

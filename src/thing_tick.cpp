@@ -20,8 +20,6 @@ void Thing::update_tick (void)
 
 bool Thing::achieve_goals_in_life (void)
 {_
-    // log("Achieve goals in life");
-_
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -65,7 +63,6 @@ _
     // Roll the dice and see if we do anything
     //
     if (!std::empty(get_on_idle_dice_do_str())) {
-        log("Idle tick");
         auto roll = get_idle_tick();
         if (get_tick() - get_tick_last_did_something() >= (unsigned int)roll) {
             auto d = get_on_idle_dice_do();

@@ -80,7 +80,7 @@ _
 //
 bool Thing::drop_into_ether (Thingp what)
 {_
-    log("Drop %s into the ether", what->to_string().c_str());
+    log("Dropping %s into the ether", what->to_string().c_str());
 _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
