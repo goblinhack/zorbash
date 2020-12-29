@@ -137,7 +137,6 @@ bool Thing::move (fpoint future_pos,
 
     if (is_player()) {
         game->tick_begin("player moved");
-        g_thing_callframes_depth = callframes_depth - 1;
         log("Player tick");
         _
 

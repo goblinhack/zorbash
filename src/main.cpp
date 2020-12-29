@@ -34,6 +34,8 @@ static char **ARGV;
 
 void quit (void)
 {_
+    LOG("FINI: Quitting, start cleanup");
+
     if (g_croaked) {
         return;
     }
@@ -146,6 +148,7 @@ void quit (void)
         ptrcheck_leak_print();
     }
 #endif
+    LOG("FINI: Clenup done");
 }
 
 void restart (void)
@@ -442,7 +445,7 @@ static void parse_args (int32_t argc, char *argv[])
     //
     LOG("INIT: Parse command line arguments for '%s'", argv[0]);
     for (i = 1; i < argc; i++) {
-        LOG("INIT: - argument: \"%s\"", argv[i]);
+        LOG("INIT: + argument: \"%s\"", argv[i]);
     }
 
     if (argc) {
@@ -492,10 +495,51 @@ static void parse_args (int32_t argc, char *argv[])
     }
 }
 
+//
+// Where all logs go
+//
+static std::string create_appdata_dir (void)
+{
+    const char *appdata;
+    appdata = getenv("APPDATA");
+    if (!appdata || !appdata[0]) {
+        appdata = "appdata";
+    }
+
+#ifdef _WIN32
+    mkdir(appdata);
+#else
+    mkdir(appdata, 0700);
+#endif
+
+    char *dir = dynprintf("%s%s%s", appdata, DIR_SEP, "zorbash");
+#ifdef _WIN32
+    mkdir(dir);
+#else
+    mkdir(dir, 0700);
+#endif
+    myfree(dir);
+
+    char *out = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
+    g_log_stdout = fopen(out, "w+");
+
+    char *err = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
+    g_log_stderr = fopen(err, "w+");
+
+    LOG("INIT: Will use STDOUT as '%s'", out);
+    LOG("INIT: Will use STDERR as '%s'", err);
+
+    myfree(out);
+    myfree(err);
+
+    return std::string(appdata);
+}
+
 int32_t main (int32_t argc, char *argv[])
 {_
     ARGV = argv;
-    parse_args(argc, argv);
+
+    auto appdata = create_appdata_dir(); // Want this first so we get all logs
 
     LOG("INIT: Greetings mortal");
 
@@ -519,37 +563,7 @@ int32_t main (int32_t argc, char *argv[])
     LOG("INIT: Platform is __linux__");
 #endif
 
-    const char *appdata;
-    appdata = getenv("APPDATA");
-    if (!appdata || !appdata[0]) {
-        appdata = "appdata";
-    }
-
-    LOG("INIT: Create the APPDATA dir, '%s'", appdata);
-#ifdef _WIN32
-    mkdir(appdata);
-#else
-    mkdir(appdata, 0700);
-#endif
-
-    char *dir = dynprintf("%s%s%s", appdata, DIR_SEP, "zorbash");
-#ifdef _WIN32
-    mkdir(dir);
-#else
-    mkdir(dir, 0700);
-#endif
-    LOG("INIT: Will use APPDATA, '%s'", dir);
-    myfree(dir);
-
-    char *out = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
-    LOG("INIT: Will use STDOUT as '%s'", out);
-    g_log_stdout = fopen(out, "w+");
-    myfree(out);
-
-    char *err = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
-    LOG("INIT: Will use STDERR as '%s'", err);
-    g_log_stderr = fopen(err, "w+");
-    myfree(err);
+    parse_args(argc, argv);
 
     //////////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ Use LOG 
@@ -563,7 +577,7 @@ int32_t main (int32_t argc, char *argv[])
     // Need this to get the UTF on the console
     //
 #ifndef _WIN32
-    CON("INIT: Init locale for console");
+    CON("INIT: Set locale for console");
     std::locale loc("");
     std::ios_base::sync_with_stdio(false);
     std::wcout.imbue(loc);
@@ -591,20 +605,17 @@ int32_t main (int32_t argc, char *argv[])
     gl_init_2d_mode();
 
     //
-    // So console is faster
+    // Disable vsync so the console is faster
     //
     SDL_GL_SetSwapInterval(0);
 
     CON("INIT: Load early gfx tiles, text, UI etc...");
     gfx_init();
 
-    //dospath2unix(ARGV[0]);
-    //LOG("Set unix path to %s", ARGV[0]);
-
     //
-    // Random numbers
+    // Random number generators
     //
-    LOG("INIT: random number generators");
+    CON("INIT: Create random number generators");
     double mean = 1.0;
     double std = 0.5;
     std::normal_distribution<double> distribution;
@@ -613,13 +624,17 @@ int32_t main (int32_t argc, char *argv[])
     mysrand(time(0));
 
 #ifdef ENABLE_CRASH_HANDLER
-    LOG("INIT: crash handlers");
-    signal(SIGSEGV, segv_handler);   // install our handler
-    signal(SIGABRT, segv_handler);   // install our handler
-    signal(SIGINT, ctrlc_handler);   // install our handler
-    signal(SIGPIPE, ctrlc_handler);  // install our handler
+    //
+    // Crash handlers
+    CON("INIT: Install crash handlers");
+    signal(SIGSEGV, segv_handler);
+    signal(SIGABRT, segv_handler);
+    signal(SIGINT, ctrlc_handler);
+    signal(SIGILL, ctrlc_handler);
+    signal(SIGPIPE, ctrlc_handler);
 #endif
 
+    CON("INIT: Create color names map");
     color_init();
 
 #if 0
@@ -731,13 +746,6 @@ int32_t main (int32_t argc, char *argv[])
     game->load();
 #endif
 
-#if 0
-    if (!wid_test_init()) {
-        ERR("Wid_test init");
-    }
-#endif
-
-    CON("INIT: Clear minicons");
     wid_minicon_flush();
     wid_botcon_flush();
     sdl_flush_display();
@@ -759,6 +767,7 @@ int32_t main (int32_t argc, char *argv[])
 
     g_opt_fast_start = false;
     sdl_loop();
+    LOG("FINI: SDL loop finished");
 
     CON("FINI: Leave 2D mode");
     gl_leave_2d_mode();

@@ -201,6 +201,8 @@ void myerr(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 // Normal logging
 //
 void LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void LOG_MISSING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void log_catchup_missing_indent_levels(void);
 
 //
 // Consoles

@@ -35,4 +35,4 @@ std::string g_opt_seed_name;
 int TILES_ACROSS;
 int TILES_DOWN;
 
-uint16_t g_thing_callframes_depth;
+uint16_t g_last_logged_g_callframes_depth;

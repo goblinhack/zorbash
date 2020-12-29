@@ -16,45 +16,31 @@ void Level::log_ (const char *fmt, va_list args)
     auto l = this;
     char buf[MAXSHORTSTR];
 
-    if (callframes_depth) {
-        int len;
+    int len;
 
-        buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
-        len = (int)strlen(buf);
+    buf[0] = '\0';
+    get_timestamp(buf, MAXSHORTSTR);
+    len = (int)strlen(buf);
 
-        if (!callframes_depth) {
-            snprintf(buf + len, MAXSHORTSTR - len, "%60s: ", l->to_string().c_str());
-        } else {
-            snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s", l->to_string().c_str(),
-                    callframes_depth - g_thing_callframes_depth, "");
-        }
-
-        len = (int)strlen(buf);
-        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
-
-        putf(MY_STDOUT, buf);
+    if (!g_last_logged_g_callframes_depth) {
+        snprintf(buf + len, MAXSHORTSTR - len, "%60s: ", l->to_string().c_str());
     } else {
-        int len;
-
-        buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
-        len = (int)strlen(buf);
-        snprintf(buf + len, MAXSHORTSTR - len, "level %s: ", l->to_string().c_str());
-
-        len = (int)strlen(buf);
-        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
-
-        putf(MY_STDOUT, buf);
+        snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s", l->to_string().c_str(),
+                g_last_logged_g_callframes_depth, "");
     }
+
+    len = (int)strlen(buf);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
 }
 
 void Level::log (const char *fmt, ...)
 {
     verify(this);
+    log_catchup_missing_indent_levels();
     auto l = this;
     va_list args;
-
     va_start(args, fmt);
     l->log_(fmt, args);
     va_end(args);

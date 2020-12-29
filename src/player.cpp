@@ -73,8 +73,6 @@ void player_tick (void)
         return;
     }
 
-    g_thing_callframes_depth = callframes_depth;
-
     static bool left = false;
     static bool right = false;
     static bool up = false;

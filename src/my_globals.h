@@ -74,8 +74,8 @@ extern int TILES_ACROSS;
 extern int TILES_DOWN;
 
 //
-// Shorter callstack indent printing logs inside thing code
+// Used to fill in gaps in log depth
 //
-extern uint16_t g_thing_callframes_depth;
+extern uint16_t g_last_logged_g_callframes_depth;
 
 #endif

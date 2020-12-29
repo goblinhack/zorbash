@@ -12,45 +12,68 @@
 #include "my_console.h"
 #include "my_log.h"
 
+//
+// Whan a log appears, if some indent levels are missing, then pull them
+// out of the callstack - it's like a mini traceback
+//
+void log_catchup_missing_indent_levels (void)
+{
+    if (!g_log_stdout) {
+        g_last_logged_g_callframes_depth = 0;
+    }
+
+    if (g_callframes_depth > 0) {
+        if (g_last_logged_g_callframes_depth > g_callframes_depth) {
+            g_last_logged_g_callframes_depth = g_callframes_depth - 1;
+            return;
+        }
+    }
+
+    while (g_last_logged_g_callframes_depth < g_callframes_depth) {
+        auto func = callframes[g_last_logged_g_callframes_depth].func;
+        g_last_logged_g_callframes_depth++;
+        LOG_MISSING("%s", func);
+    }
+    g_last_logged_g_callframes_depth = g_callframes_depth;
+}
+
 static void log_ (const char *fmt, va_list args)
 {
     char buf[MAXSHORTSTR];
-    if (callframes_depth) {
-        int len;
 
-        buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
-        len = (int)strlen(buf);
+    int len;
 
-        if (!callframes_depth) {
-            snprintf(buf + len, MAXSHORTSTR - len, "%60s: ", "");
-        } else {
-            snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s", "",
-                    callframes_depth - g_thing_callframes_depth, "");
-        }
+    buf[0] = '\0';
+    get_timestamp(buf, MAXSHORTSTR);
+    len = (int)strlen(buf);
 
-        len = (int)strlen(buf);
-        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
-
-        putf(MY_STDOUT, buf);
+    if (!g_log_stdout) {
+        // No indent
+    } else if (!g_last_logged_g_callframes_depth) {
+        snprintf(buf + len, MAXSHORTSTR - len, "%60s: ", "");
     } else {
-        int len;
-
-        buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
-        len = (int)strlen(buf);
-        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
-
-        putf(MY_STDOUT, buf);
-
-        // wid_console_log(buf + len);
+        snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s", "",
+                 g_last_logged_g_callframes_depth, "");
     }
+
+    len = (int)strlen(buf);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
 }
 
 void LOG (const char *fmt, ...)
 {
+    log_catchup_missing_indent_levels();
     va_list args;
+    va_start(args, fmt);
+    log_(fmt, args);
+    va_end(args);
+}
 
+void LOG_MISSING (const char *fmt, ...)
+{
+    va_list args;
     va_start(args, fmt);
     log_(fmt, args);
     va_end(args);
@@ -83,13 +106,13 @@ void WARN (const char *fmt, ...)
 
 static void con_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -233,8 +256,8 @@ void minicon (const wchar_t *fmt)
 
 void CON (const char *fmt, ...)
 {
+    log_catchup_missing_indent_levels();
     va_list args;
-
     va_start(args, fmt);
     con_(fmt, args);
     va_end(args);

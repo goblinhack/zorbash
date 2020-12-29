@@ -83,7 +83,7 @@ static inline void sdl_list_video_size (void)
     for (i = 0; i < SDL_GetNumDisplayModes(0); ++i) {
         SDL_DisplayMode mode;
         SDL_GetDisplayMode(0, i, &mode);
-        LOG("- SDL video            : %dx%d available, ratio %f",
+        LOG("+ SDL video            : %dx%d available, ratio %f",
             mode.w, mode.h,
             (float)mode.w / (float)mode.h);
     }
@@ -100,7 +100,7 @@ void sdl_joy_rumble (float strength, timestamp_t ms)
 
 static void sdl_init_rumble (void)
 {_
-    LOG("SDL init rumble:");
+    LOG("SDL: init rumble:");
 
     if (!haptic) {
         haptic = SDL_HapticOpenFromJoystick(joy);
@@ -128,7 +128,7 @@ static void sdl_init_rumble (void)
 
 static void sdl_init_joystick (void)
 {_
-    LOG("SDL init input:");
+    LOG("SDL: init input:");
 
     SDL_GameController *controller = NULL;
 
@@ -165,11 +165,11 @@ static void sdl_init_joystick (void)
 
     joy = SDL_JoystickOpen(joy_index);
     if (joy) {
-        LOG("- Opened Joystick %d", joy_index);
-        LOG("- Name: %s", SDL_JoystickNameForIndex(0));
-        LOG("- Number of Axes: %d", SDL_JoystickNumAxes(joy));
+        LOG("- Opened Joystick  : %d", joy_index);
+        LOG("- Name             : %s", SDL_JoystickNameForIndex(0));
+        LOG("- Number of Axes   : %d", SDL_JoystickNumAxes(joy));
         LOG("- Number of Buttons: %d", SDL_JoystickNumButtons(joy));
-        LOG("- Number of Balls: %d", SDL_JoystickNumBalls(joy));
+        LOG("- Number of Balls  : %d", SDL_JoystickNumBalls(joy));
 
         joy_naxes = SDL_JoystickNumAxes(joy);
         joy_buttons = SDL_JoystickNumButtons(joy);
@@ -187,15 +187,13 @@ uint8_t sdl_init (void)
     int video_height;
     int value;
 
-    LOG("INIT: SDL version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
-
-    LOG("INIT: SDL_Init");
+    LOG("SDL: SDL init, version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         SDL_MSG_BOX("SDL_Init failed %s", SDL_GetError());
         ERR("SDL_Init failed %s", SDL_GetError());
     }
 
-    LOG("INIT: SDL_VideoInit");
+    LOG("SDL: SDL_VideoInit");
     if (SDL_VideoInit(0) != 0) {
         SDL_MSG_BOX("SDL_VideoInit failed %s", SDL_GetError());
         ERR("SDL_VideoInit failed %s", SDL_GetError());
@@ -244,21 +242,21 @@ uint8_t sdl_init (void)
 
     uint32_t video_flags;
 
-    LOG("INIT: SDL_WINDOW_OPENGL");
+    LOG("SDL: Set SDL_WINDOW_OPENGL");
     video_flags = SDL_WINDOW_OPENGL;
 
     if (game->config.gfx_borderless) {
-        LOG("INIT: SDL_WINDOW_BORDERLESS");
+        LOG("SDL: Set SDL_WINDOW_BORDERLESS");
         video_flags |= SDL_WINDOW_BORDERLESS;
     }
 
     if (game->config.gfx_fullscreen) {
-        LOG("INIT: SDL_WINDOW_FULLSCREEN");
+        LOG("SDL: Set SDL_WINDOW_FULLSCREEN");
         video_flags |= SDL_WINDOW_FULLSCREEN;
     } 
 
     if (game->config.gfx_fullscreen_desktop) {
-        LOG("INIT: SDL_WINDOW_FULLSCREEN_DESKTOP");
+        LOG("SDL: Set SDL_WINDOW_FULLSCREEN_DESKTOP");
         video_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
 
@@ -267,17 +265,17 @@ uint8_t sdl_init (void)
         // For a lo pixel game this makes no sense as the frame
         // buffers are really large and slows things down.
         //
-        LOG("INIT: Calling SDL_GetDisplayDPI");
+        LOG("SDL: Calling SDL_GetDisplayDPI");
         float dpi;
         if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
             video_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
-            LOG("INIT: SDL_WINDOW_ALLOW_HIGHDPI");
+            LOG("SDL: SDL_WINDOW_ALLOW_HIGHDPI");
         } else {
-            ERR("INIT: Cannot enable high DPI");
+            ERR("SDL: Cannot enable high DPI");
         }
     }
 
-    LOG("INIT: SDL_CreateWindow");
+    LOG("SDL: SDL_CreateWindow");
     window = SDL_CreateWindow("zorbash",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
@@ -305,7 +303,7 @@ uint8_t sdl_init (void)
                           &game->config.outer_pix_height);
     }
 
-    LOG("INIT: SDL_GL_CreateContext(%dx%d)",
+    LOG("SDL: Call SDL_GL_CreateContext(%dx%d)",
         game->config.outer_pix_width,
         game->config.outer_pix_height);
 
@@ -317,7 +315,7 @@ uint8_t sdl_init (void)
         return false;
     }
 
-    LOG("INIT: SDL_GL_CreateContext(%dx%d) done",
+    LOG("SDL: Call SDL_GL_CreateContext(%dx%d) done",
         game->config.outer_pix_width,
         game->config.outer_pix_height);
 
@@ -328,7 +326,7 @@ uint8_t sdl_init (void)
         return false;
     }
 
-    LOG("INIT: SDL_GL_MakeCurrent() done");
+    LOG("SDL: Call SDL_GL_MakeCurrent() done");
 
     SDL_ClearError();
 
@@ -354,33 +352,33 @@ uint8_t sdl_init (void)
 
     config_gfx_zoom_update();
 
-    LOG("INIT: SDL_SetWindowTitle");
+    LOG("SDL: Call SDL_SetWindowTitle");
     SDL_SetWindowTitle(window, "zorbash");
 
-    LOG("INIT: GL Vendor   : %s", glGetString(GL_VENDOR));
-    LOG("INIT: GL Renderer : %s", glGetString(GL_RENDERER));
-    LOG("INIT: GL Version  : %s", glGetString(GL_VERSION));
-    DBG("INIT: GL Exts     : %s", glGetString(GL_EXTENSIONS));
+    LOG("SDL: GL Vendor   : %s", glGetString(GL_VENDOR));
+    LOG("SDL: GL Renderer : %s", glGetString(GL_RENDERER));
+    LOG("SDL: GL Version  : %s", glGetString(GL_VERSION));
+    LOG("SDL: GL Exts     : %s", glGetString(GL_EXTENSIONS));
 
     SDL_GL_GetAttribute(SDL_GL_RED_SIZE, &value);
-    DBG("Red         : %d", value);
+    LOG("SDL: Red size    : %d", value);
 
     SDL_GL_GetAttribute(SDL_GL_GREEN_SIZE, &value);
-    DBG("Green       : %d", value);
+    LOG("SDL: Green size  : %d", value);
 
     SDL_GL_GetAttribute(SDL_GL_BLUE_SIZE, &value);
-    DBG("Blue        : %d", value);
+    LOG("SDL: Blue size   : %d", value);
 
     SDL_GL_GetAttribute(SDL_GL_DEPTH_SIZE, &value);
-    DBG("Depth       : %d", value);
+    LOG("SDL: Depth size  : %d", value);
 
     SDL_GL_GetAttribute(SDL_GL_DOUBLEBUFFER, &value);
-    DBG("Doub Buffer : %d", value);
+    LOG("SDL: Doub Buffer : %d", value);
 
     SDL_GL_GetAttribute(SDL_GL_ACCELERATED_VISUAL, &value);
-    DBG("Hw Accel    : %d", value);
+    LOG("SDL: Hw Accel    : %d", value);
 
-    DBG("Vsync       : %d", SDL_GL_GetSwapInterval());
+    LOG("SDL: Vsync       : %d", SDL_GL_GetSwapInterval());
 
     return true;
 }
@@ -418,8 +416,6 @@ static int sdl_filter_events (void *userdata, SDL_Event *event)
 
 static void sdl_event (SDL_Event * event)
 {_
-    LOG("SDL event");
-
     SDL_KEYSYM *key;
 
     wid_mouse_double_click = false;
@@ -427,7 +423,7 @@ static void sdl_event (SDL_Event * event)
     switch (event->type) {
     case SDL_KEYDOWN:
         if (g_grab_next_key) {
-            CON("Keyboard: grabbed 0x%" PRIx32 " = %s / %s",
+            DBG("SDL: Keyboard: grabbed 0x%" PRIx32 " = %s / %s",
                 event->key.keysym.sym,
                 SDL_GetKeyName(event->key.keysym.sym),
                 SDL_GetScancodeName(event->key.keysym.scancode));
@@ -440,7 +436,7 @@ static void sdl_event (SDL_Event * event)
             return;
         }
 
-        DBG("Keyboard: key pressed keycode 0x%" PRIx32 " = %s",
+        DBG("SDL: Keyboard: key pressed keycode 0x%" PRIx32 " = %s",
             event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 
@@ -468,7 +464,7 @@ static void sdl_event (SDL_Event * event)
         break;
 
     case SDL_KEYUP:
-        DBG("Keyboard: key released keycode 0x%" PRIx32 " = %s",
+        DBG("SDL: Keyboard: key released keycode 0x%" PRIx32 " = %s",
             event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 
@@ -480,12 +476,12 @@ static void sdl_event (SDL_Event * event)
         break;
 
     case SDL_TEXTINPUT:
-        DBG("Keyboard: text input \"%s\" in window %d",
+        DBG("SDL: Keyboard: text input \"%s\" in window %d",
             event->text.text, event->text.windowID);
         break;
 
     case SDL_MOUSEWHEEL: {
-        DBG("Mouse: wheel scrolled %d in x and %d in y in window %d",
+        DBG("SDL: Mouse: wheel scrolled %d in x and %d in y in window %d",
             event->wheel.x, event->wheel.y, event->wheel.windowID);
 
         sdl_get_mouse();
@@ -527,7 +523,7 @@ static void sdl_event (SDL_Event * event)
     case SDL_MOUSEMOTION:
         mouse_down = sdl_get_mouse();
 
-        DBG("Mouse: moved to %d,%d (%d,%d) state %d",
+        DBG("SDL: Mouse: moved to %d,%d (%d,%d) state %d",
             event->motion.x, event->motion.y,
             event->motion.xrel, event->motion.yrel, mouse_down);
 
@@ -541,7 +537,7 @@ static void sdl_event (SDL_Event * event)
     case SDL_MOUSEBUTTONDOWN: {
         mouse_down = sdl_get_mouse();
 
-        DBG("Mouse DOWN: button %d pressed at %d,%d state %x",
+        DBG("SDL: Mouse DOWN: button %d pressed at %d,%d state %x",
             event->button.button, event->button.x, event->button.y,
             mouse_down);
 
@@ -558,7 +554,7 @@ static void sdl_event (SDL_Event * event)
     case SDL_MOUSEBUTTONUP:
         mouse_down = sdl_get_mouse();
 
-        DBG("Mouse UP: button %d released at %d,%d state %d",
+        DBG("SDL: Mouse UP: button %d released at %d,%d state %d",
             event->button.button, event->button.x, event->button.y,
             mouse_down);
 
@@ -566,7 +562,7 @@ static void sdl_event (SDL_Event * event)
         break;
 
     case SDL_JOYAXISMOTION: {
-        DBG("Joystick %d: axis %d moved by %d",
+        DBG("SDL: Joystick %d: axis %d moved by %d",
             event->jaxis.which, event->jaxis.axis, event->jaxis.value);
 
         int axis = event->jaxis.axis;
@@ -582,7 +578,7 @@ static void sdl_event (SDL_Event * event)
         sdl_right_fire = false;
 
         if (sdl_joy_axes[2] > sdl_joy_deadzone) {
-            DBG("left fire");
+            DBG("SDL: left fire");
             sdl_left_fire = true;
             set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t)1);
         } else {
@@ -591,7 +587,7 @@ static void sdl_event (SDL_Event * event)
 
 
         if (sdl_joy_axes[5] > sdl_joy_deadzone) {
-            DBG("right fire");
+            DBG("SDL: right fire");
             sdl_right_fire = true;
             set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t)1);
         } else {
@@ -607,62 +603,62 @@ static void sdl_event (SDL_Event * event)
     }
 
     case SDL_JOYBALLMOTION:
-        DBG("Joystick %d: ball %d moved by %d,%d",
+        DBG("SDL: Joystick %d: ball %d moved by %d,%d",
             event->jball.which, event->jball.ball, event->jball.xrel,
             event->jball.yrel);
         break;
 
     case SDL_JOYHATMOTION:
-        DBG("Joystick %d: hat %d moved to ", event->jhat.which,
+        DBG("SDL: Joystick %d: hat %d moved to ", event->jhat.which,
             event->jhat.hat);
 
         switch (event->jhat.value) {
         case SDL_HAT_CENTERED:
             break;
         case SDL_HAT_UP:
-            DBG("UP");
+            DBG("SDL: UP");
             sdl_joy2_up = true;
             break;
         case SDL_HAT_RIGHTUP:
-            DBG("RIGHTUP");
+            DBG("SDL: RIGHTUP");
             sdl_joy2_right = true;
             sdl_joy2_up = true;
             break;
         case SDL_HAT_RIGHT:
-            DBG("RIGHT");
+            DBG("SDL: RIGHT");
             sdl_joy2_right = true;
             break;
         case SDL_HAT_RIGHTDOWN:
-            DBG("RIGHTDOWN");
+            DBG("SDL: RIGHTDOWN");
             sdl_joy2_right = true;
             sdl_joy2_down = true;
             break;
         case SDL_HAT_DOWN:
-            DBG("DOWN");
+            DBG("SDL: DOWN");
             sdl_joy2_down = true;
             break;
         case SDL_HAT_LEFTDOWN:
-            DBG("LEFTDOWN");
+            DBG("SDL: LEFTDOWN");
             sdl_joy2_left = true;
             sdl_joy2_down = true;
             break;
         case SDL_HAT_LEFT:
-            DBG("LEFT");
+            DBG("SDL: LEFT");
             sdl_joy2_left = true;
             break;
         case SDL_HAT_LEFTUP:
             sdl_joy2_left = true;
             sdl_joy2_up = true;
-            DBG("LEFTUP");
+            DBG("SDL: LEFTUP");
             break;
         default:
-            DBG("UNKNOWN");
+            DBG("SDL: UNKNOWN");
             break;
         }
         break;
 
     case SDL_JOYBUTTONDOWN:
-        DBG("Joystick %d: button %d pressed",
+        DBG("SDL: Joystick %d: button %d pressed",
             event->jbutton.which, event->jbutton.button);
         set(sdl_joy_buttons, event->jbutton.button, (uint8_t)1);
         sdl_get_mouse();
@@ -670,13 +666,13 @@ static void sdl_event (SDL_Event * event)
         break;
 
     case SDL_JOYBUTTONUP:
-        DBG("Joystick %d: button %d released",
+        DBG("SDL: Joystick %d: button %d released",
             event->jbutton.which, event->jbutton.button);
         set(sdl_joy_buttons, event->jbutton.button, (uint8_t)0);
         break;
 
     case SDL_CLIPBOARDUPDATE:
-        DBG("Clipboard updated");
+        DBG("SDL: Clipboard updated");
         break;
 
     case SDL_QUIT: {
@@ -687,11 +683,11 @@ static void sdl_event (SDL_Event * event)
     }
 
     case SDL_USEREVENT:
-        DBG("User event %d", event->user.code);
+        DBG("SDL: User event %d", event->user.code);
         break;
 
     default:
-        DBG("Unknown event %d", event->type);
+        DBG("SDL: Unknown event %d", event->type);
         break;
     }
 }
@@ -770,7 +766,7 @@ static void sdl_tick (void)
     // Right stick
     //
     if (sdl_joy_axes[3] > sdl_joy_deadzone) {
-        DBG("right stick, right");
+        DBG("SDL: right stick, right");
         sdl_joy1_right = true;
 
         incr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
@@ -779,7 +775,7 @@ static void sdl_tick (void)
     }
 
     if (sdl_joy_axes[3] < -sdl_joy_deadzone) {
-        DBG("right stick, left");
+        DBG("SDL: right stick, left");
         sdl_joy1_left = true;
 
         incr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
@@ -788,7 +784,7 @@ static void sdl_tick (void)
     }
 
     if (sdl_joy_axes[4] > sdl_joy_deadzone) {
-        DBG("right stick, down");
+        DBG("SDL: right stick, down");
         sdl_joy1_down = true;
 
         incr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
@@ -797,7 +793,7 @@ static void sdl_tick (void)
     }
 
     if (sdl_joy_axes[4] < -sdl_joy_deadzone) {
-        DBG("right stick, up");
+        DBG("SDL: right stick, up");
         sdl_joy1_up = true;
 
         incr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
@@ -812,25 +808,25 @@ static void sdl_tick (void)
     int my = 0;
 
     if (sdl_joy_axes[0] > sdl_joy_deadzone) {
-        DBG("left stick, right");
+        DBG("SDL: left stick, right");
         sdl_joy2_right = true;
         mx = 1;
     }
 
     if (sdl_joy_axes[0] < -sdl_joy_deadzone) {
-        DBG("left stick, left");
+        DBG("SDL: left stick, left");
         sdl_joy2_left = true;
         mx = -1;
     }
 
     if (sdl_joy_axes[1] > sdl_joy_deadzone) {
-        DBG("left stick, down");
+        DBG("SDL: left stick, down");
         sdl_joy2_down = true;
         my = 1;
     }
 
     if (sdl_joy_axes[1] < -sdl_joy_deadzone) {
-        DBG("left stick, up");
+        DBG("SDL: left stick, up");
         sdl_joy2_up = true;
         my = -1;
     }
@@ -1147,10 +1143,10 @@ uint8_t config_errored (tokens_t *tokens, void *context)
 
 void config_update_all (void)
 {_
-    CON("INIT: OpenGL leave 2D mode");
+    CON("SDL: OpenGL leave 2D mode");
     config_gfx_zoom_update();
     config_gfx_vsync_update();
-    CON("INIT: OpenGL enter 2D mode");
+    CON("SDL: OpenGL enter 2D mode");
     gl_init_2d_mode();
 
     if (game->level) {
@@ -1318,6 +1314,7 @@ void sdl_loop (void)
 
             if (unlikely(!g_do_screenshot)) {
                 if (unlikely(!sdl_main_loop_running)) {
+                    LOG("Exit main loop");
                     break;
                 }
             }
@@ -1386,6 +1383,8 @@ void sdl_loop (void)
             break;
         }
     }
+
+    LOG("Exited main loop");
 
     gl_leave_2d_mode();
 
@@ -1465,12 +1464,12 @@ void config_gfx_zoom_update (void)
     game->config.tile_pixel_height =
         game->config.inner_pix_height / TILES_DOWN;
 
-    CON("INIT: Graphics zoom          : %f", game->config.gfx_zoom);
-    CON("INIT: - config   pix size    : %dx%d", game->config.config_pix_width,
+    CON("SDL: Graphics zoom          : %f", game->config.gfx_zoom);
+    CON("SDL: - config   pix size    : %dx%d", game->config.config_pix_width,
                                                 game->config.config_pix_height);
-    CON("INIT: - outer    pix size    : %dx%d", game->config.outer_pix_width,
+    CON("SDL: - outer    pix size    : %dx%d", game->config.outer_pix_width,
                                                 game->config.outer_pix_height);
-    CON("INIT: - inner    pix size    : %dx%d", game->config.inner_pix_width,
+    CON("SDL: - inner    pix size    : %dx%d", game->config.inner_pix_width,
                                                 game->config.inner_pix_height);
 
     TERM_WIDTH = TERM_WIDTH_DEF;
@@ -1479,19 +1478,19 @@ void config_gfx_zoom_update (void)
     game->config.ascii_gl_height = game->config.outer_pix_height / TERM_HEIGHT;
 
     if (TERM_WIDTH >= TERM_WIDTH_MAX) {
-        LOG("INIT: Exceeded console hit max width  : %d", TERM_WIDTH);
+        LOG("SDL: Exceeded console hit max width  : %d", TERM_WIDTH);
         TERM_WIDTH = TERM_WIDTH_MAX;
         game->config.ascii_gl_width =
             (float)game->config.outer_pix_width / (float)TERM_WIDTH;
     }
 
     if (TERM_HEIGHT >= TERM_HEIGHT_MAX) {
-        LOG("INIT: Exceeded console hit max height : %d", TERM_HEIGHT);
+        LOG("SDL: Exceeded console hit max height : %d", TERM_HEIGHT);
         TERM_HEIGHT = TERM_HEIGHT_MAX;
         game->config.ascii_gl_height =
             (float)game->config.outer_pix_height / (float)TERM_HEIGHT;
     }
 
-    CON("INIT: - ascii size           : %dx%d", TERM_WIDTH, TERM_HEIGHT);
-    CON("INIT: - width to height ratio: %f", game->config.video_w_h_ratio);
+    CON("SDL: - ascii size           : %dx%d", TERM_WIDTH, TERM_HEIGHT);
+    CON("SDL: - width to height ratio: %f", game->config.video_w_h_ratio);
 }
