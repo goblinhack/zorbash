@@ -17,7 +17,7 @@ void Thing::visible (void)
         return;
     }
 
-    log("is now visible");
+    log("Is now visible");
     is_hidden = false;
 
     //

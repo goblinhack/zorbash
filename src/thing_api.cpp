@@ -44,12 +44,12 @@ void Thing::new_monst (void)
     if (unlikely(!monstp)) {
         monstp = new Monst();
         // uncomment to see who allocates things
-        // err("new monst");
+        // err("New monst");
         newptr(monstp, "Monst");
 
         if (tp_id != -1) {
             if (is_dirt() || is_the_grid || is_wall() || is_floor()) {
-                die("unexpectedly needs monst struct");
+                die("Unexpectedly needs monst struct");
             }
         }
     }
@@ -745,9 +745,9 @@ int Thing::is_rrr52(void) const
     return (tp()->is_rrr52());
 }
 
-int Thing::is_rrr53(void) const
+int Thing::is_temporary_bag(void) const
 {_
-    return (tp()->is_rrr53());
+    return (tp()->is_temporary_bag());
 }
 
 int Thing::is_treasure_class_c(void) const
@@ -4546,7 +4546,7 @@ std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * Thing::get_bag 
     if (monstp) {
         return (&monstp->bag);
     } else {
-        DIE("no bag");
+        DIE("No bag");
     }
 }
 
@@ -4555,7 +4555,7 @@ const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * Thing::ge
     if (monstp) {
         return (&monstp->bag);
     } else {
-        DIE("no bag");
+        DIE("No bag");
     }
 }
 

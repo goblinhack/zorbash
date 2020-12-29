@@ -88,12 +88,12 @@ static unsigned char *load_raw_image (std::string filename,
 
     file_data = file_load(filename.c_str(), &len);
     if (!file_data) {
-        ERR("could not read file, '%s'", filename.c_str());
+        ERR("Could not read file, '%s'", filename.c_str());
     }
 
     image_data = stbi_load_from_memory(file_data, len, x, y, comp, 0);
     if (!image_data) {
-        ERR("could not read memory for file, '%s'", filename.c_str());
+        ERR("Could not read memory for file, '%s'", filename.c_str());
     }
 
     DBG("loaded '%s', %ux%u", filename.c_str(), *x, *y);
@@ -117,7 +117,7 @@ static SDL_Surface *load_image (std::string filename)
 
     image_data = load_raw_image(filename, &x, &y, &comp);
     if (!image_data) {
-        ERR("could not read memory for file, '%s'", filename.c_str());
+        ERR("Could not read memory for file, '%s'", filename.c_str());
     }
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -142,7 +142,7 @@ static SDL_Surface *load_image (std::string filename)
         surf = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
         newptr(surf, "SDL_CreateRGBSurface3");
     } else {
-        ERR("could not handle image with %d components", comp);
+        ERR("Could not handle image with %d components", comp);
         free_raw_image(image_data);
         return (0);
     }
@@ -176,7 +176,7 @@ static void load_images (SDL_Surface **surf1_out,
 
     image_data = load_raw_image(filename, &x, &y, &comp);
     if (!image_data) {
-        ERR("could not read memory for file, '%s'", filename.c_str());
+        ERR("Could not read memory for file, '%s'", filename.c_str());
     }
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -201,7 +201,7 @@ static void load_images (SDL_Surface **surf1_out,
         surf1 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
         newptr(surf1, "SDL_CreateRGBSurface7");
     } else {
-        ERR("could not handle image with %d components", comp);
+        ERR("Could not handle image with %d components", comp);
     }
 
     if (comp == 4) {
@@ -214,7 +214,7 @@ static void load_images (SDL_Surface **surf1_out,
         surf2 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
         newptr(surf2, "SDL_CreateRGBSurface10");
     } else {
-        ERR("could not handle image with %d components", comp);
+        ERR("Could not handle image with %d components", comp);
     }
 
     memcpy(surf1->pixels, image_data, comp * x * y);
@@ -257,13 +257,13 @@ Texp tex_load (std::string file, std::string name, int mode)
         return (t);
     }
 
-    LOG("loading texture '%s', '%s'", file.c_str(), name.c_str());
+    LOG("Loading texture '%s', '%s'", file.c_str(), name.c_str());
     if (file == "") {
         if (name == "") {
-            ERR("no file for tex");
+            ERR("No file for tex");
             return (0);
         } else {
-            ERR("no file for tex loading '%s'", name.c_str());
+            ERR("No file for tex loading '%s'", name.c_str());
             return (0);
         }
     }
@@ -272,7 +272,7 @@ Texp tex_load (std::string file, std::string name, int mode)
     surface = load_image(file);
 
     if (!surface) {
-        ERR("could not make surface from file '%s'", file.c_str());
+        ERR("Could not make surface from file '%s'", file.c_str());
     }
 
     t = tex_from_surface(surface, file, name, mode);
@@ -383,15 +383,15 @@ void tex_load (Texp *tex,
 {_
     Texp t = tex_find(name);
     if (t) {
-        ERR("tex already eciste '%s'", name.c_str());
+        ERR("Tex already eciste '%s'", name.c_str());
     }
 
-    LOG("loading texture '%s', '%s'", file.c_str(), name.c_str());
+    LOG("Loading texture '%s', '%s'", file.c_str(), name.c_str());
     if (file == "") {
         if (name == "") {
-            ERR("no file for tex");
+            ERR("No file for tex");
         } else {
-            ERR("no file for tex loading '%s'", name.c_str());
+            ERR("No file for tex loading '%s'", name.c_str());
         }
     }
 
@@ -402,11 +402,11 @@ void tex_load (Texp *tex,
     load_images(&surface, &surface_black_and_white, file);
 
     if (!surface) {
-        ERR("could not make surface from file '%s'", file.c_str());
+        ERR("Could not make surface from file '%s'", file.c_str());
     }
 
     if (!surface_black_and_white) {
-        ERR("could not make black and white surface from file '%s'",
+        ERR("Could not make black and white surface from file '%s'",
             file.c_str());
     }
 
@@ -424,7 +424,7 @@ void tex_load (Texp *tex,
 Texp tex_find (std::string file)
 {_
     if (file == "") {
-        ERR("no filename given for tex find");
+        ERR("No filename given for tex find");
     }
 
     auto result = textures.find(file);
@@ -444,7 +444,7 @@ Texp tex_from_surface (SDL_Surface *surface,
                        int mode)
 {_
     if (!surface) {
-        ERR("could not make surface from file, '%s'", file.c_str());
+        ERR("Could not make surface from file, '%s'", file.c_str());
     }
 
     DBG("Texture: '%s', %dx%d", file.c_str(), surface->w, surface->h);
@@ -530,7 +530,7 @@ Texp tex_from_surface (SDL_Surface *surface,
     auto result = textures.insert(std::make_pair(name, t));
 
     if (result.second == false) {
-        ERR("tex insert name '%s' failed", name.c_str());
+        ERR("Tex insert name '%s' failed", name.c_str());
     }
 
     t->width = surface->w;
@@ -549,7 +549,7 @@ int32_t tex_get_gl_binding (Texp tex)
 uint32_t tex_get_width (Texp tex)
 {_
     if (!tex) {
-        ERR("no texture");
+        ERR("No texture");
     }
 
     return (tex->width);
@@ -558,7 +558,7 @@ uint32_t tex_get_width (Texp tex)
 uint32_t tex_get_height (Texp tex)
 {_
     if (!tex) {
-        ERR("no texture");
+        ERR("No texture");
     }
 
     return (tex->height);
@@ -593,7 +593,7 @@ Texp string2tex (const char **s)
 
     auto result = textures.find(tmp);
     if (result == textures.end()) {
-        ERR("unknown tex '%s'", tmp);
+        ERR("Unknown tex '%s'", tmp);
     }
 
     return (result->second);
@@ -620,12 +620,12 @@ Texp string2tex (std::string &s, int *len)
     }
 
     if (iter == s.end()) {
-        ERR("unknown tex '%s'", out.c_str());
+        ERR("Unknown tex '%s'", out.c_str());
     }
 
     auto result = textures.find(out);
     if (result == textures.end()) {
-        ERR("unknown tex '%s'", out.c_str());
+        ERR("Unknown tex '%s'", out.c_str());
     }
 
     return (result->second);

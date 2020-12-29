@@ -48,11 +48,11 @@ bool Thing::try_to_jump (point to)
     auto y = to.y;
 
     if (is_player()) {
-        log("try jump to %d,%d", x, y);
+        log("Try jump to %d,%d", x, y);
     }
 
     if (level->is_oob(x, y)) {_
-        log("no, oob");
+        log("No, oob");
         if (is_player()) {
             MINICON("You can't jump into the void");
         }
@@ -63,7 +63,7 @@ bool Thing::try_to_jump (point to)
     // Block jumping over doors
     //
     if (!level->is_lit(x, y) && !level->is_visited(x, y)) {_
-        log("no, is not lit or visited");
+        log("No, is not lit or visited");
         if (is_player()) {
             MINICON("You can't jump into the unknown");
         }
@@ -99,7 +99,7 @@ bool Thing::try_to_jump (point to)
 
     if (is_monst()) {
         if (distance(mid_at, fpoint(x, y)) < 2) {_
-            log("no, too far");
+            log("No, too far");
             if (is_player()) {
                 MINICON("You can't jump quite that far");
             }
@@ -112,7 +112,7 @@ bool Thing::try_to_jump (point to)
     //
     if (level->is_movement_blocking_hard(x, y) ||
         level->is_movement_blocking_soft(x, y)) {_
-        log("no, jump failed, into obstacle");
+        log("No, jump failed, into obstacle");
         if (is_player()) {
             MINICON("You can't jump quite into solid objects");
         }
@@ -121,7 +121,7 @@ bool Thing::try_to_jump (point to)
 
     if (check_dest) {
         if (!level->is_dungeon(x, y)) {_
-            log("no, jump failed, not dungeon");
+            log("No, jump failed, not dungeon");
             if (is_player()) {
                 MINICON("You can't jump outside the dungeon");
             }
@@ -131,7 +131,7 @@ bool Thing::try_to_jump (point to)
         if (level->is_entrance(x, y) ||
             level->is_monst(x, y)    ||
             level->is_exit(x, y)) {_
-            log("no, jump failed, onto monst");
+            log("No, jump failed, onto monst");
             if (is_player()) {
                 MINICON("You can't quite into that");
             }
@@ -139,7 +139,7 @@ bool Thing::try_to_jump (point to)
         }
 
         if (will_avoid(point(x, y))) {_
-            log("no, jump failed, avoid destination");
+            log("No, jump failed, avoid destination");
             if (is_player()) {
                 MINICON("You can't quite onto that");
             }
@@ -263,7 +263,7 @@ bool Thing::try_to_jump (point to)
         if (!is_floating()) {
             if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
                 fpoint at(mid_at.x, mid_at.y);
-                log("causes ripples");
+                log("Causes ripples");
                 if (random_range(0, 1000) > 500) {
                     level->thing_new(tp_random_ripple()->name(), at);
                 }
@@ -336,7 +336,7 @@ void Thing::jump_end (void)
         return;
     }
 
-    log("end of jump");
+    log("End of jump");
     is_jumping = false;
 
     set_timestamp_jump_begin(0);

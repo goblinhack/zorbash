@@ -87,7 +87,7 @@ bool Thing::descend (void)
         game->current_level = next_level;
     }
 
-    log("is trying to descend");
+    log("Is trying to descend");
 
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
@@ -105,7 +105,7 @@ bool Thing::descend (void)
                     MINICON("You bravely descend");
                 }
 
-                log("move to next level entrance");
+                log("Move to next level entrance");
                 is_changing_level = true;
 
                 level_change(l);
@@ -134,7 +134,7 @@ bool Thing::descend (void)
                 }
 
                 is_changing_level = false;
-                log("moved to next level entrance");
+                log("Moved to next level entrance");
                 if (is_player()) {
                     level->timestamp_fade_in_begin = time_get_time_ms_cached();
                     level->update();

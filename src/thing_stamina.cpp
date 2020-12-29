@@ -20,8 +20,8 @@ void Thing::stamina_boost (int v)
     set_stats_stamina(new_stamina);
 
     if (new_stamina >= max_stamina) {
-        log("stamina boost not possible, maxxed at %d", new_stamina);
+        log("Stamina boost not possible, maxxed at %d", new_stamina);
     } else {
-        log("stamina boost by %d from %d to %d", v, old_stamina, new_stamina);
+        log("Stamina boost by %d from %d to %d", v, old_stamina, new_stamina);
     }
 }

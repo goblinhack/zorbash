@@ -54,7 +54,7 @@ void Thing::move_carried_items (void)
             if (level->is_water((int)mid_at.x, (int)mid_at.y) &&
                 !level->is_ripple((int)mid_at.x, (int)mid_at.y)) {
                 fpoint at(mid_at.x, mid_at.y);
-                log("causes ripples");
+                log("Causes ripples");
                 if (random_range(0, 1000) > 500) {
                     level->thing_new(tp_random_ripple()->name(), at);
                 }
@@ -71,6 +71,7 @@ void Thing::move_carried_items (void)
         }
     }
 }
+
 void Thing::move_carried_items_immediately (void)
 {_
     //
@@ -140,10 +141,10 @@ bool Thing::is_carrying_item (void)
 std::vector<Thingp> Thing::get_item_list (void)
 {_
     std::vector<Thingp> tr;
-    log("carried items:");
+    log("Carried items:");
 _
     if (!monstp) {
-        log("not carrying");
+        log("Not carrying");
         return tr;
     }
 
@@ -153,7 +154,7 @@ _
             continue;
         }
 
-        log("item %s", t->to_string().c_str());
+        log("Item %s", t->to_string().c_str());
         if (t->monstp && t->monstp->carrying.size()) {
             auto tr2 = t->get_item_list();
             std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));

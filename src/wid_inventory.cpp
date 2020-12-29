@@ -16,21 +16,21 @@ Widp wid_inventory_window {};
 
 void wid_inventory_fini (void)
 {_
-    LOG("inventory: fini");
+    LOG("Inventory: fini");
 
-    if (game->remake_inventory) {
+    if (game->request_remake_inventory) {
         //
         // continue
         //
     } else {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return;
         }
     }
 
     wid_destroy(&wid_inventory_window);
     if (wid_inventory_window) {
-        DIE("wid_inventory_window exists after destroy");
+        DIE("Wid_inventory_window exists after destroy");
     }
 }
 
@@ -43,35 +43,35 @@ uint8_t wid_inventory_init (void)
 
 static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {_
-    LOG("inventory: begin over inventory");
+    LOG("Inventory: begin over inventory");
 _
-    if (game->moving_items || game->collecting_items) {
-        LOG("inventory: moving items; ignore");
+    if (game->state_moving_items || game->state_collecting_items) {
+        LOG("Inventory: moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        LOG("inventory: in transit item; ignore");
+        LOG("Inventory: in transit item; ignore");
         return;
     }
 
     if (game->paused()) {
-        LOG("inventory: game paused; ignore");
+        LOG("Inventory: game paused; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        LOG("inventory: no level; ignore");
+        LOG("Inventory: no level; ignore");
         return;
     }
 
     auto slot = wid_get_int_context(w);
 
-    LOG("inventory: begin over inventory slot %d", slot);
+    LOG("Inventory: begin over inventory slot %d", slot);
 _
     if (!level->inventory_over(slot)) {
-        LOG("inventory: not over anything");
+        LOG("Inventory: not over anything");
         return;
     }
 
@@ -85,32 +85,32 @@ _
 
 static void wid_inventory_mouse_over_e (Widp w)
 {_
-    LOG("inventory: end over inventory");
+    LOG("Inventory: end over inventory");
 _
-    if (game->moving_items || game->collecting_items) {
-        LOG("inventory: moving items; ignore");
+    if (game->state_moving_items || game->state_collecting_items) {
+        LOG("Inventory: moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        LOG("inventory: in transit item; ignore");
+        LOG("Inventory: in transit item; ignore");
         return;
     }
 
     if (game->paused()) {
-        LOG("inventory: paused; ignore");
+        LOG("Inventory: paused; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        LOG("inventory: no level; ignore");
+        LOG("Inventory: no level; ignore");
         return;
     }
 
     auto slot = wid_get_int_context(w);
 
-    LOG("inventory: over inventory slot %d", slot);
+    LOG("Inventory: over inventory slot %d", slot);
 _
     if (!level->inventory_over(slot)) {
         return;
@@ -128,9 +128,9 @@ static uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
                                                    int32_t y,
                                                    uint32_t button)
 {_
-    LOG("inventory: mouse up over bag");
+    LOG("Inventory: mouse up over bag");
 _
-    if (game->moving_items || game->collecting_items) {
+    if (game->state_moving_items || game->state_collecting_items) {
         return false;
     }
 
@@ -139,7 +139,7 @@ _
     }
 
     BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
-    game->moving_items = true;
+    game->state_moving_items = true;
     return true;
 }
 
@@ -148,11 +148,11 @@ static uint8_t wid_inventory_item_mouse_up (Widp w,
                                             int32_t y,
                                             uint32_t button)
 {_
-    if (game->moving_items) {
+    if (game->state_moving_items) {
         wid_thing_info_fini();
     }
 
-    if (game->collecting_items) {
+    if (game->state_collecting_items) {
         wid_thing_collect_fini();
     }
 
@@ -189,11 +189,11 @@ static uint8_t wid_inventory_mouse_up (Widp w,
                                        int32_t y,
                                        uint32_t button)
 {_
-    if (game->moving_items) {
+    if (game->state_moving_items) {
         wid_thing_info_fini();
     }
 
-    if (game->collecting_items) {
+    if (game->state_collecting_items) {
         wid_thing_collect_fini();
     }
 
@@ -209,14 +209,14 @@ static uint8_t wid_inventory_mouse_up (Widp w,
 //
 static void wid_inventory_create (void)
 {_
-    LOG("inventory: inventory create");
+    LOG("Inventory: inventory create");
 
-    if (game->remake_inventory) {
+    if (game->request_remake_inventory) {
         //
         // continue
         //
     } else {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return;
         }
     }
@@ -239,7 +239,7 @@ static void wid_inventory_create (void)
 
     static bool recursion;
     if (recursion) {
-        DIE("recursion");
+        DIE("Recursion");
     }
     recursion = true;
 
@@ -255,7 +255,7 @@ static void wid_inventory_create (void)
             color c;
 
             if (wid_inventory_window) {
-                DIE("wid_inventory_window exists");
+                DIE("Wid_inventory_window exists");
             }
             wid_inventory_window = wid_new_square_window("wid inventory");
             wid_set_pos(wid_inventory_window, tl, br);
@@ -417,17 +417,17 @@ static void wid_inventory_create (void)
     }
     recursion = false;
 
-    if (game->remake_inventory) {
-        if (game->moving_items) {
+    if (game->request_remake_inventory) {
+        if (game->state_moving_items) {
             auto slot = game->inventory_highlight_slot;
-            LOG("inventory: remaking inventory for slot %d", slot);
+            LOG("Inventory: remaking inventory for slot %d", slot);
 
             auto t = level->inventory_get(slot);
             if (t) {
-                LOG("inventory: remaking inventory, remake thing info too");
+                LOG("Inventory: remaking inventory, remake thing info too");
                 game->wid_thing_info_create(t);
             } else {
-                LOG("inventory: remaking inventory, no thing info");
+                LOG("Inventory: remaking inventory, no thing info");
             }
         }
     }

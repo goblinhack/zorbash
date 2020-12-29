@@ -178,7 +178,7 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
                          &maxy,
                          &advance);
     if (e != 0) {
-        ERR("error loading font glyph %u %s", c, name);
+        ERR("Error loading font glyph %u %s", c, name);
         return;
     }
 
@@ -229,7 +229,7 @@ ttf_read_tga (Fontp f, const char *name, int pointsize)
                    filename /* to make unique for same point size */,
                    GL_LINEAR);
     if (!tex) {
-        ERR("could not load font %s tex", filename);
+        ERR("Could not load font %s tex", filename);
     }
 
     for (c = 0; c < TTF_GLYPH_MAX; c++) {
@@ -266,7 +266,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
 
     Fontp f = ttf_new(name, pointsize, style);
     if (!f) {
-        ERR("could not create font %s", name.c_str());
+        ERR("Could not create font %s", name.c_str());
     }
 
     memset(max_line_height, 0, sizeof(max_line_height));
@@ -324,7 +324,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     dst = SDL_CreateRGBSurface(0, width, height, 32,
                                rmask, gmask, bmask, amask);
     if (!dst) {
-        ERR("no surface created for size %dx%d font %s", width, height, name.c_str());
+        ERR("No surface created for size %dx%d font %s", width, height, name.c_str());
     }
 
     newptr(dst, "SDL_CreateRGBSurface");
@@ -451,7 +451,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     Texp tex;
     tex = tex_from_surface(dst, filename, filename, GL_LINEAR);
     if (!tex) {
-        ERR("could not convert %s to tex", filename);
+        ERR("Could not convert %s to tex", filename);
     }
 
     //

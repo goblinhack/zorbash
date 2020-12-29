@@ -169,9 +169,13 @@ public:
     World              world;
     Levelp             level {};            // Current displayed level
 
+    //
+    // Keep all in order:
+    //
     bool               hard_paused {};      // Hard is when a menu is on screen
     bool               soft_paused {};      // Soft pause is user initiated
     bool               started {};          // Game is afoot
+    bool               things_are_moving {};
     fpoint             mouse_over;          // Mouse cursor
     point              minimap_over;        // Which tile in the minimap
     int                seed {};             // All randomness jumps off of this
@@ -180,7 +184,6 @@ public:
     uint32_t           inventory_highlight_slot {};
     uint32_t           previous_slot {};
     uint32_t           fps_value = {};      // Current framerate
-    uint32_t           things_are_moving {};
     uint32_t           tick_completed {1};
     uint32_t           tick_current {1};
 
@@ -193,27 +196,47 @@ public:
     //
     // Temporary
     //
-    bool               moving_items {};     // Currently managing inventory
-    bool               collecting_items {}; // Collecting en masse from the level
-    bool               remake_inventory {};
-    class Wid *        in_transit_item;
-    std::list<class WidBag *> bags;
-    timestamp_t        last_mouse_down {};
-    timestamp_t        last_pause {};
 
     //
-    // Last cursor path shown.
+    // Temporary. Global states
+    //
+    bool               state_moving_items {};     // Currently managing inventory
+    bool               state_collecting_items {}; // Collecting en masse from the level
+
+    //
+    // Temporary. Global requests
+    //
+    bool               request_remake_inventory {};
+    bool               request_destroy_bags {};   // Finished emptying temporary bag
+
+    //
+    // An item being moved between bags
+    //
+    class Wid *        in_transit_item {};
+
+    //
+    // Temporary. Tied to bag moving, so not saved
+    //
+    std::list<class WidBag *> bags; // The below bags
+    class WidBag       *bag_primary {};   // The players inventory
+    class WidBag       *bag_secondary {}; // A bag being carried, or a temp bag for collecting
+
+    //
+    // Temporary. Last cursor path shown.
     //
     std::vector<point> cursor_move_path;
 
+    //
+    // Temporary for the status bar
+    //
     std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> tile_cache_moves_ahead;
-    std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS + 1> tile_cache_health;
+    std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS + 1>  tile_cache_health;
 
     //
-    // Temporary
+    // Temporary. Dampens mouse clicks
     //
-    class WidBag *bag1 {};
-    class WidBag *bag2 {};
+    timestamp_t        last_mouse_down {};
+    timestamp_t        last_pause {};
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
@@ -221,10 +244,8 @@ public:
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     /////////////////////////////////////////////////////////////////////////
 
-    friend std::ostream& operator<<(std::ostream &out,
-                                    Bits<const class Game & > const my);
-    friend std::istream& operator>>(std::istream &in,
-                                    Bits<class Game &> my);
+    friend std::ostream& operator<<(std::ostream &out, Bits<const class Game & > const my);
+    friend std::istream& operator>>(std::istream &in, Bits<class Game &> my);
     void dump(std::string prefix, std::ostream &out);
     void log(std::string prefix);
 };

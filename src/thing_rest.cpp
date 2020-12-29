@@ -9,6 +9,6 @@
 
 void Thing::rest (void)
 {_
-    log("resting");
+    log("Resting");
     stamina_boost(1);
 }

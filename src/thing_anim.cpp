@@ -13,7 +13,7 @@ void Thing::animate (void)
     auto tpp = tp();
 
 #ifdef DEBUG_ANIM
-if (is_blood()) { log("animate"); }
+if (is_blood()) { log("Animate"); }
 #endif
 
     auto tmap = &tpp->tiles;
@@ -23,7 +23,7 @@ if (is_blood()) { log("animate"); }
     std::vector<Tilep> *tiles = &((*tmap));
     if (unlikely(!tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
-if (is_blood()) { log("has no tiles"); }
+if (is_blood()) { log("Has no tiles"); }
 #endif
         return;
     }
@@ -93,7 +93,7 @@ if (is_blood()) { log("has no tiles"); }
                     auto otile = new_tile;
                     new_tile = tile_next(tmap, new_tile);
                     if (new_tile == otile) {
-                        ERR("anim loop");
+                        ERR("Anim loop");
                     }
                     continue;
                 }
@@ -111,7 +111,7 @@ if (is_blood()) { log("has no tiles"); }
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_blood()) { log("choose tiles hp %d "
+if (is_blood()) { log("Choose tiles hp %d "
                       "is_attached %d "
                       "is_being_destroyed %d "
                       "is_blitted %d "
@@ -164,7 +164,7 @@ if (is_blood()) { log("choose tiles hp %d "
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_blood()) { log("tile %s moving %d up %d down %d left %d right %d dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
+if (is_blood()) { log("Tile %s moving %d up %d down %d left %d right %d dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
                        tile_is_moving(tile),
                        tile_is_dir_up(tile),
                        tile_is_dir_down(tile),
@@ -352,7 +352,7 @@ if (is_blood()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
             // ignore
             //
         } else {
-            die("could not find a good animation tile after %d tries; has %d tiles, have tile %s for "
+            die("Could not find a good animation tile after %d tries; has %d tiles, have tile %s for "
                 "hp %d "
                 "is_attached %d "
                 "is_being_destroyed %d "
@@ -402,7 +402,7 @@ if (is_blood()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
     }
 
 #ifdef DEBUG_ANIM
-    if (is_blood()) { log("set %s", tile_name(tile).c_str()); }
+    if (is_blood()) { log("Set %s", tile_name(tile).c_str()); }
 #endif
 
     tile_curr = tile->global_index;

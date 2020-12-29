@@ -60,7 +60,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (!it->is_dead) {
-        log("shove: it strength %d vs me %d + %d",
+        log("Shove: it strength %d vs me %d + %d",
             it->get_stats_strength(), get_stats_strength(), get_stats_attack());
 
         if (it->get_stats_strength() > get_stats_strength() + get_stats_attack()) {
@@ -91,7 +91,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     // If pushed into a chasm, move the thing first and then
     // let it spawn dead things
     //
-    log("make the shoved thing fall first");
+    log("Make the shoved thing fall first");
     if (it->collision_check_only(shove_pos)) {
         if (is_player()) {
             if (it->is_torch()) {
@@ -107,7 +107,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     if (!it->is_dead) {
         if (it->is_dead_on_shove()) {
-            log("shove and kill");
+            log("Shove and kill");
             it->dead("shoved");
             auto spawn_what = it->spawn_on_shoved();
             if (spawn_what != "") {
@@ -123,7 +123,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         }
     }
 
-    log("handle location for shoved thing");
+    log("Handle location for shoved thing");
     it->location_check();
 
     //

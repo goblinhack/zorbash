@@ -46,7 +46,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
     }
 
     if (name == "") {
-        DIE("no name for wid_tiles");
+        DIE("No name for wid_tiles");
         return (0);
     }
 
@@ -55,7 +55,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
     auto result = wid_tiles_all.insert(std::make_pair(name, t));
 
     if (result.second == false) {
-        DIE("wid_tiles insert name [%s] failed", name.c_str());
+        DIE("Wid_tiles insert name [%s] failed", name.c_str());
     }
 
     char tmp[32];
@@ -63,7 +63,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
     snprintf(tmp, sizeof(tmp) - 1, "%s_tl", name.c_str());
     Tilep tile = tile_find(tmp);
     if (!tile) {
-        DIE("did not find wid %s tile %s", name.c_str(), tmp);
+        DIE("Did not find wid %s tile %s", name.c_str(), tmp);
     }
 
     Texp tex = tile_get_tex(tile);
@@ -87,7 +87,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
             snprintf(tmp, sizeof(tmp) - 1, "%s_%d", name.c_str(), c);
             Tilep tile = tile_find(tmp);
             if (!tile) {
-                DIE("did not find wid %s tile %s", name.c_str(), tmp);
+                DIE("Did not find wid %s tile %s", name.c_str(), tmp);
             }
             set(t->tile, i, j, tile);
             c++;
@@ -100,7 +100,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
         snprintf(tmp, sizeof(tmp) - 1, "%s_top%d", name.c_str(), c);
         Tilep tile = tile_find(tmp);
         if (!tile) {
-            DIE("did not find wid %s tile %s", name.c_str(), tmp);
+            DIE("Did not find wid %s tile %s", name.c_str(), tmp);
         }
 
         set(t->tile, i, j, tile);
@@ -113,7 +113,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
         snprintf(tmp, sizeof(tmp) - 1, "%s_bot%d", name.c_str(), c);
         Tilep tile = tile_find(tmp);
         if (!tile) {
-            DIE("did not find wid %s tile %s", name.c_str(), tmp);
+            DIE("Did not find wid %s tile %s", name.c_str(), tmp);
         }
 
         set(t->tile, i, j, tile);
@@ -126,7 +126,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
         snprintf(tmp, sizeof(tmp) - 1, "%s_left%d", name.c_str(), c);
         Tilep tile = tile_find(tmp);
         if (!tile) {
-            DIE("did not find wid %s tile %s", name.c_str(), tmp);
+            DIE("Did not find wid %s tile %s", name.c_str(), tmp);
         }
 
         set(t->tile, i, j, tile);
@@ -139,7 +139,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
         snprintf(tmp, sizeof(tmp) - 1, "%s_right%d", name.c_str(), c);
         Tilep tile = tile_find(tmp);
         if (!tile) {
-            DIE("did not find wid %s tile %s", name.c_str(), tmp);
+            DIE("Did not find wid %s tile %s", name.c_str(), tmp);
         }
 
         set(t->tile, i, j, tile);
@@ -151,7 +151,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
     snprintf(tmp, sizeof(tmp) - 1, "%s_tl", name.c_str());
     tile = tile_find(tmp);
     if (!tile) {
-        DIE("did not find wid %s tile %s", name.c_str(), tmp);
+        DIE("Did not find wid %s tile %s", name.c_str(), tmp);
     }
 
     set(t->tile, i, j, tile);
@@ -161,7 +161,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
     snprintf(tmp, sizeof(tmp) - 1, "%s_bl", name.c_str());
     tile = tile_find(tmp);
     if (!tile) {
-        DIE("did not find wid %s tile %s", name.c_str(), tmp);
+        DIE("Did not find wid %s tile %s", name.c_str(), tmp);
     }
 
     set(t->tile, i, j, tile);
@@ -171,7 +171,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
     snprintf(tmp, sizeof(tmp) - 1, "%s_tr", name.c_str());
     tile = tile_find(tmp);
     if (!tile) {
-        DIE("did not find wid %s tile %s", name.c_str(), tmp);
+        DIE("Did not find wid %s tile %s", name.c_str(), tmp);
     }
 
     set(t->tile, i, j, tile);
@@ -181,7 +181,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
     snprintf(tmp, sizeof(tmp) - 1, "%s_br", name.c_str());
     tile = tile_find(tmp);
     if (!tile) {
-        DIE("did not find wid %s tile %s", name.c_str(), tmp);
+        DIE("Did not find wid %s tile %s", name.c_str(), tmp);
     }
 
     set(t->tile, i, j, tile);
@@ -192,7 +192,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
 wid_tilesp wid_tiles_find (std::string file)
 {_
     if (file == "") {
-        DIE("no filename given for wid_tiles find");
+        DIE("No filename given for wid_tiles find");
     }
 
     auto result = wid_tiles_all.find(file);

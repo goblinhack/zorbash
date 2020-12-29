@@ -231,7 +231,7 @@ int Tp::is_rrr5(void) const { return _is_rrr5; }
 int Tp::is_rrr50(void) const { return _is_rrr50; }
 int Tp::is_rrr51(void) const { return _is_rrr51; }
 int Tp::is_rrr52(void) const { return _is_rrr52; }
-int Tp::is_rrr53(void) const { return _is_rrr53; }
+int Tp::is_temporary_bag(void) const { return _is_temporary_bag; }
 int Tp::is_treasure_class_c(void) const { return _is_treasure_class_c; }
 int Tp::bag_item_height(void) const { return _bag_item_height; }
 int Tp::bag_item_width(void) const { return _bag_item_width; }
@@ -472,7 +472,7 @@ void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
 void Tp::set_is_rrr50(int v) { _is_rrr50 = v; }
 void Tp::set_is_rrr51(int v) { _is_rrr51 = v; }
 void Tp::set_is_rrr52(int v) { _is_rrr52 = v; }
-void Tp::set_is_rrr53(int v) { _is_rrr53 = v; }
+void Tp::set_is_temporary_bag(int v) { _is_temporary_bag = v; }
 void Tp::set_is_treasure_class_c(int v) { _is_treasure_class_c = v; }
 void Tp::set_bag_item_height(int v) { _bag_item_height = v; }
 void Tp::set_bag_item_width(int v) { _bag_item_width = v; }

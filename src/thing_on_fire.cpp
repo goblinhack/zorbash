@@ -23,7 +23,7 @@ void Thing::unset_on_fire (void)
 
     auto fire_anim = level->thing_find(id);
     if (fire_anim) {
-        log("unset on fire");
+        log("Unset on fire");
         fire_anim->dead("remove fire");
         set_on_fire_anim_id(0);
     }
@@ -35,7 +35,7 @@ bool Thing::set_on_fire (const std::string &why)
         return false;
     }
 
-    log("set on fire, %s", why.c_str());
+    log("Set on fire, %s", why.c_str());
     auto on_fire_anim = level->thing_new("fire", this);
     set_on_fire_anim_id(on_fire_anim->id);
     on_fire_anim->set_owner(this);
@@ -195,7 +195,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
             target = best;
             if (ai_create_on_fire_path(nh, start, target)) {
                 monstp->wander_target = target;
-                log("on-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+                log("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
                 return true;
             }
         }
@@ -207,7 +207,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
 
 bool Thing::ai_on_fire (void)
 {_
-    log("ai on fire");
+    log("Ai on fire");
     auto tries = 10;
     while (tries--) {
         point nh;

@@ -17,7 +17,7 @@ void Level::things_gc (void)
         return;
     }
 
-    log("begin thing garbage collection");
+    log("Begin thing garbage collection");
 _
     for (;;) {
         auto i = all_gc_things.begin();
@@ -29,17 +29,17 @@ _
 
         auto t = thing_find(id);
         if (!t) {
-            ERR("thing %" PRIx32 " not found to garbage collect", id.id);
+            ERR("Thing %" PRIx32 " not found to garbage collect", id.id);
             continue;
         }
 
-        t->log("thing gc");
+        t->log("Thing gc");
         if (t->is_monst()) {
             monst_count--;
         }
 
         if (t->is_loggable_for_unimportant_stuff()) {
-            t->log("garbage collect");
+            t->log("Garbage collect");
         }
 
         delete t;

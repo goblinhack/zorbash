@@ -14,16 +14,16 @@ bool Thing::steal_treasure_from (Thingp it)
         return false;
     }
 
-    log("steal treasure from %s", it->to_string().c_str());
+    log("Steal treasure from %s", it->to_string().c_str());
 _
     auto cands = get_treasure_list();
     if (!cands.size()) {
-        log("no, nothing to steal");
+        log("No, nothing to steal");
         return false;
     }
     auto chosen = cands[random_range(0, cands.size())];
 
-    log("steal treasure %s", chosen->to_string().c_str());
+    log("Steal treasure %s", chosen->to_string().c_str());
     if (!it->drop(chosen, this)) {
         return false;
     }
@@ -41,28 +41,28 @@ _
 
 bool Thing::steal_item_from (Thingp it)
 {_
-    log("try to steal item from %s?", it->to_string().c_str());
+    log("Try to steal item from %s?", it->to_string().c_str());
     if ((int)random_range(0, 1000) > tp()->is_steal_item_chance_d1000()) {
-        log("no");
+        log("No");
         return false;
     }
 _
-    log("yes, steal out of this list:");
+    log("Yes, steal out of this list:");
     auto cands = it->get_item_list();
     if (!cands.size()) {
-        log("no, nothing to steal");
+        log("No, nothing to steal");
         return false;
     }
 
     auto chosen = cands[random_range(0, cands.size())];
 
-    log("yes, steal: %s", chosen->to_string().c_str());
+    log("Yes, steal: %s", chosen->to_string().c_str());
     it->drop(chosen, this);
     if (!chosen->is_dead) {
         carry(chosen);
     }
 
-    it->log("new carried list:");
+    it->log("New carried list:");
     it->get_item_list();
 
     if (it->is_player()) {

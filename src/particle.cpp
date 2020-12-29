@@ -100,7 +100,7 @@ void Level::display_internal_particles (void)
                         if (p.make_visible_at_end) {
                             t->visible();
                         }
-                        t->log("end of jump particle");
+                        t->log("End of jump particle");
                         t->is_jumping = false;
                         t->has_internal_particle = false;
                     }
@@ -350,7 +350,7 @@ void Thing::delete_particle (void)
                                 level->all_internal_particles.end(),
             [=, this] (Particle &p) { 
                 if (p.id == id) {
-                    log("remove particle");
+                    log("Remove particle");
                     return true;
                 } else {
                     return false;
@@ -368,7 +368,7 @@ void Thing::delete_particle (void)
                                 level->all_external_particles.end(),
             [=, this] (Particle &p) { 
                 if (p.id == id) {
-                    log("remove particle");
+                    log("Remove particle");
                     return true;
                 } else {
                     return false;

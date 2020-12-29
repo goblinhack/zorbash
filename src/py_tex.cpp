@@ -22,12 +22,12 @@ PyObject *tex_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     if (!a) {
-        ERR("tex_load, missing file attr");
+        ERR("Tex_load, missing file attr");
         Py_RETURN_NONE;
     }
 
     if (!b) {
-        ERR("tex_load, missing name attr");
+        ERR("Tex_load, missing name attr");
         Py_RETURN_NONE;
     }
 

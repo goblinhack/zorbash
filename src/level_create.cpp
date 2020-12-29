@@ -17,7 +17,7 @@ void Level::create (point3d at, int seed)
     mysrand(seed);
 
     log("-");
-    log("creating, seed %u", seed);
+    log("Creating, seed %u", seed);
     log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -211,7 +211,7 @@ placed_player:
 
         log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
         log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-        log("created, seed %u", seed);
+        log("Created, seed %u", seed);
         log("-");
 
         update_map();
@@ -230,7 +230,7 @@ void Level::place_walls (Dungeonp d, int variant, int block_width,
 {_
     auto tp = tp_random_wall();
     if (!tp) {
-        ERR("place_walls failed");
+        ERR("Place_walls failed");
         return;
     }
     auto what = tp->name();
@@ -295,7 +295,7 @@ void Level::place_walls (Dungeonp d, int variant, int block_width,
                 auto t = thing_new(what, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
-                    ERR("wall tile %s not found", tilename.c_str());
+                    ERR("Wall tile %s not found", tilename.c_str());
                     return;
                 }
 
@@ -315,7 +315,7 @@ void Level::place_rocks (Dungeonp d, int variant, int block_width,
 {_
     auto tp = tp_random_rock();
     if (!tp) {
-        ERR("place_rocks failed");
+        ERR("Place_rocks failed");
         return;
     }
     auto what = tp->name();
@@ -380,7 +380,7 @@ void Level::place_rocks (Dungeonp d, int variant, int block_width,
                 auto t = thing_new(what, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
-                    ERR("rock tile %s not found", tilename.c_str());
+                    ERR("Rock tile %s not found", tilename.c_str());
                     return;
                 }
                 t->tile_curr = tile->global_index;
@@ -472,7 +472,7 @@ void Level::place_floors (Dungeonp d, std::string what, int depth,
                 auto t = thing_new(new_thing, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
-                    ERR("floor tile %s not found", tilename.c_str());
+                    ERR("Floor tile %s not found", tilename.c_str());
                     return;
                 }
                 t->tile_curr = tile->global_index;

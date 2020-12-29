@@ -61,7 +61,7 @@ void Thing::cursor_path_pop_first_move (void)
     //
     if ((fabs(future_pos.x - mid_at.x) <= 1) &&
         (fabs(future_pos.y - mid_at.y) <= 1)) {
-        log("target is adjacent, attack or move to %f,%F",
+        log("Target is adjacent, attack or move to %f,%F",
             cursor->mid_at.x, cursor->mid_at.y);
         attack(cursor->mid_at);
         level->cursor_path_create();

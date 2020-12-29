@@ -259,7 +259,7 @@ void player_tick (void)
     }
 
     if (jump) {
-        player->log("jump");
+        player->log("Jump");
 
         if (game->cursor_move_path.size()) {
             //
@@ -299,7 +299,7 @@ void player_tick (void)
         level->cursor_path_clear();
         game->tick_begin("player jumped");
     } else if (up || down || left || right || attack || wait) {
-        player->log("move or attack");
+        player->log("Move or attack");
 
         //
         // If we move manually, clear the path as it visually gets

@@ -13,7 +13,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           Thingp real_hitter, // who fired the arrow?
                           int damage)
 {_
-    hitter->log("hit for damage %d", damage);
+    hitter->log("Hit for damage %d", damage);
 
     auto delta = mid_at - hitter->mid_at;
 
@@ -21,13 +21,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // Cruel to let things keep on hitting you when you're dead
     //
     if (is_dead) {
-        hitter->log("hit fails, it's dead");
+        hitter->log("Hit fails, it's dead");
         return false;
     }
 
     if (is_jelly_baby()) {
         if (hitter->is_jelly_baby()) {_
-            log("slimes combine!");
+            log("Slimes combine!");
             dead("combined");
             hitter->dead("combined");
             level->thing_new("jelly2", mid_at);
@@ -36,7 +36,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     if (!damage) {
-        hitter->log("hit fails, no damage");
+        hitter->log("Hit fails, no damage");
         return false;
     }
 
@@ -73,7 +73,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->is_lava()) {
             if (is_double_damage_from_fire()) {
                 damage *= 2;
-                log("double damage from fire");
+                log("Double damage from fire");
             }
         }
     }
@@ -82,7 +82,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_acid()) {
             if (is_double_damage_from_acid()) {
                 damage *= 2;
-                log("double damage from acid");
+                log("Double damage from acid");
             }
         }
     }
@@ -91,7 +91,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_water()) {
             if (is_double_damage_from_water()) {
                 damage *= 2;
-                log("double damage from water");
+                log("Double damage from water");
             }
         }
     }
@@ -197,7 +197,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         //
         // Record who dun it.
         //
-        log("is killed by (%s) %u damage, health now %d",
+        log("Is killed by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->text_a_or_an();
         auto reason = "killed by " + killer;
@@ -210,7 +210,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->eat(this);
         }
     } else {
-        log("is hit by (%s) %u damage, health now %d",
+        log("Is hit by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
     }
 
@@ -222,18 +222,18 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 int Thing::is_hit_by (Thingp hitter, int damage)
 {_
-    hitter->log("possible hit %s for %u", to_string().c_str(), damage);
+    hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
 _
     //
     // Cruel to let things keep on hitting you when you're dead
     //
     if (is_dead) {
-        hitter->log("no, it's dead");
+        hitter->log("No, it's dead");
         return false;
     }
 
     if (is_resurrecting) {
-        hitter->log("no, it's resurrecting");
+        hitter->log("No, it's resurrecting");
         return false;
     }
 
@@ -266,7 +266,7 @@ _
         // damage. We don't want the player to keep absorbing hits when
         // already dead though.
         //
-        hitter->log("no, it's dead");
+        hitter->log("No, it's dead");
         return false;
     }
 
@@ -289,7 +289,7 @@ _
                 //
                 // Not something that typically damages walls.
                 //
-                hitter->log("no, it's immune");
+                hitter->log("No, it's immune");
                 return false;
             }
         }
@@ -301,7 +301,7 @@ _
                 //
                 // Not something that typically damages walls.
                 //
-                hitter->log("no, it's immune");
+                hitter->log("No, it's immune");
                 return false;
             }
         }
@@ -313,7 +313,7 @@ _
             //
             hitter = hitter->get_immediate_owner();
             if (!hitter) {
-                hitter->log("ignore %s, no owner", to_string().c_str());
+                hitter->log("Ignore %s, no owner", to_string().c_str());
                 return false;
             }
 
@@ -324,7 +324,7 @@ _
             //
             weapon = hitter->weapon_get();
             if (!weapon) {
-                hitter->log("ignore %s, no weapon", to_string().c_str());
+                hitter->log("Ignore %s, no weapon", to_string().c_str());
                 return false;
             }
 
@@ -335,7 +335,7 @@ _
         } else
 #endif
         if (hitter->is_fire()) {
-            hitter->log("fire attack");
+            hitter->log("Fire attack");
         }
 #if 0
         } else if (hitter->get_immediate_owner()) {
@@ -344,7 +344,7 @@ _
             //
             hitter = hitter->get_immediate_owner();
             if (!hitter) {
-                hitter->log("ignore %s, no owner", to_string().c_str());
+                hitter->log("Ignore %s, no owner", to_string().c_str());
                 return false;
             }
 
@@ -355,7 +355,7 @@ _
             //
             weapon = hitter->weapon_get();
             if (!weapon) {
-                hitter->log("ignore %s, no weapon", to_string().c_str());
+                hitter->log("Ignore %s, no weapon", to_string().c_str());
                 return false;
             }
 
@@ -367,14 +367,14 @@ _
             // Don't let our own potion hit ourselves!
             //
             if (hitter == this) {
-                hitter->log("ignore %s, self attack", to_string().c_str());
+                hitter->log("Ignore %s, self attack", to_string().c_str());
                 return false;
             }
         }
 #endif
     }
 
-    hitter->log("hit succeeds");
+    hitter->log("Hit succeeds");
     int hit_and_killed;
 
     hit_and_killed = ai_hit_actual(hitter, real_hitter, damage);

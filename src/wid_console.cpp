@@ -96,7 +96,7 @@ static void wid_console_log_ (std::wstring s)
                         std::make_pair(log_wid_console_buffered_lines++, s));
 
         if (result.second == false) {
-            DIE("wid console lines insert name [%s] failed", wstring_to_string(s).c_str());
+            DIE("Wid console lines insert name [%s] failed", wstring_to_string(s).c_str());
         }
 
         return;
@@ -281,8 +281,8 @@ std::vector<std::wstring> wid_console_serialize (void)
 
 void wid_console_deserialize(std::vector<std::wstring> r)
 {_
-    LOG("start of replaying old logs");
-    LOG("vvvvvvvvvvvvvvvvvvvvvvvvvvv");
+    LOG("Start of replaying old logs");
+    LOG("Vvvvvvvvvvvvvvvvvvvvvvvvvvv");
     for (auto s : r) {
         auto tmp = wstring_to_string(s);
         if (tmp.size()) {
@@ -290,5 +290,5 @@ void wid_console_deserialize(std::vector<std::wstring> r)
         }
     }
     LOG("^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-    LOG("end of replaying of old log");
+    LOG("End of replaying of old log");
 }

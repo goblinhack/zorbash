@@ -10,7 +10,7 @@
 
 void World::clear (void)
 {_
-    LOG("world init: clear all levels");
+    LOG("World init: clear all levels");
     for (auto x = 0; x < LEVELS_ACROSS; ++x) {
         for (auto y = 0; y < LEVELS_DOWN; ++y) {
             for (auto z = 0; z < LEVELS_DEEP; ++z) {

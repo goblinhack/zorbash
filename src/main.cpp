@@ -484,11 +484,11 @@ static void parse_args (int32_t argc, char *argv[])
         //
         if (argv[i][0] == '-') {
             usage();
-            DIE("unknown format argument, %s", argv[i]);
+            DIE("Unknown format argument, %s", argv[i]);
         }
 
         usage();
-        DIE("unknown format argument, %s", argv[i]);
+        DIE("Unknown format argument, %s", argv[i]);
     }
 }
 
@@ -627,7 +627,7 @@ int32_t main (int32_t argc, char *argv[])
     grid_test();
     int x = 1;
     if (x) {
-    DIE("x");
+    DIE("X");
     }
 #endif
 
@@ -637,7 +637,7 @@ int32_t main (int32_t argc, char *argv[])
 
     auto y = 1;
     if (y) {
-    DIE("x");
+    DIE("X");
     }
 #endif
 
@@ -648,12 +648,12 @@ int32_t main (int32_t argc, char *argv[])
 
     CON("INIT: Load UI widgets");
     if (!wid_init()) {
-        ERR("wid init");
+        ERR("Wid init");
     }
 
     CON("INIT: Load UI console");
     if (!wid_console_init()) {
-        ERR("wid_console init");
+        ERR("Wid_console init");
     }
     wid_toggle_hidden(wid_console_window);
     sdl_flush_display();
@@ -661,31 +661,31 @@ int32_t main (int32_t argc, char *argv[])
 
     CON("INIT: Load UI tiles");
     if (!wid_tiles_init()) {
-        ERR("wid tiles init");
+        ERR("Wid tiles init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     CON("INIT: Load UI and gfx tiles");
     if (!tile_init()) {
-        ERR("tile init");
+        ERR("Tile init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     CON("INIT: Load textures");
     if (!tex_init()) {
-        ERR("tex init");
+        ERR("Tex init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     CON("INIT: Load UI minicon");
     if (!wid_minicon_init()) {
-        ERR("wid_minicon init");
+        ERR("Wid_minicon init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     CON("INIT: Load UI botcon");
     if (!wid_botcon_init()) {
-        ERR("wid_botcon init");
+        ERR("Wid_botcon init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -695,7 +695,7 @@ int32_t main (int32_t argc, char *argv[])
 
     CON("INIT: Load UI commands");
     if (!command_init()) {
-        ERR("command init");
+        ERR("Command init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -733,7 +733,7 @@ int32_t main (int32_t argc, char *argv[])
 
 #if 0
     if (!wid_test_init()) {
-        ERR("wid_test init");
+        ERR("Wid_test init");
     }
 #endif
 

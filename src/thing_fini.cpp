@@ -15,7 +15,7 @@
 
 Thing::~Thing_ (void)
 {_
-    //log("destructor");
+    //log("Destructor");
     verify(this);
     destroy();
     oldptr(this);
@@ -26,11 +26,11 @@ void Thing::destroy (void)
     verify(this);
 
     if (is_loggable_for_unimportant_stuff()) {
-        log("destroy");
+        log("Destroy");
     }
 
     if (is_being_destroyed) {
-        err("death recursion in thing destroy");
+        err("Death recursion in thing destroy");
         return;
     }
     is_being_destroyed = true;

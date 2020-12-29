@@ -21,7 +21,7 @@ Light::~Light (void)
 {_
     verify(this);
     if (is_being_destroyed) {
-        die("death recursion");
+        die("Death recursion");
     }
     is_being_destroyed = true;
     destroy();
@@ -108,7 +108,7 @@ Lightp light_new (Thingp owner,
 
     l->update();
 
-    //log("created");
+    //log("Created");
     return (l);
 }
 

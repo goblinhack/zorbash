@@ -98,7 +98,7 @@ bool Thing::ascend (void)
                     MINICON("You bravely ascend");
                 }
 
-                log("move to previous level exit");
+                log("Move to previous level exit");
                 is_changing_level = true;
 
                 level_change(l);
@@ -127,7 +127,7 @@ bool Thing::ascend (void)
                 }
 
                 is_changing_level = false;
-                log("moved to previous level exit");
+                log("Moved to previous level exit");
                 if (is_player()) {
                     level->timestamp_fade_in_begin = time_get_time_ms_cached();
                     level->update();

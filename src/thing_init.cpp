@@ -48,7 +48,7 @@ void Thing::init (Levelp level,
     timestamp_next_frame = 0;
     const auto tpp = tp_find(name);
     if (unlikely(!tpp)) {
-        ERR("thing template [%s] not found", name.c_str());
+        ERR("Thing template [%s] not found", name.c_str());
         return;
     }
 
@@ -304,7 +304,7 @@ void Thing::init (Levelp level,
     }
 
     if (tpp->is_loggable_for_unimportant_stuff()) {
-        log("created");
+        log("Created");
     }
 
 #if 0
@@ -363,7 +363,7 @@ void Thing::init (Levelp level,
             py_call_void_fn(mod.c_str(), fn.c_str(),
                             id.id, (int)mid_at.x, (int)mid_at.y);
         } else {
-            ERR("bad on_birth call [%s] expected mod:function, got %d elems",
+            ERR("Bad on_birth call [%s] expected mod:function, got %d elems",
                 on_birth.c_str(), (int)on_birth.size());
         }
     }
@@ -380,7 +380,7 @@ void Thing::reinit (void)
     verify(this);
     const auto tpp = tp_or_update();
     if (unlikely(!tpp)) {
-        ERR("no tp found for reinitialized thing ID %x tp_id %d", id.id, tp_id);
+        ERR("No tp found for reinitialized thing ID %x tp_id %d", id.id, tp_id);
         return;
     }
 
@@ -396,7 +396,7 @@ void Thing::reinit (void)
 
     if (unlikely(is_player())) {
         if (level->player && (level->player != this)) {
-            DIE("player exists in multiple places on map, %f, %f and %f, %f",
+            DIE("Player exists in multiple places on map, %f, %f and %f, %f",
                 level->player->mid_at.x, level->player->mid_at.y,
                 mid_at.x, mid_at.y);
             return;
@@ -406,12 +406,12 @@ void Thing::reinit (void)
 
     point new_at((int)mid_at.x, (int)mid_at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
-        DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
+        DIE("New thing is oob at %d, %d", new_at.x, new_at.y);
         return;
     }
 
     if (is_loggable_for_unimportant_stuff()) {
-        log("recreated");
+        log("Recreated");
     }
 
     //

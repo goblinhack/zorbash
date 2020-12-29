@@ -23,27 +23,27 @@ PyObject *tile_load_arr_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     if (!file) {
-        ERR("tile_load_arr, missing file attr");
+        ERR("Tile_load_arr, missing file attr");
         Py_RETURN_NONE;
     }
 
     if (!name) {
-        ERR("tile_load_arr, missing name attr");
+        ERR("Tile_load_arr, missing name attr");
         Py_RETURN_NONE;
     }
 
     if (!width) {
-        ERR("tile_load_arr, missing width attr");
+        ERR("Tile_load_arr, missing width attr");
         Py_RETURN_NONE;
     }
 
     if (!height) {
-        ERR("tile_load_arr, missing height attr");
+        ERR("Tile_load_arr, missing height attr");
         Py_RETURN_NONE;
     }
 
     if (!e) {
-        ERR("tile_load_arr, missing arr attr");
+        ERR("Tile_load_arr, missing arr attr");
         Py_RETURN_NONE;
     }
 
@@ -97,27 +97,27 @@ PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywd
     }
 
     if (!file) {
-        ERR("tile_load_arr_sprites, missing file attr");
+        ERR("Tile_load_arr_sprites, missing file attr");
         Py_RETURN_NONE;
     }
 
     if (!name) {
-        ERR("tile_load_arr_sprites, missing name attr");
+        ERR("Tile_load_arr_sprites, missing name attr");
         Py_RETURN_NONE;
     }
 
     if (!width) {
-        ERR("tile_load_arr_sprites, missing width attr");
+        ERR("Tile_load_arr_sprites, missing width attr");
         Py_RETURN_NONE;
     }
 
     if (!height) {
-        ERR("tile_load_arr_sprites, missing height attr");
+        ERR("Tile_load_arr_sprites, missing height attr");
         Py_RETURN_NONE;
     }
 
     if (!e) {
-        ERR("tile_load_arr_sprites, missing arr attr");
+        ERR("Tile_load_arr_sprites, missing arr attr");
         Py_RETURN_NONE;
     }
 

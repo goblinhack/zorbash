@@ -56,16 +56,16 @@ void Thing::set_owner (Thingp owner)
 
         if (tp()->is_loggable_for_important_stuff()) {
             if (owner) {
-                log("will change owner %s->%s", old_owner->to_string().c_str(),
+                log("Will change owner %s->%s", old_owner->to_string().c_str(),
                     owner->to_string().c_str());
             } else {
-                log("will remove owner %s", old_owner->to_string().c_str());
+                log("Will remove owner %s", old_owner->to_string().c_str());
             }
         }
     } else {
         if (tp()->is_loggable_for_important_stuff()) {
             if (owner) {
-                log("will set owner to %s", owner->to_string().c_str());
+                log("Will set owner to %s", owner->to_string().c_str());
             }
         }
     }
@@ -89,7 +89,7 @@ void Thing::remove_owner (void)
     }
 
     if (tp()->is_loggable_for_important_stuff()) {
-        log("remove owner %s", old_owner->to_string().c_str());
+        log("Remove owner %s", old_owner->to_string().c_str());
     }
 
     set_owner_id(0);
@@ -99,7 +99,7 @@ void Thing::remove_owner (void)
 bool Thing::change_owner (Thingp new_owner)
 {_
     if (!new_owner) {
-        err("no new owner");
+        err("No new owner");
 	return true;
     }
 
@@ -112,12 +112,12 @@ bool Thing::change_owner (Thingp new_owner)
 	return true;
     }
 
-    log("change owner from %s to %s",
+    log("Change owner from %s to %s",
 	old_owner->to_string().c_str(), new_owner->to_string().c_str());
 
     if (old_owner->is_player()) {
 	if (!old_owner->inventory_id_remove(this)) {
-	    err("failed to remove %s from inventory", to_string().c_str());
+	    err("Failed to remove %s from inventory", to_string().c_str());
 	    return false;
 	}
     }
@@ -127,7 +127,7 @@ bool Thing::change_owner (Thingp new_owner)
     hooks_remove();
 
     if (!new_owner->carry(this)) {
-        err("new owner could not carry");
+        err("New owner could not carry");
         return false;
     }
 
@@ -136,11 +136,11 @@ bool Thing::change_owner (Thingp new_owner)
     //
     auto changed_owner = get_immediate_owner();
     if (!changed_owner) {
-        err("owner change failed");
+        err("Owner change failed");
         return false;
     }
     if (changed_owner != new_owner) {
-        err("owner change failed, owner is still %s", changed_owner->to_string().c_str());
+        err("Owner change failed, owner is still %s", changed_owner->to_string().c_str());
         return false;
     }
 

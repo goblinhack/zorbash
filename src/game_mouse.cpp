@@ -39,7 +39,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         return true;
     }
 
-    player->log("mouse move");
+    player->log("Mouse move");
 
     //
     // If hovering over a double click thing then don't jump in unless
@@ -78,11 +78,11 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
                     continue;
                 }
                 if (t->is_food() || t->is_potion()) {
-                    player->log("close enough to collect");
+                    player->log("Close enough to collect");
                     player->try_to_carry(t);
                     return true;
                 } else if (t->is_monst() || t->is_generator()) {
-                    player->log("close enough to attack");
+                    player->log("Close enough to attack");
                     player->attack(level->cursor->mid_at);
                     return true;
                 }

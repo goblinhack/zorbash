@@ -31,11 +31,11 @@ void Level::cursor_find_on_visible_things (
                         const uint16_t minx, const uint16_t miny,
                         const uint16_t maxx, const uint16_t maxy)
 {
-    if (game->moving_items) {
+    if (game->state_moving_items) {
         return;
     }
 
-    if (game->collecting_items) {
+    if (game->state_collecting_items) {
         return;
     }
 

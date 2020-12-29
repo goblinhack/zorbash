@@ -429,7 +429,7 @@ void Level::attach_particle (Particlep p)
             return;
         }
     }
-    ERR("out of slots");
+    ERR("Out of slots");
 }
 
 void Level::detach_particle (Particlep p)
@@ -622,7 +622,7 @@ bool Level::collision_check_particle (Particlep p)
                     (p->at.y >= tl.y) &&
                     (p->at.y <= br.y)) {
                     int idx = p - getptr(all_particles, 0);
-                    ERR("idx %d", idx);
+                    ERR("Idx %d", idx);
                     p->is_coll = false;
                     p->velocity.x = 0;
                     p->velocity.y = 0;
@@ -956,7 +956,7 @@ void Level::calculate_density (void)
             }
         }
         if (!density_sum) {
-            DIE("no density");
+            DIE("No density");
         }
         p->density = density_sum;
         p->pressure = fmax(STIFFNESS * (p->density - REST_DENSITY), 0.0f);

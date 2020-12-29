@@ -20,7 +20,7 @@ void Thing::update_tick (void)
 
 bool Thing::achieve_goals_in_life (void)
 {_
-    // log("achieve goals in life");
+    // log("Achieve goals in life");
 _
     if (is_changing_level ||
         is_hidden || 
@@ -30,7 +30,7 @@ _
         is_waiting_to_fall || 
         is_jumping) { 
         is_tick_done = true;
-        // log("skip achieve goals in life");
+        // log("Skip achieve goals in life");
         return true;
     }
 
@@ -39,14 +39,14 @@ _
     //
     if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
                                          get_timestamp_last_tick())) {
-        // log("too often");
+        // log("Too often");
         return false;
     }
 
     set_timestamp_last_tick(time_get_time_ms_cached());
 
     if (is_loggable_for_unimportant_stuff()) {
-        log("achieve goals at tick %d, game is at tick %u",
+        log("Achieve goals at tick %d, game is at tick %u",
             get_tick(), game->tick_current);
     }
 
@@ -65,7 +65,7 @@ _
     // Roll the dice and see if we do anything
     //
     if (!std::empty(get_on_idle_dice_do_str())) {
-        log("idle tick");
+        log("Idle tick");
         auto roll = get_idle_tick();
         if (get_tick() - get_tick_last_did_something() >= (unsigned int)roll) {
             auto d = get_on_idle_dice_do();
@@ -80,19 +80,19 @@ _
     // If there is a next hop to go to, do it.
     //
     if (cursor_path_pop_next_and_move()) {
-        log("pop next move");
+        log("Pop next move");
         is_tick_done = true;
         return true;
     }
 
     if (try_to_escape()) {
-        log("try to escape");
+        log("Try to escape");
         is_tick_done = true;
         return true;
     }
 
     if (is_jumper()) {
-        log("try to jump");
+        log("Try to jump");
         if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
             if (try_to_jump()) {
                 is_tick_done = true;
@@ -105,7 +105,7 @@ _
     // If this thing has AI, it can try and reach goals
     //
     if (get_dmap_scent()) {
-        log("get next hop");
+        log("Get next hop");
         ai_get_next_hop();
     } else {
         is_tick_done = true;
@@ -124,7 +124,7 @@ bool Thing::achieve_goals_in_death (void)
         return false;
     }
 
-    log("achieve death goals at tick %d, tick %u",
+    log("Achieve death goals at tick %d, tick %u",
         get_tick(), game->tick_current);
 
     resurrect_tick();
@@ -156,7 +156,7 @@ void Thing::collision_check_do (void)
 void Thing::tick (void)
 {_
     //if (is_player()) {
-    //    log("tick");
+    //    log("Tick");
     //}
     g_thing_callframes_depth = callframes_depth;
 
@@ -182,7 +182,7 @@ void Thing::tick (void)
 
     if (unlikely(is_dead)) {
         if (is_loggable_for_unimportant_stuff()) {
-            log("tick; died");
+            log("Tick; died");
         }
         return;
     }

@@ -27,12 +27,12 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     if (!py_level_data) {
-        ERR("map_load_level, missing floor data");
+        ERR("Map_load_level, missing floor data");
     }
 
     int level_data_elems = PyList_Size(py_level_data);
     if (level_data_elems % MAP_HEIGHT) {
-        ERR("level elems needs to be evenly dividable by level height %d, got %d elems when loading %s",
+        ERR("Level elems needs to be evenly dividable by level height %d, got %d elems when loading %s",
             (int) MAP_HEIGHT, (int) PyList_Size(py_level_data), level_name);
     }
 
@@ -136,27 +136,27 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             if (floor_string.size() != MAP_WIDTH){
-                ERR("level floor width mismatch, %d, expected %d",
+                ERR("Level floor width mismatch, %d, expected %d",
                     (int)floor_string.size(), MAP_WIDTH);
             }
             if (water_string.size() != MAP_WIDTH){
-                ERR("level water width mismatch, %d, expected %d",
+                ERR("Level water width mismatch, %d, expected %d",
                     (int)water_string.size(), MAP_WIDTH);
             }
             if (lava_string.size() != MAP_WIDTH){
-                ERR("level lava width mismatch, %d, expected %d",
+                ERR("Level lava width mismatch, %d, expected %d",
                     (int)lava_string.size(), MAP_WIDTH);
             }
             if (chasm_string.size() != MAP_WIDTH){
-                ERR("level chasm width mismatch, %d, expected %d",
+                ERR("Level chasm width mismatch, %d, expected %d",
                     (int)chasm_string.size(), MAP_WIDTH);
             }
             if (walls_string.size() != MAP_WIDTH){
-                ERR("level walls width mismatch, %d, expected %d",
+                ERR("Level walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), MAP_WIDTH);
             }
             if (obj_strings.size() != MAP_WIDTH){
-                ERR("level items width mismatch, %d, expected %d",
+                ERR("Level items width mismatch, %d, expected %d",
                     (int)obj_strings.size(), MAP_WIDTH);
             }
 
@@ -182,19 +182,19 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             if (floor_string.size() != MAP_WIDTH){
-                ERR("level floor width mismatch, %d, expected %d",
+                ERR("Level floor width mismatch, %d, expected %d",
                     (int)floor_string.size(), MAP_WIDTH);
             }
             if (water_string.size() != MAP_WIDTH){
-                ERR("level water width mismatch, %d, expected %d",
+                ERR("Level water width mismatch, %d, expected %d",
                     (int)water_string.size(), MAP_WIDTH);
             }
             if (walls_string.size() != MAP_WIDTH){
-                ERR("level walls width mismatch, %d, expected %d",
+                ERR("Level walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), MAP_WIDTH);
             }
             if (obj_strings.size() != MAP_WIDTH){
-                ERR("level items width mismatch, %d, expected %d",
+                ERR("Level items width mismatch, %d, expected %d",
                     (int)obj_strings.size(), MAP_WIDTH);
             }
 

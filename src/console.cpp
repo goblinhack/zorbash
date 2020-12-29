@@ -15,7 +15,7 @@ static inline void term_puts_fg (unsigned char a)
     };
 
     if (a >= ARRAY_SIZE(data)) {
-        ERR("overflow");
+        ERR("Overflow");
     }
 
     fputs(data[a], stdout);

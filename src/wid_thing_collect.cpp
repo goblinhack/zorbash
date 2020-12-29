@@ -19,16 +19,16 @@ WidPopup *wid_thing_collect_window;
 
 void wid_thing_collect_fini (void)
 {_
-    LOG("thing collect fini");
+    LOG("Thing collect fini");
 
-    if (game->bag1) {
-        delete game->bag1;
-        game->bag1 = nullptr;
+    if (game->bag_primary) {
+        delete game->bag_primary;
+        game->bag_primary = nullptr;
     }
 
-    if (game->bag2) {
-        delete game->bag2;
-        game->bag2 = nullptr;
+    if (game->bag_secondary) {
+        delete game->bag_secondary;
+        game->bag_secondary = nullptr;
     }
 
     delete wid_thing_collect_window;
@@ -42,13 +42,13 @@ uint8_t wid_thing_collect_init (void)
 
 void Game::wid_thing_collect_destroy (void)
 {_
-    LOG("thing collect destroy");
+    LOG("Thing collect destroy");
 
-    if (game->remake_inventory) {
+    if (game->request_remake_inventory) {
         //
         // Continue
         //
-    } else if (game->collecting_items) {
+    } else if (game->state_collecting_items) {
         return;
     }
 
@@ -57,73 +57,73 @@ void Game::wid_thing_collect_destroy (void)
 
 void Game::wid_thing_collect_create (const std::list<Thingp> &items)
 {_
-    LOG("thing collect create");
+    LOG("Thing collect create");
 _
-    if (game->remake_inventory) {
+    if (game->request_remake_inventory) {
         //
         // Continue
         //
-        LOG("remake thing collect");
-    } else if (game->collecting_items) {
-        LOG("ignore, already moving items");
+        LOG("Remake thing collect");
+    } else if (game->state_collecting_items) {
+        LOG("Ignore, already moving items");
         return;
     }
 
     if (game->in_transit_item) {
-        LOG("ignore, already in transit item0");
+        LOG("Ignore, already in transit item0");
         return;
     }
 
     if (wid_console_window && wid_console_window->visible) {
-        LOG("console visible");
+        LOG("Console visible");
         return;
     }
 
     if (wid_thing_collect_window) {
-        LOG("destroy window");
+        LOG("Destroy window");
         wid_thing_collect_destroy();
     }
 
     auto player = game->level->player;
     if (!player){
-        ERR("no player");
+        ERR("No player");
         return;
     }
 
-    LOG("thing collect create bags");
+    LOG("Thing collect create bags");
 
     point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 
-    if (bag1) {
-        delete bag1;
-        bag1 = nullptr;
+    if (bag_primary) {
+        delete bag_primary;
+        bag_primary = nullptr;
     }
 
-    if (bag2) {
-        delete bag2;
-        bag2 = nullptr;
+    if (bag_secondary) {
+        delete bag_secondary;
+        bag_secondary = nullptr;
     }
 
-    collecting_items = true;
+    state_collecting_items = true;
 
     //
-    // bag1
+    // bag_primary
     //
     {
         point tl = mid - point(player->bag_width() + 5, player->bag_height() + 1);
         point br = tl +  point(player->bag_width(), player->bag_height());
-        bag1 = new WidBag(player, tl, br, "Inventory");
+        bag_primary = new WidBag(player, tl, br, "Inventory");
     }
 
     //
-    // bag2
+    // bag_secondary
     //
     {
         auto volume = bag_estimate_volume(items);
         auto height = sqrt(volume);
         if (height >= MAX_BAG_WIDTH) {
             height = MAX_BAG_WIDTH;
-            ERR("bag size is too large");
+            ERR("Bag size is too large");
         }
 
         if (height < sizeof("Items found")) {
@@ -133,12 +133,12 @@ _
         point tl = mid + point(0, - (height + 1));
         point br = tl +  point(height, height);
 
-        auto virtual_bag = level->thing_new("bag_items", fpoint(-1, -1));
-        virtual_bag->new_monst();
-        virtual_bag->monstp->bag_width = height;
-        virtual_bag->monstp->bag_height = height;
-        virtual_bag->try_to_carry(items);
+        auto temporary_bag = level->thing_new("bag_items", fpoint(-1, -1));
+        temporary_bag->new_monst();
+        temporary_bag->monstp->bag_width = height;
+        temporary_bag->monstp->bag_height = height;
+        temporary_bag->try_to_carry(items);
 
-        bag2 = new WidBag(virtual_bag, tl, br, "Items found");
+        bag_secondary = new WidBag(temporary_bag, tl, br, "Items found");
     }
 }

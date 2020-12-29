@@ -97,10 +97,10 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return false;
     }
 
-    if (game->moving_items) {
+    if (game->state_moving_items) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
-            LOG("escape pressed, clear moving items flag");
-            game->moving_items = false;
+            LOG("Escape pressed, clear moving items flag");
+            game->state_moving_items = false;
             wid_inventory_init();
             wid_thing_info_fini();
             wid_destroy(&game->in_transit_item);
@@ -108,10 +108,10 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         }
     }
 
-    if (game->collecting_items) {
+    if (game->state_collecting_items) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
-            LOG("escape pressed, clear collecting items flag");
-            game->collecting_items = false;
+            LOG("Escape pressed, clear collecting items flag");
+            game->state_collecting_items = false;
             wid_inventory_init();
             wid_thing_collect_fini();
             wid_destroy(&game->in_transit_item);
@@ -120,7 +120,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_load) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
@@ -129,7 +129,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_save) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
@@ -138,7 +138,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_pause) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
@@ -148,14 +148,14 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_help) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         game->config_keyboard_select();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_quit) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         game->quit_select();
@@ -232,7 +232,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
             return true;
         }
 
-        if (game->collecting_items) {
+        if (game->state_collecting_items) {
             wid_thing_collect_fini();
             wid_inventory_init();
             return true;
@@ -241,7 +241,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         //
         // Drop whatever we have highlighted in the inventory
         //
-        game->moving_items = false;
+        game->state_moving_items = false;
 
 	auto what = level->inventory_get();
 	if (what) {
@@ -253,7 +253,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         auto what = level->inventory_get();
@@ -263,7 +263,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_eat) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         auto what = level->inventory_get();
@@ -273,13 +273,13 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_throw) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_unused99) {
-        if (game->moving_items || game->collecting_items) {
+        if (game->state_moving_items || game->state_collecting_items) {
             return false;
         }
         MINICON("TODO KEY");
@@ -346,7 +346,7 @@ static void wid_minicon_log_ (std::wstring s)
                         std::make_pair(log_wid_minicon_buffered_lines++, s));
 
         if (result.second == false) {
-            DIE("wid minicon lines insert name [%s] failed",
+            DIE("Wid minicon lines insert name [%s] failed",
                 wstring_to_string(s).c_str());
         }
 

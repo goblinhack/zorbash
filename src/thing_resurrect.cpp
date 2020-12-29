@@ -13,7 +13,7 @@ void Thing::resurrect_tick (void)
     // Rise at the apointed time
     //
     if (game->tick_current < get_tick_resurrect_when()) {
-        log("too soon to rise from the grave, at %d wait for %d",
+        log("Too soon to rise from the grave, at %d wait for %d",
             game->tick_current, get_tick_resurrect_when());
         return;
     }
@@ -23,7 +23,7 @@ void Thing::resurrect_tick (void)
     // Or no respawn if something we don't like is standing on us!
     //
     if (is_less_preferred_terrain(make_point(mid_at))) {
-        log("do not resurrect, on bad terrain");
+        log("Do not resurrect, on bad terrain");
         return;
     }
 
@@ -48,7 +48,7 @@ void Thing::resurrect_tick (void)
             set_tick(game->tick_current);
             is_dead = false;
         } else {
-            log("too weak to rise from the grave");
+            log("Too weak to rise from the grave");
         }
     }
 }

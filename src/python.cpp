@@ -18,7 +18,7 @@ PyMODINIT_FUNC python_mouse_y_module_create(void);
 void py_call_void (const char *name)
 {_
     if (!zx_mod) {
-        ERR("python module not inited yet");
+        ERR("Python module not inited yet");
         return;
     }
 
@@ -29,7 +29,7 @@ void py_call_void (const char *name)
             Py_DECREF(pValue);
         }
     } else {
-        ERR("cannot call python function %s", name);
+        ERR("Cannot call python function %s", name);
     }
 
     py_err();
@@ -51,7 +51,7 @@ void py_call_void_fn (const char *module, const char *name, int val1)
             Py_DECREF(pValue);
         }
     } else {
-        ERR("cannot call python function %s(%d)", name, val1);
+        ERR("Cannot call python function %s(%d)", name, val1);
     }
 
     py_err();
@@ -73,7 +73,7 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2)
             Py_DECREF(pValue);
         }
     } else {
-        ERR("cannot call python function %s(%d)", name, val1);
+        ERR("Cannot call python function %s(%d)", name, val1);
     }
 
     py_err();
@@ -95,7 +95,7 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
             Py_DECREF(pValue);
         }
     } else {
-        ERR("cannot call python function %s(%d)", name, val1);
+        ERR("Cannot call python function %s(%d)", name, val1);
     }
 
     py_err();
@@ -189,7 +189,7 @@ int py_obj_to_int (PyObject *py_obj)
 
 err_out:
     if (PyErr_Occurred()) {
-        ERR("int conversion failed");
+        ERR("Int conversion failed");
     }
 
     return (val);
@@ -212,7 +212,7 @@ uint64_t py_obj_to_uint64 (PyObject *py_obj)
 err_out:
 
     if (PyErr_Occurred()) {
-        ERR("int conversion failed");
+        ERR("Int conversion failed");
     }
 
     return (val);
@@ -237,7 +237,7 @@ double py_obj_to_double (PyObject *py_obj)
 err_out:
 
     if (PyErr_Occurred()) {
-        ERR("int conversion failed");
+        ERR("Int conversion failed");
     }
 
     return (val);
@@ -269,7 +269,7 @@ err_out:
     }
 
     if (PyErr_Occurred()) {
-        ERR("int conversion failed");
+        ERR("Int conversion failed");
     }
 
     return (i);
@@ -301,7 +301,7 @@ err_out:
     }
 
     if (PyErr_Occurred()) {
-        ERR("int conversion failed");
+        ERR("Int conversion failed");
     }
 
     return (i);
@@ -333,7 +333,7 @@ err_out:
     }
 
     if (PyErr_Occurred()) {
-        ERR("int conversion failed");
+        ERR("Int conversion failed");
     }
 
     return (i);
@@ -400,7 +400,7 @@ err_out:
     }
 
     if (PyErr_Occurred()) {
-        ERR("obj lookup conversion failed");
+        ERR("Obj lookup conversion failed");
     }
 
     Py_RETURN_NONE;
@@ -674,7 +674,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr50)
     TP_SET_DECL(is_rrr51)
     TP_SET_DECL(is_rrr52)
-    TP_SET_DECL(is_rrr53)
+    TP_SET_DECL(is_temporary_bag)
     TP_SET_DECL(is_treasure_class_c)
     TP_SET_DECL(bag_item_height)
     TP_SET_DECL(bag_item_width)
@@ -825,7 +825,7 @@ python_mouse_y_module_create (void)
    PyObject *m = PyModule_Create(&python_c_MODULE);
    if (! m) {
         PyErr_Print();
-        ERR("python init");
+        ERR("Python init");
         return (0);
    }
 
@@ -888,7 +888,7 @@ void py_err (void)
             myfree(funcname);
         }
     }
-    ERR("python error");
+    ERR("Python error");
 }
 
 void py_trace (void)
@@ -1000,7 +1000,7 @@ static void py_add_to_path (const char *path)
 
     wc_new_path = (wchar_t *) myzalloc(wc_len, "wchar str");
     if (!wc_new_path) {
-        ERR("path alloc fail");
+        ERR("Path alloc fail");
     }
 
     LOG("Set python path: %s", new_path);
@@ -1943,7 +1943,7 @@ void python_init (char *argv[])
     zx_mod = PyImport_ImportModule("zx");
     if (!zx_mod) {
         py_err();
-        ERR("module zx import failed");
+        ERR("Module zx import failed");
         return;
     }
 
@@ -1954,7 +1954,7 @@ void python_init (char *argv[])
     zx_mod = PyImport_ImportModule("init");
     if (!zx_mod) {
         py_err();
-        ERR("module init import failed");
+        ERR("Module init import failed");
         return;
     }
 
@@ -1973,7 +1973,7 @@ PyObject *py_add_module (const char *mod)
     pmod = PyImport_ImportModule(mod);
     if (pmod == nullptr) {
         py_err();
-        ERR("module init '%s' import failed", mod);
+        ERR("Module init '%s' import failed", mod);
         return (nullptr);
     }
     py_mods[name] = pmod;

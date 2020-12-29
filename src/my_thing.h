@@ -1123,7 +1123,7 @@ public:
     int is_rrr50(void) const;
     int is_rrr51(void) const;
     int is_rrr52(void) const;
-    int is_rrr53(void) const;
+    int is_temporary_bag(void) const;
     int is_rrr59(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;

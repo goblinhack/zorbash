@@ -26,43 +26,43 @@ bool Thing::possible_to_attack (const Thingp it)
     // No attacking of open doors!
     //
     if (it->is_open) {
-        log("cannot attack %s, its open", it->to_string().c_str());
+        log("Cannot attack %s, its open", it->to_string().c_str());
         return false;
     }
 
     if (is_alive_monst() || is_resurrected) {
         if (me->is_jelly_baby_eater()) {
             if (it->is_jelly_baby()) {
-                log("can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_treasure_eater()) {
             if (it->is_treasure()) {
-                log("can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
             if (it->is_carrying_treasure()) {
-                log("can steal from %s", it->to_string().c_str());
+                log("Can steal from %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_potion_eater()) {
             if (it->is_potion()) {
-                log("can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_meat_eater()) {
             if (!it->is_attackable_by_monst()) {
-                log("cannot attack %s, not attackable", it->to_string().c_str());
+                log("Cannot attack %s, not attackable", it->to_string().c_str());
                 return false;
             }
             if (it->is_meat() || it->is_blood()) {
-                log("can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -70,10 +70,10 @@ bool Thing::possible_to_attack (const Thingp it)
 
     if (is_player()) {
         if (!it->is_attackable_by_player()) {
-            log("cannot attack %s, not attackable", it->to_string().c_str());
+            log("Cannot attack %s, not attackable", it->to_string().c_str());
             return false;
         }
-        log("can attack %s", it->to_string().c_str());
+        log("Can attack %s", it->to_string().c_str());
         return true;
     }
 
@@ -82,17 +82,17 @@ bool Thing::possible_to_attack (const Thingp it)
         if (o) {
             if (o->is_monst()) {
                 if (!it->is_attackable_by_monst()) {
-                    log("cannot weapon attack %s, not attackable", it->to_string().c_str());
+                    log("Cannot weapon attack %s, not attackable", it->to_string().c_str());
                     return false;
                 }
-                log("can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             } else {
                 if (!it->is_attackable_by_player()) {
-                    log("cannot weapon attack %s, not attackable", it->to_string().c_str());
+                    log("Cannot weapon attack %s, not attackable", it->to_string().c_str());
                     return false;
                 }
-                log("can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -101,13 +101,13 @@ bool Thing::possible_to_attack (const Thingp it)
     if (me->is_fire() || me->is_lava()) {
         if (it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
-                log("can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
     }
 
-    log("ignore attack %s", it->to_string().c_str());
+    log("Ignore attack %s", it->to_string().c_str());
     return false;
 }
 
@@ -126,7 +126,7 @@ bool Thing::attack (fpoint future_pos)
 
 bool Thing::attack (Thingp it)
 {_
-    log("attack %s", it->to_string().c_str());
+    log("Attack %s", it->to_string().c_str());
 _
     //
     // Carry to eat later. Monsts attack their food.
@@ -150,12 +150,12 @@ _
                     //
                     // Can't kill it twice, so hide it
                     //
-                    owner->log("eat corpse %s", it->to_string().c_str());
+                    owner->log("Eat corpse %s", it->to_string().c_str());
                     it->hide();
                     return true;
                 }
             } else if (owner->is_player()) {
-                owner->log("carry %s", it->to_string().c_str());
+                owner->log("Carry %s", it->to_string().c_str());
                 if (owner->try_to_carry(it)) {
                     return true;
                 }
@@ -175,13 +175,13 @@ _
                     //
                     // Can't kill it twice, so hide it
                     //
-                    log("eat corpse %s", it->to_string().c_str());
+                    log("Eat corpse %s", it->to_string().c_str());
                     it->hide();
                     it->gc();
                     return true;
                 }
             } else if (is_player()) {
-                log("don't attack, try to carry %s", it->to_string().c_str());
+                log("Don't attack, try to carry %s", it->to_string().c_str());
                 if (try_to_carry(it)) {
                     return true;
                 }
@@ -190,7 +190,7 @@ _
         }
     }
 
-    log("check is possible to attack %s", it->to_string().c_str());
+    log("Check is possible to attack %s", it->to_string().c_str());
     if (!possible_to_attack(it)) {
         return false;
     }
@@ -207,7 +207,7 @@ _
     auto damage = get_stats_attack();
     if (it->is_hit_by(this, damage)) {
         if (is_loggable_for_unimportant_stuff()) {
-            log("the attack hit %s for %d", it->to_string().c_str(), damage);
+            log("The attack hit %s for %d", it->to_string().c_str(), damage);
         }
         if (is_attack_lunge()) {
             lunge(it->get_interpolated_mid_at());
@@ -228,7 +228,7 @@ _
     //
     if (is_killed_on_hit_or_miss()) {
         if (is_loggable_for_unimportant_stuff()) {
-            log("attack missed %s", it->to_string().c_str());
+            log("Attack missed %s", it->to_string().c_str());
         }
         if (is_attack_lunge()) {
             lunge(it->get_interpolated_mid_at());

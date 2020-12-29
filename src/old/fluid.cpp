@@ -253,7 +253,7 @@ static void fluid_flood_fill (uint16_t x,
         stack_size++;                                       \
                                                             \
         if (stack_size >= ARRAY_SIZE(stack)) {              \
-            ERR("ran out of stack");                        \
+            ERR("Ran out of stack");                        \
             return;                                         \
         }                                                   \
     }                                                       \
@@ -325,7 +325,7 @@ static void fluid_find_pools (void)
 
             if (fluid_pool[x][y]) {
                 if (!f->mass) {
-                    ERR("pool set but no mass");
+                    ERR("Pool set but no mass");
                 }
                 continue;
             }
@@ -336,7 +336,7 @@ static void fluid_find_pools (void)
 
             max_fluid_pools++;
             if (max_fluid_pools >= MAX_POOLS) {
-                ERR("ran out of fluid pools");
+                ERR("Ran out of fluid pools");
                 return;
             }
 
@@ -516,7 +516,7 @@ static void fluid_set_depth (void)
                     fluid_pool_surface_size[pool_num]++;
                     f->is_surface = 1;
                 } else {
-                    ERR("too much surface area in pool");
+                    ERR("Too much surface area in pool");
                 }
             }
 
@@ -531,15 +531,15 @@ void fluid_add_droplets (void)
     uint16_t y = (myrand() % (MAP_HEIGHT - 4)) + 1;
 
     if (x >= MAP_WIDTH) {
-        ERR("overflow on x when adding droplets");
+        ERR("Overflow on x when adding droplets");
     }
 
     if (y >= MAP_HEIGHT) {
-        ERR("overflow on y");
+        ERR("Overflow on y");
     }
 
     if (y == 0) {
-        ERR("underflow on y");
+        ERR("Underflow on y");
     }
 
     if (!level->is_solid(x, y) &&
@@ -557,11 +557,11 @@ void fluid_add_droplets (void)
             fy += myrand() % FLUID_RESOLUTION;
 
             if (fx >= FLUID_WIDTH) {
-                ERR("overflow fx fluid");
+                ERR("Overflow fx fluid");
             }
 
             if (fy >= FLUID_HEIGHT) {
-                ERR("overflow fx fluid");
+                ERR("Overflow fx fluid");
             }
 
             level->fluid[fx][fy].mass = 10;

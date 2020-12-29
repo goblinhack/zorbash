@@ -137,7 +137,7 @@ void WidTextBox::log_ (std::wstring str, bool lhs, bool rhs)
             line_count++;
             wid_update(wid_text_box_container);
         } else {
-            ERR("text box overflow");
+            ERR("Text box overflow");
         }
     } else {
         if (line_count < scroll_height) {

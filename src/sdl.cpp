@@ -882,7 +882,7 @@ void sdl_exit (void)
         return;
     }
 
-    LOG("finishing: SDL main loop is exiting...");
+    LOG("Finishing: SDL main loop is exiting...");
 
 #ifdef ENABLE_UI_ASCII_MOUSE
     SDL_ShowCursor(1);
@@ -1429,14 +1429,14 @@ void config_gfx_zoom_update (void)
     game->config.one_pixel_height = 1;
 
     if (!game->config.gfx_zoom) {
-        ERR("game->config.gfx_zoom is zero");
+        ERR("Game->config.gfx_zoom is zero");
         return;
     }
 
     game->config.scale_pix_width = game->config.gfx_zoom;
     game->config.scale_pix_height = game->config.gfx_zoom;
     if (!game->config.scale_pix_width) {
-        ERR("game->config.scale_pix_width is zero");
+        ERR("Game->config.scale_pix_width is zero");
         return;
     }
 

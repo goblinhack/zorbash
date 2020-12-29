@@ -88,7 +88,7 @@ char *dupstr_ (const char *in,
                int line)
 {_
     if (!in) {
-        ERR("no string to duplicate");
+        ERR("No string to duplicate");
         return (0);
     }
 

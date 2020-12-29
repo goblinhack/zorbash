@@ -36,7 +36,7 @@ bool Thing::open_door (Thingp it)
 
     if (get_keys()) {
         decr_keys();
-        it->log("open");
+        it->log("Open");
         it->level_pop();
         it->is_open = true;
         it->level_push();
