@@ -38,5 +38,5 @@ void Thing::hide (void)
         if (w) { w->hide(); }
     }
 
-    log("is now hidden");
+    log("Is now hidden");
 }

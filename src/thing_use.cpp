@@ -21,7 +21,7 @@ void Thing::used (Thingp what, Thingp target)
 
     auto existing_owner = what->get_top_owner();
     if (existing_owner != this) {
-        err("attempt to use %s which is not carried", what->to_string().c_str());
+        err("Attempt to use %s which is not carried", what->to_string().c_str());
         return;
     }
 
@@ -29,7 +29,7 @@ void Thing::used (Thingp what, Thingp target)
     what->visible();
 
     monstp->carrying.remove(what->id);
-    log("used %s", what->to_string().c_str());
+    log("Used %s", what->to_string().c_str());
     what->level_pop();
     what->dead("used");
 }

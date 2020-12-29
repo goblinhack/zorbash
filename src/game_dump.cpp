@@ -29,7 +29,7 @@ void Level::dump (std::string pfx, std::ostream &out)
                     if (!t) {
                         continue;
                     }
-                    t->log("dump");
+                    t->log("Dump");
                 }
             }
         }

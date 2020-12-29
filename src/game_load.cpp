@@ -608,14 +608,15 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* bool               hard_paused                  */ in >> bits(my.t.hard_paused);
     /* bool               soft_paused                  */ in >> bits(my.t.soft_paused);
     /* bool               started                      */ in >> bits(my.t.started);
+    /* bool               things_are_moving            */ in >> bits(my.t.things_are_moving);
     /* fpoint             mouse_over                   */ in >> bits(my.t.mouse_over);
+    /* point              minimap_over                 */ in >> bits(my.t.minimap_over);
     /* int                seed                         */ in >> bits(my.t.seed);
     /* std::string        seed_name                    */ in >> bits(my.t.seed_name);
     /* point3d            current_level                */ in >> bits(my.t.current_level);
     /* uint32_t           inventory_highlight_slot     */ in >> bits(my.t.inventory_highlight_slot);
     /* uint32_t           previous_slot                */ in >> bits(my.t.previous_slot);
     /* uint32_t           fps_value                    */ in >> bits(my.t.fps_value);
-    /* uint32_t           things_are_moving            */ in >> bits(my.t.things_are_moving);
     /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);
 

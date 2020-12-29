@@ -249,7 +249,7 @@ private:
     int _is_rrr50 {};
     int _is_rrr51 {};
     int _is_rrr52 {};
-    int _is_rrr53 {};
+    int _is_temporary_bag {};
     int _is_treasure_class_c {};
     int _bag_item_height {};
     int _bag_item_width {};
@@ -598,7 +598,7 @@ public:
     int is_rrr50(void) const;
     int is_rrr51(void) const;
     int is_rrr52(void) const;
-    int is_rrr53(void) const;
+    int is_temporary_bag(void) const;
     int is_treasure_class_c(void) const;
     int bag_item_height(void) const;
     int bag_item_width(void) const;
@@ -840,7 +840,7 @@ public:
     void set_is_rrr50(int);
     void set_is_rrr51(int);
     void set_is_rrr52(int);
-    void set_is_rrr53(int);
+    void set_is_temporary_bag(int);
     void set_is_treasure_class_c(int);
     void set_bag_item_height(int);
     void set_bag_item_width(int);

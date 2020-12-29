@@ -25,7 +25,7 @@ Thingp World::find_thing_ptr (ThingId id)
 {_
     auto f = all_thing_ptrs.find(id);
     if (f == all_thing_ptrs.end()) {
-        ERR("thing ptr not found for id, %" PRIx32 "", id.id);
+        ERR("Thing ptr not found for id, %" PRIx32 "", id.id);
         return nullptr;
     }
 
@@ -50,12 +50,12 @@ void World::free_thing_id (Thingp t)
 {_
     auto f = all_thing_ptrs.find(t->id);
     if (f == all_thing_ptrs.end()) {
-        t->err("unknown id for thing %" PRIx32 "", t->id.id);
+        t->err("Unknown id for thing %" PRIx32 "", t->id.id);
         return;
     }
 
     if (f->second != t) {
-        t->err("mismatch id for thing %" PRIx32 "", t->id.id);
+        t->err("Mismatch id for thing %" PRIx32 "", t->id.id);
         return;
     }
 

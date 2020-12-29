@@ -22,7 +22,7 @@ static Fontp font_load (std::string name, std::string file, int size, int style)
     }
 
     if (name == "") {
-        ERR("no name for font %s", __FUNCTION__);
+        ERR("No name for font %s", __FUNCTION__);
         return (0);
     }
 
@@ -31,7 +31,7 @@ static Fontp font_load (std::string name, std::string file, int size, int style)
     auto result = fonts.insert(std::make_pair(name, f));
 
     if (result.second == false) {
-        ERR("font insert name [%s] failed", name.c_str());
+        ERR("Font insert name [%s] failed", name.c_str());
         return (f);
     }
 
@@ -45,7 +45,7 @@ static Fontp font_load (std::string name, std::string file, int size, int style)
 Fontp font_find (std::string file)
 {_
     if (file == "") {
-        ERR("no filename given for font find %s", __FUNCTION__);
+        ERR("No filename given for font find %s", __FUNCTION__);
         return (0);
     }
 
@@ -66,7 +66,7 @@ uint8_t font_init (void)
     auto tmp = std::string(TTF_PATH) + mybasename(UI_FONT_NAME, __FUNCTION__);
     ttf_write_tga(tmp, UI_FONT_PIXEL_SIZE, TTF_STYLE_NORMAL);
 
-    DIE("generated fonts");
+    DIE("Generated fonts");
 #endif
 
     fixed_font = font_load("fixed", (char*)UI_FONT_NAME,

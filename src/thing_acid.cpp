@@ -32,7 +32,7 @@ void Thing::acid_tick (void)
 
     bool hit;
 
-    log("acid tick");
+    log("Acid tick");
 
     //
     // Give the player a chance

@@ -39,7 +39,7 @@ void Game::init_level (point3d p)
         world.new_level_at(p, level_seed);
         l = get(world.levels, p.x, p.y, p.z);
         if (!l) {
-            ERR("no level created at %d,%d,%d",
+            ERR("No level created at %d,%d,%d",
                 game->current_level.x,
                 game->current_level.y,
                 game->current_level.z);

@@ -43,5 +43,5 @@ void Thing::add_enemy (Thingp attacker)
 
     auto enemy = attacker->id;
     monstp->enemies.push_back(enemy);
-    log("add enemy %s", attacker->to_string().c_str());
+    log("Add enemy %s", attacker->to_string().c_str());
 }

@@ -29,7 +29,7 @@ void Thing::level_change (Levelp l)
 
     auto old_level = level;
 
-    log("change level");
+    log("Change level");
     level_leave();
     level = l;
     level_enter();
@@ -98,7 +98,7 @@ void Thing::level_change (Levelp l)
         l->reset();
     }
 
-    log("changed level");
+    log("Changed level");
 
     if (is_player()) {
         l->scroll_map_to_player();
@@ -109,13 +109,13 @@ void Thing::level_enter (void)
 {_
     auto result = level->all_things.insert(std::pair(id, this));
     if (result.second == false) {
-        err("failed to insert into thing map");
+        err("Failed to insert into thing map");
     }
 
     if (is_active()) {
         auto result = level->all_active_things.insert(std::pair(id, this));
         if (result.second == false) {
-            err("failed to insert into active thing map");
+            err("Failed to insert into active thing map");
         }
     }
 
@@ -280,7 +280,7 @@ void Thing::level_push (void)
     if (!is_hidden) {
         if (gfx_shown_in_bg()) { level->bg_valid = false; }
     }
-    // log("is_monst count %d (after push) at %d,%d", level->is_monst(mx, my), mx, my);
+    // log("Is_monst count %d (after push) at %d,%d", level->is_monst(mx, my), mx, my);
 }
 
 void Thing::level_pop (void)
@@ -380,5 +380,5 @@ void Thing::level_pop (void)
     if (!is_hidden) {
         if (gfx_shown_in_bg()) { level->bg_valid = false; }
     }
-    // log("is_monst count %d (after pop) at %d,%d", level->is_monst(mx, my), mx, my);
+    // log("Is_monst count %d (after pop) at %d,%d", level->is_monst(mx, my), mx, my);
 }

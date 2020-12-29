@@ -990,7 +990,7 @@ Tpp string2tp (const char **s)
     }
 
     if (c == eo_tmp) {
-        ERR("tp name %s is too long", tmp);
+        ERR("Tp name %s is too long", tmp);
         return (0);
     }
 
@@ -999,7 +999,7 @@ Tpp string2tp (const char **s)
 
     Tpp tp = tp_find(tmp);
     if (!tp) {
-        ERR("tp name [%s] not found", tmp);
+        ERR("Tp name [%s] not found", tmp);
     }
 
     return (tp);
@@ -1026,13 +1026,13 @@ Tpp string2tp (const std::string &s, int *len)
     }
 
     if (iter == s.end()) {
-        ERR("tp name %s is too long", out.c_str());
+        ERR("Tp name %s is too long", out.c_str());
         return (0);
     }
 
     Tpp tp = tp_find(out);
     if (!tp) {
-        ERR("tp name [%s] not found", out.c_str());
+        ERR("Tp name [%s] not found", out.c_str());
     }
 
     return (tp);

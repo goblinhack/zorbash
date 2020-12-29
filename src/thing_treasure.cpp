@@ -40,10 +40,10 @@ bool Thing::is_carrying_treasure (void)
 std::vector<Thingp> Thing::get_treasure_list (void)
 {_
     std::vector<Thingp> tr;
-    log("treasure:");
+    log("Treasure:");
 _
     if (!monstp) {
-        log("not carrying");
+        log("Not carrying");
         return tr;
     }
 
@@ -53,7 +53,7 @@ _
             continue;
         }
 
-        log("treasure %s", t->to_string().c_str());
+        log("Treasure %s", t->to_string().c_str());
 
         if (t->monstp && t->monstp->carrying.size()) {
             auto tr2 = t->get_treasure_list();

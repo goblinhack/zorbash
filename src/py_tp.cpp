@@ -20,25 +20,25 @@ PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     if (!py_class) {
-        ERR("tp_load, missing name attr");
+        ERR("Tp_load, missing name attr");
         Py_RETURN_NONE;
     }
 
     char *tp_name = py_obj_attr_str(py_class, "name");
     if (!tp_name) {
-        ERR("tp_load, missing tp name");
+        ERR("Tp_load, missing tp name");
         Py_RETURN_NONE;
     }
 
     char *tp_text_name = py_obj_attr_str(py_class, "text_name");
     if (!tp_text_name) {
-        ERR("tp_load, missing tp text_name");
+        ERR("Tp_load, missing tp text_name");
         Py_RETURN_NONE;
     }
 
     char *tp_short_text_name = py_obj_attr_str(py_class, "short_text_name");
     if (!tp_short_text_name) {
-        ERR("tp_load, missing tp short_text_name");
+        ERR("Tp_load, missing tp short_text_name");
         Py_RETURN_NONE;
     }
 
@@ -452,7 +452,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         } else if (level == 3) {
             tiles = &tp->bot3_tiles;
         } else {
-            DIE("bug");
+            DIE("Bug");
         }
         break;
     case THING_DIR_UP:
@@ -461,7 +461,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         } else if (level == 2) {
             tiles = &tp->top2_tiles;
         } else {
-            DIE("bug");
+            DIE("Bug");
         }
         break;
     case THING_DIR_LEFT:
@@ -470,7 +470,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         } else if (level == 2) {
             tiles = &tp->left2_tiles;
         } else {
-            DIE("bug");
+            DIE("Bug");
         }
         break;
     case THING_DIR_RIGHT:
@@ -479,7 +479,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         } else if (level == 2) {
             tiles = &tp->right2_tiles;
         } else {
-            DIE("bug");
+            DIE("Bug");
         }
         break;
     case THING_DIR_TL:
@@ -488,7 +488,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         } else if (level == 2) {
             tiles = &tp->tl2_tiles;
         } else {
-            DIE("bug");
+            DIE("Bug");
         }
         break;
     case THING_DIR_BL:
@@ -497,7 +497,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         } else if (level == 2) {
             tiles = &tp->bl2_tiles;
         } else {
-            DIE("bug");
+            DIE("Bug");
         }
         break;
     case THING_DIR_TR:
@@ -506,7 +506,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         } else if (level == 2) {
             tiles = &tp->tr2_tiles;
         } else {
-            DIE("bug");
+            DIE("Bug");
         }
         break;
     case THING_DIR_BR:
@@ -515,13 +515,13 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         } else if (level == 2) {
             tiles = &tp->br2_tiles;
         } else {
-            DIE("bug");
+            DIE("Bug");
         }
         break;
     }
 
     if (!tiles) {
-        ERR("no tiles for [%s]", py_tile_name);
+        ERR("No tiles for [%s]", py_tile_name);
         Py_RETURN_NONE;
     }
 
@@ -861,7 +861,7 @@ TP_BODY_SET_INT(is_rrr5)
 TP_BODY_SET_INT(is_rrr50)
 TP_BODY_SET_INT(is_rrr51)
 TP_BODY_SET_INT(is_rrr52)
-TP_BODY_SET_INT(is_rrr53)
+TP_BODY_SET_INT(is_temporary_bag)
 TP_BODY_SET_INT(is_treasure_class_c)
 TP_BODY_SET_INT(bag_item_height)
 TP_BODY_SET_INT(bag_item_width)

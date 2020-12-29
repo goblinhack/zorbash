@@ -114,7 +114,7 @@ static void wid_botcon_log_ (std::wstring s)
                         std::make_pair(log_wid_botcon_buffered_lines++, s));
 
         if (result.second == false) {
-            DIE("wid botcon lines insert name [%s] failed",
+            DIE("Wid botcon lines insert name [%s] failed",
                 wstring_to_string(s).c_str());
         }
 

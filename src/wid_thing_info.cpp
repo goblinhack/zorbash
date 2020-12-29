@@ -18,16 +18,16 @@ WidPopup *wid_thing_info_window;
 
 void wid_thing_info_fini (void)
 {_
-    LOG("thing info fini");
+    LOG("Thing info fini");
 
-    if (game->bag1) {
-        delete game->bag1;
-        game->bag1 = nullptr;
+    if (game->bag_primary) {
+        delete game->bag_primary;
+        game->bag_primary = nullptr;
     }
 
-    if (game->bag2) {
-        delete game->bag2;
-        game->bag2 = nullptr;
+    if (game->bag_secondary) {
+        delete game->bag_secondary;
+        game->bag_secondary = nullptr;
     }
 
     delete wid_thing_info_window;
@@ -41,13 +41,13 @@ uint8_t wid_thing_info_init (void)
 
 void Game::wid_thing_info_destroy (void)
 {_
-    LOG("thing info destroy");
+    LOG("Thing info destroy");
 
-    if (game->remake_inventory) {
+    if (game->request_remake_inventory) {
         //
         // Continue
         //
-    } else if (game->moving_items) {
+    } else if (game->state_moving_items) {
         return;
     }
 
@@ -56,37 +56,37 @@ void Game::wid_thing_info_destroy (void)
 
 void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 {_
-    t->log("thing info create");
+    t->log("Thing info create");
 _
-    if (game->remake_inventory) {
+    if (game->request_remake_inventory) {
         //
         // Continue
         //
-        t->log("remake thing info");
-    } else if (game->moving_items) {
-        t->log("ignore, already moving items");
+        t->log("Remake thing info");
+    } else if (game->state_moving_items) {
+        t->log("Ignore, already moving items");
         return;
     }
 
     if (game->in_transit_item) {
-        t->log("ignore, already in transit item0");
+        t->log("Ignore, already in transit item0");
         return;
     }
 
     if (wid_console_window && wid_console_window->visible) {
-        t->log("console visible");
+        t->log("Console visible");
         return;
     }
 
     if (wid_thing_info_window) {
-        t->log("destroy window");
+        t->log("Destroy window");
         wid_thing_info_destroy();
     }
 
     auto player = game->level->player;
     if (!player){
-        game->moving_items = false;
-        ERR("no player");
+        game->state_moving_items = false;
+        ERR("No player");
         return;
     }
 
@@ -98,18 +98,18 @@ _
     auto tiles = &tp->tiles;
     auto tile = tile_first(tiles);
     if (!tile) {
-        t->log("no tile for thing info");
-        game->moving_items = false;
+        t->log("No tile for thing info");
+        game->state_moving_items = false;
         return;
     }
 
     static bool recursion;
     if (recursion) {
-        DIE("recursion");
+        DIE("Recursion");
     }
     recursion = true;
 
-    t->log("thing info create window");
+    t->log("Thing info create window");
 
     wid_thing_info_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
     wid_raise(wid_thing_info_window->wid_popup_container);
@@ -267,32 +267,32 @@ _
     }
 
     if (!when_hovering_over && tp->is_bag()) {
-        t->log("thing info create bags");
+        t->log("Thing info create bags");
 
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 
-        if (bag1) {
-            delete bag1;
-            bag1 = nullptr;
+        if (bag_primary) {
+            delete bag_primary;
+            bag_primary = nullptr;
         }
 
-        if (bag2) {
-            delete bag2;
-            bag2 = nullptr;
+        if (bag_secondary) {
+            delete bag_secondary;
+            bag_secondary = nullptr;
         }
 
         {
             point tl = mid - point(player->bag_width() + 5, player->bag_height() + 1);
             point br = tl +  point(player->bag_width(), player->bag_height());
-            bag1 = new WidBag(player, tl, br, "Inventory");
+            bag_primary = new WidBag(player, tl, br, "Inventory");
         }
 
         point tl = mid + point(0, - (t->bag_height() + 1));
         point br = tl +  point(t->bag_width(), t->bag_height());
         if (tp->bag_width() * tp->bag_height() < 100) {
-            bag2 = new WidBag(t, tl, br, "Wee bag");
+            bag_secondary = new WidBag(t, tl, br, "Wee bag");
         } else {
-            bag2 = new WidBag(t, tl, br, "Big bag");
+            bag_secondary = new WidBag(t, tl, br, "Big bag");
         }
     }
 

@@ -68,7 +68,7 @@ unsigned char *file_read (const char *filename, int32_t *out_len)
         *out_len = len;
     }
 
-    FILE_LOG("read %s, %dMb, %d bytes", filename, len / (1024 * 1024), len);
+    FILE_LOG("Read %s, %dMb, %d bytes", filename, len / (1024 * 1024), len);
 
     fclose(file);
 
@@ -89,7 +89,7 @@ int32_t file_write (const char *filename, unsigned char *buffer, int32_t len)
 
     rc = fwrite(buffer, len, 1, file);
 
-    FILE_LOG("saved %s, %d bytes", filename, len);
+    FILE_LOG("Saved %s, %d bytes", filename, len);
 
     /*
      * Check written one object.

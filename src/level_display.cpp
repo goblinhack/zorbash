@@ -241,7 +241,7 @@ void Level::display_map (void)
             minimap_valid = false;
             timestamp_fade_out_begin = 0;
             level_fade_out_finished = true;
-            log("fade out of level finished");
+            log("Fade out of level finished");
         }
     }
 
@@ -250,7 +250,7 @@ void Level::display_map (void)
             (time_get_time_ms_cached() - timestamp_fade_in_begin > LEVEL_FADE_IN_MS)) {
             minimap_valid = false;
             timestamp_fade_in_begin = 0;
-            log("fade in of level finished");
+            log("Fade in of level finished");
         }
     }
 
@@ -372,7 +372,7 @@ void Level::display_map (void)
     blit_fbo_unbind();
 
     if (level_fade_out_finished) {
-        log("level fade out finished");
+        log("Level fade out finished");
 
         blit_fbo_bind(FBO_MAP_HIDDEN);
         glClear(GL_COLOR_BUFFER_BIT);

@@ -132,7 +132,7 @@ redo:
         auto placed = snake_walk(depth, 5, pass);
 
         if (debug_enabled) {
-            LOG("node-grid: level depth %d placed %d nodes", depth, placed);
+            LOG("Node-grid: level depth %d placed %d nodes", depth, placed);
         }
 
         if (!placed) {
@@ -150,7 +150,7 @@ redo:
             if (placed < 3) {
                 debug("failed initial level, did not place enough nodes");
                 if (debug_enabled) {
-                    LOG("node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
+                    LOG("Node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
                 }
                 goto redo;
             }
@@ -158,7 +158,7 @@ redo:
             if (placed < 2) {
                 debug("failed level, did not place enough nodes at depth");
                 if (debug_enabled) {
-                    LOG("node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
+                    LOG("Node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
                 }
                 goto redo;
             }
@@ -205,7 +205,7 @@ redo:
         auto placed = snake_walk(secret_depth, 10, pass);
 
         if (debug_enabled) {
-            LOG("node-grid: level depth %d placed %d secret nodes", secret_depth, placed);
+            LOG("Node-grid: level depth %d placed %d secret nodes", secret_depth, placed);
         }
 
         if (!placed) {
@@ -311,7 +311,7 @@ redo:
     remove_redundant_directions();
 
     dump();
-    LOG("final map: ^^^^^^^^^^");
+    LOG("Final map: ^^^^^^^^^^");
 }
 
 void Nodes::dump (void)
@@ -397,7 +397,7 @@ void Nodes::dump (void)
             }
 
             if (t > 1) {
-                ERR("too many node types S %d E %d D %d k %d",
+                ERR("Too many node types S %d E %d D %d k %d",
                     node->is_entrance,
                     node->is_exit,
                     node->is_lock,
@@ -423,7 +423,7 @@ void Nodes::dump (void)
             s += get(out, y, x);
         }
         if (s != "") {
-            LOG("node-grid: [%s]", s.c_str());
+            LOG("Node-grid: [%s]", s.c_str());
         }
     }
 
@@ -432,42 +432,42 @@ void Nodes::dump (void)
             auto node = getn(x, y);
             if (node->has_door_down) {
                 if (y == grid_height - 1) {
-                    ERR("node %d,%d has exit down off end of map", x, y);
+                    ERR("Node %d,%d has exit down off end of map", x, y);
                 }
             }
             if (node->has_door_right) {
                 if (x == grid_width - 1) {
-                    ERR("node %d,%d has exit right off end of map", x, y);
+                    ERR("Node %d,%d has exit right off end of map", x, y);
                 }
             }
             if (node->has_door_left) {
                 if (x == 0) {
-                    ERR("node %d,%d has exit left off end of map", x, y);
+                    ERR("Node %d,%d has exit left off end of map", x, y);
                 }
             }
             if (node->has_door_up) {
                 if (y == 0) {
-                    ERR("node %d,%d has exit up off end of map", x, y);
+                    ERR("Node %d,%d has exit up off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_down) {
                 if (y == grid_height - 1) {
-                    ERR("node %d,%d has secret exit down off end of map", x, y);
+                    ERR("Node %d,%d has secret exit down off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_right) {
                 if (x == grid_width - 1) {
-                    ERR("node %d,%d has secret exit right off end of map", x, y);
+                    ERR("Node %d,%d has secret exit right off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_left) {
                 if (x == 0) {
-                    ERR("node %d,%d has secret exit left off end of map", x, y);
+                    ERR("Node %d,%d has secret exit left off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_up) {
                 if (y == 0) {
-                    ERR("node %d,%d has secret exit up off end of map", x, y);
+                    ERR("Node %d,%d has secret exit up off end of map", x, y);
                 }
             }
         }
@@ -479,49 +479,49 @@ void Nodes::dump (void)
             if (node->has_door_down) {
                 auto o = getn(x, y + 1);
                 if (!o || !o->depth) {
-                    ERR("node %d,%d has exit down but no node exists", x, y);
+                    ERR("Node %d,%d has exit down but no node exists", x, y);
                 }
             }
             if (node->has_door_right) {
                 auto o = getn(x + 1, y);
                 if (!o || !o->depth) {
-                    ERR("node %d,%d has exit right but no node exists", x, y);
+                    ERR("Node %d,%d has exit right but no node exists", x, y);
                 }
             }
             if (node->has_door_left) {
                 auto o = getn(x - 1, y);
                 if (!o || !o->depth) {
-                    ERR("node %d,%d has exit left but no node exists", x, y);
+                    ERR("Node %d,%d has exit left but no node exists", x, y);
                 }
             }
             if (node->has_door_up) {
                 auto o = getn(x, y - 1);
                 if (!o || !o->depth) {
-                    ERR("node %d,%d has exit up but no node exists", x, y);
+                    ERR("Node %d,%d has exit up but no node exists", x, y);
                 }
             }
             if (node->has_secret_exit_down) {
                 auto o = getn(x, y + 1);
                 if (!o || !o->depth) {
-                    ERR("node %d,%d has secret exit down but no node exists", x, y);
+                    ERR("Node %d,%d has secret exit down but no node exists", x, y);
                 }
             }
             if (node->has_secret_exit_right) {
                 auto o = getn(x + 1, y);
                 if (!o || !o->depth) {
-                    ERR("node %d,%d has secret exit right but no node exists", x, y);
+                    ERR("Node %d,%d has secret exit right but no node exists", x, y);
                 }
             }
             if (node->has_secret_exit_left) {
                 auto o = getn(x - 1, y);
                 if (!o || !o->depth) {
-                    ERR("node %d,%d has secret exit left but no node exists", x, y);
+                    ERR("Node %d,%d has secret exit left but no node exists", x, y);
                 }
             }
             if (node->has_secret_exit_up) {
                 auto o = getn(x, y - 1);
                 if (!o || !o->depth) {
-                    ERR("node %d,%d has secret exit up but no node exists", x, y);
+                    ERR("Node %d,%d has secret exit up but no node exists", x, y);
                 }
             }
         }
@@ -533,49 +533,49 @@ void Nodes::dump (void)
             if (node->has_door_down) {
                 auto o = getn(x, y + 1);
                 if (o->depth == depth_obstacle) {
-                    ERR("node %d,%d has exit down but that node is an obstacle", x, y);
+                    ERR("Node %d,%d has exit down but that node is an obstacle", x, y);
                 }
             }
             if (node->has_door_right) {
                 auto o = getn(x + 1, y);
                 if (o->depth == depth_obstacle) {
-                    ERR("node %d,%d has exit right but that node is an obstacle", x, y);
+                    ERR("Node %d,%d has exit right but that node is an obstacle", x, y);
                 }
             }
             if (node->has_door_left) {
                 auto o = getn(x - 1, y);
                 if (o->depth == depth_obstacle) {
-                    ERR("node %d,%d has exit left but that node is an obstacle", x, y);
+                    ERR("Node %d,%d has exit left but that node is an obstacle", x, y);
                 }
             }
             if (node->has_door_up) {
                 auto o = getn(x, y - 1);
                 if (o->depth == depth_obstacle) {
-                    ERR("node %d,%d has exit up but that node is an obstacle", x, y);
+                    ERR("Node %d,%d has exit up but that node is an obstacle", x, y);
                 }
             }
             if (node->has_secret_exit_down) {
                 auto o = getn(x, y + 1);
                 if (o->depth == depth_obstacle) {
-                    ERR("node %d,%d has secret exit down but that node is an obstacle", x, y);
+                    ERR("Node %d,%d has secret exit down but that node is an obstacle", x, y);
                 }
             }
             if (node->has_secret_exit_right) {
                 auto o = getn(x + 1, y);
                 if (o->depth == depth_obstacle) {
-                    ERR("node %d,%d has secret exit right but that node is an obstacle", x, y);
+                    ERR("Node %d,%d has secret exit right but that node is an obstacle", x, y);
                 }
             }
             if (node->has_secret_exit_left) {
                 auto o = getn(x - 1, y);
                 if (o->depth == depth_obstacle) {
-                    ERR("node %d,%d has secret exit left but that node is an obstacle", x, y);
+                    ERR("Node %d,%d has secret exit left but that node is an obstacle", x, y);
                 }
             }
             if (node->has_secret_exit_up) {
                 auto o = getn(x, y - 1);
                 if (o->depth == depth_obstacle) {
-                    ERR("node %d,%d has secret exit up but that node is an obstacle", x, y);
+                    ERR("Node %d,%d has secret exit up but that node is an obstacle", x, y);
                 }
             }
         }
@@ -586,22 +586,22 @@ void Nodes::dump (void)
             auto node = getn(x, y);
             if (node->has_door_down) {
                 if (node->has_secret_exit_down) {
-                    ERR("node %d,%d has both normal and secret exits down", x, y);
+                    ERR("Node %d,%d has both normal and secret exits down", x, y);
                 }
             }
             if (node->has_door_right) {
                 if (node->has_secret_exit_right) {
-                    ERR("node %d,%d has both normal and secret exits right", x, y);
+                    ERR("Node %d,%d has both normal and secret exits right", x, y);
                 }
             }
             if (node->has_door_left) {
                 if (node->has_secret_exit_left) {
-                    ERR("node %d,%d has both normal and secret exits left", x, y);
+                    ERR("Node %d,%d has both normal and secret exits left", x, y);
                 }
             }
             if (node->has_door_up) {
                 if (node->has_secret_exit_up) {
-                    ERR("node %d,%d has both normal and secret exits up", x, y);
+                    ERR("Node %d,%d has both normal and secret exits up", x, y);
                 }
             }
         }
@@ -615,7 +615,7 @@ void Nodes::debug (std::string msg)
     }
 
     dump();
-    LOG("node-grid: ^^^^^ %s ^^^^^", msg.c_str());
+    LOG("Node-grid: ^^^^^ %s ^^^^^", msg.c_str());
 }
 
 int Nodes::offset (const int x, const int y)
@@ -1136,7 +1136,7 @@ void Nodes::join_depth_to_next_depth (int depth, int pass)
     if (!s.size()) {
         if (pass == 1) {
             debug("error");
-            ERR("no exits from %d to %d", depth, depth + 1);
+            ERR("No exits from %d to %d", depth, depth + 1);
         }
         return;
     }
@@ -1158,11 +1158,11 @@ void Nodes::join_depth_to_next_depth (int depth, int pass)
 
         auto n = getn(b.x, b.y);
         if (!n) {
-            DIE("no new pos");
+            DIE("No new pos");
         }
         auto o = getn(a.x, a.y);
         if (!o) {
-            DIE("no old pos");
+            DIE("No old pos");
         }
 
         if (dx == 1) {
@@ -1277,11 +1277,11 @@ void Nodes::join_depth_secret (int depth, int pass)
 
         auto n = getn(b.x, b.y);
         if (!n) {
-            DIE("no new pos");
+            DIE("No new pos");
         }
         auto o = getn(a.x, a.y);
         if (!o) {
-            DIE("no old pos");
+            DIE("No old pos");
         }
 
         if (dx == 1) {
@@ -1355,7 +1355,7 @@ bool Nodes::place_lock (int depth, int pass)
     if (!s.size()) {
         debug("no lock placed for depth");
         if (debug_enabled) {
-            LOG("no lock placed for depth %d", depth);
+            LOG("No lock placed for depth %d", depth);
         }
         return false;
     }
@@ -1453,7 +1453,7 @@ bool Nodes::place_key (int depth, int pass)
     if (!s.size()) {
         debug("no key placed");
         if (debug_enabled) {
-            LOG("no key placed for depth %d", depth);
+            LOG("No key placed for depth %d", depth);
         }
         return false;
     }
@@ -2012,16 +2012,16 @@ void Nodes::make_paths_off_critical_path_reachable (void)
         auto Y = (c.y - 1) / 2;
 
         if (X >= grid_width) {
-            ERR("bug");
+            ERR("Bug");
         }
         if (Y >= grid_height) {
-            ERR("bug");
+            ERR("Bug");
         }
         if (X < 0) {
-            ERR("bug");
+            ERR("Bug");
         }
         if (Y < 0) {
-            ERR("bug");
+            ERR("Bug");
         }
 
         set(on_critical_path, X, Y, true);

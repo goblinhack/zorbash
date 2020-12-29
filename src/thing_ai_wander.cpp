@@ -171,7 +171,7 @@ bool Thing::ai_choose_wander (point& nh)
     //
     auto target = monstp->wander_target;
     if ((mid_at.x == target.x) && (mid_at.y == target.y)) {
-        log("reached target");
+        log("Reached target");
         target = point(0, 0);
     }
 
@@ -204,7 +204,7 @@ bool Thing::ai_choose_wander (point& nh)
 #ifdef ENABLE_DEBUG_AI_WANDER
     thing_new("ai_path2", fpoint(target.x , target.y));
 #endif
-    log("wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+    log("Wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
     return true;
 }
 
@@ -241,13 +241,13 @@ bool Thing::ai_wander (void)
     set_timestamp_last_wander_try(time_get_time_ms_cached());
 
     if (ai_blocked_completely()) {
-        log("blocked on all sides, try escape");
+        log("Blocked on all sides, try escape");
         if (ai_escape()) {
             return true ;
         }
 
         if (is_jumper()) {
-            log("blocked on all sides, try jumping");
+            log("Blocked on all sides, try jumping");
             if (try_harder_to_jump()) {
                 return true;
             }
@@ -257,7 +257,7 @@ bool Thing::ai_wander (void)
     }
 
     if (ai_blocked()) {
-        log("blocked on all sides except current pos, try jumping");
+        log("Blocked on all sides except current pos, try jumping");
         if (is_jumper()) {
             if (try_harder_to_jump()) {
                 return true;
@@ -286,18 +286,18 @@ bool Thing::ai_wander (void)
         }
     }
 _
-    log("no wander goal");
+    log("No wander goal");
     return false;
 }
 
 bool Thing::ai_escape (void)
 {_
     if (ai_blocked_completely()) {
-        log("ai escape blocked");
+        log("Ai escape blocked");
         return false;
     }
 
-    log("ai escape");
+    log("Ai escape");
     auto tries = 4;
     while (tries--) {
         point nh;
@@ -313,6 +313,6 @@ bool Thing::ai_escape (void)
         }
     }
 _
-    log("no escape goal");
+    log("No escape goal");
     return false;
 }

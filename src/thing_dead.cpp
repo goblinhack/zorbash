@@ -60,7 +60,7 @@ void Thing::kill (Thingp killer, const char *reason)
             py_call_void_fn(mod.c_str(), fn.c_str(),
                             id.id, (int)mid_at.x, (int)mid_at.y);
         } else {
-            ERR("bad on_death call [%s] expected mod:function, got %d elems",
+            ERR("Bad on_death call [%s] expected mod:function, got %d elems",
                 on_death.c_str(), (int)on_death.size());
         }
     }
@@ -78,7 +78,7 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (on_death_is_open()) {
-        log("killed, now open");
+        log("Killed, now open");
         level_pop();
         is_open = true;
         level_push();
@@ -91,7 +91,7 @@ void Thing::kill (Thingp killer, const char *reason)
 
     if (on_death_is_corpse()) {
         if (is_loggable_for_important_stuff()) {
-            log("killed, leaves corpse");
+            log("Killed, leaves corpse");
         }
 
         level->set_is_corpse(mid_at.x, mid_at.y);
@@ -108,7 +108,7 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (is_loggable_for_important_stuff()) {
-        log("killed, need to gc");
+        log("Killed, need to gc");
     }
 
     gc();
@@ -118,7 +118,7 @@ void Thing::gc (void)
 {_
     auto result = level->all_gc_things.insert(std::pair(id, this));
     if (result.second == false) {
-        err("failed to insert into gc thing map");
+        err("Failed to insert into gc thing map");
     }
 }
 

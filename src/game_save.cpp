@@ -193,7 +193,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_waiting_to_fall    << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_the_grid           << shift; shift++;
     if (shift >= (int)(sizeof(bits64) * 8)) {
-        ERR("ran out of bits in serialization");
+        ERR("Ran out of bits in serialization");
     }
     out << bits(bits64);
 
@@ -234,7 +234,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_wall                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_water                  << shift; shift++;
     if (shift >= (int)(sizeof(bits64) * 8)) {
-        ERR("ran out of bits in serialization");
+        ERR("Ran out of bits in serialization");
     }
     out << bits(bits64);
 
@@ -260,7 +260,7 @@ std::ostream& operator<<(std::ostream &out,
                          Bits<Level* & > const my)
 {_
 #ifdef ENABLE_DEBUG_SAVE_LOAD
-    my.t->log("save");
+    my.t->log("Save");
 #endif
     out << bits(my.t->timestamp_dungeon_created);
     timestamp_t timestamp_dungeon_saved = time_get_time_ms();
@@ -344,7 +344,7 @@ std::ostream& operator<<(std::ostream &out,
                         continue;
                     }
 #ifdef ENABLE_DEBUG_SAVE_LOAD
-                    t->log("save");
+                    t->log("Save");
 #endif
                     out << bits(t);
                 }
@@ -482,14 +482,15 @@ std::ostream& operator<<(std::ostream &out,
     /* bool               hard_paused                  */ out << bits(my.t.hard_paused);
     /* bool               soft_paused                  */ out << bits(my.t.soft_paused);
     /* bool               started                      */ out << bits(my.t.started);
+    /* bool               things_are_moving            */ out << bits(my.t.things_are_moving);
     /* fpoint             mouse_over                   */ out << bits(my.t.mouse_over);
+    /* point              minimap_over                 */ out << bits(my.t.minimap_over);
     /* int                seed                         */ out << bits(my.t.seed);
     /* std::string        seed_name                    */ out << bits(my.t.seed_name);
     /* point3d            current_level                */ out << bits(my.t.current_level);
     /* uint32_t           inventory_highlight_slot     */ out << bits(my.t.inventory_highlight_slot);
     /* uint32_t           previous_slot                */ out << bits(my.t.previous_slot);
     /* uint32_t           fps_value                    */ out << bits(my.t.fps_value);
-    /* uint32_t           things_are_moving            */ out << bits(my.t.things_are_moving);
     /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ out << bits(my.t.tick_current);
 

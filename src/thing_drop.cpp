@@ -13,15 +13,15 @@
 bool Thing::drop (Thingp what, Thingp target)
 {_
     if (target) {
-        log("drop %s at %s", what->to_string().c_str(),
+        log("Drop %s at %s", what->to_string().c_str(),
             target->to_string().c_str());
     } else {
-        log("drop %s", what->to_string().c_str());
+        log("Drop %s", what->to_string().c_str());
     }
 _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
-        err("attempt to drop %s which is not carried", 
+        err("Attempt to drop %s which is not carried", 
             what->to_string().c_str());
         return false;
     }
@@ -60,7 +60,7 @@ _
     set_where_i_dropped_an_item_last(make_point(mid_at));
 
     if (is_bag() || is_player()) {
-        log("update bag with drop of: %s", what->to_string().c_str());
+        log("Update bag with drop of: %s", what->to_string().c_str());
         bag_remove(what);
         while (bag_compress()) { }
     }
@@ -70,7 +70,7 @@ _
         wid_thing_info_fini();
     }
 
-    log("dropped %s", what->to_string().c_str());
+    log("Dropped %s", what->to_string().c_str());
 
     return true;
 }
@@ -80,11 +80,11 @@ _
 //
 bool Thing::drop_into_ether (Thingp what)
 {_
-    log("drop %s into the ether", what->to_string().c_str());
+    log("Drop %s into the ether", what->to_string().c_str());
 _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
-        err("attempt to drop %s which is not carried", 
+        err("Attempt to drop %s which is not carried", 
             what->to_string().c_str());
         return false;
     }
@@ -111,7 +111,7 @@ _
     }
 
     if (is_bag() || is_player()) {
-        log("update bag with drop of: %s", what->to_string().c_str());
+        log("Update bag with drop of: %s", what->to_string().c_str());
         bag_remove(what);
         while (bag_compress()) { }
     }
@@ -120,7 +120,7 @@ _
 
     monstp->carrying.remove(what->id);
 
-    log("dropped %s into the ether", what->to_string().c_str());
+    log("Dropped %s into the ether", what->to_string().c_str());
 
     return true;
 }
@@ -132,7 +132,7 @@ bool Thing::drop_from_ether (Thingp what)
 {_
     auto player = game->level->player;
 
-    log("drop from ether %s", what->to_string().c_str());
+    log("Drop from ether %s", what->to_string().c_str());
 _
     what->hooks_remove();
     what->remove_owner();
@@ -152,7 +152,7 @@ _
 
     auto w = game->in_transit_item;
     if (!w) {
-        ERR("no in transit item");
+        ERR("No in transit item");
         return false;
     }
 
@@ -169,7 +169,7 @@ _
                 (is_dir_br() || is_dir_right() || is_dir_tr()),
                 true /* make_visible_at_end */);
 
-    log("dropped from ether %s", what->to_string().c_str());
+    log("Dropped from ether %s", what->to_string().c_str());
 
     return true;
 }

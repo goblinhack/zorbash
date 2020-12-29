@@ -12,7 +12,7 @@
 void Thing::move_completed (void)
 {_
     if (is_player()) {
-        log("player move completed");
+        log("Player move completed");
         if (check_anything_to_carry()) {
             BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items",
                    SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect));
@@ -35,7 +35,7 @@ void Thing::move_finish (void)
 
 bool Thing::move (fpoint future_pos)
 {_
-    log("move to %f,%f", future_pos.x, future_pos.y);
+    log("Move to %f,%f", future_pos.x, future_pos.y);
     bool up     = future_pos.y < mid_at.y;
     bool down   = future_pos.y > mid_at.y;
     bool left   = future_pos.x < mid_at.x;
@@ -49,7 +49,7 @@ bool Thing::move (fpoint future_pos)
 
 bool Thing::move_no_shove (fpoint future_pos)
 {
-    log("move, no shove to %f,%f", future_pos.x, future_pos.y);
+    log("Move, no shove to %f,%f", future_pos.x, future_pos.y);
     bool up     = future_pos.y < mid_at.y;
     bool down   = future_pos.y > mid_at.y;
     bool left   = future_pos.x < mid_at.x;
@@ -138,18 +138,18 @@ bool Thing::move (fpoint future_pos,
     if (is_player()) {
         game->tick_begin("player moved");
         g_thing_callframes_depth = callframes_depth - 1;
-        log("player tick");
+        log("Player tick");
         _
 
         if (mid_at != future_pos) {
-            log("try to move; collision check");
+            log("Try to move; collision check");
             if (collision_check_only(future_pos)) {
-                log("cannot move; try to shove");
+                log("Cannot move; try to shove");
                 if (shove_allowed) {
                     try_to_shove(future_pos);
                 }
                 lunge(future_pos);
-                log("move failed");
+                log("Move failed");
                 return false;
             }
         }
@@ -172,7 +172,7 @@ _
               ((t->mid_at.y <= mid_at.y) && down));
 
         if (free_attack) {_
-            log("free attack by %s", t->to_string().c_str());
+            log("Free attack by %s", t->to_string().c_str());
             if (t->attack(this)) {
                 if (is_player()) {
                     std::string s = t->text_The() + " attacks as you run";
@@ -266,7 +266,7 @@ void Thing::update_interpolated_position (void)
     }
 
     if (update_pos) {
-        // log("update pos");
+        // log("Update pos");
         level_pop();
         set_interpolated_mid_at(new_pos);
         level_push();
@@ -284,7 +284,7 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
 {_
     if (!is_hidden) {
         if (is_loggable_for_unimportant_stuff()) {
-            log("update pos");
+            log("Update pos");
         }
     }
 
@@ -330,7 +330,7 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
-    // log("move");
+    // log("Move");
     level_pop();
     mid_at = to;
     level_push();
@@ -344,7 +344,7 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
 
     if (!is_hidden) {
         if (tpp->is_loggable_for_unimportant_stuff()) {
-            log("moved");
+            log("Moved");
         }
     }
 }
@@ -483,9 +483,9 @@ void Thing::move_to_immediately_delta (fpoint delta)
 bool Thing::move_to_check (const point& nh, const bool escaping)
 {_
     if (escaping) {
-        log("escape to check %d,%d", nh.x, nh.y);
+        log("Escape to check %d,%d", nh.x, nh.y);
     } else {
-        log("move to check %d,%d", nh.x, nh.y);
+        log("Move to check %d,%d", nh.x, nh.y);
     }
 
     //
@@ -501,7 +501,7 @@ bool Thing::move_to_check (const point& nh, const bool escaping)
         // We would hit something and cannot do this move. However,
         // see if we can hit the thing that is in the way.
         //
-        log("cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
+        log("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
 _
         bool target_attacked = false;
         bool target_overlaps = false;
@@ -510,18 +510,18 @@ _
                                           &target_overlaps);
         if (target_attacked) {
             is_tick_done = true;
-            log("cannot move to %d,%d, must attack", nh.x, nh.y);
+            log("Cannot move to %d,%d, must attack", nh.x, nh.y);
             return true;
         } else {
-            log("cannot move to %d,%d, obstacle", nh.x, nh.y);
+            log("Cannot move to %d,%d, obstacle", nh.x, nh.y);
             return false;
         }
     } else {
-        log("move to %d,%d is ok", nh.x, nh.y);
+        log("Move to %d,%d is ok", nh.x, nh.y);
 
         if (!escaping) {
             if (is_less_preferred_terrain(nh)) {_
-                log("but %d,%d is less preferred terrain, avoid", nh.x, nh.y);
+                log("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
                 return false;
             }
         }
@@ -534,12 +534,12 @@ _
 
 bool Thing::move_to_or_attack (const point& nh)
 {_
-    log("move to or attack");
+    log("Move to or attack");
     return move_to_check(nh, false);
 }
 
 bool Thing::move_to_or_escape (const point& nh)
 {_
-    log("move to or escape");
+    log("Move to or escape");
     return move_to_check(nh, true);
 }

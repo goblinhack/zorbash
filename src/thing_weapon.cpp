@@ -47,18 +47,18 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
         }
 
         if (new_weapon_carry_anim) {
-            log("change weapon carry_anim, %s->%s",
+            log("Change weapon carry_anim, %s->%s",
                 old_weapon_carry_anim->to_string().c_str(),
                 new_weapon_carry_anim->to_string().c_str());
             new_weapon_carry_anim->set_owner(this);
         } else {
-            log("remove weapon carry_anim, %s",
+            log("Remove weapon carry_anim, %s",
                 old_weapon_carry_anim->to_string().c_str());
         }
         old_weapon_carry_anim->remove_owner();
     } else {
         if (new_weapon_carry_anim) {
-            log("set weapon carry_anim, %s",
+            log("Set weapon carry_anim, %s",
                 new_weapon_carry_anim->to_string().c_str());
             new_weapon_carry_anim->set_owner(this);
         }
@@ -102,18 +102,18 @@ void Thing::weapon_set_use_anim (Thingp new_gfx_anim_attack)
         }
 
         if (new_gfx_anim_attack) {
-            log("change weapon use-anim %s->%s",
+            log("Change weapon use-anim %s->%s",
                 old_gfx_anim_attack->to_string().c_str(),
                 new_gfx_anim_attack->to_string().c_str());
             new_gfx_anim_attack->set_owner(this);
         } else {
-            log("remove weapon use-anim %s",
+            log("Remove weapon use-anim %s",
                 old_gfx_anim_attack->to_string().c_str());
         }
         old_gfx_anim_attack->remove_owner();
     } else {
         if (new_gfx_anim_attack) {
-            log("set weapon use-anim %s",
+            log("Set weapon use-anim %s",
                 new_gfx_anim_attack->to_string().c_str());
             new_gfx_anim_attack->set_owner(this);
         }
@@ -226,15 +226,15 @@ void Thing::unwield (const char *why)
         return;
     }
 
-    log("unwielding %" PRIx32 ", why: %s", get_weapon_id().id, why);
+    log("Unwielding %" PRIx32 ", why: %s", get_weapon_id().id, why);
 
     auto weapon = weapon_get();
     if (!weapon) {
-        log("could not unwield %" PRIx32 ", why: %s", get_weapon_id().id, why);
+        log("Could not unwield %" PRIx32 ", why: %s", get_weapon_id().id, why);
         return;
     }
 
-    log("unwielding current weapon %s, why: %s", weapon->tp()->name().c_str(), why);
+    log("Unwielding current weapon %s, why: %s", weapon->tp()->name().c_str(), why);
 
     sheath();
 }
@@ -246,27 +246,27 @@ void Thing::sheath (void)
         return;
     }
 
-    log("sheathing %s", weapon->tp()->name().c_str());
+    log("Sheathing %s", weapon->tp()->name().c_str());
 _
     //
     // If this weapon has its own thing id for animations then destroy that.
     //
     auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
-        log("remove carry anim");
+        log("Remove carry anim");
         weapon_carry_anim->dead("owner sheathed weapon, remove carry_anim");
         weapon_set_carry_anim(nullptr);
     } else {
-        log("weapon had no carry anim");
+        log("Weapon had no carry anim");
     }
 
     auto gfx_anim_attack = weapon_get_use_anim();
     if (gfx_anim_attack) {
-        log("remove carry anim");
+        log("Remove carry anim");
         gfx_anim_attack->dead("owner sheathed weapon, remove use-anim");
         weapon_set_use_anim(nullptr);
     } else {
-        log("weapon had no use/attack anim");
+        log("Weapon had no use/attack anim");
     }
 
     set_weapon_id(0);
@@ -277,19 +277,19 @@ void Thing::wield (Thingp weapon)
     auto weapon_tp = weapon->tp();
 
     if (weapon_get() == weapon) {
-        log("re-wielding: %s", weapon_tp->name().c_str());
+        log("Re-wielding: %s", weapon_tp->name().c_str());
         //
         // Do not return here. We need to set the carry anim post swing
         //
         sheath();
     } else {
-        log("is wielding: %s", weapon_tp->name().c_str());
+        log("Is wielding: %s", weapon_tp->name().c_str());
         unwield("wield new weapon");
     }
 
     auto carry_anim_as = weapon_tp->weapon_carry_anim();
     if (carry_anim_as == "") {
-        err("could not wield weapon %s", weapon_tp->name().c_str());
+        err("Could not wield weapon %s", weapon_tp->name().c_str());
         return;
     }
 
@@ -316,7 +316,7 @@ void Thing::wield (Thingp weapon)
 
 void Thing::use_weapon (void)
 {_
-    log("use something");
+    log("Use something");
 _
     if (get_weapon_id_use_anim().ok()) {
         //
@@ -347,14 +347,14 @@ _
 
         swung_as = weapon_tp->gfx_anim_attack();
         if (swung_as == "") {
-            die("could not use %s/%" PRIx32 " has no 'use' animation frame",
+            die("Could not use %s/%" PRIx32 " has no 'use' animation frame",
                 weapon_tp->name().c_str(), weapon->id.id);
             return;
         }
 
         auto what = tp_find(swung_as);
         if (!what) {
-            err("could not find %s to wield", swung_as.c_str());
+            err("Could not find %s to wield", swung_as.c_str());
             return;
         }
     }
@@ -394,7 +394,7 @@ _
     bool target_overlaps = false;
     auto hit_at = mid_at + fpoint(dx, dy);
 
-    log("attack at %f,%f delta %f,%f",hit_at.x, hit_at.y, dx, dy);
+    log("Attack at %f,%f delta %f,%f",hit_at.x, hit_at.y, dx, dy);
 _
     //
     // Lunge at the target

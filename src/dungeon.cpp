@@ -201,7 +201,7 @@ void Dungeon::make_dungeon (void)
     add_room_walls();
     _ debug("add room walls");
 
-    LOG("created basic layout:");
+    LOG("Created basic layout:");
     dump();
 
     //
@@ -226,14 +226,14 @@ void Dungeon::make_dungeon (void)
     add_border();
     add_remaining();
 
-    LOG("final DUNGEON:");
+    LOG("Final DUNGEON:");
     dump();
 }
 
 void Dungeon::debug (const std::string s)
 {_
     return;
-    LOG("dungeon (%u) %s", seed, s.c_str());
+    LOG("Dungeon (%u) %s", seed, s.c_str());
     LOG("===========================================================");
     dump();
 }
@@ -258,7 +258,7 @@ Dungeon::Dungeon (int map_width, int map_height,
 Dungeon::Dungeon (int level)
 {_
     if (level >= (int)LevelStatic::all_static_levels.size()) {
-        ERR("out of range level %d", level);
+        ERR("Out of range level %d", level);
         return;
     }
     auto l = get(LevelStatic::all_static_levels, level);
@@ -293,10 +293,10 @@ int Dungeon::offset (const int x, const int y)
 void Dungeon::putc (const int x, const int y, const int z, const char c)
 {
     if (!c) {
-        ERR("putting nul char at %d,%d,%d", x, y, z);
+        ERR("Putting nul char at %d,%d,%d", x, y, z);
     }
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
     auto p = cell_addr(x, y, z);
     if (p != nullptr) {
@@ -321,7 +321,7 @@ void Dungeon::putc_no_check (const int x, const int y, const int z, const char c
 char Dungeon::getc (const int x, const int y, const int z)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
     auto p = cell_addr(x, y, z);
     if (p != nullptr) {
@@ -385,7 +385,7 @@ Roomp Dungeon::getr_no_check (const int x, const int y)
 bool Dungeon::is_anything_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -400,7 +400,7 @@ bool Dungeon::is_anything_at (const int x, const int y)
 bool Dungeon::is_anything_at (const int x, const int y, const int z)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     auto c = getc(x, y, z);
@@ -426,7 +426,7 @@ int Dungeon::get_grid_depth_at (const int x, const int y)
 bool Dungeon::is_floor (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -443,7 +443,7 @@ bool Dungeon::is_floor (const int x, const int y)
 bool Dungeon::is_corridor (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -460,7 +460,7 @@ bool Dungeon::is_corridor (const int x, const int y)
 bool Dungeon::is_corridor_no_check (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -477,7 +477,7 @@ bool Dungeon::is_corridor_no_check (const int x, const int y)
 bool Dungeon::is_dirt (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -494,7 +494,7 @@ bool Dungeon::is_dirt (const int x, const int y)
 bool Dungeon::is_dirt_no_check (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -511,7 +511,7 @@ bool Dungeon::is_dirt_no_check (const int x, const int y)
 bool Dungeon::is_secret_corridor_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -528,7 +528,7 @@ bool Dungeon::is_secret_corridor_at (const int x, const int y)
 bool Dungeon::is_wall (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     auto d = MAP_DEPTH_OBJ;
@@ -540,7 +540,7 @@ bool Dungeon::is_wall (const int x, const int y)
 bool Dungeon::is_monst (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -557,7 +557,7 @@ bool Dungeon::is_monst (const int x, const int y)
 bool Dungeon::is_generator (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -574,7 +574,7 @@ bool Dungeon::is_generator (const int x, const int y)
 bool Dungeon::is_food (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -591,7 +591,7 @@ bool Dungeon::is_food (const int x, const int y)
 bool Dungeon::is_torch (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -608,7 +608,7 @@ bool Dungeon::is_torch (const int x, const int y)
 bool Dungeon::is_blood (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -625,7 +625,7 @@ bool Dungeon::is_blood (const int x, const int y)
 bool Dungeon::is_rock (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -642,7 +642,7 @@ bool Dungeon::is_rock (const int x, const int y)
 bool Dungeon::is_door (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -659,7 +659,7 @@ bool Dungeon::is_door (const int x, const int y)
 bool Dungeon::is_secret_door (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -676,7 +676,7 @@ bool Dungeon::is_secret_door (const int x, const int y)
 bool Dungeon::is_entrance (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -693,7 +693,7 @@ bool Dungeon::is_entrance (const int x, const int y)
 bool Dungeon::is_floor_deco_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -710,7 +710,7 @@ bool Dungeon::is_floor_deco_at (const int x, const int y)
 bool Dungeon::is_wall_deco_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -727,7 +727,7 @@ bool Dungeon::is_wall_deco_at (const int x, const int y)
 bool Dungeon::is_exit (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -744,7 +744,7 @@ bool Dungeon::is_exit (const int x, const int y)
 bool Dungeon::is_lava (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -761,7 +761,7 @@ bool Dungeon::is_lava (const int x, const int y)
 bool Dungeon::is_chasm (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -778,7 +778,7 @@ bool Dungeon::is_chasm (const int x, const int y)
 bool Dungeon::is_water (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -795,7 +795,7 @@ bool Dungeon::is_water (const int x, const int y)
 bool Dungeon::is_deep_water (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -812,7 +812,7 @@ bool Dungeon::is_deep_water (const int x, const int y)
 bool Dungeon::is_hazard (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -838,7 +838,7 @@ bool Dungeon::is_hazard (const int x, const int y)
 bool Dungeon::is_treasure (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -857,7 +857,7 @@ bool Dungeon::is_treasure (const int x, const int y)
 bool Dungeon::is_treasure_class_a (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -874,7 +874,7 @@ bool Dungeon::is_treasure_class_a (const int x, const int y)
 bool Dungeon::is_treasure_class_b (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -891,7 +891,7 @@ bool Dungeon::is_treasure_class_b (const int x, const int y)
 bool Dungeon::is_treasure_class_c (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -908,7 +908,7 @@ bool Dungeon::is_treasure_class_c (const int x, const int y)
 bool Dungeon::is_gold (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -925,7 +925,7 @@ bool Dungeon::is_gold (const int x, const int y)
 bool Dungeon::is_key (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -942,7 +942,7 @@ bool Dungeon::is_key (const int x, const int y)
 bool Dungeon::is_potion (const int x, const int y)
 {
     if (is_oob(x, y)) {
-        ERR("oob %s at map (%d,%d)", __FUNCTION__, x, y);
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
@@ -1035,12 +1035,12 @@ bool Dungeon::is_deep_water_no_check (const int x, const int y)
 void Dungeon::create_node_map (void)
 {
     if (grid_width > MAP_GRID_WIDTH) {
-        ERR("nodes width overflow. got %d, max %d",
+        ERR("Nodes width overflow. got %d, max %d",
             grid_width, MAP_GRID_WIDTH);
     }
 
     if (grid_height > MAP_GRID_HEIGHT) {
-        ERR("nodes height overflow. got %d, max %d",
+        ERR("Nodes height overflow. got %d, max %d",
             grid_height, MAP_GRID_HEIGHT);
     }
 
@@ -1067,7 +1067,7 @@ void Dungeon::dump (void)
                 auto c = cr.c;
 
                 if (!c) {
-                    ERR("unknown map char 0x%x/%c at x %d, y %d, depth %d",
+                    ERR("Unknown map char 0x%x/%c at x %d, y %d, depth %d",
                         m, m, x, y, d);
                 }
 
@@ -1124,7 +1124,7 @@ void Dungeon::dump (void)
                 auto c = cr.c;
 
                 if (!c) {
-                    ERR("unknown map char %c at x %d, y %d, depth %d",
+                    ERR("Unknown map char %c at x %d, y %d, depth %d",
                         m, x, y, d);
                 }
 
@@ -1393,7 +1393,7 @@ bool Dungeon::solve (int x, int y, Grid *g)
         ncandidates = candidates.size();
         if (!ncandidates) {
             rooms_print_all(g);
-            ERR("no grid room candidates at map (%d,%d)", x, y);
+            ERR("No grid room candidates at map (%d,%d)", x, y);
             dump();
             return false;
         }
@@ -1443,7 +1443,7 @@ bool Dungeon::create_cyclic_rooms (Grid *g)
                 continue;
             }
             if (!solve(x, y, g)) {
-                ERR("could not solve level at %d,%d", x, y);
+                ERR("Could not solve level at %d,%d", x, y);
                 dump();
             }
             break;
@@ -1602,17 +1602,17 @@ void Dungeon::choose_room_doors (void)
                 auto o = get(grid.node_rooms, x, y+1);
                 if (!o) {
                     _ debug("bug");
-                    ERR("had exit down at %d,%d, but no node exists", x, y);
+                    ERR("Had exit down at %d,%d, but no node exists", x, y);
                 }
                 auto rdoori = random_range(0, r->doors_down.size());
                 auto odoori = random_range(0, o->doors_up.size());
                 if (rdoori >= r->doors_down.size()) {
                     _ debug("bug");
-                    ERR("bug");
+                    ERR("Bug");
                 }
                 if (odoori >= o->doors_up.size()) {
                     _ debug("bug");
-                    ERR("bug");
+                    ERR("Bug");
                 }
 
                 r->which_door_down = rdoori;
@@ -1626,17 +1626,17 @@ void Dungeon::choose_room_doors (void)
                 auto o = get(grid.node_rooms, x+1, y);
                 if (!o) {
                     _ debug("bug");
-                    ERR("had exit right at %d,%d, but no node exists", x, y);
+                    ERR("Had exit right at %d,%d, but no node exists", x, y);
                 }
                 auto rdoori = random_range(0, r->doors_right.size());
                 auto odoori = random_range(0, o->doors_left.size());
                 if (rdoori >= r->doors_right.size()) {
                     _ debug("bug");
-                    ERR("bug");
+                    ERR("Bug");
                 }
                 if (odoori >= o->doors_left.size()) {
                     _ debug("bug");
-                    ERR("bug");
+                    ERR("Bug");
                 }
 
                 r->which_door_right = rdoori;
@@ -1650,18 +1650,18 @@ void Dungeon::choose_room_doors (void)
                 auto o = get(grid.node_rooms, x, y+1);
                 if (!o) {
                     _ debug("bug");
-                    ERR("had secret exit down at %d,%d, but no node exists", x, y);
+                    ERR("Had secret exit down at %d,%d, but no node exists", x, y);
                 }
                 auto rdoori = random_range(0, r->doors_down.size());
                 auto odoori = random_range(0, o->doors_up.size());
                 if (rdoori >= r->doors_down.size()) {
                     _ debug("bug");
-                    ERR("bug, room %d, down door index %d size %d",
+                    ERR("Bug, room %d, down door index %d size %d",
                         r->roomno, (int)rdoori, (int)r->doors_down.size());
                 }
                 if (odoori >= o->doors_up.size()) {
                     _ debug("bug");
-                    ERR("bug, room %d, up door index %d size %d",
+                    ERR("Bug, room %d, up door index %d size %d",
                         r->roomno, (int)odoori, (int)r->doors_up.size());
                 }
 
@@ -1676,18 +1676,18 @@ void Dungeon::choose_room_doors (void)
                 auto o = get(grid.node_rooms, x+1, y);
                 if (!o) {
                     _ debug("bug");
-                    ERR("had secret exit right at %d,%d, but no node exists", x, y);
+                    ERR("Had secret exit right at %d,%d, but no node exists", x, y);
                 }
                 auto rdoori = random_range(0, r->doors_right.size());
                 auto odoori = random_range(0, o->doors_left.size());
                 if (rdoori >= r->doors_right.size()) {
                     _ debug("bug");
-                    ERR("bug, room %d, right door index %d size %d",
+                    ERR("Bug, room %d, right door index %d size %d",
                         r->roomno, (int)rdoori, (int)r->doors_right.size());
                 }
                 if (odoori >= o->doors_left.size()) {
                     _ debug("bug");
-                    ERR("bug, room %d, left door index %d size %d",
+                    ERR("Bug, room %d, left door index %d size %d",
                         r->roomno, (int)odoori, (int)r->doors_left.size());
                 }
 
@@ -1730,11 +1730,11 @@ int Dungeon::draw_corridor (point start, point end, char w)
 
 #if 0
     if (w == Charmap::CORRIDOR) {
-        LOG("create corridor, between %d,%d and %d,%d",
+        LOG("Create corridor, between %d,%d and %d,%d",
             start.x, start.y,
             end.x, end.y);
     } else {
-        LOG("create secret corridor, between %d,%d and %d,%d",
+        LOG("Create secret corridor, between %d,%d and %d,%d",
             start.x, start.y,
             end.x, end.y);
     }
@@ -1924,7 +1924,7 @@ int Dungeon::draw_corridor (point start, point end, char w)
 int Dungeon::draw_corridors (void)
 {
 #if 0
-    LOG("draw corridors");
+    LOG("Draw corridors");
     dump();
 #endif
 
@@ -2182,7 +2182,7 @@ void Dungeon::place_room (Roomp r, int x, int y)
 void Dungeon::place_level (LevelStaticp l)
 {
     if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
-        ERR("level has bad size %d,%d", l->width, l->height);
+        ERR("Level has bad size %d,%d", l->width, l->height);
     }
 
     for (auto z = 0 ; z < MAP_DEPTH; z++) {
@@ -2204,7 +2204,7 @@ void Dungeon::place_level (LevelStaticp l)
 void Dungeon::map_place_room_ptr (Roomp r, int x, int y)
 {
     if (!r) {
-        ERR("no room to place");
+        ERR("No room to place");
     }
 
     for (auto dz = 0 ; dz < MAP_DEPTH; dz++) {
@@ -2264,7 +2264,7 @@ bool Dungeon::can_place_room (Roomp r, int x, int y)
 bool Dungeon::rooms_move_closer_together (void)
 {
 #if 0
-    LOG("rooms_move_closer_together");
+    LOG("Rooms_move_closer_together");
     dump();
 #endif
 
@@ -2494,7 +2494,7 @@ bool Dungeon::rooms_move_closer_together (void)
                         }
                         break;
                     case 4:
-                        ERR("wtf");
+                        ERR("Wtf");
                     }
 
                     if (moved_one) {
@@ -2522,7 +2522,7 @@ bool Dungeon::rooms_move_closer_together (void)
             if (new_total_corridor_len >= corridor_count) {
                 restore_level();
                 if (!draw_corridors()) {
-                    ERR("rolled back level was not solvable");
+                    ERR("Rolled back level was not solvable");
                 }
 
                 if (failed_to_make_shorter_corridors ++ > 1000) {
@@ -2534,7 +2534,7 @@ bool Dungeon::rooms_move_closer_together (void)
             } else if (!new_total_corridor_len) {
                 restore_level();
                 if (!draw_corridors()) {
-                    ERR("rolled back level was not solvable");
+                    ERR("Rolled back level was not solvable");
                 }
 
                 if (failed_to_place_all_corridors ++ > 1000) {
@@ -2627,7 +2627,7 @@ void Dungeon::place_doors_between_depth_changes (void)
             if (r->down_room) {
                 auto o = r->down_room;
                 if (!o) {
-                    ERR("room linkage bug");
+                    ERR("Room linkage bug");
                 }
 
                 if (r->depth > o->depth) {
@@ -2639,7 +2639,7 @@ void Dungeon::place_doors_between_depth_changes (void)
             if (r->up_room) {
                 auto o = r->up_room;
                 if (!o) {
-                    ERR("room linkage bug");
+                    ERR("Room linkage bug");
                 }
 
                 if (r->depth > o->depth) {
@@ -2651,7 +2651,7 @@ void Dungeon::place_doors_between_depth_changes (void)
             if (r->right_room) {
                 auto o = r->right_room;
                 if (!o) {
-                    ERR("room linkage bug");
+                    ERR("Room linkage bug");
                 }
 
                 if (r->depth > o->depth) {
@@ -2663,7 +2663,7 @@ void Dungeon::place_doors_between_depth_changes (void)
             if (r->left_room) {
                 auto o = r->left_room;
                 if (!o) {
-                    ERR("room linkage bug");
+                    ERR("Room linkage bug");
                 }
 
                 if (r->depth > o->depth) {
@@ -2675,7 +2675,7 @@ void Dungeon::place_doors_between_depth_changes (void)
             if (r->secret_down_room) {
                 auto o = r->secret_down_room;
                 if (!o) {
-                    ERR("room linkage bug");
+                    ERR("Room linkage bug");
                 }
 
                 putc(r->down_secret_door_at.x, r->down_secret_door_at.y,
@@ -2687,7 +2687,7 @@ void Dungeon::place_doors_between_depth_changes (void)
             if (r->secret_up_room) {
                 auto o = r->secret_up_room;
                 if (!o) {
-                    ERR("room linkage bug");
+                    ERR("Room linkage bug");
                 }
 
                 putc(r->up_secret_door_at.x, r->up_secret_door_at.y,
@@ -2699,7 +2699,7 @@ void Dungeon::place_doors_between_depth_changes (void)
             if (r->secret_right_room) {
                 auto o = r->secret_right_room;
                 if (!o) {
-                    ERR("room linkage bug");
+                    ERR("Room linkage bug");
                 }
 
                 putc(r->right_secret_door_at.x, r->right_secret_door_at.y,
@@ -2711,7 +2711,7 @@ void Dungeon::place_doors_between_depth_changes (void)
             if (r->secret_left_room) {
                 auto o = r->secret_left_room;
                 if (!o) {
-                    ERR("room linkage bug");
+                    ERR("Room linkage bug");
                 }
 
                 putc(r->left_secret_door_at.x, r->left_secret_door_at.y,

@@ -20,9 +20,9 @@ void Thing::health_boost (int v)
     set_stats_health(new_health);
 
     if (new_health >= max_health) {
-        log("health boost not possible, maxxed at %d", new_health);
+        log("Health boost not possible, maxxed at %d", new_health);
     } else {
-        log("health boost by %d from %d to %d", v, old_health, new_health);
+        log("Health boost by %d from %d to %d", v, old_health, new_health);
     }
 }
 

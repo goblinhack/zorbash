@@ -22,7 +22,7 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
                        MAX_UI_SIZE>, UI_WID_STYLE_MAX> tiles = {};
 
     if (style >= UI_WID_STYLE_MAX) {
-        ERR("unimplemented widget style %d", style);
+        ERR("Unimplemented widget style %d", style);
         return;
     }
 

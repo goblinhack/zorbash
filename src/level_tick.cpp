@@ -14,7 +14,7 @@
 
 void Level::tick (void)
 {_
-    // log("tick");
+    // log("Tick");
     // MINICON("monsts %d", monst_count);
     if (!game->started) {
         return;
@@ -60,7 +60,7 @@ void Level::tick (void)
         verify(t);
 
         if (t->is_monst()) {
-            // t->log("tick me %d game %d", t->get_tick(), game->tick_current);
+            // t->log("Tick me %d game %d", t->get_tick(), game->tick_current);
             if (t->get_tick() != game->tick_current) {
                 game->things_are_moving = true;
             }
@@ -101,11 +101,11 @@ void Level::sanity_check (void)
 
             if (monst_count) {
                 if (!is_monst(x, y)) {
-                    DIE("level sanity fail. monst count exists, but no monster found, at %d,%d", x, y);
+                    DIE("Level sanity fail. monst count exists, but no monster found, at %d,%d", x, y);
                 }
             } else {
                 if (is_monst(x, y)) {
-                    DIE("level sanity fail. no monst count exists, but monster found, at %d,%d", x, y);
+                    DIE("Level sanity fail. no monst count exists, but monster found, at %d,%d", x, y);
                 }
             }
 	}

@@ -33,7 +33,7 @@ void Thing::lava_tick (void)
 
     bool hit = false;
 
-    log("lava tick");
+    log("Lava tick");
 
     //
     // Give the player a chance

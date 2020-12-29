@@ -25,7 +25,7 @@ void Thing::fall (float fall_height, timestamp_t ms)
 
     set_fall_height(fall_height);
 
-    log("begin falling");
+    log("Begin falling");
     level_pop();
     is_falling = true;
     level_push();
@@ -48,7 +48,7 @@ float Thing::get_fall (void)
 
     if (t >= get_timestamp_fall_end()) {
         is_falling = false;
-        log("end of falling");
+        log("End of falling");
         level_push();
 
         if (!is_player()) {
@@ -68,7 +68,7 @@ float Thing::get_fall (void)
         is_changing_level = true;
 
         if (is_player()) {
-            log("player is waiting to complete the fall");
+            log("Player is waiting to complete the fall");
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
             is_waiting_to_fall = true;
         }
@@ -127,9 +127,9 @@ bool Thing::fall_to_next_level (void)
             continue;
         }
 
-        log("try to fall to %d,%d", x, y);
+        log("Try to fall to %d,%d", x, y);
         if (!next_level->is_dungeon(x, y)) {_
-            log("no, out of dungeon");
+            log("No, out of dungeon");
             continue;
         }
 
@@ -142,7 +142,7 @@ bool Thing::fall_to_next_level (void)
             next_level->is_chasm(x, y)       ||
             next_level->is_wall(x, y)        ||
             next_level->is_exit(x, y)) {_
-            log("no, special tile");
+            log("No, special tile");
             continue;
         }
 
@@ -157,10 +157,10 @@ bool Thing::fall_to_next_level (void)
                 MINICON("%s tumbles into the void!", text_The().c_str());
             }
 
-            log("land on the next level, change level then move to %d,%d", x, y);
+            log("Land on the next level, change level then move to %d,%d", x, y);
             level_change(next_level);
 
-            log("land on the next level, move to %d,%d", x, y);
+            log("Land on the next level, move to %d,%d", x, y);
             move_to_immediately(fpoint(x, y));
 
             if (is_player()) {
@@ -226,7 +226,7 @@ bool Thing::fall_to_next_level (void)
             //
             // Update the z depth when falling
             // 
-            log("end of falling");
+            log("End of falling");
             level_pop();
             is_falling = false;
             update_interpolated_position();
@@ -246,6 +246,6 @@ bool Thing::fall_to_next_level (void)
             return true;
         }
 
-        log("no, not floor or lava");
+        log("No, not floor or lava");
     }
 }

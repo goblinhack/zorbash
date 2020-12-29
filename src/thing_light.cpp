@@ -17,7 +17,7 @@ void Thing::init_lights (void)
 {_
     if (unlikely(is_player())) {
         if (level->player && (level->player != this)) {
-            DIE("player exists in multiple places on map, %f, %f and %f, %f",
+            DIE("Player exists in multiple places on map, %f, %f and %f, %f",
                 level->player->mid_at.x, level->player->mid_at.y, 
                 mid_at.x, mid_at.y);
             return;
@@ -73,7 +73,7 @@ void Thing::init_lights (void)
         }
 
         has_light = true;
-        log("player created");
+        log("Player created");
     } else {
         if (unlikely(is_light_strength())) {
             std::string l = light_color();

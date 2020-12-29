@@ -53,15 +53,15 @@ void Thing::hunger_clock (void)
 
     if (old_is_starving != is_starving) {
         if (is_starving) {
-            log("is starving");
+            log("Is starving");
         } else {
-            log("is no longer starving");
+            log("Is no longer starving");
         }
     } else if (old_is_hungry != is_hungry) {
         if (is_hungry) {
-            log("is hungry");
+            log("Is hungry");
         } else {
-            log("is no longer hungry");
+            log("Is no longer hungry");
         }
     }
 }

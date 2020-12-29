@@ -24,6 +24,7 @@
 #include "my_gl.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
+#include "my_wid_thing_collect.h"
 
 //
 // Display sorted.
@@ -376,11 +377,11 @@ void wid_set_prev (Widp w, Widp prev)
         verify(prev);
     }
     if (!w) {
-        DIE("no wid");
+        DIE("No wid");
     }
 
     if (w == prev) {
-        DIE("wid list loop");
+        DIE("Wid list loop");
     }
 
     w->prev = prev;
@@ -393,11 +394,11 @@ void wid_set_prev (Widp w, Widp prev)
 Widp wid_get_prev (Widp w)
 {_
     if (!w) {
-        DIE("no wid");
+        DIE("No wid");
     }
 
     if (w->prev == w) {
-        DIE("wid list get prev loop");
+        DIE("Wid list get prev loop");
     }
 
     return (w->prev);
@@ -406,11 +407,11 @@ Widp wid_get_prev (Widp w)
 Widp wid_get_next (Widp w)
 {_
     if (!w) {
-        DIE("no wid");
+        DIE("No wid");
     }
 
     if (w->next == w) {
-        ERR("wid list get next loop");
+        ERR("Wid list get next loop");
     }
 
     return (w->next);
@@ -1336,11 +1337,11 @@ void wid_set_bg_tilename (Widp w, std::string name)
 {_
     Tilep tile = tile_find(name);
     if (!tile) {
-        ERR("failed to find wid tile %s", name.c_str());
+        ERR("Failed to find wid tile %s", name.c_str());
     }
 
     if (!w) {
-        DIE("widget does not exist to set tile %s", name.c_str());
+        DIE("Widget does not exist to set tile %s", name.c_str());
     }
 
     w->bg_tile = tile;
@@ -1350,11 +1351,11 @@ void wid_set_fg_tilename (Widp w, std::string name)
 {_
     Tilep tile = tile_find(name);
     if (!tile) {
-        ERR("failed to find wid tile %s", name.c_str());
+        ERR("Failed to find wid tile %s", name.c_str());
     }
 
     if (!w) {
-        DIE("widget does not exist to set tile %s", name.c_str());
+        DIE("Widget does not exist to set tile %s", name.c_str());
     }
 
     w->fg_tile = tile;
@@ -1515,7 +1516,7 @@ void wid_set_on_destroy_begin (Widp w, on_destroy_t fn)
 void wid_set_on_tick (Widp w, on_tick_t fn)
 {_
     if (!fn) {
-        ERR("no ticker function set");
+        ERR("No ticker function set");
     }
 
     w->on_tick = fn;
@@ -1539,7 +1540,7 @@ static void wid_tree_attach (Widp w)
     wid_key_map_location *root;
 
     if (w->in_tree_root) {
-        DIE("wid is already attached");
+        DIE("Wid is already attached");
     }
 
     if (!w->parent) {
@@ -1549,12 +1550,12 @@ static void wid_tree_attach (Widp w)
     }
 
     if (!root) {
-        DIE("no root");
+        DIE("No root");
     }
 
     auto result = root->insert(std::make_pair(w->key, w));
     if (result.second == false) {
-        DIE("wid insert name [%s] failed", wid_get_name(w).c_str());
+        DIE("Wid insert name [%s] failed", wid_get_name(w).c_str());
     }
 
     w->in_tree_root = root;
@@ -1565,7 +1566,7 @@ static void wid_tree_insert (Widp w)
     static uint64_t key;
 
     if (w->in_tree_root) {
-        DIE("wid is already inserted");
+        DIE("Wid is already inserted");
     }
 
     wid_key_map_location *root;
@@ -1582,12 +1583,12 @@ static void wid_tree_insert (Widp w)
     }
 
     if (!root) {
-        DIE("no root");
+        DIE("No root");
     }
 
     auto result = root->insert(std::make_pair(w->key, w));
     if (result.second == false) {
-        DIE("wid insert name [%s] failed", wid_get_name(w).c_str());
+        DIE("Wid insert name [%s] failed", wid_get_name(w).c_str());
     }
 
     w->in_tree_root = root;
@@ -1598,7 +1599,7 @@ static void wid_tree_global_unsorted_insert (Widp w)
     static WidKeyType key;
 
     if (w->in_tree_global_unsorted_root) {
-        DIE("wid is already in the global tree");
+        DIE("Wid is already in the global tree");
     }
 
     auto root = &wid_global;
@@ -1608,7 +1609,7 @@ static void wid_tree_global_unsorted_insert (Widp w)
     w->tree_global_key = key;
     auto result = root->insert(std::make_pair(w->tree_global_key, w));
     if (result.second == false) {
-        DIE("wid insert name [%s] tree_global failed", wid_get_name(w).c_str());
+        DIE("Wid insert name [%s] tree_global failed", wid_get_name(w).c_str());
     }
 
     w->in_tree_global_unsorted_root = root;
@@ -1619,7 +1620,7 @@ static void wid_tree2_unsorted_insert (Widp w)
     static uint64_t key;
 
     if (w->in_tree2_unsorted_root) {
-        DIE("wid is already in the in_tree2_unsorted_root");
+        DIE("Wid is already in the in_tree2_unsorted_root");
     }
 
     wid_key_map_int *root;
@@ -1633,7 +1634,7 @@ static void wid_tree2_unsorted_insert (Widp w)
     w->tree2_key = ++key;
     auto result = root->insert(std::make_pair(w->tree2_key, w));
     if (result.second == false) {
-        DIE("wid insert name [%s] tree2 failed", wid_get_name(w).c_str());
+        DIE("Wid insert name [%s] tree2 failed", wid_get_name(w).c_str());
     }
 
     w->in_tree2_unsorted_root = root;
@@ -1655,7 +1656,7 @@ static void wid_tree3_moving_wids_insert (Widp w)
     w->tree3_key = ++key;
     auto result = root->insert(std::make_pair(w->tree3_key, w));
     if (result.second == false) {
-        DIE("wid insert name [%s] tree3 failed", wid_get_name(w).c_str());
+        DIE("Wid insert name [%s] tree3 failed", wid_get_name(w).c_str());
     }
 
     w->in_tree3_moving_wids = root;
@@ -1680,7 +1681,7 @@ static void wid_tree4_wids_being_destroyed_insert (Widp w)
     w->tree4_key = ++key;
     auto result = root->insert(std::make_pair(w->tree4_key, w));
     if (result.second == false) {
-        DIE("wid insert name [%s] tree4 failed", wid_get_name(w).c_str());
+        DIE("Wid insert name [%s] tree4 failed", wid_get_name(w).c_str());
     }
 
     w->in_tree4_wids_being_destroyed = root;
@@ -1705,7 +1706,7 @@ static void wid_tree5_ticking_wids_insert (Widp w)
     w->tree5_key = ++key;
     auto result = root->insert(std::make_pair(w->tree5_key, w));
     if (result.second == false) {
-        DIE("wid insert name [%s] tree5 failed", wid_get_name(w).c_str());
+        DIE("Wid insert name [%s] tree5 failed", wid_get_name(w).c_str());
     }
 
     w->in_tree5_ticking_wids = root;
@@ -1722,7 +1723,7 @@ static void wid_tree_remove (Widp w)
 
     auto result = root->find(w->key);
     if (result == root->end()) {
-        DIE("wid tree did not find wid hence cannot remove it");
+        DIE("Wid tree did not find wid hence cannot remove it");
     }
 
     root->erase(w->key);
@@ -1739,7 +1740,7 @@ static void wid_tree2_unsorted_remove (Widp w)
 
     auto result = root->find(w->tree2_key);
     if (result == root->end()) {
-        DIE("wid tree2 did not find wid");
+        DIE("Wid tree2 did not find wid");
     }
     root->erase(w->tree2_key);
 
@@ -1755,7 +1756,7 @@ static void wid_tree_global_unsorted_remove (Widp w)
 
     auto result = root->find(w->tree_global_key);
     if (result == root->end()) {
-        DIE("wid tree_global did not find wid");
+        DIE("Wid tree_global did not find wid");
     }
     root->erase(w->tree_global_key);
 
@@ -1768,7 +1769,7 @@ WidKeyType wid_unsorted_get_key (Widp w)
 
     auto result = root->find(w->tree_global_key);
     if (result == root->end()) {
-        DIE("wid unsorted did not find wid");
+        DIE("Wid unsorted did not find wid");
     }
 
     w = result->second;
@@ -1785,7 +1786,7 @@ static void wid_tree3_moving_wids_remove (Widp w)
 
     auto result = root->find(w->tree3_key);
     if (result == root->end()) {
-        DIE("wid tree3 did not find wid");
+        DIE("Wid tree3 did not find wid");
     }
     root->erase(w->tree3_key);
 
@@ -1801,7 +1802,7 @@ static void wid_tree4_wids_being_destroyed_remove (Widp w)
 
     auto result = root->find(w->tree4_key);
     if (result == root->end()) {
-        DIE("wid tree4 did not find wid");
+        DIE("Wid tree4 did not find wid");
     }
     root->erase(w->tree4_key);
 
@@ -1817,7 +1818,7 @@ static void wid_tree5_ticking_wids_remove (Widp w)
 
     auto result = root->find(w->tree5_key);
     if (result == root->end()) {
-        DIE("wid tree5 did not find wid");
+        DIE("Wid tree5 did not find wid");
     }
     root->erase(w->tree5_key);
 
@@ -2008,7 +2009,7 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
 #if 0
     if (w->name == "wid_bag Items found") {
         wid_dump(w, 0);
-        DIE("xxx");
+        DIE("Xxx");
     }
 #endif
 
@@ -2169,7 +2170,7 @@ Widp wid_new_square_window (std::string name)
 Widp wid_new_square_button (Widp parent, std::string name)
 {_
     if (!parent) {
-        ERR("no parent");
+        ERR("No parent");
     }
 
     Widp w = wid_new(parent);
@@ -2209,7 +2210,7 @@ Widp wid_new_square_button (Widp parent, std::string name)
 Widp wid_new_plain (Widp parent, std::string name)
 {_
     if (!parent) {
-        ERR("no parent");
+        ERR("No parent");
     }
 
     Widp w = wid_new(parent);
@@ -2250,7 +2251,7 @@ Widp wid_new_plain (Widp parent, std::string name)
 static Widp wid_new_scroll_trough (Widp parent)
 {_
     if (!parent) {
-        ERR("no parent");
+        ERR("No parent");
     }
 
     Widp w = wid_new(parent);
@@ -2292,7 +2293,7 @@ static Widp wid_new_scroll_bar (Widp parent,
                                 uint8_t vertical)
 {_
     if (!parent) {
-        ERR("no parent");
+        ERR("No parent");
     }
 
     color c;
@@ -2360,7 +2361,7 @@ Widp wid_new_vert_scroll_bar (Widp parent,
                               Widp scrollbar_owner)
 {_
     if (!parent) {
-        ERR("no parent");
+        ERR("No parent");
     }
 
     point tl;
@@ -2415,7 +2416,7 @@ Widp wid_new_horiz_scroll_bar (Widp parent, std::string name,
                                Widp scrollbar_owner)
 {_
     if (!parent) {
-        ERR("no parent");
+        ERR("No parent");
     }
 
     point tl;
@@ -2920,7 +2921,7 @@ Widp wid_find (const std::string& name)
             return (r);
         }
     }
-    // LOG("wid [%s] not found", name.c_str());
+    // LOG("Wid [%s] not found", name.c_str());
     return (nullptr);
 }
 
@@ -5193,7 +5194,7 @@ if (wid_event_to_char(key) == '+') {
         g_blend_b ++;
         if (g_blend_b >= (int)ARRAY_SIZE(vals)) {
             g_blend_b = 0;
-            ERR("wrapped");
+            ERR("Wrapped");
         }
     }
     return;
@@ -5834,7 +5835,7 @@ void wid_tick_all (void)
 
     for (auto& w : work) {
         if (!w->on_tick) {
-            ERR("wid on ticker tree, but no callback set");
+            ERR("Wid on ticker tree, but no callback set");
         }
 
         (w->on_tick)(w);
@@ -5843,27 +5844,35 @@ void wid_tick_all (void)
     //
     // If we need to remake the inventory, do so
     //
-    if (game->remake_inventory) {
-        LOG("handle request to remake inventory");
+    if (game->request_remake_inventory) {
+        LOG("Handle request to remake inventory");
         wid_inventory_init();
-        game->remake_inventory = false;
+        game->request_remake_inventory = false;
     }
 
     //
     // Just in case the window cannot be remade, clean up
     //
-    if (game->moving_items) {
-        if (!game->bag1 && !game->bag2) {
-            LOG("handle end of moving items");
-            game->moving_items = false;
+    if (game->state_moving_items) {
+        if (!game->bag_primary && !game->bag_secondary) {
+            LOG("Handle end of moving items");
+            game->state_moving_items = false;
         }
     }
 
-    if (game->collecting_items) {
-        if (!game->bag1 && !game->bag2) {
-            LOG("handle end of collecting items");
-            game->collecting_items = false;
+    if (game->state_collecting_items) {
+        if (!game->bag_primary && !game->bag_secondary) {
+            LOG("Handle end of collecting items");
+            game->state_collecting_items = false;
         }
+    }
+
+    if (game->request_destroy_bags) {
+        LOG("Handle destroy bags request");
+        game->request_destroy_bags = false;
+        wid_thing_info_fini();
+        wid_thing_collect_fini();
+        wid_inventory_init();
     }
 }
 
@@ -6104,7 +6113,7 @@ static void wid_move_enqueue (Widp w,
         if (w->moving == WID_MAX_MOVE_QUEUE) {
             Thingp t = wid_get_thing(w);
 
-            ERR("too many moves queued up for widget %s",
+            ERR("Too many moves queued up for widget %s",
                 to_string(w));
 
             if (t) {

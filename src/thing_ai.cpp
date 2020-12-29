@@ -32,13 +32,13 @@ _
     // If somewhere bad, escape
     //
     if (is_less_preferred_terrain(start) >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
-        log("on bad terrain, escape");
+        log("On bad terrain, escape");
         if (ai_escape()) {
             return;
         }
 
         monstp->wander_target = point(0, 0);
-        log("cannot escape, try to wander");
+        log("Cannot escape, try to wander");
         if (ai_wander()) {
             return;
         }
@@ -49,7 +49,7 @@ _
     //
     if (monstp->wander_target != point(0, 0)) {
         if (random_range(0, 100) < 50) {
-            log("try to continue wander");
+            log("Try to continue wander");
             if (ai_wander()) {
                 return;
             }

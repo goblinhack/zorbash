@@ -532,7 +532,7 @@ void *ptrcheck_alloc (const void *ptr,
 #endif
 
     if (!ptr) {
-        ERR("null pointer");
+        ERR("Null pointer");
     }
 
     //
@@ -553,7 +553,7 @@ void *ptrcheck_alloc (const void *ptr,
     // Missing an earlier free?
     //
     if (hash_find(hash, (void*) ptr)) {
-        ERR("pointer %p already exists and attempting to add again", ptr);
+        ERR("Pointer %p already exists and attempting to add again", ptr);
         return ((void*) ptr);
     }
 
@@ -611,7 +611,7 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 #endif
 
     if (!ptr) {
-        ERR("null pointer");
+        ERR("Null pointer");
         return false;
     }
 
@@ -740,7 +740,7 @@ void ptrcheck_leak_print (void)
             }
 #endif
             if (elem->next == elem) {
-                ERR("hash table corruption");
+                ERR("Hash table corruption");
             }
 
             elem = elem->next;

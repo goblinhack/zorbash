@@ -20,7 +20,7 @@ PyObject *text_size_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     if (!text) {
-        ERR("no text");
+        ERR("No text");
     }
 
     std::wstring col = L"none";

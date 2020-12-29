@@ -451,6 +451,9 @@ class Tp:
     def set_is_bag(self, value):
         zx.tp_set_is_bag(self, value)
 
+    def set_is_temporary_bag(self, value):
+        zx.tp_set_is_temporary_bag(self, value)
+
     def set_is_rrr59(self, value):
         zx.tp_set_is_rrr59(self, value)
 

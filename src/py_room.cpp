@@ -61,12 +61,12 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     if (!py_room_data) {
-        ERR("map_load_room, missing floor data");
+        ERR("Map_load_room, missing floor data");
     }
 
     int room_data_elems = PyList_Size(py_room_data);
     if (room_data_elems % MAP_ROOM_HEIGHT) {
-        ERR("room elems needs to be evenly dividable by room height %d, got %d elems",
+        ERR("Room elems needs to be evenly dividable by room height %d, got %d elems",
             (int) MAP_ROOM_HEIGHT, (int) PyList_Size(py_room_data));
     }
 
@@ -174,27 +174,27 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             if (floor_string.size() != MAP_ROOM_WIDTH){
-                ERR("room floor width mismatch, %d, expected %d",
+                ERR("Room floor width mismatch, %d, expected %d",
                     (int)floor_string.size(), MAP_ROOM_WIDTH);
             }
             if (water_string.size() != MAP_ROOM_WIDTH){
-                ERR("room water width mismatch, %d, expected %d",
+                ERR("Room water width mismatch, %d, expected %d",
                     (int)water_string.size(), MAP_ROOM_WIDTH);
             }
             if (lava_string.size() != MAP_ROOM_WIDTH){
-                ERR("room lava width mismatch, %d, expected %d",
+                ERR("Room lava width mismatch, %d, expected %d",
                     (int)lava_string.size(), MAP_ROOM_WIDTH);
             }
             if (chasm_string.size() != MAP_ROOM_WIDTH){
-                ERR("room chasm width mismatch, %d, expected %d",
+                ERR("Room chasm width mismatch, %d, expected %d",
                     (int)chasm_string.size(), MAP_ROOM_WIDTH);
             }
             if (walls_string.size() != MAP_ROOM_WIDTH){
-                ERR("room walls width mismatch, %d, expected %d",
+                ERR("Room walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), MAP_ROOM_WIDTH);
             }
             if (obj_strings.size() != MAP_ROOM_WIDTH){
-                ERR("room items width mismatch, %d, expected %d",
+                ERR("Room items width mismatch, %d, expected %d",
                     (int)obj_strings.size(), MAP_ROOM_WIDTH);
             }
 
