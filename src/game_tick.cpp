@@ -7,7 +7,7 @@
 #include "my_dungeon.h"
 
 void Game::tick_begin (const std::string &why)
-{_
+{
     //
     // Move when all things are done moving
     //
@@ -21,7 +21,7 @@ void Game::tick_begin (const std::string &why)
 }
 
 void Game::tick_end (void)
-{_
+{
     //
     // Move when all things are done moving
     //

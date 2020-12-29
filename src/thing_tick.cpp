@@ -12,7 +12,7 @@
 #include "my_python.h"
 
 void Thing::update_tick (void)
-{_
+{
     set_timestamp_last_tick(time_get_time_ms_cached());
     set_tick_last_did_something(game->tick_current);
     set_tick(game->tick_current);
@@ -135,7 +135,7 @@ bool Thing::achieve_goals_in_death (void)
 }
 
 void Thing::collision_check_do (void)
-{_
+{
     if (!tp()->collision_check()) {
         return;
     }
@@ -154,7 +154,7 @@ void Thing::collision_check_do (void)
 }
 
 void Thing::tick (void)
-{_
+{
     //if (is_player()) {
     //    log("Tick");
     //}

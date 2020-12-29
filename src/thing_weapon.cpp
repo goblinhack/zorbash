@@ -253,23 +253,26 @@ _
     //
     auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
-        log("Remove carry anim");
-        weapon_carry_anim->dead("owner sheathed weapon, remove carry_anim");
+        log("Sheath; remove carry-anim");
+        weapon_carry_anim->dead("owner sheathed weapon, remove carry-anim");
         weapon_set_carry_anim(nullptr);
     } else {
-        log("Weapon had no carry anim");
+        log("Weapon had no carry-anim");
     }
 
     auto gfx_anim_attack = weapon_get_use_anim();
     if (gfx_anim_attack) {
-        log("Remove carry anim");
+        log("Sheath; remove use-anim");
         gfx_anim_attack->dead("owner sheathed weapon, remove use-anim");
         weapon_set_use_anim(nullptr);
     } else {
         log("Weapon had no use/attack anim");
     }
 
-    set_weapon_id(0);
+    //
+    // No do not clear this. We need to keep the weapon around so we can swing it
+    //
+    // set_weapon_id(0);
 }
 
 void Thing::wield (Thingp weapon)
@@ -279,7 +282,7 @@ void Thing::wield (Thingp weapon)
     if (weapon_get() == weapon) {
         log("Re-wielding: %s", weapon_tp->name().c_str());
         //
-        // Do not return here. We need to set the carry anim post swing
+        // Do not return here. We need to set the carry-anim post swing
         //
         sheath();
     } else {
