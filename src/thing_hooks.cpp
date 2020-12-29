@@ -57,8 +57,6 @@ void Thing::hooks_remove ()
         }
 
         if (id == owner->get_weapon_id_use_anim()) {
-            owner->unwield("remove hooks for use-anim");
-
             if (is_loggable_for_unimportant_stuff()) {
                 log("Detach use_anim from owner %s", owner->to_string().c_str());
             }

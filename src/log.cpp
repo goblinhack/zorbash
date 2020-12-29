@@ -18,6 +18,10 @@
 //
 void log_catchup_missing_indent_levels (void)
 {
+    if (!g_opt_debug) {
+        return;
+    }
+
     if (!g_log_stdout) {
         g_last_logged_g_callframes_depth = 0;
     }

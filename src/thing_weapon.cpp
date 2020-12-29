@@ -272,7 +272,7 @@ _
     //
     // No do not clear this. We need to keep the weapon around so we can swing it
     //
-    // set_weapon_id(0);
+    set_weapon_id(0);
 }
 
 void Thing::wield (Thingp weapon)
