@@ -38,18 +38,18 @@ struct callframe {
 #ifdef USE_THREADS
 #ifdef __MAIN__
 thread_local struct callframe callframes[MAXCALLFRAME];
-thread_local unsigned char callframes_depth;
+thread_local unsigned char g_callframes_depth;
 #else
 extern thread_local struct callframe callframes[MAXCALLFRAME];
-extern thread_local unsigned char callframes_depth;
+extern thread_local unsigned char g_callframes_depth;
 #endif
 #else
 #ifdef __MAIN__
 struct callframe callframes[MAXCALLFRAME];
-unsigned char callframes_depth;
+unsigned char g_callframes_depth;
 #else
 extern struct callframe callframes[MAXCALLFRAME];
-extern unsigned char callframes_depth;
+extern unsigned char g_callframes_depth;
 #endif
 #endif
 
@@ -63,8 +63,8 @@ struct tracer_t {
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
         if (unlikely(g_opt_debug)) {
-            if (unlikely(callframes_depth < MAXCALLFRAME)) {
-                callframe *c = &callframes[callframes_depth++];
+            if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
+                callframe *c = &callframes[g_callframes_depth++];
                 c->file = file;
                 c->func = func;
                 c->line = line;
@@ -75,8 +75,8 @@ struct tracer_t {
     inline ~tracer_t()
     {
         if (unlikely(g_opt_debug)) {
-            if (callframes_depth > 0) {
-                callframes_depth--;
+            if (g_callframes_depth > 0) {
+                g_callframes_depth--;
             }
         }
     }

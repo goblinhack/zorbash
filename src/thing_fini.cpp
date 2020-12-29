@@ -25,10 +25,6 @@ void Thing::destroy (void)
 {_
     verify(this);
 
-    if (is_loggable_for_unimportant_stuff()) {
-        log("Destroy");
-    }
-
     if (is_being_destroyed) {
         err("Death recursion in thing destroy");
         return;
@@ -67,13 +63,9 @@ void Thing::destroy (void)
     {
         auto f = level->all_gc_things.find(id);
         if (f != level->all_gc_things.end()) {
-            dbg("remove from gc");
+            dbg("Remove from gc");
             level->all_gc_things.erase(f);
         }
-    }
-
-    if (is_loggable_for_unimportant_stuff()) {
-        dbg("destroyed");
     }
 
     game->world.free_thing_id(this);

@@ -26,12 +26,12 @@ void Thing::log_ (const char *fmt, va_list args) const
     get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
 
-    if (!callframes_depth) {
+    if (!g_last_logged_g_callframes_depth) {
         snprintf(buf + len, MAXSHORTSTR - len, "%60s: ", t->to_string().c_str());
     } else {
         snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s",
                 t->to_string().c_str(),
-                callframes_depth - g_thing_callframes_depth, "");
+                g_last_logged_g_callframes_depth, "");
     }
 
     len = (int)strlen(buf);
@@ -43,9 +43,10 @@ void Thing::log_ (const char *fmt, va_list args) const
 void Thing::log (const char *fmt, ...) const
 {
     verify(this);
+    log_catchup_missing_indent_levels();
+
     auto t = this;
     va_list args;
-
     va_start(args, fmt);
     t->log_(fmt, args);
     va_end(args);

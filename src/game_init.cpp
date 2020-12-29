@@ -10,6 +10,8 @@
 
 void Game::init (void)
 {_
+    LOG("Game init");
+
     if (g_opt_seed_name != "") {
         seed_name = g_opt_seed_name;
     } else {
@@ -33,6 +35,8 @@ void Game::init (void)
 
 void Game::init_level (point3d p)
 {_
+    LOG("Game init level %d,%d,%d", p.x, p.y, p.z);
+
     auto level_seed = seed + p.x + p.y + p.z;
     auto l = get(world.levels, p.x, p.y, p.z);
     if (!l) {
@@ -49,6 +53,8 @@ void Game::init_level (point3d p)
 
 void Game::init_levels (void)
 {_
+    LOG("Game init levels");
+
     //
     // Increase this to create more levels in advance
     //

@@ -158,8 +158,6 @@ void Thing::tick (void)
     //if (is_player()) {
     //    log("Tick");
     //}
-    g_thing_callframes_depth = callframes_depth;
-
     update_interpolated_position();
 
     if (unlikely(is_dead)) {

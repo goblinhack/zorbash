@@ -29,6 +29,8 @@ void game_main_menu_hide (void)
 
 uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Main menu new game chosen");
+
     game_main_menu_destroy();
     game->init();
     wid_rightbar_fini();

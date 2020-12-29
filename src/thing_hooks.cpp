@@ -17,10 +17,6 @@
 //
 void Thing::hooks_remove ()
 {_
-    if (is_loggable_for_unimportant_stuff()) {
-        log("Hooks remove");
-    }
-_
     //
     // We are owned by something. i.e. we are a sword.
     //
