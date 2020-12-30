@@ -10,28 +10,25 @@
 
 void Thing::used (Thingp what, Thingp target)
 {_
-    if (is_player()) {
-        if (!inventory_id_remove(what, target)) {
-            return;
-        }
-    }
-
-    if (!monstp) {
-        return;
-    }
-
     auto existing_owner = what->get_top_owner();
     if (existing_owner != this) {
         err("Attempt to use %s which is not carried", what->to_string().c_str());
         return;
     }
 
-    what->remove_owner();
-    what->visible();
+    if (is_player()) {
+        if (target) {
+            inventory_id_remove(what, target);
+        } else {
+            inventory_id_remove(what);
+        }
+    }
 
+    what->hooks_remove();
+    what->remove_owner();
     monstp->carrying.remove(what->id);
+
     log("Used %s", what->to_string().c_str());
-    what->level_pop();
     what->dead("used");
 }
 
@@ -66,6 +63,7 @@ bool Thing::use (Thingp what)
         game->tick_begin("player ate an item");
     } else if (what->is_potion()) {
         MINICON("You quaff the %s", what->text_the().c_str());
+        used(what, this);
         game->tick_begin("player drunk an item");
     } else if (!what->is_usable()) {
         if (is_player()) {

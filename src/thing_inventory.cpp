@@ -221,7 +221,6 @@ _
             return false;
         }
 
-
         monstp->inventory_id.push_back(what->tp_id);
         item_slot = monstp->inventory_id.size() - 1;
     }
@@ -266,6 +265,8 @@ _
         }
 
         if (what->tp() == tpp) {
+            game->request_remake_inventory = true;
+
             inventory_particle(what, i, this);
 
             auto cnt = inventory_id_slot_count(i);
@@ -327,6 +328,8 @@ _
         }
 
         if (what->tp() == tpp) {
+            game->request_remake_inventory = true;
+
             if (particle_target) {
                 inventory_particle(what, i, particle_target);
             }

@@ -68,10 +68,12 @@ _
         return;
     }
 
+#if 0
     if (game->in_transit_item) {
-        t->log("Ignore, already in transit item0");
+        t->log("Ignore, already in transit item");
         return;
     }
+#endif
 
     if (wid_console_window && wid_console_window->visible) {
         t->log("Console visible");
@@ -266,7 +268,7 @@ _
         }
     }
 
-    if (!when_hovering_over && tp->is_bag()) {
+    {
         t->log("Thing info create bags");
 
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);

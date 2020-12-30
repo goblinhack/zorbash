@@ -12,6 +12,10 @@ void Thing::animate (void)
     Tilep tile;
     auto tpp = tp();
 
+    if (time_get_time_ms_cached() <= get_timestamp_sleep_end()) {
+        return;
+    }
+
 #ifdef DEBUG_ANIM
 if (is_blood()) { log("Animate"); }
 #endif

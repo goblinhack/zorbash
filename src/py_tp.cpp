@@ -1083,6 +1083,52 @@ PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject
     Py_RETURN_NONE;
 }
 
+PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *what = nullptr;
+    uint32_t id = 0;
+    uint32_t radius_min = 0;
+    uint32_t radius_max = 0;
+
+    static char *kwlist[] = {(char*) "id", 
+                             (char*) "what", 
+                             (char*) "min", 
+                             (char*) "max", 
+                             0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, 
+                                     &radius_min, &radius_max)) {
+        Py_RETURN_NONE;
+    }
+
+    if (!id) {
+        ERR("%s, missing 'id'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (!what) {
+        ERR("%s, missing 'what'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    PY_DBG("%s(%x, %s, %u, %u)", __FUNCTION__, id, what, radius_min, radius_max);
+
+    auto level = game->level;
+    if (!level) {
+        Py_RETURN_NONE;
+    }
+
+    auto t = level->thing_find(ThingId(id));
+    if (!t) {
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    t->spawn_radius_range(std::string(what), radius_min, radius_max);
+
+    Py_RETURN_NONE;
+}
+
 PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
