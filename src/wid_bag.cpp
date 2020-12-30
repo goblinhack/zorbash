@@ -260,6 +260,7 @@ _
     game->in_transit_item = wid_new_square_window("wid_bag in transit item");
     wid_set_pos(game->in_transit_item, tl, br);
     wid_set_style(game->in_transit_item, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(game->in_transit_item, true);
 
     wid_set_thing_id_context(game->in_transit_item, id);
     wid_set_on_mouse_up(game->in_transit_item, wid_in_transit_item_place);

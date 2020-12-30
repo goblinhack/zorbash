@@ -4095,6 +4095,54 @@ timestamp_t Thing::incr_timestamp_move_end (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// timestamp_sleep_end
+////////////////////////////////////////////////////////////////////////////
+timestamp_t Thing::get_timestamp_sleep_end (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->timestamp_sleep_end);
+    } else {
+        return (0);
+    }
+}
+
+timestamp_t Thing::set_timestamp_sleep_end (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_sleep_end = v);
+}
+
+timestamp_t Thing::decr_timestamp_sleep_end (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_sleep_end -= v);
+}
+
+timestamp_t Thing::incr_timestamp_sleep_end (timestamp_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_sleep_end += v);
+}
+
+timestamp_t Thing::decr_timestamp_sleep_end (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_sleep_end--);
+}
+
+timestamp_t Thing::incr_timestamp_sleep_end (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->timestamp_sleep_end++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // timestamp_last_wander_try
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_last_wander_try (void) const
@@ -4532,6 +4580,7 @@ const std::string& Thing::str7 (void) const {_ return (tp()->str7()); }
 const std::string& Thing::long_text_description (void) const {_ return (tp()->long_text_description()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }
 const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do()); }
+const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
 const std::string& Thing::text_title (void) const {_ return (tp()->text_title()); }
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }

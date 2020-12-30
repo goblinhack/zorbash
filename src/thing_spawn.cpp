@@ -131,6 +131,60 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     return true;
 }
 
+bool Thing::spawn_radius_range (const std::string& what, uint32_t radius_min, uint32_t radius_max)
+{_
+    log("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
+
+    auto tpp = tp_find(what);
+
+    //
+    // Don't spawn too many monsts
+    //
+    if (tpp->is_monst()) {
+        if (level->monst_count >= LEVELS_MONST_COUNT) {
+            return false;
+        }
+    }
+
+    for (auto x = mid_at.x - radius_max; x <= mid_at.x + radius_max; x++) {
+        for (auto y = mid_at.y - radius_max; y <= mid_at.y + radius_max; y++) {
+            float dist = DISTANCE(x, y, mid_at.x, mid_at.y);
+
+            if (dist > radius_max) {
+                continue;
+            }
+
+            if (dist < radius_min) {
+                continue;
+            }
+
+            if (level->is_door(x,y)         ||
+                level->is_secret_door(x,y)  ||
+                level->is_generator(x,y)    ||
+                level->is_hazard(x,y)       ||
+                level->is_rock(x, y)        ||
+                level->is_wall(x, y)) {
+                continue;
+            }
+
+            if (will_avoid(point(x, y))) {
+                continue;
+            }
+
+            if (tpp->will_avoid(level, point(x, y))) {
+                continue;
+            }
+
+            auto c = level->thing_new(what, fpoint(x, y));
+            c->inherit_from(this);
+            c->location_check();
+            c->set_timestamp_sleep_end(time_get_time_ms_cached() + dist * 100);
+        }
+    }
+
+    return true;
+}
+
 bool Thing::spawn_fire (const std::string& what)
 {_
     log("Spawn fire: %s", what.c_str());

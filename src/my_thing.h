@@ -137,6 +137,7 @@ public:
     timestamp_t  timestamp_lunge_end {};
     timestamp_t  timestamp_move_begin {};
     timestamp_t  timestamp_move_end {};
+    timestamp_t  timestamp_sleep_end {};
     uint32_t     tick = {};                  // Increments on completion of move
     uint32_t     tick_last_did_something {};
     uint32_t     tick_last_escape {};
@@ -270,7 +271,7 @@ private:
     //
     // As this is called a lot, probably worth the memory
     //
-    Tpp      mytp                 {};
+    Tpp      mytp                              {};
 
 public:
     const Tpp tp_or_update(void)
@@ -681,6 +682,13 @@ public:
     timestamp_t decr_timestamp_move_end(void);
     timestamp_t incr_timestamp_move_end(void);
 
+    timestamp_t set_timestamp_sleep_end(timestamp_t);
+    timestamp_t get_timestamp_sleep_end(void) const;
+    timestamp_t decr_timestamp_sleep_end(timestamp_t);
+    timestamp_t incr_timestamp_sleep_end(timestamp_t);
+    timestamp_t decr_timestamp_sleep_end(void);
+    timestamp_t incr_timestamp_sleep_end(void);
+
     timestamp_t set_timestamp_last_wander_try(timestamp_t);
     timestamp_t get_timestamp_last_wander_try(void) const;
     timestamp_t decr_timestamp_last_wander_try(timestamp_t);
@@ -904,6 +912,7 @@ public:
     bool spawn_fire(const std::string& what);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
+    bool spawn_radius_range(const std::string& what, uint32_t radius_min, uint32_t radius_max);
     bool spawn_under(const std::string& what);
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);

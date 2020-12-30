@@ -1,8 +1,8 @@
 import zx
 import tp
 
-def effect(me, x, y):
-    zx.tp_spawn_next_to(me, "potion_descent_effect")
+def tp_effect(me, x, y):
+    zx.tp_spawn_radius_range(me, "potion_descent_effect", min=1, max=5)
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
@@ -29,16 +29,16 @@ def tp_init(name, text_name, short_text_name):
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=cyan$A swirling milky blue potion of descent")
-    x.set_on_use_do("potion_descent.effect()")
+    x.set_on_use_do("potion_descent.tp_effect()")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    x.set_tile(tile=name + ".1", delay_ms=1000)
-    x.set_tile(tile=name + ".2", delay_ms=1000)
-    x.set_tile(tile=name + ".3", delay_ms=1000)
-    x.set_tile(tile=name + ".4", delay_ms=1000)
-    x.set_tile(tile=name + ".5", delay_ms=1000)
-    x.set_tile(tile=name + ".6", delay_ms=1000)
+    x.set_tile(tile=name + ".1", delay_ms=500)
+    x.set_tile(tile=name + ".2", delay_ms=500)
+    x.set_tile(tile=name + ".3", delay_ms=500)
+    x.set_tile(tile=name + ".4", delay_ms=500)
+    x.set_tile(tile=name + ".5", delay_ms=500)
+    x.set_tile(tile=name + ".6", delay_ms=500)
 
     x.update()
 

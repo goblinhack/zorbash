@@ -129,6 +129,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t  timestamp_lunge_end       */ in >> bits(T); my.t->timestamp_lunge_end = load(T);
     /* timestamp_t  timestamp_move_begin      */ in >> bits(T); my.t->timestamp_move_begin = load(T);
     /* timestamp_t  timestamp_move_end        */ in >> bits(T); my.t->timestamp_move_end = load(T);
+    /* timestamp_t  timestamp_sleep_end       */ in >> bits(T); my.t->timestamp_sleep_end = load(T);
     /* uint32_t     tick                      */ in >> bits(my.t->tick);
     /* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);

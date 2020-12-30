@@ -110,15 +110,13 @@ _
         //
     }
 
-    if (is_bag() || is_player()) {
-        log("Update bag with drop of: %s", what->to_string().c_str());
-        bag_remove(what);
-        while (bag_compress()) { }
-    }
+    log("Update bag with drop of: %s", what->to_string().c_str());
+    bag_remove(what);
+    while (bag_compress()) { }
 
     what->remove_owner();
-
     monstp->carrying.remove(what->id);
+    game->request_remake_inventory = true;
 
     log("Dropped %s into the ether", what->to_string().c_str());
 
