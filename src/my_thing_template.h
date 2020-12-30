@@ -320,6 +320,7 @@ private:
     std::string _light_color;
     std::string _name;
     std::string _on_birth_do;
+    std::string _on_use_do;
     std::string _on_death_do;
     std::string _spawn_on_shoved;
     std::string _str1;
@@ -413,6 +414,7 @@ public:
     const std::string& light_color(void) const;
     const std::string& name(void) const;
     const std::string& on_birth_do(void) const;
+    const std::string& on_use_do(void) const;
     const std::string& on_death_do(void) const;
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
@@ -885,6 +887,7 @@ public:
     void set_name(const std::string &);
     void set_normal_placement_rules(int);
     void set_on_birth_do(const std::string &);
+    void set_on_use_do(const std::string &);
     void set_on_death_do(const std::string &);
     void set_spawn_on_shoved(const std::string &);
     void set_stats01(int);

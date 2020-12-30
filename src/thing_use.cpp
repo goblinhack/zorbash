@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_python.h"
 
 void Thing::used (Thingp what, Thingp target)
 {_
@@ -36,9 +37,28 @@ void Thing::used (Thingp what, Thingp target)
 
 bool Thing::use (Thingp what)
 {_
+    auto on_use = what->tp()->on_use_do();
+    if (!std::empty(on_use)) {
+        auto t = split_tokens(on_use, '.');
+        if (t.size() == 2) {
+            auto mod = t[0];
+            auto fn = t[1];
+            std::size_t found = fn.find("()");
+            if (found != std::string::npos) {
+                fn = fn.replace(found, 2, "");
+            }
+
+            what->log("call %s.%s()", mod.c_str(), fn.c_str());
+            py_call_void_fn(mod.c_str(), fn.c_str(),
+                            id.id, (int)mid_at.x, (int)mid_at.y);
+        } else {
+            ERR("Bad on_use call [%s] expected mod:function, got %d elems",
+                on_use.c_str(), (int)on_use.size());
+        }
+    }
+
     if (what->is_weapon()) {
         MINICON("You wield the %s", what->text_the().c_str());
-        MINICON("TODO");
         game->tick_begin("player used an item");
     } else if (what->is_food()) {
         eat(what);
@@ -46,7 +66,6 @@ bool Thing::use (Thingp what)
         game->tick_begin("player ate an item");
     } else if (what->is_potion()) {
         MINICON("You quaff the %s", what->text_the().c_str());
-        MINICON("TODO");
         game->tick_begin("player drunk an item");
     } else if (!what->is_usable()) {
         if (is_player()) {

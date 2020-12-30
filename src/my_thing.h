@@ -922,6 +922,7 @@ public:
     const std::string& light_color(void) const;
     const std::string& long_text_description(void) const;
     const std::string& on_birth_do(void) const;
+    const std::string& on_use_do(void) const;
     const std::string& on_death_do(void) const;
     const std::string& short_text_name(void) const;
     const std::string& spawn_on_shoved(void) const;
