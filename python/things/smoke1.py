@@ -3,21 +3,20 @@ import tp
 
 def tp_init(name):
     x = tp.Tp(name)
-
     x.set_gfx_animated(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_is_interesting(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_removable_if_out_of_slots(True)
+    x.set_is_able_to_fall(True)
     x.set_is_active(True) # for lifespan tick
     x.set_is_interesting(True)
+    x.set_is_loggable_for_important_stuff(True)
+    x.set_is_loggable_for_unimportant_stuff(True)
+    x.set_is_removable_if_out_of_slots(True)
     x.set_is_smoke(True)
     x.set_text_a_or_an("");
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_text_description("Whisps of smoke")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     delay = 150
     x.set_tile(tile=name + ".1", delay_ms=delay)

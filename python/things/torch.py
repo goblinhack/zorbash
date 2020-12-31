@@ -4,8 +4,6 @@ import tp
 
 def tp_init(name, text_name, tiles=[]):
     x = tp.Tp(name, text_name)
-
-    x.set_text_a_or_an("a");
     x.set_ai_obstacle(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
@@ -15,9 +13,9 @@ def tp_init(name, text_name, tiles=[]):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_is_combustible(True)
-    x.set_on_death_is_corpse(True)
+    x.set_is_able_to_fall(True)
     x.set_is_active(True) # for pushing and falling
+    x.set_is_combustible(True)
     x.set_is_dead_on_shove(True)
     x.set_is_fire(True)
     x.set_is_flammable(True)
@@ -33,10 +31,12 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_torch(True)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
+    x.set_on_death_is_corpse(True)
     x.set_spawn_on_shoved("fire")
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_a_or_an("a");
     x.set_text_description("A beacon of light in this blighted place")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     delay=100
     for t in tiles:

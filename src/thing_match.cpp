@@ -426,10 +426,10 @@ bool Thing::match (const std::string& what)
     if (is_rrr50() && (what == "is_rrr50")) {
         return true;
     }
-    if (is_rrr51() && (what == "is_rrr51")) {
+    if (is_critical_to_level() && (what == "is_critical_to_level")) {
         return true;
     }
-    if (is_rrr52() && (what == "is_rrr52")) {
+    if (is_able_to_fall() && (what == "is_able_to_fall")) {
         return true;
     }
     if (is_temporary_bag() && (what == "is_temporary_bag")) {

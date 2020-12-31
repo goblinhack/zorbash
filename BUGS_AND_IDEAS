@@ -1,12 +1,14 @@
 bugs
 ----
 
+- non interesting things cannot fall
+- throw potion
+- potion break on fall
+- can water fall
+- potion enchant radius
+
 upcoming work
 -------------
-- descent potion, that can be taken or thrown
-- potion descent creates chasm
-- potion break on fall
-- potion enchant radius
 - moving floor
 - some monsters just walk in a circular path - spiders etc
 - shove chocolate frog statue, get frog?

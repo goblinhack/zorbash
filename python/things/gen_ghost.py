@@ -6,7 +6,6 @@ def spawn(me, x, y):
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
@@ -16,6 +15,7 @@ def tp_init(name, text_name):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_able_to_fall(True)
     x.set_is_acid_hater(True)
     x.set_is_active(True)
     x.set_is_attack_shove_chance_d1000(200)
@@ -27,13 +27,13 @@ def tp_init(name, text_name):
     x.set_is_fire_hater(100)
     x.set_is_generator(True)
     x.set_is_interesting(True)
-    x.set_is_shown_on_leftbar(True)
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movement_blocking_soft(True)
     x.set_is_resurrectable(True)
     x.set_is_shovable(True)
+    x.set_is_shown_on_leftbar(True)
     x.set_is_water_hater(100)
     x.set_light_color("cyan")
     x.set_normal_placement_rules(True)

@@ -5,8 +5,6 @@ import tp
 def tp_init(name, text_name, tiles=[]):
 
     x = tp.Tp(name, text_name)
-
-    x.set_text_a_or_an("a");
     x.set_ai_obstacle(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
@@ -14,14 +12,16 @@ def tp_init(name, text_name, tiles=[]):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_able_to_fall(True)
     x.set_is_floor_deco(True)
     x.set_is_interesting(True)
-    x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_loggable_for_important_stuff(False)
+    x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_movement_blocking_hard(True)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_a_or_an("a");
     x.set_text_description("An aged and moss-covered stone pillar")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     for t in tiles:
         x.set_tile(tile=t)

@@ -4,16 +4,18 @@ import tp
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
     x.set_collision_radius(0.40)
     x.set_gfx_animated(True)
+    x.set_gfx_health_bar_shown_only_when_injured(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
+    x.set_gfx_shown_in_bg(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_able_to_fall(True)
     x.set_is_attackable_by_player(True)
     x.set_is_combustible(True)
     x.set_is_cursor_can_hover_over(True)
@@ -21,8 +23,6 @@ def tp_init(name, text_name):
     x.set_is_double_damage_from_fire(True)
     x.set_is_fire_hater(100)
     x.set_is_flammable(True)
-    x.set_gfx_health_bar_shown_only_when_injured(True)
-    x.set_gfx_shown_in_bg(True)
     x.set_is_interesting(True)
     x.set_is_light_blocker(True)
     x.set_is_movement_blocking_hard(True)

@@ -230,8 +230,8 @@ int Tp::is_rrr48(void) const { return _is_rrr48; }
 int Tp::is_rrr49(void) const { return _is_rrr49; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
 int Tp::is_rrr50(void) const { return _is_rrr50; }
-int Tp::is_rrr51(void) const { return _is_rrr51; }
-int Tp::is_rrr52(void) const { return _is_rrr52; }
+int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
+int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_temporary_bag(void) const { return _is_temporary_bag; }
 int Tp::is_treasure_class_c(void) const { return _is_treasure_class_c; }
 int Tp::bag_item_height(void) const { return _bag_item_height; }
@@ -471,8 +471,8 @@ void Tp::set_is_rrr48(int v) { _is_rrr48 = v; }
 void Tp::set_is_rrr49(int v) { _is_rrr49 = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
 void Tp::set_is_rrr50(int v) { _is_rrr50 = v; }
-void Tp::set_is_rrr51(int v) { _is_rrr51 = v; }
-void Tp::set_is_rrr52(int v) { _is_rrr52 = v; }
+void Tp::set_is_critical_to_level(int v) { _is_critical_to_level = v; }
+void Tp::set_is_able_to_fall(int v) { _is_able_to_fall = v; }
 void Tp::set_is_temporary_bag(int v) { _is_temporary_bag = v; }
 void Tp::set_is_treasure_class_c(int v) { _is_treasure_class_c = v; }
 void Tp::set_bag_item_height(int v) { _bag_item_height = v; }

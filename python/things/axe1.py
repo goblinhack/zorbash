@@ -4,7 +4,6 @@ import tp
 
 def init_swing(name):
     x = tp.Tp(name)
-
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
@@ -13,19 +12,20 @@ def init_swing(name):
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_animated_can_vflip(True)
-    x.set_gfx_dead_anim(False)
     x.set_gfx_attack_anim(True)
+    x.set_gfx_dead_anim(False)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_able_to_fall(True)
     x.set_is_active(True)
     x.set_is_interesting(True)
-    x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_loggable_for_important_stuff(True)
+    x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
     x.set_text_a_or_an("a");
-    x.set_z_prio(zx.MAP_PRIO_BEHIND)
     x.set_text_description("Thy shining pointy mechanism of justice")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
+    x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     delay = 20
     x.set_tile(tile=name + "_left.1", delay_ms=delay, is_dir_left=True)
@@ -61,20 +61,20 @@ def init_swing(name):
 
 def init_carry(name):
     x = tp.Tp(name)
-
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
-    x.set_gfx_weapon_carry_anim(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_gfx_weapon_carry_anim(True)
+    x.set_is_able_to_fall(False)
     x.set_is_active(True)
-    x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_loggable_for_important_stuff(True)
+    x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
     x.set_text_a_or_an("a");
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_text_description("Thy shining pointy mechanism of justice")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     delay = 550
     x.set_tile(tile=name + ".1", delay_ms=delay)
@@ -84,29 +84,29 @@ def init_carry(name):
 
 def init_weapon(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
-
+    x.set_bag_item_height(4)
+    x.set_bag_item_width(4)
     x.set_gfx_anim_attack("axe1_swing")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_able_to_fall(False)
     x.set_is_collectable(True)
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_bag_item_width(4)
-    x.set_bag_item_height(4)
-    x.set_is_treasure_class_b(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_treasure(True)
+    x.set_is_treasure_class_b(True)
     x.set_is_weapon(True)
+    x.set_long_text_description("A gleaming axe. It's edge is hungry.")
     x.set_stats_attack_dice("1d10+1")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy choppy means of justice")
-    x.set_long_text_description("A gleaming axe. It's edge is hungry.")
     x.set_weapon_carry_anim("axe1_carry")
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)
