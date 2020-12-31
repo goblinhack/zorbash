@@ -158,20 +158,8 @@ bool Thing::spawn_radius_range (const std::string& what, uint32_t radius_min, ui
                 continue;
             }
 
-            if (level->is_door(x,y)         ||
-                level->is_secret_door(x,y)  ||
-                level->is_generator(x,y)    ||
-                level->is_hazard(x,y)       ||
-                level->is_rock(x, y)        ||
+            if (level->is_rock(x, y) ||
                 level->is_wall(x, y)) {
-                continue;
-            }
-
-            if (will_avoid(point(x, y))) {
-                continue;
-            }
-
-            if (tpp->will_avoid(level, point(x, y))) {
                 continue;
             }
 

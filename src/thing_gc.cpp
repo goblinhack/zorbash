@@ -47,3 +47,12 @@ _
 
     all_gc_things.clear();
 }
+
+void Thing::gc (void)
+{_
+    auto result = level->all_gc_things.insert(std::pair(id, this));
+    if (result.second == false) {
+        err("Failed to insert into gc thing map");
+    }
+}
+

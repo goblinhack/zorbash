@@ -884,8 +884,8 @@ public:
     bool describe_when_in_inventory(void);
     bool drop(Thingp w);
     bool drop(Thingp w, Thingp target);
-    bool drop_into_ether(Thingp w);
     bool drop_from_ether(Thingp w);
+    bool drop_into_ether(Thingp w);
     bool eat(Thingp it);
     bool entrance_tick();
     bool exit_tick();
@@ -899,7 +899,10 @@ public:
     bool is_enemy(Thingp attacker) const;
     bool is_obstacle_for_me(const point&);
     bool is_on_fire(void);
+    bool kill_if(const std::string& what, const point &p);
+    bool place(const std::string& what, const point &p);
     bool location_check();
+    bool match(const std::string& what);
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
     bool move_no_shove(fpoint future_pos);
@@ -931,8 +934,8 @@ public:
     const std::string& light_color(void) const;
     const std::string& long_text_description(void) const;
     const std::string& on_birth_do(void) const;
-    const std::string& on_use_do(void) const;
     const std::string& on_death_do(void) const;
+    const std::string& on_use_do(void) const;
     const std::string& short_text_name(void) const;
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
@@ -1133,7 +1136,6 @@ public:
     int is_rrr50(void) const;
     int is_rrr51(void) const;
     int is_rrr52(void) const;
-    int is_temporary_bag(void) const;
     int is_rrr59(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;
@@ -1146,6 +1148,7 @@ public:
     int is_smoke(void) const;
     int is_stamina_check(void) const;
     int is_steal_item_chance_d1000(void) const;
+    int is_temporary_bag(void) const;
     int is_throwable(void) const;
     int is_torch(void) const;
     int is_treasure(void) const;
@@ -1255,7 +1258,6 @@ public:
     void gc(void);
     void hide();
     void hooks_remove();
-    void remove_all_references();
     void hunger_clock();
     void inherit_from(Thingp it);
     void init(Levelp, const std::string& name, fpoint at, fpoint jitter);
@@ -1277,9 +1279,9 @@ public:
     void minicon_(const char *fmt, va_list args) const; // compile error without
     void move_carried_items(void);
     void move_carried_items_immediately(void);
+    void move_completed(void);
     void move_delta(fpoint);
     void move_finish(void);
-    void move_completed(void);
     void move_set_dir_from_delta(fpoint);
     void move_to(fpoint to);
     void move_to(fpoint to, uint32_t speed);
@@ -1287,6 +1289,7 @@ public:
     void move_to_immediately_delta(fpoint delta);
     void msg(const std::string&);
     void reinit(void);
+    void remove_all_references();
     void remove_owner(void);
     void rest();
     void resurrect_tick();

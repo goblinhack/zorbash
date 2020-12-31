@@ -167,6 +167,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_inventory.o 	\
     $(OBJDIR)/thing_item.o 		\
     $(OBJDIR)/thing_jump.o 		\
+    $(OBJDIR)/thing_kill_if.o 		\
+    $(OBJDIR)/thing_place.o 		\
+    $(OBJDIR)/thing_kill.o 		\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
@@ -174,6 +177,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_location.o 		\
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\
+    $(OBJDIR)/thing_match.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_move_dir.o 		\
     $(OBJDIR)/thing_msg.o 		\
@@ -220,8 +224,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_rightbar.o 		\
     $(OBJDIR)/wid_text_box.o 		\
-    $(OBJDIR)/wid_thing_info.o 		\
     $(OBJDIR)/wid_thing_collect.o 	\
+    $(OBJDIR)/wid_thing_info.o 		\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
     $(OBJDIR)/world_fini.o 		\

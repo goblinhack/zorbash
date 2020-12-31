@@ -8,7 +8,7 @@
 #define _MY_TOKEN_H_
 
 #include "my_string.h"
-#include "my_slre.h"
+#include "slre.h"
 
 typedef struct tokens_t_ {
     struct slre regexp[MAXSHORTSTR];

@@ -1206,3 +1206,105 @@ PyObject *tp_spawn_under (PyObject *obj, PyObject *args, PyObject *keywds)
 
     Py_RETURN_NONE;
 }
+
+PyObject *tp_kill_if (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *what = nullptr;
+    uint32_t id = 0;
+    int x = -1;
+    int y = -1;
+
+    static char *kwlist[] = {(char*) "id", (char*) "what", (char*) "x", (char*) "y", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+        Py_RETURN_NONE;
+    }
+
+    if (!id) {
+        ERR("%s, missing 'id'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (!what) {
+        ERR("%s, missing 'what'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (x == -1) {
+        ERR("%s, missing 'x'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (y == -1) {
+        ERR("%s, missing 'y'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    PY_DBG("%s(%x, %s, %d, %d)", __FUNCTION__, id, what, x, y);
+
+    auto level = game->level;
+    if (!level) {
+        Py_RETURN_NONE;
+    }
+
+    auto t = level->thing_find(ThingId(id));
+    if (!t) {
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    t->kill_if(std::string(what), point(x, y));
+
+    Py_RETURN_NONE;
+}
+
+PyObject *tp_place (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *what = nullptr;
+    uint32_t id = 0;
+    int x = -1;
+    int y = -1;
+
+    static char *kwlist[] = {(char*) "id", (char*) "what", (char*) "x", (char*) "y", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+        Py_RETURN_NONE;
+    }
+
+    if (!id) {
+        ERR("%s, missing 'id'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (!what) {
+        ERR("%s, missing 'what'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (x == -1) {
+        ERR("%s, missing 'x'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (y == -1) {
+        ERR("%s, missing 'y'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    PY_DBG("%s(%x, %s, %d, %d)", __FUNCTION__, id, what, x, y);
+
+    auto level = game->level;
+    if (!level) {
+        Py_RETURN_NONE;
+    }
+
+    auto t = level->thing_find(ThingId(id));
+    if (!t) {
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    t->place(std::string(what), point(x, y));
+
+    Py_RETURN_NONE;
+}

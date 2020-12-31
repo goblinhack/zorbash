@@ -4586,6 +4586,7 @@ const std::string& Thing::text_title (void) const {_ return (tp()->text_title())
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }
 const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on_shoved()); }
 const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }
+const std::string& Thing::short_text_name (void) const {_ return (tp()->short_text_name()); }
 const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }
 const std::string& Thing::gfx_anim_attack (void) const {_ return (tp()->gfx_anim_attack()); }

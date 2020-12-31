@@ -7,7 +7,7 @@
 
 #include "my_main.h"
 #include "my_sdl.h"
-#include "my_slre.h"
+#include "slre.h"
 #include "my_wid_minicon.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
