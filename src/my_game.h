@@ -7,11 +7,11 @@
 #ifndef _MY_GAME_H_
 #define _MY_GAME_H_
 
-#include "my_main.h"
-#include "my_sdl.h"
-#include "my_point.h"
+// REMOVED #include "my_main.h"
+// REMOVED #include "my_sdl.h"
+// REMOVED #include "my_point.h"
 #include "my_world.h"
-#include "my_dmap.h"
+// REMOVED #include "my_dmap.h"
 #include <list>
 
 class WidBag;

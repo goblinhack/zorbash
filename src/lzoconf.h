@@ -38,7 +38,7 @@
 #  include <config.h>
 #endif
 #include <limits.h>
-#include <stddef.h>
+// REMOVED #include <stddef.h>
 
 
 /***********************************************************************
@@ -57,7 +57,7 @@
 
 /* get OS and architecture defines */
 #ifndef __LZODEFS_H_INCLUDED
-#include <lzo/lzodefs.h>
+// REMOVED #include <lzo/lzodefs.h>
 #endif
 
 

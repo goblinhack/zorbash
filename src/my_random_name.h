@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+// REMOVED #include <string>
 
 extern const char * dict1_name(void);
 extern const char * dict2_name(void);

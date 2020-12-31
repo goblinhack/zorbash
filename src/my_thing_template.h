@@ -7,8 +7,8 @@
 #ifndef _MY_THING_TEMPLATE_H
 #define _MY_THING_TEMPLATE_H
 
-#include <unordered_map>
-#include <memory>
+// REMOVED #include <unordered_map>
+// REMOVED #include <memory>
 
 #include "my_dice.h"
 #include "my_tile.h"

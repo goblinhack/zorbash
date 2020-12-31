@@ -4,7 +4,7 @@
 //
 
 #include "my_main.h"
-#include "my_tile.h"
+// REMOVED #include "my_tile.h"
 #include "my_charmap.h"
 
 std::vector<Charmap> Charmap::all_charmaps;

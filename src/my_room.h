@@ -11,7 +11,7 @@
 #include "my_point.h"
 #include "my_depth.h"
 #include "my_charmap.h"
-#include <vector>
+// REMOVED #include <vector>
 
 typedef class Room *Roomp;
 typedef std::vector<Roomp> Rooms;

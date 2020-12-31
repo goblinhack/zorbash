@@ -258,6 +258,6 @@ extern void ctrlc_handler(int sig);
 //
 #include "c_plus_plus_serializer.h"
 
-#include "my_globals.h"
+// REMOVED #include "my_globals.h"
 
 #endif

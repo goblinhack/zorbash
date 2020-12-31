@@ -4,8 +4,8 @@
 //
 
 #pragma once
-#include <vector>
-#include "my_bounds_check.h"
+// REMOVED #include <vector>
+// REMOVED #include "my_bounds_check.h"
 
 //
 // Single dimension array check

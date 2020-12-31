@@ -7,7 +7,7 @@
 #ifndef _MY_FONT_H_
 #define _MY_FONT_H_
 
-#include <memory>
+// REMOVED #include <memory>
 
 typedef class Font * Fontp;
 extern Fontp fixed_font;

@@ -24,7 +24,7 @@ template <class T> std::vector<T> make_range (T start, T stop) {
 // Create a vector of numbers and then shuffle them
 //
 #include <random>
-#include <algorithm>
+// REMOVED #include <algorithm>
 extern std::default_random_engine rng;
 template <class T> std::vector<T> make_shuffled_range (const size_t how_many) {
     std::vector<T> v(how_many);

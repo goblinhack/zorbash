@@ -7,10 +7,10 @@
 #ifndef _MY_CALLSTACK_H_
 #define _MY_CALLSTACK_H_
 
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <stdio.h>
+// REMOVED #include <string>
+// REMOVED #include <vector>
+// REMOVED #include <algorithm>
+// REMOVED #include <stdio.h>
 
 #define CAT(A, B) A ## B
 #define CAT2(A, B) CAT(A, B)

@@ -7,7 +7,7 @@
 #ifndef _MY_UI_WID_BAG_H_
 #define _MY_UI_WID_BAG_H_
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_wid.h"
 
 class WidBag {
