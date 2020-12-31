@@ -373,6 +373,21 @@ void Thing::init (Levelp level,
     }
 
     is_the_grid = tp()->is_the_grid();
+
+    //
+    // If spawning hazards, do a location check for all things now on it.
+    //
+    if (!level->is_starting) {
+        if (is_hazard()) {
+            FOR_ALL_INTERESTING_THINGS(level, it, mid_at.x, mid_at.y) {
+                if (this == it) {
+                    continue;
+                }
+
+                it->location_check();
+            } FOR_ALL_THINGS_END()
+        }
+    }
 }
 
 void Thing::reinit (void)

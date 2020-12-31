@@ -5,7 +5,7 @@ import tp
 def tp_init(name):
     text_name = "the grid"
     x = tp.Tp(name, text_name)
-
+    x.set_is_able_to_fall(False)
     x.set_is_the_grid(True)
     x.set_text_a_or_an("the");
     x.set_text_description("The grid")

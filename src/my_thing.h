@@ -1134,8 +1134,8 @@ public:
     int is_rrr49(void) const;
     int is_rrr5(void) const;
     int is_rrr50(void) const;
-    int is_rrr51(void) const;
-    int is_rrr52(void) const;
+    int is_critical_to_level(void) const;
+    int is_able_to_fall(void) const;
     int is_rrr59(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;

@@ -735,14 +735,14 @@ int Thing::is_rrr50(void) const
     return (tp()->is_rrr50());
 }
 
-int Thing::is_rrr51(void) const
+int Thing::is_critical_to_level(void) const
 {_
-    return (tp()->is_rrr51());
+    return (tp()->is_critical_to_level());
 }
 
-int Thing::is_rrr52(void) const
+int Thing::is_able_to_fall(void) const
 {_
-    return (tp()->is_rrr52());
+    return (tp()->is_able_to_fall());
 }
 
 int Thing::is_temporary_bag(void) const

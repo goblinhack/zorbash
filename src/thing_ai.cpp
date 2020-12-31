@@ -76,4 +76,9 @@ _
     //
     is_tick_done = true;
     move_finish();
+
+    //
+    // If cannot move (maybe over a chasm that spawned) then fall
+    //
+    location_check();
 }

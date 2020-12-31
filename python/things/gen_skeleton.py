@@ -6,7 +6,6 @@ def spawn(me, x, y):
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
@@ -16,6 +15,7 @@ def tp_init(name, text_name):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_able_to_fall(True)
     x.set_is_acid_hater(True)
     x.set_is_active(True)
     x.set_is_attack_shove_chance_d1000(200)
@@ -42,10 +42,10 @@ def tp_init(name, text_name):
     x.set_stats_health_initial(30)
     x.set_stats_strength(15)
     x.set_text_a_or_an("a");
+    x.set_text_description("The dead rise again here")
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
-    x.set_text_description("The dead rise again here")
 
     delay = 200
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

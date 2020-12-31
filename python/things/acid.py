@@ -4,9 +4,9 @@ import tp
 
 def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     x = tp.Tp(name, text_name, short_text_name)
-
     x.set_ai_obstacle(True)
     x.set_gfx_show_outlined(True)
+    x.set_is_able_to_fall(True)
     x.set_is_acid(True)
     x.set_is_hazard(True)
     x.set_is_light_strength(1)

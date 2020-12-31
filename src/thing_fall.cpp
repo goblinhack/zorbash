@@ -20,6 +20,18 @@ void Thing::fall (float fall_height, timestamp_t ms)
         return;
     }
 
+    if (is_critical_to_level()) {
+        return;
+    }
+
+    if (!is_able_to_fall()) {
+        return;
+    }
+
+    if (is_floating()) {
+        return;
+    }
+
     auto t = set_timestamp_fall_begin(time_get_time_ms_cached());
     set_timestamp_fall_end(t + ms);
 
@@ -35,6 +47,10 @@ void Thing::fall (float fall_height, timestamp_t ms)
             MINICON("%%fg=green$The fall puts out the flames!%%fg=reset$");
         }
         unset_on_fire();
+    }
+
+    if (is_monst() || is_item()) {
+        wobble(360);
     }
 }
 
@@ -102,11 +118,6 @@ _
         return false;
     }
 
-    if (is_floating()) {
-        log("No, is floating");
-        return false;
-    }
-
     auto tries = 0;
     for (;;) {
         int x;
@@ -163,7 +174,7 @@ _
             if (is_player()) {
                 game->level = next_level;
                 MINICON("%%fg=red$You tumble into the void!%%fg=reset$");
-            } else {
+            } else if (is_monst() || is_item()) {
                 MINICON("%s tumbles into the void!", text_The().c_str());
             }
 

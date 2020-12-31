@@ -5,9 +5,9 @@ import tp
 def tp_init(name):
     text_name = "cursor"
     x = tp.Tp(name, text_name)
-
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
+    x.set_is_able_to_fall(False)
     x.set_is_active(True)
     x.set_is_cursor(True)
     x.set_is_floating(True)

@@ -13,6 +13,9 @@
 #include "my_python.h"
 #include "my_log.h"
 
+//
+// Lower level function than dead. Adds the thing to gc.
+//
 void Thing::kill (Thingp killer, const char *reason)
 {_
     if (is_dead) {

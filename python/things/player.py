@@ -4,14 +4,13 @@ import tp
 
 def tp_init(name, text_name, short_text_name, title):
     x = tp.Tp(name, text_name, short_text_name)
-
+    x.set_bag_height(12)
+    x.set_bag_width(12)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(20)
     x.set_collision_radius(0.40)
-    x.set_bag_width(12)
-    x.set_bag_height(12)
     x.set_gfx_anim_attack("punch1")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
@@ -19,6 +18,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_change_levels(True)
+    x.set_is_able_to_fall(True)
     x.set_is_acid_hater(True)
     x.set_is_active(True)
     x.set_is_attack_shove(True)

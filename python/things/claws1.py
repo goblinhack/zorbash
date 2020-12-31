@@ -4,13 +4,13 @@ import tp
 
 def init1(name, text_name):
     x = tp.Tp(name, text_name)
-
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_animated_can_vflip(True)
     x.set_gfx_attack_anim(True)
     x.set_gfx_dead_anim(False)
     x.set_gfx_show_outlined(True)
+    x.set_is_able_to_fall(False)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_movable(True)

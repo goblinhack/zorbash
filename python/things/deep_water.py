@@ -4,11 +4,11 @@ import tp
 
 def tp_init(name, text_name, tiles=[]):
     x = tp.Tp(name, text_name)
-
     x.set_ai_obstacle(True)
     x.set_gfx_animated(True)
-    x.set_is_deep_water(True)
     x.set_gfx_shown_in_bg(True)
+    x.set_is_able_to_fall(False)
+    x.set_is_deep_water(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)

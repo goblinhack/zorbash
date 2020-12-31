@@ -3,7 +3,6 @@ import tp
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-
     x.set_ai_delay_after_moving_ms(10)
     x.set_ai_scent_distance(10)
     x.set_collision_attack(True)
@@ -18,6 +17,7 @@ def tp_init(name, text_name):
     x.set_gfx_moves_ahead_shown(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_change_levels(True)
+    x.set_is_able_to_fall(False)
     x.set_is_active(True)
     x.set_is_attack_lunge(True)
     x.set_is_attackable_by_monst(True)

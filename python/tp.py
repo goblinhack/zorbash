@@ -337,11 +337,11 @@ class Tp:
     def set_is_rrr50(self, value):
         zx.tp_set_is_rrr50(self, value)
 
-    def set_is_rrr51(self, value):
-        zx.tp_set_is_rrr51(self, value)
+    def set_is_critical_to_level(self, value):
+        zx.tp_set_is_critical_to_level(self, value)
 
-    def set_is_rrr52(self, value):
-        zx.tp_set_is_rrr52(self, value)
+    def set_is_able_to_fall(self, value):
+        zx.tp_set_is_able_to_fall(self, value)
 
     def set_is_rrr53(self, value):
         zx.tp_set_is_rrr53(self, value)
