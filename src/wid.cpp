@@ -9,7 +9,7 @@
 #include "my_depth.h"
 #include "my_wid.h"
 #include "my_main.h"
-#include "my_slre.h"
+#include "slre.h"
 #include "my_wid.h"
 #include "my_tex.h"
 #include "my_tile.h"

@@ -6,7 +6,7 @@
 #include <string.h>
 
 #include "my_main.h"
-#include "my_slre.h"
+#include "slre.h"
 #include "my_token.h"
 
 static tokens_t *tokens_parse (const char *input, tokens_t *tokens)

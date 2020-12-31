@@ -14,6 +14,8 @@
 
 bool Thing::chasm_tick (void)
 {_
+    log("Chasm tick");
+_
     if (get_immediate_owner()) {
         return false;
     }

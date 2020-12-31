@@ -1,4 +1,4 @@
-COMPILER_FLAGS=-Werror -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -Wsign-compare -fno-common -dynamic -DNDEBUG -g -Wall   -arch x86_64 -g  -DVERSION=\"0.0.4\" -DPYTHONVERSION=\"3.6\" -g -ggdb3 # AUTOGEN
+COMPILER_FLAGS=-Werror -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -Wsign-compare -fno-common -dynamic -DNDEBUG -g -Wall   -arch x86_64 -g  -DVERSION=\"0.0.4\" -DPYTHONVERSION=\"3.6\" -g -ggdb3 -O3 # AUTOGEN
     
 CLANG_COMPILER_WARNINGS=-Wall -Wmissing-prototypes -std=c++1z -stdlib=libc++ # AUTOGEN
 GCC_COMPILER_WARNINGS=-x c++ -Wall -std=c++2a -ffast-math  # AUTOGEN
@@ -180,6 +180,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_inventory.o 	\
     $(OBJDIR)/thing_item.o 		\
     $(OBJDIR)/thing_jump.o 		\
+    $(OBJDIR)/thing_kill_if.o 		\
+    $(OBJDIR)/thing_place.o 		\
+    $(OBJDIR)/thing_kill.o 		\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
@@ -187,6 +190,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_location.o 		\
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\
+    $(OBJDIR)/thing_match.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_move_dir.o 		\
     $(OBJDIR)/thing_msg.o 		\
@@ -233,8 +237,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_rightbar.o 		\
     $(OBJDIR)/wid_text_box.o 		\
-    $(OBJDIR)/wid_thing_info.o 		\
     $(OBJDIR)/wid_thing_collect.o 	\
+    $(OBJDIR)/wid_thing_info.o 		\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
     $(OBJDIR)/world_fini.o 		\
@@ -315,7 +319,7 @@ all: $(TARGET_GAME)
 .o/ascii.o: /usr/include/_types/_intmax_t.h /usr/include/_types/_uintmax_t.h
 .o/ascii.o: my_ptrcheck.h my_globals.h my_callstack.h my_array_bounds_check.h
 .o/ascii.o: my_bounds_check.h /usr/include/assert.h my_vector_bounds_check.h
-.o/ascii.o: my_sdl.h my_command.h my_token.h my_string.h my_slre.h my_font.h
+.o/ascii.o: my_sdl.h my_command.h my_token.h my_string.h slre.h my_font.h
 .o/ascii.o: my_game.h my_world.h my_level.h my_time.h /usr/include/unistd.h
 .o/ascii.o: /usr/include/sys/unistd.h
 .o/ascii.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -386,7 +390,7 @@ all: $(TARGET_GAME)
 .o/ascii_box.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
 .o/ascii_box.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
 .o/ascii_box.o: /usr/include/assert.h my_vector_bounds_check.h my_sdl.h
-.o/ascii_box.o: my_command.h my_token.h my_string.h my_slre.h
+.o/ascii_box.o: my_command.h my_token.h my_string.h slre.h
 .o/charmap.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/charmap.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/charmap.o: /usr/include/sys/_posix_availability.h
@@ -428,9 +432,8 @@ all: $(TARGET_GAME)
 .o/charmap.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/charmap.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/charmap.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/charmap.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/charmap.o: my_point.h my_math.h /usr/include/math.h my_color.h
-.o/charmap.o: my_charmap.h
+.o/charmap.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
+.o/charmap.o: my_math.h /usr/include/math.h my_color.h my_charmap.h
 .o/color.o: /usr/include/strings.h /usr/include/_types.h
 .o/color.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
 .o/color.o: /usr/include/sys/_symbol_aliasing.h
@@ -698,7 +701,7 @@ all: $(TARGET_GAME)
 .o/command.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/command.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/command.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/command.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/command.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/command.o: my_command_history.h
 .o/console.o: my_console.h my_thing_template.h my_dice.h my_tile.h my_main.h
 .o/console.o: my_sys.h my_pcg_basic.h /usr/include/inttypes.h
@@ -742,8 +745,8 @@ all: $(TARGET_GAME)
 .o/console.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/console.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/console.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/console.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/console.o: my_point.h my_math.h /usr/include/math.h my_color.h my_size.h
+.o/console.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
+.o/console.o: my_math.h /usr/include/math.h my_color.h my_size.h
 .o/dice.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/dice.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/dice.o: /usr/include/sys/_posix_availability.h /usr/include/Availability.h
@@ -1170,8 +1173,7 @@ all: $(TARGET_GAME)
 .o/file_log.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/file_log.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/file_log.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/file_log.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/file_log.o: my_log.h
+.o/file_log.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_log.h
 .o/file_read.o: /usr/include/strings.h /usr/include/_types.h
 .o/file_read.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
 .o/file_read.o: /usr/include/sys/_symbol_aliasing.h
@@ -1260,7 +1262,7 @@ all: $(TARGET_GAME)
 .o/font.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/font.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/font.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/font.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/font.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/font.o: my_math.h /usr/include/math.h my_color.h
 .o/game.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/game.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -1301,7 +1303,7 @@ all: $(TARGET_GAME)
 .o/game.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/game.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/game.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
 .o/game.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/game.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -1371,7 +1373,7 @@ all: $(TARGET_GAME)
 .o/game_config.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_config.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_config.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_config.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_config.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_config.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_config.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_config.o: /usr/include/sys/unistd.h
@@ -1404,6 +1406,7 @@ all: $(TARGET_GAME)
 .o/game_config.o: my_thing.h my_light.h my_thing_template.h my_dice.h
 .o/game_config.o: my_thing_ai.h my_wid_rightbar.h my_wid_leftbar.h
 .o/game_config.o: my_wid_inventory.h my_wid_thing_info.h
+.o/game_config.o: my_wid_thing_collect.h
 .o/game_config_gfx.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/game_config_gfx.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/game_config_gfx.o: /usr/include/sys/_symbol_aliasing.h
@@ -1454,7 +1457,7 @@ all: $(TARGET_GAME)
 .o/game_config_gfx.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/game_config_gfx.o: /usr/include/sys/_types/_wint_t.h
 .o/game_config_gfx.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_config_gfx.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_config_gfx.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_config_gfx.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_config_gfx.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_config_gfx.o: /usr/include/sys/unistd.h
@@ -1543,7 +1546,7 @@ all: $(TARGET_GAME)
 .o/game_config_keyboard.o: /usr/include/sys/_types/_wint_t.h
 .o/game_config_keyboard.o: /usr/include/_types/_wctype_t.h
 .o/game_config_keyboard.o: /usr/include/ctype.h /usr/include/_ctype.h
-.o/game_config_keyboard.o: /usr/include/runetype.h my_slre.h my_point.h
+.o/game_config_keyboard.o: /usr/include/runetype.h slre.h my_point.h
 .o/game_config_keyboard.o: my_math.h /usr/include/math.h my_world.h
 .o/game_config_keyboard.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_config_keyboard.o: /usr/include/sys/unistd.h
@@ -1631,9 +1634,9 @@ all: $(TARGET_GAME)
 .o/game_config_other.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/game_config_other.o: /usr/include/sys/_types/_wint_t.h
 .o/game_config_other.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_config_other.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/game_config_other.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/game_config_other.o: my_world.h my_level.h my_time.h /usr/include/unistd.h
+.o/game_config_other.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/game_config_other.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/game_config_other.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_config_other.o: /usr/include/sys/unistd.h
 .o/game_config_other.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/game_config_other.o: /usr/include/sys/_types/_seek_set.h
@@ -1718,9 +1721,9 @@ all: $(TARGET_GAME)
 .o/game_config_sound.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/game_config_sound.o: /usr/include/sys/_types/_wint_t.h
 .o/game_config_sound.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_config_sound.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/game_config_sound.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/game_config_sound.o: my_world.h my_level.h my_time.h /usr/include/unistd.h
+.o/game_config_sound.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/game_config_sound.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/game_config_sound.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_config_sound.o: /usr/include/sys/unistd.h
 .o/game_config_sound.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/game_config_sound.o: /usr/include/sys/_types/_seek_set.h
@@ -1798,7 +1801,7 @@ all: $(TARGET_GAME)
 .o/game_credits.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_credits.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_credits.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_credits.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_credits.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_credits.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_credits.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_credits.o: /usr/include/sys/unistd.h
@@ -1877,7 +1880,7 @@ all: $(TARGET_GAME)
 .o/game_dead.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_dead.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_dead.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_dead.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_dead.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_dead.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_dead.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_dead.o: /usr/include/sys/unistd.h
@@ -1954,7 +1957,7 @@ all: $(TARGET_GAME)
 .o/game_display.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_display.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_display.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_display.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_display.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_display.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_display.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_display.o: /usr/include/sys/unistd.h
@@ -2032,7 +2035,7 @@ all: $(TARGET_GAME)
 .o/game_dump.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_dump.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_dump.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_dump.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_dump.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_dump.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_dump.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_dump.o: /usr/include/sys/unistd.h
@@ -2107,7 +2110,7 @@ all: $(TARGET_GAME)
 .o/game_error.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_error.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_error.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_error.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_error.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_error.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_error.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_error.o: /usr/include/sys/unistd.h
@@ -2184,7 +2187,7 @@ all: $(TARGET_GAME)
 .o/game_fini.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_fini.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_fini.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_fini.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_fini.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_fini.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_fini.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_fini.o: /usr/include/sys/unistd.h
@@ -2258,7 +2261,7 @@ all: $(TARGET_GAME)
 .o/game_init.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_init.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_init.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_init.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_init.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_init.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_init.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_init.o: /usr/include/sys/unistd.h
@@ -2332,7 +2335,7 @@ all: $(TARGET_GAME)
 .o/game_load.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_load.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_load.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_load.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_load.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_load.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_load.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_load.o: /usr/include/sys/unistd.h
@@ -2418,7 +2421,7 @@ all: $(TARGET_GAME)
 .o/game_log.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_log.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_log.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_log.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_log.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_log.o: my_point.h my_math.h /usr/include/math.h my_world.h my_level.h
 .o/game_log.o: my_time.h /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/game_log.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -2494,7 +2497,7 @@ all: $(TARGET_GAME)
 .o/game_main_menu.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/game_main_menu.o: /usr/include/sys/_types/_wint_t.h
 .o/game_main_menu.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_main_menu.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_main_menu.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_main_menu.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_main_menu.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_main_menu.o: /usr/include/sys/unistd.h
@@ -2529,7 +2532,7 @@ all: $(TARGET_GAME)
 .o/game_main_menu.o: my_light.h my_thing_template.h my_dice.h my_thing_ai.h
 .o/game_main_menu.o: my_wid_botcon.h my_wid_popup.h my_wid_text_box.h
 .o/game_main_menu.o: my_wid_rightbar.h my_wid_leftbar.h my_wid_thing_info.h
-.o/game_main_menu.o: my_wid_inventory.h my_gl.h
+.o/game_main_menu.o: my_wid_inventory.h my_wid_thing_collect.h my_gl.h
 .o/game_menu_flames.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/game_menu_flames.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/game_menu_flames.o: /usr/include/sys/_symbol_aliasing.h
@@ -2582,9 +2585,9 @@ all: $(TARGET_GAME)
 .o/game_menu_flames.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/game_menu_flames.o: /usr/include/sys/_types/_wint_t.h
 .o/game_menu_flames.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_menu_flames.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/game_menu_flames.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/game_menu_flames.o: my_world.h my_level.h my_time.h /usr/include/unistd.h
+.o/game_menu_flames.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/game_menu_flames.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/game_menu_flames.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_menu_flames.o: /usr/include/sys/unistd.h
 .o/game_menu_flames.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/game_menu_flames.o: /usr/include/sys/_types/_seek_set.h
@@ -2663,7 +2666,7 @@ all: $(TARGET_GAME)
 .o/game_mouse.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_mouse.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_mouse.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_mouse.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_mouse.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_mouse.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_mouse.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_mouse.o: /usr/include/sys/unistd.h
@@ -2739,7 +2742,7 @@ all: $(TARGET_GAME)
 .o/game_notice.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_notice.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_notice.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_notice.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_notice.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_notice.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_notice.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_notice.o: /usr/include/sys/unistd.h
@@ -2817,7 +2820,7 @@ all: $(TARGET_GAME)
 .o/game_paused.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_paused.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_paused.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_paused.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_paused.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_paused.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_paused.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_paused.o: /usr/include/sys/unistd.h
@@ -2895,7 +2898,7 @@ all: $(TARGET_GAME)
 .o/game_quit.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_quit.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_quit.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_quit.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_quit.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_quit.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_quit.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_quit.o: /usr/include/sys/unistd.h
@@ -2979,7 +2982,7 @@ all: $(TARGET_GAME)
 .o/game_save.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_save.o: /usr/include/__wctype.h /usr/include/_types/_wctype_t.h
 .o/game_save.o: /usr/include/ctype.h /usr/include/_ctype.h
-.o/game_save.o: /usr/include/runetype.h my_slre.h my_point.h my_math.h
+.o/game_save.o: /usr/include/runetype.h slre.h my_point.h my_math.h
 .o/game_save.o: /usr/include/math.h my_world.h my_level.h my_time.h
 .o/game_save.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/game_save.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -3055,7 +3058,7 @@ all: $(TARGET_GAME)
 .o/game_tick.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/game_tick.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/game_tick.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/game_tick.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/game_tick.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/game_tick.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/game_tick.o: my_level.h my_time.h /usr/include/unistd.h
 .o/game_tick.o: /usr/include/sys/unistd.h
@@ -3151,7 +3154,7 @@ all: $(TARGET_GAME)
 .o/gfx.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx.o: my_math.h /usr/include/math.h my_color.h my_gfx.h
 .o/gfx0.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx0.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3192,7 +3195,7 @@ all: $(TARGET_GAME)
 .o/gfx0.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx0.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx0.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx0.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx0.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx0.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx1.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx1.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3233,7 +3236,7 @@ all: $(TARGET_GAME)
 .o/gfx1.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx1.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx1.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx1.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx1.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx1.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx10.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx10.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3274,8 +3277,8 @@ all: $(TARGET_GAME)
 .o/gfx10.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx10.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx10.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx10.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/gfx10.o: my_point.h my_math.h /usr/include/math.h my_color.h
+.o/gfx10.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
+.o/gfx10.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx11.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx11.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/gfx11.o: /usr/include/sys/_symbol_aliasing.h
@@ -3315,8 +3318,8 @@ all: $(TARGET_GAME)
 .o/gfx11.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx11.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx11.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx11.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/gfx11.o: my_point.h my_math.h /usr/include/math.h my_color.h
+.o/gfx11.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
+.o/gfx11.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx12.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx12.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/gfx12.o: /usr/include/sys/_symbol_aliasing.h
@@ -3356,8 +3359,8 @@ all: $(TARGET_GAME)
 .o/gfx12.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx12.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx12.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx12.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/gfx12.o: my_point.h my_math.h /usr/include/math.h my_color.h
+.o/gfx12.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
+.o/gfx12.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx2.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx2.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/gfx2.o: /usr/include/sys/_symbol_aliasing.h
@@ -3397,7 +3400,7 @@ all: $(TARGET_GAME)
 .o/gfx2.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx2.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx2.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx2.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx2.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx2.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx3.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx3.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3438,7 +3441,7 @@ all: $(TARGET_GAME)
 .o/gfx3.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx3.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx3.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx3.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx3.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx3.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx4.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx4.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3479,7 +3482,7 @@ all: $(TARGET_GAME)
 .o/gfx4.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx4.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx4.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx4.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx4.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx4.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx5.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx5.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3520,7 +3523,7 @@ all: $(TARGET_GAME)
 .o/gfx5.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx5.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx5.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx5.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx5.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx5.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx6.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx6.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3561,7 +3564,7 @@ all: $(TARGET_GAME)
 .o/gfx6.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx6.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx6.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx6.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx6.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx6.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx7.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx7.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3602,7 +3605,7 @@ all: $(TARGET_GAME)
 .o/gfx7.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx7.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx7.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx7.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx7.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx7.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx8.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx8.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3643,7 +3646,7 @@ all: $(TARGET_GAME)
 .o/gfx8.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx8.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx8.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx8.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx8.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx8.o: my_math.h /usr/include/math.h my_color.h
 .o/gfx9.o: my_tile.h my_main.h my_sys.h my_pcg_basic.h
 .o/gfx9.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
@@ -3684,7 +3687,7 @@ all: $(TARGET_GAME)
 .o/gfx9.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gfx9.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gfx9.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gfx9.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gfx9.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gfx9.o: my_math.h /usr/include/math.h my_color.h
 .o/gl.o: my_game.h my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/gl.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
@@ -3722,7 +3725,7 @@ all: $(TARGET_GAME)
 .o/gl.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/gl.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/gl.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/gl.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/gl.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/gl.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
 .o/gl.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/gl.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -3884,10 +3887,9 @@ all: $(TARGET_GAME)
 .o/level.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/level.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/level.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
-.o/level.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
-.o/level.o: my_dungeon_grid.h
+.o/level.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_depth.h
+.o/level.o: my_particle.h my_size.h my_thing_id.h my_dungeon.h my_room.h
+.o/level.o: my_charmap.h my_dmap.h my_level_static.h my_dungeon_grid.h
 .o/level_create.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/level_create.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/level_create.o: /usr/include/sys/_symbol_aliasing.h
@@ -3934,7 +3936,7 @@ all: $(TARGET_GAME)
 .o/level_create.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_create.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_create.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_create.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_create.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_create.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_create.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_create.o: /usr/include/sys/unistd.h
@@ -4012,7 +4014,7 @@ all: $(TARGET_GAME)
 .o/level_cursor.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_cursor.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_cursor.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_cursor.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_cursor.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_cursor.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_cursor.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_cursor.o: /usr/include/sys/unistd.h
@@ -4100,9 +4102,9 @@ all: $(TARGET_GAME)
 .o/level_cursor_path.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/level_cursor_path.o: /usr/include/sys/_types/_wint_t.h
 .o/level_cursor_path.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_cursor_path.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/level_cursor_path.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/level_cursor_path.o: my_world.h my_level.h my_time.h /usr/include/unistd.h
+.o/level_cursor_path.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/level_cursor_path.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/level_cursor_path.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_cursor_path.o: /usr/include/sys/unistd.h
 .o/level_cursor_path.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_cursor_path.o: /usr/include/sys/_types/_seek_set.h
@@ -4181,7 +4183,7 @@ all: $(TARGET_GAME)
 .o/level_display.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/level_display.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_display.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_display.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_display.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_display.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_display.o: /usr/include/sys/unistd.h
@@ -4268,10 +4270,10 @@ all: $(TARGET_GAME)
 .o/level_display_anim.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/level_display_anim.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_anim.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_display_anim.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/level_display_anim.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/level_display_anim.o: my_world.h my_level.h my_time.h
-.o/level_display_anim.o: /usr/include/unistd.h /usr/include/sys/unistd.h
+.o/level_display_anim.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/level_display_anim.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/level_display_anim.o: my_level.h my_time.h /usr/include/unistd.h
+.o/level_display_anim.o: /usr/include/sys/unistd.h
 .o/level_display_anim.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_display_anim.o: /usr/include/sys/_types/_seek_set.h
 .o/level_display_anim.o: /usr/include/sys/_types/_uid_t.h
@@ -4357,10 +4359,9 @@ all: $(TARGET_GAME)
 .o/level_display_blood.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_blood.o: /usr/include/_types/_wctype_t.h
 .o/level_display_blood.o: /usr/include/ctype.h /usr/include/_ctype.h
-.o/level_display_blood.o: /usr/include/runetype.h my_slre.h my_point.h
-.o/level_display_blood.o: my_math.h /usr/include/math.h my_world.h my_level.h
-.o/level_display_blood.o: my_time.h /usr/include/unistd.h
-.o/level_display_blood.o: /usr/include/sys/unistd.h
+.o/level_display_blood.o: /usr/include/runetype.h slre.h my_point.h my_math.h
+.o/level_display_blood.o: /usr/include/math.h my_world.h my_level.h my_time.h
+.o/level_display_blood.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/level_display_blood.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_display_blood.o: /usr/include/sys/_types/_seek_set.h
 .o/level_display_blood.o: /usr/include/sys/_types/_uid_t.h
@@ -4446,10 +4447,9 @@ all: $(TARGET_GAME)
 .o/level_display_chasm.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_chasm.o: /usr/include/_types/_wctype_t.h
 .o/level_display_chasm.o: /usr/include/ctype.h /usr/include/_ctype.h
-.o/level_display_chasm.o: /usr/include/runetype.h my_slre.h my_point.h
-.o/level_display_chasm.o: my_math.h /usr/include/math.h my_world.h my_level.h
-.o/level_display_chasm.o: my_time.h /usr/include/unistd.h
-.o/level_display_chasm.o: /usr/include/sys/unistd.h
+.o/level_display_chasm.o: /usr/include/runetype.h slre.h my_point.h my_math.h
+.o/level_display_chasm.o: /usr/include/math.h my_world.h my_level.h my_time.h
+.o/level_display_chasm.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/level_display_chasm.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_display_chasm.o: /usr/include/sys/_types/_seek_set.h
 .o/level_display_chasm.o: /usr/include/sys/_types/_uid_t.h
@@ -4537,7 +4537,7 @@ all: $(TARGET_GAME)
 .o/level_display_deep_water.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_deep_water.o: /usr/include/_types/_wctype_t.h
 .o/level_display_deep_water.o: /usr/include/ctype.h /usr/include/_ctype.h
-.o/level_display_deep_water.o: /usr/include/runetype.h my_slre.h my_point.h
+.o/level_display_deep_water.o: /usr/include/runetype.h slre.h my_point.h
 .o/level_display_deep_water.o: my_math.h /usr/include/math.h my_world.h
 .o/level_display_deep_water.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_display_deep_water.o: /usr/include/sys/unistd.h
@@ -4628,10 +4628,10 @@ all: $(TARGET_GAME)
 .o/level_display_fade.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/level_display_fade.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_fade.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_display_fade.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/level_display_fade.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/level_display_fade.o: my_world.h my_level.h my_time.h
-.o/level_display_fade.o: /usr/include/unistd.h /usr/include/sys/unistd.h
+.o/level_display_fade.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/level_display_fade.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/level_display_fade.o: my_level.h my_time.h /usr/include/unistd.h
+.o/level_display_fade.o: /usr/include/sys/unistd.h
 .o/level_display_fade.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_display_fade.o: /usr/include/sys/_types/_seek_set.h
 .o/level_display_fade.o: /usr/include/sys/_types/_uid_t.h
@@ -4716,10 +4716,10 @@ all: $(TARGET_GAME)
 .o/level_display_lava.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/level_display_lava.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_lava.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_display_lava.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/level_display_lava.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/level_display_lava.o: my_world.h my_level.h my_time.h
-.o/level_display_lava.o: /usr/include/unistd.h /usr/include/sys/unistd.h
+.o/level_display_lava.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/level_display_lava.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/level_display_lava.o: my_level.h my_time.h /usr/include/unistd.h
+.o/level_display_lava.o: /usr/include/sys/unistd.h
 .o/level_display_lava.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_display_lava.o: /usr/include/sys/_types/_seek_set.h
 .o/level_display_lava.o: /usr/include/sys/_types/_uid_t.h
@@ -4805,7 +4805,7 @@ all: $(TARGET_GAME)
 .o/level_display_minimap.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_minimap.o: /usr/include/_types/_wctype_t.h
 .o/level_display_minimap.o: /usr/include/ctype.h /usr/include/_ctype.h
-.o/level_display_minimap.o: /usr/include/runetype.h my_slre.h my_point.h
+.o/level_display_minimap.o: /usr/include/runetype.h slre.h my_point.h
 .o/level_display_minimap.o: my_math.h /usr/include/math.h my_world.h
 .o/level_display_minimap.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_display_minimap.o: /usr/include/sys/unistd.h
@@ -4894,10 +4894,9 @@ all: $(TARGET_GAME)
 .o/level_display_shake.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_shake.o: /usr/include/_types/_wctype_t.h
 .o/level_display_shake.o: /usr/include/ctype.h /usr/include/_ctype.h
-.o/level_display_shake.o: /usr/include/runetype.h my_slre.h my_point.h
-.o/level_display_shake.o: my_math.h /usr/include/math.h my_world.h my_level.h
-.o/level_display_shake.o: my_time.h /usr/include/unistd.h
-.o/level_display_shake.o: /usr/include/sys/unistd.h
+.o/level_display_shake.o: /usr/include/runetype.h slre.h my_point.h my_math.h
+.o/level_display_shake.o: /usr/include/math.h my_world.h my_level.h my_time.h
+.o/level_display_shake.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/level_display_shake.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_display_shake.o: /usr/include/sys/_types/_seek_set.h
 .o/level_display_shake.o: /usr/include/sys/_types/_uid_t.h
@@ -4982,10 +4981,10 @@ all: $(TARGET_GAME)
 .o/level_display_wall.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/level_display_wall.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_wall.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_display_wall.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/level_display_wall.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/level_display_wall.o: my_world.h my_level.h my_time.h
-.o/level_display_wall.o: /usr/include/unistd.h /usr/include/sys/unistd.h
+.o/level_display_wall.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/level_display_wall.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/level_display_wall.o: my_level.h my_time.h /usr/include/unistd.h
+.o/level_display_wall.o: /usr/include/sys/unistd.h
 .o/level_display_wall.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_display_wall.o: /usr/include/sys/_types/_seek_set.h
 .o/level_display_wall.o: /usr/include/sys/_types/_uid_t.h
@@ -5071,10 +5070,9 @@ all: $(TARGET_GAME)
 .o/level_display_water.o: /usr/include/sys/_types/_wint_t.h
 .o/level_display_water.o: /usr/include/_types/_wctype_t.h
 .o/level_display_water.o: /usr/include/ctype.h /usr/include/_ctype.h
-.o/level_display_water.o: /usr/include/runetype.h my_slre.h my_point.h
-.o/level_display_water.o: my_math.h /usr/include/math.h my_world.h my_level.h
-.o/level_display_water.o: my_time.h /usr/include/unistd.h
-.o/level_display_water.o: /usr/include/sys/unistd.h
+.o/level_display_water.o: /usr/include/runetype.h slre.h my_point.h my_math.h
+.o/level_display_water.o: /usr/include/math.h my_world.h my_level.h my_time.h
+.o/level_display_water.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/level_display_water.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/level_display_water.o: /usr/include/sys/_types/_seek_set.h
 .o/level_display_water.o: /usr/include/sys/_types/_uid_t.h
@@ -5150,7 +5148,7 @@ all: $(TARGET_GAME)
 .o/level_fini.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_fini.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_fini.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_fini.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_fini.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_fini.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_fini.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_fini.o: /usr/include/sys/unistd.h
@@ -5253,7 +5251,7 @@ all: $(TARGET_GAME)
 .o/level_heatmap.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/level_heatmap.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_heatmap.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_heatmap.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_heatmap.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_heatmap.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/level_heatmap.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/level_heatmap.o: my_level_static.h my_dungeon_grid.h
@@ -5303,7 +5301,7 @@ all: $(TARGET_GAME)
 .o/level_init.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_init.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_init.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_init.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_init.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_init.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_init.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_init.o: /usr/include/sys/unistd.h
@@ -5379,7 +5377,7 @@ all: $(TARGET_GAME)
 .o/level_log.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_log.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_log.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_log.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_log.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_log.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_log.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_log.o: /usr/include/sys/unistd.h
@@ -5456,7 +5454,7 @@ all: $(TARGET_GAME)
 .o/level_map.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_map.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_map.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_map.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_map.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_map.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_map.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_map.o: /usr/include/sys/unistd.h
@@ -5533,7 +5531,7 @@ all: $(TARGET_GAME)
 .o/level_minimap.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/level_minimap.o: /usr/include/sys/_types/_wint_t.h
 .o/level_minimap.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_minimap.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_minimap.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_minimap.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_minimap.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_minimap.o: /usr/include/sys/unistd.h
@@ -5611,7 +5609,7 @@ all: $(TARGET_GAME)
 .o/level_scroll.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_scroll.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_scroll.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_scroll.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_scroll.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_scroll.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_scroll.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_scroll.o: /usr/include/sys/unistd.h
@@ -5717,7 +5715,7 @@ all: $(TARGET_GAME)
 .o/level_static.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/level_static.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_static.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_static.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_static.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_static.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/level_static.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/level_static.o: my_level_static.h my_dungeon_grid.h
@@ -5792,7 +5790,7 @@ all: $(TARGET_GAME)
 .o/level_thing.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/level_thing.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_thing.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_thing.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_thing.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_thing.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/level_thing.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/level_thing.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -5843,7 +5841,7 @@ all: $(TARGET_GAME)
 .o/level_tick.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_tick.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_tick.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_tick.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_tick.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_tick.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_tick.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_tick.o: /usr/include/sys/unistd.h
@@ -5920,7 +5918,7 @@ all: $(TARGET_GAME)
 .o/level_update.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/level_update.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/level_update.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/level_update.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/level_update.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/level_update.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/level_update.o: my_level.h my_time.h /usr/include/unistd.h
 .o/level_update.o: /usr/include/sys/unistd.h
@@ -5991,9 +5989,9 @@ all: $(TARGET_GAME)
 .o/light.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/light.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/light.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/light.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/light.o: my_point.h my_math.h /usr/include/math.h my_world.h my_level.h
-.o/light.o: my_time.h /usr/include/unistd.h /usr/include/sys/unistd.h
+.o/light.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
+.o/light.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
+.o/light.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/light.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/light.o: /usr/include/sys/_types/_seek_set.h
 .o/light.o: /usr/include/sys/_types/_uid_t.h /usr/include/sys/_types/_gid_t.h
@@ -6063,7 +6061,7 @@ all: $(TARGET_GAME)
 .o/light_log.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/light_log.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/light_log.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/light_log.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/light_log.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/light_log.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/light_log.o: my_level.h my_time.h /usr/include/unistd.h
 .o/light_log.o: /usr/include/sys/unistd.h
@@ -6132,7 +6130,7 @@ all: $(TARGET_GAME)
 .o/log.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/log.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/log.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/log.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/log.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/log.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
 .o/log.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/log.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -6203,7 +6201,7 @@ all: $(TARGET_GAME)
 .o/log_util.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
 .o/log_util.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
 .o/log_util.o: /usr/include/assert.h my_vector_bounds_check.h my_sdl.h
-.o/log_util.o: my_command.h my_token.h my_string.h my_slre.h
+.o/log_util.o: my_command.h my_token.h my_string.h slre.h
 .o/main.o: /usr/include/strings.h /usr/include/_types.h
 .o/main.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
 .o/main.o: /usr/include/sys/_symbol_aliasing.h
@@ -6274,7 +6272,7 @@ all: $(TARGET_GAME)
 .o/main.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/main.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/main.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/main.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/main.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/main.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
 .o/main.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
 .o/main.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
@@ -6385,7 +6383,7 @@ all: $(TARGET_GAME)
 .o/particle.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/particle.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/particle.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/particle.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/particle.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/particle.o: my_depth.h my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/particle.o: my_level_static.h my_dungeon_grid.h my_tile.h my_color.h
 .o/particle.o: my_gl.h my_thing.h my_light.h my_thing_template.h my_dice.h
@@ -6455,9 +6453,9 @@ all: $(TARGET_GAME)
 .o/player.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/player.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/player.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/player.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/player.o: my_point.h my_math.h /usr/include/math.h my_world.h my_level.h
-.o/player.o: my_time.h /usr/include/unistd.h /usr/include/sys/unistd.h
+.o/player.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
+.o/player.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
+.o/player.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/player.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/player.o: /usr/include/sys/_types/_seek_set.h
 .o/player.o: /usr/include/sys/_types/_uid_t.h
@@ -6554,7 +6552,7 @@ all: $(TARGET_GAME)
 .o/ptrcheck.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/ptrcheck.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/ptrcheck.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/ptrcheck.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/ptrcheck.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/py_level.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/py_level.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/py_level.o: /usr/include/sys/_posix_availability.h
@@ -6652,8 +6650,8 @@ all: $(TARGET_GAME)
 .o/py_log.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/py_log.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/py_log.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/py_log.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/py_log.o: my_file.h my_log.h
+.o/py_log.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_file.h
+.o/py_log.o: my_log.h
 .o/py_room.o: my_python.h my_point.h my_math.h /usr/include/math.h
 .o/py_room.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/py_room.o: /usr/include/sys/_posix_availability.h
@@ -6798,8 +6796,7 @@ all: $(TARGET_GAME)
 .o/py_tile.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/py_tile.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/py_tile.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/py_tile.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/py_tile.o: my_color.h
+.o/py_tile.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_color.h
 .o/py_tp.o: my_python.h my_point.h my_math.h /usr/include/math.h
 .o/py_tp.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/py_tp.o: /usr/include/sys/_posix_availability.h
@@ -6840,8 +6837,8 @@ all: $(TARGET_GAME)
 .o/py_tp.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/py_tp.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/py_tp.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/py_tp.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/py_tp.o: my_color.h my_size.h my_game.h my_world.h my_level.h my_time.h
+.o/py_tp.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_color.h
+.o/py_tp.o: my_size.h my_game.h my_world.h my_level.h my_time.h
 .o/py_tp.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/py_tp.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/py_tp.o: /usr/include/sys/_types/_seek_set.h
@@ -6908,7 +6905,7 @@ all: $(TARGET_GAME)
 .o/py_ttf.o: my_ptrcheck.h my_globals.h my_callstack.h
 .o/py_ttf.o: my_array_bounds_check.h my_bounds_check.h /usr/include/assert.h
 .o/py_ttf.o: my_vector_bounds_check.h my_sdl.h my_command.h my_token.h
-.o/py_ttf.o: my_string.h my_slre.h
+.o/py_ttf.o: my_string.h slre.h
 .o/python.o: my_py_tp.h my_depth.h my_python.h my_point.h my_math.h
 .o/python.o: /usr/include/math.h /usr/include/sys/cdefs.h
 .o/python.o: /usr/include/sys/_symbol_aliasing.h
@@ -6954,7 +6951,7 @@ all: $(TARGET_GAME)
 .o/python.o: my_ptrcheck.h my_globals.h my_callstack.h
 .o/python.o: my_array_bounds_check.h my_bounds_check.h /usr/include/assert.h
 .o/python.o: my_vector_bounds_check.h my_sdl.h my_command.h my_token.h
-.o/python.o: my_string.h my_slre.h my_thing_template.h my_dice.h my_size.h
+.o/python.o: my_string.h slre.h my_thing_template.h my_dice.h my_size.h
 .o/random_name.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/random_name.o: /usr/include/sys/cdefs.h
 .o/random_name.o: /usr/include/sys/_symbol_aliasing.h
@@ -7061,7 +7058,7 @@ all: $(TARGET_GAME)
 .o/sdl.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/sdl.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/sdl.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/sdl.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/sdl.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/sdl.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
 .o/sdl.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/sdl.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -7147,7 +7144,7 @@ all: $(TARGET_GAME)
 .o/sdl_screenshot.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/sdl_screenshot.o: /usr/include/sys/_types/_wint_t.h
 .o/sdl_screenshot.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/sdl_screenshot.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/sdl_screenshot.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/sdl_screenshot.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/sdl_screenshot.o: my_level.h my_time.h /usr/include/unistd.h
 .o/sdl_screenshot.o: /usr/include/sys/unistd.h
@@ -7272,13 +7269,12 @@ all: $(TARGET_GAME)
 .o/signal.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/signal.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/signal.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/signal.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/signal.o: my_point.h my_math.h /usr/include/math.h my_world.h my_level.h
-.o/signal.o: my_time.h /usr/include/sys/time.h
-.o/signal.o: /usr/include/sys/_types/_timeval64.h my_depth.h my_particle.h
-.o/signal.o: my_size.h my_thing_id.h my_dungeon.h my_room.h my_charmap.h
-.o/signal.o: my_dmap.h my_level_static.h my_dungeon_grid.h
-.o/signal.o: /usr/include/stdlib.h /usr/include/sys/wait.h
+.o/signal.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
+.o/signal.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
+.o/signal.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
+.o/signal.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
+.o/signal.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
+.o/signal.o: my_dungeon_grid.h /usr/include/stdlib.h /usr/include/sys/wait.h
 .o/signal.o: /usr/include/sys/_types/_id_t.h /usr/include/sys/resource.h
 .o/signal.o: /usr/include/machine/endian.h /usr/include/i386/endian.h
 .o/signal.o: /usr/include/sys/_endian.h /usr/include/libkern/_OSByteOrder.h
@@ -7313,7 +7309,7 @@ all: $(TARGET_GAME)
 .o/slre.o: /usr/include/sys/_types/_rsize_t.h
 .o/slre.o: /usr/include/sys/_types/_errno_t.h /usr/include/strings.h
 .o/slre.o: /usr/include/secure/_strings.h /usr/include/secure/_string.h
-.o/slre.o: my_slre.h
+.o/slre.o: slre.h
 .o/sprintf.o: my_sprintf.h /usr/include/string.h /usr/include/_types.h
 .o/sprintf.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
 .o/sprintf.o: /usr/include/sys/_symbol_aliasing.h
@@ -7471,7 +7467,7 @@ all: $(TARGET_GAME)
 .o/string.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/string.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/string.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/string.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/string.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/string.o: my_thing_template.h my_dice.h my_tile.h my_point.h my_math.h
 .o/string.o: /usr/include/math.h my_color.h my_size.h my_tex.h my_time.h
 .o/string.o: /usr/include/unistd.h /usr/include/sys/unistd.h
@@ -7605,7 +7601,7 @@ all: $(TARGET_GAME)
 .o/thing_acid.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_acid.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_acid.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_acid.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_acid.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_acid.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_acid.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_acid.o: /usr/include/sys/unistd.h
@@ -7705,7 +7701,7 @@ all: $(TARGET_GAME)
 .o/thing_ai.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_ai.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_ai.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_ai.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_ai.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_ai.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
 .o/thing_ai.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/thing_ai.o: my_dungeon_grid.h my_thing.h my_light.h my_thing_template.h
@@ -7784,7 +7780,7 @@ all: $(TARGET_GAME)
 .o/thing_ai_goals.o: /usr/include/__wctype.h
 .o/thing_ai_goals.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_ai_goals.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_ai_goals.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_ai_goals.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_ai_goals.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_ai_goals.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_ai_goals.o: my_level_static.h my_dungeon_grid.h my_thing.h
@@ -7867,7 +7863,7 @@ all: $(TARGET_GAME)
 .o/thing_ai_wander.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_ai_wander.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_ai_wander.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_ai_wander.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_ai_wander.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_ai_wander.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_ai_wander.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_ai_wander.o: my_level_static.h my_dungeon_grid.h my_thing.h
@@ -7939,7 +7935,7 @@ all: $(TARGET_GAME)
 .o/thing_anim.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_anim.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_anim.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_anim.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_anim.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_anim.o: my_light.h my_thing_template.h my_dice.h my_tile.h
 .o/thing_anim.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_anim.o: my_size.h my_thing_ai.h my_dmap.h my_thing_id.h my_depth.h
@@ -8011,7 +8007,7 @@ all: $(TARGET_GAME)
 .o/thing_api.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_api.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_api.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_api.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_api.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_api.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
 .o/thing_api.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/thing_api.o: my_dungeon_grid.h my_color.h my_wid_rightbar.h my_wid.h
@@ -8092,7 +8088,7 @@ all: $(TARGET_GAME)
 .o/thing_astar.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_astar.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_astar.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_astar.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_astar.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_astar.o: my_light.h my_thing_template.h my_dice.h my_tile.h
 .o/thing_astar.o: my_color.h my_size.h my_thing_ai.h my_thing_id.h my_depth.h
 .o/thing_attack.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
@@ -8166,7 +8162,7 @@ all: $(TARGET_GAME)
 .o/thing_attack.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_attack.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_attack.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_attack.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_attack.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_attack.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_attack.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_attack.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -8242,7 +8238,7 @@ all: $(TARGET_GAME)
 .o/thing_avoid.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_avoid.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_avoid.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_avoid.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_avoid.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_avoid.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_avoid.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_avoid.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -8293,7 +8289,7 @@ all: $(TARGET_GAME)
 .o/thing_bag.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_bag.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_bag.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_bag.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_bag.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_bag.o: my_wid_bag.h my_wid.h my_point.h my_math.h
 .o/thing_bag.o: /usr/include/math.h my_size.h my_ascii.h my_color.h my_tex.h
 .o/thing_bag.o: my_tile.h my_wid_tiles.h my_thing.h my_time.h
@@ -8370,7 +8366,7 @@ all: $(TARGET_GAME)
 .o/thing_bounce.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_bounce.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_bounce.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_bounce.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_bounce.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_bounce.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_bounce.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_bounce.o: /usr/include/sys/unistd.h
@@ -8477,7 +8473,7 @@ all: $(TARGET_GAME)
 .o/thing_carry.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_carry.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_carry.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_carry.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_carry.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_carry.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_carry.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_carry.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -8530,7 +8526,7 @@ all: $(TARGET_GAME)
 .o/thing_chasm.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_chasm.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_chasm.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_chasm.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_chasm.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_chasm.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_chasm.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_chasm.o: /usr/include/sys/unistd.h
@@ -8615,7 +8611,7 @@ all: $(TARGET_GAME)
 .o/thing_collision.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_collision.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_collision.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_collision.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_collision.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_collision.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_collision.o: my_game.h my_world.h my_level.h my_time.h
 .o/thing_collision.o: /usr/include/unistd.h /usr/include/sys/unistd.h
@@ -8694,7 +8690,7 @@ all: $(TARGET_GAME)
 .o/thing_cursor.o: my_globals.h my_callstack.h my_array_bounds_check.h
 .o/thing_cursor.o: my_bounds_check.h /usr/include/assert.h
 .o/thing_cursor.o: my_vector_bounds_check.h my_sdl.h my_command.h my_token.h
-.o/thing_cursor.o: my_string.h my_slre.h my_depth.h my_dmap.h my_game.h
+.o/thing_cursor.o: my_string.h slre.h my_depth.h my_dmap.h my_game.h
 .o/thing_cursor.o: my_world.h my_level.h my_time.h /usr/include/unistd.h
 .o/thing_cursor.o: /usr/include/sys/unistd.h
 .o/thing_cursor.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -8779,9 +8775,9 @@ all: $(TARGET_GAME)
 .o/thing_cursor_path.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_cursor_path.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_cursor_path.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_cursor_path.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/thing_cursor_path.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/thing_cursor_path.o: my_world.h my_level.h my_time.h /usr/include/unistd.h
+.o/thing_cursor_path.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/thing_cursor_path.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/thing_cursor_path.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_cursor_path.o: /usr/include/sys/unistd.h
 .o/thing_cursor_path.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/thing_cursor_path.o: /usr/include/sys/_types/_seek_set.h
@@ -8884,7 +8880,7 @@ all: $(TARGET_GAME)
 .o/thing_danger.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_danger.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_danger.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_danger.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_danger.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_danger.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_danger.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_danger.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -8935,7 +8931,7 @@ all: $(TARGET_GAME)
 .o/thing_dead.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_dead.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_dead.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_dead.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_dead.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_dead.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_dead.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_dead.o: /usr/include/sys/unistd.h
@@ -9016,7 +9012,7 @@ all: $(TARGET_GAME)
 .o/thing_describe.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_describe.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_describe.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_describe.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_describe.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_describe.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_describe.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_describe.o: /usr/include/sys/unistd.h
@@ -9116,7 +9112,7 @@ all: $(TARGET_GAME)
 .o/thing_dir.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_dir.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_dir.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_dir.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_dir.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_dir.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
 .o/thing_dir.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/thing_dir.o: my_dungeon_grid.h my_thing.h my_light.h my_thing_template.h
@@ -9169,7 +9165,7 @@ all: $(TARGET_GAME)
 .o/thing_display.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_display.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_display.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_display.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_display.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_display.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_display.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_display.o: /usr/include/sys/unistd.h
@@ -9274,7 +9270,7 @@ all: $(TARGET_GAME)
 .o/thing_distance.o: /usr/include/__wctype.h
 .o/thing_distance.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_distance.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_distance.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_distance.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_distance.o: my_light.h my_thing_template.h my_dice.h my_tile.h
 .o/thing_distance.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_distance.o: my_size.h my_thing_ai.h my_dmap.h my_thing_id.h
@@ -9326,7 +9322,7 @@ all: $(TARGET_GAME)
 .o/thing_door.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_door.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_door.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_door.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_door.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_door.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_door.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_door.o: /usr/include/sys/unistd.h
@@ -9426,7 +9422,7 @@ all: $(TARGET_GAME)
 .o/thing_drop.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_drop.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_drop.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_drop.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_drop.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_drop.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_drop.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_drop.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -9479,7 +9475,7 @@ all: $(TARGET_GAME)
 .o/thing_eat.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_eat.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_eat.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_eat.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_eat.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_eat.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_eat.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_eat.o: /usr/include/sys/unistd.h
@@ -9557,7 +9553,7 @@ all: $(TARGET_GAME)
 .o/thing_enemy.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_enemy.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_enemy.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_enemy.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_enemy.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_enemy.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_enemy.o: my_thing.h my_time.h /usr/include/unistd.h
 .o/thing_enemy.o: /usr/include/sys/unistd.h
@@ -9637,7 +9633,7 @@ all: $(TARGET_GAME)
 .o/thing_entrance.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_entrance.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_entrance.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_entrance.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_entrance.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_entrance.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_entrance.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_entrance.o: /usr/include/sys/unistd.h
@@ -9719,7 +9715,7 @@ all: $(TARGET_GAME)
 .o/thing_escape.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_escape.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_escape.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_escape.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_escape.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_escape.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_escape.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_escape.o: /usr/include/sys/unistd.h
@@ -9800,7 +9796,7 @@ all: $(TARGET_GAME)
 .o/thing_exit.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_exit.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_exit.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_exit.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_exit.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_exit.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_exit.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_exit.o: /usr/include/sys/unistd.h
@@ -9879,7 +9875,7 @@ all: $(TARGET_GAME)
 .o/thing_fadeup.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_fadeup.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_fadeup.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_fadeup.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_fadeup.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_fadeup.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_fadeup.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_fadeup.o: /usr/include/sys/unistd.h
@@ -9961,7 +9957,7 @@ all: $(TARGET_GAME)
 .o/thing_fall.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_fall.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_fall.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_fall.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_fall.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_fall.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_fall.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_fall.o: /usr/include/sys/unistd.h
@@ -10040,7 +10036,7 @@ all: $(TARGET_GAME)
 .o/thing_fini.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_fini.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_fini.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_fini.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_fini.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_fini.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_fini.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_fini.o: /usr/include/sys/unistd.h
@@ -10118,7 +10114,7 @@ all: $(TARGET_GAME)
 .o/thing_fire.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_fire.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_fire.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_fire.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_fire.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_fire.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_fire.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_fire.o: /usr/include/sys/unistd.h
@@ -10218,7 +10214,7 @@ all: $(TARGET_GAME)
 .o/thing_gc.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_gc.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_gc.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_gc.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_gc.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_gc.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
 .o/thing_gc.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/thing_gc.o: my_dungeon_grid.h my_color.h my_sprintf.h
@@ -10273,7 +10269,7 @@ all: $(TARGET_GAME)
 .o/thing_health.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_health.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_health.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_health.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_health.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_health.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_health.o: my_thing.h my_time.h /usr/include/unistd.h
 .o/thing_health.o: /usr/include/sys/unistd.h
@@ -10370,7 +10366,7 @@ all: $(TARGET_GAME)
 .o/thing_hide.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_hide.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_hide.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_hide.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_hide.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_hide.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_hide.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_hide.o: my_level_static.h my_dungeon_grid.h my_color.h my_sprintf.h
@@ -10424,7 +10420,7 @@ all: $(TARGET_GAME)
 .o/thing_hit.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_hit.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_hit.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_hit.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_hit.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_hit.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_hit.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_hit.o: /usr/include/sys/unistd.h
@@ -10526,7 +10522,7 @@ all: $(TARGET_GAME)
 .o/thing_hooks.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_hooks.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_hooks.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_hooks.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_hooks.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_hooks.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_hooks.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_hooks.o: my_level_static.h my_dungeon_grid.h my_color.h my_sprintf.h
@@ -10581,7 +10577,7 @@ all: $(TARGET_GAME)
 .o/thing_hunger.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_hunger.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_hunger.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_hunger.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_hunger.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_hunger.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_hunger.o: my_thing.h my_time.h /usr/include/unistd.h
 .o/thing_hunger.o: /usr/include/sys/unistd.h
@@ -10677,7 +10673,7 @@ all: $(TARGET_GAME)
 .o/thing_id.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_id.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_id.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_id.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_id.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_id.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
 .o/thing_id.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/thing_id.o: my_dungeon_grid.h my_world.h my_color.h my_thing.h my_light.h
@@ -10754,7 +10750,7 @@ all: $(TARGET_GAME)
 .o/thing_inherit.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_inherit.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_inherit.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_inherit.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_inherit.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_inherit.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_inherit.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_inherit.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -10805,7 +10801,7 @@ all: $(TARGET_GAME)
 .o/thing_init.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_init.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_init.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_init.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_init.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_init.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_init.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_init.o: /usr/include/sys/unistd.h
@@ -10888,7 +10884,7 @@ all: $(TARGET_GAME)
 .o/thing_inventory.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_inventory.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_inventory.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_inventory.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_inventory.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_inventory.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_inventory.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_inventory.o: /usr/include/sys/unistd.h
@@ -10969,7 +10965,7 @@ all: $(TARGET_GAME)
 .o/thing_item.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_item.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_item.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_item.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_item.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_item.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_item.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_item.o: /usr/include/sys/unistd.h
@@ -11049,7 +11045,7 @@ all: $(TARGET_GAME)
 .o/thing_jump.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_jump.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_jump.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_jump.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_jump.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_jump.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_jump.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_jump.o: /usr/include/sys/unistd.h
@@ -11083,6 +11079,162 @@ all: $(TARGET_GAME)
 .o/thing_jump.o: /usr/include/sys/_types/_errno_t.h /usr/include/strings.h
 .o/thing_jump.o: /usr/include/secure/_strings.h /usr/include/secure/_string.h
 .o/thing_jump.o: my_gl.h
+.o/thing_kill.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
+.o/thing_kill.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
+.o/thing_kill.o: /usr/include/sys/_posix_availability.h
+.o/thing_kill.o: /usr/include/Availability.h
+.o/thing_kill.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+.o/thing_kill.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/thing_kill.o: /usr/include/i386/_types.h
+.o/thing_kill.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/thing_kill.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/thing_kill.o: /usr/include/sys/_types/_int8_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_int16_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_int32_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_int64_t.h
+.o/thing_kill.o: /usr/include/_types/_uint8_t.h
+.o/thing_kill.o: /usr/include/_types/_uint16_t.h
+.o/thing_kill.o: /usr/include/_types/_uint32_t.h
+.o/thing_kill.o: /usr/include/_types/_uint64_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_intptr_t.h
+.o/thing_kill.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/thing_kill.o: /usr/include/sys/_types/_u_int8_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_u_int16_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_u_int32_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_u_int64_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_uintptr_t.h
+.o/thing_kill.o: /usr/include/_types/_intmax_t.h
+.o/thing_kill.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
+.o/thing_kill.o: /usr/include/stdio.h /usr/include/_stdio.h
+.o/thing_kill.o: /usr/include/sys/_types/_va_list.h
+.o/thing_kill.o: /usr/include/sys/_types/_size_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/thing_kill.o: /usr/include/sys/_types/_off_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_ssize_t.h
+.o/thing_kill.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+.o/thing_kill.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
+.o/thing_kill.o: /usr/include/assert.h my_vector_bounds_check.h
+.o/thing_kill.o: c_plus_plus_serializer.h my_game.h my_sdl.h my_command.h
+.o/thing_kill.o: my_token.h my_string.h /usr/include/wchar.h
+.o/thing_kill.o: /usr/include/sys/_types/_mbstate_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
+.o/thing_kill.o: /usr/include/sys/_types/_clock_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_time_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
+.o/thing_kill.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/thing_kill.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/thing_kill.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/thing_kill.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/thing_kill.o: my_level.h my_time.h /usr/include/unistd.h
+.o/thing_kill.o: /usr/include/sys/unistd.h
+.o/thing_kill.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/thing_kill.o: /usr/include/sys/_types/_seek_set.h
+.o/thing_kill.o: /usr/include/sys/_types/_uid_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_gid_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_pid_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_useconds_t.h
+.o/thing_kill.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
+.o/thing_kill.o: /usr/include/sys/_types/_fd_def.h
+.o/thing_kill.o: /usr/include/sys/_types/_timeval.h
+.o/thing_kill.o: /usr/include/sys/_types/_suseconds_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_sigset_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_fd_setsize.h
+.o/thing_kill.o: /usr/include/sys/_types/_fd_set.h
+.o/thing_kill.o: /usr/include/sys/_types/_fd_clr.h
+.o/thing_kill.o: /usr/include/sys/_types/_fd_isset.h
+.o/thing_kill.o: /usr/include/sys/_types/_fd_zero.h
+.o/thing_kill.o: /usr/include/sys/_types/_fd_copy.h
+.o/thing_kill.o: /usr/include/sys/_select.h /usr/include/sys/_types/_dev_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_mode_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
+.o/thing_kill.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
+.o/thing_kill.o: my_depth.h my_particle.h my_size.h my_thing_id.h
+.o/thing_kill.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
+.o/thing_kill.o: my_level_static.h my_dungeon_grid.h my_color.h my_sprintf.h
+.o/thing_kill.o: /usr/include/string.h /usr/include/sys/_types/_rsize_t.h
+.o/thing_kill.o: /usr/include/sys/_types/_errno_t.h /usr/include/strings.h
+.o/thing_kill.o: /usr/include/secure/_strings.h /usr/include/secure/_string.h
+.o/thing_kill.o: my_thing.h my_light.h my_thing_template.h my_dice.h
+.o/thing_kill.o: my_tile.h my_thing_ai.h my_python.h my_log.h
+.o/thing_kill_if.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
+.o/thing_kill_if.o: /usr/include/sys/cdefs.h
+.o/thing_kill_if.o: /usr/include/sys/_symbol_aliasing.h
+.o/thing_kill_if.o: /usr/include/sys/_posix_availability.h
+.o/thing_kill_if.o: /usr/include/Availability.h
+.o/thing_kill_if.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+.o/thing_kill_if.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/thing_kill_if.o: /usr/include/i386/_types.h
+.o/thing_kill_if.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_int8_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_int16_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_int32_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_int64_t.h
+.o/thing_kill_if.o: /usr/include/_types/_uint8_t.h
+.o/thing_kill_if.o: /usr/include/_types/_uint16_t.h
+.o/thing_kill_if.o: /usr/include/_types/_uint32_t.h
+.o/thing_kill_if.o: /usr/include/_types/_uint64_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_intptr_t.h
+.o/thing_kill_if.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_u_int8_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_u_int16_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_u_int32_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_u_int64_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_uintptr_t.h
+.o/thing_kill_if.o: /usr/include/_types/_intmax_t.h
+.o/thing_kill_if.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h
+.o/thing_kill_if.o: my_globals.h /usr/include/stdio.h /usr/include/_stdio.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_va_list.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_size_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_off_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_ssize_t.h
+.o/thing_kill_if.o: /usr/include/secure/_stdio.h
+.o/thing_kill_if.o: /usr/include/secure/_common.h my_callstack.h
+.o/thing_kill_if.o: my_array_bounds_check.h my_bounds_check.h
+.o/thing_kill_if.o: /usr/include/assert.h my_vector_bounds_check.h
+.o/thing_kill_if.o: c_plus_plus_serializer.h my_level.h my_point.h my_math.h
+.o/thing_kill_if.o: /usr/include/math.h my_time.h /usr/include/unistd.h
+.o/thing_kill_if.o: /usr/include/sys/unistd.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_seek_set.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_uid_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_gid_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_pid_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_useconds_t.h
+.o/thing_kill_if.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_fd_def.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_timespec.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_timeval.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_time_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_suseconds_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_sigset_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_fd_setsize.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_fd_set.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_fd_clr.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_fd_isset.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_fd_zero.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_fd_copy.h
+.o/thing_kill_if.o: /usr/include/sys/_select.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_dev_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_mode_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_uuid_t.h
+.o/thing_kill_if.o: /usr/include/gethostuuid.h /usr/include/sys/time.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_timeval64.h /usr/include/time.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_clock_t.h my_sdl.h my_command.h
+.o/thing_kill_if.o: my_token.h my_string.h /usr/include/wchar.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_mbstate_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/thing_kill_if.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
+.o/thing_kill_if.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/thing_kill_if.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/thing_kill_if.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/thing_kill_if.o: my_depth.h my_particle.h my_size.h my_thing_id.h
+.o/thing_kill_if.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
+.o/thing_kill_if.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
+.o/thing_kill_if.o: my_thing_template.h my_dice.h my_tile.h my_color.h
+.o/thing_kill_if.o: my_thing_ai.h
 .o/thing_lava.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/thing_lava.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/thing_lava.o: /usr/include/sys/_posix_availability.h
@@ -11128,7 +11280,7 @@ all: $(TARGET_GAME)
 .o/thing_lava.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_lava.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_lava.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_lava.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_lava.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_lava.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_lava.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_lava.o: /usr/include/sys/unistd.h
@@ -11207,7 +11359,7 @@ all: $(TARGET_GAME)
 .o/thing_level.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_level.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_level.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_level.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_level.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_level.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_level.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_level.o: /usr/include/sys/unistd.h
@@ -11311,7 +11463,7 @@ all: $(TARGET_GAME)
 .o/thing_lifespan.o: /usr/include/__wctype.h
 .o/thing_lifespan.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_lifespan.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_lifespan.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_lifespan.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_lifespan.o: my_light.h my_thing_template.h my_dice.h my_tile.h
 .o/thing_lifespan.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_lifespan.o: my_size.h my_thing_ai.h my_dmap.h my_thing_id.h
@@ -11390,7 +11542,7 @@ all: $(TARGET_GAME)
 .o/thing_light.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_light.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_light.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_light.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_light.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_light.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_light.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_light.o: my_level_static.h my_dungeon_grid.h my_color.h my_sprintf.h
@@ -11474,7 +11626,7 @@ all: $(TARGET_GAME)
 .o/thing_location.o: /usr/include/__wctype.h
 .o/thing_location.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_location.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_location.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_location.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_location.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_location.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_location.o: my_level_static.h my_dungeon_grid.h my_thing.h
@@ -11529,7 +11681,7 @@ all: $(TARGET_GAME)
 .o/thing_log.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_log.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_log.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_log.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_log.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_log.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_log.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_log.o: /usr/include/sys/unistd.h
@@ -11607,7 +11759,7 @@ all: $(TARGET_GAME)
 .o/thing_lunge.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_lunge.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_lunge.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_lunge.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_lunge.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_lunge.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_lunge.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_lunge.o: /usr/include/sys/unistd.h
@@ -11641,6 +11793,82 @@ all: $(TARGET_GAME)
 .o/thing_lunge.o: /usr/include/sys/_types/_errno_t.h /usr/include/strings.h
 .o/thing_lunge.o: /usr/include/secure/_strings.h
 .o/thing_lunge.o: /usr/include/secure/_string.h my_gl.h
+.o/thing_match.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
+.o/thing_match.o: /usr/include/sys/cdefs.h
+.o/thing_match.o: /usr/include/sys/_symbol_aliasing.h
+.o/thing_match.o: /usr/include/sys/_posix_availability.h
+.o/thing_match.o: /usr/include/Availability.h
+.o/thing_match.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+.o/thing_match.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/thing_match.o: /usr/include/i386/_types.h
+.o/thing_match.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/thing_match.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/thing_match.o: /usr/include/sys/_types/_int8_t.h
+.o/thing_match.o: /usr/include/sys/_types/_int16_t.h
+.o/thing_match.o: /usr/include/sys/_types/_int32_t.h
+.o/thing_match.o: /usr/include/sys/_types/_int64_t.h
+.o/thing_match.o: /usr/include/_types/_uint8_t.h
+.o/thing_match.o: /usr/include/_types/_uint16_t.h
+.o/thing_match.o: /usr/include/_types/_uint32_t.h
+.o/thing_match.o: /usr/include/_types/_uint64_t.h
+.o/thing_match.o: /usr/include/sys/_types/_intptr_t.h
+.o/thing_match.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/thing_match.o: /usr/include/sys/_types/_u_int8_t.h
+.o/thing_match.o: /usr/include/sys/_types/_u_int16_t.h
+.o/thing_match.o: /usr/include/sys/_types/_u_int32_t.h
+.o/thing_match.o: /usr/include/sys/_types/_u_int64_t.h
+.o/thing_match.o: /usr/include/sys/_types/_uintptr_t.h
+.o/thing_match.o: /usr/include/_types/_intmax_t.h
+.o/thing_match.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
+.o/thing_match.o: /usr/include/stdio.h /usr/include/_stdio.h
+.o/thing_match.o: /usr/include/sys/_types/_va_list.h
+.o/thing_match.o: /usr/include/sys/_types/_size_t.h
+.o/thing_match.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/thing_match.o: /usr/include/sys/_types/_off_t.h
+.o/thing_match.o: /usr/include/sys/_types/_ssize_t.h
+.o/thing_match.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+.o/thing_match.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
+.o/thing_match.o: /usr/include/assert.h my_vector_bounds_check.h
+.o/thing_match.o: c_plus_plus_serializer.h my_level.h my_point.h my_math.h
+.o/thing_match.o: /usr/include/math.h my_time.h /usr/include/unistd.h
+.o/thing_match.o: /usr/include/sys/unistd.h
+.o/thing_match.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/thing_match.o: /usr/include/sys/_types/_seek_set.h
+.o/thing_match.o: /usr/include/sys/_types/_uid_t.h
+.o/thing_match.o: /usr/include/sys/_types/_gid_t.h
+.o/thing_match.o: /usr/include/sys/_types/_pid_t.h
+.o/thing_match.o: /usr/include/sys/_types/_useconds_t.h
+.o/thing_match.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
+.o/thing_match.o: /usr/include/sys/_types/_fd_def.h
+.o/thing_match.o: /usr/include/sys/_types/_timespec.h
+.o/thing_match.o: /usr/include/sys/_types/_timeval.h
+.o/thing_match.o: /usr/include/sys/_types/_time_t.h
+.o/thing_match.o: /usr/include/sys/_types/_suseconds_t.h
+.o/thing_match.o: /usr/include/sys/_types/_sigset_t.h
+.o/thing_match.o: /usr/include/sys/_types/_fd_setsize.h
+.o/thing_match.o: /usr/include/sys/_types/_fd_set.h
+.o/thing_match.o: /usr/include/sys/_types/_fd_clr.h
+.o/thing_match.o: /usr/include/sys/_types/_fd_isset.h
+.o/thing_match.o: /usr/include/sys/_types/_fd_zero.h
+.o/thing_match.o: /usr/include/sys/_types/_fd_copy.h
+.o/thing_match.o: /usr/include/sys/_select.h /usr/include/sys/_types/_dev_t.h
+.o/thing_match.o: /usr/include/sys/_types/_mode_t.h
+.o/thing_match.o: /usr/include/sys/_types/_uuid_t.h
+.o/thing_match.o: /usr/include/gethostuuid.h /usr/include/sys/time.h
+.o/thing_match.o: /usr/include/sys/_types/_timeval64.h /usr/include/time.h
+.o/thing_match.o: /usr/include/sys/_types/_clock_t.h my_sdl.h my_command.h
+.o/thing_match.o: my_token.h my_string.h /usr/include/wchar.h
+.o/thing_match.o: /usr/include/sys/_types/_mbstate_t.h
+.o/thing_match.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/thing_match.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
+.o/thing_match.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/thing_match.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/thing_match.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/thing_match.o: my_depth.h my_particle.h my_size.h my_thing_id.h
+.o/thing_match.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
+.o/thing_match.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
+.o/thing_match.o: my_thing_template.h my_dice.h my_tile.h my_color.h
+.o/thing_match.o: my_thing_ai.h
 .o/thing_move.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/thing_move.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/thing_move.o: /usr/include/sys/_symbol_aliasing.h
@@ -11687,7 +11915,7 @@ all: $(TARGET_GAME)
 .o/thing_move.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_move.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_move.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_move.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_move.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_move.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_move.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_move.o: /usr/include/sys/unistd.h
@@ -11796,7 +12024,7 @@ all: $(TARGET_GAME)
 .o/thing_move_dir.o: /usr/include/__wctype.h
 .o/thing_move_dir.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_move_dir.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_move_dir.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_move_dir.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_move_dir.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_move_dir.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_move_dir.o: my_level_static.h my_dungeon_grid.h my_color.h
@@ -11869,7 +12097,7 @@ all: $(TARGET_GAME)
 .o/thing_msg.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_msg.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_msg.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_msg.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_msg.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_msg.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
 .o/thing_msg.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/thing_msg.o: my_dungeon_grid.h my_thing.h my_light.h my_thing_template.h
@@ -11948,7 +12176,7 @@ all: $(TARGET_GAME)
 .o/thing_nearby.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_nearby.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_nearby.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_nearby.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_nearby.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_nearby.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_nearby.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_nearby.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -12028,7 +12256,7 @@ all: $(TARGET_GAME)
 .o/thing_obstacle.o: /usr/include/__wctype.h
 .o/thing_obstacle.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_obstacle.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_obstacle.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_obstacle.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_obstacle.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_obstacle.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_obstacle.o: my_level_static.h my_dungeon_grid.h my_thing.h
@@ -12106,7 +12334,7 @@ all: $(TARGET_GAME)
 .o/thing_on_fire.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_on_fire.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_on_fire.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_on_fire.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_on_fire.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_on_fire.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_on_fire.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_on_fire.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -12186,7 +12414,7 @@ all: $(TARGET_GAME)
 .o/thing_owner.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_owner.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_owner.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_owner.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_owner.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_owner.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_owner.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_owner.o: my_level_static.h my_dungeon_grid.h my_color.h my_sprintf.h
@@ -12240,7 +12468,7 @@ all: $(TARGET_GAME)
 .o/thing_path.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_path.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_path.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_path.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_path.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_path.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_path.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_path.o: /usr/include/sys/unistd.h
@@ -12271,6 +12499,82 @@ all: $(TARGET_GAME)
 .o/thing_path.o: my_wid.h my_ascii.h my_color.h my_tex.h my_tile.h
 .o/thing_path.o: my_wid_tiles.h my_thing.h my_light.h my_thing_template.h
 .o/thing_path.o: my_dice.h my_thing_ai.h
+.o/thing_place.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
+.o/thing_place.o: /usr/include/sys/cdefs.h
+.o/thing_place.o: /usr/include/sys/_symbol_aliasing.h
+.o/thing_place.o: /usr/include/sys/_posix_availability.h
+.o/thing_place.o: /usr/include/Availability.h
+.o/thing_place.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+.o/thing_place.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/thing_place.o: /usr/include/i386/_types.h
+.o/thing_place.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/thing_place.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/thing_place.o: /usr/include/sys/_types/_int8_t.h
+.o/thing_place.o: /usr/include/sys/_types/_int16_t.h
+.o/thing_place.o: /usr/include/sys/_types/_int32_t.h
+.o/thing_place.o: /usr/include/sys/_types/_int64_t.h
+.o/thing_place.o: /usr/include/_types/_uint8_t.h
+.o/thing_place.o: /usr/include/_types/_uint16_t.h
+.o/thing_place.o: /usr/include/_types/_uint32_t.h
+.o/thing_place.o: /usr/include/_types/_uint64_t.h
+.o/thing_place.o: /usr/include/sys/_types/_intptr_t.h
+.o/thing_place.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/thing_place.o: /usr/include/sys/_types/_u_int8_t.h
+.o/thing_place.o: /usr/include/sys/_types/_u_int16_t.h
+.o/thing_place.o: /usr/include/sys/_types/_u_int32_t.h
+.o/thing_place.o: /usr/include/sys/_types/_u_int64_t.h
+.o/thing_place.o: /usr/include/sys/_types/_uintptr_t.h
+.o/thing_place.o: /usr/include/_types/_intmax_t.h
+.o/thing_place.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
+.o/thing_place.o: /usr/include/stdio.h /usr/include/_stdio.h
+.o/thing_place.o: /usr/include/sys/_types/_va_list.h
+.o/thing_place.o: /usr/include/sys/_types/_size_t.h
+.o/thing_place.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/thing_place.o: /usr/include/sys/_types/_off_t.h
+.o/thing_place.o: /usr/include/sys/_types/_ssize_t.h
+.o/thing_place.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+.o/thing_place.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
+.o/thing_place.o: /usr/include/assert.h my_vector_bounds_check.h
+.o/thing_place.o: c_plus_plus_serializer.h my_level.h my_point.h my_math.h
+.o/thing_place.o: /usr/include/math.h my_time.h /usr/include/unistd.h
+.o/thing_place.o: /usr/include/sys/unistd.h
+.o/thing_place.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/thing_place.o: /usr/include/sys/_types/_seek_set.h
+.o/thing_place.o: /usr/include/sys/_types/_uid_t.h
+.o/thing_place.o: /usr/include/sys/_types/_gid_t.h
+.o/thing_place.o: /usr/include/sys/_types/_pid_t.h
+.o/thing_place.o: /usr/include/sys/_types/_useconds_t.h
+.o/thing_place.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
+.o/thing_place.o: /usr/include/sys/_types/_fd_def.h
+.o/thing_place.o: /usr/include/sys/_types/_timespec.h
+.o/thing_place.o: /usr/include/sys/_types/_timeval.h
+.o/thing_place.o: /usr/include/sys/_types/_time_t.h
+.o/thing_place.o: /usr/include/sys/_types/_suseconds_t.h
+.o/thing_place.o: /usr/include/sys/_types/_sigset_t.h
+.o/thing_place.o: /usr/include/sys/_types/_fd_setsize.h
+.o/thing_place.o: /usr/include/sys/_types/_fd_set.h
+.o/thing_place.o: /usr/include/sys/_types/_fd_clr.h
+.o/thing_place.o: /usr/include/sys/_types/_fd_isset.h
+.o/thing_place.o: /usr/include/sys/_types/_fd_zero.h
+.o/thing_place.o: /usr/include/sys/_types/_fd_copy.h
+.o/thing_place.o: /usr/include/sys/_select.h /usr/include/sys/_types/_dev_t.h
+.o/thing_place.o: /usr/include/sys/_types/_mode_t.h
+.o/thing_place.o: /usr/include/sys/_types/_uuid_t.h
+.o/thing_place.o: /usr/include/gethostuuid.h /usr/include/sys/time.h
+.o/thing_place.o: /usr/include/sys/_types/_timeval64.h /usr/include/time.h
+.o/thing_place.o: /usr/include/sys/_types/_clock_t.h my_sdl.h my_command.h
+.o/thing_place.o: my_token.h my_string.h /usr/include/wchar.h
+.o/thing_place.o: /usr/include/sys/_types/_mbstate_t.h
+.o/thing_place.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/thing_place.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
+.o/thing_place.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/thing_place.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/thing_place.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/thing_place.o: my_depth.h my_particle.h my_size.h my_thing_id.h
+.o/thing_place.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
+.o/thing_place.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
+.o/thing_place.o: my_thing_template.h my_dice.h my_tile.h my_color.h
+.o/thing_place.o: my_thing_ai.h
 .o/thing_rest.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/thing_rest.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/thing_rest.o: /usr/include/sys/_posix_availability.h
@@ -12316,7 +12620,7 @@ all: $(TARGET_GAME)
 .o/thing_rest.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_rest.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_rest.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_rest.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_rest.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_rest.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_rest.o: my_thing.h my_time.h /usr/include/unistd.h
 .o/thing_rest.o: /usr/include/sys/unistd.h
@@ -12393,7 +12697,7 @@ all: $(TARGET_GAME)
 .o/thing_resurrect.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_resurrect.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_resurrect.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_resurrect.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_resurrect.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_resurrect.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_resurrect.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_resurrect.o: /usr/include/sys/unistd.h
@@ -12500,7 +12804,7 @@ all: $(TARGET_GAME)
 .o/thing_shove.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_shove.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_shove.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_shove.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_shove.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_shove.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_shove.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_shove.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -12580,7 +12884,7 @@ all: $(TARGET_GAME)
 .o/thing_spawn.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_spawn.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_spawn.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_spawn.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_spawn.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_spawn.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_spawn.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_spawn.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -12634,7 +12938,7 @@ all: $(TARGET_GAME)
 .o/thing_stamina.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_stamina.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_stamina.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_stamina.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_stamina.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_stamina.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_stamina.o: my_thing.h my_time.h /usr/include/unistd.h
 .o/thing_stamina.o: /usr/include/sys/unistd.h
@@ -12734,7 +13038,7 @@ all: $(TARGET_GAME)
 .o/thing_steal.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_steal.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_steal.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_steal.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_steal.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_steal.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_steal.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_steal.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -12816,7 +13120,7 @@ all: $(TARGET_GAME)
 .o/thing_string.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_string.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_string.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_string.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_string.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_string.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_string.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_string.o: my_level_static.h my_dungeon_grid.h my_color.h
@@ -12900,7 +13204,7 @@ all: $(TARGET_GAME)
 .o/thing_template.o: /usr/include/__wctype.h
 .o/thing_template.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_template.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_template.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_template.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_template.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_template.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_template.o: my_level_static.h my_dungeon_grid.h my_thing_template.h
@@ -12986,10 +13290,10 @@ all: $(TARGET_GAME)
 .o/thing_template_api.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_template_api.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_template_api.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_template_api.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/thing_template_api.o: my_slre.h my_depth.h my_particle.h my_size.h
-.o/thing_template_api.o: my_thing_id.h my_dungeon.h my_room.h my_charmap.h
-.o/thing_template_api.o: my_dmap.h my_level_static.h my_dungeon_grid.h
+.o/thing_template_api.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/thing_template_api.o: my_depth.h my_particle.h my_size.h my_thing_id.h
+.o/thing_template_api.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
+.o/thing_template_api.o: my_level_static.h my_dungeon_grid.h
 .o/thing_template_api.o: my_thing_template.h my_dice.h my_tile.h my_color.h
 .o/thing_terrain.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/thing_terrain.o: /usr/include/sys/cdefs.h
@@ -13063,7 +13367,7 @@ all: $(TARGET_GAME)
 .o/thing_terrain.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_terrain.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_terrain.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_terrain.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_terrain.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_terrain.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_terrain.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_terrain.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -13137,7 +13441,7 @@ all: $(TARGET_GAME)
 .o/thing_text.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_text.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_text.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_text.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_text.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_text.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_text.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_text.o: my_level_static.h my_dungeon_grid.h my_color.h my_sprintf.h
@@ -13191,7 +13495,7 @@ all: $(TARGET_GAME)
 .o/thing_tick.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_tick.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_tick.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_tick.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_tick.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_tick.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_tick.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_tick.o: /usr/include/sys/unistd.h
@@ -13267,7 +13571,7 @@ all: $(TARGET_GAME)
 .o/thing_tile.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_tile.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_tile.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_tile.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_tile.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_tile.o: my_point.h my_math.h /usr/include/math.h my_color.h
 .o/thing_tile.o: my_thing.h my_time.h /usr/include/unistd.h
 .o/thing_tile.o: /usr/include/sys/unistd.h
@@ -13364,7 +13668,7 @@ all: $(TARGET_GAME)
 .o/thing_torch.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_torch.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_torch.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_torch.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_torch.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_torch.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_torch.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_torch.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -13422,7 +13726,7 @@ all: $(TARGET_GAME)
 .o/thing_treasure.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/thing_treasure.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_treasure.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_treasure.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_treasure.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_treasure.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_treasure.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_treasure.o: /usr/include/sys/unistd.h
@@ -13530,7 +13834,7 @@ all: $(TARGET_GAME)
 .o/thing_update.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_update.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_update.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_update.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_update.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_update.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_update.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_update.o: my_level_static.h my_dungeon_grid.h my_color.h
@@ -13586,7 +13890,7 @@ all: $(TARGET_GAME)
 .o/thing_use.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_use.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_use.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_use.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_use.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_use.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_use.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_use.o: /usr/include/sys/unistd.h
@@ -13614,7 +13918,7 @@ all: $(TARGET_GAME)
 .o/thing_use.o: my_depth.h my_particle.h my_size.h my_thing_id.h my_dungeon.h
 .o/thing_use.o: my_room.h my_charmap.h my_dmap.h my_level_static.h
 .o/thing_use.o: my_dungeon_grid.h my_thing.h my_light.h my_thing_template.h
-.o/thing_use.o: my_dice.h my_tile.h my_color.h my_thing_ai.h
+.o/thing_use.o: my_dice.h my_tile.h my_color.h my_thing_ai.h my_python.h
 .o/thing_visible.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/thing_visible.o: /usr/include/sys/cdefs.h
 .o/thing_visible.o: /usr/include/sys/_symbol_aliasing.h
@@ -13687,7 +13991,7 @@ all: $(TARGET_GAME)
 .o/thing_visible.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_visible.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_visible.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_visible.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_visible.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_visible.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_visible.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_visible.o: my_level_static.h my_dungeon_grid.h my_color.h
@@ -13767,7 +14071,7 @@ all: $(TARGET_GAME)
 .o/thing_water.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_water.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_water.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_water.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_water.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_water.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_water.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_water.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -13850,7 +14154,7 @@ all: $(TARGET_GAME)
 .o/thing_weapon.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/thing_weapon.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_weapon.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_weapon.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_weapon.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_weapon.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/thing_weapon.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/thing_weapon.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -13902,7 +14206,7 @@ all: $(TARGET_GAME)
 .o/thing_wobble.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/thing_wobble.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/thing_wobble.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/thing_wobble.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/thing_wobble.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/thing_wobble.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/thing_wobble.o: my_level.h my_time.h /usr/include/unistd.h
 .o/thing_wobble.o: /usr/include/sys/unistd.h
@@ -13977,7 +14281,7 @@ all: $(TARGET_GAME)
 .o/tile.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/tile.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/tile.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/tile.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_tex.h
+.o/tile.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_tex.h
 .o/tile.o: my_pixel.h my_thing_template.h my_dice.h my_dmap.h my_game.h
 .o/tile.o: my_world.h my_level.h my_time.h /usr/include/unistd.h
 .o/tile.o: /usr/include/sys/unistd.h
@@ -14058,7 +14362,7 @@ all: $(TARGET_GAME)
 .o/time.o: /usr/include/sys/_types/_dev_t.h /usr/include/sys/_types/_mode_t.h
 .o/time.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
 .o/time.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
-.o/time.o: my_sdl.h my_command.h my_token.h my_slre.h
+.o/time.o: my_sdl.h my_command.h my_token.h slre.h
 .o/token.o: /usr/include/string.h /usr/include/_types.h
 .o/token.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
 .o/token.o: /usr/include/sys/_symbol_aliasing.h
@@ -14092,7 +14396,7 @@ all: $(TARGET_GAME)
 .o/token.o: /usr/include/sys/_types/_off_t.h /usr/include/secure/_stdio.h
 .o/token.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
 .o/token.o: /usr/include/assert.h my_vector_bounds_check.h
-.o/token.o: c_plus_plus_serializer.h my_slre.h my_token.h my_string.h
+.o/token.o: c_plus_plus_serializer.h slre.h my_token.h my_string.h
 .o/token.o: /usr/include/wchar.h /usr/include/sys/_types/_mbstate_t.h
 .o/token.o: /usr/include/sys/_types/_ct_rune_t.h
 .o/token.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
@@ -14208,8 +14512,8 @@ all: $(TARGET_GAME)
 .o/ttf.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/ttf.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
 .o/ttf.o: /usr/include/_ctype.h /usr/include/runetype.h my_tex.h my_tile.h
-.o/ttf.o: my_sdl.h my_command.h my_token.h my_string.h my_slre.h
-.o/ttf.o: my_wid_tiles.h my_thing.h my_time.h /usr/include/unistd.h
+.o/ttf.o: my_sdl.h my_command.h my_token.h my_string.h slre.h my_wid_tiles.h
+.o/ttf.o: my_thing.h my_time.h /usr/include/unistd.h
 .o/ttf.o: /usr/include/sys/unistd.h /usr/include/sys/_types/_posix_vdisable.h
 .o/ttf.o: /usr/include/sys/_types/_seek_set.h
 .o/ttf.o: /usr/include/sys/_types/_uid_t.h /usr/include/sys/_types/_gid_t.h
@@ -14338,7 +14642,7 @@ all: $(TARGET_GAME)
 .o/wid.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h my_point.h
+.o/wid.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_point.h
 .o/wid.o: my_math.h /usr/include/math.h my_world.h my_level.h my_time.h
 .o/wid.o: /usr/include/unistd.h /usr/include/sys/unistd.h
 .o/wid.o: /usr/include/sys/_types/_posix_vdisable.h
@@ -14367,7 +14671,7 @@ all: $(TARGET_GAME)
 .o/wid.o: /usr/include/sys/_types/_errno_t.h /usr/include/strings.h
 .o/wid.o: /usr/include/secure/_strings.h /usr/include/secure/_string.h
 .o/wid.o: my_gl.h my_wid_inventory.h my_wid_thing_info.h my_wid_popup.h
-.o/wid.o: my_wid_text_box.h
+.o/wid.o: my_wid_text_box.h my_wid_thing_collect.h
 .o/wid_bag.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/wid_bag.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/wid_bag.o: /usr/include/sys/_posix_availability.h
@@ -14409,7 +14713,7 @@ all: $(TARGET_GAME)
 .o/wid_bag.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_bag.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_bag.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_bag.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_bag.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_bag.o: my_wid_bag.h my_wid.h my_point.h my_math.h /usr/include/math.h
 .o/wid_bag.o: my_size.h my_ascii.h my_color.h my_tex.h my_tile.h
 .o/wid_bag.o: my_wid_tiles.h my_thing.h my_time.h /usr/include/unistd.h
@@ -14485,7 +14789,7 @@ all: $(TARGET_GAME)
 .o/wid_botcon.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_botcon.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_botcon.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_botcon.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_botcon.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_botcon.o: my_wid_botcon.h my_point.h my_math.h /usr/include/math.h
 .o/wid_botcon.o: my_size.h my_wid.h my_ascii.h my_color.h my_tex.h my_tile.h
 .o/wid_botcon.o: my_wid_tiles.h my_thing.h my_time.h /usr/include/unistd.h
@@ -14561,7 +14865,7 @@ all: $(TARGET_GAME)
 .o/wid_console.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_console.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_console.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_console.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_console.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_console.o: my_wid_console.h my_wid.h my_point.h my_math.h
 .o/wid_console.o: /usr/include/math.h my_size.h my_ascii.h my_color.h
 .o/wid_console.o: my_tex.h my_tile.h my_wid_tiles.h my_thing.h my_time.h
@@ -14638,7 +14942,7 @@ all: $(TARGET_GAME)
 .o/wid_inventory.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/wid_inventory.o: /usr/include/sys/_types/_wint_t.h
 .o/wid_inventory.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_inventory.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_inventory.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_inventory.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/wid_inventory.o: my_level.h my_time.h /usr/include/unistd.h
 .o/wid_inventory.o: /usr/include/sys/unistd.h
@@ -14671,7 +14975,7 @@ all: $(TARGET_GAME)
 .o/wid_inventory.o: my_color.h my_tex.h my_tile.h my_wid_tiles.h my_thing.h
 .o/wid_inventory.o: my_light.h my_thing_template.h my_dice.h my_thing_ai.h
 .o/wid_inventory.o: my_wid_thing_info.h my_wid_popup.h my_wid_text_box.h
-.o/wid_inventory.o: my_wid_bag.h
+.o/wid_inventory.o: my_wid_thing_collect.h my_wid_bag.h
 .o/wid_leftbar.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/wid_leftbar.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/wid_leftbar.o: /usr/include/sys/_symbol_aliasing.h
@@ -14718,7 +15022,7 @@ all: $(TARGET_GAME)
 .o/wid_leftbar.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_leftbar.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_leftbar.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_leftbar.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_leftbar.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_leftbar.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/wid_leftbar.o: my_level.h my_time.h /usr/include/unistd.h
 .o/wid_leftbar.o: /usr/include/sys/unistd.h
@@ -14817,11 +15121,11 @@ all: $(TARGET_GAME)
 .o/wid_log.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/wid_log.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_log.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_log.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/wid_log.o: my_wid.h my_point.h my_math.h /usr/include/math.h my_size.h
-.o/wid_log.o: my_ascii.h my_color.h my_tex.h my_tile.h my_wid_tiles.h
-.o/wid_log.o: my_thing.h my_light.h my_thing_template.h my_dice.h
-.o/wid_log.o: my_thing_ai.h my_dmap.h my_thing_id.h my_depth.h my_log.h
+.o/wid_log.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_wid.h
+.o/wid_log.o: my_point.h my_math.h /usr/include/math.h my_size.h my_ascii.h
+.o/wid_log.o: my_color.h my_tex.h my_tile.h my_wid_tiles.h my_thing.h
+.o/wid_log.o: my_light.h my_thing_template.h my_dice.h my_thing_ai.h
+.o/wid_log.o: my_dmap.h my_thing_id.h my_depth.h my_log.h
 .o/wid_minicon.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/wid_minicon.o: /usr/include/sys/cdefs.h
 .o/wid_minicon.o: /usr/include/sys/_symbol_aliasing.h
@@ -14868,7 +15172,7 @@ all: $(TARGET_GAME)
 .o/wid_minicon.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_minicon.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_minicon.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_minicon.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_minicon.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_minicon.o: my_wid_minicon.h my_point.h my_math.h /usr/include/math.h
 .o/wid_minicon.o: my_size.h my_wid.h my_ascii.h my_color.h my_tex.h my_tile.h
 .o/wid_minicon.o: my_wid_tiles.h my_thing.h my_time.h /usr/include/unistd.h
@@ -14898,9 +15202,9 @@ all: $(TARGET_GAME)
 .o/wid_minicon.o: my_thing_template.h my_dice.h my_thing_ai.h my_dmap.h
 .o/wid_minicon.o: my_thing_id.h my_depth.h my_wid_inventory.h
 .o/wid_minicon.o: my_wid_thing_info.h my_wid_popup.h my_wid_text_box.h
-.o/wid_minicon.o: my_ttf.h my_font.h my_wid_bag.h my_game.h my_world.h
-.o/wid_minicon.o: my_level.h my_particle.h my_dungeon.h my_room.h
-.o/wid_minicon.o: my_charmap.h my_level_static.h my_dungeon_grid.h
+.o/wid_minicon.o: my_wid_thing_collect.h my_ttf.h my_font.h my_wid_bag.h
+.o/wid_minicon.o: my_game.h my_world.h my_level.h my_particle.h my_dungeon.h
+.o/wid_minicon.o: my_room.h my_charmap.h my_level_static.h my_dungeon_grid.h
 .o/wid_popup.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/wid_popup.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/wid_popup.o: /usr/include/sys/_posix_availability.h
@@ -14946,7 +15250,7 @@ all: $(TARGET_GAME)
 .o/wid_popup.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_popup.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_popup.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_popup.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_popup.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_popup.o: my_wid_popup.h my_wid_text_box.h my_wid.h my_point.h
 .o/wid_popup.o: my_math.h /usr/include/math.h my_size.h my_ascii.h my_color.h
 .o/wid_popup.o: my_tex.h my_tile.h my_wid_tiles.h my_thing.h my_time.h
@@ -15020,7 +15324,7 @@ all: $(TARGET_GAME)
 .o/wid_rightbar.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_rightbar.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_rightbar.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_rightbar.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_rightbar.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_rightbar.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/wid_rightbar.o: my_level.h my_time.h /usr/include/unistd.h
 .o/wid_rightbar.o: /usr/include/sys/unistd.h
@@ -15098,7 +15402,7 @@ all: $(TARGET_GAME)
 .o/wid_text_box.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_text_box.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_text_box.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_text_box.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_text_box.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_text_box.o: my_wid_text_box.h my_wid.h my_point.h my_math.h
 .o/wid_text_box.o: /usr/include/math.h my_size.h my_ascii.h my_color.h
 .o/wid_text_box.o: my_tex.h my_tile.h my_wid_tiles.h my_thing.h my_time.h
@@ -15181,9 +15485,9 @@ all: $(TARGET_GAME)
 .o/wid_thing_collect.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/wid_thing_collect.o: /usr/include/sys/_types/_wint_t.h
 .o/wid_thing_collect.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_thing_collect.o: /usr/include/_ctype.h /usr/include/runetype.h
-.o/wid_thing_collect.o: my_slre.h my_point.h my_math.h /usr/include/math.h
-.o/wid_thing_collect.o: my_world.h my_level.h my_time.h /usr/include/unistd.h
+.o/wid_thing_collect.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/wid_thing_collect.o: my_point.h my_math.h /usr/include/math.h my_world.h
+.o/wid_thing_collect.o: my_level.h my_time.h /usr/include/unistd.h
 .o/wid_thing_collect.o: /usr/include/sys/unistd.h
 .o/wid_thing_collect.o: /usr/include/sys/_types/_posix_vdisable.h
 .o/wid_thing_collect.o: /usr/include/sys/_types/_seek_set.h
@@ -15217,7 +15521,6 @@ all: $(TARGET_GAME)
 .o/wid_thing_collect.o: my_thing_template.h my_dice.h my_thing_ai.h
 .o/wid_thing_collect.o: my_wid_botcon.h my_wid_popup.h my_wid_text_box.h
 .o/wid_thing_collect.o: my_wid_thing_collect.h my_wid_console.h my_wid_bag.h
-.o/wid_thing_collect.o: my_traceback.h
 .o/wid_thing_info.o: my_game.h my_main.h my_sys.h my_pcg_basic.h
 .o/wid_thing_info.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/wid_thing_info.o: /usr/include/sys/_symbol_aliasing.h
@@ -15266,7 +15569,7 @@ all: $(TARGET_GAME)
 .o/wid_thing_info.o: /usr/include/_wctype.h /usr/include/__wctype.h
 .o/wid_thing_info.o: /usr/include/sys/_types/_wint_t.h
 .o/wid_thing_info.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_thing_info.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/wid_thing_info.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/wid_thing_info.o: my_point.h my_math.h /usr/include/math.h my_world.h
 .o/wid_thing_info.o: my_level.h my_time.h /usr/include/unistd.h
 .o/wid_thing_info.o: /usr/include/sys/unistd.h
@@ -15348,8 +15651,7 @@ all: $(TARGET_GAME)
 .o/wid_tiles.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
 .o/wid_tiles.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/wid_tiles.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_tiles.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/wid_tiles.o: my_tex.h
+.o/wid_tiles.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_tex.h
 .o/world.o: my_dungeon.h my_room.h my_main.h my_sys.h my_pcg_basic.h
 .o/world.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/world.o: /usr/include/sys/_symbol_aliasing.h
@@ -15411,9 +15713,9 @@ all: $(TARGET_GAME)
 .o/world.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/world.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/world.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/world.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
-.o/world.o: my_light.h my_thing_template.h my_dice.h my_tile.h my_color.h
-.o/world.o: my_size.h my_thing_ai.h my_thing_id.h
+.o/world.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h my_light.h
+.o/world.o: my_thing_template.h my_dice.h my_tile.h my_color.h my_size.h
+.o/world.o: my_thing_ai.h my_thing_id.h
 .o/world_fini.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/world_fini.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/world_fini.o: /usr/include/sys/_posix_availability.h
@@ -15482,7 +15784,7 @@ all: $(TARGET_GAME)
 .o/world_fini.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/world_fini.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/world_fini.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/world_fini.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/world_fini.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/world_fini.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/world_fini.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/world_fini.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
@@ -15556,7 +15858,7 @@ all: $(TARGET_GAME)
 .o/world_init.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
 .o/world_init.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
 .o/world_init.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/world_init.o: /usr/include/_ctype.h /usr/include/runetype.h my_slre.h
+.o/world_init.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
 .o/world_init.o: my_depth.h my_particle.h my_size.h my_thing_id.h
 .o/world_init.o: my_dungeon.h my_room.h my_charmap.h my_dmap.h
 .o/world_init.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h

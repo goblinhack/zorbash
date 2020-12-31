@@ -2,7 +2,7 @@ import builtins
 import zx
 import tp
 
-def spawn(me, x, y):
+def tp_effect(me, x, y):
     zx.tp_spawn_next_to(me, "jelly1")
     zx.tp_spawn_next_to(me, "jelly1")
     zx.tp_spawn_next_to(me, "jelly1")
@@ -55,7 +55,7 @@ def tp_init(name, text_name):
     x.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when attacked and multiplying when attacked. This is an adult. It will eat its own children!")
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
-    x.set_on_death_do("jelly2.spawn()")
+    x.set_on_death_do("jelly2.tp_effect()")
     x.set_on_death_is_corpse(True)
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stats_attack_dice("1d5")

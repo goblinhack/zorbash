@@ -806,6 +806,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"tp_spawn_radius_range",                   (PyCFunction)tp_spawn_radius_range_,                    METH_VARARGS | METH_KEYWORDS, "spawn things"},
     {"tp_spawn_fire",                           (PyCFunction)tp_spawn_fire,                             METH_VARARGS | METH_KEYWORDS, "spawn fire"},
     {"tp_spawn_under",                          (PyCFunction)tp_spawn_under,                            METH_VARARGS | METH_KEYWORDS, "spawn under"},
+    {"tp_kill_if",                              (PyCFunction)tp_kill_if,                                METH_VARARGS | METH_KEYWORDS, "kill if"},
+    {"tp_place",                                (PyCFunction)tp_place,                                METH_VARARGS | METH_KEYWORDS, "kill if"},
     {"tp_update",                               (PyCFunction)tp_update_,                                METH_VARARGS | METH_KEYWORDS, "update template"},
     PYFUNC_REF(SDLGetKeyState),
 

@@ -15,6 +15,8 @@ PyObject *tp_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject 
 PyObject *tp_spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_spawn_fire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_spawn_under(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tp_kill_if(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tp_place(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define TP_SET_PROTO(__field__)                                                     \
 PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds);

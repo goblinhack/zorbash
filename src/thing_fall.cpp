@@ -85,6 +85,8 @@ bool Thing::fall_to_next_level (void)
         return false;
     }
 
+    log("Try to fall");
+_
     auto where_to = level->world_at + point3d(0, 0, 1);
     game->init_level(where_to);
     if (is_player()) {
@@ -93,7 +95,15 @@ bool Thing::fall_to_next_level (void)
 
     auto next_level = get(game->world.levels, where_to.x, where_to.y, where_to.z);
     if (!next_level) {
-        MINICON("The chasm is permanently blocked!");
+        if (is_player()) {
+            MINICON("The chasm is permanently blocked!");
+        }
+        log("No, no next level");
+        return false;
+    }
+
+    if (is_floating()) {
+        log("No, is floating");
         return false;
     }
 
