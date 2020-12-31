@@ -8,13 +8,13 @@
 #define _MY_DMAP_H_
 
 #include "my_point.h"
-#include <array>
+// REMOVED #include <array>
 
 typedef struct Dmap_ {
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> val {};
 } Dmap;
 
-#include <type_traits>
+// REMOVED #include <type_traits>
 
 template <typename T>
 size_t len(const T& a)

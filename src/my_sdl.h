@@ -8,7 +8,7 @@
 #define _MY_SDL_H_
 
 #include <SDL.h>
-#include <SDL_keyboard.h>
+// REMOVED #include <SDL_keyboard.h>
 #include <SDL_mixer.h>
 #include "my_main.h"
 #include "my_command.h"

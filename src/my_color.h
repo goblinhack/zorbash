@@ -7,8 +7,8 @@
 #ifndef _MY_MY_COLOR_H_
 #define _MY_MY_COLOR_H_
 
-#include <map>
-#include "c_plus_plus_serializer.h"
+// REMOVED #include <map>
+// REMOVED #include "c_plus_plus_serializer.h"
 
 template<class T> class my_acolor
 {

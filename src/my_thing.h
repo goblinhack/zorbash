@@ -7,13 +7,13 @@
 #ifndef _MY_THING_H_
 #define _MY_THING_H_
 
-#include <set>
+// REMOVED #include <set>
 #include <list>
 #include "my_time.h"
 #include "my_light.h"
 #include "my_thing_ai.h"
 #include "my_thing_id.h"
-#include "my_depth.h"
+// REMOVED #include "my_depth.h"
 
 constexpr uint32_t THING_MAGIC_BEGIN = 11221122;
 constexpr uint32_t THING_MAGIC_END   = 22112211;

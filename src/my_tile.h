@@ -7,9 +7,9 @@
 #ifndef _MY_TILE_H_
 #define _MY_TILE_H_
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_sdl.h"
-#include "my_globals.h"
+// REMOVED #include "my_globals.h"
 #include "my_point.h"
 #include "my_color.h"
 

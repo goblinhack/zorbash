@@ -7,8 +7,8 @@
 #ifndef _MY_FILENODE_H_
 #define _MY_FILENODE_H_
 
-#include <map>
-#include <memory>
+// REMOVED #include <map>
+// REMOVED #include <memory>
 
 typedef std::shared_ptr< class file_node > file_nodep;
 typedef std::map< std::string, std::shared_ptr< class file_node > > file_nodes;
