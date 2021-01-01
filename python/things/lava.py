@@ -6,7 +6,7 @@ def lava_init(name, text_name, tiles=[]):
     x = tp.Tp(name, text_name)
     x.set_ai_obstacle(True)
     x.set_gfx_animated(True)
-    x.set_is_able_to_fall(False)
+    x.set_is_able_to_fall(True)
     x.set_is_cursor_can_hover_over_but_needs_double_click(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)

@@ -12,7 +12,7 @@ bool Thing::kill_if (const std::string& what, const point &p)
     //
     // Don't destroy the floor under critical items
     //
-    if (what == "is_floor") {
+    if ((what == "is_floor") || (what == "is_corridor")) {
         FOR_ALL_THINGS(level, t, p.x, p.y) {
             if (t->is_critical_to_level()) {
                 return true;

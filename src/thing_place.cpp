@@ -11,5 +11,13 @@ bool Thing::place (const std::string& what, const point &p)
 {_
     level->thing_new(what, fpoint(p.x, p.y));
 
+    //
+    // Just in case something is now on top of a chasm or lava
+    //
+    FOR_ALL_THINGS(level, t, p.x, p.y) {
+        t->location_check();
+    } FOR_ALL_THINGS_END()
+
+
     return true;
 }
