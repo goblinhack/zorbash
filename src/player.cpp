@@ -297,7 +297,14 @@ void player_tick (void)
         level->cursor_path_clear();
         game->tick_begin("player jumped");
     } else if (up || down || left || right || attack || wait) {
-        player->log("Move or attack");
+        if (attack) {
+            player->log("Player attack");
+        } else if (wait) {
+            player->log("Player collect or wait");
+        } else {
+            player->log("Player move");
+        }
+        _
 
         //
         // If we move manually, clear the path as it visually gets

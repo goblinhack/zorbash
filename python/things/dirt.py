@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name, tiles=[], left1_tiles=[]):
     x = tp.Tp(name)
-    x.set_is_able_to_fall(True)
+    x.set_is_able_to_fall(False)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_dirt(True)
     x.set_is_interesting(False)

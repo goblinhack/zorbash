@@ -13,12 +13,15 @@
 
 bool Thing::possible_to_attack (const Thingp it)
 {_
+    log("Is possible to attack %s?", it->to_string().c_str());
+_
     auto me = tp();
 
     //
     // Fire attacks via tick so it can get you when you fall or jump into it.
     //
     if (is_fire()) {
+        log("No; is fire");
         return false;
     }
 
@@ -33,37 +36,37 @@ bool Thing::possible_to_attack (const Thingp it)
     if (is_alive_monst() || is_resurrected) {
         if (me->is_jelly_baby_eater()) {
             if (it->is_jelly_baby()) {
-                log("Can attack %s", it->to_string().c_str());
+                log("Yes, can attack %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_treasure_eater()) {
             if (it->is_treasure()) {
-                log("Can attack %s", it->to_string().c_str());
+                log("Yes, can attack %s", it->to_string().c_str());
                 return true;
             }
             if (it->is_carrying_treasure()) {
-                log("Can steal from %s", it->to_string().c_str());
+                log("Yes, can steal from %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_potion_eater()) {
             if (it->is_potion()) {
-                log("Can attack %s", it->to_string().c_str());
+                log("Yes, can attack %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_meat_eater()) {
             if (!it->is_attackable_by_monst()) {
-                log("Cannot attack %s, not attackable by monst",
+                log("No, cannot attack %s, not attackable by monst",
                     it->to_string().c_str());
                 return false;
             }
             if (it->is_meat() || it->is_blood()) {
-                log("Can attack %s", it->to_string().c_str());
+                log("Yes, can attack %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -71,10 +74,10 @@ bool Thing::possible_to_attack (const Thingp it)
 
     if (is_player()) {
         if (!it->is_attackable_by_player()) {
-            log("Cannot attack %s, not attackable", it->to_string().c_str());
+            log("No, cannot attack %s, not attackable", it->to_string().c_str());
             return false;
         }
-        log("Can attack %s", it->to_string().c_str());
+        log("Yes, can attack %s", it->to_string().c_str());
         return true;
     }
 
@@ -88,7 +91,7 @@ bool Thing::possible_to_attack (const Thingp it)
                     //     it->to_string().c_str());
                     return false;
                 }
-                log("Can attack %s", it->to_string().c_str());
+                log("Yes, can attack %s", it->to_string().c_str());
                 return true;
             } else {
                 if (!it->is_attackable_by_player()) {
@@ -96,7 +99,7 @@ bool Thing::possible_to_attack (const Thingp it)
                         it->to_string().c_str());
                     return false;
                 }
-                log("Can attack %s", it->to_string().c_str());
+                log("Yes, can attack %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -105,13 +108,13 @@ bool Thing::possible_to_attack (const Thingp it)
     if (me->is_fire() || me->is_lava()) {
         if (it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
-                log("Can attack %s", it->to_string().c_str());
+                log("Yes, can attack %s", it->to_string().c_str());
                 return true;
             }
         }
     }
 
-    log("Ignore attack %s", it->to_string().c_str());
+    log("No, ignore attack %s", it->to_string().c_str());
     return false;
 }
 

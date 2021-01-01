@@ -28,7 +28,7 @@ bool Thing::achieve_goals_in_life (void)
         is_waiting_to_fall || 
         is_jumping) { 
         is_tick_done = true;
-        // log("Skip achieve goals in life");
+        log("Skip achieve goals in life");
         return true;
     }
 
@@ -153,7 +153,7 @@ void Thing::collision_check_do (void)
 void Thing::tick (void)
 {
     //if (is_player()) {
-    //    log("Tick");
+    // log("Tick");
     //}
     update_interpolated_position();
 
@@ -172,6 +172,7 @@ void Thing::tick (void)
                 }
             }
         }
+        log("Tick; is dead");
         return;
     }
 

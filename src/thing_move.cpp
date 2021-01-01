@@ -229,6 +229,7 @@ void Thing::update_interpolated_position (void)
             update_pos = true;
             new_pos = mid_at;
             last_mid_at = mid_at;
+log("set move end %u", time_get_time_ms_cached());
             set_timestamp_move_end(time_get_time_ms_cached());
         }
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
@@ -329,7 +330,11 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
-    // log("Move");
+    if (to == mid_at) {
+        return;
+    }
+
+    log("Move to %f,%f", mid_at.x, mid_at.y);
     level_pop();
     mid_at = to;
     level_push();

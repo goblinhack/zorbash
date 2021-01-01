@@ -5,7 +5,7 @@ import tp
 def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     x = tp.Tp(name)
     x.set_gfx_shown_in_bg(True)
-    x.set_is_able_to_fall(True)
+    x.set_is_able_to_fall(False)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_floor(True)
     x.set_is_interesting(False)
