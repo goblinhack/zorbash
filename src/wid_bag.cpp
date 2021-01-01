@@ -168,23 +168,26 @@ _
         // Finished moving all items from a temporary bag?
         //
         if (game->bag_primary->bag->is_temporary_bag() ||
-            game->bag_secondary->bag->is_temporary_bag()) {
+            (game->bag_secondary && game->bag_secondary->bag->is_temporary_bag())) {
 
             bag->log("Check if temporary bag is empty");
 
             game->bag_primary->bag->log("Primary bag contains %d items",
                (int) game->bag_primary->bag->monstp->carrying.size());
 
-            game->bag_primary->bag->log("Secondary bag contains %d items",
-               (int) game->bag_secondary->bag->monstp->carrying.size());
-
             if (game->bag_primary->bag->monstp->carrying.empty()) {
                 game->bag_primary->bag->log("Request cleanup, temporary bag_primary is empty");
                 game->request_destroy_bags = true;
             }
-            if (game->bag_secondary->bag->monstp->carrying.empty()) {
-                game->bag_secondary->bag->log("Request cleanup, temporary bag_secondary is empty");
-                game->request_destroy_bags = true;
+
+            if (game->bag_secondary) {
+                game->bag_secondary->bag->log("Secondary bag contains %d items",
+                    (int) game->bag_secondary->bag->monstp->carrying.size());
+
+                if (game->bag_secondary->bag->monstp->carrying.empty()) {
+                    game->bag_secondary->bag->log("Request cleanup, temporary bag_secondary is empty");
+                    game->request_destroy_bags = true;
+                }
             }
         }
     } else {

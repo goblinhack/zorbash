@@ -181,6 +181,9 @@ static uint8_t wid_inventory_item_mouse_up (Widp w,
         game->wid_thing_info_create(t);
     }
 
+    BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ to dismiss inventory.");
+    game->state_moving_items = true;
+
     return true;
 }
 

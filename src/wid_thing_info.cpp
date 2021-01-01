@@ -268,7 +268,7 @@ _
         }
     }
 
-    {
+    if (t->get_top_owner() == player) {
         t->log("Thing info create bags");
 
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
@@ -289,12 +289,14 @@ _
             bag_primary = new WidBag(player, tl, br, "Inventory");
         }
 
-        point tl = mid + point(0, - (t->bag_height() + 1));
-        point br = tl +  point(t->bag_width(), t->bag_height());
-        if (tp->bag_width() * tp->bag_height() < 100) {
-            bag_secondary = new WidBag(t, tl, br, "Wee bag");
-        } else {
-            bag_secondary = new WidBag(t, tl, br, "Big bag");
+        if (t->is_bag()) {
+            point tl = mid + point(0, - (t->bag_height() + 1));
+            point br = tl +  point(t->bag_width(), t->bag_height());
+            if (tp->bag_width() * tp->bag_height() < 100) {
+                bag_secondary = new WidBag(t, tl, br, "Wee bag");
+            } else {
+                bag_secondary = new WidBag(t, tl, br, "Big bag");
+            }
         }
     }
 
