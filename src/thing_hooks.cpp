@@ -134,6 +134,8 @@ void Thing::remove_all_references ()
     // Some things have lots of things they own
     //
     if (get_owned_count()) {
+        log("Remove all references, total %d", get_owned_count());
+
         //
         // Slow, but not used too often
         //

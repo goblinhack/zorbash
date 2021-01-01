@@ -94,6 +94,12 @@ void Thing::remove_owner (void)
 
     set_owner_id(0);
     old_owner->decr_owned_count();
+
+    //
+    // If this was fire and it had an owner (the thing it set on fire)
+    // and that owner is now dead, the fire is free to fall into a chasm
+    //
+    location_check();
 }
 
 bool Thing::change_owner (Thingp new_owner)

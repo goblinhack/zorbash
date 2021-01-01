@@ -371,6 +371,17 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         pc = e->pc;
 
         if (dont_store) {
+#ifdef ENABLE_DEBUG_PTRCHECK
+            std::cerr <<
+                string_sprintf(
+                    "PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u (do not store)\n",
+                    ptr,
+                    pc->what.c_str(),
+                    pc->size,
+                    file.c_str(),
+                    func.c_str(),
+                    line);
+#endif
             return (pc);
         }
 
@@ -403,6 +414,18 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
             pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
         }
 #endif
+#ifdef ENABLE_DEBUG_PTRCHECK
+        std::cerr <<
+            string_sprintf(
+                "PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n",
+                ptr,
+                pc->what.c_str(),
+                pc->size,
+                file.c_str(),
+                func.c_str(),
+                line,
+                l->ts.c_str());
+#endif
         return (pc);
     }
 
@@ -424,7 +447,7 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
 
     ring_ptr_size = ringbuf_current_size;
 
-    CON("vvvvv Pointer history for %p vvvvv", ptr);
+    CON("vvvvv Pointer history for %p vvvvv (max %u ptrs saved)", ptr, ring_ptr_size);
 
     //
     // Walk back through the ring buffer.
@@ -434,6 +457,8 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         // Found a match?
         //
         if (pc->ptr == ptr) {
+            CON("----- Pointer is known");
+
             auto a = pc->allocated_by;
             auto ts = timestamp();
             if (a) {
@@ -448,6 +473,17 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                         a->line,
                         a->ts.c_str());
                 std::cerr << a->tb->to_string() << std::endl;
+
+		LOG("PTRCHECK:");
+                LOG("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s",
+                    ptr,
+                    pc->what.c_str(),
+                    pc->size,
+                    a->file.c_str(),
+                    a->func.c_str(),
+                    a->line,
+                    a->ts.c_str());
+		a->tb->log();
             }
 
             auto f = pc->freed_by;
@@ -461,6 +497,15 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                         f->line,
                         f->ts.c_str());
                 std::cerr << f->tb->to_string() << std::endl;
+
+		LOG("PTRCHECK:");
+                LOG("PTRCHECK: %p freed at %s:%s line %u at %s",
+                    ptr,
+                    f->file.c_str(),
+                    f->func.c_str(),
+                    f->line,
+                    f->ts.c_str());
+                f->tb->log();
             }
 
             //
@@ -485,6 +530,16 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                             H->line,
                             H->ts.c_str());
                     std::cerr << H->tb->to_string() << std::endl;
+
+                    LOG("PTRCHECK:");
+                    LOG("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s",
+                        ptr,
+                        i,
+                        H->file.c_str(),
+                        H->func.c_str(),
+                        H->line,
+                        H->ts.c_str());
+                    H->tb->log();
                 }
             }
 #endif
@@ -547,6 +602,13 @@ void *ptrcheck_alloc (const void *ptr,
         if (!hash) {
             return ((void*) ptr);
         }
+
+        //
+        // And a ring buffer to store old pointer into.
+        //
+        ringbuf_next = &ringbuf[0];
+        ringbuf_base = &ringbuf[0];
+        ringbuf_current_size = 0;
     }
 
     //
@@ -556,13 +618,6 @@ void *ptrcheck_alloc (const void *ptr,
         ERR("Pointer %p already exists and attempting to add again", ptr);
         return ((void*) ptr);
     }
-
-    //
-    // And a ring buffer to store old pointer into.
-    //
-    ringbuf_next = &ringbuf[0];
-    ringbuf_base = &ringbuf[0];
-    ringbuf_current_size = 0;
 
     //
     // Allocate a block of data to describe the pointer and owner.
@@ -602,12 +657,12 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 
 #ifdef ENABLE_DEBUG_PTRCHECK
     auto ts = timestamp();
-    fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u\n",
+    fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u ringbuf_current_size %u\n",
             ts.c_str(),
             ptr,
             file.c_str(),
             func.c_str(),
-            line);
+            line, ringbuf_current_size);
 #endif
 
     if (!ptr) {
@@ -617,6 +672,7 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 
     pc = ptrcheck_verify_pointer(ptr, file, func, line, true /* dont store */);
     if (!pc) {
+        DIE("Failed to save pointer history");
         return false;
     }
 
@@ -650,6 +706,8 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
     //
     if (ringbuf_current_size < ringbuf_max_size) {
         ringbuf_current_size++;
+    } else {
+        DIE("overflowed ptrcheck ring buf size %u", ringbuf_current_size);
     }
 
     hash_free(hash, ptr);
@@ -663,9 +721,11 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 int ptrcheck_verify (const void *ptr, std::string &func, std::string &file,
                      int line)
 {
+#if 0
     if (!ptr_check_some_pointers_changed) {
         return true;
     }
+#endif
 
     return (ptrcheck_verify_pointer(ptr, file, func, line,
                                     false /* don't store */) != 0);
@@ -698,8 +758,7 @@ void ptrcheck_leak_print (void)
 
             auto a = pc->allocated_by;
             if (a) {
-                std::cerr <<
-                    string_sprintf(
+                fprintf(stderr,
                     "PTRCHECK: Leak %p \"%s\" (%u bytes) at %s:%s line %u at %s\n",
                     pc->ptr,
                     pc->what.c_str(),
@@ -709,11 +768,10 @@ void ptrcheck_leak_print (void)
                     a->line,
                     a->ts.c_str());
 
-                std::cerr << a->tb->to_string() << std::endl;
+		fprintf(stderr, "%s", a->tb->to_string().c_str());
             } else {
-                std::cerr <<
-                    string_sprintf("PTRCHECK: Leak \"%s\" (%u bytes)\n",
-                                   pc->what.c_str(), pc->size);
+                fprintf(stderr, "PTRCHECK: Leak \"%s\" (%u bytes)\n",
+                        pc->what.c_str(), pc->size);
             }
 
             //
@@ -728,14 +786,14 @@ void ptrcheck_leak_print (void)
 
                 auto H = pc->last_seen[h];
                 if (H) {
-                    std::cerr << string_sprintf(
+		    fprintf(stderr,
                         "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n",
                         j,
                         H->file.c_str(),
                         H->func.c_str(),
                         H->line,
                         H->ts.c_str());
-                    std::cerr << H->tb->to_string() << std::endl;
+		    fprintf(stderr, "%s", H->tb->to_string().c_str());
                 }
             }
 #endif

@@ -33,9 +33,7 @@ do_retry:
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (idp->id == id.id) {
 #ifdef ENABLE_THING_ID_LOGS
-            if (t->is_loggable_for_unimportant_stuff()) {
-                t->log("Found %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
-            }
+            t->log("Found %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
 #endif
             return;
         }
@@ -55,9 +53,7 @@ do_retry:
                return a->z_prio() < b->z_prio();
              });
 #ifdef ENABLE_THING_ID_LOGS
-        if (t->is_loggable_for_unimportant_stuff()) {
-            t->log("Put thing %" PRIx32 " at %u,%u slot %u", id.id, x, y, free_slot);
-        }
+        t->log("Put thing %p %" PRIx32 " at %u,%u slot %u", t, id.id, x, y, free_slot);
 #endif
         *idp = id;
         return;
@@ -133,6 +129,7 @@ void Level::remove_thing (int x, int y, ThingId id)
             auto v = &all_thing_ptrs_at[x][y];
             auto b = v->begin();
             auto e = v->end();
+LOG("remove_thing %p, x %d y %d", t, x, y); 
 
 #ifdef SLOWER_BUT_USES_FANCY_STL
             auto r = std::remove_if(b, e, [t /* pass t by value */](Thingp x) { return (x == t); });
@@ -147,9 +144,7 @@ void Level::remove_thing (int x, int y, ThingId id)
 #endif
 
 #ifdef ENABLE_THING_ID_LOGS
-            if (t->is_loggable_for_unimportant_stuff()) {
-                t->log("Rem thing %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
-            }
+            t->log("Rem thing %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
 #endif
             return;
         }

@@ -19,6 +19,7 @@ public:
     Traceback(void) {}
     void init(void);
     std::string to_string(void);
+    void log(void);
     Traceback(const Traceback* const other) {
         tb = other->tb;
         size = other->size;
