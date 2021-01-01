@@ -142,6 +142,13 @@ void tp_init_after_loading (void)
         if (tp->stats_stamina()) {
             tp->set_is_stamina_check(true);
         }
+
+        if (tp->is_able_to_fall()) {
+            if (!tp->is_interesting()) {
+                ERR("Tp %s needs is_interesting set if it is_able_to_fall",
+                    tp->name().c_str());
+            }
+        }
     }
 }
 

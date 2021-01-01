@@ -816,7 +816,7 @@ _
             log("Yes; candidate to attack");
             thing_add_ai_possible_hit(it, "battle");
         } else {
-            log("No; cannot attack, no overlap");
+            log("No; cannot attack %s, no overlap", it->to_string().c_str());
         }
     } else if (can_eat(it)) {
         if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
