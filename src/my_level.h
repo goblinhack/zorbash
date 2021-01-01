@@ -85,7 +85,6 @@ public:
     bool                       cursor_found {};
     bool                       cursor_needs_update {};
     bool                       heatmap_valid {};
-    bool                       bg_valid {};
     bool                       is_starting {}; // Loading level
     bool                       map_changed {}; // Something moved on the map
     bool                       map_follow_player {};
@@ -143,24 +142,29 @@ public:
     //
     // Animation loop counters for surface effects
     //
-    int   water_step1 {};
-    float water_step2 {};
-    int   deep_water_step1 {};
-    float deep_water_step2 {};
-    int   lava_step1 {};
-    float lava_step2 {};
+    int                        water_step1 {};
+    float                      water_step2 {};
+    int                        deep_water_step1 {};
+    float                      deep_water_step2 {};
+    int                        lava_step1 {};
+    float                      lava_step2 {};
+
+    //
+    // If set, redraw the background; allows for dampening
+    //
+    timestamp_t                timestamp_redraw_bg {};
 
     //
     // For thing effects, like jumping
     //
-    std::vector<Particle> all_internal_particles;
-    std::vector<Particle> new_internal_particles;
+    std::vector<Particle>      all_internal_particles;
+    std::vector<Particle>      new_internal_particles;
 
     //
     // For things like move of items into inventory
     //
-    std::vector<Particle> all_external_particles;
-    std::vector<Particle> new_external_particles;
+    std::vector<Particle>      all_external_particles;
+    std::vector<Particle>      new_external_particles;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving

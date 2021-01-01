@@ -116,7 +116,7 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (is_loggable_for_important_stuff()) {
-        log("Killed, need to gc");
+        log("Killed, need to garbage collect");
     }
 
     gc();

@@ -19,7 +19,8 @@ void Level::things_gc (void)
 
     log("Begin thing garbage collection");
 _
-    for (auto it = all_gc_things.cbegin(), next_it = it; it != all_gc_things.cend(); it = next_it) {
+    for (auto it = all_gc_things.cbegin(), next_it = it; 
+         it != all_gc_things.cend(); it = next_it) {
 	++next_it;
 
         auto id = it->first;
@@ -29,29 +30,26 @@ _
             continue;
         }
 
-        t->log("Thing gc");
-
 	//
 	// Allow the particles to finish
 	//
 	if (t->has_internal_particle) {
+            t->log("Thing garbage collect delayed due to internal particle");
 	    continue;
 	}
 
 	if (t->has_external_particle) {
+            t->log("Thing garbage collect delayed due to external particle");
 	    continue;
 	}
 
 	all_gc_things.erase(it);
 
-        t->log("Thing gc");
         if (t->is_monst()) {
             monst_count--;
         }
 
-        if (t->is_loggable_for_unimportant_stuff()) {
-            t->log("Garbage collect");
-        }
+        t->log("Thing garbage collect");
 
         delete t;
     }
