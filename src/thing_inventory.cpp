@@ -25,7 +25,7 @@ _
         std::string name = "gold";
         auto w = wid_find(name);
         if (!w) {
-            log("Could not find wid %s", name.c_str());
+            err("Could not find wid %s", name.c_str());
             return;
         }
 
@@ -50,10 +50,10 @@ _
     }
 
     if (what->is_collect_as_keys()) {
-        std::string name = "key";
+        std::string name = "keys";
         auto w = wid_find(name);
         if (!w) {
-            log("Could not find wid %s", name.c_str());
+            err("Could not find wid %s", name.c_str());
             return;
         }
 
