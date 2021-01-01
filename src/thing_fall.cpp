@@ -66,10 +66,7 @@ float Thing::get_fall (void)
         is_falling = false;
         log("End of falling");
         level_push();
-
-        if (!is_player()) {
-            fall_to_next_level();
-        }
+        fall_to_next_level();
         return (0);
     }
 

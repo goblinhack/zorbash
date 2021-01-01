@@ -164,8 +164,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     uint64_t bits64 = 0;
     int shift = 0;
     /* uint64_t */ bits64 |= my.t->has_ever_moved        << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->has_external_particle << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->has_internal_particle << shift; shift++;
     /* uint64_t */ bits64 |= my.t->has_light             << shift; shift++;
     /* uint64_t */ bits64 |= my.t->inited_tiles          << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_attached           << shift; shift++;
@@ -247,6 +245,12 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
 
+    //
+    // Not worth saving as temporary
+    //
+    // /* uint64_t */ bits64 |= my.t->has_external_particle << shift; shift++;
+    // /* uint64_t */ bits64 |= my.t->has_internal_particle << shift; shift++;
+
     WRITE_MAGIC(THING_MAGIC_END);
 
 #ifdef ENABLE_DEBUG_SAVE_LOAD
@@ -315,7 +319,6 @@ std::ostream& operator<<(std::ostream &out,
     /* cursor_found */          out << bits(my.t->cursor_found);
     /* cursor_needs_update */   out << bits(my.t->cursor_needs_update);
     /* heatmap_valid */         out << bits(my.t->heatmap_valid);
-    /* bg_valid */              out << bits(my.t->bg_valid);
     /* is_starting */           out << bits(my.t->is_starting);
     /* map_at */                out << bits(my.t->map_at);
     /* map_br */                out << bits(my.t->map_br);

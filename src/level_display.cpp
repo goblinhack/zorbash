@@ -29,7 +29,10 @@ void Level::display (void)
 
     display_external_particles();
 
-    if (!bg_valid) {
+    if (timestamp_redraw_bg &&
+        (time_get_time_ms_cached() > timestamp_redraw_bg)) {
+        timestamp_redraw_bg = 0;
+
         auto delta = 0;
         if (timestamp_fade_in_begin) {
             delta = time_get_time_ms_cached() - timestamp_fade_in_begin;
@@ -114,8 +117,6 @@ void Level::display_map_bg_things (void)
 
     gl_enter_2d_mode(game->config.inner_pix_width, 
                      game->config.inner_pix_height);
-
-    bg_valid = true;
 }
 
 void Level::display_map_things (int fbo,

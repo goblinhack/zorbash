@@ -212,8 +212,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(bits64);
     int shift = 0;
     /* uint64_t */ my.t->has_ever_moved        = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->has_external_particle = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->has_internal_particle = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->has_light             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->inited_tiles          = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_attached           = (bits64 >> shift) & 1; shift++;
@@ -291,7 +289,13 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     //
     // Need to reinit tiles
     //
-    my.t->inited_tiles       = false;
+    my.t->inited_tiles          = false;
+
+    //
+    // We do not save particles
+    //
+    my.t->has_external_particle = false;
+    my.t->has_internal_particle = false;
 
     READ_MAGIC("thing end", THING_MAGIC_END);
 
@@ -371,7 +375,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* cursor_found */          in >> bits(l->cursor_found);
     /* cursor_needs_update */   in >> bits(l->cursor_needs_update);
     /* heatmap_valid */         in >> bits(l->heatmap_valid);
-    /* bg_valid */              in >> bits(l->bg_valid);
     /* is_starting */           in >> bits(l->is_starting);
     /* map_at */                in >> bits(l->map_at);
     /* map_br */                in >> bits(l->map_br);
@@ -392,7 +395,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* maxy */                  in >> bits(l->maxy);
 
     l->update();
-    l->bg_valid = false;
+    l->timestamp_redraw_bg = 1; // Force redraw
     l->timestamp_fade_in_begin = time_get_time_ms_cached();
     l->map_changed = true;
     l->cursor_needs_update = true;
