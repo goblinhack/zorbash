@@ -26,6 +26,7 @@ bool Thing::achieve_goals_in_life (void)
         is_waiting_to_ascend || 
         is_waiting_to_descend || 
         is_waiting_to_fall || 
+        is_the_grid || 
         is_jumping) { 
         is_tick_done = true;
         log("Skip achieve goals in life");
@@ -50,6 +51,7 @@ bool Thing::achieve_goals_in_life (void)
 
     lifespan_tick();
     if (is_dead) { is_tick_done = true; return true; }
+
     hunger_clock();
     if (is_dead) { is_tick_done = true; return true; }
 

@@ -9,7 +9,9 @@
 #include "my_gl.h"
 
 void Thing::fall (float fall_height, timestamp_t ms)
-{
+{_
+    log("Can fall?");
+_
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -17,18 +19,22 @@ void Thing::fall (float fall_height, timestamp_t ms)
         is_waiting_to_descend || 
         is_waiting_to_fall || 
         is_jumping) { 
+        log("No");
         return;
     }
 
     if (is_critical_to_level()) {
+        log("No, critical");
         return;
     }
 
     if (!is_able_to_fall()) {
+        log("No, unable to fall");
         return;
     }
 
     if (is_floating()) {
+        log("No, floating");
         return;
     }
 
@@ -256,10 +262,12 @@ _
                 level->update();
             }
 
-            auto h = decr_stats_health(fall_damage);
-            if (h <= 0) {
-                h = set_stats_health(0);
-                dead("Flying without wings");
+            if (tp()->stats_health_initial()) {
+                auto h = decr_stats_health(fall_damage);
+                if (h <= 0) {
+                    h = set_stats_health(0);
+                    dead("Flying without wings");
+                }
             }
             return true;
         }

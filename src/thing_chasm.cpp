@@ -32,6 +32,27 @@ bool Thing::chasm_tick (void)
         return false;
     }
 
+    //
+    // Things on the edge of a chasm fall in
+    //
+    if (is_lava() || is_water()) {
+        if ((mid_at.x > 0) && 
+            (mid_at.x < MAP_WIDTH - 1) && 
+            (mid_at.y > 0) && 
+            (mid_at.y < MAP_HEIGHT - 1)) {
+
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    if (level->is_chasm(mid_at.x + dx, mid_at.y + dy)) {
+                        log("Near a chasm");
+                        fall(1, 1000);
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
     if (level->is_chasm(mid_at.x, mid_at.y)) {
         log("Over a chasm");
         fall(1, 750);

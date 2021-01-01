@@ -133,9 +133,11 @@ void Level::display_map_things (int fbo,
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
                     FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                        t->log("display");
                         if (z <= MAP_DEPTH_FLOOR2) {
                             t->blit(fbo);
                         }
+                        verify(t);
 
                         auto tpp = t->tp();
                         if (unlikely(tpp->gfx_animated())) {
