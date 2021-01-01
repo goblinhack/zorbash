@@ -59,6 +59,10 @@ bool Thing::ai_blocked_completely (void)
 
 bool Thing::ai_create_path (point &nh, const point start, const point end)
 {_
+    if (end == point(-1, -1)) {
+        return false;
+    }
+
     Dmap dmap {};
     point dmap_start = start;
     point dmap_end = end;
@@ -104,13 +108,19 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             if (will_avoid(point(x, y))) {
+
                 set(dmap.val, x, y, DMAP_IS_WALL);
+
             } else {
                 auto c = is_less_preferred_terrain(point(x, y));
                 if (c >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+
                     set(dmap.val, x, y, c);
+
                 } else {
+
                     set(dmap.val, x, y, DMAP_IS_PASSABLE);
+
                 }
             }
         }
@@ -120,6 +130,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
     dmap_end = point(maxx, maxy);
 
     set(dmap.val, end.x, end.y, DMAP_IS_GOAL);
+
     set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
 
     dmap_process(&dmap, dmap_start, dmap_end);
@@ -172,13 +183,13 @@ bool Thing::ai_choose_wander (point& nh)
     auto target = monstp->wander_target;
     if ((mid_at.x == target.x) && (mid_at.y == target.y)) {
         log("Reached target");
-        target = point(0, 0);
+        target = point(-1, -1);
     }
 
     //
     // Try to use the same location.
     //
-    if (target != point(0, 0)) {
+    if (target != point(-1, -1)) {
         if (ai_create_path(nh, make_point(mid_at), target)) {
             return true;
         }
@@ -187,7 +198,7 @@ bool Thing::ai_choose_wander (point& nh)
     //
     // Choose a new wander location
     //
-    monstp->wander_target = point(0, 0);
+    monstp->wander_target = point(-1, -1);
 
     target = get_random_scent_target();
     if (!ai_create_path(nh, make_point(mid_at), target)) {
@@ -282,10 +293,10 @@ bool Thing::ai_wander (void)
             //
             // Set this so next time we will choose another target
             //
-            monstp->wander_target = point(0, 0);
+            monstp->wander_target = point(-1, -1);
         }
     }
-_
+
     log("No wander goal");
     return false;
 }
@@ -309,7 +320,7 @@ bool Thing::ai_escape (void)
             //
             // Set this so next time we will choose another target
             //
-            monstp->wander_target = point(0, 0);
+            monstp->wander_target = point(-1, -1);
         }
     }
 _

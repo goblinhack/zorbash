@@ -166,6 +166,85 @@ std::string Traceback::to_string (void)
 #endif
 }
 
+void Traceback::log (void)
+{
+#ifdef _WIN32
+    return ("");
+#else
+    auto addrlist = &tb[0];
+
+    LOG("stack trace");
+    LOG("===========");
+
+    if (size == 0) {
+        LOG("  <empty, possibly corrupt>");
+        return;
+    }
+
+    // resolve addresses into strings containing "filename(function+address)",
+    // this array must be free()-ed
+    char **symbollist = backtrace_symbols(addrlist, size);
+    const char *prefix = " >";
+
+    // address of this function.
+    for (int i = 1; i < size; i++) {
+
+        char *p = symbollist[i];
+        char *cur = p;
+        char *end = p + strlen(cur);
+        bool done = false;
+
+        while (cur < end) {
+            size_t special = strcspn(cur, "_?");
+            cur += special;
+
+            if (cur >= end) {
+                break;
+            }
+
+            size_t n_sym = 0;
+            if (*cur == '?') {
+                while (cur + n_sym != end && is_mangle_char_win(cur[n_sym])) {
+                    ++n_sym;
+                }
+            } else if (is_plausible_itanium_prefix(cur)) {
+                while (cur + n_sym != end && is_mangle_char_posix(cur[n_sym])) {
+                    ++n_sym;
+                }
+            } else {
+                ++cur;
+                continue;
+            }
+
+            char tmp = cur[n_sym];
+            cur[n_sym] = '\0';
+
+            if (starts_with(cur, "__Z")) {
+                cur += 1;
+            }
+
+            auto demangled = cppDemangle(cur);
+            if (demangled) {
+                LOG("%s%u %s", prefix, i, demangled.get());
+                done = true;
+                break;
+            }
+
+            cur[n_sym] = tmp;
+            cur += n_sym;
+        }
+
+        if (!done) {
+            LOG("%s%s", prefix, p);
+        }
+    }
+
+    LOG("end-of-stack");
+
+    free(symbollist);
+#endif
+}
+
 void traceback_dump (void)
 {
     auto tb = new Traceback();

@@ -933,11 +933,6 @@ int Thing::is_bag(void) const
     return (tp()->is_bag());
 }
 
-int Thing::is_rrr59(void) const
-{_
-    return (tp()->is_rrr59());
-}
-
 int Thing::is_potion(void) const
 {_
     return (tp()->is_potion());

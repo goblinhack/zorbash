@@ -435,7 +435,7 @@ bool Thing::match (const std::string& what)
     if (is_temporary_bag() && (what == "is_temporary_bag")) {
         return true;
     }
-    if (is_rrr59() && (what == "is_rrr59")) {
+    if (is_chasm() && (what == "is_chasm")) {
         return true;
     }
     if (is_rrr6() && (what == "is_rrr6")) {

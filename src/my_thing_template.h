@@ -108,7 +108,7 @@ private:
     int _gfx_shown_in_bg {};
     int _gfx_small_shadow_caster {};
     int _gfx_weapon_carry_anim {};
-    int _is_rrr59 {};
+    int _is_chasm {};
     int _hunger_clock_freq_ms {};
     int _internal_has_dir_anim {};
     int _internal_has_hp_anim {};
@@ -127,7 +127,6 @@ private:
     int _is_bleeder {};
     int _is_blood {};
     int _is_blood_splatter {};
-    int _is_chasm {};
     int _is_collect_as_keys {};
     int _is_collectable {};
     int _is_combustible {};
@@ -460,7 +459,7 @@ public:
     int gfx_show_outlined(void) const;
     int gfx_small_shadow_caster(void) const;
     int gfx_weapon_carry_anim(void) const;
-    int is_rrr59(void) const;
+    int is_chasm(void) const;
     int hunger_clock_freq_ms(void) const;
     int internal_has_dir_anim(void) const;
     int internal_has_hp_anim(void) const;
@@ -479,7 +478,6 @@ public:
     int is_bleeder(void) const;
     int is_blood(void) const;
     int is_blood_splatter(void) const;
-    int is_chasm(void) const;
     int is_collect_as_keys(void) const;
     int is_collectable(void) const;
     int is_item_collected_as_gold(void) const;
@@ -701,7 +699,7 @@ public:
     void set_gfx_show_outlined(int);
     void set_gfx_small_shadow_caster(int);
     void set_gfx_weapon_carry_anim(int);
-    void set_is_rrr59(int);
+    void set_is_chasm(int);
     void set_hunger_clock_freq_ms(int);
     void set_internal_has_dir_anim(int);
     void set_internal_has_hp_anim(int);
@@ -720,7 +718,6 @@ public:
     void set_is_bleeder(int);
     void set_is_blood(int);
     void set_is_blood_splatter(int);
-    void set_is_chasm(int);
     void set_is_collect_as_keys(int);
     void set_is_collectable(int);
     void set_is_item_collected_as_gold(int);

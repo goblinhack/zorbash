@@ -335,7 +335,7 @@ public:
     void delete_dmap_scent(void);
     void clear_dmap_scent(void);
 
-    std::vector<Lightp> & get_light(void);
+    std::vector<Lightp> &get_light(void);
     void new_light(point offset, int strength, color col, int fbo);
     void delete_lights(void);
     void update_light(void);
@@ -1136,7 +1136,6 @@ public:
     int is_rrr50(void) const;
     int is_critical_to_level(void) const;
     int is_able_to_fall(void) const;
-    int is_rrr59(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;

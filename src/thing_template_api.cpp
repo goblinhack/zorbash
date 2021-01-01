@@ -93,7 +93,7 @@ int Tp::gfx_oversized_but_sitting_on_the_ground(void) const { return _gfx_oversi
 int Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
 int Tp::gfx_small_shadow_caster(void) const { return _gfx_small_shadow_caster; }
 int Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
-int Tp::is_rrr59(void) const { return _is_rrr59; }
+int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::hunger_clock_freq_ms(void) const { return _hunger_clock_freq_ms; }
 int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
@@ -112,7 +112,6 @@ int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
 int Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
-int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
 int Tp::is_collectable(void) const { return _is_collectable; }
 int Tp::is_combustible(void) const { return _is_combustible; }
@@ -334,7 +333,7 @@ void Tp::set_gfx_oversized_but_sitting_on_the_ground(int v) { _gfx_oversized_but
 void Tp::set_gfx_show_outlined(int v) { _gfx_show_outlined = v; }
 void Tp::set_gfx_small_shadow_caster(int v) { _gfx_small_shadow_caster = v; }
 void Tp::set_gfx_weapon_carry_anim(int v) { _gfx_weapon_carry_anim = v; }
-void Tp::set_is_rrr59(int v) { _is_rrr59 = v; }
+void Tp::set_is_chasm(int v) { _is_chasm = v; }
 void Tp::set_hunger_clock_freq_ms(int v) { _hunger_clock_freq_ms = v; }
 void Tp::set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
 void Tp::set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
@@ -353,7 +352,6 @@ void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
 void Tp::set_is_blood_splatter(int v) { _is_blood_splatter = v; }
-void Tp::set_is_chasm(int v) { _is_chasm = v; }
 void Tp::set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
 void Tp::set_is_collectable(int v) { _is_collectable = v; }
 void Tp::set_is_combustible(int v) { _is_combustible = v; }

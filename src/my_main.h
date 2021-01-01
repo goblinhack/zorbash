@@ -14,7 +14,8 @@
 // RUN with --debug for extra memory checks
 //
 #define ENABLE_DEBUG_TRACE         // (SLOW) Function tracing
-#undef ENABLE_BOUNDS_CHECKS        // (SLOW) Catch out of bounds errors
+#define ENABLE_BOUNDS_CHECKS       // (SLOW) Catch out of bounds errors
+#undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_TILE_BOUNDS         // Scan tiles for bounds
@@ -25,7 +26,7 @@
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
 #undef  ENABLE_DEBUG_IO            // File i/o
 #undef  ENABLE_DEBUG_LIGHT         // Lighting algorithm for player
-#undef  ENABLE_DEBUG_PTRCHECK      // Debug ptrcheck itself
+#undef  ENABLE_DEBUG_PTRCHECK      // (VERY SLOW) Debug ptrcheck itself
 #undef  ENABLE_DEBUG_PY            // Python debugs
 #undef  ENABLE_DEBUG_SAVE_CHECK    // Verify compressed file
 #undef  ENABLE_DEBUG_SAVE_LOAD     // Map saving and loading
@@ -36,7 +37,6 @@
 #undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
 #undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
 #undef  ENABLE_PTRCHECK_LEAK
-#undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
 
 #define LEVELS_ACROSS              MAP_WIDTH // World size

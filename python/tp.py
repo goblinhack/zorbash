@@ -457,8 +457,8 @@ class Tp:
     def set_is_temporary_bag(self, value):
         zx.tp_set_is_temporary_bag(self, value)
 
-    def set_is_rrr59(self, value):
-        zx.tp_set_is_rrr59(self, value)
+    def set_is_chasm(self, value):
+        zx.tp_set_is_chasm(self, value)
 
     def set_is_potion(self, value):
         zx.tp_set_is_potion(self, value)

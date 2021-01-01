@@ -14,7 +14,11 @@
 
 bool Thing::chasm_tick (void)
 {_
-    if (get_immediate_owner()) {
+    log("Chasm tick");
+_
+    auto immediate_owner = get_immediate_owner();
+    if (immediate_owner) {
+        log("No, has owner %s", immediate_owner->to_string().c_str());
         return false;
     }
 
@@ -24,11 +28,15 @@ bool Thing::chasm_tick (void)
         is_waiting_to_ascend || 
         is_waiting_to_descend || 
         is_waiting_to_fall || 
+        is_chasm() || 
+        is_the_grid || 
         is_jumping) { 
+        log("No, not relvent");
         return true;
     }
 
     if (is_floating()) {
+        log("No, is floating");
         return false;
     }
 
