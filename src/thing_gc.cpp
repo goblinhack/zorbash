@@ -19,19 +19,30 @@ void Level::things_gc (void)
 
     log("Begin thing garbage collection");
 _
-    for (;;) {
-        auto i = all_gc_things.begin();
-        if (i == all_gc_things.end()) {
-            break;
-        }
-        auto id = i->first;
-        all_gc_things.erase(i);
+    for (auto it = all_gc_things.cbegin(), next_it = it; it != all_gc_things.cend(); it = next_it) {
+	++next_it;
 
+        auto id = it->first;
         auto t = thing_find(id);
         if (!t) {
             ERR("Thing %" PRIx32 " not found to garbage collect", id.id);
             continue;
         }
+
+        t->log("Thing gc");
+
+	//
+	// Allow the particles to finish
+	//
+	if (t->has_internal_particle) {
+	    continue;
+	}
+
+	if (t->has_external_particle) {
+	    continue;
+	}
+
+	all_gc_things.erase(it);
 
         t->log("Thing gc");
         if (t->is_monst()) {
@@ -44,8 +55,6 @@ _
 
         delete t;
     }
-
-    all_gc_things.clear();
 }
 
 void Thing::gc (void)

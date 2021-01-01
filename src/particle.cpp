@@ -28,6 +28,7 @@ void Level::new_internal_particle (
                 return;
             }
             t->has_internal_particle = true;
+            t->log("new internal particle");
         }
     }
 
@@ -191,6 +192,7 @@ void Level::new_external_particle (
     if (id.ok()) {
         auto t = thing_find(id);
         if (t) {
+            t->log("new external particle");
             if (t->has_external_particle) {
                 return;
             }
