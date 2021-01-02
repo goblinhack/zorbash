@@ -144,7 +144,7 @@ void Light::err (const char *fmt, ...)
 void Light::dbg (const char *fmt, ...)
 {
     verify(this);
-    if (!g_opt_debug) {
+    if (!g_opt_debug2) {
         return;
     }
     auto t = this;

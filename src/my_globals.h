@@ -56,13 +56,14 @@ extern char *WORLD_PATH;
 extern FILE *g_log_stdout;
 extern FILE *g_log_stderr;
 
-extern bool g_croaked;
+extern bool g_die_occurred;
 extern bool g_do_screenshot;
 extern bool g_errored;
 extern bool g_grab_next_key;
 extern bool g_need_restart;
-extern bool g_opt_debug;
+extern bool g_opt_debug1;
 extern bool g_opt_debug2;
+extern bool g_opt_debug3;
 extern bool g_opt_fast_start;
 extern bool g_opt_new_game;
 extern bool g_quitting;

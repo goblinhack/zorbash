@@ -103,20 +103,20 @@ static void die (void)
 
 static void croak_ (const char *fmt, va_list args)
 {
-    static int g_croaked;
-    if (g_croaked) {
+    static int g_die_occurred;
+    if (g_die_occurred) {
         std::cerr <<
           string_sprintf("\nPTRCHECK: NESTED FATAL ERROR %s %s %d ",
                          __FILE__, __FUNCTION__, __LINE__);
         exit(1);
     }
-    g_croaked = 1;
+    g_die_occurred = 1;
 
     auto err = "\n" + timestamp();
     err += ": PTRCHECK: FATAL ERROR: ";
     err += string_sprintf(fmt, args);
     std::cerr << err << std::endl;
-    g_croaked = true;
+    g_die_occurred = true;
     die();
 }
 
@@ -707,7 +707,7 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
     if (ringbuf_current_size < ringbuf_max_size) {
         ringbuf_current_size++;
     } else {
-        DIE("overflowed ptrcheck ring buf size %u", ringbuf_current_size);
+        ERR("overflowed ptrcheck ring buf size %u", ringbuf_current_size);
     }
 
     hash_free(hash, ptr);
@@ -721,11 +721,11 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 int ptrcheck_verify (const void *ptr, std::string &func, std::string &file,
                      int line)
 {
-#if 0
-    if (!ptr_check_some_pointers_changed) {
-        return true;
+    if (!g_opt_debug3) {
+        if (!ptr_check_some_pointers_changed) {
+            return true;
+        }
     }
-#endif
 
     return (ptrcheck_verify_pointer(ptr, file, func, line,
                                     false /* don't store */) != 0);

@@ -75,18 +75,14 @@ _
         uint8_t terrain_score = is_less_preferred_terrain(p);
         int total_score = -(int)terrain_score;
 
-#ifdef ENABLE_DEBUG_AI_GOALS
-#define GOAL_ADD(score, msg) \
-_ \
-        total_score += (score); \
-        got_one = true; \
-        log(" add goal (%d,%d) score %d %s, %s", \
-            p.x + minx, p.y + miny, score, msg, it->to_string().c_str());
-#else
-#define GOAL_ADD(score, msg) \
-        total_score += (score); \
-        got_one = true;
-#endif
+#define GOAL_ADD(score, msg)                                                  \
+        total_score += (score);                                               \
+        got_one = true;                                                       \
+        if (g_opt_debug3) {                                                   \
+            log(" add goal (%d,%d) score %d %s, %s",                          \
+                p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
+        }
+
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
 

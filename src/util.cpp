@@ -20,7 +20,7 @@ void *myzalloc_ (int size,
         DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
-    if (g_opt_debug) {
+    if (g_opt_debug2) {
         ptrcheck_alloc(ptr, what, size, file, func, line);
     }
 
@@ -39,7 +39,7 @@ void *mymalloc_ (int size,
         DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
-    if (g_opt_debug) {
+    if (g_opt_debug2) {
         ptrcheck_alloc(ptr, what, size, file, func, line);
     }
 
@@ -53,7 +53,7 @@ void *myrealloc_ (void *ptr,
                   std::string func,
                   int line)
 {_
-    if (g_opt_debug) {
+    if (g_opt_debug2) {
         ptrcheck_free(ptr, file, func, line);
     }
 
@@ -62,7 +62,7 @@ void *myrealloc_ (void *ptr,
         DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
-    if (g_opt_debug) {
+    if (g_opt_debug2) {
         ptrcheck_alloc(ptr, what, size, file, func, line);
     }
 
@@ -74,7 +74,7 @@ void myfree_ (void *ptr,
               std::string func,
               int line)
 {_
-    if (g_opt_debug) {
+    if (g_opt_debug2) {
         ptrcheck_free(ptr, file, func, line);
     }
 
@@ -99,7 +99,7 @@ char *dupstr_ (const char *in,
 
     int size = (__typeof__(size)) strlen(in);
 
-    if (g_opt_debug) {
+    if (g_opt_debug2) {
         ptrcheck_alloc(ptr, what, size, file, func, line);
     }
 

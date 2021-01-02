@@ -148,9 +148,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
 
 std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 {_
-#ifdef ENABLE_DEBUG_SAVE_LOAD
     auto start = in.tellg();
-#endif
 
     READ_MAGIC("thing begin", THING_MAGIC_BEGIN + (int) sizeof(Thing));
 
@@ -299,11 +297,13 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
     READ_MAGIC("thing end", THING_MAGIC_END);
 
-#ifdef ENABLE_DEBUG_SAVE_LOAD
-    auto diff = in.tellg() - start;
-    LOG("LOAD %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p", 
-        (int)diff, name.c_str(), my.t->tp_id, my.t->id.id, my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
-#endif
+    if (g_opt_debug3) {
+        auto diff = in.tellg() - start;
+        LOG("LOAD %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p", 
+            (int)diff, name.c_str(), my.t->tp_id, my.t->id.id, 
+            my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
+    }
+
     return (in);
 }
 
@@ -741,10 +741,10 @@ Game::load (std::string file_to_load, class Game &target)
         return false;
     }
 
-#ifdef ENABLE_DEBUG_SAVE_LOAD_HEX
-    std::cout << "decompressed as ";
-    hexdump((const unsigned char *)uncompressed, uncompressed_len);
-#endif
+    if (g_opt_debug3) {
+        std::cout << "decompressed as ";
+        hexdump((const unsigned char *)uncompressed, uncompressed_len);
+    }
 
     std::string s((const char*)uncompressed, (size_t)uncompressed_len);
     std::istringstream in(s);

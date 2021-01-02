@@ -18,8 +18,6 @@ WidPopup *wid_thing_info_window;
 
 void wid_thing_info_fini (void)
 {_
-    LOG("Thing info fini");
-
     if (game->bag_primary) {
         delete game->bag_primary;
         game->bag_primary = nullptr;
@@ -41,8 +39,6 @@ uint8_t wid_thing_info_init (void)
 
 void Game::wid_thing_info_destroy (void)
 {_
-    LOG("Thing info destroy");
-
     if (game->request_remake_inventory) {
         //
         // Continue
@@ -56,8 +52,6 @@ void Game::wid_thing_info_destroy (void)
 
 void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 {_
-    t->log("Thing info create");
-_
     if (game->request_remake_inventory) {
         //
         // Continue

@@ -42,6 +42,10 @@ void Thing::log_ (const char *fmt, va_list args) const
 
 void Thing::log (const char *fmt, ...) const
 {
+    if (!g_opt_debug1) {
+        return;
+    }
+
     verify(this);
     log_catchup_missing_indent_levels();
 
@@ -222,7 +226,7 @@ void Thing::err (const char *fmt, ...) const
 void Thing::dbg (const char *fmt, ...) const
 {
     verify(this);
-    if (!g_opt_debug) {
+    if (!g_opt_debug2) {
         return;
     }
     auto t = this;

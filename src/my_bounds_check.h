@@ -1,5 +1,5 @@
 #pragma once
-// REMOVED #include <assert.h>
+#include <assert.h>
 #include <iostream>
 #include <sstream>
 
@@ -41,3 +41,5 @@
 #else
 #define ASSERT_EX(left, operator, right)
 #endif
+
+extern bool g_opt_debug3;

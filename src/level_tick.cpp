@@ -82,7 +82,7 @@ void Level::tick (void)
     }
 
 #if 0
-    if (g_opt_debug){
+    if (g_opt_debug2){
 	sanity_check();
     }
 #endif
