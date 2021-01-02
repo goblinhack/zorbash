@@ -68,7 +68,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/hexdump.o                     \
     $(OBJDIR)/level.o                       \
     $(OBJDIR)/level_create.o                \
-    $(OBJDIR)/level_map_update.o            \
     $(OBJDIR)/level_cursor.o                \
     $(OBJDIR)/level_cursor_path.o           \
     $(OBJDIR)/level_display.o               \
@@ -88,11 +87,12 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_init.o                  \
     $(OBJDIR)/level_log.o                   \
     $(OBJDIR)/level_map_things.o            \
+    $(OBJDIR)/level_map_update.o            \
     $(OBJDIR)/level_minimap.o               \
     $(OBJDIR)/level_scroll.o                \
     $(OBJDIR)/level_static.o                \
     $(OBJDIR)/level_tick.o                  \
-    $(OBJDIR)/level_map_update.o            \
+    $(OBJDIR)/level_update.o                \
     $(OBJDIR)/light.o                       \
     $(OBJDIR)/light_log.o                   \
     $(OBJDIR)/log.o                         \
