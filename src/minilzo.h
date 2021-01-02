@@ -46,7 +46,7 @@
 #ifdef MINILZO_HAVE_CONFIG_H
 #  include <config.h>
 #endif
-// REMOVED #include <limits.h>
+#include <limits.h>
 #include <stddef.h>
 
 #ifndef __LZODEFS_H_INCLUDED

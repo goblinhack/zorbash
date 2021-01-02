@@ -7,8 +7,7 @@
 #ifndef _MY_LOG_H_
 #define _MY_LOG_H_
 
-// REMOVED #include "my_main.h"
-// REMOVED #include <string>
+#include "my_main.h"
 
 void putf(FILE *fp, const char *s);
 

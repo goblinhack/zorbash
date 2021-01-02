@@ -38,7 +38,7 @@
 #  include <config.h>
 #endif
 #include <limits.h>
-// REMOVED #include <stddef.h>
+#include <stddef.h>
 
 
 /***********************************************************************
