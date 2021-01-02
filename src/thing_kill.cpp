@@ -27,6 +27,14 @@ void Thing::kill (Thingp killer, const char *reason)
     //
     unwield("owner is dead");
 
+    //
+    // If in a bag, get out of there!
+    //
+    auto immediate_owner = get_immediate_owner();
+    if (immediate_owner) {
+        immediate_owner->bag_remove(this);
+    }
+
     if (is_player()) {
         MINICON("RIP: %s", reason);
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");

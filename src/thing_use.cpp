@@ -24,6 +24,11 @@ void Thing::used (Thingp what, Thingp target)
         }
     }
 
+    auto immediate_owner = what->get_immediate_owner();
+    if (immediate_owner) {
+        immediate_owner->bag_remove(what);
+    }
+
     what->hooks_remove();
     what->remove_owner();
     monstp->carrying.remove(what->id);
@@ -34,6 +39,8 @@ void Thing::used (Thingp what, Thingp target)
 
 bool Thing::use (Thingp what)
 {_
+    log("Trying to use: %s", what->to_string().c_str());
+_
     auto on_use = what->tp()->on_use_do();
     if (!std::empty(on_use)) {
         auto t = split_tokens(on_use, '.');

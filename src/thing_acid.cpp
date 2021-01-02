@@ -39,7 +39,7 @@ void Thing::acid_tick (void)
     //
     if (!level->is_smoke(mid_at.x, mid_at.y)) {
         auto smoke = level->thing_new("smoke1", mid_at);
-        smoke->set_lifespan(4);
+        smoke->set_lifespan(random_range(1, 10));
 
         hit = ((int)random_range(0, 100) < 50);
     } else {

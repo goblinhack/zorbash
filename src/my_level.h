@@ -323,6 +323,8 @@ public:
     void update(void);
     void update_all_ticks(void);
     void update_hazard_tile_map(void);
+    void update_water_next_to_lava(void);
+    void update_things_next_to_a_chasm(void);
     void update_map(void);
     void update_minimap(void);
 
