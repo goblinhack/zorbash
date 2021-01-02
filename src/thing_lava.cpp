@@ -12,6 +12,10 @@
 
 void Thing::lava_tick (void)
 {_
+    if (g_opt_debug3) {
+        log("Lava tick");
+    }
+
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -19,15 +23,24 @@ void Thing::lava_tick (void)
         is_waiting_to_descend || 
         is_waiting_to_fall || 
         is_jumping) { 
+        if (g_opt_debug3) {
+            log("No, not relevent");
+        }
         return;
     }
 
     if (!is_fire_hater()) {
+        if (g_opt_debug3) {
+            log("No, not a fire hater");
+        }
         return;
     }
 
     fpoint at = get_interpolated_mid_at();
     if (!level->is_lava(at.x, at.y)) {
+        if (g_opt_debug3) {
+            log("No, no lava");
+        }
         return;
     }
 
@@ -46,26 +59,6 @@ void Thing::lava_tick (void)
 
     if (is_on_fire()) {
         hit = true;
-    }
-
-    //
-    // Things on the edge of a chasm fall in
-    //
-    if (is_water()) {
-        if ((mid_at.x > 0) && 
-            (mid_at.x < MAP_WIDTH - 1) && 
-            (mid_at.y > 0) && 
-            (mid_at.y < MAP_HEIGHT - 1)) {
-
-            for (int dx = -1; dx <= 1; dx++) {
-                for (int dy = -1; dy <= 1; dy++) {
-                    if (level->is_lava(mid_at.x + dx, mid_at.y + dy)) {
-                        dead("Near lava; turned to steam");
-                        break;
-                    }
-                }
-            }
-        }
     }
 
     if (hit) {
@@ -89,6 +82,6 @@ void Thing::lava_tick (void)
 
     if (!level->is_smoke(at.x, at.y)) {
         auto smoke = level->thing_new("smoke1", at);
-        smoke->set_lifespan(4);
+        smoke->set_lifespan(random_range(1, 10));
     }
 }

@@ -253,6 +253,11 @@ _
         return false;
     }
 
+    auto immediate_owner = what->get_immediate_owner();
+    if (immediate_owner) {
+        immediate_owner->bag_remove(what);
+    }
+
     auto inventory_items = player->monstp->inventory_id.size();
     for (auto i = 0U; i < inventory_items; i++) {
         auto tp_id = monstp->inventory_id[i];
@@ -314,6 +319,11 @@ _
 
     if (!monstp) {
         return false;
+    }
+
+    auto immediate_owner = what->get_immediate_owner();
+    if (immediate_owner) {
+        immediate_owner->bag_remove(what);
     }
 
     auto inventory_items = player->monstp->inventory_id.size();
