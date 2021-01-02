@@ -7,12 +7,9 @@
 #ifndef _MY_LEVEL_H_
 #define _MY_LEVEL_H_
 
-// REMOVED #include "my_point.h"
 #include "my_time.h"
-// REMOVED #include "my_depth.h"
 #include "my_particle.h"
 #include "my_dungeon.h"
-// REMOVED #include "my_thing_id.h"
 
 class Level {
 public:

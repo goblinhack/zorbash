@@ -7,12 +7,12 @@
 #ifndef _MY_STRING_UTILL_H_
 #define _MY_STRING_UTILL_H_
 
-//#include <iostream>
-// REMOVED #include <memory>
-// REMOVED #include <vector>
-// REMOVED #include <stdarg.h>
-// REMOVED #include <wchar.h>
-// REMOVED #include <map>
+#include <iostream>
+#include <memory>
+#include <vector>
+#include <stdarg.h>
+#include <wchar.h>
+#include <map>
 
 typedef std::shared_ptr< std::vector< std::string > > shared_vector_string;
 typedef std::shared_ptr< std::vector< std::wstring > > shared_vector_wstring;

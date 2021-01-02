@@ -3,8 +3,8 @@
 #ifndef _MY__PTRCHECK_H__
 #define _MY__PTRCHECK_H__
 
-// REMOVED #include <string>
-// REMOVED #include <ctime>
+#include <string>
+#include <ctime>
 #include "my_globals.h"
 
 //

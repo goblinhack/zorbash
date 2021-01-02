@@ -7,10 +7,8 @@
 #ifndef _MY_ASCII_H_
 #define _MY_ASCII_H_
 
-// REMOVED #include <wchar.h>
-// REMOVED #include <array>
-// REMOVED #include "my_point.h"
-// REMOVED #include "my_color.h"
+#include <wchar.h>
+#include <array>
 #include "my_tex.h"
 #include "my_tile.h"
 

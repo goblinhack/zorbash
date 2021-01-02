@@ -6,14 +6,9 @@
 #pragma once
 #include "my_room.h"
 #include "my_dmap.h"
-// REMOVED #include "my_point.h"
 #include "my_level_static.h"
 #include "my_dungeon_grid.h"
-// REMOVED #include <vector>
-
-//#include <stack>
-//#include <list>
-//#include <algorithm>
+#include <vector>
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)

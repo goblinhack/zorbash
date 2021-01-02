@@ -10,14 +10,14 @@
 
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #define __IPHONEOS__
-// REMOVED #include "SDL_opengles.h"
+#include "SDL_opengles.h"
 
 #define CreateVertexBuffers(nobuf, bufptr) glGenBuffers(nobuf, bufptr)
 #define DeleteVertexBuffers(nobuf, bufptr) glDeleteBuffers(nobuf, bufptr)
 #else
 
 #ifdef _WIN32
-// REMOVED #include "SDL_opengl.h"
+#include "SDL_opengl.h"
 #endif
 
 #define glOrthof glOrtho
