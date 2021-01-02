@@ -4,7 +4,7 @@
 //
 
 #pragma once
-// REMOVED #include <memory> // do not remove
+#include <memory> // do not remove
 #include "my_charmap.h"
 
 typedef std::shared_ptr< class LevelStatic > LevelStaticp;
