@@ -99,7 +99,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_heatmap.o               \
     $(OBJDIR)/level_init.o                  \
     $(OBJDIR)/level_log.o                   \
-    $(OBJDIR)/level_map.o                   \
     $(OBJDIR)/level_map_things.o            \
     $(OBJDIR)/level_minimap.o               \
     $(OBJDIR)/level_scroll.o                \
