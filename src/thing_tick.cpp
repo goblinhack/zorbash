@@ -38,7 +38,7 @@ bool Thing::achieve_goals_in_life (void)
     //
     if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
                                          get_timestamp_last_tick())) {
-        if (g_opt_debug3) {
+        if (g_opt_debug2) {
             log("Too often");
         }
         return false;
@@ -46,10 +46,8 @@ bool Thing::achieve_goals_in_life (void)
 
     set_timestamp_last_tick(time_get_time_ms_cached());
 
-    if (is_loggable_for_unimportant_stuff()) {
-        log("Achieve goals at tick %d, game is at tick %u",
-            get_tick(), game->tick_current);
-    }
+    log("Achieve goals at tick %d, game is at tick %u",
+        get_tick(), game->tick_current);
 
     lifespan_tick();
     if (is_dead) { is_tick_done = true; return true; }
@@ -136,7 +134,7 @@ bool Thing::achieve_goals_in_death (void)
 }
 
 void Thing::collision_check_do (void)
-{
+{_
     if (!tp()->collision_check()) {
         return;
     }
@@ -155,11 +153,11 @@ void Thing::collision_check_do (void)
 }
 
 void Thing::tick (void)
-{
-    if (g_opt_debug3) {
+{_
+    if (g_opt_debug2) {
         log("Tick");
     }
-
+_
     update_interpolated_position();
 
     if (unlikely(is_dead)) {
@@ -177,14 +175,14 @@ void Thing::tick (void)
                 }
             }
         }
-        if (g_opt_debug3) {
+        if (g_opt_debug2) {
             log("Tick; is dead");
         }
         return;
     }
 
     if (unlikely(is_dead)) {
-        if (g_opt_debug3) {
+        if (g_opt_debug2) {
             log("Tick; died");
         }
         return;

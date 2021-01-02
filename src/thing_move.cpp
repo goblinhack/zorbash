@@ -22,6 +22,7 @@ void Thing::move_completed (void)
 
 void Thing::move_finish (void)
 {_
+    log("Move finish");
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);
     update_interpolated_position();
@@ -69,7 +70,9 @@ bool Thing::move (fpoint future_pos,
                   uint8_t attack,
                   uint8_t wait_or_collect,
                   bool shove_allowed)
-{
+{_
+    log("Moved");
+
     if (is_dead) {
         return false;
     }
@@ -202,7 +205,7 @@ _
 }
 
 void Thing::update_interpolated_position (void)
-{
+{_
     bool update_pos = false;
     fpoint new_pos;
     auto tpp = tp();
@@ -214,6 +217,12 @@ void Thing::update_interpolated_position (void)
         z_depth = tpp->z_depth;
     }
 
+    //
+    // We don't want to hit lava twice as we move onto it, so only do the location
+    // check if we really move.
+    //
+    bool do_location_check = false;
+
     if (is_jumping) {
         float t = get_timestamp_jump_end() - get_timestamp_jump_begin();
         float dt = time_get_time_ms_cached() - get_timestamp_jump_begin();
@@ -224,16 +233,24 @@ void Thing::update_interpolated_position (void)
         update_pos = true;
         new_pos.x = last_mid_at.x + dx * step;
         new_pos.y = last_mid_at.y + dy * step;
+        do_location_check = false;
     } else if (!get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
+            do_location_check = true;
+            log("Changed position (new %f, %f, old %f,%f); do location check",
+                mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+
             update_pos = true;
             new_pos = mid_at;
             last_mid_at = mid_at;
-log("set move end %u", time_get_time_ms_cached());
             set_timestamp_move_end(time_get_time_ms_cached());
         }
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
+            do_location_check = true;
+            log("End of move position (new %f, %f, old %f,%f); do location check",
+                mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+
             update_pos = true;
             new_pos = mid_at;
             last_mid_at = mid_at;
@@ -266,7 +283,7 @@ log("set move end %u", time_get_time_ms_cached());
     }
 
     if (update_pos) {
-        // log("Update pos");
+        log("Update interpolated pos");
         level_pop();
         set_interpolated_mid_at(new_pos);
         level_push();
@@ -276,17 +293,15 @@ log("set move end %u", time_get_time_ms_cached());
         //
         update_light();
 
-        location_check();
+        if (do_location_check) {
+            location_check();
+        }
     }
 }
 
 void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
 {_
-    if (!is_hidden) {
-        if (is_loggable_for_unimportant_stuff()) {
-            log("Update pos");
-        }
-    }
+    log("Update pos");
 
     auto tpp = tp();
     point new_at((int)to.x, (int)to.y);
@@ -417,7 +432,7 @@ void Thing::move_set_dir_from_delta (fpoint delta)
 }
 
 void Thing::move_to (fpoint to)
-{
+{_
     move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
@@ -425,7 +440,7 @@ void Thing::move_to (fpoint to)
 }
 
 void Thing::move_to (fpoint to, uint32_t speed)
-{
+{_
     move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
@@ -433,14 +448,14 @@ void Thing::move_to (fpoint to, uint32_t speed)
 }
 
 void Thing::move_delta (fpoint delta)
-{
+{_
     move_finish();
     move_set_dir_from_delta(delta);
     update_pos(mid_at + delta, false);
 }
 
 void Thing::move_to_immediately (fpoint to)
-{
+{_
     move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
@@ -463,7 +478,7 @@ void Thing::move_to_immediately (fpoint to)
 }
 
 void Thing::move_to_immediately_delta (fpoint delta)
-{
+{_
     move_finish();
     move_set_dir_from_delta(delta);
     update_pos(mid_at + delta, true);

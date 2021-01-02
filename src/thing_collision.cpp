@@ -1067,7 +1067,7 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
                                         bool *target_attacked,
                                         bool *target_overlaps,
                                         float radius)
-{
+{_
     if (is_loggable_for_unimportant_stuff()) {
         log("Collision handle");
     }

@@ -13,7 +13,7 @@ def lava_init(name, text_name, tiles=[]):
     x.set_is_lava(True)
     x.set_is_light_strength(3)
     x.set_is_loggable_for_important_stuff(True)
-    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_unimportant_stuff(True)
     x.set_light_color("red")
     x.set_stats_attack_dice("1d12+6")
     x.set_text_a_or_an("");
