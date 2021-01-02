@@ -25,16 +25,6 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         return false;
     }
 
-    if (is_jelly_baby()) {
-        if (hitter->is_jelly_baby()) {_
-            log("Slimes combine!");
-            dead("combined");
-            hitter->dead("combined");
-            level->thing_new("jelly2", mid_at);
-            return true;
-        }
-    }
-
     if (!damage) {
         hitter->log("Hit fails, no damage");
         return false;
