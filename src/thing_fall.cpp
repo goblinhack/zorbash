@@ -55,7 +55,7 @@ _
         unset_on_fire();
     }
 
-    if (is_monst() || is_item()) {
+    if (is_player() || is_monst() || is_item()) {
         wobble(360);
     }
 }
@@ -199,7 +199,9 @@ _
             }
 
             set_fall_height(0);
-            wobble(90);
+            if (is_player() || is_monst() || is_item()) {
+                wobble(90);
+            }
             visible();
 
             //

@@ -1823,7 +1823,9 @@ public:
     void place_wall_deco(Dungeonp d);
     void place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void place_water(Dungeonp d, const std::string &what);
-    void things_gc(void);
+    void things_gc(bool force);
+    void things_gc_force(void);
+    void things_gc_if_possible(void);
     void things_tick(void);
     friend std::ostream& operator<<(std::ostream &out, Bits<const Level & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<Level &> my);

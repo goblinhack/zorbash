@@ -13,5 +13,5 @@ void Game::display (void)
     }
 
     level->display();
-    level->things_gc();
+    level->things_gc_if_possible();
 }

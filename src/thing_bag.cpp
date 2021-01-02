@@ -46,7 +46,9 @@ bool Thing::bag_contains (Thingp item)
 // Place the item somwhere in the bag
 //
 bool Thing::bag_add (Thingp item)
-{
+{_
+    log("Bag: add %s", item->to_string().c_str());
+
     if (item->monstp->preferred_bag_position != point(-1, -1)) {
         auto at = item->monstp->preferred_bag_position;
 	if (bag_can_place_at(item, at)) {
@@ -93,15 +95,13 @@ bool Thing::bag_add (Thingp item)
 }
 
 bool Thing::bag_compress (void)
-{
+{_
     auto bag = get_bag();
     auto bw = bag_width();
     auto bh = bag_height();
     auto did_something = false;
 
-    if (did_something) {
-        log("Bag: try to compress");
-    }
+    log("Bag: try to compress");
 
     for (auto x = 0; x < bw; x++) {
         for (auto y = 0; y < bh - 1; y++) {
@@ -168,6 +168,8 @@ bool Thing::bag_compress (void)
 
 bool Thing::bag_remove_at (Thingp item, point pos)
 {
+    log("Bag: remote %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
+
     auto bag = get_bag();
     auto w = item->bag_item_width();
     auto h = item->bag_item_height();
