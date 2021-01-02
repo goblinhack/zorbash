@@ -7,9 +7,8 @@
 #ifndef _MY_GLOBALS_H_
 #define _MY_GLOBALS_H_
 
-// REMOVED #include <stdio.h> // FILE
 #include <map>
-// REMOVED #include <vector>
+#include <vector> // linux
 #include <unordered_map>
 #include <string>
 
