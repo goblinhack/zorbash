@@ -49,7 +49,7 @@ void Level::fini (void)
     }
 
     log("Garbage collection of things still on the map:");
-    things_gc();
+    things_gc_force();
 
     //
     // Check all things were fully detached
