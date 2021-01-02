@@ -9,6 +9,7 @@
 #include "my_level_static.h"
 #include "my_dungeon_grid.h"
 #include <vector>
+#include <memory>
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
