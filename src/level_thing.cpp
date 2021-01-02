@@ -32,9 +32,9 @@ do_retry:
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (idp->id == id.id) {
-#ifdef ENABLE_THING_ID_LOGS
-            t->log("Found %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
-#endif
+            if (g_opt_debug3) {
+                t->log("Found %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
+            }
             return;
         }
 
@@ -52,9 +52,11 @@ do_retry:
              [](const Thingp &a, const Thingp &b) -> bool {
                return a->z_prio() < b->z_prio();
              });
-#ifdef ENABLE_THING_ID_LOGS
-        t->log("Put thing %p %" PRIx32 " at %u,%u slot %u", t, id.id, x, y, free_slot);
-#endif
+
+        if (g_opt_debug3) {
+            t->log("Put thing %p %" PRIx32 " at %u,%u slot %u", t, id.id, x, y, free_slot);
+        }
+
         *idp = id;
         return;
     }
@@ -129,22 +131,47 @@ void Level::remove_thing (int x, int y, ThingId id)
             auto v = &all_thing_ptrs_at[x][y];
             auto b = v->begin();
             auto e = v->end();
-LOG("remove_thing %p, x %d y %d", t, x, y); 
+
+            if (g_opt_debug3) {
+                t->log("Rem thing %p %" PRIx32 " at %u,%u slot %u", t, id.id, x, y, slot);
+            }
 
 #ifdef SLOWER_BUT_USES_FANCY_STL
             auto r = std::remove_if(b, e, [t /* pass t by value */](Thingp x) { return (x == t); });
             v->erase(r, e);
 #else
+            bool found = false;
             for (auto i = b; i < e; i++) {
                 if (*i == t) {
                     v->erase(i);
+                    found = true;
                     break;
                 }
             }
+
+            if (!found) {
+                t->err("Failed to remove thing %" PRIx32 " at %u,%u slot %u", 
+                       id.id, x, y, slot);
+            }
 #endif
 
-#ifdef ENABLE_THING_ID_LOGS
-            t->log("Rem thing %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
+#ifdef ENABLE_THING_ID_SANITY
+            {
+                for (auto x = 0; x < MAP_WIDTH; x++) {
+                    for (auto y = 0; y < MAP_HEIGHT; y++) {
+                        auto v = &all_thing_ptrs_at[x][y];
+                        auto b = v->begin();
+                        auto e = v->end();
+
+                        for (auto i = b; i < e; i++) {
+                            if (*i == t) {
+                                t->err("Thing ptr still exists after removal %" PRIx32 " at %u,%u slot %u", 
+                                    id.id, x, y, slot);
+                            }
+                        }
+                    }
+                }
+            }
 #endif
             return;
         }

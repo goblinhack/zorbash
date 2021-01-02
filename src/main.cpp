@@ -36,7 +36,7 @@ void quit (void)
 {_
     LOG("FINI: Quitting, start cleanup");
 
-    if (g_croaked) {
+    if (g_die_occurred) {
         return;
     }
 
@@ -143,8 +143,8 @@ void quit (void)
         EXEC_DIR = 0;
     }
 
-#ifdef ENABLE_PTRCHECK_LEAK
-    if (!g_croaked) {
+#ifdef ENABLE_DEBUG_MEM_LEAKS
+    if (!g_die_occurred) {
         ptrcheck_leak_print();
     }
 #endif
@@ -429,7 +429,8 @@ static void usage (void)
     CON(" ");
     CON(" --new-game");
     CON(" --debug                     // most debugs");
-    CON(" --debug2                    // rarely used debugs");
+    CON(" --debug2                    // + memory checks");
+    CON(" --debug3                    // + out of bounds checks");
     CON(" --ascii-mode                // pseudo ascii mode");
     CON(" --seed <name/number>");
     CON(" ");
@@ -464,13 +465,22 @@ static void parse_args (int32_t argc, char *argv[])
 
         if (!strcasecmp(argv[i], "--debug") ||
             !strcasecmp(argv[i], "-debug")) {
-            g_opt_debug = true;
+            g_opt_debug1 = true;
             continue;
         }
 
         if (!strcasecmp(argv[i], "--debug2") ||
             !strcasecmp(argv[i], "-debug2")) {
             g_opt_debug2 = true;
+            g_opt_debug1 = true;
+            continue;
+        }
+
+        if (!strcasecmp(argv[i], "--debug3") ||
+            !strcasecmp(argv[i], "-debug3")) {
+            g_opt_debug3 = true;
+            g_opt_debug2 = true;
+            g_opt_debug1 = true;
             continue;
         }
 
@@ -590,9 +600,9 @@ int32_t main (int32_t argc, char *argv[])
     game = new Game(std::string(appdata));
     game->load_config();
 
-    if (g_opt_debug) {
+    if (g_opt_debug2) {
         if (game) {
-            game->config.debug_mode = g_opt_debug;
+            game->config.debug_mode = g_opt_debug2;
         }
     }
 

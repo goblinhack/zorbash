@@ -14,6 +14,10 @@
 //
 bool Thing::location_check (void)
 {_
+    if (is_being_destroyed) {
+        return false;
+    }
+
     if (is_hidden) {
         return false;
     }

@@ -62,7 +62,7 @@ struct tracer_t {
     {
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-        if (unlikely(g_opt_debug)) {
+        if (unlikely(g_opt_debug2)) {
             if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
                 callframe *c = &callframes[g_callframes_depth++];
                 c->file = file;
@@ -74,7 +74,7 @@ struct tracer_t {
 
     inline ~tracer_t()
     {
-        if (unlikely(g_opt_debug)) {
+        if (unlikely(g_opt_debug2)) {
             if (g_callframes_depth > 0) {
                 g_callframes_depth--;
             }

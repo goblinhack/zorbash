@@ -18,7 +18,7 @@
 //
 void log_catchup_missing_indent_levels (void)
 {
-    if (!g_opt_debug) {
+    if (!g_opt_debug2) {
         return;
     }
 
@@ -355,11 +355,11 @@ static void err_ (const char *fmt, va_list args)
 
 static void croak_ (const char *fmt, va_list args)
 {
-    if (g_croaked) {
+    if (g_die_occurred) {
         fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
         exit(1);
     }
-    g_croaked = 1;
+    g_die_occurred = 1;
 
     char buf[MAXSHORTSTR];
     int len;
@@ -379,7 +379,7 @@ static void croak_ (const char *fmt, va_list args)
     ERR("%s", buf + tslen);
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
-    if (g_croaked) {
+    if (g_die_occurred) {
         return;
     }
 
@@ -388,7 +388,7 @@ static void croak_ (const char *fmt, va_list args)
     //
     py_trace();
 
-    g_croaked = true;
+    g_die_occurred = true;
 
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
     die();
@@ -407,19 +407,19 @@ void CROAK (const char *fmt, ...)
 
 static void croak_clean_ (const char *fmt, va_list args)
 {
-    if (g_croaked) {
+    if (g_die_occurred) {
         fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
         exit(1);
     }
-    g_croaked = 1;
+    g_die_occurred = 1;
 
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
-    if (g_croaked) {
+    if (g_die_occurred) {
         return;
     }
 
-    g_croaked = true;
+    g_die_occurred = true;
 
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
     die();
@@ -447,7 +447,7 @@ void DYING (const char *fmt, ...)
 
 void DBG (const char *fmt, ...)
 {
-    if (!g_opt_debug) {
+    if (!g_opt_debug2) {
         return;
     }
     va_list args;

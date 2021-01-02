@@ -63,7 +63,10 @@ bool Thing::try_to_jump (point to)
     // Block jumping over doors
     //
     if (!level->is_lit(x, y) && !level->is_visited(x, y)) {_
-        log("No, is not lit or visited");
+        if (g_opt_debug2) {
+            log("No, is not lit or visited");
+        }
+
         if (is_player()) {
             MINICON("You can't jump into the unknown");
         }

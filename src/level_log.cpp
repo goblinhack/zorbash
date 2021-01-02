@@ -146,7 +146,7 @@ void Level::err (const char *fmt, ...)
 void Level::dbg (const char *fmt, ...)
 {
     verify(this);
-    if (!g_opt_debug) {
+    if (!g_opt_debug2) {
         return;
     }
     auto l = this;

@@ -7,36 +7,31 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define ENABLE_ASSERT              // DIE on errors, like array bound check
+#define ENABLE_ASSERT              // Abort on errors
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 
 //
 // RUN with --debug for extra memory checks
 //
-#define ENABLE_DEBUG_TRACE         // (SLOW) Function tracing
-#define ENABLE_BOUNDS_CHECKS       // (SLOW) Catch out of bounds errors
-#undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
+// RUN with --debug2 for out of bounds checks
+//
+#define ENABLE_DEBUG_TRACE               // (SLOW) Function tracing
+#undef  ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS // (SLOW)
 
-#define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
-#define ENABLE_TILE_BOUNDS         // Scan tiles for bounds
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
 #undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
-#undef  ENABLE_DEBUG_AI_GOALS      // AI goal selection
 #undef  ENABLE_DEBUG_AI_WANDER     // AI wander path selection
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
-#undef  ENABLE_DEBUG_IO            // File i/o
-#undef  ENABLE_DEBUG_LIGHT         // Lighting algorithm for player
 #undef  ENABLE_DEBUG_PTRCHECK      // (VERY SLOW) Debug ptrcheck itself
-#undef  ENABLE_DEBUG_PY            // Python debugs
-#undef  ENABLE_DEBUG_SAVE_CHECK    // Verify compressed file
-#undef  ENABLE_DEBUG_SAVE_LOAD     // Map saving and loading
-#undef  ENABLE_DEBUG_SAVE_LOAD_HEX // Hex dump of save files
 #undef  ENABLE_DEBUG_TILE          // Astar AI path costs
 #undef  ENABLE_DEBUG_UI            // User interface logs
 #undef  ENABLE_DEBUG_UI2           // User interface logs with inheritance
 #undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
+#undef  ENABLE_DEBUG_MEM_LEAKS
+
+#define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
+#define ENABLE_TILE_BOUNDS         // Scan tiles for bounds
 #undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
-#undef  ENABLE_PTRCHECK_LEAK
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
 
 #define LEVELS_ACROSS              MAP_WIDTH // World size

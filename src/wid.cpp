@@ -5960,18 +5960,21 @@ void wid_display_all (void)
 printf("================================================= %d\n", wid_total_count);
 MINICON("%d",wid_total_count);
 #endif
+
     if (wid_total_count > 1000) {
-        DIE("Too many widgets");
+        ERR("Too many widgets");
     }
 
     ascii_clear_scissors();
 
 #ifdef ENABLE_DEBUG_UI_FOCUS
     if (wid_focus) {
-        ascii_putf(0, TERM_HEIGHT-4, WHITE, GRAY, L"focus %s", to_string(wid_focus).c_str());
+        ascii_putf(0, TERM_HEIGHT-4, WHITE, GRAY, L"focus %s", 
+                   to_string(wid_focus).c_str());
     }
     if (wid_over) {
-        ascii_putf(0, TERM_HEIGHT-3, WHITE, GRAY, L"over  %s", to_string(wid_over).c_str());
+        ascii_putf(0, TERM_HEIGHT-3, WHITE, GRAY, L"over  %s", 
+                   to_string(wid_over).c_str());
     }
 #endif
 

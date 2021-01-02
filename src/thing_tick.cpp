@@ -38,7 +38,9 @@ bool Thing::achieve_goals_in_life (void)
     //
     if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
                                          get_timestamp_last_tick())) {
-        // log("Too often");
+        if (g_opt_debug3) {
+            log("Too often");
+        }
         return false;
     }
 
@@ -154,9 +156,10 @@ void Thing::collision_check_do (void)
 
 void Thing::tick (void)
 {
-    //if (is_player()) {
-    // log("Tick");
-    //}
+    if (g_opt_debug3) {
+        log("Tick");
+    }
+
     update_interpolated_position();
 
     if (unlikely(is_dead)) {
@@ -174,12 +177,14 @@ void Thing::tick (void)
                 }
             }
         }
-        log("Tick; is dead");
+        if (g_opt_debug3) {
+            log("Tick; is dead");
+        }
         return;
     }
 
     if (unlikely(is_dead)) {
-        if (is_loggable_for_unimportant_stuff()) {
+        if (g_opt_debug3) {
             log("Tick; died");
         }
         return;
