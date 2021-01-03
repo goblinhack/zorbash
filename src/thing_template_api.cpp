@@ -226,9 +226,9 @@ int Tp::is_rrr45(void) const { return _is_rrr45; }
 int Tp::is_rrr46(void) const { return _is_rrr46; }
 int Tp::is_rrr47(void) const { return _is_rrr47; }
 int Tp::is_rrr48(void) const { return _is_rrr48; }
-int Tp::is_rrr49(void) const { return _is_rrr49; }
+int Tp::is_item_effect_max_radius(void) const { return _is_item_effect_max_radius; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
-int Tp::is_rrr50(void) const { return _is_rrr50; }
+int Tp::is_item_effect_min_radius(void) const { return _is_item_effect_min_radius; }
 int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
 int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_temporary_bag(void) const { return _is_temporary_bag; }
@@ -466,9 +466,9 @@ void Tp::set_is_rrr45(int v) { _is_rrr45 = v; }
 void Tp::set_is_rrr46(int v) { _is_rrr46 = v; }
 void Tp::set_is_rrr47(int v) { _is_rrr47 = v; }
 void Tp::set_is_rrr48(int v) { _is_rrr48 = v; }
-void Tp::set_is_rrr49(int v) { _is_rrr49 = v; }
+void Tp::set_is_item_effect_max_radius(int v) { _is_item_effect_max_radius = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
-void Tp::set_is_rrr50(int v) { _is_rrr50 = v; }
+void Tp::set_is_item_effect_min_radius(int v) { _is_item_effect_min_radius = v; }
 void Tp::set_is_critical_to_level(int v) { _is_critical_to_level = v; }
 void Tp::set_is_able_to_fall(int v) { _is_able_to_fall = v; }
 void Tp::set_is_temporary_bag(int v) { _is_temporary_bag = v; }

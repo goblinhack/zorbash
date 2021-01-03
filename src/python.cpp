@@ -101,6 +101,50 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
     py_err();
 }
 
+void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiii)", val1, val2, val3, val4);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        if (pValue) {
+            Py_DECREF(pValue);
+        }
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+}
+
+void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiii)", val1, val2, val3, val4, val5);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        if (pValue) {
+            Py_DECREF(pValue);
+        }
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+}
+
 char *py_obj_to_str (const PyObject *py_str)
 {_
     PyObject *py_encstr;
@@ -668,9 +712,9 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr46)
     TP_SET_DECL(is_rrr47)
     TP_SET_DECL(is_rrr48)
-    TP_SET_DECL(is_rrr49)
+    TP_SET_DECL(is_item_effect_max_radius)
     TP_SET_DECL(is_rrr5)
-    TP_SET_DECL(is_rrr50)
+    TP_SET_DECL(is_item_effect_min_radius)
     TP_SET_DECL(is_critical_to_level)
     TP_SET_DECL(is_able_to_fall)
     TP_SET_DECL(is_temporary_bag)

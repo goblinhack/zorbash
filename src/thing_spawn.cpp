@@ -131,11 +131,17 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     return true;
 }
 
-bool Thing::spawn_radius_range (const std::string& what, uint32_t radius_min, uint32_t radius_max)
+bool Thing::spawn_radius_range (Thingp parent, const std::string& what, 
+                                uint32_t radius_min, uint32_t radius_max)
 {_
-    log("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
-
     auto tpp = tp_find(what);
+
+    if (!radius_min && !radius_max) {
+        radius_min = parent->tp()->is_item_effect_min_radius();
+        radius_max = parent->tp()->is_item_effect_max_radius();
+    }
+
+    log("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
 
     //
     // Don't spawn too many monsts

@@ -855,9 +855,9 @@ TP_BODY_SET_INT(is_rrr45)
 TP_BODY_SET_INT(is_rrr46)
 TP_BODY_SET_INT(is_rrr47)
 TP_BODY_SET_INT(is_rrr48)
-TP_BODY_SET_INT(is_rrr49)
+TP_BODY_SET_INT(is_item_effect_max_radius)
 TP_BODY_SET_INT(is_rrr5)
-TP_BODY_SET_INT(is_rrr50)
+TP_BODY_SET_INT(is_item_effect_min_radius)
 TP_BODY_SET_INT(is_critical_to_level)
 TP_BODY_SET_INT(is_able_to_fall)
 TP_BODY_SET_INT(is_temporary_bag)
@@ -1086,22 +1086,30 @@ PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywd
 {_
     char *what = nullptr;
     uint32_t id = 0;
+    uint32_t parent_id = 0;
     uint32_t radius_min = 0;
     uint32_t radius_max = 0;
 
     static char *kwlist[] = {(char*) "id", 
+                             (char*) "parent_id", 
                              (char*) "what", 
                              (char*) "min", 
                              (char*) "max", 
                              0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, 
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "IIs|ii", kwlist, &id, 
+                                     &parent_id, &what, 
                                      &radius_min, &radius_max)) {
         Py_RETURN_NONE;
     }
 
     if (!id) {
         ERR("%s, missing 'id'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (!parent_id) {
+        ERR("%s, missing 'parent_id'", __FUNCTION__);
         Py_RETURN_NONE;
     }
 
@@ -1123,7 +1131,13 @@ PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywd
         Py_RETURN_NONE;
     }
 
-    t->spawn_radius_range(std::string(what), radius_min, radius_max);
+    auto parent = level->thing_find(ThingId(parent_id));
+    if (!parent) {
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    t->spawn_radius_range(parent, std::string(what), radius_min, radius_max);
 
     Py_RETURN_NONE;
 }

@@ -913,7 +913,7 @@ public:
     bool spawn_fire(const std::string& what);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
-    bool spawn_radius_range(const std::string& what, uint32_t radius_min, uint32_t radius_max);
+    bool spawn_radius_range(Thingp parent, const std::string& what, uint32_t radius_min, uint32_t radius_max);
     bool spawn_under(const std::string& what);
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);
@@ -1130,9 +1130,9 @@ public:
     int is_rrr46(void) const;
     int is_rrr47(void) const;
     int is_rrr48(void) const;
-    int is_rrr49(void) const;
+    int is_item_effect_max_radius(void) const;
     int is_rrr5(void) const;
-    int is_rrr50(void) const;
+    int is_item_effect_min_radius(void) const;
     int is_critical_to_level(void) const;
     int is_able_to_fall(void) const;
     int is_rrr6(void) const;

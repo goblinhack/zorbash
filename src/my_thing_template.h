@@ -243,9 +243,9 @@ private:
     int _is_rrr46 {};
     int _is_rrr47 {};
     int _is_rrr48 {};
-    int _is_rrr49 {};
+    int _is_item_effect_max_radius {};
     int _is_rrr5 {};
-    int _is_rrr50 {};
+    int _is_item_effect_min_radius {};
     int _is_critical_to_level {};
     int _is_able_to_fall {};
     int _is_temporary_bag {};
@@ -593,9 +593,9 @@ public:
     int is_rrr46(void) const;
     int is_rrr47(void) const;
     int is_rrr48(void) const;
-    int is_rrr49(void) const;
+    int is_item_effect_max_radius(void) const;
     int is_rrr5(void) const;
-    int is_rrr50(void) const;
+    int is_item_effect_min_radius(void) const;
     int is_critical_to_level(void) const;
     int is_able_to_fall(void) const;
     int is_temporary_bag(void) const;
@@ -834,9 +834,9 @@ public:
     void set_is_rrr46(int);
     void set_is_rrr47(int);
     void set_is_rrr48(int);
-    void set_is_rrr49(int);
+    void set_is_item_effect_max_radius(int);
     void set_is_rrr5(int);
-    void set_is_rrr50(int);
+    void set_is_item_effect_min_radius(int);
     void set_is_critical_to_level(int);
     void set_is_able_to_fall(int);
     void set_is_temporary_bag(int);

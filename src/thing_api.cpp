@@ -725,14 +725,14 @@ int Thing::is_rrr48(void) const
     return (tp()->is_rrr48());
 }
 
-int Thing::is_rrr49(void) const
+int Thing::is_item_effect_max_radius(void) const
 {_
-    return (tp()->is_rrr49());
+    return (tp()->is_item_effect_max_radius());
 }
 
-int Thing::is_rrr50(void) const
+int Thing::is_item_effect_min_radius(void) const
 {_
-    return (tp()->is_rrr50());
+    return (tp()->is_item_effect_min_radius());
 }
 
 int Thing::is_critical_to_level(void) const

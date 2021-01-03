@@ -1,8 +1,8 @@
 import zx
 import tp
 
-def tp_effect(me, x, y):
-    zx.tp_spawn_radius_range(me, "potion_descent_effect", min=0, max=4)
+def tp_effect(me, what, target, x, y):
+    zx.tp_spawn_radius_range(me, what, "potion_descent_effect")
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
@@ -17,6 +17,8 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
+    x.set_is_item_effect_max_radius(4)
+    x.set_is_item_effect_min_radius(0)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
