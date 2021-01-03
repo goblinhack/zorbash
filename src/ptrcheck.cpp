@@ -179,7 +179,7 @@ static hash_t *hash;
 // How many old/freed pointers do we keep track of. We use this when we find
 // an unknown pointer to find when it last lived.
 //
-static const int ringbuf_max_size = 200000;
+static const int ringbuf_max_size = 2000000;
 static int ringbuf_current_size;
 static std::array<class Ptrcheck, ringbuf_max_size> ringbuf;
 static Ptrcheck *ringbuf_next;

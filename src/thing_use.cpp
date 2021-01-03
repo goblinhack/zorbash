@@ -10,6 +10,26 @@
 
 void Thing::used (Thingp what, Thingp target)
 {_
+    auto on_use = what->tp()->on_use_do();
+    if (!std::empty(on_use)) {
+        auto t = split_tokens(on_use, '.');
+        if (t.size() == 2) {
+            auto mod = t[0];
+            auto fn = t[1];
+            std::size_t found = fn.find("()");
+            if (found != std::string::npos) {
+                fn = fn.replace(found, 2, "");
+            }
+
+            what->log("call %s.%s()", mod.c_str(), fn.c_str());
+            py_call_void_fn(mod.c_str(), fn.c_str(),
+                            id.id, (int)mid_at.x, (int)mid_at.y);
+        } else {
+            ERR("Bad on_use call [%s] expected mod:function, got %d elems",
+                on_use.c_str(), (int)on_use.size());
+        }
+    }
+
     auto existing_owner = what->get_top_owner();
     if (existing_owner != this) {
         err("Attempt to use %s which is not carried", what->to_string().c_str());
@@ -41,26 +61,6 @@ bool Thing::use (Thingp what)
 {_
     log("Trying to use: %s", what->to_string().c_str());
 _
-    auto on_use = what->tp()->on_use_do();
-    if (!std::empty(on_use)) {
-        auto t = split_tokens(on_use, '.');
-        if (t.size() == 2) {
-            auto mod = t[0];
-            auto fn = t[1];
-            std::size_t found = fn.find("()");
-            if (found != std::string::npos) {
-                fn = fn.replace(found, 2, "");
-            }
-
-            what->log("call %s.%s()", mod.c_str(), fn.c_str());
-            py_call_void_fn(mod.c_str(), fn.c_str(),
-                            id.id, (int)mid_at.x, (int)mid_at.y);
-        } else {
-            ERR("Bad on_use call [%s] expected mod:function, got %d elems",
-                on_use.c_str(), (int)on_use.size());
-        }
-    }
-
     if (what->is_weapon()) {
         MINICON("You wield the %s", what->text_the().c_str());
         game->tick_begin("player used an item");
