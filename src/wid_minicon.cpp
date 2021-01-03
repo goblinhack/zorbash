@@ -119,8 +119,22 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         }
     }
 
+    if (game->state_choosing_target) {
+        if (key->scancode == SDL_SCANCODE_ESCAPE) {
+            LOG("Escape pressed, clear choosing target flag");
+            game->state_choosing_target = false;
+            game->request_to_throw_item = nullptr;
+            wid_inventory_init();
+            wid_thing_collect_fini();
+            wid_destroy(&game->in_transit_item);
+            return true;
+        }
+    }
+
     if (key->scancode == (SDL_Scancode)game->config.key_load) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
@@ -129,7 +143,9 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_save) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
@@ -138,7 +154,9 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_pause) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
@@ -148,80 +166,117 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_help) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
         }
         game->config_keyboard_select();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_quit) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
         }
         game->quit_select();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action0) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(0);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action1) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(1);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action2) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(2);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action3) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(3);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action4) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(4);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action5) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(5);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action6) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(6);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action7) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(7);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action8) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(8);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         wid_thing_info_fini(); // To remove bag or other info
         level->inventory_chosen(9);
         wid_inventory_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        if (game->state_choosing_target) {
+            return false;
+        }
         //
         // Drop whatever we are moving between bags
         //
@@ -253,7 +308,9 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
         }
         auto what = level->inventory_get();
@@ -263,7 +320,9 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_eat) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
         }
         auto what = level->inventory_get();
@@ -273,13 +332,21 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_throw) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
+        }
+        auto what = level->inventory_get();
+        if (what) {
+            player->throw_item(what);
         }
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_unused99) {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return false;
         }
         MINICON("TODO KEY");

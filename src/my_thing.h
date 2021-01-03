@@ -923,6 +923,7 @@ public:
     bool try_to_jump(point p);
     bool try_to_jump(void);
     bool use(Thingp w);
+    bool throw_item(Thingp w);
     bool will_avoid(const Thingp it) const;
     bool will_avoid(const point p) const;
     bool will_prefer_terrain(const Thingp it);
@@ -1301,6 +1302,7 @@ public:
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void use_weapon(void);
     void used(Thingp w, Thingp target);
+    void throw_at(Thingp w, Thingp target);
     void visible();
     void water_tick();
     void weapon_get_use_offset(float *dx, float *dy) const;

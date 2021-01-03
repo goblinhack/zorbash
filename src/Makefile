@@ -222,6 +222,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_treasure.o              \
     $(OBJDIR)/thing_update.o                \
     $(OBJDIR)/thing_use.o                   \
+    $(OBJDIR)/thing_throw.o                 \
     $(OBJDIR)/thing_visible.o               \
     $(OBJDIR)/thing_water.o                 \
     $(OBJDIR)/thing_weapon.o                \
@@ -10253,6 +10254,58 @@ all: $(TARGET_GAME)
 .o/thing_text.o: my_charmap.h my_dmap.h my_level_static.h my_dungeon_grid.h
 .o/thing_text.o: my_color.h my_sprintf.h my_thing.h my_light.h
 .o/thing_text.o: my_thing_template.h my_dice.h my_tile.h my_thing_ai.h
+.o/thing_throw.o: my_game.h my_world.h my_point.h my_math.h
+.o/thing_throw.o: /usr/include/math.h /usr/include/sys/cdefs.h
+.o/thing_throw.o: /usr/include/sys/_symbol_aliasing.h
+.o/thing_throw.o: /usr/include/sys/_posix_availability.h
+.o/thing_throw.o: /usr/include/Availability.h
+.o/thing_throw.o: /usr/include/AvailabilityInternal.h
+.o/thing_throw.o: c_plus_plus_serializer.h my_level.h my_time.h my_sdl.h
+.o/thing_throw.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
+.o/thing_throw.o: /usr/include/_types.h /usr/include/sys/_types.h
+.o/thing_throw.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/thing_throw.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/thing_throw.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/thing_throw.o: /usr/include/sys/_types/_int8_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_int16_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_int32_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_int64_t.h
+.o/thing_throw.o: /usr/include/_types/_uint8_t.h
+.o/thing_throw.o: /usr/include/_types/_uint16_t.h
+.o/thing_throw.o: /usr/include/_types/_uint32_t.h
+.o/thing_throw.o: /usr/include/_types/_uint64_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_intptr_t.h
+.o/thing_throw.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/thing_throw.o: /usr/include/sys/_types/_u_int8_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_u_int16_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_u_int32_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_u_int64_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_uintptr_t.h
+.o/thing_throw.o: /usr/include/_types/_intmax_t.h
+.o/thing_throw.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
+.o/thing_throw.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
+.o/thing_throw.o: /usr/include/assert.h my_vector_bounds_check.h my_command.h
+.o/thing_throw.o: my_token.h my_string.h /usr/include/wchar.h
+.o/thing_throw.o: /usr/include/sys/_types/_null.h
+.o/thing_throw.o: /usr/include/sys/_types/_size_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_mbstate_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_rune_t.h /usr/include/stdio.h
+.o/thing_throw.o: /usr/include/_stdio.h /usr/include/sys/_types/_va_list.h
+.o/thing_throw.o: /usr/include/sys/stdio.h /usr/include/sys/_types/_off_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_ssize_t.h
+.o/thing_throw.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+.o/thing_throw.o: /usr/include/time.h /usr/include/sys/_types/_clock_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_time_t.h
+.o/thing_throw.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
+.o/thing_throw.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/thing_throw.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/thing_throw.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/thing_throw.o: my_particle.h my_size.h my_thing_id.h my_dungeon.h
+.o/thing_throw.o: my_room.h my_depth.h my_charmap.h my_dmap.h
+.o/thing_throw.o: my_level_static.h my_dungeon_grid.h my_thing.h my_light.h
+.o/thing_throw.o: my_thing_template.h my_dice.h my_tile.h my_color.h
+.o/thing_throw.o: my_thing_ai.h my_python.h
 .o/thing_tick.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/thing_tick.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/thing_tick.o: /usr/include/sys/_posix_availability.h
