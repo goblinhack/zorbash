@@ -224,4 +224,5 @@ void Level::cursor_recreate (void)
         cursor = thing_new("cursor", mid_at);
     }
     cursor->hide();
+    cursor_path_create();
 }
