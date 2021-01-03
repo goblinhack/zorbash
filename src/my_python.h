@@ -28,6 +28,8 @@ void py_call_void(const char *name);
 void py_call_void_fn(const char *module, const char *name, int v1);
 void py_call_void_fn(const char *module, const char *name, int v1, int v2);
 void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3);
+void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4);
+void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5);
 int py_obj_attr_int(const PyObject *py_obj, const char *attr);
 int py_obj_to_int(PyObject *py_obj);
 std::string py_obj_to_string(const PyObject *py_str);

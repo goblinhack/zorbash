@@ -417,13 +417,13 @@ bool Thing::match (const std::string& what)
     if (is_rrr48() && (what == "is_rrr48")) {
         return true;
     }
-    if (is_rrr49() && (what == "is_rrr49")) {
+    if (is_item_effect_max_radius() && (what == "is_item_effect_max_radius")) {
         return true;
     }
     if (is_rrr5() && (what == "is_rrr5")) {
         return true;
     }
-    if (is_rrr50() && (what == "is_rrr50")) {
+    if (is_item_effect_min_radius() && (what == "is_item_effect_min_radius")) {
         return true;
     }
     if (is_critical_to_level() && (what == "is_critical_to_level")) {

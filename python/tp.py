@@ -331,11 +331,11 @@ class Tp:
     def set_is_rrr48(self, value):
         zx.tp_set_is_rrr48(self, value)
 
-    def set_is_rrr49(self, value):
-        zx.tp_set_is_rrr49(self, value)
+    def set_is_item_effect_max_radius(self, value):
+        zx.tp_set_is_item_effect_max_radius(self, value)
 
-    def set_is_rrr50(self, value):
-        zx.tp_set_is_rrr50(self, value)
+    def set_is_item_effect_min_radius(self, value):
+        zx.tp_set_is_item_effect_min_radius(self, value)
 
     def set_is_critical_to_level(self, value):
         zx.tp_set_is_critical_to_level(self, value)
