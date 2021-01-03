@@ -297,6 +297,8 @@ public:
     void cursor_path_clear(void);
     void cursor_path_create(void);
     void cursor_path_draw(point start, point end);
+    void cursor_path_draw_line(point start, point end);
+    void cursor_path_draw_circle(void);
     void cursor_recreate(void);
     void display(void);
     void display_anim(void);
