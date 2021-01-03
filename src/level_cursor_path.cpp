@@ -10,18 +10,46 @@
 #include "my_gl.h"
 #include "my_thing.h"
 
+void Level::cursor_path_draw_circle (void)
+{_
+    auto what = game->request_to_throw_item;
+    if (!what) {
+        return;
+    }
+
+    auto radius_min = what->tp()->is_item_effect_min_radius();
+    auto radius_max = what->tp()->is_item_effect_max_radius();
+    auto mid_at = cursor->mid_at;
+
+    for (auto x = mid_at.x - radius_max; x <= mid_at.x + radius_max; x++) {
+        for (auto y = mid_at.y - radius_max; y <= mid_at.y + radius_max; y++) {
+            float dist = DISTANCE(x, y, mid_at.x, mid_at.y);
+
+            if (dist > radius_max) {
+                continue;
+            }
+
+            if (dist < radius_min) {
+                continue;
+            }
+
+            if (is_rock(x, y) || is_wall(x, y)) {
+                continue;
+            }
+
+            thing_new("cursor_select_path", fpoint(x, y));
+        }
+    }
+}
+
 //
 // Create the cursor path, avoiding things like lava
 //
-void Level::cursor_path_draw (point start, point end)
+void Level::cursor_path_draw_line (point start, point end)
 {_
     Dmap d {};
     point dmap_start = start;
     point dmap_end = end;
-
-    if (!player) {
-        return;
-    }
 
     int minx, miny, maxx, maxy;
     if (dmap_start.x < dmap_end.x) {
@@ -122,11 +150,23 @@ void Level::cursor_path_draw (point start, point end)
     game->cursor_move_path = p;
 
     for (auto& c : p) {
-        if (game->state_choosing_target) {
-            thing_new("cursor_select_path", fpoint(c.x , c.y));
-        } else {
-            thing_new("cursor_path", fpoint(c.x , c.y));
-        }
+        thing_new("cursor_path", fpoint(c.x , c.y));
+    }
+}
+
+//
+// Create the cursor path, avoiding things like lava
+//
+void Level::cursor_path_draw (point start, point end)
+{_
+    if (!player) {
+        return;
+    }
+
+    if (game->request_to_throw_item) {
+        cursor_path_draw_circle();
+    } else {
+        cursor_path_draw_line(start, end);
     }
 
     //
