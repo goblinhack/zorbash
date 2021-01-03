@@ -4,12 +4,12 @@
 //
 
 #include <algorithm>
-#include <set>
 #include "my_main.h"
 #include "my_level.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
+#include "my_game.h"
 
 bool Thing::spawn_next_to (const std::string& what)
 {_
@@ -144,6 +144,11 @@ bool Thing::spawn_radius_range (const std::string& what, uint32_t radius_min, ui
         if (level->monst_count >= LEVELS_MONST_COUNT) {
             return false;
         }
+    }
+
+    auto mid_at = this->mid_at;
+    if (game->request_to_throw_item) {
+        mid_at = level->cursor->mid_at;
     }
 
     for (auto x = mid_at.x - radius_max; x <= mid_at.x + radius_max; x++) {

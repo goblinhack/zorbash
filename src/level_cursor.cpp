@@ -207,3 +207,21 @@ void Level::cursor_move (void)
         }
     }
 }
+
+void Level::cursor_recreate (void)
+{_
+    if (!cursor) {
+        err("no cursor");
+        return;
+    }
+
+    auto mid_at = cursor->mid_at;
+
+    cursor->dead("update");
+    if (game->state_choosing_target) {
+        cursor = thing_new("cursor_select", mid_at);
+    } else {
+        cursor = thing_new("cursor", mid_at);
+    }
+    cursor->hide();
+}

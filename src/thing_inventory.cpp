@@ -107,8 +107,7 @@ void Thing::inventory_particle (Thingp what, uint32_t slot,
     log("Inventory particle %s with target %s",
         what->to_string().c_str(), particle_target->to_string().c_str());
 _
-    if (game->state_choosing_target ||
-        game->state_moving_items || 
+    if (game->state_moving_items || 
         game->state_collecting_items) {
         //
         // No animations when moving stuff around

@@ -2,7 +2,7 @@ import zx
 import tp
 
 def tp_effect(me, x, y):
-    zx.tp_spawn_radius_range(me, "potion_descent_effect", min=1, max=5)
+    zx.tp_spawn_radius_range(me, "potion_descent_effect", min=0, max=4)
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)

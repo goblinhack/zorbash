@@ -124,6 +124,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
             LOG("Escape pressed, clear choosing target flag");
             game->state_choosing_target = false;
             game->request_to_throw_item = nullptr;
+            game->level->cursor_recreate();
             wid_inventory_init();
             wid_thing_collect_fini();
             wid_destroy(&game->in_transit_item);

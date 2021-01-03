@@ -20,14 +20,16 @@ void Thing::throw_at (Thingp what, Thingp target)
 
     MINICON("You throw the %s", what->text_the().c_str());
 
-    what->move_to_immediately(target->mid_at);
-
     log("Thrown %s", what->to_string().c_str());
+    what->move_to_immediately(target->mid_at);
+    what->visible();
     used(what, target);
 
-    if (what == game->request_to_throw_item) {
+    if (game->state_choosing_target) {
         game->request_to_throw_item = nullptr;
         game->state_choosing_target = false;
+        level->cursor_recreate();
+        level->cursor->cursor_path_stop();
     }
 }
 
@@ -45,6 +47,7 @@ bool Thing::throw_item (Thingp what)
 
     game->state_choosing_target = true;
     game->request_to_throw_item = what;
+    level->cursor_recreate();
 
     MINICON("Choose a target");
 

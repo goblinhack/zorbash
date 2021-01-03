@@ -122,7 +122,11 @@ void Level::cursor_path_draw (point start, point end)
     game->cursor_move_path = p;
 
     for (auto& c : p) {
-        thing_new("cursor_path", fpoint(c.x , c.y));
+        if (game->state_choosing_target) {
+            thing_new("cursor_select_path", fpoint(c.x , c.y));
+        } else {
+            thing_new("cursor_path", fpoint(c.x , c.y));
+        }
     }
 
     //
