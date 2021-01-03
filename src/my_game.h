@@ -198,6 +198,8 @@ public:
     //
     bool               state_moving_items {};     // Currently managing inventory
     bool               state_collecting_items {}; // Collecting en masse from the level
+    bool               state_choosing_target {};  // Looking for somewhere to throw
+    Thingp             request_to_throw_item {};  // This is what we are throwing.
 
     //
     // Temporary. Global requests

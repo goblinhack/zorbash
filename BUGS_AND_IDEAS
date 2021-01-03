@@ -3,9 +3,13 @@ bugs
 
 - throw potion
 - potion break on fall
-- potion enchant radius
 - cubes should explode in fire?
+- cubes should fall and explode in fire?
+- fire portion
+- enchant potion
+- enchant potion of descent radius
 - have a monster use a potion?
+- weight factors into jumping
 
 upcoming work
 -------------
@@ -18,7 +22,6 @@ upcoming work
 - throw
 - should the entrance in next level be close to the prev exit
 - allow seed selection on menu
-- weight factors into jumping
 - add stuff in secret rooms
 - choose name / player
 - playback possible?

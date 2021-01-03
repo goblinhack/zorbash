@@ -23,7 +23,9 @@ void wid_inventory_fini (void)
         // continue
         //
     } else {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return;
         }
     }
@@ -45,7 +47,9 @@ static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int3
 {_
     LOG("Inventory: begin over inventory");
 _
-    if (game->state_moving_items || game->state_collecting_items) {
+    if (game->state_choosing_target ||
+        game->state_moving_items || 
+        game->state_collecting_items) {
         LOG("Inventory: moving items; ignore");
         return;
     }
@@ -87,7 +91,9 @@ static void wid_inventory_mouse_over_e (Widp w)
 {_
     LOG("Inventory: end over inventory");
 _
-    if (game->state_moving_items || game->state_collecting_items) {
+    if (game->state_choosing_target ||
+        game->state_moving_items || 
+        game->state_collecting_items) {
         LOG("Inventory: moving items; ignore");
         return;
     }
@@ -130,7 +136,9 @@ static uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
 {_
     LOG("Inventory: mouse up over bag");
 _
-    if (game->state_moving_items || game->state_collecting_items) {
+    if (game->state_choosing_target ||
+        game->state_moving_items || 
+        game->state_collecting_items) {
         return false;
     }
 
@@ -219,7 +227,9 @@ static void wid_inventory_create (void)
         // continue
         //
     } else {
-        if (game->state_moving_items || game->state_collecting_items) {
+        if (game->state_choosing_target ||
+            game->state_moving_items || 
+            game->state_collecting_items) {
             return;
         }
     }
