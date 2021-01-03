@@ -258,8 +258,8 @@ _
             update_interpolated_position();
             level_push();
 
-            game->tick_begin("finished fall to next level");
             if (is_player()) {
+                game->tick_begin("finished fall to next level");
                 level->timestamp_fade_in_begin = time_get_time_ms_cached();
                 level->update();
             }

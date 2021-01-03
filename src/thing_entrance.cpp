@@ -137,8 +137,8 @@ bool Thing::ascend (void)
         }
     }
 
-    game->tick_begin("ascend to new level");
     if (is_player()) {
+        game->tick_begin("ascend to new level");
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
         level->update();
     }

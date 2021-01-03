@@ -24,6 +24,9 @@ void Thing::throw_at (Thingp what, Thingp target)
     what->move_to_immediately(target->mid_at);
     what->visible();
     used(what, target);
+    if (is_player()) {
+        game->tick_begin("player threw an item");
+    }
 
     if (game->state_choosing_target) {
         game->request_to_throw_item = nullptr;
@@ -40,8 +43,8 @@ bool Thing::throw_item (Thingp what)
     if (!what->is_throwable()) {
         if (is_player()) {
             MINICON("I don't know how to throw %s", what->text_the().c_str());
+            game->tick_begin("player tried to use something they could not");
         }
-        game->tick_begin("player tried to use something they could not");
         return false;
     }
 

@@ -554,12 +554,14 @@ _
         if (changed_highlight_slot) {
             game->tick_begin("player wielded a new weapon");
         }
-    }
-
-    if (what->is_bag()) {
+    } else if (what->is_bag()) {
         game->wid_thing_info_create(what);
         what->log("Moving items flag set");
         game->state_moving_items = true;
+    } else if (what->is_throwable()) {
+        player->throw_item(what);
+    } else if (what->is_usable()) {
+        player->use(what);
     }
 
     return true;
