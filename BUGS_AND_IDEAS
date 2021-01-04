@@ -1,6 +1,8 @@
 bugs
 ----
 
+- state_choosing_target should highlight more
+- eat choc frog broken
 - chasm not shown when destorying over sand
 - make initial health use hitdice too
 
