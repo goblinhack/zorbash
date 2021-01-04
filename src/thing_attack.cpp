@@ -25,6 +25,11 @@ _
         return false;
     }
 
+    if (it->is_dead) {
+        log("No; is dead");
+        return false;
+    }
+
     //
     // No attacking of open doors!
     //

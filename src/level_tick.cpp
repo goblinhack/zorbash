@@ -60,7 +60,7 @@ void Level::tick (void)
         verify(t);
 
         if (t->is_monst()) {
-            if (g_opt_debug2) {
+            if (g_opt_debug3) {
                 t->log("Tick; I am at %d, game is at %d",
                        t->get_tick(), game->tick_current);
             }

@@ -283,7 +283,10 @@ void Thing::update_interpolated_position (void)
     }
 
     if (update_pos) {
-        log("Update interpolated pos");
+        if (g_opt_debug3) {
+            log("Update interpolated pos");
+        }
+
         level_pop();
         set_interpolated_mid_at(new_pos);
         level_push();
