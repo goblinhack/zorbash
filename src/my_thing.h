@@ -876,6 +876,8 @@ public:
     bool collision_find_best_target(bool *, bool *);
     bool collision_obstacle(Thingp);
     bool collision_obstacle(fpoint);
+    bool ai_obstacle(Thingp);
+    bool ai_obstacle(fpoint);
     bool cursor_path_pop_next_and_move(void);
     bool descend(void);
     bool describe_when_hovering_over(void);
@@ -895,7 +897,7 @@ public:
     bool is_carrying_item(void);
     bool is_carrying_treasure(void);
     bool is_enemy(Thingp attacker) const;
-    bool is_obstacle_for_me(const point&);
+    bool is_ai_obstacle_for_me(const point&);
     bool is_on_fire(void);
     bool kill_if(const std::string& what, const point &p);
     bool place(const std::string& what, const point &p);
@@ -1128,7 +1130,7 @@ public:
     int is_rrr44(void) const;
     int is_rrr45(void) const;
     int is_rrr46(void) const;
-    int is_rrr47(void) const;
+    int is_attack_meat(void) const;
     int is_food_eater(void) const;
     int is_item_effect_max_radius(void) const;
     int is_rrr5(void) const;

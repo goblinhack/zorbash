@@ -837,6 +837,9 @@ _
     return true;
 }
 
+//
+// Return TRUE if this is something that should physically block
+//
 bool Thing::collision_obstacle (Thingp it)
 {
     if (it == this) {
@@ -906,6 +909,97 @@ bool Thing::collision_obstacle (Thingp it)
         // if (it->is_alive_monst()) {
         //     return true;
         // }
+ 
+        if (will_avoid(it)) {
+            return true;
+        }
+
+        if (it->is_player()) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//
+// Return TRUE if this is something that should block AI
+//
+bool Thing::ai_obstacle (Thingp it)
+{
+    if (it == this) {
+        return false;
+    }
+
+    //
+    // Skip things we cannot collide with
+    //
+    if (it->is_hidden ||
+        it->is_falling ||
+        it->is_jumping ||
+        it->is_changing_level) {
+        return false;
+    }
+
+    //
+    // Stop beholders piling on top of each other
+    //
+    if (it->is_floating()) {
+        if (is_floating()) {
+            return true;
+        }
+    }
+
+    //
+    // Stop ghosts piling on top of each other
+    //
+    if (it->is_ethereal()) {
+        if (is_ethereal()) {
+            return true;
+        }
+    }
+
+    //
+    // Allow movement through open doors only
+    //
+    if (it->is_movement_blocking_hard()) {
+        if (!it->is_open) {
+            return true;
+        }
+    }
+
+    //
+    // Allow AI to see through doors?
+    //
+#if 0
+    if (it->is_movement_blocking_soft()) {
+        if (!it->is_open) {
+            return true;
+        }
+    }
+#endif
+
+    if (is_player()) {
+        if (it->is_alive_monst()) {
+            if (!it->is_ethereal()) {
+                return true;
+            }
+        }
+    } else if (is_monst()) {
+        if (it->is_chasm()) {
+            if (!is_floating()) {
+                return true;
+            }
+        }
+
+        //
+        // Do not include this check. It stops monsts seeing down a corridor
+        // with a monst already in it
+        //
+        // if (it->is_alive_monst()) {
+        //     return true;
+        // }
+ 
         if (will_avoid(it)) {
             return true;
         }
@@ -937,6 +1031,29 @@ bool Thing::collision_obstacle (fpoint p)
     return false;
 }
 
+bool Thing::ai_obstacle (fpoint p)
+{
+    //
+    // Avoid threats and treat them as obstacles
+    //
+    for (const auto& it : get(level->all_thing_ptrs_at, p.x, p.y)) {
+        if (!it) {
+            continue;
+        }
+
+        if (it->is_the_grid) { continue; }
+
+        //
+        // "true" on collision
+        //
+        if (ai_obstacle(it)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 //
 // "true" on collision
 //
@@ -955,11 +1072,11 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
         return false;
     }
 
-#if 0
-    log("Collision check only? @%f,%f with %s",
-        A_at.x, A_at.y, it->to_string().c_str());
+    if (g_opt_debug2) {
+        log("Collision check only? @%f,%f with %s",
+            A_at.x, A_at.y, it->to_string().c_str());
+    }
 _
-#endif
 
     if (it->is_monst()) {
         if (is_torch()) {

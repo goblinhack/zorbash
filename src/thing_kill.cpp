@@ -121,6 +121,8 @@ void Thing::kill (Thingp killer, const char *reason)
             }
         }
         return;
+    } else {
+        level_pop();
     }
 
     if (is_loggable_for_important_stuff()) {

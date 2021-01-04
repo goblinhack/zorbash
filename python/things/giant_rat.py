@@ -42,7 +42,7 @@ def tp_init(name, text_name):
     x.set_is_movable(True)
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
-    x.set_long_text_description("An enormous rat. Blood drips fro its rabid teeth. Will eat almost anything, especially you. Answers to the name of Mr Squeekles.")
+    x.set_long_text_description("An enormous rat. Blood drips from its teeth. Will eat almost anything, especially you. Answers to the name of Mr Squeekles.")
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d6")
     x.set_on_death_is_corpse(True)
@@ -56,7 +56,7 @@ def tp_init(name, text_name):
     x.set_stats_strength(20)
     x.set_text_a_or_an("the");
     x.set_text_description("%%fg=brown$A giant rat. Slightly cute. Likely rabid.")
-    x.set_text_hits("squeaks");
+    x.set_text_hits("gores");
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 

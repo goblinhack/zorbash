@@ -123,7 +123,7 @@ bool Thing::will_avoid (const Thingp itp)
     auto it = itp->tp();
 
     if (me->is_meat()) {
-        if (it->is_meat_eater()) {
+        if (it->is_meat_eater() || it->is_attack_meat()) {
             if (is_dangerous(itp)) {
                 return true;
             }
