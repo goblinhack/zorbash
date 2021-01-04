@@ -156,6 +156,24 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
 
+    if (key->scancode == (SDL_Scancode)game->config.key_eat) {
+        if (game->state_choosing_target) {
+            game->state_choosing_target = false;
+            game->request_to_throw_item = nullptr;
+            game->level->cursor_recreate();
+        }
+
+        if (game->state_moving_items || 
+            game->state_collecting_items) {
+            return false;
+        }
+        auto what = level->inventory_get();
+        if (what) {
+            player->use(what);
+        }
+        return true;
+    }
+
     if (game->state_choosing_target) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
             LOG("Escape pressed, clear choosing target flag");
@@ -312,18 +330,6 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
-        if (game->state_choosing_target ||
-            game->state_moving_items || 
-            game->state_collecting_items) {
-            return false;
-        }
-        auto what = level->inventory_get();
-        if (what) {
-            player->use(what);
-        }
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_eat) {
         if (game->state_choosing_target ||
             game->state_moving_items || 
             game->state_collecting_items) {

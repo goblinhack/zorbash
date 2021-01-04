@@ -52,7 +52,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_steal_item_chance_d1000(200)
     x.set_is_treasure_eater(True)
     x.set_light_color("green")
-    x.set_long_text_description("Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners left a trail of corrosive slime in their wake. Avoid this. Actually avoid cleaners completely. They have a habit of eating your hard fought items.")
+    x.set_long_text_description("Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners leave a trail of corrosive slime in their wake. Avoid this. Cleaners also have a habit of eating your hard fought items.")
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_on_death_drop_all_items(True)
