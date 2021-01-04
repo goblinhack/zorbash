@@ -241,7 +241,7 @@ private:
     int _is_rrr44 {};
     int _is_rrr45 {};
     int _is_rrr46 {};
-    int _is_rrr47 {};
+    int _is_attack_meat {};
     int _is_food_eater {};
     int _is_item_effect_max_radius {};
     int _is_rrr5 {};
@@ -591,7 +591,7 @@ public:
     int is_rrr44(void) const;
     int is_rrr45(void) const;
     int is_rrr46(void) const;
-    int is_rrr47(void) const;
+    int is_attack_meat(void) const;
     int is_food_eater(void) const;
     int is_item_effect_max_radius(void) const;
     int is_rrr5(void) const;
@@ -832,7 +832,7 @@ public:
     void set_is_rrr44(int);
     void set_is_rrr45(int);
     void set_is_rrr46(int);
-    void set_is_rrr47(int);
+    void set_is_attack_meat(int);
     void set_is_food_eater(int);
     void set_is_item_effect_max_radius(int);
     void set_is_rrr5(int);

@@ -11,7 +11,7 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-bool Thing::is_obstacle_for_me (const point &p)
+bool Thing::is_ai_obstacle_for_me (const point &p)
 {_
     //
     // Avoid threats and treat them as obstacles
@@ -26,7 +26,7 @@ bool Thing::is_obstacle_for_me (const point &p)
         //
         // "true" on collision
         //
-        if (collision_obstacle(t)) {
+        if (ai_obstacle(t)) {
             if (t->is_loggable_for_unimportant_stuff()) {
                 log(" is an obstacle for me %s", t->to_string().c_str());
             }

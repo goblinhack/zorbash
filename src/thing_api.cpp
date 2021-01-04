@@ -715,9 +715,9 @@ int Thing::is_rrr46(void) const
     return (tp()->is_rrr46());
 }
 
-int Thing::is_rrr47(void) const
+int Thing::is_attack_meat(void) const
 {_
-    return (tp()->is_rrr47());
+    return (tp()->is_attack_meat());
 }
 
 int Thing::is_food_eater(void) const

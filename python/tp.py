@@ -325,8 +325,8 @@ class Tp:
     def set_is_rrr46(self, value):
         zx.tp_set_is_rrr46(self, value)
 
-    def set_is_rrr47(self, value):
-        zx.tp_set_is_rrr47(self, value)
+    def set_is_attack_meat(self, value):
+        zx.tp_set_is_attack_meat(self, value)
 
     def set_is_food_eater(self, value):
         zx.tp_set_is_food_eater(self, value)

@@ -411,7 +411,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr46() && (what == "is_rrr46")) {
         return true;
     }
-    if (is_rrr47() && (what == "is_rrr47")) {
+    if (is_attack_meat() && (what == "is_attack_meat")) {
         return true;
     }
     if (is_food_eater() && (what == "is_food_eater")) {

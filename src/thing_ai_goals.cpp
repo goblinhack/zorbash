@@ -35,7 +35,7 @@ _
             auto X = x - minx;
             auto Y = y - miny;
 
-            if (is_obstacle_for_me(p)) {
+            if (is_ai_obstacle_for_me(p)) {
                 set(dmap_scent->val, X, Y, DMAP_IS_WALL);
             } else {
                 set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
@@ -78,7 +78,7 @@ _
 #define GOAL_ADD(score, msg)                                                  \
         total_score += (score);                                               \
         got_one = true;                                                       \
-        if (g_opt_debug3) {                                                   \
+        if (g_opt_debug2) {                                                   \
             log(" add goal (%d,%d) score %d %s, %s",                          \
                 p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
         }
@@ -99,6 +99,7 @@ _
             if (it->is_loggable_for_unimportant_stuff()) {
                 log(" consider %s", it->to_string().c_str());
             }
+            _
 
             //
             // Worse terrain, less preferred. Higher score, more preferred.
@@ -129,6 +130,10 @@ _
                         GOAL_ADD(it_stats_health, "eat-food");
                     }
                 }
+            }
+
+            if (possible_to_attack(it)) {
+                GOAL_ADD(- health_diff, "attack-monst");
             }
 
             if (will_prefer_terrain(it)) {
@@ -227,7 +232,7 @@ _
         uint8_t score8 = (int)score;
         set(dmap_scent->val, goal_target.x, goal_target.y, score8);
 
-        if (g_opt_debug3) {
+        if (g_opt_debug2) {
             log(" scale goal (%d,%d) %d to %d",
                 (int)minx + goal.at.x, (int)miny + goal.at.y, 
                 (int)orig_score, (int)score8);
@@ -281,9 +286,11 @@ _
                                   dmap_scent);
         paths.insert(result);
 
-        log(" goal (%d,%d) score %d -> cost %d", 
-            goal.at.x + minx, goal.at.y + miny,
-            (int)goal.score, (int)result.cost);
+        if (g_opt_debug2) {
+            log(" goal (%d,%d) score %d -> cost %d", 
+                goal.at.x + minx, goal.at.y + miny,
+                (int)goal.score, (int)result.cost);
+        }
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
         for (auto& p : result.path) {

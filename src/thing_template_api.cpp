@@ -224,7 +224,7 @@ int Tp::is_rrr43(void) const { return _is_rrr43; }
 int Tp::is_rrr44(void) const { return _is_rrr44; }
 int Tp::is_rrr45(void) const { return _is_rrr45; }
 int Tp::is_rrr46(void) const { return _is_rrr46; }
-int Tp::is_rrr47(void) const { return _is_rrr47; }
+int Tp::is_attack_meat(void) const { return _is_attack_meat; }
 int Tp::is_food_eater(void) const { return _is_food_eater; }
 int Tp::is_item_effect_max_radius(void) const { return _is_item_effect_max_radius; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
@@ -464,7 +464,7 @@ void Tp::set_is_rrr43(int v) { _is_rrr43 = v; }
 void Tp::set_is_rrr44(int v) { _is_rrr44 = v; }
 void Tp::set_is_rrr45(int v) { _is_rrr45 = v; }
 void Tp::set_is_rrr46(int v) { _is_rrr46 = v; }
-void Tp::set_is_rrr47(int v) { _is_rrr47 = v; }
+void Tp::set_is_attack_meat(int v) { _is_attack_meat = v; }
 void Tp::set_is_food_eater(int v) { _is_food_eater = v; }
 void Tp::set_is_item_effect_max_radius(int v) { _is_item_effect_max_radius = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }

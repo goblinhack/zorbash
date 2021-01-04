@@ -6,6 +6,9 @@ def tp_effect(me, what, target, x, y):
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
+    x.set_collision_circle(True)
+    x.set_collision_hit_priority(1)
+    x.set_collision_radius(0.40)
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
     x.set_gfx_animated(True)

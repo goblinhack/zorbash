@@ -59,7 +59,7 @@ _
             }
         }
 
-        if (me->is_meat_eater()) {
+        if (me->is_meat_eater() || me->is_attack_meat()) {
             if (!it->is_attackable_by_monst()) {
                 log("No, cannot attack %s, not attackable by meat eating monst",
                     it->to_string().c_str());
