@@ -76,7 +76,7 @@ extern void astar_dump(const Dmap *dmap,
                        const point &end);
 
 typedef struct AgeMap_ {
-    std::array<std::array<timestamp_t, MAP_HEIGHT>, MAP_WIDTH> val {};
+    std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> val {};
 } AgeMap;
 std::ostream& operator<<(std::ostream &out, Bits<const AgeMap & > const my);
 std::istream& operator>>(std::istream &in, Bits<AgeMap &> my);
