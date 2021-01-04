@@ -1,18 +1,17 @@
 bugs
 ----
 
-- throw potion
-- potion break on fall
-- cubes should explode in fire?
-- cubes should fall and explode in fire?
-- fire portion
-- enchant potion
-- enchant potion of descent radius
-- have a monster use a potion?
-- weight factors into jumping
+- make initial health use hitdice too
 
 upcoming work
 -------------
+- fire portion
+- potion break on fall
+- enchant potion
+- enchant potion of descent radius
+- new monst? should explode in fire?
+- have a monster use a potion?
+- weight factors into jumping
 - moving floor
 - some monsters just walk in a circular path - spiders etc
 - shove chocolate frog statue, get frog?

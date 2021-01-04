@@ -242,7 +242,7 @@ private:
     int _is_rrr45 {};
     int _is_rrr46 {};
     int _is_rrr47 {};
-    int _is_rrr48 {};
+    int _is_food_eater {};
     int _is_item_effect_max_radius {};
     int _is_rrr5 {};
     int _is_item_effect_min_radius {};
@@ -592,7 +592,7 @@ public:
     int is_rrr45(void) const;
     int is_rrr46(void) const;
     int is_rrr47(void) const;
-    int is_rrr48(void) const;
+    int is_food_eater(void) const;
     int is_item_effect_max_radius(void) const;
     int is_rrr5(void) const;
     int is_item_effect_min_radius(void) const;
@@ -833,7 +833,7 @@ public:
     void set_is_rrr45(int);
     void set_is_rrr46(int);
     void set_is_rrr47(int);
-    void set_is_rrr48(int);
+    void set_is_food_eater(int);
     void set_is_item_effect_max_radius(int);
     void set_is_rrr5(int);
     void set_is_item_effect_min_radius(int);

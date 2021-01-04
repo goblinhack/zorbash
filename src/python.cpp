@@ -711,7 +711,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr45)
     TP_SET_DECL(is_rrr46)
     TP_SET_DECL(is_rrr47)
-    TP_SET_DECL(is_rrr48)
+    TP_SET_DECL(is_food_eater)
     TP_SET_DECL(is_item_effect_max_radius)
     TP_SET_DECL(is_rrr5)
     TP_SET_DECL(is_item_effect_min_radius)

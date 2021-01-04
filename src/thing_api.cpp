@@ -720,9 +720,9 @@ int Thing::is_rrr47(void) const
     return (tp()->is_rrr47());
 }
 
-int Thing::is_rrr48(void) const
+int Thing::is_food_eater(void) const
 {_
-    return (tp()->is_rrr48());
+    return (tp()->is_food_eater());
 }
 
 int Thing::is_item_effect_max_radius(void) const
