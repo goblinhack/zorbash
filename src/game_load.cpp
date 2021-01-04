@@ -557,7 +557,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_quit                     */ in >> bits(my.t.key_quit                     );
     /* uint32_t           key_save                     */ in >> bits(my.t.key_save                     );
     /* uint32_t           key_screenshot               */ in >> bits(my.t.key_screenshot               );
-    /* uint32_t           key_unused99                 */ in >> bits(my.t.key_unused99                  );
+    /* uint32_t           key_inventory                 */ in >> bits(my.t.key_inventory                  );
     /* uint32_t           key_console                  */ in >> bits(my.t.key_console                  );
     /* uint32_t           key_unused3                  */ in >> bits(my.t.key_unused3                  );
     /* uint32_t           key_unused4                  */ in >> bits(my.t.key_unused4                  );

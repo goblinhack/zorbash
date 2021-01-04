@@ -710,9 +710,9 @@ int Thing::is_rrr45(void) const
     return (tp()->is_rrr45());
 }
 
-int Thing::is_rrr46(void) const
+int Thing::is_auto_collect_item(void) const
 {_
-    return (tp()->is_rrr46());
+    return (tp()->is_auto_collect_item());
 }
 
 int Thing::is_attack_meat(void) const

@@ -709,7 +709,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr43)
     TP_SET_DECL(is_rrr44)
     TP_SET_DECL(is_rrr45)
-    TP_SET_DECL(is_rrr46)
+    TP_SET_DECL(is_auto_collect_item)
     TP_SET_DECL(is_attack_meat)
     TP_SET_DECL(is_food_eater)
     TP_SET_DECL(is_item_effect_max_radius)

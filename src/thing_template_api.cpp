@@ -223,7 +223,7 @@ int Tp::is_rrr42(void) const { return _is_rrr42; }
 int Tp::is_rrr43(void) const { return _is_rrr43; }
 int Tp::is_rrr44(void) const { return _is_rrr44; }
 int Tp::is_rrr45(void) const { return _is_rrr45; }
-int Tp::is_rrr46(void) const { return _is_rrr46; }
+int Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
 int Tp::is_attack_meat(void) const { return _is_attack_meat; }
 int Tp::is_food_eater(void) const { return _is_food_eater; }
 int Tp::is_item_effect_max_radius(void) const { return _is_item_effect_max_radius; }
@@ -463,7 +463,7 @@ void Tp::set_is_rrr42(int v) { _is_rrr42 = v; }
 void Tp::set_is_rrr43(int v) { _is_rrr43 = v; }
 void Tp::set_is_rrr44(int v) { _is_rrr44 = v; }
 void Tp::set_is_rrr45(int v) { _is_rrr45 = v; }
-void Tp::set_is_rrr46(int v) { _is_rrr46 = v; }
+void Tp::set_is_auto_collect_item(int v) { _is_auto_collect_item = v; }
 void Tp::set_is_attack_meat(int v) { _is_attack_meat = v; }
 void Tp::set_is_food_eater(int v) { _is_food_eater = v; }
 void Tp::set_is_item_effect_max_radius(int v) { _is_item_effect_max_radius = v; }

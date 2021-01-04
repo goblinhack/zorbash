@@ -185,10 +185,10 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
             game->config.key_throw = 0;
         }
     }
-    if (game->config.key_unused99) {
-        if (game->config.key_unused99 == code) {
+    if (game->config.key_inventory) {
+        if (game->config.key_inventory == code) {
             MINICON("%%fg=orange$Conflicting key, disabling key gfx mode");
-            game->config.key_unused99 = 0;
+            game->config.key_inventory = 0;
         }
     }
     if (game->config.key_console) {
@@ -397,11 +397,11 @@ static void game_config_key_throw_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
-static void game_config_key_unused99_set (SDL_Scancode code)
+static void game_config_key_inventory_set (SDL_Scancode code)
 {_
-    game->config.key_unused99 = 0;
+    game->config.key_inventory = 0;
     game_config_check_for_conflicts(code);
-    game->config.key_unused99 = code;
+    game->config.key_inventory = code;
     game->config_keyboard_select();
 }
 
@@ -701,10 +701,10 @@ uint8_t game_config_key_throw (Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
 }
 
-uint8_t game_config_key_unused99 (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_key_inventory (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
-    on_sdl_key_grab = game_config_key_unused99_set;
+    on_sdl_key_grab = game_config_key_inventory_set;
     return true;
 }
 
@@ -1434,6 +1434,33 @@ void Game::config_keyboard_select (void)
         wid_set_on_mouse_up(w, game_config_key_eat);
     }
     ///////////////////////////////////////////////////////////////////////
+    // gfx_mode
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 1;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "inventory mode");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2,y_at);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Inventory");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 20,y_at);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_inventory));
+        wid_set_on_mouse_up(w, game_config_key_inventory);
+    }
+    ///////////////////////////////////////////////////////////////////////
     // action0
     ///////////////////////////////////////////////////////////////////////
     y_at += 1;
@@ -1826,33 +1853,6 @@ void Game::config_keyboard_select (void)
     y_at++;
     ///////////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////////
-    // gfx_mode
-    ///////////////////////////////////////////////////////////////////////
-    y_at += 1;
-    {_
-        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "gfx_mode");
-
-        point tl = make_point(0, y_at);
-        point br = make_point(width / 2,y_at);
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Graphics style");
-    }
-    {_
-        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "value");
-
-        point tl = make_point(width / 2 + 8, y_at);
-        point br = make_point(width / 2 + 20,y_at);
-        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_unused99));
-        wid_set_on_mouse_up(w, game_config_key_unused99);
-    }
     ///////////////////////////////////////////////////////////////////////
     // screenshot
     ///////////////////////////////////////////////////////////////////////

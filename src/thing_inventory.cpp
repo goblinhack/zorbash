@@ -548,12 +548,19 @@ _
         return false;
     }
 
+    if (game->state_choosing_target) {
+        game->state_choosing_target = false;
+        game->request_to_throw_item = nullptr;
+        game->level->cursor_recreate();
+    }
+
     what->log("Chosen inventory item");
     if (what->is_weapon()) {
         player->wield(what);
         if (changed_highlight_slot) {
             game->tick_begin("player wielded a new weapon");
         }
+        game->state_moving_items = true;
     } else if (what->is_bag()) {
         game->wid_thing_info_create(what);
         what->log("Moving items flag set");

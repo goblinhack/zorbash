@@ -811,7 +811,10 @@ _
     //
     // Sword use hits?
     //
-    if (!it->is_dead && possible_to_attack(it)) {
+    if (is_player() && it->is_item() && !it->is_auto_collect_item()) {
+        log("No; allow items to be collected manually");
+        return false;
+    } else if (!it->is_dead && possible_to_attack(it)) {
         if (things_overlap_attack(me, future_pos, it)) {
             log("Yes; candidate to attack");
             thing_add_ai_possible_hit(it, "battle");
@@ -1140,6 +1143,9 @@ _
             // open_exit(it);
             return false;
         }
+    } else if (is_player() && it->is_item() && !it->is_auto_collect_item()) {
+        log("No; allow manual collect instead");
+        return false;
     } else if (possible_to_attack(it)) {
         if (things_overlap(me, A_at, it)) {
             log("Yes; overlaps and can attack");
@@ -1239,7 +1245,7 @@ _
                 // false is used to abort the walk
                 //
                 if (!collision_add_candidates(it, future_pos, x, y, dx, dy)) {
-                    log("Collision, abort walk");
+                    log("Collision check, abort walk");
                     return false;
                 }
             } FOR_ALL_THINGS_END()

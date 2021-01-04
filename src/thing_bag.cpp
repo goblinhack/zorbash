@@ -168,7 +168,7 @@ bool Thing::bag_compress (void)
 
 bool Thing::bag_remove_at (Thingp item, point pos)
 {
-    log("Bag: remote %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
+    log("Bag: remove %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
 
     auto bag = get_bag();
     auto w = item->bag_item_width();
