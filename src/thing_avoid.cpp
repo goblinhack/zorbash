@@ -64,7 +64,7 @@ bool Tp::will_avoid (Levelp level, point p) const
     return false;
 }
 
-bool Thing::will_avoid (point p) const
+bool Thing::will_avoid (point p)
 {_
     if (level->is_water(p)) {
         if (is_water_hater()) {
@@ -117,14 +117,16 @@ bool Thing::will_avoid (point p) const
     return false;
 }
 
-bool Thing::will_avoid (const Thingp itp) const
+bool Thing::will_avoid (const Thingp itp)
 {_
     auto me = tp();
     auto it = itp->tp();
 
     if (me->is_meat()) {
         if (it->is_meat_eater()) {
-            return true;
+            if (is_dangerous(itp)) {
+                return true;
+            }
         }
     }
     if (me->is_food()) {

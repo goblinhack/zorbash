@@ -51,7 +51,11 @@ int Thing::is_dangerous(Thingp it)
 {
     int a = get_danger_level();
     int b = it->get_danger_level();
-    return b >= a;
+
+    //
+    // So giant rats will attack each other if at the same danger level
+    //
+    return b > a;
 }
 
 std::string Thing::get_danger_level(Thingp it)
