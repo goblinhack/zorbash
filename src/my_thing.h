@@ -924,8 +924,8 @@ public:
     bool try_to_jump(void);
     bool use(Thingp w);
     bool throw_item(Thingp w);
-    bool will_avoid(const Thingp it) const;
-    bool will_avoid(const point p) const;
+    bool will_avoid(const Thingp it);
+    bool will_avoid(const point p);
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void) const;
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
@@ -1198,7 +1198,7 @@ public:
     uint8_t is_dir_tl(void) const;
     uint8_t is_dir_tr(void) const;
     uint8_t is_dir_up(void) const;
-    uint8_t is_less_preferred_terrain(point p) const;
+    uint8_t is_less_preferred_terrain(point p);
     uint8_t is_visible() const;
     void acid_tick();
     void add_enemy(Thingp attacker);

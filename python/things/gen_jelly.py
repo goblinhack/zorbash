@@ -21,7 +21,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_is_wall_deco(True)
     x.set_light_color("lime")
     x.set_long_text_description("A filthy sewer pipe. Watch out, they can spawn surprises. Don't fall in!")
-    x.set_on_idle_dice_do("1d30+30:gen_jelly.spawn()")
+    x.set_on_idle_dice_do("1d50+50:gen_jelly.spawn()")
     x.set_text_a_or_an("a");
     x.set_text_description("A slime coated sewer pipe")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

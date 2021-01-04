@@ -37,6 +37,7 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
+    x.set_is_meat(True)
     x.set_is_monst(True)
     x.set_is_movable(True)
     x.set_is_shovable(True)
@@ -59,7 +60,7 @@ def tp_init(name, text_name):
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    delay=10
+    delay=150
     x.set_tile("giant_rat.1", delay_ms=delay)
     x.set_tile("giant_rat.2", delay_ms=delay)
     x.set_tile("giant_rat.dead", is_dead=True, delay_ms=delay)

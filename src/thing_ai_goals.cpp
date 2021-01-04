@@ -207,10 +207,10 @@ _
         }
     }
 
-#ifdef ENABLE_DEBUG_AI_GOALS
-    log("Sorted goals, %d (best) .. %d (worst)",
-        (int)most_preferred, (int)least_preferred);
-#endif
+    if (g_opt_debug3) {
+        log("Sorted goals, %d (best) .. %d (worst)",
+            (int)most_preferred, (int)least_preferred);
+    }
 
     //
     // Scale the goals so they will fit in the dmap.
@@ -218,9 +218,7 @@ _
     for (auto& goal : goals) {
         auto goal_target = goal.at;
         float score = get(cell_totals, goal_target.x, goal_target.y);
-#ifdef ENABLE_DEBUG_AI
         auto orig_score = score;
-#endif
         score /= (most_preferred - least_preferred);
         score *= DMAP_IS_PASSABLE - 2;
         score++;
@@ -229,11 +227,11 @@ _
         uint8_t score8 = (int)score;
         set(dmap_scent->val, goal_target.x, goal_target.y, score8);
 
-#ifdef ENABLE_DEBUG_AI
-        dbg(" scale goal (%d,%d) %d to %d",
-            (int)minx + goal.at.x, (int)miny + goal.at.y, 
-            (int)orig_score, (int)score8);
-#endif
+        if (g_opt_debug3) {
+            log(" scale goal (%d,%d) %d to %d",
+                (int)minx + goal.at.x, (int)miny + goal.at.y, 
+                (int)orig_score, (int)score8);
+        }
     }
 
     //
@@ -244,13 +242,13 @@ _
     //
     // Find the best next-hop to the best goal.
     //
-#ifdef ENABLE_DEBUG_AI_VERBOSE
-    log("Goals:");
-    dmap_print(dmap_scent,
-               point(start.x - minx, start.y - miny),
-               point(0, 0),
-               point(maxx - minx, maxy - miny));
-#endif
+    if (g_opt_debug3) {
+        log("Goals:");
+        dmap_print(dmap_scent,
+                   point(start.x - minx, start.y - miny),
+                   point(0, 0),
+                   point(maxx - minx, maxy - miny));
+    }
 
     //
     // Make sure we do not want to stay in the same position by making

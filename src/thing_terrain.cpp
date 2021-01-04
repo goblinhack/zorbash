@@ -11,7 +11,7 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-uint8_t Thing::is_less_preferred_terrain (point p) const
+uint8_t Thing::is_less_preferred_terrain (point p)
 {_
     int pref = 0;
 
