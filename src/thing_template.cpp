@@ -197,6 +197,8 @@ static Tpp tp_get_with_no_rarity_filter (Tpidmap &m)
 
 Tpp tp_random_monst (void)
 {_
+//CON("TODO using debug monster");
+//return (tp_find("giant_rat"));
     if (unlikely(!tp_monst.size())) {
         ERR("No monsts found");
         return (nullptr);

@@ -38,7 +38,7 @@ bool Thing::achieve_goals_in_life (void)
     //
     if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
                                          get_timestamp_last_tick())) {
-        if (g_opt_debug2) {
+        if (g_opt_debug3) {
             log("Too often");
         }
         return false;
@@ -154,7 +154,7 @@ void Thing::collision_check_do (void)
 
 void Thing::tick (void)
 {_
-    if (g_opt_debug2) {
+    if (g_opt_debug3) {
         log("Tick");
     }
 _
@@ -175,14 +175,14 @@ _
                 }
             }
         }
-        if (g_opt_debug2) {
+        if (g_opt_debug3) {
             log("Tick; is dead");
         }
         return;
     }
 
     if (unlikely(is_dead)) {
-        if (g_opt_debug2) {
+        if (g_opt_debug3) {
             log("Tick; died");
         }
         return;

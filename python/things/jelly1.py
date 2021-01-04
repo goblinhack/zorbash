@@ -51,7 +51,6 @@ def tp_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_on_birth_do("jelly1.spawn()")
-    x.set_on_death_is_corpse(True)
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stats_attack_dice("1d3")
     x.set_stats_defence(0)
