@@ -62,13 +62,6 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         return;
     }
 
-#if 0
-    if (game->in_transit_item) {
-        t->log("Ignore, already in transit item");
-        return;
-    }
-#endif
-
     if (wid_console_window && wid_console_window->visible) {
         t->log("Console visible");
         return;
@@ -262,7 +255,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         }
     }
 
-    if (t->get_top_owner() == player) {
+    if ((t->get_top_owner() == player) || (t == player)) {
         t->log("Thing info create bags");
 
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);

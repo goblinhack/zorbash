@@ -1129,7 +1129,7 @@ public:
     int is_rrr43(void) const;
     int is_rrr44(void) const;
     int is_rrr45(void) const;
-    int is_rrr46(void) const;
+    int is_auto_collect_item(void) const;
     int is_attack_meat(void) const;
     int is_food_eater(void) const;
     int is_item_effect_max_radius(void) const;

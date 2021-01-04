@@ -140,7 +140,7 @@ bool Thing::move (fpoint future_pos,
 
     if (is_player()) {
         game->tick_begin("player moved");
-        log("Player tick");
+        log("Player move");
         _
 
         if (mid_at != future_pos) {

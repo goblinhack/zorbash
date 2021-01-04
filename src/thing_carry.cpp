@@ -40,11 +40,15 @@ _
         }
     }
 
-    if (bag_add(it)) {
+    if (is_monst()) {
+        //
+        // Always carry
+        //
+    } else if (bag_add(it)) {
         log("Added to bag at %d,%d", 
             it->monstp->bag_position.x, it->monstp->bag_position.y);
     } else {
-        log("No; cannot store");
+        log("No; cannot store in a bag");
         set_where_i_failed_to_collect_last(make_point(it->mid_at));
 
         if (is_player()) {

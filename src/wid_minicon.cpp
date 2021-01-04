@@ -19,7 +19,6 @@
 #include "my_ascii.h"
 #include "my_game.h"
 #include "my_thing.h"
-#include "my_wid_inventory.h"
 
 static void wid_minicon_wid_create(void);
 
@@ -117,6 +116,44 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
             wid_destroy(&game->in_transit_item);
             return true;
         }
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        if (game->state_choosing_target) {
+            game->state_choosing_target = false;
+            game->request_to_throw_item = nullptr;
+            game->level->cursor_recreate();
+        }
+
+        //
+        // Drop whatever we are moving between bags
+        //
+        if (game->in_transit_item) {
+            if (wid_in_transit_item_drop()) {
+                game->tick_begin("drop in transit item");
+            }
+            return true;
+        }
+
+        if (game->state_collecting_items) {
+            wid_thing_collect_fini();
+            wid_inventory_init();
+            return true;
+        }
+
+        //
+        // Drop whatever we have highlighted in the inventory
+        //
+        game->state_moving_items = false;
+
+	auto what = level->inventory_get();
+	if (what) {
+	    if (player->drop(what)) {
+                game->tick_begin("drop");
+            }
+        }
+        wid_inventory_init();
+        return true;
     }
 
     if (game->state_choosing_target) {
@@ -274,40 +311,6 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         wid_inventory_init();
         return true;
     }
-    if (key->scancode == (SDL_Scancode)game->config.key_drop) {
-        if (game->state_choosing_target) {
-            return false;
-        }
-        //
-        // Drop whatever we are moving between bags
-        //
-        if (game->in_transit_item) {
-            if (wid_in_transit_item_drop()) {
-                game->tick_begin("drop in transit item");
-            }
-            return true;
-        }
-
-        if (game->state_collecting_items) {
-            wid_thing_collect_fini();
-            wid_inventory_init();
-            return true;
-        }
-
-        //
-        // Drop whatever we have highlighted in the inventory
-        //
-        game->state_moving_items = false;
-
-	auto what = level->inventory_get();
-	if (what) {
-	    if (player->drop(what)) {
-                game->tick_begin("drop");
-            }
-        }
-        wid_inventory_init();
-        return true;
-    }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
         if (game->state_choosing_target ||
             game->state_moving_items || 
@@ -344,13 +347,9 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         }
         return true;
     }
-    if (key->scancode == (SDL_Scancode)game->config.key_unused99) {
-        if (game->state_choosing_target ||
-            game->state_moving_items || 
-            game->state_collecting_items) {
-            return false;
-        }
-        MINICON("TODO KEY");
+    if (key->scancode == (SDL_Scancode)game->config.key_inventory) {
+        game->wid_thing_info_create(game->level->player, false);
+        game->state_moving_items = true;
         return true;
     }
 

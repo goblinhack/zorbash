@@ -89,6 +89,7 @@ void Thing::kill (Thingp killer, const char *reason)
         // Drop everything!
         //
         if (on_death_drop_all_items()) {
+            log("Drop all items on death");
             drop_all();
         }
     }

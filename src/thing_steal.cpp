@@ -31,6 +31,7 @@ _
     if (!it->is_dead) {
         carry(chosen);
     }
+    chosen->hide();
 
     if (it->is_player()) {
         it->msg(string_sprintf("                        %%fg=white$Where's my money?!"));
