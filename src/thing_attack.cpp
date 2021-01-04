@@ -61,12 +61,24 @@ _
 
         if (me->is_meat_eater()) {
             if (!it->is_attackable_by_monst()) {
-                log("No, cannot attack %s, not attackable by monst",
+                log("No, cannot attack %s, not attackable by meat eating monst",
                     it->to_string().c_str());
                 return false;
             }
             if (it->is_meat() || it->is_blood()) {
-                log("Yes, can attack %s", it->to_string().c_str());
+                log("Yes, can attack meat or blood: %s", it->to_string().c_str());
+                return true;
+            }
+        }
+
+        if (me->is_food_eater()) {
+            if (!it->is_attackable_by_monst()) {
+                log("No, cannot attack %s, not attackable by food eating monst",
+                    it->to_string().c_str());
+                return false;
+            }
+            if (it->is_food()) {
+                log("Yes, can attack food: %s", it->to_string().c_str());
                 return true;
             }
         }

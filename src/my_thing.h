@@ -1129,7 +1129,7 @@ public:
     int is_rrr45(void) const;
     int is_rrr46(void) const;
     int is_rrr47(void) const;
-    int is_rrr48(void) const;
+    int is_food_eater(void) const;
     int is_item_effect_max_radius(void) const;
     int is_rrr5(void) const;
     int is_item_effect_min_radius(void) const;

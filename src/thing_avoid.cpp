@@ -127,6 +127,11 @@ bool Thing::will_avoid (const Thingp itp) const
             return true;
         }
     }
+    if (me->is_food()) {
+        if (it->is_food_eater()) {
+            return true;
+        }
+    }
     if (me->is_treasure()) {
         if (it->is_treasure_eater()) {
             return true;

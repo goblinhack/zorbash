@@ -414,7 +414,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr47() && (what == "is_rrr47")) {
         return true;
     }
-    if (is_rrr48() && (what == "is_rrr48")) {
+    if (is_food_eater() && (what == "is_food_eater")) {
         return true;
     }
     if (is_item_effect_max_radius() && (what == "is_item_effect_max_radius")) {

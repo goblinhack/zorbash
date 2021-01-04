@@ -328,8 +328,8 @@ class Tp:
     def set_is_rrr47(self, value):
         zx.tp_set_is_rrr47(self, value)
 
-    def set_is_rrr48(self, value):
-        zx.tp_set_is_rrr48(self, value)
+    def set_is_food_eater(self, value):
+        zx.tp_set_is_food_eater(self, value)
 
     def set_is_item_effect_max_radius(self, value):
         zx.tp_set_is_item_effect_max_radius(self, value)
