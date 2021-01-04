@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <set>
+#include "my_game.h"
 #include "my_main.h"
 #include "my_level.h"
 #include "my_dmap.h"
@@ -107,6 +108,7 @@ _
             auto my_health = get_stats_health();
             auto it_stats_health = it->get_stats_health();
             auto health_diff = it_stats_health - my_health;
+            bool got_one_this_tile = false;
 
             if (is_starving) {
                 if (can_eat(it)) {
@@ -114,6 +116,7 @@ _
                     // If starving, prefer the thing with most health
                     //
                     GOAL_ADD(it_stats_health, "eat-player");
+                    got_one_this_tile = true;
                 }
             } else if (is_hungry) {
                 if (can_eat(it)) {
@@ -123,24 +126,32 @@ _
                     // go for the easier kill in preference.
                     //
                     if (it->is_player()) {
-                        GOAL_ADD(- health_diff, "eat-player");
+                        GOAL_ADD(it_stats_health / 2, "eat-player");
+                        got_one_this_tile = true;
                     } else if (it->is_alive_monst()) {
-                        GOAL_ADD(- health_diff, "eat-monst");
+                        GOAL_ADD(it_stats_health / 2, "eat-monst");
+                        got_one_this_tile = true;
                     } else {
-                        GOAL_ADD(it_stats_health, "eat-food");
+                        GOAL_ADD(it_stats_health / 2, "eat-food");
+                        got_one_this_tile = true;
                     }
                 }
             }
 
-            if (possible_to_attack(it)) {
-                GOAL_ADD(- health_diff, "attack-monst");
+            if (!got_one_this_tile) {
+                if (possible_to_attack(it)) {
+                    GOAL_ADD(- health_diff, "attack-monst");
+                }
             }
 
             if (will_prefer_terrain(it)) {
                 //
                 // Prefer certain terrains over others. i.e. I prefer water.
                 //
-                GOAL_ADD(1, "preferred-terrain");
+                auto age = get(age_map->val, p.x, p.y);
+                if (age - game->tick_current < 10) {
+                    GOAL_ADD(1, "preferred-terrain");
+                }
             }
 
             if (is_enemy(it)) {
@@ -242,7 +253,7 @@ _
     //
     // Record we've been here.
     //
-    set(age_map->val, start.x, start.y, time_get_time_ms());
+    set(age_map->val, start.x, start.y, game->tick_current);
 
     //
     // Find the best next-hop to the best goal.
@@ -316,7 +327,7 @@ _
                 best = hop0;
             }
             log("Best is %d,%d with cost %d, %d hops away",
-                best.x, best.y, result.cost, (int)hops_len);
+                best.x + minx, best.y + miny, result.cost, (int)hops_len);
         } else if (hops_len >= 1) {
             auto hop0 = get(hops, hops_len - 1);
             best = hop0;

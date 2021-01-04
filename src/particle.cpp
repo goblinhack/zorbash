@@ -260,7 +260,6 @@ void Level::display_external_particles (void)
 
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
-LOG("part dt %f", dt);
             if (dt > 1) {
                 if (p.id.id) {
                     auto t = thing_find(p.id);
@@ -286,7 +285,6 @@ LOG("part dt %f", dt);
 
             point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
             point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
-LOG("part %d %d", blit_tl.x, blit_tl.y);
 
             int oy = sin(RAD_180 * dt) * p.height;
 

@@ -2,7 +2,7 @@ import builtins
 import zx
 import tp
 
-def spawn(me, x, y):
+def tp_effect(me, x, y):
     zx.tp_spawn_under(me, "acid1")
 
 def tp_init(name, text_name, short_text_name):
@@ -49,7 +49,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_movable(True)
     x.set_is_potion_eater(True)
     x.set_is_shown_on_leftbar(True)
-    x.set_is_steal_item_chance_d1000(100)
+    x.set_is_steal_item_chance_d1000(200)
     x.set_is_treasure_eater(True)
     x.set_light_color("green")
     x.set_long_text_description("Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners left a trail of corrosive slime in their wake. Avoid this. Actually avoid cleaners completely. They have a habit of eating your hard fought items.")
@@ -57,7 +57,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_nutrition_dice("1d4")
     x.set_on_death_drop_all_items(True)
     x.set_on_death_is_corpse(True)
-    x.set_on_idle_dice_do("1d0:cube1.spawn()")
+    x.set_on_idle_dice_do("1d0:cleaner.tp_effect()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stats_attack_dice("1d5")
     x.set_stats_defence(0)
@@ -102,6 +102,6 @@ def tp_init(name, text_name, short_text_name):
     x.update()
 
 def init():
-    tp_init(name="cube1", text_name="dungeon cleaner", short_text_name="cleaner")
+    tp_init(name="cleaner", text_name="dungeon cleaner", short_text_name="cleaner")
 
 init()

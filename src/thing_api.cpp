@@ -82,7 +82,7 @@ void Thing::new_age_map (void)
         auto _age_map = monstp->_age_map->val;
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
-                set(_age_map, x, y, (timestamp_t)myrand());
+                set(_age_map, x, y, 0U);
             }
         }
     }

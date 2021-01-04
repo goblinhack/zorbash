@@ -57,10 +57,12 @@ _
     auto chosen = cands[random_range(0, cands.size())];
 
     log("Yes, steal: %s", chosen->to_string().c_str());
+
     it->drop(chosen, this);
     if (!chosen->is_dead) {
         carry(chosen);
     }
+    chosen->hide();
 
     it->log("New carried list:");
     it->get_item_list();
