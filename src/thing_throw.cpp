@@ -48,7 +48,8 @@ bool Thing::throw_item (Thingp what)
 
     game->change_state(Game::STATE_CHOOSING_TARGET);
     game->request_to_throw_item = what;
-    game->level->cursor_path_draw();
+    level->cursor_recreate();
+    game->level->cursor->visible();
 
     MINICON("Choose a target");
 

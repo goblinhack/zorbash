@@ -10,6 +10,7 @@
 #include "my_wid_thing_collect.h"
 #include "my_game.h"
 #include "my_thing.h"
+#include "my_wid_bag.h"
 
 void Game::change_state (int new_state)
 {
@@ -33,7 +34,13 @@ void Game::change_state (int new_state)
     }
 
     wid_thing_collect_fini();
-    wid_destroy(&game->in_transit_item);
+
+    if (game->in_transit_item) {
+        if (wid_in_transit_item_drop()) {
+            game->tick_begin("drop in transit item");
+        }
+        wid_destroy(&game->in_transit_item);
+    }
 
     request_to_throw_item = nullptr;
     state = new_state;
