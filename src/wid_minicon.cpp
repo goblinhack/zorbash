@@ -116,14 +116,8 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         //
         // Drop whatever we are moving between bags
         //
-        if (game->in_transit_item) {
-            if (wid_in_transit_item_drop()) {
-                game->tick_begin("drop in transit item");
-            }
-
-            if (game->state == Game::STATE_CHOOSING_TARGET) {
-                game->change_state(Game::STATE_NORMAL);
-            }
+        if (game->state == Game::STATE_CHOOSING_TARGET) {
+            game->change_state(Game::STATE_NORMAL);
             return true;
         }
 
