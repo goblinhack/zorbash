@@ -28,11 +28,8 @@ void Thing::throw_at (Thingp what, Thingp target)
         game->tick_begin("player threw an item");
     }
 
-    if (game->state_choosing_target) {
-        game->request_to_throw_item = nullptr;
-        game->state_choosing_target = false;
-        level->cursor_recreate();
-        level->cursor->cursor_path_stop();
+    if (game->state == Game::STATE_CHOOSING_TARGET) {
+        game->change_state(Game::STATE_NORMAL);
     }
 }
 
@@ -47,10 +44,11 @@ bool Thing::throw_item (Thingp what)
         }
         return false;
     }
+    // CHANGE STATE
 
-    game->state_choosing_target = true;
+    game->change_state(Game::STATE_CHOOSING_TARGET);
     game->request_to_throw_item = what;
-    level->cursor_recreate();
+    game->level->cursor_path_draw();
 
     MINICON("Choose a target");
 

@@ -5853,17 +5853,17 @@ void wid_tick_all (void)
     //
     // Just in case the window cannot be remade, clean up
     //
-    if (game->state_moving_items) {
+    if (game->state == Game::STATE_MOVING_ITEMS) {
         if (!game->bag_primary && !game->bag_secondary) {
             LOG("Handle end of moving items");
-            game->state_moving_items = false;
+            game->change_state(Game::STATE_NORMAL);
         }
     }
 
-    if (game->state_collecting_items) {
+    if (game->state == Game::STATE_COLLECTING_ITEMS) {
         if (!game->bag_primary && !game->bag_secondary) {
             LOG("Handle end of collecting items");
-            game->state_collecting_items = false;
+            game->change_state(Game::STATE_NORMAL);
         }
     }
 

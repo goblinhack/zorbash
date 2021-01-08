@@ -31,7 +31,7 @@ void Thing::level_enter (void)
     if (is_player()) {
         if (!level->cursor) {
             if (!is_cursor()) {
-                if (game->state_choosing_target) {
+                if (game->state == Game::STATE_CHOOSING_TARGET) {
                     level->cursor = level->thing_new("cursor_select", mid_at);
                 } else {
                     level->cursor = level->thing_new("cursor", mid_at);

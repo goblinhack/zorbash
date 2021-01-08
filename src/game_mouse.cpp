@@ -39,7 +39,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         return true;
     }
 
-    if (game->state_choosing_target) {
+    if (game->state == Game::STATE_CHOOSING_TARGET) {
         player->log("Chosen target");
         auto what = game->request_to_throw_item;
         player->throw_at(what, level->cursor);

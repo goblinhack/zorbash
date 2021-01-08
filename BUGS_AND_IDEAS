@@ -1,8 +1,8 @@
 bugs
 ----
 
-- state_choosing_target should highlight more
 - eat choc frog broken
+- sword reflection too high in water 2 tiles deep
 - chasm not shown when destorying over sand
 - make initial health use hitdice too
 
