@@ -176,6 +176,25 @@ void Level::cursor_path_draw (point start, point end)
 }
 
 //
+// Create the cursor path, avoiding things like lava
+//
+void Level::cursor_path_draw (void)
+{_
+    if (!player) {
+        return;
+    }
+
+    if (game->request_to_throw_item) {
+        cursor_path_draw_circle();
+    }
+
+    //
+    // Let's see the path
+    //
+    minimap_valid = false;
+}
+
+//
 // Using a dmap, solve the path to where the cursor is, creating a highlighted
 // path to follow.
 //

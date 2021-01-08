@@ -196,9 +196,13 @@ public:
     //
     // Temporary. Global states
     //
-    bool               state_moving_items {};     // Currently managing inventory
-    bool               state_collecting_items {}; // Collecting en masse from the level
-    bool               state_choosing_target {};  // Looking for somewhere to throw
+    enum {
+        STATE_NORMAL,
+        STATE_MOVING_ITEMS,     // Currently managing inventory
+        STATE_COLLECTING_ITEMS, // Collecting en masse from the level
+        STATE_CHOOSING_TARGET,  // Looking to somewhere to throw at
+    };
+    int                state {STATE_NORMAL};
     Thingp             request_to_throw_item {};  // This is what we are throwing.
 
     //
@@ -246,6 +250,7 @@ public:
     friend std::istream& operator>>(std::istream &in, Bits<class Game &> my);
     void dump(std::string prefix, std::ostream &out);
     void log(std::string prefix);
+    void change_state(int state);
 };
 
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);

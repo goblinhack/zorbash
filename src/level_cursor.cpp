@@ -31,11 +31,11 @@ void Level::cursor_find_on_visible_things (
                         const uint16_t minx, const uint16_t miny,
                         const uint16_t maxx, const uint16_t maxy)
 {
-    if (game->state_moving_items) {
+    if (game->state == Game::STATE_MOVING_ITEMS) {
         return;
     }
 
-    if (game->state_collecting_items) {
+    if (game->state == Game::STATE_COLLECTING_ITEMS) {
         return;
     }
 
@@ -218,7 +218,7 @@ void Level::cursor_recreate (void)
     auto mid_at = cursor->mid_at;
 
     cursor->dead("update");
-    if (game->state_choosing_target) {
+    if (game->state == Game::STATE_CHOOSING_TARGET) {
         cursor = thing_new("cursor_select", mid_at);
     } else {
         cursor = thing_new("cursor", mid_at);

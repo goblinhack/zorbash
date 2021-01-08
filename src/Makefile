@@ -1,4 +1,4 @@
-COMPILER_FLAGS=-Werror -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -Wsign-compare -fno-common -dynamic -DNDEBUG -g -Wall   -arch x86_64 -g  -DVERSION=\"0.0.4\" -DPYTHONVERSION=\"3.6\" -g -ggdb3 # AUTOGEN
+COMPILER_FLAGS=-Werror -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -Wsign-compare -fno-common -dynamic -DNDEBUG -g -Wall   -arch x86_64 -g  -DVERSION=\"0.0.4\" -DPYTHONVERSION=\"3.6\" -g -ggdb3 -O3 # AUTOGEN
     
 CLANG_COMPILER_WARNINGS=-Wall -Wmissing-prototypes -std=c++1z -stdlib=libc++ # AUTOGEN
 GCC_COMPILER_WARNINGS=-x c++ -Wall -std=c++2a -ffast-math  # AUTOGEN
@@ -59,6 +59,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/game_paused.o                 \
     $(OBJDIR)/game_quit.o                   \
     $(OBJDIR)/game_save.o                   \
+    $(OBJDIR)/game_state.o                  \
     $(OBJDIR)/game_tick.o                   \
     $(OBJDIR)/gauss.o                       \
     $(OBJDIR)/gfx.o                         \
@@ -2385,6 +2386,56 @@ all: $(TARGET_GAME)
 .o/game_save.o: my_color.h my_wid_tiles.h my_thing.h my_light.h
 .o/game_save.o: my_thing_template.h my_dice.h my_thing_ai.h my_wid_console.h
 .o/game_save.o: my_wid_popup.h my_wid_text_box.h my_alloc.h
+.o/game_state.o: my_game.h my_world.h my_point.h my_math.h
+.o/game_state.o: /usr/include/math.h /usr/include/sys/cdefs.h
+.o/game_state.o: /usr/include/sys/_symbol_aliasing.h
+.o/game_state.o: /usr/include/sys/_posix_availability.h
+.o/game_state.o: /usr/include/Availability.h
+.o/game_state.o: /usr/include/AvailabilityInternal.h c_plus_plus_serializer.h
+.o/game_state.o: my_level.h my_time.h my_sdl.h my_main.h my_sys.h
+.o/game_state.o: my_pcg_basic.h /usr/include/inttypes.h /usr/include/_types.h
+.o/game_state.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/game_state.o: /usr/include/i386/_types.h
+.o/game_state.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/game_state.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/game_state.o: /usr/include/sys/_types/_int8_t.h
+.o/game_state.o: /usr/include/sys/_types/_int16_t.h
+.o/game_state.o: /usr/include/sys/_types/_int32_t.h
+.o/game_state.o: /usr/include/sys/_types/_int64_t.h
+.o/game_state.o: /usr/include/_types/_uint8_t.h
+.o/game_state.o: /usr/include/_types/_uint16_t.h
+.o/game_state.o: /usr/include/_types/_uint32_t.h
+.o/game_state.o: /usr/include/_types/_uint64_t.h
+.o/game_state.o: /usr/include/sys/_types/_intptr_t.h
+.o/game_state.o: /usr/include/machine/types.h /usr/include/i386/types.h
+.o/game_state.o: /usr/include/sys/_types/_u_int8_t.h
+.o/game_state.o: /usr/include/sys/_types/_u_int16_t.h
+.o/game_state.o: /usr/include/sys/_types/_u_int32_t.h
+.o/game_state.o: /usr/include/sys/_types/_u_int64_t.h
+.o/game_state.o: /usr/include/sys/_types/_uintptr_t.h
+.o/game_state.o: /usr/include/_types/_intmax_t.h
+.o/game_state.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h my_globals.h
+.o/game_state.o: my_callstack.h my_array_bounds_check.h my_bounds_check.h
+.o/game_state.o: /usr/include/assert.h my_vector_bounds_check.h my_command.h
+.o/game_state.o: my_token.h my_string.h /usr/include/wchar.h
+.o/game_state.o: /usr/include/sys/_types/_null.h
+.o/game_state.o: /usr/include/sys/_types/_size_t.h
+.o/game_state.o: /usr/include/sys/_types/_mbstate_t.h
+.o/game_state.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/game_state.o: /usr/include/sys/_types/_rune_t.h /usr/include/stdio.h
+.o/game_state.o: /usr/include/_stdio.h /usr/include/sys/_types/_va_list.h
+.o/game_state.o: /usr/include/sys/stdio.h /usr/include/sys/_types/_off_t.h
+.o/game_state.o: /usr/include/sys/_types/_ssize_t.h
+.o/game_state.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+.o/game_state.o: /usr/include/time.h /usr/include/sys/_types/_clock_t.h
+.o/game_state.o: /usr/include/sys/_types/_time_t.h
+.o/game_state.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
+.o/game_state.o: /usr/include/__wctype.h /usr/include/sys/_types/_wint_t.h
+.o/game_state.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/game_state.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
+.o/game_state.o: my_particle.h my_size.h my_thing_id.h my_dungeon.h my_room.h
+.o/game_state.o: my_depth.h my_charmap.h my_dmap.h my_level_static.h
+.o/game_state.o: my_dungeon_grid.h
 .o/game_tick.o: my_game.h my_world.h my_point.h my_math.h /usr/include/math.h
 .o/game_tick.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/game_tick.o: /usr/include/sys/_posix_availability.h
@@ -6103,14 +6154,17 @@ all: $(TARGET_GAME)
 .o/thing_ai.o: my_charmap.h my_dmap.h my_level_static.h my_dungeon_grid.h
 .o/thing_ai.o: my_thing.h my_light.h my_thing_template.h my_dice.h my_tile.h
 .o/thing_ai.o: my_color.h my_thing_ai.h
-.o/thing_ai_goals.o: my_main.h my_sys.h my_pcg_basic.h
-.o/thing_ai_goals.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
+.o/thing_ai_goals.o: my_game.h my_world.h my_point.h my_math.h
+.o/thing_ai_goals.o: /usr/include/math.h /usr/include/sys/cdefs.h
 .o/thing_ai_goals.o: /usr/include/sys/_symbol_aliasing.h
 .o/thing_ai_goals.o: /usr/include/sys/_posix_availability.h
 .o/thing_ai_goals.o: /usr/include/Availability.h
 .o/thing_ai_goals.o: /usr/include/AvailabilityInternal.h
-.o/thing_ai_goals.o: /usr/include/_types.h /usr/include/sys/_types.h
-.o/thing_ai_goals.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/thing_ai_goals.o: c_plus_plus_serializer.h my_level.h my_time.h my_sdl.h
+.o/thing_ai_goals.o: my_main.h my_sys.h my_pcg_basic.h
+.o/thing_ai_goals.o: /usr/include/inttypes.h /usr/include/_types.h
+.o/thing_ai_goals.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/thing_ai_goals.o: /usr/include/i386/_types.h
 .o/thing_ai_goals.o: /usr/include/sys/_pthread/_pthread_types.h
 .o/thing_ai_goals.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
 .o/thing_ai_goals.o: /usr/include/sys/_types/_int8_t.h
@@ -6132,8 +6186,7 @@ all: $(TARGET_GAME)
 .o/thing_ai_goals.o: /usr/include/_types/_uintmax_t.h my_ptrcheck.h
 .o/thing_ai_goals.o: my_globals.h my_callstack.h my_array_bounds_check.h
 .o/thing_ai_goals.o: my_bounds_check.h /usr/include/assert.h
-.o/thing_ai_goals.o: my_vector_bounds_check.h c_plus_plus_serializer.h
-.o/thing_ai_goals.o: my_level.h my_time.h my_sdl.h my_command.h my_token.h
+.o/thing_ai_goals.o: my_vector_bounds_check.h my_command.h my_token.h
 .o/thing_ai_goals.o: my_string.h /usr/include/wchar.h
 .o/thing_ai_goals.o: /usr/include/sys/_types/_null.h
 .o/thing_ai_goals.o: /usr/include/sys/_types/_size_t.h
@@ -6153,12 +6206,11 @@ all: $(TARGET_GAME)
 .o/thing_ai_goals.o: /usr/include/sys/_types/_wint_t.h
 .o/thing_ai_goals.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
 .o/thing_ai_goals.o: /usr/include/_ctype.h /usr/include/runetype.h slre.h
-.o/thing_ai_goals.o: my_particle.h my_point.h my_math.h /usr/include/math.h
-.o/thing_ai_goals.o: my_size.h my_thing_id.h my_dungeon.h my_room.h
-.o/thing_ai_goals.o: my_depth.h my_charmap.h my_dmap.h my_level_static.h
-.o/thing_ai_goals.o: my_dungeon_grid.h my_thing.h my_light.h
-.o/thing_ai_goals.o: my_thing_template.h my_dice.h my_tile.h my_color.h
-.o/thing_ai_goals.o: my_thing_ai.h
+.o/thing_ai_goals.o: my_particle.h my_size.h my_thing_id.h my_dungeon.h
+.o/thing_ai_goals.o: my_room.h my_depth.h my_charmap.h my_dmap.h
+.o/thing_ai_goals.o: my_level_static.h my_dungeon_grid.h my_thing.h
+.o/thing_ai_goals.o: my_light.h my_thing_template.h my_dice.h my_tile.h
+.o/thing_ai_goals.o: my_color.h my_thing_ai.h
 .o/thing_ai_wander.o: my_main.h my_sys.h my_pcg_basic.h
 .o/thing_ai_wander.o: /usr/include/inttypes.h /usr/include/sys/cdefs.h
 .o/thing_ai_wander.o: /usr/include/sys/_symbol_aliasing.h
@@ -9877,7 +9929,7 @@ all: $(TARGET_GAME)
 .o/thing_spawn.o: my_size.h my_thing_id.h my_dungeon.h my_room.h my_depth.h
 .o/thing_spawn.o: my_charmap.h my_dmap.h my_level_static.h my_dungeon_grid.h
 .o/thing_spawn.o: my_thing.h my_light.h my_thing_template.h my_dice.h
-.o/thing_spawn.o: my_tile.h my_color.h my_thing_ai.h
+.o/thing_spawn.o: my_tile.h my_color.h my_thing_ai.h my_game.h my_world.h
 .o/thing_stamina.o: my_main.h my_sys.h my_pcg_basic.h /usr/include/inttypes.h
 .o/thing_stamina.o: /usr/include/sys/cdefs.h
 .o/thing_stamina.o: /usr/include/sys/_symbol_aliasing.h

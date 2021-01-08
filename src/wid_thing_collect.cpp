@@ -48,7 +48,7 @@ void Game::wid_thing_collect_destroy (void)
         //
         // Continue
         //
-    } else if (game->state_collecting_items) {
+    } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
         return;
     }
 
@@ -64,7 +64,7 @@ _
         // Continue
         //
         LOG("Remake thing collect");
-    } else if (game->state_collecting_items) {
+    } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
         LOG("Ignore, already moving items");
         return;
     }
@@ -104,7 +104,7 @@ _
         bag_secondary = nullptr;
     }
 
-    state_collecting_items = true;
+    state = Game::STATE_COLLECTING_ITEMS;
 
     //
     // bag_primary

@@ -23,9 +23,9 @@ void wid_inventory_fini (void)
         // continue
         //
     } else {
-        if (game->state_choosing_target ||
-            game->state_moving_items || 
-            game->state_collecting_items) {
+        if (game->state == Game::STATE_CHOOSING_TARGET ||
+            game->state == Game::STATE_MOVING_ITEMS || 
+            game->state == Game::STATE_COLLECTING_ITEMS) {
             return;
         }
     }
@@ -47,9 +47,9 @@ static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int3
 {_
     LOG("Inventory: begin over inventory");
 _
-    if (game->state_choosing_target ||
-        game->state_moving_items || 
-        game->state_collecting_items) {
+    if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_MOVING_ITEMS || 
+        game->state == Game::STATE_COLLECTING_ITEMS) {
         LOG("Inventory: moving items; ignore");
         return;
     }
@@ -91,9 +91,9 @@ static void wid_inventory_mouse_over_e (Widp w)
 {_
     LOG("Inventory: end over inventory");
 _
-    if (game->state_choosing_target ||
-        game->state_moving_items || 
-        game->state_collecting_items) {
+    if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_MOVING_ITEMS || 
+        game->state == Game::STATE_COLLECTING_ITEMS) {
         LOG("Inventory: moving items; ignore");
         return;
     }
@@ -136,9 +136,9 @@ static uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
 {_
     LOG("Inventory: mouse up over bag");
 _
-    if (game->state_choosing_target ||
-        game->state_moving_items || 
-        game->state_collecting_items) {
+    if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_MOVING_ITEMS || 
+        game->state == Game::STATE_COLLECTING_ITEMS) {
         return false;
     }
 
@@ -147,7 +147,7 @@ _
     }
 
     BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
-    game->state_moving_items = true;
+    game->change_state(Game::STATE_MOVING_ITEMS);
     return true;
 }
 
@@ -156,11 +156,11 @@ static uint8_t wid_inventory_item_mouse_up (Widp w,
                                             int32_t y,
                                             uint32_t button)
 {_
-    if (game->state_moving_items) {
+    if (game->state == Game::STATE_MOVING_ITEMS) {
         wid_thing_info_fini();
     }
 
-    if (game->state_collecting_items) {
+    if (game->state == Game::STATE_COLLECTING_ITEMS) {
         wid_thing_collect_fini();
     }
 
@@ -182,7 +182,7 @@ static uint8_t wid_inventory_item_mouse_up (Widp w,
         return true;
     }
 
-    if (game->state_moving_items) {
+    if (game->state == Game::STATE_MOVING_ITEMS) {
         level->inventory_describe(slot);
         auto t = level->inventory_get(slot);
         if (t) {
@@ -198,11 +198,11 @@ static uint8_t wid_inventory_mouse_up (Widp w,
                                        int32_t y,
                                        uint32_t button)
 {_
-    if (game->state_moving_items) {
+    if (game->state == Game::STATE_MOVING_ITEMS) {
         wid_thing_info_fini();
     }
 
-    if (game->state_collecting_items) {
+    if (game->state == Game::STATE_COLLECTING_ITEMS) {
         wid_thing_collect_fini();
     }
 
@@ -225,9 +225,9 @@ static void wid_inventory_create (void)
         // continue
         //
     } else {
-        if (game->state_choosing_target ||
-            game->state_moving_items || 
-            game->state_collecting_items) {
+        if (game->state == Game::STATE_CHOOSING_TARGET ||
+            game->state == Game::STATE_MOVING_ITEMS || 
+            game->state == Game::STATE_COLLECTING_ITEMS) {
             return;
         }
     }
@@ -342,7 +342,11 @@ static void wid_inventory_create (void)
                     wid_set_text_lhs(w, true);
 
                     if (i == game->inventory_highlight_slot) {
-                        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+                        if (game->state == Game::STATE_CHOOSING_TARGET) {
+                            wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+                        } else {
+                            wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+                        }
                     } else {
                         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
                     }
@@ -411,7 +415,7 @@ static void wid_inventory_create (void)
                             point tl = make_point(1, y);
                             point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y);
                             wid_set_pos(w, tl, br);
-                            wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+                            wid_set_color(w, WID_COLOR_TEXT_FG, LIGHTBLUE);
                             wid_set_text(w, "(wielding)");
                             wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
                             wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
@@ -429,7 +433,7 @@ static void wid_inventory_create (void)
     recursion = false;
 
     if (game->request_remake_inventory) {
-        if (game->state_moving_items) {
+        if (game->state == Game::STATE_MOVING_ITEMS) {
             auto slot = game->inventory_highlight_slot;
             LOG("Inventory: remaking inventory for slot %d", slot);
 

@@ -17,11 +17,11 @@ _
         return false;
     }
 
-    if (game->state_collecting_items) {
+    if (game->state == Game::STATE_COLLECTING_ITEMS) {
         //
         // Avoid carry checks
         //
-    } else if (game->state_moving_items) {
+    } else if (game->state == Game::STATE_MOVING_ITEMS) {
         //
         // Avoid carry checks
         //

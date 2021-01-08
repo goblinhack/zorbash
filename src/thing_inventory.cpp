@@ -107,8 +107,8 @@ void Thing::inventory_particle (Thingp what, uint32_t slot,
     log("Inventory particle %s with target %s",
         what->to_string().c_str(), particle_target->to_string().c_str());
 _
-    if (game->state_moving_items || 
-        game->state_collecting_items) {
+    if (game->state == Game::STATE_MOVING_ITEMS || 
+        game->state == Game::STATE_COLLECTING_ITEMS) {
         //
         // No animations when moving stuff around
         //
@@ -202,9 +202,9 @@ _
                 //
             } else {
                 wid_inventory_init();
-                if (!game->state_choosing_target &&
-                    !game->state_moving_items &&
-                    !game->state_collecting_items) {
+                if (game->state != Game::STATE_CHOOSING_TARGET &&
+                    game->state != Game::STATE_MOVING_ITEMS &&
+                    game->state != Game::STATE_COLLECTING_ITEMS) {
                     wid_thing_info_fini();
                 }
                 inventory_particle(what, i);
@@ -231,9 +231,9 @@ _
     game->previous_slot = item_slot;
 
     wid_inventory_init();
-    if (!game->state_choosing_target &&
-        !game->state_moving_items &&
-        !game->state_collecting_items) {
+    if (game->state != Game::STATE_CHOOSING_TARGET &&
+        game->state != Game::STATE_MOVING_ITEMS &&
+        game->state != Game::STATE_COLLECTING_ITEMS) {
         wid_thing_info_fini();
     }
     inventory_particle(what, item_slot);
@@ -299,9 +299,9 @@ _
 
             level->inventory_describe(game->inventory_highlight_slot);
             wid_inventory_init();
-            if (!game->state_choosing_target &&
-                !game->state_moving_items && 
-                !game->state_collecting_items) {
+            if (game->state != Game::STATE_CHOOSING_TARGET &&
+                game->state != Game::STATE_MOVING_ITEMS && 
+                game->state != Game::STATE_COLLECTING_ITEMS) {
                 wid_thing_info_fini();
             }
             return true;
@@ -372,9 +372,9 @@ _
             }
 
             wid_inventory_init();
-            if (!game->state_choosing_target &&
-                !game->state_moving_items &&
-                !game->state_collecting_items) {
+            if (game->state != Game::STATE_CHOOSING_TARGET &&
+                game->state != Game::STATE_MOVING_ITEMS &&
+                game->state != Game::STATE_COLLECTING_ITEMS) {
                 wid_thing_info_fini();
             }
             return true;
@@ -548,23 +548,17 @@ _
         return false;
     }
 
-    if (game->state_choosing_target) {
-        game->state_choosing_target = false;
-        game->request_to_throw_item = nullptr;
-        game->level->cursor_recreate();
-    }
-
     what->log("Chosen inventory item");
     if (what->is_weapon()) {
         player->wield(what);
         if (changed_highlight_slot) {
             game->tick_begin("player wielded a new weapon");
         }
-        game->state_moving_items = true;
+        game->change_state(Game::STATE_MOVING_ITEMS);
     } else if (what->is_bag()) {
         game->wid_thing_info_create(what);
         what->log("Moving items flag set");
-        game->state_moving_items = true;
+        game->change_state(Game::STATE_MOVING_ITEMS);
     } else if (what->is_throwable()) {
         player->throw_item(what);
     } else if (what->is_usable()) {

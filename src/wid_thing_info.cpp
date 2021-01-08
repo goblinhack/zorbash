@@ -43,7 +43,7 @@ void Game::wid_thing_info_destroy (void)
         //
         // Continue
         //
-    } else if (game->state_moving_items) {
+    } else if (game->state == Game::STATE_MOVING_ITEMS) {
         return;
     }
 
@@ -57,7 +57,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         // Continue
         //
         t->log("Remake thing info");
-    } else if (game->state_moving_items) {
+    } else if (game->state == Game::STATE_MOVING_ITEMS) {
         t->log("Ignore, already moving items");
         return;
     }
@@ -74,7 +74,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
     auto player = game->level->player;
     if (!player){
-        game->state_moving_items = false;
+        game->change_state(Game::STATE_NORMAL);
         ERR("No player");
         return;
     }
@@ -88,7 +88,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     auto tile = tile_first(tiles);
     if (!tile) {
         t->log("No tile for thing info");
-        game->state_moving_items = false;
+        game->change_state(Game::STATE_NORMAL);
         return;
     }
 
