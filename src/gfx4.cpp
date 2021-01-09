@@ -26,5 +26,6 @@ void gfx_init4 (void)
         "ui4,0,15", "ui4,1,15", "ui4,2,15", "ui4,3,15", "ui4,4,15", "ui4,5,15", "ui4,6,15", "ui4,7,15", "ui4,8,15", "ui4,9,15", "ui4,10,15", "ui4,11,15", "ui4,12,15", "ui4,13,15", "ui4,14,15", "ui4,15,15",
     };
     const std::vector<std::string> arr(tiles);
-    tile_load_arr("data/gfx/ui_box4.tga", "ui_box4", 8, 8, arr);
+    tile_load_arr("data/gfx/ui_box4.tga", "ui_box4",
+                  UI_FONT_LARGE_WIDTH, UI_FONT_LARGE_HEIGHT, arr);
 }
