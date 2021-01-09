@@ -198,69 +198,6 @@ def init_ui_dead():
         file="data/gfx/ui_dead.tga",
         name="ui_dead", width=80, height=100, arr=tiles)
 
-def init_ui_action_bar():
-    tiles = [
-      "ui_action_bar0",
-      "ui_action_bar1",
-      "ui_action_bar2",
-      "ui_action_bar3",
-      "ui_action_bar4",
-      "ui_action_bar5",
-      "ui_action_bar6",
-      "ui_action_bar7",
-      "ui_action_bar8",
-      "ui_action_bar9",
-      "ui_action_bar10",
-      "ui_action_bar11",
-      "ui_action_bar12",
-      "ui_action_bar13",
-      "ui_action_bar14",
-      "ui_action_bar15",
-      "ui_action_bar16",
-      "ui_action_bar17",
-      "ui_action_bar18",
-      "ui_action_bar19",
-    ]
-    zx.tile_load_arr(
-        file="data/gfx/ui_action_bar.tga",
-        name="ui_action_bar", width=60, height=72, arr=tiles)
-
-def init_ui_action_bar_highlight():
-    tiles = [
-      "ui_action_bar_highlight0",
-      "ui_action_bar_highlight1",
-      "ui_action_bar_highlight2",
-      "ui_action_bar_highlight3",
-      "ui_action_bar_highlight4",
-      "ui_action_bar_highlight5",
-      "ui_action_bar_highlight6",
-      "ui_action_bar_highlight7",
-      "ui_action_bar_highlight8",
-      "ui_action_bar_highlight9",
-      "ui_action_bar_highlight10",
-      "ui_action_bar_highlight11",
-      "ui_action_bar_highlight12",
-      "ui_action_bar_highlight13",
-      "ui_action_bar_highlight14",
-      "ui_action_bar_highlight15",
-      "ui_action_bar_highlight16",
-      "ui_action_bar_highlight17",
-      "ui_action_bar_highlight18",
-      "ui_action_bar_highlight19",
-    ]
-    zx.tile_load_arr(
-        file="data/gfx/ui_action_bar_highlight.tga",
-        name="ui_action_bar_highlight", width=60, height=72, arr=tiles)
-
-def init_ui_inventory():
-    tiles = [
-      "ui_inventory0",
-      "ui_inventory1",
-    ]
-    zx.tile_load_arr(
-        file="data/gfx/ui_inventory.tga",
-        name="ui_inventory", width=60, height=72, arr=tiles)
-
 def init_tiles1():
     tiles = [
       "health5-icon",
@@ -3263,9 +3200,6 @@ init_ui_status_bar_title()
 init_ui_dead()
 init_ui_credits_bg()
 init_ui_credits_fg()
-init_ui_action_bar()
-init_ui_action_bar_highlight()
-init_ui_inventory()
 init_tiles1()
 init_tiles2()
 init_tiles3()
