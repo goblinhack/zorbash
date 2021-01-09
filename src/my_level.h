@@ -39,6 +39,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};
@@ -469,6 +470,40 @@ public:
         }
         map_changed = true;
         decr(_is_hazard, x, y, (uint8_t)1);
+    }
+
+    uint8_t is_extreme_hazard (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_extreme_hazard, p.x, p.y));
+    }
+
+    uint8_t is_extreme_hazard (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_extreme_hazard, x, y));
+    }
+
+    void set_is_extreme_hazard (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        map_changed = true;
+        incr(_is_extreme_hazard, x, y, (uint8_t)1);
+    }
+
+    void unset_is_extreme_hazard (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        map_changed = true;
+        decr(_is_extreme_hazard, x, y, (uint8_t)1);
     }
 
     uint8_t is_secret_door (const point &p)

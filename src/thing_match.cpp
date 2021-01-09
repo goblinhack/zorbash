@@ -405,7 +405,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr44() && (what == "is_rrr44")) {
         return true;
     }
-    if (is_rrr45() && (what == "is_rrr45")) {
+    if (is_extreme_hazard() && (what == "is_extreme_hazard")) {
         return true;
     }
     if (is_auto_collect_item() && (what == "is_auto_collect_item")) {

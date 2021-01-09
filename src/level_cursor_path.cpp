@@ -89,10 +89,9 @@ void Level::cursor_path_draw_line (point start, point end)
     //
     // Set up obstacles for the search
     //
-    if (is_hazard((int)player->mid_at.x, (int)player->mid_at.y) ||
-        player->is_on_fire()) {
+    if (is_extreme_hazard(player->mid_at.x, player->mid_at.y)) {
         //
-        // If already on a hazard we can plot a course via hazards.
+        // Just map the shortest path outta here
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
@@ -103,15 +102,28 @@ void Level::cursor_path_draw_line (point start, point end)
                 }
             }
         }
-    } else if ((cursor &&
-               is_hazard((int)cursor->mid_at.x, (int)cursor->mid_at.y)) ||
-              player->is_on_fire()) {
+    } else if (player->will_avoid(player->mid_at)) {
+        //
+        // If already on a hazard we can plot a course via hazards.
+        //
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                if (is_extreme_hazard(x, y) ||
+                    is_movement_blocking_hard(x, y)) {
+                    set(d.val, x, y, DMAP_IS_WALL);
+                } else {
+                    set(d.val, x, y, DMAP_IS_PASSABLE);
+                }
+            }
+        }
+    } else if (cursor && player->will_avoid(cursor->mid_at)) {
         //
         // If the cursor is on a hazard we can plot a course via hazards.
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if (is_movement_blocking_hard(x, y)) {
+                if (is_extreme_hazard(x, y) ||
+                    is_movement_blocking_hard(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -120,12 +132,13 @@ void Level::cursor_path_draw_line (point start, point end)
         }
     } else {
         //
-        // Else avoid hazards
+        // Else avoid all hazards as we all are not standing on one
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if (is_movement_blocking_hard(x, y)    ||
-                    is_hazard(x,y)) {
+                if (is_extreme_hazard(x, y) ||
+                    is_movement_blocking_hard(x, y) ||
+                    player->will_avoid(point(x, y))) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -141,7 +154,7 @@ void Level::cursor_path_draw_line (point start, point end)
     set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
     if (g_opt_debug3) {
-        log("Make path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+        log("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
     }
 
     dmap_process(&d, dmap_start, dmap_end);

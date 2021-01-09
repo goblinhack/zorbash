@@ -257,6 +257,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_generator              = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_gold                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_hazard                 = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_extreme_hazard         = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_treasure_class_a       = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_treasure_class_b       = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_treasure_class_c       = (bits64 >> shift) & 1; shift++;
@@ -352,6 +353,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};           */ in >> bits(my.t->_is_generator);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};                */ in >> bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};              */ in >> bits(my.t->_is_hazard);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};      */ in >> bits(my.t->_is_extreme_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};    */ in >> bits(my.t->_is_treasure_class_a);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};    */ in >> bits(my.t->_is_treasure_class_b);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};    */ in >> bits(my.t->_is_treasure_class_c);

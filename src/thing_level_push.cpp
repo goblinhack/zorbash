@@ -62,6 +62,8 @@ void Thing::level_push (void)
                                                    level->set_is_gold(mx, my); }
     if (is_hazard())                             { i_set_is_hazard = true;
                                                    level->set_is_hazard(mx, my); }
+    if (is_extreme_hazard())                     { i_set_is_extreme_hazard = true;
+                                                   level->set_is_extreme_hazard(mx, my); }
     if (is_treasure_class_a())                   { i_set_is_treasure_class_a = true;
                                                    level->set_is_treasure_class_a(mx, my); }
     if (is_treasure_class_b())                   { i_set_is_treasure_class_b = true;

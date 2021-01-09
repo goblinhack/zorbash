@@ -56,6 +56,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_gold(mx, my); }
     if (i_set_is_hazard)                               { i_set_is_hazard = false;
                                                          level->unset_is_hazard(mx, my); }
+    if (i_set_is_extreme_hazard)                       { i_set_is_extreme_hazard = false;
+                                                         level->unset_is_extreme_hazard(mx, my); }
     if (i_set_is_treasure_class_a)                     { i_set_is_treasure_class_a = false;
                                                          level->unset_is_treasure_class_a(mx, my); }
     if (i_set_is_treasure_class_b)                     { i_set_is_treasure_class_b = false;

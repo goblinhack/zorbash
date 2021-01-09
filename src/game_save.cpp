@@ -212,6 +212,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_generator              << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_gold                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_hazard                 << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_extreme_hazard         << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_a       << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_b       << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_c       << shift; shift++;
@@ -296,6 +297,7 @@ std::ostream& operator<<(std::ostream &out,
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};           */ out << bits(my.t->_is_generator);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};                */ out << bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};              */ out << bits(my.t->_is_hazard);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};      */ out << bits(my.t->_is_extreme_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};    */ out << bits(my.t->_is_treasure_class_a);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};    */ out << bits(my.t->_is_treasure_class_b);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};    */ out << bits(my.t->_is_treasure_class_c);
