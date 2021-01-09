@@ -30,7 +30,6 @@ bool g_opt_fast_start;
 bool g_opt_new_game;
 bool g_quitting;
 bool g_render_black_and_white;
-int g_ui_font_pixel_size;
 std::string g_opt_seed_name;
 
 int TILES_ACROSS;

@@ -84,7 +84,7 @@ static void blit_text (std::string const& text,
             continue;
         }
 
-        tile = fixed_font->unicode_to_tile(c);
+        tile = font_small->unicode_to_tile(c);
 
         fg.a = a;
         glcolor(fg);

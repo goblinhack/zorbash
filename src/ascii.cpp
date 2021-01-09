@@ -323,7 +323,7 @@ void ascii_set_bg (int x, int y, const char *tilename)
 
 void ascii_set_bg (int x, int y, const wchar_t c)
 {
-    ascii_set_bg(x, y, fixed_font->unicode_to_tile(c));
+    ascii_set_bg(x, y, font_large->unicode_to_tile(c));
 }
 
 void ascii_set_bg2 (int x, int y, const char *tilename)
@@ -333,7 +333,7 @@ void ascii_set_bg2 (int x, int y, const char *tilename)
 
 void ascii_set_bg2 (int x, int y, const wchar_t c)
 {
-    ascii_set_bg2(x, y, fixed_font->unicode_to_tile(c));
+    ascii_set_bg2(x, y, font_large->unicode_to_tile(c));
 }
 
 void ascii_set_fg (int x, int y, const Texp tex,
@@ -405,7 +405,7 @@ void ascii_set_fg (int x, int y, const char *tilename)
 
 void ascii_set_fg (int x, int y, const wchar_t c)
 {
-    ascii_set_fg(x, y, fixed_font->unicode_to_tile(c));
+    ascii_set_fg(x, y, font_large->unicode_to_tile(c));
 }
 
 void ascii_set_fg2 (int x, int y, const char *tilename)
@@ -415,7 +415,7 @@ void ascii_set_fg2 (int x, int y, const char *tilename)
 
 void ascii_set_fg2 (int x, int y, const wchar_t c)
 {
-    ascii_set_fg2(x, y, fixed_font->unicode_to_tile(c));
+    ascii_set_fg2(x, y, font_large->unicode_to_tile(c));
 }
 
 void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
@@ -492,7 +492,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
         }
 
         if (!tile) {
-            tile = fixed_font->unicode_to_tile(c);
+            tile = font_large->unicode_to_tile(c);
             if (tile == nullptr) {
                 tile = tile_find_mand(TILE_UNKNOWN_NAME);
             }
@@ -879,7 +879,7 @@ void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
                           wchar_t what, color c)
 {_
     ascii_put_bg_square(tlx, tly, brx, bry,
-                        fixed_font->unicode_to_tile(what), c);
+                        font_large->unicode_to_tile(what), c);
 }
 
 static void ascii_map_thing_replace (int x, int y, Tilep tile, color c)
@@ -979,7 +979,7 @@ void ascii_draw_line (int x0, int y0, int x1, int y1, Tilep tile, color c)
 
 void ascii_draw_line (int x0, int y0, int x1, int y1, wchar_t what, color c)
 {_
-    ascii_draw_line (x0, y0, x1, y1, fixed_font->unicode_to_tile(what), c);
+    ascii_draw_line (x0, y0, x1, y1, font_large->unicode_to_tile(what), c);
 }
 
 void ascii_draw_line (int x0, int y0, int x1, int y1,

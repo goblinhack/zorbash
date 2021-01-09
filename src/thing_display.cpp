@@ -219,7 +219,7 @@ static int blit_msg_strlen (std::string const& text)
 }
 
 void Thing::blit_text (std::string const& text, color fg,
-                       point blit_tl, point blit_br)
+                       point oblit_tl, point oblit_br)
 {_
     Tilep tile;
     auto text_iter = text.begin();
@@ -229,10 +229,12 @@ void Thing::blit_text (std::string const& text, color fg,
 
     int l = blit_msg_strlen(text);
 
-    blit_tl.x = ((blit_br.x + blit_tl.x) / 2) - (g_ui_font_pixel_size * l / 2);
-    blit_br.x = blit_tl.x + g_ui_font_pixel_size;
-    blit_tl.y = blit_tl.y - g_ui_font_pixel_size;
-    blit_br.y = blit_tl.y + g_ui_font_pixel_size;
+    point blit_tl, blit_br;
+    blit_tl.x = ((oblit_br.x + oblit_tl.x) / 2) - (UI_FONT_SMALL_WIDTH * (l / 2));
+    blit_br.x = blit_tl.x + UI_FONT_SMALL_WIDTH;
+
+    blit_tl.y = oblit_tl.y;
+    blit_br.y = oblit_tl.y + UI_FONT_SMALL_HEIGHT;
 
     while (text_iter != text.end()) {
         auto c = *text_iter;
@@ -272,14 +274,14 @@ void Thing::blit_text (std::string const& text, color fg,
         }
 
         if (!tile) {
-            tile = fixed_font->unicode_to_tile(c);
+            tile = font_small->unicode_to_tile(c);
         }
 
-        tile_blit_outline(tile, blit_tl, blit_br, fg);
+        tile_blit(tile, blit_tl, blit_br, fg);
 
         tile = nullptr;
-        blit_tl.x += g_ui_font_pixel_size;
-        blit_br.x += g_ui_font_pixel_size;
+        blit_tl.x += UI_FONT_SMALL_WIDTH;
+        blit_br.x += UI_FONT_SMALL_WIDTH;
     }
     glcolor(WHITE);
 }
@@ -655,7 +657,6 @@ void Thing::blit_end_reflection_submerged (uint8_t submerged) const
     blit_flush();
     glTranslatef(0, submerged, 0);
     glDisable(GL_SCISSOR_TEST);
-
     blit_init();
 }
 
@@ -791,6 +792,10 @@ void Thing::blit_internal (int fbo,
             } else {
                 if (tile && tile_get_height(tile) != TILE_HEIGHT) {
                     if (tpp->gfx_oversized_but_sitting_on_the_ground()) {
+                        //
+                        // Seems to be ok
+                        //
+                    } else if (get_immediate_owner()) {
                         //
                         // Seems to be ok
                         //

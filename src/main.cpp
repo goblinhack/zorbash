@@ -371,7 +371,7 @@ static void find_world_dir (void)
 }
 
 //
-// Hunt down the ttf/ dir.
+// Hunt down the fonts/ dir.
 //
 static void find_ttf_dir (void)
 {_
