@@ -705,9 +705,9 @@ int Thing::is_rrr44(void) const
     return (tp()->is_rrr44());
 }
 
-int Thing::is_rrr45(void) const
+int Thing::is_extreme_hazard(void) const
 {_
-    return (tp()->is_rrr45());
+    return (tp()->is_extreme_hazard());
 }
 
 int Thing::is_auto_collect_item(void) const

@@ -236,6 +236,7 @@ public:
     uint64_t i_set_is_generator:1              {};
     uint64_t i_set_is_gold:1                   {};
     uint64_t i_set_is_hazard:1                 {};
+    uint64_t i_set_is_extreme_hazard:1         {};
     uint64_t i_set_is_treasure_class_a:1       {};
     uint64_t i_set_is_treasure_class_b:1       {};
     uint64_t i_set_is_treasure_class_c:1       {};
@@ -927,7 +928,8 @@ public:
     bool use(Thingp w);
     bool throw_item(Thingp w);
     bool will_avoid(const Thingp it);
-    bool will_avoid(const point p);
+    bool will_avoid(const point &p);
+    bool will_avoid(const fpoint &p);
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void) const;
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
@@ -1128,7 +1130,7 @@ public:
     int is_rrr42(void) const;
     int is_rrr43(void) const;
     int is_rrr44(void) const;
-    int is_rrr45(void) const;
+    int is_extreme_hazard(void) const;
     int is_auto_collect_item(void) const;
     int is_attack_meat(void) const;
     int is_food_eater(void) const;

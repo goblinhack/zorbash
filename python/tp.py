@@ -319,8 +319,8 @@ class Tp:
     def set_is_rrr44(self, value):
         zx.tp_set_is_rrr44(self, value)
 
-    def set_is_rrr45(self, value):
-        zx.tp_set_is_rrr45(self, value)
+    def set_is_extreme_hazard(self, value):
+        zx.tp_set_is_extreme_hazard(self, value)
 
     def set_is_auto_collect_item(self, value):
         zx.tp_set_is_auto_collect_item(self, value)

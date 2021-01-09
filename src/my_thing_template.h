@@ -239,7 +239,7 @@ private:
     int _is_rrr42 {};
     int _is_rrr43 {};
     int _is_rrr44 {};
-    int _is_rrr45 {};
+    int _is_extreme_hazard {};
     int _is_auto_collect_item {};
     int _is_attack_meat {};
     int _is_food_eater {};
@@ -589,7 +589,7 @@ public:
     int is_rrr42(void) const;
     int is_rrr43(void) const;
     int is_rrr44(void) const;
-    int is_rrr45(void) const;
+    int is_extreme_hazard(void) const;
     int is_auto_collect_item(void) const;
     int is_attack_meat(void) const;
     int is_food_eater(void) const;
@@ -830,7 +830,7 @@ public:
     void set_is_rrr42(int);
     void set_is_rrr43(int);
     void set_is_rrr44(int);
-    void set_is_rrr45(int);
+    void set_is_extreme_hazard(int);
     void set_is_auto_collect_item(int);
     void set_is_attack_meat(int);
     void set_is_food_eater(int);

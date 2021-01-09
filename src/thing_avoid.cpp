@@ -54,7 +54,7 @@ bool Tp::will_avoid (Levelp level, point p) const
             }
         }
     } else {
-        if (heat > 1) {
+	if (heat >= 4) { // this allows you to skip around lava
             if (is_fire_hater()) {
                 return true;
             }
@@ -64,7 +64,7 @@ bool Tp::will_avoid (Levelp level, point p) const
     return false;
 }
 
-bool Thing::will_avoid (point p)
+bool Thing::will_avoid (const point &p)
 {_
     if (level->is_water(p)) {
         if (is_water_hater()) {
@@ -99,22 +99,29 @@ bool Thing::will_avoid (point p)
         return true;
     }
 
-    int heat = level->heatmap(p);
-    if (is_double_damage_from_fire()) {
-        if (heat > 0) {
-            if (is_fire_hater()) {
-                return true;
+    if (!is_on_fire()) {
+        int heat = level->heatmap(p);
+        if (is_double_damage_from_fire()) {
+            if (heat > 0) {
+                if (is_fire_hater()) {
+                    return true;
+                }
             }
-        }
-    } else {
-        if (heat > 1) {
-            if (is_fire_hater()) {
-                return true;
+        } else {
+            if (heat >= 4) { // this allows you to skip around lava
+                if (is_fire_hater()) {
+                    return true;
+                }
             }
         }
     }
 
     return false;
+}
+
+bool Thing::will_avoid (const fpoint &p)
+{_
+    return will_avoid(point(p.x, p.y));
 }
 
 bool Thing::will_avoid (const Thingp itp)
@@ -157,12 +164,14 @@ bool Thing::will_avoid (const Thingp itp)
             return true;
         }
     }
-    if (me->is_fire_hater()) {
-        if (it->is_fire()) {
-            return true;
-        }
-        if (it->is_lava()) {
-            return true;
+    if (!is_on_fire()) {
+        if (me->is_fire_hater()) {
+            if (it->is_fire()) {
+                return true;
+            }
+            if (it->is_lava()) {
+                return true;
+            }
         }
     }
     if (me->is_water_hater()) {

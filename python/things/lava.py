@@ -9,6 +9,7 @@ def lava_init(name, text_name, tiles=[]):
     x.set_is_able_to_fall(True)
     x.set_is_cursor_can_hover_over_but_needs_double_click(True)
     x.set_is_hazard(True)
+    x.set_is_extreme_hazard(True)
     x.set_is_interesting(True)
     x.set_is_lava(True)
     x.set_is_light_strength(3)
