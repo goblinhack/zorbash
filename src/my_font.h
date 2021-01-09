@@ -10,7 +10,9 @@
 #include <memory>
 
 typedef class Font * Fontp;
-extern Fontp fixed_font;
+
+extern Fontp font_small;
+extern Fontp font_large;
 
 #include "SDL_ttf.h"
 #include "my_tile.h"
@@ -57,6 +59,7 @@ public:
     std::array<int, TTF_GLYPH_MAX+1> u_to_c {};
     std::array<int, TTF_GLYPH_MAX+1> valid {};
     std::array<Tilep, TTF_GLYPH_MAX+1> cache {};
+    int tile_index;
 
     Tilep unicode_to_tile (int u)
     {
@@ -86,7 +89,7 @@ public:
         }
 
         char tile_name[10];
-        snprintf(tile_name, sizeof(tile_name), "1.%d", index);
+        snprintf(tile_name, sizeof(tile_name), "%d.%d", tile_index, index);
 
         tile = tile_find(tile_name);
         if (!tile) {

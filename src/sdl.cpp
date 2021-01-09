@@ -1422,7 +1422,6 @@ void config_gfx_zoom_update (void)
 
     game->config.tile_width = TILE_WIDTH_LORES;
     game->config.tile_height = TILE_HEIGHT_LORES;
-    g_ui_font_pixel_size = UI_FONT_PIXEL_SIZE;
 
     game->config.one_pixel_width = 1;
     game->config.one_pixel_height = 1;

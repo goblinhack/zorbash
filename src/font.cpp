@@ -5,7 +5,8 @@
 
 #include "my_ttf.h"
 
-Fontp fixed_font;
+Fontp font_small;
+Fontp font_large;
 
 static std::map<std::string, Fontp > fonts;
 
@@ -69,9 +70,13 @@ uint8_t font_init (void)
     DIE("Generated fonts");
 #endif
 
-    fixed_font = font_load("fixed", (char*)UI_FONT_NAME,
-                           UI_FONT_WIDTH,
-                           TTF_STYLE_NORMAL);
+    font_small = font_load("font-small", (char*)UI_FONT_NAME,
+                           UI_FONT_SMALL_WIDTH, TTF_STYLE_NORMAL);
+    font_small->tile_index = 1;
+
+    font_large = font_load("font-large", (char*)UI_FONT_NAME,
+                           UI_FONT_LARGE_WIDTH, TTF_STYLE_NORMAL);
+    font_large->tile_index = 2;
 
     return true;
 }

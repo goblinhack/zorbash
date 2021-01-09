@@ -270,6 +270,10 @@ void tile_blit_outline_section_colored(uint16_t index,
                                        color color_bl, color color_br,
                                        color color_tl, color color_tr,
                                        float scale);
+void tile_blit(const Tilep &tile,
+               const point &tl,
+               const point &br,
+               const color &c);
 void tile_blit_outline(const Tilep &tile,
                        const point &tl,
                        const point &br,

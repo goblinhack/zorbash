@@ -93,10 +93,12 @@
 #define UI_CONSOLE_WIDTH           (TERM_WIDTH - 3)
 #define UI_CURSOR_COLOR            GRAY
 #define UI_CURSOR_OTHER_COLOR      WHITE
-#define UI_FONT_HEIGHT             26
-#define UI_FONT_NAME               "data/ttf/6x6.tga"
+#define UI_FONT_LARGE_WIDTH        20
+#define UI_FONT_LARGE_HEIGHT       26
+#define UI_FONT_SMALL_WIDTH        6
+#define UI_FONT_SMALL_HEIGHT       8
+#define UI_FONT_NAME               "data/fonts/6x6.tga"
 #define UI_FONT_PIXEL_SIZE         6
-#define UI_FONT_WIDTH              20
 #define UI_HEALTH_BAR_STEPS        12 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5
 #define UI_MINICON_HEIGHT          6 // Scrollbar limit

@@ -1292,6 +1292,32 @@ void tile_blit_outline (uint16_t index, const point &tl, const point &br,
     tile_blit_outline(tile_index_to_tile(index), tl, br, c);
 }
 
+void tile_blit (const Tilep &tile, const point &tl, const point &br,
+                const color &c)
+{
+    float x1, x2, y1, y2;
+
+    if (!tile) {
+        return;
+    }
+
+    x1 = tile->x1;
+    x2 = tile->x2;
+    y1 = tile->y1;
+    y2 = tile->y2;
+
+    auto binding = tile->gl_binding_mask();
+    glcolor(c);
+    binding = tile->gl_binding();
+    blit(binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+}
+
+void tile_blit (uint16_t index, const point &tl, const point &br,
+                const color &c)
+{
+    tile_blit(tile_index_to_tile(index), tl, br, c);
+}
+
 //
 // Blits a whole tile. Y co-ords are inverted.
 //
