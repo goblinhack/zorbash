@@ -236,9 +236,9 @@ private:
     int _is_rrr4 {};
     int _is_rrr40 {};
     int _is_rrr41 {};
-    int _is_rrr42 {};
-    int _is_rrr43 {};
-    int _is_rrr44 {};
+    int _is_used_when_thrown {};
+    int _is_used_automatically_when_selected {};
+    int _is_thrown_automatically_when_selected {};
     int _is_extreme_hazard {};
     int _is_auto_collect_item {};
     int _is_attack_meat {};
@@ -586,9 +586,9 @@ public:
     int is_rrr4(void) const;
     int is_rrr40(void) const;
     int is_rrr41(void) const;
-    int is_rrr42(void) const;
-    int is_rrr43(void) const;
-    int is_rrr44(void) const;
+    int is_used_when_thrown(void) const;
+    int is_used_automatically_when_selected(void) const;
+    int is_thrown_automatically_when_selected(void) const;
     int is_extreme_hazard(void) const;
     int is_auto_collect_item(void) const;
     int is_attack_meat(void) const;
@@ -827,9 +827,9 @@ public:
     void set_is_rrr4(int);
     void set_is_rrr40(int);
     void set_is_rrr41(int);
-    void set_is_rrr42(int);
-    void set_is_rrr43(int);
-    void set_is_rrr44(int);
+    void set_is_used_when_thrown(int);
+    void set_is_used_automatically_when_selected(int);
+    void set_is_thrown_automatically_when_selected(int);
     void set_is_extreme_hazard(int);
     void set_is_auto_collect_item(int);
     void set_is_attack_meat(int);

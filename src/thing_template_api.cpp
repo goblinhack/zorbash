@@ -219,9 +219,9 @@ int Tp::is_rrr39(void) const { return _is_rrr39; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr40(void) const { return _is_rrr40; }
 int Tp::is_rrr41(void) const { return _is_rrr41; }
-int Tp::is_rrr42(void) const { return _is_rrr42; }
-int Tp::is_rrr43(void) const { return _is_rrr43; }
-int Tp::is_rrr44(void) const { return _is_rrr44; }
+int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
+int Tp::is_used_automatically_when_selected(void) const { return _is_used_automatically_when_selected; }
+int Tp::is_thrown_automatically_when_selected(void) const { return _is_thrown_automatically_when_selected; }
 int Tp::is_extreme_hazard(void) const { return _is_extreme_hazard; }
 int Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
 int Tp::is_attack_meat(void) const { return _is_attack_meat; }
@@ -459,9 +459,9 @@ void Tp::set_is_rrr39(int v) { _is_rrr39 = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr40(int v) { _is_rrr40 = v; }
 void Tp::set_is_rrr41(int v) { _is_rrr41 = v; }
-void Tp::set_is_rrr42(int v) { _is_rrr42 = v; }
-void Tp::set_is_rrr43(int v) { _is_rrr43 = v; }
-void Tp::set_is_rrr44(int v) { _is_rrr44 = v; }
+void Tp::set_is_used_when_thrown(int v) { _is_used_when_thrown = v; }
+void Tp::set_is_used_automatically_when_selected(int v) { _is_used_automatically_when_selected = v; }
+void Tp::set_is_thrown_automatically_when_selected(int v) { _is_thrown_automatically_when_selected = v; }
 void Tp::set_is_extreme_hazard(int v) { _is_extreme_hazard = v; }
 void Tp::set_is_auto_collect_item(int v) { _is_auto_collect_item = v; }
 void Tp::set_is_attack_meat(int v) { _is_attack_meat = v; }

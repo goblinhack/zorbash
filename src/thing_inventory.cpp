@@ -559,9 +559,9 @@ _
         game->wid_thing_info_create(what);
         what->log("Moving items flag set");
         game->change_state(Game::STATE_MOVING_ITEMS);
-    } else if (what->is_throwable()) {
+    } else if (what->is_thrown_automatically_when_selected()) {
         player->throw_item(what);
-    } else if (what->is_usable()) {
+    } else if (what->is_used_automatically_when_selected()) {
         player->use(what);
     }
 

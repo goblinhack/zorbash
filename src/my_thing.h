@@ -1127,9 +1127,9 @@ public:
     int is_rrr4(void) const;
     int is_rrr40(void) const;
     int is_rrr41(void) const;
-    int is_rrr42(void) const;
-    int is_rrr43(void) const;
-    int is_rrr44(void) const;
+    int is_used_when_thrown(void) const;
+    int is_used_automatically_when_selected(void) const;
+    int is_thrown_automatically_when_selected(void) const;
     int is_extreme_hazard(void) const;
     int is_auto_collect_item(void) const;
     int is_attack_meat(void) const;

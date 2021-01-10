@@ -396,13 +396,13 @@ bool Thing::match (const std::string& what)
     if (is_rrr41() && (what == "is_rrr41")) {
         return true;
     }
-    if (is_rrr42() && (what == "is_rrr42")) {
+    if (is_used_when_thrown() && (what == "is_used_when_thrown")) {
         return true;
     }
-    if (is_rrr43() && (what == "is_rrr43")) {
+    if (is_used_automatically_when_selected() && (what == "is_used_automatically_when_selected")) {
         return true;
     }
-    if (is_rrr44() && (what == "is_rrr44")) {
+    if (is_thrown_automatically_when_selected() && (what == "is_thrown_automatically_when_selected")) {
         return true;
     }
     if (is_extreme_hazard() && (what == "is_extreme_hazard")) {

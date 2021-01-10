@@ -310,14 +310,14 @@ class Tp:
     def set_is_rrr41(self, value):
         zx.tp_set_is_rrr41(self, value)
 
-    def set_is_rrr42(self, value):
-        zx.tp_set_is_rrr42(self, value)
+    def set_is_used_when_thrown(self, value):
+        zx.tp_set_is_used_when_thrown(self, value)
 
-    def set_is_rrr43(self, value):
-        zx.tp_set_is_rrr43(self, value)
+    def set_is_used_automatically_when_selected(self, value):
+        zx.tp_set_is_used_automatically_when_selected(self, value)
 
-    def set_is_rrr44(self, value):
-        zx.tp_set_is_rrr44(self, value)
+    def set_is_thrown_automatically_when_selected(self, value):
+        zx.tp_set_is_thrown_automatically_when_selected(self, value)
 
     def set_is_extreme_hazard(self, value):
         zx.tp_set_is_extreme_hazard(self, value)

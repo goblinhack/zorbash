@@ -23,7 +23,16 @@ void Thing::throw_at (Thingp what, Thingp target)
     log("Thrown %s", what->to_string().c_str());
     what->move_to_immediately(target->mid_at);
     what->visible();
-    used(what, target);
+
+    //
+    // Potions for example are used when thrown. Chocolate frogs, no.
+    //
+    if (what->is_used_when_thrown()) {
+        used(what, target);
+    } else {
+        drop(what, target);
+    }
+
     if (is_player()) {
         game->tick_begin("player threw an item");
     }
@@ -44,7 +53,6 @@ bool Thing::throw_item (Thingp what)
         }
         return false;
     }
-    // CHANGE STATE
 
     game->change_state(Game::STATE_CHOOSING_TARGET);
     game->request_to_throw_item = what;
