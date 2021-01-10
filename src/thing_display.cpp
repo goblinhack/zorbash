@@ -832,6 +832,10 @@ void Thing::blit_internal (int fbo,
         blit_wall_cladding(blit_tl, blit_br, &tiles);
     }
 
+    //
+    // NOTE: chasm tiles are not blitted explicitly. Instead a floor tile
+    // will check for the presence of a chasm beneath it and blit the chasm
+    //
     if (tiles.bot3_tile) {
         blit_floor_chasm(blit_tl, blit_br, &tiles);
     }

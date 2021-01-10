@@ -15,14 +15,17 @@ void Level::put_thing (int x, int y, ThingId id)
 
     if (!id.id) {
         t->err("Null id at map (%d,%d)", x, y);
+        return;
     }
 
     if (!t) {
         t->err("Oob at map (%d,%d) for put of %" PRIx32 "", x, y, id.id);
+        return;
     }
 
     if (is_oob(x, y)) {
         t->err("Oob at map (%d,%d) for put of %" PRIx32 "", x, y, id.id);
+        return;
     }
 
     int free_slot;
@@ -150,8 +153,9 @@ void Level::remove_thing (int x, int y, ThingId id)
             }
 
             if (!found) {
-                t->err("Failed to remove thing %" PRIx32 " at %u,%u slot %u", 
-                       id.id, x, y, slot);
+                // This happens when loading a fresh level
+                //
+                // t->err("Failed to remove thing %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
             }
 #endif
 

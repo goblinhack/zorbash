@@ -25,6 +25,10 @@ void Level::cursor_path_draw_circle (void)
         for (auto y = mid_at.y - radius_max; y <= mid_at.y + radius_max; y++) {
             float dist = DISTANCE(x, y, mid_at.x, mid_at.y);
 
+            if (is_oob(x, y)) {
+                continue;
+            }
+
             if (dist > radius_max) {
                 continue;
             }

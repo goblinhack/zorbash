@@ -2,7 +2,11 @@ import zx
 import tp
 
 
-def tp_init(name, tiles=[], left1_tiles=[]):
+#
+# NOTE: chasm tiles are not blitted explicitly. Instead a floor tile
+# will check for the presence of a chasm beneath it and blit the chasm
+#
+def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     x = tp.Tp(name)
     x.set_is_able_to_fall(False)
     x.set_is_cursor_can_hover_over(True)
@@ -18,6 +22,12 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     for t in tiles:
         x.set_tile(t)
 
+    if bot3_tiles is not None:
+        for t in bot3_tiles:
+            x.set_bot3_tile(t)
+    else:
+        x.set_bot3_tile(bot3_tile=name)
+
     x.update()
 
 def init():
@@ -28,6 +38,12 @@ def init():
                         "dirt1.9", "dirt1.10", "dirt1.11", "dirt1.12",
                         "dirt1.13", "dirt1.14", "dirt1.15", "dirt1.16",
                         "dirt1.17", "dirt1.18", "dirt1.19",
+                ],
+            bot3_tiles=[ 
+                        "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+                        "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+                        "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+                        "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
                 ])
     tp_init(name="dirt2",
             tiles=[
@@ -36,6 +52,12 @@ def init():
                         "dirt2.9", "dirt2.10", "dirt2.11", "dirt2.12",
                         "dirt2.13", "dirt2.14", "dirt2.15", "dirt2.16",
                         "dirt2.17", "dirt2.18", "dirt2.19",
+                ],
+            bot3_tiles=[ 
+                        "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+                        "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+                        "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+                        "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
                 ])
     tp_init(name="dirt3",
             tiles=[
@@ -44,5 +66,11 @@ def init():
                         "dirt3.9", "dirt3.10", "dirt3.11", "dirt3.12",
                         "dirt3.13", "dirt3.14", "dirt3.15", "dirt3.16",
                         "dirt3.17", "dirt3.18", "dirt3.19",
+                ],
+            bot3_tiles=[ 
+                        "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+                        "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+                        "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+                        "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
                 ])
 init()
