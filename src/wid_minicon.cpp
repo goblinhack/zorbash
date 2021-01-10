@@ -132,14 +132,18 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
         }
 
         //
-        // Drop whatever we have highlighted in the inventory
+        // If we are moving an item, prefer to drop that.
+        // Else drop whatever we have highlighted in the inventory
         //
-        game->change_state(Game::STATE_NORMAL);
-
-	auto what = level->inventory_get();
-	if (what) {
-	    if (player->drop(what)) {
-                game->tick_begin("drop");
+        if (game->in_transit_item) {
+            game->change_state(Game::STATE_NORMAL);
+        } else {
+            game->change_state(Game::STATE_NORMAL);
+            auto what = level->inventory_get();
+            if (what) {
+                if (player->drop(what)) {
+                    game->tick_begin("drop");
+                }
             }
         }
         wid_inventory_init();
@@ -338,6 +342,7 @@ uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
     }
     if (key->scancode == (SDL_Scancode)game->config.key_inventory) {
         game->wid_thing_info_create(game->level->player, false);
+        game->request_remake_inventory = true;
         game->change_state(Game::STATE_MOVING_ITEMS);
         return true;
     }

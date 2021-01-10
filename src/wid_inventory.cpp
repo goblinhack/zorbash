@@ -148,6 +148,22 @@ _
 
     BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
     game->change_state(Game::STATE_MOVING_ITEMS);
+
+    auto level = game->level;
+    if (!level) {
+        return true;
+    }
+
+    auto slot = wid_get_int_context(w);
+    if (!level->inventory_chosen(slot)) {
+        return true;
+    }
+
+    auto t = level->inventory_get(slot);
+    if (t) {
+        game->wid_thing_info_create(t);
+    }
+
     return true;
 }
 
