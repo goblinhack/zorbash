@@ -260,9 +260,9 @@ void Thing::init (Levelp level,
     }
 
     {_
-        auto v = tpp->stats18();
+        auto v = tpp->stats_throw_distance();
         if (unlikely(v)) {
-            set_stats18(v);
+            set_stats_throw_distance(v);
         }
     }
 

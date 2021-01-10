@@ -21,6 +21,12 @@ void Level::cursor_path_draw_circle (void)
     auto radius_max = what->tp()->is_item_effect_max_radius();
     auto mid_at = cursor->mid_at;
 
+    bool too_far = false;
+    if (DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y) >
+        player->get_stats_throw_distance()) {
+        too_far = true;
+    }
+
     for (auto x = mid_at.x - radius_max; x <= mid_at.x + radius_max; x++) {
         for (auto y = mid_at.y - radius_max; y <= mid_at.y + radius_max; y++) {
             float dist = DISTANCE(x, y, mid_at.x, mid_at.y);
@@ -41,7 +47,11 @@ void Level::cursor_path_draw_circle (void)
                 continue;
             }
 
-            thing_new("cursor_select_path", fpoint(x, y));
+            if (too_far) {
+                thing_new("cursor_select_fail_path", fpoint(x, y));
+            } else {
+                thing_new("cursor_select_path", fpoint(x, y));
+            }
         }
     }
 }

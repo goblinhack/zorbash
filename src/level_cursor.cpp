@@ -203,7 +203,7 @@ void Level::cursor_move (void)
         if (cursor_at != cursor_at_old) {
             cursor_at_old = cursor_at;
             cursor->move(cursor_at);
-            cursor_path_create();
+            cursor_recreate();
         }
     }
 }
@@ -219,7 +219,13 @@ void Level::cursor_recreate (void)
 
     cursor->dead("update");
     if (game->state == Game::STATE_CHOOSING_TARGET) {
-        cursor = thing_new("cursor_select", mid_at);
+        if (DISTANCE(player->mid_at.x, player->mid_at.y, 
+                     mid_at.x, mid_at.y)  >
+                player->get_stats_throw_distance()) {
+            cursor = thing_new("cursor_select_fail", mid_at);
+        } else {
+            cursor = thing_new("cursor_select", mid_at);
+        }
     } else {
         cursor = thing_new("cursor", mid_at);
     }
