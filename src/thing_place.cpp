@@ -21,6 +21,5 @@ bool Thing::place (const std::string& what, const point &p)
         t->location_check();
     } FOR_ALL_THINGS_END()
 
-
     return true;
 }

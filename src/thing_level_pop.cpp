@@ -94,18 +94,19 @@ void Thing::level_pop (void)
                                                          level->unset_is_wall(mx, my); }
     if (i_set_is_water)                                { i_set_is_water = false;
                                                          level->unset_is_water(mx, my); }
+    level->remove_thing(last_attached.x, last_attached.y, id);
+
+    if (is_lava() || is_fire()) { level->heatmap_valid = false; }
+
+    if (gfx_shown_in_bg()) {
+        level->timestamp_redraw_bg = time_get_time_ms_cached() + 500;
+    }
+
 #if 0
     if (tp()->gfx_weapon_carry_anim()) {
         con("pop at %d,%d", last_attached.x, last_attached.y);
     }
 #endif
 
-    level->remove_thing(last_attached.x, last_attached.y, id);
-
-    if (is_lava() || is_fire()) { level->heatmap_valid = false; }
-
-    if (!is_hidden) {
-        if (gfx_shown_in_bg()) { level->timestamp_redraw_bg = time_get_time_ms_cached() + 1000; }
-    }
     // log("Is_monst count %d (after pop) at %d,%d", level->is_monst(mx, my), mx, my);
 }

@@ -106,5 +106,10 @@ void Thing::level_push (void)
     if (!is_hidden) {
         if (gfx_shown_in_bg()) { level->timestamp_redraw_bg = time_get_time_ms_cached() + 1000; }
     }
+
+    if (gfx_shown_in_bg()) {
+        level->timestamp_redraw_bg = time_get_time_ms_cached() + 500;
+    }
+
     // log("Is_monst count %d (after push) at %d,%d", level->is_monst(mx, my), mx, my);
 }

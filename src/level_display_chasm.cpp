@@ -12,6 +12,10 @@
 #include "my_tex.h"
 #include "my_gl.h"
 
+//
+// NOTE: chasm tiles are not blitted explicitly. Instead a floor tile
+// will check for the presence of a chasm beneath it and blit the chasm
+//
 void Thing::blit_floor_chasm (point &tl, point &br, const ThingTiles *tiles)
 {_
     float th = game->config.tile_pix_height;
