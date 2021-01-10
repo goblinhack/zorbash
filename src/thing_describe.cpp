@@ -33,7 +33,7 @@ bool Thing::describe_when_in_inventory (void)
             s += ". %%fg=green$" +
                  std::string(
                      SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
-                 "%%fg=reset$ to drink";
+                 "%%fg=reset$ to quaff";
         } else {
             s += ". %%fg=cyan$" +
                  std::string(
@@ -42,7 +42,7 @@ bool Thing::describe_when_in_inventory (void)
         }
     }
 
-    if (is_throwable()){
+    if (is_throwable() && !is_thrown_automatically_when_selected()){
         s += ". %%fg=purple$" +
              std::string(
                  SDL_GetScancodeName((SDL_Scancode)game->config.key_throw)) +

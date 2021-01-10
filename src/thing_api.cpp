@@ -690,19 +690,19 @@ int Thing::is_rrr41(void) const
     return (tp()->is_rrr41());
 }
 
-int Thing::is_rrr42(void) const
+int Thing::is_used_when_thrown(void) const
 {_
-    return (tp()->is_rrr42());
+    return (tp()->is_used_when_thrown());
 }
 
-int Thing::is_rrr43(void) const
+int Thing::is_used_automatically_when_selected(void) const
 {_
-    return (tp()->is_rrr43());
+    return (tp()->is_used_automatically_when_selected());
 }
 
-int Thing::is_rrr44(void) const
+int Thing::is_thrown_automatically_when_selected(void) const
 {_
-    return (tp()->is_rrr44());
+    return (tp()->is_thrown_automatically_when_selected());
 }
 
 int Thing::is_extreme_hazard(void) const

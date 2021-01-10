@@ -175,6 +175,9 @@ void Level::create (point3d at, int seed)
                         auto b = thing_new("bag_small", fpoint(x, y));
                         t->carry(b);
 
+                        auto f = thing_new("food_frog", fpoint(x, y));
+                        t->carry(f);
+
                         for (auto x = 0; x < 10; x++) {
                             auto p = thing_new("potion_descent", fpoint(x, y));
                             t->carry(p);
