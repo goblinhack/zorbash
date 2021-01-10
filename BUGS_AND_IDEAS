@@ -1,19 +1,21 @@
 bugs
 ----
 
+- throw potion into chasm should fall, not explode
 - make initial health use hitdice too
+- spider that throws web?
+- poison from spider?
+- antivenom potion
 
 upcoming work
 -------------
 - fire portion
-- potion break on fall
 - enchant potion
 - enchant potion of descent radius
 - new monst? should explode in fire?
 - have a monster use a potion?
 - weight factors into jumping
 - moving floor
-- some monsters just walk in a circular path - spiders etc
 - shove chocolate frog statue, get frog?
 - sewer level
 - water, kraken, eels
@@ -23,7 +25,6 @@ upcoming work
 - allow seed selection on menu
 - add stuff in secret rooms
 - choose name / player
-- playback possible?
 
 future work
 -----------
