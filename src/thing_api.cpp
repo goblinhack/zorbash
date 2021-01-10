@@ -3097,59 +3097,59 @@ int Thing::incr_stats17 (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats18
+// stats_throw_distance
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats18 (void) const
+int Thing::get_stats_throw_distance (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats18);
+        return (monstp->stats_throw_distance);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats18 (int v)
+int Thing::set_stats_throw_distance (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats18 = v);
+    auto n = (monstp->stats_throw_distance = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats18 (int v)
+int Thing::decr_stats_throw_distance (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats18 -= v);
+    auto n = (monstp->stats_throw_distance -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats18 (int v)
+int Thing::incr_stats_throw_distance (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats18 += v);
+    auto n = (monstp->stats_throw_distance += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats18 (void)
+int Thing::decr_stats_throw_distance (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats18--);
+    auto n = (monstp->stats_throw_distance--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats18 (void)
+int Thing::incr_stats_throw_distance (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats18++);
+    auto n = (monstp->stats_throw_distance++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }

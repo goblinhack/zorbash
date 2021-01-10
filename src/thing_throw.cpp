@@ -18,7 +18,18 @@ void Thing::throw_at (Thingp what, Thingp target)
         return;
     }
 
-    MINICON("You throw the %s", what->text_the().c_str());
+    if (DISTANCE(mid_at.x, mid_at.y, target->mid_at.x, target->mid_at.y) >
+        get_stats_throw_distance()) {
+
+        if (is_player()) {
+            MINICON("You cannot throw %s that far", what->text_the().c_str());
+        }
+        return;
+    }
+
+    if (is_player()) {
+        MINICON("You throw %s", what->text_the().c_str());
+    }
 
     log("Thrown %s", what->to_string().c_str());
     what->move_to_immediately(target->mid_at);

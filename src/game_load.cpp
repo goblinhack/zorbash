@@ -91,7 +91,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          stats15                   */ in >> bits(my.t->stats15);
     /* int          stats16                   */ in >> bits(my.t->stats16);
     /* int          stats17                   */ in >> bits(my.t->stats17);
-    /* int          stats18                   */ in >> bits(my.t->stats18);
+    /* int          stats_throw_distance                   */ in >> bits(my.t->stats_throw_distance);
     /* int          stats_stamina             */ in >> bits(my.t->stats_stamina);
     /* int          stats_stamina_max         */ in >> bits(my.t->stats_stamina_max);
     /* int          stats_defence             */ in >> bits(my.t->stats_defence);

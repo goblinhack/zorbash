@@ -50,7 +50,7 @@ void Level::display_minimap (void)
             if (cursor_at != cursor_at_old) {
                 cursor_at_old = to;
                 cursor->move(make_fpoint(game->minimap_over));
-                cursor_path_create();
+                cursor_recreate();
             }
         }
     } else {

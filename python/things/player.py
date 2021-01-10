@@ -46,6 +46,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_stats_move_speed_ms(120)
     x.set_stats_stamina(100)
     x.set_stats_strength(20)
+    x.set_stats_throw_distance(5)
     x.set_text_a_or_an("the")
     x.set_text_description("Our most noble adventurer or no particular race or gender")
     x.set_text_hits("hits")

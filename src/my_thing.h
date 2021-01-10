@@ -96,7 +96,7 @@ public:
     int          stats15 = {};
     int          stats16 = {};
     int          stats17 = {};
-    int          stats18 = {};
+    int          stats_throw_distance = {};
     int          stats_defence = {};
     int          stats_defence_max = {};
     int          stats_health = {};
@@ -562,12 +562,12 @@ public:
     int decr_stats17(void);
     int incr_stats17(void);
 
-    int set_stats18(int);
-    int get_stats18(void) const;
-    int decr_stats18(int);
-    int incr_stats18(int);
-    int decr_stats18(void);
-    int incr_stats18(void);
+    int set_stats_throw_distance(int);
+    int get_stats_throw_distance(void) const;
+    int decr_stats_throw_distance(int);
+    int incr_stats_throw_distance(int);
+    int decr_stats_throw_distance(void);
+    int incr_stats_throw_distance(void);
 
     int set_stats_stamina(int);
     int get_stats_stamina(void) const;
