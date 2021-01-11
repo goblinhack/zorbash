@@ -221,6 +221,7 @@ public:
     // the level only once.
     //
     uint64_t i_set_is_acid:1                   {};
+    uint64_t i_set_is_venom:1                  {};
     uint64_t i_set_is_blood:1                  {};
     uint64_t i_set_is_chasm:1                  {};
     uint64_t i_set_is_corpse:1                 {};
@@ -1005,7 +1006,7 @@ public:
     int hunger_clock_freq_ms(void) const;
     int is_able_to_change_levels(void) const;
     int is_acid(void) const;
-    int is_acid_dweller(void) const;
+    int is_acid_lover(void) const;
     int is_acid_hater(void) const;
     int is_active(void) const;
     int is_alive_monst(void) const;
@@ -1124,12 +1125,12 @@ public:
     int is_rrr34(void) const;
     int is_rrr35(void) const;
     int is_rrr36(void) const;
-    int is_rrr37(void) const;
-    int is_rrr38(void) const;
-    int is_rrr39(void) const;
+    int is_venom_lover(void) const;
+    int is_double_damage_from_venom(void) const;
+    int is_venom_hater(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
-    int is_rrr41(void) const;
+    int is_venom(void) const;
     int is_used_when_thrown(void) const;
     int is_used_automatically_when_selected(void) const;
     int is_thrown_automatically_when_selected(void) const;
@@ -1166,7 +1167,7 @@ public:
     int is_wall(void) const;
     int is_wall_deco(void) const;
     int is_water(void) const;
-    int is_water_dweller(void) const;
+    int is_water_lover(void) const;
     int is_water_hater(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;

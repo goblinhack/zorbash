@@ -30,6 +30,8 @@ void Thing::level_push (void)
 
     if (is_acid())                               { i_set_is_acid = true;
                                                    level->set_is_acid(mx, my); }
+    if (is_venom())                              { i_set_is_venom = true;
+                                                   level->set_is_venom(mx, my); }
     if (is_blood())                              { i_set_is_blood = true;
                                                    level->set_is_blood(mx, my); }
     if (is_chasm())                              { i_set_is_chasm = true;

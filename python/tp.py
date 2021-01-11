@@ -295,20 +295,20 @@ class Tp:
     def set_is_rrr36(self, value):
         zx.tp_set_is_rrr36(self, value)
 
-    def set_is_rrr37(self, value):
-        zx.tp_set_is_rrr37(self, value)
+    def set_is_venom_lover(self, value):
+        zx.tp_set_is_venom_lover(self, value)
 
-    def set_is_rrr38(self, value):
-        zx.tp_set_is_rrr38(self, value)
+    def set_is_double_damage_from_venom(self, value):
+        zx.tp_set_is_double_damage_from_venom(self, value)
 
-    def set_is_rrr39(self, value):
-        zx.tp_set_is_rrr39(self, value)
+    def set_is_venom_hater(self, value):
+        zx.tp_set_is_venom_hater(self, value)
 
     def set_is_rrr40(self, value):
         zx.tp_set_is_rrr40(self, value)
 
-    def set_is_rrr41(self, value):
-        zx.tp_set_is_rrr41(self, value)
+    def set_is_venom(self, value):
+        zx.tp_set_is_venom(self, value)
 
     def set_is_used_when_thrown(self, value):
         zx.tp_set_is_used_when_thrown(self, value)
@@ -484,8 +484,8 @@ class Tp:
     def set_is_double_damage_from_acid(self, value):
         zx.tp_set_is_double_damage_from_acid(self, value)
 
-    def set_is_acid_dweller(self, value):
-        zx.tp_set_is_acid_dweller(self, value)
+    def set_is_acid_lover(self, value):
+        zx.tp_set_is_acid_lover(self, value)
 
     def set_is_acid_hater(self, value):
         zx.tp_set_is_acid_hater(self, value)
@@ -691,8 +691,8 @@ class Tp:
     def set_collision_attack(self, value):
         zx.tp_set_collision_attack(self, value)
 
-    def set_is_water_dweller(self, value):
-        zx.tp_set_is_water_dweller(self, value)
+    def set_is_water_lover(self, value):
+        zx.tp_set_is_water_lover(self, value)
 
     def set_collision_hit_priority(self, value):
         zx.tp_set_collision_hit_priority(self, value)

@@ -25,6 +25,9 @@ int Thing::get_danger_level (void)
     if (is_acid()) {
         danger_level ++;
     }
+    if (is_venom()) {
+        danger_level ++;
+    }
     if (is_fire()) {
         danger_level ++;
     }

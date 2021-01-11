@@ -664,19 +664,19 @@ int Thing::is_rrr36(void) const
     return (tp()->is_rrr36());
 }
 
-int Thing::is_rrr37(void) const
+int Thing::is_venom_lover(void) const
 {_
-    return (tp()->is_rrr37());
+    return (tp()->is_venom_lover());
 }
 
-int Thing::is_rrr38(void) const
+int Thing::is_double_damage_from_venom(void) const
 {_
-    return (tp()->is_rrr38());
+    return (tp()->is_double_damage_from_venom());
 }
 
-int Thing::is_rrr39(void) const
+int Thing::is_venom_hater(void) const
 {_
-    return (tp()->is_rrr39());
+    return (tp()->is_venom_hater());
 }
 
 int Thing::is_rrr40(void) const
@@ -684,9 +684,9 @@ int Thing::is_rrr40(void) const
     return (tp()->is_rrr40());
 }
 
-int Thing::is_rrr41(void) const
+int Thing::is_venom(void) const
 {_
-    return (tp()->is_rrr41());
+    return (tp()->is_venom());
 }
 
 int Thing::is_used_when_thrown(void) const
@@ -967,9 +967,9 @@ int Thing::is_treasure_eater(void) const
     return (tp()->is_treasure_eater());
 }
 
-int Thing::is_acid_dweller(void) const
+int Thing::is_acid_lover(void) const
 {_
-    return (tp()->is_acid_dweller());
+    return (tp()->is_acid_lover());
 }
 
 int Thing::is_jelly_baby_eater(void) const
@@ -1222,9 +1222,9 @@ int Thing::is_water(void) const
     return (tp()->is_water());
 }
 
-int Thing::is_water_dweller(void) const
+int Thing::is_water_lover(void) const
 {_
-    return (tp()->is_water_dweller());
+    return (tp()->is_water_lover());
 }
 
 int Thing::is_water_hater(void) const

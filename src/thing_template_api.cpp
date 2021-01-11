@@ -104,7 +104,7 @@ int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_acid(void) const { return _is_acid; }
-int Tp::is_acid_dweller(void) const { return _is_acid_dweller; }
+int Tp::is_acid_lover(void) const { return _is_acid_lover; }
 int Tp::is_acid_hater(void) const { return _is_acid_hater; }
 int Tp::is_active(void) const { return _is_active; }
 int Tp::is_attack_eater(void) const { return _is_attack_eater; }
@@ -218,12 +218,12 @@ int Tp::is_rrr33(void) const { return _is_rrr33; }
 int Tp::is_rrr34(void) const { return _is_rrr34; }
 int Tp::is_rrr35(void) const { return _is_rrr35; }
 int Tp::is_rrr36(void) const { return _is_rrr36; }
-int Tp::is_rrr37(void) const { return _is_rrr37; }
-int Tp::is_rrr38(void) const { return _is_rrr38; }
-int Tp::is_rrr39(void) const { return _is_rrr39; }
+int Tp::is_venom_lover(void) const { return _is_venom_lover; }
+int Tp::is_double_damage_from_venom(void) const { return _is_double_damage_from_venom; }
+int Tp::is_venom_hater(void) const { return _is_venom_hater; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr40(void) const { return _is_rrr40; }
-int Tp::is_rrr41(void) const { return _is_rrr41; }
+int Tp::is_venom(void) const { return _is_venom; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_used_automatically_when_selected(void) const { return _is_used_automatically_when_selected; }
 int Tp::is_thrown_automatically_when_selected(void) const { return _is_thrown_automatically_when_selected; }
@@ -275,7 +275,7 @@ int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_wall(void) const { return _is_wall; }
 int Tp::is_wall_deco(void) const { return _is_wall_deco; }
 int Tp::is_water(void) const { return _is_water; }
-int Tp::is_water_dweller(void) const { return _is_water_dweller; }
+int Tp::is_water_lover(void) const { return _is_water_lover; }
 int Tp::is_water_hater(void) const { return _is_water_hater; }
 int Tp::is_weapon(void) const { return _is_weapon; }
 int Tp::normal_placement_rules(void) const { return _normal_placement_rules; }
@@ -343,7 +343,7 @@ void Tp::set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
 void Tp::set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
 void Tp::set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
 void Tp::set_is_acid(int v) { _is_acid = v; }
-void Tp::set_is_acid_dweller(int v) { _is_acid_dweller = v; }
+void Tp::set_is_acid_lover(int v) { _is_acid_lover = v; }
 void Tp::set_is_acid_hater(int v) { _is_acid_hater = v; }
 void Tp::set_is_active(int v) { _is_active = v; }
 void Tp::set_is_attack_eater(int v) { _is_attack_eater = v; }
@@ -457,12 +457,12 @@ void Tp::set_is_rrr33(int v) { _is_rrr33 = v; }
 void Tp::set_is_rrr34(int v) { _is_rrr34 = v; }
 void Tp::set_is_rrr35(int v) { _is_rrr35 = v; }
 void Tp::set_is_rrr36(int v) { _is_rrr36 = v; }
-void Tp::set_is_rrr37(int v) { _is_rrr37 = v; }
-void Tp::set_is_rrr38(int v) { _is_rrr38 = v; }
-void Tp::set_is_rrr39(int v) { _is_rrr39 = v; }
+void Tp::set_is_venom_lover(int v) { _is_venom_lover = v; }
+void Tp::set_is_double_damage_from_venom(int v) { _is_double_damage_from_venom = v; }
+void Tp::set_is_venom_hater(int v) { _is_venom_hater = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr40(int v) { _is_rrr40 = v; }
-void Tp::set_is_rrr41(int v) { _is_rrr41 = v; }
+void Tp::set_is_venom(int v) { _is_venom = v; }
 void Tp::set_is_used_when_thrown(int v) { _is_used_when_thrown = v; }
 void Tp::set_is_used_automatically_when_selected(int v) { _is_used_automatically_when_selected = v; }
 void Tp::set_is_thrown_automatically_when_selected(int v) { _is_thrown_automatically_when_selected = v; }
@@ -514,7 +514,7 @@ void Tp::set_is_usable(int v) { _is_usable = v; }
 void Tp::set_is_wall(int v) { _is_wall = v; }
 void Tp::set_is_wall_deco(int v) { _is_wall_deco = v; }
 void Tp::set_is_water(int v) { _is_water = v; }
-void Tp::set_is_water_dweller(int v) { _is_water_dweller = v; }
+void Tp::set_is_water_lover(int v) { _is_water_lover = v; }
 void Tp::set_is_water_hater(int v) { _is_water_hater = v; }
 void Tp::set_is_weapon(int v) { _is_weapon = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
