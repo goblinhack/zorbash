@@ -34,6 +34,11 @@ const int Tp::get_stats_attack(void) const { return _stats_attack_dice.roll(); }
 const std::string& Tp::get_stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
 void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
 
+const Dice& Tp::get_stats_health_initial_dice(void) const { return _stats_health_initial_dice; }
+const int Tp::get_stats_health_initial(void) const { return _stats_health_initial_dice.roll(); }
+const std::string& Tp::get_stats_health_initial_dice_str(void) const { return _stats_health_initial_dice_str; }
+void Tp::set_stats_health_initial_dice(const std::string &v) { _stats_health_initial_dice = v; _stats_health_initial_dice_str = v; }
+
 const Dice& Tp::gold_value_dice(void) const { return _gold_value_dice; }
 const int Tp::cash(void) const { return _gold_value_dice.roll(); }
 const std::string& Tp::gold_value_dice_str(void) const { return _gold_value_dice_str; }
@@ -295,7 +300,6 @@ int Tp::stats_throw_distance(void) const { return _stats_throw_distance; }
 int Tp::stats_stamina(void) const { return _stats_stamina; }
 int Tp::stats_defence(void) const { return _stats_defence; }
 int Tp::stats_health_hunger_pct(void) const { return _stats_health_hunger_pct; }
-int Tp::stats_health_initial(void) const { return _stats_health_initial; }
 int Tp::stats_health_starving_pct(void) const { return _stats_health_starving_pct; }
 int Tp::stats_move_speed_ms(void) const { return _stats_move_speed_ms; }
 int Tp::stats_strength(void) const { return _stats_strength; }
@@ -541,7 +545,6 @@ void Tp::set_stats_throw_distance(int v) { _stats_throw_distance = v; }
 void Tp::set_stats_stamina(int v) { _stats_stamina = v; }
 void Tp::set_stats_defence(int v) { _stats_defence = v; }
 void Tp::set_stats_health_hunger_pct(int v) { _stats_health_hunger_pct = v; }
-void Tp::set_stats_health_initial(int v) { _stats_health_initial = v; }
 void Tp::set_stats_health_starving_pct(int v) { _stats_health_starving_pct = v; }
 void Tp::set_stats_move_speed_ms(int v) { _stats_move_speed_ms = v; }
 void Tp::set_stats_strength(int v) { _stats_strength = v; }

@@ -55,7 +55,7 @@ def tp_init(name, text_name):
     x.set_stats_attack_dice("1d3")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)
-    x.set_stats_health_initial(5)
+    x.set_stats_health_initial_dice("1d5")
     x.set_stats_move_speed_ms(1000)
     x.set_stats_stamina(10)
     x.set_stats_strength(3)

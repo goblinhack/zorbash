@@ -103,7 +103,7 @@ void Thing::init (Levelp level,
     is_hungry = tpp->is_hunger_insatiable();
 
     {_
-        auto v = tpp->stats_health_initial();
+        auto v = tpp->get_stats_health_initial();
         if (unlikely(v)) {
             set_stats_health(v);
             set_stats_health_max(v);

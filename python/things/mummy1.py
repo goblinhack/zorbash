@@ -53,7 +53,7 @@ def tp_init(name, text_name):
     x.set_stats_attack_dice("1d6")
     x.set_stats_defence(2)
     x.set_stats_health_hunger_pct(95)
-    x.set_stats_health_initial(30)
+    x.set_stats_health_initial_dice("2d20")
     x.set_stats_move_speed_ms(300)
     x.set_stats_strength(9)
     x.set_text_a_or_an("a");

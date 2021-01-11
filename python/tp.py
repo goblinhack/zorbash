@@ -730,8 +730,8 @@ class Tp:
     def set_stats_health_starving_pct(self, value):
         zx.tp_set_stats_health_starving_pct(self, value)
 
-    def set_stats_health_initial(self, value):
-        zx.tp_set_stats_health_initial(self, value)
+    def set_stats_health_initial_dice(self, value):
+        zx.tp_set_stats_health_initial_dice(self, value)
 
     def set_stats_health_hunger_pct(self, value):
         zx.tp_set_stats_health_hunger_pct(self, value)

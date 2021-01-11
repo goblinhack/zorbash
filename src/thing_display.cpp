@@ -736,11 +736,22 @@ void Thing::blit_internal (int fbo,
                 std::string s = "health" + std::to_string(h_step);
                 tile = tile_find_mand(s);
                 set(game->tile_cache_health, h_step, tile);
+
             }
 
             tile_blit(tile,
                       point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
                       point(x + TILE_WIDTH / 2, y));
+
+            //
+            // Not sure about showing the health
+            //
+            if (0) {
+                blit_text(std::to_string(h),
+                          WHITE,
+                          point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
+                          point(x + TILE_WIDTH / 2, y));
+            }
         }
     }
 

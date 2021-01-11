@@ -41,7 +41,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_stats_attack_dice("1d6+1")
     x.set_stats_defence(3)
     x.set_stats_health_hunger_pct(5)
-    x.set_stats_health_initial(100)
+    x.set_stats_health_initial_dice("20d10")
     x.set_stats_health_starving_pct(5)
     x.set_stats_move_speed_ms(120)
     x.set_stats_stamina(100)

@@ -27,6 +27,10 @@ const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->get_stats
 const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->get_stats_attack_dice_str()); }
 int Thing::get_stats_attack (void) const {_ return (tp()->get_stats_attack_dice().roll()); }
 
+const Dice& Thing::get_stats_health_initial_dice (void) const {_ return (tp()->get_stats_health_initial_dice()); }
+const std::string& Thing::get_stats_health_initial_dice_str (void) const {_ return (tp()->get_stats_health_initial_dice_str()); }
+int Thing::get_stats_health_initial (void) const {_ return (tp()->get_stats_health_initial_dice().roll()); }
+
 const Dice& Thing::get_gold_value_dice (void) const {_ return (tp()->gold_value_dice()); }
 const std::string& Thing::get_gold_value_dice_str (void) const {_ return (tp()->gold_value_dice_str()); }
 int Thing::get_gold_value (void) const {_ return (tp()->gold_value_dice().roll()); }
@@ -318,11 +322,6 @@ int Thing::hunger_clock_freq_ms(void) const
 int Thing::is_hunger_insatiable(void) const
 {_
     return (tp()->is_hunger_insatiable());
-}
-
-int Thing::health_initial(void) const
-{_
-    return (tp()->stats_health_initial());
 }
 
 int Thing::health_starving_pct(void) const
