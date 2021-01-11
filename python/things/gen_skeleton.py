@@ -39,7 +39,7 @@ def tp_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_on_idle_dice_do("1d30+25:gen_skeleton.spawn()")
     x.set_stats_defence(1)
-    x.set_stats_health_initial(30)
+    x.set_stats_health_initial_dice("6d6")
     x.set_stats_strength(15)
     x.set_text_a_or_an("a");
     x.set_text_description("The dead rise again here")

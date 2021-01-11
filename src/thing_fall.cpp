@@ -264,7 +264,7 @@ _
                 level->update();
             }
 
-            if (tp()->stats_health_initial()) {
+            if (tp()->get_stats_health_initial_dice_str() != "") {
                 auto h = decr_stats_health(fall_damage);
                 if (h <= 0) {
                     h = set_stats_health(0);

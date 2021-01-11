@@ -821,6 +821,10 @@ public:
     int get_stats_attack(void) const;
     const Dice& get_stats_attack_dice(void) const;
 
+    const std::string& get_stats_health_initial_dice_str(void) const;
+    int get_stats_health_initial(void) const;
+    const Dice& get_stats_health_initial_dice(void) const;
+
     const std::string& get_gold_value_dice_str(void) const;
     int get_gold_value(void) const;
     const Dice& get_gold_value_dice(void) const;
@@ -997,7 +1001,6 @@ public:
     int gfx_small_shadow_caster(void) const;
     int gfx_weapon_carry_anim(void) const;
     int health_hunger_pct(void) const;
-    int health_initial(void) const;
     int health_starving_pct(void) const;
     int hunger_clock_freq_ms(void) const;
     int is_able_to_change_levels(void) const;

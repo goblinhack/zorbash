@@ -67,6 +67,9 @@ private:
     Dice _stats_attack_dice {};
     std::string _stats_attack_dice_str;
 
+    Dice _stats_health_initial_dice {};
+    std::string _stats_health_initial_dice_str;
+
     Dice _gold_value_dice {};
     std::string _gold_value_dice_str;
 
@@ -305,7 +308,6 @@ private:
     int _stats_throw_distance {};
     int _stats_defence {};
     int _stats_health_hunger_pct {};
-    int _stats_health_initial {};
     int _stats_health_starving_pct {};
     int _stats_move_speed_ms {};
     int _stats_stamina {};
@@ -368,6 +370,11 @@ public:
     const int get_stats_attack(void) const;
     const std::string& get_stats_attack_dice_str(void) const;
     void set_stats_attack_dice(const std::string &);
+
+    const Dice& get_stats_health_initial_dice(void) const;
+    const int get_stats_health_initial(void) const;
+    const std::string& get_stats_health_initial_dice_str(void) const;
+    void set_stats_health_initial_dice(const std::string &);
 
     const Dice& gold_value_dice(void) const;
     const int cash(void) const;
@@ -661,7 +668,6 @@ public:
     int stats_stamina(void) const;
     int stats_defence(void) const;
     int stats_health_hunger_pct(void) const;
-    int stats_health_initial(void) const;
     int stats_health_starving_pct(void) const;
     int stats_move_speed_ms(void) const;
     int stats_strength(void) const;
@@ -908,7 +914,6 @@ public:
     void set_stats_stamina(int);
     void set_stats_defence(int);
     void set_stats_health_hunger_pct(int);
-    void set_stats_health_initial(int);
     void set_stats_health_starving_pct(int);
     void set_stats_move_speed_ms(int);
     void set_stats_strength(int);

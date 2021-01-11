@@ -49,6 +49,11 @@ bool Thing::bag_add (Thingp item)
 {_
     log("Bag: add %s", item->to_string().c_str());
 
+    //
+    // Food might not have a monst pointer
+    //
+    item->new_monst();
+
     if (item->monstp->preferred_bag_position != point(-1, -1)) {
         auto at = item->monstp->preferred_bag_position;
 	if (bag_can_place_at(item, at)) {
