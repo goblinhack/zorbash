@@ -26,7 +26,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(True)
     x.set_is_acid(True)
-    x.set_is_acid_dweller(True)
+    x.set_is_acid_lover(True)
     x.set_is_active(True)
     x.set_is_attack_eater(True)
     x.set_is_attack_lunge(True)

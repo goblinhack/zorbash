@@ -30,7 +30,7 @@ bool Thing::match (const std::string& what)
     if (is_acid() && (what == "is_acid")) {
         return true;
     }
-    if (is_acid_dweller() && (what == "is_acid_dweller")) {
+    if (is_acid_lover() && (what == "is_acid_lover")) {
         return true;
     }
     if (is_acid_hater() && (what == "is_acid_hater")) {
@@ -378,13 +378,13 @@ bool Thing::match (const std::string& what)
     if (is_rrr36() && (what == "is_rrr36")) {
         return true;
     }
-    if (is_rrr37() && (what == "is_rrr37")) {
+    if (is_venom_lover() && (what == "is_venom_lover")) {
         return true;
     }
-    if (is_rrr38() && (what == "is_rrr38")) {
+    if (is_double_damage_from_venom() && (what == "is_double_damage_from_venom")) {
         return true;
     }
-    if (is_rrr39() && (what == "is_rrr39")) {
+    if (is_venom_hater() && (what == "is_venom_hater")) {
         return true;
     }
     if (is_rrr4() && (what == "is_rrr4")) {
@@ -393,7 +393,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr40() && (what == "is_rrr40")) {
         return true;
     }
-    if (is_rrr41() && (what == "is_rrr41")) {
+    if (is_venom() && (what == "is_venom")) {
         return true;
     }
     if (is_used_when_thrown() && (what == "is_used_when_thrown")) {
@@ -507,7 +507,7 @@ bool Thing::match (const std::string& what)
     if (is_water() && (what == "is_water")) {
         return true;
     }
-    if (is_water_dweller() && (what == "is_water_dweller")) {
+    if (is_water_lover() && (what == "is_water_lover")) {
         return true;
     }
     if (is_water_hater() && (what == "is_water_hater")) {

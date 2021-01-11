@@ -117,7 +117,7 @@ private:
     int _internal_has_hp_anim {};
     int _is_able_to_change_levels {};
     int _is_acid {};
-    int _is_acid_dweller {};
+    int _is_acid_lover {};
     int _is_acid_hater {};
     int _is_active {}; // e.g. a monst or player or something movable
     int _is_attack_eater {};
@@ -233,12 +233,12 @@ private:
     int _is_rrr34 {};
     int _is_rrr35 {};
     int _is_rrr36 {};
-    int _is_rrr37 {};
-    int _is_rrr38 {};
-    int _is_rrr39 {};
+    int _is_venom_lover {};
+    int _is_double_damage_from_venom {};
+    int _is_venom_hater {};
     int _is_rrr4 {};
     int _is_rrr40 {};
-    int _is_rrr41 {};
+    int _is_venom {};
     int _is_used_when_thrown {};
     int _is_used_automatically_when_selected {};
     int _is_thrown_automatically_when_selected {};
@@ -280,7 +280,7 @@ private:
     int _is_wall {};
     int _is_wall_deco {};
     int _is_water {};
-    int _is_water_dweller {};
+    int _is_water_lover {};
     int _is_water_hater {};
     int _is_weapon {};
     int _is_weapon_wielder {};
@@ -472,7 +472,7 @@ public:
     int internal_has_hp_anim(void) const;
     int is_able_to_change_levels(void) const;
     int is_acid(void) const;
-    int is_acid_dweller(void) const;
+    int is_acid_lover(void) const;
     int is_acid_hater(void) const;
     int is_active(void) const;
     int is_attack_eater(void) const;
@@ -587,12 +587,12 @@ public:
     int is_rrr34(void) const;
     int is_rrr35(void) const;
     int is_rrr36(void) const;
-    int is_rrr37(void) const;
-    int is_rrr38(void) const;
-    int is_rrr39(void) const;
+    int is_venom_lover(void) const;
+    int is_double_damage_from_venom(void) const;
+    int is_venom_hater(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
-    int is_rrr41(void) const;
+    int is_venom(void) const;
     int is_used_when_thrown(void) const;
     int is_used_automatically_when_selected(void) const;
     int is_thrown_automatically_when_selected(void) const;
@@ -643,7 +643,7 @@ public:
     int is_wall(void) const;
     int is_wall_deco(void) const;
     int is_water(void) const;
-    int is_water_dweller(void) const;
+    int is_water_lover(void) const;
     int is_water_hater(void) const;
     int is_weapon(void) const;
     int normal_placement_rules(void) const;
@@ -711,7 +711,7 @@ public:
     void set_internal_has_hp_anim(int);
     void set_is_able_to_change_levels(int);
     void set_is_acid(int);
-    void set_is_acid_dweller(int);
+    void set_is_acid_lover(int);
     void set_is_acid_hater(int);
     void set_is_active(int);
     void set_is_attack_eater(int);
@@ -827,12 +827,12 @@ public:
     void set_is_rrr34(int);
     void set_is_rrr35(int);
     void set_is_rrr36(int);
-    void set_is_rrr37(int);
-    void set_is_rrr38(int);
-    void set_is_rrr39(int);
+    void set_is_venom_lover(int);
+    void set_is_double_damage_from_venom(int);
+    void set_is_venom_hater(int);
     void set_is_rrr4(int);
     void set_is_rrr40(int);
-    void set_is_rrr41(int);
+    void set_is_venom(int);
     void set_is_used_when_thrown(int);
     void set_is_used_automatically_when_selected(int);
     void set_is_thrown_automatically_when_selected(int);
@@ -883,7 +883,7 @@ public:
     void set_is_wall(int);
     void set_is_wall_deco(int);
     void set_is_water(int);
-    void set_is_water_dweller(int);
+    void set_is_water_lover(int);
     void set_is_water_hater(int);
     void set_is_weapon(int);
     void set_light_color(const std::string &);

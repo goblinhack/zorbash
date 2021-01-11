@@ -77,6 +77,15 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+    if (is_venom_hater()) {
+        if (real_hitter->is_venom()) {
+            if (is_double_damage_from_venom()) {
+                damage *= 2;
+                log("Double damage from venom");
+            }
+        }
+    }
+
     if (is_water_hater()) {
         if (real_hitter->is_water()) {
             if (is_double_damage_from_water()) {

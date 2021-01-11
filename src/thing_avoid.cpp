@@ -25,6 +25,12 @@ bool Tp::will_avoid (Levelp level, point p) const
         }
     }
 
+    if (level->is_venom(p)) {
+        if (is_venom_hater()) {
+            return true;
+        }
+    }
+
     if (!is_floating()) {
         if (level->is_chasm(p)) {
             return true;
@@ -74,6 +80,12 @@ bool Thing::will_avoid (const point &p)
 
     if (level->is_acid(p)) {
         if (is_acid_hater()) {
+            return true;
+        }
+    }
+
+    if (level->is_venom(p)) {
+        if (is_venom_hater()) {
             return true;
         }
     }
@@ -136,21 +148,25 @@ bool Thing::will_avoid (const Thingp itp)
             }
         }
     }
+
     if (me->is_food()) {
         if (it->is_food_eater()) {
             return true;
         }
     }
+
     if (me->is_treasure()) {
         if (it->is_treasure_eater()) {
             return true;
         }
     }
+
     if (me->is_potion()) {
         if (it->is_potion_eater()) {
             return true;
         }
     }
+
     if (me->is_jelly_baby()) {
         //
         // But allow baby slimes to attack each other!
@@ -159,11 +175,19 @@ bool Thing::will_avoid (const Thingp itp)
             return true;
         }
     }
+
     if (me->is_acid_hater()) {
         if (it->is_acid()) {
             return true;
         }
     }
+
+    if (me->is_venom_hater()) {
+        if (it->is_venom()) {
+            return true;
+        }
+    }
+
     if (!is_on_fire()) {
         if (me->is_fire_hater()) {
             if (it->is_fire()) {
@@ -174,6 +198,7 @@ bool Thing::will_avoid (const Thingp itp)
             }
         }
     }
+
     if (me->is_water_hater()) {
         if (it->is_water()) {
             return true;

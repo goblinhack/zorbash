@@ -20,6 +20,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(True)
     x.set_is_acid_hater(True)
+    x.set_is_venom_hater(True) # x.set_is_venom_lover(True) for some odd creature
     x.set_is_active(True)
     x.set_is_attack_shove(True)
     x.set_is_attackable_by_monst(True)
