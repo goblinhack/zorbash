@@ -100,11 +100,13 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
     t->log("Thing info create window");
 
-    wid_thing_info_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
+    wid_thing_info_window = new WidPopup("Thing info", tl, br, 
+                                         nullptr, "", true, false);
     wid_raise(wid_thing_info_window->wid_popup_container);
 
     {_
-        auto w = wid_new_plain(wid_thing_info_window->wid_popup_container, "ui-circle");
+        auto w = wid_new_plain(
+                    wid_thing_info_window->wid_popup_container, "ui-circle");
         point tl = make_point(8, 1);
         point br = make_point(12, 4);
         wid_set_ignore_events(w, true);
@@ -115,7 +117,8 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     }
 
     {_
-        auto w = wid_new_plain(wid_thing_info_window->wid_popup_container, "ui-circle");
+        auto w = wid_new_plain(
+                    wid_thing_info_window->wid_popup_container, "ui-circle");
         point tl = make_point(9, 2);
         point br = make_point(11, 3);
         wid_set_ignore_events(w, true);
