@@ -1,7 +1,7 @@
 bugs
 ----
 
-- throw potion into chasm should fall, not explode
+- throw potion into chasm should fall, not explode (make the potion unstable)
 - make initial health use hitdice too
 - spider that throws web?
 - poison from spider?

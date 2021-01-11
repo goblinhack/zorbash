@@ -24,7 +24,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_throwable(True)
     x.set_is_treasure_class_a(False)
     x.set_is_usable(True)
-    x.set_is_used_automatically_when_selected(True)
+    x.set_is_used_automatically_when_selected(False)
     x.set_long_text_description("Chocolate frogs. The food of Gods. May seem out of place in a dungeon and you'd be correct. It is rumored a helpful god left them here for brave adventurers to assist them on their path.")
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d10")
