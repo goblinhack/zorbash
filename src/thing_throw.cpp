@@ -38,10 +38,17 @@ void Thing::throw_at (Thingp what, Thingp target)
     //
     // Potions for example are used when thrown. Chocolate frogs, no.
     //
-    if (what->is_used_when_thrown()) {
-        used(what, target);
-    } else {
+    if (level->is_lava(target->mid_at.x, target->mid_at.y) ||
+        level->is_chasm(target->mid_at.x, target->mid_at.y)) {
         drop(what, target);
+
+        what->location_check();
+    } else {
+        if (what->is_used_when_thrown()) {
+            used(what, target);
+        } else {
+            drop(what, target);
+        }
     }
 
     if (is_player()) {
