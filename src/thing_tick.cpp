@@ -93,9 +93,16 @@ bool Thing::achieve_goals_in_life (void)
     if (is_jumper()) {
         log("Try to jump");
         if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
-            if (try_to_jump()) {
-                is_tick_done = true;
-                return true;
+            if (!will_avoid(level->player)) {
+                if (try_to_jump_towards_player()) {
+                    is_tick_done = true;
+                    return true;
+                }
+            } else {
+                if (try_to_jump()) {
+                    is_tick_done = true;
+                    return true;
+                }
             }
         }
     }

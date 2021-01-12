@@ -307,6 +307,76 @@ bool Thing::try_to_jump (void)
     return false;
 }
 
+bool Thing::try_to_jump_towards_player (void)
+{_
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_waiting_to_ascend || 
+        is_waiting_to_descend || 
+        is_waiting_to_fall || 
+        is_jumping) { 
+        return false;
+    }
+
+    float d = how_far_i_can_jump();
+    int tries = d * d;
+
+    auto player_at = level->player->mid_at;
+    auto curr_dist = DISTANCE(mid_at.x, mid_at.y, player_at.x, player_at.y);
+
+    while (tries-- > 0) {
+        int x = random_range(mid_at.x - d, mid_at.x + d);
+        int y = random_range(mid_at.y - d, mid_at.y + d);
+
+        auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
+        if (new_dist > curr_dist) {
+            continue;
+        }
+
+        if (try_to_jump(point(x, y))) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool Thing::try_to_jump_away_from_player (void)
+{_
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_waiting_to_ascend || 
+        is_waiting_to_descend || 
+        is_waiting_to_fall || 
+        is_jumping) { 
+        return false;
+    }
+
+    float d = how_far_i_can_jump();
+    int tries = d * d;
+
+    auto player_at = level->player->mid_at;
+    auto curr_dist = DISTANCE(mid_at.x, mid_at.y, player_at.x, player_at.y);
+
+    while (tries-- > 0) {
+        int x = random_range(mid_at.x - d, mid_at.x + d);
+        int y = random_range(mid_at.y - d, mid_at.y + d);
+
+        auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
+        if (new_dist < curr_dist) {
+            continue;
+        }
+
+        if (try_to_jump(point(x, y))) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool Thing::try_harder_to_jump (void)
 {_
     if (is_changing_level ||
