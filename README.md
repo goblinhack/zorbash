@@ -18,8 +18,8 @@ Comments and suggestions welcome at this early stage.
 
 Graphics
 --------
-Goblinhack and
-Oryx tilesets [found here](https://www.oryxdesignlab.com/)
+Additional gfx by Oryx, [found here](https://www.oryxdesignlab.com/)
+The rest by me, Goblinhack.
 
 Music
 -----
