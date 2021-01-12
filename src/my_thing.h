@@ -930,6 +930,8 @@ public:
     bool try_to_escape(void);
     bool try_to_jump(point p);
     bool try_to_jump(void);
+    bool try_to_jump_towards_player(void);
+    bool try_to_jump_away_from_player(void);
     bool use(Thingp w);
     bool throw_item(Thingp w);
     bool will_avoid(const Thingp it);
