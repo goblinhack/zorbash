@@ -334,6 +334,13 @@ bool Thing::try_to_jump_towards_player (void)
             continue;
         }
 
+        //
+        // Don't land on the player
+        //
+        if (new_dist < 1) {
+            continue;
+        }
+
         if (try_to_jump(point(x, y))) {
             return true;
         }
