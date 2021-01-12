@@ -23,7 +23,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_venom {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};
@@ -405,38 +405,38 @@ public:
         decr(_is_acid, x, y, (uint8_t)1);
     }
 
-    uint8_t is_venom (const point &p)
+    uint8_t is_poison (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_venom, p.x, p.y));
+        return (get(_is_poison, p.x, p.y));
     }
 
-    uint8_t is_venom (const int x, const int y)
+    uint8_t is_poison (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_venom, x, y));
+        return (get(_is_poison, x, y));
     }
 
-    void set_is_venom (const int x, const int y)
+    void set_is_poison (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
         map_changed = true;
-        incr(_is_venom, x, y, (uint8_t)1);
+        incr(_is_poison, x, y, (uint8_t)1);
     }
 
-    void unset_is_venom (const int x, const int y)
+    void unset_is_poison (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
         map_changed = true;
-        decr(_is_venom, x, y, (uint8_t)1);
+        decr(_is_poison, x, y, (uint8_t)1);
     }
 
     uint8_t is_chasm (const int x, const int y)

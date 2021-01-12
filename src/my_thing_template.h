@@ -64,8 +64,11 @@ private:
     Dice _nutrition_dice {};
     std::string _nutrition_dice_str;
 
-    Dice _stats_attack_dice {};
-    std::string _stats_attack_dice_str;
+    Dice _stats_attack_melee_dice {};
+    std::string _stats_attack_melee_dice_str;
+
+    Dice _stats_attack_poison_dice {};
+    std::string _stats_attack_poison_dice_str;
 
     Dice _stats_health_initial_dice {};
     std::string _stats_health_initial_dice_str;
@@ -233,12 +236,12 @@ private:
     int _is_rrr34 {};
     int _is_rrr35 {};
     int _is_rrr36 {};
-    int _is_venom_lover {};
-    int _is_double_damage_from_venom {};
-    int _is_venom_hater {};
+    int _is_poison_lover {};
+    int _is_double_damage_from_poison {};
+    int _is_poison_hater {};
     int _is_rrr4 {};
     int _is_rrr40 {};
-    int _is_venom {};
+    int _is_poison {};
     int _is_used_when_thrown {};
     int _is_used_automatically_when_selected {};
     int _is_thrown_automatically_when_selected {};
@@ -366,10 +369,15 @@ public:
     const std::string& nutrition_dice_str(void) const;
     void set_nutrition_dice(const std::string &);
 
-    const Dice& get_stats_attack_dice(void) const;
+    const Dice& get_stats_attack_melee_dice(void) const;
     const int get_stats_attack(void) const;
-    const std::string& get_stats_attack_dice_str(void) const;
-    void set_stats_attack_dice(const std::string &);
+    const std::string& get_stats_attack_melee_dice_str(void) const;
+    void set_stats_attack_melee_dice(const std::string &);
+
+    const Dice& get_stats_attack_poison_dice(void) const;
+    const int get_stats_attack_poison(void) const;
+    const std::string& get_stats_attack_poison_dice_str(void) const;
+    void set_stats_attack_poison_dice(const std::string &);
 
     const Dice& get_stats_health_initial_dice(void) const;
     const int get_stats_health_initial(void) const;
@@ -587,12 +595,12 @@ public:
     int is_rrr34(void) const;
     int is_rrr35(void) const;
     int is_rrr36(void) const;
-    int is_venom_lover(void) const;
-    int is_double_damage_from_venom(void) const;
-    int is_venom_hater(void) const;
+    int is_poison_lover(void) const;
+    int is_double_damage_from_poison(void) const;
+    int is_poison_hater(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
-    int is_venom(void) const;
+    int is_poison(void) const;
     int is_used_when_thrown(void) const;
     int is_used_automatically_when_selected(void) const;
     int is_thrown_automatically_when_selected(void) const;
@@ -827,12 +835,12 @@ public:
     void set_is_rrr34(int);
     void set_is_rrr35(int);
     void set_is_rrr36(int);
-    void set_is_venom_lover(int);
-    void set_is_double_damage_from_venom(int);
-    void set_is_venom_hater(int);
+    void set_is_poison_lover(int);
+    void set_is_double_damage_from_poison(int);
+    void set_is_poison_hater(int);
     void set_is_rrr4(int);
     void set_is_rrr40(int);
-    void set_is_venom(int);
+    void set_is_poison(int);
     void set_is_used_when_thrown(int);
     void set_is_used_automatically_when_selected(int);
     void set_is_thrown_automatically_when_selected(int);

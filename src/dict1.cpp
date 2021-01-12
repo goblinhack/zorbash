@@ -165,7 +165,7 @@ static const char *dict1_names[] = {
     "vampire",
     "vanish",
     "vanqu",
-    "venom",
+    "poison",
     "vice",
     "vicious",
     "victim",

@@ -295,20 +295,20 @@ class Tp:
     def set_is_rrr36(self, value):
         zx.tp_set_is_rrr36(self, value)
 
-    def set_is_venom_lover(self, value):
-        zx.tp_set_is_venom_lover(self, value)
+    def set_is_poison_lover(self, value):
+        zx.tp_set_is_poison_lover(self, value)
 
-    def set_is_double_damage_from_venom(self, value):
-        zx.tp_set_is_double_damage_from_venom(self, value)
+    def set_is_double_damage_from_poison(self, value):
+        zx.tp_set_is_double_damage_from_poison(self, value)
 
-    def set_is_venom_hater(self, value):
-        zx.tp_set_is_venom_hater(self, value)
+    def set_is_poison_hater(self, value):
+        zx.tp_set_is_poison_hater(self, value)
 
     def set_is_rrr40(self, value):
         zx.tp_set_is_rrr40(self, value)
 
-    def set_is_venom(self, value):
-        zx.tp_set_is_venom(self, value)
+    def set_is_poison(self, value):
+        zx.tp_set_is_poison(self, value)
 
     def set_is_used_when_thrown(self, value):
         zx.tp_set_is_used_when_thrown(self, value)
@@ -676,8 +676,11 @@ class Tp:
     def set_nutrition_dice(self, value):
         zx.tp_set_nutrition_dice(self, value)
 
-    def set_stats_attack_dice(self, value):
-        zx.tp_set_stats_attack_dice(self, value)
+    def set_stats_attack_melee_dice(self, value):
+        zx.tp_set_stats_attack_melee_dice(self, value)
+
+    def set_stats_attack_poison_dice(self, value):
+        zx.tp_set_stats_attack_poison_dice(self, value)
 
     def set_gold_value_dice(self, value):
         zx.tp_set_gold_value_dice(self, value)

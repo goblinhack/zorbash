@@ -23,9 +23,13 @@ const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_di
 const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
 int Thing::get_nutrition (void) const {_ return (tp()->nutrition_dice().roll()); }
 
-const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->get_stats_attack_dice()); }
-const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->get_stats_attack_dice_str()); }
-int Thing::get_stats_attack (void) const {_ return (tp()->get_stats_attack_dice().roll()); }
+const Dice& Thing::get_stats_attack_melee_dice (void) const {_ return (tp()->get_stats_attack_melee_dice()); }
+const std::string& Thing::get_stats_attack_melee_dice_str (void) const {_ return (tp()->get_stats_attack_melee_dice_str()); }
+int Thing::get_stats_attack (void) const {_ return (tp()->get_stats_attack_melee_dice().roll()); }
+
+const Dice& Thing::get_stats_attack_poison_dice (void) const {_ return (tp()->get_stats_attack_poison_dice()); }
+const std::string& Thing::get_stats_attack_poison_dice_str (void) const {_ return (tp()->get_stats_attack_poison_dice_str()); }
+int Thing::get_stats_attack_poison (void) const {_ return (tp()->get_stats_attack_poison_dice().roll()); }
 
 const Dice& Thing::get_stats_health_initial_dice (void) const {_ return (tp()->get_stats_health_initial_dice()); }
 const std::string& Thing::get_stats_health_initial_dice_str (void) const {_ return (tp()->get_stats_health_initial_dice_str()); }
@@ -664,19 +668,19 @@ int Thing::is_rrr36(void) const
     return (tp()->is_rrr36());
 }
 
-int Thing::is_venom_lover(void) const
+int Thing::is_poison_lover(void) const
 {_
-    return (tp()->is_venom_lover());
+    return (tp()->is_poison_lover());
 }
 
-int Thing::is_double_damage_from_venom(void) const
+int Thing::is_double_damage_from_poison(void) const
 {_
-    return (tp()->is_double_damage_from_venom());
+    return (tp()->is_double_damage_from_poison());
 }
 
-int Thing::is_venom_hater(void) const
+int Thing::is_poison_hater(void) const
 {_
-    return (tp()->is_venom_hater());
+    return (tp()->is_poison_hater());
 }
 
 int Thing::is_rrr40(void) const
@@ -684,9 +688,9 @@ int Thing::is_rrr40(void) const
     return (tp()->is_rrr40());
 }
 
-int Thing::is_venom(void) const
+int Thing::is_poison(void) const
 {_
-    return (tp()->is_venom());
+    return (tp()->is_poison());
 }
 
 int Thing::is_used_when_thrown(void) const

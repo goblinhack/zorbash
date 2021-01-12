@@ -32,7 +32,7 @@ void Level::clear (void)
     _is_gold = {};
     _is_lava = {};
     _is_acid = {};
-    _is_venom = {};
+    _is_poison = {};
     _is_light_blocker = {};
     _is_movement_blocking_hard = {};
     _is_movement_blocking_soft = {};

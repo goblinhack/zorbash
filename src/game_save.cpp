@@ -197,7 +197,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     bits64 = 0;
     shift = 0;
     /* uint64_t */ bits64 |= my.t->i_set_is_acid                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_venom                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_poison                  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_blood                  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_chasm                  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_corpse                 << shift; shift++;
@@ -282,7 +282,7 @@ std::ostream& operator<<(std::ostream &out,
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};            */ out << bits(my.t->_fade_in_map);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};                */ out << bits(my.t->_heatmap);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};                */ out << bits(my.t->_is_acid);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_venom {};                */ out << bits(my.t->_is_venom);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};                */ out << bits(my.t->_is_poison);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};               */ out << bits(my.t->_is_blood);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};               */ out << bits(my.t->_is_chasm);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};              */ out << bits(my.t->_is_corpse);

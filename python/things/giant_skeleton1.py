@@ -51,7 +51,7 @@ def tp_init(name, text_name):
     x.set_on_death_is_corpse(True)
     x.set_rarity(zx.RARITY_COMMON)
     x.set_resurrect_dice("1d10+30")
-    x.set_stats_attack_dice("1d12")
+    x.set_stats_attack_melee_dice("1d12")
     x.set_stats_defence(4)
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial_dice("10d10")

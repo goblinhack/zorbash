@@ -16,7 +16,7 @@ def lava_init(name, text_name, tiles=[]):
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_light_color("red")
-    x.set_stats_attack_dice("1d12+6")
+    x.set_stats_attack_melee_dice("1d12+6")
     x.set_text_a_or_an("");
     x.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move)")
     x.set_text_hits("tickles");

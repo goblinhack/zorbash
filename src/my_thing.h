@@ -221,7 +221,7 @@ public:
     // the level only once.
     //
     uint64_t i_set_is_acid:1                   {};
-    uint64_t i_set_is_venom:1                  {};
+    uint64_t i_set_is_poison:1                  {};
     uint64_t i_set_is_blood:1                  {};
     uint64_t i_set_is_chasm:1                  {};
     uint64_t i_set_is_corpse:1                 {};
@@ -818,9 +818,13 @@ public:
     int get_lifespan(void) const;
     const Dice& get_lifespan_dice(void) const;
 
-    const std::string& get_stats_attack_dice_str(void) const;
+    const std::string& get_stats_attack_melee_dice_str(void) const;
     int get_stats_attack(void) const;
-    const Dice& get_stats_attack_dice(void) const;
+    const Dice& get_stats_attack_melee_dice(void) const;
+
+    const std::string& get_stats_attack_poison_dice_str(void) const;
+    int get_stats_attack_poison(void) const;
+    const Dice& get_stats_attack_poison_dice(void) const;
 
     const std::string& get_stats_health_initial_dice_str(void) const;
     int get_stats_health_initial(void) const;
@@ -1127,12 +1131,12 @@ public:
     int is_rrr34(void) const;
     int is_rrr35(void) const;
     int is_rrr36(void) const;
-    int is_venom_lover(void) const;
-    int is_double_damage_from_venom(void) const;
-    int is_venom_hater(void) const;
+    int is_poison_lover(void) const;
+    int is_double_damage_from_poison(void) const;
+    int is_poison_hater(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
-    int is_venom(void) const;
+    int is_poison(void) const;
     int is_used_when_thrown(void) const;
     int is_used_automatically_when_selected(void) const;
     int is_thrown_automatically_when_selected(void) const;

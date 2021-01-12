@@ -242,7 +242,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     shift = 0;
 
     /* uint64_t */ my.t->i_set_is_acid                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_venom                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_poison                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_blood                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_chasm                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_corpse                 = (bits64 >> shift) & 1; shift++;
@@ -338,7 +338,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};            */ in >> bits(my.t->_fade_in_map);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};                */ in >> bits(my.t->_heatmap);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};                */ in >> bits(my.t->_is_acid);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_venom {};                */ in >> bits(my.t->_is_venom);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};                */ in >> bits(my.t->_is_poison);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};               */ in >> bits(my.t->_is_blood);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};               */ in >> bits(my.t->_is_chasm);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};              */ in >> bits(my.t->_is_corpse);

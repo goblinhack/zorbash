@@ -37,7 +37,7 @@ def tp_init(name, text_name):
     x.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     x.set_normal_placement_rules(True)
     x.set_rarity(zx.RARITY_COMMON)
-    x.set_stats_attack_dice("1d1")
+    x.set_stats_attack_melee_dice("1d1")
     x.set_stats_defence(1)
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial_dice("1d3")

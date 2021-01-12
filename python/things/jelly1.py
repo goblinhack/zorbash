@@ -52,7 +52,7 @@ def tp_init(name, text_name):
     x.set_nutrition_dice("1d4")
     x.set_on_birth_do("jelly1.spawn()")
     x.set_rarity(zx.RARITY_COMMON)
-    x.set_stats_attack_dice("1d3")
+    x.set_stats_attack_melee_dice("1d3")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial_dice("1d5")
