@@ -16,7 +16,7 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     x.set_is_meat_eater(True)
     x.set_lifespan_dice("1d10+10")
     x.set_light_color("green")
-    x.set_stats_attack_dice("1d3+1")
+    x.set_stats_attack_melee_dice("1d3+1")
     x.set_text_a_or_an("");
     x.set_text_description("A pool of hissing acid")
     x.set_text_hits("burns");

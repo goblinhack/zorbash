@@ -25,8 +25,8 @@ bool Tp::will_avoid (Levelp level, point p) const
         }
     }
 
-    if (level->is_venom(p)) {
-        if (is_venom_hater()) {
+    if (level->is_poison(p)) {
+        if (is_poison_hater()) {
             return true;
         }
     }
@@ -84,8 +84,8 @@ bool Thing::will_avoid (const point &p)
         }
     }
 
-    if (level->is_venom(p)) {
-        if (is_venom_hater()) {
+    if (level->is_poison(p)) {
+        if (is_poison_hater()) {
             return true;
         }
     }
@@ -182,8 +182,8 @@ bool Thing::will_avoid (const Thingp itp)
         }
     }
 
-    if (me->is_venom_hater()) {
-        if (it->is_venom()) {
+    if (me->is_poison_hater()) {
+        if (it->is_poison()) {
             return true;
         }
     }

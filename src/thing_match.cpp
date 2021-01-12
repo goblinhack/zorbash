@@ -378,13 +378,13 @@ bool Thing::match (const std::string& what)
     if (is_rrr36() && (what == "is_rrr36")) {
         return true;
     }
-    if (is_venom_lover() && (what == "is_venom_lover")) {
+    if (is_poison_lover() && (what == "is_poison_lover")) {
         return true;
     }
-    if (is_double_damage_from_venom() && (what == "is_double_damage_from_venom")) {
+    if (is_double_damage_from_poison() && (what == "is_double_damage_from_poison")) {
         return true;
     }
-    if (is_venom_hater() && (what == "is_venom_hater")) {
+    if (is_poison_hater() && (what == "is_poison_hater")) {
         return true;
     }
     if (is_rrr4() && (what == "is_rrr4")) {
@@ -393,7 +393,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr40() && (what == "is_rrr40")) {
         return true;
     }
-    if (is_venom() && (what == "is_venom")) {
+    if (is_poison() && (what == "is_poison")) {
         return true;
     }
     if (is_used_when_thrown() && (what == "is_used_when_thrown")) {

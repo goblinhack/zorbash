@@ -29,10 +29,15 @@ const int Tp::nutrition(void) const { return _nutrition_dice.roll(); }
 const std::string& Tp::nutrition_dice_str(void) const { return _nutrition_dice_str; }
 void Tp::set_nutrition_dice(const std::string &v) { _nutrition_dice = v; _nutrition_dice_str = v; }
 
-const Dice& Tp::get_stats_attack_dice(void) const { return _stats_attack_dice; }
-const int Tp::get_stats_attack(void) const { return _stats_attack_dice.roll(); }
-const std::string& Tp::get_stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
-void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
+const Dice& Tp::get_stats_attack_melee_dice(void) const { return _stats_attack_melee_dice; }
+const int Tp::get_stats_attack(void) const { return _stats_attack_melee_dice.roll(); }
+const std::string& Tp::get_stats_attack_melee_dice_str(void) const { return _stats_attack_melee_dice_str; }
+void Tp::set_stats_attack_melee_dice(const std::string &v) { _stats_attack_melee_dice = v; _stats_attack_melee_dice_str = v; }
+
+const Dice& Tp::get_stats_attack_poison_dice(void) const { return _stats_attack_poison_dice; }
+const int Tp::get_stats_attack_poison(void) const { return _stats_attack_poison_dice.roll(); }
+const std::string& Tp::get_stats_attack_poison_dice_str(void) const { return _stats_attack_poison_dice_str; }
+void Tp::set_stats_attack_poison_dice(const std::string &v) { _stats_attack_poison_dice = v; _stats_attack_poison_dice_str = v; }
 
 const Dice& Tp::get_stats_health_initial_dice(void) const { return _stats_health_initial_dice; }
 const int Tp::get_stats_health_initial(void) const { return _stats_health_initial_dice.roll(); }
@@ -218,12 +223,12 @@ int Tp::is_rrr33(void) const { return _is_rrr33; }
 int Tp::is_rrr34(void) const { return _is_rrr34; }
 int Tp::is_rrr35(void) const { return _is_rrr35; }
 int Tp::is_rrr36(void) const { return _is_rrr36; }
-int Tp::is_venom_lover(void) const { return _is_venom_lover; }
-int Tp::is_double_damage_from_venom(void) const { return _is_double_damage_from_venom; }
-int Tp::is_venom_hater(void) const { return _is_venom_hater; }
+int Tp::is_poison_lover(void) const { return _is_poison_lover; }
+int Tp::is_double_damage_from_poison(void) const { return _is_double_damage_from_poison; }
+int Tp::is_poison_hater(void) const { return _is_poison_hater; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr40(void) const { return _is_rrr40; }
-int Tp::is_venom(void) const { return _is_venom; }
+int Tp::is_poison(void) const { return _is_poison; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_used_automatically_when_selected(void) const { return _is_used_automatically_when_selected; }
 int Tp::is_thrown_automatically_when_selected(void) const { return _is_thrown_automatically_when_selected; }
@@ -457,12 +462,12 @@ void Tp::set_is_rrr33(int v) { _is_rrr33 = v; }
 void Tp::set_is_rrr34(int v) { _is_rrr34 = v; }
 void Tp::set_is_rrr35(int v) { _is_rrr35 = v; }
 void Tp::set_is_rrr36(int v) { _is_rrr36 = v; }
-void Tp::set_is_venom_lover(int v) { _is_venom_lover = v; }
-void Tp::set_is_double_damage_from_venom(int v) { _is_double_damage_from_venom = v; }
-void Tp::set_is_venom_hater(int v) { _is_venom_hater = v; }
+void Tp::set_is_poison_lover(int v) { _is_poison_lover = v; }
+void Tp::set_is_double_damage_from_poison(int v) { _is_double_damage_from_poison = v; }
+void Tp::set_is_poison_hater(int v) { _is_poison_hater = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr40(int v) { _is_rrr40 = v; }
-void Tp::set_is_venom(int v) { _is_venom = v; }
+void Tp::set_is_poison(int v) { _is_poison = v; }
 void Tp::set_is_used_when_thrown(int v) { _is_used_when_thrown = v; }
 void Tp::set_is_used_automatically_when_selected(int v) { _is_used_automatically_when_selected = v; }
 void Tp::set_is_thrown_automatically_when_selected(int v) { _is_thrown_automatically_when_selected = v; }

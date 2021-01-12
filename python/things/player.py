@@ -20,7 +20,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(True)
     x.set_is_acid_hater(True)
-    x.set_is_venom_hater(True) # x.set_is_venom_lover(True) for some odd creature
+    x.set_is_poison_hater(True) # x.set_is_poison_lover(True) for some odd creature
     x.set_is_active(True)
     x.set_is_attack_shove(True)
     x.set_is_attackable_by_monst(True)
@@ -39,7 +39,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_shovable(True)
     x.set_is_weapon_wielder(True)
     x.set_on_death_is_corpse(True)
-    x.set_stats_attack_dice("1d6+1")
+    x.set_stats_attack_melee_dice("1d6+1")
     x.set_stats_defence(3)
     x.set_stats_health_hunger_pct(5)
     x.set_stats_health_initial_dice("20d10")

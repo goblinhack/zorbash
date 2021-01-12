@@ -59,7 +59,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_on_death_is_corpse(True)
     x.set_on_idle_dice_do("1d0:cleaner.tp_effect()")
     x.set_rarity(zx.RARITY_COMMON)
-    x.set_stats_attack_dice("1d5")
+    x.set_stats_attack_melee_dice("1d5")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial_dice("6d6")
