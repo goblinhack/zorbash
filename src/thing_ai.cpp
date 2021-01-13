@@ -20,7 +20,7 @@ _
     //
     // If on fire, try and put it out!
     //
-    if (is_on_fire() && is_fire_hater()) {
+    if (is_on_fire() && is_fire_avoider()) {
         if (is_intelligent()) {
             if (ai_on_fire()) {
                 return;

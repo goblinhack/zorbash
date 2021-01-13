@@ -23,13 +23,13 @@ const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_di
 const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
 int Thing::get_nutrition (void) const {_ return (tp()->nutrition_dice().roll()); }
 
-const Dice& Thing::get_stats_attack_melee_dice (void) const {_ return (tp()->get_stats_attack_melee_dice()); }
-const std::string& Thing::get_stats_attack_melee_dice_str (void) const {_ return (tp()->get_stats_attack_melee_dice_str()); }
-int Thing::get_stats_attack (void) const {_ return (tp()->get_stats_attack_melee_dice().roll()); }
+const Dice& Thing::get_damage_melee_dice (void) const {_ return (tp()->get_damage_melee_dice()); }
+const std::string& Thing::get_damage_melee_dice_str (void) const {_ return (tp()->get_damage_melee_dice_str()); }
+int Thing::get_damage_melee (void) const {_ return (tp()->get_damage_melee_dice().roll()); }
 
-const Dice& Thing::get_stats_attack_poison_dice (void) const {_ return (tp()->get_stats_attack_poison_dice()); }
-const std::string& Thing::get_stats_attack_poison_dice_str (void) const {_ return (tp()->get_stats_attack_poison_dice_str()); }
-int Thing::get_stats_attack_poison (void) const {_ return (tp()->get_stats_attack_poison_dice().roll()); }
+const Dice& Thing::get_damage_poison_dice (void) const {_ return (tp()->get_damage_poison_dice()); }
+const std::string& Thing::get_damage_poison_dice_str (void) const {_ return (tp()->get_damage_poison_dice_str()); }
+int Thing::get_damage_poison (void) const {_ return (tp()->get_damage_poison_dice().roll()); }
 
 const Dice& Thing::get_stats_health_initial_dice (void) const {_ return (tp()->get_stats_health_initial_dice()); }
 const std::string& Thing::get_stats_health_initial_dice_str (void) const {_ return (tp()->get_stats_health_initial_dice_str()); }
@@ -678,9 +678,9 @@ int Thing::is_double_damage_from_poison(void) const
     return (tp()->is_double_damage_from_poison());
 }
 
-int Thing::is_poison_hater(void) const
+int Thing::is_poison_avoider(void) const
 {_
-    return (tp()->is_poison_hater());
+    return (tp()->is_poison_avoider());
 }
 
 int Thing::is_rrr40(void) const
@@ -1021,14 +1021,14 @@ int Thing::is_smoke(void) const
     return (tp()->is_smoke());
 }
 
-int Thing::is_fire_hater(void) const
+int Thing::is_fire_avoider(void) const
 {_
-    return (tp()->is_fire_hater());
+    return (tp()->is_fire_avoider());
 }
 
-int Thing::is_acid_hater(void) const
+int Thing::is_acid_avoider(void) const
 {_
-    return (tp()->is_acid_hater());
+    return (tp()->is_acid_avoider());
 }
 
 int Thing::is_treasure(void) const
@@ -1231,9 +1231,9 @@ int Thing::is_water_lover(void) const
     return (tp()->is_water_lover());
 }
 
-int Thing::is_water_hater(void) const
+int Thing::is_water_avoider(void) const
 {_
-    return (tp()->is_water_hater());
+    return (tp()->is_water_avoider());
 }
 
 int Thing::is_weapon(void) const
@@ -1882,59 +1882,59 @@ int Thing::incr_stats_defence (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// defence_max
+// stats19
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_defence_max (void) const
+int Thing::get_stats_stats19 (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_defence_max);
+        return (monstp->stats_stats19);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats_defence_max (int v)
+int Thing::set_stats_stats19 (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence_max = v);
+    auto n = (monstp->stats_stats19 = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_defence_max (int v)
+int Thing::decr_stats_stats19 (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence_max -= v);
+    auto n = (monstp->stats_stats19 -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_defence_max (int v)
+int Thing::incr_stats_stats19 (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence_max += v);
+    auto n = (monstp->stats_stats19 += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_defence_max (void)
+int Thing::decr_stats_stats19 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence_max--);
+    auto n = (monstp->stats_stats19--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_defence_max (void)
+int Thing::incr_stats_stats19 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence_max++);
+    auto n = (monstp->stats_stats19++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -2926,117 +2926,117 @@ int Thing::incr_stats14 (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats15
+// stats_constitution
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats15 (void) const
+int Thing::get_stats_constitution (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats15);
+        return (monstp->stats_constitution);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats15 (int v)
+int Thing::set_stats_constitution (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats15 = v);
+    auto n = (monstp->stats_constitution = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats15 (int v)
+int Thing::decr_stats_constitution (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats15 -= v);
+    auto n = (monstp->stats_constitution -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats15 (int v)
+int Thing::incr_stats_constitution (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats15 += v);
+    auto n = (monstp->stats_constitution += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats15 (void)
+int Thing::decr_stats_constitution (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats15--);
+    auto n = (monstp->stats_constitution--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats15 (void)
+int Thing::incr_stats_constitution (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats15++);
+    auto n = (monstp->stats_constitution++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats16
+// stats_attack
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats16 (void) const
+int Thing::get_stats_attack (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats16);
+        return (monstp->stats_attack);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats16 (int v)
+int Thing::set_stats_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats16 = v);
+    auto n = (monstp->stats_attack = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats16 (int v)
+int Thing::decr_stats_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats16 -= v);
+    auto n = (monstp->stats_attack -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats16 (int v)
+int Thing::incr_stats_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats16 += v);
+    auto n = (monstp->stats_attack += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats16 (void)
+int Thing::decr_stats_attack (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats16--);
+    auto n = (monstp->stats_attack--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats16 (void)
+int Thing::incr_stats_attack (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats16++);
+    auto n = (monstp->stats_attack++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }

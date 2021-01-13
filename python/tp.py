@@ -301,8 +301,8 @@ class Tp:
     def set_is_double_damage_from_poison(self, value):
         zx.tp_set_is_double_damage_from_poison(self, value)
 
-    def set_is_poison_hater(self, value):
-        zx.tp_set_is_poison_hater(self, value)
+    def set_is_poison_avoider(self, value):
+        zx.tp_set_is_poison_avoider(self, value)
 
     def set_is_rrr40(self, value):
         zx.tp_set_is_rrr40(self, value)
@@ -487,8 +487,8 @@ class Tp:
     def set_is_acid_lover(self, value):
         zx.tp_set_is_acid_lover(self, value)
 
-    def set_is_acid_hater(self, value):
-        zx.tp_set_is_acid_hater(self, value)
+    def set_is_acid_avoider(self, value):
+        zx.tp_set_is_acid_avoider(self, value)
 
     def set_is_jelly_parent(self, value):
         zx.tp_set_is_jelly_parent(self, value)
@@ -538,8 +538,8 @@ class Tp:
     def set_is_smoke(self, value):
         zx.tp_set_is_smoke(self, value)
 
-    def set_is_fire_hater(self, value):
-        zx.tp_set_is_fire_hater(self, value)
+    def set_is_fire_avoider(self, value):
+        zx.tp_set_is_fire_avoider(self, value)
 
     def set_is_treasure(self, value):
         zx.tp_set_is_treasure(self, value)
@@ -661,8 +661,8 @@ class Tp:
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)
 
-    def set_is_water_hater(self, value):
-        zx.tp_set_is_water_hater(self, value)
+    def set_is_water_avoider(self, value):
+        zx.tp_set_is_water_avoider(self, value)
 
     def set_is_hunger_insatiable(self, value):
         zx.tp_set_is_hunger_insatiable(self, value)
@@ -676,11 +676,11 @@ class Tp:
     def set_nutrition_dice(self, value):
         zx.tp_set_nutrition_dice(self, value)
 
-    def set_stats_attack_melee_dice(self, value):
-        zx.tp_set_stats_attack_melee_dice(self, value)
+    def set_damage_melee_dice(self, value):
+        zx.tp_set_damage_melee_dice(self, value)
 
-    def set_stats_attack_poison_dice(self, value):
-        zx.tp_set_stats_attack_poison_dice(self, value)
+    def set_damage_poison_dice(self, value):
+        zx.tp_set_damage_poison_dice(self, value)
 
     def set_gold_value_dice(self, value):
         zx.tp_set_gold_value_dice(self, value)

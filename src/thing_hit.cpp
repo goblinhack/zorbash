@@ -58,7 +58,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (is_fire_hater()) {
+    if (is_fire_avoider()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
             if (is_double_damage_from_fire()) {
@@ -68,7 +68,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (is_acid_hater()) {
+    if (is_acid_avoider()) {
         if (real_hitter->is_acid()) {
             if (is_double_damage_from_acid()) {
                 damage *= 2;
@@ -77,7 +77,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (is_poison_hater()) {
+    if (is_poison_avoider()) {
         if (real_hitter->is_poison()) {
             if (is_double_damage_from_poison()) {
                 damage *= 2;
@@ -86,7 +86,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (is_water_hater()) {
+    if (is_water_avoider()) {
         if (real_hitter->is_water()) {
             if (is_double_damage_from_water()) {
                 damage *= 2;

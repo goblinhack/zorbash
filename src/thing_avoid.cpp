@@ -14,19 +14,19 @@
 bool Tp::will_avoid (Levelp level, point p) const
 {_
     if (level->is_water(p)) {
-        if (is_water_hater()) {
+        if (is_water_avoider()) {
             return true;
         }
     }
 
     if (level->is_acid(p)) {
-        if (is_acid_hater()) {
+        if (is_acid_avoider()) {
             return true;
         }
     }
 
     if (level->is_poison(p)) {
-        if (is_poison_hater()) {
+        if (is_poison_avoider()) {
             return true;
         }
     }
@@ -55,13 +55,13 @@ bool Tp::will_avoid (Levelp level, point p) const
     int heat = level->heatmap(p);
     if (is_double_damage_from_fire()) {
         if (heat > 0) {
-            if (is_fire_hater()) {
+            if (is_fire_avoider()) {
                 return true;
             }
         }
     } else {
 	if (heat >= 4) { // this allows you to skip around lava
-            if (is_fire_hater()) {
+            if (is_fire_avoider()) {
                 return true;
             }
         }
@@ -73,19 +73,19 @@ bool Tp::will_avoid (Levelp level, point p) const
 bool Thing::will_avoid (const point &p)
 {_
     if (level->is_water(p)) {
-        if (is_water_hater()) {
+        if (is_water_avoider()) {
             return true;
         }
     }
 
     if (level->is_acid(p)) {
-        if (is_acid_hater()) {
+        if (is_acid_avoider()) {
             return true;
         }
     }
 
     if (level->is_poison(p)) {
-        if (is_poison_hater()) {
+        if (is_poison_avoider()) {
             return true;
         }
     }
@@ -115,13 +115,13 @@ bool Thing::will_avoid (const point &p)
         int heat = level->heatmap(p);
         if (is_double_damage_from_fire()) {
             if (heat > 0) {
-                if (is_fire_hater()) {
+                if (is_fire_avoider()) {
                     return true;
                 }
             }
         } else {
             if (heat >= 4) { // this allows you to skip around lava
-                if (is_fire_hater()) {
+                if (is_fire_avoider()) {
                     return true;
                 }
             }
@@ -176,20 +176,20 @@ bool Thing::will_avoid (const Thingp itp)
         }
     }
 
-    if (me->is_acid_hater()) {
+    if (me->is_acid_avoider()) {
         if (it->is_acid()) {
             return true;
         }
     }
 
-    if (me->is_poison_hater()) {
+    if (me->is_poison_avoider()) {
         if (it->is_poison()) {
             return true;
         }
     }
 
     if (!is_on_fire()) {
-        if (me->is_fire_hater()) {
+        if (me->is_fire_avoider()) {
             if (it->is_fire()) {
                 return true;
             }
@@ -199,7 +199,7 @@ bool Thing::will_avoid (const Thingp itp)
         }
     }
 
-    if (me->is_water_hater()) {
+    if (me->is_water_avoider()) {
         if (it->is_water()) {
             return true;
         }

@@ -29,7 +29,7 @@ void Thing::lava_tick (void)
         return;
     }
 
-    if (!is_fire_hater()) {
+    if (!is_fire_avoider()) {
         if (g_opt_debug3) {
             log("No, not a fire hater");
         }
@@ -69,7 +69,7 @@ void Thing::lava_tick (void)
             }
             if (t->get_tick() < game->tick_current) {
                 t->set_tick(game->tick_current);
-                is_hit_by(t, t->get_stats_attack());
+                is_hit_by(t, t->get_damage_melee());
                 break;
             }
         } FOR_ALL_THINGS_END()
