@@ -42,9 +42,9 @@ def init_ui_status_bar():
       "status-bar-0",
       "karma-status",
       "health-status",
-      "defence-status",
       "stamina-status",
-      "anxiety-status",
+      "stats1",
+      "stats2",
       "attack-status",
     ]
     zx.tile_load_arr(
