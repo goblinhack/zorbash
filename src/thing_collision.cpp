@@ -614,7 +614,7 @@ _
 
         auto it = best->target;
 
-        damage = get_stats_attack();
+        damage = get_damage_melee();
         if (is_loggable_for_unimportant_stuff()) {
             log("Best cand %s, damage %d", it->to_string().c_str(), damage);
         }

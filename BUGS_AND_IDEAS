@@ -1,7 +1,14 @@
 bugs
 ----
 
+- fix attack / bite and melee
+- do spiders run from undead
+- add _attacker for some _avoiders
+- small gfx for con / def / str 
+- do spiders fight back when attacke by undead?
+- defence does nothing
 - poison from spider?
+- half damage from poison constitution save
 - spider that throws web?
 - antipoison potion
 - invisible monst?

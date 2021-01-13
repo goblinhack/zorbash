@@ -122,7 +122,7 @@ void Thing::init (Levelp level,
         auto v = tpp->stats_defence();
         if (unlikely(v)) {
             set_stats_defence(v);
-            set_stats_defence_max(v);
+            set_stats_stats19(v);
         }
     }
 
@@ -239,16 +239,16 @@ void Thing::init (Levelp level,
     }
 
     {_
-        auto v = tpp->stats15();
+        auto v = tpp->stats_constitution();
         if (unlikely(v)) {
-            set_stats15(v);
+            set_stats_constitution(v);
         }
     }
 
     {_
-        auto v = tpp->stats16();
+        auto v = tpp->stats_attack();
         if (unlikely(v)) {
-            set_stats16(v);
+            set_stats_attack(v);
         }
     }
 

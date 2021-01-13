@@ -88,14 +88,14 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          stats12                   */ in >> bits(my.t->stats12);
     /* int          stats13                   */ in >> bits(my.t->stats13);
     /* int          stats14                   */ in >> bits(my.t->stats14);
-    /* int          stats15                   */ in >> bits(my.t->stats15);
-    /* int          stats16                   */ in >> bits(my.t->stats16);
+    /* int          stats_constitution        */ in >> bits(my.t->stats_constitution);
+    /* int          stats_attack              */ in >> bits(my.t->stats_attack);
     /* int          stats17                   */ in >> bits(my.t->stats17);
-    /* int          stats_throw_distance                   */ in >> bits(my.t->stats_throw_distance);
+    /* int          stats_throw_distance      */ in >> bits(my.t->stats_throw_distance);
     /* int          stats_stamina             */ in >> bits(my.t->stats_stamina);
     /* int          stats_stamina_max         */ in >> bits(my.t->stats_stamina_max);
     /* int          stats_defence             */ in >> bits(my.t->stats_defence);
-    /* int          stats_defence_max         */ in >> bits(my.t->stats_defence_max);
+    /* int          stats_stats19         */ in >> bits(my.t->stats_stats19);
     /* int          stats_health              */ in >> bits(my.t->stats_health);
     /* int          stats_health_max          */ in >> bits(my.t->stats_health_max);
     /* int          stats_strength            */ in >> bits(my.t->stats_strength);

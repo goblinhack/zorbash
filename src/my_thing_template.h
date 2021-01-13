@@ -64,11 +64,11 @@ private:
     Dice _nutrition_dice {};
     std::string _nutrition_dice_str;
 
-    Dice _stats_attack_melee_dice {};
-    std::string _stats_attack_melee_dice_str;
+    Dice _damage_melee_dice {};
+    std::string _damage_melee_dice_str;
 
-    Dice _stats_attack_poison_dice {};
-    std::string _stats_attack_poison_dice_str;
+    Dice _damage_poison_dice {};
+    std::string _damage_poison_dice_str;
 
     Dice _stats_health_initial_dice {};
     std::string _stats_health_initial_dice_str;
@@ -121,7 +121,7 @@ private:
     int _is_able_to_change_levels {};
     int _is_acid {};
     int _is_acid_lover {};
-    int _is_acid_hater {};
+    int _is_acid_avoider {};
     int _is_active {}; // e.g. a monst or player or something movable
     int _is_attack_eater {};
     int _is_attack_lunge {};
@@ -154,7 +154,7 @@ private:
     int _is_exit {};
     int _is_explosion {};
     int _is_fire {};
-    int _is_fire_hater {};
+    int _is_fire_avoider {};
     int _is_flammable {};
     int _is_floating {};
     int _is_floor {};
@@ -238,7 +238,7 @@ private:
     int _is_rrr36 {};
     int _is_poison_lover {};
     int _is_double_damage_from_poison {};
-    int _is_poison_hater {};
+    int _is_poison_avoider {};
     int _is_rrr4 {};
     int _is_rrr40 {};
     int _is_poison {};
@@ -284,7 +284,7 @@ private:
     int _is_wall_deco {};
     int _is_water {};
     int _is_water_lover {};
-    int _is_water_hater {};
+    int _is_water_avoider {};
     int _is_weapon {};
     int _is_weapon_wielder {};
     int _normal_placement_rules {};
@@ -305,8 +305,8 @@ private:
     int _stats12 {};
     int _stats13 {};
     int _stats14 {};
-    int _stats15 {};
-    int _stats16 {};
+    int _stats_constitution {};
+    int _stats_attack {};
     int _stats17 {};
     int _stats_throw_distance {};
     int _stats_defence {};
@@ -369,15 +369,15 @@ public:
     const std::string& nutrition_dice_str(void) const;
     void set_nutrition_dice(const std::string &);
 
-    const Dice& get_stats_attack_melee_dice(void) const;
-    const int get_stats_attack(void) const;
-    const std::string& get_stats_attack_melee_dice_str(void) const;
-    void set_stats_attack_melee_dice(const std::string &);
+    const Dice& get_damage_melee_dice(void) const;
+    const int get_damage_melee(void) const;
+    const std::string& get_damage_melee_dice_str(void) const;
+    void set_damage_melee_dice(const std::string &);
 
-    const Dice& get_stats_attack_poison_dice(void) const;
-    const int get_stats_attack_poison(void) const;
-    const std::string& get_stats_attack_poison_dice_str(void) const;
-    void set_stats_attack_poison_dice(const std::string &);
+    const Dice& get_damage_poison_dice(void) const;
+    const int get_damage_poison(void) const;
+    const std::string& get_damage_poison_dice_str(void) const;
+    void set_damage_poison_dice(const std::string &);
 
     const Dice& get_stats_health_initial_dice(void) const;
     const int get_stats_health_initial(void) const;
@@ -481,7 +481,7 @@ public:
     int is_able_to_change_levels(void) const;
     int is_acid(void) const;
     int is_acid_lover(void) const;
-    int is_acid_hater(void) const;
+    int is_acid_avoider(void) const;
     int is_active(void) const;
     int is_attack_eater(void) const;
     int is_attack_lunge(void) const;
@@ -516,7 +516,7 @@ public:
     int is_exit(void) const;
     int is_explosion(void) const;
     int is_fire(void) const;
-    int is_fire_hater(void) const;
+    int is_fire_avoider(void) const;
     int is_flammable(void) const;
     int is_floating(void) const;
     int is_floor(void) const;
@@ -597,7 +597,7 @@ public:
     int is_rrr36(void) const;
     int is_poison_lover(void) const;
     int is_double_damage_from_poison(void) const;
-    int is_poison_hater(void) const;
+    int is_poison_avoider(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
     int is_poison(void) const;
@@ -652,7 +652,7 @@ public:
     int is_wall_deco(void) const;
     int is_water(void) const;
     int is_water_lover(void) const;
-    int is_water_hater(void) const;
+    int is_water_avoider(void) const;
     int is_weapon(void) const;
     int normal_placement_rules(void) const;
     int stats01(void) const;
@@ -669,8 +669,8 @@ public:
     int stats12(void) const;
     int stats13(void) const;
     int stats14(void) const;
-    int stats15(void) const;
-    int stats16(void) const;
+    int stats_constitution(void) const;
+    int stats_attack(void) const;
     int stats17(void) const;
     int stats_throw_distance(void) const;
     int stats_stamina(void) const;
@@ -720,7 +720,7 @@ public:
     void set_is_able_to_change_levels(int);
     void set_is_acid(int);
     void set_is_acid_lover(int);
-    void set_is_acid_hater(int);
+    void set_is_acid_avoider(int);
     void set_is_active(int);
     void set_is_attack_eater(int);
     void set_is_attack_lunge(int);
@@ -755,7 +755,7 @@ public:
     void set_is_exit(int);
     void set_is_explosion(int);
     void set_is_fire(int);
-    void set_is_fire_hater(int);
+    void set_is_fire_avoider(int);
     void set_is_flammable(int);
     void set_is_floating(int);
     void set_is_floor(int);
@@ -837,7 +837,7 @@ public:
     void set_is_rrr36(int);
     void set_is_poison_lover(int);
     void set_is_double_damage_from_poison(int);
-    void set_is_poison_hater(int);
+    void set_is_poison_avoider(int);
     void set_is_rrr4(int);
     void set_is_rrr40(int);
     void set_is_poison(int);
@@ -892,7 +892,7 @@ public:
     void set_is_wall_deco(int);
     void set_is_water(int);
     void set_is_water_lover(int);
-    void set_is_water_hater(int);
+    void set_is_water_avoider(int);
     void set_is_weapon(int);
     void set_light_color(const std::string &);
     void set_name(const std::string &);
@@ -915,8 +915,8 @@ public:
     void set_stats12(int);
     void set_stats13(int);
     void set_stats14(int);
-    void set_stats15(int);
-    void set_stats16(int);
+    void set_stats_constitution(int);
+    void set_stats_attack(int);
     void set_stats17(int);
     void set_stats_throw_distance(int);
     void set_stats_stamina(int);

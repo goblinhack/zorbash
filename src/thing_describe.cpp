@@ -12,7 +12,7 @@ bool Thing::describe_when_in_inventory (void)
     auto s = text_description();
 
     if (is_weapon()){
-        s += ". Damage %%fg=red$" + tp()->get_stats_attack_melee_dice_str() +
+        s += ". Damage %%fg=red$" + tp()->get_damage_melee_dice_str() +
              "%%fg=reset$";
     }
 
@@ -72,7 +72,7 @@ bool Thing::describe_when_hovering_over (void)
     auto s = text_description();
 
     if (is_weapon()){
-        s += ". Damage %%fg=red$" + tp()->get_stats_attack_melee_dice_str() +
+        s += ". Damage %%fg=red$" + tp()->get_damage_melee_dice_str() +
              "%%fg=reset$";
     }
 

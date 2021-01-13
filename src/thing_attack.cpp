@@ -228,7 +228,7 @@ _
         }
     }
 
-    auto damage = get_stats_attack();
+    auto damage = get_damage_melee();
     if (it->is_hit_by(this, damage)) {
         if (is_loggable_for_unimportant_stuff()) {
             log("The attack hit %s for %d", it->to_string().c_str(), damage);

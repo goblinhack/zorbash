@@ -61,9 +61,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     if (!it->is_dead) {
         log("Shove: it strength %d vs me %d + %d",
-            it->get_stats_strength(), get_stats_strength(), get_stats_attack());
+            it->get_stats_strength(), get_stats_strength(), get_damage_melee());
 
-        if (it->get_stats_strength() > get_stats_strength() + get_stats_attack()) {
+        if (it->get_stats_strength() > get_stats_strength() + get_damage_melee()) {
             if (is_player()) {
                 MINICON("%s is too strong to be shoved!", it->text_The().c_str());
             } else if (it->is_player()) {

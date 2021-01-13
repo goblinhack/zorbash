@@ -166,7 +166,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     bool need_line = true;
 
     {
-        auto attack_melee_dice = t->get_stats_attack_melee_dice();
+        auto attack_melee_dice = t->get_damage_melee_dice();
         auto min_value = attack_melee_dice.min_roll();
         auto max_value = attack_melee_dice.max_roll();
         if (min_value > 0) {
@@ -176,12 +176,12 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
             }
             if (min_value == max_value) {
                 wid_thing_info_window->log("Damg: " + 
-                                        t->get_stats_attack_melee_dice_str());
+                                        t->get_damage_melee_dice_str());
             } else {
                 wid_thing_info_window->log("Damg: " + 
                                         std::to_string(min_value) + "-" + 
                                         std::to_string(max_value) + " (" +
-                                        t->get_stats_attack_melee_dice_str() + ")");
+                                        t->get_damage_melee_dice_str() + ")");
             }
         }
     }
@@ -233,7 +233,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         wid_thing_info_window->log(" ");
         wid_thing_info_window->log(danger_level);
 
-        auto attack_melee_dice = t->get_stats_attack_melee_dice();
+        auto attack_melee_dice = t->get_damage_melee_dice();
         auto kill_count = player->get_stats_health() / attack_melee_dice.max_roll();
 
         //

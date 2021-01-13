@@ -104,7 +104,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_is_treasure_class_b(True)
     x.set_is_weapon(True)
     x.set_long_text_description("A gleaming axe. It's edge is hungry.")
-    x.set_stats_attack_melee_dice("1d10+1")
+    x.set_damage_melee_dice("1d10+1")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy choppy means of justice")
     x.set_weapon_carry_anim("axe1_carry")

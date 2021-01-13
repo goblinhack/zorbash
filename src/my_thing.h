@@ -93,12 +93,12 @@ public:
     int          stats12 = {};
     int          stats13 = {};
     int          stats14 = {};
-    int          stats15 = {};
-    int          stats16 = {};
+    int          stats_constitution = {};
+    int          stats_attack = {};
     int          stats17 = {};
     int          stats_throw_distance = {};
     int          stats_defence = {};
-    int          stats_defence_max = {};
+    int          stats_stats19 = {};
     int          stats_health = {};
     int          stats_health_max = {};
     int          stats_stamina = {};
@@ -423,12 +423,12 @@ public:
     int decr_stats_defence(void);
     int incr_stats_defence(void);
 
-    int set_stats_defence_max(int);
-    int get_stats_defence_max(void) const;
-    int decr_stats_defence_max(int);
-    int incr_stats_defence_max(int);
-    int decr_stats_defence_max(void);
-    int incr_stats_defence_max(void);
+    int set_stats_stats19(int);
+    int get_stats_stats19(void) const;
+    int decr_stats_stats19(int);
+    int incr_stats_stats19(int);
+    int decr_stats_stats19(void);
+    int incr_stats_stats19(void);
 
     int set_tick_rate_tenths(int);
     int get_tick_rate_tenths(void) const;
@@ -542,19 +542,19 @@ public:
     int decr_stats14(void);
     int incr_stats14(void);
 
-    int set_stats15(int);
-    int get_stats15(void) const;
-    int decr_stats15(int);
-    int incr_stats15(int);
-    int decr_stats15(void);
-    int incr_stats15(void);
+    int set_stats_constitution(int);
+    int get_stats_constitution(void) const;
+    int decr_stats_constitution(int);
+    int incr_stats_constitution(int);
+    int decr_stats_constitution(void);
+    int incr_stats_constitution(void);
 
-    int set_stats16(int);
-    int get_stats16(void) const;
-    int decr_stats16(int);
-    int incr_stats16(int);
-    int decr_stats16(void);
-    int incr_stats16(void);
+    int set_stats_attack(int);
+    int get_stats_attack(void) const;
+    int decr_stats_attack(int);
+    int incr_stats_attack(int);
+    int decr_stats_attack(void);
+    int incr_stats_attack(void);
 
     int set_stats17(int);
     int get_stats17(void) const;
@@ -818,13 +818,13 @@ public:
     int get_lifespan(void) const;
     const Dice& get_lifespan_dice(void) const;
 
-    const std::string& get_stats_attack_melee_dice_str(void) const;
-    int get_stats_attack(void) const;
-    const Dice& get_stats_attack_melee_dice(void) const;
+    const std::string& get_damage_melee_dice_str(void) const;
+    int get_damage_melee(void) const;
+    const Dice& get_damage_melee_dice(void) const;
 
-    const std::string& get_stats_attack_poison_dice_str(void) const;
-    int get_stats_attack_poison(void) const;
-    const Dice& get_stats_attack_poison_dice(void) const;
+    const std::string& get_damage_poison_dice_str(void) const;
+    int get_damage_poison(void) const;
+    const Dice& get_damage_poison_dice(void) const;
 
     const std::string& get_stats_health_initial_dice_str(void) const;
     int get_stats_health_initial(void) const;
@@ -1013,7 +1013,7 @@ public:
     int is_able_to_change_levels(void) const;
     int is_acid(void) const;
     int is_acid_lover(void) const;
-    int is_acid_hater(void) const;
+    int is_acid_avoider(void) const;
     int is_active(void) const;
     int is_alive_monst(void) const;
     int is_attack_eater(void) const;
@@ -1050,7 +1050,7 @@ public:
     int is_exit(void) const;
     int is_explosion(void) const;
     int is_fire(void) const;
-    int is_fire_hater(void) const;
+    int is_fire_avoider(void) const;
     int is_flammable(void) const;
     int is_floating(void) const;
     int is_floor(void) const;
@@ -1133,7 +1133,7 @@ public:
     int is_rrr36(void) const;
     int is_poison_lover(void) const;
     int is_double_damage_from_poison(void) const;
-    int is_poison_hater(void) const;
+    int is_poison_avoider(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
     int is_poison(void) const;
@@ -1174,7 +1174,7 @@ public:
     int is_wall_deco(void) const;
     int is_water(void) const;
     int is_water_lover(void) const;
-    int is_water_hater(void) const;
+    int is_water_avoider(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;
     int normal_placement_rules(void) const;

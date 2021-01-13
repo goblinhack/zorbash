@@ -207,7 +207,7 @@ static void wid_rightbar_create (void)
         wid_set_pos(w, tl, br);
 
         int i = ((float)player->get_stats_defence() /
-                 (float)player->get_stats_defence_max()) *
+                 (float)player->get_stats_stats19()) *
                  (float)UI_HEALTH_BAR_STEPS - 1;
         i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
         i = std::max(i, 0);
@@ -234,7 +234,7 @@ static void wid_rightbar_create (void)
 
         std::string s =
             std::to_string(player->get_stats_defence()) + "/" +
-            std::to_string(player->get_stats_defence_max());
+            std::to_string(player->get_stats_stats19());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
