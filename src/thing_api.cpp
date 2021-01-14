@@ -678,9 +678,9 @@ int Thing::damage_doubled_from_poison(void) const
     return (tp()->damage_doubled_from_poison());
 }
 
-int Thing::avoider_of_poison(void) const
+int Thing::avoids_poison(void) const
 {_
-    return (tp()->avoider_of_poison());
+    return (tp()->avoids_poison());
 }
 
 int Thing::is_rrr40(void) const
@@ -786,9 +786,9 @@ int Thing::bag_width(void)
     return (tp()->bag_width());
 }
 
-int Thing::rrr58(void) const
+int Thing::is_rrr37(void) const
 {_
-    return (tp()->rrr58());
+    return (tp()->is_rrr37());
 }
 
 int Thing::rarity(void) const
@@ -1021,14 +1021,14 @@ int Thing::is_smoke(void) const
     return (tp()->is_smoke());
 }
 
-int Thing::avoider_of_fire(void) const
+int Thing::avoids_fire(void) const
 {_
-    return (tp()->avoider_of_fire());
+    return (tp()->avoids_fire());
 }
 
-int Thing::avoider_of_acid(void) const
+int Thing::avoids_acid(void) const
 {_
-    return (tp()->avoider_of_acid());
+    return (tp()->avoids_acid());
 }
 
 int Thing::is_treasure(void) const
@@ -1231,9 +1231,9 @@ int Thing::is_water_lover(void) const
     return (tp()->is_water_lover());
 }
 
-int Thing::avoider_of_water(void) const
+int Thing::avoids_water(void) const
 {_
-    return (tp()->avoider_of_water());
+    return (tp()->avoids_water());
 }
 
 int Thing::is_weapon(void) const

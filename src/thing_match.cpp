@@ -33,7 +33,7 @@ bool Thing::match (const std::string& what)
     if (is_acid_lover() && (what == "is_acid_lover")) {
         return true;
     }
-    if (avoider_of_acid() && (what == "avoider_of_acid")) {
+    if (avoids_acid() && (what == "avoids_acid")) {
         return true;
     }
     if (is_active() && (what == "is_active")) {
@@ -141,7 +141,7 @@ bool Thing::match (const std::string& what)
     if (is_fire() && (what == "is_fire")) {
         return true;
     }
-    if (avoider_of_fire() && (what == "avoider_of_fire")) {
+    if (avoids_fire() && (what == "avoids_fire")) {
         return true;
     }
     if (is_flammable() && (what == "is_flammable")) {
@@ -384,7 +384,7 @@ bool Thing::match (const std::string& what)
     if (damage_doubled_from_poison() && (what == "damage_doubled_from_poison")) {
         return true;
     }
-    if (avoider_of_poison() && (what == "avoider_of_poison")) {
+    if (avoids_poison() && (what == "avoids_poison")) {
         return true;
     }
     if (is_rrr4() && (what == "is_rrr4")) {
@@ -510,7 +510,7 @@ bool Thing::match (const std::string& what)
     if (is_water_lover() && (what == "is_water_lover")) {
         return true;
     }
-    if (avoider_of_water() && (what == "avoider_of_water")) {
+    if (avoids_water() && (what == "avoids_water")) {
         return true;
     }
     if (is_weapon() && (what == "is_weapon")) {

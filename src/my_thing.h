@@ -997,7 +997,7 @@ public:
     int is_able_to_change_levels(void) const;
     int is_acid(void) const;
     int is_acid_lover(void) const;
-    int avoider_of_acid(void) const;
+    int avoids_acid(void) const;
     int is_active(void) const;
     int is_alive_monst(void) const;
     int attack_eater(void) const;
@@ -1034,7 +1034,7 @@ public:
     int is_exit(void) const;
     int is_explosion(void) const;
     int is_fire(void) const;
-    int avoider_of_fire(void) const;
+    int avoids_fire(void) const;
     int is_flammable(void) const;
     int is_floating(void) const;
     int is_floor(void) const;
@@ -1117,7 +1117,7 @@ public:
     int is_rrr36(void) const;
     int is_poison_lover(void) const;
     int damage_doubled_from_poison(void) const;
-    int avoider_of_poison(void) const;
+    int avoids_poison(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
     int is_poison(void) const;
@@ -1158,7 +1158,7 @@ public:
     int is_wall_deco(void) const;
     int is_water(void) const;
     int is_water_lover(void) const;
-    int avoider_of_water(void) const;
+    int avoids_water(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;
     int normal_placement_rules(void) const;
@@ -1166,7 +1166,7 @@ public:
     int on_death_is_corpse(void) const;
     int on_death_is_open(void) const;
     int rarity(void) const;
-    int rrr58(void) const;
+    int is_rrr37(void) const;
     int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;

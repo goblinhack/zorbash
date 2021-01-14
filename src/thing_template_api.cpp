@@ -110,7 +110,7 @@ int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_acid(void) const { return _is_acid; }
 int Tp::is_acid_lover(void) const { return _is_acid_lover; }
-int Tp::avoider_of_acid(void) const { return _avoider_of_acid; }
+int Tp::avoids_acid(void) const { return _avoids_acid; }
 int Tp::is_active(void) const { return _is_active; }
 int Tp::attack_eater(void) const { return _attack_eater; }
 int Tp::attack_lunge(void) const { return _attack_lunge; }
@@ -144,7 +144,7 @@ int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_exit(void) const { return _is_exit; }
 int Tp::is_explosion(void) const { return _is_explosion; }
 int Tp::is_fire(void) const { return _is_fire; }
-int Tp::avoider_of_fire(void) const { return _avoider_of_fire; }
+int Tp::avoids_fire(void) const { return _avoids_fire; }
 int Tp::is_flammable(void) const { return _is_flammable; }
 int Tp::is_floating(void) const { return _is_floating; }
 int Tp::is_floor(void) const { return _is_floor; }
@@ -225,7 +225,7 @@ int Tp::is_rrr35(void) const { return _is_rrr35; }
 int Tp::is_rrr36(void) const { return _is_rrr36; }
 int Tp::is_poison_lover(void) const { return _is_poison_lover; }
 int Tp::damage_doubled_from_poison(void) const { return _damage_doubled_from_poison; }
-int Tp::avoider_of_poison(void) const { return _avoider_of_poison; }
+int Tp::avoids_poison(void) const { return _avoids_poison; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr40(void) const { return _is_rrr40; }
 int Tp::is_poison(void) const { return _is_poison; }
@@ -247,7 +247,7 @@ int Tp::bag_item_height(void) const { return _bag_item_height; }
 int Tp::bag_item_width(void) const { return _bag_item_width; }
 int Tp::bag_height(void) const { return _bag_height; }
 int Tp::bag_width(void) const { return _bag_width; }
-int Tp::rrr58(void) const { return _rrr58; }
+int Tp::is_rrr37(void) const { return _is_rrr37; }
 int Tp::is_rrr6(void) const { return _is_rrr6; }
 int Tp::rarity(void) const { return _rarity; }
 int Tp::gfx_is_rrr99(void) const { return _gfx_is_rrr99; }
@@ -281,7 +281,7 @@ int Tp::is_wall(void) const { return _is_wall; }
 int Tp::is_wall_deco(void) const { return _is_wall_deco; }
 int Tp::is_water(void) const { return _is_water; }
 int Tp::is_water_lover(void) const { return _is_water_lover; }
-int Tp::avoider_of_water(void) const { return _avoider_of_water; }
+int Tp::avoids_water(void) const { return _avoids_water; }
 int Tp::is_weapon(void) const { return _is_weapon; }
 int Tp::normal_placement_rules(void) const { return _normal_placement_rules; }
 int Tp::stats01(void) const { return _stats01; }
@@ -347,7 +347,7 @@ void Tp::set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
 void Tp::set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
 void Tp::set_is_acid(int v) { _is_acid = v; }
 void Tp::set_is_acid_lover(int v) { _is_acid_lover = v; }
-void Tp::set_avoider_of_acid(int v) { _avoider_of_acid = v; }
+void Tp::set_avoids_acid(int v) { _avoids_acid = v; }
 void Tp::set_is_active(int v) { _is_active = v; }
 void Tp::set_attack_eater(int v) { _attack_eater = v; }
 void Tp::set_attack_lunge(int v) { _attack_lunge = v; }
@@ -381,7 +381,7 @@ void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
 void Tp::set_is_exit(int v) { _is_exit = v; }
 void Tp::set_is_explosion(int v) { _is_explosion = v; }
 void Tp::set_is_fire(int v) { _is_fire = v; }
-void Tp::set_avoider_of_fire(int v) { _avoider_of_fire = v; }
+void Tp::set_avoids_fire(int v) { _avoids_fire = v; }
 void Tp::set_is_flammable(int v) { _is_flammable = v; }
 void Tp::set_is_floating(int v) { _is_floating = v; }
 void Tp::set_is_floor(int v) { _is_floor = v; }
@@ -462,7 +462,7 @@ void Tp::set_is_rrr35(int v) { _is_rrr35 = v; }
 void Tp::set_is_rrr36(int v) { _is_rrr36 = v; }
 void Tp::set_is_poison_lover(int v) { _is_poison_lover = v; }
 void Tp::set_damage_doubled_from_poison(int v) { _damage_doubled_from_poison = v; }
-void Tp::set_avoider_of_poison(int v) { _avoider_of_poison = v; }
+void Tp::set_avoids_poison(int v) { _avoids_poison = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr40(int v) { _is_rrr40 = v; }
 void Tp::set_is_poison(int v) { _is_poison = v; }
@@ -484,7 +484,7 @@ void Tp::set_bag_item_height(int v) { _bag_item_height = v; }
 void Tp::set_bag_item_width(int v) { _bag_item_width = v; }
 void Tp::set_bag_height(int v) { _bag_height = v; }
 void Tp::set_bag_width(int v) { _bag_width = v; }
-void Tp::set_rrr58(int v) { _rrr58 = v; }
+void Tp::set_is_rrr37(int v) { _is_rrr37 = v; }
 void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
 void Tp::set_rarity(int v) { _rarity = v; }
 void Tp::set_gfx_is_rrr99(int v) { _gfx_is_rrr99 = v; }
@@ -518,7 +518,7 @@ void Tp::set_is_wall(int v) { _is_wall = v; }
 void Tp::set_is_wall_deco(int v) { _is_wall_deco = v; }
 void Tp::set_is_water(int v) { _is_water = v; }
 void Tp::set_is_water_lover(int v) { _is_water_lover = v; }
-void Tp::set_avoider_of_water(int v) { _avoider_of_water = v; }
+void Tp::set_avoids_water(int v) { _avoids_water = v; }
 void Tp::set_is_weapon(int v) { _is_weapon = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_name(const std::string &v) { _name = v; }

@@ -21,8 +21,8 @@ uint8_t Thing::is_less_preferred_terrain (point p)
 
     int heat = level->heatmap(p);
     if (heat > 1) {
-        if (avoider_of_fire()) {
-            int hate_how_much = avoider_of_fire();
+        if (avoids_fire()) {
+            int hate_how_much = avoids_fire();
             pref += hate_how_much + heat;
         }
     }

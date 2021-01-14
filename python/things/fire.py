@@ -26,7 +26,7 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_movable(True)
-    x.set_avoider_of_water(100)
+    x.set_avoids_water(100)
     x.set_lifespan_dice("1d30+20")
     x.set_light_color("yellow")
     x.set_on_idle_dice_do("1d10+20:fire.spawn()")

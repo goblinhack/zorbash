@@ -9,7 +9,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_gfx_shown_in_bg(True)
     x.set_is_able_to_fall(True)
     x.set_is_deep_water(True)
-    x.set_avoider_of_fire(True)
+    x.set_avoids_fire(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)

@@ -301,8 +301,8 @@ class Tp:
     def set_damage_doubled_from_poison(self, value):
         zx.tp_set_damage_doubled_from_poison(self, value)
 
-    def set_avoider_of_poison(self, value):
-        zx.tp_set_avoider_of_poison(self, value)
+    def set_avoids_poison(self, value):
+        zx.tp_set_avoids_poison(self, value)
 
     def set_is_rrr40(self, value):
         zx.tp_set_is_rrr40(self, value)
@@ -361,8 +361,8 @@ class Tp:
     def set_bag_width(self, value):
         zx.tp_set_bag_width(self, value)
 
-    def set_rrr58(self, value):
-        zx.tp_set_rrr58(self, value)
+    def set_is_rrr37(self, value):
+        zx.tp_set_is_rrr37(self, value)
 
     def set_rarity(self, value):
         zx.tp_set_rarity(self, value)
@@ -487,8 +487,8 @@ class Tp:
     def set_is_acid_lover(self, value):
         zx.tp_set_is_acid_lover(self, value)
 
-    def set_avoider_of_acid(self, value):
-        zx.tp_set_avoider_of_acid(self, value)
+    def set_avoids_acid(self, value):
+        zx.tp_set_avoids_acid(self, value)
 
     def set_is_jelly_parent(self, value):
         zx.tp_set_is_jelly_parent(self, value)
@@ -538,8 +538,8 @@ class Tp:
     def set_is_smoke(self, value):
         zx.tp_set_is_smoke(self, value)
 
-    def set_avoider_of_fire(self, value):
-        zx.tp_set_avoider_of_fire(self, value)
+    def set_avoids_fire(self, value):
+        zx.tp_set_avoids_fire(self, value)
 
     def set_is_treasure(self, value):
         zx.tp_set_is_treasure(self, value)
@@ -631,6 +631,9 @@ class Tp:
     def set_modifier_attack(self, value):
         zx.tp_set_modifier_attack(self, value)
 
+    def set_modifier_constitution(self, value):
+        zx.tp_set_modifier_constitution(self, value)
+
     def set_throw_distance(self, value):
         zx.tp_set_throw_distance(self, value)
 
@@ -661,8 +664,8 @@ class Tp:
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)
 
-    def set_avoider_of_water(self, value):
-        zx.tp_set_avoider_of_water(self, value)
+    def set_avoids_water(self, value):
+        zx.tp_set_avoids_water(self, value)
 
     def set_is_hunger_insatiable(self, value):
         zx.tp_set_is_hunger_insatiable(self, value)
