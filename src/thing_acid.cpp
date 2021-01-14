@@ -22,7 +22,7 @@ void Thing::acid_tick (void)
         return;
     }
 
-    if (!avoider_of_acid()) {
+    if (!avoids_acid()) {
         return;
     }
 

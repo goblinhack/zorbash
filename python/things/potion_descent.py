@@ -19,7 +19,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_combustible(True)
     x.set_damage_doubled_from_fire(True)
     x.set_is_droppable(True)
-    x.set_avoider_of_fire(100)
+    x.set_avoids_fire(100)
     x.set_is_interesting(True)
     x.set_is_item(True)
     x.set_is_item_effect_max_radius(4)

@@ -121,7 +121,7 @@ private:
     int _is_able_to_change_levels {};
     int _is_acid {};
     int _is_acid_lover {};
-    int _avoider_of_acid {};
+    int _avoids_acid {};
     int _is_active {}; // e.g. a monst or player or something movable
     int _attack_eater {};
     int _attack_lunge {};
@@ -154,7 +154,7 @@ private:
     int _is_exit {};
     int _is_explosion {};
     int _is_fire {};
-    int _avoider_of_fire {};
+    int _avoids_fire {};
     int _is_flammable {};
     int _is_floating {};
     int _is_floor {};
@@ -238,7 +238,7 @@ private:
     int _is_rrr36 {};
     int _is_poison_lover {};
     int _damage_doubled_from_poison {};
-    int _avoider_of_poison {};
+    int _avoids_poison {};
     int _is_rrr4 {};
     int _is_rrr40 {};
     int _is_poison {};
@@ -260,7 +260,7 @@ private:
     int _bag_item_width {};
     int _bag_height {};
     int _bag_width {};
-    int _rrr58 {};
+    int _is_rrr37 {};
     int _is_rrr6 {};
     int _is_rrr7 {};
     int _is_rrr8 {};
@@ -284,7 +284,7 @@ private:
     int _is_wall_deco {};
     int _is_water {};
     int _is_water_lover {};
-    int _avoider_of_water {};
+    int _avoids_water {};
     int _is_weapon {};
     int _is_weapon_wielder {};
     int _normal_placement_rules {};
@@ -479,7 +479,7 @@ public:
     int is_able_to_change_levels(void) const;
     int is_acid(void) const;
     int is_acid_lover(void) const;
-    int avoider_of_acid(void) const;
+    int avoids_acid(void) const;
     int is_active(void) const;
     int attack_eater(void) const;
     int attack_lunge(void) const;
@@ -514,7 +514,7 @@ public:
     int is_exit(void) const;
     int is_explosion(void) const;
     int is_fire(void) const;
-    int avoider_of_fire(void) const;
+    int avoids_fire(void) const;
     int is_flammable(void) const;
     int is_floating(void) const;
     int is_floor(void) const;
@@ -595,7 +595,7 @@ public:
     int is_rrr36(void) const;
     int is_poison_lover(void) const;
     int damage_doubled_from_poison(void) const;
-    int avoider_of_poison(void) const;
+    int avoids_poison(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
     int is_poison(void) const;
@@ -617,7 +617,7 @@ public:
     int bag_item_width(void) const;
     int bag_height(void) const;
     int bag_width(void) const;
-    int rrr58(void) const;
+    int is_rrr37(void) const;
     int is_rrr6(void) const;
     int rarity(void) const;
     int gfx_is_rrr99(void) const;
@@ -650,7 +650,7 @@ public:
     int is_wall_deco(void) const;
     int is_water(void) const;
     int is_water_lover(void) const;
-    int avoider_of_water(void) const;
+    int avoids_water(void) const;
     int is_weapon(void) const;
     int normal_placement_rules(void) const;
     int stats01(void) const;
@@ -717,7 +717,7 @@ public:
     void set_is_able_to_change_levels(int);
     void set_is_acid(int);
     void set_is_acid_lover(int);
-    void set_avoider_of_acid(int);
+    void set_avoids_acid(int);
     void set_is_active(int);
     void set_attack_eater(int);
     void set_attack_lunge(int);
@@ -752,7 +752,7 @@ public:
     void set_is_exit(int);
     void set_is_explosion(int);
     void set_is_fire(int);
-    void set_avoider_of_fire(int);
+    void set_avoids_fire(int);
     void set_is_flammable(int);
     void set_is_floating(int);
     void set_is_floor(int);
@@ -834,7 +834,7 @@ public:
     void set_is_rrr36(int);
     void set_is_poison_lover(int);
     void set_damage_doubled_from_poison(int);
-    void set_avoider_of_poison(int);
+    void set_avoids_poison(int);
     void set_is_rrr4(int);
     void set_is_rrr40(int);
     void set_is_poison(int);
@@ -856,7 +856,7 @@ public:
     void set_bag_item_width(int);
     void set_bag_height(int);
     void set_bag_width(int);
-    void set_rrr58(int);
+    void set_is_rrr37(int);
     void set_is_rrr6(int);
     void set_rarity(int);
     void set_gfx_is_rrr99(int);
@@ -889,7 +889,7 @@ public:
     void set_is_wall_deco(int);
     void set_is_water(int);
     void set_is_water_lover(int);
-    void set_avoider_of_water(int);
+    void set_avoids_water(int);
     void set_is_weapon(int);
     void set_light_color(const std::string &);
     void set_name(const std::string &);
