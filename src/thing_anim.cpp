@@ -135,7 +135,7 @@ if (is_blood()) { log("Choose tiles hp %d "
                       "is_resurrecting %d "
                       "is_sleeping %d "
                       "is_starving %d ",
-                      get_stats_health(),
+                      get_health(),
                       is_attached,
                       is_being_destroyed,
                       is_blitted,
@@ -194,8 +194,8 @@ if (is_blood()) { log("Tile %s moving %d up %d down %d left %d right %d dir none
                     continue;
                 }
 
-                auto health_max = get_stats_health_max();
-                auto health = get_stats_health();
+                auto health_max = get_health_max();
+                auto health = get_health();
 
                 if (tpp->internal_has_hp_anim()) {
                     if (health < health_max / 4) {
@@ -378,7 +378,7 @@ if (is_blood()) { log(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 "is_sleeping %d "
                 "is_starving %d ",
                 tries, size, tile_name(tile).c_str(),
-                get_stats_health(),
+                get_health(),
                 (bool)is_attached,
                 (bool)is_being_destroyed,
                 (bool)is_blitted,

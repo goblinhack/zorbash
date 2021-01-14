@@ -39,10 +39,10 @@ const int Tp::get_damage_poison(void) const { return _damage_poison_dice.roll();
 const std::string& Tp::get_damage_poison_dice_str(void) const { return _damage_poison_dice_str; }
 void Tp::set_damage_poison_dice(const std::string &v) { _damage_poison_dice = v; _damage_poison_dice_str = v; }
 
-const Dice& Tp::get_stats_health_initial_dice(void) const { return _stats_health_initial_dice; }
-const int Tp::get_stats_health_initial(void) const { return _stats_health_initial_dice.roll(); }
-const std::string& Tp::get_stats_health_initial_dice_str(void) const { return _stats_health_initial_dice_str; }
-void Tp::set_stats_health_initial_dice(const std::string &v) { _stats_health_initial_dice = v; _stats_health_initial_dice_str = v; }
+const Dice& Tp::get_health_initial_dice(void) const { return _health_initial_dice; }
+const int Tp::get_health_initial(void) const { return _health_initial_dice.roll(); }
+const std::string& Tp::get_health_initial_dice_str(void) const { return _health_initial_dice_str; }
+void Tp::set_health_initial_dice(const std::string &v) { _health_initial_dice = v; _health_initial_dice_str = v; }
 
 const Dice& Tp::gold_value_dice(void) const { return _gold_value_dice; }
 const int Tp::cash(void) const { return _gold_value_dice.roll(); }
@@ -110,14 +110,14 @@ int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_acid(void) const { return _is_acid; }
 int Tp::is_acid_lover(void) const { return _is_acid_lover; }
-int Tp::is_acid_avoider(void) const { return _is_acid_avoider; }
+int Tp::avoider_of_acid(void) const { return _avoider_of_acid; }
 int Tp::is_active(void) const { return _is_active; }
-int Tp::is_attack_eater(void) const { return _is_attack_eater; }
-int Tp::is_attack_lunge(void) const { return _is_attack_lunge; }
-int Tp::is_attack_shove(void) const { return _is_attack_shove; }
-int Tp::is_attack_shove_chance_d1000(void) const { return _is_attack_shove_chance_d1000; }
-int Tp::is_attackable_by_monst(void) const { return _is_attackable_by_monst; }
-int Tp::is_attackable_by_player(void) const { return _is_attackable_by_player; }
+int Tp::attack_eater(void) const { return _attack_eater; }
+int Tp::attack_lunge(void) const { return _attack_lunge; }
+int Tp::attack_shove(void) const { return _attack_shove; }
+int Tp::attack_shove_chance_d1000(void) const { return _attack_shove_chance_d1000; }
+int Tp::attackable_by_monst(void) const { return _attackable_by_monst; }
+int Tp::attackable_by_player(void) const { return _attackable_by_player; }
 int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
@@ -135,16 +135,16 @@ int Tp::is_dead_on_shove(void) const { return _is_dead_on_shove; }
 int Tp::is_deep_water(void) const { return _is_deep_water; }
 int Tp::is_dirt(void) const { return _is_dirt; }
 int Tp::is_door(void) const { return _is_door; }
-int Tp::is_double_damage_from_acid(void) const { return _is_double_damage_from_acid; }
-int Tp::is_double_damage_from_fire(void) const { return _is_double_damage_from_fire; }
-int Tp::is_double_damage_from_water(void) const { return _is_double_damage_from_water; }
+int Tp::damage_doubled_from_acid(void) const { return _damage_doubled_from_acid; }
+int Tp::damage_doubled_from_fire(void) const { return _damage_doubled_from_fire; }
+int Tp::damage_doubled_from_water(void) const { return _damage_doubled_from_water; }
 int Tp::is_droppable(void) const { return _is_droppable; }
 int Tp::is_entrance(void) const { return _is_entrance; }
 int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_exit(void) const { return _is_exit; }
 int Tp::is_explosion(void) const { return _is_explosion; }
 int Tp::is_fire(void) const { return _is_fire; }
-int Tp::is_fire_avoider(void) const { return _is_fire_avoider; }
+int Tp::avoider_of_fire(void) const { return _avoider_of_fire; }
 int Tp::is_flammable(void) const { return _is_flammable; }
 int Tp::is_floating(void) const { return _is_floating; }
 int Tp::is_floor(void) const { return _is_floor; }
@@ -224,8 +224,8 @@ int Tp::is_rrr34(void) const { return _is_rrr34; }
 int Tp::is_rrr35(void) const { return _is_rrr35; }
 int Tp::is_rrr36(void) const { return _is_rrr36; }
 int Tp::is_poison_lover(void) const { return _is_poison_lover; }
-int Tp::is_double_damage_from_poison(void) const { return _is_double_damage_from_poison; }
-int Tp::is_poison_avoider(void) const { return _is_poison_avoider; }
+int Tp::damage_doubled_from_poison(void) const { return _damage_doubled_from_poison; }
+int Tp::avoider_of_poison(void) const { return _avoider_of_poison; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr40(void) const { return _is_rrr40; }
 int Tp::is_poison(void) const { return _is_poison; }
@@ -234,7 +234,7 @@ int Tp::is_used_automatically_when_selected(void) const { return _is_used_automa
 int Tp::is_thrown_automatically_when_selected(void) const { return _is_thrown_automatically_when_selected; }
 int Tp::is_extreme_hazard(void) const { return _is_extreme_hazard; }
 int Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
-int Tp::is_attack_meat(void) const { return _is_attack_meat; }
+int Tp::attack_meat(void) const { return _attack_meat; }
 int Tp::is_food_eater(void) const { return _is_food_eater; }
 int Tp::is_item_effect_max_radius(void) const { return _is_item_effect_max_radius; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
@@ -281,7 +281,7 @@ int Tp::is_wall(void) const { return _is_wall; }
 int Tp::is_wall_deco(void) const { return _is_wall_deco; }
 int Tp::is_water(void) const { return _is_water; }
 int Tp::is_water_lover(void) const { return _is_water_lover; }
-int Tp::is_water_avoider(void) const { return _is_water_avoider; }
+int Tp::avoider_of_water(void) const { return _avoider_of_water; }
 int Tp::is_weapon(void) const { return _is_weapon; }
 int Tp::normal_placement_rules(void) const { return _normal_placement_rules; }
 int Tp::stats01(void) const { return _stats01; }
@@ -296,18 +296,16 @@ int Tp::stats09(void) const { return _stats09; }
 int Tp::stats10(void) const { return _stats10; }
 int Tp::stats11(void) const { return _stats11; }
 int Tp::stats12(void) const { return _stats12; }
-int Tp::stats13(void) const { return _stats13; }
-int Tp::stats14(void) const { return _stats14; }
-int Tp::stats_constitution(void) const { return _stats_constitution; }
-int Tp::stats_attack(void) const { return _stats_attack; }
+int Tp::modifier_constitution(void) const { return _modifier_constitution; }
+int Tp::modifier_attack(void) const { return _modifier_attack; }
 int Tp::stats17(void) const { return _stats17; }
-int Tp::stats_throw_distance(void) const { return _stats_throw_distance; }
-int Tp::stats_stamina(void) const { return _stats_stamina; }
-int Tp::stats_defence(void) const { return _stats_defence; }
-int Tp::stats_health_hunger_pct(void) const { return _stats_health_hunger_pct; }
-int Tp::stats_health_starving_pct(void) const { return _stats_health_starving_pct; }
-int Tp::stats_move_speed_ms(void) const { return _stats_move_speed_ms; }
-int Tp::stats_strength(void) const { return _stats_strength; }
+int Tp::throw_distance(void) const { return _throw_distance; }
+int Tp::stamina(void) const { return _stamina; }
+int Tp::modifier_defence(void) const { return _modifier_defence; }
+int Tp::health_hunger_pct(void) const { return _health_hunger_pct; }
+int Tp::health_starving_pct(void) const { return _health_starving_pct; }
+int Tp::move_speed_ms(void) const { return _move_speed_ms; }
+int Tp::modifier_strength(void) const { return _modifier_strength; }
 int Tp::tick_catches_up_on_attack(void) const { return _tick_catches_up_on_attack; }
 int Tp::tick_rate_tenths(void) const { return _tick_rate_tenths; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
@@ -349,14 +347,14 @@ void Tp::set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
 void Tp::set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
 void Tp::set_is_acid(int v) { _is_acid = v; }
 void Tp::set_is_acid_lover(int v) { _is_acid_lover = v; }
-void Tp::set_is_acid_avoider(int v) { _is_acid_avoider = v; }
+void Tp::set_avoider_of_acid(int v) { _avoider_of_acid = v; }
 void Tp::set_is_active(int v) { _is_active = v; }
-void Tp::set_is_attack_eater(int v) { _is_attack_eater = v; }
-void Tp::set_is_attack_lunge(int v) { _is_attack_lunge = v; }
-void Tp::set_is_attack_shove(int v) { _is_attack_shove = v; }
-void Tp::set_is_attack_shove_chance_d1000(int v) { _is_attack_shove_chance_d1000 = v; }
-void Tp::set_is_attackable_by_monst(int v) { _is_attackable_by_monst = v; }
-void Tp::set_is_attackable_by_player(int v) { _is_attackable_by_player = v; }
+void Tp::set_attack_eater(int v) { _attack_eater = v; }
+void Tp::set_attack_lunge(int v) { _attack_lunge = v; }
+void Tp::set_attack_shove(int v) { _attack_shove = v; }
+void Tp::set_attack_shove_chance_d1000(int v) { _attack_shove_chance_d1000 = v; }
+void Tp::set_attackable_by_monst(int v) { _attackable_by_monst = v; }
+void Tp::set_attackable_by_player(int v) { _attackable_by_player = v; }
 void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
@@ -374,16 +372,16 @@ void Tp::set_is_dead_on_shove(int v) { _is_dead_on_shove = v; }
 void Tp::set_is_deep_water(int v) { _is_deep_water = v; }
 void Tp::set_is_dirt(int v) { _is_dirt = v; }
 void Tp::set_is_door(int v) { _is_door = v; }
-void Tp::set_is_double_damage_from_acid(int v) { _is_double_damage_from_acid = v; }
-void Tp::set_is_double_damage_from_fire(int v) { _is_double_damage_from_fire = v; }
-void Tp::set_is_double_damage_from_water(int v) { _is_double_damage_from_water = v; }
+void Tp::set_damage_doubled_from_acid(int v) { _damage_doubled_from_acid = v; }
+void Tp::set_damage_doubled_from_fire(int v) { _damage_doubled_from_fire = v; }
+void Tp::set_damage_doubled_from_water(int v) { _damage_doubled_from_water = v; }
 void Tp::set_is_droppable(int v) { _is_droppable = v; }
 void Tp::set_is_entrance(int v) { _is_entrance = v; }
 void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
 void Tp::set_is_exit(int v) { _is_exit = v; }
 void Tp::set_is_explosion(int v) { _is_explosion = v; }
 void Tp::set_is_fire(int v) { _is_fire = v; }
-void Tp::set_is_fire_avoider(int v) { _is_fire_avoider = v; }
+void Tp::set_avoider_of_fire(int v) { _avoider_of_fire = v; }
 void Tp::set_is_flammable(int v) { _is_flammable = v; }
 void Tp::set_is_floating(int v) { _is_floating = v; }
 void Tp::set_is_floor(int v) { _is_floor = v; }
@@ -463,8 +461,8 @@ void Tp::set_is_rrr34(int v) { _is_rrr34 = v; }
 void Tp::set_is_rrr35(int v) { _is_rrr35 = v; }
 void Tp::set_is_rrr36(int v) { _is_rrr36 = v; }
 void Tp::set_is_poison_lover(int v) { _is_poison_lover = v; }
-void Tp::set_is_double_damage_from_poison(int v) { _is_double_damage_from_poison = v; }
-void Tp::set_is_poison_avoider(int v) { _is_poison_avoider = v; }
+void Tp::set_damage_doubled_from_poison(int v) { _damage_doubled_from_poison = v; }
+void Tp::set_avoider_of_poison(int v) { _avoider_of_poison = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr40(int v) { _is_rrr40 = v; }
 void Tp::set_is_poison(int v) { _is_poison = v; }
@@ -473,7 +471,7 @@ void Tp::set_is_used_automatically_when_selected(int v) { _is_used_automatically
 void Tp::set_is_thrown_automatically_when_selected(int v) { _is_thrown_automatically_when_selected = v; }
 void Tp::set_is_extreme_hazard(int v) { _is_extreme_hazard = v; }
 void Tp::set_is_auto_collect_item(int v) { _is_auto_collect_item = v; }
-void Tp::set_is_attack_meat(int v) { _is_attack_meat = v; }
+void Tp::set_attack_meat(int v) { _attack_meat = v; }
 void Tp::set_is_food_eater(int v) { _is_food_eater = v; }
 void Tp::set_is_item_effect_max_radius(int v) { _is_item_effect_max_radius = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
@@ -520,7 +518,7 @@ void Tp::set_is_wall(int v) { _is_wall = v; }
 void Tp::set_is_wall_deco(int v) { _is_wall_deco = v; }
 void Tp::set_is_water(int v) { _is_water = v; }
 void Tp::set_is_water_lover(int v) { _is_water_lover = v; }
-void Tp::set_is_water_avoider(int v) { _is_water_avoider = v; }
+void Tp::set_avoider_of_water(int v) { _avoider_of_water = v; }
 void Tp::set_is_weapon(int v) { _is_weapon = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_name(const std::string &v) { _name = v; }
@@ -541,18 +539,16 @@ void Tp::set_stats09(int v) { _stats09 = v; }
 void Tp::set_stats10(int v) { _stats10 = v; }
 void Tp::set_stats11(int v) { _stats11 = v; }
 void Tp::set_stats12(int v) { _stats12 = v; }
-void Tp::set_stats13(int v) { _stats13 = v; }
-void Tp::set_stats14(int v) { _stats14 = v; }
-void Tp::set_stats_constitution(int v) { _stats_constitution = v; }
-void Tp::set_stats_attack(int v) { _stats_attack = v; }
+void Tp::set_modifier_constitution(int v) { _modifier_constitution = v; }
+void Tp::set_modifier_attack(int v) { _modifier_attack = v; }
 void Tp::set_stats17(int v) { _stats17 = v; }
-void Tp::set_stats_throw_distance(int v) { _stats_throw_distance = v; }
-void Tp::set_stats_stamina(int v) { _stats_stamina = v; }
-void Tp::set_stats_defence(int v) { _stats_defence = v; }
-void Tp::set_stats_health_hunger_pct(int v) { _stats_health_hunger_pct = v; }
-void Tp::set_stats_health_starving_pct(int v) { _stats_health_starving_pct = v; }
-void Tp::set_stats_move_speed_ms(int v) { _stats_move_speed_ms = v; }
-void Tp::set_stats_strength(int v) { _stats_strength = v; }
+void Tp::set_throw_distance(int v) { _throw_distance = v; }
+void Tp::set_stamina(int v) { _stamina = v; }
+void Tp::set_modifier_defence(int v) { _modifier_defence = v; }
+void Tp::set_health_hunger_pct(int v) { _health_hunger_pct = v; }
+void Tp::set_health_starving_pct(int v) { _health_starving_pct = v; }
+void Tp::set_move_speed_ms(int v) { _move_speed_ms = v; }
+void Tp::set_modifier_strength(int v) { _modifier_strength = v; }
 void Tp::set_str1(const std::string &v) { _str1 = v; }
 void Tp::set_str2(const std::string &v) { _str2 = v; }
 void Tp::set_str3(const std::string &v) { _str3 = v; }

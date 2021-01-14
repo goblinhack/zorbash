@@ -11,7 +11,7 @@
 
 void Thing::water_tick (void)
 {_
-    if (is_water_avoider()) {
+    if (avoider_of_water()) {
         if (level->is_water(mid_at.x, mid_at.y)) {
             dead("A watery end");
             if (is_fire()) {

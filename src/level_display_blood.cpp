@@ -16,7 +16,7 @@ void Level::display_blood (void)
         return;
     }
 
-    float pct = player->get_stats_health_pct();
+    float pct = player->get_health_pct();
     if (pct > THING_HEALTH_BLOODIED_PCT1) {
         return;
     }

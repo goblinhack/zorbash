@@ -11,12 +11,12 @@ int Thing::get_danger_level (void)
 {_
     int danger_level = 0;
 
-    danger_level = get_stats_health() / 10;
+    danger_level = get_health() / 10;
 
     if (is_resurrectable()) {
         danger_level *= 2;
     }
-    if (is_attack_shove()) {
+    if (attack_shove()) {
         danger_level ++;
     }
     if (is_carrying_item()) {

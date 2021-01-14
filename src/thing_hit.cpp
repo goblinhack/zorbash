@@ -58,37 +58,37 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (is_fire_avoider()) {
+    if (avoider_of_fire()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
-            if (is_double_damage_from_fire()) {
+            if (damage_doubled_from_fire()) {
                 damage *= 2;
                 log("Double damage from fire");
             }
         }
     }
 
-    if (is_acid_avoider()) {
+    if (avoider_of_acid()) {
         if (real_hitter->is_acid()) {
-            if (is_double_damage_from_acid()) {
+            if (damage_doubled_from_acid()) {
                 damage *= 2;
                 log("Double damage from acid");
             }
         }
     }
 
-    if (is_poison_avoider()) {
+    if (avoider_of_poison()) {
         if (real_hitter->is_poison()) {
-            if (is_double_damage_from_poison()) {
+            if (damage_doubled_from_poison()) {
                 damage *= 2;
                 log("Double damage from poison");
             }
         }
     }
 
-    if (is_water_avoider()) {
+    if (avoider_of_water()) {
         if (real_hitter->is_water()) {
-            if (is_double_damage_from_water()) {
+            if (damage_doubled_from_water()) {
                 damage *= 2;
                 log("Double damage from water");
             }
@@ -189,9 +189,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    auto h = decr_stats_health(damage);
+    auto h = decr_health(damage);
     if (h <= 0) {
-        h = set_stats_health(0);
+        h = set_health(0);
 
         //
         // Record who dun it.

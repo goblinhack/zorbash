@@ -29,9 +29,9 @@ void Thing::lava_tick (void)
         return;
     }
 
-    if (!is_fire_avoider()) {
+    if (!avoider_of_fire()) {
         if (g_opt_debug3) {
-            log("No, not a fire hater");
+            log("No, not a fire avoider");
         }
         return;
     }

@@ -533,7 +533,7 @@ static void thing_possible_init (void)
 //
 // Find the thing with the highest priority to hit.
 //
-bool Thing::collision_find_best_target (bool *target_attacked,
+bool Thing::collision_find_best_target (bool *target_modifier_attacked,
                                         bool *target_overlaps)
 {_
     bool ret = false;
@@ -542,7 +542,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
 
     log("Collided with or can attack or eat something, find the best");
 _
-    *target_attacked = false;
+    *target_modifier_attacked = false;
     *target_overlaps = false;
 
     for (auto& cand : thing_colls) {
@@ -620,7 +620,7 @@ _
         }
 
         if (attack(it)) {
-            *target_attacked = true;
+            *target_modifier_attacked = true;
             ret = true;
         } else {
             if (is_loggable_for_unimportant_stuff()) {
@@ -1187,7 +1187,7 @@ _
 }
 
 bool Thing::collision_check_and_handle (fpoint future_pos,
-                                        bool *target_attacked,
+                                        bool *target_modifier_attacked,
                                         bool *target_overlaps,
                                         float radius)
 {_
@@ -1252,7 +1252,7 @@ _
         }
     }
 
-    return (collision_find_best_target(target_attacked, target_overlaps));
+    return (collision_find_best_target(target_modifier_attacked, target_overlaps));
 }
 
 //
@@ -1260,30 +1260,30 @@ _
 // position.
 //
 bool Thing::collision_check_and_handle_nearby (fpoint future_pos,
-                                               bool *target_attacked,
+                                               bool *target_modifier_attacked,
                                                bool *target_overlaps)
 {
     return (collision_check_and_handle(future_pos,
-                                       target_attacked,
+                                       target_modifier_attacked,
                                        target_overlaps,
                                        thing_collision_tiles));
 }
 
 bool Thing::collision_check_and_handle_at (fpoint future_pos,
-                                           bool *target_attacked,
+                                           bool *target_modifier_attacked,
                                            bool *target_overlaps)
 {
     return (collision_check_and_handle(future_pos,
-                                       target_attacked,
+                                       target_modifier_attacked,
                                        target_overlaps,
                                        0.0));
 }
 
-bool Thing::collision_check_and_handle_at (bool *target_attacked,
+bool Thing::collision_check_and_handle_at (bool *target_modifier_attacked,
                                            bool *target_overlaps)
 {
     return (collision_check_and_handle_at(mid_at,
-                                          target_attacked, target_overlaps));
+                                          target_modifier_attacked, target_overlaps));
 }
 
 

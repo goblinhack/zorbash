@@ -31,9 +31,9 @@ const Dice& Thing::get_damage_poison_dice (void) const {_ return (tp()->get_dama
 const std::string& Thing::get_damage_poison_dice_str (void) const {_ return (tp()->get_damage_poison_dice_str()); }
 int Thing::get_damage_poison (void) const {_ return (tp()->get_damage_poison_dice().roll()); }
 
-const Dice& Thing::get_stats_health_initial_dice (void) const {_ return (tp()->get_stats_health_initial_dice()); }
-const std::string& Thing::get_stats_health_initial_dice_str (void) const {_ return (tp()->get_stats_health_initial_dice_str()); }
-int Thing::get_stats_health_initial (void) const {_ return (tp()->get_stats_health_initial_dice().roll()); }
+const Dice& Thing::get_health_initial_dice (void) const {_ return (tp()->get_health_initial_dice()); }
+const std::string& Thing::get_health_initial_dice_str (void) const {_ return (tp()->get_health_initial_dice_str()); }
+int Thing::get_health_initial (void) const {_ return (tp()->get_health_initial_dice().roll()); }
 
 const Dice& Thing::get_gold_value_dice (void) const {_ return (tp()->gold_value_dice()); }
 const std::string& Thing::get_gold_value_dice_str (void) const {_ return (tp()->gold_value_dice_str()); }
@@ -315,7 +315,7 @@ int Thing::gfx_small_shadow_caster(void) const
 
 int Thing::health_hunger_pct(void) const
 {_
-    return (tp()->stats_health_hunger_pct());
+    return (tp()->health_hunger_pct());
 }
 
 int Thing::hunger_clock_freq_ms(void) const
@@ -330,7 +330,7 @@ int Thing::is_hunger_insatiable(void) const
 
 int Thing::health_starving_pct(void) const
 {_
-    return (tp()->stats_health_starving_pct());
+    return (tp()->health_starving_pct());
 }
 
 int Thing::is_active(void) const
@@ -338,9 +338,9 @@ int Thing::is_active(void) const
     return (tp()->is_active());
 }
 
-int Thing::is_attackable_by_monst(void) const
+int Thing::attackable_by_monst(void) const
 {_
-    return (tp()->is_attackable_by_monst());
+    return (tp()->attackable_by_monst());
 }
 
 int Thing::is_bleeder(void) const
@@ -673,14 +673,14 @@ int Thing::is_poison_lover(void) const
     return (tp()->is_poison_lover());
 }
 
-int Thing::is_double_damage_from_poison(void) const
+int Thing::damage_doubled_from_poison(void) const
 {_
-    return (tp()->is_double_damage_from_poison());
+    return (tp()->damage_doubled_from_poison());
 }
 
-int Thing::is_poison_avoider(void) const
+int Thing::avoider_of_poison(void) const
 {_
-    return (tp()->is_poison_avoider());
+    return (tp()->avoider_of_poison());
 }
 
 int Thing::is_rrr40(void) const
@@ -718,9 +718,9 @@ int Thing::is_auto_collect_item(void) const
     return (tp()->is_auto_collect_item());
 }
 
-int Thing::is_attack_meat(void) const
+int Thing::attack_meat(void) const
 {_
-    return (tp()->is_attack_meat());
+    return (tp()->attack_meat());
 }
 
 int Thing::is_food_eater(void) const
@@ -836,9 +836,9 @@ int Thing::is_item(void) const
     return (tp()->is_item());
 }
 
-int Thing::is_attackable_by_player(void) const
+int Thing::attackable_by_player(void) const
 {_
-    return (tp()->is_attackable_by_player());
+    return (tp()->attackable_by_player());
 }
 
 int Thing::is_item_eater(void) const
@@ -951,14 +951,14 @@ int Thing::is_floating(void) const
     return (tp()->is_floating());
 }
 
-int Thing::is_double_damage_from_acid(void) const
+int Thing::damage_doubled_from_acid(void) const
 {_
-    return (tp()->is_double_damage_from_acid());
+    return (tp()->damage_doubled_from_acid());
 }
 
-int Thing::is_double_damage_from_water(void) const
+int Thing::damage_doubled_from_water(void) const
 {_
-    return (tp()->is_double_damage_from_water());
+    return (tp()->damage_doubled_from_water());
 }
 
 int Thing::is_generator(void) const
@@ -1021,14 +1021,14 @@ int Thing::is_smoke(void) const
     return (tp()->is_smoke());
 }
 
-int Thing::is_fire_avoider(void) const
+int Thing::avoider_of_fire(void) const
 {_
-    return (tp()->is_fire_avoider());
+    return (tp()->avoider_of_fire());
 }
 
-int Thing::is_acid_avoider(void) const
+int Thing::avoider_of_acid(void) const
 {_
-    return (tp()->is_acid_avoider());
+    return (tp()->avoider_of_acid());
 }
 
 int Thing::is_treasure(void) const
@@ -1051,9 +1051,9 @@ int Thing::is_intelligent(void) const
     return (tp()->is_intelligent());
 }
 
-int Thing::is_double_damage_from_fire(void) const
+int Thing::damage_doubled_from_fire(void) const
 {_
-    return (tp()->is_double_damage_from_fire());
+    return (tp()->damage_doubled_from_fire());
 }
 
 int Thing::is_fire(void) const
@@ -1101,9 +1101,9 @@ int Thing::gfx_on_fire_anim(void) const
     return (tp()->gfx_on_fire_anim());
 }
 
-int Thing::is_attack_shove_chance_d1000(void) const
+int Thing::attack_shove_chance_d1000(void) const
 {_
-    return (tp()->is_attack_shove_chance_d1000());
+    return (tp()->attack_shove_chance_d1000());
 }
 
 int Thing::is_jumper_chance_d1000(void) const
@@ -1121,9 +1121,9 @@ int Thing::is_hazard(void) const
     return (tp()->is_hazard());
 }
 
-int Thing::is_attack_shove(void) const
+int Thing::attack_shove(void) const
 {_
-    return (tp()->is_attack_shove());
+    return (tp()->attack_shove());
 }
 
 int Thing::is_shovable(void) const
@@ -1156,14 +1156,14 @@ int Thing::is_msg(void) const
     return (tp()->is_msg());
 }
 
-int Thing::is_attack_lunge(void) const
+int Thing::attack_lunge(void) const
 {_
-    return (tp()->is_attack_lunge());
+    return (tp()->attack_lunge());
 }
 
 int Thing::defence(void) const
 {_
-    return (tp()->stats_defence());
+    return (tp()->modifier_defence());
 }
 
 int Thing::is_secret_door(void) const
@@ -1191,9 +1191,9 @@ int Thing::gfx_dead_anim(void) const
     return (tp()->gfx_dead_anim());
 }
 
-int Thing::is_attack_eater(void) const
+int Thing::attack_eater(void) const
 {_
-    return (tp()->is_attack_eater());
+    return (tp()->attack_eater());
 }
 
 int Thing::is_jumper_distance(void) const
@@ -1231,9 +1231,9 @@ int Thing::is_water_lover(void) const
     return (tp()->is_water_lover());
 }
 
-int Thing::is_water_avoider(void) const
+int Thing::avoider_of_water(void) const
 {_
-    return (tp()->is_water_avoider());
+    return (tp()->avoider_of_water());
 }
 
 int Thing::is_weapon(void) const
@@ -1694,62 +1694,62 @@ uint32_t Thing::incr_tick (void)
 ////////////////////////////////////////////////////////////////////////////
 // health
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_health (void) const
+int Thing::get_health (void) const
 {_
     int v = 0;
     if (monstp) {
         verify(monstp);
-        v = monstp->stats_health;
+        v = monstp->health;
     }
     auto owner = get_immediate_owner();
     if (owner) {
         auto owner = get_immediate_owner();
-        return v + owner->get_stats_health();
+        return v + owner->get_health();
     }
     return v;
 }
 
-int Thing::set_stats_health (int v)
+int Thing::set_health (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health = v);
+    auto n = (monstp->health = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_health (int v)
+int Thing::decr_health (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health -= v);
+    auto n = (monstp->health -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_health (int v)
+int Thing::incr_health (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health += v);
+    auto n = (monstp->health += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_health (void)
+int Thing::decr_health (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health--);
+    auto n = (monstp->health--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_health (void)
+int Thing::incr_health (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health++);
+    auto n = (monstp->health++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -1757,57 +1757,57 @@ int Thing::incr_stats_health (void)
 ////////////////////////////////////////////////////////////////////////////
 // health_max
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_health_max (void) const
+int Thing::get_health_max (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_health_max);
+        return (monstp->health_max);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats_health_max (int v)
+int Thing::set_health_max (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health_max = v);
+    auto n = (monstp->health_max = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_health_max (int v)
+int Thing::decr_health_max (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health_max -= v);
+    auto n = (monstp->health_max -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_health_max (int v)
+int Thing::incr_health_max (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health_max += v);
+    auto n = (monstp->health_max += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_health_max (void)
+int Thing::decr_health_max (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health_max--);
+    auto n = (monstp->health_max--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_health_max (void)
+int Thing::incr_health_max (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_health_max++);
+    auto n = (monstp->health_max++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -1815,68 +1815,68 @@ int Thing::incr_stats_health_max (void)
 ////////////////////////////////////////////////////////////////////////////
 // defence
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_defence (void) const
+int Thing::get_modifier_defence (void) const
 {_
     int v = 0;
     if (monstp) {
         verify(monstp);
-        v = monstp->stats_defence;
+        v = monstp->modifier_defence;
     }
     auto owner = get_immediate_owner();
     if (owner) {
         auto owner = get_immediate_owner();
-        return v + owner->get_stats_defence();
+        return v + owner->get_modifier_defence();
     }
     return v;
 }
 
-int Thing::set_stats_defence (int v)
+int Thing::set_modifier_defence (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence = v);
+    auto n = (monstp->modifier_defence = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_defence (int v)
+int Thing::decr_modifier_defence (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence -= v);
-    if (monstp->stats_defence < 0) {
-        monstp->stats_defence = 0;
+    auto n = (monstp->modifier_defence -= v);
+    if (monstp->modifier_defence < 0) {
+        monstp->modifier_defence = 0;
     }
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_defence (int v)
+int Thing::incr_modifier_defence (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence += v);
+    auto n = (monstp->modifier_defence += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_defence (void)
+int Thing::decr_modifier_defence (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence--);
-    if (monstp->stats_defence < 0) {
-        monstp->stats_defence = 0;
+    auto n = (monstp->modifier_defence--);
+    if (monstp->modifier_defence < 0) {
+        monstp->modifier_defence = 0;
     }
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_defence (void)
+int Thing::incr_modifier_defence (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_defence++);
+    auto n = (monstp->modifier_defence++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -1942,57 +1942,57 @@ int Thing::incr_stats_stats19 (void)
 ////////////////////////////////////////////////////////////////////////////
 // stamina_max
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_stamina_max (void) const
+int Thing::get_stamina_max (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_stamina_max);
+        return (monstp->stamina_max);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats_stamina_max (int v)
+int Thing::set_stamina_max (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina_max = v);
+    auto n = (monstp->stamina_max = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_stamina_max (int v)
+int Thing::decr_stamina_max (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina_max -= v);
+    auto n = (monstp->stamina_max -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_stamina_max (int v)
+int Thing::incr_stamina_max (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina_max += v);
+    auto n = (monstp->stamina_max += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_stamina_max (void)
+int Thing::decr_stamina_max (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina_max--);
+    auto n = (monstp->stamina_max--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_stamina_max (void)
+int Thing::incr_stamina_max (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina_max++);
+    auto n = (monstp->stamina_max++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -2810,233 +2810,117 @@ int Thing::incr_stats12 (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats13
+// modifier_constitution
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats13 (void) const
+int Thing::get_modifier_constitution (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats13);
+        return (monstp->modifier_constitution);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats13 (int v)
+int Thing::set_modifier_constitution (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats13 = v);
+    auto n = (monstp->modifier_constitution = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats13 (int v)
+int Thing::decr_modifier_constitution (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats13 -= v);
+    auto n = (monstp->modifier_constitution -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats13 (int v)
+int Thing::incr_modifier_constitution (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats13 += v);
+    auto n = (monstp->modifier_constitution += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats13 (void)
+int Thing::decr_modifier_constitution (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats13--);
+    auto n = (monstp->modifier_constitution--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats13 (void)
+int Thing::incr_modifier_constitution (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats13++);
+    auto n = (monstp->modifier_constitution++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats14
+// attack
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats14 (void) const
+int Thing::get_modifier_attack (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats14);
+        return (monstp->attack);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats14 (int v)
+int Thing::set_modifier_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats14 = v);
+    auto n = (monstp->attack = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats14 (int v)
+int Thing::decr_modifier_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats14 -= v);
+    auto n = (monstp->attack -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats14 (int v)
+int Thing::incr_modifier_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats14 += v);
+    auto n = (monstp->attack += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats14 (void)
+int Thing::decr_modifier_attack (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats14--);
+    auto n = (monstp->attack--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats14 (void)
+int Thing::incr_modifier_attack (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats14++);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// stats_constitution
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_constitution (void) const
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->stats_constitution);
-    } else {
-        return (0);
-    }
-}
-
-int Thing::set_stats_constitution (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_constitution = v);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-int Thing::decr_stats_constitution (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_constitution -= v);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-int Thing::incr_stats_constitution (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_constitution += v);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-int Thing::decr_stats_constitution (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_constitution--);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-int Thing::incr_stats_constitution (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_constitution++);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// stats_attack
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_attack (void) const
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->stats_attack);
-    } else {
-        return (0);
-    }
-}
-
-int Thing::set_stats_attack (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack = v);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-int Thing::decr_stats_attack (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack -= v);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-int Thing::incr_stats_attack (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack += v);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-int Thing::decr_stats_attack (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack--);
-    if (is_player()) { wid_rightbar_init(); }
-    return (n);
-}
-
-int Thing::incr_stats_attack (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack++);
+    auto n = (monstp->attack++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -3100,186 +2984,186 @@ int Thing::incr_stats17 (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats_throw_distance
+// throw_distance
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_throw_distance (void) const
+int Thing::get_throw_distance (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_throw_distance);
+        return (monstp->throw_distance);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats_throw_distance (int v)
+int Thing::set_throw_distance (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_throw_distance = v);
+    auto n = (monstp->throw_distance = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_throw_distance (int v)
+int Thing::decr_throw_distance (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_throw_distance -= v);
+    auto n = (monstp->throw_distance -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_throw_distance (int v)
+int Thing::incr_throw_distance (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_throw_distance += v);
+    auto n = (monstp->throw_distance += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_throw_distance (void)
+int Thing::decr_throw_distance (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_throw_distance--);
+    auto n = (monstp->throw_distance--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_throw_distance (void)
+int Thing::incr_throw_distance (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_throw_distance++);
+    auto n = (monstp->throw_distance++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats_stamina
+// stamina
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_stamina (void) const
+int Thing::get_stamina (void) const
 {_
     int v = 0;
     if (monstp) {
         verify(monstp);
-        v = monstp->stats_stamina;
+        v = monstp->stamina;
     }
     auto owner = get_immediate_owner();
     if (owner) {
         auto owner = get_immediate_owner();
-        return v + owner->get_stats_stamina();
+        return v + owner->get_stamina();
     }
     return v;
 }
 
-int Thing::set_stats_stamina (int v)
+int Thing::set_stamina (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina = v);
+    auto n = (monstp->stamina = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_stamina (int v)
+int Thing::decr_stamina (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina -= v);
-    if (monstp->stats_stamina < 0) {
-        monstp->stats_stamina = 0;
+    auto n = (monstp->stamina -= v);
+    if (monstp->stamina < 0) {
+        monstp->stamina = 0;
     }
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_stamina (int v)
+int Thing::incr_stamina (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina += v);
+    auto n = (monstp->stamina += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_stamina (void)
+int Thing::decr_stamina (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina--);
-    if (monstp->stats_stamina < 0) {
-        monstp->stats_stamina = 0;
+    auto n = (monstp->stamina--);
+    if (monstp->stamina < 0) {
+        monstp->stamina = 0;
     }
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_stamina (void)
+int Thing::incr_stamina (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stamina++);
+    auto n = (monstp->stamina++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats_strength
+// modifier_strength
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_strength (void) const
+int Thing::get_modifier_strength (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_strength);
+        return (monstp->modifier_strength);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats_strength (int v)
+int Thing::set_modifier_strength (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_strength = v);
+    auto n = (monstp->modifier_strength = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_strength (int v)
+int Thing::decr_modifier_strength (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_strength -= v);
+    auto n = (monstp->modifier_strength -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_strength (int v)
+int Thing::incr_modifier_strength (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_strength += v);
+    auto n = (monstp->modifier_strength += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::decr_stats_strength (void)
+int Thing::decr_modifier_strength (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_strength--);
+    auto n = (monstp->modifier_strength--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
 
-int Thing::incr_stats_strength (void)
+int Thing::incr_modifier_strength (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_strength++);
+    auto n = (monstp->modifier_strength++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }

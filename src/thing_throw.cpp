@@ -19,7 +19,7 @@ void Thing::throw_at (Thingp what, Thingp target)
     }
 
     if (DISTANCE(mid_at.x, mid_at.y, target->mid_at.x, target->mid_at.y) >
-        get_stats_throw_distance()) {
+        get_throw_distance()) {
 
         if (is_player()) {
             MINICON("You cannot throw %s that far", what->text_the().c_str());

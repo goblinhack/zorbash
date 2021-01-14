@@ -19,7 +19,7 @@ bool Thing::eat (Thingp it)
         health_boost(it->get_nutrition());
         return true;
     } else {
-        if (is_attack_eater()) {
+        if (attack_eater()) {
             if ((is_jelly_eater()    && it->is_jelly())    ||
                 (is_meat_eater()     && it->is_meat())     ||
                 (is_food_eater()     && it->is_food())     ||

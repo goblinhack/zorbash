@@ -272,8 +272,8 @@ public:
                 if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \
                 if (!t->is_interesting() &&                         \
-                    !t->is_attackable_by_monst() &&                 \
-                    !t->is_attackable_by_player() &&                \
+                    !t->attackable_by_monst() &&                 \
+                    !t->attackable_by_player() &&                \
                     !t->ai_obstacle()) {                            \
                     continue;                                       \
                 }                                                   \

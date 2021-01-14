@@ -13,11 +13,11 @@ void Thing::stamina_boost (int v)
         return;
     }
 
-    auto old_stamina = get_stats_stamina();
+    auto old_stamina = get_stamina();
     auto new_stamina = old_stamina + v;
-    auto max_stamina = get_stats_stamina_max();
+    auto max_stamina = get_stamina_max();
     new_stamina = std::min(new_stamina, max_stamina);
-    set_stats_stamina(new_stamina);
+    set_stamina(new_stamina);
 
     if (new_stamina >= max_stamina) {
         log("Stamina boost not possible, maxxed at %d", new_stamina);

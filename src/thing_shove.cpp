@@ -11,7 +11,7 @@
 
 ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 {_
-    if (!is_attack_shove()) {
+    if (!attack_shove()) {
         return (THING_SHOVE_NEVER_TRIED);
     }
 
@@ -27,7 +27,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (!is_player()) {
-        if ((int)random_range(0, 1000) > tp()->is_attack_shove_chance_d1000()) {
+        if ((int)random_range(0, 1000) > tp()->attack_shove_chance_d1000()) {
             return (THING_SHOVE_NEVER_TRIED);
         }
     }
@@ -61,9 +61,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     if (!it->is_dead) {
         log("Shove: it strength %d vs me %d + %d",
-            it->get_stats_strength(), get_stats_strength(), get_damage_melee());
+            it->get_modifier_strength(), get_modifier_strength(), get_damage_melee());
 
-        if (it->get_stats_strength() > get_stats_strength() + get_damage_melee()) {
+        if (it->get_modifier_strength() > get_modifier_strength() + get_damage_melee()) {
             if (is_player()) {
                 MINICON("%s is too strong to be shoved!", it->text_The().c_str());
             } else if (it->is_player()) {
@@ -150,7 +150,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
 ThingShoved Thing::try_to_shove (fpoint future_pos)
 {
-    if (!is_attack_shove()) {
+    if (!attack_shove()) {
         return (THING_SHOVE_NEVER_TRIED);
     }
 
@@ -176,7 +176,7 @@ ThingShoved Thing::try_to_shove (fpoint future_pos)
 
 ThingShoved Thing::try_to_shove_into_hazard (Thingp it, fpoint delta)
 {
-    if (is_attack_shove()) {
+    if (attack_shove()) {
         auto shoved_to_position = it->mid_at + delta;
         if (level->is_hazard((int)shoved_to_position.x,
                              (int)shoved_to_position.y)) {

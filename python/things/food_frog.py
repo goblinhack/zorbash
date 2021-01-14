@@ -17,7 +17,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_food(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_is_attackable_by_monst(True)
+    x.set_attackable_by_monst(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_shown_on_leftbar(True)

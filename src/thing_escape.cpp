@@ -11,8 +11,8 @@
 bool Thing::try_to_escape (void)
 {
     if (is_jumper()) {
-        auto health_max = get_stats_health_max();
-        auto health = get_stats_health();
+        auto health_max = get_health_max();
+        auto health = get_health();
 
         if (health > health_max / 2) {
             return false;

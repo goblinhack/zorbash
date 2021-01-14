@@ -25,12 +25,12 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_movable(True)
-    x.set_is_water_avoider(100)
+    x.set_avoider_of_water(100)
     x.set_lifespan_dice("1d30+10")
     x.set_light_color("yellow")
     x.set_on_idle_dice_do("1d10+20:small_fire.spawn()")
     x.set_damage_melee_dice("1d3+1")
-    x.set_stats_health_initial_dice("5")
+    x.set_health_initial_dice("5")
     x.set_text_a_or_an("");
     x.set_text_description("Fire embers")
     x.set_text_hits("burns");

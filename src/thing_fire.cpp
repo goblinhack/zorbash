@@ -30,9 +30,9 @@ void Thing::fire_tick (void)
         return;
     }
 
-    if (!is_fire_avoider()) {
+    if (!avoider_of_fire()) {
         if (g_opt_debug3) {
-            log("No, is not fire hater");
+            log("No, is not fire avoider");
         }
         return;
     }
@@ -96,17 +96,17 @@ void Thing::fire_tick (void)
         auto fire = tp_find("fire");
         auto damage = fire->get_damage_melee();
 
-        if (is_fire_avoider()) {
+        if (avoider_of_fire()) {
             damage *= 2;
         }
 
-        auto h = decr_stats_health(damage);
+        auto h = decr_health(damage);
         if (is_player()) {
             MINICON("%%fg=red$You take %u burn damage!%%fg=reset$", damage);
         }
 
         if (h <= 0) {
-            h = set_stats_health(0);
+            h = set_health(0);
             dead("Burned to death");
         }
 

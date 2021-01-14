@@ -144,7 +144,7 @@ static void wid_leftbar_create (void)
     sort(items.begin(),
          items.end(),
          [](const Thingp a, const Thingp b) -> bool {
-             return a->get_stats_health() > b->get_stats_health();
+             return a->get_health() > b->get_health();
          });
 
     auto row = 1;
@@ -175,7 +175,7 @@ static void wid_leftbar_create (void)
                 }
             }
 
-            // s += " " + std::to_string(t->get_stats_health());
+            // s += " " + std::to_string(t->get_health());
             if (level->hover_over == t) {
                 wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
             } else {
