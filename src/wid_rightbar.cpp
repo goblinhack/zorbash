@@ -162,8 +162,8 @@ static void wid_rightbar_create (void)
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
 
-        int i = ((float)player->get_stats_health() /
-                 (float)player->get_stats_health_max()) *
+        int i = ((float)player->get_health() /
+                 (float)player->get_health_max()) *
                  (float)UI_HEALTH_BAR_STEPS - 1;
         i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
         i = std::max(i, 0);
@@ -189,8 +189,8 @@ static void wid_rightbar_create (void)
         wid_set_shape_none(w);
 
         std::string s =
-            std::to_string(player->get_stats_health()) + "/" +
-            std::to_string(player->get_stats_health_max());
+            std::to_string(player->get_health()) + "/" +
+            std::to_string(player->get_health_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
@@ -206,8 +206,8 @@ static void wid_rightbar_create (void)
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
 
-        int i = ((float)player->get_stats_stamina() /
-                 (float)player->get_stats_stamina_max()) *
+        int i = ((float)player->get_stamina() /
+                 (float)player->get_stamina_max()) *
                  (float)UI_HEALTH_BAR_STEPS - 1;
         i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
         i = std::max(i, 0);
@@ -233,8 +233,8 @@ static void wid_rightbar_create (void)
         wid_set_shape_none(w);
 
         std::string s =
-            std::to_string(player->get_stats_stamina()) + "/" +
-            std::to_string(player->get_stats_stamina_max());
+            std::to_string(player->get_stamina()) + "/" +
+            std::to_string(player->get_stamina_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }

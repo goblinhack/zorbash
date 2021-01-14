@@ -31,15 +31,15 @@ void Thing::resurrect_tick (void)
     // Resurrect, but weaker
     //
     if (!is_resurrecting) {
-        auto v = get_stats_health_max() / 2;
+        auto v = get_health_max() / 2;
         if (v > 0) {
             is_resurrecting = true;
             tile_curr = 0;
             animate();
 
             log("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
-            set_stats_health(v);
-            set_stats_health_max(v);
+            set_health(v);
+            set_health_max(v);
 
             //
             // Catch up on ticks

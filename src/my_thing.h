@@ -91,19 +91,18 @@ public:
     int          stats10 = {};
     int          stats11 = {};
     int          stats12 = {};
-    int          stats13 = {};
-    int          stats14 = {};
-    int          stats_constitution = {};
-    int          stats_attack = {};
+    int          modifier_attack = {};
+    int          modifier_constitution = {};
+    int          attack = {};
     int          stats17 = {};
-    int          stats_throw_distance = {};
-    int          stats_defence = {};
+    int          throw_distance = {};
+    int          modifier_defence = {};
     int          stats_stats19 = {};
-    int          stats_health = {};
-    int          stats_health_max = {};
-    int          stats_stamina = {};
-    int          stats_stamina_max = {};
-    int          stats_strength = {};
+    int          health = {};
+    int          health_max = {};
+    int          stamina = {};
+    int          stamina_max = {};
+    int          modifier_strength = {};
     int          submerged_offset = {};      // GL co-orids
     int          tick_rate_tenths = {};
     int          tick_resurrect_when = {};
@@ -395,33 +394,33 @@ public:
     int decr_keys(void);
     int incr_keys(void);
 
-    int set_stats_health(int);
-    int get_stats_health(void) const;
-    int decr_stats_health(int);
-    int incr_stats_health(int);
-    int decr_stats_health(void);
-    int incr_stats_health(void);
+    int set_health(int);
+    int get_health(void) const;
+    int decr_health(int);
+    int incr_health(int);
+    int decr_health(void);
+    int incr_health(void);
 
-    int set_stats_health_max(int);
-    int get_stats_health_max(void) const;
-    int decr_stats_health_max(int);
-    int incr_stats_health_max(int);
-    int decr_stats_health_max(void);
-    int incr_stats_health_max(void);
+    int set_health_max(int);
+    int get_health_max(void) const;
+    int decr_health_max(int);
+    int incr_health_max(int);
+    int decr_health_max(void);
+    int incr_health_max(void);
 
-    float get_stats_health_pct(void);
+    float get_health_pct(void);
     bool is_bloodied(void);
     void health_boost(int v);
 
     float get_stamina_health_pct(void);
     void stamina_boost(int v);
 
-    int set_stats_defence(int);
-    int get_stats_defence(void) const;
-    int decr_stats_defence(int);
-    int incr_stats_defence(int);
-    int decr_stats_defence(void);
-    int incr_stats_defence(void);
+    int set_modifier_defence(int);
+    int get_modifier_defence(void) const;
+    int decr_modifier_defence(int);
+    int incr_modifier_defence(int);
+    int decr_modifier_defence(void);
+    int incr_modifier_defence(void);
 
     int set_stats_stats19(int);
     int get_stats_stats19(void) const;
@@ -528,33 +527,19 @@ public:
     int decr_stats12(void);
     int incr_stats12(void);
 
-    int set_stats13(int);
-    int get_stats13(void) const;
-    int decr_stats13(int);
-    int incr_stats13(int);
-    int decr_stats13(void);
-    int incr_stats13(void);
+    int set_modifier_attack(int);
+    int get_modifier_attack(void) const;
+    int decr_modifier_attack(int);
+    int incr_modifier_attack(int);
+    int decr_modifier_attack(void);
+    int incr_modifier_attack(void);
 
-    int set_stats14(int);
-    int get_stats14(void) const;
-    int decr_stats14(int);
-    int incr_stats14(int);
-    int decr_stats14(void);
-    int incr_stats14(void);
-
-    int set_stats_constitution(int);
-    int get_stats_constitution(void) const;
-    int decr_stats_constitution(int);
-    int incr_stats_constitution(int);
-    int decr_stats_constitution(void);
-    int incr_stats_constitution(void);
-
-    int set_stats_attack(int);
-    int get_stats_attack(void) const;
-    int decr_stats_attack(int);
-    int incr_stats_attack(int);
-    int decr_stats_attack(void);
-    int incr_stats_attack(void);
+    int set_modifier_constitution(int);
+    int get_modifier_constitution(void) const;
+    int decr_modifier_constitution(int);
+    int incr_modifier_constitution(int);
+    int decr_modifier_constitution(void);
+    int incr_modifier_constitution(void);
 
     int set_stats17(int);
     int get_stats17(void) const;
@@ -563,33 +548,33 @@ public:
     int decr_stats17(void);
     int incr_stats17(void);
 
-    int set_stats_throw_distance(int);
-    int get_stats_throw_distance(void) const;
-    int decr_stats_throw_distance(int);
-    int incr_stats_throw_distance(int);
-    int decr_stats_throw_distance(void);
-    int incr_stats_throw_distance(void);
+    int set_throw_distance(int);
+    int get_throw_distance(void) const;
+    int decr_throw_distance(int);
+    int incr_throw_distance(int);
+    int decr_throw_distance(void);
+    int incr_throw_distance(void);
 
-    int set_stats_stamina(int);
-    int get_stats_stamina(void) const;
-    int decr_stats_stamina(int);
-    int incr_stats_stamina(int);
-    int decr_stats_stamina(void);
-    int incr_stats_stamina(void);
+    int set_stamina(int);
+    int get_stamina(void) const;
+    int decr_stamina(int);
+    int incr_stamina(int);
+    int decr_stamina(void);
+    int incr_stamina(void);
 
-    int set_stats_stamina_max(int);
-    int get_stats_stamina_max(void) const;
-    int decr_stats_stamina_max(int);
-    int incr_stats_stamina_max(int);
-    int decr_stats_stamina_max(void);
-    int incr_stats_stamina_max(void);
+    int set_stamina_max(int);
+    int get_stamina_max(void) const;
+    int decr_stamina_max(int);
+    int incr_stamina_max(int);
+    int decr_stamina_max(void);
+    int incr_stamina_max(void);
 
-    int set_stats_strength(int);
-    int get_stats_strength(void) const;
-    int decr_stats_strength(int);
-    int incr_stats_strength(int);
-    int decr_stats_strength(void);
-    int incr_stats_strength(void);
+    int set_modifier_strength(int);
+    int get_modifier_strength(void) const;
+    int decr_modifier_strength(int);
+    int incr_modifier_strength(int);
+    int decr_modifier_strength(void);
+    int incr_modifier_strength(void);
 
     int set_owned_count(int);
     int get_owned_count(void) const;
@@ -826,9 +811,9 @@ public:
     int get_damage_poison(void) const;
     const Dice& get_damage_poison_dice(void) const;
 
-    const std::string& get_stats_health_initial_dice_str(void) const;
-    int get_stats_health_initial(void) const;
-    const Dice& get_stats_health_initial_dice(void) const;
+    const std::string& get_health_initial_dice_str(void) const;
+    int get_health_initial(void) const;
+    const Dice& get_health_initial_dice(void) const;
 
     const std::string& get_gold_value_dice_str(void) const;
     int get_gold_value(void) const;
@@ -1013,15 +998,15 @@ public:
     int is_able_to_change_levels(void) const;
     int is_acid(void) const;
     int is_acid_lover(void) const;
-    int is_acid_avoider(void) const;
+    int avoider_of_acid(void) const;
     int is_active(void) const;
     int is_alive_monst(void) const;
-    int is_attack_eater(void) const;
-    int is_attack_lunge(void) const;
-    int is_attack_shove(void) const;
-    int is_attack_shove_chance_d1000(void) const;
-    int is_attackable_by_monst(void) const;
-    int is_attackable_by_player(void) const;
+    int attack_eater(void) const;
+    int attack_lunge(void) const;
+    int attack_shove(void) const;
+    int attack_shove_chance_d1000(void) const;
+    int attackable_by_monst(void) const;
+    int attackable_by_player(void) const;
     int is_bag(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
@@ -1041,16 +1026,16 @@ public:
     int is_deep_water(void) const;
     int is_dirt(void) const;
     int is_door(void) const;
-    int is_double_damage_from_acid(void) const;
-    int is_double_damage_from_fire(void) const;
-    int is_double_damage_from_water(void) const;
+    int damage_doubled_from_acid(void) const;
+    int damage_doubled_from_fire(void) const;
+    int damage_doubled_from_water(void) const;
     int is_droppable(void) const;
     int is_entrance(void) const;
     int is_ethereal(void) const;
     int is_exit(void) const;
     int is_explosion(void) const;
     int is_fire(void) const;
-    int is_fire_avoider(void) const;
+    int avoider_of_fire(void) const;
     int is_flammable(void) const;
     int is_floating(void) const;
     int is_floor(void) const;
@@ -1132,8 +1117,8 @@ public:
     int is_rrr35(void) const;
     int is_rrr36(void) const;
     int is_poison_lover(void) const;
-    int is_double_damage_from_poison(void) const;
-    int is_poison_avoider(void) const;
+    int damage_doubled_from_poison(void) const;
+    int avoider_of_poison(void) const;
     int is_rrr4(void) const;
     int is_rrr40(void) const;
     int is_poison(void) const;
@@ -1142,7 +1127,7 @@ public:
     int is_thrown_automatically_when_selected(void) const;
     int is_extreme_hazard(void) const;
     int is_auto_collect_item(void) const;
-    int is_attack_meat(void) const;
+    int attack_meat(void) const;
     int is_food_eater(void) const;
     int is_item_effect_max_radius(void) const;
     int is_rrr5(void) const;
@@ -1174,7 +1159,7 @@ public:
     int is_wall_deco(void) const;
     int is_water(void) const;
     int is_water_lover(void) const;
-    int is_water_avoider(void) const;
+    int avoider_of_water(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;
     int normal_placement_rules(void) const;

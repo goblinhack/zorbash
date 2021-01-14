@@ -298,11 +298,11 @@ class Tp:
     def set_is_poison_lover(self, value):
         zx.tp_set_is_poison_lover(self, value)
 
-    def set_is_double_damage_from_poison(self, value):
-        zx.tp_set_is_double_damage_from_poison(self, value)
+    def set_damage_doubled_from_poison(self, value):
+        zx.tp_set_damage_doubled_from_poison(self, value)
 
-    def set_is_poison_avoider(self, value):
-        zx.tp_set_is_poison_avoider(self, value)
+    def set_avoider_of_poison(self, value):
+        zx.tp_set_avoider_of_poison(self, value)
 
     def set_is_rrr40(self, value):
         zx.tp_set_is_rrr40(self, value)
@@ -325,8 +325,8 @@ class Tp:
     def set_is_auto_collect_item(self, value):
         zx.tp_set_is_auto_collect_item(self, value)
 
-    def set_is_attack_meat(self, value):
-        zx.tp_set_is_attack_meat(self, value)
+    def set_attack_meat(self, value):
+        zx.tp_set_attack_meat(self, value)
 
     def set_is_food_eater(self, value):
         zx.tp_set_is_food_eater(self, value)
@@ -391,8 +391,8 @@ class Tp:
     def set_is_item(self, value):
         zx.tp_set_is_item(self, value)
 
-    def set_is_attackable_by_player(self, value):
-        zx.tp_set_is_attackable_by_player(self, value)
+    def set_attackable_by_player(self, value):
+        zx.tp_set_attackable_by_player(self, value)
 
     def set_is_treasure_class_b(self, value):
         zx.tp_set_is_treasure_class_b(self, value)
@@ -469,11 +469,11 @@ class Tp:
     def set_is_floating(self, value):
         zx.tp_set_is_floating(self, value)
 
-    def set_is_double_damage_from_acid(self, value):
-        zx.tp_set_is_double_damage_from_acid(self, value)
+    def set_damage_doubled_from_acid(self, value):
+        zx.tp_set_damage_doubled_from_acid(self, value)
 
-    def set_is_double_damage_from_water(self, value):
-        zx.tp_set_is_double_damage_from_water(self, value)
+    def set_damage_doubled_from_water(self, value):
+        zx.tp_set_damage_doubled_from_water(self, value)
 
     def set_is_generator(self, value):
         zx.tp_set_is_generator(self, value)
@@ -481,14 +481,14 @@ class Tp:
     def set_is_treasure_eater(self, value):
         zx.tp_set_is_treasure_eater(self, value)
 
-    def set_is_double_damage_from_acid(self, value):
-        zx.tp_set_is_double_damage_from_acid(self, value)
+    def set_damage_doubled_from_acid(self, value):
+        zx.tp_set_damage_doubled_from_acid(self, value)
 
     def set_is_acid_lover(self, value):
         zx.tp_set_is_acid_lover(self, value)
 
-    def set_is_acid_avoider(self, value):
-        zx.tp_set_is_acid_avoider(self, value)
+    def set_avoider_of_acid(self, value):
+        zx.tp_set_avoider_of_acid(self, value)
 
     def set_is_jelly_parent(self, value):
         zx.tp_set_is_jelly_parent(self, value)
@@ -499,8 +499,8 @@ class Tp:
     def set_is_jelly(self, value):
         zx.tp_set_is_jelly(self, value)
 
-    def set_is_attack_eater(self, value):
-        zx.tp_set_is_attack_eater(self, value)
+    def set_attack_eater(self, value):
+        zx.tp_set_attack_eater(self, value)
 
     def set_is_jumper_distance(self, value):
         zx.tp_set_is_jumper_distance(self, value)
@@ -538,8 +538,8 @@ class Tp:
     def set_is_smoke(self, value):
         zx.tp_set_is_smoke(self, value)
 
-    def set_is_fire_avoider(self, value):
-        zx.tp_set_is_fire_avoider(self, value)
+    def set_avoider_of_fire(self, value):
+        zx.tp_set_avoider_of_fire(self, value)
 
     def set_is_treasure(self, value):
         zx.tp_set_is_treasure(self, value)
@@ -553,8 +553,8 @@ class Tp:
     def set_is_intelligent(self, value):
         zx.tp_set_is_intelligent(self, value)
 
-    def set_is_double_damage_from_fire(self, value):
-        zx.tp_set_is_double_damage_from_fire(self, value)
+    def set_damage_doubled_from_fire(self, value):
+        zx.tp_set_damage_doubled_from_fire(self, value)
 
     def set_is_fire(self, value):
         zx.tp_set_is_fire(self, value)
@@ -583,8 +583,8 @@ class Tp:
     def set_gfx_attack_anim(self, value):
         zx.tp_set_gfx_attack_anim(self, value)
 
-    def set_is_attack_shove_chance_d1000(self, value):
-        zx.tp_set_is_attack_shove_chance_d1000(self, value)
+    def set_attack_shove_chance_d1000(self, value):
+        zx.tp_set_attack_shove_chance_d1000(self, value)
 
     def set_is_jumper_chance_d1000(self, value):
         zx.tp_set_is_jumper_chance_d1000(self, value)
@@ -598,8 +598,8 @@ class Tp:
     def set_is_hazard(self, value):
         zx.tp_set_is_hazard(self, value)
 
-    def set_is_attack_shove(self, value):
-        zx.tp_set_is_attack_shove(self, value)
+    def set_attack_shove(self, value):
+        zx.tp_set_attack_shove(self, value)
 
     def set_is_shovable(self, value):
         zx.tp_set_is_shovable(self, value)
@@ -616,23 +616,23 @@ class Tp:
     def set_is_msg(self, value):
         zx.tp_set_is_msg(self, value)
 
-    def set_is_attack_lunge(self, value):
-        zx.tp_set_is_attack_lunge(self, value)
+    def set_attack_lunge(self, value):
+        zx.tp_set_attack_lunge(self, value)
 
-    def set_stats_strength(self, value):
-        zx.tp_set_stats_strength(self, value)
+    def set_stamina(self, value):
+        zx.tp_set_stamina(self, value)
 
-    def set_stats_stamina(self, value):
-        zx.tp_set_stats_stamina(self, value)
+    def set_modifier_strength(self, value):
+        zx.tp_set_modifier_strength(self, value)
 
-    def set_stats_defence(self, value):
-        zx.tp_set_stats_defence(self, value)
+    def set_modifier_defence(self, value):
+        zx.tp_set_modifier_defence(self, value)
 
-    def set_stats_attack(self, value):
-        zx.tp_set_stats_attack(self, value)
+    def set_modifier_attack(self, value):
+        zx.tp_set_modifier_attack(self, value)
 
-    def set_stats_throw_distance(self, value):
-        zx.tp_set_stats_throw_distance(self, value)
+    def set_throw_distance(self, value):
+        zx.tp_set_throw_distance(self, value)
 
     def set_tick_rate_tenths(self, value):
         zx.tp_set_tick_rate_tenths(self, value)
@@ -655,14 +655,14 @@ class Tp:
     def set_ai_obstacle(self, value):
         zx.tp_set_ai_obstacle(self, value)
 
-    def set_is_attackable_by_monst(self, value):
-        zx.tp_set_is_attackable_by_monst(self, value)
+    def set_attackable_by_monst(self, value):
+        zx.tp_set_attackable_by_monst(self, value)
 
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)
 
-    def set_is_water_avoider(self, value):
-        zx.tp_set_is_water_avoider(self, value)
+    def set_avoider_of_water(self, value):
+        zx.tp_set_avoider_of_water(self, value)
 
     def set_is_hunger_insatiable(self, value):
         zx.tp_set_is_hunger_insatiable(self, value)
@@ -730,20 +730,20 @@ class Tp:
     def set_is_active(self, value):
         zx.tp_set_is_active(self, value)
 
-    def set_stats_health_starving_pct(self, value):
-        zx.tp_set_stats_health_starving_pct(self, value)
+    def set_health_starving_pct(self, value):
+        zx.tp_set_health_starving_pct(self, value)
 
-    def set_stats_health_initial_dice(self, value):
-        zx.tp_set_stats_health_initial_dice(self, value)
+    def set_health_initial_dice(self, value):
+        zx.tp_set_health_initial_dice(self, value)
 
-    def set_stats_health_hunger_pct(self, value):
-        zx.tp_set_stats_health_hunger_pct(self, value)
+    def set_health_hunger_pct(self, value):
+        zx.tp_set_health_hunger_pct(self, value)
 
-    def set_stats_attack(self, value):
-        zx.tp_set_stats_attack(self, value)
+    def set_modifier_attack(self, value):
+        zx.tp_set_modifier_attack(self, value)
 
-    def set_stats_defence(self, value):
-        zx.tp_set_stats_defence(self, value)
+    def set_modifier_defence(self, value):
+        zx.tp_set_modifier_defence(self, value)
 
     def set_hunger_clock_freq_ms(self, value):
         zx.tp_set_hunger_clock_freq_ms(self, value)
@@ -781,8 +781,8 @@ class Tp:
     def set_is_entrance(self, value):
         zx.tp_set_is_entrance(self, value)
 
-    def set_stats_move_speed_ms(self, value):
-        zx.tp_set_stats_move_speed_ms(self, value)
+    def set_move_speed_ms(self, value):
+        zx.tp_set_move_speed_ms(self, value)
 
     def set_weapon_use_delay_hundredths(self, value):
         zx.tp_set_weapon_use_delay_hundredths(self, value)

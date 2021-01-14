@@ -37,7 +37,7 @@ std::string Thing::to_string (void) const
                                is_jumping ? "/jumping" : "",
                                is_falling ? "/falling" : "",
                                mid_at.x, mid_at.y));
-    } else if (get_stats_health_max()) {_
+    } else if (get_health_max()) {_
         return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s T%u @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,

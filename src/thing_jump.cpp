@@ -12,11 +12,11 @@ float Thing::how_far_i_can_jump (void)
 {_
     auto d = (float) is_jumper_distance() + 0.5 + (random_range(0, 100) / 100.0);
 
-    if (get_stats_stamina() < get_stats_stamina_max() / 2) {
+    if (get_stamina() < get_stamina_max() / 2) {
         d /= 2;
     }
 
-    if (get_stats_stamina() < get_stats_stamina_max() / 4) {
+    if (get_stamina() < get_stamina_max() / 4) {
         d /= 2;
     }
 
@@ -36,7 +36,7 @@ bool Thing::try_to_jump (point to)
     }
 
     if (is_stamina_check()) {
-        if (!get_stats_stamina()) {
+        if (!get_stamina()) {
             if (is_player()) {
                 MINICON("You are too tired to jump. You need to rest.");
             }
@@ -276,7 +276,7 @@ bool Thing::try_to_jump (point to)
 
     wobble(25);
 
-    decr_stats_stamina(10);
+    decr_stamina(10);
 
     return true;
 }

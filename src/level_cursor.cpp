@@ -221,7 +221,7 @@ void Level::cursor_recreate (void)
     if (game->state == Game::STATE_CHOOSING_TARGET) {
         if (DISTANCE(player->mid_at.x, player->mid_at.y, 
                      mid_at.x, mid_at.y)  >
-                player->get_stats_throw_distance()) {
+                player->get_throw_distance()) {
             cursor = thing_new("cursor_select_fail", mid_at);
         } else {
             cursor = thing_new("cursor_select", mid_at);

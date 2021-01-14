@@ -103,25 +103,25 @@ void Thing::init (Levelp level,
     is_hungry = tpp->is_hunger_insatiable();
 
     {_
-        auto v = tpp->get_stats_health_initial();
+        auto v = tpp->get_health_initial();
         if (unlikely(v)) {
-            set_stats_health(v);
-            set_stats_health_max(v);
+            set_health(v);
+            set_health_max(v);
         }
     }
 
     {_
-        auto v = tpp->stats_stamina();
+        auto v = tpp->stamina();
         if (unlikely(v)) {
-            set_stats_stamina(v);
-            set_stats_stamina_max(v);
+            set_stamina(v);
+            set_stamina_max(v);
         }
     }
 
     {_
-        auto v = tpp->stats_defence();
+        auto v = tpp->modifier_defence();
         if (unlikely(v)) {
-            set_stats_defence(v);
+            set_modifier_defence(v);
             set_stats_stats19(v);
         }
     }
@@ -225,30 +225,23 @@ void Thing::init (Levelp level,
     }
 
     {_
-        auto v = tpp->stats13();
+        auto v = tpp->modifier_constitution();
         if (unlikely(v)) {
-            set_stats13(v);
+            set_modifier_constitution(v);
         }
     }
 
     {_
-        auto v = tpp->stats14();
+        auto v = tpp->modifier_attack();
         if (unlikely(v)) {
-            set_stats14(v);
+            set_modifier_attack(v);
         }
     }
 
     {_
-        auto v = tpp->stats_constitution();
+        auto v = tpp->modifier_constitution();
         if (unlikely(v)) {
-            set_stats_constitution(v);
-        }
-    }
-
-    {_
-        auto v = tpp->stats_attack();
-        if (unlikely(v)) {
-            set_stats_attack(v);
+            set_modifier_constitution(v);
         }
     }
 
@@ -260,23 +253,23 @@ void Thing::init (Levelp level,
     }
 
     {_
-        auto v = tpp->stats_throw_distance();
+        auto v = tpp->throw_distance();
         if (unlikely(v)) {
-            set_stats_throw_distance(v);
+            set_throw_distance(v);
         }
     }
 
     {_
-        auto v = tpp->stats_stamina();
+        auto v = tpp->stamina();
         if (unlikely(v)) {
-            set_stats_stamina(v);
+            set_stamina(v);
         }
     }
 
     {_
-        auto v = tpp->stats_strength();
+        auto v = tpp->modifier_strength();
         if (unlikely(v)) {
-            set_stats_strength(v);
+            set_modifier_strength(v);
         }
     }
 

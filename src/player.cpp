@@ -154,7 +154,7 @@ void player_tick (void)
         }
     }
 
-    auto delay = player->tp()->stats_move_speed_ms();
+    auto delay = player->tp()->move_speed_ms();
     if (sdl_shift_held) {
         delay = delay / 2;
     }

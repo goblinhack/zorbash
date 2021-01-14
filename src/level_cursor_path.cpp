@@ -23,7 +23,7 @@ void Level::cursor_path_draw_circle (void)
 
     bool too_far = false;
     if (DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y) >
-        player->get_stats_throw_distance()) {
+        player->get_throw_distance()) {
         too_far = true;
     }
 

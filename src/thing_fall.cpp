@@ -213,7 +213,7 @@ _
             }
 
             if (is_potion() || is_generator() || is_monst()) {
-                fall_damage = get_stats_health() / 2;
+                fall_damage = get_health() / 2;
             }
 
             auto new_pos = make_point(mid_at);
@@ -264,10 +264,10 @@ _
                 level->update();
             }
 
-            if (tp()->get_stats_health_initial_dice_str() != "") {
-                auto h = decr_stats_health(fall_damage);
+            if (tp()->get_health_initial_dice_str() != "") {
+                auto h = decr_health(fall_damage);
                 if (h <= 0) {
-                    h = set_stats_health(0);
+                    h = set_health(0);
                     dead("Flying without wings");
                 }
             }

@@ -64,8 +64,8 @@ _
             }
         }
 
-        if (me->is_meat_eater() || me->is_attack_meat()) {
-            if (!it->is_attackable_by_monst()) {
+        if (me->is_meat_eater() || me->attack_meat()) {
+            if (!it->attackable_by_monst()) {
                 log("No, cannot attack %s, not attackable by meat eating monst",
                     it->to_string().c_str());
                 return false;
@@ -77,7 +77,7 @@ _
         }
 
         if (me->is_food_eater()) {
-            if (!it->is_attackable_by_monst()) {
+            if (!it->attackable_by_monst()) {
                 log("No, cannot attack %s, not attackable by food eating monst",
                     it->to_string().c_str());
                 return false;
@@ -90,7 +90,7 @@ _
     }
 
     if (is_player()) {
-        if (!it->is_attackable_by_player()) {
+        if (!it->attackable_by_player()) {
             log("No, cannot attack %s, not attackable", it->to_string().c_str());
             return false;
         }
@@ -102,7 +102,7 @@ _
         auto o = get_immediate_owner();
         if (o) {
             if (o->is_monst()) {
-                if (!it->is_attackable_by_monst()) {
+                if (!it->attackable_by_monst()) {
                     // Too noisy
                     // log("Cannot weapon attack %s, not attackable by monst",
                     //     it->to_string().c_str());
@@ -111,7 +111,7 @@ _
                 log("Yes, can attack %s", it->to_string().c_str());
                 return true;
             } else {
-                if (!it->is_attackable_by_player()) {
+                if (!it->attackable_by_player()) {
                     log("Cannot weapon attack %s, not attackable",
                         it->to_string().c_str());
                     return false;
@@ -220,7 +220,7 @@ _
     }
 
     if (is_stamina_check()) {
-        if (!get_stats_stamina()) {
+        if (!get_stamina()) {
             if (is_player()) {
                 MINICON("You are too tired to attack. You need to rest.");
             }
@@ -233,17 +233,17 @@ _
         if (is_loggable_for_unimportant_stuff()) {
             log("The attack hit %s for %d", it->to_string().c_str(), damage);
         }
-        if (is_attack_lunge()) {
+        if (attack_lunge()) {
             lunge(it->get_interpolated_mid_at());
         }
-        if (is_attack_eater()) {
+        if (attack_eater()) {
             health_boost(it->get_nutrition());
         }
         if (is_killed_on_hitting() || is_killed_on_hit_or_miss()) {
             dead("suicide");
         }
 
-        decr_stats_stamina();
+        decr_stamina();
         return true;
     }
 
@@ -254,7 +254,7 @@ _
         if (is_loggable_for_unimportant_stuff()) {
             log("Attack missed %s", it->to_string().c_str());
         }
-        if (is_attack_lunge()) {
+        if (attack_lunge()) {
             lunge(it->get_interpolated_mid_at());
         }
         dead("suicide");

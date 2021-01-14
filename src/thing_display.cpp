@@ -694,8 +694,8 @@ void Thing::blit_internal (int fbo,
     //
     // Show a health bar over the thing?
     //
-    auto h = get_stats_health();
-    auto m = get_stats_health_max();
+    auto h = get_health();
+    auto m = get_health_max();
 
     auto lit = (fbo == FBO_FULLMAP) || 
                     level->is_lit_no_check(mid_at.x, mid_at.y);

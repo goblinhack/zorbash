@@ -13,11 +13,11 @@ void Thing::health_boost (int v)
         return;
     }
 
-    auto old_health = get_stats_health();
+    auto old_health = get_health();
     auto new_health = old_health + v;
-    auto max_health = get_stats_health_max();
+    auto max_health = get_health_max();
     new_health = std::min(new_health, max_health);
-    set_stats_health(new_health);
+    set_health(new_health);
 
     if (new_health >= max_health) {
         log("Health boost not possible, maxxed at %d", new_health);
@@ -28,12 +28,12 @@ void Thing::health_boost (int v)
 
 bool Thing::is_bloodied (void)
 {_
-    return get_stats_health_pct() <= THING_HEALTH_BLOODIED_PCT1;
+    return get_health_pct() <= THING_HEALTH_BLOODIED_PCT1;
 }
 
-float Thing::get_stats_health_pct (void)
+float Thing::get_health_pct (void)
 {_
     float pct =
-        ((float)get_stats_health() / (float)get_stats_health_max()) * 100;
+        ((float)get_health() / (float)get_health_max()) * 100;
     return pct;
 }

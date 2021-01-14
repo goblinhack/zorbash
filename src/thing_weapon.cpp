@@ -329,7 +329,7 @@ _
     }
 
     if (is_stamina_check()) {
-        if (!get_stats_stamina()) {
+        if (!get_stamina()) {
             if (is_player()) {
                 MINICON("You are too tired to attack. You need to rest.");
             }
@@ -393,7 +393,7 @@ _
         weapon_get_use_offset(&dx, &dy);
     }
 
-    bool target_attacked = false;
+    bool target_modifier_attacked = false;
     bool target_overlaps = false;
     auto hit_at = mid_at + fpoint(dx, dy);
 
@@ -404,17 +404,17 @@ _
     //
     lunge(hit_at);
 
-    decr_stats_stamina();
+    decr_stamina();
 
     if (weapon) {
         if (weapon->collision_check_and_handle_at(hit_at,
-                                                  &target_attacked,
+                                                  &target_modifier_attacked,
                                                   &target_overlaps)) {
             return;
         }
     } else {
         if (collision_check_and_handle_at(hit_at,
-                                          &target_attacked,
+                                          &target_modifier_attacked,
                                           &target_overlaps)) {
             return;
         }

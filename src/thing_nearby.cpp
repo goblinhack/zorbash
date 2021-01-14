@@ -40,9 +40,9 @@ Thingp Thing::nearby_most_dangerous_thing_get (void)
                 continue;
             }
 
-            auto score = t->get_stats_health();
+            auto score = t->get_health();
             if (will_avoid(point(x, y))) {
-                score += t->get_stats_health_max();
+                score += t->get_health_max();
             }
 
             possible.push_back(std::make_pair(t, score));

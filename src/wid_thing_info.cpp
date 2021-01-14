@@ -234,7 +234,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         wid_thing_info_window->log(danger_level);
 
         auto attack_melee_dice = t->get_damage_melee_dice();
-        auto kill_count = player->get_stats_health() / attack_melee_dice.max_roll();
+        auto kill_count = player->get_health() / attack_melee_dice.max_roll();
 
         //
         // Oh dear.

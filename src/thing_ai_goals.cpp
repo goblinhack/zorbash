@@ -105,9 +105,9 @@ _
             //
             // Worse terrain, less preferred. Higher score, more preferred.
             //
-            auto my_health = get_stats_health();
-            auto it_stats_health = it->get_stats_health();
-            auto health_diff = it_stats_health - my_health;
+            auto my_health = get_health();
+            auto it_health = it->get_health();
+            auto health_diff = it_health - my_health;
             bool got_one_this_tile = false;
 
             if (is_starving) {
@@ -115,7 +115,7 @@ _
                     //
                     // If starving, prefer the thing with most health
                     //
-                    GOAL_ADD(it_stats_health, "eat-player");
+                    GOAL_ADD(it_health, "eat-player");
                     got_one_this_tile = true;
                 }
             } else if (is_hungry) {
@@ -126,13 +126,13 @@ _
                     // go for the easier kill in preference.
                     //
                     if (it->is_player()) {
-                        GOAL_ADD(it_stats_health / 2, "eat-player");
+                        GOAL_ADD(it_health / 2, "eat-player");
                         got_one_this_tile = true;
                     } else if (it->is_alive_monst()) {
-                        GOAL_ADD(it_stats_health / 2, "eat-monst");
+                        GOAL_ADD(it_health / 2, "eat-monst");
                         got_one_this_tile = true;
                     } else {
-                        GOAL_ADD(it_stats_health / 2, "eat-food");
+                        GOAL_ADD(it_health / 2, "eat-food");
                         got_one_this_tile = true;
                     }
                 }

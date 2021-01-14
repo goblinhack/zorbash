@@ -33,7 +33,7 @@ bool Thing::match (const std::string& what)
     if (is_acid_lover() && (what == "is_acid_lover")) {
         return true;
     }
-    if (is_acid_avoider() && (what == "is_acid_avoider")) {
+    if (avoider_of_acid() && (what == "avoider_of_acid")) {
         return true;
     }
     if (is_active() && (what == "is_active")) {
@@ -42,22 +42,22 @@ bool Thing::match (const std::string& what)
     if (is_alive_monst() && (what == "is_alive_monst")) {
         return true;
     }
-    if (is_attack_eater() && (what == "is_attack_eater")) {
+    if (attack_eater() && (what == "attack_eater")) {
         return true;
     }
-    if (is_attack_lunge() && (what == "is_attack_lunge")) {
+    if (attack_lunge() && (what == "attack_lunge")) {
         return true;
     }
-    if (is_attack_shove() && (what == "is_attack_shove")) {
+    if (attack_shove() && (what == "attack_shove")) {
         return true;
     }
-    if (is_attack_shove_chance_d1000() && (what == "is_attack_shove_chance_d1000")) {
+    if (attack_shove_chance_d1000() && (what == "attack_shove_chance_d1000")) {
         return true;
     }
-    if (is_attackable_by_monst() && (what == "is_attackable_by_monst")) {
+    if (attackable_by_monst() && (what == "attackable_by_monst")) {
         return true;
     }
-    if (is_attackable_by_player() && (what == "is_attackable_by_player")) {
+    if (attackable_by_player() && (what == "attackable_by_player")) {
         return true;
     }
     if (is_bag() && (what == "is_bag")) {
@@ -114,13 +114,13 @@ bool Thing::match (const std::string& what)
     if (is_door() && (what == "is_door")) {
         return true;
     }
-    if (is_double_damage_from_acid() && (what == "is_double_damage_from_acid")) {
+    if (damage_doubled_from_acid() && (what == "damage_doubled_from_acid")) {
         return true;
     }
-    if (is_double_damage_from_fire() && (what == "is_double_damage_from_fire")) {
+    if (damage_doubled_from_fire() && (what == "damage_doubled_from_fire")) {
         return true;
     }
-    if (is_double_damage_from_water() && (what == "is_double_damage_from_water")) {
+    if (damage_doubled_from_water() && (what == "damage_doubled_from_water")) {
         return true;
     }
     if (is_droppable() && (what == "is_droppable")) {
@@ -141,7 +141,7 @@ bool Thing::match (const std::string& what)
     if (is_fire() && (what == "is_fire")) {
         return true;
     }
-    if (is_fire_avoider() && (what == "is_fire_avoider")) {
+    if (avoider_of_fire() && (what == "avoider_of_fire")) {
         return true;
     }
     if (is_flammable() && (what == "is_flammable")) {
@@ -381,10 +381,10 @@ bool Thing::match (const std::string& what)
     if (is_poison_lover() && (what == "is_poison_lover")) {
         return true;
     }
-    if (is_double_damage_from_poison() && (what == "is_double_damage_from_poison")) {
+    if (damage_doubled_from_poison() && (what == "damage_doubled_from_poison")) {
         return true;
     }
-    if (is_poison_avoider() && (what == "is_poison_avoider")) {
+    if (avoider_of_poison() && (what == "avoider_of_poison")) {
         return true;
     }
     if (is_rrr4() && (what == "is_rrr4")) {
@@ -411,7 +411,7 @@ bool Thing::match (const std::string& what)
     if (is_auto_collect_item() && (what == "is_auto_collect_item")) {
         return true;
     }
-    if (is_attack_meat() && (what == "is_attack_meat")) {
+    if (attack_meat() && (what == "attack_meat")) {
         return true;
     }
     if (is_food_eater() && (what == "is_food_eater")) {
@@ -510,7 +510,7 @@ bool Thing::match (const std::string& what)
     if (is_water_lover() && (what == "is_water_lover")) {
         return true;
     }
-    if (is_water_avoider() && (what == "is_water_avoider")) {
+    if (avoider_of_water() && (what == "avoider_of_water")) {
         return true;
     }
     if (is_weapon() && (what == "is_weapon")) {

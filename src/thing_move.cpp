@@ -338,9 +338,9 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
     } else {
         auto owner = get_top_owner();
         if (owner) {
-            move_speed = owner->tp()->stats_move_speed_ms();
+            move_speed = owner->tp()->move_speed_ms();
         } else{
-            move_speed = tpp->stats_move_speed_ms();
+            move_speed = tpp->move_speed_ms();
         }
     }
 
@@ -525,12 +525,12 @@ bool Thing::move_to_check (const point& nh, const bool escaping)
         //
         log("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
 _
-        bool target_attacked = false;
+        bool target_modifier_attacked = false;
         bool target_overlaps = false;
         collision_check_and_handle_nearby(fnh,
-                                          &target_attacked,
+                                          &target_modifier_attacked,
                                           &target_overlaps);
-        if (target_attacked) {
+        if (target_modifier_attacked) {
             is_tick_done = true;
             log("Cannot move to %d,%d, must attack", nh.x, nh.y);
             return true;
