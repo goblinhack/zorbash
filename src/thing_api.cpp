@@ -2868,13 +2868,13 @@ int Thing::incr_modifier_constitution (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// attack
+// modifier_attack
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_modifier_attack (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->attack);
+        return (monstp->modifier_attack);
     } else {
         return (0);
     }
@@ -2884,7 +2884,7 @@ int Thing::set_modifier_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->attack = v);
+    auto n = (monstp->modifier_attack = v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -2893,7 +2893,7 @@ int Thing::decr_modifier_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->attack -= v);
+    auto n = (monstp->modifier_attack -= v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -2902,7 +2902,7 @@ int Thing::incr_modifier_attack (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->attack += v);
+    auto n = (monstp->modifier_attack += v);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -2911,7 +2911,7 @@ int Thing::decr_modifier_attack (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->attack--);
+    auto n = (monstp->modifier_attack--);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }
@@ -2920,7 +2920,7 @@ int Thing::incr_modifier_attack (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->attack++);
+    auto n = (monstp->modifier_attack++);
     if (is_player()) { wid_rightbar_init(); }
     return (n);
 }

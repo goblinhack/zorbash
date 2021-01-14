@@ -74,11 +74,19 @@ public:
     int          bag_width {};
     int          bounce_count = {};
     int          gold = {};
+    int          health = {};
+    int          health_max = {};
     int          keys = {};
     int          lifespan = {};              // How many things this thing owns.
     int          light_quality {};
     int          light_strength {};
+    int          modifier_attack = {};
+    int          modifier_constitution = {};
+    int          modifier_defence = {};
+    int          modifier_strength = {};
     int          owned_count = {};           // How many things this thing owns.
+    int          stamina = {};
+    int          stamina_max = {};
     int          stats01 = {};
     int          stats02 = {};
     int          stats03 = {};
@@ -91,19 +99,10 @@ public:
     int          stats10 = {};
     int          stats11 = {};
     int          stats12 = {};
-    int          modifier_attack = {};
-    int          modifier_constitution = {};
-    int          attack = {};
     int          stats17 = {};
-    int          throw_distance = {};
-    int          modifier_defence = {};
     int          stats_stats19 = {};
-    int          health = {};
-    int          health_max = {};
-    int          stamina = {};
-    int          stamina_max = {};
-    int          modifier_strength = {};
     int          submerged_offset = {};      // GL co-orids
+    int          throw_distance = {};
     int          tick_rate_tenths = {};
     int          tick_resurrect_when = {};
     point        bag_position{-1, -1};
@@ -111,10 +110,10 @@ public:
     point        where_i_dropped_an_item_last{-1, -1};
     point        where_i_failed_to_collect_last{-1, -1};
     std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> bag {};
-    std::list<ThingId>   carrying;
-    std::string          msg;                // Text that floats on screen
-    std::vector<ThingId> enemies;            // List of things that wronged us
-    std::vector<point>   move_path;
+    std::list<ThingId>    carrying;
+    std::string           msg;               // Text that floats on screen
+    std::vector<ThingId>  enemies;           // List of things that wronged us
+    std::vector<point>    move_path;
     std::vector<uint16_t> inventory_id;      // Vector of tp_id
     timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
