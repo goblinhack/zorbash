@@ -29,4 +29,9 @@ public:
     bool crit_roll_minus_modifier(void) const;
     int operator ()() const;
 };
+
+bool d20roll(int modifier_a, int modifier_b);
+bool d20roll(int modifier_a, int modifier_b, bool &fumble, bool &critical);
+int modifier_to_bonus(int modifier);
+
 #endif

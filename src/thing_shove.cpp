@@ -61,13 +61,14 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     if (!it->is_dead) {
         log("Shove: it strength %d vs me %d + %d",
-            it->get_modifier_strength(), get_modifier_strength(), get_damage_melee());
+            it->get_modifier_strength(), get_modifier_strength(), 
+            get_damage_melee());
 
-        if (it->get_modifier_strength() > get_modifier_strength() + get_damage_melee()) {
+        if (!d20roll(get_modifier_strength(), it->get_modifier_strength())) {
             if (is_player()) {
-                MINICON("%s is too strong to be shoved!", it->text_The().c_str());
+                MINICON("%s shoves you back!", it->text_The().c_str());
             } else if (it->is_player()) {
-                MINICON("%s is too weak to shove you!", text_The().c_str());
+                MINICON("%s fails to shove you!", text_The().c_str());
             }
             return (THING_SHOVE_TRIED_AND_FAILED);
         }
