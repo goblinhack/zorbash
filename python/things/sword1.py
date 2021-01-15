@@ -103,6 +103,10 @@ def init_weapon(name, text_name, short_text_name):
     x.set_is_treasure(True)
     x.set_is_treasure_class_b(True)
     x.set_is_weapon(True)
+    x.set_modifier_attack(0)
+    x.set_modifier_constitution(0)
+    x.set_modifier_defence(0)
+    x.set_modifier_strength(0)
     x.set_damage_melee_dice("1d8+1")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy pointy means of justice")

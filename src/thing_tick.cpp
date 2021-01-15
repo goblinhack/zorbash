@@ -146,14 +146,14 @@ void Thing::collision_check_do (void)
         return;
     }
 
-    bool target_modifier_attacked = false;
+    bool target_attacked = false;
     bool target_overlaps = false;
-    if (collision_check_and_handle_at(&target_modifier_attacked,
+    if (collision_check_and_handle_at(&target_attacked,
                                       &target_overlaps)) {
         return;
     }
 
-    if (target_modifier_attacked || target_overlaps) {
+    if (target_attacked || target_overlaps) {
         move_finish();
         cursor_path_stop();
     }

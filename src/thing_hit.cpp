@@ -145,10 +145,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Visible hit indication
     //
-    if (is_player()) {
+    if (is_player() || real_hitter->is_player()) {
         msg(string_sprintf("%%fg=red$-%d", damage));
     } else if (is_monst()) {
-        if (real_hitter->is_player()) {
+        if (is_player() || real_hitter->is_player()) {
             msg(string_sprintf("%%fg=white$-%d", damage));
         }
     }
