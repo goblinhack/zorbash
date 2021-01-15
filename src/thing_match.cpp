@@ -375,7 +375,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr35() && (what == "is_rrr35")) {
         return true;
     }
-    if (is_rrr36() && (what == "is_rrr36")) {
+    if (is_humanoid() && (what == "is_humanoid")) {
         return true;
     }
     if (is_poison_lover() && (what == "is_poison_lover")) {
@@ -390,7 +390,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr4() && (what == "is_rrr4")) {
         return true;
     }
-    if (is_rrr40() && (what == "is_rrr40")) {
+    if (attack_humanoid() && (what == "attack_humanoid")) {
         return true;
     }
     if (is_poison() && (what == "is_poison")) {

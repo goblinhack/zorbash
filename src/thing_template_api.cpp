@@ -222,12 +222,12 @@ int Tp::is_rrr32(void) const { return _is_rrr32; }
 int Tp::is_rrr33(void) const { return _is_rrr33; }
 int Tp::is_rrr34(void) const { return _is_rrr34; }
 int Tp::is_rrr35(void) const { return _is_rrr35; }
-int Tp::is_rrr36(void) const { return _is_rrr36; }
+int Tp::is_humanoid(void) const { return _is_humanoid; }
 int Tp::is_poison_lover(void) const { return _is_poison_lover; }
 int Tp::damage_doubled_from_poison(void) const { return _damage_doubled_from_poison; }
 int Tp::avoids_poison(void) const { return _avoids_poison; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
-int Tp::is_rrr40(void) const { return _is_rrr40; }
+int Tp::attack_humanoid(void) const { return _attack_humanoid; }
 int Tp::is_poison(void) const { return _is_poison; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_used_automatically_when_selected(void) const { return _is_used_automatically_when_selected; }
@@ -459,12 +459,12 @@ void Tp::set_is_rrr32(int v) { _is_rrr32 = v; }
 void Tp::set_is_rrr33(int v) { _is_rrr33 = v; }
 void Tp::set_is_rrr34(int v) { _is_rrr34 = v; }
 void Tp::set_is_rrr35(int v) { _is_rrr35 = v; }
-void Tp::set_is_rrr36(int v) { _is_rrr36 = v; }
+void Tp::set_is_humanoid(int v) { _is_humanoid = v; }
 void Tp::set_is_poison_lover(int v) { _is_poison_lover = v; }
 void Tp::set_damage_doubled_from_poison(int v) { _damage_doubled_from_poison = v; }
 void Tp::set_avoids_poison(int v) { _avoids_poison = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
-void Tp::set_is_rrr40(int v) { _is_rrr40 = v; }
+void Tp::set_attack_humanoid(int v) { _attack_humanoid = v; }
 void Tp::set_is_poison(int v) { _is_poison = v; }
 void Tp::set_is_used_when_thrown(int v) { _is_used_when_thrown = v; }
 void Tp::set_is_used_automatically_when_selected(int v) { _is_used_automatically_when_selected = v; }

@@ -76,6 +76,18 @@ _
             }
         }
 
+        if (me->attack_humanoid()) {
+            if (!it->attackable_by_monst()) {
+                log("No, cannot attack %s, not attackable by humanoid eating monst",
+                    it->to_string().c_str());
+                return false;
+            }
+            if (it->is_humanoid()) {
+                log("Yes, can attack humanoid: %s", it->to_string().c_str());
+                return true;
+            }
+        }
+
         if (me->is_food_eater()) {
             if (!it->attackable_by_monst()) {
                 log("No, cannot attack %s, not attackable by food eating monst",
@@ -129,6 +141,11 @@ _
                 return true;
             }
         }
+    }
+
+    if (is_enemy(it)) {
+        log("Yes, can attack enemy %s", it->to_string().c_str());
+        return true;
     }
 
     log("No, ignore attack %s", it->to_string().c_str());

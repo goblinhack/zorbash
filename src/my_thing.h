@@ -1123,12 +1123,12 @@ public:
     int is_rrr33(void) const;
     int is_rrr34(void) const;
     int is_rrr35(void) const;
-    int is_rrr36(void) const;
+    int is_humanoid(void) const;
     int is_poison_lover(void) const;
     int damage_doubled_from_poison(void) const;
     int avoids_poison(void) const;
     int is_rrr4(void) const;
-    int is_rrr40(void) const;
+    int attack_humanoid(void) const;
     int is_poison(void) const;
     int is_used_when_thrown(void) const;
     int is_used_automatically_when_selected(void) const;

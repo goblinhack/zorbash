@@ -149,6 +149,14 @@ bool Thing::will_avoid (const Thingp itp)
         }
     }
 
+    if (me->is_humanoid()) {
+        if (it->attack_humanoid()) {
+            if (is_dangerous(itp)) {
+                return true;
+            }
+        }
+    }
+
     if (me->is_food()) {
         if (it->is_food_eater()) {
             return true;

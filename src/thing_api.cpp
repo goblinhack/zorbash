@@ -663,9 +663,9 @@ int Thing::is_rrr35(void) const
     return (tp()->is_rrr35());
 }
 
-int Thing::is_rrr36(void) const
+int Thing::is_humanoid(void) const
 {_
-    return (tp()->is_rrr36());
+    return (tp()->is_humanoid());
 }
 
 int Thing::is_poison_lover(void) const
@@ -683,9 +683,9 @@ int Thing::avoids_poison(void) const
     return (tp()->avoids_poison());
 }
 
-int Thing::is_rrr40(void) const
+int Thing::attack_humanoid(void) const
 {_
-    return (tp()->is_rrr40());
+    return (tp()->attack_humanoid());
 }
 
 int Thing::is_poison(void) const
