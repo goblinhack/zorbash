@@ -221,7 +221,7 @@ int Tp::is_rrr31(void) const { return _is_rrr31; }
 int Tp::is_rrr32(void) const { return _is_rrr32; }
 int Tp::is_rrr33(void) const { return _is_rrr33; }
 int Tp::is_rrr34(void) const { return _is_rrr34; }
-int Tp::is_rrr35(void) const { return _is_rrr35; }
+int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
 int Tp::is_humanoid(void) const { return _is_humanoid; }
 int Tp::is_poison_lover(void) const { return _is_poison_lover; }
 int Tp::damage_doubled_from_poison(void) const { return _damage_doubled_from_poison; }
@@ -458,7 +458,7 @@ void Tp::set_is_rrr31(int v) { _is_rrr31 = v; }
 void Tp::set_is_rrr32(int v) { _is_rrr32 = v; }
 void Tp::set_is_rrr33(int v) { _is_rrr33 = v; }
 void Tp::set_is_rrr34(int v) { _is_rrr34 = v; }
-void Tp::set_is_rrr35(int v) { _is_rrr35 = v; }
+void Tp::set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
 void Tp::set_is_humanoid(int v) { _is_humanoid = v; }
 void Tp::set_is_poison_lover(int v) { _is_poison_lover = v; }
 void Tp::set_damage_doubled_from_poison(int v) { _damage_doubled_from_poison = v; }

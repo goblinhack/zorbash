@@ -289,8 +289,8 @@ class Tp:
     def set_is_rrr34(self, value):
         zx.tp_set_is_rrr34(self, value)
 
-    def set_is_rrr35(self, value):
-        zx.tp_set_is_rrr35(self, value)
+    def set_is_able_to_walk_through_walls(self, value):
+        zx.tp_set_is_able_to_walk_through_walls(self, value)
 
     def set_is_humanoid(self, value):
         zx.tp_set_is_humanoid(self, value)

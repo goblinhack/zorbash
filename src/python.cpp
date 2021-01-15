@@ -698,7 +698,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr32)
     TP_SET_DECL(is_rrr33)
     TP_SET_DECL(is_rrr34)
-    TP_SET_DECL(is_rrr35)
+    TP_SET_DECL(is_able_to_walk_through_walls)
     TP_SET_DECL(is_humanoid)
     TP_SET_DECL(is_poison_lover)
     TP_SET_DECL(damage_doubled_from_poison)
