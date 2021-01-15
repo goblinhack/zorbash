@@ -361,8 +361,8 @@ class Tp:
     def set_bag_width(self, value):
         zx.tp_set_bag_width(self, value)
 
-    def set_is_rrr37(self, value):
-        zx.tp_set_is_rrr37(self, value)
+    def set_monst_size(self, value):
+        zx.tp_set_monst_size(self, value)
 
     def set_rarity(self, value):
         zx.tp_set_rarity(self, value)

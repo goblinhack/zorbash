@@ -58,7 +58,7 @@ bool Thing::describe_when_in_inventory (void)
         }
     }
 
-    if (is_rrr37()){
+    if (is_bag()){
         s += ". Select to open. Use mouse to drag items";
     }
 

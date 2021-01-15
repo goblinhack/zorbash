@@ -53,6 +53,7 @@ def tp_init(name, text_name):
     x.set_modifier_constitution(15)
     x.set_modifier_defence(11)
     x.set_modifier_strength(16)
+    x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(300)
     x.set_normal_placement_rules(True)
     x.set_on_death_is_corpse(True)

@@ -34,6 +34,7 @@ void Game::change_state (int new_state)
     }
 
     wid_thing_collect_fini();
+    wid_thing_info_fini();
 
     if (game->in_transit_item) {
         if (wid_in_transit_item_drop()) {

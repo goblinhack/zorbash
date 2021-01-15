@@ -48,6 +48,16 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     fpoint shove_delta = delta;
     fpoint shove_pos = it->mid_at + shove_delta;
+
+    if (it->monst_size() - monst_size() > 1) {
+        if (is_player()) {
+            MINICON("%s is too large to be shoved!", it->text_The().c_str());
+        } else if (it->is_player()) {
+            MINICON("%s fails to shove you!", text_The().c_str());
+        }
+        return (THING_SHOVE_TRIED_AND_FAILED);
+    }
+
     if (!it->is_torch()) {
         if (it->collision_check_only(shove_pos)) {
             if (is_player()) {
