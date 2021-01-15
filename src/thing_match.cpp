@@ -372,7 +372,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr34() && (what == "is_rrr34")) {
         return true;
     }
-    if (is_rrr35() && (what == "is_rrr35")) {
+    if (is_able_to_walk_through_walls() && (what == "is_able_to_walk_through_walls")) {
         return true;
     }
     if (is_humanoid() && (what == "is_humanoid")) {

@@ -25,6 +25,7 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("1d3")
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(False)
+    x.set_is_able_to_walk_through_walls(True)
     x.set_is_active(True)
     x.set_is_ethereal(True)
     x.set_is_floating(True)

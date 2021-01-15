@@ -24,6 +24,15 @@ bool Thing::is_ai_obstacle_for_me (const point &p)
         if (t->is_the_grid) { continue; }
 
         //
+        // Handle ghosts
+        //
+        if (is_able_to_walk_through_walls()) {
+            if (t->is_wall() || t->is_corridor()) {
+                continue;
+            }
+        }
+
+        //
         // "true" on collision
         //
         if (ai_obstacle(t)) {

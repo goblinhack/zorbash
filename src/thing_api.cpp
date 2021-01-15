@@ -658,9 +658,9 @@ int Thing::is_rrr34(void) const
     return (tp()->is_rrr34());
 }
 
-int Thing::is_rrr35(void) const
+int Thing::is_able_to_walk_through_walls(void) const
 {_
-    return (tp()->is_rrr35());
+    return (tp()->is_able_to_walk_through_walls());
 }
 
 int Thing::is_humanoid(void) const
