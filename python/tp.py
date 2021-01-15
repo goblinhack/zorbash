@@ -292,8 +292,8 @@ class Tp:
     def set_is_rrr35(self, value):
         zx.tp_set_is_rrr35(self, value)
 
-    def set_is_rrr36(self, value):
-        zx.tp_set_is_rrr36(self, value)
+    def set_is_humanoid(self, value):
+        zx.tp_set_is_humanoid(self, value)
 
     def set_is_poison_lover(self, value):
         zx.tp_set_is_poison_lover(self, value)
@@ -304,8 +304,8 @@ class Tp:
     def set_avoids_poison(self, value):
         zx.tp_set_avoids_poison(self, value)
 
-    def set_is_rrr40(self, value):
-        zx.tp_set_is_rrr40(self, value)
+    def set_attack_humanoid(self, value):
+        zx.tp_set_attack_humanoid(self, value)
 
     def set_is_poison(self, value):
         zx.tp_set_is_poison(self, value)

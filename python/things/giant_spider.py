@@ -8,7 +8,7 @@ def spawn(me, x, y):
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_delay_after_moving_ms(1000)
-    x.set_ai_scent_distance(10)
+    x.set_ai_scent_distance(3)
     x.set_attack_eater(True)
     x.set_attack_lunge(True)
     x.set_attackable_by_monst(True)

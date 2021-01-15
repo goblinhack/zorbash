@@ -32,6 +32,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_bleeder(True)
     x.set_is_combustible(True)
     x.set_is_interesting(True)
+    x.set_is_humanoid(True)
     x.set_is_jumper(True)
     x.set_is_jumper_distance(2)
     x.set_is_light_strength(10)
