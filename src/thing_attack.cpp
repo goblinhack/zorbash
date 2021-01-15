@@ -230,7 +230,6 @@ _
 
     auto damage = get_damage_melee();
     damage += modifier_to_bonus(get_modifier_attack());
-    minicon("dam %d", damage);
 
     if (owner) {
 	damage += modifier_to_bonus(owner->get_modifier_strength());

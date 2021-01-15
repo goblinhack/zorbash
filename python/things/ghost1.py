@@ -42,6 +42,7 @@ def tp_init(name, text_name):
     x.set_modifier_constitution(20)
     x.set_modifier_defence(12)
     x.set_modifier_strength(7)
+    x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(250)
     x.set_normal_placement_rules(True)
     x.set_rarity(zx.RARITY_COMMON)

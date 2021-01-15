@@ -786,9 +786,9 @@ int Thing::bag_width(void)
     return (tp()->bag_width());
 }
 
-int Thing::is_rrr37(void) const
+int Thing::monst_size(void) const
 {_
-    return (tp()->is_rrr37());
+    return (tp()->monst_size());
 }
 
 int Thing::rarity(void) const

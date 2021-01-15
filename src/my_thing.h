@@ -17,6 +17,15 @@ constexpr uint32_t THING_MAGIC_BEGIN = 11221122;
 constexpr uint32_t THING_MAGIC_END   = 22112211;
 constexpr uint32_t THING_MAGIC_FINAL = 33333333;
 
+enum {
+    MONST_SIZE_TINY,
+    MONST_SIZE_SMALL,
+    MONST_SIZE_NORMAL,
+    MONST_SIZE_LARGE,
+    MONST_SIZE_GIANT,
+    MONST_SIZE_GARGANTUAN,
+};
+
 typedef struct {
     uint16_t tile_outline;
     uint16_t bl1_tile;
@@ -1166,7 +1175,7 @@ public:
     int on_death_is_corpse(void) const;
     int on_death_is_open(void) const;
     int rarity(void) const;
-    int is_rrr37(void) const;
+    int monst_size(void) const;
     int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;

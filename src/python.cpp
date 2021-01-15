@@ -9,6 +9,7 @@
 #include "my_py_sdl.h"
 #include "my_ascii.h"
 #include "my_thing_template.h"
+#include "my_thing.h"
 #include "frameobject.h"
 
 static std::map<std::string, PyObject *> py_mods;
@@ -723,7 +724,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(bag_item_width)
     TP_SET_DECL(bag_height)
     TP_SET_DECL(bag_width)
-    TP_SET_DECL(is_rrr37)
+    TP_SET_DECL(monst_size)
     TP_SET_DECL(is_rrr6)
     TP_SET_DECL(rarity)
     TP_SET_DECL(gfx_is_rrr99)
@@ -1121,6 +1122,12 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "RARITY_VERY_RARE", THING_RARITY_VERY_RARE);
     PyModule_AddIntConstant(zx_mod, "RARITY_UNIQUE", THING_RARITY_UNIQUE);
     PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
+    PyModule_AddIntConstant(zx_mod, "MONST_SIZE_TINY", MONST_SIZE_TINY);
+    PyModule_AddIntConstant(zx_mod, "MONST_SIZE_SMALL", MONST_SIZE_SMALL);
+    PyModule_AddIntConstant(zx_mod, "MONST_SIZE_NORMAL", MONST_SIZE_NORMAL);
+    PyModule_AddIntConstant(zx_mod, "MONST_SIZE_LARGE", MONST_SIZE_LARGE);
+    PyModule_AddIntConstant(zx_mod, "MONST_SIZE_GIANT", MONST_SIZE_GIANT);
+    PyModule_AddIntConstant(zx_mod, "MONST_SIZE_GARGANTUAN", MONST_SIZE_GARGANTUAN);
     PyModule_AddStringConstant(zx_mod, "VERSION", VERSION);
 
     PyModule_AddIntConstant(zx_mod, "KMOD_LSHIFT", KMOD_LSHIFT);

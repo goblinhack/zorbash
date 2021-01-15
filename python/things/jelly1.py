@@ -55,6 +55,7 @@ def tp_init(name, text_name):
     x.set_modifier_constitution(10)
     x.set_modifier_defence(5)
     x.set_modifier_strength(5)
+    x.set_monst_size(zx.MONST_SIZE_TINY)
     x.set_move_speed_ms(1000)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
