@@ -525,12 +525,12 @@ bool Thing::move_to_check (const point& nh, const bool escaping)
         //
         log("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
 _
-        bool target_modifier_attacked = false;
+        bool target_attacked = false;
         bool target_overlaps = false;
         collision_check_and_handle_nearby(fnh,
-                                          &target_modifier_attacked,
+                                          &target_attacked,
                                           &target_overlaps);
-        if (target_modifier_attacked) {
+        if (target_attacked) {
             is_tick_done = true;
             log("Cannot move to %d,%d, must attack", nh.x, nh.y);
             return true;

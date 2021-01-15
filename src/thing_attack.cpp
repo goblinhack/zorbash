@@ -229,7 +229,20 @@ _
     }
 
     auto damage = get_damage_melee();
-    if (it->is_hit_by(this, damage)) {
+    damage += modifier_to_bonus(get_modifier_attack());
+    minicon("dam %d", damage);
+
+    if (owner) {
+	damage += modifier_to_bonus(owner->get_modifier_strength());
+	damage += modifier_to_bonus(owner->get_modifier_attack());
+    }
+
+    if (damage <= 0) {
+	if (is_player()) {
+	    MINICON("Your weapon fails to do any damage.");
+	}
+	return false;
+    } else if (it->is_hit_by(this, damage)) {
         if (is_loggable_for_unimportant_stuff()) {
             log("The attack hit %s for %d", it->to_string().c_str(), damage);
         }

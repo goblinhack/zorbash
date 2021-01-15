@@ -60,9 +60,8 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (!it->is_dead) {
-        log("Shove: it strength %d vs me %d + %d",
-            it->get_modifier_strength(), get_modifier_strength(), 
-            get_damage_melee());
+        log("Shove: it strength %d vs me %d",
+            it->get_modifier_strength(), get_modifier_strength());
 
         if (!d20roll(get_modifier_strength(), it->get_modifier_strength())) {
             if (is_player()) {

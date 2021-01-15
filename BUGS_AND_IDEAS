@@ -1,6 +1,7 @@
 bugs
 ----
 
+- no shove if monst is too big
 - fix attack / bite and melee
 - do spiders run from undead
 - add _attacker for some _avoiders
@@ -14,6 +15,7 @@ bugs
 - invisible monst?
 - monster that runs from light ?
 - ghosts move through walls?
+- consider https://kennystudio.itch.io/2d-explosions-pixelart-free
 
 upcoming work
 -------------

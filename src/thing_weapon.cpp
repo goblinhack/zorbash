@@ -393,7 +393,7 @@ _
         weapon_get_use_offset(&dx, &dy);
     }
 
-    bool target_modifier_attacked = false;
+    bool target_attacked = false;
     bool target_overlaps = false;
     auto hit_at = mid_at + fpoint(dx, dy);
 
@@ -408,13 +408,13 @@ _
 
     if (weapon) {
         if (weapon->collision_check_and_handle_at(hit_at,
-                                                  &target_modifier_attacked,
+                                                  &target_attacked,
                                                   &target_overlaps)) {
             return;
         }
     } else {
         if (collision_check_and_handle_at(hit_at,
-                                          &target_modifier_attacked,
+                                          &target_attacked,
                                           &target_overlaps)) {
             return;
         }

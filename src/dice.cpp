@@ -10,7 +10,7 @@
 int modifier_to_bonus (int modifier)
 {
     switch (modifier) {
-	case 0: return -5;
+	case 0: return 0; // Acts like not set
 	case 1: return -5;
 	case 2: return -4;
 	case 3: return -4;
