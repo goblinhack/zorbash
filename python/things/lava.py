@@ -5,18 +5,19 @@ import tp
 def lava_init(name, text_name, tiles=[]):
     x = tp.Tp(name, text_name)
     x.set_ai_obstacle(True)
+    x.set_damage_melee_dice("1d12+6")
     x.set_gfx_animated(True)
     x.set_is_able_to_fall(True)
+    x.set_is_attackable(False)
     x.set_is_cursor_can_hover_over_but_needs_double_click(True)
-    x.set_is_hazard(True)
     x.set_is_extreme_hazard(True)
+    x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_lava(True)
     x.set_is_light_strength(3)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_light_color("red")
-    x.set_damage_melee_dice("1d12+6")
     x.set_text_a_or_an("");
     x.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move)")
     x.set_text_hits("tickles");

@@ -13,20 +13,22 @@
 
 bool Thing::possible_to_attack (const Thingp it)
 {_
-    log("Is possible to attack %s?", it->to_string().c_str());
-_
     auto me = tp();
+
+    if (!it->is_attackable()) {
+        return false; // Don't log, too noisy
+    }
 
     //
     // Fire attacks via tick so it can get you when you fall or jump into it.
     //
     if (is_fire()) {
-        log("No; is fire");
+        log("Cannot attack %s, it's fire", it->to_string().c_str());
         return false;
     }
 
     if (it->is_dead) {
-        log("No; is dead");
+        log("Cannot attack %s, it's dead", it->to_string().c_str());
         return false;
     }
 
@@ -34,32 +36,32 @@ _
     // No attacking of open doors!
     //
     if (it->is_open) {
-        log("Cannot attack %s, its open", it->to_string().c_str());
+        log("Cannot attack %s, it's open", it->to_string().c_str());
         return false;
     }
 
     if (is_alive_monst() || is_resurrected) {
         if (me->is_jelly_baby_eater()) {
             if (it->is_jelly_baby()) {
-                log("Yes, can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_treasure_eater()) {
             if (it->is_treasure()) {
-                log("Yes, can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
             if (it->is_carrying_treasure()) {
-                log("Yes, can steal from %s", it->to_string().c_str());
+                log("Can steal from %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_potion_eater()) {
             if (it->is_potion()) {
-                log("Yes, can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -71,19 +73,14 @@ _
                 return false;
             }
             if (it->is_meat() || it->is_blood()) {
-                log("Yes, can attack meat or blood: %s", it->to_string().c_str());
+                log("Can attack meat or blood: %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->attack_humanoid()) {
-            if (!it->attackable_by_monst()) {
-                log("No, cannot attack %s, not attackable by humanoid eating monst",
-                    it->to_string().c_str());
-                return false;
-            }
             if (it->is_humanoid()) {
-                log("Yes, can attack humanoid: %s", it->to_string().c_str());
+                log("Can attack humanoid: %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -95,19 +92,25 @@ _
                 return false;
             }
             if (it->is_food()) {
-                log("Yes, can attack food: %s", it->to_string().c_str());
+                log("Can attack food: %s", it->to_string().c_str());
                 return true;
             }
         }
     }
 
     if (is_player()) {
-        if (!it->attackable_by_player()) {
-            log("No, cannot attack %s, not attackable", it->to_string().c_str());
-            return false;
+        //
+        // If player is attacking with bare fists, allow an attack
+        // Else if it is a weapon, the weapon will attack
+        //
+        if (!weapon_get()) {
+            if (!it->attackable_by_player()) {
+                log("No, cannot attack %s, not attackable", it->to_string().c_str());
+                return false;
+            }
+            log("Can attack %s", it->to_string().c_str());
+            return true;
         }
-        log("Yes, can attack %s", it->to_string().c_str());
-        return true;
     }
 
     if (is_weapon()) {
@@ -120,7 +123,7 @@ _
                     //     it->to_string().c_str());
                     return false;
                 }
-                log("Yes, can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             } else {
                 if (!it->attackable_by_player()) {
@@ -128,7 +131,7 @@ _
                         it->to_string().c_str());
                     return false;
                 }
-                log("Yes, can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -137,18 +140,18 @@ _
     if (me->is_fire() || me->is_lava()) {
         if (it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
-                log("Yes, can attack %s", it->to_string().c_str());
+                log("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
     }
 
     if (is_enemy(it)) {
-        log("Yes, can attack enemy %s", it->to_string().c_str());
+        log("Can attack enemy %s", it->to_string().c_str());
         return true;
     }
 
-    log("No, ignore attack %s", it->to_string().c_str());
+    log("Cannot attack %s, ignore", it->to_string().c_str());
     return false;
 }
 
@@ -231,8 +234,8 @@ _
         }
     }
 
-    log("Check is possible to attack %s", it->to_string().c_str());
     if (!possible_to_attack(it)) {
+	log("Attack failed, not possible tp attack %s", it->to_string().c_str());
         return false;
     }
 
@@ -246,22 +249,27 @@ _
     }
 
     auto damage = get_damage_melee();
-    damage += modifier_to_bonus(get_modifier_attack());
+    auto modifier = modifier_to_bonus(get_modifier_attack());
 
     if (owner) {
-	damage += modifier_to_bonus(owner->get_modifier_strength());
-	damage += modifier_to_bonus(owner->get_modifier_attack());
+	modifier += modifier_to_bonus(owner->get_modifier_strength());
+	modifier += modifier_to_bonus(owner->get_modifier_attack());
     }
 
-    if (damage <= 0) {
+    if (damage + modifier <= 0) {
 	if (is_player()) {
 	    MINICON("Your weapon fails to do any damage.");
+	} else if (it->is_player()) {
+	    MINICON("%s fails to attack you", text_The().c_str());
+        } else {
+            log("The attack failed (dmg %d, mod %d) on %s",
+		damage, modifier, it->to_string().c_str());
 	}
 	return false;
-    } else if (it->is_hit_by(this, damage)) {
-        if (is_loggable_for_unimportant_stuff()) {
-            log("The attack hit %s for %d", it->to_string().c_str(), damage);
-        }
+    } else if (it->is_hit_by(this, damage + modifier)) {
+        log("The attack succeeded (dmg %d, mod %d) on %s",
+            damage, modifier, it->to_string().c_str());
+
         if (attack_lunge()) {
             lunge(it->get_interpolated_mid_at());
         }

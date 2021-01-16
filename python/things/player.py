@@ -41,6 +41,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_meat(True)
     x.set_is_movable(True)
     x.set_is_player(True)
+    x.set_is_attackable(True)
     x.set_is_shovable(True)
     x.set_is_weapon_wielder(True)
     x.set_modifier_attack(10)

@@ -18,10 +18,13 @@ def tp_init(name, text_name):
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
+    x.set_is_attackable(True)
     x.set_is_item_not_stackable(True)
+    x.set_is_attackable(True)
     x.set_is_movable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_treasure_class_a(True)
+    x.set_is_attackable(True)
     x.set_long_text_description("A large leathery brown bag.")
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");

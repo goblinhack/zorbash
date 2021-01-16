@@ -648,9 +648,9 @@ int Thing::is_rrr32(void) const
     return (tp()->is_rrr32());
 }
 
-int Thing::is_rrr33(void) const
+int Thing::is_attackable(void) const
 {_
-    return (tp()->is_rrr33());
+    return (tp()->is_attackable());
 }
 
 int Thing::is_able_to_see_through_doors(void) const

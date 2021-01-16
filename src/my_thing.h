@@ -1121,7 +1121,7 @@ public:
     int is_rrr30(void) const;
     int is_rrr31(void) const;
     int is_rrr32(void) const;
-    int is_rrr33(void) const;
+    int is_attackable(void) const;
     int is_able_to_see_through_doors(void) const;
     int is_able_to_walk_through_walls(void) const;
     int is_humanoid(void) const;

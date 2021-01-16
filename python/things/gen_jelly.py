@@ -9,6 +9,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
 
     x = tp.Tp(name)
     # x.set_is_generator(True) # don't set to avoid auto place
+    x.set_is_attackable(True)
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_shown_in_bg(True)

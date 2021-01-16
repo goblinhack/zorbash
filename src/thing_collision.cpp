@@ -553,7 +553,7 @@ _
             continue;
         }
 
-        log("Cand %s", cand.target->to_string().c_str());
+        log("Candidate: %s", cand.target->to_string().c_str());
 
         //
         // Skip things that aren't really hitable.
@@ -614,7 +614,7 @@ _
         auto it = best->target;
 
         if (is_loggable_for_unimportant_stuff()) {
-            log("Best cand %s", it->to_string().c_str());
+            log("Best candidate %s", it->to_string().c_str());
         }
 
         if (attack(it)) {
