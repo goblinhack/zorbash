@@ -2,6 +2,7 @@ bugs
 ----
 
 - ghosts need to walk through walls
+- skeleton wont step over skull
 - fix attack / bite and melee
 - add _attacker for some _avoiders
 - small gfx for con / def / str 
@@ -12,7 +13,6 @@ bugs
 - antipoison potion
 - invisible monst?
 - monster that runs from light ?
-- ghosts move through walls?
 - consider https://kennystudio.itch.io/2d-explosions-pixelart-free
 
 upcoming work

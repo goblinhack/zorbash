@@ -49,7 +49,9 @@ bool Tp::will_avoid (Levelp level, point p) const
 
     if (level->is_movement_blocking_soft(p) ||
         level->is_movement_blocking_hard(p)) {
-        return true;
+        if (!is_able_to_walk_through_walls()) {
+            return true;
+        }
     }
 
     int heat = level->heatmap(p);
@@ -108,7 +110,9 @@ bool Thing::will_avoid (const point &p)
 
     if (level->is_movement_blocking_soft(p) ||
         level->is_movement_blocking_hard(p)) {
-        return true;
+        if (!is_able_to_walk_through_walls()) {
+            return true;
+        }
     }
 
     if (!is_on_fire()) {
