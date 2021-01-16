@@ -653,9 +653,9 @@ int Thing::is_rrr33(void) const
     return (tp()->is_rrr33());
 }
 
-int Thing::is_is_able_to_see_through_doors(void) const
+int Thing::is_able_to_see_through_doors(void) const
 {_
-    return (tp()->is_is_able_to_see_through_doors());
+    return (tp()->is_able_to_see_through_doors());
 }
 
 int Thing::is_able_to_walk_through_walls(void) const
@@ -668,9 +668,9 @@ int Thing::is_humanoid(void) const
     return (tp()->is_humanoid());
 }
 
-int Thing::is_poison_lover(void) const
+int Thing::is_poison_immune(void) const
 {_
-    return (tp()->is_poison_lover());
+    return (tp()->is_poison_immune());
 }
 
 int Thing::damage_doubled_from_poison(void) const

@@ -286,8 +286,8 @@ class Tp:
     def set_is_rrr33(self, value):
         zx.tp_set_is_rrr33(self, value)
 
-    def set_is_is_able_to_see_through_doors(self, value):
-        zx.tp_set_is_is_able_to_see_through_doors(self, value)
+    def set_is_able_to_see_through_doors(self, value):
+        zx.tp_set_is_able_to_see_through_doors(self, value)
 
     def set_is_able_to_walk_through_walls(self, value):
         zx.tp_set_is_able_to_walk_through_walls(self, value)
@@ -295,8 +295,8 @@ class Tp:
     def set_is_humanoid(self, value):
         zx.tp_set_is_humanoid(self, value)
 
-    def set_is_poison_lover(self, value):
-        zx.tp_set_is_poison_lover(self, value)
+    def set_is_poison_immune(self, value):
+        zx.tp_set_is_poison_immune(self, value)
 
     def set_damage_doubled_from_poison(self, value):
         zx.tp_set_damage_doubled_from_poison(self, value)

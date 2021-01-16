@@ -1121,10 +1121,10 @@ public:
     int is_rrr31(void) const;
     int is_rrr32(void) const;
     int is_rrr33(void) const;
-    int is_is_able_to_see_through_doors(void) const;
+    int is_able_to_see_through_doors(void) const;
     int is_able_to_walk_through_walls(void) const;
     int is_humanoid(void) const;
-    int is_poison_lover(void) const;
+    int is_poison_immune(void) const;
     int damage_doubled_from_poison(void) const;
     int avoids_poison(void) const;
     int is_rrr4(void) const;
