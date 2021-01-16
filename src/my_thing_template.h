@@ -233,7 +233,7 @@ private:
     int _is_rrr31 {};
     int _is_rrr32 {};
     int _is_rrr33 {};
-    int _is_rrr34 {};
+    int _is_is_able_to_see_through_doors {};
     int _is_able_to_walk_through_walls {};
     int _is_humanoid {};
     int _is_poison_lover {};
@@ -590,7 +590,7 @@ public:
     int is_rrr31(void) const;
     int is_rrr32(void) const;
     int is_rrr33(void) const;
-    int is_rrr34(void) const;
+    int is_is_able_to_see_through_doors(void) const;
     int is_able_to_walk_through_walls(void) const;
     int is_humanoid(void) const;
     int is_poison_lover(void) const;
@@ -829,7 +829,7 @@ public:
     void set_is_rrr31(int);
     void set_is_rrr32(int);
     void set_is_rrr33(int);
-    void set_is_rrr34(int);
+    void set_is_is_able_to_see_through_doors(int);
     void set_is_able_to_walk_through_walls(int);
     void set_is_humanoid(int);
     void set_is_poison_lover(int);

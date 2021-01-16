@@ -986,17 +986,6 @@ bool Thing::ai_obstacle (Thingp it)
         }
     }
 
-    //
-    // Allow AI to see through doors?
-    //
-#if 0
-    if (it->is_movement_blocking_soft()) {
-        if (!it->is_open) {
-            return true;
-        }
-    }
-#endif
-
     if (is_player()) {
         if (it->is_alive_monst()) {
             if (!it->is_ethereal()) {

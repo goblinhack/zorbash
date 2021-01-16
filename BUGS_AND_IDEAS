@@ -1,7 +1,6 @@
 bugs
 ----
 
-- ghosts need to walk through walls
 - skeleton wont step over skull
 - fix attack / bite and melee
 - add _attacker for some _avoiders

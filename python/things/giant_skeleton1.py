@@ -35,6 +35,7 @@ def tp_init(name, text_name):
     x.set_health_hunger_pct(95)
     x.set_health_initial_dice("10d10")
     x.set_is_able_to_change_levels(True)
+    x.set_is_able_to_see_through_doors(True)
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
     x.set_is_combustible(True)
