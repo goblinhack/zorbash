@@ -11,7 +11,7 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-bool Tp::will_avoid (Levelp level, point p) const
+bool Tp::will_avoid_threat (Levelp level, point p) const
 {_
     if (level->is_water(p)) {
         if (avoids_water()) {
@@ -34,45 +34,13 @@ bool Tp::will_avoid (Levelp level, point p) const
     if (!is_floating()) {
         if (level->is_chasm(p)) {
             return true;
-        }
-    }
-
-    if (level->is_corpse(p)) {
-        if (level->is_monst(p) > 1) {
-            return true;
-        }
-    } else {
-        if (level->is_monst(p) > 0) {
-            return true;
-        }
-    }
-
-    if (level->is_movement_blocking_soft(p) ||
-        level->is_movement_blocking_hard(p)) {
-        if (!is_able_to_walk_through_walls()) {
-            return true;
-        }
-    }
-
-    int heat = level->heatmap(p);
-    if (damage_doubled_from_fire()) {
-        if (heat > 0) {
-            if (avoids_fire()) {
-                return true;
-            }
-        }
-    } else {
-	if (heat >= 4) { // this allows you to skip around lava
-            if (avoids_fire()) {
-                return true;
-            }
         }
     }
 
     return false;
 }
 
-bool Thing::will_avoid (const point &p)
+bool Thing::will_avoid_threat (const point &p)
 {_
     if (level->is_water(p)) {
         if (avoids_water()) {
@@ -94,23 +62,6 @@ bool Thing::will_avoid (const point &p)
 
     if (!is_floating()) {
         if (level->is_chasm(p)) {
-            return true;
-        }
-    }
-
-    if (level->is_corpse(p)) {
-        if (level->is_monst(p) > 1) {
-            return true;
-        }
-    } else {
-        if (level->is_monst(p) > 0) {
-            return true;
-        }
-    }
-
-    if (level->is_movement_blocking_soft(p) ||
-        level->is_movement_blocking_hard(p)) {
-        if (!is_able_to_walk_through_walls()) {
             return true;
         }
     }
@@ -135,15 +86,28 @@ bool Thing::will_avoid (const point &p)
     return false;
 }
 
-bool Thing::will_avoid (const fpoint &p)
-{_
-    return will_avoid(point(p.x, p.y));
-}
-
-bool Thing::will_avoid (const Thingp itp)
+bool Thing::will_avoid_threat (const Thingp itp)
 {_
     auto me = tp();
     auto it = itp->tp();
+
+    if (me->avoids_water()) {
+        if (it->is_water()) {
+            return true;
+        }
+    }
+
+    if (me->avoids_acid()) {
+        if (it->is_acid()) {
+            return true;
+        }
+    }
+
+    if (me->avoids_poison()) {
+        if (it->is_poison()) {
+            return true;
+        }
+    }
 
     if (me->is_meat()) {
         if (it->is_meat_eater() || it->attack_meat()) {
@@ -188,18 +152,6 @@ bool Thing::will_avoid (const Thingp itp)
         }
     }
 
-    if (me->avoids_acid()) {
-        if (it->is_acid()) {
-            return true;
-        }
-    }
-
-    if (me->avoids_poison()) {
-        if (it->is_poison()) {
-            return true;
-        }
-    }
-
     if (!is_on_fire()) {
         if (me->avoids_fire()) {
             if (it->is_fire()) {
@@ -211,10 +163,10 @@ bool Thing::will_avoid (const Thingp itp)
         }
     }
 
-    if (me->avoids_water()) {
-        if (it->is_water()) {
-            return true;
-        }
-    }
     return false;
+}
+
+bool Thing::will_avoid_threat (const fpoint &p)
+{_
+    return will_avoid_threat(point(p.x, p.y));
 }

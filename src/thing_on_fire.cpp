@@ -94,7 +94,7 @@ bool Thing::ai_create_on_fire_path (point &nh,
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (will_avoid(point(x, y))) {
+            if (collision_obstacle(point(x, y))) {
                 set(dmap.val, x, y, DMAP_IS_WALL);
             } else {
                 set(dmap.val, x, y, DMAP_IS_PASSABLE);

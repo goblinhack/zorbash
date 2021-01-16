@@ -41,7 +41,7 @@ Thingp Thing::nearby_most_dangerous_thing_get (void)
             }
 
             auto score = t->get_health();
-            if (will_avoid(point(x, y))) {
+            if (will_avoid_threat(point(x, y))) {
                 score += t->get_health_max();
             }
 

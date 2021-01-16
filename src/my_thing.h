@@ -879,6 +879,7 @@ public:
     bool collision_find_best_target(bool *, bool *);
     bool collision_obstacle(Thingp);
     bool collision_obstacle(fpoint);
+    bool collision_obstacle(point);
     bool ai_obstacle(Thingp);
     bool ai_obstacle(fpoint);
     bool cursor_path_pop_next_and_move(void);
@@ -931,9 +932,9 @@ public:
     bool try_to_jump_away_from_player(void);
     bool use(Thingp w);
     bool throw_item(Thingp w);
-    bool will_avoid(const Thingp it);
-    bool will_avoid(const point &p);
-    bool will_avoid(const fpoint &p);
+    bool will_avoid_threat(const Thingp it);
+    bool will_avoid_threat(const point &p);
+    bool will_avoid_threat(const fpoint &p);
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void) const;
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;

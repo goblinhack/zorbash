@@ -15,7 +15,7 @@ uint8_t Thing::is_less_preferred_terrain (point p)
 {_
     int pref = 0;
 
-    if (will_avoid(p)) {
+    if (collision_obstacle(p)) {
         pref++;
     }
 

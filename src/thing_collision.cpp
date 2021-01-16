@@ -843,6 +843,8 @@ _
 //
 bool Thing::collision_obstacle (Thingp it)
 {
+    auto p = point(it->mid_at.x, it->mid_at.y);
+
     if (it == this) {
         return false;
     }
@@ -901,6 +903,16 @@ bool Thing::collision_obstacle (Thingp it)
             }
         }
     } else if (is_monst()) {
+        if (level->is_corpse(p)) {
+            if (level->is_monst(p) > 1) {
+                return true;
+            }
+        } else {
+            if (level->is_monst(p) > 0) {
+                return true;
+            }
+        }
+
         if (it->is_chasm()) {
             if (!is_floating()) {
                 return true;
@@ -915,7 +927,7 @@ bool Thing::collision_obstacle (Thingp it)
         //     return true;
         // }
  
-        if (will_avoid(it)) {
+        if (will_avoid_threat(it)) {
             return true;
         }
 
@@ -1007,7 +1019,7 @@ bool Thing::ai_obstacle (Thingp it)
         //     return true;
         // }
  
-        if (will_avoid(it)) {
+        if (will_avoid_threat(it)) {
             return true;
         }
     }
@@ -1016,6 +1028,29 @@ bool Thing::ai_obstacle (Thingp it)
 }
 
 bool Thing::collision_obstacle (fpoint p)
+{
+    //
+    // Avoid threats and treat them as obstacles
+    //
+    for (const auto& it : get(level->all_thing_ptrs_at, p.x, p.y)) {
+        if (!it) {
+            continue;
+        }
+
+        if (it->is_the_grid) { continue; }
+
+        //
+        // "true" on collision
+        //
+        if (collision_obstacle(it)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool Thing::collision_obstacle (point p)
 {
     //
     // Avoid threats and treat them as obstacles

@@ -24,7 +24,7 @@ point Thing::get_random_scent_target (void)
         auto y = std::min(
                  std::max(MAP_BORDER_TOTAL, start.y + dy), MAP_HEIGHT - MAP_BORDER_TOTAL);
 
-        if (will_avoid(point(x, y))) {
+        if (collision_obstacle(point(x, y))) {
             continue;
         } else {
             auto c = is_less_preferred_terrain(point(x, y));

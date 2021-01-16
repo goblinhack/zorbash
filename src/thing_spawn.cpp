@@ -43,10 +43,7 @@ _
         auto y = mid_at.y + d.y;
         auto p = point(x, y);
 
-        if (will_avoid(point(x, y))) {
-            continue;
-        }
-        if (tpp->will_avoid(level, point(x, y))) {
+        if (collision_obstacle(point(x, y))) {
             continue;
         }
 
@@ -107,10 +104,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
             continue;
         }
 
-        if (will_avoid(point(x, y))) {
-            continue;
-        }
-        if (tpp->will_avoid(level, point(x, y))) {
+        if (collision_obstacle(point(x, y))) {
             continue;
         }
 
@@ -200,7 +194,6 @@ bool Thing::spawn_fire (const std::string& what)
         point(0, 1),
     };
 
-    auto tpp = tp_find(what);
     for (const auto& d : all_deltas) {
         auto x = mid_at.x + d.x;
         auto y = mid_at.y + d.y;
@@ -212,10 +205,7 @@ bool Thing::spawn_fire (const std::string& what)
             continue;
         }
 
-        if (will_avoid(point(x, y))) {
-            continue;
-        }
-        if (tpp->will_avoid(level, point(x, y))) {
+        if (collision_obstacle(point(x, y))) {
             continue;
         }
 

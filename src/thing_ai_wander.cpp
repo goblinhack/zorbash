@@ -27,7 +27,7 @@ bool Thing::ai_blocked (void)
         auto t = at + d;
         auto x = t.x;
         auto y = t.y;
-        if (will_avoid(point(x, y))) {
+        if (collision_obstacle(point(x, y))) {
             count++;
         }
     }
@@ -50,7 +50,7 @@ bool Thing::ai_blocked_completely (void)
         auto t = at + d;
         auto x = t.x;
         auto y = t.y;
-        if (will_avoid(point(x, y))) {
+        if (collision_obstacle(point(x, y))) {
             count++;
         }
     }
@@ -107,10 +107,8 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (will_avoid(point(x, y))) {
-
+            if (collision_obstacle(point(x, y))) {
                 set(dmap.val, x, y, DMAP_IS_WALL);
-
             } else {
                 auto c = is_less_preferred_terrain(point(x, y));
                 if (c >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
