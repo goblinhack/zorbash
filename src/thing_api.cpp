@@ -653,9 +653,9 @@ int Thing::is_rrr33(void) const
     return (tp()->is_rrr33());
 }
 
-int Thing::is_rrr34(void) const
+int Thing::is_is_able_to_see_through_doors(void) const
 {_
-    return (tp()->is_rrr34());
+    return (tp()->is_is_able_to_see_through_doors());
 }
 
 int Thing::is_able_to_walk_through_walls(void) const
