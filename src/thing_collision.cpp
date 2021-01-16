@@ -879,6 +879,10 @@ bool Thing::collision_obstacle (Thingp it)
     // Allow movement through open doors only
     //
     if (it->is_movement_blocking_hard()) {
+        if (is_able_to_walk_through_walls()) {
+            return false;
+        }
+
         if (!it->is_open) {
             return true;
         }
@@ -961,9 +965,22 @@ bool Thing::ai_obstacle (Thingp it)
     }
 
     //
+    // Stop entities piling on top of each other
+    //
+    if (it->is_able_to_walk_through_walls()) {
+        if (is_able_to_walk_through_walls()) {
+            return true;
+        }
+    }
+
+    //
     // Allow movement through open doors only
     //
     if (it->is_movement_blocking_hard()) {
+        if (is_able_to_walk_through_walls()) {
+            return false;
+        }
+
         if (!it->is_open) {
             return true;
         }
