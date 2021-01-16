@@ -141,7 +141,7 @@ bool Thing::try_to_jump (point to)
             return false;
         }
 
-        if (will_avoid(point(x, y))) {_
+        if (collision_obstacle(point(x, y))) {_
             log("No, jump failed, avoid destination");
             if (is_player()) {
                 MINICON("You can't quite onto that");

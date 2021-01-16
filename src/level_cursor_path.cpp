@@ -116,7 +116,20 @@ void Level::cursor_path_draw_line (point start, point end)
                 }
             }
         }
-    } else if (player->will_avoid(player->mid_at)) {
+    } else if (cursor && is_extreme_hazard(cursor->mid_at.x, cursor->mid_at.y)) {
+        //
+        // If the cursor is on a hazard we can plot a course via hazards.
+        //
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                if (is_movement_blocking_hard(x, y)) {
+                    set(d.val, x, y, DMAP_IS_WALL);
+                } else {
+                    set(d.val, x, y, DMAP_IS_PASSABLE);
+                }
+            }
+        }
+    } else if (player->collision_obstacle(player->mid_at)) {
         //
         // If already on a hazard we can plot a course via hazards.
         //
@@ -130,29 +143,14 @@ void Level::cursor_path_draw_line (point start, point end)
                 }
             }
         }
-    } else if (cursor && player->will_avoid(cursor->mid_at)) {
-        //
-        // If the cursor is on a hazard we can plot a course via hazards.
-        //
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
-                if (is_extreme_hazard(x, y) ||
-                    is_movement_blocking_hard(x, y)) {
-                    set(d.val, x, y, DMAP_IS_WALL);
-                } else {
-                    set(d.val, x, y, DMAP_IS_PASSABLE);
-                }
-            }
-        }
     } else {
         //
-        // Else avoid all hazards as we all are not standing on one
+        // Else avoid all hazards as we are not standing on one
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if (is_extreme_hazard(x, y) ||
-                    is_movement_blocking_hard(x, y) ||
-                    player->will_avoid(point(x, y))) {
+                    player->collision_obstacle(point(x, y))) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);

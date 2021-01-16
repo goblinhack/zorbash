@@ -392,7 +392,7 @@ public:
     const std::string& resurrect_dice_str(void) const;
     void set_resurrect_dice(const std::string &);
 
-    bool will_avoid(Levelp, point p) const;
+    bool will_avoid_threat(Levelp, point p) const;
     const Tilemap *tp_bl1_tiles(void) const;
     const Tilemap *tp_bl2_tiles(void) const;
     const Tilemap *tp_bot1_tiles(void) const;
