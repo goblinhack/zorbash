@@ -369,7 +369,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr33() && (what == "is_rrr33")) {
         return true;
     }
-    if (is_is_able_to_see_through_doors() && (what == "is_is_able_to_see_through_doors")) {
+    if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) {
         return true;
     }
     if (is_able_to_walk_through_walls() && (what == "is_able_to_walk_through_walls")) {
@@ -378,7 +378,7 @@ bool Thing::match (const std::string& what)
     if (is_humanoid() && (what == "is_humanoid")) {
         return true;
     }
-    if (is_poison_lover() && (what == "is_poison_lover")) {
+    if (is_poison_immune() && (what == "is_poison_immune")) {
         return true;
     }
     if (damage_doubled_from_poison() && (what == "damage_doubled_from_poison")) {

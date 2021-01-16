@@ -220,10 +220,10 @@ int Tp::is_rrr30(void) const { return _is_rrr30; }
 int Tp::is_rrr31(void) const { return _is_rrr31; }
 int Tp::is_rrr32(void) const { return _is_rrr32; }
 int Tp::is_rrr33(void) const { return _is_rrr33; }
-int Tp::is_is_able_to_see_through_doors(void) const { return _is_is_able_to_see_through_doors; }
+int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
 int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
 int Tp::is_humanoid(void) const { return _is_humanoid; }
-int Tp::is_poison_lover(void) const { return _is_poison_lover; }
+int Tp::is_poison_immune(void) const { return _is_poison_immune; }
 int Tp::damage_doubled_from_poison(void) const { return _damage_doubled_from_poison; }
 int Tp::avoids_poison(void) const { return _avoids_poison; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
@@ -457,10 +457,10 @@ void Tp::set_is_rrr30(int v) { _is_rrr30 = v; }
 void Tp::set_is_rrr31(int v) { _is_rrr31 = v; }
 void Tp::set_is_rrr32(int v) { _is_rrr32 = v; }
 void Tp::set_is_rrr33(int v) { _is_rrr33 = v; }
-void Tp::set_is_is_able_to_see_through_doors(int v) { _is_is_able_to_see_through_doors = v; }
+void Tp::set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
 void Tp::set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
 void Tp::set_is_humanoid(int v) { _is_humanoid = v; }
-void Tp::set_is_poison_lover(int v) { _is_poison_lover = v; }
+void Tp::set_is_poison_immune(int v) { _is_poison_immune = v; }
 void Tp::set_damage_doubled_from_poison(int v) { _damage_doubled_from_poison = v; }
 void Tp::set_avoids_poison(int v) { _avoids_poison = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }

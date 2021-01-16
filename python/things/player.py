@@ -8,7 +8,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_attackable_by_monst(True)
     x.set_avoids_acid(True)
     x.set_avoids_fire(100)
-    x.set_avoids_poison(True) # x.set_is_poison_lover(True) for some odd creature
+    x.set_avoids_poison(True) # x.set_is_poison_immune(True) for some odd creature
     x.set_bag_height(12)
     x.set_bag_width(12)
     x.set_collision_attack(True)
