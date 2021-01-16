@@ -11,11 +11,16 @@
 
 int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           Thingp real_hitter, // who fired the arrow?
+                          bool crit,
                           int damage)
 {_
     hitter->log("Hit for damage %d", damage);
 
     auto delta = mid_at - hitter->mid_at;
+
+    if (crit) {
+        damage *= 2;
+    }
 
     //
     // Cruel to let things keep on hitting you when you're dead
@@ -109,10 +114,17 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (is_player()) {
         if (damage > THING_DAMAGE_SHAKE_ABOVE) {
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
-            MINICON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
-                    real_hitter->text_The().c_str(),
-                    real_hitter->text_hits().c_str(),
-                    damage);
+            if (crit) {
+                MINICON("%%fg=red$%s %s CRITS you for %d damage!%%fg=reset$",
+                        real_hitter->text_The().c_str(),
+                        real_hitter->text_hits().c_str(),
+                        damage);
+            } else {
+                MINICON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
+                        real_hitter->text_The().c_str(),
+                        real_hitter->text_hits().c_str(),
+                        damage);
+            }
 
             if (real_hitter->is_fire() ||
                 real_hitter->is_lava()) {
@@ -121,10 +133,17 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 }
             }
         } else {
-            MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
-                    real_hitter->text_The().c_str(),
-                    real_hitter->text_hits().c_str(),
-                    damage);
+            if (crit) {
+                MINICON("%%fg=red$%s %s CRITS you for %d damage!%%fg=reset$",
+                        real_hitter->text_The().c_str(),
+                        real_hitter->text_hits().c_str(),
+                        damage);
+            } else {
+                MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
+                        real_hitter->text_The().c_str(),
+                        real_hitter->text_hits().c_str(),
+                        damage);
+            }
         }
 
         if (is_bloodied()) {
@@ -132,8 +151,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     } else {
         if (real_hitter->is_player()) {
-            MINICON("You hit the %s for %d damage!",
-                    text_the().c_str(), damage);
+            if (crit) {
+                MINICON("%%fg=red$You CRIT hit the %s for %d damage!%%fg=reset$",
+                        text_the().c_str(), damage);
+            } else {
+                MINICON("You hit the %s for %d damage!",
+                        text_the().c_str(), damage);
+            }
         }
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
@@ -145,11 +169,21 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Visible hit indication
     //
-    if (is_player() || real_hitter->is_player()) {
-        msg(string_sprintf("%%fg=red$-%d", damage));
-    } else if (is_monst()) {
-        if (is_player() || real_hitter->is_player()) {
-            msg(string_sprintf("%%fg=white$-%d", damage));
+    if (crit) {
+        if (is_player()) {
+            msg(string_sprintf("CRIT! %%fg=red$-%d", damage));
+        } else if (is_monst()) {
+            if (hitter->is_player() || real_hitter->is_player()) {
+                msg(string_sprintf("CRIT! %%fg=white$-%d", damage));
+            }
+        }
+    } else {
+        if (is_player()) {
+            msg(string_sprintf("%%fg=red$-%d", damage));
+        } else if (is_monst()) {
+            if (hitter->is_player() || real_hitter->is_player()) {
+                msg(string_sprintf("%%fg=white$-%d", damage));
+            }
         }
     }
 
@@ -219,7 +253,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit_by (Thingp hitter, int damage)
+int Thing::is_hit_by (Thingp hitter, bool crit, int damage)
 {_
     hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
 _
@@ -376,12 +410,12 @@ _
     hitter->log("Hit succeeds");
     int hit_and_killed;
 
-    hit_and_killed = ai_hit_actual(hitter, real_hitter, damage);
+    hit_and_killed = ai_hit_actual(hitter, real_hitter, crit, damage);
 
     return (hit_and_killed);
 }
 
 int Thing::is_hit_by (Thingp hitter)
 {_
-    return (is_hit_by(hitter, 0));
+    return (is_hit_by(hitter, false, 0));
 }

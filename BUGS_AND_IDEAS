@@ -1,9 +1,11 @@
 bugs
 ----
 
+- overlap not working when things moving
+- when selecting no thing info in hover over
+- need cannot miss on generator
 - fix attack / bite and melee
 - add _attacker for some _avoiders
-- on fire monst should seek water?
 - small gfx for con / def / str 
 - warhammer should kill parent jelly in one go
 - defence does nothing
@@ -12,11 +14,13 @@ bugs
 - spider that throws web?
 - antipoison potion
 - invisible monst?
-- monster that runs from light ?
 - consider https://kennystudio.itch.io/2d-explosions-pixelart-free
 
 upcoming work
 -------------
+- monster that runs from light ?
+- on fire monst should seek water?
+- sewer wolf?
 - fire portion
 - enchant potion
 - enchant potion of descent radius

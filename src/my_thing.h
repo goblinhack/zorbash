@@ -967,7 +967,7 @@ public:
     fpoint set_interpolated_mid_at(fpoint);
     int ai_choose_goal(void);
     int ai_delay_after_moving_ms(void);
-    int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
+    int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, int damage);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
@@ -1054,7 +1054,7 @@ public:
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hit_by(Thingp hitter);
-    int is_hit_by(Thingp hitter, int damage);
+    int is_hit_by(Thingp hitter, bool crit, int damage);
     int is_hunger_insatiable(void) const;
     int is_intelligent(void) const;
     int is_interesting(void) const;

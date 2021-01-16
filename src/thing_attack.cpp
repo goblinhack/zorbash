@@ -10,6 +10,7 @@
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
+#include "my_sprintf.h"
 
 bool Thing::possible_to_attack (const Thingp it)
 {_
@@ -248,27 +249,73 @@ _
         }
     }
 
-    auto damage = get_damage_melee();
-    auto modifier = modifier_to_bonus(get_modifier_attack());
-
+    auto att_mod = modifier_to_bonus(get_modifier_strength()) +
+                   modifier_to_bonus(get_modifier_attack());
     if (owner) {
-	modifier += modifier_to_bonus(owner->get_modifier_strength());
-	modifier += modifier_to_bonus(owner->get_modifier_attack());
+        att_mod += modifier_to_bonus(owner->get_modifier_strength());
+        att_mod += modifier_to_bonus(owner->get_modifier_attack());
     }
 
-    if (damage + modifier <= 0) {
-	if (is_player()) {
-	    MINICON("Your weapon fails to do any damage.");
-	} else if (it->is_player()) {
-	    MINICON("%s fails to attack you", text_The().c_str());
+    auto def_mod = modifier_to_bonus(it->get_modifier_defence());
+    auto it_owner = get_top_owner();
+    if (it_owner) {
+        def_mod = modifier_to_bonus(it_owner->get_modifier_defence());
+    }
+
+    //
+    // See if we can bypass its defences
+    //
+    bool crit;
+    bool fumble;
+    if (!d20roll(att_mod, def_mod, fumble, crit)) {
+        if (fumble) {
+            if (is_player() || (owner && owner->is_player())) {
+                MINICON("You fumble your attack on %s.",
+                        it->text_the().c_str());
+                msg(string_sprintf("%%fg=white$fumble!%%fg=reset$"));
+            } else if (it->is_player()) {
+                MINICON("%s fumbles its attack.", text_The().c_str());
+                msg(string_sprintf("%%fg=red$fumble!%%fg=reset$"));
+            } else {
+                log("The attack missed (att %d, def %d) on %s",
+                    att_mod, def_mod, it->to_string().c_str());
+            }
         } else {
-            log("The attack failed (dmg %d, mod %d) on %s",
-		damage, modifier, it->to_string().c_str());
+            if (is_player() || (owner && owner->is_player())) {
+                MINICON("You miss your attack on %s.",
+                        it->text_the().c_str());
+                msg(string_sprintf("%%fg=white$miss!%%fg=reset$"));
+            } else if (it->is_player()) {
+                MINICON("%s misses.", text_The().c_str());
+                msg(string_sprintf("%%fg=red$miss!%%fg=reset$"));
+            } else {
+                log("The attack missed (att %d, def %d) on %s",
+                    att_mod, def_mod, it->to_string().c_str());
+            }
+        }
+        return false;
+    }
+
+    //
+    // We hit. See how much damage.
+    //
+    auto damage = get_damage_melee();
+
+    if (damage + att_mod <= 0) {
+	if (is_player()) {
+	    MINICON("Your weapon hits but does no damage.");
+	} else if (it->is_player()) {
+	    MINICON("%s hits but does no damage.", text_The().c_str());
+        } else {
+            log("The attack failed (dmg %d, att %d) on %s",
+		damage, att_mod, it->to_string().c_str());
 	}
 	return false;
-    } else if (it->is_hit_by(this, damage + modifier)) {
-        log("The attack succeeded (dmg %d, mod %d) on %s",
-            damage, modifier, it->to_string().c_str());
+    }
+
+    if (it->is_hit_by(this, crit, damage + att_mod)) {
+        log("The attack succeeded (dmg %d att, def %d) on %s",
+            att_mod, def_mod, it->to_string().c_str());
 
         if (attack_lunge()) {
             lunge(it->get_interpolated_mid_at());

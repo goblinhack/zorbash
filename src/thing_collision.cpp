@@ -730,6 +730,9 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
 
 #endif
 
+    //
+    // FYI This path is used for monst attacks
+    //
     if (A->tp()->collision_circle() &&
         B->tp()->collision_circle()) {
         if (circle_circle_collision(A, // circle
@@ -739,7 +742,17 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
                                     nullptr)) {
             return true;
         }
-        return false;
+
+        //
+        // This is to allow hits when a thing is in transit
+        //
+        if (circle_circle_collision(A, // circle
+                                    A_at,
+                                    B, // box
+                                    B->get_interpolated_mid_at(),
+                                    nullptr)) {
+            return true;
+        }
     }
 
 #if 0

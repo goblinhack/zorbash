@@ -90,8 +90,11 @@ d20roll (int modifier_a, int modifier_b)
 
     auto roll_b = random_range_inclusive(1, 20);
 
-    return roll_a + modifier_to_bonus(modifier_a) >= 
-           roll_b + modifier_to_bonus(modifier_b);
+    roll_a += modifier_to_bonus(modifier_a);
+    roll_b += modifier_to_bonus(modifier_b);
+    // MINICON("A %d(+%d) B %d(%d)", roll_a, modifier_a, roll_b, modifier_b);
+
+    return roll_a >= roll_b;
 }
 
 Dice::Dice (void)

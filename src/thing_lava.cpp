@@ -69,7 +69,7 @@ void Thing::lava_tick (void)
             }
             if (t->get_tick() < game->tick_current) {
                 t->set_tick(game->tick_current);
-                is_hit_by(t, t->get_damage_melee());
+                is_hit_by(t, false, t->get_damage_melee());
                 break;
             }
         } FOR_ALL_THINGS_END()

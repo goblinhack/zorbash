@@ -14,7 +14,7 @@ def tp_init(name, text_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
-    x.set_damage_melee_dice("1d4")
+    x.set_damage_melee_dice("1d6")
     x.set_gfx_anim_attack("claws1")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
@@ -45,7 +45,7 @@ def tp_init(name, text_name):
     x.set_modifier_defence(12)
     x.set_modifier_strength(7)
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
-    x.set_move_speed_ms(250)
+    x.set_move_speed_ms(1000)
     x.set_normal_placement_rules(True)
     x.set_rarity(zx.RARITY_COMMON)
     x.set_text_a_or_an("a");
