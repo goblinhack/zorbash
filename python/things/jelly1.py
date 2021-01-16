@@ -48,6 +48,7 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
+    x.set_is_attackable(True)
     x.set_is_movable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when attacked and multiplying when attacked. This one is a baby jelly. It tends to avoid adults of its kind.")

@@ -366,7 +366,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr32() && (what == "is_rrr32")) {
         return true;
     }
-    if (is_rrr33() && (what == "is_rrr33")) {
+    if (is_attackable() && (what == "is_attackable")) {
         return true;
     }
     if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) {

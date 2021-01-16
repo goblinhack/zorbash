@@ -91,14 +91,18 @@ _
                 it->is_hidden || 
                 it->is_falling || 
                 it->is_jumping) { 
-                if (it->is_loggable_for_unimportant_stuff()) {
-                    log(" ignore %s", it->to_string().c_str());
+                if (g_opt_debug3) {
+                    if (it->is_loggable_for_unimportant_stuff()) {
+                        log(" ignore %s", it->to_string().c_str());
+                    }
                 }
                 continue; 
             }
 
-            if (it->is_loggable_for_unimportant_stuff()) {
-                log(" consider %s", it->to_string().c_str());
+            if (g_opt_debug3) {
+                if (it->is_loggable_for_unimportant_stuff()) {
+                    log(" consider %s", it->to_string().c_str());
+                }
             }
             _
 

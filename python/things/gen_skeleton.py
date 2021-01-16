@@ -28,6 +28,7 @@ def tp_init(name, text_name):
     x.set_is_active(True)
     x.set_is_combustible(True)
     x.set_is_generator(True)
+    x.set_is_attackable(True)
     x.set_is_interesting(True)
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(True)

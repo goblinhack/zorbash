@@ -283,8 +283,8 @@ class Tp:
     def set_is_rrr32(self, value):
         zx.tp_set_is_rrr32(self, value)
 
-    def set_is_rrr33(self, value):
-        zx.tp_set_is_rrr33(self, value)
+    def set_is_attackable(self, value):
+        zx.tp_set_is_attackable(self, value)
 
     def set_is_able_to_see_through_doors(self, value):
         zx.tp_set_is_able_to_see_through_doors(self, value)
