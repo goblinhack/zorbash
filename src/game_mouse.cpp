@@ -64,15 +64,6 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     }
 
     //
-    // Grab the current move path and start walking toward it. This will
-    // consume one move by the player.
-    //
-    player->cursor_path_pop_first_move();
-    if (player->is_jumping) {
-        return true;
-    }
-
-    //
     // Have we moved close enough to attack?
     //
     if (level->cursor) {_
@@ -88,7 +79,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
                     player->log("Close enough to collect");
                     player->try_to_carry(t);
                     return true;
-                } else if (t->is_monst() || t->is_generator()) {
+                } else if (t->is_alive_monst() || t->is_generator()) {
                     player->log("Close enough to attack");
                     player->attack(level->cursor->mid_at);
                     return true;
@@ -97,6 +88,15 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
             FOR_ALL_THINGS_END()
         }
     }
+
+    //
+    // Grab the current move path and start walking toward it. This will
+    // consume one move by the player.
+    //
+    if (player->cursor_path_pop_first_move()) {
+        return true;
+    }
+
     return false;
 }
 

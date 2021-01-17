@@ -29,7 +29,10 @@ bool Thing::cursor_path_pop_next_and_move (void)
     return false;
 }
 
-void Thing::cursor_path_pop_first_move (void)
+//
+// true on having performed an action
+//
+bool Thing::cursor_path_pop_first_move (void)
 {_
     auto cursor = level->cursor;
 
@@ -41,11 +44,19 @@ void Thing::cursor_path_pop_first_move (void)
         monstp->move_path = game->cursor_move_path;
         game->cursor_move_path.clear();
         if (cursor_path_pop_next_and_move()) {
+            log("Move to cursor next hop");
             if (!game->cursor_move_path.size()) {
                 level->cursor_path_create();
             }
-            return;
+            return true;
         }
+
+        //
+        // We get here if for example we click on a monster but
+        // are unable to move into its cell because it blocks
+        //
+        log("Failed to move to cursor next hop");
+        return false;
     }
 
     //
@@ -65,7 +76,7 @@ void Thing::cursor_path_pop_first_move (void)
             cursor->mid_at.x, cursor->mid_at.y);
         attack(cursor->mid_at);
         level->cursor_path_create();
-        return;
+        return true;
     }
 
     //
@@ -73,10 +84,15 @@ void Thing::cursor_path_pop_first_move (void)
     //
     if (try_to_jump(future_pos)) {
         game->tick_begin("player tried to jump");
-        return;
+        return true;
     }
 
+    //
+    // Not sure what this tick is for
+    //
     game->tick_begin("player move popped off cursor path");
+    MINICON("HIT ODD CASE NEIL");
+    return false;
 }
 
 void Thing::cursor_path_stop (void)

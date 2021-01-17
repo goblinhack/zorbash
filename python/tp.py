@@ -277,11 +277,11 @@ class Tp:
     def set_is_rrr30(self, value):
         zx.tp_set_is_rrr30(self, value)
 
-    def set_is_rrr31(self, value):
-        zx.tp_set_is_rrr31(self, value)
+    def set_is_always_hit(self, value):
+        zx.tp_set_is_always_hit(self, value)
 
-    def set_is_rrr32(self, value):
-        zx.tp_set_is_rrr32(self, value)
+    def set_is_fearless(self, value):
+        zx.tp_set_is_fearless(self, value)
 
     def set_is_attackable(self, value):
         zx.tp_set_is_attackable(self, value)

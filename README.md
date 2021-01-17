@@ -1,17 +1,8 @@
 Zorbash
 -------
-Zorbash is a roguelike that lets you choose the way you play, turn-based or real-time.
 
-How it works.
-
-You choose to move as quickly as you want, one move at a time, or race around.
-The monsters will get the same number of moves but move at their own pace.
-
-This allows the player to do lots of moves in quick succession to overtake slow
-monsters or get to the loot before they can react.
-
-This can also lead to disaster if you get cornered by a monster with lots of
-free attacks waiting.
+Welcome to the lair of the dread beholder, Zorbash. 
+Liberate the Orb of Zorb and defeat Zorbash to win.
 
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.

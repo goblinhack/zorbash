@@ -217,8 +217,8 @@ int Tp::is_rrr28(void) const { return _is_rrr28; }
 int Tp::is_rrr29(void) const { return _is_rrr29; }
 int Tp::is_rrr3(void) const { return _is_rrr3; }
 int Tp::is_rrr30(void) const { return _is_rrr30; }
-int Tp::is_rrr31(void) const { return _is_rrr31; }
-int Tp::is_rrr32(void) const { return _is_rrr32; }
+int Tp::is_always_hit(void) const { return _is_always_hit; }
+int Tp::is_fearless(void) const { return _is_fearless; }
 int Tp::is_attackable(void) const { return _is_attackable; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
 int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
@@ -454,8 +454,8 @@ void Tp::set_is_rrr28(int v) { _is_rrr28 = v; }
 void Tp::set_is_rrr29(int v) { _is_rrr29 = v; }
 void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
 void Tp::set_is_rrr30(int v) { _is_rrr30 = v; }
-void Tp::set_is_rrr31(int v) { _is_rrr31 = v; }
-void Tp::set_is_rrr32(int v) { _is_rrr32 = v; }
+void Tp::set_is_always_hit(int v) { _is_always_hit = v; }
+void Tp::set_is_fearless(int v) { _is_fearless = v; }
 void Tp::set_is_attackable(int v) { _is_attackable = v; }
 void Tp::set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
 void Tp::set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }

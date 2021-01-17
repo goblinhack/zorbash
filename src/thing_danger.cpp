@@ -52,6 +52,10 @@ int Thing::get_danger_level (void)
 
 int Thing::is_dangerous(Thingp it)
 {
+    if (is_fearless()) {
+        return false;
+    }
+
     int a = get_danger_level();
     int b = it->get_danger_level();
 
