@@ -33,7 +33,7 @@ void log_catchup_missing_indent_levels (void)
         }
     }
 
-    while (g_last_logged_g_callframes_depth < g_callframes_depth) {
+    while (g_last_logged_g_callframes_depth < g_callframes_depth - 1) {
         auto func = callframes[g_last_logged_g_callframes_depth].func;
         g_last_logged_g_callframes_depth++;
         LOG_MISSING("%s", func);
@@ -53,8 +53,29 @@ static void log_ (const char *fmt, va_list args)
 
     if (!g_log_stdout) {
         // No indent
-    } else if (!g_last_logged_g_callframes_depth) {
-        snprintf(buf + len, MAXSHORTSTR - len, "%60s: ", "");
+    } else {
+        snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s", "",
+                 g_callframes_depth, "");
+    }
+
+    len = (int)strlen(buf);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+}
+
+static void log_missing_ (const char *fmt, va_list args)
+{
+    char buf[MAXSHORTSTR];
+
+    int len;
+
+    buf[0] = '\0';
+    get_timestamp(buf, MAXSHORTSTR);
+    len = (int)strlen(buf);
+
+    if (!g_log_stdout) {
+        // No indent
     } else {
         snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s", "",
                  g_last_logged_g_callframes_depth, "");
@@ -79,7 +100,7 @@ void LOG_MISSING (const char *fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-    log_(fmt, args);
+    log_missing_(fmt, args);
     va_end(args);
 }
 

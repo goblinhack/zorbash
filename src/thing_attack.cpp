@@ -268,30 +268,20 @@ _
     bool crit;
     bool fumble;
     if (!d20roll(att_mod, def_mod, fumble, crit)) {
-        if (fumble) {
-            if (is_player() || (owner && owner->is_player())) {
-                MINICON("You fumble your attack on %s.",
-                        it->text_the().c_str());
-                msg(string_sprintf("%%fg=white$fumble!%%fg=reset$"));
-            } else if (it->is_player()) {
-                MINICON("%s fumbles its attack.", text_The().c_str());
-                msg(string_sprintf("%%fg=red$fumble!%%fg=reset$"));
-            } else {
-                log("The attack missed (att %d, def %d) on %s",
-                    att_mod, def_mod, it->to_string().c_str());
-            }
+        if (is_player() || (owner && owner->is_player())) {
+            MINICON("You miss your attack on %s.",
+                    it->text_the().c_str());
+            msg(string_sprintf("%%fg=white$miss!%%fg=reset$"));
+        } else if (it->is_player()) {
+            MINICON("%s misses.", text_The().c_str());
+            msg(string_sprintf("%%fg=red$miss!%%fg=reset$"));
         } else {
-            if (is_player() || (owner && owner->is_player())) {
-                MINICON("You miss your attack on %s.",
-                        it->text_the().c_str());
-                msg(string_sprintf("%%fg=white$miss!%%fg=reset$"));
-            } else if (it->is_player()) {
-                MINICON("%s misses.", text_The().c_str());
-                msg(string_sprintf("%%fg=red$miss!%%fg=reset$"));
-            } else {
-                log("The attack missed (att %d, def %d) on %s",
-                    att_mod, def_mod, it->to_string().c_str());
-            }
+            log("The attack missed (att %d, def %d) on %s",
+                att_mod, def_mod, it->to_string().c_str());
+        }
+
+        if (attack_lunge()) {
+            lunge(it->get_interpolated_mid_at());
         }
         return false;
     }
@@ -301,19 +291,12 @@ _
     //
     auto damage = get_damage_melee();
 
-    if (damage + att_mod <= 0) {
-	if (is_player()) {
-	    MINICON("Your weapon hits but does no damage.");
-	} else if (it->is_player()) {
-	    MINICON("%s hits but does no damage.", text_The().c_str());
-        } else {
-            log("The attack failed (dmg %d, att %d) on %s",
-		damage, att_mod, it->to_string().c_str());
-	}
-	return false;
+    auto total_damage = damage + att_mod;
+    if (total_damage <= 0) {
+        total_damage = 1;
     }
 
-    if (it->is_hit_by(this, crit, damage + att_mod)) {
+    if (it->is_hit_by(this, crit, total_damage)) {
         log("The attack succeeded (dmg %d att, def %d) on %s",
             att_mod, def_mod, it->to_string().c_str());
 

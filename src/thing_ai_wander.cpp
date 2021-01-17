@@ -222,7 +222,7 @@ bool Thing::ai_wander (void)
     //
     // If AI is making us too slow, use a longer delay
     //
-    if (game->fps_value < 55) {
+    if (game->fps_value < 40) {
         if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS * 4,
                                             get_timestamp_last_wander_try())) {
             log("AI wander very damped; too frequent, last try %u, %u ms ago",
@@ -230,7 +230,7 @@ bool Thing::ai_wander (void)
                 time_get_time_ms_cached() - get_timestamp_last_wander_try());
             return false;
         }
-    } else if (game->fps_value < 60) {
+    } else if (game->fps_value < 50) {
         if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS * 2,
                                             get_timestamp_last_wander_try())) {
             log("AI wander damped; too frequent, last try %u, %u ms ago",

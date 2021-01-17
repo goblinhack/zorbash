@@ -12,26 +12,43 @@
 void Thing::move_completed (void)
 {_
     if (is_player()) {
-        log("Player move completed");
         if (check_anything_to_carry()) {
             BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items",
-                   SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect));
+                   SDL_GetScancodeName(
+                        (SDL_Scancode)game->config.key_wait_or_collect));
         }
+
+#if 0
+        if (THING_TICK_MAX_MOVES_AHEAD == 1) {
+            for (auto i : level->all_active_things) {
+                auto t = i.second;
+                if (t->is_monst()) {
+                    t->set_tick(game->tick_current);
+                }
+            }
+        }
+#endif
     }
+    set_timestamp_move_begin(0);
+    set_timestamp_move_end(0);
 }
 
 void Thing::move_finish (void)
 {_
-    log("Move finish");
-    set_timestamp_move_begin(0);
-    set_timestamp_move_end(0);
-    update_interpolated_position();
+    if (get_timestamp_move_begin() == 0) {
+        return;
+    }
 
     //
     // Set this so that we can pick up items again at the last location.
     //
     set_where_i_dropped_an_item_last(point(-1, -1));
     move_completed();
+
+    log("Move finish");
+    set_timestamp_move_begin(0);
+    set_timestamp_move_end(0);
+    update_interpolated_position();
 }
 
 bool Thing::move (fpoint future_pos)
@@ -176,12 +193,21 @@ _
         if (free_attack) {_
             log("Free attack by %s", t->to_string().c_str());
             if (t->attack(this)) {
-                if (is_player()) {
-                    std::string s = t->text_The() + " attacks as you run";
-                    MINICON("%s", s.c_str());
-                    t->update_tick();
+                //
+                // Too noisy?
+                //
+                if (0) {
+                    if (is_player()) {
+                        std::string s = t->text_The() + " attacks as you run";
+                        MINICON("%s", s.c_str());
+                    }
                 }
             }
+
+            //
+            // Even if it misses, it counts
+            //
+            t->update_tick();
         }
     }
 

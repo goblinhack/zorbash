@@ -1277,12 +1277,10 @@ void sdl_loop (void)
             }
 
             //
-            // Update FPS counter.
+            // Update FPS counter. Used for damping AI even if not shown.
             //
-            if (game->config.fps_counter) {
-                game->fps_value = (1000 / UI_UPDATE_SLOW_MS) * frames;
-                frames = 0;
-            }
+            game->fps_value = (1000 / UI_UPDATE_SLOW_MS) * frames;
+            frames = 0;
         }
 
         //
