@@ -55,10 +55,10 @@ std::string Thing::text_the (void) const
 
     std::string out = "the ";
 
-    if (is_undead()) {
-        out += "undead ";
-    } else {
-        if (is_dead) {
+    if (is_dead) {
+        if (is_undead()) {
+            out += "extra dead ";
+        } else {
             out += "dead ";
         }
     }
@@ -119,10 +119,10 @@ std::string Thing::short_text_the (void) const
 
     std::string out = "the ";
 
-    if (is_undead()) {
-        out += "undead ";
-    } else {
-        if (is_dead) {
+    if (is_dead) {
+        if (is_undead()) {
+            out += "extra dead ";
+        } else {
             out += "dead ";
         }
     }

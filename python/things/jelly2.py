@@ -34,7 +34,7 @@ def tp_init(name, text_name):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_health_hunger_pct(95)
-    x.set_health_initial_dice("2d10")
+    x.set_health_initial_dice("10")
     x.set_is_able_to_fall(True)
     x.set_is_acid(True)
     x.set_is_active(True)

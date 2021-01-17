@@ -1,6 +1,8 @@
 bugs
 ----
 
+- generaor monst linit
+- moves ahead 1
 - overlap not working when things moving
 - when selecting no thing info in hover over
 - need cannot miss on generator

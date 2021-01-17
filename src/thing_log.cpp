@@ -26,13 +26,9 @@ void Thing::log_ (const char *fmt, va_list args) const
     get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
 
-    if (!g_last_logged_g_callframes_depth) {
-        snprintf(buf + len, MAXSHORTSTR - len, "%60s: ", t->to_string().c_str());
-    } else {
-        snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s",
-                t->to_string().c_str(),
-                g_last_logged_g_callframes_depth, "");
-    }
+    snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s",
+             t->to_string().c_str(),
+             g_callframes_depth, "");
 
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);

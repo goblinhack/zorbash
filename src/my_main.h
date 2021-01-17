@@ -62,7 +62,7 @@
 #define THING_HEALTH_BLOODIED_PCT2 15   // More...
 #define THING_HEALTH_BLOODIED_PCT3 15   // More...
 #define THING_HEALTH_BLOODIED_PCT4 5    // Lots of blood on screen
-#define THING_TICK_MAX_MOVES_AHEAD 5    // How many moves ahead things get
+#define THING_TICK_MAX_MOVES_AHEAD 1    // How many moves ahead things get
 #define TILE_CURSOR                ((wchar_t)('z' + 6))
 #define TILE_CURSOR_NAME           "1.97" // block
 #define TILE_HEIGHT                game->config.tile_height
