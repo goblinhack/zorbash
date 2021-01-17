@@ -146,9 +146,7 @@ bool Thing::move (fpoint future_pos,
             game->tick_begin("player attacked");
         }
 
-        if ((x == mid_at.x) && (y == mid_at.y)) {
-            return false;
-        }
+        return false;
     }
 
     if ((x == mid_at.x) && (y == mid_at.y)) {

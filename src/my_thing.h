@@ -1119,8 +1119,8 @@ public:
     int is_rrr29(void) const;
     int is_rrr3(void) const;
     int is_rrr30(void) const;
-    int is_rrr31(void) const;
-    int is_rrr32(void) const;
+    int is_always_hit(void) const;
+    int is_fearless(void) const;
     int is_attackable(void) const;
     int is_able_to_see_through_doors(void) const;
     int is_able_to_walk_through_walls(void) const;
@@ -1231,7 +1231,7 @@ public:
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
-    void cursor_path_pop_first_move(void);
+    bool cursor_path_pop_first_move(void);
     void cursor_path_stop(void);
     void dbg(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));

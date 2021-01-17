@@ -230,8 +230,8 @@ private:
     int _is_rrr29 {};
     int _is_rrr3 {};
     int _is_rrr30 {};
-    int _is_rrr31 {};
-    int _is_rrr32 {};
+    int _is_always_hit {};
+    int _is_fearless {};
     int _is_attackable {};
     int _is_able_to_see_through_doors {};
     int _is_able_to_walk_through_walls {};
@@ -587,8 +587,8 @@ public:
     int is_rrr29(void) const;
     int is_rrr3(void) const;
     int is_rrr30(void) const;
-    int is_rrr31(void) const;
-    int is_rrr32(void) const;
+    int is_always_hit(void) const;
+    int is_fearless(void) const;
     int is_attackable(void) const;
     int is_able_to_see_through_doors(void) const;
     int is_able_to_walk_through_walls(void) const;
@@ -826,8 +826,8 @@ public:
     void set_is_rrr29(int);
     void set_is_rrr3(int);
     void set_is_rrr30(int);
-    void set_is_rrr31(int);
-    void set_is_rrr32(int);
+    void set_is_always_hit(int);
+    void set_is_fearless(int);
     void set_is_attackable(int);
     void set_is_able_to_see_through_doors(int);
     void set_is_able_to_walk_through_walls(int);

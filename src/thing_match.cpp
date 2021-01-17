@@ -360,10 +360,10 @@ bool Thing::match (const std::string& what)
     if (is_rrr30() && (what == "is_rrr30")) {
         return true;
     }
-    if (is_rrr31() && (what == "is_rrr31")) {
+    if (is_always_hit() && (what == "is_always_hit")) {
         return true;
     }
-    if (is_rrr32() && (what == "is_rrr32")) {
+    if (is_fearless() && (what == "is_fearless")) {
         return true;
     }
     if (is_attackable() && (what == "is_attackable")) {

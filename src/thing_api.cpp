@@ -638,14 +638,14 @@ int Thing::is_rrr30(void) const
     return (tp()->is_rrr30());
 }
 
-int Thing::is_rrr31(void) const
+int Thing::is_always_hit(void) const
 {_
-    return (tp()->is_rrr31());
+    return (tp()->is_always_hit());
 }
 
-int Thing::is_rrr32(void) const
+int Thing::is_fearless(void) const
 {_
-    return (tp()->is_rrr32());
+    return (tp()->is_fearless());
 }
 
 int Thing::is_attackable(void) const
