@@ -88,10 +88,9 @@ bool Thing::cursor_path_pop_first_move (void)
     }
 
     //
-    // Not sure what this tick is for
+    // Jump failed. Maybe too tired?
     //
-    game->tick_begin("player move popped off cursor path");
-    MINICON("HIT ODD CASE NEIL");
+    // game->tick_begin("not sure about this one");
     return false;
 }
 
