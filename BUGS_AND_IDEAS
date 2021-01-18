@@ -1,15 +1,12 @@
 bugs
 ----
 
+- destroy gen destroys all monsts spawned
 - generator monst linit
 - overlap not working when things moving
-- when selecting no thing info in hover over
-- need cannot miss on generator
 - fix attack / bite and melee
 - add _attacker for some _avoiders
-- small gfx for con / def / str 
 - warhammer should kill parent jelly in one go
-- defence does nothing
 - poison from spider?
 - half damage from poison constitution save
 - spider that throws web?
