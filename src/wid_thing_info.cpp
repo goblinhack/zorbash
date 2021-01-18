@@ -301,5 +301,8 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
 void Game::wid_thing_info_create_when_hovering_over (Thingp t)
 {
+    if (game->state == STATE_CHOOSING_TARGET) {
+        return;
+    }
     wid_thing_info_create(t, true);
 }

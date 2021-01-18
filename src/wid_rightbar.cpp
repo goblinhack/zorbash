@@ -253,15 +253,20 @@ static void wid_rightbar_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_plain(wid_rightbar, "defence-value");
+        auto w = wid_new_plain(wid_rightbar, "stats1-value");
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
-        std::string s = "   16   17   18";
-        wid_set_text(w, s);
+        char tmp[UI_SIDEBAR_RIGHT_WIDTH + 1];
+        snprintf(tmp, sizeof(tmp) - 1,
+                 "   %2d   %2d   %2d",
+                 player->get_modifier_attack(),
+                 player->get_modifier_defence(),
+                 player->get_modifier_strength());
+        wid_set_text(w, tmp);
         wid_set_text_lhs(w, true);
     }
     y_at += 1;
@@ -279,15 +284,20 @@ static void wid_rightbar_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_plain(wid_rightbar, "defence-value");
+        auto w = wid_new_plain(wid_rightbar, "stats2-value");
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
-        std::string s = "   16   17   18";
-        wid_set_text(w, s);
+        char tmp[UI_SIDEBAR_RIGHT_WIDTH + 1];
+        snprintf(tmp, sizeof(tmp) - 1,
+                 "   %2d   %2d   %2d",
+                 player->get_modifier_constitution(),
+                 0,
+                 0);
+        wid_set_text(w, tmp);
         wid_set_text_lhs(w, true);
     }
     y_at += 2;
