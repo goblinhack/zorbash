@@ -171,17 +171,35 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     if (crit) {
         if (is_player()) {
+            //
+            // Player being hit
+            //
             msg(string_sprintf("CRIT! %%fg=red$-%d", damage));
         } else if (is_monst()) {
+            //
+            // Monst being hit
+            //
             if (hitter->is_player() || real_hitter->is_player()) {
+                //
+                // Monst being hit by player
+                //
                 msg(string_sprintf("CRIT! %%fg=white$-%d", damage));
             }
         }
     } else {
         if (is_player()) {
+            //
+            // Player being hit
+            //
             msg(string_sprintf("%%fg=red$-%d", damage));
         } else if (is_monst()) {
+            //
+            // Monst being hit
+            //
             if (hitter->is_player() || real_hitter->is_player()) {
+                //
+                // Monst being hit by player
+                //
                 msg(string_sprintf("%%fg=white$-%d", damage));
             }
         }
