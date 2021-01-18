@@ -39,6 +39,10 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         return true;
     }
 
+    if (!level->cursor) {_
+        return false;
+    }
+
     if (game->state == Game::STATE_CHOOSING_TARGET) {
         player->log("Chosen target");
         auto what = game->request_to_throw_item;
@@ -49,44 +53,59 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     player->log("Mouse move");
 
     //
+    // Have we moved close enough to attack? Do this prior to checking for
+    // double click so we can attack monsts sitting in lava
+    //
+    if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
+        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+        int x = level->cursor->mid_at.x;
+        int y = level->cursor->mid_at.y;
+        FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
+            if (t == level->player) {
+                continue;
+            }
+            if (t->is_alive_monst() || t->is_generator()) {
+                player->log("Close enough to attack");
+                player->attack(level->cursor->mid_at);
+                return true;
+            }
+        }
+        FOR_ALL_THINGS_END()
+    }
+
+    //
     // If hovering over a double click thing then don't jump in unless
     // the user really means it.
     //
     if (!wid_mouse_double_click) {
-        if (level->cursor) {_
-            auto to = level->cursor->mid_at;
-            FOR_ALL_THINGS(level, t, to.x, to.y) {
-                if (t->is_cursor_can_hover_over_but_needs_double_click()) {
-                    return true;
-                }
-            } FOR_ALL_THINGS_END()
-        }
+        auto to = level->cursor->mid_at;
+        FOR_ALL_THINGS(level, t, to.x, to.y) {
+            if (t->is_cursor_can_hover_over_but_needs_double_click()) {
+                player->log("Needs double click");
+                return true;
+            }
+        } FOR_ALL_THINGS_END()
     }
 
     //
-    // Have we moved close enough to attack?
+    // Have we moved close enough to collect? Do this after the double
+    // click check so we do not try to collect things in lava.
     //
-    if (level->cursor) {_
-        if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
-            (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
-            int x = level->cursor->mid_at.x;
-            int y = level->cursor->mid_at.y;
-            FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
-                if (t == level->player) {
-                    continue;
-                }
-                if (t->is_food() || t->is_potion()) {
-                    player->log("Close enough to collect");
-                    player->try_to_carry(t);
-                    return true;
-                } else if (t->is_alive_monst() || t->is_generator()) {
-                    player->log("Close enough to attack");
-                    player->attack(level->cursor->mid_at);
-                    return true;
-                }
+    if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
+        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+        int x = level->cursor->mid_at.x;
+        int y = level->cursor->mid_at.y;
+        FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
+            if (t == level->player) {
+                continue;
             }
-            FOR_ALL_THINGS_END()
+            if (t->is_food() || t->is_potion()) {
+                player->log("Close enough to collect");
+                player->try_to_carry(t);
+                return true;
+            }
         }
+        FOR_ALL_THINGS_END()
     }
 
     //

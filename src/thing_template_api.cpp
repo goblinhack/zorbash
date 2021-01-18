@@ -304,7 +304,11 @@ int Tp::stamina(void) const { return _stamina; }
 int Tp::modifier_defence(void) const { return _modifier_defence; }
 int Tp::health_hunger_pct(void) const { return _health_hunger_pct; }
 int Tp::health_starving_pct(void) const { return _health_starving_pct; }
-int Tp::move_speed_ms(void) const { return 150; /* _move_speed_ms; */}
+#ifdef ENABLE_STRICT_TURN_BASED
+int Tp::move_speed_ms(void) const { return 150; }
+#else
+int Tp::move_speed_ms(void) const { return _move_speed_ms; }
+#endif
 int Tp::modifier_strength(void) const { return _modifier_strength; }
 int Tp::tick_catches_up_on_attack(void) const { return _tick_catches_up_on_attack; }
 int Tp::tick_rate_tenths(void) const { return _tick_rate_tenths; }
