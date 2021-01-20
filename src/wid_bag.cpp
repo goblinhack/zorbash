@@ -372,7 +372,7 @@ _
         wid_bag_title = wid_new_square_window("wid_bag_title " + title);
         wid_set_ignore_scroll_events(wid_bag_title, true);
         wid_set_pos(wid_bag_title, point(tl.x, tl.y - 1), point(br.x, tl.y - 1));
-        wid_set_style(wid_bag_title, UI_WID_STYLE_NONE);
+        wid_set_style(wid_bag_title, UI_WID_STYLE_SPARSE_NONE);
         wid_set_text(wid_bag_title, title);
     }
 

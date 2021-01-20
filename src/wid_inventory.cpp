@@ -287,7 +287,7 @@ static void wid_inventory_create (void)
             wid_inventory_window = wid_new_square_window("wid inventory");
             wid_set_ignore_scroll_events(wid_inventory_window, true);
             wid_set_pos(wid_inventory_window, tl, br);
-            wid_set_style(wid_inventory_window, UI_WID_STYLE_NONE);
+            wid_set_style(wid_inventory_window, UI_WID_STYLE_SOLID_NONE);
             wid_set_on_mouse_up(wid_inventory_window, wid_inventory_mouse_up);
         }
     }

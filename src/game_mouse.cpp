@@ -14,6 +14,10 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         return false;
     }
 
+    if (wid_find_under_mouse()) {
+        return false;
+    }
+
     if (!game || !game->started) {
         return false;
     }
