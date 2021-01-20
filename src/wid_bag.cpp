@@ -261,6 +261,7 @@ _
     auto br = tl + point(t->bag_item_width() - 1, t->bag_item_height() - 1);
 
     game->in_transit_item = wid_new_square_window("wid_bag in transit item");
+    wid_set_ignore_scroll_events(game->in_transit_item, true);
     wid_set_pos(game->in_transit_item, tl, br);
     wid_set_style(game->in_transit_item, UI_WID_STYLE_GRAY);
     wid_set_do_not_lower(game->in_transit_item, true);
@@ -360,6 +361,7 @@ _
 
     {
         wid_bag_container = wid_new_square_window("wid_bag " + title);
+        wid_set_ignore_scroll_events(wid_bag_container, true);
         wid_set_pos(wid_bag_container, tl, br);
         wid_set_style(wid_bag_container, UI_WID_STYLE_BAG);
         wid_set_on_tick(wid_bag_container, wid_bag_tick);
@@ -368,6 +370,7 @@ _
 
     {
         wid_bag_title = wid_new_square_window("wid_bag_title " + title);
+        wid_set_ignore_scroll_events(wid_bag_title, true);
         wid_set_pos(wid_bag_title, point(tl.x, tl.y - 1), point(br.x, tl.y - 1));
         wid_set_style(wid_bag_title, UI_WID_STYLE_NONE);
         wid_set_text(wid_bag_title, title);
