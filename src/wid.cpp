@@ -707,6 +707,12 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
         return false;
     }
 
+    if (wheelx || wheely) {
+        if (wid_ignore_scroll_events(w)) {
+            return false;
+        }
+    }
+
     if (!(w->on_mouse_over_b) && !(w->on_mouse_down)) {
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] ||
             get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT_FG]) {

@@ -1270,7 +1270,10 @@ void sdl_loop (void)
                         // on screen widgets are updated with the new wid
                         // we are about to make.
                         //
-                        wid_rightbar_init();
+                        if (game->request_remake_rightbar) {
+                            game->request_remake_rightbar = false;
+                            wid_rightbar_init();
+                        }
                         wid_display_all();
                     }
                 }

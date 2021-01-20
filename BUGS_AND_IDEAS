@@ -1,6 +1,7 @@
 bugs
 ----
 
+- click on inventory moves player sometiomes
 - destroy gen destroys all monsts spawned
 - generator monst linit
 - overlap not working when things moving

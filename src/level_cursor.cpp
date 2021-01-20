@@ -43,6 +43,10 @@ void Level::cursor_find_on_visible_things (
         return;
     }
 
+    if (wid_find_under_mouse()) {
+        return;
+    }
+
     if ((game->minimap_over.x > 0) && (game->minimap_over.y > 0)) {
         //
         // Don't move onto lava unless double click
@@ -174,6 +178,7 @@ void Level::cursor_move (void)
         }
         map_wanted_at += fpoint(wheel_x, -wheel_y);
         map_follow_player = false;
+        return;
     }
 
     if (game->paused()) {

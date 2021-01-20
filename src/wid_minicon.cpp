@@ -490,7 +490,6 @@ static void wid_minicon_wid_create (void)
         wid_set_pos(wid_minicon_window, tl, br);
         wid_set_shape_none(wid_minicon_window);
         wid_set_on_key_down(wid_minicon_window, wid_minicon_input);
-        wid_set_ignore_scroll_events(wid_minicon_window, true);
     }
 
     {
@@ -543,7 +542,7 @@ static void wid_minicon_wid_create (void)
     wid_minicon_vert_scroll =
         wid_new_vert_scroll_bar(wid_minicon_window, "", wid_minicon_container);
 
-    wid_not_visible(wid_get_parent(wid_minicon_vert_scroll));
+    wid_visible(wid_get_parent(wid_minicon_vert_scroll));
 
     wid_update(wid_minicon_window);
 }

@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_wid_rightbar.h"
 #include "my_thing.h"
+#include "my_traceback.h"
 
 static void wid_rightbar_create(void);
 
@@ -23,6 +24,72 @@ uint8_t wid_rightbar_init (void)
     wid_rightbar_create();
 
     return true;
+}
+
+static void wid_rightbar_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{_
+    LOG("rightbar: begin over rightbar");
+_
+    if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_MOVING_ITEMS || 
+        game->state == Game::STATE_COLLECTING_ITEMS) {
+        LOG("rightbar: moving items; ignore");
+        return;
+    }
+
+    if (game->in_transit_item) {
+        LOG("rightbar: in transit item; ignore");
+        return;
+    }
+
+    if (game->paused()) {
+        LOG("rightbar: game paused; ignore");
+        return;
+    }
+
+    auto level = game->level;
+    if (!level) {
+        LOG("rightbar: no level; ignore");
+        return;
+    }
+
+    if (level->player) {
+        game->wid_thing_info_create(level->player);
+    }
+}
+
+static void wid_rightbar_mouse_over_e (Widp w)
+{_
+    LOG("rightbar: end over rightbar");
+_
+    if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_MOVING_ITEMS || 
+        game->state == Game::STATE_COLLECTING_ITEMS) {
+        LOG("rightbar: moving items; ignore");
+        return;
+    }
+
+    if (game->in_transit_item) {
+        LOG("rightbar: in transit item; ignore");
+        return;
+    }
+
+    if (game->paused()) {
+        LOG("rightbar: paused; ignore");
+        return;
+    }
+
+    auto level = game->level;
+    if (!level) {
+        LOG("rightbar: no level; ignore");
+        return;
+    }
+
+    game->wid_thing_info_destroy();
+
+    //
+    // Do not create new wids in here
+    //
 }
 
 //
@@ -53,11 +120,13 @@ static void wid_rightbar_create (void)
         point br = make_point(TERM_WIDTH - 1, 13);
         color c;
 
-        wid_rightbar = wid_new_square_window("right rightbar");
+        wid_rightbar = wid_new_square_window("wid rightbar");
+        wid_set_ignore_scroll_events(wid_rightbar, true);
         wid_set_pos(wid_rightbar, tl, br);
         wid_set_shape_none(wid_rightbar);
-        wid_set_style(wid_rightbar, UI_WID_STYLE_OUTLINE);
-        wid_set_ignore_events(wid_rightbar, true);
+        wid_set_style(wid_rightbar, UI_WID_STYLE_NONE);
+        wid_set_on_mouse_over_b(wid_rightbar, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(wid_rightbar, wid_rightbar_mouse_over_e);
     }
 
     int y_at = 0;

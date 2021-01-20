@@ -137,6 +137,22 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
+
+    char tmp[20];
+    snprintf(tmp, sizeof(tmp) - 1,
+             "Att %2d/%-2d Def %2d/%-2d",
+             player->get_modifier_attack(),
+             modifier_to_bonus(player->get_modifier_attack()),
+             player->get_modifier_defence(),
+             modifier_to_bonus(player->get_modifier_defence()));
+    wid_thing_info_window->log(tmp);
+
+#if 0
+                 player->get_modifier_attack(),
+                 player->get_modifier_defence(),
+                 player->get_modifier_strength());
+
+#endif
     wid_thing_info_window->log(tp->long_text_description());
 
     if (t->is_item()) {
