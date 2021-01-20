@@ -4643,20 +4643,6 @@ ThingId Thing::set_on_fire_anim_id (ThingId v)
     return (monstp->on_fire_id_anim = v);
 }
 
-////////////////////////////////////////////////////////////////////////////
-// interpolated_mid_at
-////////////////////////////////////////////////////////////////////////////
-fpoint Thing::get_interpolated_mid_at (void) const
-{_
-    return (interpolated_mid_at);
-}
-
-fpoint Thing::set_interpolated_mid_at (fpoint v)
-{_
-//con("%s", __FUNCTION__);
-    return (interpolated_mid_at = v);
-}
-
 const std::string& Thing::str1 (void) const {_ return (tp()->str1()); }
 const std::string& Thing::str2 (void) const {_ return (tp()->str2()); }
 const std::string& Thing::str3 (void) const {_ return (tp()->str3()); }

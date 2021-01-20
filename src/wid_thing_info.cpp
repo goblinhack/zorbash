@@ -67,6 +67,18 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         return;
     }
 
+    if (when_hovering_over) {
+        if (t->is_hidden) {
+            t->log("Do not show thing; hidden");
+            return;
+        }
+
+        if (!level->is_lit(t->mid_at.x, t->mid_at.y)) {
+            t->log("Do not show thing; not lit");
+            return;
+        }
+    }
+
     if (wid_thing_info_window) {
         t->log("Destroy window");
         wid_thing_info_destroy();
