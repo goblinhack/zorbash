@@ -848,6 +848,8 @@ public:
     bool ai_create_on_fire_path(point &nh, const point start, const point end);
     bool ai_create_path(point &nh, const point start, const point end);
     bool ai_escape(void);
+    bool ai_obstacle(Thingp);
+    bool ai_obstacle(fpoint);
     bool ai_on_fire(void);
     bool ai_on_fire_choose_target (point& nh);
     bool ai_wander(void);
@@ -880,8 +882,7 @@ public:
     bool collision_obstacle(Thingp);
     bool collision_obstacle(fpoint);
     bool collision_obstacle(point);
-    bool ai_obstacle(Thingp);
-    bool ai_obstacle(fpoint);
+    bool cursor_path_pop_first_move(void);
     bool cursor_path_pop_next_and_move(void);
     bool descend(void);
     bool describe_when_hovering_over(void);
@@ -897,14 +898,13 @@ public:
     bool fall_to_next_level(void);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
     bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
+    bool is_ai_obstacle_for_me(const point&);
     bool is_blocking_terrain(const Thingp it);
     bool is_carrying_item(void);
     bool is_carrying_treasure(void);
     bool is_enemy(Thingp attacker) const;
-    bool is_ai_obstacle_for_me(const point&);
     bool is_on_fire(void);
     bool kill_if(const std::string& what, const point &p);
-    bool place(const std::string& what, const point &p);
     bool location_check();
     bool match(const std::string& what);
     bool move(fpoint future_pos);
@@ -915,6 +915,7 @@ public:
     bool move_to_or_escape(const point&);
     bool open_door(Thingp door);
     bool particle_anim_exists(void);
+    bool place(const std::string& what, const point &p);
     bool possible_to_attack(const Thingp it);
     bool spawn_fire(const std::string& what);
     bool spawn_next_to(const std::string& what);
@@ -923,18 +924,18 @@ public:
     bool spawn_under(const std::string& what);
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);
+    bool throw_item(Thingp w);
     bool try_harder_to_jump(void);
     bool try_to_carry(Thingp w);
     bool try_to_escape(void);
     bool try_to_jump(point p);
     bool try_to_jump(void);
-    bool try_to_jump_towards_player(void);
     bool try_to_jump_away_from_player(void);
+    bool try_to_jump_towards_player(void);
     bool use(Thingp w);
-    bool throw_item(Thingp w);
     bool will_avoid_threat(const Thingp it);
-    bool will_avoid_threat(const point &p);
     bool will_avoid_threat(const fpoint &p);
+    bool will_avoid_threat(const point &p);
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void) const;
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
@@ -963,14 +964,24 @@ public:
     float get_fall(void);
     float get_lunge(void);
     float how_far_i_can_jump(void);
-    fpoint get_interpolated_mid_at(void) const;
-    fpoint set_interpolated_mid_at(fpoint);
     int ai_choose_goal(void);
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, int damage);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
+    int attack_eater(void) const;
+    int attack_humanoid(void) const;
+    int attack_lunge(void) const;
+    int attack_meat(void) const;
+    int attack_shove(void) const;
+    int attack_shove_chance_d1000(void) const;
+    int attackable_by_monst(void) const;
+    int attackable_by_player(void) const;
+    int avoids_acid(void) const;
+    int avoids_fire(void) const;
+    int avoids_poison(void) const;
+    int avoids_water(void) const;
     int bag_height(void);
     int bag_item_height(void) const;
     int bag_item_width(void) const;
@@ -980,6 +991,10 @@ public:
     int collision_check(void) const;
     int collision_circle(void) const;
     int collision_hit_priority(void) const;
+    int damage_doubled_from_acid(void) const;
+    int damage_doubled_from_fire(void) const;
+    int damage_doubled_from_poison(void) const;
+    int damage_doubled_from_water(void) const;
     int defence(void) const;
     int get_danger_level(void);
     int gfx_an_animation_only(void) const;
@@ -1005,17 +1020,16 @@ public:
     int health_starving_pct(void) const;
     int hunger_clock_freq_ms(void) const;
     int is_able_to_change_levels(void) const;
+    int is_able_to_fall(void) const;
+    int is_able_to_see_through_doors(void) const;
+    int is_able_to_walk_through_walls(void) const;
     int is_acid(void) const;
     int is_acid_lover(void) const;
-    int avoids_acid(void) const;
     int is_active(void) const;
     int is_alive_monst(void) const;
-    int attack_eater(void) const;
-    int attack_lunge(void) const;
-    int attack_shove(void) const;
-    int attack_shove_chance_d1000(void) const;
-    int attackable_by_monst(void) const;
-    int attackable_by_player(void) const;
+    int is_always_hit(void) const;
+    int is_attackable(void) const;
+    int is_auto_collect_item(void) const;
     int is_bag(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
@@ -1026,6 +1040,7 @@ public:
     int is_combustible(void) const;
     int is_corpse(void) const;
     int is_corridor(void) const;
+    int is_critical_to_level(void) const;
     int is_cursor(void) const;
     int is_cursor_can_hover_over(void) const;
     int is_cursor_can_hover_over_but_needs_double_click(void) const;
@@ -1035,32 +1050,34 @@ public:
     int is_deep_water(void) const;
     int is_dirt(void) const;
     int is_door(void) const;
-    int damage_doubled_from_acid(void) const;
-    int damage_doubled_from_fire(void) const;
-    int damage_doubled_from_water(void) const;
     int is_droppable(void) const;
     int is_entrance(void) const;
     int is_ethereal(void) const;
     int is_exit(void) const;
     int is_explosion(void) const;
+    int is_extreme_hazard(void) const;
+    int is_fearless(void) const;
     int is_fire(void) const;
-    int avoids_fire(void) const;
     int is_flammable(void) const;
     int is_floating(void) const;
     int is_floor(void) const;
     int is_floor_deco(void) const;
     int is_food(void) const;
+    int is_food_eater(void) const;
     int is_generator(void) const;
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hit_by(Thingp hitter);
     int is_hit_by(Thingp hitter, bool crit, int damage);
+    int is_humanoid(void) const;
     int is_hunger_insatiable(void) const;
     int is_intelligent(void) const;
     int is_interesting(void) const;
     int is_item(void) const;
     int is_item_collected_as_gold(void) const;
     int is_item_eater(void) const;
+    int is_item_effect_max_radius(void) const;
+    int is_item_effect_min_radius(void) const;
     int is_item_not_stackable(void) const;
     int is_jelly(void) const;
     int is_jelly_baby(void) const;
@@ -1088,6 +1105,8 @@ public:
     int is_msg(void) const;
     int is_no_tile(void) const;
     int is_player(void) const;
+    int is_poison(void) const;
+    int is_poison_immune(void) const;
     int is_potion(void) const;
     int is_potion_eater(void) const;
     int is_projectile(void) const;
@@ -1119,30 +1138,8 @@ public:
     int is_rrr29(void) const;
     int is_rrr3(void) const;
     int is_rrr30(void) const;
-    int is_always_hit(void) const;
-    int is_fearless(void) const;
-    int is_attackable(void) const;
-    int is_able_to_see_through_doors(void) const;
-    int is_able_to_walk_through_walls(void) const;
-    int is_humanoid(void) const;
-    int is_poison_immune(void) const;
-    int damage_doubled_from_poison(void) const;
-    int avoids_poison(void) const;
     int is_rrr4(void) const;
-    int attack_humanoid(void) const;
-    int is_poison(void) const;
-    int is_used_when_thrown(void) const;
-    int is_used_automatically_when_selected(void) const;
-    int is_thrown_automatically_when_selected(void) const;
-    int is_extreme_hazard(void) const;
-    int is_auto_collect_item(void) const;
-    int attack_meat(void) const;
-    int is_food_eater(void) const;
-    int is_item_effect_max_radius(void) const;
     int is_rrr5(void) const;
-    int is_item_effect_min_radius(void) const;
-    int is_critical_to_level(void) const;
-    int is_able_to_fall(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
@@ -1156,6 +1153,7 @@ public:
     int is_steal_item_chance_d1000(void) const;
     int is_temporary_bag(void) const;
     int is_throwable(void) const;
+    int is_thrown_automatically_when_selected(void) const;
     int is_torch(void) const;
     int is_treasure(void) const;
     int is_treasure_class_a(void) const;
@@ -1164,19 +1162,20 @@ public:
     int is_treasure_eater(void) const;
     int is_undead(void) const;
     int is_usable(void) const;
+    int is_used_automatically_when_selected(void) const;
+    int is_used_when_thrown(void) const;
     int is_wall(void) const;
     int is_wall_deco(void) const;
     int is_water(void) const;
     int is_water_lover(void) const;
-    int avoids_water(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;
+    int monst_size(void) const;
     int normal_placement_rules(void) const;
     int on_death_drop_all_items(void) const;
     int on_death_is_corpse(void) const;
     int on_death_is_open(void) const;
     int rarity(void) const;
-    int monst_size(void) const;
     int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;
@@ -1231,7 +1230,6 @@ public:
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
-    bool cursor_path_pop_first_move(void);
     void cursor_path_stop(void);
     void dbg(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
@@ -1301,6 +1299,7 @@ public:
     void resurrect_tick();
     void set_owner(Thingp owner);
     void sheath(void);
+    void throw_at(Thingp w, Thingp target);
     void tick();
     void torch_tick();
     void try_to_carry(const std::list<Thingp> &items);
@@ -1310,7 +1309,6 @@ public:
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void use_weapon(void);
     void used(Thingp w, Thingp target);
-    void throw_at(Thingp w, Thingp target);
     void visible();
     void water_tick();
     void weapon_get_use_offset(float *dx, float *dy) const;
@@ -1321,6 +1319,21 @@ public:
     void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
     void weapon_sheath(void);
     void wield(Thingp w);
+
+    ////////////////////////////////////////////////////////////////////////////
+    // interpolated_mid_at
+    ////////////////////////////////////////////////////////////////////////////
+    inline const fpoint &get_interpolated_mid_at (void) const
+    {_
+        return (interpolated_mid_at);
+    }
+
+    inline void set_interpolated_mid_at (fpoint v)
+    {_
+    //con("%s", __FUNCTION__);
+        interpolated_mid_at = v;
+    }
+
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
