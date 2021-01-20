@@ -113,7 +113,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "ui_circle");
         wid_set_color(w, WID_COLOR_BG, WHITE);
-        wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
+        wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
     }
 
     {_
@@ -126,7 +126,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         wid_set_bg_tilename(w, "ui_tile_bg");
         wid_set_fg_tilename(w, tile->name);
         wid_set_color(w, WID_COLOR_BG, WHITE);
-        wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
+        wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
     }
 
     wid_thing_info_window->log(" ");
