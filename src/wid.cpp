@@ -713,7 +713,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
         }
     }
 
-    if (!(w->on_mouse_over_b) && !(w->on_mouse_down)) {
+    if (!w->on_mouse_over_b && !w->on_mouse_down) {
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] ||
             get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT_FG]) {
             //
@@ -1854,7 +1854,7 @@ static Widp wid_new (Widp parent)
     wid_set_mode(w, WID_MODE_NORMAL);
 
     w->visible = true;
-    w->style = UI_WID_STYLE_NONE;
+    w->style = UI_WID_STYLE_SOLID_NONE;
 
     return (w);
 }
@@ -1877,7 +1877,7 @@ static Widp wid_new (void)
     wid_set_mode(w, WID_MODE_NORMAL);
 
     w->visible = true;
-    w->style = UI_WID_STYLE_NONE;
+    w->style = UI_WID_STYLE_SOLID_NONE;
 
     return (w);
 }
@@ -3829,18 +3829,18 @@ Widp wid_find_under_mouse (void)
     if (ascii_is_empty(ascii_mouse_x, ascii_mouse_y)) {
         return nullptr;
     }
+
     auto w = wid_find_at(ascii_mouse_x, ascii_mouse_y);
     if (w) {
         w = wid_get_top_parent(w);
         if (wid_ignore_events(w)) {
-//MINICON("ign1 %s", wid_name(w).c_str());
             return nullptr;
         } else {
-//MINICON("over1 %s", wid_name(w).c_str());
             return w;
         }
+        return w;
     }
-    return w;
+    return nullptr;
 }
 
 Widp wid_find_under_mouse_when_scrolling (void)

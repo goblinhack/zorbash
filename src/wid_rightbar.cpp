@@ -123,8 +123,7 @@ static void wid_rightbar_create (void)
         wid_rightbar = wid_new_square_window("wid rightbar");
         wid_set_ignore_scroll_events(wid_rightbar, true);
         wid_set_pos(wid_rightbar, tl, br);
-        wid_set_shape_none(wid_rightbar);
-        wid_set_style(wid_rightbar, UI_WID_STYLE_NONE);
+        wid_set_style(wid_rightbar, UI_WID_STYLE_SOLID_NONE);
         wid_set_on_mouse_over_b(wid_rightbar, wid_rightbar_mouse_over_b);
         wid_set_on_mouse_over_e(wid_rightbar, wid_rightbar_mouse_over_e);
     }
@@ -134,9 +133,9 @@ static void wid_rightbar_create (void)
     {
         {_
             auto w = wid_new_plain(wid_rightbar, "zorbash-0");
+            wid_set_ignore_events(w, true);
             point tl = make_point(0, y_at);
             point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-            wid_set_ignore_events(w, true);
             wid_set_pos(w, tl, br);
             wid_set_bg_tilename(w, "zorbash-0");
             wid_set_color(w, WID_COLOR_BG, WHITE);
@@ -144,9 +143,9 @@ static void wid_rightbar_create (void)
         y_at += 1;
         {_
             auto w = wid_new_plain(wid_rightbar, "zorbash-1");
+            wid_set_ignore_events(w, true);
             point tl = make_point(0, y_at);
             point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-            wid_set_ignore_events(w, true);
             wid_set_pos(w, tl, br);
             wid_set_bg_tilename(w, "zorbash-1");
             wid_set_color(w, WID_COLOR_BG, WHITE);
@@ -156,11 +155,11 @@ static void wid_rightbar_create (void)
     y_at += 1;
     {_
         auto w = wid_new_plain(wid_rightbar, "level no");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
         auto s = dynprintf("Level %u", level->world_at.z);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);
         wid_set_shape_none(w);
@@ -170,11 +169,11 @@ static void wid_rightbar_create (void)
     y_at += 1;
     {_
         auto w = wid_new_plain(wid_rightbar, "Seed");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
         auto s = dynprintf("%%fg=gray$\"%s\"", game->seed_name.c_str());
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);
         wid_set_shape_none(w);
@@ -184,10 +183,10 @@ static void wid_rightbar_create (void)
     y_at += 2;
     {_
         auto w = wid_new_plain(wid_rightbar, "title name");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
 
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_text(w, player->text_title());
         wid_set_shape_none(w);
@@ -197,10 +196,10 @@ static void wid_rightbar_create (void)
 
     {_
         auto w = wid_new_plain(wid_rightbar, "gold");
+        wid_set_ignore_events(w, true);
         point tl = make_point(3, y_at-2);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-2);
 
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         auto g = dynprintf("%%fg=green$$%%fg=gray$%05d", player->get_gold());
         wid_set_text(w, g);
@@ -210,10 +209,10 @@ static void wid_rightbar_create (void)
 
     {_
         auto w = wid_new_plain(wid_rightbar, "keys");
+        wid_set_ignore_events(w, true);
         point tl = make_point(10, y_at-2);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-2);
 
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         auto k = std::to_string(player->get_keys());
         wid_set_text(w, "%%fg=yellow$%%tile=key-icon$%%fg=gray$" + k);
@@ -226,9 +225,9 @@ static void wid_rightbar_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_rightbar, "Health-status-bar");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
 
         int i = ((float)player->get_health() /
@@ -242,18 +241,18 @@ static void wid_rightbar_create (void)
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "health-status");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "health-status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "health-value");
+        wid_set_ignore_events(w, true);
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -270,9 +269,9 @@ static void wid_rightbar_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_rightbar, "stamina-status-bar");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
 
         int i = ((float)player->get_stamina() /
@@ -286,18 +285,18 @@ static void wid_rightbar_create (void)
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "stamina-status");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "stamina-status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "stamina-value");
+        wid_set_ignore_events(w, true);
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -314,18 +313,18 @@ static void wid_rightbar_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_rightbar, "stats1");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "stats1");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "stats1-value");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -345,18 +344,18 @@ static void wid_rightbar_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_rightbar, "stats2");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "stats2");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "stats2-value");
+        wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
