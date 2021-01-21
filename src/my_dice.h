@@ -33,5 +33,7 @@ public:
 bool d20roll(int modifier_a, int modifier_b);
 bool d20roll(int modifier_a, int modifier_b, bool &fumble, bool &critical);
 int modifier_to_bonus(int modifier);
+const std::string modifier_to_bonus_str(int modifier);
+const std::string modifier_to_bonus_slash_str(int modifier);
 
 #endif
