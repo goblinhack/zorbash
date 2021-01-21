@@ -93,7 +93,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
     int height = 33;
     point tl = make_point(0, TERM_HEIGHT - 2 - height);
-    point br = make_point(20, TERM_HEIGHT - 2);
+    point br = make_point(22, TERM_HEIGHT - 2);
 
     auto tp = t->tp();
     auto tiles = &tp->tiles;
@@ -150,15 +150,6 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     wid_thing_info_window->log(" ");
     wid_thing_info_window->log(" ");
 
-    char tmp[20];
-    snprintf(tmp, sizeof(tmp) - 1,
-             "Att %2d/%-2d Def %2d/%-2d",
-             player->get_modifier_attack(),
-             modifier_to_bonus(player->get_modifier_attack()),
-             player->get_modifier_defence(),
-             modifier_to_bonus(player->get_modifier_defence()));
-    wid_thing_info_window->log(tmp);
-
 #if 0
                  player->get_modifier_attack(),
                  player->get_modifier_defence(),
@@ -194,27 +185,6 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     bool need_line = true;
 
     {
-        auto attack_melee_dice = t->get_damage_melee_dice();
-        auto min_value = attack_melee_dice.min_roll();
-        auto max_value = attack_melee_dice.max_roll();
-        if (min_value > 0) {
-            if (need_line) {
-                wid_thing_info_window->log(" ");
-                need_line = false;
-            }
-            if (min_value == max_value) {
-                wid_thing_info_window->log("Damg: " + 
-                                        t->get_damage_melee_dice_str());
-            } else {
-                wid_thing_info_window->log("Damg: " + 
-                                        std::to_string(min_value) + "-" + 
-                                        std::to_string(max_value) + " (" +
-                                        t->get_damage_melee_dice_str() + ")");
-            }
-        }
-    }
-
-    {
         auto gold_dice = t->get_gold_value_dice();
         auto min_value = gold_dice.min_roll();
         auto max_value = gold_dice.max_roll();
@@ -224,10 +194,10 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
                 need_line = false;
             }
             if (min_value == max_value) {
-                wid_thing_info_window->log("Gold: " + 
+                wid_thing_info_window->log("%%fg=white$Gold value " + 
                                         t->get_gold_value_dice_str());
             } else {
-                wid_thing_info_window->log("Gold: " + 
+                wid_thing_info_window->log("%%fg=white$Gold value " + 
                                         std::to_string(min_value) + "-" + 
                                         std::to_string(max_value) + " (" +
                                         t->get_gold_value_dice_str() + ")");
@@ -245,15 +215,68 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
                 need_line = false;
             }
             if (min_value == max_value) {
-                wid_thing_info_window->log("Nutn: " + 
+                wid_thing_info_window->log("%%fg=white$Nutrition " + 
                                         t->get_nutrition_dice_str());
             } else {
-                wid_thing_info_window->log("Nutn: " + 
+                wid_thing_info_window->log("%%fg=white$Nutrition " + 
                                         std::to_string(min_value) + "-" + 
                                         std::to_string(max_value) + " (" + 
                                         t->get_nutrition_dice_str() + ")");
             }
         }
+    }
+    
+    {
+        auto attack_melee_dice = t->get_damage_melee_dice();
+        auto min_value = attack_melee_dice.min_roll();
+        auto max_value = attack_melee_dice.max_roll();
+        if (min_value > 0) {
+            if (need_line) {
+                wid_thing_info_window->log(" ");
+                need_line = false;
+            }
+            if (min_value == max_value) {
+                wid_thing_info_window->log("%%fg=white$Damage     " + 
+                                        t->get_damage_melee_dice_str());
+            } else {
+                wid_thing_info_window->log("%%fg=white$Damage     " + 
+                                        std::to_string(min_value) + "-" + 
+                                        std::to_string(max_value) + " (" +
+                                        t->get_damage_melee_dice_str() + ")");
+            }
+        }
+    }
+
+    if (t->is_monst() || t->is_player()) {
+        char tmp[40];
+
+        snprintf(tmp, sizeof(tmp) - 1,
+                 "%%fg=white$Attack         %2d%-3s",
+                 t->get_modifier_attack(),
+                 modifier_to_bonus_slash_str(
+                    t->get_modifier_attack()).c_str());
+        wid_thing_info_window->log(tmp);
+
+        snprintf(tmp, sizeof(tmp) - 1,
+                 "%%fg=white$Defence        %2d%-3s",
+                 t->get_modifier_defence(),
+                 modifier_to_bonus_slash_str(
+                    t->get_modifier_defence()).c_str());
+        wid_thing_info_window->log(tmp);
+
+        snprintf(tmp, sizeof(tmp) - 1,
+                 "%%fg=white$Strength       %2d%-3s",
+                 t->get_modifier_strength(),
+                 modifier_to_bonus_slash_str(
+                    t->get_modifier_strength()).c_str());
+        wid_thing_info_window->log(tmp);
+
+        snprintf(tmp, sizeof(tmp) - 1,
+                 "%%fg=white$Constitution   %2d%-3s",
+                 t->get_modifier_constitution(),
+                 modifier_to_bonus_slash_str(
+                    t->get_modifier_constitution()).c_str());
+        wid_thing_info_window->log(tmp);
     }
 
     if (t->is_monst()) {
