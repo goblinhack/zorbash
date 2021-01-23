@@ -2458,8 +2458,8 @@ def init_tiles3():
       "entrance1.4",
       "entrance1.5",
       "entrance1.6",
-      "entrance1.open",
-      "",
+      "entrance1.1.open",
+      "entrance1.2.open",
       #########################################################################
       "",
       "",

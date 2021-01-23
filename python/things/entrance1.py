@@ -37,7 +37,8 @@ def tp_init(name, text_name, short_text_name):
     x.set_tile(tile=name + ".2", delay_ms=delay)
     x.set_tile(tile=name + ".2", delay_ms=delay)
     x.set_tile(tile=name + ".3", delay_ms=delay)
-    x.set_tile(tile=name + ".open", is_open=True)
+    x.set_tile(tile=name + ".1.open", delay_ms=delay, is_open=True)
+    x.set_tile(tile=name + ".2.open", delay_ms=delay, is_open=True)
 
     x.update()
 
