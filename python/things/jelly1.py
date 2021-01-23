@@ -60,7 +60,6 @@ def tp_init(name, text_name):
     x.set_move_speed_ms(1000)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
-    x.set_on_birth_do("jelly1.spawn()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(10)
     x.set_text_a_or_an("a");

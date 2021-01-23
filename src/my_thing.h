@@ -803,9 +803,9 @@ public:
     int get_nutrition(void) const;
     const Dice& get_nutrition_dice(void) const;
 
-    const std::string& get_on_idle_dice_do_str(void) const;
+    const std::string& get_on_idle_dice_str(void) const;
     int get_idle_tick(void) const;
-    const Dice& get_on_idle_dice_do(void) const;
+    const Dice& get_on_idle_dice(void) const;
 
     const std::string& get_lifespan_dice_str(void) const;
     int get_lifespan(void) const;

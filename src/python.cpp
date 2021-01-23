@@ -770,7 +770,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(on_birth_do)
     TP_SET_DECL(on_use_do)
     TP_SET_DECL(on_death_do)
-    TP_SET_DECL(on_idle_dice_do)
+    TP_SET_DECL(on_idle_dice)
     TP_SET_DECL(resurrect_dice)
     TP_SET_DECL(right1_tile)
     TP_SET_DECL(right2_tile)

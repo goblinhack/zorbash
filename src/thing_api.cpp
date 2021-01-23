@@ -15,9 +15,9 @@
 //
 // Dice
 //
-const Dice& Thing::get_on_idle_dice_do (void) const {_ return (tp()->on_idle_dice_do()); }
-const std::string& Thing::get_on_idle_dice_do_str (void) const {_ return (tp()->on_idle_dice_do_str()); }
-int Thing::get_idle_tick (void) const {_ return (tp()->on_idle_dice_do().roll()); }
+const Dice& Thing::get_on_idle_dice (void) const {_ return (tp()->on_idle_dice()); }
+const std::string& Thing::get_on_idle_dice_str (void) const {_ return (tp()->on_idle_dice_str()); }
+int Thing::get_idle_tick (void) const {_ return (tp()->on_idle_dice().roll()); }
 
 const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_dice()); }
 const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }

@@ -55,8 +55,8 @@ private:
     //
     // Dice
     //
-    Dice _on_idle_dice_do {};
-    std::string _on_idle_dice_do_str;
+    Dice _on_idle_dice {};
+    std::string _on_idle_dice_str;
 
     Dice _lifespan_dice {};
     std::string _lifespan_dice_str;
@@ -352,10 +352,10 @@ public:
     //
     // Dice
     //
-    const Dice& on_idle_dice_do(void) const;
+    const Dice& on_idle_dice(void) const;
     const int idle_tick(void) const;
-    const std::string& on_idle_dice_do_str(void) const;
-    void set_on_idle_dice_do(const std::string &);
+    const std::string& on_idle_dice_str(void) const;
+    void set_on_idle_dice(const std::string &);
 
     const Dice& lifespan_dice(void) const;
     const int lifespan(void) const;

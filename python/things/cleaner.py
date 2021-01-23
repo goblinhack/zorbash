@@ -69,7 +69,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_nutrition_dice("1d4")
     x.set_on_death_drop_all_items(True)
     x.set_on_death_is_corpse(True)
-    x.set_on_idle_dice_do("1d0:cleaner.tp_effect()")
+    x.set_on_idle_dice("1d0:cleaner.tp_effect()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
     x.set_text_a_or_an("a");
