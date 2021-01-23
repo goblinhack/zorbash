@@ -1,7 +1,7 @@
 import zx
 import tp
 
-def tp_effect(me, what, target, x, y):
+def on_use(me, what, target, x, y):
     zx.tp_spawn_radius_range(me, what, "potion_descent_effect")
 
 def tp_init(name, text_name, short_text_name):
@@ -40,7 +40,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_used_when_thrown(True)
     x.set_long_text_description("This most dangerous potion will transport you to the next level by the most efficacious means possible...")
     x.set_normal_placement_rules(True)
-    x.set_on_use_do("potion_descent.tp_effect()")
+    x.set_on_use_do("potion_descent.on_use()")
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=cyan$A swirling milky blue potion of descent")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
