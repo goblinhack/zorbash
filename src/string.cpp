@@ -486,12 +486,12 @@ strcasestr_ (const char *s, const char*find)
 "The current supported versions are 5.8.8 (provided for back-ward-compatibility"
 "with the Perl 5.8 family) and 5.10.0, with the default being 5.10.0."
  */
-shared_vector_string split (const char *text, uint32_t max_line_len)
+shared_vector_string split (const char *text, int max_line_len)
 {_
     uint8_t found_format_string;
     const char *line_start;
     const char *line_end;
-    uint32_t line_len;
+    int line_len;
     char c;
     const char *const text_start = text;
 
@@ -560,11 +560,12 @@ shared_vector_string split (const char *text, uint32_t max_line_len)
                     (void) string2tile(&text);
                     found_format_string = false;
                     continue;
+                } else if (c == '%') {
+                    line_len -= 1;
                 } else {
+                    found_format_string = false;
                     text--;
                 }
-
-                found_format_string = false;
             }
 
             text++;
@@ -612,7 +613,7 @@ shared_vector_string split (const char *text, uint32_t max_line_len)
             break;
         }
 
-        line_len = (uint32_t)(line_end - line_start);
+        line_len = (int)(line_end - line_start);
         char tmp[line_len + 1];
         strlcpy_(tmp, line_start, line_len + 1);
 
@@ -633,20 +634,25 @@ shared_vector_string split (const char *text, uint32_t max_line_len)
     return (result);
 }
 
-shared_vector_string split (const std::string &text, uint32_t max_line_len)
+shared_vector_string split (const std::string &text, int max_line_len)
 {_
     uint8_t found_format_string;
-    uint32_t line_len;
+    int line_len;
     char c;
     auto text_start = text.begin();
     auto text_iter = text_start;
     auto line_start = text_start;
     auto line_end = text_start;
 
-//printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
+    if (max_line_len < 0) {
+        DIE("bad max line len");
+    }
+
     if (!text.length()) {
         return (0);
     }
+
+//printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
 
     auto result = std::make_shared< std::vector< std::string > > ();
 
@@ -730,15 +736,18 @@ shared_vector_string split (const std::string &text, uint32_t max_line_len)
 
                     found_format_string = false;
                     continue;
+                } else if (c == '%') {
+                    line_len -= 1;
                 } else {
+                    found_format_string = false;
                     text_iter--;
                 }
-
-                found_format_string = false;
             }
 
             text_iter++;
+//printf("LEN %d [%c]\n", line_len, c);
         }
+//printf("END line_len %d\n", line_len);
 
         line_end = text_iter;
 
@@ -782,7 +791,7 @@ shared_vector_string split (const std::string &text, uint32_t max_line_len)
             break;
         }
 
-        line_len = (uint32_t)(line_end - line_start);
+        line_len = (int)(line_end - line_start);
         auto tmp = std::string(line_start, line_start + line_len);
 
 //printf("OUT [%s] max_line_len %d\n", tmp.c_str(), line_len);
@@ -803,10 +812,10 @@ shared_vector_string split (const std::string &text, uint32_t max_line_len)
     return (result);
 }
 
-shared_vector_wstring split (const std::wstring &text, uint32_t max_line_len)
+shared_vector_wstring split (const std::wstring &text, int max_line_len)
 {_
     uint8_t found_format_string;
-    uint32_t line_len;
+    int line_len;
     char c;
     auto text_start = text.begin();
     auto text_iter = text_start;
@@ -900,11 +909,12 @@ shared_vector_wstring split (const std::wstring &text, uint32_t max_line_len)
 
                     found_format_string = false;
                     continue;
+                } else if (c == '%') {
+                    line_len -= 1;
                 } else {
+                    found_format_string = false;
                     text_iter--;
                 }
-
-                found_format_string = false;
             }
 
             text_iter++;
@@ -952,7 +962,7 @@ shared_vector_wstring split (const std::wstring &text, uint32_t max_line_len)
             break;
         }
 
-        line_len = (uint32_t)(line_end - line_start);
+        line_len = (int)(line_end - line_start);
         auto tmp = std::wstring(line_start, line_start + line_len);
 
 //printf("OUT [%s] max_line_len %d\n", wstring_to_string(tmp).c_str(), 

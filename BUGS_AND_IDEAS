@@ -1,6 +1,7 @@
 bugs
 ----
 
+- gasses that spread
 - destroy gen destroys all monsts spawned
 - generator monst linit
 - overlap not working when things moving
