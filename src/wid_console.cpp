@@ -121,7 +121,7 @@ static void wid_console_log_ (std::wstring s)
 void wid_console_log (std::string s)
 {_
     int chars_per_line = UI_CONSOLE_WIDTH;
-    if (!chars_per_line) {
+    if (chars_per_line <= 0) {
         chars_per_line = 80;
     }
 
@@ -140,7 +140,7 @@ void wid_console_log (std::string s)
 void wid_console_log (std::wstring s)
 {_
     int chars_per_line = UI_CONSOLE_WIDTH;
-    if (!chars_per_line) {
+    if (chars_per_line <= 0) {
         chars_per_line = 80;
     }
 

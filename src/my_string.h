@@ -48,9 +48,9 @@ std::string mybasename(const char *in, const char *who);
 void hexdump(const unsigned char *addr, size_t len);
 char *strcasestr_(const char *s, const char *find);
 
-shared_vector_string split(const char *in, uint32_t max_line_len);
-shared_vector_string split(const std::string &, uint32_t max_line_len);
-shared_vector_wstring split(const std::wstring &, uint32_t max_line_len);
+shared_vector_string split(const char *in, int max_line_len);
+shared_vector_string split(const std::string &, int max_line_len);
+shared_vector_wstring split(const std::wstring &, int max_line_len);
 extern std::vector<std::string> split_tokens(const std::string &s,
                                              const char delimiter);
 int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used,
