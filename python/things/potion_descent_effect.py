@@ -1,7 +1,7 @@
 import zx
 import tp
 
-def tp_effect(me, x, y):
+def on_death(me, x, y):
     zx.tp_kill_if(me, "is_floor", x, y)
     zx.tp_kill_if(me, "is_corridor", x, y)
     zx.tp_kill_if(me, "is_dirt", x, y)
@@ -17,8 +17,8 @@ def tp_init(name):
     x.set_is_interesting(False)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_on_death_do("potion_descent_effect.tp_effect()")
-    x.set_z_depth(zx.MAP_DEPTH_OBJ)
+    x.set_on_death_do("potion_descent_effect.on_death()")
+    x.set_z_depth(zx.MAP_DEPTH_EXPLOSION)
     x.set_z_prio(zx.MAP_PRIO_INFRONT)
 
     x.set_tile(tile="nothing")

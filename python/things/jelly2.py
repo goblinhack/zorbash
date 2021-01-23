@@ -3,6 +3,7 @@ import zx
 import tp
 
 def on_death(me, x, y):
+    zx.tp_spawn_under(me, "jelly_explosion")
     zx.tp_spawn_next_to(me, "jelly1")
     zx.tp_spawn_next_to(me, "jelly1")
     zx.tp_spawn_next_to(me, "jelly1")
@@ -66,7 +67,6 @@ def tp_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_on_death_do("jelly2.on_death()")
-    x.set_on_death_is_corpse(True)
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
     x.set_text_a_or_an("a");
@@ -109,22 +109,6 @@ def tp_init(name, text_name):
     x.set_tile(tile=name + ".6.25", is_hp_25_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".7.25", is_hp_25_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".8.25", is_hp_25_percent=True, delay_ms=delay)
-
-    delay=10
-    x.set_tile("pink_splatter.1", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.2", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.3", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.4", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.5", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.6", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.7", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.8", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.9", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.10", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.11", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.12", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.13", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.14", is_dead=True, delay_ms=delay, is_end_of_anim = True)
 
     x.update()
 

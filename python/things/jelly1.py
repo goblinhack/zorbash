@@ -1,9 +1,8 @@
 import zx
 import tp
 
-def spawn(me, x, y):
-    zx.tp_spawn_under(me, "pink_splatter")
-
+def on_death(me, x, y):
+    zx.tp_spawn_under(me, "jelly_explosion")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -43,12 +42,12 @@ def tp_init(name, text_name):
     x.set_is_jumper(True)
     x.set_is_jumper_chance_d1000(100)
     x.set_is_jumper_distance(3)
+    x.set_is_attackable(True)
     x.set_is_jumper_on_low_hp_chance_d1000(500)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
-    x.set_is_attackable(True)
     x.set_is_movable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when attacked and multiplying when attacked. This one is a baby jelly. It tends to avoid adults of its kind.")
@@ -60,6 +59,7 @@ def tp_init(name, text_name):
     x.set_move_speed_ms(1000)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
+    x.set_on_death_do("jelly1.on_death()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(10)
     x.set_text_a_or_an("a");
@@ -86,22 +86,6 @@ def tp_init(name, text_name):
     x.set_tile(tile=name + ".2.100", is_hp_25_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".3.100", is_hp_25_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".4.100", is_hp_25_percent=True, delay_ms=delay)
-
-    delay=10
-    x.set_tile("pink_splatter.1", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.2", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.3", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.4", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.5", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.6", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.7", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.8", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.9", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.10", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.11", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.12", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.13", is_dead=True, delay_ms=delay)
-    x.set_tile("pink_splatter.14", is_dead=True, delay_ms=delay, is_end_of_anim = True)
 
     x.update()
 
