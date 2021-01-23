@@ -137,12 +137,12 @@ PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywd
         }
 
         arr[i] = py_obj_to_str(strObj);
+        PY_DBG("tile_load_arr_sprites(\"%s\")", arr[i]);
     }
 
-    tile_load_arr_sprites(
-            std::string(file ? file : ""),
-            std::string(name ? name : ""),
-            width, height, numLines, arr);
+    tile_load_arr_sprites(std::string(file ? file : ""),
+                          std::string(name ? name : ""),
+                          width, height, numLines, arr);
 
     for (i=0; i<numLines; i++){
         if (!arr[i]) {
