@@ -28,7 +28,7 @@ def tp_init(name, text_name):
     x.set_avoids_water(100)
     x.set_lifespan_dice("1d30+10")
     x.set_light_color("yellow")
-    x.set_on_idle_dice_do("1d10+20:small_fire.spawn()")
+    x.set_on_idle_dice("1d10+20:small_fire.spawn()")
     x.set_damage_melee_dice("1d3+1")
     x.set_health_initial_dice("5")
     x.set_text_a_or_an("");

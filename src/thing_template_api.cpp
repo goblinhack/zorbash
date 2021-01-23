@@ -14,10 +14,10 @@
 //
 // Dice
 //
-const Dice& Tp::on_idle_dice_do(void) const { return _on_idle_dice_do; }
-const int Tp::idle_tick(void) const { return _on_idle_dice_do.roll(); }
-const std::string& Tp::on_idle_dice_do_str(void) const { return _on_idle_dice_do_str; }
-void Tp::set_on_idle_dice_do(const std::string &v) { _on_idle_dice_do = v; _on_idle_dice_do_str = v; }
+const Dice& Tp::on_idle_dice(void) const { return _on_idle_dice; }
+const int Tp::idle_tick(void) const { return _on_idle_dice.roll(); }
+const std::string& Tp::on_idle_dice_str(void) const { return _on_idle_dice_str; }
+void Tp::set_on_idle_dice(const std::string &v) { _on_idle_dice = v; _on_idle_dice_str = v; }
 
 const Dice& Tp::lifespan_dice(void) const { return _lifespan_dice; }
 const int Tp::lifespan(void) const { return _lifespan_dice.roll(); }

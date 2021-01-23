@@ -1,8 +1,11 @@
 import zx
 import tp
 
-def spawn(me, x, y):
+def on_idle_dice(me, x, y):
     zx.tp_spawn_next_to(me, "ghost1")
+
+def on_death(me, x, y):
+    zx.tp_spawn_under(me, "gen_explosion")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -24,12 +27,12 @@ def tp_init(name, text_name):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_health_initial_dice("6d6")
-    x.set_is_always_hit(True)
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
+    x.set_is_always_hit(True)
+    x.set_is_attackable(True)
     x.set_is_combustible(True)
     x.set_is_generator(True)
-    x.set_is_attackable(True)
     x.set_is_interesting(True)
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(True)
@@ -39,14 +42,15 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_light_color("cyan")
+    x.set_long_text_description("A bone portal which spews the angry spirits of those long passed")
     x.set_modifier_attack(0)
     x.set_modifier_constitution(0)
     x.set_modifier_defence(0)
     x.set_modifier_strength(0)
     x.set_normal_placement_rules(True)
-    x.set_on_idle_dice_do("1d30+20:gen_ghost.spawn()")
+    x.set_on_death_do("gen_ghost.on_death()")
+    x.set_on_idle_dice("1d30+20:gen_ghost.on_idle_dice()")
     x.set_text_a_or_an("a");
-    x.set_long_text_description("A bone portal which spews the angry spirits of those long passed")
     x.set_text_description("A cursed pile of bones, spawning spirits")
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

@@ -163,8 +163,8 @@ class Tp:
     def set_text_title(self, value):
         zx.tp_set_text_title(self, value)
 
-    def set_on_idle_dice_do(self, value):
-        zx.tp_set_on_idle_dice_do(self, value)
+    def set_on_idle_dice(self, value):
+        zx.tp_set_on_idle_dice(self, value)
 
     def set_text_hits(self, value):
         zx.tp_set_text_hits(self, value)

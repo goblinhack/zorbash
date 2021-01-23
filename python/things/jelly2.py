@@ -2,7 +2,7 @@ import builtins
 import zx
 import tp
 
-def tp_effect(me, x, y):
+def on_death(me, x, y):
     zx.tp_spawn_next_to(me, "jelly1")
     zx.tp_spawn_next_to(me, "jelly1")
     zx.tp_spawn_next_to(me, "jelly1")
@@ -65,7 +65,7 @@ def tp_init(name, text_name):
     x.set_move_speed_ms(1000)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
-    x.set_on_death_do("jelly2.tp_effect()")
+    x.set_on_death_do("jelly2.on_death()")
     x.set_on_death_is_corpse(True)
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)

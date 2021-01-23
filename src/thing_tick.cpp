@@ -64,10 +64,10 @@ _
     //
     // Roll the dice and see if we do anything
     //
-    if (!std::empty(get_on_idle_dice_do_str())) {
+    if (!std::empty(get_on_idle_dice_str())) {
         auto roll = get_idle_tick();
         if (get_tick() - get_tick_last_did_something() >= (unsigned int)roll) {
-            auto d = get_on_idle_dice_do();
+            auto d = get_on_idle_dice();
             py_call_void_fn(d.python_mod.c_str(),
                             d.python_func.c_str(),
                             id.id, (int)mid_at.x, (int)mid_at.y);
