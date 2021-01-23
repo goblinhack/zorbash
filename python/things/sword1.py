@@ -112,6 +112,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_modifier_strength(0)
     x.set_damage_melee_dice("1d8+1")
     x.set_text_a_or_an("a");
+    x.set_long_text_description("A gleaming entry-level sword. Ideal for beginners or the occasional weekend dungeoneer.")
     x.set_text_description("Thy pointy means of justice")
     x.set_weapon_carry_anim("sword1_carry")
     x.set_weapon_use_delay_hundredths(5)

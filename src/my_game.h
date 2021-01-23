@@ -11,6 +11,7 @@
 #include <list>
 
 class WidBag;
+class WidPopup;
 
 typedef class Config_ {
 public:
@@ -125,6 +126,7 @@ public:
     void wid_thing_info_create(Thingp, bool when_hovering_over = false);
     void wid_thing_info_create_when_hovering_over(Thingp);
     void wid_thing_info_destroy(void);
+    WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
     void wid_thing_collect_create(const std::list<Thingp> &items);
     void wid_thing_collect_destroy(void);
     void credits_select(void);

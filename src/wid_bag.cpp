@@ -18,6 +18,7 @@
 #include "my_game.h"
 #include "my_level.h"
 #include "my_wid_inventory.h"
+#include "my_wid_thing_info.h"
 #include "my_thing.h"
 
 static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
@@ -209,7 +210,7 @@ _
     auto id = wid_get_thing_id_context(game->in_transit_item);
     auto t = game->level->thing_find(id);
     if (!t) {
-        LOG("Cannot find thing");
+        ERR("Cannot find thing to drop");
         return false;
     }
 
