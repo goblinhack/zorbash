@@ -34,6 +34,16 @@ _
     //
     if (tpp->is_monst()) {
         if (level->monst_count >= LEVELS_MONST_COUNT) {
+            log("Too many minions");
+            return false;
+        }
+    }
+
+    //
+    // Don't spawn too many minions
+    //
+    if (is_minion_generator()) {
+        if (get_minion_count() >= minion_limit()) {
             return false;
         }
     }
