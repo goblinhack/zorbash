@@ -1,18 +1,14 @@
 bugs
 ----
 
-- need to be able to close open doors but not damaged ones
-- need effects when killing generators
-- gasses that spread
-- generator monst linit
-- overlap not working when things moving
 - fix attack / bite and melee
-- add _attacker for some _avoiders
-- warhammer should kill parent jelly in one go
 - poison from spider?
 - half damage from poison constitution save
 - spider that throws web?
 - antipoison potion
+- need to be able to close open doors but not damaged ones
+- gasses that spread
+- warhammer should kill parent jelly in one go
 - invisible monst?
 - consider https://kennystudio.itch.io/2d-explosions-pixelart-free
 
