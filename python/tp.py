@@ -262,8 +262,8 @@ class Tp:
     def set_is_rrr25(self, value):
         zx.tp_set_is_rrr25(self, value)
 
-    def set_is_rrr26(self, value):
-        zx.tp_set_is_rrr26(self, value)
+    def set_minion_limit(self, value):
+        zx.tp_set_minion_limit(self, value)
 
     def set_is_living(self, value):
         zx.tp_set_is_living(self, value)

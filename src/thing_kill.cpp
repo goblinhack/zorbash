@@ -35,6 +35,13 @@ void Thing::kill (Thingp killer, const char *reason)
         immediate_owner->bag_remove(this);
     }
 
+    //
+    // If a minion generator dies, kill all minions
+    //
+    if (is_minion_generator()) {
+        kill_minions(killer, "minion owner died");
+    }
+
     if (is_player()) {
         MINICON("RIP: %s", reason);
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");

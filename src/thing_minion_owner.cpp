@@ -101,3 +101,34 @@ void Thing::remove_minion_owner (void)
     //
     location_check();
 }
+
+void Thing::kill_minions (Thingp killer, const char *why)
+{_
+    //
+    // Slow, but not used too often
+    //
+    auto reason = dynprintf("minion owner died: %s", why);
+    for (auto p : level->all_things) {
+        auto minion = p.second;
+        auto o = minion->get_immediate_minion_owner();
+        if (o && (o == this)) {
+            minion->remove_minion_owner();
+            minion->dead(killer, "%s", reason);
+        }
+    }
+    myfree(reason);
+}
+
+void Thing::unleash_minions (void)
+{_
+    //
+    // Slow, but not used too often
+    //
+    for (auto p : level->all_things) {
+        auto minion = p.second;
+        auto o = minion->get_immediate_minion_owner();
+        if (o && (o == this)) {
+            minion->remove_minion_owner();
+        }
+    }
+}

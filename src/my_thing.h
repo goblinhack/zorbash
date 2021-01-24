@@ -230,7 +230,7 @@ public:
     // the level only once.
     //
     uint64_t i_set_is_acid:1                   {};
-    uint64_t i_set_is_poison:1                  {};
+    uint64_t i_set_is_poison:1                 {};
     uint64_t i_set_is_blood:1                  {};
     uint64_t i_set_is_chasm:1                  {};
     uint64_t i_set_is_corpse:1                 {};
@@ -243,7 +243,7 @@ public:
     uint64_t i_set_is_fire:1                   {};
     uint64_t i_set_is_floor:1                  {};
     uint64_t i_set_is_food:1                   {};
-    uint64_t i_set_is_minion_generator:1              {};
+    uint64_t i_set_is_minion_generator:1       {};
     uint64_t i_set_is_gold:1                   {};
     uint64_t i_set_is_hazard:1                 {};
     uint64_t i_set_is_extreme_hazard:1         {};
@@ -1000,10 +1000,12 @@ public:
     int attack(void) const;
     int attack_eater(void) const;
     int attack_humanoid(void) const;
+    int attack_living(void) const;
     int attack_lunge(void) const;
     int attack_meat(void) const;
     int attack_shove(void) const;
     int attack_shove_chance_d1000(void) const;
+    int attackable(void) const;
     int attackable_by_monst(void) const;
     int attackable_by_player(void) const;
     int avoids_acid(void) const;
@@ -1056,7 +1058,6 @@ public:
     int is_active(void) const;
     int is_alive_monst(void) const;
     int is_always_hit(void) const;
-    int attackable(void) const;
     int is_auto_collect_item(void) const;
     int is_bag(void) const;
     int is_bleeder(void) const;
@@ -1076,6 +1077,7 @@ public:
     int is_dangerous(Thingp);
     int is_dead_on_shove(void) const;
     int is_deep_water(void) const;
+    int is_described_when_hovering_over(void) const;
     int is_dirt(void) const;
     int is_door(void) const;
     int is_droppable(void) const;
@@ -1092,7 +1094,6 @@ public:
     int is_floor_deco(void) const;
     int is_food(void) const;
     int is_food_eater(void) const;
-    int is_minion_generator(void) const;
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hit_by(Thingp hitter);
@@ -1122,10 +1123,13 @@ public:
     int is_lava(void) const;
     int is_light_blocker(void) const;
     int is_light_strength(void) const;
+    int is_living(void) const;
     int is_loggable_for_important_stuff(void) const;
     int is_loggable_for_unimportant_stuff(void) const;
     int is_meat(void) const;
     int is_meat_eater(void) const;
+    int is_minion(void) const;
+    int is_minion_generator(void) const;
     int is_monst(void) const;
     int is_moveable(void) const;
     int is_movement_blocking_hard(void) const;
@@ -1160,12 +1164,8 @@ public:
     int is_rrr23(void) const;
     int is_rrr24(void) const;
     int is_rrr25(void) const;
-    int is_rrr26(void) const;
-    int is_living(void) const;
-    int attack_living(void) const;
-    int is_minion(void) const;
+    int minion_limit(void) const;
     int is_rrr3(void) const;
-    int is_described_when_hovering_over(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
     int is_rrr6(void) const;
@@ -1297,6 +1297,7 @@ public:
     void jump_end(void);
     void kill(Thingp killer, const char *reason);
     void kill(Thingp killer, std::string &reason);
+    void kill_minions(Thingp killer, const char *why);
     void lava_tick();
     void level_change(Levelp);
     void level_enter(void);
@@ -1322,17 +1323,18 @@ public:
     void msg(const std::string&);
     void reinit(void);
     void remove_all_references();
-    void remove_owner(void);
     void remove_minion_owner(void);
+    void remove_owner(void);
     void rest();
     void resurrect_tick();
-    void set_owner(Thingp owner);
     void set_minion_owner(Thingp minion_owner);
+    void set_owner(Thingp owner);
     void sheath(void);
     void throw_at(Thingp w, Thingp target);
     void tick();
     void torch_tick();
     void try_to_carry(const std::list<Thingp> &items);
+    void unleash_minions(void);
     void unwield(const char *why);
     void update_all(void);
     void update_interpolated_position(void);

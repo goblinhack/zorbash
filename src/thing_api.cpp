@@ -613,9 +613,9 @@ int Thing::is_rrr25(void) const
     return (tp()->is_rrr25());
 }
 
-int Thing::is_rrr26(void) const
+int Thing::minion_limit(void) const
 {_
-    return (tp()->is_rrr26());
+    return (tp()->minion_limit());
 }
 
 int Thing::is_living(void) const

@@ -107,7 +107,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_is_treasure(True)
     x.set_is_treasure_class_b(True)
     x.set_is_weapon(True)
-    x.set_long_text_description("A huge gleaming scythe. It's edge is hungry.")
+    x.set_long_text_description("A huge gleaming scythe. Ideal for gardening or other uses.")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy swingy means of justice")
     x.set_weapon_carry_anim("scythe_carry")

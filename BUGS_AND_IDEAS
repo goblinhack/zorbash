@@ -1,11 +1,9 @@
 bugs
 ----
 
-- check minion count
 - need to be able to close open doors but not damaged ones
 - need effects when killing generators
 - gasses that spread
-- destroy gen destroys all monsts spawned
 - generator monst linit
 - overlap not working when things moving
 - fix attack / bite and melee
