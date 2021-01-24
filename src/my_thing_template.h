@@ -227,7 +227,7 @@ private:
     int _is_rrr26 {};
     int _is_rrr27 {};
     int _is_rrr28 {};
-    int _is_rrr29 {};
+    int _is_minion {};
     int _is_rrr3 {};
     int _is_rrr30 {};
     int _is_always_hit {};
@@ -584,7 +584,7 @@ public:
     int is_rrr26(void) const;
     int is_rrr27(void) const;
     int is_rrr28(void) const;
-    int is_rrr29(void) const;
+    int is_minion(void) const;
     int is_rrr3(void) const;
     int is_rrr30(void) const;
     int is_always_hit(void) const;
@@ -823,7 +823,7 @@ public:
     void set_is_rrr26(int);
     void set_is_rrr27(int);
     void set_is_rrr28(int);
-    void set_is_rrr29(int);
+    void set_is_minion(int);
     void set_is_rrr3(int);
     void set_is_rrr30(int);
     void set_is_always_hit(int);

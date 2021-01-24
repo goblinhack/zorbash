@@ -39,6 +39,8 @@ def tp_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
+    x.set_is_minion(False)
+    x.set_is_minion(True)
     x.set_is_monst(True)
     x.set_is_movable(True)
     x.set_is_shown_on_leftbar(True)
@@ -76,7 +78,7 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="ghost", text_name="ghost")
+    tp_init(name="ghost_minion", text_name="ghost")
 
 init()
 

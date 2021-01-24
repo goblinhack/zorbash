@@ -67,7 +67,8 @@ public:
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
     ThingId      on_fire_id_anim {};
-    ThingId      owner_id {};                // Who created this thing?
+    ThingId      owner_id {};                // Who carries this thing?
+    ThingId      minion_owner_id {};              // Who created this thing?
     ThingId      weapon_id {};               // Current weapon
     ThingId      weapon_id_carry_anim {};
     ThingId      weapon_id_use_anim {};
@@ -94,6 +95,7 @@ public:
     int          modifier_defence = {};
     int          modifier_strength = {};
     int          owned_count = {};           // How many things this thing owns.
+    int          spawned_count = {};         // How many things this thing spawned.
     int          stamina = {};
     int          stamina_max = {};
     int          stats01 = {};
@@ -591,6 +593,13 @@ public:
     int decr_owned_count(void);
     int incr_owned_count(void);
 
+    int set_spawned_count(int);
+    int get_spawned_count(void) const;
+    int decr_spawned_count(int);
+    int incr_spawned_count(int);
+    int decr_spawned_count(void);
+    int incr_spawned_count(void);
+
     int set_lifespan(int);
     int get_lifespan_initial(void) const;
     int decr_lifespan(int);
@@ -780,6 +789,23 @@ public:
         return (monstp->owner_id = v);
     }
 
+    const ThingId& get_immediate_minion_owner_id (void) const
+    {_
+        if (likely(monstp != nullptr)) {
+            verify(monstp);
+            return (monstp->minion_owner_id);
+        } else {
+            return (NoThingId);
+        }
+    }
+
+    const ThingId& set_minion_owner_id (const ThingId &v)
+    {_
+        new_monst();
+    //con("%s", __FUNCTION__);
+        return (monstp->minion_owner_id = v);
+    }
+
     ThingId set_weapon_id_carry_anim(ThingId);
     ThingId get_weapon_id_carry_anim(void) const;
 
@@ -836,6 +862,8 @@ public:
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
     Thingp get_immediate_owner() const;
     Thingp get_top_owner() const;
+    Thingp get_immediate_minion_owner() const;
+    Thingp get_top_minion_owner() const;
     Thingp nearby_most_dangerous_thing_get(void);
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);
@@ -1135,7 +1163,7 @@ public:
     int is_rrr26(void) const;
     int is_rrr27(void) const;
     int is_rrr28(void) const;
-    int is_rrr29(void) const;
+    int is_minion(void) const;
     int is_rrr3(void) const;
     int is_rrr30(void) const;
     int is_rrr4(void) const;
@@ -1295,9 +1323,11 @@ public:
     void reinit(void);
     void remove_all_references();
     void remove_owner(void);
+    void remove_minion_owner(void);
     void rest();
     void resurrect_tick();
     void set_owner(Thingp owner);
+    void set_minion_owner(Thingp minion_owner);
     void sheath(void);
     void throw_at(Thingp w, Thingp target);
     void tick();

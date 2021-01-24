@@ -214,7 +214,7 @@ int Tp::is_rrr25(void) const { return _is_rrr25; }
 int Tp::is_rrr26(void) const { return _is_rrr26; }
 int Tp::is_rrr27(void) const { return _is_rrr27; }
 int Tp::is_rrr28(void) const { return _is_rrr28; }
-int Tp::is_rrr29(void) const { return _is_rrr29; }
+int Tp::is_minion(void) const { return _is_minion; }
 int Tp::is_rrr3(void) const { return _is_rrr3; }
 int Tp::is_rrr30(void) const { return _is_rrr30; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
@@ -456,7 +456,7 @@ void Tp::set_is_rrr25(int v) { _is_rrr25 = v; }
 void Tp::set_is_rrr26(int v) { _is_rrr26 = v; }
 void Tp::set_is_rrr27(int v) { _is_rrr27 = v; }
 void Tp::set_is_rrr28(int v) { _is_rrr28 = v; }
-void Tp::set_is_rrr29(int v) { _is_rrr29 = v; }
+void Tp::set_is_minion(int v) { _is_minion = v; }
 void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
 void Tp::set_is_rrr30(int v) { _is_rrr30 = v; }
 void Tp::set_is_always_hit(int v) { _is_always_hit = v; }

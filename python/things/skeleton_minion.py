@@ -34,15 +34,16 @@ def tp_init(name, text_name):
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
+    x.set_is_attackable(True)
     x.set_is_combustible(True)
-    x.set_is_hunger_insatiable(True)
     x.set_is_fearless(True)
+    x.set_is_hunger_insatiable(True)
     x.set_is_intelligent(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
+    x.set_is_minion(True)
     x.set_is_monst(True)
-    x.set_is_attackable(True)
     x.set_is_movable(True)
     x.set_is_resurrectable(True)
     x.set_is_shovable(True)
@@ -125,6 +126,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="skeleton", text_name="skeleton")
+    tp_init(name="skeleton_minion", text_name="skeleton")
 
 init()

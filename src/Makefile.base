@@ -197,6 +197,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_resurrect.o             \
     $(OBJDIR)/thing_shove.o                 \
     $(OBJDIR)/thing_spawn.o                 \
+    $(OBJDIR)/thing_minion_owner.o               \
     $(OBJDIR)/thing_stamina.o               \
     $(OBJDIR)/thing_steal.o                 \
     $(OBJDIR)/thing_string.o                \
@@ -204,13 +205,13 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_template_api.o          \
     $(OBJDIR)/thing_terrain.o               \
     $(OBJDIR)/thing_text.o                  \
+    $(OBJDIR)/thing_throw.o                 \
     $(OBJDIR)/thing_tick.o                  \
     $(OBJDIR)/thing_tile.o                  \
     $(OBJDIR)/thing_torch.o                 \
     $(OBJDIR)/thing_treasure.o              \
     $(OBJDIR)/thing_update.o                \
     $(OBJDIR)/thing_use.o                   \
-    $(OBJDIR)/thing_throw.o                 \
     $(OBJDIR)/thing_visible.o               \
     $(OBJDIR)/thing_water.o                 \
     $(OBJDIR)/thing_weapon.o                \

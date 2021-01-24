@@ -691,7 +691,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr26)
     TP_SET_DECL(is_rrr27)
     TP_SET_DECL(is_rrr28)
-    TP_SET_DECL(is_rrr29)
+    TP_SET_DECL(is_minion)
     TP_SET_DECL(is_rrr3)
     TP_SET_DECL(is_rrr30)
     TP_SET_DECL(is_always_hit)

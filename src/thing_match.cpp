@@ -351,7 +351,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr28() && (what == "is_rrr28")) {
         return true;
     }
-    if (is_rrr29() && (what == "is_rrr29")) {
+    if (is_minion() && (what == "is_minion")) {
         return true;
     }
     if (is_rrr3() && (what == "is_rrr3")) {
