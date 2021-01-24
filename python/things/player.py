@@ -17,7 +17,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_collision_hit_priority(20)
     x.set_collision_radius(0.40)
     x.set_damage_melee_dice("1d6+1")
-    x.set_gfx_anim_attack("punch1")
+    x.set_gfx_anim_attack("attack_punch")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_bounce_on_move(True)

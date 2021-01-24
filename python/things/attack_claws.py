@@ -52,6 +52,6 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="claws1", text_name="claw attack")
+    tp_init(name="attack_claws", text_name="claw attack")
 
 init()

@@ -42,6 +42,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="smoke1")
+    tp_init(name="smoke")
 
 init()

@@ -1,12 +1,15 @@
 import zx
 import tp
 
+def on_death(me, x, y):
+    zx.tp_spawn_under(me, "ghost_explosion")
+
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_delay_after_moving_ms(10)
     x.set_ai_scent_distance(10)
-    x.set_attack_lunge(True)
     x.set_attack_humanoid(True)
+    x.set_attack_lunge(True)
     x.set_attackable_by_monst(True)
     x.set_attackable_by_player(True)
     x.set_collision_attack(True)
@@ -15,7 +18,7 @@ def tp_init(name, text_name):
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
     x.set_damage_melee_dice("1")
-    x.set_gfx_anim_attack("claws1")
+    x.set_gfx_anim_attack("attack_claws")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_health_bar_shown(True)
@@ -48,6 +51,7 @@ def tp_init(name, text_name):
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(1000)
     x.set_normal_placement_rules(True)
+    x.set_on_death_do("ghost.on_death()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_text_a_or_an("a");
     x.set_text_description("The angry spirit of one long passed")
@@ -88,7 +92,7 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="ghost1", text_name="ghost")
+    tp_init(name="ghost", text_name="ghost")
 
 init()
 

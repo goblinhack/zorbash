@@ -38,7 +38,7 @@ _
             point s = (last_blit_tl + last_blit_br) / 2;
             point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
                     random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
-            std::string name = "gold1." + std::to_string(random_range(1, 8));
+            std::string name = "gold." + std::to_string(random_range(1, 8));
             level->new_external_particle(
                      s + j, p,
                      isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), 
@@ -65,7 +65,7 @@ _
         point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
                 random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
 
-        std::string tile_name = "key1.1";
+        std::string tile_name = "key.1";
         level->new_external_particle(
                  s + j, p,
                  isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), 

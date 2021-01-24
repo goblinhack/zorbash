@@ -61,7 +61,7 @@ void Level::update_water_next_to_lava (void)
                                 if (t->is_water()) {
                                     t->dead("Next to lava");
                                     if (!is_smoke(x, y)) {
-                                        auto smoke = thing_new("smoke1", fpoint(x, y));
+                                        auto smoke = thing_new("smoke", fpoint(x, y));
                                         smoke->set_lifespan(random_range(1, 10));
                                     }
                                 }

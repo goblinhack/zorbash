@@ -86,7 +86,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
-    x.set_gfx_anim_attack("sword1_swing")
+    x.set_gfx_anim_attack("sword_basic_swing")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_show_outlined(True)
@@ -114,7 +114,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_text_a_or_an("a");
     x.set_long_text_description("A gleaming entry-level sword. Ideal for beginners or the occasional weekend dungeoneer.")
     x.set_text_description("Thy pointy means of justice")
-    x.set_weapon_carry_anim("sword1_carry")
+    x.set_weapon_carry_anim("sword_basic_carry")
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
@@ -125,8 +125,8 @@ def init_weapon(name, text_name, short_text_name):
     x.update()
 
 def init():
-    init_swing(name="sword1_swing")
-    init_carry(name="sword1_carry")
-    init_weapon(name="sword1", text_name="short sword", short_text_name="short sword")
+    init_swing(name="sword_basic_swing")
+    init_carry(name="sword_basic_carry")
+    init_weapon(name="sword_basic", text_name="short sword", short_text_name="short sword")
 
 init()

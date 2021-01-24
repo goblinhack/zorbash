@@ -2,7 +2,7 @@ import zx
 import tp
 
 def on_idle_dice(me, x, y):
-    zx.tp_spawn_next_to(me, "skeleton1")
+    zx.tp_spawn_next_to(me, "skeleton")
 
 def on_death(me, x, y):
     zx.tp_spawn_under(me, "gen_explosion")

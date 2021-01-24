@@ -49,6 +49,6 @@ def init1(name, text_name):
 
 
 def init():
-    init1(name="punch1", text_name="punch attack")
+    init1(name="attack_punch", text_name="punch attack")
 
 init()

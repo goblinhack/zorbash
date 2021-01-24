@@ -2,7 +2,7 @@ import zx
 import tp
 
 def spawn(me, x, y):
-    zx.tp_spawn_next_to(me, "jelly1")
+    zx.tp_spawn_next_to(me, "jelly_baby")
 
 
 def tp_init(name, tiles=[], left1_tiles=[]):

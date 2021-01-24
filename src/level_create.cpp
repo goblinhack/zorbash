@@ -166,10 +166,10 @@ void Level::create (point3d at, int seed)
                     if (dungeon->is_entrance(x, y)) {
                         auto t = thing_new("player2", fpoint(x, y));
 
-                        auto w = thing_new("sword1", fpoint(x, y));
+                        auto w = thing_new("sword_basic", fpoint(x, y));
                         t->carry(w);
 
-                        auto a = thing_new("axe1", fpoint(x, y));
+                        auto a = thing_new("axe_basic", fpoint(x, y));
                         t->carry(a);
 
                         auto b = thing_new("bag_small", fpoint(x, y));
@@ -619,7 +619,7 @@ void Level::place_lava (Dungeonp d, const std::string &what)
             (void) thing_new(what, fpoint(x, y));
 
             if (random_range(0, 100) < 20) {
-                thing_new("smoke1", fpoint(x, y));
+                thing_new("smoke", fpoint(x, y));
             }
         }
     }

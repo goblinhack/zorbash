@@ -86,7 +86,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
-    x.set_gfx_anim_attack("axe1_swing")
+    x.set_gfx_anim_attack("axe_basic_swing")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_show_outlined(True)
@@ -110,7 +110,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_damage_melee_dice("1d10+1")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy choppy means of justice")
-    x.set_weapon_carry_anim("axe1_carry")
+    x.set_weapon_carry_anim("axe_basic_carry")
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
@@ -121,8 +121,8 @@ def init_weapon(name, text_name, short_text_name):
     x.update()
 
 def init():
-    init_swing(name="axe1_swing")
-    init_carry(name="axe1_carry")
-    init_weapon(name="axe1", text_name="single headed axe", short_text_name="short axe")
+    init_swing(name="axe_basic_swing")
+    init_carry(name="axe_basic_carry")
+    init_weapon(name="axe_basic", text_name="single headed axe", short_text_name="short axe")
 
 init()
