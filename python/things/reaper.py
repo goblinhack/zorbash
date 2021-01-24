@@ -4,7 +4,7 @@ import tp
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_delay_after_moving_ms(100)
-    x.set_ai_scent_distance(20)
+    x.set_ai_scent_distance(40)
     x.set_attack_lunge(True)
     x.set_attack_living(True)
     x.set_attackable_by_monst(True)
@@ -19,7 +19,7 @@ def tp_init(name, text_name):
     x.set_collision_radius(0.40)
     x.set_damage_doubled_from_fire(True)
     x.set_damage_doubled_from_water(True)
-    x.set_damage_melee_dice("2d6+6")
+    x.set_damage_melee_dice("1d6+6")
     x.set_gfx_anim_attack("scythe_swing")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)

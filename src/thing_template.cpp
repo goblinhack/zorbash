@@ -197,8 +197,8 @@ static Tpp tp_get_with_no_rarity_filter (Tpidmap &m)
 
 Tpp tp_random_monst (void)
 {_
-CON("TODO using debug monster");
-return (tp_find("reaper"));
+//CON("TODO using debug monster");
+//return (tp_find("reaper"));
     if (unlikely(!tp_monst.size())) {
         ERR("No monsts found");
         return (nullptr);
