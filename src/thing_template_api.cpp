@@ -304,6 +304,7 @@ int Tp::stamina(void) const { return _stamina; }
 int Tp::modifier_defence(void) const { return _modifier_defence; }
 int Tp::health_hunger_pct(void) const { return _health_hunger_pct; }
 int Tp::health_starving_pct(void) const { return _health_starving_pct; }
+#define ENABLE_STRICT_TURN_BASED
 #ifdef ENABLE_STRICT_TURN_BASED
 int Tp::move_speed_ms(void) const { return 150; }
 #else

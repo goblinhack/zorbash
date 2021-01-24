@@ -273,10 +273,9 @@ _
             if (is_player() || (owner && owner->is_player())) {
                 MINICON("You miss your attack on %s.",
                         it->text_the().c_str());
-                msg(string_sprintf("%%fg=gray$You miss%%fg=reset$"));
+                msg("!");
             } else if (it->is_player()) {
                 MINICON("%s misses.", text_The().c_str());
-                msg(string_sprintf("%%fg=yellow$It misses%%fg=reset$"));
             } else {
                 log("The attack missed (att %d, def %d) on %s",
                     att_mod, def_mod, it->to_string().c_str());

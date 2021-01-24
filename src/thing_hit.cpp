@@ -115,9 +115,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (damage > THING_DAMAGE_SHAKE_ABOVE) {
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
             if (crit) {
-                MINICON("%%fg=red$%s %s CRITS you for %d damage!%%fg=reset$",
+                MINICON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$",
                         real_hitter->text_The().c_str(),
-                        real_hitter->text_hits().c_str(),
                         damage);
             } else {
                 MINICON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
@@ -133,17 +132,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 }
             }
         } else {
-            if (crit) {
-                MINICON("%%fg=red$%s %s CRITS you for %d damage!%%fg=reset$",
-                        real_hitter->text_The().c_str(),
-                        real_hitter->text_hits().c_str(),
-                        damage);
-            } else {
-                MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
-                        real_hitter->text_The().c_str(),
-                        real_hitter->text_hits().c_str(),
-                        damage);
-            }
+            MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
+                    real_hitter->text_The().c_str(),
+                    real_hitter->text_hits().c_str(),
+                    damage);
         }
 
         if (is_bloodied()) {
@@ -169,39 +161,20 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Visible hit indication
     //
-    if (crit) {
-        if (is_player()) {
+    if (is_player()) {
+        //
+        // Player being hit
+        //
+        msg(string_sprintf("%%fg=red$-%d", damage));
+    } else if (is_monst()) {
+        //
+        // Monst being hit
+        //
+        if (hitter->is_player() || real_hitter->is_player()) {
             //
-            // Player being hit
+            // Monst being hit by player
             //
-            msg(string_sprintf("CRIT! %%fg=red$-%d", damage));
-        } else if (is_monst()) {
-            //
-            // Monst being hit
-            //
-            if (hitter->is_player() || real_hitter->is_player()) {
-                //
-                // Monst being hit by player
-                //
-                msg(string_sprintf("CRIT! %%fg=white$-%d", damage));
-            }
-        }
-    } else {
-        if (is_player()) {
-            //
-            // Player being hit
-            //
-            msg(string_sprintf("%%fg=red$-%d", damage));
-        } else if (is_monst()) {
-            //
-            // Monst being hit
-            //
-            if (hitter->is_player() || real_hitter->is_player()) {
-                //
-                // Monst being hit by player
-                //
-                msg(string_sprintf("%%fg=white$-%d", damage));
-            }
+            msg(string_sprintf("%%fg=white$-%d", damage));
         }
     }
 
