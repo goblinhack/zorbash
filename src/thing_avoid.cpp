@@ -125,6 +125,14 @@ bool Thing::will_avoid_threat (const Thingp itp)
         }
     }
 
+    if (me->is_living()) {
+        if (it->attack_living()) {
+            if (is_dangerous(itp)) {
+                return true;
+            }
+        }
+    }
+
     if (me->is_food()) {
         if (it->is_food_eater()) {
             return true;

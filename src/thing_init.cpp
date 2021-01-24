@@ -88,7 +88,7 @@ void Thing::init (Levelp level,
         level->player = this;
     }
 
-    if (tpp->is_monst() || tpp->is_player() || tpp->is_movable()) {
+    if (tpp->is_monst() || tpp->is_player() || tpp->is_moveable()) {
         set_timestamp_born(time_get_time_ms_cached());
     }
 

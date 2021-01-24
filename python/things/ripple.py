@@ -8,7 +8,7 @@ def tp_init(name):
     x.set_is_interesting(False)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_removable_if_out_of_slots(True)
+    x.set_is_removeable_if_out_of_slots(True)
     x.set_is_ripple(True)
     x.set_text_a_or_an("a");
     x.set_text_description("An ominous ripple")

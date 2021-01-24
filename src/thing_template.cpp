@@ -123,7 +123,7 @@ void tp_init_after_loading (void)
         if (tp->is_floor())          { tp_floor.push_back(tp); }
         if (tp->is_floor_deco())     { tp_deco.push_back(tp); }
         if (tp->is_food())           { tp_food.push_back(tp); }
-        if (tp->is_generator())      { tp_generator.push_back(tp); }
+        if (tp->is_minion_generator())      { tp_generator.push_back(tp); }
         if (tp->is_gold())           { tp_gold.push_back(tp); }
         if (tp->is_treasure_class_a())   { tp_item_class_a.push_back(tp); }
         if (tp->is_treasure_class_b())   { tp_item_class_b.push_back(tp); }
@@ -197,8 +197,8 @@ static Tpp tp_get_with_no_rarity_filter (Tpidmap &m)
 
 Tpp tp_random_monst (void)
 {_
-//CON("TODO using debug monster");
-//return (tp_find("giant_rat"));
+CON("TODO using debug monster");
+return (tp_find("reaper"));
     if (unlikely(!tp_monst.size())) {
         ERR("No monsts found");
         return (nullptr);

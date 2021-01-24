@@ -1162,82 +1162,82 @@ void wid_set_do_not_lower (Widp w, uint8_t val)
     w->do_not_lower = val;
 }
 
-uint8_t wid_get_movable (Widp w)
+uint8_t wid_get_moveable (Widp w)
 {_
-    if (w->movable_set) {
-        return (w->movable);
+    if (w->moveable_set) {
+        return (w->moveable);
     }
 
     return false;
 }
 
-void wid_set_movable (Widp w, uint8_t val)
+void wid_set_moveable (Widp w, uint8_t val)
 {_
-    w->movable = val;
-    w->movable_set = true;
+    w->moveable = val;
+    w->moveable_set = true;
 
-    wid_set_movable_horiz(w, val);
-    wid_set_movable_vert(w, val);
+    wid_set_moveable_horiz(w, val);
+    wid_set_moveable_vert(w, val);
 }
 
-uint8_t wid_get_movable_horiz (Widp w)
+uint8_t wid_get_moveable_horiz (Widp w)
 {_
-    if (w->movable_horiz_set) {
-        return (w->movable_horiz);
+    if (w->moveable_horiz_set) {
+        return (w->moveable_horiz);
     }
 
     return false;
 }
 
-void wid_set_movable_horiz (Widp w, uint8_t val)
+void wid_set_moveable_horiz (Widp w, uint8_t val)
 {_
-    w->movable_horiz = val;
-    w->movable_horiz_set = true;
+    w->moveable_horiz = val;
+    w->moveable_horiz_set = true;
 }
 
-uint8_t wid_get_movable_vert (Widp w)
+uint8_t wid_get_moveable_vert (Widp w)
 {_
-    if (w->movable_vert_set) {
-        return (w->movable_vert);
+    if (w->moveable_vert_set) {
+        return (w->moveable_vert);
     }
 
     return false;
 }
 
-void wid_set_movable_vert (Widp w, uint8_t val)
+void wid_set_moveable_vert (Widp w, uint8_t val)
 {_
-    w->movable_vert = val;
-    w->movable_vert_set = true;
+    w->moveable_vert = val;
+    w->moveable_vert_set = true;
 }
 
-uint8_t wid_get_movable_bounded (Widp w)
+uint8_t wid_get_moveable_bounded (Widp w)
 {_
-    if (w->movable_bounded_set) {
-        return (w->movable_bounded);
+    if (w->moveable_bounded_set) {
+        return (w->moveable_bounded);
     }
 
     return false;
 }
 
-void wid_set_movable_bounded (Widp w, uint8_t val)
+void wid_set_moveable_bounded (Widp w, uint8_t val)
 {_
-    w->movable_bounded = val;
-    w->movable_bounded_set = true;
+    w->moveable_bounded = val;
+    w->moveable_bounded_set = true;
 }
 
-uint8_t wid_get_movable_no_user_scroll (Widp w)
+uint8_t wid_get_moveable_no_user_scroll (Widp w)
 {_
-    if (w->movable_no_user_scroll_set) {
-        return (w->movable_no_user_scroll);
+    if (w->moveable_no_user_scroll_set) {
+        return (w->moveable_no_user_scroll);
     }
 
     return false;
 }
 
-void wid_set_movable_no_user_scroll (Widp w, uint8_t val)
+void wid_set_moveable_no_user_scroll (Widp w, uint8_t val)
 {_
-    w->movable_no_user_scroll = val;
-    w->movable_no_user_scroll_set = true;
+    w->moveable_no_user_scroll = val;
+    w->moveable_no_user_scroll_set = true;
 }
 
 uint8_t wid_get_text_lhs (Widp w)
@@ -2332,16 +2332,16 @@ static Widp wid_new_scroll_bar (Widp parent,
         wid_set_color(w, WID_COLOR_BG, c);
     }
 
-    wid_set_movable(w, true);
-    wid_set_movable_bounded(w, true);
+    wid_set_moveable(w, true);
+    wid_set_moveable_bounded(w, true);
 
     if (vertical) {
-        wid_set_movable_vert(w, true);
-        wid_set_movable_horiz(w, false);
+        wid_set_moveable_vert(w, true);
+        wid_set_moveable_horiz(w, false);
         scrollbar_owner->scrollbar_vert = w;
     } else {
-        wid_set_movable_horiz(w, true);
-        wid_set_movable_vert(w, false);
+        wid_set_moveable_horiz(w, true);
+        wid_set_moveable_vert(w, false);
         scrollbar_owner->scrollbar_horiz = w;
     }
 
@@ -3038,11 +3038,11 @@ static uint8_t wid_scroll_trough_mouse_down (Widp w,
             wid_set_mode(child, WID_MODE_ACTIVE);
         }
 
-        if (!wid_get_movable_horiz(child)) {
+        if (!wid_get_moveable_horiz(child)) {
             dx = 0;
         }
 
-        if (!wid_get_movable_vert(child)) {
+        if (!wid_get_moveable_vert(child)) {
             dy = 0;
         }
 
@@ -3094,11 +3094,11 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
             wid_set_mode(child, WID_MODE_ACTIVE);
         }
 
-        if (!wid_get_movable_horiz(child)) {
+        if (!wid_get_moveable_horiz(child)) {
             dx = 0;
         }
 
-        if (!wid_get_movable_vert(child)) {
+        if (!wid_get_moveable_vert(child)) {
             dy = 0;
         }
 
@@ -3187,7 +3187,7 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
     }
 
     if (owner->scrollbar_vert) {
-        if (wid_get_movable_vert(scrollbar)) {
+        if (wid_get_moveable_vert(scrollbar)) {
             trough_height = wid_get_height(owner->scrollbar_vert->parent);
             scrollbar_height = (int)(trough_height * (height / child_height));
 
@@ -3216,7 +3216,7 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
     }
 
     if (owner->scrollbar_horiz) {
-        if (wid_get_movable_horiz(scrollbar)) {
+        if (wid_get_moveable_horiz(scrollbar)) {
             trough_width = wid_get_width(owner->scrollbar_horiz->parent);
             scrollbar_width = (int)(trough_width * (width / child_width));
 
@@ -4091,7 +4091,7 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
         return (w);
     }
 
-    if (wid_get_movable(w)) {
+    if (wid_get_moveable(w)) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
             return nullptr;
@@ -4159,7 +4159,7 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
         return (w);
     }
 
-    if (wid_get_movable(w)) {
+    if (wid_get_moveable(w)) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
             return nullptr;
@@ -4191,7 +4191,7 @@ static void wid_children_move_delta_internal (Widp w, int32_t dx, int32_t dy)
     //
     Widp p = w->parent;
     if (p) {
-        if (wid_get_movable_bounded(w)) {
+        if (wid_get_moveable_bounded(w)) {
             if (wid_get_tl_x(w) + dx < wid_get_tl_x(p)) {
                 dx = wid_get_tl_x(p) - wid_get_tl_x(w);
             }
@@ -4233,7 +4233,7 @@ static void wid_move_delta_internal (Widp w, int32_t dx, int32_t dy)
     //
     Widp p = w->parent;
     if (p) {
-        if (wid_get_movable_bounded(w)) {
+        if (wid_get_moveable_bounded(w)) {
             if (wid_get_tl_x(w) + dx < wid_get_tl_x(p)) {
                 dx = wid_get_tl_x(p) - wid_get_tl_x(w);
             }
@@ -4690,7 +4690,7 @@ void wid_mouse_motion (int32_t x, int32_t y,
                 //
                 if (wheely) {
                     if (w->scrollbar_vert &&
-                        !wid_get_movable_no_user_scroll(w->scrollbar_vert)) {
+                        !wid_get_moveable_no_user_scroll(w->scrollbar_vert)) {
 
                         got_one = true;
                         wid_move_delta(w->scrollbar_vert, 0, -wheely);
@@ -4700,7 +4700,7 @@ void wid_mouse_motion (int32_t x, int32_t y,
 
                 if (wheelx) {
                     if (w->scrollbar_horiz &&
-                        !wid_get_movable_no_user_scroll(w->scrollbar_horiz)) {
+                        !wid_get_moveable_no_user_scroll(w->scrollbar_horiz)) {
 
                         got_one = true;
                         wid_move_delta(w->scrollbar_horiz, -wheelx, 0);
@@ -4887,7 +4887,7 @@ void wid_joy_button (int32_t x, int32_t y)
         //
         // Move on mouse.
         //
-        if (wid_get_movable(w)) {
+        if (wid_get_moveable(w)) {
             wid_mouse_motion_begin(w, x, y);
             return;
         }
@@ -4897,7 +4897,7 @@ void wid_joy_button (int32_t x, int32_t y)
         wid_fake_joy_button(x, y);
     }
 
-    if (wid_get_movable(w)) {
+    if (wid_get_moveable(w)) {
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
         wid_mouse_motion_begin(w, x, y);
@@ -4925,7 +4925,7 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     // Raise on mouse.
     //
     if ((w->on_mouse_down && (w->on_mouse_down)(w, x, y, button)) ||
-        wid_get_movable(w)) {
+        wid_get_moveable(w)) {
 
         wid_set_focus(w);
         wid_set_mode(w, WID_MODE_ACTIVE);
@@ -4934,7 +4934,7 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
         //
         // Move on mouse.
         //
-        if (wid_get_movable(w)) {
+        if (wid_get_moveable(w)) {
             wid_mouse_motion_begin(w, x, y);
             return;
         }
@@ -4946,7 +4946,7 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
         return;
     }
 
-    if (wid_get_movable(w)) {
+    if (wid_get_moveable(w)) {
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
         wid_mouse_motion_begin(w, x, y);
@@ -4982,7 +4982,7 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
 
 //MINICON("wid [%s] mouse up", w->name.c_str());
     if ((w->on_mouse_up && (w->on_mouse_up)(w, x, y, button)) ||
-        wid_get_movable(w)) {
+        wid_get_moveable(w)) {
 
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);

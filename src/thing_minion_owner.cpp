@@ -72,11 +72,11 @@ void Thing::set_minion_owner (Thingp minion_owner)
 
     if (minion_owner) {
         set_minion_owner_id(minion_owner->id);
-        minion_owner->incr_spawned_count();
+        minion_owner->incr_minion_count();
     } else {
         set_minion_owner_id(0);
         if (old_minion_owner) {
-            old_minion_owner->decr_spawned_count();
+            old_minion_owner->decr_minion_count();
         }
     }
 }
@@ -93,7 +93,7 @@ void Thing::remove_minion_owner (void)
     }
 
     set_minion_owner_id(0);
-    old_minion_owner->decr_spawned_count();
+    old_minion_owner->decr_minion_count();
 
     //
     // If this was fire and it had an minion_owner (the thing it set on fire)

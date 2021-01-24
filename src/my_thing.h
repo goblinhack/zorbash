@@ -95,7 +95,7 @@ public:
     int          modifier_defence = {};
     int          modifier_strength = {};
     int          owned_count = {};           // How many things this thing owns.
-    int          spawned_count = {};         // How many things this thing spawned.
+    int          minion_count = {};          // How many things this thing spawned.
     int          stamina = {};
     int          stamina_max = {};
     int          stats01 = {};
@@ -243,7 +243,7 @@ public:
     uint64_t i_set_is_fire:1                   {};
     uint64_t i_set_is_floor:1                  {};
     uint64_t i_set_is_food:1                   {};
-    uint64_t i_set_is_generator:1              {};
+    uint64_t i_set_is_minion_generator:1              {};
     uint64_t i_set_is_gold:1                   {};
     uint64_t i_set_is_hazard:1                 {};
     uint64_t i_set_is_extreme_hazard:1         {};
@@ -593,12 +593,12 @@ public:
     int decr_owned_count(void);
     int incr_owned_count(void);
 
-    int set_spawned_count(int);
-    int get_spawned_count(void) const;
-    int decr_spawned_count(int);
-    int incr_spawned_count(int);
-    int decr_spawned_count(void);
-    int incr_spawned_count(void);
+    int set_minion_count(int);
+    int get_minion_count(void) const;
+    int decr_minion_count(int);
+    int incr_minion_count(int);
+    int decr_minion_count(void);
+    int incr_minion_count(void);
 
     int set_lifespan(int);
     int get_lifespan_initial(void) const;
@@ -1056,7 +1056,7 @@ public:
     int is_active(void) const;
     int is_alive_monst(void) const;
     int is_always_hit(void) const;
-    int is_attackable(void) const;
+    int attackable(void) const;
     int is_auto_collect_item(void) const;
     int is_bag(void) const;
     int is_bleeder(void) const;
@@ -1092,7 +1092,7 @@ public:
     int is_floor_deco(void) const;
     int is_food(void) const;
     int is_food_eater(void) const;
-    int is_generator(void) const;
+    int is_minion_generator(void) const;
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hit_by(Thingp hitter);
@@ -1127,7 +1127,7 @@ public:
     int is_meat(void) const;
     int is_meat_eater(void) const;
     int is_monst(void) const;
-    int is_movable(void) const;
+    int is_moveable(void) const;
     int is_movement_blocking_hard(void) const;
     int is_movement_blocking_soft(void) const;
     int is_msg(void) const;
@@ -1138,7 +1138,7 @@ public:
     int is_potion(void) const;
     int is_potion_eater(void) const;
     int is_projectile(void) const;
-    int is_removable_if_out_of_slots(void) const;
+    int is_removeable_if_out_of_slots(void) const;
     int is_resurrectable(void) const;
     int is_ripple(void) const;
     int is_rock(void) const;
@@ -1161,11 +1161,11 @@ public:
     int is_rrr24(void) const;
     int is_rrr25(void) const;
     int is_rrr26(void) const;
-    int is_rrr27(void) const;
-    int is_rrr28(void) const;
+    int is_living(void) const;
+    int attack_living(void) const;
     int is_minion(void) const;
     int is_rrr3(void) const;
-    int is_rrr30(void) const;
+    int is_described_when_hovering_over(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
     int is_rrr6(void) const;

@@ -42,7 +42,7 @@ void Level::update_minimap (void)
 
                 if (is_monst(x, y)) {
                     c = RED;
-                } else if (is_generator(x, y)) {
+                } else if (is_minion_generator(x, y)) {
                     c = PINK;
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&
@@ -138,7 +138,7 @@ void Level::update_minimap (void)
                     }
                 } else if (is_monst(x, y)) {
                     c = RED;
-                } else if (is_generator(x, y)) {
+                } else if (is_minion_generator(x, y)) {
                     c = PINK;
                 } else if (player &&
                     (x == (int)player->mid_at.x) &&

@@ -197,7 +197,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_resurrect.o             \
     $(OBJDIR)/thing_shove.o                 \
     $(OBJDIR)/thing_spawn.o                 \
-    $(OBJDIR)/thing_minion_owner.o               \
+    $(OBJDIR)/thing_minion_owner.o          \
     $(OBJDIR)/thing_stamina.o               \
     $(OBJDIR)/thing_steal.o                 \
     $(OBJDIR)/thing_string.o                \

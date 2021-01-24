@@ -52,8 +52,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_floor(mx, my); }
     if (i_set_is_food)                                 { i_set_is_food = false;
                                                          level->unset_is_food(mx, my); }
-    if (i_set_is_generator)                            { i_set_is_generator = false;
-                                                         level->unset_is_generator(mx, my); }
+    if (i_set_is_minion_generator)                            { i_set_is_minion_generator = false;
+                                                         level->unset_is_minion_generator(mx, my); }
     if (i_set_is_gold)                                 { i_set_is_gold = false;
                                                          level->unset_is_gold(mx, my); }
     if (i_set_is_hazard)                               { i_set_is_hazard = false;

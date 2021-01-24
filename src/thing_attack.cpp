@@ -16,7 +16,7 @@ bool Thing::possible_to_attack (const Thingp it)
 {_
     auto me = tp();
 
-    if (!it->is_attackable()) {
+    if (!it->attackable()) {
         return false; // Don't log, too noisy
     }
 
@@ -82,6 +82,13 @@ bool Thing::possible_to_attack (const Thingp it)
         if (me->attack_humanoid()) {
             if (it->is_humanoid()) {
                 log("Can attack humanoid: %s", it->to_string().c_str());
+                return true;
+            }
+        }
+
+        if (me->attack_living()) {
+            if (it->is_living()) {
+                log("Can attack living: %s", it->to_string().c_str());
                 return true;
             }
         }

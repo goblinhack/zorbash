@@ -59,7 +59,7 @@ public:
     bool                      is_floor             {false};
     bool                      is_floor_deco        {false};
     bool                      is_food              {false};
-    bool                      is_generator         {false};
+    bool                      is_minion_generator         {false};
     bool                      is_gold              {false};
     bool                      is_key               {false};
     bool                      is_lava              {false};

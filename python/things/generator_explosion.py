@@ -23,6 +23,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="gen_explosion")
+    tp_init(name="generator_explosion")
 
 init()

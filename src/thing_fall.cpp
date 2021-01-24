@@ -162,7 +162,7 @@ _
             next_level->is_rock(x, y)        ||
             next_level->is_door(x, y)        ||
             next_level->is_secret_door(x, y) ||
-            next_level->is_generator(x, y)   ||
+            next_level->is_minion_generator(x, y)   ||
             next_level->is_chasm(x, y)       ||
             next_level->is_wall(x, y)        ||
             next_level->is_exit(x, y)) {_
@@ -212,7 +212,7 @@ _
                 fall_damage = random_range(20, 50);
             }
 
-            if (is_potion() || is_generator() || is_monst()) {
+            if (is_potion() || is_minion_generator() || is_monst()) {
                 fall_damage = get_health() / 2;
             }
 

@@ -24,7 +24,7 @@ def tp_init(name, text_name):
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_movable(True)
+    x.set_is_moveable(True)
     x.set_avoids_water(100)
     x.set_lifespan_dice("1d30+10")
     x.set_light_color("yellow")

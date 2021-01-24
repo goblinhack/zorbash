@@ -178,5 +178,5 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::GENERATOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_generator         = true;
+    c->is_minion_generator         = true;
 }

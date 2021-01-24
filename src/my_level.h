@@ -37,7 +37,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_minion_generator {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};
@@ -643,38 +643,38 @@ public:
         decr(_is_torch, x, y, (uint8_t)1);
     }
 
-    uint8_t is_generator (const point &p)
+    uint8_t is_minion_generator (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_generator, p.x, p.y));
+        return (get(_is_minion_generator, p.x, p.y));
     }
 
-    uint8_t is_generator (const int x, const int y)
+    uint8_t is_minion_generator (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_generator, x, y));
+        return (get(_is_minion_generator, x, y));
     }
 
-    void set_is_generator (const int x, const int y)
+    void set_is_minion_generator (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
         map_changed = true;
-        incr(_is_generator, x, y, (uint8_t)1);
+        incr(_is_minion_generator, x, y, (uint8_t)1);
     }
 
-    void unset_is_generator (const int x, const int y)
+    void unset_is_minion_generator (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
         map_changed = true;
-        decr(_is_generator, x, y, (uint8_t)1);
+        decr(_is_minion_generator, x, y, (uint8_t)1);
     }
 
     uint8_t is_potion (const point &p)
