@@ -224,7 +224,7 @@ private:
     int _is_rrr23 {};
     int _is_rrr24 {};
     int _is_rrr25 {};
-    int _is_rrr26 {};
+    int _minion_limit {};
     int _is_living {};
     int _attack_living {};
     int _is_minion {};
@@ -581,7 +581,7 @@ public:
     int is_rrr23(void) const;
     int is_rrr24(void) const;
     int is_rrr25(void) const;
-    int is_rrr26(void) const;
+    int minion_limit(void) const;
     int is_living(void) const;
     int attack_living(void) const;
     int is_minion(void) const;
@@ -820,7 +820,7 @@ public:
     void set_is_rrr23(int);
     void set_is_rrr24(int);
     void set_is_rrr25(int);
-    void set_is_rrr26(int);
+    void set_minion_limit(int);
     void set_is_living(int);
     void set_attack_living(int);
     void set_is_minion(int);

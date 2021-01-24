@@ -22,12 +22,8 @@ std::string Thing::text_a_or_an (void) const
 
     std::string out = "";
 
-    if (is_undead()) {
-        out += "an undead ";
-    } else {
-        if (is_dead) {
-            out += "a dead ";
-        }
+    if (is_dead) {
+        out += "a dead ";
     }
 
     if (out == "") {
@@ -86,12 +82,8 @@ std::string Thing::short_text_a_or_an (void) const
 
     std::string out = "";
 
-    if (is_undead()) {
-        out += "an undead ";
-    } else {
-        if (is_dead) {
-            out += "a dead ";
-        }
+    if (is_dead) {
+        out += "a dead ";
     }
 
     if (out == "") {

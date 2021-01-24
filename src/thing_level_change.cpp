@@ -45,6 +45,11 @@ void Thing::level_change (Levelp l)
         }
     }
 
+    //
+    // Remove minions if they stay behind
+    //
+    unleash_minions();
+
     {
         auto it = get_immediate_minion_owner();
         if (it) {

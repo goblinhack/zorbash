@@ -205,6 +205,7 @@ static void wid_rightbar_create (void)
         wid_set_text(w, g);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
+        myfree(g);
     }
 
     {_

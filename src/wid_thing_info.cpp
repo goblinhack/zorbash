@@ -197,7 +197,9 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
                      "%%fg=white$Health%15s", tmp2);
         }
         wid_popup_window->log(tmp);
+    }
 
+    if (t->is_alive_monst() || t->is_player() || t->is_weapon()) {
         auto attack_melee_dice = t->get_damage_melee_dice();
         auto min_value = attack_melee_dice.min_roll();
         auto max_value = attack_melee_dice.max_roll();
@@ -222,7 +224,9 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
             }
             wid_popup_window->log(tmp);
         }
+    }
 
+    if (t->is_alive_monst() || t->is_player()) {
         snprintf(tmp, sizeof(tmp) - 1,
                  "%%fg=white$Attack          %2d%-3s",
                  t->get_modifier_attack(),

@@ -211,7 +211,7 @@ int Tp::is_rrr22(void) const { return _is_rrr22; }
 int Tp::is_rrr23(void) const { return _is_rrr23; }
 int Tp::is_rrr24(void) const { return _is_rrr24; }
 int Tp::is_rrr25(void) const { return _is_rrr25; }
-int Tp::is_rrr26(void) const { return _is_rrr26; }
+int Tp::minion_limit(void) const { return _minion_limit; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::attack_living(void) const { return _attack_living; }
 int Tp::is_minion(void) const { return _is_minion; }
@@ -453,7 +453,7 @@ void Tp::set_is_rrr22(int v) { _is_rrr22 = v; }
 void Tp::set_is_rrr23(int v) { _is_rrr23 = v; }
 void Tp::set_is_rrr24(int v) { _is_rrr24 = v; }
 void Tp::set_is_rrr25(int v) { _is_rrr25 = v; }
-void Tp::set_is_rrr26(int v) { _is_rrr26 = v; }
+void Tp::set_minion_limit(int v) { _minion_limit = v; }
 void Tp::set_is_living(int v) { _is_living = v; }
 void Tp::set_attack_living(int v) { _attack_living = v; }
 void Tp::set_is_minion(int v) { _is_minion = v; }
