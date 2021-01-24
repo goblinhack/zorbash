@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_wid.h"
+#include "my_wid_thing_info.h"
 
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
@@ -46,6 +47,8 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     if (!level->cursor) {_
         return false;
     }
+
+    wid_thing_info_fini();
 
     if (game->state == Game::STATE_CHOOSING_TARGET) {
         player->log("Chosen target");
