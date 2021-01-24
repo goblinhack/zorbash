@@ -1842,8 +1842,6 @@ static Widp wid_new (Widp parent)
     w->parent = parent;
     w->timestamp_created = wid_time;
 
-    WID_DBG(w, "new");
-
     wid_tree_insert(w);
     wid_tree2_unsorted_insert(w);
     wid_tree_global_unsorted_insert(w);
@@ -1864,8 +1862,6 @@ static Widp wid_new (void)
     auto w = new Wid ();
 
     w->timestamp_created = wid_time;
-
-    WID_DBG(w, "new");
 
     wid_tree_insert(w);
     wid_tree2_unsorted_insert(w);

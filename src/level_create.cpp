@@ -166,14 +166,15 @@ void Level::create (point3d at, int seed)
                     if (dungeon->is_entrance(x, y)) {
                         auto t = thing_new("player2", fpoint(x, y));
 
+#if 0
                         auto w = thing_new("scythe", fpoint(x, y));
                         t->carry(w);
 
-                        auto w2 = thing_new("sword_basic", fpoint(x, y));
-                        t->carry(w2);
-
                         auto w3 = thing_new("axe_basic", fpoint(x, y));
                         t->carry(w3);
+#endif
+                        auto w2 = thing_new("sword_basic", fpoint(x, y));
+                        t->carry(w2);
 
                         auto b = thing_new("bag_small", fpoint(x, y));
                         t->carry(b);
@@ -181,7 +182,7 @@ void Level::create (point3d at, int seed)
                         auto f = thing_new("food_frog", fpoint(x, y));
                         t->carry(f);
 
-                        for (auto x = 0; x < 10; x++) {
+                        for (auto x = 0; x < 1; x++) {
                             auto p = thing_new("potion_descent", fpoint(x, y));
                             t->carry(p);
                         }
