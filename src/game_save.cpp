@@ -29,6 +29,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /////////////////////////////////////////////////////////////////////////
     /* ThingId      on_fire_id_anim           */ out << bits(my.t->on_fire_id_anim);
     /* ThingId      owner_id                  */ out << bits(my.t->owner_id);
+    /* ThingId      minion_owner_id                */ out << bits(my.t->minion_owner_id);
     /* ThingId      weapon_id                 */ out << bits(my.t->weapon_id);
     /* ThingId      weapon_id_carry_anim      */ out << bits(my.t->weapon_id_carry_anim);
     /* ThingId      weapon_id_use_anim        */ out << bits(my.t->weapon_id_use_anim);
@@ -55,6 +56,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int          modifier_defence          */ out << bits(my.t->modifier_defence);
     /* int          modifier_strength         */ out << bits(my.t->modifier_strength);
     /* int          owned_count               */ out << bits(my.t->owned_count);
+    /* int          spawned_count             */ out << bits(my.t->spawned_count);
     /* int          stamina                   */ out << bits(my.t->stamina);
     /* int          stamina_max               */ out << bits(my.t->stamina_max);
     /* int          stats01                   */ out << bits(my.t->stats01);

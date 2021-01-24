@@ -98,6 +98,10 @@ _
         remove_owner();
     }
 
+    if (get_immediate_minion_owner_id().ok()) {
+        remove_minion_owner();
+    }
+
     //
     // We own things like a sword. i.e. we are a player.
     //
@@ -144,6 +148,21 @@ void Thing::remove_all_references ()
             auto o = t->get_immediate_owner();
             if (o && (o == this)) {
                 t->remove_owner();
+            }
+        }
+    }
+
+    if (get_spawned_count()) {
+        log("Remove all references, total %d", get_spawned_count());
+
+        //
+        // Slow, but not used too often
+        //
+        for (auto p : level->all_things) {
+            auto t = p.second;
+            auto o = t->get_immediate_minion_owner();
+            if (o && (o == this)) {
+                t->remove_minion_owner();
             }
         }
     }

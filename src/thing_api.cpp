@@ -628,9 +628,9 @@ int Thing::is_rrr28(void) const
     return (tp()->is_rrr28());
 }
 
-int Thing::is_rrr29(void) const
+int Thing::is_minion(void) const
 {_
-    return (tp()->is_rrr29());
+    return (tp()->is_minion());
 }
 
 int Thing::is_rrr30(void) const
@@ -1719,7 +1719,14 @@ int Thing::get_health (void) const
     auto owner = get_immediate_owner();
     if (owner) {
         auto owner = get_immediate_owner();
-        return v + owner->get_health();
+        v += owner->get_health();
+    }
+    if (is_minion()) {
+        auto minion_owner = get_immediate_minion_owner();
+        if (minion_owner) {
+            auto minion_owner = get_immediate_minion_owner();
+            v += minion_owner->get_health();
+        }
     }
     return v;
 }
@@ -1860,7 +1867,14 @@ int Thing::get_modifier_defence (void) const
     auto owner = get_immediate_owner();
     if (owner) {
         auto owner = get_immediate_owner();
-        return v + owner->get_modifier_defence();
+        v += owner->get_modifier_defence();
+    }
+    if (is_minion()) {
+        auto minion_owner = get_immediate_minion_owner();
+        if (minion_owner) {
+            auto minion_owner = get_immediate_minion_owner();
+            v += minion_owner->get_modifier_defence();
+        }
     }
     return v;
 }
@@ -3254,7 +3268,14 @@ int Thing::get_stamina (void) const
     auto owner = get_immediate_owner();
     if (owner) {
         auto owner = get_immediate_owner();
-        return v + owner->get_stamina();
+        v += owner->get_stamina();
+    }
+    if (is_minion()) {
+        auto minion_owner = get_immediate_minion_owner();
+        if (minion_owner) {
+            auto minion_owner = get_immediate_minion_owner();
+            v += minion_owner->get_stamina();
+        }
     }
     return v;
 }
@@ -3419,6 +3440,54 @@ int Thing::incr_owned_count (void)
     new_monst();
 //con("%s", __FUNCTION__);
     return (monstp->owned_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// spawned_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_spawned_count (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->spawned_count);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_spawned_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count = v);
+}
+
+int Thing::decr_spawned_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count -= v);
+}
+
+int Thing::incr_spawned_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count += v);
+}
+
+int Thing::decr_spawned_count (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count--);
+}
+
+int Thing::incr_spawned_count (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

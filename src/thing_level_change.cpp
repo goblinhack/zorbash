@@ -46,6 +46,13 @@ void Thing::level_change (Levelp l)
     }
 
     {
+        auto it = get_immediate_minion_owner();
+        if (it) {
+            it->remove_minion_owner();
+        }
+    }
+
+    {
         auto it = weapon_get();
         if (it) {
             it->level_change(l);

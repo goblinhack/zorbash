@@ -60,6 +60,10 @@ _
     c->inherit_from(this);
     c->location_check();
 
+    if (c->is_minion()) {
+        c->set_minion_owner(this);
+    }
+
     return true;
 }
 
