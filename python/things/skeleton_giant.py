@@ -23,6 +23,7 @@ def tp_init(name, text_name):
     x.set_damage_doubled_from_fire(True)
     x.set_damage_doubled_from_water(True)
     x.set_damage_melee_dice("1d12")
+    x.set_damage_bite_dice("1d6")
     x.set_gfx_anim_attack("attack_claws")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)

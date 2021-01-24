@@ -34,10 +34,10 @@ const int Tp::get_damage_melee(void) const { return _damage_melee_dice.roll(); }
 const std::string& Tp::get_damage_melee_dice_str(void) const { return _damage_melee_dice_str; }
 void Tp::set_damage_melee_dice(const std::string &v) { _damage_melee_dice = v; _damage_melee_dice_str = v; }
 
-const Dice& Tp::get_damage_poison_dice(void) const { return _damage_poison_dice; }
-const int Tp::get_damage_poison(void) const { return _damage_poison_dice.roll(); }
-const std::string& Tp::get_damage_poison_dice_str(void) const { return _damage_poison_dice_str; }
-void Tp::set_damage_poison_dice(const std::string &v) { _damage_poison_dice = v; _damage_poison_dice_str = v; }
+const Dice& Tp::get_damage_bite_dice(void) const { return _damage_bite_dice; }
+const int Tp::get_damage_bite(void) const { return _damage_bite_dice.roll(); }
+const std::string& Tp::get_damage_bite_dice_str(void) const { return _damage_bite_dice_str; }
+void Tp::set_damage_bite_dice(const std::string &v) { _damage_bite_dice = v; _damage_bite_dice_str = v; }
 
 const Dice& Tp::get_health_initial_dice(void) const { return _health_initial_dice; }
 const int Tp::get_health_initial(void) const { return _health_initial_dice.roll(); }

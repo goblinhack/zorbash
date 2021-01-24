@@ -682,8 +682,8 @@ class Tp:
     def set_damage_melee_dice(self, value):
         zx.tp_set_damage_melee_dice(self, value)
 
-    def set_damage_poison_dice(self, value):
-        zx.tp_set_damage_poison_dice(self, value)
+    def set_damage_bite_dice(self, value):
+        zx.tp_set_damage_bite_dice(self, value)
 
     def set_gold_value_dice(self, value):
         zx.tp_set_gold_value_dice(self, value)

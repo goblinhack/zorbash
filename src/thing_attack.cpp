@@ -309,7 +309,19 @@ _
         total_damage = 1;
     }
 
-    if (it->is_hit_by(this, crit, total_damage)) {
+    //
+    // Bite?
+    //
+    auto bite = false;
+    auto bite_damage = get_damage_bite();
+    if (bite_damage) {
+        if (random_range(0, 100) < 50) {
+            total_damage = bite_damage;
+            bite = true;
+        }
+    }
+
+    if (it->is_hit_by(this, crit, bite, total_damage)) {
         log("The attack succeeded (dmg %d att, def %d) on %s",
             att_mod, def_mod, it->to_string().c_str());
 

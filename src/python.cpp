@@ -794,7 +794,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(throw_distance)
     TP_SET_DECL(stamina)
     TP_SET_DECL(damage_melee_dice)
-    TP_SET_DECL(damage_poison_dice)
+    TP_SET_DECL(damage_bite_dice)
     TP_SET_DECL(modifier_defence)
     TP_SET_DECL(health_hunger_pct)
     TP_SET_DECL(health_initial_dice)

@@ -51,7 +51,7 @@ def tp_init(name, text_name):
     x.set_modifier_strength(0)
     x.set_normal_placement_rules(True)
     x.set_on_death_do("ghost_minion_generator.on_death()")
-    x.set_on_idle_dice("1d3+2:ghost_minion_generator.on_idle_dice()")
+    x.set_on_idle_dice("1d10+10:ghost_minion_generator.on_idle_dice()")
     x.set_text_a_or_an("a");
     x.set_text_description("A cursed pile of bones, spawning spirits")
     x.set_tick_rate_tenths(3)

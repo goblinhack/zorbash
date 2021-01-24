@@ -114,32 +114,34 @@ Tilep tp_first_tile (Tpp tp)
 void tp_init_after_loading (void)
 {_
     for (auto& tp : tp_id_map) {
-        if (tp->is_blood())          { tp_blood.push_back(tp); }
-        if (tp->is_blood_splatter()) { tp_blood_splatter.push_back(tp); }
-        if (tp->is_dirt())           { tp_dirt.push_back(tp); }
-        if (tp->is_door())           { tp_door.push_back(tp); }
-        if (tp->is_entrance())       { tp_entrance.push_back(tp); }
-        if (tp->is_exit())           { tp_exit.push_back(tp); }
-        if (tp->is_floor())          { tp_floor.push_back(tp); }
-        if (tp->is_floor_deco())     { tp_deco.push_back(tp); }
-        if (tp->is_food())           { tp_food.push_back(tp); }
-        if (tp->is_minion_generator())      { tp_generator.push_back(tp); }
-        if (tp->is_gold())           { tp_gold.push_back(tp); }
-        if (tp->is_treasure_class_a())   { tp_item_class_a.push_back(tp); }
-        if (tp->is_treasure_class_b())   { tp_item_class_b.push_back(tp); }
-        if (tp->is_treasure_class_c())   { tp_item_class_c.push_back(tp); }
-        if (tp->is_key())            { tp_key.push_back(tp); }
-        if (tp->is_monst())          { tp_monst.push_back(tp); }
-        if (tp->is_potion())         { tp_potion.push_back(tp); }
-        if (tp->is_ripple())         { tp_ripples.push_back(tp); }
-        if (tp->is_rock())           { tp_rock.push_back(tp); }
-        if (tp->is_secret_door())    { tp_secret_door.push_back(tp); }
-        if (tp->is_torch())          { tp_torch.push_back(tp); }
-        if (tp->is_treasure())       { tp_treasure.push_back(tp); }
-        if (tp->is_wall())           { tp_wall.push_back(tp); }
-        if (tp->is_wall_deco())      { tp_wall_deco.push_back(tp); }
+        if (tp->is_blood())               { tp_blood.push_back(tp); }
+        if (tp->is_blood_splatter())      { tp_blood_splatter.push_back(tp); }
+        if (tp->is_dirt())                { tp_dirt.push_back(tp); }
+        if (tp->is_door())                { tp_door.push_back(tp); }
+        if (tp->is_entrance())            { tp_entrance.push_back(tp); }
+        if (tp->is_exit())                { tp_exit.push_back(tp); }
+        if (tp->is_floor())               { tp_floor.push_back(tp); }
+        if (tp->is_floor_deco())          { tp_deco.push_back(tp); }
+        if (tp->is_food())                { tp_food.push_back(tp); }
+        if (tp->is_minion_generator())    { tp_generator.push_back(tp); }
+        if (tp->is_gold())                { tp_gold.push_back(tp); }
+        if (tp->is_treasure_class_a())    { tp_item_class_a.push_back(tp); }
+        if (tp->is_treasure_class_b())    { tp_item_class_b.push_back(tp); }
+        if (tp->is_treasure_class_c())    { tp_item_class_c.push_back(tp); }
+        if (tp->is_key())                 { tp_key.push_back(tp); }
+        if (!tp->is_minion())             {
+            if (tp->is_monst())           {tp_monst.push_back(tp); }
+        }
+        if (tp->is_potion())              { tp_potion.push_back(tp); }
+        if (tp->is_ripple())              { tp_ripples.push_back(tp); }
+        if (tp->is_rock())                { tp_rock.push_back(tp); }
+        if (tp->is_secret_door())         { tp_secret_door.push_back(tp); }
+        if (tp->is_torch())               { tp_torch.push_back(tp); }
+        if (tp->is_treasure())            { tp_treasure.push_back(tp); }
+        if (tp->is_wall())                { tp_wall.push_back(tp); }
+        if (tp->is_wall_deco())           { tp_wall_deco.push_back(tp); }
 
-        if (tp->stamina()) {
+        if (tp->stamina())                 {
             tp->set_is_stamina_check(true);
         }
 
