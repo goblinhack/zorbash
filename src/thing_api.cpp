@@ -453,9 +453,9 @@ int Thing::is_alive_monst(void) const
     return (tp()->is_monst() && !is_dead);
 }
 
-int Thing::is_movable(void) const
+int Thing::is_moveable(void) const
 {_
-    return (tp()->is_movable());
+    return (tp()->is_moveable());
 }
 
 int Thing::is_movement_blocking_hard(void) const
@@ -618,14 +618,14 @@ int Thing::is_rrr26(void) const
     return (tp()->is_rrr26());
 }
 
-int Thing::is_rrr27(void) const
+int Thing::is_living(void) const
 {_
-    return (tp()->is_rrr27());
+    return (tp()->is_living());
 }
 
-int Thing::is_rrr28(void) const
+int Thing::attack_living(void) const
 {_
-    return (tp()->is_rrr28());
+    return (tp()->attack_living());
 }
 
 int Thing::is_minion(void) const
@@ -633,9 +633,9 @@ int Thing::is_minion(void) const
     return (tp()->is_minion());
 }
 
-int Thing::is_rrr30(void) const
+int Thing::is_described_when_hovering_over(void) const
 {_
-    return (tp()->is_rrr30());
+    return (tp()->is_described_when_hovering_over());
 }
 
 int Thing::is_always_hit(void) const
@@ -648,9 +648,9 @@ int Thing::is_fearless(void) const
     return (tp()->is_fearless());
 }
 
-int Thing::is_attackable(void) const
+int Thing::attackable(void) const
 {_
-    return (tp()->is_attackable());
+    return (tp()->attackable());
 }
 
 int Thing::is_able_to_see_through_doors(void) const
@@ -961,9 +961,9 @@ int Thing::damage_doubled_from_water(void) const
     return (tp()->damage_doubled_from_water());
 }
 
-int Thing::is_generator(void) const
+int Thing::is_minion_generator(void) const
 {_
-    return (tp()->is_generator());
+    return (tp()->is_minion_generator());
 }
 
 int Thing::is_treasure_eater(void) const
@@ -1011,9 +1011,9 @@ int Thing::tick_catches_up_on_attack(void) const
     return (tp()->tick_catches_up_on_attack());
 }
 
-int Thing::is_removable_if_out_of_slots(void) const
+int Thing::is_removeable_if_out_of_slots(void) const
 {_
-    return (tp()->is_removable_if_out_of_slots());
+    return (tp()->is_removeable_if_out_of_slots());
 }
 
 int Thing::is_smoke(void) const
@@ -1720,13 +1720,6 @@ int Thing::get_health (void) const
     if (owner) {
         auto owner = get_immediate_owner();
         v += owner->get_health();
-    }
-    if (is_minion()) {
-        auto minion_owner = get_immediate_minion_owner();
-        if (minion_owner) {
-            auto minion_owner = get_immediate_minion_owner();
-            v += minion_owner->get_health();
-        }
     }
     return v;
 }
@@ -3443,51 +3436,51 @@ int Thing::incr_owned_count (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// spawned_count
+// minion_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_spawned_count (void) const
+int Thing::get_minion_count (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->spawned_count);
+        return (monstp->minion_count);
     } else {
         return (0);
     }
 }
 
-int Thing::set_spawned_count (int v)
+int Thing::set_minion_count (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->spawned_count = v);
+    return (monstp->minion_count = v);
 }
 
-int Thing::decr_spawned_count (int v)
+int Thing::decr_minion_count (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->spawned_count -= v);
+    return (monstp->minion_count -= v);
 }
 
-int Thing::incr_spawned_count (int v)
+int Thing::incr_minion_count (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->spawned_count += v);
+    return (monstp->minion_count += v);
 }
 
-int Thing::decr_spawned_count (void)
+int Thing::decr_minion_count (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->spawned_count--);
+    return (monstp->minion_count--);
 }
 
-int Thing::incr_spawned_count (void)
+int Thing::incr_minion_count (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->spawned_count++);
+    return (monstp->minion_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

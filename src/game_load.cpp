@@ -82,7 +82,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          modifier_defence          */ in >> bits(my.t->modifier_defence);
     /* int          modifier_strength         */ in >> bits(my.t->modifier_strength);
     /* int          owned_count               */ in >> bits(my.t->owned_count);
-    /* int          spawned_count             */ in >> bits(my.t->spawned_count);
+    /* int          minion_count              */ in >> bits(my.t->minion_count);
     /* int          stamina                   */ in >> bits(my.t->stamina);
     /* int          stamina_max               */ in >> bits(my.t->stamina_max);
     /* int          stats01                   */ in >> bits(my.t->stats01);
@@ -256,7 +256,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_fire                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_floor                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_food                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_generator              = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_minion_generator              = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_gold                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_hazard                 = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_extreme_hazard         = (bits64 >> shift) & 1; shift++;
@@ -353,7 +353,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};                */ in >> bits(my.t->_is_fire);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};               */ in >> bits(my.t->_is_floor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};                */ in >> bits(my.t->_is_food);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_generator {};           */ in >> bits(my.t->_is_generator);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_minion_generator {};           */ in >> bits(my.t->_is_minion_generator);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};                */ in >> bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};              */ in >> bits(my.t->_is_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};      */ in >> bits(my.t->_is_extreme_hazard);

@@ -166,11 +166,14 @@ void Level::create (point3d at, int seed)
                     if (dungeon->is_entrance(x, y)) {
                         auto t = thing_new("player2", fpoint(x, y));
 
-                        auto w = thing_new("sword_basic", fpoint(x, y));
+                        auto w = thing_new("scythe", fpoint(x, y));
                         t->carry(w);
 
-                        auto a = thing_new("axe_basic", fpoint(x, y));
-                        t->carry(a);
+                        auto w2 = thing_new("sword_basic", fpoint(x, y));
+                        t->carry(w2);
+
+                        auto w3 = thing_new("axe_basic", fpoint(x, y));
+                        t->carry(w3);
 
                         auto b = thing_new("bag_small", fpoint(x, y));
                         t->carry(b);
@@ -591,7 +594,7 @@ void Level::place_normal_placement_rules (Dungeonp d)
             if (d->is_potion(x, y))       { tp = tp_random_potion(); }
             if (d->is_monst(x, y))        { tp = tp_random_monst(); }
             if (d->is_secret_door(x, y))  { tp = tp_random_secret_door(); }
-            if (d->is_generator(x, y))    { tp = tp_random_generator(); }
+            if (d->is_minion_generator(x, y))    { tp = tp_random_generator(); }
             if (d->is_torch(x, y))        { tp = tp_random_torch(); }
             if (d->is_treasure(x, y))     { tp = tp_random_treasure(); }
             if (d->is_treasure_class_a(x, y)) { tp = tp_random_item_class_a(); }
@@ -812,7 +815,7 @@ void Level::place_random_floor_deco (Dungeonp d)
                 d->is_door(x, y)         ||
                 d->is_entrance(x, y)     ||
                 d->is_exit(x, y)         ||
-                d->is_generator(x, y)    ||
+                d->is_minion_generator(x, y)    ||
                 d->is_key(x, y)          ||
                 d->is_potion(x, y)       ||
                 d->is_secret_door(x, y)  ||

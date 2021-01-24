@@ -58,8 +58,8 @@ void Thing::level_push (void)
                                                    level->set_is_floor(mx, my); }
     if (is_food())                               { i_set_is_food = true;
                                                    level->set_is_food(mx, my); }
-    if (is_generator())                          { i_set_is_generator = true;
-                                                   level->set_is_generator(mx, my); }
+    if (is_minion_generator())                          { i_set_is_minion_generator = true;
+                                                   level->set_is_minion_generator(mx, my); }
     if (is_gold())                               { i_set_is_gold = true;
                                                    level->set_is_gold(mx, my); }
     if (is_hazard())                             { i_set_is_hazard = true;

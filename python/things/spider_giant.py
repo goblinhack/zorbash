@@ -35,24 +35,25 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("4d10+4")
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
+    x.set_attackable(True)
     x.set_is_combustible(True)
     x.set_is_food_eater(True)
-    x.set_is_attackable(True)
     x.set_is_hunger_insatiable(True)
     x.set_is_interesting(True)
     x.set_is_jumper(True)
     x.set_is_jumper_chance_d1000(200)
     x.set_is_jumper_distance(2)
+    x.set_is_living(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
-    x.set_is_attackable(True)
-    x.set_is_movable(True)
+    x.set_is_moveable(True)
     x.set_is_poison(2)
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
+    x.set_is_described_when_hovering_over(True)
     x.set_long_text_description("An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
     x.set_modifier_attack(14)
     x.set_modifier_constitution(12)
@@ -72,14 +73,14 @@ def tp_init(name, text_name):
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     delay=150
-    x.set_tile("giant_spider.1", delay_ms=delay)
-    x.set_tile("giant_spider.2", delay_ms=delay)
-    x.set_tile("giant_spider.dead", is_dead=True, delay_ms=delay)
+    x.set_tile("spider_giant.1", delay_ms=delay)
+    x.set_tile("spider_giant.2", delay_ms=delay)
+    x.set_tile("spider_giant.dead", is_dead=True, delay_ms=delay)
 
     x.update()
 
 def init():
-    tp_init(name="giant_spider", text_name="giant spider")
+    tp_init(name="spider_giant", text_name="giant spider")
 
 init()
 

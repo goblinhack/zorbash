@@ -159,7 +159,7 @@ bool Thing::match (const std::string& what)
     if (is_food() && (what == "is_food")) {
         return true;
     }
-    if (is_generator() && (what == "is_generator")) {
+    if (is_minion_generator() && (what == "is_minion_generator")) {
         return true;
     }
     if (is_gold() && (what == "is_gold")) {
@@ -249,7 +249,7 @@ bool Thing::match (const std::string& what)
     if (is_monst() && (what == "is_monst")) {
         return true;
     }
-    if (is_movable() && (what == "is_movable")) {
+    if (is_moveable() && (what == "is_moveable")) {
         return true;
     }
     if (is_movement_blocking_hard() && (what == "is_movement_blocking_hard")) {
@@ -276,7 +276,7 @@ bool Thing::match (const std::string& what)
     if (is_projectile() && (what == "is_projectile")) {
         return true;
     }
-    if (is_removable_if_out_of_slots() && (what == "is_removable_if_out_of_slots")) {
+    if (is_removeable_if_out_of_slots() && (what == "is_removeable_if_out_of_slots")) {
         return true;
     }
     if (is_resurrectable() && (what == "is_resurrectable")) {
@@ -345,10 +345,10 @@ bool Thing::match (const std::string& what)
     if (is_rrr26() && (what == "is_rrr26")) {
         return true;
     }
-    if (is_rrr27() && (what == "is_rrr27")) {
+    if (is_living() && (what == "is_living")) {
         return true;
     }
-    if (is_rrr28() && (what == "is_rrr28")) {
+    if (attack_living() && (what == "attack_living")) {
         return true;
     }
     if (is_minion() && (what == "is_minion")) {
@@ -357,7 +357,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr3() && (what == "is_rrr3")) {
         return true;
     }
-    if (is_rrr30() && (what == "is_rrr30")) {
+    if (is_described_when_hovering_over() && (what == "is_described_when_hovering_over")) {
         return true;
     }
     if (is_always_hit() && (what == "is_always_hit")) {
@@ -366,7 +366,7 @@ bool Thing::match (const std::string& what)
     if (is_fearless() && (what == "is_fearless")) {
         return true;
     }
-    if (is_attackable() && (what == "is_attackable")) {
+    if (attackable() && (what == "attackable")) {
         return true;
     }
     if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) {

@@ -46,12 +46,13 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_monst(True)
-    x.set_is_attackable(True)
-    x.set_is_movable(True)
+    x.set_attackable(True)
+    x.set_is_moveable(True)
     x.set_is_resurrectable(True)
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
+    x.set_is_described_when_hovering_over(True)
     x.set_long_text_description("A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
     x.set_modifier_attack(13)
     x.set_modifier_constitution(15)
@@ -129,6 +130,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="giant-skeleton", text_name="giant skeleton")
+    tp_init(name="skeleton_giant", text_name="giant skeleton")
 
 init()

@@ -152,8 +152,8 @@ void Thing::remove_all_references ()
         }
     }
 
-    if (get_spawned_count()) {
-        log("Remove all references, total %d", get_spawned_count());
+    if (get_minion_count()) {
+        log("Remove all references, total %d", get_minion_count());
 
         //
         // Slow, but not used too often

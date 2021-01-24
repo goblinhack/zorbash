@@ -102,7 +102,7 @@ void Level::cursor_find_on_visible_things (
             } else {
                 t->describe_when_hovering_over();
 
-                if (t->tp()->long_text_description() != "") {
+                if (t->tp()->is_described_when_hovering_over()) {
                     game->wid_thing_info_create_when_hovering_over(t);
                 }
             }

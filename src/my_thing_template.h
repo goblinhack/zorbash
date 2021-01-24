@@ -122,7 +122,7 @@ private:
     int _is_acid {};
     int _is_acid_lover {};
     int _avoids_acid {};
-    int _is_active {}; // e.g. a monst or player or something movable
+    int _is_active {}; // e.g. a monst or player or something moveable
     int _attack_eater {};
     int _attack_lunge {};
     int _attack_shove {};
@@ -160,7 +160,7 @@ private:
     int _is_floor {};
     int _is_floor_deco {};
     int _is_food {};
-    int _is_generator {};
+    int _is_minion_generator {};
     int _is_gold {};
     int _is_hazard {};
     int _is_hunger_insatiable {};
@@ -192,7 +192,7 @@ private:
     int _is_meat {};
     int _is_meat_eater {};
     int _is_monst {};
-    int _is_movable {};
+    int _is_moveable {};
     int _is_movement_blocking_hard {};
     int _is_movement_blocking_soft {};
     int _is_msg {};
@@ -201,7 +201,7 @@ private:
     int _is_potion {};
     int _is_potion_eater {};
     int _is_projectile {};
-    int _is_removable_if_out_of_slots {};
+    int _is_removeable_if_out_of_slots {};
     int _is_resurrectable {};
     int _is_ripple {};
     int _is_rock {};
@@ -225,14 +225,14 @@ private:
     int _is_rrr24 {};
     int _is_rrr25 {};
     int _is_rrr26 {};
-    int _is_rrr27 {};
-    int _is_rrr28 {};
+    int _is_living {};
+    int _attack_living {};
     int _is_minion {};
     int _is_rrr3 {};
-    int _is_rrr30 {};
+    int _is_described_when_hovering_over {};
     int _is_always_hit {};
     int _is_fearless {};
-    int _is_attackable {};
+    int _attackable {};
     int _is_able_to_see_through_doors {};
     int _is_able_to_walk_through_walls {};
     int _is_humanoid {};
@@ -520,7 +520,7 @@ public:
     int is_floor(void) const;
     int is_floor_deco(void) const;
     int is_food(void) const;
-    int is_generator(void) const;
+    int is_minion_generator(void) const;
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
     int gfx_moves_ahead_shown(void) const;
@@ -548,7 +548,7 @@ public:
     int is_meat(void) const;
     int is_meat_eater(void) const;
     int is_monst(void) const;
-    int is_movable(void) const;
+    int is_moveable(void) const;
     int is_movement_blocking_hard(void) const;
     int is_movement_blocking_soft(void) const;
     int is_msg(void) const;
@@ -559,7 +559,7 @@ public:
     int is_potion(void) const;
     int is_potion_eater(void) const;
     int is_projectile(void) const;
-    int is_removable_if_out_of_slots(void) const;
+    int is_removeable_if_out_of_slots(void) const;
     int is_resurrectable(void) const;
     int is_ripple(void) const;
     int is_rock(void) const;
@@ -582,14 +582,14 @@ public:
     int is_rrr24(void) const;
     int is_rrr25(void) const;
     int is_rrr26(void) const;
-    int is_rrr27(void) const;
-    int is_rrr28(void) const;
+    int is_living(void) const;
+    int attack_living(void) const;
     int is_minion(void) const;
     int is_rrr3(void) const;
-    int is_rrr30(void) const;
+    int is_described_when_hovering_over(void) const;
     int is_always_hit(void) const;
     int is_fearless(void) const;
-    int is_attackable(void) const;
+    int attackable(void) const;
     int is_able_to_see_through_doors(void) const;
     int is_able_to_walk_through_walls(void) const;
     int is_humanoid(void) const;
@@ -758,7 +758,7 @@ public:
     void set_is_floor(int);
     void set_is_floor_deco(int);
     void set_is_food(int);
-    void set_is_generator(int);
+    void set_is_minion_generator(int);
     void set_gfx_health_bar_shown(int);
     void set_gfx_health_bar_shown_only_when_injured(int);
     void set_gfx_moves_ahead_shown(int);
@@ -786,7 +786,7 @@ public:
     void set_is_meat(int);
     void set_is_meat_eater(int);
     void set_is_monst(int);
-    void set_is_movable(int);
+    void set_is_moveable(int);
     void set_is_movement_blocking_hard(int);
     void set_is_movement_blocking_soft(int);
     void set_is_msg(int);
@@ -797,7 +797,7 @@ public:
     void set_is_potion(int);
     void set_is_potion_eater(int);
     void set_is_projectile(int);
-    void set_is_removable_if_out_of_slots(int);
+    void set_is_removeable_if_out_of_slots(int);
     void set_is_resurrectable(int);
     void set_is_ripple(int);
     void set_is_rock(int);
@@ -821,14 +821,14 @@ public:
     void set_is_rrr24(int);
     void set_is_rrr25(int);
     void set_is_rrr26(int);
-    void set_is_rrr27(int);
-    void set_is_rrr28(int);
+    void set_is_living(int);
+    void set_attack_living(int);
     void set_is_minion(int);
     void set_is_rrr3(int);
-    void set_is_rrr30(int);
+    void set_is_described_when_hovering_over(int);
     void set_is_always_hit(int);
     void set_is_fearless(int);
-    void set_is_attackable(int);
+    void set_attackable(int);
     void set_is_able_to_see_through_doors(int);
     void set_is_able_to_walk_through_walls(int);
     void set_is_humanoid(int);

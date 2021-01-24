@@ -265,17 +265,17 @@ class Tp:
     def set_is_rrr26(self, value):
         zx.tp_set_is_rrr26(self, value)
 
-    def set_is_rrr27(self, value):
-        zx.tp_set_is_rrr27(self, value)
+    def set_is_living(self, value):
+        zx.tp_set_is_living(self, value)
 
-    def set_is_rrr28(self, value):
-        zx.tp_set_is_rrr28(self, value)
+    def set_attack_living(self, value):
+        zx.tp_set_attack_living(self, value)
 
     def set_is_minion(self, value):
         zx.tp_set_is_minion(self, value)
 
-    def set_is_rrr30(self, value):
-        zx.tp_set_is_rrr30(self, value)
+    def set_is_described_when_hovering_over(self, value):
+        zx.tp_set_is_described_when_hovering_over(self, value)
 
     def set_is_always_hit(self, value):
         zx.tp_set_is_always_hit(self, value)
@@ -283,8 +283,8 @@ class Tp:
     def set_is_fearless(self, value):
         zx.tp_set_is_fearless(self, value)
 
-    def set_is_attackable(self, value):
-        zx.tp_set_is_attackable(self, value)
+    def set_attackable(self, value):
+        zx.tp_set_attackable(self, value)
 
     def set_is_able_to_see_through_doors(self, value):
         zx.tp_set_is_able_to_see_through_doors(self, value)
@@ -475,8 +475,8 @@ class Tp:
     def set_damage_doubled_from_water(self, value):
         zx.tp_set_damage_doubled_from_water(self, value)
 
-    def set_is_generator(self, value):
-        zx.tp_set_is_generator(self, value)
+    def set_is_minion_generator(self, value):
+        zx.tp_set_is_minion_generator(self, value)
 
     def set_is_treasure_eater(self, value):
         zx.tp_set_is_treasure_eater(self, value)
@@ -532,8 +532,8 @@ class Tp:
     def set_tick_catches_up_on_attack(self, value):
         zx.tp_set_tick_catches_up_on_attack(self, value)
 
-    def set_is_removable_if_out_of_slots(self, value):
-        zx.tp_set_is_removable_if_out_of_slots(self, value)
+    def set_is_removeable_if_out_of_slots(self, value):
+        zx.tp_set_is_removeable_if_out_of_slots(self, value)
 
     def set_is_smoke(self, value):
         zx.tp_set_is_smoke(self, value)
@@ -835,8 +835,8 @@ class Tp:
     def set_z_prio(self, value):
         zx.tp_set_z_prio(self, value)
 
-    def set_is_movable(self, value):
-        zx.tp_set_is_movable(self, value)
+    def set_is_moveable(self, value):
+        zx.tp_set_is_moveable(self, value)
 
     def set_gfx_animated_can_hflip(self, value):
         zx.tp_set_gfx_animated_can_hflip(self, value)

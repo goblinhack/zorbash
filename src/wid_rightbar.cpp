@@ -215,7 +215,7 @@ static void wid_rightbar_create (void)
 
         wid_set_pos(w, tl, br);
         auto k = std::to_string(player->get_keys());
-        wid_set_text(w, "%%fg=yellow$%%tile=key-icon$%%fg=gray$" + k);
+        wid_set_text(w, "%%fg=yellow$%%tile=key_icon$%%fg=gray$" + k);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }
@@ -235,17 +235,17 @@ static void wid_rightbar_create (void)
                  (float)UI_HEALTH_BAR_STEPS - 1;
         i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
         i = std::max(i, 0);
-        auto icon = "status-bar-" + std::to_string(i);
+        auto icon = "status_bar_" + std::to_string(i);
         wid_set_bg_tilename(w, icon);
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_plain(wid_rightbar, "health-status");
+        auto w = wid_new_plain(wid_rightbar, "health_status");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "health-status");
+        wid_set_bg_tilename(w, "health_status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
@@ -268,7 +268,7 @@ static void wid_rightbar_create (void)
     // stamina
     ///////////////////////////////////////////////////////////////////////////
     {_
-        auto w = wid_new_plain(wid_rightbar, "stamina-status-bar");
+        auto w = wid_new_plain(wid_rightbar, "stamina_status-bar");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
@@ -279,17 +279,17 @@ static void wid_rightbar_create (void)
                  (float)UI_HEALTH_BAR_STEPS - 1;
         i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
         i = std::max(i, 0);
-        auto icon = "status-bar-" + std::to_string(i);
+        auto icon = "status_bar_" + std::to_string(i);
         wid_set_bg_tilename(w, icon);
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_
-        auto w = wid_new_plain(wid_rightbar, "stamina-status");
+        auto w = wid_new_plain(wid_rightbar, "stamina_status");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "stamina-status");
+        wid_set_bg_tilename(w, "stamina_status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {_

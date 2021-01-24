@@ -103,7 +103,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_exit         ||
                            m.is_floor_deco   ||
                            m.is_food         ||
-                           m.is_generator    ||
+                           m.is_minion_generator    ||
                            m.is_gold         ||
                            m.is_key          ||
                            m.is_lava         ||
@@ -156,7 +156,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_exit         ||
                     m.is_floor_deco   ||
                     m.is_food         ||
-                    m.is_generator    ||
+                    m.is_minion_generator    ||
                     m.is_gold         ||
                     m.is_key          ||
                     m.is_monst        ||

@@ -278,7 +278,7 @@ _
         wid_set_fg_tile(game->in_transit_item, tile);
     }
 
-    wid_set_movable(game->in_transit_item, true);
+    wid_set_moveable(game->in_transit_item, true);
     wid_update(game->in_transit_item);
     wid_bag_add_items(wid_bag_container, bag);
 
