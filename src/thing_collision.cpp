@@ -851,195 +851,6 @@ _
     return true;
 }
 
-//
-// Return TRUE if this is something that should physically block
-//
-bool Thing::collision_obstacle (Thingp it)
-{
-    auto p = point(it->mid_at.x, it->mid_at.y);
-
-    if (it == this) {
-        return false;
-    }
-
-    //
-    // Skip things we cannot collide with
-    //
-    if (it->is_hidden ||
-        it->is_falling ||
-        it->is_jumping ||
-        it->is_changing_level) {
-        return false;
-    }
-
-    //
-    // Stop beholders piling on top of each other
-    //
-    if (it->is_floating()) {
-        if (is_floating()) {
-            return true;
-        }
-    }
-
-    //
-    // Stop ghosts piling on top of each other
-    //
-    if (it->is_ethereal()) {
-        if (is_ethereal()) {
-            return true;
-        }
-    }
-
-    //
-    // Allow movement through open doors only
-    //
-    if (it->is_movement_blocking_hard()) {
-        if (is_able_to_walk_through_walls()) {
-            return false;
-        }
-
-        if (!it->is_open) {
-            return true;
-        }
-    }
-
-    if (it->is_movement_blocking_soft()) {
-        if (!it->is_open) {
-            return true;
-        }
-    }
-
-    if (is_player()) {
-        if (it->is_alive_monst()) {
-            if (!it->is_ethereal()) {
-                return true;
-            }
-        }
-    } else if (is_monst()) {
-        if (level->is_corpse(p)) {
-            if (level->is_monst(p) > 1) {
-                return true;
-            }
-        } else {
-            if (level->is_monst(p) > 0) {
-                return true;
-            }
-        }
-
-        if (it->is_chasm()) {
-            if (!is_floating()) {
-                return true;
-            }
-        }
-
-        //
-        // Do not include this check. It stops monsts seeing down a corridor
-        // with a monst already in it
-        //
-        // if (it->is_alive_monst()) {
-        //     return true;
-        // }
- 
-        if (will_avoid_threat(it)) {
-            return true;
-        }
-
-        if (it->is_player()) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-//
-// Return TRUE if this is something that should block AI
-//
-bool Thing::ai_obstacle (Thingp it)
-{
-    if (it == this) {
-        return false;
-    }
-
-    //
-    // Skip things we cannot collide with
-    //
-    if (it->is_hidden ||
-        it->is_falling ||
-        it->is_jumping ||
-        it->is_changing_level) {
-        return false;
-    }
-
-    //
-    // Stop beholders piling on top of each other
-    //
-    if (it->is_floating()) {
-        if (is_floating()) {
-            return true;
-        }
-    }
-
-    //
-    // Stop ghosts piling on top of each other
-    //
-    if (it->is_ethereal()) {
-        if (is_ethereal()) {
-            return true;
-        }
-    }
-
-    //
-    // Stop entities piling on top of each other
-    //
-    if (it->is_able_to_walk_through_walls()) {
-        if (is_able_to_walk_through_walls()) {
-            return true;
-        }
-    }
-
-    //
-    // Allow movement through open doors only
-    //
-    if (it->is_movement_blocking_hard()) {
-        if (is_able_to_walk_through_walls()) {
-            return false;
-        }
-
-        if (!it->is_open) {
-            return true;
-        }
-    }
-
-    if (is_player()) {
-        if (it->is_alive_monst()) {
-            if (!it->is_ethereal()) {
-                return true;
-            }
-        }
-    } else if (is_monst()) {
-        if (it->is_chasm()) {
-            if (!is_floating()) {
-                return true;
-            }
-        }
-
-        //
-        // Do not include this check. It stops monsts seeing down a corridor
-        // with a monst already in it
-        //
-        // if (it->is_alive_monst()) {
-        //     return true;
-        // }
- 
-        if (will_avoid_threat(it)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 bool Thing::collision_obstacle (fpoint p)
 {
     //
@@ -1068,13 +879,7 @@ bool Thing::collision_obstacle (point p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (const auto& it : get(level->all_thing_ptrs_at, p.x, p.y)) {
-        if (!it) {
-            continue;
-        }
-
-        if (it->is_the_grid) { continue; }
-
+    FOR_ALL_COLLISION_THINGS(level, it, p.x, p.y) {
         //
         // "true" on collision
         //
@@ -1082,6 +887,7 @@ bool Thing::collision_obstacle (point p)
             return true;
         }
     }
+    FOR_ALL_THINGS_END();
 
     return false;
 }
@@ -1091,13 +897,7 @@ bool Thing::ai_obstacle (fpoint p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (const auto& it : get(level->all_thing_ptrs_at, p.x, p.y)) {
-        if (!it) {
-            continue;
-        }
-
-        if (it->is_the_grid) { continue; }
-
+    FOR_ALL_COLLISION_THINGS(level, it, p.x, p.y) {
         //
         // "true" on collision
         //
@@ -1105,6 +905,7 @@ bool Thing::ai_obstacle (fpoint p)
             return true;
         }
     }
+    FOR_ALL_THINGS_END();
 
     return false;
 }
@@ -1187,7 +988,10 @@ _
                 return !open_door(it);
             }
         }
-    } else if (it->is_ethereal()) {
+    } else if (it->is_ethereal() && !is_player()) {
+        //
+        // Ignore is_ethereal to make it easier to attack ghosts
+        //
         log("No; can pass through");
     } else if (it->is_exit()) {
         if (things_overlap(me, A_at, it)) {

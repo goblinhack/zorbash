@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def init1(name, text_name):
+def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
@@ -52,6 +52,6 @@ def init1(name, text_name):
 
 
 def init():
-    init1(name="claws1", text_name="claw attack")
+    tp_init(name="claws1", text_name="claw attack")
 
 init()
