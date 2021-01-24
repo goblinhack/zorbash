@@ -27,9 +27,9 @@ const Dice& Thing::get_damage_melee_dice (void) const {_ return (tp()->get_damag
 const std::string& Thing::get_damage_melee_dice_str (void) const {_ return (tp()->get_damage_melee_dice_str()); }
 int Thing::get_damage_melee (void) const {_ return (tp()->get_damage_melee_dice().roll()); }
 
-const Dice& Thing::get_damage_poison_dice (void) const {_ return (tp()->get_damage_poison_dice()); }
-const std::string& Thing::get_damage_poison_dice_str (void) const {_ return (tp()->get_damage_poison_dice_str()); }
-int Thing::get_damage_poison (void) const {_ return (tp()->get_damage_poison_dice().roll()); }
+const Dice& Thing::get_damage_bite_dice (void) const {_ return (tp()->get_damage_bite_dice()); }
+const std::string& Thing::get_damage_bite_dice_str (void) const {_ return (tp()->get_damage_bite_dice_str()); }
+int Thing::get_damage_bite (void) const {_ return (tp()->get_damage_bite_dice().roll()); }
 
 const Dice& Thing::get_health_initial_dice (void) const {_ return (tp()->get_health_initial_dice()); }
 const std::string& Thing::get_health_initial_dice_str (void) const {_ return (tp()->get_health_initial_dice_str()); }
@@ -3316,6 +3316,77 @@ int Thing::incr_stamina (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stamina++);
+    return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// poison
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_poison (void) const
+{_
+    int v = 0;
+    if (monstp) {
+        verify(monstp);
+        v = monstp->poison;
+    }
+    auto owner = get_immediate_owner();
+    if (owner) {
+        auto owner = get_immediate_owner();
+        v += owner->get_poison();
+    }
+    if (is_minion()) {
+        auto minion_owner = get_immediate_minion_owner();
+        if (minion_owner) {
+            auto minion_owner = get_immediate_minion_owner();
+            v += minion_owner->get_poison();
+        }
+    }
+    return v;
+}
+
+int Thing::set_poison (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->poison = v);
+    return (n);
+}
+
+int Thing::decr_poison (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->poison -= v);
+    if (monstp->poison < 0) {
+        monstp->poison = 0;
+    }
+    return (n);
+}
+
+int Thing::incr_poison (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->poison += v);
+    return (n);
+}
+
+int Thing::decr_poison (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->poison--);
+    if (monstp->poison < 0) {
+        monstp->poison = 0;
+    }
+    return (n);
+}
+
+int Thing::incr_poison (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->poison++);
     return (n);
 }
 

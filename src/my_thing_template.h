@@ -67,8 +67,8 @@ private:
     Dice _damage_melee_dice {};
     std::string _damage_melee_dice_str;
 
-    Dice _damage_poison_dice {};
-    std::string _damage_poison_dice_str;
+    Dice _damage_bite_dice {};
+    std::string _damage_bite_dice_str;
 
     Dice _health_initial_dice {};
     std::string _health_initial_dice_str;
@@ -372,10 +372,10 @@ public:
     const std::string& get_damage_melee_dice_str(void) const;
     void set_damage_melee_dice(const std::string &);
 
-    const Dice& get_damage_poison_dice(void) const;
-    const int get_damage_poison(void) const;
-    const std::string& get_damage_poison_dice_str(void) const;
-    void set_damage_poison_dice(const std::string &);
+    const Dice& get_damage_bite_dice(void) const;
+    const int get_damage_bite(void) const;
+    const std::string& get_damage_bite_dice_str(void) const;
+    void set_damage_bite_dice(const std::string &);
 
     const Dice& get_health_initial_dice(void) const;
     const int get_health_initial(void) const;

@@ -227,6 +227,33 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     }
 
     if (t->is_alive_monst() || t->is_player()) {
+        auto attack_bite_dice = t->get_damage_bite_dice();
+        auto min_value = attack_bite_dice.min_roll();
+        auto max_value = attack_bite_dice.max_roll();
+        if (min_value > 0) {
+            if (need_line) {
+                wid_popup_window->log(" ");
+                need_line = false;
+            }
+            if (min_value == max_value) {
+                snprintf(tmp2, sizeof(tmp2) - 1, "%s",
+                         t->get_damage_bite_dice_str().c_str());
+                snprintf(tmp, sizeof(tmp) - 1,
+                         "%%fg=white$Bite  %15s", tmp2);
+            } else {
+                snprintf(tmp2, sizeof(tmp2) - 1,
+                         "%d-%d(%s)",
+                         min_value,
+                         max_value,
+                         t->get_damage_bite_dice_str().c_str());
+                snprintf(tmp, sizeof(tmp) - 1,
+                         "%%fg=white$Bite  %15s", tmp2);
+            }
+            wid_popup_window->log(tmp);
+        }
+    }
+
+    if (t->is_alive_monst() || t->is_player()) {
         snprintf(tmp, sizeof(tmp) - 1,
                  "%%fg=white$Attack          %2d%-3s",
                  t->get_modifier_attack(),

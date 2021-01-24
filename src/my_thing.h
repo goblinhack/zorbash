@@ -98,6 +98,7 @@ public:
     int          minion_count = {};          // How many things this thing spawned.
     int          stamina = {};
     int          stamina_max = {};
+    int          poison = {};
     int          stats01 = {};
     int          stats02 = {};
     int          stats03 = {};
@@ -425,6 +426,8 @@ public:
     float get_stamina_health_pct(void);
     void stamina_boost(int v);
 
+    void poison_boost(int v);
+
     int set_modifier_defence(int);
     int get_modifier_defence(void) const;
     int decr_modifier_defence(int);
@@ -578,6 +581,13 @@ public:
     int incr_stamina_max(int);
     int decr_stamina_max(void);
     int incr_stamina_max(void);
+
+    int set_poison(int);
+    int get_poison(void) const;
+    int decr_poison(int);
+    int incr_poison(int);
+    int decr_poison(void);
+    int incr_poison(void);
 
     int set_modifier_strength(int);
     int get_modifier_strength(void) const;
@@ -841,9 +851,9 @@ public:
     int get_damage_melee(void) const;
     const Dice& get_damage_melee_dice(void) const;
 
-    const std::string& get_damage_poison_dice_str(void) const;
-    int get_damage_poison(void) const;
-    const Dice& get_damage_poison_dice(void) const;
+    const std::string& get_damage_bite_dice_str(void) const;
+    int get_damage_bite(void) const;
+    const Dice& get_damage_bite_dice(void) const;
 
     const std::string& get_health_initial_dice_str(void) const;
     int get_health_initial(void) const;
@@ -994,7 +1004,7 @@ public:
     float how_far_i_can_jump(void);
     int ai_choose_goal(void);
     int ai_delay_after_moving_ms(void);
-    int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, int damage);
+    int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
@@ -1097,7 +1107,8 @@ public:
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hit_by(Thingp hitter);
-    int is_hit_by(Thingp hitter, bool crit, int damage);
+    int is_hit_by(Thingp hitter, int damage);
+    int is_hit_by(Thingp hitter, bool crit, bool bite, int damage);
     int is_humanoid(void) const;
     int is_hunger_insatiable(void) const;
     int is_intelligent(void) const;

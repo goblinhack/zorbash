@@ -12,6 +12,7 @@
 int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           Thingp real_hitter, // who fired the arrow?
                           bool crit,
+                          bool bite,
                           int damage)
 {_
     hitter->log("Hit for damage %d", damage);
@@ -20,6 +21,12 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 
     if (crit) {
         damage *= 2;
+    }
+
+    if (bite) {
+        if (real_hitter->is_poison()) {
+            MINICON("TODO");
+        }
     }
 
     //
@@ -132,10 +139,16 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 }
             }
         } else {
-            MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
-                    real_hitter->text_The().c_str(),
-                    real_hitter->text_hits().c_str(),
-                    damage);
+            if (bite) {
+                MINICON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$",
+                        real_hitter->text_The().c_str(),
+                        damage);
+            } else {
+                MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
+                        real_hitter->text_The().c_str(),
+                        real_hitter->text_hits().c_str(),
+                        damage);
+            }
         }
 
         if (is_bloodied()) {
@@ -244,7 +257,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit_by (Thingp hitter, bool crit, int damage)
+int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int damage)
 {_
     hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
 _
@@ -401,12 +414,17 @@ _
     hitter->log("Hit succeeds");
     int hit_and_killed;
 
-    hit_and_killed = ai_hit_actual(hitter, real_hitter, crit, damage);
+    hit_and_killed = ai_hit_actual(hitter, real_hitter, crit, bite, damage);
 
     return (hit_and_killed);
 }
 
+int Thing::is_hit_by (Thingp hitter, int damage)
+{_
+    return (is_hit_by(hitter, false, false, damage));
+}
+
 int Thing::is_hit_by (Thingp hitter)
 {_
-    return (is_hit_by(hitter, false, 0));
+    return (is_hit_by(hitter, false, false, 0));
 }
