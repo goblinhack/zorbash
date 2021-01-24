@@ -38,6 +38,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="gem3", text_name="sapphire")
+    tp_init(name="gem_sapphire", text_name="sapphire")
 
 init()

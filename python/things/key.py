@@ -43,6 +43,6 @@ def key_init(name, text_name):
     x.update()
 
 def init():
-    key_init(name="key1", text_name="key")
+    key_init(name="key", text_name="key")
 
 init()

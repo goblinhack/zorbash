@@ -4,9 +4,9 @@ import tp
 
 def on_death(me, x, y):
     zx.tp_spawn_under(me, "pink_splatter")
-    zx.tp_spawn_next_to(me, "jelly1")
-    zx.tp_spawn_next_to(me, "jelly1")
-    zx.tp_spawn_next_to(me, "jelly1")
+    zx.tp_spawn_next_to(me, "jelly_baby")
+    zx.tp_spawn_next_to(me, "jelly_baby")
+    zx.tp_spawn_next_to(me, "jelly_baby")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -66,7 +66,7 @@ def tp_init(name, text_name):
     x.set_move_speed_ms(1000)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
-    x.set_on_death_do("jelly2.on_death()")
+    x.set_on_death_do("jelly_parent.on_death()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
     x.set_text_a_or_an("a");
@@ -113,6 +113,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="jelly2", text_name="jelly jumper")
+    tp_init(name="jelly_parent", text_name="jelly jumper")
 
 init()

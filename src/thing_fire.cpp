@@ -61,7 +61,7 @@ void Thing::fire_tick (void)
                     // Smoke ensures a reprieve.
                     //
                     if (!level->is_smoke(at.x, at.y)) {
-                        auto smoke = level->thing_new("smoke1", at);
+                        auto smoke = level->thing_new("smoke", at);
                         smoke->set_lifespan(random_range(1, 10));
                     }
                 }
@@ -74,7 +74,7 @@ void Thing::fire_tick (void)
         // Give the player a chance
         //
         if (!level->is_smoke(at.x, at.y)) {
-            auto smoke = level->thing_new("smoke1", at);
+            auto smoke = level->thing_new("smoke", at);
             smoke->set_lifespan(random_range(1, 10));
 
             hit = ((int)random_range(0, 100) < 90);
@@ -111,7 +111,7 @@ void Thing::fire_tick (void)
         }
 
         if (!level->is_smoke(at.x, at.y)) {
-            auto smoke = level->thing_new("smoke1", at);
+            auto smoke = level->thing_new("smoke", at);
             smoke->set_lifespan(random_range(1, 10));
         }
     }

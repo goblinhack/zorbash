@@ -24,7 +24,7 @@ def tp_init(name, text_name):
     x.set_damage_doubled_from_fire(True)
     x.set_damage_doubled_from_poison(True)
     x.set_damage_melee_dice("1d4+2")
-    x.set_gfx_anim_attack("claws1")
+    x.set_gfx_anim_attack("attack_claws")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_bounce_on_move(True)

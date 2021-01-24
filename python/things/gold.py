@@ -47,6 +47,6 @@ def gold_init(name, text_name):
     x.update()
 
 def init():
-    gold_init(name="gold1", text_name="gold")
+    gold_init(name="gold", text_name="gold")
 
 init()

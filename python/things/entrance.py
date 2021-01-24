@@ -43,6 +43,6 @@ def tp_init(name, text_name, short_text_name):
     x.update()
 
 def init():
-    tp_init(name="entrance1", text_name="dungeon entrance", short_text_name="entrance")
+    tp_init(name="entrance", text_name="dungeon entrance", short_text_name="entrance")
 
 init()

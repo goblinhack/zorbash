@@ -10,7 +10,7 @@ def tp_init(name, text_name):
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_gold_value_dice("1d250")
+    x.set_gold_value_dice("1d300+100")
     x.set_is_able_to_fall(True)
     x.set_is_collectable(True)
     x.set_is_interesting(True)
@@ -23,21 +23,30 @@ def tp_init(name, text_name):
     x.set_is_attackable(True)
     x.set_is_treasure_class_c(True)
     x.set_is_attackable(True)
-    x.set_long_text_description("Blood red ruby. A bit too red if you ask me. Actually it looks wet and red. Anyway, best pick it up and clean it off.")
+    x.set_long_text_description("A glistening diamond. Like a spark of white fire in the darkness. Is there anything more precious. Probably. Grab it quick anyway.")
     x.set_normal_placement_rules(True)
     x.set_rarity(zx.RARITY_UNCOMMON)
     x.set_text_a_or_an("a");
-    x.set_text_description("%%fg=red$Blood-red ruby, but who's blood?")
+    x.set_text_description("%%fg=white$Just a lonely diamond")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=2000)
+    x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=200)
+    x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=50)
+    x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=50)
+    x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=200)
+    x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=300)
+    x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=300)
+    x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=200)
+    x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=300)
+    x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=300)
+    x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=200)
     x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=50)
     x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=50)
 
     x.update()
 
 def init():
-    tp_init(name="gem5", text_name="ruby")
+    tp_init(name="gem_diamond", text_name="diamond")
 
 init()
