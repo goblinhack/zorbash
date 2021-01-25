@@ -48,7 +48,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/game_save.o                   \
     $(OBJDIR)/game_state.o                  \
     $(OBJDIR)/game_tick.o                   \
-    $(OBJDIR)/gauss.o                       \
     $(OBJDIR)/gfx.o                         \
     $(OBJDIR)/gfx0.o                        \
     $(OBJDIR)/gfx1.o                        \
@@ -65,7 +64,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/gfx9.o                        \
     $(OBJDIR)/gl.o                          \
     $(OBJDIR)/globals.o                     \
-    $(OBJDIR)/hacklib.o                     \
     $(OBJDIR)/hexdump.o                     \
     $(OBJDIR)/level.o                       \
     $(OBJDIR)/level_create.o                \

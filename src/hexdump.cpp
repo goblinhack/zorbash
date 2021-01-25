@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include "my_string.h"
 
 #define HEX_DUMP_WIDTH (16)
 

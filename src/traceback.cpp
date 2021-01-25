@@ -61,7 +61,7 @@ static bool is_plausible_itanium_prefix(char* s) {
 // c++filt -n _ZNK3MapI10StringName3RefI8GDScriptE10ComparatorIS0_E16DefaultAllocatorE3hasERKS0_
 // Map<StringName, Ref<GDScript>, Comparator<StringName>, DefaultAllocator>::has(StringName const&) const
 //
-auto cppDemangle (const char *abiName)
+static auto cppDemangle (const char *abiName)
 {
     //
     // This function allocates and returns storage in ret

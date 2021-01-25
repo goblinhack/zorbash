@@ -418,7 +418,7 @@ void ascii_set_fg2 (int x, int y, const wchar_t c)
     ascii_set_fg2(x, y, font_large->unicode_to_tile(c));
 }
 
-void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
+void ascii_putf__ (int x, int y, color fg, color bg, const std::wstring text)
 {_
     Tilep tile;
     int bg_set = false;
@@ -743,7 +743,7 @@ std::string ascii_strip (std::string const& text)
 static void ascii_putf_ (int x, int y,
                          color fg,
                          color bg,
-                         std::wstring const& fmt, va_list args)
+                         std::wstring const fmt, va_list args)
 {_
     wchar_t buf[MAXSHORTSTR];
 
@@ -809,7 +809,7 @@ void ascii_putf (int x, int y, color fg, color bg, const wchar_t *fmt, ...)
     va_end(args);
 }
 
-void ascii_putf (int x, int y, std::wstring fmt, ...)
+void ascii_putf (int x, int y, const std::wstring fmt, ...)
 {_
     va_list args;
 
@@ -818,7 +818,7 @@ void ascii_putf (int x, int y, std::wstring fmt, ...)
     va_end(args);
 }
 
-void ascii_putf (int x, int y, color fg, std::wstring fmt, ...)
+void ascii_putf (int x, int y, color fg, const std::wstring fmt, ...)
 {_
     va_list args;
 
@@ -827,7 +827,7 @@ void ascii_putf (int x, int y, color fg, std::wstring fmt, ...)
     va_end(args);
 }
 
-void ascii_putf (int x, int y, color fg, color bg, std::wstring fmt, ...)
+void ascii_putf (int x, int y, color fg, color bg, const std::wstring fmt, ...)
 {_
     va_list args;
 

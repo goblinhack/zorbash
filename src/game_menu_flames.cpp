@@ -13,7 +13,7 @@
 std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg {};
 std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg2 {};
 
-void game_display_flames_tiles (int w, int h)
+static void game_display_flames_tiles (int w, int h)
 {_
     float bright = 2.5;
 
@@ -70,7 +70,7 @@ void game_display_flames_tiles (int w, int h)
     blit_flush();
 }
 
-void game_display_flames_change (int w, int h)
+static void game_display_flames_change (int w, int h)
 {_
     int flames = 3;
     while (flames--) 

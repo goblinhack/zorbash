@@ -7,6 +7,11 @@
 #ifndef _MY_SYS_H_
 #define _MY_SYS_H_
 
+#if GCC_VERSION >= 70200
+// warns about intentional truncation like % 10s!
+#pragma GCC diagnostic ignored "-Wformat-truncation"
+#endif
+
 //
 // Settings to override compiler errors
 //

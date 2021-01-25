@@ -1316,21 +1316,15 @@ void tile_blit (const Tilep &tile, const point &tl, const point &br,
     blit(binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
-void tile_blit (uint16_t index, const point &tl, const point &br,
-                const color &c)
-{
-    tile_blit(tile_index_to_tile(index), tl, br, c);
-}
-
 //
 // Blits a whole tile. Y co-ords are inverted.
 //
-void tile_blit_outline_section (const Tilep &tile,
-                                const fpoint &tile_tl,
-                                const fpoint &tile_br,
-                                const point &tl,
-                                const point &br,
-                                float scale)
+static void tile_blit_outline_section (const Tilep &tile,
+                                       const fpoint &tile_tl,
+                                       const fpoint &tile_br,
+                                       const point &tl,
+                                       const point &br,
+                                       float scale)
 {
     float x1, x2, y1, y2;
 
@@ -1373,25 +1367,6 @@ void tile_blit_outline_section (const Tilep &tile,
 
     glcolor(WHITE);
     blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
-}
-
-void tile_blit_outline_section (const Tilep &tile,
-                                const fpoint &tile_tl,
-                                const fpoint &tile_br,
-                                const point &tl, 
-                                const point &br)
-{
-    tile_blit_outline_section (tile, tile_tl, tile_br, tl, br, 0.75);
-}
-
-void tile_blit_outline_section (uint16_t index,
-                                const fpoint &tile_tl,
-                                const fpoint &tile_br,
-                                const point &tl, 
-                                const point &br)
-{
-    tile_blit_outline_section(tile_index_to_tile(index),
-                              tile_tl, tile_br, tl, br, 0.75);
 }
 
 void tile_blit (const Tilep &tile, const point &tl, const point &br)

@@ -562,7 +562,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
     get_timestamp(buf, MAXSHORTSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: ");
 
     len = (int)strlen(buf);
 #if SDL_MAJOR_VERSION >= 2
@@ -576,11 +576,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
         "zorbash", buf + ts_len, 0);
 #endif
 
-    len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
-
     putf(MY_STDERR, buf);
-
     putf(MY_STDOUT, buf);
 
     fprintf(stderr, "%s\n", buf);

@@ -8,6 +8,7 @@
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_py_tp.h"
 
 PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_

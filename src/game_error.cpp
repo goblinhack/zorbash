@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_wid_popup.h"
+#include "my_game_error.h"
 #include "my_traceback.h"
 
 static WidPopup *game_error_window;
@@ -16,7 +17,7 @@ static void game_error_destroy (void)
     game->hard_unpause();
 }
 
-uint8_t game_error_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_error_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -43,7 +44,7 @@ uint8_t game_error_key_up (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t game_error_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_error_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -52,7 +53,7 @@ uint8_t game_error_key_down (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t game_error_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_error_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_error_destroy();
     return true;

@@ -1900,8 +1900,8 @@ public:
     void things_gc_force(void);
     void things_gc_if_possible(void);
     void things_tick(void);
-    friend std::ostream& operator<<(std::ostream &out, Bits<const Level & > const my);
-    friend std::istream& operator>>(std::istream &in, Bits<Level &> my);
+    friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
+    friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);
 };
 
 #endif

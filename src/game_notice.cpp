@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_wid_popup.h"
+#include "my_game_notice.h"
 
 static WidPopup *game_notice_window;
 
@@ -15,19 +16,19 @@ void game_notice_destroy (void)
     game->soft_unpause();
 }
 
-uint8_t game_notice_ok (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_notice_ok (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_notice_destroy();
     return false;
 }
 
-uint8_t game_notice_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_notice_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     game_notice_ok(nullptr, 0, 0, 0);
     return true;
 }
 
-uint8_t game_notice_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_notice_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

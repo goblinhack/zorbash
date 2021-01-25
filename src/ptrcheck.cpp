@@ -76,7 +76,7 @@ public:
     int last_seen_size {};
 };
 
-std::string &timestamp(void)
+static std::string &timestamp(void)
 {
     static timestamp_t time_last;
     static std::string last_timestamp;

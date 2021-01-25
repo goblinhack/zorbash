@@ -7,6 +7,8 @@
 #include <string.h> // do not remove
 #include "my_main.h"
 #include "my_string.h"
+#include "my_file.h"
+#include "my_ramdisk.h"
 
 #define nUSE_ZLIB
 #define nUSE_MINIZ

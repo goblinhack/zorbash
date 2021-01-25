@@ -12,7 +12,7 @@
 #ifndef _vscprintf
 /* For some reason, MSVC fails to honour this #ifndef. */
 /* Hence function renamed to _vscprintf_so(). */
-int _vscprintf_so(const char * format, va_list pargs) {
+static int _vscprintf_so(const char * format, va_list pargs) {
     int retval;
     va_list argcopy;
     va_copy(argcopy, pargs);

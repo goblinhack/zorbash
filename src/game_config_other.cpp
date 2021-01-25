@@ -15,7 +15,7 @@ static void game_config_other_destroy (void)
     game->soft_unpause();
 }
 
-uint8_t game_config_other_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_other_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: reload config");
     game->load_config();
@@ -24,7 +24,7 @@ uint8_t game_config_other_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
 }
 
-uint8_t game_config_other_save (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_other_save (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: save config");
     game->save_config();
@@ -33,14 +33,14 @@ uint8_t game_config_other_save (Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
 }
 
-uint8_t game_config_other_back (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_other_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_other_destroy();
     game->config_top_select();
     return true;
 }
 
-uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle debug_mode");
     game->config.debug_mode = !game->config.debug_mode;
@@ -50,7 +50,7 @@ uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t bu
     return true;
 }
 
-uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle fps_counter");
     game->config.fps_counter = !game->config.fps_counter;
@@ -58,7 +58,7 @@ uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint
     return true;
 }
 
-uint8_t game_config_other_sdl_delay_incr (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_other_sdl_delay_incr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: incr sdl_delay");
     game->config.sdl_delay++;
@@ -66,7 +66,7 @@ uint8_t game_config_other_sdl_delay_incr (Widp w, int32_t x, int32_t y, uint32_t
     return true;
 }
 
-uint8_t game_config_other_sdl_delay_decr (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_other_sdl_delay_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: incr sdl_delay");
     game->config.sdl_delay--;
@@ -74,7 +74,7 @@ uint8_t game_config_other_sdl_delay_decr (Widp w, int32_t x, int32_t y, uint32_t
     return true;
 }
 
-uint8_t game_config_other_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_other_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -106,7 +106,7 @@ uint8_t game_config_other_key_up (Widp w, const struct SDL_KEYSYM *key)
     return false;
 }
 
-uint8_t game_config_other_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_other_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

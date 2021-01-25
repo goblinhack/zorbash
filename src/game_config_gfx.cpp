@@ -16,7 +16,7 @@ static void game_config_gfx_destroy (void)
     game->soft_unpause();
 }
 
-uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: reload config");
     game->load_config();
@@ -26,7 +26,7 @@ uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
 }
 
-uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: save config");
     game->save_config();
@@ -38,14 +38,14 @@ uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
 }
 
-uint8_t game_config_gfx_back (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_gfx_destroy();
     game->config_top_select();
     return true;
 }
 
-uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle vsync");
     game->config.gfx_vsync_enable = !game->config.gfx_vsync_enable;
@@ -54,7 +54,7 @@ uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint3
     return true;
 }
 
-uint8_t game_config_gfx_ascii_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_ascii_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle vsync");
     game->config.ascii_mode = !game->config.ascii_mode;
@@ -63,7 +63,7 @@ uint8_t game_config_gfx_ascii_mode_toggle (Widp w, int32_t x, int32_t y, uint32_
     return true;
 }
 
-uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle gfx_fullscreen");
     game->config.gfx_fullscreen = !game->config.gfx_fullscreen;
@@ -75,7 +75,7 @@ uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_
     return true;
 }
 
-uint8_t game_config_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle gfx_fullscreen_desktop");
     game->config.gfx_fullscreen_desktop = !game->config.gfx_fullscreen_desktop;
@@ -87,7 +87,7 @@ uint8_t game_config_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_t y,
     return true;
 }
 
-uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle gfx_allow_highdpi");
     game->config.gfx_allow_highdpi = !game->config.gfx_allow_highdpi;
@@ -96,7 +96,7 @@ uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint
     return true;
 }
 
-uint8_t game_config_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle gfx_borderless");
     game->config.gfx_borderless = !game->config.gfx_borderless;
@@ -105,7 +105,7 @@ uint8_t game_config_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, uint32_
     return true;
 }
 
-uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle inverted");
     game->config.gfx_inverted = !game->config.gfx_inverted;
@@ -113,7 +113,7 @@ uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, uint32_t 
     return true;
 }
 
-uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: incr resolution");
     auto res = std::to_string(game->config.outer_pix_width) + "x" +
@@ -146,7 +146,7 @@ uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t 
     return true;
 }
 
-uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: decr resolution");
     auto res = std::to_string(game->config.outer_pix_width) + "x" +
@@ -179,7 +179,7 @@ uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t 
     return true;
 }
 
-uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -211,7 +211,7 @@ uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
     return false;
 }
 
-uint8_t game_config_gfx_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_gfx_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

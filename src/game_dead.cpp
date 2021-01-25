@@ -22,7 +22,7 @@ static void wid_dead_destroy (void)
     wid_not_visible(wid_botcon_window);
 }
 
-uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -48,7 +48,7 @@ uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t wid_dead_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_dead_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -57,7 +57,7 @@ uint8_t wid_dead_key_down (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t wid_dead_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_dead_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_dead_destroy();
     return true;

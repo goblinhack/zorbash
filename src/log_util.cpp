@@ -4,6 +4,7 @@
 //
 
 #include "my_ascii.h"
+#include "my_log.h"
 
 void putf (FILE *fp, const char *s)
 {

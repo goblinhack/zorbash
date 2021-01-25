@@ -54,7 +54,7 @@ uint8_t wid_minicon_init (void)
 //
 // Key down etc...
 //
-uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
+static uint8_t wid_minicon_input (Widp w, const SDL_KEYSYM *key)
 {_
     if (!game) {
         return false;

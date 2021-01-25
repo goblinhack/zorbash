@@ -163,8 +163,8 @@ public:
     //
     point        preferred_bag_position{-1, -1};
 } Monst;
-std::ostream& operator<<(std::ostream &out, Bits<const Monst & > const my);
-std::istream& operator>>(std::istream &in, Bits<Monst &> my);
+std::ostream& operator<<(std::ostream &out, Bits<const Monstp & > const my);
+std::istream& operator>>(std::istream &in, Bits<Monstp &> my);
 
 typedef struct Thing_ {
 public:
@@ -1379,8 +1379,8 @@ public:
 
 } Thing;
 
-//std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
-//std::istream& operator>>(std::istream &in, Bits<Thing &> my);
+std::ostream& operator<<(std::ostream &out, Bits<const Thingp & > const my);
+std::istream& operator>>(std::istream &in, Bits<Thingp &> my);
 
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);

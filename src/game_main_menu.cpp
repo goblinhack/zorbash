@@ -27,7 +27,7 @@ void game_main_menu_hide (void)
     wid_not_visible(game_main_menu_window->wid_text_area->wid_text_area);
 }
 
-uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     LOG("Main menu new game chosen");
 
@@ -78,33 +78,33 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     return false;
 }
 
-uint8_t game_main_menu_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_main_menu_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->load_select();
     return false;
 }
 
-uint8_t game_main_menu_config (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_main_menu_config (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->config_top_select();
     game_main_menu_hide();
     return false;
 }
 
-uint8_t game_main_menu_credits_game (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_main_menu_credits_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->credits_select();
     game_main_menu_destroy();
     return false;
 }
 
-uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->quit_select();
     return false;
 }
 
-uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -141,7 +141,7 @@ uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
     return false;
 }
 
-uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -150,7 +150,7 @@ uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-void game_display_title_bg (void)
+static void game_display_title_bg (void)
 {_
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -164,7 +164,7 @@ void game_display_title_bg (void)
     blit_flush();
 }
 
-void game_display_title_fg1 (void)
+static void game_display_title_fg1 (void)
 {_
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -178,7 +178,7 @@ void game_display_title_fg1 (void)
     blit_flush();
 }
 
-void game_display_title_fg2 (void)
+static void game_display_title_fg2 (void)
 {_
     static color fg = WHITE;
     static int delta = 10;
@@ -210,8 +210,7 @@ void game_display_title_fg2 (void)
     blit_flush();
 }
 
-
-uint8_t clamp(float v) //define a function to bound and round the input float value to 0-255
+static uint8_t clamp(float v) //define a function to bound and round the input float value to 0-255
 {
     if (v < 0)
         return 0;
@@ -221,7 +220,7 @@ uint8_t clamp(float v) //define a function to bound and round the input float va
 }
 
 // https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color#8509802
-color TransformH(const color &in, const float fHue)
+static color TransformH(const color &in, const float fHue)
 {
     color out;
     const float cosA = cos(fHue*3.14159265f/180); //convert degrees to radians
@@ -237,7 +236,7 @@ color TransformH(const color &in, const float fHue)
     return out;
 }
 
-void game_display_title_fg3 (void)
+static void game_display_title_fg3 (void)
 {_
     static color fg = RED;
     static int hue = 0;
@@ -272,7 +271,7 @@ void game_display_title_fg3 (void)
     blit_flush();
 }
 
-void game_display_title_fg4 (void)
+static void game_display_title_fg4 (void)
 {_
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -297,7 +296,7 @@ void game_display_title_fg4 (void)
     blit_flush();
 }
 
-void game_main_menu_tick (Widp w)
+static void game_main_menu_tick (Widp w)
 {_
     game_display_title_bg();
     game_display_flames();

@@ -264,5 +264,6 @@ extern uint8_t game_mouse_motion(int32_t x, int32_t y,
 extern void game_main_menu_hide(void);
 extern void game_main_menu_destroy(void);
 extern void game_display_flames(void);
+extern uint32_t csum(char *mem, uint32_t len);
 
 #endif

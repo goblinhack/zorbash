@@ -61,6 +61,8 @@ void ascii_set_bg(int x, int y, const wchar_t c);
 void ascii_set_bg2(int x, int y, Tilep);
 void ascii_set_bg2(int x, int y, Tilep, float tx, float ty, float dx, float dy);
 void ascii_set_bg2(int x, int y, color c);
+void ascii_set_bg2(int x, int y, const char *tilename);
+void ascii_set_bg2(int x, int y, const wchar_t c);
 void ascii_set_fg(int x, int y, Texp, float tx, float ty, float dx, float dy);
 void ascii_set_fg(int x, int y, Tilep);
 void ascii_set_fg(int x, int y, color c);
@@ -69,16 +71,18 @@ void ascii_set_fg(int x, int y, const wchar_t c);
 void ascii_set_fg2(int x, int y, Tilep);
 void ascii_set_fg2(int x, int y, Tilep, float tx, float ty, float dx, float dy);
 void ascii_set_fg2(int x, int y, color c);
+void ascii_set_fg2(int x, int y, const char *tilename);
+void ascii_set_fg2(int x, int y, const wchar_t c);
 
 void ascii_dim(int x, int y, int z, float alpha);
 
 void ascii_putf(int x, int y, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, color bg, const wchar_t *fmt, ...);
-void ascii_putf(int x, int y, std::wstring const& fmt, ...);
-void ascii_putf(int x, int y, color fg, std::wstring const& fmt, ...);
-void ascii_putf(int x, int y, color fg, color bg, std::wstring const& fmt, ...);
-void ascii_putf__(int x, int y, color fg, color bg, std::wstring const& text);
+void ascii_putf(int x, int y, const std::wstring fmt, ...);
+void ascii_putf(int x, int y, color fg, const std::wstring fmt, ...);
+void ascii_putf(int x, int y, color fg, color bg, const std::wstring fmt, ...);
+void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text);
 
 void ascii_display(void);
 
