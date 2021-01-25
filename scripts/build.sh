@@ -527,7 +527,7 @@ case `uname` in
         ;;
 esac
 
-GCC_WARN+="-Wmissing-prototypes"
+GCC_WARN=""
 
 #
 # Better to leave off for production
