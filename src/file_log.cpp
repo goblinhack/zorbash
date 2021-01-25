@@ -7,6 +7,7 @@
 #include "my_time.h"
 #include "my_string.h"
 #include "my_log.h"
+#include "my_file.h"
 
 static void file_log_ (const char *fmt, va_list args)
 {

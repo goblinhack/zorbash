@@ -24,42 +24,42 @@ static void game_config_top_destroy (void)
     game_config_top_window = nullptr;
 }
 
-uint8_t game_config_top_graphics (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_top_graphics (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_top_destroy();
     game->config_gfx_select();
     return true;
 }
 
-uint8_t game_config_top_keyboard (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_top_keyboard (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_top_destroy();
     game->config_keyboard_select();
     return true;
 }
 
-uint8_t game_config_top_sound (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_top_sound (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_top_destroy();
     game->config_sound_select();
     return true;
 }
 
-uint8_t game_config_top_other (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_top_other (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_top_destroy();
     game->config_other_select();
     return true;
 }
 
-uint8_t game_config_top_back (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_config_top_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_config_top_destroy();
     game->main_menu_select();
     return true;
 }
 
-uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -97,7 +97,7 @@ uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
     return false;
 }
 
-uint8_t game_config_top_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_top_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

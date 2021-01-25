@@ -17,7 +17,7 @@ static void game_quit_destroy (void)
     game->soft_unpause();
 }
 
-uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_quit_destroy();
     if (game->started) {
@@ -34,13 +34,13 @@ uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
     return false;
 }
 
-uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_quit_destroy();
     return false;
 }
 
-uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -72,7 +72,7 @@ uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
     return false;
 }
 
-uint8_t game_quit_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_quit_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

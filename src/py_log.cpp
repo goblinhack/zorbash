@@ -8,6 +8,7 @@
 #include "my_string.h"
 #include "my_file.h"
 #include "my_log.h"
+#include "my_python.h"
 
 static void py_log_ (const char *fmt, va_list args)
 {

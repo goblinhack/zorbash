@@ -56,7 +56,8 @@ strrepc (char *s, const char *replace_set, char replace_with)
  *
  * substr("foo.zip", -4, 4) -> "zip"
  */
-char *substr (const char *in, int32_t pos, int32_t len)
+#if 0
+static char *substr (const char *in, int32_t pos, int32_t len)
 {_
     int32_t slen;
     char *out;
@@ -100,6 +101,7 @@ char *substr (const char *in, int32_t pos, int32_t len)
 
     return (out);
 }
+#endif
 
 //
 // Recursively replace part of a string with another.

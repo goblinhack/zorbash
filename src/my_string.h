@@ -46,6 +46,7 @@ char *dynprintf(const char *fmt, ...);
 char *dynvprintf(const char *fmt, va_list args);
 std::string mybasename(const char *in, const char *who);
 void hexdump(const unsigned char *addr, size_t len);
+void hexdump(std::vector<unsigned char> &v);
 char *strcasestr_(const char *s, const char *find);
 
 shared_vector_string split(const char *in, int max_line_len);

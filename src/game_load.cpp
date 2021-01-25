@@ -14,6 +14,7 @@
 #include "my_thing.h"
 #include "my_alloc.h"
 #include "my_sprintf.h"
+#include "my_file.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
@@ -640,6 +641,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     return (in);
 }
 
+#if 0
 // binary mode is only for switching off newline translation
 // ios::ate, open at end
 std::vector<char> read_file (const std::string filename)
@@ -659,6 +661,7 @@ std::vector<char> read_file (const std::string filename)
         return bytes;
     }
 }
+#endif
 
 static std::vector<char> read_lzo_file (const std::string filename,
                                         lzo_uint *uncompressed_sz,
@@ -856,7 +859,7 @@ static void wid_load_destroy (void)
     game->hard_unpause();
 }
 
-uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -903,7 +906,7 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -912,7 +915,7 @@ uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     auto slot = wid_get_int_context(w);
     game->load(slot);

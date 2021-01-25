@@ -22,7 +22,7 @@ static void wid_credits_destroy (void)
     wid_not_visible(wid_botcon_window);
 }
 
-uint8_t wid_credits_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_credits_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -49,7 +49,7 @@ uint8_t wid_credits_key_up (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t wid_credits_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_credits_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -58,13 +58,13 @@ uint8_t wid_credits_key_down (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t wid_credits_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_credits_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_credits_destroy();
     return true;
 }
 
-void game_display_credits_bg (void)
+static void game_display_credits_bg (void)
 {_
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -78,7 +78,7 @@ void game_display_credits_bg (void)
     blit_flush();
 }
 
-void game_display_credits_fg (void)
+static void game_display_credits_fg (void)
 {_
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -92,7 +92,7 @@ void game_display_credits_fg (void)
     blit_flush();
 }
 
-void game_credits_tick (Widp w)
+static void game_credits_tick (Widp w)
 {_
     game_display_credits_bg();
     game_display_flames();

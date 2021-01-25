@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 #include "my_main.h"
+#include "my_random_name.h"
 
 static const char *dict1_names[] = {
     "alchemy",

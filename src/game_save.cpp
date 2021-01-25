@@ -18,7 +18,7 @@ extern uint32_t csum(char *mem, uint32_t len);
 
 #define WRITE_MAGIC(m) { uint32_t magic = m; out << bits(magic); }
 
-std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
+std::ostream& operator<<(std::ostream &out, Bits<const Monstp & > const my)
 {_
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
@@ -29,7 +29,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /////////////////////////////////////////////////////////////////////////
     /* ThingId      on_fire_id_anim           */ out << bits(my.t->on_fire_id_anim);
     /* ThingId      owner_id                  */ out << bits(my.t->owner_id);
-    /* ThingId      minion_owner_id                */ out << bits(my.t->minion_owner_id);
+    /* ThingId      minion_owner_id           */ out << bits(my.t->minion_owner_id);
     /* ThingId      weapon_id                 */ out << bits(my.t->weapon_id);
     /* ThingId      weapon_id_carry_anim      */ out << bits(my.t->weapon_id_carry_anim);
     /* ThingId      weapon_id_use_anim        */ out << bits(my.t->weapon_id_use_anim);
@@ -264,8 +264,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     return (out);
 }
 
-std::ostream& operator<<(std::ostream &out,
-                         Bits<Level* & > const my)
+std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
 {_
     if (g_opt_debug3) {
         my.t->log("Save");
@@ -664,7 +663,7 @@ static void wid_save_destroy (void)
     game->hard_unpause();
 }
 
-uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -707,7 +706,7 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -716,7 +715,7 @@ uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     auto slot = wid_get_int_context(w);
     game->save(slot);

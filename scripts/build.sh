@@ -516,7 +516,6 @@ case `uname` in
         LDLIBS="$LDLIBS -rdynamic"
         LDLIBS="$LDLIBS -Wl,-framework,Opengl"
         DSYM="dsymutil ../zorbash"
-        COMPILER_WARN="-Wmissing-prototypes"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer -static-libstdc++ -static-libgcc "
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -L/opt/local/lib/gcc6 -lasan"
@@ -525,11 +524,10 @@ case `uname` in
         EXE=""
         LDLIBS="$LDLIBS -funwind-tables"
         LDLIBS="$LDLIBS -lGL"
-        COMPILER_WARN="-Wmissing-prototypes"
         ;;
 esac
 
-COMPILER_WARN+=" -Wno-format-truncation" # warns about intentional truncation like %10s!
+GCC_WARN+="-Wmissing-prototypes"
 
 #
 # Better to leave off for production
@@ -551,12 +549,12 @@ cd src
 
 echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O3 # AUTOGEN" > .Makefile
 echo "    " >> .Makefile
-echo "CLANG_COMPILER_WARNINGS=-Wall $COMPILER_WARN -std=c++1z -stdlib=libc++ # AUTOGEN" >> .Makefile
+echo "CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++1z -stdlib=libc++ # AUTOGEN" >> .Makefile
 GCC_STACK_CHECK="-fstack-check -fstack-protector-all -D_FORTIFY_SOURCE=2"
 GCC_STACK_CHECK=
 
 # c++2a for bitfield initialization in classes
-echo "GCC_COMPILER_WARNINGS=-x c++ -Wall -std=c++2a -ffast-math $GCC_STACK_CHECK # AUTOGEN" >> .Makefile
+echo "GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a -ffast-math $GCC_STACK_CHECK # AUTOGEN" >> .Makefile
 # std++17 is not yet supported on my mac, henze c++1z
 `g++ --version >/dev/null 2>/dev/null`
 if [ $? -eq 0 ]
