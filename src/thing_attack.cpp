@@ -278,8 +278,7 @@ _
     if (!it->is_always_hit()) {
         if (!d20roll(att_mod, def_mod, fumble, crit)) {
             if (is_player() || (owner && owner->is_player())) {
-                MINICON("You miss your attack on %s.",
-                        it->text_the().c_str());
+                MINICON("You miss %s.", it->text_the().c_str());
                 msg("!");
             } else if (it->is_player()) {
                 MINICON("%s misses.", text_The().c_str());

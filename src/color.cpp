@@ -11,6 +11,7 @@
 #include <strings.h> // do not remove, strcasecmp
 
 colors color_map;
+static bool color_init_done;
 
 void color_set (std::string name,
                 color *c,
@@ -33,6 +34,7 @@ void color_init (void)
     color_init2();
     color_init3();
     color_init4();
+    color_init_done = true;
 }
 
 void color_fini (void)
@@ -84,7 +86,9 @@ color string2color (const char **s)
     auto result = color_map.find(std::string(tmp));
 
     if (result == color_map.end()) {
-        ERR("Unknown color [%s]", tmp);
+        if (color_init_done) { // avoids color warnings due to very early errors
+            ERR("Unknown color [%s]", tmp);
+        }
         return (WHITE);
     }
 
@@ -121,7 +125,9 @@ color string2color (const wchar_t **s)
     auto result = color_map.find(f);
 
     if (result == color_map.end()) {
-        ERR("Unknown color [%s]", f.c_str());
+        if (color_init_done) { // avoids color warnings due to very early errors
+            ERR("Unknown color [%s]", f.c_str());
+        }
         return (WHITE);
     }
 
@@ -155,7 +161,9 @@ color string2color (std::string &s, int *len)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        ERR("Unknown color [%s]", out.c_str());
+        if (color_init_done) { // avoids color warnings due to very early errors
+            ERR("Unknown color [%s]", out.c_str());
+        }
         return (WHITE);
     }
 
@@ -185,7 +193,9 @@ color string2color (std::string &s)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        ERR("Unknown color [%s]", out.c_str());
+        if (color_init_done) { // avoids color warnings due to very early errors
+            ERR("Unknown color [%s]", out.c_str());
+        }
         return (WHITE);
     }
 
@@ -227,7 +237,9 @@ const char *string2colorname (const char **s)
     auto result = color_map.find(std::string(tmp));
 
     if (result == color_map.end()) {
-        ERR("Unknown color [%s]", tmp);
+        if (color_init_done) { // avoids color warnings due to very early errors
+            ERR("Unknown color [%s]", tmp);
+        }
         return ("");
     }
 
@@ -261,7 +273,9 @@ std::string string2colorname (std::string &s)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        ERR("Unknown color [%s]", out.c_str());
+        if (color_init_done) { // avoids color warnings due to very early errors
+            ERR("Unknown color [%s]", out.c_str());
+        }
         return ("");
     }
 
@@ -281,7 +295,9 @@ color color_find (const char *s)
     auto result = color_map.find(std::string(s));
 
     if (result == color_map.end()) {
-        ERR("Unknown color [%s]", s);
+        if (color_init_done) { // avoids color warnings due to very early errors
+            ERR("Unknown color [%s]", s);
+        }
         return (WHITE);
     }
 

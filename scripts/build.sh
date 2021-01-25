@@ -529,6 +529,8 @@ case `uname` in
         ;;
 esac
 
+COMPILER_WARN+=" -Wno-format-truncation" # warns about intentional truncation like %10s!
+
 #
 # Better to leave off for production
 #

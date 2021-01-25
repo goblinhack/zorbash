@@ -53,7 +53,14 @@ _
         auto y = mid_at.y + d.y;
         auto p = point(x, y);
 
-        if (collision_obstacle(point(x, y))) {
+        //
+        // No spawning onto chasms for example
+        //
+        if (tpp->will_avoid_threat(level, p)) {
+            continue;
+        }
+
+        if (collision_obstacle(p)) {
             continue;
         }
 
@@ -118,7 +125,14 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
             continue;
         }
 
-        if (collision_obstacle(point(x, y))) {
+        //
+        // No spawning onto chasms for example
+        //
+        if (tpp->will_avoid_threat(level, p)) {
+            continue;
+        }
+
+        if (collision_obstacle(p)) {
             continue;
         }
 
@@ -219,7 +233,7 @@ bool Thing::spawn_fire (const std::string& what)
             continue;
         }
 
-        if (collision_obstacle(point(x, y))) {
+        if (collision_obstacle(p)) {
             continue;
         }
 

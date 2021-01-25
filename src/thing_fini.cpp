@@ -15,7 +15,9 @@
 
 Thing::~Thing_ (void)
 {_
-    //log("Destructor");
+    if (g_opt_debug2) {
+        log("Destructor");
+    }
     verify(this);
     destroy();
     oldptr(this);
@@ -24,6 +26,10 @@ Thing::~Thing_ (void)
 void Thing::destroy (void)
 {_
     verify(this);
+
+    if (g_opt_debug2) {
+        log("destroy");
+    }
 
     if (is_being_destroyed) {
         err("Death recursion in thing destroy");

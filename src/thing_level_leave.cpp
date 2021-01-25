@@ -12,6 +12,19 @@
 void Thing::level_leave (void)
 {_
     level_pop();
+
+    //
+    // Remove minions if they stay behind on the old level
+    //
+    unleash_minions();
+
+    {
+        auto it = get_immediate_minion_owner();
+        if (it) {
+            remove_minion_owner();
+        }
+    }
+
     {
         auto f = level->all_things.find(id);
         if (f != level->all_things.end()) {

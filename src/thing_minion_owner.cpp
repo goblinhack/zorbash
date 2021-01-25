@@ -54,19 +54,18 @@ void Thing::set_minion_owner (Thingp minion_owner)
             return;
         }
 
-        if (tp()->is_loggable_for_important_stuff()) {
-            if (minion_owner) {
-                log("Will change minion_owner %s->%s", old_minion_owner->to_string().c_str(),
-                    minion_owner->to_string().c_str());
-            } else {
-                log("Will remove minion_owner %s", old_minion_owner->to_string().c_str());
-            }
+        if (minion_owner) {
+            log("Will change minion owner %s->%s", 
+                old_minion_owner->to_string().c_str(),
+                minion_owner->to_string().c_str());
+        } else {
+            log("Will remove minion owner %s", 
+                old_minion_owner->to_string().c_str());
         }
     } else {
-        if (tp()->is_loggable_for_important_stuff()) {
-            if (minion_owner) {
-                log("Will set minion_owner to %s", minion_owner->to_string().c_str());
-            }
+        if (minion_owner) {
+            log("Will set minion owner to %s", 
+                minion_owner->to_string().c_str());
         }
     }
 
@@ -85,42 +84,55 @@ void Thing::remove_minion_owner (void)
 {_
     auto old_minion_owner = get_immediate_minion_owner();
     if (!old_minion_owner) {
+        err("No minion owner");
         return;
     }
 
-    if (tp()->is_loggable_for_important_stuff()) {
-        log("Remove minion_owner %s", old_minion_owner->to_string().c_str());
-    }
+    log("Remove minion owner %s", old_minion_owner->to_string().c_str());
 
     set_minion_owner_id(0);
     old_minion_owner->decr_minion_count();
-
-    //
-    // If this was fire and it had an minion_owner (the thing it set on fire)
-    // and that minion_owner is now dead, the fire is free to fall into a chasm
-    //
-    location_check();
 }
 
-void Thing::kill_minions (Thingp killer, const char *why)
+//
+// Kill and detach all minions from their owner
+//
+void Thing::kill_minions (Thingp killer)
 {_
+    if (!is_minion_generator()) {
+        return;
+    }
+
+    if (!get_minion_count()) {
+        return;
+    }
+
     //
     // Slow, but not used too often
     //
-    auto reason = dynprintf("minion owner died: %s", why);
     for (auto p : level->all_things) {
         auto minion = p.second;
         auto o = minion->get_immediate_minion_owner();
         if (o && (o == this)) {
             minion->remove_minion_owner();
-            minion->dead(killer, "%s", reason);
+            minion->dead(killer, "minion master died");
         }
     }
-    myfree(reason);
 }
 
+//
+// Detach all minions from their owner
+//
 void Thing::unleash_minions (void)
 {_
+    if (!is_minion_generator()) {
+        return;
+    }
+
+    if (!get_minion_count()) {
+        return;
+    }
+
     //
     // Slow, but not used too often
     //

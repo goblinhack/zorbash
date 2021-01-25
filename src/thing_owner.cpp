@@ -54,19 +54,15 @@ void Thing::set_owner (Thingp owner)
             return;
         }
 
-        if (tp()->is_loggable_for_important_stuff()) {
-            if (owner) {
-                log("Will change owner %s->%s", old_owner->to_string().c_str(),
-                    owner->to_string().c_str());
-            } else {
-                log("Will remove owner %s", old_owner->to_string().c_str());
-            }
+        if (owner) {
+            log("Will change owner %s->%s", old_owner->to_string().c_str(),
+                owner->to_string().c_str());
+        } else {
+            log("Will remove owner %s", old_owner->to_string().c_str());
         }
     } else {
-        if (tp()->is_loggable_for_important_stuff()) {
-            if (owner) {
-                log("Will set owner to %s", owner->to_string().c_str());
-            }
+        if (owner) {
+            log("Will set owner to %s", owner->to_string().c_str());
         }
     }
 
@@ -88,9 +84,7 @@ void Thing::remove_owner (void)
         return;
     }
 
-    if (tp()->is_loggable_for_important_stuff()) {
-        log("Remove owner %s", old_owner->to_string().c_str());
-    }
+    log("Remove owner %s", old_owner->to_string().c_str());
 
     set_owner_id(0);
     old_owner->decr_owned_count();

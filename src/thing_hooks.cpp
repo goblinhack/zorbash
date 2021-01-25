@@ -138,7 +138,7 @@ void Thing::remove_all_references ()
     // Some things have lots of things they own
     //
     if (get_owned_count()) {
-        log("Remove all references, total %d", get_owned_count());
+        log("Remove all owner references, total %d", get_owned_count());
 
         //
         // Slow, but not used too often
@@ -146,14 +146,14 @@ void Thing::remove_all_references ()
         for (auto p : level->all_things) {
             auto t = p.second;
             auto o = t->get_immediate_owner();
-            if (o && (o == this)) {
+            if (o == this) {
                 t->remove_owner();
             }
         }
     }
 
     if (get_minion_count()) {
-        log("Remove all references, total %d", get_minion_count());
+        log("Remove all minion references, total %d", get_minion_count());
 
         //
         // Slow, but not used too often
@@ -161,7 +161,7 @@ void Thing::remove_all_references ()
         for (auto p : level->all_things) {
             auto t = p.second;
             auto o = t->get_immediate_minion_owner();
-            if (o && (o == this)) {
+            if (o == this) {
                 t->remove_minion_owner();
             }
         }

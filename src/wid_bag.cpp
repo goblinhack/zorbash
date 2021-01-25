@@ -306,7 +306,7 @@ static void wid_bag_item_mouse_over_e (Widp w)
         return;
     }
 
-    BOTCON("");
+    BOTCON(" ");
 }
 
 static void wid_bag_tick (Widp w)
