@@ -1308,7 +1308,7 @@ public:
     void jump_end(void);
     void kill(Thingp killer, const char *reason);
     void kill(Thingp killer, std::string &reason);
-    void kill_minions(Thingp killer, const char *why);
+    void kill_minions(Thingp killer);
     void lava_tick();
     void level_change(Levelp);
     void level_enter(void);

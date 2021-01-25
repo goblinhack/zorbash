@@ -39,7 +39,7 @@ void Thing::kill (Thingp killer, const char *reason)
     // If a minion generator dies, kill all minions
     //
     if (is_minion_generator()) {
-        kill_minions(killer, "minion owner died");
+        kill_minions(killer);
     }
 
     if (is_player()) {

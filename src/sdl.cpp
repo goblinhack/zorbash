@@ -190,13 +190,15 @@ uint8_t sdl_init (void)
     LOG("SDL: SDL init, version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         SDL_MSG_BOX("SDL_Init failed %s", SDL_GetError());
-        ERR("SDL_Init failed %s", SDL_GetError());
+        DIE("SDL_Init failed %s", SDL_GetError());
+        return false;
     }
 
     LOG("SDL: SDL_VideoInit");
     if (SDL_VideoInit(0) != 0) {
         SDL_MSG_BOX("SDL_VideoInit failed %s", SDL_GetError());
-        ERR("SDL_VideoInit failed %s", SDL_GetError());
+        DIE("SDL_VideoInit failed %s", SDL_GetError());
+        return false;
     }
 
     int x = 0;
@@ -220,7 +222,15 @@ uint8_t sdl_init (void)
         // Else guess.
         //
         SDL_DisplayMode mode;
-        SDL_GetCurrentDisplayMode(0, &mode);
+        memset(&mode, 0, sizeof(mode));
+
+        LOG("SDL: SDL_GetCurrentDisplayMode");
+        if (SDL_GetCurrentDisplayMode(0, &mode) < 0) {
+            SDL_MSG_BOX("Couldn't set windowed display: %s",
+                        SDL_GetError());
+            DIE("Couldn't set windowed display: %s", SDL_GetError());
+            return false;
+        }
 
         game->config.config_pix_width = mode.w;
         game->config.config_pix_height = mode.h;

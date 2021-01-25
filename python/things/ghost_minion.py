@@ -59,7 +59,7 @@ def tp_init(name, text_name):
     x.set_text_a_or_an("a");
     x.set_is_described_when_hovering_over(True)
     x.set_text_description("The angry spirit of one long passed")
-    x.set_text_hits("chills");
+    x.set_text_hits("slashes");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
