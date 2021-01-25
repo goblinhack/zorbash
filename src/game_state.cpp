@@ -3,11 +3,13 @@
 // See the README.md file for license info.
 //
 
+#include "my_main.h"
 #include "my_game.h"
 #include "my_wid_minicon.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_wid_bag.h"

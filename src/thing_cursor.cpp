@@ -6,6 +6,7 @@
 #include "my_ascii.h"
 #include "my_depth.h"
 #include "my_dmap.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_wid_inventory.h"
 #include "my_sdl.h"

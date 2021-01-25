@@ -12,6 +12,7 @@
 #include "my_point.h"
 #include "my_gl.h"
 #include "my_thing.h"
+#include "my_main.h"
 #include "my_game.h"
 
 void Level::new_internal_particle (

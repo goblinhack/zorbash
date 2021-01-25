@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_main.h"
 #include "my_game.h"
 
 Game::Game (std::string appdata)

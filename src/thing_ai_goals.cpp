@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <set>
+#include "my_main.h"
 #include "my_game.h"
 #include "my_main.h"
 #include "my_level.h"

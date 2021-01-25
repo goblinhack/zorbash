@@ -15,6 +15,7 @@
 #include "my_ascii.h"
 #include "my_thing.h"
 #include "my_wid_popup.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_level.h"
 #include "my_wid_inventory.h"

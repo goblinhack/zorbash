@@ -9,6 +9,7 @@
 #include "my_color.h"
 #include "my_dmap.h"
 #include "my_wid_rightbar.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_thing.h"
 

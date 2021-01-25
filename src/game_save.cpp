@@ -4,6 +4,7 @@
 //
 
 #include "minilzo.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"

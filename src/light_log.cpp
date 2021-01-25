@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_main.h"
 #include "my_game.h"
 #include "my_globals.h"
 #include "my_traceback.h"
