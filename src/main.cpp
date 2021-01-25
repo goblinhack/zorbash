@@ -14,6 +14,7 @@
 #include <random>  // std::default_random_engine
 std::default_random_engine rng;
 
+#include "my_main.h"
 #include "my_game.h"
 #include "my_thing_template.h"
 #include "my_python.h"

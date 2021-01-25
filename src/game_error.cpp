@@ -3,8 +3,10 @@
 // See the README.md file for license info.
 //
 
+#include "my_main.h"
 #include "my_game.h"
 #include "my_wid_popup.h"
+#include "my_main.h"
 #include "my_game_error.h"
 #include "my_traceback.h"
 

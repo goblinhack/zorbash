@@ -13,6 +13,7 @@
 #include "my_string.h"
 #include "my_thing_template.h"
 #include "my_dmap.h"
+#include "my_main.h"
 #include "my_game.h"
 
 std::map<std::string, class Tile* > all_tiles;

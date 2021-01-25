@@ -10,6 +10,7 @@
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
+#include "my_main.h"
 #include "my_game.h"
 
 bool Thing::ai_blocked (void)

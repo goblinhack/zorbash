@@ -6,6 +6,7 @@
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
+#include "my_main.h"
 #include "my_game.h"
 
 void Thing::msg (std::string const &m)

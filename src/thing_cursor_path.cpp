@@ -4,6 +4,7 @@
 //
 
 #include "my_main.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_wid_console.h"

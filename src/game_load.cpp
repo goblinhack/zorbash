@@ -3,12 +3,14 @@
 // See the README.md file for license info.
 //
 
+#include "my_main.h"
 #include "my_game.h"
 #include "minilzo.h"
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
+#include "my_main.h"
 #include "my_game_error.h"
 #include "my_wid_rightbar.h"
 #include "my_thing.h"

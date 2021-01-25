@@ -4,6 +4,7 @@
 //
 
 #include "my_main.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_traceback.h"
 #include "my_time.h"

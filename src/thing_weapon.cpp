@@ -5,6 +5,7 @@
 
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_main.h"
 #include "my_game.h"
 
 Thingp Thing::weapon_get () const
