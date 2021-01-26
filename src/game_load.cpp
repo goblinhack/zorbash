@@ -643,7 +643,6 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     return (in);
 }
 
-#if 0
 // binary mode is only for switching off newline translation
 // ios::ate, open at end
 std::vector<char> read_file (const std::string filename)
@@ -663,7 +662,6 @@ std::vector<char> read_file (const std::string filename)
         return bytes;
     }
 }
-#endif
 
 static std::vector<char> read_lzo_file (const std::string filename,
                                         lzo_uint *uncompressed_sz,

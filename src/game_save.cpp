@@ -19,7 +19,7 @@ extern uint32_t csum(char *mem, uint32_t len);
 
 #define WRITE_MAGIC(m) { uint32_t magic = m; out << bits(magic); }
 
-std::ostream& operator<<(std::ostream &out, Bits<const Monstp & > const my)
+std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 {_
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
