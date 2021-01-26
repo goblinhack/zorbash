@@ -30,7 +30,7 @@ void Level::log (std::string pfx)
                     if (!t) {
                         continue;
                     }
-                    t->log(" ");
+                    t->log("loaded");
                 }
             }
         }

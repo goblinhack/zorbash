@@ -138,6 +138,8 @@ public:
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
 
+    bool                       is_being_destroyed {};
+
     //
     // Animation loop counters for surface effects
     //
@@ -272,8 +274,8 @@ public:
                 if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \
                 if (!t->is_interesting() &&                         \
-                    !t->attackable_by_monst() &&                 \
-                    !t->attackable_by_player() &&                \
+                    !t->attackable_by_monst() &&                    \
+                    !t->attackable_by_player() &&                   \
                     !t->ai_obstacle()) {                            \
                     continue;                                       \
                 }                                                   \

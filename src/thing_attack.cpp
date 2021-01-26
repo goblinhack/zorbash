@@ -16,8 +16,19 @@ bool Thing::possible_to_attack (const Thingp it)
 {_
     auto me = tp();
 
-    if (!it->attackable()) {
-        return false; // Don't log, too noisy
+    auto owner = get_top_owner();
+
+    if (is_monst() && it->attackable_by_monst()) {
+        // continue
+    } else if (is_player() && it->attackable_by_player()) {
+        // continue
+    } else if (owner && owner->is_player() && it->attackable_by_player()) {
+        // continue
+    } else if (!it->attackable()) {
+        if (g_opt_debug3) {
+            log("Cannot attack %s", it->to_string().c_str());
+        }
+        return false;
     }
 
     //

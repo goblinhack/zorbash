@@ -8,7 +8,6 @@ def lava_init(name, text_name, tiles=[]):
     x.set_damage_melee_dice("1d12+6")
     x.set_gfx_animated(True)
     x.set_is_able_to_fall(True)
-    x.set_attackable(False)
     x.set_is_cursor_can_hover_over_but_needs_double_click(True)
     x.set_is_extreme_hazard(True)
     x.set_is_hazard(True)

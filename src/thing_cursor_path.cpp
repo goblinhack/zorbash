@@ -38,6 +38,8 @@ bool Thing::cursor_path_pop_first_move (void)
     auto cursor = level->cursor;
 
     if (game->cursor_move_path.size()) {
+        log("Cursor path exists");
+
         //
         // A path to the target exists.
         //
@@ -56,7 +58,10 @@ bool Thing::cursor_path_pop_first_move (void)
         // We get here if for example we click on a monster but
         // are unable to move into its cell because it blocks
         //
+        // Or we click on a locked door and cannot pass through.
+        //
         log("Failed to move to cursor next hop");
+        level->cursor_path_create();
         return false;
     }
 

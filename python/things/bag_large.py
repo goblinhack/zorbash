@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
+    x.set_attackable(True)
     x.set_bag_height(8)
     x.set_bag_item_height(4)
     x.set_bag_item_width(4)
@@ -15,17 +16,14 @@ def tp_init(name, text_name):
     x.set_is_bag(True)
     x.set_is_collectable(True)
     x.set_is_combustible(True)
+    x.set_is_described_when_hovering_over(True)
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_attackable(True)
     x.set_is_item_not_stackable(True)
-    x.set_attackable(True)
     x.set_is_moveable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_treasure_class_a(True)
-    x.set_attackable(True)
-    x.set_is_described_when_hovering_over(True)
     x.set_long_text_description("A large leathery brown bag.")
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");

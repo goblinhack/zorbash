@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
+    x.set_attackable_by_monst(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
@@ -11,8 +12,8 @@ def tp_init(name, text_name):
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_animated_can_vflip(True)
     x.set_gfx_show_outlined(True)
+    x.set_health_initial_dice("1d4")
     x.set_is_able_to_fall(True)
-    x.set_attackable_by_monst(True)
     x.set_is_blood(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)
@@ -20,7 +21,6 @@ def tp_init(name, text_name):
     x.set_is_removeable_if_out_of_slots(True)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
-    x.set_health_initial_dice("1d4")
     x.set_text_a_or_an("a");
     x.set_text_description("An artwork comprised mainly of blood")
     x.set_z_depth(zx.MAP_DEPTH_FLOOR2)

@@ -10,7 +10,6 @@ def tp_init(name, text_name):
     x.set_ai_scent_distance(10)
     x.set_attack_humanoid(True)
     x.set_attack_lunge(True)
-    x.set_attackable_by_monst(True)
     x.set_attackable_by_player(True)
     x.set_collision_attack(True)
     x.set_collision_check(True)
@@ -30,7 +29,7 @@ def tp_init(name, text_name):
     x.set_is_able_to_fall(False)
     x.set_is_able_to_walk_through_walls(True)
     x.set_is_active(True)
-    x.set_attackable(True)
+    x.set_is_described_when_hovering_over(True)
     x.set_is_ethereal(True)
     x.set_is_fearless(True)
     x.set_is_floating(True)
@@ -43,7 +42,6 @@ def tp_init(name, text_name):
     x.set_is_moveable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
-    x.set_is_described_when_hovering_over(True)
     x.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     x.set_modifier_attack(7)
     x.set_modifier_constitution(20)
@@ -55,7 +53,6 @@ def tp_init(name, text_name):
     x.set_on_death_do("ghost.on_death()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_text_a_or_an("a");
-    x.set_is_described_when_hovering_over(True)
     x.set_text_description("The angry spirit of one long passed")
     x.set_text_hits("slashes");
     x.set_tick_rate_tenths(3)
