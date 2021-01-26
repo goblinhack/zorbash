@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get -qq --no-install-recommends -y upgrade
 RUN apt install -y build-essential
-#RUN apt install -y vim
+RUN apt install -y vim
 RUN apt install -y g++
 RUN apt install -y libsdl2-dev libsdl2-2.0-0
 #RUN apt install -y libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0
@@ -24,9 +24,9 @@ RUN apt install -y git ssh xutils-dev
 #
 # This doesn't seem to work yet, so commented out
 #
-#ENV NVIDIA_VISIBLE_DEVICES all
-#ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
-#RUN apt install -y libglvnd0 libgl1 libglx0 libegl1 libxext6 libx11-6
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+RUN apt install -y libglvnd0 libgl1 libglx0 libegl1 libxext6 libx11-6
 
 RUN rm -rf /var/lib/apt/lists/*
 
