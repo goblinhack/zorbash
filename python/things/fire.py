@@ -22,7 +22,6 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("10")
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
-    x.set_attackable(False)
     x.set_is_fire(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)

@@ -58,7 +58,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         return true;
     }
 
-    player->log("Mouse move");
+    player->log("Mouse down");
 
     //
     // Have we moved close enough to attack? Do this prior to checking for
