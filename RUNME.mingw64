@@ -1,4 +1,4 @@
-poen#!/bin/sh
+#!/bin/sh
 #
 # This script will try and build the game for mingw64, installing files
 # it needs. There is some manual prep needed first:
@@ -70,13 +70,12 @@ do
     fi
 done
 
-if [ $MINGW64_DIR = "" ]
+if [ "$MINGW64_DIR" = "" ]
 then
-    cat << %%
-    I could not find msys/mingw installed. Here are some steps to get
-    you going:
+cat << %%
+    I could not find msys/mingw installed. Here are some steps to get you going:
 
-    1. Goto https://www.msys2.org/ and install the msys2...exe
+    1. Goto https://www.msys2.org/ and install the msys2.exe
 
     2. Once installed, in the terminal msys creates, do:
          pacman -Syu
@@ -91,11 +90,11 @@ then
 
     5. Now run this script again.
 %%
-    log_err "Could not find MINGW64 dir"
+    log_err "Could not find MINGW64 dir (/mingw64)"
     exit 1
 fi
 
-log_info "MING64 install dir $MINGW64_DIR"
+log_info "MING64 install dir $MINGW64_DIR."
 
 pacman -S tar \
     make \
