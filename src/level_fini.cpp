@@ -23,6 +23,8 @@ void Level::fini (void)
     log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
+    is_being_destroyed = true;
+
     //
     // Destroying all things should detach them from all other places they
     // are referred to.
