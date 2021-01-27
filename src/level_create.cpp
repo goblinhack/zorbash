@@ -147,9 +147,9 @@ void Level::create (point3d at, int seed)
         if (g_errored) { return; }
         place_chasm(dungeon, "chasm1");
         if (g_errored) { return; }
-        place_water(dungeon, "water1");
-        if (g_errored) { return; }
         place_deep_water(dungeon, "deep_water1");
+        if (g_errored) { return; }
+        place_water(dungeon, "water1");
         if (g_errored) { return; }
 
         //
