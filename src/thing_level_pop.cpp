@@ -37,8 +37,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_corpse(mx, my); }
     if (i_set_is_corridor)                             { i_set_is_corridor = false;
                                                          level->unset_is_corridor(mx, my); }
-    if (i_set_is_deep_water)                           { i_set_is_water = false;
-                                                         level->unset_is_water(mx, my); }
+    if (i_set_is_deep_water)                           { i_set_is_deep_water = false;
+                                                         level->unset_is_deep_water(mx, my); }
     if (i_set_is_dirt)                                 { i_set_is_dirt = false;
                                                          level->unset_is_dirt(mx, my); }
     if (i_set_is_door)                                 { i_set_is_door = false;
@@ -53,7 +53,7 @@ void Thing::level_pop (void)
                                                          level->unset_is_floor(mx, my); }
     if (i_set_is_food)                                 { i_set_is_food = false;
                                                          level->unset_is_food(mx, my); }
-    if (i_set_is_minion_generator)                            { i_set_is_minion_generator = false;
+    if (i_set_is_minion_generator)                     { i_set_is_minion_generator = false;
                                                          level->unset_is_minion_generator(mx, my); }
     if (i_set_is_gold)                                 { i_set_is_gold = false;
                                                          level->unset_is_gold(mx, my); }
