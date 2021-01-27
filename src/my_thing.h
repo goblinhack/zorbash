@@ -1174,7 +1174,7 @@ public:
     int is_rrr22(void) const;
     int is_rrr23(void) const;
     int is_rrr24(void) const;
-    int is_rrr25(void) const;
+    int is_shallow_water(void) const;
     int minion_limit(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;

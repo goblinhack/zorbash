@@ -259,8 +259,8 @@ class Tp:
     def set_is_rrr24(self, value):
         zx.tp_set_is_rrr24(self, value)
 
-    def set_is_rrr25(self, value):
-        zx.tp_set_is_rrr25(self, value)
+    def set_is_shallow_water(self, value):
+        zx.tp_set_is_shallow_water(self, value)
 
     def set_minion_limit(self, value):
         zx.tp_set_minion_limit(self, value)
