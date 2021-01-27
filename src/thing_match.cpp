@@ -339,7 +339,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr24() && (what == "is_rrr24")) {
         return true;
     }
-    if (is_rrr25() && (what == "is_rrr25")) {
+    if (is_shallow_water() && (what == "is_shallow_water")) {
         return true;
     }
     if (minion_limit() && (what == "minion_limit")) {
