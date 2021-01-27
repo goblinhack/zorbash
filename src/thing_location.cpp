@@ -14,6 +14,13 @@
 //
 bool Thing::location_check (void)
 {_
+    //
+    // Prevent interactions that might generate things like smoke.
+    //
+    if (level->is_being_destroyed) {
+        return false;
+    }
+
     if (is_being_destroyed) {
         return false;
     }

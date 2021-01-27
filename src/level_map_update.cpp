@@ -86,17 +86,58 @@ void Level::update_things_next_to_a_chasm (void)
                 for (auto dx = -1; dx <= 1; dx++) {
                     for (auto dy = -1; dy <= 1; dy++) {
                         if (is_chasm(x + dx, y + dy)) {
+                            bool place_water = false;
+
                             FOR_ALL_THINGS(this, t, x, y) {
                                 if (t->is_falling) {
                                     continue;
                                 }
+
+                                //
+                                // Deep water next to a chasm changes to
+                                // regular water
+                                //
+                                if (t->is_deep_water()) {
+                                    place_water = true;
+                                }
+
                                 if (t->is_water() || t->is_lava()) {
                                     t->log("Over a chasm");
                                     t->fall(1, 750);
                                 }
                             } FOR_ALL_THINGS_END()
+
+                            if (place_water) {
+                                thing_new("water1", fpoint(x, y));
+                            }
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+void Level::update_deep_water (void)
+{
+    for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+        for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+            //
+            // Deep water must be surrounded by water
+            //
+            if (is_deep_water(x, y)) {
+                int nebs = 0;
+                for (auto dx = -1; dx <= 1; dx++) {
+                    for (auto dy = -1; dy <= 1; dy++) {
+                        nebs += is_water(x + dx, y + dy) ? 1 : 0;
+                    }
+                }
+                if (nebs < 9) {
+                    FOR_ALL_THINGS(this, t, x, y) {
+                        if (t->is_deep_water()) {
+                            t->dead("Too shallow");
+                        }
+                    } FOR_ALL_THINGS_END()
                 }
             }
         }
@@ -108,5 +149,6 @@ void Level::update_map (void)
     update_hazard_tile_map();
     update_water_next_to_lava();
     update_things_next_to_a_chasm();
+    update_deep_water();
     update_hazard_tile_map();
 }

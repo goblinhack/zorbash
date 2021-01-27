@@ -1,147 +1,96 @@
 bugs
 ----
-
 - deep water next to a chasm should go shallow
-- add poison notify on screen from spider?
-- half damage from poison constitution save
-- spider that throws web?
 
 upcoming work
 -------------
+
+poison
+------
+- add poison notify on screen from spider?
+- half damage from poison constitution save
+- spider that throws web?
 - antipoison potion
+
+gasses
+------
 - gasses that spread
+- fire
+- explosive interactions
+
+doors
+-----
 - need to be able to close open doors but not damaged ones
+- hit door, summon monst chance
+- hit door, wake sleeping monsters
+
+ai
+--
+- throw gold to distract cleaner
+- on fire intelligent monst should seek water?
+
+weapons
+-------
+- blessed items resist explosion
 - warhammer should kill parent jelly in one go
-- invisible monst?
-- consider https://kennystudio.itch.io/2d-explosions-pixelart-free
-- monster that runs from light ?
-- on fire monst should seek water?
-- sewer wolf?
 - fire portion
 - enchant potion
 - enchant potion of descent radius
-- new monst? should explode in fire?
 - have a monster use a potion?
-- weight factors into jumping
-- moving floor
-- shove chocolate frog statue, get frog?
-- sewer level
-- water, kraken, eels
-- make ripples, summon monsters
-- throw
-- should the entrance in next level be close to the prev exit
-- allow seed selection on menu
-- add stuff in secret rooms
-- choose name / player
-
-future work
------------
-- hit door, summon monst chance
-- hit door, wake sleeping monsters
 - (blunt/warhamma?) slime specific weapon does not cause slimes to split
-- carry eat slime mold and gain acid resis?
-- thief that will steal cash but can be distracted by dropped money
-- gravestone
-- bear trap/sticky trap holds player still so time catches up / have a click indicator for how long to go
-- blessed items resist explosion
+- plutonium sword
+
+water
+-----
+- water, kraken, eels; kraken will move out of shallows
+- make ripples, summon monsters
+
+monsts
+------
+- new monst? should explode in fire?
+- sewer wolf?
+- invisible monst?
+- monster that runs from light ?
+- tentacles out of the ground that try to surround you
 - creature that pretends to be a stone until close by then sprouts legs
 - dungeon walrus; long headed walrus with many tusks
 - gloat - cube like creature that explodes on touch and then its spirit gloats over your death
-- god of mold summoning
-- monster healing
-- monsters adapt to overuse of a weapon type
-- old gods to new gods scale
 - pet robot
-- plutonium sword
-- portable hunger - teleports you to a room full of digestive juices
+
+gods
+----
 - runes lean more torwards old gods
-- some dungeons would be full of human relics like a abandoned military base maintained by roomba robots
+
+level
+-----
+- teleports
+- sewer level
+- portable hunger - teleports you to a room full of digestive juices
+- moving floor
+- should the entrance in next level be close to the prev exit
+- add stuff in secret rooms
+- shove chocolate frog statue, get frog?
+
+player
+------
+- choose name / player
+- weight factors into jumping
+- allow seed selection on menu
+- carry eat slime mold and gain acid resis?
+- gravestone
+
+spells
+------
 - spell capacitor
 - spell chaining
-- tentacles out of the ground that try to surround you
+
+gfx
+---
+- consider https://kennystudio.itch.io/2d-explosions-pixelart-free
 
 tools
 -----
 pixatool https://kronbits.itch.io/pixatool?fbclid=IwAR3Tez_iXDV3v75DY4Bd1f4asfgkJJ_UwdB1olawpM2dAFS_ZSsEy-Ao-gc
 tileset https://s4m-ur4i.itch.io/huge-pixelart-asset-pack?fbclid=IwAR2bKv5nNiR8JAnAn1jw7fachwe0pqCaqKh4QKmxcNAcqkJxdHpjw1girxA
         https://kronbits.itch.io/matriax-free-assets
-
-discussion
-----------
-Thomas Verreault Jr
-
-Kicking around an adventure idea: adventurers learn that they're latest quest will require delving deep into caverns cold to find the nightmarish resting place of Zorbash, the giant beholder, killed during the first age by heroes who would go on to become demi-gods. Some scholars claim Zorbash was a demon and others that he was the first beholder and progenitor of all beholders.
-
-What is know for sure is his skull lies on an island in a cavernous grotto surrounded by the semi ruins of a settlement that was inhabited in turn by Drow and mindflayers. The skull is partially buried and resembles a macabre dome. Some sense the malignant spirit of Zorbash in its presence.
-
-What the adventurers are told is they must "enter the eye of the beholder". (This will be a gateway to somewhere else).
-
-Back story onZorbash, he/it was in deed the 1st beholder but he was a demon and the first age heros that slue him cheated and used a power/artifact/ dark magic to slay Zorbash that they should not have used. This resulted in his spirit seed going out into the world and becoming mortal creature beholders as a sort of retaliatory curse for his death. This truth is hidden and since these 1st age heroes went on to become demi-gods and they're leader is on the cusp of being elivated to lesser god status there are powerful forces that do not want the truth to ever come out. Yet one godling has still feels guilt over what was done and will be a secret benefactor in hopes that these new heroes may right a millenia old wrong and lift a curse that has plagued the world for over two ages of myth and history.
-
-The impetus of all this may be that the nature of the beholder curse is that each century there are more beholders in the world than before. It is now that the beholder population is beginning to reach critical mass. And in another 100 years they will wipe out the world of the civilized peoples. The Kings Oracle prophesies that heroes must eneter the eye of the beholder.
-
-This is all i have for now.
-
-
-Thomas Verreault Jr I was rifting off of Samuel Taylor Coleridge's poem Kubla Kahn: In Xanadu did Kubla Kahn a stately pleasure dome decree, where alf the sacred river ran down to a sunless see. However, the dome of Zorbash's skull is anything but a pleasure dome. The setting will be Coleridges poem turn on its head possibly allowing for a suitable modified poem to be used in setting as bardic lore.
-Manage
-Like
-· Reply · 11h
-Thomas Verreault Jr
-Thomas Verreault Jr Outline of adventure:
-1. seek out the "eye of the beholder" in hopes of discovering a solution to the problem facing the kingdom. Result should be meeting the godling benefactor and learning a piece of the truth. Which leads to:
-
-2. Quest for truth of what really happened. Divine opposition becomes apparent.
-
-3. Quest for the artifact that will lift the curse. More divine opposition.
-
-4. Xanadumageddon- forces of evil and divinity hot on adventurers heals to stop them. And a plot twist.
-Manage
-Like
-· Reply · 11h
-Thomas Verreault Jr
-Thomas Verreault Jr So ive been thinking what did the 1st age heroes do that was so bad. They sacrificed a party member to kill Zorbash. This sacrifical lamb has been trapped in a demensional pocket of the Abyss this whole time and has been growing stronger and reached the status of demi-god/demon hood as well. She was the lover of the godling benefactor and his aid to the adventurers is about releasing her. To do this will have the result of breaking the Zorbash millenia old curse but with one unintended consequence: she has infused the beholder essence of Zorbash in her ages long imprisonment and she has become the Queen of the beholders.
-
-The demi gods are not happy to have their secret out and not really happy with the PCs but they realize they must fix what they set in motion ages ago and will fight this demon queen of beholders trying to banish her back to the abyss if the PCs will hold off the mortal hordes descending on evil xanadu.
-Manage
-Like
-· Reply · 11h · Edited
-Thomas Verreault Jr
-Thomas Verreault Jr What is the epilogue: he that would have risen to lesser godhood will not seek revenge but does not like the PCs. He may still be a demigod.
-
-Others of the demi gods are indifferent.
-
-The one time benefactor godling has been imprisoned or punished somehow but he hates the PCs
-
-And the queen of beholders - yeah the PCs need to tread lightly in the outer planes anywhere near the abyss.
-Manage
-Like
-· Reply · 11h · Edited
-Thomas Verreault Jr
-Thomas Verreault Jr Oh yeah, the curse of Zorbash may be lifted and beholders are no longer multplying at a rate that will wipe out the world but because this 1st age hero became the demon queen of beholders they continue to exist in the material plane.
-Manage
-Like
-· Reply · 11h
-Thomas Verreault Jr
-Thomas Verreault Jr Ah lets call this half ruined settlement Zorbanadu.
-1
-Manage
-Like
-· Reply · 11h
-Robert Clendenen
-Robert Clendenen Looks like you got this...
-Manage
-Like
-· Reply · 10h
-Thomas Verreault Jr
-Thomas Verreault Jr Im just at work rifting on this idea you are welcome to suggest ideas or changes
-1
-Manage
-Like
-· Reply · 10h
-Neil McGill
-Write a reply...
-
-Thomas Verreault Jr
-Thomas Verreault Jr The benefactor was imprisoned by the others because he was determined to tell the truth (they didn't know he was in love with the one they secrificed). And they were forced to imprison him, and destroy the tomes of 1st age sagas he wrote though one survives. He cause secrets to be revealed.
 

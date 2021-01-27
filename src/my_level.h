@@ -332,6 +332,7 @@ public:
     void update_things_next_to_a_chasm(void);
     void update_map(void);
     void update_minimap(void);
+    void update_deep_water(void);
 
     void set_wobble(float);
     float get_wobble(void) const;
