@@ -126,7 +126,6 @@ void Level::update_deep_water (void)
             // Deep water must be surrounded by water
             //
             if (is_deep_water(x, y)) {
-                LOG("DEEP %d %d => %d",x,y,is_deep_water(x, y));
                 int nebs = 0;
                 for (auto dx = -1; dx <= 1; dx++) {
                     for (auto dy = -1; dy <= 1; dy++) {
@@ -140,14 +139,16 @@ void Level::update_deep_water (void)
                         }
                     } FOR_ALL_THINGS_END()
 
-                    if (is_deep_water(x, y)) {
-                        LOG("DEEP AFTER %d %d => %d",x,y,is_deep_water(x, y));
-                        FOR_ALL_THINGS(this, t, x, y) {
-                            if (t->is_deep_water()) {
-                                t->err("Still present; should be removed");
-                            }
-                        } FOR_ALL_THINGS_END()
-                        DIE("deep water still present after removal");
+                    if (g_opt_debug2) {
+                        if (is_deep_water(x, y)) {
+                            FOR_ALL_THINGS(this, t, x, y) {
+                                if (t->is_deep_water()) {
+                                    t->err("Still present; should be removed");
+                                }
+                            } FOR_ALL_THINGS_END()
+
+                            DIE("deep water still present after removal");
+                        }
                     }
                 }
             }
