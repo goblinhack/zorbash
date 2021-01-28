@@ -756,7 +756,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_usable)
     TP_SET_DECL(is_wall)
     TP_SET_DECL(is_wall_deco)
-    TP_SET_DECL(is_water)
+    TP_SET_DECL(is_gfx_water)
     TP_SET_DECL(is_water_lover)
     TP_SET_DECL(avoids_water)
     TP_SET_DECL(is_weapon)

@@ -1222,9 +1222,9 @@ int Thing::is_wall(void) const
     return (tp()->is_wall());
 }
 
-int Thing::is_water(void) const
+int Thing::is_gfx_water(void) const
 {_
-    return (tp()->is_water());
+    return (tp()->is_gfx_water());
 }
 
 int Thing::is_water_lover(void) const

@@ -550,7 +550,7 @@ bool Thing::get_coords (point &blit_tl,
         } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
             is_in_lava = true;
             set_submerged_offset(TILE_HEIGHT / 2);
-        } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
+        } else if (level->is_shallow_water((int)map_loc.x, (int)map_loc.y)) {
             set_submerged_offset(4);
             is_in_water = true;
         }

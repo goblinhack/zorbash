@@ -775,7 +775,7 @@ bool Dungeon::is_chasm (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_water (const int x, const int y)
+bool Dungeon::is_shallow_water (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -785,7 +785,7 @@ bool Dungeon::is_water (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_water) {
+        if (v.is_shallow_water) {
             return true;
         }
     }
@@ -822,7 +822,7 @@ bool Dungeon::is_hazard (const int x, const int y)
         if (v.is_deep_water) {
             return true;
         }
-        if (v.is_water) {
+        if (v.is_shallow_water) {
             return true;
         }
         if (v.is_chasm) {
@@ -1006,13 +1006,13 @@ bool Dungeon::is_chasm_no_check (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_water_no_check (const int x, const int y)
+bool Dungeon::is_shallow_water_no_check (const int x, const int y)
 {
     for (auto d = 0; d < map_depth; d++) {
         auto c = getc_no_check(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_water) {
+        if (v.is_shallow_water) {
             return true;
         }
     }
@@ -3253,7 +3253,7 @@ void Dungeon::water_fixup_shallows (void)
                 is_rock(x - 1, y + 1) ||
                 is_rock(x    , y + 1) ||
                 is_rock(x + 1, y + 1)) {
-                putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
+                putc(x, y, MAP_DEPTH_WATER, Charmap::SHALLOW_WATER);
             }
         }
     }
@@ -3268,15 +3268,15 @@ void Dungeon::water_fixup (void)
 
     for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
         for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-            if (is_water(x - 1, y - 1) &&
-                is_water(x    , y - 1) &&
-                is_water(x + 1, y - 1) &&
-                is_water(x - 1, y    ) &&
-                is_water(x    , y    ) &&
-                is_water(x + 1, y    ) &&
-                is_water(x - 1, y + 1) &&
-                is_water(x    , y + 1) &&
-                is_water(x + 1, y + 1)) {
+            if (is_shallow_water(x - 1, y - 1) &&
+                is_shallow_water(x    , y - 1) &&
+                is_shallow_water(x + 1, y - 1) &&
+                is_shallow_water(x - 1, y    ) &&
+                is_shallow_water(x    , y    ) &&
+                is_shallow_water(x + 1, y    ) &&
+                is_shallow_water(x - 1, y + 1) &&
+                is_shallow_water(x    , y + 1) &&
+                is_shallow_water(x + 1, y + 1)) {
                 set(cand, x, y, true);
             }
         }
@@ -3478,7 +3478,7 @@ void Dungeon::water_gen (uint8_t map_fill_prob,
         for (y=2; y < maze_h-2; y++) {
             if (get(map_curr, x, y)) {
                 if (!is_anything_at(x, y)) {
-                    putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
+                    putc(x, y, MAP_DEPTH_WATER, Charmap::SHALLOW_WATER);
                 }
             }
         }

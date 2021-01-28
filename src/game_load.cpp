@@ -247,12 +247,13 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     shift = 0;
 
     /* uint64_t */ my.t->i_set_is_acid                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_poison                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_poison                 = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_blood                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_chasm                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_corpse                 = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_corridor               = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_deep_water             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_shallow_water          = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_dirt                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_door                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_entrance               = (bits64 >> shift) & 1; shift++;
@@ -260,7 +261,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_fire                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_floor                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_food                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_minion_generator              = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_minion_generator       = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_gold                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_hazard                 = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_extreme_hazard         = (bits64 >> shift) & 1; shift++;
@@ -281,7 +282,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_torch                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_treasure               = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_wall                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_water                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_gfx_water              = (bits64 >> shift) & 1; shift++;
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -343,12 +344,13 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};            */ in >> bits(my.t->_fade_in_map);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};                */ in >> bits(my.t->_heatmap);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};                */ in >> bits(my.t->_is_acid);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};                */ in >> bits(my.t->_is_poison);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};              */ in >> bits(my.t->_is_poison);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};               */ in >> bits(my.t->_is_blood);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};               */ in >> bits(my.t->_is_chasm);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};              */ in >> bits(my.t->_is_corpse);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};            */ in >> bits(my.t->_is_corridor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};          */ in >> bits(my.t->_is_deep_water);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};       */ in >> bits(my.t->_is_shallow_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ in >> bits(my.t->_is_dirt);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ in >> bits(my.t->_is_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ in >> bits(my.t->_is_dungeon);
@@ -357,7 +359,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};                */ in >> bits(my.t->_is_fire);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};               */ in >> bits(my.t->_is_floor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};                */ in >> bits(my.t->_is_food);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_minion_generator {};           */ in >> bits(my.t->_is_minion_generator);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_minion_generator {};    */ in >> bits(my.t->_is_minion_generator);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};                */ in >> bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};              */ in >> bits(my.t->_is_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};      */ in >> bits(my.t->_is_extreme_hazard);
@@ -376,7 +378,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_torch {};               */ in >> bits(my.t->_is_torch);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};            */ in >> bits(my.t->_is_treasure);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};                */ in >> bits(my.t->_is_wall);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_water {};               */ in >> bits(my.t->_is_water);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_water {};           */ in >> bits(my.t->_is_gfx_water);
 
     /* all_thing_ids_at */      in >> bits(l->all_thing_ids_at);
     /* cursor_at */             in >> bits(l->cursor_at);

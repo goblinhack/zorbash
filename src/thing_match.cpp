@@ -504,9 +504,6 @@ bool Thing::match (const std::string& what)
     if (is_wall_deco() && (what == "is_wall_deco")) {
         return true;
     }
-    if (is_water() && (what == "is_water")) {
-        return true;
-    }
     if (is_water_lover() && (what == "is_water_lover")) {
         return true;
     }

@@ -52,7 +52,7 @@ void Thing::move_carried_items (void)
     //
     if (is_monst() || is_player()) {
         if (!is_floating()) {
-            if (level->is_water((int)mid_at.x, (int)mid_at.y) &&
+            if (level->is_shallow_water((int)mid_at.x, (int)mid_at.y) &&
                 !level->is_ripple((int)mid_at.x, (int)mid_at.y)) {
                 fpoint at(mid_at.x, mid_at.y);
                 log("Causes ripples");

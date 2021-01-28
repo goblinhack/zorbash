@@ -11,40 +11,40 @@ class Charmap;
 class Charmap {
 public:
     enum {
-        BLOOD           = 'b',
-        BRAZIER         = 'B',
-        CHASM           = 'C',
-        CORRIDOR        = '#',
-        DEBUG           = '@',
-        DECO            = '|',
-        DEEP_WATER      = 'W',
-        DIRT            = ',',
-        DOOR            = 'D',
-        DOOR_DOWN       = 'v',
-        DOOR_LEFT       = '<',
-        DOOR_RIGHT      = '>',
-        DOOR_UP         = '^',
-        ENTRANCE        = 'S',
-        EXIT            = 'E',
-        FLOOR           = '.',
-        FOOD            = 'f',
-        GENERATOR       = '%',
-        GOLD            = 'g',
+        BLOOD            = 'b',
+        BRAZIER          = 'B',
+        CHASM            = 'C',
+        CORRIDOR         = '#',
+        DEBUG            = '@',
+        DECO             = '|',
+        DEEP_WATER       = 'W',
+        DIRT             = ',',
+        DOOR             = 'D',
+        DOOR_DOWN        = 'v',
+        DOOR_LEFT        = '<',
+        DOOR_RIGHT       = '>',
+        DOOR_UP          = '^',
+        ENTRANCE         = 'S',
+        EXIT             = 'E',
+        FLOOR            = '.',
+        FOOD             = 'f',
+        GENERATOR        = '%',
+        GOLD             = 'g',
+        KEY              = 'k',
+        LAVA             = 'L',
+        MONST            = 'm',
+        NONE             = '\0',
+        POTION           = '!',
+        ROCK             = 'r',
+        SECRET_CORRIDOR  = '?',
+        SECRET_DOOR      = 's',
+        SPACE            = ' ',
+        TRAP             = 't',
         TREASURE_CLASS_A = '$',
         TREASURE_CLASS_B = '2',
         TREASURE_CLASS_C = '3',
-        KEY             = 'k',
-        LAVA            = 'L',
-        MONST           = 'm',
-        NONE            = '\0',
-        POTION          = '!',
-        ROCK            = 'r',
-        SECRET_CORRIDOR = '?',
-        SECRET_DOOR     = 's',
-        SPACE           = ' ',
-        TRAP            = 't',
-        WALL            = 'x',
-        WATER           = 'w',
+        WALL             = 'x',
+        SHALLOW_WATER    = 'w',
     };
 
     char                      c;
@@ -59,23 +59,23 @@ public:
     bool                      is_floor             {false};
     bool                      is_floor_deco        {false};
     bool                      is_food              {false};
-    bool                      is_minion_generator         {false};
     bool                      is_gold              {false};
     bool                      is_key               {false};
     bool                      is_lava              {false};
+    bool                      is_minion_generator  {false};
     bool                      is_monst             {false};
-    bool                      is_treasure_class_a  {false};
-    bool                      is_treasure_class_b  {false};
-    bool                      is_treasure_class_c  {false};
     bool                      is_potion            {false};
     bool                      is_rock              {false};
     bool                      is_secret_corridor   {false};
     bool                      is_secret_door       {false};
+    bool                      is_shallow_water     {false};
     bool                      is_torch             {false};
     bool                      is_trap              {false};
+    bool                      is_treasure_class_a  {false};
+    bool                      is_treasure_class_b  {false};
+    bool                      is_treasure_class_c  {false};
     bool                      is_wall              {false};
     bool                      is_wall_deco         {false};
-    bool                      is_water             {false};
 
     static std::vector<Charmap> all_charmaps;
     static void init_charmaps(void);

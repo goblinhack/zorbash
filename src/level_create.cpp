@@ -149,7 +149,7 @@ void Level::create (point3d at, int seed)
         if (g_errored) { return; }
         place_deep_water(dungeon, "deep_water1");
         if (g_errored) { return; }
-        place_water(dungeon, "water1");
+        place_shallow_water(dungeon, "water1");
         if (g_errored) { return; }
 
         //
@@ -725,15 +725,15 @@ void Level::place_random_blood (Dungeonp d)
     }
 }
 
-void Level::place_water (Dungeonp d, const std::string &what)
+void Level::place_shallow_water (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (is_water(x, y)) {
+            if (is_shallow_water(x, y)) {
                 continue;
             }
 
-            if (!d->is_water(x, y)) {
+            if (!d->is_shallow_water(x, y)) {
                 continue;
             }
 

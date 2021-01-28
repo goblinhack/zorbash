@@ -155,7 +155,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
     auto target = monstp->wander_target;
 
     if (target != point(0, 0)) {
-        if (!level->is_water(target.x, target.y)) {
+        if (!level->is_shallow_water(target.x, target.y)) {
             //
             // Choose a new wander location
             //
@@ -183,7 +183,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
 
         while (tries--) {
             auto target = get_random_scent_target();
-            if (level->is_water(target)) {
+            if (level->is_shallow_water(target)) {
                 if (distance(start, target) < closest) {
                     best = target;
                     got_one = true;

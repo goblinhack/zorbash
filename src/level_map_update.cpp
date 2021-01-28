@@ -20,7 +20,7 @@ void Level::update_hazard_tile_map (void)
 
     for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
         for (auto x = 2; x < MAP_WIDTH - 2; x++) {
-            if (is_water(x, y) || is_deep_water(x, y)) {
+            if (is_shallow_water(x, y) || is_deep_water(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
                         incr(water_tile_map, x+dx, y+dy, (uint8_t)1);
@@ -54,12 +54,12 @@ void Level::update_water_next_to_lava (void)
 {
     for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
         for (auto x = 2; x < MAP_WIDTH - 2; x++) {
-            if (is_water(x, y) || is_deep_water(x, y)) {
+            if (is_shallow_water(x, y) || is_deep_water(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
                         if (is_lava(x + dx, y + dy)) {
                             FOR_ALL_THINGS(this, t, x, y) {
-                                if (t->is_water()) {
+                                if (t->is_shallow_water()) {
                                     t->dead("Next to lava");
                                     if (!is_smoke(x, y)) {
                                         auto smoke = thing_new("smoke", fpoint(x, y));
@@ -82,11 +82,11 @@ void Level::update_things_next_to_a_chasm (void)
             //
             // Things on the edge of a chasm fall in
             //
-            if (is_water(x, y) || is_lava(x, y)) {
+            if (is_shallow_water(x, y) || is_deep_water(x, y) || is_lava(x, y)) {
                 for (auto dx = -1; dx <= 1; dx++) {
                     for (auto dy = -1; dy <= 1; dy++) {
                         if (is_chasm(x + dx, y + dy)) {
-                            bool place_water = false;
+                            bool place_shallow_water = false;
 
                             FOR_ALL_THINGS(this, t, x, y) {
                                 if (t->is_falling) {
@@ -98,16 +98,16 @@ void Level::update_things_next_to_a_chasm (void)
                                 // regular water
                                 //
                                 if (t->is_deep_water()) {
-                                    place_water = true;
+                                    place_shallow_water = true;
                                 }
 
-                                if (t->is_water() || t->is_lava()) {
+                                if (t->is_shallow_water() || t->is_deep_water() || t->is_lava()) {
                                     t->log("Over a chasm");
                                     t->fall(1, 750);
                                 }
                             } FOR_ALL_THINGS_END()
 
-                            if (place_water) {
+                            if (place_shallow_water) {
                                 thing_new("water1", fpoint(x, y));
                             }
                         }
@@ -126,18 +126,46 @@ void Level::update_deep_water (void)
             // Deep water must be surrounded by water
             //
             if (is_deep_water(x, y)) {
+                if (g_opt_debug2) {
+                    if (is_shallow_water(x, y)) {
+                        FOR_ALL_THINGS(this, t, x, y) {
+                            t->log("This thing");
+                        } FOR_ALL_THINGS_END()
+                        DIE("Deep and shallow water at same location %d,%d", x, y);
+                    }
+                }
+
                 int nebs = 0;
                 for (auto dx = -1; dx <= 1; dx++) {
                     for (auto dy = -1; dy <= 1; dy++) {
-                        nebs += is_water(x + dx, y + dy) ? 1 : 0;
+                        //
+                        // Deep water next to a wall is ok
+                        //
+                        if (is_wall(x, y) || is_rock(x, y)) {
+                            nebs ++;
+                        } else {
+                            nebs += is_shallow_water(x + dx, y + dy) ? 1 : 0;
+                            nebs += is_deep_water(x + dx, y + dy) ? 1 : 0;
+                        }
                     }
                 }
+
                 if (nebs < 9) {
+                    bool removed_deep_water = false;
+
                     FOR_ALL_THINGS(this, t, x, y) {
                         if (t->is_deep_water()) {
                             t->dead("Too shallow");
+                            removed_deep_water = true;
                         }
                     } FOR_ALL_THINGS_END()
+
+                    //
+                    // Replace with shallow water
+                    //
+                    if (removed_deep_water) {
+                        thing_new("water1", fpoint(x, y));
+                    }
 
                     if (g_opt_debug2) {
                         if (is_deep_water(x, y)) {

@@ -121,10 +121,10 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_chasm             = true;
 
-    char_index              = Charmap::WATER;
+    char_index              = Charmap::SHALLOW_WATER;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_water             = true;
+    c->is_shallow_water     = true;
 
     char_index              = Charmap::DEEP_WATER;
     c = &all_charmaps[char_index];

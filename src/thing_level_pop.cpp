@@ -37,6 +37,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_corpse(mx, my); }
     if (i_set_is_corridor)                             { i_set_is_corridor = false;
                                                          level->unset_is_corridor(mx, my); }
+    if (i_set_is_shallow_water)                        { i_set_is_shallow_water = false;
+                                                         level->unset_is_shallow_water(mx, my); }
     if (i_set_is_deep_water)                           { i_set_is_deep_water = false;
                                                          level->unset_is_deep_water(mx, my); }
     if (i_set_is_dirt)                                 { i_set_is_dirt = false;
@@ -95,8 +97,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_treasure(mx, my); }
     if (i_set_is_wall)                                 { i_set_is_wall = false;
                                                          level->unset_is_wall(mx, my); }
-    if (i_set_is_water)                                { i_set_is_water = false;
-                                                         level->unset_is_water(mx, my); }
+    if (i_set_is_gfx_water)                            { i_set_is_gfx_water = false;
+                                                         level->unset_is_gfx_water(mx, my); }
     level->remove_thing(last_attached.x, last_attached.y, id);
 
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }

@@ -13,7 +13,7 @@
 
 bool Tp::will_avoid_threat (Levelp level, point p) const
 {_
-    if (level->is_water(p)) {
+    if (level->is_shallow_water(p) || level->is_deep_water(p)) {
         if (avoids_water()) {
             return true;
         }
@@ -42,7 +42,7 @@ bool Tp::will_avoid_threat (Levelp level, point p) const
 
 bool Thing::will_avoid_threat (const point &p)
 {_
-    if (level->is_water(p)) {
+    if (level->is_shallow_water(p) || level->is_deep_water(p)) {
         if (avoids_water()) {
             return true;
         }
@@ -92,7 +92,7 @@ bool Thing::will_avoid_threat (const Thingp itp)
     auto it = itp->tp();
 
     if (me->avoids_water()) {
-        if (it->is_water()) {
+        if (it->is_shallow_water() || it->is_deep_water()) {
             return true;
         }
     }
