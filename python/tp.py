@@ -256,8 +256,8 @@ class Tp:
     def set_is_rrr23(self, value):
         zx.tp_set_is_rrr23(self, value)
 
-    def set_is_rrr24(self, value):
-        zx.tp_set_is_rrr24(self, value)
+    def set_is_burnable(self, value):
+        zx.tp_set_is_burnable(self, value)
 
     def set_is_shallow_water(self, value):
         zx.tp_set_is_shallow_water(self, value)

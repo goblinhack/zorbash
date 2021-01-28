@@ -336,7 +336,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr23() && (what == "is_rrr23")) {
         return true;
     }
-    if (is_rrr24() && (what == "is_rrr24")) {
+    if (is_burnable() && (what == "is_burnable")) {
         return true;
     }
     if (is_shallow_water() && (what == "is_shallow_water")) {

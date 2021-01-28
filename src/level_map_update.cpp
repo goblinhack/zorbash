@@ -126,13 +126,12 @@ void Level::update_deep_water (void)
             // Deep water must be surrounded by water
             //
             if (is_deep_water(x, y)) {
-                if (g_opt_debug2) {
-                    if (is_shallow_water(x, y)) {
-                        FOR_ALL_THINGS(this, t, x, y) {
-                            t->log("This thing");
-                        } FOR_ALL_THINGS_END()
-                        DIE("Deep and shallow water at same location %d,%d", x, y);
-                    }
+                if (is_shallow_water(x, y)) {
+                    FOR_ALL_THINGS(this, t, x, y) {
+                        if (t->is_shallow_water()) {
+                            t->dead("Reduce water depth");
+                        }
+                    } FOR_ALL_THINGS_END()
                 }
 
                 int nebs = 0;

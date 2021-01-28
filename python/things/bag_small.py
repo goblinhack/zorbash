@@ -14,6 +14,7 @@ def tp_init(name, text_name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(True)
     x.set_is_bag(True)
+    x.set_is_burnable(True)
     x.set_is_collectable(True)
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)

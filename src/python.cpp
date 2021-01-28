@@ -686,7 +686,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr21)
     TP_SET_DECL(is_rrr22)
     TP_SET_DECL(is_rrr23)
-    TP_SET_DECL(is_rrr24)
+    TP_SET_DECL(is_burnable)
     TP_SET_DECL(is_shallow_water)
     TP_SET_DECL(minion_limit)
     TP_SET_DECL(is_living)
