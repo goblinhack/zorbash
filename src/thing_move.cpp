@@ -68,7 +68,7 @@ bool Thing::move (fpoint future_pos)
 
 bool Thing::move_no_shove (fpoint future_pos)
 {
-    log("Move, no shove to %f,%f", future_pos.x, future_pos.y);
+    log("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
     bool up     = future_pos.y < mid_at.y;
     bool down   = future_pos.y > mid_at.y;
     bool left   = future_pos.x < mid_at.x;
@@ -329,7 +329,7 @@ void Thing::update_interpolated_position (void)
 
 void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
 {_
-    log("Update pos");
+    log("Update pos to %f,%f", to.x, to.y);
 
     auto tpp = tp();
     point new_at((int)to.x, (int)to.y);
@@ -377,7 +377,7 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
         return;
     }
 
-    log("Move to %f,%f", mid_at.x, mid_at.y);
+    log("Move to %f,%f", to.x, to.y);
     level_pop();
     mid_at = to;
     level_push();

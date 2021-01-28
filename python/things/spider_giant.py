@@ -34,6 +34,7 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("4d10+4")
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
+    x.set_is_burnable(True)
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_food_eater(True)

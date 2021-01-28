@@ -16,9 +16,6 @@
 
 Thing::~Thing_ (void)
 {_
-    if (g_opt_debug2) {
-        log("Destructor");
-    }
     verify(this);
     destroy();
     oldptr(this);
@@ -29,7 +26,9 @@ void Thing::destroy (void)
     verify(this);
 
     if (g_opt_debug2) {
-        log("destroy");
+        if (is_loggable_for_important_stuff()) {
+            log("destroy");
+        }
     }
 
     if (is_being_destroyed) {

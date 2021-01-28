@@ -21,6 +21,7 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("10d10")
     x.set_is_able_to_fall(False)
     x.set_is_always_hit(True)
+    x.set_is_burnable(True)
     x.set_is_combustible(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_door(True)

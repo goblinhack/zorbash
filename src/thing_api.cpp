@@ -604,9 +604,9 @@ int Thing::is_rrr23(void) const
     return (tp()->is_rrr23());
 }
 
-int Thing::is_rrr24(void) const
+int Thing::is_burnable(void) const
 {_
-    return (tp()->is_rrr24());
+    return (tp()->is_burnable());
 }
 
 int Thing::is_shallow_water(void) const

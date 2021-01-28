@@ -19,9 +19,20 @@ bool Thing::cursor_path_pop_next_and_move (void)
     if (monstp && monstp->move_path.size()) {
         auto to = monstp->move_path[0];
         auto future_pos = fpoint(to.x, to.y);
+
         FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) {
             t->dead("end of life");
         } FOR_ALL_THINGS_END()
+
+	//
+	// Just in case the cursor next hop ends up too far away
+	// for a single move, then reset it.
+	//
+        if ((fabs(to.x - mid_at.x) > 1) || (fabs(to.x - mid_at.x) > 1)) {
+	    cursor_path_stop();
+	    return false;
+        }
+
         monstp->move_path.erase(monstp->move_path.begin());
         if (move_no_shove(future_pos)) {
             return true;

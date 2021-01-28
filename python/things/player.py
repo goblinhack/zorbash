@@ -30,6 +30,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
     x.set_is_bleeder(True)
+    x.set_is_burnable(True)
     x.set_is_combustible(True)
     x.set_is_humanoid(True)
     x.set_is_interesting(True)

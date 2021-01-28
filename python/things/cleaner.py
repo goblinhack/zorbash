@@ -36,6 +36,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_acid(True)
     x.set_is_acid_lover(True)
     x.set_is_active(True)
+    x.set_is_burnable(True)
     x.set_is_combustible(True)
     x.set_is_critical_to_level(True)
     x.set_is_described_when_hovering_over(True)

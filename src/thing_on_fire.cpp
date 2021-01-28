@@ -31,6 +31,10 @@ void Thing::unset_on_fire (void)
 
 bool Thing::set_on_fire (const std::string &why)
 {_
+    if (!is_burnable()) {
+        return false;
+    }
+
     if (get_on_fire_anim_id().ok()) {
         return false;
     }
