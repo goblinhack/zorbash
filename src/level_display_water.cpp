@@ -117,12 +117,12 @@ void Level::display_water (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (likely(!is_water(x, y))) {
+            if (likely(!is_gfx_water(x, y))) {
                 continue;
             }
             FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                 auto tpp = t->tp();
-                if (!tpp->is_water()) {
+                if (!tpp->is_gfx_water()) {
                     continue;
                 }
                 t->blit(fbo);

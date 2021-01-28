@@ -282,7 +282,7 @@ private:
     int _is_usable {};
     int _is_wall {};
     int _is_wall_deco {};
-    int _is_water {};
+    int _is_gfx_water {};
     int _is_water_lover {};
     int _avoids_water {};
     int _is_weapon {};
@@ -648,7 +648,7 @@ public:
     int is_usable(void) const;
     int is_wall(void) const;
     int is_wall_deco(void) const;
-    int is_water(void) const;
+    int is_gfx_water(void) const;
     int is_water_lover(void) const;
     int avoids_water(void) const;
     int is_weapon(void) const;
@@ -887,7 +887,7 @@ public:
     void set_is_usable(int);
     void set_is_wall(int);
     void set_is_wall_deco(int);
-    void set_is_water(int);
+    void set_is_gfx_water(int);
     void set_is_water_lover(int);
     void set_avoids_water(int);
     void set_is_weapon(int);

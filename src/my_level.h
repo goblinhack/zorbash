@@ -29,6 +29,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
@@ -56,7 +57,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_torch {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_water {};
 
     //
     // When this Level was made. Used to restore timestamps relative to this.
@@ -746,38 +747,38 @@ public:
         decr(_is_blood, x, y, (uint8_t)1);
     }
 
-    uint8_t is_water (const point &p)
+    uint8_t is_gfx_water (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_water, p.x, p.y));
+        return (get(_is_gfx_water, p.x, p.y));
     }
 
-    uint8_t is_water (const int x, const int y)
+    uint8_t is_gfx_water (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_water, x, y));
+        return (get(_is_gfx_water, x, y));
     }
 
-    void set_is_water (const int x, const int y)
+    void set_is_gfx_water (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
         map_changed = true;
-        incr(_is_water, x, y, (uint8_t)1);
+        incr(_is_gfx_water, x, y, (uint8_t)1);
     }
 
-    void unset_is_water (const int x, const int y)
+    void unset_is_gfx_water (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
         map_changed = true;
-        decr(_is_water, x, y, (uint8_t)1);
+        decr(_is_gfx_water, x, y, (uint8_t)1);
     }
 
     uint8_t is_deep_water (const point &p)
@@ -812,6 +813,40 @@ public:
         }
         map_changed = true;
         decr(_is_deep_water, x, y, (uint8_t)1);
+    }
+
+    uint8_t is_shallow_water (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_shallow_water, p.x, p.y));
+    }
+
+    uint8_t is_shallow_water (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_shallow_water, x, y));
+    }
+
+    void set_is_shallow_water (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        map_changed = true;
+        incr(_is_shallow_water, x, y, (uint8_t)1);
+    }
+
+    void unset_is_shallow_water (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        map_changed = true;
+        decr(_is_shallow_water, x, y, (uint8_t)1);
     }
 
     uint8_t is_wall (const point &p)
@@ -1898,7 +1933,7 @@ public:
     void place_the_grid(Dungeonp d);
     void place_wall_deco(Dungeonp d);
     void place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
-    void place_water(Dungeonp d, const std::string &what);
+    void place_shallow_water(Dungeonp d, const std::string &what);
     void things_gc(bool force);
     void things_gc_force(void);
     void things_gc_if_possible(void);

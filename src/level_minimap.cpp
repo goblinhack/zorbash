@@ -72,8 +72,10 @@ void Level::update_minimap (void)
                     } else {
                         c = GRAY20;
                     }
-                } else if (is_water(x, y)) {
+                } else if (is_shallow_water(x, y)) {
                     c = BLUE2;
+                } else if (is_deep_water(x, y)) {
+                    c = BLUE3;
                 } else if (is_dirt(x, y)) {
                     c = GRAY20;
                 } else {
@@ -168,8 +170,10 @@ void Level::update_minimap (void)
                     } else {
                         c = GRAY10;
                     }
-                } else if (is_water(x, y)) {
+                } else if (is_shallow_water(x, y)) {
                     c = BLUE2;
+                } else if (is_deep_water(x, y)) {
+                    c = BLUE3;
                 } else if (is_dirt(x, y)) {
                     c = GRAY20;
                 } else if (edge_of_sceen) {

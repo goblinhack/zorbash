@@ -237,6 +237,7 @@ public:
     uint64_t i_set_is_corpse:1                 {};
     uint64_t i_set_is_corridor:1               {};
     uint64_t i_set_is_deep_water:1             {};
+    uint64_t i_set_is_shallow_water:1          {};
     uint64_t i_set_is_dirt:1                   {};
     uint64_t i_set_is_door:1                   {};
     uint64_t i_set_is_entrance:1               {};
@@ -265,7 +266,7 @@ public:
     uint64_t i_set_is_torch:1                  {};
     uint64_t i_set_is_treasure:1               {};
     uint64_t i_set_is_wall:1                   {};
-    uint64_t i_set_is_water:1                  {};
+    uint64_t i_set_is_gfx_water:1              {};
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -1205,7 +1206,7 @@ public:
     int is_used_when_thrown(void) const;
     int is_wall(void) const;
     int is_wall_deco(void) const;
-    int is_water(void) const;
+    int is_gfx_water(void) const;
     int is_water_lover(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;

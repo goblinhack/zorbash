@@ -31,7 +31,7 @@ void Thing::level_push (void)
 
     if (is_acid())                               { i_set_is_acid = true;
                                                    level->set_is_acid(mx, my); }
-    if (is_poison())                              { i_set_is_poison = true;
+    if (is_poison())                             { i_set_is_poison = true;
                                                    level->set_is_poison(mx, my); }
     if (is_blood())                              { i_set_is_blood = true;
                                                    level->set_is_blood(mx, my); }
@@ -41,10 +41,6 @@ void Thing::level_push (void)
                                                    level->set_is_corpse(mx, my); }
     if (is_corridor())                           { i_set_is_corridor = true;
                                                    level->set_is_corridor(mx, my); }
-    if (is_deep_water())                         { i_set_is_deep_water = true;
-                                                   level->set_is_deep_water(mx, my); }
-    if (is_deep_water())                         { i_set_is_water = true;
-                                                   level->set_is_water(mx, my); }
     if (is_dirt())                               { i_set_is_dirt = true;
                                                    level->set_is_dirt(mx, my); }
     if (is_door() && !is_open)                   { i_set_is_door = true;
@@ -101,8 +97,24 @@ void Thing::level_push (void)
                                                    level->set_is_treasure(mx, my); }
     if (is_wall())                               { i_set_is_wall = true;
                                                    level->set_is_wall(mx, my); }
-    if (is_water())                              { i_set_is_water = true;
-                                                   level->set_is_water(mx, my); }
+    if (is_shallow_water() || is_deep_water()) {
+        i_set_is_gfx_water = true;
+        level->set_is_gfx_water(mx, my);
+    }
+
+    if (is_shallow_water()) {
+        if (!is_falling) {
+            i_set_is_shallow_water = true;
+            level->set_is_shallow_water(mx, my);
+        }
+    }
+
+    if (is_deep_water()) { 
+        if (!is_falling) {
+            i_set_is_deep_water = true;
+            level->set_is_deep_water(mx, my);
+        }
+    }
 
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }
 

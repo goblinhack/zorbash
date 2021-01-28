@@ -115,8 +115,8 @@ public:
     bool is_wall(const int x, const int y);
     bool is_wall_deco_at(const int x, const int y);
     bool is_wall_no_check(const int x, const int y);
-    bool is_water(const int x, const int y);
-    bool is_water_no_check(const int x, const int y);
+    bool is_shallow_water(const int x, const int y);
+    bool is_shallow_water_no_check(const int x, const int y);
     bool room_is_a_candidate(const Node *n, Roomp r);
     bool room_is_a_candidate_less_restrictive(const Node *n, Roomp r);
     bool rooms_move_closer_together(void);

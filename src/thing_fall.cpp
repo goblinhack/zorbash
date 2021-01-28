@@ -233,7 +233,7 @@ _
                     MINICON("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
                 }
                 fall_damage /= 4;
-            } else if (next_level->is_water(new_pos)) {
+            } else if (next_level->is_shallow_water(new_pos)) {
                 if (is_player()) {
                     MINICON("%%fg=yellow$The water lessens the fall!%%fg=reset$");
                 }

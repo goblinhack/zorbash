@@ -40,7 +40,7 @@ bool Thing::will_prefer_terrain (const Thingp itp)
     auto it = itp->tp();
 
     if (me->is_water_lover()) {
-        if (it->is_water() || it->is_deep_water()) {
+        if (it->is_shallow_water() || it->is_deep_water()) {
             return true;
         }
     }

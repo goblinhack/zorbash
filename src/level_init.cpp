@@ -22,6 +22,7 @@ void Level::clear (void)
     _is_corpse = {};
     _is_corridor = {};
     _is_deep_water = {};
+    _is_shallow_water = {};
     _is_dirt = {};
     _is_door = {};
     _is_dungeon = {};
@@ -47,7 +48,7 @@ void Level::clear (void)
     _is_visited = {};
     _is_lit = {};
     _is_wall = {};
-    _is_water = {};
+    _is_gfx_water = {};
 
     timestamp_dungeon_created = time_get_time_ms();
     timestamp_dungeon_saved = 0;

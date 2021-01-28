@@ -265,7 +265,7 @@ bool Thing::try_to_jump (point to)
     //
     if (is_monst() || is_player()) {
         if (!is_floating()) {
-            if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
+            if (level->is_shallow_water((int)mid_at.x, (int)mid_at.y)) {
                 fpoint at(mid_at.x, mid_at.y);
                 log("Causes ripples");
                 if (random_range(0, 1000) > 500) {

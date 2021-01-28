@@ -100,7 +100,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     if (avoids_water()) {
-        if (real_hitter->is_water()) {
+        if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
             if (damage_doubled_from_water()) {
                 damage *= 2;
                 log("Double damage from water");
