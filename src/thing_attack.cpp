@@ -16,7 +16,17 @@ bool Thing::possible_to_attack (const Thingp it)
 {_
     auto me = tp();
 
+    log("Is possible to attack %s?", it->to_string().c_str());
+_
     auto owner = get_top_owner();
+
+    if (owner && owner->is_player()) {
+        if (it->attackable_by_player()) {
+            log("Owned by player");
+        } else {
+            log("Owned by player; not attackable by player");
+        }
+    }
 
     if (is_monst() && it->attackable_by_monst()) {
         // continue
@@ -24,8 +34,8 @@ bool Thing::possible_to_attack (const Thingp it)
         // continue
     } else if (owner && owner->is_player() && it->attackable_by_player()) {
         // continue
-    } else if (!it->attackable()) {
-        if (g_opt_debug3) {
+    } else {
+        if (g_opt_debug2) {
             log("Cannot attack %s", it->to_string().c_str());
         }
         return false;
@@ -146,7 +156,7 @@ bool Thing::possible_to_attack (const Thingp it)
                 return true;
             } else {
                 if (!it->attackable_by_player()) {
-                    log("Cannot weapon attack %s, not attackable",
+                    log("Cannot weapon attack %s, not attackable by player",
                         it->to_string().c_str());
                     return false;
                 }

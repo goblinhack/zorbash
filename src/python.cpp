@@ -696,7 +696,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_described_when_hovering_over)
     TP_SET_DECL(is_always_hit)
     TP_SET_DECL(is_fearless)
-    TP_SET_DECL(attackable)
     TP_SET_DECL(is_able_to_see_through_doors)
     TP_SET_DECL(is_able_to_walk_through_walls)
     TP_SET_DECL(is_humanoid)

@@ -649,9 +649,9 @@ int Thing::is_fearless(void) const
     return (tp()->is_fearless());
 }
 
-int Thing::attackable(void) const
+int Thing::attackable_by_player(void) const
 {_
-    return (tp()->attackable());
+    return (tp()->attackable_by_player());
 }
 
 int Thing::is_able_to_see_through_doors(void) const
@@ -835,11 +835,6 @@ int Thing::is_weapon_wielder(void) const
 int Thing::is_item(void) const
 {_
     return (tp()->is_item());
-}
-
-int Thing::attackable_by_player(void) const
-{_
-    return (tp()->attackable_by_player());
 }
 
 int Thing::is_item_eater(void) const

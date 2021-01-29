@@ -366,9 +366,6 @@ bool Thing::match (const std::string& what)
     if (is_fearless() && (what == "is_fearless")) {
         return true;
     }
-    if (attackable() && (what == "attackable")) {
-        return true;
-    }
     if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) {
         return true;
     }
