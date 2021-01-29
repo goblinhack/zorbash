@@ -5,7 +5,7 @@ import tp
 def tp_init(name, text_name, short_text_name, title):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_attack_shove(True)
-    x.set_attackable(True)
+    x.set_attackable_by_monst(True)
     x.set_avoids_acid(True)
     x.set_avoids_fire(100)
     x.set_avoids_poison(True) # x.set_is_poison_immune(True) for some odd creature

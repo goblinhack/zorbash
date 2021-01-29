@@ -678,14 +678,17 @@ bool things_overlap (const Thingp A, const Thingp B)
         if (circle_circle_collision(A, // circle
                                     B, // box
                                     nullptr)) {
+            LOG("%s %s (test1) overlaps", A->to_string().c_str(), B->to_string().c_str());
             return true;
         }
+        LOG("%s %s (test2) no overlaps", A->to_string().c_str(), B->to_string().c_str());
         return false;
     }
 
 #if 0
     return (things_tile_overlap(A, B));
 #endif
+    LOG("%s %s (test3) no overlaps", A->to_string().c_str(), B->to_string().c_str());
     return false;
 }
 
@@ -741,6 +744,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
                                     B, // box
                                     B->mid_at,
                                     nullptr)) {
+            LOG("%s %s (test4) overlaps", A->to_string().c_str(), B->to_string().c_str());
             return true;
         }
 
@@ -752,6 +756,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
                                     B, // box
                                     B->get_interpolated_mid_at(),
                                     nullptr)) {
+            LOG("%s %s (test5) overlaps", A->to_string().c_str(), B->to_string().c_str());
             return true;
         }
     }
@@ -759,6 +764,10 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
 #if 0
     return (things_tile_overlap(A, A_at, B));
 #endif
+    LOG("%s %s (test6) A %f %f B %f %f B interp %f %f", A->to_string().c_str(), B->to_string().c_str(),
+        A_at.x, A_at.y,
+        B->mid_at.x, B->mid_at.y,
+        B->get_interpolated_mid_at().x, B->get_interpolated_mid_at().y);
     return false;
 }
 
@@ -771,6 +780,7 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
                                            B, // box
                                            B->mid_at,
                                            nullptr)) {
+            LOG("%s %s (test7) overlaps", A->to_string().c_str(), B->to_string().c_str());
             return true;
         }
         if (circle_circle_collision_attack(A, // circle
@@ -778,6 +788,7 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
                                            B, // box
                                            B->get_interpolated_mid_at(),
                                            nullptr)) {
+            LOG("%s %s (test8) overlaps", A->to_string().c_str(), B->to_string().c_str());
             return true;
         }
         if (circle_circle_collision_attack(A, // circle
@@ -785,10 +796,12 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
                                            B, // box
                                            B->get_interpolated_mid_at(),
                                            nullptr)) {
+            LOG("%s %s (test9) overlaps", A->to_string().c_str(), B->to_string().c_str());
             return true;
         }
     }
 
+    LOG("%s %s (test10) no overlaps", A->to_string().c_str(), B->to_string().c_str());
     return false;
 }
 
@@ -1026,7 +1039,7 @@ _
             log("Yes; can eat and overlaps");
             return true;
         } else {
-            log("Yes; no can eat but no overlap");
+            log("Yes; can eat but no overlap");
         }
     } else {
         if (things_overlap(me, A_at, it)) {

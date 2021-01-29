@@ -219,7 +219,6 @@ int Tp::is_rrr3(void) const { return _is_rrr3; }
 int Tp::is_described_when_hovering_over(void) const { return _is_described_when_hovering_over; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
 int Tp::is_fearless(void) const { return _is_fearless; }
-int Tp::attackable(void) const { return _attackable; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
 int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
 int Tp::is_humanoid(void) const { return _is_humanoid; }
@@ -359,7 +358,6 @@ void Tp::set_attack_lunge(int v) { _attack_lunge = v; }
 void Tp::set_attack_shove(int v) { _attack_shove = v; }
 void Tp::set_attack_shove_chance_d1000(int v) { _attack_shove_chance_d1000 = v; }
 void Tp::set_attackable_by_monst(int v) { _attackable_by_monst = v; }
-void Tp::set_attackable_by_player(int v) { _attackable_by_player = v; }
 void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
@@ -461,7 +459,7 @@ void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
 void Tp::set_is_described_when_hovering_over(int v) { _is_described_when_hovering_over = v; }
 void Tp::set_is_always_hit(int v) { _is_always_hit = v; }
 void Tp::set_is_fearless(int v) { _is_fearless = v; }
-void Tp::set_attackable(int v) { _attackable = v; }
+void Tp::set_attackable_by_player(int v) { _attackable_by_player = v; }
 void Tp::set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
 void Tp::set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
 void Tp::set_is_humanoid(int v) { _is_humanoid = v; }

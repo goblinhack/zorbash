@@ -283,9 +283,6 @@ class Tp:
     def set_is_fearless(self, value):
         zx.tp_set_is_fearless(self, value)
 
-    def set_attackable(self, value):
-        zx.tp_set_attackable(self, value)
-
     def set_is_able_to_see_through_doors(self, value):
         zx.tp_set_is_able_to_see_through_doors(self, value)
 

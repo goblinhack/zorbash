@@ -4,6 +4,11 @@ import tp
 
 def init_swing(name):
     x = tp.Tp(name)
+    x.set_collision_attack(True)
+    x.set_collision_check(True)
+    x.set_collision_circle(True)
+    x.set_collision_hit_priority(10)
+    x.set_collision_radius(0.40)
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_animated_can_vflip(True)
@@ -81,11 +86,6 @@ def init_weapon(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_bag_item_height(4)
     x.set_bag_item_width(4)
-    x.set_collision_attack(True)
-    x.set_collision_check(True)
-    x.set_collision_circle(True)
-    x.set_collision_hit_priority(10)
-    x.set_collision_radius(0.40)
     x.set_damage_melee_dice("3d6+1")
     x.set_gfx_anim_attack("scythe_swing")
     x.set_gfx_animated(True)

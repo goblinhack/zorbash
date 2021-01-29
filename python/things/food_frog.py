@@ -4,7 +4,8 @@ import tp
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
-    x.set_attackable(True)
+    x.set_attackable_by_player(True)
+    x.set_attackable_by_monst(True)
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
     x.set_collision_circle(True)

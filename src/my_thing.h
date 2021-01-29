@@ -1016,9 +1016,8 @@ public:
     int attack_meat(void) const;
     int attack_shove(void) const;
     int attack_shove_chance_d1000(void) const;
-    int attackable(void) const;
-    int attackable_by_monst(void) const;
     int attackable_by_player(void) const;
+    int attackable_by_monst(void) const;
     int avoids_acid(void) const;
     int avoids_fire(void) const;
     int avoids_poison(void) const;

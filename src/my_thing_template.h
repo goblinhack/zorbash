@@ -232,7 +232,6 @@ private:
     int _is_described_when_hovering_over {};
     int _is_always_hit {};
     int _is_fearless {};
-    int _attackable {};
     int _is_able_to_see_through_doors {};
     int _is_able_to_walk_through_walls {};
     int _is_humanoid {};
@@ -589,7 +588,6 @@ public:
     int is_described_when_hovering_over(void) const;
     int is_always_hit(void) const;
     int is_fearless(void) const;
-    int attackable(void) const;
     int is_able_to_see_through_doors(void) const;
     int is_able_to_walk_through_walls(void) const;
     int is_humanoid(void) const;
@@ -828,7 +826,6 @@ public:
     void set_is_described_when_hovering_over(int);
     void set_is_always_hit(int);
     void set_is_fearless(int);
-    void set_attackable(int);
     void set_is_able_to_see_through_doors(int);
     void set_is_able_to_walk_through_walls(int);
     void set_is_humanoid(int);
