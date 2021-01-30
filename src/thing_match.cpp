@@ -54,10 +54,10 @@ bool Thing::match (const std::string& what)
     if (attack_shove_chance_d1000() && (what == "attack_shove_chance_d1000")) {
         return true;
     }
-    if (attackable_by_monst() && (what == "attackable_by_monst")) {
+    if (is_attackable_by_monst() && (what == "is_attackable_by_monst")) {
         return true;
     }
-    if (attackable_by_player() && (what == "attackable_by_player")) {
+    if (is_attackable_by_player() && (what == "is_attackable_by_player")) {
         return true;
     }
     if (is_bag() && (what == "is_bag")) {
@@ -498,7 +498,7 @@ bool Thing::match (const std::string& what)
     if (is_wall() && (what == "is_wall")) {
         return true;
     }
-    if (is_wall_deco() && (what == "is_wall_deco")) {
+    if (is_sewer_entrance() && (what == "is_sewer_entrance")) {
         return true;
     }
     if (is_water_lover() && (what == "is_water_lover")) {

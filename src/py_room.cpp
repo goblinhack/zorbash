@@ -145,7 +145,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_secret_door ||
                     m.is_door) {
                     walls_string += c;
-                } else if (m.is_wall_deco) {
+                } else if (m.is_sewer_entrance) {
                     walls_string += Charmap::WALL;
                 } else {
                     walls_string += Charmap::SPACE;
@@ -166,7 +166,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_potion       ||
                     m.is_torch        ||
                     m.is_trap         ||
-                    m.is_wall_deco) {
+                    m.is_sewer_entrance) {
                     obj_strings += c;
                 } else {
                     obj_strings += Charmap::SPACE;

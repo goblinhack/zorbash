@@ -127,8 +127,8 @@ private:
     int _attack_lunge {};
     int _attack_shove {};
     int _attack_shove_chance_d1000 {};
-    int _attackable_by_monst {};
-    int _attackable_by_player {};
+    int _is_attackable_by_monst {};
+    int _is_attackable_by_player {};
     int _is_bag {};
     int _is_bleeder {};
     int _is_blood {};
@@ -280,7 +280,7 @@ private:
     int _is_undead {};
     int _is_usable {};
     int _is_wall {};
-    int _is_wall_deco {};
+    int _is_sewer_entrance {};
     int _is_gfx_water {};
     int _is_water_lover {};
     int _avoids_water {};
@@ -484,8 +484,8 @@ public:
     int attack_lunge(void) const;
     int attack_shove(void) const;
     int attack_shove_chance_d1000(void) const;
-    int attackable_by_monst(void) const;
-    int attackable_by_player(void) const;
+    int is_attackable_by_monst(void) const;
+    int is_attackable_by_player(void) const;
     int is_bag(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
@@ -645,7 +645,7 @@ public:
     int is_undead(void) const;
     int is_usable(void) const;
     int is_wall(void) const;
-    int is_wall_deco(void) const;
+    int is_sewer_entrance(void) const;
     int is_gfx_water(void) const;
     int is_water_lover(void) const;
     int avoids_water(void) const;
@@ -721,8 +721,8 @@ public:
     void set_attack_lunge(int);
     void set_attack_shove(int);
     void set_attack_shove_chance_d1000(int);
-    void set_attackable_by_monst(int);
-    void set_attackable_by_player(int);
+    void set_is_attackable_by_monst(int);
+    void set_is_attackable_by_player(int);
     void set_is_bag(int);
     void set_is_bleeder(int);
     void set_is_blood(int);
@@ -883,7 +883,7 @@ public:
     void set_is_undead(int);
     void set_is_usable(int);
     void set_is_wall(int);
-    void set_is_wall_deco(int);
+    void set_is_sewer_entrance(int);
     void set_is_gfx_water(int);
     void set_is_water_lover(int);
     void set_avoids_water(int);
@@ -974,7 +974,7 @@ Tpp tp_random_secret_door(void);
 Tpp tp_random_torch(void);
 Tpp tp_random_treasure(void);
 Tpp tp_random_wall(void);
-Tpp tp_random_wall_deco(void);
+Tpp tp_random_sewer_entrance(void);
 uint8_t tp_init(void);
 void tp_fini(void);
 void tp_init_after_loading(void);

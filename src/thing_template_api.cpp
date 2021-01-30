@@ -116,8 +116,8 @@ int Tp::attack_eater(void) const { return _attack_eater; }
 int Tp::attack_lunge(void) const { return _attack_lunge; }
 int Tp::attack_shove(void) const { return _attack_shove; }
 int Tp::attack_shove_chance_d1000(void) const { return _attack_shove_chance_d1000; }
-int Tp::attackable_by_monst(void) const { return _attackable_by_monst; }
-int Tp::attackable_by_player(void) const { return _attackable_by_player; }
+int Tp::is_attackable_by_monst(void) const { return _is_attackable_by_monst; }
+int Tp::is_attackable_by_player(void) const { return _is_attackable_by_player; }
 int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
@@ -277,7 +277,7 @@ int Tp::is_treasure_eater(void) const { return _is_treasure_eater; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_wall(void) const { return _is_wall; }
-int Tp::is_wall_deco(void) const { return _is_wall_deco; }
+int Tp::is_sewer_entrance(void) const { return _is_sewer_entrance; }
 int Tp::is_gfx_water(void) const { return _is_gfx_water; }
 int Tp::is_water_lover(void) const { return _is_water_lover; }
 int Tp::avoids_water(void) const { return _avoids_water; }
@@ -357,7 +357,7 @@ void Tp::set_attack_eater(int v) { _attack_eater = v; }
 void Tp::set_attack_lunge(int v) { _attack_lunge = v; }
 void Tp::set_attack_shove(int v) { _attack_shove = v; }
 void Tp::set_attack_shove_chance_d1000(int v) { _attack_shove_chance_d1000 = v; }
-void Tp::set_attackable_by_monst(int v) { _attackable_by_monst = v; }
+void Tp::set_is_attackable_by_monst(int v) { _is_attackable_by_monst = v; }
 void Tp::set_is_bag(int v) { _is_bag = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
@@ -459,7 +459,7 @@ void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
 void Tp::set_is_described_when_hovering_over(int v) { _is_described_when_hovering_over = v; }
 void Tp::set_is_always_hit(int v) { _is_always_hit = v; }
 void Tp::set_is_fearless(int v) { _is_fearless = v; }
-void Tp::set_attackable_by_player(int v) { _attackable_by_player = v; }
+void Tp::set_is_attackable_by_player(int v) { _is_attackable_by_player = v; }
 void Tp::set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
 void Tp::set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
 void Tp::set_is_humanoid(int v) { _is_humanoid = v; }
@@ -518,7 +518,7 @@ void Tp::set_is_treasure_eater(int v) { _is_treasure_eater = v; }
 void Tp::set_is_undead(int v) { _is_undead = v; }
 void Tp::set_is_usable(int v) { _is_usable = v; }
 void Tp::set_is_wall(int v) { _is_wall = v; }
-void Tp::set_is_wall_deco(int v) { _is_wall_deco = v; }
+void Tp::set_is_sewer_entrance(int v) { _is_sewer_entrance = v; }
 void Tp::set_is_gfx_water(int v) { _is_gfx_water = v; }
 void Tp::set_is_water_lover(int v) { _is_water_lover = v; }
 void Tp::set_avoids_water(int v) { _avoids_water = v; }

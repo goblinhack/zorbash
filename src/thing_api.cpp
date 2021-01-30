@@ -279,9 +279,9 @@ int Thing::is_floor_deco(void) const
     return (tp()->is_floor_deco());
 }
 
-int Thing::is_wall_deco(void) const
+int Thing::is_sewer_entrance(void) const
 {_
-    return (tp()->is_wall_deco());
+    return (tp()->is_sewer_entrance());
 }
 
 int Thing::gfx_weapon_carry_anim(void) const
@@ -339,9 +339,9 @@ int Thing::is_active(void) const
     return (tp()->is_active());
 }
 
-int Thing::attackable_by_monst(void) const
+int Thing::is_attackable_by_monst(void) const
 {_
-    return (tp()->attackable_by_monst());
+    return (tp()->is_attackable_by_monst());
 }
 
 int Thing::is_bleeder(void) const
@@ -649,9 +649,9 @@ int Thing::is_fearless(void) const
     return (tp()->is_fearless());
 }
 
-int Thing::attackable_by_player(void) const
+int Thing::is_attackable_by_player(void) const
 {_
-    return (tp()->attackable_by_player());
+    return (tp()->is_attackable_by_player());
 }
 
 int Thing::is_able_to_see_through_doors(void) const

@@ -707,7 +707,7 @@ bool Dungeon::is_floor_deco_at (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_wall_deco_at (const int x, const int y)
+bool Dungeon::is_sewer_entrance_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -717,7 +717,7 @@ bool Dungeon::is_wall_deco_at (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_wall_deco) {
+        if (v.is_sewer_entrance) {
             return true;
         }
     }
