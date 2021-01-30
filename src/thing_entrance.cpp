@@ -78,7 +78,7 @@ bool Thing::ascend (void)
         return false;
     }
 
-    auto next_level = level->world_at + point3d(0, 0, -1);
+    auto next_level = level->world_at + point3d(0, 0, -2);
     game->init_level(next_level);
 
     if (is_player()) {

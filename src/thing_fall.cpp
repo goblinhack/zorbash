@@ -108,7 +108,7 @@ bool Thing::fall_to_next_level (void)
 
     log("Try to fall");
 _
-    auto where_to = level->world_at + point3d(0, 0, 1);
+    auto where_to = level->world_at + point3d(0, 0, 2);
     game->init_level(where_to);
     if (is_player()) {
         game->current_level = where_to;
