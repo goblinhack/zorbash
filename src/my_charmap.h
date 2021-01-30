@@ -75,7 +75,7 @@ public:
     bool                      is_treasure_class_b  {false};
     bool                      is_treasure_class_c  {false};
     bool                      is_wall              {false};
-    bool                      is_wall_deco         {false};
+    bool                      is_sewer_entrance         {false};
 
     static std::vector<Charmap> all_charmaps;
     static void init_charmaps(void);

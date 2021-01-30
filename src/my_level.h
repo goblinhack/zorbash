@@ -275,8 +275,8 @@ public:
                 if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \
                 if (!t->is_interesting() &&                         \
-                    !t->attackable_by_monst() &&                    \
-                    !t->attackable_by_player() &&                   \
+                    !t->is_attackable_by_monst() &&                    \
+                    !t->is_attackable_by_player() &&                   \
                     !t->ai_obstacle()) {                            \
                     continue;                                       \
                 }                                                   \
@@ -1931,7 +1931,7 @@ public:
     void place_remaining_walls(Dungeonp d, const std::string &what);
     void place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void place_the_grid(Dungeonp d);
-    void place_wall_deco(Dungeonp d);
+    void place_sewer_entrance(Dungeonp d);
     void place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void place_shallow_water(Dungeonp d, const std::string &what);
     void things_gc(bool force);

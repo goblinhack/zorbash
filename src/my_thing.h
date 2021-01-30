@@ -1016,8 +1016,8 @@ public:
     int attack_meat(void) const;
     int attack_shove(void) const;
     int attack_shove_chance_d1000(void) const;
-    int attackable_by_player(void) const;
-    int attackable_by_monst(void) const;
+    int is_attackable_by_player(void) const;
+    int is_attackable_by_monst(void) const;
     int avoids_acid(void) const;
     int avoids_fire(void) const;
     int avoids_poison(void) const;
@@ -1204,7 +1204,7 @@ public:
     int is_used_automatically_when_selected(void) const;
     int is_used_when_thrown(void) const;
     int is_wall(void) const;
-    int is_wall_deco(void) const;
+    int is_sewer_entrance(void) const;
     int is_gfx_water(void) const;
     int is_water_lover(void) const;
     int is_weapon(void) const;

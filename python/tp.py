@@ -118,8 +118,8 @@ class Tp:
     def set_is_floor_deco(self, value):
         zx.tp_set_is_floor_deco(self, value)
 
-    def set_is_wall_deco(self, value):
-        zx.tp_set_is_wall_deco(self, value)
+    def set_is_sewer_entrance(self, value):
+        zx.tp_set_is_sewer_entrance(self, value)
 
     def set_is_player(self, value):
         zx.tp_set_is_player(self, value)
@@ -388,8 +388,8 @@ class Tp:
     def set_is_item(self, value):
         zx.tp_set_is_item(self, value)
 
-    def set_attackable_by_player(self, value):
-        zx.tp_set_attackable_by_player(self, value)
+    def set_is_attackable_by_player(self, value):
+        zx.tp_set_is_attackable_by_player(self, value)
 
     def set_is_treasure_class_b(self, value):
         zx.tp_set_is_treasure_class_b(self, value)
@@ -655,8 +655,8 @@ class Tp:
     def set_ai_obstacle(self, value):
         zx.tp_set_ai_obstacle(self, value)
 
-    def set_attackable_by_monst(self, value):
-        zx.tp_set_attackable_by_monst(self, value)
+    def set_is_attackable_by_monst(self, value):
+        zx.tp_set_is_attackable_by_monst(self, value)
 
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)

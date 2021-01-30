@@ -10,7 +10,7 @@ def tp_init(name, text_name):
     x.set_ai_scent_distance(10)
     x.set_attack_humanoid(True)
     x.set_attack_lunge(True)
-    x.set_attackable_by_player(True)
+    x.set_is_attackable_by_player(True)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)

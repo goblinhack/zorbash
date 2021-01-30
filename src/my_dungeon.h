@@ -113,7 +113,7 @@ public:
     bool is_torch(const int x, const int y);
     bool is_treasure(const int x, const int y);
     bool is_wall(const int x, const int y);
-    bool is_wall_deco_at(const int x, const int y);
+    bool is_sewer_entrance_at(const int x, const int y);
     bool is_wall_no_check(const int x, const int y);
     bool is_shallow_water(const int x, const int y);
     bool is_shallow_water_no_check(const int x, const int y);

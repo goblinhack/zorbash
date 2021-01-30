@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-    x.set_attackable_by_player(True)
+    x.set_is_attackable_by_player(True)
     x.set_avoids_fire(100)
     x.set_collision_attack(True)
     x.set_collision_check(True)

@@ -21,18 +21,18 @@ _
     auto owner = get_top_owner();
 
     if (owner && owner->is_player()) {
-        if (it->attackable_by_player()) {
+        if (it->is_attackable_by_player()) {
             log("Owned by player");
         } else {
-            log("Owned by player; not attackable by player");
+            log("Owned by player; not is_attackable by player");
         }
     }
 
-    if (is_monst() && it->attackable_by_monst()) {
+    if (is_monst() && it->is_attackable_by_monst()) {
         // continue
-    } else if (is_player() && it->attackable_by_player()) {
+    } else if (is_player() && it->is_attackable_by_player()) {
         // continue
-    } else if (owner && owner->is_player() && it->attackable_by_player()) {
+    } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
         // continue
     } else {
         if (g_opt_debug2) {
@@ -89,8 +89,8 @@ _
         }
 
         if (me->is_meat_eater() || me->attack_meat()) {
-            if (!it->attackable_by_monst()) {
-                log("No, cannot attack %s, not attackable by meat eating monst",
+            if (!it->is_attackable_by_monst()) {
+                log("No, cannot attack %s, not is_attackable by meat eating monst",
                     it->to_string().c_str());
                 return false;
             }
@@ -115,8 +115,8 @@ _
         }
 
         if (me->is_food_eater()) {
-            if (!it->attackable_by_monst()) {
-                log("No, cannot attack %s, not attackable by food eating monst",
+            if (!it->is_attackable_by_monst()) {
+                log("No, cannot attack %s, not is_attackable by food eating monst",
                     it->to_string().c_str());
                 return false;
             }
@@ -133,8 +133,8 @@ _
         // Else if it is a weapon, the weapon will attack
         //
         if (!weapon_get()) {
-            if (!it->attackable_by_player()) {
-                log("No, cannot attack %s, not attackable", it->to_string().c_str());
+            if (!it->is_attackable_by_player()) {
+                log("No, cannot attack %s, not is_attackable", it->to_string().c_str());
                 return false;
             }
             log("Can attack %s", it->to_string().c_str());
@@ -146,17 +146,17 @@ _
         auto o = get_immediate_owner();
         if (o) {
             if (o->is_monst()) {
-                if (!it->attackable_by_monst()) {
+                if (!it->is_attackable_by_monst()) {
                     // Too noisy
-                    // log("Cannot weapon attack %s, not attackable by monst",
+                    // log("Cannot weapon attack %s, not is_attackable by monst",
                     //     it->to_string().c_str());
                     return false;
                 }
                 log("Can attack %s", it->to_string().c_str());
                 return true;
             } else {
-                if (!it->attackable_by_player()) {
-                    log("Cannot weapon attack %s, not attackable by player",
+                if (!it->is_attackable_by_player()) {
+                    log("Cannot weapon attack %s, not is_attackable by player",
                         it->to_string().c_str());
                     return false;
                 }

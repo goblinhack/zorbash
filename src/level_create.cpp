@@ -210,7 +210,7 @@ placed_player:
         if (g_errored) { return; }
         place_random_floor_deco(dungeon);
         if (g_errored) { return; }
-        place_wall_deco(dungeon);
+        place_sewer_entrance(dungeon);
         if (g_errored) { return; }
         game_mark_dungeon_tiles(dungeon);
         if (g_errored) { return; }
@@ -586,19 +586,19 @@ void Level::place_normal_placement_rules (Dungeonp d)
             //
             mysrand(seed + x + (y * MAP_WIDTH));
 
-            if (d->is_blood(x, y))        { tp = tp_random_blood(); }
-            if (d->is_door(x, y))         { tp = tp_random_door(); }
-            if (d->is_entrance(x, y))     { tp = tp_random_entrance(); }
-            if (d->is_exit(x, y))         { tp = tp_random_exit(); }
-            if (d->is_food(x, y))         { tp = tp_random_food(); }
-            if (d->is_gold(x, y))         { tp = tp_random_gold(); }
-            if (d->is_key(x, y))          { tp = tp_random_key(); }
-            if (d->is_potion(x, y))       { tp = tp_random_potion(); }
-            if (d->is_monst(x, y))        { tp = tp_random_monst(); }
-            if (d->is_secret_door(x, y))  { tp = tp_random_secret_door(); }
-            if (d->is_minion_generator(x, y))    { tp = tp_random_generator(); }
-            if (d->is_torch(x, y))        { tp = tp_random_torch(); }
-            if (d->is_treasure(x, y))     { tp = tp_random_treasure(); }
+            if (d->is_blood(x, y))            { tp = tp_random_blood(); }
+            if (d->is_door(x, y))             { tp = tp_random_door(); }
+            if (d->is_entrance(x, y))         { tp = tp_random_entrance(); }
+            if (d->is_exit(x, y))             { tp = tp_random_exit(); }
+            if (d->is_food(x, y))             { tp = tp_random_food(); }
+            if (d->is_gold(x, y))             { tp = tp_random_gold(); }
+            if (d->is_key(x, y))              { tp = tp_random_key(); }
+            if (d->is_potion(x, y))           { tp = tp_random_potion(); }
+            if (d->is_monst(x, y))            { tp = tp_random_monst(); }
+            if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
+            if (d->is_minion_generator(x, y)) { tp = tp_random_generator(); }
+            if (d->is_torch(x, y))            { tp = tp_random_torch(); }
+            if (d->is_treasure(x, y))         { tp = tp_random_treasure(); }
             if (d->is_treasure_class_a(x, y)) { tp = tp_random_item_class_a(); }
             if (d->is_treasure_class_b(x, y)) { tp = tp_random_item_class_b(); }
             if (d->is_treasure_class_c(x, y)) { tp = tp_random_item_class_c(); }
@@ -812,19 +812,19 @@ void Level::place_random_floor_deco (Dungeonp d)
                 continue;
             }
 
-            if (d->is_food(x, y)         ||
-                d->is_blood(x, y)        ||
-                d->is_door(x, y)         ||
-                d->is_entrance(x, y)     ||
-                d->is_exit(x, y)         ||
-                d->is_minion_generator(x, y)    ||
-                d->is_key(x, y)          ||
-                d->is_potion(x, y)       ||
-                d->is_secret_door(x, y)  ||
-                d->is_treasure(x, y)     ||
-                d->is_treasure_class_a(x, y) ||
-                d->is_treasure_class_b(x, y) ||
-                d->is_treasure_class_c(x, y) ||
+            if (d->is_food(x, y)              ||
+                d->is_blood(x, y)             ||
+                d->is_door(x, y)              ||
+                d->is_entrance(x, y)          ||
+                d->is_exit(x, y)              ||
+                d->is_minion_generator(x, y)  ||
+                d->is_key(x, y)               ||
+                d->is_potion(x, y)            ||
+                d->is_secret_door(x, y)       ||
+                d->is_treasure(x, y)          ||
+                d->is_treasure_class_a(x, y)  ||
+                d->is_treasure_class_b(x, y)  ||
+                d->is_treasure_class_c(x, y)  ||
                 d->is_monst(x, y)) {
                 continue;
             }
@@ -869,7 +869,7 @@ void Level::place_random_floor_deco (Dungeonp d)
     }
 }
 
-void Level::place_wall_deco (Dungeonp d)
+void Level::place_sewer_entrance (Dungeonp d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -897,16 +897,19 @@ void Level::place_wall_deco (Dungeonp d)
             //
             mysrand(seed + x + (y * MAP_WIDTH));
 
-            auto tp = tp_random_wall_deco();
+            auto tp = tp_random_sewer_entrance();
             if (!tp) {
                 return;
             }
 
             thing_new(tp->name(), fpoint(x, y));
 
-            if (!d->is_wall(x, y)) {
-                tp = tp_random_wall();
-                thing_new(tp->name(), fpoint(x, y));
+            if (d->is_wall(x, y)) {
+                FOR_ALL_THINGS(this, t, x, y) {
+                    if (t->is_rock() || t->is_wall()) {
+                        t->dead("Replaced by sewer");
+                    }
+                } FOR_ALL_THINGS_END()
             }
         }
     }
