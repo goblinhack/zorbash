@@ -13,6 +13,7 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_gl.h"
+#include "my_random.h"
 
 void Thing::init_lights (void)
 {_

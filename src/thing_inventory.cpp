@@ -9,6 +9,7 @@
 #include "my_thing.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
+#include "my_random.h"
 
 void Thing::inventory_particle (Thingp what, uint32_t slot)
 {_

@@ -4,6 +4,7 @@
 //
 
 #include "my_main.h"
+#include "my_game.h"
 #include "my_depth.h"
 #include "my_gl.h"
 #include "my_tile.h"
@@ -13,8 +14,7 @@
 #include "my_string.h"
 #include "my_thing_template.h"
 #include "my_dmap.h"
-#include "my_main.h"
-#include "my_game.h"
+#include "my_random.h"
 
 std::map<std::string, class Tile* > all_tiles;
 std::vector<class Tile* > all_tiles_array;

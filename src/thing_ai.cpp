@@ -4,12 +4,12 @@
 //
 
 #include <algorithm>
-#include <set>
 #include "my_main.h"
 #include "my_level.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
+#include "my_random.h"
 
 void Thing::ai_get_next_hop (void)
 {_

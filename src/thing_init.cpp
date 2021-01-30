@@ -13,6 +13,7 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 #include "my_python.h"
+#include "my_random.h"
 
 Thingp Level::thing_new (const std::string& tp_name, Thingp owner)
 {_

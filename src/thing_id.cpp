@@ -10,6 +10,7 @@
 #include "my_color.h"
 #include "my_dmap.h"
 #include "my_thing.h"
+#include "my_random.h"
 
 Thingp World::test_thing_ptr (ThingId id)
 {_

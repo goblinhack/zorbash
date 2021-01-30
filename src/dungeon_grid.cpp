@@ -11,6 +11,7 @@
 #include "my_main.h"
 #include "my_dmap.h"
 #include "my_dungeon_grid.h"
+#include "my_random.h"
 
 static bool debug_enabled = false;
 

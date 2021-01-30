@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_thing.h"
+#include "my_random.h"
 
 void Level::update_hazard_tile_map (void)
 {

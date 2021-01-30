@@ -4,6 +4,7 @@
 //
 #include "my_main.h"
 #include "my_random_name.h"
+#include "my_random.h"
 
 static const char *dict1_names[] = {
     "alchemy",

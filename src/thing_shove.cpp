@@ -8,6 +8,7 @@
 #include "my_depth.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
+#include "my_random.h"
 
 ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 {_

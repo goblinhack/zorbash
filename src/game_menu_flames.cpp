@@ -10,6 +10,7 @@
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
 #include "my_gl.h"
+#include "my_random.h"
 
 std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg {};
 std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg2 {};

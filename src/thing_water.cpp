@@ -8,6 +8,7 @@
 #include "my_depth.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
+#include "my_random.h"
 
 void Thing::water_tick (void)
 {_

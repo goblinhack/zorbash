@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_thing.h"
 #include "my_level.h"
+#include "my_random.h"
 
 point Thing::get_random_scent_target (void)
 {

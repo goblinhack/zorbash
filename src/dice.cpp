@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_string.h"
 #include "my_dice.h"
+#include "my_random.h"
 
 int modifier_to_bonus (int modifier)
 {
