@@ -118,8 +118,8 @@ class Tp:
     def set_is_floor_deco(self, value):
         zx.tp_set_is_floor_deco(self, value)
 
-    def set_is_sewer_entrance(self, value):
-        zx.tp_set_is_sewer_entrance(self, value)
+    def set_is_sewer(self, value):
+        zx.tp_set_is_sewer(self, value)
 
     def set_is_player(self, value):
         zx.tp_set_is_player(self, value)

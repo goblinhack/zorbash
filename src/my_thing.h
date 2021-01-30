@@ -222,7 +222,8 @@ public:
     uint64_t is_starving:1             {};
     uint64_t is_tick_done:1            {}; // has moved/hit and finished its move
     uint64_t is_waiting_to_ascend:1    {};
-    uint64_t is_waiting_to_descend:1   {};
+    uint64_t is_waiting_to_descend_to_next_level:1 {};
+    uint64_t is_waiting_to_descend_to_sewer:1      {};
     uint64_t is_waiting_to_fall:1      {};
     uint64_t is_the_grid:1             {};
 
@@ -242,6 +243,7 @@ public:
     uint64_t i_set_is_door:1                   {};
     uint64_t i_set_is_entrance:1               {};
     uint64_t i_set_is_exit:1                   {};
+    uint64_t i_set_is_sewer:1                  {};
     uint64_t i_set_is_fire:1                   {};
     uint64_t i_set_is_floor:1                  {};
     uint64_t i_set_is_food:1                   {};
@@ -923,7 +925,8 @@ public:
     bool collision_obstacle(point);
     bool cursor_path_pop_first_move(void);
     bool cursor_path_pop_next_and_move(void);
-    bool descend(void);
+    bool descend_to_next_level(void);
+    bool descend_to_sewer(void);
     bool describe_when_hovering_over(void);
     bool describe_when_in_inventory(void);
     bool drop(Thingp w);
@@ -933,6 +936,7 @@ public:
     bool eat(Thingp it);
     bool entrance_tick();
     bool exit_tick();
+    bool sewer_tick();
     bool fall(void);
     bool fall_to_next_level(void);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
@@ -1204,7 +1208,7 @@ public:
     int is_used_automatically_when_selected(void) const;
     int is_used_when_thrown(void) const;
     int is_wall(void) const;
-    int is_sewer_entrance(void) const;
+    int is_sewer(void) const;
     int is_gfx_water(void) const;
     int is_water_lover(void) const;
     int is_weapon(void) const;

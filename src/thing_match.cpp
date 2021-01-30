@@ -498,7 +498,7 @@ bool Thing::match (const std::string& what)
     if (is_wall() && (what == "is_wall")) {
         return true;
     }
-    if (is_sewer_entrance() && (what == "is_sewer_entrance")) {
+    if (is_sewer() && (what == "is_sewer")) {
         return true;
     }
     if (is_water_lover() && (what == "is_water_lover")) {

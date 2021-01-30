@@ -158,9 +158,13 @@ static void wid_rightbar_create (void)
         auto w = wid_new_plain(wid_rightbar, "level no");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at - 1);
+
+        //
+        // Level nos are divided by 2 as we have sewer levels under each level
+        //
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
-        auto s = dynprintf("Level %u", level->world_at.z);
+        auto s = dynprintf("Level %u", (level->world_at.z + 1) / 2);
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);
         wid_set_shape_none(w);

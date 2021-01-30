@@ -19,7 +19,7 @@ bool Thing::entrance_tick (void)
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -59,7 +59,7 @@ bool Thing::ascend (void)
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;

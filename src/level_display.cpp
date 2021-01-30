@@ -393,8 +393,11 @@ void Level::display_map (void)
         if (player && player->is_waiting_to_ascend) {
             player->ascend();
         }
-        if (player && player->is_waiting_to_descend) {
-            player->descend();
+        if (player && player->is_waiting_to_descend_to_next_level) {
+            player->descend_to_next_level();
+        }
+        if (player && player->is_waiting_to_descend_to_sewer) {
+            player->descend_to_sewer();
         }
         if (player && player->is_waiting_to_fall) {
             player->fall_to_next_level();

@@ -189,7 +189,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_starving           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_tick_done          << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_to_next_level << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_to_sewer      << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_fall    << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_the_grid           << shift; shift++;
     if (shift >= (int)(sizeof(bits64) * 8)) {
@@ -211,6 +212,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_door                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_entrance               << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_exit                   << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_sewer                  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_fire                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_floor                  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_food                   << shift; shift++;
@@ -297,6 +299,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ out << bits(my.t->_is_dungeon);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};            */ out << bits(my.t->_is_entrance);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};                */ out << bits(my.t->_is_exit);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer {};               */ out << bits(my.t->_is_sewer);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};                */ out << bits(my.t->_is_fire);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};               */ out << bits(my.t->_is_floor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};                */ out << bits(my.t->_is_food);

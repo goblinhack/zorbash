@@ -210,7 +210,7 @@ placed_player:
         if (g_errored) { return; }
         place_random_floor_deco(dungeon);
         if (g_errored) { return; }
-        place_sewer_entrance(dungeon);
+        place_sewer(dungeon);
         if (g_errored) { return; }
         game_mark_dungeon_tiles(dungeon);
         if (g_errored) { return; }
@@ -590,6 +590,7 @@ void Level::place_normal_placement_rules (Dungeonp d)
             if (d->is_door(x, y))             { tp = tp_random_door(); }
             if (d->is_entrance(x, y))         { tp = tp_random_entrance(); }
             if (d->is_exit(x, y))             { tp = tp_random_exit(); }
+            if (d->is_sewer(x, y))            { tp = tp_random_sewer(); }
             if (d->is_food(x, y))             { tp = tp_random_food(); }
             if (d->is_gold(x, y))             { tp = tp_random_gold(); }
             if (d->is_key(x, y))              { tp = tp_random_key(); }
@@ -869,7 +870,7 @@ void Level::place_random_floor_deco (Dungeonp d)
     }
 }
 
-void Level::place_sewer_entrance (Dungeonp d)
+void Level::place_sewer (Dungeonp d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -897,7 +898,7 @@ void Level::place_sewer_entrance (Dungeonp d)
             //
             mysrand(seed + x + (y * MAP_WIDTH));
 
-            auto tp = tp_random_sewer_entrance();
+            auto tp = tp_random_sewer();
             if (!tp) {
                 return;
             }

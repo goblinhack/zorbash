@@ -35,6 +35,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
@@ -1461,6 +1462,38 @@ public:
         decr(_is_exit, x, y, (uint8_t)1);
     }
 
+    uint8_t is_sewer (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_sewer, p.x, p.y));
+    }
+
+    uint8_t is_sewer (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_sewer, x, y));
+    }
+
+    void set_is_sewer (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        incr(_is_sewer, x, y, (uint8_t)1);
+    }
+
+    void unset_is_sewer (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        decr(_is_sewer, x, y, (uint8_t)1);
+    }
+
     uint8_t is_smoke (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
@@ -1931,7 +1964,7 @@ public:
     void place_remaining_walls(Dungeonp d, const std::string &what);
     void place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void place_the_grid(Dungeonp d);
-    void place_sewer_entrance(Dungeonp d);
+    void place_sewer(Dungeonp d);
     void place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void place_shallow_water(Dungeonp d, const std::string &what);
     void things_gc(bool force);

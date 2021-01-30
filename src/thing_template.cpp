@@ -37,7 +37,7 @@ static Tpidmap tp_item_class_a;
 static Tpidmap tp_item_class_b;
 static Tpidmap tp_item_class_c;
 static Tpidmap tp_wall;
-static Tpidmap tp_sewer_entrance;
+static Tpidmap tp_sewer;
 
 static uint8_t tp_init_done;
 
@@ -139,7 +139,7 @@ void tp_init_after_loading (void)
         if (tp->is_torch())               { tp_torch.push_back(tp); }
         if (tp->is_treasure())            { tp_treasure.push_back(tp); }
         if (tp->is_wall())                { tp_wall.push_back(tp); }
-        if (tp->is_sewer_entrance())           { tp_sewer_entrance.push_back(tp); }
+        if (tp->is_sewer())           { tp_sewer.push_back(tp); }
 
         if (tp->stamina())                 {
             tp->set_is_stamina_check(true);
@@ -406,11 +406,11 @@ Tpp tp_random_deco (void)
     return tp_get_with_no_rarity_filter(tp_deco);
 }
 
-Tpp tp_random_sewer_entrance (void)
+Tpp tp_random_sewer (void)
 {_
-    if (unlikely(!tp_sewer_entrance.size())) {
-        ERR("No sewer_entrances found");
+    if (unlikely(!tp_sewer.size())) {
+        ERR("No sewers found");
         return (nullptr);
     }
-    return tp_get_with_no_rarity_filter(tp_sewer_entrance);
+    return tp_get_with_no_rarity_filter(tp_sewer);
 }
