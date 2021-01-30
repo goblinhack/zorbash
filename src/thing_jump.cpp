@@ -30,7 +30,7 @@ bool Thing::try_to_jump (point to)
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -134,6 +134,7 @@ bool Thing::try_to_jump (point to)
 
         if (level->is_entrance(x, y) ||
             level->is_monst(x, y)    ||
+            level->is_sewer(x, y)    ||
             level->is_exit(x, y)) {_
             log("No, jump failed, onto monst");
             if (is_player()) {
@@ -288,7 +289,7 @@ bool Thing::try_to_jump (void)
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -314,7 +315,7 @@ bool Thing::try_to_jump_towards_player (void)
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -356,7 +357,7 @@ bool Thing::try_to_jump_away_from_player (void)
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -391,7 +392,7 @@ bool Thing::try_harder_to_jump (void)
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;

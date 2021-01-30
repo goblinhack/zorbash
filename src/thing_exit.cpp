@@ -19,7 +19,8 @@ bool Thing::exit_tick (void)
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
+        is_waiting_to_descend_to_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -43,14 +44,14 @@ bool Thing::exit_tick (void)
 
     if (is_player()) {
         level->timestamp_fade_out_begin = time_get_time_ms_cached();
-        is_waiting_to_descend = true;
+        is_waiting_to_descend_to_next_level = true;
         return true;
     } else {
-        return descend();
+        return descend_to_next_level();
     }
 }
 
-bool Thing::descend (void)
+bool Thing::descend_to_next_level (void)
 {_
     if (is_changing_level ||
         is_hidden || 

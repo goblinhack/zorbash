@@ -35,7 +35,7 @@
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
 
 #define LEVELS_ACROSS              MAP_WIDTH // World size
-#define LEVELS_DEEP                32
+#define LEVELS_DEEP                52 // divided by 2 for sewer levels
 #define LEVELS_DOWN                MAP_HEIGHT
 #define LEVELS_MONST_COUNT         100
 #define LEVEL_FADE_IN_MS           800

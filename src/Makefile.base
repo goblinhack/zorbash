@@ -151,6 +151,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_entrance.o              \
     $(OBJDIR)/thing_escape.o                \
     $(OBJDIR)/thing_exit.o                  \
+    $(OBJDIR)/thing_sewer.o                 \
     $(OBJDIR)/thing_fadeup.o                \
     $(OBJDIR)/thing_fall.o                  \
     $(OBJDIR)/thing_fini.o                  \

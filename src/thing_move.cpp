@@ -99,7 +99,7 @@ bool Thing::move (fpoint future_pos,
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_jumping) { 
         return false;
     }

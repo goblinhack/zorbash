@@ -49,6 +49,8 @@ void Thing::level_push (void)
                                                    level->set_is_entrance(mx, my); }
     if (is_exit())                               { i_set_is_exit = true;
                                                    level->set_is_exit(mx, my); }
+    if (is_sewer())                              { i_set_is_sewer = true;
+                                                   level->set_is_sewer(mx, my); }
     if (is_fire() && !is_dead)                   { i_set_is_fire = true;
                                                    level->set_is_fire(mx, my); }
     if (is_floor())                              { i_set_is_floor = true;

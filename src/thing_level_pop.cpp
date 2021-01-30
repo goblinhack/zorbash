@@ -49,6 +49,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_entrance(mx, my); }
     if (i_set_is_exit)                                 { i_set_is_exit = false;
                                                          level->unset_is_exit(mx, my); }
+    if (i_set_is_sewer)                                { i_set_is_sewer = false;
+                                                         level->unset_is_sewer(mx, my); }
     if (i_set_is_fire)                                 { i_set_is_fire = false;
                                                          level->unset_is_fire(mx, my); }
     if (i_set_is_floor)                                { i_set_is_floor = false;

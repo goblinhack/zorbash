@@ -17,7 +17,7 @@ _
         is_hidden || 
         is_falling || 
         is_waiting_to_ascend || 
-        is_waiting_to_descend || 
+        is_waiting_to_descend_to_next_level || 
         is_waiting_to_fall || 
         is_jumping) { 
         log("No");
@@ -158,14 +158,15 @@ _
             continue;
         }
 
-        if (next_level->is_entrance(x, y)    ||
-            next_level->is_monst(x, y)       ||
-            next_level->is_rock(x, y)        ||
-            next_level->is_door(x, y)        ||
-            next_level->is_secret_door(x, y) ||
-            next_level->is_minion_generator(x, y)   ||
-            next_level->is_chasm(x, y)       ||
-            next_level->is_wall(x, y)        ||
+        if (next_level->is_entrance(x, y)         ||
+            next_level->is_monst(x, y)            ||
+            next_level->is_rock(x, y)             ||
+            next_level->is_door(x, y)             ||
+            next_level->is_secret_door(x, y)      ||
+            next_level->is_minion_generator(x, y) ||
+            next_level->is_chasm(x, y)            ||
+            next_level->is_wall(x, y)             ||
+            next_level->is_sewer(x, y)            ||
             next_level->is_exit(x, y)) {_
             log("No, special tile");
             continue;

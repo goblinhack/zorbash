@@ -280,7 +280,7 @@ private:
     int _is_undead {};
     int _is_usable {};
     int _is_wall {};
-    int _is_sewer_entrance {};
+    int _is_sewer {};
     int _is_gfx_water {};
     int _is_water_lover {};
     int _avoids_water {};
@@ -645,7 +645,7 @@ public:
     int is_undead(void) const;
     int is_usable(void) const;
     int is_wall(void) const;
-    int is_sewer_entrance(void) const;
+    int is_sewer(void) const;
     int is_gfx_water(void) const;
     int is_water_lover(void) const;
     int avoids_water(void) const;
@@ -883,7 +883,7 @@ public:
     void set_is_undead(int);
     void set_is_usable(int);
     void set_is_wall(int);
-    void set_is_sewer_entrance(int);
+    void set_is_sewer(int);
     void set_is_gfx_water(int);
     void set_is_water_lover(int);
     void set_avoids_water(int);
@@ -974,7 +974,7 @@ Tpp tp_random_secret_door(void);
 Tpp tp_random_torch(void);
 Tpp tp_random_treasure(void);
 Tpp tp_random_wall(void);
-Tpp tp_random_sewer_entrance(void);
+Tpp tp_random_sewer(void);
 uint8_t tp_init(void);
 void tp_fini(void);
 void tp_init_after_loading(void);
