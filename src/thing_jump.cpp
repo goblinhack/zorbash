@@ -31,6 +31,7 @@ bool Thing::try_to_jump (point to)
         is_falling || 
         is_waiting_to_ascend || 
         is_waiting_to_descend_to_next_level || 
+        is_waiting_to_descend_to_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -290,6 +291,7 @@ bool Thing::try_to_jump (void)
         is_falling || 
         is_waiting_to_ascend || 
         is_waiting_to_descend_to_next_level || 
+        is_waiting_to_descend_to_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -316,6 +318,7 @@ bool Thing::try_to_jump_towards_player (void)
         is_falling || 
         is_waiting_to_ascend || 
         is_waiting_to_descend_to_next_level || 
+        is_waiting_to_descend_to_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -358,6 +361,7 @@ bool Thing::try_to_jump_away_from_player (void)
         is_falling || 
         is_waiting_to_ascend || 
         is_waiting_to_descend_to_next_level || 
+        is_waiting_to_descend_to_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -393,6 +397,7 @@ bool Thing::try_harder_to_jump (void)
         is_falling || 
         is_waiting_to_ascend || 
         is_waiting_to_descend_to_next_level || 
+        is_waiting_to_descend_to_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;

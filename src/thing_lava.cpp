@@ -22,6 +22,7 @@ void Thing::lava_tick (void)
         is_falling || 
         is_waiting_to_ascend || 
         is_waiting_to_descend_to_next_level || 
+        is_waiting_to_descend_to_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         if (g_opt_debug3) {
