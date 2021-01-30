@@ -86,7 +86,7 @@ void Level::update_things_next_to_a_chasm (void)
                 for (auto dx = -1; dx <= 1; dx++) {
                     for (auto dy = -1; dy <= 1; dy++) {
                         if (is_chasm(x + dx, y + dy)) {
-                            bool place_shallow_water = false;
+                            bool create_dungeon_place_place_shallow_water = false;
 
                             FOR_ALL_THINGS(this, t, x, y) {
                                 if (t->is_falling) {
@@ -98,7 +98,7 @@ void Level::update_things_next_to_a_chasm (void)
                                 // regular water
                                 //
                                 if (t->is_deep_water()) {
-                                    place_shallow_water = true;
+                                    create_dungeon_place_place_shallow_water = true;
                                 }
 
                                 if (t->is_shallow_water() || t->is_deep_water() || t->is_lava()) {
@@ -107,7 +107,7 @@ void Level::update_things_next_to_a_chasm (void)
                                 }
                             } FOR_ALL_THINGS_END()
 
-                            if (place_shallow_water) {
+                            if (create_dungeon_place_place_shallow_water) {
                                 thing_new("water1", fpoint(x, y));
                             }
                         }
