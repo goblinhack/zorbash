@@ -26,6 +26,7 @@ bool Thing::achieve_goals_in_life (void)
         is_falling || 
         is_waiting_to_ascend || 
         is_waiting_to_descend_to_next_level || 
+        is_waiting_to_descend_to_sewer || 
         is_waiting_to_fall || 
         is_the_grid || 
         is_jumping) { 
