@@ -13,6 +13,7 @@
 #include "my_thing.h"
 #include "my_python.h"
 #include "my_log.h"
+#include "my_random.h"
 
 //
 // Lower level function than dead. Adds the thing to gc.

@@ -4,6 +4,7 @@
 //
 
 #include "my_thing.h"
+#include "my_random.h"
 
 #undef DEBUG_ANIM
 

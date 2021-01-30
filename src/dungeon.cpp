@@ -4,6 +4,7 @@
  */
 
 #include "my_dungeon.h"
+#include "my_random.h"
 
 //
 // The algorithm

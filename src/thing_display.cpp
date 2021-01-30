@@ -12,6 +12,7 @@
 #include "my_level.h"
 #include "my_tex.h"
 #include "my_gl.h"
+#include "my_random.h"
 
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                           const point &blit_tl,

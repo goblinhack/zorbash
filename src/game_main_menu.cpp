@@ -14,6 +14,7 @@
 #include "my_wid_inventory.h"
 #include "my_wid_thing_collect.h"
 #include "my_gl.h"
+#include "my_random.h"
 
 static WidPopup *game_main_menu_window;
 

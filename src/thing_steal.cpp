@@ -7,6 +7,7 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 #include "my_wid_rightbar.h"
+#include "my_random.h"
 
 bool Thing::steal_treasure_from (Thingp it)
 {_

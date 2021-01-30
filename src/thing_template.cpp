@@ -10,6 +10,7 @@
 #include "my_main.h"
 #include "my_tile.h"
 #include "my_dice.h"
+#include "my_random.h"
 
 Tpnamemap tp_name_map;
 Tpidmap tp_id_map;

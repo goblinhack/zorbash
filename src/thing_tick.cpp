@@ -11,6 +11,7 @@
 #include "my_wid_console.h"
 #include "my_thing.h"
 #include "my_python.h"
+#include "my_random.h"
 
 void Thing::update_tick (void)
 {

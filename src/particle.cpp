@@ -6,14 +6,15 @@
 #include <algorithm>
 #include <vector>
 #include <iterator>
+#include "my_main.h"
+#include "my_game.h"
 #include "my_particle.h"
 #include "my_level.h"
 #include "my_tile.h"
 #include "my_point.h"
 #include "my_gl.h"
 #include "my_thing.h"
-#include "my_main.h"
-#include "my_game.h"
+#include "my_random.h"
 
 void Level::new_internal_particle (
                           ThingId id,

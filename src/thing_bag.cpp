@@ -7,7 +7,6 @@
 
 #include "my_main.h"
 #include "my_sdl.h"
-#include "slre.h"
 #include "my_wid_bag.h"
 #include "my_ttf.h"
 #include "my_string.h"
@@ -18,6 +17,7 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_level.h"
+#include "my_random.h"
 
 static std::list<WidBag *> bags;
 

@@ -30,6 +30,7 @@ std::default_random_engine rng;
 #include "my_level_static.h"
 #include "my_gfx.h"
 #include "my_random_name.h"
+#include "my_random.h"
 
 static char **ARGV;
 

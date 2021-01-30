@@ -8,6 +8,7 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 #include "my_gl.h"
+#include "my_random.h"
 
 bool Thing::try_to_escape (void)
 {

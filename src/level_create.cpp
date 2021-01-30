@@ -7,6 +7,7 @@
 #include "my_game.h"
 #include "my_dungeon.h"
 #include "my_thing.h"
+#include "my_random.h"
 
 void Level::create (point3d at, int seed)
 {_
