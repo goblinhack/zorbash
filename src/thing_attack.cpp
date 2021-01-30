@@ -35,7 +35,7 @@ _
     } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
         // continue
     } else {
-        if (g_opt_debug2) {
+        if (g_opt_debug3) { // very noisy
             log("Cannot attack %s", it->to_string().c_str());
         }
         return false;
