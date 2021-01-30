@@ -547,7 +547,12 @@ log_info "VERSION (game)             : $VERSION"
 
 cd src
 
-echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O3 # AUTOGEN" > .Makefile
+if [[ $OPT_DEV != "" ]]; then
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 # AUTOGEN" > .Makefile
+else
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O3 # AUTOGEN" > .Makefile
+fi
+
 echo "    " >> .Makefile
 echo "CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++1z -stdlib=libc++ # AUTOGEN" >> .Makefile
 GCC_STACK_CHECK="-fstack-check -fstack-protector-all -D_FORTIFY_SOURCE=2"
@@ -617,7 +622,6 @@ case `uname` in
     *Darwin*)
         CORES=`/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g'`
     ;;
-
     *inux*)
         CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
     ;;
