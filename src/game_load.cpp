@@ -13,7 +13,6 @@
 #include "my_main.h"
 #include "my_game_error.h"
 #include "my_wid_rightbar.h"
-#include "my_thing.h"
 #include "my_alloc.h"
 #include "my_sprintf.h"
 #include "my_file.h"

@@ -4,9 +4,7 @@
 //
 
 #pragma once
-// REMOVED #include "my_main.h"
 #include "my_point.h"
-// REMOVED #include "my_size.h"
 
 void wid_botcon_fini(void);
 uint8_t wid_botcon_init(void);

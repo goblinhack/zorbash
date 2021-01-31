@@ -6,7 +6,6 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_wid_rightbar.h"
-#include "my_thing.h"
 #include "my_traceback.h"
 
 static void wid_rightbar_create(void);

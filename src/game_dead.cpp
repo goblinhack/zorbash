@@ -8,7 +8,6 @@
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
-#include "my_thing.h"
 #include "my_random.h"
 
 static WidPopup *wid_dead_window;

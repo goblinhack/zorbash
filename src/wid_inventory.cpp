@@ -9,7 +9,6 @@
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
 #include "my_wid_bag.h"
-#include "my_thing.h"
 
 static void wid_inventory_create(void);
 
