@@ -63,10 +63,10 @@ bool Thing::location_check (void)
     if (ascend_dungeon_tick()) {
         return false;
     }
-    if (ascend_sewer_tick()) {
+    if (descend_sewer_tick()) {
         return false;
     }
-    if (descend_sewer_tick()) {
+    if (ascend_sewer_tick()) {
         return false;
     }
 

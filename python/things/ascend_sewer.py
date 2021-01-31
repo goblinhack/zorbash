@@ -21,15 +21,15 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_ascend_sewer(True)
     x.set_light_color("lime")
-    x.set_long_text_description("A filthy sewer pipe. Watch out, they can spawn surprises. Don't fall in!")
     x.set_minion_limit(10)
+    x.set_long_text_description("A way out of these stinking sewers!")
     x.set_on_idle_dice("1d50+50:ascend_sewer.spawn()")
     x.set_text_a_or_an("a");
     x.set_text_description("A slime coated sewer pipe")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    delay = 2500
+    delay = 1000
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 
@@ -40,5 +40,4 @@ def init():
     tp_init(name="ascend_sewer2", tiles=[ "ascend_sewer2.1", "ascend_sewer2.2", ])
     tp_init(name="ascend_sewer3", tiles=[ "ascend_sewer3.1", "ascend_sewer3.2", ])
     tp_init(name="ascend_sewer4", tiles=[ "ascend_sewer4.1", "ascend_sewer4.2", ])
-    tp_init(name="ascend_sewer5", tiles=[ "ascend_sewer5.1", "ascend_sewer5.2", ])
 init()

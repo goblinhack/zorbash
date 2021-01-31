@@ -160,7 +160,7 @@ _
             continue;
         }
 
-        if (next_level->is_ascend_dungeon(x, y) ||
+        if (next_level->is_ascend_dungeon(x, y)   ||
             next_level->is_monst(x, y)            ||
             next_level->is_rock(x, y)             ||
             next_level->is_door(x, y)             ||
@@ -168,8 +168,8 @@ _
             next_level->is_minion_generator(x, y) ||
             next_level->is_chasm(x, y)            ||
             next_level->is_wall(x, y)             ||
-            next_level->is_ascend_sewer(x, y)   ||
-            next_level->is_descend_sewer(x, y)       ||
+            next_level->is_ascend_sewer(x, y)     ||
+            next_level->is_descend_sewer(x, y)    ||
             next_level->is_descend_dungeon(x, y)) {_
             log("No, special tile");
             continue;
