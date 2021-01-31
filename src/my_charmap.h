@@ -55,9 +55,9 @@ public:
     bool                      is_deep_water        {false};
     bool                      is_dirt              {false};
     bool                      is_door              {false};
-    bool                      is_ascend_dungeon  {false};
-    bool                      is_descend_dungeon      {false};
-    bool                      is_ascend_sewer    {false};
+    bool                      is_ascend_dungeon    {false};
+    bool                      is_descend_dungeon   {false};
+    bool                      is_descend_sewer     {false};
     bool                      is_floor             {false};
     bool                      is_floor_deco        {false};
     bool                      is_food              {false};

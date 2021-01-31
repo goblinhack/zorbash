@@ -221,10 +221,10 @@ public:
     uint64_t is_sleeping:1             {};
     uint64_t is_starving:1             {};
     uint64_t is_tick_done:1            {}; // has moved/hit and finished its move
-    uint64_t is_waiting_to_ascend_dungeon:1   {};
-    uint64_t is_waiting_to_descend_sewer:1     {};
+    uint64_t is_waiting_to_ascend_dungeon:1  {};
+    uint64_t is_waiting_to_descend_sewer:1   {};
     uint64_t is_waiting_to_descend_dungeon:1 {};
-    uint64_t is_waiting_to_ascend_sewer:1      {};
+    uint64_t is_waiting_to_ascend_sewer:1    {};
     uint64_t is_waiting_to_fall:1      {};
     uint64_t is_the_grid:1             {};
 
@@ -242,10 +242,10 @@ public:
     uint64_t i_set_is_shallow_water:1          {};
     uint64_t i_set_is_dirt:1                   {};
     uint64_t i_set_is_door:1                   {};
-    uint64_t i_set_is_ascend_dungeon:1       {};
-    uint64_t i_set_is_descend_dungeon:1           {};
-    uint64_t i_set_is_ascend_sewer:1         {};
-    uint64_t i_set_is_descend_sewer:1             {};
+    uint64_t i_set_is_ascend_dungeon:1         {};
+    uint64_t i_set_is_descend_dungeon:1        {};
+    uint64_t i_set_is_ascend_sewer:1           {};
+    uint64_t i_set_is_descend_sewer:1          {};
     uint64_t i_set_is_fire:1                   {};
     uint64_t i_set_is_floor:1                  {};
     uint64_t i_set_is_food:1                   {};
@@ -897,6 +897,7 @@ public:
     bool ai_on_fire_choose_target (point& nh);
     bool ai_wander(void);
     bool ascend_dungeon(void);
+    bool ascend(int z);
     bool descend_sewer(void);
     bool attack(Thingp it);
     bool attack(fpoint future_pos);

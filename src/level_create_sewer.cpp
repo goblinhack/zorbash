@@ -145,7 +145,7 @@ bool Level::create_sewer_pipes (point3d at)
 
     }
     for (auto sewer = 0U; sewer < sewers.size(); sewer++) {
-        (void) thing_new("descend_sewer1", sewers[sewer]);
+        (void) thing_new("ascend_sewer1", sewers[sewer]);
     }
 
     return true;
@@ -172,7 +172,7 @@ void Level::create_sewer_place_walls (int variant, int block_width, int block_he
 
                 if (is_corridor(X, Y) || 
                     is_shallow_water(X, Y) || 
-                    is_descend_sewer(X, Y) || 
+                    is_ascend_sewer(X, Y) || 
                     is_deep_water(X, Y)) {
                     can_place_here = false;
                     continue;
@@ -240,7 +240,7 @@ void Level::create_sewer_place_remaining_walls (const std::string &what)
 
             if (is_corridor(x, y) || 
                 is_shallow_water(x, y) || 
-                is_descend_sewer(x, y) || 
+                is_ascend_sewer(x, y) || 
                 is_deep_water(x, y)) {
                 continue;
             }
