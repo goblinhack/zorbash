@@ -30,4 +30,20 @@ def init():
             "corridor1.13", "corridor1.14", "corridor1.15", "corridor1.16",
             "corridor1.17", "corridor1.18", "corridor1.19",
         ])
+    tp_init(name="corridor2",
+        tiles=[
+            "corridor2.1", "corridor2.2", "corridor2.3", "corridor2.4",
+            "corridor2.5", "corridor2.6", "corridor2.7", "corridor2.8",
+            "corridor2.9", "corridor2.10", "corridor2.11", "corridor2.12",
+            "corridor2.13", "corridor2.14", "corridor2.15", "corridor2.16",
+            "corridor2.17", "corridor2.18", "corridor2.19",
+        ])
+    tp_init(name="corridor3",
+        tiles=[
+            "corridor3.1", "corridor3.2", "corridor3.3", "corridor3.4",
+            "corridor3.5", "corridor3.6", "corridor3.7", "corridor3.8",
+            "corridor3.9", "corridor3.10", "corridor3.11", "corridor3.12",
+            "corridor3.13", "corridor3.14", "corridor3.15", "corridor3.16",
+            "corridor3.17", "corridor3.18", "corridor3.19",
+        ])
 init()

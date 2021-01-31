@@ -211,7 +211,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_door                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_entrance               << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_exit                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_sewer                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_sewer_entrance         << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_sewer_exit             << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_fire                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_floor                  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_food                   << shift; shift++;
@@ -298,7 +299,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ out << bits(my.t->_is_dungeon);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};            */ out << bits(my.t->_is_entrance);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};                */ out << bits(my.t->_is_exit);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer {};               */ out << bits(my.t->_is_sewer);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer_entrance {};      */ out << bits(my.t->_is_sewer_entrance);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer_exit {};          */ out << bits(my.t->_is_sewer_exit);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};                */ out << bits(my.t->_is_fire);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};               */ out << bits(my.t->_is_floor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};                */ out << bits(my.t->_is_food);

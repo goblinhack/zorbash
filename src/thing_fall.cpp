@@ -167,7 +167,8 @@ _
             next_level->is_minion_generator(x, y) ||
             next_level->is_chasm(x, y)            ||
             next_level->is_wall(x, y)             ||
-            next_level->is_sewer(x, y)            ||
+            next_level->is_sewer_entrance(x, y)   ||
+            next_level->is_sewer_exit(x, y)       ||
             next_level->is_exit(x, y)) {_
             log("No, special tile");
             continue;

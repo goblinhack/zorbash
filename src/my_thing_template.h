@@ -219,7 +219,7 @@ private:
     int _is_rrr20 {};
     int _is_rrr21 {};
     int _is_rrr22 {};
-    int _is_rrr23 {};
+    int _is_sewer_exit {};
     int _is_burnable {};
     int _is_shallow_water {};
     int _minion_limit {};
@@ -278,7 +278,7 @@ private:
     int _is_undead {};
     int _is_usable {};
     int _is_wall {};
-    int _is_sewer {};
+    int _is_sewer_entrance {};
     int _is_gfx_water {};
     int _is_water_lover {};
     int _avoids_water {};
@@ -575,7 +575,7 @@ public:
     int is_rrr20(void) const;
     int is_rrr21(void) const;
     int is_rrr22(void) const;
-    int is_rrr23(void) const;
+    int is_sewer_exit(void) const;
     int is_burnable(void) const;
     int is_shallow_water(void) const;
     int minion_limit(void) const;
@@ -643,7 +643,7 @@ public:
     int is_undead(void) const;
     int is_usable(void) const;
     int is_wall(void) const;
-    int is_sewer(void) const;
+    int is_sewer_entrance(void) const;
     int is_gfx_water(void) const;
     int is_water_lover(void) const;
     int avoids_water(void) const;
@@ -813,7 +813,7 @@ public:
     void set_is_rrr20(int);
     void set_is_rrr21(int);
     void set_is_rrr22(int);
-    void set_is_rrr23(int);
+    void set_is_sewer_exit(int);
     void set_is_burnable(int);
     void set_is_shallow_water(int);
     void set_minion_limit(int);
@@ -881,7 +881,7 @@ public:
     void set_is_undead(int);
     void set_is_usable(int);
     void set_is_wall(int);
-    void set_is_sewer(int);
+    void set_is_sewer_entrance(int);
     void set_is_gfx_water(int);
     void set_is_water_lover(int);
     void set_avoids_water(int);
@@ -972,7 +972,7 @@ Tpp tp_random_secret_door(void);
 Tpp tp_random_torch(void);
 Tpp tp_random_treasure(void);
 Tpp tp_random_wall(void);
-Tpp tp_random_sewer(void);
+Tpp tp_random_sewer_entrance(void);
 uint8_t tp_init(void);
 void tp_fini(void);
 void tp_init_after_loading(void);

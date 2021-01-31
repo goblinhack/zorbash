@@ -28,7 +28,8 @@ void Level::clear (void)
     _is_dungeon = {};
     _is_entrance = {};
     _is_exit = {};
-    _is_sewer = {};
+    _is_sewer_entrance = {};
+    _is_sewer_exit = {};
     _is_fire = {};
     _is_floor = {};
     _is_food = {};

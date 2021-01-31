@@ -35,7 +35,8 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer_entrance {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer_exit {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
@@ -1462,36 +1463,68 @@ public:
         decr(_is_exit, x, y, (uint8_t)1);
     }
 
-    uint8_t is_sewer (const point &p)
+    uint8_t is_sewer_entrance (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_sewer, p.x, p.y));
+        return (get(_is_sewer_entrance, p.x, p.y));
     }
 
-    uint8_t is_sewer (const int x, const int y)
+    uint8_t is_sewer_entrance (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_sewer, x, y));
+        return (get(_is_sewer_entrance, x, y));
     }
 
-    void set_is_sewer (const int x, const int y)
+    void set_is_sewer_entrance (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        incr(_is_sewer, x, y, (uint8_t)1);
+        incr(_is_sewer_entrance, x, y, (uint8_t)1);
     }
 
-    void unset_is_sewer (const int x, const int y)
+    void unset_is_sewer_entrance (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        decr(_is_sewer, x, y, (uint8_t)1);
+        decr(_is_sewer_entrance, x, y, (uint8_t)1);
+    }
+
+    uint8_t is_sewer_exit (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_sewer_exit, p.x, p.y));
+    }
+
+    uint8_t is_sewer_exit (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_sewer_exit, x, y));
+    }
+
+    void set_is_sewer_exit (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        incr(_is_sewer_exit, x, y, (uint8_t)1);
+    }
+
+    void unset_is_sewer_exit (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        decr(_is_sewer_exit, x, y, (uint8_t)1);
     }
 
     uint8_t is_smoke (const point &p)
@@ -1915,19 +1948,43 @@ public:
         set_no_check(_is_lit, x, y, (uint8_t)0);
     }
 
+    Thingp inventory_describe(const uint32_t slot);
     Thingp inventory_get(const uint32_t slot);
     Thingp inventory_get(void);
     Thingp thing_find(const ThingId id);
     Thingp thing_new(const std::string& tp_name, Thingp owner);
     Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
     Thingp thing_new(const std::string& tp_name, const point at);
-    Thingp inventory_describe(const uint32_t slot);
-    bool inventory_over(const uint32_t slot);
     bool inventory_chosen(const uint32_t slot);
+    bool inventory_over(const uint32_t slot);
     const char *to_cstring(void);
     std::string to_string(void);
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args); // compile error without
+    void create(point3d at, int seed);
+    bool create_dungeon(point3d at, int seed);
+    void create_dungeon_game_mark_dungeon_tiles(Dungeonp d);
+    void create_dungeon_place_chasm(Dungeonp d, const std::string &what);
+    void create_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
+    void create_dungeon_place_deep_water(Dungeonp d, const std::string &what);
+    void create_dungeon_place_floor_under_objects(Dungeonp d, const std::string what, int depth);
+    void create_dungeon_place_floors(Dungeonp d, const std::string what, int depth, int variant, int block_width, int block_height, int tries);
+    void create_dungeon_place_lava(Dungeonp d, const std::string &what);
+    void create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d);
+    void create_dungeon_place_place_shallow_water(Dungeonp d, const std::string &what);
+    void create_dungeon_place_random_blood(Dungeonp d);
+    void create_dungeon_place_random_floor_deco(Dungeonp d);
+    void create_dungeon_place_remaining_floor(Dungeonp d, const std::string &what);
+    void create_dungeon_place_remaining_rocks(Dungeonp d, const std::string &what);
+    void create_dungeon_place_remaining_walls(Dungeonp d, const std::string &what);
+    void create_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
+    void create_dungeon_place_sewer_pipes(Dungeonp d);
+    void create_dungeon_place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
+    bool create_sewer(point3d at, int seed);
+    bool create_sewer_pipes(point3d at);
+    bool create_sewer_pools(void);
+    void create_sewer_place_remaining_rocks(const std::string &what);
+    void create_sewer_place_rocks(int variant, int block_width, int block_height, int tries);
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dbg_(const char *fmt, va_list args); // compile error without
     void display_external_particles(void);
@@ -1936,13 +1993,9 @@ public:
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void err_(const char *fmt, va_list args); // compile error without
     void fini(void);
-    void create_dungeon_game_mark_dungeon_tiles(Dungeonp d);
-    void create(point3d at, int seed);
-    void create_sewer(point3d at, int seed);
-    void create_dungeon(point3d at, int seed);
+    void lights_fade(void);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
     void lights_update(void);
-    void lights_fade(void);
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log(std::string prefix);
     void log_(const char *fmt, va_list args); // compile error without
@@ -1950,25 +2003,9 @@ public:
     void new_external_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
     void new_internal_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
     void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
-    void create_dungeon_place_chasm(Dungeonp d, const std::string &what);
-    void create_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
-    void create_dungeon_place_deep_water(Dungeonp d, const std::string &what);
     void place_dirt(Dungeonp d);
     void place_floor_deco(Dungeonp d);
-    void create_dungeon_place_floor_under_objects(Dungeonp d, const std::string what, int depth);
-    void create_dungeon_place_floors(Dungeonp d, const std::string what, int depth, int variant, int block_width, int block_height, int tries);
-    void create_dungeon_place_lava(Dungeonp d, const std::string &what);
-    void create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d);
-    void create_dungeon_place_random_blood(Dungeonp d);
-    void create_dungeon_place_random_floor_deco(Dungeonp d);
-    void create_dungeon_place_remaining_floor(Dungeonp d, const std::string &what);
-    void create_dungeon_place_remaining_rocks(Dungeonp d, const std::string &what);
-    void create_dungeon_place_remaining_walls(Dungeonp d, const std::string &what);
-    void create_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
-    void place_the_grid(Dungeonp d);
-    void create_dungeon_place_sewer_pipes(Dungeonp d);
-    void create_dungeon_place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
-    void create_dungeon_place_place_shallow_water(Dungeonp d, const std::string &what);
+    void place_the_grid(void);
     void things_gc(bool force);
     void things_gc_force(void);
     void things_gc_if_possible(void);

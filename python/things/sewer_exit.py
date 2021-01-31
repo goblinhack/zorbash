@@ -19,11 +19,11 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_is_light_strength(1)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_is_sewer(True)
+    x.set_is_sewer_exit(True)
     x.set_light_color("lime")
-    x.set_long_text_description("A filthy sewer pipe. Watch out, they can spawn surprises. Don't fall in!")
+    x.set_long_text_description("A way out of these stinking sewers!")
     x.set_minion_limit(10)
-    x.set_on_idle_dice("1d50+50:sewer.spawn()")
+    x.set_on_idle_dice("1d50+50:sewer_exit.spawn()")
     x.set_text_a_or_an("a");
     x.set_text_description("A slime coated sewer pipe")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
@@ -36,9 +36,8 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.update()
 
 def init():
-    tp_init(name="sewer1", tiles=[ "sewer1.1", "sewer1.2", ])
-    tp_init(name="sewer2", tiles=[ "sewer2.1", "sewer2.2", ])
-    tp_init(name="sewer3", tiles=[ "sewer3.1", "sewer3.2", ])
-    tp_init(name="sewer4", tiles=[ "sewer4.1", "sewer4.2", ])
-    tp_init(name="sewer5", tiles=[ "sewer5.1", "sewer5.2", ])
+    tp_init(name="sewer_exit1", tiles=[ "sewer_exit1.1", "sewer_exit1.2", ])
+    tp_init(name="sewer_exit2", tiles=[ "sewer_exit2.1", "sewer_exit2.2", ])
+    tp_init(name="sewer_exit3", tiles=[ "sewer_exit3.1", "sewer_exit3.2", ])
+    tp_init(name="sewer_exit4", tiles=[ "sewer_exit4.1", "sewer_exit4.2", ])
 init()

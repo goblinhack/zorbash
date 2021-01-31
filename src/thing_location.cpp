@@ -57,11 +57,18 @@ bool Thing::location_check (void)
         return false;
     }
 
-    auto ret = true;
     if (exit_tick()) {
-        ret = false;
-    } else if (entrance_tick()) {
-        ret = false;
+        return false;
     }
-    return (ret);
+    if (entrance_tick()) {
+        return false;
+    }
+    if (sewer_exit_tick()) {
+        return false;
+    }
+    if (sewer_entrance_tick()) {
+        return false;
+    }
+
+    return (true);
 }

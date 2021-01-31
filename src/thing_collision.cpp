@@ -1012,9 +1012,14 @@ _
             log("No; overlaps but can exit");
             return false;
         }
-    } else if (it->is_sewer()) {
+    } else if (it->is_sewer_entrance()) {
         if (things_overlap(me, A_at, it)) {
-            log("No; overlaps but can exit via sewer");
+            log("No; overlaps but can exit via sewer entrance");
+            return false;
+        }
+    } else if (it->is_sewer_exit()) {
+        if (things_overlap(me, A_at, it)) {
+            log("No; overlaps but can exit via sewer exit");
             return false;
         }
     } else if (is_player() && it->is_item() && !it->is_auto_collect_item()) {

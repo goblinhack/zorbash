@@ -13,7 +13,7 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Thing::sewer_tick (void)
+bool Thing::sewer_entrance_tick (void)
 {_
     if (is_changing_level ||
         is_hidden || 
@@ -34,7 +34,7 @@ bool Thing::sewer_tick (void)
         return false;
     }
 
-    if (!level->is_sewer(mid_at.x, mid_at.y)) {
+    if (!level->is_sewer_entrance(mid_at.x, mid_at.y)) {
         return false;
     }
 
@@ -43,12 +43,19 @@ bool Thing::sewer_tick (void)
     }
 
     if (is_player()) {
-        level->timestamp_fade_out_begin = time_get_time_ms_cached();
-        is_waiting_to_descend_to_sewer = true;
-        return true;
+        if (level->world_at.z & 1) {
+            level->timestamp_fade_out_begin = time_get_time_ms_cached();
+            is_waiting_to_descend_to_sewer = true;
+            return true;
+        }
     } else {
-        return descend_to_sewer();
+        //
+        // Not sure if monsts should do this as they crawl out of sewers
+        //
+        return false;
     }
+
+    return false;
 }
 
 bool Thing::descend_to_sewer (void)
@@ -66,8 +73,9 @@ bool Thing::descend_to_sewer (void)
         return false;
     }
 
+    auto player = level->player;
     if (is_monst()) {
-        if (level->player) {
+        if (player) {
             //
             // Don't descend if player is on the same level
             //
@@ -99,57 +107,48 @@ bool Thing::descend_to_sewer (void)
         return false;
     }
 
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (l->is_entrance(x, y)) {
-                if (is_player()) {
-                    game->level = l;
-                    MINICON("You bravely descend");
-                }
-
-                log("Move to next level entrance");
-                is_changing_level = true;
-
-                level_change(l);
-                set_tick_last_level_change(get_tick());
-                move_to_immediately(fpoint(x, y));
-                move_carried_items_immediately();
-                if (is_player()) {
-                    l->player = this;
-                    l->scroll_map_to_player();
-                    l->update();
-                    //
-                    // Make sure all monsts on the new level are at the
-                    // same tick or they will get lots of free attacks
-                    //
-                    l->update_all_ticks();
-                }
-
-                move_finish();
-                set_interpolated_mid_at(mid_at);
-                update_interpolated_position();
-                location_check();
-                update_light();
-
-                if (is_player()) {
-                    level->cursor->move_to_immediately(mid_at);
-                }
-
-                is_changing_level = false;
-                log("Moved to next level entrance");
-                if (is_player()) {
-                    level->timestamp_fade_in_begin = time_get_time_ms_cached();
-                    level->update();
-                }
-                return true;
-            }
-        }
-    }
+    int x = player->mid_at.x;
+    int y = player->mid_at.y;
 
     if (is_player()) {
-        game->tick_begin("descend to new level");
+        game->level = l;
+        MINICON("You bravely descend");
+    }
+
+    log("Move to next level entrance");
+    is_changing_level = true;
+
+    level_change(l);
+    set_tick_last_level_change(get_tick());
+    move_to_immediately(fpoint(x, y));
+    move_carried_items_immediately();
+    if (is_player()) {
+        l->player = this;
+        l->scroll_map_to_player();
+        l->update();
+        //
+        // Make sure all monsts on the new level are at the
+        // same tick or they will get lots of free attacks
+        //
+        l->update_all_ticks();
+    }
+
+    move_finish();
+    set_interpolated_mid_at(mid_at);
+    update_interpolated_position();
+    location_check();
+    update_light();
+
+    if (is_player()) {
+        level->cursor->move_to_immediately(mid_at);
+    }
+
+    is_changing_level = false;
+    log("Moved to next level entrance");
+    if (is_player()) {
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
         level->update();
     }
+
     return true;
 }

@@ -35,6 +35,7 @@ typename std::remove_all_extents<T>::type* mend(T& arr) {
 extern void dmap_process(Dmap *D, point tl, point br);
 extern void dmap_process(Dmap *D);
 extern void dmap_print(const Dmap *d, point at, point start, point end);
+extern void dmap_print(const Dmap *d);
 extern std::vector<point> dmap_solve(const Dmap *d, const point start);
 extern std::vector<point> dmap_solve_allow_diagonal(const Dmap *d,
                                                     const point start);
