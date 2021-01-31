@@ -11,7 +11,6 @@
 #include "my_wid_thing_collect.h"
 #include "my_main.h"
 #include "my_game.h"
-#include "my_thing.h"
 #include "my_wid_bag.h"
 
 void Game::change_state (int new_state)

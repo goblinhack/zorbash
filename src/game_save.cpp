@@ -9,7 +9,6 @@
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
-#include "my_thing.h"
 #include "my_alloc.h"
 
 extern bool game_load_headers_only;

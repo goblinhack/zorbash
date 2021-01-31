@@ -5,7 +5,6 @@
 
 #include "my_main.h"
 #include "my_game.h"
-#include "my_thing.h"
 #include "my_wid.h"
 #include "my_wid_thing_info.h"
 

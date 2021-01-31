@@ -7,14 +7,8 @@
 #ifndef _MY_TIME_UTIL_H_
 #define _MY_TIME_UTIL_H_
 
-// REMOVED #include <assert.h>
 #ifdef NOT_NEEDED
-// REMOVED #include <CoreServices/CoreServices.h>
-// REMOVED #include <mach/mach.h>
-// REMOVED #include <mach/mach_time.h>
 #endif
-// REMOVED #include <unistd.h>
-// REMOVED #include <sys/time.h>
 #include "my_sdl.h"
 
 #undef ONESEC

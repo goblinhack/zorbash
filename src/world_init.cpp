@@ -6,7 +6,6 @@
 #include "my_main.h"
 #include "my_world.h"
 #include "my_depth.h"
-#include "my_thing.h"
 
 void World::clear (void)
 {_

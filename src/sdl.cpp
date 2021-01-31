@@ -7,7 +7,6 @@
 #include "my_game.h"
 #include "my_gl.h"
 #include "my_ascii.h"
-#include "my_thing.h"
 #include "my_player.h"
 #include "my_level.h"
 #include "my_wid_console.h"

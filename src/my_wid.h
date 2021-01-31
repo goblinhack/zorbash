@@ -7,12 +7,8 @@
 #ifndef _MY_WID_H_
 #define _MY_WID_H_
 
-// REMOVED #include "my_main.h"
-// REMOVED #include "my_point.h"
-// REMOVED #include "my_size.h"
 #include "my_ascii.h"
 typedef class Wid* Widp;
-// REMOVED #include "my_sdl.h"
 #include "my_wid_tiles.h"
 #include "my_thing.h"
 

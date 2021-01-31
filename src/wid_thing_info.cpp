@@ -9,7 +9,6 @@
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_wid_thing_info.h"
-#include "my_thing.h"
 #include "my_tile.h"
 #include "my_wid_console.h"
 #include "my_wid_bag.h"
