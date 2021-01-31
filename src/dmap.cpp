@@ -42,6 +42,36 @@ void dmap_print (const Dmap *d, point at, point start, point end)
     }
 }
 
+void dmap_print (const Dmap *d)
+{
+    uint8_t x;
+    uint8_t y;
+
+    LOG("DMAP:");
+
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        std::string debug;
+        for (x = 0; x < MAP_WIDTH; x++) {
+            uint8_t e = get(d->val, x, y);
+            if (e == DMAP_IS_WALL) {
+                debug += ("## ");
+                continue;
+            }
+            if (e == DMAP_IS_PASSABLE) {
+                debug += (".  ");
+                continue;
+            }
+
+            if (e > 0) {
+                debug += string_sprintf("%-3X", e);
+            } else {
+                debug += "*  ";
+            }
+        }
+        LOG("DMAP: %s", debug.c_str());
+    }
+}
+
 void dmap_process (Dmap *D, point tl, point br)
 {
     uint8_t x;

@@ -279,9 +279,9 @@ int Thing::is_floor_deco(void) const
     return (tp()->is_floor_deco());
 }
 
-int Thing::is_sewer(void) const
+int Thing::is_sewer_entrance(void) const
 {_
-    return (tp()->is_sewer());
+    return (tp()->is_sewer_entrance());
 }
 
 int Thing::gfx_weapon_carry_anim(void) const
@@ -599,9 +599,9 @@ int Thing::is_rrr22(void) const
     return (tp()->is_rrr22());
 }
 
-int Thing::is_rrr23(void) const
+int Thing::is_sewer_exit(void) const
 {_
-    return (tp()->is_rrr23());
+    return (tp()->is_sewer_exit());
 }
 
 int Thing::is_burnable(void) const

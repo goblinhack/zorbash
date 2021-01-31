@@ -134,8 +134,7 @@ bool Thing::try_to_jump (point to)
         }
 
         if (level->is_entrance(x, y) ||
-            level->is_monst(x, y)    ||
-            level->is_sewer(x, y)    ||
+            level->is_monst(x, y) ||
             level->is_exit(x, y)) {_
             log("No, jump failed, onto monst");
             if (is_player()) {

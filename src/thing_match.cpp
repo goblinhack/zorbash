@@ -333,7 +333,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr22() && (what == "is_rrr22")) {
         return true;
     }
-    if (is_rrr23() && (what == "is_rrr23")) {
+    if (is_sewer_exit() && (what == "is_sewer_exit")) {
         return true;
     }
     if (is_burnable() && (what == "is_burnable")) {
@@ -498,7 +498,7 @@ bool Thing::match (const std::string& what)
     if (is_wall() && (what == "is_wall")) {
         return true;
     }
-    if (is_sewer() && (what == "is_sewer")) {
+    if (is_sewer_entrance() && (what == "is_sewer_entrance")) {
         return true;
     }
     if (is_water_lover() && (what == "is_water_lover")) {

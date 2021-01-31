@@ -208,7 +208,7 @@ int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_rrr20(void) const { return _is_rrr20; }
 int Tp::is_rrr21(void) const { return _is_rrr21; }
 int Tp::is_rrr22(void) const { return _is_rrr22; }
-int Tp::is_rrr23(void) const { return _is_rrr23; }
+int Tp::is_sewer_exit(void) const { return _is_sewer_exit; }
 int Tp::is_burnable(void) const { return _is_burnable; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
 int Tp::minion_limit(void) const { return _minion_limit; }
@@ -277,7 +277,7 @@ int Tp::is_treasure_eater(void) const { return _is_treasure_eater; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_wall(void) const { return _is_wall; }
-int Tp::is_sewer(void) const { return _is_sewer; }
+int Tp::is_sewer_entrance(void) const { return _is_sewer_entrance; }
 int Tp::is_gfx_water(void) const { return _is_gfx_water; }
 int Tp::is_water_lover(void) const { return _is_water_lover; }
 int Tp::avoids_water(void) const { return _avoids_water; }
@@ -448,7 +448,7 @@ void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_rrr20(int v) { _is_rrr20 = v; }
 void Tp::set_is_rrr21(int v) { _is_rrr21 = v; }
 void Tp::set_is_rrr22(int v) { _is_rrr22 = v; }
-void Tp::set_is_rrr23(int v) { _is_rrr23 = v; }
+void Tp::set_is_sewer_exit(int v) { _is_sewer_exit = v; }
 void Tp::set_is_burnable(int v) { _is_burnable = v; }
 void Tp::set_is_shallow_water(int v) { _is_shallow_water = v; }
 void Tp::set_minion_limit(int v) { _minion_limit = v; }
@@ -518,7 +518,7 @@ void Tp::set_is_treasure_eater(int v) { _is_treasure_eater = v; }
 void Tp::set_is_undead(int v) { _is_undead = v; }
 void Tp::set_is_usable(int v) { _is_usable = v; }
 void Tp::set_is_wall(int v) { _is_wall = v; }
-void Tp::set_is_sewer(int v) { _is_sewer = v; }
+void Tp::set_is_sewer_entrance(int v) { _is_sewer_entrance = v; }
 void Tp::set_is_gfx_water(int v) { _is_gfx_water = v; }
 void Tp::set_is_water_lover(int v) { _is_water_lover = v; }
 void Tp::set_avoids_water(int v) { _avoids_water = v; }

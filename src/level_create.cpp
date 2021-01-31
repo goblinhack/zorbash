@@ -23,16 +23,21 @@ void Level::create (point3d at, int seed)
     log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
+    bool ret;
     if (at.z & 1) {
-        create_dungeon(at, seed);
+        ret = create_dungeon(at, seed);
     } else {
-        create_sewer(at, seed);
+        ret = create_sewer(at, seed);
     }
 
     log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     log("Created, seed %u", seed);
     log("-");
+
+    if (!ret) {
+        err("Faile to create level");
+    }
 
     update_map();
 
@@ -42,7 +47,7 @@ void Level::create (point3d at, int seed)
     timestamp_fade_in_begin = time_get_time_ms_cached();
 }
 
-void Level::place_the_grid (Dungeonp d)
+void Level::place_the_grid (void)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {

@@ -9,8 +9,10 @@
 #include "my_thing.h"
 #include "my_random.h"
 
-void Level::create_dungeon (point3d at, int seed)
+bool Level::create_dungeon (point3d at, int seed)
 {_
+    log("Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
+
     while (true) {
         auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH,
                                    MAP_GRID_HEIGHT, seed);
@@ -23,44 +25,43 @@ void Level::create_dungeon (point3d at, int seed)
         //
         // The grid is the basis of all reality.
         //
-        place_the_grid(dungeon);
-
-        if (g_errored) { return; }
+        place_the_grid();
+        if (g_errored) { return false; }
 #if 0
         //
         // Static level
         //
         auto dungeon = new Dungeon(0);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 #endif
         auto tries = 10000;
 
         create_dungeon_place_walls(dungeon, 1, 6, 6, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 2, 6, 6, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 1, 6, 3, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 1, 3, 6, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 1, 3, 3, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 2, 3, 3, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 1, 2, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 2, 2, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 3, 2, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 1, 2, 1, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 2, 2, 1, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 1, 1, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, 2, 1, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 
         for (auto d = 1; d < 3; d++) {
             int nloops = 10;
@@ -79,73 +80,73 @@ void Level::create_dungeon (point3d at, int seed)
         }
 
         create_dungeon_place_floor_under_objects(dungeon, "floor1", 1);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor2", 2);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor3", 3);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor4", 4);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor5", 5);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor6", 6);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor7", 7);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor8", 8);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor9", 9);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_remaining_walls(dungeon, "wall1");
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_remaining_floor(dungeon, "floor1");
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_corridor(dungeon, "corridor1", 0);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 
         create_dungeon_place_rocks(dungeon, 1, 6, 6, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 1, 6, 3, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 1, 3, 6, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 1, 3, 3, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 2, 3, 3, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 1, 2, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 2, 2, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 3, 2, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 1, 2, 1, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 2, 2, 1, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 1, 1, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 2, 1, 2, tries);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 
         create_dungeon_place_remaining_rocks(dungeon, "rock1");
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         place_dirt(dungeon);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_lava(dungeon, "lava1");
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_chasm(dungeon, "chasm1");
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_deep_water(dungeon, "deep_water1");
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_place_shallow_water(dungeon, "water1");
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 
         //
         // Items that have no special placement rules
         //
         create_dungeon_place_objects_with_normal_placement_rules(dungeon);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 
         //
         // Place the player if we do not have one.
@@ -184,30 +185,32 @@ void Level::create_dungeon (point3d at, int seed)
         }
 
 placed_player:
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 
         //
         // Scary non essential stuff
         //
         create_dungeon_place_random_blood(dungeon);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 
         //
         // Less important stuff
         //
         place_floor_deco(dungeon);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_random_floor_deco(dungeon);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_place_sewer_pipes(dungeon);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         create_dungeon_game_mark_dungeon_tiles(dungeon);
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
         scroll_map_to_player();
-        if (g_errored) { return; }
+        if (g_errored) { return false; }
 
         break;
     }
+
+    return true;
 }
 
 void Level::create_dungeon_place_walls (Dungeonp d, int variant, 
@@ -215,7 +218,7 @@ void Level::create_dungeon_place_walls (Dungeonp d, int variant,
 {_
     auto tp = tp_random_wall();
     if (!tp) {
-        ERR("Place_walls failed");
+        ERR("Place walls failed");
         return;
     }
     auto what = tp->name();
@@ -300,7 +303,7 @@ void Level::create_dungeon_place_rocks (Dungeonp d, int variant,
 {_
     auto tp = tp_random_rock();
     if (!tp) {
-        ERR("Place_rocks failed");
+        ERR("Place rocks failed");
         return;
     }
     auto what = tp->name();
@@ -554,7 +557,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_door(x, y))             { tp = tp_random_door(); }
             if (d->is_entrance(x, y))         { tp = tp_random_entrance(); }
             if (d->is_exit(x, y))             { tp = tp_random_exit(); }
-            if (d->is_sewer(x, y))            { tp = tp_random_sewer(); }
+            if (d->is_sewer_entrance(x, y))   { tp = tp_random_sewer_entrance(); }
             if (d->is_food(x, y))             { tp = tp_random_food(); }
             if (d->is_gold(x, y))             { tp = tp_random_gold(); }
             if (d->is_key(x, y))              { tp = tp_random_key(); }
@@ -862,7 +865,7 @@ void Level::create_dungeon_place_sewer_pipes (Dungeonp d)
             //
             mysrand(seed + x + (y * MAP_WIDTH));
 
-            auto tp = tp_random_sewer();
+            auto tp = tp_random_sewer_entrance();
             if (!tp) {
                 return;
             }

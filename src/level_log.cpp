@@ -15,20 +15,20 @@ void Level::log_ (const char *fmt, va_list args)
 {
     verify(this);
     auto l = this;
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
 
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSHORTSTR - len, "%60s: %*s",
+    snprintf(buf + len, MAXSTR - len, "%60s: %*s",
              l->to_string().c_str(),
              g_callframes_depth, "");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 }
@@ -48,16 +48,16 @@ void Level::con_ (const char *fmt, va_list args)
 {
     verify(this);
     auto l = this;
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "Level %s: ", l->to_string().c_str());
+    snprintf(buf + len, MAXSTR - len, "Level %s: ", l->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -88,16 +88,16 @@ void Level::err_ (const char *fmt, va_list args)
 
     verify(this);
     auto l = this;
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: Level %s: ", l->to_cstring());
+    snprintf(buf + len, MAXSTR - len, "ERROR: Level %s: ", l->to_cstring());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 

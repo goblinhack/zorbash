@@ -57,7 +57,7 @@ public:
     bool                      is_door              {false};
     bool                      is_entrance          {false};
     bool                      is_exit              {false};
-    bool                      is_sewer             {false};
+    bool                      is_sewer_entrance    {false};
     bool                      is_floor             {false};
     bool                      is_floor_deco        {false};
     bool                      is_food              {false};

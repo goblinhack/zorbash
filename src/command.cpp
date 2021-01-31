@@ -149,13 +149,13 @@ static int command_matches (const char *input,
                             uint8_t execute_command,
                             void *context)
 {_
-    char cand_expand_to[MAXSHORTSTR];
+    char cand_expand_to[MAXSTR];
     commandp matched_command = nullptr;
-    char completes_to[MAXSHORTSTR];
-    char expands_to[MAXSHORTSTR];
+    char completes_to[MAXSTR];
+    char expands_to[MAXSTR];
     tokens_t input_tokens;
-    char match[MAXSHORTSTR];
-    char match2[MAXSHORTSTR];
+    char match[MAXSTR];
+    char match2[MAXSTR];
     int longest_match;
     int common_len;
     int matches;
@@ -252,7 +252,7 @@ static int command_matches (const char *input,
                 }
 
                 if (output) {
-                    strlcpy_(output, completes_to, MAXSHORTSTR);
+                    strlcpy_(output, completes_to, MAXSTR);
                 }
             }
 
@@ -332,7 +332,7 @@ static int command_matches (const char *input,
              * Expands to:
              */
             if (output) {
-                strlcpy_(output, expands_to, MAXSHORTSTR);
+                strlcpy_(output, expands_to, MAXSTR);
             }
         }
     }
@@ -427,7 +427,7 @@ uint8_t command_handle (std::string input,
                         uint8_t execute_command,
                         void *context)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
 
     buf[0]= '\0';
 
@@ -452,7 +452,7 @@ uint8_t command_handle (std::wstring input,
                         uint8_t execute_command,
                         void *context)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
 
     buf[0] = '\0';
 
