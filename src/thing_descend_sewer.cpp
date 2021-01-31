@@ -13,14 +13,15 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Thing::sewer_entrance_tick (void)
+bool Thing::descend_sewer_tick (void)
 {_
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
-        is_waiting_to_ascend || 
-        is_waiting_to_descend_to_next_level || 
-        is_waiting_to_descend_to_sewer || 
+        is_waiting_to_descend_sewer || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_ascend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -34,7 +35,7 @@ bool Thing::sewer_entrance_tick (void)
         return false;
     }
 
-    if (!level->is_sewer_entrance(mid_at.x, mid_at.y)) {
+    if (!level->is_descend_sewer(mid_at.x, mid_at.y)) {
         return false;
     }
 
@@ -45,7 +46,7 @@ bool Thing::sewer_entrance_tick (void)
     if (is_player()) {
         if (level->world_at.z & 1) {
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
-            is_waiting_to_descend_to_sewer = true;
+            is_waiting_to_descend_sewer = true;
             return true;
         }
     } else {
@@ -58,13 +59,14 @@ bool Thing::sewer_entrance_tick (void)
     return false;
 }
 
-bool Thing::descend_to_sewer (void)
+bool Thing::descend_sewer (void)
 {_
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
-        is_waiting_to_ascend || 
         is_waiting_to_fall || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_ascend_sewer || 
         is_jumping) { 
         return false;
     }
@@ -102,7 +104,7 @@ bool Thing::descend_to_sewer (void)
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
         if (is_player()) {
-            MINICON("The exit is permanently blocked!");
+            MINICON("The sewer is permanently blocked!");
         }
         return false;
     }
@@ -112,10 +114,10 @@ bool Thing::descend_to_sewer (void)
 
     if (is_player()) {
         game->level = l;
-        MINICON("You bravely descend");
+        MINICON("You climb into the muck");
     }
 
-    log("Move to next level entrance");
+    log("Move to next level sewer entrance");
     is_changing_level = true;
 
     level_change(l);
@@ -144,7 +146,7 @@ bool Thing::descend_to_sewer (void)
     }
 
     is_changing_level = false;
-    log("Moved to next level entrance");
+    log("Moved to next level sewer");
     if (is_player()) {
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
         level->update();

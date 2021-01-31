@@ -35,6 +35,7 @@ def tp_init(name,
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_movement_blocking_hard(True)
     x.set_is_wall(True)
+    x.set_is_dungeon_wall(True)
     x.set_text_a_or_an("a");
     x.set_text_description("A moss covered wall.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
@@ -145,12 +146,12 @@ def tp_init(name,
     x.update()
 
 def init():
-    tp_init(name="wall1",
-            tiles=[       "wall1.1", "wall1.2", "wall1.3", "wall1.4",
-                          "wall1.5", "wall1.6", "wall1.7", "wall1.8",
-                          "wall1.9", "wall1.10", "wall1.11", "wall1.12",
-                          "wall1.13", "wall1.14", "wall1.15", "wall1.16",
-                          "wall1.17", "wall1.18", "wall1.19", ],
+    tp_init(name="dungeon_wall",
+            tiles=[       "dungeon_wall.1", "dungeon_wall.2", "dungeon_wall.3", "dungeon_wall.4",
+                          "dungeon_wall.5", "dungeon_wall.6", "dungeon_wall.7", "dungeon_wall.8",
+                          "dungeon_wall.9", "dungeon_wall.10", "dungeon_wall.11", "dungeon_wall.12",
+                          "dungeon_wall.13", "dungeon_wall.14", "dungeon_wall.15", "dungeon_wall.16",
+                          "dungeon_wall.17", "dungeon_wall.18", "dungeon_wall.19", ],
             left1_tiles=[ "wall_deco1.left.1", "wall_deco1.left.2",
                           "wall_deco1.left.3", "wall_deco1.left.4",
                           "wall_deco1.left.5", "wall_deco1.left.6", ],

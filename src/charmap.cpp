@@ -83,7 +83,7 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::ENTRANCE;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_entrance          = true;
+    c->is_ascend_dungeon          = true;
 
     char_index              = Charmap::DECO;
     c = &all_charmaps[char_index];
@@ -93,7 +93,7 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::EXIT;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_exit              = true;
+    c->is_descend_dungeon              = true;
 
     char_index              = Charmap::KEY;
     c = &all_charmaps[char_index];

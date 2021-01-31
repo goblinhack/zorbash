@@ -45,14 +45,14 @@ void Thing::level_pop (void)
                                                          level->unset_is_dirt(mx, my); }
     if (i_set_is_door)                                 { i_set_is_door = false;
                                                          level->unset_is_door(mx, my); }
-    if (i_set_is_entrance)                             { i_set_is_entrance = false;
-                                                         level->unset_is_entrance(mx, my); }
-    if (i_set_is_exit)                                 { i_set_is_exit = false;
-                                                         level->unset_is_exit(mx, my); }
-    if (i_set_is_sewer_entrance)                       { i_set_is_sewer_entrance = false;
-                                                         level->unset_is_sewer_entrance(mx, my); }
-    if (i_set_is_sewer_exit)                           { i_set_is_sewer_exit = false;
-                                                         level->unset_is_sewer_exit(mx, my); }
+    if (i_set_is_ascend_dungeon)                       { i_set_is_ascend_dungeon = false;
+                                                         level->unset_is_ascend_dungeon(mx, my); }
+    if (i_set_is_descend_dungeon)                      { i_set_is_descend_dungeon = false;
+                                                         level->unset_is_descend_dungeon(mx, my); }
+    if (i_set_is_ascend_sewer)                         { i_set_is_ascend_sewer = false;
+                                                         level->unset_is_ascend_sewer(mx, my); }
+    if (i_set_is_descend_sewer)                        { i_set_is_descend_sewer = false;
+                                                         level->unset_is_descend_sewer(mx, my); }
     if (i_set_is_fire)                                 { i_set_is_fire = false;
                                                          level->unset_is_fire(mx, my); }
     if (i_set_is_floor)                                { i_set_is_floor = false;

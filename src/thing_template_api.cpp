@@ -139,9 +139,9 @@ int Tp::damage_doubled_from_acid(void) const { return _damage_doubled_from_acid;
 int Tp::damage_doubled_from_fire(void) const { return _damage_doubled_from_fire; }
 int Tp::damage_doubled_from_water(void) const { return _damage_doubled_from_water; }
 int Tp::is_droppable(void) const { return _is_droppable; }
-int Tp::is_entrance(void) const { return _is_entrance; }
+int Tp::is_ascend_dungeon(void) const { return _is_ascend_dungeon; }
 int Tp::is_ethereal(void) const { return _is_ethereal; }
-int Tp::is_exit(void) const { return _is_exit; }
+int Tp::is_descend_dungeon(void) const { return _is_descend_dungeon; }
 int Tp::is_explosion(void) const { return _is_explosion; }
 int Tp::is_fire(void) const { return _is_fire; }
 int Tp::avoids_fire(void) const { return _avoids_fire; }
@@ -206,9 +206,9 @@ int Tp::is_rrr18(void) const { return _is_rrr18; }
 int Tp::is_rrr19(void) const { return _is_rrr19; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_rrr20(void) const { return _is_rrr20; }
-int Tp::is_rrr21(void) const { return _is_rrr21; }
-int Tp::is_rrr22(void) const { return _is_rrr22; }
-int Tp::is_sewer_exit(void) const { return _is_sewer_exit; }
+int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
+int Tp::is_dungeon_wall(void) const { return _is_dungeon_wall; }
+int Tp::is_descend_sewer(void) const { return _is_descend_sewer; }
 int Tp::is_burnable(void) const { return _is_burnable; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
 int Tp::minion_limit(void) const { return _minion_limit; }
@@ -277,7 +277,7 @@ int Tp::is_treasure_eater(void) const { return _is_treasure_eater; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_wall(void) const { return _is_wall; }
-int Tp::is_sewer_entrance(void) const { return _is_sewer_entrance; }
+int Tp::is_ascend_sewer(void) const { return _is_ascend_sewer; }
 int Tp::is_gfx_water(void) const { return _is_gfx_water; }
 int Tp::is_water_lover(void) const { return _is_water_lover; }
 int Tp::avoids_water(void) const { return _avoids_water; }
@@ -379,9 +379,9 @@ void Tp::set_damage_doubled_from_acid(int v) { _damage_doubled_from_acid = v; }
 void Tp::set_damage_doubled_from_fire(int v) { _damage_doubled_from_fire = v; }
 void Tp::set_damage_doubled_from_water(int v) { _damage_doubled_from_water = v; }
 void Tp::set_is_droppable(int v) { _is_droppable = v; }
-void Tp::set_is_entrance(int v) { _is_entrance = v; }
+void Tp::set_is_ascend_dungeon(int v) { _is_ascend_dungeon = v; }
 void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
-void Tp::set_is_exit(int v) { _is_exit = v; }
+void Tp::set_is_descend_dungeon(int v) { _is_descend_dungeon = v; }
 void Tp::set_is_explosion(int v) { _is_explosion = v; }
 void Tp::set_is_fire(int v) { _is_fire = v; }
 void Tp::set_avoids_fire(int v) { _avoids_fire = v; }
@@ -446,9 +446,9 @@ void Tp::set_is_rrr18(int v) { _is_rrr18 = v; }
 void Tp::set_is_rrr19(int v) { _is_rrr19 = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_rrr20(int v) { _is_rrr20 = v; }
-void Tp::set_is_rrr21(int v) { _is_rrr21 = v; }
-void Tp::set_is_rrr22(int v) { _is_rrr22 = v; }
-void Tp::set_is_sewer_exit(int v) { _is_sewer_exit = v; }
+void Tp::set_is_sewer_wall(int v) { _is_sewer_wall = v; }
+void Tp::set_is_dungeon_wall(int v) { _is_dungeon_wall = v; }
+void Tp::set_is_descend_sewer(int v) { _is_descend_sewer = v; }
 void Tp::set_is_burnable(int v) { _is_burnable = v; }
 void Tp::set_is_shallow_water(int v) { _is_shallow_water = v; }
 void Tp::set_minion_limit(int v) { _minion_limit = v; }
@@ -518,7 +518,7 @@ void Tp::set_is_treasure_eater(int v) { _is_treasure_eater = v; }
 void Tp::set_is_undead(int v) { _is_undead = v; }
 void Tp::set_is_usable(int v) { _is_usable = v; }
 void Tp::set_is_wall(int v) { _is_wall = v; }
-void Tp::set_is_sewer_entrance(int v) { _is_sewer_entrance = v; }
+void Tp::set_is_ascend_sewer(int v) { _is_ascend_sewer = v; }
 void Tp::set_is_gfx_water(int v) { _is_gfx_water = v; }
 void Tp::set_is_water_lover(int v) { _is_water_lover = v; }
 void Tp::set_avoids_water(int v) { _avoids_water = v; }

@@ -279,9 +279,9 @@ int Thing::is_floor_deco(void) const
     return (tp()->is_floor_deco());
 }
 
-int Thing::is_sewer_entrance(void) const
+int Thing::is_ascend_sewer(void) const
 {_
-    return (tp()->is_sewer_entrance());
+    return (tp()->is_ascend_sewer());
 }
 
 int Thing::gfx_weapon_carry_anim(void) const
@@ -389,14 +389,14 @@ int Thing::is_door(void) const
     return (tp()->is_door());
 }
 
-int Thing::is_entrance(void) const
+int Thing::is_ascend_dungeon(void) const
 {_
-    return (tp()->is_entrance());
+    return (tp()->is_ascend_dungeon());
 }
 
-int Thing::is_exit(void) const
+int Thing::is_descend_dungeon(void) const
 {_
-    return (tp()->is_exit());
+    return (tp()->is_descend_dungeon());
 }
 
 int Thing::is_explosion(void) const
@@ -589,19 +589,19 @@ int Thing::is_rrr20(void) const
     return (tp()->is_rrr20());
 }
 
-int Thing::is_rrr21(void) const
+int Thing::is_sewer_wall(void) const
 {_
-    return (tp()->is_rrr21());
+    return (tp()->is_sewer_wall());
 }
 
-int Thing::is_rrr22(void) const
+int Thing::is_dungeon_wall(void) const
 {_
-    return (tp()->is_rrr22());
+    return (tp()->is_dungeon_wall());
 }
 
-int Thing::is_sewer_exit(void) const
+int Thing::is_descend_sewer(void) const
 {_
-    return (tp()->is_sewer_exit());
+    return (tp()->is_descend_sewer());
 }
 
 int Thing::is_burnable(void) const

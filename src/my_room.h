@@ -103,8 +103,8 @@ public:
     bool                    dir_left     {false};
     bool                    dir_right    {false};
 
-    bool                    is_entrance  {false};
-    bool                    is_exit      {false};
+    bool                    is_ascend_dungeon  {false};
+    bool                    is_descend_dungeon      {false};
     bool                    is_lock      {false};
     bool                    is_key       {false};
     bool                    is_secret    {false};

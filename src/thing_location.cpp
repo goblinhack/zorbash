@@ -57,18 +57,18 @@ bool Thing::location_check (void)
         return false;
     }
 
-    if (exit_tick()) {
+    if (descend_dungeon_tick()) {
         return false;
     }
-    if (entrance_tick()) {
+    if (ascend_dungeon_tick()) {
         return false;
     }
-    if (sewer_exit_tick()) {
+    if (ascend_sewer_tick()) {
         return false;
     }
-    if (sewer_entrance_tick()) {
+    if (descend_sewer_tick()) {
         return false;
     }
 
-    return (true);
+    return true;
 }

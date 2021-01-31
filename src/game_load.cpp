@@ -237,9 +237,10 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->is_sleeping           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_starving           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_tick_done          = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_waiting_to_ascend  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_waiting_to_descend_to_next_level = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_waiting_to_descend_to_sewer      = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_waiting_to_ascend_dungeon  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_waiting_to_descend_sewer   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_waiting_to_descend_dungeon = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_waiting_to_ascend_sewer    = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_waiting_to_fall    = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_the_grid           = (bits64 >> shift) & 1; shift++;
 
@@ -256,10 +257,10 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_shallow_water          = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_dirt                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_door                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_entrance               = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_exit                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_sewer_entrance         = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_sewer_exit             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_ascend_dungeon         = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_descend_dungeon        = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_ascend_sewer           = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_descend_sewer          = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_fire                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_floor                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_food                   = (bits64 >> shift) & 1; shift++;
@@ -356,10 +357,10 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ in >> bits(my.t->_is_dirt);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ in >> bits(my.t->_is_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ in >> bits(my.t->_is_dungeon);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};            */ in >> bits(my.t->_is_entrance);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};                */ in >> bits(my.t->_is_exit);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer_entrance {};      */ in >> bits(my.t->_is_sewer_entrance);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer_exit {};          */ in >> bits(my.t->_is_sewer_exit);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};      */ in >> bits(my.t->_is_ascend_dungeon);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_dungeon {};     */ in >> bits(my.t->_is_descend_dungeon);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_sewer {};        */ in >> bits(my.t->_is_ascend_sewer);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_sewer {};       */ in >> bits(my.t->_is_descend_sewer);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};                */ in >> bits(my.t->_is_fire);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};               */ in >> bits(my.t->_is_floor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};                */ in >> bits(my.t->_is_food);

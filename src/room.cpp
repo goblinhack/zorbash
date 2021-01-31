@@ -70,11 +70,11 @@ Roomp Room::create_w_flip (void)
     r->dir_left       = dir_right;
     r->dir_right      = dir_left;
 
-    r->is_entrance    = is_entrance;
+    r->is_ascend_dungeon    = is_ascend_dungeon;
     r->is_lock        = is_lock;
     r->is_key         = is_key;
     r->is_secret      = is_secret;
-    r->is_exit        = is_exit;
+    r->is_descend_dungeon        = is_descend_dungeon;
 
     r->depth          = depth;
 
@@ -126,11 +126,11 @@ Roomp Room::rotate_clockwise (void)
     r->dir_left       = dir_down;
     r->dir_right      = dir_up;
 
-    r->is_entrance    = is_entrance;
+    r->is_ascend_dungeon    = is_ascend_dungeon;
     r->is_lock        = is_lock;
     r->is_key         = is_key;
     r->is_secret      = is_secret;
-    r->is_exit        = is_exit;
+    r->is_descend_dungeon        = is_descend_dungeon;
 
     r->depth          = depth;
 

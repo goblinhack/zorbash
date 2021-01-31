@@ -45,14 +45,14 @@ void Thing::level_push (void)
                                                    level->set_is_dirt(mx, my); }
     if (is_door() && !is_open)                   { i_set_is_door = true;
                                                    level->set_is_door(mx, my); }
-    if (is_entrance())                           { i_set_is_entrance = true;
-                                                   level->set_is_entrance(mx, my); }
-    if (is_exit())                               { i_set_is_exit = true;
-                                                   level->set_is_exit(mx, my); }
-    if (is_sewer_entrance())                     { i_set_is_sewer_entrance = true;
-                                                   level->set_is_sewer_entrance(mx, my); }
-    if (is_sewer_exit())                         { i_set_is_sewer_exit = true;
-                                                   level->set_is_sewer_exit(mx, my); }
+    if (is_ascend_dungeon())                     { i_set_is_ascend_dungeon = true;
+                                                   level->set_is_ascend_dungeon(mx, my); }
+    if (is_descend_dungeon())                    { i_set_is_descend_dungeon = true;
+                                                   level->set_is_descend_dungeon(mx, my); }
+    if (is_ascend_sewer())                       { i_set_is_ascend_sewer = true;
+                                                   level->set_is_ascend_sewer(mx, my); }
+    if (is_descend_sewer())                      { i_set_is_descend_sewer = true;
+                                                   level->set_is_descend_sewer(mx, my); }
     if (is_fire() && !is_dead)                   { i_set_is_fire = true;
                                                    level->set_is_fire(mx, my); }
     if (is_floor())                              { i_set_is_floor = true;

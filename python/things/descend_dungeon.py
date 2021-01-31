@@ -14,7 +14,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_able_to_fall(False)
     x.set_is_critical_to_level(True)
     x.set_is_cursor_can_hover_over(True)
-    x.set_is_exit(True)
+    x.set_is_descend_dungeon(True)
     x.set_is_interesting(True)
     x.set_is_light_strength(2)
     x.set_light_color("white")
