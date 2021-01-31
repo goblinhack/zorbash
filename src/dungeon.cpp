@@ -674,7 +674,7 @@ bool Dungeon::is_secret_door (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_entrance (const int x, const int y)
+bool Dungeon::is_ascend_dungeon (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -684,7 +684,7 @@ bool Dungeon::is_entrance (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_entrance) {
+        if (v.is_ascend_dungeon) {
             return true;
         }
     }
@@ -708,7 +708,7 @@ bool Dungeon::is_floor_deco_at (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_sewer_entrance_at (const int x, const int y)
+bool Dungeon::is_ascend_sewer_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -718,14 +718,14 @@ bool Dungeon::is_sewer_entrance_at (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_sewer_entrance) {
+        if (v.is_ascend_sewer) {
             return true;
         }
     }
     return false;
 }
 
-bool Dungeon::is_exit (const int x, const int y)
+bool Dungeon::is_descend_dungeon (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -735,14 +735,14 @@ bool Dungeon::is_exit (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_exit) {
+        if (v.is_descend_dungeon) {
             return true;
         }
     }
     return false;
 }
 
-bool Dungeon::is_sewer_entrance (const int x, const int y)
+bool Dungeon::is_ascend_sewer (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -752,7 +752,7 @@ bool Dungeon::is_sewer_entrance (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_sewer_entrance) {
+        if (v.is_ascend_sewer) {
             return true;
         }
     }
@@ -1301,10 +1301,10 @@ bool Dungeon::room_is_a_candidate (const Node *n, Roomp r)
     if (n->dir_down != r->dir_down) {
         return false;
     }
-    if (n->is_exit != r->is_exit) {
+    if (n->is_descend_dungeon != r->is_descend_dungeon) {
         return false;
     }
-    if (n->is_entrance != r->is_entrance) {
+    if (n->is_ascend_dungeon != r->is_ascend_dungeon) {
         return false;
     }
     if (n->is_lock != r->is_lock) {
@@ -1361,10 +1361,10 @@ bool Dungeon::room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
     if (r->dir_down) {
         return false;
     }
-    if (n->is_exit != r->is_exit) {
+    if (n->is_descend_dungeon != r->is_descend_dungeon) {
         return false;
     }
-    if (n->is_entrance != r->is_entrance) {
+    if (n->is_ascend_dungeon != r->is_ascend_dungeon) {
         return false;
     }
     if (n->is_lock != r->is_lock) {
@@ -1457,7 +1457,7 @@ bool Dungeon::create_cyclic_rooms (Grid *g)
     for (auto x = 0; x < grid_width; x++) {
         for (auto y = 0; y < grid_height; y++) {
             auto n = nodes->getn(x, y);
-            if (!n->is_entrance) {
+            if (!n->is_ascend_dungeon) {
                 continue;
             }
             if (!solve(x, y, g)) {

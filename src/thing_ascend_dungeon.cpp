@@ -13,14 +13,15 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Thing::exit_tick (void)
+bool Thing::ascend_dungeon_tick (void)
 {_
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
-        is_waiting_to_ascend || 
-        is_waiting_to_descend_to_next_level || 
-        is_waiting_to_descend_to_sewer || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_descend_sewer || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -34,7 +35,7 @@ bool Thing::exit_tick (void)
         return false;
     }
 
-    if (!level->is_exit(mid_at.x, mid_at.y)) {
+    if (!level->is_ascend_dungeon(mid_at.x, mid_at.y)) {
         return false;
     }
 
@@ -42,21 +43,26 @@ bool Thing::exit_tick (void)
         return false;
     }
 
-    if (is_player()) {
-        level->timestamp_fade_out_begin = time_get_time_ms_cached();
-        is_waiting_to_descend_to_next_level = true;
-        return true;
-    } else {
-        return descend_to_next_level();
+    if (level->world_at.z > 1) {
+        if (is_player()) {
+            level->timestamp_fade_out_begin = time_get_time_ms_cached();
+            is_waiting_to_ascend_dungeon = true;
+            return true;
+        } else {
+            return ascend_dungeon();
+        }
     }
+
+    return false;
 }
 
-bool Thing::descend_to_next_level (void)
+bool Thing::ascend_dungeon (void)
 {_
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
-        is_waiting_to_ascend || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
         return false;
@@ -66,48 +72,37 @@ bool Thing::descend_to_next_level (void)
         return false;
     }
 
-    if (is_monst()) {
-        if (level->player) {
-            //
-            // Don't descend if player is on the same level
-            //
-            return false;
-        }
-    }
-
     //
     // No level change if too rapid
     //
-    if (get_tick() - get_tick_last_level_change() < 1) {
+    if (get_tick() - get_tick_last_level_change() <= 1) {
         return false;
     }
 
-    auto next_level = level->world_at + point3d(0, 0, 2);
+    auto next_level = level->world_at + point3d(0, 0, -2);
     game->init_level(next_level);
 
     if (is_player()) {
         game->current_level = next_level;
     }
 
-    log("Is trying to descend");
-
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
         if (is_player()) {
-            MINICON("The exit is permanently blocked!");
+            MINICON("The entrance is permanently blocked!");
         }
         return false;
     }
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (l->is_entrance(x, y)) {
+            if (l->is_descend_dungeon(x, y)) {
                 if (is_player()) {
                     game->level = l;
-                    MINICON("You bravely descend");
+                    MINICON("You bravely ascend");
                 }
 
-                log("Move to next level entrance");
+                log("Move to previous level exit");
                 is_changing_level = true;
 
                 level_change(l);
@@ -136,7 +131,7 @@ bool Thing::descend_to_next_level (void)
                 }
 
                 is_changing_level = false;
-                log("Moved to next level entrance");
+                log("Moved to previous level exit");
                 if (is_player()) {
                     level->timestamp_fade_in_begin = time_get_time_ms_cached();
                     level->update();
@@ -147,7 +142,7 @@ bool Thing::descend_to_next_level (void)
     }
 
     if (is_player()) {
-        game->tick_begin("descend to new level");
+        game->tick_begin("ascend to new level");
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
         level->update();
     }

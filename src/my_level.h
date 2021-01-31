@@ -33,10 +33,10 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer_entrance {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sewer_exit {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_dungeon {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_sewer {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_sewer {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
@@ -1399,132 +1399,132 @@ public:
         decr(_is_gold, x, y, (uint8_t)1);
     }
 
-    uint8_t is_entrance (const point &p)
+    uint8_t is_ascend_dungeon (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_entrance, p.x, p.y));
+        return (get(_is_ascend_dungeon, p.x, p.y));
     }
 
-    uint8_t is_entrance (const int x, const int y)
+    uint8_t is_ascend_dungeon (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_entrance, x, y));
+        return (get(_is_ascend_dungeon, x, y));
     }
 
-    void set_is_entrance (const int x, const int y)
+    void set_is_ascend_dungeon (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        incr(_is_entrance, x, y, (uint8_t)1);
+        incr(_is_ascend_dungeon, x, y, (uint8_t)1);
     }
 
-    void unset_is_entrance (const int x, const int y)
+    void unset_is_ascend_dungeon (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        decr(_is_entrance, x, y, (uint8_t)1);
+        decr(_is_ascend_dungeon, x, y, (uint8_t)1);
     }
 
-    uint8_t is_exit (const point &p)
+    uint8_t is_descend_dungeon (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_exit, p.x, p.y));
+        return (get(_is_descend_dungeon, p.x, p.y));
     }
 
-    uint8_t is_exit (const int x, const int y)
+    uint8_t is_descend_dungeon (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_exit, x, y));
+        return (get(_is_descend_dungeon, x, y));
     }
 
-    void set_is_exit (const int x, const int y)
+    void set_is_descend_dungeon (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        incr(_is_exit, x, y, (uint8_t)1);
+        incr(_is_descend_dungeon, x, y, (uint8_t)1);
     }
 
-    void unset_is_exit (const int x, const int y)
+    void unset_is_descend_dungeon (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        decr(_is_exit, x, y, (uint8_t)1);
+        decr(_is_descend_dungeon, x, y, (uint8_t)1);
     }
 
-    uint8_t is_sewer_entrance (const point &p)
+    uint8_t is_ascend_sewer (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_sewer_entrance, p.x, p.y));
+        return (get(_is_ascend_sewer, p.x, p.y));
     }
 
-    uint8_t is_sewer_entrance (const int x, const int y)
+    uint8_t is_ascend_sewer (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_sewer_entrance, x, y));
+        return (get(_is_ascend_sewer, x, y));
     }
 
-    void set_is_sewer_entrance (const int x, const int y)
+    void set_is_ascend_sewer (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        incr(_is_sewer_entrance, x, y, (uint8_t)1);
+        incr(_is_ascend_sewer, x, y, (uint8_t)1);
     }
 
-    void unset_is_sewer_entrance (const int x, const int y)
+    void unset_is_ascend_sewer (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        decr(_is_sewer_entrance, x, y, (uint8_t)1);
+        decr(_is_ascend_sewer, x, y, (uint8_t)1);
     }
 
-    uint8_t is_sewer_exit (const point &p)
+    uint8_t is_descend_sewer (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_sewer_exit, p.x, p.y));
+        return (get(_is_descend_sewer, p.x, p.y));
     }
 
-    uint8_t is_sewer_exit (const int x, const int y)
+    uint8_t is_descend_sewer (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_sewer_exit, x, y));
+        return (get(_is_descend_sewer, x, y));
     }
 
-    void set_is_sewer_exit (const int x, const int y)
+    void set_is_descend_sewer (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        incr(_is_sewer_exit, x, y, (uint8_t)1);
+        incr(_is_descend_sewer, x, y, (uint8_t)1);
     }
 
-    void unset_is_sewer_exit (const int x, const int y)
+    void unset_is_descend_sewer (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        decr(_is_sewer_exit, x, y, (uint8_t)1);
+        decr(_is_descend_sewer, x, y, (uint8_t)1);
     }
 
     uint8_t is_smoke (const point &p)
@@ -1983,8 +1983,8 @@ public:
     bool create_sewer(point3d at, int seed);
     bool create_sewer_pipes(point3d at);
     bool create_sewer_pools(void);
-    void create_sewer_place_remaining_rocks(const std::string &what);
-    void create_sewer_place_rocks(int variant, int block_width, int block_height, int tries);
+    void create_sewer_place_remaining_walls(const std::string &what);
+    void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dbg_(const char *fmt, va_list args); // compile error without
     void display_external_particles(void);

@@ -16,8 +16,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     int down = false;
     int left = false;
     int right = false;
-    int is_entrance = false;
-    int is_exit = false;
+    int is_ascend_dungeon = false;
+    int is_descend_dungeon = false;
     int is_lock = false;
     int is_key = false;
     int is_secret = false;
@@ -51,8 +51,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                                      &down,
                                      &left,
                                      &right,
-                                     &is_entrance,
-                                     &is_exit,
+                                     &is_ascend_dungeon,
+                                     &is_descend_dungeon,
                                      &is_lock,
                                      &is_key,
                                      &is_secret,
@@ -99,8 +99,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 } else if (m.is_blood            ||
                            m.is_deep_water       ||
                            m.is_door             ||
-                           m.is_entrance         ||
-                           m.is_exit             ||
+                           m.is_ascend_dungeon         ||
+                           m.is_descend_dungeon             ||
                            m.is_floor_deco       ||
                            m.is_food             ||
                            m.is_minion_generator ||
@@ -145,15 +145,15 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_secret_door ||
                     m.is_door) {
                     walls_string += c;
-                } else if (m.is_sewer_entrance) {
+                } else if (m.is_ascend_sewer) {
                     walls_string += Charmap::WALL;
                 } else {
                     walls_string += Charmap::SPACE;
                 }
 
                 if (m.is_blood            ||
-                    m.is_entrance         ||
-                    m.is_exit             ||
+                    m.is_ascend_dungeon         ||
+                    m.is_descend_dungeon             ||
                     m.is_floor_deco       ||
                     m.is_food             ||
                     m.is_minion_generator ||
@@ -166,7 +166,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_potion           ||
                     m.is_torch            ||
                     m.is_trap             ||
-                    m.is_sewer_entrance) {
+                    m.is_ascend_sewer) {
                     obj_strings += c;
                 } else {
                     obj_strings += Charmap::SPACE;
@@ -223,8 +223,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         r->dir_down    = down ? true : false;
         r->dir_left    = left ? true : false;
         r->dir_right   = right ? true : false;
-        r->is_entrance = is_entrance ? true : false;
-        r->is_exit     = is_exit ? true : false;
+        r->is_ascend_dungeon = is_ascend_dungeon ? true : false;
+        r->is_descend_dungeon     = is_descend_dungeon ? true : false;
         r->is_lock     = is_lock ? true : false;
         r->is_key      = is_key ? true : false;
         r->is_secret   = is_secret ? true : false;

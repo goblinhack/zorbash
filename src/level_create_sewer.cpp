@@ -24,32 +24,32 @@ bool Level::create_sewer (point3d at, int seed)
     if (g_errored) { return false; }
 
     auto tries = 10000;
-    create_sewer_place_rocks(1, 6, 6, tries);
+    create_sewer_place_walls(1, 6, 6, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(1, 6, 3, tries);
+    create_sewer_place_walls(1, 6, 3, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(1, 3, 6, tries);
+    create_sewer_place_walls(1, 3, 6, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(1, 3, 3, tries);
+    create_sewer_place_walls(1, 3, 3, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(2, 3, 3, tries);
+    create_sewer_place_walls(2, 3, 3, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(1, 2, 2, tries);
+    create_sewer_place_walls(1, 2, 2, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(2, 2, 2, tries);
+    create_sewer_place_walls(2, 2, 2, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(3, 2, 2, tries);
+    create_sewer_place_walls(3, 2, 2, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(1, 2, 1, tries);
+    create_sewer_place_walls(1, 2, 1, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(2, 2, 1, tries);
+    create_sewer_place_walls(2, 2, 1, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(1, 1, 2, tries);
+    create_sewer_place_walls(1, 1, 2, tries);
     if (g_errored) { return false; }
-    create_sewer_place_rocks(2, 1, 2, tries);
+    create_sewer_place_walls(2, 1, 2, tries);
     if (g_errored) { return false; }
 
-    create_sewer_place_remaining_rocks("rock1");
+    create_sewer_place_remaining_walls("sewer_wall");
     if (g_errored) { return false; }
 
     return true;
@@ -84,13 +84,16 @@ bool Level::create_sewer_pipes (point3d at)
     //
     point midpoint;
     int got_count = 0;
+    std::vector<point> sewers;
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_HEIGHT; x++) {
             FOR_ALL_THINGS(prev, t, x, y) {
-                if (t->is_sewer_entrance()) {
+                if (t->is_descend_sewer()) {
                     set(dmap.val, x, y, DMAP_IS_GOAL);
-                    midpoint += point(x, y);
+                    point p(x, y);
+                    midpoint += p;
+                    sewers.push_back(p);
                     got_count++;
                 }
             } FOR_ALL_THINGS_END()
@@ -108,52 +111,51 @@ bool Level::create_sewer_pipes (point3d at)
         midpoint /= got_count;
     }
 
-    point midpoint2;
-    midpoint2.x = random_range(0, MAP_WIDTH);
-    midpoint2.y = random_range(0, MAP_HEIGHT);
-
     dmap_print(&dmap);
     dmap_process(&dmap);
 
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_HEIGHT; x++) {
-            FOR_ALL_THINGS(prev, t, x, y) {
-                if (t->is_sewer_entrance()) {
-                    char path_debug = '\0'; // astart path debug
-                    auto result = astar_solve(path_debug, midpoint, point(x, y), &dmap);
+    for (auto tries = 0U; tries < sewers.size() / 2; tries++) {
+        auto a = sewers[random_range(0, sewers.size())];
+        auto b = sewers[random_range(0, sewers.size())];
 
-                    for (auto p : result.path) {
-                        (void) thing_new("corridor2", p);
-                        if (random_range(0, 100) < 50) {
-                            if (random_range(0, 100) < 50) {
-                                (void) thing_new("water1", p);
-                            } else {
-                                (void) thing_new("deep_water1", p);
-                            }
-                        }
-                    }
-
-                    if (random_range(0, 100) < 20) {
-                        auto result = astar_solve(path_debug, midpoint2, point(x, y), &dmap);
-                        for (auto p : result.path) {
-                            (void) thing_new("corridor3", p);
-                        }
-                    }
-
-                    (void) thing_new("sewer_exit1", point(x, y));
-                }
-            } FOR_ALL_THINGS_END()
+        if (a == b) {
+            b = midpoint;
         }
+
+        char path_debug = '\0'; // astart path debug
+        auto result = astar_solve(path_debug, a, b, &dmap);
+
+        for (auto p : result.path) {
+            (void) thing_new("corridor2", p);
+            if (random_range(0, 100) < 50) {
+                if (random_range(0, 100) < 50) {
+                    (void) thing_new("water1", p);
+                } else {
+                    (void) thing_new("deep_water1", p);
+                }
+            }
+        }
+
+        if (random_range(0, 100) < 5) {
+            auto result = astar_solve(path_debug, midpoint, a, &dmap);
+            for (auto p : result.path) {
+                (void) thing_new("corridor3", p);
+            }
+        }
+
+    }
+    for (auto sewer = 0U; sewer < sewers.size(); sewer++) {
+        (void) thing_new("descend_sewer1", sewers[sewer]);
     }
 
     return true;
 }
 
-void Level::create_sewer_place_rocks (int variant, int block_width, int block_height, int tries)
+void Level::create_sewer_place_walls (int variant, int block_width, int block_height, int tries)
 {_
-    auto tp = tp_random_rock();
+    auto tp = tp_random_sewer_wall();
     if (!tp) {
-        ERR("Place rocks failed");
+        ERR("Place walls failed");
         return;
     }
     auto what = tp->name();
@@ -168,7 +170,10 @@ void Level::create_sewer_place_rocks (int variant, int block_width, int block_he
             for (auto dy = 0; dy < block_height; dy++) {
                 auto Y = y + dy;
 
-                if (is_corridor(X, Y) || is_shallow_water(X, Y) || is_deep_water(X, Y)) {
+                if (is_corridor(X, Y) || 
+                    is_shallow_water(X, Y) || 
+                    is_descend_sewer(X, Y) || 
+                    is_deep_water(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -177,7 +182,7 @@ void Level::create_sewer_place_rocks (int variant, int block_width, int block_he
                 // We place large blocks and avoid splatting them with
                 // smaller ones here.
                 //
-                if (is_rock(X, Y)) {
+                if (is_wall(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -197,7 +202,7 @@ void Level::create_sewer_place_rocks (int variant, int block_width, int block_he
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                set_is_rock(X, Y);
+                set_is_wall(X, Y);
 
                 auto tilename = what + ".";
                 tilename += std::to_string(variant);
@@ -214,7 +219,7 @@ void Level::create_sewer_place_rocks (int variant, int block_width, int block_he
                 auto t = thing_new(what, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
-                    ERR("Rock tile %s not found", tilename.c_str());
+                    ERR("wall tile %s not found", tilename.c_str());
                     return;
                 }
                 t->tile_curr = tile->global_index;
@@ -228,16 +233,19 @@ void Level::create_sewer_place_rocks (int variant, int block_width, int block_he
     }
 }
 
-void Level::create_sewer_place_remaining_rocks (const std::string &what)
+void Level::create_sewer_place_remaining_walls (const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
 
-            if (is_corridor(x, y) || is_shallow_water(x, y) || is_deep_water(x, y)) {
+            if (is_corridor(x, y) || 
+                is_shallow_water(x, y) || 
+                is_descend_sewer(x, y) || 
+                is_deep_water(x, y)) {
                 continue;
             }
 
-            if (is_rock(x, y)) {
+            if (is_wall(x, y)) {
                 continue;
             }
 

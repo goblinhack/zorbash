@@ -28,8 +28,8 @@ public:
     bool is_secret                            {false};
     bool is_key                               {false};
     bool is_lock                              {false};
-    bool is_entrance                          {false};
-    bool is_exit                              {false};
+    bool is_ascend_dungeon                          {false};
+    bool is_descend_dungeon                              {false};
     bool on_critical_path                     {false};
     bool has_door_up                          {false};
     bool has_door_down                        {false};

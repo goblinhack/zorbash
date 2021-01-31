@@ -88,12 +88,12 @@ public:
     bool is_dirt_no_check(const int x, const int y);
     bool is_door(const int x, const int y);
     bool is_door_no_check(const int x, const int y);
-    bool is_entrance(const int x, const int y);
-    bool is_entrance_no_check(const int x, const int y);
-    bool is_exit(const int x, const int y);
-    bool is_exit_no_check(const int x, const int y);
-    bool is_sewer_entrance(const int x, const int y);
-    bool is_sewer_entrance_no_check(const int x, const int y);
+    bool is_ascend_dungeon(const int x, const int y);
+    bool is_ascend_dungeon_no_check(const int x, const int y);
+    bool is_descend_dungeon(const int x, const int y);
+    bool is_descend_dungeon_no_check(const int x, const int y);
+    bool is_ascend_sewer(const int x, const int y);
+    bool is_ascend_sewer_no_check(const int x, const int y);
     bool is_floor(const int x, const int y);
     bool is_floor_deco_at(const int x, const int y);
     bool is_floor_no_check(const int x, const int y);
@@ -115,7 +115,7 @@ public:
     bool is_torch(const int x, const int y);
     bool is_treasure(const int x, const int y);
     bool is_wall(const int x, const int y);
-    bool is_sewer_entrance_at(const int x, const int y);
+    bool is_ascend_sewer_at(const int x, const int y);
     bool is_wall_no_check(const int x, const int y);
     bool is_shallow_water(const int x, const int y);
     bool is_shallow_water_no_check(const int x, const int y);

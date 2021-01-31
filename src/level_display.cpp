@@ -390,15 +390,20 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         blit_fbo_unbind();
 
-        if (player && player->is_waiting_to_ascend) {
-            player->ascend();
+        if (player && player->is_waiting_to_descend_dungeon) {
+            player->descend_dungeon();
         }
-        if (player && player->is_waiting_to_descend_to_next_level) {
-            player->descend_to_next_level();
+        if (player && player->is_waiting_to_ascend_dungeon) {
+            player->ascend_dungeon();
         }
-        if (player && player->is_waiting_to_descend_to_sewer) {
-            player->descend_to_sewer();
+
+        if (player && player->is_waiting_to_descend_sewer) {
+            player->descend_sewer();
         }
+        if (player && player->is_waiting_to_ascend_sewer) {
+            player->ascend_sewer();
+        }
+
         if (player && player->is_waiting_to_fall) {
             player->fall_to_next_level();
         }

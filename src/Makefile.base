@@ -148,13 +148,11 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_distance.o              \
     $(OBJDIR)/thing_door.o                  \
     $(OBJDIR)/thing_drop.o                  \
+    $(OBJDIR)/thing_ascend_dungeon.o        \
+    $(OBJDIR)/thing_descend_dungeon.o       \
     $(OBJDIR)/thing_eat.o                   \
     $(OBJDIR)/thing_enemy.o                 \
-    $(OBJDIR)/thing_entrance.o              \
     $(OBJDIR)/thing_escape.o                \
-    $(OBJDIR)/thing_exit.o                  \
-    $(OBJDIR)/thing_sewer_entrance.o        \
-    $(OBJDIR)/thing_sewer_exit.o            \
     $(OBJDIR)/thing_fadeup.o                \
     $(OBJDIR)/thing_fall.o                  \
     $(OBJDIR)/thing_fini.o                  \
@@ -167,6 +165,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_hunger.o                \
     $(OBJDIR)/thing_id.o                    \
     $(OBJDIR)/thing_inherit.o               \
+    $(OBJDIR)/thing_ascend_sewer.o          \
+    $(OBJDIR)/thing_descend_sewer.o         \
     $(OBJDIR)/thing_init.o                  \
     $(OBJDIR)/thing_inventory.o             \
     $(OBJDIR)/thing_item.o                  \
@@ -205,6 +205,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_steal.o                 \
     $(OBJDIR)/thing_string.o                \
     $(OBJDIR)/thing_template.o              \
+    $(OBJDIR)/thing_template_random.o       \
     $(OBJDIR)/thing_template_api.o          \
     $(OBJDIR)/thing_terrain.o               \
     $(OBJDIR)/thing_text.o                  \

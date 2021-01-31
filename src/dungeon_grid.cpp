@@ -380,11 +380,11 @@ void Nodes::dump (void)
             }
 
             auto t = 0;
-            if (node->is_entrance) {
+            if (node->is_ascend_dungeon) {
                 set(out, oy, ox-1, 'S');
                 t++;
             }
-            if (node->is_exit) {
+            if (node->is_descend_dungeon) {
                 set(out, oy, ox-1, 'E');
                 t++;
             }
@@ -399,8 +399,8 @@ void Nodes::dump (void)
 
             if (t > 1) {
                 ERR("Too many node types S %d E %d D %d k %d",
-                    node->is_entrance,
-                    node->is_exit,
+                    node->is_ascend_dungeon,
+                    node->is_descend_dungeon,
                     node->is_lock,
                     node->is_key);
             }
@@ -697,8 +697,8 @@ void Nodes::init_nodes (void)
             n->y                                     = 0;
             n->is_key                                = false;
             n->is_lock                               = false;
-            n->is_entrance                           = false;
-            n->is_exit                               = false;
+            n->is_ascend_dungeon                           = false;
+            n->is_descend_dungeon                               = false;
             n->on_critical_path                      = false;
             n->dir_up                                = false;
             n->dir_down                              = false;
@@ -1320,10 +1320,10 @@ bool Nodes::place_lock (int depth, int pass)
             if (o->depth != depth) {
                 continue;
             }
-            if (o->is_exit) {
+            if (o->is_descend_dungeon) {
                 continue;
             }
-            if (o->is_entrance) {
+            if (o->is_ascend_dungeon) {
                 continue;
             }
             if (!o->on_critical_path) {
@@ -1437,10 +1437,10 @@ bool Nodes::place_key (int depth, int pass)
             if (o->is_lock) {
                 continue;
             }
-            if (o->is_entrance) {
+            if (o->is_ascend_dungeon) {
                 continue;
             }
-            if (o->is_exit) {
+            if (o->is_descend_dungeon) {
                 continue;
             }
             if (!o->on_critical_path) {
@@ -1485,10 +1485,10 @@ bool Nodes::place_entrance (void)
             if (o->is_lock) {
                 continue;
             }
-            if (o->is_entrance) {
+            if (o->is_ascend_dungeon) {
                 continue;
             }
-            if (o->is_exit) {
+            if (o->is_descend_dungeon) {
                 continue;
             }
 
@@ -1504,7 +1504,7 @@ bool Nodes::place_entrance (void)
     auto i = random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
-    n->is_entrance = true;
+    n->is_ascend_dungeon = true;
 
     return true;
 }
@@ -1526,10 +1526,10 @@ bool Nodes::place_exit (void)
             if (o->is_lock) {
                 continue;
             }
-            if (o->is_entrance) {
+            if (o->is_ascend_dungeon) {
                 continue;
             }
-            if (o->is_exit) {
+            if (o->is_descend_dungeon) {
                 continue;
             }
             if (o->depth == max_depth) {
@@ -1546,7 +1546,7 @@ bool Nodes::place_exit (void)
     auto i = random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
-    n->is_exit = true;
+    n->is_descend_dungeon = true;
 
     return true;
 }
@@ -1650,10 +1650,10 @@ bool Nodes::create_path_to_exit (int pass)
             if (!n) {
                 continue;
             }
-            if (n->is_entrance) {
+            if (n->is_ascend_dungeon) {
                 start = point(x, y);
             }
-            if (n->is_exit) {
+            if (n->is_descend_dungeon) {
                 end = point(x, y);
             }
         }
@@ -1940,10 +1940,10 @@ void Nodes::make_paths_off_critical_path_reachable (void)
             if (!n) {
                 continue;
             }
-            if (n->is_entrance) {
+            if (n->is_ascend_dungeon) {
                 start = point(x, y);
             }
-            if (n->is_exit) {
+            if (n->is_descend_dungeon) {
                 end = point(x, y);
             }
         }

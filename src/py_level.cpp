@@ -61,9 +61,9 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 } else if (m.is_blood            ||
                            m.is_deep_water       ||
                            m.is_door             ||
-                           m.is_entrance         ||
-                           m.is_exit             ||
-                           m.is_sewer_entrance   ||
+                           m.is_ascend_dungeon ||
+                           m.is_descend_dungeon     ||
+                           m.is_ascend_sewer   ||
                            m.is_floor_deco       ||
                            m.is_food             ||
                            m.is_minion_generator ||
@@ -108,16 +108,16 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_secret_door ||
                     m.is_door) {
                     walls_string += c;
-                } else if (m.is_sewer_entrance) {
+                } else if (m.is_ascend_sewer) {
                     walls_string += Charmap::WALL;
                 } else {
                     walls_string += Charmap::SPACE;
                 }
 
                 if (m.is_blood            ||
-                    m.is_entrance         ||
-                    m.is_exit             ||
-                    m.is_sewer_entrance   ||
+                    m.is_ascend_dungeon ||
+                    m.is_descend_dungeon     ||
+                    m.is_ascend_sewer   ||
                     m.is_floor_deco       ||
                     m.is_food             ||
                     m.is_minion_generator ||
@@ -130,7 +130,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_potion           ||
                     m.is_torch            ||
                     m.is_trap             ||
-                    m.is_sewer_entrance) {
+                    m.is_ascend_sewer) {
                     obj_strings += c;
                 } else {
                     obj_strings += Charmap::SPACE;

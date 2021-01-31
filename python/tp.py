@@ -118,8 +118,8 @@ class Tp:
     def set_is_floor_deco(self, value):
         zx.tp_set_is_floor_deco(self, value)
 
-    def set_is_sewer_entrance(self, value):
-        zx.tp_set_is_sewer_entrance(self, value)
+    def set_is_ascend_sewer(self, value):
+        zx.tp_set_is_ascend_sewer(self, value)
 
     def set_is_player(self, value):
         zx.tp_set_is_player(self, value)
@@ -247,14 +247,14 @@ class Tp:
     def set_is_rrr20(self, value):
         zx.tp_set_is_rrr20(self, value)
 
-    def set_is_rrr21(self, value):
-        zx.tp_set_is_rrr21(self, value)
+    def set_is_sewer_wall(self, value):
+        zx.tp_set_is_sewer_wall(self, value)
 
-    def set_is_rrr22(self, value):
-        zx.tp_set_is_rrr22(self, value)
+    def set_is_dungeon_wall(self, value):
+        zx.tp_set_is_dungeon_wall(self, value)
 
-    def set_is_sewer_exit(self, value):
-        zx.tp_set_is_sewer_exit(self, value)
+    def set_is_descend_sewer(self, value):
+        zx.tp_set_is_descend_sewer(self, value)
 
     def set_is_burnable(self, value):
         zx.tp_set_is_burnable(self, value)
@@ -772,14 +772,14 @@ class Tp:
     def set_is_interesting(self, value):
         zx.tp_set_is_interesting(self, value)
 
-    def set_is_exit(self, value):
-        zx.tp_set_is_exit(self, value)
+    def set_is_descend_dungeon(self, value):
+        zx.tp_set_is_descend_dungeon(self, value)
 
     def set_is_door(self, value):
         zx.tp_set_is_door(self, value)
 
-    def set_is_entrance(self, value):
-        zx.tp_set_is_entrance(self, value)
+    def set_is_ascend_dungeon(self, value):
+        zx.tp_set_is_ascend_dungeon(self, value)
 
     def set_move_speed_ms(self, value):
         zx.tp_set_move_speed_ms(self, value)

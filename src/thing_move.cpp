@@ -98,9 +98,10 @@ bool Thing::move (fpoint future_pos,
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
-        is_waiting_to_ascend || 
-        is_waiting_to_descend_to_next_level || 
-        is_waiting_to_descend_to_sewer || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_descend_sewer || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_sewer || 
         is_jumping) { 
         return false;
     }

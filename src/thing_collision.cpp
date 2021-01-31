@@ -1007,17 +1007,17 @@ _
         // Ignore is_ethereal to make it easier to attack ghosts
         //
         log("No; can pass through");
-    } else if (it->is_exit()) {
+    } else if (it->is_descend_dungeon()) {
         if (things_overlap(me, A_at, it)) {
             log("No; overlaps but can exit");
             return false;
         }
-    } else if (it->is_sewer_entrance()) {
+    } else if (it->is_ascend_sewer()) {
         if (things_overlap(me, A_at, it)) {
             log("No; overlaps but can exit via sewer entrance");
             return false;
         }
-    } else if (it->is_sewer_exit()) {
+    } else if (it->is_descend_sewer()) {
         if (things_overlap(me, A_at, it)) {
             log("No; overlaps but can exit via sewer exit");
             return false;

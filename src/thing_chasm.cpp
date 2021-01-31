@@ -30,9 +30,10 @@ bool Thing::chasm_tick (void)
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
-        is_waiting_to_ascend || 
-        is_waiting_to_descend_to_next_level || 
-        is_waiting_to_descend_to_sewer || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_descend_sewer || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_sewer || 
         is_waiting_to_fall || 
         is_chasm() || 
         is_the_grid || 

@@ -126,13 +126,13 @@ bool Thing::match (const std::string& what)
     if (is_droppable() && (what == "is_droppable")) {
         return true;
     }
-    if (is_entrance() && (what == "is_entrance")) {
+    if (is_ascend_dungeon() && (what == "is_ascend_dungeon")) {
         return true;
     }
     if (is_ethereal() && (what == "is_ethereal")) {
         return true;
     }
-    if (is_exit() && (what == "is_exit")) {
+    if (is_descend_dungeon() && (what == "is_descend_dungeon")) {
         return true;
     }
     if (is_explosion() && (what == "is_explosion")) {
@@ -327,13 +327,13 @@ bool Thing::match (const std::string& what)
     if (is_rrr20() && (what == "is_rrr20")) {
         return true;
     }
-    if (is_rrr21() && (what == "is_rrr21")) {
+    if (is_sewer_wall() && (what == "is_sewer_wall")) {
         return true;
     }
-    if (is_rrr22() && (what == "is_rrr22")) {
+    if (is_dungeon_wall() && (what == "is_dungeon_wall")) {
         return true;
     }
-    if (is_sewer_exit() && (what == "is_sewer_exit")) {
+    if (is_descend_sewer() && (what == "is_descend_sewer")) {
         return true;
     }
     if (is_burnable() && (what == "is_burnable")) {
@@ -498,7 +498,7 @@ bool Thing::match (const std::string& what)
     if (is_wall() && (what == "is_wall")) {
         return true;
     }
-    if (is_sewer_entrance() && (what == "is_sewer_entrance")) {
+    if (is_ascend_sewer() && (what == "is_ascend_sewer")) {
         return true;
     }
     if (is_water_lover() && (what == "is_water_lover")) {

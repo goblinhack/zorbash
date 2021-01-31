@@ -97,8 +97,6 @@ bool Level::create_dungeon (point3d at, int seed)
         if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor9", 9);
         if (g_errored) { return false; }
-        create_dungeon_place_remaining_walls(dungeon, "wall1");
-        if (g_errored) { return false; }
         create_dungeon_place_remaining_floor(dungeon, "floor1");
         if (g_errored) { return false; }
         create_dungeon_place_corridor(dungeon, "corridor1", 0);
@@ -129,6 +127,8 @@ bool Level::create_dungeon (point3d at, int seed)
         create_dungeon_place_rocks(dungeon, 2, 1, 2, tries);
         if (g_errored) { return false; }
 
+        create_dungeon_place_remaining_walls(dungeon, "dungeon_wall");
+        if (g_errored) { return false; }
         create_dungeon_place_remaining_rocks(dungeon, "rock1");
         if (g_errored) { return false; }
         place_dirt(dungeon);
@@ -154,7 +154,7 @@ bool Level::create_dungeon (point3d at, int seed)
         if (!game->level) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 for (auto y = 0; y < MAP_HEIGHT; y++) {
-                    if (dungeon->is_entrance(x, y)) {
+                    if (dungeon->is_ascend_dungeon(x, y)) {
                         auto t = thing_new("player2", fpoint(x, y));
 
 #if 0
@@ -216,7 +216,7 @@ placed_player:
 void Level::create_dungeon_place_walls (Dungeonp d, int variant, 
                                         int block_width, int block_height, int tries)
 {_
-    auto tp = tp_random_wall();
+    auto tp = tp_random_dungeon_wall();
     if (!tp) {
         ERR("Place walls failed");
         return;
@@ -331,7 +331,7 @@ void Level::create_dungeon_place_rocks (Dungeonp d, int variant,
                 // We place large blocks and avoid splatting them with
                 // smaller ones here.
                 //
-                if (is_rock(X, Y)) {
+                if (is_wall(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -555,9 +555,9 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
 
             if (d->is_blood(x, y))            { tp = tp_random_blood(); }
             if (d->is_door(x, y))             { tp = tp_random_door(); }
-            if (d->is_entrance(x, y))         { tp = tp_random_entrance(); }
-            if (d->is_exit(x, y))             { tp = tp_random_exit(); }
-            if (d->is_sewer_entrance(x, y))   { tp = tp_random_sewer_entrance(); }
+            if (d->is_ascend_dungeon(x, y))   { tp = tp_random_entrance(); }
+            if (d->is_descend_dungeon(x, y))  { tp = tp_random_exit(); }
+            if (d->is_ascend_sewer(x, y))     { tp = tp_random_descend_sewer(); }
             if (d->is_food(x, y))             { tp = tp_random_food(); }
             if (d->is_gold(x, y))             { tp = tp_random_gold(); }
             if (d->is_key(x, y))              { tp = tp_random_key(); }
@@ -647,39 +647,39 @@ void Level::create_dungeon_place_random_blood (Dungeonp d)
                 continue;
             }
 
-            if (d->is_entrance(x, y) ||
-                d->is_entrance(x - 1, y) ||
-                d->is_entrance(x + 1, y) ||
-                d->is_entrance(x, y - 1) ||
-                d->is_entrance(x, y + 1) ||
-                d->is_entrance(x - 1, y - 1) ||
-                d->is_entrance(x + 1, y - 1) ||
-                d->is_entrance(x - 1, y + 1) ||
-                d->is_entrance(x + 1, y + 1)) {
+            if (d->is_ascend_dungeon(x, y) ||
+                d->is_ascend_dungeon(x - 1, y) ||
+                d->is_ascend_dungeon(x + 1, y) ||
+                d->is_ascend_dungeon(x, y - 1) ||
+                d->is_ascend_dungeon(x, y + 1) ||
+                d->is_ascend_dungeon(x - 1, y - 1) ||
+                d->is_ascend_dungeon(x + 1, y - 1) ||
+                d->is_ascend_dungeon(x - 1, y + 1) ||
+                d->is_ascend_dungeon(x + 1, y + 1)) {
                 continue;
             }
 
-            if (d->is_exit(x, y) ||
-                d->is_exit(x - 1, y) ||
-                d->is_exit(x + 1, y) ||
-                d->is_exit(x, y - 1) ||
-                d->is_exit(x, y + 1) ||
-                d->is_exit(x - 1, y - 1) ||
-                d->is_exit(x + 1, y - 1) ||
-                d->is_exit(x - 1, y + 1) ||
-                d->is_exit(x + 1, y + 1)) {
+            if (d->is_descend_dungeon(x, y) ||
+                d->is_descend_dungeon(x - 1, y) ||
+                d->is_descend_dungeon(x + 1, y) ||
+                d->is_descend_dungeon(x, y - 1) ||
+                d->is_descend_dungeon(x, y + 1) ||
+                d->is_descend_dungeon(x - 1, y - 1) ||
+                d->is_descend_dungeon(x + 1, y - 1) ||
+                d->is_descend_dungeon(x - 1, y + 1) ||
+                d->is_descend_dungeon(x + 1, y + 1)) {
                 continue;
             }
 
-            if (d->is_exit(x, y) ||
-                d->is_exit(x - 1, y) ||
-                d->is_exit(x + 1, y) ||
-                d->is_exit(x, y - 1) ||
-                d->is_exit(x, y + 1) ||
-                d->is_exit(x - 1, y - 1) ||
-                d->is_exit(x + 1, y - 1) ||
-                d->is_exit(x - 1, y + 1) ||
-                d->is_exit(x + 1, y + 1)) {
+            if (d->is_descend_dungeon(x, y) ||
+                d->is_descend_dungeon(x - 1, y) ||
+                d->is_descend_dungeon(x + 1, y) ||
+                d->is_descend_dungeon(x, y - 1) ||
+                d->is_descend_dungeon(x, y + 1) ||
+                d->is_descend_dungeon(x - 1, y - 1) ||
+                d->is_descend_dungeon(x + 1, y - 1) ||
+                d->is_descend_dungeon(x - 1, y + 1) ||
+                d->is_descend_dungeon(x + 1, y + 1)) {
                 continue;
             }
 
@@ -783,8 +783,8 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
             if (d->is_food(x, y)              ||
                 d->is_blood(x, y)             ||
                 d->is_door(x, y)              ||
-                d->is_entrance(x, y)          ||
-                d->is_exit(x, y)              ||
+                d->is_ascend_dungeon(x, y)          ||
+                d->is_descend_dungeon(x, y)              ||
                 d->is_minion_generator(x, y)  ||
                 d->is_key(x, y)               ||
                 d->is_potion(x, y)            ||
@@ -865,7 +865,7 @@ void Level::create_dungeon_place_sewer_pipes (Dungeonp d)
             //
             mysrand(seed + x + (y * MAP_WIDTH));
 
-            auto tp = tp_random_sewer_entrance();
+            auto tp = tp_random_descend_sewer();
             if (!tp) {
                 return;
             }
@@ -937,11 +937,15 @@ void Level::create_dungeon_place_remaining_walls (Dungeonp d, const std::string 
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (is_wall(x, y)) {
+            if (is_rock(x, y) || is_wall(x, y)) {
                 continue;
             }
 
-            if (!d->is_wall(x, y)) {
+            if (!d->is_rock(x, y) && !d->is_wall(x, y)) {
+                continue;
+            }
+
+            if (random_range(0, 100) < 50) {
                 continue;
             }
 
@@ -959,11 +963,11 @@ void Level::create_dungeon_place_remaining_rocks (Dungeonp d, const std::string 
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (is_rock(x, y)) {
+            if (is_rock(x, y) || is_wall(x, y)) {
                 continue;
             }
 
-            if (!d->is_rock(x, y)) {
+            if (!d->is_rock(x, y) && !d->is_wall(x, y)) {
                 continue;
             }
 

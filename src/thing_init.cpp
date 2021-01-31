@@ -275,7 +275,7 @@ void Thing::init (Levelp level,
         }
     }
 
-    if (unlikely(tpp->is_entrance())) {
+    if (unlikely(tpp->is_ascend_dungeon())) {
         if (level->world_at.z > 1) {
             is_open = true;
         }
