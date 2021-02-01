@@ -12,6 +12,8 @@ bool Level::create_sewer (point3d at, int seed)
 {_
     log("Create sewer at (%d,%d,%d)", at.x, at.y, at.z);
 
+    is_sewer_level = true;
+
     place_the_grid();
     if (g_errored) { return false; }
 
@@ -127,12 +129,8 @@ bool Level::create_sewer_pipes (point3d at)
 
         for (auto p : result.path) {
             (void) thing_new("corridor2", p);
-            if (random_range(0, 100) < 50) {
-                if (random_range(0, 100) < 50) {
-                    (void) thing_new("water1", p);
-                } else {
-                    (void) thing_new("deep_water1", p);
-                }
+            if (random_range(0, 100) < 95) {
+                (void) thing_new("water1", p);
             }
         }
 

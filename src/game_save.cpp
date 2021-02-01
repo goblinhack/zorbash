@@ -340,6 +340,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* map_tl */                out << bits(my.t->map_tl);
     /* map_wanted_at */         out << bits(my.t->map_wanted_at);
     /* minimap_valid */         out << bits(my.t->minimap_valid);
+    /* is_dungeon_level */      out << bits(my.t->is_dungeon_level);
+    /* is_sewer_level */        out << bits(my.t->is_sewer_level);
     /* monst_count */           out << bits(my.t->monst_count);
     /* mouse */                 out << bits(my.t->mouse);
     /* mouse_old */             out << bits(my.t->mouse_old);

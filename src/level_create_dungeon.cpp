@@ -13,6 +13,8 @@ bool Level::create_dungeon (point3d at, int seed)
 {_
     log("Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
 
+    is_dungeon_level = true;
+
     while (true) {
         auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH,
                                    MAP_GRID_HEIGHT, seed);

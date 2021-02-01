@@ -399,6 +399,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* map_tl */                in >> bits(l->map_tl);
     /* map_wanted_at */         in >> bits(l->map_wanted_at);
     /* minimap_valid */         in >> bits(l->minimap_valid);
+    /* is_dungeon_level */      in >> bits(l->is_dungeon_level);
+    /* is_sewer_level */        in >> bits(l->is_sewer_level);
     /* monst_count */           in >> bits(l->monst_count);
     /* mouse */                 in >> bits(l->mouse);
     /* mouse_old */             in >> bits(l->mouse_old);

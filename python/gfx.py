@@ -3001,6 +3001,78 @@ def init_tiles3_water():
         file="data/gfx/tiles3_water.tga",
         name="tiles3_water", width=32, height=32, arr=tiles)
 
+def init_tiles3_sewer_water():
+    tiles = [
+      "sewer_water1a",
+      "sewer_water2a",
+      "sewer_water3a",
+      "sewer_water4a",
+      "sewer_water5a",
+      "sewer_water6a",
+      "sewer_water7a",
+      "sewer_water8a",
+      "sewer_water1b",
+      "sewer_water2b",
+      "sewer_water3b",
+      "sewer_water4b",
+      "sewer_water5b",
+      "sewer_water6b",
+      "sewer_water7b",
+      "sewer_water8b",
+      "sewer_water1c",
+      "sewer_water2c",
+      "sewer_water3c",
+      "sewer_water4c",
+      "sewer_water5c",
+      "sewer_water6c",
+      "sewer_water7c",
+      "sewer_water8c",
+      "sewer_water1d",
+      "sewer_water2d",
+      "sewer_water3d",
+      "sewer_water4d",
+      "sewer_water5d",
+      "sewer_water6d",
+      "sewer_water7d",
+      "sewer_water8d",
+      "sewer_water1e",
+      "sewer_water2e",
+      "sewer_water3e",
+      "sewer_water4e",
+      "sewer_water5e",
+      "sewer_water6e",
+      "sewer_water7e",
+      "sewer_water8e",
+      "sewer_water1f",
+      "sewer_water2f",
+      "sewer_water3f",
+      "sewer_water4f",
+      "sewer_water5f",
+      "sewer_water6f",
+      "sewer_water7f",
+      "sewer_water8f",
+      "sewer_water1g",
+      "sewer_water2g",
+      "sewer_water3g",
+      "sewer_water4g",
+      "sewer_water5g",
+      "sewer_water6g",
+      "sewer_water7g",
+      "sewer_water8g",
+      "sewer_water1h",
+      "sewer_water2h",
+      "sewer_water3h",
+      "sewer_water4h",
+      "sewer_water5h",
+      "sewer_water6h",
+      "sewer_water7h",
+      "sewer_water8h",
+    ]
+
+    zx.tile_load_arr_sprites(
+        file="data/gfx/tiles3_sewer_water.tga",
+        name="tiles3_sewer_water", width=32, height=32, arr=tiles)
+
 def init_tiles3_deep_water():
     tiles = [
       "deep_water1a",
@@ -3305,6 +3377,7 @@ init_tiles1()
 init_tiles2()
 init_tiles3()
 init_tiles3_water()
+init_tiles3_sewer_water()
 init_tiles3_lava()
 init_chasm()
 init_tiles3_deep_water()
