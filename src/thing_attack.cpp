@@ -16,8 +16,6 @@ bool Thing::possible_to_attack (const Thingp it)
 {_
     auto me = tp();
 
-    log("Is possible to attack %s?", it->to_string().c_str());
-_
     auto owner = get_top_owner();
 
     if (owner && owner->is_player()) {
@@ -41,6 +39,8 @@ _
         return false;
     }
 
+    log("Is possible to attack %s?", it->to_string().c_str());
+_
     //
     // Fire attacks via tick so it can get you when you fall or jump into it.
     //

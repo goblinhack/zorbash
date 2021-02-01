@@ -36,72 +36,143 @@ void Level::display_water (int fbo,
 #define WATER_ACROSS 8
 #define WATER_DOWN   8
 
-    static std::array<std::array<Tilep, WATER_DOWN>, WATER_ACROSS> water;
-    if (!water[0][0]) {
-        set(water, 0, 0, tile_find("water1a"));
-        set(water, 1, 0, tile_find("water2a"));
-        set(water, 2, 0, tile_find("water3a"));
-        set(water, 3, 0, tile_find("water4a"));
-        set(water, 4, 0, tile_find("water5a"));
-        set(water, 5, 0, tile_find("water6a"));
-        set(water, 6, 0, tile_find("water7a"));
-        set(water, 7, 0, tile_find("water8a"));
-        set(water, 0, 1, tile_find("water1b"));
-        set(water, 1, 1, tile_find("water2b"));
-        set(water, 2, 1, tile_find("water3b"));
-        set(water, 3, 1, tile_find("water4b"));
-        set(water, 4, 1, tile_find("water5b"));
-        set(water, 5, 1, tile_find("water6b"));
-        set(water, 6, 1, tile_find("water7b"));
-        set(water, 7, 1, tile_find("water8b"));
-        set(water, 0, 2, tile_find("water1c"));
-        set(water, 1, 2, tile_find("water2c"));
-        set(water, 2, 2, tile_find("water3c"));
-        set(water, 3, 2, tile_find("water4c"));
-        set(water, 4, 2, tile_find("water5c"));
-        set(water, 5, 2, tile_find("water6c"));
-        set(water, 6, 2, tile_find("water7c"));
-        set(water, 7, 2, tile_find("water8c"));
-        set(water, 0, 3, tile_find("water1d"));
-        set(water, 1, 3, tile_find("water2d"));
-        set(water, 2, 3, tile_find("water3d"));
-        set(water, 3, 3, tile_find("water4d"));
-        set(water, 4, 3, tile_find("water5d"));
-        set(water, 5, 3, tile_find("water6d"));
-        set(water, 6, 3, tile_find("water7d"));
-        set(water, 7, 3, tile_find("water8d"));
-        set(water, 0, 4, tile_find("water1e"));
-        set(water, 1, 4, tile_find("water2e"));
-        set(water, 2, 4, tile_find("water3e"));
-        set(water, 3, 4, tile_find("water4e"));
-        set(water, 4, 4, tile_find("water5e"));
-        set(water, 5, 4, tile_find("water6e"));
-        set(water, 6, 4, tile_find("water7e"));
-        set(water, 7, 4, tile_find("water8e"));
-        set(water, 0, 5, tile_find("water1f"));
-        set(water, 1, 5, tile_find("water2f"));
-        set(water, 2, 5, tile_find("water3f"));
-        set(water, 3, 5, tile_find("water4f"));
-        set(water, 4, 5, tile_find("water5f"));
-        set(water, 5, 5, tile_find("water6f"));
-        set(water, 6, 5, tile_find("water7f"));
-        set(water, 7, 5, tile_find("water8f"));
-        set(water, 0, 6, tile_find("water1g"));
-        set(water, 1, 6, tile_find("water2g"));
-        set(water, 2, 6, tile_find("water3g"));
-        set(water, 3, 6, tile_find("water4g"));
-        set(water, 4, 6, tile_find("water5g"));
-        set(water, 5, 6, tile_find("water6g"));
-        set(water, 6, 6, tile_find("water7g"));
-        set(water, 7, 6, tile_find("water8g"));
-        set(water, 0, 7, tile_find("water1h"));
-        set(water, 1, 7, tile_find("water2h"));
-        set(water, 2, 7, tile_find("water3h"));
-        set(water, 3, 7, tile_find("water4h"));
-        set(water, 4, 7, tile_find("water5h"));
-        set(water, 5, 7, tile_find("water6h"));
-        set(water, 6, 7, tile_find("water7h"));
-        set(water, 7, 7, tile_find("water8h"));
+    static std::array<std::array<Tilep, WATER_DOWN>, WATER_ACROSS> water[2];
+
+    int level_type = 0;
+    if (is_sewer_level) {
+        level_type = 1;
+    }
+
+    if (!water[0][0][0]) {
+        set(water[0], 0, 0, tile_find("water1a"));
+        set(water[0], 1, 0, tile_find("water2a"));
+        set(water[0], 2, 0, tile_find("water3a"));
+        set(water[0], 3, 0, tile_find("water4a"));
+        set(water[0], 4, 0, tile_find("water5a"));
+        set(water[0], 5, 0, tile_find("water6a"));
+        set(water[0], 6, 0, tile_find("water7a"));
+        set(water[0], 7, 0, tile_find("water8a"));
+        set(water[0], 0, 1, tile_find("water1b"));
+        set(water[0], 1, 1, tile_find("water2b"));
+        set(water[0], 2, 1, tile_find("water3b"));
+        set(water[0], 3, 1, tile_find("water4b"));
+        set(water[0], 4, 1, tile_find("water5b"));
+        set(water[0], 5, 1, tile_find("water6b"));
+        set(water[0], 6, 1, tile_find("water7b"));
+        set(water[0], 7, 1, tile_find("water8b"));
+        set(water[0], 0, 2, tile_find("water1c"));
+        set(water[0], 1, 2, tile_find("water2c"));
+        set(water[0], 2, 2, tile_find("water3c"));
+        set(water[0], 3, 2, tile_find("water4c"));
+        set(water[0], 4, 2, tile_find("water5c"));
+        set(water[0], 5, 2, tile_find("water6c"));
+        set(water[0], 6, 2, tile_find("water7c"));
+        set(water[0], 7, 2, tile_find("water8c"));
+        set(water[0], 0, 3, tile_find("water1d"));
+        set(water[0], 1, 3, tile_find("water2d"));
+        set(water[0], 2, 3, tile_find("water3d"));
+        set(water[0], 3, 3, tile_find("water4d"));
+        set(water[0], 4, 3, tile_find("water5d"));
+        set(water[0], 5, 3, tile_find("water6d"));
+        set(water[0], 6, 3, tile_find("water7d"));
+        set(water[0], 7, 3, tile_find("water8d"));
+        set(water[0], 0, 4, tile_find("water1e"));
+        set(water[0], 1, 4, tile_find("water2e"));
+        set(water[0], 2, 4, tile_find("water3e"));
+        set(water[0], 3, 4, tile_find("water4e"));
+        set(water[0], 4, 4, tile_find("water5e"));
+        set(water[0], 5, 4, tile_find("water6e"));
+        set(water[0], 6, 4, tile_find("water7e"));
+        set(water[0], 7, 4, tile_find("water8e"));
+        set(water[0], 0, 5, tile_find("water1f"));
+        set(water[0], 1, 5, tile_find("water2f"));
+        set(water[0], 2, 5, tile_find("water3f"));
+        set(water[0], 3, 5, tile_find("water4f"));
+        set(water[0], 4, 5, tile_find("water5f"));
+        set(water[0], 5, 5, tile_find("water6f"));
+        set(water[0], 6, 5, tile_find("water7f"));
+        set(water[0], 7, 5, tile_find("water8f"));
+        set(water[0], 0, 6, tile_find("water1g"));
+        set(water[0], 1, 6, tile_find("water2g"));
+        set(water[0], 2, 6, tile_find("water3g"));
+        set(water[0], 3, 6, tile_find("water4g"));
+        set(water[0], 4, 6, tile_find("water5g"));
+        set(water[0], 5, 6, tile_find("water6g"));
+        set(water[0], 6, 6, tile_find("water7g"));
+        set(water[0], 7, 6, tile_find("water8g"));
+        set(water[0], 0, 7, tile_find("water1h"));
+        set(water[0], 1, 7, tile_find("water2h"));
+        set(water[0], 2, 7, tile_find("water3h"));
+        set(water[0], 3, 7, tile_find("water4h"));
+        set(water[0], 4, 7, tile_find("water5h"));
+        set(water[0], 5, 7, tile_find("water6h"));
+        set(water[0], 6, 7, tile_find("water7h"));
+        set(water[0], 7, 7, tile_find("water8h"));
+
+        set(water[1], 0, 0, tile_find("sewer_water1a"));
+        set(water[1], 1, 0, tile_find("sewer_water2a"));
+        set(water[1], 2, 0, tile_find("sewer_water3a"));
+        set(water[1], 3, 0, tile_find("sewer_water4a"));
+        set(water[1], 4, 0, tile_find("sewer_water5a"));
+        set(water[1], 5, 0, tile_find("sewer_water6a"));
+        set(water[1], 6, 0, tile_find("sewer_water7a"));
+        set(water[1], 7, 0, tile_find("sewer_water8a"));
+        set(water[1], 0, 1, tile_find("sewer_water1b"));
+        set(water[1], 1, 1, tile_find("sewer_water2b"));
+        set(water[1], 2, 1, tile_find("sewer_water3b"));
+        set(water[1], 3, 1, tile_find("sewer_water4b"));
+        set(water[1], 4, 1, tile_find("sewer_water5b"));
+        set(water[1], 5, 1, tile_find("sewer_water6b"));
+        set(water[1], 6, 1, tile_find("sewer_water7b"));
+        set(water[1], 7, 1, tile_find("sewer_water8b"));
+        set(water[1], 0, 2, tile_find("sewer_water1c"));
+        set(water[1], 1, 2, tile_find("sewer_water2c"));
+        set(water[1], 2, 2, tile_find("sewer_water3c"));
+        set(water[1], 3, 2, tile_find("sewer_water4c"));
+        set(water[1], 4, 2, tile_find("sewer_water5c"));
+        set(water[1], 5, 2, tile_find("sewer_water6c"));
+        set(water[1], 6, 2, tile_find("sewer_water7c"));
+        set(water[1], 7, 2, tile_find("sewer_water8c"));
+        set(water[1], 0, 3, tile_find("sewer_water1d"));
+        set(water[1], 1, 3, tile_find("sewer_water2d"));
+        set(water[1], 2, 3, tile_find("sewer_water3d"));
+        set(water[1], 3, 3, tile_find("sewer_water4d"));
+        set(water[1], 4, 3, tile_find("sewer_water5d"));
+        set(water[1], 5, 3, tile_find("sewer_water6d"));
+        set(water[1], 6, 3, tile_find("sewer_water7d"));
+        set(water[1], 7, 3, tile_find("sewer_water8d"));
+        set(water[1], 0, 4, tile_find("sewer_water1e"));
+        set(water[1], 1, 4, tile_find("sewer_water2e"));
+        set(water[1], 2, 4, tile_find("sewer_water3e"));
+        set(water[1], 3, 4, tile_find("sewer_water4e"));
+        set(water[1], 4, 4, tile_find("sewer_water5e"));
+        set(water[1], 5, 4, tile_find("sewer_water6e"));
+        set(water[1], 6, 4, tile_find("sewer_water7e"));
+        set(water[1], 7, 4, tile_find("sewer_water8e"));
+        set(water[1], 0, 5, tile_find("sewer_water1f"));
+        set(water[1], 1, 5, tile_find("sewer_water2f"));
+        set(water[1], 2, 5, tile_find("sewer_water3f"));
+        set(water[1], 3, 5, tile_find("sewer_water4f"));
+        set(water[1], 4, 5, tile_find("sewer_water5f"));
+        set(water[1], 5, 5, tile_find("sewer_water6f"));
+        set(water[1], 6, 5, tile_find("sewer_water7f"));
+        set(water[1], 7, 5, tile_find("sewer_water8f"));
+        set(water[1], 0, 6, tile_find("sewer_water1g"));
+        set(water[1], 1, 6, tile_find("sewer_water2g"));
+        set(water[1], 2, 6, tile_find("sewer_water3g"));
+        set(water[1], 3, 6, tile_find("sewer_water4g"));
+        set(water[1], 4, 6, tile_find("sewer_water5g"));
+        set(water[1], 5, 6, tile_find("sewer_water6g"));
+        set(water[1], 6, 6, tile_find("sewer_water7g"));
+        set(water[1], 7, 6, tile_find("sewer_water8g"));
+        set(water[1], 0, 7, tile_find("sewer_water1h"));
+        set(water[1], 1, 7, tile_find("sewer_water2h"));
+        set(water[1], 2, 7, tile_find("sewer_water3h"));
+        set(water[1], 3, 7, tile_find("sewer_water4h"));
+        set(water[1], 4, 7, tile_find("sewer_water5h"));
+        set(water[1], 5, 7, tile_find("sewer_water6h"));
+        set(water[1], 6, 7, tile_find("sewer_water7h"));
+        set(water[1], 7, 7, tile_find("sewer_water8h"));
     }
 
     auto z = MAP_DEPTH_WATER;
@@ -159,7 +230,7 @@ void Level::display_water (int fbo,
                 bry -= pixel_map_at.y;
             }
 
-            auto tile = get_no_check(water,
+            auto tile = get_no_check(water[level_type],
                                      (x&~1) % WATER_ACROSS,
                                      (y&~1) % WATER_DOWN);
             auto x1 = tile->x1;
@@ -213,6 +284,9 @@ void Level::display_water (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     color c = WHITE;
     c.a = 100;
+    if (is_sewer_level) {
+        c = DARKGREEN;
+    }
     glcolor(c);
     glTranslatef(-2, -2, 0); blit_fbo(fbo_mask1); glTranslatef( 2,  2, 0);
     glTranslatef( 0, -2, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  2, 0);
