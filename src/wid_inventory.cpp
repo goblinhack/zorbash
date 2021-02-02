@@ -278,7 +278,10 @@ static void wid_inventory_create (void)
             auto x1 = TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH;
             auto x2 = TERM_WIDTH - 1;
             point tl = make_point(x1, TERM_HEIGHT - 22);
-            point br = make_point(x2, TERM_HEIGHT - 1);
+            //
+            // Leave space for the minibar
+            //
+            point br = make_point(x2, TERM_HEIGHT - 10);
             color c;
 
             if (wid_inventory_window) {

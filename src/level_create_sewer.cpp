@@ -129,7 +129,7 @@ bool Level::create_sewer_pipes (point3d at)
 
         for (auto p : result.path) {
             (void) thing_new("corridor2", p);
-            if (random_range(0, 100) < 95) {
+            if (random_range(0, 100) < 25) {
                 (void) thing_new("water1", p);
             }
         }

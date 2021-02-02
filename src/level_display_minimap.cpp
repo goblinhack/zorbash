@@ -25,7 +25,7 @@ void Level::display_minimap (void)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glPushMatrix();
     glTranslatef(game->config.outer_pix_width - mx,
-                    game->config.outer_pix_height - my, 0);
+                 game->config.outer_pix_height - my, 0);
     blit_init();
     blit(fbo_tex_id[FBO_MINIMAP], 0.0, 1.0, 1.0, 0.0, 0, my, mx, 0.0);
     blit_flush();
