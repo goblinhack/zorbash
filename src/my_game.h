@@ -212,7 +212,7 @@ public:
     //
     bool               request_remake_inventory {};
     bool               request_destroy_bags {};   // Finished emptying temporary bag
-    bool               request_remake_rightbar {};
+    bool               update_rightbar {};
 
     //
     // An item being moved between bags
