@@ -39,4 +39,6 @@ void Thing::level_leave (void)
             level->all_active_things.erase(f);
         }
     }
+
+    game->update_rightbar = true;
 }

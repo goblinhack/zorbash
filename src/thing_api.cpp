@@ -1475,7 +1475,7 @@ int Thing::get_gold (void) const
 int Thing::set_gold (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1486,7 +1486,7 @@ int Thing::set_gold (int v)
 int Thing::decr_gold (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1500,7 +1500,7 @@ int Thing::decr_gold (int v)
 int Thing::incr_gold (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1511,7 +1511,7 @@ int Thing::incr_gold (int v)
 int Thing::decr_gold (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1525,7 +1525,7 @@ int Thing::decr_gold (void)
 int Thing::incr_gold (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1549,7 +1549,7 @@ int Thing::get_keys (void) const
 int Thing::set_keys (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1560,7 +1560,7 @@ int Thing::set_keys (int v)
 int Thing::decr_keys (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1574,7 +1574,7 @@ int Thing::decr_keys (int v)
 int Thing::incr_keys (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1585,7 +1585,7 @@ int Thing::incr_keys (int v)
 int Thing::decr_keys (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1599,7 +1599,7 @@ int Thing::decr_keys (void)
 int Thing::incr_keys (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1723,7 +1723,7 @@ int Thing::get_health (void) const
 int Thing::set_health (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1734,7 +1734,7 @@ int Thing::set_health (int v)
 int Thing::decr_health (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1745,7 +1745,7 @@ int Thing::decr_health (int v)
 int Thing::incr_health (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1756,7 +1756,7 @@ int Thing::incr_health (int v)
 int Thing::decr_health (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1767,7 +1767,7 @@ int Thing::decr_health (void)
 int Thing::incr_health (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1791,7 +1791,7 @@ int Thing::get_health_max (void) const
 int Thing::set_health_max (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1802,7 +1802,7 @@ int Thing::set_health_max (int v)
 int Thing::decr_health_max (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1813,7 +1813,7 @@ int Thing::decr_health_max (int v)
 int Thing::incr_health_max (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1824,7 +1824,7 @@ int Thing::incr_health_max (int v)
 int Thing::decr_health_max (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1835,7 +1835,7 @@ int Thing::decr_health_max (void)
 int Thing::incr_health_max (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1871,7 +1871,7 @@ int Thing::get_modifier_defence (void) const
 int Thing::set_modifier_defence (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1882,7 +1882,7 @@ int Thing::set_modifier_defence (int v)
 int Thing::decr_modifier_defence (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1896,7 +1896,7 @@ int Thing::decr_modifier_defence (int v)
 int Thing::incr_modifier_defence (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1907,7 +1907,7 @@ int Thing::incr_modifier_defence (int v)
 int Thing::decr_modifier_defence (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1921,7 +1921,7 @@ int Thing::decr_modifier_defence (void)
 int Thing::incr_modifier_defence (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1945,7 +1945,7 @@ int Thing::get_stats_stats19 (void) const
 int Thing::set_stats_stats19 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1956,7 +1956,7 @@ int Thing::set_stats_stats19 (int v)
 int Thing::decr_stats_stats19 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1967,7 +1967,7 @@ int Thing::decr_stats_stats19 (int v)
 int Thing::incr_stats_stats19 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1978,7 +1978,7 @@ int Thing::incr_stats_stats19 (int v)
 int Thing::decr_stats_stats19 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1989,7 +1989,7 @@ int Thing::decr_stats_stats19 (void)
 int Thing::incr_stats_stats19 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2013,7 +2013,7 @@ int Thing::get_stamina_max (void) const
 int Thing::set_stamina_max (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2024,7 +2024,7 @@ int Thing::set_stamina_max (int v)
 int Thing::decr_stamina_max (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2035,7 +2035,7 @@ int Thing::decr_stamina_max (int v)
 int Thing::incr_stamina_max (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2046,7 +2046,7 @@ int Thing::incr_stamina_max (int v)
 int Thing::decr_stamina_max (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2057,7 +2057,7 @@ int Thing::decr_stamina_max (void)
 int Thing::incr_stamina_max (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2187,7 +2187,7 @@ int Thing::get_stats01 (void) const
 int Thing::set_stats01 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2198,7 +2198,7 @@ int Thing::set_stats01 (int v)
 int Thing::decr_stats01 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2209,7 +2209,7 @@ int Thing::decr_stats01 (int v)
 int Thing::incr_stats01 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2220,7 +2220,7 @@ int Thing::incr_stats01 (int v)
 int Thing::decr_stats01 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2231,7 +2231,7 @@ int Thing::decr_stats01 (void)
 int Thing::incr_stats01 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2255,7 +2255,7 @@ int Thing::get_stats02 (void) const
 int Thing::set_stats02 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2266,7 +2266,7 @@ int Thing::set_stats02 (int v)
 int Thing::decr_stats02 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2277,7 +2277,7 @@ int Thing::decr_stats02 (int v)
 int Thing::incr_stats02 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2288,7 +2288,7 @@ int Thing::incr_stats02 (int v)
 int Thing::decr_stats02 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2299,7 +2299,7 @@ int Thing::decr_stats02 (void)
 int Thing::incr_stats02 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2323,7 +2323,7 @@ int Thing::get_stats03 (void) const
 int Thing::set_stats03 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2334,7 +2334,7 @@ int Thing::set_stats03 (int v)
 int Thing::decr_stats03 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2345,7 +2345,7 @@ int Thing::decr_stats03 (int v)
 int Thing::incr_stats03 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2356,7 +2356,7 @@ int Thing::incr_stats03 (int v)
 int Thing::decr_stats03 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2367,7 +2367,7 @@ int Thing::decr_stats03 (void)
 int Thing::incr_stats03 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2391,7 +2391,7 @@ int Thing::get_stats04 (void) const
 int Thing::set_stats04 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2402,7 +2402,7 @@ int Thing::set_stats04 (int v)
 int Thing::decr_stats04 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2413,7 +2413,7 @@ int Thing::decr_stats04 (int v)
 int Thing::incr_stats04 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2424,7 +2424,7 @@ int Thing::incr_stats04 (int v)
 int Thing::decr_stats04 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2435,7 +2435,7 @@ int Thing::decr_stats04 (void)
 int Thing::incr_stats04 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2459,7 +2459,7 @@ int Thing::get_stats05 (void) const
 int Thing::set_stats05 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2470,7 +2470,7 @@ int Thing::set_stats05 (int v)
 int Thing::decr_stats05 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2481,7 +2481,7 @@ int Thing::decr_stats05 (int v)
 int Thing::incr_stats05 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2492,7 +2492,7 @@ int Thing::incr_stats05 (int v)
 int Thing::decr_stats05 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2503,7 +2503,7 @@ int Thing::decr_stats05 (void)
 int Thing::incr_stats05 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2527,7 +2527,7 @@ int Thing::get_stats06 (void) const
 int Thing::set_stats06 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2538,7 +2538,7 @@ int Thing::set_stats06 (int v)
 int Thing::decr_stats06 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2549,7 +2549,7 @@ int Thing::decr_stats06 (int v)
 int Thing::incr_stats06 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2560,7 +2560,7 @@ int Thing::incr_stats06 (int v)
 int Thing::decr_stats06 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2571,7 +2571,7 @@ int Thing::decr_stats06 (void)
 int Thing::incr_stats06 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2595,7 +2595,7 @@ int Thing::get_stats07 (void) const
 int Thing::set_stats07 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2606,7 +2606,7 @@ int Thing::set_stats07 (int v)
 int Thing::decr_stats07 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2617,7 +2617,7 @@ int Thing::decr_stats07 (int v)
 int Thing::incr_stats07 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2628,7 +2628,7 @@ int Thing::incr_stats07 (int v)
 int Thing::decr_stats07 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2639,7 +2639,7 @@ int Thing::decr_stats07 (void)
 int Thing::incr_stats07 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2663,7 +2663,7 @@ int Thing::get_stats08 (void) const
 int Thing::set_stats08 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2674,7 +2674,7 @@ int Thing::set_stats08 (int v)
 int Thing::decr_stats08 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2685,7 +2685,7 @@ int Thing::decr_stats08 (int v)
 int Thing::incr_stats08 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2696,7 +2696,7 @@ int Thing::incr_stats08 (int v)
 int Thing::decr_stats08 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2707,7 +2707,7 @@ int Thing::decr_stats08 (void)
 int Thing::incr_stats08 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2731,7 +2731,7 @@ int Thing::get_stats09 (void) const
 int Thing::set_stats09 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2742,7 +2742,7 @@ int Thing::set_stats09 (int v)
 int Thing::decr_stats09 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2753,7 +2753,7 @@ int Thing::decr_stats09 (int v)
 int Thing::incr_stats09 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2764,7 +2764,7 @@ int Thing::incr_stats09 (int v)
 int Thing::decr_stats09 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2775,7 +2775,7 @@ int Thing::decr_stats09 (void)
 int Thing::incr_stats09 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2799,7 +2799,7 @@ int Thing::get_stats10 (void) const
 int Thing::set_stats10 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2810,7 +2810,7 @@ int Thing::set_stats10 (int v)
 int Thing::decr_stats10 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2821,7 +2821,7 @@ int Thing::decr_stats10 (int v)
 int Thing::incr_stats10 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2832,7 +2832,7 @@ int Thing::incr_stats10 (int v)
 int Thing::decr_stats10 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2843,7 +2843,7 @@ int Thing::decr_stats10 (void)
 int Thing::incr_stats10 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2867,7 +2867,7 @@ int Thing::get_stats11 (void) const
 int Thing::set_stats11 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2878,7 +2878,7 @@ int Thing::set_stats11 (int v)
 int Thing::decr_stats11 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2889,7 +2889,7 @@ int Thing::decr_stats11 (int v)
 int Thing::incr_stats11 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2900,7 +2900,7 @@ int Thing::incr_stats11 (int v)
 int Thing::decr_stats11 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2911,7 +2911,7 @@ int Thing::decr_stats11 (void)
 int Thing::incr_stats11 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2935,7 +2935,7 @@ int Thing::get_stats12 (void) const
 int Thing::set_stats12 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2946,7 +2946,7 @@ int Thing::set_stats12 (int v)
 int Thing::decr_stats12 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2957,7 +2957,7 @@ int Thing::decr_stats12 (int v)
 int Thing::incr_stats12 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2968,7 +2968,7 @@ int Thing::incr_stats12 (int v)
 int Thing::decr_stats12 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -2979,7 +2979,7 @@ int Thing::decr_stats12 (void)
 int Thing::incr_stats12 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3003,7 +3003,7 @@ int Thing::get_modifier_constitution (void) const
 int Thing::set_modifier_constitution (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3014,7 +3014,7 @@ int Thing::set_modifier_constitution (int v)
 int Thing::decr_modifier_constitution (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3025,7 +3025,7 @@ int Thing::decr_modifier_constitution (int v)
 int Thing::incr_modifier_constitution (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3036,7 +3036,7 @@ int Thing::incr_modifier_constitution (int v)
 int Thing::decr_modifier_constitution (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3047,7 +3047,7 @@ int Thing::decr_modifier_constitution (void)
 int Thing::incr_modifier_constitution (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3071,7 +3071,7 @@ int Thing::get_modifier_attack (void) const
 int Thing::set_modifier_attack (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3082,7 +3082,7 @@ int Thing::set_modifier_attack (int v)
 int Thing::decr_modifier_attack (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3093,7 +3093,7 @@ int Thing::decr_modifier_attack (int v)
 int Thing::incr_modifier_attack (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3104,7 +3104,7 @@ int Thing::incr_modifier_attack (int v)
 int Thing::decr_modifier_attack (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3115,7 +3115,7 @@ int Thing::decr_modifier_attack (void)
 int Thing::incr_modifier_attack (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3139,7 +3139,7 @@ int Thing::get_stats17 (void) const
 int Thing::set_stats17 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3150,7 +3150,7 @@ int Thing::set_stats17 (int v)
 int Thing::decr_stats17 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3161,7 +3161,7 @@ int Thing::decr_stats17 (int v)
 int Thing::incr_stats17 (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3172,7 +3172,7 @@ int Thing::incr_stats17 (int v)
 int Thing::decr_stats17 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3183,7 +3183,7 @@ int Thing::decr_stats17 (void)
 int Thing::incr_stats17 (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3402,7 +3402,7 @@ int Thing::get_modifier_strength (void) const
 int Thing::set_modifier_strength (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3413,7 +3413,7 @@ int Thing::set_modifier_strength (int v)
 int Thing::decr_modifier_strength (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3424,7 +3424,7 @@ int Thing::decr_modifier_strength (int v)
 int Thing::incr_modifier_strength (int v)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3435,7 +3435,7 @@ int Thing::incr_modifier_strength (int v)
 int Thing::decr_modifier_strength (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3446,7 +3446,7 @@ int Thing::decr_modifier_strength (void)
 int Thing::incr_modifier_strength (void)
 {_
     if (is_player()) {
-        game->request_remake_rightbar = true;
+        game->update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
