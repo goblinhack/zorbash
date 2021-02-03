@@ -77,6 +77,7 @@ static auto cppDemangle (const char *abiName)
         // -2: mangled_name is not a valid name under the C++ ABI mangling rules.
         // -3: One of the arguments is invalid.
         std::unique_ptr<char, decltype(deallocator) > retval(nullptr, deallocator);
+        return retval;
     }
 
     //
