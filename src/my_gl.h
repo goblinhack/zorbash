@@ -8,6 +8,9 @@
 #define _MY_GLAPI_H_
 #define GL_GLEXT_PROTOTYPES
 
+/* Defined before OpenGL and GLUT includes to avoid deprecation messages */
+#define GL_SILENCE_DEPRECATION
+
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #define __IPHONEOS__
 #include "SDL_opengles.h"
