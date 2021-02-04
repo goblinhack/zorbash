@@ -90,22 +90,20 @@ sdl_help()
 SDL2_SCORE=0
 
 if [ "$SDL2_CONFIG" != "" ]; then
-    SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
+    SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
 
-    find $SDL2_INC_PATH | grep -q SDL_mixer.h
-    if [ $? -eq 0 ]; then
-        SDL2_SCORE=`expr $SDL2_SCORE + 1`
-        SDL2_MIXER=`find $SDL2_INC_PATH -name SDL_mixer.h`
-    fi
-fi
+    if [[ "$SDL2_INC_PATH" != "" ]]; then
+        find $SDL2_INC_PATH | grep -q SDL_mixer.h
+        if [ $? -eq 0 ]; then
+            SDL2_SCORE=`expr $SDL2_SCORE + 1`
+            SDL2_MIXER=`find $SDL2_INC_PATH -name SDL_mixer.h`
+        fi
 
-if [ "$SDL2_CONFIG" != "" ]; then
-    SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
-
-    find $SDL2_INC_PATH | grep -q SDL_ttf.h
-    if [ $? -eq 0 ]; then
-        SDL2_SCORE=`expr $SDL2_SCORE + 1`
-        SDL2_TTF=`find $SDL2_INC_PATH -name SDL_ttf.h`
+        find $SDL2_INC_PATH | grep -q SDL_ttf.h
+        if [ $? -eq 0 ]; then
+            SDL2_SCORE=`expr $SDL2_SCORE + 1`
+            SDL2_TTF=`find $SDL2_INC_PATH -name SDL_ttf.h`
+        fi
     fi
 fi
 
@@ -290,20 +288,24 @@ Python2_SCORE=0
 Python3_SCORE=0
 
 if [ "$Python2_CONFIG" != "" ]; then
-    Python2_INC_PATH=`$Python2_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
+    Python2_INC_PATH=`$Python2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
 
-    find $Python2_INC_PATH | grep -q Python.h
-    if [ $? -eq 0 ]; then
-        Python2_SCORE=`expr $Python2_SCORE + 1`
+    if [[ "$Python2_INC_PATH" != "" ]]; then
+        find $Python2_INC_PATH | grep -q Python.h
+        if [ $? -eq 0 ]; then
+            Python2_SCORE=`expr $Python2_SCORE + 1`
+        fi
     fi
 fi
 
 if [ "$Python3_CONFIG" != "" ]; then
-    Python3_INC_PATH=`$Python3_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
+    Python3_INC_PATH=`$Python3_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
 
-    find $Python3_INC_PATH | grep -q Python.h
-    if [ $? -eq 0 ]; then
-        Python3_SCORE=`expr $Python3_SCORE + 1`
+    if [[ "$Python3_INC_PATH" != "" ]]; then
+        find $Python3_INC_PATH | grep -q Python.h
+        if [ $? -eq 0 ]; then
+            Python3_SCORE=`expr $Python3_SCORE + 1`
+        fi
     fi
 fi
 
