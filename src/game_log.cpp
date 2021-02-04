@@ -68,7 +68,6 @@ void Config::log (std::string pfx)
     auto old_pfx = pfx;
     pfx += "  ";
 
-    LOG("%s ascii_mode             %u", pfx.c_str(), ascii_mode);
     LOG("%s debug_mode             %u", pfx.c_str(), debug_mode);
     LOG("%s fps_counter            %u", pfx.c_str(), fps_counter);
     LOG("%s gfx_allow_highdpi      %u", pfx.c_str(), gfx_allow_highdpi);

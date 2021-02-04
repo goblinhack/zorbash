@@ -31,8 +31,8 @@ typedef struct {
     double texMaxY;
 } glyph;
 
-typedef struct {
-    SDL_Surface *image = {};
+typedef struct glyphtex_ {
+    SDL_Surface *image {};
     uint32_t tex;
     Texp tex_p = {};
 } glyphtex;

@@ -138,7 +138,8 @@ void Level::display_internal_particles (void)
             float tile_pix_height = tile->pix_height;
             float tileh = game->config.tile_pix_height;
 
-            if (0) {
+#if 0
+            {
                 //
                 // Not sure why but for internal particles this ends up
                 // making jumping slimes too large
@@ -156,6 +157,7 @@ void Level::display_internal_particles (void)
                     blit_br.y += ((ytiles-1) * tileh) / 2;
                 }
             }
+#endif
 
             if (unlikely(tpp &&
                          tpp->gfx_oversized_but_sitting_on_the_ground())) {

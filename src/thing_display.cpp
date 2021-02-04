@@ -391,8 +391,8 @@ bool Thing::get_coords (point &blit_tl,
             // Confusing in ascii mode
             //
             if (is_player() ||
-                (level->player && (get_immediate_owner_id() == level->player->id)) ||
-                !game->config.ascii_mode) {
+                (level->player && 
+                 (get_immediate_owner_id() == level->player->id))) {
                 if (get_timestamp_flip_start()) {
                     //
                     // Slow flip
@@ -717,7 +717,7 @@ void Thing::blit_internal (int fbo,
         auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
         auto x = (blit_tl.x + blit_br.x) / 2;
 
-        if (0) if (gfx_moves_ahead_shown()) {
+        if ((0)) if (gfx_moves_ahead_shown()) {
             auto diff = game->tick_current - get_tick();
             if ((diff > 0) && (diff <= THING_TICK_MAX_MOVES_AHEAD)) {
                 auto tile = get(game->tile_cache_moves_ahead, diff);
@@ -744,16 +744,6 @@ void Thing::blit_internal (int fbo,
             tile_blit(tile,
                       point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
                       point(x + TILE_WIDTH / 2, y));
-
-            //
-            // Not sure about showing the health
-            //
-            if (0) {
-                blit_text(std::to_string(h),
-                          WHITE,
-                          point(x - TILE_WIDTH / 2, y - TILE_HEIGHT),
-                          point(x + TILE_WIDTH / 2, y));
-            }
         }
     }
 

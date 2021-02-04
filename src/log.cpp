@@ -654,16 +654,6 @@ static void botcon_ (const wchar_t *fmt, va_list args)
 
 void botcon (const wchar_t *fmt)
 {
-    if (0)
-    {
-        char buf[MAXSTR];
-
-        buf[0] = '\0';
-        get_timestamp(buf, MAXSTR);
-        fprintf(MY_STDOUT, "%s", buf);
-        term_log(buf);
-    }
-
     {
         // fwprintf(MY_STDOUT, L"%S\n", fmt);
         // term_log(fmt);

@@ -233,10 +233,11 @@ void Dungeon::make_dungeon (void)
 
 void Dungeon::debug (const std::string s)
 {_
-    return;
-    LOG("Dungeon (%u) %s", seed, s.c_str());
-    LOG("===========================================================");
-    dump();
+    if (g_opt_debug3) {
+        LOG("Dungeon (%u) %s", seed, s.c_str());
+        LOG("===========================================================");
+        dump();
+    }
 }
 
 //
@@ -1067,10 +1068,11 @@ void Dungeon::create_node_map (void)
 
 void Dungeon::dump (void)
 {_
-    if (0) {
+    if (!g_opt_debug2) {
+        return;
+    }
+
     LOG("DUNGEON: Seed %u (with room depth)", seed);
-    //printf("DUNGEON: Seed %u (with room depth)\n", seed);
-    return;
     for (auto y = 0; y < map_height; y++) {
         std::string s;
         for (auto x = 0; x < map_width; x++) {
@@ -1121,7 +1123,7 @@ void Dungeon::dump (void)
             LOG("[%s]", s.c_str());
             //printf("[%s]\n", s.c_str());
         }
-    }}
+    }
 
     //
     // Pass 2 without room depths

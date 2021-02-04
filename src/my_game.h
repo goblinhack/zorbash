@@ -22,7 +22,7 @@ public:
     //
     float              ascii_gl_height              = {};
     float              ascii_gl_width               = {};
-    float              gfx_zoom                     = 3;
+    float              gfx_zoom                     = 4;
     float              one_pixel_height             = {};
     float              one_pixel_width              = {};
     float              scale_pix_height             = {};
@@ -32,7 +32,6 @@ public:
     float              tile_pixel_height            = {};
     float              tile_pixel_width             = {};
     float              video_w_h_ratio              = {};
-    int                ascii_mode                   = false;
     int                debug_mode                   = false;
     int                fps_counter                  = false;
     int                gfx_allow_highdpi            = false;
