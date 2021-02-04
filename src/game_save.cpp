@@ -421,7 +421,6 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* float              tile_pixel_height            */ out << bits(my.t.tile_pixel_height            );
     /* float              tile_pixel_width             */ out << bits(my.t.tile_pixel_width             );
     /* float              video_w_h_ratio              */ out << bits(my.t.video_w_h_ratio              );
-    /* int                ascii_mode                   */ out << bits(my.t.ascii_mode                   );
     /* int                debug_mode                   */ out << bits(my.t.debug_mode                   );
     /* int                fps_counter                  */ out << bits(my.t.fps_counter                  );
     /* int                gfx_allow_highdpi            */ out << bits(my.t.gfx_allow_highdpi            );

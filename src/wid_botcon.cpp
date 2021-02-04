@@ -74,19 +74,6 @@ static void wid_botcon_scroll (Widp w, std::wstring str)
     }
 }
 
-static void wid_botcon_replace (Widp w, std::wstring str)
-{_
-    Widp tmp {};
-
-    //
-    // Get the wid on the bottom of the list/screen.
-    //
-    tmp = wid_get_head(w);
-    if (tmp) {
-        wid_set_text(tmp, str);
-    }
-}
-
 void wid_botcon_clear (void)
 {_
     auto tmp = wid_get_head(wid_botcon_input_line);
@@ -126,11 +113,7 @@ static void wid_botcon_log_ (std::wstring s)
     //
     wid_botcon_flush();
 
-    if (last_msg == s) {
-        if (0) {
-            wid_botcon_replace(wid_botcon_input_line, s);
-        }
-    } else {
+    if (last_msg != s) {
         last_msg = s;
         last_msg_count = 0;
         wid_botcon_scroll(wid_botcon_input_line, s);

@@ -20,7 +20,6 @@ public:
     std::string python_mod;
     Dice (void);
     std::string to_string (void) const;
-    const char *to_cstring(void);
     Dice (std::string s);
     int roll(void) const;
     int max_roll(void) const;

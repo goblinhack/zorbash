@@ -985,7 +985,6 @@ public:
     bool will_avoid_threat(const fpoint &p);
     bool will_avoid_threat(const point &p);
     bool will_prefer_terrain(const Thingp it);
-    const char *to_cstring(void) const;
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
     const std::string& gfx_anim_attack(void) const;
     const std::string& light_color(void) const;

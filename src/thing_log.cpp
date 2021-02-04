@@ -172,7 +172,8 @@ void Thing::err_ (const char *fmt, va_list args) const
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "ERROR: Thing %s: ", t->to_cstring());
+    snprintf(buf + len, MAXSTR - len, "ERROR: Thing %s: ",
+             t->to_string().c_str());
 
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSTR - len, fmt, args);

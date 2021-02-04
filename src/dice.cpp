@@ -183,11 +183,6 @@ std::string Dice::to_string (void) const
     return (hd);
 }
 
-const char * Dice::to_cstring (void)
-{
-    return (to_string().c_str());
-}
-
 Dice::Dice (std::string s)
 {
     hd = s;

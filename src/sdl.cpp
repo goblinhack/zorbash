@@ -1122,28 +1122,6 @@ void config_gfx_vsync_update (void)
 //
 // User has entered a command, run it
 //
-uint8_t config_ascii_mode (tokens_t *tokens, void *context)
-{_
-    char *s = tokens->args[2];
-
-    if (!s || (*s == '\0')) {
-        game->config.ascii_mode = true;
-    } else {
-        game->config.ascii_mode = strtol(s, 0, 10) ? 1 : 0;
-    }
-
-    if (game->config.ascii_mode) {
-        CON("USERCFG: ASCII mode enabled");
-    } else {
-        CON("USERCFG: ASCII mode disabled");
-    }
-
-    return true;
-}
-
-//
-// User has entered a command, run it
-//
 uint8_t config_errored (tokens_t *tokens, void *context)
 {_
     g_errored = false;

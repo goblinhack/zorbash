@@ -530,7 +530,6 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* float              tile_pixel_height            */ in >> bits(my.t.tile_pixel_height            );
     /* float              tile_pixel_width             */ in >> bits(my.t.tile_pixel_width             );
     /* float              video_w_h_ratio              */ in >> bits(my.t.video_w_h_ratio              );
-    /* int                ascii_mode                   */ in >> bits(my.t.ascii_mode                   );
     /* int                debug_mode                   */ in >> bits(my.t.debug_mode                   );
     /* int                fps_counter                  */ in >> bits(my.t.fps_counter                  );
     /* int                gfx_allow_highdpi            */ in >> bits(my.t.gfx_allow_highdpi            );

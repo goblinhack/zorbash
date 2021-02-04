@@ -1959,7 +1959,6 @@ public:
     Thingp thing_new(const std::string& tp_name, const point at);
     bool inventory_chosen(const uint32_t slot);
     bool inventory_over(const uint32_t slot);
-    const char *to_cstring(void);
     std::string to_string(void);
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args); // compile error without

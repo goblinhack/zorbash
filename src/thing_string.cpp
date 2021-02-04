@@ -62,8 +62,3 @@ std::string Thing::to_string (void) const
                                mid_at.x, mid_at.y));
     }
 }
-
-const char * Thing::to_cstring (void) const
-{_
-    return (to_string().c_str());
-}
