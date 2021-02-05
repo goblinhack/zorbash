@@ -497,4 +497,33 @@ static inline std::istream& operator>> (std::istream &in,
 
     return in;
 }
+
+////////////////////////////////////////////////////////////////////////////
+// Read/write pair
+////////////////////////////////////////////////////////////////////////////
+
+template < typename K, typename V >
+static inline std::ostream& operator<<(std::ostream &out,
+                                       Bits<std::pair<K, V> &> const wrapped)
+{
+#ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
+    std::cout << "read pair<K,V>" std::endl;
+#endif
+    out << bits(wrapped.t.first);
+    out << bits(wrapped.t.second);
+    return (out);
+}
+
+template <typename K, typename V>
+static inline std::istream&
+operator>>(std::istream& in, Bits<std::pair<K, V> &> wrapped)
+{
+#ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
+    std::cout << "write pair<K,V>" std::endl;
+#endif
+    in >> bits(wrapped.t.first);
+    in >> bits(wrapped.t.second);
+    return in;
+}
+
 #endif /* C_PLUS_PLUS_SERIALIZER */
