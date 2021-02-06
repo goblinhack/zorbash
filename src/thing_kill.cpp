@@ -3,8 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -14,6 +13,8 @@
 #include "my_python.h"
 #include "my_log.h"
 #include "my_random.h"
+#include "my_thing_template.h"
+#include "my_string.h"
 
 //
 // Lower level function than dead. Adds the thing to gc.

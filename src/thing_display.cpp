@@ -3,8 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_thing.h"
@@ -13,6 +12,11 @@
 #include "my_tex.h"
 #include "my_gl.h"
 #include "my_random.h"
+#include "my_thing_template.h"
+#include "my_tile.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ui.h"
 
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                           const point &blit_tl,
@@ -711,8 +715,8 @@ void Thing::blit_internal (int fbo,
          (gfx_health_bar_shown_only_when_injured() && (h < m))
         )) {
 
-        int h_step = (1.0 - ((float)h / (float)m)) * UI_MONST_HEALTH_BAR_STEPS;
-        h_step = std::min(h_step, UI_MONST_HEALTH_BAR_STEPS);
+        int h_step = (1.0 - ((float)h / (float)m)) * GAME_MONST_HEALTH_BAR_STEPS;
+        h_step = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
         h_step = std::max(h_step, 1);
         auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
         auto x = (blit_tl.x + blit_br.x) / 2;

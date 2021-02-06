@@ -10,9 +10,10 @@
 #include <sys/stat.h>
 #include <strings.h> // do not remove, strlen
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_dir.h"
 #include "my_string.h"
+#include "my_ptrcheck.h"
 
 /*
  * Does the requested dir exist?

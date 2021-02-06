@@ -3,8 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -12,6 +11,7 @@
 #include "my_sprintf.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_globals.h"
 
 bool Thing::chasm_tick (void)
 {_

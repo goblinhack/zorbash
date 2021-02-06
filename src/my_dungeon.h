@@ -4,12 +4,15 @@
 //
 
 #pragma once
-#include "my_room.h"
-#include "my_dmap.h"
-#include "my_level_static.h"
-#include "my_dungeon_grid.h"
+
 #include <vector>
-#include <memory>
+#include <array>
+
+#include "my_dungeon_grid.h"
+#include "my_thing_defs.h"
+#include "my_fwd.h"
+#include "my_depth.h"
+#include "my_point.h"
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
@@ -140,7 +143,7 @@ public:
     void choose_room_doors(void);
     void create_node_map(void);
     void debug(const std::string s);
-    void dmap_set_is_walls(Dmap *d);
+    void dmap_set_is_walls(Dmapp d);
     void dump(void);
     void make_dungeon(void);
     void map_place_room_ptr(Roomp r, int x, int y);
@@ -186,32 +189,11 @@ public:
                     uint8_t map_r2,
                     uint8_t map_generations);
 
-    bool is_oob (const int x, const int y, const int z)
-    {
-        return ((x < 0) || (x >= map_width) ||
-                (y < 0) || (y >= map_height) ||
-                (z < 0) || (z >= map_depth));
-    }
+    bool is_oob(const int x, const int y, const int z);
+    bool is_oob(const int x, const int y);
 
-    bool is_oob (const int x, const int y)
-    {
-        return ((x < 0) || (x >= map_width) ||
-                (y < 0) || (y >= map_height));
-    }
-
-    char *cell_addr (const int x, const int y, const int z)
-    {
-        if (unlikely(is_oob(x, y, z))) {
-            return (nullptr);
-        }
-
-        return (&getref(cells, offset(x, y, z)));
-    }
-
-    char *cell_addr_no_check (const int x, const int y, const int z)
-    {
-        return (&getref(cells, offset(x, y, z)));
-    }
+    char *cell_addr(const int x, const int y, const int z);
+    char *cell_addr_no_check(const int x, const int y, const int z);
 };
 
 extern class Dungeon *dungeon_test(void);

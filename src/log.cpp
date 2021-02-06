@@ -3,7 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_traceback.h"
 #include "my_wid_console.h"
@@ -12,6 +12,8 @@
 #include "my_python.h"
 #include "my_console.h"
 #include "my_log.h"
+#include "my_string.h"
+#include "my_globals.h"
 
 //
 // Whan a log appears, if some indent levels are missing, then pull them
@@ -24,22 +26,22 @@ void log_catchup_missing_indent_levels (void)
     }
 
     if (!g_log_stdout) {
-        g_last_logged_g_callframes_depth = 0;
+        g_last_logged_callframes_depth = 0;
     }
 
     if (g_callframes_depth > 0) {
-        if (g_last_logged_g_callframes_depth > g_callframes_depth) {
-            g_last_logged_g_callframes_depth = g_callframes_depth - 1;
+        if (g_last_logged_callframes_depth > g_callframes_depth) {
+            g_last_logged_callframes_depth = g_callframes_depth - 1;
             return;
         }
     }
 
-    while (g_last_logged_g_callframes_depth < g_callframes_depth - 1) {
-        auto func = callframes[g_last_logged_g_callframes_depth].func;
-        g_last_logged_g_callframes_depth++;
+    while (g_last_logged_callframes_depth < g_callframes_depth - 1) {
+        auto func = callframes[g_last_logged_callframes_depth].func;
+        g_last_logged_callframes_depth++;
         LOG_MISSING("%s", func);
     }
-    g_last_logged_g_callframes_depth = g_callframes_depth;
+    g_last_logged_callframes_depth = g_callframes_depth;
 }
 
 static void log_ (const char *fmt, va_list args)
@@ -79,7 +81,7 @@ static void log_missing_ (const char *fmt, va_list args)
         // No indent
     } else {
         snprintf(buf + len, MAXSTR - len, "%60s: %*s", "",
-                 g_last_logged_g_callframes_depth, "");
+                 g_last_logged_callframes_depth, "");
     }
 
     len = (int)strlen(buf);

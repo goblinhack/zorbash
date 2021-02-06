@@ -3,10 +3,11 @@
 // See the README.md file for license info.
 //
 
+#include <string.h>
+#include "my_sys.h"
 #include "my_main.h"
 #include "my_ptrcheck.h"
 #include "stdlib.h"
-#include <string.h>
 
 void *myzalloc_ (int size,
                  std::string what,

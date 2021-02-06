@@ -7,6 +7,8 @@
 #ifndef _MY_CALLSTACK_H_
 #define _MY_CALLSTACK_H_
 
+#include "my_sys.h"
+
 #define CAT(A, B) A ## B
 #define CAT2(A, B) CAT(A, B)
 
@@ -55,6 +57,7 @@ struct tracer_t {
                      const char *func,
                      const unsigned short line)
     {
+        extern bool g_opt_debug2;
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
         if (unlikely(g_opt_debug2)) {
@@ -69,6 +72,7 @@ struct tracer_t {
 
     inline ~tracer_t()
     {
+        extern bool g_opt_debug2;
         if (unlikely(g_opt_debug2)) {
             if (g_callframes_depth > 0) {
                 g_callframes_depth--;

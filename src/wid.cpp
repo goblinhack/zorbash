@@ -4,12 +4,10 @@
 //
 
 #include <list>
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_wid.h"
-#include "my_main.h"
 #include "slre.h"
 #include "my_wid.h"
 #include "my_tex.h"
@@ -26,6 +24,11 @@
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ui.h"
+#include "my_sdl.h"
+#include "my_ptrcheck.h"
 
 //
 // Display sorted.
@@ -140,6 +143,16 @@ static uint8_t wid_init_done;
 static uint8_t wid_exiting;
 
 static int wid_refresh_overlay_count;
+
+Wid::Wid (void)
+{
+    newptr(this, "wid");
+}
+
+Wid::~Wid (void)
+{
+    oldptr(this);
+}
 
 uint8_t wid_init (void)
 {_
@@ -757,7 +770,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
 //
 // Map an SDL key event to the char the user typed
 //
-char wid_event_to_char (const struct SDL_KEYSYM *evt)
+char wid_event_to_char (const struct SDL_Keysym *evt)
 {_
     switch (evt->mod) {
         case KMOD_LSHIFT:
@@ -3459,7 +3472,7 @@ void wid_scroll_with_input (Widp w, std::wstring str)
     }
 }
 
-uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
+uint8_t wid_receive_input (Widp w, const SDL_Keysym *key)
 {_
     std::wstring beforecursor;
     std::wstring aftercursor;
@@ -3711,7 +3724,7 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
 //
 // Handle keys no one grabbed.
 //
-static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
+static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
 {_
     Widp w {};
 
@@ -5183,7 +5196,7 @@ CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_st
 glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
 #endif
 
-void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
+void wid_key_down (const struct SDL_Keysym *key, int32_t x, int32_t y)
 {_
     Widp w {};
 
@@ -5277,7 +5290,7 @@ try_parent:
     wid_receive_unhandled_input(key);
 }
 
-void wid_key_up (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
+void wid_key_up (const struct SDL_Keysym *key, int32_t x, int32_t y)
 {_
     Widp w {};
 

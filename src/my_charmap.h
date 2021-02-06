@@ -7,7 +7,8 @@
 #ifndef _MY_CMAP_H_
 #define _MY_CMAP_H_
 
-class Charmap;
+#include <vector>
+
 class Charmap {
 public:
     enum {

@@ -22,7 +22,7 @@ extern Widp wid_console_window;
 extern Widp wid_console_container;
 
 
-uint8_t wid_console_receive_input(Widp w, const SDL_KEYSYM *key);
+uint8_t wid_console_receive_input(Widp w, const SDL_Keysym *key);
 
 std::vector<std::wstring> wid_console_serialize(void);
 void wid_console_deserialize(std::vector<std::wstring> r);

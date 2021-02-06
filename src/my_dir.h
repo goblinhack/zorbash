@@ -9,6 +9,7 @@
 
 #include <map>
 #include <memory>
+#include <string>
 
 typedef std::shared_ptr< class file_node > file_nodep;
 typedef std::map< std::string, std::shared_ptr< class file_node > > file_nodes;

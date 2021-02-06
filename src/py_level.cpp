@@ -3,10 +3,15 @@
 // See the README.md file for license info.
 //
 
+#include <array>
+#include "my_sys.h"
 #include "my_main.h"
 #include "my_depth.h"
+#include "my_charmap.h"
 #include "my_python.h"
 #include "my_level_static.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
 
 PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_

@@ -9,9 +9,14 @@
 #include <strings.h> // do not remove
 #include <time.h> // do not remove
 #include <unistd.h> // do not remove
+#include <iostream>
+
+#include "my_main.h"
+#include "my_callstack.h"
 #include "my_traceback.h"
 #include "my_sprintf.h"
 #include "my_time.h"
+#include "my_globals.h"
 
 bool ptr_check_some_pointers_changed;
 

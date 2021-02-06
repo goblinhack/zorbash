@@ -8,8 +8,9 @@
 #include <time.h> // do not remove
 #include <unistd.h> // do not remove
 #include <signal.h> // dirname
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
+#include "my_globals.h"
 
 void callstack_dump (void)
 {_

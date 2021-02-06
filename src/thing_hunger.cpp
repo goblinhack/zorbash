@@ -3,9 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_tile.h"
 #include "my_thing.h"
+#include "my_thing_template.h"
 
 void Thing::hunger_clock (void)
 {_

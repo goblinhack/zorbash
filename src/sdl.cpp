@@ -3,15 +3,20 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "stb_image_write.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_gl.h"
 #include "my_ascii.h"
 #include "my_player.h"
 #include "my_level.h"
 #include "my_wid_console.h"
-#include "stb_image_write.h"
 #include "my_wid_rightbar.h"
+#include "my_sdl.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ptrcheck.h"
+#include "my_ui.h"
 
 static int sdl_get_mouse(void);
 
@@ -426,7 +431,7 @@ static int sdl_filter_events (void *userdata, SDL_Event *event)
 
 static void sdl_event (SDL_Event * event)
 {_
-    SDL_KEYSYM *key;
+    SDL_Keysym *key;
 
     wid_mouse_double_click = false;
 
@@ -453,7 +458,7 @@ static void sdl_event (SDL_Event * event)
             key = &event->key.keysym;
 
             {
-                static struct SDL_KEYSYM last;
+                static struct SDL_Keysym last;
                 static timestamp_t last_time_for_key;
 
                 //
@@ -1050,7 +1055,7 @@ void config_gfx_zoom_in (void)
         game->config.gfx_zoom = 5;
     }
     LOG("Zoom set to %f", game->config.gfx_zoom);
-    config_update_all();
+    sdl_config_update_all();
 }
 
 void config_gfx_zoom_out (void)
@@ -1060,7 +1065,7 @@ void config_gfx_zoom_out (void)
         game->config.gfx_zoom = 0.5;
     }
     LOG("Zoom set to %f", game->config.gfx_zoom);
-    config_update_all();
+    sdl_config_update_all();
 }
 
 //
@@ -1082,7 +1087,7 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
         LOG("USERCFG: gfx zoom set to %d", val);
     }
 
-    config_update_all();
+    sdl_config_update_all();
     return true;
 }
 
@@ -1129,7 +1134,7 @@ uint8_t config_errored (tokens_t *tokens, void *context)
     return true;
 }
 
-void config_update_all (void)
+void sdl_config_update_all (void)
 {_
     CON("SDL: OpenGL leave 2D mode");
     config_gfx_zoom_update();

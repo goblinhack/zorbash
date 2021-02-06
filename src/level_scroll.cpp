@@ -3,11 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_wid.h"
 #include "my_wid_rightbar.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_globals.h"
+#include "my_sdl.h"
 
 void Level::scroll_map_do (bool fast)
 {_

@@ -4,7 +4,15 @@
  */
 
 #include "my_dungeon.h"
+#include "my_charmap.h"
 #include "my_random.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_globals.h"
+#include "my_room.h"
+#include "my_dmap.h"
+#include "my_level_static.h"
+#include "my_main.h"
 
 //
 // The algorithm
@@ -229,6 +237,33 @@ void Dungeon::make_dungeon (void)
 
     LOG("Final DUNGEON:");
     dump();
+}
+
+char *Dungeon::cell_addr (const int x, const int y, const int z)
+{
+    if (unlikely(is_oob(x, y, z))) {
+        return (nullptr);
+    }
+
+    return (&getref(cells, offset(x, y, z)));
+}
+
+char *Dungeon::cell_addr_no_check (const int x, const int y, const int z)
+{
+    return (&getref(cells, offset(x, y, z)));
+}
+
+bool Dungeon::is_oob (const int x, const int y, const int z)
+{
+    return ((x < 0) || (x >= map_width) ||
+            (y < 0) || (y >= map_height) ||
+            (z < 0) || (z >= map_depth));
+}
+
+bool Dungeon::is_oob (const int x, const int y)
+{
+    return ((x < 0) || (x >= map_width) ||
+            (y < 0) || (y >= map_height));
 }
 
 void Dungeon::debug (const std::string s)

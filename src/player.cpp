@@ -1,11 +1,17 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
+#include "my_thing.h"
+#include "my_monst.h"
+#include "my_monst.h"
+#include "my_thing_template.h"
 #include "my_wid_console.h"
 #include "my_player.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_sdl.h"
 
 void player_tick (void)
 {_

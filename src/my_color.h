@@ -7,8 +7,7 @@
 #ifndef _MY_MY_COLOR_H_
 #define _MY_MY_COLOR_H_
 
-#include <map>
-#include "c_plus_plus_serializer.h"
+#include <string>
 
 template<class T> class my_acolor
 {
@@ -29,6 +28,7 @@ public:
 
     my_acolor (const my_acolor &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
 
+#ifdef UNUSED
     friend std::ostream& operator<<(std::ostream &out,
                                     Bits<const my_acolor & > const my)
     {
@@ -47,6 +47,7 @@ public:
         out << "(" << my.r << ", " << my.g << ", " << my.b << ", " << my.a << ")";
         return (out);
     }
+#endif
 
     void operator+= (my_acolor c)
     {
@@ -104,33 +105,7 @@ public:
     }
 };
 
-typedef my_acolor<unsigned char> color;
-typedef my_acolor<double> colorf;
-
-typedef std::map< std::string, color > colors;
-extern colors color_map;
-
-void color_init(void);
-void color_init1(void);
-void color_init2(void);
-void color_init3(void);
-void color_init4(void);
-void color_fini(void);
-void glcolor_save(void);
-void glcolor_restore(void);
-color string2color(const char **s);
-color string2color(const wchar_t **s);
-color string2color(std::string &s, int *len);
-color string2color(std::string &s);
-color string2color(std::wstring &s, int *len);
-const char *string2colorname(const char **s);
-std::string string2colorname(std::string &s);
-color color_find(const char *s);
-color color_to_mono(color a);
-void color_set(std::string name,
-               color *c,
-               uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-
+#if 0
 extern color ALICE_BLUE;
 extern color ALICEBLUE;
 extern color ANTIQUEWHITE1;
@@ -155,21 +130,13 @@ extern color BISQUE2;
 extern color BISQUE3;
 extern color BISQUE4;
 extern color BISQUE;
-extern color BLACK;
-extern color COLOR_NONE;
 extern color BLANCHEDALMOND;
-extern color BLUE1;
-extern color BLUE2;
-extern color BLUE3;
-extern color BLUE4;
-extern color BLUE;
 extern color BLUE_VIOLET;
 extern color BLUEVIOLET;
 extern color BROWN1;
 extern color BROWN2;
 extern color BROWN3;
 extern color BROWN4;
-extern color BROWN;
 extern color BURLYWOOD1;
 extern color BURLYWOOD2;
 extern color BURLYWOOD3;
@@ -208,10 +175,7 @@ extern color CYAN2;
 extern color CYAN3;
 extern color CYAN4;
 extern color CYAN;
-extern color DARKBLUE;
 extern color DARKCYAN;
-extern color DARKGRAY;
-extern color DARKGREEN;
 extern color DARKKHAKI;
 extern color DARKMAGENTA;
 extern color DARKOLIVEGREEN1;
@@ -224,7 +188,6 @@ extern color DARKORANGE2;
 extern color DARKORANGE3;
 extern color DARKORANGE4;
 extern color DARKORANGE;
-extern color DARKRED;
 extern color DARKSEAGREEN1;
 extern color DARKSEAGREEN2;
 extern color DARKSEAGREEN3;
@@ -277,7 +240,6 @@ extern color GOLD2;
 extern color GOLD3;
 extern color GOLD4;
 extern color GOLD;
-extern color GRAY10;
 extern color GRAY11;
 extern color GRAY12;
 extern color GRAY13;
@@ -288,7 +250,6 @@ extern color GRAY17;
 extern color GRAY18;
 extern color GRAY19;
 extern color GRAY1;
-extern color GRAY20;
 extern color GRAY21;
 extern color GRAY22;
 extern color GRAY23;
@@ -299,8 +260,6 @@ extern color GRAY27;
 extern color GRAY28;
 extern color GRAY29;
 extern color GRAY2;
-extern color GRAY30;
-extern color GRAY31;
 extern color GRAY32;
 extern color GRAY33;
 extern color GRAY34;
@@ -310,7 +269,6 @@ extern color GRAY37;
 extern color GRAY38;
 extern color GRAY39;
 extern color GRAY3;
-extern color GRAY40;
 extern color GRAY41;
 extern color GRAY42;
 extern color GRAY43;
@@ -321,7 +279,6 @@ extern color GRAY47;
 extern color GRAY48;
 extern color GRAY49;
 extern color GRAY4;
-extern color GRAY50;
 extern color GRAY51;
 extern color GRAY52;
 extern color GRAY53;
@@ -332,7 +289,6 @@ extern color GRAY57;
 extern color GRAY58;
 extern color GRAY59;
 extern color GRAY5;
-extern color GRAY60;
 extern color GRAY61;
 extern color GRAY62;
 extern color GRAY63;
@@ -343,7 +299,6 @@ extern color GRAY67;
 extern color GRAY68;
 extern color GRAY69;
 extern color GRAY6;
-extern color GRAY70;
 extern color GRAY71;
 extern color GRAY72;
 extern color GRAY73;
@@ -354,7 +309,6 @@ extern color GRAY77;
 extern color GRAY78;
 extern color GRAY79;
 extern color GRAY7;
-extern color GRAY80;
 extern color GRAY81;
 extern color GRAY82;
 extern color GRAY83;
@@ -365,7 +319,6 @@ extern color GRAY87;
 extern color GRAY88;
 extern color GRAY89;
 extern color GRAY8;
-extern color GRAY90;
 extern color GRAY91;
 extern color GRAY92;
 extern color GRAY93;
@@ -376,12 +329,10 @@ extern color GRAY97;
 extern color GRAY98;
 extern color GRAY99;
 extern color GRAY9;
-extern color GRAY;
 extern color GREEN1;
 extern color GREEN2;
 extern color GREEN3;
 extern color GREEN4;
-extern color GREEN;
 extern color GREEN_YELLOW;
 extern color GREENYELLOW;
 extern color HOTPINK1;
@@ -417,7 +368,6 @@ extern color LIGHTBLUE1;
 extern color LIGHTBLUE2;
 extern color LIGHTBLUE3;
 extern color LIGHTBLUE4;
-extern color LIGHTBLUE;
 extern color LIGHTCORAL;
 extern color LIGHTCYAN1;
 extern color LIGHTCYAN2;
@@ -489,7 +439,6 @@ extern color ORANGE1;
 extern color ORANGE2;
 extern color ORANGE3;
 extern color ORANGE4;
-extern color ORANGE;
 extern color ORANGERED1;
 extern color ORANGERED2;
 extern color ORANGERED3;
@@ -520,7 +469,6 @@ extern color PINK1;
 extern color PINK2;
 extern color PINK3;
 extern color PINK4;
-extern color PINK;
 extern color PLUM1;
 extern color PLUM2;
 extern color PLUM3;
@@ -531,12 +479,10 @@ extern color PURPLE1;
 extern color PURPLE2;
 extern color PURPLE3;
 extern color PURPLE4;
-extern color PURPLE;
 extern color RED1;
 extern color RED2;
 extern color RED3;
 extern color RED4;
-extern color RED;
 extern color SADDLE_BROWN;
 extern color SADDLEBROWN;
 extern color SEAGREEN1;
@@ -605,7 +551,6 @@ extern color VIOLETRED2;
 extern color VIOLETRED3;
 extern color VIOLETRED4;
 extern color VIOLETRED;
-extern color WHITE;
 extern color WHITE_SMOKE;
 extern color WHITESMOKE;
 extern color YELLOW1;
@@ -613,17 +558,6 @@ extern color YELLOW2;
 extern color YELLOW3;
 extern color YELLOW4;
 extern color YELLOWGREEN;
-extern color YELLOW;
-
-extern color gl_save_color;
-extern color gl_last_color;
-
-static inline color gl_color_current (void)
-{
-    return (gl_last_color);
-}
-
-extern color COLOR_NONE;
 
 #define CONST_ALICEBLUE { 240, 248, 255, 255 }
 #define CONST_ANTIQUEWHITE1 { 255, 239, 219, 255 }
@@ -850,7 +784,7 @@ extern color COLOR_NONE;
 #define CONST_GRAY92 { 235, 235, 235, 255 }
 #define CONST_GRAY93 { 237, 237, 237, 255 }
 #define CONST_GRAY94 { 240, 240, 240, 255 }
-#define CONST_GRAY95 { 242, 242, 242, 255 }
+#define CONST_GRAY95 { 242, 242, 242, 255 } 
 #define CONST_GRAY96 { 245, 245, 245, 255 }
 #define CONST_GRAY97 { 247, 247, 247, 255 }
 #define CONST_GRAY98 { 250, 250, 250, 255 }
@@ -1092,4 +1026,64 @@ extern color COLOR_NONE;
 #define CONST_YELLOWGREEN { 154, 205, 50, 255 }
 #define CONST_YELLOW { 255, 255, 0, 255 }
 #define CONST_INK { 51, 54, 47, 47 }
+#endif
+
+typedef my_acolor<double> colorf;
+typedef my_acolor<unsigned char> color;
+
+extern color gl_last_color;
+extern color gl_save_color;
+
+extern color BLACK;
+extern color BLUE;
+extern color COLOR_NONE;
+extern color DARKRED;
+extern color GRAY10;
+extern color GRAY20;
+extern color GRAY30;
+extern color GRAY31;
+extern color GRAY50;
+extern color GRAY60;
+extern color GRAY70;
+extern color GRAY80;
+extern color GRAY90;
+extern color GRAY;
+extern color GREEN;
+extern color ORANGE;
+extern color PURPLE;
+extern color RED;
+extern color WHITE;
+extern color YELLOW;
+extern color DARKBLUE;
+extern color DARKGREEN;
+extern color BROWN;
+extern color BLUE1;
+extern color BLUE2;
+extern color BLUE4;
+extern color BLUE3;
+extern color PINK;
+extern color DARKGRAY;
+extern color GRAY40;
+extern color LIGHTBLUE;
+
+color color_find(const char *s);
+color color_to_mono(color a);
+color gl_color_current (void);
+color string2color(const char **s);
+color string2color(const wchar_t **s);
+color string2color(std::string &s);
+color string2color(std::string &s, int *len);
+color string2color(std::wstring &s, int *len);
+const char *string2colorname(const char **s);
+std::string string2colorname(std::string &s);
+void color_fini(void);
+void color_init(void);
+void color_init1(void);
+void color_init2(void);
+void color_init3(void);
+void color_init4(void);
+void color_set(std::string name, color *c, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+void glcolor_restore(void);
+void glcolor_save(void);
+
 #endif // _MY_COLOR_H_

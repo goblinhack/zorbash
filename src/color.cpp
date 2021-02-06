@@ -3,12 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include <strings.h> // do not remove
-#include <string.h> // do not remove
-#include "my_main.h"
-#include "my_gl.h"
-#include "my_string.h"
 #include <strings.h> // do not remove, strcasecmp
+#include <string.h> // do not remove
+#include "my_sys.h"
+#include "my_gl.h"
+#include "my_ui.h"
+#include "my_string.h"
+#include "my_main.h"
+
+typedef std::map< std::string, color > colors;
 
 colors color_map;
 static bool color_init_done;
@@ -55,6 +58,11 @@ void glcolor_restore (void)
     color s = gl_last_color = gl_save_color;
 
     glColor4ub(s.r, s.g, s.b, s.a);
+}
+
+color gl_color_current (void)
+{
+    return (gl_last_color);
 }
 
 color string2color (const char **s)

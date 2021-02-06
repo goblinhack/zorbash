@@ -7,8 +7,11 @@
 #include <string.h> // do not remove
 #include <sys/stat.h>
 #include <unistd.h>
-#include "my_main.h"
+#include <stdio.h>
+#include "my_sys.h"
 #include "my_file.h"
+#include "my_globals.h"
+#include "my_ptrcheck.h"
 
 unsigned char *file_read (const char *filename, int32_t *out_len)
 {_

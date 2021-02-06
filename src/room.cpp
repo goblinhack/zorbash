@@ -5,10 +5,24 @@
 
 #include "my_room.h"
 #include "my_range.h"
-
-static int debug_enabled = false;
+#include "my_room.h"
+#include "my_thing.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ptrcheck.h"
 
 std::vector<Roomp> Room::all_rooms;
+
+Room::Room (void)
+{
+    this->roomno = all_rooms.size();
+    newptr(this, "room");
+}
+
+Room::~Room (void)
+{
+    oldptr(this);
+}
 
 void room_init (void)
 {_
@@ -180,7 +194,7 @@ void Room::finalize (void)
 {
     find_doors();
 
-    if (debug_enabled) {
+    if (g_opt_debug3) {
         dump();
     }
 }

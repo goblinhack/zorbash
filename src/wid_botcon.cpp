@@ -5,7 +5,7 @@
 
 #include <SDL.h>
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_sdl.h"
 #include "slre.h"
 #include "my_wid_botcon.h"
@@ -13,8 +13,9 @@
 #include "my_string.h"
 #include "my_wid.h"
 #include "my_ascii.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
+#include "my_ui.h"
 
 static void wid_botcon_wid_create(void);
 

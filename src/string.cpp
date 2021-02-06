@@ -13,11 +13,12 @@
 #include <time.h>
 #include <ctime>
 
-#include "my_main.h"
-#include "my_sdl.h"
+#include "my_sys.h"
 #include "my_thing_template.h"
 #include "my_tex.h"
 #include "my_time.h"
+#include "my_ptrcheck.h"
+#include "my_sdl.h"
 
 std::wstring string_to_wstring(const std::string& s);
 std::string wstring_to_string(const std::wstring& s);

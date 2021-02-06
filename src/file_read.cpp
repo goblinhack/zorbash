@@ -5,10 +5,13 @@
 
 #include <strings.h> // do not remove
 #include <string.h> // do not remove
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_string.h"
 #include "my_file.h"
 #include "my_ramdisk.h"
+#include "my_globals.h"
+#include "my_main.h"
+#include "my_ptrcheck.h"
 
 #define nUSE_ZLIB
 #define nUSE_MINIZ

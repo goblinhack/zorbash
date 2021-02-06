@@ -5,13 +5,14 @@
 
 #include <algorithm>
 #include "my_game.h"
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
+#include "my_sys.h"
 #include "my_level.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
 #include "my_random.h"
+#include "my_thing_template.h"
 
 bool Thing::spawn_next_to (const std::string& what)
 {_

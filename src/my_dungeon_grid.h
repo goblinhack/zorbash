@@ -7,6 +7,9 @@
 //
 // Implements layered cycles that can be used to then create a dungeon
 //
+#include <vector>
+#include "my_point.h"
+#include "my_fwd.h"
 
 class Node {
 public:
@@ -28,8 +31,8 @@ public:
     bool is_secret                            {false};
     bool is_key                               {false};
     bool is_lock                              {false};
-    bool is_ascend_dungeon                          {false};
-    bool is_descend_dungeon                              {false};
+    bool is_ascend_dungeon                    {false};
+    bool is_descend_dungeon                   {false};
     bool on_critical_path                     {false};
     bool has_door_up                          {false};
     bool has_door_down                        {false};
@@ -147,7 +150,7 @@ public:
     bool create_path_to_exit(int pass);
     void create_path_lock_to_key(int depth);
     void make_paths_off_critical_path_reachable(void);
-    void dmap_print_walls(Dmap *d);
+    void dmap_print_walls(Dmapp d);
     void remove_redundant_directions(void);
 };
 extern class Nodes *grid_test(void);

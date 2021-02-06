@@ -4,7 +4,12 @@
 //
 
 #include "my_thing.h"
+#include "my_main.h"
+#include "my_callstack.h"
 #include "my_random.h"
+#include "my_thing_template.h"
+#include "my_tile.h"
+#include "my_ptrcheck.h"
 
 #undef DEBUG_ANIM
 

@@ -3,11 +3,14 @@
 // See the README.md file for license info.
 //
 
+#include "my_sys.h"
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
 #include "my_wid_rightbar.h"
 #include "my_random.h"
+#include "my_thing_template.h"
+#include "my_ptrcheck.h"
 
 bool Thing::steal_treasure_from (Thingp it)
 {_

@@ -2,7 +2,8 @@
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
 //
-#include "my_main.h"
+
+#include "my_sys.h"
 #include "my_random_name.h"
 
 #include <iostream>

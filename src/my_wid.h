@@ -7,10 +7,15 @@
 #ifndef _MY_WID_H_
 #define _MY_WID_H_
 
+#include <list>
+#include <map>
+
+#include "my_fwd.h"
 #include "my_ascii.h"
-typedef class Wid* Widp;
 #include "my_wid_tiles.h"
-#include "my_thing.h"
+#include "my_size.h"
+#include "my_thing_id.h"
+#include "my_time.h"
 
 void WID_LOG(Widp, const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 void WID_DBG(Widp, const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -55,7 +60,7 @@ Widp wid_new_plain(Widp parent, std::string name);
 Widp wid_new_square_window(std::string name);
 Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
 Widp wid_new_window(std::string name);
-char wid_event_to_char(const struct SDL_KEYSYM *evt);
+char wid_event_to_char(const struct SDL_Keysym *evt);
 color wid_get_color(Widp, wid_color which);
 int32_t wid_get_height(Widp);
 int32_t wid_get_tl_x(Widp);
@@ -67,8 +72,8 @@ std::string wid_name(Widp);
 std::wstring wid_get_text(Widp);
 std::wstring wid_get_tooltip(Widp);
 typedef uint8_t(*on_joy_button_t)(Widp, int32_t x, int32_t y);
-typedef uint8_t(*on_key_down_t)(Widp, const struct SDL_KEYSYM *);
-typedef uint8_t(*on_key_up_t)(Widp, const struct SDL_KEYSYM *);
+typedef uint8_t(*on_key_down_t)(Widp, const struct SDL_Keysym *);
+typedef uint8_t(*on_key_up_t)(Widp, const struct SDL_Keysym *);
 typedef uint8_t(*on_mouse_down_t)(Widp, int32_t x, int32_t y, uint32_t button);
 typedef uint8_t(*on_mouse_motion_t)(Widp, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
 typedef uint8_t(*on_mouse_up_t)(Widp, int32_t x, int32_t y, uint32_t button);
@@ -107,7 +112,7 @@ uint8_t wid_ignore_for_focus(Widp);
 uint8_t wid_init(void);
 uint8_t wid_is_always_hidden(Widp w);
 uint8_t wid_is_hidden(Widp w);
-uint8_t wid_receive_input(Widp, const SDL_KEYSYM *key);
+uint8_t wid_receive_input(Widp, const SDL_Keysym *key);
 int wid_get_int_context(Widp);
 ThingId wid_get_thing_id_context(Widp);
 void wid_always_hidden(Widp, uint8_t value);
@@ -131,8 +136,8 @@ void wid_get_pct(Widp w, double *x, double *y);
 void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int32_t *tl_x, int32_t *tl_y, int32_t *br_x, int32_t *br_y);
 void wid_not_visible(Widp);
 void wid_joy_button(int32_t x, int32_t y);
-void wid_key_down(const struct SDL_KEYSYM *, int32_t x, int32_t y);
-void wid_key_up(const struct SDL_KEYSYM *, int32_t x, int32_t y);
+void wid_key_down(const struct SDL_Keysym *, int32_t x, int32_t y);
+void wid_key_up(const struct SDL_Keysym *, int32_t x, int32_t y);
 void wid_lower(Widp);
 void wid_mouse_down(uint32_t button, int32_t x, int32_t y);
 void wid_mouse_hide(int);
@@ -330,15 +335,8 @@ typedef struct wid_move_ {
 
 class Wid {
 public:
-    Wid (void)
-    {
-        newptr(this, "wid");
-    }
-
-    ~Wid (void)
-    {
-        oldptr(this);
-    }
+    Wid(void);
+    ~Wid(void);
 
     WidKeyType tree_global_key {};
 

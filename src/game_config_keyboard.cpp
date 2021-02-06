@@ -3,11 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_popup.h"
-#include "my_main.h"
 #include "my_game_notice.h"
+#include "my_sdl.h"
+#include "my_ui.h"
 
 static int last_vert_scroll_offset = -1;
 static WidPopup *game_config_keyboard_window;
@@ -271,7 +272,7 @@ static uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32
     } else {
         game->config_top_select();
     }
-    config_update_all();
+    sdl_config_update_all();
     return true;
 }
 
@@ -864,7 +865,7 @@ static uint8_t game_config_key_screenshot (Widp w, int32_t x, int32_t y, uint32_
     return true;
 }
 
-static uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -890,7 +891,7 @@ static uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key
     return false;
 }
 
-static uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

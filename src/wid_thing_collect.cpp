@@ -3,7 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
@@ -14,6 +14,7 @@
 #include "my_wid_bag.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_monst.h"
 
 WidPopup *wid_thing_collect_window;
 

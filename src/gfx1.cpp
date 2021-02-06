@@ -5,6 +5,7 @@
 
 #include "my_tile.h"
 #include "my_gfx.h"
+#include "my_ui.h"
 
 void gfx_init1 (void)
 {

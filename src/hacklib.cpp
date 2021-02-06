@@ -3,7 +3,7 @@
 /* Copyright (c) Robert Patrick Rankin, 1991              */
 /* NetHack may be freely redistributed.  See license for details. */
 
-#include "my_main.h"
+#include "my_sys.h"
 
 static struct tm *getlt (void)
 {_

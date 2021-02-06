@@ -3,12 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_time.h"
 #include "my_string.h"
 #include "my_file.h"
 #include "my_log.h"
 #include "my_python.h"
+#include "my_main.h"
+#include "my_globals.h"
 
 static void py_log_ (const char *fmt, va_list args)
 {

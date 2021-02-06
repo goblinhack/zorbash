@@ -5,11 +5,12 @@
 
 #include <algorithm>
 #include <set>
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_level.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
+#include "my_thing_template.h"
 
 uint8_t Thing::is_less_preferred_terrain (point p)
 {_

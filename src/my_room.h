@@ -7,13 +7,16 @@
 #ifndef _MY_ROOM_H_
 #define _MY_ROOM_H_
 
+#include <array>
+#include <vector>
+
+#include "my_thing_defs.h"
 #include "my_main.h"
 #include "my_point.h"
 #include "my_depth.h"
 #include "my_charmap.h"
-#include <vector>
+#include "my_fwd.h"
 
-typedef class Room *Roomp;
 typedef std::vector<Roomp> Rooms;
 
 class Room
@@ -22,16 +25,8 @@ private:
 public:
     static Rooms all_rooms;
 
-    Room (void)
-    {
-        this->roomno = all_rooms.size();
-        newptr(this, "room");
-    }
-
-    ~Room (void)
-    {
-        oldptr(this);
-    }
+    Room(void);
+    ~Room(void);
 
     //
     // Unique per room.
@@ -104,7 +99,7 @@ public:
     bool                    dir_right    {false};
 
     bool                    is_ascend_dungeon  {false};
-    bool                    is_descend_dungeon      {false};
+    bool                    is_descend_dungeon {false};
     bool                    is_lock      {false};
     bool                    is_key       {false};
     bool                    is_secret    {false};

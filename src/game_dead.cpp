@@ -3,12 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_random.h"
+#include "my_thing.h"
+#include "my_ui.h"
 
 static WidPopup *wid_dead_window;
 
@@ -23,7 +25,7 @@ static void wid_dead_destroy (void)
     wid_not_visible(wid_botcon_window);
 }
 
-static uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -49,7 +51,7 @@ static uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-static uint8_t wid_dead_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_dead_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

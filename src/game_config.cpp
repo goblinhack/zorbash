@@ -3,9 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
-#include "my_main.h"
 #include "my_game.h"
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
@@ -13,6 +12,9 @@
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
+#include "my_sdl.h"
+#include "my_wid.h"
+#include "my_ui.h"
 
 static WidPopup *game_config_top_window;
 
@@ -61,7 +63,7 @@ static uint8_t game_config_top_back (Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
 }
 
-static uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_top_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -99,7 +101,7 @@ static uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
     return false;
 }
 
-static uint8_t game_config_top_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_top_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

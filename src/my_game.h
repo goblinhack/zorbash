@@ -13,6 +13,8 @@
 class WidBag;
 class WidPopup;
 
+#define GAME_MONST_HEALTH_BAR_STEPS  16
+
 typedef class Config_ {
 public:
     uint32_t           header_size                  = {};
@@ -51,54 +53,47 @@ public:
     int32_t            outer_pix_width              = {};
     int32_t            config_pix_height            = {};
     int32_t            config_pix_width             = {};
-    uint32_t           key_action0                  = {SDL_SCANCODE_0};
-    uint32_t           key_action1                  = {SDL_SCANCODE_1};
-    uint32_t           key_action2                  = {SDL_SCANCODE_2};
-    uint32_t           key_action3                  = {SDL_SCANCODE_3};
-    uint32_t           key_action4                  = {SDL_SCANCODE_4};
-    uint32_t           key_action5                  = {SDL_SCANCODE_5};
-    uint32_t           key_action6                  = {SDL_SCANCODE_6};
-    uint32_t           key_action7                  = {SDL_SCANCODE_7};
-    uint32_t           key_action8                  = {SDL_SCANCODE_8};
-    uint32_t           key_action9                  = {SDL_SCANCODE_9};
-    uint32_t           key_attack                   = {SDL_SCANCODE_SPACE};
-#ifdef __APPLE__
-    //
-    // Delete on mac seems to map to backspace...
-    //
-    uint32_t           key_drop                     = {SDL_SCANCODE_BACKSPACE};
-#else
-    uint32_t           key_drop                     = {SDL_SCANCODE_DELETE};
-#endif
-    uint32_t           key_eat                      = {SDL_SCANCODE_E};
-    uint32_t           key_help                     = {SDL_SCANCODE_H};
-    uint32_t           key_jump                     = {SDL_SCANCODE_J};
-    uint32_t           key_load                     = {SDL_SCANCODE_F11};
-    uint32_t           key_map_down                 = {SDL_SCANCODE_DOWN};
-    uint32_t           key_map_left                 = {SDL_SCANCODE_LEFT};
-    uint32_t           key_map_right                = {SDL_SCANCODE_RIGHT};
-    uint32_t           key_map_up                   = {SDL_SCANCODE_UP};
-    uint32_t           key_move_down                = {SDL_SCANCODE_S};
-    uint32_t           key_move_left                = {SDL_SCANCODE_A};
-    uint32_t           key_move_right               = {SDL_SCANCODE_D};
-    uint32_t           key_move_up                  = {SDL_SCANCODE_W};
-    uint32_t           key_pause                    = {SDL_SCANCODE_P};
-    uint32_t           key_quit                     = {SDL_SCANCODE_Q};
-    uint32_t           key_save                     = {SDL_SCANCODE_F12};
-    uint32_t           key_screenshot               = {SDL_SCANCODE_F10};
-    uint32_t           key_throw                    = {SDL_SCANCODE_T};
-    uint32_t           key_inventory                = {SDL_SCANCODE_I};
-    uint32_t           key_console                  = {SDL_SCANCODE_BACKSLASH};
-    uint32_t           key_unused3                  = 0;
-    uint32_t           key_unused4                  = 0;
-    uint32_t           key_unused5                  = 0;
-    uint32_t           key_use                      = {SDL_SCANCODE_U};
-    uint32_t           key_wait_or_collect          = {SDL_SCANCODE_PERIOD};
-    uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};
-    uint32_t           key_zoom_out                 = {SDL_SCANCODE_X};
-    uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
-    uint32_t           sdl_delay                    = 1;
-    uint32_t           sound_volume                 = {MIX_MAX_VOLUME / 2};
+    uint32_t           key_action0                  = {};
+    uint32_t           key_action1                  = {};
+    uint32_t           key_action2                  = {};
+    uint32_t           key_action3                  = {};
+    uint32_t           key_action4                  = {};
+    uint32_t           key_action5                  = {};
+    uint32_t           key_action6                  = {};
+    uint32_t           key_action7                  = {};
+    uint32_t           key_action8                  = {};
+    uint32_t           key_action9                  = {};
+    uint32_t           key_attack                   = {};
+    uint32_t           key_drop                     = {};
+    uint32_t           key_eat                      = {};
+    uint32_t           key_help                     = {};
+    uint32_t           key_jump                     = {};
+    uint32_t           key_load                     = {};
+    uint32_t           key_map_down                 = {};
+    uint32_t           key_map_left                 = {};
+    uint32_t           key_map_right                = {};
+    uint32_t           key_map_up                   = {};
+    uint32_t           key_move_down                = {};
+    uint32_t           key_move_left                = {};
+    uint32_t           key_move_right               = {};
+    uint32_t           key_move_up                  = {};
+    uint32_t           key_pause                    = {};
+    uint32_t           key_quit                     = {};
+    uint32_t           key_save                     = {};
+    uint32_t           key_screenshot               = {};
+    uint32_t           key_throw                    = {};
+    uint32_t           key_inventory                = {};
+    uint32_t           key_console                  = {};
+    uint32_t           key_unused3                  = {};
+    uint32_t           key_unused4                  = {};
+    uint32_t           key_unused5                  = {};
+    uint32_t           key_use                      = {};
+    uint32_t           key_wait_or_collect          = {};
+    uint32_t           key_zoom_in                  = {};
+    uint32_t           key_zoom_out                 = {};
+    uint32_t           music_volume                 = {};
+    uint32_t           sdl_delay                    = {};
+    uint32_t           sound_volume                 = {};
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
@@ -234,7 +229,7 @@ public:
     // Temporary for the status bar
     //
     std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> tile_cache_moves_ahead;
-    std::array<Tilep, UI_MONST_HEALTH_BAR_STEPS + 1>  tile_cache_health;
+    std::array<Tilep, GAME_MONST_HEALTH_BAR_STEPS + 1>  tile_cache_health;
 
     //
     // Temporary. Dampens mouse clicks
@@ -264,5 +259,7 @@ extern void game_main_menu_hide(void);
 extern void game_main_menu_destroy(void);
 extern void game_display_flames(void);
 extern uint32_t csum(char *mem, uint32_t len);
+
+extern class Game *game;
 
 #endif

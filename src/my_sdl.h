@@ -8,10 +8,10 @@
 #define _MY_SDL_H_
 
 #include <SDL.h>
-#include <SDL_mixer.h>
+
 #include "my_main.h"
 #include "my_command.h"
-typedef int32_t timestamp_t;
+#include "my_time.h"
 
 uint8_t sdl_init(void);
 void sdl_fini(void);
@@ -47,12 +47,6 @@ enum {
     SDL_JOY_BUTTON_RIGHT_FIRE               = 31,
 #define SDL_MAX_BUTTONS                     32
 };
-
-#if SDL_MAJOR_VERSION == 1 // {
-#define SDL_KEYSYM SDL_keysym
-#else
-#define SDL_KEYSYM SDL_Keysym
-#endif // }
 
 struct tokens_t_;
 uint8_t sdl_user_exit(struct tokens_t_ *tokens, void *context);
@@ -106,7 +100,7 @@ extern uint8_t config_gfx_lights_set(tokensp, void *context);
 extern void config_gfx_zoom_in(void);
 extern void config_gfx_zoom_out(void);
 extern void config_gfx_zoom_update(void);
-extern void config_update_all(void);
+extern void sdl_config_update_all(void);
 extern uint8_t config_gfx_zoom_set(tokensp, void *context);
 extern uint8_t config_gfx_vsync_enable(tokensp, void *context);
 extern uint8_t config_errored(tokensp, void *context);
