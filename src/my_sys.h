@@ -7,7 +7,10 @@
 #ifndef _MY_SYS_H_
 #define _MY_SYS_H_
 
+#include "my_defs.h"
+
 #include <stdint.h>
+#include <cinttypes> // PRIx32
 
 #if __GNUC__ >= 8
 // warns about intentional truncation like % 10s!
@@ -148,9 +151,15 @@ typedef unsigned long int   uint64_t;
 #define DIR_SEP_CHAR '/'
 #endif
 
+//
+// Code tracing
+// https://github.com/goblinhack/callstack
+//
+#include "my_callstack.h"
+
+void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CROAK(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CROAK_CLEAN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 
 #define DIE(args...)                                                          \
     DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
@@ -158,96 +167,40 @@ void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
     exit(1);
 
 #define DIE_CLEAN(args...)                                                    \
-    DYING("Exiting at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
-    CROAK_CLEAN(args);                                                              \
+    DYING("Exiting at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);         \
+    CROAK_CLEAN(args);                                                        \
     exit(1);
 
+#ifdef DEBUG
+#define DODEBUG(x) x
+#else
+#define DODEBUG(x)
+#endif
+
 #ifdef ENABLE_ASSERT
-#define ASSERT(x)                                                             \
-    if (!(x)) {                                                               \
-        DIE("Failed assert:" #x);                                             \
+#undef ASSERT
+#define ASSERT(x) \
+    if (! (x)) {_ \
+        std::stringstream ss; \
+        ss << "Assert '" << #x << "' failed at line " \
+           << __LINE__ << ", file " << __FILE__ \
+           << ", function " << __FUNCTION__ << "()"; \
+        { auto s = ss.str(); DIE("%s", s.c_str()); } \
     }
 #else
 #define ASSERT(x)
 #endif
 
-//
-// Serious errors
-//
-void WARN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-#define ERR _ myerr
-
-//
-// Also serious. UI msg box popups, in game and pre game with SDL
-//
-void SDL_MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void GAME_UI_MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-
-//
-// Add _ so we get a traceback element.
-//
-void myerr(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-#define ERR _ myerr
-
-//
-// Normal logging
-//
-void LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void LOG_MISSING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void log_catchup_missing_indent_levels(void);
-
-//
-// Consoles
-//
-void BOTCON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void BOTCON(const wchar_t *fmt, ...);
-void CON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void CON(const wchar_t *fmt, ...);
-void MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void MINICON(const wchar_t *fmt, ...);
-void con(const wchar_t *fmt);
-void minicon(const wchar_t *fmt);
-void botcon(const wchar_t *fmt);
-
-//
-// Enabled only when debug_mode is on
-//
-void DBG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-
-//
-// main.c
-//
-#define MY_STDOUT (g_log_stdout ? g_log_stdout : stdout)
-#define MY_STDERR (g_log_stderr ? g_log_stderr : stderr)
-
-extern void quit(void);
-extern void restart(void);
-extern void die(void);
-extern void segv_handler(int sig);
-extern void ctrlc_handler(int sig);
-
-//
-// Memory debugging
-//
-#include "my_ptrcheck.h"
-
-//
-// Code tracing
-// https://github.com/goblinhack/callstack
-//
-#include "my_callstack.h"
-
-//
-// Array bounds checks
-// https://github.com/goblinhack/c-plus-plus-array-bounds-checker
-//
-#include "my_array_bounds_check.h"
-#include "my_vector_bounds_check.h"
-
-//
-// Serialization support
-// https://github.com/goblinhack/simple-c-plus-plus-serializer
-//
-#include "c_plus_plus_serializer.h"
+// Based on
+// https://stackoverflow.com/questions/2193544/how-to-print-additional-information-when-assert-fails
+#ifdef ENABLE_ASSERT
+#define ASSERT_EX(left, operator, right) \
+    if (!((left) operator (right))) {_ \
+        std::cerr << "ASSERT FAILED: " << #left << " " << #operator << " " << #right << " @ " << __FILE__ << ":" << __PRETTY_FUNCTION__ << " line " << __LINE__ << " " << #left << "=" << (left) << "; " << #right << "=" << (right) << std::endl; \
+        ASSERT(left operator right); \
+    }
+#else
+#define ASSERT_EX(left, operator, right)
+#endif
 
 #endif

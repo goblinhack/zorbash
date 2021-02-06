@@ -3,11 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_python.h"
+#include "my_thing_template.h"
+#include "my_string.h"
+#include "my_monst.h"
 
 void Thing::used (Thingp what, Thingp target)
 {_

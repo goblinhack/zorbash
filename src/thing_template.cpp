@@ -3,19 +3,52 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_level.h"
 #include "my_thing_template.h"
 #include "my_depth.h"
-#include "my_main.h"
 #include "my_tile.h"
 #include "my_dice.h"
 #include "my_random.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ptrcheck.h"
+#include "my_thing_template.h"
+#include "my_ptrcheck.h"
 
 Tpnamemap tp_name_map;
 Tpidmap tp_id_map;
 
 static uint8_t tp_init_done;
+
+Tp::Tp (void) {
+    newptr(this, "Tp");
+}
+
+Tp::~Tp (void) {
+    oldptr(this);
+}
+
+Tpp tp_find (const std::string &name)
+{_
+    auto result = tp_name_map.find(name);
+
+    if (unlikely(result == tp_name_map.end())) {
+        return (0);
+    }
+
+    return (result->second);
+}
+
+Tpp tp_find (uint32_t id)
+{_
+    auto result = get(tp_id_map, id - 1);
+    if (!result) {
+        ERR("Thing template %" PRIx32 " not found", id);
+    }
+
+    return (result);
+}
 
 uint8_t tp_init (void)
 {_
@@ -58,19 +91,6 @@ Tpp tp_load (int id, std::string const& name,
     tp->id = tp_id_map.size();
 
     return (tp);
-}
-
-//
-// Find an existing thing.
-//
-Tpp tp_find (uint32_t id)
-{_
-    auto result = get(tp_id_map, id - 1);
-    if (!result) {
-        ERR("Thing template %" PRIx32 " not found", id);
-    }
-
-    return (result);
 }
 
 Tilep tp_first_tile (Tpp tp)

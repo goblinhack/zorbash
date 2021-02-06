@@ -3,12 +3,17 @@
 // See the README.md file for license info.
 //
 
+#include "my_sys.h"
 #include "my_ascii.h"
 #include "my_font.h"
-#include "my_main.h"
 #include "my_game.h"
 #include "my_gl.h"
 #include "my_thing_template.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_string.h"
+#include "my_sdl.h"
+#include "my_ui.h"
 
 struct ascii_ ascii;
 
@@ -92,6 +97,53 @@ static int mouse_found = false;
 static point scissors_tl;
 static point scissors_br;
 static bool scissors_enabled = false;
+
+int ascii_ok (int x, int y)
+{
+    if (unlikely(x < 0)) {
+        return (false);
+    }
+
+    if (unlikely(x >= TERM_WIDTH)) {
+        return (false);
+    }
+
+    if (unlikely(y < 0)) {
+        return (false);
+    }
+
+    if (unlikely(y >= TERM_HEIGHT)) {
+        return (false);
+    }
+
+    return (true);
+}
+
+int ascii_x_ok (int x)
+{
+    if (unlikely(x < 0)) {
+        return (false);
+    }
+
+    if (unlikely(x >= TERM_WIDTH)) {
+        return (false);
+    }
+
+    return (true);
+}
+
+int ascii_y_ok (int y)
+{
+    if (unlikely(y < 0)) {
+        return (false);
+    }
+
+    if (unlikely(y >= TERM_HEIGHT)) {
+        return (false);
+    }
+
+    return (true);
+}
 
 void ascii_clear_scissors (void)
 {

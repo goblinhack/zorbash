@@ -4,8 +4,9 @@
 //
 
 #include <SDL.h>
+#include <algorithm>
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_sdl.h"
 #include "slre.h"
 #include "my_wid_console.h"
@@ -15,7 +16,7 @@
 #include "my_wid.h"
 #include "my_ascii.h"
 #include "my_string.h"
-#include <algorithm>
+#include "my_ui.h"
 
 static int32_t wid_console_inited;
 static int32_t wid_console_exiting;
@@ -155,7 +156,7 @@ void wid_console_log (std::wstring s)
 //
 // Key down etc...
 //
-uint8_t wid_console_receive_input (Widp w, const SDL_KEYSYM *key)
+uint8_t wid_console_receive_input (Widp w, const SDL_Keysym *key)
 {_
     wid_console_reset_scroll();
 

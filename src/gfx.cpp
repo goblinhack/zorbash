@@ -5,6 +5,7 @@
 
 #include "my_tile.h"
 #include "my_gfx.h"
+#include "my_ui.h"
 
 static void gfx_init_font_small (void)
 {

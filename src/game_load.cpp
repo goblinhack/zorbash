@@ -3,19 +3,25 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "minilzo.h"
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
-#include "my_main.h"
 #include "my_game_error.h"
 #include "my_wid_rightbar.h"
 #include "my_alloc.h"
 #include "my_sprintf.h"
 #include "my_file.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_monst.h"
+#include "my_ui.h"
+#include "my_string.h"
+#include "my_thing.h"
+#include "my_sdl.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
@@ -813,7 +819,7 @@ Game::load (void)
 
     load(save_file, *this);
 
-    config_update_all();
+    sdl_config_update_all();
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
@@ -848,7 +854,7 @@ Game::load (int slot)
 
     load(save_file, *this);
 
-    config_update_all();
+    sdl_config_update_all();
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
@@ -867,7 +873,7 @@ static void wid_load_destroy (void)
     game->hard_unpause();
 }
 
-static uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -914,7 +920,7 @@ static uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-static uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_load_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

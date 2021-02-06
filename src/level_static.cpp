@@ -5,10 +5,25 @@
 
 #include "my_level.h"
 #include "my_level_static.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ptrcheck.h"
 
 static int debug_enabled = false;
 
 std::vector<LevelStaticp> LevelStatic::all_static_levels;
+
+LevelStatic::LevelStatic (void)
+{
+    this->levelno = all_static_levels.size();
+
+    newptr(this, "level");
+}
+
+LevelStatic::~LevelStatic (void)
+{
+    oldptr(this);
+}
 
 void level_fini (void)
 {_
@@ -17,7 +32,7 @@ void level_fini (void)
 
 LevelStaticp LevelStatic::level_new (void)
 {_
-    auto r = std::make_shared< class LevelStatic >();
+    auto r = new LevelStatic();
     LevelStatic::all_static_levels.push_back(r);
     return (r);
 }

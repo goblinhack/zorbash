@@ -3,9 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
+#include "my_sdl.h"
 #include "my_wid_popup.h"
+#include "my_globals.h"
+#include "my_ui.h"
 
 static WidPopup *game_config_gfx_window;
 static bool local_g_need_restart = false;
@@ -21,7 +24,7 @@ static uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t bu
 {_
     CON("USERCFG: reload config");
     game->load_config();
-    config_update_all();
+    sdl_config_update_all();
     game_config_gfx_destroy();
     game->config_top_select();
     return true;
@@ -133,7 +136,7 @@ static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, ui
         }
     }
     game_config_gfx_save(nullptr, 0, 0, 0);
-    config_update_all();
+    sdl_config_update_all();
     game->config_gfx_select();
     return true;
 }
@@ -166,12 +169,12 @@ static uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, ui
         }
     }
     game_config_gfx_save(nullptr, 0, 0, 0);
-    config_update_all();
+    sdl_config_update_all();
     game->config_gfx_select();
     return true;
 }
 
-static uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_gfx_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -203,7 +206,7 @@ static uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
     return false;
 }
 
-static uint8_t game_config_gfx_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_gfx_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

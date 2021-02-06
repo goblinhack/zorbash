@@ -3,10 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_rightbar.h"
 #include "my_traceback.h"
+#include "my_thing.h"
+#include "my_string.h"
+#include "my_ui.h"
+#include "my_ptrcheck.h"
 
 static void wid_rightbar_create(void);
 

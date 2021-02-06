@@ -5,9 +5,10 @@
 
 #pragma once
 #include <memory> // do not remove
-#include "my_charmap.h"
+#include <vector> // do not remove
+#include "my_fwd.h"
+#include "my_thing_defs.h"
 
-typedef std::shared_ptr< class LevelStatic > LevelStaticp;
 typedef std::vector<LevelStaticp> LevelsStatic;
 
 class LevelStatic
@@ -16,17 +17,8 @@ private:
 public:
     static LevelsStatic all_static_levels;
 
-    LevelStatic (void)
-    {
-        this->levelno = all_static_levels.size();
-
-        newptr(this, "level");
-    }
-
-    ~LevelStatic (void)
-    {
-        oldptr(this);
-    }
+    LevelStatic (void);
+    ~LevelStatic (void);
 
     //
     // Unique per level.

@@ -3,11 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_popup.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game_notice.h"
+#include "my_ui.h"
 
 static WidPopup *game_notice_window;
 
@@ -24,13 +25,13 @@ static uint8_t game_notice_ok (Widp w, int32_t x, int32_t y, uint32_t button)
     return false;
 }
 
-static uint8_t game_notice_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_notice_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     game_notice_ok(nullptr, 0, 0, 0);
     return true;
 }
 
-static uint8_t game_notice_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_notice_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

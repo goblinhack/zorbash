@@ -124,6 +124,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/stb_image.o                   \
     $(OBJDIR)/string.o                      \
     $(OBJDIR)/tex.o                         \
+    $(OBJDIR)/thing.o                       \
     $(OBJDIR)/thing_acid.o                  \
     $(OBJDIR)/thing_ai.o                    \
     $(OBJDIR)/thing_ai_goals.o              \
@@ -194,7 +195,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_obstacle.o              \
     $(OBJDIR)/thing_on_fire.o               \
     $(OBJDIR)/thing_owner.o                 \
-    $(OBJDIR)/thing_path.o                  \
     $(OBJDIR)/thing_place.o                 \
     $(OBJDIR)/thing_rest.o                  \
     $(OBJDIR)/thing_resurrect.o             \

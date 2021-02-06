@@ -3,21 +3,24 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_gl.h"
 #include "my_wid.h"
 #include "my_tex.h"
 #include "my_tile.h"
 #include "my_ttf.h"
 #include "my_ramdisk.h"
-#include "my_time.h"
 #include "my_string.h"
 #include "my_font.h"
 #include "my_bits.h"
 #include "my_math.h"
 #include "my_pixel.h"
+#include "my_sdl.h"
 #include "stb_image.h"
 #include "stb_image_write.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ptrcheck.h"
 
 static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name,
                                      Font *f,

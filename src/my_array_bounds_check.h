@@ -1,6 +1,11 @@
 #pragma once
 #include <array>
-#include "my_bounds_check.h"
+#include <assert.h>
+#include <iostream>
+#include <sstream>
+#include "my_callstack.h"
+#include "my_globals.h"
+#include "my_defs.h"
 
 //
 // Single dimension array check

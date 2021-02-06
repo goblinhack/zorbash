@@ -3,13 +3,26 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_string.h"
 #include "my_time.h"
+#include "my_sdl.h"
 
 timestamp_t time_now;
 timestamp_t base_time_in_mill;
 static char buf_[MAXSHORTSTR];
+
+timestamp_t time_get_time_ms (void)
+{
+    time_update_time_milli();
+
+    return (time_now);
+}
+
+timestamp_t time_get_time_ms_cached (void)
+{
+    return (time_now);
+}
 
 const char *time2str (timestamp_t ms, char *buf, int len)
 {
@@ -140,4 +153,49 @@ void get_timestamp (char *buf, int32_t len)
 #else
     timestamp(buf, len);
 #endif
+}
+
+timestamp_t time_update_time_milli (void)
+{
+#ifdef NOT_NEEDED
+    //
+    // Some macos specific way of getting the time that looks like it could
+    // be useful, so leaving around
+    //
+    uint64_t abs_time = mach_absolute_time();
+    Nanoseconds nano_time = AbsoluteToNanoseconds( *(AbsoluteTime *) &abs_time );
+    uint64_t nano_val = * (uint64_t *) &nano_time;;
+    uint32_t time_in_mill = nano_val / 1000000LLU;
+
+    if (!base_time_in_mill) {
+        base_time_in_mill = time_in_mill;
+    }
+
+    time_now = (time_in_mill - base_time_in_mill);
+
+    return (time_now);
+#endif
+#ifdef NOT_NEEDED
+    extern uint8_t sdl_main_loop_running;
+    extern uint8_t sdl_init_video;
+
+    if (unlikely(!sdl_main_loop_running || !sdl_init_video)) {
+        struct timeval  tv;
+
+        gettimeofday(&tv, NULL);
+
+        uint32_t time_in_mill =
+                ((uint32_t)(tv.tv_sec) * 1000) + (tv.tv_usec) / 1000;
+
+        if (!base_time_in_mill) {
+            base_time_in_mill = time_in_mill;
+        }
+
+        time_now = (time_in_mill - base_time_in_mill);
+
+        return (time_now);
+    }
+#endif
+    time_now = SDL_GetTicks();
+    return (time_now);
 }

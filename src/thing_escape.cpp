@@ -3,12 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
 #include "my_gl.h"
 #include "my_random.h"
+#include "my_thing_template.h"
 
 bool Thing::try_to_escape (void)
 {

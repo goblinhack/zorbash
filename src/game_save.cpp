@@ -4,12 +4,18 @@
 //
 
 #include "minilzo.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_alloc.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_monst.h"
+#include "my_string.h"
+#include "my_thing.h"
+#include "my_ui.h"
 
 extern bool game_load_headers_only;
 bool game_save_config_only;
@@ -672,7 +678,7 @@ static void wid_save_destroy (void)
     game->hard_unpause();
 }
 
-static uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_save_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -715,7 +721,7 @@ static uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
     return true;
 }
 
-static uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t wid_save_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

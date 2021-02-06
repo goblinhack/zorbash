@@ -12,35 +12,6 @@
 #include <unordered_map>
 #include <string>
 
-//
-// Forward references
-//
-struct Thing_;
-class Light;
-class World;
-class Level;
-struct Monst_;
-class Tile;
-class Tex;
-
-using Lightp = class Light*;
-using Thingp = struct Thing_*;
-using Worldp = class World*;
-using Levelp = class Level*;
-using Monstp = struct Monst_*;
-using Tilep  = class Tile*;
-using Texp   = class Tex*;
-using Tpp    = class Tp*;
-
-using Tilemap = std::vector<Tilep>;
-using Tpidmap = std::vector<Tpp>;
-using Tpnamemap = std::unordered_map< std::string, Tpp >;
-
-extern class Game *game;
-
-extern Tpidmap tp_id_map;
-extern Tpnamemap tp_name_map;
-
 extern std::map<std::string, class Tile* > all_tiles;
 extern std::vector<class Tile* > all_tiles_array;
 
@@ -76,6 +47,9 @@ extern int TILES_DOWN;
 //
 // Used to fill in gaps in log depth
 //
-extern uint16_t g_last_logged_g_callframes_depth;
+extern uint16_t g_last_logged_callframes_depth;
+
+#define MY_STDERR (g_log_stderr ? g_log_stderr : stderr)
+#define MY_STDOUT (g_log_stdout ? g_log_stdout : stdout)
 
 #endif

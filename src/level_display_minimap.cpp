@@ -3,13 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_tile.h"
 #include "my_tex.h"
 #include "my_gl.h"
 #include "my_thing.h"
+#include "my_ui.h"
+#include "my_sdl.h"
+#include "my_ptrcheck.h"
 
 void Level::display_minimap (void)
 {

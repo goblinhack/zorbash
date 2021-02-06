@@ -14,6 +14,7 @@
 #include <random>  // std::default_random_engine
 std::default_random_engine rng;
 
+#include "my_sys.h"
 #include "my_main.h"
 #include "my_game.h"
 #include "my_thing_template.h"
@@ -22,7 +23,6 @@ std::default_random_engine rng;
 #include "my_wid_console.h"
 #include "my_wid_minicon.h"
 #include "my_wid_botcon.h"
-#include "my_wid_test.h"
 #include "my_font.h"
 #include "my_dir.h"
 #include "my_file.h"
@@ -31,6 +31,10 @@ std::default_random_engine rng;
 #include "my_gfx.h"
 #include "my_random_name.h"
 #include "my_random.h"
+#include "my_globals.h"
+#include "my_ptrcheck.h"
+#include "my_string.h"
+#include "my_sdl.h"
 
 static char **ARGV;
 

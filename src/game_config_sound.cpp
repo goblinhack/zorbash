@@ -3,9 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_popup.h"
+#include "my_ui.h"
 
 static WidPopup *game_config_sound_window;
 
@@ -73,7 +74,7 @@ static uint8_t game_config_sound_music_volume_decr (Widp w, int32_t x, int32_t y
     return true;
 }
 
-static uint8_t game_config_sound_key_up (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_sound_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;
@@ -105,7 +106,7 @@ static uint8_t game_config_sound_key_up (Widp w, const struct SDL_KEYSYM *key)
     return false;
 }
 
-static uint8_t game_config_sound_key_down (Widp w, const struct SDL_KEYSYM *key)
+static uint8_t game_config_sound_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
         return false;

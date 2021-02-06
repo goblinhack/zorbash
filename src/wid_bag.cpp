@@ -5,21 +5,25 @@
 
 #include <SDL.h>
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_sdl.h"
-#include "slre.h"
 #include "my_wid_bag.h"
+#include "my_main.h"
 #include "my_ttf.h"
 #include "my_string.h"
 #include "my_wid.h"
 #include "my_ascii.h"
 #include "my_wid_popup.h"
-#include "my_main.h"
 #include "my_game.h"
 #include "my_level.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
 #include "my_thing.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ui.h"
+#include "my_monst.h"
+#include "slre.h"
 
 static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
 static void wid_bag_item_mouse_over_e(Widp w);

@@ -3,10 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_wid.h"
 #include "my_wid_thing_info.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_thing.h"
+#include "my_ptrcheck.h"
 
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)

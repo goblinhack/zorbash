@@ -3,9 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_dmap.h"
+#include "my_thing_defs.h"
 #include "my_sprintf.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_main.h"
 
 void dmap_print (const Dmap *d, point at, point start, point end)
 {

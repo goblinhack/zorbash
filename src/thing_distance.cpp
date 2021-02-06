@@ -3,10 +3,12 @@
 // See the README.md file for license info.
 //
 //
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_thing.h"
 #include "my_level.h"
 #include "my_random.h"
+#include "my_dmap.h"
+#include "my_monst.h"
 
 point Thing::get_random_scent_target (void)
 {

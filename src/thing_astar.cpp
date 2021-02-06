@@ -3,13 +3,18 @@
 // See the README.md file for license info.
 //
 
+#include <vector>
 #include <algorithm>
+#include "my_sys.h"
 #include "my_main.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_sprintf.h"
 #include "my_thing.h"
-#include <vector>
+#include "my_thing_template.h"
+#include "my_thing_ai.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
 std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> astar_debug {};

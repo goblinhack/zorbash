@@ -3,7 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_gl.h"
@@ -14,13 +14,36 @@
 #include "my_string.h"
 #include "my_thing_template.h"
 #include "my_dmap.h"
+#include "my_tile.h"
 #include "my_random.h"
+#include "my_globals.h"
+#include "my_ptrcheck.h"
 
 std::map<std::string, class Tile* > all_tiles;
 std::vector<class Tile* > all_tiles_array;
 
 static uint8_t tile_init_done;
 
+Tile::Tile (void)
+{
+    newptr(this, "Tile");
+}
+
+Tile::~Tile (void)
+{
+    oldptr(this);
+}
+
+Tilep tile_index_to_tile (uint16_t i)
+{
+    if (unlikely(!i)) {
+        return (nullptr);
+    } else {
+        return all_tiles_array[i - 1];
+    }
+}
+
+uint8_t tile_init(void);
 uint8_t tile_init (void)
 {_
     tile_init_done = true;

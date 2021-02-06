@@ -3,14 +3,21 @@
 // See the README.md file for license info.
 //
 
+#include <map>
 #include "my_py_tp.h"
+#include <frameobject.h>
+#include "my_main.h"
+#include "my_callstack.h"
 #include "my_depth.h"
 #include "my_python.h"
 #include "my_py_sdl.h"
 #include "my_ascii.h"
 #include "my_thing_template.h"
 #include "my_thing.h"
-#include "frameobject.h"
+#include "my_monst.h"
+#include "my_ptrcheck.h"
+#include "my_sdl.h"
+#include "my_string.h"
 
 static std::map<std::string, PyObject *> py_mods;
 PyObject *zx_mod;

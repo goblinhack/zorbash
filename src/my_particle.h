@@ -19,7 +19,7 @@ public:
               point pixel_map_at,
               isize sz,
               uint32_t timestamp_start, uint32_t timestamp_stop,
-              Tilep tile,
+              class Tile* tile,
               bool hflip,
               bool make_visible_at_end) :
         id(thing_id),
@@ -37,7 +37,7 @@ public:
               point pixel_map_at,
               isize sz,
               uint32_t timestamp_start, uint32_t timestamp_stop,
-              Tilep tile,
+              class Tile* tile,
               bool hflip,
               bool make_visible_at_end) :
         start(start),
@@ -57,7 +57,7 @@ public:
     isize sz;
     uint32_t timestamp_start {};
     uint32_t timestamp_stop {};
-    Tilep tile {};
+    class Tile* tile {};
     bool hflip {};
     bool make_visible_at_end {};
     int height {};

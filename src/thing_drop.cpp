@@ -3,13 +3,16 @@
 // See the README.md file for license info.
 //
 
+#include "my_sys.h"
 #include "my_level.h"
 #include "my_thing.h"
-#include "my_main.h"
 #include "my_game.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_inventory.h"
 #include "my_level.h"
+#include "my_monst.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
 
 bool Thing::drop (Thingp what, Thingp target)
 {_

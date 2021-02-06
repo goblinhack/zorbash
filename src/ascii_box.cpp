@@ -3,7 +3,13 @@
 // See the README.md file for license info.
 //
 
+#include "my_sys.h"
 #include "my_ascii.h"
+#include "my_string.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ui.h"
+#include "my_main.h"
 
 static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
                              int x1, int y1, int x2, int y2,

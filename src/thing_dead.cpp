@@ -3,8 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -13,6 +12,8 @@
 #include "my_thing.h"
 #include "my_python.h"
 #include "my_log.h"
+#include "my_ptrcheck.h"
+#include "my_string.h"
 
 void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 {

@@ -5,6 +5,7 @@
 
 #include <string.h>
 
+#include "my_sys.h"
 #include "my_main.h"
 #include "slre.h"
 #include "my_token.h"

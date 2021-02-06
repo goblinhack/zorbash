@@ -4,6 +4,8 @@
 //
 
 #include "my_python.h"
+#include "my_main.h"
+#include "my_callstack.h"
 #include "my_ascii.h"
 
 PyObject *text_size_ (PyObject *obj, PyObject *args, PyObject *keywds)

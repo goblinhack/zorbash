@@ -3,14 +3,17 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
 #include "my_random.h"
+#include "my_globals.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_thing_template.h"
 
 void Thing::lava_tick (void)
 {_

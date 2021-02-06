@@ -3,10 +3,11 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
+#include "my_sys.h"
 #include "my_game.h"
 #include "my_dungeon.h"
 #include "my_thing.h"
+#include "my_ptrcheck.h"
 
 Level::Level (void)
 {_

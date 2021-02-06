@@ -7,9 +7,12 @@
 #ifndef _MY_LEVEL_H_
 #define _MY_LEVEL_H_
 
+#include <map>
 #include "my_time.h"
+#include "my_thing_defs.h"
 #include "my_particle.h"
 #include "my_dungeon.h"
+#include "my_fwd.h"
 
 class Level {
 public:
@@ -178,8 +181,8 @@ public:
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     /////////////////////////////////////////////////////////////////////////
 
-    Level (void);
-    ~Level (void);
+    Level(void);
+    ~Level(void);
 
     void remove_thing(int x, int y, ThingId id);
     void remove_thing(point p, ThingId id);
@@ -191,10 +194,10 @@ public:
     #define JOIN(X,Y) JOIN1(X,Y)
 
     #define FOR_ALL_THINGS(level, t, x, y)                          \
-        if (!(level)->is_oob(x, y)) {                               \
+        if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
             auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for (size_t idx = 0; idx < _vec_.size(); idx++) {       \
+            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
                 t = _vec_[idx];                                     \
                 verify(t);                                          \
 
@@ -205,47 +208,47 @@ public:
     // during walks
     //
     #define FOR_ALL_GRID_THINGS(level, t, x, y)              	    \
-        if (!(level)->is_oob(x, y)) {                               \
+        if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
             auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for (size_t idx = 0; idx < _vec_.size(); idx++) {       \
+            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
                 t = _vec_[idx];                                     \
-                if (!t->is_the_grid) { continue; }                  \
+                if(!t->is_the_grid) { continue; }                   \
 
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
-        if (!(level)->is_oob(x, y)) {                               \
+        if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
             auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for (size_t idx = 0; idx < _vec_.size(); idx++) {       \
+            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
                 t = _vec_[idx];                                     \
-                if (t->z_depth != z) {                              \
+                if(t->z_depth != z) {                               \
                     continue;                                       \
                 }                                                   \
-                if (t->is_hidden) { continue; }                     \
+                if(t->is_hidden) { continue; }                      \
 
     #define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                 \
     {                                                               \
         Thingp t;                                                   \
         auto _vec_ = getref(level->all_thing_ptrs_at, x, y);        \
-        for (size_t idx = 0; idx < _vec_.size(); idx++) {           \
+        for(size_t idx = 0; idx < _vec_.size(); idx++) {            \
             t = _vec_[idx];                                         \
             verify(t);                                              \
-            if (likely(!t->has_light)) { continue; }                \
-            if (t->is_hidden) { continue; }                         \
+            if(likely(!t->has_light)) { continue; }                 \
+            if(t->is_hidden) { continue; }                          \
 
     //
     // Things that move around
     //
     #define FOR_ALL_ACTIVE_THINGS(level, t, x, y)                   \
-        if (!(level)->is_oob(x, y)) {                               \
+        if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
             auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for (size_t idx = 0; idx < _vec_.size(); idx++) {       \
+            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
                 t = _vec_[idx];                                     \
                 verify(t);                                          \
-                if (t->is_the_grid) { continue; }                   \
-                if (t->is_hidden) { continue; }                     \
-                if (!t->is_active()) {                              \
+                if(t->is_the_grid) { continue; }                    \
+                if(t->is_hidden) { continue; }                      \
+                if(!t->is_active()) {                               \
                     continue;                                       \
                 }                                                   \
 
@@ -254,15 +257,15 @@ public:
     // like food
     //
     #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)              \
-        if (!(level)->is_oob(x, y)) {                               \
+        if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
             auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for (size_t idx = 0; idx < _vec_.size(); idx++) {       \
+            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
                 t = _vec_[idx];                                     \
                 verify(t);                                          \
-                if (t->is_the_grid) { continue; }                   \
-                if (t->is_hidden) { continue; }                     \
-                if (!t->is_interesting()) {                         \
+                if(t->is_the_grid) { continue; }                    \
+                if(t->is_hidden) { continue; }                      \
+                if(!t->is_interesting()) {                          \
                     continue;                                       \
                 }                                                   \
 
@@ -270,17 +273,17 @@ public:
     // Things you can bump into
     //
     #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                \
-        if (!(level)->is_oob(x, y)) {                               \
+        if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
             auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for (size_t idx = 0; idx < _vec_.size(); idx++) {       \
+            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
                 t = _vec_[idx];                                     \
                 verify(t);                                          \
-                if (t->is_the_grid) { continue; }                   \
-                if (t->is_hidden) { continue; }                     \
-                if (!t->is_interesting() &&                         \
-                    !t->is_attackable_by_monst() &&                    \
-                    !t->is_attackable_by_player() &&                   \
+                if(t->is_the_grid) { continue; }                    \
+                if(t->is_hidden) { continue; }                      \
+                if(!t->is_interesting() &&                          \
+                    !t->is_attackable_by_monst() &&                 \
+                    !t->is_attackable_by_player() &&                \
                     !t->ai_obstacle()) {                            \
                     continue;                                       \
                 }                                                   \
@@ -289,1681 +292,141 @@ public:
     // Cursor path is the highlighted path the player follows.
     //
     #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)              \
-        if (!(level)->is_oob(x, y)) {                               \
+        if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
             auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for (size_t idx = 0; idx < _vec_.size(); idx++) {       \
+            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
                 t = _vec_[idx];                                     \
                 verify(t);                                          \
-                if (!t->is_cursor_path()) {                         \
+                if(!t->is_cursor_path()) {                          \
                     continue;                                       \
                 }                                                   \
 
-    void clear(void);
-    void cursor_check_if_scroll_needed(void);
-    void cursor_find_on_visible_things(const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void cursor_move(void);
-    void cursor_path_clear(void);
-    void cursor_path_create(void);
-    void cursor_path_draw(point start, point end);
-    void cursor_path_draw(void);
-    void cursor_path_draw_line(point start, point end);
-    void cursor_path_draw_circle(void);
-    void cursor_recreate(void);
-    void display(void);
-    void display_anim(void);
-    void display_minimap(void);
-    void display_blood(void);
-    void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_fade_in(void);
-    void display_fade_out(void);
-    void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_map(void);
-    void display_map_bg_things(void);
-    void display_map_fg_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void get_tiles(void);
-    void sanity_check(void);
-    void scroll_map(void);
-    void scroll_map_do(bool fast);
-    void scroll_map_set_target(void);
-    void scroll_map_to_player(void);
-    void tick(void);
-    void update(void);
-    void update_all_ticks(void);
-    void update_hazard_tile_map(void);
-    void update_water_next_to_lava(void);
-    void update_things_next_to_a_chasm(void);
-    void update_map(void);
-    void update_minimap(void);
-    void update_deep_water(void);
-
-    void set_wobble(float);
-    float get_wobble(void) const;
-    float update_wobble(void);
-    bool screen_shake_begin(void);
-    void screen_shake_end(void);
-
-    uint8_t is_lava (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_lava, p.x, p.y));
-    }
-
-    uint8_t is_lava (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_lava, x, y));
-    }
-
-    void set_is_lava (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_lava, x, y, (uint8_t)1);
-    }
-
-    void unset_is_lava (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_lava, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_acid (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_acid, p.x, p.y));
-    }
-
-    uint8_t is_acid (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_acid, x, y));
-    }
-
-    void set_is_acid (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_acid, x, y, (uint8_t)1);
-    }
-
-    void unset_is_acid (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_acid, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_poison (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_poison, p.x, p.y));
-    }
-
-    uint8_t is_poison (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_poison, x, y));
-    }
-
-    void set_is_poison (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_poison, x, y, (uint8_t)1);
-    }
-
-    void unset_is_poison (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_poison, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_chasm (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_chasm, x, y));
-    }
-
-    uint8_t is_chasm (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_chasm, p.x, p.y));
-    }
-
-    void set_is_chasm (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_chasm, x, y, (uint8_t)1);
-    }
-
-    void unset_is_chasm (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_chasm, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_hazard (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_hazard, p.x, p.y));
-    }
-
-    uint8_t is_hazard (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_hazard, x, y));
-    }
-
-    void set_is_hazard (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_hazard, x, y, (uint8_t)1);
-    }
-
-    void unset_is_hazard (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_hazard, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_extreme_hazard (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_extreme_hazard, p.x, p.y));
-    }
-
-    uint8_t is_extreme_hazard (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_extreme_hazard, x, y));
-    }
-
-    void set_is_extreme_hazard (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_extreme_hazard, x, y, (uint8_t)1);
-    }
-
-    void unset_is_extreme_hazard (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_extreme_hazard, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_secret_door (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_secret_door, p.x, p.y));
-    }
-
-    uint8_t is_secret_door (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_secret_door, x, y));
-    }
-
-    void set_is_secret_door (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_secret_door, x, y, (uint8_t)1);
-    }
-
-    void unset_is_secret_door (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_secret_door, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_ripple (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_ripple, p.x, p.y));
-    }
-
-    uint8_t is_ripple (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_ripple, x, y));
-    }
-
-    void set_is_ripple (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_ripple, x, y, (uint8_t)1);
-    }
-
-    void unset_is_ripple (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_ripple, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_torch (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_torch, p.x, p.y));
-    }
-
-    uint8_t is_torch (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_torch, x, y));
-    }
-
-    void set_is_torch (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_torch, x, y, (uint8_t)1);
-    }
-
-    void unset_is_torch (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_torch, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_minion_generator (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_minion_generator, p.x, p.y));
-    }
-
-    uint8_t is_minion_generator (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_minion_generator, x, y));
-    }
-
-    void set_is_minion_generator (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_minion_generator, x, y, (uint8_t)1);
-    }
-
-    void unset_is_minion_generator (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_minion_generator, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_potion (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_potion, p.x, p.y));
-    }
-
-    uint8_t is_potion (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_potion, x, y));
-    }
-
-    void set_is_potion (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_potion, x, y, (uint8_t)1);
-    }
-
-    void unset_is_potion (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_potion, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_blood (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_blood, p.x, p.y));
-    }
-
-    uint8_t is_blood (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_blood, x, y));
-    }
-
-    void set_is_blood (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_blood, x, y, (uint8_t)1);
-    }
-
-    void unset_is_blood (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_blood, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_gfx_water (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_gfx_water, p.x, p.y));
-    }
-
-    uint8_t is_gfx_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_gfx_water, x, y));
-    }
-
-    void set_is_gfx_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_gfx_water, x, y, (uint8_t)1);
-    }
-
-    void unset_is_gfx_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_gfx_water, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_deep_water (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_deep_water, p.x, p.y));
-    }
-
-    uint8_t is_deep_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_deep_water, x, y));
-    }
-
-    void set_is_deep_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_deep_water, x, y, (uint8_t)1);
-    }
-
-    void unset_is_deep_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_deep_water, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_shallow_water (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_shallow_water, p.x, p.y));
-    }
-
-    uint8_t is_shallow_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_shallow_water, x, y));
-    }
-
-    void set_is_shallow_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_shallow_water, x, y, (uint8_t)1);
-    }
-
-    void unset_is_shallow_water (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_shallow_water, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_wall (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_wall, p.x, p.y));
-    }
-
-    uint8_t is_wall (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_wall, x, y));
-    }
-
-    void set_is_wall (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_wall, x, y, (uint8_t)1);
-    }
-
-    void unset_is_wall (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_wall, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_corridor (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_corridor, p.x, p.y));
-    }
-
-    uint8_t is_corridor (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_corridor, x, y));
-    }
-
-    void set_is_corridor (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_corridor, x, y, (uint8_t)1);
-    }
-
-    void unset_is_corridor (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_corridor, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_dirt (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_dirt, p.x, p.y));
-    }
-
-    uint8_t is_dirt (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_dirt, x, y));
-    }
-
-    void set_is_dirt (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_dirt, x, y, (uint8_t)1);
-    }
-
-    void unset_is_dirt (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_dirt, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_floor (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_floor, x, y));
-    }
-
-    void set_is_floor (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_floor, x, y, (uint8_t)1);
-    }
-
-    void unset_is_floor (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_floor, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_rock (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_rock, p.x, p.y));
-    }
-
-    uint8_t is_rock (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_rock, x, y));
-    }
-
-    void set_is_rock (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_rock, x, y, (uint8_t)1);
-    }
-
-    void unset_is_rock (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_rock, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_dungeon (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_dungeon, p.x, p.y));
-    }
-
-    uint8_t is_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_dungeon, x, y));
-    }
-
-    void set_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        incr(_is_dungeon, x, y, (uint8_t)1);
-    }
-
-    void unset_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        map_changed = true;
-        decr(_is_dungeon, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_corpse (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_corpse, p.x, p.y));
-    }
-
-    uint8_t is_corpse (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_corpse, x, y));
-    }
-
-    void set_is_corpse (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_corpse, x, y, (uint8_t)1);
-    }
-
-    void unset_is_corpse (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_corpse, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_fire (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_fire, p.x, p.y));
-    }
-
-    uint8_t is_fire (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_fire, x, y));
-    }
-
-    void set_is_fire (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_fire, x, y, (uint8_t)1);
-    }
-
-    void unset_is_fire (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_fire, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_monst (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_monst, p.x, p.y));
-    }
-
-    uint8_t is_monst (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_monst, x, y));
-    }
-
-    void set_is_monst (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_monst, x, y, (uint8_t)1);
-    }
-
-    void unset_is_monst (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_monst, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_door (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_door, p.x, p.y));
-    }
-
-    uint8_t is_door (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_door, x, y));
-    }
-
-    void set_is_door (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_door, x, y, (uint8_t)1);
-    }
-
-    void unset_is_door (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_door, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_key (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_key, p.x, p.y));
-    }
-
-    uint8_t is_key (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_key, x, y));
-    }
-
-    void set_is_key (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_key, x, y, (uint8_t)1);
-    }
-
-    void unset_is_key (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_key, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_food (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_food, p.x, p.y));
-    }
-
-    uint8_t is_food (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_food, x, y));
-    }
-
-    void set_is_food (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_food, x, y, (uint8_t)1);
-    }
-
-    void unset_is_food (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_food, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_treasure (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_treasure, p.x, p.y));
-    }
-
-    uint8_t is_treasure (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_treasure, x, y));
-    }
-
-    void set_is_treasure (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_treasure, x, y, (uint8_t)1);
-    }
-
-    void unset_is_treasure (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_treasure, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_treasure_class_a (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_treasure_class_a, p.x, p.y));
-    }
-
-    uint8_t is_treasure_class_a (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_treasure_class_a, x, y));
-    }
-
-    void set_is_treasure_class_a (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_treasure_class_a, x, y, (uint8_t)1);
-    }
-
-    void unset_is_treasure_class_a (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_treasure_class_a, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_treasure_class_b (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_treasure_class_b, p.x, p.y));
-    }
-
-    uint8_t is_treasure_class_b (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_treasure_class_b, x, y));
-    }
-
-    void set_is_treasure_class_b (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_treasure_class_b, x, y, (uint8_t)1);
-    }
-
-    void unset_is_treasure_class_b (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_treasure_class_b, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_treasure_class_c (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_treasure_class_c, p.x, p.y));
-    }
-
-    uint8_t is_treasure_class_c (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_treasure_class_c, x, y));
-    }
-
-    void set_is_treasure_class_c (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_treasure_class_c, x, y, (uint8_t)1);
-    }
-
-    void unset_is_treasure_class_c (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_treasure_class_c, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_gold (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_gold, p.x, p.y));
-    }
-
-    uint8_t is_gold (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_gold, x, y));
-    }
-
-    void set_is_gold (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_gold, x, y, (uint8_t)1);
-    }
-
-    void unset_is_gold (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_gold, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_ascend_dungeon (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_ascend_dungeon, p.x, p.y));
-    }
-
-    uint8_t is_ascend_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_ascend_dungeon, x, y));
-    }
-
-    void set_is_ascend_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_ascend_dungeon, x, y, (uint8_t)1);
-    }
-
-    void unset_is_ascend_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_ascend_dungeon, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_descend_dungeon (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_descend_dungeon, p.x, p.y));
-    }
-
-    uint8_t is_descend_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_descend_dungeon, x, y));
-    }
-
-    void set_is_descend_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_descend_dungeon, x, y, (uint8_t)1);
-    }
-
-    void unset_is_descend_dungeon (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_descend_dungeon, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_ascend_sewer (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_ascend_sewer, p.x, p.y));
-    }
-
-    uint8_t is_ascend_sewer (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_ascend_sewer, x, y));
-    }
-
-    void set_is_ascend_sewer (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_ascend_sewer, x, y, (uint8_t)1);
-    }
-
-    void unset_is_ascend_sewer (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_ascend_sewer, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_descend_sewer (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_descend_sewer, p.x, p.y));
-    }
-
-    uint8_t is_descend_sewer (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_descend_sewer, x, y));
-    }
-
-    void set_is_descend_sewer (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_descend_sewer, x, y, (uint8_t)1);
-    }
-
-    void unset_is_descend_sewer (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_descend_sewer, x, y, (uint8_t)1);
-    }
-
-    uint8_t is_smoke (const point &p)
-    {_
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_smoke, p.x, p.y));
-    }
-
-    uint8_t is_smoke (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_smoke, x, y));
-    }
-
-    void set_is_smoke (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        incr(_is_smoke, x, y, (uint8_t)1);
-    }
-
-    void unset_is_smoke (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        decr(_is_smoke, x, y, (uint8_t)1);
-    }
-
-    uint8_t heatmap(const point &p);
-    uint8_t heatmap_no_check(const point &p);
-    uint8_t heatmap(const int x, const int y);
-    uint8_t heatmap_no_check(const int x, const int y);
-    void incr_heatmap(const int x, const int y);
-    void incr_heatmap_no_check(const int x, const int y);
-    void unset_heatmap(const int x, const int y);
-    void unset_heatmap_no_check(const int x, const int y);
-    void update_heatmap(void);
-
-    //
-    // Used in lighting, so inlined
-    //
-    inline bool is_oob (const int x, const int y, const int z)
-    {
-        return ((x < 0) || (x >= MAP_WIDTH) ||
-                (y < 0) || (y >= MAP_HEIGHT) ||
-                (z < 0) || (z >= MAP_DEPTH));
-    }
-
-    inline bool is_oob (const int x, const int y)
-    {
-        return ((x < 0) || (x >= MAP_WIDTH) ||
-                (y < 0) || (y >= MAP_HEIGHT));
-    }
-
-    inline bool is_oob (const fpoint p)
-    {
-        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
-                (p.y < 0) || (p.y >= MAP_HEIGHT));
-    }
-
-    inline bool is_oob (const point p)
-    {
-        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
-                (p.y < 0) || (p.y >= MAP_HEIGHT));
-    }
-
-    inline uint8_t fade_in_map (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_fade_in_map, p.x, p.y));
-    }
-
-    inline uint8_t fade_in_map_no_check (const point &p)
-    {
-        return (get_no_check(_fade_in_map, p.x, p.y));
-    }
-
-    inline uint8_t fade_in_map (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_fade_in_map, x, y));
-    }
-
-    inline uint8_t fade_in_map_no_check (const int x, const int y)
-    {
-        return (get_no_check(_fade_in_map, x, y));
-    }
-
-    inline void incr_fade_in (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        auto v = get(_fade_in_map, x, y);
-        if (v < 255) {
-            v+=1;
-            set(_fade_in_map, x, y, v);
-        } else {
-            set(_fade_in_map, x, y, (uint8_t)255);
-        }
-    }
-
-    inline void incr_fade_in_no_check (const int x, const int y)
-    {
-        auto v = get_no_check(_fade_in_map, x, y);
-        if (v < 255) {
-            v+=1;
-            set_no_check(_fade_in_map, x, y, v);
-        } else {
-            set(_fade_in_map, x, y, (uint8_t)255);
-        }
-    }
-
-    inline void unset_fade_in (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_fade_in_map, x, y, (uint8_t)0);
-    }
-
-    inline void unset_fade_in_no_check (const int x, const int y)
-    {
-        set_no_check(_fade_in_map, x, y, (uint8_t)0);
-    }
-
-    inline uint8_t is_visited (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_visited, p.x, p.y));
-    }
-
-    inline uint8_t is_visited_no_check (const point &p)
-    {
-        return (get_no_check(_is_visited, p.x, p.y));
-    }
-
-    inline uint8_t is_visited (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_visited, x, y));
-    }
-
-    inline uint8_t is_visited_no_check (const int x, const int y)
-    {
-        return (get_no_check(_is_visited, x, y));
-    }
-
-    inline void set_visited (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-
-        if (!get(_is_visited, x, y)) {
-            set(_fade_in_map, x, y, (uint8_t)1);
-        }
-    }
-
-    inline void set_visited_no_check (const int x, const int y)
-    {
-        if (!get_no_check(_is_visited, x, y)) {
-            set_no_check(_fade_in_map, x, y, (uint8_t)1);
-        }
-        set_no_check(_is_visited, x, y, true);
-    }
-
-    inline void unset_visited (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_visited, x, y, false);
-    }
-
-    inline void unset_visited_no_check (const int x, const int y)
-    {
-        set_no_check(_is_visited, x, y, false);
-    }
-
-    //
-    // Used in lighting, so inlined
-    //
-    inline bool is_light_blocker (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_light_blocker, p.x, p.y));
-    }
-
-    inline bool is_light_blocker_no_check (const point &p)
-    {
-        return (get_no_check(_is_light_blocker, p.x, p.y));
-    }
-
-    inline bool is_light_blocker (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_light_blocker, x, y));
-    }
-
-    inline bool is_light_blocker_no_check (const int x, const int y)
-    {
-        return (get_no_check(_is_light_blocker, x, y));
-    }
-
-    inline void set_is_light_blocker (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_light_blocker, x, y, true);
-    }
-
-    inline void set_is_light_blocker_no_check (const int x, const int y)
-    {
-        set_no_check(_is_light_blocker, x, y, true);
-    }
-
-    inline void unset_is_light_blocker (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_light_blocker, x, y, false);
-    }
-
-    inline void unset_is_light_blocker_no_check (const int x, const int y)
-    {
-        set_no_check(_is_light_blocker, x, y, false);
-    }
-
-    //
-    // Used in lighting, so inlined
-    //
-    inline bool is_movement_blocking_hard (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_movement_blocking_hard, p.x, p.y));
-    }
-
-    inline bool is_movement_blocking_hard_no_check (const point &p)
-    {
-        return (get_no_check(_is_movement_blocking_hard, p.x, p.y));
-    }
-
-    inline bool is_movement_blocking_hard (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_movement_blocking_hard, x, y));
-    }
-
-    inline bool is_movement_blocking_hard_no_check (const int x, const int y)
-    {
-        return (get_no_check(_is_movement_blocking_hard, x, y));
-    }
-
-    inline void set_is_movement_blocking_hard (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_movement_blocking_hard, x, y, true);
-    }
-
-    inline void set_is_movement_blocking_hard_no_check (const int x, const int y)
-    {
-        set_no_check(_is_movement_blocking_hard, x, y, true);
-    }
-
-    inline void unset_is_movement_blocking_hard (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_movement_blocking_hard, x, y, false);
-    }
-
-    inline void unset_is_movement_blocking_hard_no_check (const int x, const int y)
-    {
-        set_no_check(_is_movement_blocking_hard, x, y, false);
-    }
-
-    //
-    // Used in lighting, so inlined
-    //
-    inline bool is_movement_blocking_soft (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_movement_blocking_soft, p.x, p.y));
-    }
-
-    inline bool is_movement_blocking_soft_no_check (const point &p)
-    {
-        return (get_no_check(_is_movement_blocking_soft, p.x, p.y));
-    }
-
-    inline bool is_movement_blocking_soft (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_movement_blocking_soft, x, y));
-    }
-
-    inline bool is_movement_blocking_soft_no_check (const int x, const int y)
-    {
-        return (get_no_check(_is_movement_blocking_soft, x, y));
-    }
-
-    inline void set_is_movement_blocking_soft (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_movement_blocking_soft, x, y, true);
-    }
-
-    inline void set_is_movement_blocking_soft_no_check (const int x, const int y)
-    {
-        set_no_check(_is_movement_blocking_soft, x, y, true);
-    }
-
-    inline void unset_is_movement_blocking_soft (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_movement_blocking_soft, x, y, false);
-    }
-
-    inline void unset_is_movement_blocking_soft_no_check (const int x, const int y)
-    {
-        set_no_check(_is_movement_blocking_soft, x, y, false);
-    }
-
-    inline uint8_t is_lit (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (get(_is_lit, p.x, p.y));
-    }
-
-    inline uint8_t is_lit_no_check (const point &p)
-    {
-        return (get_no_check(_is_lit, p.x, p.y));
-    }
-
-    inline uint8_t is_lit (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (get(_is_lit, x, y));
-    }
-
-    inline uint8_t is_lit_no_check (const int x, const int y)
-    {
-        return (get_no_check(_is_lit, x, y));
-    }
-
-    inline void set_is_lit_no_check (const int x, const int y)
-    {
-        auto l = getptr_no_check(_is_lit, x, y);
-        if (*l == 0) {
-            *l = 255;
-        } else if (*l < 255) {
-            (*l)++;
-        }
-    }
-
-    inline void set_is_lit (const int x, const int y)
-    {
-        auto l = getptr(_is_lit, x, y);
-        if (*l == 0) {
-            *l = 255;
-        } else if (*l < 255) {
-            (*l)++;
-        }
-    }
-
-    inline void set_is_lit_no_check (const int x, const int y, uint8_t v)
-    {
-        set_no_check(_is_lit, x, y, v);
-    }
-
-    inline void unset_is_lit (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_lit, x, y, (uint8_t)0);
-    }
-
-    inline void unset_is_lit_no_check (const int x, const int y)
-    {
-        set_no_check(_is_lit, x, y, (uint8_t)0);
-    }
-
-    Thingp inventory_describe(const uint32_t slot);
     Thingp inventory_get(const uint32_t slot);
     Thingp inventory_get(void);
     Thingp thing_find(const ThingId id);
     Thingp thing_new(const std::string& tp_name, Thingp owner);
     Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
     Thingp thing_new(const std::string& tp_name, const point at);
+    bool create_dungeon(point3d at, int seed);
+    bool create_sewer(point3d at, int seed);
+    bool create_sewer_pipes(point3d at);
+    bool create_sewer_pools(void);
     bool inventory_chosen(const uint32_t slot);
     bool inventory_over(const uint32_t slot);
+    bool is_light_blocker(const int x, const int y);
+    bool is_light_blocker(const point &p);
+    bool is_light_blocker_no_check(const int x, const int y);
+    bool is_light_blocker_no_check(const point &p);
+    bool is_movement_blocking_hard(const int x, const int y);
+    bool is_movement_blocking_hard(const point &p);
+    bool is_movement_blocking_hard_no_check(const int x, const int y);
+    bool is_movement_blocking_hard_no_check(const point &p);
+    bool is_movement_blocking_soft(const int x, const int y);
+    bool is_movement_blocking_soft(const point &p);
+    bool is_movement_blocking_soft_no_check(const int x, const int y);
+    bool is_movement_blocking_soft_no_check(const point &p);
+    bool is_oob(const fpoint p);
+    bool is_oob(const int x, const int y);
+    bool is_oob(const int x, const int y, const int z);
+    bool is_oob(const point p);
+    bool screen_shake_begin(void);
+    float get_wobble(void) const;
+    float update_wobble(void);
     std::string to_string(void);
-    void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    uint8_t fade_in_map(const int x, const int y);
+    uint8_t fade_in_map(const point &p);
+    uint8_t fade_in_map_no_check(const int x, const int y);
+    uint8_t fade_in_map_no_check(const point &p);
+    uint8_t heatmap(const int x, const int y);
+    uint8_t heatmap(const point &p);
+    uint8_t heatmap_no_check(const int x, const int y);
+    uint8_t heatmap_no_check(const point &p);
+    uint8_t is_acid(const int x, const int y);
+    uint8_t is_acid(const point &p);
+    uint8_t is_ascend_dungeon(const int x, const int y);
+    uint8_t is_ascend_dungeon(const point &p);
+    uint8_t is_ascend_sewer(const int x, const int y);
+    uint8_t is_ascend_sewer(const point &p);
+    uint8_t is_blood(const int x, const int y);
+    uint8_t is_blood(const point &p);
+    uint8_t is_chasm(const int x, const int y);
+    uint8_t is_chasm(const point &p);
+    uint8_t is_corpse(const int x, const int y);
+    uint8_t is_corpse(const point &p);
+    uint8_t is_corridor(const int x, const int y);
+    uint8_t is_corridor(const point &p);
+    uint8_t is_deep_water(const int x, const int y);
+    uint8_t is_deep_water(const point &p);
+    uint8_t is_descend_dungeon(const int x, const int y);
+    uint8_t is_descend_dungeon(const point &p);
+    uint8_t is_descend_sewer(const int x, const int y);
+    uint8_t is_descend_sewer(const point &p);
+    uint8_t is_dirt(const int x, const int y);
+    uint8_t is_dirt(const point &p);
+    uint8_t is_door(const int x, const int y);
+    uint8_t is_door(const point &p);
+    uint8_t is_dungeon(const int x, const int y);
+    uint8_t is_dungeon(const point &p);
+    uint8_t is_extreme_hazard(const int x, const int y);
+    uint8_t is_extreme_hazard(const point &p);
+    uint8_t is_fire(const int x, const int y);
+    uint8_t is_fire(const point &p);
+    uint8_t is_floor(const int x, const int y);
+    uint8_t is_food(const int x, const int y);
+    uint8_t is_food(const point &p);
+    uint8_t is_gfx_water(const int x, const int y);
+    uint8_t is_gfx_water(const point &p);
+    uint8_t is_gold(const int x, const int y);
+    uint8_t is_gold(const point &p);
+    uint8_t is_hazard(const int x, const int y);
+    uint8_t is_hazard(const point &p);
+    uint8_t is_key(const int x, const int y);
+    uint8_t is_key(const point &p);
+    uint8_t is_lava(const int x, const int y);
+    uint8_t is_lava(const point &p);
+    uint8_t is_lit(const int x, const int y);
+    uint8_t is_lit(const point &p);
+    uint8_t is_lit_no_check(const int x, const int y);
+    uint8_t is_lit_no_check(const point &p);
+    uint8_t is_minion_generator(const int x, const int y);
+    uint8_t is_minion_generator(const point &p);
+    uint8_t is_monst(const int x, const int y);
+    uint8_t is_monst(const point &p);
+    uint8_t is_poison(const int x, const int y);
+    uint8_t is_poison(const point &p);
+    uint8_t is_potion(const int x, const int y);
+    uint8_t is_potion(const point &p);
+    uint8_t is_ripple(const int x, const int y);
+    uint8_t is_ripple(const point &p);
+    uint8_t is_rock(const int x, const int y);
+    uint8_t is_rock(const point &p);
+    uint8_t is_secret_door(const int x, const int y);
+    uint8_t is_secret_door(const point &p);
+    uint8_t is_shallow_water(const int x, const int y);
+    uint8_t is_shallow_water(const point &p);
+    uint8_t is_smoke(const int x, const int y);
+    uint8_t is_smoke(const point &p);
+    uint8_t is_torch(const int x, const int y);
+    uint8_t is_torch(const point &p);
+    uint8_t is_treasure(const int x, const int y);
+    uint8_t is_treasure(const point &p);
+    uint8_t is_treasure_class_a(const int x, const int y);
+    uint8_t is_treasure_class_a(const point &p);
+    uint8_t is_treasure_class_b(const int x, const int y);
+    uint8_t is_treasure_class_b(const point &p);
+    uint8_t is_treasure_class_c(const int x, const int y);
+    uint8_t is_treasure_class_c(const point &p);
+    uint8_t is_visited(const int x, const int y);
+    uint8_t is_visited(const point &p);
+    uint8_t is_visited_no_check(const int x, const int y);
+    uint8_t is_visited_no_check(const point &p);
+    uint8_t is_wall(const int x, const int y);
+    uint8_t is_wall(const point &p);
+    void clear(void);
+    void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void con_(const char *fmt, va_list args); // compile error without
     void create(point3d at, int seed);
-    bool create_dungeon(point3d at, int seed);
     void create_dungeon_game_mark_dungeon_tiles(Dungeonp d);
     void create_dungeon_place_chasm(Dungeonp d, const std::string &what);
     void create_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
@@ -1981,23 +444,48 @@ public:
     void create_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void create_dungeon_place_sewer_pipes(Dungeonp d);
     void create_dungeon_place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
-    bool create_sewer(point3d at, int seed);
-    bool create_sewer_pipes(point3d at);
-    bool create_sewer_pools(void);
     void create_sewer_place_remaining_walls(const std::string &what);
     void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
-    void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void cursor_check_if_scroll_needed(void);
+    void cursor_find_on_visible_things(const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void cursor_move(void);
+    void cursor_path_clear(void);
+    void cursor_path_create(void);
+    void cursor_path_draw(point start, point end);
+    void cursor_path_draw(void);
+    void cursor_path_draw_circle(void);
+    void cursor_path_draw_line(point start, point end);
+    void cursor_recreate(void);
+    void dbg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void dbg_(const char *fmt, va_list args); // compile error without
+    void display(void);
+    void display_anim(void);
+    void display_blood(void);
+    void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_external_particles(void);
+    void display_fade_in(void);
+    void display_fade_out(void);
     void display_internal_particles(void);
+    void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_map(void);
+    void display_map_bg_things(void);
+    void display_map_fg_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_minimap(void);
+    void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void dump(std::string prefix, std::ostream &out);
-    void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void err_(const char *fmt, va_list args); // compile error without
     void fini(void);
+    void get_tiles(void);
+    void incr_fade_in(const int x, const int y);
+    void incr_fade_in_no_check(const int x, const int y);
+    void incr_heatmap(const int x, const int y);
+    void incr_heatmap_no_check(const int x, const int y);
     void lights_fade(void);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
     void lights_update(void);
-    void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void log(std::string prefix);
     void log_(const char *fmt, va_list args); // compile error without
     void new_external_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
@@ -2007,10 +495,127 @@ public:
     void place_dirt(Dungeonp d);
     void place_floor_deco(Dungeonp d);
     void place_the_grid(void);
+    void sanity_check(void);
+    void screen_shake_end(void);
+    void scroll_map(void);
+    void scroll_map_do(bool fast);
+    void scroll_map_set_target(void);
+    void scroll_map_to_player(void);
+    void set_dungeon(const int x, const int y);
+    void set_is_acid(const int x, const int y);
+    void set_is_ascend_dungeon(const int x, const int y);
+    void set_is_ascend_sewer(const int x, const int y);
+    void set_is_blood(const int x, const int y);
+    void set_is_chasm(const int x, const int y);
+    void set_is_corpse(const int x, const int y);
+    void set_is_corridor(const int x, const int y);
+    void set_is_deep_water(const int x, const int y);
+    void set_is_descend_dungeon(const int x, const int y);
+    void set_is_descend_sewer(const int x, const int y);
+    void set_is_dirt(const int x, const int y);
+    void set_is_door(const int x, const int y);
+    void set_is_extreme_hazard(const int x, const int y);
+    void set_is_fire(const int x, const int y);
+    void set_is_floor(const int x, const int y);
+    void set_is_food(const int x, const int y);
+    void set_is_gfx_water(const int x, const int y);
+    void set_is_gold(const int x, const int y);
+    void set_is_hazard(const int x, const int y);
+    void set_is_key(const int x, const int y);
+    void set_is_lava(const int x, const int y);
+    void set_is_light_blocker(const int x, const int y);
+    void set_is_light_blocker_no_check(const int x, const int y);
+    void set_is_lit(const int x, const int y);
+    void set_is_lit_no_check(const int x, const int y);
+    void set_is_lit_no_check(const int x, const int y, uint8_t v);
+    void set_is_minion_generator(const int x, const int y);
+    void set_is_monst(const int x, const int y);
+    void set_is_movement_blocking_hard(const int x, const int y);
+    void set_is_movement_blocking_hard_no_check(const int x, const int y);
+    void set_is_movement_blocking_soft(const int x, const int y);
+    void set_is_movement_blocking_soft_no_check(const int x, const int y);
+    void set_is_poison(const int x, const int y);
+    void set_is_potion(const int x, const int y);
+    void set_is_ripple(const int x, const int y);
+    void set_is_rock(const int x, const int y);
+    void set_is_secret_door(const int x, const int y);
+    void set_is_shallow_water(const int x, const int y);
+    void set_is_smoke(const int x, const int y);
+    void set_is_torch(const int x, const int y);
+    void set_is_treasure(const int x, const int y);
+    void set_is_treasure_class_a(const int x, const int y);
+    void set_is_treasure_class_b(const int x, const int y);
+    void set_is_treasure_class_c(const int x, const int y);
+    void set_is_wall(const int x, const int y);
+    void set_visited(const int x, const int y);
+    void set_visited_no_check(const int x, const int y);
+    void set_wobble(float);
     void things_gc(bool force);
     void things_gc_force(void);
     void things_gc_if_possible(void);
     void things_tick(void);
+    void tick(void);
+    void unset_dungeon(const int x, const int y);
+    void unset_fade_in(const int x, const int y);
+    void unset_fade_in_no_check(const int x, const int y);
+    void unset_heatmap(const int x, const int y);
+    void unset_heatmap_no_check(const int x, const int y);
+    void unset_is_acid(const int x, const int y);
+    void unset_is_ascend_dungeon(const int x, const int y);
+    void unset_is_ascend_sewer(const int x, const int y);
+    void unset_is_blood(const int x, const int y);
+    void unset_is_chasm(const int x, const int y);
+    void unset_is_corpse(const int x, const int y);
+    void unset_is_corridor(const int x, const int y);
+    void unset_is_deep_water(const int x, const int y);
+    void unset_is_descend_dungeon(const int x, const int y);
+    void unset_is_descend_sewer(const int x, const int y);
+    void unset_is_dirt(const int x, const int y);
+    void unset_is_door(const int x, const int y);
+    void unset_is_extreme_hazard(const int x, const int y);
+    void unset_is_fire(const int x, const int y);
+    void unset_is_floor(const int x, const int y);
+    void unset_is_food(const int x, const int y);
+    void unset_is_gfx_water(const int x, const int y);
+    void unset_is_gold(const int x, const int y);
+    void unset_is_hazard(const int x, const int y);
+    void unset_is_key(const int x, const int y);
+    void unset_is_lava(const int x, const int y);
+    void unset_is_light_blocker(const int x, const int y);
+    void unset_is_light_blocker_no_check(const int x, const int y);
+    void unset_is_lit(const int x, const int y);
+    void unset_is_lit_no_check(const int x, const int y);
+    void unset_is_minion_generator(const int x, const int y);
+    void unset_is_monst(const int x, const int y);
+    void unset_is_movement_blocking_hard(const int x, const int y);
+    void unset_is_movement_blocking_hard_no_check(const int x, const int y);
+    void unset_is_movement_blocking_soft(const int x, const int y);
+    void unset_is_movement_blocking_soft_no_check(const int x, const int y);
+    void unset_is_poison(const int x, const int y);
+    void unset_is_potion(const int x, const int y);
+    void unset_is_ripple(const int x, const int y);
+    void unset_is_rock(const int x, const int y);
+    void unset_is_secret_door(const int x, const int y);
+    void unset_is_shallow_water(const int x, const int y);
+    void unset_is_smoke(const int x, const int y);
+    void unset_is_torch(const int x, const int y);
+    void unset_is_treasure(const int x, const int y);
+    void unset_is_treasure_class_a(const int x, const int y);
+    void unset_is_treasure_class_b(const int x, const int y);
+    void unset_is_treasure_class_c(const int x, const int y);
+    void unset_is_wall(const int x, const int y);
+    void unset_visited(const int x, const int y);
+    void unset_visited_no_check(const int x, const int y);
+    void update(void);
+    void update_all_ticks(void);
+    void update_deep_water(void);
+    void update_hazard_tile_map(void);
+    void update_heatmap(void);
+    void update_map(void);
+    void update_minimap(void);
+    void update_things_next_to_a_chasm(void);
+    void update_water_next_to_lava(void);
+    Thingp inventory_describe(const uint32_t slot);
     friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);
 };
