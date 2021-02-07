@@ -54,9 +54,15 @@ _
         return false;
     }
 
-    if (it->is_dead) {
-        log("Cannot attack %s, it's dead", it->to_string().c_str());
-        return false;
+    if (me->is_meat_eater() || me->attack_meat()) {
+        //
+        // Meat eaters eat you when you are dead!
+        //
+    } else {
+        if (it->is_dead) {
+            log("Cannot attack %s, it's dead", it->to_string().c_str());
+            return false;
+        }
     }
 
     //

@@ -325,7 +325,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr2() && (what == "is_rrr2")) {
         return true;
     }
-    if (is_rrr20() && (what == "is_rrr20")) {
+    if (is_skill() && (what == "is_skill")) {
         return true;
     }
     if (is_sewer_wall() && (what == "is_sewer_wall")) {

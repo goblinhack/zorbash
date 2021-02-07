@@ -204,7 +204,7 @@ int Tp::is_rrr17(void) const { return _is_rrr17; }
 int Tp::is_rrr18(void) const { return _is_rrr18; }
 int Tp::is_rrr19(void) const { return _is_rrr19; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
-int Tp::is_rrr20(void) const { return _is_rrr20; }
+int Tp::is_skill(void) const { return _is_skill; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
 int Tp::is_dungeon_wall(void) const { return _is_dungeon_wall; }
 int Tp::is_descend_sewer(void) const { return _is_descend_sewer; }
@@ -444,7 +444,7 @@ void Tp::set_is_rrr17(int v) { _is_rrr17 = v; }
 void Tp::set_is_rrr18(int v) { _is_rrr18 = v; }
 void Tp::set_is_rrr19(int v) { _is_rrr19 = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
-void Tp::set_is_rrr20(int v) { _is_rrr20 = v; }
+void Tp::set_is_skill(int v) { _is_skill = v; }
 void Tp::set_is_sewer_wall(int v) { _is_sewer_wall = v; }
 void Tp::set_is_dungeon_wall(int v) { _is_dungeon_wall = v; }
 void Tp::set_is_descend_sewer(int v) { _is_descend_sewer = v; }
