@@ -10,7 +10,6 @@ Comments and suggestions welcome at this early stage.
 Upcoming work
 -------------
 
-- click on topcon should move
 - skeletons do not eat dead spiders
 - test descent potion in sewer
 - tiny pixel effects that bounce?
