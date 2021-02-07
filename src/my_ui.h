@@ -32,11 +32,11 @@
 #define UI_FONT_PIXEL_SIZE         6
 #define UI_HEALTH_BAR_STEPS        12 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5
-#define UI_MINICON_HEIGHT          20 // Scrollbar limit
-#define UI_MINICON_TEXT_COLOR      UI_TEXT_COLOR
-#define UI_MINICON_VIS_HEIGHT      5
-#define UI_MINICON_VIS_WIDTH       UI_MINICON_WIDTH
-#define UI_MINICON_WIDTH           (TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
+#define UI_TOPCON_HEIGHT          20 // Scrollbar limit
+#define UI_TOPCON_TEXT_COLOR      UI_TEXT_COLOR
+#define UI_TOPCON_VIS_HEIGHT      5
+#define UI_TOPCON_VIS_WIDTH       UI_TOPCON_WIDTH
+#define UI_TOPCON_WIDTH           (TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
 #define UI_MINIMAP_SIZE            0.155
 #define UI_MOUSE_DOUBLE_CLICK      500 // Double click time
 #define UI_MOUSE_WHEEL_SCALE       1.0 // How much the wheel mouse moves.

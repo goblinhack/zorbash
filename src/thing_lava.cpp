@@ -82,8 +82,8 @@ void Thing::lava_tick (void)
         } FOR_ALL_THINGS_END()
     } else {
         if (is_player()) {
-            MINICON("You stand on a sightly cooler rock in the lava!");
-            MINICON("Your feet are warm and toasty!");
+            TOPCON("You stand on a sightly cooler rock in the lava!");
+            TOPCON("Your feet are warm and toasty!");
         }
     }
 

@@ -249,7 +249,7 @@ _
 
     auto old_owner = t->get_immediate_owner();
     if (!old_owner) {
-        MINICON("%s has no owner so cannot move it!", t->text_The().c_str());
+        TOPCON("%s has no owner so cannot move it!", t->text_The().c_str());
         return true;
     }
 

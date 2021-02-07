@@ -234,7 +234,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/wid_inventory.o               \
     $(OBJDIR)/wid_leftbar.o                 \
     $(OBJDIR)/wid_log.o                     \
-    $(OBJDIR)/wid_minicon.o                 \
+    $(OBJDIR)/wid_topcon.o                 \
     $(OBJDIR)/wid_popup.o                   \
     $(OBJDIR)/wid_rightbar.o                \
     $(OBJDIR)/wid_text_box.o                \

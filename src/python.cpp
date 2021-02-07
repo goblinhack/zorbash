@@ -473,7 +473,7 @@ static PyObject *con_ (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
 }
 
-static PyObject *minicon_ (PyObject *obj, PyObject *args, PyObject *keywds)
+static PyObject *topcon_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     wchar_t *a = 0;
 
@@ -482,7 +482,7 @@ static PyObject *minicon_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     if (a) {
-        minicon(a);
+        topcon(a);
     }
 
     Py_RETURN_NONE;
@@ -843,7 +843,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"log",                                     (PyCFunction)log_,                                      METH_VARARGS,                 "log to the log file"},
     {"map_load_level",                          (PyCFunction)map_load_level_,                           METH_VARARGS | METH_KEYWORDS, "load a level"},
     {"map_load_room",                           (PyCFunction)map_load_room_,                            METH_VARARGS | METH_KEYWORDS, "load a room"},
-    {"minicon",                                 (PyCFunction)minicon_,                                  METH_VARARGS,                 "log to the mini console"},
+    {"topcon",                                 (PyCFunction)topcon_,                                  METH_VARARGS,                 "log to the mini console"},
     {"pct_to_abs",                              (PyCFunction)pct_to_abs_,                               METH_VARARGS | METH_KEYWORDS, "pct to abs"},
     {"puts",                                    (PyCFunction)puts_,                                     METH_VARARGS,                 "log to the console"},
     {"tex_load",                                (PyCFunction)tex_load_,                                 METH_VARARGS | METH_KEYWORDS, "load a texture"},

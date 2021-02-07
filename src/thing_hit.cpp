@@ -28,7 +28,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 
     if (bite) {
         if (real_hitter->is_poison()) {
-            MINICON("TODO");
+            TOPCON("TODO");
         }
     }
 
@@ -125,11 +125,11 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (damage > THING_DAMAGE_SHAKE_ABOVE) {
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
             if (crit) {
-                MINICON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$",
+                TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$",
                         real_hitter->text_The().c_str(),
                         damage);
             } else {
-                MINICON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
+                TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
                         real_hitter->text_The().c_str(),
                         real_hitter->text_hits().c_str(),
                         damage);
@@ -138,16 +138,16 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             if (real_hitter->is_fire() ||
                 real_hitter->is_lava()) {
                 if (set_on_fire("hit by fire")) {
-                    MINICON("%%fg=red$You are literally ON FIRE!%%fg=reset$");
+                    TOPCON("%%fg=red$You are literally ON FIRE!%%fg=reset$");
                 }
             }
         } else {
             if (bite) {
-                MINICON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$",
+                TOPCON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$",
                         real_hitter->text_The().c_str(),
                         damage);
             } else {
-                MINICON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
+                TOPCON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
                         real_hitter->text_The().c_str(),
                         real_hitter->text_hits().c_str(),
                         damage);
@@ -160,10 +160,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     } else {
         if (real_hitter->is_player()) {
             if (crit) {
-                MINICON("%%fg=red$You CRIT hit the %s for %d damage!%%fg=reset$",
+                TOPCON("%%fg=red$You CRIT hit the %s for %d damage!%%fg=reset$",
                         text_the().c_str(), damage);
             } else {
-                MINICON("You hit the %s for %d damage!",
+                TOPCON("You hit the %s for %d damage!",
                         text_the().c_str(), damage);
             }
         }

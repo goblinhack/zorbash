@@ -6,7 +6,7 @@
 #include "my_sys.h"
 #include "my_game.h"
 #include "minilzo.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
@@ -647,7 +647,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);
 
-    std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
+    std::vector<std::wstring> s; in >> bits(s); wid_topcon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
 
     my.t.level = get(my.t.world.levels,
@@ -773,8 +773,8 @@ Game::load (std::string file_to_load, class Game &target)
     std::istringstream in(s);
 
     if (!game_load_headers_only) {
-        wid_minicon_fini();
-        wid_minicon_init();
+        wid_topcon_fini();
+        wid_topcon_init();
     }
 
     game_load_error = "";
@@ -787,7 +787,7 @@ Game::load (std::string file_to_load, class Game &target)
     }
 
     if (!game_load_headers_only) {
-        wid_visible(wid_minicon_window);
+        wid_visible(wid_topcon_window);
         wid_visible(wid_botcon_window);
         wid_rightbar_fini();
         wid_rightbar_init();
@@ -839,7 +839,7 @@ Game::load (int slot)
     }
 
     if  (!get(slot_valid, slot)) {
-        MINICON("No game at that slot");
+        TOPCON("No game at that slot");
         return;
     }
 
@@ -861,7 +861,7 @@ Game::load (int slot)
     CON("DUNGEON: Loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 
-    MINICON("Loaded the game from %s", save_file.c_str());
+    TOPCON("Loaded the game from %s", save_file.c_str());
 }
 
 static WidPopup *wid_load;
@@ -899,7 +899,7 @@ static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
                     case '9': {
                         int slot = c - '0';
                         if  (!get(slot_valid, slot)) {
-                            MINICON("No game at that slot");
+                            TOPCON("No game at that slot");
                         } else {
                             game->load(slot);
                             wid_load_destroy();
@@ -939,7 +939,7 @@ static uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 
 void Game::load_select (void)
 {_
-    MINICON("Loading a saved game");
+    TOPCON("Loading a saved game");
     CON("USERCFG: loading a saved game, destroy old");
 
     if (wid_load) {
@@ -949,7 +949,7 @@ void Game::load_select (void)
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
-                          UI_MINICON_VIS_HEIGHT + 2);
+                          UI_TOPCON_VIS_HEIGHT + 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
                           tl.y + 19);
     auto width = br.x - tl.x;

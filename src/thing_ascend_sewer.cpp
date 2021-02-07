@@ -90,7 +90,7 @@ bool Thing::ascend_sewer (void)
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
         if (is_player()) {
-            MINICON("The entrance is permanently blocked!");
+            TOPCON("The entrance is permanently blocked!");
         }
         return false;
     }
@@ -100,7 +100,7 @@ bool Thing::ascend_sewer (void)
 
     if (is_player()) {
         game->level = l;
-        MINICON("You ascend out of the muck");
+        TOPCON("You ascend out of the muck");
     }
 
     log("Move to previous level exit");

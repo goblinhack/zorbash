@@ -11,7 +11,7 @@
 #include "my_level.h"
 #include "my_console.h"
 #include "my_wid_console.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_log.h"
 #include "my_thing.h"
@@ -111,7 +111,7 @@ void Thing::con_ (const char *fmt, va_list args) const
     FLUSH_THE_CONSOLE();
 }
 
-void Thing::minicon_ (const char *fmt, va_list args) const
+void Thing::topcon_ (const char *fmt, va_list args) const
 {
     verify(this);
     auto t = this;
@@ -131,7 +131,7 @@ void Thing::minicon_ (const char *fmt, va_list args) const
 
     term_log(buf);
     putchar('\n');
-    wid_minicon_log(buf);
+    wid_topcon_log(buf);
     wid_console_log(buf);
     FLUSH_THE_CONSOLE();
 }
@@ -147,14 +147,14 @@ void Thing::con (const char *fmt, ...) const
     va_end(args);
 }
 
-void Thing::minicon (const char *fmt, ...) const
+void Thing::topcon (const char *fmt, ...) const
 {
     verify(this);
     auto t = this;
     va_list args;
 
     va_start(args, fmt);
-    t->minicon_(fmt, args);
+    t->topcon_(fmt, args);
     va_end(args);
 }
 

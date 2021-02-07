@@ -225,7 +225,7 @@ _
         item_slot = free_slot;
     } else {
         if (inventory_items >= UI_ACTIONBAR_MAX_ITEMS) {
-            MINICON("No space to carry %s which is not carried",
+            TOPCON("No space to carry %s which is not carried",
                     what->text_the().c_str());
             return false;
         }

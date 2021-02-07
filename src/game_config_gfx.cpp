@@ -224,7 +224,7 @@ void Game::config_gfx_select (void)
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, 
-                          UI_MINICON_VIS_HEIGHT - 2);
+                          UI_TOPCON_VIS_HEIGHT - 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, 
                           UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x - 2;

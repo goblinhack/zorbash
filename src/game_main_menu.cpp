@@ -5,7 +5,7 @@
 
 #include "my_sys.h"
 #include "my_game.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
@@ -39,8 +39,8 @@ static uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t b
     wid_rightbar_fini();
     wid_rightbar_init();
 
-    wid_minicon_fini();
-    wid_minicon_init();
+    wid_topcon_fini();
+    wid_topcon_init();
 
     wid_thing_info_fini();
     wid_thing_collect_fini();
@@ -49,9 +49,9 @@ static uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t b
     wid_inventory_fini();
     wid_inventory_init();
 
-    wid_visible(wid_minicon_window);
-    MINICON("Welcome to the lair of the dread beholder, %%fg=red$Zorbash%%fg=reset$.");
-    MINICON("Liberate the %%fg=yellow$Orb of Zorb%%fg=reset$ and defeat Zorbash to win.");
+    wid_visible(wid_topcon_window);
+    TOPCON("Welcome to the lair of the dread beholder, %%fg=red$Zorbash%%fg=reset$.");
+    TOPCON("Liberate the %%fg=yellow$Orb of Zorb%%fg=reset$ and defeat Zorbash to win.");
 
     CON("%%fg=red$@@@@@@  @@@@@  @@@@@@  @@@@@@   @@@@@   @@@@  @@@ @@@%%fg=reset$");
     CON("%%fg=red$@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@ @@@ @@@%%fg=reset$");

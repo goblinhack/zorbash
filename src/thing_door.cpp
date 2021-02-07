@@ -16,7 +16,7 @@ bool Thing::open_door (Thingp it)
     if (is_on_fire()) {
         if (!it->is_on_fire()) {
             if (is_player()) {
-                MINICON("The door is ablaze!");
+                TOPCON("The door is ablaze!");
             }
             it->set_on_fire("opened flaming door");
         }
@@ -42,14 +42,14 @@ bool Thing::open_door (Thingp it)
         it->level_push();
 
         if (is_player()) {
-            MINICON("The door creaks open");
+            TOPCON("The door creaks open");
         }
         update_light();
         return true;
     }
 
     if (is_player()) {
-        MINICON("You need a key");
+        TOPCON("You need a key");
     }
 
     return false;

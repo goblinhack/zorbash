@@ -5,7 +5,7 @@
 
 #include "my_sys.h"
 #include "my_game.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_ui.h"
@@ -24,8 +24,8 @@ static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
     game_quit_destroy();
     if (game->started) {
         LOG("USERCFG: restart game");
-        wid_minicon_fini();
-        wid_minicon_init();
+        wid_topcon_fini();
+        wid_topcon_init();
         wid_botcon_fini();
         wid_botcon_init();
         game->fini();

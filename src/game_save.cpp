@@ -6,7 +6,7 @@
 #include "minilzo.h"
 #include "my_sys.h"
 #include "my_game.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_alloc.h"
@@ -518,7 +518,7 @@ std::ostream& operator<<(std::ostream &out,
     /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ out << bits(my.t.tick_current);
 
-    out << bits(wid_minicon_serialize());
+    out << bits(wid_topcon_serialize());
     out << bits(wid_console_serialize());
 
     return (out);
@@ -656,7 +656,7 @@ Game::save (int slot)
     CON("DUNGEON: Saved %s, seed %u", save_file.c_str(), seed);
     LOG("-");
 
-    MINICON("Saved the game to %s", save_file.c_str());
+    TOPCON("Saved the game to %s", save_file.c_str());
 }
 
 void
@@ -747,7 +747,7 @@ void Game::save_select (void)
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
-                          UI_MINICON_VIS_HEIGHT + 2);
+                          UI_TOPCON_VIS_HEIGHT + 2);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
                           tl.y + 19);
     auto width = br.x - tl.x;

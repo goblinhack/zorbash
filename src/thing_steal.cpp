@@ -39,7 +39,7 @@ _
 
     if (it->is_player()) {
         it->msg(string_sprintf("                        %%fg=white$Where's my money?!"));
-        MINICON("%%fg=orange$You feel less wealthy somehow...");
+        TOPCON("%%fg=orange$You feel less wealthy somehow...");
     }
     return true;
 }
@@ -74,7 +74,7 @@ _
 
     if (it->is_player()) {
         it->msg(string_sprintf("                        %%fg=white$Where's my stuff?!"));
-        MINICON("%%fg=orange$You feel lighter somehow...");
+        TOPCON("%%fg=orange$You feel lighter somehow...");
     }
 
     //

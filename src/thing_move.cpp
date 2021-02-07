@@ -127,7 +127,7 @@ bool Thing::move (fpoint future_pos,
                 try_to_carry(items);
             }
         } else {
-            MINICON("You wait...");
+            TOPCON("You wait...");
         }
 
         location_check();
@@ -204,7 +204,7 @@ _
                 if ((0)) {
                     if (is_player()) {
                         std::string s = t->text_The() + " attacks as you run";
-                        MINICON("%s", s.c_str());
+                        TOPCON("%s", s.c_str());
                     }
                 }
             }

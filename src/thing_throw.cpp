@@ -23,13 +23,13 @@ void Thing::throw_at (Thingp what, Thingp target)
         get_throw_distance()) {
 
         if (is_player()) {
-            MINICON("You cannot throw %s that far", what->text_the().c_str());
+            TOPCON("You cannot throw %s that far", what->text_the().c_str());
         }
         return;
     }
 
     if (is_player()) {
-        MINICON("You throw %s", what->text_the().c_str());
+        TOPCON("You throw %s", what->text_the().c_str());
     }
 
     log("Thrown %s", what->to_string().c_str());
@@ -67,7 +67,7 @@ bool Thing::throw_item (Thingp what)
 
     if (!what->is_throwable()) {
         if (is_player()) {
-            MINICON("I don't know how to throw %s", what->text_the().c_str());
+            TOPCON("I don't know how to throw %s", what->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
         }
         return false;
@@ -78,7 +78,7 @@ bool Thing::throw_item (Thingp what)
     level->cursor_recreate();
     game->level->cursor->visible();
 
-    MINICON("Choose a target");
+    TOPCON("Choose a target");
 
     return true;
 }
