@@ -71,86 +71,211 @@ bool Level::create_sewer_pipes (point3d at)
         return false;
     }
 
-    auto player = prev->player;
-    if (!prev) {
-        err("no previous level player for sewer");
-        return false;
-    }
+    std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pipes_template = {};
+    std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> sewer_pipe = {};
+    std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> final_pipes = {};
+    std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> failed = {};
 
-    Dmap dmap {};
-
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_HEIGHT; x++) {
-            set(dmap.val, x, y, DMAP_IS_PASSABLE);
+    //
+    // Draw some random pipes
+    //
+    auto min_pipe_distance = 10;
+    auto max_pipe_distance = 20;
+    for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; 
+         x+=random_range(min_pipe_distance,max_pipe_distance)) {
+        for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+            set(pipes_template, x, y, true);
         }
     }
 
-    set(dmap.val, player->mid_at.x, player->mid_at.y, DMAP_IS_GOAL);
+    for (auto y = MAP_BORDER_ROCK; y < MAP_WIDTH - MAP_BORDER_ROCK; 
+         y+=random_range(min_pipe_distance,max_pipe_distance)) {
+        for (auto x = MAP_BORDER_ROCK; x < MAP_HEIGHT - MAP_BORDER_ROCK; x++) {
+            set(pipes_template, x, y, true);
+        }
+    }
 
     //
-    // Find all pipes and mark them as goals.
+    // Place the sewers
     //
-    point midpoint;
-    int got_count = 0;
     std::vector<point> sewers;
+    auto got_count = 0;
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_HEIGHT; x++) {
             FOR_ALL_THINGS(prev, t, x, y) {
                 if (t->is_descend_sewer()) {
-                    set(dmap.val, x, y, DMAP_IS_GOAL);
                     point p(x, y);
-                    midpoint += p;
                     sewers.push_back(p);
+                    set(sewer_pipe, x, y, true);
                     got_count++;
                 }
             } FOR_ALL_THINGS_END()
         }
     }
 
-    if (!got_count) {
-        set(dmap.val, random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT), DMAP_IS_GOAL);
-        set(dmap.val, random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT), DMAP_IS_GOAL);
-        set(dmap.val, random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT), DMAP_IS_GOAL);
-        set(dmap.val, random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT), DMAP_IS_GOAL);
-        midpoint.x = random_range(0, MAP_WIDTH);
-        midpoint.y = random_range(0, MAP_HEIGHT);
-    } else {
-        midpoint /= got_count;
+    if (got_count <= 1) {
+        sewers.push_back(point(random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT)));
+        sewers.push_back(point(random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT)));
+        sewers.push_back(point(random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT)));
     }
 
-    dmap_print(&dmap);
-    dmap_process(&dmap);
+    //
+    // Draw a line from the sewer to a nearby pipe
+    //
+    for (auto n = 0U; n < sewers.size(); n++) {
+        auto p = sewers[n];
+        int dx = 0, dy = 0;
+        switch (random_range_inclusive(0, 3)) {
+            case 0: dx = -1; dy = 0; break;
+            case 1: dx =  1; dy = 0; break;
+            case 2: dx =  0; dy = -1; break;
+            case 3: dx =  0; dy = 1; break;
+        }
 
-    for (auto tries = 0U; tries < sewers.size() / 2; tries++) {
-        auto a = sewers[random_range(0, sewers.size())];
+        while (true) {
+            if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+                break;
+            }
+            if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+                break;
+            }
+            if (p.x <= MAP_BORDER_ROCK) {
+                break;
+            }
+            if (p.y <= MAP_BORDER_ROCK) {
+                break;
+            }
+
+            //
+            // Try to follow the pipe template
+            //
+            if (get(pipes_template, p.x, p.y)) {
+                break;
+            }
+            set(pipes_template, p.x, p.y, true);
+            p.x += dx;
+            p.y += dy;
+        }
+    }
+
+    //
+    // For each sewer, try to find another
+    //
+    for (auto n = 0U; n < sewers.size(); n++) {
+        auto a = sewers[n];
         auto b = sewers[random_range(0, sewers.size())];
-
-        if (a == b) {
-            b = midpoint;
+        while (a == b) {
+            b = sewers[random_range(0, sewers.size())];
         }
 
-        char path_debug = '\0'; // astart path debug
-        auto result = astar_solve(path_debug, a, b, &dmap);
+        std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
+        int tries = 0;
+        while (tries < 1000) {
+            set(final_pipes, a.x, a.y, true);
+            set(walked, a.x, a.y, true);
+            if (a.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+                break;
+            }
+            if (a.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+                break;
+            }
+            if (a.x <= MAP_BORDER_ROCK) {
+                break;
+            }
+            if (a.y <= MAP_BORDER_ROCK) {
+                break;
+            }
 
-        for (auto p : result.path) {
-            (void) thing_new("corridor2", p);
-            if (random_range(0, 100) < 25) {
-                (void) thing_new("water1", p);
+            //
+            // Try to follow the pipe template
+            //
+            if ((a.x < b.x) && get(pipes_template, a.x + 1, a.y)) {
+                a.x++;
+                continue;
+            }
+            if ((a.x > b.x) && get(pipes_template, a.x - 1, a.y)) {
+                a.x--;
+                continue;
+            }
+            if ((a.y < b.y) && get(pipes_template, a.x, a.y + 1)) {
+                a.y++;
+                continue;
+            }
+            if ((a.y > b.y) && get(pipes_template, a.x, a.y - 1)) {
+                a.y--;
+                continue;
+            }
+            if (!get(walked, a.x + 1, a.y) && get(pipes_template, a.x + 1, a.y)) {
+                a.x++;
+                continue;
+            }
+            if (!get(walked, a.x - 1, a.y) && get(pipes_template, a.x - 1, a.y)) {
+                a.x--;
+                continue;
+            }
+            if (!get(walked, a.x, a.y + 1) && get(pipes_template, a.x, a.y + 1)) {
+                a.y++;
+                continue;
+            }
+            if (!get(walked, a.x, a.y - 1) && get(pipes_template, a.x, a.y - 1)) {
+                a.y--;
+                continue;
+            }
+            if (!get(walked, a.x + 1, a.y)) {
+                a.x++;
+                continue;
+            }
+            if (!get(walked, a.x - 1, a.y)) {
+                a.x--;
+                continue;
+            }
+            if (!get(walked, a.x, a.y + 1)) {
+                a.y++;
+                continue;
+            }
+            if (!get(walked, a.x, a.y - 1)) {
+                a.y--;
+                continue;
+            }
+            set(failed, a.x, a.y, true);
+            break;
+        }
+    }
+
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_HEIGHT; x++) {
+            point p(x, y);
+            if (get(final_pipes, x, y)) {
+                (void) thing_new("corridor2", p);
+                if (random_range(0, 100) < 25) {
+                    (void) thing_new("water1", p);
+                }
+            }
+            if (get(sewer_pipe, x, y)) {
+                (void) thing_new("ascend_sewer1", p);
             }
         }
+    }
 
-        if (random_range(0, 100) < 5) {
-            auto result = astar_solve(path_debug, midpoint, a, &dmap);
-            for (auto p : result.path) {
-                (void) thing_new("corridor3", p);
+#if 0
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_HEIGHT; x++) {
+            if (get(failed, x, y)) {
+                printf("F");
+            } else if (get(sewer_pipe, x, y)) {
+                printf("S");
+            } else if (get(final_pipes, x, y)) {
+                printf("p");
+            } else if (get(pipes_template, x, y)) {
+                printf(".");
+            } else {
+                printf(" ");
             }
         }
-
+        printf("\n");
     }
-    for (auto sewer = 0U; sewer < sewers.size(); sewer++) {
-        (void) thing_new("ascend_sewer1", sewers[sewer]);
-    }
+#endif
 
     return true;
 }
