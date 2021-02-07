@@ -15,12 +15,18 @@
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
-    if (wid_find_under_mouse_when_scrolling()) {
-        return false;
+    auto w = wid_find_under_mouse();
+    if (w) {
+        if (w->name != "wid topcon window") {
+            return false;
+        }
     }
 
-    if (wid_find_under_mouse()) {
-        return false;
+    w = wid_find_under_mouse_when_scrolling();
+    if (w) {
+        if (w->name != "wid topcon window") {
+            return false;
+        }
     }
 
     if (!game || !game->started) {

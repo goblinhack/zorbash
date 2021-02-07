@@ -58,7 +58,7 @@ def init2():
 
     load_all_plugins()
 
-    zx.minicon("Welcome mortal, to Zorbash version " + zx.VERSION)
+    zx.topcon("Welcome mortal, to Zorbash version " + zx.VERSION)
     console.hello()
 
 init1()
