@@ -96,6 +96,7 @@ public:
     point        where_i_failed_to_collect_last{-1, -1};
     std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> bag {};
     std::list<ThingId>    carrying;
+    std::list<ThingId>    skills;
     std::string           msg;               // Text that floats on screen
     std::vector<ThingId>  enemies;           // List of things that wronged us
     std::vector<point>    move_path;

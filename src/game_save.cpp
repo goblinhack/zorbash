@@ -90,6 +90,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* point   where_i_failed_to_collect_last */ out << bits(my.t->where_i_failed_to_collect_last);
     /* std::array<std::array<ThingId          */ out << bits(my.t->bag);
     /* std::list<ThingId>   carrying          */ out << bits(my.t->carrying);
+    /* std::list<ThingId>   skills            */ out << bits(my.t->skills);
     /* std::string          msg               */ out << bits(my.t->msg);
     /* std::vector<ThingId> enemies           */ out << bits(my.t->enemies);
     /* std::vector<point>   move_path         */ out << bits(my.t->move_path);

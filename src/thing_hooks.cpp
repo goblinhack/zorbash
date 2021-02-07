@@ -68,8 +68,8 @@ void Thing::hooks_remove ()
             //
             // End of the use-animation, make the sword visible again.
             //
-            auto carrying = owner->weapon_get_carry_anim();
-            if (carrying) {
+            auto carry_anim = owner->weapon_get_carry_anim();
+            if (carry_anim) {
                 log("Make carry weapon visible %s", owner->to_string().c_str());
 _
                 //
@@ -80,7 +80,7 @@ _
                         log("Reapply carry-anim for owner %s",
                              owner->to_string().c_str());
                     }
-                    carrying->visible();
+                    carry_anim->visible();
                 } else {
                     if (is_loggable_for_unimportant_stuff()) {
                         log("Do not reapply carry-anim for invisible owner %s",

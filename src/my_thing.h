@@ -214,6 +214,10 @@ public:
     bool bag_remove_at(Thingp item, point pos);
     bool can_eat(const Thingp it);
     bool carry(Thingp w);
+    bool add_kill(Thingp it);
+    bool skill_add(Thingp it);
+    bool skill_remove(Thingp it);
+    void skill_remove_all(void);
     bool change_owner(Thingp new_owner);
     bool chasm_tick();
     bool check_anything_to_carry(void);

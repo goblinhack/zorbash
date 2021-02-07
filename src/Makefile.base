@@ -137,6 +137,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_bag.o                   \
     $(OBJDIR)/thing_bounce.o                \
     $(OBJDIR)/thing_carry.o                 \
+    $(OBJDIR)/thing_skill.o                 \
     $(OBJDIR)/thing_chasm.o                 \
     $(OBJDIR)/thing_collision.o             \
     $(OBJDIR)/thing_cursor.o                \

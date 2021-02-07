@@ -106,6 +106,8 @@ void Thing::kill (Thingp killer, const char *reason)
             log("Drop all items on death");
             drop_all();
         }
+
+        skill_remove_all();
     }
 
     if (on_death_is_open()) {

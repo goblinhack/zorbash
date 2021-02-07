@@ -185,6 +185,9 @@ bool Level::create_dungeon (point3d at, int seed)
                             t->carry(p);
                         }
 
+                        auto s = thing_new("skill_devoted_thrust", fpoint(x, y));
+                        t->skill_add(s);
+
                         goto placed_player;
                     }
                 }
