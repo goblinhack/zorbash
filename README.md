@@ -7,6 +7,22 @@ Liberate the Orb of Zorb and defeat Zorbash to win.
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.
 
+Upcoming work
+-------------
+
+- test descent potion in sewer
+- tiny pixel effects that bounce?
+- skills
+- skill, switch to defensive
+- skill, whirl attack
+- skill, kneecap
+- skill, blind strike
+- skill, slash and roll
+- skill, slash and jump
+- skill, devoted thrust
+- skill, defensive mode, recover stamina
+- skill, spring attack, give upa round for 2.5 times damage
+
 Graphics
 --------
 Additional gfx by Oryx, [found here](https://www.oryxdesignlab.com/)

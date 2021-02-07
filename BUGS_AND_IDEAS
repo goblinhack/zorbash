@@ -1,19 +1,4 @@
-bugs
-----
-
-- test descent potion in sewer
-- tiny pixel effects that bounce?
-- skills
-  - switch to defensive
-  - whirl attack
-  - kneecap
-  - blind strike
-  - slash and roll
-  - slash and jump
-  - devoted thrust
-  - defensive mode, recover stamina
-  - spring attack, give upa round for 2.5 times damage
-  
+Future TODO
 
 poison
 ------
@@ -97,14 +82,3 @@ spells
 ------
 - spell capacitor
 - spell chaining
-
-gfx
----
-- consider https://kennystudio.itch.io/2d-explosions-pixelart-free
-
-tools
------
-pixatool https://kronbits.itch.io/pixatool?fbclid=IwAR3Tez_iXDV3v75DY4Bd1f4asfgkJJ_UwdB1olawpM2dAFS_ZSsEy-Ao-gc
-tileset https://s4m-ur4i.itch.io/huge-pixelart-asset-pack?fbclid=IwAR2bKv5nNiR8JAnAn1jw7fachwe0pqCaqKh4QKmxcNAcqkJxdHpjw1girxA
-        https://kronbits.itch.io/matriax-free-assets
-
