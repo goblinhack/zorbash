@@ -244,8 +244,8 @@ class Tp:
     def set_is_rrr19(self, value):
         zx.tp_set_is_rrr19(self, value)
 
-    def set_is_rrr20(self, value):
-        zx.tp_set_is_rrr20(self, value)
+    def set_is_skill(self, value):
+        zx.tp_set_is_skill(self, value)
 
     def set_is_sewer_wall(self, value):
         zx.tp_set_is_sewer_wall(self, value)

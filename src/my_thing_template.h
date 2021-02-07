@@ -228,7 +228,7 @@ private:
     int _is_rrr18 {};
     int _is_rrr19 {};
     int _is_rrr2 {};
-    int _is_rrr20 {};
+    int _is_skill {};
     int _is_rrr3 {};
     int _is_rrr4 {};
     int _is_rrr5 {};
@@ -574,7 +574,7 @@ public:
     int is_rrr18(void) const;
     int is_rrr19(void) const;
     int is_rrr2(void) const;
-    int is_rrr20(void) const;
+    int is_skill(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
@@ -816,7 +816,7 @@ public:
     void set_is_rrr18(int);
     void set_is_rrr19(int);
     void set_is_rrr2(int);
-    void set_is_rrr20(int);
+    void set_is_skill(int);
     void set_is_rrr3(int);
     void set_is_rrr4(int);
     void set_is_rrr5(int);

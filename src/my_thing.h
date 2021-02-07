@@ -684,7 +684,7 @@ public:
     int is_rrr18(void) const;
     int is_rrr19(void) const;
     int is_rrr2(void) const;
-    int is_rrr20(void) const;
+    int is_skill(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;

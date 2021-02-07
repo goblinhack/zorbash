@@ -588,9 +588,9 @@ int Thing::is_rrr19(void) const
     return (tp()->is_rrr19());
 }
 
-int Thing::is_rrr20(void) const
+int Thing::is_skill(void) const
 {_
-    return (tp()->is_rrr20());
+    return (tp()->is_skill());
 }
 
 int Thing::is_sewer_wall(void) const
