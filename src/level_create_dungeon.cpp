@@ -812,12 +812,12 @@ void Level::create_dungeon_place_sewer_pipes (Dungeonp d)
     //
     // Sometimes we have sewer pipes
     //
-    if (random_range(0, 100) < 10) {
+    if (random_range(0, 100) < 80) {
         return;
     }
 
     int sewer_count = 0;
-    int sewer_count_target = 2 + random_range(0, 10);
+    int sewer_count_target = 2 + random_range(0, 5);
 
     while (sewer_count < sewer_count_target) {
         auto x = random_range(MAP_BORDER_TOTAL, MAP_WIDTH - MAP_BORDER_TOTAL + 1);

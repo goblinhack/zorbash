@@ -160,7 +160,7 @@ void Game::dead_select (const char *reason)
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
 
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "Rise Again ?");
+        wid_set_text(w, "Continue?");
     }
 
     wid_update(wid_dead_window->wid_text_area->wid_text_area);
