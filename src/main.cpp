@@ -21,7 +21,7 @@ std::default_random_engine rng;
 #include "my_python.h"
 #include "my_gl.h"
 #include "my_wid_console.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_font.h"
 #include "my_dir.h"
@@ -81,8 +81,8 @@ void quit (void)
     LOG("FINI: wid_console_fini");
     wid_console_fini();
 
-    LOG("FINI: wid_minicon_fini");
-    wid_minicon_fini();
+    LOG("FINI: wid_topcon_fini");
+    wid_topcon_fini();
 
     LOG("FINI: wid_botcon_fini");
     wid_botcon_fini();
@@ -708,9 +708,9 @@ int32_t main (int32_t argc, char *argv[])
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Load UI minicon");
-    if (!wid_minicon_init()) {
-        ERR("Wid_minicon init");
+    CON("INIT: Load UI topcon");
+    if (!wid_topcon_init()) {
+        ERR("Wid_topcon init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //
@@ -762,7 +762,7 @@ int32_t main (int32_t argc, char *argv[])
     game->load();
 #endif
 
-    wid_minicon_flush();
+    wid_topcon_flush();
     wid_botcon_flush();
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////

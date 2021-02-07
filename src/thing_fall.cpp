@@ -56,7 +56,7 @@ _
 
     if (is_on_fire()) {
         if (is_player()) {
-            MINICON("%%fg=green$The fall puts out the flames!%%fg=reset$");
+            TOPCON("%%fg=green$The fall puts out the flames!%%fg=reset$");
         }
         unset_on_fire();
     }
@@ -121,7 +121,7 @@ _
     auto next_level = get(game->world.levels, where_to.x, where_to.y, where_to.z);
     if (!next_level) {
         if (is_player()) {
-            MINICON("The chasm is permanently blocked!");
+            TOPCON("The chasm is permanently blocked!");
         }
         log("No, no next level");
         return false;
@@ -184,9 +184,9 @@ _
 
             if (is_player()) {
                 game->level = next_level;
-                MINICON("%%fg=red$You tumble into the void!%%fg=reset$");
+                TOPCON("%%fg=red$You tumble into the void!%%fg=reset$");
             } else if (is_monst() || is_item()) {
-                MINICON("%s tumbles into the void!", text_The().c_str());
+                TOPCON("%s tumbles into the void!", text_The().c_str());
             }
 
             log("Land on the next level, change level then move to %d,%d", x, y);
@@ -227,28 +227,28 @@ _
             auto new_pos = make_point(mid_at);
             if (next_level->is_lava(new_pos)) {
                 if (is_player()) {
-                    MINICON("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
+                    TOPCON("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
                 }
                 fall_damage *= 3;
             } else if (next_level->is_fire(new_pos)) {
                 if (is_player()) {
-                    MINICON("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$");
+                    TOPCON("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$");
                 }
                 fall_damage *= 2;
             } else if (next_level->is_deep_water(new_pos)) {
                 if (is_player()) {
-                    MINICON("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
+                    TOPCON("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
                 }
                 fall_damage /= 4;
             } else if (next_level->is_shallow_water(new_pos)) {
                 if (is_player()) {
-                    MINICON("%%fg=yellow$The water lessens the fall!%%fg=reset$");
+                    TOPCON("%%fg=yellow$The water lessens the fall!%%fg=reset$");
                 }
                 fall_damage /= 2;
             }
 
             if (is_player()) {
-                MINICON("%%fg=red$You take %u fall damage!%%fg=reset$", fall_damage);
+                TOPCON("%%fg=red$You take %u fall damage!%%fg=reset$", fall_damage);
             }
 
             bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);

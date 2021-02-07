@@ -46,7 +46,7 @@ int Thing::get_danger_level (void)
 
     danger_level += get_damage_melee_dice().max_roll();
 
-    // minicon("level %d", danger_level);
+    // topcon("level %d", danger_level);
     return danger_level;
 }
 

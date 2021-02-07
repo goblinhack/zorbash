@@ -60,7 +60,7 @@ void Thing::fire_tick (void)
             hit = ((int)random_range(0, 100) < 90);
             if (!hit) {
                 if (is_player()) {
-                    MINICON("%%fg=green$You feel a brief cool breeze and reprieve from the flames!%%fg=reset$");
+                    TOPCON("%%fg=green$You feel a brief cool breeze and reprieve from the flames!%%fg=reset$");
 
                     //
                     // Smoke ensures a reprieve.
@@ -85,11 +85,11 @@ void Thing::fire_tick (void)
             hit = ((int)random_range(0, 100) < 90);
             if (!hit) {
                 if (is_player()) {
-                    MINICON("%%fg=red$You dodge the flames");
+                    TOPCON("%%fg=red$You dodge the flames");
                 }
             } else if ((int)random_range(0, 100) < 20) {
                 if (set_on_fire("stepped into fire")) {
-                    MINICON("%%fg=red$The flames wrap around you!%%fg=reset$");
+                    TOPCON("%%fg=red$The flames wrap around you!%%fg=reset$");
                 }
             }
         } else {
@@ -107,7 +107,7 @@ void Thing::fire_tick (void)
 
         auto h = decr_health(damage);
         if (is_player()) {
-            MINICON("%%fg=red$You take %u burn damage!%%fg=reset$", damage);
+            TOPCON("%%fg=red$You take %u burn damage!%%fg=reset$", damage);
         }
 
         if (h <= 0) {

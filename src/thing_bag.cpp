@@ -193,7 +193,7 @@ bool Thing::bag_remove_at (Thingp item, point pos)
 bool Thing::bag_can_place_at (Thingp item, point pos)
 {_
     if (item == this) {
-        MINICON("Cannot place a bag inside itself!");
+        TOPCON("Cannot place a bag inside itself!");
         return false;
     }
 

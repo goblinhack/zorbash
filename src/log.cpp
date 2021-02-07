@@ -7,7 +7,7 @@
 #include "my_game.h"
 #include "my_traceback.h"
 #include "my_wid_console.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_python.h"
 #include "my_console.h"
@@ -206,7 +206,7 @@ void con (const wchar_t *fmt)
     FLUSH_THE_CONSOLE();
 }
 
-static void minicon_ (const char *fmt, va_list args)
+static void topcon_ (const char *fmt, va_list args)
 {
     char buf[MAXSTR];
     char ts[MAXSTR/2];
@@ -214,7 +214,7 @@ static void minicon_ (const char *fmt, va_list args)
 
     buf[0] = '\0';
     get_timestamp(ts, MAXSTR);
-    snprintf(buf, sizeof(buf) - 1, "%sMINICON: ", ts);
+    snprintf(buf, sizeof(buf) - 1, "%sTOPCON: ", ts);
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
@@ -223,18 +223,18 @@ static void minicon_ (const char *fmt, va_list args)
     term_log(buf);
     putchar('\n');
 
-    wid_minicon_log(buf + len);
+    wid_topcon_log(buf + len);
     wid_console_log(buf + len);
     FLUSH_THE_CONSOLE();
 }
 
-static void minicon_ (const wchar_t *fmt, va_list args)
+static void topcon_ (const wchar_t *fmt, va_list args)
 {
     {
         char ts[MAXSTR];
         ts[0] = '\0';
         get_timestamp(ts, MAXSTR);
-        fprintf(MY_STDOUT, "%sMINICON: ", ts);
+        fprintf(MY_STDOUT, "%sTOPCON: ", ts);
         term_log(ts);
     }
 
@@ -248,12 +248,12 @@ static void minicon_ (const wchar_t *fmt, va_list args)
         if (wrote && (wrote < MAXSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
-            fprintf(stderr, "Failed to minicon log: [%S]\n", fmt);
+            fprintf(stderr, "Failed to topcon log: [%S]\n", fmt);
         }
 
         fwprintf(MY_STDOUT, L"%S\n", buf);
         term_log(buf);
-        wid_minicon_log(buf);
+        wid_topcon_log(buf);
         //wid_console_log(buf);
     }
 
@@ -261,7 +261,7 @@ static void minicon_ (const wchar_t *fmt, va_list args)
     FLUSH_THE_CONSOLE();
 }
 
-void minicon (const wchar_t *fmt)
+void topcon (const wchar_t *fmt)
 {
     {
         char buf[MAXSTR];
@@ -275,7 +275,7 @@ void minicon (const wchar_t *fmt)
     {
         fwprintf(MY_STDOUT, L"%S\n", fmt);
         term_log(fmt);
-        wid_minicon_log(fmt);
+        wid_topcon_log(fmt);
         //wid_console_log(fmt);
     }
     putchar('\n');
@@ -300,21 +300,21 @@ void CON (const wchar_t *fmt, ...)
     va_end(args);
 }
 
-void MINICON (const char *fmt, ...)
+void TOPCON (const char *fmt, ...)
 {
     va_list args;
 
     va_start(args, fmt);
-    minicon_(fmt, args);
+    topcon_(fmt, args);
     va_end(args);
 }
 
-void MINICON (const wchar_t *fmt, ...)
+void TOPCON (const wchar_t *fmt, ...)
 {
     va_list args;
 
     va_start(args, fmt);
-    minicon_(fmt, args);
+    topcon_(fmt, args);
     va_end(args);
 }
 

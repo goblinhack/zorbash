@@ -130,7 +130,7 @@ static void wid_leftbar_create (void)
     int height = items.size();
 
     {_
-        point tl = make_point(0,  UI_MINICON_VIS_HEIGHT + 1);
+        point tl = make_point(0,  UI_TOPCON_VIS_HEIGHT + 1);
         //
         // Add some below to avoid mouse scrolling being too close to
         // the menu items

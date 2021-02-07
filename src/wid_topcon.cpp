@@ -8,7 +8,7 @@
 #include "my_sys.h"
 #include "my_sdl.h"
 #include "slre.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
@@ -23,30 +23,30 @@
 #include "my_thing.h"
 #include "my_ui.h"
 
-static void wid_minicon_wid_create(void);
+static void wid_topcon_wid_create(void);
 
-Widp wid_minicon_container {};
-Widp wid_minicon_vert_scroll {};
-Widp wid_minicon_input_line {};
-Widp wid_minicon_window {};
+Widp wid_topcon_container {};
+Widp wid_topcon_vert_scroll {};
+Widp wid_topcon_input_line {};
+Widp wid_topcon_window {};
 
 static std::wstring last_msg;
 static int last_msg_count;
 
-static std::map< unsigned int, std::wstring > wid_minicon_lines;
+static std::map< unsigned int, std::wstring > wid_topcon_lines;
 
-void wid_minicon_fini (void)
+void wid_topcon_fini (void)
 {_
-    wid_destroy(&wid_minicon_container);
-    wid_destroy(&wid_minicon_vert_scroll);
-    wid_destroy(&wid_minicon_input_line);
-    wid_destroy(&wid_minicon_window);
+    wid_destroy(&wid_topcon_container);
+    wid_destroy(&wid_topcon_vert_scroll);
+    wid_destroy(&wid_topcon_input_line);
+    wid_destroy(&wid_topcon_window);
 }
 
-uint8_t wid_minicon_init (void)
+uint8_t wid_topcon_init (void)
 {_
-    wid_minicon_wid_create();
-    wid_not_visible(wid_minicon_window);
+    wid_topcon_wid_create();
+    wid_not_visible(wid_topcon_window);
 
     last_msg = L"";
     last_msg_count = 0;
@@ -57,7 +57,7 @@ uint8_t wid_minicon_init (void)
 //
 // Key down etc...
 //
-static uint8_t wid_minicon_input (Widp w, const SDL_Keysym *key)
+static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
 {_
     if (!game) {
         return false;
@@ -79,7 +79,7 @@ static uint8_t wid_minicon_input (Widp w, const SDL_Keysym *key)
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_in) {
-        MINICON("Zoom in");
+        TOPCON("Zoom in");
         config_gfx_zoom_in();
         return true;
     }
@@ -206,7 +206,7 @@ static uint8_t wid_minicon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        MINICON("Pausing the game");
+        TOPCON("Pausing the game");
         CON("USERCFG: pausing the game");
         game->pause_select();
         return true;
@@ -356,16 +356,16 @@ static uint8_t wid_minicon_input (Widp w, const SDL_Keysym *key)
 //
 // Scroll back to the bottom of the screen.
 //
-static void wid_minicon_reset_scroll (void)
+static void wid_topcon_reset_scroll (void)
 {_
-    if (!wid_minicon_vert_scroll) {
+    if (!wid_topcon_vert_scroll) {
         return;
     }
 
-    wid_move_to_bottom(wid_minicon_vert_scroll);
+    wid_move_to_bottom(wid_topcon_vert_scroll);
 }
 
-static void wid_minicon_scroll (Widp w, std::wstring str)
+static void wid_topcon_scroll (Widp w, std::wstring str)
 {_
     Widp tmp {};
 
@@ -380,7 +380,7 @@ static void wid_minicon_scroll (Widp w, std::wstring str)
     }
 }
 
-static void wid_minicon_replace (Widp w, std::wstring str)
+static void wid_topcon_replace (Widp w, std::wstring str)
 {_
     Widp tmp {};
 
@@ -394,23 +394,23 @@ static void wid_minicon_replace (Widp w, std::wstring str)
 }
 
 //
-// Log a message to the minicon
+// Log a message to the topcon
 //
-static void wid_minicon_log_ (std::wstring s)
+static void wid_topcon_log_ (std::wstring s)
 {_
-    static int32_t log_wid_minicon_buffered_lines;
+    static int32_t log_wid_topcon_buffered_lines;
 
-    wid_minicon_reset_scroll();
+    wid_topcon_reset_scroll();
 
     //
-    // Before the minicon is ready, we buffer the logs.
+    // Before the topcon is ready, we buffer the logs.
     //
-    if (!wid_minicon_input_line) {
-        auto result = wid_minicon_lines.insert(
-                        std::make_pair(log_wid_minicon_buffered_lines++, s));
+    if (!wid_topcon_input_line) {
+        auto result = wid_topcon_lines.insert(
+                        std::make_pair(log_wid_topcon_buffered_lines++, s));
 
         if (result.second == false) {
-            DIE("Wid minicon lines insert name [%s] failed",
+            DIE("Wid topcon lines insert name [%s] failed",
                 wstring_to_string(s).c_str());
         }
 
@@ -418,95 +418,95 @@ static void wid_minicon_log_ (std::wstring s)
     }
 
     //
-    // Flush the logs now the minicon exists.
+    // Flush the logs now the topcon exists.
     //
-    wid_minicon_flush();
+    wid_topcon_flush();
 
     if (last_msg == s) {
         s = last_msg + L" (x" + std::to_wstring(last_msg_count + 2) + L")";
         last_msg_count++;
-        wid_minicon_replace(wid_minicon_input_line, s);
+        wid_topcon_replace(wid_topcon_input_line, s);
     } else {
         last_msg = s;
         last_msg_count = 0;
-        wid_minicon_scroll(wid_minicon_input_line, s);
+        wid_topcon_scroll(wid_topcon_input_line, s);
     }
 }
 
-void wid_minicon_flush (void)
+void wid_topcon_flush (void)
 {_
-    auto iter = wid_minicon_lines.begin();
+    auto iter = wid_topcon_lines.begin();
 
-    while (iter != wid_minicon_lines.end()) {
-        wid_minicon_scroll(wid_minicon_input_line, iter->second);
-        iter = wid_minicon_lines.erase(iter);
+    while (iter != wid_topcon_lines.end()) {
+        wid_topcon_scroll(wid_topcon_input_line, iter->second);
+        iter = wid_topcon_lines.erase(iter);
     }
 
-    wid_minicon_reset_scroll();
+    wid_topcon_reset_scroll();
 }
 
 //
-// Log a message to the minicon
+// Log a message to the topcon
 //
-void wid_minicon_log (std::string s)
+void wid_topcon_log (std::string s)
 {_
-    int chars_per_line = UI_MINICON_WIDTH;
+    int chars_per_line = UI_TOPCON_WIDTH;
 
     auto d = split(s, chars_per_line);
 
     if (d) {
         for (const auto& c : *d) {
-            wid_minicon_log_(string_to_wstring(c));
+            wid_topcon_log_(string_to_wstring(c));
         }
     }
 }
 
 //
-// Log a message to the minicon
+// Log a message to the topcon
 //
-void wid_minicon_log (std::wstring s)
+void wid_topcon_log (std::wstring s)
 {_
-    int chars_per_line = UI_MINICON_WIDTH;
+    int chars_per_line = UI_TOPCON_WIDTH;
 
     auto d = split(s, chars_per_line);
 
     if (d) {
         for (const auto& c : *d) {
-            wid_minicon_log_(c);
+            wid_topcon_log_(c);
         }
     }
 }
 
 //
-// Create the minicon
+// Create the topcon
 //
-static void wid_minicon_wid_create (void)
+static void wid_topcon_wid_create (void)
 {_
-    int h = UI_MINICON_VIS_HEIGHT;
+    int h = UI_TOPCON_VIS_HEIGHT;
 
     {
         point tl = make_point(0, 0);
-        point br = make_point(UI_MINICON_VIS_WIDTH - 1, h);
+        point br = make_point(UI_TOPCON_VIS_WIDTH - 1, h);
 
-        wid_minicon_window = wid_new_square_window("wid minicon");
-        wid_set_name(wid_minicon_window, "wid minicon window");
-        wid_set_pos(wid_minicon_window, tl, br);
-        wid_set_shape_none(wid_minicon_window);
-        wid_set_on_key_down(wid_minicon_window, wid_minicon_input);
+        wid_topcon_window = wid_new_square_window("wid topcon");
+        wid_set_name(wid_topcon_window, "wid topcon window");
+        wid_set_pos(wid_topcon_window, tl, br);
+        wid_set_shape_none(wid_topcon_window);
+        wid_set_on_key_down(wid_topcon_window, wid_topcon_input);
     }
 
     {
         point tl = make_point(0, 0);
-        point br = make_point(UI_MINICON_VIS_WIDTH - 1, h);
+        point br = make_point(UI_TOPCON_VIS_WIDTH - 1, h);
 
-        wid_minicon_container = wid_new_container(wid_minicon_window,
-                                                  "wid minicon container");
-        wid_set_pos(wid_minicon_container, tl, br);
-        wid_set_shape_square(wid_minicon_container);
-        wid_set_style(wid_minicon_container, 1);
+        wid_topcon_container = wid_new_container(wid_topcon_window,
+                                                  "wid topcon container");
+        wid_set_pos(wid_topcon_container, tl, br);
+        wid_set_shape_square(wid_topcon_container);
+        wid_set_style(wid_topcon_container, 1);
         color c = GRAY;
         c.a = 150;
-        wid_set_color(wid_minicon_container, WID_COLOR_BG, c);
+        wid_set_color(wid_topcon_container, WID_COLOR_BG, c);
     }
 
   {
@@ -516,12 +516,12 @@ static void wid_minicon_wid_create (void)
         Widp child {};
         Widp prev {};
 
-        for (row = 0; row < UI_MINICON_HEIGHT; row++) {
+        for (row = 0; row < UI_TOPCON_HEIGHT; row++) {
             row_bottom --;
             point tl = make_point(0, row_bottom);
-            point br = make_point(UI_MINICON_WIDTH, row_bottom);
+            point br = make_point(UI_TOPCON_WIDTH, row_bottom);
 
-            child = wid_new_container(wid_minicon_container, "");
+            child = wid_new_container(wid_topcon_container, "");
 
             wid_set_shape_none(child);
             wid_set_pos(child, tl, br);
@@ -531,29 +531,29 @@ static void wid_minicon_wid_create (void)
             prev = child;
 
             if (row == 0) {
-                wid_minicon_input_line = child;
+                wid_topcon_input_line = child;
             }
 
-            wid_set_color(child, WID_COLOR_TEXT_FG, UI_MINICON_TEXT_COLOR);
+            wid_set_color(child, WID_COLOR_TEXT_FG, UI_TOPCON_TEXT_COLOR);
             wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
-            wid_set_name(child, "minicon output");
+            wid_set_name(child, "topcon output");
         }
 
-        wid_raise(wid_minicon_input_line);
+        wid_raise(wid_topcon_input_line);
     }
 
-    wid_minicon_vert_scroll =
-        wid_new_vert_scroll_bar(wid_minicon_window, "", wid_minicon_container);
+    wid_topcon_vert_scroll =
+        wid_new_vert_scroll_bar(wid_topcon_window, "", wid_topcon_container);
 
-    wid_visible(wid_get_parent(wid_minicon_vert_scroll));
+    wid_visible(wid_get_parent(wid_topcon_vert_scroll));
 
-    wid_update(wid_minicon_window);
+    wid_update(wid_topcon_window);
 }
 
-std::vector<std::wstring> wid_minicon_serialize (void)
+std::vector<std::wstring> wid_topcon_serialize (void)
 {_
     std::vector<std::wstring> r;
-    auto tmp = wid_get_head(wid_minicon_input_line);
+    auto tmp = wid_get_head(wid_topcon_input_line);
     while (tmp) {
         auto s = wid_get_text(tmp);
         if (s.size()) {
@@ -565,12 +565,12 @@ std::vector<std::wstring> wid_minicon_serialize (void)
     return (r);
 }
 
-void wid_minicon_deserialize(std::vector<std::wstring> r)
+void wid_topcon_deserialize(std::vector<std::wstring> r)
 {_
     for (const auto& s : r) {
         auto tmp = wstring_to_string(s);
         if (tmp.size()) {
-            MINICON("%s", tmp.c_str());
+            TOPCON("%s", tmp.c_str());
         }
     }
 }

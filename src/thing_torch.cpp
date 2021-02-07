@@ -44,7 +44,7 @@ void Thing::torch_tick (void)
                 if (try_to_shove(t, delta)) {
                     if (!is_dead) {
                         if (is_player()) {
-                            MINICON("You knock over the torch!");
+                            TOPCON("You knock over the torch!");
                         }
                     }
                     return;
@@ -53,7 +53,7 @@ void Thing::torch_tick (void)
 
             if (!is_dead) {
                 if (random_range(0, 100) < 20) {
-                    MINICON("You stumble into the flames!");
+                    TOPCON("You stumble into the flames!");
                     set_on_fire("stumedled into flames");
                 }
             }

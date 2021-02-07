@@ -336,7 +336,7 @@ _
     if (is_stamina_check()) {
         if (!get_stamina()) {
             if (is_player()) {
-                MINICON("You are too tired to attack. You need to rest.");
+                TOPCON("You are too tired to attack. You need to rest.");
             }
             return;
         }
@@ -347,7 +347,7 @@ _
     auto weapon = weapon_get();
     if (!weapon) {
         if (is_player()) {
-            MINICON("You attack with bare fists!");
+            TOPCON("You attack with bare fists!");
         }
         swung_as = gfx_anim_attack();
     } else {

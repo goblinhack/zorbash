@@ -97,7 +97,7 @@ bool Thing::descend_dungeon (void)
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
         if (is_player()) {
-            MINICON("The exit is permanently blocked!");
+            TOPCON("The exit is permanently blocked!");
         }
         return false;
     }
@@ -107,7 +107,7 @@ bool Thing::descend_dungeon (void)
             if (l->is_ascend_dungeon(x, y)) {
                 if (is_player()) {
                     game->level = l;
-                    MINICON("You bravely descend");
+                    TOPCON("You bravely descend");
                 }
 
                 log("Move to next level entrance");

@@ -37,7 +37,7 @@ void Level::scroll_map_do (bool fast)
 
 #if 0
 if (player) {
-    player->minicon("map_at %f %f map_wanted_at %f %f", 
+    player->topcon("map_at %f %f map_wanted_at %f %f", 
                     map_at.x,
                     map_at.y,
                     map_wanted_at.x,

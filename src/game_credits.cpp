@@ -5,7 +5,7 @@
 
 #include "my_sys.h"
 #include "my_game.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_gl.h"
@@ -20,7 +20,7 @@ static void wid_credits_destroy (void)
     game->soft_unpause();
     game->fini();
     game->main_menu_select();
-    wid_not_visible(wid_minicon_window);
+    wid_not_visible(wid_topcon_window);
     wid_not_visible(wid_botcon_window);
 }
 

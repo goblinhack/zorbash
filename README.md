@@ -10,18 +10,20 @@ Comments and suggestions welcome at this early stage.
 Upcoming work
 -------------
 
+- click on topcon should move
+- skeletons do not eat dead spiders
 - test descent potion in sewer
 - tiny pixel effects that bounce?
 - skills
 - skill, switch to defensive
-- skill, whirl attack
-- skill, kneecap
-- skill, blind strike
+- skill, whirl attack, attack 2 or 3 enemies
+- skill, kneecap, hobble enemy
+- skill, blind strike, attack the eyes
 - skill, slash and roll
 - skill, slash and jump
-- skill, devoted thrust
+- skill, devoted thrust, put everything into one massive strike
 - skill, defensive mode, recover stamina
-- skill, spring attack, give upa round for 2.5 times damage
+- skill, spring attack, give up a round for 2.5 times damage
 
 Graphics
 --------

@@ -56,9 +56,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     if (it->monst_size() - monst_size() > 1) {
         if (is_player()) {
-            MINICON("%s is too large to be shoved!", it->text_The().c_str());
+            TOPCON("%s is too large to be shoved!", it->text_The().c_str());
         } else if (it->is_player()) {
-            MINICON("%s fails to shove you!", text_The().c_str());
+            TOPCON("%s fails to shove you!", text_The().c_str());
         }
         return (THING_SHOVE_TRIED_AND_FAILED);
     }
@@ -66,9 +66,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     if (!it->is_torch()) {
         if (it->collision_check_only(shove_pos)) {
             if (is_player()) {
-                MINICON("%s cannot be shoved!", it->text_The().c_str());
+                TOPCON("%s cannot be shoved!", it->text_The().c_str());
             } else if (it->is_player()) {
-                MINICON("%s fails to shove you!", text_The().c_str());
+                TOPCON("%s fails to shove you!", text_The().c_str());
             }
             return (THING_SHOVE_TRIED_AND_FAILED);
         }
@@ -80,21 +80,21 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
         if (!d20roll(get_modifier_strength(), it->get_modifier_strength())) {
             if (is_player()) {
-                MINICON("%s shoves you back!", it->text_The().c_str());
+                TOPCON("%s shoves you back!", it->text_The().c_str());
             } else if (it->is_player()) {
-                MINICON("%s fails to shove you!", text_The().c_str());
+                TOPCON("%s fails to shove you!", text_The().c_str());
             }
             return (THING_SHOVE_TRIED_AND_FAILED);
         }
 
         if (is_player()) {
             if (it->is_torch()) {
-                MINICON("You knock over %s!", it->text_the().c_str());
+                TOPCON("You knock over %s!", it->text_the().c_str());
             } else {
-                MINICON("You shove %s!", it->text_the().c_str());
+                TOPCON("You shove %s!", it->text_the().c_str());
             }
         } else if (it->is_player()) {
-            MINICON("%s shoves you!", text_The().c_str());
+            TOPCON("%s shoves you!", text_The().c_str());
         }
 
         if (it->is_monst()) {
@@ -111,7 +111,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         if (is_player()) {
             if (it->is_torch()) {
                 if (!it->is_dead) {
-                    MINICON("The torch falls back on you!");
+                    TOPCON("The torch falls back on you!");
                 }
             }
             it->move_to(mid_at, 100);
@@ -149,12 +149,12 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
             if (random_range(0, 100) < 5) {
                 if (is_player()) {
                     if (set_on_fire("set youtself on fire")) {
-                        MINICON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
+                        TOPCON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
                     }
                 }
             } else {
                 if (is_player()) {
-                    MINICON("%%fg=orange$It burns as you shove it, but you avoid the flames");
+                    TOPCON("%%fg=orange$It burns as you shove it, but you avoid the flames");
                 }
             }
         }

@@ -5,7 +5,7 @@
 
 #include "my_sys.h"
 #include "my_game.h"
-#include "my_wid_minicon.h"
+#include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_wid_thing_info.h"

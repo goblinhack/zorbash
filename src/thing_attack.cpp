@@ -276,7 +276,7 @@ _
     if (is_stamina_check()) {
         if (!get_stamina()) {
             if (is_player()) {
-                MINICON("You are too tired to attack. You need to rest.");
+                TOPCON("You are too tired to attack. You need to rest.");
             }
             return false;
         }
@@ -304,10 +304,10 @@ _
     if (!it->is_always_hit()) {
         if (!d20roll(att_mod, def_mod, fumble, crit)) {
             if (is_player() || (owner && owner->is_player())) {
-                MINICON("You miss %s.", it->text_the().c_str());
+                TOPCON("You miss %s.", it->text_the().c_str());
                 msg("!");
             } else if (it->is_player()) {
-                MINICON("%s misses.", text_The().c_str());
+                TOPCON("%s misses.", text_The().c_str());
             } else {
                 log("The attack missed (att %d, def %d) on %s",
                     att_mod, def_mod, it->to_string().c_str());
