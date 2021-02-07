@@ -1,12 +1,23 @@
 bugs
 ----
-- create a grid in sewer
-- test descent potion in sewer
-- tiny pixel effects thts bounce?
 
+- test descent potion in sewer
+- tiny pixel effects that bounce?
+- skills
+  - switch to defensive
+  - whirl attack
+  - kneecap
+  - blind strike
+  - slash and roll
+  - slash and jump
+  - devoted thrust
+  - defensive mode, recover stamina
+  - spring attack, give upa round for 2.5 times damage
+  
 
 poison
 ------
+- holy water
 - look up turn based combat
 - add poison notify on screen from spider?
 - half damage from poison constitution save
@@ -32,8 +43,10 @@ ai
 
 weapons
 -------
+- three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)
 - blessed items resist explosion
 - warhammer should kill parent jelly in one go
+- warhammer smash skeletton
 - fire portion
 - enchant potion
 - enchant potion of descent radius

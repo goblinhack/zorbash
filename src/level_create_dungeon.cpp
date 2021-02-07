@@ -564,7 +564,6 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_door(x, y))             { tp = tp_random_door(); }
             if (d->is_ascend_dungeon(x, y))   { tp = tp_random_entrance(); }
             if (d->is_descend_dungeon(x, y))  { tp = tp_random_exit(); }
-            if (d->is_descend_sewer(x, y))    { tp = tp_random_descend_sewer(); }
             if (d->is_food(x, y))             { tp = tp_random_food(); }
             if (d->is_gold(x, y))             { tp = tp_random_gold(); }
             if (d->is_key(x, y))              { tp = tp_random_key(); }
@@ -651,42 +650,6 @@ void Level::create_dungeon_place_random_blood (Dungeonp d)
                 d->is_hazard(x + 1, y - 1) ||
                 d->is_hazard(x - 1, y + 1) ||
                 d->is_hazard(x + 1, y + 1)) {
-                continue;
-            }
-
-            if (d->is_ascend_dungeon(x, y) ||
-                d->is_ascend_dungeon(x - 1, y) ||
-                d->is_ascend_dungeon(x + 1, y) ||
-                d->is_ascend_dungeon(x, y - 1) ||
-                d->is_ascend_dungeon(x, y + 1) ||
-                d->is_ascend_dungeon(x - 1, y - 1) ||
-                d->is_ascend_dungeon(x + 1, y - 1) ||
-                d->is_ascend_dungeon(x - 1, y + 1) ||
-                d->is_ascend_dungeon(x + 1, y + 1)) {
-                continue;
-            }
-
-            if (d->is_descend_dungeon(x, y) ||
-                d->is_descend_dungeon(x - 1, y) ||
-                d->is_descend_dungeon(x + 1, y) ||
-                d->is_descend_dungeon(x, y - 1) ||
-                d->is_descend_dungeon(x, y + 1) ||
-                d->is_descend_dungeon(x - 1, y - 1) ||
-                d->is_descend_dungeon(x + 1, y - 1) ||
-                d->is_descend_dungeon(x - 1, y + 1) ||
-                d->is_descend_dungeon(x + 1, y + 1)) {
-                continue;
-            }
-
-            if (d->is_descend_dungeon(x, y) ||
-                d->is_descend_dungeon(x - 1, y) ||
-                d->is_descend_dungeon(x + 1, y) ||
-                d->is_descend_dungeon(x, y - 1) ||
-                d->is_descend_dungeon(x, y + 1) ||
-                d->is_descend_dungeon(x - 1, y - 1) ||
-                d->is_descend_dungeon(x + 1, y - 1) ||
-                d->is_descend_dungeon(x - 1, y + 1) ||
-                d->is_descend_dungeon(x + 1, y + 1)) {
                 continue;
             }
 
@@ -790,8 +753,8 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
             if (d->is_food(x, y)              ||
                 d->is_blood(x, y)             ||
                 d->is_door(x, y)              ||
-                d->is_ascend_dungeon(x, y)          ||
-                d->is_descend_dungeon(x, y)              ||
+                d->is_ascend_dungeon(x, y)    ||
+                d->is_descend_dungeon(x, y)   ||
                 d->is_minion_generator(x, y)  ||
                 d->is_key(x, y)               ||
                 d->is_potion(x, y)            ||
@@ -846,47 +809,106 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
 
 void Level::create_dungeon_place_sewer_pipes (Dungeonp d)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (!d->is_wall(x, y)) {
-                continue;
-            }
+    //
+    // Sometimes we have sewer pipes
+    //
+    if (random_range(0, 100) < 10) {
+        return;
+    }
 
-            if (d->is_floor(x, y - 1)) {
-                continue;
-            }
-            if (d->is_wall(x, y + 1)) {
-                continue;
-            }
-            if (d->is_rock(x, y + 1)) {
-                continue;
-            }
-            if (random_range(0, 100) < 95) {
-                continue;
-            }
+    int sewer_count = 0;
+    int sewer_count_target = 2 + random_range(0, 10);
 
-            //
-            // Reset the seed for each cell to increase the chances
-            // of repeatability if other small things change in the
-            // game
-            //
-            mysrand(seed + x + (y * MAP_WIDTH));
+    while (sewer_count < sewer_count_target) {
+        auto x = random_range(MAP_BORDER_TOTAL, MAP_WIDTH - MAP_BORDER_TOTAL + 1);
+        auto y = random_range(MAP_BORDER_TOTAL, MAP_HEIGHT - MAP_BORDER_TOTAL + 1);
 
-            auto tp = tp_random_descend_sewer();
-            if (!tp) {
-                return;
-            }
-
-            thing_new(tp->name(), fpoint(x, y));
-
-            if (d->is_wall(x, y)) {
-                FOR_ALL_THINGS(this, t, x, y) {
-                    if (t->is_rock() || t->is_wall()) {
-                        t->dead("Replaced by sewer");
-                    }
-                } FOR_ALL_THINGS_END()
-            }
+        if (d->is_wall(x, y)) {
+            continue;
         }
+
+        if (d->is_rock(x, y)) {
+            continue;
+        }
+
+        if (!d->is_floor(x, y) ||
+            !d->is_floor(x - 1, y) ||
+            !d->is_floor(x + 1, y) ||
+            !d->is_floor(x, y - 1) ||
+            !d->is_floor(x, y + 1) ||
+            !d->is_floor(x - 1, y - 1) ||
+            !d->is_floor(x + 1, y - 1) ||
+            !d->is_floor(x - 1, y + 1) ||
+            !d->is_floor(x + 1, y + 1)) {
+            continue;
+        }
+
+        if (d->is_hazard(x, y) ||
+            d->is_hazard(x - 1, y) ||
+            d->is_hazard(x + 1, y) ||
+            d->is_hazard(x, y - 1) ||
+            d->is_hazard(x, y + 1) ||
+            d->is_hazard(x - 1, y - 1) ||
+            d->is_hazard(x + 1, y - 1) ||
+            d->is_hazard(x - 1, y + 1) ||
+            d->is_hazard(x + 1, y + 1)) {
+            continue;
+        }
+
+        if (d->is_ascend_dungeon(x, y) ||
+            d->is_ascend_dungeon(x - 1, y) ||
+            d->is_ascend_dungeon(x + 1, y) ||
+            d->is_ascend_dungeon(x, y - 1) ||
+            d->is_ascend_dungeon(x, y + 1) ||
+            d->is_ascend_dungeon(x - 1, y - 1) ||
+            d->is_ascend_dungeon(x + 1, y - 1) ||
+            d->is_ascend_dungeon(x - 1, y + 1) ||
+            d->is_ascend_dungeon(x + 1, y + 1)) {
+            continue;
+        }
+
+        if (d->is_descend_dungeon(x, y) ||
+            d->is_descend_dungeon(x - 1, y) ||
+            d->is_descend_dungeon(x + 1, y) ||
+            d->is_descend_dungeon(x, y - 1) ||
+            d->is_descend_dungeon(x, y + 1) ||
+            d->is_descend_dungeon(x - 1, y - 1) ||
+            d->is_descend_dungeon(x + 1, y - 1) ||
+            d->is_descend_dungeon(x - 1, y + 1) ||
+            d->is_descend_dungeon(x + 1, y + 1)) {
+            continue;
+        }
+
+        if (d->is_descend_sewer(x, y) ||
+            d->is_descend_sewer(x - 1, y) ||
+            d->is_descend_sewer(x + 1, y) ||
+            d->is_descend_sewer(x, y - 1) ||
+            d->is_descend_sewer(x, y + 1) ||
+            d->is_descend_sewer(x - 1, y - 1) ||
+            d->is_descend_sewer(x + 1, y - 1) ||
+            d->is_descend_sewer(x - 1, y + 1) ||
+            d->is_descend_sewer(x + 1, y + 1)) {
+            continue;
+        }
+
+        if (is_descend_sewer(x, y)) {
+            continue;
+        }
+
+        //
+        // Reset the seed for each cell to increase the chances
+        // of repeatability if other small things change in the
+        // game
+        //
+        mysrand(seed + x + (y * MAP_WIDTH));
+
+        auto tp = tp_random_descend_sewer();
+        if (!tp) {
+            return;
+        }
+
+        thing_new(tp->name(), fpoint(x, y));
+        sewer_count++;
     }
 }
 
