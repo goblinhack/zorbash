@@ -10,6 +10,7 @@
 #include "my_wid_rightbar.h"
 #include "my_wid_leftbar.h"
 #include "my_wid_inventory.h"
+#include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
 #include "my_sdl.h"
@@ -120,6 +121,7 @@ void Game::config_top_select (void)
     wid_rightbar_fini();
     wid_leftbar_fini();
     wid_inventory_fini();
+    wid_skillbox_fini();
     wid_thing_info_fini();
     wid_thing_collect_fini();
 

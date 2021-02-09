@@ -518,14 +518,22 @@ case `uname` in
         LDLIBS="$LDLIBS -rdynamic"
         LDLIBS="$LDLIBS -Wl,-framework,Opengl"
         DSYM="dsymutil ../zorbash"
-        #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer -static-libstdc++ -static-libgcc "
-        #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
-        #LDLIBS+=" -L/opt/local/lib/gcc6 -lasan"
+        #
+        # Can't get this to work
+        #
+        if [[ $OPT_DEV2 != "" ]]; then
+            C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer"
+            LDFLAGS+=" -fsanitize=address"
+        fi
         ;;
     *)
         EXE=""
         LDLIBS="$LDLIBS -funwind-tables"
         LDLIBS="$LDLIBS -lGL"
+        if [[ $OPT_DEV2 != "" ]]; then
+            C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer"
+            LDFLAGS+=" -fsanitize=address"
+        fi
         ;;
 esac
 
@@ -535,7 +543,7 @@ GCC_WARN=""
 # Better to leave off for production
 #
 WERROR=""
-if [[ $OPT_DEV != "" ]]; then
+if [[ $OPT_DEV1 != "" ]]; then
     WERROR="-Werror"
 fi
 
@@ -549,7 +557,7 @@ log_info "VERSION (game)             : $VERSION"
 
 cd src
 
-if [[ $OPT_DEV != "" ]]; then
+if [[ $OPT_DEV1 != "" ]]; then
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 # AUTOGEN" > .Makefile
 else
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O3 # AUTOGEN" > .Makefile
@@ -557,8 +565,15 @@ fi
 
 echo "    " >> .Makefile
 echo "CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++1z -stdlib=libc++ # AUTOGEN" >> .Makefile
-GCC_STACK_CHECK="-fstack-check -fstack-protector-all -D_FORTIFY_SOURCE=2"
-GCC_STACK_CHECK=
+echo "    " >> .Makefile
+echo "LDFLAGS=$LDFLAGS" >> .Makefile
+
+if [[ $OPT_DEV2 != "" ]]; then
+    GCC_STACK_CHECK="-fstack-check -fstack-protector-all -D_FORTIFY_SOURCE=2"
+    GCC_STACK_CHECK="-fstack-check -fstack-protector-all"
+else
+    GCC_STACK_CHECK=
+fi
 
 # c++2a for bitfield initialization in classes
 echo "GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a -ffast-math $GCC_STACK_CHECK # AUTOGEN" >> .Makefile

@@ -107,8 +107,7 @@ _
 //
 // Particle from the inventory to tp_id target
 //
-void Thing::inventory_particle (Thingp what, uint32_t slot,
-                                Thingp particle_target)
+void Thing::inventory_particle (Thingp what, uint32_t slot, Thingp particle_target)
 {_
     log("Inventory particle %s with target %s",
         what->to_string().c_str(), particle_target->to_string().c_str());
@@ -580,7 +579,7 @@ _
     auto what = inventory_get(game->inventory_highlight_slot);
     if (what) {
         what->log("Inventory: describe slot %d", slot);
-        what->describe_when_in_inventory();
+        what->describe_when_hovered_over_in_rightbar();
     } else {
         LOG("Inventory: describe slot %d => nothing there", slot);
     }

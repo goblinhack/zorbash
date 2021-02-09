@@ -242,7 +242,7 @@ public:
     bool descend_sewer(void);
     bool descend_sewer_tick();
     bool describe_when_hovering_over(void);
-    bool describe_when_in_inventory(void);
+    bool describe_when_hovered_over_in_rightbar(void);
     bool drop(Thingp w);
     bool drop(Thingp w, Thingp target);
     bool drop_from_ether(Thingp w);
@@ -255,6 +255,8 @@ public:
     bool inventory_id_insert(Thingp what);
     bool inventory_id_remove(Thingp what);
     bool inventory_id_remove(Thingp what, Thingp target);
+    bool skillbox_id_insert(Thingp what);
+    bool skillbox_id_remove(Thingp what);
     bool is_ai_obstacle_for_me(const point&);
     bool is_blocking_terrain(const Thingp it);
     bool is_bloodied(void);
@@ -1013,7 +1015,7 @@ public:
     void init(Levelp, const std::string& name, fpoint at, fpoint jitter);
     void init_lights(void);
     void inventory_particle(Thingp what, uint32_t slot);
-    void inventory_particle(Thingp what, uint32_t slot, Thingp target);
+    void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
     void jump_end(void);
     void kill(Thingp killer, const char *reason);
     void kill(Thingp killer, std::string &reason);

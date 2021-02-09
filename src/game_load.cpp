@@ -123,6 +123,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* std::vector<ThingId> enemies           */ in >> bits(my.t->enemies);
     /* std::vector<point>   move_path         */ in >> bits(my.t->move_path);
     /* std::vector<uint16_t> inventory_id     */ in >> bits(my.t->inventory_id);
+    /* std::vector<uint16_t> skillbox_id      */ in >> bits(my.t->skillbox_id);
     /* timestamp_t  timestamp_born            */ in >> bits(T); my.t->timestamp_born = load(T);
     /* timestamp_t  timestamp_bounce_begin    */ in >> bits(T); my.t->timestamp_bounce_begin = load(T);
     /* timestamp_t  timestamp_bounce_end      */ in >> bits(T); my.t->timestamp_bounce_end = load(T);
@@ -643,6 +644,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* std::string        seed_name                    */ in >> bits(my.t.seed_name);
     /* point3d            current_level                */ in >> bits(my.t.current_level);
     /* uint32_t           inventory_highlight_slot     */ in >> bits(my.t.inventory_highlight_slot);
+    /* uint32_t           skillbox_highlight_slot      */ in >> bits(my.t.skillbox_highlight_slot);
     /* uint32_t           previous_slot                */ in >> bits(my.t.previous_slot);
     /* uint32_t           fps_value                    */ in >> bits(my.t.fps_value);
     /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);

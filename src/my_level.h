@@ -304,6 +304,8 @@ public:
 
     Thingp inventory_get(const uint32_t slot);
     Thingp inventory_get(void);
+    Thingp skillbox_get(const uint32_t slot);
+    Thingp skillbox_get(void);
     Thingp thing_find(const ThingId id);
     Thingp thing_new(const std::string& tp_name, Thingp owner);
     Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
@@ -314,6 +316,8 @@ public:
     bool create_sewer_pools(void);
     bool inventory_chosen(const uint32_t slot);
     bool inventory_over(const uint32_t slot);
+    bool skillbox_chosen(const uint32_t slot);
+    bool skillbox_over(const uint32_t slot);
     bool is_light_blocker(const int x, const int y);
     bool is_light_blocker(const point &p);
     bool is_light_blocker_no_check(const int x, const int y);
@@ -616,6 +620,7 @@ public:
     void update_things_next_to_a_chasm(void);
     void update_water_next_to_lava(void);
     Thingp inventory_describe(const uint32_t slot);
+    Thingp skillbox_describe(const uint32_t slot);
     friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);
 };

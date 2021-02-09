@@ -91,10 +91,12 @@ Build options:
 usage $0 [options]
 
         [--dev] Enable development warnings
+        [--dev2] Enable stack checking
 %%
 }
 
-OPT_DEV=
+OPT_DEV1=
+OPT_DEV2=
 
 read_opts()
 {
@@ -103,9 +105,16 @@ read_opts()
         local option=$1
 
         case $option in
+            -*dev2)
+                OPT_DEV2="yes"
+                export OPT_DEV2
+                OPT_DEV1="yes"
+                export OPT_DEV1
+                shift
+                ;;
             -*dev)
-                OPT_DEV="yes"
-                export OPT_DEV
+                OPT_DEV1="yes"
+                export OPT_DEV1
                 shift
                 ;;
             *)

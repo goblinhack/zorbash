@@ -12,6 +12,7 @@
 #include "my_wid_leftbar.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_inventory.h"
+#include "my_wid_skillbox.h"
 #include "my_wid_thing_collect.h"
 #include "my_gl.h"
 #include "my_random.h"
@@ -48,6 +49,9 @@ static uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t b
 
     wid_inventory_fini();
     wid_inventory_init();
+
+    wid_skillbox_fini();
+    wid_skillbox_init();
 
     wid_visible(wid_topcon_window);
     TOPCON("Welcome to the lair of the dread beholder, %%fg=red$Zorbash%%fg=reset$.");
@@ -325,6 +329,7 @@ void Game::main_menu_select (void)
     wid_rightbar_fini();
     wid_leftbar_fini();
     wid_inventory_fini();
+    wid_skillbox_fini();
     wid_thing_info_fini();
     wid_thing_collect_fini();
 

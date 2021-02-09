@@ -95,6 +95,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* std::vector<ThingId> enemies           */ out << bits(my.t->enemies);
     /* std::vector<point>   move_path         */ out << bits(my.t->move_path);
     /* std::vector<uint16_t> inventory_id     */ out << bits(my.t->inventory_id);
+    /* std::vector<uint16_t> skillbox_id      */ out << bits(my.t->skillbox_id);
     /* timestamp_t  timestamp_born            */ out << bits(my.t->timestamp_born);
     /* timestamp_t  timestamp_bounce_begin    */ out << bits(my.t->timestamp_bounce_begin);
     /* timestamp_t  timestamp_bounce_end      */ out << bits(my.t->timestamp_bounce_end);
@@ -514,6 +515,7 @@ std::ostream& operator<<(std::ostream &out,
     /* std::string        seed_name                    */ out << bits(my.t.seed_name);
     /* point3d            current_level                */ out << bits(my.t.current_level);
     /* uint32_t           inventory_highlight_slot     */ out << bits(my.t.inventory_highlight_slot);
+    /* uint32_t           skillbox_highlight_slot      */ out << bits(my.t.skillbox_highlight_slot);
     /* uint32_t           previous_slot                */ out << bits(my.t.previous_slot);
     /* uint32_t           fps_value                    */ out << bits(my.t.fps_value);
     /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);
