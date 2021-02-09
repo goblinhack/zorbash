@@ -174,6 +174,7 @@ public:
     std::string        seed_name {};        // Human readable version of the above
     point3d            current_level;       // Where we are in the world.
     uint32_t           inventory_highlight_slot {};
+    uint32_t           skillbox_highlight_slot {};
     uint32_t           previous_slot {};
     uint32_t           fps_value = {};      // Current framerate
     uint32_t           tick_completed {1};
@@ -205,6 +206,7 @@ public:
     // Temporary. Global requests
     //
     bool               request_remake_inventory {};
+    bool               request_remake_skillbox {};
     bool               request_destroy_bags {};   // Finished emptying temporary bag
     bool               update_rightbar {};
 

@@ -10,7 +10,7 @@
 #include "my_thing_template.h"
 #include "my_sdl.h"
 
-bool Thing::describe_when_in_inventory (void)
+bool Thing::describe_when_hovered_over_in_rightbar (void)
 {_
     auto s = text_description();
 

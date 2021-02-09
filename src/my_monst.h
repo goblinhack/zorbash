@@ -101,6 +101,7 @@ public:
     std::vector<ThingId>  enemies;           // List of things that wronged us
     std::vector<point>    move_path;
     std::vector<uint16_t> inventory_id;      // Vector of tp_id
+    std::vector<uint16_t> skillbox_id;       // Vector of tp_id
     timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};

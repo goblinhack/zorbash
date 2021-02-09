@@ -22,6 +22,7 @@
 #include "my_ascii.h"
 #include "my_gl.h"
 #include "my_wid_inventory.h"
+#include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
 #include "my_array_bounds_check.h"
@@ -5864,6 +5865,15 @@ void wid_tick_all (void)
         LOG("Handle request to remake inventory");
         wid_inventory_init();
         game->request_remake_inventory = false;
+    }
+
+    //
+    // If we need to remake the skillbox, do so
+    //
+    if (game->request_remake_skillbox) {
+        LOG("Handle request to remake skillbox");
+        wid_skillbox_init();
+        game->request_remake_skillbox = false;
     }
 
     //

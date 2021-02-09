@@ -33,7 +33,7 @@ uint8_t dir_exists (const char *indir)
 
     rc = 0;
     if (stat(dir, &buf) >= 0) {
-        rc = S_ISDIR(buf. st_mode);
+        rc = S_ISDIR(buf.st_mode);
     }
 
     myfree(dir);

@@ -172,6 +172,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_descend_sewer.o         \
     $(OBJDIR)/thing_init.o                  \
     $(OBJDIR)/thing_inventory.o             \
+    $(OBJDIR)/thing_skillbox.o              \
     $(OBJDIR)/thing_item.o                  \
     $(OBJDIR)/thing_jump.o                  \
     $(OBJDIR)/thing_kill.o                  \
@@ -233,9 +234,10 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/wid_botcon.o                  \
     $(OBJDIR)/wid_console.o                 \
     $(OBJDIR)/wid_inventory.o               \
+    $(OBJDIR)/wid_skillbox.o                \
     $(OBJDIR)/wid_leftbar.o                 \
     $(OBJDIR)/wid_log.o                     \
-    $(OBJDIR)/wid_topcon.o                 \
+    $(OBJDIR)/wid_topcon.o                  \
     $(OBJDIR)/wid_popup.o                   \
     $(OBJDIR)/wid_rightbar.o                \
     $(OBJDIR)/wid_text_box.o                \
@@ -258,7 +260,7 @@ $(OBJDIR)/%.o: %.cpp
 #
 TARGET_GAME=$(NAME)$(EXE)
 $(TARGET_GAME): $(GAME_OBJECTS)
-	$(CC) $(GAME_OBJECTS) $(LDLIBS) -o ../$(TARGET_GAME)
+	$(CC) $(LDFLAGS) $(GAME_OBJECTS) $(LDLIBS) -o ../$(TARGET_GAME)
 
 #
 # To force clean and avoid "up to date" warning.

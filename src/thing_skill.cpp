@@ -8,7 +8,7 @@
 #include "my_thing.h"
 #include "my_game.h"
 #include "my_monst.h"
-#include "my_wid_inventory.h"
+#include "my_wid_skillbox.h"
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
 #include "my_ptrcheck.h"
@@ -39,8 +39,8 @@ _
     }
 
     if (is_player()) {
-        if (!inventory_id_insert(it)) {
-            log("No; no space in inventory");
+        if (!skillbox_id_insert(it)) {
+            log("No; no space in skillbox");
             return false;
         }
     }
@@ -52,7 +52,7 @@ _
     log("Add skill %s", it->to_string().c_str());
 
     if (is_player()) {
-        wid_inventory_init();
+        wid_skillbox_init();
     }
 
     return true;
@@ -78,7 +78,7 @@ _
 
     if (top_owner) {
         if (top_owner->is_player()) {
-            top_owner->inventory_id_remove(what);
+            top_owner->skillbox_id_remove(what);
         }
     }
 
@@ -88,9 +88,7 @@ _
 
     what->remove_owner();
     monstp->skills.remove(what->id);
-#if 0
-    game->request_remake_inventory = true;
-#endif
+    game->request_remake_skillbox = true;
 
     log("Dropped %s into the ether", what->to_string().c_str());
 
