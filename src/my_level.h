@@ -232,7 +232,6 @@ public:
         auto _vec_ = getref(level->all_thing_ptrs_at, x, y);        \
         for(size_t idx = 0; idx < _vec_.size(); idx++) {            \
             t = _vec_[idx];                                         \
-            verify(t);                                              \
             if(likely(!t->has_light)) { continue; }                 \
             if(t->is_hidden) { continue; }                          \
 
