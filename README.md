@@ -11,14 +11,15 @@ Upcoming work
 -------------
 
 - skills
-- skill, switch to defensive
+- skill, devoted thrust, put everything into one massive strike
 - skill, whirl attack, attack 2 or 3 enemies
+- skill, healing
+- skill, defensive mode, recover stamina
 - skill, kneecap, hobble enemy
+- skill, switch to defensive
 - skill, blind strike, attack the eyes
 - skill, slash and roll
 - skill, slash and jump
-- skill, devoted thrust, put everything into one massive strike
-- skill, defensive mode, recover stamina
 - skill, spring attack, give up a round for 2.5 times damage
 - test descent potion in sewer
 - tiny pixel effects that bounce?
