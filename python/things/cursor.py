@@ -15,7 +15,7 @@ def tp_init(name):
     x.set_text_a_or_an("the");
     x.set_text_description("Cursor")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
-    x.set_z_prio(zx.MAP_PRIO_BEHIND)
+    x.set_z_prio(zx.MAP_PRIO_INFRONT)
 
     delay = 50
     x.set_tile(tile=name + ".1", delay_ms=delay)

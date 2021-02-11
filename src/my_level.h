@@ -196,42 +196,42 @@ public:
     #define FOR_ALL_THINGS(level, t, x, y)                          \
         if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
-            auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
-                t = _vec_[idx];                                     \
+            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
+            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
+                t = (*_vec_)[idx];                                  \
                 verify(t);                                          \
 
     #define FOR_ALL_THINGS_END() } }
 
     //
-    // NOTE: get is a lot safer than getref, if the vector gets resized somehow
+    // NOTE: get is a lot safer than getptr, if the vector gets resized somehow
     // during walks
     //
     #define FOR_ALL_GRID_THINGS(level, t, x, y)              	    \
         if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
-            auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
-                t = _vec_[idx];                                     \
+            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
+            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
+                t = (*_vec_)[idx];                                  \
                 if(!t->is_the_grid) { continue; }                   \
 
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
         if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
-            auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
-                t = _vec_[idx];                                     \
-                if(t->z_depth != z) {                               \
+            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
+            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
+                t = (*_vec_)[idx];                                  \
+                if (t->z_depth != z) {                              \
                     continue;                                       \
                 }                                                   \
-                if(t->is_hidden) { continue; }                      \
+                if (t->is_hidden) { continue; }                     \
 
     #define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                 \
     {                                                               \
         Thingp t;                                                   \
-        auto _vec_ = getref(level->all_thing_ptrs_at, x, y);        \
-        for(size_t idx = 0; idx < _vec_.size(); idx++) {            \
-            t = _vec_[idx];                                         \
+        auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);        \
+        for(size_t idx = 0; idx < _vec_->size(); idx++) {           \
+            t = (*_vec_)[idx];                                      \
             if(likely(!t->has_light)) { continue; }                 \
             if(t->is_hidden) { continue; }                          \
 
@@ -241,9 +241,9 @@ public:
     #define FOR_ALL_ACTIVE_THINGS(level, t, x, y)                   \
         if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
-            auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
-                t = _vec_[idx];                                     \
+            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
+            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
+                t = (*_vec_)[idx];                                  \
                 verify(t);                                          \
                 if(t->is_the_grid) { continue; }                    \
                 if(t->is_hidden) { continue; }                      \
@@ -258,9 +258,9 @@ public:
     #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)              \
         if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
-            auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
-                t = _vec_[idx];                                     \
+            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
+            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
+                t = (*_vec_)[idx];                                  \
                 verify(t);                                          \
                 if(t->is_the_grid) { continue; }                    \
                 if(t->is_hidden) { continue; }                      \
@@ -274,9 +274,9 @@ public:
     #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                \
         if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
-            auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
-                t = _vec_[idx];                                     \
+            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
+            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
+                t = (*_vec_)[idx];                                  \
                 verify(t);                                          \
                 if(t->is_the_grid) { continue; }                    \
                 if(t->is_hidden) { continue; }                      \
@@ -293,9 +293,9 @@ public:
     #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)              \
         if(!(level)->is_oob(x, y)) {                                \
             Thingp t;                                               \
-            auto _vec_ = getref(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_.size(); idx++) {        \
-                t = _vec_[idx];                                     \
+            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
+            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
+                t = (*_vec_)[idx];                                  \
                 verify(t);                                          \
                 if(!t->is_cursor_path()) {                          \
                     continue;                                       \

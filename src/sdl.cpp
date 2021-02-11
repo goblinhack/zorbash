@@ -1467,8 +1467,18 @@ void config_gfx_zoom_update (void)
 
     TERM_WIDTH = TERM_WIDTH_DEF;
     TERM_HEIGHT = TERM_HEIGHT_DEF;
+#ifdef SQUARE
+    //
+    // Square tiles but looks a bit odd
+    //
+    game->config.ascii_gl_height = game->config.outer_pix_height / TERM_HEIGHT;
+    game->config.ascii_gl_width = game->config.ascii_gl_height;
+    TERM_WIDTH = game->config.outer_pix_width /  game->config.ascii_gl_width;
+    TERM_HEIGHT = game->config.outer_pix_height /  game->config.ascii_gl_height;
+#else
     game->config.ascii_gl_width = game->config.outer_pix_width / TERM_WIDTH;
     game->config.ascii_gl_height = game->config.outer_pix_height / TERM_HEIGHT;
+#endif
 
     if (TERM_WIDTH >= TERM_WIDTH_MAX) {
         LOG("SDL: Exceeded console hit max width  : %d", TERM_WIDTH);

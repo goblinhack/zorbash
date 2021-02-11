@@ -181,6 +181,9 @@ void Level::cursor_path_draw_line (point start, point end)
     game->cursor_move_path = p;
 
     for (auto& c : p) {
+        if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
+            continue;
+        }
         thing_new("cursor_path", fpoint(c.x , c.y));
     }
 }

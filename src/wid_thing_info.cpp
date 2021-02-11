@@ -79,8 +79,8 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     {_
         auto w = wid_new_plain(
                     wid_popup_window->wid_popup_container, "ui-circle");
-        point tl = make_point(8, 1);
-        point br = make_point(12, 4);
+        point tl = make_point(9, 1);
+        point br = make_point(14, 4);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "ui_circle");
@@ -91,8 +91,8 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     {_
         auto w = wid_new_plain(
                     wid_popup_window->wid_popup_container, "ui-circle");
-        point tl = make_point(9, 2);
-        point br = make_point(11, 3);
+        point tl = make_point(10, 2);
+        point br = make_point(13, 3);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "ui_tile_bg");
