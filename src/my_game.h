@@ -45,8 +45,8 @@ public:
     int                gfx_minimap                  = true;
     int                gfx_show_hidden              = false;
     int                gfx_vsync_enable             = true;
-    int                tile_height                  = {};
-    int                tile_width                   = {};
+    uint8_t            tile_height                  = {};
+    uint8_t            tile_width                   = {};
     int32_t            inner_pix_height             = {};
     int32_t            inner_pix_width              = {};
     int32_t            outer_pix_height             = {};

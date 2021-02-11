@@ -12,9 +12,9 @@
 #include "my_tex.h"
 #include "my_tile.h"
 
-#define TERM_HEIGHT_DEF            36
+#define TERM_HEIGHT_DEF            42
 #define TERM_HEIGHT_MAX            TERM_HEIGHT_DEF
-#define TERM_WIDTH_DEF             100
+#define TERM_WIDTH_DEF             120
 #define TERM_WIDTH_MAX             TERM_WIDTH_DEF
 
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_Keysym * key);
