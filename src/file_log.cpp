@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include <cstring>
 #include "my_sys.h"
 #include "my_time.h"
 #include "my_string.h"
