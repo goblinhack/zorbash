@@ -29,5 +29,5 @@ void gfx_init3 (void)
     };
     const std::vector<std::string> arr(tiles);
     tile_load_arr("data/gfx/ui_box3.tga", "ui_box3",
-                  UI_FONT_LARGE_WIDTH, UI_FONT_LARGE_HEIGHT, arr);
+                  UI_TILE_LARGE_WIDTH, UI_TILE_LARGE_HEIGHT, arr);
 }
