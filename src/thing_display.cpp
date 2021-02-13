@@ -15,7 +15,7 @@
 #include "my_thing_template.h"
 #include "my_tile.h"
 #include "my_array_bounds_check.h"
-#include "my_vector_bounds_check.h"
+// REMOVED #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
