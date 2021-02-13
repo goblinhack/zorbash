@@ -8,6 +8,7 @@
 #define _MY_THING_H_
 
 #include <list>
+#include <array>
 #include "my_thing_defs.h"
 #include "my_dice.h"
 #include "my_thing_id.h"
