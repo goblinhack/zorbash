@@ -57,7 +57,7 @@ Screenshots
 How to build
 ------------
 
-- On Linux: (last tried ubuntu 19.04 on Mon Jan  4 13:11:50 GMT 2021)
+- On Linux: (last tried ubuntu 19.04 on Sat Feb 13 15:12:42 GMT 2021)
 <pre>
     sh ./RUNME
 </pre>
