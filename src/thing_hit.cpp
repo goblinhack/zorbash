@@ -10,7 +10,6 @@
 #include "my_sprintf.h"
 #include "my_thing_template.h"
 #include "my_array_bounds_check.h"
-// REMOVED #include "my_vector_bounds_check.h"
 
 int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           Thingp real_hitter, // who fired the arrow?

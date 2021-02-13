@@ -7,7 +7,6 @@
 #include "my_sys.h"
 #include "my_ttf.h"
 #include "my_array_bounds_check.h"
-// REMOVED #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 #include "my_main.h"
 

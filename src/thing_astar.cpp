@@ -14,7 +14,6 @@
 #include "my_thing_template.h"
 #include "my_thing_ai.h"
 #include "my_array_bounds_check.h"
-// REMOVED #include "my_vector_bounds_check.h"
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
 std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> astar_debug {};

@@ -10,8 +10,6 @@
 #include "my_thing_template.h"
 #include "my_random.h"
 #include "my_globals.h"
-// REMOVED #include "my_array_bounds_check.h"
-// REMOVED #include "my_vector_bounds_check.h"
 #include "my_ptrcheck.h"
 
 bool Level::create_dungeon (point3d at, int seed)

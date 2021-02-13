@@ -12,7 +12,6 @@
 #include "my_gl.h"
 #include "my_random.h"
 #include "my_array_bounds_check.h"
-// REMOVED #include "my_vector_bounds_check.h"
 
 std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg {};
 std::array<std::array<color, TERM_HEIGHT_MAX * 2>, TERM_WIDTH_MAX * 2> bg2 {};
