@@ -10,6 +10,39 @@
 #include "my_string.h"
 #include <strings.h> // do not remove, strcasecmp
 
+color BLACK;
+color BLUE;
+color COLOR_NONE;
+color DARKRED;
+color GRAY10;
+color GRAY20;
+color GRAY30;
+color GRAY40;
+color GRAY50;
+color GRAY60;
+color GRAY70;
+color GRAY80;
+color GRAY90;
+color GRAY;
+color GREEN;
+color ORANGE;
+color PURPLE;
+color RED;
+color WHITE;
+color YELLOW;
+color DARKBLUE;
+color DARKGREEN;
+color BROWN;
+color BLUE1;
+color BLUE2;
+color BLUE4;
+color BLUE3;
+color PINK;
+color DARKGRAY;
+color LIGHTBLUE;
+color CYAN;
+
+#if 0
 color COLOR_NONE;
 color ALICE_BLUE;
 color ALICEBLUE;
@@ -86,7 +119,6 @@ color CYAN1;
 color CYAN2;
 color CYAN3;
 color CYAN4;
-color CYAN;
 color DARKBLUE;
 color DARKCYAN;
 color DARKGRAY;
@@ -154,9 +186,43 @@ color GOLD1;
 color GOLD2;
 color GOLD3;
 color GOLD4;
+#endif
 
 void color_init1 (void)
 {_
+    color_set("black", &BLACK, 0, 0, 0, 255);
+    color_set("blue", &BLUE, 0, 0, 255, 255);
+    color_set("none", &COLOR_NONE, 0, 0, 0, 0);
+    color_set("darkred", &DARKRED, 139, 0, 0, 255);
+    color_set("gray10", &GRAY10, 26, 26, 26, 255);
+    color_set("gray20", &GRAY20, 51, 51, 51, 255);
+    color_set("gray30", &GRAY30, 77, 77, 77, 255);
+    color_set("gray40", &GRAY40, 102, 102, 102, 255);
+    color_set("gray50", &GRAY50, 127, 127, 127, 255);
+    color_set("gray60", &GRAY60, 153, 153, 153, 255);
+    color_set("gray70", &GRAY70, 179, 179, 179, 255);
+    color_set("gray80", &GRAY80, 204, 204, 204, 255);
+    color_set("gray90", &GRAY90, 229, 229, 229, 255);
+    color_set("gray", &GRAY, 190, 190, 190, 255);
+    color_set("green", &GREEN, 0, 255, 0, 255);
+    color_set("orange", &ORANGE, 255, 165, 0, 255);
+    color_set("purple", &PURPLE, 160, 32, 240, 255);
+    color_set("red", &RED, 255, 0, 0, 255);
+    color_set("white", &WHITE, 255, 255, 255, 255);
+    color_set("yellow", &YELLOW, 255, 255, 0, 255);
+    color_set("darkblue", &DARKBLUE, 0, 0, 139, 255);
+    color_set("darkgreen", &DARKGREEN, 0, 100, 0, 255);
+    color_set("brown", &BROWN, 165, 42, 42, 255);
+    color_set("blue1", &BLUE1, 0, 0, 255, 255);
+    color_set("blue2", &BLUE2, 0, 0, 238, 255);
+    color_set("blue4", &BLUE4, 0, 0, 139, 255);
+    color_set("blue3", &BLUE3, 0, 0, 205, 255);
+    color_set("pink", &PINK, 255, 192, 203, 255);
+    color_set("darkgray", &DARKGRAY, 169, 169, 169, 255);
+    color_set("lightblue", &LIGHTBLUE, 173, 216, 230, 255);
+    color_set("cyan", &CYAN, 0, 255, 255, 255);
+
+#if 0
     color_set("aliceblue", &ALICEBLUE, 240, 248, 255, 255);
     color_set("antiquewhite1", &ANTIQUEWHITE1, 255, 239, 219, 255);
     color_set("antiquewhite2", &ANTIQUEWHITE2, 238, 223, 204, 255);
@@ -228,7 +294,6 @@ void color_init1 (void)
     color_set("cyan2", &CYAN2, 0, 238, 238, 255);
     color_set("cyan3", &CYAN3, 0, 205, 205, 255);
     color_set("cyan4", &CYAN4, 0, 139, 139, 255);
-    color_set("cyan", &CYAN, 0, 255, 255, 255);
     color_set("darkblue", &DARKBLUE, 0, 0, 139, 255);
     color_set("darkcyan", &DARKCYAN, 0, 139, 139, 255);
     color_set("darkgray", &DARKGRAY, 169, 169, 169, 255);
@@ -290,4 +355,5 @@ void color_init1 (void)
     color_set("gold2", &GOLD2, 238, 201, 0, 255);
     color_set("gold3", &GOLD3, 205, 173, 0, 255);
     color_set("gold4", &GOLD4, 139, 117, 0, 255);
+#endif
 }

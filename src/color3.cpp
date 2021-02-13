@@ -10,6 +10,8 @@
 #include "my_string.h"
 #include <strings.h> // do not remove, strcasecmp
 
+
+#if 0
 color HOTPINK1;
 color HOTPINK2;
 color HOTPINK3;
@@ -65,9 +67,11 @@ color LIGHTSKYBLUE4;
 color LIGHTSKYBLUE;
 color LIGHTSLATEBLUE;
 color LIGHTSLATEGRAY;
+#endif
 
 void color_init3 (void)
 {_
+#if 0
     color_set("hotpink1", &HOTPINK1, 255, 110, 180, 255);
     color_set("hotpink2", &HOTPINK2, 238, 106, 167, 255);
     color_set("hotpink3", &HOTPINK3, 205, 96, 144, 255);
@@ -121,4 +125,5 @@ void color_init3 (void)
     color_set("lightskyblue", &LIGHTSKYBLUE, 135, 206, 250, 255);
     color_set("lightslateblue", &LIGHTSLATEBLUE, 132, 112, 255, 255);
     color_set("lightslategray", &LIGHTSLATEGRAY, 119, 136, 153, 255);
+#endif
 }
