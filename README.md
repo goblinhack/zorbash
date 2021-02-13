@@ -10,6 +10,8 @@ Comments and suggestions welcome at this early stage.
 Upcoming work
 -------------
 
+- cursor jumps around
+- move minimap up one row or to the top?
 - skills
 - skill, devoted thrust, put everything into one massive strike
 - skill, whirl attack, attack 2 or 3 enemies
