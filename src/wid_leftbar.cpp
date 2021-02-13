@@ -13,7 +13,6 @@
 #include "my_thing_template.h"
 #include "my_globals.h"
 #include "my_array_bounds_check.h"
-// REMOVED #include "my_vector_bounds_check.h"
 
 static void wid_leftbar_create(void);
 
