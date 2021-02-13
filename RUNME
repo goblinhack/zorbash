@@ -133,6 +133,7 @@ if [ $? -ne 0 ]; then
     log_err "Build failed."
     log_err "Could you send $LOG to $MAINTAINER?"
     log_err "Or file an issue at https://github.com/goblinhack/zorbash"
+    exit 1
 else
     log "Built successfully"
 fi
