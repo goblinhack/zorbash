@@ -8,6 +8,8 @@
 #define _MY_GLAPI_H_
 #define GL_GLEXT_PROTOTYPES
 
+#include <array>
+
 /* Defined before OpenGL and GLUT includes to avoid deprecation messages */
 #define GL_SILENCE_DEPRECATION
 
