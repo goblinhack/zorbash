@@ -10,7 +10,7 @@
 #include "my_wid_thing_collect.h"
 #include "my_wid_bag.h"
 #include "my_array_bounds_check.h"
-// REMOVED #include "my_vector_bounds_check.h"
+#include "my_vector_bounds_check.h"
 #include "my_ui.h"
 #include "my_monst.h"
 #include "my_thing.h"
