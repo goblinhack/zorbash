@@ -15,7 +15,7 @@ def init_ui_circle():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_circle.tga",
-        name="ui_circle", width=256, height=256, arr=tiles)
+        name="ui_circle", width=64, height=64, arr=tiles)
 
 def init_ui_tile_bg():
     tiles = [
