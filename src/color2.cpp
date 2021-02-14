@@ -11,7 +11,6 @@
 #include <strings.h> // do not remove, strcasecmp
 
 #if 0
-color GOLD;
 color GRAY10;
 color GRAY11;
 color GRAY12;
@@ -124,7 +123,6 @@ color GREENYELLOW;
 void color_init2 (void)
 {_
 #if 0
-    color_set("gold", &GOLD, 255, 215, 0, 255);
     color_set("gray10", &GRAY10, 26, 26, 26, 255);
     color_set("gray11", &GRAY11, 28, 28, 28, 255);
     color_set("gray12", &GRAY12, 31, 31, 31, 255);

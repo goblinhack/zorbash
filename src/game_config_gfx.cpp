@@ -111,8 +111,8 @@ static uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, ui
 static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: incr resolution");
-    auto res = std::to_string(game->config.outer_pix_width) + "x" +
-               std::to_string(game->config.outer_pix_height);
+    auto res = std::to_string(game->config.window_pix_width) + "x" +
+               std::to_string(game->config.window_pix_height);
     auto n = SDL_GetNumDisplayModes(0);
     int chosen = 0;
     for (int i = 0; i < n; ++i) {
@@ -130,8 +130,8 @@ static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, ui
             SDL_GetDisplayMode(0, i, &mode);
             auto cand = std::to_string(mode.w) + "x" + std::to_string(mode.h);
             CON(" - chosen: %s", cand.c_str());
-            game->config.outer_pix_width = mode.w;
-            game->config.outer_pix_height = mode.h;
+            game->config.window_pix_width = mode.w;
+            game->config.window_pix_height = mode.h;
             local_g_need_restart = true;
         }
     }
@@ -144,8 +144,8 @@ static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, ui
 static uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: decr resolution");
-    auto res = std::to_string(game->config.outer_pix_width) + "x" +
-               std::to_string(game->config.outer_pix_height);
+    auto res = std::to_string(game->config.window_pix_width) + "x" +
+               std::to_string(game->config.window_pix_height);
     auto n = SDL_GetNumDisplayModes(0);
     int chosen = 0;
     for (int i = 0; i < n; ++i) {
@@ -163,8 +163,8 @@ static uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, ui
             SDL_GetDisplayMode(0, i, &mode);
             auto cand = std::to_string(mode.w) + "x" + std::to_string(mode.h);
             CON(" - chosen: %s", cand.c_str());
-            game->config.outer_pix_width = mode.w;
-            game->config.outer_pix_height = mode.h;
+            game->config.window_pix_width = mode.w;
+            game->config.window_pix_height = mode.h;
             local_g_need_restart = true;
         }
     }
@@ -308,8 +308,8 @@ void Game::config_gfx_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
 
-        auto res = std::to_string(game->config.outer_pix_width) + "x" +
-                   std::to_string(game->config.outer_pix_height);
+        auto res = std::to_string(game->config.window_pix_width) + "x" +
+                   std::to_string(game->config.window_pix_height);
         wid_set_text(w, res);
     }
     {_

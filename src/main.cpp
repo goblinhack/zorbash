@@ -617,6 +617,12 @@ int32_t main (int32_t argc, char *argv[])
         ERR("SDL init");
     }
 
+    if (g_need_restart) {
+        CON("FINI: Restart");
+        g_need_restart = false;
+        execv(argv[0], argv);
+    }
+
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
 

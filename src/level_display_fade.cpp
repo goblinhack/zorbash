@@ -19,7 +19,7 @@ void Level::display_fade_out (void)
         return;
     }
 
-    point at(game->config.inner_pix_width / 2, game->config.inner_pix_height / 2);
+    point at(game->config.game_pix_width / 2, game->config.game_pix_height / 2);
     if (player) {
         at = ((player->last_blit_tl + player->last_blit_br) / 2);
     }
@@ -28,7 +28,7 @@ void Level::display_fade_out (void)
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
-    float rad = (1.0 - ts) * (float) game->config.inner_pix_width / 2;
+    float rad = (1.0 - ts) * (float) game->config.game_pix_width / 2;
     float a = (1.0 - ts) * 255;
 
     blit_init();
@@ -67,7 +67,7 @@ void Level::display_fade_in (void)
         return;
     }
 
-    point at(game->config.inner_pix_width / 2, game->config.inner_pix_height / 2);
+    point at(game->config.game_pix_width / 2, game->config.game_pix_height / 2);
     if (player) {
         at = ((player->last_blit_tl + player->last_blit_br) / 2);
     }
@@ -76,7 +76,7 @@ void Level::display_fade_in (void)
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
-    float rad = ts * (float) game->config.inner_pix_width / 2;
+    float rad = ts * (float) game->config.game_pix_width / 2;
     float a = ts * 255;
 
     blit_init();

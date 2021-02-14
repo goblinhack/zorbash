@@ -611,10 +611,10 @@ uint8_t Thing::blit_begin_submerged (void) const
         if (owner) {
             waterline = owner->last_blit_br.y;
         }
-        if (waterline < game->config.inner_pix_height) {
-            glScissor(0, game->config.inner_pix_height - waterline,
-                      game->config.inner_pix_width,
-                      game->config.inner_pix_height);
+        if (waterline < game->config.game_pix_height) {
+            glScissor(0, game->config.game_pix_height - waterline,
+                      game->config.game_pix_width,
+                      game->config.game_pix_height);
             GL_ERROR_CHECK();
         }
         glEnable(GL_SCISSOR_TEST);
@@ -643,11 +643,11 @@ uint8_t Thing::blit_begin_reflection_submerged (void) const
         if (owner) {
             waterline = owner->last_blit_br.y;
         }
-        if (waterline < game->config.inner_pix_height) {
+        if (waterline < game->config.game_pix_height) {
             glScissor(0,
                       0,
-                      game->config.inner_pix_width,
-                      game->config.inner_pix_height - waterline);
+                      game->config.game_pix_width,
+                      game->config.game_pix_height - waterline);
             GL_ERROR_CHECK();
         }
         glEnable(GL_SCISSOR_TEST);

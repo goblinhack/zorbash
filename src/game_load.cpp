@@ -525,17 +525,18 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
         return in;
     }
 
-    /* float              ascii_gl_height              */ in >> bits(my.t.ascii_gl_height              );
-    /* float              ascii_gl_width               */ in >> bits(my.t.ascii_gl_width               );
-    /* float              gfx_zoom                     */ in >> bits(my.t.gfx_zoom                     );
+    /* float              game_pix_scale_height        */ in >> bits(my.t.game_pix_scale_height             );
+    /* float              game_pix_scale_width         */ in >> bits(my.t.game_pix_scale_width              );
+    /* float              game_pix_zoom                */ in >> bits(my.t.game_pix_zoom                     );
     /* float              one_pixel_height             */ in >> bits(my.t.one_pixel_height             );
     /* float              one_pixel_width              */ in >> bits(my.t.one_pixel_width              );
-    /* float              scale_pix_height             */ in >> bits(my.t.scale_pix_height             );
-    /* float              scale_pix_width              */ in >> bits(my.t.scale_pix_width              );
     /* float              tile_pix_height              */ in >> bits(my.t.tile_pix_height              );
     /* float              tile_pix_width               */ in >> bits(my.t.tile_pix_width               );
     /* float              tile_pixel_height            */ in >> bits(my.t.tile_pixel_height            );
     /* float              tile_pixel_width             */ in >> bits(my.t.tile_pixel_width             );
+    /* float              ui_pix_scale_height          */ in >> bits(my.t.ui_pix_scale_height             );
+    /* float              ui_pix_scale_width           */ in >> bits(my.t.ui_pix_scale_width              );
+    /* float              ui_pix_zoom                  */ in >> bits(my.t.ui_pix_zoom                     );
     /* float              video_w_h_ratio              */ in >> bits(my.t.video_w_h_ratio              );
     /* int                debug_mode                   */ in >> bits(my.t.debug_mode                   );
     /* int                fps_counter                  */ in >> bits(my.t.fps_counter                  );
@@ -549,12 +550,16 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* int                gfx_vsync_enable             */ in >> bits(my.t.gfx_vsync_enable             );
     /* int                tile_height                  */ in >> bits(my.t.tile_height                  );
     /* int                tile_width                   */ in >> bits(my.t.tile_width                   );
-    /* int32_t            inner_pix_height             */ in >> bits(my.t.inner_pix_height             );
-    /* int32_t            inner_pix_width              */ in >> bits(my.t.inner_pix_width              );
-    /* int32_t            outer_pix_height             */ in >> bits(my.t.outer_pix_height             );
-    /* int32_t            outer_pix_width              */ in >> bits(my.t.outer_pix_width              );
     /* int32_t            config_pix_height            */ in >> bits(my.t.config_pix_height            );
     /* int32_t            config_pix_width             */ in >> bits(my.t.config_pix_width             );
+    /* int32_t            game_pix_height              */ in >> bits(my.t.game_pix_height             );
+    /* int32_t            game_pix_width               */ in >> bits(my.t.game_pix_width              );
+    /* int32_t            ui_pix_height                */ in >> bits(my.t.ui_pix_height             );
+    /* int32_t            ui_pix_width                 */ in >> bits(my.t.ui_pix_width              );
+    /* int32_t            window_pix_height            */ in >> bits(my.t.window_pix_height             );
+    /* int32_t            window_pix_width             */ in >> bits(my.t.window_pix_width              );
+    /* uint16_t           ascii_gl_height              */ in >> bits(my.t.ascii_gl_height              );
+    /* uint16_t           ascii_gl_width               */ in >> bits(my.t.ascii_gl_width               );
     /* uint32_t           key_action0                  */ in >> bits(my.t.key_action0                  );
     /* uint32_t           key_action1                  */ in >> bits(my.t.key_action1                  );
     /* uint32_t           key_action2                  */ in >> bits(my.t.key_action2                  );
@@ -566,7 +571,11 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_action8                  */ in >> bits(my.t.key_action8                  );
     /* uint32_t           key_action9                  */ in >> bits(my.t.key_action9                  );
     /* uint32_t           key_attack                   */ in >> bits(my.t.key_attack                   );
+    /* uint32_t           key_console                  */ in >> bits(my.t.key_console                  );
+    /* uint32_t           key_drop                     */ in >> bits(my.t.key_drop                     );
+    /* uint32_t           key_eat                      */ in >> bits(my.t.key_eat                      );
     /* uint32_t           key_help                     */ in >> bits(my.t.key_help                     );
+    /* uint32_t           key_inventory                */ in >> bits(my.t.key_inventory                  );
     /* uint32_t           key_jump                     */ in >> bits(my.t.key_jump                     );
     /* uint32_t           key_load                     */ in >> bits(my.t.key_load                     );
     /* uint32_t           key_map_down                 */ in >> bits(my.t.key_map_down                 );
@@ -581,25 +590,22 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_quit                     */ in >> bits(my.t.key_quit                     );
     /* uint32_t           key_save                     */ in >> bits(my.t.key_save                     );
     /* uint32_t           key_screenshot               */ in >> bits(my.t.key_screenshot               );
-    /* uint32_t           key_inventory                 */ in >> bits(my.t.key_inventory                  );
-    /* uint32_t           key_console                  */ in >> bits(my.t.key_console                  );
+    /* uint32_t           key_throw                    */ in >> bits(my.t.key_throw                    );
     /* uint32_t           key_unused3                  */ in >> bits(my.t.key_unused3                  );
     /* uint32_t           key_unused4                  */ in >> bits(my.t.key_unused4                  );
     /* uint32_t           key_unused5                  */ in >> bits(my.t.key_unused5                  );
-    /* uint32_t           key_eat                      */ in >> bits(my.t.key_eat                      );
-    /* uint32_t           key_throw                    */ in >> bits(my.t.key_throw                    );
-    /* uint32_t           key_drop                     */ in >> bits(my.t.key_drop                     );
     /* uint32_t           key_use                      */ in >> bits(my.t.key_use                      );
-    /* uint32_t           key_wait_or_collect                     */ in >> bits(my.t.key_wait_or_collect                     );
+    /* uint32_t           key_wait_or_collect          */ in >> bits(my.t.key_wait_or_collect                     );
     /* uint32_t           key_zoom_in                  */ in >> bits(my.t.key_zoom_in                  );
     /* uint32_t           key_zoom_out                 */ in >> bits(my.t.key_zoom_out                 );
     /* uint32_t           music_volume                 */ in >> bits(my.t.music_volume                 );
     /* uint32_t           sdl_delay                    */ in >> bits(my.t.sdl_delay                    );
     /* uint32_t           sound_volume                 */ in >> bits(my.t.sound_volume                 );
 
-    if (!my.t.gfx_zoom) {
-        ERR("Loading, gfx_zoom is zero");
-        my.t.gfx_zoom = 1;
+    if (!my.t.game_pix_zoom) {
+        ERR("Loading, game_pix_zoom is zero");
+        my.t.game_pix_zoom = 3;
+        my.t.ui_pix_zoom = 2;
     }
 
     return (in);

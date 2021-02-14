@@ -119,8 +119,8 @@ void Level::display_map_bg_things (void)
         blit_fbo_unbind();
     }
 
-    gl_enter_2d_mode(game->config.inner_pix_width, 
-                     game->config.inner_pix_height);
+    gl_enter_2d_mode(game->config.game_pix_width, 
+                     game->config.game_pix_height);
 }
 
 void Level::display_map_things (int fbo,
@@ -288,10 +288,10 @@ void Level::display_map (void)
         glcolor(WHITE);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        auto Y = h - pixel_map_at.y - game->config.inner_pix_height;
+        auto Y = h - pixel_map_at.y - game->config.game_pix_height;
         float left  = (float)(pixel_map_at.x) / w;
-        float top   = (float)(Y + game->config.inner_pix_height) / h;
-        float right = (float)(pixel_map_at.x + game->config.inner_pix_width) / w;
+        float top   = (float)(Y + game->config.game_pix_height) / h;
+        float right = (float)(pixel_map_at.x + game->config.game_pix_width) / w;
         float bot   = (float)Y / h;
 
         blit_init();
@@ -299,8 +299,8 @@ void Level::display_map (void)
              left, top, right, bot,
              0, 
              0,
-             game->config.inner_pix_width,
-             game->config.inner_pix_height);
+             game->config.game_pix_width,
+             game->config.game_pix_height);
         blit_flush();
 
         glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
@@ -310,12 +310,12 @@ void Level::display_map (void)
              left, top, right, bot,
              0, 
              0,
-             game->config.inner_pix_width,
-             game->config.inner_pix_height);
+             game->config.game_pix_width,
+             game->config.game_pix_height);
         blit_flush();
 
         glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
-        blit_fbo_inner(FBO_LIGHT);
+        blit_fbo_game_pix(FBO_LIGHT);
     }
 
     if (!frozen) {_
@@ -327,7 +327,7 @@ void Level::display_map (void)
         display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         display_internal_particles();
         glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
-        blit_fbo_inner(FBO_LIGHT);
+        blit_fbo_game_pix(FBO_LIGHT);
         display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
     }
 
@@ -342,17 +342,17 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(DARKBLUE);
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-        blit_fbo_inner(FBO_MAP_HIDDEN);
+        blit_fbo_game_pix(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
         glcolor(WHITE);
-        blit_fbo_inner(FBO_MAP_VISIBLE);
+        blit_fbo_game_pix(FBO_MAP_VISIBLE);
 
         if (fade_out) {
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             display_fade_out();
             blit_fbo_bind(FBO_MAP);
             glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
-            blit_fbo_inner(FBO_FADE);
+            blit_fbo_game_pix(FBO_FADE);
         }
 
         if (fade_in) {
@@ -360,7 +360,7 @@ void Level::display_map (void)
             display_fade_in();
             blit_fbo_bind(FBO_MAP);
             glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
-            blit_fbo_inner(FBO_FADE);
+            blit_fbo_game_pix(FBO_FADE);
         }
     }
 

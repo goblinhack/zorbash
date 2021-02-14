@@ -5954,6 +5954,10 @@ void wid_display_all (void)
 {_
     ascii_clear_display();
 
+    gl_leave_2d_mode();
+    gl_enter_2d_mode(game->config.ui_pix_width,
+                     game->config.ui_pix_height);
+
     blit_fbo_bind(FBO_WID);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
@@ -5982,7 +5986,7 @@ void wid_display_all (void)
     }
 
 #if 0
-printf("================================================= %d\n", wid_total_count);
+printf("========================================= %d\n", wid_total_count);
 TOPCON("%d",wid_total_count);
 #endif
 
@@ -6019,6 +6023,11 @@ TOPCON("%d",wid_total_count);
     // Need this to reset wid_over after display
     //
     wid_update_mouse();
+
+    gl_leave_2d_mode();
+    gl_enter_2d_mode(game->config.window_pix_width,
+                     game->config.window_pix_height);
+
 }
 
 uint8_t wid_is_hidden (Widp w)

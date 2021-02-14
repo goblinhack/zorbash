@@ -26,8 +26,8 @@ void Thing::cursor_hover_over_check (void)
 
     auto mx = mouse_x;
     auto my = mouse_y;
-    mx /= game->config.scale_pix_width;
-    my /= game->config.scale_pix_height;
+    mx /= game->config.game_pix_scale_width;
+    my /= game->config.game_pix_scale_height;
 
     if ((mx >= tblit_tl.x) && (mx <= tblit_br.x)) {
         if ((my >= tblit_tl.y) && (my <= tblit_br.y)) {
