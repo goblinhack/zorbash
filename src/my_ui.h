@@ -26,8 +26,8 @@
 #define UI_CURSOR_OTHER_COLOR      WHITE
 #define UI_FONT_LARGE_WIDTH        8
 #define UI_FONT_LARGE_HEIGHT       8
-#define UI_TILE_LARGE_WIDTH        20
-#define UI_TILE_LARGE_HEIGHT       26
+#define UI_TILE_LARGE_WIDTH        8
+#define UI_TILE_LARGE_HEIGHT       8
 #define UI_FONT_SMALL_WIDTH        6
 #define UI_FONT_SMALL_HEIGHT       8
 #define UI_FONT_NAME               "data/fonts/6x6.tga"
