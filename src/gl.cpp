@@ -43,8 +43,8 @@ void gl_init_2d_mode (void)
     //
     CON("OpenGL: enable viewport");
     glViewport(0, 0,
-               game->config.outer_pix_width,
-               game->config.outer_pix_height);
+               game->config.window_pix_width,
+               game->config.window_pix_height);
     GL_ERROR_CHECK();
 
     //
@@ -87,8 +87,8 @@ void gl_enter_2d_mode (void)
     // 2D projection
     //
     glOrtho(0, // left
-            game->config.inner_pix_width, // right
-            game->config.inner_pix_height, // bottom
+            game->config.game_pix_width, // right
+            game->config.game_pix_height, // bottom
             0, //top
             -1200.0,
             1200.0);
@@ -422,8 +422,8 @@ void gl_init_fbo (void)
 
 void fbo_get_size (int fbo, int &w, int &h)
 {
-    w = game->config.inner_pix_width;
-    h = game->config.inner_pix_height;
+    w = game->config.game_pix_width;
+    h = game->config.game_pix_height;
 
     switch (fbo) {
         case FBO_MAP:
@@ -431,15 +431,15 @@ void fbo_get_size (int fbo, int &w, int &h)
         case FBO_MAP_VISIBLE:
         case FBO_LIGHT:
         case FBO_FADE:
-            w = game->config.inner_pix_width;
-            h = game->config.inner_pix_height;
+            w = game->config.game_pix_width;
+            h = game->config.game_pix_height;
             break;
         case FBO_MASK1:
         case FBO_MASK2:
         case FBO_MASK3:
         case FBO_MASK4:
-            w = game->config.inner_pix_width;
-            h = game->config.inner_pix_height;
+            w = game->config.game_pix_width;
+            h = game->config.game_pix_height;
             break;
         case FBO_MINIMAP:
             w = MAP_WIDTH;
@@ -459,13 +459,12 @@ void fbo_get_size (int fbo, int &w, int &h)
             h = TILE_HEIGHT * MAP_HEIGHT;
             break;
         case FBO_WID:
-            //
-            // Outer for the UI allows use to have more detail in
-            // the logo and other things
-            //
+            w = game->config.ui_pix_width;
+            h = game->config.ui_pix_height;
+            break;
         case FBO_FINAL:
-            w = game->config.outer_pix_width;
-            h = game->config.outer_pix_height;
+            w = game->config.window_pix_width;
+            h = game->config.window_pix_height;
             break;
     }
 }
@@ -483,25 +482,36 @@ void blit_fbo (int fbo)
     blit_flush();
 }
 
-void blit_fbo_inner (int fbo)
+void blit_fbo_game_pix (int fbo)
 {
     blit_init();
     blit(fbo_tex_id[fbo],
          0.0, 1.0, 1.0, 0.0,
          0, 0,
-         game->config.inner_pix_width,
-         game->config.inner_pix_height);
+         game->config.game_pix_width,
+         game->config.game_pix_height);
     blit_flush();
 }
 
-void blit_fbo_outer (int fbo)
+void blit_fbo_ui_pix (int fbo)
 {
     blit_init();
     blit(fbo_tex_id[fbo],
          0.0, 1.0, 1.0, 0.0,
          0, 0,
-         game->config.outer_pix_width,
-         game->config.outer_pix_height);
+         game->config.ui_pix_width,
+         game->config.ui_pix_height);
+    blit_flush();
+}
+
+void blit_fbo_window_pix (int fbo)
+{
+    blit_init();
+    blit(fbo_tex_id[fbo],
+         0.0, 1.0, 1.0, 0.0,
+         0, 0,
+         game->config.window_pix_width,
+         game->config.window_pix_height);
     blit_flush();
 }
 

@@ -77,7 +77,7 @@ void Level::display_blood (void)
     blit_init();
     tile_blit(tile_find_mand(t),
               point(0,0),
-              point(game->config.inner_pix_width,
-                    game->config.inner_pix_height));
+              point(game->config.game_pix_width,
+                    game->config.game_pix_height));
     blit_flush();
 }

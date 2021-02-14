@@ -311,8 +311,9 @@ void blit_colored(int tex, GLushort left, GLushort top, GLushort right, float bo
 void blit_colored(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, GLushort left, GLushort top, GLushort right, GLushort bottom, color color_bl, color color_br, color color_tl, color color_tr);
 void blit_fbo(int fbo);
 void blit_fbo_bind(int fbo);
-void blit_fbo_inner(int fbo);
-void blit_fbo_outer(int fbo);
+void blit_fbo_game_pix(int fbo);
+void blit_fbo_ui_pix(int fbo);
+void blit_fbo_window_pix(int fbo);
 void blit_fbo_unbind(void);
 void blit_fini(void);
 void blit_flush(void);

@@ -166,8 +166,8 @@ static void game_display_title_bg (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(TERM_WIDTH * game->config.ascii_gl_width,
-                    TERM_HEIGHT * game->config.ascii_gl_height));
+              point(game->config.ui_pix_width,
+                    game->config.ui_pix_height));
     blit_flush();
 }
 
@@ -180,8 +180,8 @@ static void game_display_title_fg1 (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(TERM_WIDTH * game->config.ascii_gl_width,
-                    TERM_HEIGHT * game->config.ascii_gl_height));
+              point(game->config.ui_pix_width,
+                    game->config.ui_pix_height));
     blit_flush();
 }
 
@@ -212,8 +212,8 @@ static void game_display_title_fg2 (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(TERM_WIDTH * game->config.ascii_gl_width,
-                    TERM_HEIGHT * game->config.ascii_gl_height));
+              point(game->config.ui_pix_width,
+                    game->config.ui_pix_height));
     blit_flush();
 }
 
@@ -273,8 +273,8 @@ static void game_display_title_fg3 (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(TERM_WIDTH * game->config.ascii_gl_width,
-                    TERM_HEIGHT * game->config.ascii_gl_height));
+              point(game->config.ui_pix_width,
+                    game->config.ui_pix_height));
     blit_flush();
 }
 
@@ -298,8 +298,8 @@ static void game_display_title_fg4 (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(TERM_WIDTH * game->config.ascii_gl_width,
-                    TERM_HEIGHT * game->config.ascii_gl_height));
+              point(game->config.ui_pix_width,
+                    game->config.ui_pix_height));
     blit_flush();
 }
 

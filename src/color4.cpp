@@ -21,8 +21,6 @@ color LIGHTYELLOW2;
 color LIGHTYELLOW3;
 color LIGHTYELLOW4;
 color LIGHTYELLOW;
-color LIMEGREEN;
-color LIME;
 color LINEN;
 color MAGENTA1;
 color MAGENTA2;
@@ -202,8 +200,6 @@ void color_init4 (void)
     color_set("lightyellow3", &LIGHTYELLOW3, 205, 205, 180, 255);
     color_set("lightyellow4", &LIGHTYELLOW4, 139, 139, 122, 255);
     color_set("lightyellow", &LIGHTYELLOW, 255, 255, 224, 255);
-    color_set("limegreen", &LIMEGREEN, 50, 205, 50, 255);
-    color_set("lime", &LIME, 50, 205, 50, 255);
     color_set("linen", &LINEN, 250, 240, 230, 255);
     color_set("magenta1", &MAGENTA1, 255, 0, 255, 255);
     color_set("magenta2", &MAGENTA2, 238, 0, 238, 255);

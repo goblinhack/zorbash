@@ -41,9 +41,11 @@ color PINK;
 color DARKGRAY;
 color LIGHTBLUE;
 color CYAN;
+color LIMEGREEN;
+color LIME;
+color GOLD;
 
 #if 0
-color COLOR_NONE;
 color ALICE_BLUE;
 color ALICEBLUE;
 color ANTIQUEWHITE1;
@@ -190,6 +192,8 @@ color GOLD4;
 
 void color_init1 (void)
 {_
+    color_set("lime", &LIME, 50, 205, 50, 255);
+    color_set("limegreen", &LIMEGREEN, 50, 205, 50, 255);
     color_set("black", &BLACK, 0, 0, 0, 255);
     color_set("blue", &BLUE, 0, 0, 255, 255);
     color_set("none", &COLOR_NONE, 0, 0, 0, 0);
@@ -246,7 +250,6 @@ void color_init1 (void)
     color_set("bisque4", &BISQUE4, 139, 125, 107, 255);
     color_set("bisque", &BISQUE, 255, 228, 196, 255);
     color_set("black", &BLACK, 0, 0, 0, 255);
-    color_set("none", &COLOR_NONE, 0, 0, 0, 0);
     color_set("blanchedalmond", &BLANCHEDALMOND, 255, 235, 205, 255);
     color_set("blue1", &BLUE1, 0, 0, 255, 255);
     color_set("blue2", &BLUE2, 0, 0, 238, 255);
@@ -355,5 +358,6 @@ void color_init1 (void)
     color_set("gold2", &GOLD2, 238, 201, 0, 255);
     color_set("gold3", &GOLD3, 205, 173, 0, 255);
     color_set("gold4", &GOLD4, 139, 117, 0, 255);
+    color_set("gold", &GOLD, 255, 215, 0, 255);
 #endif
 }

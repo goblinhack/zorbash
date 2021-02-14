@@ -73,13 +73,13 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_out) {
         CON("USERCFG: zoom out");
-        config_gfx_zoom_out();
+        config_game_pix_zoom_out();
         return true;
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_in) {
         TOPCON("Zoom in");
-        config_gfx_zoom_in();
+        config_game_pix_zoom_in();
         return true;
     }
 

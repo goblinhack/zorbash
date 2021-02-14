@@ -218,7 +218,7 @@ uint8_t sdl_init (void)
     //
     // If we have a saved setting, use that.
     //
-    if (game->config.outer_pix_width && game->config.outer_pix_height) {
+    if (game->config.window_pix_width && game->config.window_pix_height) {
         video_width = game->config.config_pix_width;
         video_height = game->config.config_pix_height;
     } else {
@@ -297,46 +297,49 @@ uint8_t sdl_init (void)
                               video_height,
                               video_flags);
     if (!window) {
+        ERR("Couldn't set windowed display %ux%u: %s",
+            video_width, video_height,
+            SDL_GetError());
+
         SDL_MSG_BOX("Couldn't set windowed display %ux%u: %s",
                     video_width, video_height,
                     SDL_GetError());
 
-        ERR("Couldn't set windowed display %ux%u: %s",
-            video_width, video_height,
-            SDL_GetError());
+        game->config.reset();
+        game->save_config();
         return false;
     }
 
     if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
         SDL_GL_GetDrawableSize(window,
-                               &game->config.outer_pix_width,
-                               &game->config.outer_pix_height);
+                               &game->config.window_pix_width,
+                               &game->config.window_pix_height);
     } else {
         SDL_GetWindowSize(window,
-                          &game->config.outer_pix_width,
-                          &game->config.outer_pix_height);
+                          &game->config.window_pix_width,
+                          &game->config.window_pix_height);
     }
 
     LOG("SDL: Call SDL_GL_CreateContext(%dx%d)",
-        game->config.outer_pix_width,
-        game->config.outer_pix_height);
+        game->config.window_pix_width,
+        game->config.window_pix_height);
 
     context = SDL_GL_CreateContext(window);
     if (!context) {
-        SDL_MSG_BOX("SDL_GL_CreateContext failed %s", SDL_GetError());
         SDL_ClearError();
         ERR("SDL_GL_CreateContext failed %s", SDL_GetError());
+        SDL_MSG_BOX("SDL_GL_CreateContext failed %s", SDL_GetError());
         return false;
     }
 
     LOG("SDL: Call SDL_GL_CreateContext(%dx%d) done",
-        game->config.outer_pix_width,
-        game->config.outer_pix_height);
+        game->config.window_pix_width,
+        game->config.window_pix_height);
 
     if (SDL_GL_MakeCurrent(window, context) < 0) {
-        SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
         SDL_ClearError();
         ERR("SDL_GL_MakeCurrent failed %s", SDL_GetError());
+        SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
         return false;
     }
 
@@ -364,7 +367,7 @@ uint8_t sdl_init (void)
             GL_STENCIL_BUFFER_BIT);
     SDL_GL_SwapWindow(window);
 
-    config_gfx_zoom_update();
+    config_game_pix_zoom_update();
 
     LOG("SDL: Call SDL_SetWindowTitle");
     SDL_SetWindowTitle(window, "zorbash");
@@ -719,8 +722,8 @@ static int sdl_get_mouse (void)
         return (button);
     }
 
-    x *= game->config.outer_pix_width / game->config.config_pix_width;
-    y *= game->config.outer_pix_height / game->config.config_pix_height;
+    x *= game->config.window_pix_width / game->config.config_pix_width;
+    y *= game->config.window_pix_height / game->config.config_pix_height;
 
     mouse_x = x;
     mouse_y = y;
@@ -732,8 +735,8 @@ void sdl_mouse_center (void)
 {_
     int x, y;
 
-    x = game->config.outer_pix_width / 2;
-    y = game->config.outer_pix_height / 2;
+    x = game->config.window_pix_width / 2;
+    y = game->config.window_pix_height / 2;
 
     sdl_mouse_warp(x, y);
 }
@@ -744,13 +747,13 @@ void sdl_mouse_warp (int x, int y)
 
     if (x <= 0) {
         x = border;
-    } else if (x >= game->config.outer_pix_width - border) {
-        x = game->config.outer_pix_width - border;
+    } else if (x >= game->config.window_pix_width - border) {
+        x = game->config.window_pix_width - border;
     }
     if (y <= 0) {
         y = border;
-    } else if (y >= game->config.outer_pix_height - border) {
-        y = game->config.outer_pix_height - border;
+    } else if (y >= game->config.window_pix_height - border) {
+        y = game->config.window_pix_height - border;
     }
 
     SDL_WarpMouseInWindow(window, x, y);
@@ -872,12 +875,12 @@ static void sdl_tick (void)
             y = 0;
         }
 
-        if (x > game->config.outer_pix_width - 1) {
-            x = game->config.outer_pix_width - 1;
+        if (x > game->config.window_pix_width - 1) {
+            x = game->config.window_pix_width - 1;
         }
 
-        if (y > game->config.outer_pix_height - 1) {
-            y = game->config.outer_pix_height - 1;
+        if (y > game->config.window_pix_height - 1) {
+            y = game->config.window_pix_height - 1;
         }
 
         if (wid_mouse_visible) {
@@ -1045,43 +1048,43 @@ uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-void config_gfx_zoom_in (void)
+void config_game_pix_zoom_in (void)
 {_
-    game->config.gfx_zoom++;
-    if (game->config.gfx_zoom == 1.5) {
-        game->config.gfx_zoom = 1.0;
-    } else if (game->config.gfx_zoom > 5) {
-        game->config.gfx_zoom = 5;
+    game->config.game_pix_zoom++;
+    if (game->config.game_pix_zoom == 1.5) {
+        game->config.game_pix_zoom = 1.0;
+    } else if (game->config.game_pix_zoom > 5) {
+        game->config.game_pix_zoom = 5;
     }
-    LOG("Zoom set to %f", game->config.gfx_zoom);
+    TOPCON("Zoom set to %f", game->config.game_pix_zoom);
     sdl_config_update_all();
 }
 
-void config_gfx_zoom_out (void)
+void config_game_pix_zoom_out (void)
 {_
-    game->config.gfx_zoom--;
-    if (game->config.gfx_zoom < 1) {
-        game->config.gfx_zoom = 0.5;
+    game->config.game_pix_zoom--;
+    if (game->config.game_pix_zoom < 1) {
+        game->config.game_pix_zoom = 0.5;
     }
-    LOG("Zoom set to %f", game->config.gfx_zoom);
+    TOPCON("Zoom set to %f", game->config.game_pix_zoom);
     sdl_config_update_all();
 }
 
 //
 // User has entered a command, run it
 //
-uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
+uint8_t config_game_pix_zoom_set (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[3];
 
     if (!s || (*s == '\0')) {
-        game->config.gfx_zoom = 1;
+        game->config.game_pix_zoom = 1;
         CON("USERCFG: gfx zoom enabled (default)");
     } else {
         int val = strtol(s, 0, 10);
-        game->config.gfx_zoom = val;
-        if (game->config.gfx_zoom < 1) {
-            game->config.gfx_zoom = 1;
+        game->config.game_pix_zoom = val;
+        if (game->config.game_pix_zoom < 1) {
+            game->config.game_pix_zoom = 1;
         }
         LOG("USERCFG: gfx zoom set to %d", val);
     }
@@ -1136,7 +1139,7 @@ uint8_t config_errored (tokens_t *tokens, void *context)
 void sdl_config_update_all (void)
 {_
     CON("SDL: OpenGL leave 2D mode");
-    config_gfx_zoom_update();
+    config_game_pix_zoom_update();
     config_gfx_vsync_update();
     CON("SDL: OpenGL enter 2D mode");
     gl_init_2d_mode();
@@ -1222,16 +1225,16 @@ void sdl_loop (void)
         old_g_errored = g_errored;
 
         gl_leave_2d_mode();
-        gl_enter_2d_mode(game->config.inner_pix_width,
-                         game->config.inner_pix_height);
+        gl_enter_2d_mode(game->config.game_pix_width,
+                         game->config.game_pix_height);
 
         glcolor(WHITE);
         game->display();
         blit_fbo_unbind();
 
         gl_leave_2d_mode();
-        gl_enter_2d_mode(game->config.outer_pix_width,
-                         game->config.outer_pix_height);
+        gl_enter_2d_mode(game->config.window_pix_width,
+                         game->config.window_pix_height);
 
         //
         // Less frequent updates
@@ -1323,7 +1326,7 @@ void sdl_loop (void)
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
         glBlendFunc(GL_ONE, GL_ZERO);
-        blit_fbo_outer(FBO_MAP);
+        blit_fbo_window_pix(FBO_MAP);
 
         //
         // Draw the map
@@ -1333,18 +1336,18 @@ void sdl_loop (void)
         }
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        blit_fbo_outer(FBO_WID);
+        blit_fbo_window_pix(FBO_WID);
         blit_fbo_unbind();
 
         glBlendFunc(GL_ONE, GL_ZERO);
         if (unlikely(game->config.gfx_inverted)) {
             glLogicOp(GL_COPY_INVERTED);
             glEnable(GL_COLOR_LOGIC_OP);
-            blit_fbo_outer(FBO_FINAL);
+            blit_fbo_window_pix(FBO_FINAL);
             glLogicOp(GL_COPY);
             glDisable(GL_COLOR_LOGIC_OP);
         } else {
-            blit_fbo_outer(FBO_FINAL);
+            blit_fbo_window_pix(FBO_FINAL);
         }
 
         //
@@ -1399,7 +1402,7 @@ void sdl_flush_display (void)
         glLogicOp(GL_COPY_INVERTED);
         glEnable(GL_COLOR_LOGIC_OP);
     }
-    blit_fbo_inner(FBO_WID);
+    blit_fbo_ui_pix(FBO_WID);
     if (game->config.gfx_inverted) {
         glLogicOp(GL_COPY);
         glDisable(GL_COLOR_LOGIC_OP);
@@ -1407,10 +1410,10 @@ void sdl_flush_display (void)
     SDL_GL_SwapWindow(window);
 }
 
-void config_gfx_zoom_update (void)
+void config_game_pix_zoom_update (void)
 {_
-    if (!game->config.gfx_zoom) {
-        game->config.gfx_zoom = 1;
+    if (!game->config.game_pix_zoom) {
+        game->config.game_pix_zoom = 1;
     }
 
     game->config.tile_width = TILE_WIDTH_LORES;
@@ -1419,25 +1422,45 @@ void config_gfx_zoom_update (void)
     game->config.one_pixel_width = 1;
     game->config.one_pixel_height = 1;
 
-    if (!game->config.gfx_zoom) {
-        ERR("Game->config.gfx_zoom is zero");
+    if (!game->config.game_pix_zoom) {
+        ERR("Game->config.game_pix_zoom is zero");
+        game->config.game_pix_zoom = 3;
         return;
     }
 
-    game->config.scale_pix_width = game->config.gfx_zoom;
-    game->config.scale_pix_height = game->config.gfx_zoom;
-    if (!game->config.scale_pix_width) {
-        ERR("Game->config.scale_pix_width is zero");
+    if (!game->config.ui_pix_zoom) {
+        ERR("Game->config.game_pix_zoom is zero");
+        game->config.ui_pix_zoom = 2;
         return;
     }
 
-    game->config.inner_pix_width =
-        game->config.outer_pix_width / game->config.scale_pix_width;
-    game->config.inner_pix_height =
-        game->config.outer_pix_height / game->config.scale_pix_height;
+    game->config.game_pix_scale_width = game->config.game_pix_zoom;
+    game->config.game_pix_scale_height = game->config.game_pix_zoom;
 
-    float tiles_across = game->config.inner_pix_width / TILE_WIDTH;
-    float tiles_down = game->config.inner_pix_height / TILE_HEIGHT;
+    if (!game->config.game_pix_scale_width) {
+        ERR("Game->config.game_pix_scale_width is zero");
+        return;
+    }
+
+    game->config.ui_pix_scale_width = game->config.ui_pix_zoom;
+    game->config.ui_pix_scale_height = game->config.ui_pix_zoom;
+    if (!game->config.ui_pix_scale_width) {
+        ERR("Game->config.ui_pix_scale_width is zero");
+        return;
+    }
+
+    game->config.game_pix_width =
+        game->config.window_pix_width / game->config.game_pix_scale_width;
+    game->config.game_pix_height =
+        game->config.window_pix_height / game->config.game_pix_scale_height;
+
+    game->config.ui_pix_width =
+        game->config.window_pix_width / game->config.ui_pix_scale_width;
+    game->config.ui_pix_height =
+        game->config.window_pix_height / game->config.ui_pix_scale_height;
+
+    float tiles_across = game->config.game_pix_width / TILE_WIDTH;
+    float tiles_down = game->config.game_pix_height / TILE_HEIGHT;
 
     TILES_ACROSS = (int)tiles_across;
     TILES_DOWN = (int)tiles_down;
@@ -1448,51 +1471,50 @@ void config_gfx_zoom_update (void)
         game->config.one_pixel_height * TILE_HEIGHT;
 
     game->config.video_w_h_ratio =
-        (double)game->config.inner_pix_width /
-        (double)game->config.inner_pix_height;
+        (double)game->config.game_pix_width /
+        (double)game->config.game_pix_height;
 
     game->config.tile_pixel_width =
-        game->config.inner_pix_width / TILES_ACROSS;
+        game->config.game_pix_width / TILES_ACROSS;
     game->config.tile_pixel_height =
-        game->config.inner_pix_height / TILES_DOWN;
+        game->config.game_pix_height / TILES_DOWN;
 
-    CON("SDL: Graphics zoom          : %f", game->config.gfx_zoom);
-    CON("SDL: - config   pix size    : %dx%d", game->config.config_pix_width,
-                                                game->config.config_pix_height);
-    CON("SDL: - outer    pix size    : %dx%d", game->config.outer_pix_width,
-                                                game->config.outer_pix_height);
-    CON("SDL: - inner    pix size    : %dx%d", game->config.inner_pix_width,
-                                                game->config.inner_pix_height);
+    CON("SDL: Window                 : %f", game->config.game_pix_zoom);
+    CON("SDL: - config pixel size    : %dx%d", game->config.config_pix_width,
+                                               game->config.config_pix_height);
+    CON("SDL: - window pixel size    : %dx%d", game->config.window_pix_width,
+                                               game->config.window_pix_height);
+    CON("SDL: Game graphics zoom     : %f", game->config.game_pix_zoom);
+    CON("SDL: - game pixel size      : %dx%d", game->config.game_pix_width,
+                                               game->config.game_pix_height);
+    CON("SDL: UI zoom                : %f", game->config.ui_pix_zoom);
+    CON("SDL: - UI pixel size        : %dx%d", game->config.ui_pix_width,
+                                               game->config.ui_pix_height);
 
     TERM_WIDTH = TERM_WIDTH_DEF;
     TERM_HEIGHT = TERM_HEIGHT_DEF;
-#ifdef SQUARE
-    //
-    // Square tiles but looks a bit odd
-    //
-    game->config.ascii_gl_height = game->config.outer_pix_height / TERM_HEIGHT;
-    game->config.ascii_gl_width = game->config.ascii_gl_height;
-    TERM_WIDTH = game->config.outer_pix_width /  game->config.ascii_gl_width;
-    TERM_HEIGHT = game->config.outer_pix_height /  game->config.ascii_gl_height;
-#else
-    game->config.ascii_gl_width = game->config.outer_pix_width / TERM_WIDTH;
-    game->config.ascii_gl_height = game->config.outer_pix_height / TERM_HEIGHT;
-#endif
+    game->config.ascii_gl_width = UI_FONT_LARGE_WIDTH;
+    game->config.ascii_gl_height = UI_FONT_LARGE_HEIGHT;
+
+    TERM_WIDTH = game->config.ui_pix_width /  game->config.ascii_gl_width;
+    TERM_HEIGHT = game->config.ui_pix_height /  game->config.ascii_gl_height;
 
     if (TERM_WIDTH >= TERM_WIDTH_MAX) {
         LOG("SDL: Exceeded console hit max width  : %d", TERM_WIDTH);
         TERM_WIDTH = TERM_WIDTH_MAX;
         game->config.ascii_gl_width =
-            (float)game->config.outer_pix_width / (float)TERM_WIDTH;
+            (float)game->config.ui_pix_width / (float)TERM_WIDTH;
     }
 
     if (TERM_HEIGHT >= TERM_HEIGHT_MAX) {
         LOG("SDL: Exceeded console hit max height : %d", TERM_HEIGHT);
         TERM_HEIGHT = TERM_HEIGHT_MAX;
         game->config.ascii_gl_height =
-            (float)game->config.outer_pix_height / (float)TERM_HEIGHT;
+            (float)game->config.ui_pix_height / (float)TERM_HEIGHT;
     }
 
+    CON("SDL: - ascii gl size        : %ux%u", 
+        game->config.ascii_gl_width, game->config.ascii_gl_height);
     CON("SDL: - ascii size           : %dx%d", TERM_WIDTH, TERM_HEIGHT);
     CON("SDL: - width to height ratio: %f", game->config.video_w_h_ratio);
 }

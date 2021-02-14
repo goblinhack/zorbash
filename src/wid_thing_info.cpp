@@ -79,8 +79,8 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     {_
         auto w = wid_new_plain(
                     wid_popup_window->wid_popup_container, "ui-circle");
-        point tl = make_point(9, 1);
-        point br = make_point(14, 4);
+        point tl = make_point(6 + 1, 1);
+        point br = make_point(6 + 4, 4);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "ui_circle");
@@ -91,8 +91,8 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     {_
         auto w = wid_new_plain(
                     wid_popup_window->wid_popup_container, "ui-circle");
-        point tl = make_point(10, 2);
-        point br = make_point(13, 3);
+        point tl = make_point(6 + 2, 2);
+        point br = make_point(6 + 3, 3);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "ui_tile_bg");
@@ -368,7 +368,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
     int height = 33;
     point tl = make_point(0, TERM_HEIGHT - 2 - height);
-    point br = make_point(22, TERM_HEIGHT - 2);
+    point br = make_point(16, TERM_HEIGHT - 2);
 
     t->log("Thing info create window");
     wid_thing_info_window = wid_thing_info_create_popup(t, tl, br);

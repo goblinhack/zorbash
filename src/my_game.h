@@ -22,17 +22,18 @@ public:
     // Keep flags int size so the header size will change on a new flag.
     // It does not always for new bools.
     //
-    float              ascii_gl_height              = {};
-    float              ascii_gl_width               = {};
-    float              gfx_zoom                     = 4;
+    float              game_pix_scale_height        = {};
+    float              game_pix_scale_width         = {};
+    float              game_pix_zoom                = 3;
     float              one_pixel_height             = {};
     float              one_pixel_width              = {};
-    float              scale_pix_height             = {};
-    float              scale_pix_width              = {};
     float              tile_pix_height              = {};
     float              tile_pix_width               = {};
     float              tile_pixel_height            = {};
     float              tile_pixel_width             = {};
+    float              ui_pix_scale_height          = {};
+    float              ui_pix_scale_width           = {};
+    float              ui_pix_zoom                  = 2;
     float              video_w_h_ratio              = {};
     int                debug_mode                   = false;
     int                fps_counter                  = false;
@@ -45,14 +46,16 @@ public:
     int                gfx_minimap                  = true;
     int                gfx_show_hidden              = false;
     int                gfx_vsync_enable             = true;
-    uint8_t            tile_height                  = {};
-    uint8_t            tile_width                   = {};
-    int32_t            inner_pix_height             = {};
-    int32_t            inner_pix_width              = {};
-    int32_t            outer_pix_height             = {};
-    int32_t            outer_pix_width              = {};
     int32_t            config_pix_height            = {};
     int32_t            config_pix_width             = {};
+    int32_t            game_pix_height              = {};
+    int32_t            game_pix_width               = {};
+    int32_t            ui_pix_height                = {};
+    int32_t            ui_pix_width                 = {};
+    int32_t            window_pix_height            = {};
+    int32_t            window_pix_width             = {};
+    uint16_t           ascii_gl_height              = {};
+    uint16_t           ascii_gl_width               = {};
     uint32_t           key_action0                  = {};
     uint32_t           key_action1                  = {};
     uint32_t           key_action2                  = {};
@@ -64,9 +67,11 @@ public:
     uint32_t           key_action8                  = {};
     uint32_t           key_action9                  = {};
     uint32_t           key_attack                   = {};
+    uint32_t           key_console                  = {};
     uint32_t           key_drop                     = {};
     uint32_t           key_eat                      = {};
     uint32_t           key_help                     = {};
+    uint32_t           key_inventory                = {};
     uint32_t           key_jump                     = {};
     uint32_t           key_load                     = {};
     uint32_t           key_map_down                 = {};
@@ -82,8 +87,6 @@ public:
     uint32_t           key_save                     = {};
     uint32_t           key_screenshot               = {};
     uint32_t           key_throw                    = {};
-    uint32_t           key_inventory                = {};
-    uint32_t           key_console                  = {};
     uint32_t           key_unused3                  = {};
     uint32_t           key_unused4                  = {};
     uint32_t           key_unused5                  = {};
@@ -94,8 +97,11 @@ public:
     uint32_t           music_volume                 = {};
     uint32_t           sdl_delay                    = {};
     uint32_t           sound_volume                 = {};
+    uint8_t            tile_height                  = {};
+    uint8_t            tile_width                   = {};
 
     void fini(void);
+    void reset(void);
     void dump(std::string prefix, std::ostream &out);
     void log(std::string prefix);
 } Config;

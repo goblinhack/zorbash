@@ -51,13 +51,13 @@ static void game_display_flames_tiles (int w, int h)
                 }
             } else if (r < 50) {
                 cn = DARKRED;
-            } else if (r < 120) {
+            } else if (r < 80) {
                 cn = RED;
-            } else if (r < 140) {
+            } else if (r < 120) {
                 cn = ORANGE;
-            } else if (r < 160) {
+            } else if (r < 140) {
                 cn = YELLOW;
-            } else if (r < 180) {
+            } else if (r < 170) {
                 cn = GRAY90;
             } else {
                 cn = WHITE;
@@ -81,7 +81,7 @@ static void game_display_flames_change (int w, int h)
         auto xr = random_range(w / 4, w - w / 4);
         auto r = random_range(0, 100);
 
-        if (r < 30) {
+        if (r < 60) {
             set(bg, xr - 3, h - 1, GRAY10);
             set(bg, xr - 2, h - 1, GRAY10);
             set(bg, xr - 1, h - 1, GRAY10);
@@ -89,7 +89,7 @@ static void game_display_flames_change (int w, int h)
             set(bg, xr + 1, h - 1, GRAY10);
             set(bg, xr + 2, h - 1, GRAY10);
             set(bg, xr + 3, h - 1, GRAY10);
-        } else if (r < 60) {
+        } else if (r < 90) {
             set(bg, xr - 1, h - 1, BLACK);
             set(bg, xr - 2, h - 1, BLACK);
             set(bg, xr    , h - 1, BLACK);
@@ -103,7 +103,7 @@ static void game_display_flames_change (int w, int h)
             continue;
         }
 
-        int sparks = 1;
+        int sparks = 3;
         while (sparks--) {
             for (auto y = 0; y < h - 1; y++) {
                 auto c0 = get(bg, x, y);

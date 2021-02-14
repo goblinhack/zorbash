@@ -161,8 +161,8 @@ void pixel_to_ascii (int *x, int *y)
     float mx = *x;
     float my = *y;
 
-    float w = game->config.ascii_gl_width * (float)TERM_WIDTH;
-    float h = game->config.ascii_gl_height * (float)TERM_HEIGHT;
+    float w = game->config.window_pix_width;
+    float h = game->config.window_pix_height;
 
     mx /= w;
     my /= h;
@@ -1059,6 +1059,8 @@ static void ascii_blit (void)
 
     float mx = mouse_x;
     float my = mouse_y;
+    const auto dw = game->config.ascii_gl_width;
+    const auto dh = game->config.ascii_gl_height;
 
     tile_y = 0;
     for (y = 0; y < TERM_HEIGHT; y++) {
@@ -1073,8 +1075,8 @@ static void ascii_blit (void)
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;
-            tile_br.x = tile_x + game->config.ascii_gl_width;
-            tile_br.y = tile_y + game->config.ascii_gl_height;
+            tile_br.x = tile_x + dw;
+            tile_br.y = tile_y + dh;
 
             if (!mouse_found) {
                 if ((mx < tile_br.x) &&
@@ -1121,10 +1123,10 @@ static void ascii_blit (void)
                                       bg_color_br);
             }
 
-            tile_x += game->config.ascii_gl_width;
+            tile_x += dw;
         }
 
-        tile_y += game->config.ascii_gl_height;
+        tile_y += dh;
     }
 
     //
@@ -1143,8 +1145,8 @@ static void ascii_blit (void)
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;
-            tile_br.x = tile_x + game->config.ascii_gl_width;
-            tile_br.y = tile_y + game->config.ascii_gl_height;
+            tile_br.x = tile_x + dw;
+            tile_br.y = tile_y + dh;
 
             if (cell->bg2_tile) {
                 color bg2_color_tl = cell->bg2_color_tl;
@@ -1182,10 +1184,10 @@ static void ascii_blit (void)
                    fg2_color_br);
             }
 
-            tile_x += game->config.ascii_gl_width;
+            tile_x += dw;
         }
 
-        tile_y += game->config.ascii_gl_height;
+        tile_y += dh;
     }
 
     tile_y = 0;
@@ -1199,14 +1201,14 @@ static void ascii_blit (void)
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;
-            tile_br.x = tile_x + game->config.ascii_gl_width;
-            tile_br.y = tile_y + game->config.ascii_gl_height;
+            tile_br.x = tile_x + dw;
+            tile_br.y = tile_y + dh;
 
             //
             // Foreground
             //
             {
-                tile_br.x = tile_x + game->config.ascii_gl_width;
+                tile_br.x = tile_x + dw;
                 Tilep tile = cell->fg_tile;
 
                 if (tile) {
@@ -1226,10 +1228,10 @@ static void ascii_blit (void)
                 }
             }
 
-            tile_x += game->config.ascii_gl_width;
+            tile_x += dw;
         }
 
-        tile_y += game->config.ascii_gl_height;
+        tile_y += dh;
     }
 }
 
@@ -1240,6 +1242,8 @@ void ascii_display (void)
 {_
     mouse_found = false;
 
+    gl_enter_2d_mode(game->config.ui_pix_width,
+                     game->config.ui_pix_height);
     blit_init();
     ascii_blit();
     blit_flush();

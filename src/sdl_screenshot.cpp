@@ -20,8 +20,8 @@ void sdl_screenshot (void)
 
 void sdl_screenshot_do (void)
 {_
-    int w = game->config.outer_pix_width;
-    int h = game->config.outer_pix_height;
+    int w = game->config.window_pix_width;
+    int h = game->config.window_pix_height;
 
     static int count = 1;
 

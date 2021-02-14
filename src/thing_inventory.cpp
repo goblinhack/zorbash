@@ -36,8 +36,8 @@ _
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-        p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
-        p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+        p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
+        p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         int cnt = random_range(1, 10);
         for (int c = 0; c < cnt; c++) {
@@ -64,8 +64,8 @@ _
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-	p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
-	p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+	p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
+	p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         point s = (last_blit_tl + last_blit_br) / 2;
         point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
@@ -90,8 +90,8 @@ _
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-        p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
-        p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+        p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
+        p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         level->new_external_particle(
                  what->id,
@@ -138,8 +138,8 @@ _
     }
 
     auto p = (w->abs_tl + w->abs_br) / 2;
-    p.x = (int)(((float)game->config.inner_pix_width / (float)TERM_WIDTH) * (float)p.x);
-    p.y = (int)(((float)game->config.inner_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+    p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
+    p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
     level->new_external_particle(what->id, p, where_to,
                                  isize(TILE_WIDTH, TILE_HEIGHT), 

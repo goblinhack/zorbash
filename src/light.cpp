@@ -415,8 +415,8 @@ void Light::render_triangle_fans (int first)
     }
 
     if (fbo == FBO_FULLMAP_LIGHT) {
-        gl_enter_2d_mode(game->config.inner_pix_width, 
-                         game->config.inner_pix_height);
+        gl_enter_2d_mode(game->config.game_pix_width, 
+                         game->config.game_pix_height);
     }
 }
 

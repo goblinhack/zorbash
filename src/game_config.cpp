@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include <SDL_mixer.h>
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_game.h"
@@ -21,6 +22,93 @@ static WidPopup *game_config_top_window;
 
 void Config::fini (void)
 {_
+}
+
+void Config::reset (void)
+{_
+    game_pix_scale_height        = {};
+    game_pix_scale_width         = {};
+    game_pix_zoom                = 3;
+    one_pixel_height             = {};
+    one_pixel_width              = {};
+    tile_pix_height              = {};
+    tile_pix_width               = {};
+    tile_pixel_height            = {};
+    tile_pixel_width             = {};
+    ui_pix_scale_height          = {};
+    ui_pix_scale_width           = {};
+    ui_pix_zoom                  = 2;
+    video_w_h_ratio              = {};
+    debug_mode                   = false;
+    fps_counter                  = false;
+    gfx_allow_highdpi            = false;
+    gfx_borderless               = true;
+    gfx_fullscreen               = false;
+    gfx_fullscreen_desktop       = true;
+    gfx_inverted                 = false;
+    gfx_lights                   = true;
+    gfx_minimap                  = true;
+    gfx_show_hidden              = false;
+    gfx_vsync_enable             = true;
+    config_pix_height            = {};
+    config_pix_width             = {};
+    game_pix_height              = {};
+    game_pix_width               = {};
+    ui_pix_height                = {};
+    ui_pix_width                 = {};
+    window_pix_height            = {};
+    window_pix_width             = {};
+    ascii_gl_height              = {};
+    ascii_gl_width               = {};
+
+    key_action0                  = {SDL_SCANCODE_0};
+    key_action1                  = {SDL_SCANCODE_1};
+    key_action2                  = {SDL_SCANCODE_2};
+    key_action3                  = {SDL_SCANCODE_3};
+    key_action4                  = {SDL_SCANCODE_4};
+    key_action5                  = {SDL_SCANCODE_5};
+    key_action6                  = {SDL_SCANCODE_6};
+    key_action7                  = {SDL_SCANCODE_7};
+    key_action8                  = {SDL_SCANCODE_8};
+    key_action9                  = {SDL_SCANCODE_9};
+    key_attack                   = {SDL_SCANCODE_SPACE};
+#ifdef __APPLE__
+    //
+    // Delete on mac seems to map to backspace...
+    //
+    key_drop                     = {SDL_SCANCODE_BACKSPACE};
+#else
+    key_drop                     = {SDL_SCANCODE_DELETE};
+#endif
+    key_eat                      = {SDL_SCANCODE_E};
+    key_help                     = {SDL_SCANCODE_H};
+    key_jump                     = {SDL_SCANCODE_J};
+    key_load                     = {SDL_SCANCODE_F11};
+    key_map_down                 = {SDL_SCANCODE_DOWN};
+    key_map_left                 = {SDL_SCANCODE_LEFT};
+    key_map_right                = {SDL_SCANCODE_RIGHT};
+    key_map_up                   = {SDL_SCANCODE_UP};
+    key_move_down                = {SDL_SCANCODE_S};
+    key_move_left                = {SDL_SCANCODE_A};
+    key_move_right               = {SDL_SCANCODE_D};
+    key_move_up                  = {SDL_SCANCODE_W};
+    key_pause                    = {SDL_SCANCODE_P};
+    key_quit                     = {SDL_SCANCODE_Q};
+    key_save                     = {SDL_SCANCODE_F12};
+    key_screenshot               = {SDL_SCANCODE_F10};
+    key_throw                    = {SDL_SCANCODE_T};
+    key_inventory                = {SDL_SCANCODE_I};
+    key_console                  = {SDL_SCANCODE_BACKSLASH};
+    key_unused3                  = 0;
+    key_unused4                  = 0;
+    key_unused5                  = 0;
+    key_use                      = {SDL_SCANCODE_U};
+    key_wait_or_collect          = {SDL_SCANCODE_PERIOD};
+    key_zoom_in                  = {SDL_SCANCODE_Z};
+    key_zoom_out                 = {SDL_SCANCODE_X};
+    music_volume                 = {MIX_MAX_VOLUME / 2};
+    sdl_delay                    = 1;
+    sound_volume                 = {MIX_MAX_VOLUME / 2};
 }
 
 static void game_config_top_destroy (void)
