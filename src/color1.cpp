@@ -225,6 +225,7 @@ void color_init1 (void)
     color_set("darkgray", &DARKGRAY, 169, 169, 169, 255);
     color_set("lightblue", &LIGHTBLUE, 173, 216, 230, 255);
     color_set("cyan", &CYAN, 0, 255, 255, 255);
+    color_set("gold", &GOLD, 255, 215, 0, 255);
 
 #if 0
     color_set("aliceblue", &ALICEBLUE, 240, 248, 255, 255);
@@ -358,6 +359,5 @@ void color_init1 (void)
     color_set("gold2", &GOLD2, 238, 201, 0, 255);
     color_set("gold3", &GOLD3, 205, 173, 0, 255);
     color_set("gold4", &GOLD4, 139, 117, 0, 255);
-    color_set("gold", &GOLD, 255, 215, 0, 255);
 #endif
 }

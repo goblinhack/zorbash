@@ -75,8 +75,8 @@ static void game_display_credits_bg (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(TERM_WIDTH * game->config.ascii_gl_width,
-                    TERM_HEIGHT * game->config.ascii_gl_height));
+              point(game->config.ui_pix_width,
+                    game->config.ui_pix_height));
     blit_flush();
 }
 
@@ -89,8 +89,8 @@ static void game_display_credits_fg (void)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
               point(0,0),
-              point(TERM_WIDTH * game->config.ascii_gl_width,
-                    TERM_HEIGHT * game->config.ascii_gl_height));
+              point(game->config.ui_pix_width,
+                    game->config.ui_pix_height));
     blit_flush();
 }
 
@@ -120,6 +120,24 @@ void Game::credits_select (void)
     wid_set_on_key_down(
       wid_credits_window->wid_popup_container, wid_credits_key_down);
 
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
+    wid_credits_window->log(" ");
     wid_credits_window->log(" ");
     wid_credits_window->log(" ");
     wid_credits_window->log(" ");
