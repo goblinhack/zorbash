@@ -947,7 +947,6 @@ static uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 
 void Game::load_select (void)
 {_
-    TOPCON("Loading a saved game");
     CON("USERCFG: loading a saved game, destroy old");
 
     if (wid_load) {
@@ -957,9 +956,9 @@ void Game::load_select (void)
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
-                          UI_TOPCON_VIS_HEIGHT + 2);
+                          UI_TOPCON_VIS_HEIGHT + 10);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
-                          tl.y + 19);
+                          tl.y + 29);
     auto width = br.x - tl.x;
 
     wid_load = new WidPopup("Game load", tl, br, tile_find_mand("load"), "", false, false);
