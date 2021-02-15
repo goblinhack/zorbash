@@ -121,7 +121,7 @@ static void wid_rightbar_create (void)
 
     {_
         point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
-        point br = make_point(TERM_WIDTH - 1, 13);
+        point br = make_point(TERM_WIDTH - 1, 15);
         color c;
 
         wid_rightbar = wid_new_square_window("wid rightbar");
@@ -152,6 +152,46 @@ static void wid_rightbar_create (void)
             point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
             wid_set_pos(w, tl, br);
             wid_set_bg_tilename(w, "zorbash-1");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        y_at += 1;
+        {_
+            auto w = wid_new_plain(wid_rightbar, "zorbash-2");
+            wid_set_ignore_events(w, true);
+            point tl = make_point(0, y_at);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "zorbash-2");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        y_at += 1;
+        {_
+            auto w = wid_new_plain(wid_rightbar, "zorbash-3");
+            wid_set_ignore_events(w, true);
+            point tl = make_point(0, y_at);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "zorbash-3");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        y_at += 1;
+        {_
+            auto w = wid_new_plain(wid_rightbar, "zorbash-4");
+            wid_set_ignore_events(w, true);
+            point tl = make_point(0, y_at);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "zorbash-4");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        y_at += 1;
+        {_
+            auto w = wid_new_plain(wid_rightbar, "zorbash-5");
+            wid_set_ignore_events(w, true);
+            point tl = make_point(0, y_at);
+            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "zorbash-5");
             wid_set_color(w, WID_COLOR_BG, WHITE);
         }
     }
@@ -252,7 +292,7 @@ static void wid_rightbar_create (void)
         auto w = wid_new_plain(wid_rightbar, "health_status");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "health_status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
@@ -296,7 +336,7 @@ static void wid_rightbar_create (void)
         auto w = wid_new_plain(wid_rightbar, "stamina_status");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "stamina_status");
         wid_set_color(w, WID_COLOR_BG, WHITE);

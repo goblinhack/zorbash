@@ -28,6 +28,17 @@ def init_ui_tile_bg():
 
 def init_ui_status_bar():
     tiles = [
+      "zorbash-0",
+      "zorbash-1",
+      "zorbash-2",
+      "zorbash-3",
+      "zorbash-4",
+      "zorbash-5",
+      "status_bar_16",
+      "status_bar_15",
+      "status_bar_14",
+      "status_bar_13",
+      "status_bar_12",
       "status_bar_11",
       "status_bar_10",
       "status_bar_9",
@@ -40,7 +51,6 @@ def init_ui_status_bar():
       "status_bar_2",
       "status_bar_1",
       "status_bar_0",
-      "",
       "health_status",
       "stamina_status",
       "stats1",
@@ -49,16 +59,7 @@ def init_ui_status_bar():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_status_bar.tga",
-        name="ui_status_bar", width=200, height=24, arr=tiles)
-
-def init_ui_status_bar_title():
-    tiles = [
-      "zorbash-0",
-      "zorbash-1",
-    ]
-    zx.tile_load_arr(
-        file="data/gfx/title_small.tga",
-        name="status_bar_title", width=240, height=48, arr=tiles)
+        name="ui_status_bar", width=128, height=8, arr=tiles)
 
 def init_ui_blood():
     tiles = [
@@ -3369,7 +3370,6 @@ init_title_fg4()
 init_title_bg()
 init_bloom()
 init_ui_status_bar()
-init_ui_status_bar_title()
 init_ui_dead()
 init_ui_credits_bg()
 init_ui_credits_fg()
