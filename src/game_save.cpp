@@ -754,9 +754,9 @@ void Game::save_select (void)
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
-                          UI_TOPCON_VIS_HEIGHT + 2);
+                          UI_TOPCON_VIS_HEIGHT + 10);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
-                          tl.y + 19);
+                          tl.y + 29);
     auto width = br.x - tl.x;
 
     wid_save = new WidPopup("Game save", tl, br, tile_find_mand("save"), "");
