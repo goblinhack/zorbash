@@ -11,6 +11,6 @@ def skill_devoted_thrust_init(name, text_name):
     x.update()
 
 def init():
-    skill_devoted_thrust_init(name="skill_devoted_thrust", text_name="skill_devoted_thrust")
+    skill_devoted_thrust_init(name="skill_devoted_thrust", text_name="devoted thrust")
 
 init()
