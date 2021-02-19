@@ -4,6 +4,8 @@ Zorbash
 Welcome to the lair of the dread beholder, Zorbash. 
 Liberate the Orb of Zorb and defeat Zorbash to win.
 
+(Well you will once the game is finished! :)
+
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.
 
