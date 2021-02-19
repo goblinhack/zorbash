@@ -36,6 +36,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="bag_small", text_name="wee bag")
+    tp_init(name="bag_small", text_name="small bag")
 
 init()
