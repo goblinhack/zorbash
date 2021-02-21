@@ -14,6 +14,10 @@ class WidBag;
 class WidPopup;
 
 #define GAME_MONST_HEALTH_BAR_STEPS  16
+#define GAME_DEFAULT_PIX_ZOOM        4
+#define GAME_MAX_PIX_ZOOM            5
+#define GAME_MIN_PIX_ZOOM            1
+#define GAME_DEFAULT_UI_ZOOM         2
 
 typedef class Config_ {
 public:
@@ -24,7 +28,7 @@ public:
     //
     float              game_pix_scale_height        = {};
     float              game_pix_scale_width         = {};
-    float              game_pix_zoom                = 3;
+    float              game_pix_zoom                = GAME_DEFAULT_PIX_ZOOM;
     float              one_pixel_height             = {};
     float              one_pixel_width              = {};
     float              tile_pix_height              = {};
@@ -33,7 +37,7 @@ public:
     float              tile_pixel_width             = {};
     float              ui_pix_scale_height          = {};
     float              ui_pix_scale_width           = {};
-    float              ui_pix_zoom                  = 2;
+    float              ui_pix_zoom                  = GAME_DEFAULT_UI_ZOOM;
     float              video_w_h_ratio              = {};
     int                debug_mode                   = false;
     int                fps_counter                  = false;

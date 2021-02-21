@@ -1051,22 +1051,20 @@ uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
 void config_game_pix_zoom_in (void)
 {_
     game->config.game_pix_zoom++;
-    if (game->config.game_pix_zoom == 1.5) {
-        game->config.game_pix_zoom = 1.0;
-    } else if (game->config.game_pix_zoom > 5) {
-        game->config.game_pix_zoom = 5;
+    if (game->config.game_pix_zoom > GAME_MAX_PIX_ZOOM) {
+        game->config.game_pix_zoom = GAME_MAX_PIX_ZOOM;
     }
-    TOPCON("Zoom set to %f", game->config.game_pix_zoom);
+    TOPCON("Game zoom set to %f", game->config.game_pix_zoom);
     sdl_config_update_all();
 }
 
 void config_game_pix_zoom_out (void)
 {_
     game->config.game_pix_zoom--;
-    if (game->config.game_pix_zoom < 1) {
-        game->config.game_pix_zoom = 0.5;
+    if (game->config.game_pix_zoom < GAME_MIN_PIX_ZOOM) {
+        game->config.game_pix_zoom = GAME_MIN_PIX_ZOOM;
     }
-    TOPCON("Zoom set to %f", game->config.game_pix_zoom);
+    TOPCON("Game zoom set to %f", game->config.game_pix_zoom);
     sdl_config_update_all();
 }
 
@@ -1078,13 +1076,13 @@ uint8_t config_game_pix_zoom_set (tokens_t *tokens, void *context)
     char *s = tokens->args[3];
 
     if (!s || (*s == '\0')) {
-        game->config.game_pix_zoom = 1;
+        game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
         CON("USERCFG: gfx zoom enabled (default)");
     } else {
         int val = strtol(s, 0, 10);
         game->config.game_pix_zoom = val;
-        if (game->config.game_pix_zoom < 1) {
-            game->config.game_pix_zoom = 1;
+        if (game->config.game_pix_zoom < GAME_MIN_PIX_ZOOM) {
+            game->config.game_pix_zoom = GAME_MIN_PIX_ZOOM;
         }
         LOG("USERCFG: gfx zoom set to %d", val);
     }
@@ -1412,10 +1410,6 @@ void sdl_flush_display (void)
 
 void config_game_pix_zoom_update (void)
 {_
-    if (!game->config.game_pix_zoom) {
-        game->config.game_pix_zoom = 1;
-    }
-
     game->config.tile_width = TILE_WIDTH_LORES;
     game->config.tile_height = TILE_HEIGHT_LORES;
 
@@ -1424,13 +1418,13 @@ void config_game_pix_zoom_update (void)
 
     if (!game->config.game_pix_zoom) {
         ERR("Game->config.game_pix_zoom is zero");
-        game->config.game_pix_zoom = 3;
+        game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
         return;
     }
 
     if (!game->config.ui_pix_zoom) {
-        ERR("Game->config.game_pix_zoom is zero");
-        game->config.ui_pix_zoom = 2;
+        ERR("Game->config.ui_pix_zoom is zero");
+        game->config.ui_pix_zoom = GAME_DEFAULT_UI_ZOOM;
         return;
     }
 
@@ -1479,7 +1473,7 @@ void config_game_pix_zoom_update (void)
     game->config.tile_pixel_height =
         game->config.game_pix_height / TILES_DOWN;
 
-    CON("SDL: Window                 : %f", game->config.game_pix_zoom);
+    CON("SDL: Window:");
     CON("SDL: - config pixel size    : %dx%d", game->config.config_pix_width,
                                                game->config.config_pix_height);
     CON("SDL: - window pixel size    : %dx%d", game->config.window_pix_width,

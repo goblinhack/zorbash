@@ -18,11 +18,14 @@
 #include "my_random.h"
 #include "my_globals.h"
 #include "my_ptrcheck.h"
+#include "my_array_bounds_check.h"
 
 std::map<std::string, class Tile* > all_tiles;
 std::vector<class Tile* > all_tiles_array;
 
 static uint8_t tile_init_done;
+
+#define ENABLE_TILE_BOUNDS
 
 Tile::Tile (void)
 {

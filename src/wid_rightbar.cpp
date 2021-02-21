@@ -10,7 +10,10 @@
 #include "my_thing.h"
 #include "my_string.h"
 #include "my_ui.h"
+#include "my_monst.h"
+#include "my_wid_inventory.h"
 #include "my_ptrcheck.h"
+#include "my_vector_bounds_check.h"
 
 static void wid_rightbar_create(void);
 
@@ -121,8 +124,7 @@ static void wid_rightbar_create (void)
 
     {_
         point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
-        point br = make_point(TERM_WIDTH - 1, 15);
-        color c;
+        point br = make_point(TERM_WIDTH - 1, 52);
 
         wid_rightbar = wid_new_square_window("wid rightbar");
         wid_set_ignore_scroll_events(wid_rightbar, true);
@@ -130,73 +132,12 @@ static void wid_rightbar_create (void)
         wid_set_style(wid_rightbar, UI_WID_STYLE_SOLID_NONE);
         wid_set_on_mouse_over_b(wid_rightbar, wid_rightbar_mouse_over_b);
         wid_set_on_mouse_over_e(wid_rightbar, wid_rightbar_mouse_over_e);
+        wid_set_bg_tilename(wid_rightbar, "ui_status_bar");
+        wid_lower(wid_rightbar);
     }
 
-    int y_at = 0;
-
-    {
-        {_
-            auto w = wid_new_plain(wid_rightbar, "zorbash-0");
-            wid_set_ignore_events(w, true);
-            point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-            wid_set_pos(w, tl, br);
-            wid_set_bg_tilename(w, "zorbash-0");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        y_at += 1;
-        {_
-            auto w = wid_new_plain(wid_rightbar, "zorbash-1");
-            wid_set_ignore_events(w, true);
-            point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-            wid_set_pos(w, tl, br);
-            wid_set_bg_tilename(w, "zorbash-1");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        y_at += 1;
-        {_
-            auto w = wid_new_plain(wid_rightbar, "zorbash-2");
-            wid_set_ignore_events(w, true);
-            point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-            wid_set_pos(w, tl, br);
-            wid_set_bg_tilename(w, "zorbash-2");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        y_at += 1;
-        {_
-            auto w = wid_new_plain(wid_rightbar, "zorbash-3");
-            wid_set_ignore_events(w, true);
-            point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-            wid_set_pos(w, tl, br);
-            wid_set_bg_tilename(w, "zorbash-3");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        y_at += 1;
-        {_
-            auto w = wid_new_plain(wid_rightbar, "zorbash-4");
-            wid_set_ignore_events(w, true);
-            point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-            wid_set_pos(w, tl, br);
-            wid_set_bg_tilename(w, "zorbash-4");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        y_at += 1;
-        {_
-            auto w = wid_new_plain(wid_rightbar, "zorbash-5");
-            wid_set_ignore_events(w, true);
-            point tl = make_point(0, y_at);
-            point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-            wid_set_pos(w, tl, br);
-            wid_set_bg_tilename(w, "zorbash-5");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-    }
-
-    y_at += 1;
+    int y_at = 6;
+    
     {_
         auto w = wid_new_plain(wid_rightbar, "level no");
         wid_set_ignore_events(w, true);
@@ -273,7 +214,7 @@ static void wid_rightbar_create (void)
     // Health
     ///////////////////////////////////////////////////////////////////////////
     {_
-        auto w = wid_new_plain(wid_rightbar, "Health-status-bar");
+        auto w = wid_new_plain(wid_rightbar, "Health-bar");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
@@ -284,18 +225,8 @@ static void wid_rightbar_create (void)
                  (float)UI_HEALTH_BAR_STEPS - 1;
         i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
         i = std::max(i, 0);
-        auto icon = "status_bar_" + std::to_string(i);
-        wid_set_bg_tilename(w, icon);
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
-    {_
-        auto w = wid_new_plain(wid_rightbar, "health_status");
-        wid_set_ignore_events(w, true);
-        point tl = make_point(0, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "health_status");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
+        auto icon = "health_bar_" + std::to_string(i);
+        wid_set_fg_tilename(w, icon);
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "health-value");
@@ -317,7 +248,7 @@ static void wid_rightbar_create (void)
     // stamina
     ///////////////////////////////////////////////////////////////////////////
     {_
-        auto w = wid_new_plain(wid_rightbar, "stamina_status-bar");
+        auto w = wid_new_plain(wid_rightbar, "stamina-bar");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
@@ -328,18 +259,8 @@ static void wid_rightbar_create (void)
                  (float)UI_HEALTH_BAR_STEPS - 1;
         i = std::min(i, UI_HEALTH_BAR_STEPS - 1);
         i = std::max(i, 0);
-        auto icon = "status_bar_" + std::to_string(i);
-        wid_set_bg_tilename(w, icon);
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
-    {_
-        auto w = wid_new_plain(wid_rightbar, "stamina_status");
-        wid_set_ignore_events(w, true);
-        point tl = make_point(0, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "stamina_status");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
+        auto icon = "health_bar_" + std::to_string(i);
+        wid_set_fg_tilename(w, icon);
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "stamina-value");
@@ -355,20 +276,11 @@ static void wid_rightbar_create (void)
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
-    y_at += 1;
+    y_at += 3;
 
     ///////////////////////////////////////////////////////////////////////////
     // ATT DEF STR
     ///////////////////////////////////////////////////////////////////////////
-    {_
-        auto w = wid_new_plain(wid_rightbar, "stats1");
-        wid_set_ignore_events(w, true);
-        point tl = make_point(0, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "stats1");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
     {_
         auto w = wid_new_plain(wid_rightbar, "stats1-value");
         wid_set_ignore_events(w, true);
@@ -392,15 +304,6 @@ static void wid_rightbar_create (void)
     // CON
     ///////////////////////////////////////////////////////////////////////////
     {_
-        auto w = wid_new_plain(wid_rightbar, "stats2");
-        wid_set_ignore_events(w, true);
-        point tl = make_point(0, y_at + 1);
-        point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "stats2");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-    }
-    {_
         auto w = wid_new_plain(wid_rightbar, "stats2-value");
         wid_set_ignore_events(w, true);
         point tl = make_point(0, y_at + 1);
@@ -417,7 +320,103 @@ static void wid_rightbar_create (void)
         wid_set_text(w, tmp);
         wid_set_text_lhs(w, true);
     }
-    y_at += 2;
+    y_at += 4;
+
+    {
+        auto monstp = player->monstp;
+        std::vector<Widp> wid_inventory_items;
+
+        uint8_t item = 0;
+        for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
+            //
+            // slot number
+            //
+            auto slot(std::to_string(i));
+
+            if (item < monstp->inventory_id.size()) {
+                auto tp_id = get(monstp->inventory_id, item);
+                if (!tp_id) {
+                    item++;
+                    continue;
+                }
+
+                auto tpp = tp_find(tp_id);
+                auto tiles = &tpp->tiles;
+
+                if (!tiles) {
+                    item++;
+                    continue;
+                }
+
+                auto tile = tile_first(tiles);
+                if (!tile) {
+                    item++;
+                    continue;
+                }
+
+                auto s = "inventory icon" + std::to_string(i);
+                auto w = wid_new_plain(wid_rightbar, s);
+                auto x = (i % 5) * 3 + 1;
+                auto y = (i / 5) * 3 + 1 + y_at;
+                point tl = make_point(x, y);
+                point br = make_point(x+1, y+1);
+
+                wid_set_pos(w, tl, br);
+                wid_set_fg_tile(w, tile);
+
+                auto weapon = player->weapon_get();
+                if (weapon) {
+                    auto weapon_tp_id = weapon->tp()->id;
+                    auto tp_id = monstp->inventory_id[i];
+                    if (tp_id == weapon_tp_id) {
+                        static Tilep tile;
+                        if (!tile) {
+                            tile = tile_find_mand("cursor.8");
+                        }
+                        wid_set_bg_tile(w, tile);
+                        wid_set_color(w, WID_COLOR_BG, WHITE);
+                    }
+                }
+
+                if (i == game->inventory_highlight_slot) {
+                    if (game->state == Game::STATE_CHOOSING_TARGET) {
+                        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+                    } else {
+                        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+                    }
+                } else {
+                    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
+                }
+
+                wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
+                wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
+
+                if (tpp->is_bag()) {
+                    wid_set_on_mouse_up(w, wid_inventory_item_mouse_up_on_bag);
+                } else {
+                    wid_set_on_mouse_up(w, wid_inventory_item_mouse_up);
+                }
+
+                wid_set_int_context(w, i);
+            }
+            item++;
+        }
+    }
 
     wid_update(wid_rightbar);
+
+    if (game->request_remake_inventory) {
+        if (game->state == Game::STATE_MOVING_ITEMS) {
+            auto slot = game->inventory_highlight_slot;
+            LOG("Inventory: remaking inventory for slot %d", slot);
+
+            auto t = level->inventory_get(slot);
+            if (t) {
+                LOG("Inventory: remaking inventory, remake thing info too");
+                game->wid_thing_info_create(t);
+            } else {
+                LOG("Inventory: remaking inventory, no thing info");
+            }
+        }
+    }
 }

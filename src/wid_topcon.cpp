@@ -10,6 +10,7 @@
 #include "slre.h"
 #include "my_wid_topcon.h"
 #include "my_wid_inventory.h"
+#include "my_wid_rightbar.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
 #include "my_ttf.h"
@@ -148,7 +149,7 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
                 }
             }
         }
-        wid_inventory_init();
+        wid_rightbar_init();
         return true;
     }
 
@@ -233,8 +234,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(0);
-        wid_inventory_init();
+        level->inventory_chosen(9);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action1) {
@@ -242,8 +243,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(1);
-        wid_inventory_init();
+        level->inventory_chosen(0);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action2) {
@@ -251,8 +252,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(2);
-        wid_inventory_init();
+        level->inventory_chosen(1);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action3) {
@@ -260,8 +261,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(3);
-        wid_inventory_init();
+        level->inventory_chosen(2);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action4) {
@@ -269,8 +270,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(4);
-        wid_inventory_init();
+        level->inventory_chosen(3);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action5) {
@@ -278,8 +279,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(5);
-        wid_inventory_init();
+        level->inventory_chosen(4);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action6) {
@@ -287,8 +288,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(6);
-        wid_inventory_init();
+        level->inventory_chosen(5);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action7) {
@@ -296,8 +297,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(7);
-        wid_inventory_init();
+        level->inventory_chosen(6);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action8) {
@@ -305,8 +306,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(8);
-        wid_inventory_init();
+        level->inventory_chosen(7);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_action9) {
@@ -314,8 +315,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(9);
-        wid_inventory_init();
+        level->inventory_chosen(8);
+        wid_rightbar_init();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {

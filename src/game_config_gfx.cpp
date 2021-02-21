@@ -338,7 +338,7 @@ void Game::config_gfx_select (void)
     /////////////////////////////////////////////////////////////////////////
     // fullscreen
     /////////////////////////////////////////////////////////////////////////
-    y_at += 1;
+    y_at += 2;
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Fullscreen");

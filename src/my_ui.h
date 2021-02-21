@@ -32,7 +32,7 @@
 #define UI_FONT_SMALL_HEIGHT       8
 #define UI_FONT_NAME               "data/fonts/6x6.tga"
 #define UI_FONT_PIXEL_SIZE         6
-#define UI_HEALTH_BAR_STEPS        17 // How many graduations on health bar
+#define UI_HEALTH_BAR_STEPS        18 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5
 #define UI_TOPCON_HEIGHT           5 // Scrollbar limit
 #define UI_TOPCON_TEXT_COLOR       UI_TEXT_COLOR
