@@ -15,7 +15,7 @@ def init_ui_circle():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_circle.tga",
-        name="ui_circle", width=64, height=64, arr=tiles)
+        name="ui_circle", width=32, height=32, arr=tiles)
 
 def init_ui_tile_bg():
     tiles = [
@@ -26,40 +26,38 @@ def init_ui_tile_bg():
         name="ui_tile_bg", width=128, height=128, arr=tiles)
 
 
+def init_ui_health_bar():
+    tiles = [
+      "health_bar_17",
+      "health_bar_16",
+      "health_bar_15",
+      "health_bar_14",
+      "health_bar_13",
+      "health_bar_12",
+      "health_bar_11",
+      "health_bar_10",
+      "health_bar_9",
+      "health_bar_8",
+      "health_bar_7",
+      "health_bar_6",
+      "health_bar_5",
+      "health_bar_4",
+      "health_bar_3",
+      "health_bar_2",
+      "health_bar_1",
+      "health_bar_0",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_health_bar.tga",
+        name="ui_health_bar", width=128, height=8, arr=tiles)
+
 def init_ui_status_bar():
     tiles = [
-      "zorbash-0",
-      "zorbash-1",
-      "zorbash-2",
-      "zorbash-3",
-      "zorbash-4",
-      "zorbash-5",
-      "status_bar_16",
-      "status_bar_15",
-      "status_bar_14",
-      "status_bar_13",
-      "status_bar_12",
-      "status_bar_11",
-      "status_bar_10",
-      "status_bar_9",
-      "status_bar_8",
-      "status_bar_7",
-      "status_bar_6",
-      "status_bar_5",
-      "status_bar_4",
-      "status_bar_3",
-      "status_bar_2",
-      "status_bar_1",
-      "status_bar_0",
-      "health_status",
-      "stamina_status",
-      "stats1",
-      "stats2",
-      "",
+      "ui_status_bar",
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_status_bar.tga",
-        name="ui_status_bar", width=128, height=8, arr=tiles)
+        name="ui_status_bar", width=128, height=424, arr=tiles)
 
 def init_ui_blood():
     tiles = [
@@ -3370,6 +3368,7 @@ init_title_fg4()
 init_title_bg()
 init_bloom()
 init_ui_status_bar()
+init_ui_health_bar()
 init_ui_dead()
 init_ui_credits_bg()
 init_ui_credits_fg()

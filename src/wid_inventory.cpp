@@ -49,7 +49,7 @@ uint8_t wid_inventory_init (void)
     return true;
 }
 
-static void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {_
     LOG("Inventory: begin over inventory");
 _
@@ -93,7 +93,7 @@ _
     }
 }
 
-static void wid_inventory_mouse_over_e (Widp w)
+void wid_inventory_mouse_over_e (Widp w)
 {_
     LOG("Inventory: end over inventory");
 _
@@ -135,10 +135,10 @@ _
     //
 }
 
-static uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
-                                                   int32_t x,
-                                                   int32_t y,
-                                                   uint32_t button)
+uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
+                                            int32_t x,
+                                            int32_t y,
+                                            uint32_t button)
 {_
     LOG("Inventory: mouse up over bag");
 _
@@ -173,10 +173,10 @@ _
     return true;
 }
 
-static uint8_t wid_inventory_item_mouse_up (Widp w,
-                                            int32_t x,
-                                            int32_t y,
-                                            uint32_t button)
+uint8_t wid_inventory_item_mouse_up (Widp w,
+                                     int32_t x,
+                                     int32_t y,
+                                     uint32_t button)
 {_
     if (game->state == Game::STATE_MOVING_ITEMS) {
         wid_thing_info_fini();
@@ -215,10 +215,10 @@ static uint8_t wid_inventory_item_mouse_up (Widp w,
     return true;
 }
 
-static uint8_t wid_inventory_mouse_up (Widp w,
-                                       int32_t x,
-                                       int32_t y,
-                                       uint32_t button)
+uint8_t wid_inventory_mouse_up (Widp w,
+                                int32_t x,
+                                int32_t y,
+                                uint32_t button)
 {_
     if (game->state == Game::STATE_MOVING_ITEMS) {
         wid_thing_info_fini();
@@ -240,6 +240,9 @@ static uint8_t wid_inventory_mouse_up (Widp w,
 //
 static void wid_inventory_create (void)
 {_
+    if ((1)) {
+        return;
+    }
     LOG("Inventory: inventory create");
 
     if (game->request_remake_inventory) {
@@ -364,19 +367,6 @@ static void wid_inventory_create (void)
                     wid_set_pos(w, tl, br);
                     wid_set_text_lhs(w, true);
 
-                    if (i == game->inventory_highlight_slot) {
-                        if (game->state == Game::STATE_CHOOSING_TARGET) {
-                            wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
-                        } else {
-                            wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-                        }
-                    } else {
-                        wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
-                    }
-
-                    wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-                    wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-                    wid_set_int_context(w, i);
 
                     if (item < inventory_items) {
                         auto tp_id = monstp->inventory_id[i];
@@ -428,7 +418,7 @@ static void wid_inventory_create (void)
                         if (!tile) {
                             tile = tile_find_mand("right-hand");
                         }
-                        wid_set_fg_tile(w, tile);
+                        wid_set_bg_tile(w, tile);
 
                         y++;
 
