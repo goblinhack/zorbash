@@ -371,7 +371,7 @@ static void wid_rightbar_create (void)
                     if (tp_id == weapon_tp_id) {
                         static Tilep tile;
                         if (!tile) {
-                            tile = tile_find_mand("cursor.8");
+                            tile = tile_find_mand("selected");
                         }
                         wid_set_bg_tile(w, tile);
                         wid_set_color(w, WID_COLOR_BG, WHITE);

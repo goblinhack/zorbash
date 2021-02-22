@@ -430,7 +430,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
             point tl = mid + point(0, - (t->bag_height() + 1));
             point br = tl +  point(t->bag_width(), t->bag_height());
             if (tp->bag_width() * tp->bag_height() < 100) {
-                bag_secondary = new WidBag(t, tl, br, "Wee bag");
+                bag_secondary = new WidBag(t, tl, br, "Small bag");
             } else {
                 bag_secondary = new WidBag(t, tl, br, "Big bag");
             }
