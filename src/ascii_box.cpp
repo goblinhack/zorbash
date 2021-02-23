@@ -10,7 +10,11 @@
 #include "my_ui.h"
 #include "my_main.h"
 
-static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
+static void ascii_put_box__ (int style, 
+                             Tilep bg_tile, 
+                             Tilep fg_tile,
+                             Tilep fg2_tile,
+                             Tilep fg3_tile,
                              int x1, int y1, int x2, int y2,
                              color col_bg, color col_fg,
                              void *context)
@@ -57,9 +61,22 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
                     ascii_set_bg2(x, y, bg_tile, tx, ty, dx, dy);
                     ascii_set_bg2(x, y, col_bg);
                 }
+
+                //
+                // The numbers for fg are offset here as "fg1" is really
+                // the ascii letter tile
+                //
                 if (fg_tile || (col_fg != COLOR_NONE)) {
                     ascii_set_fg2(x, y, fg_tile, tx, ty, dx, dy);
                     ascii_set_fg2(x, y, col_fg);
+                }
+                if (fg2_tile || (col_fg != COLOR_NONE)) {
+                    ascii_set_fg3(x, y, fg2_tile, tx, ty, dx, dy);
+                    ascii_set_fg3(x, y, col_fg);
+                }
+                if (fg3_tile || (col_fg != COLOR_NONE)) {
+                    ascii_set_fg4(x, y, fg3_tile, tx, ty, dx, dy);
+                    ascii_set_fg4(x, y, col_fg);
                 }
                 ascii_set_fg(x, y, ' ');
             }
@@ -168,6 +185,8 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
 static void ascii_put_box_ (int style,
                             Tilep bg_tile,
                             Tilep fg_tile,
+                            Tilep fg2_tile,
+                            Tilep fg3_tile,
                             int x,
                             int y,
                             int width,
@@ -178,7 +197,12 @@ static void ascii_put_box_ (int style,
                             va_list args)
 {_
     if (!*fmt) {
-        ascii_put_box__(style, bg_tile, fg_tile, x, y,
+        ascii_put_box__(style, 
+                        bg_tile, 
+                        fg_tile, 
+                        fg2_tile, 
+                        fg3_tile, 
+                        x, y,
                         x + width - 1, y + height - 1,
                         col_bg, col_text, 0 /* context */);
     } else {
@@ -195,7 +219,12 @@ static void ascii_put_box_ (int style,
         auto b = std::wstring(buf);
         int len = ascii_strlen(b);
 
-        ascii_put_box__(style, bg_tile, fg_tile, x, y,
+        ascii_put_box__(style, 
+                        bg_tile, 
+                        fg_tile, 
+                        fg2_tile, 
+                        fg3_tile, 
+                        x, y,
                         x + width - 1, y + height - 1,
                         col_bg, col_text, 0 /* context */);
 
@@ -203,7 +232,12 @@ static void ascii_put_box_ (int style,
     }
 }
 
-void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const wchar_t *fmt, ...)
+void ascii_put_box (box_args b, int style, 
+                    Tilep bg_tile, 
+                    Tilep fg_tile, 
+                    Tilep fg2_tile, 
+                    Tilep fg3_tile, 
+                    const wchar_t *fmt, ...)
 {_
     va_list args;
 
@@ -227,6 +261,8 @@ void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const w
     ascii_put_box_(style,
                    bg_tile,
                    fg_tile,
+                   fg2_tile,
+                   fg3_tile,
                    b.x,
                    b.y,
                    b.width,

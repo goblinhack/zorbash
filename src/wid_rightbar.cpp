@@ -354,7 +354,7 @@ static void wid_rightbar_create (void)
                     continue;
                 }
 
-                auto s = "inventory icon" + std::to_string(i);
+                auto s = "inventory slot" + std::to_string(i);
                 auto w = wid_new_plain(wid_rightbar, s);
                 auto x = (i % 5) * 3 + 1;
                 auto y = (i / 5) * 3 + 1 + y_at;
@@ -363,21 +363,11 @@ static void wid_rightbar_create (void)
 
                 wid_set_pos(w, tl, br);
                 wid_set_fg_tile(w, tile);
+                wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-                auto weapon = player->weapon_get();
-                if (weapon) {
-                    auto weapon_tp_id = weapon->tp()->id;
-                    auto tp_id = monstp->inventory_id[i];
-                    if (tp_id == weapon_tp_id) {
-                        static Tilep tile;
-                        if (!tile) {
-                            tile = tile_find_mand("selected");
-                        }
-                        wid_set_bg_tile(w, tile);
-                        wid_set_color(w, WID_COLOR_BG, WHITE);
-                    }
-                }
-
+                //
+                // If choosing a target, highlight the item
+                //
                 if (i == game->inventory_highlight_slot) {
                     if (game->state == Game::STATE_CHOOSING_TARGET) {
                         wid_set_color(w, WID_COLOR_TEXT_FG, RED);
@@ -386,6 +376,35 @@ static void wid_rightbar_create (void)
                     }
                 } else {
                     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
+                }
+
+                //
+                // Print highlighted weapon
+                //
+                auto weapon = player->weapon_get();
+                if (weapon) {
+                    auto weapon_tp_id = weapon->tp()->id;
+                    auto tp_id = monstp->inventory_id[i];
+                    if (tp_id == weapon_tp_id) {
+                        static Tilep tile;
+                        if (!tile) {
+                            tile = tile_find_mand("item_wielded");
+                        }
+                        wid_set_fg2_tile(w, tile);
+                    }
+                }
+
+                //
+                // Print item count
+                //
+                //
+                auto count = player->inventory_id_slot_count(i);
+                if (count > 9) {
+                    auto tile = tile_find_mand("item_count_N");
+                    wid_set_fg3_tile(w, tile);
+                } else if (count > 0) {
+                    auto tile = tile_find_mand("item_count_" + std::to_string(count));
+                    wid_set_fg3_tile(w, tile);
                 }
 
                 wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);

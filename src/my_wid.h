@@ -181,6 +181,8 @@ void wid_set_debug(Widp, uint8_t);
 void wid_set_do_not_lower(Widp, uint8_t val);
 void wid_set_do_not_raise(Widp, uint8_t val);
 void wid_set_fg_tilename(Widp, std::string name);
+void wid_set_fg2_tilename(Widp, std::string name);
+void wid_set_fg3_tilename(Widp, std::string name);
 void wid_set_focus(Widp);
 void wid_set_focusable(Widp, uint8_t val);
 void wid_set_ignore_events(Widp, uint8_t);
@@ -444,6 +446,8 @@ public:
 
     Tilep bg_tile {};
     Tilep fg_tile {};
+    Tilep fg2_tile {};
+    Tilep fg3_tile {};
 
     fsize texuv {};
 
@@ -548,6 +552,8 @@ uint8_t wid_is_moving(Widp w);
 void wid_set_style(Widp w, int style);
 void wid_set_bg_tile(Widp w, Tilep tile);
 void wid_set_fg_tile(Widp w, Tilep tile);
+void wid_set_fg2_tile(Widp w, Tilep tile);
+void wid_set_fg3_tile(Widp w, Tilep tile);
 
 extern int wid_mouse_visible;
 extern Widp wid_mouse_template;

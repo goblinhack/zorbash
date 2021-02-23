@@ -25,6 +25,8 @@ class AsciiCell {
 public:
     Tilep fg_tile {};
     Tilep fg2_tile {};
+    Tilep fg3_tile {};
+    Tilep fg4_tile {};
     Tilep bg_tile {};
     Tilep bg2_tile {};
 
@@ -49,6 +51,14 @@ public:
     float fg2_ty {};
     float fg2_dx {};
     float fg2_dy {};
+    float fg3_tx {};
+    float fg3_ty {};
+    float fg3_dx {};
+    float fg3_dy {};
+    float fg4_tx {};
+    float fg4_ty {};
+    float fg4_dx {};
+    float fg4_dy {};
 
     color fg_color_tl;
     color fg_color_bl;
@@ -66,6 +76,14 @@ public:
     color fg2_color_bl;
     color fg2_color_tr;
     color fg2_color_br;
+    color fg3_color_tl;
+    color fg3_color_bl;
+    color fg3_color_tr;
+    color fg3_color_br;
+    color fg4_color_tl;
+    color fg4_color_bl;
+    color fg4_color_tr;
+    color fg4_color_br;
 
     //
     // Is reset each frame, and so although a pointer potentially should be
@@ -218,6 +236,12 @@ bool ascii_is_empty (int x, int y)
     if (cell->fg2_tile) {
         return false;
     }
+    if (cell->fg3_tile) {
+        return false;
+    }
+    if (cell->fg4_tile) {
+        return false;
+    }
     if (cell->tex) {
         return false;
     }
@@ -278,6 +302,34 @@ void ascii_set_fg2 (int x, int y, color c)
     cell->fg2_color_tr = c;
     cell->fg2_color_bl = c;
     cell->fg2_color_br = c;
+}
+
+void ascii_set_fg3 (int x, int y, color c)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    AsciiCell *cell = &getref_no_check(cells, x, y);
+
+    cell->fg3_color_tl = c;
+    cell->fg3_color_tr = c;
+    cell->fg3_color_bl = c;
+    cell->fg3_color_br = c;
+}
+
+void ascii_set_fg4 (int x, int y, color c)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    AsciiCell *cell = &getref_no_check(cells, x, y);
+
+    cell->fg4_color_tl = c;
+    cell->fg4_color_tr = c;
+    cell->fg4_color_bl = c;
+    cell->fg4_color_br = c;
 }
 
 void ascii_set_context (int x, int y, void *context)
@@ -434,6 +486,36 @@ void ascii_set_fg2 (int x, int y, const Tilep tile)
     cell->fg2_dy = 1;
 }
 
+void ascii_set_fg3 (int x, int y, const Tilep tile)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    AsciiCell *cell = &getref_no_check(cells, x, y);
+
+    cell->fg3_tile = tile;
+    cell->fg3_tx = 0;
+    cell->fg3_ty = 0;
+    cell->fg3_dx = 1;
+    cell->fg3_dy = 1;
+}
+
+void ascii_set_fg4 (int x, int y, const Tilep tile)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    AsciiCell *cell = &getref_no_check(cells, x, y);
+
+    cell->fg4_tile = tile;
+    cell->fg4_tx = 0;
+    cell->fg4_ty = 0;
+    cell->fg4_dx = 1;
+    cell->fg4_dy = 1;
+}
+
 void ascii_set_fg2 (int x, int y, const Tilep tile,
                     float tx, float ty, float dx, float dy)
 {
@@ -448,6 +530,38 @@ void ascii_set_fg2 (int x, int y, const Tilep tile,
     cell->fg2_ty = ty;
     cell->fg2_dx = dx;
     cell->fg2_dy = dy;
+}
+
+void ascii_set_fg3 (int x, int y, const Tilep tile,
+                    float tx, float ty, float dx, float dy)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    AsciiCell *cell = &getref_no_check(cells, x, y);
+
+    cell->fg3_tile = tile;
+    cell->fg3_tx = tx;
+    cell->fg3_ty = ty;
+    cell->fg3_dx = dx;
+    cell->fg3_dy = dy;
+}
+
+void ascii_set_fg4 (int x, int y, const Tilep tile,
+                    float tx, float ty, float dx, float dy)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    AsciiCell *cell = &getref_no_check(cells, x, y);
+
+    cell->fg4_tile = tile;
+    cell->fg4_tx = tx;
+    cell->fg4_ty = ty;
+    cell->fg4_dx = dx;
+    cell->fg4_dy = dy;
 }
 
 void ascii_set_fg (int x, int y, const char *tilename)
@@ -468,6 +582,26 @@ void ascii_set_fg2 (int x, int y, const char *tilename)
 void ascii_set_fg2 (int x, int y, const wchar_t c)
 {
     ascii_set_fg2(x, y, font_large->unicode_to_tile(c));
+}
+
+void ascii_set_fg3 (int x, int y, const char *tilename)
+{
+    ascii_set_fg3(x, y, tile_find(tilename));
+}
+
+void ascii_set_fg3 (int x, int y, const wchar_t c)
+{
+    ascii_set_fg3(x, y, font_large->unicode_to_tile(c));
+}
+
+void ascii_set_fg4 (int x, int y, const char *tilename)
+{
+    ascii_set_fg4(x, y, tile_find(tilename));
+}
+
+void ascii_set_fg4 (int x, int y, const wchar_t c)
+{
+    ascii_set_fg4(x, y, font_large->unicode_to_tile(c));
 }
 
 void ascii_putf__ (int x, int y, color fg, color bg, const std::wstring text)
@@ -1182,6 +1316,42 @@ static void ascii_blit (void)
                    fg2_color_tr,
                    fg2_color_bl,
                    fg2_color_br);
+            }
+
+            if (cell->fg3_tile) {
+                color fg3_color_tl = cell->fg3_color_tl;
+                color fg3_color_tr = cell->fg3_color_tr;
+                color fg3_color_bl = cell->fg3_color_bl;
+                color fg3_color_br = cell->fg3_color_br;
+
+                tile_blit_section_colored(
+                   cell->fg3_tile,
+                   fpoint(cell->fg3_tx, cell->fg3_ty),
+                   fpoint(cell->fg3_tx + cell->fg3_dx,
+                          cell->fg3_ty + cell->fg3_dy),
+                   tile_tl, tile_br,
+                   fg3_color_tl,
+                   fg3_color_tr,
+                   fg3_color_bl,
+                   fg3_color_br);
+            }
+
+            if (cell->fg4_tile) {
+                color fg4_color_tl = cell->fg4_color_tl;
+                color fg4_color_tr = cell->fg4_color_tr;
+                color fg4_color_bl = cell->fg4_color_bl;
+                color fg4_color_br = cell->fg4_color_br;
+
+                tile_blit_section_colored(
+                   cell->fg4_tile,
+                   fpoint(cell->fg4_tx, cell->fg4_ty),
+                   fpoint(cell->fg4_tx + cell->fg4_dx,
+                          cell->fg4_ty + cell->fg4_dy),
+                   tile_tl, tile_br,
+                   fg4_color_tl,
+                   fg4_color_tr,
+                   fg4_color_bl,
+                   fg4_color_br);
             }
 
             tile_x += dw;
