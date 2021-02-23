@@ -12,6 +12,7 @@
 #include "my_ui.h"
 #include "my_monst.h"
 #include "my_wid_inventory.h"
+#include "my_sdl.h"
 #include "my_ptrcheck.h"
 #include "my_vector_bounds_check.h"
 
@@ -333,6 +334,19 @@ static void wid_rightbar_create (void)
             //
             auto slot(std::to_string(i));
 
+            //
+            // Always create the slot even if empty as we use this for particles
+            //
+            auto s = "inventory slot" + std::to_string(i);
+            auto w = wid_new_plain(wid_rightbar, s);
+            auto x = (i % 5) * 3 + 1;
+            auto y = (i / 5) * 3 + 1 + y_at;
+            point tl = make_point(x, y);
+            point br = make_point(x+1, y+1);
+
+            wid_set_pos(w, tl, br);
+            wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
             if (item < monstp->inventory_id.size()) {
                 auto tp_id = get(monstp->inventory_id, item);
                 if (!tp_id) {
@@ -354,16 +368,7 @@ static void wid_rightbar_create (void)
                     continue;
                 }
 
-                auto s = "inventory slot" + std::to_string(i);
-                auto w = wid_new_plain(wid_rightbar, s);
-                auto x = (i % 5) * 3 + 1;
-                auto y = (i / 5) * 3 + 1 + y_at;
-                point tl = make_point(x, y);
-                point br = make_point(x+1, y+1);
-
-                wid_set_pos(w, tl, br);
                 wid_set_fg_tile(w, tile);
-                wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
                 //
                 // If choosing a target, highlight the item
@@ -402,7 +407,7 @@ static void wid_rightbar_create (void)
                 if (count > 9) {
                     auto tile = tile_find_mand("item_count_N");
                     wid_set_fg3_tile(w, tile);
-                } else if (count > 0) {
+                } else if (count > 1) {
                     auto tile = tile_find_mand("item_count_" + std::to_string(count));
                     wid_set_fg3_tile(w, tile);
                 }
@@ -438,4 +443,42 @@ static void wid_rightbar_create (void)
             }
         }
     }
+}
+
+bool is_mouse_over_rightbar (void)
+{
+    if (!wid_rightbar) {
+        return false;
+    }
+
+    //
+    // If we are in the portion of the lower screen above the itembar
+    // then do not scroll
+    //
+    int x = mouse_x;
+    int y = mouse_y;
+    pixel_to_ascii(&x, &y);
+
+    static int tlx, tly, brx, bry, cached;
+    if (cached != TERM_HEIGHT) {
+        cached = TERM_HEIGHT;
+    }
+
+    wid_get_tl_x_tl_y_br_x_br_y(wid_rightbar, &tlx, &tly, &brx, &bry);
+
+    //
+    // Add some border
+    //
+    tlx -= 1;
+    brx += 1;
+    tly -= 1;
+    bry += 1;
+
+    if ((x >= tlx) && (x < brx) && (y >= tly)) {
+        //CON("    rightbar %d %d %d", tlx, brx, x);
+        return true;
+    }
+    //CON("NOT rightbar %d %d %d", tlx, brx, x);
+
+    return false;
 }

@@ -9,6 +9,7 @@
 #include "my_dmap.h"
 #include "my_game.h"
 #include "my_wid_inventory.h"
+#include "my_wid_rightbar.h"
 #include "my_sdl.h"
 #include "my_thing.h"
 #include "my_wid.h"
@@ -31,7 +32,7 @@ void Thing::cursor_hover_over_check (void)
 
     if ((mx >= tblit_tl.x) && (mx <= tblit_br.x)) {
         if ((my >= tblit_tl.y) && (my <= tblit_br.y)) {
-            if (is_mouse_over_inventory()) {
+            if (is_mouse_over_rightbar()) {
                 return;
             }
 

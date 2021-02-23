@@ -13,3 +13,4 @@ uint8_t wid_rightbar_init(void);
 // Global widgets.
 //
 extern Widp wid_rightbar_window;
+extern bool is_mouse_over_rightbar(void);

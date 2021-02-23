@@ -22,6 +22,7 @@
 #include "my_ascii.h"
 #include "my_gl.h"
 #include "my_wid_inventory.h"
+#include "my_wid_rightbar.h"
 #include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
@@ -5913,7 +5914,7 @@ void wid_tick_all (void)
     //
     if (game->request_remake_inventory) {
         LOG("Handle request to remake inventory");
-        wid_inventory_init();
+        wid_rightbar_init();
         game->request_remake_inventory = false;
     }
 
