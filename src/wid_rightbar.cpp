@@ -12,6 +12,7 @@
 #include "my_ui.h"
 #include "my_monst.h"
 #include "my_wid_inventory.h"
+#include "my_wid_skillbox.h"
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
 #include "my_vector_bounds_check.h"
@@ -131,8 +132,6 @@ static void wid_rightbar_create (void)
         wid_set_ignore_scroll_events(wid_rightbar, true);
         wid_set_pos(wid_rightbar, tl, br);
         wid_set_style(wid_rightbar, UI_WID_STYLE_SOLID_NONE);
-        wid_set_on_mouse_over_b(wid_rightbar, wid_rightbar_mouse_over_b);
-        wid_set_on_mouse_over_e(wid_rightbar, wid_rightbar_mouse_over_e);
         wid_set_bg_tilename(wid_rightbar, "ui_status_bar");
         wid_lower(wid_rightbar);
     }
@@ -284,7 +283,8 @@ static void wid_rightbar_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_rightbar, "stats1-value");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
@@ -306,7 +306,8 @@ static void wid_rightbar_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_rightbar, "stats2-value");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
@@ -323,6 +324,9 @@ static void wid_rightbar_create (void)
     }
     y_at += 4;
 
+    //
+    // Inventory items
+    //
     {
         auto monstp = player->monstp;
         std::vector<Widp> wid_inventory_items;
@@ -335,12 +339,25 @@ static void wid_rightbar_create (void)
             auto slot(std::to_string(i));
 
             //
-            // Always create the slot even if empty as we use this for particles
+            // Always create the slot even if empty as we use this for 
+            // particles when dropping items.
             //
-            auto s = "inventory slot" + std::to_string(i);
-            auto w = wid_new_plain(wid_rightbar, s);
             auto x = (i % 5) * 3 + 1;
             auto y = (i / 5) * 3 + 1 + y_at;
+
+            {
+                auto w = wid_new_plain(wid_rightbar, "inventory slot bg");
+                point tl = make_point(x-1, y-1);
+                point br = make_point(x+2, y+2);
+                wid_set_shape_none(w);
+                wid_set_pos(w, tl, br);
+                wid_set_int_context(w, i);
+                wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
+                wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
+            }
+
+            auto s = "inventory slot" + std::to_string(i);
+            auto w = wid_new_plain(wid_rightbar, s);
             point tl = make_point(x, y);
             point br = make_point(x+1, y+1);
 
@@ -402,7 +419,6 @@ static void wid_rightbar_create (void)
                 //
                 // Print item count
                 //
-                //
                 auto count = player->inventory_id_slot_count(i);
                 if (count > 9) {
                     auto tile = tile_find_mand("item_count_N");
@@ -421,6 +437,80 @@ static void wid_rightbar_create (void)
                     wid_set_on_mouse_up(w, wid_inventory_item_mouse_up);
                 }
 
+                wid_set_int_context(w, i);
+            }
+            item++;
+        }
+    }
+
+    //
+    // Skills
+    //
+    y_at += 8;
+    {
+        auto monstp = player->monstp;
+        std::vector<Widp> wid_skillbox_items;
+
+        uint8_t item = 0;
+        for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
+            //
+            // slot number
+            //
+            auto slot(std::to_string(i));
+
+            //
+            // Always create the slot even if empty as we use this for particles
+            //
+            auto s = "skill slot" + std::to_string(i);
+            auto w = wid_new_plain(wid_rightbar, s);
+            auto x = (i % 5) * 3 + 1;
+            auto y = (i / 5) * 3 + 1 + y_at;
+            point tl = make_point(x, y);
+            point br = make_point(x+1, y+1);
+
+            wid_set_pos(w, tl, br);
+            wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+            if (item < monstp->skillbox_id.size()) {
+                auto tp_id = get(monstp->skillbox_id, item);
+                if (!tp_id) {
+                    item++;
+                    continue;
+                }
+
+                auto tpp = tp_find(tp_id);
+                auto tiles = &tpp->tiles;
+
+                if (!tiles) {
+                    item++;
+                    continue;
+                }
+
+                auto tile = tile_first(tiles);
+                if (!tile) {
+                    item++;
+                    continue;
+                }
+
+                wid_set_fg_tile(w, tile);
+
+                //
+                // If choosing a target, highlight the item
+                //
+                if (i == game->skillbox_highlight_slot) {
+                    if (game->state == Game::STATE_CHOOSING_TARGET) {
+                        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+                    } else {
+                        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+                    }
+                } else {
+                    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
+                }
+
+#if 0
+                wid_set_on_mouse_over_b(w, wid_skillbox_mouse_over_b);
+                wid_set_on_mouse_over_e(w, wid_skillbox_mouse_over_e);
+#endif
                 wid_set_int_context(w, i);
             }
             item++;
