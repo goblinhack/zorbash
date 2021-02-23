@@ -16,7 +16,7 @@
 #include "my_wid_popup.h"
 #include "my_game.h"
 #include "my_level.h"
-#include "my_wid_inventory.h"
+#include "my_wid_rightbar.h"
 #include "my_wid_thing_info.h"
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
@@ -114,8 +114,7 @@ _
 
     t->log("In transit item place");
 
-    int slot;
-    if (is_mouse_over_inventory_slot(slot)) {
+    if (is_mouse_over_rightbar()) {
         t->log("Is over inventory");
         if (game->level->player->carry(t)) {
             t->log("Placed in inventory");

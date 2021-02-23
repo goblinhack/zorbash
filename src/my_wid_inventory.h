@@ -12,11 +12,6 @@ uint8_t wid_inventory_init(void);
 //
 // Global widgets.
 //
-extern Widp wid_inventory_window;
-
-extern bool is_mouse_over_inventory(void);
-extern bool is_mouse_over_inventory_slot(int &slot);
-
 void wid_inventory_mouse_over_b(Widp w, int32_t relx, int32_t rely, 
                                 int32_t wheelx, int32_t wheely);
 void wid_inventory_mouse_over_e(Widp w);

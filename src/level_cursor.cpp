@@ -167,10 +167,6 @@ void Level::cursor_find_on_visible_things (
 //
 void Level::cursor_move (void)
 {_
-    if (is_mouse_over_inventory()) {
-        return;
-    }
-
     if (is_mouse_over_any_bag()) {
         return;
     }
