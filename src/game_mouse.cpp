@@ -150,6 +150,13 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
         return false;
     }
 
+    auto w = wid_find_under_mouse();
+    if (w) {
+        if (w->name != "wid topcon window") {
+            level->cursor_path_clear();
+        }
+    }
+
     if (level->timestamp_dungeon_created &&
       time_have_x_tenths_passed_since(10, level->timestamp_dungeon_created)) {
         if (level->cursor) {_

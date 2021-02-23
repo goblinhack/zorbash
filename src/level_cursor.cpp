@@ -18,11 +18,14 @@
 
 void Level::cursor_check_if_scroll_needed (void)
 {_
+    //
+    // Not sure why I have this and what it does :)
+    //
     if (map_follow_player) {
         if (cursor) {
             if (player) {
                 auto d = distance(player->mid_at, cursor->mid_at);
-                if (d > std::min(TILES_ACROSS/2, TILES_DOWN/2)) {
+                if (d > std::min(TILES_ACROSS, TILES_DOWN)) {
                     cursor->move(player->mid_at);
                 }
             }
