@@ -85,7 +85,7 @@ _
         std::string name = "inventory slot" + std::to_string(slot);
         auto w = wid_find(name);
         if (!w) {
-            log("Could not find wid %s", name.c_str());
+            err("Could not find wid %s", name.c_str());
             return;
         }
 
@@ -133,7 +133,7 @@ _
     std::string name = "inventory slot" + std::to_string(slot);
     auto w = wid_find(name);
     if (!w) {
-        log("Could not find wid %s", name.c_str());
+        err("Could not find wid %s", name.c_str());
         return;
     }
 

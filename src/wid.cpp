@@ -1343,6 +1343,16 @@ static Tilep wid_get_fg_tile (Widp w)
     return (w->fg_tile);
 }
 
+static Tilep wid_get_fg2_tile (Widp w)
+{_
+    return (w->fg2_tile);
+}
+
+static Tilep wid_get_fg3_tile (Widp w)
+{_
+    return (w->fg3_tile);
+}
+
 void wid_set_bg_tile (Widp w, Tilep tile)
 {
     w->bg_tile = tile;
@@ -1351,6 +1361,16 @@ void wid_set_bg_tile (Widp w, Tilep tile)
 void wid_set_fg_tile (Widp w, Tilep tile)
 {
     w->fg_tile = tile;
+}
+
+void wid_set_fg2_tile (Widp w, Tilep tile)
+{
+    w->fg2_tile = tile;
+}
+
+void wid_set_fg3_tile (Widp w, Tilep tile)
+{
+    w->fg3_tile = tile;
 }
 
 void wid_set_bg_tilename (Widp w, std::string name)
@@ -1379,6 +1399,34 @@ void wid_set_fg_tilename (Widp w, std::string name)
     }
 
     w->fg_tile = tile;
+}
+
+void wid_set_fg2_tilename (Widp w, std::string name)
+{_
+    Tilep tile = tile_find(name);
+    if (!tile) {
+        ERR("Failed to find wid tile %s", name.c_str());
+    }
+
+    if (!w) {
+        DIE("Widget does not exist to set tile %s", name.c_str());
+    }
+
+    w->fg2_tile = tile;
+}
+
+void wid_set_fg3_tilename (Widp w, std::string name)
+{_
+    Tilep tile = tile_find(name);
+    if (!tile) {
+        ERR("Failed to find wid tile %s", name.c_str());
+    }
+
+    if (!w) {
+        DIE("Widget does not exist to set tile %s", name.c_str());
+    }
+
+    w->fg3_tile = tile;
 }
 
 //
@@ -5610,6 +5658,8 @@ static void wid_display (Widp w,
     auto height = wid_get_height(w);
     Tilep bg_tile = wid_get_bg_tile(w);
     Tilep fg_tile = wid_get_fg_tile(w);
+    Tilep fg2_tile = wid_get_fg2_tile(w);
+    Tilep fg3_tile = wid_get_fg3_tile(w);
 
     point tl;
     point br;
@@ -5652,7 +5702,8 @@ static void wid_display (Widp w,
     }
 
     if (w->square) {
-        ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, L"");
+        ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, 
+                      fg2_tile, fg3_tile, L"");
     } else {
         // shape none
     }
