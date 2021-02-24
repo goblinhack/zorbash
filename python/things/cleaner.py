@@ -27,7 +27,6 @@ def tp_init(name, text_name, short_text_name):
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_bounce_on_move(True)
     x.set_gfx_health_bar_shown(True)
-    x.set_gfx_moves_ahead_shown(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
@@ -72,7 +71,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
     x.set_text_a_or_an("a");
-    x.set_text_description("A dungeon auto cleaner jelly thingy")
+    x.set_text_description("A dungeon auto cleaner jelly thingy.")
     x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

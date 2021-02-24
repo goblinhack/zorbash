@@ -40,7 +40,7 @@ void Level::create (point3d at, int seed)
     log("-");
 
     if (!ret) {
-        err("Faile to create level");
+        err("Failed to create level");
     }
 
     update_map();

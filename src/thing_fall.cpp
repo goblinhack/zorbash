@@ -111,7 +111,17 @@ bool Thing::fall_to_next_level (void)
 
     log("Try to fall");
 _
+    //
+    // Fall from a dungeon to the next dungeon, 2 levels down
+    //
     auto where_to = level->world_at + point3d(0, 0, 2);
+    if (level->is_sewer_level) {
+        //
+        // If in a sewer then we drop only one level to the next dungeon.
+        //
+        where_to = level->world_at + point3d(0, 0, 1);
+    }
+
     game->init_level(where_to);
     if (is_player()) {
         game->current_level = where_to;

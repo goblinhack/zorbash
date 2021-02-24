@@ -71,4 +71,5 @@ std::wstring ltrim_ws(const std::wstring& s);
 std::wstring rtrim_ws(const std::wstring& s);
 std::wstring trim_ws(const std::wstring& s);
 std::string& string_timestamp(void);
+std::string strerror_to_string(const int err);
 #endif

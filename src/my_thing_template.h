@@ -104,7 +104,7 @@ private:
     int _gfx_health_bar_shown {};
     int _gfx_health_bar_shown_only_when_injured {};
     int _gfx_is_rrr99 {};
-    int _gfx_moves_ahead_shown {};
+    int _gfx_unused_flag {};
     int _gfx_on_fire_anim {};
     int _gfx_oversized_but_sitting_on_the_ground {};
     int _gfx_show_outlined {};
@@ -451,7 +451,7 @@ public:
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
     int gfx_is_rrr99(void) const;
-    int gfx_moves_ahead_shown(void) const;
+    int gfx_unused_flag(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;
@@ -690,7 +690,7 @@ public:
     void set_gfx_health_bar_shown(int);
     void set_gfx_health_bar_shown_only_when_injured(int);
     void set_gfx_is_rrr99(int);
-    void set_gfx_moves_ahead_shown(int);
+    void set_gfx_unused_flag(int);
     void set_gfx_on_fire_anim(int);
     void set_gfx_oversized_but_sitting_on_the_ground(int);
     void set_gfx_show_outlined(int);

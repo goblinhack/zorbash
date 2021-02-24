@@ -31,7 +31,6 @@
 #define THING_HEALTH_BLOODIED_PCT2 15   // More...
 #define THING_HEALTH_BLOODIED_PCT3 15   // More...
 #define THING_HEALTH_BLOODIED_PCT4 5    // Lots of blood on screen
-#define THING_TICK_MAX_MOVES_AHEAD 1    // How many moves ahead things get
 #define MAX_BAG_WIDTH              20
 #define MAX_BAG_HEIGHT             20
 

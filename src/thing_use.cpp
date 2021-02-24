@@ -67,7 +67,7 @@ bool Thing::use (Thingp what)
     log("Trying to use: %s", what->to_string().c_str());
 _
     if (what->is_weapon()) {
-        TOPCON("You wield the %s", what->text_the().c_str());
+        TOPCON("You wield the %s.", what->text_the().c_str());
         if (is_player()) {
             game->tick_begin("player used an item");
         }
@@ -78,14 +78,14 @@ _
             game->tick_begin("player ate an item");
         }
     } else if (what->is_potion()) {
-        TOPCON("You quaff the %s", what->text_the().c_str());
+        TOPCON("You quaff the %s.", what->text_the().c_str());
         used(what, this);
         if (is_player()) {
             game->tick_begin("player drunk an item");
         }
     } else if (!what->is_usable()) {
         if (is_player()) {
-            TOPCON("I don't know how to use %s", what->text_the().c_str());
+            TOPCON("I don't know how to use %s.", what->text_the().c_str());
         }
         if (is_player()) {
             game->tick_begin("player tried to use something they could not");

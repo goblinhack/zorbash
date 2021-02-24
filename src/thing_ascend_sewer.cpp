@@ -99,7 +99,7 @@ bool Thing::ascend_sewer (void)
 
     if (is_player()) {
         game->level = l;
-        TOPCON("You ascend out of the muck");
+        TOPCON("You ascend out of the wriggling filthy sewer.");
     }
 
     log("Move to previous level exit");

@@ -46,7 +46,7 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (is_player()) {
-        TOPCON("RIP: %s", reason);
+        TOPCON("RIP: %s.", reason);
         TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
         level->map_follow_player = false;
@@ -54,7 +54,7 @@ void Thing::kill (Thingp killer, const char *reason)
         log("%s is dead, %s", text_The().c_str(), reason);
         if (killer && (killer != this)) {
             if (killer->is_player()) {
-                TOPCON("%s is dead, %s", text_The().c_str(), reason);
+                TOPCON("%s is dead, %s.", text_The().c_str(), reason);
             }
         }
     }
@@ -117,7 +117,7 @@ void Thing::kill (Thingp killer, const char *reason)
         level_push();
         auto p = level->player;
         if (p) {
-            TOPCON("The door crashes open");
+            TOPCON("The door crashes open.");
             p->update_light();
         }
     }

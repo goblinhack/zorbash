@@ -153,7 +153,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
                 }
             } else {
                 if (is_player()) {
-                    TOPCON("%%fg=orange$It burns as you shove it, but you avoid the flames");
+                    TOPCON("%%fg=orange$It burns as you shove it, but you avoid the flames.");
                 }
             }
         }

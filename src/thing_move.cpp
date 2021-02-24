@@ -13,25 +13,14 @@
 #include "my_thing_template.h"
 #include "my_ptrcheck.h"
 
-void Thing::move_completed (void)
+void Thing::move_reset_timestamps (void)
 {_
     if (is_player()) {
         if (check_anything_to_carry()) {
-            BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items",
+            BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items.",
                    SDL_GetScancodeName(
                         (SDL_Scancode)game->config.key_wait_or_collect));
         }
-
-#if 0
-        if (THING_TICK_MAX_MOVES_AHEAD == 1) {
-            for (auto i : level->all_active_things) {
-                auto t = i.second;
-                if (t->is_monst()) {
-                    t->set_tick(game->tick_current);
-                }
-            }
-        }
-#endif
     }
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);
@@ -47,11 +36,9 @@ void Thing::move_finish (void)
     // Set this so that we can pick up items again at the last location.
     //
     set_where_i_dropped_an_item_last(point(-1, -1));
-    move_completed();
+    move_reset_timestamps();
 
     log("Move finish");
-    set_timestamp_move_begin(0);
-    set_timestamp_move_end(0);
     update_interpolated_position();
 }
 
@@ -203,7 +190,7 @@ _
                 if ((0)) {
                     if (is_player()) {
                         std::string s = t->text_The() + " attacks as you run";
-                        TOPCON("%s", s.c_str());
+                        TOPCON("%s.", s.c_str());
                     }
                 }
             }
@@ -291,7 +278,7 @@ void Thing::update_interpolated_position (void)
             new_pos = mid_at;
             last_mid_at = mid_at;
 
-            move_completed();
+            move_reset_timestamps();
         }
 
         //
@@ -469,6 +456,7 @@ void Thing::move_to (fpoint to)
     move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
+
     update_pos(to, false);
 }
 
@@ -477,6 +465,7 @@ void Thing::move_to (fpoint to, uint32_t speed)
     move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
+
     update_pos(to, false, speed);
 }
 
@@ -484,6 +473,22 @@ void Thing::move_delta (fpoint delta)
 {_
     move_finish();
     move_set_dir_from_delta(delta);
+
+    //
+    // If the move finish ended up doing something like moving into
+    // a sewer, then we need to abort the delta move
+    //
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_descend_sewer || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_sewer || 
+        is_jumping) { 
+        return;
+    }
+
     update_pos(mid_at + delta, false);
 }
 
@@ -492,29 +497,23 @@ void Thing::move_to_immediately (fpoint to)
     move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
+
+    //
+    // If the move finish ended up doing something like moving into
+    // a sewer, then we need to abort the delta move
+    //
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_descend_sewer || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_sewer || 
+        is_jumping) { 
+        return;
+    }
+
     update_pos(to, true);
-    move_finish();
-
-    //
-    // End of jump handles this
-    //
-    if (!is_jumping) {
-        location_check();
-    }
-
-    if (is_player()) {
-        if (!level->map_follow_player) {
-            level->map_follow_player = true;
-            level->cursor_needs_update = true;
-        }
-    }
-}
-
-void Thing::move_to_immediately_delta (fpoint delta)
-{_
-    move_finish();
-    move_set_dir_from_delta(delta);
-    update_pos(mid_at + delta, true);
     move_finish();
 
     //

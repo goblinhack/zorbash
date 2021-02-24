@@ -8,7 +8,7 @@ def tp_init(name):
     x.set_is_able_to_fall(False)
     x.set_is_the_grid(True)
     x.set_text_a_or_an("the");
-    x.set_text_description("The grid")
+    x.set_text_description("The grid.")
     x.set_z_depth(zx.MAP_DEPTH_THE_GRID)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 

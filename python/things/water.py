@@ -16,7 +16,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_gfx_water(True)
     x.set_is_shallow_water(True)
     x.set_text_a_or_an("the");
-    x.set_text_description("Some shallow water")
+    x.set_text_description("Some shallow water.")
     x.set_z_depth(zx.MAP_DEPTH_WATER)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 

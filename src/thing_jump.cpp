@@ -59,7 +59,7 @@ bool Thing::try_to_jump (point to)
     if (level->is_oob(x, y)) {_
         log("No, oob");
         if (is_player()) {
-            TOPCON("You can't jump into the void");
+            TOPCON("You can't jump into the void.");
         }
         return false;
     }
@@ -73,7 +73,7 @@ bool Thing::try_to_jump (point to)
         }
 
         if (is_player()) {
-            TOPCON("You can't jump into the unknown");
+            TOPCON("You can't jump into the unknown.");
         }
         return false;
     }
@@ -109,7 +109,7 @@ bool Thing::try_to_jump (point to)
         if (distance(mid_at, fpoint(x, y)) < 2) {_
             log("No, too far");
             if (is_player()) {
-                TOPCON("You can't jump quite that far");
+                TOPCON("You can't jump quite that far.");
             }
             return false;
         }
@@ -122,7 +122,7 @@ bool Thing::try_to_jump (point to)
         level->is_movement_blocking_soft(x, y)) {_
         log("No, jump failed, into obstacle");
         if (is_player()) {
-            TOPCON("You can't jump quite into solid objects");
+            TOPCON("You can't jump quite into solid objects.");
         }
         return false;
     }
@@ -131,7 +131,7 @@ bool Thing::try_to_jump (point to)
         if (!level->is_dungeon(x, y)) {_
             log("No, jump failed, not dungeon");
             if (is_player()) {
-                TOPCON("You can't jump outside the dungeon");
+                TOPCON("You can't jump outside the dungeon.");
             }
             return false;
         }
@@ -141,7 +141,7 @@ bool Thing::try_to_jump (point to)
             level->is_descend_dungeon(x, y)) {_
             log("No, jump failed, onto monst");
             if (is_player()) {
-                TOPCON("You can't quite into that");
+                TOPCON("You can't quite into that.");
             }
             return false;
         }
@@ -149,7 +149,7 @@ bool Thing::try_to_jump (point to)
         if (collision_obstacle(point(x, y))) {_
             log("No, jump failed, avoid destination");
             if (is_player()) {
-                TOPCON("You can't quite onto that");
+                TOPCON("You can't quite onto that.");
             }
             return false;
         }

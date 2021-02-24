@@ -199,7 +199,7 @@ void pixel_to_ascii (int *x, int *y)
     *x = mx;
     *y = my;
 
-    // TOPCON("%f %f -> %d %d", mx, my, *x, *y); 
+    // TOPCON("%f %f -> %d %d.", mx, my, *x, *y); 
 }
 
 static int ascii_ok_for_scissors (int x, int y)

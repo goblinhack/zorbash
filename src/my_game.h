@@ -240,7 +240,6 @@ public:
     //
     // Temporary for the status bar
     //
-    std::array<Tilep, THING_TICK_MAX_MOVES_AHEAD + 1> tile_cache_moves_ahead;
     std::array<Tilep, GAME_MONST_HEALTH_BAR_STEPS + 1>  tile_cache_health;
 
     //

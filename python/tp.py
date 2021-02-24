@@ -406,8 +406,8 @@ class Tp:
     def set_is_cursor_can_hover_over_but_needs_double_click(self, value):
         zx.tp_set_is_cursor_can_hover_over_but_needs_double_click(self, value)
 
-    def set_gfx_moves_ahead_shown(self, value):
-        zx.tp_set_gfx_moves_ahead_shown(self, value)
+    def set_gfx_unused_flag(self, value):
+        zx.tp_set_gfx_unused_flag(self, value)
 
     def set_gfx_health_bar_shown_only_when_injured(self, value):
         zx.tp_set_gfx_health_bar_shown_only_when_injured(self, value)

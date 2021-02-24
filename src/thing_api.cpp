@@ -855,9 +855,9 @@ int Thing::is_cursor_can_hover_over_but_needs_double_click(void) const
     return (tp()->is_cursor_can_hover_over_but_needs_double_click());
 }
 
-int Thing::gfx_moves_ahead_shown(void) const
+int Thing::gfx_unused_flag(void) const
 {_
-    return (tp()->gfx_moves_ahead_shown());
+    return (tp()->gfx_unused_flag());
 }
 
 int Thing::gfx_health_bar_shown_only_when_injured(void) const
@@ -1613,21 +1613,10 @@ int Thing::incr_keys (void)
 ////////////////////////////////////////////////////////////////////////////
 // tick
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::set_max_tick_difference (void)
-{_
-    if (game->tick_current > THING_TICK_MAX_MOVES_AHEAD) {
-        monstp->tick = std::max(monstp->tick,
-                                game->tick_current - 
-                                THING_TICK_MAX_MOVES_AHEAD);
-    }
-    return (monstp->tick);
-}
-
 uint32_t Thing::get_tick (void)
 {_
     if (monstp) {
         verify(monstp);
-        set_max_tick_difference();
         return (monstp->tick);
     } else {
         return (0);
@@ -1648,61 +1637,40 @@ uint32_t Thing::set_tick (uint32_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->tick = v);
-    n = set_max_tick_difference();
-    return (n);
+    monstp->tick = v;
+    return (monstp->tick);
 }
 
 uint32_t Thing::decr_tick (uint32_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto o = monstp->tick;
-    auto n = set_max_tick_difference();
-    if (n != o) {
-        return n;
-    }
-    n = (monstp->tick -= v);
-    return (n);
+    monstp->tick -= v;
+    return (monstp->tick);
 }
 
 uint32_t Thing::incr_tick (uint32_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto o = monstp->tick;
-    auto n = set_max_tick_difference();
-    if (n != o) {
-        return n;
-    }
-    n = (monstp->tick += v);
-    return (n);
+    monstp->tick += v;
+    return (monstp->tick);
 }
 
 uint32_t Thing::decr_tick (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto o = monstp->tick;
-    auto n = set_max_tick_difference();
-    if (n != o) {
-        return n;
-    }
-    n = (monstp->tick--);
-    return (n);
+    monstp->tick--;
+    return (monstp->tick);
 }
 
 uint32_t Thing::incr_tick (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto o = monstp->tick;
-    auto n = set_max_tick_difference();
-    if (n != o) {
-        return n;
-    }
-    n = (monstp->tick++);
-    return (n);
+    monstp->tick++;
+    return (monstp->tick);
 }
 
 ////////////////////////////////////////////////////////////////////////////

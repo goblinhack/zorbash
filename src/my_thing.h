@@ -502,7 +502,7 @@ public:
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
     int gfx_is_rrr99(void) const;
-    int gfx_moves_ahead_shown(void) const;
+    int gfx_unused_flag(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;
@@ -929,7 +929,6 @@ public:
     uint32_t incr_tick_last_level_change(void);
     uint32_t incr_tick_resurrect_when(int);
     uint32_t incr_tick_resurrect_when(void);
-    uint32_t set_max_tick_difference();
     uint32_t set_tick(uint32_t);
     uint32_t set_tick_last_did_something(uint32_t);
     uint32_t set_tick_last_escape(uint32_t);
@@ -1035,14 +1034,13 @@ public:
     void topcon_(const char *fmt, va_list args) const; // compile error without
     void move_carried_items(void);
     void move_carried_items_immediately(void);
-    void move_completed(void);
+    void move_reset_timestamps(void);
     void move_delta(fpoint);
     void move_finish(void);
     void move_set_dir_from_delta(fpoint);
     void move_to(fpoint to);
     void move_to(fpoint to, uint32_t speed);
     void move_to_immediately(fpoint to);
-    void move_to_immediately_delta(fpoint delta);
     void msg(const std::string&);
     void new_age_map(void);
     void new_dmap_scent(void);

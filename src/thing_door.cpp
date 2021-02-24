@@ -42,14 +42,14 @@ bool Thing::open_door (Thingp it)
         it->level_push();
 
         if (is_player()) {
-            TOPCON("The door creaks open");
+            TOPCON("The door creaks open.");
         }
         update_light();
         return true;
     }
 
     if (is_player()) {
-        TOPCON("You need a key");
+        TOPCON("You need a key.");
     }
 
     return false;

@@ -56,7 +56,7 @@ bool Thing::ascend (int z)
             if (l->is_descend_dungeon(x, y)) {
                 if (is_player()) {
                     game->level = l;
-                    TOPCON("You ascend");
+                    TOPCON("You ascend.");
                 }
 
                 log("Move to previous level exit");

@@ -1054,7 +1054,7 @@ void config_game_pix_zoom_in (void)
     if (game->config.game_pix_zoom > GAME_MAX_PIX_ZOOM) {
         game->config.game_pix_zoom = GAME_MAX_PIX_ZOOM;
     }
-    TOPCON("Game zoom set to %f", game->config.game_pix_zoom);
+    TOPCON("Game zoom set to %f.", game->config.game_pix_zoom);
     sdl_config_update_all();
 }
 
@@ -1064,7 +1064,7 @@ void config_game_pix_zoom_out (void)
     if (game->config.game_pix_zoom < GAME_MIN_PIX_ZOOM) {
         game->config.game_pix_zoom = GAME_MIN_PIX_ZOOM;
     }
-    TOPCON("Game zoom set to %f", game->config.game_pix_zoom);
+    TOPCON("Game zoom set to %f.", game->config.game_pix_zoom);
     sdl_config_update_all();
 }
 

@@ -24,7 +24,6 @@ Upcoming work
 - skill, slash and roll
 - skill, slash and jump
 - skill, spring attack, give up a round for 2.5 times damage
-- test descent potion in sewer
 - tiny pixel effects that bounce?
 
 Graphics

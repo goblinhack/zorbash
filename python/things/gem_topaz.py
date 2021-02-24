@@ -24,7 +24,7 @@ def tp_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_rarity(zx.RARITY_COMMON)
     x.set_text_a_or_an("a");
-    x.set_text_description("%%fg=cyan$Clean cut topaz")
+    x.set_text_description("%%fg=cyan$Clean cut topaz.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 

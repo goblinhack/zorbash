@@ -663,7 +663,7 @@ Game::save (int slot)
     CON("DUNGEON: Saved %s, seed %u", save_file.c_str(), seed);
     LOG("-");
 
-    TOPCON("Saved the game to %s", save_file.c_str());
+    TOPCON("Saved the game to %s.", save_file.c_str());
 }
 
 void

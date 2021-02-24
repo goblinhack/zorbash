@@ -65,7 +65,15 @@ bool Thing::describe_when_hovered_over_in_rightbar (void)
         s += ". Select to open. Use mouse to drag items";
     }
 
-    BOTCON("%s.", s.c_str());
+    if (s.size()) {
+        if ((s[s.size() - 1] == '.') || (s[s.size() - 1] == '!')) {
+            BOTCON("%s", s.c_str());
+        } else {
+            BOTCON("%s.", s.c_str());
+        }
+    } else {
+        die("No descrption set");
+    }
 
     return true;
 }
@@ -86,7 +94,15 @@ bool Thing::describe_when_hovering_over (void)
             "%%fg=reset$ to collect";
     }
 
-    BOTCON("%s.", s.c_str());
+    if (s.size()) {
+        if ((s[s.size() - 1] == '.') || (s[s.size() - 1] == '!')) {
+            BOTCON("%s", s.c_str());
+        } else {
+            BOTCON("%s.", s.c_str());
+        }
+    } else {
+        die("No descrption set");
+    }
 
     return true;
 }

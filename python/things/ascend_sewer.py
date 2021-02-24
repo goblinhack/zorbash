@@ -25,7 +25,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_long_text_description("A way out of these stinking sewers!")
     x.set_on_idle_dice("1d50+50:ascend_sewer.spawn()")
     x.set_text_a_or_an("a");
-    x.set_text_description("A slime coated sewer pipe")
+    x.set_text_description("A slime coated sewer pipe.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 

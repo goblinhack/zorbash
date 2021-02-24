@@ -79,7 +79,7 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_in) {
-        TOPCON("Zoom in");
+        TOPCON("Zoom in.");
         config_game_pix_zoom_in();
         return true;
     }
@@ -206,7 +206,7 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return false;
         }
         wid_thing_info_fini(); // To remove bag or other info
-        TOPCON("Pausing the game");
+        TOPCON("Pausing the game.");
         CON("USERCFG: pausing the game");
         game->pause_select();
         return true;

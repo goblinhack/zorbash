@@ -47,6 +47,7 @@ bool Thing::descend_sewer_tick (void)
         if (level->world_at.z & 1) {
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
             is_waiting_to_descend_sewer = true;
+            move_finish();
             return true;
         }
     } else {
@@ -114,7 +115,7 @@ bool Thing::descend_sewer (void)
 
     if (is_player()) {
         game->level = l;
-        TOPCON("You climb into the muck");
+        TOPCON("You climb into the sewer. Why though?");
     }
 
     log("Move to next level sewer entrance");
