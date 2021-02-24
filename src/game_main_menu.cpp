@@ -81,7 +81,7 @@ static uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t b
     wid_botcon_init();
 
     wid_visible(wid_botcon_window);
-    BOTCON("Press 'h' for help");
+    BOTCON("Press 'h' for help.");
     return false;
 }
 

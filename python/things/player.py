@@ -54,7 +54,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_on_death_is_corpse(True)
     x.set_stamina(100)
     x.set_text_a_or_an("the")
-    x.set_text_description("Our most noble adventurer")
+    x.set_text_description("Our most noble adventurer. Press 'h' for help.")
     x.set_text_hits("hits")
     x.set_text_title(title)
     x.set_throw_distance(5)

@@ -24,7 +24,7 @@ def tp_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_rarity(zx.RARITY_UNCOMMON)
     x.set_text_a_or_an("a");
-    x.set_text_description("%%fg=white$Just a lonely diamond")
+    x.set_text_description("%%fg=white$Just a lonely diamond.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 

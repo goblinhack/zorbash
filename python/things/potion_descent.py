@@ -41,7 +41,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_normal_placement_rules(True)
     x.set_on_use_do("potion_descent.on_use()")
     x.set_text_a_or_an("a");
-    x.set_text_description("%%fg=cyan$A swirling milky blue potion of descent")
+    x.set_text_description("%%fg=cyan$A swirling milky blue potion of descent.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 

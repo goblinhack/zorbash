@@ -757,7 +757,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
     wid_m_over_e();
 
     wid_over = w;
-    // TOPCON("mouse over %s mouse %d,%d", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+    // TOPCON("mouse over %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
 
     wid_set_mode(w, WID_MODE_OVER);
 
@@ -3801,7 +3801,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
         case KMOD_RCTRL:
             switch ((int32_t)key->sym) {
                 case 'r':
-                    TOPCON("Creating a new dungeon");
+                    TOPCON("Creating a new dungeon.");
                     CON("USERCFG: reloading dungeon, destroy old");
                     game->fini();
                     game->init();
@@ -3811,7 +3811,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
         default:
             if (key->scancode == (SDL_Scancode)game->config.key_screenshot) {
                 sdl_screenshot();
-                TOPCON("Screenshot taken");
+                TOPCON("Screenshot taken.");
                 CON("USERCFG: screenshot taken");
                 return true;
             }
@@ -3911,10 +3911,10 @@ Widp wid_find_under_mouse_when_scrolling (void)
     if (w) {
         w = wid_get_top_parent(w);
         if (wid_ignore_scroll_events(w)) {
-//TOPCON("ign2 %s", wid_name(w).c_str());
+//TOPCON("ign2 %s.", wid_name(w).c_str());
             return nullptr;
         } else {
-//TOPCON("over2 %s", wid_name(w).c_str());
+//TOPCON("over2 %s.", wid_name(w).c_str());
             return w;
         }
     }
@@ -5039,7 +5039,7 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
         return;
     }
 
-//TOPCON("wid [%s] mouse up", w->name.c_str());
+//TOPCON("wid [%s] mouse up.", w->name.c_str());
     if ((w->on_mouse_up && (w->on_mouse_up)(w, x, y, button)) ||
         wid_get_moveable(w)) {
 
@@ -5057,30 +5057,30 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
 {_
     Widp w {};
 
-//TOPCON("key down");
+//TOPCON("key down.");
     w = wid_key_down_handler_at(wid_focus, x, y, true /* strict */);
     if (w) {
-//TOPCON("%s %d",to_cstring(w).c_str(),__LINE__);
+//TOPCON("%s %d.",to_cstring(w).c_str(),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(
                 wid_get_top_parent(wid_focus), x, y, false /* strict */);
     if (w) {
-//TOPCON("%s %d",to_string(w).c_str(),__LINE__);
+//TOPCON("%s %d.",to_string(w).c_str(),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(wid_over, x, y, true /* strict */);
     if (w) {
-//TOPCON("%s %d",to_string(w).c_str(),__LINE__);
+//TOPCON("%s %d.",to_string(w).c_str(),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(
                 wid_get_top_parent(wid_over), x, y, false /* strict */);
     if (w) {
-//TOPCON("%s %d",to_string(w).c_str(),__LINE__);
+//TOPCON("%s %d.",to_string(w).c_str(),__LINE__);
         return (w);
     }
 
@@ -5090,7 +5090,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-//TOPCON("  focus is locked");
+//TOPCON("  focus is locked.");
             continue;
         }
 
@@ -5098,7 +5098,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
         if (!w) {
             continue;
         }
-//TOPCON("     got top level strict handler%s",to_string(w).c_str());
+//TOPCON("     got top level strict handler%s.",to_string(w).c_str());
 
         return (w);
     }
@@ -5109,7 +5109,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-//TOPCON("  focus is locked");
+//TOPCON("  focus is locked.");
             continue;
         }
 
@@ -5118,7 +5118,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
             continue;
         }
 
-//TOPCON("     got top level loose handler%s",to_string(w));
+//TOPCON("     got top level loose handler%s.",to_string(w));
         return (w);
     }
 
@@ -6039,7 +6039,7 @@ void wid_display_all (void)
 
 #if 0
 printf("========================================= %d\n", wid_total_count);
-TOPCON("%d",wid_total_count);
+TOPCON("%d.",wid_total_count);
 #endif
 
     if (wid_total_count > 1000) {

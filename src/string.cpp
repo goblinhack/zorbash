@@ -1264,3 +1264,34 @@ std::string& string_timestamp (void)
     last_timestamp = s;
     return last_timestamp;
 }
+
+//
+// Concert errno to a std::string
+//
+std::string strerror_to_string(const int err)
+{
+    static const auto MAX_ERRNO_BUF_SIZE = 1024U;
+    char err_out[MAX_ERRNO_BUF_SIZE];
+    err_out[0] = '\0';
+
+    //
+    // Choose the correct strerror
+    //
+#if defined(__GLIBC__) && (_GNU_SOURCE || (_POSIX_C_SOURCE < 200112L && _XOPEN_SOURCE < 600))
+    //
+    // GNU version returns a string pointer
+    //
+    const char* str = strerror_r(errno, err_out, MAX_ERRNO_BUF_SIZE);
+    if (str) {
+        return std::string(str);
+    }
+#else
+    //
+    // XSI version returns 0 on success
+    //
+    if (!strerror_r(err, err_out, sizeof(err_out))) {
+        return std::string(err_out);
+    }
+#endif
+    return "Could not decode errno: " + std::to_string(err) + " strerror_r errno=" + std::to_string(errno);
+}

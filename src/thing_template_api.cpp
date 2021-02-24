@@ -152,7 +152,7 @@ int Tp::is_food(void) const { return _is_food; }
 int Tp::is_minion_generator(void) const { return _is_minion_generator; }
 int Tp::gfx_health_bar_shown(void) const { return _gfx_health_bar_shown; }
 int Tp::gfx_health_bar_shown_only_when_injured(void) const { return _gfx_health_bar_shown_only_when_injured; }
-int Tp::gfx_moves_ahead_shown(void) const { return _gfx_moves_ahead_shown; }
+int Tp::gfx_unused_flag(void) const { return _gfx_unused_flag; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_hazard(void) const { return _is_hazard; }
 int Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
@@ -392,7 +392,7 @@ void Tp::set_is_food(int v) { _is_food = v; }
 void Tp::set_is_minion_generator(int v) { _is_minion_generator = v; }
 void Tp::set_gfx_health_bar_shown(int v) { _gfx_health_bar_shown = v; }
 void Tp::set_gfx_health_bar_shown_only_when_injured(int v) { _gfx_health_bar_shown_only_when_injured = v; }
-void Tp::set_gfx_moves_ahead_shown(int v) { _gfx_moves_ahead_shown = v; }
+void Tp::set_gfx_unused_flag(int v) { _gfx_unused_flag = v; }
 void Tp::set_is_gold(int v) { _is_gold = v; }
 void Tp::set_is_hazard(int v) { _is_hazard = v; }
 void Tp::set_is_hunger_insatiable(int v) { _is_hunger_insatiable = v; }

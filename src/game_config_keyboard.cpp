@@ -82,115 +82,115 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
     }
     if (game->config.key_attack) {
         if (game->config.key_attack == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key attack");
+            TOPCON("%%fg=orange$Conflicting key, disabling key attack.");
             game->config.key_attack = 0;
         }
     }
     if (game->config.key_drop) {
         if (game->config.key_drop == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key drop");
+            TOPCON("%%fg=orange$Conflicting key, disabling key drop.");
             game->config.key_drop = 0;
         }
     }
     if (game->config.key_help) {
         if (game->config.key_help == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key help");
+            TOPCON("%%fg=orange$Conflicting key, disabling key help.");
             game->config.key_help = 0;
         }
     }
     if (game->config.key_jump) {
         if (game->config.key_jump == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key jump");
+            TOPCON("%%fg=orange$Conflicting key, disabling key jump.");
             game->config.key_jump = 0;
         }
     }
     if (game->config.key_load) {
         if (game->config.key_load == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key load");
+            TOPCON("%%fg=orange$Conflicting key, disabling key load.");
             game->config.key_load = 0;
         }
     }
     if (game->config.key_map_down) {
         if (game->config.key_map_down == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key map down");
+            TOPCON("%%fg=orange$Conflicting key, disabling key map down.");
             game->config.key_map_down = 0;
         }
     }
     if (game->config.key_map_left) {
         if (game->config.key_map_left == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key map left");
+            TOPCON("%%fg=orange$Conflicting key, disabling key map left.");
             game->config.key_map_left = 0;
         }
     }
     if (game->config.key_map_right) {
         if (game->config.key_map_right == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key map right");
+            TOPCON("%%fg=orange$Conflicting key, disabling key map right.");
             game->config.key_map_right = 0;
         }
     }
     if (game->config.key_map_up) {
         if (game->config.key_map_up == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key map up");
+            TOPCON("%%fg=orange$Conflicting key, disabling key map up.");
             game->config.key_map_up = 0;
         }
     }
     if (game->config.key_move_down) {
         if (game->config.key_move_down == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key move down");
+            TOPCON("%%fg=orange$Conflicting key, disabling key move down.");
             game->config.key_move_down = 0;
         }
     }
     if (game->config.key_move_left) {
         if (game->config.key_move_left == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key move left");
+            TOPCON("%%fg=orange$Conflicting key, disabling key move left.");
             game->config.key_move_left = 0;
         }
     }
     if (game->config.key_move_right) {
         if (game->config.key_move_right == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key move right");
+            TOPCON("%%fg=orange$Conflicting key, disabling key move right.");
             game->config.key_move_right = 0;
         }
     }
     if (game->config.key_move_up) {
         if (game->config.key_move_up == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key move up");
+            TOPCON("%%fg=orange$Conflicting key, disabling key move up.");
             game->config.key_move_up = 0;
         }
     }
     if (game->config.key_pause) {
         if (game->config.key_pause == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key pause");
+            TOPCON("%%fg=orange$Conflicting key, disabling key pause.");
             game->config.key_pause = 0;
         }
     }
     if (game->config.key_quit) {
         if (game->config.key_quit == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key quit");
+            TOPCON("%%fg=orange$Conflicting key, disabling key quit.");
             game->config.key_quit = 0;
         }
     }
     if (game->config.key_save) {
         if (game->config.key_save == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key save");
+            TOPCON("%%fg=orange$Conflicting key, disabling key save.");
             game->config.key_save = 0;
         }
     }
     if (game->config.key_screenshot) {
         if (game->config.key_screenshot == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key screenshot");
+            TOPCON("%%fg=orange$Conflicting key, disabling key screenshot.");
             game->config.key_screenshot = 0;
         }
     }
     if (game->config.key_throw) {
         if (game->config.key_throw == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key throw");
+            TOPCON("%%fg=orange$Conflicting key, disabling key throw.");
             game->config.key_throw = 0;
         }
     }
     if (game->config.key_inventory) {
         if (game->config.key_inventory == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key gfx mode");
+            TOPCON("%%fg=orange$Conflicting key, disabling key gfx mode.");
             game->config.key_inventory = 0;
         }
     }
@@ -226,25 +226,25 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
     }
     if (game->config.key_use) {
         if (game->config.key_use == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key use");
+            TOPCON("%%fg=orange$Conflicting key, disabling key use.");
             game->config.key_use = 0;
         }
     }
     if (game->config.key_wait_or_collect) {
         if (game->config.key_wait_or_collect == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key wait");
+            TOPCON("%%fg=orange$Conflicting key, disabling key wait.");
             game->config.key_wait_or_collect = 0;
         }
     }
     if (game->config.key_zoom_in) {
         if (game->config.key_zoom_in == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key zoom in");
+            TOPCON("%%fg=orange$Conflicting key, disabling key zoom in.");
             game->config.key_zoom_in = 0;
         }
     }
     if (game->config.key_zoom_out) {
         if (game->config.key_zoom_out == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key zoom out");
+            TOPCON("%%fg=orange$Conflicting key, disabling key zoom out.");
             game->config.key_zoom_out = 0;
         }
     }

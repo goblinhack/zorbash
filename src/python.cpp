@@ -637,7 +637,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_minion_generator)
     TP_SET_DECL(gfx_health_bar_shown)
     TP_SET_DECL(gfx_health_bar_shown_only_when_injured)
-    TP_SET_DECL(gfx_moves_ahead_shown)
+    TP_SET_DECL(gfx_unused_flag)
     TP_SET_DECL(is_gold)
     TP_SET_DECL(is_hazard)
     TP_SET_DECL(is_hunger_insatiable)

@@ -847,7 +847,7 @@ Game::load (int slot)
     }
 
     if  (!get(slot_valid, slot)) {
-        TOPCON("No game at that slot");
+        TOPCON("No game at that slot.");
         return;
     }
 
@@ -869,7 +869,7 @@ Game::load (int slot)
     CON("DUNGEON: Loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 
-    TOPCON("Loaded the game from %s", save_file.c_str());
+    TOPCON("Loaded the game from %s.", save_file.c_str());
 }
 
 static WidPopup *wid_load;
@@ -907,7 +907,7 @@ static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
                     case '9': {
                         int slot = c - '0';
                         if  (!get(slot_valid, slot)) {
-                            TOPCON("No game at that slot");
+                            TOPCON("No game at that slot.");
                         } else {
                             game->load(slot);
                             wid_load_destroy();

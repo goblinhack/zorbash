@@ -13,7 +13,7 @@ def tp_init(name, text_name):
     x.set_is_secret_door(True)
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");
-    x.set_text_description("A hidden door...")
+    x.set_text_description("A hidden door.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 

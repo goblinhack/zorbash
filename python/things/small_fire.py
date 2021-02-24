@@ -32,7 +32,7 @@ def tp_init(name, text_name):
     x.set_damage_melee_dice("1d3+1")
     x.set_health_initial_dice("5")
     x.set_text_a_or_an("");
-    x.set_text_description("Fire embers")
+    x.set_text_description("Fire embers.")
     x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

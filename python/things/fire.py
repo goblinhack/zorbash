@@ -33,7 +33,7 @@ def tp_init(name, text_name):
     x.set_light_color("yellow")
     x.set_on_idle_dice("1d10+20:fire.spawn()")
     x.set_text_a_or_an("");
-    x.set_text_description("Fire")
+    x.set_text_description("Fire.")
     x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

@@ -22,16 +22,16 @@ void Game::change_state (int new_state)
 
     switch (new_state) {
         case STATE_NORMAL:
-            log("State changed to STATE_NORMAL");
+            LOG("State changed to STATE_NORMAL");
             break;
         case STATE_MOVING_ITEMS:     // Currently managing inventory
-            log("State changed to STATE_MOVING_ITEMS");
+            LOG("State changed to STATE_MOVING_ITEMS");
             break;
         case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
-            log("State changed to STATE_COLLECTING_ITEMS");
+            LOG("State changed to STATE_COLLECTING_ITEMS");
             break;
         case STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
-            log("State changed to STATE_CHOOSING_TARGET");
+            LOG("State changed to STATE_CHOOSING_TARGET");
             break;
     }
 
