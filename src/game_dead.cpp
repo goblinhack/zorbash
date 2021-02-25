@@ -88,10 +88,9 @@ void Game::dead_select (const char *reason)
 
     auto h = TERM_HEIGHT / 2;
     point tl = make_point(0, h);
-    point br = make_point(UI_WID_POPUP_WIDTH_WIDE, TERM_HEIGHT - 2);
+    point br = make_point(UI_WID_POPUP_WIDTH_WIDE - 1, TERM_HEIGHT - 2);
     auto width = br.x - tl.x - 1;
 
-CON("game dead %dx%d", br.x - tl.x, br.y - tl.y);
     wid_dead_window = new WidPopup("Game dead",
                                    tl, br, nullptr, "ui_dead", false, false);
     wid_set_on_key_up(
@@ -167,8 +166,8 @@ CON("game dead %dx%d", br.x - tl.x, br.y - tl.y);
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 
-        point tl = make_point(3, h - 8);
-        point br = make_point(width - 5, h - 6);
+        point tl = make_point(9, h - 8);
+        point br = make_point(width - 11, h - 6);
 
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
