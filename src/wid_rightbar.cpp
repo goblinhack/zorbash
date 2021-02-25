@@ -126,7 +126,7 @@ static void wid_rightbar_create (void)
 
     {_
         point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
-        point br = make_point(TERM_WIDTH - 1, 52);
+        point br = make_point(TERM_WIDTH - 1, 63);
 
         wid_rightbar = wid_new_square_window("wid rightbar");
         wid_set_ignore_scroll_events(wid_rightbar, true);
