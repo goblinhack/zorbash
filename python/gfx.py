@@ -195,7 +195,7 @@ def init_ui_dead():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_dead.tga",
-        name="ui_dead", width=80, height=100, arr=tiles)
+        name="ui_dead", width=304, height=248, arr=tiles)
 
 def init_tiles1():
     tiles = [

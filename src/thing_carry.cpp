@@ -118,18 +118,26 @@ std::list<Thingp> Thing::anything_to_carry (void)
 
     FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
         if (t->is_dead) {
+            log("Potential item to carry, no, is dead: %s",
+                t->to_string().c_str());
             continue;
         }
 
         if (t->is_hidden) {
+            log("Potential item to carry, no, is hidden: %s",
+                t->to_string().c_str());
             continue;
         }
 
         if (t->get_immediate_owner()) {
+            log("Potential item to carry, no, has owner: %s",
+                t->to_string().c_str());
             continue;
         }
 
         if (!t->is_collectable()) {
+            log("Potential item to carry, no, not collectable: %s",
+                t->to_string().c_str());
             continue;
         }
 

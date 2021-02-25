@@ -28,7 +28,7 @@ _
     auto chosen = cands[random_range(0, cands.size())];
 
     log("Steal treasure %s", chosen->to_string().c_str());
-    if (!it->drop(chosen, this)) {
+    if (!it->drop(chosen, this, true /* stolen */)) {
         return false;
     }
 

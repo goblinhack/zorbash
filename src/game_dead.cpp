@@ -86,10 +86,12 @@ void Game::dead_select (const char *reason)
     game->level->scroll_map_to_player();
     game->level->cursor->hide();
 
-    point tl = make_point(0, TERM_HEIGHT - 22);
-    point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, TERM_HEIGHT - 2);
+    auto h = TERM_HEIGHT / 2;
+    point tl = make_point(0, h);
+    point br = make_point(UI_WID_POPUP_WIDTH_WIDE, TERM_HEIGHT - 2);
     auto width = br.x - tl.x - 1;
 
+CON("game dead %dx%d", br.x - tl.x, br.y - tl.y);
     wid_dead_window = new WidPopup("Game dead",
                                    tl, br, nullptr, "ui_dead", false, false);
     wid_set_on_key_up(
@@ -112,14 +114,26 @@ void Game::dead_select (const char *reason)
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
     wid_dead_window->log(reason);
 
     {_
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 
-        point tl = make_point(1, 5);
-        point br = make_point(width - 1, 7);
+        point tl = make_point(1, 13);
+        point br = make_point(width - 1, 15);
 
         wid_set_shape_none(w);
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
@@ -153,8 +167,8 @@ void Game::dead_select (const char *reason)
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 
-        point tl = make_point(3, 11);
-        point br = make_point(width - 5, 13);
+        point tl = make_point(3, h - 8);
+        point br = make_point(width - 5, h - 6);
 
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
