@@ -5,6 +5,7 @@ import tp
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_collision_circle(True)
+    x.set_is_active(True) # for lifespan tick
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
@@ -14,7 +15,7 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_removeable_if_out_of_slots(True)
-    x.set_lifespan_dice("1d10+2")
+    x.set_lifespan_dice("1d10+10")
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("a");
     x.set_text_description("An artwork comprised mainly of green slime.")

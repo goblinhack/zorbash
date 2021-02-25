@@ -245,7 +245,7 @@ public:
     bool describe_when_hovering_over(void);
     bool describe_when_hovered_over_in_rightbar(void);
     bool drop(Thingp w);
-    bool drop(Thingp w, Thingp target);
+    bool drop(Thingp w, Thingp target, bool stolen=false);
     bool drop_from_ether(Thingp w);
     bool drop_into_ether(Thingp w);
     bool eat(Thingp it);

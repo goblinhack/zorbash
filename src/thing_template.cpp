@@ -56,6 +56,15 @@ uint8_t tp_init (void)
 
     tp_random_init();
 
+    for (auto& tp : tp_name_map) {
+        auto tpp = tp.second;
+        if (!tpp->lifespan_dice_str().empty()) {
+            if (!tpp->is_active()) {
+                DIE("Thing template must be set to be is_active [%s] for lifespan tick to work", tp.first.c_str());
+            }
+        }
+    }
+
     return true;
 }
 

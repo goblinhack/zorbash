@@ -13,13 +13,22 @@
 #include "my_monst.h"
 #include "my_array_bounds_check.h"
 
-bool Thing::drop (Thingp what, Thingp target)
+bool Thing::drop (Thingp what, Thingp target, bool stolen)
 {_
-    if (target) {
-        log("Drop %s at %s", what->to_string().c_str(),
-            target->to_string().c_str());
+    if (stolen) {
+        if (target) {
+            log("Drop (being stolen) %s at %s", what->to_string().c_str(),
+                target->to_string().c_str());
+        } else {
+            log("Drop (being stolen) %s", what->to_string().c_str());
+        }
     } else {
-        log("Drop %s", what->to_string().c_str());
+        if (target) {
+            log("Drop %s at %s", what->to_string().c_str(),
+                target->to_string().c_str());
+        } else {
+            log("Drop %s", what->to_string().c_str());
+        }
     }
 _
     auto existing_owner = what->get_immediate_owner();
@@ -57,10 +66,12 @@ _
 
     monstp->carrying.remove(what->id);
 
-    //
-    // Prevent too soon re-carry
-    //
-    set_where_i_dropped_an_item_last(make_point(mid_at));
+    if (!stolen) {
+        //
+        // Prevent too soon re-carry
+        //
+        set_where_i_dropped_an_item_last(make_point(mid_at));
+    }
 
     if (is_bag() || is_player()) {
         log("Update bag with drop of: %s", what->to_string().c_str());
@@ -73,7 +84,11 @@ _
         wid_thing_info_fini();
     }
 
-    log("Dropped %s", what->to_string().c_str());
+    if (stolen) {
+        log("Dropped (being stolen) %s", what->to_string().c_str());
+    } else {
+        log("Dropped %s", what->to_string().c_str());
+    }
 
     return true;
 }

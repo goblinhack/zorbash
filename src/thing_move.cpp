@@ -100,11 +100,17 @@ bool Thing::move (fpoint future_pos,
         rest();
     }
 
+    //
+    // Set this so that we can pick up items again at the last location.
+    //
+    set_where_i_dropped_an_item_last(point(-1, -1));
+
     if (wait_or_collect) {
         if (is_player()) {
             game->tick_begin("player idled");
         }
 
+        log("Check if there is anything to carry here");
         auto items = anything_to_carry();
         if (!items.empty()) {
             if (items.size() > 1) {
