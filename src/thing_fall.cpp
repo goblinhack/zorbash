@@ -8,6 +8,7 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 #include "my_random.h"
+#include "my_ptrcheck.h"
 #include "my_thing_template.h"
 #include "my_array_bounds_check.h"
 
@@ -183,13 +184,17 @@ _
             next_level->is_ascend_sewer(x, y)     ||
             next_level->is_descend_sewer(x, y)    ||
             next_level->is_descend_dungeon(x, y)) {_
-            log("No, special tile");
+            log("No, special tile at %d,%d", x, y);
             continue;
         }
 
         if (next_level->is_floor(x, y) ||
             next_level->is_fire(x, y) ||
             next_level->is_lava(x, y)) {
+
+            FOR_ALL_THINGS(next_level, t, x, y) {
+                t->log("Under thing on new level");
+            } FOR_ALL_THINGS_END()
 
             if (is_player()) {
                 game->level = next_level;
@@ -233,7 +238,7 @@ _
                 fall_damage = get_health() / 2;
             }
 
-            auto new_pos = make_point(mid_at);
+            auto new_pos = make_point(x, y);
             if (next_level->is_lava(new_pos)) {
                 if (is_player()) {
                     TOPCON("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
@@ -261,7 +266,8 @@ _
             }
 
             bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
-            next_level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+            next_level->thing_new(tp_random_blood_splatter()->name(), 
+                                  new_pos);
 
             next_level->scroll_map_to_player();
             update_light();

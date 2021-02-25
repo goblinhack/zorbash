@@ -30,17 +30,6 @@ uint8_t wid_leftbar_init (void)
     return true;
 }
 
-#if 0
-static uint8_t game_monsts_mouse_down (Widp w,
-                                       int32_t x,
-                                       int32_t y,
-                                       uint32_t button)
-{_
-    CON("status button %d", button);
-    return true;
-}
-#endif
-
 static void game_monsts_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {_
     if (!game->level) {
