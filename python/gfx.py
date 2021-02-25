@@ -57,7 +57,7 @@ def init_ui_status_bar():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_status_bar.tga",
-        name="ui_status_bar", width=128, height=424, arr=tiles)
+        name="ui_status_bar", width=128, height=512, arr=tiles)
 
 def init_ui_blood():
     tiles = [
