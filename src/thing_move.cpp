@@ -499,20 +499,9 @@ void Thing::move_to_immediately (fpoint to)
     move_set_dir_from_delta(delta);
 
     //
-    // If the move finish ended up doing something like moving into
-    // a sewer, then we need to abort the delta move
+    // Don't check for descending here as that check will be set when falling
     //
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_jumping) { 
-        return;
-    }
-
+ 
     update_pos(to, true);
     move_finish();
 

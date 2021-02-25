@@ -21,6 +21,7 @@ void Game::init (void)
         seed_name = random_name(sizeof("4294967295") - 1);
     }
     seed = string_to_hash(seed_name);
+    CON("Creating level, name '%s', seed %u", seed_name.c_str(), seed);
 
     current_level = point3d(LEVELS_ACROSS / 2, LEVELS_DOWN / 2, 1);
     level = nullptr;

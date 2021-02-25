@@ -5,6 +5,9 @@ import tp
 def on_idle(me, x, y):
     zx.tp_spawn_under(me, "acid1")
 
+def on_death(me, x, y):
+    zx.tp_spawn_under(me, "green_splatter")
+
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_ai_delay_after_moving_ms(1000)
@@ -66,7 +69,6 @@ def tp_init(name, text_name, short_text_name):
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_on_death_drop_all_items(True)
-    x.set_on_death_is_corpse(True)
     x.set_on_idle_dice("1d0:cleaner.on_idle()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
@@ -74,6 +76,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_text_description("A dungeon auto cleaner jelly thingy.")
     x.set_text_hits("burns");
     x.set_tick_rate_tenths(3)
+    x.set_on_death_do("cleaner.on_death()")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
@@ -86,22 +89,6 @@ def tp_init(name, text_name, short_text_name):
     x.set_tile(tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
-
-    delay=10
-    x.set_tile("green_splatter.1", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.2", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.3", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.4", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.5", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.6", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.7", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.8", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.9", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.10", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.11", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.12", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.13", is_dead=True, delay_ms=delay)
-    x.set_tile("green_splatter.14", is_dead=True, delay_ms=delay, is_end_of_anim = True)
 
     x.update()
 

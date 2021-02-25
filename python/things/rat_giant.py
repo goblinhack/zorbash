@@ -1,9 +1,6 @@
 import zx
 import tp
 
-def spawn(me, x, y):
-    zx.tp_spawn_under(me, "pink_splatter")
-
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
