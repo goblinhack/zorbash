@@ -130,6 +130,8 @@ void Level::update_minimap (void)
                     ((x == minx) && (y >= miny) && (y <= maxy)) ||
                     ((x == maxx) && (y >= miny) && (y <= maxy));
 
+                edge_of_sceen = false; // Not sure I like seeing this
+
                 if (!is_visited(x, y)) {
                     if (edge_of_sceen) {
                         c = DARKRED;
@@ -193,6 +195,7 @@ void Level::update_minimap (void)
                     c.b /= 2;
                 }
 
+#if 0
                 if (!edge_of_sceen) {
                     if (!x || !y) {
                         c = GRAY;
@@ -202,6 +205,7 @@ void Level::update_minimap (void)
                         c.a = 100;
                     }
                 }
+#endif
 
                 if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
                     if ((game->minimap_over.x == x) &&

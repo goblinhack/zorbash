@@ -461,8 +461,15 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
         return;
     }
 
+    //
+    // Blit a dark background which we will fill with lights
+    //
     glClear(GL_COLOR_BUFFER_BIT);
-    glColor4ub(0,0,0,180);
+    if (is_sewer_level) {
+        glColor4ub(0,0,0,220);
+    } else {
+        glColor4ub(0,0,0,180);
+    }
     glBlendFunc(GL_ONE, GL_ZERO);
     glDisable(GL_TEXTURE_2D);
     gl_blitquad(0, 0, 
@@ -474,17 +481,6 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
     // Draw small light sources
     //
     glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_ALPHA);
-//
-// Paste this code prior to the blend in question
-//
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int g_blend_a;
-extern int g_blend_b;
-CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
-glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
-#endif
 
     blit_init();
     for (auto y = miny; y < maxy; y++) {

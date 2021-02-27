@@ -175,6 +175,12 @@ public:
     std::vector<Particle>      all_external_particles;
     std::vector<Particle>      new_external_particles;
 
+    //
+    // Where the minimap widget ois
+    //
+    point                      minimap_tl;
+    point                      minimap_br;
+
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
