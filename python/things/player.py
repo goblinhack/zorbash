@@ -36,7 +36,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_interesting(True)
     x.set_is_jumper(True)
     x.set_is_jumper_distance(2)
-    x.set_light_strength(10)
+    x.set_light_strength(8)
     x.set_is_living(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)

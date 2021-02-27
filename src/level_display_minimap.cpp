@@ -19,33 +19,36 @@ void Level::display_minimap (void)
         return;
     }
 
-    float atx = UI_MINIMAP_SIZE;
-    float aty = atx * game->config.video_w_h_ratio;
-    atx *= game->config.window_pix_width;
-    aty *= game->config.window_pix_height;
+    float tlx = minimap_tl.x * game->config.ascii_gl_width;
+    float tly = minimap_tl.y * game->config.ascii_gl_height;
+
+    float brx = minimap_br.x * game->config.ascii_gl_width;
+    float bry = minimap_br.y * game->config.ascii_gl_height;
+
+    auto zoom = game->config.ui_pix_zoom;
+
+    tlx *= zoom;
+    tly *= zoom;
+    brx *= zoom;
+    bry *= zoom;
+
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glPushMatrix();
-    glTranslatef(game->config.window_pix_width - atx,
-                 game->config.window_pix_height - aty, 0);
     blit_init();
-    blit(fbo_tex_id[FBO_MINIMAP], 0.0, 1.0, 1.0, 0.0, 0, aty, atx, 0.0);
+    blit(fbo_tex_id[FBO_MINIMAP], 0.0, 1.0, 1.0, 0.0, tlx, bry, brx, tly);
     blit_flush();
-    glPopMatrix();
 
     //
     // Over minimap?
     //
     auto old_minimap_over = game->minimap_over;
-    if ((mouse_x >= game->config.window_pix_width - atx) &&
-        (mouse_y >= game->config.window_pix_height - aty)) {
+    if ((mouse_x >= tlx) && (mouse_x <= brx) &&
+        (mouse_y >= tly) && (mouse_y <= bry)) {
         game->minimap_over =
             make_point(
-            ((float)(mouse_x - (game->config.window_pix_width - atx))
-                / atx) * MAP_WIDTH,
-            ((float)(mouse_y - (game->config.window_pix_height - aty))
-                / aty) * MAP_HEIGHT
-            );
+                ((float)(mouse_x - tlx) / (brx - tlx)) * MAP_WIDTH,
+                ((float)(mouse_y - tly) / (bry - tly)) * MAP_HEIGHT);
+
         fpoint to(game->minimap_over.x, game->minimap_over.y);
         if (cursor) {_
             verify(cursor);

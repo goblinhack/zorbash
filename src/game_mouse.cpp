@@ -14,17 +14,24 @@
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
-    auto w = wid_find_under_mouse();
-    if (w) {
-        if (w->name != "wid topcon window") {
-            return false;
+    //
+    // If over the minimap allows clicks to move us
+    //
+    // Else, ignore clicks as they should go to a widget
+    //
+    if (game->minimap_over == point(-1, -1)) {
+        auto w = wid_find_under_mouse();
+        if (w) {
+            if (w->name != "wid topcon window") {
+                return false;
+            }
         }
-    }
 
-    w = wid_find_under_mouse_when_scrolling();
-    if (w) {
-        if (w->name != "wid topcon window") {
-            return false;
+        w = wid_find_under_mouse_when_scrolling();
+        if (w) {
+            if (w->name != "wid topcon window") {
+                return false;
+            }
         }
     }
 

@@ -517,6 +517,32 @@ static void wid_rightbar_create (void)
         }
     }
 
+    //
+    // Map
+    //
+    y_at += 18;
+    {
+        auto w = wid_new_container(wid_rightbar, "minimap wid");
+        point tl = make_point(0, y_at);
+        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1,
+                              y_at + UI_SIDEBAR_RIGHT_WIDTH - 1);
+
+        wid_set_pos(w, tl, br);
+        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+        wid_set_style(w, UI_WID_STYLE_RED);
+        wid_set_shape_none(w);
+
+        wid_update(wid_rightbar);
+
+        int tlx, tly, brx, bry;
+        wid_get_tl_x_tl_y_br_x_br_y(w, &tlx, &tly, &brx, &bry);
+
+        level->minimap_tl.x = tlx;
+        level->minimap_tl.y = tly;
+        level->minimap_br.x = brx;
+        level->minimap_br.y = bry;
+    }
+
     wid_update(wid_rightbar);
 
     if (game->request_remake_inventory) {
