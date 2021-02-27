@@ -18,7 +18,7 @@ def key_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_item(False)
     x.set_is_key(True)
-    x.set_is_light_strength(2)
+    x.set_light_strength(2)
     x.set_is_moveable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_treasure_class_a(False)

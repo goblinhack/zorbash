@@ -32,7 +32,7 @@ def tp_init(name, text_name):
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_interesting(True)
-    x.set_is_light_strength(1)
+    x.set_light_strength(1)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_minion_generator(True)

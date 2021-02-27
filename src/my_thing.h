@@ -502,7 +502,7 @@ public:
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
     int gfx_is_rrr99(void) const;
-    int gfx_unused_flag(void) const;
+    int gfx_glows(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;
@@ -655,7 +655,7 @@ public:
     int is_killed_on_hitting(void) const;
     int is_lava(void) const;
     int is_light_blocker(void) const;
-    int is_light_strength(void) const;
+    int light_strength(void) const;
     int is_living(void) const;
     int is_loggable_for_important_stuff(void) const;
     int is_loggable_for_unimportant_stuff(void) const;

@@ -232,7 +232,7 @@ bool Thing::match (const std::string& what)
     if (is_light_blocker() && (what == "is_light_blocker")) {
         return true;
     }
-    if (is_light_strength() && (what == "is_light_strength")) {
+    if (light_strength() && (what == "light_strength")) {
         return true;
     }
     if (is_loggable_for_important_stuff() && (what == "is_loggable_for_important_stuff")) {

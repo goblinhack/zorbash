@@ -24,7 +24,7 @@ void Level::display_fade_out (void)
         at = ((player->last_blit_tl + player->last_blit_br) / 2);
     }
 
-    blit_fbo_bind(FBO_FADE);
+    blit_fbo_bind(FBO_SCREEN_FADE_IN_AND_OUT);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
@@ -72,7 +72,7 @@ void Level::display_fade_in (void)
         at = ((player->last_blit_tl + player->last_blit_br) / 2);
     }
 
-    blit_fbo_bind(FBO_FADE);
+    blit_fbo_bind(FBO_SCREEN_FADE_IN_AND_OUT);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 

@@ -16,7 +16,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_cursor_can_hover_over(True)
     x.set_is_ascend_dungeon(True)
     x.set_is_interesting(True)
-    x.set_is_light_strength(2)
+    x.set_light_strength(2)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
     x.set_text_a_or_an("the");

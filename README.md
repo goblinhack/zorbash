@@ -54,6 +54,24 @@ Screenshots
 ![Alt text](pics/screenshot.14.png?raw=true "")
 ![Alt text](pics/screenshot.15.png?raw=true "")
 
+Older Screenshots
+-----------------
+![Alt text](pics/old/screenshot.1.png?raw=true "")
+![Alt text](pics/old/screenshot.2.png?raw=true "")
+![Alt text](pics/old/screenshot.3.png?raw=true "")
+![Alt text](pics/old/screenshot.4.png?raw=true "")
+![Alt text](pics/old/screenshot.5.png?raw=true "")
+![Alt text](pics/old/screenshot.6.png?raw=true "")
+![Alt text](pics/old/screenshot.7.png?raw=true "")
+![Alt text](pics/old/screenshot.8.png?raw=true "")
+![Alt text](pics/old/screenshot.9.png?raw=true "")
+![Alt text](pics/old/screenshot.10.png?raw=true "")
+![Alt text](pics/old/screenshot.11.png?raw=true "")
+![Alt text](pics/old/screenshot.12.png?raw=true "")
+![Alt text](pics/old/screenshot.13.png?raw=true "")
+![Alt text](pics/old/screenshot.14.png?raw=true "")
+![Alt text](pics/old/screenshot.15.png?raw=true "")
+
 How to build
 ------------
 

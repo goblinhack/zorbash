@@ -5,8 +5,9 @@ def init_solid():
     zx.tex_load(file="data/gfx/solid.tga", name="solid")
 
 
-def init_bloom():
-    zx.tex_load(file="data/gfx/bloom.tga", name="bloom")
+def init_light():
+    zx.tex_load(file="data/gfx/light.tga", name="light")
+    zx.tex_load(file="data/gfx/glow.tga", name="glow")
 
 
 def init_ui_circle():
@@ -3366,7 +3367,7 @@ init_title_fg2()
 init_title_fg3()
 init_title_fg4()
 init_title_bg()
-init_bloom()
+init_light()
 init_ui_status_bar()
 init_ui_health_bar()
 init_ui_dead()

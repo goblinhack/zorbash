@@ -14,8 +14,11 @@
 #include "my_vector_bounds_check.h"
 #include "my_ptrcheck.h"
 
-static Texp g_bloom_overlay_tex;
-static int g_bloom_overlay_texid;
+static Texp g_light_overlay_tex;
+static int g_light_overlay_texid;
+
+static Texp g_glow_overlay_tex;
+static int g_glow_overlay_texid;
 
 Light::Light (void)
 {_
@@ -359,10 +362,11 @@ void Light::render_triangle_fans (int first)
     if (fbo == FBO_FULLMAP_LIGHT) {
         light_pos = cached_light_pos;
         gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
-    } else {
+    } else if (fbo == FBO_PLAYER_LIGHT) {
         light_pos -= level->pixel_map_at  - offset;
+    } else {
+        return;
     }
-
 
     if (offset != point(0, 0)) {
         static color l(255, 255, 255, 50);
@@ -422,9 +426,14 @@ void Light::render_triangle_fans (int first)
 
 void Light::render (int first)
 {
-    if (!g_bloom_overlay_tex) {
-        g_bloom_overlay_tex = tex_load("", "bloom", GL_NEAREST);
-        g_bloom_overlay_texid = tex_get_gl_binding(g_bloom_overlay_tex);
+    if (!g_light_overlay_tex) {
+        g_light_overlay_tex = tex_load("", "light", GL_NEAREST);
+        g_light_overlay_texid = tex_get_gl_binding(g_light_overlay_tex);
+    }
+
+    if (!g_glow_overlay_tex) {
+        g_glow_overlay_tex = tex_load("", "glow", GL_NEAREST);
+        g_glow_overlay_texid = tex_get_gl_binding(g_glow_overlay_tex);
     }
 
     if (!calculate(first)) {
@@ -448,12 +457,34 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
         }
     }
 
-    if (fbo == FBO_FULLMAP_LIGHT) {
+    if (fbo != FBO_SMALL_LIGHTS) {
         return;
     }
 
-    // glBlendFunc(GL_ZERO, GL_ONE); // basic
-    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE_MINUS_CONSTANT_COLOR);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor4ub(0,0,0,180);
+    glBlendFunc(GL_ONE, GL_ZERO);
+    glDisable(GL_TEXTURE_2D);
+    gl_blitquad(0, 0, 
+                game->config.game_pix_width, game->config.game_pix_height);
+    glEnable(GL_TEXTURE_2D);
+    glcolor(WHITE);
+
+    //
+    // Draw small light sources
+    //
+    glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_ALPHA);
+//
+// Paste this code prior to the blend in question
+//
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int g_blend_a;
+extern int g_blend_b;
+CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
+#endif
 
     blit_init();
     for (auto y = miny; y < maxy; y++) {
@@ -462,6 +493,49 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
                 for (auto& l : t->get_light()) {
 
                     if (player && (l->owner == player)) {
+                        if (l->fbo != fbo) {
+                            continue;
+                        }
+                    }
+
+                    if (!is_lit_no_check(t->mid_at.x, t->mid_at.y)) {
+                        continue;
+                    }
+
+                    auto t = l->owner;
+                    point blit_tl, blit_br;
+                    Tilep tile = {};
+
+                    if (!t->get_map_offset_coords(blit_tl, blit_br, tile, false)) {
+                        continue;
+                    }
+
+                    auto mid = (blit_br + blit_tl) / 2;
+                    auto s = l->strength;
+                    auto tlx = mid.x - s;
+                    auto tly = mid.y - s;
+                    auto brx = mid.x + s;
+                    auto bry = mid.y + s;
+                    color c = l->col;
+                    glcolor(c);
+                    blit(g_light_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
+                }
+            } FOR_ALL_THINGS_END()
+        }
+    }
+    blit_flush();
+
+    //
+    // Add glow to light sources
+    //
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+    blit_init();
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
+                for (auto& l : t->get_light()) {
+
+                    if (!t->gfx_glows()) {
                         continue;
                     }
 
@@ -474,7 +548,7 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
                     Tilep tile = {};
 
                     if (!t->get_map_offset_coords(blit_tl, blit_br, tile, false)) {
-                        return;
+                        continue;
                     }
 
                     auto mid = (blit_br + blit_tl) / 2;
@@ -485,12 +559,14 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
                     auto bry = mid.y + s;
                     color c = l->col;
                     glcolor(c);
-                    blit(g_bloom_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
+                    blit(g_glow_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
                 }
             } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
+
+    glcolor(WHITE);
 }
 
 //
