@@ -104,7 +104,7 @@ private:
     int _gfx_health_bar_shown {};
     int _gfx_health_bar_shown_only_when_injured {};
     int _gfx_is_rrr99 {};
-    int _gfx_unused_flag {};
+    int _gfx_glows {};
     int _gfx_on_fire_anim {};
     int _gfx_oversized_but_sitting_on_the_ground {};
     int _gfx_show_outlined {};
@@ -191,7 +191,7 @@ private:
     int _is_killed_on_hitting {};
     int _is_lava {};
     int _is_light_blocker {};
-    int _is_light_strength {};
+    int _light_strength {};
     int _is_living {};
     int _is_loggable_for_important_stuff {};
     int _is_loggable_for_unimportant_stuff {};
@@ -451,7 +451,7 @@ public:
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
     int gfx_is_rrr99(void) const;
-    int gfx_unused_flag(void) const;
+    int gfx_glows(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;
@@ -538,7 +538,7 @@ public:
     int is_killed_on_hitting(void) const;
     int is_lava(void) const;
     int is_light_blocker(void) const;
-    int is_light_strength(void) const;
+    int light_strength(void) const;
     int is_living(void) const;
     int is_loggable_for_important_stuff(void) const;
     int is_loggable_for_unimportant_stuff(void) const;
@@ -690,7 +690,7 @@ public:
     void set_gfx_health_bar_shown(int);
     void set_gfx_health_bar_shown_only_when_injured(int);
     void set_gfx_is_rrr99(int);
-    void set_gfx_unused_flag(int);
+    void set_gfx_glows(int);
     void set_gfx_on_fire_anim(int);
     void set_gfx_oversized_but_sitting_on_the_ground(int);
     void set_gfx_show_outlined(int);
@@ -779,7 +779,7 @@ public:
     void set_is_killed_on_hitting(int);
     void set_is_lava(int);
     void set_is_light_blocker(int);
-    void set_is_light_strength(int);
+    void set_light_strength(int);
     void set_is_living(int);
     void set_is_loggable_for_important_stuff(int);
     void set_is_loggable_for_unimportant_stuff(int);

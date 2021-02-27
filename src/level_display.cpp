@@ -131,9 +131,12 @@ void Level::display_map_things (int fbo,
     glcolor(WHITE);
 
     {
+        //
+        // Blit the floor
+        //
         blit_fbo_bind(fbo);
         blit_init();
-        for (auto z = 0; z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
+        for (auto z = 0; z < MAP_DEPTH_OBJ; z++) {
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
                     FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
@@ -158,12 +161,12 @@ void Level::display_map_things (int fbo,
         glcolor(WHITE);
 
         //
-        // Blit effects
+        // Blit stuff on top of the floor and water
         //
         blit_fbo_bind(fbo);
         blit_init();
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; 
-             z < MAP_DEPTH_LAST_MAP_TYPE; z++) {
+             z < MAP_DEPTH_OBJ; z++) {
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
                     FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
@@ -186,7 +189,7 @@ void Level::display_map_fg_things (int fbo,
 
     blit_fbo_bind(fbo);
     blit_init();
-    for (auto z = (int)MAP_DEPTH_LAST_MAP_TYPE; z < MAP_DEPTH; z++) {
+    for (auto z = (int)MAP_DEPTH_OBJ; z < MAP_DEPTH; z++) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
@@ -265,14 +268,18 @@ void Level::display_map (void)
         //
         // Generate an FBO with all light sources merged together
         //
-        blit_fbo_bind(FBO_LIGHT);
+        blit_fbo_bind(FBO_PLAYER_LIGHT);
         glClear(GL_COLOR_BUFFER_BIT);
         lights_render(light_minx, light_miny, light_maxx, light_maxy,
-                      FBO_LIGHT);
+                      FBO_PLAYER_LIGHT);
 
         blit_fbo_bind(FBO_FULLMAP_LIGHT);
         lights_render(light_minx, light_miny, light_maxx, light_maxy,
                       FBO_FULLMAP_LIGHT);
+
+        blit_fbo_bind(FBO_SMALL_LIGHTS);
+        lights_render(light_minx, light_miny, light_maxx, light_maxy,
+                      FBO_SMALL_LIGHTS);
     }
 
     if (!frozen) {_
@@ -315,7 +322,7 @@ void Level::display_map (void)
         blit_flush();
 
         glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
-        blit_fbo_game_pix(FBO_LIGHT);
+        blit_fbo_game_pix(FBO_PLAYER_LIGHT);
     }
 
     if (!frozen) {_
@@ -326,9 +333,21 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         display_internal_particles();
-        glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
-        blit_fbo_game_pix(FBO_LIGHT);
+
+        //
+        // Blit small lights and glow
+        //
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        blit_fbo_game_pix(FBO_SMALL_LIGHTS);
+
+        //
+        // Blit objects that are in front of small lights so that the
+        // player is not lost in lava glow
+        //
         display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+        glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
+        blit_fbo_game_pix(FBO_PLAYER_LIGHT);
+
     }
 
     {_
@@ -340,10 +359,12 @@ void Level::display_map (void)
         //
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(DARKBLUE);
+        glcolor(GRAY20);
+
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
         blit_fbo_game_pix(FBO_MAP_HIDDEN);
         glBlendFunc(GL_ONE, GL_ONE);
+
         glcolor(WHITE);
         blit_fbo_game_pix(FBO_MAP_VISIBLE);
 
@@ -352,7 +373,7 @@ void Level::display_map (void)
             display_fade_out();
             blit_fbo_bind(FBO_MAP);
             glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
-            blit_fbo_game_pix(FBO_FADE);
+            blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
         }
 
         if (fade_in) {
@@ -360,7 +381,7 @@ void Level::display_map (void)
             display_fade_in();
             blit_fbo_bind(FBO_MAP);
             glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
-            blit_fbo_game_pix(FBO_FADE);
+            blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
         }
     }
 
@@ -387,7 +408,7 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         blit_fbo_bind(FBO_FULLMAP_LIGHT);
         glClear(GL_COLOR_BUFFER_BIT);
-        blit_fbo_bind(FBO_LIGHT);
+        blit_fbo_bind(FBO_PLAYER_LIGHT);
         glClear(GL_COLOR_BUFFER_BIT);
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);

@@ -406,8 +406,8 @@ class Tp:
     def set_is_cursor_can_hover_over_but_needs_double_click(self, value):
         zx.tp_set_is_cursor_can_hover_over_but_needs_double_click(self, value)
 
-    def set_gfx_unused_flag(self, value):
-        zx.tp_set_gfx_unused_flag(self, value)
+    def set_gfx_glows(self, value):
+        zx.tp_set_gfx_glows(self, value)
 
     def set_gfx_health_bar_shown_only_when_injured(self, value):
         zx.tp_set_gfx_health_bar_shown_only_when_injured(self, value)
@@ -754,8 +754,8 @@ class Tp:
     def set_is_ripple(self, value):
         zx.tp_set_is_ripple(self, value)
 
-    def set_is_light_strength(self, value):
-        zx.tp_set_is_light_strength(self, value)
+    def set_light_strength(self, value):
+        zx.tp_set_light_strength(self, value)
 
     def set_is_blood(self, value):
         zx.tp_set_is_blood(self, value)

@@ -32,65 +32,66 @@ void Thing::init_lights (void)
         //
         color col = WHITE;
 
-        int strength = is_light_strength();
+        int strength = light_strength();
         int d1 = 1;
         int d2 = 2;
 
         new_light(point(0, 0), strength, col, FBO_FULLMAP_LIGHT);
-        new_light(point(0, 0), strength, col, FBO_LIGHT);
+        new_light(point(0, 0), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point(0, 0), 3, col, FBO_SMALL_LIGHTS);
 
-        new_light(point(-d1, -d1), strength, col, FBO_LIGHT);
-        new_light(point( d1, -d1), strength, col, FBO_LIGHT);
-        new_light(point(-d1,  d1), strength, col, FBO_LIGHT);
-        new_light(point( d1,  d1), strength, col, FBO_LIGHT);
+        new_light(point(-d1, -d1), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point( d1, -d1), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point(-d1,  d1), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point( d1,  d1), strength, col, FBO_PLAYER_LIGHT);
 
-        new_light(point(-d2, -d1), strength, col, FBO_LIGHT);
-        new_light(point( d2, -d1), strength, col, FBO_LIGHT);
-        new_light(point(-d2,  d1), strength, col, FBO_LIGHT);
-        new_light(point( d2,  d1), strength, col, FBO_LIGHT);
+        new_light(point(-d2, -d1), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point( d2, -d1), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point(-d2,  d1), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point( d2,  d1), strength, col, FBO_PLAYER_LIGHT);
 
-        new_light(point(-d1, -d2), strength, col, FBO_LIGHT);
-        new_light(point( d1, -d2), strength, col, FBO_LIGHT);
-        new_light(point(-d1,  d2), strength, col, FBO_LIGHT);
-        new_light(point( d1,  d2), strength, col, FBO_LIGHT);
+        new_light(point(-d1, -d2), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point( d1, -d2), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point(-d1,  d2), strength, col, FBO_PLAYER_LIGHT);
+        new_light(point( d1,  d2), strength, col, FBO_PLAYER_LIGHT);
 
         {
             d1 = 3;
             d2 = 5;
 
-            new_light(point(-d1, -d1), strength, col, FBO_LIGHT);
-            new_light(point( d1, -d1), strength, col, FBO_LIGHT);
-            new_light(point(-d1,  d1), strength, col, FBO_LIGHT);
-            new_light(point( d1,  d1), strength, col, FBO_LIGHT);
+            new_light(point(-d1, -d1), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point( d1, -d1), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point(-d1,  d1), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point( d1,  d1), strength, col, FBO_PLAYER_LIGHT);
 
-            new_light(point(-d2, -d1), strength, col, FBO_LIGHT);
-            new_light(point( d2, -d1), strength, col, FBO_LIGHT);
-            new_light(point(-d2,  d1), strength, col, FBO_LIGHT);
-            new_light(point( d2,  d1), strength, col, FBO_LIGHT);
+            new_light(point(-d2, -d1), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point( d2, -d1), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point(-d2,  d1), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point( d2,  d1), strength, col, FBO_PLAYER_LIGHT);
 
-            new_light(point(-d1, -d2), strength, col, FBO_LIGHT);
-            new_light(point( d1, -d2), strength, col, FBO_LIGHT);
-            new_light(point(-d1,  d2), strength, col, FBO_LIGHT);
-            new_light(point( d1,  d2), strength, col, FBO_LIGHT);
+            new_light(point(-d1, -d2), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point( d1, -d2), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point(-d1,  d2), strength, col, FBO_PLAYER_LIGHT);
+            new_light(point( d1,  d2), strength, col, FBO_PLAYER_LIGHT);
         }
 
         has_light = true;
         log("Player created");
     } else {
-        if (unlikely(is_light_strength())) {
+        if (unlikely(light_strength())) {
             std::string l = light_color();
             if (l.empty()) {
                 l = "white";
             }
             bool add_light = true;
             if (is_lava()) {
-                if (random_range(0, 100) < 50) {
-                    add_light = false;
-                }
+//                if (random_range(0, 100) < 80) {
+                    add_light = true;
+//                }
             }
             if (add_light) {
                 color c = string2color(l);
-                new_light(point(0, 0), is_light_strength(), c, FBO_LIGHT);
+                new_light(point(0, 0), light_strength(), c, FBO_PLAYER_LIGHT);
                 has_light = true;
             }
         }

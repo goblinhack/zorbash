@@ -432,9 +432,9 @@ int Thing::is_chasm(void) const
     return (tp()->is_chasm());
 }
 
-int Thing::is_light_strength(void) const
+int Thing::light_strength(void) const
 {_
-    return (tp()->is_light_strength());
+    return (tp()->light_strength());
 }
 
 int Thing::is_meat(void) const
@@ -855,9 +855,9 @@ int Thing::is_cursor_can_hover_over_but_needs_double_click(void) const
     return (tp()->is_cursor_can_hover_over_but_needs_double_click());
 }
 
-int Thing::gfx_unused_flag(void) const
+int Thing::gfx_glows(void) const
 {_
-    return (tp()->gfx_unused_flag());
+    return (tp()->gfx_glows());
 }
 
 int Thing::gfx_health_bar_shown_only_when_injured(void) const

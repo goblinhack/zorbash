@@ -30,6 +30,9 @@
 #include "my_ui.h"
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
+#include <unistd.h> // usleep
+
+#define ENABLE_DEBUG_GFX_GL_BLEND
 
 //
 // Display sorted.
