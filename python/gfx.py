@@ -221,9 +221,9 @@ def init_tiles1():
       "",
       #########################################################################
       "skill_devoted_thrust",
-      "skill_devoted_thrust_active",
+      "skill_devoted_thrust_activated",
       "skill_secondary_attack",
-      "skill_secondary_attack_active",
+      "skill_secondary_attack_activated",
       "skill_heal",
       "skill_heal_active",
       "",

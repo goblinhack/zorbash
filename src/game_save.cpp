@@ -173,6 +173,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->has_ever_moved        << shift; shift++;
     /* uint64_t */ bits64 |= my.t->has_light             << shift; shift++;
     /* uint64_t */ bits64 |= my.t->inited_tiles          << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_activated          << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_attached           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_being_destroyed    << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_blitted            << shift; shift++;
@@ -193,13 +194,13 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_resurrecting       << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_sleeping           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_starving           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_the_grid           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_tick_done          << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend_dungeon  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_sewer   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_dungeon << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend_sewer    << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_dungeon << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_sewer   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_fall    << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_the_grid           << shift; shift++;
     if (shift >= (int)(sizeof(bits64) * 8)) {
         ERR("Ran out of bits in serialization");
     }

@@ -479,6 +479,17 @@ static void wid_rightbar_create (void)
                 }
 
                 auto tpp = tp_find(tp_id);
+                bool activated = false;
+
+                for (auto id : monstp->skills) {
+                    auto t = level->thing_find(id);
+                    if (t) {
+                        if (t->tp() == tpp) {
+                            activated = t->is_activated;
+                        }
+                    }
+                }
+
                 auto tiles = &tpp->tiles;
 
                 if (!tiles) {
@@ -486,7 +497,7 @@ static void wid_rightbar_create (void)
                     continue;
                 }
 
-                auto tile = tile_first(tiles);
+                auto tile = tile_n(tiles, activated ? 1 : 0);
                 if (!tile) {
                     item++;
                     continue;
