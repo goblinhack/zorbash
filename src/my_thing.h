@@ -78,6 +78,7 @@ public:
     uint64_t has_internal_particle:1   {}; // current in motion particle
     uint64_t has_light:1               {};
     uint64_t inited_tiles:1            {};
+    uint64_t is_activated:1            {};
     uint64_t is_attached:1             {};
     uint64_t is_being_destroyed:1      {};
     uint64_t is_blitted:1              {};
@@ -98,13 +99,13 @@ public:
     uint64_t is_resurrecting:1         {};
     uint64_t is_sleeping:1             {};
     uint64_t is_starving:1             {};
+    uint64_t is_the_grid:1             {};
     uint64_t is_tick_done:1            {}; // has moved/hit and finished its move
     uint64_t is_waiting_to_ascend_dungeon:1  {};
-    uint64_t is_waiting_to_descend_sewer:1   {};
-    uint64_t is_waiting_to_descend_dungeon:1 {};
     uint64_t is_waiting_to_ascend_sewer:1    {};
+    uint64_t is_waiting_to_descend_dungeon:1 {};
+    uint64_t is_waiting_to_descend_sewer:1   {};
     uint64_t is_waiting_to_fall:1      {};
-    uint64_t is_the_grid:1             {};
 
     //
     // These are flags used to make sure we set or unset flags onto
