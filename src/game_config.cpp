@@ -28,7 +28,7 @@ void Config::reset (void)
 {_
     game_pix_scale_height        = {};
     game_pix_scale_width         = {};
-    game_pix_zoom                = 3;
+    game_pix_zoom                = GAME_DEFAULT_PIX_ZOOM;
     one_pixel_height             = {};
     one_pixel_width              = {};
     tile_pix_height              = {};
@@ -37,7 +37,7 @@ void Config::reset (void)
     tile_pixel_width             = {};
     ui_pix_scale_height          = {};
     ui_pix_scale_width           = {};
-    ui_pix_zoom                  = 2;
+    ui_pix_zoom                  = GAME_DEFAULT_UI_ZOOM;
     video_w_h_ratio              = {};
     debug_mode                   = false;
     fps_counter                  = false;

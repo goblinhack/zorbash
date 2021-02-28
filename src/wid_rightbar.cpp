@@ -507,10 +507,9 @@ static void wid_rightbar_create (void)
                     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
                 }
 
-#if 0
                 wid_set_on_mouse_over_b(w, wid_skillbox_mouse_over_b);
                 wid_set_on_mouse_over_e(w, wid_skillbox_mouse_over_e);
-#endif
+
                 wid_set_int_context(w, i);
             }
             item++;

@@ -203,7 +203,7 @@ _
 
     LOG("Slot %d has %s", slot, tpp->name().c_str());
 
-    for (auto oid : monstp->carrying) {
+    for (auto oid : monstp->skills) {
         auto o = thing_find(oid);
         if (o) {
             if (o->tp() == tpp) {
@@ -320,7 +320,7 @@ Thingp Level::skillbox_describe (const uint32_t slot)
 {_
     LOG("Skillbox: describe slot %d", slot);
 _
-    auto what = skillbox_get(game->skillbox_highlight_slot);
+    auto what = skillbox_get(slot);
     if (what) {
         what->log("Skillbox: describe slot %d", slot);
         what->describe_when_hovered_over_in_rightbar();

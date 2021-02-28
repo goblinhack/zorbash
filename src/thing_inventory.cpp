@@ -576,7 +576,7 @@ Thingp Level::inventory_describe (const uint32_t slot)
 {_
     LOG("Inventory: describe slot %d", slot);
 _
-    auto what = inventory_get(game->inventory_highlight_slot);
+    auto what = inventory_get(slot);
     if (what) {
         what->log("Inventory: describe slot %d", slot);
         what->describe_when_hovered_over_in_rightbar();
