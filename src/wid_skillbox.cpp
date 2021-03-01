@@ -129,16 +129,18 @@ _
 uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
                                     uint32_t button)
 {_
+    TOPCON("XXX");
+    auto slot = wid_get_int_context(w);
+    LOG("Skillbox: mouse up on slot %d", slot);
+
     if (game->state == Game::STATE_MOVING_ITEMS) {
         wid_thing_info_fini();
+        return false;
     }
 
     if (game->state == Game::STATE_COLLECTING_ITEMS) {
         wid_thing_collect_fini();
-    }
-
-    if (game->in_transit_item) {
-        return wid_in_transit_item_place(w, x, y, button);
+        return false;
     }
 
     if (game->paused()) {
@@ -150,36 +152,10 @@ uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
         return true;
     }
 
-    auto slot = wid_get_int_context(w);
     if (!level->skillbox_chosen(slot)) {
+        LOG("Skillbox: nothing on skill slot %d", slot);
         return true;
     }
 
-    if (game->state == Game::STATE_MOVING_ITEMS) {
-        level->skillbox_describe(slot);
-        auto t = level->skillbox_get(slot);
-        if (t) {
-            game->wid_thing_info_create(t);
-        }
-    }
-
     return true;
-}
-
-uint8_t wid_skillbox_mouse_up (Widp w, int32_t x, int32_t y,
-                               uint32_t button)
-{_
-    if (game->state == Game::STATE_MOVING_ITEMS) {
-        wid_thing_info_fini();
-    }
-
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        wid_thing_collect_fini();
-    }
-
-    if (game->in_transit_item) {
-        return wid_in_transit_item_place(w, x, y, button);
-    }
-
-    return false;
 }

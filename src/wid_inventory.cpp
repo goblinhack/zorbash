@@ -203,23 +203,3 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
 
     return true;
 }
-
-uint8_t wid_inventory_mouse_up (Widp w,
-                                int32_t x,
-                                int32_t y,
-                                uint32_t button)
-{_
-    if (game->state == Game::STATE_MOVING_ITEMS) {
-        wid_thing_info_fini();
-    }
-
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        wid_thing_collect_fini();
-    }
-
-    if (game->in_transit_item) {
-        return wid_in_transit_item_place(w, x, y, button);
-    }
-
-    return false;
-}

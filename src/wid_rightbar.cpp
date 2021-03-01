@@ -497,7 +497,7 @@ static void wid_rightbar_create (void)
                     continue;
                 }
 
-                auto tile = tile_n(tiles, activated ? 1 : 0);
+                auto tile = tile_n(tiles, activated ? 0 : 1);
                 if (!tile) {
                     item++;
                     continue;
@@ -520,6 +520,7 @@ static void wid_rightbar_create (void)
 
                 wid_set_on_mouse_over_b(w, wid_skillbox_mouse_over_b);
                 wid_set_on_mouse_over_e(w, wid_skillbox_mouse_over_e);
+                wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
 
                 wid_set_int_context(w, i);
             }

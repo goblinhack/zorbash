@@ -23,7 +23,3 @@ uint8_t wid_inventory_item_mouse_up(Widp w,
                                     int32_t x,
                                     int32_t y,
                                     uint32_t button);
-uint8_t wid_inventory_mouse_up(Widp w,
-                               int32_t x,
-                               int32_t y,
-                               uint32_t button);
