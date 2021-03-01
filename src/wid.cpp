@@ -5915,18 +5915,11 @@ void wid_tick_all (void)
     //
     // If we need to remake the inventory, do so
     //
-    if (game->request_remake_inventory) {
+    if (game->request_remake_inventory ||
+        game->request_remake_skillbox) {
         LOG("Handle request to remake inventory");
         wid_rightbar_init();
         game->request_remake_inventory = false;
-    }
-
-    //
-    // If we need to remake the skillbox, do so
-    //
-    if (game->request_remake_skillbox) {
-        LOG("Handle request to remake skillbox");
-        wid_skillbox_init();
         game->request_remake_skillbox = false;
     }
 

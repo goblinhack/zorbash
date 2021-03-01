@@ -213,7 +213,8 @@ _
         }
     }
 
-    LOG("Slot %d has tp %s that is not carried", slot, tpp->name().c_str());
+    LOG("Slot %d has skill tp %s that is not carried", slot, 
+        tpp->name().c_str());
     return nullptr;
 }
 
@@ -245,7 +246,7 @@ _
     Thingp what;
 
     if (slot != game->skillbox_highlight_slot) {
-        LOG("Skillbox: request to remake skillbox");
+        LOG("Skillbox: request to remake skillbox due to highlight");
         game->request_remake_skillbox = true;
         game->skillbox_highlight_slot = slot;
         what = skillbox_describe(slot);
@@ -254,6 +255,7 @@ _
     }
 
     if (!what) {
+        LOG("Skillbox: no skill chosen");
         return false;
     }
 
@@ -270,6 +272,7 @@ _
     }
 
     if (slot >= player->monstp->skillbox_id.size()) {
+        LOG("Skillbox: nothing in slot %d", slot);
         return false;
     }
 
@@ -278,6 +281,7 @@ _
 
     auto oid = get(player->monstp->skillbox_id, slot);
     if (!oid) {
+        LOG("Skillbox: no skill at slot %d", slot);
         return false;
     }
 
@@ -294,10 +298,13 @@ _
     }
 
     if (!what) {
+        LOG("Skillbox: no thing at slot %d", slot);
         return false;
     }
 
+    what->is_activated = !what->is_activated;
     what->log("Chosen skillbox item");
+#if 0
     if (what->is_weapon()) {
         player->wield(what);
         if (changed_highlight_slot) {
@@ -312,6 +319,7 @@ _
     } else if (what->is_used_automatically_when_selected()) {
         player->use(what);
     }
+#endif
 
     return true;
 }
