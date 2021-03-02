@@ -249,7 +249,14 @@ void Thing::update_interpolated_position (void)
     if (is_jumping) {
         float t = get_timestamp_jump_end() - get_timestamp_jump_begin();
         float dt = time_get_time_ms_cached() - get_timestamp_jump_begin();
-        float step = dt / t;
+
+        float step;
+        if (!t) {
+            step = 1.0;
+        } else {
+            step = dt / t;
+        }
+
         float dx = mid_at.x - last_mid_at.x;
         float dy = mid_at.y - last_mid_at.y;
 
@@ -296,7 +303,14 @@ void Thing::update_interpolated_position (void)
     } else {
         float t = get_timestamp_move_end() - get_timestamp_move_begin();
         float dt = time_get_time_ms_cached() - get_timestamp_move_begin();
-        float step = dt / t;
+
+        float step;
+        if (!t) {
+            step = 1.0;
+        } else {
+            step = dt / t;
+        }
+
         float dx = mid_at.x - last_mid_at.x;
         float dy = mid_at.y - last_mid_at.y;
 
