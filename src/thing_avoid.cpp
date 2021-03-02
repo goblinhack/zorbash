@@ -38,6 +38,23 @@ bool Tp::will_avoid_threat (Levelp level, point p) const
         }
     }
 
+    if (avoids_fire()) {
+        int heat = level->heatmap(p);
+        if (damage_doubled_from_fire()) {
+            if (heat > 0) {
+                if (avoids_fire()) {
+                    return true;
+                }
+            }
+        } else {
+            if (heat >= 4) { // this allows you to skip around lava
+                if (avoids_fire()) {
+                    return true;
+                }
+            }
+        }
+    }
+
     return false;
 }
 
