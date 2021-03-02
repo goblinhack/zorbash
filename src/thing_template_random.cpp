@@ -140,6 +140,17 @@ Tpp tp_random_monst (void)
     return tp_get_with_rarity_filter(tp_monst);
 }
 
+Tpp Level::tp_random_monst (const point &p)
+{_
+    for (;;) {
+        auto tpp = ::tp_random_monst();
+        if (tpp->will_avoid_threat(this, p)) {
+            continue;
+        }
+        return tpp;
+    }
+}
+
 Tpp tp_random_food (void)
 {_
     if (unlikely(!tp_food.size())) {

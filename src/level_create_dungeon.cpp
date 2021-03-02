@@ -148,6 +148,11 @@ bool Level::create_dungeon (point3d at, int seed)
         if (g_errored) { return false; }
 
         //
+        // Update the heatmap to avoid placing monsts next to lava
+        //
+        update_heatmap();
+
+        //
         // Items that have no special placement rules
         //
         create_dungeon_place_objects_with_normal_placement_rules(dungeon);
@@ -568,7 +573,9 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_gold(x, y))             { tp = tp_random_gold(); }
             if (d->is_key(x, y))              { tp = tp_random_key(); }
             if (d->is_potion(x, y))           { tp = tp_random_potion(); }
-            if (d->is_monst(x, y))            { tp = tp_random_monst(); }
+            if (d->is_monst(x, y)) { 
+                tp = tp_random_monst(point(x, y)); 
+            }
             if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
             if (d->is_minion_generator(x, y)) { tp = tp_random_generator(); }
             if (d->is_torch(x, y))            { tp = tp_random_torch(); }
