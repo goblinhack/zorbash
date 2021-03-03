@@ -13,8 +13,8 @@ void Game::tick_begin (const std::string &why)
     // Move when all things are done moving
     //
     game->tick_current++;
-    LOG("-");
-    LOG("Game tick %d begin (%s)", game->tick_current, why.c_str());
+    CON("-");
+    CON("Game tick %d begin (%s)", game->tick_current, why.c_str());
 
     if (level) {
         level->lights_fade();

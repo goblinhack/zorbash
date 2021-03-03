@@ -60,7 +60,7 @@ private:
     float _collision_attack_radius {};
     float _collision_radius {};
     fsize _sz;
-    int _ai_delay_after_moving_ms {};
+    int _unused_rrr98 {};
     int _ai_obstacle {};
     int _ai_scent_distance {};
     int _attack_eater {};
@@ -407,7 +407,7 @@ public:
     const std::string& weapon_carry_anim(void) const;
     float collision_attack_radius(void) const;
     float collision_radius(void) const;
-    int ai_delay_after_moving_ms(void) const;
+    int unused_rrr98(void) const;
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
@@ -642,7 +642,7 @@ public:
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
     std::string text_a_or_an(void) const;
-    void set_ai_delay_after_moving_ms(int);
+    void set_unused_rrr98(int);
     void set_ai_obstacle(int);
     void set_ai_scent_distance(int);
     void set_attack_eater(int);

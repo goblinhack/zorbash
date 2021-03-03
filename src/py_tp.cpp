@@ -701,7 +701,7 @@ PyObject *tp_set_br2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 
 TP_BODY_SET_DOUBLE(collision_attack_radius)
 TP_BODY_SET_DOUBLE(collision_radius)
-TP_BODY_SET_INT(ai_delay_after_moving_ms)
+TP_BODY_SET_INT(unused_rrr98)
 TP_BODY_SET_INT(ai_obstacle)
 TP_BODY_SET_INT(ai_scent_distance)
 TP_BODY_SET_INT(attack_eater)

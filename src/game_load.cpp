@@ -134,8 +134,8 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t  timestamp_hunger_tick     */ in >> bits(T); my.t->timestamp_hunger_tick = load(T);
     /* timestamp_t  timestamp_jump_begin      */ in >> bits(T); my.t->timestamp_jump_begin = load(T);
     /* timestamp_t  timestamp_jump_end        */ in >> bits(T); my.t->timestamp_jump_end = load(T);
-    /* timestamp_t  timestamp_last_tick       */ in >> bits(T); my.t->timestamp_last_tick = load(T);
-    /* timestamp_t  timestamp_last_ticked     */ in >> bits(T); my.t->timestamp_last_ticked = load(T);
+    /* timestamp_t  timestamp_unused2         */ in >> bits(T); my.t->timestamp_unused2 = load(T);
+    /* timestamp_t  timestamp_unused1         */ in >> bits(T); my.t->timestamp_unused1 = load(T);
     /* timestamp_t  timestamp_last_wander_try */ in >> bits(T); my.t->timestamp_last_wander_try = load(T);
     /* timestamp_t  timestamp_lunge_begin     */ in >> bits(T); my.t->timestamp_lunge_begin = load(T);
     /* timestamp_t  timestamp_lunge_end       */ in >> bits(T); my.t->timestamp_lunge_end = load(T);

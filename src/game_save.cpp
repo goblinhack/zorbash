@@ -87,7 +87,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* point        wander_target             */ out << bits(my.t->wander_target);
     /* point     where_i_dropped_an_item_last */ out << bits(my.t->where_i_dropped_an_item_last);
     /* point   where_i_failed_to_collect_last */ out << bits(my.t->where_i_failed_to_collect_last);
-    /* std::array<std::array<ThingId          */ out << bits(my.t->bag);
+    /* std::array<std::array<ThingId > >      */ out << bits(my.t->bag);
     /* std::list<ThingId>   carrying          */ out << bits(my.t->carrying);
     /* std::list<ThingId>   skills            */ out << bits(my.t->skills);
     /* std::string          msg               */ out << bits(my.t->msg);
@@ -106,8 +106,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t  timestamp_hunger_tick     */ out << bits(my.t->timestamp_hunger_tick);
     /* timestamp_t  timestamp_jump_begin      */ out << bits(my.t->timestamp_jump_begin);
     /* timestamp_t  timestamp_jump_end        */ out << bits(my.t->timestamp_jump_end);
-    /* timestamp_t  timestamp_last_tick       */ out << bits(my.t->timestamp_last_tick);
-    /* timestamp_t  timestamp_last_ticked     */ out << bits(my.t->timestamp_last_ticked);
+    /* timestamp_t  timestamp_unused2         */ out << bits(my.t->timestamp_unused2);
+    /* timestamp_t  timestamp_unused1         */ out << bits(my.t->timestamp_unused1);
     /* timestamp_t  timestamp_last_wander_try */ out << bits(my.t->timestamp_last_wander_try);
     /* timestamp_t  timestamp_lunge_begin     */ out << bits(my.t->timestamp_lunge_begin);
     /* timestamp_t  timestamp_lunge_end       */ out << bits(my.t->timestamp_lunge_end);

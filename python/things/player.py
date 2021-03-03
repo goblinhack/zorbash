@@ -50,7 +50,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_modifier_constitution(10)
     x.set_modifier_defence(10)
     x.set_modifier_strength(10)
-    x.set_move_speed_ms(120)
+    x.set_move_speed_ms(150)
     x.set_on_death_is_corpse(True)
     x.set_stamina(100)
     x.set_text_a_or_an("the")

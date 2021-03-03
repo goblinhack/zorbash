@@ -6,7 +6,6 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-    x.set_ai_delay_after_moving_ms(1000)
     x.set_ai_scent_distance(5)
     x.set_attack_eater(True)
     x.set_attack_lunge(True)
@@ -57,7 +56,7 @@ def tp_init(name, text_name):
     x.set_modifier_defence(5)
     x.set_modifier_strength(5)
     x.set_monst_size(zx.MONST_SIZE_TINY)
-    x.set_move_speed_ms(1000)
+    x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_on_death_do("jelly_baby.on_death()")

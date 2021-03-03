@@ -27,7 +27,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         METH_VARARGS | METH_KEYWORDS,                                           \
         "set a " #__field__ " in a thing template"},                            \
 
-TP_SET_PROTO(ai_delay_after_moving_ms)
+TP_SET_PROTO(unused_rrr98)
 TP_SET_PROTO(ai_obstacle)
 TP_SET_PROTO(ai_scent_distance)
 TP_SET_PROTO(attack_eater)
