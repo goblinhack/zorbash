@@ -9,23 +9,6 @@ Liberate the Orb of Zorb and defeat Zorbash to win.
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.
 
-Upcoming work
--------------
-
-- frame around minimap
-- skills
-- skill, devoted thrust, put everything into one massive strike
-- skill, whirl attack, attack 2 or 3 enemies
-- skill, healing
-- skill, defensive mode, recover stamina
-- skill, kneecap, hobble enemy
-- skill, switch to defensive
-- skill, blind strike, attack the eyes
-- skill, slash and roll
-- skill, slash and jump
-- skill, spring attack, give up a round for 2.5 times damage
-- tiny pixel effects that bounce?
-
 Graphics
 --------
 Additional gfx by Oryx, [found here](https://www.oryxdesignlab.com/)
@@ -33,8 +16,7 @@ The rest by me, Goblinhack.
 
 Music
 -----
-TODO
-Markus Heichelbech (deceased senior technician): [found here](http://nosoapradio.us)
+None yet
 
 Screenshots
 -----------
