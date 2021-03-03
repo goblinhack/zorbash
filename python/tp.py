@@ -706,8 +706,8 @@ class Tp:
     def set_collision_attack_radius(self, value):
         zx.tp_set_collision_attack_radius(self, value)
 
-    def set_ai_delay_after_moving_ms(self, value):
-        zx.tp_set_ai_delay_after_moving_ms(self, value)
+    def set_unused_rrr98(self, value):
+        zx.tp_set_unused_rrr98(self, value)
 
     def set_gfx_bounce_on_move(self, value):
         zx.tp_set_gfx_bounce_on_move(self, value)

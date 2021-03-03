@@ -15,6 +15,7 @@
 void Thing::ai_get_next_hop (void)
 {_
     log("AI");
+    con("ai");
 _
     point start((int)mid_at.x, (int)mid_at.y);
 

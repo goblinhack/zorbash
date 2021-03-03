@@ -553,7 +553,7 @@ static PyMethodDef python_c_METHODS[] = {
      * The cast of the function is necessary since PyCFunction values
      * only take two PyObject *parameters, and some take three.
      */
-    TP_SET_DECL(ai_delay_after_moving_ms)
+    TP_SET_DECL(unused_rrr98)
     TP_SET_DECL(ai_obstacle)
     TP_SET_DECL(ai_scent_distance)
     TP_SET_DECL(bl1_tile)

@@ -207,9 +207,9 @@ void Thing::delete_lights (void)
     }
 }
 
-int Thing::ai_delay_after_moving_ms(void)
+int Thing::unused_rrr98(void)
 {_
-    return (tp()->ai_delay_after_moving_ms());
+    return (tp()->unused_rrr98());
 }
 
 int Thing::ai_scent_distance(void) const
@@ -4042,99 +4042,99 @@ timestamp_t Thing::incr_timestamp_fadeup_end (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// timestamp_last_ticked
+// timestamp_unused1
 ////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_last_ticked (void) const
+timestamp_t Thing::get_timestamp_unused1 (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->timestamp_last_ticked);
+        return (monstp->timestamp_unused1);
     } else {
         return (0);
     }
 }
 
-timestamp_t Thing::set_timestamp_last_ticked (timestamp_t v)
+timestamp_t Thing::set_timestamp_unused1 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_ticked = v);
+    return (monstp->timestamp_unused1 = v);
 }
 
-timestamp_t Thing::decr_timestamp_last_ticked (timestamp_t v)
+timestamp_t Thing::decr_timestamp_unused1 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_ticked -= v);
+    return (monstp->timestamp_unused1 -= v);
 }
 
-timestamp_t Thing::incr_timestamp_last_ticked (timestamp_t v)
+timestamp_t Thing::incr_timestamp_unused1 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_ticked += v);
+    return (monstp->timestamp_unused1 += v);
 }
 
-timestamp_t Thing::decr_timestamp_last_ticked (void)
+timestamp_t Thing::decr_timestamp_unused1 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_ticked--);
+    return (monstp->timestamp_unused1--);
 }
 
-timestamp_t Thing::incr_timestamp_last_ticked (void)
+timestamp_t Thing::incr_timestamp_unused1 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_ticked++);
+    return (monstp->timestamp_unused1++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// timestamp_last_tick
+// timestamp_unused2
 ////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_last_tick (void) const
+timestamp_t Thing::get_timestamp_unused2 (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->timestamp_last_tick);
+        return (monstp->timestamp_unused2);
     } else {
         return (0);
     }
 }
 
-timestamp_t Thing::set_timestamp_last_tick (timestamp_t v)
+timestamp_t Thing::set_timestamp_unused2 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_tick = v);
+    return (monstp->timestamp_unused2 = v);
 }
 
-timestamp_t Thing::decr_timestamp_last_tick (timestamp_t v)
+timestamp_t Thing::decr_timestamp_unused2 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_tick -= v);
+    return (monstp->timestamp_unused2 -= v);
 }
 
-timestamp_t Thing::incr_timestamp_last_tick (timestamp_t v)
+timestamp_t Thing::incr_timestamp_unused2 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_tick += v);
+    return (monstp->timestamp_unused2 += v);
 }
 
-timestamp_t Thing::decr_timestamp_last_tick (void)
+timestamp_t Thing::decr_timestamp_unused2 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_tick--);
+    return (monstp->timestamp_unused2--);
 }
 
-timestamp_t Thing::incr_timestamp_last_tick (void)
+timestamp_t Thing::incr_timestamp_unused2 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_tick++);
+    return (monstp->timestamp_unused2++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

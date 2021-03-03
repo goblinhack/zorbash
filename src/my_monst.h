@@ -113,8 +113,8 @@ public:
     timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
     timestamp_t  timestamp_jump_begin {};
     timestamp_t  timestamp_jump_end {};
-    timestamp_t  timestamp_last_tick {};
-    timestamp_t  timestamp_last_ticked {};
+    timestamp_t  timestamp_unused2 {};
+    timestamp_t  timestamp_unused1 {};
     timestamp_t  timestamp_last_wander_try {};
     timestamp_t  timestamp_lunge_begin {};
     timestamp_t  timestamp_lunge_end {};

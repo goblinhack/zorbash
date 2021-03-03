@@ -342,7 +342,7 @@ void Thing::init (Levelp level,
     // Jitter the initial ticks so things don't all tick the same time
     //
     if (is_active()) {
-        set_timestamp_last_tick(time_get_time_ms_cached() +
+        set_timestamp_unused2(time_get_time_ms_cached() +
                                 random_range(0, get_tick_rate_tenths() * 100));
     }
 

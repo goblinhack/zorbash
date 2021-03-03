@@ -15,7 +15,7 @@
 
 void Thing::update_tick (void)
 {
-    set_timestamp_last_tick(time_get_time_ms_cached());
+    set_timestamp_unused2(time_get_time_ms_cached());
     set_tick_last_did_something(game->tick_current);
     set_tick(game->tick_current);
 }
@@ -36,19 +36,6 @@ bool Thing::achieve_goals_in_life (void)
         log("Skip achieve goals in life");
         return true;
     }
-
-    //
-    // Don't do stuff too often
-    //
-    if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
-                                         get_timestamp_last_tick())) {
-        if (g_opt_debug3) {
-            log("Too often");
-        }
-        return false;
-    }
-
-    set_timestamp_last_tick(time_get_time_ms_cached());
 
     log("Achieve goals at tick %d, game is at tick %u",
         get_tick(), game->tick_current);
@@ -130,7 +117,7 @@ bool Thing::achieve_goals_in_death (void)
     // Don't do stuff too often
     //
     if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
-                                         get_timestamp_last_tick())) {
+                                         get_timestamp_unused2())) {
         return false;
     }
 

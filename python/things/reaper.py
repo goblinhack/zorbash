@@ -3,7 +3,6 @@ import tp
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-    x.set_ai_delay_after_moving_ms(100)
     x.set_ai_scent_distance(40)
     x.set_attack_living(True)
     x.set_attack_lunge(True)
@@ -50,7 +49,7 @@ def tp_init(name, text_name):
     x.set_modifier_defence(25)
     x.set_modifier_strength(25)
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
-    x.set_move_speed_ms(300)
+    x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
     x.set_on_death_is_corpse(True)
     x.set_rarity(zx.RARITY_VERY_RARE)

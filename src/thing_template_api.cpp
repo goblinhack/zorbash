@@ -76,7 +76,7 @@ const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim
 const std::string& Tp::gfx_anim_attack(void) const { return _gfx_anim_attack; }
 float Tp::collision_attack_radius(void) const { return _collision_attack_radius; }
 float Tp::collision_radius(void) const { return _collision_radius; }
-int Tp::ai_delay_after_moving_ms(void) const { return _ai_delay_after_moving_ms; }
+int Tp::unused_rrr98(void) const { return _unused_rrr98; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
 int Tp::ai_scent_distance(void) const { return _ai_scent_distance; }
 int Tp::blit_bot_off(void) const { return _blit_bot_off; }
@@ -315,7 +315,7 @@ int Tp::weapon_damage(void) const { return _weapon_damage; }
 int Tp::weapon_use_delay_hundredths(void) const { return _weapon_use_delay_hundredths; }
 int Tp::weapon_use_distance(void) const { return _weapon_use_distance; }
 std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
-void Tp::set_ai_delay_after_moving_ms(int v) { _ai_delay_after_moving_ms = v; }
+void Tp::set_unused_rrr98(int v) { _unused_rrr98 = v; }
 void Tp::set_ai_obstacle(int v) { _ai_obstacle = v; }
 void Tp::set_ai_scent_distance(int v) { _ai_scent_distance = v; }
 void Tp::set_blit_bot_off(int v) { _blit_bot_off = v; }
