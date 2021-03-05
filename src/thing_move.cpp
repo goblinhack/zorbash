@@ -389,9 +389,6 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
         return;
     }
 
-    if (is_monst() || is_player()){
-    con("Move to %f,%f speed %u", to.x, to.y, move_speed);
-    }
     log("Move to %f,%f", to.x, to.y);
     level_pop();
     mid_at = to;
