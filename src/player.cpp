@@ -308,7 +308,7 @@ void player_tick (void)
         } else if (wait) {
             player->log("Player collect or wait");
         } else {
-            player->log("Player move");
+            player->log("Player move attempt");
         }
         _
 
