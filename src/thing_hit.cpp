@@ -249,7 +249,15 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         log("Is killed by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->text_a_or_an();
+
+        //
+        // If not a monst, e.g. a generator then don't include killed by
+        //
         auto reason = "killed by " + killer;
+        if (!is_monst()) {
+            reason = "by " + killer;
+        }
+
         dead(real_hitter, reason);
 
         //

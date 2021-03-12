@@ -54,7 +54,11 @@ void Thing::kill (Thingp killer, const char *reason)
         log("%s is dead, %s", text_The().c_str(), reason);
         if (killer && (killer != this)) {
             if (killer->is_player()) {
-                TOPCON("%s is dead, %s.", text_The().c_str(), reason);
+                if (is_monst()) {
+                    TOPCON("%s is dead, %s.", text_The().c_str(), reason);
+                } else {
+                    TOPCON("%s is destroyed %s.", text_The().c_str(), reason);
+                }
             }
         }
     }
