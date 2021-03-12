@@ -621,6 +621,23 @@ _
             log("Best candidate %s", it->to_string().c_str());
         }
 
+        //
+        // We hit this path if you click on a door and attack it.
+        // However, try to open the door if you have a key.
+        //
+        if (it->is_door() && !it->is_open) {
+            auto owner = get_immediate_owner();
+            if (owner) {
+                if (owner->open_door(it)) {
+                    *target_attacked = false;
+                    ret = true;
+                }
+            } else if (open_door(it)) {
+                *target_attacked = false;
+                ret = true;
+            }
+        }
+
         if (attack(it)) {
             *target_attacked = true;
             ret = true;
@@ -1013,10 +1030,15 @@ _
             }
         }
     } else if (it->is_door() && !it->is_open) {
-        if (things_overlap(me, A_at, it)) {
-            if (!it->is_dead) {
+        if (!it->is_dead) {
+            if (things_overlap(me, A_at, it)) {
                 log("Yes; overlaps and can open");
-                return !open_door(it);
+                if (open_door(it)) {
+                    return true;
+                } else if (things_overlap_attack(me, A_at, it)) {
+                    log("Yes; overlaps and can attack");
+                    return true;
+                }
             }
         }
     } else if (it->is_ethereal() && !is_player()) {
