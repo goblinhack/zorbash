@@ -592,14 +592,38 @@ static void grab_key (void)
 
 static uint8_t game_config_keyboard_profile_arrow_keys (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    game->config.key_move_up    = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_UP);
     game->config.key_move_up    = SDL_SCANCODE_UP;
+
+    game->config.key_move_left  = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_LEFT);
     game->config.key_move_left  = SDL_SCANCODE_LEFT;
+
+    game->config.key_move_down  = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_DOWN);
     game->config.key_move_down  = SDL_SCANCODE_DOWN;
+
+    game->config.key_move_right = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_RIGHT);
     game->config.key_move_right = SDL_SCANCODE_RIGHT;
+
+    game->config.key_map_up     = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_W);
     game->config.key_map_up     = SDL_SCANCODE_W;
+
+    game->config.key_map_left   = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_A);
     game->config.key_map_left   = SDL_SCANCODE_A;
+
+    game->config.key_map_down   = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_S);
     game->config.key_map_down   = SDL_SCANCODE_S;
+
+    game->config.key_map_right  = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_D);
     game->config.key_map_right  = SDL_SCANCODE_D;
+
     game->config_keyboard_select();
 
     return true;
@@ -607,14 +631,38 @@ static uint8_t game_config_keyboard_profile_arrow_keys (Widp w, int32_t x, int32
 
 static uint8_t game_config_keyboard_profile_wasd (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    game->config.key_move_up    = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_W);
     game->config.key_move_up    = SDL_SCANCODE_W;
+
+    game->config.key_move_left  = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_A);
     game->config.key_move_left  = SDL_SCANCODE_A;
+
+    game->config.key_move_down  = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_S);
     game->config.key_move_down  = SDL_SCANCODE_S;
+
+    game->config.key_move_right = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_D);
     game->config.key_move_right = SDL_SCANCODE_D;
+
+    game->config.key_map_up     = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_UP);
     game->config.key_map_up     = SDL_SCANCODE_UP;
+
+    game->config.key_map_left   = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_LEFT);
     game->config.key_map_left   = SDL_SCANCODE_LEFT;
+
+    game->config.key_map_down   = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_DOWN);
     game->config.key_map_down   = SDL_SCANCODE_DOWN;
+
+    game->config.key_map_right  = 0;
+    game_config_check_for_conflicts(SDL_SCANCODE_RIGHT);
     game->config.key_map_right  = SDL_SCANCODE_RIGHT;
+
     game->config_keyboard_select();
 
     return true;

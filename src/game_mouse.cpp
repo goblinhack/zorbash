@@ -87,7 +87,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
             if (t == level->player) {
                 continue;
             }
-            if (t->is_alive_monst() || t->is_minion_generator()) {
+            if (t->is_door() || t->is_alive_monst() || t->is_minion_generator()) {
                 player->log("Close enough to attack");
                 player->attack(level->cursor->mid_at);
                 return true;
