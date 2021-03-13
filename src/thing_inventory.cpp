@@ -555,10 +555,10 @@ _
 
     what->log("Chosen inventory item");
     if (what->is_weapon()) {
-        player->wield(what);
         if (changed_highlight_slot) {
-            game->tick_begin("player wielded a new weapon");
+            game->tick_begin("player changed weapon");
         }
+        player->wield(what);
     } else if (what->is_bag()) {
         game->wid_thing_info_create(what);
         what->log("Moving items flag set");

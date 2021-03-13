@@ -116,7 +116,7 @@ void Thing::kill_minions (Thingp killer)
         auto o = minion->get_immediate_minion_owner();
         if (o && (o == this)) {
             minion->remove_minion_owner();
-            minion->dead(killer, "minion master died");
+            minion->dead(killer, "its master died");
         }
     }
 }

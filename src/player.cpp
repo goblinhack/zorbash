@@ -263,6 +263,7 @@ void player_tick (void)
     }
 
     if (jump) {
+        game->tick_begin("player jumped");
         player->log("Jump");
 
         if (game->cursor_move_path.size()) {
@@ -301,7 +302,6 @@ void player_tick (void)
         player->monstp->move_path.clear();
         game->cursor_move_path.clear();
         level->cursor_path_clear();
-        game->tick_begin("player jumped");
     } else if (up || down || left || right || attack || wait) {
         if (attack) {
             player->log("Player attack");
