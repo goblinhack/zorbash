@@ -44,7 +44,7 @@ uint8_t wid_thing_info_init (void)
     return true;
 }
 
-void Game::wid_thing_info_destroy (void)
+void Game::wid_thing_info_destroy_immediate (void)
 {_
     if (game->request_remake_inventory) {
         //
@@ -55,6 +55,11 @@ void Game::wid_thing_info_destroy (void)
     }
 
     wid_thing_info_fini();
+}
+
+void Game::wid_thing_info_destroy_deferred (void)
+{_
+    request_destroy_thing_info = time_get_time_ms_cached();
 }
 
 WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
@@ -350,8 +355,10 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
     if (wid_thing_info_window) {
         t->log("Destroy window");
-        wid_thing_info_destroy();
+        wid_thing_info_destroy_immediate();
     }
+
+    request_destroy_thing_info = 0;
 
     auto player = game->level->player;
     if (!player){

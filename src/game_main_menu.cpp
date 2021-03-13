@@ -333,7 +333,7 @@ void Game::main_menu_select (void)
     wid_thing_info_fini();
     wid_thing_collect_fini();
 
-    game->wid_thing_info_destroy();
+    game->wid_thing_info_destroy_immediate();
 
     point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 19);
     point br = make_point(TERM_WIDTH - 7, TERM_HEIGHT - 1);
