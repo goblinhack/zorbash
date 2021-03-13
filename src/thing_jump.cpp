@@ -479,7 +479,7 @@ void Thing::jump_end (void)
         auto t = nearby_most_dangerous_thing_get();
         if (t) {
             std::string s = t->text_The() + " attacks as you land";
-            game->tick_begin("monst attack as player landed");
+            game->tick_begin("monst attacked as player landed");
         }
     }
     wobble(25);

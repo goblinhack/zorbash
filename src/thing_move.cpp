@@ -139,12 +139,11 @@ bool Thing::move (fpoint future_pos,
     move_set_dir_from_delta(delta);
 
     if (attack) {
-        use_weapon();
-
         if (is_player()) {
             game->tick_begin("player attacked");
         }
 
+        use_weapon();
         return false;
     }
 
