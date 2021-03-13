@@ -83,7 +83,7 @@ void Level::cursor_find_on_visible_things (
 
     cursor_needs_update = false;
 
-    game->wid_thing_info_destroy();
+    game->wid_thing_info_destroy_deferred();
 
     if (cursor) {
         auto p = cursor->mid_at;

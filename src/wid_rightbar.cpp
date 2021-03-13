@@ -94,7 +94,7 @@ _
         return;
     }
 
-    game->wid_thing_info_destroy();
+    game->wid_thing_info_destroy_deferred();
 
     //
     // Do not create new wids in here

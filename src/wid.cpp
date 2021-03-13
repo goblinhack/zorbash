@@ -5923,6 +5923,13 @@ void wid_tick_all (void)
         game->request_remake_skillbox = false;
     }
 
+    if (game->request_destroy_thing_info) {
+        if (time_have_x_tenths_passed_since(
+            1, game->request_destroy_thing_info)) {
+            wid_thing_info_fini();
+        }
+    }
+
     //
     // Just in case the window cannot be remade, clean up
     //

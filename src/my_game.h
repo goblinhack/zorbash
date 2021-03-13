@@ -129,7 +129,8 @@ public:
     void dead_select(const char *reason);
     void wid_thing_info_create(Thingp, bool when_hovering_over = false);
     void wid_thing_info_create_when_hovering_over(Thingp);
-    void wid_thing_info_destroy(void);
+    void wid_thing_info_destroy_deferred(void);
+    void wid_thing_info_destroy_immediate(void);
     WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
     void wid_thing_collect_create(const std::list<Thingp> &items);
     void wid_thing_collect_destroy(void);
@@ -219,6 +220,7 @@ public:
     bool               request_remake_skillbox {};
     bool               request_destroy_bags {};   // Finished emptying temporary bag
     bool               update_rightbar {};
+    uint32_t           request_destroy_thing_info {};
 
     //
     // An item being moved between bags

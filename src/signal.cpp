@@ -14,10 +14,15 @@
 
 void callstack_dump (void)
 {_
+    if (!g_opt_debug2) {
+        return;
+    }
+
     static int done;
     if (done) {
         return;
     }
+
     done = true;
 
     fprintf(MY_STDERR, "code trace\n");
