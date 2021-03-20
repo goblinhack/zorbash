@@ -65,12 +65,12 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
     }
 }
 
-bool Thing::use (Thingp what)
+bool Thing::use (Thingp what, int *damage)
 {_
     log("Trying to use: %s", what->to_string().c_str());
 _
     if (what->is_skill()) {
-        skill_use(what);
+        skill_use(what, damage);
     } else if (what->is_weapon()) {
         TOPCON("You wield the %s.", what->text_the().c_str());
         if (is_player()) {
