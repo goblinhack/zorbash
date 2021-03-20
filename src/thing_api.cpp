@@ -4752,6 +4752,7 @@ const std::string& Thing::str6 (void) const {_ return (tp()->str6()); }
 const std::string& Thing::str7 (void) const {_ return (tp()->str7()); }
 const std::string& Thing::long_text_description (void) const {_ return (tp()->long_text_description()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }
+const std::string& Thing::text_on_use (void) const {_ return (tp()->text_on_use()); }
 const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do()); }
 const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }

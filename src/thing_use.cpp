@@ -66,7 +66,9 @@ bool Thing::use (Thingp what)
 {_
     log("Trying to use: %s", what->to_string().c_str());
 _
-    if (what->is_weapon()) {
+    if (what->is_skill()) {
+        skill_use(what);
+    } else if (what->is_weapon()) {
         TOPCON("You wield the %s.", what->text_the().c_str());
         if (is_player()) {
             game->tick_begin("player used an item");

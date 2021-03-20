@@ -274,7 +274,8 @@ _
     }
 
     //
-    // No do not clear this. We need to keep the weapon around so we can swing it
+    // No do not clear this. We need to keep the weapon around so we can swing 
+    // it
     //
     set_weapon_id(0);
 }

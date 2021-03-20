@@ -2074,13 +2074,6 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         return;
     }
 
-#if 0
-    if (w->name == "wid_bag Items found") {
-        wid_dump(w, 0);
-        DIE("Xxx");
-    }
-#endif
-
     WID_DBG(w, "destroy delay");
 
     (*wp) = nullptr;

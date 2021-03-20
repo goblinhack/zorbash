@@ -109,3 +109,18 @@ void Thing::skill_remove_all (void)
         skill_remove(t);
     }
 }
+
+bool Thing::skill_use (Thingp it)
+{_
+    log("Try to use skill %s", it->to_string().c_str());
+
+    auto tp = it->tp();
+    TOPCON("%s", tp->text_on_use().c_str());
+_
+    if (!monstp) {
+        log("No; not a monst");
+        return false;
+    }
+
+    return true;
+}

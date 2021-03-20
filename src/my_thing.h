@@ -220,6 +220,7 @@ public:
     bool skill_add(Thingp it);
     bool skill_remove(Thingp it);
     void skill_remove_all(void);
+    bool skill_use(Thingp it);
     bool change_owner(Thingp new_owner);
     bool chasm_tick();
     bool check_anything_to_carry(void);
@@ -340,6 +341,7 @@ public:
     const std::string& str6(void) const;
     const std::string& str7(void) const;
     const std::string& text_description(void) const;
+    const std::string& text_on_use(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;

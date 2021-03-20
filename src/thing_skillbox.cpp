@@ -304,6 +304,12 @@ _
 
     what->is_activated = !what->is_activated;
     what->log("Chosen skillbox item");
+
+    if (what->is_activated) {
+        TOPCON("You activate %s skill.", what->text_the().c_str());
+    } else {
+        TOPCON("You deactivate %s skill.", what->text_the().c_str());
+    }
 #if 0
     if (what->is_weapon()) {
         player->wield(what);

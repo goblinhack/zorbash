@@ -817,6 +817,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(long_text_description)
     TP_SET_DECL(text_a_or_an)
     TP_SET_DECL(text_description)
+    TP_SET_DECL(text_on_use)
     TP_SET_DECL(text_hits)
     TP_SET_DECL(text_name)
     TP_SET_DECL(text_title)
