@@ -46,7 +46,7 @@ void Thing::throw_at (Thingp what, Thingp target)
         what->location_check();
     } else {
         if (what->is_used_when_thrown()) {
-            used(what, target);
+            used(what, target, true /* remove_after_use */);
         } else {
             drop(what, target);
         }
