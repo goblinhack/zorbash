@@ -69,6 +69,7 @@ const std::string& Tp::str6(void) const { return _str6; }
 const std::string& Tp::str7(void) const { return _str7; }
 const std::string& Tp::long_text_description(void) const { return _long_text_description; }
 const std::string& Tp::text_description(void) const { return _text_description; }
+const std::string& Tp::text_on_use(void) const { return _text_on_use; }
 const std::string& Tp::text_hits(void) const { return _text_hits; }
 const std::string& Tp::text_name(void) const { return _text_name; }
 const std::string& Tp::short_text_name(void) const { return _short_text_name; }
@@ -561,6 +562,7 @@ void Tp::set_str7(const std::string &v) { _str7 = v; }
 void Tp::set_long_text_description(const std::string &v) { _long_text_description = v; }
 void Tp::set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
 void Tp::set_text_description(const std::string &v) { _text_description = v; }
+void Tp::set_text_on_use(const std::string &v) { _text_on_use = v; }
 void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
 void Tp::set_text_name(const std::string &v) { _text_name = v; }
 void Tp::set_short_text_name(const std::string &v) { _short_text_name = v; }

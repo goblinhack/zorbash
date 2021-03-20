@@ -7,6 +7,7 @@
 #include "my_game.h"
 #include "my_tile.h"
 #include "my_thing.h"
+#include "my_monst.h"
 #include "my_sprintf.h"
 #include "my_thing_template.h"
 #include "my_array_bounds_check.h"
@@ -130,6 +131,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+    for (auto oid : real_hitter->monstp->skills) {
+        auto skill = level->thing_find(oid);
+        if (skill && skill->is_activated) {
+            real_hitter->use(skill);
+        }
+    }
+
     if (is_player()) {
         if (damage > THING_DAMAGE_SHAKE_ABOVE) {
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
@@ -173,7 +181,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                         text_the().c_str(), damage);
             } else {
                 TOPCON("You hit the %s for %d damage!",
-                        text_the().c_str(), damage);
+                       text_the().c_str(), damage);
             }
         }
         if (real_hitter->is_fire() ||

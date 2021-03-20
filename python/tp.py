@@ -151,6 +151,9 @@ class Tp:
     def set_text_description(self, value):
         zx.tp_set_text_description(self, value)
 
+    def set_text_on_use(self, value):
+        zx.tp_set_text_on_use(self, value)
+
     def set_on_birth_do(self, value):
         zx.tp_set_on_birth_do(self, value)
 

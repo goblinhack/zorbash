@@ -129,7 +129,6 @@ _
 uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
                                     uint32_t button)
 {_
-    TOPCON("XXX");
     auto slot = wid_get_int_context(w);
     LOG("Skillbox: mouse up on slot %d", slot);
 
