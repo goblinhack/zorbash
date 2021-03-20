@@ -229,95 +229,194 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         game->quit_select();
         return true;
     }
-    if (key->scancode == (SDL_Scancode)game->config.key_action0) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+    if (sdl_shift_held) {
+        //
+        // If shift is held, select skills
+        //
+        if (key->scancode == (SDL_Scancode)game->config.key_action0) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(9);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(9);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action1) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action1) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(0);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(0);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action2) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action2) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(1);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(1);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action3) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action3) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(2);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(2);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action4) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action4) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(3);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(3);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action5) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action5) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(4);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(4);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action6) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action6) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(5);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(5);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action7) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action7) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(6);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(6);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action8) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action8) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(7);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(7);
-        wid_rightbar_init();
-        return true;
-    }
-    if (key->scancode == (SDL_Scancode)game->config.key_action9) {
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            return false;
+        if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->skillbox_chosen(8);
+            wid_rightbar_init();
+            return true;
         }
-        wid_thing_info_fini(); // To remove bag or other info
-        level->inventory_chosen(8);
-        wid_rightbar_init();
-        return true;
+    } else {
+        //
+        // If shift is not held, select inventory
+        //
+        if (key->scancode == (SDL_Scancode)game->config.key_action0) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(9);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action1) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(0);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action2) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(1);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action3) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(2);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action4) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(3);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action5) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(4);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action6) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(5);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action7) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(6);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action8) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(7);
+            wid_rightbar_init();
+            return true;
+        }
+        if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+            if (game->state == Game::STATE_CHOOSING_TARGET) {
+                return false;
+            }
+            wid_thing_info_fini(); // To remove bag or other info
+            level->inventory_chosen(8);
+            wid_rightbar_init();
+            return true;
+        }
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
         if (game->state == Game::STATE_CHOOSING_TARGET ||

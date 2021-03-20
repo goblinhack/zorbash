@@ -134,7 +134,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     for (auto oid : real_hitter->monstp->skills) {
         auto skill = level->thing_find(oid);
         if (skill && skill->is_activated) {
-            real_hitter->use(skill);
+            real_hitter->use(skill, &damage);
         }
     }
 

@@ -220,7 +220,7 @@ public:
     bool skill_add(Thingp it);
     bool skill_remove(Thingp it);
     void skill_remove_all(void);
-    bool skill_use(Thingp it);
+    bool skill_use(Thingp it, int *damage = nullptr);
     bool change_owner(Thingp new_owner);
     bool chasm_tick();
     bool check_anything_to_carry(void);
@@ -296,7 +296,7 @@ public:
     bool try_to_jump(void);
     bool try_to_jump_away_from_player(void);
     bool try_to_jump_towards_player(void);
-    bool use(Thingp w);
+    bool use(Thingp w, int *damage = nullptr);
     bool will_avoid_threat(const Thingp it);
     bool will_avoid_threat(const fpoint &p);
     bool will_avoid_threat(const point &p);

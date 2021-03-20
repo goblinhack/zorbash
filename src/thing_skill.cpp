@@ -110,7 +110,7 @@ void Thing::skill_remove_all (void)
     }
 }
 
-bool Thing::skill_use (Thingp what)
+bool Thing::skill_use (Thingp what, int *damage)
 {_
     log("Try to use skill %s", what->to_string().c_str());
 
