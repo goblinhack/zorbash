@@ -12,7 +12,7 @@
 #include "my_string.h"
 #include "my_monst.h"
 
-void Thing::used (Thingp what, Thingp target)
+void Thing::used (Thingp what, Thingp target, bool remove_after_use)
 {_
     auto on_use = what->tp()->on_use_do();
     if (!std::empty(on_use)) {
@@ -49,17 +49,20 @@ void Thing::used (Thingp what, Thingp target)
         }
     }
 
-    auto immediate_owner = what->get_immediate_owner();
-    if (immediate_owner) {
-        immediate_owner->bag_remove(what);
-    }
-
-    what->hooks_remove();
-    what->remove_owner();
-    monstp->carrying.remove(what->id);
-
     log("Used %s", what->to_string().c_str());
-    what->dead("used");
+
+    if (remove_after_use) {
+        auto immediate_owner = what->get_immediate_owner();
+        if (immediate_owner) {
+            immediate_owner->bag_remove(what);
+        }
+
+        what->hooks_remove();
+        what->remove_owner();
+        monstp->carrying.remove(what->id);
+
+        what->dead("used");
+    }
 }
 
 bool Thing::use (Thingp what)
@@ -75,13 +78,13 @@ _
         }
     } else if (what->is_food()) {
         eat(what);
-        used(what, this);
+        used(what, this, true /* remove after use */);
         if (is_player()) {
             game->tick_begin("player ate an item");
         }
     } else if (what->is_potion()) {
         TOPCON("You quaff the %s.", what->text_the().c_str());
-        used(what, this);
+        used(what, this, true /* remove after use */);
         if (is_player()) {
             game->tick_begin("player drunk an item");
         }

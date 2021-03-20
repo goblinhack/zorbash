@@ -12,43 +12,43 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-bool Thing::skill_add (Thingp it)
+bool Thing::skill_add (Thingp what)
 {_
-    log("Try to add skill %s", it->to_string().c_str());
+    log("Try to add skill %s", what->to_string().c_str());
 _
     if (!monstp) {
         log("No; not a monst");
         return false;
     }
 
-    auto existing_owner = it->get_immediate_owner();
+    auto existing_owner = what->get_immediate_owner();
     if (existing_owner) {
         if (existing_owner == this) {
             log("No; same owner");
             return false;
         }
-        existing_owner->drop(it);
+        existing_owner->drop(what);
     }
 
     for (const auto& item : monstp->skills) {
-        if (item == it->id) {
+        if (item == what->id) {
             log("No; already carried");
             return false;
         }
     }
 
     if (is_player()) {
-        if (!skillbox_id_insert(it)) {
+        if (!skillbox_id_insert(what)) {
             log("No; no space in skillbox");
             return false;
         }
     }
 
-    monstp->skills.push_front(it->id);
-    it->set_owner(this);
-    it->hide();
+    monstp->skills.push_front(what->id);
+    what->set_owner(this);
+    what->hide();
 
-    log("Add skill %s", it->to_string().c_str());
+    log("Add skill %s", what->to_string().c_str());
 
     if (is_player()) {
         wid_skillbox_init();
@@ -110,17 +110,19 @@ void Thing::skill_remove_all (void)
     }
 }
 
-bool Thing::skill_use (Thingp it)
+bool Thing::skill_use (Thingp what)
 {_
-    log("Try to use skill %s", it->to_string().c_str());
+    log("Try to use skill %s", what->to_string().c_str());
 
-    auto tp = it->tp();
+    auto tp = what->tp();
     TOPCON("%s", tp->text_on_use().c_str());
 _
     if (!monstp) {
         log("No; not a monst");
         return false;
     }
+
+    used(what, this, false /* remove after use */);
 
     return true;
 }

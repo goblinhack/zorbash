@@ -1083,7 +1083,7 @@ public:
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void update_tick(void);
     void use_weapon(void);
-    void used(Thingp w, Thingp target);
+    void used(Thingp w, Thingp target, bool remove_after_use);
     void visible();
     void water_tick();
     void weapon_get_use_offset(float *dx, float *dy) const;
