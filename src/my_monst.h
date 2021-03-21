@@ -137,6 +137,7 @@ public:
     // Things not worth saving
     //
     point        preferred_bag_position{-1, -1};
+    int          current_damage {};          // Current damage; so it can be modified by python
 } Monst;
 std::ostream& operator<<(std::ostream &out, Bits<const Monstp & > const my);
 std::istream& operator>>(std::istream &in, Bits<Monstp &> my);

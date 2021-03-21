@@ -214,7 +214,7 @@ static void topcon_ (const char *fmt, va_list args)
 
     buf[0] = '\0';
     get_timestamp(ts, MAXSTR);
-    snprintf(buf, sizeof(buf) - 1, "%sTOPCON: ", ts);
+    snprintf(buf, sizeof(buf) - 1, "%s", ts);
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
@@ -234,7 +234,7 @@ static void topcon_ (const wchar_t *fmt, va_list args)
         char ts[MAXSTR];
         ts[0] = '\0';
         get_timestamp(ts, MAXSTR);
-        fprintf(MY_STDOUT, "%sTOPCON: ", ts);
+        fprintf(MY_STDOUT, "%s", ts);
         term_log(ts);
     }
 

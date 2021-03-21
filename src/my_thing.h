@@ -220,7 +220,7 @@ public:
     bool skill_add(Thingp it);
     bool skill_remove(Thingp it);
     void skill_remove_all(void);
-    bool skill_use(Thingp it, int *damage = nullptr);
+    bool skill_use(Thingp it);
     bool change_owner(Thingp new_owner);
     bool chasm_tick();
     bool check_anything_to_carry(void);
@@ -296,7 +296,7 @@ public:
     bool try_to_jump(void);
     bool try_to_jump_away_from_player(void);
     bool try_to_jump_towards_player(void);
-    bool use(Thingp w, int *damage = nullptr);
+    bool use(Thingp w);
     bool will_avoid_threat(const Thingp it);
     bool will_avoid_threat(const fpoint &p);
     bool will_avoid_threat(const point &p);
@@ -341,7 +341,7 @@ public:
     const std::string& str6(void) const;
     const std::string& str7(void) const;
     const std::string& text_description(void) const;
-    const std::string& text_on_use(void) const;
+    const std::string& text_unused(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;
@@ -395,6 +395,8 @@ public:
     int decr_gold(void);
     int decr_health(int);
     int decr_health(void);
+    int decr_current_damage(int);
+    int decr_current_damage(void);
     int decr_health_max(int);
     int decr_health_max(void);
     int decr_keys(int);
@@ -459,6 +461,7 @@ public:
     int get_gold(void) const;
     int get_gold_value(void) const;
     int get_health(void) const;
+    int get_current_damage(void) const;
     int get_health_initial(void) const;
     int get_health_max(void) const;
     int get_idle_tick(void) const;
@@ -519,6 +522,8 @@ public:
     int incr_gold(void);
     int incr_health(int);
     int incr_health(void);
+    int incr_current_damage(int);
+    int incr_current_damage(void);
     int incr_health_max(int);
     int incr_health_max(void);
     int incr_keys(int);
@@ -737,6 +742,7 @@ public:
     int rarity(void) const;
     int set_gold(int);
     int set_health(int);
+    int set_current_damage(int);
     int set_health_max(int);
     int set_keys(int);
     int set_lifespan(int);

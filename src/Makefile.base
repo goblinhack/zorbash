@@ -112,6 +112,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/py_tex.o                      \
     $(OBJDIR)/py_tile.o                     \
     $(OBJDIR)/py_tp.o                       \
+    $(OBJDIR)/py_thing.o                    \
     $(OBJDIR)/py_ttf.o                      \
     $(OBJDIR)/python.o                      \
     $(OBJDIR)/random_name.o                 \

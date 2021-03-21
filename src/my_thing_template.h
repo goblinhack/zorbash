@@ -321,7 +321,7 @@ private:
     std::string _str7;
     std::string _text_a_or_an;
     std::string _text_description;
-    std::string _text_on_use;
+    std::string _text_unused;
     std::string _text_hits;
     std::string _text_name;
     std::string _text_title;
@@ -402,7 +402,7 @@ public:
     const std::string& str6(void) const;
     const std::string& str7(void) const;
     const std::string& text_description(void) const;
-    const std::string& text_on_use(void) const;
+    const std::string& text_unused(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;
@@ -900,7 +900,7 @@ public:
     void set_str7(const std::string &);
     void set_text_a_or_an(const std::string &);
     void set_text_description(const std::string &);
-    void set_text_on_use(const std::string &);
+    void set_text_unused(const std::string &);
     void set_text_hits(const std::string &);
     void set_text_name(const std::string &);
     void set_text_title(const std::string &);
