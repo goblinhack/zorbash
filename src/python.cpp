@@ -5,6 +5,7 @@
 
 #include <map>
 #include "my_py_tp.h"
+#include "my_py_thing.h"
 #include <frameobject.h>
 #include "my_main.h"
 #include "my_callstack.h"
@@ -817,7 +818,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(long_text_description)
     TP_SET_DECL(text_a_or_an)
     TP_SET_DECL(text_description)
-    TP_SET_DECL(text_on_use)
+    TP_SET_DECL(text_unused)
     TP_SET_DECL(text_hits)
     TP_SET_DECL(text_name)
     TP_SET_DECL(text_title)
@@ -844,7 +845,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"log",                                     (PyCFunction)log_,                                      METH_VARARGS,                 "log to the log file"},
     {"map_load_level",                          (PyCFunction)map_load_level_,                           METH_VARARGS | METH_KEYWORDS, "load a level"},
     {"map_load_room",                           (PyCFunction)map_load_room_,                            METH_VARARGS | METH_KEYWORDS, "load a room"},
-    {"topcon",                                 (PyCFunction)topcon_,                                  METH_VARARGS,                 "log to the mini console"},
+    {"topcon",                                  (PyCFunction)topcon_,                                   METH_VARARGS,                 "log to the mini console"},
     {"pct_to_abs",                              (PyCFunction)pct_to_abs_,                               METH_VARARGS | METH_KEYWORDS, "pct to abs"},
     {"puts",                                    (PyCFunction)puts_,                                     METH_VARARGS,                 "log to the console"},
     {"tex_load",                                (PyCFunction)tex_load_,                                 METH_VARARGS | METH_KEYWORDS, "load a texture"},
@@ -858,8 +859,35 @@ static PyMethodDef python_c_METHODS[] = {
     {"tp_spawn_fire",                           (PyCFunction)tp_spawn_fire,                             METH_VARARGS | METH_KEYWORDS, "spawn fire"},
     {"tp_spawn_under",                          (PyCFunction)tp_spawn_under,                            METH_VARARGS | METH_KEYWORDS, "spawn under"},
     {"tp_kill_if",                              (PyCFunction)tp_kill_if,                                METH_VARARGS | METH_KEYWORDS, "kill if"},
-    {"tp_place",                                (PyCFunction)tp_place,                                METH_VARARGS | METH_KEYWORDS, "kill if"},
+    {"tp_place",                                (PyCFunction)tp_place,                                  METH_VARARGS | METH_KEYWORDS, "kill place"},
     {"tp_update",                               (PyCFunction)tp_update_,                                METH_VARARGS | METH_KEYWORDS, "update template"},
+
+    {"thing_set_health",                        (PyCFunction)thing_set_health,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_incr_health",                       (PyCFunction)thing_incr_health,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_decr_health",                       (PyCFunction)thing_decr_health,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_get_health",                        (PyCFunction)thing_get_health,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
+
+    {"thing_set_health_max",                    (PyCFunction)thing_set_health_max,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_incr_health_max",                   (PyCFunction)thing_incr_health_max,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_decr_health_max",                   (PyCFunction)thing_decr_health_max,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_get_health_max",                    (PyCFunction)thing_get_health_max,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+
+    {"thing_set_stamina",                       (PyCFunction)thing_set_stamina,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_incr_stamina",                      (PyCFunction)thing_incr_stamina,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_decr_stamina",                      (PyCFunction)thing_decr_stamina,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_get_stamina",                       (PyCFunction)thing_get_stamina,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+
+    {"thing_set_stamina_max",                   (PyCFunction)thing_set_stamina_max,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_incr_stamina_max",                  (PyCFunction)thing_incr_stamina_max,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_decr_stamina_max",                  (PyCFunction)thing_decr_stamina_max,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_get_stamina_max",                   (PyCFunction)thing_get_stamina_max,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+
+    {"thing_set_current_damage",                (PyCFunction)thing_set_current_damage,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_incr_current_damage",               (PyCFunction)thing_incr_current_damage,                 METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_decr_current_damage",               (PyCFunction)thing_decr_current_damage,                 METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_get_current_damage",                (PyCFunction)thing_get_current_damage,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
+
+    {"thing_get_name",                          (PyCFunction)thing_get_name,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
     PYFUNC_REF(SDLGetKeyState),
 
     {0, 0, 0, 0}   /* sentinel */

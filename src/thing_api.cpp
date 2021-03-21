@@ -4743,6 +4743,79 @@ ThingId Thing::set_on_fire_anim_id (ThingId v)
     return (monstp->on_fire_id_anim = v);
 }
 
+////////////////////////////////////////////////////////////////////////////
+// current_damage
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_current_damage (void) const
+{_
+    int v = 0;
+    if (monstp) {
+        verify(monstp);
+        v = monstp->current_damage;
+    }
+    auto owner = get_immediate_owner();
+    if (owner) {
+        auto owner = get_immediate_owner();
+        v += owner->get_current_damage();
+    }
+    return v;
+}
+
+int Thing::set_current_damage (int v)
+{_
+    if (is_player()) {
+        game->update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->current_damage = v);
+    return (n);
+}
+
+int Thing::decr_current_damage (int v)
+{_
+    if (is_player()) {
+        game->update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->current_damage -= v);
+    return (n);
+}
+
+int Thing::incr_current_damage (int v)
+{_
+    if (is_player()) {
+        game->update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->current_damage += v);
+    return (n);
+}
+
+int Thing::decr_current_damage (void)
+{_
+    if (is_player()) {
+        game->update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->current_damage--);
+    return (n);
+}
+
+int Thing::incr_current_damage (void)
+{_
+    if (is_player()) {
+        game->update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->current_damage++);
+    return (n);
+}
+
 const std::string& Thing::str1 (void) const {_ return (tp()->str1()); }
 const std::string& Thing::str2 (void) const {_ return (tp()->str2()); }
 const std::string& Thing::str3 (void) const {_ return (tp()->str3()); }
@@ -4752,7 +4825,7 @@ const std::string& Thing::str6 (void) const {_ return (tp()->str6()); }
 const std::string& Thing::str7 (void) const {_ return (tp()->str7()); }
 const std::string& Thing::long_text_description (void) const {_ return (tp()->long_text_description()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }
-const std::string& Thing::text_on_use (void) const {_ return (tp()->text_on_use()); }
+const std::string& Thing::text_unused (void) const {_ return (tp()->text_unused()); }
 const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do()); }
 const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
