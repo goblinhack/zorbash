@@ -2,10 +2,15 @@
 Bugs
 ----
 
+00:00:20.397: Game tick 27 begin (player moved)
+00:00:20.397: The broiling lava tickles you for 15 damage!
+00:00:20.399: You are literally ON FIRE!
+00:00:20.562: The broiling lava tickles you for 13 damage!
+
 Upcoming work
 -------------
 - skills
-- skill, devoted thrust, put everything into one massive strike
+- skill, guaranteed hit, but you have no defense in the next move
 - skill, whirl attack, attack 2 or 3 enemies
 - skill, healing
 - skill, defensive mode, recover stamina
