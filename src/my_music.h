@@ -22,10 +22,10 @@ bool music_play(const std::string &file, std::string &alias, uint32_t rate);
 void music_halt(void);
 void music_update_volume(void);
 
+void music_play_intro(void);
 #if 0
 void music_play_demo(void);
 void music_play_death(void);
-void music_play_intro(void);
 void music_play_game(uint32_t);
 void music_play_dead(void);
 void music_play_game_over(void);

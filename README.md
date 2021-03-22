@@ -16,7 +16,7 @@ The rest by me, Goblinhack.
 
 Music
 -----
-None yet
+By the amazing Markus Heichelbech (deceased senior technician): [found here](http://nosoapradio.us)
 
 Screenshots
 -----------

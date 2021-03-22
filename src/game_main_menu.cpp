@@ -17,6 +17,7 @@
 #include "my_gl.h"
 #include "my_random.h"
 #include "my_ui.h"
+#include "my_music.h"
 
 static WidPopup *game_main_menu_window;
 
@@ -322,6 +323,8 @@ static void game_main_menu_tick (Widp w)
 void Game::main_menu_select (void)
 {_
     CON("Main menu");
+
+    music_play_intro();
 
     if (game_main_menu_window) {
         game_main_menu_destroy();
