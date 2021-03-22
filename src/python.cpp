@@ -887,6 +887,9 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_decr_current_damage",               (PyCFunction)thing_decr_current_damage,                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_current_damage",                (PyCFunction)thing_get_current_damage,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
 
+    {"thing_skill_activate",                    (PyCFunction)thing_skill_activate,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_skill_deactivate",                  (PyCFunction)thing_skill_deactivate,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
+
     {"thing_get_name",                          (PyCFunction)thing_get_name,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
     PYFUNC_REF(SDLGetKeyState),
 

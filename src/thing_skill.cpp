@@ -116,3 +116,15 @@ bool Thing::skill_use (Thingp what)
     used(what, this, false /* remove after use */);
     return true;
 }
+
+void Thing::skill_deactivate (Thingp what)
+{_
+    what->is_activated = false;
+    game->request_remake_skillbox = true;
+}
+
+void Thing::skill_activate (Thingp what)
+{_
+    what->is_activated = true;
+    game->request_remake_skillbox = true;
+}
