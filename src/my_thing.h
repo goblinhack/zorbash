@@ -189,6 +189,7 @@ public:
     Thingp weapon_get_use_anim(void) const;
     bool achieve_goals_in_death();
     bool achieve_goals_in_life();
+    bool add_kill(Thingp it);
     bool ai_blocked(void);
     bool ai_blocked_completely(void);
     bool ai_choose_wander(point& nh);
@@ -216,11 +217,6 @@ public:
     bool bag_remove_at(Thingp item, point pos);
     bool can_eat(const Thingp it);
     bool carry(Thingp w);
-    bool add_kill(Thingp it);
-    bool skill_add(Thingp it);
-    bool skill_remove(Thingp it);
-    void skill_remove_all(void);
-    bool skill_use(Thingp it);
     bool change_owner(Thingp new_owner);
     bool chasm_tick();
     bool check_anything_to_carry(void);
@@ -244,8 +240,8 @@ public:
     bool descend_dungeon_tick();
     bool descend_sewer(void);
     bool descend_sewer_tick();
-    bool describe_when_hovering_over(void);
     bool describe_when_hovered_over_in_rightbar(void);
+    bool describe_when_hovering_over(void);
     bool drop(Thingp w);
     bool drop(Thingp w, Thingp target, bool stolen=false);
     bool drop_from_ether(Thingp w);
@@ -258,8 +254,6 @@ public:
     bool inventory_id_insert(Thingp what);
     bool inventory_id_remove(Thingp what);
     bool inventory_id_remove(Thingp what, Thingp target);
-    bool skillbox_id_insert(Thingp what);
-    bool skillbox_id_remove(Thingp what);
     bool is_ai_obstacle_for_me(const point&);
     bool is_blocking_terrain(const Thingp it);
     bool is_bloodied(void);
@@ -281,6 +275,11 @@ public:
     bool place(const std::string& what, const point &p);
     bool possible_to_attack(const Thingp it);
     bool set_on_fire(const std::string &why);
+    bool skill_add(Thingp it);
+    bool skill_remove(Thingp it);
+    bool skill_use(Thingp it);
+    bool skillbox_id_insert(Thingp what);
+    bool skillbox_id_remove(Thingp what);
     bool spawn_fire(const std::string& what);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
@@ -341,10 +340,10 @@ public:
     const std::string& str6(void) const;
     const std::string& str7(void) const;
     const std::string& text_description(void) const;
-    const std::string& text_unused(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;
+    const std::string& text_unused(void) const;
     const std::string& weapon_carry_anim(void) const;
     float get_bounce(void);
     float get_bounce_fade(void) const;
@@ -362,7 +361,6 @@ public:
     float update_wobble(void);
     fpoint get_lunge_to(void) const;
     int ai_choose_goal(void);
-    int unused_rrr98(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
@@ -391,12 +389,12 @@ public:
     int damage_doubled_from_fire(void) const;
     int damage_doubled_from_poison(void) const;
     int damage_doubled_from_water(void) const;
+    int decr_current_damage(int);
+    int decr_current_damage(void);
     int decr_gold(int);
     int decr_gold(void);
     int decr_health(int);
     int decr_health(void);
-    int decr_current_damage(int);
-    int decr_current_damage(void);
     int decr_health_max(int);
     int decr_health_max(void);
     int decr_keys(int);
@@ -455,13 +453,13 @@ public:
     int decr_tick_rate_tenths(void);
     int defence(void) const;
     int get_bounce_count(void) const;
+    int get_current_damage(void) const;
     int get_damage_bite(void) const;
     int get_damage_melee(void) const;
     int get_danger_level(void);
     int get_gold(void) const;
     int get_gold_value(void) const;
     int get_health(void) const;
-    int get_current_damage(void) const;
     int get_health_initial(void) const;
     int get_health_max(void) const;
     int get_idle_tick(void) const;
@@ -505,10 +503,10 @@ public:
     int gfx_bounce_always(void) const;
     int gfx_bounce_on_move(void) const;
     int gfx_dead_anim(void) const;
+    int gfx_glows(void) const;
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
     int gfx_is_rrr99(void) const;
-    int gfx_glows(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;
@@ -518,12 +516,12 @@ public:
     int health_hunger_pct(void) const;
     int health_starving_pct(void) const;
     int hunger_clock_freq_ms(void) const;
+    int incr_current_damage(int);
+    int incr_current_damage(void);
     int incr_gold(int);
     int incr_gold(void);
     int incr_health(int);
     int incr_health(void);
-    int incr_current_damage(int);
-    int incr_current_damage(void);
     int incr_health_max(int);
     int incr_health_max(void);
     int incr_keys(int);
@@ -569,7 +567,6 @@ public:
     int incr_stats10(int);
     int incr_stats10(void);
     int incr_stats11(int);
-    void set_interpolated_mid_at (fpoint v);
     int incr_stats11(void);
     int incr_stats12(int);
     int incr_stats12(void);
@@ -663,7 +660,6 @@ public:
     int is_killed_on_hitting(void) const;
     int is_lava(void) const;
     int is_light_blocker(void) const;
-    int light_strength(void) const;
     int is_living(void) const;
     int is_loggable_for_important_stuff(void) const;
     int is_loggable_for_unimportant_stuff(void) const;
@@ -699,7 +695,6 @@ public:
     int is_rrr18(void) const;
     int is_rrr19(void) const;
     int is_rrr2(void) const;
-    int is_skill(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
@@ -713,6 +708,7 @@ public:
     int is_shovable(void) const;
     int is_shown_on_leftbar(void) const;
     int is_shown_uniquely_on_leftbar(void) const;
+    int is_skill(void) const;
     int is_smoke(void) const;
     int is_stamina_check(void) const;
     int is_steal_item_chance_d1000(void) const;
@@ -733,6 +729,7 @@ public:
     int is_water_lover(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;
+    int light_strength(void) const;
     int minion_limit(void) const;
     int monst_size(void) const;
     int normal_placement_rules(void) const;
@@ -740,9 +737,9 @@ public:
     int on_death_is_corpse(void) const;
     int on_death_is_open(void) const;
     int rarity(void) const;
+    int set_current_damage(int);
     int set_gold(int);
     int set_health(int);
-    int set_current_damage(int);
     int set_health_max(int);
     int set_keys(int);
     int set_lifespan(int);
@@ -772,6 +769,7 @@ public:
     int set_throw_distance(int);
     int set_tick_rate_tenths(int);
     int tick_catches_up_on_attack(void) const;
+    int unused_rrr98(void);
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
@@ -820,10 +818,6 @@ public:
     timestamp_t decr_timestamp_jump_begin(void);
     timestamp_t decr_timestamp_jump_end(timestamp_t);
     timestamp_t decr_timestamp_jump_end(void);
-    timestamp_t decr_timestamp_unused2(timestamp_t);
-    timestamp_t decr_timestamp_unused2(void);
-    timestamp_t decr_timestamp_unused1(timestamp_t);
-    timestamp_t decr_timestamp_unused1(void);
     timestamp_t decr_timestamp_last_wander_try(timestamp_t);
     timestamp_t decr_timestamp_last_wander_try(void);
     timestamp_t decr_timestamp_lunge_begin(timestamp_t);
@@ -836,6 +830,10 @@ public:
     timestamp_t decr_timestamp_move_end(void);
     timestamp_t decr_timestamp_sleep_end(timestamp_t);
     timestamp_t decr_timestamp_sleep_end(void);
+    timestamp_t decr_timestamp_unused1(timestamp_t);
+    timestamp_t decr_timestamp_unused1(void);
+    timestamp_t decr_timestamp_unused2(timestamp_t);
+    timestamp_t decr_timestamp_unused2(void);
     timestamp_t get_timestamp_born(void) const;
     timestamp_t get_timestamp_bounce_begin(void) const;
     timestamp_t get_timestamp_bounce_end(void) const;
@@ -847,14 +845,14 @@ public:
     timestamp_t get_timestamp_hunger_tick(void) const;
     timestamp_t get_timestamp_jump_begin(void) const;
     timestamp_t get_timestamp_jump_end(void) const;
-    timestamp_t get_timestamp_unused2(void) const;
-    timestamp_t get_timestamp_unused1(void) const;
     timestamp_t get_timestamp_last_wander_try(void) const;
     timestamp_t get_timestamp_lunge_begin(void) const;
     timestamp_t get_timestamp_lunge_end(void) const;
     timestamp_t get_timestamp_move_begin(void) const;
     timestamp_t get_timestamp_move_end(void) const;
     timestamp_t get_timestamp_sleep_end(void) const;
+    timestamp_t get_timestamp_unused1(void) const;
+    timestamp_t get_timestamp_unused2(void) const;
     timestamp_t incr_timestamp_born(timestamp_t);
     timestamp_t incr_timestamp_born(void);
     timestamp_t incr_timestamp_bounce_begin(timestamp_t);
@@ -877,10 +875,6 @@ public:
     timestamp_t incr_timestamp_jump_begin(void);
     timestamp_t incr_timestamp_jump_end(timestamp_t);
     timestamp_t incr_timestamp_jump_end(void);
-    timestamp_t incr_timestamp_unused2(timestamp_t);
-    timestamp_t incr_timestamp_unused2(void);
-    timestamp_t incr_timestamp_unused1(timestamp_t);
-    timestamp_t incr_timestamp_unused1(void);
     timestamp_t incr_timestamp_last_wander_try(timestamp_t);
     timestamp_t incr_timestamp_last_wander_try(void);
     timestamp_t incr_timestamp_lunge_begin(timestamp_t);
@@ -893,6 +887,10 @@ public:
     timestamp_t incr_timestamp_move_end(void);
     timestamp_t incr_timestamp_sleep_end(timestamp_t);
     timestamp_t incr_timestamp_sleep_end(void);
+    timestamp_t incr_timestamp_unused1(timestamp_t);
+    timestamp_t incr_timestamp_unused1(void);
+    timestamp_t incr_timestamp_unused2(timestamp_t);
+    timestamp_t incr_timestamp_unused2(void);
     timestamp_t set_timestamp_born(timestamp_t);
     timestamp_t set_timestamp_bounce_begin(timestamp_t);
     timestamp_t set_timestamp_bounce_end(timestamp_t);
@@ -904,14 +902,14 @@ public:
     timestamp_t set_timestamp_hunger_tick(timestamp_t);
     timestamp_t set_timestamp_jump_begin(timestamp_t);
     timestamp_t set_timestamp_jump_end(timestamp_t);
-    timestamp_t set_timestamp_unused2(timestamp_t);
-    timestamp_t set_timestamp_unused1(timestamp_t);
     timestamp_t set_timestamp_last_wander_try(timestamp_t);
     timestamp_t set_timestamp_lunge_begin(timestamp_t);
     timestamp_t set_timestamp_lunge_end(timestamp_t);
     timestamp_t set_timestamp_move_begin(timestamp_t);
     timestamp_t set_timestamp_move_end(timestamp_t);
     timestamp_t set_timestamp_sleep_end(timestamp_t);
+    timestamp_t set_timestamp_unused1(timestamp_t);
+    timestamp_t set_timestamp_unused2(timestamp_t);
     uint32_t decr_tick(uint32_t);
     uint32_t decr_tick(void);
     uint32_t decr_tick_last_did_something(uint32_t);
@@ -1039,13 +1037,11 @@ public:
     void log(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args) const; // compile error without
     void lunge(fpoint tt);
-    void topcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
-    void topcon_(const char *fmt, va_list args) const; // compile error without
     void move_carried_items(void);
     void move_carried_items_immediately(void);
-    void move_reset_timestamps(void);
     void move_delta(fpoint);
     void move_finish(void);
+    void move_reset_timestamps(void);
     void move_set_dir_from_delta(fpoint);
     void move_to(fpoint to);
     void move_to(fpoint to, uint32_t speed);
@@ -1068,6 +1064,7 @@ public:
     void set_fadeup_fade(float);
     void set_fadeup_height(float);
     void set_fall_height(float);
+    void set_interpolated_mid_at (fpoint v);
     void set_lunge_to(fpoint);
     void set_minion_owner(Thingp minion_owner);
     void set_msg(const std::string&);
@@ -1075,9 +1072,14 @@ public:
     void set_submerged_offset(int);
     void set_wobble(float);
     void sheath(void);
+    void skill_activate(Thingp what);
+    void skill_deactivate(Thingp what);
+    void skill_remove_all(void);
     void stamina_boost(int v);
     void throw_at(Thingp w, Thingp target);
     void tick();
+    void topcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
+    void topcon_(const char *fmt, va_list args) const; // compile error without
     void torch_tick();
     void try_to_carry(const std::list<Thingp> &items);
     void unleash_minions(void);

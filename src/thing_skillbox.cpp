@@ -310,22 +310,6 @@ _
     } else {
         TOPCON("You deactivate %s skill.", what->text_the().c_str());
     }
-#if 0
-    if (what->is_weapon()) {
-        player->wield(what);
-        if (changed_highlight_slot) {
-            game->tick_begin("player wielded a new weapon");
-        }
-    } else if (what->is_bag()) {
-        game->wid_thing_info_create(what);
-        what->log("Moving items flag set");
-        game->change_state(Game::STATE_MOVING_ITEMS);
-    } else if (what->is_thrown_automatically_when_selected()) {
-        player->throw_item(what);
-    } else if (what->is_used_automatically_when_selected()) {
-        player->use(what);
-    }
-#endif
 
     return true;
 }
