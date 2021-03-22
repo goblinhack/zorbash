@@ -115,6 +115,9 @@ void quit (void)
     LOG("FINI: color_fini");
     color_fini();
 
+    LOG("FINI: music_fini");
+    music_fini();
+
     if (EXEC_FULL_PATH_AND_NAME) {
         myfree(EXEC_FULL_PATH_AND_NAME);
         EXEC_FULL_PATH_AND_NAME = 0;

@@ -112,7 +112,7 @@ bool music_find (const std::string &name_alias)
 
 void music_update_volume (void)
 {_
-    Mix_VolumeMusic((int) (((float) game->config.music_volume) * (1.0 / MIX_MAX_VOLUME)));
+    Mix_VolumeMusic(game->config.music_volume);
     SDL_ClearError();
 }
 
@@ -190,11 +190,6 @@ void music_play_demo (void)
     music_play("data/music/Faith.ogg", "battle", 44100 );
 }
 
-void music_play_intro (void)
-{_
-    music_play("data/music/Faith.ogg", "intro", 44100 );
-}
-
 void music_play_dead (void)
 {_
     music_play("data/music/Faith.ogg", "dead", 44100 );
@@ -205,6 +200,11 @@ void music_play_game_over (void)
     music_play("data/music/Faith.ogg", "game over", 44100 );
 }
 #endif
+
+void music_play_intro (void)
+{_
+    music_play("data/music/DST-PhaserSwitch.mp3", "intro", 44100 );
+}
 
 void music_halt (void)
 {_
