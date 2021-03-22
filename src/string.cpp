@@ -987,6 +987,172 @@ shared_vector_wstring split (const std::wstring &text, int max_line_len)
     return (result);
 }
 
+int length_without_format (const std::string &text)
+{_
+    uint8_t found_format_string;
+    char c;
+    auto text_start = text.begin();
+    auto text_iter = text_start;
+    int line_len = 0;
+
+    found_format_string = false;
+
+    for (;;) {
+        c = *text_iter;
+        if (!c) {
+            break;
+        }
+        line_len++;
+
+        if (!found_format_string) {
+            if (c == '%') {
+                found_format_string = true;
+            }
+        } else if (found_format_string) {
+            if (std::string(text_iter, text_iter + 3) == "fg=") {
+                text_iter += 3;
+                line_len -= 2; /* for the %% */
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+
+                found_format_string = false;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                text_iter += 3;
+                line_len -= 2; /* for the %% */
+
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tp(tmp, &len);
+                text_iter += len + 1;
+
+                found_format_string = false;
+                continue;
+            } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                text_iter += 4;
+                line_len -= 2; /* for the %% */
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tex(tmp, &len);
+                text_iter += len + 1;
+
+                found_format_string = false;
+                continue;
+            } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                text_iter += 5;
+                line_len -= 2; /* for the %% */
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tile(tmp, &len);
+                text_iter += len + 1;
+
+                found_format_string = false;
+                continue;
+            } else if (c == '%') {
+                line_len -= 1;
+            } else {
+                found_format_string = false;
+                text_iter--;
+            }
+        }
+
+        text_iter++;
+//printf("LEN %d [%c]\n", line_len, c);
+    }
+//printf("END line_len %d\n", line_len);
+
+    return line_len;
+}
+
+int length_without_format (const std::wstring &text)
+{_
+    uint8_t found_format_string;
+    char c;
+    auto text_start = text.begin();
+    auto text_iter = text_start;
+    int line_len = 0;
+
+    found_format_string = false;
+
+    for (;;) {
+        c = *text_iter;
+        if (!c) {
+            break;
+        }
+        line_len++;
+
+        if (!found_format_string) {
+            if (c == '%') {
+                found_format_string = true;
+            }
+        } else if (found_format_string) {
+            if (std::string(text_iter, text_iter + 3) == "fg=") {
+                text_iter += 3;
+                line_len -= 2; /* for the %% */
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+
+                found_format_string = false;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                text_iter += 3;
+                line_len -= 2; /* for the %% */
+
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tp(tmp, &len);
+                text_iter += len + 1;
+
+                found_format_string = false;
+                continue;
+            } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                text_iter += 4;
+                line_len -= 2; /* for the %% */
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tex(tmp, &len);
+                text_iter += len + 1;
+
+                found_format_string = false;
+                continue;
+            } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                text_iter += 5;
+                line_len -= 2; /* for the %% */
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tile(tmp, &len);
+                text_iter += len + 1;
+
+                found_format_string = false;
+                continue;
+            } else if (c == '%') {
+                line_len -= 1;
+            } else {
+                found_format_string = false;
+                text_iter--;
+            }
+        }
+
+        text_iter++;
+//printf("LEN %d [%c]\n", line_len, c);
+    }
+//printf("END line_len %d\n", line_len);
+
+    return line_len;
+}
+
 Tpp string2tp (const char **s)
 {_
     static char tmp[MAXSHORTSTR];

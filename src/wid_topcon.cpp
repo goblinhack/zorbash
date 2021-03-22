@@ -525,6 +525,10 @@ static void wid_topcon_log_ (std::wstring s)
         s = last_msg + L" (x" + std::to_wstring(last_msg_count + 2) + L")";
         last_msg_count++;
         wid_topcon_replace(wid_topcon_input_line, s);
+    } else if (!last_msg.empty() &&
+               length_without_format(last_msg) + length_without_format(s) + 1 < UI_TOPCON_WIDTH) {
+        last_msg = last_msg + L" " + s;
+        wid_topcon_replace(wid_topcon_input_line, last_msg);
     } else {
         last_msg = s;
         last_msg_count = 0;

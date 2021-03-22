@@ -51,14 +51,10 @@ def load_plugin(plugin):
         load_one_plugin(filename)
 
 def init1():
-
     zx.con("PYTHON: Init module: running in: {}".format(os.getcwd()))
 
 def init2():
-
     load_all_plugins()
-
-    zx.topcon("Welcome mortal, to Zorbash version " + zx.VERSION)
     console.hello()
 
 init1()

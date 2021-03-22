@@ -34,9 +34,9 @@
 #define UI_FONT_PIXEL_SIZE         6
 #define UI_HEALTH_BAR_STEPS        18 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS       5
-#define UI_TOPCON_HEIGHT           5 // Scrollbar limit
+#define UI_TOPCON_HEIGHT           10 // Scrollbar limit
 #define UI_TOPCON_TEXT_COLOR       UI_TEXT_COLOR
-#define UI_TOPCON_VIS_HEIGHT       5
+#define UI_TOPCON_VIS_HEIGHT       UI_TOPCON_HEIGHT
 #define UI_TOPCON_VIS_WIDTH        UI_TOPCON_WIDTH
 #define UI_TOPCON_WIDTH            (TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
 #define UI_MINIMAP_SIZE            0.155
