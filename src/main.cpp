@@ -17,6 +17,7 @@ std::default_random_engine rng;
 #include "my_sys.h"
 #include "my_main.h"
 #include "my_game.h"
+#include "my_music.h"
 #include "my_thing_template.h"
 #include "my_python.h"
 #include "my_gl.h"
@@ -712,8 +713,14 @@ int32_t main (int32_t argc, char *argv[])
     if (!tex_init()) {
         ERR("Tex init");
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    CON("INIT: Load music");
+    if (!music_init()) {
+        ERR("Music init");
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     CON("INIT: Load UI topcon");
     if (!wid_topcon_init()) {
         ERR("Wid_topcon init");

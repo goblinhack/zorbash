@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include <SDL_mixer.h>
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_popup.h"
@@ -46,6 +47,9 @@ static uint8_t game_config_sound_effects_volume_incr (Widp w, int32_t x, int32_t
 {_
     CON("USERCFG: incr sound_volume");
     game->config.sound_volume++;
+    if (game->config.sound_volume > MIX_MAX_VOLUME) {
+        game->config.sound_volume = MIX_MAX_VOLUME;
+    }
     game->config_sound_select();
     return true;
 }
@@ -53,7 +57,11 @@ static uint8_t game_config_sound_effects_volume_incr (Widp w, int32_t x, int32_t
 static uint8_t game_config_sound_effects_volume_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: incr sound_volume");
-    game->config.sound_volume--;
+    if (game->config.sound_volume > 0) {
+        game->config.sound_volume--;
+    } else {
+        game->config.sound_volume = 0;
+    }
     game->config_sound_select();
     return true;
 }
@@ -62,6 +70,9 @@ static uint8_t game_config_sound_music_volume_incr (Widp w, int32_t x, int32_t y
 {_
     CON("USERCFG: incr music_volume");
     game->config.music_volume++;
+    if (game->config.music_volume > MIX_MAX_VOLUME) {
+        game->config.music_volume = MIX_MAX_VOLUME;
+    }
     game->config_sound_select();
     return true;
 }
@@ -69,7 +80,11 @@ static uint8_t game_config_sound_music_volume_incr (Widp w, int32_t x, int32_t y
 static uint8_t game_config_sound_music_volume_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: incr music_volume");
-    game->config.music_volume--;
+    if (game->config.music_volume > 0) {
+        game->config.music_volume--;
+    } else {
+        game->config.music_volume = 0;
+    }
     game->config_sound_select();
     return true;
 }
