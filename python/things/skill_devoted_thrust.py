@@ -7,9 +7,10 @@ def on_use(me, what, target, x, y):
     #zx.topcon("what   {} {}".format(zx.thing_get_name(what), zx.thing_get_health(what)))
     #zx.topcon("target {} {}".format(zx.thing_get_name(target), zx.thing_get_health(target)))
     bonus = int(zx.thing_get_stamina(me) / 2)
-    zx.topcon("%%fg=yellow$You strike with a mighty thrust bonus of {}%%fg=reset$".format(bonus))
-    zx.thing_incr_current_damage(me, bonus)
-    zx.thing_decr_stamina(me, bonus)
+    if bonus > 0:
+        zx.topcon("%%fg=yellow$You strike with a mighty thrust of {}%%fg=reset$.".format(bonus))
+        zx.thing_incr_current_damage(me, bonus)
+        zx.thing_decr_stamina(me, bonus)
 
 def skill_devoted_thrust_init(name, text_name):
     x = tp.Tp(name, text_name)
