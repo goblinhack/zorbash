@@ -106,7 +106,7 @@ void Config::reset (void)
     key_wait_or_collect          = {SDL_SCANCODE_PERIOD};
     key_zoom_in                  = {SDL_SCANCODE_Z};
     key_zoom_out                 = {SDL_SCANCODE_X};
-    music_volume                 = {MIX_MAX_VOLUME / 2};
+    music_volume                 = {MIX_MAX_VOLUME / 3};
     sdl_delay                    = 1;
     sound_volume                 = {MIX_MAX_VOLUME / 2};
 }

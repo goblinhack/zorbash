@@ -2,6 +2,7 @@
 Bugs
 ----
 
+- mouse held for volume
 00:00:20.397: Game tick 27 begin (player moved)
 00:00:20.397: The broiling lava tickles you for 15 damage!
 00:00:20.399: You are literally ON FIRE!
@@ -21,7 +22,6 @@ Upcoming work
 - skill, slash and jump
 - skill, spring attack, give up a round for 2.5 times damage
 - tiny pixel effects that bounce?
-- music Markus Heichelbech (deceased senior technician): [found here](http://nosoapradio.us)
 
 Future TODO
 -----------

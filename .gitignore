@@ -1,0 +1,11 @@
+data/gfx
+appdata/
+build.log
+python/__pycache__/
+python/things/__pycache__/
+src/.o/
+src/Makefile
+src/Makefile.bak
+windows/python.version.sh
+windows/windows.xml
+zorbash.dSYM/
