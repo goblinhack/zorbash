@@ -1,4 +1,6 @@
 all:
+	scripts/check_files.sh
+	scripts/ramdisk.py
 	if [ ! -f src/Makefile ]; then \
 	    (RUNME;) \
 	fi
@@ -6,8 +8,10 @@ all:
 
 clean:
 	(cd src; make $@)
+	/bin/rm -rf data/gfx
 
 clobber:
 	(cd src; make $@)
 	rm src/Makefile
+	/bin/rm -rf data/gfx
 # DO NOT DELETE

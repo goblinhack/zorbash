@@ -127,8 +127,6 @@ read_opts()
 
 read_opts $*
 
-(cd data; tar zxf gfx.tgz)
-
 run scripts/build.sh $LOG
 
 if [ $? -ne 0 ]; then

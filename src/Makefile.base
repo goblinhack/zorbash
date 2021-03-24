@@ -100,8 +100,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/log_util.o                    \
     $(OBJDIR)/main.o                        \
     $(OBJDIR)/map.o                         \
-    $(OBJDIR)/music.o                       \
     $(OBJDIR)/minilzo.o                     \
+    $(OBJDIR)/music.o                       \
     $(OBJDIR)/particle.o                    \
     $(OBJDIR)/pcg_basic.o                   \
     $(OBJDIR)/player.o                      \
@@ -111,11 +111,22 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/py_room.o                     \
     $(OBJDIR)/py_sdl.o                      \
     $(OBJDIR)/py_tex.o                      \
+    $(OBJDIR)/py_thing.o                    \
     $(OBJDIR)/py_tile.o                     \
     $(OBJDIR)/py_tp.o                       \
-    $(OBJDIR)/py_thing.o                    \
     $(OBJDIR)/py_ttf.o                      \
     $(OBJDIR)/python.o                      \
+    $(OBJDIR)/ramdisk_data.o                \
+    $(OBJDIR)/ramdisk_data_0.o              \
+    $(OBJDIR)/ramdisk_data_1.o              \
+    $(OBJDIR)/ramdisk_data_2.o              \
+    $(OBJDIR)/ramdisk_data_3.o              \
+    $(OBJDIR)/ramdisk_data_4.o              \
+    $(OBJDIR)/ramdisk_data_5.o              \
+    $(OBJDIR)/ramdisk_data_6.o              \
+    $(OBJDIR)/ramdisk_data_7.o              \
+    $(OBJDIR)/ramdisk_data_8.o              \
+    $(OBJDIR)/ramdisk_data_9.o              \
     $(OBJDIR)/random_name.o                 \
     $(OBJDIR)/room.o                        \
     $(OBJDIR)/sdl.o                         \
@@ -133,28 +144,29 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_ai_wander.o             \
     $(OBJDIR)/thing_anim.o                  \
     $(OBJDIR)/thing_api.o                   \
+    $(OBJDIR)/thing_ascend.o                \
+    $(OBJDIR)/thing_ascend_dungeon.o        \
+    $(OBJDIR)/thing_ascend_sewer.o          \
     $(OBJDIR)/thing_astar.o                 \
     $(OBJDIR)/thing_attack.o                \
     $(OBJDIR)/thing_avoid.o                 \
     $(OBJDIR)/thing_bag.o                   \
     $(OBJDIR)/thing_bounce.o                \
     $(OBJDIR)/thing_carry.o                 \
-    $(OBJDIR)/thing_skill.o                 \
     $(OBJDIR)/thing_chasm.o                 \
     $(OBJDIR)/thing_collision.o             \
     $(OBJDIR)/thing_cursor.o                \
     $(OBJDIR)/thing_cursor_path.o           \
     $(OBJDIR)/thing_danger.o                \
     $(OBJDIR)/thing_dead.o                  \
+    $(OBJDIR)/thing_descend_dungeon.o       \
+    $(OBJDIR)/thing_descend_sewer.o         \
     $(OBJDIR)/thing_describe.o              \
     $(OBJDIR)/thing_dir.o                   \
     $(OBJDIR)/thing_display.o               \
     $(OBJDIR)/thing_distance.o              \
     $(OBJDIR)/thing_door.o                  \
     $(OBJDIR)/thing_drop.o                  \
-    $(OBJDIR)/thing_ascend_dungeon.o        \
-    $(OBJDIR)/thing_ascend.o                \
-    $(OBJDIR)/thing_descend_dungeon.o       \
     $(OBJDIR)/thing_eat.o                   \
     $(OBJDIR)/thing_enemy.o                 \
     $(OBJDIR)/thing_escape.o                \
@@ -170,11 +182,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_hunger.o                \
     $(OBJDIR)/thing_id.o                    \
     $(OBJDIR)/thing_inherit.o               \
-    $(OBJDIR)/thing_ascend_sewer.o          \
-    $(OBJDIR)/thing_descend_sewer.o         \
     $(OBJDIR)/thing_init.o                  \
     $(OBJDIR)/thing_inventory.o             \
-    $(OBJDIR)/thing_skillbox.o              \
     $(OBJDIR)/thing_item.o                  \
     $(OBJDIR)/thing_jump.o                  \
     $(OBJDIR)/thing_kill.o                  \
@@ -192,6 +201,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_log.o                   \
     $(OBJDIR)/thing_lunge.o                 \
     $(OBJDIR)/thing_match.o                 \
+    $(OBJDIR)/thing_minion_owner.o          \
     $(OBJDIR)/thing_move.o                  \
     $(OBJDIR)/thing_move_dir.o              \
     $(OBJDIR)/thing_msg.o                   \
@@ -200,18 +210,19 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_on_fire.o               \
     $(OBJDIR)/thing_owner.o                 \
     $(OBJDIR)/thing_place.o                 \
+    $(OBJDIR)/thing_poison.o                \
     $(OBJDIR)/thing_rest.o                  \
     $(OBJDIR)/thing_resurrect.o             \
     $(OBJDIR)/thing_shove.o                 \
+    $(OBJDIR)/thing_skill.o                 \
+    $(OBJDIR)/thing_skillbox.o              \
     $(OBJDIR)/thing_spawn.o                 \
-    $(OBJDIR)/thing_minion_owner.o          \
     $(OBJDIR)/thing_stamina.o               \
-    $(OBJDIR)/thing_poison.o                \
     $(OBJDIR)/thing_steal.o                 \
     $(OBJDIR)/thing_string.o                \
     $(OBJDIR)/thing_template.o              \
-    $(OBJDIR)/thing_template_random.o       \
     $(OBJDIR)/thing_template_api.o          \
+    $(OBJDIR)/thing_template_random.o       \
     $(OBJDIR)/thing_terrain.o               \
     $(OBJDIR)/thing_text.o                  \
     $(OBJDIR)/thing_throw.o                 \
@@ -236,16 +247,16 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/wid_botcon.o                  \
     $(OBJDIR)/wid_console.o                 \
     $(OBJDIR)/wid_inventory.o               \
-    $(OBJDIR)/wid_skillbox.o                \
     $(OBJDIR)/wid_leftbar.o                 \
     $(OBJDIR)/wid_log.o                     \
-    $(OBJDIR)/wid_topcon.o                  \
     $(OBJDIR)/wid_popup.o                   \
     $(OBJDIR)/wid_rightbar.o                \
+    $(OBJDIR)/wid_skillbox.o                \
     $(OBJDIR)/wid_text_box.o                \
     $(OBJDIR)/wid_thing_collect.o           \
     $(OBJDIR)/wid_thing_info.o              \
     $(OBJDIR)/wid_tiles.o                   \
+    $(OBJDIR)/wid_topcon.o                  \
     $(OBJDIR)/world.o                       \
     $(OBJDIR)/world_fini.o                  \
     $(OBJDIR)/world_init.o                  \
