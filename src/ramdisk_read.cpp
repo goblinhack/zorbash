@@ -10,12 +10,12 @@
 #include "my_ramdisk.h"
 #include "my_ptrcheck.h"
 
-std::map<std::string, ramdisk_t_> ramdisk_files;
+std::map<std::string, ramdisk_t_> ramdisk_data;
 
 unsigned char *ramdisk_load (const std::string &filename, int *outlen)
 {_
-    auto f = ramdisk_files.find(filename);
-    if (f == ramdisk_files.end()) {
+    auto f = ramdisk_data.find(filename);
+    if (f == ramdisk_data.end()) {
         return nullptr;
     }
 

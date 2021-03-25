@@ -14,10 +14,13 @@ then
     )
 fi
 
-echo $0: Unzip graphics
-tar zxf data/gfx.tgz
-if [[ $? -ne 0 ]];
+if [[ ! -d data ]];
 then
-    echo $0: Failed to unzip data/gfx.tgz
-    exit 1
+    echo $0: Unzip graphics
+    tar zxf data/gfx.tgz
+    if [[ $? -ne 0 ]];
+    then
+        echo $0: Failed to unzip data/gfx.tgz
+        exit 1
+    fi
 fi

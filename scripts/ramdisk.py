@@ -33,11 +33,11 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
         rel_path_filename = os.path.join(folder, orig_filename)
 
         with open("src/ramdisk_data_{}.S".format(ram_file), "a") as myfile:
-            myfile.write(".globl {}_start_\n".format(c_filename))
-            myfile.write("{}_start_:\n".format(c_filename))
+            myfile.write(".globl data_{}_start_\n".format(c_filename))
+            myfile.write("data_{}_start_:\n".format(c_filename))
             myfile.write(".incbin \"../{}\"\n".format(rel_path_filename))
-            myfile.write(".globl {}_end_\n".format(c_filename))
-            myfile.write("{}_end_:\n".format(c_filename))
+            myfile.write(".globl data_{}_end_\n".format(c_filename))
+            myfile.write("data_{}_end_:\n".format(c_filename))
             myfile.write("\n")
 
 with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
@@ -59,10 +59,10 @@ with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
             rel_path_filename = os.path.join(folder, c_filename)
 
             myfile.write("    {\n")
-            myfile.write("        extern unsigned char *data_{}_data_start_ asm(\"data_{}_data_start_\");\n".format(c_filename, c_filename))
-            myfile.write("        extern unsigned char *data_{}_data_end_ asm(\"data_{}_data_end_\");\n".format(c_filename, c_filename))
-            myfile.write("        static const unsigned char *const start = (const unsigned char *const) (char*)&data_{}_data_start_;\n".format(c_filename, c_filename))
-            myfile.write("        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_{}_data_end_;\n".format(c_filename, c_filename))
+            myfile.write("        extern unsigned char *data_{}_start_ asm(\"data_{}_start_\");\n".format(c_filename, c_filename))
+            myfile.write("        extern unsigned char *data_{}_end_ asm(\"data_{}_end_\");\n".format(c_filename, c_filename))
+            myfile.write("        static const unsigned char *const start = (const unsigned char *const) (char*)&data_{}_start_;\n".format(c_filename, c_filename))
+            myfile.write("        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_{}_end_;\n".format(c_filename, c_filename))
             myfile.write("        ramdisk_t r;\n")
             myfile.write("        r.data = start;\n")
             myfile.write("        r.len = end - start;\n")
