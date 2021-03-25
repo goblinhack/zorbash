@@ -1,6 +1,8 @@
-all:
+pre:
 	scripts/check_files.sh
 	scripts/ramdisk.py
+
+all: pre
 	if [ ! -f src/Makefile ]; then \
 	    (RUNME;) \
 	fi

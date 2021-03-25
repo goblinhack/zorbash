@@ -2,31 +2,31 @@
 
 .globl solid_tga_start_
 solid_tga_start_:
-.incbin "data/gfx/solid_tga"
+.incbin "../data/gfx/solid.tga"
 .globl solid_tga_end_
 solid_tga_end_:
 
 .globl title_splash_tga_start_
 title_splash_tga_start_:
-.incbin "data/gfx/title_splash_tga"
+.incbin "../data/gfx/title_splash.tga"
 .globl title_splash_tga_end_
 title_splash_tga_end_:
 
 .globl ui_vert2_tga_start_
 ui_vert2_tga_start_:
-.incbin "data/gfx/ui_vert2_tga"
+.incbin "../data/gfx/ui_vert2.tga"
 .globl ui_vert2_tga_end_
 ui_vert2_tga_end_:
 
 .globl tiles3_surface_effects_tga_start_
 tiles3_surface_effects_tga_start_:
-.incbin "data/gfx/tiles3_surface_effects_tga"
+.incbin "../data/gfx/tiles3_surface_effects.tga"
 .globl tiles3_surface_effects_tga_end_
 tiles3_surface_effects_tga_end_:
 
 .globl ui_credits_bg_tga_start_
 ui_credits_bg_tga_start_:
-.incbin "data/gfx/ui_credits_bg_tga"
+.incbin "../data/gfx/ui_credits_bg.tga"
 .globl ui_credits_bg_tga_end_
 ui_credits_bg_tga_end_:
 

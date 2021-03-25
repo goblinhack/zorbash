@@ -8,8 +8,12 @@ Bugs
 00:00:20.399: You are literally ON FIRE!
 00:00:20.562: The broiling lava tickles you for 13 damage!
 
-Upcoming work
--------------
+Sound
+-----
+https://freesound.org/search/?q=rat
+
+Skills
+------
 - skills
 - skill, guaranteed hit, but you have no defense in the next move
 - skill, whirl attack, attack 2 or 3 enemies
@@ -23,10 +27,7 @@ Upcoming work
 - skill, spring attack, give up a round for 2.5 times damage
 - tiny pixel effects that bounce?
 
-Future TODO
------------
-
-poison
+Poison
 ------
 - holy water
 - look up turn based combat
@@ -35,24 +36,24 @@ poison
 - spider that throws web?
 - antipoison potion
 
-gasses
+Gasses
 ------
 - gasses that spread
 - fire
 - explosive interactions
 
-doors
+Doors
 -----
 - need to be able to close open doors but not damaged ones
 - hit door, summon monst chance
 - hit door, wake sleeping monsters
 
-ai
+AI
 --
 - throw gold to distract cleaner
 - on fire intelligent monst should seek water?
 
-weapons
+Weapons
 -------
 - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)
 - blessed items resist explosion
@@ -65,12 +66,12 @@ weapons
 - (blunt/warhamma?) slime specific weapon does not cause slimes to split
 - plutonium sword
 
-water
+Water
 -----
 - water, kraken, eels; kraken will move out of shallows
 - make ripples, summon monsters
 
-monsts
+Monsts
 ------
 - new monst? should explode in fire?
 - sewer wolf?
@@ -82,29 +83,27 @@ monsts
 - gloat - cube like creature that explodes on touch and then its spirit gloats over your death
 - pet robot
 
-gods
+Gods
 ----
 - runes lean more torwards old gods
 
-level
+Level
 -----
 - teleports
-- sewer level
 - portable hunger - teleports you to a room full of digestive juices
 - moving floor
 - should the entrance in next level be close to the prev exit
 - add stuff in secret rooms
 - shove chocolate frog statue, get frog?
 
-player
+Player
 ------
 - choose name / player
 - weight factors into jumping
 - allow seed selection on menu
 - carry eat slime mold and gain acid resis?
-- gravestone
 
-spells
+Spells
 ------
 - spell capacitor
 - spell chaining
