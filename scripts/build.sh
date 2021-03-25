@@ -656,6 +656,8 @@ else
     log_info "Compiling"
 fi
 
+cd ..
+echo make $CORES $* all
 make $CORES $* all
 
 if [ $? -eq 0 ]

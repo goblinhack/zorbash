@@ -26,15 +26,16 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
         ram_file = count % ram_files 
         count += 1
 
-        rec, c_filename = filename
+        rec, orig_filename = filename
+        c_filename = orig_filename
         c_filename = re.sub("-", "_", c_filename)
         c_filename = re.sub("\.", "_", c_filename)
-        rel_path_filename = os.path.join(folder, c_filename)
+        rel_path_filename = os.path.join(folder, orig_filename)
 
         with open("src/ramdisk_data_{}.S".format(ram_file), "a") as myfile:
             myfile.write(".globl {}_start_\n".format(c_filename))
             myfile.write("{}_start_:\n".format(c_filename))
-            myfile.write(".incbin \"{}\"\n".format(rel_path_filename))
+            myfile.write(".incbin \"../{}\"\n".format(rel_path_filename))
             myfile.write(".globl {}_end_\n".format(c_filename))
             myfile.write("{}_end_:\n".format(c_filename))
             myfile.write("\n")

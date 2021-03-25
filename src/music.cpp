@@ -9,7 +9,7 @@
 #include "my_main.h"
 #include "my_music.h"
 #include "my_ptrcheck.h"
-#include "my_ramdisk.h"
+#include "my_file.h"
 #include "my_game.h"
 
 class music {

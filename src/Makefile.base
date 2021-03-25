@@ -117,6 +117,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/py_ttf.o                      \
     $(OBJDIR)/python.o                      \
     $(OBJDIR)/ramdisk_data.o                \
+    $(OBJDIR)/ramdisk_read.o                \
     $(OBJDIR)/ramdisk_data_0.o              \
     $(OBJDIR)/ramdisk_data_1.o              \
     $(OBJDIR)/ramdisk_data_2.o              \
@@ -267,6 +268,10 @@ GAME_OBJECTS=				    \
 $(OBJDIR)/%.o: %.cpp
 	@echo $(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
 	@$(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
+
+$(OBJDIR)/%.o: %.S
+	@echo $(CC) -c -o $@ $<
+	@$(CC) -c -o $@ $<
 
 #
 # link

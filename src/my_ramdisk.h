@@ -4,4 +4,17 @@
 //
 
 #pragma once
-unsigned char *file_load(const char *filename, int32_t *outlen);
+
+#include <map>
+#include <string>
+
+typedef struct ramdisk_t_ {
+    const char *filename;
+    const unsigned char *data;
+    int len;
+} ramdisk_t;
+
+extern std::map<std::string, ramdisk_t_> ramdisk_data;
+
+extern unsigned char *ramdisk_load(const std::string &, int *outlen);
+extern void ramdisk_init(void);
