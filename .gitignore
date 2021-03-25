@@ -9,3 +9,4 @@ src/Makefile.bak
 windows/python.version.sh
 windows/windows.xml
 zorbash.dSYM/
+zorbash
