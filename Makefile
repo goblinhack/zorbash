@@ -1,6 +1,6 @@
 pre:
-	scripts/check_files.sh
-	scripts/ramdisk.py
+	@scripts/check_files.sh
+	@scripts/ramdisk.py
 
 all: pre
 	if [ ! -f src/Makefile ]; then \
@@ -16,4 +16,5 @@ clobber:
 	(cd src; make $@)
 	rm src/Makefile
 	/bin/rm -rf data/gfx
-# DO NOT DELETE
+
+.DEFAULT_GOAL := all

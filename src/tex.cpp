@@ -8,7 +8,7 @@
 #include "my_main.h"
 #include "my_gl.h"
 #include "my_tex.h"
-#include "my_ramdisk.h"
+#include "my_file.h"
 #include "my_pixel.h"
 #include "my_math.h"
 #include "my_string.h"
