@@ -36,6 +36,7 @@ std::default_random_engine rng;
 #include "my_ptrcheck.h"
 #include "my_string.h"
 #include "my_sdl.h"
+#include "my_ramdisk.h"
 
 static char **ARGV;
 
@@ -584,6 +585,9 @@ int32_t main (int32_t argc, char *argv[])
 #endif
 
     parse_args(argc, argv);
+
+    LOG("INIT: Ramdisk");
+    ramdisk_init();
 
     //////////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ Use LOG 

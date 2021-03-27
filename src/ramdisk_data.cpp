@@ -10,7 +10,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/title_small_tga"] = r;
+        ramdisk_data["data/gfx/title_small.tga"] = r;
     }
 
     {
@@ -21,7 +21,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/weapons_tga"] = r;
+        ramdisk_data["data/gfx/weapons.tga"] = r;
     }
 
     {
@@ -32,7 +32,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_tile_bg_tga"] = r;
+        ramdisk_data["data/gfx/ui_tile_bg.tga"] = r;
     }
 
     {
@@ -43,7 +43,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/solid_tga"] = r;
+        ramdisk_data["data/gfx/solid.tga"] = r;
     }
 
     {
@@ -54,7 +54,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/title_fg4_tga"] = r;
+        ramdisk_data["data/gfx/title_fg4.tga"] = r;
     }
 
     {
@@ -65,7 +65,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_horiz2_tga"] = r;
+        ramdisk_data["data/gfx/ui_horiz2.tga"] = r;
     }
 
     {
@@ -76,7 +76,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/title_fg1_tga"] = r;
+        ramdisk_data["data/gfx/title_fg1.tga"] = r;
     }
 
     {
@@ -87,7 +87,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/chasm2_tga"] = r;
+        ramdisk_data["data/gfx/chasm2.tga"] = r;
     }
 
     {
@@ -98,7 +98,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/title_fg3_tga"] = r;
+        ramdisk_data["data/gfx/title_fg3.tga"] = r;
     }
 
     {
@@ -109,7 +109,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_horiz1_tga"] = r;
+        ramdisk_data["data/gfx/ui_horiz1.tga"] = r;
     }
 
     {
@@ -120,7 +120,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/title_fg2_tga"] = r;
+        ramdisk_data["data/gfx/title_fg2.tga"] = r;
     }
 
     {
@@ -131,7 +131,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles3_lava_tga"] = r;
+        ramdisk_data["data/gfx/tiles3_lava.tga"] = r;
     }
 
     {
@@ -142,7 +142,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_dead_tga"] = r;
+        ramdisk_data["data/gfx/ui_dead.tga"] = r;
     }
 
     {
@@ -153,7 +153,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/title_splash_tga"] = r;
+        ramdisk_data["data/gfx/title_splash.tga"] = r;
     }
 
     {
@@ -164,7 +164,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_health_bar_tga"] = r;
+        ramdisk_data["data/gfx/ui_health_bar.tga"] = r;
     }
 
     {
@@ -175,7 +175,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_credits_fg_tga"] = r;
+        ramdisk_data["data/gfx/ui_credits_fg.tga"] = r;
     }
 
     {
@@ -186,7 +186,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/blood_tga"] = r;
+        ramdisk_data["data/gfx/blood.tga"] = r;
     }
 
     {
@@ -197,7 +197,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/glow_tga"] = r;
+        ramdisk_data["data/gfx/glow.tga"] = r;
     }
 
     {
@@ -208,7 +208,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/background_tga"] = r;
+        ramdisk_data["data/gfx/background.tga"] = r;
     }
 
     {
@@ -219,7 +219,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_bag_tga"] = r;
+        ramdisk_data["data/gfx/ui_bag.tga"] = r;
     }
 
     {
@@ -230,7 +230,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles3_chasm_tga"] = r;
+        ramdisk_data["data/gfx/tiles3_chasm.tga"] = r;
     }
 
     {
@@ -241,7 +241,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/light_tga"] = r;
+        ramdisk_data["data/gfx/light.tga"] = r;
     }
 
     {
@@ -252,7 +252,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles3_water_tga"] = r;
+        ramdisk_data["data/gfx/tiles3_water.tga"] = r;
     }
 
     {
@@ -263,7 +263,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_vert2_tga"] = r;
+        ramdisk_data["data/gfx/ui_vert2.tga"] = r;
     }
 
     {
@@ -274,7 +274,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/chasm_tga"] = r;
+        ramdisk_data["data/gfx/chasm.tga"] = r;
     }
 
     {
@@ -285,7 +285,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/attack_tga"] = r;
+        ramdisk_data["data/gfx/attack.tga"] = r;
     }
 
     {
@@ -296,7 +296,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles3_sewer_water_tga"] = r;
+        ramdisk_data["data/gfx/tiles3_sewer_water.tga"] = r;
     }
 
     {
@@ -307,7 +307,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_circle_tga"] = r;
+        ramdisk_data["data/gfx/ui_circle.tga"] = r;
     }
 
     {
@@ -318,7 +318,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_vert1_tga"] = r;
+        ramdisk_data["data/gfx/ui_vert1.tga"] = r;
     }
 
     {
@@ -329,7 +329,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/title_bg_tga"] = r;
+        ramdisk_data["data/gfx/title_bg.tga"] = r;
     }
 
     {
@@ -340,7 +340,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_box0_tga"] = r;
+        ramdisk_data["data/gfx/ui_box0.tga"] = r;
     }
 
     {
@@ -351,7 +351,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_box1_tga"] = r;
+        ramdisk_data["data/gfx/ui_box1.tga"] = r;
     }
 
     {
@@ -362,7 +362,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles1_tga"] = r;
+        ramdisk_data["data/gfx/tiles1.tga"] = r;
     }
 
     {
@@ -373,7 +373,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles3_surface_effects_tga"] = r;
+        ramdisk_data["data/gfx/tiles3_surface_effects.tga"] = r;
     }
 
     {
@@ -384,7 +384,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles3_tga"] = r;
+        ramdisk_data["data/gfx/tiles3.tga"] = r;
     }
 
     {
@@ -395,7 +395,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_box3_tga"] = r;
+        ramdisk_data["data/gfx/ui_box3.tga"] = r;
     }
 
     {
@@ -406,7 +406,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_box2_tga"] = r;
+        ramdisk_data["data/gfx/ui_box2.tga"] = r;
     }
 
     {
@@ -417,7 +417,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles2_tga"] = r;
+        ramdisk_data["data/gfx/tiles2.tga"] = r;
     }
 
     {
@@ -428,7 +428,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_box6_tga"] = r;
+        ramdisk_data["data/gfx/ui_box6.tga"] = r;
     }
 
     {
@@ -439,7 +439,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_box7_tga"] = r;
+        ramdisk_data["data/gfx/ui_box7.tga"] = r;
     }
 
     {
@@ -450,7 +450,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/tiles3_deep_water_tga"] = r;
+        ramdisk_data["data/gfx/tiles3_deep_water.tga"] = r;
     }
 
     {
@@ -461,7 +461,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_status_bar_tga"] = r;
+        ramdisk_data["data/gfx/ui_status_bar.tga"] = r;
     }
 
     {
@@ -472,7 +472,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_box5_tga"] = r;
+        ramdisk_data["data/gfx/ui_box5.tga"] = r;
     }
 
     {
@@ -483,7 +483,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_credits_bg_tga"] = r;
+        ramdisk_data["data/gfx/ui_credits_bg.tga"] = r;
     }
 
     {
@@ -494,7 +494,7 @@ void ramdisk_init (void)
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/gfx/ui_box4_tga"] = r;
+        ramdisk_data["data/gfx/ui_box4.tga"] = r;
     }
 
 }

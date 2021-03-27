@@ -46,7 +46,7 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (is_player()) {
-        TOPCON("RIP: %s.", reason);
+        TOPCON("RIP: Killed %s.", reason);
         TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
         level->map_follow_player = false;
