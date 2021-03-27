@@ -6,27 +6,27 @@ data_weapons_tga_start_:
 .globl data_weapons_tga_end_
 data_weapons_tga_end_:
 
-.globl data_tiles3_lava_tga_start_
-data_tiles3_lava_tga_start_:
-.incbin "../data/gfx/tiles3_lava.tga"
-.globl data_tiles3_lava_tga_end_
-data_tiles3_lava_tga_end_:
+.globl data_ui_horiz1_tga_start_
+data_ui_horiz1_tga_start_:
+.incbin "../data/gfx/ui_horiz1.tga"
+.globl data_ui_horiz1_tga_end_
+data_ui_horiz1_tga_end_:
 
-.globl data_light_tga_start_
-data_light_tga_start_:
-.incbin "../data/gfx/light.tga"
-.globl data_light_tga_end_
-data_light_tga_end_:
+.globl data_ui_bag_tga_start_
+data_ui_bag_tga_start_:
+.incbin "../data/gfx/ui_bag.tga"
+.globl data_ui_bag_tga_end_
+data_ui_bag_tga_end_:
 
-.globl data_ui_box1_tga_start_
-data_ui_box1_tga_start_:
-.incbin "../data/gfx/ui_box1.tga"
-.globl data_ui_box1_tga_end_
-data_ui_box1_tga_end_:
+.globl data_title_bg_tga_start_
+data_title_bg_tga_start_:
+.incbin "../data/gfx/title_bg.tga"
+.globl data_title_bg_tga_end_
+data_title_bg_tga_end_:
 
-.globl data_ui_status_bar_tga_start_
-data_ui_status_bar_tga_start_:
-.incbin "../data/gfx/ui_status_bar.tga"
-.globl data_ui_status_bar_tga_end_
-data_ui_status_bar_tga_end_:
+.globl data_ui_box7_tga_start_
+data_ui_box7_tga_start_:
+.incbin "../data/gfx/ui_box7.tga"
+.globl data_ui_box7_tga_end_
+data_ui_box7_tga_end_:
 
