@@ -6,6 +6,7 @@
 #include <SDL_mixer.h>
 #include "my_sys.h"
 #include "my_game.h"
+#include "my_music.h"
 #include "my_wid_popup.h"
 #include "my_ui.h"
 
@@ -74,6 +75,7 @@ static uint8_t game_config_sound_music_volume_incr (Widp w, int32_t x, int32_t y
         game->config.music_volume = MIX_MAX_VOLUME;
     }
     game->config_sound_select();
+    music_update_volume();
     return true;
 }
 
@@ -86,6 +88,7 @@ static uint8_t game_config_sound_music_volume_decr (Widp w, int32_t x, int32_t y
         game->config.music_volume = 0;
     }
     game->config_sound_select();
+    music_update_volume();
     return true;
 }
 
@@ -228,6 +231,7 @@ void Game::config_sound_select (void)
         wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_config_sound_effects_volume_incr);
+        wid_set_on_mouse_held_down(w, game_config_sound_effects_volume_incr);
         wid_set_text(w, "+");
     }
     {_
@@ -239,6 +243,7 @@ void Game::config_sound_select (void)
         wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_config_sound_effects_volume_decr);
+        wid_set_on_mouse_held_down(w, game_config_sound_effects_volume_decr);
         wid_set_text(w, "-");
     }
 
@@ -273,6 +278,7 @@ void Game::config_sound_select (void)
         wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_config_sound_music_volume_incr);
+        wid_set_on_mouse_held_down(w, game_config_sound_music_volume_incr);
         wid_set_text(w, "+");
     }
     {_
@@ -284,6 +290,7 @@ void Game::config_sound_select (void)
         wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_config_sound_music_volume_decr);
+        wid_set_on_mouse_held_down(w, game_config_sound_music_volume_decr);
         wid_set_text(w, "-");
     }
 

@@ -1545,6 +1545,11 @@ void wid_set_on_mouse_down (Widp w, on_mouse_down_t fn)
     w->on_mouse_down = fn;
 }
 
+void wid_set_on_mouse_held_down (Widp w, on_mouse_down_t fn)
+{_
+    w->on_mouse_held_down = fn;
+}
+
 void wid_set_on_mouse_up (Widp w, on_mouse_up_t fn)
 {_
     w->on_mouse_up = fn;
@@ -5015,6 +5020,57 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
 
         return;
     }
+}
+
+void wid_mouse_held_down (uint32_t button, int32_t x, int32_t y)
+{_
+    Widp w {};
+
+    pixel_to_ascii(&x, &y);
+    if (!ascii_ok(x, y)) {
+        return;
+    }
+    ascii_mouse_x = x;
+    ascii_mouse_y = y;
+
+    w = wid_mouse_down_handler(x, y);
+    if (!w) {
+        return;
+    }
+
+    //
+    // Raise on mouse.
+    //
+    if ((w->on_mouse_held_down && (w->on_mouse_held_down)(w, x, y, button)) ||
+        wid_get_moveable(w)) {
+
+        wid_set_focus(w);
+        wid_set_mode(w, WID_MODE_ACTIVE);
+        wid_raise(w);
+
+        //
+        // Move on mouse.
+        //
+        if (wid_get_moveable(w)) {
+            wid_mouse_motion_begin(w, x, y);
+            return;
+        }
+
+        return;
+    }
+
+    if (wid_get_moveable(w)) {
+        wid_set_mode(w, WID_MODE_ACTIVE);
+        wid_raise(w);
+        wid_mouse_motion_begin(w, x, y);
+        return;
+    }
+
+#if 0
+    if (game_mouse_down(x, y, button)) {
+        return;
+    }
+#endif
 }
 
 void wid_mouse_up (uint32_t button, int32_t x, int32_t y)

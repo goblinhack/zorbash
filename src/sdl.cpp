@@ -1306,6 +1306,17 @@ void sdl_loop (void)
                 sdl_event(&events[i]);
             }
 
+            //
+            // Mouse held?
+            //
+            if (!found) {
+                auto mouse_down = sdl_get_mouse();
+                if (mouse_down) {
+                    DBG("SDL: Mouse DOWN held: button %d", mouse_down);
+                    wid_mouse_held_down(mouse_down, mouse_x, mouse_y);
+                }
+            }
+
             if (unlikely(!g_do_screenshot)) {
                 if (unlikely(!sdl_main_loop_running)) {
                     LOG("Exit main loop");
