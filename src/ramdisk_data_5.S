@@ -1,26 +1,32 @@
 // Ramdisk data for files that due to licensing cannot be exposed
 
-.globl data_ui_horiz2_tga_start_
-data_ui_horiz2_tga_start_:
-.incbin "../data/gfx/ui_horiz2.tga"
-.globl data_ui_horiz2_tga_end_
-data_ui_horiz2_tga_end_:
+.globl data_tiles1_dungeon_tga_start_
+data_tiles1_dungeon_tga_start_:
+.incbin "../data/gfx/tiles1_dungeon.tga"
+.globl data_tiles1_dungeon_tga_end_
+data_tiles1_dungeon_tga_end_:
 
-.globl data_ui_credits_fg_tga_start_
-data_ui_credits_fg_tga_start_:
-.incbin "../data/gfx/ui_credits_fg.tga"
-.globl data_ui_credits_fg_tga_end_
-data_ui_credits_fg_tga_end_:
+.globl data_title_splash_tga_start_
+data_title_splash_tga_start_:
+.incbin "../data/gfx/title_splash.tga"
+.globl data_title_splash_tga_end_
+data_title_splash_tga_end_:
 
-.globl data_attack_tga_start_
-data_attack_tga_start_:
-.incbin "../data/gfx/attack.tga"
-.globl data_attack_tga_end_
-data_attack_tga_end_:
+.globl data_ui_vert2_tga_start_
+data_ui_vert2_tga_start_:
+.incbin "../data/gfx/ui_vert2.tga"
+.globl data_ui_vert2_tga_end_
+data_ui_vert2_tga_end_:
 
-.globl data_ui_box3_tga_start_
-data_ui_box3_tga_start_:
-.incbin "../data/gfx/ui_box3.tga"
-.globl data_ui_box3_tga_end_
-data_ui_box3_tga_end_:
+.globl data_tiles3_surface_effects_tga_start_
+data_tiles3_surface_effects_tga_start_:
+.incbin "../data/gfx/tiles3_surface_effects.tga"
+.globl data_tiles3_surface_effects_tga_end_
+data_tiles3_surface_effects_tga_end_:
+
+.globl data_ui_credits_bg_tga_start_
+data_ui_credits_bg_tga_start_:
+.incbin "../data/gfx/ui_credits_bg.tga"
+.globl data_ui_credits_bg_tga_end_
+data_ui_credits_bg_tga_end_:
 

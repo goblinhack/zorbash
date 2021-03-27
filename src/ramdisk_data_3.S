@@ -1,32 +1,32 @@
 // Ramdisk data for files that due to licensing cannot be exposed
 
-.globl data_solid_tga_start_
-data_solid_tga_start_:
-.incbin "../data/gfx/solid.tga"
-.globl data_solid_tga_end_
-data_solid_tga_end_:
+.globl data_ui_tile_bg_tga_start_
+data_ui_tile_bg_tga_start_:
+.incbin "../data/gfx/ui_tile_bg.tga"
+.globl data_ui_tile_bg_tga_end_
+data_ui_tile_bg_tga_end_:
 
-.globl data_title_splash_tga_start_
-data_title_splash_tga_start_:
-.incbin "../data/gfx/title_splash.tga"
-.globl data_title_splash_tga_end_
-data_title_splash_tga_end_:
+.globl data_tiles3_lava_tga_start_
+data_tiles3_lava_tga_start_:
+.incbin "../data/gfx/tiles3_lava.tga"
+.globl data_tiles3_lava_tga_end_
+data_tiles3_lava_tga_end_:
 
-.globl data_ui_vert2_tga_start_
-data_ui_vert2_tga_start_:
-.incbin "../data/gfx/ui_vert2.tga"
-.globl data_ui_vert2_tga_end_
-data_ui_vert2_tga_end_:
+.globl data_light_tga_start_
+data_light_tga_start_:
+.incbin "../data/gfx/light.tga"
+.globl data_light_tga_end_
+data_light_tga_end_:
 
-.globl data_tiles3_surface_effects_tga_start_
-data_tiles3_surface_effects_tga_start_:
-.incbin "../data/gfx/tiles3_surface_effects.tga"
-.globl data_tiles3_surface_effects_tga_end_
-data_tiles3_surface_effects_tga_end_:
+.globl data_ui_box1_tga_start_
+data_ui_box1_tga_start_:
+.incbin "../data/gfx/ui_box1.tga"
+.globl data_ui_box1_tga_end_
+data_ui_box1_tga_end_:
 
-.globl data_ui_credits_bg_tga_start_
-data_ui_credits_bg_tga_start_:
-.incbin "../data/gfx/ui_credits_bg.tga"
-.globl data_ui_credits_bg_tga_end_
-data_ui_credits_bg_tga_end_:
+.globl data_ui_status_bar_tga_start_
+data_ui_status_bar_tga_start_:
+.incbin "../data/gfx/ui_status_bar.tga"
+.globl data_ui_status_bar_tga_end_
+data_ui_status_bar_tga_end_:
 
