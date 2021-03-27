@@ -53,10 +53,11 @@ with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
             ram_file = count % ram_files 
             count += 1
 
-            rec, c_filename = filename
+            rec, orig_filename = filename
+            c_filename = orig_filename
             c_filename = re.sub("-", "_", c_filename)
             c_filename = re.sub("\.", "_", c_filename)
-            rel_path_filename = os.path.join(folder, c_filename)
+            rel_path_filename = os.path.join(folder, orig_filename)
 
             myfile.write("    {\n")
             myfile.write("        extern unsigned char *data_{}_start_ asm(\"data_{}_start_\");\n".format(c_filename, c_filename))

@@ -22,7 +22,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/dungeon_grid.o                \
     $(OBJDIR)/file.o                        \
     $(OBJDIR)/file_log.o                    \
-    $(OBJDIR)/file_read.o                   \
     $(OBJDIR)/font.o                        \
     $(OBJDIR)/game.o                        \
     $(OBJDIR)/game_config.o                 \
