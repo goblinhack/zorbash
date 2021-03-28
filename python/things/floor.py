@@ -102,6 +102,7 @@ def init():
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
                         "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
                 ])
+    return
     tp_init(name="floor6",
             tiles=[
                         "floor6.1", "floor6.2", "floor6.3", "floor6.4",

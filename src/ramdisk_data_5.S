@@ -1,10 +1,10 @@
 // Ramdisk data for files that due to licensing cannot be exposed
 
-.globl data_tiles1_dungeon_tga_start_
-data_tiles1_dungeon_tga_start_:
-.incbin "../data/gfx/tiles1_dungeon.tga"
-.globl data_tiles1_dungeon_tga_end_
-data_tiles1_dungeon_tga_end_:
+.globl data_solid_tga_start_
+data_solid_tga_start_:
+.incbin "../data/gfx/solid.tga"
+.globl data_solid_tga_end_
+data_solid_tga_end_:
 
 .globl data_title_splash_tga_start_
 data_title_splash_tga_start_:
@@ -24,9 +24,9 @@ data_tiles3_surface_effects_tga_start_:
 .globl data_tiles3_surface_effects_tga_end_
 data_tiles3_surface_effects_tga_end_:
 
-.globl data_ui_credits_bg_tga_start_
-data_ui_credits_bg_tga_start_:
-.incbin "../data/gfx/ui_credits_bg.tga"
-.globl data_ui_credits_bg_tga_end_
-data_ui_credits_bg_tga_end_:
+.globl data_ui_box5_tga_start_
+data_ui_box5_tga_start_:
+.incbin "../data/gfx/ui_box5.tga"
+.globl data_ui_box5_tga_end_
+data_ui_box5_tga_end_:
 

@@ -68,6 +68,45 @@ bool Level::create_dungeon (point3d at, int seed)
         create_dungeon_place_walls(dungeon, 2, 1, 2, tries);
         if (g_errored) { return false; }
 
+        {
+            auto floor_type = random_range_inclusive(1, 5);
+            int nloops = 100;
+            auto s = "floor";
+
+            while (nloops--) {
+                auto tries = 20;
+                create_dungeon_place_floors(dungeon, s, floor_type, 1, 6, 6, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 1, 6, 3, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 1, 3, 6, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 1, 3, 3, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 2, 3, 3, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 1, 2, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 2, 2, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 3, 2, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 1, 2, 1, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 2, 2, 1, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 1, 1, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 2, 1, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, random_range_inclusive(1, 19), 1, 1, tries);
+                if (g_errored) { return false; }
+            }
+
+            create_dungeon_place_remaining_floor(dungeon, s + std::to_string(floor_type));
+            if (g_errored) { return false; }
+        }
+#if 0
         for (auto d = 1; d < 3; d++) {
             int nloops = 10;
             while (nloops--) {
@@ -83,7 +122,9 @@ bool Level::create_dungeon (point3d at, int seed)
                 }
             }
         }
+#endif
 
+#if 0
         create_dungeon_place_floor_under_objects(dungeon, "floor1", 1);
         if (g_errored) { return false; }
         create_dungeon_place_floor_under_objects(dungeon, "floor2", 2);
@@ -104,6 +145,7 @@ bool Level::create_dungeon (point3d at, int seed)
         if (g_errored) { return false; }
         create_dungeon_place_remaining_floor(dungeon, "floor1");
         if (g_errored) { return false; }
+#endif
         create_dungeon_place_corridor(dungeon, "corridor1", 0);
         if (g_errored) { return false; }
 
@@ -394,7 +436,7 @@ void Level::create_dungeon_place_rocks (Dungeonp d, int variant,
     }
 }
 
-void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int depth,
+void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int floor_type,
                                          int variant, int block_width,
                                          int block_height, int tries)
 {_
@@ -410,13 +452,6 @@ void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int depth
 
                 if (d->is_oob(X, Y)) {
                     continue;
-                }
-
-                if (depth) {
-                    if (depth != d->get_grid_depth_at(X, Y)) {
-                        can_place_here = false;
-                        continue;
-                    }
                 }
 
                 if (!d->is_floor(X, Y)) {
@@ -455,7 +490,7 @@ void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int depth
                 auto X = x + dx;
                 set_is_floor(X, Y);
 
-                auto new_thing = what + std::to_string(depth);
+                auto new_thing = what + std::to_string(floor_type);
                 auto tilename = new_thing + ".";
 
                 tilename += std::to_string(variant);
@@ -481,7 +516,7 @@ void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int depth
     }
 }
 
-void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string what, int depth)
+void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string what, int floor_type)
 {_
     for (auto x = MAP_BORDER_TOTAL; x < MAP_WIDTH - MAP_BORDER_TOTAL; x++) {
         for (auto y = MAP_BORDER_TOTAL; y < MAP_HEIGHT - MAP_BORDER_TOTAL; y++) {
@@ -491,12 +526,6 @@ void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string wh
 
             if (is_floor(x, y)) {
                 continue;
-            }
-
-            if (depth) {
-                if (depth != d->get_grid_depth_at(x, y)) {
-                    continue;
-                }
             }
 
             (void) thing_new(what, fpoint(x, y));
@@ -933,19 +962,13 @@ void Level::create_dungeon_place_remaining_floor (Dungeonp d, const std::string 
     }
 }
 
-void Level::create_dungeon_place_corridor (Dungeonp d, const std::string what, int depth)
+void Level::create_dungeon_place_corridor (Dungeonp d, const std::string what, int floor_type)
 {_
     for (auto x = MAP_BORDER_TOTAL; x < MAP_WIDTH - MAP_BORDER_TOTAL; x++) {
         for (auto y = MAP_BORDER_TOTAL; y < MAP_HEIGHT - MAP_BORDER_TOTAL; y++) {
             if (!d->is_corridor(x, y) &&
                 !d->is_secret_corridor_at(x, y)) {
                 continue;
-            }
-
-            if (depth) {
-                if (depth != d->get_grid_depth_at(x, y)) {
-                    continue;
-                }
             }
 
             (void) thing_new(what, fpoint(x, y));
