@@ -85,7 +85,7 @@ void Thing::fire_tick (void)
             hit = ((int)random_range(0, 100) < 90);
             if (!hit) {
                 if (is_player()) {
-                    TOPCON("%%fg=red$You dodge the flames.");
+                    TOPCON("%%fg=red$You dodge the flames.%%fg=reset$");
                 }
             } else if ((int)random_range(0, 100) < 20) {
                 if (set_on_fire("stepped into fire")) {

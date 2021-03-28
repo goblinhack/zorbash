@@ -24,9 +24,9 @@ data_tiles3_tga_start_:
 .globl data_tiles3_tga_end_
 data_tiles3_tga_end_:
 
-.globl data_ui_box4_tga_start_
-data_ui_box4_tga_start_:
-.incbin "../data/gfx/ui_box4.tga"
-.globl data_ui_box4_tga_end_
-data_ui_box4_tga_end_:
+.globl data_ui_credits_bg_tga_start_
+data_ui_credits_bg_tga_start_:
+.incbin "../data/gfx/ui_credits_bg.tga"
+.globl data_ui_credits_bg_tga_end_
+data_ui_credits_bg_tga_end_:
 

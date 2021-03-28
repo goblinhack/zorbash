@@ -1,10 +1,10 @@
 // Ramdisk data for files that due to licensing cannot be exposed
 
-.globl data_solid_tga_start_
-data_solid_tga_start_:
-.incbin "../data/gfx/solid.tga"
-.globl data_solid_tga_end_
-data_solid_tga_end_:
+.globl data_ui_tile_bg_tga_start_
+data_ui_tile_bg_tga_start_:
+.incbin "../data/gfx/ui_tile_bg.tga"
+.globl data_ui_tile_bg_tga_end_
+data_ui_tile_bg_tga_end_:
 
 .globl data_ui_dead_tga_start_
 data_ui_dead_tga_start_:
@@ -24,9 +24,9 @@ data_tiles1_tga_start_:
 .globl data_tiles1_tga_end_
 data_tiles1_tga_end_:
 
-.globl data_ui_box5_tga_start_
-data_ui_box5_tga_start_:
-.incbin "../data/gfx/ui_box5.tga"
-.globl data_ui_box5_tga_end_
-data_ui_box5_tga_end_:
+.globl data_ui_status_bar_tga_start_
+data_ui_status_bar_tga_start_:
+.incbin "../data/gfx/ui_status_bar.tga"
+.globl data_ui_status_bar_tga_end_
+data_ui_status_bar_tga_end_:
 
