@@ -70,6 +70,8 @@ bool Level::create_dungeon (point3d at, int seed)
 
         {
             auto floor_type = random_range_inclusive(1, 5);
+            floor_type = 5;
+
             int nloops = 100;
             auto s = "floor";
 
@@ -77,13 +79,23 @@ bool Level::create_dungeon (point3d at, int seed)
                 auto tries = 20;
                 create_dungeon_place_floors(dungeon, s, floor_type, 1, 6, 6, tries);
                 if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 2, 6, 6, tries);
+                if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 1, 6, 3, tries);
                 if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 2, 6, 3, tries);
+                if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 1, 3, 6, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 2, 3, 6, tries);
                 if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 1, 3, 3, tries);
                 if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 2, 3, 3, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 3, 3, 3, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 4, 3, 3, tries);
                 if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 1, 2, 2, tries);
                 if (g_errored) { return false; }
@@ -91,15 +103,37 @@ bool Level::create_dungeon (point3d at, int seed)
                 if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 3, 2, 2, tries);
                 if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 4, 2, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 5, 2, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 6, 2, 2, tries);
+                if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 1, 2, 1, tries);
                 if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 2, 2, 1, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 3, 2, 1, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 4, 2, 1, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 5, 2, 1, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 6, 2, 1, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 7, 2, 1, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 8, 2, 1, tries);
                 if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 1, 1, 2, tries);
                 if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 2, 1, 2, tries);
                 if (g_errored) { return false; }
-                create_dungeon_place_floors(dungeon, s, floor_type, random_range_inclusive(1, 19), 1, 1, tries);
+                create_dungeon_place_floors(dungeon, s, floor_type, 3, 1, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, 4, 1, 2, tries);
+                if (g_errored) { return false; }
+                create_dungeon_place_floors(dungeon, s, floor_type, random_range_inclusive(1, 38), 1, 1, tries);
                 if (g_errored) { return false; }
             }
 
