@@ -582,9 +582,9 @@ int Thing::is_rrr18(void) const
     return (tp()->is_rrr18());
 }
 
-int Thing::is_rrr19(void) const
+int Thing::minion_leash_distance(void) const
 {_
-    return (tp()->is_rrr19());
+    return (tp()->minion_leash_distance());
 }
 
 int Thing::is_skill(void) const

@@ -24,9 +24,9 @@ data_ui_vert1_tga_start_:
 .globl data_ui_vert1_tga_end_
 data_ui_vert1_tga_end_:
 
-.globl data_tiles1_walls_tga_start_
-data_tiles1_walls_tga_start_:
-.incbin "../data/gfx/tiles1_walls.tga"
-.globl data_tiles1_walls_tga_end_
-data_tiles1_walls_tga_end_:
+.globl data_ui_box6_tga_start_
+data_ui_box6_tga_start_:
+.incbin "../data/gfx/ui_box6.tga"
+.globl data_ui_box6_tga_end_
+data_ui_box6_tga_end_:
 

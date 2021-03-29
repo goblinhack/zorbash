@@ -24,9 +24,9 @@ data_ui_box0_tga_start_:
 .globl data_ui_box0_tga_end_
 data_ui_box0_tga_end_:
 
-.globl data_ui_box7_tga_start_
-data_ui_box7_tga_start_:
-.incbin "../data/gfx/ui_box7.tga"
-.globl data_ui_box7_tga_end_
-data_ui_box7_tga_end_:
+.globl data_tiles3_deep_water_tga_start_
+data_tiles3_deep_water_tga_start_:
+.incbin "../data/gfx/tiles3_deep_water.tga"
+.globl data_tiles3_deep_water_tga_end_
+data_tiles3_deep_water_tga_end_:
 

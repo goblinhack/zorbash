@@ -688,7 +688,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr16)
     TP_SET_DECL(is_rrr17)
     TP_SET_DECL(is_rrr18)
-    TP_SET_DECL(is_rrr19)
+    TP_SET_DECL(minion_leash_distance)
     TP_SET_DECL(is_rrr2)
     TP_SET_DECL(is_skill)
     TP_SET_DECL(is_sewer_wall)

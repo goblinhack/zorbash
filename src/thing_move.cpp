@@ -45,6 +45,20 @@ void Thing::move_finish (void)
 bool Thing::move (fpoint future_pos)
 {_
     log("Move to %f,%f", future_pos.x, future_pos.y);
+
+    //
+    // Don't let minions wander too far
+    //
+    auto master = get_top_minion_owner();
+    if (master) {
+        if (minion_leash_distance()) {
+            if (distance(future_pos, master->mid_at) >= minion_leash_distance()) {
+                log("Minion cannot to %f,%f; it tugs at the leash", future_pos.x, future_pos.y);
+                return false;
+            }
+        }
+    }
+
     bool up     = future_pos.y < mid_at.y;
     bool down   = future_pos.y > mid_at.y;
     bool left   = future_pos.x < mid_at.x;
