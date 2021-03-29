@@ -127,4 +127,42 @@ def init():
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
                         "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
                 ])
+    tp_init(name="floor6",
+            tiles=[
+                        "floor6.1", "floor6.2", "floor6.3", "floor6.4",
+                        "floor6.5", "floor6.6", "floor6.7", "floor6.8",
+                        "floor6.9", "floor6.10", "floor6.11", "floor6.12",
+                        "floor6.13", "floor6.14", "floor6.15", "floor6.16",
+                        "floor6.17", "floor6.18", "floor6.19", "floor6.20",
+                        "floor6.21", "floor6.22", "floor6.23", "floor6.24",
+                        "floor6.25", "floor6.26", "floor6.27", "floor6.28",
+                        "floor6.29", "floor6.30", "floor6.31", "floor6.32",
+                        "floor6.33", "floor6.34", "floor6.35", "floor6.36",
+                        "floor6.37", "floor6.38",
+                  ],
+            bot3_tiles=[ 
+                        "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+                        "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+                        "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+                        "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
+                ])
+    tp_init(name="floor7",
+            tiles=[
+                        "floor7.1", "floor7.2", "floor7.3", "floor7.4",
+                        "floor7.5", "floor7.6", "floor7.7", "floor7.8",
+                        "floor7.9", "floor7.10", "floor7.11", "floor7.12",
+                        "floor7.13", "floor7.14", "floor7.15", "floor7.16",
+                        "floor7.17", "floor7.18", "floor7.19", "floor7.20",
+                        "floor7.21", "floor7.22", "floor7.23", "floor7.24",
+                        "floor7.25", "floor7.26", "floor7.27", "floor7.28",
+                        "floor7.29", "floor7.30", "floor7.31", "floor7.32",
+                        "floor7.33", "floor7.34", "floor7.35", "floor7.36",
+                        "floor7.37", "floor7.38",
+                  ],
+            bot3_tiles=[ 
+                        "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+                        "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+                        "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+                        "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
+                ])
 init()

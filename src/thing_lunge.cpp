@@ -12,8 +12,10 @@
 void Thing::lunge (fpoint to)
 {
     auto t = set_timestamp_lunge_begin(time_get_time_ms_cached());
+    auto p = to - mid_at;
     set_timestamp_lunge_end(t + 200);
     set_lunge_to(to);
+    move_set_dir_from_delta(p);
 }
 
 float Thing::get_lunge (void)
