@@ -18,9 +18,9 @@ data_ui_circle_tga_start_:
 .globl data_ui_circle_tga_end_
 data_ui_circle_tga_end_:
 
-.globl data_tiles2_tga_start_
-data_tiles2_tga_start_:
-.incbin "../data/gfx/tiles2.tga"
-.globl data_tiles2_tga_end_
-data_tiles2_tga_end_:
+.globl data_tiles1_walls_tga_start_
+data_tiles1_walls_tga_start_:
+.incbin "../data/gfx/tiles1_walls.tga"
+.globl data_tiles1_walls_tga_end_
+data_tiles1_walls_tga_end_:
 

@@ -693,7 +693,7 @@ public:
     int is_rrr16(void) const;
     int is_rrr17(void) const;
     int is_rrr18(void) const;
-    int is_rrr19(void) const;
+    int minion_leash_distance(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;

@@ -319,7 +319,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr18() && (what == "is_rrr18")) {
         return true;
     }
-    if (is_rrr19() && (what == "is_rrr19")) {
+    if (minion_leash_distance() && (what == "minion_leash_distance")) {
         return true;
     }
     if (is_rrr2() && (what == "is_rrr2")) {

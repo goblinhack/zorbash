@@ -24,9 +24,9 @@ data_title_bg_tga_start_:
 .globl data_title_bg_tga_end_
 data_title_bg_tga_end_:
 
-.globl data_ui_box6_tga_start_
-data_ui_box6_tga_start_:
-.incbin "../data/gfx/ui_box6.tga"
-.globl data_ui_box6_tga_end_
-data_ui_box6_tga_end_:
+.globl data_ui_box7_tga_start_
+data_ui_box7_tga_start_:
+.incbin "../data/gfx/ui_box7.tga"
+.globl data_ui_box7_tga_end_
+data_ui_box7_tga_end_:
 

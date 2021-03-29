@@ -8,6 +8,9 @@
 #include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
+#include "my_wid_leftbar.h"
+#include "my_wid_thing_info.h"
+#include "my_wid_thing_collect.h"
 #include "my_random.h"
 #include "my_thing.h"
 #include "my_ui.h"
@@ -68,6 +71,10 @@ static uint8_t wid_dead_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 
 void Game::dead_select (const char *reason)
 {_
+    wid_thing_info_fini();
+    wid_thing_collect_fini();
+    wid_leftbar_fini();
+
     if (wid_dead_window) {
         wid_dead_destroy();
     }

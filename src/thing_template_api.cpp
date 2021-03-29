@@ -203,7 +203,7 @@ int Tp::is_rrr15(void) const { return _is_rrr15; }
 int Tp::is_rrr16(void) const { return _is_rrr16; }
 int Tp::is_rrr17(void) const { return _is_rrr17; }
 int Tp::is_rrr18(void) const { return _is_rrr18; }
-int Tp::is_rrr19(void) const { return _is_rrr19; }
+int Tp::minion_leash_distance(void) const { return _minion_leash_distance; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_skill(void) const { return _is_skill; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
@@ -443,7 +443,7 @@ void Tp::set_is_rrr15(int v) { _is_rrr15 = v; }
 void Tp::set_is_rrr16(int v) { _is_rrr16 = v; }
 void Tp::set_is_rrr17(int v) { _is_rrr17 = v; }
 void Tp::set_is_rrr18(int v) { _is_rrr18 = v; }
-void Tp::set_is_rrr19(int v) { _is_rrr19 = v; }
+void Tp::set_minion_leash_distance(int v) { _minion_leash_distance = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_skill(int v) { _is_skill = v; }
 void Tp::set_is_sewer_wall(int v) { _is_sewer_wall = v; }

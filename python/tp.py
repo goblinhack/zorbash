@@ -244,8 +244,8 @@ class Tp:
     def set_is_rrr18(self, value):
         zx.tp_set_is_rrr18(self, value)
 
-    def set_is_rrr19(self, value):
-        zx.tp_set_is_rrr19(self, value)
+    def set_minion_leash_distance(self, value):
+        zx.tp_set_minion_leash_distance(self, value)
 
     def set_is_skill(self, value):
         zx.tp_set_is_skill(self, value)
