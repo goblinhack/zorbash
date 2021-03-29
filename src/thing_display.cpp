@@ -390,9 +390,6 @@ bool Thing::get_coords (point &blit_tl,
     auto falling = is_falling || (owner && owner->is_falling);
     if (likely(!falling)) {
         if (unlikely(tpp->gfx_animated_can_hflip())) {
-            //
-            // Confusing in ascii mode
-            //
             if (is_player() ||
                 (level->player && 
                  (get_immediate_owner_id() == level->player->id))) {
@@ -434,6 +431,10 @@ bool Thing::get_coords (point &blit_tl,
                     if (is_dir_right() || is_dir_tr() || is_dir_br()) {
                         std::swap(blit_tl.x, blit_br.x);
                     }
+                }
+            } else {
+                if (is_dir_right() || is_dir_tr() || is_dir_br()) {
+                    std::swap(blit_tl.x, blit_br.x);
                 }
             }
         }
