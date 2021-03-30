@@ -403,6 +403,8 @@ public:
     int decr_lifespan(void);
     int decr_minion_count(int);
     int decr_minion_count(void);
+    int decr_charge_count(int);
+    int decr_charge_count(void);
     int decr_modifier_attack(int);
     int decr_modifier_attack(void);
     int decr_modifier_constitution(int);
@@ -467,6 +469,7 @@ public:
     int get_lifespan(void) const;
     int get_lifespan_initial(void) const;
     int get_minion_count(void) const;
+    int get_charge_count(void) const;
     int get_modifier_attack(void) const;
     int get_modifier_constitution(void) const;
     int get_modifier_defence(void) const;
@@ -530,6 +533,8 @@ public:
     int incr_lifespan(void);
     int incr_minion_count(int);
     int incr_minion_count(void);
+    int incr_charge_count(int);
+    int incr_charge_count(void);
     int incr_modifier_attack(int);
     int incr_modifier_attack(void);
     int incr_modifier_constitution(int);
@@ -692,7 +697,7 @@ public:
     int is_rrr15(void) const;
     int is_rrr16(void) const;
     int is_wand(void) const;
-    int wand_charges(void) const;
+    int charge_count(void) const;
     int minion_leash_distance(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
@@ -744,6 +749,7 @@ public:
     int set_keys(int);
     int set_lifespan(int);
     int set_minion_count(int);
+    int set_charge_count(int);
     int set_modifier_attack(int);
     int set_modifier_constitution(int);
     int set_modifier_defence(int);

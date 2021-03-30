@@ -41,6 +41,16 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
         return;
     }
 
+    if (what->get_charge_count()) {
+        what->decr_charge_count();
+        if (what->get_charge_count()) {
+            log("Used %s (has %d charges left)", what->to_string().c_str(), what->get_charge_count());
+            return;
+        }
+    }
+
+    log("Used %s", what->to_string().c_str());
+
     if (is_player()) {
         if (target) {
             inventory_id_remove(what, target);
@@ -48,8 +58,6 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
             inventory_id_remove(what);
         }
     }
-
-    log("Used %s", what->to_string().c_str());
 
     if (remove_after_use) {
         auto immediate_owner = what->get_immediate_owner();

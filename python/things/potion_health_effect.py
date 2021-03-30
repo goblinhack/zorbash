@@ -4,7 +4,7 @@ import tp
 def tp_init(name):
     x = tp.Tp(name)
     x.set_gfx_animated(True)
-    x.set_gfx_show_outlined(True)
+    x.set_gfx_show_outlined(False)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(False)
     x.set_is_floating(True)
@@ -16,12 +16,12 @@ def tp_init(name):
 
     x.set_tile(tile="nothing")
     x.set_tile(tile=name + ".1", delay_ms=50)
-    x.set_tile(tile=name + ".2", delay_ms=50)
-    x.set_tile(tile=name + ".3", delay_ms=50)
-    x.set_tile(tile=name + ".4", delay_ms=50)
-    x.set_tile(tile=name + ".5", delay_ms=50)
-    x.set_tile(tile=name + ".6", delay_ms=50)
-    x.set_tile(tile=name + ".7", delay_ms=50, is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    x.set_tile(tile=name + ".2", delay_ms=100)
+    x.set_tile(tile=name + ".3", delay_ms=100)
+    x.set_tile(tile=name + ".4", delay_ms=100)
+    x.set_tile(tile=name + ".5", delay_ms=100)
+    x.set_tile(tile=name + ".6", delay_ms=100)
+    x.set_tile(tile=name + ".7", delay_ms=100, is_end_of_anim = True, is_dead_on_end_of_anim=True)
 
     x.update()
 

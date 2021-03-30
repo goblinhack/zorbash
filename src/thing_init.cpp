@@ -284,6 +284,10 @@ void Thing::init (Levelp level,
         }
     }
 
+    if (unlikely(tpp->charge_count())) {
+        set_charge_count(tpp->charge_count());
+    }
+
     auto tiles = &tpp->tiles;
     if (tpp->gfx_animated()) {
         auto tile = tile_first(tiles);
