@@ -258,7 +258,7 @@ bool Level::create_dungeon (point3d at, int seed)
                         t->carry(f);
 
                         for (auto x = 0; x < 3; x++) {
-                            auto p = thing_new("potion_descent", fpoint(x, y));
+                            auto p = thing_new("potion_health", fpoint(x, y));
                             t->carry(p);
                         }
 

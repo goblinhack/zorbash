@@ -238,11 +238,11 @@ class Tp:
     def set_is_rrr16(self, value):
         zx.tp_set_is_rrr16(self, value)
 
-    def set_is_rrr17(self, value):
-        zx.tp_set_is_rrr17(self, value)
+    def set_is_wand(self, value):
+        zx.tp_set_is_wand(self, value)
 
-    def set_is_rrr18(self, value):
-        zx.tp_set_is_rrr18(self, value)
+    def set_wand_charges(self, value):
+        zx.tp_set_wand_charges(self, value)
 
     def set_minion_leash_distance(self, value):
         zx.tp_set_minion_leash_distance(self, value)
