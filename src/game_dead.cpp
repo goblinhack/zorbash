@@ -131,8 +131,8 @@ void Game::dead_select (const char *reason)
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
-    wid_dead_window->log("Killed by:");
-    wid_dead_window->log(reason);
+    wid_dead_window->log(" ");
+    wid_dead_window->log(std::string("Killed ") + reason);
 
     {_
         auto p = wid_dead_window->wid_text_area->wid_text_area;
