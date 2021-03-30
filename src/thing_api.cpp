@@ -577,9 +577,9 @@ int Thing::is_wand(void) const
     return (tp()->is_wand());
 }
 
-int Thing::wand_charges(void) const
+int Thing::charge_count(void) const
 {_
-    return (tp()->wand_charges());
+    return (tp()->charge_count());
 }
 
 int Thing::minion_leash_distance(void) const
@@ -3519,6 +3519,54 @@ int Thing::incr_minion_count (void)
     new_monst();
 //con("%s", __FUNCTION__);
     return (monstp->minion_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// charge_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_charge_count (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->charge_count);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_charge_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->charge_count = v);
+}
+
+int Thing::decr_charge_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->charge_count -= v);
+}
+
+int Thing::incr_charge_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->charge_count += v);
+}
+
+int Thing::decr_charge_count (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->charge_count--);
+}
+
+int Thing::incr_charge_count (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->charge_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

@@ -225,7 +225,7 @@ private:
     int _is_rrr15 {};
     int _is_rrr16 {};
     int _is_wand {};
-    int _wand_charges {};
+    int _charge_count {};
     int _minion_leash_distance {};
     int _is_rrr2 {};
     int _is_skill {};
@@ -573,7 +573,7 @@ public:
     int is_rrr15(void) const;
     int is_rrr16(void) const;
     int is_wand(void) const;
-    int wand_charges(void) const;
+    int charge_count(void) const;
     int minion_leash_distance(void) const;
     int is_rrr2(void) const;
     int is_skill(void) const;
@@ -815,7 +815,7 @@ public:
     void set_is_rrr15(int);
     void set_is_rrr16(int);
     void set_is_wand(int);
-    void set_wand_charges(int);
+    void set_charge_count(int);
     void set_minion_leash_distance(int);
     void set_is_rrr2(int);
     void set_is_skill(int);

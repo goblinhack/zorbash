@@ -241,8 +241,8 @@ class Tp:
     def set_is_wand(self, value):
         zx.tp_set_is_wand(self, value)
 
-    def set_wand_charges(self, value):
-        zx.tp_set_wand_charges(self, value)
+    def set_charge_count(self, value):
+        zx.tp_set_charge_count(self, value)
 
     def set_minion_leash_distance(self, value):
         zx.tp_set_minion_leash_distance(self, value)

@@ -323,6 +323,16 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         }
     }
 
+    if (tp->charge_count()) {
+        if (t->get_charge_count() > 1) {
+            wid_popup_window->log(" ");
+            wid_popup_window->log("Has " + std::to_string(t->get_charge_count()) + " charges left");
+        } else {
+            wid_popup_window->log(" ");
+            wid_popup_window->log("Has one charge left");
+        }
+    }
+
     return wid_popup_window;
 }
 
