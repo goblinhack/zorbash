@@ -257,10 +257,11 @@ bool Level::create_dungeon (point3d at, int seed)
                         auto f = thing_new("food_frog", fpoint(x, y));
                         t->carry(f);
 
-                        for (auto x = 0; x < 3; x++) {
-                            auto p = thing_new("potion_health", fpoint(x, y));
-                            t->carry(p);
-                        }
+                        auto p = thing_new("potion_health", fpoint(x, y));
+                        t->carry(p);
+
+                        auto W = thing_new("wand_descent", fpoint(x, y));
+                        t->carry(W);
 
                         auto s = thing_new("skill_devoted_thrust", fpoint(x, y));
                         t->skill_add(s);

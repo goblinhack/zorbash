@@ -56,6 +56,6 @@ def tp_init(name, text_name, short_text_name):
     x.update()
 
 def init():
-    tp_init(name="wand_health", text_name="wand of descent", short_text_name="wand.descent")
+    tp_init(name="wand_descent", text_name="wand of descent", short_text_name="wand.descent")
 
 init()
