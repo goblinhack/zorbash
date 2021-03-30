@@ -123,12 +123,6 @@ std::list<Thingp> Thing::anything_to_carry (void)
             continue;
         }
 
-        if (t->is_hidden) {
-            log("Potential item to carry, no, is hidden: %s",
-                t->to_string().c_str());
-            continue;
-        }
-
         if (t->get_immediate_owner()) {
             log("Potential item to carry, no, has owner: %s",
                 t->to_string().c_str());
@@ -137,6 +131,12 @@ std::list<Thingp> Thing::anything_to_carry (void)
 
         if (!t->is_collectable()) {
             log("Potential item to carry, no, not collectable: %s",
+                t->to_string().c_str());
+            continue;
+        }
+
+        if (t->is_hidden) {
+            log("Potential item to carry, no, is hidden: %s",
                 t->to_string().c_str());
             continue;
         }

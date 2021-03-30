@@ -105,7 +105,7 @@ _
         bag_secondary = nullptr;
     }
 
-    state = Game::STATE_COLLECTING_ITEMS;
+    change_state(Game::STATE_COLLECTING_ITEMS);
 
     //
     // bag_primary

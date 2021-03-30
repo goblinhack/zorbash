@@ -551,6 +551,8 @@ void Thing::move_to_immediately (fpoint to)
             level->cursor_needs_update = true;
         }
     }
+
+    update_interpolated_position();
 }
 
 bool Thing::move_to_check (const point& nh, const bool escaping)

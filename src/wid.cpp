@@ -5973,8 +5973,8 @@ void wid_tick_all (void)
     }
 
     if (game->request_destroy_thing_info) {
-        if (time_have_x_tenths_passed_since(
-            1, game->request_destroy_thing_info)) {
+        if (time_have_x_tenths_passed_since(1, game->request_destroy_thing_info)) {
+            game->request_destroy_thing_info = false;
             wid_thing_info_fini();
         }
     }

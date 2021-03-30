@@ -50,6 +50,8 @@ void Game::wid_thing_info_destroy_immediate (void)
         //
         // Continue
         //
+    } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
+        return;
     } else if (game->state == Game::STATE_MOVING_ITEMS) {
         return;
     }
@@ -331,10 +333,15 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         // Continue
         //
         t->log("Remake thing info");
+    } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
+        t->err("Ignore, already collecting items");
+        return;
     } else if (game->state == Game::STATE_MOVING_ITEMS) {
         t->log("Ignore, already moving items");
         return;
     }
+
+    t->log("Make thing info");
 
     if (wid_console_window && wid_console_window->visible) {
         t->log("Console visible");
@@ -451,7 +458,16 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
 void Game::wid_thing_info_create_when_hovering_over (Thingp t)
 {
-    if (game->state == STATE_CHOOSING_TARGET) {
+    if (game->state == Game::STATE_COLLECTING_ITEMS) {
+        return;
+    }
+    if (game->state == Game::STATE_MOVING_ITEMS) {
+        return;
+    }
+    if (game->state == Game::STATE_CHOOSING_TARGET) {
+        return;
+    }
+    if (game->state == Game::STATE_CHOOSING_TARGET) {
         return;
     }
     wid_thing_info_create(t, true);
