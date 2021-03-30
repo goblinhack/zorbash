@@ -101,8 +101,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 } else if (m.is_blood            ||
                            m.is_deep_water       ||
                            m.is_door             ||
-                           m.is_ascend_dungeon         ||
-                           m.is_descend_dungeon             ||
+                           m.is_ascend_dungeon   ||
+                           m.is_descend_dungeon  ||
                            m.is_floor_deco       ||
                            m.is_food             ||
                            m.is_minion_generator ||

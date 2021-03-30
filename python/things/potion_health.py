@@ -1,8 +1,15 @@
 import zx
 import tp
 
-def on_use(me, what, target, x, y):
-    zx.tp_spawn_radius_range(me, what, "potion_health_effect")
+def on_use(owner, potion, target, x, y):
+    health = zx.thing_get_health(owner)
+    new_health = int(zx.thing_get_health_max(owner) / 100) * 80
+    if new_health > health:
+        zx.tp_spawn_radius_range(owner, potion, "potion_health_effect")
+        zx.thing_set_health(owner, new_health)
+        zx.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
+    else:
+        zx.topcon("Hm. That potion didn't seem to do anything.")
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
@@ -25,7 +32,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_is_item_effect_max_radius(4)
+    x.set_is_item_effect_max_radius(0)
     x.set_is_item_effect_min_radius(0)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
@@ -33,10 +40,11 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_potion(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_throwable(True)
-    x.set_is_thrown_automatically_when_selected(True)
+    x.set_is_thrown_automatically_when_selected(False)
+    x.set_is_thrown_automatically_when_selected(False)
     x.set_is_treasure_class_c(True)
     x.set_is_usable(True)
-    x.set_is_used_when_thrown(True)
+    x.set_is_used_when_thrown(False)
     x.set_long_text_description("Restores you to 80 percent health")
     x.set_normal_placement_rules(True)
     x.set_on_use_do("potion_health.on_use()")
