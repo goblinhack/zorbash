@@ -36,7 +36,7 @@ bool Thing::describe_when_hovered_over_in_rightbar (void)
             s += ". %%fg=green$" +
                  std::string(
                      SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
-                 "%%fg=reset$ to quaff";
+                 "%%fg=reset$ to use";
         } else {
             s += ". %%fg=cyan$" +
                  std::string(
