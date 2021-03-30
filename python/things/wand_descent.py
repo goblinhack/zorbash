@@ -46,12 +46,12 @@ def tp_init(name, text_name, short_text_name):
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    x.set_tile(tile=name + ".1", delay_ms=500)
-    x.set_tile(tile=name + ".2", delay_ms=500)
-    x.set_tile(tile=name + ".3", delay_ms=500)
-    x.set_tile(tile=name + ".4", delay_ms=500)
-    x.set_tile(tile=name + ".5", delay_ms=500)
-    x.set_tile(tile=name + ".6", delay_ms=500)
+    x.set_tile(tile=name + ".1", delay_ms=100)
+    x.set_tile(tile=name + ".2", delay_ms=100)
+    x.set_tile(tile=name + ".3", delay_ms=100)
+    x.set_tile(tile=name + ".4", delay_ms=100)
+    x.set_tile(tile=name + ".5", delay_ms=100)
+    x.set_tile(tile=name + ".6", delay_ms=100)
 
     x.update()
 
