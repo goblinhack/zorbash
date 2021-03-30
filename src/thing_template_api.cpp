@@ -201,8 +201,8 @@ int Tp::is_rrr13(void) const { return _is_rrr13; }
 int Tp::is_rrr14(void) const { return _is_rrr14; }
 int Tp::is_rrr15(void) const { return _is_rrr15; }
 int Tp::is_rrr16(void) const { return _is_rrr16; }
-int Tp::is_rrr17(void) const { return _is_rrr17; }
-int Tp::is_rrr18(void) const { return _is_rrr18; }
+int Tp::is_wand(void) const { return _is_wand; }
+int Tp::wand_charges(void) const { return _wand_charges; }
 int Tp::minion_leash_distance(void) const { return _minion_leash_distance; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_skill(void) const { return _is_skill; }
@@ -441,8 +441,8 @@ void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
 void Tp::set_is_rrr14(int v) { _is_rrr14 = v; }
 void Tp::set_is_rrr15(int v) { _is_rrr15 = v; }
 void Tp::set_is_rrr16(int v) { _is_rrr16 = v; }
-void Tp::set_is_rrr17(int v) { _is_rrr17 = v; }
-void Tp::set_is_rrr18(int v) { _is_rrr18 = v; }
+void Tp::set_is_wand(int v) { _is_wand = v; }
+void Tp::set_wand_charges(int v) { _wand_charges = v; }
 void Tp::set_minion_leash_distance(int v) { _minion_leash_distance = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_skill(int v) { _is_skill = v; }

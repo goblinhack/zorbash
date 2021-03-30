@@ -691,8 +691,8 @@ public:
     int is_rrr14(void) const;
     int is_rrr15(void) const;
     int is_rrr16(void) const;
-    int is_rrr17(void) const;
-    int is_rrr18(void) const;
+    int is_wand(void) const;
+    int wand_charges(void) const;
     int minion_leash_distance(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;

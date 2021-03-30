@@ -131,7 +131,7 @@ void Game::dead_select (const char *reason)
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
-    wid_dead_window->log(" ");
+    wid_dead_window->log("Killed by:");
     wid_dead_window->log(reason);
 
     {_
@@ -147,25 +147,25 @@ void Game::dead_select (const char *reason)
         wid_set_pos(w, tl, br);
         auto r = random_range(0, 100);
         if (r < 10) {
-            wid_set_text(w, "Lived large, too short:");
+            wid_set_text(w, "Lived large, too short...");
         } else if (r < 20) {
-            wid_set_text(w, "Died how they lived:");
+            wid_set_text(w, "Died how they lived...");
         } else if (r < 30) {
-            wid_set_text(w, "Died by surprise:");
+            wid_set_text(w, "Died by surprise!");
         } else if (r < 40) {
-            wid_set_text(w, "Such high hopes:");
+            wid_set_text(w, "Such high hopes...");
         } else if (r < 50) {
-            wid_set_text(w, "Another silly death:");
+            wid_set_text(w, "Another silly death...");
         } else if (r < 60) {
-            wid_set_text(w, "A great loss:");
+            wid_set_text(w, "A great loss...");
         } else if (r < 70) {
-            wid_set_text(w, "They will rise again:");
+            wid_set_text(w, "They will rise again?");
         } else if (r < 80) {
-            wid_set_text(w, "Insert name here:");
+            wid_set_text(w, "Insert name here");
         } else if (r < 90) {
-            wid_set_text(w, "Why, Gods, why:");
+            wid_set_text(w, "Why, Gods, why?");
         } else {
-            wid_set_text(w, "Reason of demise:");
+            wid_set_text(w, "Slightly dead.");
         }
     }
 

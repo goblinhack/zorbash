@@ -572,14 +572,14 @@ int Thing::is_rrr16(void) const
     return (tp()->is_rrr16());
 }
 
-int Thing::is_rrr17(void) const
+int Thing::is_wand(void) const
 {_
-    return (tp()->is_rrr17());
+    return (tp()->is_wand());
 }
 
-int Thing::is_rrr18(void) const
+int Thing::wand_charges(void) const
 {_
-    return (tp()->is_rrr18());
+    return (tp()->wand_charges());
 }
 
 int Thing::minion_leash_distance(void) const

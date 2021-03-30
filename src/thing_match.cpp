@@ -313,10 +313,10 @@ bool Thing::match (const std::string& what)
     if (is_rrr16() && (what == "is_rrr16")) {
         return true;
     }
-    if (is_rrr17() && (what == "is_rrr17")) {
+    if (is_wand() && (what == "is_wand")) {
         return true;
     }
-    if (is_rrr18() && (what == "is_rrr18")) {
+    if (wand_charges() && (what == "wand_charges")) {
         return true;
     }
     if (minion_leash_distance() && (what == "minion_leash_distance")) {
