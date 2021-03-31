@@ -22,7 +22,10 @@
 #include "my_array_bounds_check.h"
 #include "my_ui.h"
 #include "my_monst.h"
+#include "my_game.h"
 #include "slre.h"
+
+static WidPopup *wid_thing_info_window2;
 
 static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
 static void wid_bag_item_mouse_over_e(Widp w);
@@ -74,6 +77,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
         wid_set_thing_id_context(w, item.id);
+        //wid_set_int_context(w, bag->id);
         wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
 
         auto tpp = t->tp();
@@ -300,6 +304,33 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
     if (t) {
         t->describe_when_hovered_over_in_rightbar();
     }
+
+    //
+    // Prefer to show the thing we are moving
+    //
+    {
+        int height = 33;
+        auto o = t;
+        if (o /* && (o != bag) */) {
+            point tl2 = make_point(0, TERM_HEIGHT - 2 - height);
+            point br2 = make_point(22, TERM_HEIGHT - 2);
+
+            delete wid_thing_info_window2;
+
+            wid_thing_info_window2 = game->wid_thing_info_create_popup(o, tl2, br2);
+            if (!wid_thing_info_window2) {
+                return;
+            }
+
+            int utilized = wid_thing_info_window->wid_text_area->line_count;
+            int utilized2 = wid_thing_info_window2->wid_text_area->line_count;
+            wid_move_delta(wid_thing_info_window2->wid_popup_container, 0, 
+                           height - (utilized2 + utilized - 3));
+            wid_resize(wid_thing_info_window2->wid_popup_container, -1,
+                       utilized2 - 2);
+
+        }
+    }
 }
 
 static void wid_bag_item_mouse_over_e (Widp w)
@@ -354,6 +385,9 @@ _
     if (b != game->bags.end()) {
         game->bags.erase(b);
     }
+
+    delete wid_thing_info_window2;
+    wid_thing_info_window2 = nullptr;
 }
 
 WidBag::WidBag (Thingp bag_, point tl, point br, const std::string &title) : tl(tl), br(br)

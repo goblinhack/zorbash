@@ -18,7 +18,7 @@
 #include "my_ui.h"
 
 WidPopup *wid_thing_info_window;
-WidPopup *wid_thing_info_window2;
+static WidPopup *wid_thing_info_window2;
 
 void wid_thing_info_fini (void)
 {_
@@ -37,6 +37,8 @@ void wid_thing_info_fini (void)
 
     delete wid_thing_info_window2;
     wid_thing_info_window2 = nullptr;
+
+    BOTCON(" "); // Clear out existing message
 }
 
 uint8_t wid_thing_info_init (void)
@@ -468,15 +470,6 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
 void Game::wid_thing_info_create_when_hovering_over (Thingp t)
 {
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        return;
-    }
-    if (game->state == Game::STATE_MOVING_ITEMS) {
-        return;
-    }
-    if (game->state == Game::STATE_CHOOSING_TARGET) {
-        return;
-    }
     if (game->state == Game::STATE_CHOOSING_TARGET) {
         return;
     }
