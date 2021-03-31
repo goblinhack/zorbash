@@ -7,6 +7,7 @@
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_game.h"
 #include "my_thing_template.h"
 #include "my_sdl.h"
 
@@ -14,55 +15,73 @@ bool Thing::describe_when_hovered_over_in_rightbar (void)
 {_
     auto s = text_description();
 
-    if (is_weapon()){
-        s += ". Damage %%fg=red$" + tp()->get_damage_melee_dice_str() +
-             "%%fg=reset$";
+    bool skip_keys = true;
+    switch (game->state) {
+        case Game::STATE_NORMAL:
+            skip_keys = false;
+            break;
+        case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
+            skip_keys = true;
+            break;
+        case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+            skip_keys = true;
+            break;
+        case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
+            skip_keys = true;
+            break;
     }
 
-    if (is_droppable()){
-        s += ". %%fg=orange$" +
-             std::string(
-                 SDL_GetScancodeName((SDL_Scancode)game->config.key_drop)) +
-             "%%fg=reset$ to drop";
-    }
-
-    if (is_usable()){
-        if (is_food()){
-            s += ". %%fg=green$" +
-                 std::string(
-                     SDL_GetScancodeName((SDL_Scancode)game->config.key_eat)) +
-                 "%%fg=reset$ to eat";
-        } else if (is_potion()){
-            s += ". %%fg=green$" +
-                 std::string(
-                     SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
-                 "%%fg=reset$ to use";
-        } else {
-            s += ". %%fg=cyan$" +
-                 std::string(
-                     SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
-                 "%%fg=reset$ to use";
+    if (!skip_keys) {
+        if (is_weapon()){
+            s += ". Damage %%fg=red$" + tp()->get_damage_melee_dice_str() +
+                 "%%fg=reset$";
         }
-    }
 
-    if (is_throwable() && !is_thrown_automatically_when_selected()){
-        s += ". %%fg=purple$" +
-             std::string(
-                 SDL_GetScancodeName((SDL_Scancode)game->config.key_throw)) +
-             "%%fg=reset$ to throw";
-    }
-
-    if (!is_hidden) {
-        if (is_collectable()){
-            s += ". %%fg=yellow$" +
-                std::string(
-                    SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect)) +
-                "%%fg=reset$ to collect";
+        if (is_droppable()){
+            s += ". %%fg=orange$" +
+                 std::string(
+                     SDL_GetScancodeName((SDL_Scancode)game->config.key_drop)) +
+                 "%%fg=reset$ to drop";
         }
-    }
 
-    if (is_bag()){
-        s += ". Select to open. Use mouse to drag items";
+        if (is_usable()){
+            if (is_food()){
+                s += ". %%fg=green$" +
+                     std::string(
+                         SDL_GetScancodeName((SDL_Scancode)game->config.key_eat)) +
+                     "%%fg=reset$ to eat";
+            } else if (is_potion()){
+                s += ". %%fg=green$" +
+                     std::string(
+                         SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
+                     "%%fg=reset$ to use";
+            } else {
+                s += ". %%fg=cyan$" +
+                     std::string(
+                         SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
+                     "%%fg=reset$ to use";
+            }
+        }
+
+        if (is_throwable() && !is_thrown_automatically_when_selected()){
+            s += ". %%fg=purple$" +
+                 std::string(
+                     SDL_GetScancodeName((SDL_Scancode)game->config.key_throw)) +
+                 "%%fg=reset$ to throw";
+        }
+
+        if (!is_hidden) {
+            if (is_collectable()){
+                s += ". %%fg=yellow$" +
+                    std::string(
+                        SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect)) +
+                    "%%fg=reset$ to collect";
+            }
+        }
+
+        if (is_bag()){
+            s += ". Select to open. Use mouse to drag items";
+        }
     }
 
     if (s.size()) {
@@ -82,16 +101,34 @@ bool Thing::describe_when_hovering_over (void)
 {_
     auto s = text_description();
 
-    if (is_weapon()){
-        s += ". Damage %%fg=red$" + tp()->get_damage_melee_dice_str() +
-             "%%fg=reset$";
+    bool skip_keys = true;
+    switch (game->state) {
+        case Game::STATE_NORMAL:
+            skip_keys = false;
+            break;
+        case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
+            skip_keys = true;
+            break;
+        case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+            skip_keys = true;
+            break;
+        case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
+            skip_keys = true;
+            break;
     }
 
-    if (is_collectable()){
-        s += ". Press %%fg=yellow$" +
-            std::string(
-                SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect)) +
-            "%%fg=reset$ to collect";
+    if (!skip_keys) {
+        if (is_weapon()){
+            s += ". Damage %%fg=red$" + tp()->get_damage_melee_dice_str() +
+                 "%%fg=reset$";
+        }
+
+        if (is_collectable()){
+            s += ". Press %%fg=yellow$" +
+                std::string(
+                    SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect)) +
+                "%%fg=reset$ to collect";
+        }
     }
 
     if (s.size()) {
