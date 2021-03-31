@@ -25,7 +25,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_is_item_effect_max_radius(4)
+    x.set_is_item_effect_max_radius(2)
     x.set_is_item_effect_min_radius(0)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
