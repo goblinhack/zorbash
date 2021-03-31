@@ -119,16 +119,6 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         //
         // Drop whatever we are moving between bags
         //
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            game->change_state(Game::STATE_NORMAL);
-            return true;
-        }
-
-        if (game->state == Game::STATE_CHOOSING_TARGET) {
-            game->change_state(Game::STATE_NORMAL);
-            return true;
-        }
-
         if (game->state == Game::STATE_COLLECTING_ITEMS) {
             game->change_state(Game::STATE_NORMAL);
             return true;
