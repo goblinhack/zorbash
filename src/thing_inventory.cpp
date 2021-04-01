@@ -107,7 +107,9 @@ _
 //
 // Particle from the inventory to tp_id target
 //
-void Thing::inventory_particle (Thingp what, uint32_t slot, Thingp particle_target)
+void Thing::inventory_particle (Thingp what, 
+                                uint32_t slot, 
+                                Thingp particle_target)
 {_
     log("Inventory particle %s with target %s",
         what->to_string().c_str(), particle_target->to_string().c_str());
@@ -127,25 +129,41 @@ _
         return;
     }
 
+    //
+    // We can throw from the inventory or from the player. I think it
+    // looks better to throw from the player.
+    //
+    bool throw_from_inventory = false;
+    point where_from;
+
+    if (throw_from_inventory) {
+        std::string name = "inventory slot" + std::to_string(slot);
+        auto w = wid_find(name);
+        if (!w) {
+            err("Could not find wid %s", name.c_str());
+            return;
+        }
+
+        where_from = (w->abs_tl + w->abs_br) / 2;
+        where_from.x = (int)(((float)game->config.game_pix_width / 
+                             (float)TERM_WIDTH) * (float)where_from.x);
+        where_from.y = (int)(((float)game->config.game_pix_height / 
+                             (float)TERM_HEIGHT) * (float)where_from.y);
+    } else {
+        where_from = (last_blit_tl + last_blit_br) / 2;
+    }
+
     point where_to = (particle_target->last_blit_tl +
                       particle_target->last_blit_br) / 2;
 
-    std::string name = "inventory slot" + std::to_string(slot);
-    auto w = wid_find(name);
-    if (!w) {
-        err("Could not find wid %s", name.c_str());
-        return;
-    }
 
-    auto p = (w->abs_tl + w->abs_br) / 2;
-    p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
-    p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
-
-    level->new_external_particle(what->id, p, where_to,
+    level->new_external_particle(what->id, where_from, where_to,
                                  isize(TILE_WIDTH, TILE_HEIGHT), 
                                  PARTICLE_SPEED_MS,
                                  tile_index_to_tile(what->tile_curr),
-                                 (what->is_dir_br() || what->is_dir_right() || what->is_dir_tr()),
+                                 (what->is_dir_br() || 
+                                  what->is_dir_right() || 
+                                  what->is_dir_tr()),
                                  true /* make_visible_at_end */);
 }
 
