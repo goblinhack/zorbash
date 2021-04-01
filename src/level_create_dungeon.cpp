@@ -266,6 +266,11 @@ bool Level::create_dungeon (point3d at, int seed)
                         auto s = thing_new("skill_devoted_thrust", fpoint(x, y));
                         t->skill_add(s);
 
+                        {
+                            auto i = thing_new("thunderstone", fpoint(x, y));
+                            t->carry(i);
+                        }
+
                         goto placed_player;
                     }
                 }

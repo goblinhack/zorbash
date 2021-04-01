@@ -388,6 +388,16 @@ ThingId wid_get_thing_id_context (Widp w)
     return (w->thing_id_context);
 }
 
+void wid_set_thing_id2_context (Widp w, ThingId thing_id_context)
+{_
+    w->thing_id2_context = thing_id_context;
+}
+
+ThingId wid_get_thing_id2_context (Widp w)
+{_
+    return (w->thing_id2_context);
+}
+
 void wid_set_prev (Widp w, Widp prev)
 {_
     verify(w);
