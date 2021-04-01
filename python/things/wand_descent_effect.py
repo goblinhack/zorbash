@@ -22,10 +22,10 @@ def tp_init(name):
     x.set_z_prio(zx.MAP_PRIO_INFRONT)
 
     x.set_tile(tile="nothing")
-    x.set_tile(tile=name + ".1", delay_ms=50)
-    x.set_tile(tile=name + ".2", delay_ms=50)
-    x.set_tile(tile=name + ".3", delay_ms=50)
-    x.set_tile(tile=name + ".4", delay_ms=50, is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    x.set_tile("blue_explosion_effect.1", delay_ms=50)
+    x.set_tile("blue_explosion_effect.2", delay_ms=50)
+    x.set_tile("blue_explosion_effect.3", delay_ms=50)
+    x.set_tile("blue_explosion_effect.4", delay_ms=50, is_end_of_anim = True, is_dead_on_end_of_anim=True)
 
     x.update()
 

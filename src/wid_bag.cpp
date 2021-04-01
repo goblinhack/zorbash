@@ -77,7 +77,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
         wid_set_thing_id_context(w, item.id);
-        //wid_set_int_context(w, bag->id);
+        wid_set_thing_id2_context(w, bag->id);
         wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
 
         auto tpp = t->tp();
@@ -299,6 +299,9 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
         return;
     }
 
+    auto bagid = wid_get_thing_id2_context(w);
+    auto bag = game->level->thing_find(bagid);
+
     auto id = wid_get_thing_id_context(w);
     auto t = game->level->thing_find(id);
     if (t) {
@@ -311,7 +314,7 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
     {
         int height = 33;
         auto o = t;
-        if (o /* && (o != bag) */) {
+        if (o && (o != bag)) {
             point tl2 = make_point(0, TERM_HEIGHT - 2 - height);
             point br2 = make_point(22, TERM_HEIGHT - 2);
 
