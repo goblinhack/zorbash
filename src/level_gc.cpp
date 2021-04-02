@@ -44,6 +44,11 @@ _
                 t->log("Thing garbage collect delayed due to external particle");
                 continue;
             }
+
+            if (t->has_laser) {
+                t->log("Thing garbage collect delayed due to laser");
+                continue;
+            }
 	}
 
 	all_gc_things.erase(it);

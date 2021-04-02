@@ -64,6 +64,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/gl.o                          \
     $(OBJDIR)/globals.o                     \
     $(OBJDIR)/hexdump.o                     \
+    $(OBJDIR)/laser.o                       \
     $(OBJDIR)/level.o                       \
     $(OBJDIR)/level_create.o                \
     $(OBJDIR)/level_create_dungeon.o        \
@@ -116,7 +117,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/py_ttf.o                      \
     $(OBJDIR)/python.o                      \
     $(OBJDIR)/ramdisk_data.o                \
-    $(OBJDIR)/ramdisk_read.o                \
     $(OBJDIR)/ramdisk_data_0.o              \
     $(OBJDIR)/ramdisk_data_1.o              \
     $(OBJDIR)/ramdisk_data_2.o              \
@@ -127,6 +127,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/ramdisk_data_7.o              \
     $(OBJDIR)/ramdisk_data_8.o              \
     $(OBJDIR)/ramdisk_data_9.o              \
+    $(OBJDIR)/ramdisk_read.o                \
     $(OBJDIR)/random_name.o                 \
     $(OBJDIR)/room.o                        \
     $(OBJDIR)/sdl.o                         \

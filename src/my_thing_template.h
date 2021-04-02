@@ -318,7 +318,7 @@ private:
     std::string _str4;
     std::string _str5;
     std::string _str6;
-    std::string _str7;
+    std::string _laser_name;
     std::string _text_a_or_an;
     std::string _text_description;
     std::string _text_unused;
@@ -400,7 +400,7 @@ public:
     const std::string& str4(void) const;
     const std::string& str5(void) const;
     const std::string& str6(void) const;
-    const std::string& str7(void) const;
+    const std::string& laser_name(void) const;
     const std::string& text_description(void) const;
     const std::string& text_unused(void) const;
     const std::string& text_hits(void) const;
@@ -897,7 +897,7 @@ public:
     void set_str4(const std::string &);
     void set_str5(const std::string &);
     void set_str6(const std::string &);
-    void set_str7(const std::string &);
+    void set_laser_name(const std::string &);
     void set_text_a_or_an(const std::string &);
     void set_text_description(const std::string &);
     void set_text_unused(const std::string &);

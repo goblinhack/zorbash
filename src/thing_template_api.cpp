@@ -66,7 +66,7 @@ const std::string& Tp::str3(void) const { return _str3; }
 const std::string& Tp::str4(void) const { return _str4; }
 const std::string& Tp::str5(void) const { return _str5; }
 const std::string& Tp::str6(void) const { return _str6; }
-const std::string& Tp::str7(void) const { return _str7; }
+const std::string& Tp::laser_name(void) const { return _laser_name; }
 const std::string& Tp::long_text_description(void) const { return _long_text_description; }
 const std::string& Tp::text_description(void) const { return _text_description; }
 const std::string& Tp::text_unused(void) const { return _text_unused; }
@@ -558,7 +558,7 @@ void Tp::set_str3(const std::string &v) { _str3 = v; }
 void Tp::set_str4(const std::string &v) { _str4 = v; }
 void Tp::set_str5(const std::string &v) { _str5 = v; }
 void Tp::set_str6(const std::string &v) { _str6 = v; }
-void Tp::set_str7(const std::string &v) { _str7 = v; }
+void Tp::set_laser_name(const std::string &v) { _laser_name = v; }
 void Tp::set_long_text_description(const std::string &v) { _long_text_description = v; }
 void Tp::set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
 void Tp::set_text_description(const std::string &v) { _text_description = v; }

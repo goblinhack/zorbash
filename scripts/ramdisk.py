@@ -5,12 +5,23 @@ import pathlib
 import math
 import re
 import os
+import sys
 
 files = collections.defaultdict(list)
 root = pathlib.Path(".")
 
 file_count = 0
 ram_files = 10
+
+newer = False
+for filepath in root.rglob(r'data/gfx/*.tga'):
+    if os.path.getctime("zorbash") < os.path.getctime(filepath):
+        print("{} is newer".format(filepath))
+        newer = True
+        break
+if not newer:
+    print("Ramdisk is up to date")
+    sys.exit(0)
 
 for filepath in root.rglob(r'data/gfx/*.tga'):
     files[filepath.parent].append(filepath.name)

@@ -4870,7 +4870,7 @@ const std::string& Thing::str3 (void) const {_ return (tp()->str3()); }
 const std::string& Thing::str4 (void) const {_ return (tp()->str4()); }
 const std::string& Thing::str5 (void) const {_ return (tp()->str5()); }
 const std::string& Thing::str6 (void) const {_ return (tp()->str6()); }
-const std::string& Thing::str7 (void) const {_ return (tp()->str7()); }
+const std::string& Thing::laser_name (void) const {_ return (tp()->laser_name()); }
 const std::string& Thing::long_text_description (void) const {_ return (tp()->long_text_description()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }
 const std::string& Thing::text_unused (void) const {_ return (tp()->text_unused()); }

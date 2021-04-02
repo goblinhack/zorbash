@@ -266,6 +266,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     //
     // /* uint64_t */ bits64 |= my.t->has_external_particle << shift; shift++;
     // /* uint64_t */ bits64 |= my.t->has_internal_particle << shift; shift++;
+    // /* uint64_t */ bits64 |= my.t->has_laser << shift; shift++;
 
     WRITE_MAGIC(THING_MAGIC_END);
 
