@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+#
+# Why a ramdisk ? Oryx tiles request that the images are hidden reasonably,
+# so this is my attempt; tarring the images during build and in the release
+# adding the images into the binary itself, so we never ship the raw images.
+#
 
 import collections
 import pathlib
@@ -7,34 +12,48 @@ import re
 import os
 import sys
 
+number_of_files_to_add_to_ramdisk = 0
+number_of_ramdisk_files = 10
+
+#
+# If the make target exists, see if any graphics are newer than the
+# target. If so we need to rebuild the ramdisk.
+#
+try:
+    with open('zorbash') as unused:
+        newer = False
+        for filepath in root.rglob(r'data/gfx/*.tga'):
+            if os.path.getctime("zorbash") < os.path.getctime(filepath):
+                print("{} is newer".format(filepath))
+                newer = True
+                break
+        #
+        # If nothing is newer than the target, the ramdisk is up to date
+        #
+        if not newer:
+            print("Ramdisk is up to date")
+            sys.exit(0)
+except IOError:
+    pass
+
 files = collections.defaultdict(list)
 root = pathlib.Path(".")
 
-file_count = 0
-ram_files = 10
-
-newer = False
-for filepath in root.rglob(r'data/gfx/*.tga'):
-    if os.path.getctime("zorbash") < os.path.getctime(filepath):
-        print("{} is newer".format(filepath))
-        newer = True
-        break
-if not newer:
-    print("Ramdisk is up to date")
-    sys.exit(0)
-
+#
+# For each .tga convert it to assembly to be included in the build
+#
 for filepath in root.rglob(r'data/gfx/*.tga'):
     files[filepath.parent].append(filepath.name)
-    file_count += 1
+    number_of_files_to_add_to_ramdisk += 1
 
-for ram_file in range(ram_files):
+for ram_file in range(number_of_ramdisk_files):
     with open("src/ramdisk_data_{}.S".format(ram_file), "w") as myfile:
         myfile.write("// Ramdisk data for files that due to licensing cannot be exposed\n\n")
 
 count = 0
 for record_number, (folder, filenames) in enumerate(sorted(files.items())):
     for filename in enumerate(filenames):
-        ram_file = count % ram_files 
+        ram_file = count % number_of_ramdisk_files 
         count += 1
 
         rec, orig_filename = filename
@@ -51,6 +70,10 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
             myfile.write("data_{}_end_:\n".format(c_filename))
             myfile.write("\n")
 
+#
+# This file references the assembly above to allow for easy loading of
+# the files
+#
 with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
     myfile.write("#include \"my_ramdisk.h\"")
     myfile.write("\n")
@@ -61,7 +84,7 @@ with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
     count = 0
     for record_number, (folder, filenames) in enumerate(sorted(files.items())):
         for filename in enumerate(filenames):
-            ram_file = count % ram_files 
+            ram_file = count % number_of_ramdisk_files 
             count += 1
 
             rec, orig_filename = filename
@@ -83,4 +106,3 @@ with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
             myfile.write("\n")
 
     myfile.write("}\n")
-
