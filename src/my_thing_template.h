@@ -223,7 +223,7 @@ private:
     int _is_rrr13 {};
     int _is_rrr14 {};
     int _is_rrr15 {};
-    int _is_target_select_automatically_when_chosen {};
+    int _is_laser_target_select_automatically_when_chosen {};
     int _is_wand {};
     int _charge_count {};
     int _minion_leash_distance {};
@@ -571,7 +571,7 @@ public:
     int is_rrr13(void) const;
     int is_rrr14(void) const;
     int is_rrr15(void) const;
-    int is_target_select_automatically_when_chosen(void) const;
+    int is_laser_target_select_automatically_when_chosen(void) const;
     int is_wand(void) const;
     int charge_count(void) const;
     int minion_leash_distance(void) const;
@@ -813,7 +813,7 @@ public:
     void set_is_rrr13(int);
     void set_is_rrr14(int);
     void set_is_rrr15(int);
-    void set_is_target_select_automatically_when_chosen(int);
+    void set_is_laser_target_select_automatically_when_chosen(int);
     void set_is_wand(int);
     void set_charge_count(int);
     void set_minion_leash_distance(int);

@@ -19,10 +19,7 @@ void Level::cursor_path_draw_circle (void)
 {_
     auto what = game->request_to_throw_item;
     if (!what) {
-        what = game->request_to_laser_item;
-        if (!what) {
-            return;
-        }
+        return;
     }
 
     auto radius_min = what->tp()->is_item_effect_min_radius();
@@ -202,7 +199,9 @@ void Level::cursor_path_draw (point start, point end)
     if (game->request_to_throw_item) {
         cursor_path_draw_circle();
     } else if (game->request_to_laser_item) {
-        cursor_path_draw_line(start, end);
+        //
+        // Draw a line instead
+        //
     } else {
         cursor_path_draw_line(start, end);
     }
@@ -247,6 +246,10 @@ void Level::cursor_path_create (void)
     }
 
     cursor_path_clear();
+
+    if (game->request_to_laser_item) {
+        return;
+    }
 
     //
     // If not following the player, draw the path

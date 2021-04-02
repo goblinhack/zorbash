@@ -35,7 +35,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_treasure(True)
     x.set_is_treasure_class_c(True)
     x.set_is_usable(True)
-    x.set_is_target_select_automatically_when_chosen(True)
+    x.set_is_laser_target_select_automatically_when_chosen(True)
     x.set_is_wand(True)
     x.set_laser_name("laser_green")
     x.set_long_text_description("This most dangerous wand can transport its target to the next level by the most efficacious means possible...")

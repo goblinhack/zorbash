@@ -310,7 +310,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr15() && (what == "is_rrr15")) {
         return true;
     }
-    if (is_target_select_automatically_when_chosen() && (what == "is_target_select_automatically_when_chosen")) {
+    if (is_laser_target_select_automatically_when_chosen() && (what == "is_laser_target_select_automatically_when_chosen")) {
         return true;
     }
     if (is_wand() && (what == "is_wand")) {

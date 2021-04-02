@@ -200,7 +200,7 @@ int Tp::is_rrr12(void) const { return _is_rrr12; }
 int Tp::is_rrr13(void) const { return _is_rrr13; }
 int Tp::is_rrr14(void) const { return _is_rrr14; }
 int Tp::is_rrr15(void) const { return _is_rrr15; }
-int Tp::is_target_select_automatically_when_chosen(void) const { return _is_target_select_automatically_when_chosen; }
+int Tp::is_laser_target_select_automatically_when_chosen(void) const { return _is_laser_target_select_automatically_when_chosen; }
 int Tp::is_wand(void) const { return _is_wand; }
 int Tp::charge_count(void) const { return _charge_count; }
 int Tp::minion_leash_distance(void) const { return _minion_leash_distance; }
@@ -440,7 +440,7 @@ void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
 void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
 void Tp::set_is_rrr14(int v) { _is_rrr14 = v; }
 void Tp::set_is_rrr15(int v) { _is_rrr15 = v; }
-void Tp::set_is_target_select_automatically_when_chosen(int v) { _is_target_select_automatically_when_chosen = v; }
+void Tp::set_is_laser_target_select_automatically_when_chosen(int v) { _is_laser_target_select_automatically_when_chosen = v; }
 void Tp::set_is_wand(int v) { _is_wand = v; }
 void Tp::set_charge_count(int v) { _charge_count = v; }
 void Tp::set_minion_leash_distance(int v) { _minion_leash_distance = v; }

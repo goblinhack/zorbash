@@ -583,8 +583,8 @@ _
         game->change_state(Game::STATE_MOVING_ITEMS);
     } else if (what->is_thrown_automatically_when_chosen()) {
         player->throw_item(what);
-    } else if (what->is_target_select_automatically_when_chosen()) {
-        player->target_select(what);
+    } else if (what->is_laser_target_select_automatically_when_chosen()) {
+        player->laser_item(what);
     } else if (what->is_used_automatically_when_selected()) {
         player->use(what);
     }

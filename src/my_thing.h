@@ -699,7 +699,7 @@ public:
     int is_rrr13(void) const;
     int is_rrr14(void) const;
     int is_rrr15(void) const;
-    int is_target_select_automatically_when_chosen(void) const;
+    int is_laser_target_select_automatically_when_chosen(void) const;
     int is_wand(void) const;
     int charge_count(void) const;
     int minion_leash_distance(void) const;
