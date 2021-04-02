@@ -7,7 +7,6 @@
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
-#include "my_python.h"
 
 void Thing::throw_at (Thingp what, Thingp target)
 {_
@@ -73,12 +72,7 @@ bool Thing::throw_item (Thingp what)
         return false;
     }
 
-    game->change_state(Game::STATE_CHOOSING_TARGET);
     game->request_to_throw_item = what;
-    level->cursor_recreate();
-    game->level->cursor->visible();
 
-    TOPCON("Choose a target to throw %s at.", what->text_the().c_str());
-
-    return true;
+    return target_select(what);
 }

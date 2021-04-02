@@ -227,6 +227,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_terrain.o               \
     $(OBJDIR)/thing_text.o                  \
     $(OBJDIR)/thing_throw.o                 \
+    $(OBJDIR)/thing_laser.o                 \
+    $(OBJDIR)/thing_target.o                \
     $(OBJDIR)/thing_tick.o                  \
     $(OBJDIR)/thing_tile.o                  \
     $(OBJDIR)/thing_torch.o                 \

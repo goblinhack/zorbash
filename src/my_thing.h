@@ -290,6 +290,8 @@ public:
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);
     bool throw_item(Thingp w);
+    bool laser_item(Thingp w);
+    bool target_select(Thingp w);
     bool try_harder_to_jump(void);
     bool try_to_carry(Thingp w);
     bool try_to_escape(void);
