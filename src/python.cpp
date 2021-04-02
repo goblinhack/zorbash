@@ -685,7 +685,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr13)
     TP_SET_DECL(is_rrr14)
     TP_SET_DECL(is_rrr15)
-    TP_SET_DECL(is_target_select_automatically_when_chosen)
+    TP_SET_DECL(is_laser_target_select_automatically_when_chosen)
     TP_SET_DECL(is_wand)
     TP_SET_DECL(charge_count)
     TP_SET_DECL(minion_leash_distance)

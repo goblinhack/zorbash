@@ -567,9 +567,9 @@ int Thing::is_rrr15(void) const
     return (tp()->is_rrr15());
 }
 
-int Thing::is_target_select_automatically_when_chosen(void) const
+int Thing::is_laser_target_select_automatically_when_chosen(void) const
 {_
-    return (tp()->is_target_select_automatically_when_chosen());
+    return (tp()->is_laser_target_select_automatically_when_chosen());
 }
 
 int Thing::is_wand(void) const

@@ -72,6 +72,10 @@ bool Thing::throw_item (Thingp what)
         return false;
     }
 
+    if (!target_select(what)) {
+        return false;
+    }
+
     game->request_to_throw_item = what;
 
     return target_select(what);

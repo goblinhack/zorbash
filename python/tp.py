@@ -235,8 +235,8 @@ class Tp:
     def set_is_rrr15(self, value):
         zx.tp_set_is_rrr15(self, value)
 
-    def set_is_target_select_automatically_when_chosen(self, value):
-        zx.tp_set_is_target_select_automatically_when_chosen(self, value)
+    def set_is_laser_target_select_automatically_when_chosen(self, value):
+        zx.tp_set_is_laser_target_select_automatically_when_chosen(self, value)
 
     def set_is_wand(self, value):
         zx.tp_set_is_wand(self, value)
