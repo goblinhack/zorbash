@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ ! -d data/gfx ]]; then
+    echo $0: Need untar graphics tarball
+    tar zxf data/gfx.tgz
+    exit 0
+fi
+
 COUNT=$(find data -newer data/gfx.tgz -type f | wc -l)
 if [[ $COUNT -gt 0 ]];
 then 
