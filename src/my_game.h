@@ -211,7 +211,8 @@ public:
         STATE_CHOOSING_TARGET,  // Looking to somewhere to throw at
     };
     int                state {STATE_NORMAL};
-    Thingp             request_to_throw_item {};  // This is what we are throwing.
+    Thingp             request_to_throw_item {};  // What we are throwing.
+    Thingp             request_to_laser_item {};  // What we are lasering with.
 
     //
     // Temporary. Global requests

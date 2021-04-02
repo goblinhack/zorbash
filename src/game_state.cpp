@@ -46,6 +46,7 @@ void Game::change_state (int new_state)
     }
 
     request_to_throw_item = nullptr;
+    request_to_laser_item = nullptr;
     state = new_state;
 
     if (level) {
