@@ -130,53 +130,51 @@ void Level::display_map_things (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 
-    {
-        //
-        // Blit the floor
-        //
-        blit_fbo_bind(fbo);
-        blit_init();
-        for (auto z = 0; z < MAP_DEPTH_OBJ; z++) {
-            for (auto y = miny; y < maxy; y++) {
-                for (auto x = minx; x < maxx; x++) {
-                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (z <= MAP_DEPTH_FLOOR2) {
-                            t->blit(fbo);
-                        }
-
-                        auto tpp = t->tp();
-                        if (unlikely(tpp->gfx_animated())) {
-                            t->animate();
-                        }
-                    } FOR_ALL_THINGS_END()
-                }
-            }
-        }
-        blit_flush();
-
-        display_water(fbo, minx, miny, maxx, maxy);
-        display_deep_water(fbo, minx, miny, maxx, maxy);
-        display_lava(fbo, minx, miny, maxx, maxy);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glcolor(WHITE);
-
-        //
-        // Blit stuff on top of the floor and water
-        //
-        blit_fbo_bind(fbo);
-        blit_init();
-        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; 
-             z < MAP_DEPTH_OBJ; z++) {
-            for (auto y = miny; y < maxy; y++) {
-                for (auto x = minx; x < maxx; x++) {
-                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+    //
+    // Blit the floor
+    //
+    blit_fbo_bind(fbo);
+    blit_init();
+    for (auto z = 0; z < MAP_DEPTH_OBJ; z++) {
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    if (z <= MAP_DEPTH_FLOOR2) {
                         t->blit(fbo);
-                    } FOR_ALL_THINGS_END()
-                }
+                    }
+
+                    auto tpp = t->tp();
+                    if (unlikely(tpp->gfx_animated())) {
+                        t->animate();
+                    }
+                } FOR_ALL_THINGS_END()
             }
         }
-        blit_flush();
     }
+    blit_flush();
+
+    display_water(fbo, minx, miny, maxx, maxy);
+    display_deep_water(fbo, minx, miny, maxx, maxy);
+    display_lava(fbo, minx, miny, maxx, maxy);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
+
+    //
+    // Blit stuff on top of the floor and water
+    //
+    blit_fbo_bind(fbo);
+    blit_init();
+    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH_OBJ; z++) {
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    t->blit(fbo);
+                } FOR_ALL_THINGS_END()
+            }
+        }
+    }
+    blit_flush();
+
     glcolor(WHITE);
 }
 
@@ -335,6 +333,11 @@ void Level::display_map (void)
         display_internal_particles();
 
         //
+        // If choosing a target, lets see it
+        //
+        display_target();
+
+        //
         // Blit small lights and glow
         //
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -347,7 +350,6 @@ void Level::display_map (void)
         display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
         blit_fbo_game_pix(FBO_PLAYER_LIGHT);
-
     }
 
     {_

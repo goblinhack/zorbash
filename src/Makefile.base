@@ -82,6 +82,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_display_shake.o         \
     $(OBJDIR)/level_display_wall.o          \
     $(OBJDIR)/level_display_water.o         \
+    $(OBJDIR)/level_display_target.o        \
     $(OBJDIR)/level_fini.o                  \
     $(OBJDIR)/level_gc.o                    \
     $(OBJDIR)/level_heatmap.o               \

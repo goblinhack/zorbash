@@ -474,6 +474,7 @@ public:
     void display(void);
     void display_anim(void);
     void display_blood(void);
+    void display_target(void);
     void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_external_particles(void);
     void display_fade_in(void);
