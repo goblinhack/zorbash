@@ -235,8 +235,8 @@ class Tp:
     def set_is_rrr15(self, value):
         zx.tp_set_is_rrr15(self, value)
 
-    def set_is_rrr16(self, value):
-        zx.tp_set_is_rrr16(self, value)
+    def set_is_target_select_automatically_when_chosen(self, value):
+        zx.tp_set_is_target_select_automatically_when_chosen(self, value)
 
     def set_is_wand(self, value):
         zx.tp_set_is_wand(self, value)
@@ -316,8 +316,8 @@ class Tp:
     def set_is_used_automatically_when_selected(self, value):
         zx.tp_set_is_used_automatically_when_selected(self, value)
 
-    def set_is_thrown_automatically_when_selected(self, value):
-        zx.tp_set_is_thrown_automatically_when_selected(self, value)
+    def set_is_thrown_automatically_when_chosen(self, value):
+        zx.tp_set_is_thrown_automatically_when_chosen(self, value)
 
     def set_is_extreme_hazard(self, value):
         zx.tp_set_is_extreme_hazard(self, value)

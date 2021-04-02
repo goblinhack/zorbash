@@ -200,7 +200,7 @@ int Tp::is_rrr12(void) const { return _is_rrr12; }
 int Tp::is_rrr13(void) const { return _is_rrr13; }
 int Tp::is_rrr14(void) const { return _is_rrr14; }
 int Tp::is_rrr15(void) const { return _is_rrr15; }
-int Tp::is_rrr16(void) const { return _is_rrr16; }
+int Tp::is_target_select_automatically_when_chosen(void) const { return _is_target_select_automatically_when_chosen; }
 int Tp::is_wand(void) const { return _is_wand; }
 int Tp::charge_count(void) const { return _charge_count; }
 int Tp::minion_leash_distance(void) const { return _minion_leash_distance; }
@@ -230,7 +230,7 @@ int Tp::attack_humanoid(void) const { return _attack_humanoid; }
 int Tp::is_poison(void) const { return _is_poison; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_used_automatically_when_selected(void) const { return _is_used_automatically_when_selected; }
-int Tp::is_thrown_automatically_when_selected(void) const { return _is_thrown_automatically_when_selected; }
+int Tp::is_thrown_automatically_when_chosen(void) const { return _is_thrown_automatically_when_chosen; }
 int Tp::is_extreme_hazard(void) const { return _is_extreme_hazard; }
 int Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
 int Tp::attack_meat(void) const { return _attack_meat; }
@@ -440,7 +440,7 @@ void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
 void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
 void Tp::set_is_rrr14(int v) { _is_rrr14 = v; }
 void Tp::set_is_rrr15(int v) { _is_rrr15 = v; }
-void Tp::set_is_rrr16(int v) { _is_rrr16 = v; }
+void Tp::set_is_target_select_automatically_when_chosen(int v) { _is_target_select_automatically_when_chosen = v; }
 void Tp::set_is_wand(int v) { _is_wand = v; }
 void Tp::set_charge_count(int v) { _charge_count = v; }
 void Tp::set_minion_leash_distance(int v) { _minion_leash_distance = v; }
@@ -471,7 +471,7 @@ void Tp::set_attack_humanoid(int v) { _attack_humanoid = v; }
 void Tp::set_is_poison(int v) { _is_poison = v; }
 void Tp::set_is_used_when_thrown(int v) { _is_used_when_thrown = v; }
 void Tp::set_is_used_automatically_when_selected(int v) { _is_used_automatically_when_selected = v; }
-void Tp::set_is_thrown_automatically_when_selected(int v) { _is_thrown_automatically_when_selected = v; }
+void Tp::set_is_thrown_automatically_when_chosen(int v) { _is_thrown_automatically_when_chosen = v; }
 void Tp::set_is_extreme_hazard(int v) { _is_extreme_hazard = v; }
 void Tp::set_is_auto_collect_item(int v) { _is_auto_collect_item = v; }
 void Tp::set_attack_meat(int v) { _attack_meat = v; }
