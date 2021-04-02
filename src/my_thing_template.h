@@ -223,7 +223,7 @@ private:
     int _is_rrr13 {};
     int _is_rrr14 {};
     int _is_rrr15 {};
-    int _is_rrr16 {};
+    int _is_target_select_automatically_when_chosen {};
     int _is_wand {};
     int _charge_count {};
     int _minion_leash_distance {};
@@ -248,7 +248,7 @@ private:
     int _is_temporary_bag {};
     int _is_the_grid {};
     int _is_throwable {};
-    int _is_thrown_automatically_when_selected {};
+    int _is_thrown_automatically_when_chosen {};
     int _is_torch {};
     int _is_treasure {};
     int _is_treasure_class_a {};
@@ -571,7 +571,7 @@ public:
     int is_rrr13(void) const;
     int is_rrr14(void) const;
     int is_rrr15(void) const;
-    int is_rrr16(void) const;
+    int is_target_select_automatically_when_chosen(void) const;
     int is_wand(void) const;
     int charge_count(void) const;
     int minion_leash_distance(void) const;
@@ -596,7 +596,7 @@ public:
     int is_temporary_bag(void) const;
     int is_the_grid(void) const;
     int is_throwable(void) const;
-    int is_thrown_automatically_when_selected(void) const;
+    int is_thrown_automatically_when_chosen(void) const;
     int is_torch(void) const;
     int is_treasure(void) const;
     int is_treasure_class_a(void) const;
@@ -813,7 +813,7 @@ public:
     void set_is_rrr13(int);
     void set_is_rrr14(int);
     void set_is_rrr15(int);
-    void set_is_rrr16(int);
+    void set_is_target_select_automatically_when_chosen(int);
     void set_is_wand(int);
     void set_charge_count(int);
     void set_minion_leash_distance(int);
@@ -838,7 +838,7 @@ public:
     void set_is_temporary_bag(int);
     void set_is_the_grid(int);
     void set_is_throwable(int);
-    void set_is_thrown_automatically_when_selected(int);
+    void set_is_thrown_automatically_when_chosen(int);
     void set_is_torch(int);
     void set_is_treasure(int);
     void set_is_treasure_class_a(int);

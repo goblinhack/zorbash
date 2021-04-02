@@ -63,7 +63,7 @@ bool Thing::describe_when_hovered_over_in_rightbar (void)
             }
         }
 
-        if (is_throwable() && !is_thrown_automatically_when_selected()){
+        if (is_throwable() && !is_thrown_automatically_when_chosen()){
             s += ". %%fg=purple$" +
                  std::string(
                      SDL_GetScancodeName((SDL_Scancode)game->config.key_throw)) +

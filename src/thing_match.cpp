@@ -310,7 +310,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr15() && (what == "is_rrr15")) {
         return true;
     }
-    if (is_rrr16() && (what == "is_rrr16")) {
+    if (is_target_select_automatically_when_chosen() && (what == "is_target_select_automatically_when_chosen")) {
         return true;
     }
     if (is_wand() && (what == "is_wand")) {
@@ -400,7 +400,7 @@ bool Thing::match (const std::string& what)
     if (is_used_automatically_when_selected() && (what == "is_used_automatically_when_selected")) {
         return true;
     }
-    if (is_thrown_automatically_when_selected() && (what == "is_thrown_automatically_when_selected")) {
+    if (is_thrown_automatically_when_chosen() && (what == "is_thrown_automatically_when_chosen")) {
         return true;
     }
     if (is_extreme_hazard() && (what == "is_extreme_hazard")) {

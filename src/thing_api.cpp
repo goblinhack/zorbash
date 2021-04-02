@@ -567,9 +567,9 @@ int Thing::is_rrr15(void) const
     return (tp()->is_rrr15());
 }
 
-int Thing::is_rrr16(void) const
+int Thing::is_target_select_automatically_when_chosen(void) const
 {_
-    return (tp()->is_rrr16());
+    return (tp()->is_target_select_automatically_when_chosen());
 }
 
 int Thing::is_wand(void) const
@@ -707,9 +707,9 @@ int Thing::is_used_automatically_when_selected(void) const
     return (tp()->is_used_automatically_when_selected());
 }
 
-int Thing::is_thrown_automatically_when_selected(void) const
+int Thing::is_thrown_automatically_when_chosen(void) const
 {_
-    return (tp()->is_thrown_automatically_when_selected());
+    return (tp()->is_thrown_automatically_when_chosen());
 }
 
 int Thing::is_extreme_hazard(void) const

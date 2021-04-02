@@ -15,6 +15,8 @@ import sys
 number_of_files_to_add_to_ramdisk = 0
 number_of_ramdisk_files = 10
 
+root = pathlib.Path(".")
+
 #
 # If the make target exists, see if any graphics are newer than the
 # target. If so we need to rebuild the ramdisk.
@@ -37,7 +39,6 @@ except IOError:
     pass
 
 files = collections.defaultdict(list)
-root = pathlib.Path(".")
 
 #
 # For each .tga convert it to assembly to be included in the build

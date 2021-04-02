@@ -32,7 +32,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_moveable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_throwable(True)
-    x.set_is_thrown_automatically_when_selected(True)
+    x.set_is_thrown_automatically_when_chosen(True)
     x.set_is_treasure(True)
     x.set_is_treasure_class_c(True)
     x.set_is_usable(True)

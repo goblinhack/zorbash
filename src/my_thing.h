@@ -697,7 +697,7 @@ public:
     int is_rrr13(void) const;
     int is_rrr14(void) const;
     int is_rrr15(void) const;
-    int is_rrr16(void) const;
+    int is_target_select_automatically_when_chosen(void) const;
     int is_wand(void) const;
     int charge_count(void) const;
     int minion_leash_distance(void) const;
@@ -721,7 +721,7 @@ public:
     int is_steal_item_chance_d1000(void) const;
     int is_temporary_bag(void) const;
     int is_throwable(void) const;
-    int is_thrown_automatically_when_selected(void) const;
+    int is_thrown_automatically_when_chosen(void) const;
     int is_torch(void) const;
     int is_treasure(void) const;
     int is_treasure_class_a(void) const;
