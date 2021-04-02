@@ -310,10 +310,11 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     my.t->inited_tiles          = false;
 
     //
-    // We do not save particles
+    // We do not save particles or lasers
     //
     my.t->has_external_particle = false;
     my.t->has_internal_particle = false;
+    my.t->has_laser             = false;
 
     READ_MAGIC("thing end", THING_MAGIC_END);
 

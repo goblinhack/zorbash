@@ -76,6 +76,7 @@ public:
     uint64_t has_ever_moved:1          {};
     uint64_t has_external_particle:1   {}; // current in motion particle
     uint64_t has_internal_particle:1   {}; // current in motion particle
+    uint64_t has_laser:1               {}; // current laser being fired
     uint64_t has_light:1               {};
     uint64_t inited_tiles:1            {};
     uint64_t is_activated:1            {};
@@ -272,6 +273,7 @@ public:
     bool move_to_or_escape(const point&);
     bool open_door(Thingp door);
     bool particle_anim_exists(void);
+    bool laser_anim_exists(void);
     bool place(const std::string& what, const point &p);
     bool possible_to_attack(const Thingp it);
     bool set_on_fire(const std::string &why);
@@ -338,7 +340,7 @@ public:
     const std::string& str4(void) const;
     const std::string& str5(void) const;
     const std::string& str6(void) const;
-    const std::string& str7(void) const;
+    const std::string& laser_name(void) const;
     const std::string& text_description(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
@@ -998,6 +1000,7 @@ public:
     void delete_dmap_scent(void);
     void delete_lights(void);
     void delete_particle();
+    void delete_laser();
     void destroy();
     void destroyed(void);
     void die(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
