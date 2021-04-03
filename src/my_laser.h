@@ -15,15 +15,13 @@
 typedef class Laser_ {
 public:
     Laser_(ThingId thing_id,
-              point start, point stop,
-              point pixel_map_at,
-              isize sz,
-              uint32_t timestamp_start, uint32_t timestamp_stop) :
+           point start, point stop,
+           point pixel_map_at,
+           uint32_t timestamp_start, uint32_t timestamp_stop) :
         id(thing_id),
         start(start),
         stop(stop),
         pixel_map_at(pixel_map_at),
-        sz(sz),
         timestamp_start(timestamp_start),
         timestamp_stop(timestamp_stop) { }
 
@@ -31,7 +29,6 @@ public:
     point start;
     point stop;
     point pixel_map_at;
-    isize sz;
     uint32_t timestamp_start {};
     uint32_t timestamp_stop {};
     int height {};

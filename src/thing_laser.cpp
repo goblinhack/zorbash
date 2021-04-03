@@ -58,11 +58,7 @@ bool Thing::laser_fire (Thingp item, Thingp target)
         return false;
     }
 
-    start -= level->pixel_map_at;
-    end -= level->pixel_map_at;
-
-    level->new_laser(item->id, start, end, 
-                     isize(TILE_WIDTH, TILE_HEIGHT), 1000);
+    level->new_laser(item->id, start, end, 10000);
 
     return true;
 }

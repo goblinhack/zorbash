@@ -744,6 +744,26 @@ void gl_blitquad (GLushort left, GLushort top, GLushort right, GLushort bottom)
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
+void gl_blitquad (const point &tl, const point &tr, 
+                  const point &bl, const point &br)
+{
+    GLushort xy[4*2];
+    GLushort *xyp = xy;
+
+    Vertex2(tl.x, tl.y);
+    Vertex2(tr.x, tr.y);
+    Vertex2(bl.x, bl.y);
+    Vertex2(br.x, br.y);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+
+    glVertexPointer(2, GL_SHORT, 0, xy);
+    GL_ERROR_CHECK();
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableClientState(GL_VERTEX_ARRAY);
+}
+
 void gl_blitsquare (GLushort left, GLushort top, GLushort right, GLushort bottom)
 {
     GLushort xy[4*2];

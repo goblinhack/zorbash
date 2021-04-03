@@ -15,10 +15,8 @@
 #include "my_gl.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
-#include "my_random.h"
 
-void Level::new_laser (ThingId id,
-                       point start, point stop, isize sz, uint32_t dur)
+void Level::new_laser (ThingId id, point start, point stop, uint32_t dur)
 {
     if (id.ok()) {
         auto t = thing_find(id);
@@ -32,8 +30,7 @@ void Level::new_laser (ThingId id,
     }
 
     uint32_t now = time_update_time_milli();
-    new_lasers.push_back(Laser(id, start, stop, pixel_map_at,
-                               sz, now, now + dur));
+    new_lasers.push_back(Laser(id, start, stop, pixel_map_at, now, now + dur));
 }
 
 void Level::display_lasers (void)
@@ -71,42 +68,46 @@ void Level::display_lasers (void)
     auto e = std::remove_if(all_lasers.begin(),
                             all_lasers.end(),
         [=, this] (Laser &p) {
-            //
-            // Different curve height for each laser
-            //
-            if (!p.height) {
-                p.height = random_range(30, 50);
-            }
-
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
             if (dt > 1) {
                 if (p.id.id) {
                     auto t = thing_find(p.id);
                     if (t) {
-                        t->log("End of jump laser");
-                        t->is_jumping = false;
+                        t->log("End of laser");
                         t->has_laser = false;
                     }
                 }
                 return true;
             }
 
-            auto d = p.stop - p.start;
-            point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
+            auto start = p.start - p.pixel_map_at;
+            auto stop = p.stop - p.pixel_map_at;
 
-            auto sz = p.sz;
-            if (sz.w < 0) { sz.w = -sz.w; }
-            if (sz.h < 0) { sz.h = -sz.h; }
+            auto d = stop - start;
+            point at((d.x * dt) + start.x, (d.y * dt) + start.y);
 
-            point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
-            point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
+            auto tile = tile_find_mand("cursor_select_path.1");
+            glBindTexture(GL_TEXTURE_2D, tile->gl_binding());
 
-            int oy = sin(RAD_180 * dt) * p.height;
+            auto dist = distance(start, stop);
+            auto delta = stop - start;
+            auto steps = (int)ceil(dist);
 
-            blit_tl.y -= oy;
-            blit_br.y -= oy;
+CON("dist %f steps %d", (float)dist, steps);
+            for (int t = 0; t < steps; t++) {
+                auto mx = start.x + delta.x * t;
+                auto my = start.y + delta.y * t;
 
+                point tl(mx - delta.y, my - delta.x);
+                point tr(mx + delta.y, my - delta.x);
+                point bl(mx - delta.y, my + delta.x);
+                point br(mx + delta.y, my + delta.x);
+
+                gl_blitquad(tl, tr, bl, br);
+            }
+
+#if 0
             Tpp tpp = {};
             if (p.id.id) {
                 auto t = thing_find(p.id);
@@ -115,7 +116,6 @@ void Level::display_lasers (void)
                 }
             }
 
-#if 0
             auto tile = p.tile;
             float tile_pix_height = tile->pix_height;
             float tileh = game->config.tile_pix_height;
@@ -179,7 +179,6 @@ void Thing::delete_laser (void)
         }
     );
 
-    level->all_lasers.erase(e, 
-                                        level->all_lasers.end());
+    level->all_lasers.erase(e, level->all_lasers.end());
     has_laser = false;
 }
