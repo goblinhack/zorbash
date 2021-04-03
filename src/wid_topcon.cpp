@@ -428,7 +428,7 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         }
         auto what = level->inventory_get();
         if (what) {
-            player->throw_item(what);
+            player->throw_item_choose_target(what);
         }
         return true;
     }

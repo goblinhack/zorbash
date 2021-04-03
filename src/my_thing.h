@@ -289,9 +289,10 @@ public:
     bool spawn_under(const std::string& what);
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);
-    bool throw_item(Thingp w);
-    bool laser_item(Thingp w);
-    bool target_select(Thingp w);
+    bool throw_item_choose_target(Thingp item);
+    bool fire_laser_choose_target(Thingp item);
+    bool laser_fire(Thingp item, Thingp target);
+    bool target_select(Thingp item);
     bool try_harder_to_jump(void);
     bool try_to_carry(Thingp w);
     bool try_to_escape(void);

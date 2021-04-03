@@ -18,8 +18,7 @@
 #include "my_random.h"
 
 void Level::new_laser (ThingId id,
-                       point start, point stop, isize sz, uint32_t dur,
-                       const Tilep tile)
+                       point start, point stop, isize sz, uint32_t dur)
 {
     if (id.ok()) {
         auto t = thing_find(id);
@@ -34,7 +33,7 @@ void Level::new_laser (ThingId id,
 
     uint32_t now = time_update_time_milli();
     new_lasers.push_back(Laser(id, start, stop, pixel_map_at,
-                               sz, now, now + dur, tile));
+                               sz, now, now + dur));
 }
 
 void Level::display_lasers (void)
@@ -116,11 +115,11 @@ void Level::display_lasers (void)
                 }
             }
 
+#if 0
             auto tile = p.tile;
             float tile_pix_height = tile->pix_height;
             float tileh = game->config.tile_pix_height;
 
-#if 0
             {
                 //
                 // Not sure why but for internal lasers this ends up
@@ -139,7 +138,6 @@ void Level::display_lasers (void)
                     blit_br.y += ((ytiles-1) * tileh) / 2;
                 }
             }
-#endif
 
             if (unlikely(tpp &&
                          tpp->gfx_oversized_but_sitting_on_the_ground())) {
@@ -153,6 +151,7 @@ void Level::display_lasers (void)
             blit_br -= pixel_map_at - p.pixel_map_at;
 
             tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+#endif
 
             return false;
         });

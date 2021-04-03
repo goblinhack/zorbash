@@ -15,9 +15,9 @@
 #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 
-void Thing::inventory_particle (Thingp what, uint32_t slot)
+void Thing::inventory_particle (Thingp item, uint32_t slot)
 {_
-    log("Inventory particle %s", what->to_string().c_str());
+    log("Inventory particle %s", item->to_string().c_str());
 _
     //
     // No animations at the start
@@ -27,7 +27,7 @@ _
         return;
     }
 
-    if (what->is_item_collected_as_gold()) {
+    if (item->is_item_collected_as_gold()) {
         std::string name = "gold";
         auto w = wid_find(name);
         if (!w) {
@@ -55,7 +55,7 @@ _
         return;
     }
 
-    if (what->is_collect_as_keys()) {
+    if (item->is_collect_as_keys()) {
         std::string name = "keys";
         auto w = wid_find(name);
         if (!w) {
@@ -94,12 +94,12 @@ _
         p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         level->new_external_particle(
-                 what->id,
+                 item->id,
                  (last_blit_tl + last_blit_br) / 2, p,
                  isize(TILE_WIDTH, TILE_HEIGHT), 
                  PARTICLE_SPEED_MS,
-                 tile_index_to_tile(what->tile_curr),
-                 (what->is_dir_br() || what->is_dir_right() || what->is_dir_tr()),
+                 tile_index_to_tile(item->tile_curr),
+                 (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()),
                  false /* make_visible_at_end */);
     }
 }
@@ -107,12 +107,12 @@ _
 //
 // Particle from the inventory to tp_id target
 //
-void Thing::inventory_particle (Thingp what, 
+void Thing::inventory_particle (Thingp item, 
                                 uint32_t slot, 
                                 Thingp particle_target)
 {_
     log("Inventory particle %s with target %s",
-        what->to_string().c_str(), particle_target->to_string().c_str());
+        item->to_string().c_str(), particle_target->to_string().c_str());
 _
     if (game->state == Game::STATE_MOVING_ITEMS || 
         game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -157,19 +157,19 @@ _
                       particle_target->last_blit_br) / 2;
 
 
-    level->new_external_particle(what->id, where_from, where_to,
+    level->new_external_particle(item->id, where_from, where_to,
                                  isize(TILE_WIDTH, TILE_HEIGHT), 
                                  PARTICLE_SPEED_MS,
-                                 tile_index_to_tile(what->tile_curr),
-                                 (what->is_dir_br() || 
-                                  what->is_dir_right() || 
-                                  what->is_dir_tr()),
+                                 tile_index_to_tile(item->tile_curr),
+                                 (item->is_dir_br() || 
+                                  item->is_dir_right() || 
+                                  item->is_dir_tr()),
                                  true /* make_visible_at_end */);
 }
 
-bool Thing::inventory_id_insert (Thingp what)
+bool Thing::inventory_id_insert (Thingp item)
 {_
-    log("Inventory insert %s", what->to_string().c_str());
+    log("Inventory insert %s", item->to_string().c_str());
 _
     auto player = level->player;
     if (!player) {
@@ -184,21 +184,21 @@ _
         return false;
     }
 
-    if (what->is_item_collected_as_gold()) {
+    if (item->is_item_collected_as_gold()) {
         wid_inventory_init();
         wid_thing_info_fini();
-        incr_gold(what->get_gold_value());
-        inventory_particle(what, monstp->inventory_id.size() - 1);
-        what->dead("collected");
+        incr_gold(item->get_gold_value());
+        inventory_particle(item, monstp->inventory_id.size() - 1);
+        item->dead("collected");
         return false;
     }
 
-    if (what->is_collect_as_keys()) {
+    if (item->is_collect_as_keys()) {
         wid_inventory_init();
         wid_thing_info_fini();
         incr_keys(1);
-        inventory_particle(what, monstp->inventory_id.size() - 1);
-        what->dead("collected");
+        inventory_particle(item, monstp->inventory_id.size() - 1);
+        item->dead("collected");
         return false;
     }
 
@@ -218,8 +218,8 @@ _
             continue;
         }
 
-        if (what->tp() == tpp) {
-            if (what->is_item_not_stackable()) {
+        if (item->tp() == tpp) {
+            if (item->is_item_not_stackable()) {
                 //
                 // Needs its own slot
                 //
@@ -230,7 +230,7 @@ _
                     game->state != Game::STATE_COLLECTING_ITEMS) {
                     wid_thing_info_fini();
                 }
-                inventory_particle(what, i);
+                inventory_particle(item, i);
                 return true;
             }
         }
@@ -238,16 +238,16 @@ _
 
     int item_slot = -1;
     if (free_slot != -1) {
-        monstp->inventory_id[free_slot] = what->tp_id;
+        monstp->inventory_id[free_slot] = item->tp_id;
         item_slot = free_slot;
     } else {
         if (inventory_items >= UI_ACTIONBAR_MAX_ITEMS) {
             TOPCON("No space to carry %s which is not carried.",
-                    what->text_the().c_str());
+                    item->text_the().c_str());
             return false;
         }
 
-        monstp->inventory_id.push_back(what->tp_id);
+        monstp->inventory_id.push_back(item->tp_id);
         item_slot = monstp->inventory_id.size() - 1;
     }
 
@@ -259,14 +259,14 @@ _
         game->state != Game::STATE_COLLECTING_ITEMS) {
         wid_thing_info_fini();
     }
-    inventory_particle(what, item_slot);
+    inventory_particle(item, item_slot);
     level->inventory_describe(item_slot);
     return true;
 }
 
-bool Thing::inventory_id_remove (Thingp what)
+bool Thing::inventory_id_remove (Thingp item)
 {_
-    log("Inventory remove %s", what->to_string().c_str());
+    log("Inventory remove %s", item->to_string().c_str());
 _
     auto player = level->player;
     if (!player) {
@@ -281,9 +281,9 @@ _
         return false;
     }
 
-    auto immediate_owner = what->get_immediate_owner();
+    auto immediate_owner = item->get_immediate_owner();
     if (immediate_owner) {
-        immediate_owner->bag_remove(what);
+        immediate_owner->bag_remove(item);
     }
 
     auto inventory_items = player->monstp->inventory_id.size();
@@ -297,10 +297,10 @@ _
             continue;
         }
 
-        if (what->tp() == tpp) {
+        if (item->tp() == tpp) {
             game->request_remake_inventory = true;
 
-            inventory_particle(what, i, this);
+            inventory_particle(item, i, this);
 
             auto cnt = inventory_id_slot_count(i);
             log("Remove slot %d, count %d", i, cnt);
@@ -333,10 +333,10 @@ _
     return false;
 }
 
-bool Thing::inventory_id_remove (Thingp what, Thingp particle_target)
+bool Thing::inventory_id_remove (Thingp item, Thingp particle_target)
 {_
     log("Inventory remove %s with target %s",
-        what->to_string().c_str(), particle_target->to_string().c_str());
+        item->to_string().c_str(), particle_target->to_string().c_str());
 _
     auto player = level->player;
     if (!player) {
@@ -351,9 +351,9 @@ _
         return false;
     }
 
-    auto immediate_owner = what->get_immediate_owner();
+    auto immediate_owner = item->get_immediate_owner();
     if (immediate_owner) {
-        immediate_owner->bag_remove(what);
+        immediate_owner->bag_remove(item);
     }
 
     auto inventory_items = player->monstp->inventory_id.size();
@@ -367,11 +367,11 @@ _
             continue;
         }
 
-        if (what->tp() == tpp) {
+        if (item->tp() == tpp) {
             game->request_remake_inventory = true;
 
             if (particle_target) {
-                inventory_particle(what, i, particle_target);
+                inventory_particle(item, i, particle_target);
             }
 
             auto cnt = inventory_id_slot_count(i);
@@ -516,22 +516,22 @@ _
         return false;
     }
 
-    Thingp what;
+    Thingp item;
 
     if (slot != game->inventory_highlight_slot) {
         LOG("Inventory: request to remake inventory");
         game->request_remake_inventory = true;
         game->inventory_highlight_slot = slot;
-        what = inventory_describe(slot);
+        item = inventory_describe(slot);
     } else {
-        what = inventory_describe(game->inventory_highlight_slot);
+        item = inventory_describe(game->inventory_highlight_slot);
     }
 
-    if (!what) {
+    if (!item) {
         return false;
     }
 
-    what->log("Over inventory item");
+    item->log("Over inventory item");
     return true;
 }
 
@@ -555,38 +555,38 @@ _
         return false;
     }
 
-    Thingp what;
+    Thingp item;
     bool changed_highlight_slot = false;
 
     if (slot != game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
         changed_highlight_slot = true;
 
-        what = inventory_describe(slot);
+        item = inventory_describe(slot);
     } else {
-        what = inventory_describe(game->inventory_highlight_slot);
+        item = inventory_describe(game->inventory_highlight_slot);
     }
 
-    if (!what) {
+    if (!item) {
         return false;
     }
 
-    what->log("Chosen inventory item");
-    if (what->is_weapon()) {
+    item->log("Chosen inventory item");
+    if (item->is_weapon()) {
         if (changed_highlight_slot) {
             game->tick_begin("player changed weapon");
         }
-        player->wield(what);
-    } else if (what->is_bag()) {
-        game->wid_thing_info_create(what);
-        what->log("Moving items flag set");
+        player->wield(item);
+    } else if (item->is_bag()) {
+        game->wid_thing_info_create(item);
+        item->log("Moving items flag set");
         game->change_state(Game::STATE_MOVING_ITEMS);
-    } else if (what->is_thrown_automatically_when_chosen()) {
-        player->throw_item(what);
-    } else if (what->is_laser_target_select_automatically_when_chosen()) {
-        player->laser_item(what);
-    } else if (what->is_used_automatically_when_selected()) {
-        player->use(what);
+    } else if (item->is_thrown_automatically_when_chosen()) {
+        player->throw_item_choose_target(item);
+    } else if (item->is_laser_target_select_automatically_when_chosen()) {
+        player->fire_laser_choose_target(item);
+    } else if (item->is_used_automatically_when_selected()) {
+        player->use(item);
     }
 
     return true;
@@ -596,12 +596,12 @@ Thingp Level::inventory_describe (const uint32_t slot)
 {_
     LOG("Inventory: describe slot %d", slot);
 _
-    auto what = inventory_get(slot);
-    if (what) {
-        what->log("Inventory: describe slot %d", slot);
-        what->describe_when_hovered_over_in_rightbar();
+    auto item = inventory_get(slot);
+    if (item) {
+        item->log("Inventory: describe slot %d", slot);
+        item->describe_when_hovered_over_in_rightbar();
     } else {
         LOG("Inventory: describe slot %d => nothing there", slot);
     }
-    return what;
+    return item;
 }

@@ -32,6 +32,7 @@ void Level::display_target (void)
     if (!start.x && !start.y) {
         return;
     }
+
     if (!end.x && !end.y) {
         return;
     }

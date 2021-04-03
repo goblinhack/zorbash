@@ -8,6 +8,27 @@
 #include "my_level.h"
 #include "my_thing.h"
 
+bool Thing::throw_item_choose_target (Thingp what)
+{_
+    log("Trying to use: %s", what->to_string().c_str());
+
+    if (!what->is_throwable()) {
+        if (is_player()) {
+            TOPCON("I don't know how to throw %s.", what->text_the().c_str());
+            game->tick_begin("player tried to use something they could not");
+        }
+        return false;
+    }
+
+    if (!target_select(what)) {
+        return false;
+    }
+
+    game->request_to_throw_item = what;
+
+    return target_select(what);
+}
+
 void Thing::throw_at (Thingp what, Thingp target)
 {_
     if (!what) {
@@ -58,25 +79,4 @@ void Thing::throw_at (Thingp what, Thingp target)
     if (game->state == Game::STATE_CHOOSING_TARGET) {
         game->change_state(Game::STATE_NORMAL);
     }
-}
-
-bool Thing::throw_item (Thingp what)
-{_
-    log("Trying to use: %s", what->to_string().c_str());
-
-    if (!what->is_throwable()) {
-        if (is_player()) {
-            TOPCON("I don't know how to throw %s.", what->text_the().c_str());
-            game->tick_begin("player tried to use something they could not");
-        }
-        return false;
-    }
-
-    if (!target_select(what)) {
-        return false;
-    }
-
-    game->request_to_throw_item = what;
-
-    return target_select(what);
 }

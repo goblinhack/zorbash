@@ -18,16 +18,14 @@ public:
               point start, point stop,
               point pixel_map_at,
               isize sz,
-              uint32_t timestamp_start, uint32_t timestamp_stop,
-              class Tile* tile) :
+              uint32_t timestamp_start, uint32_t timestamp_stop) :
         id(thing_id),
         start(start),
         stop(stop),
         pixel_map_at(pixel_map_at),
         sz(sz),
         timestamp_start(timestamp_start),
-        timestamp_stop(timestamp_stop),
-        tile(tile) { }
+        timestamp_stop(timestamp_stop) { }
 
     ThingId id {};
     point start;
@@ -36,7 +34,6 @@ public:
     isize sz;
     uint32_t timestamp_start {};
     uint32_t timestamp_stop {};
-    class Tile* tile {};
     int height {};
 } Laser;
 

@@ -68,8 +68,14 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
 
     if (game->state == Game::STATE_CHOOSING_TARGET) {
         player->log("Chosen target");
-        auto what = game->request_to_throw_item;
-        player->throw_at(what, level->cursor);
+        if (game->request_to_throw_item) {
+            auto item = game->request_to_throw_item;
+            player->throw_at(item, level->cursor);
+        }
+        if (game->request_to_laser_item) {
+            auto item = game->request_to_laser_item;
+            player->laser_fire(item, level->cursor);
+        }
         return true;
     }
 
