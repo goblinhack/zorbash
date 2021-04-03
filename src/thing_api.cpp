@@ -562,9 +562,9 @@ int Thing::is_rrr14(void) const
     return (tp()->is_rrr14());
 }
 
-int Thing::is_rrr15(void) const
+int Thing::range_max(void) const
 {_
-    return (tp()->is_rrr15());
+    return (tp()->range_max());
 }
 
 int Thing::is_laser_target_select_automatically_when_chosen(void) const
@@ -732,14 +732,14 @@ int Thing::is_food_eater(void) const
     return (tp()->is_food_eater());
 }
 
-int Thing::is_item_effect_max_radius(void) const
+int Thing::blast_max_radius(void) const
 {_
-    return (tp()->is_item_effect_max_radius());
+    return (tp()->blast_max_radius());
 }
 
-int Thing::is_item_effect_min_radius(void) const
+int Thing::blast_min_radius(void) const
 {_
-    return (tp()->is_item_effect_min_radius());
+    return (tp()->blast_min_radius());
 }
 
 int Thing::is_critical_to_level(void) const

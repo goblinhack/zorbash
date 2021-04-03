@@ -22,8 +22,8 @@ void Level::cursor_path_draw_circle (void)
         return;
     }
 
-    auto radius_min = what->tp()->is_item_effect_min_radius();
-    auto radius_max = what->tp()->is_item_effect_max_radius();
+    auto radius_min = what->tp()->blast_min_radius();
+    auto radius_max = what->tp()->blast_max_radius();
     auto mid_at = cursor->mid_at;
 
     bool too_far = false;

@@ -232,8 +232,8 @@ class Tp:
     def set_is_rrr14(self, value):
         zx.tp_set_is_rrr14(self, value)
 
-    def set_is_rrr15(self, value):
-        zx.tp_set_is_rrr15(self, value)
+    def set_range_max(self, value):
+        zx.tp_set_range_max(self, value)
 
     def set_is_laser_target_select_automatically_when_chosen(self, value):
         zx.tp_set_is_laser_target_select_automatically_when_chosen(self, value)
@@ -331,11 +331,11 @@ class Tp:
     def set_is_food_eater(self, value):
         zx.tp_set_is_food_eater(self, value)
 
-    def set_is_item_effect_max_radius(self, value):
-        zx.tp_set_is_item_effect_max_radius(self, value)
+    def set_blast_max_radius(self, value):
+        zx.tp_set_blast_max_radius(self, value)
 
-    def set_is_item_effect_min_radius(self, value):
-        zx.tp_set_is_item_effect_min_radius(self, value)
+    def set_blast_min_radius(self, value):
+        zx.tp_set_blast_min_radius(self, value)
 
     def set_is_critical_to_level(self, value):
         zx.tp_set_is_critical_to_level(self, value)
