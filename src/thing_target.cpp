@@ -10,7 +10,9 @@
 
 bool Thing::target_select (Thingp what)
 {_
-    TOPCON("Choose a target to use %s at.", what->text_the().c_str());
+    if (game->state != Game::STATE_CHOOSING_TARGET) {
+        TOPCON("Choose a target to use %s at.", what->text_the().c_str());
+    }
 
     game->change_state(Game::STATE_CHOOSING_TARGET);
     level->cursor_recreate();

@@ -507,7 +507,7 @@ public:
     void new_external_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
     void new_internal_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
     void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
-    void new_laser(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile);
+    void new_laser(ThingId id, point start, point stop, isize sz, uint32_t dur);
     void place_dirt(Dungeonp d);
     void place_floor_deco(Dungeonp d);
     void place_the_grid(void);
