@@ -652,8 +652,8 @@ public:
     int is_item(void) const;
     int is_item_collected_as_gold(void) const;
     int is_item_eater(void) const;
-    int is_item_effect_max_radius(void) const;
-    int is_item_effect_min_radius(void) const;
+    int blast_max_radius(void) const;
+    int blast_min_radius(void) const;
     int is_item_not_stackable(void) const;
     int is_jelly(void) const;
     int is_jelly_baby(void) const;
@@ -698,7 +698,7 @@ public:
     int is_rrr12(void) const;
     int is_rrr13(void) const;
     int is_rrr14(void) const;
-    int is_rrr15(void) const;
+    int range_max(void) const;
     int is_laser_target_select_automatically_when_chosen(void) const;
     int is_wand(void) const;
     int charge_count(void) const;

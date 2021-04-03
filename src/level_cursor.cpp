@@ -228,11 +228,23 @@ void Level::cursor_recreate (void)
 
     auto mid_at = cursor->mid_at;
 
+    auto what = game->request_to_throw_item;
+    if (!what) {
+        what = game->request_to_laser_item;
+    }
+
     cursor->dead("update");
-    if (game->state == Game::STATE_CHOOSING_TARGET) {
-        if (DISTANCE(player->mid_at.x, player->mid_at.y, 
-                     mid_at.x, mid_at.y)  >
-                player->get_throw_distance()) {
+    if (what && (game->state == Game::STATE_CHOOSING_TARGET)) {
+        bool too_far = false;
+        auto dist = DISTANCE(player->mid_at.x, player->mid_at.y,
+                             mid_at.x, mid_at.y);
+        if (what->get_throw_distance()) {
+            too_far = dist > player->get_throw_distance();
+        } else if (what->range_max()) {
+            too_far = dist > what->range_max();
+        }
+
+        if (too_far) {
             cursor = thing_new("cursor_select_fail", mid_at);
         } else {
             cursor = thing_new("cursor_select", mid_at);

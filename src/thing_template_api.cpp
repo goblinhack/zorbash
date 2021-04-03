@@ -199,7 +199,7 @@ int Tp::is_rrr11(void) const { return _is_rrr11; }
 int Tp::is_rrr12(void) const { return _is_rrr12; }
 int Tp::is_rrr13(void) const { return _is_rrr13; }
 int Tp::is_rrr14(void) const { return _is_rrr14; }
-int Tp::is_rrr15(void) const { return _is_rrr15; }
+int Tp::range_max(void) const { return _range_max; }
 int Tp::is_laser_target_select_automatically_when_chosen(void) const { return _is_laser_target_select_automatically_when_chosen; }
 int Tp::is_wand(void) const { return _is_wand; }
 int Tp::charge_count(void) const { return _charge_count; }
@@ -235,9 +235,9 @@ int Tp::is_extreme_hazard(void) const { return _is_extreme_hazard; }
 int Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
 int Tp::attack_meat(void) const { return _attack_meat; }
 int Tp::is_food_eater(void) const { return _is_food_eater; }
-int Tp::is_item_effect_max_radius(void) const { return _is_item_effect_max_radius; }
+int Tp::blast_max_radius(void) const { return _blast_max_radius; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
-int Tp::is_item_effect_min_radius(void) const { return _is_item_effect_min_radius; }
+int Tp::blast_min_radius(void) const { return _blast_min_radius; }
 int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
 int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_temporary_bag(void) const { return _is_temporary_bag; }
@@ -439,7 +439,7 @@ void Tp::set_is_rrr11(int v) { _is_rrr11 = v; }
 void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
 void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
 void Tp::set_is_rrr14(int v) { _is_rrr14 = v; }
-void Tp::set_is_rrr15(int v) { _is_rrr15 = v; }
+void Tp::set_range_max(int v) { _range_max = v; }
 void Tp::set_is_laser_target_select_automatically_when_chosen(int v) { _is_laser_target_select_automatically_when_chosen = v; }
 void Tp::set_is_wand(int v) { _is_wand = v; }
 void Tp::set_charge_count(int v) { _charge_count = v; }
@@ -476,9 +476,9 @@ void Tp::set_is_extreme_hazard(int v) { _is_extreme_hazard = v; }
 void Tp::set_is_auto_collect_item(int v) { _is_auto_collect_item = v; }
 void Tp::set_attack_meat(int v) { _attack_meat = v; }
 void Tp::set_is_food_eater(int v) { _is_food_eater = v; }
-void Tp::set_is_item_effect_max_radius(int v) { _is_item_effect_max_radius = v; }
+void Tp::set_blast_max_radius(int v) { _blast_max_radius = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
-void Tp::set_is_item_effect_min_radius(int v) { _is_item_effect_min_radius = v; }
+void Tp::set_blast_min_radius(int v) { _blast_min_radius = v; }
 void Tp::set_is_critical_to_level(int v) { _is_critical_to_level = v; }
 void Tp::set_is_able_to_fall(int v) { _is_able_to_fall = v; }
 void Tp::set_is_temporary_bag(int v) { _is_temporary_bag = v; }

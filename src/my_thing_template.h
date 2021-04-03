@@ -174,8 +174,8 @@ private:
     int _is_item {};
     int _is_item_collected_as_gold {};
     int _is_item_eater {};
-    int _is_item_effect_max_radius {};
-    int _is_item_effect_min_radius {};
+    int _blast_max_radius {};
+    int _blast_min_radius {};
     int _is_item_not_stackable {};
     int _is_jelly {};
     int _is_jelly_baby {};
@@ -222,7 +222,7 @@ private:
     int _is_rrr12 {};
     int _is_rrr13 {};
     int _is_rrr14 {};
-    int _is_rrr15 {};
+    int _range_max {};
     int _is_laser_target_select_automatically_when_chosen {};
     int _is_wand {};
     int _charge_count {};
@@ -523,8 +523,8 @@ public:
     int is_item(void) const;
     int is_item_collected_as_gold(void) const;
     int is_item_eater(void) const;
-    int is_item_effect_max_radius(void) const;
-    int is_item_effect_min_radius(void) const;
+    int blast_max_radius(void) const;
+    int blast_min_radius(void) const;
     int is_item_not_stackable(void) const;
     int is_jelly(void) const;
     int is_jelly_baby(void) const;
@@ -570,7 +570,7 @@ public:
     int is_rrr12(void) const;
     int is_rrr13(void) const;
     int is_rrr14(void) const;
-    int is_rrr15(void) const;
+    int range_max(void) const;
     int is_laser_target_select_automatically_when_chosen(void) const;
     int is_wand(void) const;
     int charge_count(void) const;
@@ -764,8 +764,8 @@ public:
     void set_is_item(int);
     void set_is_item_collected_as_gold(int);
     void set_is_item_eater(int);
-    void set_is_item_effect_max_radius(int);
-    void set_is_item_effect_min_radius(int);
+    void set_blast_max_radius(int);
+    void set_blast_min_radius(int);
     void set_is_item_not_stackable(int);
     void set_is_jelly(int);
     void set_is_jelly_baby(int);
@@ -812,7 +812,7 @@ public:
     void set_is_rrr12(int);
     void set_is_rrr13(int);
     void set_is_rrr14(int);
-    void set_is_rrr15(int);
+    void set_range_max(int);
     void set_is_laser_target_select_automatically_when_chosen(int);
     void set_is_wand(int);
     void set_charge_count(int);

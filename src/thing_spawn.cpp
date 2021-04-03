@@ -162,8 +162,8 @@ bool Thing::spawn_radius_range (Thingp parent, const std::string& what,
     auto tpp = tp_find(what);
 
     if (!radius_min && !radius_max) {
-        radius_min = parent->tp()->is_item_effect_min_radius();
-        radius_max = parent->tp()->is_item_effect_max_radius();
+        radius_min = parent->tp()->blast_min_radius();
+        radius_max = parent->tp()->blast_max_radius();
     }
 
     log("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);

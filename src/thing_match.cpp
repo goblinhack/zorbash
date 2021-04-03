@@ -307,7 +307,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr14() && (what == "is_rrr14")) {
         return true;
     }
-    if (is_rrr15() && (what == "is_rrr15")) {
+    if (range_max() && (what == "range_max")) {
         return true;
     }
     if (is_laser_target_select_automatically_when_chosen() && (what == "is_laser_target_select_automatically_when_chosen")) {
@@ -415,13 +415,13 @@ bool Thing::match (const std::string& what)
     if (is_food_eater() && (what == "is_food_eater")) {
         return true;
     }
-    if (is_item_effect_max_radius() && (what == "is_item_effect_max_radius")) {
+    if (blast_max_radius() && (what == "blast_max_radius")) {
         return true;
     }
     if (is_rrr5() && (what == "is_rrr5")) {
         return true;
     }
-    if (is_item_effect_min_radius() && (what == "is_item_effect_min_radius")) {
+    if (blast_min_radius() && (what == "blast_min_radius")) {
         return true;
     }
     if (is_critical_to_level() && (what == "is_critical_to_level")) {
