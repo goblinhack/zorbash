@@ -39,7 +39,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_long_text_description("This most dangerous wand can transport its target to the next level by the most efficacious means possible...")
     x.set_normal_placement_rules(True)
     x.set_on_use_do("wand_descent.on_use()")
-    x.set_range_max(10)
+    x.set_range_max(7)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=cyan$A wand of descent.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

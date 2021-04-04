@@ -46,7 +46,7 @@ void Level::display_target (void)
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     blit_fbo_bind(FBO_MAP_VISIBLE);
-    glLineWidth(5.0);
+    glLineWidth(1.0);
 
     auto mid_at = cursor->mid_at;
     bool too_far = false;

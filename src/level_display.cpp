@@ -332,12 +332,6 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         display_internal_particles();
-        display_lasers();
-
-        //
-        // If choosing a target, lets see it
-        //
-        display_target();
 
         //
         // Blit small lights and glow
@@ -349,9 +343,15 @@ void Level::display_map (void)
         // Blit objects that are in front of small lights so that the
         // player is not lost in lava glow
         //
+        display_lasers();
         display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
         blit_fbo_game_pix(FBO_PLAYER_LIGHT);
+
+        //
+        // If choosing a target, lets see it
+        //
+        display_target();
     }
 
     {_

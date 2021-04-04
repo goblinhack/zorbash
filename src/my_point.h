@@ -163,32 +163,10 @@ public:
     }
 
     //
-    // Yields an angle between 0 and 180 deg radians
-    //
-    friend T angle (const my_apoint A, const my_apoint B)
-    {
-        const T a = sqrt(A.x*A.x + A.y*A.y);
-        const T b = sqrt(B.x*B.x + B.y*B.y);
-
-        return (acos((A.x*B.x + A.y*B.y) / (a * b)));
-    }
-
-    //
-    // Yields an angle between 0 and 180 deg radians
-    //
-    T angle (const my_apoint A) const
-    {
-        const T a = sqrt(A.x*A.x + A.y*A.y);
-        const T b = sqrt(x*x + y*y);
-
-        return (acos((A.x*x + A.y*y) / (a * b)));
-    }
-
-    //
     // Yields an angle between 0 and 360 deg radians - essentially, how much
     // this point has been rotated about the origin.
     //
-    T anglerot (void) const
+    T angle_radians (void) const
     {
         T theta = asin(y / length());
 
@@ -203,7 +181,7 @@ public:
         }
     }
 
-    my_apoint rotate (T angle, const my_apoint O) const
+    my_apoint rotate_radians (T angle, const my_apoint O) const
     {
         T s;
         T c;
@@ -221,11 +199,27 @@ public:
         return (my_apoint(xnew + O.x, ynew + O.y));
     }
 
-    my_apoint rotate (T angle) const
+    my_apoint rotate_radians (float angle) const
     {
         T s;
         T c;
         sincosf(angle, &s, &c);
+
+        T X = x;
+        T Y = y;
+
+        // rotate point
+        T xnew = X * c - Y * s;
+        T ynew = X * s + Y * c;
+
+        return (my_apoint(xnew, ynew));
+    }
+
+    my_apoint rotate_radians (double angle) const
+    {
+        T s;
+        T c;
+        sincos(angle, &s, &c);
 
         T X = x;
         T Y = y;
@@ -379,6 +373,7 @@ public:
 
 typedef my_apoint<int16_t> point;
 typedef my_apoint<float> fpoint;
+typedef my_apoint<double> dpoint;
 
 static inline point make_point (const int x, const int y) {
     return point(x, y);
