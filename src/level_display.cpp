@@ -13,6 +13,7 @@
 #include "my_array_bounds_check.h"
 #include "my_tile.h"
 #include "my_globals.h"
+#include "my_laser.h"
 
 void Level::display (void)
 {_
@@ -331,6 +332,7 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         display_internal_particles();
+        display_lasers();
 
         //
         // If choosing a target, lets see it

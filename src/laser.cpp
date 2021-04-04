@@ -84,27 +84,59 @@ void Level::display_lasers (void)
             auto start = p.start - p.pixel_map_at;
             auto stop = p.stop - p.pixel_map_at;
 
-            auto d = stop - start;
-            point at((d.x * dt) + start.x, (d.y * dt) + start.y);
-
-            auto tile = tile_find_mand("cursor_select_path.1");
+            //auto tile = tile_find_mand("cursor_select_path.1");
+            auto tile = tile_find_mand("player1.1");
             glBindTexture(GL_TEXTURE_2D, tile->gl_binding());
 
             auto dist = distance(start, stop);
-            auto delta = stop - start;
-            auto steps = (int)ceil(dist);
+            auto steps = (int)ceil(dist) / TILE_WIDTH;
+            fpoint diff(stop.x - start.x, stop.y - start.y);
+            fpoint step = diff / steps;
+            auto ang = diff.anglerot() * (360.0 / RAD_360);
+            ang += 90;
 
-CON("dist %f steps %d", (float)dist, steps);
+            fpoint perp = step;
+            perp = perp.rotate(90);
+
             for (int t = 0; t < steps; t++) {
-                auto mx = start.x + delta.x * t;
-                auto my = start.y + delta.y * t;
+                fpoint mid(start.x + step.x * t, start.y + step.y * t);
 
-                point tl(mx - delta.y, my - delta.x);
-                point tr(mx + delta.y, my - delta.x);
-                point bl(mx - delta.y, my + delta.x);
-                point br(mx + delta.y, my + delta.x);
+    glPushAttrib(GL_ENABLE_BIT); 
+    blit_fbo_bind(FBO_MAP_VISIBLE);
+    glLineWidth(1.0);
 
-                gl_blitquad(tl, tr, bl, br);
+    glDisable(GL_TEXTURE_2D);
+
+    gl_blitline(start.x, start.y, mid.x, mid.y);
+    gl_blitline(mid.x, mid.y, mid.x + perp.x, mid.y + perp.y);
+
+    glEnable(GL_TEXTURE_2D);
+    glcolor(WHITE);
+    glPopAttrib();
+
+
+#if 0
+static bool draw; draw = !draw;
+if (draw) {
+    glPushAttrib(GL_ENABLE_BIT); 
+    glLineStipple(1, 0xAAAA);
+    glEnable(GL_LINE_STIPPLE);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    blit_fbo_bind(FBO_MAP_VISIBLE);
+    glLineWidth(5.0);
+
+    glDisable(GL_TEXTURE_2D);
+    gl_blitline(start.x, 
+                start.y, 
+                mid.x, 
+                mid.y);
+    glEnable(GL_TEXTURE_2D);
+    glcolor(WHITE);
+    glPopAttrib();
+}
+#endif
+
             }
 
 #if 0
