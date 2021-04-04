@@ -58,7 +58,7 @@ bool Thing::laser_fire (Thingp item, Thingp target)
         return false;
     }
 
-    level->new_laser(item->id, start, end, 1000);
+    level->new_laser(item->id, start, end, 500);
 
     return true;
 }

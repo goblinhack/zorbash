@@ -15,6 +15,7 @@
 #include "my_gl.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
+#include "my_random.h"
 
 void Level::new_laser (ThingId id, point start, point stop, uint32_t dur)
 {
@@ -84,106 +85,57 @@ void Level::display_lasers (void)
             auto start = p.start - p.pixel_map_at;
             auto stop = p.stop - p.pixel_map_at;
 
-            //auto tile = tile_find_mand("cursor_select_path.1");
-            auto tile = tile_find_mand("player1.1");
-            glBindTexture(GL_TEXTURE_2D, tile->gl_binding());
+            auto tile_start = tile_find_mand("laser_green_start");
+            std::vector<Tilep> tile_mid;
+            tile_mid.push_back(tile_find_mand("laser_green_mid1"));
+            tile_mid.push_back(tile_find_mand("laser_green_mid2"));
+            tile_mid.push_back(tile_find_mand("laser_green_mid3"));
+            tile_mid.push_back(tile_find_mand("laser_green_mid4"));
+            tile_mid.push_back(tile_find_mand("laser_green_mid5"));
+            tile_mid.push_back(tile_find_mand("laser_green_mid6"));
+            auto tile_end = tile_find_mand("laser_green_end");
 
             auto dist = distance(start, stop);
             auto steps = (int)ceil(dist) / TILE_WIDTH;
-            fpoint diff(stop.x - start.x, stop.y - start.y);
-            fpoint step = diff / steps;
-            auto ang = diff.anglerot() * (360.0 / RAD_360);
-            ang += 90;
+            dpoint diff(stop.x - start.x, stop.y - start.y);
+            dpoint step = diff / steps;
+            double ninety_deg = RAD_360 / 4;
 
-            fpoint perp = step;
-            perp = perp.rotate(90);
+            dpoint perp = step;
+            perp = perp.rotate_radians(ninety_deg);
+            perp /= 2;
 
-            for (int t = 0; t < steps; t++) {
+            point p1;
+            point p2;
+            point op1;
+            point op2;
+
+            static int i; 
+            i++;
+            for (int t = 0; t <= steps; t++) {
                 fpoint mid(start.x + step.x * t, start.y + step.y * t);
 
-    glPushAttrib(GL_ENABLE_BIT); 
-    blit_fbo_bind(FBO_MAP_VISIBLE);
-    glLineWidth(1.0);
+                op1 = p1;
+                op2 = p2;
 
-    glDisable(GL_TEXTURE_2D);
+                p1.x = mid.x - perp.x;
+                p1.y = mid.y - perp.y;
+                p2.x = mid.x + perp.x;
+                p2.y = mid.y + perp.y;
 
-    gl_blitline(start.x, start.y, mid.x, mid.y);
-    gl_blitline(mid.x, mid.y, mid.x + perp.x, mid.y + perp.y);
+                if (t == 0) {
+                    continue;
+                }
 
-    glEnable(GL_TEXTURE_2D);
-    glcolor(WHITE);
-    glPopAttrib();
-
-
-#if 0
-static bool draw; draw = !draw;
-if (draw) {
-    glPushAttrib(GL_ENABLE_BIT); 
-    glLineStipple(1, 0xAAAA);
-    glEnable(GL_LINE_STIPPLE);
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    blit_fbo_bind(FBO_MAP_VISIBLE);
-    glLineWidth(5.0);
-
-    glDisable(GL_TEXTURE_2D);
-    gl_blitline(start.x, 
-                start.y, 
-                mid.x, 
-                mid.y);
-    glEnable(GL_TEXTURE_2D);
-    glcolor(WHITE);
-    glPopAttrib();
-}
-#endif
-
-            }
-
-#if 0
-            Tpp tpp = {};
-            if (p.id.id) {
-                auto t = thing_find(p.id);
-                if (t) {
-                    tpp = t->tp();
+                if (t == 1) {
+                    tile_blit(tile_start, op1, op2, p1, p2);
+                } else if (t == steps) {
+                    tile_blit(tile_end, op1, op2, p1, p2);
+                } else {
+                    tile_blit(tile_mid[(t + i) % tile_mid.size()],
+                              op1, op2, p1, p2);
                 }
             }
-
-            auto tile = p.tile;
-            float tile_pix_height = tile->pix_height;
-            float tileh = game->config.tile_pix_height;
-
-            {
-                //
-                // Not sure why but for internal lasers this ends up
-                // making jumping slimes too large
-                //
-                float tile_pix_width = tile->pix_width;
-                float tilew = game->config.tile_pix_width;
-                if (unlikely((tile_pix_width != TILE_WIDTH) ||
-                             (tile_pix_height != TILE_HEIGHT))) {
-                    auto xtiles = tile_pix_width / TILE_WIDTH;
-                    blit_tl.x -= ((xtiles-1) * tilew) / 2;
-                    blit_br.x += ((xtiles-1) * tilew) / 2;
-
-                    auto ytiles = tile_pix_height / TILE_HEIGHT;
-                    blit_tl.y -= ((ytiles-1) * tileh) / 2;
-                    blit_br.y += ((ytiles-1) * tileh) / 2;
-                }
-            }
-
-            if (unlikely(tpp &&
-                         tpp->gfx_oversized_but_sitting_on_the_ground())) {
-                float y_offset =
-                    (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
-                blit_tl.y -= y_offset;
-                blit_br.y -= y_offset;
-            }
-
-            blit_tl -= pixel_map_at - p.pixel_map_at;
-            blit_br -= pixel_map_at - p.pixel_map_at;
-
-            tile_blit_outline(tile, blit_tl, blit_br, WHITE);
-#endif
 
             return false;
         });
