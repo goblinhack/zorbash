@@ -258,7 +258,7 @@ bool Thing::spawn_fire (const std::string& what)
     return true;
 }
 
-bool Thing::spawn_under (const std::string& what)
+bool Thing::spawn_at (const std::string& what)
 {_
     log("Spawn under: %s", what.c_str());
 

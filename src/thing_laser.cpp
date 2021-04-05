@@ -60,5 +60,7 @@ bool Thing::laser_fire (Thingp item, Thingp target)
 
     level->new_laser(item->id, start, end, 500);
 
+    used(item, target, true /* remove_after_use */);
+
     return true;
 }

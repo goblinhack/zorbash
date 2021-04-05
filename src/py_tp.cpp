@@ -917,7 +917,7 @@ PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
 }
 
-PyObject *tp_spawn_under (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_spawn_at (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -951,7 +951,7 @@ PyObject *tp_spawn_under (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    t->spawn_under(std::string(what));
+    t->spawn_at(std::string(what));
 
     Py_RETURN_NONE;
 }

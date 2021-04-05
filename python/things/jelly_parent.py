@@ -3,7 +3,7 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    zx.tp_spawn_under(me, "pink_splatter")
+    zx.tp_spawn_at(me, "pink_splatter")
     zx.tp_spawn_next_to(me, "jelly_baby")
     zx.tp_spawn_next_to(me, "jelly_baby")
     zx.tp_spawn_next_to(me, "jelly_baby")

@@ -3,10 +3,10 @@ import zx
 import tp
 
 def on_idle(me, x, y):
-    zx.tp_spawn_under(me, "acid1")
+    zx.tp_spawn_at(me, "acid1")
 
 def on_death(me, x, y):
-    zx.tp_spawn_under(me, "green_splatter")
+    zx.tp_spawn_at(me, "green_splatter")
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
