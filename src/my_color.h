@@ -231,7 +231,6 @@ extern color FIREBRICK;
 extern color FLORAL_WHITE;
 extern color FLORALWHITE;
 extern color FOREST_GREEN;
-extern color FORESTGREEN;
 extern color GAINSBORO;
 extern color GHOST_WHITE;
 extern color GHOSTWHITE;
@@ -1065,6 +1064,7 @@ extern color PINK;
 extern color DARKGRAY;
 extern color GRAY40;
 extern color LIGHTBLUE;
+extern color FORESTGREEN;
 
 color color_find(const char *s);
 color color_to_mono(color a);

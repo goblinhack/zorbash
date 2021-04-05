@@ -12,21 +12,21 @@ data_tiles3_lava_tga_start_:
 .globl data_tiles3_lava_tga_end_
 data_tiles3_lava_tga_end_:
 
-.globl data_light_tga_start_
-data_light_tga_start_:
-.incbin "../data/gfx/light.tga"
-.globl data_light_tga_end_
-data_light_tga_end_:
+.globl data_tiles3_chasm_tga_start_
+data_tiles3_chasm_tga_start_:
+.incbin "../data/gfx/tiles3_chasm.tga"
+.globl data_tiles3_chasm_tga_end_
+data_tiles3_chasm_tga_end_:
 
-.globl data_ui_box1_tga_start_
-data_ui_box1_tga_start_:
-.incbin "../data/gfx/ui_box1.tga"
-.globl data_ui_box1_tga_end_
-data_ui_box1_tga_end_:
+.globl data_ui_box0_tga_start_
+data_ui_box0_tga_start_:
+.incbin "../data/gfx/ui_box0.tga"
+.globl data_ui_box0_tga_end_
+data_ui_box0_tga_end_:
 
-.globl data_ui_status_bar_tga_start_
-data_ui_status_bar_tga_start_:
-.incbin "../data/gfx/ui_status_bar.tga"
-.globl data_ui_status_bar_tga_end_
-data_ui_status_bar_tga_end_:
+.globl data_tiles3_deep_water_tga_start_
+data_tiles3_deep_water_tga_start_:
+.incbin "../data/gfx/tiles3_deep_water.tga"
+.globl data_tiles3_deep_water_tga_end_
+data_tiles3_deep_water_tga_end_:
 
