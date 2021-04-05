@@ -44,6 +44,7 @@ color CYAN;
 color LIMEGREEN;
 color LIME;
 color GOLD;
+color FORESTGREEN;
 
 #if 0
 color ALICE_BLUE;
@@ -180,7 +181,6 @@ color FIREBRICK;
 color FLORAL_WHITE;
 color FLORALWHITE;
 color FOREST_GREEN;
-color FORESTGREEN;
 color GAINSBORO;
 color GHOST_WHITE;
 color GHOSTWHITE;
@@ -226,6 +226,7 @@ void color_init1 (void)
     color_set("lightblue", &LIGHTBLUE, 173, 216, 230, 255);
     color_set("cyan", &CYAN, 0, 255, 255, 255);
     color_set("gold", &GOLD, 255, 215, 0, 255);
+    color_set("forestgreen", &FORESTGREEN, 34, 139, 34, 255);
 
 #if 0
     color_set("aliceblue", &ALICEBLUE, 240, 248, 255, 255);
@@ -352,7 +353,6 @@ void color_init1 (void)
     color_set("firebrick4", &FIREBRICK4, 139, 26, 26, 255);
     color_set("firebrick", &FIREBRICK, 178, 34, 34, 255);
     color_set("floralwhite", &FLORALWHITE, 255, 250, 240, 255);
-    color_set("forestgreen", &FORESTGREEN, 34, 139, 34, 255);
     color_set("gainsboro", &GAINSBORO, 220, 220, 220, 255);
     color_set("ghostwhite", &GHOSTWHITE, 248, 248, 255, 255);
     color_set("gold1", &GOLD1, 255, 215, 0, 255);

@@ -23,7 +23,7 @@ void Level::new_internal_particle (
                           const Tilep tile,
                           bool hflip,
                           bool make_visible_at_end)
-{
+{_
     if (id.ok()) {
         auto t = thing_find(id);
         if (t) {
@@ -46,7 +46,7 @@ void Level::new_internal_particle (
                           const Tilep tile,
                           bool hflip,
                           bool make_visible_at_end)
-{
+{_
     uint32_t now = time_update_time_milli();
     new_internal_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
@@ -189,7 +189,7 @@ void Level::new_external_particle (
                           point start, point stop, isize sz, uint32_t dur,
                           const Tilep tile, bool hflip,
                           bool make_visible_at_end)
-{
+{_
     //
     // We hit here for player jumps
     //
@@ -213,7 +213,7 @@ void Level::new_external_particle (
 void Level::new_external_particle (point start, point stop, isize sz, uint32_t dur,
                                    const Tilep tile, bool hflip,
                                    bool make_visible_at_end)
-{
+{_
     uint32_t now = time_update_time_milli();
     new_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
