@@ -154,18 +154,18 @@ void Level::display_lasers (void)
 
             auto dist = distance(start, stop);
             auto steps = (int)ceil(dist) / TILE_WIDTH;
-            dpoint diff(stop.x - start.x, stop.y - start.y);
-            dpoint step = diff / steps;
-            double ninety_deg = RAD_360 / 4;
+            fpoint diff(stop.x - start.x, stop.y - start.y);
+            fpoint step = diff / steps;
+            float ninety_deg = RAD_360 / 4;
 
-            dpoint perp = step;
+            fpoint perp = step;
             perp = perp.rotate_radians(ninety_deg);
             perp /= 2;
 
             point p1;
             point p2;
-            point op1;
-            point op2;
+            point old_p1;
+            point old_p2;
 
             int frame = (int)((float)Laser::max_frames * dt);
             if (frame >= Laser::max_frames) {
@@ -176,8 +176,8 @@ void Level::display_lasers (void)
                 fpoint mid(start.x + step.x * animstep, 
                            start.y + step.y * animstep);
 
-                op1 = p1;
-                op2 = p2;
+                old_p1 = p1;
+                old_p2 = p2;
 
                 p1.x = mid.x - perp.x;
                 p1.y = mid.y - perp.y;
@@ -190,13 +190,13 @@ void Level::display_lasers (void)
 
                 if (animstep == 1) {
                     tile_blit(get(p.tiles, frame, 0),
-                              op1, p1, op2, p2);
+                              old_p1, p1, old_p2, p2);
                 } else if (animstep == steps) {
                     tile_blit(get(p.tiles, frame, Laser::max_frames - 1), 
-                              op1, p1, op2, p2);
+                              old_p1, p1, old_p2, p2);
                 } else {
                     tile_blit(get(p.tiles, frame, animstep), 
-                              op1, p1, op2, p2);
+                              old_p1, p1, old_p2, p2);
                 }
             }
 

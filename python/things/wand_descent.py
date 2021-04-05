@@ -2,6 +2,8 @@ import zx
 import tp
 
 def on_use(me, what, target, x, y):
+    zx.topcon("hello")
+    zx.tp_spawn_at(target, "explosion1")
     zx.tp_spawn_radius_range(me, what, "wand_descent_effect")
 
 def tp_init(name, text_name, short_text_name):

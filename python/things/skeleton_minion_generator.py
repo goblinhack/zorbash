@@ -5,7 +5,7 @@ def on_idle_dice(me, x, y):
     zx.tp_spawn_next_to(me, "skeleton_minion")
 
 def on_death(me, x, y):
-    zx.tp_spawn_under(me, "generator_explosion")
+    zx.tp_spawn_at(me, "generator_explosion")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
