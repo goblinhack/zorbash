@@ -20,6 +20,8 @@ void Game::change_state (int new_state)
         return;
     }
 
+    auto old_state = state;
+
     switch (new_state) {
         case STATE_NORMAL:
             LOG("State changed to STATE_NORMAL");
@@ -49,10 +51,27 @@ void Game::change_state (int new_state)
     request_to_laser_item = nullptr;
     state = new_state;
 
-    if (level) {
-        level->cursor_recreate();
-        level->cursor->cursor_path_stop();
+    switch (old_state) {
+        case STATE_NORMAL:
+        case STATE_MOVING_ITEMS:     // Currently managing inventory
+        case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+            if (level) {
+                level->cursor_recreate();
+                level->cursor->cursor_path_stop();
+            }
+            break;
+        case STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
+            //
+            // Don't create the cursor right after selecting. Wait until
+            // we move again.
+            //
+            if (level) {
+                level->cursor_recreate();
+                level->cursor_path_clear();
+            }
+            break;
     }
+
 
     wid_inventory_init();
 }
