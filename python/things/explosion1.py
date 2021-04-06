@@ -14,7 +14,7 @@ def tp_init(name):
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_light_color("yellow")
     x.set_light_strength(4)
-    x.set_z_depth(zx.MAP_DEPTH_EXPLOSION)
+    x.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MAJOR)
     x.set_z_prio(zx.MAP_PRIO_INFRONT)
 
     x.set_tile(tile=name + ".1", delay_ms=100)
