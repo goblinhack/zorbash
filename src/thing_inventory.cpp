@@ -443,6 +443,26 @@ _
     return count;
 }
 
+int Thing::item_count (Tpp tp)
+{_
+    auto count = 0;
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (!o) {
+            continue;
+        }
+
+        if (o->tp() == tp) {
+            count++;
+            if (o->is_item_not_stackable()) {
+                count = 1;
+            }
+        }
+    }
+
+    return count;
+}
+
 Thingp Level::inventory_get (const uint32_t slot)
 {_
     log("Inventory get slot %d", slot);

@@ -590,6 +590,7 @@ public:
     int incr_tick_rate_tenths(int);
     int incr_tick_rate_tenths(void);
     int inventory_id_slot_count(const uint32_t slot);
+    int item_count(Tpp item);
     int is_able_to_change_levels(void) const;
     int is_able_to_fall(void) const;
     int is_able_to_see_through_doors(void) const;
