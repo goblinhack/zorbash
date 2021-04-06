@@ -18,6 +18,7 @@ std::default_random_engine rng;
 #include "my_main.h"
 #include "my_game.h"
 #include "my_music.h"
+#include "my_sound.h"
 #include "my_thing_template.h"
 #include "my_python.h"
 #include "my_gl.h"
@@ -118,6 +119,9 @@ void quit (void)
 
     LOG("FINI: music_fini");
     music_fini();
+
+    LOG("FINI: sound_fini");
+    sound_fini();
 
     if (EXEC_FULL_PATH_AND_NAME) {
         myfree(EXEC_FULL_PATH_AND_NAME);
@@ -725,6 +729,12 @@ int32_t main (int32_t argc, char *argv[])
     CON("INIT: Load music");
     if (!music_init()) {
         ERR("Music init");
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    CON("INIT: Load sound");
+    if (!sound_init()) {
+        ERR("sound init");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

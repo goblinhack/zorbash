@@ -61,6 +61,10 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
 
     log("Used %s", what->to_string().c_str());
 
+    //
+    // Remove the item from the inventory, possibly throwing it at the
+    // target as an animation
+    //
     if (is_player()) {
         //
         // Last charge used up.

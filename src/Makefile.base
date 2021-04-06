@@ -103,6 +103,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/map.o                         \
     $(OBJDIR)/minilzo.o                     \
     $(OBJDIR)/music.o                       \
+    $(OBJDIR)/sound.o                       \
     $(OBJDIR)/particle.o                    \
     $(OBJDIR)/pcg_basic.o                   \
     $(OBJDIR)/player.o                      \
