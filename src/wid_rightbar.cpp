@@ -424,7 +424,8 @@ static void wid_rightbar_create (void)
                     auto tile = tile_find_mand("item_count_N");
                     wid_set_fg3_tile(w, tile);
                 } else if (count > 1) {
-                    auto tile = tile_find_mand("item_count_" + std::to_string(count));
+                    auto tile = tile_find_mand(
+                                    "item_count_" + std::to_string(count));
                     wid_set_fg3_tile(w, tile);
                 }
 
