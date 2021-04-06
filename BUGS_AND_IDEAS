@@ -2,11 +2,12 @@
 Bugs
 ----
 
+sounds
 more corridors
 more walls
 more rooms
-sounds
 make generator glow fade in and out ?
+if moving diagonally to a tile sourrounded by chasms, shouldn't attack, should auto jump
 
 Sound
 -----
@@ -30,7 +31,6 @@ Skills
 Poison
 ------
 - holy water
-- look up turn based combat
 - add poison notify on screen from spider?
 - half damage from poison constitution save
 - spider that throws web?
