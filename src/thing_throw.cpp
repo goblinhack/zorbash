@@ -8,34 +8,34 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Thing::throw_item_choose_target (Thingp what)
+bool Thing::throw_item_choose_target (Thingp item)
 {_
-    log("Trying to use: %s", what->to_string().c_str());
+    log("Trying to use: %s", item->to_string().c_str());
 
-    if (!what->is_throwable()) {
+    if (!item->is_throwable()) {
         if (is_player()) {
-            TOPCON("I don't know how to throw %s.", what->text_the().c_str());
+            TOPCON("I don't know how to throw %s.", item->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
         }
         return false;
     }
 
-    if (!target_select(what)) {
+    if (!target_select(item)) {
         return false;
     }
 
-    game->request_to_throw_item = what;
+    game->request_to_throw_item = item;
 
-    return target_select(what);
+    return target_select(item);
 }
 
-void Thing::throw_at (Thingp what, Thingp target)
+void Thing::throw_at (Thingp item, Thingp target)
 {_
-    if (!what) {
-        what = game->request_to_throw_item;
+    if (!item) {
+        item = game->request_to_throw_item;
     }
 
-    if (!what) {
+    if (!item) {
         return;
     }
 
@@ -43,32 +43,32 @@ void Thing::throw_at (Thingp what, Thingp target)
         get_throw_distance()) {
 
         if (is_player()) {
-            TOPCON("You cannot throw %s that far.", what->text_the().c_str());
+            TOPCON("You cannot throw %s that far.", item->text_the().c_str());
         }
         return;
     }
 
     if (is_player()) {
-        TOPCON("You throw %s.", what->text_the().c_str());
+        TOPCON("You throw %s.", item->text_the().c_str());
     }
 
-    log("Thrown %s", what->to_string().c_str());
-    what->move_to_immediately(target->mid_at);
-    what->visible();
+    log("Thrown %s", item->to_string().c_str());
+    item->move_to_immediately(target->mid_at);
+    item->visible();
 
     //
     // Potions for example are used when thrown. Chocolate frogs, no.
     //
     if (level->is_lava(target->mid_at.x, target->mid_at.y) ||
         level->is_chasm(target->mid_at.x, target->mid_at.y)) {
-        drop(what, target);
+        drop(item, target);
 
-        what->location_check();
+        item->location_check();
     } else {
-        if (what->is_used_when_thrown()) {
-            used(what, target, true /* remove_after_use */);
+        if (item->is_used_when_thrown()) {
+            used(item, target, true /* remove_after_use */);
         } else {
-            drop(what, target);
+            drop(item, target);
         }
     }
 
