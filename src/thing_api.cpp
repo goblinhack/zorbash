@@ -577,7 +577,7 @@ int Thing::is_wand(void) const
     return (tp()->is_wand());
 }
 
-int Thing::charge_count(void) const
+int Thing::get_initial_charge_count(void) const
 {_
     return (tp()->charge_count());
 }

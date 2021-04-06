@@ -392,7 +392,7 @@ static void wid_rightbar_create (void)
                 //
                 if (i == game->inventory_highlight_slot) {
                     if (game->state == Game::STATE_CHOOSING_TARGET) {
-                        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+                        wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
                     } else {
                         wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
                     }
