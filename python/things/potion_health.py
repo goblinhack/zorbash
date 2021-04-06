@@ -5,7 +5,7 @@ def on_use(owner, potion, target, x, y):
     health = zx.thing_get_health(owner)
     new_health = int((zx.thing_get_health_max(owner) / 100.0) * 80)
     if new_health > health:
-        zx.tp_spawn_radius_range(owner, potion, "potion_health_effect")
+        zx.tp_spawn_radius_range(owner, potion, target, "potion_health_effect")
         zx.thing_set_health(owner, new_health)
         zx.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
     else:

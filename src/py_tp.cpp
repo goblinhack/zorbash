@@ -823,18 +823,20 @@ PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywd
     char *what = nullptr;
     uint32_t id = 0;
     uint32_t parent_id = 0;
+    uint32_t target_id = 0;
     uint32_t radius_min = 0;
     uint32_t radius_max = 0;
 
     static char *kwlist[] = {(char*) "id", 
                              (char*) "parent_id", 
+                             (char*) "target_id", 
                              (char*) "what", 
                              (char*) "min", 
                              (char*) "max", 
                              0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "IIs|ii", kwlist, &id, 
-                                     &parent_id, &what, 
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, 
+                                     &parent_id, &target_id, &what, 
                                      &radius_min, &radius_max)) {
         Py_RETURN_NONE;
     }
@@ -846,6 +848,11 @@ PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywd
 
     if (!parent_id) {
         ERR("%s, missing 'parent_id'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (!target_id) {
+        ERR("%s, missing 'target_id'", __FUNCTION__);
         Py_RETURN_NONE;
     }
 
@@ -863,17 +870,24 @@ PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywd
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s, cannot find 'me' thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
     auto parent = level->thing_find(ThingId(parent_id));
     if (!parent) {
-        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s, cannot find parent thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
-    t->spawn_radius_range(parent, std::string(what), radius_min, radius_max);
+    auto target = level->thing_find(ThingId(target_id));
+    if (!target) {
+        ERR("%s, cannot find target thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    t->spawn_radius_range(parent, target,
+                          std::string(what), radius_min, radius_max);
 
     Py_RETURN_NONE;
 }
@@ -952,6 +966,45 @@ PyObject *tp_spawn_at (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     t->spawn_at(std::string(what));
+
+    Py_RETURN_NONE;
+}
+
+PyObject *tp_spawn_at_if_possible (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *what = nullptr;
+    uint32_t id = 0;
+
+    static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+        Py_RETURN_NONE;
+    }
+
+    if (!id) {
+        ERR("%s, missing 'id'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (!what) {
+        ERR("%s, missing 'what'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
+
+    auto level = game->level;
+    if (!level) {
+        Py_RETURN_NONE;
+    }
+
+    auto t = level->thing_find(ThingId(id));
+    if (!t) {
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    t->spawn_at_if_possible(std::string(what));
 
     Py_RETURN_NONE;
 }

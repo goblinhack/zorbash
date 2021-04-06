@@ -2,15 +2,16 @@ import zx
 import tp
 
 def on_use(me, what, target, x, y):
-    zx.topcon("hello")
     zx.tp_spawn_at(target, "explosion1")
-    zx.tp_spawn_radius_range(me, what, "wand_descent_effect")
+    zx.tp_spawn_radius_range(me, what, target, "wand_descent_effect")
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_avoids_fire(100)
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
+    x.set_blast_max_radius(4)
+    x.set_blast_min_radius(0)
     x.set_charge_count(3)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)

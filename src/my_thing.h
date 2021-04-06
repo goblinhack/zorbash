@@ -285,8 +285,9 @@ public:
     bool spawn_fire(const std::string& what);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
-    bool spawn_radius_range(Thingp parent, const std::string& what, uint32_t radius_min, uint32_t radius_max);
+    bool spawn_radius_range(Thingp parent, Thingp target, const std::string& what, uint32_t radius_min, uint32_t radius_max);
     bool spawn_at(const std::string& what);
+    bool spawn_at_if_possible(const std::string& what);
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);
     bool throw_item_choose_target(Thingp item);
