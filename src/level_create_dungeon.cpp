@@ -267,8 +267,15 @@ bool Level::create_dungeon (point3d at, int seed)
                             t->carry(p);
                         }
 
-                        auto W = thing_new("wand_descent", fpoint(x, y));
-                        t->carry(W);
+                        {
+                            auto W = thing_new("wand_descent", fpoint(x, y));
+                            t->carry(W);
+                        }
+
+                        {
+                            auto W = thing_new("wand_descent", fpoint(x, y));
+                            t->carry(W);
+                        }
 
                         auto s = thing_new("skill_devoted_thrust", fpoint(x, y));
                         t->skill_add(s);

@@ -41,14 +41,20 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
 
     auto existing_owner = what->get_top_owner();
     if (existing_owner != this) {
-        err("Attempt to use %s which is not carried", what->to_string().c_str());
+        err("Attempt to use %s which is not carried", 
+            what->to_string().c_str());
         return;
     }
 
+    //
+    // Decrement the charge count and do not remove, if it has charges
+    //
     if (what->get_charge_count()) {
         what->decr_charge_count();
         if (what->get_charge_count()) {
-            log("Used %s (has %d charges left)", what->to_string().c_str(), what->get_charge_count());
+            log("Used %s (has %d charges left)", 
+                what->to_string().c_str(), what->get_charge_count());
+            game->request_remake_inventory = true;
             return;
         }
     }
@@ -59,7 +65,7 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
         //
         // Last charge used up.
         //
-        if (what->charge_count()) {
+        if (what->get_charge_count()) {
             inventory_id_remove(what);
         } else {
             if (target) {

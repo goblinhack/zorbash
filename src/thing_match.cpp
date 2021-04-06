@@ -316,9 +316,6 @@ bool Thing::match (const std::string& what)
     if (is_wand() && (what == "is_wand")) {
         return true;
     }
-    if (charge_count() && (what == "charge_count")) {
-        return true;
-    }
     if (minion_leash_distance() && (what == "minion_leash_distance")) {
         return true;
     }

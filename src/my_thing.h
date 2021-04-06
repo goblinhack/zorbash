@@ -704,7 +704,7 @@ public:
     int range_max(void) const;
     int is_laser_target_select_automatically_when_chosen(void) const;
     int is_wand(void) const;
-    int charge_count(void) const;
+    int get_initial_charge_count(void) const;
     int minion_leash_distance(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
