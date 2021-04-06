@@ -391,13 +391,9 @@ static void wid_rightbar_create (void)
                 // If choosing a target, highlight the item
                 //
                 if (i == game->inventory_highlight_slot) {
-                    if (game->state == Game::STATE_CHOOSING_TARGET) {
-                        wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
-                    } else {
-                        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-                    }
+                    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
                 } else {
-                    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
+                    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
                 }
 
                 //
@@ -510,13 +506,9 @@ static void wid_rightbar_create (void)
                 // If choosing a target, highlight the item
                 //
                 if (i == game->skillbox_highlight_slot) {
-                    if (game->state == Game::STATE_CHOOSING_TARGET) {
-                        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
-                    } else {
-                        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-                    }
+                    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
                 } else {
-                    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
+                    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
                 }
 
                 wid_set_on_mouse_over_b(w, wid_skillbox_mouse_over_b);
