@@ -18,6 +18,7 @@ std::default_random_engine rng;
 #include "my_main.h"
 #include "my_game.h"
 #include "my_music.h"
+#include "my_audio.h"
 #include "my_sound.h"
 #include "my_thing_template.h"
 #include "my_python.h"
@@ -116,6 +117,9 @@ void quit (void)
 
     LOG("FINI: color_fini");
     color_fini();
+
+    LOG("FINI: audio_fini");
+    audio_fini();
 
     LOG("FINI: music_fini");
     music_fini();
@@ -726,6 +730,12 @@ int32_t main (int32_t argc, char *argv[])
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+    CON("INIT: Init audio");
+    if (!audio_init()) {
+        ERR("Audio init");
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     CON("INIT: Load music");
     if (!music_init()) {
         ERR("Music init");
@@ -734,7 +744,7 @@ int32_t main (int32_t argc, char *argv[])
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     CON("INIT: Load sound");
     if (!sound_init()) {
-        ERR("sound init");
+        ERR("Sound init");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

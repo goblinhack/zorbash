@@ -5,6 +5,7 @@ OBJDIR=.o
 GAME_OBJECTS=				    \
     $(OBJDIR)/ascii.o                       \
     $(OBJDIR)/ascii_box.o                   \
+    $(OBJDIR)/audio.o                       \
     $(OBJDIR)/charmap.o                     \
     $(OBJDIR)/color.o                       \
     $(OBJDIR)/color1.o                      \
@@ -80,9 +81,9 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_display_lava.o          \
     $(OBJDIR)/level_display_minimap.o       \
     $(OBJDIR)/level_display_shake.o         \
+    $(OBJDIR)/level_display_target.o        \
     $(OBJDIR)/level_display_wall.o          \
     $(OBJDIR)/level_display_water.o         \
-    $(OBJDIR)/level_display_target.o        \
     $(OBJDIR)/level_fini.o                  \
     $(OBJDIR)/level_gc.o                    \
     $(OBJDIR)/level_heatmap.o               \
@@ -103,7 +104,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/map.o                         \
     $(OBJDIR)/minilzo.o                     \
     $(OBJDIR)/music.o                       \
-    $(OBJDIR)/sound.o                       \
     $(OBJDIR)/particle.o                    \
     $(OBJDIR)/pcg_basic.o                   \
     $(OBJDIR)/player.o                      \
@@ -136,6 +136,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/sdl_screenshot.o              \
     $(OBJDIR)/signal.o                      \
     $(OBJDIR)/slre.o                        \
+    $(OBJDIR)/sound.o                       \
     $(OBJDIR)/sprintf.o                     \
     $(OBJDIR)/stb_image.o                   \
     $(OBJDIR)/string.o                      \
@@ -191,6 +192,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_jump.o                  \
     $(OBJDIR)/thing_kill.o                  \
     $(OBJDIR)/thing_kill_if.o               \
+    $(OBJDIR)/thing_laser.o                 \
     $(OBJDIR)/thing_lava.o                  \
     $(OBJDIR)/thing_level_change.o          \
     $(OBJDIR)/thing_level_enter.o           \
@@ -223,14 +225,13 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_stamina.o               \
     $(OBJDIR)/thing_steal.o                 \
     $(OBJDIR)/thing_string.o                \
+    $(OBJDIR)/thing_target.o                \
     $(OBJDIR)/thing_template.o              \
     $(OBJDIR)/thing_template_api.o          \
     $(OBJDIR)/thing_template_random.o       \
     $(OBJDIR)/thing_terrain.o               \
     $(OBJDIR)/thing_text.o                  \
     $(OBJDIR)/thing_throw.o                 \
-    $(OBJDIR)/thing_laser.o                 \
-    $(OBJDIR)/thing_target.o                \
     $(OBJDIR)/thing_tick.o                  \
     $(OBJDIR)/thing_tile.o                  \
     $(OBJDIR)/thing_torch.o                 \

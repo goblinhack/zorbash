@@ -10,10 +10,13 @@
 #include "my_array_bounds_check.h"
 #include "my_thing.h"
 #include "my_ptrcheck.h"
+#include "my_sound.h"
 
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
+    sound_play("click");
+
     //
     // If over the minimap allows clicks to move us
     //
