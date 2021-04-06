@@ -34,9 +34,9 @@ static std::map<std::string, std::shared_ptr< class music > > all_music;
 
 static std::string music_current;
 
-uint8_t music_init_done;
+bool music_init_done;
 
-uint8_t music_init (void)
+bool music_init (void)
 {_
     return (true);
 }
@@ -52,8 +52,6 @@ void music_fini (void)
             iter = all_music.erase(iter);
         }
     }
-
-    Mix_CloseAudio();
 }
 
 bool music_load (const std::string &file, const std::string &name_alias)
@@ -116,30 +114,13 @@ void music_update_volume (void)
     SDL_ClearError();
 }
 
-bool music_play (const std::string &file, const std::string &alias, uint32_t rate)
+bool music_play (const std::string &file, const std::string &alias,
+                 uint32_t rate)
 {_
     if (file == music_current) {
         return true;
     }
     music_current = file;
-
-    int audio_format = MIX_DEFAULT_FORMAT;
-    int audio_channels = 2;
-    int audio_buffers = 4096;
-
-    if (!music_init_done) {
-        if (Mix_OpenAudio(rate,
-                          audio_format,
-                          audio_channels,
-                          audio_buffers) != 0) {
-
-            ERR("Mix_OpenAudio fail: %s %s", Mix_GetError(), SDL_GetError());
-            SDL_ClearError();
-            return false;
-        }
-
-        music_init_done = true;
-    }
 
     if (!music_load(file, alias)) {
         return false;
@@ -147,13 +128,6 @@ bool music_play (const std::string &file, const std::string &alias, uint32_t rat
 
     music_update_volume();
 
-#if 0
-    static int sound_loaded;
-    if (!sound_loaded) {
-        sound_loaded = true;
-        sound_load_all();
-    }
-#endif
     auto music = all_music.find(alias);
 
     if (Mix_FadeInMusicPos(music->second->m, -1, 2000, 0) == -1) {

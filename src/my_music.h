@@ -14,7 +14,7 @@
 class music;
 using musicp = class music *;
 
-uint8_t music_init(void);
+bool music_init(void);
 void music_fini(void);
 bool music_load(const std::string &file, std::string &name);
 bool music_find(const std::string &name);
