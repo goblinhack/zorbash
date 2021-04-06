@@ -3,6 +3,16 @@
 if [[ ! -d data/gfx ]]; then
     echo $0: Need untar graphics tarball
     tar zxf data/gfx.tgz
+    DONE=1
+fi
+
+if [[ ! -d data/sounds ]]; then
+    echo $0: Need untar sounds tarball
+    tar zxf data/sounds.tgz
+    DONE=1
+fi
+
+if [[ $DONE -eq 1 ]]; then
     exit 0
 fi
 
@@ -20,13 +30,38 @@ then
     )
 fi
 
-if [[ ! -d data ]];
+COUNT=$(find data -newer data/sounds.tgz -type f | wc -l)
+if [[ $COUNT -gt 0 ]];
+then 
+    echo $0: Need to retar sounds tarball due to updates
+    (
+        tar zcvf data/sounds.tgz data/sounds
+	if [[ $? -ne 0 ]];
+	then
+	    echo $0: Failed to zip data/sonuds.tgz
+	    exit 1
+	fi
+    )
+fi
+
+if [[ ! -d data/gfx ]];
 then
     echo $0: Unzip graphics
     tar zxf data/gfx.tgz
     if [[ $? -ne 0 ]];
     then
         echo $0: Failed to unzip data/gfx.tgz
+        exit 1
+    fi
+fi
+
+if [[ ! -d data/sounds ]];
+then
+    echo $0: Unzip sounds
+    tar zxf data/sounds.tgz
+    if [[ $? -ne 0 ]];
+    then
+        echo $0: Failed to unzip data/sounds.tgz
         exit 1
     fi
 fi

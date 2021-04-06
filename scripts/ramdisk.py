@@ -29,6 +29,12 @@ try:
                 print("{} is newer".format(filepath))
                 newer = True
                 break
+
+        for filepath in root.rglob(r'data/sounds/*/*/.wav'):
+            if os.path.getctime("zorbash") < os.path.getctime(filepath):
+                print("{} is newer".format(filepath))
+                newer = True
+                break
         #
         # If nothing is newer than the target, the ramdisk is up to date
         #
@@ -44,6 +50,10 @@ files = collections.defaultdict(list)
 # For each .tga convert it to assembly to be included in the build
 #
 for filepath in root.rglob(r'data/gfx/*.tga'):
+    files[filepath.parent].append(filepath.name)
+    number_of_files_to_add_to_ramdisk += 1
+
+for filepath in root.rglob(r'data/sounds/*/*.wav'):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
 
