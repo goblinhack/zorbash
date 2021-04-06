@@ -30,3 +30,75 @@ data_ui_box5_tga_start_:
 .globl data_ui_box5_tga_end_
 data_ui_box5_tga_end_:
 
+.globl data_sorcery_wav_start_
+data_sorcery_wav_start_:
+.incbin "../data/sounds/abilities/sorcery.wav"
+.globl data_sorcery_wav_end_
+data_sorcery_wav_end_:
+
+.globl data_fire_b_wav_start_
+data_fire_b_wav_start_:
+.incbin "../data/sounds/abilities/fire_b.wav"
+.globl data_fire_b_wav_end_
+data_fire_b_wav_end_:
+
+.globl data_attack_a_wav_start_
+data_attack_a_wav_start_:
+.incbin "../data/sounds/abilities/attack_a.wav"
+.globl data_attack_a_wav_end_
+data_attack_a_wav_end_:
+
+.globl data_beetle_wav_start_
+data_beetle_wav_start_:
+.incbin "../data/sounds/creatures/beetle.wav"
+.globl data_beetle_wav_end_
+data_beetle_wav_end_:
+
+.globl data_impact_b_wav_start_
+data_impact_b_wav_start_:
+.incbin "../data/sounds/impacts/impact_b.wav"
+.globl data_impact_b_wav_end_
+data_impact_b_wav_end_:
+
+.globl data_pit_trap_damage_wav_start_
+data_pit_trap_damage_wav_start_:
+.incbin "../data/sounds/impacts/pit_trap_damage.wav"
+.globl data_pit_trap_damage_wav_end_
+data_pit_trap_damage_wav_end_:
+
+.globl data_paper_wav_start_
+data_paper_wav_start_:
+.incbin "../data/sounds/interface/paper.wav"
+.globl data_paper_wav_end_
+data_paper_wav_end_:
+
+.globl data_error_wav_start_
+data_error_wav_start_:
+.incbin "../data/sounds/interface/error.wav"
+.globl data_error_wav_end_
+data_error_wav_end_:
+
+.globl data_swerve_wav_start_
+data_swerve_wav_start_:
+.incbin "../data/sounds/misc/swerve.wav"
+.globl data_swerve_wav_end_
+data_swerve_wav_end_:
+
+.globl data_whistle_wav_start_
+data_whistle_wav_start_:
+.incbin "../data/sounds/misc/whistle.wav"
+.globl data_whistle_wav_end_
+data_whistle_wav_end_:
+
+.globl data_close_wav_start_
+data_close_wav_start_:
+.incbin "../data/sounds/misc/close.wav"
+.globl data_close_wav_end_
+data_close_wav_end_:
+
+.globl data_ping_wav_start_
+data_ping_wav_start_:
+.incbin "../data/sounds/misc/ping.wav"
+.globl data_ping_wav_end_
+data_ping_wav_end_:
+

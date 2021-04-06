@@ -541,4 +541,1390 @@ void ramdisk_init (void)
         ramdisk_data["data/gfx/ui_box4.tga"] = r;
     }
 
+    {
+        extern unsigned char *data_jump_a_wav_start_ asm("data_jump_a_wav_start_");
+        extern unsigned char *data_jump_a_wav_end_ asm("data_jump_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_jump_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_jump_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/jump_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_disarm_single_wav_start_ asm("data_disarm_single_wav_start_");
+        extern unsigned char *data_disarm_single_wav_end_ asm("data_disarm_single_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_disarm_single_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_disarm_single_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/disarm_single.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_jump_b_wav_start_ asm("data_jump_b_wav_start_");
+        extern unsigned char *data_jump_b_wav_end_ asm("data_jump_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_jump_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_jump_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/jump_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_disarm_multi_b_wav_start_ asm("data_disarm_multi_b_wav_start_");
+        extern unsigned char *data_disarm_multi_b_wav_end_ asm("data_disarm_multi_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_disarm_multi_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_disarm_multi_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/disarm_multi_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_heal_b_wav_start_ asm("data_heal_b_wav_start_");
+        extern unsigned char *data_heal_b_wav_end_ asm("data_heal_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_heal_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_heal_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/heal_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_laser_a_wav_start_ asm("data_laser_a_wav_start_");
+        extern unsigned char *data_laser_a_wav_end_ asm("data_laser_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_laser_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_laser_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/laser_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_disarm_success_wav_start_ asm("data_disarm_success_wav_start_");
+        extern unsigned char *data_disarm_success_wav_end_ asm("data_disarm_success_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_disarm_success_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_disarm_success_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/disarm_success.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_sorcery_wav_start_ asm("data_sorcery_wav_start_");
+        extern unsigned char *data_sorcery_wav_end_ asm("data_sorcery_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_sorcery_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_sorcery_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/sorcery.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_disarm_multi_a_wav_start_ asm("data_disarm_multi_a_wav_start_");
+        extern unsigned char *data_disarm_multi_a_wav_end_ asm("data_disarm_multi_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_disarm_multi_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_disarm_multi_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/disarm_multi_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_heal_a_wav_start_ asm("data_heal_a_wav_start_");
+        extern unsigned char *data_heal_a_wav_end_ asm("data_heal_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_heal_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_heal_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/heal_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_laser_b_wav_start_ asm("data_laser_b_wav_start_");
+        extern unsigned char *data_laser_b_wav_end_ asm("data_laser_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_laser_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_laser_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/laser_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_blaster_wav_start_ asm("data_blaster_wav_start_");
+        extern unsigned char *data_blaster_wav_end_ asm("data_blaster_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_blaster_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_blaster_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/blaster.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_woosh_a_wav_start_ asm("data_woosh_a_wav_start_");
+        extern unsigned char *data_woosh_a_wav_end_ asm("data_woosh_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_woosh_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_woosh_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/woosh_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_bazooka_wav_start_ asm("data_bazooka_wav_start_");
+        extern unsigned char *data_bazooka_wav_end_ asm("data_bazooka_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_bazooka_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_bazooka_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/bazooka.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_swing_wav_start_ asm("data_swing_wav_start_");
+        extern unsigned char *data_swing_wav_end_ asm("data_swing_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_swing_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_swing_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/swing.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_fire_a_wav_start_ asm("data_fire_a_wav_start_");
+        extern unsigned char *data_fire_a_wav_end_ asm("data_fire_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_fire_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_fire_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/fire_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_woosh_b_wav_start_ asm("data_woosh_b_wav_start_");
+        extern unsigned char *data_woosh_b_wav_end_ asm("data_woosh_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_woosh_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_woosh_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/woosh_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_fire_b_wav_start_ asm("data_fire_b_wav_start_");
+        extern unsigned char *data_fire_b_wav_end_ asm("data_fire_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_fire_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_fire_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/fire_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_fire_c_wav_start_ asm("data_fire_c_wav_start_");
+        extern unsigned char *data_fire_c_wav_end_ asm("data_fire_c_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_fire_c_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_fire_c_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/fire_c.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_special_b_wav_start_ asm("data_special_b_wav_start_");
+        extern unsigned char *data_special_b_wav_end_ asm("data_special_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_special_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_special_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/special_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_spell_a_wav_start_ asm("data_spell_a_wav_start_");
+        extern unsigned char *data_spell_a_wav_end_ asm("data_spell_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_spell_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_spell_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/spell_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_teleport_wav_start_ asm("data_teleport_wav_start_");
+        extern unsigned char *data_teleport_wav_end_ asm("data_teleport_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_teleport_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_teleport_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/teleport.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_special_a_wav_start_ asm("data_special_a_wav_start_");
+        extern unsigned char *data_special_a_wav_end_ asm("data_special_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_special_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_special_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/special_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_spell_b_wav_start_ asm("data_spell_b_wav_start_");
+        extern unsigned char *data_spell_b_wav_end_ asm("data_spell_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_spell_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_spell_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/spell_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_shoot_b_wav_start_ asm("data_shoot_b_wav_start_");
+        extern unsigned char *data_shoot_b_wav_end_ asm("data_shoot_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_shoot_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_shoot_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/shoot_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_shoot_a_wav_start_ asm("data_shoot_a_wav_start_");
+        extern unsigned char *data_shoot_a_wav_end_ asm("data_shoot_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_shoot_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_shoot_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/shoot_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_reload_wav_start_ asm("data_reload_wav_start_");
+        extern unsigned char *data_reload_wav_end_ asm("data_reload_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_reload_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_reload_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/reload.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_attack_a_wav_start_ asm("data_attack_a_wav_start_");
+        extern unsigned char *data_attack_a_wav_end_ asm("data_attack_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_attack_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_attack_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/attack_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_attack_b_wav_start_ asm("data_attack_b_wav_start_");
+        extern unsigned char *data_attack_b_wav_end_ asm("data_attack_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_attack_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_attack_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/attack_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_shotgun_wav_start_ asm("data_shotgun_wav_start_");
+        extern unsigned char *data_shotgun_wav_end_ asm("data_shotgun_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_shotgun_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_shotgun_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/shotgun.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_lightning_a_wav_start_ asm("data_lightning_a_wav_start_");
+        extern unsigned char *data_lightning_a_wav_end_ asm("data_lightning_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_lightning_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_lightning_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/lightning_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_summon_wav_start_ asm("data_summon_wav_start_");
+        extern unsigned char *data_summon_wav_end_ asm("data_summon_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_summon_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_summon_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/summon.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_lightning_b_wav_start_ asm("data_lightning_b_wav_start_");
+        extern unsigned char *data_lightning_b_wav_end_ asm("data_lightning_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_lightning_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_lightning_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/lightning_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_telepathy_wav_start_ asm("data_telepathy_wav_start_");
+        extern unsigned char *data_telepathy_wav_end_ asm("data_telepathy_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_telepathy_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_telepathy_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/abilities/telepathy.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_bird_wav_start_ asm("data_bird_wav_start_");
+        extern unsigned char *data_bird_wav_end_ asm("data_bird_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_bird_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_bird_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/bird.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_wings_wav_start_ asm("data_wings_wav_start_");
+        extern unsigned char *data_wings_wav_end_ asm("data_wings_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_wings_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_wings_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/wings.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_skeleton_wav_start_ asm("data_skeleton_wav_start_");
+        extern unsigned char *data_skeleton_wav_end_ asm("data_skeleton_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_skeleton_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_skeleton_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/skeleton.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_beetle_wav_start_ asm("data_beetle_wav_start_");
+        extern unsigned char *data_beetle_wav_end_ asm("data_beetle_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_beetle_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_beetle_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/beetle.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_mystical_wav_start_ asm("data_mystical_wav_start_");
+        extern unsigned char *data_mystical_wav_end_ asm("data_mystical_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_mystical_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_mystical_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/mystical.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_claw_wav_start_ asm("data_claw_wav_start_");
+        extern unsigned char *data_claw_wav_end_ asm("data_claw_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_claw_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_claw_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/claw.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_jelly_wav_start_ asm("data_jelly_wav_start_");
+        extern unsigned char *data_jelly_wav_end_ asm("data_jelly_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_jelly_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_jelly_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/jelly.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_snake_wav_start_ asm("data_snake_wav_start_");
+        extern unsigned char *data_snake_wav_end_ asm("data_snake_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_snake_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_snake_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/snake.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_mouse_wav_start_ asm("data_mouse_wav_start_");
+        extern unsigned char *data_mouse_wav_end_ asm("data_mouse_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_mouse_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_mouse_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/mouse.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_swarm_wav_start_ asm("data_swarm_wav_start_");
+        extern unsigned char *data_swarm_wav_end_ asm("data_swarm_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_swarm_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_swarm_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/swarm.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_frog_wav_start_ asm("data_frog_wav_start_");
+        extern unsigned char *data_frog_wav_end_ asm("data_frog_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_frog_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_frog_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/frog.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_boom_a_wav_start_ asm("data_boom_a_wav_start_");
+        extern unsigned char *data_boom_a_wav_end_ asm("data_boom_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_boom_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_boom_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/boom_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_boom_b_wav_start_ asm("data_boom_b_wav_start_");
+        extern unsigned char *data_boom_b_wav_end_ asm("data_boom_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_boom_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_boom_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/boom_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_impact_b_wav_start_ asm("data_impact_b_wav_start_");
+        extern unsigned char *data_impact_b_wav_end_ asm("data_impact_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_impact_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_impact_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/impact_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_impact_a_wav_start_ asm("data_impact_a_wav_start_");
+        extern unsigned char *data_impact_a_wav_end_ asm("data_impact_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_impact_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_impact_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/impact_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_explode_a_wav_start_ asm("data_explode_a_wav_start_");
+        extern unsigned char *data_explode_a_wav_end_ asm("data_explode_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explode_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explode_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/explode_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_pit_trap_fall_wav_start_ asm("data_pit_trap_fall_wav_start_");
+        extern unsigned char *data_pit_trap_fall_wav_end_ asm("data_pit_trap_fall_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_pit_trap_fall_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_pit_trap_fall_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/pit_trap_fall.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_sear_wav_start_ asm("data_sear_wav_start_");
+        extern unsigned char *data_sear_wav_end_ asm("data_sear_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_sear_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_sear_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/sear.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_explode_b_wav_start_ asm("data_explode_b_wav_start_");
+        extern unsigned char *data_explode_b_wav_end_ asm("data_explode_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explode_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explode_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/explode_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_explode_c_wav_start_ asm("data_explode_c_wav_start_");
+        extern unsigned char *data_explode_c_wav_end_ asm("data_explode_c_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explode_c_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explode_c_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/explode_c.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_magic_crumble_wav_start_ asm("data_magic_crumble_wav_start_");
+        extern unsigned char *data_magic_crumble_wav_end_ asm("data_magic_crumble_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_magic_crumble_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_magic_crumble_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/magic_crumble.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_area_effect_a_wav_start_ asm("data_area_effect_a_wav_start_");
+        extern unsigned char *data_area_effect_a_wav_end_ asm("data_area_effect_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_area_effect_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_area_effect_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/area_effect_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_area_effect_b_wav_start_ asm("data_area_effect_b_wav_start_");
+        extern unsigned char *data_area_effect_b_wav_end_ asm("data_area_effect_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_area_effect_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_area_effect_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/area_effect_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_pit_trap_damage_wav_start_ asm("data_pit_trap_damage_wav_start_");
+        extern unsigned char *data_pit_trap_damage_wav_end_ asm("data_pit_trap_damage_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_pit_trap_damage_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_pit_trap_damage_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/pit_trap_damage.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_spike_trap_a_wav_start_ asm("data_spike_trap_a_wav_start_");
+        extern unsigned char *data_spike_trap_a_wav_end_ asm("data_spike_trap_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_spike_trap_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_spike_trap_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/spike_trap_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_hit_wav_start_ asm("data_hit_wav_start_");
+        extern unsigned char *data_hit_wav_end_ asm("data_hit_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_hit_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_hit_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/hit.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_spike_trap_b_wav_start_ asm("data_spike_trap_b_wav_start_");
+        extern unsigned char *data_spike_trap_b_wav_end_ asm("data_spike_trap_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_spike_trap_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_spike_trap_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/spike_trap_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_magic_dust_b_wav_start_ asm("data_magic_dust_b_wav_start_");
+        extern unsigned char *data_magic_dust_b_wav_end_ asm("data_magic_dust_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_magic_dust_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_magic_dust_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/magic_dust_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_magic_dust_a_wav_start_ asm("data_magic_dust_a_wav_start_");
+        extern unsigned char *data_magic_dust_a_wav_end_ asm("data_magic_dust_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_magic_dust_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_magic_dust_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/magic_dust_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_select_b_wav_start_ asm("data_select_b_wav_start_");
+        extern unsigned char *data_select_b_wav_end_ asm("data_select_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_select_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_select_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/select_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_select_a_wav_start_ asm("data_select_a_wav_start_");
+        extern unsigned char *data_select_a_wav_end_ asm("data_select_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_select_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_select_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/select_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_end_turn_wav_start_ asm("data_end_turn_wav_start_");
+        extern unsigned char *data_end_turn_wav_end_ asm("data_end_turn_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_end_turn_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_end_turn_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/end_turn.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_bonus_wav_start_ asm("data_bonus_wav_start_");
+        extern unsigned char *data_bonus_wav_end_ asm("data_bonus_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_bonus_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_bonus_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/bonus.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_paper_wav_start_ asm("data_paper_wav_start_");
+        extern unsigned char *data_paper_wav_end_ asm("data_paper_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_paper_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_paper_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/paper.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_lose_a_wav_start_ asm("data_lose_a_wav_start_");
+        extern unsigned char *data_lose_a_wav_end_ asm("data_lose_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_lose_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_lose_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/lose_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_lose_b_wav_start_ asm("data_lose_b_wav_start_");
+        extern unsigned char *data_lose_b_wav_end_ asm("data_lose_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_lose_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_lose_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/lose_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_new_turn_wav_start_ asm("data_new_turn_wav_start_");
+        extern unsigned char *data_new_turn_wav_end_ asm("data_new_turn_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_new_turn_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_new_turn_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/new_turn.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_gold_wav_start_ asm("data_gold_wav_start_");
+        extern unsigned char *data_gold_wav_end_ asm("data_gold_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_gold_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_gold_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/gold.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_1up_a_wav_start_ asm("data_1up_a_wav_start_");
+        extern unsigned char *data_1up_a_wav_end_ asm("data_1up_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_1up_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_1up_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/1up_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_blip_wav_start_ asm("data_blip_wav_start_");
+        extern unsigned char *data_blip_wav_end_ asm("data_blip_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_blip_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_blip_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/blip.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_1up_b_wav_start_ asm("data_1up_b_wav_start_");
+        extern unsigned char *data_1up_b_wav_end_ asm("data_1up_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_1up_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_1up_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/1up_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_coin_wav_start_ asm("data_coin_wav_start_");
+        extern unsigned char *data_coin_wav_end_ asm("data_coin_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_coin_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_coin_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/coin.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_click_wav_start_ asm("data_click_wav_start_");
+        extern unsigned char *data_click_wav_end_ asm("data_click_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_click_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_click_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/click.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_error_wav_start_ asm("data_error_wav_start_");
+        extern unsigned char *data_error_wav_end_ asm("data_error_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_error_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_error_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/error.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_score_wav_start_ asm("data_score_wav_start_");
+        extern unsigned char *data_score_wav_end_ asm("data_score_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_score_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_score_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/score.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_dong_wav_start_ asm("data_dong_wav_start_");
+        extern unsigned char *data_dong_wav_end_ asm("data_dong_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_dong_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_dong_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/dong.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_level_up_wav_start_ asm("data_level_up_wav_start_");
+        extern unsigned char *data_level_up_wav_end_ asm("data_level_up_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_level_up_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_level_up_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/level_up.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_ding_wav_start_ asm("data_ding_wav_start_");
+        extern unsigned char *data_ding_wav_end_ asm("data_ding_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_ding_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_ding_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/interface/ding.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_clack_wav_start_ asm("data_clack_wav_start_");
+        extern unsigned char *data_clack_wav_end_ asm("data_clack_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_clack_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_clack_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/clack.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_step_wav_start_ asm("data_step_wav_start_");
+        extern unsigned char *data_step_wav_end_ asm("data_step_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_step_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_step_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/step.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_bay_door_close_wav_start_ asm("data_bay_door_close_wav_start_");
+        extern unsigned char *data_bay_door_close_wav_end_ asm("data_bay_door_close_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_bay_door_close_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_bay_door_close_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/bay_door_close.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_fall_wav_start_ asm("data_fall_wav_start_");
+        extern unsigned char *data_fall_wav_end_ asm("data_fall_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_fall_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_fall_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/fall.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_close_shut_wav_start_ asm("data_close_shut_wav_start_");
+        extern unsigned char *data_close_shut_wav_end_ asm("data_close_shut_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_close_shut_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_close_shut_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/close_shut.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_swerve_wav_start_ asm("data_swerve_wav_start_");
+        extern unsigned char *data_swerve_wav_end_ asm("data_swerve_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_swerve_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_swerve_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/swerve.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_computer_a_wav_start_ asm("data_computer_a_wav_start_");
+        extern unsigned char *data_computer_a_wav_end_ asm("data_computer_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/computer_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_computer_b_wav_start_ asm("data_computer_b_wav_start_");
+        extern unsigned char *data_computer_b_wav_end_ asm("data_computer_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/computer_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_computer_c_wav_start_ asm("data_computer_c_wav_start_");
+        extern unsigned char *data_computer_c_wav_end_ asm("data_computer_c_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_c_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_c_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/computer_c.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_mushroom_wav_start_ asm("data_mushroom_wav_start_");
+        extern unsigned char *data_mushroom_wav_end_ asm("data_mushroom_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_mushroom_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_mushroom_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/mushroom.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_rebound_wav_start_ asm("data_rebound_wav_start_");
+        extern unsigned char *data_rebound_wav_end_ asm("data_rebound_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_rebound_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_rebound_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/rebound.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_collect_a_wav_start_ asm("data_collect_a_wav_start_");
+        extern unsigned char *data_collect_a_wav_end_ asm("data_collect_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_collect_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_collect_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/collect_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_bay_door_open_wav_start_ asm("data_bay_door_open_wav_start_");
+        extern unsigned char *data_bay_door_open_wav_end_ asm("data_bay_door_open_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_bay_door_open_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_bay_door_open_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/bay_door_open.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_collect_b_wav_start_ asm("data_collect_b_wav_start_");
+        extern unsigned char *data_collect_b_wav_end_ asm("data_collect_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_collect_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_collect_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/collect_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_shriek_wav_start_ asm("data_shriek_wav_start_");
+        extern unsigned char *data_shriek_wav_end_ asm("data_shriek_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_shriek_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_shriek_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/shriek.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_whistle_wav_start_ asm("data_whistle_wav_start_");
+        extern unsigned char *data_whistle_wav_end_ asm("data_whistle_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_whistle_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_whistle_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/whistle.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_computer_d_wav_start_ asm("data_computer_d_wav_start_");
+        extern unsigned char *data_computer_d_wav_end_ asm("data_computer_d_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_d_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_d_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/computer_d.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_computer_e_wav_start_ asm("data_computer_e_wav_start_");
+        extern unsigned char *data_computer_e_wav_end_ asm("data_computer_e_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_e_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_e_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/computer_e.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_zong_wav_start_ asm("data_zong_wav_start_");
+        extern unsigned char *data_zong_wav_end_ asm("data_zong_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_zong_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_zong_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/zong.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_open_wav_start_ asm("data_open_wav_start_");
+        extern unsigned char *data_open_wav_end_ asm("data_open_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_open_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_open_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/open.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_scatter_wav_start_ asm("data_scatter_wav_start_");
+        extern unsigned char *data_scatter_wav_end_ asm("data_scatter_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_scatter_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_scatter_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/scatter.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_drip_wav_start_ asm("data_drip_wav_start_");
+        extern unsigned char *data_drip_wav_end_ asm("data_drip_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_drip_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_drip_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/drip.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_unlock_wav_start_ asm("data_unlock_wav_start_");
+        extern unsigned char *data_unlock_wav_end_ asm("data_unlock_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_unlock_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_unlock_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/unlock.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_chime_wav_start_ asm("data_chime_wav_start_");
+        extern unsigned char *data_chime_wav_end_ asm("data_chime_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_chime_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_chime_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/chime.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_transistor_wav_start_ asm("data_transistor_wav_start_");
+        extern unsigned char *data_transistor_wav_end_ asm("data_transistor_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_transistor_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_transistor_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/transistor.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_close_wav_start_ asm("data_close_wav_start_");
+        extern unsigned char *data_close_wav_end_ asm("data_close_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_close_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_close_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/close.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_resurrect_wav_start_ asm("data_resurrect_wav_start_");
+        extern unsigned char *data_resurrect_wav_end_ asm("data_resurrect_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_resurrect_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_resurrect_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/resurrect.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_wave_wav_start_ asm("data_wave_wav_start_");
+        extern unsigned char *data_wave_wav_end_ asm("data_wave_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_wave_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_wave_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/wave.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_wiggle_b_wav_start_ asm("data_wiggle_b_wav_start_");
+        extern unsigned char *data_wiggle_b_wav_end_ asm("data_wiggle_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_wiggle_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_wiggle_b_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/wiggle_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_blurb_wav_start_ asm("data_blurb_wav_start_");
+        extern unsigned char *data_blurb_wav_end_ asm("data_blurb_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_blurb_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_blurb_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/blurb.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_wiggle_a_wav_start_ asm("data_wiggle_a_wav_start_");
+        extern unsigned char *data_wiggle_a_wav_end_ asm("data_wiggle_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_wiggle_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_wiggle_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/wiggle_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_scramble_wav_start_ asm("data_scramble_wav_start_");
+        extern unsigned char *data_scramble_wav_end_ asm("data_scramble_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_scramble_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_scramble_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/scramble.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_twing_wav_start_ asm("data_twing_wav_start_");
+        extern unsigned char *data_twing_wav_end_ asm("data_twing_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_twing_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_twing_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/twing.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_shut_wav_start_ asm("data_shut_wav_start_");
+        extern unsigned char *data_shut_wav_end_ asm("data_shut_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_shut_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_shut_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/shut.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_rubberband_wav_start_ asm("data_rubberband_wav_start_");
+        extern unsigned char *data_rubberband_wav_end_ asm("data_rubberband_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_rubberband_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_rubberband_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/rubberband.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_ping_wav_start_ asm("data_ping_wav_start_");
+        extern unsigned char *data_ping_wav_end_ asm("data_ping_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_ping_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_ping_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/misc/ping.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_curse_wav_start_ asm("data_curse_wav_start_");
+        extern unsigned char *data_curse_wav_end_ asm("data_curse_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_curse_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_curse_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/status/curse.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_freeze_wav_start_ asm("data_freeze_wav_start_");
+        extern unsigned char *data_freeze_wav_end_ asm("data_freeze_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_freeze_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_freeze_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/status/freeze.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_mutation_wav_start_ asm("data_mutation_wav_start_");
+        extern unsigned char *data_mutation_wav_end_ asm("data_mutation_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_mutation_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_mutation_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/status/mutation.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_confuse_wav_start_ asm("data_confuse_wav_start_");
+        extern unsigned char *data_confuse_wav_end_ asm("data_confuse_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_confuse_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_confuse_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/status/confuse.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_disease_wav_start_ asm("data_disease_wav_start_");
+        extern unsigned char *data_disease_wav_end_ asm("data_disease_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_disease_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_disease_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/status/disease.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_burn_wav_start_ asm("data_burn_wav_start_");
+        extern unsigned char *data_burn_wav_end_ asm("data_burn_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_burn_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_burn_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/status/burn.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_charm_wav_start_ asm("data_charm_wav_start_");
+        extern unsigned char *data_charm_wav_end_ asm("data_charm_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_charm_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_charm_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/status/charm.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_poison_wav_start_ asm("data_poison_wav_start_");
+        extern unsigned char *data_poison_wav_end_ asm("data_poison_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_poison_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_poison_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/status/poison.wav"] = r;
+    }
+
 }

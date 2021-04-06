@@ -12,6 +12,7 @@ Comments and suggestions welcome at this early stage.
 Graphics
 --------
 Additional gfx by Oryx, [found here](https://www.oryxdesignlab.com/)
+<!-- Oryx: Order Number: #102084 (placed on January 16, 2016 03:14PM EST) -->
 The rest by me, Goblinhack.
 
 Music

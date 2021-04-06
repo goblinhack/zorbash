@@ -30,3 +30,81 @@ data_ui_box7_tga_start_:
 .globl data_ui_box7_tga_end_
 data_ui_box7_tga_end_:
 
+.globl data_disarm_multi_b_wav_start_
+data_disarm_multi_b_wav_start_:
+.incbin "../data/sounds/abilities/disarm_multi_b.wav"
+.globl data_disarm_multi_b_wav_end_
+data_disarm_multi_b_wav_end_:
+
+.globl data_bazooka_wav_start_
+data_bazooka_wav_start_:
+.incbin "../data/sounds/abilities/bazooka.wav"
+.globl data_bazooka_wav_end_
+data_bazooka_wav_end_:
+
+.globl data_spell_b_wav_start_
+data_spell_b_wav_start_:
+.incbin "../data/sounds/abilities/spell_b.wav"
+.globl data_spell_b_wav_end_
+data_spell_b_wav_end_:
+
+.globl data_telepathy_wav_start_
+data_telepathy_wav_start_:
+.incbin "../data/sounds/abilities/telepathy.wav"
+.globl data_telepathy_wav_end_
+data_telepathy_wav_end_:
+
+.globl data_swarm_wav_start_
+data_swarm_wav_start_:
+.incbin "../data/sounds/creatures/swarm.wav"
+.globl data_swarm_wav_end_
+data_swarm_wav_end_:
+
+.globl data_explode_c_wav_start_
+data_explode_c_wav_start_:
+.incbin "../data/sounds/impacts/explode_c.wav"
+.globl data_explode_c_wav_end_
+data_explode_c_wav_end_:
+
+.globl data_select_b_wav_start_
+data_select_b_wav_start_:
+.incbin "../data/sounds/interface/select_b.wav"
+.globl data_select_b_wav_end_
+data_select_b_wav_end_:
+
+.globl data_blip_wav_start_
+data_blip_wav_start_:
+.incbin "../data/sounds/interface/blip.wav"
+.globl data_blip_wav_end_
+data_blip_wav_end_:
+
+.globl data_step_wav_start_
+data_step_wav_start_:
+.incbin "../data/sounds/misc/step.wav"
+.globl data_step_wav_end_
+data_step_wav_end_:
+
+.globl data_collect_a_wav_start_
+data_collect_a_wav_start_:
+.incbin "../data/sounds/misc/collect_a.wav"
+.globl data_collect_a_wav_end_
+data_collect_a_wav_end_:
+
+.globl data_drip_wav_start_
+data_drip_wav_start_:
+.incbin "../data/sounds/misc/drip.wav"
+.globl data_drip_wav_end_
+data_drip_wav_end_:
+
+.globl data_scramble_wav_start_
+data_scramble_wav_start_:
+.incbin "../data/sounds/misc/scramble.wav"
+.globl data_scramble_wav_end_
+data_scramble_wav_end_:
+
+.globl data_burn_wav_start_
+data_burn_wav_start_:
+.incbin "../data/sounds/status/burn.wav"
+.globl data_burn_wav_end_
+data_burn_wav_end_:
+

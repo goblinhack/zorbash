@@ -30,3 +30,75 @@ data_ui_credits_bg_tga_start_:
 .globl data_ui_credits_bg_tga_end_
 data_ui_credits_bg_tga_end_:
 
+.globl data_disarm_multi_a_wav_start_
+data_disarm_multi_a_wav_start_:
+.incbin "../data/sounds/abilities/disarm_multi_a.wav"
+.globl data_disarm_multi_a_wav_end_
+data_disarm_multi_a_wav_end_:
+
+.globl data_fire_c_wav_start_
+data_fire_c_wav_start_:
+.incbin "../data/sounds/abilities/fire_c.wav"
+.globl data_fire_c_wav_end_
+data_fire_c_wav_end_:
+
+.globl data_attack_b_wav_start_
+data_attack_b_wav_start_:
+.incbin "../data/sounds/abilities/attack_b.wav"
+.globl data_attack_b_wav_end_
+data_attack_b_wav_end_:
+
+.globl data_mystical_wav_start_
+data_mystical_wav_start_:
+.incbin "../data/sounds/creatures/mystical.wav"
+.globl data_mystical_wav_end_
+data_mystical_wav_end_:
+
+.globl data_impact_a_wav_start_
+data_impact_a_wav_start_:
+.incbin "../data/sounds/impacts/impact_a.wav"
+.globl data_impact_a_wav_end_
+data_impact_a_wav_end_:
+
+.globl data_spike_trap_a_wav_start_
+data_spike_trap_a_wav_start_:
+.incbin "../data/sounds/impacts/spike_trap_a.wav"
+.globl data_spike_trap_a_wav_end_
+data_spike_trap_a_wav_end_:
+
+.globl data_lose_a_wav_start_
+data_lose_a_wav_start_:
+.incbin "../data/sounds/interface/lose_a.wav"
+.globl data_lose_a_wav_end_
+data_lose_a_wav_end_:
+
+.globl data_score_wav_start_
+data_score_wav_start_:
+.incbin "../data/sounds/interface/score.wav"
+.globl data_score_wav_end_
+data_score_wav_end_:
+
+.globl data_computer_a_wav_start_
+data_computer_a_wav_start_:
+.incbin "../data/sounds/misc/computer_a.wav"
+.globl data_computer_a_wav_end_
+data_computer_a_wav_end_:
+
+.globl data_computer_d_wav_start_
+data_computer_d_wav_start_:
+.incbin "../data/sounds/misc/computer_d.wav"
+.globl data_computer_d_wav_end_
+data_computer_d_wav_end_:
+
+.globl data_resurrect_wav_start_
+data_resurrect_wav_start_:
+.incbin "../data/sounds/misc/resurrect.wav"
+.globl data_resurrect_wav_end_
+data_resurrect_wav_end_:
+
+.globl data_curse_wav_start_
+data_curse_wav_start_:
+.incbin "../data/sounds/status/curse.wav"
+.globl data_curse_wav_end_
+data_curse_wav_end_:
+
