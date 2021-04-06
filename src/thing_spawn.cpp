@@ -156,17 +156,19 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     return true;
 }
 
-bool Thing::spawn_radius_range (Thingp parent, const std::string& what, 
+bool Thing::spawn_radius_range (Thingp item, Thingp target, 
+                                const std::string& what, 
                                 uint32_t radius_min, uint32_t radius_max)
 {_
     auto tpp = tp_find(what);
 
     if (!radius_min && !radius_max) {
-        radius_min = parent->tp()->blast_min_radius();
-        radius_max = parent->tp()->blast_max_radius();
+        radius_min = item->tp()->blast_min_radius();
+        radius_max = item->tp()->blast_max_radius();
     }
 
-    log("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
+    log("Spawn %s in radius range %u to %u", 
+        what.c_str(), radius_min, radius_max);
 
     //
     // Don't spawn too many monsts
@@ -177,10 +179,7 @@ bool Thing::spawn_radius_range (Thingp parent, const std::string& what,
         }
     }
 
-    auto mid_at = this->mid_at;
-    if (game->request_to_throw_item) {
-        mid_at = level->cursor->mid_at;
-    }
+    auto mid_at = target->mid_at;
 
     for (auto x = mid_at.x - radius_max; x <= mid_at.x + radius_max; x++) {
         for (auto y = mid_at.y - radius_max; y <= mid_at.y + radius_max; y++) {
@@ -258,7 +257,7 @@ bool Thing::spawn_fire (const std::string& what)
     return true;
 }
 
-bool Thing::spawn_at (const std::string& what)
+bool Thing::spawn_at_if_possible (const std::string& what)
 {_
     log("Spawn under: %s", what.c_str());
 
@@ -272,6 +271,31 @@ bool Thing::spawn_at (const std::string& what)
         level->is_wall(x, y)) {
         return false;
     }
+
+    possible.push_back(p);
+
+    auto cands = possible.size();
+    if (!cands) {
+        return false;
+    }
+
+    auto chosen = possible[random_range(0, cands)];
+
+    auto c = level->thing_new(what, chosen);
+    c->inherit_from(this);
+    c->location_check();
+
+    return true;
+}
+
+bool Thing::spawn_at (const std::string& what)
+{_
+    log("Spawn under: %s", what.c_str());
+
+    std::vector<point> possible;
+    auto x = mid_at.x;
+    auto y = mid_at.y;
+    auto p = point(x, y);
 
     possible.push_back(p);
 

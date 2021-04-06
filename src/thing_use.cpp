@@ -25,7 +25,11 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
                 fn = fn.replace(found, 2, "");
             }
 
-            what->log("call %s.%s()", mod.c_str(), fn.c_str());
+            what->log("call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(),
+                      to_string().c_str(),
+                      what->to_string().c_str(),
+                      target->to_string().c_str());
+
             py_call_void_fn(mod.c_str(), fn.c_str(),
                             id.id, what->id.id, target->id.id,
                             (int)mid_at.x, (int)mid_at.y);
@@ -52,10 +56,17 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
     log("Used %s", what->to_string().c_str());
 
     if (is_player()) {
-        if (target) {
-            inventory_id_remove(what, target);
-        } else {
+        //
+        // Last charge used up.
+        //
+        if (what->charge_count()) {
             inventory_id_remove(what);
+        } else {
+            if (target) {
+                inventory_id_remove(what, target);
+            } else {
+                inventory_id_remove(what);
+            }
         }
     }
 

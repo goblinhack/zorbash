@@ -2,7 +2,7 @@ import zx
 import tp
 
 def on_use(owner, skill, target, x, y):
-    zx.tp_spawn_radius_range(owner, skill, "skill_devoted_thrust_effect")
+    zx.tp_spawn_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
     #zx.topcon("owner  {} {}".format(zx.thing_get_name(owner), zx.thing_get_health(owner)))
     #zx.topcon("skill  {} {}".format(zx.thing_get_name(skill), zx.thing_get_health(skill)))
     #zx.topcon("target {} {}".format(zx.thing_get_name(target), zx.thing_get_health(target)))
