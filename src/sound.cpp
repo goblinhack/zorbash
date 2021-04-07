@@ -37,6 +37,8 @@ bool sound_init_done;
 
 bool sound_init (void)
 {_
+    Mix_AllocateChannels(16);
+
     return (true);
 }
 
@@ -129,8 +131,15 @@ bool sound_play (const std::string &alias)
     if (Mix_PlayChannel(-1 /* first free channel */,
                         sound->second->chunk, 
                         0 /* loops */) == -1) {
-        ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
+        Mix_HaltChannel(0);
         SDL_ClearError();
+
+        if (Mix_PlayChannel(-1 /* first free channel */,
+                            sound->second->chunk, 
+                            0 /* loops */) == -1) {
+            ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
+            SDL_ClearError();
+        }
     }
 
     float volume = sound->second->volume *

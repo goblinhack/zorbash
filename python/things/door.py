@@ -1,10 +1,16 @@
 import zx
 import tp
+import random
 
+
+def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+    zx.sound_play("door_hit{}".format(random.randrange(1, 2)))
+
+def on_death(me, x, y):
+    zx.sound_play("door_break")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-    x.set_is_attackable_by_player(True)
     x.set_avoids_fire(100)
     x.set_collision_attack(True)
     x.set_collision_check(True)
@@ -21,6 +27,7 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("10d10")
     x.set_is_able_to_fall(False)
     x.set_is_always_hit(True)
+    x.set_is_attackable_by_player(True)
     x.set_is_burnable(True)
     x.set_is_combustible(True)
     x.set_is_cursor_can_hover_over(True)
@@ -35,8 +42,10 @@ def tp_init(name, text_name):
     x.set_modifier_defence(20)
     x.set_modifier_strength(0)
     x.set_normal_placement_rules(True)
+    x.set_on_death_do("door.on_death()")
     x.set_on_death_is_corpse(True)
     x.set_on_death_is_open(True)
+    x.set_on_hit_do("door.on_hit()")
     x.set_text_a_or_an("the");
     x.set_text_description("A door covered in claw marks.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

@@ -12,6 +12,7 @@
 #include "my_level.h"
 #include "my_monst.h"
 #include "my_array_bounds_check.h"
+#include "my_sound.h"
 
 bool Thing::drop (Thingp what, Thingp target, bool stolen)
 {_
@@ -88,6 +89,10 @@ _
         log("Dropped (being stolen) %s", what->to_string().c_str());
     } else {
         log("Dropped %s", what->to_string().c_str());
+
+        if (is_player()) {
+            sound_play("drop");
+        }
     }
 
     return true;

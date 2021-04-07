@@ -4,7 +4,6 @@ import random
 
 def on_death(me, x, y):
     zx.tp_spawn_at(me, "pink_splatter")
-    zx.sound_play("squelch")
     zx.sound_play("slime{}".format(random.randrange(1, 9)))
 
 def tp_init(name, text_name):
@@ -12,8 +11,6 @@ def tp_init(name, text_name):
     x.set_ai_scent_distance(5)
     x.set_attack_eater(True)
     x.set_attack_lunge(True)
-    x.set_is_attackable_by_player(True)
-    x.set_is_attackable_by_monst(True)
     x.set_avoids_fire(100)
     x.set_collision_attack(True)
     x.set_collision_check(True)
@@ -33,6 +30,8 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("1")
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
+    x.set_is_attackable_by_monst(True)
+    x.set_is_attackable_by_player(True)
     x.set_is_burnable(True)
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
