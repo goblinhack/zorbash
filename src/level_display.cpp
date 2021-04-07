@@ -395,7 +395,7 @@ void Level::display_map (void)
         //
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(GRAY20);
+        glcolor(GRAY40);
 
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
         blit_fbo_game_pix(FBO_MAP_HIDDEN);
