@@ -417,6 +417,7 @@ _
     decr_stamina();
 
     if (weapon) {
+        on_use(weapon);
         if (weapon->collision_check_and_handle_at(hit_at,
                                                   &target_attacked,
                                                   &target_overlaps)) {

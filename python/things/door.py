@@ -4,7 +4,7 @@ import random
 
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    zx.sound_play("door_hit{}".format(random.randrange(1, 2)))
+    zx.sound_play("door_hit{}".format(random.randint(1, 2)))
 
 def on_death(me, x, y):
     zx.sound_play("door_break")
