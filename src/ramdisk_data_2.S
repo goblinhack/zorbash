@@ -60,45 +60,51 @@ data_swarm_wav_start_:
 .globl data_swarm_wav_end_
 data_swarm_wav_end_:
 
-.globl data_explode_c_wav_start_
-data_explode_c_wav_start_:
-.incbin "../data/sounds/impacts/explode_c.wav"
-.globl data_explode_c_wav_end_
-data_explode_c_wav_end_:
+.globl data_sear_wav_start_
+data_sear_wav_start_:
+.incbin "../data/sounds/impacts/sear.wav"
+.globl data_sear_wav_end_
+data_sear_wav_end_:
 
-.globl data_select_b_wav_start_
-data_select_b_wav_start_:
-.incbin "../data/sounds/interface/select_b.wav"
-.globl data_select_b_wav_end_
-data_select_b_wav_end_:
+.globl data_spike_trap_b_wav_start_
+data_spike_trap_b_wav_start_:
+.incbin "../data/sounds/impacts/spike_trap_b.wav"
+.globl data_spike_trap_b_wav_end_
+data_spike_trap_b_wav_end_:
 
-.globl data_blip_wav_start_
-data_blip_wav_start_:
-.incbin "../data/sounds/interface/blip.wav"
-.globl data_blip_wav_end_
-data_blip_wav_end_:
+.globl data_lose_b_wav_start_
+data_lose_b_wav_start_:
+.incbin "../data/sounds/interface/lose_b.wav"
+.globl data_lose_b_wav_end_
+data_lose_b_wav_end_:
 
-.globl data_step_wav_start_
-data_step_wav_start_:
-.incbin "../data/sounds/misc/step.wav"
-.globl data_step_wav_end_
-data_step_wav_end_:
+.globl data_dong_wav_start_
+data_dong_wav_start_:
+.incbin "../data/sounds/interface/dong.wav"
+.globl data_dong_wav_end_
+data_dong_wav_end_:
 
-.globl data_shriek_wav_start_
-data_shriek_wav_start_:
-.incbin "../data/sounds/misc/shriek.wav"
-.globl data_shriek_wav_end_
-data_shriek_wav_end_:
+.globl data_rebound_wav_start_
+data_rebound_wav_start_:
+.incbin "../data/sounds/misc/rebound.wav"
+.globl data_rebound_wav_end_
+data_rebound_wav_end_:
 
-.globl data_resurrect_wav_start_
-data_resurrect_wav_start_:
-.incbin "../data/sounds/misc/resurrect.wav"
-.globl data_resurrect_wav_end_
-data_resurrect_wav_end_:
+.globl data_unlock_wav_start_
+data_unlock_wav_start_:
+.incbin "../data/sounds/misc/unlock.wav"
+.globl data_unlock_wav_end_
+data_unlock_wav_end_:
 
-.globl data_curse_wav_start_
-data_curse_wav_start_:
-.incbin "../data/sounds/status/curse.wav"
-.globl data_curse_wav_end_
-data_curse_wav_end_:
+.globl data_twing_wav_start_
+data_twing_wav_start_:
+.incbin "../data/sounds/misc/twing.wav"
+.globl data_twing_wav_end_
+data_twing_wav_end_:
+
+.globl data_charm_wav_start_
+data_charm_wav_start_:
+.incbin "../data/sounds/status/charm.wav"
+.globl data_charm_wav_end_
+data_charm_wav_end_:
 

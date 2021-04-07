@@ -54,51 +54,51 @@ data_claw_wav_start_:
 .globl data_claw_wav_end_
 data_claw_wav_end_:
 
-.globl data_explode_a_wav_start_
-data_explode_a_wav_start_:
-.incbin "../data/sounds/impacts/explode_a.wav"
-.globl data_explode_a_wav_end_
-data_explode_a_wav_end_:
+.globl data_434462__dersuperanton__getting_hit_hugh_wav_start_
+data_434462__dersuperanton__getting_hit_hugh_wav_start_:
+.incbin "../data/sounds/impacts/434462__dersuperanton__getting-hit-hugh.wav"
+.globl data_434462__dersuperanton__getting_hit_hugh_wav_end_
+data_434462__dersuperanton__getting_hit_hugh_wav_end_:
 
-.globl data_hit_wav_start_
-data_hit_wav_start_:
-.incbin "../data/sounds/impacts/hit.wav"
-.globl data_hit_wav_end_
-data_hit_wav_end_:
+.globl data_area_effect_b_wav_start_
+data_area_effect_b_wav_start_:
+.incbin "../data/sounds/impacts/area_effect_b.wav"
+.globl data_area_effect_b_wav_end_
+data_area_effect_b_wav_end_:
 
-.globl data_lose_b_wav_start_
-data_lose_b_wav_start_:
-.incbin "../data/sounds/interface/lose_b.wav"
-.globl data_lose_b_wav_end_
-data_lose_b_wav_end_:
+.globl data_end_turn_wav_start_
+data_end_turn_wav_start_:
+.incbin "../data/sounds/interface/end_turn.wav"
+.globl data_end_turn_wav_end_
+data_end_turn_wav_end_:
 
-.globl data_dong_wav_start_
-data_dong_wav_start_:
-.incbin "../data/sounds/interface/dong.wav"
-.globl data_dong_wav_end_
-data_dong_wav_end_:
+.globl data_coin_wav_start_
+data_coin_wav_start_:
+.incbin "../data/sounds/interface/coin.wav"
+.globl data_coin_wav_end_
+data_coin_wav_end_:
 
-.globl data_rebound_wav_start_
-data_rebound_wav_start_:
-.incbin "../data/sounds/misc/rebound.wav"
-.globl data_rebound_wav_end_
-data_rebound_wav_end_:
+.globl data_fall_wav_start_
+data_fall_wav_start_:
+.incbin "../data/sounds/misc/fall.wav"
+.globl data_fall_wav_end_
+data_fall_wav_end_:
 
-.globl data_unlock_wav_start_
-data_unlock_wav_start_:
-.incbin "../data/sounds/misc/unlock.wav"
-.globl data_unlock_wav_end_
-data_unlock_wav_end_:
+.globl data_zong_wav_start_
+data_zong_wav_start_:
+.incbin "../data/sounds/misc/zong.wav"
+.globl data_zong_wav_end_
+data_zong_wav_end_:
 
-.globl data_twing_wav_start_
-data_twing_wav_start_:
-.incbin "../data/sounds/misc/twing.wav"
-.globl data_twing_wav_end_
-data_twing_wav_end_:
+.globl data_wiggle_b_wav_start_
+data_wiggle_b_wav_start_:
+.incbin "../data/sounds/misc/wiggle_b.wav"
+.globl data_wiggle_b_wav_end_
+data_wiggle_b_wav_end_:
 
-.globl data_charm_wav_start_
-data_charm_wav_start_:
-.incbin "../data/sounds/status/charm.wav"
-.globl data_charm_wav_end_
-data_charm_wav_end_:
+.globl data_mutation_wav_start_
+data_mutation_wav_start_:
+.incbin "../data/sounds/status/mutation.wav"
+.globl data_mutation_wav_end_
+data_mutation_wav_end_:
 

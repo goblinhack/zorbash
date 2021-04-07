@@ -95,7 +95,7 @@ color string2color (const char **s)
 
     if (result == color_map.end()) {
         if (color_init_done) { // avoids color warnings due to very early errors
-            ERR("Unknown color [%s]", tmp);
+            CON("Unknown color [%s]", tmp);
         }
         return (WHITE);
     }
@@ -134,7 +134,7 @@ color string2color (const wchar_t **s)
 
     if (result == color_map.end()) {
         if (color_init_done) { // avoids color warnings due to very early errors
-            ERR("Unknown color [%s]", f.c_str());
+            CON("Unknown color [%s]", f.c_str());
         }
         return (WHITE);
     }
@@ -170,7 +170,7 @@ color string2color (std::string &s, int *len)
 
     if (result == color_map.end()) {
         if (color_init_done) { // avoids color warnings due to very early errors
-            ERR("Unknown color [%s]", out.c_str());
+            CON("Unknown color [%s]", out.c_str());
         }
         return (WHITE);
     }
@@ -202,7 +202,7 @@ color string2color (std::string &s)
 
     if (result == color_map.end()) {
         if (color_init_done) { // avoids color warnings due to very early errors
-            ERR("Unknown color [%s]", out.c_str());
+            CON("Unknown color [%s]", out.c_str());
         }
         return (WHITE);
     }
@@ -246,7 +246,7 @@ const char *string2colorname (const char **s)
 
     if (result == color_map.end()) {
         if (color_init_done) { // avoids color warnings due to very early errors
-            ERR("Unknown color [%s]", tmp);
+            CON("Unknown color [%s]", tmp);
         }
         return ("");
     }
@@ -282,7 +282,7 @@ std::string string2colorname (std::string &s)
 
     if (result == color_map.end()) {
         if (color_init_done) { // avoids color warnings due to very early errors
-            ERR("Unknown color [%s]", out.c_str());
+            CON("Unknown color [%s]", out.c_str());
         }
         return ("");
     }
@@ -304,7 +304,7 @@ color color_find (const char *s)
 
     if (result == color_map.end()) {
         if (color_init_done) { // avoids color warnings due to very early errors
-            ERR("Unknown color [%s]", s);
+            CON("Unknown color [%s]", s);
         }
         return (WHITE);
     }

@@ -11,14 +11,23 @@ Comments and suggestions welcome at this early stage.
 
 Graphics
 --------
-Additional gfx by Oryx, [found here](https://www.oryxdesignlab.com/)
+Various items and monsters by Oryx, [found here](https://www.oryxdesignlab.com/)
 <!-- Oryx: Order Number: #102084 (placed on January 16, 2016 03:14PM EST) -->
-The rest by me, Goblinhack.
 
 Music
 -----
-By the amazing Markus Heichelbech (deceased senior technician): [found here](http://nosoapradio.us)
+Main music by the amazing Markus Heichelbech (deceased senior technician): [found here](http://nosoapradio.us)
 <!-- and https://drive.google.com/drive/folders/0B_fD62tSeGaVRlBaZWJwS29JSnM -->
+
+Sound effects
+-------------
+8 bit sounds by Oryx, [found here](https://www.oryxdesignlab.com/)
+Impact sounds by Dersuperanton, [found here](https://freesound.org/people/dersuperanton/)
+Impact sounds by RobinHood76, [found here](https://freesound.org/people/Robinhood76/)
+Impact sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
+Impact sounds by Adam N, [found here](https://freesound.org/people/egomassive/)
+Slime sounds by Konstati, [found here](https://freesound.org/people/konstati/)
+Key sounds by uEffects, [found here](https://freesound.org/people/uEffects/)
 
 Screenshots
 -----------

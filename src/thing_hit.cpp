@@ -9,8 +9,76 @@
 #include "my_thing.h"
 #include "my_monst.h"
 #include "my_sprintf.h"
+#include "my_string.h"
+#include "my_python.h"
 #include "my_thing_template.h"
 #include "my_array_bounds_check.h"
+
+//
+// Python callback upon being hit
+//
+void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
+                    Thingp real_hitter, // who fired the arrow?
+                    bool crit,
+                    bool bite,
+                    int damage)
+{_
+    auto on_hit = tp()->on_hit_do();
+    if (std::empty(on_hit)) {
+        return;
+    }
+
+    auto t = split_tokens(on_hit, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(),
+            to_string().c_str(),
+            hitter->to_string().c_str(),
+            real_hitter->to_string().c_str(),
+            crit, bite, damage);
+
+        py_call_void_fn(mod.c_str(), fn.c_str(),
+                        id.id, hitter->id.id, real_hitter->id.id,
+                        (int)mid_at.x, (int)mid_at.y,
+                        (int)crit,
+                        (int)bite,
+                        (int)damage);
+    } else {
+        ERR("Bad on_hit call [%s] expected mod:function, got %d elems",
+            on_hit.c_str(), (int)on_hit.size());
+    }
+}
+
+void Thing::on_claw_attack (void)
+{_
+    auto on_claw_attack = tp()->on_claw_attack_do();
+    if (std::empty(on_claw_attack)) {
+        return;
+    }
+
+    auto t = split_tokens(on_claw_attack, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
+
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id);
+    } else {
+        ERR("Bad on_claw_attack call [%s] expected mod:function, got %d elems",
+            on_claw_attack.c_str(), (int)on_claw_attack.size());
+    }
+}
 
 int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           Thingp real_hitter, // who fired the arrow?
@@ -28,7 +96,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 
     if (bite) {
         if (real_hitter->is_poison()) {
-            TOPCON("TODO");
+            TOPCON("TODO poison");
         }
     }
 
@@ -197,6 +265,11 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     //
+    // Python callback
+    //
+    on_hit(hitter, real_hitter, crit, bite, damage);
+
+    //
     // Visible hit indication
     //
     if (is_player()) {
@@ -241,14 +314,17 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // 
     // Are we carrying a weapon? If not, see if we can do a claw attack
     //
-    if (!real_hitter->is_player()) {
-        if (!real_hitter->get_weapon_id_carry_anim().ok()) {
-            auto claws = real_hitter->tp()->gfx_anim_attack();
-            if (claws != "") {
-                auto claw_attack = level->thing_new(claws, mid_at);
-                claw_attack->bounce(0.1, 0.1, 100, 3);
-                claw_attack->move_set_dir_from_delta(delta);
-            }
+    if (!real_hitter->get_weapon_id_carry_anim().ok()) {
+        auto claws = real_hitter->tp()->gfx_anim_attack();
+        if (claws != "") {
+            auto claw_attack = level->thing_new(claws, mid_at);
+            claw_attack->bounce(0.1, 0.1, 100, 3);
+            claw_attack->move_set_dir_from_delta(delta);
+
+            //
+            // Python callback
+            //
+            real_hitter->on_claw_attack();
         }
     }
 

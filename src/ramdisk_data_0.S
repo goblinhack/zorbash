@@ -60,45 +60,51 @@ data_snake_wav_start_:
 .globl data_snake_wav_end_
 data_snake_wav_end_:
 
-.globl data_sear_wav_start_
-data_sear_wav_start_:
-.incbin "../data/sounds/impacts/sear.wav"
-.globl data_sear_wav_end_
-data_sear_wav_end_:
+.globl data_explode_a_wav_start_
+data_explode_a_wav_start_:
+.incbin "../data/sounds/impacts/explode_a.wav"
+.globl data_explode_a_wav_end_
+data_explode_a_wav_end_:
 
-.globl data_magic_dust_b_wav_start_
-data_magic_dust_b_wav_start_:
-.incbin "../data/sounds/impacts/magic_dust_b.wav"
-.globl data_magic_dust_b_wav_end_
-data_magic_dust_b_wav_end_:
+.globl data_spike_trap_a_wav_start_
+data_spike_trap_a_wav_start_:
+.incbin "../data/sounds/impacts/spike_trap_a.wav"
+.globl data_spike_trap_a_wav_end_
+data_spike_trap_a_wav_end_:
 
-.globl data_gold_wav_start_
-data_gold_wav_start_:
-.incbin "../data/sounds/interface/gold.wav"
-.globl data_gold_wav_end_
-data_gold_wav_end_:
+.globl data_paper_wav_start_
+data_paper_wav_start_:
+.incbin "../data/sounds/interface/paper.wav"
+.globl data_paper_wav_end_
+data_paper_wav_end_:
 
-.globl data_ding_wav_start_
-data_ding_wav_start_:
-.incbin "../data/sounds/interface/ding.wav"
-.globl data_ding_wav_end_
-data_ding_wav_end_:
+.globl data_error_wav_start_
+data_error_wav_start_:
+.incbin "../data/sounds/interface/error.wav"
+.globl data_error_wav_end_
+data_error_wav_end_:
 
-.globl data_bay_door_open_wav_start_
-data_bay_door_open_wav_start_:
-.incbin "../data/sounds/misc/bay_door_open.wav"
-.globl data_bay_door_open_wav_end_
-data_bay_door_open_wav_end_:
+.globl data_swerve_wav_start_
+data_swerve_wav_start_:
+.incbin "../data/sounds/misc/swerve.wav"
+.globl data_swerve_wav_end_
+data_swerve_wav_end_:
 
-.globl data_transistor_wav_start_
-data_transistor_wav_start_:
-.incbin "../data/sounds/misc/transistor.wav"
-.globl data_transistor_wav_end_
-data_transistor_wav_end_:
+.globl data_scatter_wav_start_
+data_scatter_wav_start_:
+.incbin "../data/sounds/misc/scatter.wav"
+.globl data_scatter_wav_end_
+data_scatter_wav_end_:
 
-.globl data_rubberband_wav_start_
-data_rubberband_wav_start_:
-.incbin "../data/sounds/misc/rubberband.wav"
-.globl data_rubberband_wav_end_
-data_rubberband_wav_end_:
+.globl data_wiggle_a_wav_start_
+data_wiggle_a_wav_start_:
+.incbin "../data/sounds/misc/wiggle_a.wav"
+.globl data_wiggle_a_wav_end_
+data_wiggle_a_wav_end_:
+
+.globl data_disease_wav_start_
+data_disease_wav_start_:
+.incbin "../data/sounds/status/disease.wav"
+.globl data_disease_wav_end_
+data_disease_wav_end_:
 

@@ -154,6 +154,75 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
     py_err();
 }
 
+void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
+                      int val6)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiiii)", val1, val2, val3, val4, val5, val6);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        if (pValue) {
+            Py_DECREF(pValue);
+        }
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+}
+
+void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
+                      int val6, int val7)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiiiii)", val1, val2, val3, val4, val5, val6, val7);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        if (pValue) {
+            Py_DECREF(pValue);
+        }
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+}
+
+void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
+                      int val6, int val7, int val8)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        if (pValue) {
+            Py_DECREF(pValue);
+        }
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+}
+
 char *py_obj_to_str (const PyObject *py_str)
 {_
     PyObject *py_encstr;
@@ -782,6 +851,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(nutrition_dice)
     TP_SET_DECL(on_birth_do)
     TP_SET_DECL(on_use_do)
+    TP_SET_DECL(on_hit_do)
+    TP_SET_DECL(on_claw_attack_do)
     TP_SET_DECL(on_death_do)
     TP_SET_DECL(on_idle_dice)
     TP_SET_DECL(resurrect_dice)

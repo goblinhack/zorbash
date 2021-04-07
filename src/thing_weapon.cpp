@@ -348,6 +348,11 @@ _
     if (!weapon) {
         if (is_player()) {
             TOPCON("You attack with bare fists!");
+
+            //
+            // Python callback
+            //
+            on_claw_attack();
         }
         swung_as = gfx_anim_attack();
     } else {

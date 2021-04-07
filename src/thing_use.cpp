@@ -25,10 +25,10 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
                 fn = fn.replace(found, 2, "");
             }
 
-            what->log("call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(),
-                      to_string().c_str(),
-                      what->to_string().c_str(),
-                      target->to_string().c_str());
+            log("call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(),
+                to_string().c_str(),
+                what->to_string().c_str(),
+                target->to_string().c_str());
 
             py_call_void_fn(mod.c_str(), fn.c_str(),
                             id.id, what->id.id, target->id.id,

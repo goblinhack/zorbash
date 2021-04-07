@@ -60,45 +60,51 @@ data_frog_wav_start_:
 .globl data_frog_wav_end_
 data_frog_wav_end_:
 
-.globl data_magic_crumble_wav_start_
-data_magic_crumble_wav_start_:
-.incbin "../data/sounds/impacts/magic_crumble.wav"
-.globl data_magic_crumble_wav_end_
-data_magic_crumble_wav_end_:
+.globl data_explode_b_wav_start_
+data_explode_b_wav_start_:
+.incbin "../data/sounds/impacts/explode_b.wav"
+.globl data_explode_b_wav_end_
+data_explode_b_wav_end_:
 
-.globl data_select_a_wav_start_
-data_select_a_wav_start_:
-.incbin "../data/sounds/interface/select_a.wav"
-.globl data_select_a_wav_end_
-data_select_a_wav_end_:
+.globl data_magic_dust_b_wav_start_
+data_magic_dust_b_wav_start_:
+.incbin "../data/sounds/impacts/magic_dust_b.wav"
+.globl data_magic_dust_b_wav_end_
+data_magic_dust_b_wav_end_:
 
-.globl data_1up_b_wav_start_
-data_1up_b_wav_start_:
-.incbin "../data/sounds/interface/1up_b.wav"
-.globl data_1up_b_wav_end_
-data_1up_b_wav_end_:
+.globl data_new_turn_wav_start_
+data_new_turn_wav_start_:
+.incbin "../data/sounds/interface/new_turn.wav"
+.globl data_new_turn_wav_end_
+data_new_turn_wav_end_:
 
-.globl data_bay_door_close_wav_start_
-data_bay_door_close_wav_start_:
-.incbin "../data/sounds/misc/bay_door_close.wav"
-.globl data_bay_door_close_wav_end_
-data_bay_door_close_wav_end_:
+.globl data_level_up_wav_start_
+data_level_up_wav_start_:
+.incbin "../data/sounds/interface/level_up.wav"
+.globl data_level_up_wav_end_
+data_level_up_wav_end_:
 
-.globl data_whistle_wav_start_
-data_whistle_wav_start_:
-.incbin "../data/sounds/misc/whistle.wav"
-.globl data_whistle_wav_end_
-data_whistle_wav_end_:
+.globl data_collect_a_wav_start_
+data_collect_a_wav_start_:
+.incbin "../data/sounds/misc/collect_a.wav"
+.globl data_collect_a_wav_end_
+data_collect_a_wav_end_:
 
-.globl data_wave_wav_start_
-data_wave_wav_start_:
-.incbin "../data/sounds/misc/wave.wav"
-.globl data_wave_wav_end_
-data_wave_wav_end_:
+.globl data_chime_wav_start_
+data_chime_wav_start_:
+.incbin "../data/sounds/misc/chime.wav"
+.globl data_chime_wav_end_
+data_chime_wav_end_:
 
-.globl data_freeze_wav_start_
-data_freeze_wav_start_:
-.incbin "../data/sounds/status/freeze.wav"
-.globl data_freeze_wav_end_
-data_freeze_wav_end_:
+.globl data_shut_wav_start_
+data_shut_wav_start_:
+.incbin "../data/sounds/misc/shut.wav"
+.globl data_shut_wav_end_
+data_shut_wav_end_:
+
+.globl data_poison_wav_start_
+data_poison_wav_start_:
+.incbin "../data/sounds/status/poison.wav"
+.globl data_poison_wav_end_
+data_poison_wav_end_:
 

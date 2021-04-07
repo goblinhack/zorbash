@@ -73,12 +73,6 @@ bool sound_load (float volume, const std::string &file,
 
     auto s = std::make_shared< class sound >(alias);
 
-    auto result = all_sound.insert(std::make_pair(alias, s));
-    if (result.second == false) {
-        ERR("Cannot insert sound name [%s] failed", alias.c_str());
-        return false;
-    }
-
     s->volume = volume;
     s->data = file_load(file.c_str(), &s->len);
     if (!s->data) {
@@ -101,6 +95,12 @@ bool sound_load (float volume, const std::string &file,
         ERR("Mix_LoadWAV_RW fail %s: %s %s", 
             file.c_str(), Mix_GetError(), SDL_GetError());
         SDL_ClearError();
+        return false;
+    }
+
+    auto result = all_sound.insert(std::make_pair(alias, s));
+    if (result.second == false) {
+        ERR("Cannot insert sound name [%s] failed", alias.c_str());
         return false;
     }
 

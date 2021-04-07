@@ -60,45 +60,45 @@ data_boom_b_wav_start_:
 .globl data_boom_b_wav_end_
 data_boom_b_wav_end_:
 
-.globl data_area_effect_b_wav_start_
-data_area_effect_b_wav_start_:
-.incbin "../data/sounds/impacts/area_effect_b.wav"
-.globl data_area_effect_b_wav_end_
-data_area_effect_b_wav_end_:
+.globl data_magic_crumble_wav_start_
+data_magic_crumble_wav_start_:
+.incbin "../data/sounds/impacts/magic_crumble.wav"
+.globl data_magic_crumble_wav_end_
+data_magic_crumble_wav_end_:
 
-.globl data_bonus_wav_start_
-data_bonus_wav_start_:
-.incbin "../data/sounds/interface/bonus.wav"
-.globl data_bonus_wav_end_
-data_bonus_wav_end_:
+.globl data_magic_dust_a_wav_start_
+data_magic_dust_a_wav_start_:
+.incbin "../data/sounds/impacts/magic_dust_a.wav"
+.globl data_magic_dust_a_wav_end_
+data_magic_dust_a_wav_end_:
 
-.globl data_click_wav_start_
-data_click_wav_start_:
-.incbin "../data/sounds/interface/click.wav"
-.globl data_click_wav_end_
-data_click_wav_end_:
+.globl data_1up_a_wav_start_
+data_1up_a_wav_start_:
+.incbin "../data/sounds/interface/1up_a.wav"
+.globl data_1up_a_wav_end_
+data_1up_a_wav_end_:
 
-.globl data_close_shut_wav_start_
-data_close_shut_wav_start_:
-.incbin "../data/sounds/misc/close_shut.wav"
-.globl data_close_shut_wav_end_
-data_close_shut_wav_end_:
+.globl data_clack_wav_start_
+data_clack_wav_start_:
+.incbin "../data/sounds/misc/clack.wav"
+.globl data_clack_wav_end_
+data_clack_wav_end_:
 
-.globl data_open_wav_start_
-data_open_wav_start_:
-.incbin "../data/sounds/misc/open.wav"
-.globl data_open_wav_end_
-data_open_wav_end_:
+.globl data_collect_b_wav_start_
+data_collect_b_wav_start_:
+.incbin "../data/sounds/misc/collect_b.wav"
+.globl data_collect_b_wav_end_
+data_collect_b_wav_end_:
 
-.globl data_blurb_wav_start_
-data_blurb_wav_start_:
-.incbin "../data/sounds/misc/blurb.wav"
-.globl data_blurb_wav_end_
-data_blurb_wav_end_:
+.globl data_close_wav_start_
+data_close_wav_start_:
+.incbin "../data/sounds/misc/close.wav"
+.globl data_close_wav_end_
+data_close_wav_end_:
 
-.globl data_confuse_wav_start_
-data_confuse_wav_start_:
-.incbin "../data/sounds/status/confuse.wav"
-.globl data_confuse_wav_end_
-data_confuse_wav_end_:
+.globl data_ping_wav_start_
+data_ping_wav_start_:
+.incbin "../data/sounds/misc/ping.wav"
+.globl data_ping_wav_end_
+data_ping_wav_end_:
 

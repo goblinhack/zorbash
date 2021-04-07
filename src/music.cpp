@@ -67,13 +67,6 @@ bool music_load (uint32_t rate, const std::string &file,
 
     auto m = std::make_shared< class music >(name_alias);
 
-    auto result = all_music.insert(std::make_pair(name_alias, m));
-
-    if (result.second == false) {
-        ERR("Cannot insert music name [%s] failed", name_alias.c_str());
-        return false;
-    }
-
     m->rate = rate;
     m->data = file_load(file.c_str(), &m->len);
     if (!m->data) {
@@ -94,6 +87,12 @@ bool music_load (uint32_t rate, const std::string &file,
     if (!m->m) {
         ERR("Mix_LoadMUS_RW fail %s: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
         SDL_ClearError();
+        return false;
+    }
+
+    auto result = all_music.insert(std::make_pair(name_alias, m));
+    if (result.second == false) {
+        ERR("Cannot insert music name [%s] failed", name_alias.c_str());
         return false;
     }
 

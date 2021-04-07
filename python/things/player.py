@@ -2,10 +2,24 @@ import zx
 import tp
 
 
+# hitter: arrow / monst
+# real_hitter: who fired the arrow
+def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+    if damage <= 1:
+        zx.sound_play("player_hit1")
+    if damage <= 5:
+        zx.sound_play("player_hit2")
+    elif damage < 10:
+        zx.sound_play("player_hit3")
+    elif damage < 30:
+        zx.sound_play("player_hit4")
+
+def on_claw_attack(me):
+    zx.sound_play("player_punch")
+
 def tp_init(name, text_name, short_text_name, title):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_attack_shove(True)
-    x.set_is_attackable_by_monst(True)
     x.set_avoids_acid(True)
     x.set_avoids_fire(100)
     x.set_avoids_poison(True) # x.set_is_poison_immune(True) for some odd creature
@@ -29,6 +43,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
+    x.set_is_attackable_by_monst(True)
     x.set_is_bleeder(True)
     x.set_is_burnable(True)
     x.set_is_combustible(True)
@@ -36,7 +51,6 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_interesting(True)
     x.set_is_jumper(True)
     x.set_is_jumper_distance(2)
-    x.set_light_strength(8)
     x.set_is_living(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
@@ -45,6 +59,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_player(True)
     x.set_is_shovable(True)
     x.set_is_weapon_wielder(True)
+    x.set_light_strength(8)
     x.set_long_text_description("Our most noble adventurer or no particular race or gender. Devoid of fear and stout of heart. Likes kittens.")
     x.set_modifier_attack(10)
     x.set_modifier_constitution(10)
@@ -52,6 +67,8 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_modifier_strength(10)
     x.set_move_speed_ms(150)
     x.set_on_death_is_corpse(True)
+    x.set_on_hit_do("player.on_hit()")
+    x.set_on_claw_attack_do("player.on_claw_attack()")
     x.set_stamina(100)
     x.set_text_a_or_an("the")
     x.set_text_description("Our most noble adventurer. Press 'h' for help.")

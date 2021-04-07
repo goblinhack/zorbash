@@ -250,6 +250,7 @@ public:
     bool eat(Thingp it);
     bool fall(void);
     bool fall_to_next_level(void);
+    bool fire_laser_choose_target(Thingp item);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
     bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
     bool inventory_id_insert(Thingp what);
@@ -263,6 +264,8 @@ public:
     bool is_enemy(Thingp attacker) const;
     bool is_on_fire(void);
     bool kill_if(const std::string& what, const point &p);
+    bool laser_anim_exists(void);
+    bool laser_fire(Thingp item, Thingp target);
     bool location_check();
     bool match(const std::string& what);
     bool move(fpoint future_pos);
@@ -273,7 +276,6 @@ public:
     bool move_to_or_escape(const point&);
     bool open_door(Thingp door);
     bool particle_anim_exists(void);
-    bool laser_anim_exists(void);
     bool place(const std::string& what, const point &p);
     bool possible_to_attack(const Thingp it);
     bool set_on_fire(const std::string &why);
@@ -282,18 +284,16 @@ public:
     bool skill_use(Thingp it);
     bool skillbox_id_insert(Thingp what);
     bool skillbox_id_remove(Thingp what);
+    bool spawn_at(const std::string& what);
+    bool spawn_at_if_possible(const std::string& what);
     bool spawn_fire(const std::string& what);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
     bool spawn_radius_range(Thingp parent, Thingp target, const std::string& what, uint32_t radius_min, uint32_t radius_max);
-    bool spawn_at(const std::string& what);
-    bool spawn_at_if_possible(const std::string& what);
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);
-    bool throw_item_choose_target(Thingp item);
-    bool fire_laser_choose_target(Thingp item);
-    bool laser_fire(Thingp item, Thingp target);
     bool target_select(Thingp item);
+    bool throw_item_choose_target(Thingp item);
     bool try_harder_to_jump(void);
     bool try_to_carry(Thingp w);
     bool try_to_escape(void);
@@ -331,11 +331,14 @@ public:
     const std::string& get_on_idle_dice_str(void) const;
     const std::string& get_resurrect_dice_str(void) const;
     const std::string& gfx_anim_attack(void) const;
+    const std::string& laser_name(void) const;
     const std::string& light_color(void) const;
     const std::string& long_text_description(void) const;
     const std::string& on_birth_do(void) const;
     const std::string& on_death_do(void) const;
     const std::string& on_use_do(void) const;
+    const std::string& on_hit_do(void) const;
+    const std::string& on_claw_attack_do(void) const;
     const std::string& short_text_name(void) const;
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
@@ -344,7 +347,6 @@ public:
     const std::string& str4(void) const;
     const std::string& str5(void) const;
     const std::string& str6(void) const;
-    const std::string& laser_name(void) const;
     const std::string& text_description(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
@@ -386,6 +388,8 @@ public:
     int bag_item_height(void) const;
     int bag_item_width(void) const;
     int bag_width(void);
+    int blast_max_radius(void) const;
+    int blast_min_radius(void) const;
     int collision_attack(void) const;
     int collision_box(void) const;
     int collision_check(void) const;
@@ -395,6 +399,8 @@ public:
     int damage_doubled_from_fire(void) const;
     int damage_doubled_from_poison(void) const;
     int damage_doubled_from_water(void) const;
+    int decr_charge_count(int);
+    int decr_charge_count(void);
     int decr_current_damage(int);
     int decr_current_damage(void);
     int decr_gold(int);
@@ -409,8 +415,6 @@ public:
     int decr_lifespan(void);
     int decr_minion_count(int);
     int decr_minion_count(void);
-    int decr_charge_count(int);
-    int decr_charge_count(void);
     int decr_modifier_attack(int);
     int decr_modifier_attack(void);
     int decr_modifier_constitution(int);
@@ -461,6 +465,7 @@ public:
     int decr_tick_rate_tenths(void);
     int defence(void) const;
     int get_bounce_count(void) const;
+    int get_charge_count(void) const;
     int get_current_damage(void) const;
     int get_damage_bite(void) const;
     int get_damage_melee(void) const;
@@ -471,11 +476,11 @@ public:
     int get_health_initial(void) const;
     int get_health_max(void) const;
     int get_idle_tick(void) const;
+    int get_initial_charge_count(void) const;
     int get_keys(void) const;
     int get_lifespan(void) const;
     int get_lifespan_initial(void) const;
     int get_minion_count(void) const;
-    int get_charge_count(void) const;
     int get_modifier_attack(void) const;
     int get_modifier_constitution(void) const;
     int get_modifier_defence(void) const;
@@ -525,6 +530,8 @@ public:
     int health_hunger_pct(void) const;
     int health_starving_pct(void) const;
     int hunger_clock_freq_ms(void) const;
+    int incr_charge_count(int);
+    int incr_charge_count(void);
     int incr_current_damage(int);
     int incr_current_damage(void);
     int incr_gold(int);
@@ -539,8 +546,6 @@ public:
     int incr_lifespan(void);
     int incr_minion_count(int);
     int incr_minion_count(void);
-    int incr_charge_count(int);
-    int incr_charge_count(void);
     int incr_modifier_attack(int);
     int incr_modifier_attack(void);
     int incr_modifier_constitution(int);
@@ -590,7 +595,6 @@ public:
     int incr_tick_rate_tenths(int);
     int incr_tick_rate_tenths(void);
     int inventory_id_slot_count(const uint32_t slot);
-    int item_count(Tpp item);
     int is_able_to_change_levels(void) const;
     int is_able_to_fall(void) const;
     int is_able_to_see_through_doors(void) const;
@@ -655,8 +659,6 @@ public:
     int is_item(void) const;
     int is_item_collected_as_gold(void) const;
     int is_item_eater(void) const;
-    int blast_max_radius(void) const;
-    int blast_min_radius(void) const;
     int is_item_not_stackable(void) const;
     int is_jelly(void) const;
     int is_jelly_baby(void) const;
@@ -670,6 +672,7 @@ public:
     int is_key(void) const;
     int is_killed_on_hit_or_miss(void) const;
     int is_killed_on_hitting(void) const;
+    int is_laser_target_select_automatically_when_chosen(void) const;
     int is_lava(void) const;
     int is_light_blocker(void) const;
     int is_living(void) const;
@@ -701,11 +704,6 @@ public:
     int is_rrr12(void) const;
     int is_rrr13(void) const;
     int is_rrr14(void) const;
-    int range_max(void) const;
-    int is_laser_target_select_automatically_when_chosen(void) const;
-    int is_wand(void) const;
-    int get_initial_charge_count(void) const;
-    int minion_leash_distance(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
@@ -738,17 +736,22 @@ public:
     int is_used_automatically_when_selected(void) const;
     int is_used_when_thrown(void) const;
     int is_wall(void) const;
+    int is_wand(void) const;
     int is_water_lover(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;
+    int item_count(Tpp item);
     int light_strength(void) const;
+    int minion_leash_distance(void) const;
     int minion_limit(void) const;
     int monst_size(void) const;
     int normal_placement_rules(void) const;
     int on_death_drop_all_items(void) const;
     int on_death_is_corpse(void) const;
     int on_death_is_open(void) const;
+    int range_max(void) const;
     int rarity(void) const;
+    int set_charge_count(int);
     int set_current_damage(int);
     int set_gold(int);
     int set_health(int);
@@ -756,7 +759,6 @@ public:
     int set_keys(int);
     int set_lifespan(int);
     int set_minion_count(int);
-    int set_charge_count(int);
     int set_modifier_attack(int);
     int set_modifier_constitution(int);
     int set_modifier_defence(int);
@@ -1003,9 +1005,9 @@ public:
     void dead_(const char *fmt, va_list args); // compile error without
     void delete_age_map(void);
     void delete_dmap_scent(void);
+    void delete_laser();
     void delete_lights(void);
     void delete_particle();
-    void delete_laser();
     void destroy();
     void destroyed(void);
     void die(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -1065,6 +1067,8 @@ public:
     void new_dmap_scent(void);
     void new_light(point offset, int strength, color col, int fbo);
     void new_monst(void);
+    void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
+    void on_claw_attack(void);
     void poison_boost(int v);
     void reinit(void);
     void remove_all_references();

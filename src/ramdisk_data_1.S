@@ -60,45 +60,51 @@ data_mouse_wav_start_:
 .globl data_mouse_wav_end_
 data_mouse_wav_end_:
 
-.globl data_explode_b_wav_start_
-data_explode_b_wav_start_:
-.incbin "../data/sounds/impacts/explode_b.wav"
-.globl data_explode_b_wav_end_
-data_explode_b_wav_end_:
+.globl data_pit_trap_fall_wav_start_
+data_pit_trap_fall_wav_start_:
+.incbin "../data/sounds/impacts/pit_trap_fall.wav"
+.globl data_pit_trap_fall_wav_end_
+data_pit_trap_fall_wav_end_:
 
-.globl data_magic_dust_a_wav_start_
-data_magic_dust_a_wav_start_:
-.incbin "../data/sounds/impacts/magic_dust_a.wav"
-.globl data_magic_dust_a_wav_end_
-data_magic_dust_a_wav_end_:
+.globl data_hit_wav_start_
+data_hit_wav_start_:
+.incbin "../data/sounds/impacts/hit.wav"
+.globl data_hit_wav_end_
+data_hit_wav_end_:
 
-.globl data_1up_a_wav_start_
-data_1up_a_wav_start_:
-.incbin "../data/sounds/interface/1up_a.wav"
-.globl data_1up_a_wav_end_
-data_1up_a_wav_end_:
+.globl data_lose_a_wav_start_
+data_lose_a_wav_start_:
+.incbin "../data/sounds/interface/lose_a.wav"
+.globl data_lose_a_wav_end_
+data_lose_a_wav_end_:
 
-.globl data_clack_wav_start_
-data_clack_wav_start_:
-.incbin "../data/sounds/misc/clack.wav"
-.globl data_clack_wav_end_
-data_clack_wav_end_:
+.globl data_score_wav_start_
+data_score_wav_start_:
+.incbin "../data/sounds/interface/score.wav"
+.globl data_score_wav_end_
+data_score_wav_end_:
 
-.globl data_collect_b_wav_start_
-data_collect_b_wav_start_:
-.incbin "../data/sounds/misc/collect_b.wav"
-.globl data_collect_b_wav_end_
-data_collect_b_wav_end_:
+.globl data_mushroom_wav_start_
+data_mushroom_wav_start_:
+.incbin "../data/sounds/misc/mushroom.wav"
+.globl data_mushroom_wav_end_
+data_mushroom_wav_end_:
 
-.globl data_close_wav_start_
-data_close_wav_start_:
-.incbin "../data/sounds/misc/close.wav"
-.globl data_close_wav_end_
-data_close_wav_end_:
+.globl data_drip_wav_start_
+data_drip_wav_start_:
+.incbin "../data/sounds/misc/drip.wav"
+.globl data_drip_wav_end_
+data_drip_wav_end_:
 
-.globl data_ping_wav_start_
-data_ping_wav_start_:
-.incbin "../data/sounds/misc/ping.wav"
-.globl data_ping_wav_end_
-data_ping_wav_end_:
+.globl data_scramble_wav_start_
+data_scramble_wav_start_:
+.incbin "../data/sounds/misc/scramble.wav"
+.globl data_scramble_wav_end_
+data_scramble_wav_end_:
+
+.globl data_burn_wav_start_
+data_burn_wav_start_:
+.incbin "../data/sounds/status/burn.wav"
+.globl data_burn_wav_end_
+data_burn_wav_end_:
 

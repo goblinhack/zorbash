@@ -1070,6 +1070,28 @@ void ramdisk_init (void)
     }
 
     {
+        extern unsigned char *data_437653__dersuperanton__moan_male_beat_punch_wav_start_ asm("data_437653__dersuperanton__moan_male_beat_punch_wav_start_");
+        extern unsigned char *data_437653__dersuperanton__moan_male_beat_punch_wav_end_ asm("data_437653__dersuperanton__moan_male_beat_punch_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_437653__dersuperanton__moan_male_beat_punch_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_437653__dersuperanton__moan_male_beat_punch_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_434462__dersuperanton__getting_hit_hugh_wav_start_ asm("data_434462__dersuperanton__getting_hit_hugh_wav_start_");
+        extern unsigned char *data_434462__dersuperanton__getting_hit_hugh_wav_end_ asm("data_434462__dersuperanton__getting_hit_hugh_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_434462__dersuperanton__getting_hit_hugh_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_434462__dersuperanton__getting_hit_hugh_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/434462__dersuperanton__getting-hit-hugh.wav"] = r;
+    }
+
+    {
         extern unsigned char *data_impact_a_wav_start_ asm("data_impact_a_wav_start_");
         extern unsigned char *data_impact_a_wav_end_ asm("data_impact_a_wav_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_impact_a_wav_start_;
@@ -1147,6 +1169,17 @@ void ramdisk_init (void)
     }
 
     {
+        extern unsigned char *data_437650__dersuperanton__getting_hit_damage_scream_wav_start_ asm("data_437650__dersuperanton__getting_hit_damage_scream_wav_start_");
+        extern unsigned char *data_437650__dersuperanton__getting_hit_damage_scream_wav_end_ asm("data_437650__dersuperanton__getting_hit_damage_scream_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_437650__dersuperanton__getting_hit_damage_scream_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_437650__dersuperanton__getting_hit_damage_scream_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/437650__dersuperanton__getting-hit-damage-scream.wav"] = r;
+    }
+
+    {
         extern unsigned char *data_area_effect_a_wav_start_ asm("data_area_effect_a_wav_start_");
         extern unsigned char *data_area_effect_a_wav_end_ asm("data_area_effect_a_wav_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_area_effect_a_wav_start_;
@@ -1221,6 +1254,17 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/sounds/impacts/magic_dust_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_82388__robinhood76__01308_man_hit_9_wav_start_ asm("data_82388__robinhood76__01308_man_hit_9_wav_start_");
+        extern unsigned char *data_82388__robinhood76__01308_man_hit_9_wav_end_ asm("data_82388__robinhood76__01308_man_hit_9_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_82388__robinhood76__01308_man_hit_9_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_82388__robinhood76__01308_man_hit_9_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/82388__robinhood76__01308_man_hit_9.wav"] = r;
     }
 
     {

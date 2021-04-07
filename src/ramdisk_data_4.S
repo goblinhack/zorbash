@@ -60,45 +60,45 @@ data_boom_a_wav_start_:
 .globl data_boom_a_wav_end_
 data_boom_a_wav_end_:
 
-.globl data_area_effect_a_wav_start_
-data_area_effect_a_wav_start_:
-.incbin "../data/sounds/impacts/area_effect_a.wav"
-.globl data_area_effect_a_wav_end_
-data_area_effect_a_wav_end_:
+.globl data_explode_c_wav_start_
+data_explode_c_wav_start_:
+.incbin "../data/sounds/impacts/explode_c.wav"
+.globl data_explode_c_wav_end_
+data_explode_c_wav_end_:
 
-.globl data_end_turn_wav_start_
-data_end_turn_wav_start_:
-.incbin "../data/sounds/interface/end_turn.wav"
-.globl data_end_turn_wav_end_
-data_end_turn_wav_end_:
+.globl data_82388__robinhood76__01308_man_hit_9_wav_start_
+data_82388__robinhood76__01308_man_hit_9_wav_start_:
+.incbin "../data/sounds/impacts/82388__robinhood76__01308_man_hit_9.wav"
+.globl data_82388__robinhood76__01308_man_hit_9_wav_end_
+data_82388__robinhood76__01308_man_hit_9_wav_end_:
 
-.globl data_coin_wav_start_
-data_coin_wav_start_:
-.incbin "../data/sounds/interface/coin.wav"
-.globl data_coin_wav_end_
-data_coin_wav_end_:
+.globl data_gold_wav_start_
+data_gold_wav_start_:
+.incbin "../data/sounds/interface/gold.wav"
+.globl data_gold_wav_end_
+data_gold_wav_end_:
 
-.globl data_fall_wav_start_
-data_fall_wav_start_:
-.incbin "../data/sounds/misc/fall.wav"
-.globl data_fall_wav_end_
-data_fall_wav_end_:
+.globl data_ding_wav_start_
+data_ding_wav_start_:
+.incbin "../data/sounds/interface/ding.wav"
+.globl data_ding_wav_end_
+data_ding_wav_end_:
 
-.globl data_zong_wav_start_
-data_zong_wav_start_:
-.incbin "../data/sounds/misc/zong.wav"
-.globl data_zong_wav_end_
-data_zong_wav_end_:
+.globl data_bay_door_open_wav_start_
+data_bay_door_open_wav_start_:
+.incbin "../data/sounds/misc/bay_door_open.wav"
+.globl data_bay_door_open_wav_end_
+data_bay_door_open_wav_end_:
 
-.globl data_wiggle_b_wav_start_
-data_wiggle_b_wav_start_:
-.incbin "../data/sounds/misc/wiggle_b.wav"
-.globl data_wiggle_b_wav_end_
-data_wiggle_b_wav_end_:
+.globl data_transistor_wav_start_
+data_transistor_wav_start_:
+.incbin "../data/sounds/misc/transistor.wav"
+.globl data_transistor_wav_end_
+data_transistor_wav_end_:
 
-.globl data_mutation_wav_start_
-data_mutation_wav_start_:
-.incbin "../data/sounds/status/mutation.wav"
-.globl data_mutation_wav_end_
-data_mutation_wav_end_:
+.globl data_rubberband_wav_start_
+data_rubberband_wav_start_:
+.incbin "../data/sounds/misc/rubberband.wav"
+.globl data_rubberband_wav_end_
+data_rubberband_wav_end_:
 
