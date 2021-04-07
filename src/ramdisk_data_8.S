@@ -48,29 +48,41 @@ data_shotgun_wav_start_:
 .globl data_shotgun_wav_end_
 data_shotgun_wav_end_:
 
-.globl data_claw_wav_start_
-data_claw_wav_start_:
-.incbin "../data/sounds/creatures/claw.wav"
-.globl data_claw_wav_end_
-data_claw_wav_end_:
+.globl data_beetle_wav_start_
+data_beetle_wav_start_:
+.incbin "../data/sounds/creatures/beetle.wav"
+.globl data_beetle_wav_end_
+data_beetle_wav_end_:
 
-.globl data_434462__dersuperanton__getting_hit_hugh_wav_start_
-data_434462__dersuperanton__getting_hit_hugh_wav_start_:
-.incbin "../data/sounds/impacts/434462__dersuperanton__getting-hit-hugh.wav"
-.globl data_434462__dersuperanton__getting_hit_hugh_wav_end_
-data_434462__dersuperanton__getting_hit_hugh_wav_end_:
+.globl data_slime4_wav_start_
+data_slime4_wav_start_:
+.incbin "../data/sounds/creatures/slime4.wav"
+.globl data_slime4_wav_end_
+data_slime4_wav_end_:
 
-.globl data_area_effect_b_wav_start_
-data_area_effect_b_wav_start_:
-.incbin "../data/sounds/impacts/area_effect_b.wav"
-.globl data_area_effect_b_wav_end_
-data_area_effect_b_wav_end_:
+.globl data_437653__dersuperanton__moan_male_beat_punch_wav_start_
+data_437653__dersuperanton__moan_male_beat_punch_wav_start_:
+.incbin "../data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav"
+.globl data_437653__dersuperanton__moan_male_beat_punch_wav_end_
+data_437653__dersuperanton__moan_male_beat_punch_wav_end_:
 
-.globl data_end_turn_wav_start_
-data_end_turn_wav_start_:
-.incbin "../data/sounds/interface/end_turn.wav"
-.globl data_end_turn_wav_end_
-data_end_turn_wav_end_:
+.globl data_door_hit2_wav_start_
+data_door_hit2_wav_start_:
+.incbin "../data/sounds/impacts/door_hit2.wav"
+.globl data_door_hit2_wav_end_
+data_door_hit2_wav_end_:
+
+.globl data_spike_trap_a_wav_start_
+data_spike_trap_a_wav_start_:
+.incbin "../data/sounds/impacts/spike_trap_a.wav"
+.globl data_spike_trap_a_wav_end_
+data_spike_trap_a_wav_end_:
+
+.globl data_bonus_wav_start_
+data_bonus_wav_start_:
+.incbin "../data/sounds/interface/bonus.wav"
+.globl data_bonus_wav_end_
+data_bonus_wav_end_:
 
 .globl data_coin_wav_start_
 data_coin_wav_start_:
@@ -78,27 +90,27 @@ data_coin_wav_start_:
 .globl data_coin_wav_end_
 data_coin_wav_end_:
 
-.globl data_fall_wav_start_
-data_fall_wav_start_:
-.incbin "../data/sounds/misc/fall.wav"
-.globl data_fall_wav_end_
-data_fall_wav_end_:
+.globl data_bay_door_close_wav_start_
+data_bay_door_close_wav_start_:
+.incbin "../data/sounds/misc/bay_door_close.wav"
+.globl data_bay_door_close_wav_end_
+data_bay_door_close_wav_end_:
 
-.globl data_zong_wav_start_
-data_zong_wav_start_:
-.incbin "../data/sounds/misc/zong.wav"
-.globl data_zong_wav_end_
-data_zong_wav_end_:
+.globl data_whistle_wav_start_
+data_whistle_wav_start_:
+.incbin "../data/sounds/misc/whistle.wav"
+.globl data_whistle_wav_end_
+data_whistle_wav_end_:
 
-.globl data_wiggle_b_wav_start_
-data_wiggle_b_wav_start_:
-.incbin "../data/sounds/misc/wiggle_b.wav"
-.globl data_wiggle_b_wav_end_
-data_wiggle_b_wav_end_:
+.globl data_wave_wav_start_
+data_wave_wav_start_:
+.incbin "../data/sounds/misc/wave.wav"
+.globl data_wave_wav_end_
+data_wave_wav_end_:
 
-.globl data_mutation_wav_start_
-data_mutation_wav_start_:
-.incbin "../data/sounds/status/mutation.wav"
-.globl data_mutation_wav_end_
-data_mutation_wav_end_:
+.globl data_curse_wav_start_
+data_curse_wav_start_:
+.incbin "../data/sounds/status/curse.wav"
+.globl data_curse_wav_end_
+data_curse_wav_end_:
 
