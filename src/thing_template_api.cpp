@@ -210,7 +210,7 @@ int Tp::minion_leash_distance(void) const { return _minion_leash_distance; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_skill(void) const { return _is_skill; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
-int Tp::is_dungeon_wall(void) const { return _is_dungeon_wall; }
+int Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
 int Tp::is_descend_sewer(void) const { return _is_descend_sewer; }
 int Tp::is_burnable(void) const { return _is_burnable; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
@@ -450,7 +450,7 @@ void Tp::set_minion_leash_distance(int v) { _minion_leash_distance = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_skill(int v) { _is_skill = v; }
 void Tp::set_is_sewer_wall(int v) { _is_sewer_wall = v; }
-void Tp::set_is_dungeon_wall(int v) { _is_dungeon_wall = v; }
+void Tp::set_is_wall_dungeon(int v) { _is_wall_dungeon = v; }
 void Tp::set_is_descend_sewer(int v) { _is_descend_sewer = v; }
 void Tp::set_is_burnable(int v) { _is_burnable = v; }
 void Tp::set_is_shallow_water(int v) { _is_shallow_water = v; }

@@ -597,9 +597,9 @@ int Thing::is_sewer_wall(void) const
     return (tp()->is_sewer_wall());
 }
 
-int Thing::is_dungeon_wall(void) const
+int Thing::is_wall_dungeon(void) const
 {_
-    return (tp()->is_dungeon_wall());
+    return (tp()->is_wall_dungeon());
 }
 
 int Thing::is_descend_sewer(void) const

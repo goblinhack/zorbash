@@ -152,7 +152,7 @@ private:
     int _is_dirt {};
     int _is_door {};
     int _is_droppable {};
-    int _is_dungeon_wall {};
+    int _is_wall_dungeon {};
     int _is_ethereal {};
     int _is_explosion {};
     int _is_extreme_hazard {};
@@ -507,7 +507,7 @@ public:
     int is_dirt(void) const;
     int is_door(void) const;
     int is_droppable(void) const;
-    int is_dungeon_wall(void) const;
+    int is_wall_dungeon(void) const;
     int is_ethereal(void) const;
     int is_explosion(void) const;
     int is_extreme_hazard(void) const;
@@ -748,7 +748,7 @@ public:
     void set_is_dirt(int);
     void set_is_door(int);
     void set_is_droppable(int);
-    void set_is_dungeon_wall(int);
+    void set_is_wall_dungeon(int);
     void set_is_ethereal(int);
     void set_is_explosion(int);
     void set_is_extreme_hazard(int);
@@ -938,7 +938,7 @@ class Tp* tp_random_deco(void);
 class Tp* tp_random_descend_sewer(void);
 class Tp* tp_random_dirt(void);
 class Tp* tp_random_door(void);
-class Tp* tp_random_dungeon_wall(void);
+class Tp* tp_random_wall_dungeon(void);
 class Tp* tp_random_entrance(void);
 class Tp* tp_random_exit(void);
 class Tp* tp_random_floor(void);

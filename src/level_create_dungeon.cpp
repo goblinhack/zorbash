@@ -41,31 +41,36 @@ bool Level::create_dungeon (point3d at, int seed)
 #endif
         auto tries = 10000;
 
-        create_dungeon_place_walls(dungeon, 1, 6, 6, tries);
+        auto wall_type = tp_random_wall_dungeon();
+        if (!wall_type) {
+            DIE("No dungeon walls found");
+        }
+
+        create_dungeon_place_walls(dungeon, wall_type, 1, 6, 6, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 2, 6, 6, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 2, 6, 6, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 1, 6, 3, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 1, 6, 3, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 1, 3, 6, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 1, 3, 6, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 1, 3, 3, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 1, 3, 3, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 2, 3, 3, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 2, 3, 3, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 1, 2, 2, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 1, 2, 2, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 2, 2, 2, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 2, 2, 2, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 3, 2, 2, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 3, 2, 2, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 1, 2, 1, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 1, 2, 1, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 2, 2, 1, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 2, 2, 1, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 1, 1, 2, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 1, 1, 2, tries);
         if (g_errored) { return false; }
-        create_dungeon_place_walls(dungeon, 2, 1, 2, tries);
+        create_dungeon_place_walls(dungeon, wall_type, 2, 1, 2, tries);
         if (g_errored) { return false; }
 
         {
@@ -207,8 +212,9 @@ bool Level::create_dungeon (point3d at, int seed)
         create_dungeon_place_rocks(dungeon, 2, 1, 2, tries);
         if (g_errored) { return false; }
 
-        create_dungeon_place_remaining_walls(dungeon, "dungeon_wall");
+        create_dungeon_place_remaining_walls(dungeon, wall_type->name());
         if (g_errored) { return false; }
+
         create_dungeon_place_remaining_rocks(dungeon, "rock1");
         if (g_errored) { return false; }
         place_dirt(dungeon);
@@ -325,14 +331,9 @@ placed_player:
     return true;
 }
 
-void Level::create_dungeon_place_walls (Dungeonp d, int variant, 
+void Level::create_dungeon_place_walls (Dungeonp d, Tpp tp, int variant, 
                                         int block_width, int block_height, int tries)
 {_
-    auto tp = tp_random_dungeon_wall();
-    if (!tp) {
-        ERR("Place walls failed");
-        return;
-    }
     auto what = tp->name();
 
     while (tries--) {

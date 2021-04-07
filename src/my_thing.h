@@ -635,7 +635,7 @@ public:
     int is_dirt(void) const;
     int is_door(void) const;
     int is_droppable(void) const;
-    int is_dungeon_wall(void) const;
+    int is_wall_dungeon(void) const;
     int is_ethereal(void) const;
     int is_explosion(void) const;
     int is_extreme_hazard(void) const;

@@ -767,7 +767,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr2)
     TP_SET_DECL(is_skill)
     TP_SET_DECL(is_sewer_wall)
-    TP_SET_DECL(is_dungeon_wall)
+    TP_SET_DECL(is_wall_dungeon)
     TP_SET_DECL(is_descend_sewer)
     TP_SET_DECL(is_burnable)
     TP_SET_DECL(is_shallow_water)
