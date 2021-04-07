@@ -1070,6 +1070,8 @@ public:
     void new_monst(void);
     void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
     void on_open(void);
+    void on_use(Thingp what, Thingp target);
+    void on_use(Thingp what);
     void on_claw_attack(void);
     void poison_boost(int v);
     void reinit(void);

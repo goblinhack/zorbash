@@ -1,6 +1,9 @@
 import zx
 import tp
+import random
 
+def on_use(me, what, target, x, y):
+    zx.sound_play("sword_swing{}".format(random.randint(1,3)))
 
 def init_swing(name):
     x = tp.Tp(name)
@@ -115,6 +118,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_modifier_constitution(0)
     x.set_modifier_defence(0)
     x.set_modifier_strength(0)
+    x.set_on_use_do("axe_basic.on_use()")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy choppy means of justice.")
     x.set_weapon_carry_anim("axe_basic_carry")

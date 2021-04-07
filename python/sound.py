@@ -2,7 +2,10 @@ import zx
 
 zx.sound_load(volume=1.0, file="data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav",      name="player_punch")
 zx.sound_load(volume=1.0, file="data/sounds/impacts/443293__deathscyp__wood-break.wav",                    name="door_break")
-zx.sound_load(volume=1.0, file="data/sounds/impacts//554153__danielvj__door-open.wav",                     name="door_open")
+zx.sound_load(volume=1.0, file="data/sounds/impacts/554153__danielvj__door-open.wav",                      name="door_open")
+zx.sound_load(volume=1.0, file="data/sounds/impacts/59992__qubodup__swosh-sword-swing.wav",                name="sword_swing1")
+zx.sound_load(volume=1.0, file="data/sounds/impacts/268227__xxchr0nosxx__swing.wav",                       name="sword_swing2")
+zx.sound_load(volume=1.0, file="data/sounds/impacts/507466__danjocross__clean-fast-swoosh.wav",            name="sword_swing3")
 zx.sound_load(volume=1.0, file="data/sounds/impacts/door_hit1.wav",                                        name="door_hit1")
 zx.sound_load(volume=1.0, file="data/sounds/impacts/door_hit2.wav",                                        name="door_hit2")
 zx.sound_load(volume=1.0, file="data/sounds/creatures/148975__adam_n__squelch_1.wav",                      name="squelch")
