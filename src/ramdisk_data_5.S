@@ -48,11 +48,17 @@ data_reload_wav_start_:
 .globl data_reload_wav_end_
 data_reload_wav_end_:
 
-.globl data_skeleton_wav_start_
-data_skeleton_wav_start_:
-.incbin "../data/sounds/creatures/skeleton.wav"
-.globl data_skeleton_wav_end_
-data_skeleton_wav_end_:
+.globl data_slime8_wav_start_
+data_slime8_wav_start_:
+.incbin "../data/sounds/creatures/slime8.wav"
+.globl data_slime8_wav_end_
+data_slime8_wav_end_:
+
+.globl data_slime3_wav_start_
+data_slime3_wav_start_:
+.incbin "../data/sounds/creatures/slime3.wav"
+.globl data_slime3_wav_end_
+data_slime3_wav_end_:
 
 .globl data_boom_b_wav_start_
 data_boom_b_wav_start_:
@@ -60,45 +66,57 @@ data_boom_b_wav_start_:
 .globl data_boom_b_wav_end_
 data_boom_b_wav_end_:
 
-.globl data_magic_crumble_wav_start_
-data_magic_crumble_wav_start_:
-.incbin "../data/sounds/impacts/magic_crumble.wav"
-.globl data_magic_crumble_wav_end_
-data_magic_crumble_wav_end_:
+.globl data_sear_wav_start_
+data_sear_wav_start_:
+.incbin "../data/sounds/impacts/sear.wav"
+.globl data_sear_wav_end_
+data_sear_wav_end_:
 
-.globl data_magic_dust_a_wav_start_
-data_magic_dust_a_wav_start_:
-.incbin "../data/sounds/impacts/magic_dust_a.wav"
-.globl data_magic_dust_a_wav_end_
-data_magic_dust_a_wav_end_:
+.globl data_area_effect_b_wav_start_
+data_area_effect_b_wav_start_:
+.incbin "../data/sounds/impacts/area_effect_b.wav"
+.globl data_area_effect_b_wav_end_
+data_area_effect_b_wav_end_:
 
-.globl data_1up_a_wav_start_
-data_1up_a_wav_start_:
-.incbin "../data/sounds/interface/1up_a.wav"
-.globl data_1up_a_wav_end_
-data_1up_a_wav_end_:
+.globl data_click2_wav_start_
+data_click2_wav_start_:
+.incbin "../data/sounds/interface/click2.wav"
+.globl data_click2_wav_end_
+data_click2_wav_end_:
 
-.globl data_clack_wav_start_
-data_clack_wav_start_:
-.incbin "../data/sounds/misc/clack.wav"
-.globl data_clack_wav_end_
-data_clack_wav_end_:
+.globl data_blip_wav_start_
+data_blip_wav_start_:
+.incbin "../data/sounds/interface/blip.wav"
+.globl data_blip_wav_end_
+data_blip_wav_end_:
 
-.globl data_collect_b_wav_start_
-data_collect_b_wav_start_:
-.incbin "../data/sounds/misc/collect_b.wav"
-.globl data_collect_b_wav_end_
-data_collect_b_wav_end_:
+.globl data_ding_wav_start_
+data_ding_wav_start_:
+.incbin "../data/sounds/interface/ding.wav"
+.globl data_ding_wav_end_
+data_ding_wav_end_:
 
-.globl data_close_wav_start_
-data_close_wav_start_:
-.incbin "../data/sounds/misc/close.wav"
-.globl data_close_wav_end_
-data_close_wav_end_:
+.globl data_bay_door_open_wav_start_
+data_bay_door_open_wav_start_:
+.incbin "../data/sounds/misc/bay_door_open.wav"
+.globl data_bay_door_open_wav_end_
+data_bay_door_open_wav_end_:
 
-.globl data_ping_wav_start_
-data_ping_wav_start_:
-.incbin "../data/sounds/misc/ping.wav"
-.globl data_ping_wav_end_
-data_ping_wav_end_:
+.globl data_transistor_wav_start_
+data_transistor_wav_start_:
+.incbin "../data/sounds/misc/transistor.wav"
+.globl data_transistor_wav_end_
+data_transistor_wav_end_:
+
+.globl data_shut_wav_start_
+data_shut_wav_start_:
+.incbin "../data/sounds/misc/shut.wav"
+.globl data_shut_wav_end_
+data_shut_wav_end_:
+
+.globl data_poison_wav_start_
+data_poison_wav_start_:
+.incbin "../data/sounds/status/poison.wav"
+.globl data_poison_wav_end_
+data_poison_wav_end_:
 

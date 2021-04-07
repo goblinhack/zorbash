@@ -48,57 +48,69 @@ data_attack_a_wav_start_:
 .globl data_attack_a_wav_end_
 data_attack_a_wav_end_:
 
-.globl data_beetle_wav_start_
-data_beetle_wav_start_:
-.incbin "../data/sounds/creatures/beetle.wav"
-.globl data_beetle_wav_end_
-data_beetle_wav_end_:
+.globl data_slime9_wav_start_
+data_slime9_wav_start_:
+.incbin "../data/sounds/creatures/slime9.wav"
+.globl data_slime9_wav_end_
+data_slime9_wav_end_:
 
-.globl data_impact_b_wav_start_
-data_impact_b_wav_start_:
-.incbin "../data/sounds/impacts/impact_b.wav"
-.globl data_impact_b_wav_end_
-data_impact_b_wav_end_:
+.globl data_slime1_wav_start_
+data_slime1_wav_start_:
+.incbin "../data/sounds/creatures/slime1.wav"
+.globl data_slime1_wav_end_
+data_slime1_wav_end_:
 
-.globl data_437650__dersuperanton__getting_hit_damage_scream_wav_start_
-data_437650__dersuperanton__getting_hit_damage_scream_wav_start_:
-.incbin "../data/sounds/impacts/437650__dersuperanton__getting-hit-damage-scream.wav"
-.globl data_437650__dersuperanton__getting_hit_damage_scream_wav_end_
-data_437650__dersuperanton__getting_hit_damage_scream_wav_end_:
+.globl data_59992__qubodup__swosh_sword_swing_wav_start_
+data_59992__qubodup__swosh_sword_swing_wav_start_:
+.incbin "../data/sounds/impacts/59992__qubodup__swosh-sword-swing.wav"
+.globl data_59992__qubodup__swosh_sword_swing_wav_end_
+data_59992__qubodup__swosh_sword_swing_wav_end_:
 
-.globl data_select_b_wav_start_
-data_select_b_wav_start_:
-.incbin "../data/sounds/interface/select_b.wav"
-.globl data_select_b_wav_end_
-data_select_b_wav_end_:
+.globl data_explode_b_wav_start_
+data_explode_b_wav_start_:
+.incbin "../data/sounds/impacts/explode_b.wav"
+.globl data_explode_b_wav_end_
+data_explode_b_wav_end_:
 
-.globl data_blip_wav_start_
-data_blip_wav_start_:
-.incbin "../data/sounds/interface/blip.wav"
-.globl data_blip_wav_end_
-data_blip_wav_end_:
+.globl data_443293__deathscyp__wood_break_wav_start_
+data_443293__deathscyp__wood_break_wav_start_:
+.incbin "../data/sounds/impacts/443293__deathscyp__wood-break.wav"
+.globl data_443293__deathscyp__wood_break_wav_end_
+data_443293__deathscyp__wood_break_wav_end_:
 
-.globl data_step_wav_start_
-data_step_wav_start_:
-.incbin "../data/sounds/misc/step.wav"
-.globl data_step_wav_end_
-data_step_wav_end_:
+.globl data_select_a_wav_start_
+data_select_a_wav_start_:
+.incbin "../data/sounds/interface/select_a.wav"
+.globl data_select_a_wav_end_
+data_select_a_wav_end_:
 
-.globl data_shriek_wav_start_
-data_shriek_wav_start_:
-.incbin "../data/sounds/misc/shriek.wav"
-.globl data_shriek_wav_end_
-data_shriek_wav_end_:
+.globl data_click_long_wav_start_
+data_click_long_wav_start_:
+.incbin "../data/sounds/interface/click_long.wav"
+.globl data_click_long_wav_end_
+data_click_long_wav_end_:
 
-.globl data_resurrect_wav_start_
-data_resurrect_wav_start_:
-.incbin "../data/sounds/misc/resurrect.wav"
-.globl data_resurrect_wav_end_
-data_resurrect_wav_end_:
+.globl data_clack_wav_start_
+data_clack_wav_start_:
+.incbin "../data/sounds/misc/clack.wav"
+.globl data_clack_wav_end_
+data_clack_wav_end_:
 
-.globl data_curse_wav_start_
-data_curse_wav_start_:
-.incbin "../data/sounds/status/curse.wav"
-.globl data_curse_wav_end_
-data_curse_wav_end_:
+.globl data_collect_b_wav_start_
+data_collect_b_wav_start_:
+.incbin "../data/sounds/misc/collect_b.wav"
+.globl data_collect_b_wav_end_
+data_collect_b_wav_end_:
+
+.globl data_close_wav_start_
+data_close_wav_start_:
+.incbin "../data/sounds/misc/close.wav"
+.globl data_close_wav_end_
+data_close_wav_end_:
+
+.globl data_rubberband_wav_start_
+data_rubberband_wav_start_:
+.incbin "../data/sounds/misc/rubberband.wav"
+.globl data_rubberband_wav_end_
+data_rubberband_wav_end_:
 
