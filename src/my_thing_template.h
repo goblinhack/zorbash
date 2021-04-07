@@ -307,6 +307,7 @@ private:
     std::string _nutrition_dice_str;
     std::string _on_birth_do;
     std::string _on_death_do;
+    std::string _on_open_do;
     std::string _on_idle_dice_str;
     std::string _on_use_do;
     std::string _on_hit_do;
@@ -391,6 +392,7 @@ public:
     const std::string& nutrition_dice_str(void) const;
     const std::string& on_birth_do(void) const;
     const std::string& on_death_do(void) const;
+    const std::string& on_open_do(void) const;
     const std::string& on_idle_dice_str(void) const;
     const std::string& on_use_do(void) const;
     const std::string& on_hit_do(void) const;
@@ -872,6 +874,7 @@ public:
     void set_nutrition_dice(const std::string &);
     void set_on_birth_do(const std::string &);
     void set_on_death_do(const std::string &);
+    void set_on_open_do(const std::string &);
     void set_on_death_drop_all_items(int);
     void set_on_death_is_corpse(int);
     void set_on_death_is_open(int);

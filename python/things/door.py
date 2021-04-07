@@ -9,6 +9,9 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
 def on_death(me, x, y):
     zx.sound_play("door_break")
 
+def on_open(me, x, y):
+    zx.sound_play("door_open")
+
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_avoids_fire(100)
@@ -43,6 +46,7 @@ def tp_init(name, text_name):
     x.set_modifier_strength(0)
     x.set_normal_placement_rules(True)
     x.set_on_death_do("door.on_death()")
+    x.set_on_open_do("door.on_open()")
     x.set_on_death_is_corpse(True)
     x.set_on_death_is_open(True)
     x.set_on_hit_do("door.on_hit()")

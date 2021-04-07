@@ -336,6 +336,7 @@ public:
     const std::string& long_text_description(void) const;
     const std::string& on_birth_do(void) const;
     const std::string& on_death_do(void) const;
+    const std::string& on_open_do(void) const;
     const std::string& on_use_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_claw_attack_do(void) const;
@@ -1068,6 +1069,7 @@ public:
     void new_light(point offset, int strength, color col, int fbo);
     void new_monst(void);
     void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
+    void on_open(void);
     void on_claw_attack(void);
     void poison_boost(int v);
     void reinit(void);

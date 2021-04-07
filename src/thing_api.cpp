@@ -4879,6 +4879,7 @@ const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); 
 const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
 const std::string& Thing::on_claw_attack_do (void) const {_ return (tp()->on_claw_attack_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
+const std::string& Thing::on_open_do (void) const {_ return (tp()->on_open_do()); }
 const std::string& Thing::text_title (void) const {_ return (tp()->text_title()); }
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }
 const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on_shoved()); }
