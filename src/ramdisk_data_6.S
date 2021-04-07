@@ -84,21 +84,21 @@ data_swerve_wav_start_:
 .globl data_swerve_wav_end_
 data_swerve_wav_end_:
 
-.globl data_whistle_wav_start_
-data_whistle_wav_start_:
-.incbin "../data/sounds/misc/whistle.wav"
-.globl data_whistle_wav_end_
-data_whistle_wav_end_:
+.globl data_scatter_wav_start_
+data_scatter_wav_start_:
+.incbin "../data/sounds/misc/scatter.wav"
+.globl data_scatter_wav_end_
+data_scatter_wav_end_:
 
-.globl data_close_wav_start_
-data_close_wav_start_:
-.incbin "../data/sounds/misc/close.wav"
-.globl data_close_wav_end_
-data_close_wav_end_:
+.globl data_wiggle_a_wav_start_
+data_wiggle_a_wav_start_:
+.incbin "../data/sounds/misc/wiggle_a.wav"
+.globl data_wiggle_a_wav_end_
+data_wiggle_a_wav_end_:
 
-.globl data_ping_wav_start_
-data_ping_wav_start_:
-.incbin "../data/sounds/misc/ping.wav"
-.globl data_ping_wav_end_
-data_ping_wav_end_:
+.globl data_disease_wav_start_
+data_disease_wav_start_:
+.incbin "../data/sounds/status/disease.wav"
+.globl data_disease_wav_end_
+data_disease_wav_end_:
 

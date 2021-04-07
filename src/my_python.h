@@ -16,6 +16,10 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *py_add_module(const char *mod);
 PyObject *py_obj_attr(const PyObject *py_str, const char *attr);
+PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -61,17 +65,17 @@ PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds)         
 	                                                                        \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "ddi", kwlist,               \
                                      &d1, &d2, &i1)) {	                        \
-        return (0);	                                                        \
+        Py_RETURN_FALSE;                                                        \
     }	                                                                        \
 	                                                                        \
     if (!py_class) {	                                                        \
         ERR("%s, missing class", __FUNCTION__);	                                \
-        return (0);	                                                        \
+        Py_RETURN_FALSE;                                                        \
     }	                                                                        \
 	                                                                        \
     (__fn__)(d1, d2, i1);                                                       \
 	                                                                        \
-    Py_RETURN_NONE;	                                                        \
+    Py_RETURN_TRUE;	                                                        \
 }	                                                                        \
 
 #define PY_BODY_DOUBLE_DOUBLE_FN(__fn__, n1, n2)                                \
@@ -84,17 +88,17 @@ PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds)         
 	                                                                        \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist,                \
                                      &d1, &d2)) {	                        \
-        return (0);	                                                        \
+        Py_RETURN_FALSE;                                                        \
     }	                                                                        \
 	                                                                        \
     if (!py_class) {	                                                        \
         ERR("%s, missing class", __FUNCTION__);	                                \
-        return (0);	                                                        \
+        Py_RETURN_FALSE;                                                        \
     }	                                                                        \
 	                                                                        \
     (__fn__)(d1, d2);                                                           \
 	                                                                        \
-    Py_RETURN_NONE;	                                                        \
+    Py_RETURN_TRUE;	                                                        \
 }	                                                                        \
 
 #define PY_BODY_DOUBLE_FN(__fn__, n1)                                           \
@@ -106,12 +110,12 @@ PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds)         
 	                                                                        \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "d", kwlist,                 \
                                      &d1)) {	                                \
-        return (0);	                                                        \
+        Py_RETURN_FALSE;                                                        \
     }	                                                                        \
 	                                                                        \
     (__fn__)(d1);                                                               \
 	                                                                        \
-    Py_RETURN_NONE;	                                                        \
+    Py_RETURN_TRUE;	                                                        \
 }	                                                                        \
 
 #define PY_BODY_INT_INT_INT_FN(__fn__, n1, n2, n3)                              \
@@ -125,12 +129,12 @@ PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds)         
 	                                                                        \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "iii", kwlist,               \
                                      &n1, &n2, &n3)) {	                        \
-        return (0);	                                                        \
+        Py_RETURN_FALSE;                                                        \
     }	                                                                        \
 	                                                                        \
     (__fn__)(n1, n2, n3);                                                       \
 	                                                                        \
-    Py_RETURN_NONE;	                                                        \
+    Py_RETURN_TRUE;	                                                        \
 }	                                                                        \
 
 #define PY_BODY_INT_FN(__fn__, n1)                                              \
@@ -142,12 +146,12 @@ PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds)         
 	                                                                        \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "i", kwlist,                 \
                                      &n1)) {	                                \
-        return (0);	                                                        \
+        Py_RETURN_FALSE;                                                        \
     }	                                                                        \
 	                                                                        \
     (__fn__)(n1);                                                               \
 	                                                                        \
-    Py_RETURN_NONE;	                                                        \
+    Py_RETURN_TRUE;	                                                        \
 }	                                                                        \
 
 #define PY_BODY_VOID_FN(__fn__)                                                 \
@@ -155,7 +159,7 @@ PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds)         
 {	                                                                        \
     (__fn__)();                                                                 \
 	                                                                        \
-    Py_RETURN_NONE;	                                                        \
+    Py_RETURN_TRUE;	                                                        \
 }	                                                                        \
 
 //

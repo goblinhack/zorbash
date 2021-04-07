@@ -84,27 +84,21 @@ data_bay_door_close_wav_start_:
 .globl data_bay_door_close_wav_end_
 data_bay_door_close_wav_end_:
 
-.globl data_bay_door_open_wav_start_
-data_bay_door_open_wav_start_:
-.incbin "../data/sounds/misc/bay_door_open.wav"
-.globl data_bay_door_open_wav_end_
-data_bay_door_open_wav_end_:
+.globl data_whistle_wav_start_
+data_whistle_wav_start_:
+.incbin "../data/sounds/misc/whistle.wav"
+.globl data_whistle_wav_end_
+data_whistle_wav_end_:
 
-.globl data_unlock_wav_start_
-data_unlock_wav_start_:
-.incbin "../data/sounds/misc/unlock.wav"
-.globl data_unlock_wav_end_
-data_unlock_wav_end_:
+.globl data_wave_wav_start_
+data_wave_wav_start_:
+.incbin "../data/sounds/misc/wave.wav"
+.globl data_wave_wav_end_
+data_wave_wav_end_:
 
-.globl data_twing_wav_start_
-data_twing_wav_start_:
-.incbin "../data/sounds/misc/twing.wav"
-.globl data_twing_wav_end_
-data_twing_wav_end_:
-
-.globl data_charm_wav_start_
-data_charm_wav_start_:
-.incbin "../data/sounds/status/charm.wav"
-.globl data_charm_wav_end_
-data_charm_wav_end_:
+.globl data_freeze_wav_start_
+data_freeze_wav_start_:
+.incbin "../data/sounds/status/freeze.wav"
+.globl data_freeze_wav_end_
+data_freeze_wav_end_:
 

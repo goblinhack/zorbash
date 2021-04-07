@@ -205,7 +205,7 @@ static void find_executable (void)
     char *tmp;
 
     exec_name = mybasename(ARGV[0], __FUNCTION__);
-    CON("INIT: Will use EXEC_NAME as '%s'", exec_name.c_str());
+    CON("INI: Will use EXEC_NAME as '%s'", exec_name.c_str());
 
     //
     // Get the current directory, ending in a single /
@@ -302,7 +302,7 @@ cleanup:
     myfree(EXEC_DIR);
     EXEC_DIR = new_EXEC_DIR;
 
-    LOG("INIT: EXEC_DIR set to %s", EXEC_DIR);
+    LOG("INI: EXEC_DIR set to %s", EXEC_DIR);
     DBG("Parent dir  : \"%s\"", parent_dir);
     DBG("Curr dir    : \"%s\"", curr_dir);
     DBG("Full name   : \"%s\"", exec_expanded_name);
@@ -348,7 +348,7 @@ static void find_exec_dir (void)
     }
     EXEC_DIR = tmp5;
 
-    CON("INIT: Will use EXEC_DIR as '%s'", EXEC_DIR);
+    CON("INI: Will use EXEC_DIR as '%s'", EXEC_DIR);
 }
 
 //
@@ -463,9 +463,9 @@ static void parse_args (int32_t argc, char *argv[])
     //
     // Parse format args
     //
-    LOG("INIT: Parse command line arguments for '%s'", argv[0]);
+    LOG("INI: Parse command line arguments for '%s'", argv[0]);
     for (i = 1; i < argc; i++) {
-        LOG("INIT: + argument: \"%s\"", argv[i]);
+        LOG("INI: + argument: \"%s\"", argv[i]);
     }
 
     if (argc) {
@@ -555,8 +555,8 @@ static std::string create_appdata_dir (void)
     char *err = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
     g_log_stderr = fopen(err, "w+");
 
-    LOG("INIT: Will use STDOUT as '%s'", out);
-    LOG("INIT: Will use STDERR as '%s'", err);
+    LOG("INI: Will use STDOUT as '%s'", out);
+    LOG("INI: Will use STDERR as '%s'", err);
 
     myfree(out);
     myfree(err);
@@ -570,31 +570,31 @@ int32_t main (int32_t argc, char *argv[])
 
     auto appdata = create_appdata_dir(); // Want this first so we get all logs
 
-    LOG("INIT: Greetings mortal");
+    LOG("INI: Greetings mortal");
 
     //////////////////////////////////////////////////////////////////////////////
     // Use LOG instead of CON until we set stdout or you see two logs
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v 
     //////////////////////////////////////////////////////////////////////////////
 #ifdef _WIN32
-    LOG("INIT: Platform is _WIN32");
+    LOG("INI: Platform is _WIN32");
 #endif
 #ifdef __MINGW32__
-    LOG("INIT: Platform is __MINGW32__");
+    LOG("INI: Platform is __MINGW32__");
 #endif
 #ifdef __MINGW64__
-    LOG("INIT: Platform is __MINGW64__");
+    LOG("INI: Platform is __MINGW64__");
 #endif
 #ifdef __APPLE__
-    LOG("INIT: Platform is __APPLE__");
+    LOG("INI: Platform is __APPLE__");
 #endif
 #ifdef __linux__
-    LOG("INIT: Platform is __linux__");
+    LOG("INI: Platform is __linux__");
 #endif
 
     parse_args(argc, argv);
 
-    LOG("INIT: Ramdisk");
+    LOG("INI: Ramdisk");
     ramdisk_init();
 
     //////////////////////////////////////////////////////////////////////////////
@@ -602,14 +602,14 @@ int32_t main (int32_t argc, char *argv[])
     // instead of CON until we set stdout or you see two logs
     //////////////////////////////////////////////////////////////////////////////
 
-    LOG("INIT: Create ascii console");
+    LOG("INI: Create ascii console");
     ascii_init();
 
     //
     // Need this to get the UTF on the console
     //
 #ifndef _WIN32
-    CON("INIT: Set locale for console");
+    CON("INI: Set locale for console");
     std::locale loc("");
     std::ios_base::sync_with_stdio(false);
     std::wcout.imbue(loc);
@@ -618,7 +618,7 @@ int32_t main (int32_t argc, char *argv[])
     //
     // Create and load the last saved game
     //
-    CON("INIT: Load game config");
+    CON("INI: Load game config");
     game = new Game(std::string(appdata));
     game->load_config();
 
@@ -628,7 +628,7 @@ int32_t main (int32_t argc, char *argv[])
         }
     }
 
-    CON("INIT: SDL create window");
+    CON("INI: SDL create window");
     if (!sdl_init()) {
         ERR("SDL init");
     }
@@ -639,7 +639,7 @@ int32_t main (int32_t argc, char *argv[])
         execv(argv[0], argv);
     }
 
-    CON("INIT: OpenGL enter 2D mode");
+    CON("INI: OpenGL enter 2D mode");
     gl_init_2d_mode();
 
     //
@@ -647,13 +647,13 @@ int32_t main (int32_t argc, char *argv[])
     //
     SDL_GL_SetSwapInterval(0);
 
-    CON("INIT: Load early gfx tiles, text, UI etc...");
+    CON("INI: Load early gfx tiles, text, UI etc...");
     gfx_init();
 
     //
     // Random number generators
     //
-    CON("INIT: Create random number generators");
+    CON("INI: Create random number generators");
     double mean = 1.0;
     double std = 0.5;
     std::normal_distribution<double> distribution;
@@ -664,7 +664,7 @@ int32_t main (int32_t argc, char *argv[])
 #ifdef ENABLE_CRASH_HANDLER
     //
     // Crash handlers
-    CON("INIT: Install crash handlers");
+    CON("INI: Install crash handlers");
     signal(SIGSEGV, segv_handler);
     signal(SIGABRT, segv_handler);
     signal(SIGINT, ctrlc_handler);
@@ -672,7 +672,7 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGPIPE, ctrlc_handler);
 #endif
 
-    CON("INIT: Create color names map");
+    CON("INI: Create color names map");
     color_init();
 
 #if 0
@@ -694,17 +694,17 @@ int32_t main (int32_t argc, char *argv[])
     }
 #endif
 
-    CON("INIT: Create UI fonts");
+    CON("INI: Create UI fonts");
     if (!font_init()) {
         ERR("Font init");
     }
 
-    CON("INIT: Load UI widgets");
+    CON("INI: Load UI widgets");
     if (!wid_init()) {
         ERR("Wid init");
     }
 
-    CON("INIT: Load UI console");
+    CON("INI: Load UI console");
     if (!wid_console_init()) {
         ERR("Wid_console init");
     }
@@ -712,65 +712,65 @@ int32_t main (int32_t argc, char *argv[])
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Load UI tiles");
+    CON("INI: Load UI tiles");
     if (!wid_tiles_init()) {
         ERR("Wid tiles init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Load UI and gfx tiles");
+    CON("INI: Load UI and gfx tiles");
     if (!tile_init()) {
         ERR("Tile init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Load textures");
+    CON("INI: Load textures");
     if (!tex_init()) {
         ERR("Tex init");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    CON("INIT: Init audio");
+    CON("INI: Init audio");
     if (!audio_init()) {
         ERR("Audio init");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    CON("INIT: Load music");
+    CON("INI: Load music");
     if (!music_init()) {
         ERR("Music init");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    CON("INIT: Load sound");
+    CON("INI: Load sound");
     if (!sound_init()) {
         ERR("Sound init");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    CON("INIT: Load UI topcon");
+    CON("INI: Load UI topcon");
     if (!wid_topcon_init()) {
         ERR("Wid_topcon init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //
-    CON("INIT: Load UI botcon");
+    CON("INI: Load UI botcon");
     if (!wid_botcon_init()) {
         ERR("Wid_botcon init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Find resource locations for gfx and music");
+    CON("INI: Find resource locations for gfx and music");
     find_file_locations();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Load UI commands");
+    CON("INI: Load UI commands");
     if (!command_init()) {
         ERR("Command init");
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Load dungeon character maps");
+    CON("INI: Load dungeon character maps");
     Charmap::init_charmaps();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -778,14 +778,14 @@ int32_t main (int32_t argc, char *argv[])
     py_call_void("init2");
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Load dungeon thing templates");
+    CON("INI: Load dungeon thing templates");
     tp_init();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //
     // Create a fresh game if none was loaded
     //
-    CON("INIT: Load dungeon rooms");
+    CON("INI: Load dungeon rooms");
     room_init();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
    
@@ -808,10 +808,10 @@ int32_t main (int32_t argc, char *argv[])
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (g_opt_new_game) {
-        CON("INIT: New game");
+        CON("INI: New game");
         game->new_game();
     } else {
-        CON("INIT: Game menu");
+        CON("INI: Game menu");
         game->main_menu_select();
     }
     sdl_flush_display();

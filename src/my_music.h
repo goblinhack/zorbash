@@ -16,9 +16,9 @@ using musicp = class music *;
 
 bool music_init(void);
 void music_fini(void);
-bool music_load(const std::string &file, std::string &name);
+bool music_load(uint32_t rate, const std::string &file, const std::string &name);
 bool music_find(const std::string &name);
-bool music_play(const std::string &file, std::string &alias, uint32_t rate);
+bool music_play(const std::string &name);
 void music_halt(void);
 void music_update_volume(void);
 

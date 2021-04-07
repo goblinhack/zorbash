@@ -1292,6 +1292,9 @@ void Dungeon::rooms_print_all (Grid *g)
             }
 
             Roomp r = get(g->node_rooms, x, y);
+            if (!r) {
+                return;
+            }
             auto rx = x * MAP_ROOM_WIDTH + MAP_BORDER_TOTAL;
             auto ry = y * MAP_ROOM_HEIGHT + MAP_BORDER_TOTAL;
             room_print_at(r, rx, ry);
@@ -1427,6 +1430,10 @@ bool Dungeon::solve (int x, int y, Grid *g)
 
     std::vector<Roomp> candidates;
 
+    if (!Room::all_rooms.size()) {
+        DIE("Failed to load any rooms. Initialization error?");
+    }
+
     for (auto r : Room::all_rooms) {
         if (!room_is_a_candidate(n, r)) {
             continue;
@@ -1448,8 +1455,8 @@ bool Dungeon::solve (int x, int y, Grid *g)
         ncandidates = candidates.size();
         if (!ncandidates) {
             rooms_print_all(g);
-            ERR("No grid room candidates at map (%d,%d)", x, y);
             dump();
+            DIE("No grid room candidates at map (%d,%d)", x, y);
             return false;
         }
     }
@@ -1498,8 +1505,8 @@ bool Dungeon::create_cyclic_rooms (Grid *g)
                 continue;
             }
             if (!solve(x, y, g)) {
-                ERR("Could not solve level at %d,%d", x, y);
                 dump();
+                DIE("Could not solve level at %d,%d", x, y);
             }
             break;
         }
@@ -1652,6 +1659,9 @@ void Dungeon::choose_room_doors (void)
             }
 
             auto r = get(grid.node_rooms, x, y);
+            if (!r) {
+                continue;
+            }
 
             if (n->has_door_down) {
                 auto o = get(grid.node_rooms, x, y+1);
@@ -1757,30 +1767,34 @@ void Dungeon::choose_room_doors (void)
 }
 
 void Dungeon::save_level (void)
-{
+{_
     std::copy(mbegin(cells), mend(cells), mbegin(cells_saved));
 
     for (unsigned int rs = 0;
             rs < (unsigned int) all_placed_rooms.size(); rs++) {
         auto r = get(all_placed_rooms, rs);
-        r->rollback_at = r->at;
+        if (r) {
+            r->rollback_at = r->at;
+        }
     }
 }
 
 void Dungeon::restore_level (void)
-{
+{_
     std::copy(mbegin(cells_saved), mend(cells_saved), mbegin(cells));
 
     for (unsigned int rs = 0;
             rs < (unsigned int) all_placed_rooms.size(); rs++) {
         auto r = get(all_placed_rooms, rs);
-        r->at = r->rollback_at;
+        if (r) {
+            r->at = r->rollback_at;
+        }
     }
 }
 
 
 int Dungeon::draw_corridor (point start, point end, char w)
-{
+{_
     Dmap d {};
 
 #if 0
@@ -1977,7 +1991,7 @@ int Dungeon::draw_corridor (point start, point end, char w)
 // Join the corridors of each room, return the total lenght of all corridors
 //
 int Dungeon::draw_corridors (void)
-{
+{_
 #if 0
     LOG("Draw corridors");
     dump();
@@ -2010,6 +2024,9 @@ int Dungeon::draw_corridors (void)
             }
 
             auto r = get(grid.node_rooms, x, y);
+            if (!r) {
+                continue;
+            }
 
             if (n->has_door_down) {
                 auto o = get(grid.node_rooms, x, y+1);
@@ -2352,7 +2369,9 @@ bool Dungeon::rooms_move_closer_together (void)
     // Make sure we start with a solvable room
     //
     save_level();
+
     auto corridor_count = draw_corridors();
+
     if (!corridor_count) {
         _ debug("level before adding corridors is NOT solvable");
         return false;
@@ -2433,6 +2452,7 @@ bool Dungeon::rooms_move_closer_together (void)
                     if (!r) {
                         continue;
                     }
+
                     if (!r->skip) {
                         continue;
                     }

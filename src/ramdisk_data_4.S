@@ -84,27 +84,21 @@ data_fall_wav_start_:
 .globl data_fall_wav_end_
 data_fall_wav_end_:
 
-.globl data_collect_b_wav_start_
-data_collect_b_wav_start_:
-.incbin "../data/sounds/misc/collect_b.wav"
-.globl data_collect_b_wav_end_
-data_collect_b_wav_end_:
+.globl data_zong_wav_start_
+data_zong_wav_start_:
+.incbin "../data/sounds/misc/zong.wav"
+.globl data_zong_wav_end_
+data_zong_wav_end_:
 
-.globl data_chime_wav_start_
-data_chime_wav_start_:
-.incbin "../data/sounds/misc/chime.wav"
-.globl data_chime_wav_end_
-data_chime_wav_end_:
+.globl data_wiggle_b_wav_start_
+data_wiggle_b_wav_start_:
+.incbin "../data/sounds/misc/wiggle_b.wav"
+.globl data_wiggle_b_wav_end_
+data_wiggle_b_wav_end_:
 
-.globl data_shut_wav_start_
-data_shut_wav_start_:
-.incbin "../data/sounds/misc/shut.wav"
-.globl data_shut_wav_end_
-data_shut_wav_end_:
-
-.globl data_poison_wav_start_
-data_poison_wav_start_:
-.incbin "../data/sounds/status/poison.wav"
-.globl data_poison_wav_end_
-data_poison_wav_end_:
+.globl data_mutation_wav_start_
+data_mutation_wav_start_:
+.incbin "../data/sounds/status/mutation.wav"
+.globl data_mutation_wav_end_
+data_mutation_wav_end_:
 

@@ -25,14 +25,14 @@ void gl_init_2d_mode (void)
     //
     // Enable Texture Worldping
     //
-    CON("OpenGL: enable textures");
+    CON("GFX: enable textures");
     glEnable(GL_TEXTURE_2D);
     GL_ERROR_CHECK();
 
     //
     // Enable alpha blending for sprites
     //
-    CON("OpenGL: enable blending");
+    CON("GFX: enable blending");
     glEnable(GL_BLEND);
     GL_ERROR_CHECK();
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -41,7 +41,7 @@ void gl_init_2d_mode (void)
     //
     // Setup our viewport
     //
-    CON("OpenGL: enable viewport");
+    CON("GFX: enable viewport");
     glViewport(0, 0,
                game->config.window_pix_width,
                game->config.window_pix_height);
@@ -50,13 +50,13 @@ void gl_init_2d_mode (void)
     //
     // Reset the view
     //
-    CON("OpenGL: identity");
+    CON("GFX: identity");
     glLoadIdentity();
     GL_ERROR_CHECK();
 
     gl_init_fbo();
 
-    CON("OpenGL: misc");
+    CON("GFX: misc");
     glLineWidth(1.0);
     GL_ERROR_CHECK();
     glEnable(GL_LINE_SMOOTH);
@@ -231,7 +231,7 @@ static void gl_init_fbo_ (int fbo,
                           GLuint tex_width,
                           GLuint tex_height)
 {_
-    LOG("OpenGL: create FBO, size %dx%d", tex_width, tex_height);
+    LOG("GFX: create FBO, size %dx%d", tex_width, tex_height);
     GL_ERROR_CHECK();
 
     LOG("OpenGl: - glGenTextures");
@@ -343,32 +343,32 @@ static void gl_init_fbo_ (int fbo,
 
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
         if (status == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) {
-            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points are framebuffer attachment complete. This means that at least one attachment point with a renderbuffer or texture attached has its attached object no longer in existence or has an attached image with a width or height of zero, or the color attachment point has a non-color-renderable image attached, or the depth attachment point has a non-depth-renderable image attached, or the stencil attachment point has a non-stencil-renderable image attached.  Color-renderable formats include GL_RGBA4, GL_RGB5_A1, and GL_RGB565. GL_DEPTH_COMPONENT16 is the only depth-renderable format. GL_STENCIL_INDEX8 is the only stencil-renderable format.");
+            ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points are framebuffer attachment complete. This means that at least one attachment point with a renderbuffer or texture attached has its attached object no longer in existence or has an attached image with a width or height of zero, or the color attachment point has a non-color-renderable image attached, or the depth attachment point has a non-depth-renderable image attached, or the stencil attachment point has a non-stencil-renderable image attached.  Color-renderable formats include GL_RGBA4, GL_RGB5_A1, and GL_RGB565. GL_DEPTH_COMPONENT16 is the only depth-renderable format. GL_STENCIL_INDEX8 is the only stencil-renderable format.");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS
         if (status == GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS) {
-            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same width and height.");
+            ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same width and height.");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
         if (status == GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT) {
-            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT No images are attached to the framebuffer.");
+            ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT No images are attached to the framebuffer.");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_UNSUPPORTED
         if (status == GL_FRAMEBUFFER_UNSUPPORTED) {
-            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images violates an implementation-dependent set of restrictions.");
+            ERR("OpenGl: - GFX: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images violates an implementation-dependent set of restrictions.");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_UNSUPPORTED
         if (status == GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER) {
-            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
+            ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
         }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER
         if (status == GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER) {
-            ERR("OpenGl: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
+            ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
         }
 #endif
     }
@@ -387,7 +387,7 @@ void gl_init_fbo (void)
 {
     int i;
 
-    CON("OpenGL: create FBOs");
+    CON("GFX: create FBOs");
     GL_ERROR_CHECK();
 
     for (i = 0; i < MAX_FBO; i++) {
@@ -401,7 +401,7 @@ void gl_init_fbo (void)
         // If no change in size (minimap, bg map) then do not reset the FBO
         //
         if (fbo_size[i] == isize(tex_width, tex_height)) {
-            CON("OpenGL: skip init of FBO %d", i);
+            CON("GFX: skip init of FBO %d", i);
             continue;
         }
 
@@ -416,7 +416,7 @@ void gl_init_fbo (void)
         blit_fbo_unbind();
     }
 
-    CON("OpenGL: created FBOs");
+    CON("GFX: created FBOs");
     GL_ERROR_CHECK();
 }
 
@@ -1220,7 +1220,7 @@ void gl_ext_init (void)
     WNDCLASSEX wc;
     HWND hwnd;
 
-    CON("OpenGL: extensions");
+    CON("GFX: extensions");
 
     CON("OpenGl: - GetModuleHandle");
     HINSTANCE hInstance = GetModuleHandle(0);
@@ -1293,19 +1293,19 @@ void gl_ext_init (void)
 void gl_error (GLenum errCode)
 {
     if (errCode == GL_INVALID_ENUM) {
-        ERR("OpenGL: error, GL_INVALID_ENUM");
+        ERR("GFX: error, GL_INVALID_ENUM");
     } else if (errCode == GL_INVALID_VALUE) {
-        ERR("OpenGL: error, GL_INVALID_VALUE");
+        ERR("GFX: error, GL_INVALID_VALUE");
     } else if (errCode == GL_INVALID_OPERATION) {
-        ERR("OpenGL: error, GL_INVALID_OPERATION");
+        ERR("GFX: error, GL_INVALID_OPERATION");
     } else if (errCode == GL_STACK_OVERFLOW) {
-        ERR("OpenGL: error, GL_STACK_OVERFLOW");
+        ERR("GFX: error, GL_STACK_OVERFLOW");
     } else if (errCode == GL_STACK_UNDERFLOW) {
-        ERR("OpenGL: error, GL_STACK_UNDERFLOW");
+        ERR("GFX: error, GL_STACK_UNDERFLOW");
     } else if (errCode == GL_OUT_OF_MEMORY) {
-        ERR("OpenGL: error, GL_OUT_OF_MEMORY");
+        ERR("GFX: error, GL_OUT_OF_MEMORY");
     } else {
-        ERR("OpenGL: unknown error, %d", errCode);
+        ERR("GFX: unknown error, %d", errCode);
     }
 }
 

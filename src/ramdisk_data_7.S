@@ -78,27 +78,27 @@ data_score_wav_start_:
 .globl data_score_wav_end_
 data_score_wav_end_:
 
-.globl data_computer_a_wav_start_
-data_computer_a_wav_start_:
-.incbin "../data/sounds/misc/computer_a.wav"
-.globl data_computer_a_wav_end_
-data_computer_a_wav_end_:
+.globl data_mushroom_wav_start_
+data_mushroom_wav_start_:
+.incbin "../data/sounds/misc/mushroom.wav"
+.globl data_mushroom_wav_end_
+data_mushroom_wav_end_:
 
-.globl data_computer_d_wav_start_
-data_computer_d_wav_start_:
-.incbin "../data/sounds/misc/computer_d.wav"
-.globl data_computer_d_wav_end_
-data_computer_d_wav_end_:
+.globl data_drip_wav_start_
+data_drip_wav_start_:
+.incbin "../data/sounds/misc/drip.wav"
+.globl data_drip_wav_end_
+data_drip_wav_end_:
 
-.globl data_resurrect_wav_start_
-data_resurrect_wav_start_:
-.incbin "../data/sounds/misc/resurrect.wav"
-.globl data_resurrect_wav_end_
-data_resurrect_wav_end_:
+.globl data_scramble_wav_start_
+data_scramble_wav_start_:
+.incbin "../data/sounds/misc/scramble.wav"
+.globl data_scramble_wav_end_
+data_scramble_wav_end_:
 
-.globl data_curse_wav_start_
-data_curse_wav_start_:
-.incbin "../data/sounds/status/curse.wav"
-.globl data_curse_wav_end_
-data_curse_wav_end_:
+.globl data_burn_wav_start_
+data_burn_wav_start_:
+.incbin "../data/sounds/status/burn.wav"
+.globl data_burn_wav_end_
+data_burn_wav_end_:
 

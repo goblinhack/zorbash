@@ -28,6 +28,7 @@ public:
     Mix_Music *m = {};
     unsigned char *data = {};
     int32_t len = {};
+    uint32_t rate = 44100;
 };
 
 static std::map<std::string, std::shared_ptr< class music > > all_music;
@@ -54,7 +55,8 @@ void music_fini (void)
     }
 }
 
-bool music_load (const std::string &file, const std::string &name_alias)
+bool music_load (uint32_t rate, const std::string &file, 
+                 const std::string &name_alias)
 {_
     if (name_alias == "") {
         auto m = music_find(name_alias);
@@ -72,6 +74,7 @@ bool music_load (const std::string &file, const std::string &name_alias)
         return false;
     }
 
+    m->rate = rate;
     m->data = file_load(file.c_str(), &m->len);
     if (!m->data) {
         ERR("Cannot load music %s", file.c_str());
@@ -114,24 +117,19 @@ void music_update_volume (void)
     SDL_ClearError();
 }
 
-bool music_play (const std::string &file, const std::string &alias,
-                 uint32_t rate)
+bool music_play (const std::string &name)
 {_
-    if (file == music_current) {
+    if (name == music_current) {
         return true;
     }
-    music_current = file;
-
-    if (!music_load(file, alias)) {
-        return false;
-    }
+    music_current = name;
 
     music_update_volume();
 
-    auto music = all_music.find(alias);
+    auto music = all_music.find(name);
 
     if (Mix_FadeInMusicPos(music->second->m, -1, 2000, 0) == -1) {
-        ERR("Cannot play music %s: %s", alias.c_str(), Mix_GetError());
+        ERR("Cannot play music %s: %s", name.c_str(), Mix_GetError());
         SDL_ClearError();
     }
 
@@ -177,7 +175,7 @@ void music_play_game_over (void)
 
 void music_play_intro (void)
 {_
-    music_play("data/music/DST-PhaserSwitch.mp3", "intro", 44100 );
+    music_play("intro");
 }
 
 void music_halt (void)

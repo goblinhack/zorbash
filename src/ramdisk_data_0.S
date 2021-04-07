@@ -84,27 +84,21 @@ data_ding_wav_start_:
 .globl data_ding_wav_end_
 data_ding_wav_end_:
 
-.globl data_mushroom_wav_start_
-data_mushroom_wav_start_:
-.incbin "../data/sounds/misc/mushroom.wav"
-.globl data_mushroom_wav_end_
-data_mushroom_wav_end_:
+.globl data_bay_door_open_wav_start_
+data_bay_door_open_wav_start_:
+.incbin "../data/sounds/misc/bay_door_open.wav"
+.globl data_bay_door_open_wav_end_
+data_bay_door_open_wav_end_:
 
-.globl data_open_wav_start_
-data_open_wav_start_:
-.incbin "../data/sounds/misc/open.wav"
-.globl data_open_wav_end_
-data_open_wav_end_:
+.globl data_transistor_wav_start_
+data_transistor_wav_start_:
+.incbin "../data/sounds/misc/transistor.wav"
+.globl data_transistor_wav_end_
+data_transistor_wav_end_:
 
-.globl data_blurb_wav_start_
-data_blurb_wav_start_:
-.incbin "../data/sounds/misc/blurb.wav"
-.globl data_blurb_wav_end_
-data_blurb_wav_end_:
-
-.globl data_confuse_wav_start_
-data_confuse_wav_start_:
-.incbin "../data/sounds/status/confuse.wav"
-.globl data_confuse_wav_end_
-data_confuse_wav_end_:
+.globl data_rubberband_wav_start_
+data_rubberband_wav_start_:
+.incbin "../data/sounds/misc/rubberband.wav"
+.globl data_rubberband_wav_end_
+data_rubberband_wav_end_:
 

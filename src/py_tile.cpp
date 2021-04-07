@@ -23,32 +23,33 @@ PyObject *tile_load_arr_ (PyObject *obj, PyObject *args, PyObject *keywds)
         (char*) "name", (char*) "width", (char*) "height", (char*) "arr", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: bad args");
+        Py_RETURN_FALSE;
     }
 
     if (!file) {
-        ERR("Tile_load_arr, missing file attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: missing file attr");
+        Py_RETURN_FALSE;
     }
 
     if (!name) {
-        ERR("Tile_load_arr, missing name attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: missing name attr");
+        Py_RETURN_FALSE;
     }
 
     if (!width) {
-        ERR("Tile_load_arr, missing width attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: missing width attr");
+        Py_RETURN_FALSE;
     }
 
     if (!height) {
-        ERR("Tile_load_arr, missing height attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: missing height attr");
+        Py_RETURN_FALSE;
     }
 
     if (!e) {
-        ERR("Tile_load_arr, missing arr attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: missing arr attr");
+        Py_RETURN_FALSE;
     }
 
     int numLines = PyList_Size(e);
@@ -57,7 +58,7 @@ PyObject *tile_load_arr_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     memset(arr, 0, sizeof(arr));
 
-    PY_DBG("tile_load_arr(file=%s, name=%s, width=%d, height=%d, ...)", file, name, width, height);
+    PY_DBG("tile_load_arr:file=%s, name=%s, width=%d, height=%d, ...)", file, name, width, height);
 
     for (i=0; i<numLines; i++){
         PyObject * strObj;
@@ -81,7 +82,7 @@ PyObject *tile_load_arr_ (PyObject *obj, PyObject *args, PyObject *keywds)
         myfree((char*) arr[i]);
     }
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }
 
 PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -97,32 +98,33 @@ PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywd
         (char*) "name", (char*) "width", (char*) "height", (char*) "arr", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: bad args");
+        Py_RETURN_FALSE;
     }
 
     if (!file) {
-        ERR("Tile_load_arr_sprites, missing file attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: sprites, missing file attr");
+        Py_RETURN_FALSE;
     }
 
     if (!name) {
-        ERR("Tile_load_arr_sprites, missing name attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: sprites, missing name attr");
+        Py_RETURN_FALSE;
     }
 
     if (!width) {
-        ERR("Tile_load_arr_sprites, missing width attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: sprites, missing width attr");
+        Py_RETURN_FALSE;
     }
 
     if (!height) {
-        ERR("Tile_load_arr_sprites, missing height attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: sprites, missing height attr");
+        Py_RETURN_FALSE;
     }
 
     if (!e) {
-        ERR("Tile_load_arr_sprites, missing arr attr");
-        Py_RETURN_NONE;
+        ERR("tile_load_arr: sprites, missing arr attr");
+        Py_RETURN_FALSE;
     }
 
     int numLines = PyList_Size(e);
@@ -131,7 +133,7 @@ PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywd
 
     memset(arr, 0, sizeof(arr));
 
-    PY_DBG("tile_load_arr_sprites(file=%s, name=%s, width=%d, height=%d, ...)", file, name, width, height);
+    PY_DBG("tile_load_arr:sprites(file=%s, name=%s, width=%d, height=%d, ...)", file, name, width, height);
 
     for (i=0; i<numLines; i++){
         PyObject * strObj;
@@ -141,7 +143,7 @@ PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywd
         }
 
         arr[i] = py_obj_to_str(strObj);
-        PY_DBG("tile_load_arr_sprites(\"%s\")", arr[i]);
+        PY_DBG("tile_load_arr:sprites(\"%s\")", arr[i]);
     }
 
     tile_load_arr_sprites(std::string(file ? file : ""),
@@ -156,5 +158,5 @@ PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywd
         myfree((char*) arr[i]);
     }
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }
