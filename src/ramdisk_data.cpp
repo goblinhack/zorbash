@@ -1510,39 +1510,6 @@ void ramdisk_init (void)
     }
 
     {
-        extern unsigned char *data_computer_a_wav_start_ asm("data_computer_a_wav_start_");
-        extern unsigned char *data_computer_a_wav_end_ asm("data_computer_a_wav_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_a_wav_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_a_wav_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/sounds/misc/computer_a.wav"] = r;
-    }
-
-    {
-        extern unsigned char *data_computer_b_wav_start_ asm("data_computer_b_wav_start_");
-        extern unsigned char *data_computer_b_wav_end_ asm("data_computer_b_wav_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_b_wav_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_b_wav_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/sounds/misc/computer_b.wav"] = r;
-    }
-
-    {
-        extern unsigned char *data_computer_c_wav_start_ asm("data_computer_c_wav_start_");
-        extern unsigned char *data_computer_c_wav_end_ asm("data_computer_c_wav_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_c_wav_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_c_wav_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/sounds/misc/computer_c.wav"] = r;
-    }
-
-    {
         extern unsigned char *data_mushroom_wav_start_ asm("data_mushroom_wav_start_");
         extern unsigned char *data_mushroom_wav_end_ asm("data_mushroom_wav_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_mushroom_wav_start_;
@@ -1617,28 +1584,6 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/sounds/misc/whistle.wav"] = r;
-    }
-
-    {
-        extern unsigned char *data_computer_d_wav_start_ asm("data_computer_d_wav_start_");
-        extern unsigned char *data_computer_d_wav_end_ asm("data_computer_d_wav_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_d_wav_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_d_wav_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/sounds/misc/computer_d.wav"] = r;
-    }
-
-    {
-        extern unsigned char *data_computer_e_wav_start_ asm("data_computer_e_wav_start_");
-        extern unsigned char *data_computer_e_wav_end_ asm("data_computer_e_wav_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_computer_e_wav_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_computer_e_wav_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/sounds/misc/computer_e.wav"] = r;
     }
 
     {

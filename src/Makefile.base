@@ -113,6 +113,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/py_room.o                     \
     $(OBJDIR)/py_sdl.o                      \
     $(OBJDIR)/py_tex.o                      \
+    $(OBJDIR)/py_sound.o                    \
+    $(OBJDIR)/py_music.o                    \
     $(OBJDIR)/py_thing.o                    \
     $(OBJDIR)/py_tile.o                     \
     $(OBJDIR)/py_tp.o                       \

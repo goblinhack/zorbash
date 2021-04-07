@@ -464,14 +464,15 @@ static PyObject *con_ (PyObject *obj, PyObject *args, PyObject *keywds)
     wchar_t *a = 0;
 
     if (!PyArg_ParseTuple(args, "u", &a)) {
-        return (0);
+        ERR("con: bad args");
+        Py_RETURN_FALSE;
     }
 
     if (a) {
         con(a);
     }
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }
 
 static PyObject *topcon_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -479,14 +480,15 @@ static PyObject *topcon_ (PyObject *obj, PyObject *args, PyObject *keywds)
     wchar_t *a = 0;
 
     if (!PyArg_ParseTuple(args, "u", &a)) {
-        return (0);
+        ERR("topcon: bad args");
+        Py_RETURN_FALSE;
     }
 
     if (a) {
         topcon(a);
     }
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }
 
 static PyObject *puts_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -494,14 +496,15 @@ static PyObject *puts_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *a = 0;
 
     if (!PyArg_ParseTuple(args, "s", &a)) {
-        return (0);
+        ERR("puts: bad args");
+        Py_RETURN_FALSE;
     }
 
     fputs(a, MY_STDOUT);
     fflush(MY_STDOUT);
     printf("%s", a);
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }
 
 static PyObject *log_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -509,14 +512,15 @@ static PyObject *log_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *a = 0;
 
     if (!PyArg_ParseTuple(args, "s", &a)) {
-        return (0);
+        ERR("log: bad args");
+        Py_RETURN_FALSE;
     }
 
     if (a) {
         LOG("%s", a);
     }
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }
 
 static PyObject *err_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -524,14 +528,15 @@ static PyObject *err_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *a = 0;
 
     if (!PyArg_ParseTuple(args, "s", &a)) {
-        return (0);
+        ERR("err: bad args");
+        Py_RETURN_FALSE;
     }
 
     if (a) {
         ERR("%s", a);
     }
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }
 
 static PyObject *die_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -539,14 +544,15 @@ static PyObject *die_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *a = 0;
 
     if (!PyArg_ParseTuple(args, "s", &a)) {
-        return (0);
+        ERR("die: bad args");
+        Py_RETURN_FALSE;
     }
 
     if (a) {
         ERR("%s", a);
     }
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }
 
 static PyMethodDef python_c_METHODS[] = {
@@ -838,6 +844,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(weapon_use_distance)
     TP_SET_DECL(z_depth)
     TP_SET_DECL(z_prio)
+
     {"abs_to_pct",                              (PyCFunction)abs_to_pct_,                               METH_VARARGS | METH_KEYWORDS, "abs to pct "},
     {"con",                                     (PyCFunction)con_,                                      METH_VARARGS,                 "log to the console"},
     {"die",                                     (PyCFunction)die_,                                      METH_VARARGS,                 "exit game with error"},
@@ -845,22 +852,26 @@ static PyMethodDef python_c_METHODS[] = {
     {"log",                                     (PyCFunction)log_,                                      METH_VARARGS,                 "log to the log file"},
     {"map_load_level",                          (PyCFunction)map_load_level_,                           METH_VARARGS | METH_KEYWORDS, "load a level"},
     {"map_load_room",                           (PyCFunction)map_load_room_,                            METH_VARARGS | METH_KEYWORDS, "load a room"},
-    {"topcon",                                  (PyCFunction)topcon_,                                   METH_VARARGS,                 "log to the mini console"},
+    {"music_load",                              (PyCFunction)music_load_,                               METH_VARARGS | METH_KEYWORDS, "load a sound"},
+    {"music_play",                              (PyCFunction)music_play_,                               METH_VARARGS | METH_KEYWORDS, "play a sound"},
     {"pct_to_abs",                              (PyCFunction)pct_to_abs_,                               METH_VARARGS | METH_KEYWORDS, "pct to abs"},
     {"puts",                                    (PyCFunction)puts_,                                     METH_VARARGS,                 "log to the console"},
+    {"sound_load",                              (PyCFunction)sound_load_,                               METH_VARARGS | METH_KEYWORDS, "load a sound"},
+    {"sound_play",                              (PyCFunction)sound_play_,                               METH_VARARGS | METH_KEYWORDS, "play a sound"},
     {"tex_load",                                (PyCFunction)tex_load_,                                 METH_VARARGS | METH_KEYWORDS, "load a texture"},
     {"text_size",                               (PyCFunction)text_size_,                                METH_VARARGS | METH_KEYWORDS, "text size in pixels"},
     {"tile_load_arr",                           (PyCFunction)tile_load_arr_,                            METH_VARARGS | METH_KEYWORDS, "load a tile array"},
     {"tile_load_arr_sprites",                   (PyCFunction)tile_load_arr_sprites_,                    METH_VARARGS | METH_KEYWORDS, "load a tile array in color and black and white"},
+    {"topcon",                                  (PyCFunction)topcon_,                                   METH_VARARGS,                 "log to the mini console"},
+    {"tp_kill_if",                              (PyCFunction)tp_kill_if,                                METH_VARARGS | METH_KEYWORDS, "kill if"},
     {"tp_load",                                 (PyCFunction)tp_load_,                                  METH_VARARGS | METH_KEYWORDS, "load a thing template"},
+    {"tp_place",                                (PyCFunction)tp_place,                                  METH_VARARGS | METH_KEYWORDS, "kill place"},
+    {"tp_spawn_at",                             (PyCFunction)tp_spawn_at,                               METH_VARARGS | METH_KEYWORDS, "spawn under"},
+    {"tp_spawn_at_if_possible",                 (PyCFunction)tp_spawn_at_if_possible,                   METH_VARARGS | METH_KEYWORDS, "spawn under"},
+    {"tp_spawn_fire",                           (PyCFunction)tp_spawn_fire,                             METH_VARARGS | METH_KEYWORDS, "spawn fire"},
     {"tp_spawn_next_to",                        (PyCFunction)tp_spawn_next_to_,                         METH_VARARGS | METH_KEYWORDS, "spawn thing"},
     {"tp_spawn_next_to_or_on_monst",            (PyCFunction)tp_spawn_next_to_or_on_monst_,             METH_VARARGS | METH_KEYWORDS, "spawn thing"},
     {"tp_spawn_radius_range",                   (PyCFunction)tp_spawn_radius_range_,                    METH_VARARGS | METH_KEYWORDS, "spawn things"},
-    {"tp_spawn_fire",                           (PyCFunction)tp_spawn_fire,                             METH_VARARGS | METH_KEYWORDS, "spawn fire"},
-    {"tp_spawn_at",                             (PyCFunction)tp_spawn_at,                               METH_VARARGS | METH_KEYWORDS, "spawn under"},
-    {"tp_spawn_at_if_possible",                 (PyCFunction)tp_spawn_at_if_possible,                   METH_VARARGS | METH_KEYWORDS, "spawn under"},
-    {"tp_kill_if",                              (PyCFunction)tp_kill_if,                                METH_VARARGS | METH_KEYWORDS, "kill if"},
-    {"tp_place",                                (PyCFunction)tp_place,                                  METH_VARARGS | METH_KEYWORDS, "kill place"},
     {"tp_update",                               (PyCFunction)tp_update_,                                METH_VARARGS | METH_KEYWORDS, "update template"},
 
     {"thing_set_health",                        (PyCFunction)thing_set_health,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1979,12 +1990,12 @@ static std::string get_env(const char* env)
 
 void python_init (char *argv[])
 {_
-    CON("INIT: PYTHONVERSION %s", PYTHONVERSION);
+    CON("INI: PYTHONVERSION %s", PYTHONVERSION);
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     auto pythonpath = get_env("PYTHONPATH");
-    CON("INIT: PYTHONPATH is currently '%s'", pythonpath.c_str());
+    CON("INI: PYTHONPATH is currently '%s'", pythonpath.c_str());
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2007,7 +2018,7 @@ void python_init (char *argv[])
 #endif
 
     // Attempt to append to path.
-    CON("INIT: PYTHONPATH is modified to '%s'", newpath.c_str());
+    CON("INI: PYTHONPATH is now '%s'", newpath.c_str());
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //
@@ -2017,12 +2028,12 @@ void python_init (char *argv[])
     setenv("PYTHONPATH", newpath.c_str(), 1);
 #endif
 
-    CON("INIT: Calling PyImport_AppendInittab");
+    CON("INI: Calling PyImport_AppendInittab");
     PyImport_AppendInittab("zx", python_mouse_y_module_create);
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Calling Py_Initialize");
+    CON("INI: Calling Py_Initialize");
     Py_Initialize();
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2034,7 +2045,7 @@ void python_init (char *argv[])
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    LOG("INIT: Calling PyImport_ImportModule for zx module");
+    LOG("INI: Calling PyImport_ImportModule for zx module");
 
     zx_mod = PyImport_ImportModule("zx");
     if (!zx_mod) {
@@ -2045,7 +2056,7 @@ void python_init (char *argv[])
 
     python_add_consts();
 
-    LOG("INIT: Calling PyImport_ImportModule for init module");
+    LOG("INI: Calling PyImport_ImportModule for init module");
 
     zx_mod = PyImport_ImportModule("init");
     if (!zx_mod) {

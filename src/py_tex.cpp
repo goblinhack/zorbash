@@ -13,28 +13,29 @@
 
 PyObject *tex_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    char *a = 0;
-    char *b = 0;
+    char *file = 0;
+    char *name = 0;
 
     static char *kwlist[] = {(char*) "file", (char*) "name", 0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "ss", kwlist, &a, &b)) {
-        Py_RETURN_NONE;
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "ss", kwlist, &file, &name)) {
+        ERR("tex_load: bad arguments");
+        Py_RETURN_FALSE;
     }
 
-    if (!a) {
-        ERR("Tex_load, missing file attr");
-        Py_RETURN_NONE;
+    if (!file) {
+        ERR("tex_load: missing file attr");
+        Py_RETURN_FALSE;
     }
 
-    if (!b) {
-        ERR("Tex_load, missing name attr");
-        Py_RETURN_NONE;
+    if (!name) {
+        ERR("tex_load: missing name attr");
+        Py_RETURN_FALSE;
     }
 
-    PY_DBG("tex_load(file=%s, name=%s)", a, b);
+    PY_DBG("tex_load(file=%s, name=%s)", file, name);
 
-    tex_load(a, b, GL_NEAREST);
+    tex_load(file, name, GL_NEAREST);
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }

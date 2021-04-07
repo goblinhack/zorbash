@@ -59,17 +59,20 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                                      &is_key,
                                      &is_secret,
                                      &is_depth)) {
-        Py_RETURN_NONE;
+        ERR("map_load_room: bad args");
+        Py_RETURN_FALSE;
     }
 
     if (!py_room_data) {
         ERR("Map_load_room, missing floor data");
+        Py_RETURN_FALSE;
     }
 
     int room_data_elems = PyList_Size(py_room_data);
     if (room_data_elems % MAP_ROOM_HEIGHT) {
         ERR("Room elems needs to be evenly dividable by room height %d, got %d elems",
             (int) MAP_ROOM_HEIGHT, (int) PyList_Size(py_room_data));
+        Py_RETURN_FALSE;
     }
 
     int rooms_across = room_data_elems / MAP_ROOM_HEIGHT;
@@ -178,26 +181,32 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             if (floor_string.size() != MAP_ROOM_WIDTH){
                 ERR("Room floor width mismatch, %d, expected %d",
                     (int)floor_string.size(), MAP_ROOM_WIDTH);
+                Py_RETURN_FALSE;
             }
             if (water_string.size() != MAP_ROOM_WIDTH){
                 ERR("Room water width mismatch, %d, expected %d",
                     (int)water_string.size(), MAP_ROOM_WIDTH);
+                Py_RETURN_FALSE;
             }
             if (lava_string.size() != MAP_ROOM_WIDTH){
                 ERR("Room lava width mismatch, %d, expected %d",
                     (int)lava_string.size(), MAP_ROOM_WIDTH);
+                Py_RETURN_FALSE;
             }
             if (chasm_string.size() != MAP_ROOM_WIDTH){
                 ERR("Room chasm width mismatch, %d, expected %d",
                     (int)chasm_string.size(), MAP_ROOM_WIDTH);
+                Py_RETURN_FALSE;
             }
             if (walls_string.size() != MAP_ROOM_WIDTH){
                 ERR("Room walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), MAP_ROOM_WIDTH);
+                Py_RETURN_FALSE;
             }
             if (obj_strings.size() != MAP_ROOM_WIDTH){
                 ERR("Room items width mismatch, %d, expected %d",
                     (int)obj_strings.size(), MAP_ROOM_WIDTH);
+                Py_RETURN_FALSE;
             }
 
             for (auto x = 0; x < MAP_ROOM_WIDTH; x++) {
@@ -244,5 +253,5 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         r = r->rotate_clockwise();
     }
 
-    Py_RETURN_NONE;
+    Py_RETURN_TRUE;
 }

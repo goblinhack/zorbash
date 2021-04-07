@@ -33,134 +33,10 @@ public:
 
 static std::map<std::string, std::shared_ptr< class sound > > all_sound;
 
-static std::string sound_current;
-
 bool sound_init_done;
 
 bool sound_init (void)
 {_
-    sound_load(1, "data/sounds/misc/clack.wav",               "clack");
-    sound_load(1, "data/sounds/misc/step.wav",                "step");
-    sound_load(1, "data/sounds/misc/bay_door_close.wav",      "bay_door_close");
-    sound_load(1, "data/sounds/misc/fall.wav",                "fall");
-    sound_load(1, "data/sounds/misc/close_shut.wav",          "close_shut");
-    sound_load(1, "data/sounds/misc/swerve.wav",              "swerve");
-    sound_load(1, "data/sounds/misc/mushroom.wav",            "mushroom");
-    sound_load(1, "data/sounds/misc/rebound.wav",             "rebound");
-    sound_load(1, "data/sounds/misc/collect_a.wav",           "collect_a");
-    sound_load(1, "data/sounds/misc/bay_door_open.wav",       "bay_door_open");
-    sound_load(1, "data/sounds/misc/collect_b.wav",           "collect_b");
-    sound_load(1, "data/sounds/misc/shriek.wav",              "shriek");
-    sound_load(1, "data/sounds/misc/whistle.wav",             "whistle");
-    sound_load(1, "data/sounds/misc/zong.wav",                "zong");
-    sound_load(1, "data/sounds/misc/open.wav",                "open");
-    sound_load(1, "data/sounds/misc/scatter.wav",             "scatter");
-    sound_load(1, "data/sounds/misc/drip.wav",                "drip");
-    sound_load(1, "data/sounds/misc/unlock.wav",              "unlock");
-    sound_load(1, "data/sounds/misc/chime.wav",               "chime");
-    sound_load(1, "data/sounds/misc/transistor.wav",          "transistor");
-    sound_load(1, "data/sounds/misc/close.wav",               "close");
-    sound_load(1, "data/sounds/misc/resurrect.wav",           "resurrect");
-    sound_load(1, "data/sounds/misc/wave.wav",                "wave");
-    sound_load(1, "data/sounds/misc/wiggle_b.wav",            "wiggle_b");
-    sound_load(1, "data/sounds/misc/blurb.wav",               "blurb");
-    sound_load(1, "data/sounds/misc/wiggle_a.wav",            "wiggle_a");
-    sound_load(1, "data/sounds/misc/scramble.wav",            "scramble");
-    sound_load(1, "data/sounds/misc/twing.wav",               "twing");
-    sound_load(1, "data/sounds/misc/shut.wav",                "shut");
-    sound_load(1, "data/sounds/misc/rubberband.wav",          "rubberband");
-    sound_load(1, "data/sounds/misc/ping.wav",                "ping");
-    sound_load(1, "data/sounds/interface/select_b.wav",       "select_b");
-    sound_load(1, "data/sounds/interface/select_a.wav",       "select_a");
-    sound_load(1, "data/sounds/interface/end_turn.wav",       "end_turn");
-    sound_load(1, "data/sounds/interface/bonus.wav",          "bonus");
-    sound_load(1, "data/sounds/interface/paper.wav",          "paper");
-    sound_load(1, "data/sounds/interface/lose_a.wav",         "lose_a");
-    sound_load(1, "data/sounds/interface/lose_b.wav",         "lose_b");
-    sound_load(1, "data/sounds/interface/new_turn.wav",       "new_turn");
-    sound_load(1, "data/sounds/interface/gold.wav",           "gold");
-    sound_load(1, "data/sounds/interface/1up_a.wav",          "1up_a");
-    sound_load(1, "data/sounds/interface/blip.wav",           "blip");
-    sound_load(1, "data/sounds/interface/1up_b.wav",          "1up_b");
-    sound_load(1, "data/sounds/interface/coin.wav",           "coin");
-    sound_load(1, "data/sounds/interface/click.wav",          "click");
-    sound_load(1, "data/sounds/interface/error.wav",          "error");
-    sound_load(1, "data/sounds/interface/score.wav",          "score");
-    sound_load(1, "data/sounds/interface/dong.wav",           "dong");
-    sound_load(1, "data/sounds/interface/level_up.wav",       "level_up");
-    sound_load(1, "data/sounds/interface/ding.wav",           "ding");
-    sound_load(1, "data/sounds/impacts/boom_a.wav",           "boom_a");
-    sound_load(1, "data/sounds/impacts/boom_b.wav",           "boom_b");
-    sound_load(1, "data/sounds/impacts/impact_b.wav",         "impact_b");
-    sound_load(1, "data/sounds/impacts/impact_a.wav",         "impact_a");
-    sound_load(1, "data/sounds/impacts/explode_a.wav",        "explode_a");
-    sound_load(1, "data/sounds/impacts/pit_trap_fall.wav",    "pit_trap_fall");
-    sound_load(1, "data/sounds/impacts/sear.wav",             "sear");
-    sound_load(1, "data/sounds/impacts/explode_b.wav",        "explode_b");
-    sound_load(1, "data/sounds/impacts/explode_c.wav",        "explode_c");
-    sound_load(1, "data/sounds/impacts/magic_crumble.wav",    "magic_crumble");
-    sound_load(1, "data/sounds/impacts/area_effect_a.wav",    "area_effect_a");
-    sound_load(1, "data/sounds/impacts/area_effect_b.wav",    "area_effect_b");
-    sound_load(1, "data/sounds/impacts/pit_trap_damage.wav",  "pit_trap_damage");
-    sound_load(1, "data/sounds/impacts/spike_trap_a.wav",     "spike_trap_a");
-    sound_load(1, "data/sounds/impacts/hit.wav",              "hit");
-    sound_load(1, "data/sounds/impacts/spike_trap_b.wav",     "spike_trap_b");
-    sound_load(1, "data/sounds/impacts/magic_dust_b.wav",     "magic_dust_b");
-    sound_load(1, "data/sounds/impacts/magic_dust_a.wav",     "magic_dust_a");
-    sound_load(1, "data/sounds/status/curse.wav",             "curse");
-    sound_load(1, "data/sounds/status/freeze.wav",            "freeze");
-    sound_load(1, "data/sounds/status/mutation.wav",          "mutation");
-    sound_load(1, "data/sounds/status/confuse.wav",           "confuse");
-    sound_load(1, "data/sounds/status/disease.wav",           "disease");
-    sound_load(1, "data/sounds/status/burn.wav",              "burn");
-    sound_load(1, "data/sounds/status/charm.wav",             "charm");
-    sound_load(1, "data/sounds/status/poison.wav",            "poison");
-    sound_load(1, "data/sounds/abilities/jump_a.wav",         "jump_a");
-    sound_load(1, "data/sounds/abilities/disarm_single.wav",  "disarm_single");
-    sound_load(1, "data/sounds/abilities/jump_b.wav",         "jump_b");
-    sound_load(1, "data/sounds/abilities/disarm_multi_b.wav", "disarm_multi_b");
-    sound_load(1, "data/sounds/abilities/heal_b.wav",         "heal_b");
-    sound_load(1, "data/sounds/abilities/laser_a.wav",        "laser_a");
-    sound_load(1, "data/sounds/abilities/disarm_success.wav", "disarm_success");
-    sound_load(1, "data/sounds/abilities/sorcery.wav",        "sorcery");
-    sound_load(1, "data/sounds/abilities/disarm_multi_a.wav", "disarm_multi_a");
-    sound_load(1, "data/sounds/abilities/heal_a.wav",         "heal_a");
-    sound_load(1, "data/sounds/abilities/laser_b.wav",        "laser_b");
-    sound_load(1, "data/sounds/abilities/blaster.wav",        "blaster");
-    sound_load(1, "data/sounds/abilities/woosh_a.wav",        "woosh_a");
-    sound_load(1, "data/sounds/abilities/bazooka.wav",        "bazooka");
-    sound_load(1, "data/sounds/abilities/swing.wav",          "swing");
-    sound_load(1, "data/sounds/abilities/fire_a.wav",         "fire_a");
-    sound_load(1, "data/sounds/abilities/woosh_b.wav",        "woosh_b");
-    sound_load(1, "data/sounds/abilities/fire_b.wav",         "fire_b");
-    sound_load(1, "data/sounds/abilities/fire_c.wav",         "fire_c");
-    sound_load(1, "data/sounds/abilities/special_b.wav",      "special_b");
-    sound_load(1, "data/sounds/abilities/spell_a.wav",        "spell_a");
-    sound_load(1, "data/sounds/abilities/teleport.wav",       "teleport");
-    sound_load(1, "data/sounds/abilities/special_a.wav",      "special_a");
-    sound_load(1, "data/sounds/abilities/spell_b.wav",        "spell_b");
-    sound_load(1, "data/sounds/abilities/shoot_b.wav",        "shoot_b");
-    sound_load(1, "data/sounds/abilities/shoot_a.wav",        "shoot_a");
-    sound_load(1, "data/sounds/abilities/reload.wav",         "reload");
-    sound_load(1, "data/sounds/abilities/attack_a.wav",       "attack_a");
-    sound_load(1, "data/sounds/abilities/attack_b.wav",       "attack_b");
-    sound_load(1, "data/sounds/abilities/shotgun.wav",        "shotgun");
-    sound_load(1, "data/sounds/abilities/lightning_a.wav",    "lightning_a");
-    sound_load(1, "data/sounds/abilities/summon.wav",         "summon");
-    sound_load(1, "data/sounds/abilities/lightning_b.wav",    "lightning_b");
-    sound_load(1, "data/sounds/abilities/telepathy.wav",      "telepathy");
-    sound_load(1, "data/sounds/creatures/bird.wav",           "bird");
-    sound_load(1, "data/sounds/creatures/wings.wav",          "wings");
-    sound_load(1, "data/sounds/creatures/skeleton.wav",       "skeleton");
-    sound_load(1, "data/sounds/creatures/beetle.wav",         "beetle");
-    sound_load(1, "data/sounds/creatures/mystical.wav",       "mystical");
-    sound_load(1, "data/sounds/creatures/claw.wav",           "claw");
-    sound_load(1, "data/sounds/creatures/jelly.wav",          "jelly");
-    sound_load(1, "data/sounds/creatures/snake.wav",          "snake");
-    sound_load(1, "data/sounds/creatures/mouse.wav",          "mouse");
-    sound_load(1, "data/sounds/creatures/swarm.wav",          "swarm");
-    sound_load(1, "data/sounds/creatures/frog.wav",           "frog");
-
     return (true);
 }
 
@@ -269,5 +145,4 @@ bool sound_play (const std::string &alias)
 
 void sound_halt (void)
 {_
-    sound_current = "";
 }

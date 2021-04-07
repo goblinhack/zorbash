@@ -347,7 +347,7 @@ void glcolorfast(color s);
     auto errCode = glGetError();                                   \
     if (likely(errCode == GL_NO_ERROR)) {                          \
     } else {                                                       \
-        ERR("OpenGL: error at %s:%s line %u",                      \
+        ERR("GFX: error at %s:%s line %u",                      \
             __FILE__, __PRETTY_FUNCTION__, __LINE__);              \
         gl_error(errCode);                                         \
     }                                                              \

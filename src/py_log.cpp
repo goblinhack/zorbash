@@ -20,7 +20,7 @@ static void py_log_ (const char *fmt, va_list args)
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "PYTHON: ");
+    snprintf(buf + len, MAXSTR - len, "PYC: ");
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSTR - len, fmt, args);
 

@@ -18,11 +18,13 @@ PyObject *text_size_ (PyObject *obj, PyObject *args, PyObject *keywds)
     };
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "u", kwlist, &text)) {
+        ERR("text_size: bad args");
         Py_RETURN_NONE;
     }
 
     if (!text) {
         ERR("No text");
+        Py_RETURN_NONE;
     }
 
     std::wstring col = L"none";

@@ -78,27 +78,27 @@ data_dong_wav_start_:
 .globl data_dong_wav_end_
 data_dong_wav_end_:
 
-.globl data_computer_b_wav_start_
-data_computer_b_wav_start_:
-.incbin "../data/sounds/misc/computer_b.wav"
-.globl data_computer_b_wav_end_
-data_computer_b_wav_end_:
+.globl data_rebound_wav_start_
+data_rebound_wav_start_:
+.incbin "../data/sounds/misc/rebound.wav"
+.globl data_rebound_wav_end_
+data_rebound_wav_end_:
 
-.globl data_computer_e_wav_start_
-data_computer_e_wav_start_:
-.incbin "../data/sounds/misc/computer_e.wav"
-.globl data_computer_e_wav_end_
-data_computer_e_wav_end_:
+.globl data_unlock_wav_start_
+data_unlock_wav_start_:
+.incbin "../data/sounds/misc/unlock.wav"
+.globl data_unlock_wav_end_
+data_unlock_wav_end_:
 
-.globl data_wave_wav_start_
-data_wave_wav_start_:
-.incbin "../data/sounds/misc/wave.wav"
-.globl data_wave_wav_end_
-data_wave_wav_end_:
+.globl data_twing_wav_start_
+data_twing_wav_start_:
+.incbin "../data/sounds/misc/twing.wav"
+.globl data_twing_wav_end_
+data_twing_wav_end_:
 
-.globl data_freeze_wav_start_
-data_freeze_wav_start_:
-.incbin "../data/sounds/status/freeze.wav"
-.globl data_freeze_wav_end_
-data_freeze_wav_end_:
+.globl data_charm_wav_start_
+data_charm_wav_start_:
+.incbin "../data/sounds/status/charm.wav"
+.globl data_charm_wav_end_
+data_charm_wav_end_:
 

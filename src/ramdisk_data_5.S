@@ -84,21 +84,21 @@ data_close_shut_wav_start_:
 .globl data_close_shut_wav_end_
 data_close_shut_wav_end_:
 
-.globl data_shriek_wav_start_
-data_shriek_wav_start_:
-.incbin "../data/sounds/misc/shriek.wav"
-.globl data_shriek_wav_end_
-data_shriek_wav_end_:
+.globl data_open_wav_start_
+data_open_wav_start_:
+.incbin "../data/sounds/misc/open.wav"
+.globl data_open_wav_end_
+data_open_wav_end_:
 
-.globl data_transistor_wav_start_
-data_transistor_wav_start_:
-.incbin "../data/sounds/misc/transistor.wav"
-.globl data_transistor_wav_end_
-data_transistor_wav_end_:
+.globl data_blurb_wav_start_
+data_blurb_wav_start_:
+.incbin "../data/sounds/misc/blurb.wav"
+.globl data_blurb_wav_end_
+data_blurb_wav_end_:
 
-.globl data_rubberband_wav_start_
-data_rubberband_wav_start_:
-.incbin "../data/sounds/misc/rubberband.wav"
-.globl data_rubberband_wav_end_
-data_rubberband_wav_end_:
+.globl data_confuse_wav_start_
+data_confuse_wav_start_:
+.incbin "../data/sounds/status/confuse.wav"
+.globl data_confuse_wav_end_
+data_confuse_wav_end_:
 
