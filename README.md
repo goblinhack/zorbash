@@ -11,7 +11,7 @@ Comments and suggestions welcome at this early stage.
 
 Graphics
 --------
-o Various items and monsters by Oryx, [found here](https://www.oryxdesignlab.com/)
+- Various items and monsters by Oryx, [found here](https://www.oryxdesignlab.com/)
 <!-- Oryx: Order Number: #102084 (placed on January 16, 2016 03:14PM EST) -->
 
 Music
@@ -30,6 +30,7 @@ Sound effects
 - Slime sounds by Konstati, [found here](https://freesound.org/people/konstati/)
 - Key sounds by uEffects, [found here](https://freesound.org/people/uEffects/)
 - Door sounds by TiesWijnen, [found here](https://freesound.org/people/TiesWijnen/)
+- Door sounds by danielvj, [found here](https://freesound.org/people/danielvj/)
 
 Screenshots
 -----------

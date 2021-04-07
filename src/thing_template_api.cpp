@@ -56,6 +56,7 @@ void Tp::set_resurrect_dice(const std::string &v) { _resurrect_dice = v; _resurr
 const std::string& Tp::light_color(void) const { return _light_color; }
 const std::string& Tp::name(void) const { return _name; }
 const std::string& Tp::on_death_do(void) const { return _on_death_do; }
+const std::string& Tp::on_open_do(void) const { return _on_open_do; }
 const std::string& Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
 const std::string& Tp::str1(void) const { return _str1; }
 const std::string& Tp::on_birth_do(void) const { return _on_birth_do; }
@@ -533,6 +534,7 @@ void Tp::set_on_use_do(const std::string &v) { _on_use_do = v; }
 void Tp::set_on_hit_do(const std::string &v) { _on_hit_do = v; }
 void Tp::set_on_claw_attack_do(const std::string &v) { _on_claw_attack_do = v; }
 void Tp::set_on_death_do(const std::string &v) { _on_death_do = v; }
+void Tp::set_on_open_do(const std::string &v) { _on_open_do = v; }
 void Tp::set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }
 void Tp::set_stats01(int v) { _stats01 = v; }
 void Tp::set_stats02(int v) { _stats02 = v; }
