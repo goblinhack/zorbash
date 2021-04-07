@@ -309,6 +309,8 @@ private:
     std::string _on_death_do;
     std::string _on_idle_dice_str;
     std::string _on_use_do;
+    std::string _on_hit_do;
+    std::string _on_claw_attack_do;
     std::string _resurrect_dice_str;
     std::string _short_text_name;
     std::string _spawn_on_shoved;
@@ -391,6 +393,8 @@ public:
     const std::string& on_death_do(void) const;
     const std::string& on_idle_dice_str(void) const;
     const std::string& on_use_do(void) const;
+    const std::string& on_hit_do(void) const;
+    const std::string& on_claw_attack_do(void) const;
     const std::string& resurrect_dice_str(void) const;
     const std::string& short_text_name(void) const;
     const std::string& spawn_on_shoved(void) const;
@@ -873,6 +877,8 @@ public:
     void set_on_death_is_open(int);
     void set_on_idle_dice(const std::string &);
     void set_on_use_do(const std::string &);
+    void set_on_hit_do(const std::string &);
+    void set_on_claw_attack_do(const std::string &);
     void set_rarity(int);
     void set_resurrect_dice(const std::string &);
     void set_short_text_name(const std::string &);

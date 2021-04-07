@@ -160,6 +160,12 @@ class Tp:
     def set_on_use_do(self, value):
         zx.tp_set_on_use_do(self, value)
 
+    def set_on_hit_do(self, value):
+        zx.tp_set_on_hit_do(self, value)
+
+    def set_on_claw_attack_do(self, value):
+        zx.tp_set_on_claw_attack_do(self, value)
+
     def set_on_death_do(self, value):
         zx.tp_set_on_death_do(self, value)
 

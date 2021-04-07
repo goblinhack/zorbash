@@ -30,6 +30,7 @@
 #include "my_ui.h"
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
+#include "my_sound.h"
 #include <unistd.h> // usleep
 
 #define ENABLE_DEBUG_GFX_GL_BLEND
@@ -5103,6 +5104,7 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
 
 //TOPCON("wid [%s] mouse up.", w->name.c_str());
     if ((w->on_mouse_up && (w->on_mouse_up)(w, x, y, button)) ||
+        sound_play("click");
         wid_get_moveable(w)) {
 
         wid_set_mode(w, WID_MODE_ACTIVE);
@@ -5346,6 +5348,7 @@ if (wid_event_to_char(key) == '-') {
         (wid_focus->on_key_down)) {
 
         if ((wid_focus->on_key_down)(wid_focus, key)) {
+            sound_play("keypress");
             //
             // Do not raise, gets in the way of popups the callback creates.
             //
@@ -5367,6 +5370,7 @@ if (wid_event_to_char(key) == '-') {
     }
 
     if ((w->on_key_down)(w, key)) {
+        sound_play("click");
         //
         // Do not raise, gets in the way of popups the callback creates.
         //
@@ -5384,6 +5388,7 @@ try_parent:
     while (w) {
         if (w->on_key_down) {
             if ((w->on_key_down)(w, key)) {
+                sound_play("click");
                 //
                 // Do not raise, gets in the way of popups the callback
                 // creates.

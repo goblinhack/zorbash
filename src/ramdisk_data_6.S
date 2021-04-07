@@ -60,45 +60,45 @@ data_impact_b_wav_start_:
 .globl data_impact_b_wav_end_
 data_impact_b_wav_end_:
 
-.globl data_pit_trap_damage_wav_start_
-data_pit_trap_damage_wav_start_:
-.incbin "../data/sounds/impacts/pit_trap_damage.wav"
-.globl data_pit_trap_damage_wav_end_
-data_pit_trap_damage_wav_end_:
+.globl data_437650__dersuperanton__getting_hit_damage_scream_wav_start_
+data_437650__dersuperanton__getting_hit_damage_scream_wav_start_:
+.incbin "../data/sounds/impacts/437650__dersuperanton__getting-hit-damage-scream.wav"
+.globl data_437650__dersuperanton__getting_hit_damage_scream_wav_end_
+data_437650__dersuperanton__getting_hit_damage_scream_wav_end_:
 
-.globl data_paper_wav_start_
-data_paper_wav_start_:
-.incbin "../data/sounds/interface/paper.wav"
-.globl data_paper_wav_end_
-data_paper_wav_end_:
+.globl data_select_b_wav_start_
+data_select_b_wav_start_:
+.incbin "../data/sounds/interface/select_b.wav"
+.globl data_select_b_wav_end_
+data_select_b_wav_end_:
 
-.globl data_error_wav_start_
-data_error_wav_start_:
-.incbin "../data/sounds/interface/error.wav"
-.globl data_error_wav_end_
-data_error_wav_end_:
+.globl data_blip_wav_start_
+data_blip_wav_start_:
+.incbin "../data/sounds/interface/blip.wav"
+.globl data_blip_wav_end_
+data_blip_wav_end_:
 
-.globl data_swerve_wav_start_
-data_swerve_wav_start_:
-.incbin "../data/sounds/misc/swerve.wav"
-.globl data_swerve_wav_end_
-data_swerve_wav_end_:
+.globl data_step_wav_start_
+data_step_wav_start_:
+.incbin "../data/sounds/misc/step.wav"
+.globl data_step_wav_end_
+data_step_wav_end_:
 
-.globl data_scatter_wav_start_
-data_scatter_wav_start_:
-.incbin "../data/sounds/misc/scatter.wav"
-.globl data_scatter_wav_end_
-data_scatter_wav_end_:
+.globl data_shriek_wav_start_
+data_shriek_wav_start_:
+.incbin "../data/sounds/misc/shriek.wav"
+.globl data_shriek_wav_end_
+data_shriek_wav_end_:
 
-.globl data_wiggle_a_wav_start_
-data_wiggle_a_wav_start_:
-.incbin "../data/sounds/misc/wiggle_a.wav"
-.globl data_wiggle_a_wav_end_
-data_wiggle_a_wav_end_:
+.globl data_resurrect_wav_start_
+data_resurrect_wav_start_:
+.incbin "../data/sounds/misc/resurrect.wav"
+.globl data_resurrect_wav_end_
+data_resurrect_wav_end_:
 
-.globl data_disease_wav_start_
-data_disease_wav_start_:
-.incbin "../data/sounds/status/disease.wav"
-.globl data_disease_wav_end_
-data_disease_wav_end_:
+.globl data_curse_wav_start_
+data_curse_wav_start_:
+.incbin "../data/sounds/status/curse.wav"
+.globl data_curse_wav_end_
+data_curse_wav_end_:
 
