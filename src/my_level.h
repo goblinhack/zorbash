@@ -456,7 +456,7 @@ public:
     void create_dungeon_place_remaining_walls(Dungeonp d, const std::string &what);
     void create_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
     void create_dungeon_place_sewer_pipes(Dungeonp d);
-    void create_dungeon_place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
+    void create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries);
     void create_sewer_place_remaining_walls(const std::string &what);
     void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
     void cursor_check_if_scroll_needed(void);

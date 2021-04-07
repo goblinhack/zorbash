@@ -35,7 +35,7 @@ static Tpidmap tp_treasure;
 static Tpidmap tp_item_class_a;
 static Tpidmap tp_item_class_b;
 static Tpidmap tp_item_class_c;
-static Tpidmap tp_dungeon_wall;
+static Tpidmap tp_wall_dungeon;
 static Tpidmap tp_sewer_wall;
 static Tpidmap tp_ascend_sewer;
 static Tpidmap tp_descend_sewer;
@@ -47,7 +47,7 @@ void tp_random_init (void)
         if (tp->is_blood_splatter())      { tp_blood_splatter.push_back(tp); }
         if (tp->is_dirt())                { tp_dirt.push_back(tp); }
         if (tp->is_door())                { tp_door.push_back(tp); }
-        if (tp->is_dungeon_wall())        { tp_dungeon_wall.push_back(tp); }
+        if (tp->is_wall_dungeon())        { tp_wall_dungeon.push_back(tp); }
         if (tp->is_ascend_dungeon())      { tp_ascend_dungeon.push_back(tp); }
         if (tp->is_descend_dungeon())     { tp_descend_dungeon.push_back(tp); }
         if (tp->is_floor())               { tp_floor.push_back(tp); }
@@ -313,13 +313,13 @@ Tpp tp_random_blood (void)
     return tp_get_with_no_rarity_filter(tp_blood);
 }
 
-Tpp tp_random_dungeon_wall (void)
+Tpp tp_random_wall_dungeon (void)
 {_
-    if (unlikely(!tp_dungeon_wall.size())) {
+    if (unlikely(!tp_wall_dungeon.size())) {
         ERR("No dungeon walls found");
         return (nullptr);
     }
-    return tp_get_with_no_rarity_filter(tp_dungeon_wall);
+    return tp_get_with_no_rarity_filter(tp_wall_dungeon);
 }
 
 Tpp tp_random_sewer_wall (void)

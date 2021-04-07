@@ -262,8 +262,8 @@ class Tp:
     def set_is_sewer_wall(self, value):
         zx.tp_set_is_sewer_wall(self, value)
 
-    def set_is_dungeon_wall(self, value):
-        zx.tp_set_is_dungeon_wall(self, value)
+    def set_is_wall_dungeon(self, value):
+        zx.tp_set_is_wall_dungeon(self, value)
 
     def set_is_descend_sewer(self, value):
         zx.tp_set_is_descend_sewer(self, value)
