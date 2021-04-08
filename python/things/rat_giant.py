@@ -2,7 +2,7 @@ import zx
 import tp
 import random
 
-def on_claw_attack(me, x, y):
+def on_bite(me, x, y):
     sound = "growl{}".format(random.randint(1, 10))
     if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
         zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
@@ -33,9 +33,9 @@ def tp_init(name, text_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
+    x.set_damage_bite_dice("1d6+2")
     x.set_damage_doubled_from_fire(True)
     x.set_damage_doubled_from_poison(True)
-    x.set_damage_melee_dice("1d4+2")
     x.set_gfx_anim_attack("attack_claws")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
@@ -52,6 +52,7 @@ def tp_init(name, text_name):
     x.set_is_attackable_by_player(True)
     x.set_is_burnable(True)
     x.set_is_combustible(True)
+    x.set_is_corpse_on_death(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_food_eater(True)
     x.set_is_hunger_insatiable(True)
@@ -77,11 +78,10 @@ def tp_init(name, text_name):
     x.set_move_speed_ms(50)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d6")
-    x.set_on_claw_attack_do("rat_giant.on_claw_attack()")
+    x.set_on_bite_do("rat_giant.on_bite()")
     x.set_on_death_do("rat_giant.on_death()")
     x.set_on_hit_do("rat_giant.on_hit()")
-    x.set_on_miss_do("rat_giant.on_hit()")
-    x.set_on_death_is_corpse(True)
+    x.set_on_miss_do("rat_giant.on_miss()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
     x.set_text_a_or_an("the");

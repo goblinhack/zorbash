@@ -272,7 +272,7 @@ private:
     int _move_speed_ms {};
     int _normal_placement_rules {};
     int _on_death_drop_all_items {};
-    int _on_death_is_corpse {};
+    int _is_corpse_on_death {};
     int _on_death_is_open {};
     int _rarity {};
     int _stamina {};
@@ -312,7 +312,7 @@ private:
     std::string _on_use_do;
     std::string _on_hit_do;
     std::string _on_miss_do;
-    std::string _on_claw_attack_do;
+    std::string _on_bite_do;
     std::string _on_move_do;
     std::string _on_born_do;
     std::string _resurrect_dice_str;
@@ -400,7 +400,7 @@ public:
     const std::string& on_use_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_miss_do(void) const;
-    const std::string& on_claw_attack_do(void) const;
+    const std::string& on_bite_do(void) const;
     const std::string& on_move_do(void) const;
     const std::string& on_born_do(void) const;
     const std::string& resurrect_dice_str(void) const;
@@ -632,7 +632,7 @@ public:
     int move_speed_ms(void) const;
     int normal_placement_rules(void) const;
     int on_death_drop_all_items(void) const;
-    int on_death_is_corpse(void) const;
+    int is_corpse_on_death(void) const;
     int on_death_is_open(void) const;
     int rarity(void) const;
     int stamina(void) const;
@@ -882,13 +882,13 @@ public:
     void set_on_death_do(const std::string &);
     void set_on_open_do(const std::string &);
     void set_on_death_drop_all_items(int);
-    void set_on_death_is_corpse(int);
+    void set_is_corpse_on_death(int);
     void set_on_death_is_open(int);
     void set_on_idle_dice(const std::string &);
     void set_on_use_do(const std::string &);
     void set_on_hit_do(const std::string &);
     void set_on_miss_do(const std::string &);
-    void set_on_claw_attack_do(const std::string &);
+    void set_on_bite_do(const std::string &);
     void set_on_move_do(const std::string &);
     void set_on_born_do(const std::string &);
     void set_rarity(int);

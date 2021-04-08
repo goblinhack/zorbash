@@ -1,5 +1,25 @@
 import zx
 import tp
+import random
+
+def on_bite(me, x, y):
+    sound = "growl{}".format(random.randint(1, 10))
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
+
+def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+    sound = "hiss{}".format(random.randint(1, 10))
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
+
+def on_miss(me, hitter, x, y):
+    sound = "hiss{}".format(random.randint(1, 10))
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
+
+def on_death(me, x, y):
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, "monst_death1"):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, "monst_death1")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -9,8 +29,6 @@ def tp_init(name, text_name):
     x.set_attack_meat(True)
     x.set_attack_shove(True)
     x.set_attack_shove_chance_d1000(200)
-    x.set_is_attackable_by_player(True)
-    x.set_is_attackable_by_monst(True)
     x.set_avoids_acid(True)
     x.set_avoids_fire(100)
     x.set_avoids_water(100)
@@ -34,8 +52,11 @@ def tp_init(name, text_name):
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
+    x.set_is_attackable_by_monst(True)
+    x.set_is_attackable_by_player(True)
     x.set_is_burnable(True)
     x.set_is_combustible(True)
+    x.set_is_corpse_on_death(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_fearless(True)
     x.set_is_hunger_insatiable(True)
@@ -57,7 +78,10 @@ def tp_init(name, text_name):
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
-    x.set_on_death_is_corpse(True)
+    x.set_on_bite_do("mummy.on_bite()")
+    x.set_on_death_do("mummy.on_death()")
+    x.set_on_hit_do("mummy.on_hit()")
+    x.set_on_miss_do("mummy.on_miss()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_resurrect_dice("1d10+30")
     x.set_text_a_or_an("a");

@@ -166,8 +166,8 @@ class Tp:
     def set_on_miss_do(self, value):
         zx.tp_set_on_miss_do(self, value)
 
-    def set_on_claw_attack_do(self, value):
-        zx.tp_set_on_claw_attack_do(self, value)
+    def set_on_bite_do(self, value):
+        zx.tp_set_on_bite_do(self, value)
 
     def set_on_death_do(self, value):
         zx.tp_set_on_death_do(self, value)
@@ -739,8 +739,8 @@ class Tp:
     def set_is_bleeder(self, value):
         zx.tp_set_is_bleeder(self, value)
 
-    def set_on_death_is_corpse(self, value):
-        zx.tp_set_on_death_is_corpse(self, value)
+    def set_is_corpse_on_death(self, value):
+        zx.tp_set_is_corpse_on_death(self, value)
 
     def set_is_meat_eater(self, value):
         zx.tp_set_is_meat_eater(self, value)

@@ -307,6 +307,7 @@ _
     // See if we can bypass its defences
     //
     if (!it->is_always_hit()) {
+        //it->topcon("att_mod %d def_mod %d", att_mod, def_mod);
         if (!d20roll(att_mod, def_mod, fumble, crit)) {
             if (is_player() || (owner && owner->is_player())) {
                 TOPCON("You miss %s.", it->text_the().c_str());

@@ -47,7 +47,7 @@ def tp_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_on_death_do("door.on_death()")
     x.set_on_open_do("door.on_open()")
-    x.set_on_death_is_corpse(True)
+    x.set_is_corpse_on_death(True)
     x.set_on_death_is_open(True)
     x.set_on_hit_do("door.on_hit()")
     x.set_text_a_or_an("the");

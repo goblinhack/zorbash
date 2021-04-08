@@ -126,7 +126,7 @@ void Thing::kill (Thingp killer, const char *reason)
         }
     }
 
-    if (on_death_is_corpse()) {
+    if (is_corpse_on_death()) {
         if (is_loggable_for_important_stuff()) {
             log("Killed, leaves corpse");
         }

@@ -362,14 +362,14 @@ int Thing::is_combustible(void) const
     return (tp()->is_combustible());
 }
 
-int Thing::on_death_is_corpse(void) const
+int Thing::is_corpse_on_death(void) const
 {_
-    return (tp()->on_death_is_corpse());
+    return (tp()->is_corpse_on_death());
 }
 
 int Thing::is_corpse (void) const
 {_
-    return (is_dead && on_death_is_corpse());
+    return (is_dead && is_corpse_on_death());
 }
 
 int Thing::is_corridor(void) const
@@ -4878,7 +4878,7 @@ const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do(
 const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
 const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
 const std::string& Thing::on_miss_do (void) const {_ return (tp()->on_miss_do()); }
-const std::string& Thing::on_claw_attack_do (void) const {_ return (tp()->on_claw_attack_do()); }
+const std::string& Thing::on_bite_do (void) const {_ return (tp()->on_bite_do()); }
 const std::string& Thing::on_move_do (void) const {_ return (tp()->on_move_do()); }
 const std::string& Thing::on_born_do (void) const {_ return (tp()->on_born_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }

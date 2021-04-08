@@ -2,6 +2,10 @@ import zx
 import tp
 import random
 
+def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, "squelch"):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, "squelch")
+
 def on_death(me, x, y):
     zx.tp_spawn_at(me, "pink_splatter")
     zx.sound_play_channel(zx.CHANNEL_MONST, "slime{}".format(random.randint(1, 9)))
@@ -62,6 +66,7 @@ def tp_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
     x.set_on_death_do("jelly_baby.on_death()")
+    x.set_on_hit_do("jelly_baby.on_hit()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(10)
     x.set_text_a_or_an("a");

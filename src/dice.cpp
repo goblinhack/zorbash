@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
 #include "my_string.h"
 #include "my_dice.h"
 #include "my_random.h"
@@ -144,6 +145,7 @@ d20roll (int modifier_a, int modifier_b, bool &fumble, bool &critical)
     }
 
     auto roll_b = random_range_inclusive(1, 20);
+//TOPCON("a %d b %d", roll_a, roll_b);
 
     return roll_a + modifier_to_bonus(modifier_a) >= 
            roll_b + modifier_to_bonus(modifier_b);

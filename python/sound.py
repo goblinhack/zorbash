@@ -47,6 +47,7 @@ zx.sound_load(volume=0.25, file="data/sounds/creatures/slime6.wav",             
 zx.sound_load(volume=0.25, file="data/sounds/creatures/slime7.wav",                                         name="slime7")
 zx.sound_load(volume=0.25, file="data/sounds/creatures/slime8.wav",                                         name="slime8")
 zx.sound_load(volume=0.25, file="data/sounds/creatures/slime9.wav",                                         name="slime9")
+zx.sound_load(volume=0.25, file="data/sounds/creatures/76962__michel88__deaths.wav",                        name="monst_death1")
 zx.sound_load(volume=0.25, file="data/sounds/impacts/434462__dersuperanton__getting-hit-hugh.wav",          name="player_hit1")
 zx.sound_load(volume=0.25, file="data/sounds/impacts/404109__deathscyp__damage-1.wav",                      name="player_hit2")
 zx.sound_load(volume=0.25, file="data/sounds/impacts/82388__robinhood76__01308_man_hit_9.wav",              name="player_hit3")

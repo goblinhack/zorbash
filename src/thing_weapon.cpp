@@ -352,7 +352,7 @@ _
             //
             // Python callback
             //
-            on_claw_attack();
+            on_bite();
         }
         swung_as = gfx_anim_attack();
     } else {
