@@ -983,7 +983,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
 _
 
     if (it->is_monst()) {
-        if (is_torch()) {
+        if (is_brazier()) {
             //
             // Torches always hit monsters
             //

@@ -147,7 +147,7 @@ public:
     uint64_t i_set_is_rock:1                   {};
     uint64_t i_set_is_secret_door:1            {};
     uint64_t i_set_is_smoke:1                  {};
-    uint64_t i_set_is_torch:1                  {};
+    uint64_t i_set_is_brazier:1                  {};
     uint64_t i_set_is_treasure:1               {};
     uint64_t i_set_is_wall:1                   {};
     uint64_t i_set_is_gfx_water:1              {};
@@ -729,7 +729,7 @@ public:
     int is_temporary_bag(void) const;
     int is_throwable(void) const;
     int is_thrown_automatically_when_chosen(void) const;
-    int is_torch(void) const;
+    int is_brazier(void) const;
     int is_treasure(void) const;
     int is_treasure_class_a(void) const;
     int is_treasure_class_b(void) const;
@@ -1108,7 +1108,7 @@ public:
     void tick();
     void topcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void topcon_(const char *fmt, va_list args) const; // compile error without
-    void torch_tick();
+    void brazier_tick();
     void try_to_carry(const std::list<Thingp> &items);
     void unleash_minions(void);
     void unset_on_fire(void);

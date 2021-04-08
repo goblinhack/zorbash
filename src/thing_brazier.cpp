@@ -12,12 +12,12 @@
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
 
-void Thing::torch_tick (void)
+void Thing::brazier_tick (void)
 {_
     //
-    // This is for if you land on a torch
+    // This is for if you land on a brazier
     //
-    if (level->is_torch(mid_at.x, mid_at.y)) {
+    if (level->is_brazier(mid_at.x, mid_at.y)) {
         static const std::vector<fpoint> all_deltas = {
             fpoint(-1, -1),
             fpoint( 1, -1),
@@ -31,7 +31,7 @@ void Thing::torch_tick (void)
 
         FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_OBJ) {
             auto tpp = t->tp();
-            if (!tpp->is_torch()) {
+            if (!tpp->is_brazier()) {
                 continue;
             }
 
@@ -44,7 +44,7 @@ void Thing::torch_tick (void)
                 if (try_to_shove(t, delta)) {
                     if (!is_dead) {
                         if (is_player()) {
-                            TOPCON("You knock over the torch!");
+                            TOPCON("You knock over the brazier!");
                         }
                     }
                     return;

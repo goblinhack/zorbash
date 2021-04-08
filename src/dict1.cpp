@@ -156,7 +156,7 @@ static const char *dict1_names[] = {
     "titan",
     "toad",
     "tomb",
-    "torch",
+    "brazier",
     "tragic",
     "tremor",
     "troll",

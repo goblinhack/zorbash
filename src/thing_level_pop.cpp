@@ -95,8 +95,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_secret_door(mx, my); }
     if (i_set_is_smoke)                                { i_set_is_smoke = false;
                                                          level->unset_is_smoke(mx, my); }
-    if (i_set_is_torch)                                { i_set_is_torch = false;
-                                                         level->unset_is_torch(mx, my); }
+    if (i_set_is_brazier)                                { i_set_is_brazier = false;
+                                                         level->unset_is_brazier(mx, my); }
     if (i_set_is_treasure)                             { i_set_is_treasure = false;
                                                          level->unset_is_treasure(mx, my); }
     if (i_set_is_wall)                                 { i_set_is_wall = false;

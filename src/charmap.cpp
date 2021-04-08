@@ -163,7 +163,7 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::BRAZIER;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_torch           = true;
+    c->is_brazier           = true;
 
     char_index              = Charmap::TRAP;
     c = &all_charmaps[char_index];

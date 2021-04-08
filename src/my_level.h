@@ -60,7 +60,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_torch {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_water {};
@@ -420,8 +420,8 @@ public:
     uint8_t is_shallow_water(const point &p);
     uint8_t is_smoke(const int x, const int y);
     uint8_t is_smoke(const point &p);
-    uint8_t is_torch(const int x, const int y);
-    uint8_t is_torch(const point &p);
+    uint8_t is_brazier(const int x, const int y);
+    uint8_t is_brazier(const point &p);
     uint8_t is_treasure(const int x, const int y);
     uint8_t is_treasure(const point &p);
     uint8_t is_treasure_class_a(const int x, const int y);
@@ -558,7 +558,7 @@ public:
     void set_is_secret_door(const int x, const int y);
     void set_is_shallow_water(const int x, const int y);
     void set_is_smoke(const int x, const int y);
-    void set_is_torch(const int x, const int y);
+    void set_is_brazier(const int x, const int y);
     void set_is_treasure(const int x, const int y);
     void set_is_treasure_class_a(const int x, const int y);
     void set_is_treasure_class_b(const int x, const int y);
@@ -615,7 +615,7 @@ public:
     void unset_is_secret_door(const int x, const int y);
     void unset_is_shallow_water(const int x, const int y);
     void unset_is_smoke(const int x, const int y);
-    void unset_is_torch(const int x, const int y);
+    void unset_is_brazier(const int x, const int y);
     void unset_is_treasure(const int x, const int y);
     void unset_is_treasure_class_a(const int x, const int y);
     void unset_is_treasure_class_b(const int x, const int y);

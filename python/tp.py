@@ -583,8 +583,8 @@ class Tp:
     def set_is_loggable_for_unimportant_stuff(self, value):
         zx.tp_set_is_loggable_for_unimportant_stuff(self, value)
 
-    def set_is_torch(self, value):
-        zx.tp_set_is_torch(self, value)
+    def set_is_brazier(self, value):
+        zx.tp_set_is_brazier(self, value)
 
     def set_gfx_bounce_always(self, value):
         zx.tp_set_gfx_bounce_always(self, value)

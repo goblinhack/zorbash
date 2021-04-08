@@ -54,69 +54,87 @@ data_bird_wav_start_:
 .globl data_bird_wav_end_
 data_bird_wav_end_:
 
-.globl data_snake_wav_start_
-data_snake_wav_start_:
-.incbin "../data/sounds/creatures/snake.wav"
-.globl data_snake_wav_end_
-data_snake_wav_end_:
+.globl data_growl1_wav_start_
+data_growl1_wav_start_:
+.incbin "../data/sounds/creatures/growl1.wav"
+.globl data_growl1_wav_end_
+data_growl1_wav_end_:
 
-.globl data_frog_wav_start_
-data_frog_wav_start_:
-.incbin "../data/sounds/creatures/frog.wav"
-.globl data_frog_wav_end_
-data_frog_wav_end_:
+.globl data_hiss9_wav_start_
+data_hiss9_wav_start_:
+.incbin "../data/sounds/creatures/hiss9.wav"
+.globl data_hiss9_wav_end_
+data_hiss9_wav_end_:
 
-.globl data_explode_a_wav_start_
-data_explode_a_wav_start_:
-.incbin "../data/sounds/impacts/explode_a.wav"
-.globl data_explode_a_wav_end_
-data_explode_a_wav_end_:
+.globl data_slime3_wav_start_
+data_slime3_wav_start_:
+.incbin "../data/sounds/creatures/slime3.wav"
+.globl data_slime3_wav_end_
+data_slime3_wav_end_:
 
-.globl data_268227__xxchr0nosxx__swing_wav_start_
-data_268227__xxchr0nosxx__swing_wav_start_:
-.incbin "../data/sounds/impacts/268227__xxchr0nosxx__swing.wav"
-.globl data_268227__xxchr0nosxx__swing_wav_end_
-data_268227__xxchr0nosxx__swing_wav_end_:
+.globl data_slime6_wav_start_
+data_slime6_wav_start_:
+.incbin "../data/sounds/creatures/slime6.wav"
+.globl data_slime6_wav_end_
+data_slime6_wav_end_:
 
-.globl data_magic_dust_a_wav_start_
-data_magic_dust_a_wav_start_:
-.incbin "../data/sounds/impacts/magic_dust_a.wav"
-.globl data_magic_dust_a_wav_end_
-data_magic_dust_a_wav_end_:
+.globl data_impact_a_wav_start_
+data_impact_a_wav_start_:
+.incbin "../data/sounds/impacts/impact_a.wav"
+.globl data_impact_a_wav_end_
+data_impact_a_wav_end_:
 
-.globl data_gold_wav_start_
-data_gold_wav_start_:
-.incbin "../data/sounds/interface/gold.wav"
-.globl data_gold_wav_end_
-data_gold_wav_end_:
+.globl data_door_hit1_wav_start_
+data_door_hit1_wav_start_:
+.incbin "../data/sounds/impacts/door_hit1.wav"
+.globl data_door_hit1_wav_end_
+data_door_hit1_wav_end_:
 
-.globl data_181002__ueffects__s_key_wav_start_
-data_181002__ueffects__s_key_wav_start_:
-.incbin "../data/sounds/interface/181002__ueffects__s-key.wav"
-.globl data_181002__ueffects__s_key_wav_end_
-data_181002__ueffects__s_key_wav_end_:
+.globl data_spike_trap_b_wav_start_
+data_spike_trap_b_wav_start_:
+.incbin "../data/sounds/impacts/spike_trap_b.wav"
+.globl data_spike_trap_b_wav_end_
+data_spike_trap_b_wav_end_:
 
-.globl data_rebound_wav_start_
-data_rebound_wav_start_:
-.incbin "../data/sounds/misc/rebound.wav"
-.globl data_rebound_wav_end_
-data_rebound_wav_end_:
+.globl data_lose_a_wav_start_
+data_lose_a_wav_start_:
+.incbin "../data/sounds/interface/lose_a.wav"
+.globl data_lose_a_wav_end_
+data_lose_a_wav_end_:
 
-.globl data_unlock_wav_start_
-data_unlock_wav_start_:
-.incbin "../data/sounds/misc/unlock.wav"
-.globl data_unlock_wav_end_
-data_unlock_wav_end_:
+.globl data_error_wav_start_
+data_error_wav_start_:
+.incbin "../data/sounds/interface/error.wav"
+.globl data_error_wav_end_
+data_error_wav_end_:
 
-.globl data_scramble_wav_start_
-data_scramble_wav_start_:
-.incbin "../data/sounds/misc/scramble.wav"
-.globl data_scramble_wav_end_
-data_scramble_wav_end_:
+.globl data_close_shut_wav_start_
+data_close_shut_wav_start_:
+.incbin "../data/sounds/misc/close_shut.wav"
+.globl data_close_shut_wav_end_
+data_close_shut_wav_end_:
 
-.globl data_burn_wav_start_
-data_burn_wav_start_:
-.incbin "../data/sounds/status/burn.wav"
-.globl data_burn_wav_end_
-data_burn_wav_end_:
+.globl data_zong_wav_start_
+data_zong_wav_start_:
+.incbin "../data/sounds/misc/zong.wav"
+.globl data_zong_wav_end_
+data_zong_wav_end_:
+
+.globl data_wave_wav_start_
+data_wave_wav_start_:
+.incbin "../data/sounds/misc/wave.wav"
+.globl data_wave_wav_end_
+data_wave_wav_end_:
+
+.globl data_shut_wav_start_
+data_shut_wav_start_:
+.incbin "../data/sounds/misc/shut.wav"
+.globl data_shut_wav_end_
+data_shut_wav_end_:
+
+.globl data_disease_wav_start_
+data_disease_wav_start_:
+.incbin "../data/sounds/status/disease.wav"
+.globl data_disease_wav_end_
+data_disease_wav_end_:
 

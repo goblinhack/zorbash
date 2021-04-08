@@ -832,7 +832,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_smoke)
     TP_SET_DECL(is_the_grid)
     TP_SET_DECL(is_throwable)
-    TP_SET_DECL(is_torch)
+    TP_SET_DECL(is_brazier)
     TP_SET_DECL(is_treasure)
     TP_SET_DECL(is_treasure_eater)
     TP_SET_DECL(is_undead)

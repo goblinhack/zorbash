@@ -277,7 +277,7 @@ int Tp::is_jelly_parent(void) const { return _is_jelly_parent; }
 int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_throwable(void) const { return _is_throwable; }
-int Tp::is_torch(void) const { return _is_torch; }
+int Tp::is_brazier(void) const { return _is_brazier; }
 int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_treasure_eater(void) const { return _is_treasure_eater; }
 int Tp::is_undead(void) const { return _is_undead; }
@@ -518,7 +518,7 @@ void Tp::set_is_jelly_parent(int v) { _is_jelly_parent = v; }
 void Tp::set_is_smoke(int v) { _is_smoke = v; }
 void Tp::set_is_the_grid(int v) { _is_the_grid = v; }
 void Tp::set_is_throwable(int v) { _is_throwable = v; }
-void Tp::set_is_torch(int v) { _is_torch = v; }
+void Tp::set_is_brazier(int v) { _is_brazier = v; }
 void Tp::set_is_treasure(int v) { _is_treasure = v; }
 void Tp::set_is_treasure_eater(int v) { _is_treasure_eater = v; }
 void Tp::set_is_undead(int v) { _is_undead = v; }
