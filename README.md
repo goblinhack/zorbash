@@ -34,6 +34,7 @@ Sound effects
 - Sword sounds by XxChr0nosxX, [found here](https://freesound.org/people/XxChr0nosxX/)
 - Sword sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
 - Wood break sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
+- Footstep sounds by Rico Casazza, [found here](https://freesound.org/people/Rico_Casazza/)
 
 Screenshots
 -----------

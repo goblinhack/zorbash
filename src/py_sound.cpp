@@ -63,7 +63,9 @@ PyObject *sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
     PY_DBG("sound_play(name=%s)", name);
 
     std::string namearg = name;
-    sound_play(namearg);
+    if (!sound_play(namearg)) {
+        Py_RETURN_FALSE;
+    }
 
     Py_RETURN_TRUE;
 }

@@ -18,8 +18,15 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
 def on_claw_attack(me):
     zx.sound_play("player_punch")
 
+last_footstep = 0
 def on_move(me, x, y):
-    zx.sound_play("footsteps{}".format(random.randint(1,8)))
+    global last_footstep
+    footstep = random.randint(1, 8)
+    while footstep == last_footstep:
+        footstep = random.randint(1, 8)
+
+    if zx.sound_play("footsteps{}".format(footstep)):
+        last_footstep = footstep
 
 def on_born(me, x, y):
     zx.topcon("born")
