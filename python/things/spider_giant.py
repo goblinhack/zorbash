@@ -50,7 +50,7 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_long_text_description("An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
-    x.set_modifier_attack(14)
+    x.set_modifier_attack(12) # 10, means no bonus
     x.set_modifier_constitution(12)
     x.set_modifier_defence(14)
     x.set_modifier_strength(16)

@@ -8,7 +8,9 @@ def on_claw_attack(me, x, y):
         zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    zx.sound_play("squeaky_toy")
+    sound = "hiss{}".format(random.randint(1, 10))
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
 
 def on_miss(me, hitter, x, y):
     sound = "hiss{}".format(random.randint(1, 10))
@@ -16,9 +18,7 @@ def on_miss(me, hitter, x, y):
         zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
 
 def on_death(me, x, y):
-    sound = "growl{}".format(random.randint(1, 10))
-    if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
-        zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
+    zx.sound_play("squeaky_toy")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -69,7 +69,7 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_long_text_description("An enormous rat. Blood drips from its teeth. Will eat almost anything, especially you. Answers to the name of Mr Squeekles.")
-    x.set_modifier_attack(7)
+    x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(11)
     x.set_modifier_defence(12)
     x.set_modifier_strength(7)

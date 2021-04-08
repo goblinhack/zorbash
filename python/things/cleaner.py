@@ -59,7 +59,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_treasure_eater(True)
     x.set_light_color("green")
     x.set_long_text_description("Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners leave a trail of corrosive slime in their wake. Avoid this. Cleaners also have a habit of eating your hard fought items.")
-    x.set_modifier_attack(14)
+    x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(20)
     x.set_modifier_defence(14)
     x.set_modifier_strength(14)
