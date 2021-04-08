@@ -29,7 +29,6 @@ int Thing::item_count (Tpp tp)
                     count++;
                 }
             }
-            // o->con("count %d", count);
         }
     }
 

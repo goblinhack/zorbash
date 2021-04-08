@@ -13,6 +13,9 @@ void Game::fini (void)
     things_are_moving = false;
     tick_completed = 1;
     tick_current = 1;
+_
     config.fini();
+_
     world.fini();
+_
 }

@@ -35,7 +35,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_light_color("red")
     x.set_light_strength(1)
     x.set_normal_placement_rules(True)
-    x.set_lifespan_dice("1d100+10")
+    x.set_lifespan_dice("1d5+5")
     x.set_text_a_or_an("a");
     x.set_long_text_description("A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
     x.set_text_description("A small beacon of light in this blighted place.")

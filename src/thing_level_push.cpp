@@ -24,7 +24,7 @@ void Thing::level_push (void)
     last_attached = point(mx, my);
 
 #if 0
-    if (tp()->gfx_weapon_carry_anim()) {
+    if (is_torch()) {
         con("push at %d,%d", last_attached.x, last_attached.y);
     }
 #endif

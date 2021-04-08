@@ -22,13 +22,16 @@ static void game_quit_destroy (void)
 static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_quit_destroy();
+_
     if (game->started) {
         LOG("USERCFG: restart game");
         wid_topcon_fini();
         wid_topcon_init();
         wid_botcon_fini();
         wid_botcon_init();
+_
         game->fini();
+_
         game->main_menu_select();
     } else {
         DIE_CLEAN("USERCFG: quit");

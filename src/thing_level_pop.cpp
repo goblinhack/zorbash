@@ -112,7 +112,7 @@ void Thing::level_pop (void)
     }
 
 #if 0
-    if (tp()->gfx_weapon_carry_anim()) {
+    if (is_torch()) {
         con("pop at %d,%d", last_attached.x, last_attached.y);
     }
 #endif
