@@ -69,3 +69,30 @@ PyObject *sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     Py_RETURN_TRUE;
 }
+
+PyObject *sound_play_channel_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *name = 0;
+    int channel = 0;
+
+    static char *kwlist[] = {(char*) "channel", (char*) "name", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "is", kwlist, &channel, &name)) {
+        ERR("sound_play_channel: bad arguments");
+        Py_RETURN_FALSE;
+    }
+
+    if (!name) {
+        ERR("sound_play_channel: missing name attr");
+        Py_RETURN_FALSE;
+    }
+
+    PY_DBG("sound_play_channel(channel=%d, name=%s)", channel, name);
+
+    std::string namearg = name;
+    if (!sound_play_channel(channel, namearg)) {
+        Py_RETURN_FALSE;
+    }
+
+    Py_RETURN_TRUE;
+}

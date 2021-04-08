@@ -7,17 +7,21 @@ import random
 # real_hitter: who fired the arrow
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     if damage <= 1:
-        zx.sound_play("player_hit1")
-    if damage <= 5:
-        zx.sound_play("player_hit2")
+        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit1")
+    elif damage <= 5:
+        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit2")
     elif damage < 10:
-        zx.sound_play("player_hit3")
+        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit3")
     elif damage < 30:
-        zx.sound_play("player_hit4")
+        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit4")
 
 def on_claw_attack(me):
     zx.sound_play("player_punch")
 
+def on_born(me, x, y):
+    pass
+
+# Don't repeat footsteps and wait for the current channel to finish so sounds do not overlap
 last_footstep = 0
 def on_move(me, x, y):
     global last_footstep
@@ -25,12 +29,8 @@ def on_move(me, x, y):
     while footstep == last_footstep:
         footstep = random.randint(1, 8)
 
-    if zx.sound_play("footsteps{}".format(footstep)):
+    if zx.sound_play_channel(zx.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
         last_footstep = footstep
-
-def on_born(me, x, y):
-    zx.topcon("born")
-    pass
 
 def tp_init(name, text_name, short_text_name, title):
     x = tp.Tp(name, text_name, short_text_name)

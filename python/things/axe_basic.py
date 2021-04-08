@@ -3,7 +3,7 @@ import tp
 import random
 
 def on_use(me, what, target, x, y):
-    zx.sound_play("sword_swing{}".format(random.randint(1,3)))
+    zx.sound_play_channel(zx.CHANNEL_WEAPON, "sword_swing{}".format(random.randint(1,3)))
 
 def init_swing(name):
     x = tp.Tp(name)
