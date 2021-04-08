@@ -128,9 +128,16 @@ bool sound_play (const std::string &alias)
         return false;
     }
 
-    if (Mix_PlayChannel(-1 /* first free channel */,
+
+    if (Mix_Playing(1)) {
+        return false;
+    }
+
+    if (Mix_PlayChannel(1 /* first free channel */,
                         sound->second->chunk, 
                         0 /* loops */) == -1) {
+        return false;
+#if 0
         Mix_HaltChannel(0);
         SDL_ClearError();
 
@@ -140,6 +147,7 @@ bool sound_play (const std::string &alias)
             ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
             SDL_ClearError();
         }
+#endif
     }
 
     float volume = sound->second->volume *
