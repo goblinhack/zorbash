@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, tiles=[], left1_tiles=[]):
+def tp_init(name, tiles=[], bot3_tiles=[]):
     x = tp.Tp(name)
     x.set_gfx_shown_in_bg(True)
     x.set_is_able_to_fall(False)
@@ -19,6 +19,12 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     for t in tiles:
         x.set_tile(t)
 
+    if bot3_tiles is not None:
+        for t in bot3_tiles:
+            x.set_bot3_tile(t)
+    else:
+        x.set_bot3_tile(bot3_tile=name)
+
     x.update()
 
 def init():
@@ -29,7 +35,13 @@ def init():
             "corridor1.9", "corridor1.10", "corridor1.11", "corridor1.12",
             "corridor1.13", "corridor1.14", "corridor1.15", "corridor1.16",
             "corridor1.17", "corridor1.18", "corridor1.19",
-        ])
+        ],
+        bot3_tiles=[ 
+                    "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+                    "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+                    "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+                    "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
+            ])
     tp_init(name="corridor2",
         tiles=[
             "corridor2.1", "corridor2.2", "corridor2.3", "corridor2.4",
@@ -37,7 +49,13 @@ def init():
             "corridor2.9", "corridor2.10", "corridor2.11", "corridor2.12",
             "corridor2.13", "corridor2.14", "corridor2.15", "corridor2.16",
             "corridor2.17", "corridor2.18", "corridor2.19",
-        ])
+        ],
+        bot3_tiles=[ 
+                    "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+                    "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+                    "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+                    "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
+            ])
     tp_init(name="corridor3",
         tiles=[
             "corridor3.1", "corridor3.2", "corridor3.3", "corridor3.4",
@@ -45,5 +63,11 @@ def init():
             "corridor3.9", "corridor3.10", "corridor3.11", "corridor3.12",
             "corridor3.13", "corridor3.14", "corridor3.15", "corridor3.16",
             "corridor3.17", "corridor3.18", "corridor3.19",
-        ])
+        ],
+        bot3_tiles=[ 
+                    "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
+                    "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
+                    "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
+                    "chasm1.16", "chasm1.17", "chasm1.18", "chasm1.19",
+            ])
 init()

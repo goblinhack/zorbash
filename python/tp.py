@@ -169,6 +169,12 @@ class Tp:
     def set_on_death_do(self, value):
         zx.tp_set_on_death_do(self, value)
 
+    def set_on_born_do(self, value):
+        zx.tp_set_on_born_do(self, value)
+
+    def set_on_move_do(self, value):
+        zx.tp_set_on_move_do(self, value)
+
     def set_on_open_do(self, value):
         zx.tp_set_on_open_do(self, value)
 

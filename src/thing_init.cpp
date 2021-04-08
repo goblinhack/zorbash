@@ -40,6 +40,31 @@ Thing::Thing_ (void)
     newptr(this, "thing");
 }
 
+void Thing::on_born (void)
+{_
+    auto on_born = tp()->on_born_do();
+    if (std::empty(on_born)) {
+        return;
+    }
+
+    auto t = split_tokens(on_born, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (int)mid_at.x, (int)mid_at.y);
+    } else {
+        ERR("Bad on_born call [%s] expected mod:function, got %d elems",
+            on_born.c_str(), (int)on_born.size());
+    }
+}
+
 void Thing::init (Levelp level,
                   const std::string& name,
                   const fpoint born, const fpoint jitter)
@@ -390,6 +415,8 @@ void Thing::init (Levelp level,
             } FOR_ALL_THINGS_END()
         }
     }
+
+    on_born();
 }
 
 void Thing::reinit (void)

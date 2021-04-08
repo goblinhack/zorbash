@@ -1,5 +1,6 @@
 import zx
 import tp
+import random
 
 
 # hitter: arrow / monst
@@ -16,6 +17,13 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
 
 def on_claw_attack(me):
     zx.sound_play("player_punch")
+
+def on_move(me, x, y):
+    zx.sound_play("footsteps{}".format(random.randint(1,8)))
+
+def on_born(me, x, y):
+    zx.topcon("born")
+    pass
 
 def tp_init(name, text_name, short_text_name, title):
     x = tp.Tp(name, text_name, short_text_name)
@@ -65,8 +73,10 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_modifier_constitution(10)
     x.set_modifier_defence(10)
     x.set_modifier_strength(10)
-    x.set_move_speed_ms(150)
+    x.set_move_speed_ms(200)
     x.set_on_claw_attack_do("player.on_claw_attack()")
+    x.set_on_born_do("player.on_born()")
+    x.set_on_move_do("player.on_move()")
     x.set_on_death_is_corpse(True)
     x.set_on_hit_do("player.on_hit()")
     x.set_stamina(100)

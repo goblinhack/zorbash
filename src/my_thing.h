@@ -340,6 +340,8 @@ public:
     const std::string& on_use_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_claw_attack_do(void) const;
+    const std::string& on_move_do(void) const;
+    const std::string& on_born_do(void) const;
     const std::string& short_text_name(void) const;
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
@@ -1073,6 +1075,8 @@ public:
     void on_use(Thingp what, Thingp target);
     void on_use(Thingp what);
     void on_claw_attack(void);
+    void on_born(void);
+    void on_move(void);
     void poison_boost(int v);
     void reinit(void);
     void remove_all_references();

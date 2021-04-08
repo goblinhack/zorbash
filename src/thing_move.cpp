@@ -12,6 +12,33 @@
 #include "my_array_bounds_check.h"
 #include "my_thing_template.h"
 #include "my_ptrcheck.h"
+#include "my_string.h"
+#include "my_python.h"
+
+void Thing::on_move (void)
+{_
+    auto on_move = tp()->on_move_do();
+    if (std::empty(on_move)) {
+        return;
+    }
+
+    auto t = split_tokens(on_move, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (int)mid_at.x, (int)mid_at.y);
+    } else {
+        ERR("Bad on_move call [%s] expected mod:function, got %d elems",
+            on_move.c_str(), (int)on_move.size());
+    }
+}
 
 void Thing::move_reset_timestamps (void)
 {_
@@ -287,6 +314,7 @@ void Thing::update_interpolated_position (void)
             new_pos = mid_at;
             last_mid_at = mid_at;
             set_timestamp_move_end(time_get_time_ms_cached());
+            on_move();
         }
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
@@ -410,6 +438,7 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
     if (!immediately) {
         set_timestamp_move_begin(time_get_time_ms_cached());
         set_timestamp_move_end(get_timestamp_move_begin() + move_speed);
+        on_move();
     }
 
     move_carried_items();
