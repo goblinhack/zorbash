@@ -6,7 +6,7 @@ import tp
 # NOTE: chasm tiles are not blitted explicitly. Instead a floor tile
 # will check for the presence of a chasm beneath it and blit the chasm
 #
-def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
+def tp_init(name, tiles=[], bot3_tiles=[]):
     x = tp.Tp(name)
     x.set_gfx_shown_in_bg(True)
     x.set_is_able_to_fall(False)

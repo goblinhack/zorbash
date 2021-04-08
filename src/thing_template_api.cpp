@@ -63,6 +63,8 @@ const std::string& Tp::on_birth_do(void) const { return _on_birth_do; }
 const std::string& Tp::on_use_do(void) const { return _on_use_do; }
 const std::string& Tp::on_hit_do(void) const { return _on_hit_do; }
 const std::string& Tp::on_claw_attack_do(void) const { return _on_claw_attack_do; }
+const std::string& Tp::on_born_do(void) const { return _on_born_do; }
+const std::string& Tp::on_move_do(void) const { return _on_move_do; }
 const std::string& Tp::text_title(void) const { return _text_title; }
 const std::string& Tp::str2(void) const { return _str2; }
 const std::string& Tp::str3(void) const { return _str3; }
@@ -533,6 +535,8 @@ void Tp::set_on_birth_do(const std::string &v) { _on_birth_do = v; }
 void Tp::set_on_use_do(const std::string &v) { _on_use_do = v; }
 void Tp::set_on_hit_do(const std::string &v) { _on_hit_do = v; }
 void Tp::set_on_claw_attack_do(const std::string &v) { _on_claw_attack_do = v; }
+void Tp::set_on_move_do(const std::string &v) { _on_move_do = v; }
+void Tp::set_on_born_do(const std::string &v) { _on_born_do = v; }
 void Tp::set_on_death_do(const std::string &v) { _on_death_do = v; }
 void Tp::set_on_open_do(const std::string &v) { _on_open_do = v; }
 void Tp::set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }

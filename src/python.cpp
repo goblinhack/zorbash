@@ -853,6 +853,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(on_use_do)
     TP_SET_DECL(on_hit_do)
     TP_SET_DECL(on_claw_attack_do)
+    TP_SET_DECL(on_move_do)
+    TP_SET_DECL(on_born_do)
     TP_SET_DECL(on_death_do)
     TP_SET_DECL(on_open_do)
     TP_SET_DECL(on_idle_dice)
