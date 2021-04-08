@@ -155,12 +155,24 @@ void Level::update_deep_water (void)
                 if (nebs < 9) {
                     bool removed_deep_water = false;
 
-                    FOR_ALL_THINGS(this, t, x, y) {
-                        if (t->is_deep_water()) {
-                            t->dead("Too shallow");
-                            removed_deep_water = true;
-                        }
-                    } FOR_ALL_THINGS_END()
+                    if (g_opt_debug2) {
+                        FOR_ALL_THINGS(this, t, x, y) {
+                            t->log("Pre remove");
+                        } FOR_ALL_THINGS_END()
+                    }
+
+                    bool did_something = false;
+                    do {
+                        did_something = false;
+                        FOR_ALL_THINGS(this, t, x, y) {
+                            if (t->is_deep_water()) {
+                                t->log("Removed, too shallow");
+                                t->dead("Too shallow");
+                                removed_deep_water = true;
+                                did_something = true;
+                            }
+                        } FOR_ALL_THINGS_END()
+                    } while (did_something);
 
                     //
                     // Replace with shallow water
@@ -173,11 +185,14 @@ void Level::update_deep_water (void)
                         if (is_deep_water(x, y)) {
                             FOR_ALL_THINGS(this, t, x, y) {
                                 if (t->is_deep_water()) {
-                                    t->err("Still present; should be removed");
+                                    t->log("Still present; should be removed");
+                                } else {
+                                    t->log("Still present; ok");
                                 }
                             } FOR_ALL_THINGS_END()
 
-                            DIE("deep water still present after removal");
+                            DIE("deep water (count %d) still present after removal",
+                                is_deep_water(x, y));
                         }
                     }
                 }

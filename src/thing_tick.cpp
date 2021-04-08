@@ -23,7 +23,6 @@ void Thing::update_tick (void)
 bool Thing::achieve_goals_in_life (void)
 {_
     if (is_changing_level ||
-        is_hidden || 
         is_falling || 
         is_waiting_to_ascend_dungeon || 
         is_waiting_to_descend_sewer || 
@@ -39,9 +38,18 @@ bool Thing::achieve_goals_in_life (void)
 
     log("Achieve goals at tick %d, game is at tick %u",
         get_tick(), game->tick_current);
-_
+
+    //
+    // Lifespan tick for carried torches must be before is_hidden check
+    //
     lifespan_tick();
     if (is_dead) { is_tick_done = true; return true; }
+
+    if (is_hidden) { 
+        is_tick_done = true;
+        log("Skip achieve goals in life");
+        return true;
+    }
 
     hunger_clock();
     if (is_dead) { is_tick_done = true; return true; }
