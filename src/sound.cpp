@@ -168,8 +168,8 @@ bool sound_play_channel (int channel, const std::string &alias)
         return false;
     }
 
-
     if (Mix_Playing(1)) {
+        TOPCON("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
         return false;
     }
 
@@ -183,6 +183,7 @@ bool sound_play_channel (int channel, const std::string &alias)
     if (Mix_PlayChannel(channel,
                         sound->second->chunk, 
                         0 /* loops */) == -1) {
+        TOPCON("Cannot play sound %s on channel %d", alias.c_str(), channel);
         return false;
     }
 

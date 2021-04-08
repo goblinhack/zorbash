@@ -311,6 +311,7 @@ private:
     std::string _on_idle_dice_str;
     std::string _on_use_do;
     std::string _on_hit_do;
+    std::string _on_miss_do;
     std::string _on_claw_attack_do;
     std::string _on_move_do;
     std::string _on_born_do;
@@ -398,6 +399,7 @@ public:
     const std::string& on_idle_dice_str(void) const;
     const std::string& on_use_do(void) const;
     const std::string& on_hit_do(void) const;
+    const std::string& on_miss_do(void) const;
     const std::string& on_claw_attack_do(void) const;
     const std::string& on_move_do(void) const;
     const std::string& on_born_do(void) const;
@@ -885,6 +887,7 @@ public:
     void set_on_idle_dice(const std::string &);
     void set_on_use_do(const std::string &);
     void set_on_hit_do(const std::string &);
+    void set_on_miss_do(const std::string &);
     void set_on_claw_attack_do(const std::string &);
     void set_on_move_do(const std::string &);
     void set_on_born_do(const std::string &);

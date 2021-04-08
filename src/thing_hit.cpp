@@ -55,6 +55,36 @@ void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
     }
 }
 
+//
+// Python callback upon being miss
+//
+void Thing::on_miss (Thingp hitter)
+{_
+    auto on_miss = tp()->on_miss_do();
+    if (std::empty(on_miss)) {
+        return;
+    }
+
+    auto t = split_tokens(on_miss, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
+            to_string().c_str(), hitter->to_string().c_str());
+
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id,
+                        (int)mid_at.x, (int)mid_at.y);
+    } else {
+        ERR("Bad on_miss call [%s] expected mod:function, got %d elems",
+            on_miss.c_str(), (int)on_miss.size());
+    }
+}
+
 void Thing::on_claw_attack (void)
 {_
     auto on_claw_attack = tp()->on_claw_attack_do();
@@ -73,7 +103,7 @@ void Thing::on_claw_attack (void)
 
         log("call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-        py_call_void_fn(mod.c_str(), fn.c_str(), id.id);
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (int)mid_at.x, (int)mid_at.y);
     } else {
         ERR("Bad on_claw_attack call [%s] expected mod:function, got %d elems",
             on_claw_attack.c_str(), (int)on_claw_attack.size());
