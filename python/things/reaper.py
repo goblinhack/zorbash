@@ -51,7 +51,7 @@ def tp_init(name, text_name):
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
-    x.set_on_death_is_corpse(True)
+    x.set_is_corpse_on_death(True)
     x.set_rarity(zx.RARITY_VERY_RARE)
     x.set_resurrect_dice("1d10+30")
     x.set_text_a_or_an("a");

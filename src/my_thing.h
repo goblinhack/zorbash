@@ -340,7 +340,7 @@ public:
     const std::string& on_use_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_miss_do(void) const;
-    const std::string& on_claw_attack_do(void) const;
+    const std::string& on_bite_do(void) const;
     const std::string& on_move_do(void) const;
     const std::string& on_born_do(void) const;
     const std::string& short_text_name(void) const;
@@ -751,7 +751,7 @@ public:
     int monst_size(void) const;
     int normal_placement_rules(void) const;
     int on_death_drop_all_items(void) const;
-    int on_death_is_corpse(void) const;
+    int is_corpse_on_death(void) const;
     int on_death_is_open(void) const;
     int range_max(void) const;
     int rarity(void) const;
@@ -1076,7 +1076,7 @@ public:
     void on_open(void);
     void on_use(Thingp what, Thingp target);
     void on_use(Thingp what);
-    void on_claw_attack(void);
+    void on_bite(void);
     void on_born(void);
     void on_move(void);
     void poison_boost(int v);

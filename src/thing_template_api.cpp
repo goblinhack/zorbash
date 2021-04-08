@@ -63,7 +63,7 @@ const std::string& Tp::on_birth_do(void) const { return _on_birth_do; }
 const std::string& Tp::on_use_do(void) const { return _on_use_do; }
 const std::string& Tp::on_hit_do(void) const { return _on_hit_do; }
 const std::string& Tp::on_miss_do(void) const { return _on_miss_do; }
-const std::string& Tp::on_claw_attack_do(void) const { return _on_claw_attack_do; }
+const std::string& Tp::on_bite_do(void) const { return _on_bite_do; }
 const std::string& Tp::on_born_do(void) const { return _on_born_do; }
 const std::string& Tp::on_move_do(void) const { return _on_move_do; }
 const std::string& Tp::text_title(void) const { return _text_title; }
@@ -131,7 +131,7 @@ int Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
 int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
 int Tp::is_collectable(void) const { return _is_collectable; }
 int Tp::is_combustible(void) const { return _is_combustible; }
-int Tp::on_death_is_corpse(void) const { return _on_death_is_corpse; }
+int Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
 int Tp::is_corridor(void) const { return _is_corridor; }
 int Tp::is_cursor(void) const { return _is_cursor; }
 int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
@@ -371,7 +371,7 @@ void Tp::set_is_blood_splatter(int v) { _is_blood_splatter = v; }
 void Tp::set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
 void Tp::set_is_collectable(int v) { _is_collectable = v; }
 void Tp::set_is_combustible(int v) { _is_combustible = v; }
-void Tp::set_on_death_is_corpse(int v) { _on_death_is_corpse = v; }
+void Tp::set_is_corpse_on_death(int v) { _is_corpse_on_death = v; }
 void Tp::set_is_corridor(int v) { _is_corridor = v; }
 void Tp::set_is_cursor(int v) { _is_cursor = v; }
 void Tp::set_is_cursor_can_hover_over(int v) { _is_cursor_can_hover_over = v; }
@@ -536,7 +536,7 @@ void Tp::set_on_birth_do(const std::string &v) { _on_birth_do = v; }
 void Tp::set_on_use_do(const std::string &v) { _on_use_do = v; }
 void Tp::set_on_hit_do(const std::string &v) { _on_hit_do = v; }
 void Tp::set_on_miss_do(const std::string &v) { _on_miss_do = v; }
-void Tp::set_on_claw_attack_do(const std::string &v) { _on_claw_attack_do = v; }
+void Tp::set_on_bite_do(const std::string &v) { _on_bite_do = v; }
 void Tp::set_on_move_do(const std::string &v) { _on_move_do = v; }
 void Tp::set_on_born_do(const std::string &v) { _on_born_do = v; }
 void Tp::set_on_death_do(const std::string &v) { _on_death_do = v; }

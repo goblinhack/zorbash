@@ -32,7 +32,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_torch(True)
     x.set_light_color("red")
     x.set_normal_placement_rules(True)
-    x.set_on_death_is_corpse(True)
+    x.set_is_corpse_on_death(True)
     x.set_spawn_on_shoved("fire")
     x.set_text_a_or_an("a");
     x.set_text_description("A beacon of light in this blighted place.")

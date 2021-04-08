@@ -12,7 +12,7 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     else:
         zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit5")
 
-def on_claw_attack(me, x, y):
+def on_bite(me, x, y):
     zx.sound_play("player_punch")
 
 def on_born(me, x, y):
@@ -78,10 +78,10 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_modifier_defence(10)
     x.set_modifier_strength(10)
     x.set_move_speed_ms(200)
-    x.set_on_claw_attack_do("player.on_claw_attack()")
+    x.set_on_bite_do("player.on_bite()")
     x.set_on_born_do("player.on_born()")
     x.set_on_move_do("player.on_move()")
-    x.set_on_death_is_corpse(True)
+    x.set_is_corpse_on_death(True)
     x.set_on_hit_do("player.on_hit()")
     x.set_stamina(100)
     x.set_text_a_or_an("the")

@@ -85,14 +85,14 @@ void Thing::on_miss (Thingp hitter)
     }
 }
 
-void Thing::on_claw_attack (void)
+void Thing::on_bite (void)
 {_
-    auto on_claw_attack = tp()->on_claw_attack_do();
-    if (std::empty(on_claw_attack)) {
+    auto on_bite = tp()->on_bite_do();
+    if (std::empty(on_bite)) {
         return;
     }
 
-    auto t = split_tokens(on_claw_attack, '.');
+    auto t = split_tokens(on_bite, '.');
     if (t.size() == 2) {
         auto mod = t[0];
         auto fn = t[1];
@@ -105,8 +105,8 @@ void Thing::on_claw_attack (void)
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (int)mid_at.x, (int)mid_at.y);
     } else {
-        ERR("Bad on_claw_attack call [%s] expected mod:function, got %d elems",
-            on_claw_attack.c_str(), (int)on_claw_attack.size());
+        ERR("Bad on_bite call [%s] expected mod:function, got %d elems",
+            on_bite.c_str(), (int)on_bite.size());
     }
 }
 
@@ -347,14 +347,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (!real_hitter->get_weapon_id_carry_anim().ok()) {
         auto claws = real_hitter->tp()->gfx_anim_attack();
         if (claws != "") {
-            auto claw_attack = level->thing_new(claws, mid_at);
-            claw_attack->bounce(0.1, 0.1, 100, 3);
-            claw_attack->move_set_dir_from_delta(delta);
+            auto bite = level->thing_new(claws, mid_at);
+            bite->bounce(0.1, 0.1, 100, 3);
+            bite->move_set_dir_from_delta(delta);
 
             //
             // Python callback
             //
-            real_hitter->on_claw_attack();
+            real_hitter->on_bite();
         }
     }
 
