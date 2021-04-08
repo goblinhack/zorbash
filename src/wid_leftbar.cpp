@@ -162,7 +162,7 @@ static void wid_leftbar_create (void)
             if (t->is_dead) {
                 if (t->is_door()) {
                     s += ", broken";
-                } else if (t->is_torch()) {
+                } else if (t->is_brazier()) {
                     s += ", fallen";
                 } else {
                     s += ", dead";

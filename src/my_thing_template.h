@@ -249,7 +249,7 @@ private:
     int _is_the_grid {};
     int _is_throwable {};
     int _is_thrown_automatically_when_chosen {};
-    int _is_torch {};
+    int _is_brazier {};
     int _is_treasure {};
     int _is_treasure_class_a {};
     int _is_treasure_class_b {};
@@ -609,7 +609,7 @@ public:
     int is_the_grid(void) const;
     int is_throwable(void) const;
     int is_thrown_automatically_when_chosen(void) const;
-    int is_torch(void) const;
+    int is_brazier(void) const;
     int is_treasure(void) const;
     int is_treasure_class_a(void) const;
     int is_treasure_class_b(void) const;
@@ -851,7 +851,7 @@ public:
     void set_is_the_grid(int);
     void set_is_throwable(int);
     void set_is_thrown_automatically_when_chosen(int);
-    void set_is_torch(int);
+    void set_is_brazier(int);
     void set_is_treasure(int);
     void set_is_treasure_class_a(int);
     void set_is_treasure_class_b(int);
@@ -964,7 +964,7 @@ class Tp* tp_random_ripple(void);
 class Tp* tp_random_rock(void);
 class Tp* tp_random_secret_door(void);
 class Tp* tp_random_sewer_wall(void);
-class Tp* tp_random_torch(void);
+class Tp* tp_random_brazier(void);
 class Tp* tp_random_treasure(void);
 uint8_t tp_init(void);
 void tp_fini(void);

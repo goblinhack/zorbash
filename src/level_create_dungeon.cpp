@@ -666,7 +666,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             }
             if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
             if (d->is_minion_generator(x, y)) { tp = tp_random_generator(); }
-            if (d->is_torch(x, y))            { tp = tp_random_torch(); }
+            if (d->is_brazier(x, y))            { tp = tp_random_brazier(); }
             if (d->is_treasure(x, y))         { tp = tp_random_treasure(); }
             if (d->is_treasure_class_a(x, y)) { tp = tp_random_item_class_a(); }
             if (d->is_treasure_class_b(x, y)) { tp = tp_random_item_class_b(); }

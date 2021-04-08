@@ -1070,9 +1070,9 @@ int Thing::is_loggable_for_unimportant_stuff(void) const
     return (tp()->is_loggable_for_unimportant_stuff());
 }
 
-int Thing::is_torch(void) const
+int Thing::is_brazier(void) const
 {_
-    return (tp()->is_torch());
+    return (tp()->is_brazier());
 }
 
 int Thing::gfx_bounce_always(void) const

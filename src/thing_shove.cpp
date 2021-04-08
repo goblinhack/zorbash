@@ -62,7 +62,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         return (THING_SHOVE_TRIED_AND_FAILED);
     }
 
-    if (!it->is_torch()) {
+    if (!it->is_brazier()) {
         if (it->collision_check_only(shove_pos)) {
             if (is_player()) {
                 TOPCON("%s cannot be shoved!", it->text_The().c_str());
@@ -87,7 +87,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         }
 
         if (is_player()) {
-            if (it->is_torch()) {
+            if (it->is_brazier()) {
                 TOPCON("You knock over %s!", it->text_the().c_str());
             } else {
                 TOPCON("You shove %s!", it->text_the().c_str());
@@ -108,9 +108,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     log("Make the shoved thing fall first");
     if (it->collision_check_only(shove_pos)) {
         if (is_player()) {
-            if (it->is_torch()) {
+            if (it->is_brazier()) {
                 if (!it->is_dead) {
-                    TOPCON("The torch falls back on you!");
+                    TOPCON("The brazier falls back on you!");
                 }
             }
             it->move_to(mid_at, 100);

@@ -36,7 +36,7 @@ bool Thing::location_check (void)
     if (is_dead) {
         return false;
     }
-    torch_tick();
+    brazier_tick();
     if (is_dead) {
         return false;
     }

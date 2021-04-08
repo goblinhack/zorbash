@@ -469,7 +469,7 @@ bool Thing::match (const std::string& what)
     if (is_throwable() && (what == "is_throwable")) {
         return true;
     }
-    if (is_torch() && (what == "is_torch")) {
+    if (is_brazier() && (what == "is_brazier")) {
         return true;
     }
     if (is_treasure() && (what == "is_treasure")) {

@@ -625,7 +625,7 @@ bool Dungeon::is_food (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_torch (const int x, const int y)
+bool Dungeon::is_brazier (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -635,7 +635,7 @@ bool Dungeon::is_torch (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_torch) {
+        if (v.is_brazier) {
             return true;
         }
     }

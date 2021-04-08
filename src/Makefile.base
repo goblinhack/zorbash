@@ -236,7 +236,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_throw.o                 \
     $(OBJDIR)/thing_tick.o                  \
     $(OBJDIR)/thing_tile.o                  \
-    $(OBJDIR)/thing_torch.o                 \
+    $(OBJDIR)/thing_brazier.o               \
     $(OBJDIR)/thing_treasure.o              \
     $(OBJDIR)/thing_update.o                \
     $(OBJDIR)/thing_use.o                   \

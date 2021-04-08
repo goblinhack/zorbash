@@ -72,7 +72,7 @@ public:
     bool                      is_secret_corridor   {false};
     bool                      is_secret_door       {false};
     bool                      is_shallow_water     {false};
-    bool                      is_torch             {false};
+    bool                      is_brazier             {false};
     bool                      is_trap              {false};
     bool                      is_treasure_class_a  {false};
     bool                      is_treasure_class_b  {false};
