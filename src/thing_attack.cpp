@@ -333,11 +333,7 @@ _
     // We hit. See how much damage.
     //
     auto damage = get_damage_melee();
-
     auto total_damage = damage + att_mod;
-    if (total_damage <= 0) {
-        total_damage = 1;
-    }
 
     //
     // Bite?
@@ -349,6 +345,10 @@ _
             total_damage = bite_damage;
             bite = true;
         }
+    }
+
+    if (total_damage <= 0) {
+        total_damage = 1;
     }
 
     if (it->is_hit_by(this, crit, bite, total_damage)) {

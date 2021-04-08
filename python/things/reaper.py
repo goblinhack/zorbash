@@ -44,7 +44,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_long_text_description("A lesser reaper. You cannot kill what does not live!")
-    x.set_modifier_attack(25)
+    x.set_modifier_attack(18) # 10, means no bonus
     x.set_modifier_constitution(25)
     x.set_modifier_defence(25)
     x.set_modifier_strength(25)

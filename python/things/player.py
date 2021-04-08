@@ -6,14 +6,11 @@ import random
 # hitter: arrow / monst
 # real_hitter: who fired the arrow
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    if damage <= 1:
-        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit1")
-    elif damage <= 5:
-        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit2")
-    elif damage < 10:
-        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit3")
-    elif damage < 30:
-        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit4")
+    # zx.topcon("player hit damage {}".format(damage))
+    if damage <= 5:
+        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit{}".format(random.randint(1, 4)))
+    else:
+        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit5")
 
 def on_claw_attack(me, x, y):
     zx.sound_play("player_punch")
@@ -76,7 +73,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_weapon_wielder(True)
     x.set_light_strength(8)
     x.set_long_text_description("Our most noble adventurer or no particular race or gender. Devoid of fear and stout of heart. Likes kittens.")
-    x.set_modifier_attack(10)
+    x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(10)
     x.set_modifier_defence(10)
     x.set_modifier_strength(10)

@@ -37,6 +37,7 @@ Sound effects
 - Rag growl sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
 - Rat hiss sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
 - Rat squeak sounds by tim.kahn, [found here](https://freesound.org/people/tim.kahn/)
+- Grunt squeak sounds by vmgraw, [found here](https://freesound.org/people/vmgraw/)
 
 Screenshots
 -----------

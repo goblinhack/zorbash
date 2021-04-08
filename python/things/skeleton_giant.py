@@ -52,7 +52,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_long_text_description("A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
-    x.set_modifier_attack(13)
+    x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(15)
     x.set_modifier_defence(13)
     x.set_modifier_strength(13)

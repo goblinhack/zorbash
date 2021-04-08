@@ -181,6 +181,8 @@ bool sound_play_channel (int channel, const std::string &alias)
         return false;
     }
 
+    LOG("Play sound %s on channel %d", alias.c_str(), channel);
+
     return true;
 }
 
