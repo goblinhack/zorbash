@@ -247,8 +247,8 @@ class Tp:
     def set_is_rrr13(self, value):
         zx.tp_set_is_rrr13(self, value)
 
-    def set_is_rrr14(self, value):
-        zx.tp_set_is_rrr14(self, value)
+    def set_is_torch(self, value):
+        zx.tp_set_is_torch(self, value)
 
     def set_range_max(self, value):
         zx.tp_set_range_max(self, value)

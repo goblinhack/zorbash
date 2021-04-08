@@ -204,7 +204,7 @@ int Tp::is_rrr10(void) const { return _is_rrr10; }
 int Tp::is_rrr11(void) const { return _is_rrr11; }
 int Tp::is_rrr12(void) const { return _is_rrr12; }
 int Tp::is_rrr13(void) const { return _is_rrr13; }
-int Tp::is_rrr14(void) const { return _is_rrr14; }
+int Tp::is_torch(void) const { return _is_torch; }
 int Tp::range_max(void) const { return _range_max; }
 int Tp::is_laser_target_select_automatically_when_chosen(void) const { return _is_laser_target_select_automatically_when_chosen; }
 int Tp::is_wand(void) const { return _is_wand; }
@@ -444,7 +444,7 @@ void Tp::set_is_rrr10(int v) { _is_rrr10 = v; }
 void Tp::set_is_rrr11(int v) { _is_rrr11 = v; }
 void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
 void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
-void Tp::set_is_rrr14(int v) { _is_rrr14 = v; }
+void Tp::set_is_torch(int v) { _is_torch = v; }
 void Tp::set_range_max(int v) { _range_max = v; }
 void Tp::set_is_laser_target_select_automatically_when_chosen(int v) { _is_laser_target_select_automatically_when_chosen = v; }
 void Tp::set_is_wand(int v) { _is_wand = v; }

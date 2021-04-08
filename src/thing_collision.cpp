@@ -862,6 +862,11 @@ _
         // If on fire, allow fire to burn its owner - you!
         //
         if (!is_fire()) {
+            if (is_torch()) {
+                log("No; dont set fire to yourself by carrying a torch");
+                return false;
+            }
+
             log("Yes; allow fire to burn owner");
             return true;
         }

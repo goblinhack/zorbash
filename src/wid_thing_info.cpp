@@ -333,14 +333,20 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
             wid_popup_window->log(" ");
             wid_popup_window->log("Has one charge left");
         }
-    }
 
-    auto c = player->item_count(t->tp());
-    if (c > 1) {
-        wid_popup_window->log(" ");
-        wid_popup_window->log("Item count " + std::to_string(c));
-    }
+        auto c = player->item_count(t->tp());
+        if (c > t->get_charge_count()) {
+            wid_popup_window->log(" ");
+            wid_popup_window->log("Total charges " + std::to_string(c));
+        }
+    } else {
+        auto c = player->item_count(t->tp());
+        if (c > 1) {
+            wid_popup_window->log(" ");
+            wid_popup_window->log("Item count " + std::to_string(c));
+        }
 
+    }
     return wid_popup_window;
 }
 

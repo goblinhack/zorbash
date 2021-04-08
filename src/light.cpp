@@ -449,6 +449,7 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
         bool first = true;
+        player->light_update_strength();
         for (auto l : player->get_light()) {
             if (l->fbo == fbo) {
                 l->render(first);

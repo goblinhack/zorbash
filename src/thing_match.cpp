@@ -304,7 +304,7 @@ bool Thing::match (const std::string& what)
     if (is_rrr13() && (what == "is_rrr13")) {
         return true;
     }
-    if (is_rrr14() && (what == "is_rrr14")) {
+    if (is_torch() && (what == "is_torch")) {
         return true;
     }
     if (range_max() && (what == "range_max")) {

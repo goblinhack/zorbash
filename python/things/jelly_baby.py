@@ -56,7 +56,7 @@ def tp_init(name, text_name):
     x.set_is_monst(True)
     x.set_is_moveable(True)
     x.set_is_shown_on_leftbar(True)
-    x.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when attacked and multiplying when attacked. This one is a baby jelly. It tends to avoid adults of its kind.")
+    x.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened. This one is a baby jelly. It tends to avoid adults of its kind. So should you.")
     x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(10)
     x.set_modifier_defence(5)

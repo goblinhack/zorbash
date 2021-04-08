@@ -7,7 +7,6 @@ def on_use(me, what, target, x, y):
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
-    x.set_avoids_fire(100)
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
     x.set_blast_max_radius(4)
@@ -21,7 +20,6 @@ def tp_init(name, text_name, short_text_name):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(True)
-    x.set_is_attackable_by_player(True)
     x.set_is_burnable(True)
     x.set_is_collectable(True)
     x.set_is_combustible(True)
@@ -32,7 +30,6 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_laser_target_select_automatically_when_chosen(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_is_moveable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_treasure(True)
     x.set_is_treasure_class_c(True)
