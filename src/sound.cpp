@@ -133,7 +133,14 @@ bool sound_play (const std::string &alias)
         return false;
     }
 
-    if (Mix_PlayChannel(1 /* first free channel */,
+    float volume = sound->second->volume *
+        ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
+
+    volume *= MIX_MAX_VOLUME;
+
+    Mix_VolumeChunk(sound->second->chunk, volume);
+
+    if (Mix_PlayChannel(-1 /* first free channel */,
                         sound->second->chunk, 
                         0 /* loops */) == -1) {
         return false;
@@ -150,12 +157,34 @@ bool sound_play (const std::string &alias)
 #endif
     }
 
+    return true;
+}
+
+bool sound_play_channel (int channel, const std::string &alias)
+{_
+    auto sound = all_sound.find(alias);
+    if (sound == all_sound.end()) {
+        ERR("Cannot find sound %s", alias.c_str());
+        return false;
+    }
+
+
+    if (Mix_Playing(1)) {
+        return false;
+    }
+
     float volume = sound->second->volume *
         ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
 
     volume *= MIX_MAX_VOLUME;
 
     Mix_VolumeChunk(sound->second->chunk, volume);
+
+    if (Mix_PlayChannel(channel,
+                        sound->second->chunk, 
+                        0 /* loops */) == -1) {
+        return false;
+    }
 
     return true;
 }

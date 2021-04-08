@@ -19,6 +19,7 @@
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
 #include "my_string.h"
+#include "my_sound.h"
 
 static std::map<std::string, PyObject *> py_mods;
 PyObject *zx_mod;
@@ -932,6 +933,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"puts",                                    (PyCFunction)puts_,                                     METH_VARARGS,                 "log to the console"},
     {"sound_load",                              (PyCFunction)sound_load_,                               METH_VARARGS | METH_KEYWORDS, "load a sound"},
     {"sound_play",                              (PyCFunction)sound_play_,                               METH_VARARGS | METH_KEYWORDS, "play a sound"},
+    {"sound_play_channel",                      (PyCFunction)sound_play_channel_,                       METH_VARARGS | METH_KEYWORDS, "play a sound"},
     {"tex_load",                                (PyCFunction)tex_load_,                                 METH_VARARGS | METH_KEYWORDS, "load a texture"},
     {"text_size",                               (PyCFunction)text_size_,                                METH_VARARGS | METH_KEYWORDS, "text size in pixels"},
     {"tile_load_arr",                           (PyCFunction)tile_load_arr_,                            METH_VARARGS | METH_KEYWORDS, "load a tile array"},
@@ -1238,6 +1240,11 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXPLOSION_MAJOR", MAP_DEPTH_EXPLOSION_MAJOR);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXPLOSION_MINOR", MAP_DEPTH_EXPLOSION_MINOR);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MESSAGE", MAP_DEPTH_MESSAGE);
+    PyModule_AddIntConstant(zx_mod, "CHANNEL_FOOTSTEPS", CHANNEL_FOOTSTEPS);
+    PyModule_AddIntConstant(zx_mod, "CHANNEL_MISC", CHANNEL_MISC);
+    PyModule_AddIntConstant(zx_mod, "CHANNEL_IMPACT", CHANNEL_IMPACT);
+    PyModule_AddIntConstant(zx_mod, "CHANNEL_WEAPON", CHANNEL_WEAPON);
+    PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST", CHANNEL_MONST);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);

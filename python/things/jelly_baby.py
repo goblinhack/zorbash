@@ -4,7 +4,7 @@ import random
 
 def on_death(me, x, y):
     zx.tp_spawn_at(me, "pink_splatter")
-    zx.sound_play("slime{}".format(random.randint(1, 9)))
+    zx.sound_play_channel(zx.CHANNEL_MONST, "slime{}".format(random.randint(1, 9)))
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
