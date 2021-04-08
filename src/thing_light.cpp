@@ -14,6 +14,49 @@
 #include "my_game.h"
 #include "my_gl.h"
 #include "my_random.h"
+#include "my_thing_template.h"
+#include "my_monst.h"
+
+int Thing::light_strength (void) const
+{_
+    auto light_strength = tp()->light_strength();
+
+    if (!monstp) {
+        return light_strength;
+    }
+
+    auto torch_count = 0;
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (!o) {
+            continue;
+        }
+
+        if (!o->is_torch()) {
+            continue;
+        }
+
+        if (o->get_charge_count()) {
+            torch_count += o->get_charge_count();
+        } else {
+            torch_count++;
+        }
+    }
+
+    if (torch_count == 2) {
+        light_strength /= 2;
+    }
+
+    if (torch_count == 1) {
+        light_strength /= 2;
+    }
+
+    if (torch_count == 0) {
+        light_strength = 1;
+    }
+
+    return light_strength;
+}
 
 void Thing::init_lights (void)
 {_
@@ -94,6 +137,17 @@ void Thing::init_lights (void)
                 new_light(point(0, 0), light_strength(), c, FBO_PLAYER_LIGHT);
                 has_light = true;
             }
+        }
+    }
+}
+
+void Thing::light_update_strength (void)
+{_
+    auto str = light_strength();
+    for (auto l : get_light()) {
+        if (str != l->orig_strength) {
+            l->orig_strength = str;
+            l->update();
         }
     }
 }

@@ -759,7 +759,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr11)
     TP_SET_DECL(is_rrr12)
     TP_SET_DECL(is_rrr13)
-    TP_SET_DECL(is_rrr14)
+    TP_SET_DECL(is_torch)
     TP_SET_DECL(range_max)
     TP_SET_DECL(is_laser_target_select_automatically_when_chosen)
     TP_SET_DECL(is_wand)

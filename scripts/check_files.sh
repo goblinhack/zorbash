@@ -16,7 +16,7 @@ if [[ $DONE -eq 1 ]]; then
     exit 0
 fi
 
-COUNT=$(find data -newer data/gfx.tgz -type f | wc -l)
+COUNT=$(find data/gfx -newer data/gfx.tgz -type f | wc -l)
 if [[ $COUNT -gt 0 ]];
 then 
     echo $0: Need to retar graphics tarball due to updates
@@ -30,7 +30,7 @@ then
     )
 fi
 
-COUNT=$(find data -newer data/sounds.tgz -type f | wc -l)
+COUNT=$(find data/sounds -newer data/sounds.tgz -type f | wc -l)
 if [[ $COUNT -gt 0 ]];
 then 
     echo $0: Need to retar sounds tarball due to updates

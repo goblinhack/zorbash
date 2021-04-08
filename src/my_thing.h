@@ -707,7 +707,7 @@ public:
     int is_rrr11(void) const;
     int is_rrr12(void) const;
     int is_rrr13(void) const;
-    int is_rrr14(void) const;
+    int is_torch(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
@@ -1131,6 +1131,7 @@ public:
     void weapon_sheath(void);
     void wield(Thingp w);
     void wobble(float wobble);
+    void light_update_strength(void);
 } Thing;
 
 std::ostream& operator<<(std::ostream &out, Bits<const Thingp & > const my);

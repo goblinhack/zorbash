@@ -432,11 +432,6 @@ int Thing::is_chasm(void) const
     return (tp()->is_chasm());
 }
 
-int Thing::light_strength(void) const
-{_
-    return (tp()->light_strength());
-}
-
 int Thing::is_meat(void) const
 {_
     return (tp()->is_meat());
@@ -557,9 +552,9 @@ int Thing::is_rrr13(void) const
     return (tp()->is_rrr13());
 }
 
-int Thing::is_rrr14(void) const
+int Thing::is_torch(void) const
 {_
-    return (tp()->is_rrr14());
+    return (tp()->is_torch());
 }
 
 int Thing::range_max(void) const

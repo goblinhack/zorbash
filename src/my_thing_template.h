@@ -221,7 +221,7 @@ private:
     int _is_rrr11 {};
     int _is_rrr12 {};
     int _is_rrr13 {};
-    int _is_rrr14 {};
+    int _is_torch {};
     int _range_max {};
     int _is_laser_target_select_automatically_when_chosen {};
     int _is_wand {};
@@ -581,7 +581,7 @@ public:
     int is_rrr11(void) const;
     int is_rrr12(void) const;
     int is_rrr13(void) const;
-    int is_rrr14(void) const;
+    int is_torch(void) const;
     int range_max(void) const;
     int is_laser_target_select_automatically_when_chosen(void) const;
     int is_wand(void) const;
@@ -823,7 +823,7 @@ public:
     void set_is_rrr11(int);
     void set_is_rrr12(int);
     void set_is_rrr13(int);
-    void set_is_rrr14(int);
+    void set_is_torch(int);
     void set_range_max(int);
     void set_is_laser_target_select_automatically_when_chosen(int);
     void set_is_wand(int);
