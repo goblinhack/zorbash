@@ -128,11 +128,6 @@ bool sound_play (const std::string &alias)
         return false;
     }
 
-
-    if (Mix_Playing(1)) {
-        return false;
-    }
-
     float volume = sound->second->volume *
         ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
 
@@ -143,8 +138,8 @@ bool sound_play (const std::string &alias)
     if (Mix_PlayChannel(-1 /* first free channel */,
                         sound->second->chunk, 
                         0 /* loops */) == -1) {
-        return false;
-#if 0
+
+        LOG("Cannot play sound %s on any channel", alias.c_str());
         Mix_HaltChannel(0);
         SDL_ClearError();
 
@@ -154,7 +149,6 @@ bool sound_play (const std::string &alias)
             ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
             SDL_ClearError();
         }
-#endif
     }
 
     return true;
@@ -168,8 +162,8 @@ bool sound_play_channel (int channel, const std::string &alias)
         return false;
     }
 
-    if (Mix_Playing(1)) {
-        TOPCON("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
+    if (Mix_Playing(channel)) {
+        LOG("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
         return false;
     }
 
@@ -183,7 +177,7 @@ bool sound_play_channel (int channel, const std::string &alias)
     if (Mix_PlayChannel(channel,
                         sound->second->chunk, 
                         0 /* loops */) == -1) {
-        TOPCON("Cannot play sound %s on channel %d", alias.c_str(), channel);
+        LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
         return false;
     }
 
