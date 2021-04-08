@@ -853,6 +853,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(on_birth_do)
     TP_SET_DECL(on_use_do)
     TP_SET_DECL(on_hit_do)
+    TP_SET_DECL(on_miss_do)
     TP_SET_DECL(on_claw_attack_do)
     TP_SET_DECL(on_move_do)
     TP_SET_DECL(on_born_do)
@@ -1245,6 +1246,7 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "CHANNEL_IMPACT", CHANNEL_IMPACT);
     PyModule_AddIntConstant(zx_mod, "CHANNEL_WEAPON", CHANNEL_WEAPON);
     PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST", CHANNEL_MONST);
+    PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST2", CHANNEL_MONST2);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);

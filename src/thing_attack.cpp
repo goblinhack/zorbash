@@ -369,6 +369,8 @@ _
         return true;
     }
 
+    it->on_miss(this);
+
     //
     // Missiles?
     //

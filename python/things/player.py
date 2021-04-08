@@ -15,7 +15,7 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     elif damage < 30:
         zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit4")
 
-def on_claw_attack(me):
+def on_claw_attack(me, x, y):
     zx.sound_play("player_punch")
 
 def on_born(me, x, y):

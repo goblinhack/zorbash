@@ -1,14 +1,30 @@
 import zx
 import tp
+import random
 
+def on_claw_attack(me, x, y):
+    sound = "growl{}".format(random.randint(1, 10))
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
+
+def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+    zx.sound_play("squeaky_toy")
+
+def on_miss(me, hitter, x, y):
+    sound = "hiss{}".format(random.randint(1, 10))
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
+
+def on_death(me, x, y):
+    sound = "growl{}".format(random.randint(1, 10))
+    if not zx.sound_play_channel(zx.CHANNEL_MONST, sound):
+        zx.sound_play_channel(zx.CHANNEL_MONST2, sound)
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_scent_distance(10)
     x.set_attack_eater(True)
     x.set_attack_lunge(True)
-    x.set_is_attackable_by_player(True)
-    x.set_is_attackable_by_monst(True)
     x.set_avoids_acid(True)
     x.set_avoids_fire(100)
     x.set_avoids_poison(True)
@@ -32,6 +48,8 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("2d6")
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
+    x.set_is_attackable_by_monst(True)
+    x.set_is_attackable_by_player(True)
     x.set_is_burnable(True)
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
@@ -59,6 +77,10 @@ def tp_init(name, text_name):
     x.set_move_speed_ms(50)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d6")
+    x.set_on_claw_attack_do("rat_giant.on_claw_attack()")
+    x.set_on_death_do("rat_giant.on_death()")
+    x.set_on_hit_do("rat_giant.on_hit()")
+    x.set_on_miss_do("rat_giant.on_hit()")
     x.set_on_death_is_corpse(True)
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)

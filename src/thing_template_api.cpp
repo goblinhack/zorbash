@@ -62,6 +62,7 @@ const std::string& Tp::str1(void) const { return _str1; }
 const std::string& Tp::on_birth_do(void) const { return _on_birth_do; }
 const std::string& Tp::on_use_do(void) const { return _on_use_do; }
 const std::string& Tp::on_hit_do(void) const { return _on_hit_do; }
+const std::string& Tp::on_miss_do(void) const { return _on_miss_do; }
 const std::string& Tp::on_claw_attack_do(void) const { return _on_claw_attack_do; }
 const std::string& Tp::on_born_do(void) const { return _on_born_do; }
 const std::string& Tp::on_move_do(void) const { return _on_move_do; }
@@ -534,6 +535,7 @@ void Tp::set_normal_placement_rules(int v) { _normal_placement_rules = v; }
 void Tp::set_on_birth_do(const std::string &v) { _on_birth_do = v; }
 void Tp::set_on_use_do(const std::string &v) { _on_use_do = v; }
 void Tp::set_on_hit_do(const std::string &v) { _on_hit_do = v; }
+void Tp::set_on_miss_do(const std::string &v) { _on_miss_do = v; }
 void Tp::set_on_claw_attack_do(const std::string &v) { _on_claw_attack_do = v; }
 void Tp::set_on_move_do(const std::string &v) { _on_move_do = v; }
 void Tp::set_on_born_do(const std::string &v) { _on_born_do = v; }

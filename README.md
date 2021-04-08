@@ -32,9 +32,11 @@ Sound effects
 - Slime sounds by Konstati, [found here](https://freesound.org/people/konstati/)
 - Sword sounds by Danjocross, [found here](https://freesound.org/people/Danjocross/)
 - Sword sounds by XxChr0nosxX, [found here](https://freesound.org/people/XxChr0nosxX/)
-- Sword sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
 - Wood break sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
 - Footstep sounds by Rico Casazza, [found here](https://freesound.org/people/Rico_Casazza/)
+- Rag growl sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
+- Rat hiss sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
+- Rat squeak sounds by tim.kahn, [found here](https://freesound.org/people/tim.kahn/)
 
 Screenshots
 -----------
