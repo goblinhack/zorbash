@@ -154,25 +154,13 @@ void Level::update_deep_water (void)
 
                 if (nebs < 9) {
                     bool removed_deep_water = false;
-
-                    if (g_opt_debug2) {
-                        FOR_ALL_THINGS(this, t, x, y) {
-                            t->log("Pre remove");
-                        } FOR_ALL_THINGS_END()
-                    }
-
-                    bool did_something = false;
-                    do {
-                        did_something = false;
-                        FOR_ALL_THINGS(this, t, x, y) {
-                            if (t->is_deep_water()) {
-                                t->log("Removed, too shallow");
-                                t->dead("Too shallow");
-                                removed_deep_water = true;
-                                did_something = true;
-                            }
-                        } FOR_ALL_THINGS_END()
-                    } while (did_something);
+                    FOR_ALL_THINGS(this, t, x, y) {
+                        if (t->is_deep_water()) {
+                            t->log("Removed, too shallow");
+                            t->dead("Too shallow");
+                            removed_deep_water = true;
+                        }
+                    } FOR_ALL_THINGS_END()
 
                     //
                     // Replace with shallow water

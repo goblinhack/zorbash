@@ -14,6 +14,7 @@
 #include "my_tile.h"
 #include "my_globals.h"
 #include "my_laser.h"
+#include "my_ptrcheck.h"
 
 void Level::display (void)
 {_

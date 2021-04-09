@@ -12,6 +12,7 @@
 #include "my_random.h"
 #include "my_thing_template.h"
 #include "my_array_bounds_check.h"
+#include "my_ptrcheck.h"
 
 void Thing::acid_tick (void)
 {_
