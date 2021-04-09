@@ -211,8 +211,13 @@ public:
         STATE_CHOOSING_TARGET,  // Looking to somewhere to throw at
     };
     int                state {STATE_NORMAL};
+
+    //
+    // Make sure to update thing_fini.cpp to remove these pointers
+    //
     Thingp             request_to_throw_item {};  // What we are throwing.
     Thingp             request_to_laser_item {};  // What we are lasering with.
+    Thingp             current_wid_thing_info;    // What is currently described
 
     //
     // Temporary. Global requests

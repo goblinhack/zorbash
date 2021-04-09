@@ -15,6 +15,7 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 #include "my_globals.h"
+#include "my_game.h"
 
 Thing::~Thing_ (void)
 {_
@@ -84,6 +85,19 @@ void Thing::destroy (void)
 
     if (level->cursor == this) {
         level->cursor = nullptr;
+    }
+
+    if (game->request_to_throw_item == this) {
+        game->request_to_throw_item = nullptr;
+    }
+
+    if (game->request_to_laser_item == this) {
+        game->request_to_laser_item = nullptr;
+    }
+
+    if (game->current_wid_thing_info == this) {
+        game->current_wid_thing_info = nullptr;
+        game->wid_thing_info_destroy_immediate();
     }
 
     if (monstp) {
