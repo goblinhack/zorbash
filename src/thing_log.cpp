@@ -20,6 +20,10 @@
 
 void Thing::log_ (const char *fmt, va_list args) const
 {
+    if (!g_opt_debug1) {
+        return;
+    }
+
     verify(this);
     auto t = this;
     char buf[MAXSTR];

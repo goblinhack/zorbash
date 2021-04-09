@@ -12,7 +12,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_collision_radius(0.40)
     x.set_gfx_animated(True)
     x.set_gfx_glows(True)
-    x.set_gfx_show_outlined(False)
+    x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(True)
     x.set_is_active(True) # for pushing and falling
@@ -31,12 +31,12 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_treasure(True)
     x.set_is_treasure_class_a(True)
     x.set_is_usable(True)
-    x.set_light_color("red")
-    x.set_light_strength(1)
-    x.set_normal_placement_rules(True)
     x.set_lifespan_dice("100+1d20")
-    x.set_text_a_or_an("a");
+    x.set_light_color("orange")
+    x.set_light_strength(2)
     x.set_long_text_description("A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
+    x.set_normal_placement_rules(True)
+    x.set_text_a_or_an("a");
     x.set_text_description("A small beacon of light in this blighted place.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

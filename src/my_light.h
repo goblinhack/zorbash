@@ -30,14 +30,16 @@ public:
     Thingp             owner {}; // The owner, so we don't block our own light.
     color              col;
     int                fbo;
+    bool               ray_cast_only {};
     point              offset;
     point              cached_light_pos;
     point              cached_pixel_map_at;
     std::vector<Ray>   ray;
     std::vector<float> cached_gl_cmds;
     std::array< std::vector<RayPoint>, LIGHT_MAX_RAYS > points;
-    int16_t            orig_strength {};
-    int16_t            strength {};
+    int16_t            orig_strength {}; // Initial strenght
+    int16_t            prev_strength {}; // Light before torch changes
+    int16_t            strength {};      // Current torch strength
     uint16_t           max_light_rays {};
     uint8_t            flicker {0};
     uint8_t            is_being_destroyed:1 {};
@@ -47,8 +49,8 @@ public:
     void reset(void);
     void update(void);
     bool calculate(int last);
-    void render_triangle_fans(int first);
-    void render(int first);
+    void render_triangle_fans(void);
+    void render(int ray_cast_only);
     void draw_line(const int16_t index, const point &p0, const point &p1);
     void draw_pixel(const int16_t index, const point &p0, const point &p1);
     void log_(const char *fmt, va_list args); // compile error without
@@ -69,5 +71,9 @@ extern Lightp light_new(Thingp owner,
                         int strength,
                         color col,
                         int fbo);
+
+extern Lightp light_new(Thingp owner,
+                        point offset,
+                        int strength);
 
 #endif // LIGHT_H

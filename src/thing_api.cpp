@@ -173,40 +173,6 @@ void Thing::clear_dmap_scent (void)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////
-// light
-////////////////////////////////////////////////////////////////////////////
-std::vector<Lightp> &Thing::get_light (void)
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->light);
-    } else {
-        static std::vector<Lightp> no_light;
-        return no_light;
-    }
-}
-
-void Thing::new_light (point offset, int strength, color col, int fbo)
-{_
-    new_monst();
-    auto l = light_new(this, offset, strength, col, fbo);
-    monstp->light.push_back(l);
-    monstp->light_strength = strength;
-    monstp->light_col = col;
-}
-
-void Thing::delete_lights (void)
-{_
-    if (monstp) {
-        verify(monstp);
-        for (auto& l : monstp->light) {
-            delete l;
-        }
-        monstp->light.resize(0);
-    }
-}
-
 int Thing::unused_rrr98(void)
 {_
     return (tp()->unused_rrr98());

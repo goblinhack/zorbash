@@ -33,7 +33,7 @@ def tp_init(name, text_name):
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_interesting(True)
-    x.set_light_strength(3)
+    x.set_light_strength(2)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_minion_generator(True)
@@ -53,7 +53,7 @@ def tp_init(name, text_name):
     x.set_on_idle_dice("1d10+10:ghost_minion_generator.on_idle_dice()")
     x.set_text_a_or_an("a");
     x.set_text_description("A cursed pile of bones, spawning spirits.")
-    x.set_tick_rate_tenths(3)
+    x.set_tick_rate_tenths(2)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 

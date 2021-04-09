@@ -318,6 +318,15 @@ void player_tick (void)
         //
         level->cursor_path_clear();
 
+        //
+        // If swinging, don't leave the weapon behind
+        //
+        // Not sure about this one
+        // if (player->get_weapon_id_use_anim().ok()) {
+        //     player->topcon("Don't move while swinging weapon");
+        //     return;
+        // }
+
         fpoint future_pos = player->mid_at + fpoint(dx, dy);
         player->move(future_pos, up, down, left, right, attack, wait, true);
         last_key_pressed_when = time_get_time_ms_cached();

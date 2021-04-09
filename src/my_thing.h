@@ -1082,6 +1082,7 @@ public:
     void new_age_map(void);
     void new_dmap_scent(void);
     void new_light(point offset, int strength, color col, int fbo);
+    void new_light(point offset, int strength);
     void new_monst(void);
     void on_bite(void);
     void on_born(void);
