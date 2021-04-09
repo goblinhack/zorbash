@@ -272,7 +272,7 @@ extern PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB_EXT;
 #define FBO_MAP_VISIBLE            1
 #define FBO_MAP_HIDDEN             2
 #define FBO_WID                    3
-#define FBO_PLAYER_LIGHT           4
+#define FBO_PLAYER_VISIBLE_LIGHTING           4
 #define FBO_MINIMAP                5
 #define FBO_MASK1                  6
 #define FBO_MASK2                  7
@@ -287,7 +287,7 @@ extern PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB_EXT;
 #define FBO_FULLMAP_VISITED        16
 #define FBO_FINAL                  17
 #define FBO_SCREEN_FADE_IN_AND_OUT 18
-#define FBO_SMALL_LIGHTS           19
+#define FBO_SMALL_POINT_LIGHTS           19
 #define MAX_FBO                    20
 
 extern uint32_t NUMBER_BYTES_PER_VERTICE_2D;

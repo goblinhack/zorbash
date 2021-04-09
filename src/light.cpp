@@ -110,9 +110,29 @@ Lightp light_new (Thingp owner,
 
     l->offset         = offset;
     l->orig_strength  = strength;
+    l->prev_strength  = strength;
     l->owner          = owner;
     l->col            = col;
     l->fbo            = fbo;
+
+    l->update();
+
+    //log("Created");
+    return (l);
+}
+
+Lightp light_new (Thingp owner,
+                  point offset,
+                  int strength)
+{_
+    auto l = new Light(); // std::make_shared< class Light >();
+
+    l->offset         = offset;
+    l->orig_strength  = strength;
+    l->prev_strength  = strength;
+    l->owner          = owner;
+    l->ray_cast_only  = true;
+    l->fbo            = -1;
 
     l->update();
 
@@ -152,7 +172,7 @@ void Light::reset (void)
     cached_light_pos = point(-1, -1);
 }
 
-bool Light::calculate (int first)
+bool Light::calculate (int ray_casy_only)
 {
     auto player = level->player;
     if (!player) {
@@ -218,7 +238,7 @@ bool Light::calculate (int first)
                 (player->mid_at.x <= MAP_WIDTH - d) &&
                 (player->mid_at.y >= d) &&
                 (player->mid_at.y <= MAP_HEIGHT - d)))) {
-        if (first) {
+        if (ray_cast_only) {
             for (int16_t i = 0; i < max_light_rays; i++) {
                 auto r = &getref_no_check(ray, i);
                 int16_t step = 0;
@@ -356,14 +376,14 @@ bool Light::calculate (int first)
     return true;
 }
 
-void Light::render_triangle_fans (int first)
+void Light::render_triangle_fans (void)
 {
     point light_pos = owner->last_blit_at;
 
     if (fbo == FBO_FULLMAP_LIGHT) {
         light_pos = cached_light_pos;
         gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
-    } else if (fbo == FBO_PLAYER_LIGHT) {
+    } else if (fbo == FBO_PLAYER_VISIBLE_LIGHTING) {
         light_pos -= level->pixel_map_at  - offset;
     } else {
         return;
@@ -425,7 +445,7 @@ void Light::render_triangle_fans (int first)
     }
 }
 
-void Light::render (int first)
+void Light::render (int ray_cast_only)
 {
     if (!g_light_overlay_tex) {
         g_light_overlay_tex = tex_load("", "light", GL_NEAREST);
@@ -437,10 +457,15 @@ void Light::render (int first)
         g_glow_overlay_texid = tex_get_gl_binding(g_glow_overlay_tex);
     }
 
-    if (!calculate(first)) {
+    if (!calculate(ray_cast_only)) {
         return;
     }
-    render_triangle_fans(first);
+
+    if (ray_cast_only) {
+        return;
+    }
+
+    render_triangle_fans();
 }
 
 void Level::lights_render (int minx, int miny, int maxx, int maxy,
@@ -449,17 +474,20 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
     if (player) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-        bool first = true;
         player->light_update_strength();
         for (auto l : player->get_light()) {
+            if (l->ray_cast_only) {
+                l->render(true);
+                continue;
+            }
+
             if (l->fbo == fbo) {
-                l->render(first);
-                first = false;
+                l->render(false);
             }
         }
     }
 
-    if (fbo != FBO_SMALL_LIGHTS) {
+    if (fbo != FBO_SMALL_POINT_LIGHTS) {
         return;
     }
 
@@ -483,7 +511,17 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
     // Draw small light sources
     //
     glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_ALPHA);
+    lights_render_small_lights(minx, miny, maxx, maxy, fbo, true);
 
+    glcolor(WHITE);
+}
+
+//
+// Draw point source lights 
+//
+void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
+                                        int fbo, bool include_player_lights)
+{_
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -491,6 +529,12 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
                 for (auto& l : t->get_light()) {
 
                     if (player && (l->owner == player)) {
+                        if (!include_player_lights) {
+                            continue;
+                        }
+                        if (l->ray_cast_only) {
+                            continue;
+                        }
                         if (l->fbo != fbo) {
                             continue;
                         }
@@ -532,6 +576,18 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
                 for (auto& l : t->get_light()) {
+
+                    if (player && (l->owner == player)) {
+                        if (!include_player_lights) {
+                            continue;
+                        }
+                        if (l->ray_cast_only) {
+                            continue;
+                        }
+                        if (l->fbo != fbo) {
+                            continue;
+                        }
+                    }
 
                     if (!t->gfx_glows()) {
                         continue;

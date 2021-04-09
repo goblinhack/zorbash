@@ -475,6 +475,7 @@ public:
     void incr_heatmap_no_check(const int x, const int y);
     void lights_fade(void);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
+    void lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights);
     void lights_update_same_level(void);
     void lights_update_new_level(void);
     void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));

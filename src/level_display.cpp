@@ -304,18 +304,39 @@ void Level::display_map (void)
         //
         // Generate an FBO with all light sources merged together
         //
-        blit_fbo_bind(FBO_PLAYER_LIGHT);
+        blit_fbo_bind(FBO_PLAYER_VISIBLE_LIGHTING);
         glClear(GL_COLOR_BUFFER_BIT);
-        lights_render(light_minx, light_miny, light_maxx, light_maxy,
-                      FBO_PLAYER_LIGHT);
 
+        //
+        // Render the player light sources - but also render the point
+        // light sources on a dark background to make things look more
+        // dramatic
+        // 
+        lights_render(light_minx, light_miny, light_maxx, light_maxy,
+                      FBO_PLAYER_VISIBLE_LIGHTING);
+        //
+        // Add in point light sources so we can see lave for example that
+        // is not directly lit but it hit by ray casting
+        //
+        lights_render_small_lights(
+                      light_minx, light_miny, light_maxx, light_maxy,
+                      FBO_SMALL_POINT_LIGHTS, 
+                      false /* include player lights */);
+
+        //
+        // This renders a single player light to the gray background
+        // so we can see where we have been
+        //
         blit_fbo_bind(FBO_FULLMAP_LIGHT);
         lights_render(light_minx, light_miny, light_maxx, light_maxy,
                       FBO_FULLMAP_LIGHT);
 
-        blit_fbo_bind(FBO_SMALL_LIGHTS);
+        //
+        // Render a dark background with point lights that look dramatic
+        //
+        blit_fbo_bind(FBO_SMALL_POINT_LIGHTS);
         lights_render(light_minx, light_miny, light_maxx, light_maxy,
-                      FBO_SMALL_LIGHTS);
+                      FBO_SMALL_POINT_LIGHTS);
     }
 
     if (!frozen) {_
@@ -358,7 +379,7 @@ void Level::display_map (void)
         blit_flush();
 
         glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
-        blit_fbo_game_pix(FBO_PLAYER_LIGHT);
+        blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
     }
 
     if (!frozen) {_
@@ -374,7 +395,7 @@ void Level::display_map (void)
         // Blit small lights and glow
         //
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        blit_fbo_game_pix(FBO_SMALL_LIGHTS);
+        blit_fbo_game_pix(FBO_SMALL_POINT_LIGHTS);
 
         //
         // Blit objects that are in front of small lights so that the
@@ -383,7 +404,7 @@ void Level::display_map (void)
         display_lasers();
         display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
-        blit_fbo_game_pix(FBO_PLAYER_LIGHT);
+        blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
         display_map_fg2_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
 
         //
@@ -450,7 +471,7 @@ void Level::display_map (void)
         glClear(GL_COLOR_BUFFER_BIT);
         blit_fbo_bind(FBO_FULLMAP_LIGHT);
         glClear(GL_COLOR_BUFFER_BIT);
-        blit_fbo_bind(FBO_PLAYER_LIGHT);
+        blit_fbo_bind(FBO_PLAYER_VISIBLE_LIGHTING);
         glClear(GL_COLOR_BUFFER_BIT);
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
