@@ -1,0 +1,70 @@
+//
+// Copyright goblinhack@gmail.com
+// See the README.md file for license info.
+//
+
+#include "my_sys.h"
+#include "my_level.h"
+#include "my_depth.h"
+#include "my_color.h"
+#include "my_dmap.h"
+#include "my_sprintf.h"
+#include "my_thing.h"
+#include "my_sys.h"
+#include "my_game.h"
+#include "my_gl.h"
+#include "my_random.h"
+#include "my_thing_template.h"
+#include "my_monst.h"
+
+void Thing::get_light_strength_including_torch_effect (int &out_light_strength)
+{_
+    auto orig_light_strength = out_light_strength;
+    auto light_strength = get_initial_light_strength();
+
+    auto torch_count = 0;
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (!o) {
+            continue;
+        }
+
+        if (!o->is_torch()) {
+            continue;
+        }
+
+        if (o->get_charge_count()) {
+            torch_count += o->get_charge_count();
+        } else {
+            torch_count++;
+        }
+    }
+
+    if (torch_count == 3) {
+        light_strength = (light_strength * 3) / 4;
+    } else if (torch_count == 2) {
+        light_strength /= 2;
+    } else if (torch_count == 1) {
+        light_strength /= 2;
+    } else if (torch_count == 0) {
+        light_strength = 1;
+    }
+
+    if (orig_light_strength) {
+        if (light_strength != orig_light_strength) {
+            if (light_strength <= 1) {
+                TOPCON("You are plunged into darkness.");
+            } else if (light_strength < orig_light_strength) {
+                TOPCON("It gets darker...");
+            }
+
+            //
+            // This causes a flicker and I slightly like that without 
+            // this you see a bit more of the level before it goes dark.
+            //
+            level->update();
+        }
+    }
+
+    out_light_strength = light_strength;
+}
