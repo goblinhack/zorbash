@@ -22,6 +22,8 @@ static WidPopup *wid_thing_info_window2;
 
 void wid_thing_info_fini (void)
 {_
+    game->current_wid_thing_info = nullptr;
+
     if (game->bag_primary) {
         delete game->bag_primary;
         game->bag_primary = nullptr;
@@ -478,6 +480,8 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     wid_update(wid_thing_info_window->wid_text_area->wid_text_area);
 
     recursion = false;
+
+    game->current_wid_thing_info = t;
 }
 
 void Game::wid_thing_info_create_when_hovering_over (Thingp t)
