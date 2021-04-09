@@ -34,8 +34,14 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
 _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
-        err("Attempt to drop %s which is not carried", 
-            what->to_string().c_str());
+        if (existing_owner) {
+            err("Attempt to drop %s which is not carried and owned by %s", 
+                what->to_string().c_str(),
+                existing_owner->to_string().c_str());
+        } else {
+            err("Attempt to drop %s which is not carried and not owned", 
+                what->to_string().c_str());
+        }
         return false;
     }
 
@@ -107,8 +113,14 @@ bool Thing::drop_into_ether (Thingp what)
 _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
-        err("Attempt to drop %s which is not carried", 
-            what->to_string().c_str());
+        if (existing_owner) {
+            err("Attempt to drop %s into the ether which is not carried and owned by %s", 
+                what->to_string().c_str(),
+                existing_owner->to_string().c_str());
+        } else {
+            err("Attempt to drop %s into the ether which is not carried and not owned", 
+                what->to_string().c_str());
+        }
         return false;
     }
 

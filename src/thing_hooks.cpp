@@ -96,8 +96,13 @@ _
                 }
             }
         }
+    }
 
-        remove_owner();
+    //
+    // Remove from inventory and remove from ownership
+    //
+    if (get_immediate_owner_id().ok()) {
+        owner->drop_into_ether(this);
     }
 
     if (get_immediate_minion_owner_id().ok()) {

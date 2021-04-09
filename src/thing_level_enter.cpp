@@ -73,5 +73,5 @@ void Thing::level_enter (void)
     is_waiting_to_ascend_sewer    = false;
     is_waiting_to_fall            = false;
 
-    game->update_rightbar = true;
+    game->request_update_rightbar = true;
 }

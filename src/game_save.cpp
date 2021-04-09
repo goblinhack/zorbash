@@ -244,7 +244,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_rock                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_secret_door            << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_smoke                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_brazier                  << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_brazier                << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_treasure               << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_wall                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_gfx_water              << shift; shift++;

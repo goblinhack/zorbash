@@ -27,6 +27,11 @@ void Level::display (void)
         }
     }
 
+    if (game->request_update_same_level) {
+        game->request_update_same_level = false;
+        update_same_level();
+    }
+
     bool shake = screen_shake_begin();
     display_map();
     if (shake) {

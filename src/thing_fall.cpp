@@ -54,6 +54,13 @@ _
     is_falling = true;
     level_push();
 
+    //
+    // If a generator falls, the connection to the minions is severed
+    //
+    if (is_minion_generator()) {
+        kill_minions(nullptr);
+    }
+
     if (is_on_fire()) {
         if (is_player()) {
             TOPCON("%%fg=green$The fall puts out the flames!%%fg=reset$");
@@ -212,7 +219,7 @@ _
             if (is_player()) {
                 next_level->player = this;
                 next_level->scroll_map_to_player();
-                next_level->update();
+                next_level->update_new_level();
                 //
                 // Make sure all monsts on the new level are at the
                 // same tick or they will get lots of free attacks
@@ -286,7 +293,7 @@ _
             if (is_player()) {
                 game->tick_begin("finished fall to next level");
                 level->timestamp_fade_in_begin = time_get_time_ms_cached();
-                level->update();
+                level->update_new_level();
             }
 
             if (tp()->get_health_initial_dice_str() != "") {

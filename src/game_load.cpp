@@ -291,7 +291,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_rock                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_secret_door            = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_smoke                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_brazier                  = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_brazier                = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_treasure               = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_wall                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_gfx_water              = (bits64 >> shift) & 1; shift++;
@@ -422,7 +422,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* miny */                  in >> bits(l->miny);
     /* maxy */                  in >> bits(l->maxy);
 
-    l->update();
+    l->update_new_level();
     l->timestamp_redraw_bg = 1; // Force redraw
     l->timestamp_fade_in_begin = time_get_time_ms_cached();
     l->map_changed = true;
@@ -466,7 +466,7 @@ _
         }
     }
 
-    l->update();
+    l->update_new_level();
 
     READ_MAGIC("level end", THING_MAGIC_FINAL);
     LOG("DUNGEON: Loaded things for level %d,%d,%d", p.x, p.y, p.z);

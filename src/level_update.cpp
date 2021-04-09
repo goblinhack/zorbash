@@ -8,11 +8,19 @@
 #include "my_dungeon.h"
 #include "my_thing.h"
 
-void Level::update (void)
+void Level::update_new_level (void)
 {_
     minimap_valid = false;
     heatmap_valid = false;
 
-    lights_update();
+    lights_update_new_level();
     scroll_map_to_player();
+}
+
+void Level::update_same_level (void)
+{_
+    minimap_valid = false;
+    heatmap_valid = false;
+
+    lights_update_same_level();
 }

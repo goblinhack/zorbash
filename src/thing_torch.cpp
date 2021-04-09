@@ -40,13 +40,11 @@ void Thing::get_light_strength_including_torch_effect (int &out_light_strength)
         }
     }
 
-    if (torch_count == 3) {
-        light_strength = (light_strength * 3) / 4;
-    } else if (torch_count == 2) {
-        light_strength /= 2;
-    } else if (torch_count == 1) {
-        light_strength /= 2;
-    } else if (torch_count == 0) {
+    if (torch_count < 6) {
+        light_strength -= 7 - torch_count;
+    }
+
+    if (torch_count == 0) {
         light_strength = 1;
     }
 
@@ -62,7 +60,7 @@ void Thing::get_light_strength_including_torch_effect (int &out_light_strength)
             // This causes a flicker and I slightly like that without 
             // this you see a bit more of the level before it goes dark.
             //
-            level->update();
+            game->request_update_same_level = true;
         }
     }
 

@@ -93,8 +93,6 @@ extern void config_gfx_inverted_toggle(void);
 extern uint8_t config_gfx_inverted_set(tokensp, void *context);
 extern void config_gfx_minimap_toggle(void);
 extern uint8_t config_gfx_minimap_set(tokensp, void *context);
-extern void config_gfx_show_hidden_toggle(void);
-extern uint8_t config_gfx_show_hidden_set(tokensp, void *context);
 extern void config_gfx_lights_toggle(void);
 extern uint8_t config_gfx_lights_set(tokensp, void *context);
 extern void config_game_pix_zoom_in(void);

@@ -475,7 +475,8 @@ public:
     void incr_heatmap_no_check(const int x, const int y);
     void lights_fade(void);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
-    void lights_update(void);
+    void lights_update_same_level(void);
+    void lights_update_new_level(void);
     void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void log(std::string prefix);
     void log_(const char *fmt, va_list args); // compile error without
@@ -598,7 +599,8 @@ public:
     void unset_is_wall(const int x, const int y);
     void unset_visited(const int x, const int y);
     void unset_visited_no_check(const int x, const int y);
-    void update(void);
+    void update_new_level(void);
+    void update_same_level(void);
     void update_all_ticks(void);
     void update_deep_water(void);
     void update_hazard_tile_map(void);

@@ -158,6 +158,7 @@ bool Light::calculate (int first)
     if (!player) {
         return false;
     }
+
     if (!player->is_blitted) {
         return false;
     }
@@ -582,9 +583,9 @@ void Level::lights_fade (void)
 }
 
 //
-// Alow distant lights to fade
+// Refresh lights on a new level. Ignore blitted postion.
 //
-void Level::lights_update (void)
+void Level::lights_update_new_level (void)
 {_
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -593,6 +594,23 @@ void Level::lights_update (void)
                 // Need to do this as light position depends on blitting
                 //
                 t->is_blitted = false;
+                for (auto& l : t->get_light()) {
+                    l->update();
+                    l->reset();
+                }
+            } FOR_ALL_THINGS_END()
+        }
+    }
+}
+
+//
+// Update lights on existing level e.g. torch goes out
+//
+void Level::lights_update_same_level (void)
+{_
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
                 for (auto& l : t->get_light()) {
                     l->update();
                     l->reset();
