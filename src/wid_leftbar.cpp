@@ -13,6 +13,7 @@
 #include "my_thing_template.h"
 #include "my_globals.h"
 #include "my_array_bounds_check.h"
+#include "my_ptrcheck.h"
 
 static void wid_leftbar_create(void);
 

@@ -203,13 +203,20 @@ public:
     #define JOIN1(X,Y) X##Y
     #define JOIN(X,Y) JOIN1(X,Y)
 
-    #define FOR_ALL_THINGS(level, t, x, y)                          \
+    #define FOR_ALL_THINGS_WALKER(level, t, x, y)                   \
         if(!(level)->is_oob(x, y)) {                                \
-            Thingp t;                                               \
+            static Thingp things_to_walk[MAP_SLOTS];                \
             auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
+            auto things_to_walk_size = _vec_->size();               \
+            for(size_t idx = 0; idx < things_to_walk_size; idx++)   \
+                things_to_walk[idx] = (*_vec_)[idx];                \
+            for(size_t idx = 0; idx < things_to_walk_size; idx++) { \
+                Thingp t;                                           \
                 t = (*_vec_)[idx];                                  \
                 verify(t);                                          \
+
+    #define FOR_ALL_THINGS(level, t, x, y)                          \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
 
     #define FOR_ALL_THINGS_END() } }
 
@@ -218,30 +225,18 @@ public:
     // during walks
     //
     #define FOR_ALL_GRID_THINGS(level, t, x, y)              	    \
-        if(!(level)->is_oob(x, y)) {                                \
-            Thingp t;                                               \
-            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
-                t = (*_vec_)[idx];                                  \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if(!t->is_the_grid) { continue; }                   \
 
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
-        if(!(level)->is_oob(x, y)) {                                \
-            Thingp t;                                               \
-            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
-                t = (*_vec_)[idx];                                  \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if (t->z_depth != z) {                              \
                     continue;                                       \
                 }                                                   \
                 if (t->is_hidden) { continue; }                     \
 
     #define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                 \
-    {                                                               \
-        Thingp t;                                                   \
-        auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);        \
-        for(size_t idx = 0; idx < _vec_->size(); idx++) {           \
-            t = (*_vec_)[idx];                                      \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
             if(likely(!t->has_light)) { continue; }                 \
             if(t->is_hidden) { continue; }                          \
 
@@ -249,12 +244,7 @@ public:
     // Things that move around
     //
     #define FOR_ALL_ACTIVE_THINGS(level, t, x, y)                   \
-        if(!(level)->is_oob(x, y)) {                                \
-            Thingp t;                                               \
-            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
-                t = (*_vec_)[idx];                                  \
-                verify(t);                                          \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if(t->is_the_grid) { continue; }                    \
                 if(t->is_hidden) { continue; }                      \
                 if(!t->is_active()) {                               \
@@ -266,12 +256,7 @@ public:
     // like food
     //
     #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)              \
-        if(!(level)->is_oob(x, y)) {                                \
-            Thingp t;                                               \
-            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
-                t = (*_vec_)[idx];                                  \
-                verify(t);                                          \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if(t->is_the_grid) { continue; }                    \
                 if(t->is_hidden) { continue; }                      \
                 if(!t->is_interesting()) {                          \
@@ -282,12 +267,7 @@ public:
     // Things you can bump into
     //
     #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                \
-        if(!(level)->is_oob(x, y)) {                                \
-            Thingp t;                                               \
-            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
-                t = (*_vec_)[idx];                                  \
-                verify(t);                                          \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if(t->is_the_grid) { continue; }                    \
                 if(t->is_hidden) { continue; }                      \
                 if(!t->is_interesting() &&                          \
@@ -301,12 +281,7 @@ public:
     // Cursor path is the highlighted path the player follows.
     //
     #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)              \
-        if(!(level)->is_oob(x, y)) {                                \
-            Thingp t;                                               \
-            auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
-            for(size_t idx = 0; idx < _vec_->size(); idx++) {       \
-                t = (*_vec_)[idx];                                  \
-                verify(t);                                          \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if(!t->is_cursor_path()) {                          \
                     continue;                                       \
                 }                                                   \

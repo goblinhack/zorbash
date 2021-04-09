@@ -14,6 +14,7 @@
 #include "my_gl.h"
 #include "my_array_bounds_check.h"
 #include "my_globals.h"
+#include "my_ptrcheck.h"
 
 void Level::display_lava (int fbo,
                           uint16_t minx, uint16_t miny,

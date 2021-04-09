@@ -265,9 +265,11 @@ _
                 TOPCON("%%fg=red$You take %u fall damage!%%fg=reset$", fall_damage);
             }
 
-            bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
-            next_level->thing_new(tp_random_blood_splatter()->name(), 
-                                  new_pos);
+            if (is_monst() || is_player()) {
+                bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
+                next_level->thing_new(tp_random_blood_splatter()->name(), 
+                                      new_pos);
+            }
 
             next_level->scroll_map_to_player();
             update_light();
