@@ -423,7 +423,7 @@ int Thing::inventory_id_slot_count (const uint32_t slot)
         return 0;
     }
 
-    return item_count(tpp);
+    return item_count_including_charges(tpp);
 }
 
 Thingp Level::inventory_get (const uint32_t slot)

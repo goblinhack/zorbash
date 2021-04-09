@@ -757,7 +757,7 @@ void Thing::blit_internal (int fbo,
     uint8_t fade = level->is_lit(mid_at.x, mid_at.y);
     if (fbo == FBO_FULLMAP) {
         c.a = 255;
-    } else if (light_strength()) {
+    } else if (get_light_strength()) {
         c.a = fade;
     }
 

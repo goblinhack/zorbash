@@ -62,7 +62,7 @@ public:
     int          keys = {};
     int          lifespan = {};              // How many things this thing owns.
     int          light_quality {};
-    int          light_strength {};
+    int          light_strength {};          // Current strength, including torches
     int          modifier_attack = {};
     int          modifier_constitution = {};
     int          modifier_defence = {};
