@@ -10,7 +10,7 @@
 #include "my_monst.h"
 #include "my_random.h"
 
-int Thing::item_count (Tpp tp)
+int Thing::item_count_including_charges (Tpp tp)
 {_
     auto count = 0;
     for (auto oid : monstp->carrying) {
@@ -33,6 +33,46 @@ int Thing::item_count (Tpp tp)
     }
 
     return count;
+}
+
+int Thing::item_count_excluding_charges (Tpp tp)
+{_
+    auto count = 0;
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (!o) {
+            continue;
+        }
+
+        if (o->tp() == tp) {
+            if (o->is_item_not_stackable()) {
+                count = 1;
+            } else {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+//
+// Used so that only one torch that is carried ticks in lifespan
+//
+void Thing::update_all_carried_items_tick (Tpp tp)
+{_
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (!o) {
+            continue;
+        }
+
+        if (o->tp() == tp) {
+            o->update_tick();
+            o->con("uptate tick now T%u game %u" , 
+                   o->get_tick(), game->tick_current);
+        }
+    }
 }
 
 void Thing::move_carried_items (void)

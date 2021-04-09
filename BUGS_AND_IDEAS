@@ -2,8 +2,8 @@
 Bugs
 ----
 
+torch light goes from 4 to 2
 moving player when moving items should close item windows
-torch needs to timeout
 bag items not described when doing multipickup
 sounds
 water footsteps im sewer

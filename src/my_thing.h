@@ -335,14 +335,14 @@ public:
     const std::string& light_color(void) const;
     const std::string& long_text_description(void) const;
     const std::string& on_birth_do(void) const;
+    const std::string& on_bite_do(void) const;
+    const std::string& on_born_do(void) const;
     const std::string& on_death_do(void) const;
-    const std::string& on_open_do(void) const;
-    const std::string& on_use_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_miss_do(void) const;
-    const std::string& on_bite_do(void) const;
     const std::string& on_move_do(void) const;
-    const std::string& on_born_do(void) const;
+    const std::string& on_open_do(void) const;
+    const std::string& on_use_do(void) const;
     const std::string& short_text_name(void) const;
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
@@ -417,6 +417,8 @@ public:
     int decr_keys(void);
     int decr_lifespan(int);
     int decr_lifespan(void);
+    int decr_light_strength(int);
+    int decr_light_strength(void);
     int decr_minion_count(int);
     int decr_minion_count(void);
     int decr_modifier_attack(int);
@@ -478,12 +480,15 @@ public:
     int get_gold_value(void) const;
     int get_health(void) const;
     int get_health_initial(void) const;
+    int get_initial_light_strength(void) const;
     int get_health_max(void) const;
     int get_idle_tick(void) const;
     int get_initial_charge_count(void) const;
     int get_keys(void) const;
     int get_lifespan(void) const;
     int get_lifespan_initial(void) const;
+    int get_light_strength(void);
+    int get_light_strength_initial(void) const;
     int get_minion_count(void) const;
     int get_modifier_attack(void) const;
     int get_modifier_constitution(void) const;
@@ -548,6 +553,8 @@ public:
     int incr_keys(void);
     int incr_lifespan(int);
     int incr_lifespan(void);
+    int incr_light_strength(int);
+    int incr_light_strength(void);
     int incr_minion_count(int);
     int incr_minion_count(void);
     int incr_modifier_attack(int);
@@ -617,12 +624,14 @@ public:
     int is_bleeder(void) const;
     int is_blood(void) const;
     int is_blood_splatter(void) const;
+    int is_brazier(void) const;
     int is_burnable(void) const;
     int is_chasm(void) const;
     int is_collect_as_keys(void) const;
     int is_collectable(void) const;
     int is_combustible(void) const;
     int is_corpse(void) const;
+    int is_corpse_on_death(void) const;
     int is_corridor(void) const;
     int is_critical_to_level(void) const;
     int is_cursor(void) const;
@@ -638,7 +647,6 @@ public:
     int is_dirt(void) const;
     int is_door(void) const;
     int is_droppable(void) const;
-    int is_wall_dungeon(void) const;
     int is_ethereal(void) const;
     int is_explosion(void) const;
     int is_extreme_hazard(void) const;
@@ -707,7 +715,6 @@ public:
     int is_rrr11(void) const;
     int is_rrr12(void) const;
     int is_rrr13(void) const;
-    int is_torch(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
@@ -729,7 +736,7 @@ public:
     int is_temporary_bag(void) const;
     int is_throwable(void) const;
     int is_thrown_automatically_when_chosen(void) const;
-    int is_brazier(void) const;
+    int is_torch(void) const;
     int is_treasure(void) const;
     int is_treasure_class_a(void) const;
     int is_treasure_class_b(void) const;
@@ -740,18 +747,20 @@ public:
     int is_used_automatically_when_selected(void) const;
     int is_used_when_thrown(void) const;
     int is_wall(void) const;
+    int is_wall_dungeon(void) const;
     int is_wand(void) const;
     int is_water_lover(void) const;
     int is_weapon(void) const;
     int is_weapon_wielder(void) const;
-    int item_count(Tpp item);
-    int light_strength(void) const;
+    int item_count_excluding_charges(Tpp item);
+    int item_count_including_charges(Tpp item);
+    int light_strength(void);
+    void get_light_strength_including_torch_effect(int &light_strength);
     int minion_leash_distance(void) const;
     int minion_limit(void) const;
     int monst_size(void) const;
     int normal_placement_rules(void) const;
     int on_death_drop_all_items(void) const;
-    int is_corpse_on_death(void) const;
     int on_death_is_open(void) const;
     int range_max(void) const;
     int rarity(void) const;
@@ -762,6 +771,7 @@ public:
     int set_health_max(int);
     int set_keys(int);
     int set_lifespan(int);
+    int set_light_strength(int);
     int set_minion_count(int);
     int set_modifier_attack(int);
     int set_modifier_constitution(int);
@@ -993,6 +1003,7 @@ public:
     void botcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void botcon_(const char *fmt, va_list args) const; // compile error without
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
+    void brazier_tick();
     void clear_age_map(void);
     void clear_dmap_scent(void);
     void collision_check_do();
@@ -1054,6 +1065,7 @@ public:
     void level_pop(void);
     void level_push(void);
     void lifespan_tick();
+    void light_update_strength(void);
     void log(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args) const; // compile error without
     void lunge(fpoint tt);
@@ -1071,14 +1083,14 @@ public:
     void new_dmap_scent(void);
     void new_light(point offset, int strength, color col, int fbo);
     void new_monst(void);
-    void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
-    void on_miss(Thingp hitter);
-    void on_open(void);
-    void on_use(Thingp what, Thingp target);
-    void on_use(Thingp what);
     void on_bite(void);
     void on_born(void);
+    void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
+    void on_miss(Thingp hitter);
     void on_move(void);
+    void on_open(void);
+    void on_use(Thingp what);
+    void on_use(Thingp what, Thingp target);
     void poison_boost(int v);
     void reinit(void);
     void remove_all_references();
@@ -1108,12 +1120,12 @@ public:
     void tick();
     void topcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void topcon_(const char *fmt, va_list args) const; // compile error without
-    void brazier_tick();
     void try_to_carry(const std::list<Thingp> &items);
     void unleash_minions(void);
     void unset_on_fire(void);
     void unwield(const char *why);
     void update_all(void);
+    void update_all_carried_items_tick(Tpp);
     void update_interpolated_position(void);
     void update_light(void);
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
@@ -1131,7 +1143,6 @@ public:
     void weapon_sheath(void);
     void wield(Thingp w);
     void wobble(float wobble);
-    void light_update_strength(void);
 } Thing;
 
 std::ostream& operator<<(std::ostream &out, Bits<const Thingp & > const my);

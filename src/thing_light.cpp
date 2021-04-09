@@ -17,47 +17,6 @@
 #include "my_thing_template.h"
 #include "my_monst.h"
 
-int Thing::light_strength (void) const
-{_
-    auto light_strength = tp()->light_strength();
-
-    if (!monstp) {
-        return light_strength;
-    }
-
-    auto torch_count = 0;
-    for (auto oid : monstp->carrying) {
-        auto o = level->thing_find(oid);
-        if (!o) {
-            continue;
-        }
-
-        if (!o->is_torch()) {
-            continue;
-        }
-
-        if (o->get_charge_count()) {
-            torch_count += o->get_charge_count();
-        } else {
-            torch_count++;
-        }
-    }
-
-    if (torch_count == 2) {
-        light_strength /= 2;
-    }
-
-    if (torch_count == 1) {
-        light_strength /= 2;
-    }
-
-    if (torch_count == 0) {
-        light_strength = 1;
-    }
-
-    return light_strength;
-}
-
 void Thing::init_lights (void)
 {_
     if (unlikely(is_player())) {
@@ -75,7 +34,7 @@ void Thing::init_lights (void)
         //
         color col = WHITE;
 
-        int strength = light_strength();
+        int strength = get_light_strength();
         int d1 = 1;
         int d2 = 2;
 
@@ -121,7 +80,7 @@ void Thing::init_lights (void)
         has_light = true;
         log("Player created");
     } else {
-        if (unlikely(light_strength())) {
+        if (unlikely(get_light_strength())) {
             std::string l = light_color();
             if (l.empty()) {
                 l = "white";
@@ -134,7 +93,7 @@ void Thing::init_lights (void)
             }
             if (add_light) {
                 color c = string2color(l);
-                new_light(point(0, 0), light_strength(), c, FBO_PLAYER_LIGHT);
+                new_light(point(0, 0), get_light_strength(), c, FBO_PLAYER_LIGHT);
                 has_light = true;
             }
         }
@@ -143,7 +102,7 @@ void Thing::init_lights (void)
 
 void Thing::light_update_strength (void)
 {_
-    auto str = light_strength();
+    auto str = get_light_strength();
     for (auto l : get_light()) {
         if (str != l->orig_strength) {
             l->orig_strength = str;

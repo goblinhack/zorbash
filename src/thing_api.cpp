@@ -3613,6 +3613,70 @@ int Thing::incr_lifespan (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// light_strength
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_initial_light_strength (void) const
+{_
+    return (tp()->light_strength());
+}
+
+int Thing::get_light_strength (void)
+{_
+    if (!monstp) {
+        return get_initial_light_strength();
+    }
+
+    verify(monstp);
+    auto light_strength = monstp->light_strength;
+
+    if (!light_strength) {
+        light_strength = get_initial_light_strength();
+    }
+
+    if (is_player()) {
+        get_light_strength_including_torch_effect(light_strength);
+    }
+
+    monstp->light_strength = light_strength;
+    return light_strength;
+}
+
+int Thing::set_light_strength (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->light_strength = v);
+}
+
+int Thing::decr_light_strength (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->light_strength -= v);
+}
+
+int Thing::incr_light_strength (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->light_strength += v);
+}
+
+int Thing::decr_light_strength (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->light_strength--);
+}
+
+int Thing::incr_light_strength (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->light_strength++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // tick_last_did_something
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_tick_last_did_something (void) const
