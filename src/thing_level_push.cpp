@@ -95,7 +95,7 @@ void Thing::level_push (void)
                                                    level->set_is_secret_door(mx, my); }
     if (is_smoke())                              { i_set_is_smoke = true;
                                                    level->set_is_smoke(mx, my); }
-    if (is_brazier())                              { i_set_is_brazier = true;
+    if (is_brazier())                            { i_set_is_brazier = true;
                                                    level->set_is_brazier(mx, my); }
     if (is_treasure())                           { i_set_is_treasure = true;
                                                    level->set_is_treasure(mx, my); }

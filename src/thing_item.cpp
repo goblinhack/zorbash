@@ -69,8 +69,6 @@ void Thing::update_all_carried_items_tick (Tpp tp)
 
         if (o->tp() == tp) {
             o->update_tick();
-            o->con("uptate tick now T%u game %u" , 
-                   o->get_tick(), game->tick_current);
         }
     }
 }

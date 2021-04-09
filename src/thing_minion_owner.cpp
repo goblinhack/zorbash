@@ -100,6 +100,11 @@ void Thing::remove_minion_owner (void)
 //
 void Thing::kill_minions (Thingp killer)
 {_
+    //
+    // Warning killer can be nullptr - e.g. when a generator falls to
+    // a new level
+    //
+ 
     if (!is_minion_generator()) {
         return;
     }

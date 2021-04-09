@@ -36,7 +36,6 @@ void Thing::kill (Thingp killer, const char *reason)
     auto immediate_owner = get_immediate_owner();
     if (immediate_owner) {
         immediate_owner->bag_remove(this);
-        immediate_owner->drop_into_ether(this);
     }
 
     //

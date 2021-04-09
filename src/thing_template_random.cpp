@@ -63,7 +63,7 @@ void tp_random_init (void)
         if (tp->is_ascend_sewer())        { tp_ascend_sewer.push_back(tp); }
         if (tp->is_descend_sewer())       { tp_descend_sewer.push_back(tp); }
         if (tp->is_sewer_wall())          { tp_sewer_wall.push_back(tp); }
-        if (tp->is_brazier())               { tp_brazier.push_back(tp); }
+        if (tp->is_brazier())             { tp_brazier.push_back(tp); }
         if (tp->is_treasure())            { tp_treasure.push_back(tp); }
         if (tp->is_treasure_class_a())    { tp_item_class_a.push_back(tp); }
         if (tp->is_treasure_class_b())    { tp_item_class_b.push_back(tp); }

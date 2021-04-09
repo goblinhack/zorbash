@@ -40,5 +40,5 @@ void Thing::level_leave (void)
         }
     }
 
-    game->update_rightbar = true;
+    game->request_update_rightbar = true;
 }

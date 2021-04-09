@@ -119,7 +119,7 @@ bool Thing::descend_dungeon (void)
                 if (is_player()) {
                     l->player = this;
                     l->scroll_map_to_player();
-                    l->update();
+                    l->update_new_level();
                     //
                     // Make sure all monsts on the new level are at the
                     // same tick or they will get lots of free attacks
@@ -141,7 +141,7 @@ bool Thing::descend_dungeon (void)
                 log("Moved to next level entrance");
                 if (is_player()) {
                     level->timestamp_fade_in_begin = time_get_time_ms_cached();
-                    level->update();
+                    level->update_new_level();
                 }
                 return true;
             }
@@ -151,7 +151,7 @@ bool Thing::descend_dungeon (void)
     if (is_player()) {
         game->tick_begin("descend level");
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
-        level->update();
+        level->update_new_level();
     }
     return true;
 }

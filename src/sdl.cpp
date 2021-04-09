@@ -1003,51 +1003,6 @@ uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-void config_gfx_show_hidden_toggle (void)
-{_
-    if (!game->config.gfx_show_hidden) {
-        game->config.gfx_show_hidden = true;
-        CON("gfx show hidden enabled");
-    } else {
-        game->config.gfx_show_hidden = false;
-        CON("gfx show hidden disabled");
-    }
-
-    if (game->level) {
-        game->level->update();
-    }
-}
-
-//
-// User has entered a command, run it
-//
-uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
-{_
-    char *s = tokens->args[4];
-
-    if (!s || (*s == '\0')) {
-        game->config.gfx_show_hidden = true;
-        CON("gfx show hidden enabled (default)");
-    } else {
-        int val = strtol(s, 0, 10) ? 1 : 0;
-        game->config.gfx_show_hidden = val;
-        if (game->config.gfx_show_hidden) {
-            CON("gfx show hidden enabled");
-        } else {
-            CON("gfx show hidden disabled");
-        }
-    }
-
-    if (game->level) {
-        game->level->update();
-    }
-
-    return true;
-}
-
-//
-// User has entered a command, run it
-//
 void config_game_pix_zoom_in (void)
 {_
     game->config.game_pix_zoom++;
@@ -1143,7 +1098,7 @@ void sdl_config_update_all (void)
     gl_init_2d_mode();
 
     if (game->level) {
-        game->level->update();
+        game->level->update_same_level();
     }
 }
 
@@ -1263,8 +1218,8 @@ void sdl_loop (void)
                         // on screen widgets are updated with the new wid
                         // we are about to make.
                         //
-                        if (game->update_rightbar) {
-                            game->update_rightbar = false;
+                        if (game->request_update_rightbar) {
+                            game->request_update_rightbar = false;
                             wid_rightbar_init();
                         }
                         wid_display_all();

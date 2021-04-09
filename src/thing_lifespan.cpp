@@ -22,9 +22,6 @@ void Thing::lifespan_tick (void)
     if (!get_lifespan()) {
         return;
     }
-    if (is_torch() && owner) {
-con("lifespan %d tick %d", get_lifespan(), get_tick());
-    }
 
     decr_lifespan();
 
@@ -35,6 +32,7 @@ con("lifespan %d tick %d", get_lifespan(), get_tick());
     if (owner) {
         if (owner->item_count_excluding_charges(tpp) > 1) {
             owner->update_all_carried_items_tick(tpp);
+            decr_tick();
         }
     }
 
@@ -42,16 +40,10 @@ con("lifespan %d tick %d", get_lifespan(), get_tick());
         return;
     }
 
-    if (is_torch() && owner) {
-        con("total %d tick T%d has %d charges left",
-            owner->item_count_excluding_charges(tpp),
-            get_tick(), get_charge_count());
-    }
     if (get_charge_count()) {
         decr_charge_count();
         if (get_charge_count()) {
-            con("Lifespan expired (but has %d charges left)",
-                   get_charge_count());
+            log("Lifespan expired (but has %d charges left)", get_charge_count());
             game->request_remake_inventory = true;
             set_lifespan(tpp->lifespan());
             return;

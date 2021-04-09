@@ -69,7 +69,7 @@ bool Thing::ascend (int z)
                 if (is_player()) {
                     l->player = this;
                     l->scroll_map_to_player();
-                    l->update();
+                    l->update_new_level();
                     //
                     // Make sure all monsts on the new level are at the
                     // same tick or they will get lots of free attacks
@@ -91,7 +91,7 @@ bool Thing::ascend (int z)
                 log("Moved to previous level exit");
                 if (is_player()) {
                     level->timestamp_fade_in_begin = time_get_time_ms_cached();
-                    level->update();
+                    level->update_new_level();
                 }
                 return true;
             }
@@ -101,7 +101,7 @@ bool Thing::ascend (int z)
     if (is_player()) {
         game->tick_begin("ascend level");
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
-        level->update();
+        level->update_new_level();
     }
     return true;
 }
