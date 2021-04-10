@@ -7,9 +7,11 @@ def on_use(owner, potion, target, x, y):
     if new_health > health:
         zx.tp_spawn_radius_range(owner, potion, target, "potion_health_effect")
         zx.thing_set_health(owner, new_health)
-        zx.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
+        if zx.if_matches(owner, "is_player"):
+            zx.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
     else:
-        zx.topcon("Hm. That potion didn't seem to do anything.")
+        if zx.if_matches(owner, "is_player"):
+            zx.topcon("Hm. That potion didn't seem to do anything.")
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)

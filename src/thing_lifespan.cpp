@@ -8,6 +8,37 @@
 #include "my_sprintf.h"
 #include "my_game.h"
 #include "my_thing_template.h"
+#include "my_string.h"
+#include "my_python.h"
+
+void Thing::on_lifespan (Thingp what)
+{
+    auto on_lifespan = what->tp()->on_lifespan_do();
+    if (std::empty(on_lifespan)) {
+        return;
+    }
+
+    auto t = split_tokens(on_lifespan, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
+            to_string().c_str(),
+            what->to_string().c_str());
+
+        py_call_void_fn(mod.c_str(), fn.c_str(),
+                        id.id, what->id.id,
+                        (int)mid_at.x, (int)mid_at.y);
+    } else {
+        ERR("Bad on_lifespan call [%s] expected mod:function, got %d elems",
+            on_lifespan.c_str(), (int)on_lifespan.size());
+    }
+}
 
 void Thing::lifespan_tick (void)
 {_
@@ -38,6 +69,11 @@ void Thing::lifespan_tick (void)
 
     if (get_lifespan()) {
         return;
+    }
+
+    auto top_owner = get_top_owner();
+    if (top_owner) {
+        top_owner->on_lifespan(this);
     }
 
     if (get_charge_count()) {

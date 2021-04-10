@@ -30,7 +30,7 @@ void Thing::destroy (void)
 
     if (g_opt_debug2) {
         if (is_loggable_for_important_stuff()) {
-            log("destroy");
+            log("Is being destroyed");
         }
     }
 
@@ -77,8 +77,6 @@ void Thing::destroy (void)
         }
     }
 
-    game->world.free_thing_id(this);
-
     if (level->player == this) {
         level->player = nullptr;
     }
@@ -99,6 +97,16 @@ void Thing::destroy (void)
         game->current_wid_thing_info = nullptr;
         game->wid_thing_info_destroy_immediate();
     }
+
+    if (has_external_particle) {
+        err("Still has external particle");
+    }
+
+    if (has_internal_particle) {
+        err("Still has external particle");
+    }
+
+    game->world.free_thing_id(this);
 
     if (monstp) {
         oldptr(monstp);

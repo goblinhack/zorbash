@@ -154,8 +154,7 @@ void Thing::light_update_strength (void)
         }
 
         if (str != l->prev_strength) {
-            l->prev_strength = str;
-            l->update();
+            l->update(str);
         }
     }
 }

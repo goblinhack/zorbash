@@ -2,6 +2,10 @@ import zx
 import tp
 
 
+def on_lifespan(owner, me, x, y):
+    if zx.if_matches(owner, "is_player"):
+        zx.topcon("One of your torches fizzles out.")
+
 def tp_init(name, text_name, tiles=[]):
     x = tp.Tp(name, text_name)
     x.set_bag_item_height(2)
@@ -31,11 +35,12 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_treasure(True)
     x.set_is_treasure_class_a(True)
     x.set_is_usable(True)
-    x.set_lifespan_dice("100+1d20")
+    x.set_lifespan_dice("2")
     x.set_light_color("orange")
     x.set_light_strength(2)
     x.set_long_text_description("A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
     x.set_normal_placement_rules(True)
+    x.set_on_lifespan_do("torch.on_lifespan()")
     x.set_text_a_or_an("a");
     x.set_text_description("A small beacon of light in this blighted place.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

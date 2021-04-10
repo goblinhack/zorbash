@@ -854,6 +854,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(on_use_do)
     TP_SET_DECL(on_hit_do)
     TP_SET_DECL(on_miss_do)
+    TP_SET_DECL(on_lifespan_do)
     TP_SET_DECL(on_bite_do)
     TP_SET_DECL(on_move_do)
     TP_SET_DECL(on_born_do)
@@ -940,7 +941,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"tile_load_arr",                           (PyCFunction)tile_load_arr_,                            METH_VARARGS | METH_KEYWORDS, "load a tile array"},
     {"tile_load_arr_sprites",                   (PyCFunction)tile_load_arr_sprites_,                    METH_VARARGS | METH_KEYWORDS, "load a tile array in color and black and white"},
     {"topcon",                                  (PyCFunction)topcon_,                                   METH_VARARGS,                 "log to the mini console"},
-    {"tp_kill_if",                              (PyCFunction)tp_kill_if,                                METH_VARARGS | METH_KEYWORDS, "kill if"},
+    {"if_matches_then_kill",                    (PyCFunction)if_matches_then_kill_,                     METH_VARARGS | METH_KEYWORDS, "if matches then kill"},
+    {"if_matches",                              (PyCFunction)if_matches_,                               METH_VARARGS | METH_KEYWORDS, "if matches"},
     {"tp_load",                                 (PyCFunction)tp_load_,                                  METH_VARARGS | METH_KEYWORDS, "load a thing template"},
     {"tp_place",                                (PyCFunction)tp_place,                                  METH_VARARGS | METH_KEYWORDS, "kill place"},
     {"tp_spawn_at",                             (PyCFunction)tp_spawn_at,                               METH_VARARGS | METH_KEYWORDS, "spawn under"},

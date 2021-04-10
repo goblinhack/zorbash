@@ -115,7 +115,7 @@ Lightp light_new (Thingp owner,
     l->col            = col;
     l->fbo            = fbo;
 
-    l->update();
+    l->update(strength);
 
     //log("Created");
     return (l);
@@ -134,17 +134,31 @@ Lightp light_new (Thingp owner,
     l->ray_cast_only  = true;
     l->fbo            = -1;
 
-    l->update();
+    l->update(strength);
 
     //log("Created");
     return (l);
 }
 
+void Light::update (int strength_in)
+{_
+    if (!strength_in) {
+        DIE("no light strength set");
+    }
+
+    prev_strength = strength_in;
+    strength = strength_in * TILE_WIDTH;
+
+    update();
+}
+
 void Light::update (void)
 {_
-    level    = owner->level;
-    strength = orig_strength * TILE_WIDTH;
+    if (!strength) {
+        DIE("no light strength set");
+    }
 
+    level = owner->level;
     max_light_rays = LIGHT_MAX_RAYS;
 
     ray.resize(max_light_rays);

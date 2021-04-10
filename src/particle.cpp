@@ -27,11 +27,17 @@ void Level::new_internal_particle (
     if (id.ok()) {
         auto t = thing_find(id);
         if (t) {
+            if (t->is_being_destroyed) {
+                t->log("Do not internal create particle, as being destroyed");
+                return;
+            }
+
             if (t->has_internal_particle) {
                 return;
             }
+
+            t->log("New internal particle");
             t->has_internal_particle = true;
-            t->log("new internal particle");
         }
     }
 
@@ -196,10 +202,16 @@ void Level::new_external_particle (
     if (id.ok()) {
         auto t = thing_find(id);
         if (t) {
-            t->log("new external particle");
+            if (t->is_being_destroyed) {
+                t->log("Do not create external particle, as being destroyed");
+                return;
+            }
+
             if (t->has_external_particle) {
                 return;
             }
+
+            t->log("New external particle");
             t->has_external_particle = true;
         }
     }
@@ -352,6 +364,7 @@ bool Thing::particle_anim_exists (void)
 void Thing::delete_particle (void)
 {_
     if (has_internal_particle) {
+        log("Delete particle: has internal particle");
         auto e = std::remove_if(level->all_internal_particles.begin(),
                                 level->all_internal_particles.end(),
             [=, this] (Particle &p) { 
@@ -364,12 +377,17 @@ void Thing::delete_particle (void)
             }
         );
 
+        if (e == level->all_internal_particles.end()) {
+            err("Delete internal particle failed");
+        }
+
         level->all_internal_particles.erase(e, 
                                             level->all_internal_particles.end());
         has_internal_particle = false;
     }
 
     if (has_external_particle) {
+        log("Delete particle: has external particle");
         auto e = std::remove_if(level->all_external_particles.begin(),
                                 level->all_external_particles.end(),
             [=, this] (Particle &p) { 
@@ -381,6 +399,10 @@ void Thing::delete_particle (void)
                 }
             }
         );
+
+        if (e == level->all_external_particles.end()) {
+            err("Delete internal particle failed");
+        }
 
         level->all_external_particles.erase(e, 
                                             level->all_external_particles.end());
