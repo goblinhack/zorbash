@@ -14,8 +14,28 @@
 
 void player_tick (void)
 {_
+    //
+    // Trying to move when the console is visible.
+    //
     if (wid_console_window && wid_console_window->visible) {
         return;
+    }
+
+    //
+    // Trying to move when moving items?
+    //
+    switch (game->state) {
+        case Game::STATE_NORMAL:
+            break;
+        case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
+            LOG("Ignore player action when moving items");
+            return;
+        case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+            LOG("Ignore player action when collectin items");
+            return;
+        case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
+            LOG("Ignore player action when choosing target");
+            return;
     }
 
     auto level = game->level;
@@ -28,12 +48,15 @@ void player_tick (void)
         return;
     }
 
-    float delta = 0.2;
+    //
+    // Trying to scroll the map?
+    //
+    const float map_move_scroll_delta = 0.2;
     bool some_key_event_was_pressed = false;
     const uint8_t *state = SDL_GetKeyboardState(0);
 
     if (state[game->config.key_map_left]) {
-        level->map_wanted_at.x -= delta;
+        level->map_wanted_at.x -= map_move_scroll_delta;
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
@@ -41,7 +64,7 @@ void player_tick (void)
     }
 
     if (state[game->config.key_map_right]) {
-        level->map_wanted_at.x += delta;
+        level->map_wanted_at.x += map_move_scroll_delta;
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
@@ -49,7 +72,7 @@ void player_tick (void)
     }
 
     if (state[game->config.key_map_up]) {
-        level->map_wanted_at.y -= delta;
+        level->map_wanted_at.y -= map_move_scroll_delta;
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
@@ -57,7 +80,7 @@ void player_tick (void)
     }
 
     if (state[game->config.key_map_down]) {
-        level->map_wanted_at.y += delta;
+        level->map_wanted_at.y += map_move_scroll_delta;
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
@@ -279,9 +302,9 @@ void player_tick (void)
                 }
             }
         } else if (level->cursor->mid_at == player->mid_at) {
-            auto delta = player->dir_to_direction();
-            point p = make_point(player->mid_at.x + delta.x,
-                                 player->mid_at.y + delta.y);
+            auto player_move_delta = player->dir_to_direction();
+            point p = make_point(player->mid_at.x + player_move_delta.x,
+                                 player->mid_at.y + player_move_delta.y);
             if (level->is_movement_blocking_hard(p.x, p.y) ||
                 level->is_movement_blocking_soft(p.x, p.y)) {
                 player->try_to_jump(make_point(player->mid_at));
