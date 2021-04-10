@@ -34,7 +34,7 @@ Sound effects
 - Sword sounds by XxChr0nosxX, [found here](https://freesound.org/people/XxChr0nosxX/)
 - Wood break sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
 - Footstep sounds by Rico Casazza, [found here](https://freesound.org/people/Rico_Casazza/)
-- Rag growl sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
+- Rat growl sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
 - Rat hiss sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
 - Rat squeak sounds by tim.kahn, [found here](https://freesound.org/people/tim.kahn/)
 - Grunt squeak sounds by vmgraw, [found here](https://freesound.org/people/vmgraw/)
