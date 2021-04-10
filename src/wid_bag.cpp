@@ -320,7 +320,8 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
 
             delete wid_thing_info_window2;
 
-            wid_thing_info_window2 = game->wid_thing_info_create_popup(o, tl2, br2);
+            wid_thing_info_window2 = 
+                    game->wid_thing_info_create_popup(o, tl2, br2);
             if (!wid_thing_info_window2) {
                 return;
             }
