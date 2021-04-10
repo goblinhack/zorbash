@@ -46,7 +46,7 @@ def tp_init(name, text_name):
     x.set_light_color("green")
     x.set_light_strength(1)
     x.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
-    x.set_minion_leash_distance(10)
+    x.set_minion_leash_distance(8)
     x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(20)
     x.set_modifier_defence(12)

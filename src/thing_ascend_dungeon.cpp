@@ -57,5 +57,5 @@ bool Thing::ascend_dungeon_tick (void)
 
 bool Thing::ascend_dungeon (void)
 {_
-    return ascend(-2);
+    return ascend(2);
 }

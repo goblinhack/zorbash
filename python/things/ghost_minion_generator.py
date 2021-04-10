@@ -43,7 +43,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_light_color("cyan")
     x.set_long_text_description("A bone portal which spews the angry spirits of those long passed.")
-    x.set_minion_limit(10)
+    x.set_minion_limit(5)
     x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(0)
     x.set_modifier_defence(0)

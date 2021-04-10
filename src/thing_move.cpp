@@ -567,10 +567,21 @@ void Thing::move_to_immediately (fpoint to)
     update_pos(to, true);
     move_finish();
 
-    //
-    // End of jump handles this
-    //
-    if (!is_jumping) {
+    if (is_changing_level ||
+        is_hidden || 
+        is_falling || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_descend_sewer || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_sewer || 
+        is_jumping) { 
+        //
+        // Things like changing level, don't look at the location until
+        // the interpolated position is updated else we can look at the
+        // old level coords on the new level and collide with the wrong
+        // things
+        //
+    } else {
         location_check();
     }
 
