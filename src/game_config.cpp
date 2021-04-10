@@ -98,7 +98,7 @@ void Config::reset (void)
     key_screenshot               = {SDL_SCANCODE_F10};
     key_throw                    = {SDL_SCANCODE_T};
     key_inventory                = {SDL_SCANCODE_I};
-    key_console                  = {SDL_SCANCODE_ESCAPE};
+    key_console                  = {SDL_SCANCODE_TAB};
     key_unused3                  = 0;
     key_unused4                  = 0;
     key_unused5                  = 0;

@@ -49,8 +49,9 @@ void game_notice (std::string s)
 
     auto m = TERM_WIDTH / 2;
     auto n = TERM_HEIGHT / 2;
-    point tl = make_point(m - UI_WID_POPUP_WIDTH_NORMAL / 2, n - 2);
-    point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, n + 2);
+    int w = (s.size() / 2) + 3;
+    point tl = make_point(m - w, n - 2);
+    point br = make_point(m + w - 1, n + 2);
     auto width = br.x - tl.x;
 
     game_notice_window = new WidPopup("Game notice", tl, br, nullptr, "", false, false);
