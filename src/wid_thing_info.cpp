@@ -181,12 +181,12 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
             }
             if (min_value == max_value) {
                 wid_popup_window->log("%%fg=white$Nutrition " + 
-                                        t->get_nutrition_dice_str());
+                                      t->get_nutrition_dice_str());
             } else {
                 wid_popup_window->log("%%fg=white$Nutrition " + 
-                                        std::to_string(min_value) + "-" + 
-                                        std::to_string(max_value) + " (" + 
-                                        t->get_nutrition_dice_str() + ")");
+                                      std::to_string(min_value) + "-" + 
+                                      std::to_string(max_value) + " (" + 
+                                      t->get_nutrition_dice_str() + ")");
             }
         }
     }
@@ -201,14 +201,14 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         }
         if (t->get_health() == t->get_health_max()) {
             snprintf(tmp, sizeof(tmp) - 1,
-                     "%%fg=white$Health%15d", t->get_health());
+                     "%%fg=white$Health%15d ``````", t->get_health());
         } else {
             snprintf(tmp2, sizeof(tmp2) - 1,
                      "%d/%d",
                      t->get_health(),
                      t->get_health_max());
             snprintf(tmp, sizeof(tmp) - 1,
-                     "%%fg=white$Health%15s", tmp2);
+                     "%%fg=white$Health%15s ``````", tmp2);
         }
         wid_popup_window->log(tmp);
     }
@@ -226,7 +226,7 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
                 snprintf(tmp2, sizeof(tmp2) - 1, "%s",
                          t->get_damage_melee_dice_str().c_str());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Damage%15s", tmp2);
+                         "%%fg=white$Damage%15s ``````", tmp2);
             } else {
                 snprintf(tmp2, sizeof(tmp2) - 1,
                          "%d-%d(%s)",
@@ -234,7 +234,7 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
                          max_value,
                          t->get_damage_melee_dice_str().c_str());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Damage%15s", tmp2);
+                         "%%fg=white$Damage%15s ``````", tmp2);
             }
             wid_popup_window->log(tmp);
         }
@@ -253,7 +253,7 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
                 snprintf(tmp2, sizeof(tmp2) - 1, "%s",
                          t->get_damage_bite_dice_str().c_str());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Bite  %15s", tmp2);
+                         "%%fg=white$Bite  %21s", tmp2);
             } else {
                 snprintf(tmp2, sizeof(tmp2) - 1,
                          "%d-%d(%s)",
@@ -261,7 +261,7 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
                          max_value,
                          t->get_damage_bite_dice_str().c_str());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Bite  %15s", tmp2);
+                         "%%fg=white$Bite  %21s", tmp2);
             }
             wid_popup_window->log(tmp);
         }
@@ -269,28 +269,28 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
 
     if (t->is_alive_monst() || t->is_player()) {
         snprintf(tmp, sizeof(tmp) - 1,
-                 "%%fg=white$Attack          %2d%-3s",
+                 "%%fg=white$Attack          %2d%-3s to dmg",
                  t->get_modifier_attack(),
                  modifier_to_bonus_slash_str(
                     t->get_modifier_attack()).c_str());
         wid_popup_window->log(tmp);
 
         snprintf(tmp, sizeof(tmp) - 1,
-                 "%%fg=white$Defence         %2d%-3s",
+                 "%%fg=white$Defence         %2d%-3s ``````",
                  t->get_modifier_defence(),
                  modifier_to_bonus_slash_str(
                     t->get_modifier_defence()).c_str());
         wid_popup_window->log(tmp);
 
         snprintf(tmp, sizeof(tmp) - 1,
-                 "%%fg=white$Strength        %2d%-3s",
+                 "%%fg=white$Strength        %2d%-3s to dmg",
                  t->get_modifier_strength(),
                  modifier_to_bonus_slash_str(
                     t->get_modifier_strength()).c_str());
         wid_popup_window->log(tmp);
 
         snprintf(tmp, sizeof(tmp) - 1,
-                 "%%fg=white$Constitution    %2d%-3s",
+                 "%%fg=white$Constitution    %2d%-3s ``````",
                  t->get_modifier_constitution(),
                  modifier_to_bonus_slash_str(
                     t->get_modifier_constitution()).c_str());
@@ -418,7 +418,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
     int height = 33;
     point tl = make_point(0, TERM_HEIGHT - 2 - height);
-    point br = make_point(22, TERM_HEIGHT - 2);
+    point br = make_point(29, TERM_HEIGHT - 2);
 
     t->log("Thing info create window");
     wid_thing_info_window = wid_thing_info_create_popup(t, tl, br);
