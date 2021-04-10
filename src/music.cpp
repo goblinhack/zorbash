@@ -31,7 +31,7 @@ public:
     uint32_t rate = 44100;
 };
 
-static std::map<std::string, std::shared_ptr< class music > > all_music;
+static std::map<std::string, class music *> all_music;
 
 static std::string music_current;
 
@@ -65,7 +65,7 @@ bool music_load (uint32_t rate, const std::string &file,
         }
     }
 
-    auto m = std::make_shared< class music >(name_alias);
+    class music * m = new music(name_alias);
 
     m->rate = rate;
     m->data = file_load(file.c_str(), &m->len);

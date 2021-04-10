@@ -31,7 +31,7 @@ public:
     float volume {};
 };
 
-static std::map<std::string, std::shared_ptr< class sound > > all_sound;
+static std::map<std::string, class sound *> all_sound;
 
 bool sound_init_done;
 
@@ -73,7 +73,7 @@ bool sound_load (float volume, const std::string &file,
         }
     }
 
-    auto s = std::make_shared< class sound >(alias);
+    class sound * s = new sound(alias);
 
     s->volume = volume;
     s->data = file_load(file.c_str(), &s->len);
