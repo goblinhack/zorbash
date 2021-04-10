@@ -11,6 +11,7 @@
 #include "my_wid_thing_collect.h"
 #include "my_tile.h"
 #include "my_wid_console.h"
+#include "my_wid_thing_info.h"
 #include "my_wid_bag.h"
 #include "my_level.h"
 #include "my_thing.h"
@@ -106,6 +107,21 @@ _
     }
 
     change_state(Game::STATE_COLLECTING_ITEMS);
+
+    //
+    // Might as well show something; the player
+    //
+    if (player) {
+        int height = 33;
+        point tl = make_point(0, TERM_HEIGHT - 2 - height);
+        point br = make_point(22, TERM_HEIGHT - 2);
+        wid_thing_info_window = wid_thing_info_create_popup(player, tl, br);
+
+        int utilized = wid_thing_info_window->wid_text_area->line_count;
+        wid_move_delta(wid_thing_info_window->wid_popup_container, 0, 
+                       height - utilized + 2);
+        wid_resize(wid_thing_info_window->wid_popup_container, -1, utilized - 2);
+    }
 
     //
     // bag_primary
