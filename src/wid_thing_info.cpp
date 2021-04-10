@@ -302,35 +302,45 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         wid_popup_window->log(" ");
         wid_popup_window->log(danger_level);
 
-        auto attack_melee_dice = t->get_damage_melee_dice();
-        auto kill_count = player->get_health() / attack_melee_dice.max_roll();
+        auto max_damage = t->get_damage_max();
+        if (max_damage > 0) {
+            auto kill_count = player->get_health() / max_damage;
 
-        //
-        // Oh dear.
-        //
-        if (kill_count == 0) {
-            kill_count = 1;
-        }
+            //
+            // Oh dear.
+            //
+            if (kill_count == 0) {
+                kill_count = 1;
+            }
 
-        if (kill_count == 1) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("%%fg=red$Could kill you in");
-            wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + " hit!");
-        } else if (kill_count <= 2) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("%%fg=red$Could kill you in");
-            wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + " hits");
-        } else if (kill_count <= 5) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("%%fg=orange$Could kill you in");
-            wid_popup_window->log("%%fg=orange$" + std::to_string(kill_count) + " hits");
+            if (kill_count == 1) {
+                wid_popup_window->log(" ");
+                wid_popup_window->log("%%fg=red$Could kill you in");
+                wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
+                                      " hit!");
+            } else if (kill_count <= 2) {
+                wid_popup_window->log(" ");
+                wid_popup_window->log("%%fg=red$Could kill you in");
+                wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
+                                      " hits");
+            } else if (kill_count <= 5) {
+                wid_popup_window->log(" ");
+                wid_popup_window->log("%%fg=orange$Could kill you in");
+                wid_popup_window->log("%%fg=orange$" + std::to_string(kill_count) + 
+                                      " hits");
+            } else if (kill_count <= 10) {
+                wid_popup_window->log(" ");
+                wid_popup_window->log("Could kill you in");
+                wid_popup_window->log(std::to_string(kill_count) + " hits");
+            }
         }
     }
 
     if (tp->charge_count()) {
         if (t->get_charge_count() > 1) {
             wid_popup_window->log(" ");
-            wid_popup_window->log("Has " + std::to_string(t->get_charge_count()) + " charges left");
+            wid_popup_window->log("Has " + 
+                                  std::to_string(t->get_charge_count()) + " charges left");
         } else {
             wid_popup_window->log(" ");
             wid_popup_window->log("Has one charge left");

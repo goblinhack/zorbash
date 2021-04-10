@@ -644,6 +644,8 @@ public:
     int is_descend_dungeon(void) const;
     int is_descend_sewer(void) const;
     int is_described_when_hovering_over(void) const;
+    int get_damage_max(void);
+    int get_damage_min(void);
     int is_dirt(void) const;
     int is_door(void) const;
     int is_droppable(void) const;
