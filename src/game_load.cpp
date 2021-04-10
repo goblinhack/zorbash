@@ -775,10 +775,12 @@ Game::load (std::string file_to_load, class Game &target)
         return false;
     }
 
+#if 0
     if (g_opt_debug3) {
         std::cout << "decompressed as ";
         hexdump((const unsigned char *)uncompressed, uncompressed_len);
     }
+#endif
 
     std::string s((const char*)uncompressed, (size_t)uncompressed_len);
     std::istringstream in(s);

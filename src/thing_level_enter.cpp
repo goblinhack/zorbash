@@ -66,12 +66,16 @@ void Thing::level_enter (void)
     //
     // Can be shown on screen again.
     //
-    is_changing_level             = false;
-    is_waiting_to_ascend_dungeon  = false;
-    is_waiting_to_descend_sewer   = false;
+    is_waiting_to_ascend_dungeon = false;
+    is_waiting_to_descend_sewer = false;
     is_waiting_to_descend_dungeon = false;
-    is_waiting_to_ascend_sewer    = false;
-    is_waiting_to_fall            = false;
+    is_waiting_to_ascend_sewer = false;
+    is_waiting_to_fall = false;
+
+    // 
+    // Allow this once descend or ascend is completed
+    //
+    // is_changing_level = false;
 
     game->request_update_rightbar = true;
 }

@@ -553,10 +553,12 @@ bool Game::save (std::string file_to_save)
     HEAP_ALLOC(compressed, uncompressed_len);
     memcpy(uncompressed, data.c_str(), uncompressed_len);
 
+#if 0
     if (g_opt_debug3) {
         std::cout << "before compression ";
         (void) hexdump((const unsigned char*)uncompressed, uncompressed_len);
     }
+#endif
 
     if (lzo_init() != LZO_E_OK) {
         ERR("LZO init fail: enable '-DLZO_DEBUG' for diagnostics)");
@@ -602,10 +604,12 @@ bool Game::save (std::string file_to_save)
     //
     // Dump the post compress buffer
     //
+#if 0
     if (g_opt_debug3) {
         std::cout << "after compression ";
         (void) hexdump((const unsigned char *)compressed, compressed_len);
     }
+#endif
 
     //
     // Save the post compress buffer

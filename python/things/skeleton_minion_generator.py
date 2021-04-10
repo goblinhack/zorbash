@@ -42,7 +42,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_light_color("cyan")
     x.set_long_text_description("A grave portal from which the dead crawl out.")
-    x.set_minion_limit(10)
+    x.set_minion_limit(4)
     x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(0)
     x.set_modifier_defence(0)
