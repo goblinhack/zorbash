@@ -1166,7 +1166,7 @@ void sdl_loop (void)
         if (g_errored) {
             if (g_errored != old_g_errored) {
                 ERR("An error occurred. Check the logs above.");
-                CON("To dismiss this console, press ESCAPE.");
+                CON("To dismiss this console, press TAB.");
                 CON("To continue playing at your own risk, try 'clear errored'");
                 if (wid_console_window && !(wid_console_window->visible)) {
                     wid_visible(wid_console_window);

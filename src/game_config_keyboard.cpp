@@ -584,9 +584,9 @@ static void game_config_key_screenshot_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
-static void grab_key (void)
+static void grab_key (const std::string which)
 {_
-    game_notice("Press a key");
+    game_notice("Press a key for " + which);
     g_grab_next_key = true;
 }
 
@@ -670,245 +670,245 @@ static uint8_t game_config_keyboard_profile_wasd (Widp w, int32_t x, int32_t y, 
 
 static uint8_t game_config_key_move_left (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("move left");
     on_sdl_key_grab = game_config_key_move_left_set;
     return true;
 }
 
 static uint8_t game_config_key_move_right (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("move right");
     on_sdl_key_grab = game_config_key_move_right_set;
     return true;
 }
 
 static uint8_t game_config_key_move_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("move up");
     on_sdl_key_grab = game_config_key_move_up_set;
     return true;
 }
 
 static uint8_t game_config_key_move_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("move down");
     on_sdl_key_grab = game_config_key_move_down_set;
     return true;
 }
 
 static uint8_t game_config_key_map_left (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("map left");
     on_sdl_key_grab = game_config_key_map_left_set;
     return true;
 }
 
 static uint8_t game_config_key_map_right (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("map right");
     on_sdl_key_grab = game_config_key_map_right_set;
     return true;
 }
 
 static uint8_t game_config_key_map_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("map up");
     on_sdl_key_grab = game_config_key_map_up_set;
     return true;
 }
 
 static uint8_t game_config_key_map_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("map down");
     on_sdl_key_grab = game_config_key_map_down_set;
     return true;
 }
 
 static uint8_t game_config_key_attack (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("attack");
     on_sdl_key_grab = game_config_key_attack_set;
     return true;
 }
 
 static uint8_t game_config_key_wait_or_collect (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("wait or collect");
     on_sdl_key_grab = game_config_key_wait_or_collect_set;
     return true;
 }
 
 static uint8_t game_config_key_jump (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("jump");
     on_sdl_key_grab = game_config_key_jump_set;
     return true;
 }
 
 static uint8_t game_config_key_throw (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("item throw");
     on_sdl_key_grab = game_config_key_throw_set;
     return true;
 }
 
 static uint8_t game_config_key_inventory (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("show inventory");
     on_sdl_key_grab = game_config_key_inventory_set;
     return true;
 }
 
 static uint8_t game_config_key_drop (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("item drop");
     on_sdl_key_grab = game_config_key_drop_set;
     return true;
 }
 
 static uint8_t game_config_key_use (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("item use");
     on_sdl_key_grab = game_config_key_use_set;
     return true;
 }
 
 static uint8_t game_config_key_eat (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("item eat");
     on_sdl_key_grab = game_config_key_eat_set;
     return true;
 }
 
 static uint8_t game_config_key_action0 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 0");
     on_sdl_key_grab = game_config_key_action0_set;
     return true;
 }
 
 static uint8_t game_config_key_action1 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 1");
     on_sdl_key_grab = game_config_key_action1_set;
     return true;
 }
 
 static uint8_t game_config_key_action2 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 2");
     on_sdl_key_grab = game_config_key_action2_set;
     return true;
 }
 
 static uint8_t game_config_key_action3 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 3");
     on_sdl_key_grab = game_config_key_action3_set;
     return true;
 }
 
 static uint8_t game_config_key_action4 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 4");
     on_sdl_key_grab = game_config_key_action4_set;
     return true;
 }
 
 static uint8_t game_config_key_action5 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 5");
     on_sdl_key_grab = game_config_key_action5_set;
     return true;
 }
 
 static uint8_t game_config_key_action6 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 6");
     on_sdl_key_grab = game_config_key_action6_set;
     return true;
 }
 
 static uint8_t game_config_key_action7 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 7");
     on_sdl_key_grab = game_config_key_action7_set;
     return true;
 }
 
 static uint8_t game_config_key_action8 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 8");
     on_sdl_key_grab = game_config_key_action8_set;
     return true;
 }
 
 static uint8_t game_config_key_action9 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("action 9");
     on_sdl_key_grab = game_config_key_action9_set;
     return true;
 }
 
 static uint8_t game_config_key_save (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("save game");
     on_sdl_key_grab = game_config_key_save_set;
     return true;
 }
 
 static uint8_t game_config_key_load (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("load game");
     on_sdl_key_grab = game_config_key_load_set;
     return true;
 }
 
 static uint8_t game_config_key_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("zoom in");
     on_sdl_key_grab = game_config_key_zoom_in_set;
     return true;
 }
 
 static uint8_t game_config_key_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("zoom out");
     on_sdl_key_grab = game_config_key_zoom_out_set;
     return true;
 }
 
 static uint8_t game_config_key_pause (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("pause game");
     on_sdl_key_grab = game_config_key_pause_set;
     return true;
 }
 
 static uint8_t game_config_key_help (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("help");
     on_sdl_key_grab = game_config_key_help_set;
     return true;
 }
 
 static uint8_t game_config_key_console (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("toggle console");
     on_sdl_key_grab = game_config_key_console_set;
     return true;
 }
 
 static uint8_t game_config_key_quit (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("quit");
     on_sdl_key_grab = game_config_key_quit_set;
     return true;
 }
 
 static uint8_t game_config_key_screenshot (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    grab_key();
+    grab_key("screenshot grab");
     on_sdl_key_grab = game_config_key_screenshot_set;
     return true;
 }
