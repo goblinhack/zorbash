@@ -699,8 +699,8 @@ void Nodes::init_nodes (void)
             n->y                                     = 0;
             n->is_key                                = false;
             n->is_lock                               = false;
-            n->is_ascend_dungeon                           = false;
-            n->is_descend_dungeon                               = false;
+            n->is_ascend_dungeon                     = false;
+            n->is_descend_dungeon                    = false;
             n->on_critical_path                      = false;
             n->dir_up                                = false;
             n->dir_down                              = false;
