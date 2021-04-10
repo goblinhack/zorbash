@@ -450,7 +450,6 @@ static void usage (void)
     CON(" --debug                     // most debugs");
     CON(" --debug2                    // + memory checks");
     CON(" --debug3                    // + out of bounds checks");
-    CON(" --ascii-mode                // pseudo ascii mode");
     CON(" --seed <name/number>");
     CON(" ");
     CON("Written by goblinhack@gmail.com");
@@ -602,7 +601,7 @@ int32_t main (int32_t argc, char *argv[])
     // instead of CON until we set stdout or you see two logs
     //////////////////////////////////////////////////////////////////////////////
 
-    LOG("INI: Create ascii console");
+    LOG("INI: Create console");
     ascii_init();
 
     //
