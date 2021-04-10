@@ -27,14 +27,6 @@ const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_di
 const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
 int Thing::get_nutrition (void) const {_ return (tp()->nutrition_dice().roll()); }
 
-const Dice& Thing::get_damage_melee_dice (void) const {_ return (tp()->get_damage_melee_dice()); }
-const std::string& Thing::get_damage_melee_dice_str (void) const {_ return (tp()->get_damage_melee_dice_str()); }
-int Thing::get_damage_melee (void) const {_ return (tp()->get_damage_melee_dice().roll()); }
-
-const Dice& Thing::get_damage_bite_dice (void) const {_ return (tp()->get_damage_bite_dice()); }
-const std::string& Thing::get_damage_bite_dice_str (void) const {_ return (tp()->get_damage_bite_dice_str()); }
-int Thing::get_damage_bite (void) const {_ return (tp()->get_damage_bite_dice().roll()); }
-
 const Dice& Thing::get_health_initial_dice (void) const {_ return (tp()->get_health_initial_dice()); }
 const std::string& Thing::get_health_initial_dice_str (void) const {_ return (tp()->get_health_initial_dice_str()); }
 int Thing::get_health_initial (void) const {_ return (tp()->get_health_initial_dice().roll()); }

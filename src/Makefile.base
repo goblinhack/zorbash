@@ -155,6 +155,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_ascend_sewer.o          \
     $(OBJDIR)/thing_astar.o                 \
     $(OBJDIR)/thing_attack.o                \
+    $(OBJDIR)/thing_damage.o                \
     $(OBJDIR)/thing_avoid.o                 \
     $(OBJDIR)/thing_bag.o                   \
     $(OBJDIR)/thing_bounce.o                \
