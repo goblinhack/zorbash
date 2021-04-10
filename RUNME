@@ -90,7 +90,7 @@ Build options:
 
 usage $0 [options]
 
-        [--dev] Enable development warnings
+        [--dev]  Enable development warnings
         [--dev2] Enable stack checking
 %%
 }

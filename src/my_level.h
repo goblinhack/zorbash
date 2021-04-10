@@ -212,7 +212,7 @@ public:
                 things_to_walk[idx] = (*_vec_)[idx];                \
             for(size_t idx = 0; idx < things_to_walk_size; idx++) { \
                 Thingp t;                                           \
-                t = (*_vec_)[idx];                                  \
+                t = things_to_walk[idx];                            \
                 verify(t);                                          \
 
     #define FOR_ALL_THINGS(level, t, x, y)                          \
