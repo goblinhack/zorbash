@@ -1023,7 +1023,7 @@ PyObject *tp_spawn_at_if_possible (PyObject *obj, PyObject *args, PyObject *keyw
     Py_RETURN_TRUE;
 }
 
-PyObject *tp_kill_if (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -1070,7 +1070,47 @@ PyObject *tp_kill_if (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_FALSE;
     }
 
-    t->kill_if(std::string(what), point(x, y));
+    t->if_matches_then_kill(std::string(what), point(x, y));
+
+    Py_RETURN_TRUE;
+}
+
+PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *what = nullptr;
+    uint32_t id = 0;
+
+    static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+        ERR("%s: bad args", __FUNCTION__);
+        Py_RETURN_FALSE;
+    }
+
+    if (!id) {
+        ERR("%s: missing 'id'", __FUNCTION__);
+        Py_RETURN_FALSE;
+    }
+
+    if (!what) {
+        ERR("%s: missing 'what'", __FUNCTION__);
+        Py_RETURN_FALSE;
+    }
+
+    PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
+
+    auto level = game->level;
+    if (!level) {
+        Py_RETURN_FALSE;
+    }
+
+    auto t = level->thing_find(ThingId(id));
+    if (!t) {
+        ERR("%s: cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        Py_RETURN_FALSE;
+    }
+
+    t->matches(std::string(what));
 
     Py_RETURN_TRUE;
 }
@@ -1379,6 +1419,7 @@ TP_BODY_SET_STRING(on_idle_dice)
 TP_BODY_SET_STRING(on_use_do)
 TP_BODY_SET_STRING(on_hit_do)
 TP_BODY_SET_STRING(on_miss_do)
+TP_BODY_SET_STRING(on_lifespan_do)
 TP_BODY_SET_STRING(on_bite_do)
 TP_BODY_SET_STRING(on_move_do)
 TP_BODY_SET_STRING(on_born_do)

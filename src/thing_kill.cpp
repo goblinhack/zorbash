@@ -15,6 +15,8 @@
 #include "my_random.h"
 #include "my_thing_template.h"
 #include "my_string.h"
+#include "my_array_bounds_check.h"
+#include "my_ptrcheck.h"
 
 //
 // Lower level function than dead. Adds the thing to gc.
@@ -156,4 +158,26 @@ void Thing::kill (Thingp killer, const char *reason)
 void Thing::kill (Thingp killer, std::string &reason)
 {_
     kill(killer, reason.c_str());
+}
+
+bool Thing::if_matches_then_kill (const std::string& what, const point &p)
+{_
+    //
+    // Don't destroy the floor under critical items
+    //
+    if ((what == "is_floor") || (what == "is_corridor")) {
+        FOR_ALL_THINGS(level, t, p.x, p.y) {
+            if (t->is_critical_to_level()) {
+                return true;
+            }
+        } FOR_ALL_THINGS_END()
+    }
+
+    FOR_ALL_THINGS(level, t, p.x, p.y) {
+        if (t->matches(what)) {
+            t->dead(this, "killed");
+        }
+    } FOR_ALL_THINGS_END()
+
+    return true;
 }

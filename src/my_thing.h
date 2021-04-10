@@ -263,11 +263,11 @@ public:
     bool is_carrying_treasure(void);
     bool is_enemy(Thingp attacker) const;
     bool is_on_fire(void);
-    bool kill_if(const std::string& what, const point &p);
+    bool if_matches_then_kill(const std::string& what, const point &p);
     bool laser_anim_exists(void);
     bool laser_fire(Thingp item, Thingp target);
     bool location_check();
-    bool match(const std::string& what);
+    bool matches(const std::string& what);
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
     bool move_no_shove(fpoint future_pos);
@@ -340,6 +340,7 @@ public:
     const std::string& on_death_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_miss_do(void) const;
+    const std::string& on_lifespan_do(void) const;
     const std::string& on_move_do(void) const;
     const std::string& on_open_do(void) const;
     const std::string& on_use_do(void) const;
@@ -1090,6 +1091,7 @@ public:
     void on_born(void);
     void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
     void on_miss(Thingp hitter);
+    void on_lifespan(Thingp hitter);
     void on_move(void);
     void on_open(void);
     void on_use(Thingp what);

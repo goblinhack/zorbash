@@ -16,7 +16,8 @@ PyObject *tp_spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *tp_spawn_fire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_kill_if(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_place(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define TP_SET_PROTO(__field__)                                                     \
@@ -274,6 +275,7 @@ TP_SET_PROTO(on_idle_dice)
 TP_SET_PROTO(on_use_do)
 TP_SET_PROTO(on_hit_do)
 TP_SET_PROTO(on_miss_do)
+TP_SET_PROTO(on_lifespan_do)
 TP_SET_PROTO(on_bite_do)
 TP_SET_PROTO(on_born_do)
 TP_SET_PROTO(on_move_do)

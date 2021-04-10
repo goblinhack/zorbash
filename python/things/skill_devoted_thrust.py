@@ -8,11 +8,13 @@ def on_use(owner, skill, target, x, y):
     #zx.topcon("target {} {}".format(zx.thing_get_name(target), zx.thing_get_health(target)))
     bonus = int(zx.thing_get_stamina(owner) / 2)
     if bonus > 1:
-        zx.topcon("%%fg=yellow$You strike with a mighty thrust of {}.%%fg=reset$".format(bonus))
+        if zx.if_matches(owner, "is_player"):
+            zx.topcon("%%fg=yellow$You strike with a mighty thrust of {}.%%fg=reset$".format(bonus))
         zx.thing_incr_current_damage(owner, bonus)
         zx.thing_decr_stamina(owner, bonus)
     else:
-        zx.topcon("You run out of devotion.")
+        if zx.if_matches(owner, "is_player"):
+            zx.topcon("You run out of devotion.")
         zx.thing_skill_deactivate(owner, skill)
 
 def skill_devoted_thrust_init(name, text_name):

@@ -47,6 +47,7 @@ public:
     void destroy();
     void destroyed(void);
     void reset(void);
+    void update(int strength);
     void update(void);
     bool calculate(int last);
     void render_triangle_fans(void);

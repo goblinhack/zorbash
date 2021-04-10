@@ -12,7 +12,7 @@
 #include "my_string.h"
 #include "slre.h"
 
-bool Thing::match (const std::string& what)
+bool Thing::matches (const std::string& what)
 {
     if (strisregexp(what.c_str())) {
         struct slre slre;
