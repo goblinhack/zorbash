@@ -4225,10 +4225,10 @@ def init_tiles1_monsts_and_items():
       "food_frog",
       "bag",
       "thunderstone",
+      "sword_rusty.1",
       "sword_basic.1",
       "axe_basic.1",
       "scythe.1",
-      "",
       "",
       "",
       "",
@@ -6931,6 +6931,26 @@ def init_chasm():
 
 def init_weapons_tiles():
     tiles = [
+      "",
+      "sword_rusty_carry.1",
+      "sword_rusty_carry.2",
+      "sword_rusty_swing_left.1",
+      "sword_rusty_swing_left.2",
+      "sword_rusty_swing_left.3",
+      "sword_rusty_swing_left.4",
+      "sword_rusty_swing_left.5",
+      "sword_rusty_swing_left.6",
+      ###########################################################################
+      "",
+      "",
+      "",
+      "sword_rusty_swing_up.1",
+      "sword_rusty_swing_up.2",
+      "sword_rusty_swing_up.3",
+      "sword_rusty_swing_up.4",
+      "sword_rusty_swing_up.5",
+      "sword_rusty_swing_up.6",
+      ###########################################################################
       "",
       "sword_basic_carry.1",
       "sword_basic_carry.2",
