@@ -417,7 +417,7 @@ void Thing::init (Levelp level,
     }
 
     if (is_carrier_of_treasure_class_a()) {
-        auto W = level->thing_new("sword_basic", mid_at);
+        auto W = level->thing_new("sword_rusty", mid_at);
         carry(W);
     }
 
