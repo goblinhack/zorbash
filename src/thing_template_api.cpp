@@ -201,7 +201,7 @@ int Tp::is_resurrectable(void) const { return _is_resurrectable; }
 int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rrr1(void) const { return _is_rrr1; }
-int Tp::is_rrr10(void) const { return _is_rrr10; }
+int Tp::is_item_carrier(void) const { return _is_item_carrier; }
 int Tp::is_carrier_of_treasure_class_c(void) const { return _is_carrier_of_treasure_class_c; }
 int Tp::is_carrier_of_treasure_class_b(void) const { return _is_carrier_of_treasure_class_b; }
 int Tp::is_carrier_of_treasure_class_a(void) const { return _is_carrier_of_treasure_class_a; }
@@ -441,7 +441,7 @@ void Tp::set_is_resurrectable(int v) { _is_resurrectable = v; }
 void Tp::set_is_ripple(int v) { _is_ripple = v; }
 void Tp::set_is_rock(int v) { _is_rock = v; }
 void Tp::set_is_rrr1(int v) { _is_rrr1 = v; }
-void Tp::set_is_rrr10(int v) { _is_rrr10 = v; }
+void Tp::set_is_item_carrier(int v) { _is_item_carrier = v; }
 void Tp::set_is_carrier_of_treasure_class_c(int v) { _is_carrier_of_treasure_class_c = v; }
 void Tp::set_is_carrier_of_treasure_class_b(int v) { _is_carrier_of_treasure_class_b = v; }
 void Tp::set_is_carrier_of_treasure_class_a(int v) { _is_carrier_of_treasure_class_a = v; }

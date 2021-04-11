@@ -65,6 +65,7 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_weapon_wielder(True)
+    x.set_is_item_carrier(True)
     x.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
     x.set_modifier_attack(10) # 10, means no bonus
     x.set_modifier_constitution(10)

@@ -714,7 +714,7 @@ public:
     int is_ripple(void) const;
     int is_rock(void) const;
     int is_rrr1(void) const;
-    int is_rrr10(void) const;
+    int is_item_carrier(void) const;
     int is_carrier_of_treasure_class_c(void) const;
     int is_carrier_of_treasure_class_b(void) const;
     int is_carrier_of_treasure_class_a(void) const;

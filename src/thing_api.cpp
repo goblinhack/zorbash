@@ -490,9 +490,9 @@ int Thing::is_rrr9(void) const
     return (tp()->is_rrr9());
 }
 
-int Thing::is_rrr10(void) const
+int Thing::is_item_carrier(void) const
 {_
-    return (tp()->is_rrr10());
+    return (tp()->is_item_carrier());
 }
 
 int Thing::is_carrier_of_treasure_class_c(void) const
