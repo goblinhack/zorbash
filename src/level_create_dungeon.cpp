@@ -248,11 +248,13 @@ bool Level::create_dungeon (point3d at, int seed)
                     if (dungeon->is_ascend_dungeon(x, y)) {
                         auto t = thing_new("player2", fpoint(x, y));
 
+#if 0
                         auto w = thing_new("scythe", fpoint(x, y));
                         t->carry(w);
 
                         auto w3 = thing_new("axe_basic", fpoint(x, y));
                         t->carry(w3);
+#endif
 
                         auto w2 = thing_new("sword_basic", fpoint(x, y));
                         t->carry(w2);
@@ -279,7 +281,7 @@ bool Level::create_dungeon (point3d at, int seed)
                         }
 
                         {
-                            auto W = thing_new("wand_descent", fpoint(x, y));
+                            auto W = thing_new("wand_energy", fpoint(x, y));
                             t->carry(W);
                         }
 
