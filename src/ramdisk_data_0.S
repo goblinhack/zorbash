@@ -6,135 +6,135 @@ data_title_small_tga_start_:
 .globl data_title_small_tga_end_
 data_title_small_tga_end_:
 
-.globl data_title_fg3_tga_start_
-data_title_fg3_tga_start_:
-.incbin "../data/gfx/title_fg3.tga"
-.globl data_title_fg3_tga_end_
-data_title_fg3_tga_end_:
+.globl data_title_fg1_tga_start_
+data_title_fg1_tga_start_:
+.incbin "../data/gfx/title_fg1.tga"
+.globl data_title_fg1_tga_end_
+data_title_fg1_tga_end_:
 
-.globl data_glow_tga_start_
-data_glow_tga_start_:
-.incbin "../data/gfx/glow.tga"
-.globl data_glow_tga_end_
-data_glow_tga_end_:
+.globl data_ui_credits_fg_tga_start_
+data_ui_credits_fg_tga_start_:
+.incbin "../data/gfx/ui_credits_fg.tga"
+.globl data_ui_credits_fg_tga_end_
+data_ui_credits_fg_tga_end_:
 
-.globl data_ui_circle_tga_start_
-data_ui_circle_tga_start_:
-.incbin "../data/gfx/ui_circle.tga"
-.globl data_ui_circle_tga_end_
-data_ui_circle_tga_end_:
+.globl data_attack_tga_start_
+data_attack_tga_start_:
+.incbin "../data/gfx/attack.tga"
+.globl data_attack_tga_end_
+data_attack_tga_end_:
 
-.globl data_tiles1_walls_tga_start_
-data_tiles1_walls_tga_start_:
-.incbin "../data/gfx/tiles1_walls.tga"
-.globl data_tiles1_walls_tga_end_
-data_tiles1_walls_tga_end_:
+.globl data_ui_box2_tga_start_
+data_ui_box2_tga_start_:
+.incbin "../data/gfx/ui_box2.tga"
+.globl data_ui_box2_tga_end_
+data_ui_box2_tga_end_:
 
-.globl data_disarm_single_wav_start_
-data_disarm_single_wav_start_:
-.incbin "../data/sounds/abilities/disarm_single.wav"
-.globl data_disarm_single_wav_end_
-data_disarm_single_wav_end_:
+.globl data_ui_box4_tga_start_
+data_ui_box4_tga_start_:
+.incbin "../data/gfx/ui_box4.tga"
+.globl data_ui_box4_tga_end_
+data_ui_box4_tga_end_:
 
-.globl data_blaster_wav_start_
-data_blaster_wav_start_:
-.incbin "../data/sounds/abilities/blaster.wav"
-.globl data_blaster_wav_end_
-data_blaster_wav_end_:
+.globl data_heal_a_wav_start_
+data_heal_a_wav_start_:
+.incbin "../data/sounds/abilities/heal_a.wav"
+.globl data_heal_a_wav_end_
+data_heal_a_wav_end_:
 
-.globl data_teleport_wav_start_
-data_teleport_wav_start_:
-.incbin "../data/sounds/abilities/teleport.wav"
-.globl data_teleport_wav_end_
-data_teleport_wav_end_:
+.globl data_special_b_wav_start_
+data_special_b_wav_start_:
+.incbin "../data/sounds/abilities/special_b.wav"
+.globl data_special_b_wav_end_
+data_special_b_wav_end_:
 
-.globl data_summon_wav_start_
-data_summon_wav_start_:
-.incbin "../data/sounds/abilities/summon.wav"
-.globl data_summon_wav_end_
-data_summon_wav_end_:
+.globl data_shotgun_wav_start_
+data_shotgun_wav_start_:
+.incbin "../data/sounds/abilities/shotgun.wav"
+.globl data_shotgun_wav_end_
+data_shotgun_wav_end_:
 
-.globl data_slime9_wav_start_
-data_slime9_wav_start_:
-.incbin "../data/sounds/creatures/slime9.wav"
-.globl data_slime9_wav_end_
-data_slime9_wav_end_:
+.globl data_growl7_wav_start_
+data_growl7_wav_start_:
+.incbin "../data/sounds/creatures/growl7.wav"
+.globl data_growl7_wav_end_
+data_growl7_wav_end_:
 
-.globl data_hiss10_wav_start_
-data_hiss10_wav_start_:
-.incbin "../data/sounds/creatures/hiss10.wav"
-.globl data_hiss10_wav_end_
-data_hiss10_wav_end_:
+.globl data_hiss7_wav_start_
+data_hiss7_wav_start_:
+.incbin "../data/sounds/creatures/hiss7.wav"
+.globl data_hiss7_wav_end_
+data_hiss7_wav_end_:
 
-.globl data_snake_wav_start_
-data_snake_wav_start_:
-.incbin "../data/sounds/creatures/snake.wav"
-.globl data_snake_wav_end_
-data_snake_wav_end_:
+.globl data_jelly_wav_start_
+data_jelly_wav_start_:
+.incbin "../data/sounds/creatures/jelly.wav"
+.globl data_jelly_wav_end_
+data_jelly_wav_end_:
 
-.globl data_slime7_wav_start_
-data_slime7_wav_start_:
-.incbin "../data/sounds/creatures/slime7.wav"
-.globl data_slime7_wav_end_
-data_slime7_wav_end_:
+.globl data_swarm_wav_start_
+data_swarm_wav_start_:
+.incbin "../data/sounds/creatures/swarm.wav"
+.globl data_swarm_wav_end_
+data_swarm_wav_end_:
 
-.globl data_437653__dersuperanton__moan_male_beat_punch_wav_start_
-data_437653__dersuperanton__moan_male_beat_punch_wav_start_:
-.incbin "../data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav"
-.globl data_437653__dersuperanton__moan_male_beat_punch_wav_end_
-data_437653__dersuperanton__moan_male_beat_punch_wav_end_:
+.globl data_59992__qubodup__swosh_sword_swing_wav_start_
+data_59992__qubodup__swosh_sword_swing_wav_start_:
+.incbin "../data/sounds/impacts/59992__qubodup__swosh-sword-swing.wav"
+.globl data_59992__qubodup__swosh_sword_swing_wav_end_
+data_59992__qubodup__swosh_sword_swing_wav_end_:
 
-.globl data_explode_c_wav_start_
-data_explode_c_wav_start_:
-.incbin "../data/sounds/impacts/explode_c.wav"
-.globl data_explode_c_wav_end_
-data_explode_c_wav_end_:
+.globl data_sear_wav_start_
+data_sear_wav_start_:
+.incbin "../data/sounds/impacts/sear.wav"
+.globl data_sear_wav_end_
+data_sear_wav_end_:
 
-.globl data_pit_trap_damage_wav_start_
-data_pit_trap_damage_wav_start_:
-.incbin "../data/sounds/impacts/pit_trap_damage.wav"
-.globl data_pit_trap_damage_wav_end_
-data_pit_trap_damage_wav_end_:
+.globl data_area_effect_b_wav_start_
+data_area_effect_b_wav_start_:
+.incbin "../data/sounds/impacts/area_effect_b.wav"
+.globl data_area_effect_b_wav_end_
+data_area_effect_b_wav_end_:
 
-.globl data_end_turn_wav_start_
-data_end_turn_wav_start_:
-.incbin "../data/sounds/interface/end_turn.wav"
-.globl data_end_turn_wav_end_
-data_end_turn_wav_end_:
+.globl data_click2_wav_start_
+data_click2_wav_start_:
+.incbin "../data/sounds/interface/click2.wav"
+.globl data_click2_wav_end_
+data_click2_wav_end_:
 
-.globl data_1up_b_wav_start_
-data_1up_b_wav_start_:
-.incbin "../data/sounds/interface/1up_b.wav"
-.globl data_1up_b_wav_end_
-data_1up_b_wav_end_:
+.globl data_blip_wav_start_
+data_blip_wav_start_:
+.incbin "../data/sounds/interface/blip.wav"
+.globl data_blip_wav_end_
+data_blip_wav_end_:
 
-.globl data_step_wav_start_
-data_step_wav_start_:
-.incbin "../data/sounds/misc/step.wav"
-.globl data_step_wav_end_
-data_step_wav_end_:
+.globl data_ding_wav_start_
+data_ding_wav_start_:
+.incbin "../data/sounds/interface/ding.wav"
+.globl data_ding_wav_end_
+data_ding_wav_end_:
 
-.globl data_collect_b_wav_start_
-data_collect_b_wav_start_:
-.incbin "../data/sounds/misc/collect_b.wav"
-.globl data_collect_b_wav_end_
-data_collect_b_wav_end_:
+.globl data_collect_a_wav_start_
+data_collect_a_wav_start_:
+.incbin "../data/sounds/misc/collect_a.wav"
+.globl data_collect_a_wav_end_
+data_collect_a_wav_end_:
 
-.globl data_close_wav_start_
-data_close_wav_start_:
-.incbin "../data/sounds/misc/close.wav"
-.globl data_close_wav_end_
-data_close_wav_end_:
+.globl data_chime_wav_start_
+data_chime_wav_start_:
+.incbin "../data/sounds/misc/chime.wav"
+.globl data_chime_wav_end_
+data_chime_wav_end_:
 
-.globl data_scramble_wav_start_
-data_scramble_wav_start_:
-.incbin "../data/sounds/misc/scramble.wav"
-.globl data_scramble_wav_end_
-data_scramble_wav_end_:
+.globl data_blurb_wav_start_
+data_blurb_wav_start_:
+.incbin "../data/sounds/misc/blurb.wav"
+.globl data_blurb_wav_end_
+data_blurb_wav_end_:
 
-.globl data_freeze_wav_start_
-data_freeze_wav_start_:
-.incbin "../data/sounds/status/freeze.wav"
-.globl data_freeze_wav_end_
-data_freeze_wav_end_:
+.globl data_footsteps2_wav_start_
+data_footsteps2_wav_start_:
+.incbin "../data/sounds/misc/footsteps2.wav"
+.globl data_footsteps2_wav_end_
+data_footsteps2_wav_end_:
 
