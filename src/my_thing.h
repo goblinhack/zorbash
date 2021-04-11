@@ -715,9 +715,9 @@ public:
     int is_rock(void) const;
     int is_rrr1(void) const;
     int is_rrr10(void) const;
-    int is_rrr11(void) const;
-    int is_rrr12(void) const;
-    int is_rrr13(void) const;
+    int is_carrier_of_treasure_class_c(void) const;
+    int is_carrier_of_treasure_class_b(void) const;
+    int is_carrier_of_treasure_class_a(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;

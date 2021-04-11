@@ -241,14 +241,14 @@ class Tp:
     def set_is_rrr10(self, value):
         zx.tp_set_is_rrr10(self, value)
 
-    def set_is_rrr11(self, value):
-        zx.tp_set_is_rrr11(self, value)
+    def set_is_carrier_of_treasure_class_c(self, value):
+        zx.tp_set_is_carrier_of_treasure_class_c(self, value)
 
-    def set_is_rrr12(self, value):
-        zx.tp_set_is_rrr12(self, value)
+    def set_is_carrier_of_treasure_class_b(self, value):
+        zx.tp_set_is_carrier_of_treasure_class_b(self, value)
 
-    def set_is_rrr13(self, value):
-        zx.tp_set_is_rrr13(self, value)
+    def set_is_carrier_of_treasure_class_a(self, value):
+        zx.tp_set_is_carrier_of_treasure_class_a(self, value)
 
     def set_is_torch(self, value):
         zx.tp_set_is_torch(self, value)

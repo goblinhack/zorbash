@@ -246,13 +246,20 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
             if (crit) {
                 TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$",
-                        real_hitter->text_The().c_str(),
-                        damage);
+                       real_hitter->text_The().c_str(),
+                       damage);
             } else {
-                TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
-                        real_hitter->text_The().c_str(),
-                        real_hitter->text_hits().c_str(),
-                        damage);
+                if (hitter->is_weapon()) {
+                    TOPCON("%%fg=red$%s hits you for %d damage with %s!%%fg=reset$",
+                           real_hitter->text_The().c_str(),
+                           damage,
+                           hitter->text_The().c_str());
+                } else {
+                    TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
+                           real_hitter->text_The().c_str(),
+                           real_hitter->text_hits().c_str(),
+                           damage);
+                }
             }
 
             if (real_hitter->is_fire() ||
@@ -267,10 +274,17 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                         real_hitter->text_The().c_str(),
                         damage);
             } else {
-                TOPCON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
-                        real_hitter->text_The().c_str(),
-                        real_hitter->text_hits().c_str(),
-                        damage);
+                if (hitter->is_weapon()) {
+                    TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$",
+                           real_hitter->text_The().c_str(),
+                           damage,
+                           hitter->text_The().c_str());
+                } else {
+                    TOPCON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
+                           real_hitter->text_The().c_str(),
+                           real_hitter->text_hits().c_str(),
+                           damage);
+                }
             }
         }
 
