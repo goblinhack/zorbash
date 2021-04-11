@@ -253,7 +253,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                     TOPCON("%%fg=red$%s hits you for %d damage with %s!%%fg=reset$",
                            real_hitter->text_The().c_str(),
                            damage,
-                           hitter->text_The().c_str());
+                           hitter->text_the().c_str());
                 } else {
                     TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
                            real_hitter->text_The().c_str(),
@@ -278,7 +278,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                     TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$",
                            real_hitter->text_The().c_str(),
                            damage,
-                           hitter->text_The().c_str());
+                           hitter->text_the().c_str());
                 } else {
                     TOPCON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
                            real_hitter->text_The().c_str(),
