@@ -495,19 +495,19 @@ int Thing::is_rrr10(void) const
     return (tp()->is_rrr10());
 }
 
-int Thing::is_rrr11(void) const
+int Thing::is_carrier_of_treasure_class_c(void) const
 {_
-    return (tp()->is_rrr11());
+    return (tp()->is_carrier_of_treasure_class_c());
 }
 
-int Thing::is_rrr12(void) const
+int Thing::is_carrier_of_treasure_class_b(void) const
 {_
-    return (tp()->is_rrr12());
+    return (tp()->is_carrier_of_treasure_class_b());
 }
 
-int Thing::is_rrr13(void) const
+int Thing::is_carrier_of_treasure_class_a(void) const
 {_
-    return (tp()->is_rrr13());
+    return (tp()->is_carrier_of_treasure_class_a());
 }
 
 int Thing::is_torch(void) const

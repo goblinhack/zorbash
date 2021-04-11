@@ -47,8 +47,10 @@ bool Tp::will_avoid_threat (Levelp level, point p) const
                 }
             }
         } else {
+CON("heat %s %d",name().c_str(), heat);
             if (heat >= 4) { // this allows you to skip around lava
                 if (avoids_fire()) {
+CON("heat %s %d avoids fire",name().c_str(), heat);
                     return true;
                 }
             }
@@ -89,12 +91,15 @@ bool Thing::will_avoid_threat (const point &p)
         if (damage_doubled_from_fire()) {
             if (heat > 0) {
                 if (avoids_fire()) {
+con("heat %d avoids fire",heat);
                     return true;
                 }
             }
         } else {
+con("heat %d",heat);
             if (heat >= 4) { // this allows you to skip around lava
                 if (avoids_fire()) {
+con("heat %d avoids fire",heat);
                     return true;
                 }
             }

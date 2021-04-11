@@ -218,9 +218,9 @@ private:
     int _is_rrr1 {};
     int _is_rrr10 {};
     int _is_rrr100 {};
-    int _is_rrr11 {};
-    int _is_rrr12 {};
-    int _is_rrr13 {};
+    int _is_carrier_of_treasure_class_c {};
+    int _is_carrier_of_treasure_class_b {};
+    int _is_carrier_of_treasure_class_a {};
     int _is_torch {};
     int _range_max {};
     int _is_laser_target_select_automatically_when_chosen {};
@@ -580,9 +580,9 @@ public:
     int is_rock(void) const;
     int is_rrr1(void) const;
     int is_rrr10(void) const;
-    int is_rrr11(void) const;
-    int is_rrr12(void) const;
-    int is_rrr13(void) const;
+    int is_carrier_of_treasure_class_c(void) const;
+    int is_carrier_of_treasure_class_b(void) const;
+    int is_carrier_of_treasure_class_a(void) const;
     int is_torch(void) const;
     int range_max(void) const;
     int is_laser_target_select_automatically_when_chosen(void) const;
@@ -822,9 +822,9 @@ public:
     void set_is_rrr1(int);
     void set_is_rrr10(int);
     void set_is_rrr100(int);
-    void set_is_rrr11(int);
-    void set_is_rrr12(int);
-    void set_is_rrr13(int);
+    void set_is_carrier_of_treasure_class_c(int);
+    void set_is_carrier_of_treasure_class_b(int);
+    void set_is_carrier_of_treasure_class_a(int);
     void set_is_torch(int);
     void set_range_max(int);
     void set_is_laser_target_select_automatically_when_chosen(int);

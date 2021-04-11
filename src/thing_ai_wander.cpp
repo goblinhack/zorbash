@@ -200,12 +200,12 @@ bool Thing::ai_choose_wander (point& nh)
 
     target = get_random_scent_target();
     if (!ai_create_path(nh, make_point(mid_at), target)) {
-        dbg("could not wander");
+        dbg("Could not wander");
         return false;
     }
 
     if (target == make_point(mid_at)) {
-        dbg("could not wander; at target");
+        dbg("Could not wander; at target");
         return false;
     }
 
@@ -302,11 +302,11 @@ bool Thing::ai_wander (void)
 bool Thing::ai_escape (void)
 {_
     if (ai_blocked_completely()) {
-        log("Ai escape blocked");
+        log("AI escape blocked");
         return false;
     }
 
-    log("Ai escape");
+    log("AI escape");
     auto tries = 4;
     while (tries--) {
         point nh;

@@ -202,9 +202,9 @@ int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rrr1(void) const { return _is_rrr1; }
 int Tp::is_rrr10(void) const { return _is_rrr10; }
-int Tp::is_rrr11(void) const { return _is_rrr11; }
-int Tp::is_rrr12(void) const { return _is_rrr12; }
-int Tp::is_rrr13(void) const { return _is_rrr13; }
+int Tp::is_carrier_of_treasure_class_c(void) const { return _is_carrier_of_treasure_class_c; }
+int Tp::is_carrier_of_treasure_class_b(void) const { return _is_carrier_of_treasure_class_b; }
+int Tp::is_carrier_of_treasure_class_a(void) const { return _is_carrier_of_treasure_class_a; }
 int Tp::is_torch(void) const { return _is_torch; }
 int Tp::range_max(void) const { return _range_max; }
 int Tp::is_laser_target_select_automatically_when_chosen(void) const { return _is_laser_target_select_automatically_when_chosen; }
@@ -442,9 +442,9 @@ void Tp::set_is_ripple(int v) { _is_ripple = v; }
 void Tp::set_is_rock(int v) { _is_rock = v; }
 void Tp::set_is_rrr1(int v) { _is_rrr1 = v; }
 void Tp::set_is_rrr10(int v) { _is_rrr10 = v; }
-void Tp::set_is_rrr11(int v) { _is_rrr11 = v; }
-void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
-void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
+void Tp::set_is_carrier_of_treasure_class_c(int v) { _is_carrier_of_treasure_class_c = v; }
+void Tp::set_is_carrier_of_treasure_class_b(int v) { _is_carrier_of_treasure_class_b = v; }
+void Tp::set_is_carrier_of_treasure_class_a(int v) { _is_carrier_of_treasure_class_a = v; }
 void Tp::set_is_torch(int v) { _is_torch = v; }
 void Tp::set_range_max(int v) { _range_max = v; }
 void Tp::set_is_laser_target_select_automatically_when_chosen(int v) { _is_laser_target_select_automatically_when_chosen = v; }

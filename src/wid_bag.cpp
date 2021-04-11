@@ -312,7 +312,7 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
     // Prefer to show the thing we are moving
     //
     if (wid_thing_info_window) {
-        int height = 33;
+        int height = 53;
         auto o = t;
         if (o && (o != bag)) {
             point tl2 = make_point(0, TERM_HEIGHT - 2 - height);

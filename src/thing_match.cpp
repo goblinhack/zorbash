@@ -292,13 +292,13 @@ bool Thing::matches (const std::string& what)
     if (is_rrr10() && (what == "is_rrr10")) {
         return true;
     }
-    if (is_rrr11() && (what == "is_rrr11")) {
+    if (is_carrier_of_treasure_class_c() && (what == "is_carrier_of_treasure_class_c")) {
         return true;
     }
-    if (is_rrr12() && (what == "is_rrr12")) {
+    if (is_carrier_of_treasure_class_b() && (what == "is_carrier_of_treasure_class_b")) {
         return true;
     }
-    if (is_rrr13() && (what == "is_rrr13")) {
+    if (is_carrier_of_treasure_class_a() && (what == "is_carrier_of_treasure_class_a")) {
         return true;
     }
     if (is_torch() && (what == "is_torch")) {

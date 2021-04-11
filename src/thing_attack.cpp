@@ -30,7 +30,9 @@ bool Thing::possible_to_attack (const Thingp it)
         }
     }
 
-    if (is_monst() && it->is_attackable_by_monst()) {
+    if (owner && owner->is_monst() && it->is_attackable_by_monst()) {
+        // monst weapn, continue
+    } else if (is_monst() && it->is_attackable_by_monst()) {
         // continue
     } else if (is_player() && it->is_attackable_by_player()) {
         // continue
@@ -287,6 +289,13 @@ _
         }
     }
 
+    if (weapon_get()) {
+        auto delta = it->mid_at- mid_at;
+        move_set_dir_from_delta(delta);
+        use_weapon();
+        return true;
+    }
+
     auto att_mod = modifier_to_bonus(get_modifier_strength()) +
                    modifier_to_bonus(get_modifier_attack());
     if (owner) {
@@ -313,7 +322,13 @@ _
                 TOPCON("You miss %s.", it->text_the().c_str());
                 msg("!");
             } else if (it->is_player()) {
-                TOPCON("%s misses.", text_The().c_str());
+                if (owner) {
+                    TOPCON("%s misses with %s.", 
+                           owner->text_The().c_str(),
+                           text_The().c_str());
+                } else {
+                    TOPCON("%s misses.", text_The().c_str());
+                }
             } else {
                 log("The attack missed (att %d, def %d) on %s",
                     att_mod, def_mod, it->to_string().c_str());
