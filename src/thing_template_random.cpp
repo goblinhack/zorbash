@@ -35,6 +35,9 @@ static Tpidmap tp_treasure;
 static Tpidmap tp_item_class_a;
 static Tpidmap tp_item_class_b;
 static Tpidmap tp_item_class_c;
+static Tpidmap tp_weapon_class_a;
+static Tpidmap tp_weapon_class_b;
+static Tpidmap tp_weapon_class_c;
 static Tpidmap tp_wall_dungeon;
 static Tpidmap tp_sewer_wall;
 static Tpidmap tp_ascend_sewer;
@@ -68,6 +71,12 @@ void tp_random_init (void)
         if (tp->is_treasure_class_a())    { tp_item_class_a.push_back(tp); }
         if (tp->is_treasure_class_b())    { tp_item_class_b.push_back(tp); }
         if (tp->is_treasure_class_c())    { tp_item_class_c.push_back(tp); }
+
+        if (tp->is_weapon()) {
+            if (tp->is_treasure_class_a())    { tp_weapon_class_a.push_back(tp); }
+            if (tp->is_treasure_class_b())    { tp_weapon_class_b.push_back(tp); }
+            if (tp->is_treasure_class_c())    { tp_weapon_class_c.push_back(tp); }
+        }
 
         if (tp->stamina())                 {
             tp->set_is_stamina_check(true);
@@ -203,6 +212,33 @@ Tpp tp_random_item_class_c (void)
         return (nullptr);
     }
     return tp_get_with_rarity_filter(tp_item_class_c);
+}
+
+Tpp tp_random_weapon_class_a (void)
+{_
+    if (unlikely(!tp_weapon_class_a.size())) {
+        ERR("No weapon_class_a found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_weapon_class_a);
+}
+
+Tpp tp_random_weapon_class_b (void)
+{_
+    if (unlikely(!tp_weapon_class_b.size())) {
+        ERR("No weapon_class_b found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_weapon_class_b);
+}
+
+Tpp tp_random_weapon_class_c (void)
+{_
+    if (unlikely(!tp_weapon_class_c.size())) {
+        ERR("No weapon_class_c found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_weapon_class_c);
 }
 
 Tpp tp_random_dirt (void)

@@ -238,8 +238,8 @@ class Tp:
     def set_is_rrr9(self, value):
         zx.tp_set_is_rrr9(self, value)
 
-    def set_is_rrr10(self, value):
-        zx.tp_set_is_rrr10(self, value)
+    def set_is_item_carrier(self, value):
+        zx.tp_set_is_item_carrier(self, value)
 
     def set_is_carrier_of_treasure_class_c(self, value):
         zx.tp_set_is_carrier_of_treasure_class_c(self, value)

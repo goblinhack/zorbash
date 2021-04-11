@@ -289,7 +289,7 @@ bool Thing::matches (const std::string& what)
     if (is_rrr1() && (what == "is_rrr1")) {
         return true;
     }
-    if (is_rrr10() && (what == "is_rrr10")) {
+    if (is_item_carrier() && (what == "is_item_carrier")) {
         return true;
     }
     if (is_carrier_of_treasure_class_c() && (what == "is_carrier_of_treasure_class_c")) {

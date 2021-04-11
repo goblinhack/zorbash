@@ -18,6 +18,16 @@
 #include "my_ptrcheck.h"
 #include "my_string.h"
 
+Thingp Level::thing_new (Tpp tp, const point at)
+{_
+    return thing_new(tp->name(), at);
+}
+
+Thingp Level::thing_new (Tpp tp, const fpoint at)
+{_
+    return thing_new(tp->name(), at);
+}
+
 Thingp Level::thing_new (const std::string& tp_name, Thingp owner)
 {_
     return thing_new(tp_name, owner->mid_at);
@@ -416,9 +426,49 @@ void Thing::init (Levelp level,
         }
     }
 
-    if (is_carrier_of_treasure_class_a()) {
-        auto W = level->thing_new("sword_rusty", mid_at);
-        carry(W);
+    //
+    // Auto carry of weapons?
+    //
+    if (is_weapon_wielder()) {
+        if (is_carrier_of_treasure_class_a()) {
+            auto W = level->thing_new(tp_random_weapon_class_a(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
+        if (is_carrier_of_treasure_class_b()) {
+            auto W = level->thing_new(tp_random_weapon_class_b(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
+        if (is_carrier_of_treasure_class_c()) {
+            auto W = level->thing_new(tp_random_weapon_class_c(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
+    }
+
+    if (is_item_carrier()) {
+        if (is_carrier_of_treasure_class_a()) {
+            auto W = level->thing_new(tp_random_item_class_a(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
+        if (is_carrier_of_treasure_class_b()) {
+            auto W = level->thing_new(tp_random_item_class_b(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
+        if (is_carrier_of_treasure_class_c()) {
+            auto W = level->thing_new(tp_random_item_class_c(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
     }
 
     on_born();

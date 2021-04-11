@@ -755,7 +755,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_ripple)
     TP_SET_DECL(is_rock)
     TP_SET_DECL(is_rrr1)
-    TP_SET_DECL(is_rrr10)
+    TP_SET_DECL(is_item_carrier)
     TP_SET_DECL(is_carrier_of_treasure_class_c)
     TP_SET_DECL(is_carrier_of_treasure_class_b)
     TP_SET_DECL(is_carrier_of_treasure_class_a)

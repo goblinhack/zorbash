@@ -291,6 +291,8 @@ public:
     Thingp skillbox_get(const uint32_t slot);
     Thingp skillbox_get(void);
     Thingp thing_find(const ThingId id);
+    Thingp thing_new(Tpp, const point at);
+    Thingp thing_new(Tpp, const fpoint at);
     Thingp thing_new(const std::string& tp_name, Thingp owner);
     Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
     Thingp thing_new(const std::string& tp_name, const point at);
