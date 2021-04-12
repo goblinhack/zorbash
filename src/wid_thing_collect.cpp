@@ -112,9 +112,9 @@ _
     // Might as well show something; the player
     //
     if (player) {
-        int height = 33;
+        int height = 50;
         point tl = make_point(0, TERM_HEIGHT - 2 - height);
-        point br = make_point(22, TERM_HEIGHT - 2);
+        point br = make_point(29, TERM_HEIGHT - 2);
         wid_thing_info_window = wid_thing_info_create_popup(player, tl, br);
 
         int utilized = wid_thing_info_window->wid_text_area->line_count;

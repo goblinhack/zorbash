@@ -416,7 +416,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     }
     recursion = true;
 
-    int height = 40;
+    int height = 50;
     point tl = make_point(0, TERM_HEIGHT - 2 - height);
     point br = make_point(29, TERM_HEIGHT - 2);
 
@@ -439,7 +439,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         auto o = game->level->thing_find(id);
         if (o) {
             point tl2 = make_point(0, TERM_HEIGHT - 2 - height);
-            point br2 = make_point(22, TERM_HEIGHT - 2);
+            point br2 = make_point(29, TERM_HEIGHT - 2);
             wid_thing_info_window2 = wid_thing_info_create_popup(o, tl2, br2);
             if (!wid_thing_info_window2) {
                 return;
