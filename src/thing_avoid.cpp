@@ -89,15 +89,12 @@ bool Thing::will_avoid_threat (const point &p)
         if (damage_doubled_from_fire()) {
             if (heat > 0) {
                 if (avoids_fire()) {
-con("heat %d avoids fire",heat);
                     return true;
                 }
             }
         } else {
-con("heat %d",heat);
             if (heat >= 4) { // this allows you to skip around lava
                 if (avoids_fire()) {
-con("heat %d avoids fire",heat);
                     return true;
                 }
             }
