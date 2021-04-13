@@ -9,5 +9,9 @@ src/Makefile
 src/Makefile.bak
 windows/python.version.sh
 windows/windows.xml
-zorbash.dSYM/
-zorbash
+src/zorbash-game
+zorbash-game
+zorbash-game.dSYM/
+src/zorbash-game.exe
+zorbash-game.exe
+zorbash-game.exe.dSYM/
