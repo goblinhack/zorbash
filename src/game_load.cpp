@@ -91,7 +91,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          modifier_strength         */ in >> bits(my.t->modifier_strength);
     /* int          owned_count               */ in >> bits(my.t->owned_count);
     /* int          minion_count              */ in >> bits(my.t->minion_count);
-    /* int          spawned_count             */ in >> bits(my.t->spawned_count);
     /* int          charge_count              */ in >> bits(my.t->charge_count);
     /* int          stamina                   */ in >> bits(my.t->stamina);
     /* int          stamina_max               */ in >> bits(my.t->stamina_max);

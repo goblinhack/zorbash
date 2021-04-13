@@ -69,8 +69,8 @@ public:
     int          modifier_defence = {};
     int          modifier_strength = {};
     int          owned_count = {};           // How many things this thing owns.
+    int          spawned_count = {};         // How many things this thing owns.
     int          minion_count = {};          // How many things this thing spawned.
-    int          spawned_count = {};         // How many things this thing spawned.
     int          charge_count = {};          // How many things this thing spawned.
     int          stamina = {};
     int          stamina_max = {};

@@ -9,16 +9,18 @@
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_py_thing.h"
+#include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
 #define THING_BODY_SET_INT(__func__, __api__)                                       \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{	                                                                            \
+{_	                                                                            \
     uint32_t id = 0;	                                                            \
     uint32_t value = 0;	                                                            \
     static char *kwlist[] = {(char*)"id", (char*)"value", 0};	                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "Ii", kwlist, &id, &value)) {    \
+        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -34,11 +36,12 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_GET_INT(__func__, __api__)                                       \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{	                                                                            \
+{_	                                                                            \
     uint32_t id = 0;	                                                            \
     static char *kwlist[] = {(char*)"id", 0};	                                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
+        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -54,11 +57,12 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_GET_STRING(__func__, __api__)                                    \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{	                                                                            \
+{_	                                                                            \
     uint32_t id = 0;	                                                            \
     static char *kwlist[] = {(char*)"id", 0};	                                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
+        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -74,12 +78,13 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_SET_THING(__func__, __api__)                                     \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{	                                                                            \
+{_	                                                                            \
     uint32_t id = 0;	                                                            \
     uint32_t oid = 0;	                                                            \
     static char *kwlist[] = {(char*)"id", (char*)"oid", 0};	                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &oid)) {      \
+        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -111,11 +116,12 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_GET_THING(__func__, __api__)                                     \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{	                                                                            \
+{_	                                                                            \
     uint32_t id = 0;	                                                            \
     static char *kwlist[] = {(char*)"id", 0};	                                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
+        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -132,6 +138,169 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 	                                                                            \
     ThingId found = t->__api__();                                                   \
     return Py_BuildValue("I", found.id);                                            \
+}
+
+#define THING_BODY_GET_BOOL(__func__, __api__)                                      \
+PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
+{_	                                                                            \
+    uint32_t id = 0;	                                                            \
+    static char *kwlist[] = {(char*)"id", 0};	                                    \
+	                                                                            \
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
+        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
+        Py_RETURN_FALSE;	                                                    \
+    }	                                                                            \
+	                                                                            \
+    if (!id) {	                                                                    \
+        ERR("%s: no thing ID set", __FUNCTION__);	                            \
+        Py_RETURN_FALSE;	                                                    \
+    }	                                                                            \
+	                                                                            \
+    Thingp t = game->level->thing_find(id);	                                    \
+    if (!t) {	                                                                    \
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
+        Py_RETURN_FALSE;	                                                    \
+    }	                                                                            \
+	                                                                            \
+    if (t->__api__()) {                                                             \
+        Py_RETURN_TRUE;	                                                            \
+    } else {                                                                        \
+        Py_RETURN_FALSE;	                                                    \
+    }                                                                               \
+}
+
+PyObject *thing_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    int x = -1;
+    int y = -1;
+    static char *kwlist[] = {(char*)"x", (char*)"y", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_FALSE;	
+    }	
+	
+    if (x == -1) {	
+        ERR("%s: no x arg set", __FUNCTION__);	
+        Py_RETURN_NONE;
+    }	
+
+    if (y == -1) {	
+        ERR("%s: no x arg set", __FUNCTION__);	
+        Py_RETURN_NONE;
+    }	
+	
+    auto items = 0;
+    FOR_ALL_THINGS(game->level, t, x, y) {
+        items++;
+    } FOR_ALL_THINGS_END()
+
+    PyObject *lst = PyList_New(items);
+    auto item = 0;
+    FOR_ALL_THINGS(game->level, t, x, y) {
+        PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
+        item++;
+    } FOR_ALL_THINGS_END()
+
+    return (lst);
+}
+
+PyObject *thing_get_coords (PyObject *obj, PyObject *args, PyObject *keywds)
+{_	
+    uint32_t id = 0;	
+    static char *kwlist[] = {(char*)"id", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!id) {	
+        ERR("%s: no thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp t = game->level->thing_find(id);	
+    if (!t) {	
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Py_ssize_t size = 2;
+    auto the_tuple = PyTuple_New(size); // this line crashes the program
+    if (!the_tuple) {
+        ERR("%s: cannot create tuple for ID %u", __FUNCTION__, id);	
+        Py_RETURN_NONE;	
+    }	
+
+    auto err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 0, PyLong_FromLong((long) t->mid_at.x));
+    if (err < 0) {
+        ERR("%s: cannot create tuple (a) for ID %u", __FUNCTION__, id);	
+        Py_RETURN_NONE;	
+    }
+
+    err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 1, PyLong_FromLong((long) t->mid_at.y));
+    if (err < 0) {
+        ERR("%s: cannot create tuple (a) for ID %u", __FUNCTION__, id);	
+        Py_RETURN_NONE;	
+    }
+
+    return the_tuple;
+}
+
+PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
+{_	
+    uint32_t owner_id = 0;	
+    uint32_t item_id = 0;	
+    uint32_t target_id = 0;	
+    static char *kwlist[] = {(char*)"owner", (char*)"item", (char*)"target", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "III", kwlist, &owner_id, &item_id, &target_id)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!owner_id) {	
+        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp owner = game->level->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!item_id) {	
+        ERR("%s: no item thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp item = game->level->thing_find(item_id);	
+    if (!item) {	
+        ERR("%s: cannot find item thing ID %u", __FUNCTION__, item_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!target_id) {	
+        ERR("%s: no target thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp target = game->level->thing_find(target_id);	
+    if (!target) {	
+        ERR("%s: cannot find target thing ID %u", __FUNCTION__, target_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    target->log("is hit by %s owned by %s", 
+                item->to_string().c_str(), owner->to_string().c_str());
+
+    if (target->is_hit_by(item)) {
+        Py_RETURN_TRUE;	
+    } else {
+        Py_RETURN_FALSE;	
+    }
 }
 
 THING_BODY_SET_INT(thing_set_health, set_health)
@@ -167,3 +336,160 @@ THING_BODY_GET_STRING(thing_get_name, text_name)
 THING_BODY_GET_THING(thing_get_immediate_spawned_owner_id, get_immediate_spawned_owner_id)
 THING_BODY_GET_THING(thing_get_immediate_minion_owner_id, get_immediate_minion_owner_id)
 THING_BODY_GET_THING(thing_get_immediate_owner_id, get_immediate_owner_id)
+
+THING_BODY_GET_BOOL(thing_is_bloodied, is_bloodied)
+THING_BODY_GET_BOOL(thing_is_carrying_item, is_carrying_item)
+THING_BODY_GET_BOOL(thing_is_carrying_treasure, is_carrying_treasure)
+THING_BODY_GET_BOOL(thing_is_on_fire, is_on_fire)
+THING_BODY_GET_BOOL(thing_is_able_to_change_levels, is_able_to_change_levels)
+THING_BODY_GET_BOOL(thing_is_able_to_fall, is_able_to_fall)
+THING_BODY_GET_BOOL(thing_is_able_to_see_through_doors, is_able_to_see_through_doors)
+THING_BODY_GET_BOOL(thing_is_able_to_walk_through_walls, is_able_to_walk_through_walls)
+THING_BODY_GET_BOOL(thing_is_acid, is_acid)
+THING_BODY_GET_BOOL(thing_is_acid_lover, is_acid_lover)
+THING_BODY_GET_BOOL(thing_is_active, is_active)
+THING_BODY_GET_BOOL(thing_is_alive_monst, is_alive_monst)
+THING_BODY_GET_BOOL(thing_is_always_hit, is_always_hit)
+THING_BODY_GET_BOOL(thing_is_ascend_dungeon, is_ascend_dungeon)
+THING_BODY_GET_BOOL(thing_is_ascend_sewer, is_ascend_sewer)
+THING_BODY_GET_BOOL(thing_is_attackable_by_monst, is_attackable_by_monst)
+THING_BODY_GET_BOOL(thing_is_attackable_by_player, is_attackable_by_player)
+THING_BODY_GET_BOOL(thing_is_auto_collect_item, is_auto_collect_item)
+THING_BODY_GET_BOOL(thing_is_bag, is_bag)
+THING_BODY_GET_BOOL(thing_is_bleeder, is_bleeder)
+THING_BODY_GET_BOOL(thing_is_blood, is_blood)
+THING_BODY_GET_BOOL(thing_is_blood_splatter, is_blood_splatter)
+THING_BODY_GET_BOOL(thing_is_brazier, is_brazier)
+THING_BODY_GET_BOOL(thing_is_burnable, is_burnable)
+THING_BODY_GET_BOOL(thing_is_chasm, is_chasm)
+THING_BODY_GET_BOOL(thing_is_collect_as_keys, is_collect_as_keys)
+THING_BODY_GET_BOOL(thing_is_collectable, is_collectable)
+THING_BODY_GET_BOOL(thing_is_combustible, is_combustible)
+THING_BODY_GET_BOOL(thing_is_corpse, is_corpse)
+THING_BODY_GET_BOOL(thing_is_corpse_on_death, is_corpse_on_death)
+THING_BODY_GET_BOOL(thing_is_corridor, is_corridor)
+THING_BODY_GET_BOOL(thing_is_critical_to_level, is_critical_to_level)
+THING_BODY_GET_BOOL(thing_is_cursor, is_cursor)
+THING_BODY_GET_BOOL(thing_is_cursor_can_hover_over, is_cursor_can_hover_over)
+THING_BODY_GET_BOOL(thing_is_cursor_can_hover_over_but_needs_double_click, is_cursor_can_hover_over_but_needs_double_click)
+THING_BODY_GET_BOOL(thing_is_cursor_path, is_cursor_path)
+THING_BODY_GET_BOOL(thing_is_dead_on_shove, is_dead_on_shove)
+THING_BODY_GET_BOOL(thing_is_deep_water, is_deep_water)
+THING_BODY_GET_BOOL(thing_is_descend_dungeon, is_descend_dungeon)
+THING_BODY_GET_BOOL(thing_is_descend_sewer, is_descend_sewer)
+THING_BODY_GET_BOOL(thing_is_described_when_hovering_over, is_described_when_hovering_over)
+THING_BODY_GET_BOOL(thing_is_dirt, is_dirt)
+THING_BODY_GET_BOOL(thing_is_door, is_door)
+THING_BODY_GET_BOOL(thing_is_droppable, is_droppable)
+THING_BODY_GET_BOOL(thing_is_ethereal, is_ethereal)
+THING_BODY_GET_BOOL(thing_is_explosion, is_explosion)
+THING_BODY_GET_BOOL(thing_is_extreme_hazard, is_extreme_hazard)
+THING_BODY_GET_BOOL(thing_is_fearless, is_fearless)
+THING_BODY_GET_BOOL(thing_is_fire, is_fire)
+THING_BODY_GET_BOOL(thing_is_flammable, is_flammable)
+THING_BODY_GET_BOOL(thing_is_floating, is_floating)
+THING_BODY_GET_BOOL(thing_is_floor, is_floor)
+THING_BODY_GET_BOOL(thing_is_floor_deco, is_floor_deco)
+THING_BODY_GET_BOOL(thing_is_food, is_food)
+THING_BODY_GET_BOOL(thing_is_food_eater, is_food_eater)
+THING_BODY_GET_BOOL(thing_is_gfx_water, is_gfx_water)
+THING_BODY_GET_BOOL(thing_is_gold, is_gold)
+THING_BODY_GET_BOOL(thing_is_hazard, is_hazard)
+THING_BODY_GET_BOOL(thing_is_humanoid, is_humanoid)
+THING_BODY_GET_BOOL(thing_is_hunger_insatiable, is_hunger_insatiable)
+THING_BODY_GET_BOOL(thing_is_intelligent, is_intelligent)
+THING_BODY_GET_BOOL(thing_is_interesting, is_interesting)
+THING_BODY_GET_BOOL(thing_is_item, is_item)
+THING_BODY_GET_BOOL(thing_is_item_collected_as_gold, is_item_collected_as_gold)
+THING_BODY_GET_BOOL(thing_is_item_eater, is_item_eater)
+THING_BODY_GET_BOOL(thing_is_item_not_stackable, is_item_not_stackable)
+THING_BODY_GET_BOOL(thing_is_jelly, is_jelly)
+THING_BODY_GET_BOOL(thing_is_jelly_baby, is_jelly_baby)
+THING_BODY_GET_BOOL(thing_is_jelly_baby_eater, is_jelly_baby_eater)
+THING_BODY_GET_BOOL(thing_is_jelly_eater, is_jelly_eater)
+THING_BODY_GET_BOOL(thing_is_jelly_parent, is_jelly_parent)
+THING_BODY_GET_BOOL(thing_is_jumper, is_jumper)
+THING_BODY_GET_BOOL(thing_is_jumper_chance_d1000, is_jumper_chance_d1000)
+THING_BODY_GET_BOOL(thing_is_jumper_distance, is_jumper_distance)
+THING_BODY_GET_BOOL(thing_is_jumper_on_low_hp_chance_d1000, is_jumper_on_low_hp_chance_d1000)
+THING_BODY_GET_BOOL(thing_is_key, is_key)
+THING_BODY_GET_BOOL(thing_is_killed_on_hit_or_miss, is_killed_on_hit_or_miss)
+THING_BODY_GET_BOOL(thing_is_killed_on_hitting, is_killed_on_hitting)
+THING_BODY_GET_BOOL(thing_is_laser_target_select_automatically_when_chosen, is_laser_target_select_automatically_when_chosen)
+THING_BODY_GET_BOOL(thing_is_lava, is_lava)
+THING_BODY_GET_BOOL(thing_is_light_blocker, is_light_blocker)
+THING_BODY_GET_BOOL(thing_is_living, is_living)
+THING_BODY_GET_BOOL(thing_is_loggable_for_important_stuff, is_loggable_for_important_stuff)
+THING_BODY_GET_BOOL(thing_is_loggable_for_unimportant_stuff, is_loggable_for_unimportant_stuff)
+THING_BODY_GET_BOOL(thing_is_meat, is_meat)
+THING_BODY_GET_BOOL(thing_is_meat_eater, is_meat_eater)
+THING_BODY_GET_BOOL(thing_is_minion, is_minion)
+THING_BODY_GET_BOOL(thing_is_minion_generator, is_minion_generator)
+THING_BODY_GET_BOOL(thing_is_monst, is_monst)
+THING_BODY_GET_BOOL(thing_is_moveable, is_moveable)
+THING_BODY_GET_BOOL(thing_is_movement_blocking_hard, is_movement_blocking_hard)
+THING_BODY_GET_BOOL(thing_is_movement_blocking_soft, is_movement_blocking_soft)
+THING_BODY_GET_BOOL(thing_is_msg, is_msg)
+THING_BODY_GET_BOOL(thing_is_no_tile, is_no_tile)
+THING_BODY_GET_BOOL(thing_is_player, is_player)
+THING_BODY_GET_BOOL(thing_is_poison, is_poison)
+THING_BODY_GET_BOOL(thing_is_poison_immune, is_poison_immune)
+THING_BODY_GET_BOOL(thing_is_potion, is_potion)
+THING_BODY_GET_BOOL(thing_is_potion_eater, is_potion_eater)
+THING_BODY_GET_BOOL(thing_is_projectile, is_projectile)
+THING_BODY_GET_BOOL(thing_is_removeable_if_out_of_slots, is_removeable_if_out_of_slots)
+THING_BODY_GET_BOOL(thing_is_resurrectable, is_resurrectable)
+THING_BODY_GET_BOOL(thing_is_ripple, is_ripple)
+THING_BODY_GET_BOOL(thing_is_rock, is_rock)
+THING_BODY_GET_BOOL(thing_is_rrr1, is_rrr1)
+THING_BODY_GET_BOOL(thing_is_item_carrier, is_item_carrier)
+THING_BODY_GET_BOOL(thing_is_carrier_of_treasure_class_c, is_carrier_of_treasure_class_c)
+THING_BODY_GET_BOOL(thing_is_carrier_of_treasure_class_b, is_carrier_of_treasure_class_b)
+THING_BODY_GET_BOOL(thing_is_carrier_of_treasure_class_a, is_carrier_of_treasure_class_a)
+THING_BODY_GET_BOOL(thing_is_rrr2, is_rrr2)
+THING_BODY_GET_BOOL(thing_is_rrr3, is_rrr3)
+THING_BODY_GET_BOOL(thing_is_rrr4, is_rrr4)
+THING_BODY_GET_BOOL(thing_is_rrr5, is_rrr5)
+THING_BODY_GET_BOOL(thing_is_spawner, is_spawner)
+THING_BODY_GET_BOOL(thing_is_rrr7, is_rrr7)
+THING_BODY_GET_BOOL(thing_is_rrr8, is_rrr8)
+THING_BODY_GET_BOOL(thing_is_rrr9, is_rrr9)
+THING_BODY_GET_BOOL(thing_is_secret_door, is_secret_door)
+THING_BODY_GET_BOOL(thing_is_sewer_wall, is_sewer_wall)
+THING_BODY_GET_BOOL(thing_is_shallow_water, is_shallow_water)
+THING_BODY_GET_BOOL(thing_is_shovable, is_shovable)
+THING_BODY_GET_BOOL(thing_is_shown_on_leftbar, is_shown_on_leftbar)
+THING_BODY_GET_BOOL(thing_is_shown_uniquely_on_leftbar, is_shown_uniquely_on_leftbar)
+THING_BODY_GET_BOOL(thing_is_skill, is_skill)
+THING_BODY_GET_BOOL(thing_is_smoke, is_smoke)
+THING_BODY_GET_BOOL(thing_is_stamina_check, is_stamina_check)
+THING_BODY_GET_BOOL(thing_is_steal_item_chance_d1000, is_steal_item_chance_d1000)
+THING_BODY_GET_BOOL(thing_is_temporary_bag, is_temporary_bag)
+THING_BODY_GET_BOOL(thing_is_throwable, is_throwable)
+THING_BODY_GET_BOOL(thing_is_thrown_automatically_when_chosen, is_thrown_automatically_when_chosen)
+THING_BODY_GET_BOOL(thing_is_torch, is_torch)
+THING_BODY_GET_BOOL(thing_is_treasure, is_treasure)
+THING_BODY_GET_BOOL(thing_is_treasure_class_a, is_treasure_class_a)
+THING_BODY_GET_BOOL(thing_is_treasure_class_b, is_treasure_class_b)
+THING_BODY_GET_BOOL(thing_is_treasure_class_c, is_treasure_class_c)
+THING_BODY_GET_BOOL(thing_is_treasure_eater, is_treasure_eater)
+THING_BODY_GET_BOOL(thing_is_undead, is_undead)
+THING_BODY_GET_BOOL(thing_is_usable, is_usable)
+THING_BODY_GET_BOOL(thing_is_used_automatically_when_selected, is_used_automatically_when_selected)
+THING_BODY_GET_BOOL(thing_is_used_when_thrown, is_used_when_thrown)
+THING_BODY_GET_BOOL(thing_is_wall, is_wall)
+THING_BODY_GET_BOOL(thing_is_wall_dungeon, is_wall_dungeon)
+THING_BODY_GET_BOOL(thing_is_wand, is_wand)
+THING_BODY_GET_BOOL(thing_is_water_lover, is_water_lover)
+THING_BODY_GET_BOOL(thing_is_weapon, is_weapon)
+THING_BODY_GET_BOOL(thing_is_weapon_wielder, is_weapon_wielder)
+THING_BODY_GET_BOOL(thing_is_dir_bl, is_dir_bl)
+THING_BODY_GET_BOOL(thing_is_dir_br, is_dir_br)
+THING_BODY_GET_BOOL(thing_is_dir_down, is_dir_down)
+THING_BODY_GET_BOOL(thing_is_dir_left, is_dir_left)
+THING_BODY_GET_BOOL(thing_is_dir_none, is_dir_none)
+THING_BODY_GET_BOOL(thing_is_dir_right, is_dir_right)
+THING_BODY_GET_BOOL(thing_is_dir_tl, is_dir_tl)
+THING_BODY_GET_BOOL(thing_is_dir_tr, is_dir_tr)
+THING_BODY_GET_BOOL(thing_is_dir_up, is_dir_up)
+THING_BODY_GET_BOOL(thing_is_visible, is_visible)

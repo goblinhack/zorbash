@@ -14,11 +14,7 @@
 PYFUNC(SDLGetKeyState, "get a snapshot of the current keyboard state")
 {_
     int numkeys;
-#if SDL_MAJOR_VERSION == 1 && SDL_MINOR_VERSION == 2 /* { */
-    const uint8_t *keys = SDL_GetKeyState(&numkeys);
-#else
     const uint8_t *keys = SDL_GetKeyboardState(&numkeys);
-#endif
 
     PyObject *lst = PyList_New(numkeys);
 

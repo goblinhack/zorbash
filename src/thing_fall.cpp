@@ -87,7 +87,7 @@ float Thing::get_fall (void)
 
     if (t >= get_timestamp_fall_end()) {
         is_falling = false;
-        log("End of falling");
+        log("End of falling timestamp");
         level_push();
         fall_to_next_level();
         return (0);
@@ -121,7 +121,7 @@ bool Thing::fall_to_next_level (void)
         return false;
     }
 
-    log("Try to fall");
+    log("Try to fall to next level");
 _
     //
     // Fall from a dungeon to the next dungeon, 2 levels down
@@ -288,9 +288,10 @@ _
             //
             // Update the z depth when falling
             // 
-            log("End of falling");
+            log("End of falling to next level");
             level_pop();
             is_falling = false;
+            is_changing_level = false;
             update_interpolated_position();
             level_push();
 

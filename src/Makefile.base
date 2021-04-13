@@ -1,5 +1,5 @@
 
-NAME=zorbash
+NAME=zorbash-game
 OBJDIR=.o
 
 GAME_OBJECTS=				    \
@@ -287,7 +287,9 @@ $(OBJDIR)/%.o: %.S
 #
 TARGET_GAME=$(NAME)$(EXE)
 $(TARGET_GAME): $(GAME_OBJECTS)
-	$(CC) $(LDFLAGS) $(GAME_OBJECTS) $(LDLIBS) -o ../$(TARGET_GAME)
+	$(CC) $(LDFLAGS) $(GAME_OBJECTS) $(LDLIBS) -o $(TARGET_GAME)
+	cp $(TARGET_GAME) ..
+	$(DSYM)
 
 #
 # To force clean and avoid "up to date" warning.
@@ -296,15 +298,13 @@ $(TARGET_GAME): $(GAME_OBJECTS)
 .PHONY: clobber
 
 clean:
-	rm -rf ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
-	rm -rf $(GAME_OBJECTS) $(TARGET_GAME) stdout.txt stderr.txt
+	rm -f ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
+	rm -f $(TARGET_GAME) stdout.txt stderr.txt
+	rm -rf $(OBJDIR)
+	mkdir -p $(OBJDIR)
 
 clobber: clean
 	rm -rf $(OBJDIR)
 	mkdir -p $(OBJDIR)
 
-valgrind:
-	valgrind --gen-suppressions=all --leak-check=full --suppressions=valgrind.suppress --error-limit=no ../$(NAME)
-
 all: $(TARGET_GAME)
-	$(DSYM)

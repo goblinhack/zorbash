@@ -68,7 +68,7 @@ void Thing::on_born (void)
 
         log("call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
 
-        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (int)mid_at.x, (int)mid_at.y);
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
         ERR("Bad on_born call [%s] expected mod:function, got %d elems",
             on_born.c_str(), (int)on_born.size());
@@ -398,7 +398,7 @@ void Thing::init (Levelp level,
                 fn = fn.replace(found, 2, "");
             }
             py_call_void_fn(mod.c_str(), fn.c_str(),
-                            id.id, (int)mid_at.x, (int)mid_at.y);
+                            id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
         } else {
             ERR("Bad on_birth call [%s] expected mod:function, got %d elems",
                 on_birth.c_str(), (int)on_birth.size());

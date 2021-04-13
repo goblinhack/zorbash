@@ -517,7 +517,7 @@ case `uname` in
         LDLIBS="$LDLIBS -funwind-tables"
         LDLIBS="$LDLIBS -rdynamic"
         LDLIBS="$LDLIBS -Wl,-framework,Opengl"
-        DSYM="dsymutil ../zorbash"
+        DSYM="dsymutil ../zorbash-game"
         #
         # Can't get this to work
         #
@@ -667,11 +667,11 @@ then
             log_info "Run:"
             echo "  export PYTHONPATH=/mingw64/lib/python${PYTHONVERSION}/:/mingw64/lib/python${PYTHONVERSION}/lib-dynload:/mingw64/lib/python${PYTHONVERSION}/site-packages"
             echo "  export PYTHONHOME=/mingw64/bin"
-            echo "  ./zorbash.exe"
+            echo "  ./zorbash-game.exe"
             ;;
         *)
             log_info "Run:"
-            echo "  ./zorbash"
+            echo "  ./zorbash-game"
             ;;
     esac
 
