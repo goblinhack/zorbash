@@ -24,7 +24,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 	                                                                            \
     Thingp t = game->level->thing_find(id);	                                    \
     if (!t) {	                                                                    \
-        ERR("%s, cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -44,7 +44,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 	                                                                            \
     Thingp t = game->level->thing_find(id);	                                    \
     if (!t) {	                                                                    \
-        ERR("%s, cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -64,7 +64,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 	                                                                            \
     Thingp t = game->level->thing_find(id);	                                    \
     if (!t) {	                                                                    \
-        ERR("%s, cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -83,20 +83,55 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
+    if (!id) {	                                                                    \
+        ERR("%s: no thing ID set", __FUNCTION__);	                            \
+        Py_RETURN_FALSE;	                                                    \
+    }	                                                                            \
+	                                                                            \
+    if (!oid) {	                                                                    \
+        ERR("%s: no oid thing ID set", __FUNCTION__);	                            \
+        Py_RETURN_FALSE;	                                                    \
+    }	                                                                            \
+	                                                                            \
     Thingp t = game->level->thing_find(id);	                                    \
     if (!t) {	                                                                    \
-        ERR("%s, cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
                                                                                     \
     Thingp o = game->level->thing_find(oid);	                                    \
     if (!t) {	                                                                    \
-        ERR("%s, cannot find thing ID %u", __FUNCTION__, oid);	                    \
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, oid);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     t->__api__(o);                                                                  \
     Py_RETURN_TRUE;                                                                 \
+}
+
+#define THING_BODY_GET_THING(__func__, __api__)                                     \
+PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
+{	                                                                            \
+    uint32_t id = 0;	                                                            \
+    static char *kwlist[] = {(char*)"id", 0};	                                    \
+	                                                                            \
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
+        Py_RETURN_FALSE;	                                                    \
+    }	                                                                            \
+	                                                                            \
+    if (!id) {	                                                                    \
+        ERR("%s: no thing ID set", __FUNCTION__);	                            \
+        return Py_BuildValue("I", 0);                                               \
+    }	                                                                            \
+	                                                                            \
+    Thingp t = game->level->thing_find(id);	                                    \
+    if (!t) {	                                                                    \
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
+        return Py_BuildValue("I", 0);                                               \
+    }	                                                                            \
+	                                                                            \
+    ThingId found = t->__api__();                                                   \
+    return Py_BuildValue("I", found.id);                                            \
 }
 
 THING_BODY_SET_INT(thing_set_health, set_health)
@@ -128,3 +163,7 @@ THING_BODY_SET_THING(thing_skill_activate, skill_activate)
 THING_BODY_SET_THING(thing_skill_deactivate, skill_deactivate)
 
 THING_BODY_GET_STRING(thing_get_name, text_name)
+
+THING_BODY_GET_THING(thing_get_immediate_spawned_owner_id, get_immediate_spawned_owner_id)
+THING_BODY_GET_THING(thing_get_immediate_minion_owner_id, get_immediate_minion_owner_id)
+THING_BODY_GET_THING(thing_get_immediate_owner_id, get_immediate_owner_id)

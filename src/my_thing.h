@@ -181,10 +181,10 @@ public:
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
     Thingp get_immediate_minion_owner() const;
-    Thingp get_immediate_spawner_owner() const;
+    Thingp get_immediate_spawned_owner() const;
     Thingp get_immediate_owner() const;
     Thingp get_top_minion_owner() const;
-    Thingp get_top_spawner_owner() const;
+    Thingp get_top_spawned_owner() const;
     Thingp get_top_owner() const;
     Thingp nearby_most_dangerous_thing_get(void);
     Thingp weapon_get() const;
@@ -317,10 +317,10 @@ public:
     const Dice& get_on_idle_dice(void) const;
     const Dice& get_resurrect_dice(void) const;
     const ThingId& get_immediate_minion_owner_id (void) const;
-    const ThingId& get_immediate_spawner_owner_id (void) const;
+    const ThingId& get_immediate_spawned_owner_id (void) const;
     const ThingId& get_immediate_owner_id (void) const;
     const ThingId& set_minion_owner_id (const ThingId &v);
-    const ThingId& set_spawner_owner_id (const ThingId &v);
+    const ThingId& set_spawned_owner_id (const ThingId &v);
     const ThingId& set_owner_id (const ThingId &v);
     const Tpp tp(void) const;
     const Tpp tp_or_update(void);
@@ -1124,7 +1124,7 @@ public:
     void set_interpolated_mid_at (fpoint v);
     void set_lunge_to(fpoint);
     void set_minion_owner(Thingp minion_owner);
-    void set_spawner_owner(Thingp spawner_owner);
+    void set_spawned_owner(Thingp spawner_owner);
     void set_msg(const std::string&);
     void set_owner(Thingp owner);
     void set_submerged_offset(int);

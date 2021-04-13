@@ -982,6 +982,11 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_skill_deactivate",                  (PyCFunction)thing_skill_deactivate,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
 
     {"thing_get_name",                          (PyCFunction)thing_get_name,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
+
+    {"thing_get_immediate_spawned_owner_id",    (PyCFunction)thing_get_immediate_spawned_owner_id,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_get_immediate_minion_owner_id",     (PyCFunction)thing_get_immediate_minion_owner_id,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_get_immediate_owner_id",            (PyCFunction)thing_get_immediate_owner_id,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
+
     PYFUNC_REF(SDLGetKeyState),
 
     {0, 0, 0, 0}   /* sentinel */
