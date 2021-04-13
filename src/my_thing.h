@@ -181,8 +181,10 @@ public:
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
     Thingp get_immediate_minion_owner() const;
+    Thingp get_immediate_spawner_owner() const;
     Thingp get_immediate_owner() const;
     Thingp get_top_minion_owner() const;
+    Thingp get_top_spawner_owner() const;
     Thingp get_top_owner() const;
     Thingp nearby_most_dangerous_thing_get(void);
     Thingp weapon_get() const;
@@ -315,8 +317,10 @@ public:
     const Dice& get_on_idle_dice(void) const;
     const Dice& get_resurrect_dice(void) const;
     const ThingId& get_immediate_minion_owner_id (void) const;
+    const ThingId& get_immediate_spawner_owner_id (void) const;
     const ThingId& get_immediate_owner_id (void) const;
     const ThingId& set_minion_owner_id (const ThingId &v);
+    const ThingId& set_spawner_owner_id (const ThingId &v);
     const ThingId& set_owner_id (const ThingId &v);
     const Tpp tp(void) const;
     const Tpp tp_or_update(void);
@@ -422,6 +426,8 @@ public:
     int decr_light_strength(void);
     int decr_minion_count(int);
     int decr_minion_count(void);
+    int decr_spawned_count(int);
+    int decr_spawned_count(void);
     int decr_modifier_attack(int);
     int decr_modifier_attack(void);
     int decr_modifier_constitution(int);
@@ -491,6 +497,7 @@ public:
     int get_light_strength(void);
     int get_light_strength_initial(void) const;
     int get_minion_count(void) const;
+    int get_spawned_count(void) const;
     int get_modifier_attack(void) const;
     int get_modifier_constitution(void) const;
     int get_modifier_defence(void) const;
@@ -558,6 +565,8 @@ public:
     int incr_light_strength(void);
     int incr_minion_count(int);
     int incr_minion_count(void);
+    int incr_spawned_count(int);
+    int incr_spawned_count(void);
     int incr_modifier_attack(int);
     int incr_modifier_attack(void);
     int incr_modifier_constitution(int);
@@ -722,7 +731,7 @@ public:
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
-    int is_rrr6(void) const;
+    int is_spawner(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int is_rrr9(void) const;
@@ -776,6 +785,7 @@ public:
     int set_lifespan(int);
     int set_light_strength(int);
     int set_minion_count(int);
+    int set_spawned_count(int);
     int set_modifier_attack(int);
     int set_modifier_constitution(int);
     int set_modifier_defence(int);
@@ -1061,6 +1071,7 @@ public:
     void kill(Thingp killer, const char *reason);
     void kill(Thingp killer, std::string &reason);
     void kill_minions(Thingp killer);
+    void kill_spawned(Thingp killer);
     void lava_tick();
     void level_change(Levelp);
     void level_enter(void);
@@ -1100,6 +1111,7 @@ public:
     void reinit(void);
     void remove_all_references();
     void remove_minion_owner(void);
+    void remove_spawner_owner(void);
     void remove_owner(void);
     void rest();
     void resurrect_tick();
@@ -1112,6 +1124,7 @@ public:
     void set_interpolated_mid_at (fpoint v);
     void set_lunge_to(fpoint);
     void set_minion_owner(Thingp minion_owner);
+    void set_spawner_owner(Thingp spawner_owner);
     void set_msg(const std::string&);
     void set_owner(Thingp owner);
     void set_submerged_offset(int);
@@ -1127,6 +1140,7 @@ public:
     void topcon_(const char *fmt, va_list args) const; // compile error without
     void try_to_carry(const std::list<Thingp> &items);
     void unleash_minions(void);
+    void unleash_spawners_things(void);
     void unset_on_fire(void);
     void unwield(const char *why);
     void update_all(void);

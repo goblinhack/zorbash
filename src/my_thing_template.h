@@ -232,7 +232,7 @@ private:
     int _is_rrr3 {};
     int _is_rrr4 {};
     int _is_rrr5 {};
-    int _is_rrr6 {};
+    int _is_spawner {};
     int _is_rrr7 {};
     int _is_rrr8 {};
     int _is_rrr9 {};
@@ -594,7 +594,7 @@ public:
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
-    int is_rrr6(void) const;
+    int is_spawner(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int is_rrr9(void) const;
@@ -836,7 +836,7 @@ public:
     void set_is_rrr3(int);
     void set_is_rrr4(int);
     void set_is_rrr5(int);
-    void set_is_rrr6(int);
+    void set_is_spawner(int);
     void set_is_rrr7(int);
     void set_is_rrr8(int);
     void set_is_rrr9(int);

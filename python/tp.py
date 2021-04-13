@@ -226,8 +226,8 @@ class Tp:
     def set_is_rrr5(self, value):
         zx.tp_set_is_rrr5(self, value)
 
-    def set_is_rrr6(self, value):
-        zx.tp_set_is_rrr6(self, value)
+    def set_is_spawner(self, value):
+        zx.tp_set_is_spawner(self, value)
 
     def set_is_rrr7(self, value):
         zx.tp_set_is_rrr7(self, value)

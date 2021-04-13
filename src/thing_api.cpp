@@ -470,9 +470,9 @@ int Thing::is_rrr5(void) const
     return (tp()->is_rrr5());
 }
 
-int Thing::is_rrr6(void) const
+int Thing::is_spawner(void) const
 {_
-    return (tp()->is_rrr6());
+    return (tp()->is_spawner());
 }
 
 int Thing::is_rrr7(void) const
@@ -3472,6 +3472,54 @@ int Thing::incr_minion_count (void)
     new_monst();
 //con("%s", __FUNCTION__);
     return (monstp->minion_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// spawned_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_spawned_count (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->spawned_count);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_spawned_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count = v);
+}
+
+int Thing::decr_spawned_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count -= v);
+}
+
+int Thing::incr_spawned_count (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count += v);
+}
+
+int Thing::decr_spawned_count (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count--);
+}
+
+int Thing::incr_spawned_count (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->spawned_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

@@ -808,7 +808,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(bag_height)
     TP_SET_DECL(bag_width)
     TP_SET_DECL(monst_size)
-    TP_SET_DECL(is_rrr6)
+    TP_SET_DECL(is_spawner)
     TP_SET_DECL(rarity)
     TP_SET_DECL(gfx_is_rrr99)
     TP_SET_DECL(is_shown_uniquely_on_leftbar)

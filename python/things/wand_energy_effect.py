@@ -2,6 +2,12 @@ import zx
 import tp
 
 def on_death(me, x, y):
+    #spawner = zx.get_spawner(me)
+    #zx.if_matches_then_hit(spawner, "is_monst", x, y)
+    #zx.if_matches_then_hit(spawner, "is_player", x, y)
+    #zx.if_matches_then_hit(spawner, "is_item", x, y)
+    #zx.if_matches_then_hit(spawner, "is_door", x, y)
+    #zx.if_matches_then_hit(spawner, "is_generator", x, y)
     pass
 
 def tp_init(name):
