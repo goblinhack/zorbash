@@ -1,9 +1,12 @@
 import zx
 import tp
 
-def on_use(me, what, target, x, y):
+def on_use(owner, item, target, x, y):
+    #zx.con("me      {} {:08X}".format(zx.thing_get_name(me), me))
+    #zx.con("item    {} {:08X}".format(zx.thing_get_name(item), item))
+    #zx.con("target  {} {:08X}".format(zx.thing_get_name(target), target))
     zx.tp_spawn_at(target, "explosion1")
-    zx.tp_spawn_radius_range(me, what, target, "wand_descent_effect")
+    zx.tp_spawn_radius_range(me, item, target, "wand_descent_effect")
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)

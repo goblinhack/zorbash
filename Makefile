@@ -3,7 +3,7 @@ pre:
 	@scripts/ramdisk.py
 
 all: pre
-	if [ ! -f src/Makefile ]; then \
+	@if [ ! -f src/Makefile ]; then \
 	    (RUNME;) \
 	fi
 	(cd src; make $@)

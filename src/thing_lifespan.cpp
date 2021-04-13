@@ -33,7 +33,7 @@ void Thing::on_lifespan (Thingp what)
 
         py_call_void_fn(mod.c_str(), fn.c_str(),
                         id.id, what->id.id,
-                        (int)mid_at.x, (int)mid_at.y);
+                        (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
         ERR("Bad on_lifespan call [%s] expected mod:function, got %d elems",
             on_lifespan.c_str(), (int)on_lifespan.size());

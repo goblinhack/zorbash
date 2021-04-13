@@ -33,8 +33,8 @@ void Thing::on_use (Thingp what)
             what->to_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(),
-                        id.id, what->id.id, 0,
-                        (int)mid_at.x, (int)mid_at.y);
+                        id.id, what->id.id, 0U,
+                        (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
         ERR("Bad on_use call [%s] expected mod:function, got %d elems",
             on_use.c_str(), (int)on_use.size());
@@ -61,7 +61,7 @@ void Thing::on_use (Thingp what, Thingp target)
 
             py_call_void_fn(mod.c_str(), fn.c_str(),
                             id.id, what->id.id, target->id.id,
-                            (int)mid_at.x, (int)mid_at.y);
+                            (unsigned int)mid_at.x, (unsigned int)mid_at.y);
         } else {
             ERR("Bad on_use call [%s] expected mod:function, got %d elems",
                 on_use.c_str(), (int)on_use.size());

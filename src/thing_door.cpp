@@ -29,7 +29,7 @@ void Thing::on_open (void)
             fn = fn.replace(found, 2, "");
         }
         py_call_void_fn(mod.c_str(), fn.c_str(),
-                        id.id, (int)mid_at.x, (int)mid_at.y);
+                        id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
         ERR("Bad on_open call [%s] expected mod:function, got %d elems",
             on_open.c_str(), (int)on_open.size());

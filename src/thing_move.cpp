@@ -33,7 +33,7 @@ void Thing::on_move (void)
 
         log("call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
 
-        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (int)mid_at.x, (int)mid_at.y);
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
         ERR("Bad on_move call [%s] expected mod:function, got %d elems",
             on_move.c_str(), (int)on_move.size());

@@ -38,6 +38,14 @@ void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v
 void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6);
 void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7);
 void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3, unsigned int v4);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3, unsigned int v4, unsigned int v5);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3, unsigned int v4, unsigned int v5, unsigned int v6);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3, unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3, unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8);
 int py_obj_attr_int(const PyObject *py_obj, const char *attr);
 int py_obj_to_int(PyObject *py_obj);
 std::string py_obj_to_string(const PyObject *py_str);

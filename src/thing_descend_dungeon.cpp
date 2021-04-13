@@ -111,15 +111,12 @@ bool Thing::descend_dungeon (void)
 
                 log("Move to next level entrance");
                 is_changing_level = true;
-                log("move_to_immediately is_changing_level 1 %d", is_changing_level);
 
                 log("Level change");
                 level_change(l);
-                log("move_to_immediately is_changing_level 2 %d", is_changing_level);
                 set_tick_last_level_change(get_tick());
 
                 log("Level change move to destination");
-                log("move_to_immediately is_changing_level 3 %d", is_changing_level);
                 move_to_immediately(fpoint(x, y));
 
                 log("Level change move carried items");

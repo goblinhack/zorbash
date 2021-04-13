@@ -45,10 +45,10 @@ void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
 
         py_call_void_fn(mod.c_str(), fn.c_str(),
                         id.id, hitter->id.id, real_hitter->id.id,
-                        (int)mid_at.x, (int)mid_at.y,
-                        (int)crit,
-                        (int)bite,
-                        (int)damage);
+                        (unsigned int)mid_at.x, (unsigned int)mid_at.y,
+                        (unsigned int)crit,
+                        (unsigned int)bite,
+                        (unsigned int)damage);
     } else {
         ERR("Bad on_hit call [%s] expected mod:function, got %d elems",
             on_hit.c_str(), (int)on_hit.size());
@@ -78,7 +78,7 @@ void Thing::on_miss (Thingp hitter)
             to_string().c_str(), hitter->to_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id,
-                        (int)mid_at.x, (int)mid_at.y);
+                        (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
         ERR("Bad on_miss call [%s] expected mod:function, got %d elems",
             on_miss.c_str(), (int)on_miss.size());
@@ -103,7 +103,7 @@ void Thing::on_bite (void)
 
         log("call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (int)mid_at.x, (int)mid_at.y);
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
         ERR("Bad on_bite call [%s] expected mod:function, got %d elems",
             on_bite.c_str(), (int)on_bite.size());
@@ -297,8 +297,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 TOPCON("%%fg=red$You CRIT hit the %s for %d damage!%%fg=reset$",
                         text_the().c_str(), damage);
             } else {
-                TOPCON("You hit the %s for %d damage!",
-                       text_the().c_str(), damage);
+                if (hitter && (hitter != real_hitter)) {
+                    TOPCON("You hit the %s for %d damage with %s!",
+                        text_the().c_str(), damage,
+                        hitter->text_a_or_an().c_str());
+                } else {
+                    TOPCON("You hit the %s for %d damage!",
+                        text_the().c_str(), damage);
+                }
             }
         }
         if (real_hitter->is_fire() ||
@@ -448,8 +454,6 @@ _
         }
     }
 
-//    Thingp weapon = nullptr;
-
     if (hitter && hitter->is_dead) {
         //
         // This case is hit if a ghost runs into a player. The ghost takes
@@ -579,5 +583,5 @@ int Thing::is_hit_by (Thingp hitter, int damage)
 
 int Thing::is_hit_by (Thingp hitter)
 {_
-    return (is_hit_by(hitter, false, false, 0));
+    return (is_hit_by(hitter, false, false, hitter->get_damage_melee()));
 }

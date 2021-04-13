@@ -2,16 +2,11 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    zx.con("me      {} {}".format(zx.thing_get_name(me), me))
-    spawner = zx.thing_get_immediate_spawned_owner_id(me)
-    zx.con("spawner {} {}".format(zx.thing_get_name(spawner), spawner))
-    owner = zx.thing_get_immediate_owner_id(spawner)
-    zx.con("owner   {} {}".format(zx.thing_get_name(owner), owner))
-    #zx.if_matches_then_hit(spawner, "is_monst", x, y)
-    #zx.if_matches_then_hit(spawner, "is_player", x, y)
-    #zx.if_matches_then_hit(spawner, "is_item", x, y)
-    #zx.if_matches_then_hit(spawner, "is_door", x, y)
-    #zx.if_matches_then_hit(spawner, "is_generator", x, y)
+    #zx.con("me      {} {:08X}".format(zx.thing_get_name(me), me))
+    #spawner = zx.thing_get_immediate_spawned_owner_id(me)
+    #zx.con("spawner {} {:08X}".format(zx.thing_get_name(spawner), spawner))
+    #owner = zx.thing_get_immediate_owner_id(spawner)
+    #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
     pass
 
 def tp_init(name):
@@ -22,8 +17,8 @@ def tp_init(name):
     x.set_is_able_to_fall(False)
     x.set_is_floating(True)
     x.set_is_interesting(False)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_important_stuff(True)
+    x.set_is_loggable_for_unimportant_stuff(True)
     x.set_on_death_do("wand_energy_effect.on_death()")
     x.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
     x.set_z_prio(zx.MAP_PRIO_INFRONT)
