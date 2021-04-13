@@ -12,16 +12,16 @@
 #include "my_thing.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::get_top_spawner_owner (void) const
+Thingp Thing::get_top_spawned_owner (void) const
 {_
-    auto id = get_immediate_spawner_owner_id();
+    auto id = get_immediate_spawned_owner_id();
     if (likely(id.ok())) {
         auto i = level->thing_find(id);
         if (unlikely(!i)) {
             return nullptr;
         }
-        if (unlikely(i->get_immediate_spawner_owner_id().ok())) {
-            return i->get_immediate_spawner_owner();
+        if (unlikely(i->get_immediate_spawned_owner_id().ok())) {
+            return i->get_immediate_spawned_owner();
         }
         return i;
     } else {
@@ -29,9 +29,9 @@ Thingp Thing::get_top_spawner_owner (void) const
     }
 }
 
-Thingp Thing::get_immediate_spawner_owner (void) const
+Thingp Thing::get_immediate_spawned_owner (void) const
 {_
-    auto id = get_immediate_spawner_owner_id();
+    auto id = get_immediate_spawned_owner_id();
     if (likely(id.ok())) {
         auto i = level->thing_find(id);
         if (unlikely(!i)) {
@@ -43,13 +43,13 @@ Thingp Thing::get_immediate_spawner_owner (void) const
     }
 }
 
-void Thing::set_spawner_owner (Thingp spawner_owner)
+void Thing::set_spawned_owner (Thingp spawner_owner)
 {_
     if (spawner_owner) {
         verify(spawner_owner);
     }
 
-    auto old_spawner_owner = get_immediate_spawner_owner();
+    auto old_spawner_owner = get_immediate_spawned_owner();
     if (old_spawner_owner) {
         if (old_spawner_owner == spawner_owner) {
             return;
@@ -71,10 +71,10 @@ void Thing::set_spawner_owner (Thingp spawner_owner)
     }
 
     if (spawner_owner) {
-        set_spawner_owner_id(spawner_owner->id);
+        set_spawned_owner_id(spawner_owner->id);
         spawner_owner->incr_spawned_count();
     } else {
-        set_spawner_owner_id(0);
+        set_spawned_owner_id(0);
         if (old_spawner_owner) {
             old_spawner_owner->decr_spawned_count();
         }
@@ -83,7 +83,7 @@ void Thing::set_spawner_owner (Thingp spawner_owner)
 
 void Thing::remove_spawner_owner (void)
 {_
-    auto old_spawner_owner = get_immediate_spawner_owner();
+    auto old_spawner_owner = get_immediate_spawned_owner();
     if (!old_spawner_owner) {
         err("No spawner owner");
         return;
@@ -91,7 +91,7 @@ void Thing::remove_spawner_owner (void)
 
     log("Remove spawner owner %s", old_spawner_owner->to_string().c_str());
 
-    set_spawner_owner_id(0);
+    set_spawned_owner_id(0);
     old_spawner_owner->decr_spawned_count();
 }
 
@@ -118,7 +118,7 @@ void Thing::kill_spawned (Thingp killer)
     //
     for (auto p : level->all_things) {
         auto spawner = p.second;
-        auto o = spawner->get_immediate_spawner_owner();
+        auto o = spawner->get_immediate_spawned_owner();
         if (o && (o == this)) {
             spawner->remove_spawner_owner();
             spawner->dead(killer, "its master died");
@@ -141,7 +141,7 @@ void Thing::unleash_spawners_things (void)
     //
     for (auto p : level->all_things) {
         auto spawner = p.second;
-        auto o = spawner->get_immediate_spawner_owner();
+        auto o = spawner->get_immediate_spawned_owner();
         if (o && (o == this)) {
             spawner->remove_spawner_owner();
         }

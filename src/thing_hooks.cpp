@@ -109,7 +109,7 @@ _
         remove_minion_owner();
     }
 
-    if (get_immediate_spawner_owner_id().ok()) {
+    if (get_immediate_spawned_owner_id().ok()) {
         remove_spawner_owner();
     }
 
@@ -186,7 +186,7 @@ void Thing::remove_all_references ()
         //
         for (auto p : level->all_things) {
             auto t = p.second;
-            auto o = t->get_immediate_spawner_owner();
+            auto o = t->get_immediate_spawned_owner();
             if (o == this) {
                 t->remove_spawner_owner();
             }

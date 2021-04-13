@@ -38,4 +38,8 @@ PyObject *thing_get_name(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_skill_activate(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_skill_deactivate(PyObject *obj, PyObject *args, PyObject *keywds);
 
+PyObject *thing_get_immediate_spawned_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_immediate_minion_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_immediate_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
+
 #endif

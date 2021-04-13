@@ -2,7 +2,11 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    #spawner = zx.get_spawner(me)
+    zx.con("me      {} {}".format(zx.thing_get_name(me), me))
+    spawner = zx.thing_get_immediate_spawned_owner_id(me)
+    zx.con("spawner {} {}".format(zx.thing_get_name(spawner), spawner))
+    owner = zx.thing_get_immediate_owner_id(spawner)
+    zx.con("owner   {} {}".format(zx.thing_get_name(owner), owner))
     #zx.if_matches_then_hit(spawner, "is_monst", x, y)
     #zx.if_matches_then_hit(spawner, "is_player", x, y)
     #zx.if_matches_then_hit(spawner, "is_item", x, y)
