@@ -18,11 +18,19 @@ void Thing::level_leave (void)
     // Remove minions if they stay behind on the old level
     //
     unleash_minions();
+    unleash_spawners_things();
 
     {
         auto it = get_immediate_minion_owner();
         if (it) {
             remove_minion_owner();
+        }
+    }
+
+    {
+        auto it = get_immediate_spawner_owner();
+        if (it) {
+            remove_spawner_owner();
         }
     }
 

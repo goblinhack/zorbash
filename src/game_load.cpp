@@ -63,6 +63,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* ThingId      on_fire_id_anim           */ in >> bits(my.t->on_fire_id_anim);
     /* ThingId      owner_id                  */ in >> bits(my.t->owner_id);
     /* ThingId      minion_owner_id           */ in >> bits(my.t->minion_owner_id);
+    /* ThingId      spawner_owner_id          */ in >> bits(my.t->spawner_owner_id);
     /* ThingId      weapon_id                 */ in >> bits(my.t->weapon_id);
     /* ThingId      weapon_id_carry_anim      */ in >> bits(my.t->weapon_id_carry_anim);
     /* ThingId      weapon_id_use_anim        */ in >> bits(my.t->weapon_id_use_anim);
@@ -90,6 +91,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          modifier_strength         */ in >> bits(my.t->modifier_strength);
     /* int          owned_count               */ in >> bits(my.t->owned_count);
     /* int          minion_count              */ in >> bits(my.t->minion_count);
+    /* int          spawned_count             */ in >> bits(my.t->spawned_count);
     /* int          charge_count              */ in >> bits(my.t->charge_count);
     /* int          stamina                   */ in >> bits(my.t->stamina);
     /* int          stamina_max               */ in >> bits(my.t->stamina_max);

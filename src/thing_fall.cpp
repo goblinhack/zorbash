@@ -61,6 +61,10 @@ _
         kill_minions(nullptr);
     }
 
+    if (is_spawner()) {
+        kill_spawned(nullptr);
+    }
+
     if (is_on_fire()) {
         if (is_player()) {
             TOPCON("%%fg=green$The fall puts out the flames!%%fg=reset$");

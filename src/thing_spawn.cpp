@@ -84,6 +84,10 @@ _
         c->set_minion_owner(this);
     }
 
+    if (is_spawner()) {
+        c->set_spawner_owner(this);
+    }
+
     return true;
 }
 
@@ -153,6 +157,10 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     c->inherit_from(this);
     c->location_check();
 
+    if (is_spawner()) {
+        c->set_spawner_owner(this);
+    }
+
     return true;
 }
 
@@ -202,6 +210,10 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
             c->inherit_from(this);
             c->location_check();
             c->set_timestamp_sleep_end(time_get_time_ms_cached() + dist * 100);
+
+            if (is_spawner()) {
+                c->set_spawner_owner(this);
+            }
         }
     }
 
@@ -254,6 +266,10 @@ bool Thing::spawn_fire (const std::string& what)
     c->inherit_from(this);
     c->location_check();
 
+    if (is_spawner()) {
+        c->set_spawner_owner(this);
+    }
+
     return true;
 }
 
@@ -285,6 +301,10 @@ bool Thing::spawn_at_if_possible (const std::string& what)
     c->inherit_from(this);
     c->location_check();
 
+    if (is_spawner()) {
+        c->set_spawner_owner(this);
+    }
+
     return true;
 }
 
@@ -309,6 +329,10 @@ bool Thing::spawn_at (const std::string& what)
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);
     c->location_check();
+
+    if (is_spawner()) {
+        c->set_spawner_owner(this);
+    }
 
     return true;
 }

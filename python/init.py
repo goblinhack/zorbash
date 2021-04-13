@@ -7,7 +7,7 @@ import sys
 import console
 import time
 
-timeme_enabled = True
+timeme_enabled = False
 
 def timeme(py_function):
     def timeme_wrapper(*args, **kwargs):

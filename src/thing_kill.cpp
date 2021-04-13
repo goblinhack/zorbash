@@ -47,6 +47,10 @@ void Thing::kill (Thingp killer, const char *reason)
         kill_minions(killer);
     }
 
+    if (is_spawner()) {
+        kill_spawned(killer);
+    }
+
     if (is_player()) {
         TOPCON("RIP: Killed %s.", reason);
         TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");

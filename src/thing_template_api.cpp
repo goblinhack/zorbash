@@ -254,7 +254,7 @@ int Tp::bag_item_width(void) const { return _bag_item_width; }
 int Tp::bag_height(void) const { return _bag_height; }
 int Tp::bag_width(void) const { return _bag_width; }
 int Tp::monst_size(void) const { return _monst_size; }
-int Tp::is_rrr6(void) const { return _is_rrr6; }
+int Tp::is_spawner(void) const { return _is_spawner; }
 int Tp::rarity(void) const { return _rarity; }
 int Tp::gfx_is_rrr99(void) const { return _gfx_is_rrr99; }
 int Tp::is_shown_uniquely_on_leftbar(void) const { return _is_shown_uniquely_on_leftbar; }
@@ -495,7 +495,7 @@ void Tp::set_bag_item_width(int v) { _bag_item_width = v; }
 void Tp::set_bag_height(int v) { _bag_height = v; }
 void Tp::set_bag_width(int v) { _bag_width = v; }
 void Tp::set_monst_size(int v) { _monst_size = v; }
-void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
+void Tp::set_is_spawner(int v) { _is_spawner = v; }
 void Tp::set_rarity(int v) { _rarity = v; }
 void Tp::set_gfx_is_rrr99(int v) { _gfx_is_rrr99 = v; }
 void Tp::set_is_shown_uniquely_on_leftbar(int v) { _is_shown_uniquely_on_leftbar = v; }

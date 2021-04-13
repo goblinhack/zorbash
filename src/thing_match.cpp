@@ -430,7 +430,7 @@ bool Thing::matches (const std::string& what)
     if (is_chasm() && (what == "is_chasm")) {
         return true;
     }
-    if (is_rrr6() && (what == "is_rrr6")) {
+    if (is_spawner() && (what == "is_spawner")) {
         return true;
     }
     if (is_rrr7() && (what == "is_rrr7")) {

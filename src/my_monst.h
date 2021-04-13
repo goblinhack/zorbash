@@ -41,7 +41,8 @@ public:
     /////////////////////////////////////////////////////////////////////////
     ThingId      on_fire_id_anim {};
     ThingId      owner_id {};                // Who carries this thing?
-    ThingId      minion_owner_id {};              // Who created this thing?
+    ThingId      minion_owner_id {};         // Who generated this thing?
+    ThingId      spawner_owner_id {};        // Who spawned this thing?
     ThingId      weapon_id {};               // Current weapon
     ThingId      weapon_id_carry_anim {};
     ThingId      weapon_id_use_anim {};
@@ -69,6 +70,7 @@ public:
     int          modifier_strength = {};
     int          owned_count = {};           // How many things this thing owns.
     int          minion_count = {};          // How many things this thing spawned.
+    int          spawned_count = {};         // How many things this thing spawned.
     int          charge_count = {};          // How many things this thing spawned.
     int          stamina = {};
     int          stamina_max = {};
