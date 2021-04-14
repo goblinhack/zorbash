@@ -601,7 +601,7 @@ void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string wh
 
             (void) thing_new(what, fpoint(x, y));
 
-            if (d->is_monst(x, y + 1) ||
+            if (d->is_monst_any(x, y + 1) ||
                 d->is_food(x, y + 1) ||
                 d->is_treasure(x, y + 1) ||
                 d->is_treasure_class_a(x, y + 1) ||
@@ -613,7 +613,7 @@ void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string wh
                     thing_new(what, fpoint(x, y + 1));
                 }
             }
-            if (d->is_monst(x, y - 1) ||
+            if (d->is_monst_any(x, y - 1) ||
                 d->is_food(x, y - 1) ||
                 d->is_treasure(x, y - 1) ||
                 d->is_treasure_class_a(x, y - 1) ||
@@ -625,7 +625,7 @@ void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string wh
                     thing_new(what, fpoint(x, y - 1));
                 }
             }
-            if (d->is_monst(x + 1, y) ||
+            if (d->is_monst_any(x + 1, y) ||
                 d->is_food(x + 1, y) ||
                 d->is_treasure(x + 1, y) ||
                 d->is_treasure_class_a(x + 1, y) ||
@@ -637,7 +637,7 @@ void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string wh
                     thing_new(what, fpoint(x + 1, y));
                 }
             }
-            if (d->is_monst(x - 1, y) ||
+            if (d->is_monst_any(x - 1, y) ||
                 d->is_food(x - 1, y) ||
                 d->is_treasure(x - 1, y) ||
                 d->is_treasure_class_a(x - 1, y) ||
@@ -673,11 +673,19 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_gold(x, y))             { tp = tp_random_gold(); }
             if (d->is_key(x, y))              { tp = tp_random_key(); }
             if (d->is_potion(x, y))           { tp = tp_random_potion(); }
-            if (d->is_monst(x, y)) { 
-                tp = tp_random_monst(point(x, y)); 
+            if (d->is_monst_easy(x, y)) { 
+                tp = tp_random_monst_easy(point(x, y)); 
+            }
+            if (d->is_monst_easy(x, y)) { 
+                tp = tp_random_monst_hard(point(x, y)); 
             }
             if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
-            if (d->is_minion_generator(x, y)) { tp = tp_random_generator(); }
+            if (d->is_minion_generator_easy(x, y)) {
+                tp = tp_random_minion_genertor_easy(); 
+            }
+            if (d->is_minion_generator_hard(x, y)) {
+                tp = tp_random_minion_genertor_hard(); 
+            }
             if (d->is_brazier(x, y))          { tp = tp_random_brazier(); }
             if (d->is_treasure(x, y))         { tp = tp_random_treasure(); }
             if (d->is_treasure_class_a(x, y)) { tp = tp_random_item_class_a(); }
@@ -857,20 +865,20 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
                 continue;
             }
 
-            if (d->is_food(x, y)              ||
-                d->is_blood(x, y)             ||
-                d->is_door(x, y)              ||
-                d->is_ascend_dungeon(x, y)    ||
-                d->is_descend_dungeon(x, y)   ||
-                d->is_minion_generator(x, y)  ||
-                d->is_key(x, y)               ||
-                d->is_potion(x, y)            ||
-                d->is_secret_door(x, y)       ||
-                d->is_treasure(x, y)          ||
-                d->is_treasure_class_a(x, y)  ||
-                d->is_treasure_class_b(x, y)  ||
-                d->is_treasure_class_c(x, y)  ||
-                d->is_monst(x, y)) {
+            if (d->is_food(x, y)                 ||
+                d->is_blood(x, y)                ||
+                d->is_door(x, y)                 ||
+                d->is_ascend_dungeon(x, y)       ||
+                d->is_descend_dungeon(x, y)      ||
+                d->is_minion_generator_any(x, y) ||
+                d->is_key(x, y)                  ||
+                d->is_potion(x, y)               ||
+                d->is_secret_door(x, y)          ||
+                d->is_treasure(x, y)             ||
+                d->is_treasure_class_a(x, y)     ||
+                d->is_treasure_class_b(x, y)     ||
+                d->is_treasure_class_c(x, y)     ||
+                d->is_monst_any(x, y)) {
                 continue;
             }
 

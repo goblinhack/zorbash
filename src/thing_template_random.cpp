@@ -73,17 +73,17 @@ void tp_random_init (void)
         if (tp->is_treasure_class_c())    { tp_item_class_c.push_back(tp); }
 
         if (tp->is_weapon()) {
-            if (tp->is_treasure_class_a())    { tp_weapon_class_a.push_back(tp); }
-            if (tp->is_treasure_class_b())    { tp_weapon_class_b.push_back(tp); }
-            if (tp->is_treasure_class_c())    { tp_weapon_class_c.push_back(tp); }
+            if (tp->is_treasure_class_a()) { tp_weapon_class_a.push_back(tp); }
+            if (tp->is_treasure_class_b()) { tp_weapon_class_b.push_back(tp); }
+            if (tp->is_treasure_class_c()) { tp_weapon_class_c.push_back(tp); }
         }
 
-        if (tp->stamina())                 {
+        if (tp->stamina()) {
             tp->set_is_stamina_check(true);
         }
 
-        if (!tp->is_minion())             {
-            if (tp->is_monst())           {tp_monst.push_back(tp); }
+        if (!tp->is_minion()) {
+            if (tp->is_monst()) {tp_monst.push_back(tp); }
         }
 
         if (tp->is_able_to_fall()) {
@@ -149,6 +149,16 @@ Tpp tp_random_monst (void)
     return tp_get_with_rarity_filter(tp_monst);
 }
 
+Tpp tp_random_monst_easy (void)
+{_
+    return tp_random_monst();
+}
+
+Tpp tp_random_monst_hard (void)
+{_
+    return tp_random_monst();
+}
+
 Tpp Level::tp_random_monst (const point &p)
 {_
     for (;;) {
@@ -158,6 +168,16 @@ Tpp Level::tp_random_monst (const point &p)
         }
         return tpp;
     }
+}
+
+Tpp Level::tp_random_monst_easy (const point &p)
+{_
+    return tp_random_monst(p);
+}
+
+Tpp Level::tp_random_monst_hard (const point &p)
+{_
+    return tp_random_monst(p);
 }
 
 Tpp tp_random_food (void)
@@ -331,13 +351,23 @@ Tpp tp_random_secret_door (void)
     return tp_get_with_no_rarity_filter(tp_secret_door);
 }
 
-Tpp tp_random_generator (void)
+Tpp tp_random_minion_genertor (void)
 {_
     if (unlikely(!tp_generator.size())) {
         ERR("No generator found");
         return (nullptr);
     }
     return tp_get_with_rarity_filter(tp_generator);
+}
+
+Tpp tp_random_minion_genertor_easy (void)
+{
+    return tp_random_minion_genertor();
+}
+
+Tpp tp_random_minion_genertor_hard (void)
+{
+    return tp_random_minion_genertor();
 }
 
 Tpp tp_random_blood (void)

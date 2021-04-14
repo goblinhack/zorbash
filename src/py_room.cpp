@@ -101,27 +101,29 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_secret_corridor ||
                     m.is_dirt) {
                     floor_string += c;
-                } else if (m.is_blood            ||
-                           m.is_deep_water       ||
-                           m.is_door             ||
-                           m.is_ascend_dungeon   ||
-                           m.is_descend_dungeon  ||
-                           m.is_floor_deco       ||
-                           m.is_food             ||
-                           m.is_minion_generator ||
-                           m.is_gold             ||
-                           m.is_key              ||
-                           m.is_lava             ||
-                           m.is_monst            ||
-                           m.is_treasure_class_a ||
-                           m.is_treasure_class_b ||
-                           m.is_treasure_class_c ||
-                           m.is_potion           ||
-                           m.is_secret_door      ||
-                           m.is_brazier          ||
-                           m.is_trap             ||
-                           m.is_shallow_water    ||
-                           m.is_deep_water      
+                } else if (m.is_blood                 ||
+                           m.is_deep_water            ||
+                           m.is_door                  ||
+                           m.is_ascend_dungeon        ||
+                           m.is_descend_dungeon       ||
+                           m.is_floor_deco            ||
+                           m.is_food                  ||
+                           m.is_minion_generator_easy ||
+                           m.is_minion_generator_hard ||
+                           m.is_gold                  ||
+                           m.is_key                   ||
+                           m.is_lava                  ||
+                           m.is_monst_easy            ||
+                           m.is_monst_hard            ||
+                           m.is_treasure_class_a      ||
+                           m.is_treasure_class_b      ||
+                           m.is_treasure_class_c      ||
+                           m.is_potion                ||
+                           m.is_secret_door           ||
+                           m.is_brazier               ||
+                           m.is_trap                  ||
+                           m.is_shallow_water         ||
+                           m.is_deep_water               
                            ) {
                     floor_string += Charmap::FLOOR;
                 } else {
@@ -156,21 +158,23 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     walls_string += Charmap::SPACE;
                 }
 
-                if (m.is_blood            ||
-                    m.is_ascend_dungeon   ||
-                    m.is_descend_dungeon  ||
-                    m.is_floor_deco       ||
-                    m.is_food             ||
-                    m.is_minion_generator ||
-                    m.is_gold             ||
-                    m.is_key              ||
-                    m.is_monst            ||
-                    m.is_treasure_class_a ||
-                    m.is_treasure_class_b ||
-                    m.is_treasure_class_c ||
-                    m.is_potion           ||
-                    m.is_brazier          ||
-                    m.is_trap             ||
+                if (m.is_blood                 ||
+                    m.is_ascend_dungeon        ||
+                    m.is_descend_dungeon       ||
+                    m.is_floor_deco            ||
+                    m.is_food                  ||
+                    m.is_minion_generator_easy ||
+                    m.is_minion_generator_hard ||
+                    m.is_gold                  ||
+                    m.is_key                   ||
+                    m.is_monst_easy            ||
+                    m.is_monst_hard            ||
+                    m.is_treasure_class_a      ||
+                    m.is_treasure_class_b      ||
+                    m.is_treasure_class_c      ||
+                    m.is_potion                ||
+                    m.is_brazier               ||
+                    m.is_trap                  ||
                     m.is_descend_sewer) {
                     obj_strings += c;
                 } else {
