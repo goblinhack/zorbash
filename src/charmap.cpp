@@ -145,10 +145,15 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_treasure_class_c  = true;
 
-    char_index              = Charmap::MONST;
+    char_index              = Charmap::MONST_EASY;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_monst             = true;
+    c->is_monst_easy        = true;
+
+    char_index              = Charmap::MONST_HARD;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_monst_hard        = true;
 
     char_index              = Charmap::FOOD;
     c = &all_charmaps[char_index];
@@ -174,8 +179,13 @@ void Charmap::init_charmaps (void)
     c = &all_charmaps[char_index];
     c->c                    = char_index;
 
-    char_index              = Charmap::GENERATOR;
+    char_index              = Charmap::MINION_GENERATOR_EASY;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_minion_generator         = true;
+    c->is_minion_generator_easy  = true;
+
+    char_index              = Charmap::MINION_GENERATOR_HARD;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_minion_generator_easy  = true;
 }

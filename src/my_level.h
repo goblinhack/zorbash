@@ -613,6 +613,8 @@ public:
     void update_things_next_to_a_chasm(void);
     void update_water_next_to_lava(void);
     Tpp tp_random_monst(const point &p);
+    Tpp tp_random_monst_easy(const point &p);
+    Tpp tp_random_monst_hard(const point &p);
     Thingp inventory_describe(const uint32_t slot);
     Thingp skillbox_describe(const uint32_t slot);
     friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);

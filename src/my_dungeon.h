@@ -101,7 +101,9 @@ public:
     bool is_floor_deco_at(const int x, const int y);
     bool is_floor_no_check(const int x, const int y);
     bool is_food(const int x, const int y);
-    bool is_minion_generator(const int x, const int y);
+    bool is_minion_generator_any(const int x, const int y);
+    bool is_minion_generator_easy(const int x, const int y);
+    bool is_minion_generator_hard(const int x, const int y);
     bool is_gold(const int x, const int y);
     bool is_hazard(const int x, const int y);
     bool is_treasure_class_a(const int x, const int y);
@@ -110,7 +112,9 @@ public:
     bool is_key(const int x, const int y);
     bool is_lava(const int x, const int y);
     bool is_lava_no_check(const int x, const int y);
-    bool is_monst(const int x, const int y);
+    bool is_monst_any(const int x, const int y);
+    bool is_monst_easy(const int x, const int y);
+    bool is_monst_hard(const int x, const int y);
     bool is_potion(const int x, const int y);
     bool is_rock(const int x, const int y);
     bool is_secret_corridor_at(const int x, const int y);
