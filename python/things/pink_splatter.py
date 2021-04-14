@@ -19,7 +19,7 @@ def tp_init(name, text_name):
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    delay = 20
+    delay = 10
     x.set_tile("pink_splatter.1", delay_ms=delay)
     x.set_tile("pink_splatter.2", delay_ms=delay)
     x.set_tile("pink_splatter.3", delay_ms=delay)
