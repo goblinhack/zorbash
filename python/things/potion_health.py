@@ -2,6 +2,9 @@ import zx
 import tp
 
 def on_use(owner, item, target, x, y):
+    #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
+    #zx.con("item    {} {:08X}".format(zx.thing_get_name(item), item))
+    #zx.con("target  {} {:08X}".format(zx.thing_get_name(target), target))
     health = zx.thing_get_health(owner)
     new_health = int((zx.thing_get_health_max(owner) / 100.0) * 80)
     if new_health > health:
