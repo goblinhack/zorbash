@@ -56,8 +56,6 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat(True)
     x.set_is_meat_eater(True)
-    x.set_is_minion(False)
-    x.set_is_minion(True)
     x.set_is_monst(True)
     x.set_is_moveable(True)
     x.set_is_shown_on_leftbar(True)

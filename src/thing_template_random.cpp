@@ -146,6 +146,11 @@ Tpp tp_random_monst (void)
         ERR("No monsts found");
         return (nullptr);
     }
+#if 0
+for (auto i = 0; i < 1000; i++) {
+    CON("%s",tp_get_with_rarity_filter(tp_monst)->name().c_str());
+}
+#endif
     return tp_get_with_rarity_filter(tp_monst);
 }
 
