@@ -182,7 +182,7 @@ SDL2 and Python3 is needed.
 <!--                       Secret Verses:                                         -->
 <!--                       Twas not an easy fight, it’s true                      -->
 <!--                       But not in the way you think.                          -->
-<!--                       Our swords cut deep, drew blood-like goo               -->
+<!--                       Our swords cut deep, drew blood_like goo               -->
 <!--                       We fought in perfect sync.                             -->
 <!--                                                                              -->
 <!--                       But as we slashed, great Zorbash did                   -->

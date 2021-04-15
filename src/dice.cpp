@@ -9,9 +9,9 @@
 #include "my_dice.h"
 #include "my_random.h"
 
-int modifier_to_bonus (int modifier)
+int stat_to_bonus (int stat)
 {
-    switch (modifier) {
+    switch (stat) {
 	case 0: return 0; // Acts like not set
 	case 1: return -5;
 	case 2: return -4;
@@ -47,9 +47,9 @@ int modifier_to_bonus (int modifier)
     }
 }
 
-const std::string modifier_to_bonus_str (int modifier)
+const std::string stat_to_bonus_str (int stat)
 {
-    switch (modifier) {
+    switch (stat) {
 	case 0: return "0"; // Acts like not set
 	case 1: return "-5";
 	case 2: return "-4";
@@ -85,9 +85,9 @@ const std::string modifier_to_bonus_str (int modifier)
     }
 }
 
-const std::string modifier_to_bonus_slash_str (int modifier)
+const std::string stat_to_bonus_slash_str (int stat)
 {
-    switch (modifier) {
+    switch (stat) {
 	case 0: return "/na"; // Acts like not set
 	case 1: return "/-5";
 	case 2: return "/-4";
@@ -127,7 +127,7 @@ const std::string modifier_to_bonus_slash_str (int modifier)
 // Roll "a" to see if it beats "b"
 //
 bool
-d20roll (int modifier_a, int modifier_b, bool &fumble, bool &critical)
+d20roll (int stat_a, int stat_b, bool &fumble, bool &critical)
 {
     auto roll_a = random_range_inclusive(1, 20);
 
@@ -147,15 +147,15 @@ d20roll (int modifier_a, int modifier_b, bool &fumble, bool &critical)
     auto roll_b = random_range_inclusive(1, 20);
 //TOPCON("a %d b %d", roll_a, roll_b);
 
-    return roll_a + modifier_to_bonus(modifier_a) >= 
-           roll_b + modifier_to_bonus(modifier_b);
+    return roll_a + stat_to_bonus(stat_a) >= 
+           roll_b + stat_to_bonus(stat_b);
 }
 
 //
 // Roll "a" to see if it beats "b"
 //
 bool
-d20roll (int modifier_a, int modifier_b)
+d20roll (int stat_a, int stat_b)
 {
     auto roll_a = random_range_inclusive(1, 20);
 
@@ -169,9 +169,9 @@ d20roll (int modifier_a, int modifier_b)
 
     auto roll_b = random_range_inclusive(1, 20);
 
-    roll_a += modifier_to_bonus(modifier_a);
-    roll_b += modifier_to_bonus(modifier_b);
-    //TOPCON("A %d(+%d) B %d(%d)", roll_a, modifier_a, roll_b, modifier_b);
+    roll_a += stat_to_bonus(stat_a);
+    roll_b += stat_to_bonus(stat_b);
+    //TOPCON("A %d(+%d) B %d(%d)", roll_a, stat_a, roll_b, stat_b);
 
     return roll_a >= roll_b;
 }
@@ -222,9 +222,9 @@ Dice::Dice (std::string s)
                     ndice = std::stoi(sp[0]);
                     sides = std::stoi(sp[1]);
                 } else {
-                    modifier += std::stoi(sp[0]);
+                    stat += std::stoi(sp[0]);
                 }
-                // CON("new dice %dd%d+%d", ndice, sides, modifier);
+                // CON("new dice %dd%d+%d", ndice, sides, stat);
             }
         }
     }
@@ -237,19 +237,19 @@ int Dice::roll (void) const
     while (n--) {
         tot += random_range(0, sides) + 1;
     }
-    tot += modifier;
-    // CON("roll %dd%d+%d => %d", ndice, sides, modifier, tot);
+    tot += stat;
+    // CON("roll %dd%d+%d => %d", ndice, sides, stat, tot);
     return (tot);
 }
 
 int Dice::max_roll (void) const
 {
-    return ndice * sides + modifier;
+    return ndice * sides + stat;
 }
 
 int Dice::min_roll (void) const
 {
-    return ndice * 1 + modifier;
+    return ndice * 1 + stat;
 }
 
 bool Dice::crit_roll (void) const
@@ -258,10 +258,10 @@ bool Dice::crit_roll (void) const
     return r >= (ndice * sides);
 }
 
-bool Dice::crit_roll_minus_modifier (void) const
+bool Dice::crit_roll_minus_stat (void) const
 {
     auto r = roll();
-    return r - modifier >= (ndice * sides);
+    return r - stat >= (ndice * sides);
 }
 
 int Dice::operator ()() const

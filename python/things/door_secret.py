@@ -29,6 +29,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="door_secret1", text_name="secret door")
+    tp_init(name="door_secret", text_name="secret door")
 
 init()

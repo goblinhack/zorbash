@@ -643,17 +643,17 @@ class Tp:
     def set_stamina(self, value):
         zx.tp_set_stamina(self, value)
 
-    def set_modifier_strength(self, value):
-        zx.tp_set_modifier_strength(self, value)
+    def set_stat_strength(self, value):
+        zx.tp_set_stat_strength(self, value)
 
-    def set_modifier_defence(self, value):
-        zx.tp_set_modifier_defence(self, value)
+    def set_stat_defence(self, value):
+        zx.tp_set_stat_defence(self, value)
 
-    def set_modifier_attack(self, value):
-        zx.tp_set_modifier_attack(self, value)
+    def set_stat_attack(self, value):
+        zx.tp_set_stat_attack(self, value)
 
-    def set_modifier_constitution(self, value):
-        zx.tp_set_modifier_constitution(self, value)
+    def set_stat_constitution(self, value):
+        zx.tp_set_stat_constitution(self, value)
 
     def set_throw_distance(self, value):
         zx.tp_set_throw_distance(self, value)
@@ -763,11 +763,11 @@ class Tp:
     def set_health_hunger_pct(self, value):
         zx.tp_set_health_hunger_pct(self, value)
 
-    def set_modifier_attack(self, value):
-        zx.tp_set_modifier_attack(self, value)
+    def set_stat_attack(self, value):
+        zx.tp_set_stat_attack(self, value)
 
-    def set_modifier_defence(self, value):
-        zx.tp_set_modifier_defence(self, value)
+    def set_stat_defence(self, value):
+        zx.tp_set_stat_defence(self, value)
 
     def set_hunger_clock_freq_ms(self, value):
         zx.tp_set_hunger_clock_freq_ms(self, value)

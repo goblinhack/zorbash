@@ -293,9 +293,9 @@ static void wid_rightbar_create (void)
         char tmp[UI_SIDEBAR_RIGHT_WIDTH + 1];
         snprintf(tmp, sizeof(tmp) - 1,
                  "   %2d   %2d   %2d",
-                 player->get_modifier_attack(),
-                 player->get_modifier_defence(),
-                 player->get_modifier_strength());
+                 player->get_stat_attack(),
+                 player->get_stat_defence(),
+                 player->get_stat_strength());
         wid_set_text(w, tmp);
         wid_set_text_lhs(w, true);
     }
@@ -316,7 +316,7 @@ static void wid_rightbar_create (void)
         char tmp[UI_SIDEBAR_RIGHT_WIDTH + 1];
         snprintf(tmp, sizeof(tmp) - 1,
                  "   %2d   %2d   %2d",
-                 player->get_modifier_constitution(),
+                 player->get_stat_constitution(),
                  0,
                  0);
         wid_set_text(w, tmp);

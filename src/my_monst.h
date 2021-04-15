@@ -64,10 +64,10 @@ public:
     int          lifespan = {};              // How many things this thing owns.
     int          light_quality {};
     int          light_strength {};          // Current strength, including torches
-    int          modifier_attack = {};
-    int          modifier_constitution = {};
-    int          modifier_defence = {};
-    int          modifier_strength = {};
+    int          stat_attack = {};
+    int          stat_constitution = {};
+    int          stat_defence = {};
+    int          stat_strength = {};
     int          owned_count = {};           // How many things this thing owns.
     int          spawned_count = {};         // How many things this thing owns.
     int          minion_count = {};          // How many things this thing spawned.

@@ -296,17 +296,17 @@ _
         return true;
     }
 
-    auto att_mod = modifier_to_bonus(get_modifier_strength()) +
-                   modifier_to_bonus(get_modifier_attack());
+    auto att_mod = stat_to_bonus(get_stat_strength()) +
+                   stat_to_bonus(get_stat_attack());
     if (owner) {
-        att_mod += modifier_to_bonus(owner->get_modifier_strength());
-        att_mod += modifier_to_bonus(owner->get_modifier_attack());
+        att_mod += stat_to_bonus(owner->get_stat_strength());
+        att_mod += stat_to_bonus(owner->get_stat_attack());
     }
 
-    auto def_mod = modifier_to_bonus(it->get_modifier_defence());
+    auto def_mod = stat_to_bonus(it->get_stat_defence());
     auto it_owner = get_top_owner();
     if (it_owner) {
-        def_mod = modifier_to_bonus(it_owner->get_modifier_defence());
+        def_mod = stat_to_bonus(it_owner->get_stat_defence());
     }
 
     bool crit = false;

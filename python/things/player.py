@@ -74,10 +74,10 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_weapon_wielder(True)
     x.set_light_strength(8)
     x.set_long_text_description("Our most noble adventurer or no particular race or gender. Devoid of fear and stout of heart. Likes kittens.")
-    x.set_modifier_attack(10) # 10, means no bonus
-    x.set_modifier_constitution(10)
-    x.set_modifier_defence(10)
-    x.set_modifier_strength(10)
+    x.set_stat_attack(10) # 10, means no bonus
+    x.set_stat_constitution(10)
+    x.set_stat_defence(10)
+    x.set_stat_strength(10)
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(200)
     x.set_on_bite_do("player.on_bite()")

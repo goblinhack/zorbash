@@ -85,10 +85,10 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          lifespan                  */ in >> bits(my.t->lifespan);
     /* int          light_quality             */ in >> bits(my.t->light_quality);
     /* int          light_strength            */ in >> bits(my.t->light_strength);
-    /* int          modifier_attack           */ in >> bits(my.t->modifier_attack);
-    /* int          modifier_constitution     */ in >> bits(my.t->modifier_constitution);
-    /* int          modifier_defence          */ in >> bits(my.t->modifier_defence);
-    /* int          modifier_strength         */ in >> bits(my.t->modifier_strength);
+    /* int          stat_attack           */ in >> bits(my.t->stat_attack);
+    /* int          stat_constitution     */ in >> bits(my.t->stat_constitution);
+    /* int          stat_defence          */ in >> bits(my.t->stat_defence);
+    /* int          stat_strength         */ in >> bits(my.t->stat_strength);
     /* int          owned_count               */ in >> bits(my.t->owned_count);
     /* int          minion_count              */ in >> bits(my.t->minion_count);
     /* int          charge_count              */ in >> bits(my.t->charge_count);

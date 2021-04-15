@@ -57,10 +57,10 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int          lifespan                  */ out << bits(my.t->lifespan);
     /* int          light_quality             */ out << bits(my.t->light_quality);
     /* int          light_strength            */ out << bits(my.t->light_strength);
-    /* int          modifier_attack           */ out << bits(my.t->modifier_attack);
-    /* int          modifier_constitution     */ out << bits(my.t->modifier_constitution);
-    /* int          modifier_defence          */ out << bits(my.t->modifier_defence);
-    /* int          modifier_strength         */ out << bits(my.t->modifier_strength);
+    /* int          stat_attack           */ out << bits(my.t->stat_attack);
+    /* int          stat_constitution     */ out << bits(my.t->stat_constitution);
+    /* int          stat_defence          */ out << bits(my.t->stat_defence);
+    /* int          stat_strength         */ out << bits(my.t->stat_strength);
     /* int          owned_count               */ out << bits(my.t->owned_count);
     /* int          minion_count              */ out << bits(my.t->minion_count);
     /* int          charge_count              */ out << bits(my.t->charge_count);

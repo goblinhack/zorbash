@@ -75,9 +75,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     if (!it->is_dead) {
         log("Shove: it strength %d vs me %d",
-            it->get_modifier_strength(), get_modifier_strength());
+            it->get_stat_strength(), get_stat_strength());
 
-        if (!d20roll(get_modifier_strength(), it->get_modifier_strength())) {
+        if (!d20roll(get_stat_strength(), it->get_stat_strength())) {
             if (is_player()) {
                 TOPCON("%s shoves you back!", it->text_The().c_str());
             } else if (it->is_player()) {

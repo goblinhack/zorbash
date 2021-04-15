@@ -28,7 +28,7 @@ void Level::display_blood (void)
     static int high = 240;
     static int pulse = 1;
     static color blood(255, 255, 255, 128);
-    static auto t = "blood-0";
+    static auto t = "blood_0";
 
     static uint32_t last_pulse_when;
     if (!last_pulse_when) {
@@ -54,19 +54,19 @@ void Level::display_blood (void)
         }
 
         if (pct <= THING_HEALTH_BLOODIED_PCT1) {
-            t = "blood-0";
+            t = "blood_0";
             pulse = 1;
         }
         if (pct < THING_HEALTH_BLOODIED_PCT2) {
-            t = "blood-1";
+            t = "blood_1";
             pulse = 2;
         }
         if (pct < THING_HEALTH_BLOODIED_PCT3) {
-            t = "blood-2";
+            t = "blood_2";
             pulse = 2;
         }
         if (pct < THING_HEALTH_BLOODIED_PCT4) {
-            t = "blood-3";
+            t = "blood_3";
             pulse = 3;
         }
     }
