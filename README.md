@@ -1,7 +1,7 @@
 Zorbash
 -------
 
-Welcome to the lair of the dread beholder, Zorbash. 
+Welcome to the lair of the dread tentacleye, Zorbash. 
 Liberate the Orb of Zorb and defeat Zorbash to win.
 
 (Well you will once the game is finished! :)

@@ -60,7 +60,7 @@ bool Thing::collision_obstacle (Thingp it)
     }
 
     //
-    // Stop beholders piling on top of each other
+    // Stop tentacleyes piling on top of each other
     //
     if (it->is_floating()) {
         if (is_floating()) {
@@ -160,7 +160,7 @@ bool Thing::ai_obstacle (Thingp it)
     }
 
     //
-    // Stop beholders piling on top of each other
+    // Stop tentacleyes piling on top of each other
     //
     if (it->is_floating()) {
         if (is_floating()) {
