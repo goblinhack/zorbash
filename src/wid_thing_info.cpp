@@ -268,33 +268,69 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     }
 
     if (t->is_alive_monst() || t->is_player()) {
-        snprintf(tmp, sizeof(tmp) - 1,
-                 "%%fg=white$Attack          %2d%-3s to dmg",
-                 t->get_modifier_attack(),
-                 modifier_to_bonus_slash_str(
-                    t->get_modifier_attack()).c_str());
-        wid_popup_window->log(tmp);
+        {
+            auto stat = t->get_modifier_attack();
+            if (stat != 10) {
+                snprintf(tmp, sizeof(tmp) - 1,
+                        "%%fg=white$Attack          %2d%-3s to dmg",
+                        stat,
+                        modifier_to_bonus_slash_str(stat).c_str());
+                wid_popup_window->log(tmp);
+            } else {
+                snprintf(tmp, sizeof(tmp) - 1,
+                        "%%fg=white$Attack          %2d/no bonus`",
+                        stat);
+                wid_popup_window->log(tmp);
+            }
+        }
 
-        snprintf(tmp, sizeof(tmp) - 1,
-                 "%%fg=white$Defence         %2d%-3s ``````",
-                 t->get_modifier_defence(),
-                 modifier_to_bonus_slash_str(
-                    t->get_modifier_defence()).c_str());
-        wid_popup_window->log(tmp);
+        {
+            auto stat = t->get_modifier_defence();
+            if (stat != 10) {
+                snprintf(tmp, sizeof(tmp) - 1,
+                        "%%fg=white$Defence         %2d%-3s to dmg",
+                        stat,
+                        modifier_to_bonus_slash_str(stat).c_str());
+                wid_popup_window->log(tmp);
+            } else {
+                snprintf(tmp, sizeof(tmp) - 1,
+                        "%%fg=white$Defence         %2d/no bonus`",
+                        stat);
+                wid_popup_window->log(tmp);
+            }
+        }
 
-        snprintf(tmp, sizeof(tmp) - 1,
-                 "%%fg=white$Strength        %2d%-3s to dmg",
-                 t->get_modifier_strength(),
-                 modifier_to_bonus_slash_str(
-                    t->get_modifier_strength()).c_str());
-        wid_popup_window->log(tmp);
+        {
+            auto stat = t->get_modifier_strength();
+            if (stat != 10) {
+                snprintf(tmp, sizeof(tmp) - 1,
+                        "%%fg=white$Strength        %2d%-3s to dmg",
+                        stat,
+                        modifier_to_bonus_slash_str(stat).c_str());
+                wid_popup_window->log(tmp);
+            } else {
+                snprintf(tmp, sizeof(tmp) - 1,
+                        "%%fg=white$Strength        %2d/no bonus`",
+                        stat);
+                wid_popup_window->log(tmp);
+            }
+        }
 
-        snprintf(tmp, sizeof(tmp) - 1,
-                 "%%fg=white$Constitution    %2d%-3s ``````",
-                 t->get_modifier_constitution(),
-                 modifier_to_bonus_slash_str(
-                    t->get_modifier_constitution()).c_str());
-        wid_popup_window->log(tmp);
+        {
+            auto stat = t->get_modifier_constitution();
+            if (stat != 10) {
+                snprintf(tmp, sizeof(tmp) - 1,
+                        "%%fg=white$Constitution    %2d%-3s to dmg",
+                        stat,
+                        modifier_to_bonus_slash_str(stat).c_str());
+                wid_popup_window->log(tmp);
+            } else {
+                snprintf(tmp, sizeof(tmp) - 1,
+                        "%%fg=white$Constitution    %2d/no bonus`",
+                        stat);
+                wid_popup_window->log(tmp);
+            }
+        }
     }
 
     if (t->is_alive_monst()) {
