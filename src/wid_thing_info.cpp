@@ -269,12 +269,12 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
 
     if (t->is_alive_monst() || t->is_player()) {
         {
-            auto stat = t->get_modifier_attack();
+            auto stat = t->get_stat_attack();
             if (stat != 10) {
                 snprintf(tmp, sizeof(tmp) - 1,
                         "%%fg=white$Attack          %2d%-3s to dmg",
                         stat,
-                        modifier_to_bonus_slash_str(stat).c_str());
+                        stat_to_bonus_slash_str(stat).c_str());
                 wid_popup_window->log(tmp);
             } else {
                 snprintf(tmp, sizeof(tmp) - 1,
@@ -285,12 +285,12 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         }
 
         {
-            auto stat = t->get_modifier_defence();
+            auto stat = t->get_stat_defence();
             if (stat != 10) {
                 snprintf(tmp, sizeof(tmp) - 1,
                         "%%fg=white$Defence         %2d%-3s to dmg",
                         stat,
-                        modifier_to_bonus_slash_str(stat).c_str());
+                        stat_to_bonus_slash_str(stat).c_str());
                 wid_popup_window->log(tmp);
             } else {
                 snprintf(tmp, sizeof(tmp) - 1,
@@ -301,12 +301,12 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         }
 
         {
-            auto stat = t->get_modifier_strength();
+            auto stat = t->get_stat_strength();
             if (stat != 10) {
                 snprintf(tmp, sizeof(tmp) - 1,
                         "%%fg=white$Strength        %2d%-3s to dmg",
                         stat,
-                        modifier_to_bonus_slash_str(stat).c_str());
+                        stat_to_bonus_slash_str(stat).c_str());
                 wid_popup_window->log(tmp);
             } else {
                 snprintf(tmp, sizeof(tmp) - 1,
@@ -317,12 +317,12 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         }
 
         {
-            auto stat = t->get_modifier_constitution();
+            auto stat = t->get_stat_constitution();
             if (stat != 10) {
                 snprintf(tmp, sizeof(tmp) - 1,
                         "%%fg=white$Constitution    %2d%-3s to dmg",
                         stat,
-                        modifier_to_bonus_slash_str(stat).c_str());
+                        stat_to_bonus_slash_str(stat).c_str());
                 wid_popup_window->log(tmp);
             } else {
                 snprintf(tmp, sizeof(tmp) - 1,

@@ -13,7 +13,7 @@ class Dice {
 private:
     int ndice {};
     int sides {};
-    int modifier {};
+    int stat {};
     std::string hd;
 public:
     std::string python_func;
@@ -25,14 +25,14 @@ public:
     int max_roll(void) const;
     int min_roll(void) const;
     bool crit_roll(void) const;
-    bool crit_roll_minus_modifier(void) const;
+    bool crit_roll_minus_stat(void) const;
     int operator ()() const;
 };
 
-bool d20roll(int modifier_a, int modifier_b);
-bool d20roll(int modifier_a, int modifier_b, bool &fumble, bool &critical);
-int modifier_to_bonus(int modifier);
-const std::string modifier_to_bonus_str(int modifier);
-const std::string modifier_to_bonus_slash_str(int modifier);
+bool d20roll(int stat_a, int stat_b);
+bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical);
+int stat_to_bonus(int stat);
+const std::string stat_to_bonus_str(int stat);
+const std::string stat_to_bonus_slash_str(int stat);
 
 #endif

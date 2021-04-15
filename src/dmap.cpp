@@ -227,7 +227,7 @@ void dmap_process (Dmap *D, point tl, point br)
     } while (changed);
 
     //
-    // Mix in any original depth modifiers
+    // Mix in any original depth stats
     //
     for (y = miny + 1; y < maxy - 1; y++) {
         for (x = minx + 1; x < maxx - 1; x++) {

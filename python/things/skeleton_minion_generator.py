@@ -43,10 +43,10 @@ def tp_init(name, text_name):
     x.set_light_color("cyan")
     x.set_long_text_description("A grave portal from which the dead crawl out.")
     x.set_minion_limit(4)
-    x.set_modifier_attack(10) # 10, means no bonus
-    x.set_modifier_constitution(0)
-    x.set_modifier_defence(0)
-    x.set_modifier_strength(0)
+    x.set_stat_attack(10) # 10, means no bonus
+    x.set_stat_constitution(0)
+    x.set_stat_defence(0)
+    x.set_stat_strength(0)
     x.set_normal_placement_rules(True)
     x.set_on_death_do("ghost_minion_generator.on_death()")
     x.set_on_idle_dice("1d10+10:skeleton_minion_generator.on_idle_dice()")

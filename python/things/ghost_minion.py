@@ -46,10 +46,10 @@ def tp_init(name, text_name):
     x.set_light_strength(1)
     x.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     x.set_minion_leash_distance(8)
-    x.set_modifier_attack(10) # 10, means no bonus
-    x.set_modifier_constitution(20)
-    x.set_modifier_defence(12)
-    x.set_modifier_strength(7)
+    x.set_stat_attack(10) # 10, means no bonus
+    x.set_stat_constitution(20)
+    x.set_stat_defence(12)
+    x.set_stat_strength(7)
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)

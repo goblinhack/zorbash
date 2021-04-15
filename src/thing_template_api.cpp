@@ -302,12 +302,12 @@ int Tp::stats09(void) const { return _stats09; }
 int Tp::stats10(void) const { return _stats10; }
 int Tp::stats11(void) const { return _stats11; }
 int Tp::stats12(void) const { return _stats12; }
-int Tp::modifier_constitution(void) const { return _modifier_constitution; }
-int Tp::modifier_attack(void) const { return _modifier_attack; }
+int Tp::stat_constitution(void) const { return _stat_constitution; }
+int Tp::stat_attack(void) const { return _stat_attack; }
 int Tp::stats17(void) const { return _stats17; }
 int Tp::throw_distance(void) const { return _throw_distance; }
 int Tp::stamina(void) const { return _stamina; }
-int Tp::modifier_defence(void) const { return _modifier_defence; }
+int Tp::stat_defence(void) const { return _stat_defence; }
 int Tp::health_hunger_pct(void) const { return _health_hunger_pct; }
 int Tp::health_starving_pct(void) const { return _health_starving_pct; }
 #define ENABLE_STRICT_TURN_BASED
@@ -316,7 +316,7 @@ int Tp::move_speed_ms(void) const { return 150; }
 #else
 int Tp::move_speed_ms(void) const { return _move_speed_ms; }
 #endif
-int Tp::modifier_strength(void) const { return _modifier_strength; }
+int Tp::stat_strength(void) const { return _stat_strength; }
 int Tp::tick_catches_up_on_attack(void) const { return _tick_catches_up_on_attack; }
 int Tp::tick_rate_tenths(void) const { return _tick_rate_tenths; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
@@ -556,16 +556,16 @@ void Tp::set_stats09(int v) { _stats09 = v; }
 void Tp::set_stats10(int v) { _stats10 = v; }
 void Tp::set_stats11(int v) { _stats11 = v; }
 void Tp::set_stats12(int v) { _stats12 = v; }
-void Tp::set_modifier_constitution(int v) { _modifier_constitution = v; }
-void Tp::set_modifier_attack(int v) { _modifier_attack = v; }
+void Tp::set_stat_constitution(int v) { _stat_constitution = v; }
+void Tp::set_stat_attack(int v) { _stat_attack = v; }
 void Tp::set_stats17(int v) { _stats17 = v; }
 void Tp::set_throw_distance(int v) { _throw_distance = v; }
 void Tp::set_stamina(int v) { _stamina = v; }
-void Tp::set_modifier_defence(int v) { _modifier_defence = v; }
+void Tp::set_stat_defence(int v) { _stat_defence = v; }
 void Tp::set_health_hunger_pct(int v) { _health_hunger_pct = v; }
 void Tp::set_health_starving_pct(int v) { _health_starving_pct = v; }
 void Tp::set_move_speed_ms(int v) { _move_speed_ms = v; }
-void Tp::set_modifier_strength(int v) { _modifier_strength = v; }
+void Tp::set_stat_strength(int v) { _stat_strength = v; }
 void Tp::set_str1(const std::string &v) { _str1 = v; }
 void Tp::set_str2(const std::string &v) { _str2 = v; }
 void Tp::set_str3(const std::string &v) { _str3 = v; }

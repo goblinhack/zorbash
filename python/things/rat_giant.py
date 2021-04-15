@@ -70,10 +70,10 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_long_text_description("An enormous rat. Blood drips from its teeth. Will eat almost anything, especially you. Answers to the name of Mr Squeekles.")
-    x.set_modifier_attack(10) # 10, means no bonus
-    x.set_modifier_constitution(11)
-    x.set_modifier_defence(12)
-    x.set_modifier_strength(7)
+    x.set_stat_attack(10) # 10, means no bonus
+    x.set_stat_constitution(11)
+    x.set_stat_defence(12)
+    x.set_stat_strength(7)
     x.set_monst_size(zx.MONST_SIZE_LARGE)
     x.set_move_speed_ms(50)
     x.set_normal_placement_rules(True)

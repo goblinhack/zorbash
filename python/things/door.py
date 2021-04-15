@@ -40,10 +40,10 @@ def tp_init(name, text_name):
     x.set_is_light_blocker(True)
     x.set_is_movement_blocking_hard(True)
     x.set_is_shown_on_leftbar(True)
-    x.set_modifier_attack(10) # 10, means no bonus
-    x.set_modifier_constitution(0)
-    x.set_modifier_defence(20)
-    x.set_modifier_strength(0)
+    x.set_stat_attack(10) # 10, means no bonus
+    x.set_stat_constitution(0)
+    x.set_stat_defence(20)
+    x.set_stat_strength(0)
     x.set_normal_placement_rules(True)
     x.set_on_death_do("door.on_death()")
     x.set_on_open_do("door.on_open()")

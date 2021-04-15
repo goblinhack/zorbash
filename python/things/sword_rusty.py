@@ -117,10 +117,10 @@ def init_weapon(name, text_name, short_text_name):
     x.set_is_treasure_class_a(True)
     x.set_is_weapon(True)
     x.set_long_text_description("A rusting sword. Ideal for absolutely no one.")
-    x.set_modifier_attack(10) # 10, means no bonus
-    x.set_modifier_constitution(0)
-    x.set_modifier_defence(0)
-    x.set_modifier_strength(0)
+    x.set_stat_attack(10) # 10, means no bonus
+    x.set_stat_constitution(0)
+    x.set_stat_defence(0)
+    x.set_stat_strength(0)
     x.set_on_use_do("sword_rusty.on_use()")
     x.set_text_a_or_an("a");
     x.set_text_description("Thy rusty means of justice.")

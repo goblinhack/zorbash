@@ -159,9 +159,9 @@ void Thing::init (Levelp level,
     }
 
     {_
-        auto v = tpp->modifier_defence();
+        auto v = tpp->stat_defence();
         if (unlikely(v)) {
-            set_modifier_defence(v);
+            set_stat_defence(v);
             set_stats_stats19(v);
         }
     }
@@ -265,23 +265,23 @@ void Thing::init (Levelp level,
     }
 
     {_
-        auto v = tpp->modifier_constitution();
+        auto v = tpp->stat_constitution();
         if (unlikely(v)) {
-            set_modifier_constitution(v);
+            set_stat_constitution(v);
         }
     }
 
     {_
-        auto v = tpp->modifier_attack();
+        auto v = tpp->stat_attack();
         if (unlikely(v)) {
-            set_modifier_attack(v);
+            set_stat_attack(v);
         }
     }
 
     {_
-        auto v = tpp->modifier_constitution();
+        auto v = tpp->stat_constitution();
         if (unlikely(v)) {
-            set_modifier_constitution(v);
+            set_stat_constitution(v);
         }
     }
 
@@ -307,9 +307,9 @@ void Thing::init (Levelp level,
     }
 
     {_
-        auto v = tpp->modifier_strength();
+        auto v = tpp->stat_strength();
         if (unlikely(v)) {
-            set_modifier_strength(v);
+            set_stat_strength(v);
         }
     }
 
