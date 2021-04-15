@@ -718,7 +718,7 @@ void Thing::blit_internal (int fbo,
         int h_step = (1.0 - ((float)h / (float)m)) * GAME_MONST_HEALTH_BAR_STEPS;
         h_step = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
         h_step = std::max(h_step, 1);
-        auto y = blit_br.y - ((tile->py2 - tile->py1) * tile->pix_height);
+        auto y = blit_br.y - (tile->pix_height - tile->py1);
         auto x = (blit_tl.x + blit_br.x) / 2;
 
         {
