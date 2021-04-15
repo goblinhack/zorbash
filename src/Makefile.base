@@ -289,7 +289,7 @@ TARGET_GAME=$(NAME)$(EXE)
 $(TARGET_GAME): $(GAME_OBJECTS)
 	$(CC) $(LDFLAGS) $(GAME_OBJECTS) $(LDLIBS) -o $(TARGET_GAME)
 	cp $(TARGET_GAME) ..
-	$(DSYM)
+	#$(DSYM)
 
 #
 # To force clean and avoid "up to date" warning.
