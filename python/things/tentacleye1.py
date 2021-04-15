@@ -33,6 +33,7 @@ def tp_init(name, text_name):
     x.set_collision_radius(0.40)
     x.set_damage_melee_dice("2d6")
     x.set_gfx_anim_attack("attack_claws")
+    x.set_gfx_show_outlined(True)
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_health_bar_shown(True)
