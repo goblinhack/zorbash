@@ -715,10 +715,11 @@ void Thing::blit_internal (int fbo,
          (gfx_health_bar_shown_only_when_injured() && (h < m))
         )) {
 
-        int h_step = (1.0 - ((float)h / (float)m)) * GAME_MONST_HEALTH_BAR_STEPS;
+        int h_step = (1.0 - ((float)h / (float)m)) * 
+                        GAME_MONST_HEALTH_BAR_STEPS;
         h_step = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
         h_step = std::max(h_step, 1);
-        auto y = blit_br.y - (tile->pix_height - tile->py1);
+        auto y = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height);
         auto x = (blit_tl.x + blit_br.x) / 2;
 
         {
