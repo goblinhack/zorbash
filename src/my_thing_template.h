@@ -60,7 +60,7 @@ private:
     float _collision_attack_radius {};
     float _collision_radius {};
     fsize _sz;
-    int _unused_rrr98 {};
+    int _rrr24 {};
     int _ai_obstacle {};
     int _ai_scent_distance {};
     int _attack_eater {};
@@ -103,7 +103,7 @@ private:
     int _gfx_dead_anim {};
     int _gfx_health_bar_shown {};
     int _gfx_health_bar_shown_only_when_injured {};
-    int _gfx_is_rrr99 {};
+    int _rrr23 {};
     int _gfx_glows {};
     int _gfx_on_fire_anim {};
     int _gfx_oversized_but_sitting_on_the_ground {};
@@ -235,7 +235,7 @@ private:
     int _is_spawner {};
     int _is_rrr7 {};
     int _is_rrr8 {};
-    int _is_rrr9 {};
+    int _ai_avoid_distance {};
     int _is_secret_door {};
     int _is_sewer_wall {};
     int _is_shallow_water {};
@@ -423,7 +423,7 @@ public:
     const std::string& weapon_carry_anim(void) const;
     float collision_attack_radius(void) const;
     float collision_radius(void) const;
-    int unused_rrr98(void) const;
+    int rrr24(void) const;
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
@@ -466,7 +466,7 @@ public:
     int gfx_dead_anim(void) const;
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
-    int gfx_is_rrr99(void) const;
+    int rrr23(void) const;
     int gfx_glows(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
@@ -597,7 +597,7 @@ public:
     int is_spawner(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
-    int is_rrr9(void) const;
+    int ai_avoid_distance(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;
@@ -658,7 +658,7 @@ public:
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
     std::string text_a_or_an(void) const;
-    void set_unused_rrr98(int);
+    void set_rrr24(int);
     void set_ai_obstacle(int);
     void set_ai_scent_distance(int);
     void set_attack_eater(int);
@@ -705,7 +705,7 @@ public:
     void set_gfx_dead_anim(int);
     void set_gfx_health_bar_shown(int);
     void set_gfx_health_bar_shown_only_when_injured(int);
-    void set_gfx_is_rrr99(int);
+    void set_rrr23(int);
     void set_gfx_glows(int);
     void set_gfx_on_fire_anim(int);
     void set_gfx_oversized_but_sitting_on_the_ground(int);
@@ -839,7 +839,7 @@ public:
     void set_is_spawner(int);
     void set_is_rrr7(int);
     void set_is_rrr8(int);
-    void set_is_rrr9(int);
+    void set_ai_avoid_distance(int);
     void set_is_secret_door(int);
     void set_is_sewer_wall(int);
     void set_is_shallow_water(int);

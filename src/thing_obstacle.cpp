@@ -12,7 +12,7 @@
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 
-bool Thing::is_ai_obstacle_for_me (const point &p)
+bool Thing::ai_obstacle_for_me (const point &p)
 {_
     //
     // Avoid threats and treat them as obstacles

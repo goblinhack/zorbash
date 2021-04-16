@@ -84,7 +84,7 @@ const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim
 const std::string& Tp::gfx_anim_attack(void) const { return _gfx_anim_attack; }
 float Tp::collision_attack_radius(void) const { return _collision_attack_radius; }
 float Tp::collision_radius(void) const { return _collision_radius; }
-int Tp::unused_rrr98(void) const { return _unused_rrr98; }
+int Tp::rrr24(void) const { return _rrr24; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
 int Tp::ai_scent_distance(void) const { return _ai_scent_distance; }
 int Tp::blit_bot_off(void) const { return _blit_bot_off; }
@@ -256,7 +256,7 @@ int Tp::bag_width(void) const { return _bag_width; }
 int Tp::monst_size(void) const { return _monst_size; }
 int Tp::is_spawner(void) const { return _is_spawner; }
 int Tp::rarity(void) const { return _rarity; }
-int Tp::gfx_is_rrr99(void) const { return _gfx_is_rrr99; }
+int Tp::rrr23(void) const { return _rrr23; }
 int Tp::is_shown_uniquely_on_leftbar(void) const { return _is_shown_uniquely_on_leftbar; }
 int Tp::is_stamina_check(void) const { return _is_stamina_check; }
 int Tp::gfx_shown_in_bg(void) const { return _gfx_shown_in_bg; }
@@ -266,7 +266,7 @@ int Tp::is_weapon_wielder(void) const { return _is_weapon_wielder; }
 int Tp::is_item(void) const { return _is_item; }
 int Tp::is_rrr7(void) const { return _is_rrr7; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
-int Tp::is_rrr9(void) const { return _is_rrr9; }
+int Tp::ai_avoid_distance(void) const { return _ai_avoid_distance; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_shown_on_leftbar(void) const { return _is_shown_on_leftbar; }
@@ -323,7 +323,7 @@ int Tp::weapon_damage(void) const { return _weapon_damage; }
 int Tp::weapon_use_delay_hundredths(void) const { return _weapon_use_delay_hundredths; }
 int Tp::weapon_use_distance(void) const { return _weapon_use_distance; }
 std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
-void Tp::set_unused_rrr98(int v) { _unused_rrr98 = v; }
+void Tp::set_rrr24(int v) { _rrr24 = v; }
 void Tp::set_ai_obstacle(int v) { _ai_obstacle = v; }
 void Tp::set_ai_scent_distance(int v) { _ai_scent_distance = v; }
 void Tp::set_blit_bot_off(int v) { _blit_bot_off = v; }
@@ -497,7 +497,7 @@ void Tp::set_bag_width(int v) { _bag_width = v; }
 void Tp::set_monst_size(int v) { _monst_size = v; }
 void Tp::set_is_spawner(int v) { _is_spawner = v; }
 void Tp::set_rarity(int v) { _rarity = v; }
-void Tp::set_gfx_is_rrr99(int v) { _gfx_is_rrr99 = v; }
+void Tp::set_rrr23(int v) { _rrr23 = v; }
 void Tp::set_is_shown_uniquely_on_leftbar(int v) { _is_shown_uniquely_on_leftbar = v; }
 void Tp::set_is_stamina_check(int v) { _is_stamina_check = v; }
 void Tp::set_gfx_shown_in_bg(int v) { _gfx_shown_in_bg = v; }
@@ -507,7 +507,7 @@ void Tp::set_is_weapon_wielder(int v) { _is_weapon_wielder = v; }
 void Tp::set_is_item(int v) { _is_item = v; }
 void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
-void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }
+void Tp::set_ai_avoid_distance(int v) { _ai_avoid_distance = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
 void Tp::set_is_shovable(int v) { _is_shovable = v; }
 void Tp::set_is_shown_on_leftbar(int v) { _is_shown_on_leftbar = v; }
