@@ -90,6 +90,7 @@ _
                 p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
         }
 
+        bool avoid = false;
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
 
@@ -125,7 +126,7 @@ _
                     //
                     // If starving, prefer the thing with most health
                     //
-                    GOAL_ADD(it_health, "eat-player");
+                    GOAL_ADD(it_health, "eat-it");
                     got_one_this_tile = true;
                 }
             } else if (is_hungry) {
@@ -151,6 +152,18 @@ _
             if (!got_one_this_tile) {
                 if (possible_to_attack(it)) {
                     GOAL_ADD(- health_diff, "attack-monst");
+                }
+            }
+
+            if (it->is_player()) {
+                if (distance(mid_at, level->player->mid_at) <
+                             ai_avoid_distance()) {
+                    avoid = true;
+                    GOAL_ADD(-100, "avoid-player");
+
+                    topcon("dist %f vs %d", 
+                           distance(mid_at, level->player->mid_at), 
+                           ai_avoid_distance());
                 }
             }
 
@@ -185,6 +198,31 @@ _
             set(dmap_scent->val, X, Y, terrain_score);
         } else {
             set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
+        }
+
+        if (avoid) {
+            auto d = ai_avoid_distance();
+            for (auto dx = -d; dx <= d; dx++) {
+                for (auto dy = -d; dy <= d; dy++) {
+
+                    auto dist = distance(mid_at + fpoint(dx, dy),
+                                         level->player->mid_at);
+                    if (dist < ai_avoid_distance()) {
+                        continue;
+                    }
+
+                    point p(mid_at.x + dx, mid_at.y + dy);
+                    if (ai_obstacle_for_me(p)) {
+                        continue;
+                    }
+
+                    uint8_t terrain_score = is_less_preferred_terrain(p);
+                    int total_score = -(int)terrain_score;
+                    total_score += dist * dist;
+                    goals.insert(Goal(total_score, point(X + dx, Y + dy)));
+                    set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
+                }
+            }
         }
     } }
 
