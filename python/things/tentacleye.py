@@ -24,7 +24,7 @@ def on_death(me, x, y):
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_scent_distance(14)
-    x.set_ai_avoid_distance(3)
+    x.set_ai_avoid_distance(4)
     x.set_attack_lunge(True)
     x.set_attack_meat(True)
     x.set_collision_attack(True)
@@ -44,7 +44,6 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(False)
-    x.set_is_able_to_walk_through_walls(True)
     x.set_is_active(True)
     x.set_is_attackable_by_player(True)
     x.set_is_described_when_hovering_over(True)
