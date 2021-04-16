@@ -258,7 +258,7 @@ public:
     bool inventory_id_insert(Thingp what);
     bool inventory_id_remove(Thingp what);
     bool inventory_id_remove(Thingp what, Thingp target);
-    bool is_ai_obstacle_for_me(const point&);
+    bool ai_obstacle_for_me(const point&);
     bool is_blocking_terrain(const Thingp it);
     bool is_bloodied(void);
     bool is_carrying_item(void);
@@ -537,7 +537,7 @@ public:
     int gfx_glows(void) const;
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
-    int gfx_is_rrr99(void) const;
+    int rrr23(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;
@@ -734,7 +734,7 @@ public:
     int is_spawner(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
-    int is_rrr9(void) const;
+    int ai_avoid_distance(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;
@@ -811,7 +811,7 @@ public:
     int set_throw_distance(int);
     int set_tick_rate_tenths(int);
     int tick_catches_up_on_attack(void) const;
-    int unused_rrr98(void);
+    int rrr24(void);
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;

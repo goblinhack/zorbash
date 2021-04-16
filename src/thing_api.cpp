@@ -165,9 +165,9 @@ void Thing::clear_dmap_scent (void)
     }
 }
 
-int Thing::unused_rrr98(void)
+int Thing::rrr24(void)
 {_
-    return (tp()->unused_rrr98());
+    return (tp()->rrr24());
 }
 
 int Thing::ai_scent_distance(void) const
@@ -485,9 +485,9 @@ int Thing::is_rrr8(void) const
     return (tp()->is_rrr8());
 }
 
-int Thing::is_rrr9(void) const
+int Thing::ai_avoid_distance(void) const
 {_
-    return (tp()->is_rrr9());
+    return (tp()->ai_avoid_distance());
 }
 
 int Thing::is_item_carrier(void) const
@@ -753,9 +753,9 @@ int Thing::rarity(void) const
     return (tp()->rarity());
 }
 
-int Thing::gfx_is_rrr99(void) const
+int Thing::rrr23(void) const
 {_
-    return (tp()->gfx_is_rrr99());
+    return (tp()->rrr23());
 }
 
 int Thing::is_shown_uniquely_on_leftbar(void) const

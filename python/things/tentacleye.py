@@ -24,6 +24,7 @@ def on_death(me, x, y):
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_scent_distance(14)
+    x.set_ai_avoid_distance(3)
     x.set_attack_lunge(True)
     x.set_attack_meat(True)
     x.set_collision_attack(True)

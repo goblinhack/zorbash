@@ -158,7 +158,6 @@ PyObject *thing_is_rrr5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spawner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr8(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr9(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_secret_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sewer_wall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shallow_water(PyObject *obj, PyObject *args, PyObject *keywds);

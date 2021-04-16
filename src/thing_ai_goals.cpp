@@ -42,7 +42,7 @@ _
             auto X = x - minx;
             auto Y = y - miny;
 
-            if (is_ai_obstacle_for_me(p)) {
+            if (ai_obstacle_for_me(p)) {
                 set(dmap_scent->val, X, Y, DMAP_IS_WALL);
             } else {
                 set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);

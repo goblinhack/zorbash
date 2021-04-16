@@ -439,7 +439,7 @@ bool Thing::matches (const std::string& what)
     if (is_rrr8() && (what == "is_rrr8")) {
         return true;
     }
-    if (is_rrr9() && (what == "is_rrr9")) {
+    if (ai_avoid_distance() && (what == "ai_avoid_distance")) {
         return true;
     }
     if (is_secret_door() && (what == "is_secret_door")) {
