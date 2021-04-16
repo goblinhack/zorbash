@@ -159,11 +159,6 @@ _
                 if (distance(mid_at, level->player->mid_at) <
                              ai_avoid_distance()) {
                     avoid = true;
-                    GOAL_ADD(-100, "avoid-player");
-
-                    topcon("dist %f vs %d", 
-                           distance(mid_at, level->player->mid_at), 
-                           ai_avoid_distance());
                 }
             }
 
