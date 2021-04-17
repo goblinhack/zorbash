@@ -356,7 +356,7 @@ Tpp tp_random_secret_door (void)
     return tp_get_with_no_rarity_filter(tp_secret_door);
 }
 
-Tpp tp_random_minion_genertor (void)
+Tpp tp_random_minion_generator (void)
 {_
     if (unlikely(!tp_generator.size())) {
         ERR("No generator found");
@@ -365,14 +365,35 @@ Tpp tp_random_minion_genertor (void)
     return tp_get_with_rarity_filter(tp_generator);
 }
 
-Tpp tp_random_minion_genertor_easy (void)
+Tpp tp_random_minion_generator_easy (void)
 {
-    return tp_random_minion_genertor();
+    return tp_random_minion_generator();
 }
 
-Tpp tp_random_minion_genertor_hard (void)
+Tpp tp_random_minion_generator_hard (void)
 {
-    return tp_random_minion_genertor();
+    return tp_random_minion_generator();
+}
+
+Tpp Level::tp_random_minion_generator (const point &p)
+{_
+    for (;;) {
+        auto tpp = ::tp_random_minion_generator();
+        if (tpp->will_avoid_threat(this, p)) {
+            continue;
+        }
+        return tpp;
+    }
+}
+
+Tpp Level::tp_random_minion_generator_easy (const point &p)
+{_
+    return tp_random_minion_generator(p);
+}
+
+Tpp Level::tp_random_minion_generator_hard (const point &p)
+{_
+    return tp_random_minion_generator(p);
 }
 
 Tpp tp_random_blood (void)

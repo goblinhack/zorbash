@@ -665,6 +665,8 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             //
             mysrand(seed + x + (y * MAP_WIDTH));
 
+            point p(x, y);
+
             if (d->is_blood(x, y))            { tp = tp_random_blood(); }
             if (d->is_door(x, y))             { tp = tp_random_door(); }
             if (d->is_ascend_dungeon(x, y))   { tp = tp_random_entrance(); }
@@ -673,18 +675,18 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_gold(x, y))             { tp = tp_random_gold(); }
             if (d->is_key(x, y))              { tp = tp_random_key(); }
             if (d->is_potion(x, y))           { tp = tp_random_potion(); }
-            if (d->is_monst_easy(x, y)) { 
-                tp = tp_random_monst_easy(point(x, y)); 
-            }
-            if (d->is_monst_easy(x, y)) { 
-                tp = tp_random_monst_hard(point(x, y)); 
-            }
             if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
+            if (d->is_monst_easy(x, y)) { 
+                tp = tp_random_monst_easy(p);
+            }
+            if (d->is_monst_easy(x, y)) { 
+                tp = tp_random_monst_hard(p); 
+            }
             if (d->is_minion_generator_easy(x, y)) {
-                tp = tp_random_minion_genertor_easy(); 
+                tp = tp_random_minion_generator_easy(p); 
             }
             if (d->is_minion_generator_hard(x, y)) {
-                tp = tp_random_minion_genertor_hard(); 
+                tp = tp_random_minion_generator_hard(p); 
             }
             if (d->is_brazier(x, y))          { tp = tp_random_brazier(); }
             if (d->is_treasure(x, y))         { tp = tp_random_treasure(); }
