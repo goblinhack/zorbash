@@ -194,6 +194,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_open               << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_resurrected        << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_resurrecting       << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_unable_to_resurrect       << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_sleeping           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_starving           << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_the_grid           << shift; shift++;
