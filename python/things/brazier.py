@@ -30,7 +30,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_shown_on_leftbar(True)
     x.set_is_shown_uniquely_on_leftbar(True)
     x.set_is_brazier(True)
-    x.set_light_color("red")
+    x.set_light_color("orange")
     x.set_normal_placement_rules(True)
     x.set_is_corpse_on_death(True)
     x.set_spawn_on_shoved("fire")

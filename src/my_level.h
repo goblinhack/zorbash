@@ -615,6 +615,9 @@ public:
     Tpp tp_random_monst(const point &p);
     Tpp tp_random_monst_easy(const point &p);
     Tpp tp_random_monst_hard(const point &p);
+    Tpp tp_random_minion_generator(const point &p);
+    Tpp tp_random_minion_generator_easy(const point &p);
+    Tpp tp_random_minion_generator_hard(const point &p);
     Thingp inventory_describe(const uint32_t slot);
     Thingp skillbox_describe(const uint32_t slot);
     friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
