@@ -253,6 +253,97 @@ int Tp::is_rrr6(void) const                                          { return _i
 int Tp::is_rrr7(void) const                                          { return _is_rrr7; }
 int Tp::is_rrr8(void) const                                          { return _is_rrr8; }
 int Tp::is_rrr9(void) const                                          { return _is_rrr9; }
+int Tp::is_rrr10(void) const                                         { return _is_rrr10; }
+int Tp::is_rrr11(void) const                                         { return _is_rrr11; }
+int Tp::is_rrr12(void) const                                         { return _is_rrr12; }
+int Tp::is_rrr13(void) const                                         { return _is_rrr13; }
+int Tp::is_rrr14(void) const                                         { return _is_rrr14; }
+int Tp::is_rrr15(void) const                                         { return _is_rrr15; }
+int Tp::is_rrr16(void) const                                         { return _is_rrr16; }
+int Tp::is_rrr17(void) const                                         { return _is_rrr17; }
+int Tp::is_rrr18(void) const                                         { return _is_rrr18; }
+int Tp::is_rrr19(void) const                                         { return _is_rrr19; }
+int Tp::is_rrr20(void) const                                         { return _is_rrr20; }
+int Tp::is_rrr21(void) const                                         { return _is_rrr21; }
+int Tp::is_rrr22(void) const                                         { return _is_rrr22; }
+int Tp::is_rrr23(void) const                                         { return _is_rrr23; }
+int Tp::is_rrr24(void) const                                         { return _is_rrr24; }
+int Tp::is_rrr25(void) const                                         { return _is_rrr25; }
+int Tp::is_rrr26(void) const                                         { return _is_rrr26; }
+int Tp::is_rrr27(void) const                                         { return _is_rrr27; }
+int Tp::is_rrr28(void) const                                         { return _is_rrr28; }
+int Tp::is_rrr29(void) const                                         { return _is_rrr29; }
+int Tp::is_rrr30(void) const                                         { return _is_rrr30; }
+int Tp::is_rrr31(void) const                                         { return _is_rrr31; }
+int Tp::is_rrr32(void) const                                         { return _is_rrr32; }
+int Tp::is_rrr33(void) const                                         { return _is_rrr33; }
+int Tp::is_rrr34(void) const                                         { return _is_rrr34; }
+int Tp::is_rrr35(void) const                                         { return _is_rrr35; }
+int Tp::is_rrr36(void) const                                         { return _is_rrr36; }
+int Tp::is_rrr37(void) const                                         { return _is_rrr37; }
+int Tp::is_rrr38(void) const                                         { return _is_rrr38; }
+int Tp::is_rrr39(void) const                                         { return _is_rrr39; }
+int Tp::is_rrr40(void) const                                         { return _is_rrr40; }
+int Tp::is_rrr41(void) const                                         { return _is_rrr41; }
+int Tp::is_rrr42(void) const                                         { return _is_rrr42; }
+int Tp::is_rrr43(void) const                                         { return _is_rrr43; }
+int Tp::is_rrr44(void) const                                         { return _is_rrr44; }
+int Tp::is_rrr45(void) const                                         { return _is_rrr45; }
+int Tp::is_rrr46(void) const                                         { return _is_rrr46; }
+int Tp::is_rrr47(void) const                                         { return _is_rrr47; }
+int Tp::is_rrr48(void) const                                         { return _is_rrr48; }
+int Tp::is_rrr49(void) const                                         { return _is_rrr49; }
+int Tp::is_rrr50(void) const                                         { return _is_rrr50; }
+int Tp::is_rrr51(void) const                                         { return _is_rrr51; }
+int Tp::is_rrr52(void) const                                         { return _is_rrr52; }
+int Tp::is_rrr53(void) const                                         { return _is_rrr53; }
+int Tp::is_rrr54(void) const                                         { return _is_rrr54; }
+int Tp::is_rrr55(void) const                                         { return _is_rrr55; }
+int Tp::is_rrr56(void) const                                         { return _is_rrr56; }
+int Tp::is_rrr57(void) const                                         { return _is_rrr57; }
+int Tp::is_rrr58(void) const                                         { return _is_rrr58; }
+int Tp::is_rrr59(void) const                                         { return _is_rrr59; }
+int Tp::is_rrr60(void) const                                         { return _is_rrr60; }
+int Tp::is_rrr61(void) const                                         { return _is_rrr61; }
+int Tp::is_rrr62(void) const                                         { return _is_rrr62; }
+int Tp::is_rrr63(void) const                                         { return _is_rrr63; }
+int Tp::is_rrr64(void) const                                         { return _is_rrr64; }
+int Tp::is_rrr65(void) const                                         { return _is_rrr65; }
+int Tp::is_rrr66(void) const                                         { return _is_rrr66; }
+int Tp::is_rrr67(void) const                                         { return _is_rrr67; }
+int Tp::is_rrr68(void) const                                         { return _is_rrr68; }
+int Tp::is_rrr69(void) const                                         { return _is_rrr69; }
+int Tp::is_rrr70(void) const                                         { return _is_rrr70; }
+int Tp::is_rrr71(void) const                                         { return _is_rrr71; }
+int Tp::is_rrr72(void) const                                         { return _is_rrr72; }
+int Tp::is_rrr73(void) const                                         { return _is_rrr73; }
+int Tp::is_rrr74(void) const                                         { return _is_rrr74; }
+int Tp::is_rrr75(void) const                                         { return _is_rrr75; }
+int Tp::is_rrr76(void) const                                         { return _is_rrr76; }
+int Tp::is_rrr77(void) const                                         { return _is_rrr77; }
+int Tp::is_rrr78(void) const                                         { return _is_rrr78; }
+int Tp::is_rrr79(void) const                                         { return _is_rrr79; }
+int Tp::is_rrr80(void) const                                         { return _is_rrr80; }
+int Tp::is_rrr81(void) const                                         { return _is_rrr81; }
+int Tp::is_rrr82(void) const                                         { return _is_rrr82; }
+int Tp::is_rrr83(void) const                                         { return _is_rrr83; }
+int Tp::is_rrr84(void) const                                         { return _is_rrr84; }
+int Tp::is_rrr85(void) const                                         { return _is_rrr85; }
+int Tp::is_rrr86(void) const                                         { return _is_rrr86; }
+int Tp::is_rrr87(void) const                                         { return _is_rrr87; }
+int Tp::is_rrr88(void) const                                         { return _is_rrr88; }
+int Tp::is_rrr89(void) const                                         { return _is_rrr89; }
+int Tp::is_rrr90(void) const                                         { return _is_rrr90; }
+int Tp::is_rrr91(void) const                                         { return _is_rrr91; }
+int Tp::is_rrr92(void) const                                         { return _is_rrr92; }
+int Tp::is_rrr93(void) const                                         { return _is_rrr93; }
+int Tp::is_rrr94(void) const                                         { return _is_rrr94; }
+int Tp::is_rrr95(void) const                                         { return _is_rrr95; }
+int Tp::is_rrr96(void) const                                         { return _is_rrr96; }
+int Tp::is_rrr97(void) const                                         { return _is_rrr97; }
+int Tp::is_rrr98(void) const                                         { return _is_rrr98; }
+int Tp::is_rrr99(void) const                                         { return _is_rrr99; }
+int Tp::is_rrr100(void) const                                        { return _is_rrr100; }
 int Tp::is_secret_door(void) const                                   { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const                                 { return _is_shallow_water; }
@@ -488,6 +579,97 @@ void Tp::set_is_rrr6(int v)                                          { _is_rrr6 
 void Tp::set_is_rrr7(int v)                                          { _is_rrr7 = v; }
 void Tp::set_is_rrr8(int v)                                          { _is_rrr8 = v; }
 void Tp::set_is_rrr9(int v)                                          { _is_rrr9 = v; }
+void Tp::set_is_rrr10(int v)                                         { _is_rrr10 = v; }
+void Tp::set_is_rrr11(int v)                                         { _is_rrr11 = v; }
+void Tp::set_is_rrr12(int v)                                         { _is_rrr12 = v; }
+void Tp::set_is_rrr13(int v)                                         { _is_rrr13 = v; }
+void Tp::set_is_rrr14(int v)                                         { _is_rrr14 = v; }
+void Tp::set_is_rrr15(int v)                                         { _is_rrr15 = v; }
+void Tp::set_is_rrr16(int v)                                         { _is_rrr16 = v; }
+void Tp::set_is_rrr17(int v)                                         { _is_rrr17 = v; }
+void Tp::set_is_rrr18(int v)                                         { _is_rrr18 = v; }
+void Tp::set_is_rrr19(int v)                                         { _is_rrr19 = v; }
+void Tp::set_is_rrr20(int v)                                         { _is_rrr20 = v; }
+void Tp::set_is_rrr21(int v)                                         { _is_rrr21 = v; }
+void Tp::set_is_rrr22(int v)                                         { _is_rrr22 = v; }
+void Tp::set_is_rrr23(int v)                                         { _is_rrr23 = v; }
+void Tp::set_is_rrr24(int v)                                         { _is_rrr24 = v; }
+void Tp::set_is_rrr25(int v)                                         { _is_rrr25 = v; }
+void Tp::set_is_rrr26(int v)                                         { _is_rrr26 = v; }
+void Tp::set_is_rrr27(int v)                                         { _is_rrr27 = v; }
+void Tp::set_is_rrr28(int v)                                         { _is_rrr28 = v; }
+void Tp::set_is_rrr29(int v)                                         { _is_rrr29 = v; }
+void Tp::set_is_rrr30(int v)                                         { _is_rrr30 = v; }
+void Tp::set_is_rrr31(int v)                                         { _is_rrr31 = v; }
+void Tp::set_is_rrr32(int v)                                         { _is_rrr32 = v; }
+void Tp::set_is_rrr33(int v)                                         { _is_rrr33 = v; }
+void Tp::set_is_rrr34(int v)                                         { _is_rrr34 = v; }
+void Tp::set_is_rrr35(int v)                                         { _is_rrr35 = v; }
+void Tp::set_is_rrr36(int v)                                         { _is_rrr36 = v; }
+void Tp::set_is_rrr37(int v)                                         { _is_rrr37 = v; }
+void Tp::set_is_rrr38(int v)                                         { _is_rrr38 = v; }
+void Tp::set_is_rrr39(int v)                                         { _is_rrr39 = v; }
+void Tp::set_is_rrr40(int v)                                         { _is_rrr40 = v; }
+void Tp::set_is_rrr41(int v)                                         { _is_rrr41 = v; }
+void Tp::set_is_rrr42(int v)                                         { _is_rrr42 = v; }
+void Tp::set_is_rrr43(int v)                                         { _is_rrr43 = v; }
+void Tp::set_is_rrr44(int v)                                         { _is_rrr44 = v; }
+void Tp::set_is_rrr45(int v)                                         { _is_rrr45 = v; }
+void Tp::set_is_rrr46(int v)                                         { _is_rrr46 = v; }
+void Tp::set_is_rrr47(int v)                                         { _is_rrr47 = v; }
+void Tp::set_is_rrr48(int v)                                         { _is_rrr48 = v; }
+void Tp::set_is_rrr49(int v)                                         { _is_rrr49 = v; }
+void Tp::set_is_rrr50(int v)                                         { _is_rrr50 = v; }
+void Tp::set_is_rrr51(int v)                                         { _is_rrr51 = v; }
+void Tp::set_is_rrr52(int v)                                         { _is_rrr52 = v; }
+void Tp::set_is_rrr53(int v)                                         { _is_rrr53 = v; }
+void Tp::set_is_rrr54(int v)                                         { _is_rrr54 = v; }
+void Tp::set_is_rrr55(int v)                                         { _is_rrr55 = v; }
+void Tp::set_is_rrr56(int v)                                         { _is_rrr56 = v; }
+void Tp::set_is_rrr57(int v)                                         { _is_rrr57 = v; }
+void Tp::set_is_rrr58(int v)                                         { _is_rrr58 = v; }
+void Tp::set_is_rrr59(int v)                                         { _is_rrr59 = v; }
+void Tp::set_is_rrr60(int v)                                         { _is_rrr60 = v; }
+void Tp::set_is_rrr61(int v)                                         { _is_rrr61 = v; }
+void Tp::set_is_rrr62(int v)                                         { _is_rrr62 = v; }
+void Tp::set_is_rrr63(int v)                                         { _is_rrr63 = v; }
+void Tp::set_is_rrr64(int v)                                         { _is_rrr64 = v; }
+void Tp::set_is_rrr65(int v)                                         { _is_rrr65 = v; }
+void Tp::set_is_rrr66(int v)                                         { _is_rrr66 = v; }
+void Tp::set_is_rrr67(int v)                                         { _is_rrr67 = v; }
+void Tp::set_is_rrr68(int v)                                         { _is_rrr68 = v; }
+void Tp::set_is_rrr69(int v)                                         { _is_rrr69 = v; }
+void Tp::set_is_rrr70(int v)                                         { _is_rrr70 = v; }
+void Tp::set_is_rrr71(int v)                                         { _is_rrr71 = v; }
+void Tp::set_is_rrr72(int v)                                         { _is_rrr72 = v; }
+void Tp::set_is_rrr73(int v)                                         { _is_rrr73 = v; }
+void Tp::set_is_rrr74(int v)                                         { _is_rrr74 = v; }
+void Tp::set_is_rrr75(int v)                                         { _is_rrr75 = v; }
+void Tp::set_is_rrr76(int v)                                         { _is_rrr76 = v; }
+void Tp::set_is_rrr77(int v)                                         { _is_rrr77 = v; }
+void Tp::set_is_rrr78(int v)                                         { _is_rrr78 = v; }
+void Tp::set_is_rrr79(int v)                                         { _is_rrr79 = v; }
+void Tp::set_is_rrr80(int v)                                         { _is_rrr80 = v; }
+void Tp::set_is_rrr81(int v)                                         { _is_rrr81 = v; }
+void Tp::set_is_rrr82(int v)                                         { _is_rrr82 = v; }
+void Tp::set_is_rrr83(int v)                                         { _is_rrr83 = v; }
+void Tp::set_is_rrr84(int v)                                         { _is_rrr84 = v; }
+void Tp::set_is_rrr85(int v)                                         { _is_rrr85 = v; }
+void Tp::set_is_rrr86(int v)                                         { _is_rrr86 = v; }
+void Tp::set_is_rrr87(int v)                                         { _is_rrr87 = v; }
+void Tp::set_is_rrr88(int v)                                         { _is_rrr88 = v; }
+void Tp::set_is_rrr89(int v)                                         { _is_rrr89 = v; }
+void Tp::set_is_rrr90(int v)                                         { _is_rrr90 = v; }
+void Tp::set_is_rrr91(int v)                                         { _is_rrr91 = v; }
+void Tp::set_is_rrr92(int v)                                         { _is_rrr92 = v; }
+void Tp::set_is_rrr93(int v)                                         { _is_rrr93 = v; }
+void Tp::set_is_rrr94(int v)                                         { _is_rrr94 = v; }
+void Tp::set_is_rrr95(int v)                                         { _is_rrr95 = v; }
+void Tp::set_is_rrr96(int v)                                         { _is_rrr96 = v; }
+void Tp::set_is_rrr97(int v)                                         { _is_rrr97 = v; }
+void Tp::set_is_rrr98(int v)                                         { _is_rrr98 = v; }
+void Tp::set_is_rrr99(int v)                                         { _is_rrr99 = v; }
+void Tp::set_is_rrr100(int v)                                         { _is_rrr100 = v; }
 void Tp::set_is_secret_door(int v)                                   { _is_secret_door = v; }
 void Tp::set_is_sewer_wall(int v)                                    { _is_sewer_wall = v; }
 void Tp::set_is_shallow_water(int v)                                 { _is_shallow_water = v; }
