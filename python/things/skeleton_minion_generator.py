@@ -3,7 +3,7 @@ import tp
 import random
 
 def on_idle_dice(me, x, y):
-    if random.randint(1, 100) < 100:
+    if random.randint(1, 100) < 10:
         zx.tp_spawn_next_to(me, "skeleton_minion_fire")
     else:
         zx.tp_spawn_next_to(me, "skeleton_minion")
