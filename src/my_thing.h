@@ -98,6 +98,7 @@ public:
     uint64_t is_open:1                 {};
     uint64_t is_resurrected:1          {};
     uint64_t is_resurrecting:1         {};
+    uint64_t is_unable_to_resurrect:1  {};
     uint64_t is_sleeping:1             {};
     uint64_t is_starving:1             {};
     uint64_t is_the_grid:1             {};
