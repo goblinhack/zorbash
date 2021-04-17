@@ -121,7 +121,7 @@ void Thing::kill_minions (Thingp killer)
         auto o = minion->get_immediate_minion_owner();
         if (o && (o == this)) {
             minion->remove_minion_owner();
-            minion->is_unable_to_resurrect = true;
+            minion->is_resurrection_blocked = true;
             minion->dead(killer, "its master died");
         }
     }

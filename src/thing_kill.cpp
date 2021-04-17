@@ -102,7 +102,7 @@ void Thing::kill (Thingp killer, const char *reason)
     //
     // Resurrect unless say this was a minion and its master died
     //
-    if (!is_unable_to_resurrect) {
+    if (!is_resurrection_blocked) {
         if (is_resurrectable()) {
             set_tick_resurrect_when(game->tick_current + get_resurrect());
         }

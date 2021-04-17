@@ -171,7 +171,7 @@ _
         // Resurrect things unless that can do unless that has been
         // disabled e.g. via minion master death
         //
-        if (!is_unable_to_resurrect && is_resurrectable()) {
+        if (!is_resurrection_blocked && is_resurrectable()) {
             //
             // Tick on player move/change of the current tick
             //
