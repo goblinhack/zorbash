@@ -43,6 +43,208 @@ const Dice& Thing::get_resurrect_dice (void) const {_ return (tp()->resurrect_di
 const std::string& Thing::get_resurrect_dice_str (void) const {_ return (tp()->resurrect_dice_str()); }
 int Thing::get_resurrect (void) const {_ return (tp()->resurrect_dice().roll()); }
 
+int Thing::ai_avoid_distance(void) const                                {_ return (tp()->ai_avoid_distance()); }
+int Thing::ai_obstacle(void) const                                      {_ return (tp()->ai_obstacle()); }
+int Thing::ai_scent_distance(void) const                                {_ return (tp()->ai_scent_distance()); }
+int Thing::attack_eater(void) const                                     {_ return (tp()->attack_eater()); }
+int Thing::attack_humanoid(void) const                                  {_ return (tp()->attack_humanoid()); }
+int Thing::attack_living(void) const                                    {_ return (tp()->attack_living()); }
+int Thing::attack_lunge(void) const                                     {_ return (tp()->attack_lunge()); }
+int Thing::attack_meat(void) const                                      {_ return (tp()->attack_meat()); }
+int Thing::attack_shove(void) const                                     {_ return (tp()->attack_shove()); }
+int Thing::attack_shove_chance_d1000(void) const                        {_ return (tp()->attack_shove_chance_d1000()); }
+int Thing::avoids_acid(void) const                                      {_ return (tp()->avoids_acid()); }
+int Thing::avoids_fire(void) const                                      {_ return (tp()->avoids_fire()); }
+int Thing::avoids_poison(void) const                                    {_ return (tp()->avoids_poison()); }
+int Thing::avoids_water(void) const                                     {_ return (tp()->avoids_water()); }
+int Thing::blast_max_radius(void) const                                 {_ return (tp()->blast_max_radius()); }
+int Thing::blast_min_radius(void) const                                 {_ return (tp()->blast_min_radius()); }
+int Thing::collision_attack(void) const                                 {_ return (tp()->collision_attack()); }
+int Thing::collision_box(void) const                                    {_ return (tp()->collision_box()); }
+int Thing::collision_check(void) const                                  {_ return (tp()->collision_check()); }
+int Thing::collision_circle(void) const                                 {_ return (tp()->collision_circle()); }
+int Thing::collision_hit_priority(void) const                           {_ return (tp()->collision_hit_priority()); }
+int Thing::damage_doubled_from_acid(void) const                         {_ return (tp()->damage_doubled_from_acid()); }
+int Thing::damage_doubled_from_fire(void) const                         {_ return (tp()->damage_doubled_from_fire()); }
+int Thing::damage_doubled_from_poison(void) const                       {_ return (tp()->damage_doubled_from_poison()); }
+int Thing::damage_doubled_from_water(void) const                        {_ return (tp()->damage_doubled_from_water()); }
+int Thing::defence(void) const                                          {_ return (tp()->stat_defence()); }
+int Thing::get_initial_charge_count(void) const                         {_ return (tp()->charge_count()); }
+int Thing::gfx_an_animation_only(void) const                            {_ return (tp()->gfx_an_animation_only()); }
+int Thing::gfx_animated(void) const                                     {_ return (tp()->gfx_animated()); }
+int Thing::gfx_animated_can_hflip(void) const                           {_ return (tp()->gfx_animated_can_hflip()); }
+int Thing::gfx_animated_can_vflip(void) const                           {_ return (tp()->gfx_animated_can_vflip()); }
+int Thing::gfx_animated_no_dir(void) const                              {_ return (tp()->gfx_animated_no_dir()); }
+int Thing::gfx_attack_anim(void) const                                  {_ return (tp()->gfx_attack_anim()); }
+int Thing::gfx_bounce_always(void) const                                {_ return (tp()->gfx_bounce_always()); }
+int Thing::gfx_bounce_on_move(void) const                               {_ return (tp()->gfx_bounce_on_move()); }
+int Thing::gfx_dead_anim(void) const                                    {_ return (tp()->gfx_dead_anim()); }
+int Thing::gfx_glows(void) const                                        {_ return (tp()->gfx_glows()); }
+int Thing::gfx_health_bar_shown(void) const                             {_ return (tp()->gfx_health_bar_shown()); }
+int Thing::gfx_health_bar_shown_only_when_injured(void) const           {_ return (tp()->gfx_health_bar_shown_only_when_injured()); }
+int Thing::gfx_on_fire_anim(void) const                                 {_ return (tp()->gfx_on_fire_anim()); }
+int Thing::gfx_oversized_but_sitting_on_the_ground(void) const          {_ return (tp()->gfx_oversized_but_sitting_on_the_ground()); }
+int Thing::gfx_show_outlined(void) const                                {_ return (tp()->gfx_show_outlined()); }
+int Thing::gfx_shown_in_bg(void) const                                  {_ return (tp()->gfx_shown_in_bg()); }
+int Thing::gfx_small_shadow_caster(void) const                          {_ return (tp()->gfx_small_shadow_caster()); }
+int Thing::gfx_weapon_carry_anim(void) const                            {_ return (tp()->gfx_weapon_carry_anim()); }
+int Thing::health_hunger_pct(void) const                                {_ return (tp()->health_hunger_pct()); }
+int Thing::health_starving_pct(void) const                              {_ return (tp()->health_starving_pct()); }
+int Thing::hunger_clock_freq_ms(void) const                             {_ return (tp()->hunger_clock_freq_ms()); }
+int Thing::is_able_to_change_levels(void) const                         {_ return (tp()->is_able_to_change_levels()); }
+int Thing::is_able_to_fall(void) const                                  {_ return (tp()->is_able_to_fall()); }
+int Thing::is_able_to_see_through_doors(void) const                     {_ return (tp()->is_able_to_see_through_doors()); }
+int Thing::is_able_to_walk_through_walls(void) const                    {_ return (tp()->is_able_to_walk_through_walls()); }
+int Thing::is_acid(void) const                                          {_ return (tp()->is_acid()); }
+int Thing::is_acid_lover(void) const                                    {_ return (tp()->is_acid_lover()); }
+int Thing::is_active(void) const                                        {_ return (tp()->is_active()); }
+int Thing::is_alive_monst(void) const                                   {_ return (tp()->is_monst() && !is_dead); }
+int Thing::is_always_hit(void) const                                    {_ return (tp()->is_always_hit()); }
+int Thing::is_ascend_dungeon(void) const                                {_ return (tp()->is_ascend_dungeon()); }
+int Thing::is_ascend_sewer(void) const                                  {_ return (tp()->is_ascend_sewer()); }
+int Thing::is_attackable_by_monst(void) const                           {_ return (tp()->is_attackable_by_monst()); }
+int Thing::is_attackable_by_player(void) const                          {_ return (tp()->is_attackable_by_player()); }
+int Thing::is_auto_collect_item(void) const                             {_ return (tp()->is_auto_collect_item()); }
+int Thing::is_bag(void) const                                           {_ return (tp()->is_bag()); }
+int Thing::is_bleeder(void) const                                       {_ return (tp()->is_bleeder()); }
+int Thing::is_blood(void) const                                         {_ return (tp()->is_blood()); }
+int Thing::is_blood_splatter(void) const                                {_ return (tp()->is_blood_splatter()); }
+int Thing::is_brazier(void) const                                       {_ return (tp()->is_brazier()); }
+int Thing::is_burnable(void) const                                      {_ return (tp()->is_burnable()); }
+int Thing::is_carrier_of_treasure_class_a(void) const                   {_ return (tp()->is_carrier_of_treasure_class_a()); }
+int Thing::is_carrier_of_treasure_class_b(void) const                   {_ return (tp()->is_carrier_of_treasure_class_b()); }
+int Thing::is_carrier_of_treasure_class_c(void) const                   {_ return (tp()->is_carrier_of_treasure_class_c()); }
+int Thing::is_chasm(void) const                                         {_ return (tp()->is_chasm()); }
+int Thing::is_collect_as_keys(void) const                               {_ return (tp()->is_collect_as_keys()); }
+int Thing::is_collectable(void) const                                   {_ return (tp()->is_collectable()); }
+int Thing::is_combustible(void) const                                   {_ return (tp()->is_combustible()); }
+int Thing::is_corpse (void) const                                       {_ return (is_dead && is_corpse_on_death()); }
+int Thing::is_corpse_on_death(void) const                               {_ return (tp()->is_corpse_on_death()); }
+int Thing::is_corridor(void) const                                      {_ return (tp()->is_corridor()); }
+int Thing::is_critical_to_level(void) const                             {_ return (tp()->is_critical_to_level()); }
+int Thing::is_cursor(void) const                                        {_ return (tp()->is_cursor()); }
+int Thing::is_cursor_can_hover_over(void) const                         {_ return (tp()->is_cursor_can_hover_over()); }
+int Thing::is_cursor_can_hover_over_but_needs_double_click(void) const  {_ return (tp()->is_cursor_can_hover_over_but_needs_double_click()); }
+int Thing::is_cursor_path(void) const                                   {_ return (tp()->is_cursor_path()); }
+int Thing::is_dead_on_shove(void) const                                 {_ return (tp()->is_dead_on_shove()); }
+int Thing::is_deep_water(void) const                                    {_ return (tp()->is_deep_water()); }
+int Thing::is_descend_dungeon(void) const                               {_ return (tp()->is_descend_dungeon()); }
+int Thing::is_descend_sewer(void) const                                 {_ return (tp()->is_descend_sewer()); }
+int Thing::is_described_when_hovering_over(void) const                  {_ return (tp()->is_described_when_hovering_over()); }
+int Thing::is_dirt(void) const                                          {_ return (tp()->is_dirt()); }
+int Thing::is_door(void) const                                          {_ return (tp()->is_door()); }
+int Thing::is_droppable(void) const                                     {_ return (tp()->is_droppable()); }
+int Thing::is_ethereal(void) const                                      {_ return (tp()->is_ethereal()); }
+int Thing::is_explosion(void) const                                     {_ return (tp()->is_explosion()); }
+int Thing::is_extreme_hazard(void) const                                {_ return (tp()->is_extreme_hazard()); }
+int Thing::is_fearless(void) const                                      {_ return (tp()->is_fearless()); }
+int Thing::is_fire(void) const                                          {_ return (tp()->is_fire()); }
+int Thing::is_flammable(void) const                                     {_ return (tp()->is_flammable()); }
+int Thing::is_floating(void) const                                      {_ return (tp()->is_floating()); }
+int Thing::is_floor(void) const                                         {_ return (tp()->is_floor()); }
+int Thing::is_floor_deco(void) const                                    {_ return (tp()->is_floor_deco()); }
+int Thing::is_food(void) const                                          {_ return (tp()->is_food()); }
+int Thing::is_food_eater(void) const                                    {_ return (tp()->is_food_eater()); }
+int Thing::is_gfx_water(void) const                                     {_ return (tp()->is_gfx_water()); }
+int Thing::is_gold(void) const                                          {_ return (tp()->is_gold()); }
+int Thing::is_hazard(void) const                                        {_ return (tp()->is_hazard()); }
+int Thing::is_humanoid(void) const                                      {_ return (tp()->is_humanoid()); }
+int Thing::is_hunger_insatiable(void) const                             {_ return (tp()->is_hunger_insatiable()); }
+int Thing::is_intelligent(void) const                                   {_ return (tp()->is_intelligent()); }
+int Thing::is_interesting(void) const                                   {_ return (tp()->is_interesting()); }
+int Thing::is_item(void) const                                          {_ return (tp()->is_item()); }
+int Thing::is_item_carrier(void) const                                  {_ return (tp()->is_item_carrier()); }
+int Thing::is_item_collected_as_gold(void) const                        {_ return (tp()->is_item_collected_as_gold()); }
+int Thing::is_item_eater(void) const                                    {_ return (tp()->is_item_eater()); }
+int Thing::is_item_not_stackable(void) const                            {_ return (tp()->is_item_not_stackable()); }
+int Thing::is_jelly(void) const                                         {_ return (tp()->is_jelly()); }
+int Thing::is_jelly_baby(void) const                                    {_ return (tp()->is_jelly_baby()); }
+int Thing::is_jelly_baby_eater(void) const                              {_ return (tp()->is_jelly_baby_eater()); }
+int Thing::is_jelly_eater(void) const                                   {_ return (tp()->is_jelly_eater()); }
+int Thing::is_jelly_parent(void) const                                  {_ return (tp()->is_jelly_parent()); }
+int Thing::is_jumper(void) const                                        {_ return (tp()->is_jumper()); }
+int Thing::is_jumper_chance_d1000(void) const                           {_ return (tp()->is_jumper_chance_d1000()); }
+int Thing::is_jumper_distance(void) const                               {_ return (tp()->is_jumper_distance()); }
+int Thing::is_jumper_on_low_hp_chance_d1000(void) const                 {_ return (tp()->is_jumper_on_low_hp_chance_d1000()); }
+int Thing::is_key(void) const                                           {_ return (tp()->is_key()); }
+int Thing::is_killed_on_hit_or_miss(void) const                         {_ return (tp()->is_killed_on_hit_or_miss()); }
+int Thing::is_killed_on_hitting(void) const                             {_ return (tp()->is_killed_on_hitting()); }
+int Thing::is_laser_target_select_automatically_when_chosen(void) const {_ return (tp()->is_laser_target_select_automatically_when_chosen()); }
+int Thing::is_lava(void) const                                          {_ return (tp()->is_lava()); }
+int Thing::is_light_blocker(void) const                                 {_ return (tp()->is_light_blocker()); }
+int Thing::is_living(void) const                                        {_ return (tp()->is_living()); }
+int Thing::is_loggable_for_important_stuff(void) const                  {_ return (tp()->is_loggable_for_important_stuff()); }
+int Thing::is_loggable_for_unimportant_stuff(void) const                {_ return (tp()->is_loggable_for_unimportant_stuff()); }
+int Thing::is_meat(void) const                                          {_ return (tp()->is_meat()); }
+int Thing::is_meat_eater(void) const                                    {_ return (tp()->is_meat_eater()); }
+int Thing::is_minion(void) const                                        {_ return (tp()->is_minion()); }
+int Thing::is_minion_generator(void) const                              {_ return (tp()->is_minion_generator()); }
+int Thing::is_monst(void) const                                         {_ return (tp()->is_monst()); }
+int Thing::is_moveable(void) const                                      {_ return (tp()->is_moveable()); }
+int Thing::is_movement_blocking_hard(void) const                        {_ return (tp()->is_movement_blocking_hard()); }
+int Thing::is_movement_blocking_soft(void) const                        {_ return (tp()->is_movement_blocking_soft()); }
+int Thing::is_msg(void) const                                           {_ return (tp()->is_msg()); }
+int Thing::is_no_tile(void) const                                       {_ return (tp()->is_no_tile()); }
+int Thing::is_player(void) const                                        {_ return (tp()->is_player()); }
+int Thing::is_poison(void) const                                        {_ return (tp()->is_poison()); }
+int Thing::is_poison_immune(void) const                                 {_ return (tp()->is_poison_immune()); }
+int Thing::is_potion(void) const                                        {_ return (tp()->is_potion()); }
+int Thing::is_potion_eater(void) const                                  {_ return (tp()->is_potion_eater()); }
+int Thing::is_projectile(void) const                                    {_ return (tp()->is_projectile()); }
+int Thing::is_removeable_if_out_of_slots(void) const                    {_ return (tp()->is_removeable_if_out_of_slots()); }
+int Thing::is_resurrectable(void) const                                 {_ return (tp()->is_resurrectable()); }
+int Thing::is_ripple(void) const                                        {_ return (tp()->is_ripple()); }
+int Thing::is_rock(void) const                                          {_ return (tp()->is_rock()); }
+int Thing::is_rrr1(void) const                                          {_ return (tp()->is_rrr1()); }
+int Thing::is_rrr2(void) const                                          {_ return (tp()->is_rrr2()); }
+int Thing::is_rrr3(void) const                                          {_ return (tp()->is_rrr3()); }
+int Thing::is_rrr4(void) const                                          {_ return (tp()->is_rrr4()); }
+int Thing::is_rrr5(void) const                                          {_ return (tp()->is_rrr5()); }
+int Thing::is_rrr6(void) const                                          {_ return (tp()->is_rrr6()); }
+int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
+int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
+int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
+int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
+int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
+int Thing::is_shallow_water(void) const                                 {_ return (tp()->is_shallow_water()); }
+int Thing::is_shovable(void) const                                      {_ return (tp()->is_shovable()); }
+int Thing::is_shown_on_leftbar(void) const                              {_ return (tp()->is_shown_on_leftbar()); }
+int Thing::is_shown_uniquely_on_leftbar(void) const                     {_ return (tp()->is_shown_uniquely_on_leftbar()); }
+int Thing::is_skill(void) const                                         {_ return (tp()->is_skill()); }
+int Thing::is_smoke(void) const                                         {_ return (tp()->is_smoke()); }
+int Thing::is_spawner(void) const                                       {_ return (tp()->is_spawner()); }
+int Thing::is_stamina_check(void) const                                 {_ return (tp()->is_stamina_check()); }
+int Thing::is_steal_item_chance_d1000(void) const                       {_ return (tp()->is_steal_item_chance_d1000()); }
+int Thing::is_temporary_bag(void) const                                 {_ return (tp()->is_temporary_bag()); }
+int Thing::is_throwable(void) const                                     {_ return (tp()->is_throwable()); }
+int Thing::is_thrown_automatically_when_chosen(void) const              {_ return (tp()->is_thrown_automatically_when_chosen()); }
+int Thing::is_torch(void) const                                         {_ return (tp()->is_torch()); }
+int Thing::is_treasure(void) const                                      {_ return (tp()->is_treasure()); }
+int Thing::is_treasure_class_a(void) const                              {_ return (tp()->is_treasure_class_a()); }
+int Thing::is_treasure_class_b(void) const                              {_ return (tp()->is_treasure_class_b()); }
+int Thing::is_treasure_class_c(void) const                              {_ return (tp()->is_treasure_class_c()); }
+int Thing::is_treasure_eater(void) const                                {_ return (tp()->is_treasure_eater()); }
+int Thing::is_undead(void) const                                        {_ return (tp()->is_undead()); }
+int Thing::is_usable(void) const                                        {_ return (tp()->is_usable()); }
+int Thing::is_used_automatically_when_selected(void) const              {_ return (tp()->is_used_automatically_when_selected()); }
+int Thing::is_used_when_thrown(void) const                              {_ return (tp()->is_used_when_thrown()); }
+int Thing::is_wall(void) const                                          {_ return (tp()->is_wall()); }
+int Thing::is_wall_dungeon(void) const                                  {_ return (tp()->is_wall_dungeon()); }
+int Thing::is_wand(void) const                                          {_ return (tp()->is_wand()); }
+int Thing::is_water_lover(void) const                                   {_ return (tp()->is_water_lover()); }
+int Thing::is_weapon(void) const                                        {_ return (tp()->is_weapon()); }
+int Thing::is_weapon_wielder(void) const                                {_ return (tp()->is_weapon_wielder()); }
+int Thing::minion_leash_distance(void) const                            {_ return (tp()->minion_leash_distance()); }
+int Thing::minion_limit(void) const                                     {_ return (tp()->minion_limit()); }
+int Thing::normal_placement_rules(void) const                           {_ return (tp()->normal_placement_rules()); }
+int Thing::on_death_drop_all_items(void) const                          {_ return (tp()->on_death_drop_all_items()); }
+int Thing::on_death_is_open(void) const                                 {_ return (tp()->on_death_is_open()); }
+int Thing::range_max(void) const                                        {_ return (tp()->range_max()); }
+int Thing::tick_catches_up_on_attack(void) const                        {_ return (tp()->tick_catches_up_on_attack()); }
+int Thing::weapon_damage(void) const                                    {_ return (tp()->weapon_damage()); }
+int Thing::weapon_use_delay_hundredths(void) const                      {_ return (tp()->weapon_use_delay_hundredths()); }
+int Thing::weapon_use_distance(void) const                              {_ return (tp()->weapon_use_distance()); }
+
 void Thing::new_monst (void)
 {_
     if (unlikely(!monstp)) {
@@ -165,556 +367,6 @@ void Thing::clear_dmap_scent (void)
     }
 }
 
-int Thing::is_rrr9(void)
-{_
-    return (tp()->is_rrr9());
-}
-
-int Thing::ai_scent_distance(void) const
-{_
-    return (tp()->ai_scent_distance());
-}
-
-int Thing::collision_attack(void) const
-{_
-    return (tp()->collision_attack());
-}
-
-int Thing::collision_box(void) const
-{_
-    return (tp()->collision_box());
-}
-
-int Thing::collision_check(void) const
-{_
-    return (tp()->collision_check());
-}
-
-int Thing::collision_circle(void) const
-{_
-    return (tp()->collision_circle());
-}
-
-int Thing::collision_hit_priority(void) const
-{_
-    return (tp()->collision_hit_priority());
-}
-
-int Thing::is_interesting(void) const
-{_
-    return (tp()->is_interesting());
-}
-
-int Thing::gfx_animated(void) const
-{_
-    return (tp()->gfx_animated());
-}
-
-int Thing::gfx_animated_can_vflip(void) const
-{_
-    return (tp()->gfx_animated_can_vflip());
-}
-
-int Thing::gfx_animated_no_dir(void) const
-{_
-    return (tp()->gfx_animated_no_dir());
-}
-
-int Thing::gfx_bounce_on_move(void) const
-{_
-    return (tp()->gfx_bounce_on_move());
-}
-
-int Thing::gfx_animated_can_hflip(void) const
-{_
-    return (tp()->gfx_animated_can_hflip());
-}
-
-int Thing::gfx_an_animation_only(void) const
-{_
-    return (tp()->gfx_an_animation_only());
-}
-
-int Thing::is_floor_deco(void) const
-{_
-    return (tp()->is_floor_deco());
-}
-
-int Thing::is_ascend_sewer(void) const
-{_
-    return (tp()->is_ascend_sewer());
-}
-
-int Thing::gfx_weapon_carry_anim(void) const
-{_
-    return (tp()->gfx_weapon_carry_anim());
-}
-
-int Thing::gfx_attack_anim(void) const
-{_
-    return (tp()->gfx_attack_anim());
-}
-
-int Thing::is_light_blocker(void) const
-{_
-    return (tp()->is_light_blocker());
-}
-
-int Thing::gfx_show_outlined(void) const
-{_
-    return (tp()->gfx_show_outlined());
-}
-
-int Thing::gfx_oversized_but_sitting_on_the_ground(void) const
-{_
-    return (tp()->gfx_oversized_but_sitting_on_the_ground());
-}
-
-int Thing::gfx_small_shadow_caster(void) const
-{_
-    return (tp()->gfx_small_shadow_caster());
-}
-
-int Thing::health_hunger_pct(void) const
-{_
-    return (tp()->health_hunger_pct());
-}
-
-int Thing::hunger_clock_freq_ms(void) const
-{_
-    return (tp()->hunger_clock_freq_ms());
-}
-
-int Thing::is_hunger_insatiable(void) const
-{_
-    return (tp()->is_hunger_insatiable());
-}
-
-int Thing::health_starving_pct(void) const
-{_
-    return (tp()->health_starving_pct());
-}
-
-int Thing::is_active(void) const
-{_
-    return (tp()->is_active());
-}
-
-int Thing::is_attackable_by_monst(void) const
-{_
-    return (tp()->is_attackable_by_monst());
-}
-
-int Thing::is_bleeder(void) const
-{_
-    return (tp()->is_bleeder());
-}
-
-int Thing::is_blood(void) const
-{_
-    return (tp()->is_blood());
-}
-
-int Thing::is_combustible(void) const
-{_
-    return (tp()->is_combustible());
-}
-
-int Thing::is_corpse_on_death(void) const
-{_
-    return (tp()->is_corpse_on_death());
-}
-
-int Thing::is_corpse (void) const
-{_
-    return (is_dead && is_corpse_on_death());
-}
-
-int Thing::is_corridor(void) const
-{_
-    return (tp()->is_corridor());
-}
-
-int Thing::is_deep_water(void) const
-{_
-    return (tp()->is_deep_water());
-}
-
-int Thing::is_dirt(void) const
-{_
-    return (tp()->is_dirt());
-}
-
-int Thing::is_door(void) const
-{_
-    return (tp()->is_door());
-}
-
-int Thing::is_ascend_dungeon(void) const
-{_
-    return (tp()->is_ascend_dungeon());
-}
-
-int Thing::is_descend_dungeon(void) const
-{_
-    return (tp()->is_descend_dungeon());
-}
-
-int Thing::is_explosion(void) const
-{_
-    return (tp()->is_explosion());
-}
-
-int Thing::is_floor(void) const
-{_
-    return (tp()->is_floor());
-}
-
-int Thing::is_food(void) const
-{_
-    return (tp()->is_food());
-}
-
-int Thing::is_key(void) const
-{_
-    return (tp()->is_key());
-}
-
-int Thing::is_lava(void) const
-{_
-    return (tp()->is_lava());
-}
-
-int Thing::is_chasm(void) const
-{_
-    return (tp()->is_chasm());
-}
-
-int Thing::is_meat(void) const
-{_
-    return (tp()->is_meat());
-}
-
-int Thing::is_meat_eater(void) const
-{_
-    return (tp()->is_meat_eater());
-}
-
-int Thing::is_monst(void) const
-{_
-    return (tp()->is_monst());
-}
-
-int Thing::is_alive_monst(void) const
-{_
-    return (tp()->is_monst() && !is_dead);
-}
-
-int Thing::is_moveable(void) const
-{_
-    return (tp()->is_moveable());
-}
-
-int Thing::is_movement_blocking_hard(void) const
-{_
-    return (tp()->is_movement_blocking_hard());
-}
-
-int Thing::ai_obstacle(void) const
-{_
-    return (tp()->ai_obstacle());
-}
-
-int Thing::is_player(void) const
-{_
-    return (tp()->is_player());
-}
-
-int Thing::is_projectile(void) const
-{_
-    return (tp()->is_projectile());
-}
-
-int Thing::is_ripple(void) const
-{_
-    return (tp()->is_ripple());
-}
-
-int Thing::is_rock(void) const
-{_
-    return (tp()->is_rock());
-}
-
-int Thing::is_rrr1(void) const
-{_
-    return (tp()->is_rrr1());
-}
-
-int Thing::is_rrr2(void) const
-{_
-    return (tp()->is_rrr2());
-}
-
-int Thing::is_rrr3(void) const
-{_
-    return (tp()->is_rrr3());
-}
-
-int Thing::is_rrr4(void) const
-{_
-    return (tp()->is_rrr4());
-}
-
-int Thing::is_rrr5(void) const
-{_
-    return (tp()->is_rrr5());
-}
-
-int Thing::is_spawner(void) const
-{_
-    return (tp()->is_spawner());
-}
-
-int Thing::is_rrr7(void) const
-{_
-    return (tp()->is_rrr7());
-}
-
-int Thing::is_rrr8(void) const
-{_
-    return (tp()->is_rrr8());
-}
-
-int Thing::ai_avoid_distance(void) const
-{_
-    return (tp()->ai_avoid_distance());
-}
-
-int Thing::is_item_carrier(void) const
-{_
-    return (tp()->is_item_carrier());
-}
-
-int Thing::is_carrier_of_treasure_class_c(void) const
-{_
-    return (tp()->is_carrier_of_treasure_class_c());
-}
-
-int Thing::is_carrier_of_treasure_class_b(void) const
-{_
-    return (tp()->is_carrier_of_treasure_class_b());
-}
-
-int Thing::is_carrier_of_treasure_class_a(void) const
-{_
-    return (tp()->is_carrier_of_treasure_class_a());
-}
-
-int Thing::is_torch(void) const
-{_
-    return (tp()->is_torch());
-}
-
-int Thing::range_max(void) const
-{_
-    return (tp()->range_max());
-}
-
-int Thing::is_laser_target_select_automatically_when_chosen(void) const
-{_
-    return (tp()->is_laser_target_select_automatically_when_chosen());
-}
-
-int Thing::is_wand(void) const
-{_
-    return (tp()->is_wand());
-}
-
-int Thing::get_initial_charge_count(void) const
-{_
-    return (tp()->charge_count());
-}
-
-int Thing::minion_leash_distance(void) const
-{_
-    return (tp()->minion_leash_distance());
-}
-
-int Thing::is_skill(void) const
-{_
-    return (tp()->is_skill());
-}
-
-int Thing::is_sewer_wall(void) const
-{_
-    return (tp()->is_sewer_wall());
-}
-
-int Thing::is_wall_dungeon(void) const
-{_
-    return (tp()->is_wall_dungeon());
-}
-
-int Thing::is_descend_sewer(void) const
-{_
-    return (tp()->is_descend_sewer());
-}
-
-int Thing::is_burnable(void) const
-{_
-    return (tp()->is_burnable());
-}
-
-int Thing::is_shallow_water(void) const
-{_
-    return (tp()->is_shallow_water());
-}
-
-int Thing::minion_limit(void) const
-{_
-    return (tp()->minion_limit());
-}
-
-int Thing::is_living(void) const
-{_
-    return (tp()->is_living());
-}
-
-int Thing::attack_living(void) const
-{_
-    return (tp()->attack_living());
-}
-
-int Thing::is_minion(void) const
-{_
-    return (tp()->is_minion());
-}
-
-int Thing::is_described_when_hovering_over(void) const
-{_
-    return (tp()->is_described_when_hovering_over());
-}
-
-int Thing::is_always_hit(void) const
-{_
-    return (tp()->is_always_hit());
-}
-
-int Thing::is_fearless(void) const
-{_
-    return (tp()->is_fearless());
-}
-
-int Thing::is_attackable_by_player(void) const
-{_
-    return (tp()->is_attackable_by_player());
-}
-
-int Thing::is_able_to_see_through_doors(void) const
-{_
-    return (tp()->is_able_to_see_through_doors());
-}
-
-int Thing::is_able_to_walk_through_walls(void) const
-{_
-    return (tp()->is_able_to_walk_through_walls());
-}
-
-int Thing::is_humanoid(void) const
-{_
-    return (tp()->is_humanoid());
-}
-
-int Thing::is_poison_immune(void) const
-{_
-    return (tp()->is_poison_immune());
-}
-
-int Thing::damage_doubled_from_poison(void) const
-{_
-    return (tp()->damage_doubled_from_poison());
-}
-
-int Thing::avoids_poison(void) const
-{_
-    return (tp()->avoids_poison());
-}
-
-int Thing::attack_humanoid(void) const
-{_
-    return (tp()->attack_humanoid());
-}
-
-int Thing::is_poison(void) const
-{_
-    return (tp()->is_poison());
-}
-
-int Thing::is_used_when_thrown(void) const
-{_
-    return (tp()->is_used_when_thrown());
-}
-
-int Thing::is_used_automatically_when_selected(void) const
-{_
-    return (tp()->is_used_automatically_when_selected());
-}
-
-int Thing::is_thrown_automatically_when_chosen(void) const
-{_
-    return (tp()->is_thrown_automatically_when_chosen());
-}
-
-int Thing::is_extreme_hazard(void) const
-{_
-    return (tp()->is_extreme_hazard());
-}
-
-int Thing::is_auto_collect_item(void) const
-{_
-    return (tp()->is_auto_collect_item());
-}
-
-int Thing::attack_meat(void) const
-{_
-    return (tp()->attack_meat());
-}
-
-int Thing::is_food_eater(void) const
-{_
-    return (tp()->is_food_eater());
-}
-
-int Thing::blast_max_radius(void) const
-{_
-    return (tp()->blast_max_radius());
-}
-
-int Thing::blast_min_radius(void) const
-{_
-    return (tp()->blast_min_radius());
-}
-
-int Thing::is_critical_to_level(void) const
-{_
-    return (tp()->is_critical_to_level());
-}
-
-int Thing::is_able_to_fall(void) const
-{_
-    return (tp()->is_able_to_fall());
-}
-
-int Thing::is_temporary_bag(void) const
-{_
-    return (tp()->is_temporary_bag());
-}
-
-int Thing::is_treasure_class_c(void) const
-{_
-    return (tp()->is_treasure_class_c());
-}
-
 int Thing::bag_item_height(void) const
 {_
     return (tp()->bag_item_height());
@@ -751,461 +403,6 @@ int Thing::monst_size(void) const
 int Thing::rarity(void) const
 {_
     return (tp()->rarity());
-}
-
-int Thing::is_rrr6(void) const
-{_
-    return (tp()->is_rrr6());
-}
-
-int Thing::is_shown_uniquely_on_leftbar(void) const
-{_
-    return (tp()->is_shown_uniquely_on_leftbar());
-}
-
-int Thing::is_stamina_check(void) const
-{_
-    return (tp()->is_stamina_check());
-}
-
-int Thing::gfx_shown_in_bg(void) const
-{_
-    return (tp()->gfx_shown_in_bg());
-}
-
-int Thing::on_death_drop_all_items(void) const
-{_
-    return (tp()->on_death_drop_all_items());
-}
-
-int Thing::is_steal_item_chance_d1000(void) const
-{_
-    return (tp()->is_steal_item_chance_d1000());
-}
-
-int Thing::is_weapon_wielder(void) const
-{_
-    return (tp()->is_weapon_wielder());
-}
-
-int Thing::is_item(void) const
-{_
-    return (tp()->is_item());
-}
-
-int Thing::is_item_eater(void) const
-{_
-    return (tp()->is_item_eater());
-}
-
-int Thing::is_movement_blocking_soft(void) const
-{_
-    return (tp()->is_movement_blocking_soft());
-}
-
-int Thing::is_cursor_can_hover_over_but_needs_double_click(void) const
-{_
-    return (tp()->is_cursor_can_hover_over_but_needs_double_click());
-}
-
-int Thing::gfx_glows(void) const
-{_
-    return (tp()->gfx_glows());
-}
-
-int Thing::gfx_health_bar_shown_only_when_injured(void) const
-{_
-    return (tp()->gfx_health_bar_shown_only_when_injured());
-}
-
-int Thing::gfx_health_bar_shown(void) const
-{_
-    return (tp()->gfx_health_bar_shown());
-}
-
-int Thing::on_death_is_open(void) const
-{_
-    return (tp()->on_death_is_open());
-}
-
-int Thing::is_killed_on_hit_or_miss(void) const
-{_
-    return (tp()->is_killed_on_hit_or_miss());
-}
-
-int Thing::is_killed_on_hitting(void) const
-{_
-    return (tp()->is_killed_on_hitting());
-}
-
-int Thing::is_collect_as_keys(void) const
-{_
-    return (tp()->is_collect_as_keys());
-}
-
-int Thing::is_ethereal(void) const
-{_
-    return (tp()->is_ethereal());
-}
-
-int Thing::is_potion_eater(void) const
-{_
-    return (tp()->is_potion_eater());
-}
-
-int Thing::is_throwable(void) const
-{_
-    return (tp()->is_throwable());
-}
-
-int Thing::is_usable(void) const
-{_
-    return (tp()->is_usable());
-}
-
-int Thing::is_droppable(void) const
-{_
-    return (tp()->is_droppable());
-}
-
-int Thing::is_item_not_stackable(void) const
-{_
-    return (tp()->is_item_not_stackable());
-}
-
-int Thing::is_treasure_class_a(void) const
-{_
-    return (tp()->is_treasure_class_a());
-}
-
-int Thing::is_treasure_class_b(void) const
-{_
-    return (tp()->is_treasure_class_b());
-}
-
-int Thing::is_bag(void) const
-{_
-    return (tp()->is_bag());
-}
-
-int Thing::is_potion(void) const
-{_
-    return (tp()->is_potion());
-}
-
-int Thing::is_shown_on_leftbar(void) const
-{_
-    return (tp()->is_shown_on_leftbar());
-}
-
-int Thing::is_floating(void) const
-{_
-    return (tp()->is_floating());
-}
-
-int Thing::damage_doubled_from_acid(void) const
-{_
-    return (tp()->damage_doubled_from_acid());
-}
-
-int Thing::damage_doubled_from_water(void) const
-{_
-    return (tp()->damage_doubled_from_water());
-}
-
-int Thing::is_minion_generator(void) const
-{_
-    return (tp()->is_minion_generator());
-}
-
-int Thing::is_treasure_eater(void) const
-{_
-    return (tp()->is_treasure_eater());
-}
-
-int Thing::is_acid_lover(void) const
-{_
-    return (tp()->is_acid_lover());
-}
-
-int Thing::is_jelly_baby_eater(void) const
-{_
-    return (tp()->is_jelly_baby_eater());
-}
-
-int Thing::is_jelly_baby(void) const
-{_
-    return (tp()->is_jelly_baby());
-}
-
-int Thing::is_able_to_change_levels(void) const
-{_
-    return (tp()->is_able_to_change_levels());
-}
-
-int Thing::is_item_collected_as_gold(void) const
-{_
-    return (tp()->is_item_collected_as_gold());
-}
-
-int Thing::is_gold(void) const
-{_
-    return (tp()->is_gold());
-}
-
-int Thing::is_loggable_for_important_stuff(void) const
-{_
-    return (tp()->is_loggable_for_important_stuff());
-}
-
-int Thing::tick_catches_up_on_attack(void) const
-{_
-    return (tp()->tick_catches_up_on_attack());
-}
-
-int Thing::is_removeable_if_out_of_slots(void) const
-{_
-    return (tp()->is_removeable_if_out_of_slots());
-}
-
-int Thing::is_smoke(void) const
-{_
-    return (tp()->is_smoke());
-}
-
-int Thing::avoids_fire(void) const
-{_
-    return (tp()->avoids_fire());
-}
-
-int Thing::avoids_acid(void) const
-{_
-    return (tp()->avoids_acid());
-}
-
-int Thing::is_treasure(void) const
-{_
-    return (tp()->is_treasure());
-}
-
-int Thing::is_collectable(void) const
-{_
-    return (tp()->is_collectable());
-}
-
-int Thing::is_resurrectable(void) const
-{_
-    return (tp()->is_resurrectable());
-}
-
-int Thing::is_intelligent(void) const
-{_
-    return (tp()->is_intelligent());
-}
-
-int Thing::damage_doubled_from_fire(void) const
-{_
-    return (tp()->damage_doubled_from_fire());
-}
-
-int Thing::is_fire(void) const
-{_
-    return (tp()->is_fire());
-}
-
-int Thing::is_dead_on_shove(void) const
-{_
-    return (tp()->is_dead_on_shove());
-}
-
-int Thing::is_loggable_for_unimportant_stuff(void) const
-{_
-    return (tp()->is_loggable_for_unimportant_stuff());
-}
-
-int Thing::is_brazier(void) const
-{_
-    return (tp()->is_brazier());
-}
-
-int Thing::gfx_bounce_always(void) const
-{_
-    return (tp()->gfx_bounce_always());
-}
-
-int Thing::is_jelly_parent(void) const
-{_
-    return (tp()->is_jelly_parent());
-}
-
-int Thing::normal_placement_rules(void) const
-{_
-    return (tp()->normal_placement_rules());
-}
-
-int Thing::is_flammable(void) const
-{_
-    return (tp()->is_flammable());
-}
-
-int Thing::gfx_on_fire_anim(void) const
-{_
-    return (tp()->gfx_on_fire_anim());
-}
-
-int Thing::attack_shove_chance_d1000(void) const
-{_
-    return (tp()->attack_shove_chance_d1000());
-}
-
-int Thing::is_jumper_chance_d1000(void) const
-{_
-    return (tp()->is_jumper_chance_d1000());
-}
-
-int Thing::is_jumper_on_low_hp_chance_d1000(void) const
-{_
-    return (tp()->is_jumper_on_low_hp_chance_d1000());
-}
-
-int Thing::is_hazard(void) const
-{_
-    return (tp()->is_hazard());
-}
-
-int Thing::attack_shove(void) const
-{_
-    return (tp()->attack_shove());
-}
-
-int Thing::is_shovable(void) const
-{_
-    return (tp()->is_shovable());
-}
-
-int Thing::is_cursor_path(void) const
-{_
-    return (tp()->is_cursor_path());
-}
-
-int Thing::is_jelly_eater(void) const
-{_
-    return (tp()->is_jelly_eater());
-}
-
-int Thing::is_blood_splatter(void) const
-{_
-    return (tp()->is_blood_splatter());
-}
-
-int Thing::is_no_tile(void) const
-{_
-    return (tp()->is_no_tile());
-}
-
-int Thing::is_msg(void) const
-{_
-    return (tp()->is_msg());
-}
-
-int Thing::attack_lunge(void) const
-{_
-    return (tp()->attack_lunge());
-}
-
-int Thing::defence(void) const
-{_
-    return (tp()->stat_defence());
-}
-
-int Thing::is_secret_door(void) const
-{_
-    return (tp()->is_secret_door());
-}
-
-int Thing::is_cursor_can_hover_over(void) const
-{_
-    return (tp()->is_cursor_can_hover_over());
-}
-
-int Thing::is_cursor(void) const
-{_
-    return (tp()->is_cursor());
-}
-
-int Thing::is_jelly(void) const
-{_
-    return (tp()->is_jelly());
-}
-
-int Thing::gfx_dead_anim(void) const
-{_
-    return (tp()->gfx_dead_anim());
-}
-
-int Thing::attack_eater(void) const
-{_
-    return (tp()->attack_eater());
-}
-
-int Thing::is_jumper_distance(void) const
-{_
-    return (tp()->is_jumper_distance());
-}
-
-int Thing::is_jumper(void) const
-{_
-    return (tp()->is_jumper());
-}
-
-int Thing::is_acid(void) const
-{_
-    return (tp()->is_acid());
-}
-
-int Thing::is_undead(void) const
-{_
-    return (tp()->is_undead());
-}
-
-int Thing::is_wall(void) const
-{_
-    return (tp()->is_wall());
-}
-
-int Thing::is_gfx_water(void) const
-{_
-    return (tp()->is_gfx_water());
-}
-
-int Thing::is_water_lover(void) const
-{_
-    return (tp()->is_water_lover());
-}
-
-int Thing::avoids_water(void) const
-{_
-    return (tp()->avoids_water());
-}
-
-int Thing::is_weapon(void) const
-{_
-    return (tp()->is_weapon());
-}
-
-int Thing::weapon_damage(void) const
-{_
-    return (tp()->weapon_damage());
-}
-
-int Thing::weapon_use_delay_hundredths(void) const
-{_
-    return (tp()->weapon_use_delay_hundredths());
-}
-
-int Thing::weapon_use_distance(void) const
-{_
-    return (tp()->weapon_use_distance());
 }
 
 ////////////////////////////////////////////////////////////////////////////

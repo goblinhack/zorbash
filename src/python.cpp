@@ -985,8 +985,10 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr3)
     TP_SET_DECL(is_rrr4)
     TP_SET_DECL(is_rrr5)
+    TP_SET_DECL(is_rrr6)
     TP_SET_DECL(is_rrr7)
     TP_SET_DECL(is_rrr8)
+    TP_SET_DECL(is_rrr9)
     TP_SET_DECL(is_secret_door)
     TP_SET_DECL(is_sewer_wall)
     TP_SET_DECL(is_shallow_water)
@@ -1050,8 +1052,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(resurrect_dice)
     TP_SET_DECL(right1_tile)
     TP_SET_DECL(right2_tile)
-    TP_SET_DECL(is_rrr6)
-    TP_SET_DECL(is_rrr9)
     TP_SET_DECL(spawn_on_shoved)
     TP_SET_DECL(stamina)
     TP_SET_DECL(stat_attack)
@@ -1287,8 +1287,10 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr3",                           (PyCFunction)thing_is_rrr3,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr4",                           (PyCFunction)thing_is_rrr4,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr5",                           (PyCFunction)thing_is_rrr5,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr6",                           (PyCFunction)thing_is_rrr6,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr7",                           (PyCFunction)thing_is_rrr7,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr8",                           (PyCFunction)thing_is_rrr8,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr9",                           (PyCFunction)thing_is_rrr9,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_secret_door",                    (PyCFunction)thing_is_secret_door,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_sewer_wall",                     (PyCFunction)thing_is_sewer_wall,                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_shallow_water",                  (PyCFunction)thing_is_shallow_water,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
