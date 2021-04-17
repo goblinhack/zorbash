@@ -68,6 +68,10 @@ bool Thing::laser_fire (Thingp item, Thingp target)
         return false;
     }
 
+    if (is_player()) {
+        game->tick_begin("player fired laser");
+    }
+
     if (game->state == Game::STATE_CHOOSING_TARGET) {
         game->change_state(Game::STATE_NORMAL);
     }

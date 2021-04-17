@@ -106,27 +106,31 @@ bool Thing::collision_obstacle (Thingp it)
     } else if (is_monst()) {
         auto monst_count = level->is_monst(p);
         if (level->is_corpse(p)) {
-            if (monst_count <= 2) {
-                if (it->is_alive_monst() && it->is_ethereal()) {
+            if (monst_count > 2) {
+		//
+                // Too many monsts (including one corpse)
+		//
+		return true;
+            }
+            if (monst_count == 2) {
+                if (it->is_alive_monst() && !it->is_ethereal()) {
                     //
-                    // Can pass through
-                    //
-                } else {
-                    //
-                    // Too many monsts (including one corpse
+                    // Cannot pass through
                     //
                     return true;
                 }
             }
         } else {
-            if (monst_count <= 1) {
-                if (it->is_alive_monst() && it->is_ethereal()) {
+            if (monst_count > 1) {
+		//
+                // Too many monsts (including one corpse)
+		//
+		return true;
+            }
+            if (monst_count == 1) {
+                if (it->is_alive_monst() && !it->is_ethereal()) {
                     //
-                    // Can pass through
-                    //
-                } else {
-                    //
-                    // Too many monsts (including one corpse
+                    // Cannot pass through
                     //
                     return true;
                 }

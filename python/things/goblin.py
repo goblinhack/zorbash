@@ -58,6 +58,7 @@ def tp_init(name, text_name):
     x.set_is_described_when_hovering_over(True)
     x.set_is_intelligent(True)
     x.set_is_interesting(True)
+    x.set_is_item_carrier(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_monst(True)
@@ -65,12 +66,7 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_weapon_wielder(True)
-    x.set_is_item_carrier(True)
     x.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
-    x.set_stat_attack(10) # 10, means no bonus
-    x.set_stat_constitution(10)
-    x.set_stat_defence(14)
-    x.set_stat_strength(8)
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
@@ -80,6 +76,10 @@ def tp_init(name, text_name):
     x.set_on_hit_do("goblin.on_hit()")
     x.set_on_miss_do("goblin.on_miss()")
     x.set_rarity(zx.RARITY_COMMON)
+    x.set_stat_attack(10) # 10, means no bonus
+    x.set_stat_constitution(10)
+    x.set_stat_defence(14)
+    x.set_stat_strength(8)
     x.set_text_a_or_an("a");
     x.set_text_description("A very lesser goblin.")
     x.set_text_hits("claws");

@@ -1,8 +1,12 @@
 import zx
 import tp
+import random
 
 def on_idle_dice(me, x, y):
-    zx.tp_spawn_next_to(me, "skeleton_minion")
+    if random.randint(1, 100) < 100:
+        zx.tp_spawn_next_to(me, "skeleton_minion_fire")
+    else:
+        zx.tp_spawn_next_to(me, "skeleton_minion")
 
 def on_death(me, x, y):
     zx.tp_spawn_at(me, "generator_explosion")
@@ -32,7 +36,6 @@ def tp_init(name, text_name):
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_interesting(True)
-    x.set_light_strength(1)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_minion_generator(True)
@@ -41,15 +44,16 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_light_color("cyan")
+    x.set_light_strength(1)
     x.set_long_text_description("A grave portal from which the dead crawl out.")
     x.set_minion_limit(4)
+    x.set_normal_placement_rules(True)
+    x.set_on_death_do("ghost_minion_generator.on_death()")
+    x.set_on_idle_dice("1d10+10:skeleton_minion_generator.on_idle_dice()")
     x.set_stat_attack(10) # 10, means no bonus
     x.set_stat_constitution(0)
     x.set_stat_defence(0)
     x.set_stat_strength(0)
-    x.set_normal_placement_rules(True)
-    x.set_on_death_do("ghost_minion_generator.on_death()")
-    x.set_on_idle_dice("1d10+10:skeleton_minion_generator.on_idle_dice()")
     x.set_text_a_or_an("a");
     x.set_text_description("The dead rise again here.")
     x.set_tick_rate_tenths(3)

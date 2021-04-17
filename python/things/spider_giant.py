@@ -71,10 +71,6 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_long_text_description("An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
-    x.set_stat_attack(12) # 10, means no bonus
-    x.set_stat_constitution(12)
-    x.set_stat_defence(14)
-    x.set_stat_strength(16)
     x.set_monst_size(zx.MONST_SIZE_GIANT)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
@@ -85,6 +81,10 @@ def tp_init(name, text_name):
     x.set_on_miss_do("spider_giant.on_miss()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
+    x.set_stat_attack(12) # 10, means no bonus
+    x.set_stat_constitution(12)
+    x.set_stat_defence(14)
+    x.set_stat_strength(16)
     x.set_text_a_or_an("the");
     x.set_text_description("%%fg=brown$A giant spider.")
     x.set_text_hits("gores");

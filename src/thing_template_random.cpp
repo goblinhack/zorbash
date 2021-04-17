@@ -166,7 +166,11 @@ Tpp tp_random_monst_hard (void)
 
 Tpp Level::tp_random_monst (const point &p)
 {_
+    auto tries = 0U;
     for (;;) {
+        if (tries++ > 1000) {
+            return nullptr;
+        }
         auto tpp = ::tp_random_monst();
         if (tpp->will_avoid_threat(this, p)) {
             continue;
@@ -311,7 +315,7 @@ Tpp tp_random_potion (void)
     return tp_get_with_rarity_filter(tp_potion);
 }
 
-Tpp tp_random_entrance (void)
+Tpp tp_random_ascend_dungeon (void)
 {_
     if (unlikely(!tp_ascend_dungeon.size())) {
         ERR("No entrance found");
@@ -320,7 +324,7 @@ Tpp tp_random_entrance (void)
     return tp_get_with_no_rarity_filter(tp_ascend_dungeon);
 }
 
-Tpp tp_random_exit (void)
+Tpp tp_random_descend_dungeon (void)
 {_
     if (unlikely(!tp_descend_dungeon.size())) {
         ERR("No exit found");
@@ -377,7 +381,11 @@ Tpp tp_random_minion_generator_hard (void)
 
 Tpp Level::tp_random_minion_generator (const point &p)
 {_
+    auto tries = 0U;
     for (;;) {
+        if (tries++ > 1000) {
+            return nullptr;
+        }
         auto tpp = ::tp_random_minion_generator();
         if (tpp->will_avoid_threat(this, p)) {
             continue;

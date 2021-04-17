@@ -669,8 +669,8 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
 
             if (d->is_blood(x, y))            { tp = tp_random_blood(); }
             if (d->is_door(x, y))             { tp = tp_random_door(); }
-            if (d->is_ascend_dungeon(x, y))   { tp = tp_random_entrance(); }
-            if (d->is_descend_dungeon(x, y))  { tp = tp_random_exit(); }
+            if (d->is_ascend_dungeon(x, y))   { tp = tp_random_ascend_dungeon(); }
+            if (d->is_descend_dungeon(x, y))  { tp = tp_random_descend_dungeon(); }
             if (d->is_food(x, y))             { tp = tp_random_food(); }
             if (d->is_gold(x, y))             { tp = tp_random_gold(); }
             if (d->is_key(x, y))              { tp = tp_random_key(); }
