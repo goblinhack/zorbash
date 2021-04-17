@@ -51,8 +51,10 @@ _
     // Fire attacks via tick so it can get you when you fall or jump into it.
     //
     if (is_fire()) {
-        log("Cannot attack %s, it's fire", it->to_string().c_str());
-        return false;
+        if (!is_monst()) {
+            log("Cannot attack %s, I am fire", it->to_string().c_str());
+            return false;
+        }
     }
 
     if (me->is_meat_eater() || me->attack_meat()) {
