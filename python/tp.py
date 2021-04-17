@@ -238,6 +238,279 @@ class Tp:
     def set_is_rrr9(self, value):
         zx.tp_set_is_rrr9(self, value)
 
+    def set_is_rrr10(self, value):
+        zx.tp_set_is_rrr10(self, value)
+
+    def set_is_rrr11(self, value):
+        zx.tp_set_is_rrr11(self, value)
+
+    def set_is_rrr12(self, value):
+        zx.tp_set_is_rrr12(self, value)
+
+    def set_is_rrr13(self, value):
+        zx.tp_set_is_rrr13(self, value)
+
+    def set_is_rrr14(self, value):
+        zx.tp_set_is_rrr14(self, value)
+
+    def set_is_rrr15(self, value):
+        zx.tp_set_is_rrr15(self, value)
+
+    def set_is_rrr16(self, value):
+        zx.tp_set_is_rrr16(self, value)
+
+    def set_is_rrr17(self, value):
+        zx.tp_set_is_rrr17(self, value)
+
+    def set_is_rrr18(self, value):
+        zx.tp_set_is_rrr18(self, value)
+
+    def set_is_rrr19(self, value):
+        zx.tp_set_is_rrr19(self, value)
+
+    def set_is_rrr20(self, value):
+        zx.tp_set_is_rrr20(self, value)
+
+    def set_is_rrr21(self, value):
+        zx.tp_set_is_rrr21(self, value)
+
+    def set_is_rrr22(self, value):
+        zx.tp_set_is_rrr22(self, value)
+
+    def set_is_rrr23(self, value):
+        zx.tp_set_is_rrr23(self, value)
+
+    def set_is_rrr24(self, value):
+        zx.tp_set_is_rrr24(self, value)
+
+    def set_is_rrr25(self, value):
+        zx.tp_set_is_rrr25(self, value)
+
+    def set_is_rrr26(self, value):
+        zx.tp_set_is_rrr26(self, value)
+
+    def set_is_rrr27(self, value):
+        zx.tp_set_is_rrr27(self, value)
+
+    def set_is_rrr28(self, value):
+        zx.tp_set_is_rrr28(self, value)
+
+    def set_is_rrr29(self, value):
+        zx.tp_set_is_rrr29(self, value)
+
+    def set_is_rrr30(self, value):
+        zx.tp_set_is_rrr30(self, value)
+
+    def set_is_rrr31(self, value):
+        zx.tp_set_is_rrr31(self, value)
+
+    def set_is_rrr32(self, value):
+        zx.tp_set_is_rrr32(self, value)
+
+    def set_is_rrr33(self, value):
+        zx.tp_set_is_rrr33(self, value)
+
+    def set_is_rrr34(self, value):
+        zx.tp_set_is_rrr34(self, value)
+
+    def set_is_rrr35(self, value):
+        zx.tp_set_is_rrr35(self, value)
+
+    def set_is_rrr36(self, value):
+        zx.tp_set_is_rrr36(self, value)
+
+    def set_is_rrr37(self, value):
+        zx.tp_set_is_rrr37(self, value)
+
+    def set_is_rrr38(self, value):
+        zx.tp_set_is_rrr38(self, value)
+
+    def set_is_rrr39(self, value):
+        zx.tp_set_is_rrr39(self, value)
+
+    def set_is_rrr40(self, value):
+        zx.tp_set_is_rrr40(self, value)
+
+    def set_is_rrr41(self, value):
+        zx.tp_set_is_rrr41(self, value)
+
+    def set_is_rrr42(self, value):
+        zx.tp_set_is_rrr42(self, value)
+
+    def set_is_rrr43(self, value):
+        zx.tp_set_is_rrr43(self, value)
+
+    def set_is_rrr44(self, value):
+        zx.tp_set_is_rrr44(self, value)
+
+    def set_is_rrr45(self, value):
+        zx.tp_set_is_rrr45(self, value)
+
+    def set_is_rrr46(self, value):
+        zx.tp_set_is_rrr46(self, value)
+
+    def set_is_rrr47(self, value):
+        zx.tp_set_is_rrr47(self, value)
+
+    def set_is_rrr48(self, value):
+        zx.tp_set_is_rrr48(self, value)
+
+    def set_is_rrr49(self, value):
+        zx.tp_set_is_rrr49(self, value)
+
+    def set_is_rrr50(self, value):
+        zx.tp_set_is_rrr50(self, value)
+
+    def set_is_rrr51(self, value):
+        zx.tp_set_is_rrr51(self, value)
+
+    def set_is_rrr52(self, value):
+        zx.tp_set_is_rrr52(self, value)
+
+    def set_is_rrr53(self, value):
+        zx.tp_set_is_rrr53(self, value)
+
+    def set_is_rrr54(self, value):
+        zx.tp_set_is_rrr54(self, value)
+
+    def set_is_rrr55(self, value):
+        zx.tp_set_is_rrr55(self, value)
+
+    def set_is_rrr56(self, value):
+        zx.tp_set_is_rrr56(self, value)
+
+    def set_is_rrr57(self, value):
+        zx.tp_set_is_rrr57(self, value)
+
+    def set_is_rrr58(self, value):
+        zx.tp_set_is_rrr58(self, value)
+
+    def set_is_rrr59(self, value):
+        zx.tp_set_is_rrr59(self, value)
+
+    def set_is_rrr60(self, value):
+        zx.tp_set_is_rrr60(self, value)
+
+    def set_is_rrr61(self, value):
+        zx.tp_set_is_rrr61(self, value)
+
+    def set_is_rrr62(self, value):
+        zx.tp_set_is_rrr62(self, value)
+
+    def set_is_rrr63(self, value):
+        zx.tp_set_is_rrr63(self, value)
+
+    def set_is_rrr64(self, value):
+        zx.tp_set_is_rrr64(self, value)
+
+    def set_is_rrr65(self, value):
+        zx.tp_set_is_rrr65(self, value)
+
+    def set_is_rrr66(self, value):
+        zx.tp_set_is_rrr66(self, value)
+
+    def set_is_rrr67(self, value):
+        zx.tp_set_is_rrr67(self, value)
+
+    def set_is_rrr68(self, value):
+        zx.tp_set_is_rrr68(self, value)
+
+    def set_is_rrr69(self, value):
+        zx.tp_set_is_rrr69(self, value)
+
+    def set_is_rrr70(self, value):
+        zx.tp_set_is_rrr70(self, value)
+
+    def set_is_rrr71(self, value):
+        zx.tp_set_is_rrr71(self, value)
+
+    def set_is_rrr72(self, value):
+        zx.tp_set_is_rrr72(self, value)
+
+    def set_is_rrr73(self, value):
+        zx.tp_set_is_rrr73(self, value)
+
+    def set_is_rrr74(self, value):
+        zx.tp_set_is_rrr74(self, value)
+
+    def set_is_rrr75(self, value):
+        zx.tp_set_is_rrr75(self, value)
+
+    def set_is_rrr76(self, value):
+        zx.tp_set_is_rrr76(self, value)
+
+    def set_is_rrr77(self, value):
+        zx.tp_set_is_rrr77(self, value)
+
+    def set_is_rrr78(self, value):
+        zx.tp_set_is_rrr78(self, value)
+
+    def set_is_rrr79(self, value):
+        zx.tp_set_is_rrr79(self, value)
+
+    def set_is_rrr80(self, value):
+        zx.tp_set_is_rrr80(self, value)
+
+    def set_is_rrr81(self, value):
+        zx.tp_set_is_rrr81(self, value)
+
+    def set_is_rrr82(self, value):
+        zx.tp_set_is_rrr82(self, value)
+
+    def set_is_rrr83(self, value):
+        zx.tp_set_is_rrr83(self, value)
+
+    def set_is_rrr84(self, value):
+        zx.tp_set_is_rrr84(self, value)
+
+    def set_is_rrr85(self, value):
+        zx.tp_set_is_rrr85(self, value)
+
+    def set_is_rrr86(self, value):
+        zx.tp_set_is_rrr86(self, value)
+
+    def set_is_rrr87(self, value):
+        zx.tp_set_is_rrr87(self, value)
+
+    def set_is_rrr88(self, value):
+        zx.tp_set_is_rrr88(self, value)
+
+    def set_is_rrr89(self, value):
+        zx.tp_set_is_rrr89(self, value)
+
+    def set_is_rrr90(self, value):
+        zx.tp_set_is_rrr90(self, value)
+
+    def set_is_rrr91(self, value):
+        zx.tp_set_is_rrr91(self, value)
+
+    def set_is_rrr92(self, value):
+        zx.tp_set_is_rrr92(self, value)
+
+    def set_is_rrr93(self, value):
+        zx.tp_set_is_rrr93(self, value)
+
+    def set_is_rrr94(self, value):
+        zx.tp_set_is_rrr94(self, value)
+
+    def set_is_rrr95(self, value):
+        zx.tp_set_is_rrr95(self, value)
+
+    def set_is_rrr96(self, value):
+        zx.tp_set_is_rrr96(self, value)
+
+    def set_is_rrr97(self, value):
+        zx.tp_set_is_rrr97(self, value)
+
+    def set_is_rrr98(self, value):
+        zx.tp_set_is_rrr98(self, value)
+
+    def set_is_rrr99(self, value):
+        zx.tp_set_is_rrr99(self, value)
+
+    def set_is_rrr100(self, value):
+        zx.tp_set_is_rrr100(self, value)
+
     def set_is_spawner(self, value):
         zx.tp_set_is_spawner(self, value)
 

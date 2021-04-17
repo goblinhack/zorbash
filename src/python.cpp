@@ -989,6 +989,97 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr7)
     TP_SET_DECL(is_rrr8)
     TP_SET_DECL(is_rrr9)
+    TP_SET_DECL(is_rrr10)
+    TP_SET_DECL(is_rrr11)
+    TP_SET_DECL(is_rrr12)
+    TP_SET_DECL(is_rrr13)
+    TP_SET_DECL(is_rrr14)
+    TP_SET_DECL(is_rrr15)
+    TP_SET_DECL(is_rrr16)
+    TP_SET_DECL(is_rrr17)
+    TP_SET_DECL(is_rrr18)
+    TP_SET_DECL(is_rrr19)
+    TP_SET_DECL(is_rrr20)
+    TP_SET_DECL(is_rrr21)
+    TP_SET_DECL(is_rrr22)
+    TP_SET_DECL(is_rrr23)
+    TP_SET_DECL(is_rrr24)
+    TP_SET_DECL(is_rrr25)
+    TP_SET_DECL(is_rrr26)
+    TP_SET_DECL(is_rrr27)
+    TP_SET_DECL(is_rrr28)
+    TP_SET_DECL(is_rrr29)
+    TP_SET_DECL(is_rrr30)
+    TP_SET_DECL(is_rrr31)
+    TP_SET_DECL(is_rrr32)
+    TP_SET_DECL(is_rrr33)
+    TP_SET_DECL(is_rrr34)
+    TP_SET_DECL(is_rrr35)
+    TP_SET_DECL(is_rrr36)
+    TP_SET_DECL(is_rrr37)
+    TP_SET_DECL(is_rrr38)
+    TP_SET_DECL(is_rrr39)
+    TP_SET_DECL(is_rrr40)
+    TP_SET_DECL(is_rrr41)
+    TP_SET_DECL(is_rrr42)
+    TP_SET_DECL(is_rrr43)
+    TP_SET_DECL(is_rrr44)
+    TP_SET_DECL(is_rrr45)
+    TP_SET_DECL(is_rrr46)
+    TP_SET_DECL(is_rrr47)
+    TP_SET_DECL(is_rrr48)
+    TP_SET_DECL(is_rrr49)
+    TP_SET_DECL(is_rrr50)
+    TP_SET_DECL(is_rrr51)
+    TP_SET_DECL(is_rrr52)
+    TP_SET_DECL(is_rrr53)
+    TP_SET_DECL(is_rrr54)
+    TP_SET_DECL(is_rrr55)
+    TP_SET_DECL(is_rrr56)
+    TP_SET_DECL(is_rrr57)
+    TP_SET_DECL(is_rrr58)
+    TP_SET_DECL(is_rrr59)
+    TP_SET_DECL(is_rrr60)
+    TP_SET_DECL(is_rrr61)
+    TP_SET_DECL(is_rrr62)
+    TP_SET_DECL(is_rrr63)
+    TP_SET_DECL(is_rrr64)
+    TP_SET_DECL(is_rrr65)
+    TP_SET_DECL(is_rrr66)
+    TP_SET_DECL(is_rrr67)
+    TP_SET_DECL(is_rrr68)
+    TP_SET_DECL(is_rrr69)
+    TP_SET_DECL(is_rrr70)
+    TP_SET_DECL(is_rrr71)
+    TP_SET_DECL(is_rrr72)
+    TP_SET_DECL(is_rrr73)
+    TP_SET_DECL(is_rrr74)
+    TP_SET_DECL(is_rrr75)
+    TP_SET_DECL(is_rrr76)
+    TP_SET_DECL(is_rrr77)
+    TP_SET_DECL(is_rrr78)
+    TP_SET_DECL(is_rrr79)
+    TP_SET_DECL(is_rrr80)
+    TP_SET_DECL(is_rrr81)
+    TP_SET_DECL(is_rrr82)
+    TP_SET_DECL(is_rrr83)
+    TP_SET_DECL(is_rrr84)
+    TP_SET_DECL(is_rrr85)
+    TP_SET_DECL(is_rrr86)
+    TP_SET_DECL(is_rrr87)
+    TP_SET_DECL(is_rrr88)
+    TP_SET_DECL(is_rrr89)
+    TP_SET_DECL(is_rrr90)
+    TP_SET_DECL(is_rrr91)
+    TP_SET_DECL(is_rrr92)
+    TP_SET_DECL(is_rrr93)
+    TP_SET_DECL(is_rrr94)
+    TP_SET_DECL(is_rrr95)
+    TP_SET_DECL(is_rrr96)
+    TP_SET_DECL(is_rrr97)
+    TP_SET_DECL(is_rrr98)
+    TP_SET_DECL(is_rrr99)
+    TP_SET_DECL(is_rrr100)
     TP_SET_DECL(is_secret_door)
     TP_SET_DECL(is_sewer_wall)
     TP_SET_DECL(is_shallow_water)
@@ -1291,6 +1382,97 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr7",                           (PyCFunction)thing_is_rrr7,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr8",                           (PyCFunction)thing_is_rrr8,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr9",                           (PyCFunction)thing_is_rrr9,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr10",                          (PyCFunction)thing_is_rrr10,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr11",                          (PyCFunction)thing_is_rrr11,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr12",                          (PyCFunction)thing_is_rrr12,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr13",                          (PyCFunction)thing_is_rrr13,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr14",                          (PyCFunction)thing_is_rrr14,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr15",                          (PyCFunction)thing_is_rrr15,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr16",                          (PyCFunction)thing_is_rrr16,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr17",                          (PyCFunction)thing_is_rrr17,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr18",                          (PyCFunction)thing_is_rrr18,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr19",                          (PyCFunction)thing_is_rrr19,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr20",                          (PyCFunction)thing_is_rrr20,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr21",                          (PyCFunction)thing_is_rrr21,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr22",                          (PyCFunction)thing_is_rrr22,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr23",                          (PyCFunction)thing_is_rrr23,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr24",                          (PyCFunction)thing_is_rrr24,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr25",                          (PyCFunction)thing_is_rrr25,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr26",                          (PyCFunction)thing_is_rrr26,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr27",                          (PyCFunction)thing_is_rrr27,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr28",                          (PyCFunction)thing_is_rrr28,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr29",                          (PyCFunction)thing_is_rrr29,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr30",                          (PyCFunction)thing_is_rrr30,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr31",                          (PyCFunction)thing_is_rrr31,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr32",                          (PyCFunction)thing_is_rrr32,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr33",                          (PyCFunction)thing_is_rrr33,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr34",                          (PyCFunction)thing_is_rrr34,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr35",                          (PyCFunction)thing_is_rrr35,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr36",                          (PyCFunction)thing_is_rrr36,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr37",                          (PyCFunction)thing_is_rrr37,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr38",                          (PyCFunction)thing_is_rrr38,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr39",                          (PyCFunction)thing_is_rrr39,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr40",                          (PyCFunction)thing_is_rrr40,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr41",                          (PyCFunction)thing_is_rrr41,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr42",                          (PyCFunction)thing_is_rrr42,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr43",                          (PyCFunction)thing_is_rrr43,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr44",                          (PyCFunction)thing_is_rrr44,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr45",                          (PyCFunction)thing_is_rrr45,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr46",                          (PyCFunction)thing_is_rrr46,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr47",                          (PyCFunction)thing_is_rrr47,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr48",                          (PyCFunction)thing_is_rrr48,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr49",                          (PyCFunction)thing_is_rrr49,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr50",                          (PyCFunction)thing_is_rrr50,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr51",                          (PyCFunction)thing_is_rrr51,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr52",                          (PyCFunction)thing_is_rrr52,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr53",                          (PyCFunction)thing_is_rrr53,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr54",                          (PyCFunction)thing_is_rrr54,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr55",                          (PyCFunction)thing_is_rrr55,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr56",                          (PyCFunction)thing_is_rrr56,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr57",                          (PyCFunction)thing_is_rrr57,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr58",                          (PyCFunction)thing_is_rrr58,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr59",                          (PyCFunction)thing_is_rrr59,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr60",                          (PyCFunction)thing_is_rrr60,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr61",                          (PyCFunction)thing_is_rrr61,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr62",                          (PyCFunction)thing_is_rrr62,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr63",                          (PyCFunction)thing_is_rrr63,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr64",                          (PyCFunction)thing_is_rrr64,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr65",                          (PyCFunction)thing_is_rrr65,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr66",                          (PyCFunction)thing_is_rrr66,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr67",                          (PyCFunction)thing_is_rrr67,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr68",                          (PyCFunction)thing_is_rrr68,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr69",                          (PyCFunction)thing_is_rrr69,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr70",                          (PyCFunction)thing_is_rrr70,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr71",                          (PyCFunction)thing_is_rrr71,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr72",                          (PyCFunction)thing_is_rrr72,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr73",                          (PyCFunction)thing_is_rrr73,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr74",                          (PyCFunction)thing_is_rrr74,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr75",                          (PyCFunction)thing_is_rrr75,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr76",                          (PyCFunction)thing_is_rrr76,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr77",                          (PyCFunction)thing_is_rrr77,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr78",                          (PyCFunction)thing_is_rrr78,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr79",                          (PyCFunction)thing_is_rrr79,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr80",                          (PyCFunction)thing_is_rrr80,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr81",                          (PyCFunction)thing_is_rrr81,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr82",                          (PyCFunction)thing_is_rrr82,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr83",                          (PyCFunction)thing_is_rrr83,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr84",                          (PyCFunction)thing_is_rrr84,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr85",                          (PyCFunction)thing_is_rrr85,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr86",                          (PyCFunction)thing_is_rrr86,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr87",                          (PyCFunction)thing_is_rrr87,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr88",                          (PyCFunction)thing_is_rrr88,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr89",                          (PyCFunction)thing_is_rrr89,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr90",                          (PyCFunction)thing_is_rrr90,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr91",                          (PyCFunction)thing_is_rrr91,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr92",                          (PyCFunction)thing_is_rrr92,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr93",                          (PyCFunction)thing_is_rrr93,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr94",                          (PyCFunction)thing_is_rrr94,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr95",                          (PyCFunction)thing_is_rrr95,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr96",                          (PyCFunction)thing_is_rrr96,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr97",                          (PyCFunction)thing_is_rrr97,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr98",                          (PyCFunction)thing_is_rrr98,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr99",                          (PyCFunction)thing_is_rrr99,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr100",                         (PyCFunction)thing_is_rrr100,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_secret_door",                    (PyCFunction)thing_is_secret_door,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_sewer_wall",                     (PyCFunction)thing_is_sewer_wall,                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_shallow_water",                  (PyCFunction)thing_is_shallow_water,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
