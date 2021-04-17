@@ -167,7 +167,11 @@ _
     update_interpolated_position();
 
     if (unlikely(is_dead)) {
-        if (unlikely(is_resurrectable())) {
+        //
+        // Resurrect things unless that can do unless that has been
+        // disabled e.g. via minion master death
+        //
+        if (!is_unable_to_resurrect && is_resurrectable()) {
             //
             // Tick on player move/change of the current tick
             //
