@@ -165,9 +165,9 @@ void Thing::clear_dmap_scent (void)
     }
 }
 
-int Thing::rrr24(void)
+int Thing::is_rrr9(void)
 {_
-    return (tp()->rrr24());
+    return (tp()->is_rrr9());
 }
 
 int Thing::ai_scent_distance(void) const
@@ -753,9 +753,9 @@ int Thing::rarity(void) const
     return (tp()->rarity());
 }
 
-int Thing::rrr23(void) const
+int Thing::is_rrr6(void) const
 {_
-    return (tp()->rrr23());
+    return (tp()->is_rrr6());
 }
 
 int Thing::is_shown_uniquely_on_leftbar(void) const

@@ -73,36 +73,36 @@ public:
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
-    uint64_t has_ever_moved:1          {};
-    uint64_t has_external_particle:1   {}; // current in motion particle
-    uint64_t has_internal_particle:1   {}; // current in motion particle
-    uint64_t has_laser:1               {}; // current laser being fired
-    uint64_t has_light:1               {};
-    uint64_t inited_tiles:1            {};
-    uint64_t is_activated:1            {};
-    uint64_t is_attached:1             {};
-    uint64_t is_being_destroyed:1      {};
-    uint64_t is_blitted:1              {};
-    uint64_t is_bouncing:1             {};
-    uint64_t is_changing_level:1       {};
-    uint64_t is_dead:1                 {};
-    uint64_t is_facing_left:1          {};
-    uint64_t is_fadeup:1               {};
-    uint64_t is_falling:1              {};
-    uint64_t is_hidden:1               {};
-    uint64_t is_hungry:1               {};
-    uint64_t is_in_lava:1              {};
-    uint64_t is_in_water:1             {};
-    uint64_t is_jumping:1              {};
-    uint64_t is_moving:1               {};
-    uint64_t is_open:1                 {};
-    uint64_t is_resurrected:1          {};
-    uint64_t is_resurrecting:1         {};
-    uint64_t is_unable_to_resurrect:1  {};
-    uint64_t is_sleeping:1             {};
-    uint64_t is_starving:1             {};
-    uint64_t is_the_grid:1             {};
-    uint64_t is_tick_done:1            {}; // has moved/hit and finished its move
+    uint64_t has_ever_moved:1                {};
+    uint64_t has_external_particle:1         {}; // current in motion particle
+    uint64_t has_internal_particle:1         {}; // current in motion particle
+    uint64_t has_laser:1                     {}; // current laser being fired
+    uint64_t has_light:1                     {};
+    uint64_t inited_tiles:1                  {};
+    uint64_t is_activated:1                  {};
+    uint64_t is_attached:1                   {};
+    uint64_t is_being_destroyed:1            {};
+    uint64_t is_blitted:1                    {};
+    uint64_t is_bouncing:1                   {};
+    uint64_t is_changing_level:1             {};
+    uint64_t is_dead:1                       {};
+    uint64_t is_facing_left:1                {};
+    uint64_t is_fadeup:1                     {};
+    uint64_t is_falling:1                    {};
+    uint64_t is_hidden:1                     {};
+    uint64_t is_hungry:1                     {};
+    uint64_t is_in_lava:1                    {};
+    uint64_t is_in_water:1                   {};
+    uint64_t is_jumping:1                    {};
+    uint64_t is_moving:1                     {};
+    uint64_t is_open:1                       {};
+    uint64_t is_resurrected:1                {}; // has finished resurrecting
+    uint64_t is_resurrecting:1               {}; // is currently resurrecing
+    uint64_t is_resurrection_blocked:1       {}; // blocked from resurrection
+    uint64_t is_sleeping:1                   {};
+    uint64_t is_starving:1                   {};
+    uint64_t is_the_grid:1                   {};
+    uint64_t is_tick_done:1                  {}; // has moved/hit and finished its move
     uint64_t is_waiting_to_ascend_dungeon:1  {};
     uint64_t is_waiting_to_ascend_sewer:1    {};
     uint64_t is_waiting_to_descend_dungeon:1 {};
@@ -538,7 +538,7 @@ public:
     int gfx_glows(void) const;
     int gfx_health_bar_shown(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
-    int rrr23(void) const;
+    int is_rrr6(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;
@@ -812,7 +812,7 @@ public:
     int set_throw_distance(int);
     int set_tick_rate_tenths(int);
     int tick_catches_up_on_attack(void) const;
-    int rrr24(void);
+    int is_rrr9(void);
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;

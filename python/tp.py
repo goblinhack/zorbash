@@ -388,8 +388,8 @@ class Tp:
     def set_rarity(self, value):
         zx.tp_set_rarity(self, value)
 
-    def set_rrr23(self, value):
-        zx.tp_set_rrr23(self, value)
+    def set_rrr6(self, value):
+        zx.tp_set_rrr6(self, value)
 
     def set_is_shown_uniquely_on_leftbar(self, value):
         zx.tp_set_is_shown_uniquely_on_leftbar(self, value)
@@ -730,8 +730,8 @@ class Tp:
     def set_collision_attack_radius(self, value):
         zx.tp_set_collision_attack_radius(self, value)
 
-    def set_rrr24(self, value):
-        zx.tp_set_rrr24(self, value)
+    def set_rrr9(self, value):
+        zx.tp_set_rrr9(self, value)
 
     def set_gfx_bounce_on_move(self, value):
         zx.tp_set_gfx_bounce_on_move(self, value)

@@ -29,7 +29,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         METH_VARARGS | METH_KEYWORDS,                                           \
         "set a " #__field__ " in a thing template"},                            \
 
-TP_SET_PROTO(rrr24)
+TP_SET_PROTO(is_rrr9)
 TP_SET_PROTO(ai_obstacle)
 TP_SET_PROTO(ai_scent_distance)
 TP_SET_PROTO(attack_eater)
@@ -83,7 +83,7 @@ TP_SET_PROTO(gfx_bounce_on_move)
 TP_SET_PROTO(gfx_dead_anim)
 TP_SET_PROTO(gfx_health_bar_shown)
 TP_SET_PROTO(gfx_health_bar_shown_only_when_injured)
-TP_SET_PROTO(rrr23)
+TP_SET_PROTO(is_rrr6)
 TP_SET_PROTO(gfx_glows)
 TP_SET_PROTO(gfx_on_fire_anim)
 TP_SET_PROTO(gfx_oversized_but_sitting_on_the_ground)
