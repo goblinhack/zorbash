@@ -226,14 +226,20 @@ class Tp:
     def set_is_rrr5(self, value):
         zx.tp_set_is_rrr5(self, value)
 
-    def set_is_spawner(self, value):
-        zx.tp_set_is_spawner(self, value)
+    def set_is_rrr6(self, value):
+        zx.tp_set_is_rrr6(self, value)
 
     def set_is_rrr7(self, value):
         zx.tp_set_is_rrr7(self, value)
 
     def set_is_rrr8(self, value):
         zx.tp_set_is_rrr8(self, value)
+
+    def set_is_rrr9(self, value):
+        zx.tp_set_is_rrr9(self, value)
+
+    def set_is_spawner(self, value):
+        zx.tp_set_is_spawner(self, value)
 
     def set_ai_avoid_distance(self, value):
         zx.tp_set_ai_avoid_distance(self, value)
@@ -364,9 +370,6 @@ class Tp:
     def set_is_able_to_fall(self, value):
         zx.tp_set_is_able_to_fall(self, value)
 
-    def set_is_rrr53(self, value):
-        zx.tp_set_is_rrr53(self, value)
-
     def set_is_treasure_class_c(self, value):
         zx.tp_set_is_treasure_class_c(self, value)
 
@@ -387,9 +390,6 @@ class Tp:
 
     def set_rarity(self, value):
         zx.tp_set_rarity(self, value)
-
-    def set_rrr6(self, value):
-        zx.tp_set_rrr6(self, value)
 
     def set_is_shown_uniquely_on_leftbar(self, value):
         zx.tp_set_is_shown_uniquely_on_leftbar(self, value)
@@ -729,9 +729,6 @@ class Tp:
 
     def set_collision_attack_radius(self, value):
         zx.tp_set_collision_attack_radius(self, value)
-
-    def set_rrr9(self, value):
-        zx.tp_set_rrr9(self, value)
 
     def set_gfx_bounce_on_move(self, value):
         zx.tp_set_gfx_bounce_on_move(self, value)
