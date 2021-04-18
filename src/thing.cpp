@@ -9,6 +9,8 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 
+Thingp g_debug_thing;
+
 const Tpp Thing::tp_or_update(void)
 {
     if (likely(mytp != nullptr)) {

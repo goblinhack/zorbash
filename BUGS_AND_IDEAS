@@ -2,6 +2,7 @@
 Todo
 ----
 
+debug show level
 skeleton sword_rusty/hidden should not attack skeleton fire
 if a skeleton attacks a goblin they should fight
 wand of death should stop regenerating monst

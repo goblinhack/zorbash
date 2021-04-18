@@ -181,9 +181,13 @@ _
     }
 
     if (me->is_fire() || me->is_lava()) {
-        if (it->is_combustible()) {
+        if (me->is_monst()) {
+            //
+            // Fire monsters do not attack always
+            //
+        } else if (it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
-                log("Can attack %s", it->to_string().c_str());
+                log("Can attack as I am fire %s", it->to_string().c_str());
                 return true;
             }
         }

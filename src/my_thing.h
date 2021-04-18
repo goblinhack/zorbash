@@ -1264,4 +1264,6 @@ bool things_overlap(Thingp t, fpoint t_at, Thingp o);
 bool things_overlap_attack(Thingp t, fpoint t_at, Thingp o);
 int bag_estimate_volume(const std::list<Thingp> &items);
 
+extern Thingp g_debug_thing;
+
 #endif // _MY_THING_H_

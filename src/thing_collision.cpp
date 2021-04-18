@@ -840,9 +840,7 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
 }
 
 //
-// handle a single collision between two things
-//
-// false aborts the walk
+// If two things collide, return false to stop the walk
 //
 bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
                                       int x, int y, int dx, int dy)
@@ -854,19 +852,22 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
 
     log("Collision candidate? %s", it->to_string().c_str());
 _
-    //
-    // Need this or shields attack the player.
-    //
     if ((owner_it == me) || (owner_me == it)) {
         //
         // If on fire, allow fire to burn its owner - you!
         //
-        if (!is_fire()) {
+        if (is_fire()) {
             if (is_torch()) {
+                //
+                // Abort the walk
+                //
                 log("No; dont set fire to yourself by carrying a torch");
                 return false;
             }
 
+            //
+            // Continue the walk
+            //
             log("Yes; allow fire to burn owner");
             return true;
         }
@@ -877,6 +878,9 @@ _
     //
     if (is_player() && it->is_item() && !it->is_auto_collect_item()) {
         log("No; allow items to be collected manually");
+        //
+        // Abort the walk
+        //
         return false;
     } else if (!it->is_dead && possible_to_attack(it)) {
         if (things_overlap_attack(me, future_pos, it)) {
@@ -888,6 +892,9 @@ _
     } else if (can_eat(it)) {
         if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
             log("No; can eat but was seen previously");
+            //
+            // Continue the walk
+            //
             return true;
         }
 
@@ -896,8 +903,14 @@ _
             thing_add_ai_possible_hit(it, "eat");
         }
     } else if (it->is_dead) {
+        //
+        // Continue walking by falling through to return true
+        //
         log("No; ignore corpse");
     } else {
+        //
+        // Continue walking by falling through to return true
+        //
         log("No; ignore");
     }
 
