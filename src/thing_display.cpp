@@ -705,6 +705,10 @@ void Thing::blit_internal (int fbo,
 
     auto lit = (fbo == FBO_FULLMAP) || 
                     level->is_lit_no_check(mid_at.x, mid_at.y);
+    if (unlikely(g_opt_debug2)) {
+        lit = true;
+    }
+
     if (tile &&
         !tile->is_invisible &&
         !is_dead &&
@@ -760,6 +764,10 @@ void Thing::blit_internal (int fbo,
         c.a = 255;
     } else if (get_light_strength()) {
         c.a = fade;
+    }
+
+    if (unlikely(g_opt_debug2)) {
+        c.a = 255;
     }
 
     glcolor(c);

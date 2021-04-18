@@ -219,13 +219,13 @@ bool Level::create_dungeon (point3d at, int seed)
         if (g_errored) { return false; }
         place_dirt(dungeon);
         if (g_errored) { return false; }
-        create_dungeon_place_lava(dungeon, "lava1");
-        if (g_errored) { return false; }
         create_dungeon_place_chasm(dungeon, "chasm1");
         if (g_errored) { return false; }
         create_dungeon_place_deep_water(dungeon, "deep_water1");
         if (g_errored) { return false; }
         create_dungeon_place_place_shallow_water(dungeon, "water1");
+        if (g_errored) { return false; }
+        create_dungeon_place_lava(dungeon, "lava1");
         if (g_errored) { return false; }
 
         //
@@ -326,6 +326,8 @@ placed_player:
         //
         // Less important stuff
         //
+        create_dungeon_place_lava_smoke(dungeon);
+        if (g_errored) { return false; }
         place_floor_deco(dungeon);
         if (g_errored) { return false; }
         create_dungeon_place_random_floor_deco(dungeon);
@@ -678,13 +680,13 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
 
             if (d->is_monst_easy(x, y)) { 
-                if (random_range(0, 100) < 50) {
+                if (random_range(0, 100) < 75) {
                     tp = tp_random_monst_easy(p);
                 }
             }
 
             if (d->is_monst_easy(x, y)) { 
-                if (random_range(0, 100) < 50) {
+                if (random_range(0, 100) < 75) {
                     tp = tp_random_monst_hard(p); 
                 }
             }
@@ -702,10 +704,31 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             }
 
             if (d->is_brazier(x, y))          { tp = tp_random_brazier(); }
-            if (d->is_treasure(x, y))         { tp = tp_random_treasure(); }
-            if (d->is_treasure_class_a(x, y)) { tp = tp_random_item_class_a(); }
-            if (d->is_treasure_class_b(x, y)) { tp = tp_random_item_class_b(); }
-            if (d->is_treasure_class_c(x, y)) { tp = tp_random_item_class_c(); }
+
+            if (d->is_treasure(x, y))         { 
+                if (random_range(0, 100) < 50) {
+                    tp = tp_random_treasure(); 
+                }
+            }
+
+            if (d->is_treasure_class_a(x, y)) { 
+                if (random_range(0, 100) < 50) {
+                    tp = tp_random_item_class_a(); 
+                }
+            }
+
+            if (d->is_treasure_class_b(x, y)) { 
+                if (random_range(0, 100) < 50) {
+                    tp = tp_random_item_class_b(); 
+                }
+            }
+
+            if (d->is_treasure_class_c(x, y)) { 
+                if (random_range(0, 100) < 50) {
+                    tp = tp_random_item_class_c(); 
+                }
+            }
+
             if (tp) {
                 (void) thing_new(tp->name(), fpoint(x, y));
             }
@@ -726,10 +749,37 @@ void Level::create_dungeon_place_lava (Dungeonp d, const std::string &what)
             }
 
             (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
 
+void Level::create_dungeon_place_lava_smoke (Dungeonp d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (!is_lava(x, y)) {
+                continue;
+            }
+
+            //
+            // Place smoke over lava but not if next to water as it will
+            // just boil off anyway
+            //
             if (random_range(0, 100) < 20) {
+                for (auto dx = -2; dx <= 2; dx++) {
+                    for (auto dy = -2; dy <= 2; dy++) {
+                        if (is_shallow_water(x + dx, y + dy)) {
+                            goto next;
+                        }
+                        if (is_deep_water(x + dx, y + dy)) {
+                            goto next;
+                        }
+                    }
+                }
                 thing_new("smoke", fpoint(x, y));
             }
+next:
+            continue;
         }
     }
 }
