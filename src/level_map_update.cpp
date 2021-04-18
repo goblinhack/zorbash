@@ -64,9 +64,11 @@ void Level::update_water_next_to_lava (void)
                             FOR_ALL_THINGS(this, t, x, y) {
                                 if (t->is_shallow_water()) {
                                     t->dead("Next to lava");
-                                    if (!is_smoke(x, y)) {
-                                        auto smoke = thing_new("smoke", fpoint(x, y));
-                                        smoke->set_lifespan(random_range(1, 10));
+                                    if (!is_starting) {
+                                        if (!is_smoke(x, y)) {
+                                            auto smoke = thing_new("smoke", fpoint(x, y));
+                                            smoke->set_lifespan(random_range(1, 10));
+                                        }
                                     }
                                 }
                             } FOR_ALL_THINGS_END()
