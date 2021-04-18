@@ -218,4 +218,20 @@ void Level::scroll_map_set_target (void)
             map_wanted_at.y -= d;
         }
     }
+
+    //
+    // Don't allow scrolling off the map
+    //
+    if (map_wanted_at.x < 0) {
+        map_wanted_at.x = 0;
+    }
+    if (map_wanted_at.y < 0) {
+        map_wanted_at.y = 0;
+    }
+    if (map_wanted_at.x > MAP_WIDTH - 1) {
+        map_wanted_at.x = MAP_WIDTH - 1;
+    }
+    if (map_wanted_at.y > MAP_HEIGHT - 1) {
+        map_wanted_at.y = MAP_HEIGHT - 1;
+    }
 }
