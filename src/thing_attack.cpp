@@ -384,7 +384,7 @@ _
             health_boost(it->get_nutrition());
         }
         if (is_killed_on_hitting() || is_killed_on_hit_or_miss()) {
-            dead("suicide");
+            dead("by foolishness");
         }
 
         decr_stamina();
@@ -403,7 +403,7 @@ _
         if (attack_lunge()) {
             lunge(it->get_interpolated_mid_at());
         }
-        dead("suicide");
+        dead("by foolishness");
         return true;
     }
 

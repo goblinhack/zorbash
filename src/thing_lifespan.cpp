@@ -86,5 +86,5 @@ void Thing::lifespan_tick (void)
         }
     }
 
-    dead("ran out of life");
+    dead("by ran out of life");
 }

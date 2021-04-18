@@ -126,7 +126,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     if (!it->is_dead) {
         if (it->is_dead_on_shove()) {
             log("Shove and kill");
-            it->dead("shoved");
+            it->dead("by being shoved");
             auto spawn_what = it->spawn_on_shoved();
             if (spawn_what != "") {
                 auto spawn_at = it->mid_at;

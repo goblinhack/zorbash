@@ -124,7 +124,7 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
         what->remove_owner();
         monstp->carrying.remove(what->id);
 
-        what->dead("used");
+        what->dead("by being used");
     }
 }
 

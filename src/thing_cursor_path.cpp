@@ -23,7 +23,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
         auto future_pos = fpoint(to.x, to.y);
 
         FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) {
-            t->dead("end of life");
+            t->dead("by end of life");
         } FOR_ALL_THINGS_END()
 
 	//

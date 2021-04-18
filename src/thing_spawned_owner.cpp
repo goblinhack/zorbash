@@ -121,7 +121,7 @@ void Thing::kill_spawned (Thingp killer)
         auto o = spawner->get_immediate_spawned_owner();
         if (o && (o == this)) {
             spawner->remove_spawner_owner();
-            spawner->dead(killer, "its master died");
+            spawner->dead(killer, "its spawner died");
         }
     }
 }
