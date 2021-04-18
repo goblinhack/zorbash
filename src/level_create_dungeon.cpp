@@ -74,7 +74,7 @@ bool Level::create_dungeon (point3d at, int seed)
         if (g_errored) { return false; }
 
         {
-            auto floor_type = random_range_inclusive(1, 7);
+            auto floor_type = random_range_inclusive(1, 11);
 
             int nloops = 100;
             auto s = "floor";
