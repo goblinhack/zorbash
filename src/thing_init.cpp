@@ -534,7 +534,7 @@ void Thing::reinit (void)
     //
     if (is_cursor()) {
         if (level->cursor) {
-            dead("already exists");
+            dead("by already exists");
         } else {
             level->cursor = this;
         }

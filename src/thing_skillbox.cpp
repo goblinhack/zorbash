@@ -32,22 +32,6 @@ _
         return false;
     }
 
-    if (what->is_item_collected_as_gold()) {
-        wid_skillbox_init();
-        wid_thing_info_fini();
-        incr_gold(what->get_gold_value());
-        what->dead("collected");
-        return false;
-    }
-
-    if (what->is_collect_as_keys()) {
-        wid_skillbox_init();
-        wid_thing_info_fini();
-        incr_keys(1);
-        what->dead("collected");
-        return false;
-    }
-
     int free_slot = -1;
     auto skillbox_items = player->monstp->skillbox_id.size();
     for (auto i = 0U; i < skillbox_items; i++) {

@@ -63,7 +63,7 @@ void Level::update_water_next_to_lava (void)
                         if (is_lava(x + dx, y + dy)) {
                             FOR_ALL_THINGS(this, t, x, y) {
                                 if (t->is_shallow_water()) {
-                                    t->dead("Next to lava");
+                                    t->dead("by being too close to lava");
                                     if (!is_starting) {
                                         if (!is_smoke(x, y)) {
                                             auto smoke = thing_new("smoke", fpoint(x, y));
@@ -134,7 +134,7 @@ void Level::update_deep_water (void)
                 if (is_shallow_water(x, y)) {
                     FOR_ALL_THINGS(this, t, x, y) {
                         if (t->is_shallow_water()) {
-                            t->dead("Reduce water depth");
+                            t->dead("by being shallow");
                         }
                     } FOR_ALL_THINGS_END()
                 }
@@ -159,7 +159,7 @@ void Level::update_deep_water (void)
                     FOR_ALL_THINGS(this, t, x, y) {
                         if (t->is_deep_water()) {
                             t->log("Removed, too shallow");
-                            t->dead("Too shallow");
+                            t->dead("by being too shallow");
                             removed_deep_water = true;
                         }
                     } FOR_ALL_THINGS_END()

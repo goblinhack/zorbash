@@ -28,7 +28,7 @@ void Thing::unset_on_fire (void)
     auto fire_anim = level->thing_find(id);
     if (fire_anim) {
         log("Unset on fire");
-        fire_anim->dead("remove fire");
+        fire_anim->dead("by removing fire");
         set_on_fire_anim_id(0);
     }
 }

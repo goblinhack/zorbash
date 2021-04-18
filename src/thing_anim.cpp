@@ -52,7 +52,7 @@ if (is_blood()) { log("Has no tiles"); }
         //
         if (tile_is_end_of_anim(tile)) {
             if (tile_is_dead_on_end_of_anim(tile)) {
-                dead("end of anim");
+                dead("by end of anim");
             }
 
             if (tile_is_alive_on_end_of_anim(tile)) {

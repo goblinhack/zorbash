@@ -31,7 +31,7 @@ float Thing::get_fadeup (void)
     auto t = time_get_time_ms_cached();
 
     if (t >= get_timestamp_fadeup_end()) {
-        dead("fadeup finished");
+        dead("by fadeup finished");
         alpha = 0;
         return (-1);
     }

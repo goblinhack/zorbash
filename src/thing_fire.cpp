@@ -112,7 +112,7 @@ void Thing::fire_tick (void)
 
         if (h <= 0) {
             h = set_health(0);
-            dead("burning");
+            dead("by burning");
         }
 
         if (!level->is_smoke(at.x, at.y)) {

@@ -35,7 +35,7 @@ void Thing::hunger_clock (void)
         //
         // starvation is just annoying for players
         //
-        // dead("starved to death");
+        // dead("by starved to death");
     }
 
     int hungry_at =

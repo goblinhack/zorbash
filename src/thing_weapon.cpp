@@ -258,7 +258,7 @@ _
     auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
         log("Sheath; remove carry-anim");
-        weapon_carry_anim->dead("owner sheathed weapon, remove carry-anim");
+        weapon_carry_anim->dead("by owner sheathed weapon, remove carry-anim");
         weapon_set_carry_anim(nullptr);
     } else {
         log("Weapon had no carry-anim");
@@ -267,7 +267,7 @@ _
     auto gfx_anim_attack = weapon_get_use_anim();
     if (gfx_anim_attack) {
         log("Sheath; remove use-anim");
-        gfx_anim_attack->dead("owner sheathed weapon, remove use-anim");
+        gfx_anim_attack->dead("by owner sheathed weapon, remove use-anim");
         weapon_set_use_anim(nullptr);
     } else {
         log("Weapon had no use/attack anim");

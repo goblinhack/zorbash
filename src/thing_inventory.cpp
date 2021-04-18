@@ -189,7 +189,7 @@ _
         wid_thing_info_fini();
         incr_gold(item->get_gold_value());
         inventory_particle(item, monstp->inventory_id.size() - 1);
-        item->dead("collected");
+        item->dead("by being collected");
         return false;
     }
 
@@ -198,7 +198,7 @@ _
         wid_thing_info_fini();
         incr_keys(1);
         inventory_particle(item, monstp->inventory_id.size() - 1);
-        item->dead("collected");
+        item->dead("by being collected");
         return false;
     }
 

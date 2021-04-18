@@ -305,7 +305,7 @@ _
                 auto h = decr_health(fall_damage);
                 if (h <= 0) {
                     h = set_health(0);
-                    dead("flying without wings");
+                    dead("by flying without wings");
                 }
             }
             return true;
