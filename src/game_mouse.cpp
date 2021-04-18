@@ -180,5 +180,27 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
         }
     }
 
+#if 0
+{
+    g_debug_thing = nullptr;
+
+    point p(level->cursor->mid_at.x, level->cursor->mid_at.y);
+    TOPCON("monst %d corpse %d", level->is_monst(p), level->is_corpse(p));
+    FOR_ALL_INTERESTING_THINGS(level, t, level->cursor->mid_at.x, level->cursor->mid_at.y) {
+        if (level->cursor->mid_at != t->mid_at) {
+            continue;
+        }
+        if (t->is_dead) {
+            continue;
+        }
+        if (t->is_monst()) {
+            t->topcon("debug");
+            g_debug_thing = t;
+        }
+    }
+    FOR_ALL_THINGS_END()
+}
+#endif
+
     return true;
 }
