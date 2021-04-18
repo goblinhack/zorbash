@@ -361,7 +361,7 @@ void Thing::update_interpolated_position (void)
     }
 
     if (update_pos) {
-        if (g_opt_debug3) {
+        if (g_opt_debug4) {
             log("Update interpolated pos");
         }
 

@@ -18,18 +18,21 @@ char *WORLD_PATH;
 FILE *g_log_stdout;
 FILE *g_log_stderr;
 
-bool g_die_occurred;
-bool g_do_screenshot;
-bool g_errored;
-bool g_grab_next_key;
-bool g_need_restart;
-bool g_opt_debug1;
-bool g_opt_debug2;
-bool g_opt_debug3;
-bool g_opt_fast_start;
-bool g_opt_new_game;
-bool g_quitting;
-bool g_render_black_and_white;
+bool g_die_occurred;           // Fatal error has occurred
+bool g_do_screenshot;          // Grab a screen shot next fram
+bool g_errored;                // An error has occurred
+bool g_grab_next_key;          // Waiting for key input
+bool g_need_restart;           // Need to restart game
+bool g_opt_debug1;             // Basic debug
+bool g_opt_debug2;             // As above but includes log indentation and more detailed debugs
+bool g_opt_debug3;             // As above but show the entire level
+bool g_opt_debug4;             // As above but include memory checks
+bool g_opt_debug5;             // As above but include out of bounds checks
+bool g_opt_fast_start;         // Do not flush after each console log at start
+bool g_opt_new_game;           // Start in the game imediately
+bool g_quitting;               // Exitting the game
+bool g_render_black_and_white; // Rendering map in black and white
+
 std::string g_opt_seed_name;
 
 int TILES_ACROSS;

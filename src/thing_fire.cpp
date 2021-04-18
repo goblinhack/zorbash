@@ -15,7 +15,7 @@
 
 void Thing::fire_tick (void)
 {_
-    if (g_opt_debug3) {
+    if (g_opt_debug4) {
         log("Fire tick");
     }
 
@@ -29,14 +29,14 @@ void Thing::fire_tick (void)
         is_waiting_to_fall || 
         is_the_grid || 
         is_jumping) { 
-        if (g_opt_debug3) {
+        if (g_opt_debug4) {
             log("No, not relevent");
         }
         return;
     }
 
     if (!avoids_fire()) {
-        if (g_opt_debug3) {
+        if (g_opt_debug4) {
             log("No, is not fire avoider");
         }
         return;
@@ -44,7 +44,7 @@ void Thing::fire_tick (void)
 
     fpoint at = get_interpolated_mid_at();
     if (!level->is_fire(at.x, at.y) && !is_on_fire()) {
-        if (g_opt_debug3) {
+        if (g_opt_debug4) {
             log("No, no fire at");
         }
         return;

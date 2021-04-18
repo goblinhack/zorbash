@@ -403,7 +403,7 @@ void Level::display_map (void)
         //
         display_lasers();
         display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-        if (!g_opt_debug2) {
+        if (!g_opt_debug3) {
             glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
             blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
         }

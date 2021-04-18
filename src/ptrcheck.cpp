@@ -727,7 +727,7 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 int ptrcheck_verify (const void *ptr, std::string &func, std::string &file,
                      int line)
 {
-    if (!g_opt_debug3) {
+    if (!g_opt_debug4) {
         if (!ptr_check_some_pointers_changed) {
             return true;
         }
