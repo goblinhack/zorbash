@@ -202,6 +202,7 @@ Tpp Level::tp_random_monst_easy (const point &p)
     auto tries = 0U;
     for (;;) {
         if (tries++ > 1000) {
+            ERR("Cannot place easy monst");
             return nullptr;
         }
         auto tpp = ::tp_random_monst();
@@ -229,6 +230,7 @@ Tpp Level::tp_random_monst_hard (const point &p)
     auto tries = 0U;
     for (;;) {
         if (tries++ > 1000) {
+            ERR("Cannot place hard monst");
             return nullptr;
         }
         auto tpp = ::tp_random_monst();

@@ -684,9 +684,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             }
 
             if (d->is_monst_hard(x, y)) { 
-                if (random_range(0, 100) < 75) {
-                    tp = tp_random_monst_hard(p); 
-                }
+                tp = tp_random_monst_hard(p); 
             }
 
             if (d->is_minion_generator_easy(x, y)) {
@@ -696,9 +694,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             }
 
             if (d->is_minion_generator_hard(x, y)) {
-                if (random_range(0, 100) < 50) {
-                    tp = tp_random_minion_generator_hard(p); 
-                }
+                tp = tp_random_minion_generator_hard(p); 
             }
 
             if (d->is_brazier(x, y))          { tp = tp_random_brazier(); }
