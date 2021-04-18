@@ -39,7 +39,7 @@ bool Thing::possible_to_attack (const Thingp it)
     } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
         // continue
     } else {
-        if (g_opt_debug3) { // very noisy
+        if (g_opt_debug4) { // very noisy
             log("Cannot attack %s", it->to_string().c_str());
         }
         return false;

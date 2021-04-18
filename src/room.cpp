@@ -193,7 +193,7 @@ void Room::finalize (void)
 {
     find_doors();
 
-    if (g_opt_debug3) {
+    if (g_opt_debug4) {
         dump();
     }
 }

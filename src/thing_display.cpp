@@ -705,7 +705,7 @@ void Thing::blit_internal (int fbo,
 
     auto lit = (fbo == FBO_FULLMAP) || 
                     level->is_lit_no_check(mid_at.x, mid_at.y);
-    if (unlikely(g_opt_debug2)) {
+    if (unlikely(g_opt_debug3)) {
         lit = true;
     }
 
@@ -766,7 +766,7 @@ void Thing::blit_internal (int fbo,
         c.a = fade;
     }
 
-    if (unlikely(g_opt_debug2)) {
+    if (unlikely(g_opt_debug3)) {
         c.a = 255;
     }
 

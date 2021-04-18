@@ -447,9 +447,11 @@ static void usage (void)
     CON("zorbash, options:");
     CON(" ");
     CON(" --new-game");
-    CON(" --debug                     // most debugs");
-    CON(" --debug2                    // + memory checks");
-    CON(" --debug3                    // + out of bounds checks");
+    CON(" --debug                     // basic debug");
+    CON(" --debug2                    // as above but includes log indentation and more detailed debugs");
+    CON(" --debug3                    // as above but show the entire level");
+    CON(" --debug4                    // as above but include memory checks");
+    CON(" --debug5                    // as above but include out of bounds checks");
     CON(" --seed <name/number>");
     CON(" ");
     CON("Written by goblinhack@gmail.com");
@@ -489,16 +491,35 @@ static void parse_args (int32_t argc, char *argv[])
 
         if (!strcasecmp(argv[i], "--debug2") ||
             !strcasecmp(argv[i], "-debug2")) {
-            g_opt_debug2 = true;
             g_opt_debug1 = true;
+            g_opt_debug2 = true;
             continue;
         }
 
         if (!strcasecmp(argv[i], "--debug3") ||
             !strcasecmp(argv[i], "-debug3")) {
-            g_opt_debug3 = true;
-            g_opt_debug2 = true;
             g_opt_debug1 = true;
+            g_opt_debug2 = true;
+            g_opt_debug3 = true;
+            continue;
+        }
+
+        if (!strcasecmp(argv[i], "--debug4") ||
+            !strcasecmp(argv[i], "-debug4")) {
+            g_opt_debug1 = true;
+            g_opt_debug2 = true;
+            g_opt_debug3 = true;
+            g_opt_debug4 = true;
+            continue;
+        }
+
+        if (!strcasecmp(argv[i], "--debug5") ||
+            !strcasecmp(argv[i], "-debug5")) {
+            g_opt_debug1 = true;
+            g_opt_debug2 = true;
+            g_opt_debug3 = true;
+            g_opt_debug4 = true;
+            g_opt_debug5 = true;
             continue;
         }
 

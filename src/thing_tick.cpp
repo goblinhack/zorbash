@@ -160,7 +160,7 @@ void Thing::collision_check_do (void)
 
 void Thing::tick (void)
 {_
-    if (g_opt_debug3) {
+    if (g_opt_debug4) {
         log("Tick");
     }
 _
@@ -185,14 +185,14 @@ _
                 }
             }
         }
-        if (g_opt_debug3) {
+        if (g_opt_debug4) {
             log("Tick; is dead");
         }
         return;
     }
 
     if (unlikely(is_dead)) {
-        if (g_opt_debug3) {
+        if (g_opt_debug4) {
             log("Tick; died");
         }
         return;

@@ -98,7 +98,7 @@ _
                 it->is_hidden || 
                 it->is_falling || 
                 it->is_jumping) { 
-                if (g_opt_debug3) {
+                if (g_opt_debug4) {
                     if (it->is_loggable_for_unimportant_stuff()) {
                         log(" ignore %s", it->to_string().c_str());
                     }
@@ -106,7 +106,7 @@ _
                 continue; 
             }
 
-            if (g_opt_debug3) {
+            if (g_opt_debug4) {
                 if (it->is_loggable_for_unimportant_stuff()) {
                     log(" consider %s", it->to_string().c_str());
                 }
@@ -266,7 +266,7 @@ _
         }
     }
 
-    if (g_opt_debug3) {
+    if (g_opt_debug4) {
         log("Sorted goals, %d (best) .. %d (worst)",
             (int)most_preferred, (int)least_preferred);
     }
@@ -301,7 +301,7 @@ _
     //
     // Find the best next-hop to the best goal.
     //
-    if (g_opt_debug3) {
+    if (g_opt_debug4) {
         log("Goals:");
         dmap_print(dmap_scent,
                    point(start.x - minx, start.y - miny),

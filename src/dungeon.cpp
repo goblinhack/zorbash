@@ -268,7 +268,7 @@ bool Dungeon::is_oob (const int x, const int y)
 
 void Dungeon::debug (const std::string s)
 {_
-    if (g_opt_debug3) {
+    if (g_opt_debug4) {
         LOG("Dungeon (%u) %s", seed, s.c_str());
         LOG("===========================================================");
         dump();
