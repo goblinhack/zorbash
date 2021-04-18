@@ -398,6 +398,10 @@ void Nodes::dump (void)
                 set(out, oy, ox-1, 'K');
                 t++;
             }
+            if (node->is_secret) {
+                set(out, oy, ox-1, 's');
+                t++;
+            }
 
             if (t > 1) {
                 ERR("Too many node types S %d E %d D %d k %d",

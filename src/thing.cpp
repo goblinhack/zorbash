@@ -97,7 +97,6 @@ const ThingId& Thing::get_immediate_spawned_owner_id (void) const
 {_
     if (likely(monstp != nullptr)) {
         verify(monstp);
-LOG("%s get %d", __FUNCTION__, monstp->spawner_owner_id.id);
         return (monstp->spawner_owner_id);
     } else {
         return (NoThingId);
@@ -108,7 +107,6 @@ const ThingId& Thing::set_spawned_owner_id (const ThingId &v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-LOG("%s set %d", __FUNCTION__, v.id);
     return (monstp->spawner_owner_id = v);
 }
 

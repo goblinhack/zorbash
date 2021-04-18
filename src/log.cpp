@@ -46,10 +46,6 @@ void log_catchup_missing_indent_levels (void)
 
 static void log_ (const char *fmt, va_list args)
 {
-    if (!g_opt_debug1) {
-        return;
-    }
-
     char buf[MAXSTR];
     int len;
 
