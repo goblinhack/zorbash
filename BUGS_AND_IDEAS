@@ -1,25 +1,21 @@
 
 Todo
 ----
-
-wand of death should stop regenerating monst
-frogs next to lava should melt?
-tentacleeye lightning
 easy and hard monsters in random monst
 easy and hard generators
+tentacleeye lightning
 sound play with distance for rat squeak
-goblin mage
-goblin generator
-pack spawn of goblins?
+
+Traps
+-----
 random floor trap / a seethrough bridge over lava etc?
-rusty sword has poisoning chance?
-zombie camel?
 moving blocks?
+boulders blocking secret room?
 
 Sound
 -----
-water footsteps im sewer
-
+water footsteps in sewer
+water footsteps in water too
 
 Skills
 ------
@@ -40,6 +36,7 @@ Skills
 
 Poison
 ------
+- rusty sword has poisoning chance?
 - holy water
 - add poison notify on screen from spider?
 - half damage from poison constitution save
@@ -63,8 +60,13 @@ AI
 - throw gold to distract cleaner
 - on fire intelligent monst should seek water?
 
+Food
+----
+frogs next to lava should melt?
+
 Weapons
 -------
+- wand of death should stop regenerating monst
 - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)
 - blessed items resist explosion
 - warhammer should kill parent jelly in one go
@@ -83,6 +85,10 @@ Water
 
 Monsts
 ------
+- goblin mage
+- goblin generator
+- pack spawn of goblins?
+- zombie camel?
 - new monst? should explode in fire?
 - sewer wolf?
 - invisible monst?
