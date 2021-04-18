@@ -233,18 +233,18 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
         }
 
-        // remember to update create_h_flip
-        r->dir_up      = up ? true : false;
-        r->dir_down    = down ? true : false;
-        r->dir_left    = left ? true : false;
-        r->dir_right   = right ? true : false;
-        r->is_ascend_dungeon = is_ascend_dungeon ? true : false;
-        r->is_descend_dungeon     = is_descend_dungeon ? true : false;
-        r->is_lock     = is_lock ? true : false;
-        r->is_key      = is_key ? true : false;
-        r->is_secret   = is_secret ? true : false;
-        r->depth       = is_depth;
-        // remember to update create_h_flip
+        // remember to update create_w_flip
+        r->dir_up             = up ? true : false;
+        r->dir_down           = down ? true : false;
+        r->dir_left           = left ? true : false;
+        r->dir_right          = right ? true : false;
+        r->is_ascend_dungeon  = is_ascend_dungeon ? true : false;
+        r->is_descend_dungeon = is_descend_dungeon ? true : false;
+        r->is_lock            = is_lock ? true : false;
+        r->is_key             = is_key ? true : false;
+        r->is_secret          = is_secret ? true : false;
+        r->depth              = is_depth;
+        // remember to update create_w_flip
 
         r->finalize();
 

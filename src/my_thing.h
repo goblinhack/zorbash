@@ -148,7 +148,7 @@ public:
     uint64_t i_set_is_rock:1                   {};
     uint64_t i_set_is_secret_door:1            {};
     uint64_t i_set_is_smoke:1                  {};
-    uint64_t i_set_is_brazier:1                  {};
+    uint64_t i_set_is_brazier:1                {};
     uint64_t i_set_is_treasure:1               {};
     uint64_t i_set_is_wall:1                   {};
     uint64_t i_set_is_gfx_water:1              {};

@@ -1177,10 +1177,6 @@ void Dungeon::create_node_map (void)
 
 void Dungeon::dump (void)
 {_
-    if (!g_opt_debug2) {
-        return;
-    }
-
     LOG("DUNGEON: Seed %u (with room depth)", seed);
     for (auto y = 0; y < map_height; y++) {
         std::string s;
@@ -1485,6 +1481,9 @@ bool Dungeon::room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
         return false;
     }
     if (n->is_key != r->is_key) {
+        return false;
+    }
+    if (n->is_secret != r->is_secret) {
         return false;
     }
     return true;
