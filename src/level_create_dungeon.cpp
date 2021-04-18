@@ -234,12 +234,6 @@ bool Level::create_dungeon (point3d at, int seed)
         update_heatmap();
 
         //
-        // Items that have no special placement rules
-        //
-        create_dungeon_place_objects_with_normal_placement_rules(dungeon);
-        if (g_errored) { return false; }
-
-        //
         // Place the player if we do not have one.
         //
         if (!game->level) {
@@ -315,6 +309,10 @@ bool Level::create_dungeon (point3d at, int seed)
         }
 
 placed_player:
+        //
+        // Items that have no special placement rules
+        //
+        create_dungeon_place_objects_with_normal_placement_rules(dungeon);
         if (g_errored) { return false; }
 
         //
@@ -685,7 +683,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 
-            if (d->is_monst_easy(x, y)) { 
+            if (d->is_monst_hard(x, y)) { 
                 if (random_range(0, 100) < 75) {
                     tp = tp_random_monst_hard(p); 
                 }

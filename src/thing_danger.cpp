@@ -6,6 +6,47 @@
 #include "my_sys.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_thing_template.h"
+
+int Tp::get_danger_level (void)
+{_
+    int danger_level = 0;
+
+    danger_level = get_health_initial() / 10;
+
+    if (is_resurrectable()) {
+        danger_level *= 2;
+    }
+    if (attack_shove()) {
+        danger_level ++;
+    }
+    if (is_acid()) {
+        danger_level ++;
+    }
+    if (is_poison()) {
+        danger_level ++;
+    }
+    if (is_fire()) {
+        danger_level ++;
+    }
+    if (is_lava()) {
+        danger_level ++;
+    }
+    if (is_floating()) {
+        danger_level += 2;
+    }
+    if (is_jumper()) {
+        danger_level += 2;
+    }
+    if (is_item_eater()) {
+        danger_level += 20;
+    }
+
+    danger_level += get_damage_melee_dice().max_roll();
+
+    // topcon("level %d", danger_level);
+    return danger_level;
+}
 
 int Thing::get_danger_level (void)
 {_
