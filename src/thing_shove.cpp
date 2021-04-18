@@ -79,7 +79,11 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
         if (!d20roll(get_stat_strength(), it->get_stat_strength())) {
             if (is_player()) {
-                TOPCON("%s shoves you back!", it->text_The().c_str());
+                if (it->is_monst()) {
+                    TOPCON("%s shoves you back!", it->text_The().c_str());
+                } else {
+                    TOPCON("%s refuses to budge!", it->text_The().c_str());
+                }
             } else if (it->is_player()) {
                 TOPCON("%s fails to shove you!", text_The().c_str());
             }
