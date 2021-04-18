@@ -8,6 +8,7 @@
 #include "my_room.h"
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
 #include "my_ptrcheck.h"
 
 std::vector<Roomp> Room::all_rooms;
@@ -209,14 +210,22 @@ void Room::dump (void)
 
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
-            auto c = get(data, x, y, MAP_DEPTH_OBJ);
-            if (!c || (c == ' ')) {
-                c = get(data, x, y, MAP_DEPTH_FLOOR);
+            for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
+                auto m = get(data, x, y, d);
+                if (!m || (m == ' ')) {
+                    continue;
+                }
+
+                auto cr = get(Charmap::all_charmaps, m);
+                auto c = cr.c;
+
+                set(tmp, x, y, c);
+                break;
             }
-            set(tmp, x, y, c);
         }
     }
 
+    LOG("ROOM(%d): depth %d", roomno, depth);
     LOG("ROOM(%d): direction: up %d down %d left %d right %d",
         roomno, dir_up, dir_down, dir_left, dir_right);
     LOG("ROOM(%d): doors:     up %d down %d left %d right %d",

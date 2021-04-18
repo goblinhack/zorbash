@@ -12,6 +12,7 @@
 #include "my_random.h"
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
+#include "my_thing.h"
 
 static Tpidmap tp_blood;
 static Tpidmap tp_blood_splatter;
@@ -166,6 +167,12 @@ Tpp tp_random_monst_hard (void)
 
 Tpp Level::tp_random_monst (const point &p)
 {_
+    if (!player) {
+        DIE("cannot place monst if no player yet");
+    }
+
+    auto player_danger_level = player->get_danger_level();
+
     auto tries = 0U;
     for (;;) {
         if (tries++ > 1000) {
@@ -175,18 +182,67 @@ Tpp Level::tp_random_monst (const point &p)
         if (tpp->will_avoid_threat(this, p)) {
             continue;
         }
+
+        if (tpp->get_danger_level() < player_danger_level) {
+            continue;
+        }
+
         return tpp;
     }
 }
 
 Tpp Level::tp_random_monst_easy (const point &p)
 {_
-    return tp_random_monst(p);
+    if (!player) {
+        DIE("cannot place monst if no player yet");
+    }
+
+    auto player_danger_level = player->get_danger_level();
+
+    auto tries = 0U;
+    for (;;) {
+        if (tries++ > 1000) {
+            return nullptr;
+        }
+        auto tpp = ::tp_random_monst();
+        if (tpp->will_avoid_threat(this, p)) {
+            continue;
+        }
+
+        if (tpp->get_danger_level() > player_danger_level) {
+            continue;
+        }
+
+        CON("Placed easy monst %s", tpp->name().c_str());
+        return tpp;
+    }
 }
 
 Tpp Level::tp_random_monst_hard (const point &p)
 {_
-    return tp_random_monst(p);
+    if (!player) {
+        DIE("cannot place monst if no player yet");
+    }
+
+    auto player_danger_level = player->get_danger_level();
+
+    auto tries = 0U;
+    for (;;) {
+        if (tries++ > 1000) {
+            return nullptr;
+        }
+        auto tpp = ::tp_random_monst();
+        if (tpp->will_avoid_threat(this, p)) {
+            continue;
+        }
+
+        if (tpp->get_danger_level() < player_danger_level) {
+            continue;
+        }
+
+        CON("Placed hard monst %s", tpp->name().c_str());
+        return tpp;
+    }
 }
 
 Tpp tp_random_food (void)

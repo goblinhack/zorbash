@@ -1280,7 +1280,6 @@ void Dungeon::reset_possible_rooms (void)
     for (auto& r : Room::all_rooms) {
         r->placed = false;
         r->skip = false;
-        r->depth = 0;
 
         r->which_secret_door_up = 0;
         r->which_secret_door_down = 0;
@@ -1372,12 +1371,20 @@ void Dungeon::rooms_print_all (Grid *g)
     }
 }
 
-bool Dungeon::room_is_a_candidate (const Node *n, Roomp r)
+bool Dungeon::room_is_a_candidate (int x, int y, const Node *n, Roomp r)
 {
+#if 0
+CON("%d %d depth %d up %d down %d left %d right %d", x, y, 
+    n->depth, n->has_door_up, n->has_door_down, n->has_door_left, n->has_door_right);
+#endif
     for (auto x = 0; x < nodes->grid_width; x++) {
         for (auto y = 0; y < nodes->grid_height; y++) {
             auto o = get(grid.node_rooms, x, y);
             if (o == r) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
                 return false;
             }
         }
@@ -1385,48 +1392,104 @@ bool Dungeon::room_is_a_candidate (const Node *n, Roomp r)
 
     if ((n->has_door_down || n->has_secret_exit_down) &&
         !r->doors_down.size()) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
         return false;
     }
     if ((n->has_door_up || n->has_secret_exit_up) &&
         !r->doors_up.size()) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
         return false;
     }
     if ((n->has_door_left || n->has_secret_exit_left) &&
         !r->doors_left.size()) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
         return false;
     }
     if ((n->has_door_right || n->has_secret_exit_right) &&
         !r->doors_right.size()) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
         return false;
     }
     if (n->dir_left != r->dir_left) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
         return false;
     }
     if (n->dir_right != r->dir_right) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
         return false;
     }
     if (n->dir_up != r->dir_up) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
         return false;
     }
     if (n->dir_down != r->dir_down) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
         return false;
     }
-    if (n->is_descend_dungeon != r->is_descend_dungeon) {
-        return false;
+    if (n->is_descend_dungeon) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
+        return (n->is_descend_dungeon == r->is_descend_dungeon);
     }
-    if (n->is_ascend_dungeon != r->is_ascend_dungeon) {
-        return false;
+    if (n->is_ascend_dungeon) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
+        return (n->is_ascend_dungeon == r->is_ascend_dungeon);
     }
-    if (n->is_lock != r->is_lock) {
-        return false;
+    if (n->is_lock) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
+        return (n->is_lock == r->is_lock);
     }
-    if (n->is_key != r->is_key) {
-        return false;
+    if (n->is_key) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
+        return (n->is_key == r->is_key);
     }
-    if (n->is_secret != r->is_secret) {
-        return false;
+    if (n->is_secret) {
+#if 0
+CON("skip %d",__LINE__);
+r->dump();
+#endif
+        return (n->is_secret == r->is_secret);
     }
     if (n->depth != r->depth) {
+#if 0
+CON("skip %d depth %d roomno %d",__LINE__, r->depth, r->roomno);
+r->dump();
+#endif
         return false;
     }
     return true;
@@ -1471,19 +1534,22 @@ bool Dungeon::room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
     if (r->dir_down) {
         return false;
     }
-    if (n->is_descend_dungeon != r->is_descend_dungeon) {
-        return false;
+    if (n->is_descend_dungeon) {
+        return (n->is_descend_dungeon == r->is_descend_dungeon);
     }
-    if (n->is_ascend_dungeon != r->is_ascend_dungeon) {
-        return false;
+    if (n->is_ascend_dungeon) {
+        return (n->is_ascend_dungeon == r->is_ascend_dungeon);
     }
-    if (n->is_lock != r->is_lock) {
-        return false;
+    if (n->is_lock) {
+        return (n->is_lock == r->is_lock);
     }
-    if (n->is_key != r->is_key) {
-        return false;
+    if (n->is_key) {
+        return (n->is_key == r->is_key);
     }
-    if (n->is_secret != r->is_secret) {
+    if (n->is_secret) {
+        return (n->is_secret == r->is_secret);
+    }
+    if (n->depth >= r->depth) {
         return false;
     }
     return true;
@@ -1508,7 +1574,7 @@ bool Dungeon::solve (int x, int y, Grid *g)
     }
 
     for (auto r : Room::all_rooms) {
-        if (!room_is_a_candidate(n, r)) {
+        if (!room_is_a_candidate(x, y, n, r)) {
             continue;
         }
 
@@ -2719,8 +2785,6 @@ void Dungeon::assign_rooms_to_tiles (void)
 
             auto r = get(grid.node_rooms, x, y);
             if (r) {
-                auto n = nodes->getn(x, y);
-                r->depth = n->depth;
                 map_place_room_ptr(r, r->at.x, r->at.y);
             }
         }

@@ -23,7 +23,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     int is_lock = false;
     int is_key = false;
     int is_secret = false;
-    int is_depth = 0;
+    int depth = 0;
 
     static char *kwlist[] = {
         (char*) "room_data",
@@ -58,7 +58,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                                      &is_lock,
                                      &is_key,
                                      &is_secret,
-                                     &is_depth)) {
+                                     &depth)) {
         ERR("map_load_room: bad args");
         Py_RETURN_FALSE;
     }
@@ -243,7 +243,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         r->is_lock            = is_lock ? true : false;
         r->is_key             = is_key ? true : false;
         r->is_secret          = is_secret ? true : false;
-        r->depth              = is_depth;
+        r->depth              = depth;
         // remember to update create_w_flip
 
         r->finalize();

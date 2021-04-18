@@ -1207,6 +1207,7 @@ public:
     void set_weapon_use_distance(int);
     void set_z_depth(int);
     void set_z_prio(int);
+    int get_danger_level(void);
 };
 
 Tilep tp_first_tile(class Tp*);
