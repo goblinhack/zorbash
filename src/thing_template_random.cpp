@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_game.h"
 #include "my_level.h"
 #include "my_thing_template.h"
 #include "my_depth.h"
@@ -167,12 +168,6 @@ Tpp tp_random_monst_hard (void)
 
 Tpp Level::tp_random_monst (const point &p)
 {_
-    if (!player) {
-        DIE("cannot place monst if no player yet");
-    }
-
-    auto player_danger_level = player->get_danger_level();
-
     auto tries = 0U;
     for (;;) {
         if (tries++ > 1000) {
@@ -183,10 +178,6 @@ Tpp Level::tp_random_monst (const point &p)
             continue;
         }
 
-        if (tpp->get_danger_level() < player_danger_level) {
-            continue;
-        }
-
         return tpp;
     }
 }
@@ -194,7 +185,13 @@ Tpp Level::tp_random_monst (const point &p)
 Tpp Level::tp_random_monst_easy (const point &p)
 {_
     if (!player) {
-        DIE("cannot place monst if no player yet");
+        //
+        // Try the current level
+        //
+        player = game->level->player;
+        if (!player) {
+            DIE("cannot place monst if no player yet");
+        }
     }
 
     auto player_danger_level = player->get_danger_level();
@@ -222,7 +219,13 @@ Tpp Level::tp_random_monst_easy (const point &p)
 Tpp Level::tp_random_monst_hard (const point &p)
 {_
     if (!player) {
-        DIE("cannot place monst if no player yet");
+        //
+        // Try the current level
+        //
+        player = game->level->player;
+        if (!player) {
+            DIE("cannot place monst if no player yet");
+        }
     }
 
     auto player_danger_level = player->get_danger_level();
