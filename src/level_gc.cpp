@@ -65,6 +65,8 @@ _
 
         delete t;
     }
+
+    log("End thing garbage collection");
 }
 
 void Level::things_gc_force (void)

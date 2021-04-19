@@ -682,7 +682,7 @@ Game::save_config (void)
     std::ofstream out(filename, std::ios::binary);
     const Config &c = game->config;
     out << bits(c);
-    game->config.log("WROTE:");
+    game->config.dump("WROTE:");
 }
 
 static WidPopup *wid_save;

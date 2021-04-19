@@ -6,8 +6,42 @@ import imp
 import sys
 import console
 import time
+import logging
+import datetime
 
 timeme_enabled = False
+
+#
+# Unused
+#
+# def my_formatter(verbosity=logging.INFO):
+#     format_string = "%(asctime)s.%(msecs)03d "
+#     format_string += "init.py: "
+#     datefmt = "%d-%m-%Y %H:%M:%S"
+#     format_string += "%(levelname)4s: "
+#     format_string += "%(message)s"
+#     return logging.Formatter(format_string, datefmt=datefmt)
+# 
+# def my_logger:
+#     log_handler = logging.StreamHandler()
+#     log_handler.setLevel(logging.INFO)
+#     log_handler.setFormatter(my_formatter(logging.DEBUG))
+#     log_handler.setFormatter(my_formatter(logging.ERROR))
+#     log_handler.setFormatter(my_formatter(logging.INFO))
+# 
+#     logger = logging.getLogger(__name__)
+#     logger.addHandler(log_handler)
+#     logger.setLevel(logging.INFO)
+#     logger.propagate = False  # avoid multiple logs:
+#
+# def my_arger:
+#     arger = argparse.ArgumentParser()
+#     arger.add_argument("--debug", default=False, action='store_true')
+#     args = arger.parse_args(args)
+# 
+# def unused:
+#     my_logger()
+#     my_arger()
 
 def timeme(py_function):
     def timeme_wrapper(*args, **kwargs):

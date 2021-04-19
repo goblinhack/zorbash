@@ -1150,6 +1150,16 @@ void sdl_loop (void)
     SDL_ShowCursor(0);
 #endif
 
+    //
+    // Causes a 0.3 sec delay first time it seems to run
+    //
+    SDL_PumpEvents();
+
+    //
+    // Reset the fade in due to the above
+    //
+    game->level->timestamp_fade_in_begin = time_get_time_ms_cached();
+
     for (;/*ever*/;) {
         frames++;
 
