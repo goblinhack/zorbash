@@ -32,6 +32,7 @@ bool Thing::eat (Thingp it)
                 // For treasure what should the boost be?
                 //
                 health_boost(it->get_nutrition());
+                it->dead("by being eaten");
                 return true;
             }
         }
