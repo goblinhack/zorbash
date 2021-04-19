@@ -107,7 +107,7 @@ public:
     void fini(void);
     void reset(void);
     void dump(std::string prefix, std::ostream &out);
-    void log(std::string prefix);
+    void dump(std::string prefix);
 } Config;
 std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my);
 std::istream& operator>>(std::istream &in, Bits<Config &> my);
@@ -266,7 +266,7 @@ public:
     friend std::ostream& operator<<(std::ostream &out, Bits<const class Game & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<class Game &> my);
     void dump(std::string prefix, std::ostream &out);
-    void log(std::string prefix);
+    void dump(std::string prefix);
     void change_state(int state);
 };
 

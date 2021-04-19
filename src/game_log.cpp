@@ -8,7 +8,7 @@
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 
-void Level::log (std::string pfx)
+void Level::dump (std::string pfx)
 {_
     LOG("%s Level {", pfx.c_str());
     auto old_pfx = pfx;
@@ -31,7 +31,7 @@ void Level::log (std::string pfx)
                     if (!t) {
                         continue;
                     }
-                    t->log("loaded");
+                    t->log("dump");
                 }
             }
         }
@@ -41,7 +41,7 @@ void Level::log (std::string pfx)
     LOG("%s }", pfx.c_str());
 }
 
-void World::log (std::string pfx)
+void World::dump (std::string pfx)
 {_
     LOG("%s World {", pfx.c_str());
     auto old_pfx = pfx;
@@ -53,7 +53,7 @@ void World::log (std::string pfx)
             for (auto z = 0; z < LEVELS_DEEP; ++z) {
                 auto l = get(levels, x, y, z);
                 if (l) {
-                    l->log(pfx + "  ");
+                    l->dump(pfx + "  ");
                 }
             }
         }
@@ -63,7 +63,7 @@ void World::log (std::string pfx)
     LOG("%s }", pfx.c_str());
 }
 
-void Config::log (std::string pfx)
+void Config::dump (std::string pfx)
 {_
     LOG("%s Config {", pfx.c_str());
     auto old_pfx = pfx;
@@ -107,7 +107,7 @@ void Config::log (std::string pfx)
     LOG("%s }", pfx.c_str());
 }
 
-void Game::log (std::string pfx)
+void Game::dump (std::string pfx)
 {_
     LOG("%s Game {", pfx.c_str());
     auto old_pfx = pfx;
@@ -119,8 +119,8 @@ void Game::log (std::string pfx)
     LOG("%s appdata    %s", pfx.c_str(), appdata.c_str());
     LOG("%s saved_dir  %s", pfx.c_str(), saved_dir.c_str());
     LOG("%s seed       %u", pfx.c_str(), seed);
-    config.log(pfx);
-    world.log(pfx);
+    config.dump(pfx);
+    world.dump(pfx);
 
     pfx = old_pfx;
     LOG("%s }", pfx.c_str());

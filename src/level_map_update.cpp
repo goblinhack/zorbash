@@ -193,9 +193,11 @@ void Level::update_deep_water (void)
 
 void Level::update_map (void)
 {
+    log("Update map start");
     update_hazard_tile_map();
     update_water_next_to_lava();
     update_things_next_to_a_chasm();
     update_deep_water();
     update_hazard_tile_map();
+    log("Update map end");
 }

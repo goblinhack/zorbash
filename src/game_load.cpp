@@ -820,7 +820,7 @@ Game::load_config (void)
     std::ifstream in(filename);
     if (in.is_open()) {
         in >> bits(*(&game->config));
-        game->config.log("READ:");
+        game->config.dump("READ:");
     }
 }
 
