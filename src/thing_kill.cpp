@@ -23,7 +23,13 @@
 //
 void Thing::kill (Thingp killer, const char *reason)
 {_
-    if (is_dead) {
+    auto is_corpse_currently = is_corpse();
+
+    //
+    // We allow the check if a corpse so that the thing can be eaten
+    // and then removed from the level
+    //
+    if (is_dead && !is_corpse_currently) {
         return;
     }
 
@@ -137,22 +143,28 @@ void Thing::kill (Thingp killer, const char *reason)
         }
     }
 
-    if (is_corpse_on_death()) {
+    if (is_bleeder()) {
+        int splatters = random_range(2, 10);
+        for (int splatter = 0; splatter < splatters; splatter++) {
+            auto tpp = tp_random_blood();
+            (void) level->thing_new(tpp->name(),
+                                    mid_at, fpoint(0.25, 0.25));
+        }
+    }
+
+    if (is_corpse_currently) {
+        if (is_loggable_for_important_stuff()) {
+            log("Already a corpse, clean it up");
+        }
+        //
+        // Already a corpse
+        //
+    } else if (is_corpse_on_death()) {
         if (is_loggable_for_important_stuff()) {
             log("Killed, leaves corpse");
         }
 
         level->set_is_corpse(mid_at.x, mid_at.y);
-
-        if (is_bleeder()) {
-            int splatters = random_range(2, 10);
-            for (int splatter = 0; splatter < splatters; splatter++) {
-                auto tpp = tp_random_blood();
-                (void) level->thing_new(tpp->name(),
-                                        mid_at, fpoint(0.25, 0.25));
-            }
-        }
-        return;
     }
 
     level_pop();
