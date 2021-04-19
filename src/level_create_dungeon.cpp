@@ -212,11 +212,12 @@ bool Level::create_dungeon (point3d at, int seed)
         create_dungeon_place_rocks(dungeon, 2, 1, 2, tries);
         if (g_errored) { return false; }
 
+        create_dungeon_place_remaining_rocks(dungeon, "rock1");
+        if (g_errored) { return false; }
+
         create_dungeon_place_remaining_walls(dungeon, wall_type->name());
         if (g_errored) { return false; }
 
-        create_dungeon_place_remaining_rocks(dungeon, "rock1");
-        if (g_errored) { return false; }
         place_dirt(dungeon);
         if (g_errored) { return false; }
         create_dungeon_place_chasm(dungeon, "chasm1");

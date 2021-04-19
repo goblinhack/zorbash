@@ -38,5 +38,9 @@ def init():
     tp_init(name="floor_blood2", text_name="pool of blood")
     tp_init(name="floor_blood3", text_name="pool of blood")
     tp_init(name="floor_blood4", text_name="pool of blood")
+    tp_init(name="floor_blood5", text_name="pool of blood")
+    tp_init(name="floor_blood6", text_name="pool of blood")
+    tp_init(name="floor_blood7", text_name="pool of blood")
+    tp_init(name="floor_blood8", text_name="pool of blood")
 
 init()
