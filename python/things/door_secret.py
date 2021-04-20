@@ -25,6 +25,14 @@ def tp_init(name, text_name):
     x.set_tile(tile=name + ".6")
     x.set_tile(tile=name + ".7")
     x.set_tile(tile=name + ".8")
+    x.set_tile(tile=name + ".9")
+    x.set_tile(tile=name + ".10")
+    x.set_tile(tile=name + ".11")
+    x.set_tile(tile=name + ".12")
+    x.set_tile(tile=name + ".13")
+    x.set_tile(tile=name + ".14")
+    x.set_tile(tile=name + ".15")
+    x.set_tile(tile=name + ".16")
 
     x.update()
 

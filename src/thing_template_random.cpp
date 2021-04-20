@@ -184,17 +184,18 @@ Tpp Level::tp_random_monst (const point &p)
 
 Tpp Level::tp_random_monst_easy (const point &p)
 {_
-    if (!player) {
+    Thingp current_player = player;
+    if (!current_player) {
         //
         // Try the current level
         //
-        player = game->level->player;
-        if (!player) {
+        current_player = game->level->player;
+        if (!current_player) {
             DIE("cannot place monst if no player yet");
         }
     }
 
-    auto player_danger_level = player->get_danger_level();
+    auto player_danger_level = current_player->get_danger_level();
 
     auto tries = 0U;
     for (;;) {
@@ -218,17 +219,18 @@ Tpp Level::tp_random_monst_easy (const point &p)
 
 Tpp Level::tp_random_monst_hard (const point &p)
 {_
-    if (!player) {
+    Thingp current_player = player;
+    if (!current_player) {
         //
         // Try the current level
         //
-        player = game->level->player;
-        if (!player) {
+        current_player = game->level->player;
+        if (!current_player) {
             DIE("cannot place monst if no player yet");
         }
     }
 
-    auto player_danger_level = player->get_danger_level();
+    auto player_danger_level = current_player->get_danger_level();
 
     auto tries = 0U;
     for (;;) {
