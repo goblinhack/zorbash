@@ -656,8 +656,8 @@ void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string wh
 
 void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             Tpp tp {};
             //
             // Reset the seed for each cell to increase the chances
@@ -688,14 +688,32 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 tp = tp_random_monst_hard(p); 
             }
 
-            if (d->is_minion_generator_easy(x, y)) {
-                if (random_range(0, 100) < 50) {
-                    tp = tp_random_minion_generator_easy(p); 
-                }
-            }
+            //
+            // If surrounded by hazards then choose an ethereal generator
+            //
+            if (d->is_hazard(x - 1, y) &&
+                d->is_hazard(x + 1, y) &&
+                d->is_hazard(x, y - 1) &&
+                d->is_hazard(x, y + 1) &&
+                d->is_hazard(x - 1, y - 1) &&
+                d->is_hazard(x + 1, y - 1) &&
+                d->is_hazard(x - 1, y + 1) &&
+                d->is_hazard(x + 1, y + 1)) {
 
-            if (d->is_minion_generator_hard(x, y)) {
-                tp = tp_random_minion_generator_hard(p); 
+                if (d->is_minion_generator_easy(x, y) || d->is_minion_generator_hard(x, y)) {
+                    tp = tp_random_ethereal_minion_generator(); 
+                }
+            } else {
+                //
+                // Else choose a normal generator
+                //
+                if (d->is_minion_generator_easy(x, y)) {
+                    if (random_range(0, 100) < 50) {
+                        tp = tp_random_minion_generator_easy(p); 
+                    }
+                } else if (d->is_minion_generator_hard(x, y)) {
+                    tp = tp_random_minion_generator_hard(p); 
+                }
             }
 
             if (d->is_brazier(x, y))          { tp = tp_random_brazier(); }

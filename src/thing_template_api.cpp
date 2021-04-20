@@ -343,7 +343,7 @@ int Tp::is_rrr96(void) const                                         { return _i
 int Tp::is_rrr97(void) const                                         { return _is_rrr97; }
 int Tp::is_rrr98(void) const                                         { return _is_rrr98; }
 int Tp::is_rrr99(void) const                                         { return _is_rrr99; }
-int Tp::is_rrr100(void) const                                        { return _is_rrr100; }
+int Tp::is_ethereal_minion_generator(void) const                                        { return _is_ethereal_minion_generator; }
 int Tp::is_secret_door(void) const                                   { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const                                 { return _is_shallow_water; }
@@ -669,7 +669,7 @@ void Tp::set_is_rrr96(int v)                                         { _is_rrr96
 void Tp::set_is_rrr97(int v)                                         { _is_rrr97 = v; }
 void Tp::set_is_rrr98(int v)                                         { _is_rrr98 = v; }
 void Tp::set_is_rrr99(int v)                                         { _is_rrr99 = v; }
-void Tp::set_is_rrr100(int v)                                         { _is_rrr100 = v; }
+void Tp::set_is_ethereal_minion_generator(int v)                                         { _is_ethereal_minion_generator = v; }
 void Tp::set_is_secret_door(int v)                                   { _is_secret_door = v; }
 void Tp::set_is_sewer_wall(int v)                                    { _is_sewer_wall = v; }
 void Tp::set_is_shallow_water(int v)                                 { _is_shallow_water = v; }

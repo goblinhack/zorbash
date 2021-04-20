@@ -826,7 +826,7 @@ public:
     int is_rrr97(void) const;
     int is_rrr98(void) const;
     int is_rrr99(void) const;
-    int is_rrr100(void) const;
+    int is_ethereal_minion_generator(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;

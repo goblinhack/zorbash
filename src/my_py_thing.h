@@ -258,7 +258,7 @@ PyObject *thing_is_rrr96(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr97(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr98(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr99(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr100(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_ethereal_minion_generator(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_secret_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sewer_wall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shallow_water(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -508,8 +508,8 @@ class Tp:
     def set_is_rrr99(self, value):
         zx.tp_set_is_rrr99(self, value)
 
-    def set_is_rrr100(self, value):
-        zx.tp_set_is_rrr100(self, value)
+    def set_is_ethereal_minion_generator(self, value):
+        zx.tp_set_is_ethereal_minion_generator(self, value)
 
     def set_is_spawner(self, value):
         zx.tp_set_is_spawner(self, value)

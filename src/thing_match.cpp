@@ -244,7 +244,7 @@ bool Thing::matches (const std::string& what)
     if (is_rrr97() &&                                         (what == "is_rrr97"))                                          { return true; }
     if (is_rrr98() &&                                         (what == "is_rrr98"))                                          { return true; }
     if (is_rrr99() &&                                         (what == "is_rrr99"))                                          { return true; }
-    if (is_rrr100() &&                                        (what == "is_rrr100"))                                          { return true; }
+    if (is_ethereal_minion_generator() &&                                        (what == "is_ethereal_minion_generator"))                                          { return true; }
     if (is_secret_door() &&                                   (what == "is_secret_door"))                                   { return true; }
     if (is_sewer_wall() &&                                    (what == "is_sewer_wall"))                                    { return true; }
     if (is_shallow_water() &&                                 (what == "is_shallow_water"))                                 { return true; }
