@@ -32,6 +32,7 @@ static Tpidmap tp_ripples;
 static Tpidmap tp_rock;
 static Tpidmap tp_secret_door;
 static Tpidmap tp_generator;
+static Tpidmap tp_ethereal_generator;
 static Tpidmap tp_brazier;
 static Tpidmap tp_treasure;
 static Tpidmap tp_item_class_a;
@@ -48,31 +49,32 @@ static Tpidmap tp_descend_sewer;
 void tp_random_init (void)
 {_
     for (auto& tp : tp_id_map) {
-        if (tp->is_blood())               { tp_blood.push_back(tp); }
-        if (tp->is_blood_splatter())      { tp_blood_splatter.push_back(tp); }
-        if (tp->is_dirt())                { tp_dirt.push_back(tp); }
-        if (tp->is_door())                { tp_door.push_back(tp); }
-        if (tp->is_wall_dungeon())        { tp_wall_dungeon.push_back(tp); }
-        if (tp->is_ascend_dungeon())      { tp_ascend_dungeon.push_back(tp); }
-        if (tp->is_descend_dungeon())     { tp_descend_dungeon.push_back(tp); }
-        if (tp->is_floor())               { tp_floor.push_back(tp); }
-        if (tp->is_floor_deco())          { tp_deco.push_back(tp); }
-        if (tp->is_food())                { tp_food.push_back(tp); }
-        if (tp->is_gold())                { tp_gold.push_back(tp); }
-        if (tp->is_key())                 { tp_key.push_back(tp); }
-        if (tp->is_minion_generator())    { tp_generator.push_back(tp); }
-        if (tp->is_potion())              { tp_potion.push_back(tp); }
-        if (tp->is_ripple())              { tp_ripples.push_back(tp); }
-        if (tp->is_rock())                { tp_rock.push_back(tp); }
-        if (tp->is_secret_door())         { tp_secret_door.push_back(tp); }
-        if (tp->is_ascend_sewer())        { tp_ascend_sewer.push_back(tp); }
-        if (tp->is_descend_sewer())       { tp_descend_sewer.push_back(tp); }
-        if (tp->is_sewer_wall())          { tp_sewer_wall.push_back(tp); }
-        if (tp->is_brazier())             { tp_brazier.push_back(tp); }
-        if (tp->is_treasure())            { tp_treasure.push_back(tp); }
-        if (tp->is_treasure_class_a())    { tp_item_class_a.push_back(tp); }
-        if (tp->is_treasure_class_b())    { tp_item_class_b.push_back(tp); }
-        if (tp->is_treasure_class_c())    { tp_item_class_c.push_back(tp); }
+        if (tp->is_blood())                     { tp_blood.push_back(tp); }
+        if (tp->is_blood_splatter())            { tp_blood_splatter.push_back(tp); }
+        if (tp->is_dirt())                      { tp_dirt.push_back(tp); }
+        if (tp->is_door())                      { tp_door.push_back(tp); }
+        if (tp->is_wall_dungeon())              { tp_wall_dungeon.push_back(tp); }
+        if (tp->is_ascend_dungeon())            { tp_ascend_dungeon.push_back(tp); }
+        if (tp->is_descend_dungeon())           { tp_descend_dungeon.push_back(tp); }
+        if (tp->is_floor())                     { tp_floor.push_back(tp); }
+        if (tp->is_floor_deco())                { tp_deco.push_back(tp); }
+        if (tp->is_food())                      { tp_food.push_back(tp); }
+        if (tp->is_gold())                      { tp_gold.push_back(tp); }
+        if (tp->is_key())                       { tp_key.push_back(tp); }
+        if (tp->is_minion_generator())          { tp_generator.push_back(tp); }
+        if (tp->is_ethereal_minion_generator()) { tp_ethereal_generator.push_back(tp); }
+        if (tp->is_potion())                    { tp_potion.push_back(tp); }
+        if (tp->is_ripple())                    { tp_ripples.push_back(tp); }
+        if (tp->is_rock())                      { tp_rock.push_back(tp); }
+        if (tp->is_secret_door())               { tp_secret_door.push_back(tp); }
+        if (tp->is_ascend_sewer())              { tp_ascend_sewer.push_back(tp); }
+        if (tp->is_descend_sewer())             { tp_descend_sewer.push_back(tp); }
+        if (tp->is_sewer_wall())                { tp_sewer_wall.push_back(tp); }
+        if (tp->is_brazier())                   { tp_brazier.push_back(tp); }
+        if (tp->is_treasure())                  { tp_treasure.push_back(tp); }
+        if (tp->is_treasure_class_a())          { tp_item_class_a.push_back(tp); }
+        if (tp->is_treasure_class_b())          { tp_item_class_b.push_back(tp); }
+        if (tp->is_treasure_class_c())          { tp_item_class_c.push_back(tp); }
 
         if (tp->is_weapon()) {
             if (tp->is_treasure_class_a()) { tp_weapon_class_a.push_back(tp); }
@@ -430,6 +432,15 @@ Tpp tp_random_minion_generator (void)
         return (nullptr);
     }
     return tp_get_with_rarity_filter(tp_generator);
+}
+
+Tpp tp_random_ethereal_minion_generator (void)
+{_
+    if (unlikely(!tp_ethereal_generator.size())) {
+        ERR("No generator found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_ethereal_generator);
 }
 
 Tpp tp_random_minion_generator_easy (void)

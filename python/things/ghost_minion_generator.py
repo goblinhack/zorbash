@@ -37,6 +37,7 @@ def tp_init(name, text_name):
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_minion_generator(True)
+    x.set_is_ethereal_minion_generator(True)
     x.set_is_movement_blocking_soft(True)
     x.set_is_resurrectable(True)
     x.set_is_shovable(True)

@@ -1079,7 +1079,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr97)
     TP_SET_DECL(is_rrr98)
     TP_SET_DECL(is_rrr99)
-    TP_SET_DECL(is_rrr100)
+    TP_SET_DECL(is_ethereal_minion_generator)
     TP_SET_DECL(is_secret_door)
     TP_SET_DECL(is_sewer_wall)
     TP_SET_DECL(is_shallow_water)
@@ -1472,7 +1472,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr97",                          (PyCFunction)thing_is_rrr97,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr98",                          (PyCFunction)thing_is_rrr98,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr99",                          (PyCFunction)thing_is_rrr99,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr100",                         (PyCFunction)thing_is_rrr100,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_ethereal_minion_generator",                         (PyCFunction)thing_is_ethereal_minion_generator,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_secret_door",                    (PyCFunction)thing_is_secret_door,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_sewer_wall",                     (PyCFunction)thing_is_sewer_wall,                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_shallow_water",                  (PyCFunction)thing_is_shallow_water,                    METH_VARARGS | METH_KEYWORDS, "thing api"},

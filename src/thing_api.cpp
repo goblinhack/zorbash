@@ -294,7 +294,7 @@ int Thing::is_rrr96(void) const                                         {_ retur
 int Thing::is_rrr97(void) const                                         {_ return (tp()->is_rrr97()); }
 int Thing::is_rrr98(void) const                                         {_ return (tp()->is_rrr98()); }
 int Thing::is_rrr99(void) const                                         {_ return (tp()->is_rrr99()); }
-int Thing::is_rrr100(void) const                                        {_ return (tp()->is_rrr100()); }
+int Thing::is_ethereal_minion_generator(void) const                                        {_ return (tp()->is_ethereal_minion_generator()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
 int Thing::is_shallow_water(void) const                                 {_ return (tp()->is_shallow_water()); }

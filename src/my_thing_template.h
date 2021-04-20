@@ -320,7 +320,7 @@ private:
     int _is_rrr97 {};
     int _is_rrr98 {};
     int _is_rrr99 {};
-    int _is_rrr100 {};
+    int _is_ethereal_minion_generator {};
     int _is_secret_door {};
     int _is_sewer_wall {};
     int _is_shallow_water {};
@@ -773,7 +773,7 @@ public:
     int is_rrr97(void) const;
     int is_rrr98(void) const;
     int is_rrr99(void) const;
-    int is_rrr100(void) const;
+    int is_ethereal_minion_generator(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;
@@ -1106,7 +1106,7 @@ public:
     void set_is_rrr97(int);
     void set_is_rrr98(int);
     void set_is_rrr99(int);
-    void set_is_rrr100(int);
+    void set_is_ethereal_minion_generator(int);
     void set_is_secret_door(int);
     void set_is_sewer_wall(int);
     void set_is_shallow_water(int);
@@ -1229,6 +1229,7 @@ class Tp* tp_random_ascend_dungeon(void);
 class Tp* tp_random_descend_dungeon(void);
 class Tp* tp_random_floor(void);
 class Tp* tp_random_food(void);
+class Tp* tp_random_ethereal_minion_generator(void);
 class Tp* tp_random_minion_generator(void);
 class Tp* tp_random_minion_generator_easy(void);
 class Tp* tp_random_minion_generator_hard(void);
