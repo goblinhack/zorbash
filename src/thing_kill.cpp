@@ -26,11 +26,16 @@ void Thing::kill (Thingp killer, const char *reason)
     auto is_corpse_currently = is_corpse();
 
     //
-    // We allow the check if a corpse so that the thing can be eaten
-    // and then removed from the level
+    // If already dead, do nothing
     //
-    if (is_dead && !is_corpse_currently) {
-        return;
+    if (is_dead) {
+        //
+        // Unless it is already a corpse. In such a case, if a corpse is
+        // eaten we want to remove it.
+        //
+        if (!is_corpse_currently) {
+            return;
+        }
     }
 
     //
@@ -153,18 +158,22 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (is_corpse_currently) {
-        if (is_loggable_for_important_stuff()) {
-            log("Already a corpse, clean it up");
-        }
         //
         // Already a corpse
         //
+        if (is_loggable_for_important_stuff()) {
+            log("Already a corpse, clean it up");
+        }
     } else if (is_corpse_on_death()) {
+        //
+        // Leaves a corpse
+        //
         if (is_loggable_for_important_stuff()) {
             log("Killed, leaves corpse");
         }
 
         level->set_is_corpse(mid_at.x, mid_at.y);
+        return;
     }
 
     level_pop();
