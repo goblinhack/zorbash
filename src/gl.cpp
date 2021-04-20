@@ -401,7 +401,7 @@ void gl_init_fbo (void)
         // If no change in size (minimap, bg map) then do not reset the FBO
         //
         if (fbo_size[i] == isize(tex_width, tex_height)) {
-            CON("GFX: skip init of FBO %d", i);
+            LOG("GFX: skip init of FBO %d", i);
             continue;
         }
 

@@ -81,7 +81,7 @@ void Level::fini (void)
     // And finally the player
     //
     if (player) {
-        err("Level fini: did not detach player");
+        err("Level fini: did not detach player, player %p still set on level", player);
     }
 
     log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");

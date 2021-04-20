@@ -1,8 +1,9 @@
 
 Todo
 ----
-a room with a door should hold something
-max zoom out center level
+gen surrounded by lava or chasms should be an ethereal generator
+room with a tough monst should not have 50% treasure
+no sewers close together
 fire skel in room that is locked should not be seen
 no skel sword swing at blood
 tentacleeye lightning
@@ -53,6 +54,7 @@ Gasses
 
 Doors
 -----
+- tougher doors?
 - need to be able to close open doors but not damaged ones
 - hit door, summon monst chance
 - hit door, wake sleeping monsters

@@ -60,10 +60,6 @@ void Thing::destroy (void)
     //
     point old_at((int)mid_at.x, (int)mid_at.y);
 
-    if (is_player()) {
-        level->player = nullptr;
-    }
-
     delete_dmap_scent();
     delete_age_map();
     delete_lights();
