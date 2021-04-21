@@ -191,9 +191,12 @@ Tpp Level::tp_random_monst_easy (const point &p)
         //
         // Try the current level
         //
-        current_player = game->level->player;
+        if (game->level) {
+            current_player = game->level->player;
+        }
         if (!current_player) {
-            DIE("cannot place monst if no player yet");
+            ERR("Cannot place easy monst if no player yet");
+            return nullptr;
         }
     }
 
@@ -226,9 +229,12 @@ Tpp Level::tp_random_monst_hard (const point &p)
         //
         // Try the current level
         //
-        current_player = game->level->player;
+        if (game->level) {
+            current_player = game->level->player;
+        }
         if (!current_player) {
-            DIE("cannot place monst if no player yet");
+            ERR("Cannot place hard monst if no player yet");
+            return nullptr;
         }
     }
 

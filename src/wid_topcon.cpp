@@ -491,6 +491,7 @@ static void wid_topcon_log_ (std::wstring s)
 
     wid_topcon_reset_scroll();
 
+CON("[%s]", wstring_to_string(s).c_str());
     //
     // Before the topcon is ready, we buffer the logs.
     //
