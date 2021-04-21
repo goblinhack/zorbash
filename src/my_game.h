@@ -132,6 +132,8 @@ public:
     void wid_thing_info_destroy_deferred(void);
     void wid_thing_info_destroy_immediate(void);
     WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
+    void wid_thing_info_push_popup(Thingp t);
+    void wid_thing_info_clear_popup(void);
     void wid_thing_collect_create(const std::list<Thingp> &items);
     void wid_thing_collect_destroy(void);
     void credits_select(void);
@@ -217,7 +219,6 @@ public:
     //
     Thingp             request_to_throw_item {};  // What we are throwing.
     Thingp             request_to_laser_item {};  // What we are lasering with.
-    Thingp             current_wid_thing_info;    // What is currently described
 
     //
     // Temporary. Global requests

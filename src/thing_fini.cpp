@@ -15,6 +15,7 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 #include "my_globals.h"
+#include "my_wid_thing_info.h"
 #include "my_game.h"
 
 Thing::~Thing_ (void)
@@ -89,9 +90,11 @@ void Thing::destroy (void)
         game->request_to_laser_item = nullptr;
     }
 
-    if (game->current_wid_thing_info == this) {
-        game->current_wid_thing_info = nullptr;
-        game->wid_thing_info_destroy_immediate();
+    for (const auto w : wid_thing_info_window) {
+        if (w->t == this) {
+            game->wid_thing_info_destroy_immediate();
+            break;
+        }
     }
 
     if (has_external_particle) {

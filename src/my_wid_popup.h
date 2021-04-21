@@ -22,7 +22,8 @@ public:
 
     point       tl;
     point       br;
-    Tilep       title_tile;
+    Tilep       title_tile {};
+    Thingp      t {};
     std::string background;
 
 public:

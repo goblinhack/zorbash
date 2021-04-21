@@ -13,4 +13,4 @@ uint8_t wid_thing_info_init(void);
 //
 // Global widgets.
 //
-extern WidPopup *wid_thing_info_window;
+extern std::list<WidPopup *> wid_thing_info_window;

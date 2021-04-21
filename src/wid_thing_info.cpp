@@ -17,13 +17,10 @@
 #include "my_thing.h"
 #include "my_ui.h"
 
-WidPopup *wid_thing_info_window;
-static WidPopup *wid_thing_info_window2;
+std::list<WidPopup *> wid_thing_info_window;
 
 void wid_thing_info_fini (void)
 {_
-    game->current_wid_thing_info = nullptr;
-
     if (game->bag_primary) {
         delete game->bag_primary;
         game->bag_primary = nullptr;
@@ -34,11 +31,7 @@ void wid_thing_info_fini (void)
         game->bag_secondary = nullptr;
     }
 
-    delete wid_thing_info_window;
-    wid_thing_info_window = nullptr;
-
-    delete wid_thing_info_window2;
-    wid_thing_info_window2 = nullptr;
+    game->wid_thing_info_clear_popup();
 
     BOTCON(" "); // Clear out existing message
 }
@@ -85,6 +78,9 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
 
     auto wid_popup_window = new WidPopup("Thing info", tl, br, 
                                          nullptr, "", true, false);
+
+    wid_popup_window->t = t;
+
     wid_raise(wid_popup_window->wid_popup_container);
 
     {_
@@ -395,7 +391,48 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         }
 
     }
+
     return wid_popup_window;
+}
+
+void Game::wid_thing_info_push_popup (Thingp t)
+{_
+    int utilized = 0;
+    for (const auto w : wid_thing_info_window) {
+        utilized += w->wid_text_area->line_count;
+
+        if (w->t == t) {
+            return;
+        }
+    }
+
+    int height = 50;
+
+    point tl = make_point(0, TERM_HEIGHT - 2 - height);
+    point br = make_point(29, TERM_HEIGHT - 2);
+
+    auto w2 = game->wid_thing_info_create_popup(t, tl, br);
+    if (!w2) {
+        return;
+    }
+
+    wid_thing_info_window.push_back(w2);
+
+    int utilized2 = w2->wid_text_area->line_count;
+    wid_move_delta(w2->wid_popup_container, 0, height - utilized2 - utilized + 1);
+    wid_resize(w2->wid_popup_container, -1, utilized2 - 1);
+
+    for (auto w : wid_thing_info_window) {
+        wid_update(w->wid_text_area->wid_text_area);
+    }
+}
+
+void Game::wid_thing_info_clear_popup (void)
+{_
+    for (auto w : wid_thing_info_window) {
+        delete w;
+    }
+    wid_thing_info_window.clear();
 }
 
 void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
@@ -432,7 +469,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         }
     }
 
-    if (wid_thing_info_window) {
+    if (!wid_thing_info_window.empty()) {
         t->log("Destroy window");
         wid_thing_info_destroy_immediate();
     }
@@ -452,20 +489,8 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     }
     recursion = true;
 
-    int height = 50;
-    point tl = make_point(0, TERM_HEIGHT - 2 - height);
-    point br = make_point(29, TERM_HEIGHT - 2);
-
     t->log("Thing info create window");
-    wid_thing_info_window = wid_thing_info_create_popup(t, tl, br);
-    if (!wid_thing_info_window) {
-        return;
-    }
-
-    int utilized = wid_thing_info_window->wid_text_area->line_count;
-    wid_move_delta(wid_thing_info_window->wid_popup_container, 0, 
-                   height - utilized + 2);
-    wid_resize(wid_thing_info_window->wid_popup_container, -1, utilized - 2);
+    wid_thing_info_push_popup(t);
 
     //
     // Prefer to show the thing we are moving
@@ -474,19 +499,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         auto id = wid_get_thing_id_context(game->in_transit_item);
         auto o = game->level->thing_find(id);
         if (o) {
-            point tl2 = make_point(0, TERM_HEIGHT - 2 - height);
-            point br2 = make_point(29, TERM_HEIGHT - 2);
-            wid_thing_info_window2 = wid_thing_info_create_popup(o, tl2, br2);
-            if (!wid_thing_info_window2) {
-                return;
-            }
-
-            int utilized2 = wid_thing_info_window2->wid_text_area->line_count;
-            wid_move_delta(wid_thing_info_window2->wid_popup_container, 0, 
-                           height - (utilized2 + utilized - 3));
-            wid_resize(wid_thing_info_window2->wid_popup_container, -1,
-                       utilized2 - 2);
-
+            wid_thing_info_push_popup(o);
         }
     }
 
@@ -523,11 +536,7 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         }
     }
 
-    wid_update(wid_thing_info_window->wid_text_area->wid_text_area);
-
     recursion = false;
-
-    game->current_wid_thing_info = t;
 }
 
 void Game::wid_thing_info_create_when_hovering_over (Thingp t)

@@ -112,15 +112,7 @@ _
     // Might as well show something; the player
     //
     if (player) {
-        int height = 50;
-        point tl = make_point(0, TERM_HEIGHT - 2 - height);
-        point br = make_point(29, TERM_HEIGHT - 2);
-        wid_thing_info_window = wid_thing_info_create_popup(player, tl, br);
-
-        int utilized = wid_thing_info_window->wid_text_area->line_count;
-        wid_move_delta(wid_thing_info_window->wid_popup_container, 0, 
-                       height - utilized + 2);
-        wid_resize(wid_thing_info_window->wid_popup_container, -1, utilized - 2);
+        wid_thing_info_push_popup(player);
     }
 
     //
