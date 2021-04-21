@@ -878,10 +878,6 @@ _
     //
     if (is_player() && it->is_item() && !it->is_auto_collect_item()) {
         log("No; allow items to be collected manually");
-        //
-        // Abort the walk
-        //
-        return false;
     } else if (!it->is_dead && possible_to_attack(it)) {
         if (things_overlap_attack(me, future_pos, it)) {
             log("Yes; candidate to attack");

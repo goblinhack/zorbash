@@ -615,7 +615,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                 tile->internal_has_dir_anim = true;
             } else if (none) {
                 tile->dir = THING_DIR_NONE;
-                tile->internal_has_dir_anim = true;
             }
 
             if (tile->internal_has_dir_anim) {
