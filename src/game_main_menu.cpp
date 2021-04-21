@@ -37,7 +37,7 @@ static uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t b
     LOG("Main menu new game chosen");
 
     game_main_menu_destroy();
-    game->init();
+
     wid_rightbar_fini();
     wid_rightbar_init();
 
@@ -53,6 +53,8 @@ static uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t b
 
     wid_skillbox_fini();
     wid_skillbox_init();
+
+    game->init();
 
     wid_visible(wid_topcon_window);
     TOPCON("Welcome to the lair of the dread monster, %%fg=red$Zorbash%%fg=reset$.");

@@ -239,3 +239,57 @@ void Room::dump (void)
     }
     LOG("-");
 }
+
+void Room::con (void)
+{
+    std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp {};
+    for (auto y = 0; y < height; y++) {
+        for (auto x = 0; x < width; x++) {
+            set(tmp, x, y, ' ');
+        }
+    }
+
+    for (auto y = 0; y < height; y++) {
+        for (auto x = 0; x < width; x++) {
+            for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
+                auto m = get(data, x, y, d);
+                if (!m || (m == ' ')) {
+                    continue;
+                }
+
+                auto cr = get(Charmap::all_charmaps, m);
+                auto c = cr.c;
+
+                set(tmp, x, y, c);
+                break;
+            }
+        }
+    }
+
+    CON("ROOM(%d): depth %d", roomno, depth);
+    CON("ROOM(%d): direction: up %d down %d left %d right %d",
+        roomno, dir_up, dir_down, dir_left, dir_right);
+    CON("ROOM(%d): doors:     up %d down %d left %d right %d",
+        roomno, has_door_up, has_door_down, has_door_left, has_door_right);
+    for (auto y = 0; y < height; y++) {
+        std::string s;
+        for (auto x = 0; x < width; x++) {
+            s += get(tmp, x, y);
+        }
+        CON("ROOM(%d): %s", roomno, s.c_str());
+    }
+    CON("-");
+}
+
+bool Room::contains (int depth, char what)
+{
+    for (auto y = 0; y < height; y++) {
+        for (auto x = 0; x < width; x++) {
+            auto m = get(data, x, y, depth);
+            if (m == what) {
+                return true;
+            }
+        }
+    }
+    return false;
+}

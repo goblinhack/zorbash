@@ -9,6 +9,7 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 #include "my_random.h"
+#include "my_room.h"
 #include "my_globals.h"
 #include "my_ptrcheck.h"
 
@@ -26,6 +27,22 @@ bool Level::create_dungeon (point3d at, int seed)
             delete dungeon;
             continue;
         }
+
+        //
+        // Check we have a dungeon start
+        //
+        {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                for (auto y = 0; y < MAP_HEIGHT; y++) {
+                    if (dungeon->is_ascend_dungeon(x, y)) {
+                        goto have_dungeon_start;
+                    }
+                }
+            }
+            ERR("Did not find dungeon entrance");
+            return false;
+        }
+have_dungeon_start:
 
         //
         // The grid is the basis of all reality.
@@ -315,29 +332,34 @@ placed_player:
         //
         create_dungeon_place_objects_with_normal_placement_rules(dungeon);
         if (g_errored) { return false; }
-
+_
         //
         // Scary non essential stuff
         //
         create_dungeon_place_random_blood(dungeon);
         if (g_errored) { return false; }
-
+_
         //
         // Less important stuff
         //
         create_dungeon_place_lava_smoke(dungeon);
         if (g_errored) { return false; }
+_
         place_floor_deco(dungeon);
         if (g_errored) { return false; }
+_
         create_dungeon_place_random_floor_deco(dungeon);
         if (g_errored) { return false; }
+_
         create_dungeon_place_sewer_pipes(dungeon);
         if (g_errored) { return false; }
+_
         create_dungeon_game_mark_dungeon_tiles(dungeon);
         if (g_errored) { return false; }
+_
         scroll_map_to_player();
         if (g_errored) { return false; }
-
+_
         break;
     }
 
@@ -689,6 +711,16 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             }
 
             //
+            // If a hard monst room then always give treasure
+            //
+            auto r = d->getr(x, y);
+            bool always_give_treasure = false;
+            if (r) {
+                always_give_treasure = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_HARD) ||
+                                       r->contains(MAP_DEPTH_WATER, Charmap::DOOR);
+            }
+
+            //
             // If surrounded by hazards then choose an ethereal generator
             //
             if (d->is_hazard(x - 1, y) &&
@@ -708,8 +740,12 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 // Else choose a normal generator
                 //
                 if (d->is_minion_generator_easy(x, y)) {
-                    if (random_range(0, 100) < 50) {
+                    if (always_give_treasure) {
                         tp = tp_random_minion_generator_easy(p); 
+                    } else {
+                        if (random_range(0, 100) < 50) {
+                            tp = tp_random_minion_generator_easy(p); 
+                        }
                     }
                 } else if (d->is_minion_generator_hard(x, y)) {
                     tp = tp_random_minion_generator_hard(p); 
@@ -719,26 +755,42 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_brazier(x, y))          { tp = tp_random_brazier(); }
 
             if (d->is_treasure(x, y))         { 
-                if (random_range(0, 100) < 50) {
+                if (always_give_treasure) {
                     tp = tp_random_treasure(); 
+                } else {
+                    if (random_range(0, 100) < 50) {
+                        tp = tp_random_treasure(); 
+                    }
                 }
             }
 
             if (d->is_treasure_class_a(x, y)) { 
-                if (random_range(0, 100) < 50) {
+                if (always_give_treasure) {
                     tp = tp_random_item_class_a(); 
+                } else {
+                    if (random_range(0, 100) < 50) {
+                        tp = tp_random_item_class_a(); 
+                    }
                 }
             }
 
             if (d->is_treasure_class_b(x, y)) { 
-                if (random_range(0, 100) < 50) {
+                if (always_give_treasure) {
                     tp = tp_random_item_class_b(); 
+                } else {
+                    if (random_range(0, 100) < 50) {
+                        tp = tp_random_item_class_b(); 
+                    }
                 }
             }
 
             if (d->is_treasure_class_c(x, y)) { 
-                if (random_range(0, 100) < 50) {
+                if (always_give_treasure) {
                     tp = tp_random_item_class_c(); 
+                } else {
+                    if (random_range(0, 100) < 50) {
+                        tp = tp_random_item_class_c(); 
+                    }
                 }
             }
 
@@ -1005,14 +1057,22 @@ void Level::create_dungeon_place_sewer_pipes (Dungeonp d)
     //
     // Sometimes we have sewer pipes
     //
-    if (random_range(0, 100) < 80) {
+    auto r = random_range(0, 100);
+    if (r < 80) {
         return;
     }
 
     int sewer_count = 0;
+    int min_sewer_dist = 10;
     int sewer_count_target = 2 + random_range(0, 5);
+    auto tries = 10000;
 
     while (sewer_count < sewer_count_target) {
+redo:
+        if (!tries--) {
+            return;
+        }
+
         auto x = random_range(MAP_BORDER_TOTAL, MAP_WIDTH - MAP_BORDER_TOTAL + 1);
         auto y = random_range(MAP_BORDER_TOTAL, MAP_HEIGHT - MAP_BORDER_TOTAL + 1);
 
@@ -1072,20 +1132,19 @@ void Level::create_dungeon_place_sewer_pipes (Dungeonp d)
             continue;
         }
 
-        if (d->is_descend_sewer(x, y) ||
-            d->is_descend_sewer(x - 1, y) ||
-            d->is_descend_sewer(x + 1, y) ||
-            d->is_descend_sewer(x, y - 1) ||
-            d->is_descend_sewer(x, y + 1) ||
-            d->is_descend_sewer(x - 1, y - 1) ||
-            d->is_descend_sewer(x + 1, y - 1) ||
-            d->is_descend_sewer(x - 1, y + 1) ||
-            d->is_descend_sewer(x + 1, y + 1)) {
-            continue;
-        }
+        for (auto dx = -min_sewer_dist; dx < min_sewer_dist; dx++) {
+            auto X = x + dx;
+            for (auto dy = -min_sewer_dist; dy < min_sewer_dist; dy++) {
+                auto Y = y + dy;
 
-        if (is_descend_sewer(x, y)) {
-            continue;
+                if (d->is_oob(X, Y)) {
+                    continue;
+                }
+
+                if (is_descend_sewer(X, Y)) {
+                    goto redo;
+                }
+            }
         }
 
         //

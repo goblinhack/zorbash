@@ -125,6 +125,8 @@ public:
     void find_doors(void);
     void finalize(void);
     void dump(void);
+    void con(void);
+    bool contains(int depth, char what);
 };
 
 void room_init(void);

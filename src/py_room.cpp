@@ -233,18 +233,46 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
         }
 
-        // remember to update create_w_flip
-        r->dir_up             = up ? true : false;
-        r->dir_down           = down ? true : false;
-        r->dir_left           = left ? true : false;
-        r->dir_right          = right ? true : false;
-        r->is_ascend_dungeon  = is_ascend_dungeon ? true : false;
+        //////////////////////////////////////////////////////////////
+        // Remember to update create_w_flip if adding new fields
+        //////////////////////////////////////////////////////////////
+        r->dir_up             = up                 ? true : false;
+        r->dir_down           = down               ? true : false;
+        r->dir_left           = left               ? true : false;
+        r->dir_right          = right              ? true : false;
+        r->is_ascend_dungeon  = is_ascend_dungeon  ? true : false;
         r->is_descend_dungeon = is_descend_dungeon ? true : false;
-        r->is_lock            = is_lock ? true : false;
-        r->is_key             = is_key ? true : false;
-        r->is_secret          = is_secret ? true : false;
+        r->is_lock            = is_lock            ? true : false;
+        r->is_key             = is_key             ? true : false;
+        r->is_secret          = is_secret          ? true : false;
         r->depth              = depth;
-        // remember to update create_w_flip
+        //////////////////////////////////////////////////////////////
+        // Remember to update create_w_flip if adding new fields
+        //////////////////////////////////////////////////////////////
+
+        //
+        // Sanity check the rooms
+        //
+        if (is_ascend_dungeon) {
+            if (!r->contains(MAP_DEPTH_OBJ, Charmap::ENTRANCE)) {
+                r->con();
+                DIE("Entrance room is missing dungeon entrance char '%c'", Charmap::ENTRANCE);
+            }
+        }
+
+        if (is_descend_dungeon) {
+            if (!r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
+                r->con();
+                DIE("Exit room is missing dungeon exit char '%c'", Charmap::EXIT);
+            }
+        }
+
+        if (is_key) {
+            if (!r->contains(MAP_DEPTH_OBJ, Charmap::KEY)) {
+                r->con();
+                DIE("Key room is missing dungeon key char '%c'", Charmap::KEY);
+            }
+        }
 
         r->finalize();
 
