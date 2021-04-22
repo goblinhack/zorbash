@@ -416,7 +416,8 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
     for (auto t : ts) {
         auto tp = t->tp();
 
-        snprintf(tmp, sizeof(tmp) - 1, "%-28s", tp->text_name().c_str());
+        auto name = t->short_text_capitalized();
+        snprintf(tmp, sizeof(tmp) - 1, "%-28s", name.c_str());
         for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
             if (*c == ' ') {
                 *c = '`';
