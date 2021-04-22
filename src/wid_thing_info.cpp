@@ -61,8 +61,9 @@ void Game::wid_thing_info_destroy_deferred (void)
     request_destroy_thing_info = time_get_time_ms_cached();
 }
 
-WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
+WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br, bool compact)
 {_
+    compact = true;
     auto player = game->level->player;
     if (!player) {
         return nullptr;
@@ -83,39 +84,41 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
 
     wid_raise(wid_popup_window->wid_popup_container);
 
-    {_
-        auto w = wid_new_plain(
-                    wid_popup_window->wid_popup_container, "ui-circle");
-        point tl = make_point(12 + 1, 1);
-        point br = make_point(12 + 4, 4);
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "ui_circle");
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-        wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
-    }
+    if (!compact) {
+        {_
+            auto w = wid_new_plain(
+                        wid_popup_window->wid_popup_container, "ui-circle");
+            point tl = make_point(12 + 1, 1);
+            point br = make_point(12 + 4, 4);
+            wid_set_ignore_events(w, true);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "ui_circle");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+            wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
+        }
 
-    {_
-        auto w = wid_new_plain(
-                    wid_popup_window->wid_popup_container, "ui-circle");
-        point tl = make_point(12 + 2, 2);
-        point br = make_point(12 + 3, 3);
-        wid_set_ignore_events(w, true);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "ui_tile_bg");
-        wid_set_fg_tilename(w, tile->name);
-        wid_set_color(w, WID_COLOR_BG, WHITE);
-        wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
-    }
+        {_
+            auto w = wid_new_plain(
+                        wid_popup_window->wid_popup_container, "ui-circle");
+            point tl = make_point(12 + 2, 2);
+            point br = make_point(12 + 3, 3);
+            wid_set_ignore_events(w, true);
+            wid_set_pos(w, tl, br);
+            wid_set_bg_tilename(w, "ui_tile_bg");
+            wid_set_fg_tilename(w, tile->name);
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+            wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
+        }
 
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
+        wid_popup_window->log(" ");
+        wid_popup_window->log(" ");
+        wid_popup_window->log(" ");
+        wid_popup_window->log(" ");
+        wid_popup_window->log(" ");
+        wid_popup_window->log(" ");
+        wid_popup_window->log(" ");
+        wid_popup_window->log(" ");
+    }
 
     wid_popup_window->log(tp->long_text_description());
 
@@ -329,80 +332,81 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         }
     }
 
-    if (t->is_alive_monst()) {
-        std::string danger_level = player->get_danger_level(t);
-        wid_popup_window->log(" ");
-        wid_popup_window->log(danger_level);
+    if (!compact) {
+        if (t->is_alive_monst()) {
+            std::string danger_level = player->get_danger_level(t);
+            wid_popup_window->log(" ");
+            wid_popup_window->log(danger_level);
 
-        auto max_damage = t->get_damage_max();
-        if (max_damage > 0) {
-            auto kill_count = player->get_health() / max_damage;
+            auto max_damage = t->get_damage_max();
+            if (max_damage > 0) {
+                auto kill_count = player->get_health() / max_damage;
 
-            //
-            // Oh dear.
-            //
-            if (kill_count == 0) {
-                kill_count = 1;
-            }
+                //
+                // Oh dear.
+                //
+                if (kill_count == 0) {
+                    kill_count = 1;
+                }
 
-            if (kill_count == 1) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("%%fg=red$Could kill you in");
-                wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
-                                      " hit!");
-            } else if (kill_count <= 2) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("%%fg=red$Could kill you in");
-                wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
-                                      " hits");
-            } else if (kill_count <= 5) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("%%fg=orange$Could kill you in");
-                wid_popup_window->log("%%fg=orange$" + std::to_string(kill_count) + 
-                                      " hits");
-            } else if (kill_count <= 10) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("Could kill you in");
-                wid_popup_window->log(std::to_string(kill_count) + " hits");
+                if (kill_count == 1) {
+                    wid_popup_window->log(" ");
+                    wid_popup_window->log("%%fg=red$Could kill you in");
+                    wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
+                                          " hit!");
+                } else if (kill_count <= 2) {
+                    wid_popup_window->log(" ");
+                    wid_popup_window->log("%%fg=red$Could kill you in");
+                    wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
+                                          " hits");
+                } else if (kill_count <= 5) {
+                    wid_popup_window->log(" ");
+                    wid_popup_window->log("%%fg=orange$Could kill you in");
+                    wid_popup_window->log("%%fg=orange$" + std::to_string(kill_count) + 
+                                          " hits");
+                } else if (kill_count <= 10) {
+                    wid_popup_window->log(" ");
+                    wid_popup_window->log("Could kill you in");
+                    wid_popup_window->log(std::to_string(kill_count) + " hits");
+                }
             }
         }
-    }
 
-    if (tp->charge_count()) {
-        if (t->get_charge_count() > 1) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("Has " + 
-                                  std::to_string(t->get_charge_count()) + " charges left");
+        if (tp->charge_count()) {
+            if (t->get_charge_count() > 1) {
+                wid_popup_window->log(" ");
+                wid_popup_window->log("Has " + 
+                                      std::to_string(t->get_charge_count()) + " charges left");
+            } else {
+                wid_popup_window->log(" ");
+                wid_popup_window->log("Has one charge left");
+            }
+
+            auto c = player->item_count_including_charges(t->tp());
+            if (c > t->get_charge_count()) {
+                wid_popup_window->log(" ");
+                wid_popup_window->log("Total charges " + std::to_string(c));
+            }
         } else {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("Has one charge left");
+            auto c = player->item_count_including_charges(t->tp());
+            if (c > 1) {
+                wid_popup_window->log(" ");
+                wid_popup_window->log("Item count " + std::to_string(c));
+            }
         }
-
-        auto c = player->item_count_including_charges(t->tp());
-        if (c > t->get_charge_count()) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("Total charges " + std::to_string(c));
-        }
-    } else {
-        auto c = player->item_count_including_charges(t->tp());
-        if (c > 1) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("Item count " + std::to_string(c));
-        }
-
     }
 
     return wid_popup_window;
 }
 
-void Game::wid_thing_info_push_popup (Thingp t)
+bool Game::wid_thing_info_push_popup (Thingp t, bool compact)
 {_
     int utilized = 0;
     for (const auto w : wid_thing_info_window) {
         utilized += w->wid_text_area->line_count;
 
         if (w->t == t) {
-            return;
+            return true;
         }
     }
 
@@ -411,20 +415,27 @@ void Game::wid_thing_info_push_popup (Thingp t)
     point tl = make_point(0, TERM_HEIGHT - 2 - height);
     point br = make_point(29, TERM_HEIGHT - 2);
 
-    auto w2 = game->wid_thing_info_create_popup(t, tl, br);
-    if (!w2) {
-        return;
+    auto w = game->wid_thing_info_create_popup(t, tl, br, compact);
+    if (!w) {
+        return false;
     }
 
-    wid_thing_info_window.push_back(w2);
-
-    int utilized2 = w2->wid_text_area->line_count;
-    wid_move_delta(w2->wid_popup_container, 0, height - utilized2 - utilized + 1);
-    wid_resize(w2->wid_popup_container, -1, utilized2 - 1);
+t->con("thing info");
+    int utilized2 = w->wid_text_area->line_count;
+    wid_move_delta(w->wid_popup_container, 0, height - utilized2 - utilized + 1);
+    wid_resize(w->wid_popup_container, -1, utilized2 - 1);
 
     for (auto w : wid_thing_info_window) {
         wid_update(w->wid_text_area->wid_text_area);
     }
+
+    if (wid_get_tl_y(w->wid_popup_container) <= UI_TOPCON_VIS_HEIGHT) {
+        delete w;
+        return false;
+    }
+
+    wid_thing_info_window.push_back(w);
+    return true;
 }
 
 void Game::wid_thing_info_clear_popup (void)
@@ -437,6 +448,11 @@ void Game::wid_thing_info_clear_popup (void)
 
 void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 {_
+    if (game->state == Game::STATE_CHOOSING_TARGET) {
+        t->log("Ignore, chossing target");
+        return;
+    }
+
     if (game->request_remake_inventory) {
         //
         // Continue
@@ -539,10 +555,89 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     recursion = false;
 }
 
-void Game::wid_thing_info_create_when_hovering_over (Thingp t)
-{
+void Game::wid_thing_info_create (const std::vector<Thingp> &ts)
+{_
     if (game->state == Game::STATE_CHOOSING_TARGET) {
+        LOG("Ignore, chossing target");
         return;
     }
+
+    if (game->request_remake_inventory) {
+        //
+        // Continue
+        //
+        LOG("Remake thing info");
+    } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
+        ERR("Ignore, already collecting items");
+        return;
+    } else if (game->state == Game::STATE_MOVING_ITEMS) {
+        LOG("Ignore, already moving items");
+        return;
+    }
+
+    LOG("Make thing info");
+
+    if (wid_console_window && wid_console_window->visible) {
+        LOG("Console visible");
+        return;
+    }
+
+    wid_thing_info_destroy_immediate();
+    request_destroy_thing_info = 0;
+
+    auto player = game->level->player;
+    if (!player){
+        game->change_state(Game::STATE_NORMAL);
+        ERR("No player");
+        return;
+    }
+
+    static bool recursion;
+    if (recursion) {
+        DIE("Recursion");
+    }
+    recursion = true;
+
+    LOG("Thing info create window");
+
+CON("=======THING INFOS==========");
+    int i = 0;
+    bool failed = false;
+    for (auto t : ts) {
+        i++;
+        if (!wid_thing_info_push_popup(t)) {
+CON("TOO MANY");
+            failed = true;
+            break;
+        }
+    }
+
+    if (failed) {
+        failed = false;
+        wid_thing_info_fini();
+CON("MAKE COMPACT");
+	for (auto t : ts) {
+	    if (!wid_thing_info_push_popup(t, true /* compact */)) {
+                t->topcon("failed");
+		failed = true;
+                break;
+	    }
+	}
+    }
+
+    if (failed) {
+        wid_thing_info_fini();
+    }
+
+    recursion = false;
+}
+
+void Game::wid_thing_info_create_when_hovering_over (Thingp t)
+{
     wid_thing_info_create(t, true);
+}
+
+void Game::wid_thing_info_create_when_hovering_over (const std::vector<Thingp> & ts)
+{
+    wid_thing_info_create(ts);
 }
