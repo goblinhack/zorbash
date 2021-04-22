@@ -15,6 +15,7 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
+#include "my_template.h"
 
 void Level::cursor_describe (void)
 {
@@ -46,7 +47,7 @@ void Level::cursor_describe (void)
             t->describe_when_hovering_over();
 
             if (t->tp()->is_described_when_hovering_over()) {
-                hover_over_things.push_back(t);
+                push_back_if_unique(hover_over_things, t);
             }
         }
 
@@ -72,7 +73,7 @@ void Level::cursor_describe (void)
         t->describe_when_hovering_over();
 
         if (t->tp()->long_text_description() != "") {
-            hover_over_things.push_back(t);
+            push_back_if_unique(hover_over_things, t);
         }
 
         if (!hover_over) {
@@ -97,7 +98,7 @@ void Level::cursor_describe (void)
         t->describe_when_hovering_over();
 
         if (t->tp()->long_text_description() != "") {
-            hover_over_things.push_back(t);
+            push_back_if_unique(hover_over_things, t);
         }
 
         if (!hover_over) {
@@ -106,7 +107,6 @@ void Level::cursor_describe (void)
     } FOR_ALL_THINGS_END()
 
     if (hover_over_things.size()) {
-        TOPCON("hover_over_things.size %d", (int)hover_over_things.size());
         game->wid_thing_info_create_when_hovering_over(hover_over_things);
     }
 }

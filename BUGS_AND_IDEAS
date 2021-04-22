@@ -22,6 +22,7 @@ water footsteps in water too
 
 Skills
 ------
+- melee in shallow water should have advantage over something in deep water
 - challenging learning spot to acquire skills?
 - skills
 - skill, heroic charge, rush enemy
@@ -61,8 +62,9 @@ Doors
 
 AI
 --
+- rats should avoid meat eaters
+- rats steal keys ? shown visibly ?
 - throw gold to distract cleaner
-- on fire intelligent monst should seek water?
 
 Food
 ----
@@ -89,6 +91,7 @@ Water
 
 Monsts
 ------
+- rat pack and king rat
 - goblin mage
 - goblin generator
 - pack spawn of goblins?

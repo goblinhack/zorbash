@@ -133,8 +133,9 @@ public:
     void wid_thing_info_create_when_hovering_over(const std::vector<Thingp> &);
     void wid_thing_info_destroy_deferred(void);
     void wid_thing_info_destroy_immediate(void);
-    WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be, bool compact = false);
-    bool wid_thing_info_push_popup(Thingp t, bool compact = false);
+    WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
+    bool wid_thing_info_push_popup(Thingp t);
+    WidPopup *wid_thing_info_create_popup_compact(const std::vector<Thingp> &);
     void wid_thing_info_clear_popup(void);
     void wid_thing_collect_create(const std::list<Thingp> &items);
     void wid_thing_collect_destroy(void);

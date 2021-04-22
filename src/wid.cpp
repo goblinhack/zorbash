@@ -5485,9 +5485,6 @@ void wid_get_abs_coords (Widp w,
     *tly = wid_get_tl_y(w);
     *brx = wid_get_br_x(w);
     *bry = wid_get_br_y(w);
-if(w->debug) {
-    CON("%d,%d %d,%d", *tlx, *tly, *brx, *bry);
-}
 
     p = w->parent;
     if (p) {
@@ -5495,9 +5492,6 @@ if(w->debug) {
         *tly += p->offset.y;
         *brx += p->offset.x;
         *bry += p->offset.y;
-if(w->debug) {
-    CON("  %d,%d %d,%d", *tlx, *tly, *brx, *bry);
-}
     }
 
     while (p) {
@@ -5529,9 +5523,6 @@ if(w->debug) {
             *bry = pbry;
         }
 
-if(w->debug) {
-    CON("    %d,%d %d,%d", *tlx, *tly, *brx, *bry);
-}
         p = p->parent;
     }
 
@@ -6098,17 +6089,23 @@ void wid_display_all (void)
             continue;
         }
 
+#if 0
 auto last = wid_total_count;
+#endif
         wid_display(w,
                     false /* disable_scissors */,
                     0 /* updated_scissors */,
                     true);
+#if 0
 printf("%s %d\n", wid_name(w).c_str(), wid_total_count - last);
+#endif
     }
 
+#if 0
 printf("========================================= %d\n", wid_total_count);
+#endif
 
-    if (wid_total_count > 10000) {
+    if (wid_total_count > 5000) {
         ERR("Too many widgets %d", wid_total_count);
     }
 
