@@ -113,9 +113,6 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     wid_popup_window->log(" ");
     wid_popup_window->log(" ");
     wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
-    wid_popup_window->log(" ");
 
     wid_popup_window->log(tp->long_text_description());
 
@@ -166,6 +163,9 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         }
     }
 
+    char tmp[40];
+    char tmp2[40];
+
     if (player->can_eat(t)) {
         auto nutrition_dice = t->get_nutrition_dice();
         auto min_value = nutrition_dice.min_roll();
@@ -175,21 +175,24 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
                 wid_popup_window->log(" ");
                 need_line = false;
             }
+
             if (min_value == max_value) {
-                wid_popup_window->log("%%fg=white$Nutrition " + 
-                                      t->get_nutrition_dice_str());
+                snprintf(tmp2, sizeof(tmp2) - 1,
+                         "(%s)",
+                         t->get_nutrition_dice_str().c_str());
             } else {
-                wid_popup_window->log("%%fg=white$Nutrition " + 
-                                      std::to_string(min_value) + "-" + 
-                                      std::to_string(max_value) + " (" + 
-                                      t->get_nutrition_dice_str() + ")");
+                snprintf(tmp2, sizeof(tmp2) - 1,
+                         "%d-%d(%s)",
+                         min_value,
+                         max_value,
+                         t->get_nutrition_dice_str().c_str());
             }
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=white$Nutrition%15s ```", tmp2);
+            wid_popup_window->log(tmp);
         }
     }
     
-    char tmp[40];
-    char tmp2[40];
-
     if (t->is_alive_monst() || t->is_player()) {
         if (need_line) {
             wid_popup_window->log(" ");
@@ -417,7 +420,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
         auto tp = t->tp();
 
         auto name = t->short_text_capitalized();
-        snprintf(tmp, sizeof(tmp) - 1, "%-28s", name.c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=white$%-28s%%fg=reset$", name.c_str());
         for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
             if (*c == ' ') {
                 *c = '`';
@@ -450,19 +453,24 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
         }
 
         {
-            auto gold_dice = t->get_gold_value_dice();
-            auto min_value = gold_dice.min_roll();
-            auto max_value = gold_dice.max_roll();
+            auto gold_value_dice = t->get_gold_value_dice();
+            auto min_value = gold_value_dice.min_roll();
+            auto max_value = gold_value_dice.max_roll();
             if (min_value > 0) {
                 if (min_value == max_value) {
-                    wid_popup_window->log("%%fg=white$Gold value " + 
-                                            t->get_gold_value_dice_str());
+                    snprintf(tmp2, sizeof(tmp2) - 1,
+                             "(%s)",
+                             t->get_gold_value_dice_str().c_str());
                 } else {
-                    wid_popup_window->log("%%fg=white$Gold value " + 
-                                            std::to_string(min_value) + "-" + 
-                                            std::to_string(max_value) + " (" +
-                                            t->get_gold_value_dice_str() + ")");
+                    snprintf(tmp2, sizeof(tmp2) - 1,
+                             "%d-%d(%s)",
+                             min_value,
+                             max_value,
+                             t->get_gold_value_dice_str().c_str());
                 }
+                snprintf(tmp, sizeof(tmp) - 1,
+                         "%%fg=gray$Gold  %15s ``````", tmp2);
+                wid_popup_window->log(tmp);
             }
         }
 
@@ -472,28 +480,33 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
             auto max_value = nutrition_dice.max_roll();
             if (min_value > 0) {
                 if (min_value == max_value) {
-                    wid_popup_window->log("%%fg=white$Nutrition " + 
-                                          t->get_nutrition_dice_str());
+                    snprintf(tmp2, sizeof(tmp2) - 1,
+                             "(%s)",
+                             t->get_nutrition_dice_str().c_str());
                 } else {
-                    wid_popup_window->log("%%fg=white$Nutrition " + 
-                                          std::to_string(min_value) + "-" + 
-                                          std::to_string(max_value) + " (" + 
-                                          t->get_nutrition_dice_str() + ")");
+                    snprintf(tmp2, sizeof(tmp2) - 1,
+                             "%d-%d(%s)",
+                             min_value,
+                             max_value,
+                             t->get_nutrition_dice_str().c_str());
                 }
+                snprintf(tmp, sizeof(tmp) - 1,
+                         "%%fg=gray$Nutrit%15s ``````", tmp2);
+                wid_popup_window->log(tmp);
             }
         }
 
         if (t->is_alive_monst() || t->is_player()) {
             if (t->get_health() == t->get_health_max()) {
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Health%15d ``````", t->get_health());
+                         "%%fg=gray$Health%15d ``````", t->get_health());
             } else {
                 snprintf(tmp2, sizeof(tmp2) - 1,
                          "%d/%d",
                          t->get_health(),
                          t->get_health_max());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Health%15s ``````", tmp2);
+                         "%%fg=gray$Health%15s ``````", tmp2);
             }
             wid_popup_window->log(tmp);
         }
@@ -507,7 +520,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                     snprintf(tmp2, sizeof(tmp2) - 1, "%s",
                              t->get_damage_melee_dice_str().c_str());
                     snprintf(tmp, sizeof(tmp) - 1,
-                             "%%fg=white$Damage%15s ``````", tmp2);
+                             "%%fg=gray$Damage%15s ``````", tmp2);
                 } else {
                     snprintf(tmp2, sizeof(tmp2) - 1,
                              "%d-%d(%s)",
@@ -515,7 +528,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                              max_value,
                              t->get_damage_melee_dice_str().c_str());
                     snprintf(tmp, sizeof(tmp) - 1,
-                             "%%fg=white$Damage%15s ``````", tmp2);
+                             "%%fg=gray$Damage%15s ``````", tmp2);
                 }
                 wid_popup_window->log(tmp);
             }
@@ -530,7 +543,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                     snprintf(tmp2, sizeof(tmp2) - 1, "%s",
                              t->get_damage_bite_dice_str().c_str());
                     snprintf(tmp, sizeof(tmp) - 1,
-                             "%%fg=white$Bite  %21s", tmp2);
+                             "%%fg=gray$Bite  %21s", tmp2);
                 } else {
                     snprintf(tmp2, sizeof(tmp2) - 1,
                              "%d-%d(%s)",
@@ -538,7 +551,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                              max_value,
                              t->get_damage_bite_dice_str().c_str());
                     snprintf(tmp, sizeof(tmp) - 1,
-                             "%%fg=white$Bite  %21s", tmp2);
+                             "%%fg=gray$Bite  %21s", tmp2);
                 }
                 wid_popup_window->log(tmp);
             }
@@ -549,13 +562,13 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                 auto stat = t->get_stat_attack();
                 if (stat != 10) {
                     snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=white$Attack          %2d%-3s to dmg",
+                            "%%fg=gray$Attack          %2d%-3s to dmg",
                             stat,
                             stat_to_bonus_slash_str(stat).c_str());
                     wid_popup_window->log(tmp);
                 } else {
                     snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=white$Attack          %2d/no bonus`",
+                            "%%fg=gray$Attack          %2d/no bonus`",
                             stat);
                     wid_popup_window->log(tmp);
                 }
@@ -565,13 +578,13 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                 auto stat = t->get_stat_defence();
                 if (stat != 10) {
                     snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=white$Defence         %2d%-3s to dmg",
+                            "%%fg=gray$Defence         %2d%-3s to dmg",
                             stat,
                             stat_to_bonus_slash_str(stat).c_str());
                     wid_popup_window->log(tmp);
                 } else {
                     snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=white$Defence         %2d/no bonus`",
+                            "%%fg=gray$Defence         %2d/no bonus`",
                             stat);
                     wid_popup_window->log(tmp);
                 }
@@ -581,13 +594,13 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                 auto stat = t->get_stat_strength();
                 if (stat != 10) {
                     snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=white$Strength        %2d%-3s to dmg",
+                            "%%fg=gray$Strength        %2d%-3s to dmg",
                             stat,
                             stat_to_bonus_slash_str(stat).c_str());
                     wid_popup_window->log(tmp);
                 } else {
                     snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=white$Strength        %2d/no bonus`",
+                            "%%fg=gray$Strength        %2d/no bonus`",
                             stat);
                     wid_popup_window->log(tmp);
                 }
@@ -597,13 +610,13 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                 auto stat = t->get_stat_constitution();
                 if (stat != 10) {
                     snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=white$Constitution    %2d%-3s to dmg",
+                            "%%fg=gray$Constitution    %2d%-3s to dmg",
                             stat,
                             stat_to_bonus_slash_str(stat).c_str());
                     wid_popup_window->log(tmp);
                 } else {
                     snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=white$Constitution    %2d/no bonus`",
+                            "%%fg=gray$Constitution    %2d/no bonus`",
                             stat);
                     wid_popup_window->log(tmp);
                 }
@@ -705,8 +718,8 @@ bool Game::wid_thing_info_push_popup (Thingp t)
     }
 
     int utilized2 = w->wid_text_area->line_count;
-    wid_move_delta(w->wid_popup_container, 0, height - utilized2 - utilized + 1);
-    wid_resize(w->wid_popup_container, -1, utilized2 - 1);
+    wid_move_delta(w->wid_popup_container, 0, height - utilized2 - utilized - 1);
+    wid_resize(w->wid_popup_container, -1, utilized2 + 1);
 
     for (auto w : wid_thing_info_window) {
         wid_update(w->wid_text_area->wid_text_area);
@@ -883,20 +896,15 @@ void Game::wid_thing_info_create (const std::vector<Thingp> &ts)
 
     LOG("Thing info create window");
 
-    bool failed = true;
-#if 0
-CON("=======THING INFOS==========");
     int i = 0;
     bool failed = false;
     for (auto t : ts) {
         i++;
         if (!wid_thing_info_push_popup(t)) {
-CON("TOO MANY");
             failed = true;
             break;
         }
     }
-#endif
 
     if (failed) {
         failed = false;
