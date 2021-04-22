@@ -37,9 +37,12 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
     int w = br.x - tl.x;
     int h = br.y - tl.y;
     width = w;
-    height = h;
 
-    scroll_height = h * 2;
+    if (vert_scoll) {
+        scroll_height = h * 2;
+    } else {
+        scroll_height = h;
+    }
     line_count = 0;
 
     {
@@ -62,6 +65,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
                                               "wid text inner area");
         wid_set_pos(wid_text_area, tl, br);
         wid_set_shape_none(wid_text_area);
+        // wid_set_style(wid_text_area, UI_WID_STYLE_RED);
 
         w = br.x - tl.x;
         h = br.y - tl.y;
@@ -69,12 +73,20 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
 
     {
         int32_t row;
-        int row_bottom = h - 1;
 
         Widp child {};
         Widp prev {};
 
-        for (row = 0; row < scroll_height; row++) {
+        int lines_of_text;
+        if (vert_scoll) {
+            lines_of_text = scroll_height;
+        } else {
+            lines_of_text = wid_get_height(wid_text_area);
+        }
+        int row_bottom = lines_of_text;
+        height = lines_of_text;
+
+        for (row = 0; row < lines_of_text; row++) {
             row_bottom --;
             point tl = make_point(0, row_bottom);
             point br = make_point(w, row_bottom);
@@ -140,7 +152,8 @@ void WidTextBox::log_ (std::wstring str, bool lhs, bool rhs)
             line_count++;
             wid_update(wid_text_box_container);
         } else {
-            ERR("Text box overflow on [%s]", wstring_to_string(str).c_str());
+            ERR("Text box overflow on [%s] height %d line_count %d", wstring_to_string(str).c_str(),
+                height, line_count);
         }
     } else {
         if (line_count < scroll_height) {

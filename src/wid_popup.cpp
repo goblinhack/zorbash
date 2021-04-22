@@ -78,7 +78,7 @@ WidPopup::WidPopup (const std::string name,
     }
 
     {
-        point tl = make_point(0, + tile_size + 0);
+        point tl = make_point(0, tile_size);
         point br = make_point(inner_w, inner_h + tile_size);
         wid_text_area = new WidTextBox(tl, br, wid_popup_container,
                                        horiz_scroll, vert_scoll);
