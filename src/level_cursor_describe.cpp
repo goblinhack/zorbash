@@ -1,0 +1,112 @@
+//
+// Copyright goblinhack@gmail.com
+// See the README.md file for license info.
+//
+
+#include "my_sys.h"
+#include "my_game.h"
+#include "my_tile.h"
+#include "my_thing.h"
+#include "my_thing_template.h"
+#include "my_wid_thing_info.h"
+#include "my_wid_inventory.h"
+#include "my_wid_bag.h"
+#include "my_globals.h"
+#include "my_array_bounds_check.h"
+#include "my_ptrcheck.h"
+#include "my_sdl.h"
+
+void Level::cursor_describe (void)
+{
+    if (!cursor) {
+        return;
+    }
+
+    std::vector<Thingp> hover_over_things;
+    auto p = cursor->mid_at;
+    hover_over = nullptr;
+
+    FOR_ALL_ACTIVE_THINGS(this, t, p.x, p.y) {
+        int x = p.x;
+        int y = p.y;
+        if (!is_lit(x, y) && !is_visited(x, y)) {_
+            continue;
+        }
+
+        if (t->get_immediate_owner() ||
+            t->is_cursor() ||
+            t->is_cursor_path() ||
+            t->is_the_grid) {
+            continue;
+        }
+
+        if (t->is_on_fire()) {
+            BOTCON("%%fg=red$Burning! %s", t->text_description().c_str());
+        } else {
+            t->describe_when_hovering_over();
+
+            if (t->tp()->is_described_when_hovering_over()) {
+                hover_over_things.push_back(t);
+            }
+        }
+
+        if (!hover_over) {
+            hover_over = t;
+        }
+    } FOR_ALL_THINGS_END()
+
+    FOR_ALL_INTERESTING_THINGS(this, t, p.x, p.y) {
+        int x = p.x;
+        int y = p.y;
+        if (!is_lit(x, y) && !is_visited(x, y)) {_
+            continue;
+        }
+
+        if (t->get_immediate_owner() ||
+            t->is_cursor() ||
+            t->is_cursor_path() ||
+            t->is_the_grid) {
+            continue;
+        }
+
+        t->describe_when_hovering_over();
+
+        if (t->tp()->long_text_description() != "") {
+            hover_over_things.push_back(t);
+        }
+
+        if (!hover_over) {
+            hover_over = t;
+        }
+    } FOR_ALL_THINGS_END()
+
+    FOR_ALL_THINGS(this, t, p.x, p.y) {
+        int x = p.x;
+        int y = p.y;
+        if (!is_lit(x, y) && !is_visited(x, y)) {_
+            continue;
+        }
+
+        if (t->get_immediate_owner() ||
+            t->is_cursor() ||
+            t->is_cursor_path() ||
+            t->is_the_grid) {
+            continue;
+        }
+
+        t->describe_when_hovering_over();
+
+        if (t->tp()->long_text_description() != "") {
+            hover_over_things.push_back(t);
+        }
+
+        if (!hover_over) {
+            hover_over = t;
+        }
+    } FOR_ALL_THINGS_END()
+
+    if (hover_over_things.size()) {
+        TOPCON("hover_over_things.size %d", (int)hover_over_things.size());
+        game->wid_thing_info_create_when_hovering_over(hover_over_things);
+    }
+}

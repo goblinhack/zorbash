@@ -109,10 +109,15 @@ public:
     point                      map_br;        // visible map br
     point                      map_tl;        // visible map tl
     point                      pixel_map_at;  // map pixel location
+
+    //
+    // Update thing_fini.cpp when adding more references to Thingp
+    //
     Thingp                     player = {};
     Thingp                     cursor = {};
     Thingp                     highlight = {};
     Thingp                     hover_over = {};
+
     std::map<ThingId, Thingp> all_things {};
     std::map<ThingId, Thingp> all_active_things {};
     std::map<ThingId, Thingp> all_gc_things {};
@@ -447,6 +452,7 @@ public:
     void cursor_path_draw_circle(void);
     void cursor_path_draw_line(point start, point end);
     void cursor_recreate(void);
+    void cursor_describe(void);
     void dbg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void dbg_(const char *fmt, va_list args); // compile error without
     void display(void);

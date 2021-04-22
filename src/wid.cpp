@@ -6098,19 +6098,18 @@ void wid_display_all (void)
             continue;
         }
 
+auto last = wid_total_count;
         wid_display(w,
                     false /* disable_scissors */,
                     0 /* updated_scissors */,
                     true);
+printf("%s %d\n", wid_name(w).c_str(), wid_total_count - last);
     }
 
-#if 0
 printf("========================================= %d\n", wid_total_count);
-TOPCON("%d.",wid_total_count);
-#endif
 
-    if (wid_total_count > 1000) {
-        ERR("Too many widgets");
+    if (wid_total_count > 10000) {
+        ERR("Too many widgets %d", wid_total_count);
     }
 
     ascii_clear_scissors();

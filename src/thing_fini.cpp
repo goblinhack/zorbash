@@ -74,6 +74,14 @@ void Thing::destroy (void)
         }
     }
 
+    if (level->hover_over == this) {
+        level->hover_over = nullptr;
+    }
+
+    if (level->highlight == this) {
+        level->highlight = nullptr;
+    }
+
     if (level->player == this) {
         level->player = nullptr;
     }

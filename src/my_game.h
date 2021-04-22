@@ -128,11 +128,13 @@ public:
     void config_top_select(void);
     void dead_select(const char *reason);
     void wid_thing_info_create(Thingp, bool when_hovering_over = false);
+    void wid_thing_info_create(const std::vector<Thingp> &ts);
     void wid_thing_info_create_when_hovering_over(Thingp);
+    void wid_thing_info_create_when_hovering_over(const std::vector<Thingp> &);
     void wid_thing_info_destroy_deferred(void);
     void wid_thing_info_destroy_immediate(void);
-    WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
-    void wid_thing_info_push_popup(Thingp t);
+    WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be, bool compact = false);
+    bool wid_thing_info_push_popup(Thingp t, bool compact = false);
     void wid_thing_info_clear_popup(void);
     void wid_thing_collect_create(const std::list<Thingp> &items);
     void wid_thing_collect_destroy(void);
