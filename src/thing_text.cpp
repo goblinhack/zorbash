@@ -132,3 +132,28 @@ std::string Thing::short_text_The (void) const
     out[0] = toupper(out[0]);
     return (out);
 }
+
+//
+// foo bar -> Foo Bar
+//
+std::string Thing::short_text_capitalized (void) const
+{_
+    std::string out = tp()->short_text_name();
+    char *b = (char*)out.c_str();
+    char *e = b + out.size();
+    char *c = b;
+    bool word_start = true;
+    while (c < e) {
+        if (word_start) {
+            if (islower(*c)) {
+                *c = toupper(*c);
+            }
+            word_start = false;
+        } else if (*c == ' ') {
+            word_start = true;
+        }
+        
+        c++;
+    }
+    return out;
+}

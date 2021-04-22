@@ -919,6 +919,7 @@ public:
     std::string get_danger_level(Thingp);
     std::string get_msg(void) const;
     std::string short_text_The(void) const;
+    std::string short_text_capitalized(void) const;
     std::string short_text_a_or_an(void) const;
     std::string short_text_the(void) const;
     std::string text_The(void) const;
