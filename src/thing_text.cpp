@@ -138,7 +138,7 @@ std::string Thing::short_text_The (void) const
 //
 std::string Thing::short_text_capitalized (void) const
 {_
-    std::string out = tp()->short_text_name();
+    std::string out = tp()->text_name();
     char *b = (char*)out.c_str();
     char *e = b + out.size();
     char *c = b;
