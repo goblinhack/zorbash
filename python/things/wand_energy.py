@@ -12,6 +12,7 @@ def on_use(owner, item, target, x, y):
         if zx.thing_is_monst(thing) or \
                 zx.thing_is_item(thing) or \
                 zx.thing_is_door(thing) or \
+                zx.thing_is_wall(thing) or \
                 zx.thing_is_minion_generator(thing) or \
                 zx.thing_is_brazier(thing):
             zx.thing_hit(owner, item, thing)
