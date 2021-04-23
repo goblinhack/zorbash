@@ -47,6 +47,7 @@ void Thing::move_reset_timestamps (void)
             BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items.",
                    SDL_GetScancodeName(
                         (SDL_Scancode)game->config.key_wait_or_collect));
+            level->describe(mid_at);
         }
     }
     set_timestamp_move_begin(0);

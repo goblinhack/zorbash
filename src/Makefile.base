@@ -2,7 +2,7 @@
 NAME=zorbash-game
 OBJDIR=.o
 
-GAME_OBJECTS=				    \
+GAME_OBJECTS=				                \
     $(OBJDIR)/ascii.o                       \
     $(OBJDIR)/ascii_box.o                   \
     $(OBJDIR)/audio.o                       \
@@ -71,9 +71,10 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_create_dungeon.o        \
     $(OBJDIR)/level_create_sewer.o          \
     $(OBJDIR)/level_cursor.o                \
-    $(OBJDIR)/level_cursor_path.o           \
-    $(OBJDIR)/level_cursor_find.o           \
     $(OBJDIR)/level_cursor_describe.o       \
+    $(OBJDIR)/level_cursor_find.o           \
+    $(OBJDIR)/level_cursor_path.o           \
+    $(OBJDIR)/level_describe.o              \
     $(OBJDIR)/level_display.o               \
     $(OBJDIR)/level_display_anim.o          \
     $(OBJDIR)/level_display_blood.o         \
@@ -112,11 +113,11 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/ptrcheck.o                    \
     $(OBJDIR)/py_level.o                    \
     $(OBJDIR)/py_log.o                      \
+    $(OBJDIR)/py_music.o                    \
     $(OBJDIR)/py_room.o                     \
     $(OBJDIR)/py_sdl.o                      \
-    $(OBJDIR)/py_tex.o                      \
     $(OBJDIR)/py_sound.o                    \
-    $(OBJDIR)/py_music.o                    \
+    $(OBJDIR)/py_tex.o                      \
     $(OBJDIR)/py_thing.o                    \
     $(OBJDIR)/py_tile.o                     \
     $(OBJDIR)/py_tp.o                       \
@@ -157,15 +158,16 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_ascend_sewer.o          \
     $(OBJDIR)/thing_astar.o                 \
     $(OBJDIR)/thing_attack.o                \
-    $(OBJDIR)/thing_damage.o                \
     $(OBJDIR)/thing_avoid.o                 \
     $(OBJDIR)/thing_bag.o                   \
     $(OBJDIR)/thing_bounce.o                \
+    $(OBJDIR)/thing_brazier.o               \
     $(OBJDIR)/thing_carry.o                 \
     $(OBJDIR)/thing_chasm.o                 \
     $(OBJDIR)/thing_collision.o             \
     $(OBJDIR)/thing_cursor.o                \
     $(OBJDIR)/thing_cursor_path.o           \
+    $(OBJDIR)/thing_damage.o                \
     $(OBJDIR)/thing_danger.o                \
     $(OBJDIR)/thing_dead.o                  \
     $(OBJDIR)/thing_descend_dungeon.o       \
@@ -206,13 +208,11 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_level_push.o            \
     $(OBJDIR)/thing_lifespan.o              \
     $(OBJDIR)/thing_light.o                 \
-    $(OBJDIR)/thing_torch.o                 \
     $(OBJDIR)/thing_location.o              \
     $(OBJDIR)/thing_log.o                   \
     $(OBJDIR)/thing_lunge.o                 \
     $(OBJDIR)/thing_match.o                 \
     $(OBJDIR)/thing_minion_owner.o          \
-    $(OBJDIR)/thing_spawned_owner.o         \
     $(OBJDIR)/thing_move.o                  \
     $(OBJDIR)/thing_move_dir.o              \
     $(OBJDIR)/thing_msg.o                   \
@@ -228,6 +228,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_skill.o                 \
     $(OBJDIR)/thing_skillbox.o              \
     $(OBJDIR)/thing_spawn.o                 \
+    $(OBJDIR)/thing_spawned_owner.o         \
     $(OBJDIR)/thing_stamina.o               \
     $(OBJDIR)/thing_steal.o                 \
     $(OBJDIR)/thing_string.o                \
@@ -240,7 +241,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_throw.o                 \
     $(OBJDIR)/thing_tick.o                  \
     $(OBJDIR)/thing_tile.o                  \
-    $(OBJDIR)/thing_brazier.o               \
+    $(OBJDIR)/thing_torch.o                 \
     $(OBJDIR)/thing_treasure.o              \
     $(OBJDIR)/thing_update.o                \
     $(OBJDIR)/thing_use.o                   \
