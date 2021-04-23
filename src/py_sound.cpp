@@ -70,6 +70,44 @@ PyObject *sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_TRUE;
 }
 
+PyObject *sound_play_at_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *name = 0;
+    int x = -1;
+    int y = -1;
+
+    static char *kwlist[] = {(char*) "name", (char*)"x", (char*)"y", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "sii", kwlist, &name, &x, &y)) {
+        ERR("sound_play_at: bad arguments");
+        Py_RETURN_FALSE;
+    }
+
+    if (!name) {
+        ERR("sound_play_at: missing name attr");
+        Py_RETURN_FALSE;
+    }
+
+    if (x == -1) {
+        ERR("sound_play_at: missing x attr");
+        Py_RETURN_FALSE;
+    }
+
+    if (y == -1) {
+        ERR("sound_play_at: missing x attr");
+        Py_RETURN_FALSE;
+    }
+
+    PY_DBG("sound_play_at(name=%s, %d, %d)", name, x, y);
+
+    std::string namearg = name;
+    if (!sound_play_at(namearg, x, y)) {
+        Py_RETURN_FALSE;
+    }
+
+    Py_RETURN_TRUE;
+}
+
 PyObject *sound_play_channel_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *name = 0;
@@ -91,6 +129,45 @@ PyObject *sound_play_channel_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     std::string namearg = name;
     if (!sound_play_channel(channel, namearg)) {
+        Py_RETURN_FALSE;
+    }
+
+    Py_RETURN_TRUE;
+}
+
+PyObject *sound_play_channel_at_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *name = 0;
+    int channel = 0;
+    int x = -1;
+    int y = -1;
+
+    static char *kwlist[] = {(char*) "channel", (char*) "name", (char*)"x", (char*)"y", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "isii", kwlist, &channel, &name, &x, &y)) {
+        ERR("sound_play_channel_at: bad arguments");
+        Py_RETURN_FALSE;
+    }
+
+    if (!name) {
+        ERR("sound_play_channel_at: missing name attr");
+        Py_RETURN_FALSE;
+    }
+
+    if (x == -1) {
+        ERR("sound_play_channel_at: missing x attr");
+        Py_RETURN_FALSE;
+    }
+
+    if (y == -1) {
+        ERR("sound_play_channel_at: missing x attr");
+        Py_RETURN_FALSE;
+    }
+
+    PY_DBG("sound_play_channel(channel=%d, name=%s, %d, %d)", channel, name, x, y);
+
+    std::string namearg = name;
+    if (!sound_play_channel_at(channel, namearg, x, y)) {
         Py_RETURN_FALSE;
     }
 

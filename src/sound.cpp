@@ -7,10 +7,13 @@
 #include <SDL_mixer.h>
 #include "my_sys.h"
 #include "my_main.h"
+#include "my_game.h"
+#include "my_level.h"
+#include "my_thing.h"
 #include "my_sound.h"
 #include "my_ptrcheck.h"
 #include "my_file.h"
-#include "my_game.h"
+#include "my_array_bounds_check.h"
 
 class sound {
 public:
@@ -154,6 +157,62 @@ bool sound_play (const std::string &alias)
     return true;
 }
 
+bool sound_play_at (const std::string &alias, int x, int y)
+{_
+    //
+    // No sound if in a locked room
+    //
+    auto level = game->level;
+    if (!level) {
+        return false;
+    }
+    auto player = level->player;
+    if (!player) {
+        return false;
+    }
+
+    int distance = get(&level->player_dmap.val, (int)player->mid_at.x, (int)player->mid_at.y);
+    if (distance >= DMAP_IS_PASSABLE) {
+        return true;
+    }
+
+    auto sound = all_sound.find(alias);
+    if (sound == all_sound.end()) {
+        ERR("Cannot find sound %s", alias.c_str());
+        return false;
+    }
+
+    float volume = sound->second->volume *
+        ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
+
+    volume *= MIX_MAX_VOLUME;
+
+    volume -= distance;
+    if (distance <= 0) {
+        return true;
+    }
+
+    Mix_VolumeChunk(sound->second->chunk, volume);
+
+    if (Mix_PlayChannel(-1 /* first free channel */,
+                        sound->second->chunk, 
+                        0 /* loops */) == -1) {
+
+        LOG("Cannot play sound %s on any channel", alias.c_str());
+        Mix_HaltChannel(0);
+        SDL_ClearError();
+
+        if (Mix_PlayChannel(-1 /* first free channel */,
+                            sound->second->chunk, 
+                            0 /* loops */) == -1) {
+            ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
+            SDL_ClearError();
+        }
+    }
+
+    return true;
+}
+
 bool sound_play_channel (int channel, const std::string &alias)
 {_
     auto sound = all_sound.find(alias);
@@ -171,6 +230,57 @@ bool sound_play_channel (int channel, const std::string &alias)
         ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
 
     volume *= MIX_MAX_VOLUME;
+
+    Mix_VolumeChunk(sound->second->chunk, volume);
+
+    if (Mix_PlayChannel(channel,
+                        sound->second->chunk, 
+                        0 /* loops */) == -1) {
+        LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
+        return false;
+    }
+
+    LOG("Play sound %s on channel %d", alias.c_str(), channel);
+
+    return true;
+}
+
+bool sound_play_channel_at (int channel, const std::string &alias, int x, int y)
+{_
+    auto level = game->level;
+    if (!level) {
+        return false;
+    }
+    auto player = level->player;
+    if (!player) {
+        return false;
+    }
+
+    int distance = get(&level->player_dmap.val, (int)player->mid_at.x, (int)player->mid_at.y);
+    if (distance >= DMAP_IS_PASSABLE) {
+        return true;
+    }
+
+    auto sound = all_sound.find(alias);
+    if (sound == all_sound.end()) {
+        ERR("Cannot find sound %s", alias.c_str());
+        return false;
+    }
+
+    if (Mix_Playing(channel)) {
+        LOG("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
+        return false;
+    }
+
+    float volume = sound->second->volume *
+        ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
+
+    volume *= MIX_MAX_VOLUME;
+
+    volume -= distance;
+    if (distance <= 0) {
+        return true;
+    }
 
     Mix_VolumeChunk(sound->second->chunk, volume);
 

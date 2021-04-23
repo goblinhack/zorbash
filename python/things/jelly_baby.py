@@ -3,12 +3,12 @@ import tp
 import random
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    if not zx.sound_play_channel(zx.CHANNEL_MONST, "squelch"):
-        zx.sound_play_channel(zx.CHANNEL_MONST2, "squelch")
+    if not zx.sound_play_channel_at(zx.CHANNEL_MONST, "squelch", x, y):
+        zx.sound_play_channel_at(zx.CHANNEL_MONST2, "squelch", x, y)
 
 def on_death(me, x, y):
     zx.tp_spawn_at(me, "pink_splatter")
-    zx.sound_play_channel(zx.CHANNEL_MONST, "slime{}".format(random.randint(1, 9)))
+    zx.sound_play_channel_at(zx.CHANNEL_MONST, "slime{}".format(random.randint(1, 9)), x, y)
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
