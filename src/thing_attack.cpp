@@ -295,13 +295,6 @@ _
         }
     }
 
-    if (weapon_get()) {
-        auto delta = it->mid_at- mid_at;
-        move_set_dir_from_delta(delta);
-        use_weapon();
-        return true;
-    }
-
     auto att_mod = stat_to_bonus(get_stat_strength()) +
                    stat_to_bonus(get_stat_attack());
     if (owner) {
@@ -313,6 +306,38 @@ _
     auto it_owner = get_top_owner();
     if (it_owner) {
         def_mod = stat_to_bonus(it_owner->get_stat_defence());
+    }
+
+    //
+    // We hit. See how much damage.
+    //
+    auto damage = get_damage_melee();
+    auto total_damage = damage + att_mod;
+
+    //
+    // Bite?
+    //
+    auto bite = false;
+    auto bite_damage = get_damage_bite();
+    if (bite_damage) {
+        if (random_range(0, 100) < 50) {
+            total_damage = bite_damage;
+            bite = true;
+        }
+    }
+
+    //
+    // Don't swing weapons at pools of blood.
+    //
+    if (it->is_alive_monst() || it->is_door() || it->is_player()) {
+        if (weapon_get()) {
+            auto delta = it->mid_at- mid_at;
+            move_set_dir_from_delta(delta);
+            use_weapon();
+            return true;
+        }
+    } else {
+        bite = true;
     }
 
     bool crit = false;
@@ -348,24 +373,6 @@ _
             // We tried to attack, so do not move
             //
             return true;
-        }
-    }
-
-    //
-    // We hit. See how much damage.
-    //
-    auto damage = get_damage_melee();
-    auto total_damage = damage + att_mod;
-
-    //
-    // Bite?
-    //
-    auto bite = false;
-    auto bite_damage = get_damage_bite();
-    if (bite_damage) {
-        if (random_range(0, 100) < 50) {
-            total_damage = bite_damage;
-            bite = true;
         }
     }
 

@@ -366,7 +366,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // 
     // Are we carrying a weapon? If not, see if we can do a claw attack
     //
-    if (!real_hitter->get_weapon_id_carry_anim().ok()) {
+    if (bite || !real_hitter->get_weapon_id_carry_anim().ok()) {
         auto claws = real_hitter->tp()->gfx_anim_attack();
         if (claws != "") {
             auto bite = level->thing_new(claws, mid_at);
