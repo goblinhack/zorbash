@@ -6,7 +6,7 @@ def on_use(owner, item, target, x, y):
     #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
     #zx.con("item    {} {:08X}".format(zx.thing_get_name(item), item))
     #zx.con("target  {} {:08X}".format(zx.thing_get_name(target), target))
-    zx.sound_play_channel(zx.CHANNEL_WEAPON, "sword_swing{}".format(random.randint(1,3)))
+    zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "sword_swing{}".format(random.randint(1,3)), x, y)
 
 def init_swing(name):
     x = tp.Tp(name)

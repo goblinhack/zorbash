@@ -20,7 +20,9 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
 bool sound_load(float volume, const char *file, const char *alias);
 bool sound_find(const std::string &alias);
 bool sound_play(const std::string &alias);
+bool sound_play_at(const std::string &alias, int x, int y);
 bool sound_play_channel(int chan, const std::string &alias);
+bool sound_play_channel_at(int chan, const std::string &alias, int x, int y);
 void sound_halt(void);
 
 enum {

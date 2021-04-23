@@ -8,9 +8,9 @@ import random
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     # zx.topcon("player hit damage {}".format(damage))
     if damage <= 5:
-        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit{}".format(random.randint(1, 4)))
+        zx.sound_play_channel_at(zx.CHANNEL_IMPACT, "player_hit{}".format(random.randint(1, 4)), x, y)
     else:
-        zx.sound_play_channel(zx.CHANNEL_IMPACT, "player_hit5")
+        zx.sound_play_channel_at(zx.CHANNEL_IMPACT, "player_hit5", x, y)
 
 def on_bite(me, x, y):
     zx.sound_play("player_punch")
@@ -26,7 +26,7 @@ def on_move(me, x, y):
     while footstep == last_footstep:
         footstep = random.randint(1, 8)
 
-    if zx.sound_play_channel(zx.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
+    if zx.sound_play_channel_at(zx.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep), x, y):
         last_footstep = footstep
 
 def tp_init(name, text_name, short_text_name, title):
