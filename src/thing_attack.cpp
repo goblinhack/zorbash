@@ -326,18 +326,30 @@ _
         }
     }
 
-    //
-    // Don't swing weapons at pools of blood.
-    //
-    if (it->is_alive_monst() || it->is_door() || it->is_player()) {
+    if (is_player()) {
+        //
+        // Player always uses their weapon
+        //
         if (weapon_get()) {
             auto delta = it->mid_at- mid_at;
             move_set_dir_from_delta(delta);
             use_weapon();
             return true;
         }
-    } else {
-        bite = true;
+    } else if (is_monst()) {
+        //
+        // Don't swing weapons at pools of blood.
+        //
+        if (it->is_alive_monst() || it->is_door() || it->is_player() || it->is_minion_generator()) {
+            if (weapon_get()) {
+                auto delta = it->mid_at- mid_at;
+                move_set_dir_from_delta(delta);
+                use_weapon();
+                return true;
+            }
+        } else if (is_monst()) {
+            bite = true;
+        }
     }
 
     bool crit = false;
