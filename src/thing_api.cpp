@@ -345,7 +345,10 @@ void Thing::new_monst (void)
         newptr(monstp, "Monst");
 
         if (tp_id != -1) {
-            if (is_dirt() || is_the_grid || is_wall() || is_floor()) {
+            //
+            // Walls and rock can be destroyed, hence no checks
+            //
+            if (is_dirt() || is_the_grid || is_floor()) {
                 die("Unexpectedly needs monst struct");
             }
         }

@@ -156,7 +156,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // If hit by something then abort following any path
     //
-    cursor_path_stop();
+    if (is_player()) {
+        cursor_path_stop();
+    }
 
     if (real_hitter->tp()->gfx_bounce_on_move()) {
         real_hitter->bounce(0.5, 0.1, 100, 3);
@@ -477,6 +479,7 @@ _
             if (!hitter_tp->is_explosion()     &&
                 !hitter_tp->is_projectile()    &&
                 !hitter_tp->is_weapon()        &&
+                !hitter_tp->is_wand()          &&
                 !hitter_tp->is_fire()          &&
                 !hitter_tp->is_lava()          &&
                 !hitter_tp->gfx_attack_anim()) {
@@ -491,6 +494,7 @@ _
         if (is_wall()) {
             if (!hitter_tp->is_explosion()     &&
                 !hitter_tp->is_projectile()    &&
+                !hitter_tp->is_wand()          &&
                 !hitter_tp->gfx_attack_anim()) {
                 //
                 // Not something that typically damages walls.

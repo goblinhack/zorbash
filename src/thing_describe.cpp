@@ -91,7 +91,7 @@ bool Thing::describe_when_hovered_over_in_rightbar (void)
             BOTCON("%s", s.c_str());
         }
     } else {
-        die("No descrption set");
+        return false;
     }
 
     level->describe(this);
@@ -140,7 +140,7 @@ bool Thing::describe_when_hovering_over (void)
             BOTCON("%s.", s.c_str());
         }
     } else {
-        die("No descrption set");
+        return false;
     }
 
     level->describe(this);
