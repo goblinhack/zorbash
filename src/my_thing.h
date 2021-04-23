@@ -345,6 +345,7 @@ public:
     const std::string& on_death_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_miss_do(void) const;
+    const std::string& on_tick_do(void) const;
     const std::string& on_lifespan_do(void) const;
     const std::string& on_move_do(void) const;
     const std::string& on_open_do(void) const;
@@ -1196,6 +1197,7 @@ public:
     void on_born(void);
     void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
     void on_miss(Thingp hitter);
+    bool on_tick(void);
     void on_lifespan(Thingp hitter);
     void on_move(void);
     void on_open(void);

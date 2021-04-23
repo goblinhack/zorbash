@@ -4234,6 +4234,7 @@ const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do(
 const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
 const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
 const std::string& Thing::on_miss_do (void) const {_ return (tp()->on_miss_do()); }
+const std::string& Thing::on_tick_do (void) const {_ return (tp()->on_tick_do()); }
 const std::string& Thing::on_lifespan_do (void) const {_ return (tp()->on_lifespan_do()); }
 const std::string& Thing::on_bite_do (void) const {_ return (tp()->on_bite_do()); }
 const std::string& Thing::on_move_do (void) const {_ return (tp()->on_move_do()); }

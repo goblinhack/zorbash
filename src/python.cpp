@@ -403,6 +403,452 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1, u
     py_err();
 }
 
+bool py_call_bool (const char *name)
+{_
+    if (!zx_mod) {
+        ERR("Python module not inited yet");
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(zx_mod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pValue = PyObject_CallObject(pFunc, 0);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s", name);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, int val1)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(i)", val1);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, int val1, int val2)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(ii)", val1, val2);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iii)", val1, val2, val3);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiii)", val1, val2, val3, val4);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiii)", val1, val2, val3, val4, val5);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
+                      int val6)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiiii)", val1, val2, val3, val4, val5, val6);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
+                      int val6, int val7)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiiiii)", val1, val2, val3, val4, val5, val6, val7);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
+                      int val6, int val7, int val8)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, unsigned int val1)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(I)", val1);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(II)", val1, val2);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(III)", val1, val2, val3);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(IIII)", val1, val2, val3, val4);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(IIIII)", val1, val2, val3, val4, val5);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
+                      unsigned int val6)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(IIIIII)", val1, val2, val3, val4, val5, val6);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
+                      unsigned int val6, unsigned int val7)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(IIIIIII)", val1, val2, val3, val4, val5, val6, val7);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
+bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
+                      unsigned int val6, unsigned int val7, unsigned int val8)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return false;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        bool out = false;
+        if (pValue) {
+            out = py_obj_to_bool(pValue);
+            Py_DECREF(pValue);
+        }
+        return out;
+    } else {
+        ERR("Cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+    return false;
+}
+
 char *py_obj_to_str (const PyObject *py_str)
 {_
     PyObject *py_encstr;
@@ -495,6 +941,28 @@ err_out:
     }
 
     return (val);
+}
+
+int py_obj_to_bool (PyObject *py_obj)
+{_
+    int val;
+
+    val = 0;
+
+    if (!PyLong_Check((PyObject *)py_obj)) {
+        ERR("Object is a %s, not a int object.",
+            Py_TYPE((PyObject *)py_obj)->tp_name);
+        goto err_out;
+    }
+
+    val = PyLong_AsLong(py_obj);
+
+err_out:
+    if (PyErr_Occurred()) {
+        ERR("Int(bool) conversion failed");
+    }
+
+    return (val == 0 ? false : true);
 }
 
 uint64_t py_obj_to_uint64 (PyObject *py_obj)
@@ -1135,6 +1603,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(on_idle_dice)
     TP_SET_DECL(on_lifespan_do)
     TP_SET_DECL(on_miss_do)
+    TP_SET_DECL(on_tick_do)
     TP_SET_DECL(on_move_do)
     TP_SET_DECL(on_open_do)
     TP_SET_DECL(on_use_do)

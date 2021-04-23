@@ -21,6 +21,10 @@ def on_death(me, x, y):
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, "monst_death1", x, y):
         zx.sound_play_channel_at(zx.CHANNEL_MONST2, "monst_death1", x, y)
 
+def on_tick(me, x, y): # Return True on doing an action
+    zx.topcon("tic")
+    return False
+
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_avoid_distance(4)
@@ -67,6 +71,11 @@ def tp_init(name, text_name):
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
     x.set_on_death_do("tentacleye.on_death()")
+    x.set_on_bite_do("tentacleye.on_bite()")
+    x.set_on_death_do("tentacleye.on_death()")
+    x.set_on_hit_do("tentacleye.on_hit()")
+    x.set_on_miss_do("tentacleye.on_miss()")
+    x.set_on_tick_do("tentacleye.on_tick()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stat_attack(10) # 10, means no bonus
     x.set_stat_constitution(10)

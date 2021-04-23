@@ -166,6 +166,9 @@ class Tp:
     def set_on_miss_do(self, value):
         zx.tp_set_on_miss_do(self, value)
 
+    def set_on_tick_do(self, value):
+        zx.tp_set_on_tick_do(self, value)
+
     def set_on_lifespan_do(self, value):
         zx.tp_set_on_lifespan_do(self, value)
 
