@@ -237,11 +237,6 @@ void Game::wid_thing_info_clear_popup (void)
 
 void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 {_
-    if (game->state == Game::STATE_CHOOSING_TARGET) {
-        t->log("Ignore, chossing target");
-        return;
-    }
-
     if (game->request_remake_inventory) {
         //
         // Continue
@@ -263,11 +258,6 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
     }
 
     if (when_hovering_over) {
-        if (t->is_hidden) {
-            t->log("Do not show thing; hidden");
-            return;
-        }
-
         if (!level->is_lit(t->mid_at.x, t->mid_at.y)) {
             t->log("Do not show thing; not lit");
             return;
@@ -346,11 +336,6 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 
 void Game::wid_thing_info_create (const std::vector<Thingp> &ts)
 {_
-    if (game->state == Game::STATE_CHOOSING_TARGET) {
-        LOG("Ignore, chossing target");
-        return;
-    }
-
     if (game->request_remake_inventory) {
         //
         // Continue

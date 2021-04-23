@@ -1253,7 +1253,7 @@ public:
     void weapon_set_use_anim(Thingp gfx_anim_attack);
     void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
     void weapon_sheath(void);
-    void wield(Thingp w);
+    bool wield(Thingp w);
     void wobble(float wobble);
 } Thing;
 

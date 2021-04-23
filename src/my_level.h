@@ -454,6 +454,7 @@ public:
     void cursor_recreate(void);
     void cursor_describe(void);
     void describe(fpoint at);
+    void describe(Thingp);
     void dbg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void dbg_(const char *fmt, va_list args); // compile error without
     void display(void);

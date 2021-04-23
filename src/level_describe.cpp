@@ -19,6 +19,11 @@
 
 void Level::describe (fpoint p)
 {
+    if (game->state == Game::STATE_MOVING_ITEMS || 
+        game->state == Game::STATE_COLLECTING_ITEMS) {
+        return;
+    }
+
     std::vector<Thingp> hover_over_things;
     hover_over = nullptr;
 
@@ -69,7 +74,7 @@ void Level::describe (fpoint p)
 
         t->describe_when_hovering_over();
 
-        if (t->tp()->long_text_description() != "") {
+        if (t->long_text_description() != "") {
             push_back_if_unique(hover_over_things, t);
         }
 
@@ -95,7 +100,7 @@ void Level::describe (fpoint p)
 
         t->describe_when_hovering_over();
 
-        if (t->tp()->long_text_description() != "") {
+        if (t->long_text_description() != "") {
             push_back_if_unique(hover_over_things, t);
         }
 
@@ -107,4 +112,32 @@ void Level::describe (fpoint p)
     if (hover_over_things.size()) {
         game->wid_thing_info_create_when_hovering_over(hover_over_things);
     }
+}
+
+void Level::describe (Thingp t)
+{
+    if (game->state == Game::STATE_MOVING_ITEMS || 
+        game->state == Game::STATE_COLLECTING_ITEMS) {
+        return;
+    }
+
+    if (!t->is_described_when_hovering_over()) {
+        return;
+    }
+
+    if (t->long_text_description() == "") {
+        return;
+    }
+
+    if (t->is_cursor() ||
+        t->is_player() ||
+        t->is_cursor_path() ||
+        t->is_the_grid) {
+        return;
+    }
+
+    wid_thing_info_fini();
+    std::vector<Thingp> hover_over_things;
+    hover_over_things.push_back(t);
+    game->wid_thing_info_create_when_hovering_over(hover_over_things);
 }
