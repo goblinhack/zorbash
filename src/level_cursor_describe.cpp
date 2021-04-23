@@ -36,6 +36,7 @@ void Level::cursor_describe (void)
 
         if (t->get_immediate_owner() ||
             t->is_cursor() ||
+            t->is_player() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
             continue;
@@ -65,6 +66,7 @@ void Level::cursor_describe (void)
 
         if (t->get_immediate_owner() ||
             t->is_cursor() ||
+            t->is_player() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
             continue;
@@ -90,6 +92,7 @@ void Level::cursor_describe (void)
 
         if (t->get_immediate_owner() ||
             t->is_cursor() ||
+            t->is_player() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
             continue;

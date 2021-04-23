@@ -31,9 +31,11 @@ void wid_thing_info_fini (void)
         game->bag_secondary = nullptr;
     }
 
-    game->wid_thing_info_clear_popup();
+    if (wid_thing_info_window.size()) {
+        BOTCON(" "); // Clear out existing message
+    }
 
-    BOTCON(" "); // Clear out existing message
+    game->wid_thing_info_clear_popup();
 }
 
 uint8_t wid_thing_info_init (void)
@@ -115,284 +117,21 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     wid_popup_window->log(" ");
 
     wid_popup_window->log(tp->long_text_description());
+    wid_popup_window->log(" ");
 
-    if (t->is_item()) {
-        if (tp->rarity() == THING_RARITY_UNCOMMON) {
-            wid_popup_window->log("Uncommon item");
-        } else if (tp->rarity() == THING_RARITY_RARE) {
-            wid_popup_window->log("Rare item");
-        } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-            wid_popup_window->log("Very rare item");
-        } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-            wid_popup_window->log("Unique item");
-        }
-    }
-
-    if (t->is_monst()) {
-        if (tp->rarity() == THING_RARITY_UNCOMMON) {
-            wid_popup_window->log("Uncommon monster");
-        } else if (tp->rarity() == THING_RARITY_RARE) {
-            wid_popup_window->log("Rare monster");
-        } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-            wid_popup_window->log("Very rare monster");
-        } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-            wid_popup_window->log("Unique monster");
-        }
-    }
-
-    bool need_line = true;
-
-    {
-        auto gold_dice = t->get_gold_value_dice();
-        auto min_value = gold_dice.min_roll();
-        auto max_value = gold_dice.max_roll();
-        if (min_value > 0) {
-            if (need_line) {
-                wid_popup_window->log(" ");
-                need_line = false;
-            }
-            if (min_value == max_value) {
-                wid_popup_window->log("%%fg=white$Gold value " + 
-                                        t->get_gold_value_dice_str());
-            } else {
-                wid_popup_window->log("%%fg=white$Gold value " + 
-                                        std::to_string(min_value) + "-" + 
-                                        std::to_string(max_value) + " (" +
-                                        t->get_gold_value_dice_str() + ")");
-            }
-        }
-    }
-
-    char tmp[40];
-    char tmp2[40];
-
-    if (player->can_eat(t)) {
-        auto nutrition_dice = t->get_nutrition_dice();
-        auto min_value = nutrition_dice.min_roll();
-        auto max_value = nutrition_dice.max_roll();
-        if (min_value > 0) {
-            if (need_line) {
-                wid_popup_window->log(" ");
-                need_line = false;
-            }
-
-            if (min_value == max_value) {
-                snprintf(tmp2, sizeof(tmp2) - 1,
-                         "(%s)",
-                         t->get_nutrition_dice_str().c_str());
-            } else {
-                snprintf(tmp2, sizeof(tmp2) - 1,
-                         "%d-%d(%s)",
-                         min_value,
-                         max_value,
-                         t->get_nutrition_dice_str().c_str());
-            }
-            snprintf(tmp, sizeof(tmp) - 1,
-                    "%%fg=white$Nutrition%15s ```", tmp2);
-            wid_popup_window->log(tmp);
-        }
-    }
-    
-    if (t->is_alive_monst() || t->is_player()) {
-        if (need_line) {
-            wid_popup_window->log(" ");
-            need_line = false;
-        }
-        if (t->get_health() == t->get_health_max()) {
-            snprintf(tmp, sizeof(tmp) - 1,
-                     "%%fg=white$Health%15d ``````", t->get_health());
-        } else {
-            snprintf(tmp2, sizeof(tmp2) - 1,
-                     "%d/%d",
-                     t->get_health(),
-                     t->get_health_max());
-            snprintf(tmp, sizeof(tmp) - 1,
-                     "%%fg=white$Health%15s ``````", tmp2);
-        }
-        wid_popup_window->log(tmp);
-    }
-
-    if (t->is_alive_monst() || t->is_player() || t->is_weapon()) {
-        auto attack_melee_dice = t->get_damage_melee_dice();
-        auto min_value = attack_melee_dice.min_roll();
-        auto max_value = attack_melee_dice.max_roll();
-        if (min_value > 0) {
-            if (need_line) {
-                wid_popup_window->log(" ");
-                need_line = false;
-            }
-            if (min_value == max_value) {
-                snprintf(tmp2, sizeof(tmp2) - 1, "%s",
-                         t->get_damage_melee_dice_str().c_str());
-                snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Damage%15s ``````", tmp2);
-            } else {
-                snprintf(tmp2, sizeof(tmp2) - 1,
-                         "%d-%d(%s)",
-                         min_value,
-                         max_value,
-                         t->get_damage_melee_dice_str().c_str());
-                snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Damage%15s ``````", tmp2);
-            }
-            wid_popup_window->log(tmp);
-        }
-    }
-
-    if (t->is_alive_monst() || t->is_player()) {
-        auto attack_bite_dice = t->get_damage_bite_dice();
-        auto min_value = attack_bite_dice.min_roll();
-        auto max_value = attack_bite_dice.max_roll();
-        if (min_value > 0) {
-            if (need_line) {
-                wid_popup_window->log(" ");
-                need_line = false;
-            }
-            if (min_value == max_value) {
-                snprintf(tmp2, sizeof(tmp2) - 1, "%s",
-                         t->get_damage_bite_dice_str().c_str());
-                snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Bite  %21s", tmp2);
-            } else {
-                snprintf(tmp2, sizeof(tmp2) - 1,
-                         "%d-%d(%s)",
-                         min_value,
-                         max_value,
-                         t->get_damage_bite_dice_str().c_str());
-                snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=white$Bite  %21s", tmp2);
-            }
-            wid_popup_window->log(tmp);
-        }
-    }
-
-    if (t->is_alive_monst() || t->is_player()) {
-        {
-            auto stat = t->get_stat_attack();
-            if (stat != 10) {
-                snprintf(tmp, sizeof(tmp) - 1,
-                        "%%fg=white$Attack          %2d%-3s to dmg",
-                        stat,
-                        stat_to_bonus_slash_str(stat).c_str());
-                wid_popup_window->log(tmp);
-            } else {
-                snprintf(tmp, sizeof(tmp) - 1,
-                        "%%fg=white$Attack          %2d/no bonus`",
-                        stat);
-                wid_popup_window->log(tmp);
-            }
-        }
-
-        {
-            auto stat = t->get_stat_defence();
-            if (stat != 10) {
-                snprintf(tmp, sizeof(tmp) - 1,
-                        "%%fg=white$Defence         %2d%-3s to dmg",
-                        stat,
-                        stat_to_bonus_slash_str(stat).c_str());
-                wid_popup_window->log(tmp);
-            } else {
-                snprintf(tmp, sizeof(tmp) - 1,
-                        "%%fg=white$Defence         %2d/no bonus`",
-                        stat);
-                wid_popup_window->log(tmp);
-            }
-        }
-
-        {
-            auto stat = t->get_stat_strength();
-            if (stat != 10) {
-                snprintf(tmp, sizeof(tmp) - 1,
-                        "%%fg=white$Strength        %2d%-3s to dmg",
-                        stat,
-                        stat_to_bonus_slash_str(stat).c_str());
-                wid_popup_window->log(tmp);
-            } else {
-                snprintf(tmp, sizeof(tmp) - 1,
-                        "%%fg=white$Strength        %2d/no bonus`",
-                        stat);
-                wid_popup_window->log(tmp);
-            }
-        }
-
-        {
-            auto stat = t->get_stat_constitution();
-            if (stat != 10) {
-                snprintf(tmp, sizeof(tmp) - 1,
-                        "%%fg=white$Constitution    %2d%-3s to dmg",
-                        stat,
-                        stat_to_bonus_slash_str(stat).c_str());
-                wid_popup_window->log(tmp);
-            } else {
-                snprintf(tmp, sizeof(tmp) - 1,
-                        "%%fg=white$Constitution    %2d/no bonus`",
-                        stat);
-                wid_popup_window->log(tmp);
-            }
-        }
-    }
-
-    if (t->is_alive_monst()) {
-        std::string danger_level = player->get_danger_level(t);
-        wid_popup_window->log(" ");
-        wid_popup_window->log(danger_level);
-
-        auto max_damage = t->get_damage_max();
-        if (max_damage > 0) {
-            auto kill_count = player->get_health() / max_damage;
-
-            //
-            // Oh dear.
-            //
-            if (kill_count == 0) {
-                kill_count = 1;
-            }
-
-            if (kill_count == 1) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("%%fg=red$Could kill you in");
-                wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
-                                      " hit!");
-            } else if (kill_count <= 2) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("%%fg=red$Could kill you in");
-                wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
-                                      " hits");
-            } else if (kill_count <= 5) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("%%fg=orange$Could kill you in");
-                wid_popup_window->log("%%fg=orange$" + std::to_string(kill_count) + 
-                                      " hits");
-            } else if (kill_count <= 10) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("Could kill you in");
-                wid_popup_window->log(std::to_string(kill_count) + " hits");
-            }
-        }
-    }
-
-    if (tp->charge_count()) {
-        if (t->get_charge_count() > 1) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("Has " + 
-                                  std::to_string(t->get_charge_count()) + " charges left");
-        } else {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("Has one charge left");
-        }
-
-        auto c = player->item_count_including_charges(t->tp());
-        if (c > t->get_charge_count()) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("Total charges " + std::to_string(c));
-        }
-    } else {
-        auto c = player->item_count_including_charges(t->tp());
-        if (c > 1) {
-            wid_popup_window->log(" ");
-            wid_popup_window->log("Item count " + std::to_string(c));
-        }
-    }
+    wid_thing_info_add_item_rarity(wid_popup_window, t);
+    wid_thing_info_add_monst_rarity(wid_popup_window, t);
+    wid_thing_info_add_gold_value(wid_popup_window, t);
+    wid_thing_info_add_nutrition(wid_popup_window, t);
+    wid_thing_info_add_health(wid_popup_window, t);
+    wid_thing_info_add_melee_damage(wid_popup_window, t);
+    wid_thing_info_add_bite_damage(wid_popup_window, t);
+    wid_thing_info_add_attack(wid_popup_window, t);
+    wid_thing_info_add_defence(wid_popup_window, t);
+    wid_thing_info_add_strength(wid_popup_window, t);
+    wid_thing_info_add_constitution(wid_popup_window, t);
+    wid_thing_info_add_charge_count(wid_popup_window, t);
+    wid_thing_info_add_danger_level(wid_popup_window, t);
 
     return wid_popup_window;
 }
@@ -412,13 +151,10 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
                                          nullptr, "", false, false /* vert */);
 
     wid_raise(wid_popup_window->wid_popup_container);
-    
+
     char tmp[40];
-    char tmp2[40];
 
     for (auto t : ts) {
-        auto tp = t->tp();
-
         auto name = t->short_text_capitalized();
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=white$%-28s%%fg=reset$", name.c_str());
         for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
@@ -428,262 +164,19 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
         }
         wid_popup_window->log(tmp);
 
-        if (t->is_item()) {
-            if (tp->rarity() == THING_RARITY_UNCOMMON) {
-                wid_popup_window->log("Uncommon item");
-            } else if (tp->rarity() == THING_RARITY_RARE) {
-                wid_popup_window->log("Rare item");
-            } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-                wid_popup_window->log("Very rare item");
-            } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-                wid_popup_window->log("Unique item");
-            }
-        }
-
-        if (t->is_monst()) {
-            if (tp->rarity() == THING_RARITY_UNCOMMON) {
-                wid_popup_window->log("Uncommon monster");
-            } else if (tp->rarity() == THING_RARITY_RARE) {
-                wid_popup_window->log("Rare monster");
-            } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-                wid_popup_window->log("Very rare monster");
-            } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-                wid_popup_window->log("Unique monster");
-            }
-        }
-
-        {
-            auto gold_value_dice = t->get_gold_value_dice();
-            auto min_value = gold_value_dice.min_roll();
-            auto max_value = gold_value_dice.max_roll();
-            if (min_value > 0) {
-                if (min_value == max_value) {
-                    snprintf(tmp2, sizeof(tmp2) - 1,
-                             "(%s)",
-                             t->get_gold_value_dice_str().c_str());
-                } else {
-                    snprintf(tmp2, sizeof(tmp2) - 1,
-                             "%d-%d(%s)",
-                             min_value,
-                             max_value,
-                             t->get_gold_value_dice_str().c_str());
-                }
-                snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=gray$Gold  %15s ``````", tmp2);
-                wid_popup_window->log(tmp);
-            }
-        }
-
-        if (player->can_eat(t)) {
-            auto nutrition_dice = t->get_nutrition_dice();
-            auto min_value = nutrition_dice.min_roll();
-            auto max_value = nutrition_dice.max_roll();
-            if (min_value > 0) {
-                if (min_value == max_value) {
-                    snprintf(tmp2, sizeof(tmp2) - 1,
-                             "(%s)",
-                             t->get_nutrition_dice_str().c_str());
-                } else {
-                    snprintf(tmp2, sizeof(tmp2) - 1,
-                             "%d-%d(%s)",
-                             min_value,
-                             max_value,
-                             t->get_nutrition_dice_str().c_str());
-                }
-                snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=gray$Nutrit%15s ``````", tmp2);
-                wid_popup_window->log(tmp);
-            }
-        }
-
-        if (t->is_alive_monst() || t->is_player()) {
-            if (t->get_health() == t->get_health_max()) {
-                snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=gray$Health%15d ``````", t->get_health());
-            } else {
-                snprintf(tmp2, sizeof(tmp2) - 1,
-                         "%d/%d",
-                         t->get_health(),
-                         t->get_health_max());
-                snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=gray$Health%15s ``````", tmp2);
-            }
-            wid_popup_window->log(tmp);
-        }
-
-        if (t->is_alive_monst() || t->is_player() || t->is_weapon()) {
-            auto attack_melee_dice = t->get_damage_melee_dice();
-            auto min_value = attack_melee_dice.min_roll();
-            auto max_value = attack_melee_dice.max_roll();
-            if (min_value > 0) {
-                if (min_value == max_value) {
-                    snprintf(tmp2, sizeof(tmp2) - 1, "%s",
-                             t->get_damage_melee_dice_str().c_str());
-                    snprintf(tmp, sizeof(tmp) - 1,
-                             "%%fg=gray$Damage%15s ``````", tmp2);
-                } else {
-                    snprintf(tmp2, sizeof(tmp2) - 1,
-                             "%d-%d(%s)",
-                             min_value,
-                             max_value,
-                             t->get_damage_melee_dice_str().c_str());
-                    snprintf(tmp, sizeof(tmp) - 1,
-                             "%%fg=gray$Damage%15s ``````", tmp2);
-                }
-                wid_popup_window->log(tmp);
-            }
-        }
-
-        if (t->is_alive_monst() || t->is_player()) {
-            auto attack_bite_dice = t->get_damage_bite_dice();
-            auto min_value = attack_bite_dice.min_roll();
-            auto max_value = attack_bite_dice.max_roll();
-            if (min_value > 0) {
-                if (min_value == max_value) {
-                    snprintf(tmp2, sizeof(tmp2) - 1, "%s",
-                             t->get_damage_bite_dice_str().c_str());
-                    snprintf(tmp, sizeof(tmp) - 1,
-                             "%%fg=gray$Bite  %21s", tmp2);
-                } else {
-                    snprintf(tmp2, sizeof(tmp2) - 1,
-                             "%d-%d(%s)",
-                             min_value,
-                             max_value,
-                             t->get_damage_bite_dice_str().c_str());
-                    snprintf(tmp, sizeof(tmp) - 1,
-                             "%%fg=gray$Bite  %21s", tmp2);
-                }
-                wid_popup_window->log(tmp);
-            }
-        }
-
-        if (t->is_alive_monst() || t->is_player()) {
-            {
-                auto stat = t->get_stat_attack();
-                if (stat != 10) {
-                    snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=gray$Attack          %2d%-3s to dmg",
-                            stat,
-                            stat_to_bonus_slash_str(stat).c_str());
-                    wid_popup_window->log(tmp);
-                } else {
-                    snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=gray$Attack          %2d/no bonus`",
-                            stat);
-                    wid_popup_window->log(tmp);
-                }
-            }
-
-            {
-                auto stat = t->get_stat_defence();
-                if (stat != 10) {
-                    snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=gray$Defence         %2d%-3s to dmg",
-                            stat,
-                            stat_to_bonus_slash_str(stat).c_str());
-                    wid_popup_window->log(tmp);
-                } else {
-                    snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=gray$Defence         %2d/no bonus`",
-                            stat);
-                    wid_popup_window->log(tmp);
-                }
-            }
-
-            {
-                auto stat = t->get_stat_strength();
-                if (stat != 10) {
-                    snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=gray$Strength        %2d%-3s to dmg",
-                            stat,
-                            stat_to_bonus_slash_str(stat).c_str());
-                    wid_popup_window->log(tmp);
-                } else {
-                    snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=gray$Strength        %2d/no bonus`",
-                            stat);
-                    wid_popup_window->log(tmp);
-                }
-            }
-
-            {
-                auto stat = t->get_stat_constitution();
-                if (stat != 10) {
-                    snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=gray$Constitution    %2d%-3s to dmg",
-                            stat,
-                            stat_to_bonus_slash_str(stat).c_str());
-                    wid_popup_window->log(tmp);
-                } else {
-                    snprintf(tmp, sizeof(tmp) - 1,
-                            "%%fg=gray$Constitution    %2d/no bonus`",
-                            stat);
-                    wid_popup_window->log(tmp);
-                }
-            }
-        }
-
-        if (t->is_alive_monst()) {
-            std::string danger_level = player->get_danger_level(t);
-            wid_popup_window->log(" ");
-            wid_popup_window->log(danger_level);
-
-            auto max_damage = t->get_damage_max();
-            if (max_damage > 0) {
-                auto kill_count = player->get_health() / max_damage;
-
-                //
-                // Oh dear.
-                //
-                if (kill_count == 0) {
-                    kill_count = 1;
-                }
-
-                if (kill_count == 1) {
-                    wid_popup_window->log(" ");
-                    wid_popup_window->log("%%fg=red$Could kill you in");
-                    wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
-                                          " hit!");
-                } else if (kill_count <= 2) {
-                    wid_popup_window->log(" ");
-                    wid_popup_window->log("%%fg=red$Could kill you in");
-                    wid_popup_window->log("%%fg=red$" + std::to_string(kill_count) + 
-                                          " hits");
-                } else if (kill_count <= 5) {
-                    wid_popup_window->log(" ");
-                    wid_popup_window->log("%%fg=orange$Could kill you in");
-                    wid_popup_window->log("%%fg=orange$" + std::to_string(kill_count) + 
-                                          " hits");
-                } else if (kill_count <= 10) {
-                    wid_popup_window->log(" ");
-                    wid_popup_window->log("Could kill you in");
-                    wid_popup_window->log(std::to_string(kill_count) + " hits");
-                }
-            }
-        }
-
-        if (tp->charge_count()) {
-            if (t->get_charge_count() > 1) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("Has " + 
-                                      std::to_string(t->get_charge_count()) + " charges left");
-            } else {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("Has one charge left");
-            }
-
-            auto c = player->item_count_including_charges(t->tp());
-            if (c > t->get_charge_count()) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("Total charges " + std::to_string(c));
-            }
-        } else {
-            auto c = player->item_count_including_charges(t->tp());
-            if (c > 1) {
-                wid_popup_window->log(" ");
-                wid_popup_window->log("Item count " + std::to_string(c));
-            }
-        }
+        wid_thing_info_add_item_rarity(wid_popup_window, t);
+        wid_thing_info_add_monst_rarity(wid_popup_window, t);
+        wid_thing_info_add_gold_value(wid_popup_window, t);
+        wid_thing_info_add_nutrition(wid_popup_window, t);
+        wid_thing_info_add_health(wid_popup_window, t);
+        wid_thing_info_add_melee_damage(wid_popup_window, t);
+        wid_thing_info_add_bite_damage(wid_popup_window, t);
+        wid_thing_info_add_attack(wid_popup_window, t);
+        wid_thing_info_add_defence(wid_popup_window, t);
+        wid_thing_info_add_strength(wid_popup_window, t);
+        wid_thing_info_add_constitution(wid_popup_window, t);
+        wid_thing_info_add_charge_count(wid_popup_window, t);
+        wid_thing_info_add_danger_level(wid_popup_window, t);
     }
 
     auto w = wid_popup_window;
@@ -699,9 +192,9 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
 
 bool Game::wid_thing_info_push_popup (Thingp t)
 {_
-    int utilized = 0;
+    int existing_height = 0;
     for (const auto w : wid_thing_info_window) {
-        utilized += w->wid_text_area->line_count;
+        existing_height += wid_get_height(w->wid_popup_container);
 
         if (w->t == t) {
             return true;
@@ -717,9 +210,9 @@ bool Game::wid_thing_info_push_popup (Thingp t)
         return false;
     }
 
-    int utilized2 = w->wid_text_area->line_count;
-    wid_move_delta(w->wid_popup_container, 0, height - utilized2 - utilized - 1);
-    wid_resize(w->wid_popup_container, -1, utilized2 + 1);
+    int utilized = w->wid_text_area->line_count;
+    wid_move_delta(w->wid_popup_container, 0, height - utilized - existing_height - 1);
+    wid_resize(w->wid_popup_container, -1, utilized + 1);
 
     for (auto w : wid_thing_info_window) {
         wid_update(w->wid_text_area->wid_text_area);
@@ -896,26 +389,30 @@ void Game::wid_thing_info_create (const std::vector<Thingp> &ts)
 
     LOG("Thing info create window");
 
-    int i = 0;
-    bool failed = false;
-    for (auto t : ts) {
-        i++;
-        if (!wid_thing_info_push_popup(t)) {
-            failed = true;
-            break;
+    //
+    // If too many items, use a compressed form
+    //
+    bool compact = false;
+    if (ts.size() > 2) {
+        compact = true;
+    }
+
+    if (!compact) {
+        int i = 0;
+        for (auto t : ts) {
+            i++;
+            if (!wid_thing_info_push_popup(t)) {
+                wid_thing_info_fini();
+                compact = true;
+                break;
+            }
         }
     }
 
-    if (failed) {
-        failed = false;
-        wid_thing_info_fini();
+    if (compact) {
         if (!wid_thing_info_create_popup_compact(ts)) {
-            failed = true;
+            wid_thing_info_fini();
         }
-    }
-
-    if (failed) {
-        wid_thing_info_fini();
     }
 
     recursion = false;
@@ -929,4 +426,336 @@ void Game::wid_thing_info_create_when_hovering_over (Thingp t)
 void Game::wid_thing_info_create_when_hovering_over (const std::vector<Thingp> & ts)
 {
     wid_thing_info_create(ts);
+}
+
+void Game::wid_thing_info_add_item_rarity (WidPopup *w, Thingp t) 
+{_
+    auto tp = t->tp();
+    if (t->is_item()) {
+        if (tp->rarity() == THING_RARITY_UNCOMMON) {
+            w->log("Uncommon item");
+        } else if (tp->rarity() == THING_RARITY_RARE) {
+            w->log("Rare item");
+        } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
+            w->log("Very rare item");
+        } else if (tp->rarity() == THING_RARITY_UNIQUE) {
+            w->log("Unique item");
+        }
+    }
+}
+
+void Game::wid_thing_info_add_monst_rarity (WidPopup *w, Thingp t) 
+{_
+    auto tp = t->tp();
+    if (t->is_monst()) {
+        if (tp->rarity() == THING_RARITY_UNCOMMON) {
+            w->log("Uncommon monster");
+        } else if (tp->rarity() == THING_RARITY_RARE) {
+            w->log("Rare monster");
+        } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
+            w->log("Very rare monster");
+        } else if (tp->rarity() == THING_RARITY_UNIQUE) {
+            w->log("Unique monster");
+        }
+    }
+}
+
+void Game::wid_thing_info_add_gold_value (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+    char tmp2[40];
+
+    auto gold_value_dice = t->get_gold_value_dice();
+    auto min_value = gold_value_dice.min_roll();
+    auto max_value = gold_value_dice.max_roll();
+    if (min_value > 0) {
+        if (min_value == max_value) {
+            snprintf(tmp2, sizeof(tmp2) - 1,
+                     "(%s)",
+                     t->get_gold_value_dice_str().c_str());
+        } else {
+            snprintf(tmp2, sizeof(tmp2) - 1,
+                     "%d-%d(%s)",
+                     min_value,
+                     max_value,
+                     t->get_gold_value_dice_str().c_str());
+        }
+        snprintf(tmp, sizeof(tmp) - 1,
+                 "%%fg=gray$Gold  %15s ``````", tmp2);
+        w->log(tmp);
+    }
+}
+
+void Game::wid_thing_info_add_nutrition (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+    char tmp2[40];
+
+    if (!game->level->player) {
+        return;
+    }
+
+    if (game->level->player->can_eat(t)) {
+        auto nutrition_dice = t->get_nutrition_dice();
+        auto min_value = nutrition_dice.min_roll();
+        auto max_value = nutrition_dice.max_roll();
+        if (min_value > 0) {
+            if (min_value == max_value) {
+                snprintf(tmp2, sizeof(tmp2) - 1,
+                         "(%s)",
+                         t->get_nutrition_dice_str().c_str());
+            } else {
+                snprintf(tmp2, sizeof(tmp2) - 1,
+                         "%d-%d(%s)",
+                         min_value,
+                         max_value,
+                         t->get_nutrition_dice_str().c_str());
+            }
+            snprintf(tmp, sizeof(tmp) - 1,
+                     "%%fg=gray$Food  %15s ``````", tmp2);
+            w->log(tmp);
+        }
+    }
+}
+
+void Game::wid_thing_info_add_health (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+    char tmp2[40];
+
+    if (t->is_alive_monst() || t->is_player()) {
+        if (t->get_health() == t->get_health_max()) {
+            snprintf(tmp, sizeof(tmp) - 1,
+                     "%%fg=gray$Health%15d ``````", t->get_health());
+        } else {
+            snprintf(tmp2, sizeof(tmp2) - 1,
+                     "%d/%d",
+                     t->get_health(),
+                     t->get_health_max());
+            snprintf(tmp, sizeof(tmp) - 1,
+                     "%%fg=gray$Health%15s ``````", tmp2);
+        }
+        w->log(tmp);
+    }
+}
+
+void Game::wid_thing_info_add_melee_damage (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+    char tmp2[40];
+
+    if (t->is_alive_monst() || t->is_player() || t->is_weapon()) {
+        auto attack_melee_dice = t->get_damage_melee_dice();
+        auto min_value = attack_melee_dice.min_roll();
+        auto max_value = attack_melee_dice.max_roll();
+        if (min_value > 0) {
+            if (min_value == max_value) {
+                snprintf(tmp2, sizeof(tmp2) - 1, "%s",
+                         t->get_damage_melee_dice_str().c_str());
+                snprintf(tmp, sizeof(tmp) - 1,
+                         "%%fg=gray$Melee %15s ``````", tmp2);
+            } else {
+                snprintf(tmp2, sizeof(tmp2) - 1,
+                         "%d-%d(%s)",
+                         min_value,
+                         max_value,
+                         t->get_damage_melee_dice_str().c_str());
+                snprintf(tmp, sizeof(tmp) - 1,
+                         "%%fg=gray$Melee %15s ``````", tmp2);
+            }
+            w->log(tmp);
+        }
+    }
+}
+
+void Game::wid_thing_info_add_bite_damage (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+    char tmp2[40];
+
+    if (t->is_alive_monst() || t->is_player()) {
+        auto attack_bite_dice = t->get_damage_bite_dice();
+        auto min_value = attack_bite_dice.min_roll();
+        auto max_value = attack_bite_dice.max_roll();
+        if (min_value > 0) {
+            if (min_value == max_value) {
+                snprintf(tmp2, sizeof(tmp2) - 1, "%s",
+                         t->get_damage_bite_dice_str().c_str());
+                snprintf(tmp, sizeof(tmp) - 1,
+                         "%%fg=gray$Bite  %21s", tmp2);
+            } else {
+                snprintf(tmp2, sizeof(tmp2) - 1,
+                         "%d-%d(%s)",
+                         min_value,
+                         max_value,
+                         t->get_damage_bite_dice_str().c_str());
+                snprintf(tmp, sizeof(tmp) - 1,
+                         "%%fg=gray$Bite  %21s", tmp2);
+            }
+            w->log(tmp);
+        }
+    }
+}
+
+void Game::wid_thing_info_add_attack (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+
+    if (t->is_alive_monst() || t->is_player()) {
+        auto stat = t->get_stat_attack();
+        if (stat != 10) {
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=gray$Attack          %2d%-3s to dmg",
+                    stat,
+                    stat_to_bonus_slash_str(stat).c_str());
+            w->log(tmp);
+        } else {
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=gray$Attack          %2d/no bonus`",
+                    stat);
+            w->log(tmp);
+        }
+    }
+}
+
+void Game::wid_thing_info_add_defence (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+
+    if (t->is_alive_monst() || t->is_player()) {
+        auto stat = t->get_stat_defence();
+        if (stat != 10) {
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=gray$Defence         %2d%-3s to dmg",
+                    stat,
+                    stat_to_bonus_slash_str(stat).c_str());
+            w->log(tmp);
+        } else {
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=gray$Defence         %2d/no bonus`",
+                    stat);
+            w->log(tmp);
+        }
+    }
+}
+
+void Game::wid_thing_info_add_strength (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+
+    if (t->is_alive_monst() || t->is_player()) {
+        auto stat = t->get_stat_strength();
+        if (stat != 10) {
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=gray$Strength        %2d%-3s to dmg",
+                    stat,
+                    stat_to_bonus_slash_str(stat).c_str());
+            w->log(tmp);
+        } else {
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=gray$Strength        %2d/no bonus`",
+                    stat);
+            w->log(tmp);
+        }
+    }
+}
+
+void Game::wid_thing_info_add_constitution (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+
+    if (t->is_alive_monst() || t->is_player()) {
+        auto stat = t->get_stat_constitution();
+        if (stat != 10) {
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=gray$Constitution    %2d%-3s to dmg",
+                    stat,
+                    stat_to_bonus_slash_str(stat).c_str());
+            w->log(tmp);
+        } else {
+            snprintf(tmp, sizeof(tmp) - 1,
+                    "%%fg=gray$Constitution    %2d/no bonus`",
+                    stat);
+            w->log(tmp);
+        }
+    }
+}
+
+void Game::wid_thing_info_add_danger_level (WidPopup *w, Thingp t) 
+{_
+    auto player = game->level->player;
+    if (!player) {
+        return;
+    }
+
+    if (t->is_alive_monst()) {
+        std::string danger_level = player->get_danger_level(t);
+        w->log(" ");
+        w->log(danger_level);
+
+        auto max_damage = t->get_damage_max();
+        if (max_damage > 0) {
+            auto kill_count = player->get_health() / max_damage;
+
+            //
+            // Oh dear.
+            //
+            if (kill_count == 0) {
+                kill_count = 1;
+            }
+
+            if (kill_count == 1) {
+                w->log(" ");
+                w->log("%%fg=red$Could kill you in");
+                w->log("%%fg=red$" + std::to_string(kill_count) + 
+                                      " hit!");
+            } else if (kill_count <= 2) {
+                w->log(" ");
+                w->log("%%fg=red$Could kill you in");
+                w->log("%%fg=red$" + std::to_string(kill_count) + 
+                                      " hits");
+            } else if (kill_count <= 5) {
+                w->log(" ");
+                w->log("%%fg=orange$Could kill you in");
+                w->log("%%fg=orange$" + std::to_string(kill_count) + 
+                                      " hits");
+            } else if (kill_count <= 10) {
+                w->log(" ");
+                w->log("Could kill you in");
+                w->log(std::to_string(kill_count) + " hits");
+            }
+        }
+    }
+}
+
+void Game::wid_thing_info_add_charge_count (WidPopup *w, Thingp t) 
+{_
+    char tmp[40];
+    char tmp2[40];
+
+    auto player = game->level->player;
+    if (!player) {
+        return;
+    }
+
+    auto tp = t->tp();
+    if (tp->charge_count()) {
+        auto c = player->item_count_including_charges(t->tp());
+        if (c > t->get_charge_count()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%d(%d tot)", t->get_charge_count(), c);
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Count %15s ``````", tmp2);
+            w->log(tmp);
+        } else {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->get_charge_count());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Count %15s ``````", tmp2);
+            w->log(tmp);
+        }
+    } else {
+        auto c = player->item_count_including_charges(t->tp());
+        if (c > 1) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%d", c);
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Count %15s ``````", tmp2);
+            w->log(tmp);
+        }
+    }
 }

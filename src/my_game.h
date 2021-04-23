@@ -114,39 +114,29 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my);
 
 class Game {
 public:
-    Game (void) {}
     Game (std::string appdata);
+    Game (void) {}
+    WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
+    WidPopup *wid_thing_info_create_popup_compact(const std::vector<Thingp> &);
     bool load(std::string save_file, class Game &target);
-    void tick_begin(const std::string &);
-    void tick_end();
     bool paused(void);
     bool save(std::string save_file);
+    bool wid_thing_info_push_popup(Thingp t);
     void config_gfx_select(void);
+    void config_keyboard_select(void);
     void config_other_select(void);
     void config_sound_select(void);
-    void config_keyboard_select(void);
     void config_top_select(void);
-    void dead_select(const char *reason);
-    void wid_thing_info_create(Thingp, bool when_hovering_over = false);
-    void wid_thing_info_create(const std::vector<Thingp> &ts);
-    void wid_thing_info_create_when_hovering_over(Thingp);
-    void wid_thing_info_create_when_hovering_over(const std::vector<Thingp> &);
-    void wid_thing_info_destroy_deferred(void);
-    void wid_thing_info_destroy_immediate(void);
-    WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
-    bool wid_thing_info_push_popup(Thingp t);
-    WidPopup *wid_thing_info_create_popup_compact(const std::vector<Thingp> &);
-    void wid_thing_info_clear_popup(void);
-    void wid_thing_collect_create(const std::list<Thingp> &items);
-    void wid_thing_collect_destroy(void);
     void credits_select(void);
+    void dead_select(const char *reason);
     void display(void);
     void fini(void);
     void hard_pause(void);
     void hard_unpause(void);
+    void help_select(void);
     void init(void);
-    void init_levels(void);
     void init_level(point3d);
+    void init_levels(void);
     void load(int slot);
     void load(void);
     void load_config(void);
@@ -155,16 +145,39 @@ public:
     void new_game(void);
     void pause_select(void);
     void quit_select(void);
-    void help_select(void);
     void save(int slot);
     void save(void);
     void save_config(void);
     void save_select(void);
     void soft_pause(void);
     void soft_unpause(void);
+    void tick_begin(const std::string &);
+    void tick_end();
+    void wid_thing_collect_create(const std::list<Thingp> &items);
+    void wid_thing_collect_destroy(void);
+    void wid_thing_info_add_attack(WidPopup *w, Thingp t);
+    void wid_thing_info_add_bite_damage(WidPopup *w, Thingp t);
+    void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
+    void wid_thing_info_add_constitution(WidPopup *w, Thingp t);
+    void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);
+    void wid_thing_info_add_defence(WidPopup *w, Thingp t);
+    void wid_thing_info_add_gold_value(WidPopup *w, Thingp t);
+    void wid_thing_info_add_health(WidPopup *w, Thingp t);
+    void wid_thing_info_add_item_rarity(WidPopup *w, Thingp t);
+    void wid_thing_info_add_melee_damage(WidPopup *w, Thingp t);
+    void wid_thing_info_add_monst_rarity(WidPopup *w, Thingp t);
+    void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
+    void wid_thing_info_add_strength(WidPopup *w, Thingp t);
+    void wid_thing_info_clear_popup(void);
+    void wid_thing_info_create(Thingp, bool when_hovering_over = false);
+    void wid_thing_info_create(const std::vector<Thingp> &ts);
+    void wid_thing_info_create_when_hovering_over(Thingp);
+    void wid_thing_info_create_when_hovering_over(const std::vector<Thingp> &);
+    void wid_thing_info_destroy_deferred(void);
+    void wid_thing_info_destroy_immediate(void);
 
     //
-    // Save file name, contains the date and other useful save slot info
+    //Save file name, contains the date and other useful save slot info
     //
     std::string        version = "" VERSION "";
     uint32_t           header_size {};
