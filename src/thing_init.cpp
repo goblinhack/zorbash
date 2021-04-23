@@ -126,6 +126,7 @@ void Thing::init (Levelp level,
 
     if (tpp->is_player()) {
         level->player = this;
+        level->player_dmap_update();
     }
 
     if (tpp->is_monst() || tpp->is_player() || tpp->is_moveable()) {

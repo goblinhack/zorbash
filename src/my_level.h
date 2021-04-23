@@ -14,6 +14,7 @@
 #include "my_laser.h"
 #include "my_dungeon.h"
 #include "my_fwd.h"
+#include "my_dmap.h"
 
 class Level {
 public:
@@ -189,6 +190,12 @@ public:
     //
     point                      minimap_tl;
     point                      minimap_br;
+
+    //
+    // We regenerate this map every player move, and indicates the shortest
+    // path to the player. Used for sound effects and lighting checks.
+    //
+    Dmap                       player_dmap;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
@@ -405,6 +412,16 @@ public:
     uint8_t is_brazier(const int x, const int y);
     uint8_t is_brazier(const point &p);
     uint8_t is_treasure(const int x, const int y);
+    Thingp inventory_describe(const uint32_t slot);
+    Thingp skillbox_describe(const uint32_t slot);
+    Tpp tp_random_minion_generator(const point &p);
+    Tpp tp_random_minion_generator_easy(const point &p);
+    Tpp tp_random_minion_generator_hard(const point &p);
+    Tpp tp_random_monst(const point &p);
+    Tpp tp_random_monst_easy(const point &p);
+    Tpp tp_random_monst_hard(const point &p);
+    friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);
+    friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
     uint8_t is_treasure(const point &p);
     uint8_t is_treasure_class_a(const int x, const int y);
     uint8_t is_treasure_class_a(const point &p);
@@ -443,6 +460,7 @@ public:
     void create_sewer_place_remaining_walls(const std::string &what);
     void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
     void cursor_check_if_scroll_needed(void);
+    void cursor_describe(void);
     void cursor_find_on_visible_things(const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void cursor_move(void);
     void cursor_path_clear(void);
@@ -452,15 +470,13 @@ public:
     void cursor_path_draw_circle(void);
     void cursor_path_draw_line(point start, point end);
     void cursor_recreate(void);
-    void cursor_describe(void);
-    void describe(fpoint at);
-    void describe(Thingp);
     void dbg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void dbg_(const char *fmt, va_list args); // compile error without
+    void describe(Thingp);
+    void describe(fpoint at);
     void display(void);
     void display_anim(void);
     void display_blood(void);
-    void display_target(void);
     void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_external_particles(void);
     void display_fade_in(void);
@@ -470,11 +486,13 @@ public:
     void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map(void);
     void display_map_bg_things(void);
-    void display_map_fg_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map_fg2_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_map_fg_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_minimap(void);
+    void display_target(void);
     void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void dump(std::string prefix);
     void dump(std::string prefix, std::ostream &out);
     void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
     void err_(const char *fmt, va_list args); // compile error without
@@ -487,10 +505,9 @@ public:
     void lights_fade(void);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
     void lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights);
-    void lights_update_same_level(void);
     void lights_update_new_level(void);
+    void lights_update_same_level(void);
     void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-    void dump(std::string prefix);
     void log_(const char *fmt, va_list args); // compile error without
     void new_external_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
     void new_external_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
@@ -500,6 +517,7 @@ public:
     void place_dirt(Dungeonp d);
     void place_floor_deco(Dungeonp d);
     void place_the_grid(void);
+    void player_dmap_update(void);
     void sanity_check(void);
     void screen_shake_end(void);
     void scroll_map(void);
@@ -511,6 +529,7 @@ public:
     void set_is_ascend_dungeon(const int x, const int y);
     void set_is_ascend_sewer(const int x, const int y);
     void set_is_blood(const int x, const int y);
+    void set_is_brazier(const int x, const int y);
     void set_is_chasm(const int x, const int y);
     void set_is_corpse(const int x, const int y);
     void set_is_corridor(const int x, const int y);
@@ -546,7 +565,6 @@ public:
     void set_is_secret_door(const int x, const int y);
     void set_is_shallow_water(const int x, const int y);
     void set_is_smoke(const int x, const int y);
-    void set_is_brazier(const int x, const int y);
     void set_is_treasure(const int x, const int y);
     void set_is_treasure_class_a(const int x, const int y);
     void set_is_treasure_class_b(const int x, const int y);
@@ -569,6 +587,7 @@ public:
     void unset_is_ascend_dungeon(const int x, const int y);
     void unset_is_ascend_sewer(const int x, const int y);
     void unset_is_blood(const int x, const int y);
+    void unset_is_brazier(const int x, const int y);
     void unset_is_chasm(const int x, const int y);
     void unset_is_corpse(const int x, const int y);
     void unset_is_corridor(const int x, const int y);
@@ -603,7 +622,6 @@ public:
     void unset_is_secret_door(const int x, const int y);
     void unset_is_shallow_water(const int x, const int y);
     void unset_is_smoke(const int x, const int y);
-    void unset_is_brazier(const int x, const int y);
     void unset_is_treasure(const int x, const int y);
     void unset_is_treasure_class_a(const int x, const int y);
     void unset_is_treasure_class_b(const int x, const int y);
@@ -611,26 +629,16 @@ public:
     void unset_is_wall(const int x, const int y);
     void unset_visited(const int x, const int y);
     void unset_visited_no_check(const int x, const int y);
-    void update_new_level(void);
-    void update_same_level(void);
     void update_all_ticks(void);
     void update_deep_water(void);
     void update_hazard_tile_map(void);
     void update_heatmap(void);
     void update_map(void);
     void update_minimap(void);
+    void update_new_level(void);
+    void update_same_level(void);
     void update_things_next_to_a_chasm(void);
     void update_water_next_to_lava(void);
-    Tpp tp_random_monst(const point &p);
-    Tpp tp_random_monst_easy(const point &p);
-    Tpp tp_random_monst_hard(const point &p);
-    Tpp tp_random_minion_generator(const point &p);
-    Tpp tp_random_minion_generator_easy(const point &p);
-    Tpp tp_random_minion_generator_hard(const point &p);
-    Thingp inventory_describe(const uint32_t slot);
-    Thingp skillbox_describe(const uint32_t slot);
-    friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
-    friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);
 };
 
 #endif

@@ -110,6 +110,7 @@ GAME_OBJECTS=				                \
     $(OBJDIR)/particle.o                    \
     $(OBJDIR)/pcg_basic.o                   \
     $(OBJDIR)/player.o                      \
+    $(OBJDIR)/player_dmap.o                 \
     $(OBJDIR)/ptrcheck.o                    \
     $(OBJDIR)/py_level.o                    \
     $(OBJDIR)/py_log.o                      \
