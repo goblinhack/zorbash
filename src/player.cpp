@@ -10,6 +10,7 @@
 #include "my_wid_console.h"
 #include "my_player.h"
 #include "my_array_bounds_check.h"
+#include "my_wid_thing_info.h"
 #include "my_sdl.h"
 
 void player_tick (void)
@@ -349,6 +350,11 @@ void player_tick (void)
         //     player->topcon("Don't move while swinging weapon");
         //     return;
         // }
+
+        //
+        // IF something was being described and we moved, clear it now
+        //
+        wid_thing_info_fini();
 
         fpoint future_pos = player->mid_at + fpoint(dx, dy);
         player->move(future_pos, up, down, left, right, attack, wait, true);

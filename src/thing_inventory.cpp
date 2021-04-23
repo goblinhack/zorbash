@@ -190,6 +190,17 @@ _
         incr_gold(item->get_gold_value());
         inventory_particle(item, monstp->inventory_id.size() - 1);
         item->dead("by being collected");
+
+        //
+        // If we just picked up some gold snd other items are on the
+        // ground that are not auto collected, then describe them
+        //
+        if (game->state == Game::STATE_NORMAL) {
+            if (is_player()) {
+                level->describe(mid_at);
+            }
+        }
+
         return false;
     }
 
@@ -199,6 +210,17 @@ _
         incr_keys(1);
         inventory_particle(item, monstp->inventory_id.size() - 1);
         item->dead("by being collected");
+
+        //
+        // If we just picked up some keys snd other items are on the
+        // ground that are not auto collected, then describe them
+        //
+        if (game->state == Game::STATE_NORMAL) {
+            if (is_player()) {
+                level->describe(mid_at);
+            }
+        }
+
         return false;
     }
 
@@ -259,8 +281,10 @@ _
         game->state != Game::STATE_COLLECTING_ITEMS) {
         wid_thing_info_fini();
     }
+
     inventory_particle(item, item_slot);
     level->inventory_describe(item_slot);
+
     return true;
 }
 
