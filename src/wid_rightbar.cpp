@@ -415,7 +415,7 @@ static void wid_rightbar_create (void)
                 //
                 // Print item count
                 //
-                auto count = player->inventory_id_slot_count(i);
+                auto count = player->item_slot_charge_count(i);
                 if (count > 9) {
                     auto tile = tile_find_mand("item_count_N");
                     wid_set_fg3_tile(w, tile);
