@@ -326,7 +326,7 @@ _
 
             inventory_particle(item, i, this);
 
-            auto cnt = inventory_id_slot_count(i);
+            auto cnt = item_slot_count(i);
             log("Remove slot %d, count %d", i, cnt);
             if (cnt > 1) {_
                 log("Decrement slot count");
@@ -398,7 +398,7 @@ _
                 inventory_particle(item, i, particle_target);
             }
 
-            auto cnt = inventory_id_slot_count(i);
+            auto cnt = item_slot_count(i);
             log("Remove slot %d, count %d", i, cnt);
             if (cnt > 1) {_
                 log("Decrement slot count");
@@ -431,7 +431,7 @@ _
     return false;
 }
 
-int Thing::inventory_id_slot_count (const uint32_t slot)
+int Thing::item_slot_charge_count (const uint32_t slot)
 {_
     auto tp_id = get(monstp->inventory_id, slot);
     if (!tp_id) {
@@ -448,6 +448,25 @@ int Thing::inventory_id_slot_count (const uint32_t slot)
     }
 
     return item_count_including_charges(tpp);
+}
+
+int Thing::item_slot_count (const uint32_t slot)
+{_
+    auto tp_id = get(monstp->inventory_id, slot);
+    if (!tp_id) {
+        return 0;
+    }
+
+    if (!monstp) {
+        return 0;
+    }
+
+    auto tpp = tp_find(tp_id);
+    if (!tpp) {
+        return 0;
+    }
+
+    return item_count_excluding_charges(tpp);
 }
 
 Thingp Level::inventory_get (const uint32_t slot)
