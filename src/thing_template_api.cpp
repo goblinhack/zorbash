@@ -65,6 +65,7 @@ const std::string& Tp::on_death_do(void) const           { return _on_death_do; 
 const std::string& Tp::on_hit_do(void) const             { return _on_hit_do; }
 const std::string& Tp::on_lifespan_do(void) const        { return _on_lifespan_do; }
 const std::string& Tp::on_miss_do(void) const            { return _on_miss_do; }
+const std::string& Tp::on_tick_do(void) const            { return _on_tick_do; }
 const std::string& Tp::on_move_do(void) const            { return _on_move_do; }
 const std::string& Tp::on_open_do(void) const            { return _on_open_do; }
 const std::string& Tp::on_use_do(void) const             { return _on_use_do; }
@@ -750,6 +751,7 @@ void Tp::set_on_death_do(const std::string &v)           { _on_death_do = v; }
 void Tp::set_on_hit_do(const std::string &v)             { _on_hit_do = v; }
 void Tp::set_on_lifespan_do(const std::string &v)        { _on_lifespan_do = v; }
 void Tp::set_on_miss_do(const std::string &v)            { _on_miss_do = v; }
+void Tp::set_on_tick_do(const std::string &v)            { _on_tick_do = v; }
 void Tp::set_on_move_do(const std::string &v)            { _on_move_do = v; }
 void Tp::set_on_open_do(const std::string &v)            { _on_open_do = v; }
 void Tp::set_on_use_do(const std::string &v)             { _on_use_do = v; }

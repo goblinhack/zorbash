@@ -12,6 +12,38 @@
 #include "my_random.h"
 #include "my_thing_template.h"
 #include "my_globals.h"
+#include "my_string.h"
+
+//
+// Python callback upon being tick
+//
+bool Thing::on_tick (void)
+{_
+    auto on_tick = tp()->on_tick_do();
+    if (std::empty(on_tick)) {
+        return false;
+    }
+
+    auto t = split_tokens(on_tick, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%s)", mod.c_str(), fn.c_str(),
+            to_string().c_str());
+
+        return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id,
+                              (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    }
+
+    ERR("Bad on_tick call [%s] expected mod:function, got %d elems",
+        on_tick.c_str(), (int)on_tick.size());
+    return false;
+}
 
 void Thing::update_tick (void)
 {
@@ -104,6 +136,11 @@ bool Thing::achieve_goals_in_life (void)
                 }
             }
         }
+    }
+
+    if (on_tick()) {
+        is_tick_done = true;
+        return true;
     }
 
     //
