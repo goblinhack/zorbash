@@ -33,54 +33,54 @@ bool Thing::describe_when_hovered_over_in_rightbar (void)
 
     if (!skip_keys) {
         if (is_weapon()){
-            s += ". Damage %%fg=red$" + tp()->get_damage_melee_dice_str() +
-                 "%%fg=reset$";
+            s += " Damage %%fg=red$" + tp()->get_damage_melee_dice_str() +
+                 "%%fg=reset$.";
         }
 
         if (is_droppable()){
-            s += ". %%fg=orange$" +
+            s += " %%fg=orange$" +
                  std::string(
                      SDL_GetScancodeName((SDL_Scancode)game->config.key_drop)) +
-                 "%%fg=reset$ to drop";
+                 "%%fg=reset$ to drop.";
         }
 
         if (is_usable()){
             if (is_food()){
-                s += ". %%fg=green$" +
+                s += " %%fg=green$" +
                      std::string(
                          SDL_GetScancodeName((SDL_Scancode)game->config.key_eat)) +
-                     "%%fg=reset$ to eat";
+                     "%%fg=reset$ to eat.";
             } else if (is_potion()){
-                s += ". %%fg=green$" +
+                s += " %%fg=green$" +
                      std::string(
                          SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
-                     "%%fg=reset$ to use";
+                     "%%fg=reset$ to use.";
             } else {
-                s += ". %%fg=cyan$" +
+                s += " %%fg=cyan$" +
                      std::string(
                          SDL_GetScancodeName((SDL_Scancode)game->config.key_use)) +
-                     "%%fg=reset$ to use";
+                     "%%fg=reset$ to use.";
             }
         }
 
         if (is_throwable() && !is_thrown_automatically_when_chosen()){
-            s += ". %%fg=purple$" +
+            s += " %%fg=purple$" +
                  std::string(
                      SDL_GetScancodeName((SDL_Scancode)game->config.key_throw)) +
-                 "%%fg=reset$ to throw";
+                 "%%fg=reset$ to throw.";
         }
 
         if (!is_hidden) {
             if (is_collectable()){
-                s += ". %%fg=yellow$" +
+                s += " %%fg=yellow$" +
                     std::string(
                         SDL_GetScancodeName((SDL_Scancode)game->config.key_wait_or_collect)) +
-                    "%%fg=reset$ to collect";
+                    "%%fg=reset$ to collect.";
             }
         }
 
         if (is_bag()){
-            s += ". Select to open. Use mouse to drag items";
+            s += " Select to open. Use mouse to drag items.";
         }
     }
 
@@ -88,11 +88,13 @@ bool Thing::describe_when_hovered_over_in_rightbar (void)
         if ((s[s.size() - 1] == '.') || (s[s.size() - 1] == '!')) {
             BOTCON("%s", s.c_str());
         } else {
-            BOTCON("%s.", s.c_str());
+            BOTCON("%s", s.c_str());
         }
     } else {
         die("No descrption set");
     }
+
+    level->describe(this);
 
     return true;
 }
@@ -140,6 +142,8 @@ bool Thing::describe_when_hovering_over (void)
     } else {
         die("No descrption set");
     }
+
+    level->describe(this);
 
     return true;
 }

@@ -280,7 +280,10 @@ _
     set_weapon_id(0);
 }
 
-void Thing::wield (Thingp weapon)
+//
+// Returns true on weapon change
+//
+bool Thing::wield (Thingp weapon)
 {_
     auto weapon_tp = weapon->tp();
 
@@ -290,15 +293,16 @@ void Thing::wield (Thingp weapon)
         // Do not return here. We need to set the carry-anim post swing
         //
         sheath();
-    } else {
-        log("Is wielding: %s", weapon_tp->name().c_str());
-        unwield("wield new weapon");
+        return false;
     }
+
+    log("Is wielding: %s", weapon_tp->name().c_str());
+    unwield("wield new weapon");
 
     auto carry_anim_as = weapon_tp->weapon_carry_anim();
     if (carry_anim_as == "") {
         err("Could not wield weapon %s", weapon_tp->name().c_str());
-        return;
+        return false;
     }
 
     auto carry_anim = level->thing_new(carry_anim_as, this);
@@ -320,6 +324,7 @@ void Thing::wield (Thingp weapon)
 
     // Needed?
     // move_carried_items();
+    return true;
 }
 
 void Thing::use_weapon (void)

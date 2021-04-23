@@ -580,20 +580,29 @@ _
 
     item->log("Chosen inventory item");
     if (item->is_weapon()) {
-        if (changed_highlight_slot) {
-            game->tick_begin("player changed weapon");
+        if (player->wield(item)) {
+            if (changed_highlight_slot) {
+                game->tick_begin("player changed weapon");
+            }
         }
-        player->wield(item);
+        game->change_state(Game::STATE_NORMAL);
+        describe(item);
     } else if (item->is_bag()) {
         game->wid_thing_info_create(item);
         item->log("Moving items flag set");
         game->change_state(Game::STATE_MOVING_ITEMS);
     } else if (item->is_thrown_automatically_when_chosen()) {
         player->throw_item_choose_target(item);
+        describe(item);
     } else if (item->is_laser_target_select_automatically_when_chosen()) {
         player->fire_laser_choose_target(item);
+        describe(item);
     } else if (item->is_used_automatically_when_selected()) {
         player->use(item);
+        describe(item);
+    } else {
+        game->change_state(Game::STATE_NORMAL);
+        describe(item);
     }
 
     return true;
