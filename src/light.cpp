@@ -554,6 +554,13 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
                         }
                     }
 
+                    //
+                    // Skip lights that are in blocked off rooms the player cannot see
+                    //
+                    if (get(player_dmap.val, t->mid_at.x, t->mid_at.y) >= DMAP_IS_PASSABLE) {
+                        continue;
+                    }
+
                     if (!is_lit_no_check(t->mid_at.x, t->mid_at.y)) {
                         continue;
                     }
@@ -604,6 +611,13 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
                     }
 
                     if (!t->gfx_glows()) {
+                        continue;
+                    }
+
+                    //
+                    // Skip lights that are in blocked off rooms the player cannot see
+                    //
+                    if (get(player_dmap.val, t->mid_at.x, t->mid_at.y) >= DMAP_IS_PASSABLE) {
                         continue;
                     }
 

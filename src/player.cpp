@@ -359,6 +359,11 @@ void player_tick (void)
         fpoint future_pos = player->mid_at + fpoint(dx, dy);
         player->move(future_pos, up, down, left, right, attack, wait, true);
         last_key_pressed_when = time_get_time_ms_cached();
+
+        //
+        // Update reachability for the player
+        //
+        level->player_dmap_update();
     }
 
     left = false;
