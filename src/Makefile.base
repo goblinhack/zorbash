@@ -2,7 +2,10 @@
 NAME=zorbash-game
 OBJDIR=.o
 
-GAME_OBJECTS=				                \
+#    $(OBJDIR)/thing_fire_at.o               \
+
+GAME_OBJECTS=				    \
+    $(OBJDIR)/vision.o                      \
     $(OBJDIR)/ascii.o                       \
     $(OBJDIR)/ascii_box.o                   \
     $(OBJDIR)/audio.o                       \
