@@ -639,6 +639,9 @@ public:
     void update_same_level(void);
     void update_things_next_to_a_chasm(void);
     void update_water_next_to_lava(void);
+    bool can_see_obstacle(int x, int y);
+    bool can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag);
+    bool can_see(int x0, int y0, int x1, int y1);
 };
 
 #endif

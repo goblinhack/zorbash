@@ -138,6 +138,11 @@ bool Thing::achieve_goals_in_life (void)
         }
     }
 
+    if (fire_at_target()) {
+        is_tick_done = true;
+        return true;
+    }
+
     if (on_tick()) {
         is_tick_done = true;
         return true;
