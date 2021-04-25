@@ -192,12 +192,24 @@ PyObject *thing_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
 	
     auto items = 0;
     FOR_ALL_THINGS(game->level, t, x, y) {
+        //
+        // Don't include carried things else lasers will destroy all items carried!
+        //
+        if (t->get_immediate_owner()) {
+            continue;
+        }
         items++;
     } FOR_ALL_THINGS_END()
 
     PyObject *lst = PyList_New(items);
     auto item = 0;
     FOR_ALL_THINGS(game->level, t, x, y) {
+        //
+        // Don't include carried things else lasers will destroy all items carried!
+        //
+        if (t->get_immediate_owner()) {
+            continue;
+        }
         PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
         item++;
     } FOR_ALL_THINGS_END()

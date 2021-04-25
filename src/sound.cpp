@@ -187,7 +187,7 @@ bool sound_play_at (const std::string &alias, int x, int y)
     volume *= MIX_MAX_VOLUME;
 
     volume -= distance;
-    if (distance <= 0) {
+    if (volume <= 0) {
         return true;
     }
 
@@ -257,6 +257,7 @@ bool sound_play_channel_at (int channel, const std::string &alias, int x, int y)
 
     int distance = get(&level->player_dmap.val, (int)player->mid_at.x, (int)player->mid_at.y);
     if (distance >= DMAP_IS_PASSABLE) {
+        LOG("Cannot play sound %s on channel %d, cannot reach target", alias.c_str(), channel);
         return true;
     }
 
@@ -277,7 +278,7 @@ bool sound_play_channel_at (int channel, const std::string &alias, int x, int y)
     volume *= MIX_MAX_VOLUME;
 
     volume -= distance;
-    if (distance <= 0) {
+    if (volume <= 0) {
         return true;
     }
 

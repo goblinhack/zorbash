@@ -43,7 +43,8 @@ bool audio_init (void)
     // computer. You also may make this 4096, or larger, if you are just 
     // playing music. 
     //
-    int chunksize = 4096;
+    // int chunksize = 4096;
+    int chunksize = 1024; // less latency but might be choppy
 
     if (!audio_init_done) {
         if (Mix_OpenAudio(audio_freq,

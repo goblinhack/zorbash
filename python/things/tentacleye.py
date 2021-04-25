@@ -5,29 +5,31 @@ import random
 def on_bite(me, x, y):
     sound = "growl{}".format(random.randint(1, 10))
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, sound, x, y):
-        zx.sound_play_channel_at(zx.CHANNEL_MONST2, sound, x, y)
+        zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, sound, x, y)
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     sound = "hiss{}".format(random.randint(1, 10))
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, sound, x, y):
-        zx.sound_play_channel_at(zx.CHANNEL_MONST2, sound, x, y)
+        zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, sound, x, y)
 
 def on_miss(me, hitter, x, y):
     sound = "hiss{}".format(random.randint(1, 10))
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, sound, x, y):
-        zx.sound_play_channel_at(zx.CHANNEL_MONST2, sound, x, y)
+        zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, sound, x, y)
 
 def on_death(me, x, y):
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, "monst_death1", x, y):
-        zx.sound_play_channel_at(zx.CHANNEL_MONST2, "monst_death1", x, y)
+        zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, "monst_death1", x, y)
 
 def on_tick(me, x, y): # Return True on doing an action
     zx.topcon("tic")
     return False
 
 def on_fire_at(me, target, x, y): # Return True on doing an action
-    zx.thing_fire_at(me, "laser_energy", target)
-    return True
+    if random.randint(1, 10) < 5:
+        zx.thing_fire_at(me, "laser_energy", target)
+        return True
+    return False
 
 
 def tp_init(name, text_name):

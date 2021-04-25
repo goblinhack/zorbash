@@ -18,6 +18,8 @@ def on_use(owner, item, target, x, y):
                 zx.thing_is_brazier(thing):
             zx.thing_hit(owner, item, thing)
 
+    zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "lightning_a", x, y)
+
 #
 # This is an internal only object to fire lasers from monsters
 #

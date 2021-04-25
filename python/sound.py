@@ -1,5 +1,7 @@
 import zx
 
+zx.sound_load(volume=1.0, file="data/sounds/abilities/lightning_a.wav",                                     name="lightning_a")
+zx.sound_load(volume=1.0, file="data/sounds/abilities/lightning_b.wav",                                     name="lightning_b")
 zx.sound_load(volume=0.25, file="data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav",      name="player_punch")
 zx.sound_load(volume=0.25, file="data/sounds/impacts/443293__deathscyp__wood-break.wav",                    name="door_break")
 zx.sound_load(volume=0.25, file="data/sounds/impacts/554153__danielvj__door-open.wav",                      name="door_open")
@@ -163,7 +165,6 @@ zx.sound_load(volume=0.25, file="data/sounds/misc/drop.wav",                    
 #zx.sound_load(volume=1.0, file="data/sounds/abilities/attack_a.wav",       name="attack_a")
 #zx.sound_load(volume=1.0, file="data/sounds/abilities/attack_b.wav",       name="attack_b")
 #zx.sound_load(volume=1.0, file="data/sounds/abilities/shotgun.wav",        name="shotgun")
-#zx.sound_load(volume=1.0, file="data/sounds/abilities/lightning_a.wav",    name="lightning_a")
 #zx.sound_load(volume=1.0, file="data/sounds/abilities/summon.wav",         name="summon")
 #zx.sound_load(volume=1.0, file="data/sounds/abilities/lightning_b.wav",    name="lightning_b")
 #zx.sound_load(volume=1.0, file="data/sounds/abilities/telepathy.wav",      name="telepathy")
