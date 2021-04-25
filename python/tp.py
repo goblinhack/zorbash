@@ -166,6 +166,9 @@ class Tp:
     def set_on_miss_do(self, value):
         zx.tp_set_on_miss_do(self, value)
 
+    def set_on_fire_at_do(self, value):
+        zx.tp_set_on_fire_at_do(self, value)
+
     def set_on_tick_do(self, value):
         zx.tp_set_on_tick_do(self, value)
 
@@ -505,11 +508,11 @@ class Tp:
     def set_is_rrr97(self, value):
         zx.tp_set_is_rrr97(self, value)
 
-    def set_is_rrr98(self, value):
-        zx.tp_set_is_rrr98(self, value)
+    def set_is_able_to_fire_at(self, value):
+        zx.tp_set_is_able_to_fire_at(self, value)
 
-    def set_is_rrr99(self, value):
-        zx.tp_set_is_rrr99(self, value)
+    def set_ai_vision_distance(self, value):
+        zx.tp_set_ai_vision_distance(self, value)
 
     def set_is_ethereal_minion_generator(self, value):
         zx.tp_set_is_ethereal_minion_generator(self, value)

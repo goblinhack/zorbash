@@ -181,12 +181,13 @@ public:
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
+    Thingp get_best_fire_at_target(void);
     Thingp get_immediate_minion_owner() const;
-    Thingp get_immediate_spawned_owner() const;
     Thingp get_immediate_owner() const;
+    Thingp get_immediate_spawned_owner() const;
     Thingp get_top_minion_owner() const;
-    Thingp get_top_spawned_owner() const;
     Thingp get_top_owner() const;
+    Thingp get_top_spawned_owner() const;
     Thingp nearby_most_dangerous_thing_get(void);
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);
@@ -202,6 +203,7 @@ public:
     bool ai_escape(void);
     bool ai_obstacle(Thingp);
     bool ai_obstacle(fpoint);
+    bool ai_obstacle_for_me(const point&);
     bool ai_on_fire(void);
     bool ai_on_fire_choose_target (point& nh);
     bool ai_wander(void);
@@ -253,20 +255,20 @@ public:
     bool eat(Thingp it);
     bool fall(void);
     bool fall_to_next_level(void);
+    bool fire_at_target(void);
     bool fire_laser_choose_target(Thingp item);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
     bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
+    bool if_matches_then_kill(const std::string& what, const point &p);
     bool inventory_id_insert(Thingp what);
     bool inventory_id_remove(Thingp what);
     bool inventory_id_remove(Thingp what, Thingp target);
-    bool ai_obstacle_for_me(const point&);
     bool is_blocking_terrain(const Thingp it);
     bool is_bloodied(void);
     bool is_carrying_item(void);
     bool is_carrying_treasure(void);
     bool is_enemy(Thingp attacker) const;
     bool is_on_fire(void);
-    bool if_matches_then_kill(const std::string& what, const point &p);
     bool laser_anim_exists(void);
     bool laser_fire(Thingp item, Thingp target);
     bool location_check();
@@ -277,6 +279,8 @@ public:
     bool move_to_check(const point&, const bool escaping);
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
+    bool on_fire_at(Thingp hitter);
+    bool on_tick(void);
     bool open_door(Thingp door);
     bool particle_anim_exists(void);
     bool place(const std::string& what, const point &p);
@@ -305,6 +309,7 @@ public:
     bool try_to_jump_away_from_player(void);
     bool try_to_jump_towards_player(void);
     bool use(Thingp w);
+    bool wield(Thingp w);
     bool will_avoid_threat(const Thingp it);
     bool will_avoid_threat(const fpoint &p);
     bool will_avoid_threat(const point &p);
@@ -318,15 +323,16 @@ public:
     const Dice& get_on_idle_dice(void) const;
     const Dice& get_resurrect_dice(void) const;
     const ThingId& get_immediate_minion_owner_id (void) const;
-    const ThingId& get_immediate_spawned_owner_id (void) const;
     const ThingId& get_immediate_owner_id (void) const;
+    const ThingId& get_immediate_spawned_owner_id (void) const;
     const ThingId& set_minion_owner_id (const ThingId &v);
-    const ThingId& set_spawned_owner_id (const ThingId &v);
     const ThingId& set_owner_id (const ThingId &v);
+    const ThingId& set_spawned_owner_id (const ThingId &v);
     const Tpp tp(void) const;
     const Tpp tp_or_update(void);
     const fpoint &get_interpolated_mid_at (void) const;
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
+    const std::string get_danger_level_str(Thingp);
     const std::string& get_damage_bite_dice_str(void) const;
     const std::string& get_damage_melee_dice_str(void) const;
     const std::string& get_gold_value_dice_str(void) const;
@@ -343,12 +349,13 @@ public:
     const std::string& on_bite_do(void) const;
     const std::string& on_born_do(void) const;
     const std::string& on_death_do(void) const;
+    const std::string& on_fire_at_do(void) const;
     const std::string& on_hit_do(void) const;
-    const std::string& on_miss_do(void) const;
-    const std::string& on_tick_do(void) const;
     const std::string& on_lifespan_do(void) const;
+    const std::string& on_miss_do(void) const;
     const std::string& on_move_do(void) const;
     const std::string& on_open_do(void) const;
+    const std::string& on_tick_do(void) const;
     const std::string& on_use_do(void) const;
     const std::string& short_text_name(void) const;
     const std::string& spawn_on_shoved(void) const;
@@ -384,6 +391,7 @@ public:
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
+    int ai_vision_distance(void) const;
     int attack(void) const;
     int attack_eater(void) const;
     int attack_humanoid(void) const;
@@ -487,6 +495,7 @@ public:
     int get_damage_max(void);
     int get_damage_melee(void) const;
     int get_damage_min(void);
+    int get_danger_level(Thingp);
     int get_danger_level(void);
     int get_gold(void) const;
     int get_gold_value(void) const;
@@ -619,10 +628,9 @@ public:
     int incr_throw_distance(void);
     int incr_tick_rate_tenths(int);
     int incr_tick_rate_tenths(void);
-    int item_slot_charge_count(const uint32_t slot);
-    int item_slot_count(const uint32_t slot);
     int is_able_to_change_levels(void) const;
     int is_able_to_fall(void) const;
+    int is_able_to_fire_at(void) const;
     int is_able_to_see_through_doors(void) const;
     int is_able_to_walk_through_walls(void) const;
     int is_acid(void) const;
@@ -666,6 +674,7 @@ public:
     int is_door(void) const;
     int is_droppable(void) const;
     int is_ethereal(void) const;
+    int is_ethereal_minion_generator(void) const;
     int is_explosion(void) const;
     int is_extreme_hazard(void) const;
     int is_fearless(void) const;
@@ -730,14 +739,6 @@ public:
     int is_ripple(void) const;
     int is_rock(void) const;
     int is_rrr1(void) const;
-    int is_rrr2(void) const;
-    int is_rrr3(void) const;
-    int is_rrr4(void) const;
-    int is_rrr5(void) const;
-    int is_rrr6(void) const;
-    int is_rrr7(void) const;
-    int is_rrr8(void) const;
-    int is_rrr9(void) const;
     int is_rrr10(void) const;
     int is_rrr11(void) const;
     int is_rrr12(void) const;
@@ -748,6 +749,7 @@ public:
     int is_rrr17(void) const;
     int is_rrr18(void) const;
     int is_rrr19(void) const;
+    int is_rrr2(void) const;
     int is_rrr20(void) const;
     int is_rrr21(void) const;
     int is_rrr22(void) const;
@@ -758,6 +760,7 @@ public:
     int is_rrr27(void) const;
     int is_rrr28(void) const;
     int is_rrr29(void) const;
+    int is_rrr3(void) const;
     int is_rrr30(void) const;
     int is_rrr31(void) const;
     int is_rrr32(void) const;
@@ -768,6 +771,7 @@ public:
     int is_rrr37(void) const;
     int is_rrr38(void) const;
     int is_rrr39(void) const;
+    int is_rrr4(void) const;
     int is_rrr40(void) const;
     int is_rrr41(void) const;
     int is_rrr42(void) const;
@@ -778,6 +782,7 @@ public:
     int is_rrr47(void) const;
     int is_rrr48(void) const;
     int is_rrr49(void) const;
+    int is_rrr5(void) const;
     int is_rrr50(void) const;
     int is_rrr51(void) const;
     int is_rrr52(void) const;
@@ -788,6 +793,7 @@ public:
     int is_rrr57(void) const;
     int is_rrr58(void) const;
     int is_rrr59(void) const;
+    int is_rrr6(void) const;
     int is_rrr60(void) const;
     int is_rrr61(void) const;
     int is_rrr62(void) const;
@@ -798,6 +804,7 @@ public:
     int is_rrr67(void) const;
     int is_rrr68(void) const;
     int is_rrr69(void) const;
+    int is_rrr7(void) const;
     int is_rrr70(void) const;
     int is_rrr71(void) const;
     int is_rrr72(void) const;
@@ -808,6 +815,7 @@ public:
     int is_rrr77(void) const;
     int is_rrr78(void) const;
     int is_rrr79(void) const;
+    int is_rrr8(void) const;
     int is_rrr80(void) const;
     int is_rrr81(void) const;
     int is_rrr82(void) const;
@@ -818,6 +826,7 @@ public:
     int is_rrr87(void) const;
     int is_rrr88(void) const;
     int is_rrr89(void) const;
+    int is_rrr9(void) const;
     int is_rrr90(void) const;
     int is_rrr91(void) const;
     int is_rrr92(void) const;
@@ -826,9 +835,6 @@ public:
     int is_rrr95(void) const;
     int is_rrr96(void) const;
     int is_rrr97(void) const;
-    int is_rrr98(void) const;
-    int is_rrr99(void) const;
-    int is_ethereal_minion_generator(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;
@@ -861,6 +867,8 @@ public:
     int is_weapon_wielder(void) const;
     int item_count_excluding_charges(Tpp item);
     int item_count_including_charges(Tpp item);
+    int item_slot_charge_count(const uint32_t slot);
+    int item_slot_count(const uint32_t slot);
     int light_strength(void);
     int minion_leash_distance(void) const;
     int minion_limit(void) const;
@@ -908,7 +916,6 @@ public:
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
-    void get_light_strength_including_torch_effect(int &light_strength);
     point dir_to_direction() const;
     point get_random_scent_target(void);
     point get_where_i_dropped_an_item_last(void) const;
@@ -918,11 +925,10 @@ public:
     std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_bag (void);
     std::list<Thingp> anything_to_carry(void);
     std::size_t get_light_count (void) const;
-    std::string get_danger_level(Thingp);
     std::string get_msg(void) const;
     std::string short_text_The(void) const;
-    std::string short_text_capitalized(void) const;
     std::string short_text_a_or_an(void) const;
+    std::string short_text_capitalized(void) const;
     std::string short_text_the(void) const;
     std::string text_The(void) const;
     std::string text_a_or_an(void) const;
@@ -1152,6 +1158,7 @@ public:
     void fall(float fall_height, timestamp_t ms);
     void fire_tick();
     void gc(void);
+    void get_light_strength_including_torch_effect(int &light_strength);
     void get_tiles(void);
     void health_boost(int v);
     void hide();
@@ -1190,15 +1197,14 @@ public:
     void msg(const std::string&);
     void new_age_map(void);
     void new_dmap_scent(void);
-    void new_light(point offset, int strength, color col, int fbo);
     void new_light(point offset, int strength);
+    void new_light(point offset, int strength, color col, int fbo);
     void new_monst(void);
     void on_bite(void);
     void on_born(void);
     void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
-    void on_miss(Thingp hitter);
-    bool on_tick(void);
     void on_lifespan(Thingp hitter);
+    void on_miss(Thingp hitter);
     void on_move(void);
     void on_open(void);
     void on_use(Thingp what);
@@ -1207,8 +1213,8 @@ public:
     void reinit(void);
     void remove_all_references();
     void remove_minion_owner(void);
-    void remove_spawner_owner(void);
     void remove_owner(void);
+    void remove_spawner_owner(void);
     void rest();
     void resurrect_tick();
     void set_bounce_count(int);
@@ -1220,9 +1226,9 @@ public:
     void set_interpolated_mid_at (fpoint v);
     void set_lunge_to(fpoint);
     void set_minion_owner(Thingp minion_owner);
-    void set_spawned_owner(Thingp spawner_owner);
     void set_msg(const std::string&);
     void set_owner(Thingp owner);
+    void set_spawned_owner(Thingp spawner_owner);
     void set_submerged_offset(int);
     void set_wobble(float);
     void sheath(void);
@@ -1256,7 +1262,6 @@ public:
     void weapon_set_use_anim(Thingp gfx_anim_attack);
     void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
     void weapon_sheath(void);
-    bool wield(Thingp w);
     void wobble(float wobble);
 } Thing;
 

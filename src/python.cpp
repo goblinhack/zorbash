@@ -1545,8 +1545,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr95)
     TP_SET_DECL(is_rrr96)
     TP_SET_DECL(is_rrr97)
-    TP_SET_DECL(is_rrr98)
-    TP_SET_DECL(is_rrr99)
+    TP_SET_DECL(is_able_to_fire_at)
+    TP_SET_DECL(ai_vision_distance)
     TP_SET_DECL(is_ethereal_minion_generator)
     TP_SET_DECL(is_secret_door)
     TP_SET_DECL(is_sewer_wall)
@@ -1603,6 +1603,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(on_idle_dice)
     TP_SET_DECL(on_lifespan_do)
     TP_SET_DECL(on_miss_do)
+    TP_SET_DECL(on_fire_at_do)
     TP_SET_DECL(on_tick_do)
     TP_SET_DECL(on_move_do)
     TP_SET_DECL(on_open_do)
@@ -1941,8 +1942,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr95",                          (PyCFunction)thing_is_rrr95,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr96",                          (PyCFunction)thing_is_rrr96,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr97",                          (PyCFunction)thing_is_rrr97,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr98",                          (PyCFunction)thing_is_rrr98,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr99",                          (PyCFunction)thing_is_rrr99,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_able_to_fire_at",                          (PyCFunction)thing_is_able_to_fire_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_ai_vision_distance",                          (PyCFunction)thing_ai_vision_distance,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_ethereal_minion_generator",                         (PyCFunction)thing_is_ethereal_minion_generator,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_secret_door",                    (PyCFunction)thing_is_secret_door,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_sewer_wall",                     (PyCFunction)thing_is_sewer_wall,                       METH_VARARGS | METH_KEYWORDS, "thing api"},

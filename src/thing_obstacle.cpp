@@ -251,4 +251,3 @@ bool Thing::ai_obstacle (Thingp it)
 
     return false;
 }
-

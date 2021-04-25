@@ -2,10 +2,7 @@
 NAME=zorbash-game
 OBJDIR=.o
 
-#    $(OBJDIR)/thing_fire_at.o               \
-
 GAME_OBJECTS=				    \
-    $(OBJDIR)/vision.o                      \
     $(OBJDIR)/ascii.o                       \
     $(OBJDIR)/ascii_box.o                   \
     $(OBJDIR)/audio.o                       \
@@ -189,6 +186,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_fall.o                  \
     $(OBJDIR)/thing_fini.o                  \
     $(OBJDIR)/thing_fire.o                  \
+    $(OBJDIR)/thing_fire_at.o               \
     $(OBJDIR)/thing_gc.o                    \
     $(OBJDIR)/thing_health.o                \
     $(OBJDIR)/thing_hide.o                  \
@@ -250,6 +248,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_update.o                \
     $(OBJDIR)/thing_use.o                   \
     $(OBJDIR)/thing_visible.o               \
+    $(OBJDIR)/thing_vision.o                \
     $(OBJDIR)/thing_water.o                 \
     $(OBJDIR)/thing_weapon.o                \
     $(OBJDIR)/thing_wobble.o                \

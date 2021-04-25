@@ -674,7 +674,7 @@ void Game::wid_thing_info_add_danger_level (WidPopup *w, Thingp t)
     }
 
     if (t->is_alive_monst()) {
-        std::string danger_level = player->get_danger_level(t);
+        const std::string danger_level = player->get_danger_level_str(t);
         w->log(" ");
         w->log(danger_level);
 
