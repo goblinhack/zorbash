@@ -8,6 +8,8 @@ def on_use(owner, item, target, x, y):
     zx.tp_spawn_at(target, "explosion_mushroom")
     zx.tp_spawn_radius_range(owner, item, target, "wand_descent_effect")
 
+    zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "lightning_b", x, y)
+
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_bag_item_height(2)

@@ -85,10 +85,10 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          lifespan                  */ in >> bits(my.t->lifespan);
     /* int          light_quality             */ in >> bits(my.t->light_quality);
     /* int          light_strength            */ in >> bits(my.t->light_strength);
-    /* int          stat_attack           */ in >> bits(my.t->stat_attack);
-    /* int          stat_constitution     */ in >> bits(my.t->stat_constitution);
-    /* int          stat_defence          */ in >> bits(my.t->stat_defence);
-    /* int          stat_strength         */ in >> bits(my.t->stat_strength);
+    /* int          stat_attack               */ in >> bits(my.t->stat_attack);
+    /* int          stat_constitution         */ in >> bits(my.t->stat_constitution);
+    /* int          stat_defence              */ in >> bits(my.t->stat_defence);
+    /* int          stat_strength             */ in >> bits(my.t->stat_strength);
     /* int          owned_count               */ in >> bits(my.t->owned_count);
     /* int          minion_count              */ in >> bits(my.t->minion_count);
     /* int          charge_count              */ in >> bits(my.t->charge_count);
@@ -530,18 +530,18 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
         return in;
     }
 
-    /* float              game_pix_scale_height        */ in >> bits(my.t.game_pix_scale_height             );
-    /* float              game_pix_scale_width         */ in >> bits(my.t.game_pix_scale_width              );
-    /* float              game_pix_zoom                */ in >> bits(my.t.game_pix_zoom                     );
+    /* float              game_pix_scale_height        */ in >> bits(my.t.game_pix_scale_height        );
+    /* float              game_pix_scale_width         */ in >> bits(my.t.game_pix_scale_width         );
+    /* float              game_pix_zoom                */ in >> bits(my.t.game_pix_zoom                );
     /* float              one_pixel_height             */ in >> bits(my.t.one_pixel_height             );
     /* float              one_pixel_width              */ in >> bits(my.t.one_pixel_width              );
     /* float              tile_pix_height              */ in >> bits(my.t.tile_pix_height              );
     /* float              tile_pix_width               */ in >> bits(my.t.tile_pix_width               );
     /* float              tile_pixel_height            */ in >> bits(my.t.tile_pixel_height            );
     /* float              tile_pixel_width             */ in >> bits(my.t.tile_pixel_width             );
-    /* float              ui_pix_scale_height          */ in >> bits(my.t.ui_pix_scale_height             );
-    /* float              ui_pix_scale_width           */ in >> bits(my.t.ui_pix_scale_width              );
-    /* float              ui_pix_zoom                  */ in >> bits(my.t.ui_pix_zoom                     );
+    /* float              ui_pix_scale_height          */ in >> bits(my.t.ui_pix_scale_height          );
+    /* float              ui_pix_scale_width           */ in >> bits(my.t.ui_pix_scale_width           );
+    /* float              ui_pix_zoom                  */ in >> bits(my.t.ui_pix_zoom                  );
     /* float              video_w_h_ratio              */ in >> bits(my.t.video_w_h_ratio              );
     /* int                debug_mode                   */ in >> bits(my.t.debug_mode                   );
     /* int                fps_counter                  */ in >> bits(my.t.fps_counter                  );
@@ -557,12 +557,12 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* int                tile_width                   */ in >> bits(my.t.tile_width                   );
     /* int32_t            config_pix_height            */ in >> bits(my.t.config_pix_height            );
     /* int32_t            config_pix_width             */ in >> bits(my.t.config_pix_width             );
-    /* int32_t            game_pix_height              */ in >> bits(my.t.game_pix_height             );
-    /* int32_t            game_pix_width               */ in >> bits(my.t.game_pix_width              );
-    /* int32_t            ui_pix_height                */ in >> bits(my.t.ui_pix_height             );
-    /* int32_t            ui_pix_width                 */ in >> bits(my.t.ui_pix_width              );
-    /* int32_t            window_pix_height            */ in >> bits(my.t.window_pix_height             );
-    /* int32_t            window_pix_width             */ in >> bits(my.t.window_pix_width              );
+    /* int32_t            game_pix_height              */ in >> bits(my.t.game_pix_height              );
+    /* int32_t            game_pix_width               */ in >> bits(my.t.game_pix_width               );
+    /* int32_t            ui_pix_height                */ in >> bits(my.t.ui_pix_height                );
+    /* int32_t            ui_pix_width                 */ in >> bits(my.t.ui_pix_width                 );
+    /* int32_t            window_pix_height            */ in >> bits(my.t.window_pix_height            );
+    /* int32_t            window_pix_width             */ in >> bits(my.t.window_pix_width             );
     /* uint16_t           ascii_gl_height              */ in >> bits(my.t.ascii_gl_height              );
     /* uint16_t           ascii_gl_width               */ in >> bits(my.t.ascii_gl_width               );
     /* uint32_t           key_action0                  */ in >> bits(my.t.key_action0                  );
@@ -600,7 +600,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_unused4                  */ in >> bits(my.t.key_unused4                  );
     /* uint32_t           key_unused5                  */ in >> bits(my.t.key_unused5                  );
     /* uint32_t           key_use                      */ in >> bits(my.t.key_use                      );
-    /* uint32_t           key_wait_or_collect          */ in >> bits(my.t.key_wait_or_collect                     );
+    /* uint32_t           key_wait_or_collect          */ in >> bits(my.t.key_wait_or_collect          );
     /* uint32_t           key_zoom_in                  */ in >> bits(my.t.key_zoom_in                  );
     /* uint32_t           key_zoom_out                 */ in >> bits(my.t.key_zoom_out                 );
     /* uint32_t           music_volume                 */ in >> bits(my.t.music_volume                 );

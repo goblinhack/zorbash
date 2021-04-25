@@ -2248,7 +2248,7 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "CHANNEL_IMPACT", CHANNEL_IMPACT);
     PyModule_AddIntConstant(zx_mod, "CHANNEL_WEAPON", CHANNEL_WEAPON);
     PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST", CHANNEL_MONST);
-    PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST2", CHANNEL_MONST2);
+    PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST_DEATH", CHANNEL_MONST_DEATH);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);

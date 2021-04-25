@@ -5,17 +5,17 @@ import random
 def on_bite(me, x, y):
     sound = "growl{}".format(random.randint(1, 10))
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, sound, x, y):
-        zx.sound_play_channel_at(zx.CHANNEL_MONST2, sound, x, y)
+        zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, sound, x, y)
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     sound = "hiss{}".format(random.randint(1, 10))
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, sound, x, y):
-        zx.sound_play_channel_at(zx.CHANNEL_MONST2, sound, x, y)
+        zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, sound, x, y)
 
 def on_miss(me, hitter, x, y):
     sound = "hiss{}".format(random.randint(1, 10))
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, sound, x, y):
-        zx.sound_play_channel_at(zx.CHANNEL_MONST2, sound, x, y)
+        zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, sound, x, y)
 
 def on_death(me, x, y):
     zx.sound_play("squeaky_toy")

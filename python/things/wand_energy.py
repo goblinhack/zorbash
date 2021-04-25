@@ -17,6 +17,8 @@ def on_use(owner, item, target, x, y):
                 zx.thing_is_brazier(thing):
             zx.thing_hit(owner, item, thing)
 
+    zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "lightning_a", x, y)
+
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_bag_item_height(2)

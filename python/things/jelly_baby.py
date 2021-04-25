@@ -4,7 +4,7 @@ import random
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     if not zx.sound_play_channel_at(zx.CHANNEL_MONST, "squelch", x, y):
-        zx.sound_play_channel_at(zx.CHANNEL_MONST2, "squelch", x, y)
+        zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, "squelch", x, y)
 
 def on_death(me, x, y):
     zx.tp_spawn_at(me, "pink_splatter")

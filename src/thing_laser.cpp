@@ -87,7 +87,7 @@ bool Thing::laser_fire (Thingp item, Thingp target)
         return false;
     }
 
-    level->new_laser(item->id, start, end, 500);
+    level->new_laser(item->id, start, end, 150);
 
     used(item, target, true /* remove_after_use */);
 
@@ -129,7 +129,7 @@ bool Thing::laser_fire_monst (const std::string &laser, Thingp target)
         return false;
     }
 
-    level->new_laser(item->id, start, end, 500);
+    level->new_laser(item->id, start, end, 150);
 
     on_use(item, target);
 
