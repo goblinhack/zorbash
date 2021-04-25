@@ -31,6 +31,10 @@ _
     };
 
     auto tpp = tp_find(what);
+    if (!tpp) {
+        err("Cannot find %s to spawn", what.c_str());
+        return false;
+    }
 
     //
     // Don't spawn too many monsts
@@ -108,6 +112,10 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     };
 
     auto tpp = tp_find(what);
+    if (!tpp) {
+        err("Cannot find %s to spawn", what.c_str());
+        return false;
+    }
 
     //
     // Don't spawn too many monsts
@@ -169,6 +177,20 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
                                 uint32_t radius_min, uint32_t radius_max)
 {_
     auto tpp = tp_find(what);
+    if (!tpp) {
+        err("Cannot find %s to spawn", what.c_str());
+        return false;
+    }
+
+    if (!target) {
+        err("No target to spawn %s", what.c_str());
+        return false;
+    }
+
+    if (!item) {
+        err("No item to spawn %s", what.c_str());
+        return false;
+    }
 
     if (!radius_min && !radius_max) {
         radius_min = item->tp()->blast_min_radius();

@@ -94,8 +94,8 @@ void Game::dead_select (const char *reason)
     game->level->cursor->hide();
 
     auto h = TERM_HEIGHT / 2;
-    point tl = make_point(0, h);
-    point br = make_point(UI_WID_POPUP_WIDTH_WIDE - 1, TERM_HEIGHT - 2);
+    point tl = make_point(0, h + 1);
+    point br = make_point(UI_WID_POPUP_WIDTH_WIDE - 1, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 1;
 
     wid_dead_window = new WidPopup("Game dead",
@@ -128,11 +128,9 @@ void Game::dead_select (const char *reason)
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
+    wid_dead_window->log("Killed...");
     wid_dead_window->log(" ");
-    wid_dead_window->log(" ");
-    wid_dead_window->log(" ");
-    wid_dead_window->log(" ");
-    wid_dead_window->log(std::string("Killed ") + reason);
+    wid_dead_window->log(reason);
 
     {_
         auto p = wid_dead_window->wid_text_area->wid_text_area;

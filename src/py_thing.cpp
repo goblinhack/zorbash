@@ -293,10 +293,57 @@ PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;	
     }	
 
-    target->log("is hit by %s owned by %s", 
-                item->to_string().c_str(), owner->to_string().c_str());
+    owner->log("hit with %s target %s", item->to_string().c_str(), target->to_string().c_str());
 
     if (target->is_hit_by(item)) {
+        Py_RETURN_TRUE;	
+    } else {
+        Py_RETURN_FALSE;	
+    }
+}
+
+PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
+{_	
+    uint32_t owner_id = 0;	
+    char *item = nullptr;
+    uint32_t target_id = 0;	
+    static char *kwlist[] = {(char*)"owner", (char*)"item", (char*)"target", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &target_id)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!owner_id) {	
+        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp owner = game->level->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!item) {	
+        ERR("%s: no item thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!target_id) {	
+        ERR("%s: no target thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp target = game->level->thing_find(target_id);	
+    if (!target) {	
+        ERR("%s: cannot find target thing ID %u", __FUNCTION__, target_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    owner->log("fire %s at %s", item, target->to_string().c_str());
+
+    if (owner->laser_fire_monst(std::string(item), target)) {
         Py_RETURN_TRUE;	
     } else {
         Py_RETURN_FALSE;	
@@ -550,7 +597,7 @@ THING_BODY_GET_BOOL(thing_is_rrr93, is_rrr93)
 THING_BODY_GET_BOOL(thing_is_rrr94, is_rrr94)
 THING_BODY_GET_BOOL(thing_is_rrr95, is_rrr95)
 THING_BODY_GET_BOOL(thing_is_rrr96, is_rrr96)
-THING_BODY_GET_BOOL(thing_is_rrr97, is_rrr97)
+THING_BODY_GET_BOOL(thing_is_laser, is_laser)
 THING_BODY_GET_BOOL(thing_is_able_to_fire_at, is_able_to_fire_at)
 THING_BODY_GET_BOOL(thing_ai_vision_distance, ai_vision_distance)
 THING_BODY_GET_BOOL(thing_is_ethereal_minion_generator, is_ethereal_minion_generator)

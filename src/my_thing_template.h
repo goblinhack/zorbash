@@ -317,7 +317,7 @@ private:
     int _is_rrr94 {};
     int _is_rrr95 {};
     int _is_rrr96 {};
-    int _is_rrr97 {};
+    int _is_laser {};
     int _is_able_to_fire_at {};
     int _ai_vision_distance {};
     int _is_ethereal_minion_generator {};
@@ -774,7 +774,7 @@ public:
     int is_rrr94(void) const;
     int is_rrr95(void) const;
     int is_rrr96(void) const;
-    int is_rrr97(void) const;
+    int is_laser(void) const;
     int is_able_to_fire_at(void) const;
     int ai_vision_distance(void) const;
     int is_ethereal_minion_generator(void) const;
@@ -1107,7 +1107,7 @@ public:
     void set_is_rrr94(int);
     void set_is_rrr95(int);
     void set_is_rrr96(int);
-    void set_is_rrr97(int);
+    void set_is_laser(int);
     void set_is_able_to_fire_at(int);
     void set_ai_vision_distance(int);
     void set_is_ethereal_minion_generator(int);

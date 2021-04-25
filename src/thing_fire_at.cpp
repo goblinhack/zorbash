@@ -136,16 +136,14 @@ bool Thing::fire_at_target (void)
         int x = mid_at.x + dx;
         int y = mid_at.y + dy;
 
-        FOR_ALL_COLLISION_THINGS(level, it, x, y) {
-            if (ai_obstacle(it)) {
-                continue;
-            }
-
+        FOR_ALL_ACTIVE_THINGS(level, it, x, y) {
             if (this == it) {
                 continue;
             }
 
-            thing_possible_hit_add(this, it);
+            if (it->is_alive_monst() || it->is_player()) {
+                thing_possible_hit_add(this, it);
+            }
         }
         FOR_ALL_THINGS_END();
     }

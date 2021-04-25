@@ -255,7 +255,7 @@ PyObject *thing_is_rrr93(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr94(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr95(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr96(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr97(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_laser(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_vision_distance(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal_minion_generator(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -294,5 +294,6 @@ PyObject *thing_is_weapon_wielder(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_get_all(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_coords(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #endif
