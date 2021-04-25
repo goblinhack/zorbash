@@ -292,8 +292,8 @@ int Thing::is_rrr94(void) const                                         {_ retur
 int Thing::is_rrr95(void) const                                         {_ return (tp()->is_rrr95()); }
 int Thing::is_rrr96(void) const                                         {_ return (tp()->is_rrr96()); }
 int Thing::is_rrr97(void) const                                         {_ return (tp()->is_rrr97()); }
-int Thing::is_rrr98(void) const                                         {_ return (tp()->is_rrr98()); }
-int Thing::is_rrr99(void) const                                         {_ return (tp()->is_rrr99()); }
+int Thing::is_able_to_fire_at(void) const                                         {_ return (tp()->is_able_to_fire_at()); }
+int Thing::ai_vision_distance(void) const                                         {_ return (tp()->ai_vision_distance()); }
 int Thing::is_ethereal_minion_generator(void) const                                        {_ return (tp()->is_ethereal_minion_generator()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
@@ -4234,6 +4234,7 @@ const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do(
 const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
 const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
 const std::string& Thing::on_miss_do (void) const {_ return (tp()->on_miss_do()); }
+const std::string& Thing::on_fire_at_do (void) const {_ return (tp()->on_fire_at_do()); }
 const std::string& Thing::on_tick_do (void) const {_ return (tp()->on_tick_do()); }
 const std::string& Thing::on_lifespan_do (void) const {_ return (tp()->on_lifespan_do()); }
 const std::string& Thing::on_bite_do (void) const {_ return (tp()->on_bite_do()); }

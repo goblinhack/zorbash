@@ -106,7 +106,7 @@ int Thing::is_dangerous(Thingp it)
     return b > a;
 }
 
-std::string Thing::get_danger_level(Thingp it)
+const std::string Thing::get_danger_level_str(Thingp it)
 {
     auto a = get_danger_level();
     auto b = it->get_danger_level();
@@ -123,4 +123,11 @@ std::string Thing::get_danger_level(Thingp it)
     } else {
         return "%%fg=green$Mostly harmless";
     }
+}
+
+int Thing::get_danger_level(Thingp it)
+{
+    int a = get_danger_level();
+    int b = it->get_danger_level();
+    return b - a;
 }

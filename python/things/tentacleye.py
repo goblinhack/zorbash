@@ -25,9 +25,16 @@ def on_tick(me, x, y): # Return True on doing an action
     zx.topcon("tic")
     return False
 
+def on_fire_at(me, target, x, y): # Return True on doing an action
+    zx.topcon("me     {} {}".format(zx.thing_get_name(me), zx.thing_get_health(me)))
+    zx.topcon("target {} {}".format(zx.thing_get_name(target), zx.thing_get_health(target)))
+    return False
+
+
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_avoid_distance(4)
+    x.set_ai_vision_distance(8)
     x.set_ai_scent_distance(14)
     x.set_attack_lunge(True)
     x.set_attack_meat(True)
@@ -49,6 +56,7 @@ def tp_init(name, text_name):
     x.set_health_initial_dice("100+10d8")
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(False)
+    x.set_is_able_to_fire_at(True)
     x.set_is_active(True)
     x.set_is_attackable_by_player(True)
     x.set_is_described_when_hovering_over(True)
@@ -75,6 +83,7 @@ def tp_init(name, text_name):
     x.set_on_death_do("tentacleye.on_death()")
     x.set_on_hit_do("tentacleye.on_hit()")
     x.set_on_miss_do("tentacleye.on_miss()")
+    x.set_on_fire_at_do("tentacleye.on_fire_at()")
     x.set_on_tick_do("tentacleye.on_tick()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stat_attack(10) # 10, means no bonus

@@ -65,6 +65,7 @@ const std::string& Tp::on_death_do(void) const           { return _on_death_do; 
 const std::string& Tp::on_hit_do(void) const             { return _on_hit_do; }
 const std::string& Tp::on_lifespan_do(void) const        { return _on_lifespan_do; }
 const std::string& Tp::on_miss_do(void) const            { return _on_miss_do; }
+const std::string& Tp::on_fire_at_do(void) const         { return _on_fire_at_do; }
 const std::string& Tp::on_tick_do(void) const            { return _on_tick_do; }
 const std::string& Tp::on_move_do(void) const            { return _on_move_do; }
 const std::string& Tp::on_open_do(void) const            { return _on_open_do; }
@@ -342,8 +343,8 @@ int Tp::is_rrr94(void) const                                         { return _i
 int Tp::is_rrr95(void) const                                         { return _is_rrr95; }
 int Tp::is_rrr96(void) const                                         { return _is_rrr96; }
 int Tp::is_rrr97(void) const                                         { return _is_rrr97; }
-int Tp::is_rrr98(void) const                                         { return _is_rrr98; }
-int Tp::is_rrr99(void) const                                         { return _is_rrr99; }
+int Tp::is_able_to_fire_at(void) const                                         { return _is_able_to_fire_at; }
+int Tp::ai_vision_distance(void) const                                         { return _ai_vision_distance; }
 int Tp::is_ethereal_minion_generator(void) const                                        { return _is_ethereal_minion_generator; }
 int Tp::is_secret_door(void) const                                   { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
@@ -668,8 +669,8 @@ void Tp::set_is_rrr94(int v)                                         { _is_rrr94
 void Tp::set_is_rrr95(int v)                                         { _is_rrr95 = v; }
 void Tp::set_is_rrr96(int v)                                         { _is_rrr96 = v; }
 void Tp::set_is_rrr97(int v)                                         { _is_rrr97 = v; }
-void Tp::set_is_rrr98(int v)                                         { _is_rrr98 = v; }
-void Tp::set_is_rrr99(int v)                                         { _is_rrr99 = v; }
+void Tp::set_is_able_to_fire_at(int v)                                         { _is_able_to_fire_at = v; }
+void Tp::set_ai_vision_distance(int v)                                         { _ai_vision_distance = v; }
 void Tp::set_is_ethereal_minion_generator(int v)                                         { _is_ethereal_minion_generator = v; }
 void Tp::set_is_secret_door(int v)                                   { _is_secret_door = v; }
 void Tp::set_is_sewer_wall(int v)                                    { _is_sewer_wall = v; }
@@ -751,6 +752,7 @@ void Tp::set_on_death_do(const std::string &v)           { _on_death_do = v; }
 void Tp::set_on_hit_do(const std::string &v)             { _on_hit_do = v; }
 void Tp::set_on_lifespan_do(const std::string &v)        { _on_lifespan_do = v; }
 void Tp::set_on_miss_do(const std::string &v)            { _on_miss_do = v; }
+void Tp::set_on_fire_at_do(const std::string &v)         { _on_fire_at_do = v; }
 void Tp::set_on_tick_do(const std::string &v)            { _on_tick_do = v; }
 void Tp::set_on_move_do(const std::string &v)            { _on_move_do = v; }
 void Tp::set_on_open_do(const std::string &v)            { _on_open_do = v; }

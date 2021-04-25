@@ -318,8 +318,8 @@ private:
     int _is_rrr95 {};
     int _is_rrr96 {};
     int _is_rrr97 {};
-    int _is_rrr98 {};
-    int _is_rrr99 {};
+    int _is_able_to_fire_at {};
+    int _ai_vision_distance {};
     int _is_ethereal_minion_generator {};
     int _is_secret_door {};
     int _is_sewer_wall {};
@@ -403,6 +403,7 @@ private:
     std::string _on_use_do;
     std::string _on_hit_do;
     std::string _on_miss_do;
+    std::string _on_fire_at_do;
     std::string _on_tick_do;
     std::string _on_lifespan_do;
     std::string _on_bite_do;
@@ -497,6 +498,7 @@ public:
     const std::string& on_born_do(void) const;
     const std::string& on_lifespan_do(void) const;
     const std::string& on_miss_do(void) const;
+    const std::string& on_fire_at_do(void) const;
     const std::string& on_tick_do(void) const;
     const std::string& on_move_do(void) const;
     const std::string& resurrect_dice_str(void) const;
@@ -773,8 +775,8 @@ public:
     int is_rrr95(void) const;
     int is_rrr96(void) const;
     int is_rrr97(void) const;
-    int is_rrr98(void) const;
-    int is_rrr99(void) const;
+    int is_able_to_fire_at(void) const;
+    int ai_vision_distance(void) const;
     int is_ethereal_minion_generator(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
@@ -1106,8 +1108,8 @@ public:
     void set_is_rrr95(int);
     void set_is_rrr96(int);
     void set_is_rrr97(int);
-    void set_is_rrr98(int);
-    void set_is_rrr99(int);
+    void set_is_able_to_fire_at(int);
+    void set_ai_vision_distance(int);
     void set_is_ethereal_minion_generator(int);
     void set_is_secret_door(int);
     void set_is_sewer_wall(int);
@@ -1162,6 +1164,7 @@ public:
     void set_on_idle_dice(const std::string &);
     void set_on_lifespan_do(const std::string &);
     void set_on_miss_do(const std::string &);
+    void set_on_fire_at_do(const std::string &);
     void set_on_tick_do(const std::string &);
     void set_on_move_do(const std::string &);
     void set_on_open_do(const std::string &);

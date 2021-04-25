@@ -242,8 +242,8 @@ bool Thing::matches (const std::string& what)
     if (is_rrr95() &&                                         (what == "is_rrr95"))                                          { return true; }
     if (is_rrr96() &&                                         (what == "is_rrr96"))                                          { return true; }
     if (is_rrr97() &&                                         (what == "is_rrr97"))                                          { return true; }
-    if (is_rrr98() &&                                         (what == "is_rrr98"))                                          { return true; }
-    if (is_rrr99() &&                                         (what == "is_rrr99"))                                          { return true; }
+    if (is_able_to_fire_at() &&                                         (what == "is_able_to_fire_at"))                                          { return true; }
+    if (ai_vision_distance() &&                                         (what == "ai_vision_distance"))                                          { return true; }
     if (is_ethereal_minion_generator() &&                                        (what == "is_ethereal_minion_generator"))                                          { return true; }
     if (is_secret_door() &&                                   (what == "is_secret_door"))                                   { return true; }
     if (is_sewer_wall() &&                                    (what == "is_sewer_wall"))                                    { return true; }
