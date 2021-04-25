@@ -93,3 +93,47 @@ bool Thing::laser_fire (Thingp item, Thingp target)
 
     return true;
 }
+
+bool Thing::laser_fire_monst (const std::string &laser, Thingp target)
+{_
+    auto item = level->thing_new(laser, mid_at);
+    if (!item) {
+        return false;
+    }
+
+    item->set_owner(this);
+
+    log("Firing laser with: %s at %s", item->to_string().c_str(),
+        target->to_string().c_str());
+
+    if (item->laser_name().empty()) {
+        if (is_player()) {
+            TOPCON("I don't know how to fire %s.", item->text_the().c_str());
+            game->tick_begin("player tried to use something they could not");
+        }
+        return false;
+    }
+
+    if (is_player()) {
+        game->tick_begin("player fired laser");
+    }
+
+    auto start = last_blit_at;
+    auto end = target->last_blit_at;
+
+    if (!start.x && !start.y) {
+        return false;
+    }
+
+    if (!end.x && !end.y) {
+        return false;
+    }
+
+    level->new_laser(item->id, start, end, 500);
+
+    on_use(item, target);
+
+    item->dead("fired");
+
+    return true;
+}

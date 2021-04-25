@@ -116,6 +116,21 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           bool bite,
                           int damage)
 {_
+    if (!hitter) {
+        err("No hitter");
+        return false;
+    }
+
+    if (!real_hitter) {
+        err("No real hitter");
+        return false;
+    }
+
+    if (!real_hitter->monstp) {
+        real_hitter->err("Has no monstp");
+        return false;
+    }
+
     hitter->log("Hit for damage %d", damage);
 
     auto delta = mid_at - hitter->mid_at;

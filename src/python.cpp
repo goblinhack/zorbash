@@ -1544,7 +1544,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr94)
     TP_SET_DECL(is_rrr95)
     TP_SET_DECL(is_rrr96)
-    TP_SET_DECL(is_rrr97)
+    TP_SET_DECL(is_laser)
     TP_SET_DECL(is_able_to_fire_at)
     TP_SET_DECL(ai_vision_distance)
     TP_SET_DECL(is_ethereal_minion_generator)
@@ -1941,7 +1941,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr94",                          (PyCFunction)thing_is_rrr94,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr95",                          (PyCFunction)thing_is_rrr95,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr96",                          (PyCFunction)thing_is_rrr96,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr97",                          (PyCFunction)thing_is_rrr97,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_laser",                          (PyCFunction)thing_is_laser,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_able_to_fire_at",                          (PyCFunction)thing_is_able_to_fire_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_ai_vision_distance",                          (PyCFunction)thing_ai_vision_distance,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_ethereal_minion_generator",                         (PyCFunction)thing_is_ethereal_minion_generator,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1979,7 +1979,8 @@ static PyMethodDef python_c_METHODS[] = {
 
     {"thing_get_all",                           (PyCFunction)thing_get_all,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_coords",                        (PyCFunction)thing_get_coords,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_hit",                               (PyCFunction)thing_hit,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_hit",                               (PyCFunction)thing_hit,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_fire_at",                           (PyCFunction)thing_fire_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
 
     PYFUNC_REF(SDLGetKeyState),
 

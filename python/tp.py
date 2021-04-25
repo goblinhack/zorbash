@@ -505,8 +505,8 @@ class Tp:
     def set_is_rrr96(self, value):
         zx.tp_set_is_rrr96(self, value)
 
-    def set_is_rrr97(self, value):
-        zx.tp_set_is_rrr97(self, value)
+    def set_is_laser(self, value):
+        zx.tp_set_is_laser(self, value)
 
     def set_is_able_to_fire_at(self, value):
         zx.tp_set_is_able_to_fire_at(self, value)

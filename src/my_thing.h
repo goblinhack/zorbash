@@ -271,6 +271,7 @@ public:
     bool is_on_fire(void);
     bool laser_anim_exists(void);
     bool laser_fire(Thingp item, Thingp target);
+    bool laser_fire_monst(const std::string &item, Thingp target);
     bool location_check();
     bool matches(const std::string& what);
     bool move(fpoint future_pos);
@@ -834,7 +835,7 @@ public:
     int is_rrr94(void) const;
     int is_rrr95(void) const;
     int is_rrr96(void) const;
-    int is_rrr97(void) const;
+    int is_laser(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;

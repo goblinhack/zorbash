@@ -26,16 +26,15 @@ def on_tick(me, x, y): # Return True on doing an action
     return False
 
 def on_fire_at(me, target, x, y): # Return True on doing an action
-    zx.topcon("me     {} {}".format(zx.thing_get_name(me), zx.thing_get_health(me)))
-    zx.topcon("target {} {}".format(zx.thing_get_name(target), zx.thing_get_health(target)))
-    return False
+    zx.thing_fire_at(me, "laser_energy", target)
+    return True
 
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_avoid_distance(4)
-    x.set_ai_vision_distance(8)
     x.set_ai_scent_distance(14)
+    x.set_ai_vision_distance(8)
     x.set_attack_lunge(True)
     x.set_attack_meat(True)
     x.set_avoids_fire(100)
@@ -78,13 +77,12 @@ def tp_init(name, text_name):
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
-    x.set_on_death_do("tentacleye.on_death()")
     x.set_on_bite_do("tentacleye.on_bite()")
     x.set_on_death_do("tentacleye.on_death()")
+    x.set_on_fire_at_do("tentacleye.on_fire_at()")
     x.set_on_hit_do("tentacleye.on_hit()")
     x.set_on_miss_do("tentacleye.on_miss()")
-    x.set_on_fire_at_do("tentacleye.on_fire_at()")
-    x.set_on_tick_do("tentacleye.on_tick()")
+    #x.set_on_tick_do("tentacleye.on_tick()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stat_attack(10) # 10, means no bonus
     x.set_stat_constitution(10)

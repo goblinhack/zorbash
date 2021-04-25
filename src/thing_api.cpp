@@ -291,7 +291,7 @@ int Thing::is_rrr93(void) const                                         {_ retur
 int Thing::is_rrr94(void) const                                         {_ return (tp()->is_rrr94()); }
 int Thing::is_rrr95(void) const                                         {_ return (tp()->is_rrr95()); }
 int Thing::is_rrr96(void) const                                         {_ return (tp()->is_rrr96()); }
-int Thing::is_rrr97(void) const                                         {_ return (tp()->is_rrr97()); }
+int Thing::is_laser(void) const                                         {_ return (tp()->is_laser()); }
 int Thing::is_able_to_fire_at(void) const                                         {_ return (tp()->is_able_to_fire_at()); }
 int Thing::ai_vision_distance(void) const                                         {_ return (tp()->ai_vision_distance()); }
 int Thing::is_ethereal_minion_generator(void) const                                        {_ return (tp()->is_ethereal_minion_generator()); }
