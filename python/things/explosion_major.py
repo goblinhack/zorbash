@@ -37,6 +37,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="explosion_mushroom")
+    tp_init(name="explosion_major")
 
 init()

@@ -31,10 +31,6 @@ void wid_thing_info_fini (void)
         game->bag_secondary = nullptr;
     }
 
-    if (wid_thing_info_window.size()) {
-        BOTCON(" "); // Clear out existing message
-    }
-
     game->wid_thing_info_clear_popup();
 }
 
@@ -132,6 +128,7 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     wid_thing_info_add_constitution(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
+    t->show_botcon_description();
 
     return wid_popup_window;
 }
@@ -199,6 +196,10 @@ bool Game::wid_thing_info_push_popup (Thingp t)
         if (w->t == t) {
             return true;
         }
+    }
+
+    if (t->long_text_description() == "") {
+        return false;
     }
 
     int height = 50;

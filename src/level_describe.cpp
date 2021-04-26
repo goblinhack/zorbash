@@ -24,6 +24,8 @@ void Level::describe (fpoint p)
         return;
     }
 
+    BOTCON(" ");
+
     std::vector<Thingp> hover_over_things;
     hover_over = nullptr;
 
@@ -42,12 +44,10 @@ void Level::describe (fpoint p)
             continue;
         }
 
-        if (t->is_on_fire()) {
-            BOTCON("%%fg=red$Burning! %s", t->text_description().c_str());
-        } else {
+        if (t->is_described_when_hovering_over()) {
             t->describe_when_hovering_over();
 
-            if (t->tp()->is_described_when_hovering_over()) {
+            if (t->long_text_description() != "") {
                 push_back_if_unique(hover_over_things, t);
             }
         }
@@ -66,16 +66,17 @@ void Level::describe (fpoint p)
 
         if (t->get_immediate_owner() ||
             t->is_cursor() ||
-            t->is_player() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
             continue;
         }
 
-        t->describe_when_hovering_over();
+        if (t->is_described_when_hovering_over()) {
+            t->describe_when_hovering_over();
 
-        if (t->long_text_description() != "") {
-            push_back_if_unique(hover_over_things, t);
+            if (t->long_text_description() != "") {
+                push_back_if_unique(hover_over_things, t);
+            }
         }
 
         if (!hover_over) {
@@ -92,16 +93,17 @@ void Level::describe (fpoint p)
 
         if (t->get_immediate_owner() ||
             t->is_cursor() ||
-            t->is_player() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
             continue;
         }
 
-        t->describe_when_hovering_over();
+        if (t->is_described_when_hovering_over()) {
+            t->describe_when_hovering_over();
 
-        if (t->long_text_description() != "") {
-            push_back_if_unique(hover_over_things, t);
+            if (t->long_text_description() != "") {
+                push_back_if_unique(hover_over_things, t);
+            }
         }
 
         if (!hover_over) {
@@ -126,13 +128,7 @@ void Level::describe (Thingp t)
     }
 
     if (t->long_text_description() == "") {
-        return;
-    }
-
-    if (t->is_cursor() ||
-        t->is_player() ||
-        t->is_cursor_path() ||
-        t->is_the_grid) {
+        t->show_botcon_description();
         return;
     }
 

@@ -10,11 +10,12 @@ def tp_init(name, text_name, tiles=[]):
     x.set_gfx_shown_in_bg(True)
     x.set_is_able_to_fall(True)
     x.set_is_deep_water(True)
+    x.set_is_described_when_hovering_over(True)
+    x.set_is_gfx_water(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_gfx_water(True)
     x.set_text_a_or_an("the");
     x.set_text_description("A pool of deep dank water, with things in it.")
     x.set_z_depth(zx.MAP_DEPTH_WATER)

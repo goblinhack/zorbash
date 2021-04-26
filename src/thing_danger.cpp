@@ -23,7 +23,7 @@ int Tp::get_danger_level (void)
     if (is_acid()) {
         danger_level ++;
     }
-    if (is_poison()) {
+    if (is_hunger_insatiable()) {
         danger_level ++;
     }
     if (is_fire()) {
@@ -32,17 +32,21 @@ int Tp::get_danger_level (void)
     if (is_lava()) {
         danger_level ++;
     }
+    if (is_poison()) {
+        danger_level += is_poison();
+    }
     if (is_floating()) {
         danger_level += 2;
     }
     if (is_jumper()) {
-        danger_level += 2;
+        danger_level += 5;
     }
     if (is_item_eater()) {
         danger_level += 20;
     }
 
-    danger_level += get_damage_melee_dice().max_roll();
+    danger_level += std::max(get_damage_melee_dice().max_roll(),
+                             get_damage_bite_dice().max_roll());
 
     // topcon("level %d", danger_level);
     return danger_level;
@@ -66,6 +70,9 @@ int Thing::get_danger_level (void)
     if (is_acid()) {
         danger_level ++;
     }
+    if (is_hunger_insatiable()) {
+        danger_level ++;
+    }
     if (is_poison()) {
         danger_level ++;
     }
@@ -75,17 +82,21 @@ int Thing::get_danger_level (void)
     if (is_lava()) {
         danger_level ++;
     }
+    if (is_poison()) {
+        danger_level += is_poison();
+    }
     if (is_floating()) {
         danger_level += 2;
     }
     if (is_jumper()) {
-        danger_level += 2;
+        danger_level += 5;
     }
     if (is_item_eater()) {
         danger_level += 20;
     }
 
-    danger_level += get_damage_melee_dice().max_roll();
+    danger_level += std::max(get_damage_melee_dice().max_roll(),
+                             get_damage_bite_dice().max_roll());
 
     // topcon("level %d", danger_level);
     return danger_level;
@@ -118,10 +129,14 @@ const std::string Thing::get_danger_level_str(Thingp it)
         return "%%fg=red$Dangerous";
     } else if (delta >= 0) {
         return "%%fg=orange$Caution advised";
-    } else if (delta <= -10) {
+    } else if (delta >= -10) {
+        return "%%fg=green$Slight caution needed";
+    } else if (delta >= -20) {
+        return "%%fg=green$Mostly harmless";
+    } else if (delta >= -30) {
         return "%%fg=green$Harmless";
     } else {
-        return "%%fg=green$Mostly harmless";
+        return "%%fg=green$Walkover";
     }
 }
 

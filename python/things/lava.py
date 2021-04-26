@@ -10,6 +10,7 @@ def lava_init(name, text_name, tiles=[]):
     x.set_gfx_glows(True)
     x.set_is_able_to_fall(True)
     x.set_is_cursor_can_hover_over_but_needs_double_click(True)
+    x.set_is_described_when_hovering_over(True)
     x.set_is_extreme_hazard(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
@@ -19,7 +20,7 @@ def lava_init(name, text_name, tiles=[]):
     x.set_light_color("red")
     x.set_light_strength(2)
     x.set_text_a_or_an("");
-    x.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move)")
+    x.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto)")
     x.set_text_hits("tickles");
     x.set_tick_catches_up_on_attack(True)
     x.set_tick_rate_tenths(3)

@@ -268,7 +268,7 @@ public:
     bool is_carrying_item(void);
     bool is_carrying_treasure(void);
     bool is_enemy(Thingp attacker) const;
-    bool is_on_fire(void);
+    bool is_on_fire(void) const;
     bool laser_anim_exists(void);
     bool laser_fire(Thingp item, Thingp target);
     bool laser_fire_monst(const std::string &item, Thingp target);
@@ -374,6 +374,7 @@ public:
     const std::string& weapon_carry_anim(void) const;
     float get_bounce(void);
     float get_bounce_fade(void) const;
+    void show_botcon_description(void) const;
     float get_bounce_height(void) const;
     float get_fadeup(void);
     float get_fadeup_fade(void) const;

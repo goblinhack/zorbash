@@ -20,7 +20,7 @@ def tp_init(name,
             tr2_tiles=[],
             bl2_tiles=[],
             br2_tiles=[]):
-    x = tp.Tp(name)
+    x = tp.Tp(name, "rock")
     x.set_ai_obstacle(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
@@ -29,6 +29,7 @@ def tp_init(name,
     x.set_health_initial_dice("20d10")
     x.set_is_able_to_fall(False)
     x.set_is_cursor_can_hover_over(True)
+    x.set_is_described_when_hovering_over(True)
     x.set_is_interesting(False)
     x.set_is_light_blocker(True)
     x.set_is_loggable_for_important_stuff(False)
