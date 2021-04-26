@@ -839,6 +839,7 @@ public:
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;
+    int is_water(void) const;
     int is_shovable(void) const;
     int is_shown_on_leftbar(void) const;
     int is_shown_uniquely_on_leftbar(void) const;

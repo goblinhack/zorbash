@@ -292,12 +292,13 @@ int Thing::is_rrr94(void) const                                         {_ retur
 int Thing::is_rrr95(void) const                                         {_ return (tp()->is_rrr95()); }
 int Thing::is_rrr96(void) const                                         {_ return (tp()->is_rrr96()); }
 int Thing::is_laser(void) const                                         {_ return (tp()->is_laser()); }
-int Thing::is_able_to_fire_at(void) const                                         {_ return (tp()->is_able_to_fire_at()); }
-int Thing::ai_vision_distance(void) const                                         {_ return (tp()->ai_vision_distance()); }
-int Thing::is_ethereal_minion_generator(void) const                                        {_ return (tp()->is_ethereal_minion_generator()); }
+int Thing::is_able_to_fire_at(void) const                               {_ return (tp()->is_able_to_fire_at()); }
+int Thing::ai_vision_distance(void) const                               {_ return (tp()->ai_vision_distance()); }
+int Thing::is_ethereal_minion_generator(void) const                     {_ return (tp()->is_ethereal_minion_generator()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
 int Thing::is_shallow_water(void) const                                 {_ return (tp()->is_shallow_water()); }
+int Thing::is_water(void) const                                         {_ return (tp()->is_shallow_water() || tp()->is_deep_water()); }
 int Thing::is_shovable(void) const                                      {_ return (tp()->is_shovable()); }
 int Thing::is_shown_on_leftbar(void) const                              {_ return (tp()->is_shown_on_leftbar()); }
 int Thing::is_shown_uniquely_on_leftbar(void) const                     {_ return (tp()->is_shown_uniquely_on_leftbar()); }

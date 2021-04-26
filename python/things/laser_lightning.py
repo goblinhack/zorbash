@@ -7,6 +7,9 @@ def on_use(owner, item, target, x, y):
     #zx.con("target  {} {:08X} {}".format(zx.thing_get_name(target), target, target))
     zx.tp_spawn_radius_range(owner, item, target, "laser_lightning_effect")
 
+    #zx.thing_is_water_at(thing, x, y)
+    #zx.get_all_flood_fill(me, "is_water", x, y)
+
     target_x, target_y = zx.thing_get_coords(target)
     for thing in zx.thing_get_all(target_x, target_y):
         if zx.thing_is_monst(thing) or \
