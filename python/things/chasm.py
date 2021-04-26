@@ -15,10 +15,11 @@ def chasm_init(name, text_name, tiles=[]):
     x.set_is_extreme_hazard(True)
     x.set_is_interesting(True)
     x.set_is_chasm(True)
+    x.set_is_described_when_hovering_over(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_text_a_or_an("a");
-    x.set_text_description("%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump)")
+    x.set_text_description("%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump into)")
     x.set_z_depth(zx.MAP_DEPTH_CHASM)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 

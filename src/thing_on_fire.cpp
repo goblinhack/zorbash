@@ -13,7 +13,7 @@
 #include "my_dmap.h"
 #include "my_monst.h"
 
-bool Thing::is_on_fire (void)
+bool Thing::is_on_fire (void) const
 {_
     return get_on_fire_anim_id().ok();
 }

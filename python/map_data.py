@@ -38,6 +38,33 @@ import zx
 # POTION                        !  always generated
 
 #
+# User defined rooms
+#
+#def add_room():
+#    def add_things():
+#        zx.room_add_thing(name="skeleton1", rel_coord=True, x=4, y=1)
+#
+#    zx.map_load_room(entrance=True,
+#                     name="skel1",
+#                     on_create=add_things,
+#                     room_data=[
+#                         "             ",
+#                         "    ......   ",
+#                         "    ....S.   ",
+#                         "    ......   ",
+#                         "    ......   ",
+#                         " <........   ",
+#                         "    ......   ",
+#                         "    ......   ",
+#                         "    ......   ",
+#                         "      .      ",
+#                         "      v      ",
+#                         "             ",
+#                         "             ",
+#                         ])
+#add_room()
+
+#
 #  entrance rooms
 #
 zx.map_load_room(entrance=True, room_data=[

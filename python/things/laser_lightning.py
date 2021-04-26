@@ -5,10 +5,10 @@ def on_use(owner, item, target, x, y):
     #zx.con("owner   {} {:08X} {}".format(zx.thing_get_name(owner), owner, owner))
     #zx.con("item    {} {:08X} {}".format(zx.thing_get_name(item), item, item))
     #zx.con("target  {} {:08X} {}".format(zx.thing_get_name(target), target, target))
-    zx.tp_spawn_radius_range(owner, item, target, "laser_lightning_effect")
+    zx.tp_spawn_radius_range(owner, item, target, "explosion_minor")
 
     #zx.thing_is_water_at(thing, x, y)
-    #zx.get_all_flood_fill(me, "is_water", x, y)
+    #zx.get_all_flood_fill_from(me, "is_water", x, y)
 
     target_x, target_y = zx.thing_get_coords(target)
     for thing in zx.thing_get_all(target_x, target_y):
