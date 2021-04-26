@@ -2,12 +2,10 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    #zx.con("me      {} {:08X}".format(zx.thing_get_name(me), me))
-    #spawner = zx.thing_get_immediate_spawned_owner_id(me)
-    #zx.con("spawner {} {:08X}".format(zx.thing_get_name(spawner), spawner))
-    #owner = zx.thing_get_immediate_owner_id(spawner)
-    #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
-    pass
+    zx.if_matches_then_kill(me, "is_floor", x, y)
+    zx.if_matches_then_kill(me, "is_corridor", x, y)
+    zx.if_matches_then_kill(me, "is_dirt", x, y)
+    zx.tp_place(me, "chasm1", x, y)
 
 def tp_init(name):
     x = tp.Tp(name)
@@ -19,7 +17,7 @@ def tp_init(name):
     x.set_is_interesting(False)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_on_death_do("wand_energy_effect.on_death()")
+    x.set_on_death_do("laser_descent_effect.on_death()")
     x.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
     x.set_z_prio(zx.MAP_PRIO_INFRONT)
 
@@ -32,6 +30,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="wand_energy_effect")
+    tp_init(name="laser_descent_effect")
 
 init()

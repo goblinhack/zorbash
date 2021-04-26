@@ -12,6 +12,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
     x.set_damage_doubled_from_fire(True)
+    x.set_damage_melee_dice("1d12+6") # This is the damage when the player fires, not taken from the laser
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
@@ -33,13 +34,13 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_treasure_class_c(True)
     x.set_is_usable(True)
     x.set_is_wand(True)
-    x.set_laser_name("laser_descent")
-    x.set_long_text_description("This most dangerous wand can transport its target to the next level by the most efficacious means possible...")
+    x.set_laser_name("laser_lightning")
+    x.set_long_text_description("This most dangerous wand can transport its target to the next level by the most efficacious means possible... Warning do not use if standing in the same pool as your target...")
     x.set_normal_placement_rules(True)
-    x.set_on_use_do("laser_descent.on_use()")
+    x.set_on_use_do("laser_lightning.on_use()")
     x.set_range_max(7)
     x.set_text_a_or_an("a");
-    x.set_text_description("%%fg=cyan$A wand of descent.")
+    x.set_text_description("%%fg=cyan$A wand of lightning.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
@@ -53,6 +54,6 @@ def tp_init(name, text_name, short_text_name):
     x.update()
 
 def init():
-    tp_init(name="wand_descent", text_name="wand of descent", short_text_name="wand.descent")
+    tp_init(name="wand_lightning", text_name="wand of lightning", short_text_name="wand.lightning")
 
 init()

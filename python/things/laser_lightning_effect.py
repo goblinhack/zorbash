@@ -2,10 +2,7 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    zx.if_matches_then_kill(me, "is_floor", x, y)
-    zx.if_matches_then_kill(me, "is_corridor", x, y)
-    zx.if_matches_then_kill(me, "is_dirt", x, y)
-    zx.tp_place(me, "chasm1", x, y)
+    return
 
 def tp_init(name):
     x = tp.Tp(name)
@@ -17,7 +14,7 @@ def tp_init(name):
     x.set_is_interesting(False)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_on_death_do("wand_descent_effect.on_death()")
+    x.set_on_death_do("laser_lightning_effect.on_death()")
     x.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
     x.set_z_prio(zx.MAP_PRIO_INFRONT)
 
@@ -30,6 +27,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="wand_descent_effect")
+    tp_init(name="laser_lightning_effect")
 
 init()

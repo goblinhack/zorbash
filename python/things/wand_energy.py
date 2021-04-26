@@ -1,24 +1,6 @@
 import zx
 import tp
 
-def on_use(owner, item, target, x, y):
-    #zx.con("owner   {} {:08X} {}".format(zx.thing_get_name(owner), owner, owner))
-    #zx.con("item    {} {:08X} {}".format(zx.thing_get_name(item), item, item))
-    #zx.con("target  {} {:08X} {}".format(zx.thing_get_name(target), target, target))
-    zx.tp_spawn_radius_range(owner, item, target, "wand_energy_effect")
-
-    target_x, target_y = zx.thing_get_coords(target)
-    for thing in zx.thing_get_all(target_x, target_y):
-        if zx.thing_is_monst(thing) or \
-                zx.thing_is_item(thing) or \
-                zx.thing_is_door(thing) or \
-                zx.thing_is_wall(thing) or \
-                zx.thing_is_minion_generator(thing) or \
-                zx.thing_is_brazier(thing):
-            zx.thing_hit(owner, item, thing)
-
-    zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "lightning_a", x, y)
-
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_bag_item_height(2)
@@ -30,7 +12,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
     x.set_damage_doubled_from_fire(True)
-    x.set_damage_melee_dice("1d6+6")
+    x.set_damage_melee_dice("1d6+6") # This is the damage when the player fires, not taken from the laser
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
@@ -55,7 +37,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_laser_name("laser_energy")
     x.set_long_text_description("Discharges a powerful beam of energy upon an unwitting recipient...")
     x.set_normal_placement_rules(True)
-    x.set_on_use_do("wand_energy.on_use()")
+    x.set_on_use_do("laser_energy.on_use()")
     x.set_range_max(7)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=yellow$A wand of energy.")
