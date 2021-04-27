@@ -102,8 +102,8 @@ void Thing::level_push (void)
     if (is_wall())                               { i_set_is_wall = true;
                                                    level->set_is_wall(mx, my); }
     if (is_shallow_water() || is_deep_water()) {
-        i_set_is_gfx_water = true;
-        level->set_is_gfx_water(mx, my);
+        i_set_gfx_water = true;
+        level->set_gfx_water(mx, my);
     }
 
     if (is_shallow_water()) {

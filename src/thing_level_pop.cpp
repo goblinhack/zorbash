@@ -101,8 +101,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_treasure(mx, my); }
     if (i_set_is_wall)                                 { i_set_is_wall = false;
                                                          level->unset_is_wall(mx, my); }
-    if (i_set_is_gfx_water)                            { i_set_is_gfx_water = false;
-                                                         level->unset_is_gfx_water(mx, my); }
+    if (i_set_gfx_water)                            { i_set_gfx_water = false;
+                                                         level->unset_gfx_water(mx, my); }
     level->remove_thing(last_attached.x, last_attached.y, id);
 
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }

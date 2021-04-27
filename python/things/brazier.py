@@ -11,6 +11,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_glows(True)
+    x.set_gfx_flickers(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)

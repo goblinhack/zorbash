@@ -196,7 +196,7 @@ int Tp::is_floor(void) const                                         { return _i
 int Tp::is_floor_deco(void) const                                    { return _is_floor_deco; }
 int Tp::is_food(void) const                                          { return _is_food; }
 int Tp::is_food_eater(void) const                                    { return _is_food_eater; }
-int Tp::is_gfx_water(void) const                                     { return _is_gfx_water; }
+int Tp::gfx_water(void) const                                     { return _gfx_water; }
 int Tp::is_gold(void) const                                          { return _is_gold; }
 int Tp::is_hazard(void) const                                        { return _is_hazard; }
 int Tp::is_humanoid(void) const                                      { return _is_humanoid; }
@@ -341,7 +341,7 @@ int Tp::is_rrr92(void) const                                         { return _i
 int Tp::is_rrr93(void) const                                         { return _is_rrr93; }
 int Tp::is_rrr94(void) const                                         { return _is_rrr94; }
 int Tp::is_rrr95(void) const                                         { return _is_rrr95; }
-int Tp::is_gfx_flickers(void) const                                         { return _is_gfx_flickers; }
+int Tp::gfx_flickers(void) const                                         { return _gfx_flickers; }
 int Tp::is_laser(void) const                                         { return _is_laser; }
 int Tp::is_able_to_fire_at(void) const                                         { return _is_able_to_fire_at; }
 int Tp::ai_vision_distance(void) const                                         { return _ai_vision_distance; }
@@ -522,7 +522,7 @@ void Tp::set_is_floor(int v)                                         { _is_floor
 void Tp::set_is_floor_deco(int v)                                    { _is_floor_deco = v; }
 void Tp::set_is_food(int v)                                          { _is_food = v; }
 void Tp::set_is_food_eater(int v)                                    { _is_food_eater = v; }
-void Tp::set_is_gfx_water(int v)                                     { _is_gfx_water = v; }
+void Tp::set_gfx_water(int v)                                     { _gfx_water = v; }
 void Tp::set_is_gold(int v)                                          { _is_gold = v; }
 void Tp::set_is_hazard(int v)                                        { _is_hazard = v; }
 void Tp::set_is_humanoid(int v)                                      { _is_humanoid = v; }
@@ -667,7 +667,7 @@ void Tp::set_is_rrr92(int v)                                         { _is_rrr92
 void Tp::set_is_rrr93(int v)                                         { _is_rrr93 = v; }
 void Tp::set_is_rrr94(int v)                                         { _is_rrr94 = v; }
 void Tp::set_is_rrr95(int v)                                         { _is_rrr95 = v; }
-void Tp::set_is_gfx_flickers(int v)                                         { _is_gfx_flickers = v; }
+void Tp::set_gfx_flickers(int v)                                         { _gfx_flickers = v; }
 void Tp::set_is_laser(int v)                                         { _is_laser = v; }
 void Tp::set_is_able_to_fire_at(int v)                                         { _is_able_to_fire_at = v; }
 void Tp::set_ai_vision_distance(int v)                                         { _ai_vision_distance = v; }

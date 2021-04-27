@@ -151,7 +151,7 @@ public:
     uint64_t i_set_is_brazier:1                {};
     uint64_t i_set_is_treasure:1               {};
     uint64_t i_set_is_wall:1                   {};
-    uint64_t i_set_is_gfx_water:1              {};
+    uint64_t i_set_gfx_water:1              {};
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -687,7 +687,7 @@ public:
     int is_floor_deco(void) const;
     int is_food(void) const;
     int is_food_eater(void) const;
-    int is_gfx_water(void) const;
+    int gfx_water(void) const;
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_hit_by(Thingp hitter);
@@ -835,7 +835,7 @@ public:
     int is_rrr93(void) const;
     int is_rrr94(void) const;
     int is_rrr95(void) const;
-    int is_gfx_flickers(void) const;
+    int gfx_flickers(void) const;
     int is_laser(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;

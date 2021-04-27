@@ -15,6 +15,8 @@ def tp_init(name, text_name):
     x.set_collision_radius(0.40)
     x.set_damage_melee_dice("1d3+1")
     x.set_gfx_animated(True)
+    x.set_gfx_flickers(True)
+    x.set_gfx_glows(True)
     x.set_gfx_on_fire_anim(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)

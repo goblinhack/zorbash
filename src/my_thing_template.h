@@ -170,7 +170,7 @@ private:
     int _is_floor_deco {};
     int _is_food {};
     int _is_food_eater {};
-    int _is_gfx_water {};
+    int _gfx_water {};
     int _is_gold {};
     int _is_hazard {};
     int _is_humanoid {};
@@ -316,7 +316,7 @@ private:
     int _is_rrr93 {};
     int _is_rrr94 {};
     int _is_rrr95 {};
-    int _is_gfx_flickers {};
+    int _gfx_flickers {};
     int _is_laser {};
     int _is_able_to_fire_at {};
     int _ai_vision_distance {};
@@ -628,7 +628,7 @@ public:
     int is_floor_deco(void) const;
     int is_food(void) const;
     int is_food_eater(void) const;
-    int is_gfx_water(void) const;
+    int gfx_water(void) const;
     int is_gold(void) const;
     int is_hazard(void) const;
     int is_humanoid(void) const;
@@ -773,7 +773,7 @@ public:
     int is_rrr93(void) const;
     int is_rrr94(void) const;
     int is_rrr95(void) const;
-    int is_gfx_flickers(void) const;
+    int gfx_flickers(void) const;
     int is_laser(void) const;
     int is_able_to_fire_at(void) const;
     int ai_vision_distance(void) const;
@@ -960,7 +960,7 @@ public:
     void set_is_floor_deco(int);
     void set_is_food(int);
     void set_is_food_eater(int);
-    void set_is_gfx_water(int);
+    void set_gfx_water(int);
     void set_is_gold(int);
     void set_is_hazard(int);
     void set_is_humanoid(int);
@@ -1106,7 +1106,7 @@ public:
     void set_is_rrr93(int);
     void set_is_rrr94(int);
     void set_is_rrr95(int);
-    void set_is_gfx_flickers(int);
+    void set_gfx_flickers(int);
     void set_is_laser(int);
     void set_is_able_to_fire_at(int);
     void set_ai_vision_distance(int);

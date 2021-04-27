@@ -11,7 +11,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_able_to_fall(True)
     x.set_is_deep_water(True)
     x.set_is_described_when_hovering_over(True)
-    x.set_is_gfx_water(True)
+    x.set_gfx_water(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)
