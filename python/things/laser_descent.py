@@ -9,7 +9,7 @@ def on_use(owner, item, target, x, y):
     zx.tp_spawn_radius_range(owner, item, target, "explosion_destroy_floor")
 
     target_x, target_y = zx.thing_get_coords(target)
-    for thing in zx.thing_get_all(target_x, target_y):
+    for thing in zx.level_get_all(target_x, target_y):
         if zx.thing_is_monst(thing) or \
                 zx.thing_is_item(thing) or \
                 zx.thing_is_door(thing) or \

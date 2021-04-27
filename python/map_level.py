@@ -1,6 +1,6 @@
 import zx
 
-zx.map_load_level(level_data=[
+zx.level_add(level_data=[
 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 "x                                                                      x",
 "x                                                                      x",

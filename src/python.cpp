@@ -6,7 +6,9 @@
 #include <map>
 #include "my_py_tp.h"
 #include "my_py_thing.h"
+#include "my_py_level.h"
 #include <frameobject.h>
+
 #include "my_main.h"
 #include "my_callstack.h"
 #include "my_depth.h"
@@ -1668,7 +1670,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"if_matches",                                             (PyCFunction)if_matches_,                                            METH_VARARGS | METH_KEYWORDS, "if matches"},
     {"if_matches_then_kill",                                   (PyCFunction)if_matches_then_kill_,                                  METH_VARARGS | METH_KEYWORDS, "if matches then kill"},
     {"log",                                                    (PyCFunction)log_,                                                   METH_VARARGS,                 "log to the log file"},
-    {"map_load_level",                                         (PyCFunction)map_load_level_,                                        METH_VARARGS | METH_KEYWORDS, "load a level"},
+    {"level_add",                                              (PyCFunction)level_add_,                                        METH_VARARGS | METH_KEYWORDS, "load a level"},
     {"map_load_room",                                          (PyCFunction)map_load_room_,                                         METH_VARARGS | METH_KEYWORDS, "load a room"},
     {"music_load",                                             (PyCFunction)music_load_,                                            METH_VARARGS | METH_KEYWORDS, "load a sound"},
     {"music_play",                                             (PyCFunction)music_play_,                                            METH_VARARGS | METH_KEYWORDS, "play a sound"},
@@ -1689,7 +1691,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_decr_stamina",                                     (PyCFunction)thing_decr_stamina,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_decr_stamina_max",                                 (PyCFunction)thing_decr_stamina_max,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_fire_at",                                          (PyCFunction)thing_fire_at,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_get_all",                                          (PyCFunction)thing_get_all,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_get_all",                                          (PyCFunction)level_get_all,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_coords",                                       (PyCFunction)thing_get_coords,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_current_damage",                               (PyCFunction)thing_get_current_damage,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_health",                                       (PyCFunction)thing_get_health,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
