@@ -542,7 +542,6 @@ PyObject *thing_is_water_lover_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_weapon_wielder_at(PyObject *obj, PyObject *args, PyObject *keywds);
 
-PyObject *thing_get_all(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_coords(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);

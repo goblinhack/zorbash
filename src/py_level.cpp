@@ -6,14 +6,19 @@
 #include <array>
 #include "my_sys.h"
 #include "my_main.h"
+#include "my_game.h"
+#include "my_level.h"
+#include "my_thing.h"
 #include "my_depth.h"
 #include "my_charmap.h"
 #include "my_python.h"
 #include "my_level_static.h"
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
+#include "my_array_bounds_check.h"
+#include "my_ptrcheck.h"
 
-PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *level_name = 0;
     PyObject *py_level_data = 0;
@@ -234,4 +239,59 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
     l->finalize();
 
     Py_RETURN_TRUE;
+}
+
+PyObject *level_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    uint32_t id = 0;	                                                            \
+    int x = -1;
+    int y = -1;
+    static char *kwlist[] = {(char*)"x", (char*)"y", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_FALSE;	
+    }	
+	
+    if (!id) {
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	
+        Py_RETURN_FALSE;	
+    }
+
+    Thingp t = game->level->thing_find(id);	
+    if (!t) {	
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);
+        Py_RETURN_NONE;	
+    }	
+
+    if (t->level->is_oob(x, y)) {
+        PyObject *lst = PyList_New(0);
+        return (lst);
+    }
+
+    auto items = 0;
+    FOR_ALL_THINGS(t->level, t, x, y) {
+        //
+        // Don't include carried things else lasers will destroy all items carried!
+        //
+        if (t->get_immediate_owner()) {
+            continue;
+        }
+        items++;
+    } FOR_ALL_THINGS_END()
+
+    PyObject *lst = PyList_New(items);
+    auto item = 0;
+    FOR_ALL_THINGS(t->level, t, x, y) {
+        //
+        // Don't include carried things else lasers will destroy all items carried!
+        //
+        if (t->get_immediate_owner()) {
+            continue;
+        }
+        PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
+        item++;
+    } FOR_ALL_THINGS_END()
+
+    return (lst);
 }
