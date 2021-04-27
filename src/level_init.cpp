@@ -51,7 +51,7 @@ void Level::clear (void)
     _is_visited = {};
     _is_lit = {};
     _is_wall = {};
-    _is_gfx_water = {};
+    _gfx_water = {};
 
     timestamp_dungeon_created = time_get_time_ms();
     timestamp_dungeon_saved = 0;

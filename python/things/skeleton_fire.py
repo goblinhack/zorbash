@@ -23,6 +23,7 @@ def tp_init(name, text_name):
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_bounce_on_move(True)
+    x.set_gfx_glows(True)
     x.set_gfx_health_bar_shown(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)

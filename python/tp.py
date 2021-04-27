@@ -502,8 +502,8 @@ class Tp:
     def set_is_rrr95(self, value):
         zx.tp_set_is_rrr95(self, value)
 
-    def set_is_gfx_flickers(self, value):
-        zx.tp_set_is_gfx_flickers(self, value)
+    def set_gfx_flickers(self, value):
+        zx.tp_set_gfx_flickers(self, value)
 
     def set_is_laser(self, value):
         zx.tp_set_is_laser(self, value)
@@ -1165,8 +1165,8 @@ class Tp:
     def set_is_chasm(self, value):
         zx.tp_set_is_chasm(self, value)
 
-    def set_is_gfx_water(self, value):
-        zx.tp_set_is_gfx_water(self, value)
+    def set_gfx_water(self, value):
+        zx.tp_set_gfx_water(self, value)
 
     def set_is_deep_water(self, value):
         zx.tp_set_is_deep_water(self, value)

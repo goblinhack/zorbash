@@ -64,7 +64,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_water {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};
 
     //
     // When this Level was made. Used to restore timestamps relative to this.
@@ -377,8 +377,8 @@ public:
     uint8_t is_floor(const int x, const int y);
     uint8_t is_food(const int x, const int y);
     uint8_t is_food(const point &p);
-    uint8_t is_gfx_water(const int x, const int y);
-    uint8_t is_gfx_water(const point &p);
+    uint8_t gfx_water(const int x, const int y);
+    uint8_t gfx_water(const point &p);
     uint8_t is_gold(const int x, const int y);
     uint8_t is_gold(const point &p);
     uint8_t is_hazard(const int x, const int y);
@@ -542,7 +542,7 @@ public:
     void set_is_fire(const int x, const int y);
     void set_is_floor(const int x, const int y);
     void set_is_food(const int x, const int y);
-    void set_is_gfx_water(const int x, const int y);
+    void set_gfx_water(const int x, const int y);
     void set_is_gold(const int x, const int y);
     void set_is_hazard(const int x, const int y);
     void set_is_key(const int x, const int y);
@@ -600,7 +600,7 @@ public:
     void unset_is_fire(const int x, const int y);
     void unset_is_floor(const int x, const int y);
     void unset_is_food(const int x, const int y);
-    void unset_is_gfx_water(const int x, const int y);
+    void unset_gfx_water(const int x, const int y);
     void unset_is_gold(const int x, const int y);
     void unset_is_hazard(const int x, const int y);
     void unset_is_key(const int x, const int y);

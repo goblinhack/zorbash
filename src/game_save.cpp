@@ -249,7 +249,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_brazier                << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_treasure               << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_wall                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_gfx_water              << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_gfx_water              << shift; shift++;
     if (shift >= (int)(sizeof(bits64) * 8)) {
         ERR("Ran out of bits in serialization");
     }
@@ -336,7 +336,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};             */ out << bits(my.t->_is_brazier);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};            */ out << bits(my.t->_is_treasure);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};                */ out << bits(my.t->_is_wall);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_water {};           */ out << bits(my.t->_is_gfx_water);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};           */ out << bits(my.t->_gfx_water);
 
     /* all_thing_ids_at */      out << bits(my.t->all_thing_ids_at);
     /* cursor_at */             out << bits(my.t->cursor_at);
