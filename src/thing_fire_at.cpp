@@ -141,7 +141,7 @@ bool Thing::fire_at_target (void)
                 continue;
             }
 
-            if (it->is_alive_monst() || it->is_player()) {
+            if (possible_to_attack(it)) {
                 thing_possible_hit_add(this, it);
             }
         }
