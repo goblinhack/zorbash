@@ -44,7 +44,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
     }
 
     for (const auto& item : bag->monstp->carrying) {
-        auto t = game->level->thing_find(item.id);
+        auto t = game->thing_find(item.id);
         if (!t) {
             continue;
         }
@@ -108,7 +108,7 @@ _
     }
 
     auto id = wid_get_thing_id_context(game->in_transit_item);
-    auto t = game->level->thing_find(id);
+    auto t = game->thing_find(id);
     if (!t) {
         LOG("Cannot find thing");
         return false;
@@ -134,7 +134,7 @@ _
     }
 
     auto bag_id = wid_get_thing_id_context(wid_bag_container);
-    auto bag = game->level->thing_find(bag_id);
+    auto bag = game->thing_find(bag_id);
     if (!bag) {
         t->log("Bag containing me not found");
         return false;
@@ -212,7 +212,7 @@ _
     }
 
     auto id = wid_get_thing_id_context(game->in_transit_item);
-    auto t = game->level->thing_find(id);
+    auto t = game->thing_find(id);
     if (!t) {
         ERR("Cannot find thing to drop");
         return false;
@@ -235,14 +235,14 @@ _
     }
 
     auto id = wid_get_thing_id_context(w);
-    auto t = game->level->thing_find(id);
+    auto t = game->thing_find(id);
     if (!t) {
         return false;
     }
 
     auto wid_bag_container = wid_get_parent(w);
     auto bag_id = wid_get_thing_id_context(wid_bag_container);
-    auto bag = game->level->thing_find(bag_id);
+    auto bag = game->thing_find(bag_id);
     if (!bag) {
         return false;
     }
@@ -298,7 +298,7 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
     }
 
     auto id = wid_get_thing_id_context(w);
-    auto t = game->level->thing_find(id);
+    auto t = game->thing_find(id);
     if (t) {
         t->describe_when_hovered_over_in_rightbar();
     }
@@ -347,7 +347,7 @@ _
                 }
 
                 const auto& item = bag->monstp->carrying.begin();
-                auto t = game->level->thing_find(item->id);
+                auto t = game->thing_find(item->id);
                 if (!t) {
                     break;
                 }

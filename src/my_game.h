@@ -114,8 +114,9 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my);
 
 class Game {
 public:
-    Game (std::string appdata);
-    Game (void) {}
+    Game(std::string appdata);
+    Game(void) {}
+    Thingp thing_find(const ThingId id);
     WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
     WidPopup *wid_thing_info_create_popup_compact(const std::vector<Thingp> &);
     bool load(std::string save_file, class Game &target);

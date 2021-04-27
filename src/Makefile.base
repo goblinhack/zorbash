@@ -36,6 +36,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/game_dump.o                   \
     $(OBJDIR)/game_error.o                  \
     $(OBJDIR)/game_fini.o                   \
+    $(OBJDIR)/game_id.o                     \
     $(OBJDIR)/game_init.o                   \
     $(OBJDIR)/game_load.o                   \
     $(OBJDIR)/game_log.o                    \
@@ -90,6 +91,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_fini.o                  \
     $(OBJDIR)/level_gc.o                    \
     $(OBJDIR)/level_heatmap.o               \
+    $(OBJDIR)/level_id.o                    \
     $(OBJDIR)/level_init.o                  \
     $(OBJDIR)/level_log.o                   \
     $(OBJDIR)/level_map_things.o            \
@@ -193,7 +195,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_hit.o                   \
     $(OBJDIR)/thing_hooks.o                 \
     $(OBJDIR)/thing_hunger.o                \
-    $(OBJDIR)/thing_id.o                    \
     $(OBJDIR)/thing_inherit.o               \
     $(OBJDIR)/thing_init.o                  \
     $(OBJDIR)/thing_inventory.o             \
@@ -204,7 +205,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_lava.o                  \
     $(OBJDIR)/thing_level_change.o          \
     $(OBJDIR)/thing_level_enter.o           \
-    $(OBJDIR)/thing_level_find.o            \
     $(OBJDIR)/thing_level_leave.o           \
     $(OBJDIR)/thing_level_pop.o             \
     $(OBJDIR)/thing_level_push.o            \
@@ -275,6 +275,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/wid_topcon.o                  \
     $(OBJDIR)/world.o                       \
     $(OBJDIR)/world_fini.o                  \
+    $(OBJDIR)/world_id.o                    \
     $(OBJDIR)/world_init.o                  \
 
 #

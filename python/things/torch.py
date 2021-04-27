@@ -34,7 +34,6 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_torch(True)
     x.set_is_treasure(True)
     x.set_is_treasure_class_a(True)
-    x.set_is_usable(True)
     x.set_lifespan_dice("1d100+10")
     x.set_light_color("orange")
     x.set_light_strength(2)

@@ -22,7 +22,7 @@ Thingp World::test_thing_ptr (ThingId id)
     return (f->second);
 }
 
-Thingp World::find_thing_ptr (ThingId id)
+Thingp World::thing_find (ThingId id)
 {_
     auto f = all_thing_ptrs.find(id);
     if (f == all_thing_ptrs.end()) {

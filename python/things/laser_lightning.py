@@ -7,7 +7,7 @@ def on_use(owner, item, target, x, y):
     #zx.con("target  {} {:08X} {}".format(zx.thing_get_name(target), target, target))
     zx.tp_spawn_radius_range(owner, item, target, "explosion_minor")
 
-    if zx.thing_is_water_at(thing, x, y):
+    if zx.level_is_water_at(target, x, y):
         pass
     #zx.get_all_flood_fill_from(me, "is_water", x, y)
 
