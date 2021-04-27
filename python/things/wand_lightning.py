@@ -35,7 +35,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_usable(True)
     x.set_is_wand(True)
     x.set_laser_name("laser_lightning")
-    x.set_long_text_description("This most dangerous wand can transport its target to the next level by the most efficacious means possible... Warning do not use if standing in the same pool as your target...")
+    x.set_long_text_description("This wand blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath.")
     x.set_normal_placement_rules(True)
     x.set_on_use_do("laser_lightning.on_use()")
     x.set_range_max(7)

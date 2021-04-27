@@ -117,7 +117,7 @@ bool Thing::bag_compress (void)
 		continue;
 	    }
 
-	    auto t = game->level->thing_find(id);
+	    auto t = game->thing_find(id);
             if (!t) {
                 continue;
             }
@@ -210,7 +210,7 @@ _
             for (auto y = 0; y < bh; y++) {
                 auto id = get(bag, x, y);
                 if (id != NoThingId) {
-                    auto t = game->level->thing_find(id);
+                    auto t = game->thing_find(id);
                     if (!t) {
                         continue;
                     }
@@ -260,7 +260,7 @@ _
 		continue;
 	    }
 #if 0
-	    auto o = game->level->thing_find(id);
+	    auto o = game->thing_find(id);
             if (!o) {
                 continue;
             }
@@ -334,7 +334,7 @@ _
         for (auto y = 0; y < bh; y++) {
             auto id = get(bag, x, y);
 	    if (id != NoThingId) {
-                auto t = game->level->thing_find(id);
+                auto t = game->thing_find(id);
                 if (!t) {
                     continue;
                 }

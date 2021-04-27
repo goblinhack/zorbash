@@ -38,7 +38,7 @@ static void game_monsts_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_
     }
 
     auto id = wid_get_int_context(w);
-    auto t = game->level->thing_find(id);
+    auto t = game->thing_find(id);
     game->level->highlight = t;
 }
 

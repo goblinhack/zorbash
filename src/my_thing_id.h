@@ -7,6 +7,13 @@
 #ifndef _MY_THING_ID_H_
 #define _MY_THING_ID_H_
 
+//
+// All levels share the same thing ID namespace so we can find any
+// thing on any level just by its number
+//
+// If this gets too slow, consider using the first byte as level
+// number.
+//
 using ThingId = struct ThingId_ {
 public:
     uint32_t id {};
