@@ -341,7 +341,7 @@ int Tp::is_rrr92(void) const                                         { return _i
 int Tp::is_rrr93(void) const                                         { return _is_rrr93; }
 int Tp::is_rrr94(void) const                                         { return _is_rrr94; }
 int Tp::is_rrr95(void) const                                         { return _is_rrr95; }
-int Tp::is_rrr96(void) const                                         { return _is_rrr96; }
+int Tp::is_gfx_flickers(void) const                                         { return _is_gfx_flickers; }
 int Tp::is_laser(void) const                                         { return _is_laser; }
 int Tp::is_able_to_fire_at(void) const                                         { return _is_able_to_fire_at; }
 int Tp::ai_vision_distance(void) const                                         { return _ai_vision_distance; }
@@ -667,7 +667,7 @@ void Tp::set_is_rrr92(int v)                                         { _is_rrr92
 void Tp::set_is_rrr93(int v)                                         { _is_rrr93 = v; }
 void Tp::set_is_rrr94(int v)                                         { _is_rrr94 = v; }
 void Tp::set_is_rrr95(int v)                                         { _is_rrr95 = v; }
-void Tp::set_is_rrr96(int v)                                         { _is_rrr96 = v; }
+void Tp::set_is_gfx_flickers(int v)                                         { _is_gfx_flickers = v; }
 void Tp::set_is_laser(int v)                                         { _is_laser = v; }
 void Tp::set_is_able_to_fire_at(int v)                                         { _is_able_to_fire_at = v; }
 void Tp::set_ai_vision_distance(int v)                                         { _ai_vision_distance = v; }

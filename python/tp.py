@@ -502,8 +502,8 @@ class Tp:
     def set_is_rrr95(self, value):
         zx.tp_set_is_rrr95(self, value)
 
-    def set_is_rrr96(self, value):
-        zx.tp_set_is_rrr96(self, value)
+    def set_is_gfx_flickers(self, value):
+        zx.tp_set_is_gfx_flickers(self, value)
 
     def set_is_laser(self, value):
         zx.tp_set_is_laser(self, value)

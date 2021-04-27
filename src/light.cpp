@@ -13,6 +13,7 @@
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
 #include "my_ptrcheck.h"
+#include "my_random.h"
 
 static Texp g_light_overlay_tex;
 static int g_light_overlay_texid;
@@ -593,6 +594,7 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
     //
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
     blit_init();
+
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
@@ -633,8 +635,14 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
                         continue;
                     }
 
+                    if (t->is_gfx_flickers()) {
+                        if (random_range(0, 100) < 10) {
+                            l->flicker = random_range(0, 10);
+                        }
+                    }
+
+                    auto s = l->strength + l->flicker;
                     auto mid = (blit_br + blit_tl) / 2;
-                    auto s = l->strength;
                     auto tlx = mid.x - s;
                     auto tly = mid.y - s;
                     auto brx = mid.x + s;

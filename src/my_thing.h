@@ -835,7 +835,7 @@ public:
     int is_rrr93(void) const;
     int is_rrr94(void) const;
     int is_rrr95(void) const;
-    int is_rrr96(void) const;
+    int is_gfx_flickers(void) const;
     int is_laser(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;

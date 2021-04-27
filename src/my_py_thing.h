@@ -252,7 +252,7 @@ PyObject *thing_is_rrr92(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr93(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr94(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr95(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr96(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_gfx_flickers(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_laser(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal_minion_generator(PyObject *obj, PyObject *args, PyObject *keywds);
