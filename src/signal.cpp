@@ -11,6 +11,7 @@
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_globals.h"
+#include "my_traceback.h"
 
 void callstack_dump (void)
 {_
@@ -136,6 +137,7 @@ void segv_handler (int sig)
 
     crashed = 1;
     fprintf(MY_STDERR, "Crash!!!");
+    traceback_dump();
     ERR("Crashed");
 
     debug_crash_handler(sig);
@@ -144,6 +146,7 @@ void segv_handler (int sig)
 void ctrlc_handler (int sig)
 {_
     fprintf(MY_STDERR, "Interrupted!!!");
+    traceback_dump();
     DIE_CLEAN("Interrupted");
 }
 #endif

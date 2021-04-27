@@ -168,9 +168,12 @@ _
         } else if (tries < 1000) {
             x = mid_at.x + random_range(-MAP_BORDER_TOTAL * 4, MAP_BORDER_TOTAL * 4);
             y = mid_at.y + random_range(-MAP_BORDER_TOTAL * 4, MAP_BORDER_TOTAL * 4);
-        } else {
+        } else if (tries < 10000) {
             x = random_range(MAP_BORDER_TOTAL, MAP_WIDTH - MAP_BORDER_TOTAL);
             y = random_range(MAP_BORDER_TOTAL, MAP_HEIGHT - MAP_BORDER_TOTAL);
+        } else {
+            err("Could not fall to next level");
+            return false;
         }
         tries++;
 

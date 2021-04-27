@@ -1,5 +1,10 @@
 import zx
 
+zx.sound_load(volume=1.0, file="data/sounds/impacts/explosion_a.wav",                                       name="explosion_a")
+zx.sound_load(volume=1.0, file="data/sounds/impacts/explosion_b.wav",                                       name="explosion_b")
+zx.sound_load(volume=1.0, file="data/sounds/impacts/explosion_c.wav",                                       name="explosion_c")
+zx.sound_load(volume=1.0, file="data/sounds/impacts/explosion_d.wav",                                       name="explosion_d")
+zx.sound_load(volume=1.0, file="data/sounds/impacts/explosion_e.wav",                                       name="explosion_e")
 zx.sound_load(volume=1.0, file="data/sounds/abilities/lightning_a.wav",                                     name="lightning_a")
 zx.sound_load(volume=1.0, file="data/sounds/abilities/lightning_b.wav",                                     name="lightning_b")
 zx.sound_load(volume=0.25, file="data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav",      name="player_punch")

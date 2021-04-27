@@ -32,6 +32,7 @@ enum {
     CHANNEL_MONST,
     CHANNEL_MONST_DEATH,
     CHANNEL_WEAPON,
+    CHANNEL_EXPLOSION,
 };
 
 #endif
