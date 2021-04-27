@@ -7,10 +7,6 @@ def on_use(owner, item, target, x, y):
     #zx.con("target  {} {:08X} {}".format(zx.thing_get_name(target), target, target))
     zx.tp_spawn_radius_range(owner, item, target, "explosion_minor")
 
-    if zx.level_is_water_at(target, x, y):
-        pass
-    #zx.get_all_flood_fill_from(me, "is_water", x, y)
-
     target_x, target_y = zx.thing_get_coords(target)
     for thing in zx.level_get_all(owner, target_x, target_y):
         if zx.thing_is_monst(thing) or \
@@ -21,6 +17,25 @@ def on_use(owner, item, target, x, y):
                 zx.thing_is_minion_generator(thing) or \
                 zx.thing_is_brazier(thing):
             zx.thing_hit(owner, item, thing)
+
+    #
+    # Lightning can impact all things in the same pool
+    #
+    for water in zx.level_flood_fill_get_all_things(target, x, y, "is_water"):
+        water_x, water_y = zx.thing_get_coords(water)
+        for thing in zx.level_get_all(water, water_x, water_y):
+            if thing != target:
+                if zx.thing_is_monst(thing) or \
+                        zx.thing_is_item(thing) or \
+                        zx.thing_is_door(thing) or \
+                        zx.thing_is_wall(thing) or \
+                        zx.thing_is_player(thing) or \
+                        zx.thing_is_minion_generator(thing) or \
+                        zx.thing_is_brazier(thing):
+                    zx.thing_fire_at(owner, "laser_lightning_secondary", thing)
+
+                if zx.thing_is_player(thing):
+                    zx.topcon("Current surges through your body")
 
     zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "lightning_b", x, y)
 

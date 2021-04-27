@@ -5,7 +5,7 @@ def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
-    x.set_blast_max_radius(2)
+    x.set_blast_max_radius(0)
     x.set_blast_min_radius(0)
     x.set_charge_count(3)
     x.set_collision_circle(True)

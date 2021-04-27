@@ -9,6 +9,7 @@
 #include <Python.h>
 
 PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *level_is_able_to_change_levels_at(PyObject *obj, PyObject *args, PyObject *keywds);

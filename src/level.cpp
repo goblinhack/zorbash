@@ -1231,26 +1231,26 @@ void Level::unset_is_smoke (const int x, const int y)
 //
 // Used in lighting, so inlined
 //
-bool Level::is_oob (const int x, const int y, const int z)
+bool Level::is_oob (const int x, const int y, const int z) const
 {
     return ((x < 0) || (x >= MAP_WIDTH) ||
             (y < 0) || (y >= MAP_HEIGHT) ||
             (z < 0) || (z >= MAP_DEPTH));
 }
 
-bool Level::is_oob (const int x, const int y)
+bool Level::is_oob (const int x, const int y) const
 {
     return ((x < 0) || (x >= MAP_WIDTH) ||
             (y < 0) || (y >= MAP_HEIGHT));
 }
 
-bool Level::is_oob (const fpoint p)
+bool Level::is_oob (const fpoint p) const
 {
     return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
             (p.y < 0) || (p.y >= MAP_HEIGHT));
 }
 
-bool Level::is_oob (const point p)
+bool Level::is_oob (const point p) const
 {
     return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
             (p.y < 0) || (p.y >= MAP_HEIGHT));
@@ -1381,7 +1381,7 @@ void Level::unset_visited_no_check (const int x, const int y)
 //
 // Used in lighting, so inlined
 //
-bool Level::is_light_blocker (const point &p)
+bool Level::is_light_blocker (const point &p) const
 {
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -1389,12 +1389,12 @@ bool Level::is_light_blocker (const point &p)
     return (get(_is_light_blocker, p.x, p.y));
 }
 
-bool Level::is_light_blocker_no_check (const point &p)
+bool Level::is_light_blocker_no_check (const point &p) const
 {
     return (get_no_check(_is_light_blocker, p.x, p.y));
 }
 
-bool Level::is_light_blocker (const int x, const int y)
+bool Level::is_light_blocker (const int x, const int y) const
 {
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -1402,7 +1402,7 @@ bool Level::is_light_blocker (const int x, const int y)
     return (get(_is_light_blocker, x, y));
 }
 
-bool Level::is_light_blocker_no_check (const int x, const int y)
+bool Level::is_light_blocker_no_check (const int x, const int y) const
 {
     return (get_no_check(_is_light_blocker, x, y));
 }
@@ -1436,7 +1436,7 @@ void Level::unset_is_light_blocker_no_check (const int x, const int y)
 //
 // Used in lighting, so inlined
 //
-bool Level::is_movement_blocking_hard (const point &p)
+bool Level::is_movement_blocking_hard (const point &p) const
 {
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -1444,12 +1444,12 @@ bool Level::is_movement_blocking_hard (const point &p)
     return (get(_is_movement_blocking_hard, p.x, p.y));
 }
 
-bool Level::is_movement_blocking_hard_no_check (const point &p)
+bool Level::is_movement_blocking_hard_no_check (const point &p) const
 {
     return (get_no_check(_is_movement_blocking_hard, p.x, p.y));
 }
 
-bool Level::is_movement_blocking_hard (const int x, const int y)
+bool Level::is_movement_blocking_hard (const int x, const int y) const
 {
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -1457,7 +1457,7 @@ bool Level::is_movement_blocking_hard (const int x, const int y)
     return (get(_is_movement_blocking_hard, x, y));
 }
 
-bool Level::is_movement_blocking_hard_no_check (const int x, const int y)
+bool Level::is_movement_blocking_hard_no_check (const int x, const int y) const
 {
     return (get_no_check(_is_movement_blocking_hard, x, y));
 }
@@ -1491,7 +1491,7 @@ void Level::unset_is_movement_blocking_hard_no_check (const int x, const int y)
 //
 // Used in lighting, so inlined
 //
-bool Level::is_movement_blocking_soft (const point &p)
+bool Level::is_movement_blocking_soft (const point &p) const
 {
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
@@ -1499,12 +1499,12 @@ bool Level::is_movement_blocking_soft (const point &p)
     return (get(_is_movement_blocking_soft, p.x, p.y));
 }
 
-bool Level::is_movement_blocking_soft_no_check (const point &p)
+bool Level::is_movement_blocking_soft_no_check (const point &p) const
 {
     return (get_no_check(_is_movement_blocking_soft, p.x, p.y));
 }
 
-bool Level::is_movement_blocking_soft (const int x, const int y)
+bool Level::is_movement_blocking_soft (const int x, const int y) const
 {
     if (unlikely(is_oob(x, y))) {
         return (false);
@@ -1512,7 +1512,7 @@ bool Level::is_movement_blocking_soft (const int x, const int y)
     return (get(_is_movement_blocking_soft, x, y));
 }
 
-bool Level::is_movement_blocking_soft_no_check (const int x, const int y)
+bool Level::is_movement_blocking_soft_no_check (const int x, const int y) const
 {
     return (get_no_check(_is_movement_blocking_soft, x, y));
 }

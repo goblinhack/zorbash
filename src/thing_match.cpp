@@ -12,7 +12,7 @@
 #include "my_string.h"
 #include "slre.h"
 
-bool Thing::matches (const std::string& what)
+bool Thing::matches (const std::string& what) const
 {
     if (strisregexp(what.c_str())) {
         struct slre slre;
@@ -44,6 +44,7 @@ bool Thing::matches (const std::string& what)
     if (damage_doubled_from_fire() &&                         (what == "damage_doubled_from_fire"))                         { return true; }
     if (damage_doubled_from_poison() &&                       (what == "damage_doubled_from_poison"))                       { return true; }
     if (damage_doubled_from_water() &&                        (what == "damage_doubled_from_water"))                        { return true; }
+    if (gfx_flickers() &&                                     (what == "gfx_flickers"))                                         { return true; }
     if (is_able_to_change_levels() &&                         (what == "is_able_to_change_levels"))                         { return true; }
     if (is_able_to_fall() &&                                  (what == "is_able_to_fall"))                                  { return true; }
     if (is_able_to_fire_at() &&                               (what == "is_able_to_fire_at"))                               { return true; }
@@ -244,7 +245,6 @@ bool Thing::matches (const std::string& what)
     if (is_rrr93() &&                                         (what == "is_rrr93"))                                         { return true; }
     if (is_rrr94() &&                                         (what == "is_rrr94"))                                         { return true; }
     if (is_rrr95() &&                                         (what == "is_rrr95"))                                         { return true; }
-    if (gfx_flickers() &&                                         (what == "gfx_flickers"))                                         { return true; }
     if (is_secret_door() &&                                   (what == "is_secret_door"))                                   { return true; }
     if (is_sewer_wall() &&                                    (what == "is_sewer_wall"))                                    { return true; }
     if (is_shallow_water() &&                                 (what == "is_shallow_water"))                                 { return true; }
@@ -285,4 +285,264 @@ bool Thing::matches (const std::string& what)
     if ((is_shallow_water() || is_deep_water()) &&            (what == "is_water"))                                         { return true; }
 
     return (what == short_text_name());
+}
+
+std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
+{
+    if (what == "ai_avoid_distance")                                { return &Thing::ai_avoid_distance; }
+    if (what == "ai_vision_distance")                               { return &Thing::ai_vision_distance; }
+    if (what == "attack_eater")                                     { return &Thing::attack_eater; }
+    if (what == "attack_humanoid")                                  { return &Thing::attack_humanoid; }
+    if (what == "attack_living")                                    { return &Thing::attack_living; }
+    if (what == "attack_lunge")                                     { return &Thing::attack_lunge; }
+    if (what == "attack_meat")                                      { return &Thing::attack_meat; }
+    if (what == "attack_shove")                                     { return &Thing::attack_shove; }
+    if (what == "attack_shove_chance_d1000")                        { return &Thing::attack_shove_chance_d1000; }
+    if (what == "avoids_acid")                                      { return &Thing::avoids_acid; }
+    if (what == "avoids_fire")                                      { return &Thing::avoids_fire; }
+    if (what == "avoids_poison")                                    { return &Thing::avoids_poison; }
+    if (what == "avoids_water")                                     { return &Thing::avoids_water; }
+    if (what == "blast_max_radius")                                 { return &Thing::blast_max_radius; }
+    if (what == "blast_min_radius")                                 { return &Thing::blast_min_radius; }
+    if (what == "damage_doubled_from_acid")                         { return &Thing::damage_doubled_from_acid; }
+    if (what == "damage_doubled_from_fire")                         { return &Thing::damage_doubled_from_fire; }
+    if (what == "damage_doubled_from_poison")                       { return &Thing::damage_doubled_from_poison; }
+    if (what == "damage_doubled_from_water")                        { return &Thing::damage_doubled_from_water; }
+    if (what == "is_able_to_change_levels")                         { return &Thing::is_able_to_change_levels; }
+    if (what == "is_able_to_fall")                                  { return &Thing::is_able_to_fall; }
+    if (what == "is_able_to_fire_at")                               { return &Thing::is_able_to_fire_at; }
+    if (what == "is_able_to_see_through_doors")                     { return &Thing::is_able_to_see_through_doors; }
+    if (what == "is_able_to_walk_through_walls")                    { return &Thing::is_able_to_walk_through_walls; }
+    if (what == "is_acid")                                          { return &Thing::is_acid; }
+    if (what == "is_acid_lover")                                    { return &Thing::is_acid_lover; }
+    if (what == "is_active")                                        { return &Thing::is_active; }
+    if (what == "is_alive_monst")                                   { return &Thing::is_alive_monst; }
+    if (what == "is_always_hit")                                    { return &Thing::is_always_hit; }
+    if (what == "is_ascend_dungeon")                                { return &Thing::is_ascend_dungeon; }
+    if (what == "is_ascend_sewer")                                  { return &Thing::is_ascend_sewer; }
+    if (what == "is_attackable_by_monst")                           { return &Thing::is_attackable_by_monst; }
+    if (what == "is_attackable_by_player")                          { return &Thing::is_attackable_by_player; }
+    if (what == "is_auto_collect_item")                             { return &Thing::is_auto_collect_item; }
+    if (what == "is_bag")                                           { return &Thing::is_bag; }
+    if (what == "is_bleeder")                                       { return &Thing::is_bleeder; }
+    if (what == "is_blood")                                         { return &Thing::is_blood; }
+    if (what == "is_blood_splatter")                                { return &Thing::is_blood_splatter; }
+    if (what == "is_brazier")                                       { return &Thing::is_brazier; }
+    if (what == "is_burnable")                                      { return &Thing::is_burnable; }
+    if (what == "is_carrier_of_treasure_class_a")                   { return &Thing::is_carrier_of_treasure_class_a; }
+    if (what == "is_carrier_of_treasure_class_b")                   { return &Thing::is_carrier_of_treasure_class_b; }
+    if (what == "is_carrier_of_treasure_class_c")                   { return &Thing::is_carrier_of_treasure_class_c; }
+    if (what == "is_chasm")                                         { return &Thing::is_chasm; }
+    if (what == "is_collect_as_keys")                               { return &Thing::is_collect_as_keys; }
+    if (what == "is_collectable")                                   { return &Thing::is_collectable; }
+    if (what == "is_combustible")                                   { return &Thing::is_combustible; }
+    if (what == "is_corpse")                                        { return &Thing::is_corpse; }
+    if (what == "is_corridor")                                      { return &Thing::is_corridor; }
+    if (what == "is_critical_to_level")                             { return &Thing::is_critical_to_level; }
+    if (what == "is_cursor")                                        { return &Thing::is_cursor; }
+    if (what == "is_cursor_can_hover_over")                         { return &Thing::is_cursor_can_hover_over; }
+    if (what == "is_cursor_can_hover_over_but_needs_double_click")  { return &Thing::is_cursor_can_hover_over_but_needs_double_click; }
+    if (what == "is_cursor_path")                                   { return &Thing::is_cursor_path; }
+    if (what == "is_dead_on_shove")                                 { return &Thing::is_dead_on_shove; }
+    if (what == "is_deep_water")                                    { return &Thing::is_deep_water; }
+    if (what == "is_descend_dungeon")                               { return &Thing::is_descend_dungeon; }
+    if (what == "is_descend_sewer")                                 { return &Thing::is_descend_sewer; }
+    if (what == "is_described_when_hovering_over")                  { return &Thing::is_described_when_hovering_over; }
+    if (what == "is_dirt")                                          { return &Thing::is_dirt; }
+    if (what == "is_door")                                          { return &Thing::is_door; }
+    if (what == "is_droppable")                                     { return &Thing::is_droppable; }
+    if (what == "is_ethereal")                                      { return &Thing::is_ethereal; }
+    if (what == "is_ethereal_minion_generator")                     { return &Thing::is_ethereal_minion_generator; }
+    if (what == "is_explosion")                                     { return &Thing::is_explosion; }
+    if (what == "is_extreme_hazard")                                { return &Thing::is_extreme_hazard; }
+    if (what == "is_fearless")                                      { return &Thing::is_fearless; }
+    if (what == "is_fire")                                          { return &Thing::is_fire; }
+    if (what == "is_flammable")                                     { return &Thing::is_flammable; }
+    if (what == "is_floating")                                      { return &Thing::is_floating; }
+    if (what == "is_floor")                                         { return &Thing::is_floor; }
+    if (what == "is_floor_deco")                                    { return &Thing::is_floor_deco; }
+    if (what == "is_food")                                          { return &Thing::is_food; }
+    if (what == "is_food_eater")                                    { return &Thing::is_food_eater; }
+    if (what == "is_gold")                                          { return &Thing::is_gold; }
+    if (what == "is_hazard")                                        { return &Thing::is_hazard; }
+    if (what == "is_humanoid")                                      { return &Thing::is_humanoid; }
+    if (what == "is_hunger_insatiable")                             { return &Thing::is_hunger_insatiable; }
+    if (what == "is_intelligent")                                   { return &Thing::is_intelligent; }
+    if (what == "is_interesting")                                   { return &Thing::is_interesting; }
+    if (what == "is_item")                                          { return &Thing::is_item; }
+    if (what == "is_item_carrier")                                  { return &Thing::is_item_carrier; }
+    if (what == "is_item_collected_as_gold")                        { return &Thing::is_item_collected_as_gold; }
+    if (what == "is_item_eater")                                    { return &Thing::is_item_eater; }
+    if (what == "is_item_not_stackable")                            { return &Thing::is_item_not_stackable; }
+    if (what == "is_jelly")                                         { return &Thing::is_jelly; }
+    if (what == "is_jelly_baby")                                    { return &Thing::is_jelly_baby; }
+    if (what == "is_jelly_baby_eater")                              { return &Thing::is_jelly_baby_eater; }
+    if (what == "is_jelly_eater")                                   { return &Thing::is_jelly_eater; }
+    if (what == "is_jelly_parent")                                  { return &Thing::is_jelly_parent; }
+    if (what == "is_jumper")                                        { return &Thing::is_jumper; }
+    if (what == "is_jumper_chance_d1000")                           { return &Thing::is_jumper_chance_d1000; }
+    if (what == "is_jumper_distance")                               { return &Thing::is_jumper_distance; }
+    if (what == "is_jumper_on_low_hp_chance_d1000")                 { return &Thing::is_jumper_on_low_hp_chance_d1000; }
+    if (what == "is_key")                                           { return &Thing::is_key; }
+    if (what == "is_killed_on_hit_or_miss")                         { return &Thing::is_killed_on_hit_or_miss; }
+    if (what == "is_killed_on_hitting")                             { return &Thing::is_killed_on_hitting; }
+    if (what == "is_laser")                                         { return &Thing::is_laser; }
+    if (what == "is_laser_target_select_automatically_when_chosen") { return &Thing::is_laser_target_select_automatically_when_chosen; }
+    if (what == "is_lava")                                          { return &Thing::is_lava; }
+    if (what == "is_light_blocker")                                 { return &Thing::is_light_blocker; }
+    if (what == "is_living")                                        { return &Thing::is_living; }
+    if (what == "is_loggable_for_important_stuff")                  { return &Thing::is_loggable_for_important_stuff; }
+    if (what == "is_loggable_for_unimportant_stuff")                { return &Thing::is_loggable_for_unimportant_stuff; }
+    if (what == "is_meat")                                          { return &Thing::is_meat; }
+    if (what == "is_meat_eater")                                    { return &Thing::is_meat_eater; }
+    if (what == "is_minion")                                        { return &Thing::is_minion; }
+    if (what == "is_minion_generator")                              { return &Thing::is_minion_generator; }
+    if (what == "is_monst")                                         { return &Thing::is_monst; }
+    if (what == "is_moveable")                                      { return &Thing::is_moveable; }
+    if (what == "is_movement_blocking_hard")                        { return &Thing::is_movement_blocking_hard; }
+    if (what == "is_movement_blocking_soft")                        { return &Thing::is_movement_blocking_soft; }
+    if (what == "is_msg")                                           { return &Thing::is_msg; }
+    if (what == "is_no_tile")                                       { return &Thing::is_no_tile; }
+    if (what == "is_player")                                        { return &Thing::is_player; }
+    if (what == "is_poison")                                        { return &Thing::is_poison; }
+    if (what == "is_poison_immune")                                 { return &Thing::is_poison_immune; }
+    if (what == "is_potion")                                        { return &Thing::is_potion; }
+    if (what == "is_potion_eater")                                  { return &Thing::is_potion_eater; }
+    if (what == "is_projectile")                                    { return &Thing::is_projectile; }
+    if (what == "is_removeable_if_out_of_slots")                    { return &Thing::is_removeable_if_out_of_slots; }
+    if (what == "is_resurrectable")                                 { return &Thing::is_resurrectable; }
+    if (what == "is_ripple")                                        { return &Thing::is_ripple; }
+    if (what == "is_rock")                                          { return &Thing::is_rock; }
+    if (what == "is_rrr1")                                          { return &Thing::is_rrr1; }
+    if (what == "is_rrr10")                                         { return &Thing::is_rrr10; }
+    if (what == "is_rrr11")                                         { return &Thing::is_rrr11; }
+    if (what == "is_rrr12")                                         { return &Thing::is_rrr12; }
+    if (what == "is_rrr13")                                         { return &Thing::is_rrr13; }
+    if (what == "is_rrr14")                                         { return &Thing::is_rrr14; }
+    if (what == "is_rrr15")                                         { return &Thing::is_rrr15; }
+    if (what == "is_rrr16")                                         { return &Thing::is_rrr16; }
+    if (what == "is_rrr17")                                         { return &Thing::is_rrr17; }
+    if (what == "is_rrr18")                                         { return &Thing::is_rrr18; }
+    if (what == "is_rrr19")                                         { return &Thing::is_rrr19; }
+    if (what == "is_rrr2")                                          { return &Thing::is_rrr2; }
+    if (what == "is_rrr20")                                         { return &Thing::is_rrr20; }
+    if (what == "is_rrr21")                                         { return &Thing::is_rrr21; }
+    if (what == "is_rrr22")                                         { return &Thing::is_rrr22; }
+    if (what == "is_rrr23")                                         { return &Thing::is_rrr23; }
+    if (what == "is_rrr24")                                         { return &Thing::is_rrr24; }
+    if (what == "is_rrr25")                                         { return &Thing::is_rrr25; }
+    if (what == "is_rrr26")                                         { return &Thing::is_rrr26; }
+    if (what == "is_rrr27")                                         { return &Thing::is_rrr27; }
+    if (what == "is_rrr28")                                         { return &Thing::is_rrr28; }
+    if (what == "is_rrr29")                                         { return &Thing::is_rrr29; }
+    if (what == "is_rrr3")                                          { return &Thing::is_rrr3; }
+    if (what == "is_rrr30")                                         { return &Thing::is_rrr30; }
+    if (what == "is_rrr31")                                         { return &Thing::is_rrr31; }
+    if (what == "is_rrr32")                                         { return &Thing::is_rrr32; }
+    if (what == "is_rrr33")                                         { return &Thing::is_rrr33; }
+    if (what == "is_rrr34")                                         { return &Thing::is_rrr34; }
+    if (what == "is_rrr35")                                         { return &Thing::is_rrr35; }
+    if (what == "is_rrr36")                                         { return &Thing::is_rrr36; }
+    if (what == "is_rrr37")                                         { return &Thing::is_rrr37; }
+    if (what == "is_rrr38")                                         { return &Thing::is_rrr38; }
+    if (what == "is_rrr39")                                         { return &Thing::is_rrr39; }
+    if (what == "is_rrr4")                                          { return &Thing::is_rrr4; }
+    if (what == "is_rrr40")                                         { return &Thing::is_rrr40; }
+    if (what == "is_rrr41")                                         { return &Thing::is_rrr41; }
+    if (what == "is_rrr42")                                         { return &Thing::is_rrr42; }
+    if (what == "is_rrr43")                                         { return &Thing::is_rrr43; }
+    if (what == "is_rrr44")                                         { return &Thing::is_rrr44; }
+    if (what == "is_rrr45")                                         { return &Thing::is_rrr45; }
+    if (what == "is_rrr46")                                         { return &Thing::is_rrr46; }
+    if (what == "is_rrr47")                                         { return &Thing::is_rrr47; }
+    if (what == "is_rrr48")                                         { return &Thing::is_rrr48; }
+    if (what == "is_rrr49")                                         { return &Thing::is_rrr49; }
+    if (what == "is_rrr5")                                          { return &Thing::is_rrr5; }
+    if (what == "is_rrr50")                                         { return &Thing::is_rrr50; }
+    if (what == "is_rrr51")                                         { return &Thing::is_rrr51; }
+    if (what == "is_rrr52")                                         { return &Thing::is_rrr52; }
+    if (what == "is_rrr53")                                         { return &Thing::is_rrr53; }
+    if (what == "is_rrr54")                                         { return &Thing::is_rrr54; }
+    if (what == "is_rrr55")                                         { return &Thing::is_rrr55; }
+    if (what == "is_rrr56")                                         { return &Thing::is_rrr56; }
+    if (what == "is_rrr57")                                         { return &Thing::is_rrr57; }
+    if (what == "is_rrr58")                                         { return &Thing::is_rrr58; }
+    if (what == "is_rrr59")                                         { return &Thing::is_rrr59; }
+    if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
+    if (what == "is_rrr60")                                         { return &Thing::is_rrr60; }
+    if (what == "is_rrr61")                                         { return &Thing::is_rrr61; }
+    if (what == "is_rrr62")                                         { return &Thing::is_rrr62; }
+    if (what == "is_rrr63")                                         { return &Thing::is_rrr63; }
+    if (what == "is_rrr64")                                         { return &Thing::is_rrr64; }
+    if (what == "is_rrr65")                                         { return &Thing::is_rrr65; }
+    if (what == "is_rrr66")                                         { return &Thing::is_rrr66; }
+    if (what == "is_rrr67")                                         { return &Thing::is_rrr67; }
+    if (what == "is_rrr68")                                         { return &Thing::is_rrr68; }
+    if (what == "is_rrr69")                                         { return &Thing::is_rrr69; }
+    if (what == "is_rrr7")                                          { return &Thing::is_rrr7; }
+    if (what == "is_rrr70")                                         { return &Thing::is_rrr70; }
+    if (what == "is_rrr71")                                         { return &Thing::is_rrr71; }
+    if (what == "is_rrr72")                                         { return &Thing::is_rrr72; }
+    if (what == "is_rrr73")                                         { return &Thing::is_rrr73; }
+    if (what == "is_rrr74")                                         { return &Thing::is_rrr74; }
+    if (what == "is_rrr75")                                         { return &Thing::is_rrr75; }
+    if (what == "is_rrr76")                                         { return &Thing::is_rrr76; }
+    if (what == "is_rrr77")                                         { return &Thing::is_rrr77; }
+    if (what == "is_rrr78")                                         { return &Thing::is_rrr78; }
+    if (what == "is_rrr79")                                         { return &Thing::is_rrr79; }
+    if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
+    if (what == "is_rrr80")                                         { return &Thing::is_rrr80; }
+    if (what == "is_rrr81")                                         { return &Thing::is_rrr81; }
+    if (what == "is_rrr82")                                         { return &Thing::is_rrr82; }
+    if (what == "is_rrr83")                                         { return &Thing::is_rrr83; }
+    if (what == "is_rrr84")                                         { return &Thing::is_rrr84; }
+    if (what == "is_rrr85")                                         { return &Thing::is_rrr85; }
+    if (what == "is_rrr86")                                         { return &Thing::is_rrr86; }
+    if (what == "is_rrr87")                                         { return &Thing::is_rrr87; }
+    if (what == "is_rrr88")                                         { return &Thing::is_rrr88; }
+    if (what == "is_rrr89")                                         { return &Thing::is_rrr89; }
+    if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }
+    if (what == "is_rrr90")                                         { return &Thing::is_rrr90; }
+    if (what == "is_rrr91")                                         { return &Thing::is_rrr91; }
+    if (what == "is_rrr92")                                         { return &Thing::is_rrr92; }
+    if (what == "is_rrr93")                                         { return &Thing::is_rrr93; }
+    if (what == "is_rrr94")                                         { return &Thing::is_rrr94; }
+    if (what == "is_rrr95")                                         { return &Thing::is_rrr95; }
+    if (what == "gfx_flickers")                                     { return &Thing::gfx_flickers; }
+    if (what == "is_secret_door")                                   { return &Thing::is_secret_door; }
+    if (what == "is_sewer_wall")                                    { return &Thing::is_sewer_wall; }
+    if (what == "is_shallow_water")                                 { return &Thing::is_shallow_water; }
+    if (what == "is_shovable")                                      { return &Thing::is_shovable; }
+    if (what == "is_shown_on_leftbar")                              { return &Thing::is_shown_on_leftbar; }
+    if (what == "is_shown_uniquely_on_leftbar")                     { return &Thing::is_shown_uniquely_on_leftbar; }
+    if (what == "is_skill")                                         { return &Thing::is_skill; }
+    if (what == "is_smoke")                                         { return &Thing::is_smoke; }
+    if (what == "is_spawner")                                       { return &Thing::is_spawner; }
+    if (what == "is_stamina_check")                                 { return &Thing::is_stamina_check; }
+    if (what == "is_steal_item_chance_d1000")                       { return &Thing::is_steal_item_chance_d1000; }
+    if (what == "is_temporary_bag")                                 { return &Thing::is_temporary_bag; }
+    if (what == "is_throwable")                                     { return &Thing::is_throwable; }
+    if (what == "is_thrown_automatically_when_chosen")              { return &Thing::is_thrown_automatically_when_chosen; }
+    if (what == "is_torch")                                         { return &Thing::is_torch; }
+    if (what == "is_treasure")                                      { return &Thing::is_treasure; }
+    if (what == "is_treasure_class_a")                              { return &Thing::is_treasure_class_a; }
+    if (what == "is_treasure_class_b")                              { return &Thing::is_treasure_class_b; }
+    if (what == "is_treasure_class_c")                              { return &Thing::is_treasure_class_c; }
+    if (what == "is_treasure_eater")                                { return &Thing::is_treasure_eater; }
+    if (what == "is_undead")                                        { return &Thing::is_undead; }
+    if (what == "is_usable")                                        { return &Thing::is_usable; }
+    if (what == "is_used_automatically_when_selected")              { return &Thing::is_used_automatically_when_selected; }
+    if (what == "is_used_when_thrown")                              { return &Thing::is_used_when_thrown; }
+    if (what == "is_wall")                                          { return &Thing::is_wall; }
+    if (what == "is_wall_dungeon")                                  { return &Thing::is_wall_dungeon; }
+    if (what == "is_wand")                                          { return &Thing::is_wand; }
+    if (what == "is_water_lover")                                   { return &Thing::is_water_lover; }
+    if (what == "is_weapon")                                        { return &Thing::is_weapon; }
+    if (what == "is_weapon_wielder")                                { return &Thing::is_weapon_wielder; }
+    if (what == "minion_leash_distance")                            { return &Thing::minion_leash_distance; }
+    if (what == "minion_limit")                                     { return &Thing::minion_limit; }
+    if (what == "range_max")                                        { return &Thing::range_max; }
+    if (what == "is_water")                                         { return &Thing::is_water; }
+
+    DIE("could not find a matches function for [%s]", what.c_str());
 }

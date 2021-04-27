@@ -243,7 +243,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *level_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    uint32_t id = 0;	                                                            \
+    uint32_t id = 0;
     int x = -1;
     int y = -1;
     static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", 0};	
@@ -292,6 +292,52 @@ PyObject *level_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
         PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
         item++;
     } FOR_ALL_THINGS_END()
+
+    return (lst);
+}
+
+PyObject *level_flood_fill_get_all_things (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    uint32_t id = 0;
+    int x = -1;
+    int y = -1;
+    static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", (char*)"filter", 0};	
+    char *filter = nullptr;
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iiis", kwlist, &id, &x, &y, &filter)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_FALSE;	
+    }	
+	
+    if (!id) {
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	
+        Py_RETURN_FALSE;	
+    }
+
+    if (!filter) {
+        ERR("%s: no filter specified %u", __FUNCTION__, id);	
+        Py_RETURN_FALSE;	
+    }
+
+    Thingp t = game->thing_find(id);	
+    if (!t) {	
+        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);
+        Py_RETURN_NONE;	
+    }	
+
+    if (t->level->is_oob(x, y)) {
+        PyObject *lst = PyList_New(0);
+        return (lst);
+    }
+
+    auto things = t->level->flood_fill_things(point(x, y), Thing::matches_to_func(filter));
+    auto items = things.size();
+    PyObject *lst = PyList_New(items);
+    auto item = 0;
+    for (auto t : things) {
+        PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
+        item++;
+    }
 
     return (lst);
 }

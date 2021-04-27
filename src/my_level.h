@@ -316,22 +316,22 @@ public:
     bool inventory_over(const uint32_t slot);
     bool skillbox_chosen(const uint32_t slot);
     bool skillbox_over(const uint32_t slot);
-    bool is_light_blocker(const int x, const int y);
-    bool is_light_blocker(const point &p);
-    bool is_light_blocker_no_check(const int x, const int y);
-    bool is_light_blocker_no_check(const point &p);
-    bool is_movement_blocking_hard(const int x, const int y);
-    bool is_movement_blocking_hard(const point &p);
-    bool is_movement_blocking_hard_no_check(const int x, const int y);
-    bool is_movement_blocking_hard_no_check(const point &p);
-    bool is_movement_blocking_soft(const int x, const int y);
-    bool is_movement_blocking_soft(const point &p);
-    bool is_movement_blocking_soft_no_check(const int x, const int y);
-    bool is_movement_blocking_soft_no_check(const point &p);
-    bool is_oob(const fpoint p);
-    bool is_oob(const int x, const int y);
-    bool is_oob(const int x, const int y, const int z);
-    bool is_oob(const point p);
+    bool is_light_blocker(const int x, const int y) const;
+    bool is_light_blocker(const point &p) const;
+    bool is_light_blocker_no_check(const int x, const int y) const;
+    bool is_light_blocker_no_check(const point &p) const;
+    bool is_movement_blocking_hard(const int x, const int y) const;
+    bool is_movement_blocking_hard(const point &p) const;
+    bool is_movement_blocking_hard_no_check(const int x, const int y) const;
+    bool is_movement_blocking_hard_no_check(const point &p) const;
+    bool is_movement_blocking_soft(const int x, const int y) const;
+    bool is_movement_blocking_soft(const point &p) const;
+    bool is_movement_blocking_soft_no_check(const int x, const int y) const;
+    bool is_movement_blocking_soft_no_check(const point &p) const;
+    bool is_oob(const fpoint p) const;
+    bool is_oob(const int x, const int y) const;
+    bool is_oob(const int x, const int y, const int z) const;
+    bool is_oob(const point p) const;
     bool screen_shake_begin(void);
     float get_wobble(void) const;
     float update_wobble(void);
@@ -642,6 +642,9 @@ public:
     bool can_see_obstacle(int x, int y);
     bool can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag);
     bool can_see(int x0, int y0, int x1, int y1);
+    std::deque<point> flood_fill(point) const;
+    std::deque<point> flood_fill_points(point, std::function<int(Thingp)> filter);
+    std::deque<Thingp> flood_fill_things(point, std::function<int(Thingp)> filter);
 };
 
 #endif
