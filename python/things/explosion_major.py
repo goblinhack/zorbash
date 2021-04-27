@@ -1,6 +1,9 @@
 import zx
 import tp
 
+def on_death(me, x, y):
+    zx.sound_play_channel_at(zx.CHANNEL_EXPLOSION, "explosion_d", x, y)
+
 def tp_init(name):
     x = tp.Tp(name)
     x.set_gfx_animated(True)
@@ -14,6 +17,7 @@ def tp_init(name):
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_light_color("yellow")
     x.set_light_strength(4)
+    x.set_on_death_do("explosion_major.on_death()")
     x.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MAJOR)
     x.set_z_prio(zx.MAP_PRIO_INFRONT)
 
