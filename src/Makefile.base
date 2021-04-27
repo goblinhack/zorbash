@@ -69,6 +69,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/laser.o                       \
     $(OBJDIR)/level.o                       \
     $(OBJDIR)/level_create.o                \
+    $(OBJDIR)/level_flood.o                 \
     $(OBJDIR)/level_create_dungeon.o        \
     $(OBJDIR)/level_create_sewer.o          \
     $(OBJDIR)/level_cursor.o                \

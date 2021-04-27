@@ -261,21 +261,47 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (is_player()) {
         if (damage > THING_DAMAGE_SHAKE_ABOVE) {
             level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
-            if (crit) {
-                TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$",
-                       real_hitter->text_The().c_str(),
-                       damage);
-            } else {
-                if (hitter->is_weapon()) {
-                    TOPCON("%%fg=red$%s hits you for %d damage with %s!%%fg=reset$",
-                           real_hitter->text_The().c_str(),
-                           damage,
-                           hitter->text_the().c_str());
-                } else {
-                    TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
-                           real_hitter->text_The().c_str(),
-                           real_hitter->text_hits().c_str(),
+            if (real_hitter == this) {
+                if (crit) {
+                    TOPCON("%%fg=red$You CRIT yourselfd for %d damage!%%fg=reset$",
                            damage);
+                } else {
+                    if (hitter->is_weapon()) {
+                        TOPCON("%%fg=red$You hit yourself for %d damage with %s!%%fg=reset$",
+                               damage,
+                               hitter->text_the().c_str());
+                    } else if (hitter->is_wand()) {
+                        TOPCON("%%fg=red$You zap yourself for %d damage with %s!%%fg=reset$",
+                               damage,
+                               hitter->text_the().c_str());
+                    } else {
+                        TOPCON("%%fg=red$You hurt yourself for %d damage with %s!%%fg=reset$",
+                               damage,
+                               hitter->text_the().c_str());
+                    }
+                }
+            } else {
+                if (crit) {
+                    TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$",
+                           real_hitter->text_The().c_str(),
+                           damage);
+                } else {
+                    if (hitter->is_weapon()) {
+                        TOPCON("%%fg=red$%s hits you for %d damage with %s!%%fg=reset$",
+                               real_hitter->text_The().c_str(),
+                               damage,
+                               hitter->text_the().c_str());
+                    } else if (hitter->is_wand()) {
+                        TOPCON("%%fg=red$%s zaps you for %d damage with %s!%%fg=reset$",
+                               real_hitter->text_The().c_str(),
+                               damage,
+                               hitter->text_the().c_str());
+                    } else {
+                        TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
+                               real_hitter->text_The().c_str(),
+                               real_hitter->text_hits().c_str(),
+                               damage);
+                    }
                 }
             }
 
@@ -286,21 +312,47 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 }
             }
         } else {
-            if (bite) {
-                TOPCON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$",
-                        real_hitter->text_The().c_str(),
-                        damage);
-            } else {
-                if (hitter->is_weapon()) {
-                    TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$",
-                           real_hitter->text_The().c_str(),
-                           damage,
-                           hitter->text_the().c_str());
+            if (real_hitter == this) {
+                if (bite) {
+                    TOPCON("%%fg=yellow$You bite yourself for %d damage!%%fg=reset$",
+                            damage);
                 } else {
-                    TOPCON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
-                           real_hitter->text_The().c_str(),
-                           real_hitter->text_hits().c_str(),
-                           damage);
+                    if (hitter->is_weapon()) {
+                        TOPCON("%%fg=yellow$You hit yourself for %d damage with %s!%%fg=reset$",
+                               damage,
+                               hitter->text_the().c_str());
+                    } else if (hitter->is_wand()) {
+                        TOPCON("%%fg=yellow$You zap yourself for %d damage with %s!%%fg=reset$",
+                               damage,
+                               hitter->text_the().c_str());
+                    } else {
+                        TOPCON("%%fg=yellow$You hurt yourself for %d damage with %s!%%fg=reset$",
+                               damage,
+                               hitter->text_the().c_str());
+                    }
+                }
+            } else {
+                if (bite) {
+                    TOPCON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$",
+                            real_hitter->text_The().c_str(),
+                            damage);
+                } else {
+                    if (hitter->is_weapon()) {
+                        TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$",
+                               real_hitter->text_The().c_str(),
+                               damage,
+                               hitter->text_the().c_str());
+                    } else if (hitter->is_wand()) {
+                        TOPCON("%%fg=yellow$%s zaps you for %d damage with %s!%%fg=reset$",
+                               real_hitter->text_The().c_str(),
+                               damage,
+                               hitter->text_the().c_str());
+                    } else {
+                        TOPCON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
+                               real_hitter->text_The().c_str(),
+                               real_hitter->text_hits().c_str(),
+                               damage);
+                    }
                 }
             }
         }
@@ -462,8 +514,12 @@ _
         // If on fire, the fire is owned by the player. So don't make the
         // player the real hitter.
         //
-        if (real_hitter == this) {
-            real_hitter = nullptr;
+        if (real_hitter) {
+            if (real_hitter->is_fire()) {
+                if (real_hitter == this) {
+                    real_hitter = nullptr;
+                }
+            }
         }
 
         if (!real_hitter) {

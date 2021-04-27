@@ -273,7 +273,8 @@ public:
     bool laser_fire(Thingp item, Thingp target);
     bool laser_fire_monst(const std::string &item, Thingp target);
     bool location_check();
-    bool matches(const std::string& what);
+    bool matches(const std::string& what) const;
+    static std::function<int(Thingp)> matches_to_func(const std::string& what);
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
     bool move_no_shove(fpoint future_pos);

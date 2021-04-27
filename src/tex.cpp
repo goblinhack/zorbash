@@ -90,12 +90,12 @@ static unsigned char *load_raw_image (std::string filename,
 
     file_data = file_load(filename.c_str(), &len);
     if (!file_data) {
-        ERR("Could not read file, '%s'", filename.c_str());
+        DIE("Could not read file, '%s'", filename.c_str());
     }
 
     image_data = stbi_load_from_memory(file_data, len, x, y, comp, 0);
     if (!image_data) {
-        ERR("Could not read memory for file, '%s'", filename.c_str());
+        DIE("Could not read memory for file, '%s'", filename.c_str());
     }
 
     DBG("loaded '%s', %ux%u", filename.c_str(), *x, *y);

@@ -5,7 +5,6 @@ def on_use(owner, item, target, x, y):
     #zx.con("owner   {} {:08X} {}".format(zx.thing_get_name(owner), owner, owner))
     #zx.con("item    {} {:08X} {}".format(zx.thing_get_name(item), item, item))
     #zx.con("target  {} {:08X} {}".format(zx.thing_get_name(target), target, target))
-    zx.tp_spawn_radius_range(owner, item, target, "explosion_minor")
 
     target_x, target_y = zx.thing_get_coords(target)
     for thing in zx.level_get_all(owner, target_x, target_y):
@@ -17,25 +16,6 @@ def on_use(owner, item, target, x, y):
                 zx.thing_is_minion_generator(thing) or \
                 zx.thing_is_brazier(thing):
             zx.thing_hit(owner, item, thing)
-
-    #
-    # Lightning can impact all things in the same pool
-    #
-    for water in zx.level_flood_fill_get_all_things(target, x, y, "is_water"):
-        water_x, water_y = zx.thing_get_coords(water)
-        for thing in zx.level_get_all(water, water_x, water_y):
-            if thing != target:
-                if zx.thing_is_monst(thing) or \
-                        zx.thing_is_item(thing) or \
-                        zx.thing_is_door(thing) or \
-                        zx.thing_is_wall(thing) or \
-                        zx.thing_is_player(thing) or \
-                        zx.thing_is_minion_generator(thing) or \
-                        zx.thing_is_brazier(thing):
-                    zx.thing_fire_at(owner, "laser_lightning_secondary", thing)
-
-                if zx.thing_is_player(thing):
-                    zx.topcon("Current surges through your body")
 
     zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "lightning_b", x, y)
 
@@ -57,14 +37,14 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_no_tile(True)
     x.set_is_usable(True)
     x.set_is_spawner(True)
-    x.set_laser_name("laser_lightning")
-    x.set_on_use_do("laser_lightning.on_use()")
+    x.set_laser_name("laser_lightning_secondary")
+    x.set_on_use_do("laser_lightning_secondary.on_use()")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     x.update()
 
 def init():
-    tp_init(name="laser_lightning", text_name="laser beam of lightning", short_text_name="laser.lightning")
+    tp_init(name="laser_lightning_secondary", text_name="laser beam of lightning", short_text_name="laser.lightning")
 
 init()

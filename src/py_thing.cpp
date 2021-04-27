@@ -307,6 +307,10 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
 
     owner->log("fire %s at %s", item, target->to_string().c_str());
 
+    if (owner->get_top_owner()) {
+        owner = owner->get_top_owner();
+    }
+
     if (owner->laser_fire_monst(std::string(item), target)) {
         Py_RETURN_TRUE;	
     } else {
