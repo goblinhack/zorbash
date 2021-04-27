@@ -40,8 +40,8 @@ public:
     int16_t            orig_strength {}; // Initial strenght
     int16_t            prev_strength {}; // Light before torch changes
     int16_t            strength {};      // Current torch strength
+    uint16_t           flicker {};
     uint16_t           max_light_rays {};
-    uint8_t            flicker {0};
     uint8_t            is_being_destroyed:1 {};
 
     void destroy();

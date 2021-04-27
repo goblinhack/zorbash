@@ -223,7 +223,7 @@ PyObject *level_is_rrr92_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr93_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr94_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr95_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr96_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_gfx_flickers_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_laser_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_fire_at_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ethereal_minion_generator_at(PyObject *obj, PyObject *args, PyObject *keywds);
