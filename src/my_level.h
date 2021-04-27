@@ -12,6 +12,7 @@
 #include "my_thing_defs.h"
 #include "my_particle.h"
 #include "my_laser.h"
+#include "my_projectile.h"
 #include "my_dungeon.h"
 #include "my_fwd.h"
 #include "my_dmap.h"
@@ -181,6 +182,9 @@ public:
     //
     std::vector<Particle>      all_external_particles;
     std::vector<Particle>      new_external_particles;
+
+    std::vector<Projectile>    all_projectiles;
+    std::vector<Projectile>    new_projectiles;
 
     std::vector<Laser>         all_lasers;
     std::vector<Laser>         new_lasers;
@@ -483,6 +487,7 @@ public:
     void display_fade_out(void);
     void display_internal_particles(void);
     void display_lasers(void);
+    void display_projectiles(void);
     void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map(void);
     void display_map_bg_things(void);
@@ -514,6 +519,7 @@ public:
     void new_internal_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
     void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip, bool make_visible_at_end);
     void new_laser(ThingId id, point start, point stop, uint32_t dur);
+    void new_projectile(ThingId id, point start, point stop, uint32_t dur);
     void place_dirt(Dungeonp d);
     void place_floor_deco(Dungeonp d);
     void place_the_grid(void);

@@ -230,12 +230,12 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class,    \
                                      &value)) {                                 \
         ERR("%s: bad args", __FUNCTION__);                                      \
-        Py_RETURN_FALSE;                                                         \
+        Py_RETURN_FALSE;                                                        \
     }                                                                           \
                                                                                 \
     if (!py_class) {                                                            \
         ERR("%s: missing class", __FUNCTION__);                                 \
-        Py_RETURN_FALSE;                                                         \
+        Py_RETURN_FALSE;                                                        \
     }                                                                           \
                                                                                 \
     tp_name = py_obj_attr_str(py_class, "name");                                \
@@ -275,12 +275,12 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|d", kwlist, &py_class,    \
                                      &value)) {                                 \
         ERR("%s: bad args", __FUNCTION__);                                      \
-        Py_RETURN_FALSE;                                                         \
+        Py_RETURN_FALSE;                                                        \
     }                                                                           \
                                                                                 \
     if (!py_class) {                                                            \
         ERR("%s: missing class", __FUNCTION__);                                 \
-        Py_RETURN_FALSE;                                                         \
+        Py_RETURN_FALSE;                                                        \
     }                                                                           \
                                                                                 \
     tp_name = py_obj_attr_str(py_class, (char*) "name");                        \
@@ -1299,7 +1299,7 @@ TP_BODY_SET_INT(is_jumper_on_low_hp_chance_d1000)
 TP_BODY_SET_INT(is_key)
 TP_BODY_SET_INT(is_killed_on_hit_or_miss)
 TP_BODY_SET_INT(is_killed_on_hitting)
-TP_BODY_SET_INT(is_laser_target_select_automatically_when_chosen)
+TP_BODY_SET_INT(is_target_select_automatically_when_chosen)
 TP_BODY_SET_INT(is_lava)
 TP_BODY_SET_INT(is_light_blocker)
 TP_BODY_SET_INT(is_living)
@@ -1419,7 +1419,6 @@ TP_BODY_SET_INT(is_rrr91)
 TP_BODY_SET_INT(is_rrr92)
 TP_BODY_SET_INT(is_rrr93)
 TP_BODY_SET_INT(is_rrr94)
-TP_BODY_SET_INT(is_rrr95)
 TP_BODY_SET_INT(gfx_flickers)
 TP_BODY_SET_INT(is_laser)
 TP_BODY_SET_INT(is_able_to_fire_at)
@@ -1523,7 +1522,7 @@ TP_BODY_SET_STRING(str2)
 TP_BODY_SET_STRING(str3)
 TP_BODY_SET_STRING(str4)
 TP_BODY_SET_STRING(str5)
-TP_BODY_SET_STRING(str6)
+TP_BODY_SET_STRING(projectile_name)
 TP_BODY_SET_STRING(text_a_or_an)
 TP_BODY_SET_STRING(text_description)
 TP_BODY_SET_STRING(text_hits)

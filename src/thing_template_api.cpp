@@ -77,7 +77,7 @@ const std::string& Tp::str2(void) const                  { return _str2; }
 const std::string& Tp::str3(void) const                  { return _str3; }
 const std::string& Tp::str4(void) const                  { return _str4; }
 const std::string& Tp::str5(void) const                  { return _str5; }
-const std::string& Tp::str6(void) const                  { return _str6; }
+const std::string& Tp::projectile_name(void) const                  { return _projectile_name; }
 const std::string& Tp::text_description(void) const      { return _text_description; }
 const std::string& Tp::text_hits(void) const             { return _text_hits; }
 const std::string& Tp::text_name(void) const             { return _text_name; }
@@ -220,7 +220,7 @@ int Tp::is_jumper_on_low_hp_chance_d1000(void) const                 { return _i
 int Tp::is_key(void) const                                           { return _is_key; }
 int Tp::is_killed_on_hit_or_miss(void) const                         { return _is_killed_on_hit_or_miss; }
 int Tp::is_killed_on_hitting(void) const                             { return _is_killed_on_hitting; }
-int Tp::is_laser_target_select_automatically_when_chosen(void) const { return _is_laser_target_select_automatically_when_chosen; }
+int Tp::is_target_select_automatically_when_chosen(void) const { return _is_target_select_automatically_when_chosen; }
 int Tp::is_lava(void) const                                          { return _is_lava; }
 int Tp::is_light_blocker(void) const                                 { return _is_light_blocker; }
 int Tp::is_living(void) const                                        { return _is_living; }
@@ -340,12 +340,11 @@ int Tp::is_rrr91(void) const                                         { return _i
 int Tp::is_rrr92(void) const                                         { return _is_rrr92; }
 int Tp::is_rrr93(void) const                                         { return _is_rrr93; }
 int Tp::is_rrr94(void) const                                         { return _is_rrr94; }
-int Tp::is_rrr95(void) const                                         { return _is_rrr95; }
-int Tp::gfx_flickers(void) const                                         { return _gfx_flickers; }
+int Tp::gfx_flickers(void) const                                     { return _gfx_flickers; }
 int Tp::is_laser(void) const                                         { return _is_laser; }
-int Tp::is_able_to_fire_at(void) const                                         { return _is_able_to_fire_at; }
-int Tp::ai_vision_distance(void) const                                         { return _ai_vision_distance; }
-int Tp::is_ethereal_minion_generator(void) const                                        { return _is_ethereal_minion_generator; }
+int Tp::is_able_to_fire_at(void) const                               { return _is_able_to_fire_at; }
+int Tp::ai_vision_distance(void) const                               { return _ai_vision_distance; }
+int Tp::is_ethereal_minion_generator(void) const                     { return _is_ethereal_minion_generator; }
 int Tp::is_secret_door(void) const                                   { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const                                 { return _is_shallow_water; }
@@ -546,7 +545,7 @@ void Tp::set_is_jumper_on_low_hp_chance_d1000(int v)                 { _is_jumpe
 void Tp::set_is_key(int v)                                           { _is_key = v; }
 void Tp::set_is_killed_on_hit_or_miss(int v)                         { _is_killed_on_hit_or_miss = v; }
 void Tp::set_is_killed_on_hitting(int v)                             { _is_killed_on_hitting = v; }
-void Tp::set_is_laser_target_select_automatically_when_chosen(int v) { _is_laser_target_select_automatically_when_chosen = v; }
+void Tp::set_is_target_select_automatically_when_chosen(int v) { _is_target_select_automatically_when_chosen = v; }
 void Tp::set_is_lava(int v)                                          { _is_lava = v; }
 void Tp::set_is_light_blocker(int v)                                 { _is_light_blocker = v; }
 void Tp::set_is_living(int v)                                        { _is_living = v; }
@@ -567,7 +566,6 @@ void Tp::set_is_poison(int v)                                        { _is_poiso
 void Tp::set_is_poison_immune(int v)                                 { _is_poison_immune = v; }
 void Tp::set_is_potion(int v)                                        { _is_potion = v; }
 void Tp::set_is_potion_eater(int v)                                  { _is_potion_eater = v; }
-void Tp::set_is_projectile(int v)                                    { _is_projectile = v; }
 void Tp::set_is_removeable_if_out_of_slots(int v)                    { _is_removeable_if_out_of_slots = v; }
 void Tp::set_is_resurrectable(int v)                                 { _is_resurrectable = v; }
 void Tp::set_is_ripple(int v)                                        { _is_ripple = v; }
@@ -666,12 +664,12 @@ void Tp::set_is_rrr91(int v)                                         { _is_rrr91
 void Tp::set_is_rrr92(int v)                                         { _is_rrr92 = v; }
 void Tp::set_is_rrr93(int v)                                         { _is_rrr93 = v; }
 void Tp::set_is_rrr94(int v)                                         { _is_rrr94 = v; }
-void Tp::set_is_rrr95(int v)                                         { _is_rrr95 = v; }
-void Tp::set_gfx_flickers(int v)                                         { _gfx_flickers = v; }
+void Tp::set_is_projectile(int v)                                    { _is_projectile = v; }
+void Tp::set_gfx_flickers(int v)                                     { _gfx_flickers = v; }
 void Tp::set_is_laser(int v)                                         { _is_laser = v; }
-void Tp::set_is_able_to_fire_at(int v)                                         { _is_able_to_fire_at = v; }
-void Tp::set_ai_vision_distance(int v)                                         { _ai_vision_distance = v; }
-void Tp::set_is_ethereal_minion_generator(int v)                                         { _is_ethereal_minion_generator = v; }
+void Tp::set_is_able_to_fire_at(int v)                               { _is_able_to_fire_at = v; }
+void Tp::set_ai_vision_distance(int v)                               { _ai_vision_distance = v; }
+void Tp::set_is_ethereal_minion_generator(int v)                     { _is_ethereal_minion_generator = v; }
 void Tp::set_is_secret_door(int v)                                   { _is_secret_door = v; }
 void Tp::set_is_sewer_wall(int v)                                    { _is_sewer_wall = v; }
 void Tp::set_is_shallow_water(int v)                                 { _is_shallow_water = v; }
@@ -764,7 +762,7 @@ void Tp::set_str2(const std::string &v)                  { _str2 = v; }
 void Tp::set_str3(const std::string &v)                  { _str3 = v; }
 void Tp::set_str4(const std::string &v)                  { _str4 = v; }
 void Tp::set_str5(const std::string &v)                  { _str5 = v; }
-void Tp::set_str6(const std::string &v)                  { _str6 = v; }
+void Tp::set_projectile_name(const std::string &v)                  { _projectile_name = v; }
 void Tp::set_text_a_or_an(const std::string &v)          { _text_a_or_an = v; }
 void Tp::set_text_description(const std::string &v)      { _text_description = v; }
 void Tp::set_text_hits(const std::string &v)             { _text_hits = v; }

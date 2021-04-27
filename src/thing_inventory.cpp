@@ -613,8 +613,8 @@ _
     } else if (item->is_thrown_automatically_when_chosen()) {
         player->throw_item_choose_target(item);
         describe(item);
-    } else if (item->is_laser_target_select_automatically_when_chosen()) {
-        player->fire_laser_choose_target(item);
+    } else if (item->is_target_select_automatically_when_chosen()) {
+        player->fire_at_and_choose_target(item);
         describe(item);
     } else if (item->is_used_automatically_when_selected()) {
         player->use(item);

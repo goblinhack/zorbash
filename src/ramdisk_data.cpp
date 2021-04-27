@@ -476,6 +476,17 @@ void ramdisk_init (void)
     }
 
     {
+        extern unsigned char *data_projectile_lightning_tga_start_ asm("data_projectile_lightning_tga_start_");
+        extern unsigned char *data_projectile_lightning_tga_end_ asm("data_projectile_lightning_tga_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_projectile_lightning_tga_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_projectile_lightning_tga_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/gfx/projectile_lightning.tga"] = r;
+    }
+
+    {
         extern unsigned char *data_ui_box6_tga_start_ asm("data_ui_box6_tga_start_");
         extern unsigned char *data_ui_box6_tga_end_ asm("data_ui_box6_tga_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_ui_box6_tga_start_;
@@ -1510,17 +1521,6 @@ void ramdisk_init (void)
     }
 
     {
-        extern unsigned char *data_explode_a_wav_start_ asm("data_explode_a_wav_start_");
-        extern unsigned char *data_explode_a_wav_end_ asm("data_explode_a_wav_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explode_a_wav_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explode_a_wav_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/sounds/impacts/explode_a.wav"] = r;
-    }
-
-    {
         extern unsigned char *data_257709__vmgraw__grunt_2_wav_start_ asm("data_257709__vmgraw__grunt_2_wav_start_");
         extern unsigned char *data_257709__vmgraw__grunt_2_wav_end_ asm("data_257709__vmgraw__grunt_2_wav_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_257709__vmgraw__grunt_2_wav_start_;
@@ -1529,6 +1529,17 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/sounds/impacts/257709__vmgraw__grunt-2.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_explosion_a_wav_start_ asm("data_explosion_a_wav_start_");
+        extern unsigned char *data_explosion_a_wav_end_ asm("data_explosion_a_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explosion_a_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explosion_a_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/explosion_a.wav"] = r;
     }
 
     {
@@ -1554,25 +1565,25 @@ void ramdisk_init (void)
     }
 
     {
-        extern unsigned char *data_explode_b_wav_start_ asm("data_explode_b_wav_start_");
-        extern unsigned char *data_explode_b_wav_end_ asm("data_explode_b_wav_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explode_b_wav_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explode_b_wav_end_;
+        extern unsigned char *data_explosion_b_wav_start_ asm("data_explosion_b_wav_start_");
+        extern unsigned char *data_explosion_b_wav_end_ asm("data_explosion_b_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explosion_b_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explosion_b_wav_end_;
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/sounds/impacts/explode_b.wav"] = r;
+        ramdisk_data["data/sounds/impacts/explosion_b.wav"] = r;
     }
 
     {
-        extern unsigned char *data_explode_c_wav_start_ asm("data_explode_c_wav_start_");
-        extern unsigned char *data_explode_c_wav_end_ asm("data_explode_c_wav_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explode_c_wav_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explode_c_wav_end_;
+        extern unsigned char *data_explosion_c_wav_start_ asm("data_explosion_c_wav_start_");
+        extern unsigned char *data_explosion_c_wav_end_ asm("data_explosion_c_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explosion_c_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explosion_c_wav_end_;
         ramdisk_t r;
         r.data = start;
         r.len = end - start;
-        ramdisk_data["data/sounds/impacts/explode_c.wav"] = r;
+        ramdisk_data["data/sounds/impacts/explosion_c.wav"] = r;
     }
 
     {
@@ -1606,6 +1617,28 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/sounds/impacts/door_hit1.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_explosion_d_wav_start_ asm("data_explosion_d_wav_start_");
+        extern unsigned char *data_explosion_d_wav_end_ asm("data_explosion_d_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explosion_d_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explosion_d_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/explosion_d.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_explosion_e_wav_start_ asm("data_explosion_e_wav_start_");
+        extern unsigned char *data_explosion_e_wav_end_ asm("data_explosion_e_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_explosion_e_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_explosion_e_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/explosion_e.wav"] = r;
     }
 
     {

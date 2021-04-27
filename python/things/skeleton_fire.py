@@ -1,6 +1,12 @@
 import zx
 import tp
 
+def on_fire_at(me, target, x, y): # Return True on doing an action
+    if random.randint(1, 10) < 5:
+        zx.thing_fire_at(me, "projectile_fire", target)
+        return True
+    return False
+
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_scent_distance(10)
@@ -39,7 +45,6 @@ def tp_init(name, text_name):
     x.set_is_corpse_on_death(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_fearless(True)
-    x.set_is_fire(True)
     x.set_is_hunger_insatiable(True)
     x.set_is_intelligent(True)
     x.set_is_interesting(True)
@@ -58,6 +63,7 @@ def tp_init(name, text_name):
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
+    x.set_on_fire_at_do("skelton_fire.on_fire_at()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_resurrect_dice("1d10+30")
     x.set_stat_attack(10) # 10, means no bonus

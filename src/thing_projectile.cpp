@@ -9,11 +9,11 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::fire_laser_at_and_choose_target (Thingp item)
+bool Thing::fire_projectile_at_and_choose_target (Thingp item)
 {_
-    log("Trying to laser with: %s", item->to_string().c_str());
+    log("Trying to projectile with: %s", item->to_string().c_str());
 
-    if (item->laser_name().empty()) {
+    if (item->projectile_name().empty()) {
         if (is_player()) {
             TOPCON("I don't know how to fire %s.", item->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
@@ -30,12 +30,12 @@ bool Thing::fire_laser_at_and_choose_target (Thingp item)
     return target_select(item);
 }
 
-bool Thing::laser_fire (Thingp item, Thingp target)
+bool Thing::projectile_fire (Thingp item, Thingp target)
 {_
-    log("Firing laser with: %s at %s", item->to_string().c_str(),
+    log("Firing projectile with: %s at %s", item->to_string().c_str(),
         target->to_string().c_str());
 
-    if (item->laser_name().empty()) {
+    if (item->projectile_name().empty()) {
         if (is_player()) {
             TOPCON("I don't know how to fire %s.", item->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
@@ -44,7 +44,7 @@ bool Thing::laser_fire (Thingp item, Thingp target)
     }
 
     if (!game->request_to_fire_item) {
-        ERR("No laser to fire");
+        ERR("No projectile to fire");
         return false;
     }
 
@@ -69,7 +69,7 @@ bool Thing::laser_fire (Thingp item, Thingp target)
     }
 
     if (is_player()) {
-        game->tick_begin("player fired laser");
+        game->tick_begin("player fired projectile");
     }
 
     if (game->state == Game::STATE_CHOOSING_TARGET) {
@@ -87,26 +87,26 @@ bool Thing::laser_fire (Thingp item, Thingp target)
         return false;
     }
 
-    level->new_laser(item->id, start, end, 150);
+    level->new_projectile(item->id, start, end, 150);
 
     used(item, target, true /* remove_after_use */);
 
     return true;
 }
 
-bool Thing::laser_fire_monst (const std::string &laser, Thingp target)
+bool Thing::projectile_fire_monst (const std::string &projectile, Thingp target)
 {_
-    auto item = level->thing_new(laser, mid_at);
+    auto item = level->thing_new(projectile, mid_at);
     if (!item) {
         return false;
     }
 
     item->set_owner(this);
 
-    log("Firing laser with: %s at %s", item->to_string().c_str(),
+    log("Firing projectile with: %s at %s", item->to_string().c_str(),
         target->to_string().c_str());
 
-    if (item->laser_name().empty()) {
+    if (item->projectile_name().empty()) {
         if (is_player()) {
             TOPCON("I don't know how to fire %s.", item->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
@@ -115,7 +115,7 @@ bool Thing::laser_fire_monst (const std::string &laser, Thingp target)
     }
 
     if (is_player()) {
-        game->tick_begin("player fired laser");
+        game->tick_begin("player fired projectile");
     }
 
     auto start = last_blit_at;
@@ -129,7 +129,7 @@ bool Thing::laser_fire_monst (const std::string &laser, Thingp target)
         return false;
     }
 
-    level->new_laser(item->id, start, end, 150);
+    level->new_projectile(item->id, start, end, 150);
 
     on_use(item, target);
 

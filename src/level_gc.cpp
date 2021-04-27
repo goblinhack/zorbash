@@ -53,6 +53,11 @@ _
                 t->log("Thing garbage collect delayed due to laser");
                 continue;
             }
+
+            if (t->has_projectile) {
+                t->log("Thing garbage collect delayed due to projectile");
+                continue;
+            }
 	}
 
 	all_gc_things.erase(it);

@@ -94,8 +94,8 @@ void Thing::destroy (void)
         game->request_to_throw_item = nullptr;
     }
 
-    if (game->request_to_laser_item == this) {
-        game->request_to_laser_item = nullptr;
+    if (game->request_to_fire_item == this) {
+        game->request_to_fire_item = nullptr;
     }
 
     for (const auto w : wid_thing_info_window) {

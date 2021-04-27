@@ -8,6 +8,7 @@
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_thing_template.h"
 #include "my_py_thing.h"
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
@@ -311,10 +312,20 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
         owner = owner->get_top_owner();
     }
 
-    if (owner->laser_fire_monst(std::string(item), target)) {
-        Py_RETURN_TRUE;	
+    auto what = std::string(item);
+    auto fire_what = tp_find(what);
+    if (fire_what->is_laser()){
+        if (owner->laser_fire_monst(std::string(item), target)) {
+            Py_RETURN_TRUE;	
+        } else {
+            Py_RETURN_FALSE;	
+        }
     } else {
-        Py_RETURN_FALSE;	
+        if (owner->projectile_fire_monst(std::string(item), target)) {
+            Py_RETURN_TRUE;	
+        } else {
+            Py_RETURN_FALSE;	
+        }
     }
 }
 
@@ -412,7 +423,7 @@ THING_BODY_GET_BOOL(thing_is_key, is_key)
 THING_BODY_GET_BOOL(thing_is_killed_on_hit_or_miss, is_killed_on_hit_or_miss)
 THING_BODY_GET_BOOL(thing_is_killed_on_hitting, is_killed_on_hitting)
 THING_BODY_GET_BOOL(thing_is_laser, is_laser)
-THING_BODY_GET_BOOL(thing_is_laser_target_select_automatically_when_chosen, is_laser_target_select_automatically_when_chosen)
+THING_BODY_GET_BOOL(thing_is_target_select_automatically_when_chosen, is_target_select_automatically_when_chosen)
 THING_BODY_GET_BOOL(thing_is_lava, is_lava)
 THING_BODY_GET_BOOL(thing_is_light_blocker, is_light_blocker)
 THING_BODY_GET_BOOL(thing_is_living, is_living)
@@ -533,7 +544,6 @@ THING_BODY_GET_BOOL(thing_is_rrr91, is_rrr91)
 THING_BODY_GET_BOOL(thing_is_rrr92, is_rrr92)
 THING_BODY_GET_BOOL(thing_is_rrr93, is_rrr93)
 THING_BODY_GET_BOOL(thing_is_rrr94, is_rrr94)
-THING_BODY_GET_BOOL(thing_is_rrr95, is_rrr95)
 THING_BODY_GET_BOOL(thing_gfx_flickers, gfx_flickers)
 THING_BODY_GET_BOOL(thing_is_secret_door, is_secret_door)
 THING_BODY_GET_BOOL(thing_is_sewer_wall, is_sewer_wall)

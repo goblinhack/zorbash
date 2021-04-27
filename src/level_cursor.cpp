@@ -98,7 +98,7 @@ void Level::cursor_recreate (void)
 
     auto what = game->request_to_throw_item;
     if (!what) {
-        what = game->request_to_laser_item;
+        what = game->request_to_fire_item;
     }
 
     cursor->dead("update");

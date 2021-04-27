@@ -102,7 +102,7 @@ PyObject *level_is_jumper_on_low_hp_chance_d1000_at(PyObject *obj, PyObject *arg
 PyObject *level_is_key_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_killed_on_hit_or_miss_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_killed_on_hitting_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_laser_target_select_automatically_when_chosen_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_target_select_automatically_when_chosen_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_lava_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_light_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_living_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -223,7 +223,7 @@ PyObject *level_is_rrr91_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr92_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr93_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr94_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr95_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_projectile_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_flickers_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_laser_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_fire_at_at(PyObject *obj, PyObject *args, PyObject *keywds);

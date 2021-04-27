@@ -46,6 +46,7 @@ int Thing::get_resurrect (void) const {_ return (tp()->resurrect_dice().roll());
 int Thing::ai_avoid_distance(void) const                                {_ return (tp()->ai_avoid_distance()); }
 int Thing::ai_obstacle(void) const                                      {_ return (tp()->ai_obstacle()); }
 int Thing::ai_scent_distance(void) const                                {_ return (tp()->ai_scent_distance()); }
+int Thing::ai_vision_distance(void) const                               {_ return (tp()->ai_vision_distance()); }
 int Thing::attack_eater(void) const                                     {_ return (tp()->attack_eater()); }
 int Thing::attack_humanoid(void) const                                  {_ return (tp()->attack_humanoid()); }
 int Thing::attack_living(void) const                                    {_ return (tp()->attack_living()); }
@@ -79,6 +80,7 @@ int Thing::gfx_attack_anim(void) const                                  {_ retur
 int Thing::gfx_bounce_always(void) const                                {_ return (tp()->gfx_bounce_always()); }
 int Thing::gfx_bounce_on_move(void) const                               {_ return (tp()->gfx_bounce_on_move()); }
 int Thing::gfx_dead_anim(void) const                                    {_ return (tp()->gfx_dead_anim()); }
+int Thing::gfx_flickers(void) const                                     {_ return (tp()->gfx_flickers()); }
 int Thing::gfx_glows(void) const                                        {_ return (tp()->gfx_glows()); }
 int Thing::gfx_health_bar_shown(void) const                             {_ return (tp()->gfx_health_bar_shown()); }
 int Thing::gfx_health_bar_shown_only_when_injured(void) const           {_ return (tp()->gfx_health_bar_shown_only_when_injured()); }
@@ -87,12 +89,14 @@ int Thing::gfx_oversized_but_sitting_on_the_ground(void) const          {_ retur
 int Thing::gfx_show_outlined(void) const                                {_ return (tp()->gfx_show_outlined()); }
 int Thing::gfx_shown_in_bg(void) const                                  {_ return (tp()->gfx_shown_in_bg()); }
 int Thing::gfx_small_shadow_caster(void) const                          {_ return (tp()->gfx_small_shadow_caster()); }
+int Thing::gfx_water(void) const                                        {_ return (tp()->gfx_water()); }
 int Thing::gfx_weapon_carry_anim(void) const                            {_ return (tp()->gfx_weapon_carry_anim()); }
 int Thing::health_hunger_pct(void) const                                {_ return (tp()->health_hunger_pct()); }
 int Thing::health_starving_pct(void) const                              {_ return (tp()->health_starving_pct()); }
 int Thing::hunger_clock_freq_ms(void) const                             {_ return (tp()->hunger_clock_freq_ms()); }
 int Thing::is_able_to_change_levels(void) const                         {_ return (tp()->is_able_to_change_levels()); }
 int Thing::is_able_to_fall(void) const                                  {_ return (tp()->is_able_to_fall()); }
+int Thing::is_able_to_fire_at(void) const                               {_ return (tp()->is_able_to_fire_at()); }
 int Thing::is_able_to_see_through_doors(void) const                     {_ return (tp()->is_able_to_see_through_doors()); }
 int Thing::is_able_to_walk_through_walls(void) const                    {_ return (tp()->is_able_to_walk_through_walls()); }
 int Thing::is_acid(void) const                                          {_ return (tp()->is_acid()); }
@@ -135,6 +139,7 @@ int Thing::is_dirt(void) const                                          {_ retur
 int Thing::is_door(void) const                                          {_ return (tp()->is_door()); }
 int Thing::is_droppable(void) const                                     {_ return (tp()->is_droppable()); }
 int Thing::is_ethereal(void) const                                      {_ return (tp()->is_ethereal()); }
+int Thing::is_ethereal_minion_generator(void) const                     {_ return (tp()->is_ethereal_minion_generator()); }
 int Thing::is_explosion(void) const                                     {_ return (tp()->is_explosion()); }
 int Thing::is_extreme_hazard(void) const                                {_ return (tp()->is_extreme_hazard()); }
 int Thing::is_fearless(void) const                                      {_ return (tp()->is_fearless()); }
@@ -145,7 +150,6 @@ int Thing::is_floor(void) const                                         {_ retur
 int Thing::is_floor_deco(void) const                                    {_ return (tp()->is_floor_deco()); }
 int Thing::is_food(void) const                                          {_ return (tp()->is_food()); }
 int Thing::is_food_eater(void) const                                    {_ return (tp()->is_food_eater()); }
-int Thing::gfx_water(void) const                                     {_ return (tp()->gfx_water()); }
 int Thing::is_gold(void) const                                          {_ return (tp()->is_gold()); }
 int Thing::is_hazard(void) const                                        {_ return (tp()->is_hazard()); }
 int Thing::is_humanoid(void) const                                      {_ return (tp()->is_humanoid()); }
@@ -169,7 +173,8 @@ int Thing::is_jumper_on_low_hp_chance_d1000(void) const                 {_ retur
 int Thing::is_key(void) const                                           {_ return (tp()->is_key()); }
 int Thing::is_killed_on_hit_or_miss(void) const                         {_ return (tp()->is_killed_on_hit_or_miss()); }
 int Thing::is_killed_on_hitting(void) const                             {_ return (tp()->is_killed_on_hitting()); }
-int Thing::is_laser_target_select_automatically_when_chosen(void) const {_ return (tp()->is_laser_target_select_automatically_when_chosen()); }
+int Thing::is_laser(void) const                                         {_ return (tp()->is_laser()); }
+int Thing::is_target_select_automatically_when_chosen(void) const {_ return (tp()->is_target_select_automatically_when_chosen()); }
 int Thing::is_lava(void) const                                          {_ return (tp()->is_lava()); }
 int Thing::is_light_blocker(void) const                                 {_ return (tp()->is_light_blocker()); }
 int Thing::is_living(void) const                                        {_ return (tp()->is_living()); }
@@ -196,14 +201,6 @@ int Thing::is_resurrectable(void) const                                 {_ retur
 int Thing::is_ripple(void) const                                        {_ return (tp()->is_ripple()); }
 int Thing::is_rock(void) const                                          {_ return (tp()->is_rock()); }
 int Thing::is_rrr1(void) const                                          {_ return (tp()->is_rrr1()); }
-int Thing::is_rrr2(void) const                                          {_ return (tp()->is_rrr2()); }
-int Thing::is_rrr3(void) const                                          {_ return (tp()->is_rrr3()); }
-int Thing::is_rrr4(void) const                                          {_ return (tp()->is_rrr4()); }
-int Thing::is_rrr5(void) const                                          {_ return (tp()->is_rrr5()); }
-int Thing::is_rrr6(void) const                                          {_ return (tp()->is_rrr6()); }
-int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
-int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
-int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
 int Thing::is_rrr10(void) const                                         {_ return (tp()->is_rrr10()); }
 int Thing::is_rrr11(void) const                                         {_ return (tp()->is_rrr11()); }
 int Thing::is_rrr12(void) const                                         {_ return (tp()->is_rrr12()); }
@@ -214,6 +211,7 @@ int Thing::is_rrr16(void) const                                         {_ retur
 int Thing::is_rrr17(void) const                                         {_ return (tp()->is_rrr17()); }
 int Thing::is_rrr18(void) const                                         {_ return (tp()->is_rrr18()); }
 int Thing::is_rrr19(void) const                                         {_ return (tp()->is_rrr19()); }
+int Thing::is_rrr2(void) const                                          {_ return (tp()->is_rrr2()); }
 int Thing::is_rrr20(void) const                                         {_ return (tp()->is_rrr20()); }
 int Thing::is_rrr21(void) const                                         {_ return (tp()->is_rrr21()); }
 int Thing::is_rrr22(void) const                                         {_ return (tp()->is_rrr22()); }
@@ -224,6 +222,7 @@ int Thing::is_rrr26(void) const                                         {_ retur
 int Thing::is_rrr27(void) const                                         {_ return (tp()->is_rrr27()); }
 int Thing::is_rrr28(void) const                                         {_ return (tp()->is_rrr28()); }
 int Thing::is_rrr29(void) const                                         {_ return (tp()->is_rrr29()); }
+int Thing::is_rrr3(void) const                                          {_ return (tp()->is_rrr3()); }
 int Thing::is_rrr30(void) const                                         {_ return (tp()->is_rrr30()); }
 int Thing::is_rrr31(void) const                                         {_ return (tp()->is_rrr31()); }
 int Thing::is_rrr32(void) const                                         {_ return (tp()->is_rrr32()); }
@@ -234,6 +233,7 @@ int Thing::is_rrr36(void) const                                         {_ retur
 int Thing::is_rrr37(void) const                                         {_ return (tp()->is_rrr37()); }
 int Thing::is_rrr38(void) const                                         {_ return (tp()->is_rrr38()); }
 int Thing::is_rrr39(void) const                                         {_ return (tp()->is_rrr39()); }
+int Thing::is_rrr4(void) const                                          {_ return (tp()->is_rrr4()); }
 int Thing::is_rrr40(void) const                                         {_ return (tp()->is_rrr40()); }
 int Thing::is_rrr41(void) const                                         {_ return (tp()->is_rrr41()); }
 int Thing::is_rrr42(void) const                                         {_ return (tp()->is_rrr42()); }
@@ -244,6 +244,7 @@ int Thing::is_rrr46(void) const                                         {_ retur
 int Thing::is_rrr47(void) const                                         {_ return (tp()->is_rrr47()); }
 int Thing::is_rrr48(void) const                                         {_ return (tp()->is_rrr48()); }
 int Thing::is_rrr49(void) const                                         {_ return (tp()->is_rrr49()); }
+int Thing::is_rrr5(void) const                                          {_ return (tp()->is_rrr5()); }
 int Thing::is_rrr50(void) const                                         {_ return (tp()->is_rrr50()); }
 int Thing::is_rrr51(void) const                                         {_ return (tp()->is_rrr51()); }
 int Thing::is_rrr52(void) const                                         {_ return (tp()->is_rrr52()); }
@@ -254,6 +255,7 @@ int Thing::is_rrr56(void) const                                         {_ retur
 int Thing::is_rrr57(void) const                                         {_ return (tp()->is_rrr57()); }
 int Thing::is_rrr58(void) const                                         {_ return (tp()->is_rrr58()); }
 int Thing::is_rrr59(void) const                                         {_ return (tp()->is_rrr59()); }
+int Thing::is_rrr6(void) const                                          {_ return (tp()->is_rrr6()); }
 int Thing::is_rrr60(void) const                                         {_ return (tp()->is_rrr60()); }
 int Thing::is_rrr61(void) const                                         {_ return (tp()->is_rrr61()); }
 int Thing::is_rrr62(void) const                                         {_ return (tp()->is_rrr62()); }
@@ -264,6 +266,7 @@ int Thing::is_rrr66(void) const                                         {_ retur
 int Thing::is_rrr67(void) const                                         {_ return (tp()->is_rrr67()); }
 int Thing::is_rrr68(void) const                                         {_ return (tp()->is_rrr68()); }
 int Thing::is_rrr69(void) const                                         {_ return (tp()->is_rrr69()); }
+int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
 int Thing::is_rrr70(void) const                                         {_ return (tp()->is_rrr70()); }
 int Thing::is_rrr71(void) const                                         {_ return (tp()->is_rrr71()); }
 int Thing::is_rrr72(void) const                                         {_ return (tp()->is_rrr72()); }
@@ -274,6 +277,7 @@ int Thing::is_rrr76(void) const                                         {_ retur
 int Thing::is_rrr77(void) const                                         {_ return (tp()->is_rrr77()); }
 int Thing::is_rrr78(void) const                                         {_ return (tp()->is_rrr78()); }
 int Thing::is_rrr79(void) const                                         {_ return (tp()->is_rrr79()); }
+int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
 int Thing::is_rrr80(void) const                                         {_ return (tp()->is_rrr80()); }
 int Thing::is_rrr81(void) const                                         {_ return (tp()->is_rrr81()); }
 int Thing::is_rrr82(void) const                                         {_ return (tp()->is_rrr82()); }
@@ -284,21 +288,15 @@ int Thing::is_rrr86(void) const                                         {_ retur
 int Thing::is_rrr87(void) const                                         {_ return (tp()->is_rrr87()); }
 int Thing::is_rrr88(void) const                                         {_ return (tp()->is_rrr88()); }
 int Thing::is_rrr89(void) const                                         {_ return (tp()->is_rrr89()); }
+int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
 int Thing::is_rrr90(void) const                                         {_ return (tp()->is_rrr90()); }
 int Thing::is_rrr91(void) const                                         {_ return (tp()->is_rrr91()); }
 int Thing::is_rrr92(void) const                                         {_ return (tp()->is_rrr92()); }
 int Thing::is_rrr93(void) const                                         {_ return (tp()->is_rrr93()); }
 int Thing::is_rrr94(void) const                                         {_ return (tp()->is_rrr94()); }
-int Thing::is_rrr95(void) const                                         {_ return (tp()->is_rrr95()); }
-int Thing::gfx_flickers(void) const                                         {_ return (tp()->gfx_flickers()); }
-int Thing::is_laser(void) const                                         {_ return (tp()->is_laser()); }
-int Thing::is_able_to_fire_at(void) const                               {_ return (tp()->is_able_to_fire_at()); }
-int Thing::ai_vision_distance(void) const                               {_ return (tp()->ai_vision_distance()); }
-int Thing::is_ethereal_minion_generator(void) const                     {_ return (tp()->is_ethereal_minion_generator()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
 int Thing::is_shallow_water(void) const                                 {_ return (tp()->is_shallow_water()); }
-int Thing::is_water(void) const                                         {_ return (tp()->is_shallow_water() || tp()->is_deep_water()); }
 int Thing::is_shovable(void) const                                      {_ return (tp()->is_shovable()); }
 int Thing::is_shown_on_leftbar(void) const                              {_ return (tp()->is_shown_on_leftbar()); }
 int Thing::is_shown_uniquely_on_leftbar(void) const                     {_ return (tp()->is_shown_uniquely_on_leftbar()); }
@@ -323,6 +321,7 @@ int Thing::is_used_when_thrown(void) const                              {_ retur
 int Thing::is_wall(void) const                                          {_ return (tp()->is_wall()); }
 int Thing::is_wall_dungeon(void) const                                  {_ return (tp()->is_wall_dungeon()); }
 int Thing::is_wand(void) const                                          {_ return (tp()->is_wand()); }
+int Thing::is_water(void) const                                         {_ return (tp()->is_shallow_water() || tp()->is_deep_water()); }
 int Thing::is_water_lover(void) const                                   {_ return (tp()->is_water_lover()); }
 int Thing::is_weapon(void) const                                        {_ return (tp()->is_weapon()); }
 int Thing::is_weapon_wielder(void) const                                {_ return (tp()->is_weapon_wielder()); }
@@ -4226,7 +4225,7 @@ const std::string& Thing::str2 (void) const {_ return (tp()->str2()); }
 const std::string& Thing::str3 (void) const {_ return (tp()->str3()); }
 const std::string& Thing::str4 (void) const {_ return (tp()->str4()); }
 const std::string& Thing::str5 (void) const {_ return (tp()->str5()); }
-const std::string& Thing::str6 (void) const {_ return (tp()->str6()); }
+const std::string& Thing::projectile_name (void) const {_ return (tp()->projectile_name()); }
 const std::string& Thing::laser_name (void) const {_ return (tp()->laser_name()); }
 const std::string& Thing::long_text_description (void) const {_ return (tp()->long_text_description()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }

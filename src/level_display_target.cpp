@@ -13,7 +13,7 @@
 
 void Level::display_target (void)
 {_
-    auto what = game->request_to_laser_item;
+    auto what = game->request_to_fire_item;
     if (!what) {
         return;
     }
