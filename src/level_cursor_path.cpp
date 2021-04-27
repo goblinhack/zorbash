@@ -19,7 +19,7 @@ void Level::cursor_path_draw_circle (void)
 {_
     auto what = game->request_to_throw_item;
     if (!what) {
-        what = game->request_to_laser_item;
+        what = game->request_to_fire_item;
         if (!what) {
             return;
         }
@@ -39,7 +39,7 @@ void Level::cursor_path_draw_circle (void)
         if (dist > player->get_throw_distance()) {
             too_far = true;
         }
-    } else if (game->request_to_laser_item) {
+    } else if (game->request_to_fire_item) {
         if (dist > what->range_max()) {
             too_far = true;
         }
@@ -211,11 +211,11 @@ void Level::cursor_path_draw (point start, point end)
 
     if (game->request_to_throw_item) {
         cursor_path_draw_circle();
-    } else if (game->request_to_laser_item) {
+    } else if (game->request_to_fire_item) {
         //
         // Draw a line instead
         //
-        if (game->request_to_laser_item->blast_max_radius()) {
+        if (game->request_to_fire_item->blast_max_radius()) {
             //
             // For wands with a blast effect, show both line and radius
             //
@@ -270,8 +270,8 @@ void Level::cursor_path_create (void)
     // For lasers do not show the cursor (circle) unless the item has a 
     // blast radius
     //
-    if (game->request_to_laser_item) {
-        if (!game->request_to_laser_item->blast_max_radius()) {
+    if (game->request_to_fire_item) {
+        if (!game->request_to_fire_item->blast_max_radius()) {
             return;
         }
     }

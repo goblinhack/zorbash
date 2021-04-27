@@ -139,11 +139,14 @@ class Tp:
     def set_str_str5(self, value):
         zx.tp_set_str_str5(self, value)
 
-    def set_str_str6(self, value):
-        zx.tp_set_str_str6(self, value)
+    def set_str_projectile_name(self, value):
+        zx.tp_set_str_projectile_name(self, value)
 
     def set_laser_name(self, value):
         zx.tp_set_laser_name(self, value)
+
+    def set_projectile_name(self, value):
+        zx.tp_set_projectile_name(self, value)
 
     def set_long_text_description(self, value):
         zx.tp_set_long_text_description(self, value)
@@ -499,8 +502,8 @@ class Tp:
     def set_is_rrr94(self, value):
         zx.tp_set_is_rrr94(self, value)
 
-    def set_is_rrr95(self, value):
-        zx.tp_set_is_rrr95(self, value)
+    def set_is_projectile(self, value):
+        zx.tp_set_is_projectile(self, value)
 
     def set_gfx_flickers(self, value):
         zx.tp_set_gfx_flickers(self, value)
@@ -541,8 +544,8 @@ class Tp:
     def set_range_max(self, value):
         zx.tp_set_range_max(self, value)
 
-    def set_is_laser_target_select_automatically_when_chosen(self, value):
-        zx.tp_set_is_laser_target_select_automatically_when_chosen(self, value)
+    def set_is_target_select_automatically_when_chosen(self, value):
+        zx.tp_set_is_target_select_automatically_when_chosen(self, value)
 
     def set_is_wand(self, value):
         zx.tp_set_is_wand(self, value)

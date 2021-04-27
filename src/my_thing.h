@@ -77,6 +77,7 @@ public:
     uint64_t has_external_particle:1         {}; // current in motion particle
     uint64_t has_internal_particle:1         {}; // current in motion particle
     uint64_t has_laser:1                     {}; // current laser being fired
+    uint64_t has_projectile:1                {}; // current projectile being fired
     uint64_t has_light:1                     {};
     uint64_t inited_tiles:1                  {};
     uint64_t is_activated:1                  {};
@@ -255,8 +256,11 @@ public:
     bool eat(Thingp it);
     bool fall(void);
     bool fall_to_next_level(void);
+    bool fire_at_and_choose_target(Thingp);
     bool fire_at_target(void);
-    bool fire_laser_choose_target(Thingp item);
+    bool fire_laser_at_and_choose_target(Thingp item);
+    bool fire_projectile_at_and_choose_target(Thingp item);
+    bool fire_choose_target(Thingp item);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
     bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
     bool if_matches_then_kill(const std::string& what, const point &p);
@@ -272,6 +276,9 @@ public:
     bool laser_anim_exists(void);
     bool laser_fire(Thingp item, Thingp target);
     bool laser_fire_monst(const std::string &item, Thingp target);
+    bool projectile_anim_exists(void);
+    bool projectile_fire(Thingp item, Thingp target);
+    bool projectile_fire_monst(const std::string &item, Thingp target);
     bool location_check();
     bool matches(const std::string& what) const;
     static std::function<int(Thingp)> matches_to_func(const std::string& what);
@@ -366,7 +373,7 @@ public:
     const std::string& str3(void) const;
     const std::string& str4(void) const;
     const std::string& str5(void) const;
-    const std::string& str6(void) const;
+    const std::string& projectile_name(void) const;
     const std::string& text_description(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
@@ -715,7 +722,7 @@ public:
     int is_key(void) const;
     int is_killed_on_hit_or_miss(void) const;
     int is_killed_on_hitting(void) const;
-    int is_laser_target_select_automatically_when_chosen(void) const;
+    int is_target_select_automatically_when_chosen(void) const;
     int is_lava(void) const;
     int is_light_blocker(void) const;
     int is_living(void) const;
@@ -835,7 +842,6 @@ public:
     int is_rrr92(void) const;
     int is_rrr93(void) const;
     int is_rrr94(void) const;
-    int is_rrr95(void) const;
     int gfx_flickers(void) const;
     int is_laser(void) const;
     int is_secret_door(void) const;
@@ -1139,6 +1145,7 @@ public:
     void delete_age_map(void);
     void delete_dmap_scent(void);
     void delete_laser();
+    void delete_projectile();
     void delete_lights(void);
     void delete_particle();
     void destroy();

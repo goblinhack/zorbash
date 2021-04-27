@@ -24,111 +24,117 @@ data_ui_box3_tga_start_:
 .globl data_ui_box3_tga_end_
 data_ui_box3_tga_end_:
 
-.globl data_ui_credits_bg_tga_start_
-data_ui_credits_bg_tga_start_:
-.incbin "../data/gfx/ui_credits_bg.tga"
-.globl data_ui_credits_bg_tga_end_
-data_ui_credits_bg_tga_end_:
+.globl data_ui_box5_tga_start_
+data_ui_box5_tga_start_:
+.incbin "../data/gfx/ui_box5.tga"
+.globl data_ui_box5_tga_end_
+data_ui_box5_tga_end_:
 
-.globl data_disarm_multi_a_wav_start_
-data_disarm_multi_a_wav_start_:
-.incbin "../data/sounds/abilities/disarm_multi_a.wav"
-.globl data_disarm_multi_a_wav_end_
-data_disarm_multi_a_wav_end_:
+.globl data_sorcery_wav_start_
+data_sorcery_wav_start_:
+.incbin "../data/sounds/abilities/sorcery.wav"
+.globl data_sorcery_wav_end_
+data_sorcery_wav_end_:
 
-.globl data_fire_c_wav_start_
-data_fire_c_wav_start_:
-.incbin "../data/sounds/abilities/fire_c.wav"
-.globl data_fire_c_wav_end_
-data_fire_c_wav_end_:
+.globl data_fire_b_wav_start_
+data_fire_b_wav_start_:
+.incbin "../data/sounds/abilities/fire_b.wav"
+.globl data_fire_b_wav_end_
+data_fire_b_wav_end_:
 
-.globl data_attack_b_wav_start_
-data_attack_b_wav_start_:
-.incbin "../data/sounds/abilities/attack_b.wav"
-.globl data_attack_b_wav_end_
-data_attack_b_wav_end_:
+.globl data_attack_a_wav_start_
+data_attack_a_wav_start_:
+.incbin "../data/sounds/abilities/attack_a.wav"
+.globl data_attack_a_wav_end_
+data_attack_a_wav_end_:
 
-.globl data_slime8_wav_start_
-data_slime8_wav_start_:
-.incbin "../data/sounds/creatures/slime8.wav"
-.globl data_slime8_wav_end_
-data_slime8_wav_end_:
+.globl data_wings_wav_start_
+data_wings_wav_start_:
+.incbin "../data/sounds/creatures/wings.wav"
+.globl data_wings_wav_end_
+data_wings_wav_end_:
 
-.globl data_hiss6_wav_start_
-data_hiss6_wav_start_:
-.incbin "../data/sounds/creatures/hiss6.wav"
-.globl data_hiss6_wav_end_
-data_hiss6_wav_end_:
+.globl data_hiss2_wav_start_
+data_hiss2_wav_start_:
+.incbin "../data/sounds/creatures/hiss2.wav"
+.globl data_hiss2_wav_end_
+data_hiss2_wav_end_:
 
-.globl data_claw_wav_start_
-data_claw_wav_start_:
-.incbin "../data/sounds/creatures/claw.wav"
-.globl data_claw_wav_end_
-data_claw_wav_end_:
+.globl data_mystical_wav_start_
+data_mystical_wav_start_:
+.incbin "../data/sounds/creatures/mystical.wav"
+.globl data_mystical_wav_end_
+data_mystical_wav_end_:
 
-.globl data_slime4_wav_start_
-data_slime4_wav_start_:
-.incbin "../data/sounds/creatures/slime4.wav"
-.globl data_slime4_wav_end_
-data_slime4_wav_end_:
+.globl data_76962__michel88__deaths_wav_start_
+data_76962__michel88__deaths_wav_start_:
+.incbin "../data/sounds/creatures/76962__michel88__deaths.wav"
+.globl data_76962__michel88__deaths_wav_end_
+data_76962__michel88__deaths_wav_end_:
 
-.globl data_boom_b_wav_start_
-data_boom_b_wav_start_:
-.incbin "../data/sounds/impacts/boom_b.wav"
-.globl data_boom_b_wav_end_
-data_boom_b_wav_end_:
+.globl data_boom_a_wav_start_
+data_boom_a_wav_start_:
+.incbin "../data/sounds/impacts/boom_a.wav"
+.globl data_boom_a_wav_end_
+data_boom_a_wav_end_:
 
-.globl data_pit_trap_fall_wav_start_
-data_pit_trap_fall_wav_start_:
-.incbin "../data/sounds/impacts/pit_trap_fall.wav"
-.globl data_pit_trap_fall_wav_end_
-data_pit_trap_fall_wav_end_:
+.globl data_explosion_a_wav_start_
+data_explosion_a_wav_start_:
+.incbin "../data/sounds/impacts/explosion_a.wav"
+.globl data_explosion_a_wav_end_
+data_explosion_a_wav_end_:
 
-.globl data_area_effect_a_wav_start_
-data_area_effect_a_wav_start_:
-.incbin "../data/sounds/impacts/area_effect_a.wav"
-.globl data_area_effect_a_wav_end_
-data_area_effect_a_wav_end_:
+.globl data_magic_crumble_wav_start_
+data_magic_crumble_wav_start_:
+.incbin "../data/sounds/impacts/magic_crumble.wav"
+.globl data_magic_crumble_wav_end_
+data_magic_crumble_wav_end_:
 
-.globl data_select_b_wav_start_
-data_select_b_wav_start_:
-.incbin "../data/sounds/interface/select_b.wav"
-.globl data_select_b_wav_end_
-data_select_b_wav_end_:
+.globl data_magic_dust_b_wav_start_
+data_magic_dust_b_wav_start_:
+.incbin "../data/sounds/impacts/magic_dust_b.wav"
+.globl data_magic_dust_b_wav_end_
+data_magic_dust_b_wav_end_:
 
-.globl data_1up_a_wav_start_
-data_1up_a_wav_start_:
-.incbin "../data/sounds/interface/1up_a.wav"
-.globl data_1up_a_wav_end_
-data_1up_a_wav_end_:
+.globl data_lose_b_wav_start_
+data_lose_b_wav_start_:
+.incbin "../data/sounds/interface/lose_b.wav"
+.globl data_lose_b_wav_end_
+data_lose_b_wav_end_:
 
-.globl data_level_up_wav_start_
-data_level_up_wav_start_:
-.incbin "../data/sounds/interface/level_up.wav"
-.globl data_level_up_wav_end_
-data_level_up_wav_end_:
+.globl data_score_wav_start_
+data_score_wav_start_:
+.incbin "../data/sounds/interface/score.wav"
+.globl data_score_wav_end_
+data_score_wav_end_:
 
-.globl data_rebound_wav_start_
-data_rebound_wav_start_:
-.incbin "../data/sounds/misc/rebound.wav"
-.globl data_rebound_wav_end_
-data_rebound_wav_end_:
+.globl data_swerve_wav_start_
+data_swerve_wav_start_:
+.incbin "../data/sounds/misc/swerve.wav"
+.globl data_swerve_wav_end_
+data_swerve_wav_end_:
 
-.globl data_unlock_wav_start_
-data_unlock_wav_start_:
-.incbin "../data/sounds/misc/unlock.wav"
-.globl data_unlock_wav_end_
-data_unlock_wav_end_:
+.globl data_open_wav_start_
+data_open_wav_start_:
+.incbin "../data/sounds/misc/open.wav"
+.globl data_open_wav_end_
+data_open_wav_end_:
 
-.globl data_footsteps5_wav_start_
-data_footsteps5_wav_start_:
-.incbin "../data/sounds/misc/footsteps5.wav"
-.globl data_footsteps5_wav_end_
-data_footsteps5_wav_end_:
+.globl data_wiggle_b_wav_start_
+data_wiggle_b_wav_start_:
+.incbin "../data/sounds/misc/wiggle_b.wav"
+.globl data_wiggle_b_wav_end_
+data_wiggle_b_wav_end_:
 
-.globl data_ping_wav_start_
-data_ping_wav_start_:
-.incbin "../data/sounds/misc/ping.wav"
-.globl data_ping_wav_end_
-data_ping_wav_end_:
+.globl data_footsteps1_wav_start_
+data_footsteps1_wav_start_:
+.incbin "../data/sounds/misc/footsteps1.wav"
+.globl data_footsteps1_wav_end_
+data_footsteps1_wav_end_:
+
+.globl data_burn_wav_start_
+data_burn_wav_start_:
+.incbin "../data/sounds/status/burn.wav"
+.globl data_burn_wav_end_
+data_burn_wav_end_:
 

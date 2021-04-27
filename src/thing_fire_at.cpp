@@ -155,3 +155,12 @@ bool Thing::fire_at_target (void)
 
     return on_fire_at(target);
 }
+
+bool Thing::fire_at_and_choose_target (Thingp item)
+{_
+    if (item->is_laser()) {
+        return fire_laser_at_and_choose_target(item);
+    } else {
+        return fire_projectile_at_and_choose_target(item);
+    }
+}

@@ -9,7 +9,7 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::fire_laser_choose_target (Thingp item)
+bool Thing::fire_laser_at_and_choose_target (Thingp item)
 {_
     log("Trying to laser with: %s", item->to_string().c_str());
 
@@ -25,7 +25,7 @@ bool Thing::fire_laser_choose_target (Thingp item)
         return false;
     }
 
-    game->request_to_laser_item = item;
+    game->request_to_fire_item = item;
 
     return target_select(item);
 }
@@ -43,7 +43,7 @@ bool Thing::laser_fire (Thingp item, Thingp target)
         return false;
     }
 
-    if (!game->request_to_laser_item) {
+    if (!game->request_to_fire_item) {
         ERR("No laser to fire");
         return false;
     }
@@ -54,7 +54,7 @@ bool Thing::laser_fire (Thingp item, Thingp target)
     bool too_far = false;
     auto dist = distance(mid_at, target->mid_at);
 
-    if (game->request_to_laser_item) {
+    if (game->request_to_fire_item) {
         if (dist > item->range_max()) {
             too_far = true;
         }

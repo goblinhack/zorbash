@@ -195,7 +195,7 @@ private:
     int _is_key {};
     int _is_killed_on_hit_or_miss {};
     int _is_killed_on_hitting {};
-    int _is_laser_target_select_automatically_when_chosen {};
+    int _is_target_select_automatically_when_chosen {};
     int _is_lava {};
     int _is_light_blocker {};
     int _is_living {};
@@ -315,7 +315,6 @@ private:
     int _is_rrr92 {};
     int _is_rrr93 {};
     int _is_rrr94 {};
-    int _is_rrr95 {};
     int _gfx_flickers {};
     int _is_laser {};
     int _is_able_to_fire_at {};
@@ -417,7 +416,7 @@ private:
     std::string _str3;
     std::string _str4;
     std::string _str5;
-    std::string _str6;
+    std::string _projectile_name;
     std::string _laser_name;
     std::string _text_a_or_an;
     std::string _text_description;
@@ -509,7 +508,7 @@ public:
     const std::string& str3(void) const;
     const std::string& str4(void) const;
     const std::string& str5(void) const;
-    const std::string& str6(void) const;
+    const std::string& projectile_name(void) const;
     const std::string& text_description(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
@@ -652,7 +651,7 @@ public:
     int is_key(void) const;
     int is_killed_on_hit_or_miss(void) const;
     int is_killed_on_hitting(void) const;
-    int is_laser_target_select_automatically_when_chosen(void) const;
+    int is_target_select_automatically_when_chosen(void) const;
     int is_lava(void) const;
     int is_light_blocker(void) const;
     int is_living(void) const;
@@ -673,7 +672,6 @@ public:
     int is_poison_immune(void) const;
     int is_potion(void) const;
     int is_potion_eater(void) const;
-    int is_projectile(void) const;
     int is_removeable_if_out_of_slots(void) const;
     int is_resurrectable(void) const;
     int is_ripple(void) const;
@@ -772,7 +770,7 @@ public:
     int is_rrr92(void) const;
     int is_rrr93(void) const;
     int is_rrr94(void) const;
-    int is_rrr95(void) const;
+    int is_projectile(void) const;
     int gfx_flickers(void) const;
     int is_laser(void) const;
     int is_able_to_fire_at(void) const;
@@ -985,7 +983,7 @@ public:
     void set_is_key(int);
     void set_is_killed_on_hit_or_miss(int);
     void set_is_killed_on_hitting(int);
-    void set_is_laser_target_select_automatically_when_chosen(int);
+    void set_is_target_select_automatically_when_chosen(int);
     void set_is_lava(int);
     void set_is_light_blocker(int);
     void set_is_living(int);
@@ -1006,7 +1004,6 @@ public:
     void set_is_poison_immune(int);
     void set_is_potion(int);
     void set_is_potion_eater(int);
-    void set_is_projectile(int);
     void set_is_removeable_if_out_of_slots(int);
     void set_is_resurrectable(int);
     void set_is_ripple(int);
@@ -1105,7 +1102,7 @@ public:
     void set_is_rrr92(int);
     void set_is_rrr93(int);
     void set_is_rrr94(int);
-    void set_is_rrr95(int);
+    void set_is_projectile(int);
     void set_gfx_flickers(int);
     void set_is_laser(int);
     void set_is_able_to_fire_at(int);
@@ -1197,7 +1194,7 @@ public:
     void set_str3(const std::string &);
     void set_str4(const std::string &);
     void set_str5(const std::string &);
-    void set_str6(const std::string &);
+    void set_projectile_name(const std::string &);
     void set_text_a_or_an(const std::string &);
     void set_text_description(const std::string &);
     void set_text_hits(const std::string &);

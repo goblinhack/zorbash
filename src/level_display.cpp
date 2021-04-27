@@ -14,6 +14,7 @@
 #include "my_tile.h"
 #include "my_globals.h"
 #include "my_laser.h"
+#include "my_projectile.h"
 #include "my_ptrcheck.h"
 
 void Level::display (void)
@@ -402,6 +403,7 @@ void Level::display_map (void)
         // player is not lost in lava glow
         //
         display_lasers();
+        display_projectiles();
         display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
         if (!g_opt_debug3) {
             glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);

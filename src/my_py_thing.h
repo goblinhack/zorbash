@@ -130,7 +130,7 @@ PyObject *thing_is_jumper_on_low_hp_chance_d1000(PyObject *obj, PyObject *args, 
 PyObject *thing_is_key(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_killed_on_hit_or_miss(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_killed_on_hitting(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_laser_target_select_automatically_when_chosen(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_target_select_automatically_when_chosen(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_lava(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_light_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_living(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -251,7 +251,7 @@ PyObject *thing_is_rrr91(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr92(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr93(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr94(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr95(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_projectile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_flickers(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_laser(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);

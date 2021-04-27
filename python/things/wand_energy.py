@@ -25,7 +25,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_flammable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
-    x.set_is_laser_target_select_automatically_when_chosen(True)
+    x.set_is_target_select_automatically_when_chosen(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_shown_on_leftbar(True)
