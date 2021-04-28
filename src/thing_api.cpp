@@ -174,7 +174,7 @@ int Thing::is_key(void) const                                           {_ retur
 int Thing::is_killed_on_hit_or_miss(void) const                         {_ return (tp()->is_killed_on_hit_or_miss()); }
 int Thing::is_killed_on_hitting(void) const                             {_ return (tp()->is_killed_on_hitting()); }
 int Thing::is_laser(void) const                                         {_ return (tp()->is_laser()); }
-int Thing::is_target_select_automatically_when_chosen(void) const {_ return (tp()->is_target_select_automatically_when_chosen()); }
+int Thing::is_target_select_automatically_when_chosen(void) const       {_ return (tp()->is_target_select_automatically_when_chosen()); }
 int Thing::is_lava(void) const                                          {_ return (tp()->is_lava()); }
 int Thing::is_light_blocker(void) const                                 {_ return (tp()->is_light_blocker()); }
 int Thing::is_living(void) const                                        {_ return (tp()->is_living()); }
@@ -192,7 +192,7 @@ int Thing::is_msg(void) const                                           {_ retur
 int Thing::is_no_tile(void) const                                       {_ return (tp()->is_no_tile()); }
 int Thing::is_player(void) const                                        {_ return (tp()->is_player()); }
 int Thing::is_poison(void) const                                        {_ return (tp()->is_poison()); }
-int Thing::is_poison_immune(void) const                                 {_ return (tp()->is_poison_immune()); }
+int Thing::is_immune_to_poison(void) const                              {_ return (tp()->is_immune_to_poison()); }
 int Thing::is_potion(void) const                                        {_ return (tp()->is_potion()); }
 int Thing::is_potion_eater(void) const                                  {_ return (tp()->is_potion_eater()); }
 int Thing::is_projectile(void) const                                    {_ return (tp()->is_projectile()); }
@@ -293,7 +293,7 @@ int Thing::is_rrr90(void) const                                         {_ retur
 int Thing::is_rrr91(void) const                                         {_ return (tp()->is_rrr91()); }
 int Thing::is_rrr92(void) const                                         {_ return (tp()->is_rrr92()); }
 int Thing::is_rrr93(void) const                                         {_ return (tp()->is_rrr93()); }
-int Thing::is_rrr94(void) const                                         {_ return (tp()->is_rrr94()); }
+int Thing::is_immune_to_fire(void) const                                         {_ return (tp()->is_immune_to_fire()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
 int Thing::is_shallow_water(void) const                                 {_ return (tp()->is_shallow_water()); }

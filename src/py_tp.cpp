@@ -847,7 +847,7 @@ PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywd
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, 
                                      &parent_id, &target_id, &what, 
                                      &radius_min, &radius_max)) {
-        ERR("%s: bad args", __FUNCTION__);                                      \
+        ERR("%s: bad args", __FUNCTION__);
         Py_RETURN_FALSE;
     }
 
@@ -1317,7 +1317,7 @@ TP_BODY_SET_INT(is_msg)
 TP_BODY_SET_INT(is_no_tile)
 TP_BODY_SET_INT(is_player)
 TP_BODY_SET_INT(is_poison)
-TP_BODY_SET_INT(is_poison_immune)
+TP_BODY_SET_INT(is_immune_to_poison)
 TP_BODY_SET_INT(is_potion)
 TP_BODY_SET_INT(is_potion_eater)
 TP_BODY_SET_INT(is_projectile)
@@ -1418,7 +1418,7 @@ TP_BODY_SET_INT(is_rrr90)
 TP_BODY_SET_INT(is_rrr91)
 TP_BODY_SET_INT(is_rrr92)
 TP_BODY_SET_INT(is_rrr93)
-TP_BODY_SET_INT(is_rrr94)
+TP_BODY_SET_INT(is_immune_to_fire)
 TP_BODY_SET_INT(gfx_flickers)
 TP_BODY_SET_INT(is_laser)
 TP_BODY_SET_INT(is_able_to_fire_at)

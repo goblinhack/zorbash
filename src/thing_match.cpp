@@ -142,7 +142,7 @@ bool Thing::matches (const std::string& what) const
     if (is_no_tile() &&                                       (what == "is_no_tile"))                                       { return true; }
     if (is_player() &&                                        (what == "is_player"))                                        { return true; }
     if (is_poison() &&                                        (what == "is_poison"))                                        { return true; }
-    if (is_poison_immune() &&                                 (what == "is_poison_immune"))                                 { return true; }
+    if (is_immune_to_poison() &&                              (what == "is_immune_to_poison"))                                 { return true; }
     if (is_potion() &&                                        (what == "is_potion"))                                        { return true; }
     if (is_potion_eater() &&                                  (what == "is_potion_eater"))                                  { return true; }
     if (is_projectile() &&                                    (what == "is_projectile"))                                    { return true; }
@@ -243,7 +243,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr91() &&                                         (what == "is_rrr91"))                                         { return true; }
     if (is_rrr92() &&                                         (what == "is_rrr92"))                                         { return true; }
     if (is_rrr93() &&                                         (what == "is_rrr93"))                                         { return true; }
-    if (is_rrr94() &&                                         (what == "is_rrr94"))                                         { return true; }
+    if (is_immune_to_fire() &&                                         (what == "is_immune_to_fire"))                                         { return true; }
     if (is_projectile() &&                                         (what == "is_projectile"))                                         { return true; }
     if (is_secret_door() &&                                   (what == "is_secret_door"))                                   { return true; }
     if (is_sewer_wall() &&                                    (what == "is_sewer_wall"))                                    { return true; }
@@ -405,7 +405,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_no_tile")                                       { return &Thing::is_no_tile; }
     if (what == "is_player")                                        { return &Thing::is_player; }
     if (what == "is_poison")                                        { return &Thing::is_poison; }
-    if (what == "is_poison_immune")                                 { return &Thing::is_poison_immune; }
+    if (what == "is_immune_to_poison")                              { return &Thing::is_immune_to_poison; }
     if (what == "is_potion")                                        { return &Thing::is_potion; }
     if (what == "is_potion_eater")                                  { return &Thing::is_potion_eater; }
     if (what == "is_projectile")                                    { return &Thing::is_projectile; }
@@ -506,7 +506,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr91")                                         { return &Thing::is_rrr91; }
     if (what == "is_rrr92")                                         { return &Thing::is_rrr92; }
     if (what == "is_rrr93")                                         { return &Thing::is_rrr93; }
-    if (what == "is_rrr94")                                         { return &Thing::is_rrr94; }
+    if (what == "is_immune_to_fire")                                         { return &Thing::is_immune_to_fire; }
     if (what == "is_projectile")                                         { return &Thing::is_projectile; }
     if (what == "gfx_flickers")                                     { return &Thing::gfx_flickers; }
     if (what == "is_secret_door")                                   { return &Thing::is_secret_door; }

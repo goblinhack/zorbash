@@ -9,17 +9,9 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::fire_laser_at_and_choose_target (Thingp item)
+bool Thing::laser_choose_target (Thingp item)
 {_
-    log("Trying to laser with: %s", item->to_string().c_str());
-
-    if (item->laser_name().empty()) {
-        if (is_player()) {
-            TOPCON("I don't know how to fire %s.", item->text_the().c_str());
-            game->tick_begin("player tried to use something they could not");
-        }
-        return false;
-    }
+    log("Trying to target a laser with: %s", item->to_string().c_str());
 
     if (!target_select(item)) {
         return false;
@@ -30,49 +22,33 @@ bool Thing::fire_laser_at_and_choose_target (Thingp item)
     return target_select(item);
 }
 
-bool Thing::laser_fire (Thingp item, Thingp target)
+bool Thing::laser_fire_at (const std::string &laser_name, Thingp target)
 {_
-    log("Firing laser with: %s at %s", item->to_string().c_str(),
+    if (laser_name == "") {
+        die("No laser name");
+    }
+
+    auto laser = level->thing_new(laser_name, mid_at);
+    if (!laser) {
+        return false;
+    }
+
+    laser->set_owner(this);
+    laser->move_to_immediately(target->mid_at);
+
+    log("Firing named laser with: %s at %s", laser->to_string().c_str(),
         target->to_string().c_str());
 
-    if (item->laser_name().empty()) {
+    if (!laser->is_laser()) {
         if (is_player()) {
-            TOPCON("I don't know how to fire %s.", item->text_the().c_str());
+            TOPCON("I don't know how to zap %s.", laser->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
         }
         return false;
     }
 
-    if (!game->request_to_fire_item) {
-        ERR("No laser to fire");
-        return false;
-    }
-
-    //
-    // Check not out of range
-    //
-    bool too_far = false;
-    auto dist = distance(mid_at, target->mid_at);
-
-    if (game->request_to_fire_item) {
-        if (dist > item->range_max()) {
-            too_far = true;
-        }
-    }
-
-    if (too_far) {
-        if (is_player()) {
-            TOPCON("That target is out of range of %s.", 
-                   item->text_the().c_str());
-        }
-        return false;
-    }
-
     if (is_player()) {
-        game->tick_begin("player fired laser");
-    }
-
-    if (game->state == Game::STATE_CHOOSING_TARGET) {
+        game->tick_begin("player zapped laser");
         game->change_state(Game::STATE_NORMAL);
     }
 
@@ -87,53 +63,9 @@ bool Thing::laser_fire (Thingp item, Thingp target)
         return false;
     }
 
-    level->new_laser(item->id, start, end, 150);
+    level->new_laser(laser->id, start, end, 150);
 
-    used(item, target, true /* remove_after_use */);
-
-    return true;
-}
-
-bool Thing::laser_fire_monst (const std::string &laser, Thingp target)
-{_
-    auto item = level->thing_new(laser, mid_at);
-    if (!item) {
-        return false;
-    }
-
-    item->set_owner(this);
-
-    log("Firing laser with: %s at %s", item->to_string().c_str(),
-        target->to_string().c_str());
-
-    if (item->laser_name().empty()) {
-        if (is_player()) {
-            TOPCON("I don't know how to fire %s.", item->text_the().c_str());
-            game->tick_begin("player tried to use something they could not");
-        }
-        return false;
-    }
-
-    if (is_player()) {
-        game->tick_begin("player fired laser");
-    }
-
-    auto start = last_blit_at;
-    auto end = target->last_blit_at;
-
-    if (!start.x && !start.y) {
-        return false;
-    }
-
-    if (!end.x && !end.y) {
-        return false;
-    }
-
-    level->new_laser(item->id, start, end, 150);
-
-    on_use(item, target);
-
-    item->dead("fired");
+    on_use(laser, target);
 
     return true;
 }

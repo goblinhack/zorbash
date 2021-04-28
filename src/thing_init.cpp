@@ -86,6 +86,10 @@ void Thing::init (Levelp level,
     last_mid_at = born;
 
     timestamp_next_frame = 0;
+    if (name == "") {
+        DIE("Thing template cannot be created: no name given");
+    }
+
     const auto tpp = tp_find(name);
     if (unlikely(!tpp)) {
         ERR("Thing template [%s] not found", name.c_str());

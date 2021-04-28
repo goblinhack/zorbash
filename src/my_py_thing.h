@@ -149,7 +149,7 @@ PyObject *thing_is_no_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_player(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_poison(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_poison_immune(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_projectile(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -250,7 +250,7 @@ PyObject *thing_is_rrr90(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr91(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr92(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr93(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr94(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_fire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_projectile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_flickers(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_laser(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -292,5 +292,6 @@ PyObject *thing_is_weapon_wielder(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_get_coords(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #endif

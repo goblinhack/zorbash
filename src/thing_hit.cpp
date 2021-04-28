@@ -139,9 +139,26 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         damage *= 2;
     }
 
+    //
+    // Check for immunity
+    //
+    if (is_immune_to_fire()) {
+        if (hitter->is_fire() || real_hitter->is_fire()) {
+            if (real_hitter->is_player()) {
+                TOPCON("%s basks in the fire!", text_The().c_str());
+            }
+            return false;
+        }
+    }
+
     if (bite) {
-        if (real_hitter->is_poison()) {
-            TOPCON("TODO poison");
+        if (is_immune_to_poison()) {
+            if (hitter->is_poison() || real_hitter->is_poison()) {
+                if (real_hitter->is_player()) {
+                    TOPCON("%s drinks in the poison!", text_The().c_str());
+                }
+                return false;
+            }
         }
     }
 
@@ -364,15 +381,15 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_player()) {
             if (crit) {
                 TOPCON("%%fg=red$You CRIT hit the %s for %d damage!%%fg=reset$",
-                        text_the().c_str(), damage);
+                       text_the().c_str(), damage);
             } else {
                 if (hitter && (hitter != real_hitter)) {
                     TOPCON("You hit the %s for %d damage with %s!",
-                        text_the().c_str(), damage,
-                        hitter->text_a_or_an().c_str());
+                           text_the().c_str(), damage,
+                           hitter->text_a_or_an().c_str());
                 } else {
                     TOPCON("You hit the %s for %d damage!",
-                        text_the().c_str(), damage);
+                           text_the().c_str(), damage);
                 }
             }
         }
@@ -493,12 +510,12 @@ _
     // Cruel to let things keep on hitting you when you're dead
     //
     if (is_dead) {
-        hitter->log("No, it's dead");
+        hitter->log("No, %s is dead", to_string().c_str());
         return false;
     }
 
     if (is_resurrecting) {
-        hitter->log("No, it's resurrecting");
+        hitter->log("No, %s is resurrecting", to_string().c_str());
         return false;
     }
 
@@ -533,7 +550,7 @@ _
         // damage. We don't want the player to keep absorbing hits when
         // already dead though.
         //
-        hitter->log("No, it's dead");
+        hitter->log("No, hitter %s is already dead", to_string().c_str());
         return false;
     }
 
@@ -549,6 +566,7 @@ _
         if (is_door()) {
             if (!hitter_tp->is_explosion()     &&
                 !hitter_tp->is_projectile()    &&
+                !hitter_tp->is_laser()         &&
                 !hitter_tp->is_weapon()        &&
                 !hitter_tp->is_wand()          &&
                 !hitter_tp->is_fire()          &&
@@ -557,90 +575,28 @@ _
                 //
                 // Not something that typically damages walls.
                 //
-                hitter->log("No, it's immune");
+                hitter->log("No, %s is immune (1)", to_string().c_str());
                 return false;
             }
         }
 
-        if (is_wall()) {
+        if (is_wall() || is_rock()) {
             if (!hitter_tp->is_explosion()     &&
                 !hitter_tp->is_projectile()    &&
+                !hitter_tp->is_laser()         &&
                 !hitter_tp->is_wand()          &&
                 !hitter_tp->gfx_attack_anim()) {
                 //
                 // Not something that typically damages walls.
                 //
-                hitter->log("No, it's immune");
+                hitter->log("No, %s is immune (2)", to_string().c_str());
                 return false;
             }
         }
 
-#if 0
-        if (hitter_tp->gfx_attack_anim()) {
-            //
-            // Get the player using the weapon as the hitter.
-            //
-            hitter = hitter->get_immediate_owner();
-            if (!hitter) {
-                hitter->log("Ignore %s, no owner", to_string().c_str());
-                return false;
-            }
-
-            verify(hitter);
-
-            //
-            // Get the damage from the weapon being used to use.
-            //
-            weapon = hitter->weapon_get();
-            if (!weapon) {
-                hitter->log("Ignore %s, no weapon", to_string().c_str());
-                return false;
-            }
-
-            if (!damage) {
-                damage = (weapon->tp()->weapon_damage());
-            }
-
-        } else
-#endif
         if (hitter->is_fire()) {
             hitter->log("Fire attack");
         }
-#if 0
-        } else if (hitter->get_immediate_owner()) {
-            //
-            // Get the player firing the weapon as the hitter.
-            //
-            hitter = hitter->get_immediate_owner();
-            if (!hitter) {
-                hitter->log("Ignore %s, no owner", to_string().c_str());
-                return false;
-            }
-
-            verify(hitter);
-
-            //
-            // Get the damage from the weapon being used to use.
-            //
-            weapon = hitter->weapon_get();
-            if (!weapon) {
-                hitter->log("Ignore %s, no weapon", to_string().c_str());
-                return false;
-            }
-
-            if (!damage) {
-                damage = weapon->tp()->weapon_damage();
-            }
-
-            //
-            // Don't let our own potion hit ourselves!
-            //
-            if (hitter == this) {
-                hitter->log("Ignore %s, self attack", to_string().c_str());
-                return false;
-            }
-        }
-#endif
     }
 
     hitter->log("Hit succeeds");

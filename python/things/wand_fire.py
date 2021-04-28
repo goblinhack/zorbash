@@ -1,6 +1,10 @@
 import zx
 import tp
 
+def on_fire_at(me, target, x, y): # Return True on doing an action
+    zx.thing_fire_at(me, "projectile_fire", target)
+    return True
+
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_bag_item_height(2)
@@ -37,7 +41,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_projectile_name("projectile_fire")
     x.set_long_text_description("Discharges a powerful blast of fire upon an unwitting recipient...")
     x.set_normal_placement_rules(True)
-    x.set_on_use_do("projectile_fire.on_use()")
+    x.set_on_fire_at_do("wand_fire.on_fire_at()")
     x.set_range_max(7)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=yellow$A wand of fire.")

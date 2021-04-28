@@ -46,6 +46,8 @@ def tp_init(name, text_name):
     x.set_is_described_when_hovering_over(True)
     x.set_is_fearless(True)
     x.set_is_hunger_insatiable(True)
+    x.set_is_immune_to_fire(True)
+    x.set_is_immune_to_poison(True)
     x.set_is_intelligent(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(True)
@@ -136,6 +138,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="skeleton_fire", text_name="firey skeleton")
+    tp_init(name="skeleton_fire", text_name="burning skeleton")
 
 init()

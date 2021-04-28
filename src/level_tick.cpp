@@ -37,6 +37,36 @@ void Level::tick (void)
         return;
     }
 
+    if (game->paused()) {
+        return;
+    }
+
+    //
+    // Stop rapid pickup/drop events if particles are still in progress
+    //
+    if (player && player->particle_anim_exists()) {
+        return;
+    }
+
+    //
+    // No moving if weapons have not finished firing
+    //
+    if (all_projectiles.size()) {
+        return;
+    }
+
+    if (new_projectiles.size()) {
+        return;
+    }
+
+    if (all_lasers.size()) {
+        return;
+    }
+
+    if (new_lasers.size()) {
+        return;
+    }
+
     player_tick();
 
     if (game->paused()) {

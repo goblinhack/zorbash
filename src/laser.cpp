@@ -37,10 +37,18 @@ Laser_::Laser_(
         return;
     }
 
-    auto name = t->laser_name();
-    if (name.empty()) {
-        ERR("no laser name");
-        return;
+    //
+    // Can be either a wand or the projectile itself being fired
+    //
+    std::string name;
+    if (t->is_laser()) {
+        name = t->tp()->name();
+    } else {
+        name = t->laser_name();
+        if (name.empty()) {
+            t->err("no laser name");
+            return;
+        }
     }
 
     //
@@ -143,7 +151,7 @@ void Level::display_lasers (void)
 
             if (dt > 1) {
                 if (t) {
-                    t->log("End of laser");
+                    t->dead("End of laser");
                     t->has_laser = false;
                 }
                 return true;

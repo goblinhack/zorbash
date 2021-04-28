@@ -215,7 +215,7 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
         for (auto y = mid_at.y - radius_max; y <= mid_at.y + radius_max; y++) {
             float dist = DISTANCE(x, y, mid_at.x, mid_at.y);
 
-            if (dist > radius_max) {
+            if (dist >= radius_max + 1) {
                 continue;
             }
 

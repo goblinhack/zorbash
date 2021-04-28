@@ -215,35 +215,23 @@ PyObject *thing_get_coords (PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
 {_	
-    uint32_t owner_id = 0;	
-    uint32_t item_id = 0;	
+    uint32_t hitter_id = 0;	
     uint32_t target_id = 0;	
-    static char *kwlist[] = {(char*)"owner", (char*)"item", (char*)"target", 0};	
+    static char *kwlist[] = {(char*)"hitter", (char*)"target", 0};	
 	
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "III", kwlist, &owner_id, &item_id, &target_id)) {
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &target_id)) {
         ERR("%s: failed parsing keywords", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
-    if (!owner_id) {	
-        ERR("%s: no owner thing ID set", __FUNCTION__);	
+    if (!hitter_id) {	
+        ERR("%s: no hitter thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
-    Thingp owner = game->thing_find(owner_id);	
-    if (!owner) {	
-        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
-        Py_RETURN_NONE;	
-    }	
-
-    if (!item_id) {	
-        ERR("%s: no item thing ID set", __FUNCTION__);	
-        Py_RETURN_NONE;	
-    }	
-	
-    Thingp item = game->thing_find(item_id);	
-    if (!item) {	
-        ERR("%s: cannot find item thing ID %u", __FUNCTION__, item_id);	
+    Thingp hitter = game->thing_find(hitter_id);	
+    if (!hitter) {	
+        ERR("%s: cannot find hitter thing ID %u", __FUNCTION__, hitter_id);	
         Py_RETURN_NONE;	
     }	
 
@@ -258,11 +246,58 @@ PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;	
     }	
 
-    owner->log("hit with %s target %s", item->to_string().c_str(), target->to_string().c_str());
+    hitter->log("Hit with %s target %s", hitter->to_string().c_str(), target->to_string().c_str());
 
-    if (target->is_hit_by(item)) {
+    if (target->is_hit_by(hitter)) {
         Py_RETURN_TRUE;	
     } else {
+        Py_RETURN_FALSE;	
+    }
+}
+
+PyObject *thing_possible_to_attack (PyObject *obj, PyObject *args, PyObject *keywds)
+{_	
+    uint32_t hitter_id = 0;	
+    uint32_t target_id = 0;	
+    static char *kwlist[] = {(char*)"hitter", (char*)"target", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &target_id)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!hitter_id) {	
+        ERR("%s: no hitter thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp hitter = game->thing_find(hitter_id);	
+    if (!hitter) {	
+        ERR("%s: cannot find hitter thing ID %u", __FUNCTION__, hitter_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!target_id) {	
+        ERR("%s: no target thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp target = game->thing_find(target_id);	
+    if (!target) {	
+        ERR("%s: cannot find target thing ID %u", __FUNCTION__, target_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    hitter->log("Check if possible to attack target %s", 
+                target->to_string().c_str());
+
+    if (hitter->possible_to_attack(target)) {
+        hitter->log("Check if possible to target %s; yes", 
+                target->to_string().c_str());
+        Py_RETURN_TRUE;	
+    } else {
+        hitter->log("Check if possible to attack %s; no", 
+                    target->to_string().c_str());
         Py_RETURN_FALSE;	
     }
 }
@@ -306,26 +341,25 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;	
     }	
 
-    owner->log("fire %s at %s", item, target->to_string().c_str());
-
-    if (owner->get_top_owner()) {
-        owner = owner->get_top_owner();
-    }
+    owner->log("Fire %s at %s", item, target->to_string().c_str());
 
     auto what = std::string(item);
     auto fire_what = tp_find(what);
-    if (fire_what->laser_name().empty()) {
-        if (owner->projectile_fire_monst(std::string(item), target)) {
+    if (fire_what->is_projectile()) {
+        if (owner->projectile_fire_at(std::string(item), target)) {
+            Py_RETURN_TRUE;	
+        } else {
+            Py_RETURN_FALSE;	
+        }
+    } else if (fire_what->is_laser()) {
+        if (owner->laser_fire_at(std::string(item), target)) {
             Py_RETURN_TRUE;	
         } else {
             Py_RETURN_FALSE;	
         }
     } else {
-        if (owner->laser_fire_monst(std::string(item), target)) {
-            Py_RETURN_TRUE;	
-        } else {
-            Py_RETURN_FALSE;	
-        }
+        owner->err("Cannot fire %s at %s", item, target->to_string().c_str());
+        Py_RETURN_FALSE;	
     }
 }
 
@@ -442,7 +476,7 @@ THING_BODY_GET_BOOL(thing_is_no_tile, is_no_tile)
 THING_BODY_GET_BOOL(thing_is_on_fire, is_on_fire)
 THING_BODY_GET_BOOL(thing_is_player, is_player)
 THING_BODY_GET_BOOL(thing_is_poison, is_poison)
-THING_BODY_GET_BOOL(thing_is_poison_immune, is_poison_immune)
+THING_BODY_GET_BOOL(thing_is_immune_to_poison, is_immune_to_poison)
 THING_BODY_GET_BOOL(thing_is_potion, is_potion)
 THING_BODY_GET_BOOL(thing_is_potion_eater, is_potion_eater)
 THING_BODY_GET_BOOL(thing_is_projectile, is_projectile)
@@ -543,7 +577,7 @@ THING_BODY_GET_BOOL(thing_is_rrr90, is_rrr90)
 THING_BODY_GET_BOOL(thing_is_rrr91, is_rrr91)
 THING_BODY_GET_BOOL(thing_is_rrr92, is_rrr92)
 THING_BODY_GET_BOOL(thing_is_rrr93, is_rrr93)
-THING_BODY_GET_BOOL(thing_is_rrr94, is_rrr94)
+THING_BODY_GET_BOOL(thing_is_immune_to_fire, is_immune_to_fire)
 THING_BODY_GET_BOOL(thing_gfx_flickers, gfx_flickers)
 THING_BODY_GET_BOOL(thing_is_secret_door, is_secret_door)
 THING_BODY_GET_BOOL(thing_is_sewer_wall, is_sewer_wall)

@@ -857,6 +857,6 @@ int32_t main (int32_t argc, char *argv[])
         execv(argv[0], argv);
     }
 
-    CON("FINI: Goodbye cruel world");
+    CON("FINI: Goodbye and take care until next time!");
     return (0);
 }

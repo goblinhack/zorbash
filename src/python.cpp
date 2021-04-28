@@ -1442,7 +1442,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_no_tile)
     TP_SET_DECL(is_player)
     TP_SET_DECL(is_poison)
-    TP_SET_DECL(is_poison_immune)
+    TP_SET_DECL(is_immune_to_poison)
     TP_SET_DECL(is_potion)
     TP_SET_DECL(is_potion_eater)
     TP_SET_DECL(is_projectile)
@@ -1543,7 +1543,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr91)
     TP_SET_DECL(is_rrr92)
     TP_SET_DECL(is_rrr93)
-    TP_SET_DECL(is_rrr94)
+    TP_SET_DECL(is_immune_to_fire)
     TP_SET_DECL(is_projectile)
     TP_SET_DECL(gfx_flickers)
     TP_SET_DECL(is_laser)
@@ -1782,7 +1782,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_on_fire_at",                                    (PyCFunction)level_is_on_fire_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_player_at",                                     (PyCFunction)level_is_player_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_poison_at",                                     (PyCFunction)level_is_poison_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_poison_immune_at",                              (PyCFunction)level_is_poison_immune_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_immune_to_poison_at",                           (PyCFunction)level_is_immune_to_poison_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_potion_at",                                     (PyCFunction)level_is_potion_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_potion_eater_at",                               (PyCFunction)level_is_potion_eater_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_projectile_at",                                 (PyCFunction)level_is_projectile_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1882,8 +1882,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr91_at",                                      (PyCFunction)level_is_rrr91_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr92_at",                                      (PyCFunction)level_is_rrr92_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr93_at",                                      (PyCFunction)level_is_rrr93_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr94_at",                                      (PyCFunction)level_is_rrr94_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_projectile_at",                                      (PyCFunction)level_is_projectile_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_immune_to_fire_at",                                      (PyCFunction)level_is_immune_to_fire_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_projectile_at",                                 (PyCFunction)level_is_projectile_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr9_at",                                       (PyCFunction)level_is_rrr9_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_secret_door_at",                                (PyCFunction)level_is_secret_door_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_sewer_wall_at",                                 (PyCFunction)level_is_sewer_wall_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1934,6 +1934,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_decr_stamina",                                     (PyCFunction)thing_decr_stamina,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_decr_stamina_max",                                 (PyCFunction)thing_decr_stamina_max,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_fire_at",                                          (PyCFunction)thing_fire_at,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_possible_to_attack",                               (PyCFunction)thing_possible_to_attack,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_coords",                                       (PyCFunction)thing_get_coords,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_current_damage",                               (PyCFunction)thing_get_current_damage,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_health",                                       (PyCFunction)thing_get_health,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1944,8 +1945,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_get_name",                                         (PyCFunction)thing_get_name,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_stamina",                                      (PyCFunction)thing_get_stamina,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_stamina_max",                                  (PyCFunction)thing_get_stamina_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_gfx_flickers",                                     (PyCFunction)thing_gfx_flickers,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_gfx_water",                                     (PyCFunction)thing_gfx_water,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_gfx_flickers",                                     (PyCFunction)thing_gfx_flickers,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_gfx_water",                                        (PyCFunction)thing_gfx_water,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_hit",                                              (PyCFunction)thing_hit,                                              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_incr_current_damage",                              (PyCFunction)thing_incr_current_damage,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_incr_health",                                      (PyCFunction)thing_incr_health,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2060,7 +2061,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_on_fire",                                       (PyCFunction)thing_is_on_fire,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_player",                                        (PyCFunction)thing_is_player,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_poison",                                        (PyCFunction)thing_is_poison,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_poison_immune",                                 (PyCFunction)thing_is_poison_immune,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_immune_to_poison",                              (PyCFunction)thing_is_immune_to_poison,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_potion",                                        (PyCFunction)thing_is_potion,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_potion_eater",                                  (PyCFunction)thing_is_potion_eater,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_projectile",                                    (PyCFunction)thing_is_projectile,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2161,8 +2162,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr91",                                         (PyCFunction)thing_is_rrr91,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr92",                                         (PyCFunction)thing_is_rrr92,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr93",                                         (PyCFunction)thing_is_rrr93,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr94",                                         (PyCFunction)thing_is_rrr94,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_projectile",                                         (PyCFunction)thing_is_projectile,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_immune_to_fire",                                         (PyCFunction)thing_is_immune_to_fire,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_projectile",                                    (PyCFunction)thing_is_projectile,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_secret_door",                                   (PyCFunction)thing_is_secret_door,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_sewer_wall",                                    (PyCFunction)thing_is_sewer_wall,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_shallow_water",                                 (PyCFunction)thing_is_shallow_water,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},

@@ -37,10 +37,18 @@ Projectile_::Projectile_(
         return;
     }
 
-    auto name = t->projectile_name();
-    if (name.empty()) {
-        ERR("no projectile name");
-        return;
+    //
+    // Can be either a wand or the projectile itself being fired
+    //
+    std::string name;
+    if (t->is_projectile()) {
+        name = t->tp()->name();
+    } else {
+        name = t->projectile_name();
+        if (name.empty()) {
+            t->err("no projectile name");
+            return;
+        }
     }
 
     //
@@ -133,7 +141,7 @@ void Level::display_projectiles (void)
 
             if (dt > 1) {
                 if (t) {
-                    t->log("End of projectile");
+                    t->dead("End of projectile");
                     t->has_projectile = false;
                 }
                 return true;
@@ -160,22 +168,21 @@ void Level::display_projectiles (void)
             fpoint mid(start.x + (diff.x * dt), 
                        start.y + (diff.y * dt));
 
-            point p1;
-            point p2;
-            point p3;
-            point p4;
+            point tl = make_point(mid - perp - step / 2);
+            point tr = make_point(mid - perp + step / 2);
+            point bl = make_point(mid + perp - step / 2);
+            point br = make_point(mid + perp + step / 2);
 
-            p1.x = mid.x - perp.x;
-            p1.y = mid.y - perp.y;
-            p2.x = mid.x + perp.x;
-            p2.y = mid.y + perp.y;
-
-            p3.x = mid.x + perp.x;
-            p3.y = mid.y - perp.y;
-            p4.x = mid.x - perp.x;
-            p4.y = mid.y + perp.y;
-
-            tile_blit(get(p.tiles, frame), p1, p3, p2, p4);
+            tile_blit(get(p.tiles, frame), tl, tr, bl, br);
+#if 0
+            //
+            // Debug
+            //
+            gl_blitline(tl.x, tl.y, tr.x, tr.y);
+            gl_blitline(tr.x, tr.y, br.x, br.y);
+            gl_blitline(br.x, br.y, bl.x, bl.y);
+            gl_blitline(bl.x, bl.y, tl.x, tl.y);
+#endif
 
             return false;
         });
