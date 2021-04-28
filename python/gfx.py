@@ -6316,12 +6316,12 @@ def init_tiles1_monsts_and_items():
       "wand10.4",
       "wand10.5",
       "wand10.6",
-      "wand11.1",
-      "wand11.2",
-      "wand11.3",
-      "wand11.4",
-      "wand11.5",
-      "wand11.6",
+      "wand_fire.1",
+      "wand_fire.2",
+      "wand_fire.3",
+      "wand_fire.4",
+      "wand_fire.5",
+      "wand_fire.6",
       "wand_lightning.1",
       "wand_lightning.2",
       "wand_lightning.3",
@@ -10332,6 +10332,30 @@ def init_laser_lightning_secondary_tiles():
         file="data/gfx/laser_lightning.tga",
         name="laser_lightning_secondary", width=32, height=32, arr=tiles)
 
+def init_projectile_fire_tiles():
+    tiles = [
+      "projectile_fire.1",
+      "projectile_fire.2",
+      "projectile_fire.3",
+      "projectile_fire.4",
+      "projectile_fire.5",
+      "projectile_fire.6",
+      "projectile_fire.7",
+      "projectile_fire.8",
+      "projectile_fire.9",
+      "projectile_fire.10",
+      "projectile_fire.11",
+      "projectile_fire.12",
+      "projectile_fire.13",
+      "projectile_fire.14",
+      "projectile_fire.15",
+      "projectile_fire.16",
+    ]
+
+    zx.tile_load_arr_sprites(
+        file="data/gfx/projectile_fire.tga",
+        name="projectile_fire", width=32, height=32, arr=tiles)
+
 
 init_solid()
 init_ui_circle()
@@ -10365,5 +10389,6 @@ init_laser_descent_tiles()
 init_laser_energy_tiles()
 init_laser_lightning_tiles()
 init_laser_lightning_secondary_tiles()
+init_projectile_fire_tiles()
 init_explosions()
 

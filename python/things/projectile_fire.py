@@ -18,7 +18,7 @@ def on_use(owner, item, target, x, y):
                 zx.thing_is_brazier(thing):
             zx.thing_hit(owner, item, thing)
 
-    zx.sound_play_channel_at(zx.CHANNEL_EXPLOSION, "explosion_b", x, y)
+    zx.sound_play_channel_at(zx.CHANNEL_EXPLOSION, "explosion_c", x, y)
 
 #
 # This is an internal only object to fire projectiles from monsters
@@ -38,6 +38,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_no_tile(True)
     x.set_is_usable(True)
     x.set_is_spawner(True)
+    x.set_is_fire(True)
     x.set_projectile_name("projectile_fire")
     x.set_on_use_do("projectile_fire.on_use()")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

@@ -314,14 +314,14 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
 
     auto what = std::string(item);
     auto fire_what = tp_find(what);
-    if (fire_what->is_laser()){
-        if (owner->laser_fire_monst(std::string(item), target)) {
+    if (fire_what->laser_name().empty()) {
+        if (owner->projectile_fire_monst(std::string(item), target)) {
             Py_RETURN_TRUE;	
         } else {
             Py_RETURN_FALSE;	
         }
     } else {
-        if (owner->projectile_fire_monst(std::string(item), target)) {
+        if (owner->laser_fire_monst(std::string(item), target)) {
             Py_RETURN_TRUE;	
         } else {
             Py_RETURN_FALSE;	

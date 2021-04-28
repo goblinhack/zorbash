@@ -124,7 +124,7 @@ bool Thing::matches (const std::string& what) const
     if (is_killed_on_hit_or_miss() &&                         (what == "is_killed_on_hit_or_miss"))                         { return true; }
     if (is_killed_on_hitting() &&                             (what == "is_killed_on_hitting"))                             { return true; }
     if (is_laser() &&                                         (what == "is_laser"))                                         { return true; }
-    if (is_target_select_automatically_when_chosen() && (what == "is_target_select_automatically_when_chosen")) { return true; }
+    if (is_target_select_automatically_when_chosen() &&       (what == "is_target_select_automatically_when_chosen")) { return true; }
     if (is_lava() &&                                          (what == "is_lava"))                                          { return true; }
     if (is_light_blocker() &&                                 (what == "is_light_blocker"))                                 { return true; }
     if (is_living() &&                                        (what == "is_living"))                                        { return true; }
