@@ -300,6 +300,17 @@ void ramdisk_init (void)
     }
 
     {
+        extern unsigned char *data_projectile_fire_tga_start_ asm("data_projectile_fire_tga_start_");
+        extern unsigned char *data_projectile_fire_tga_end_ asm("data_projectile_fire_tga_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_projectile_fire_tga_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_projectile_fire_tga_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/gfx/projectile_fire.tga"] = r;
+    }
+
+    {
         extern unsigned char *data_tiles3_water_tga_start_ asm("data_tiles3_water_tga_start_");
         extern unsigned char *data_tiles3_water_tga_end_ asm("data_tiles3_water_tga_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_tiles3_water_tga_start_;
@@ -473,17 +484,6 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/gfx/tiles1_walls.tga"] = r;
-    }
-
-    {
-        extern unsigned char *data_projectile_lightning_tga_start_ asm("data_projectile_lightning_tga_start_");
-        extern unsigned char *data_projectile_lightning_tga_end_ asm("data_projectile_lightning_tga_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data_projectile_lightning_tga_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_projectile_lightning_tga_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/gfx/projectile_lightning.tga"] = r;
     }
 
     {

@@ -1366,7 +1366,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_blood)
     TP_SET_DECL(is_blood_splatter)
     TP_SET_DECL(is_brazier)
-    TP_SET_DECL(is_burnable)
+    TP_SET_DECL(is_rrr99)
     TP_SET_DECL(is_carrier_of_treasure_class_a)
     TP_SET_DECL(is_carrier_of_treasure_class_b)
     TP_SET_DECL(is_carrier_of_treasure_class_c)
@@ -1696,7 +1696,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_blood_splatter_at",                             (PyCFunction)level_is_blood_splatter_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_bloodied_at",                                   (PyCFunction)level_is_bloodied_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_brazier_at",                                    (PyCFunction)level_is_brazier_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_burnable_at",                                   (PyCFunction)level_is_burnable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_rrr99_at",                                   (PyCFunction)level_is_rrr99_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_carrier_of_treasure_class_a_at",                (PyCFunction)level_is_carrier_of_treasure_class_a_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_carrier_of_treasure_class_b_at",                (PyCFunction)level_is_carrier_of_treasure_class_b_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_carrier_of_treasure_class_c_at",                (PyCFunction)level_is_carrier_of_treasure_class_c_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1971,7 +1971,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_blood_splatter",                                (PyCFunction)thing_is_blood_splatter,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_bloodied",                                      (PyCFunction)thing_is_bloodied,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_brazier",                                       (PyCFunction)thing_is_brazier,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_burnable",                                      (PyCFunction)thing_is_burnable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rrr99",                                      (PyCFunction)thing_is_rrr99,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_carrier_of_treasure_class_a",                   (PyCFunction)thing_is_carrier_of_treasure_class_a,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_carrier_of_treasure_class_b",                   (PyCFunction)thing_is_carrier_of_treasure_class_b,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_carrier_of_treasure_class_c",                   (PyCFunction)thing_is_carrier_of_treasure_class_c,                   METH_VARARGS | METH_KEYWORDS, "thing api"},

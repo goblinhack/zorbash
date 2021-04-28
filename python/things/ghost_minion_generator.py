@@ -30,7 +30,6 @@ def tp_init(name, text_name):
     x.set_is_active(True)
     x.set_is_always_hit(True)
     x.set_is_attackable_by_player(True)
-    x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_interesting(True)
     x.set_light_strength(2)

@@ -18,17 +18,17 @@ data_blood_tga_start_:
 .globl data_blood_tga_end_
 data_blood_tga_end_:
 
-.globl data_ui_circle_tga_start_
-data_ui_circle_tga_start_:
-.incbin "../data/gfx/ui_circle.tga"
-.globl data_ui_circle_tga_end_
-data_ui_circle_tga_end_:
+.globl data_tiles3_sewer_water_tga_start_
+data_tiles3_sewer_water_tga_start_:
+.incbin "../data/gfx/tiles3_sewer_water.tga"
+.globl data_tiles3_sewer_water_tga_end_
+data_tiles3_sewer_water_tga_end_:
 
-.globl data_tiles1_walls_tga_start_
-data_tiles1_walls_tga_start_:
-.incbin "../data/gfx/tiles1_walls.tga"
-.globl data_tiles1_walls_tga_end_
-data_tiles1_walls_tga_end_:
+.globl data_tiles2_tga_start_
+data_tiles2_tga_start_:
+.incbin "../data/gfx/tiles2.tga"
+.globl data_tiles2_tga_end_
+data_tiles2_tga_end_:
 
 .globl data_jump_a_wav_start_
 data_jump_a_wav_start_:

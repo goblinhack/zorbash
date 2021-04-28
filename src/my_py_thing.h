@@ -60,7 +60,7 @@ PyObject *thing_is_blood(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_blood_splatter(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bloodied(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_brazier(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_burnable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_rrr99(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrier_of_treasure_class_a(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrier_of_treasure_class_b(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrier_of_treasure_class_c(PyObject *obj, PyObject *args, PyObject *keywds);

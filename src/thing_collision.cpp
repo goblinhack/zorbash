@@ -903,6 +903,16 @@ _
         // Continue walking by falling through to return true
         //
         log("No; ignore corpse");
+    } else if (is_fire() && it->is_combustible()) {
+        //
+        // Fire attack?
+        //
+        if (things_overlap_attack(me, future_pos, it)) {
+            log("Yes; allow fire to burn %s", it->to_string().c_str());
+            thing_add_ai_possible_hit(it, "burn");
+        } else {
+            log("No; cannot butn %s, no overlap", it->to_string().c_str());
+        }
     } else {
         //
         // Continue walking by falling through to return true

@@ -18,7 +18,6 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_able_to_fall(True)
     x.set_is_active(True) # for pushing and falling
     x.set_is_brazier(True)
-    x.set_is_combustible(True)
     x.set_is_corpse_on_death(True)
     x.set_is_dead_on_shove(True)
     x.set_is_described_when_hovering_over(True)

@@ -162,7 +162,7 @@ int Tp::is_bleeder(void) const                                       { return _i
 int Tp::is_blood(void) const                                         { return _is_blood; }
 int Tp::is_blood_splatter(void) const                                { return _is_blood_splatter; }
 int Tp::is_brazier(void) const                                       { return _is_brazier; }
-int Tp::is_burnable(void) const                                      { return _is_burnable; }
+int Tp::is_rrr99(void) const                                      { return _is_rrr99; }
 int Tp::is_carrier_of_treasure_class_a(void) const                   { return _is_carrier_of_treasure_class_a; }
 int Tp::is_carrier_of_treasure_class_b(void) const                   { return _is_carrier_of_treasure_class_b; }
 int Tp::is_carrier_of_treasure_class_c(void) const                   { return _is_carrier_of_treasure_class_c; }
@@ -487,7 +487,7 @@ void Tp::set_is_bleeder(int v)                                       { _is_bleed
 void Tp::set_is_blood(int v)                                         { _is_blood = v; }
 void Tp::set_is_blood_splatter(int v)                                { _is_blood_splatter = v; }
 void Tp::set_is_brazier(int v)                                       { _is_brazier = v; }
-void Tp::set_is_burnable(int v)                                      { _is_burnable = v; }
+void Tp::set_is_rrr99(int v)                                      { _is_rrr99 = v; }
 void Tp::set_is_carrier_of_treasure_class_a(int v)                   { _is_carrier_of_treasure_class_a = v; }
 void Tp::set_is_carrier_of_treasure_class_b(int v)                   { _is_carrier_of_treasure_class_b = v; }
 void Tp::set_is_carrier_of_treasure_class_c(int v)                   { _is_carrier_of_treasure_class_c = v; }

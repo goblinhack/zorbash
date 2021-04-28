@@ -221,7 +221,7 @@ public:
     #define JOIN(X,Y) JOIN1(X,Y)
 
     #define FOR_ALL_THINGS_WALKER(level, t, x, y)                   \
-        if(!(level)->is_oob(x, y)) {                                \
+        if (!(level)->is_oob(x, y)) {                               \
             static Thingp things_to_walk[MAP_SLOTS];                \
             auto _vec_ = getptr(level->all_thing_ptrs_at, x, y);    \
             auto things_to_walk_size = _vec_->size();               \
@@ -243,7 +243,7 @@ public:
     //
     #define FOR_ALL_GRID_THINGS(level, t, x, y)              	    \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
-                if(!t->is_the_grid) { continue; }                   \
+                if (!t->is_the_grid) { continue; }                  \
 
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
@@ -254,17 +254,17 @@ public:
 
     #define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                 \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
-            if(likely(!t->has_light)) { continue; }                 \
-            if(t->is_hidden) { continue; }                          \
+            if (likely(!t->has_light)) { continue; }                \
+            if (t->is_hidden) { continue; }                         \
 
     //
     // Things that move around
     //
     #define FOR_ALL_ACTIVE_THINGS(level, t, x, y)                   \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
-                if(t->is_the_grid) { continue; }                    \
-                if(t->is_hidden) { continue; }                      \
-                if(!t->is_active()) {                               \
+                if (t->is_the_grid) { continue; }                   \
+                if (t->is_hidden) { continue; }                     \
+                if (!t->is_active()) {                              \
                     continue;                                       \
                 }                                                   \
 
@@ -274,9 +274,9 @@ public:
     //
     #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)              \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
-                if(t->is_the_grid) { continue; }                    \
-                if(t->is_hidden) { continue; }                      \
-                if(!t->is_interesting()) {                          \
+                if (t->is_the_grid) { continue; }                   \
+                if (t->is_hidden) { continue; }                     \
+                if (!t->is_interesting()) {                         \
                     continue;                                       \
                 }                                                   \
 
@@ -285,21 +285,22 @@ public:
     //
     #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
-                if(t->is_the_grid) { continue; }                    \
-                if(t->is_hidden) { continue; }                      \
-                if(!t->is_interesting() &&                          \
-                    !t->is_attackable_by_monst() &&                 \
-                    !t->is_attackable_by_player() &&                \
-                    !t->ai_obstacle()) {                            \
+                if (t->is_the_grid) { continue; }                   \
+                if (t->is_hidden) { continue; }                     \
+                if (t->is_interesting() ||                          \
+                    t->is_attackable_by_monst() ||                  \
+                    t->is_attackable_by_player() ||                 \
+                    t->ai_obstacle()) {                             \
+                } else {                                            \
                     continue;                                       \
-                }                                                   \
+                }
 
     //
     // Cursor path is the highlighted path the player follows.
     //
     #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)              \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
-                if(!t->is_cursor_path()) {                          \
+                if (!t->is_cursor_path()) {                         \
                     continue;                                       \
                 }                                                   \
 

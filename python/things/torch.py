@@ -21,9 +21,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(True)
     x.set_is_active(True) # for pushing and falling
-    x.set_is_burnable(True)
     x.set_is_collectable(True)
-    x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_droppable(True)
     x.set_is_flammable(True)

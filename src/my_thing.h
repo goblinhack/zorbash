@@ -657,7 +657,7 @@ public:
     int is_blood(void) const;
     int is_blood_splatter(void) const;
     int is_brazier(void) const;
-    int is_burnable(void) const;
+    int is_rrr99(void) const;
     int is_carrier_of_treasure_class_a(void) const;
     int is_carrier_of_treasure_class_b(void) const;
     int is_carrier_of_treasure_class_c(void) const;

@@ -18,17 +18,17 @@ data_glow_tga_start_:
 .globl data_glow_tga_end_
 data_glow_tga_end_:
 
-.globl data_ui_vert1_tga_start_
-data_ui_vert1_tga_start_:
-.incbin "../data/gfx/ui_vert1.tga"
-.globl data_ui_vert1_tga_end_
-data_ui_vert1_tga_end_:
+.globl data_ui_circle_tga_start_
+data_ui_circle_tga_start_:
+.incbin "../data/gfx/ui_circle.tga"
+.globl data_ui_circle_tga_end_
+data_ui_circle_tga_end_:
 
-.globl data_projectile_lightning_tga_start_
-data_projectile_lightning_tga_start_:
-.incbin "../data/gfx/projectile_lightning.tga"
-.globl data_projectile_lightning_tga_end_
-data_projectile_lightning_tga_end_:
+.globl data_tiles1_walls_tga_start_
+data_tiles1_walls_tga_start_:
+.incbin "../data/gfx/tiles1_walls.tga"
+.globl data_tiles1_walls_tga_end_
+data_tiles1_walls_tga_end_:
 
 .globl data_disarm_single_wav_start_
 data_disarm_single_wav_start_:

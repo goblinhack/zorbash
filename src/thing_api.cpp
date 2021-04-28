@@ -114,7 +114,7 @@ int Thing::is_bleeder(void) const                                       {_ retur
 int Thing::is_blood(void) const                                         {_ return (tp()->is_blood()); }
 int Thing::is_blood_splatter(void) const                                {_ return (tp()->is_blood_splatter()); }
 int Thing::is_brazier(void) const                                       {_ return (tp()->is_brazier()); }
-int Thing::is_burnable(void) const                                      {_ return (tp()->is_burnable()); }
+int Thing::is_rrr99(void) const                                      {_ return (tp()->is_rrr99()); }
 int Thing::is_carrier_of_treasure_class_a(void) const                   {_ return (tp()->is_carrier_of_treasure_class_a()); }
 int Thing::is_carrier_of_treasure_class_b(void) const                   {_ return (tp()->is_carrier_of_treasure_class_b()); }
 int Thing::is_carrier_of_treasure_class_c(void) const                   {_ return (tp()->is_carrier_of_treasure_class_c()); }
