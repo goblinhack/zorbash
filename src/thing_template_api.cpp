@@ -77,7 +77,7 @@ const std::string& Tp::str2(void) const                  { return _str2; }
 const std::string& Tp::str3(void) const                  { return _str3; }
 const std::string& Tp::str4(void) const                  { return _str4; }
 const std::string& Tp::str5(void) const                  { return _str5; }
-const std::string& Tp::projectile_name(void) const                  { return _projectile_name; }
+const std::string& Tp::projectile_name(void) const       { return _projectile_name; }
 const std::string& Tp::text_description(void) const      { return _text_description; }
 const std::string& Tp::text_hits(void) const             { return _text_hits; }
 const std::string& Tp::text_name(void) const             { return _text_name; }
@@ -196,7 +196,7 @@ int Tp::is_floor(void) const                                         { return _i
 int Tp::is_floor_deco(void) const                                    { return _is_floor_deco; }
 int Tp::is_food(void) const                                          { return _is_food; }
 int Tp::is_food_eater(void) const                                    { return _is_food_eater; }
-int Tp::gfx_water(void) const                                     { return _gfx_water; }
+int Tp::gfx_water(void) const                                        { return _gfx_water; }
 int Tp::is_gold(void) const                                          { return _is_gold; }
 int Tp::is_hazard(void) const                                        { return _is_hazard; }
 int Tp::is_humanoid(void) const                                      { return _is_humanoid; }
@@ -220,7 +220,7 @@ int Tp::is_jumper_on_low_hp_chance_d1000(void) const                 { return _i
 int Tp::is_key(void) const                                           { return _is_key; }
 int Tp::is_killed_on_hit_or_miss(void) const                         { return _is_killed_on_hit_or_miss; }
 int Tp::is_killed_on_hitting(void) const                             { return _is_killed_on_hitting; }
-int Tp::is_target_select_automatically_when_chosen(void) const { return _is_target_select_automatically_when_chosen; }
+int Tp::is_target_select_automatically_when_chosen(void) const       { return _is_target_select_automatically_when_chosen; }
 int Tp::is_lava(void) const                                          { return _is_lava; }
 int Tp::is_light_blocker(void) const                                 { return _is_light_blocker; }
 int Tp::is_living(void) const                                        { return _is_living; }
@@ -238,7 +238,7 @@ int Tp::is_msg(void) const                                           { return _i
 int Tp::is_no_tile(void) const                                       { return _is_no_tile; }
 int Tp::is_player(void) const                                        { return _is_player; }
 int Tp::is_poison(void) const                                        { return _is_poison; }
-int Tp::is_poison_immune(void) const                                 { return _is_poison_immune; }
+int Tp::is_immune_to_poison(void) const                              { return _is_immune_to_poison; }
 int Tp::is_potion(void) const                                        { return _is_potion; }
 int Tp::is_potion_eater(void) const                                  { return _is_potion_eater; }
 int Tp::is_projectile(void) const                                    { return _is_projectile; }
@@ -339,7 +339,7 @@ int Tp::is_rrr90(void) const                                         { return _i
 int Tp::is_rrr91(void) const                                         { return _is_rrr91; }
 int Tp::is_rrr92(void) const                                         { return _is_rrr92; }
 int Tp::is_rrr93(void) const                                         { return _is_rrr93; }
-int Tp::is_rrr94(void) const                                         { return _is_rrr94; }
+int Tp::is_immune_to_fire(void) const                                { return _is_immune_to_fire; }
 int Tp::gfx_flickers(void) const                                     { return _gfx_flickers; }
 int Tp::is_laser(void) const                                         { return _is_laser; }
 int Tp::is_able_to_fire_at(void) const                               { return _is_able_to_fire_at; }
@@ -521,7 +521,7 @@ void Tp::set_is_floor(int v)                                         { _is_floor
 void Tp::set_is_floor_deco(int v)                                    { _is_floor_deco = v; }
 void Tp::set_is_food(int v)                                          { _is_food = v; }
 void Tp::set_is_food_eater(int v)                                    { _is_food_eater = v; }
-void Tp::set_gfx_water(int v)                                     { _gfx_water = v; }
+void Tp::set_gfx_water(int v)                                        { _gfx_water = v; }
 void Tp::set_is_gold(int v)                                          { _is_gold = v; }
 void Tp::set_is_hazard(int v)                                        { _is_hazard = v; }
 void Tp::set_is_humanoid(int v)                                      { _is_humanoid = v; }
@@ -545,7 +545,7 @@ void Tp::set_is_jumper_on_low_hp_chance_d1000(int v)                 { _is_jumpe
 void Tp::set_is_key(int v)                                           { _is_key = v; }
 void Tp::set_is_killed_on_hit_or_miss(int v)                         { _is_killed_on_hit_or_miss = v; }
 void Tp::set_is_killed_on_hitting(int v)                             { _is_killed_on_hitting = v; }
-void Tp::set_is_target_select_automatically_when_chosen(int v) { _is_target_select_automatically_when_chosen = v; }
+void Tp::set_is_target_select_automatically_when_chosen(int v)       { _is_target_select_automatically_when_chosen = v; }
 void Tp::set_is_lava(int v)                                          { _is_lava = v; }
 void Tp::set_is_light_blocker(int v)                                 { _is_light_blocker = v; }
 void Tp::set_is_living(int v)                                        { _is_living = v; }
@@ -563,7 +563,7 @@ void Tp::set_is_msg(int v)                                           { _is_msg =
 void Tp::set_is_no_tile(int v)                                       { _is_no_tile = v; }
 void Tp::set_is_player(int v)                                        { _is_player = v; }
 void Tp::set_is_poison(int v)                                        { _is_poison = v; }
-void Tp::set_is_poison_immune(int v)                                 { _is_poison_immune = v; }
+void Tp::set_is_immune_to_poison(int v)                              { _is_immune_to_poison = v; }
 void Tp::set_is_potion(int v)                                        { _is_potion = v; }
 void Tp::set_is_potion_eater(int v)                                  { _is_potion_eater = v; }
 void Tp::set_is_removeable_if_out_of_slots(int v)                    { _is_removeable_if_out_of_slots = v; }
@@ -663,7 +663,7 @@ void Tp::set_is_rrr90(int v)                                         { _is_rrr90
 void Tp::set_is_rrr91(int v)                                         { _is_rrr91 = v; }
 void Tp::set_is_rrr92(int v)                                         { _is_rrr92 = v; }
 void Tp::set_is_rrr93(int v)                                         { _is_rrr93 = v; }
-void Tp::set_is_rrr94(int v)                                         { _is_rrr94 = v; }
+void Tp::set_is_immune_to_fire(int v)                                { _is_immune_to_fire = v; }
 void Tp::set_is_projectile(int v)                                    { _is_projectile = v; }
 void Tp::set_gfx_flickers(int v)                                     { _gfx_flickers = v; }
 void Tp::set_is_laser(int v)                                         { _is_laser = v; }
@@ -762,7 +762,7 @@ void Tp::set_str2(const std::string &v)                  { _str2 = v; }
 void Tp::set_str3(const std::string &v)                  { _str3 = v; }
 void Tp::set_str4(const std::string &v)                  { _str4 = v; }
 void Tp::set_str5(const std::string &v)                  { _str5 = v; }
-void Tp::set_projectile_name(const std::string &v)                  { _projectile_name = v; }
+void Tp::set_projectile_name(const std::string &v)       { _projectile_name = v; }
 void Tp::set_text_a_or_an(const std::string &v)          { _text_a_or_an = v; }
 void Tp::set_text_description(const std::string &v)      { _text_description = v; }
 void Tp::set_text_hits(const std::string &v)             { _text_hits = v; }

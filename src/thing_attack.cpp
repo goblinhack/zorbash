@@ -22,16 +22,23 @@ bool Thing::possible_to_attack (const Thingp it)
 
     auto owner = get_top_owner();
 
-    if (owner && owner->is_player()) {
-        if (it->is_attackable_by_player()) {
-            log("Owned by player");
-        } else {
-            log("Owned by player; not is_attackable by player");
+    //
+    // Allow wands to reflect and attack the owner. Weapons though, no.
+    //
+    if (is_weapon()) {
+        if (owner && owner->is_player()) {
+            if (it->is_attackable_by_player()) {
+                log("Owned by player");
+            } else {
+                log("Owned by player; not is_attackable by player");
+            }
         }
     }
 
-    if (owner && owner->is_monst() && it->is_attackable_by_monst()) {
-        // monst weapn, continue
+    if (is_wand() || is_laser() || is_projectile()) {
+        // continue
+    } else if (owner && owner->is_monst() && it->is_attackable_by_monst()) {
+        // monst weapon, continue
     } else if (is_monst() && it->is_attackable_by_monst()) {
         // continue
     } else if (is_player() && it->is_attackable_by_player()) {
@@ -51,7 +58,7 @@ _
     // Fire attacks via tick so it can get you when you fall or jump into it.
     //
     if (is_fire()) {
-        if (!is_monst()) {
+        if (!is_monst() && !is_laser() && !is_projectile() && !is_weapon()) {
             log("Cannot attack %s, I am fire", it->to_string().c_str());
             return false;
         }
@@ -196,6 +203,31 @@ _
     if (is_enemy(it)) {
         log("Can attack enemy %s", it->to_string().c_str());
         return true;
+    }
+
+    if (it->is_alive_monst() || 
+        it->is_combustible() ||
+        it->is_wall() ||
+        it->is_rock() ||
+        it->is_door() ||
+        it->is_brazier() ||
+        it->is_player() ||
+        it->is_item()) {
+
+        if (is_laser()) {
+            log("Can attack as laser %s", it->to_string().c_str());
+            return true;
+        }
+
+        if (is_projectile()) {
+            log("Can attack as projectile %s", it->to_string().c_str());
+            return true;
+        }
+
+        if (is_wand()) {
+            log("Can attack as wand %s", it->to_string().c_str());
+            return true;
+        }
     }
 
     log("Cannot attack %s, ignore", it->to_string().c_str());
@@ -367,7 +399,7 @@ _
             } else if (it->is_player()) {
                 if (owner) {
                     TOPCON("%s misses with %s.", 
-                           owner->text_The().c_str(),
+                           owner->text_the().c_str(),
                            text_The().c_str());
                 } else {
                     TOPCON("%s misses.", text_The().c_str());

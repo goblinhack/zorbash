@@ -213,7 +213,7 @@ private:
     int _is_no_tile {};
     int _is_player {};
     int _is_poison {};
-    int _is_poison_immune {};
+    int _is_immune_to_poison {};
     int _is_potion {};
     int _is_potion_eater {};
     int _is_projectile {};
@@ -314,7 +314,7 @@ private:
     int _is_rrr91 {};
     int _is_rrr92 {};
     int _is_rrr93 {};
-    int _is_rrr94 {};
+    int _is_immune_to_fire {};
     int _gfx_flickers {};
     int _is_laser {};
     int _is_able_to_fire_at {};
@@ -669,7 +669,7 @@ public:
     int is_no_tile(void) const;
     int is_player(void) const;
     int is_poison(void) const;
-    int is_poison_immune(void) const;
+    int is_immune_to_poison(void) const;
     int is_potion(void) const;
     int is_potion_eater(void) const;
     int is_removeable_if_out_of_slots(void) const;
@@ -769,7 +769,7 @@ public:
     int is_rrr91(void) const;
     int is_rrr92(void) const;
     int is_rrr93(void) const;
-    int is_rrr94(void) const;
+    int is_immune_to_fire(void) const;
     int is_projectile(void) const;
     int gfx_flickers(void) const;
     int is_laser(void) const;
@@ -1001,7 +1001,7 @@ public:
     void set_is_no_tile(int);
     void set_is_player(int);
     void set_is_poison(int);
-    void set_is_poison_immune(int);
+    void set_is_immune_to_poison(int);
     void set_is_potion(int);
     void set_is_potion_eater(int);
     void set_is_removeable_if_out_of_slots(int);
@@ -1101,7 +1101,7 @@ public:
     void set_is_rrr91(int);
     void set_is_rrr92(int);
     void set_is_rrr93(int);
-    void set_is_rrr94(int);
+    void set_is_immune_to_fire(int);
     void set_is_projectile(int);
     void set_gfx_flickers(int);
     void set_is_laser(int);

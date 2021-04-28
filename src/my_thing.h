@@ -258,8 +258,8 @@ public:
     bool fall_to_next_level(void);
     bool fire_at_and_choose_target(Thingp);
     bool fire_at_target(void);
-    bool fire_laser_at_and_choose_target(Thingp item);
-    bool fire_projectile_at_and_choose_target(Thingp item);
+    bool laser_choose_target(Thingp item);
+    bool projectile_choose_target(Thingp item);
     bool fire_choose_target(Thingp item);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
     bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
@@ -274,11 +274,9 @@ public:
     bool is_enemy(Thingp attacker) const;
     bool is_on_fire(void) const;
     bool laser_anim_exists(void);
-    bool laser_fire(Thingp item, Thingp target);
-    bool laser_fire_monst(const std::string &item, Thingp target);
+    bool laser_fire_at(const std::string &item, Thingp target);
     bool projectile_anim_exists(void);
-    bool projectile_fire(Thingp item, Thingp target);
-    bool projectile_fire_monst(const std::string &item, Thingp target);
+    bool projectile_fire_at(const std::string &item, Thingp target);
     bool location_check();
     bool matches(const std::string& what) const;
     static std::function<int(Thingp)> matches_to_func(const std::string& what);
@@ -740,7 +738,7 @@ public:
     int is_no_tile(void) const;
     int is_player(void) const;
     int is_poison(void) const;
-    int is_poison_immune(void) const;
+    int is_immune_to_poison(void) const;
     int is_potion(void) const;
     int is_potion_eater(void) const;
     int is_projectile(void) const;
@@ -841,7 +839,7 @@ public:
     int is_rrr91(void) const;
     int is_rrr92(void) const;
     int is_rrr93(void) const;
-    int is_rrr94(void) const;
+    int is_immune_to_fire(void) const;
     int gfx_flickers(void) const;
     int is_laser(void) const;
     int is_secret_door(void) const;

@@ -9,17 +9,9 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::fire_projectile_at_and_choose_target (Thingp item)
+bool Thing::projectile_choose_target (Thingp item)
 {_
-    log("Trying to projectile with: %s", item->to_string().c_str());
-
-    if (item->projectile_name().empty()) {
-        if (is_player()) {
-            TOPCON("I don't know how to fire %s.", item->text_the().c_str());
-            game->tick_begin("player tried to use something they could not");
-        }
-        return false;
-    }
+    log("Trying to target a projectile with: %s", item->to_string().c_str());
 
     if (!target_select(item)) {
         return false;
@@ -30,49 +22,33 @@ bool Thing::fire_projectile_at_and_choose_target (Thingp item)
     return target_select(item);
 }
 
-bool Thing::projectile_fire (Thingp item, Thingp target)
+bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp target)
 {_
-    log("Firing projectile with: %s at %s", item->to_string().c_str(),
+    if (projectile_name == "") {
+        die("No projectile name");
+    }
+
+    auto projectile = level->thing_new(projectile_name, mid_at);
+    if (!projectile) {
+        return false;
+    }
+
+    projectile->set_owner(this);
+    projectile->move_to_immediately(target->mid_at);
+
+    log("Firing named projectile with: %s at %s", projectile->to_string().c_str(),
         target->to_string().c_str());
 
-    if (item->projectile_name().empty()) {
+    if (!projectile->is_projectile()) {
         if (is_player()) {
-            TOPCON("I don't know how to fire %s.", item->text_the().c_str());
+            TOPCON("I don't know how to fire %s.", projectile->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
-        }
-        return false;
-    }
-
-    if (!game->request_to_fire_item) {
-        ERR("No projectile to fire");
-        return false;
-    }
-
-    //
-    // Check not out of range
-    //
-    bool too_far = false;
-    auto dist = distance(mid_at, target->mid_at);
-
-    if (game->request_to_fire_item) {
-        if (dist > item->range_max()) {
-            too_far = true;
-        }
-    }
-
-    if (too_far) {
-        if (is_player()) {
-            TOPCON("That target is out of range of %s.", 
-                   item->text_the().c_str());
         }
         return false;
     }
 
     if (is_player()) {
         game->tick_begin("player fired projectile");
-    }
-
-    if (game->state == Game::STATE_CHOOSING_TARGET) {
         game->change_state(Game::STATE_NORMAL);
     }
 
@@ -87,53 +63,9 @@ bool Thing::projectile_fire (Thingp item, Thingp target)
         return false;
     }
 
-    level->new_projectile(item->id, start, end, 1500);
+    level->new_projectile(projectile->id, start, end, 500);
 
-    used(item, target, true /* remove_after_use */);
-
-    return true;
-}
-
-bool Thing::projectile_fire_monst (const std::string &projectile, Thingp target)
-{_
-    auto item = level->thing_new(projectile, mid_at);
-    if (!item) {
-        return false;
-    }
-
-    item->set_owner(this);
-
-    log("Firing projectile with: %s at %s", item->to_string().c_str(),
-        target->to_string().c_str());
-
-    if (item->projectile_name().empty()) {
-        if (is_player()) {
-            TOPCON("I don't know how to fire %s.", item->text_the().c_str());
-            game->tick_begin("player tried to use something they could not");
-        }
-        return false;
-    }
-
-    if (is_player()) {
-        game->tick_begin("player fired projectile");
-    }
-
-    auto start = last_blit_at;
-    auto end = target->last_blit_at;
-
-    if (!start.x && !start.y) {
-        return false;
-    }
-
-    if (!end.x && !end.y) {
-        return false;
-    }
-
-    level->new_projectile(item->id, start, end, 150);
-
-    on_use(item, target);
-
-    item->dead("fired");
+    on_use(projectile, target);
 
     return true;
 }

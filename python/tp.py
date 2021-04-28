@@ -499,8 +499,8 @@ class Tp:
     def set_is_rrr93(self, value):
         zx.tp_set_is_rrr93(self, value)
 
-    def set_is_rrr94(self, value):
-        zx.tp_set_is_rrr94(self, value)
+    def set_is_immune_to_fire(self, value):
+        zx.tp_set_is_immune_to_fire(self, value)
 
     def set_is_projectile(self, value):
         zx.tp_set_is_projectile(self, value)
@@ -604,8 +604,8 @@ class Tp:
     def set_is_humanoid(self, value):
         zx.tp_set_is_humanoid(self, value)
 
-    def set_is_poison_immune(self, value):
-        zx.tp_set_is_poison_immune(self, value)
+    def set_is_immune_to_poison(self, value):
+        zx.tp_set_is_immune_to_poison(self, value)
 
     def set_damage_doubled_from_poison(self, value):
         zx.tp_set_damage_doubled_from_poison(self, value)

@@ -33,6 +33,7 @@ def tp_init(name, text_name):
     x.set_is_fearless(True)
     x.set_is_floating(True)
     x.set_is_hunger_insatiable(True)
+    x.set_is_immune_to_poison(True)
     x.set_is_intelligent(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(True)
@@ -46,15 +47,15 @@ def tp_init(name, text_name):
     x.set_light_strength(1)
     x.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     x.set_minion_leash_distance(8)
-    x.set_stat_attack(10) # 10, means no bonus
-    x.set_stat_constitution(20)
-    x.set_stat_defence(12)
-    x.set_stat_strength(7)
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
     x.set_on_death_do("ghost.on_death()")
     x.set_rarity(zx.RARITY_COMMON)
+    x.set_stat_attack(10) # 10, means no bonus
+    x.set_stat_constitution(20)
+    x.set_stat_defence(12)
+    x.set_stat_strength(7)
     x.set_text_a_or_an("a");
     x.set_text_description("The angry spirit of one long passed.")
     x.set_text_hits("slashes");
