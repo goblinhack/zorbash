@@ -46,35 +46,25 @@ Projectile_::Projectile_(
     //
     // Find all projectile animation tiles. Names look like this:
     //
-    // "projectile_green.{frame}.start",
-    // "projectile_green.{frame}.{mid}.1",
-    // "projectile_green.{frame}.{mid}.2",
-    // "projectile_green.{frame}.{mid}.3",
-    // "projectile_green.{frame}.{mid}.4",
-    // "projectile_green.{frame}.{mid}.5",
-    // "projectile_green.{frame}.{mid}.6",
-    // "projectile_green.{frame}.{mid}.7",
-    // "projectile_green.{frame}.{mid}.8",
-    // "projectile_green.{frame}.{mid}.9",
-    // "projectile_green.{frame}.{mid}.10",
-    // "projectile_green.{frame}.{mid}.11",
-    // "projectile_green.{frame}.{mid}.12",
-    // "projectile_green.{frame}.{mid}.13",
-    // "projectile_green.{frame}.{mid}.14",
-    // "projectile_green.{frame}.end",
+    // "projectile_green.{frame}.1",
+    // "projectile_green.{frame}.2",
+    // "projectile_green.{frame}.3",
+    // "projectile_green.{frame}.4",
+    // "projectile_green.{frame}.5",
+    // "projectile_green.{frame}.6",
+    // "projectile_green.{frame}.7",
+    // "projectile_green.{frame}.8",
+    // "projectile_green.{frame}.9",
+    // "projectile_green.{frame}.10",
+    // "projectile_green.{frame}.11",
+    // "projectile_green.{frame}.12",
+    // "projectile_green.{frame}.13",
+    // "projectile_green.{frame}.14",
+    // "projectile_green.{frame}.15",
+    // "projectile_green.{frame}.16",
     //
-    tiles.resize(max_frames);
-
     for (int frame = 0; frame < max_frames; frame++) {
-        tiles[frame].push_back(
-            tile_find_mand(name + "." + std::to_string(frame + 1) + ".start"));
-        for (int mid = 0; mid < max_frames - 2; mid++) {
-            tiles[frame].push_back(
-                tile_find_mand(name + "." + std::to_string(frame + 1) + 
-                               ".mid." + std::to_string(mid + 1)));
-        }
-        tiles[frame].push_back(
-            tile_find_mand(name + "." + std::to_string(frame + 1) + ".end"));
+        tiles.push_back(tile_find_mand(name + "." + std::to_string(frame + 1)));
     }
 }
 
@@ -162,43 +152,30 @@ void Level::display_projectiles (void)
             perp = perp.rotate_radians(ninety_deg);
             perp /= 2;
 
-            point p1;
-            point p2;
-            point old_p1;
-            point old_p2;
-
             int frame = (int)((float)Projectile::max_frames * dt);
             if (frame >= Projectile::max_frames) {
                 frame = Projectile::max_frames - 1;
             }
 
-            for (int animstep = 0; animstep <= steps; animstep++) {
-                fpoint mid(start.x + step.x * animstep, 
-                           start.y + step.y * animstep);
+            fpoint mid(start.x + (diff.x * dt), 
+                       start.y + (diff.y * dt));
 
-                old_p1 = p1;
-                old_p2 = p2;
+            point p1;
+            point p2;
+            point p3;
+            point p4;
 
-                p1.x = mid.x - perp.x;
-                p1.y = mid.y - perp.y;
-                p2.x = mid.x + perp.x;
-                p2.y = mid.y + perp.y;
+            p1.x = mid.x - perp.x;
+            p1.y = mid.y - perp.y;
+            p2.x = mid.x + perp.x;
+            p2.y = mid.y + perp.y;
 
-                if (animstep == 0) {
-                    continue;
-                }
+            p3.x = mid.x + perp.x;
+            p3.y = mid.y - perp.y;
+            p4.x = mid.x - perp.x;
+            p4.y = mid.y + perp.y;
 
-                if (animstep == 1) {
-                    tile_blit(get(p.tiles, frame, 0),
-                              old_p1, p1, old_p2, p2);
-                } else if (animstep == steps) {
-                    tile_blit(get(p.tiles, frame, Projectile::max_frames - 1), 
-                              old_p1, p1, old_p2, p2);
-                } else {
-                    tile_blit(get(p.tiles, frame, animstep), 
-                              old_p1, p1, old_p2, p2);
-                }
-            }
+            tile_blit(get(p.tiles, frame), p1, p3, p2, p4);
 
             return false;
         });

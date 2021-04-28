@@ -87,7 +87,7 @@ bool Thing::projectile_fire (Thingp item, Thingp target)
         return false;
     }
 
-    level->new_projectile(item->id, start, end, 150);
+    level->new_projectile(item->id, start, end, 1500);
 
     used(item, target, true /* remove_after_use */);
 

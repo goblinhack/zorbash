@@ -75,10 +75,10 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         }
         if (game->request_to_fire_item) {
             auto item = game->request_to_fire_item;
-            if (item->is_laser()) {
-                player->laser_fire(item, level->cursor);
-            } else {
+            if (item->laser_name().empty()) {
                 player->projectile_fire(item, level->cursor);
+            } else {
+                player->laser_fire(item, level->cursor);
             }
         }
         return true;

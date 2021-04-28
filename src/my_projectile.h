@@ -33,7 +33,7 @@ public:
     //
     // Animation frames
     //
-    std::vector< std::vector<Tilep> > tiles;
+    std::vector< Tilep > tiles;
     static const auto max_frames = 16;
 } Projectile;
 

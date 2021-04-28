@@ -102,6 +102,21 @@ void player_tick (void)
     if (player->particle_anim_exists()) {
         return;
     }
+    //
+    // No moving if weapons have not finished firing
+    //
+    if (level->all_projectiles.size()) {
+        return;
+    }
+    if (level->new_projectiles.size()) {
+        return;
+    }
+    if (level->all_lasers.size()) {
+        return;
+    }
+    if (level->new_lasers.size()) {
+        return;
+    }
 
     static bool left = false;
     static bool right = false;

@@ -303,6 +303,11 @@ have_dungeon_start:
                         }
 
                         {
+                            auto W = thing_new("wand_fire", fpoint(x, y));
+                            t->carry(W);
+                        }
+
+                        {
                             auto W = thing_new("key", fpoint(x, y));
                             t->carry(W);
                         }
