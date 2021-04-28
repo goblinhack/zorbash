@@ -27,6 +27,7 @@ static Tpidmap tp_food;
 static Tpidmap tp_gold;
 static Tpidmap tp_key;
 static Tpidmap tp_potion;
+static Tpidmap tp_wand;
 static Tpidmap tp_monst;
 static Tpidmap tp_ripples;
 static Tpidmap tp_rock;
@@ -64,6 +65,7 @@ void tp_random_init (void)
         if (tp->is_minion_generator())          { tp_generator.push_back(tp); }
         if (tp->is_ethereal_minion_generator()) { tp_ethereal_generator.push_back(tp); }
         if (tp->is_potion())                    { tp_potion.push_back(tp); }
+        if (tp->is_wand())                      { tp_wand.push_back(tp); }
         if (tp->is_ripple())                    { tp_ripples.push_back(tp); }
         if (tp->is_rock())                      { tp_rock.push_back(tp); }
         if (tp->is_secret_door())               { tp_secret_door.push_back(tp); }
@@ -384,6 +386,15 @@ Tpp tp_random_potion (void)
         return (nullptr);
     }
     return tp_get_with_rarity_filter(tp_potion);
+}
+
+Tpp tp_random_wand (void)
+{_
+    if (unlikely(!tp_wand.size())) {
+        ERR("No wand found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_wand);
 }
 
 Tpp tp_random_ascend_dungeon (void)

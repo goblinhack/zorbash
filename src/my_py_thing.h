@@ -249,7 +249,7 @@ PyObject *thing_is_rrr89(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr90(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr91(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr92(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr93(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_wand_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_fire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_projectile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_flickers(PyObject *obj, PyObject *args, PyObject *keywds);

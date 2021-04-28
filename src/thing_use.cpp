@@ -151,6 +151,12 @@ _
         if (is_player()) {
             game->tick_begin("player drunk an item");
         }
+    } else if (what->is_wand()) {
+        TOPCON("You wave the %s.", what->text_the().c_str());
+        used(what, this, true /* remove after use */);
+        if (is_player()) {
+            game->tick_begin("player drunk an item");
+        }
     } else if (!what->is_usable()) {
         if (is_player()) {
             TOPCON("I don't know how to use %s.", what->text_the().c_str());

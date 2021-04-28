@@ -109,6 +109,13 @@ _
             }
         }
 
+        if (me->is_wand_eater()) {
+            if (it->is_wand()) {
+                log("Can attack %s", it->to_string().c_str());
+                return true;
+            }
+        }
+
         if (me->is_meat_eater() || me->attack_meat()) {
             if (!it->is_attackable_by_monst()) {
                 log("No, cannot attack %s, not is_attackable by meat eating monst",

@@ -221,7 +221,7 @@ PyObject *level_is_rrr89_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr90_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr91_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr92_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr93_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_wand_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_projectile_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_flickers_at(PyObject *obj, PyObject *args, PyObject *keywds);

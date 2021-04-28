@@ -39,6 +39,7 @@ public:
         MONST_HARD       =            'M',
         NONE             =            '\0',
         POTION           =            '!',
+        WAND             =            '/',
         ROCK             =            'r',
         SECRET_CORRIDOR  =            '?',
         SECRET_DOOR      =            's',
@@ -72,6 +73,7 @@ public:
     bool                      is_monst_easy                   {false};
     bool                      is_monst_hard                   {false};
     bool                      is_potion                       {false};
+    bool                      is_wand                         {false};
     bool                      is_rock                         {false};
     bool                      is_secret_corridor              {false};
     bool                      is_secret_door                  {false};

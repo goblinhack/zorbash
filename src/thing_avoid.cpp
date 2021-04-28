@@ -169,6 +169,12 @@ bool Thing::will_avoid_threat (const Thingp itp)
         }
     }
 
+    if (me->is_wand()) {
+        if (it->is_wand_eater()) {
+            return true;
+        }
+    }
+
     if (me->is_jelly_baby()) {
         //
         // But allow baby slimes to attack each other!

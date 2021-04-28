@@ -248,7 +248,7 @@ _
                 fall_damage = random_range(20, 50);
             }
 
-            if (is_potion() || is_minion_generator() || is_monst()) {
+            if (is_wand() || is_potion() || is_minion_generator() || is_monst()) {
                 fall_damage = get_health() / 2;
             }
 

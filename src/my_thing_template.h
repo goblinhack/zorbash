@@ -313,7 +313,7 @@ private:
     int _is_rrr90 {};
     int _is_rrr91 {};
     int _is_rrr92 {};
-    int _is_rrr93 {};
+    int _is_wand_eater {};
     int _is_immune_to_fire {};
     int _gfx_flickers {};
     int _is_laser {};
@@ -768,7 +768,7 @@ public:
     int is_rrr90(void) const;
     int is_rrr91(void) const;
     int is_rrr92(void) const;
-    int is_rrr93(void) const;
+    int is_wand_eater(void) const;
     int is_immune_to_fire(void) const;
     int is_projectile(void) const;
     int gfx_flickers(void) const;
@@ -1100,7 +1100,7 @@ public:
     void set_is_rrr90(int);
     void set_is_rrr91(int);
     void set_is_rrr92(int);
-    void set_is_rrr93(int);
+    void set_is_wand_eater(int);
     void set_is_immune_to_fire(int);
     void set_is_projectile(int);
     void set_gfx_flickers(int);
@@ -1248,6 +1248,7 @@ class Tp* tp_random_monst(void);
 class Tp* tp_random_monst_easy(void);
 class Tp* tp_random_monst_hard(void);
 class Tp* tp_random_potion(void);
+class Tp* tp_random_wand(void);
 class Tp* tp_random_ripple(void);
 class Tp* tp_random_rock(void);
 class Tp* tp_random_secret_door(void);

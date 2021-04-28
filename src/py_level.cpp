@@ -90,6 +90,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_treasure_class_b      ||
                            m.is_treasure_class_c      ||
                            m.is_potion                ||
+                           m.is_wand                  ||
                            m.is_secret_door           ||
                            m.is_brazier               ||
                            m.is_trap                  ||
@@ -145,6 +146,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_treasure_class_b      ||
                     m.is_treasure_class_c      ||
                     m.is_potion                ||
+                    m.is_wand                  ||
                     m.is_brazier               ||
                     m.is_trap                  ||
                     m.is_descend_sewer) {
@@ -586,7 +588,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_rrr8_at, is_rrr8)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr90_at, is_rrr90)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr91_at, is_rrr91)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr92_at, is_rrr92)
-LEVEL_BODY_GET_BOOL_AT(level_is_rrr93_at, is_rrr93)
+LEVEL_BODY_GET_BOOL_AT(level_is_wand_eater_at, is_wand_eater)
 LEVEL_BODY_GET_BOOL_AT(level_is_immune_to_fire_at, is_immune_to_fire)
 LEVEL_BODY_GET_BOOL_AT(level_gfx_flickers_at, gfx_flickers)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr9_at, is_rrr9)

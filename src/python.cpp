@@ -1542,7 +1542,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr90)
     TP_SET_DECL(is_rrr91)
     TP_SET_DECL(is_rrr92)
-    TP_SET_DECL(is_rrr93)
+    TP_SET_DECL(is_wand_eater)
     TP_SET_DECL(is_immune_to_fire)
     TP_SET_DECL(is_projectile)
     TP_SET_DECL(gfx_flickers)
@@ -1881,7 +1881,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr90_at",                                      (PyCFunction)level_is_rrr90_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr91_at",                                      (PyCFunction)level_is_rrr91_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr92_at",                                      (PyCFunction)level_is_rrr92_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr93_at",                                      (PyCFunction)level_is_rrr93_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_wand_eater_at",                                      (PyCFunction)level_is_wand_eater_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_immune_to_fire_at",                                      (PyCFunction)level_is_immune_to_fire_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_projectile_at",                                 (PyCFunction)level_is_projectile_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr9_at",                                       (PyCFunction)level_is_rrr9_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2161,8 +2161,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr90",                                         (PyCFunction)thing_is_rrr90,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr91",                                         (PyCFunction)thing_is_rrr91,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr92",                                         (PyCFunction)thing_is_rrr92,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr93",                                         (PyCFunction)thing_is_rrr93,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_immune_to_fire",                                         (PyCFunction)thing_is_immune_to_fire,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_wand_eater",                                    (PyCFunction)thing_is_wand_eater,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_immune_to_fire",                                (PyCFunction)thing_is_immune_to_fire,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_projectile",                                    (PyCFunction)thing_is_projectile,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_secret_door",                                   (PyCFunction)thing_is_secret_door,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_sewer_wall",                                    (PyCFunction)thing_is_sewer_wall,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},

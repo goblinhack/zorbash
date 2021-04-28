@@ -87,6 +87,8 @@ void Thing::level_push (void)
                                                    level->set_is_movement_blocking_soft(mx, my); }
     if (is_potion())                             { i_set_is_potion = true;
                                                    level->set_is_potion(mx, my); }
+    if (is_wand())                               { i_set_is_wand = true;
+                                                   level->set_is_wand(mx, my); }
     if (is_ripple())                             { i_set_is_ripple = true;
                                                    level->set_is_ripple(mx, my); }
     if (is_rock())                               { i_set_is_rock = true;

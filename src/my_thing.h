@@ -145,6 +145,7 @@ public:
     uint64_t i_set_is_movement_blocking_hard:1 {};
     uint64_t i_set_is_movement_blocking_soft:1 {};
     uint64_t i_set_is_potion:1                 {};
+    uint64_t i_set_is_wand:1                   {};
     uint64_t i_set_is_ripple:1                 {};
     uint64_t i_set_is_rock:1                   {};
     uint64_t i_set_is_secret_door:1            {};
@@ -152,7 +153,7 @@ public:
     uint64_t i_set_is_brazier:1                {};
     uint64_t i_set_is_treasure:1               {};
     uint64_t i_set_is_wall:1                   {};
-    uint64_t i_set_gfx_water:1              {};
+    uint64_t i_set_gfx_water:1                 {};
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -838,7 +839,7 @@ public:
     int is_rrr90(void) const;
     int is_rrr91(void) const;
     int is_rrr92(void) const;
-    int is_rrr93(void) const;
+    int is_wand_eater(void) const;
     int is_immune_to_fire(void) const;
     int gfx_flickers(void) const;
     int is_laser(void) const;
