@@ -292,7 +292,7 @@ int Thing::is_rrr9(void) const                                          {_ retur
 int Thing::is_rrr90(void) const                                         {_ return (tp()->is_rrr90()); }
 int Thing::is_rrr91(void) const                                         {_ return (tp()->is_rrr91()); }
 int Thing::is_rrr92(void) const                                         {_ return (tp()->is_rrr92()); }
-int Thing::is_rrr93(void) const                                         {_ return (tp()->is_rrr93()); }
+int Thing::is_wand_eater(void) const                                         {_ return (tp()->is_wand_eater()); }
 int Thing::is_immune_to_fire(void) const                                         {_ return (tp()->is_immune_to_fire()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }

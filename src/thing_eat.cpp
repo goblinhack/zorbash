@@ -25,6 +25,7 @@ bool Thing::eat (Thingp it)
                 (is_meat_eater()     && it->is_meat())     ||
                 (is_food_eater()     && it->is_food())     ||
                 (is_treasure_eater() && it->is_treasure()) ||
+                (is_wand_eater()     && it->is_wand())     ||
                 (is_potion_eater()   && it->is_potion())) {
 
                 log("Eats %s", it->text_the().c_str());
@@ -62,6 +63,11 @@ bool Thing::can_eat (const Thingp itp)
     }
     if (me->is_potion_eater()) {
         if (it->is_potion()) {
+            return true;
+        }
+    }
+    if (me->is_wand_eater()) {
+        if (it->is_wand()) {
             return true;
         }
     }

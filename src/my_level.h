@@ -58,6 +58,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
@@ -403,6 +404,8 @@ public:
     uint8_t is_poison(const point &p);
     uint8_t is_potion(const int x, const int y);
     uint8_t is_potion(const point &p);
+    uint8_t is_wand(const int x, const int y);
+    uint8_t is_wand(const point &p);
     uint8_t is_ripple(const int x, const int y);
     uint8_t is_ripple(const point &p);
     uint8_t is_rock(const int x, const int y);
@@ -566,6 +569,7 @@ public:
     void set_is_movement_blocking_soft_no_check(const int x, const int y);
     void set_is_poison(const int x, const int y);
     void set_is_potion(const int x, const int y);
+    void set_is_wand(const int x, const int y);
     void set_is_ripple(const int x, const int y);
     void set_is_rock(const int x, const int y);
     void set_is_secret_door(const int x, const int y);
@@ -623,6 +627,7 @@ public:
     void unset_is_movement_blocking_soft_no_check(const int x, const int y);
     void unset_is_poison(const int x, const int y);
     void unset_is_potion(const int x, const int y);
+    void unset_is_wand(const int x, const int y);
     void unset_is_ripple(const int x, const int y);
     void unset_is_rock(const int x, const int y);
     void unset_is_secret_door(const int x, const int y);

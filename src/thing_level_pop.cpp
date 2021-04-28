@@ -87,6 +87,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_movement_blocking_soft(mx, my); }
     if (i_set_is_potion)                               { i_set_is_potion = false;
                                                          level->unset_is_potion(mx, my); }
+    if (i_set_is_wand)                                 { i_set_is_wand = false;
+                                                         level->unset_is_wand(mx, my); }
     if (i_set_is_ripple)                               { i_set_is_ripple = false;
                                                          level->unset_is_ripple(mx, my); }
     if (i_set_is_rock)                                 { i_set_is_rock = false;
@@ -101,7 +103,7 @@ void Thing::level_pop (void)
                                                          level->unset_is_treasure(mx, my); }
     if (i_set_is_wall)                                 { i_set_is_wall = false;
                                                          level->unset_is_wall(mx, my); }
-    if (i_set_gfx_water)                            { i_set_gfx_water = false;
+    if (i_set_gfx_water)                               { i_set_gfx_water = false;
                                                          level->unset_gfx_water(mx, my); }
     level->remove_thing(last_attached.x, last_attached.y, id);
 

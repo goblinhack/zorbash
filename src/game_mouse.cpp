@@ -139,7 +139,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
             if (t == level->player) {
                 continue;
             }
-            if (t->is_food() || t->is_potion()) {
+            if (t->is_food() || t->is_item()) {
                 player->log("Close enough to collect");
                 player->try_to_carry(t);
                 return true;

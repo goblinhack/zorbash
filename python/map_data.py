@@ -24,6 +24,7 @@ import zx
 # TRAP                          t
 # WALL                          x
 # SHALLOW_WATER                 w
+# WAND                          /
 
 # MINION_GENERATOR_EASY         g  has a 50% chance of not heing generated
 # MINION_GENERATOR_HARD         G  always generated
@@ -69,7 +70,7 @@ import zx
 #
 zx.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","             "," $    ^      ","             ",
-"  . .......$ ","      .      ","             "," m    .      ","      ^      ",
+"  . ./////.$ ","      .      ","             "," m    .      ","      ^      ",
 "  C...www... ","      .      ","             "," .... . ..   ","  .......CC  ",
 " .CC...www.. ","    $..,,    ","    .....    ","   .......   "," .........CC ",
 " ..CC..wwww. ","    ....,    ","    .CCC.    ","   .......   "," .........CC ",

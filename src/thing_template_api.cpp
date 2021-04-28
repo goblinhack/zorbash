@@ -338,7 +338,7 @@ int Tp::is_rrr89(void) const                                         { return _i
 int Tp::is_rrr90(void) const                                         { return _is_rrr90; }
 int Tp::is_rrr91(void) const                                         { return _is_rrr91; }
 int Tp::is_rrr92(void) const                                         { return _is_rrr92; }
-int Tp::is_rrr93(void) const                                         { return _is_rrr93; }
+int Tp::is_wand_eater(void) const                                         { return _is_wand_eater; }
 int Tp::is_immune_to_fire(void) const                                { return _is_immune_to_fire; }
 int Tp::gfx_flickers(void) const                                     { return _gfx_flickers; }
 int Tp::is_laser(void) const                                         { return _is_laser; }
@@ -662,7 +662,7 @@ void Tp::set_is_rrr89(int v)                                         { _is_rrr89
 void Tp::set_is_rrr90(int v)                                         { _is_rrr90 = v; }
 void Tp::set_is_rrr91(int v)                                         { _is_rrr91 = v; }
 void Tp::set_is_rrr92(int v)                                         { _is_rrr92 = v; }
-void Tp::set_is_rrr93(int v)                                         { _is_rrr93 = v; }
+void Tp::set_is_wand_eater(int v)                                         { _is_wand_eater = v; }
 void Tp::set_is_immune_to_fire(int v)                                { _is_immune_to_fire = v; }
 void Tp::set_is_projectile(int v)                                    { _is_projectile = v; }
 void Tp::set_gfx_flickers(int v)                                     { _gfx_flickers = v; }

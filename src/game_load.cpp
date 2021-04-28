@@ -289,6 +289,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_movement_blocking_hard = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_movement_blocking_soft = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_potion                 = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_wand                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_ripple                 = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_rock                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_secret_door            = (bits64 >> shift) & 1; shift++;
@@ -296,7 +297,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_brazier                = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_treasure               = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_wall                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_gfx_water              = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_gfx_water                 = (bits64 >> shift) & 1; shift++;
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -389,6 +390,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};                 */ in >> bits(my.t->_is_lit);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};               */ in >> bits(my.t->_is_monst);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};              */ in >> bits(my.t->_is_potion);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};                */ in >> bits(my.t->_is_wand);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};              */ in >> bits(my.t->_is_ripple);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};                */ in >> bits(my.t->_is_rock);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};         */ in >> bits(my.t->_is_secret_door);
@@ -396,7 +398,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};             */ in >> bits(my.t->_is_brazier);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};            */ in >> bits(my.t->_is_treasure);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};                */ in >> bits(my.t->_is_wall);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};           */ in >> bits(my.t->_gfx_water);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};              */ in >> bits(my.t->_gfx_water);
 
     /* all_thing_ids_at */      in >> bits(l->all_thing_ids_at);
     /* cursor_at */             in >> bits(l->cursor_at);

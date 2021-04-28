@@ -242,7 +242,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr90() &&                                         (what == "is_rrr90"))                                         { return true; }
     if (is_rrr91() &&                                         (what == "is_rrr91"))                                         { return true; }
     if (is_rrr92() &&                                         (what == "is_rrr92"))                                         { return true; }
-    if (is_rrr93() &&                                         (what == "is_rrr93"))                                         { return true; }
+    if (is_wand_eater() &&                                         (what == "is_wand_eater"))                                         { return true; }
     if (is_immune_to_fire() &&                                         (what == "is_immune_to_fire"))                                         { return true; }
     if (is_projectile() &&                                         (what == "is_projectile"))                                         { return true; }
     if (is_secret_door() &&                                   (what == "is_secret_door"))                                   { return true; }
@@ -505,7 +505,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr90")                                         { return &Thing::is_rrr90; }
     if (what == "is_rrr91")                                         { return &Thing::is_rrr91; }
     if (what == "is_rrr92")                                         { return &Thing::is_rrr92; }
-    if (what == "is_rrr93")                                         { return &Thing::is_rrr93; }
+    if (what == "is_wand_eater")                                         { return &Thing::is_wand_eater; }
     if (what == "is_immune_to_fire")                                         { return &Thing::is_immune_to_fire; }
     if (what == "is_projectile")                                         { return &Thing::is_projectile; }
     if (what == "gfx_flickers")                                     { return &Thing::gfx_flickers; }

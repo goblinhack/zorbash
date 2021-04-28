@@ -211,6 +211,12 @@ void Thing::show_botcon_description (void) const
                             SDL_GetScancodeName(
                             (SDL_Scancode)game->config.key_use)) +
                         "%%fg=reset$ to use.";
+            } else if (is_wand()){
+                text += " %%fg=green$" +
+                        std::string(
+                            SDL_GetScancodeName(
+                            (SDL_Scancode)game->config.key_use)) +
+                        "%%fg=reset$ to use.";
             } else {
                 text += " %%fg=cyan$" +
                         std::string(

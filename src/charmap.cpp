@@ -105,6 +105,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_potion            = true;
 
+    char_index              = Charmap::WAND;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_wand              = true;
+
     char_index              = Charmap::GOLD;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

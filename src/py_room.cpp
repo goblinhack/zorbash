@@ -119,6 +119,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_treasure_class_b      ||
                            m.is_treasure_class_c      ||
                            m.is_potion                ||
+                           m.is_wand                  ||
                            m.is_secret_door           ||
                            m.is_brazier               ||
                            m.is_trap                  ||
@@ -173,6 +174,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_treasure_class_b      ||
                     m.is_treasure_class_c      ||
                     m.is_potion                ||
+                    m.is_wand                  ||
                     m.is_brazier               ||
                     m.is_trap                  ||
                     m.is_descend_sewer) {
