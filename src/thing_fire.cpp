@@ -35,7 +35,11 @@ void Thing::fire_tick (void)
         return;
     }
 
-    if (!avoids_fire()) {
+    if (is_combustible()) {
+        //
+        // Keep going
+        //
+    } else if (!avoids_fire()) {
         if (g_opt_debug4) {
             log("No, is not fire avoider");
         }
@@ -86,6 +90,11 @@ void Thing::fire_tick (void)
             if (!hit) {
                 if (is_player()) {
                     TOPCON("%%fg=red$You dodge the flames.%%fg=reset$");
+                }
+            } else if (is_combustible()) {
+                hit = true;
+                if (set_on_fire("caught fire")) {
+                    TOPCON("%%fg=red$The flames wrap around you!%%fg=reset$");
                 }
             } else if ((int)random_range(0, 100) < 20) {
                 if (set_on_fire("stepped into fire")) {

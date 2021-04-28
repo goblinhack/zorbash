@@ -41,7 +41,6 @@ def tp_init(name, text_name):
     x.set_is_attackable_by_monst(True)
     x.set_is_attackable_by_player(True)
     x.set_is_carrier_of_treasure_class_a(True)
-    x.set_is_combustible(True)
     x.set_is_corpse_on_death(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_fearless(True)

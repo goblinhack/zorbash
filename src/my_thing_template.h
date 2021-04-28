@@ -136,7 +136,7 @@ private:
     int _is_blood {};
     int _is_blood_splatter {};
     int _is_brazier {};
-    int _is_burnable {};
+    int _is_rrr99 {};
     int _is_carrier_of_treasure_class_a {};
     int _is_carrier_of_treasure_class_b {};
     int _is_carrier_of_treasure_class_c {};
@@ -593,7 +593,7 @@ public:
     int is_blood(void) const;
     int is_blood_splatter(void) const;
     int is_brazier(void) const;
-    int is_burnable(void) const;
+    int is_rrr99(void) const;
     int is_carrier_of_treasure_class_a(void) const;
     int is_carrier_of_treasure_class_b(void) const;
     int is_carrier_of_treasure_class_c(void) const;
@@ -924,7 +924,7 @@ public:
     void set_is_blood(int);
     void set_is_blood_splatter(int);
     void set_is_brazier(int);
-    void set_is_burnable(int);
+    void set_is_rrr99(int);
     void set_is_carrier_of_treasure_class_a(int);
     void set_is_carrier_of_treasure_class_b(int);
     void set_is_carrier_of_treasure_class_c(int);

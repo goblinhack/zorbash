@@ -33,7 +33,6 @@ def tp_init(name, text_name):
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
     x.set_is_always_hit(True)
-    x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(True)

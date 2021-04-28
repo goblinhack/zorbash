@@ -35,7 +35,7 @@ void Thing::unset_on_fire (void)
 
 bool Thing::set_on_fire (const std::string &why)
 {_
-    if (!is_burnable()) {
+    if (!is_combustible()) {
         return false;
     }
 

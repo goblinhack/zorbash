@@ -18,17 +18,17 @@ data_laser_green_tga_start_:
 .globl data_laser_green_tga_end_
 data_laser_green_tga_end_:
 
-.globl data_attack_tga_start_
-data_attack_tga_start_:
-.incbin "../data/gfx/attack.tga"
-.globl data_attack_tga_end_
-data_attack_tga_end_:
+.globl data_chasm_tga_start_
+data_chasm_tga_start_:
+.incbin "../data/gfx/chasm.tga"
+.globl data_chasm_tga_end_
+data_chasm_tga_end_:
 
-.globl data_ui_box2_tga_start_
-data_ui_box2_tga_start_:
-.incbin "../data/gfx/ui_box2.tga"
-.globl data_ui_box2_tga_end_
-data_ui_box2_tga_end_:
+.globl data_ui_box3_tga_start_
+data_ui_box3_tga_start_:
+.incbin "../data/gfx/ui_box3.tga"
+.globl data_ui_box3_tga_end_
+data_ui_box3_tga_end_:
 
 .globl data_ui_credits_bg_tga_start_
 data_ui_credits_bg_tga_start_:

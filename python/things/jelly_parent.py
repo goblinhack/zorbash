@@ -43,8 +43,6 @@ def tp_init(name, text_name):
     x.set_is_able_to_fall(True)
     x.set_is_acid(True)
     x.set_is_active(True)
-    x.set_is_burnable(True)
-    x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_hunger_insatiable(True)
     x.set_is_interesting(True)
