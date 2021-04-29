@@ -142,7 +142,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Check for immunity
     //
-    if (is_immune_to_fire()) {
+    if (loves_fire()) {
         if (hitter->is_fire() || real_hitter->is_fire()) {
             if (is_player()) {
                 TOPCON("You bask in the fire!");
@@ -154,7 +154,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     if (bite) {
-        if (is_immune_to_poison()) {
+        if (loves_poison()) {
             if (hitter->is_poison() || real_hitter->is_poison()) {
                 if (is_player()) {
                     TOPCON("You drink in the poison!");
@@ -219,7 +219,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (avoids_fire()) {
+    if (hates_fire()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
             if (damage_doubled_from_fire()) {
@@ -229,7 +229,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (avoids_acid()) {
+    if (hates_acid()) {
         if (real_hitter->is_acid()) {
             if (damage_doubled_from_acid()) {
                 damage *= 2;
@@ -238,7 +238,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (avoids_poison()) {
+    if (hates_poison()) {
         if (real_hitter->is_poison()) {
             if (damage_doubled_from_poison()) {
                 damage *= 2;
@@ -247,7 +247,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (avoids_water()) {
+    if (hates_water()) {
         if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
             if (damage_doubled_from_water()) {
                 damage *= 2;

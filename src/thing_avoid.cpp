@@ -15,19 +15,19 @@
 bool Tp::will_avoid_threat (Levelp level, point p) const
 {_
     if (level->is_shallow_water(p) || level->is_deep_water(p)) {
-        if (avoids_water()) {
+        if (hates_water()) {
             return true;
         }
     }
 
     if (level->is_acid(p)) {
-        if (avoids_acid()) {
+        if (hates_acid()) {
             return true;
         }
     }
 
     if (level->is_poison(p)) {
-        if (avoids_poison()) {
+        if (hates_poison()) {
             return true;
         }
     }
@@ -38,17 +38,17 @@ bool Tp::will_avoid_threat (Levelp level, point p) const
         }
     }
 
-    if (avoids_fire()) {
+    if (hates_fire()) {
         int heat = level->heatmap(p);
         if (damage_doubled_from_fire()) {
             if (heat > 0) {
-                if (avoids_fire()) {
+                if (hates_fire()) {
                     return true;
                 }
             }
         } else {
             if (heat >= 4) { // this allows you to skip around lava
-                if (avoids_fire()) {
+                if (hates_fire()) {
                     return true;
                 }
             }
@@ -61,19 +61,19 @@ bool Tp::will_avoid_threat (Levelp level, point p) const
 bool Thing::will_avoid_threat (const point &p)
 {_
     if (level->is_shallow_water(p) || level->is_deep_water(p)) {
-        if (avoids_water()) {
+        if (hates_water()) {
             return true;
         }
     }
 
     if (level->is_acid(p)) {
-        if (avoids_acid()) {
+        if (hates_acid()) {
             return true;
         }
     }
 
     if (level->is_poison(p)) {
-        if (avoids_poison()) {
+        if (hates_poison()) {
             return true;
         }
     }
@@ -88,13 +88,13 @@ bool Thing::will_avoid_threat (const point &p)
         int heat = level->heatmap(p);
         if (damage_doubled_from_fire()) {
             if (heat > 0) {
-                if (avoids_fire()) {
+                if (hates_fire()) {
                     return true;
                 }
             }
         } else {
             if (heat >= 4) { // this allows you to skip around lava
-                if (avoids_fire()) {
+                if (hates_fire()) {
                     return true;
                 }
             }
@@ -109,19 +109,19 @@ bool Thing::will_avoid_threat (const Thingp itp)
     auto me = tp();
     auto it = itp->tp();
 
-    if (me->avoids_water()) {
+    if (me->hates_water()) {
         if (it->is_shallow_water() || it->is_deep_water()) {
             return true;
         }
     }
 
-    if (me->avoids_acid()) {
+    if (me->hates_acid()) {
         if (it->is_acid()) {
             return true;
         }
     }
 
-    if (me->avoids_poison()) {
+    if (me->hates_poison()) {
         if (it->is_poison()) {
             return true;
         }
@@ -185,7 +185,7 @@ bool Thing::will_avoid_threat (const Thingp itp)
     }
 
     if (!is_on_fire()) {
-        if (me->avoids_fire()) {
+        if (me->hates_fire()) {
             if (it->is_fire()) {
                 return true;
             }

@@ -10,9 +10,9 @@ def on_death(me, x, y):
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_attack_shove_chance_d1000(200)
-    x.set_avoids_acid(True)
-    x.set_avoids_fire(100)
-    x.set_avoids_water(100)
+    x.set_hates_acid(True)
+    x.set_hates_fire(100)
+    x.set_hates_water(100)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)

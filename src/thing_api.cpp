@@ -54,10 +54,10 @@ int Thing::attack_lunge(void) const                                     {_ retur
 int Thing::attack_meat(void) const                                      {_ return (tp()->attack_meat()); }
 int Thing::attack_shove(void) const                                     {_ return (tp()->attack_shove()); }
 int Thing::attack_shove_chance_d1000(void) const                        {_ return (tp()->attack_shove_chance_d1000()); }
-int Thing::avoids_acid(void) const                                      {_ return (tp()->avoids_acid()); }
-int Thing::avoids_fire(void) const                                      {_ return (tp()->avoids_fire()); }
-int Thing::avoids_poison(void) const                                    {_ return (tp()->avoids_poison()); }
-int Thing::avoids_water(void) const                                     {_ return (tp()->avoids_water()); }
+int Thing::hates_acid(void) const                                      {_ return (tp()->hates_acid()); }
+int Thing::hates_fire(void) const                                      {_ return (tp()->hates_fire()); }
+int Thing::hates_poison(void) const                                    {_ return (tp()->hates_poison()); }
+int Thing::hates_water(void) const                                     {_ return (tp()->hates_water()); }
 int Thing::blast_max_radius(void) const                                 {_ return (tp()->blast_max_radius()); }
 int Thing::blast_min_radius(void) const                                 {_ return (tp()->blast_min_radius()); }
 int Thing::collision_attack(void) const                                 {_ return (tp()->collision_attack()); }
@@ -192,7 +192,7 @@ int Thing::is_msg(void) const                                           {_ retur
 int Thing::is_no_tile(void) const                                       {_ return (tp()->is_no_tile()); }
 int Thing::is_player(void) const                                        {_ return (tp()->is_player()); }
 int Thing::is_poison(void) const                                        {_ return (tp()->is_poison()); }
-int Thing::is_immune_to_poison(void) const                              {_ return (tp()->is_immune_to_poison()); }
+int Thing::loves_poison(void) const                              {_ return (tp()->loves_poison()); }
 int Thing::is_potion(void) const                                        {_ return (tp()->is_potion()); }
 int Thing::is_potion_eater(void) const                                  {_ return (tp()->is_potion_eater()); }
 int Thing::is_projectile(void) const                                    {_ return (tp()->is_projectile()); }
@@ -293,7 +293,7 @@ int Thing::is_rrr90(void) const                                         {_ retur
 int Thing::is_rrr91(void) const                                         {_ return (tp()->is_rrr91()); }
 int Thing::is_burnable(void) const                                         {_ return (tp()->is_burnable()); }
 int Thing::is_wand_eater(void) const                                         {_ return (tp()->is_wand_eater()); }
-int Thing::is_immune_to_fire(void) const                                         {_ return (tp()->is_immune_to_fire()); }
+int Thing::loves_fire(void) const                                         {_ return (tp()->loves_fire()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
 int Thing::is_shallow_water(void) const                                 {_ return (tp()->is_shallow_water()); }

@@ -18,6 +18,7 @@ def on_fall(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
+    x.set_hates_water(100)
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
     x.set_charge_count(5)
@@ -30,13 +31,12 @@ def tp_init(name, text_name, short_text_name):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(True)
+    x.set_is_active(True) # So it can interact with fire
     x.set_is_collectable(True)
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_droppable(True)
-    x.set_is_very_combustible(True)
     x.set_is_interesting(True)
-    x.set_is_active(True) # So it can interact with fire
     x.set_is_item(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
@@ -45,12 +45,13 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_treasure(True)
     x.set_is_treasure_class_b(True)
     x.set_is_usable(True)
+    x.set_is_very_combustible(True)
     x.set_is_wand(True)
     x.set_long_text_description("Discharges a powerful blast of fire upon an unwitting recipient...")
     x.set_normal_placement_rules(True)
-    x.set_on_hit_do("wand_fire.on_hit()")
-    x.set_on_fire_do("wand_fire.on_fire()")
     x.set_on_fall_do("wand_fire.on_fall()")
+    x.set_on_fire_do("wand_fire.on_fire()")
+    x.set_on_hit_do("wand_fire.on_hit()")
     x.set_projectile_name("projectile_fire")
     x.set_range_max(7)
     x.set_text_a_or_an("a");

@@ -415,6 +415,8 @@ public:
     uint8_t is_secret_door(const point &p);
     uint8_t is_shallow_water(const int x, const int y);
     uint8_t is_shallow_water(const point &p);
+    uint8_t is_water(const int x, const int y);
+    uint8_t is_water(const point &p);
     uint8_t is_smoke(const int x, const int y);
     uint8_t is_smoke(const point &p);
     uint8_t is_brazier(const int x, const int y);

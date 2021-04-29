@@ -411,10 +411,10 @@ public:
     int attack_meat(void) const;
     int attack_shove(void) const;
     int attack_shove_chance_d1000(void) const;
-    int avoids_acid(void) const;
-    int avoids_fire(void) const;
-    int avoids_poison(void) const;
-    int avoids_water(void) const;
+    int hates_acid(void) const;
+    int hates_fire(void) const;
+    int hates_poison(void) const;
+    int hates_water(void) const;
     int bag_height(void);
     int bag_item_height(void) const;
     int bag_item_width(void) const;
@@ -741,7 +741,7 @@ public:
     int is_no_tile(void) const;
     int is_player(void) const;
     int is_poison(void) const;
-    int is_immune_to_poison(void) const;
+    int loves_poison(void) const;
     int is_potion(void) const;
     int is_potion_eater(void) const;
     int is_projectile(void) const;
@@ -842,7 +842,7 @@ public:
     int is_rrr91(void) const;
     int is_burnable(void) const;
     int is_wand_eater(void) const;
-    int is_immune_to_fire(void) const;
+    int loves_fire(void) const;
     int gfx_flickers(void) const;
     int is_laser(void) const;
     int is_secret_door(void) const;

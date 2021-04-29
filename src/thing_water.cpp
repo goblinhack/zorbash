@@ -12,8 +12,8 @@
 
 void Thing::water_tick (void)
 {_
-    if (avoids_water()) {
-        if (level->is_shallow_water(mid_at.x, mid_at.y)) {
+    if (hates_water()) {
+        if (level->is_water(mid_at.x, mid_at.y)) {
             dead("by a watery end");
             if (is_fire()) {
                 auto owner = get_top_owner();
