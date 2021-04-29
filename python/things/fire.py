@@ -3,7 +3,7 @@ import zx
 import tp
 
 def spawn(me, x, y):
-    zx.tp_spawn_fire(me, "small_fire")
+    zx.level_spawn_fire_around_thing(me, "small_fire")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)

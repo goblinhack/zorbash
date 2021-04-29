@@ -903,7 +903,7 @@ _
         // Continue walking by falling through to return true
         //
         log("No; ignore corpse");
-    } else if (is_fire() && it->is_combustible()) {
+    } else if (is_fire() && (it->is_burnable() || it->is_combustible())) {
         //
         // Fire attack?
         //

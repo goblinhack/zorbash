@@ -114,7 +114,7 @@ int Thing::is_bleeder(void) const                                       {_ retur
 int Thing::is_blood(void) const                                         {_ return (tp()->is_blood()); }
 int Thing::is_blood_splatter(void) const                                {_ return (tp()->is_blood_splatter()); }
 int Thing::is_brazier(void) const                                       {_ return (tp()->is_brazier()); }
-int Thing::is_rrr99(void) const                                      {_ return (tp()->is_rrr99()); }
+int Thing::is_rrr99(void) const                                         {_ return (tp()->is_rrr99()); }
 int Thing::is_carrier_of_treasure_class_a(void) const                   {_ return (tp()->is_carrier_of_treasure_class_a()); }
 int Thing::is_carrier_of_treasure_class_b(void) const                   {_ return (tp()->is_carrier_of_treasure_class_b()); }
 int Thing::is_carrier_of_treasure_class_c(void) const                   {_ return (tp()->is_carrier_of_treasure_class_c()); }
@@ -144,7 +144,7 @@ int Thing::is_explosion(void) const                                     {_ retur
 int Thing::is_extreme_hazard(void) const                                {_ return (tp()->is_extreme_hazard()); }
 int Thing::is_fearless(void) const                                      {_ return (tp()->is_fearless()); }
 int Thing::is_fire(void) const                                          {_ return (tp()->is_fire()); }
-int Thing::is_flammable(void) const                                     {_ return (tp()->is_flammable()); }
+int Thing::is_very_combustible(void) const                                     {_ return (tp()->is_very_combustible()); }
 int Thing::is_floating(void) const                                      {_ return (tp()->is_floating()); }
 int Thing::is_floor(void) const                                         {_ return (tp()->is_floor()); }
 int Thing::is_floor_deco(void) const                                    {_ return (tp()->is_floor_deco()); }
@@ -291,7 +291,7 @@ int Thing::is_rrr89(void) const                                         {_ retur
 int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
 int Thing::is_rrr90(void) const                                         {_ return (tp()->is_rrr90()); }
 int Thing::is_rrr91(void) const                                         {_ return (tp()->is_rrr91()); }
-int Thing::is_rrr92(void) const                                         {_ return (tp()->is_rrr92()); }
+int Thing::is_burnable(void) const                                         {_ return (tp()->is_burnable()); }
 int Thing::is_wand_eater(void) const                                         {_ return (tp()->is_wand_eater()); }
 int Thing::is_immune_to_fire(void) const                                         {_ return (tp()->is_immune_to_fire()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
@@ -4234,6 +4234,8 @@ const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do(
 const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
 const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
 const std::string& Thing::on_miss_do (void) const {_ return (tp()->on_miss_do()); }
+const std::string& Thing::on_fall_do (void) const {_ return (tp()->on_fall_do()); }
+const std::string& Thing::on_fire_do (void) const {_ return (tp()->on_fire_do()); }
 const std::string& Thing::on_fire_at_do (void) const {_ return (tp()->on_fire_at_do()); }
 const std::string& Thing::on_tick_do (void) const {_ return (tp()->on_tick_do()); }
 const std::string& Thing::on_lifespan_do (void) const {_ return (tp()->on_lifespan_do()); }

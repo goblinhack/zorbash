@@ -72,7 +72,7 @@ PyObject *level_is_explosion_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_is_extreme_hazard_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fearless_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_flammable_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_very_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_floating_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_floor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_floor_deco_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -220,7 +220,7 @@ PyObject *level_is_rrr88_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr89_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr90_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr91_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr92_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_burnable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wand_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_projectile_at(PyObject *obj, PyObject *args, PyObject *keywds);

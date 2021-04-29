@@ -361,6 +361,8 @@ public:
     const std::string& on_hit_do(void) const;
     const std::string& on_lifespan_do(void) const;
     const std::string& on_miss_do(void) const;
+    const std::string& on_fire_do(void) const;
+    const std::string& on_fall_do(void) const;
     const std::string& on_move_do(void) const;
     const std::string& on_open_do(void) const;
     const std::string& on_tick_do(void) const;
@@ -688,7 +690,7 @@ public:
     int is_extreme_hazard(void) const;
     int is_fearless(void) const;
     int is_fire(void) const;
-    int is_flammable(void) const;
+    int is_very_combustible(void) const;
     int is_floating(void) const;
     int is_floor(void) const;
     int is_floor_deco(void) const;
@@ -838,7 +840,7 @@ public:
     int is_rrr9(void) const;
     int is_rrr90(void) const;
     int is_rrr91(void) const;
-    int is_rrr92(void) const;
+    int is_burnable(void) const;
     int is_wand_eater(void) const;
     int is_immune_to_fire(void) const;
     int gfx_flickers(void) const;
@@ -1215,6 +1217,8 @@ public:
     void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
     void on_lifespan(Thingp hitter);
     void on_miss(Thingp hitter);
+    void on_fire(void);
+    void on_fall(void);
     void on_move(void);
     void on_open(void);
     void on_use(Thingp what);

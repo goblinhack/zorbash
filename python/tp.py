@@ -169,6 +169,12 @@ class Tp:
     def set_on_miss_do(self, value):
         zx.tp_set_on_miss_do(self, value)
 
+    def set_on_fall_do(self, value):
+        zx.tp_set_on_fall_do(self, value)
+
+    def set_on_fire_do(self, value):
+        zx.tp_set_on_fire_do(self, value)
+
     def set_on_fire_at_do(self, value):
         zx.tp_set_on_fire_at_do(self, value)
 
@@ -493,8 +499,8 @@ class Tp:
     def set_is_rrr91(self, value):
         zx.tp_set_is_rrr91(self, value)
 
-    def set_is_rrr92(self, value):
-        zx.tp_set_is_rrr92(self, value)
+    def set_is_burnable(self, value):
+        zx.tp_set_is_burnable(self, value)
 
     def set_is_wand_eater(self, value):
         zx.tp_set_is_wand_eater(self, value)
@@ -877,8 +883,8 @@ class Tp:
     def set_normal_placement_rules(self, value):
         zx.tp_set_normal_placement_rules(self, value)
 
-    def set_is_flammable(self, value):
-        zx.tp_set_is_flammable(self, value)
+    def set_is_very_combustible(self, value):
+        zx.tp_set_is_very_combustible(self, value)
 
     def set_is_combustible(self, value):
         zx.tp_set_is_combustible(self, value)

@@ -22,7 +22,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_dead_on_shove(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_fire(True)
-    x.set_is_flammable(True)
+    x.set_is_very_combustible(True)
     x.set_is_floor_deco(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)

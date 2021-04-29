@@ -65,6 +65,8 @@ const std::string& Tp::on_death_do(void) const           { return _on_death_do; 
 const std::string& Tp::on_hit_do(void) const             { return _on_hit_do; }
 const std::string& Tp::on_lifespan_do(void) const        { return _on_lifespan_do; }
 const std::string& Tp::on_miss_do(void) const            { return _on_miss_do; }
+const std::string& Tp::on_fall_do(void) const            { return _on_fall_do; }
+const std::string& Tp::on_fire_do(void) const            { return _on_fire_do; }
 const std::string& Tp::on_fire_at_do(void) const         { return _on_fire_at_do; }
 const std::string& Tp::on_tick_do(void) const            { return _on_tick_do; }
 const std::string& Tp::on_move_do(void) const            { return _on_move_do; }
@@ -190,7 +192,7 @@ int Tp::is_explosion(void) const                                     { return _i
 int Tp::is_extreme_hazard(void) const                                { return _is_extreme_hazard; }
 int Tp::is_fearless(void) const                                      { return _is_fearless; }
 int Tp::is_fire(void) const                                          { return _is_fire; }
-int Tp::is_flammable(void) const                                     { return _is_flammable; }
+int Tp::is_very_combustible(void) const                                     { return _is_very_combustible; }
 int Tp::is_floating(void) const                                      { return _is_floating; }
 int Tp::is_floor(void) const                                         { return _is_floor; }
 int Tp::is_floor_deco(void) const                                    { return _is_floor_deco; }
@@ -337,7 +339,7 @@ int Tp::is_rrr88(void) const                                         { return _i
 int Tp::is_rrr89(void) const                                         { return _is_rrr89; }
 int Tp::is_rrr90(void) const                                         { return _is_rrr90; }
 int Tp::is_rrr91(void) const                                         { return _is_rrr91; }
-int Tp::is_rrr92(void) const                                         { return _is_rrr92; }
+int Tp::is_burnable(void) const                                         { return _is_burnable; }
 int Tp::is_wand_eater(void) const                                         { return _is_wand_eater; }
 int Tp::is_immune_to_fire(void) const                                { return _is_immune_to_fire; }
 int Tp::gfx_flickers(void) const                                     { return _gfx_flickers; }
@@ -515,7 +517,7 @@ void Tp::set_is_explosion(int v)                                     { _is_explo
 void Tp::set_is_extreme_hazard(int v)                                { _is_extreme_hazard = v; }
 void Tp::set_is_fearless(int v)                                      { _is_fearless = v; }
 void Tp::set_is_fire(int v)                                          { _is_fire = v; }
-void Tp::set_is_flammable(int v)                                     { _is_flammable = v; }
+void Tp::set_is_very_combustible(int v)                                     { _is_very_combustible = v; }
 void Tp::set_is_floating(int v)                                      { _is_floating = v; }
 void Tp::set_is_floor(int v)                                         { _is_floor = v; }
 void Tp::set_is_floor_deco(int v)                                    { _is_floor_deco = v; }
@@ -661,7 +663,7 @@ void Tp::set_is_rrr88(int v)                                         { _is_rrr88
 void Tp::set_is_rrr89(int v)                                         { _is_rrr89 = v; }
 void Tp::set_is_rrr90(int v)                                         { _is_rrr90 = v; }
 void Tp::set_is_rrr91(int v)                                         { _is_rrr91 = v; }
-void Tp::set_is_rrr92(int v)                                         { _is_rrr92 = v; }
+void Tp::set_is_burnable(int v)                                         { _is_burnable = v; }
 void Tp::set_is_wand_eater(int v)                                         { _is_wand_eater = v; }
 void Tp::set_is_immune_to_fire(int v)                                { _is_immune_to_fire = v; }
 void Tp::set_is_projectile(int v)                                    { _is_projectile = v; }
@@ -750,6 +752,8 @@ void Tp::set_on_death_do(const std::string &v)           { _on_death_do = v; }
 void Tp::set_on_hit_do(const std::string &v)             { _on_hit_do = v; }
 void Tp::set_on_lifespan_do(const std::string &v)        { _on_lifespan_do = v; }
 void Tp::set_on_miss_do(const std::string &v)            { _on_miss_do = v; }
+void Tp::set_on_fire_do(const std::string &v)            { _on_fire_do = v; }
+void Tp::set_on_fall_do(const std::string &v)            { _on_fall_do = v; }
 void Tp::set_on_fire_at_do(const std::string &v)         { _on_fire_at_do = v; }
 void Tp::set_on_tick_do(const std::string &v)            { _on_tick_do = v; }
 void Tp::set_on_move_do(const std::string &v)            { _on_move_do = v; }

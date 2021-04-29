@@ -13,8 +13,8 @@ def on_death(me, x, y):
                 zx.thing_is_brazier(thing):
             zx.thing_hit(me, thing)
 
-    zx.tp_spawn_at(me, "explosion_major")
-    zx.tp_spawn_radius_range(me, me, me, "explosion_destroy_floor")
+    zx.level_spawn_at_thing(me, "explosion_major")
+    zx.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
 
 #
 # This is an internal only object to fire lasers from monsters

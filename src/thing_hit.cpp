@@ -144,7 +144,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     if (is_immune_to_fire()) {
         if (hitter->is_fire() || real_hitter->is_fire()) {
-            if (real_hitter->is_player()) {
+            if (is_player()) {
+                TOPCON("You bask in the fire!");
+            } else if (real_hitter->is_player()) {
                 TOPCON("%s basks in the fire!", text_The().c_str());
             }
             return false;
@@ -154,7 +156,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (bite) {
         if (is_immune_to_poison()) {
             if (hitter->is_poison() || real_hitter->is_poison()) {
-                if (real_hitter->is_player()) {
+                if (is_player()) {
+                    TOPCON("You drink in the poison!");
+                } else if (real_hitter->is_player()) {
                     TOPCON("%s drinks in the poison!", text_The().c_str());
                 }
                 return false;

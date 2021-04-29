@@ -747,7 +747,7 @@ done:
     Py_RETURN_TRUE;
 }
 
-PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -787,7 +787,7 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_TRUE;
 }
 
-PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -827,7 +827,7 @@ PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject
     Py_RETURN_TRUE;
 }
 
-PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -902,7 +902,7 @@ PyObject *tp_spawn_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_TRUE;
 }
 
-PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -942,7 +942,7 @@ PyObject *tp_spawn_fire (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_TRUE;
 }
 
-PyObject *tp_spawn_at (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -982,7 +982,7 @@ PyObject *tp_spawn_at (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_TRUE;
 }
 
-PyObject *tp_spawn_at_if_possible (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -1114,7 +1114,7 @@ PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_TRUE;
 }
 
-PyObject *tp_place (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_place_at (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *what = nullptr;
     uint32_t id = 0;
@@ -1269,7 +1269,7 @@ TP_BODY_SET_INT(is_explosion)
 TP_BODY_SET_INT(is_extreme_hazard)
 TP_BODY_SET_INT(is_fearless)
 TP_BODY_SET_INT(is_fire)
-TP_BODY_SET_INT(is_flammable)
+TP_BODY_SET_INT(is_very_combustible)
 TP_BODY_SET_INT(is_floating)
 TP_BODY_SET_INT(is_floor)
 TP_BODY_SET_INT(is_floor_deco)
@@ -1416,7 +1416,7 @@ TP_BODY_SET_INT(is_rrr88)
 TP_BODY_SET_INT(is_rrr89)
 TP_BODY_SET_INT(is_rrr90)
 TP_BODY_SET_INT(is_rrr91)
-TP_BODY_SET_INT(is_rrr92)
+TP_BODY_SET_INT(is_burnable)
 TP_BODY_SET_INT(is_wand_eater)
 TP_BODY_SET_INT(is_immune_to_fire)
 TP_BODY_SET_INT(gfx_flickers)
@@ -1510,6 +1510,8 @@ TP_BODY_SET_STRING(on_hit_do)
 TP_BODY_SET_STRING(on_idle_dice)
 TP_BODY_SET_STRING(on_lifespan_do)
 TP_BODY_SET_STRING(on_miss_do)
+TP_BODY_SET_STRING(on_fire_do)
+TP_BODY_SET_STRING(on_fall_do)
 TP_BODY_SET_STRING(on_fire_at_do)
 TP_BODY_SET_STRING(on_tick_do)
 TP_BODY_SET_STRING(on_move_do)

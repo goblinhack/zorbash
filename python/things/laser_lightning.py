@@ -6,7 +6,7 @@ def on_death(me, x, y):
     for thing in zx.level_get_all(me, target_x, target_y):
         if zx.thing_possible_to_attack(me, thing):
             zx.thing_hit(me, thing)
-    zx.tp_spawn_at(me, "explosion_minor")
+    zx.level_spawn_at_thing(me, "explosion_minor")
     zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "lightning_a", x, y)
 
     #

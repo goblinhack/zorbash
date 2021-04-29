@@ -164,7 +164,7 @@ private:
     int _is_extreme_hazard {};
     int _is_fearless {};
     int _is_fire {};
-    int _is_flammable {};
+    int _is_very_combustible {};
     int _is_floating {};
     int _is_floor {};
     int _is_floor_deco {};
@@ -312,7 +312,7 @@ private:
     int _is_rrr89 {};
     int _is_rrr90 {};
     int _is_rrr91 {};
-    int _is_rrr92 {};
+    int _is_burnable {};
     int _is_wand_eater {};
     int _is_immune_to_fire {};
     int _gfx_flickers {};
@@ -402,6 +402,8 @@ private:
     std::string _on_use_do;
     std::string _on_hit_do;
     std::string _on_miss_do;
+    std::string _on_fire_do;
+    std::string _on_fall_do;
     std::string _on_fire_at_do;
     std::string _on_tick_do;
     std::string _on_lifespan_do;
@@ -497,6 +499,8 @@ public:
     const std::string& on_born_do(void) const;
     const std::string& on_lifespan_do(void) const;
     const std::string& on_miss_do(void) const;
+    const std::string& on_fire_do(void) const;
+    const std::string& on_fall_do(void) const;
     const std::string& on_fire_at_do(void) const;
     const std::string& on_tick_do(void) const;
     const std::string& on_move_do(void) const;
@@ -621,7 +625,7 @@ public:
     int is_extreme_hazard(void) const;
     int is_fearless(void) const;
     int is_fire(void) const;
-    int is_flammable(void) const;
+    int is_very_combustible(void) const;
     int is_floating(void) const;
     int is_floor(void) const;
     int is_floor_deco(void) const;
@@ -767,7 +771,7 @@ public:
     int is_rrr89(void) const;
     int is_rrr90(void) const;
     int is_rrr91(void) const;
-    int is_rrr92(void) const;
+    int is_burnable(void) const;
     int is_wand_eater(void) const;
     int is_immune_to_fire(void) const;
     int is_projectile(void) const;
@@ -952,7 +956,7 @@ public:
     void set_is_extreme_hazard(int);
     void set_is_fearless(int);
     void set_is_fire(int);
-    void set_is_flammable(int);
+    void set_is_very_combustible(int);
     void set_is_floating(int);
     void set_is_floor(int);
     void set_is_floor_deco(int);
@@ -1099,7 +1103,7 @@ public:
     void set_is_rrr89(int);
     void set_is_rrr90(int);
     void set_is_rrr91(int);
-    void set_is_rrr92(int);
+    void set_is_burnable(int);
     void set_is_wand_eater(int);
     void set_is_immune_to_fire(int);
     void set_is_projectile(int);
@@ -1161,6 +1165,8 @@ public:
     void set_on_idle_dice(const std::string &);
     void set_on_lifespan_do(const std::string &);
     void set_on_miss_do(const std::string &);
+    void set_on_fire_do(const std::string &);
+    void set_on_fall_do(const std::string &);
     void set_on_fire_at_do(const std::string &);
     void set_on_tick_do(const std::string &);
     void set_on_move_do(const std::string &);

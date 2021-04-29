@@ -2,7 +2,7 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    zx.tp_spawn_at(me, "ghost_explosion")
+    zx.level_spawn_at_thing(me, "ghost_explosion")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)

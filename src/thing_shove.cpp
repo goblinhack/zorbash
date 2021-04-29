@@ -148,7 +148,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     // If shoving something on fire! set yourself on fire!
     //
     if (!was_dead) {
-        if (it->is_flammable()) {
+        if (it->is_very_combustible()) {
             if (random_range(0, 100) < 5) {
                 if (is_player()) {
                     if (set_on_fire("set youtself on fire")) {
