@@ -12,6 +12,38 @@
 #include "my_vector_bounds_check.h"
 #include "my_dmap.h"
 #include "my_monst.h"
+#include "my_python.h"
+#include "my_string.h"
+
+//
+// Python callback upon being fire
+//
+void Thing::on_fire (void)
+{_
+    auto on_fire = tp()->on_fire_do();
+    if (std::empty(on_fire)) {
+        return;
+    }
+
+    auto t = split_tokens(on_fire, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%s)", mod.c_str(), fn.c_str(),
+            to_string().c_str());
+
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id,
+                        (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    } else {
+        ERR("Bad on_fire call [%s] expected mod:function, got %d elems",
+            on_fire.c_str(), (int)on_fire.size());
+    }
+}
 
 bool Thing::is_on_fire (void) const
 {_
@@ -35,7 +67,7 @@ void Thing::unset_on_fire (void)
 
 bool Thing::set_on_fire (const std::string &why)
 {_
-    if (!is_combustible()) {
+    if (!is_burnable() && !is_combustible()) {
         return false;
     }
 
@@ -48,6 +80,11 @@ bool Thing::set_on_fire (const std::string &why)
     set_on_fire_anim_id(on_fire_anim->id);
     on_fire_anim->set_owner(this);
     move_carried_items();
+
+    if (!is_dead) {
+        on_fire();
+    }
+
     return true;
 }
 

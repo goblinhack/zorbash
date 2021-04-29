@@ -8,7 +8,7 @@ def on_use(owner, item, target, x, y):
     health = zx.thing_get_health(owner)
     new_health = int((zx.thing_get_health_max(owner) / 100.0) * 80)
     if new_health > health:
-        zx.tp_spawn_radius_range(owner, item, target, "potion_health_effect")
+        zx.level_spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
         zx.thing_set_health(owner, new_health)
         if zx.if_matches(owner, "is_player"):
             zx.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
@@ -36,6 +36,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_described_when_hovering_over(True)
     x.set_is_droppable(True)
     x.set_is_interesting(True)
+    x.set_is_active(True) # So it can interact with fire
     x.set_is_item(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)

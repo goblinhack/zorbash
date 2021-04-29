@@ -6,7 +6,7 @@ def on_death(me, x, y):
     zx.if_matches_then_kill(me, "is_floor", x, y)
     zx.if_matches_then_kill(me, "is_corridor", x, y)
     zx.if_matches_then_kill(me, "is_dirt", x, y)
-    zx.tp_place(me, "chasm1", x, y)
+    zx.level_place_at(me, "chasm1", x, y)
 
 def tp_init(name):
     x = tp.Tp(name)

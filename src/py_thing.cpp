@@ -157,7 +157,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
-    Thingp t = game->thing_find(id);	                                    \
+    Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
         ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
@@ -363,6 +363,82 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 }
 
+PyObject *thing_killed_by (PyObject *obj, PyObject *args, PyObject *keywds)
+{_	
+    uint32_t owner_id = 0;	
+    char *reason = nullptr;
+    uint32_t killer_id = 0;	
+    static char *kwlist[] = {(char*)"owner", (char*)"reason", (char*)"killer", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &reason, &killer_id)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!owner_id) {	
+        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp owner = game->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!reason) {	
+        ERR("%s: no reason thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!killer_id) {	
+        ERR("%s: no killer thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp killer = game->thing_find(killer_id);	
+    if (!killer) {	
+        ERR("%s: cannot find killer thing ID %u", __FUNCTION__, killer_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    owner->log("Killed by %s, reason %s", killer->to_string().c_str(), reason);
+    owner->dead(killer, "%s", reason);
+    Py_RETURN_NONE;	
+}
+
+PyObject *thing_killed (PyObject *obj, PyObject *args, PyObject *keywds)
+{_	
+    uint32_t owner_id = 0;	
+    char *reason = nullptr;
+    static char *kwlist[] = {(char*)"owner", (char*)"reason", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &reason)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!owner_id) {	
+        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp owner = game->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!reason) {	
+        ERR("%s: no reason thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    owner->log("Killed: reason %s", reason);
+    owner->dead("%s", reason);
+    Py_RETURN_NONE;	
+}
+
 THING_BODY_GET_BOOL(thing_ai_vision_distance, ai_vision_distance)
 THING_BODY_GET_BOOL(thing_is_able_to_change_levels, is_able_to_change_levels)
 THING_BODY_GET_BOOL(thing_is_able_to_fall, is_able_to_fall)
@@ -426,7 +502,7 @@ THING_BODY_GET_BOOL(thing_is_explosion, is_explosion)
 THING_BODY_GET_BOOL(thing_is_extreme_hazard, is_extreme_hazard)
 THING_BODY_GET_BOOL(thing_is_fearless, is_fearless)
 THING_BODY_GET_BOOL(thing_is_fire, is_fire)
-THING_BODY_GET_BOOL(thing_is_flammable, is_flammable)
+THING_BODY_GET_BOOL(thing_is_very_combustible, is_very_combustible)
 THING_BODY_GET_BOOL(thing_is_floating, is_floating)
 THING_BODY_GET_BOOL(thing_is_floor, is_floor)
 THING_BODY_GET_BOOL(thing_is_floor_deco, is_floor_deco)
@@ -575,7 +651,7 @@ THING_BODY_GET_BOOL(thing_is_rrr89, is_rrr89)
 THING_BODY_GET_BOOL(thing_is_rrr9, is_rrr9)
 THING_BODY_GET_BOOL(thing_is_rrr90, is_rrr90)
 THING_BODY_GET_BOOL(thing_is_rrr91, is_rrr91)
-THING_BODY_GET_BOOL(thing_is_rrr92, is_rrr92)
+THING_BODY_GET_BOOL(thing_is_burnable, is_burnable)
 THING_BODY_GET_BOOL(thing_is_wand_eater, is_wand_eater)
 THING_BODY_GET_BOOL(thing_is_immune_to_fire, is_immune_to_fire)
 THING_BODY_GET_BOOL(thing_gfx_flickers, gfx_flickers)

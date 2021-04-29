@@ -57,7 +57,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_active(True)
     x.set_is_attackable_by_monst(True)
     x.set_is_bleeder(True)
-    x.set_is_combustible(True)
+    x.set_is_burnable(True)
     x.set_is_corpse_on_death(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_humanoid(True)

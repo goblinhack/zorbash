@@ -7,7 +7,7 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
         zx.sound_play_channel_at(zx.CHANNEL_MONST_DEATH, "squelch", x, y)
 
 def on_death(me, x, y):
-    zx.tp_spawn_at(me, "pink_splatter")
+    zx.level_spawn_at_thing(me, "pink_splatter")
     zx.sound_play_channel_at(zx.CHANNEL_MONST, "slime{}".format(random.randint(1, 9)), x, y)
 
 def tp_init(name, text_name):

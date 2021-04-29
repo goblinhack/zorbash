@@ -1,9 +1,19 @@
 import zx
 import tp
 
+def explode(me, x, y):
+    zx.level_spawn_at_thing(me, "explosion_major")
+    zx.level_spawn_fire_around_thing(me, "fire")
+    zx.thing_killed(me, "exploded")
+
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    zx.tp_spawn_at(me, "explosion_major")
-    zx.tp_spawn_at(me, "explosion_destroy_floor")
+    explode(me, x, y)
+
+def on_fire(me, x, y):
+    explode(me, x, y)
+
+def on_fall(me, x, y):
+    explode(me, x, y)
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
@@ -23,8 +33,9 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_droppable(True)
-    x.set_is_flammable(True)
+    x.set_is_very_combustible(True)
     x.set_is_interesting(True)
+    x.set_is_active(True) # So it can interact with fire
     x.set_is_item(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
@@ -39,6 +50,8 @@ def tp_init(name, text_name, short_text_name):
     x.set_long_text_description("This wand blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath.")
     x.set_normal_placement_rules(True)
     x.set_on_hit_do("wand_lightning.on_hit()")
+    x.set_on_fire_do("wand_lightning.on_fire()")
+    x.set_on_fall_do("wand_lightning.on_fall()")
     x.set_range_max(7)
     x.set_text_a_or_an("a");
     x.set_text_description("%%fg=cyan$A wand of lightning.")

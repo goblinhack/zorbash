@@ -11,6 +11,38 @@
 #include "my_ptrcheck.h"
 #include "my_thing_template.h"
 #include "my_array_bounds_check.h"
+#include "my_python.h"
+#include "my_string.h"
+
+//
+// Python callback upon being fall
+//
+void Thing::on_fall (void)
+{_
+    auto on_fall = tp()->on_fall_do();
+    if (std::empty(on_fall)) {
+        return;
+    }
+
+    auto t = split_tokens(on_fall, '.');
+    if (t.size() == 2) {
+        auto mod = t[0];
+        auto fn = t[1];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+        }
+
+        log("call %s.%s(%ss)", mod.c_str(), fn.c_str(),
+            to_string().c_str());
+
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id,
+                        (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    } else {
+        ERR("Bad on_fall call [%s] expected mod:function, got %d elems",
+            on_fall.c_str(), (int)on_fall.size());
+    }
+}
 
 void Thing::fall (float fall_height, timestamp_t ms)
 {_
@@ -311,6 +343,11 @@ _
                     dead("by flying without wings");
                 }
             }
+
+            if (!is_dead) {
+                on_fall();
+            }
+
             return true;
         }
 

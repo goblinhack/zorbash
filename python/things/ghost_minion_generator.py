@@ -2,10 +2,10 @@ import zx
 import tp
 
 def on_idle_dice(me, x, y):
-    zx.tp_spawn_next_to(me, "ghost_minion")
+    zx.level_spawn_next_to(me, "ghost_minion")
 
 def on_death(me, x, y):
-    zx.tp_spawn_at(me, "generator_explosion")
+    zx.level_spawn_at_thing(me, "generator_explosion")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)

@@ -199,7 +199,7 @@ _
             //
             // Fire monsters do not attack always
             //
-        } else if (it->is_combustible()) {
+        } else if (it->is_burnable() || it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
                 log("Can attack as I am fire %s", it->to_string().c_str());
                 return true;
@@ -214,6 +214,7 @@ _
 
     if (it->is_alive_monst() || 
         it->is_combustible() ||
+        it->is_burnable() ||
         it->is_wall() ||
         it->is_rock() ||
         it->is_door() ||
@@ -321,7 +322,7 @@ _
     }
 
     if (!possible_to_attack(it)) {
-	log("Attack failed, not possible tp attack %s", it->to_string().c_str());
+	log("Attack failed, not possible to attack %s", it->to_string().c_str());
         return false;
     }
 

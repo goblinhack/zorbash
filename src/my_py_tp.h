@@ -10,15 +10,15 @@
 
 PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_spawn_fire(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_place(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define TP_SET_PROTO(__field__)                                                     \
 PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds);
@@ -146,7 +146,7 @@ TP_SET_PROTO(is_explosion)
 TP_SET_PROTO(is_extreme_hazard)
 TP_SET_PROTO(is_fearless)
 TP_SET_PROTO(is_fire)
-TP_SET_PROTO(is_flammable)
+TP_SET_PROTO(is_very_combustible)
 TP_SET_PROTO(is_floating)
 TP_SET_PROTO(is_floor)
 TP_SET_PROTO(is_floor_deco)
@@ -297,7 +297,7 @@ TP_SET_PROTO(is_rrr88)
 TP_SET_PROTO(is_rrr89)
 TP_SET_PROTO(is_rrr90)
 TP_SET_PROTO(is_rrr91)
-TP_SET_PROTO(is_rrr92)
+TP_SET_PROTO(is_burnable)
 TP_SET_PROTO(is_wand_eater)
 TP_SET_PROTO(is_immune_to_fire)
 TP_SET_PROTO(is_projectile)
@@ -365,6 +365,8 @@ TP_SET_PROTO(on_idle_dice)
 TP_SET_PROTO(on_lifespan_do)
 TP_SET_PROTO(on_fire_at_do)
 TP_SET_PROTO(on_miss_do)
+TP_SET_PROTO(on_fire_do)
+TP_SET_PROTO(on_fall_do)
 TP_SET_PROTO(on_tick_do)
 TP_SET_PROTO(on_move_do)
 TP_SET_PROTO(on_open_do)
