@@ -99,10 +99,10 @@ int Tp::attack_lunge(void) const                                     { return _a
 int Tp::attack_meat(void) const                                      { return _attack_meat; }
 int Tp::attack_shove(void) const                                     { return _attack_shove; }
 int Tp::attack_shove_chance_d1000(void) const                        { return _attack_shove_chance_d1000; }
-int Tp::avoids_acid(void) const                                      { return _avoids_acid; }
-int Tp::avoids_fire(void) const                                      { return _avoids_fire; }
-int Tp::avoids_poison(void) const                                    { return _avoids_poison; }
-int Tp::avoids_water(void) const                                     { return _avoids_water; }
+int Tp::hates_acid(void) const                                      { return _hates_acid; }
+int Tp::hates_fire(void) const                                      { return _hates_fire; }
+int Tp::hates_poison(void) const                                    { return _hates_poison; }
+int Tp::hates_water(void) const                                     { return _hates_water; }
 int Tp::bag_height(void) const                                       { return _bag_height; }
 int Tp::bag_item_height(void) const                                  { return _bag_item_height; }
 int Tp::bag_item_width(void) const                                   { return _bag_item_width; }
@@ -240,7 +240,7 @@ int Tp::is_msg(void) const                                           { return _i
 int Tp::is_no_tile(void) const                                       { return _is_no_tile; }
 int Tp::is_player(void) const                                        { return _is_player; }
 int Tp::is_poison(void) const                                        { return _is_poison; }
-int Tp::is_immune_to_poison(void) const                              { return _is_immune_to_poison; }
+int Tp::loves_poison(void) const                              { return _loves_poison; }
 int Tp::is_potion(void) const                                        { return _is_potion; }
 int Tp::is_potion_eater(void) const                                  { return _is_potion_eater; }
 int Tp::is_projectile(void) const                                    { return _is_projectile; }
@@ -341,7 +341,7 @@ int Tp::is_rrr90(void) const                                         { return _i
 int Tp::is_rrr91(void) const                                         { return _is_rrr91; }
 int Tp::is_burnable(void) const                                         { return _is_burnable; }
 int Tp::is_wand_eater(void) const                                         { return _is_wand_eater; }
-int Tp::is_immune_to_fire(void) const                                { return _is_immune_to_fire; }
+int Tp::loves_fire(void) const                                { return _loves_fire; }
 int Tp::gfx_flickers(void) const                                     { return _gfx_flickers; }
 int Tp::is_laser(void) const                                         { return _is_laser; }
 int Tp::is_able_to_fire_at(void) const                               { return _is_able_to_fire_at; }
@@ -422,10 +422,10 @@ void Tp::set_attack_lunge(int v)                                     { _attack_l
 void Tp::set_attack_meat(int v)                                      { _attack_meat = v; }
 void Tp::set_attack_shove(int v)                                     { _attack_shove = v; }
 void Tp::set_attack_shove_chance_d1000(int v)                        { _attack_shove_chance_d1000 = v; }
-void Tp::set_avoids_acid(int v)                                      { _avoids_acid = v; }
-void Tp::set_avoids_fire(int v)                                      { _avoids_fire = v; }
-void Tp::set_avoids_poison(int v)                                    { _avoids_poison = v; }
-void Tp::set_avoids_water(int v)                                     { _avoids_water = v; }
+void Tp::set_hates_acid(int v)                                      { _hates_acid = v; }
+void Tp::set_hates_fire(int v)                                      { _hates_fire = v; }
+void Tp::set_hates_poison(int v)                                    { _hates_poison = v; }
+void Tp::set_hates_water(int v)                                     { _hates_water = v; }
 void Tp::set_bag_height(int v)                                       { _bag_height = v; }
 void Tp::set_bag_item_height(int v)                                  { _bag_item_height = v; }
 void Tp::set_bag_item_width(int v)                                   { _bag_item_width = v; }
@@ -565,7 +565,7 @@ void Tp::set_is_msg(int v)                                           { _is_msg =
 void Tp::set_is_no_tile(int v)                                       { _is_no_tile = v; }
 void Tp::set_is_player(int v)                                        { _is_player = v; }
 void Tp::set_is_poison(int v)                                        { _is_poison = v; }
-void Tp::set_is_immune_to_poison(int v)                              { _is_immune_to_poison = v; }
+void Tp::set_loves_poison(int v)                              { _loves_poison = v; }
 void Tp::set_is_potion(int v)                                        { _is_potion = v; }
 void Tp::set_is_potion_eater(int v)                                  { _is_potion_eater = v; }
 void Tp::set_is_removeable_if_out_of_slots(int v)                    { _is_removeable_if_out_of_slots = v; }
@@ -665,7 +665,7 @@ void Tp::set_is_rrr90(int v)                                         { _is_rrr90
 void Tp::set_is_rrr91(int v)                                         { _is_rrr91 = v; }
 void Tp::set_is_burnable(int v)                                         { _is_burnable = v; }
 void Tp::set_is_wand_eater(int v)                                         { _is_wand_eater = v; }
-void Tp::set_is_immune_to_fire(int v)                                { _is_immune_to_fire = v; }
+void Tp::set_loves_fire(int v)                                { _loves_fire = v; }
 void Tp::set_is_projectile(int v)                                    { _is_projectile = v; }
 void Tp::set_gfx_flickers(int v)                                     { _gfx_flickers = v; }
 void Tp::set_is_laser(int v)                                         { _is_laser = v; }

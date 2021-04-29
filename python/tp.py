@@ -505,8 +505,8 @@ class Tp:
     def set_is_wand_eater(self, value):
         zx.tp_set_is_wand_eater(self, value)
 
-    def set_is_immune_to_fire(self, value):
-        zx.tp_set_is_immune_to_fire(self, value)
+    def set_loves_fire(self, value):
+        zx.tp_set_loves_fire(self, value)
 
     def set_is_projectile(self, value):
         zx.tp_set_is_projectile(self, value)
@@ -610,14 +610,14 @@ class Tp:
     def set_is_humanoid(self, value):
         zx.tp_set_is_humanoid(self, value)
 
-    def set_is_immune_to_poison(self, value):
-        zx.tp_set_is_immune_to_poison(self, value)
+    def set_loves_poison(self, value):
+        zx.tp_set_loves_poison(self, value)
 
     def set_damage_doubled_from_poison(self, value):
         zx.tp_set_damage_doubled_from_poison(self, value)
 
-    def set_avoids_poison(self, value):
-        zx.tp_set_avoids_poison(self, value)
+    def set_hates_poison(self, value):
+        zx.tp_set_hates_poison(self, value)
 
     def set_attack_humanoid(self, value):
         zx.tp_set_attack_humanoid(self, value)
@@ -796,8 +796,8 @@ class Tp:
     def set_is_acid_lover(self, value):
         zx.tp_set_is_acid_lover(self, value)
 
-    def set_avoids_acid(self, value):
-        zx.tp_set_avoids_acid(self, value)
+    def set_hates_acid(self, value):
+        zx.tp_set_hates_acid(self, value)
 
     def set_is_jelly_parent(self, value):
         zx.tp_set_is_jelly_parent(self, value)
@@ -847,8 +847,8 @@ class Tp:
     def set_is_smoke(self, value):
         zx.tp_set_is_smoke(self, value)
 
-    def set_avoids_fire(self, value):
-        zx.tp_set_avoids_fire(self, value)
+    def set_hates_fire(self, value):
+        zx.tp_set_hates_fire(self, value)
 
     def set_is_treasure(self, value):
         zx.tp_set_is_treasure(self, value)
@@ -973,8 +973,8 @@ class Tp:
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)
 
-    def set_avoids_water(self, value):
-        zx.tp_set_avoids_water(self, value)
+    def set_hates_water(self, value):
+        zx.tp_set_hates_water(self, value)
 
     def set_is_hunger_insatiable(self, value):
         zx.tp_set_is_hunger_insatiable(self, value)

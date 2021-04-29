@@ -39,7 +39,7 @@ def tp_init(name, text_name):
     x.set_ai_vision_distance(8)
     x.set_attack_lunge(True)
     x.set_attack_meat(True)
-    x.set_avoids_fire(100)
+    x.set_hates_fire(100)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)

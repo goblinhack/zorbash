@@ -15,7 +15,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_attack_lunge(True)
     x.set_is_attackable_by_player(True)
     x.set_is_attackable_by_monst(True)
-    x.set_avoids_fire(100)
+    x.set_hates_fire(100)
     x.set_collision_attack(True)
     x.set_collision_attack_radius(0.60)
     x.set_collision_check(True)

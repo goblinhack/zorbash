@@ -554,6 +554,16 @@ void Level::unset_is_shallow_water (const int x, const int y)
     decr(_is_shallow_water, x, y, (uint8_t)1);
 }
 
+uint8_t Level::is_water (const point &p)
+{_
+    return is_shallow_water(p) || is_deep_water(p);
+}
+
+uint8_t Level::is_water (const int x, const int y)
+{_
+    return is_shallow_water(x, y) || is_deep_water(x, y);
+}
+
 uint8_t Level::is_wall (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {

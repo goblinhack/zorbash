@@ -18,7 +18,7 @@ def on_use(owner, item, target, x, y):
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
-    x.set_avoids_fire(100)
+    x.set_hates_fire(100)
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
     x.set_blast_max_radius(0)

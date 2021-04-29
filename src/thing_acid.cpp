@@ -28,7 +28,7 @@ void Thing::acid_tick (void)
         return;
     }
 
-    if (!avoids_acid()) {
+    if (!hates_acid()) {
         return;
     }
 

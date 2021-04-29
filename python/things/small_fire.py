@@ -7,7 +7,7 @@ def spawn(me, x, y):
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
-    x.set_avoids_water(100)
+    x.set_hates_water(100)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)

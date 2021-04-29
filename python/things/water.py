@@ -5,7 +5,7 @@ import tp
 def tp_init(name, text_name, tiles=[]):
     x = tp.Tp(name, text_name)
     x.set_ai_obstacle(True)
-    x.set_avoids_fire(True)
+    x.set_hates_fire(True)
     x.set_gfx_animated(True)
     x.set_is_able_to_fall(True)
     x.set_is_described_when_hovering_over(True)
