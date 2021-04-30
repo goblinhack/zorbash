@@ -23,6 +23,10 @@
 //
 void Thing::kill (Thingp killer, const char *reason)
 {_
+    ///////////////////////////////////////////////////////////////
+    // WARNING: killer can be nullptr
+    ///////////////////////////////////////////////////////////////
+    //
     auto is_corpse_currently = is_corpse();
 
     //
@@ -79,11 +83,11 @@ void Thing::kill (Thingp killer, const char *reason)
     //
     // If a minion generator dies, kill all minions
     //
-    if (is_minion_generator()) {
+    if (killer && is_minion_generator()) {
         kill_minions(killer);
     }
 
-    if (is_spawner()) {
+    if (killer && is_spawner()) {
         kill_spawned(killer);
     }
 
@@ -144,10 +148,22 @@ void Thing::kill (Thingp killer, const char *reason)
         auto p = level->player;
         if (p) {
             int distance = get(&level->player_dmap.val, (int)mid_at.x, (int)mid_at.y);
-            if (distance < 5) {
-                TOPCON("The door crashes open.");
-            } else if (distance < DMAP_IS_PASSABLE) {
-                TOPCON("The hear the noise of a door crashing open.");
+            if (killer && killer->is_fire()) {
+                if (distance < 5) {
+                    TOPCON("The door burns through.");
+                } else if (distance < DMAP_IS_PASSABLE) {
+                    TOPCON("The hear the crackling of burning wood.");
+                } else {
+                    TOPCON("You smell smoke in the air.");
+                }
+            } else {
+                if (distance < 5) {
+                    TOPCON("The door crashes open.");
+                } else if (distance < DMAP_IS_PASSABLE) {
+                    TOPCON("The hear the noise of a door crashing open.");
+                } else {
+                    TOPCON("You hear a muffled crash.");
+                }
             }
             p->update_light();
         }
@@ -213,12 +229,10 @@ bool Thing::if_matches_then_kill (const std::string& what, const point &p)
             t->dead(this, "killed");
 
             //
-            // Just in case something is now on top of a chasm or lava
+            // Check if we are newly spawned over a chasm
+            // Or if something we spawned at needs to react to us
             //
-            log("do location checks");
-            FOR_ALL_INTERESTING_THINGS(level, t, p.x, p.y) {
-                t->location_check_forced();
-            } FOR_ALL_THINGS_END()
+            location_check_all_things_at();
         }
     } FOR_ALL_THINGS_END()
 

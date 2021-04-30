@@ -19,9 +19,10 @@ std::string Thing::to_string (void) const
     verify(this);
 
     if (unlikely(!level)) {
-        return (string_sprintf("<not in level> %" PRIx32 "(<no tp>%s%s%s%s @%g,%g)",
+        return (string_sprintf("<not in level> %" PRIx32 "(<no tp>%s%s%s%s%s @%g,%g)",
                                id,
                                is_dead ? "/dead" : "",
+                               is_on_fire() ? "/onfire" : "",
                                is_hidden ? "/hidden" : "",
                                is_jumping ? "/jumping" : "",
                                is_falling ? "/falling" : "",
@@ -29,35 +30,38 @@ std::string Thing::to_string (void) const
     }
 
     if (unlikely(!tpp)) {_
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(<no tp>%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(<no tp>%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id,
                                is_dead ? "/dead" : "",
+                               is_on_fire() ? "/onfire" : "",
                                is_hidden ? "/hidden" : "",
                                is_jumping ? "/jumping" : "",
                                is_falling ? "/falling" : "",
                                mid_at.x, mid_at.y));
     } else if (get_health_max() || is_active()) {_
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s T%u @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s%s T%u @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id, tpp->name().c_str(),
                                is_dead ? "/dead" : "",
+                               is_on_fire() ? "/onfire" : "",
                                is_hidden ? "/hidden" : "",
                                is_jumping ? "/jumping" : "",
                                is_falling ? "/falling" : "",
                                get_tick_const(),
                                mid_at.x, mid_at.y));
     } else {_
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id, tpp->name().c_str(),
                                is_dead ? "/dead" : "",
+                               is_on_fire() ? "/onfire" : "",
                                is_hidden ? "/hidden" : "",
                                is_jumping ? "/jumping" : "",
                                is_falling ? "/falling" : "",

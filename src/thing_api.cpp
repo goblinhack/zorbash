@@ -144,7 +144,7 @@ int Thing::is_explosion(void) const                                     {_ retur
 int Thing::is_extreme_hazard(void) const                                {_ return (tp()->is_extreme_hazard()); }
 int Thing::is_fearless(void) const                                      {_ return (tp()->is_fearless()); }
 int Thing::is_fire(void) const                                          {_ return (tp()->is_fire()); }
-int Thing::is_very_combustible(void) const                                     {_ return (tp()->is_very_combustible()); }
+int Thing::is_very_combustible(void) const                              {_ return (tp()->is_very_combustible()); }
 int Thing::is_floating(void) const                                      {_ return (tp()->is_floating()); }
 int Thing::is_floor(void) const                                         {_ return (tp()->is_floor()); }
 int Thing::is_floor_deco(void) const                                    {_ return (tp()->is_floor_deco()); }

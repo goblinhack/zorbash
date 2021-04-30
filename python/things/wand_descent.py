@@ -2,6 +2,7 @@ import zx
 import tp
 
 def explode(me, x, y):
+    zx.thing_msg(me, "The wand of descent explodes. The earth tremors.")
     zx.level_spawn_at_thing(me, "explosion_major")
     zx.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     zx.thing_killed(me, "exploded")

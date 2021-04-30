@@ -2,17 +2,6 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    target_x, target_y = zx.thing_get_coords(me)
-    for thing in zx.level_get_all(me, target_x, target_y):
-        if zx.thing_is_monst(thing) or \
-                zx.thing_is_item(thing) or \
-                zx.thing_is_door(thing) or \
-                zx.thing_is_wall(thing) or \
-                zx.thing_is_player(thing) or \
-                zx.thing_is_minion_generator(thing) or \
-                zx.thing_is_brazier(thing):
-            zx.thing_hit(me, thing)
-
     zx.level_spawn_at_thing(me, "explosion_major")
     zx.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
 

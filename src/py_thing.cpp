@@ -192,7 +192,7 @@ PyObject *thing_get_coords (PyObject *obj, PyObject *args, PyObject *keywds)
     }	
 	
     Py_ssize_t size = 2;
-    auto the_tuple = PyTuple_New(size); // this line crashes the program
+    auto the_tuple = PyTuple_New(size);
     if (!the_tuple) {
         ERR("%s: cannot create tuple for ID %u", __FUNCTION__, id);	
         Py_RETURN_NONE;	
@@ -436,6 +436,48 @@ PyObject *thing_killed (PyObject *obj, PyObject *args, PyObject *keywds)
 	
     owner->log("Killed: reason %s", reason);
     owner->dead("%s", reason);
+    Py_RETURN_NONE;	
+}
+
+PyObject *thing_msg (PyObject *obj, PyObject *args, PyObject *keywds)
+{_	
+    uint32_t owner_id = 0;	
+    char *msg = nullptr;
+    static char *kwlist[] = {(char*)"owner", (char*)"msg", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
+        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    if (!owner_id) {	
+        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp owner = game->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!msg) {	
+        ERR("%s: no msg thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    //
+    // If not reachable, suppress the msg
+    //
+    if (game->level->player) {
+        int distance = get(&game->level->player_dmap.val, 
+                           (int)owner->mid_at.x, (int)owner->mid_at.y);
+        if (distance < DMAP_IS_PASSABLE) {
+            TOPCON("%s", msg);
+        }
+    } else {
+        TOPCON("%s", msg);
+    }
     Py_RETURN_NONE;	
 }
 

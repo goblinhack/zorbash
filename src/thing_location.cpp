@@ -9,6 +9,8 @@
 #include "my_depth.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
+#include "my_ptrcheck.h"
+#include "my_array_bounds_check.h"
 
 //
 // This is called if we move onto or fall onto a new location
@@ -89,4 +91,16 @@ bool Thing::location_check (void)
     set_tick_last_location_check(game->tick_current);
 
     return location_check_forced();
+}
+
+//
+// Check all things at this location
+//
+void Thing::location_check_all_things_at (void)
+{_
+    log("Do location checks");
+    FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {_
+        t->log("Do location check");
+        t->location_check_forced();
+    } FOR_ALL_THINGS_END()
 }

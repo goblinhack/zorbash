@@ -36,6 +36,8 @@ void Level::describe (fpoint p)
             continue;
         }
 
+        if (t->is_fire()) { t->topcon("XXX describe"); }
+
         if (t->get_immediate_owner() ||
             t->is_cursor() ||
             t->is_player() ||
