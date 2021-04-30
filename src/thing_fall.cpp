@@ -192,14 +192,14 @@ _
             x = mid_at.x;
             y = mid_at.y;
         } else if (tries < 10) {
-            x = mid_at.x + random_range(-MAP_BORDER_TOTAL, MAP_BORDER_TOTAL);
-            y = mid_at.y + random_range(-MAP_BORDER_TOTAL, MAP_BORDER_TOTAL);
+            x = mid_at.x + random_range(0, MAP_BORDER_TOTAL) - MAP_BORDER_TOTAL / 2;
+            y = mid_at.y + random_range(0, MAP_BORDER_TOTAL) - MAP_BORDER_TOTAL / 2;
         } else if (tries < 100) {
-            x = mid_at.x + random_range(-MAP_BORDER_TOTAL * 2, MAP_BORDER_TOTAL * 2);
-            y = mid_at.y + random_range(-MAP_BORDER_TOTAL * 2, MAP_BORDER_TOTAL * 2);
+            x = mid_at.x + random_range(0, MAP_BORDER_TOTAL * 2) - MAP_BORDER_TOTAL;
+            y = mid_at.y + random_range(0, MAP_BORDER_TOTAL * 2) - MAP_BORDER_TOTAL;
         } else if (tries < 1000) {
-            x = mid_at.x + random_range(-MAP_BORDER_TOTAL * 4, MAP_BORDER_TOTAL * 4);
-            y = mid_at.y + random_range(-MAP_BORDER_TOTAL * 4, MAP_BORDER_TOTAL * 4);
+            x = mid_at.x + random_range(0, MAP_BORDER_TOTAL * 4) - MAP_BORDER_TOTAL * 2;
+            y = mid_at.y + random_range(0, MAP_BORDER_TOTAL * 4) - MAP_BORDER_TOTAL * 2;
         } else if (tries < 10000) {
             x = random_range(MAP_BORDER_TOTAL, MAP_WIDTH - MAP_BORDER_TOTAL);
             y = random_range(MAP_BORDER_TOTAL, MAP_HEIGHT - MAP_BORDER_TOTAL);
@@ -242,7 +242,7 @@ _
             next_level->is_lava(x, y)) {
 
             FOR_ALL_THINGS(next_level, t, x, y) {
-                t->log("Under thing on new level");
+                t->log("Landed under thing on new level");
             } FOR_ALL_THINGS_END()
 
             if (is_player()) {

@@ -15,10 +15,6 @@
 
 void Thing::fire_tick (void)
 {_
-    if (g_opt_debug4) {
-        log("Fire tick");
-    }
-
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -35,13 +31,17 @@ void Thing::fire_tick (void)
         return;
     }
 
+    if (g_opt_debug3) {
+        log("Fire tick");
+    }
+
     fpoint at = get_interpolated_mid_at();
     if (is_burnable() || is_combustible() || is_very_combustible()) {
         //
         // Keep going
         //
     } else if (!hates_fire()) {
-        if (g_opt_debug4) {
+        if (g_opt_debug3) {
             log("No, is not fire avoider");
         }
         return;

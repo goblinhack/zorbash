@@ -2212,6 +2212,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_set_stamina_max",                                  (PyCFunction)thing_set_stamina_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_skill_activate",                                   (PyCFunction)thing_skill_activate,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_skill_deactivate",                                 (PyCFunction)thing_skill_deactivate,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_msg",                                              (PyCFunction)thing_msg,                                              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"tile_load_arr",                                          (PyCFunction)tile_load_arr_,                                         METH_VARARGS | METH_KEYWORDS, "load a tile array"},
     {"tile_load_arr_sprites",                                  (PyCFunction)tile_load_arr_sprites_,                                 METH_VARARGS | METH_KEYWORDS, "load a tile array in color and black and white"},
     {"topcon",                                                 (PyCFunction)topcon_,                                                METH_VARARGS,                 "log to the mini console"},

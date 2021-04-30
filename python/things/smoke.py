@@ -1,6 +1,9 @@
 import zx
 import tp
 
+def on_fall(me, x, y):
+    zx.thing_killed(me, "dissipated")
+
 def tp_init(name):
     x = tp.Tp(name)
     x.set_gfx_animated(True)
@@ -12,6 +15,7 @@ def tp_init(name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_removeable_if_out_of_slots(True)
     x.set_is_smoke(True)
+    x.set_on_fall_do("smoke.on_fall()")
     x.set_text_a_or_an("");
     x.set_text_description("Whisps of smoke.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

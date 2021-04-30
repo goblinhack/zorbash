@@ -279,6 +279,7 @@ public:
     bool projectile_anim_exists(void);
     bool projectile_fire_at(const std::string &item, Thingp target);
     bool location_check();
+    void location_check_all_things_at();
     bool location_check_forced();
     bool matches(const std::string& what) const;
     static std::function<int(Thingp)> matches_to_func(const std::string& what);

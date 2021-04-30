@@ -2,6 +2,7 @@ import zx
 import tp
 
 def explode(me, x, y):
+    zx.thing_msg(me, "The wand of energy explodes in a blaze of power.")
     zx.level_spawn_at_thing(me, "explosion_minor")
     zx.level_spawn_fire_around_thing(me, "fire")
     zx.thing_killed(me, "exploded")

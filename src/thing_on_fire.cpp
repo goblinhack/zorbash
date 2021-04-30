@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_thing.h"
@@ -84,6 +85,11 @@ bool Thing::set_on_fire (const std::string &why)
     if (!is_dead) {
         on_fire();
     }
+
+    //
+    // In case the fire is over a chasm
+    //
+    location_check_all_things_at();
 
     return true;
 }
