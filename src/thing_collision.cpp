@@ -1057,6 +1057,10 @@ _
         }
     }
 
+    //
+    // As we want to be able to shove the brazier, we need to check for
+    // collision. However if standing on the thing, allow movement away.
+    //
     if (it->is_brazier()) {
         if (it->mid_at == mid_at) {
             //
