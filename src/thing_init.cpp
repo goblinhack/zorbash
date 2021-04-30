@@ -109,6 +109,13 @@ void Thing::init (Levelp level,
     //
     if (is_active()) {
         set_tick(game->tick_current);
+
+        //
+        // Newly spawned things, don't make them do something immediately
+        // This can lead to recursion
+        //
+        set_tick_last_location_check(game->tick_current);
+        set_tick_last_did_something(game->tick_current);
     }
 
     //

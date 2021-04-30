@@ -55,7 +55,6 @@ def tp_init(name, text_name):
     x.set_is_food_eater(True)
     x.set_is_hunger_insatiable(True)
     x.set_loves_poison(True)
-    x.set_is_interesting(True)
     x.set_is_jumper(True)
     x.set_is_jumper_chance_d1000(200)
     x.set_is_jumper_distance(2)

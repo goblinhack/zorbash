@@ -19,7 +19,7 @@ bool Thing::place (const std::string& what, const point &p)
     // Just in case something is now on top of a chasm or lava
     //
     log("do location checks");
-    FOR_ALL_THINGS(level, t, p.x, p.y) {
+    FOR_ALL_INTERESTING_THINGS(level, t, p.x, p.y) {
         t->location_check();
     } FOR_ALL_THINGS_END()
 

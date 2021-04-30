@@ -14,7 +14,6 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_is_able_to_fall(False)
     x.set_is_active(True)
     x.set_is_described_when_hovering_over(True)
-    x.set_is_interesting(False)
     x.set_light_strength(1)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)

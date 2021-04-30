@@ -49,6 +49,7 @@ void Thing::update_tick (void)
 {
     set_timestamp_unused2(time_get_time_ms_cached());
     set_tick_last_did_something(game->tick_current);
+    set_tick_last_location_check(game->tick_current);
     set_tick(game->tick_current);
 }
 

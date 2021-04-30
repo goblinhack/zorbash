@@ -146,6 +146,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t  timestamp_sleep_end       */ in >> bits(T); my.t->timestamp_sleep_end = load(T);
     /* uint32_t     tick                      */ in >> bits(my.t->tick);
     /* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
+    /* uint32_t     tick_last_location_check  */ in >> bits(my.t->tick_last_location_check);
     /* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);
     /* uint32_t     tick_last_level_change    */ in >> bits(my.t->tick_last_level_change);
     /////////////////////////////////////////////////////////////////////////
@@ -341,7 +342,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     l->all_thing_ids_at = {};
     l->all_thing_ptrs_at = {};
     l->all_things = {};
-    l->all_active_things = {};
+    l->all_interesting_things = {};
     l->all_gc_things = {};
 
     in >> bits(l->timestamp_dungeon_created); old_timestamp_dungeon_created = l->timestamp_dungeon_created;

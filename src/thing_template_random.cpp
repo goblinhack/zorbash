@@ -88,6 +88,10 @@ void tp_random_init (void)
             tp->set_is_stamina_check(true);
         }
 
+        if (tp->is_active()) {
+            tp->set_is_interesting(true);
+        }
+
         if (!tp->is_minion()) {
             if (tp->is_monst()) {tp_monst.push_back(tp); }
         }

@@ -11,7 +11,6 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     x.set_is_acid(True)
     x.set_is_active(True) # for lifespan tick
     x.set_is_hazard(True)
-    x.set_is_interesting(True)
     x.set_light_strength(1)
     x.set_gfx_glows(True)
     x.set_is_loggable_for_important_stuff(False)

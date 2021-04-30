@@ -45,7 +45,6 @@ def tp_init(name, text_name):
     x.set_is_active(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_hunger_insatiable(True)
-    x.set_is_interesting(True)
     x.set_is_jelly(True)
     x.set_is_jelly_baby_eater(True)
     x.set_is_jelly_eater(True)

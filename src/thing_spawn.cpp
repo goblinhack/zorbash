@@ -82,7 +82,7 @@ _
     auto chosen = possible[random_range(0, cands)];
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);
-    c->location_check();
+    c->location_check_forced();
 
     if (c->is_minion()) {
         c->set_minion_owner(this);
@@ -163,7 +163,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
 
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);
-    c->location_check();
+    c->location_check_forced();
 
     if (is_spawner()) {
         c->set_spawned_owner(this);
@@ -230,7 +230,7 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
 
             auto c = level->thing_new(what, fpoint(x, y));
             c->inherit_from(this);
-            c->location_check();
+            c->location_check_forced();
             c->set_timestamp_sleep_end(time_get_time_ms_cached() + dist * 100);
 
             if (is_spawner()) {
@@ -286,7 +286,7 @@ bool Thing::spawn_fire (const std::string& what)
     auto c = level->thing_new(what, chosen);
     c->log("Spawned");
     c->inherit_from(this);
-    c->location_check();
+    c->location_check_forced();
 
     if (is_spawner()) {
         c->set_spawned_owner(this);
@@ -321,7 +321,7 @@ bool Thing::spawn_at_if_possible (const std::string& what)
 
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);
-    c->location_check();
+    c->location_check_forced();
 
     if (is_spawner()) {
         c->set_spawned_owner(this);
@@ -350,7 +350,7 @@ bool Thing::spawn_at (const std::string& what)
 
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);
-    c->location_check();
+    c->location_check_forced();
 
     if (is_spawner()) {
         c->set_spawned_owner(this);

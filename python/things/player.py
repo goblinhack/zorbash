@@ -61,7 +61,6 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_is_corpse_on_death(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_humanoid(True)
-    x.set_is_interesting(True)
     x.set_is_jumper(True)
     x.set_is_jumper_distance(2)
     x.set_is_living(True)

@@ -4,15 +4,22 @@
 //
 
 #include "my_sys.h"
+#include "my_game.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
 
 //
+// This is called if we move onto or fall onto a new location
+//
+// It is also called at the end of all moves for the current tick
+// to handle things that do not move but something has happened to
+// like they caught on fire
+//
 // True on something bad - level change or death
 //
-bool Thing::location_check (void)
+bool Thing::location_check_forced (void)
 {_
     //
     // Prevent interactions that might generate things like smoke.
@@ -71,4 +78,15 @@ bool Thing::location_check (void)
     }
 
     return true;
+}
+
+bool Thing::location_check (void)
+{_
+    if (get_tick_last_location_check() == game->tick_current) {
+        return false;
+    }
+
+    set_tick_last_location_check(game->tick_current);
+
+    return location_check_forced();
 }

@@ -35,7 +35,6 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_collectable(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_droppable(True)
-    x.set_is_interesting(True)
     x.set_is_active(True) # So it can interact with fire
     x.set_is_item(True)
     x.set_is_loggable_for_important_stuff(True)
