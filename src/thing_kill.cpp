@@ -149,7 +149,7 @@ void Thing::kill (Thingp killer, const char *reason)
         if (p) {
             int distance = distance_to_player();
             if (killer && killer->is_fire()) {
-                if (distance < 5) {
+                if ((distance < 5) || (distance == DMAP_IS_WALL)) {
                     TOPCON("The door burns through.");
                 } else if (distance < DMAP_IS_PASSABLE) {
                     TOPCON("The hear the crackling of burning wood.");
@@ -157,12 +157,12 @@ void Thing::kill (Thingp killer, const char *reason)
                     TOPCON("You smell smoke in the air.");
                 }
             } else {
-                if (distance < 5) {
+                if ((distance < 5) || (distance == DMAP_IS_WALL)) {
                     TOPCON("The door crashes open.");
                 } else if (distance < DMAP_IS_PASSABLE) {
                     TOPCON("The hear the noise of a door crashing open.");
                 } else {
-                    TOPCON("You hear a muffled crash.");
+                    TOPCON("You hear a muffled crash. %d", distance);
                 }
             }
             p->update_light();

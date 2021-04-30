@@ -11,6 +11,7 @@
 #include "my_wid_leftbar.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_thing_collect.h"
+#include "my_wid_rightbar.h"
 #include "my_random.h"
 #include "my_thing.h"
 #include "my_ui.h"
@@ -78,6 +79,11 @@ void Game::dead_select (const char *reason)
     if (wid_dead_window) {
         wid_dead_destroy();
     }
+
+    //
+    // Update this prior to pausing the game so we see the final level number
+    //
+    wid_rightbar_init();
 
     if (time_get_time_ms_cached() < level->player->get_timestamp_move_end()) {
         //
