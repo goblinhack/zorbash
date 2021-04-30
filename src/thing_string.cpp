@@ -42,16 +42,21 @@ std::string Thing::to_string (void) const
                                is_falling ? "/falling" : "",
                                mid_at.x, mid_at.y));
     } else if (get_health_max() || is_active()) {_
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s%s T%u @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s T%u @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id, tpp->name().c_str(),
-                               is_dead ? "/dead" : "",
-                               is_on_fire() ? "/onfire" : "",
-                               is_hidden ? "/hidden" : "",
-                               is_jumping ? "/jumping" : "",
-                               is_falling ? "/falling" : "",
+                               is_dead                       ? "/dead" : "",
+                               is_on_fire()                  ? "/onfire" : "",
+                               is_hidden                     ? "/hidden" : "",
+                               is_jumping                    ? "/jumping" : "",
+                               is_falling                    ? "/falling" : "",
+                               is_changing_level             ? "/chg-level" : "",
+                               is_waiting_to_ascend_dungeon  ? "/ascending" : "",
+                               is_waiting_to_descend_sewer   ? "/descending" : "",
+                               is_waiting_to_descend_dungeon ? "/des-sewer" : "",
+                               is_waiting_to_ascend_sewer    ? "/asc-sewer" : "",
                                get_tick_const(),
                                mid_at.x, mid_at.y));
     } else {_
