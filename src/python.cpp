@@ -1540,7 +1540,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr88)
     TP_SET_DECL(is_rrr89)
     TP_SET_DECL(is_rrr90)
-    TP_SET_DECL(is_rrr91)
+    TP_SET_DECL(is_barrel)
     TP_SET_DECL(is_burnable)
     TP_SET_DECL(is_wand_eater)
     TP_SET_DECL(loves_fire)
@@ -1881,7 +1881,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr89_at",                                      (PyCFunction)level_is_rrr89_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr8_at",                                       (PyCFunction)level_is_rrr8_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr90_at",                                      (PyCFunction)level_is_rrr90_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr91_at",                                      (PyCFunction)level_is_rrr91_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_barrel_at",                                      (PyCFunction)level_is_barrel_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_burnable_at",                                      (PyCFunction)level_is_burnable_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr99_at",                                      (PyCFunction)level_is_rrr99_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr9_at",                                       (PyCFunction)level_is_rrr9_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2165,7 +2165,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr89",                                         (PyCFunction)thing_is_rrr89,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr9",                                          (PyCFunction)thing_is_rrr9,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr90",                                         (PyCFunction)thing_is_rrr90,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr91",                                         (PyCFunction)thing_is_rrr91,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_barrel",                                         (PyCFunction)thing_is_barrel,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_burnable",                                         (PyCFunction)thing_is_burnable,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr99",                                         (PyCFunction)thing_is_rrr99,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_secret_door",                                   (PyCFunction)thing_is_secret_door,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},

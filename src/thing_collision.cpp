@@ -1045,6 +1045,13 @@ _
     //
     // Sword use hits?
     //
+    if (it->is_barrel()) {
+        if (things_overlap_attack(me, A_at, it)) {
+            log("Yes; overlaps barrel");
+            return true;
+        }
+    }
+
     if (me_tp->gfx_attack_anim()) {
         if (it_tp->is_monst()) {
             //

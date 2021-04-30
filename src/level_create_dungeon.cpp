@@ -767,9 +767,15 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 
-            if (d->is_brazier(x, y))          { tp = tp_random_brazier(); }
+            if (d->is_brazier(x, y)) {
+                tp = tp_random_brazier();
+            }
 
-            if (d->is_treasure(x, y))         { 
+            if (d->is_barrel(x, y)) {
+                tp = tp_random_barrel();
+            }
+
+            if (d->is_treasure(x, y)) { 
                 if (always_give_treasure) {
                     tp = tp_random_treasure(); 
                 } else {

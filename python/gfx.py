@@ -8199,7 +8199,7 @@ def init_tiles2():
       "door1.25",
       "door1.dead",
       "door1.open",
-      "",
+      "barrel",
       "",
       "",
       "",

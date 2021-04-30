@@ -222,6 +222,7 @@ _
         it->is_rock() ||
         it->is_door() ||
         it->is_brazier() ||
+        it->is_barrel() ||
         it->is_player() ||
         it->is_item()) {
 

@@ -122,6 +122,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_wand                  ||
                            m.is_secret_door           ||
                            m.is_brazier               ||
+                           m.is_barrel                ||
                            m.is_trap                  ||
                            m.is_shallow_water         ||
                            m.is_deep_water               
@@ -176,6 +177,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_potion                ||
                     m.is_wand                  ||
                     m.is_brazier               ||
+                    m.is_barrel                ||
                     m.is_trap                  ||
                     m.is_descend_sewer) {
                     obj_strings += c;

@@ -296,6 +296,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_secret_door            = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_smoke                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_brazier                = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_barrel                 = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_treasure               = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_wall                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_gfx_water                 = (bits64 >> shift) & 1; shift++;
@@ -397,6 +398,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};         */ in >> bits(my.t->_is_secret_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};               */ in >> bits(my.t->_is_smoke);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};             */ in >> bits(my.t->_is_brazier);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_barrel {};              */ in >> bits(my.t->_is_barrel);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};            */ in >> bits(my.t->_is_treasure);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};                */ in >> bits(my.t->_is_wall);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};              */ in >> bits(my.t->_gfx_water);

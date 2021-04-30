@@ -34,7 +34,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_able_to_fall(True)
     x.set_is_active(True) # So it can interact with fire
     x.set_is_collectable(True)
-    x.set_is_combustible(True)
+    x.set_is_very_combustible(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_droppable(True)
     x.set_is_item(True)
@@ -45,7 +45,6 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_treasure(True)
     x.set_is_treasure_class_b(True)
     x.set_is_usable(True)
-    x.set_is_very_combustible(True)
     x.set_is_wand(True)
     x.set_long_text_description("Discharges a powerful blast of fire upon an unwitting recipient...")
     x.set_normal_placement_rules(True)
