@@ -80,7 +80,7 @@ zx.map_load_room(entrance=True, room_data=[
 ".....C...Cb$ ","  C......C.  ","    .        ","  !s...C..   "," C......   . ",
 "CCCCCCCCCCC. ","  C..C.C.C.  ","    .   m$   ","    ...CCC   "," CC.C.. .... ",
 "CCC.CCCCCCC. ","    CCSC.C.  ","    .....    ","  ........   "," CCCC.. .    ",
-"Cb.........m ","     CCC.C.  ","             "," ..  .....   ","  CCCC. ...m ",
+"C/.........m ","     CCC.C.  ","             "," ..  .....   ","  CCCC. ...m ",
 "      v    m ","       CCCm  ","             ","      ...    ","             ",
 ])
 zx.map_load_room(entrance=True, room_data=[
