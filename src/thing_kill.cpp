@@ -143,7 +143,12 @@ void Thing::kill (Thingp killer, const char *reason)
         level_push();
         auto p = level->player;
         if (p) {
-            TOPCON("The door crashes open.");
+            int distance = get(&level->player_dmap.val, (int)mid_at.x, (int)mid_at.y);
+            if (distance < 5) {
+                TOPCON("The door crashes open.");
+            } else if (distance < DMAP_IS_PASSABLE) {
+                TOPCON("The hear the noise of a door crashing open.");
+            }
             p->update_light();
         }
     }
