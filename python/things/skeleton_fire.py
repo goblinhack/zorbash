@@ -1,22 +1,23 @@
 import zx
 import tp
+import random
 
 def on_fire_at(me, target, x, y): # Return True on doing an action
-    if random.randint(1, 10) < 5:
+    if random.randint(1, 100) < 10:
         zx.thing_fire_at(me, "projectile_fire", target)
+        zx.thing_sound_play_channel(me, zx.CHANNEL_EXPLOSION, "explosion_b")
         return True
     return False
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_scent_distance(10)
+    x.set_ai_vision_distance(8)
     x.set_attack_eater(True)
     x.set_attack_lunge(True)
     x.set_attack_meat(True)
     x.set_attack_shove(True)
     x.set_attack_shove_chance_d1000(200)
-    x.set_hates_acid(True)
-    x.set_hates_water(100)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
@@ -24,7 +25,7 @@ def tp_init(name, text_name):
     x.set_collision_radius(0.40)
     x.set_damage_bite_dice("1d4")
     x.set_damage_doubled_from_water(True)
-    x.set_damage_melee_dice("1d6")
+    x.set_damage_melee_dice("1d4")
     x.set_gfx_anim_attack("attack_claws")
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
@@ -33,10 +34,13 @@ def tp_init(name, text_name):
     x.set_gfx_health_bar_shown(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_hates_acid(True)
+    x.set_hates_water(100)
     x.set_health_hunger_pct(95)
     x.set_health_initial_dice("2")
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(True)
+    x.set_is_able_to_fire_at(True)
     x.set_is_active(True)
     x.set_is_attackable_by_monst(True)
     x.set_is_attackable_by_player(True)
@@ -44,12 +48,12 @@ def tp_init(name, text_name):
     x.set_is_corpse_on_death(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_fearless(True)
+    x.set_is_fire(True)
     x.set_is_hunger_insatiable(True)
-    x.set_loves_fire(True)
-    x.set_loves_poison(True)
     x.set_is_intelligent(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
+    x.set_is_minion(True)
     x.set_is_monst(True)
     x.set_is_moveable(True)
     x.set_is_resurrectable(True)
@@ -60,10 +64,13 @@ def tp_init(name, text_name):
     x.set_light_color("yellow")
     x.set_light_strength(2)
     x.set_long_text_description("A collection of tortured burning bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
+    x.set_loves_fire(True)
+    x.set_loves_poison(True)
+    x.set_minion_leash_distance(6)
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
-    x.set_on_fire_at_do("skelton_fire.on_fire_at()")
+    x.set_on_fire_at_do("skeleton_fire.on_fire_at()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_resurrect_dice("1d10+30")
     x.set_stat_attack(10) # 10, means no bonus

@@ -63,7 +63,7 @@ bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp targe
         return false;
     }
 
-    level->new_projectile(projectile->id, start, end, 500);
+    level->new_projectile(projectile->id, start, end, 200);
 
     on_use(projectile, target);
 
