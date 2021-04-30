@@ -86,27 +86,8 @@ void tp_random_init (void)
             if (tp->is_treasure_class_c()) { tp_weapon_class_c.push_back(tp); }
         }
 
-        if (tp->stamina()) {
-            tp->set_is_stamina_check(true);
-        }
-
-        if (tp->is_active()) {
-            tp->set_is_interesting(true);
-        }
-
-        if (tp->is_very_combustible()) {
-            tp->set_is_combustible(true);
-        }
-
         if (!tp->is_minion()) {
             if (tp->is_monst()) {tp_monst.push_back(tp); }
-        }
-
-        if (tp->is_able_to_fall()) {
-            if (!tp->is_interesting()) {
-                ERR("Tp %s needs is_interesting set if it is_able_to_fall",
-                    tp->name().c_str());
-            }
         }
     }
 }

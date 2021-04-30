@@ -9,7 +9,11 @@
 #ifndef _MY_SOUND_H_
 #define _MY_SOUND_H_
 
+#include <SDL_mixer.h>
 #include <string>
+#include "my_sys.h"
+#include "my_main.h"
+#include "my_ptrcheck.h"
 
 class sound;
 using soundp = class sound *;
@@ -20,10 +24,29 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
 bool sound_load(float volume, const char *file, const char *alias);
 bool sound_find(const std::string &alias);
 bool sound_play(const std::string &alias);
-bool sound_play_at(const std::string &alias, int x, int y);
 bool sound_play_channel(int chan, const std::string &alias);
-bool sound_play_channel_at(int chan, const std::string &alias, int x, int y);
 void sound_halt(void);
+
+class sound {
+public:
+    sound (std::string alias) : alias(alias)
+    {
+    }
+
+    ~sound (void)
+    {
+        Mix_FreeChunk(chunk);
+        myfree(data);
+    }
+
+    std::string alias;
+    Mix_Chunk *chunk = {};
+    unsigned char *data = {};
+    int32_t len = {};
+    float volume {};
+};
+
+extern std::map<std::string, class sound *> all_sound;
 
 enum {
     CHANNEL_MISC,

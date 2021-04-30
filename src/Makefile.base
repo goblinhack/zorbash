@@ -67,10 +67,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/globals.o                     \
     $(OBJDIR)/hexdump.o                     \
     $(OBJDIR)/laser.o                       \
-    $(OBJDIR)/projectile.o                  \
     $(OBJDIR)/level.o                       \
     $(OBJDIR)/level_create.o                \
-    $(OBJDIR)/level_flood.o                 \
     $(OBJDIR)/level_create_dungeon.o        \
     $(OBJDIR)/level_create_sewer.o          \
     $(OBJDIR)/level_cursor.o                \
@@ -91,6 +89,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_display_wall.o          \
     $(OBJDIR)/level_display_water.o         \
     $(OBJDIR)/level_fini.o                  \
+    $(OBJDIR)/level_flood.o                 \
     $(OBJDIR)/level_gc.o                    \
     $(OBJDIR)/level_heatmap.o               \
     $(OBJDIR)/level_id.o                    \
@@ -115,6 +114,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/pcg_basic.o                   \
     $(OBJDIR)/player.o                      \
     $(OBJDIR)/player_dmap.o                 \
+    $(OBJDIR)/projectile.o                  \
     $(OBJDIR)/ptrcheck.o                    \
     $(OBJDIR)/py_level.o                    \
     $(OBJDIR)/py_log.o                      \
@@ -204,7 +204,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_jump.o                  \
     $(OBJDIR)/thing_kill.o                  \
     $(OBJDIR)/thing_laser.o                 \
-    $(OBJDIR)/thing_projectile.o            \
     $(OBJDIR)/thing_lava.o                  \
     $(OBJDIR)/thing_level_change.o          \
     $(OBJDIR)/thing_level_enter.o           \
@@ -227,11 +226,13 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_owner.o                 \
     $(OBJDIR)/thing_place.o                 \
     $(OBJDIR)/thing_poison.o                \
+    $(OBJDIR)/thing_projectile.o            \
     $(OBJDIR)/thing_rest.o                  \
     $(OBJDIR)/thing_resurrect.o             \
     $(OBJDIR)/thing_shove.o                 \
     $(OBJDIR)/thing_skill.o                 \
     $(OBJDIR)/thing_skillbox.o              \
+    $(OBJDIR)/thing_sound.o                 \
     $(OBJDIR)/thing_spawn.o                 \
     $(OBJDIR)/thing_spawned_owner.o         \
     $(OBJDIR)/thing_stamina.o               \
@@ -239,6 +240,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_string.o                \
     $(OBJDIR)/thing_target.o                \
     $(OBJDIR)/thing_template.o              \
+    $(OBJDIR)/thing_template_fixup.o        \
     $(OBJDIR)/thing_template_api.o          \
     $(OBJDIR)/thing_template_random.o       \
     $(OBJDIR)/thing_terrain.o               \

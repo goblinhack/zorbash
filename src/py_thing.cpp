@@ -469,15 +469,10 @@ PyObject *thing_msg (PyObject *obj, PyObject *args, PyObject *keywds)
     //
     // If not reachable, suppress the msg
     //
-    if (game->level->player) {
-        int distance = get(&game->level->player_dmap.val, 
-                           (int)owner->mid_at.x, (int)owner->mid_at.y);
-        if (distance < DMAP_IS_PASSABLE) {
-            TOPCON("%s", msg);
-        }
-    } else {
+    if (owner->distance_to_player() < DMAP_IS_PASSABLE) {
         TOPCON("%s", msg);
     }
+
     Py_RETURN_NONE;	
 }
 

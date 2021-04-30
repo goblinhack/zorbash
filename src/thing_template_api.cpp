@@ -777,7 +777,7 @@ void Tp::set_weapon_carry_anim(const std::string &v)     { _weapon_carry_anim = 
 
 #define ENABLE_STRICT_TURN_BASED
 #ifdef ENABLE_STRICT_TURN_BASED
-int Tp::move_speed_ms(void) const { return 150; }
+int Tp::move_speed_ms(void) const { return THING_MOVE_SPEED_MS; }
 #else
 int Tp::move_speed_ms(void) const { return _move_speed_ms; }
 #endif
