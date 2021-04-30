@@ -1043,10 +1043,26 @@ _
     }
 
     //
-    // Sword use hits?
+    // As we want to be able to shove the barrel, we need to check for
+    // collision. However if standing on the thing, allow movement away.
     //
     if (it->is_barrel()) {
-        if (things_overlap_attack(me, A_at, it)) {
+        if (it->mid_at == mid_at) {
+            //
+            // Allow movement away. This happens if you jump onto a barrel.
+            //
+        } else if (things_overlap_attack(me, A_at, it)) {
+            log("Yes; overlaps barrel");
+            return true;
+        }
+    }
+
+    if (it->is_brazier()) {
+        if (it->mid_at == mid_at) {
+            //
+            // Allow movement away. This happens if you jump onto a brazier.
+            //
+        } else if (things_overlap_attack(me, A_at, it)) {
             log("Yes; overlaps barrel");
             return true;
         }

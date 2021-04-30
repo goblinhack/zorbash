@@ -4,7 +4,7 @@ import random
 
 
 def explode(me, x, y):
-    zx.thing_msg(me, "The wand of fire explodes, predictably in a fireball.")
+    zx.thing_msg(me, "The oil filled barrel explodes. Health and safety have been alerted.")
     zx.level_spawn_at_thing(me, "explosion_major")
     zx.level_spawn_fire_around_thing(me, "fire")
     zx.level_spawn_at_thing(me, "fire")

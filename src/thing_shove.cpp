@@ -126,9 +126,17 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     } else {
         if (is_player()) {
             if (it->is_brazier()) {
-                TOPCON("You knock over %s!", it->text_the().c_str());
+                if (it->is_dead) {
+                    TOPCON("You kick the brazier around. Why though?");
+                } else {
+                    TOPCON("You knock over %s!", it->text_the().c_str());
+                }
             } else {
-                TOPCON("You shove %s!", it->text_the().c_str());
+                if (it->is_dead) {
+                    TOPCON("You kick %s!", it->text_the().c_str());
+                } else {
+                    TOPCON("You shove %s!", it->text_the().c_str());
+                }
             }
         } else if (it->is_player()) {
             TOPCON("%s shoves you!", text_The().c_str());
