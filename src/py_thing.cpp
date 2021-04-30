@@ -476,10 +476,90 @@ PyObject *thing_msg (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;	
 }
 
+PyObject *thing_sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    char *name = 0;
+    uint32_t owner_id = 0;	
+
+    static char *kwlist[] = {(char*)"owner", (char*) "name", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &name)) {
+        ERR("thing_sound_play: bad arguments");
+        Py_RETURN_FALSE;
+    }
+
+    if (!owner_id) {	
+        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp owner = game->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!name) {
+        ERR("thing_sound_play: missing name attr");
+        Py_RETURN_FALSE;
+    }
+
+    PY_DBG("thing_sound_play(name=%s)", name);
+
+    std::string alias = name;
+    if (!owner->thing_sound_play(alias)) {
+        Py_RETURN_FALSE;
+    }
+
+    Py_RETURN_TRUE;
+}
+
+PyObject *thing_sound_play_channel_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    uint32_t owner_id = 0;	
+    char *name = 0;
+    int channel = 0;
+
+    static char *kwlist[] = {(char*)"owner", (char*) "channel", (char*) "name", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iis", kwlist, &owner_id, &channel, &name)) {
+        ERR("thing_sound_play_channel: bad arguments");
+        Py_RETURN_FALSE;
+    }
+
+    Thingp owner = game->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
+
+    if (!name) {
+        ERR("thing_sound_play: missing name attr");
+        Py_RETURN_FALSE;
+    }
+    if (!name) {
+        ERR("thing_sound_play_channel: missing name attr");
+        Py_RETURN_FALSE;
+    }
+
+    PY_DBG("sound_play_channel(channel=%d, name=%s)", channel, name);
+
+    std::string alias = name;
+    if (!owner->thing_sound_play_channel(channel, alias)) {
+        Py_RETURN_FALSE;
+    }
+
+    Py_RETURN_TRUE;
+}
+
+THING_BODY_GET_BOOL(level_is_able_to_fire_at, is_able_to_fire_at)
+THING_BODY_GET_BOOL(level_is_attackable_by_monst, is_attackable_by_monst)
+THING_BODY_GET_BOOL(level_is_attackable_by_player, is_attackable_by_player)
 THING_BODY_GET_BOOL(thing_ai_vision_distance, ai_vision_distance)
+THING_BODY_GET_BOOL(thing_gfx_flickers, gfx_flickers)
+THING_BODY_GET_BOOL(thing_gfx_water, gfx_water)
 THING_BODY_GET_BOOL(thing_is_able_to_change_levels, is_able_to_change_levels)
 THING_BODY_GET_BOOL(thing_is_able_to_fall, is_able_to_fall)
-THING_BODY_GET_BOOL(level_is_able_to_fire_at, is_able_to_fire_at)
 THING_BODY_GET_BOOL(thing_is_able_to_see_through_doors, is_able_to_see_through_doors)
 THING_BODY_GET_BOOL(thing_is_able_to_walk_through_walls, is_able_to_walk_through_walls)
 THING_BODY_GET_BOOL(thing_is_acid, is_acid)
@@ -489,16 +569,15 @@ THING_BODY_GET_BOOL(thing_is_alive_monst, is_alive_monst)
 THING_BODY_GET_BOOL(thing_is_always_hit, is_always_hit)
 THING_BODY_GET_BOOL(thing_is_ascend_dungeon, is_ascend_dungeon)
 THING_BODY_GET_BOOL(thing_is_ascend_sewer, is_ascend_sewer)
-THING_BODY_GET_BOOL(level_is_attackable_by_monst, is_attackable_by_monst)
-THING_BODY_GET_BOOL(level_is_attackable_by_player, is_attackable_by_player)
 THING_BODY_GET_BOOL(thing_is_auto_collect_item, is_auto_collect_item)
 THING_BODY_GET_BOOL(thing_is_bag, is_bag)
+THING_BODY_GET_BOOL(thing_is_barrel, is_barrel)
 THING_BODY_GET_BOOL(thing_is_bleeder, is_bleeder)
 THING_BODY_GET_BOOL(thing_is_blood, is_blood)
 THING_BODY_GET_BOOL(thing_is_blood_splatter, is_blood_splatter)
 THING_BODY_GET_BOOL(thing_is_bloodied, is_bloodied)
 THING_BODY_GET_BOOL(thing_is_brazier, is_brazier)
-THING_BODY_GET_BOOL(thing_is_rrr99, is_rrr99)
+THING_BODY_GET_BOOL(thing_is_burnable, is_burnable)
 THING_BODY_GET_BOOL(thing_is_carrier_of_treasure_class_a, is_carrier_of_treasure_class_a)
 THING_BODY_GET_BOOL(thing_is_carrier_of_treasure_class_b, is_carrier_of_treasure_class_b)
 THING_BODY_GET_BOOL(thing_is_carrier_of_treasure_class_c, is_carrier_of_treasure_class_c)
@@ -539,13 +618,11 @@ THING_BODY_GET_BOOL(thing_is_explosion, is_explosion)
 THING_BODY_GET_BOOL(thing_is_extreme_hazard, is_extreme_hazard)
 THING_BODY_GET_BOOL(thing_is_fearless, is_fearless)
 THING_BODY_GET_BOOL(thing_is_fire, is_fire)
-THING_BODY_GET_BOOL(thing_is_very_combustible, is_very_combustible)
 THING_BODY_GET_BOOL(thing_is_floating, is_floating)
 THING_BODY_GET_BOOL(thing_is_floor, is_floor)
 THING_BODY_GET_BOOL(thing_is_floor_deco, is_floor_deco)
 THING_BODY_GET_BOOL(thing_is_food, is_food)
 THING_BODY_GET_BOOL(thing_is_food_eater, is_food_eater)
-THING_BODY_GET_BOOL(thing_gfx_water, gfx_water)
 THING_BODY_GET_BOOL(thing_is_gold, is_gold)
 THING_BODY_GET_BOOL(thing_is_hazard, is_hazard)
 THING_BODY_GET_BOOL(thing_is_humanoid, is_humanoid)
@@ -570,7 +647,6 @@ THING_BODY_GET_BOOL(thing_is_key, is_key)
 THING_BODY_GET_BOOL(thing_is_killed_on_hit_or_miss, is_killed_on_hit_or_miss)
 THING_BODY_GET_BOOL(thing_is_killed_on_hitting, is_killed_on_hitting)
 THING_BODY_GET_BOOL(thing_is_laser, is_laser)
-THING_BODY_GET_BOOL(thing_is_target_select_automatically_when_chosen, is_target_select_automatically_when_chosen)
 THING_BODY_GET_BOOL(thing_is_lava, is_lava)
 THING_BODY_GET_BOOL(thing_is_light_blocker, is_light_blocker)
 THING_BODY_GET_BOOL(thing_is_living, is_living)
@@ -589,7 +665,6 @@ THING_BODY_GET_BOOL(thing_is_no_tile, is_no_tile)
 THING_BODY_GET_BOOL(thing_is_on_fire, is_on_fire)
 THING_BODY_GET_BOOL(thing_is_player, is_player)
 THING_BODY_GET_BOOL(thing_is_poison, is_poison)
-THING_BODY_GET_BOOL(thing_loves_poison, loves_poison)
 THING_BODY_GET_BOOL(thing_is_potion, is_potion)
 THING_BODY_GET_BOOL(thing_is_potion_eater, is_potion_eater)
 THING_BODY_GET_BOOL(thing_is_projectile, is_projectile)
@@ -687,11 +762,7 @@ THING_BODY_GET_BOOL(thing_is_rrr88, is_rrr88)
 THING_BODY_GET_BOOL(thing_is_rrr89, is_rrr89)
 THING_BODY_GET_BOOL(thing_is_rrr9, is_rrr9)
 THING_BODY_GET_BOOL(thing_is_rrr90, is_rrr90)
-THING_BODY_GET_BOOL(thing_is_barrel, is_barrel)
-THING_BODY_GET_BOOL(thing_is_burnable, is_burnable)
-THING_BODY_GET_BOOL(thing_is_wand_eater, is_wand_eater)
-THING_BODY_GET_BOOL(thing_loves_fire, loves_fire)
-THING_BODY_GET_BOOL(thing_gfx_flickers, gfx_flickers)
+THING_BODY_GET_BOOL(thing_is_rrr99, is_rrr99)
 THING_BODY_GET_BOOL(thing_is_secret_door, is_secret_door)
 THING_BODY_GET_BOOL(thing_is_sewer_wall, is_sewer_wall)
 THING_BODY_GET_BOOL(thing_is_shallow_water, is_shallow_water)
@@ -703,6 +774,7 @@ THING_BODY_GET_BOOL(thing_is_smoke, is_smoke)
 THING_BODY_GET_BOOL(thing_is_spawner, is_spawner)
 THING_BODY_GET_BOOL(thing_is_stamina_check, is_stamina_check)
 THING_BODY_GET_BOOL(thing_is_steal_item_chance_d1000, is_steal_item_chance_d1000)
+THING_BODY_GET_BOOL(thing_is_target_select_automatically_when_chosen, is_target_select_automatically_when_chosen)
 THING_BODY_GET_BOOL(thing_is_temporary_bag, is_temporary_bag)
 THING_BODY_GET_BOOL(thing_is_throwable, is_throwable)
 THING_BODY_GET_BOOL(thing_is_thrown_automatically_when_chosen, is_thrown_automatically_when_chosen)
@@ -716,14 +788,18 @@ THING_BODY_GET_BOOL(thing_is_undead, is_undead)
 THING_BODY_GET_BOOL(thing_is_usable, is_usable)
 THING_BODY_GET_BOOL(thing_is_used_automatically_when_selected, is_used_automatically_when_selected)
 THING_BODY_GET_BOOL(thing_is_used_when_thrown, is_used_when_thrown)
+THING_BODY_GET_BOOL(thing_is_very_combustible, is_very_combustible)
 THING_BODY_GET_BOOL(thing_is_visible, is_visible)
 THING_BODY_GET_BOOL(thing_is_wall, is_wall)
 THING_BODY_GET_BOOL(thing_is_wall_dungeon, is_wall_dungeon)
 THING_BODY_GET_BOOL(thing_is_wand, is_wand)
+THING_BODY_GET_BOOL(thing_is_wand_eater, is_wand_eater)
 THING_BODY_GET_BOOL(thing_is_water, is_water)
 THING_BODY_GET_BOOL(thing_is_water_lover, is_water_lover)
 THING_BODY_GET_BOOL(thing_is_weapon, is_weapon)
 THING_BODY_GET_BOOL(thing_is_weapon_wielder, is_weapon_wielder)
+THING_BODY_GET_BOOL(thing_loves_fire, loves_fire)
+THING_BODY_GET_BOOL(thing_loves_poison, loves_poison)
 THING_BODY_GET_INT(thing_get_current_damage, get_current_damage)
 THING_BODY_GET_INT(thing_get_health, get_health)
 THING_BODY_GET_INT(thing_get_health_max, get_health_max)
