@@ -279,6 +279,7 @@ public:
     bool projectile_anim_exists(void);
     bool projectile_fire_at(const std::string &item, Thingp target);
     bool location_check();
+    bool location_check_forced();
     bool matches(const std::string& what) const;
     static std::function<int(Thingp)> matches_to_func(const std::string& what);
     bool move(fpoint future_pos);
@@ -1068,6 +1069,8 @@ public:
     uint32_t decr_tick(void);
     uint32_t decr_tick_last_did_something(uint32_t);
     uint32_t decr_tick_last_did_something(void);
+    uint32_t decr_tick_last_location_check(uint32_t);
+    uint32_t decr_tick_last_location_check(void);
     uint32_t decr_tick_last_escape(uint32_t);
     uint32_t decr_tick_last_escape(void);
     uint32_t decr_tick_last_level_change(uint32_t);
@@ -1077,6 +1080,7 @@ public:
     uint32_t get_tick(void);
     uint32_t get_tick_const(void) const;
     uint32_t get_tick_last_did_something(void) const;
+    uint32_t get_tick_last_location_check(void) const;
     uint32_t get_tick_last_escape(void) const;
     uint32_t get_tick_last_level_change(void) const;
     uint32_t get_tick_resurrect_when(void) const;
@@ -1084,6 +1088,8 @@ public:
     uint32_t incr_tick(void);
     uint32_t incr_tick_last_did_something(uint32_t);
     uint32_t incr_tick_last_did_something(void);
+    uint32_t incr_tick_last_location_check(uint32_t);
+    uint32_t incr_tick_last_location_check(void);
     uint32_t incr_tick_last_escape(uint32_t);
     uint32_t incr_tick_last_escape(void);
     uint32_t incr_tick_last_level_change(uint32_t);
@@ -1092,6 +1098,7 @@ public:
     uint32_t incr_tick_resurrect_when(void);
     uint32_t set_tick(uint32_t);
     uint32_t set_tick_last_did_something(uint32_t);
+    uint32_t set_tick_last_location_check(uint32_t);
     uint32_t set_tick_last_escape(uint32_t);
     uint32_t set_tick_last_level_change(uint32_t);
     uint32_t set_tick_resurrect_when(int);

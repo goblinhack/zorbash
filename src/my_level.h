@@ -121,8 +121,22 @@ public:
     Thingp                     highlight = {};
     Thingp                     hover_over = {};
 
+    //
+    // Everything thing on the level. Not all in the game, just this level.
+    //
     std::map<ThingId, Thingp> all_things {};
-    std::map<ThingId, Thingp> all_active_things {};
+
+    //
+    // For all things that move, like monsters, or those that do not, like
+    // wands, and even those that do not move but can be destroyed, like
+    // walls. Omits things like floors, corridors, the grid; those that
+    // generally do nothing or are hidden.
+    //
+    std::map<ThingId, Thingp> all_interesting_things {};
+
+    //
+    // All things that are to be destroyed
+    //
     std::map<ThingId, Thingp> all_gc_things {};
 
     //
@@ -237,6 +251,27 @@ public:
 
     #define FOR_ALL_THINGS_END() } }
 
+    #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL(t) {                \
+        auto c = all_interesting_things;                            \
+        auto i = all_interesting_things.begin();                    \
+        while (i != all_interesting_things.end()) {                 \
+            auto t = i->second;                                     \
+                                                                    \
+            ThingId next_key {};                                    \
+            i++;                                                    \
+            if (i != all_interesting_things.end()) {                \
+                next_key = i->first;                                \
+            }                                                       \
+                                                                    \
+            verify(t);                                              \
+
+    #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END()               \
+            if (i == all_interesting_things.end()) {                \
+                break;                                              \
+            }                                                       \
+            i = all_interesting_things.find(next_key);              \
+        } }
+
     //
     // NOTE: get is a lot safer than getptr, if the vector gets resized somehow
     // during walks
@@ -269,8 +304,8 @@ public:
                 }                                                   \
 
     //
-    // Things that move around and things that do not, but are interesting,
-    // like food
+    // Things that move around and things that do not, but are interesting
+    // like food or walls that can be destroyed
     //
     #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)              \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \

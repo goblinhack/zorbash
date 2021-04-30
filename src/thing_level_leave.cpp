@@ -41,10 +41,10 @@ void Thing::level_leave (void)
         }
     }
 
-    if (is_active()) {
-        auto f = level->all_active_things.find(id);
-        if (f != level->all_active_things.end()) {
-            level->all_active_things.erase(f);
+    if (is_interesting()) {
+        auto f = level->all_interesting_things.find(id);
+        if (f != level->all_interesting_things.end()) {
+            level->all_interesting_things.erase(f);
         }
     }
 

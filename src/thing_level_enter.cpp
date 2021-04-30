@@ -17,8 +17,8 @@ void Thing::level_enter (void)
         err("Failed to insert into thing map");
     }
 
-    if (is_active()) {
-        auto result = level->all_active_things.insert(std::pair(id, this));
+    if (is_interesting()) {
+        auto result = level->all_interesting_things.insert(std::pair(id, this));
         if (result.second == false) {
             err("Failed to insert into active thing map");
         }

@@ -56,7 +56,6 @@ def tp_init(name, text_name):
     x.set_is_corpse_on_death(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_intelligent(True)
-    x.set_is_interesting(True)
     x.set_is_item_carrier(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)

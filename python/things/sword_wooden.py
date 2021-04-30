@@ -24,7 +24,6 @@ def init_swing(name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(True)
     x.set_is_active(True)
-    x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_moveable(True)

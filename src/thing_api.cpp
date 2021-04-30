@@ -3022,6 +3022,54 @@ uint32_t Thing::incr_tick_last_did_something (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_last_location_check
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_tick_last_location_check (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->tick_last_location_check);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_tick_last_location_check (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_location_check = v);
+}
+
+uint32_t Thing::decr_tick_last_location_check (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_location_check -= v);
+}
+
+uint32_t Thing::incr_tick_last_location_check (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_location_check += v);
+}
+
+uint32_t Thing::decr_tick_last_location_check (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_location_check--);
+}
+
+uint32_t Thing::incr_tick_last_location_check (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_location_check++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // tick_last_escape
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_tick_last_escape (void) const

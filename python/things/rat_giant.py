@@ -54,7 +54,6 @@ def tp_init(name, text_name):
     x.set_is_described_when_hovering_over(True)
     x.set_is_food_eater(True)
     x.set_is_hunger_insatiable(True)
-    x.set_is_interesting(True)
     x.set_is_jumper(True)
     x.set_is_jumper_chance_d1000(50)
     x.set_is_jumper_distance(2)

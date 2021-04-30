@@ -35,6 +35,7 @@ void Thing::fire_tick (void)
         return;
     }
 
+    fpoint at = get_interpolated_mid_at();
     if (is_burnable() || is_combustible() || is_very_combustible()) {
         //
         // Keep going
@@ -43,27 +44,6 @@ void Thing::fire_tick (void)
         if (g_opt_debug4) {
             log("No, is not fire avoider");
         }
-        return;
-    }
-
-    fpoint at = get_interpolated_mid_at();
-
-    if (is_on_fire()) {
-        return;
-    }
-
-    if (is_very_combustible() && level->heatmap(at.x, at.y)) {
-        //
-        // Too close to the flames
-        //
-    } else if (is_combustible() && (level->heatmap(at.x, at.y) > 1)) {
-        //
-        // Too close to the flames
-        //
-    } else if (!level->is_fire(at.x, at.y)) {
-        //
-        // No fire here.
-        //
         return;
     }
 
@@ -91,6 +71,17 @@ void Thing::fire_tick (void)
         } else {
             hit = false;
         }
+    } else if (is_very_combustible() && level->heatmap(at.x, at.y)) {
+        //
+        // Too close to the flames
+        //
+topcon("combust map %d", level->heatmap(at.x, at.y));
+        hit = true;
+    } else if (is_combustible() && (level->heatmap(at.x, at.y) > 1)) {
+        //
+        // Too close to the flames
+        //
+        hit = ((int)random_range(0, 100) < 70);
     } else if (level->is_fire(at.x, at.y)) {
         //
         // Give the player a chance
@@ -99,19 +90,10 @@ void Thing::fire_tick (void)
             auto smoke = level->thing_new("smoke", at);
             smoke->set_lifespan(random_range(1, 10));
 
-            if (is_very_combustible()) {
-                hit = true;
-            } else if (is_combustible()) {
-                hit = ((int)random_range(0, 100) < 70);
-            } else {
-                hit = ((int)random_range(0, 100) < 20);
-            }
-
+            hit = ((int)random_range(0, 100) < 20);
             if (hit) {
-                if (set_on_fire("caught fire")) {
-                    if (is_player()) {
-                        TOPCON("%%fg=red$The flames wrap around you!%%fg=reset$");
-                    }
+                if (is_player()) {
+                    TOPCON("%%fg=red$The flames wrap around you!%%fg=reset$");
                 }
             } else {
                 if (is_player()) {
@@ -124,6 +106,10 @@ void Thing::fire_tick (void)
     }
 
     if (hit) {
+        if (!is_on_fire()) {
+            set_on_fire("caught fire");
+        }
+
         auto fire = tp_find("fire");
         auto damage = fire->get_damage_melee();
 

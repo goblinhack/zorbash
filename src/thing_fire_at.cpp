@@ -136,7 +136,7 @@ bool Thing::fire_at_target (void)
         int x = mid_at.x + dx;
         int y = mid_at.y + dy;
 
-        FOR_ALL_ACTIVE_THINGS(level, it, x, y) {
+        FOR_ALL_INTERESTING_THINGS(level, it, x, y) {
             if (this == it) {
                 continue;
             }

@@ -63,7 +63,7 @@ void Thing::throw_at (Thingp item, Thingp target)
         level->is_chasm(target->mid_at.x, target->mid_at.y)) {
         drop(item, target);
 
-        item->location_check();
+        item->location_check_forced();
     } else {
         if (item->is_used_when_thrown()) {
             used(item, target, true /* remove_after_use */);

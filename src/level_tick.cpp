@@ -76,44 +76,31 @@ void Level::tick (void)
     // LOG("-");
 
     //
-    // Active things are generally things that move or have a life span
+    // For all things that move, like monsters, or those that do not, like
+    // wands, and even those that do not move but can be destroyed, like
+    // walls. Omits things like floors, corridors, the grid; those that
+    // generally do nothing or are hidden.
     //
-    auto c = all_active_things;
-    auto i = all_active_things.begin();
-    while (i != all_active_things.end()) {
-        auto t = i->second;
-
-        ThingId next_key {};
-        i++;
-        if (i != all_active_things.end()) {
-            next_key = i->first;
-        }
-
-        verify(t);
-
-        if (t->is_monst()) {
-            if (g_opt_debug4) {
-                t->log("Tick; I am at %d, game is at %d",
-                       t->get_tick(), game->tick_current);
-            }
-
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(t) {
+        if (t->is_player() || t->is_monst()) {
             if (t->get_tick() != game->tick_current) {
                 game->things_are_moving = true;
             }
         }
-
         t->tick();
+    } FOR_ALL_THINGS_END()
 
-        //
-        // Check the walk is not invalidated
-        //
-        if (i == all_active_things.end()) {
-            break;
-        }
-        i = all_active_things.find(next_key);
-    }
-
+    //
+    // If things have stopped moving, perform location checks on where theuy
+    // are now. This handles things like shoving a monst into a chasm. We do
+    // location checks on the ends of moves, but this is a backup and will
+    // also handle things that do not move, like a wand that is now on fire.
+    //
     if (!game->things_are_moving) {
+        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(t) {
+            t->location_check();
+        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END()
+
         game->tick_end();
     }
 
@@ -150,7 +137,7 @@ void Level::sanity_check (void)
 
 void Level::update_all_ticks (void)
 {_
-    for (auto& i : all_active_things) {
+    for (auto& i : all_interesting_things) {
         auto t = i.second;
         t->update_tick();
     }

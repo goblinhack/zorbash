@@ -26,7 +26,6 @@ def tp_init(name, text_name):
     x.set_is_active(True)
     x.set_is_fire(True)
     x.set_is_hazard(True)
-    x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_moveable(True)

@@ -124,8 +124,24 @@ public:
     timestamp_t  timestamp_move_begin {};
     timestamp_t  timestamp_move_end {};
     timestamp_t  timestamp_sleep_end {};
-    uint32_t     tick = {};                  // Increments on completion of move
+    //
+    // Current tick compared to the game. Increments on move completion.
+    //
+    uint32_t     tick = {};
+    //
+    // Used for calling on_idle()
+    //
     uint32_t     tick_last_did_something {};
+    //
+    // If things have stopped moving, perform location checks on where theuy
+    // are now. This handles things like shoving a monst into a chasm. We do
+    // location checks on the ends of moves, but this is a backup and will
+    // also handle things that do not move, like a wand that is now on fire.
+    //
+    uint32_t     tick_last_location_check {};
+    //
+    // Don't try and escape too often else the player can never kill the monst!
+    //
     uint32_t     tick_last_escape {};
     uint32_t     tick_last_level_change {};
     /////////////////////////////////////////////////////////////////////////
