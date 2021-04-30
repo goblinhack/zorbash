@@ -25,7 +25,6 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_floor_deco(True)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_movement_blocking_soft(True)
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_shown_uniquely_on_leftbar(True)
