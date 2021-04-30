@@ -307,10 +307,12 @@ have_dungeon_start:
                             t->carry(W);
                         }
 
+#if 0
                         {
                             auto W = thing_new("key", fpoint(x, y));
                             t->carry(W);
                         }
+#endif
 
                         {
                             auto W = thing_new("torch", fpoint(x, y));
