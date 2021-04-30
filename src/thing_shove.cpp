@@ -24,7 +24,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     //
-    // Sanity check
+    // Sanity check we cannot shove more than one tile
     //
     if ((fabs(delta.x) > 1) || (fabs(delta.y) > 1)) {
         return (THING_SHOVE_NEVER_TRIED);
@@ -35,6 +35,8 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
             return (THING_SHOVE_NEVER_TRIED);
         }
     }
+
+    log("Try to shove, delta %d,%d", (int)delta.x, (int)delta.y);
 
     bool was_dead = it->is_dead;
 
@@ -48,7 +50,9 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     //
     // Annoy the thing being pushed
     //
-    it->add_enemy(this);
+    if (it->is_alive_monst()) {
+        it->add_enemy(this);
+    }
 
     fpoint shove_delta = delta;
     fpoint shove_pos = it->mid_at + shove_delta;
@@ -90,6 +94,36 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
             return (THING_SHOVE_TRIED_AND_FAILED);
         }
 
+        if (it->is_monst()) {
+            it->msg(string_sprintf("%%fg=orange$!"));
+        }
+    }
+
+    //
+    // If pushed into a chasm, move the thing first and then
+    // let it spawn dead things
+    //
+    if (it->collision_check_only(shove_pos)) {
+        //
+        // This is a failure to shove
+        //
+        if (it->is_brazier()) {
+            if (!it->is_dead) {
+                if (is_player()) {
+                    TOPCON("The brazier falls back on you!");
+                }
+                it->move_to(mid_at, THING_MOVE_SPEED_MS);
+            }
+        } else if (it->is_barrel()) {
+            if (is_player()) {
+                TOPCON("The barrel will not budge!");
+            }
+        } else {
+            if (is_player()) {
+                TOPCON("%s cannot be shoved! Something blocks the way.", text_The().c_str());
+            }
+        }
+    } else {
         if (is_player()) {
             if (it->is_brazier()) {
                 TOPCON("You knock over %s!", it->text_the().c_str());
@@ -100,27 +134,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
             TOPCON("%s shoves you!", text_The().c_str());
         }
 
-        if (it->is_monst()) {
-            it->msg(string_sprintf("%%fg=orange$!"));
-        }
-    }
-
-    //
-    // If pushed into a chasm, move the thing first and then
-    // let it spawn dead things
-    //
-    log("Make the shoved thing fall first");
-    if (it->collision_check_only(shove_pos)) {
-        if (is_player()) {
-            if (it->is_brazier()) {
-                if (!it->is_dead) {
-                    TOPCON("The brazier falls back on you!");
-                }
-            }
-            it->move_to(mid_at, 100);
-        }
-    } else {
-        it->move_to(shove_pos, 100);
+        it->move_to(shove_pos, THING_MOVE_SPEED_MS);
     }
 
     if (!it->is_dead) {

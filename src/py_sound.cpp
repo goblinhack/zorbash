@@ -5,8 +5,10 @@
 
 #include <strings.h> // do not remove
 #include <string.h> // do not remove
+#include "my_main.h"
 #include "my_sys.h"
-#include "my_gl.h"
+#include "my_game.h"
+#include "my_thing.h"
 #include "my_python.h"
 #include "my_sound.h"
 #include "my_main.h"
@@ -19,7 +21,7 @@ PyObject *sound_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     static char *kwlist[] = {(char*)"volume", (char*) "file", (char*) "name", 0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "fss", kwlist, 
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "fss", kwlist,
                                      &volume, &file, &name)) {
         ERR("sound_load: bad arguments");
         Py_RETURN_FALSE;
@@ -38,8 +40,8 @@ PyObject *sound_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
     PY_DBG("sound_load(volume=%f, file=%s, name=%s)", volume, file, name);
 
     std::string filearg = file;
-    std::string namearg = name;
-    sound_load(volume, filearg, namearg);
+    std::string alias = name;
+    sound_load(volume, filearg, alias);
 
     Py_RETURN_TRUE;
 }
@@ -62,46 +64,84 @@ PyObject *sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     PY_DBG("sound_play(name=%s)", name);
 
-    std::string namearg = name;
-    if (!sound_play(namearg)) {
+    std::string alias = name;
+    if (!sound_play(alias)) {
         Py_RETURN_FALSE;
     }
 
     Py_RETURN_TRUE;
 }
 
-PyObject *sound_play_at_ (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *name = 0;
-    int x = -1;
-    int y = -1;
+    uint32_t owner_id = 0;	
 
-    static char *kwlist[] = {(char*) "name", (char*)"x", (char*)"y", 0};
+    static char *kwlist[] = {(char*)"owner", (char*) "name", 0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "sii", kwlist, &name, &x, &y)) {
-        ERR("sound_play_at: bad arguments");
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &name)) {
+        ERR("thing_sound_play: bad arguments");
         Py_RETURN_FALSE;
     }
+
+    if (!owner_id) {	
+        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        Py_RETURN_NONE;	
+    }	
+	
+    Thingp owner = game->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
 
     if (!name) {
-        ERR("sound_play_at: missing name attr");
+        ERR("thing_sound_play: missing name attr");
         Py_RETURN_FALSE;
     }
 
-    if (x == -1) {
-        ERR("sound_play_at: missing x attr");
+    PY_DBG("thing_sound_play(name=%s)", name);
+
+    std::string alias = name;
+    if (!owner->thing_sound_play(alias)) {
         Py_RETURN_FALSE;
     }
 
-    if (y == -1) {
-        ERR("sound_play_at: missing x attr");
+    Py_RETURN_TRUE;
+}
+
+PyObject *thing_sound_play_channel_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    uint32_t owner_id = 0;	
+    char *name = 0;
+    int channel = 0;
+
+    static char *kwlist[] = {(char*)"owner", (char*) "channel", (char*) "name", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "is", kwlist, &channel, &name)) {
+        ERR("thing_sound_play_channel: bad arguments");
         Py_RETURN_FALSE;
     }
 
-    PY_DBG("sound_play_at(name=%s, %d, %d)", name, x, y);
+    Thingp owner = game->thing_find(owner_id);	
+    if (!owner) {	
+        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        Py_RETURN_NONE;	
+    }	
 
-    std::string namearg = name;
-    if (!sound_play_at(namearg, x, y)) {
+    if (!name) {
+        ERR("thing_sound_play: missing name attr");
+        Py_RETURN_FALSE;
+    }
+    if (!name) {
+        ERR("thing_sound_play_channel: missing name attr");
+        Py_RETURN_FALSE;
+    }
+
+    PY_DBG("sound_play_channel(channel=%d, name=%s)", channel, name);
+
+    std::string alias = name;
+    if (!owner->thing_sound_play_channel(channel, alias)) {
         Py_RETURN_FALSE;
     }
 
@@ -127,49 +167,11 @@ PyObject *sound_play_channel_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     PY_DBG("sound_play_channel(channel=%d, name=%s)", channel, name);
 
-    std::string namearg = name;
-    if (!sound_play_channel(channel, namearg)) {
+    std::string alias = name;
+    if (!sound_play_channel(channel, alias)) {
         Py_RETURN_FALSE;
     }
 
     Py_RETURN_TRUE;
 }
 
-PyObject *sound_play_channel_at_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    char *name = 0;
-    int channel = 0;
-    int x = -1;
-    int y = -1;
-
-    static char *kwlist[] = {(char*) "channel", (char*) "name", (char*)"x", (char*)"y", 0};
-
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "isii", kwlist, &channel, &name, &x, &y)) {
-        ERR("sound_play_channel_at: bad arguments");
-        Py_RETURN_FALSE;
-    }
-
-    if (!name) {
-        ERR("sound_play_channel_at: missing name attr");
-        Py_RETURN_FALSE;
-    }
-
-    if (x == -1) {
-        ERR("sound_play_channel_at: missing x attr");
-        Py_RETURN_FALSE;
-    }
-
-    if (y == -1) {
-        ERR("sound_play_channel_at: missing x attr");
-        Py_RETURN_FALSE;
-    }
-
-    PY_DBG("sound_play_channel(channel=%d, name=%s, %d, %d)", channel, name, x, y);
-
-    std::string namearg = name;
-    if (!sound_play_channel_at(channel, namearg, x, y)) {
-        Py_RETURN_FALSE;
-    }
-
-    Py_RETURN_TRUE;
-}

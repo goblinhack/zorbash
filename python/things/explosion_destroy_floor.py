@@ -2,7 +2,7 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    zx.sound_play_channel_at(zx.CHANNEL_EXPLOSION, "explosion_e", x, y)
+    zx.thing_sound_play_channel(me, zx.CHANNEL_EXPLOSION, "explosion_e")
     zx.if_matches_then_kill(me, "is_floor", x, y)
     zx.if_matches_then_kill(me, "is_corridor", x, y)
     zx.if_matches_then_kill(me, "is_dirt", x, y)

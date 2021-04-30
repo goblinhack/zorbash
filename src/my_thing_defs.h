@@ -24,6 +24,7 @@
 #define MAP_SLOTS                  32 // Max things per map slot
 #define MAP_WIDTH                  ((MAP_GRID_WIDTH*MAP_ROOM_WIDTH) + (MAP_BORDER_TOTAL*2))
 #define PARTICLE_SPEED_MS          400
+#define THING_MOVE_SPEED_MS        150
 #define THING_AI_WANDER_FREQ_TENTHS 3   // How often we can wander
 #define THING_DAMAGE_SHAKE_ABOVE   10   // Damage above this causes shakes
 #define THING_DAMAGE_SHAKE_SCALE   40.0 // Smaller means more shaking

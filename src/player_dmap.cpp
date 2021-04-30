@@ -4,11 +4,31 @@
 //
 
 #include "my_main.h"
+#include "my_game.h"
 #include "my_sys.h"
 #include "my_level.h"
 #include "my_dmap.h"
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
+
+//
+// Return the dmap distance. DMAP_IS_WALL if not reachable.
+//
+int Thing::distance_to_player (void)
+{_
+    auto player = game->level->player;
+    if (!player) {
+        return DMAP_IS_WALL;
+    }
+
+    //
+    // Check we're on the same level
+    if (player->level != level) {
+        return DMAP_IS_WALL;
+    }
+
+    return get(&game->level->player_dmap.val, (int)mid_at.x, (int)mid_at.y);
+}
 
 void Level::player_dmap_update (void)
 {_

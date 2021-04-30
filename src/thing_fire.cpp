@@ -31,7 +31,7 @@ void Thing::fire_tick (void)
         return;
     }
 
-    if (g_opt_debug3) {
+    if (g_opt_debug4) {
         log("Fire tick");
     }
 
@@ -41,7 +41,7 @@ void Thing::fire_tick (void)
         // Keep going
         //
     } else if (!hates_fire()) {
-        if (g_opt_debug3) {
+        if (g_opt_debug4) {
             log("No, is not fire avoider");
         }
         return;
@@ -76,7 +76,7 @@ void Thing::fire_tick (void)
         // Too close to the flames
         //
         hit = true;
-    } else if (is_combustible() && (level->heatmap(at.x, at.y) > 1)) {
+    } else if (is_combustible() && (level->heatmap(at.x, at.y) > 2)) {
         //
         // Too close to the flames
         //

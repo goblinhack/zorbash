@@ -42,8 +42,7 @@ def tp_init(name, text_name):
     x.set_is_burnable(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_described_when_hovering_over(True)
-    x.set_is_floor_deco(True)
-    x.set_is_item(True)
+    x.set_is_floor_deco(False) # Else it can be placed next to lava and starts a firestorm
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_very_combustible(True)

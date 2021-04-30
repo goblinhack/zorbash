@@ -55,6 +55,7 @@ uint8_t tp_init (void)
     tp_init_done = true;
 
     tp_random_init();
+    tp_fixup();
 
     for (auto& tp : tp_name_map) {
         auto tpp = tp.second;

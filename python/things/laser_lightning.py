@@ -7,7 +7,7 @@ def on_death(me, x, y):
         if zx.thing_possible_to_attack(me, thing):
             zx.thing_hit(me, thing)
     zx.level_spawn_at_thing(me, "explosion_minor")
-    zx.sound_play_channel_at(zx.CHANNEL_WEAPON, "lightning_a", x, y)
+    zx.thing_sound_play_channel(me, zx.CHANNEL_WEAPON, "lightning_a")
 
     #
     # Lightning can impact all things in the same pool

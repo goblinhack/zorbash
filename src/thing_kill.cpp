@@ -147,7 +147,7 @@ void Thing::kill (Thingp killer, const char *reason)
         level_push();
         auto p = level->player;
         if (p) {
-            int distance = get(&level->player_dmap.val, (int)mid_at.x, (int)mid_at.y);
+            int distance = distance_to_player();
             if (killer && killer->is_fire()) {
                 if (distance < 5) {
                     TOPCON("The door burns through.");

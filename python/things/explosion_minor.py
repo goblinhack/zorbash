@@ -2,7 +2,7 @@ import zx
 import tp
 
 def on_death(me, x, y):
-    zx.sound_play_channel_at(zx.CHANNEL_EXPLOSION, "explosion_a", x, y)
+    zx.thing_sound_play_channel(me, zx.CHANNEL_EXPLOSION, "explosion_a")
 
 def tp_init(name):
     x = tp.Tp(name)
