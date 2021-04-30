@@ -66,6 +66,7 @@ void Level::describe (fpoint p)
 
         if (t->get_immediate_owner() ||
             t->is_cursor() ||
+            t->is_player() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
             continue;
@@ -89,6 +90,15 @@ void Level::describe (fpoint p)
         int y = p.y;
         if (!is_lit(x, y) && !is_visited(x, y)) {_
             continue;
+        }
+
+        //
+        // Only show the player as fallback if we have nothing else
+        //
+        if (hover_over_things.size()) {
+            if(t->is_player()) {
+                continue;
+            }
         }
 
         if (t->get_immediate_owner() ||
