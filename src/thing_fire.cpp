@@ -75,7 +75,6 @@ void Thing::fire_tick (void)
         //
         // Too close to the flames
         //
-topcon("combust map %d", level->heatmap(at.x, at.y));
         hit = true;
     } else if (is_combustible() && (level->heatmap(at.x, at.y) > 1)) {
         //

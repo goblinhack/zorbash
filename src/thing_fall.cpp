@@ -204,18 +204,19 @@ _
             x = random_range(MAP_BORDER_TOTAL, MAP_WIDTH - MAP_BORDER_TOTAL);
             y = random_range(MAP_BORDER_TOTAL, MAP_HEIGHT - MAP_BORDER_TOTAL);
         } else {
-            err("Could not fall to next level");
+            err("Could not fall to next level; tried many times to place this thing and failed");
             return false;
         }
         tries++;
 
-        if (next_level->is_oob(x, y)) {_
+        if (next_level->is_oob(x, y)) {
+            log("No, %d,%d is out of dungeon", x, y);
             continue;
         }
 
         log("Try to fall to %d,%d", x, y);
-        if (!next_level->is_dungeon(x, y)) {_
-            log("No, out of dungeon");
+        if (!next_level->is_dungeon(x, y)) {
+            log("No, %d,%d is not a dungeon tile", x, y);
             continue;
         }
 
@@ -229,12 +230,14 @@ _
             next_level->is_wall(x, y)             ||
             next_level->is_ascend_sewer(x, y)     ||
             next_level->is_descend_sewer(x, y)    ||
-            next_level->is_descend_dungeon(x, y)) {_
-            log("No, special tile at %d,%d", x, y);
+            next_level->is_descend_dungeon(x, y)) {
+            log("No, %d,%d is a special tile", x, y);
             continue;
         }
 
         if (next_level->is_floor(x, y) ||
+            next_level->is_corridor(x, y) ||
+            next_level->is_water(x, y) ||
             next_level->is_fire(x, y) ||
             next_level->is_lava(x, y)) {
 
