@@ -23,6 +23,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_described_when_hovering_over(True)
     x.set_is_fire(True)
     x.set_is_floor_deco(True)
+    x.set_is_item(True)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_movement_blocking_soft(True)

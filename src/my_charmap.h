@@ -12,8 +12,9 @@
 class Charmap {
 public:
     enum {
-        BLOOD            =            'b',
+        BLOOD            =            '_',
         BRAZIER          =            'B',
+        BARREL           =            'b',
         CHASM            =            'C',
         CORRIDOR         =            '#',
         DEBUG            =            '@',
@@ -79,6 +80,7 @@ public:
     bool                      is_secret_door                  {false};
     bool                      is_shallow_water                {false};
     bool                      is_brazier                      {false};
+    bool                      is_barrel                       {false};
     bool                      is_trap                         {false};
     bool                      is_treasure_class_a             {false};
     bool                      is_treasure_class_b             {false};

@@ -496,8 +496,8 @@ class Tp:
     def set_is_rrr90(self, value):
         zx.tp_set_is_rrr90(self, value)
 
-    def set_is_rrr91(self, value):
-        zx.tp_set_is_rrr91(self, value)
+    def set_is_barrel(self, value):
+        zx.tp_set_is_barrel(self, value)
 
     def set_is_burnable(self, value):
         zx.tp_set_is_burnable(self, value)

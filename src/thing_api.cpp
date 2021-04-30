@@ -290,7 +290,7 @@ int Thing::is_rrr88(void) const                                         {_ retur
 int Thing::is_rrr89(void) const                                         {_ return (tp()->is_rrr89()); }
 int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
 int Thing::is_rrr90(void) const                                         {_ return (tp()->is_rrr90()); }
-int Thing::is_rrr91(void) const                                         {_ return (tp()->is_rrr91()); }
+int Thing::is_barrel(void) const                                         {_ return (tp()->is_barrel()); }
 int Thing::is_burnable(void) const                                         {_ return (tp()->is_burnable()); }
 int Thing::is_wand_eater(void) const                                         {_ return (tp()->is_wand_eater()); }
 int Thing::loves_fire(void) const                                         {_ return (tp()->loves_fire()); }

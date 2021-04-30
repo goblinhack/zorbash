@@ -164,7 +164,7 @@ int Tp::is_bleeder(void) const                                       { return _i
 int Tp::is_blood(void) const                                         { return _is_blood; }
 int Tp::is_blood_splatter(void) const                                { return _is_blood_splatter; }
 int Tp::is_brazier(void) const                                       { return _is_brazier; }
-int Tp::is_rrr99(void) const                                      { return _is_rrr99; }
+int Tp::is_rrr99(void) const                                         { return _is_rrr99; }
 int Tp::is_carrier_of_treasure_class_a(void) const                   { return _is_carrier_of_treasure_class_a; }
 int Tp::is_carrier_of_treasure_class_b(void) const                   { return _is_carrier_of_treasure_class_b; }
 int Tp::is_carrier_of_treasure_class_c(void) const                   { return _is_carrier_of_treasure_class_c; }
@@ -338,7 +338,7 @@ int Tp::is_rrr87(void) const                                         { return _i
 int Tp::is_rrr88(void) const                                         { return _is_rrr88; }
 int Tp::is_rrr89(void) const                                         { return _is_rrr89; }
 int Tp::is_rrr90(void) const                                         { return _is_rrr90; }
-int Tp::is_rrr91(void) const                                         { return _is_rrr91; }
+int Tp::is_barrel(void) const                                         { return _is_barrel; }
 int Tp::is_burnable(void) const                                         { return _is_burnable; }
 int Tp::is_wand_eater(void) const                                         { return _is_wand_eater; }
 int Tp::loves_fire(void) const                                { return _loves_fire; }
@@ -489,7 +489,7 @@ void Tp::set_is_bleeder(int v)                                       { _is_bleed
 void Tp::set_is_blood(int v)                                         { _is_blood = v; }
 void Tp::set_is_blood_splatter(int v)                                { _is_blood_splatter = v; }
 void Tp::set_is_brazier(int v)                                       { _is_brazier = v; }
-void Tp::set_is_rrr99(int v)                                      { _is_rrr99 = v; }
+void Tp::set_is_rrr99(int v)                                         { _is_rrr99 = v; }
 void Tp::set_is_carrier_of_treasure_class_a(int v)                   { _is_carrier_of_treasure_class_a = v; }
 void Tp::set_is_carrier_of_treasure_class_b(int v)                   { _is_carrier_of_treasure_class_b = v; }
 void Tp::set_is_carrier_of_treasure_class_c(int v)                   { _is_carrier_of_treasure_class_c = v; }
@@ -662,7 +662,7 @@ void Tp::set_is_rrr87(int v)                                         { _is_rrr87
 void Tp::set_is_rrr88(int v)                                         { _is_rrr88 = v; }
 void Tp::set_is_rrr89(int v)                                         { _is_rrr89 = v; }
 void Tp::set_is_rrr90(int v)                                         { _is_rrr90 = v; }
-void Tp::set_is_rrr91(int v)                                         { _is_rrr91 = v; }
+void Tp::set_is_barrel(int v)                                         { _is_barrel = v; }
 void Tp::set_is_burnable(int v)                                         { _is_burnable = v; }
 void Tp::set_is_wand_eater(int v)                                         { _is_wand_eater = v; }
 void Tp::set_loves_fire(int v)                                { _loves_fire = v; }

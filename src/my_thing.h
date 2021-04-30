@@ -151,6 +151,7 @@ public:
     uint64_t i_set_is_secret_door:1            {};
     uint64_t i_set_is_smoke:1                  {};
     uint64_t i_set_is_brazier:1                {};
+    uint64_t i_set_is_barrel:1                 {};
     uint64_t i_set_is_treasure:1               {};
     uint64_t i_set_is_wall:1                   {};
     uint64_t i_set_gfx_water:1                 {};
@@ -841,7 +842,7 @@ public:
     int is_rrr89(void) const;
     int is_rrr9(void) const;
     int is_rrr90(void) const;
-    int is_rrr91(void) const;
+    int is_barrel(void) const;
     int is_burnable(void) const;
     int is_wand_eater(void) const;
     int loves_fire(void) const;

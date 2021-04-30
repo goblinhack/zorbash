@@ -175,6 +175,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_brazier           = true;
 
+    char_index              = Charmap::BARREL;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_barrel            = true;
+
     char_index              = Charmap::TRAP;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

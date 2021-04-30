@@ -62,7 +62,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         return (THING_SHOVE_TRIED_AND_FAILED);
     }
 
-    if (!it->is_brazier()) {
+    if (!it->is_brazier() && !it->is_barrel()) {
         if (it->collision_check_only(shove_pos)) {
             if (is_player()) {
                 TOPCON("%s cannot be shoved!", it->text_The().c_str());
@@ -148,10 +148,10 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     // If shoving something on fire! set yourself on fire!
     //
     if (!was_dead) {
-        if (it->is_very_combustible()) {
+        if (it->is_fire()) {
             if (random_range(0, 100) < 5) {
                 if (is_player()) {
-                    if (set_on_fire("set youtself on fire")) {
+                    if (set_on_fire("set yourself on fire")) {
                         TOPCON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
                     }
                 }

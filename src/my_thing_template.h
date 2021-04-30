@@ -311,7 +311,7 @@ private:
     int _is_rrr88 {};
     int _is_rrr89 {};
     int _is_rrr90 {};
-    int _is_rrr91 {};
+    int _is_barrel {};
     int _is_burnable {};
     int _is_wand_eater {};
     int _loves_fire {};
@@ -770,7 +770,7 @@ public:
     int is_rrr88(void) const;
     int is_rrr89(void) const;
     int is_rrr90(void) const;
-    int is_rrr91(void) const;
+    int is_barrel(void) const;
     int is_burnable(void) const;
     int is_wand_eater(void) const;
     int loves_fire(void) const;
@@ -1102,7 +1102,7 @@ public:
     void set_is_rrr88(int);
     void set_is_rrr89(int);
     void set_is_rrr90(int);
-    void set_is_rrr91(int);
+    void set_is_barrel(int);
     void set_is_burnable(int);
     void set_is_wand_eater(int);
     void set_loves_fire(int);
@@ -1260,6 +1260,7 @@ class Tp* tp_random_rock(void);
 class Tp* tp_random_secret_door(void);
 class Tp* tp_random_sewer_wall(void);
 class Tp* tp_random_brazier(void);
+class Tp* tp_random_barrel(void);
 class Tp* tp_random_treasure(void);
 uint8_t tp_init(void);
 void tp_fini(void);

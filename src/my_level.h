@@ -64,6 +64,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_barrel {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};
@@ -456,6 +457,8 @@ public:
     uint8_t is_smoke(const point &p);
     uint8_t is_brazier(const int x, const int y);
     uint8_t is_brazier(const point &p);
+    uint8_t is_barrel(const int x, const int y);
+    uint8_t is_barrel(const point &p);
     uint8_t is_treasure(const int x, const int y);
     Thingp inventory_describe(const uint32_t slot);
     Thingp skillbox_describe(const uint32_t slot);
@@ -636,6 +639,8 @@ public:
     void unset_is_ascend_sewer(const int x, const int y);
     void unset_is_blood(const int x, const int y);
     void unset_is_brazier(const int x, const int y);
+    void unset_is_barrel(const int x, const int y);
+    void set_is_barrel(const int x, const int y);
     void unset_is_chasm(const int x, const int y);
     void unset_is_corpse(const int x, const int y);
     void unset_is_corridor(const int x, const int y);

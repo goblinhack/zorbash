@@ -121,6 +121,7 @@ public:
     bool is_secret_corridor_at(const int x, const int y);
     bool is_secret_door(const int x, const int y);
     bool is_brazier(const int x, const int y);
+    bool is_barrel(const int x, const int y);
     bool is_treasure(const int x, const int y);
     bool is_wall(const int x, const int y);
     bool is_descend_sewer_at(const int x, const int y);

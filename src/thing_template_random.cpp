@@ -35,6 +35,7 @@ static Tpidmap tp_secret_door;
 static Tpidmap tp_generator;
 static Tpidmap tp_ethereal_generator;
 static Tpidmap tp_brazier;
+static Tpidmap tp_barrel;
 static Tpidmap tp_treasure;
 static Tpidmap tp_item_class_a;
 static Tpidmap tp_item_class_b;
@@ -73,6 +74,7 @@ void tp_random_init (void)
         if (tp->is_descend_sewer())             { tp_descend_sewer.push_back(tp); }
         if (tp->is_sewer_wall())                { tp_sewer_wall.push_back(tp); }
         if (tp->is_brazier())                   { tp_brazier.push_back(tp); }
+        if (tp->is_barrel())                    { tp_barrel.push_back(tp); }
         if (tp->is_treasure())                  { tp_treasure.push_back(tp); }
         if (tp->is_treasure_class_a())          { tp_item_class_a.push_back(tp); }
         if (tp->is_treasure_class_b())          { tp_item_class_b.push_back(tp); }
@@ -90,6 +92,10 @@ void tp_random_init (void)
 
         if (tp->is_active()) {
             tp->set_is_interesting(true);
+        }
+
+        if (tp->is_very_combustible()) {
+            tp->set_is_combustible(true);
         }
 
         if (!tp->is_minion()) {
@@ -426,6 +432,15 @@ Tpp tp_random_brazier (void)
         return (nullptr);
     }
     return tp_get_with_no_rarity_filter(tp_brazier);
+}
+
+Tpp tp_random_barrel (void)
+{_
+    if (unlikely(!tp_barrel.size())) {
+        ERR("No barrel found");
+        return (nullptr);
+    }
+    return tp_get_with_no_rarity_filter(tp_barrel);
 }
 
 Tpp tp_random_door (void)
