@@ -121,20 +121,42 @@ bool Thing::move (fpoint future_pos,
                   uint8_t wait_or_collect,
                   bool shove_allowed)
 {_
-    log("Moved");
+    log("Move");
 
     if (is_dead) {
         return false;
     }
 
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_jumping) { 
+    if (is_hidden) {
+        log("Move; no, is hidden");
+        return false;
+    }
+    if (is_changing_level) {
+        log("Move; no waiting on level change");
+        return false;
+    }
+    if (is_falling) {
+        log("Move; no, is falling");
+        return false;
+    }
+    if (is_waiting_to_ascend_dungeon) {
+        log("Move; no, is waiting to ascend dungeon");
+        return false;
+    }
+    if (is_waiting_to_descend_sewer) {
+        log("Move; no, is waiting to descend sewer");
+        return false;
+    }
+    if (is_waiting_to_descend_dungeon) {
+        log("Move; no, is waiting to descend dungeon");
+        return false;
+    }
+    if (is_waiting_to_ascend_sewer) {
+        log("Move; no, is waiting to ascend sewer");
+        return false;
+    }
+    if (is_jumping) { 
+        log("Move; no, is jumping");
         return false;
     }
 
