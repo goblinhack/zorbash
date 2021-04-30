@@ -206,6 +206,14 @@ bool Thing::if_matches_then_kill (const std::string& what, const point &p)
     FOR_ALL_THINGS(level, t, p.x, p.y) {
         if (t->matches(what)) {
             t->dead(this, "killed");
+
+            //
+            // Just in case something is now on top of a chasm or lava
+            //
+            log("do location checks");
+            FOR_ALL_INTERESTING_THINGS(level, t, p.x, p.y) {
+                t->location_check_forced();
+            } FOR_ALL_THINGS_END()
         }
     } FOR_ALL_THINGS_END()
 

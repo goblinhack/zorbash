@@ -276,7 +276,20 @@ void Thing::update_interpolated_position (void)
 
     auto p = get_top_owner();
     if ((p && p->is_falling) || is_falling) {
-        z_depth = MAP_DEPTH_FLOOR;
+        if (z_depth == MAP_DEPTH_LAVA) {
+            //
+            // If we change the depth, it is displayed as white
+            //
+        } else if (z_depth == MAP_DEPTH_WATER) {
+            //
+            // If we change the depth, it is displayed as white
+            //
+        } else {
+            //
+            // Stops monsts falling over the floor tiles
+            //
+            z_depth = MAP_DEPTH_FLOOR;
+        }
     } else {
         z_depth = tpp->z_depth;
     }

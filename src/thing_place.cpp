@@ -20,7 +20,7 @@ bool Thing::place (const std::string& what, const point &p)
     //
     log("do location checks");
     FOR_ALL_INTERESTING_THINGS(level, t, p.x, p.y) {
-        t->location_check();
+        t->location_check_forced();
     } FOR_ALL_THINGS_END()
 
     return true;

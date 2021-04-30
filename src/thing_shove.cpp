@@ -136,13 +136,13 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
                     it->dir_set_right();
                 }
                 auto n = level->thing_new(spawn_what, spawn_at);
-                n->location_check();
+                n->location_check_forced();
             }
         }
     }
 
     log("Handle location for shoved thing");
-    it->location_check();
+    it->location_check_forced();
 
     //
     // If shoving something on fire! set yourself on fire!
