@@ -1996,6 +1996,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_cursor_can_hover_over_but_needs_double_click",  (PyCFunction)thing_is_cursor_can_hover_over_but_needs_double_click,  METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_cursor_path",                                   (PyCFunction)thing_is_cursor_path,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_dead_on_shove",                                 (PyCFunction)thing_is_dead_on_shove,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_dead",                                          (PyCFunction)thing_is_dead,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_deep_water",                                    (PyCFunction)thing_is_deep_water,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_descend_dungeon",                               (PyCFunction)thing_is_descend_dungeon,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_descend_sewer",                                 (PyCFunction)thing_is_descend_sewer,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},

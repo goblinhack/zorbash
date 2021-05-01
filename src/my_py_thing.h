@@ -80,6 +80,7 @@ PyObject *thing_is_cursor_can_hover_over(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_is_cursor_can_hover_over_but_needs_double_click(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_shove(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_dead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_deep_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_descend_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_descend_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
