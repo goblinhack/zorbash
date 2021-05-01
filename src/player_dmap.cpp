@@ -52,7 +52,7 @@ void Level::player_dmap_update (void)
     set(player_dmap.val, player->mid_at.x, player->mid_at.y, DMAP_IS_GOAL);
 
     dmap_process(&player_dmap);
-    if (g_opt_debug3) {
+    if (g_opt_debug4) {
         LOG("Player dmap:");
         dmap_print(&player_dmap);
     }

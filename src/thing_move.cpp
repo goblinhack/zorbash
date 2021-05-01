@@ -139,22 +139,6 @@ bool Thing::move (fpoint future_pos,
         log("Move; no, is falling");
         return false;
     }
-    if (is_waiting_to_ascend_dungeon) {
-        log("Move; no, is waiting to ascend dungeon");
-        return false;
-    }
-    if (is_waiting_to_descend_sewer) {
-        log("Move; no, is waiting to descend sewer");
-        return false;
-    }
-    if (is_waiting_to_descend_dungeon) {
-        log("Move; no, is waiting to descend dungeon");
-        return false;
-    }
-    if (is_waiting_to_ascend_sewer) {
-        log("Move; no, is waiting to ascend sewer");
-        return false;
-    }
     if (is_jumping) { 
         log("Move; no, is jumping");
         return false;
@@ -186,7 +170,42 @@ bool Thing::move (fpoint future_pos,
             TOPCON("You wait...");
         }
 
+#if 0
         location_check();
+#endif
+        return false;
+    }
+
+    //
+    // Do this after wait checks, so the player can bump the tick
+    // if stuck.
+    //
+    if (is_waiting_to_ascend_dungeon) {
+        log("Move; no, is waiting to ascend dungeon");
+        if (is_player()) {
+            game->tick_begin("player waiting to ascend");
+        }
+        return false;
+    }
+    if (is_waiting_to_descend_sewer) {
+        log("Move; no, is waiting to descend sewer");
+        if (is_player()) {
+            game->tick_begin("player waiting to descend");
+        }
+        return false;
+    }
+    if (is_waiting_to_descend_dungeon) {
+        log("Move; no, is waiting to descend dungeon");
+        if (is_player()) {
+            game->tick_begin("player waiting to descend");
+        }
+        return false;
+    }
+    if (is_waiting_to_ascend_sewer) {
+        log("Move; no, is waiting to ascend sewer");
+        if (is_player()) {
+            game->tick_begin("player waiting to ascend");
+        }
         return false;
     }
 
@@ -316,11 +335,13 @@ void Thing::update_interpolated_position (void)
         z_depth = tpp->z_depth;
     }
 
+#if 0
     //
     // We don't want to hit lava twice as we move onto it, so only do the location
     // check if we really move.
     //
     bool do_location_check = false;
+#endif
 
     if (is_jumping) {
         float t = get_timestamp_jump_end() - get_timestamp_jump_begin();
@@ -339,10 +360,14 @@ void Thing::update_interpolated_position (void)
         update_pos = true;
         new_pos.x = last_mid_at.x + dx * step;
         new_pos.y = last_mid_at.y + dy * step;
+#if 0
         do_location_check = false;
+#endif
     } else if (!get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
+#if 0
             do_location_check = true;
+#endif
             log("Changed position (new %f, %f, old %f,%f); do location check",
                 mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
 
@@ -354,7 +379,9 @@ void Thing::update_interpolated_position (void)
         }
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
+#if 0
             do_location_check = true;
+#endif
             log("End of move position (new %f, %f, old %f,%f); do location check",
                 mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
 
@@ -410,9 +437,11 @@ void Thing::update_interpolated_position (void)
         //
         update_light();
 
+#if 0
         if (do_location_check) {
             location_check();
         }
+#endif
     }
 }
 
@@ -618,7 +647,7 @@ void Thing::move_to_immediately (fpoint to)
         // things
         //
     } else {
-        location_check();
+        location_check_forced();
     }
 
     if (is_player()) {

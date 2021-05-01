@@ -39,7 +39,15 @@ bool Thing::ascend_sewer_tick (void)
         return false;
     }
 
+    if (is_player()) {
+        log("Location check, ascend sewer");
+    }
+
     if (get_tick() - get_tick_last_level_change() < 1) {
+        if (is_player()) {
+            log("Location check, ascend sewer, no too soon");
+        }
+
         return false;
     }
 
@@ -58,6 +66,7 @@ bool Thing::ascend_sewer_tick (void)
 
 bool Thing::ascend_sewer (void)
 {_
+    log("Ascend sewer");
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -65,17 +74,11 @@ bool Thing::ascend_sewer (void)
         is_waiting_to_descend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
+        log("Ascend sewer; no");
         return false;
     }
 
     if (!monstp) {
-        return false;
-    }
-
-    //
-    // No level change if too rapid
-    //
-    if (get_tick() - get_tick_last_level_change() <= 1) {
         return false;
     }
 

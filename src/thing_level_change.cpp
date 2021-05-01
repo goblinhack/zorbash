@@ -20,6 +20,7 @@
 void Thing::level_change (Levelp l)
 {_
     if (level == l) {
+        log("Change level; no, same level");
         return;
     }
 

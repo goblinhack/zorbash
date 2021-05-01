@@ -39,7 +39,14 @@ bool Thing::descend_dungeon_tick (void)
         return false;
     }
 
+    if (is_player()) {
+        log("Location check, descend");
+    }
+
     if (get_tick() - get_tick_last_level_change() < 1) {
+        if (is_player()) {
+            log("Location check, descend, no too soon");
+        }
         return false;
     }
 
@@ -54,6 +61,7 @@ bool Thing::descend_dungeon_tick (void)
 
 bool Thing::descend_dungeon (void)
 {_
+    log("Descend dungeon");
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -61,6 +69,7 @@ bool Thing::descend_dungeon (void)
         is_waiting_to_descend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
+        log("Descend dungeon, no");
         return false;
     }
 
@@ -75,13 +84,6 @@ bool Thing::descend_dungeon (void)
             //
             return false;
         }
-    }
-
-    //
-    // No level change if too rapid
-    //
-    if (get_tick() - get_tick_last_level_change() < 1) {
-        return false;
     }
 
     auto next_level = level->world_at + point3d(0, 0, 2);

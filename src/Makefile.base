@@ -158,7 +158,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_ai_wander.o             \
     $(OBJDIR)/thing_anim.o                  \
     $(OBJDIR)/thing_api.o                   \
-    $(OBJDIR)/thing_ascend.o                \
     $(OBJDIR)/thing_ascend_dungeon.o        \
     $(OBJDIR)/thing_ascend_sewer.o          \
     $(OBJDIR)/thing_astar.o                 \

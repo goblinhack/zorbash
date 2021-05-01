@@ -27,15 +27,28 @@ bool Thing::location_check_forced (void)
     // Prevent interactions that might generate things like smoke.
     //
     if (level->is_being_destroyed) {
+        if (is_player()) {
+            log("Location check, skip, level is being destroyed");
+        }
         return false;
     }
 
     if (is_being_destroyed) {
+        if (is_player()) {
+            log("Location check, skip, being destroyed");
+        }
         return false;
     }
 
     if (is_hidden) {
+        if (is_player()) {
+            log("Location check, skip, is hidden");
+        }
         return false;
+    }
+
+    if (is_player()) {
+        log("Location check, do");
     }
 
     //
@@ -67,15 +80,27 @@ bool Thing::location_check_forced (void)
     }
 
     if (descend_dungeon_tick()) {
+        if (is_player()) {
+            log("Location check, descend dungeon");
+        }
         return false;
     }
     if (ascend_dungeon_tick()) {
+        if (is_player()) {
+            log("Location check, ascend dungeon");
+        }
         return false;
     }
     if (descend_sewer_tick()) {
+        if (is_player()) {
+            log("Location check, descend sewer");
+        }
         return false;
     }
     if (ascend_sewer_tick()) {
+        if (is_player()) {
+            log("Location check, ascend sewer");
+        }
         return false;
     }
 
@@ -85,10 +110,16 @@ bool Thing::location_check_forced (void)
 bool Thing::location_check (void)
 {_
     if (get_tick_last_location_check() == game->tick_current) {
+        if (is_player()) {
+            log("Location check, tick %d, too soon", get_tick_last_location_check());
+        }
         return false;
     }
 
     set_tick_last_location_check(game->tick_current);
+    if (is_player()) {
+        log("Location check, tick %d", get_tick_last_location_check());
+    }
 
     return location_check_forced();
 }

@@ -39,12 +39,20 @@ bool Thing::descend_sewer_tick (void)
         return false;
     }
 
+    if (is_player()) {
+        log("Location check, descend sewer");
+    }
+
     if (get_tick() - get_tick_last_level_change() < 1) {
+        if (is_player()) {
+            log("Location check, descend sewer, no too soon");
+        }
         return false;
     }
 
     if (is_player()) {
         if (level->world_at.z & 1) {
+            log("Descending sewer");
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
             is_waiting_to_descend_sewer = true;
             move_finish();
@@ -54,14 +62,17 @@ bool Thing::descend_sewer_tick (void)
         //
         // Not sure if monsts should do this as they crawl out of sewers
         //
+        log("Monst cannot descend sewer");
         return false;
     }
 
+    log("Cannot descend sewer");
     return false;
 }
 
 bool Thing::descend_sewer (void)
 {_
+    log("Descend sewer");
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -69,6 +80,7 @@ bool Thing::descend_sewer (void)
         is_waiting_to_ascend_dungeon || 
         is_waiting_to_ascend_sewer || 
         is_jumping) { 
+        log("Descend sewer, no");
         return false;
     }
 
@@ -84,13 +96,6 @@ bool Thing::descend_sewer (void)
             //
             return false;
         }
-    }
-
-    //
-    // No level change if too rapid
-    //
-    if (get_tick() - get_tick_last_level_change() < 1) {
-        return false;
     }
 
     auto next_level = level->world_at + point3d(0, 0, 1);
