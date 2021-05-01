@@ -89,6 +89,7 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
     //
     auto player = level->player;
     if (player && player->is_dead) {
+        LOG("Ignore input; player is dead");
         return false;
     }
 
@@ -96,6 +97,30 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
     // Stop rapid pickup/drop events if particles are still in progress
     //
     if (player->particle_anim_exists()) {
+        LOG("Ignore input; anim exists");
+        return false;
+    }
+
+    //
+    // No moving if weapons have not finished firing
+    //
+    if (level->all_projectiles.size()) {
+        LOG("Ignore input; projectile exists");
+        return false;
+    }
+
+    if (level->new_projectiles.size()) {
+        LOG("Ignore input; projectile exists");
+        return false;
+    }
+
+    if (level->all_lasers.size()) {
+        LOG("Ignore input; laser exists");
+        return false;
+    }
+
+    if (level->new_lasers.size()) {
+        LOG("Ignore input; laser exists");
         return false;
     }
 

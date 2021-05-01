@@ -32,6 +32,6 @@ def tp_init(name, text_name, short_text_name):
     x.update()
 
 def init():
-    tp_init(name="projectile_fire", text_name="blast of fire", short_text_name="projectile.fire")
+    tp_init(name="projectile_fire", text_name="fireball", short_text_name="projectile.fire")
 
 init()

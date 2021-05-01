@@ -317,6 +317,11 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                                real_hitter->text_The().c_str(),
                                damage,
                                hitter->text_the().c_str());
+                    } else if (hitter->is_projectile()) {
+                        TOPCON("%%fg=red$%s blastd you for %d damage with %s!%%fg=reset$",
+                               real_hitter->text_The().c_str(),
+                               damage,
+                               hitter->text_the().c_str());
                     } else {
                         TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
                                real_hitter->text_The().c_str(),
@@ -365,6 +370,11 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                                hitter->text_the().c_str());
                     } else if (hitter->is_wand()) {
                         TOPCON("%%fg=yellow$%s zaps you for %d damage with %s!%%fg=reset$",
+                               real_hitter->text_The().c_str(),
+                               damage,
+                               hitter->text_the().c_str());
+                    } else if (hitter->is_projectile()) {
+                        TOPCON("%%fg=yellow$%s blasts you for %d damage with %s!%%fg=reset$",
                                real_hitter->text_The().c_str(),
                                damage,
                                hitter->text_the().c_str());

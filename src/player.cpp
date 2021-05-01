@@ -19,6 +19,9 @@ void player_tick (void)
     // Trying to move when the console is visible.
     //
     if (wid_console_window && wid_console_window->visible) {
+        if (g_opt_debug4) {
+            LOG("Player tick; ignore, console open");
+        }
         return;
     }
 
@@ -29,23 +32,35 @@ void player_tick (void)
         case Game::STATE_NORMAL:
             break;
         case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
-            LOG("Ignore player action when moving items");
+            if (g_opt_debug4) {
+                LOG("Ignore player action when moving items");
+            }
             return;
         case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
-            LOG("Ignore player action when collectin items");
+            if (g_opt_debug4) {
+                LOG("Ignore player action when collectin items");
+            }
             return;
         case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
+            if (g_opt_debug4) {
+            }
             LOG("Ignore player action when choosing target");
             return;
     }
 
     auto level = game->level;
     if (!level) {
+        if (g_opt_debug4) {
+            LOG("Player tick; ignore, no level");
+        }
         return;
     }
 
     auto player = level->player;
     if (!player) {
+        if (g_opt_debug4) {
+            LOG("Player tick; ignore, no player");
+        }
         return;
     }
 
@@ -89,6 +104,9 @@ void player_tick (void)
     }
 
     if (player->is_dead || player->is_hidden) {
+        if (g_opt_debug4) {
+            LOG("Player tick; ignore, is dead");
+        }
         return;
     }
 
@@ -169,6 +187,9 @@ void player_tick (void)
     if (left || right || up || down) {
         pending_cnt++;
         if (pending_cnt < pending_max_delay) {
+            if (g_opt_debug4) {
+                LOG("Player tick; too fast");
+            }
             return;
         }
     }
@@ -187,6 +208,9 @@ void player_tick (void)
     jump   = state[game->config.key_jump] ? 1 : 0;
 
     if (some_key_event_was_pressed) {
+        if (g_opt_debug4) {
+            LOG("Player tick; too fast");
+        }
         return;
     }
 
@@ -201,6 +225,9 @@ void player_tick (void)
         up = false;
         down = false;
         pending_cnt = 0;
+        if (g_opt_debug4) {
+            LOG("Player tick; too fast");
+        }
         return;
     }
 

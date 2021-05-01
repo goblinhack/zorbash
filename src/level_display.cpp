@@ -482,17 +482,25 @@ void Level::display_map (void)
         blit_fbo_unbind();
 
         if (player && player->is_waiting_to_descend_dungeon) {
-            player->descend_dungeon();
+            if (!player->descend_dungeon()) {
+                player->err("Failed to descend dungeon");
+            }
         }
         if (player && player->is_waiting_to_ascend_dungeon) {
-            player->ascend_dungeon();
+            if (!player->ascend_dungeon()) {
+                player->err("Failed to ascend dungeon");
+            }
         }
 
         if (player && player->is_waiting_to_descend_sewer) {
-            player->descend_sewer();
+            if (!player->descend_sewer()) {
+                player->err("Failed to descend sewer");
+            }
         }
         if (player && player->is_waiting_to_ascend_sewer) {
-            player->ascend_sewer();
+            if (!player->ascend_sewer()) {
+                player->err("Failed to ascend sewer");
+            }
         }
 
         if (player && player->is_waiting_to_fall) {
