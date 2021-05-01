@@ -494,6 +494,23 @@ bool Dungeon::is_corridor (const int x, const int y)
     return false;
 }
 
+bool Dungeon::is_bridge (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_bridge) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Dungeon::is_corridor_no_check (const int x, const int y)
 {
     if (is_oob(x, y)) {

@@ -71,6 +71,12 @@ void Level::update_minimap (void)
                     } else {
                         c = GRAY20;
                     }
+                } else if (is_bridge(x, y)) {
+                    if (is_visited(x, y)) {
+                        c = BROWN1;
+                    } else {
+                        c = BROWN2;
+                    }
                 } else if (is_shallow_water(x, y)) {
                     c = BLUE2;
                 } else if (is_deep_water(x, y)) {
@@ -170,6 +176,12 @@ void Level::update_minimap (void)
                         c = GRAY20;
                     } else {
                         c = GRAY10;
+                    }
+                } else if (is_bridge(x, y)) {
+                    if (is_visited(x, y)) {
+                        c = BROWN1;
+                    } else {
+                        c = BROWN2;
                     }
                 } else if (is_shallow_water(x, y)) {
                     c = BLUE2;

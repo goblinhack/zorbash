@@ -298,7 +298,8 @@ void Level::create_sewer_place_walls (int variant, int block_width, int block_he
             for (auto dy = 0; dy < block_height; dy++) {
                 auto Y = y + dy;
 
-                if (is_corridor(X, Y) || 
+                if (is_bridge(X, Y) || 
+                    is_corridor(X, Y) || 
                     is_shallow_water(X, Y) || 
                     is_ascend_sewer(X, Y) || 
                     is_deep_water(X, Y)) {
@@ -366,7 +367,8 @@ void Level::create_sewer_place_remaining_walls (const std::string &what)
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
 
-            if (is_corridor(x, y) || 
+            if (is_bridge(x, y) || 
+                is_corridor(x, y) || 
                 is_shallow_water(x, y) || 
                 is_ascend_sewer(x, y) || 
                 is_deep_water(x, y)) {

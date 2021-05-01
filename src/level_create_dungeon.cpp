@@ -204,6 +204,9 @@ have_dungeon_start:
         create_dungeon_place_corridor(dungeon, "corridor1", 0);
         if (g_errored) { return false; }
 
+        create_dungeon_place_bridge(dungeon, "bridge_ud", 0);
+        if (g_errored) { return false; }
+
         create_dungeon_place_rocks(dungeon, 1, 6, 6, tries);
         if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 1, 6, 3, tries);
@@ -1219,6 +1222,19 @@ void Level::create_dungeon_place_corridor (Dungeonp d, const std::string what, i
     }
 }
 
+void Level::create_dungeon_place_bridge (Dungeonp d, const std::string what, int floor_type)
+{_
+    for (auto x = MAP_BORDER_TOTAL; x < MAP_WIDTH - MAP_BORDER_TOTAL; x++) {
+        for (auto y = MAP_BORDER_TOTAL; y < MAP_HEIGHT - MAP_BORDER_TOTAL; y++) {
+            if (!d->is_bridge(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
 void Level::place_dirt (Dungeonp d)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
@@ -1291,11 +1307,13 @@ void Level::create_dungeon_game_mark_dungeon_tiles (Dungeonp d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (d->is_floor(x, y) ||
+            if (d->is_floor(x, y)    ||
                 d->is_corridor(x, y) ||
-                d->is_wall(x, y) ||
-                is_floor(x, y) ||
-                is_corridor(x, y)) {
+                d->is_bridge(x, y)   ||
+                d->is_wall(x, y)     ||
+                is_floor(x, y)       ||
+                is_corridor(x, y)    ||
+                is_bridge(x, y)) {
                 set_dungeon(x, y);
             }
         }

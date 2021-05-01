@@ -68,6 +68,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 auto m = get(Charmap::all_charmaps, c);
 
                 if (m.is_floor ||
+                    m.is_bridge ||
                     m.is_secret_corridor ||
                     m.is_dirt) {
                     floor_string += c;
@@ -587,7 +588,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_rrr87_at, is_rrr87)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr88_at, is_rrr88)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr89_at, is_rrr89)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr8_at, is_rrr8)
-LEVEL_BODY_GET_BOOL_AT(level_is_rrr90_at, is_rrr90)
+LEVEL_BODY_GET_BOOL_AT(level_is_bridge_at, is_bridge)
 LEVEL_BODY_GET_BOOL_AT(level_is_barrel_at, is_barrel)
 LEVEL_BODY_GET_BOOL_AT(level_is_burnable_at, is_burnable)
 LEVEL_BODY_GET_BOOL_AT(level_is_wand_eater_at, is_wand_eater)

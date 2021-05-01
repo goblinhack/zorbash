@@ -85,6 +85,8 @@ public:
     bool is_chasm_no_check(const int x, const int y);
     bool is_corridor(const int x, const int y);
     bool is_corridor_no_check(const int x, const int y);
+    bool is_bridge(const int x, const int y);
+    bool is_bridge_no_check(const int x, const int y);
     bool is_deep_water(const int x, const int y);
     bool is_deep_water_no_check(const int x, const int y);
     bool is_dirt(const int x, const int y);

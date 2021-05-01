@@ -192,7 +192,7 @@ int Tp::is_explosion(void) const                                     { return _i
 int Tp::is_extreme_hazard(void) const                                { return _is_extreme_hazard; }
 int Tp::is_fearless(void) const                                      { return _is_fearless; }
 int Tp::is_fire(void) const                                          { return _is_fire; }
-int Tp::is_very_combustible(void) const                                     { return _is_very_combustible; }
+int Tp::is_very_combustible(void) const                              { return _is_very_combustible; }
 int Tp::is_floating(void) const                                      { return _is_floating; }
 int Tp::is_floor(void) const                                         { return _is_floor; }
 int Tp::is_floor_deco(void) const                                    { return _is_floor_deco; }
@@ -337,7 +337,7 @@ int Tp::is_rrr86(void) const                                         { return _i
 int Tp::is_rrr87(void) const                                         { return _is_rrr87; }
 int Tp::is_rrr88(void) const                                         { return _is_rrr88; }
 int Tp::is_rrr89(void) const                                         { return _is_rrr89; }
-int Tp::is_rrr90(void) const                                         { return _is_rrr90; }
+int Tp::is_bridge(void) const                                         { return _is_bridge; }
 int Tp::is_barrel(void) const                                         { return _is_barrel; }
 int Tp::is_burnable(void) const                                         { return _is_burnable; }
 int Tp::is_wand_eater(void) const                                         { return _is_wand_eater; }
@@ -517,7 +517,7 @@ void Tp::set_is_explosion(int v)                                     { _is_explo
 void Tp::set_is_extreme_hazard(int v)                                { _is_extreme_hazard = v; }
 void Tp::set_is_fearless(int v)                                      { _is_fearless = v; }
 void Tp::set_is_fire(int v)                                          { _is_fire = v; }
-void Tp::set_is_very_combustible(int v)                                     { _is_very_combustible = v; }
+void Tp::set_is_very_combustible(int v)                              { _is_very_combustible = v; }
 void Tp::set_is_floating(int v)                                      { _is_floating = v; }
 void Tp::set_is_floor(int v)                                         { _is_floor = v; }
 void Tp::set_is_floor_deco(int v)                                    { _is_floor_deco = v; }
@@ -661,7 +661,7 @@ void Tp::set_is_rrr86(int v)                                         { _is_rrr86
 void Tp::set_is_rrr87(int v)                                         { _is_rrr87 = v; }
 void Tp::set_is_rrr88(int v)                                         { _is_rrr88 = v; }
 void Tp::set_is_rrr89(int v)                                         { _is_rrr89 = v; }
-void Tp::set_is_rrr90(int v)                                         { _is_rrr90 = v; }
+void Tp::set_is_bridge(int v)                                         { _is_bridge = v; }
 void Tp::set_is_barrel(int v)                                         { _is_barrel = v; }
 void Tp::set_is_burnable(int v)                                         { _is_burnable = v; }
 void Tp::set_is_wand_eater(int v)                                         { _is_wand_eater = v; }

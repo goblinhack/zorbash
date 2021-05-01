@@ -41,6 +41,8 @@ void Thing::level_push (void)
                                                    level->set_is_corpse(mx, my); }
     if (is_corridor())                           { i_set_is_corridor = true;
                                                    level->set_is_corridor(mx, my); }
+    if (is_bridge())                             { i_set_is_bridge = true;
+                                                   level->set_is_bridge(mx, my); }
     if (is_dirt())                               { i_set_is_dirt = true;
                                                    level->set_is_dirt(mx, my); }
     if (is_door() && !is_open)                   { i_set_is_door = true;

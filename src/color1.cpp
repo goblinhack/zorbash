@@ -45,6 +45,10 @@ color LIMEGREEN;
 color LIME;
 color GOLD;
 color FORESTGREEN;
+color BROWN1;
+color BROWN2;
+color BROWN3;
+color BROWN4;
 
 #if 0
 color ALICE_BLUE;
@@ -80,11 +84,6 @@ color BLUE4;
 color BLUE;
 color BLUE_VIOLET;
 color BLUEVIOLET;
-color BROWN1;
-color BROWN2;
-color BROWN3;
-color BROWN4;
-color BROWN;
 color BURLYWOOD1;
 color BURLYWOOD2;
 color BURLYWOOD3;
@@ -192,6 +191,10 @@ color GOLD4;
 
 void color_init1 (void)
 {_
+    color_set("brown1", &BROWN1, 255, 64, 64, 255);
+    color_set("brown2", &BROWN2, 238, 59, 59, 255);
+    color_set("brown3", &BROWN3, 205, 51, 51, 255);
+    color_set("brown4", &BROWN4, 139, 35, 35, 255);
     color_set("lime", &LIME, 50, 205, 50, 255);
     color_set("limegreen", &LIMEGREEN, 50, 205, 50, 255);
     color_set("black", &BLACK, 0, 0, 0, 255);
@@ -259,10 +262,6 @@ void color_init1 (void)
     color_set("blue4", &BLUE4, 0, 0, 139, 255);
     color_set("blue", &BLUE, 0, 0, 255, 255);
     color_set("blueviolet", &BLUEVIOLET, 138, 43, 226, 255);
-    color_set("brown1", &BROWN1, 255, 64, 64, 255);
-    color_set("brown2", &BROWN2, 238, 59, 59, 255);
-    color_set("brown3", &BROWN3, 205, 51, 51, 255);
-    color_set("brown4", &BROWN4, 139, 35, 35, 255);
     color_set("brown", &BROWN, 165, 42, 42, 255);
     color_set("burlywood1", &BURLYWOOD1, 255, 211, 155, 255);
     color_set("burlywood2", &BURLYWOOD2, 238, 197, 145, 255);

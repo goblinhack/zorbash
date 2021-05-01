@@ -120,6 +120,7 @@ public:
     uint64_t i_set_is_chasm:1                  {};
     uint64_t i_set_is_corpse:1                 {};
     uint64_t i_set_is_corridor:1               {};
+    uint64_t i_set_is_bridge:1                 {};
     uint64_t i_set_is_deep_water:1             {};
     uint64_t i_set_is_shallow_water:1          {};
     uint64_t i_set_is_dirt:1                   {};
@@ -841,7 +842,7 @@ public:
     int is_rrr88(void) const;
     int is_rrr89(void) const;
     int is_rrr9(void) const;
-    int is_rrr90(void) const;
+    int is_bridge(void) const;
     int is_rrr99(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;

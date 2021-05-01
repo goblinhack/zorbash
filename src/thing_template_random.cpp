@@ -137,8 +137,6 @@ static Tpp tp_get_with_no_rarity_filter (Tpidmap &m)
 
 Tpp tp_random_monst (void)
 {_
-CON("TODO using debug monster");
-return (tp_find("skeleton_fire"));
     if (unlikely(!tp_monst.size())) {
         ERR("No monsts found");
         return (nullptr);
@@ -153,6 +151,10 @@ for (auto i = 0; i < 1000; i++) {
 
 Tpp tp_random_monst_easy (void)
 {_
+#if 0
+CON("TODO using debug monster");
+return (tp_find("skeleton_fire"));
+#endif
     return tp_random_monst();
 }
 

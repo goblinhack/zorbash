@@ -237,6 +237,7 @@ _
 
         if (next_level->is_floor(x, y) ||
             next_level->is_corridor(x, y) ||
+            next_level->is_bridge(x, y) ||
             next_level->is_water(x, y) ||
             next_level->is_fire(x, y) ||
             next_level->is_lava(x, y)) {

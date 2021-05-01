@@ -247,7 +247,7 @@ PyObject *thing_is_rrr86(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr87(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr88(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr89(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr90(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_barrel(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_burnable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wand_eater(PyObject *obj, PyObject *args, PyObject *keywds);

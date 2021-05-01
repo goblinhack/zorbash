@@ -17,6 +17,7 @@ public:
         BARREL           =            'b',
         CHASM            =            'C',
         CORRIDOR         =            '#',
+        BRIDGE           =            '=',
         DEBUG            =            '@',
         DECO             =            '|',
         DEEP_WATER       =            'W',
@@ -57,6 +58,7 @@ public:
     bool                      is_blood                        {false};
     bool                      is_chasm                        {false};
     bool                      is_corridor                     {false};
+    bool                      is_bridge                       {false};
     bool                      is_deep_water                   {false};
     bool                      is_dirt                         {false};
     bool                      is_door                         {false};
