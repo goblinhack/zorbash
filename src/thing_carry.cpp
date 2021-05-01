@@ -167,6 +167,11 @@ bool Thing::check_anything_to_carry (void)
             continue;
         }
 
+        if (t->is_auto_collect_item()) {
+            carry(t);
+            continue;
+        }
+
         return true;
     } FOR_ALL_THINGS_END()
 

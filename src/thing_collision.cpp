@@ -873,10 +873,7 @@ _
         }
     }
 
-    //
-    // Sword use hits?
-    //
-    if (is_player() && it->is_item() && !it->is_auto_collect_item()) {
+    if (is_player() && it->is_item()) {
         log("No; allow items to be collected manually");
     } else if (!it->is_dead && possible_to_attack(it)) {
         if (things_overlap_attack(me, future_pos, it)) {
@@ -1114,7 +1111,7 @@ _
             log("No; overlaps but can exit via sewer exit");
             return false;
         }
-    } else if (is_player() && it->is_item() && !it->is_auto_collect_item()) {
+    } else if (is_player() && it->is_item()) {
         log("No; allow manual collect instead");
         return false;
     } else if (possible_to_attack(it)) {
