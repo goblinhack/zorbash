@@ -264,6 +264,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_blood                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_chasm                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_corpse                 = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_bridge                 = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_corridor               = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_deep_water             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_shallow_water          = (bits64 >> shift) & 1; shift++;
@@ -367,6 +368,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};               */ in >> bits(my.t->_is_blood);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};               */ in >> bits(my.t->_is_chasm);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};              */ in >> bits(my.t->_is_corpse);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_bridge {};              */ in >> bits(my.t->_is_bridge);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};            */ in >> bits(my.t->_is_corridor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};          */ in >> bits(my.t->_is_deep_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};       */ in >> bits(my.t->_is_shallow_water);

@@ -37,6 +37,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_corpse(mx, my); }
     if (i_set_is_corridor)                             { i_set_is_corridor = false;
                                                          level->unset_is_corridor(mx, my); }
+    if (i_set_is_bridge)                               { i_set_is_bridge = false;
+                                                         level->unset_is_bridge(mx, my); }
     if (i_set_is_shallow_water)                        { i_set_is_shallow_water = false;
                                                          level->unset_is_shallow_water(mx, my); }
     if (i_set_is_deep_water)                           { i_set_is_deep_water = false;

@@ -493,8 +493,8 @@ class Tp:
     def set_is_rrr89(self, value):
         zx.tp_set_is_rrr89(self, value)
 
-    def set_is_rrr90(self, value):
-        zx.tp_set_is_rrr90(self, value)
+    def set_is_bridge(self, value):
+        zx.tp_set_is_bridge(self, value)
 
     def set_is_barrel(self, value):
         zx.tp_set_is_barrel(self, value)

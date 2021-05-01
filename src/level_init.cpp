@@ -22,6 +22,7 @@ void Level::clear (void)
     _is_chasm = {};
     _is_corpse = {};
     _is_corridor = {};
+    _is_bridge = {};
     _is_deep_water = {};
     _is_shallow_water = {};
     _is_dirt = {};

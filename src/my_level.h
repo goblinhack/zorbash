@@ -34,6 +34,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_bridge {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
@@ -400,6 +401,8 @@ public:
     uint8_t is_corpse(const point &p);
     uint8_t is_corridor(const int x, const int y);
     uint8_t is_corridor(const point &p);
+    uint8_t is_bridge(const int x, const int y);
+    uint8_t is_bridge(const point &p);
     uint8_t is_deep_water(const int x, const int y);
     uint8_t is_deep_water(const point &p);
     uint8_t is_descend_dungeon(const int x, const int y);
@@ -490,6 +493,7 @@ public:
     void create_dungeon_game_mark_dungeon_tiles(Dungeonp d);
     void create_dungeon_place_chasm(Dungeonp d, const std::string &what);
     void create_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
+    void create_dungeon_place_bridge(Dungeonp d, const std::string what, int depth);
     void create_dungeon_place_deep_water(Dungeonp d, const std::string &what);
     void create_dungeon_place_floor_under_objects(Dungeonp d, const std::string what, int depth);
     void create_dungeon_place_floors(Dungeonp d, const std::string what, int depth, int variant, int block_width, int block_height, int tries);
@@ -583,6 +587,7 @@ public:
     void set_is_chasm(const int x, const int y);
     void set_is_corpse(const int x, const int y);
     void set_is_corridor(const int x, const int y);
+    void set_is_bridge(const int x, const int y);
     void set_is_deep_water(const int x, const int y);
     void set_is_descend_dungeon(const int x, const int y);
     void set_is_descend_sewer(const int x, const int y);
@@ -644,6 +649,7 @@ public:
     void unset_is_chasm(const int x, const int y);
     void unset_is_corpse(const int x, const int y);
     void unset_is_corridor(const int x, const int y);
+    void unset_is_bridge(const int x, const int y);
     void unset_is_deep_water(const int x, const int y);
     void unset_is_descend_dungeon(const int x, const int y);
     void unset_is_descend_sewer(const int x, const int y);

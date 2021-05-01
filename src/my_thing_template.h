@@ -310,7 +310,7 @@ private:
     int _is_rrr87 {};
     int _is_rrr88 {};
     int _is_rrr89 {};
-    int _is_rrr90 {};
+    int _is_bridge {};
     int _is_barrel {};
     int _is_burnable {};
     int _is_wand_eater {};
@@ -774,7 +774,7 @@ public:
     int is_rrr88(void) const;
     int is_rrr89(void) const;
     int is_rrr9(void) const;
-    int is_rrr90(void) const;
+    int is_bridge(void) const;
     int is_rrr99(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
@@ -1106,7 +1106,7 @@ public:
     void set_is_rrr88(int);
     void set_is_rrr89(int);
     void set_is_rrr9(int);
-    void set_is_rrr90(int);
+    void set_is_bridge(int);
     void set_is_rrr99(int);
     void set_is_secret_door(int);
     void set_is_sewer_wall(int);

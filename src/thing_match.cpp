@@ -94,7 +94,7 @@ bool Thing::matches (const std::string& what) const
     if (is_extreme_hazard() &&                                (what == "is_extreme_hazard"))                                { return true; }
     if (is_fearless() &&                                      (what == "is_fearless"))                                      { return true; }
     if (is_fire() &&                                          (what == "is_fire"))                                          { return true; }
-    if (is_very_combustible() &&                                     (what == "is_very_combustible"))                                     { return true; }
+    if (is_very_combustible() &&                              (what == "is_very_combustible"))                                     { return true; }
     if (is_floating() &&                                      (what == "is_floating"))                                      { return true; }
     if (is_floor() &&                                         (what == "is_floor"))                                         { return true; }
     if (is_floor_deco() &&                                    (what == "is_floor_deco"))                                    { return true; }
@@ -239,7 +239,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr88() &&                                         (what == "is_rrr88"))                                         { return true; }
     if (is_rrr89() &&                                         (what == "is_rrr89"))                                         { return true; }
     if (is_rrr9() &&                                          (what == "is_rrr9"))                                          { return true; }
-    if (is_rrr90() &&                                         (what == "is_rrr90"))                                         { return true; }
+    if (is_bridge() &&                                         (what == "is_bridge"))                                         { return true; }
     if (is_barrel() &&                                         (what == "is_barrel"))                                         { return true; }
     if (is_burnable() &&                                         (what == "is_burnable"))                                         { return true; }
     if (is_wand_eater() &&                                         (what == "is_wand_eater"))                                         { return true; }
@@ -357,7 +357,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_extreme_hazard")                                { return &Thing::is_extreme_hazard; }
     if (what == "is_fearless")                                      { return &Thing::is_fearless; }
     if (what == "is_fire")                                          { return &Thing::is_fire; }
-    if (what == "is_very_combustible")                                     { return &Thing::is_very_combustible; }
+    if (what == "is_very_combustible")                              { return &Thing::is_very_combustible; }
     if (what == "is_floating")                                      { return &Thing::is_floating; }
     if (what == "is_floor")                                         { return &Thing::is_floor; }
     if (what == "is_floor_deco")                                    { return &Thing::is_floor_deco; }
@@ -502,7 +502,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr88")                                         { return &Thing::is_rrr88; }
     if (what == "is_rrr89")                                         { return &Thing::is_rrr89; }
     if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }
-    if (what == "is_rrr90")                                         { return &Thing::is_rrr90; }
+    if (what == "is_bridge")                                         { return &Thing::is_bridge; }
     if (what == "is_barrel")                                         { return &Thing::is_barrel; }
     if (what == "is_burnable")                                         { return &Thing::is_burnable; }
     if (what == "is_wand_eater")                                         { return &Thing::is_wand_eater; }
