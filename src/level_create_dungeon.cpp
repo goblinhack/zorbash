@@ -204,7 +204,7 @@ have_dungeon_start:
         create_dungeon_place_corridor(dungeon, "corridor1", 0);
         if (g_errored) { return false; }
 
-        create_dungeon_place_bridge(dungeon, "bridge_ud", 0);
+        create_dungeon_place_bridge(dungeon);
         if (g_errored) { return false; }
 
         create_dungeon_place_rocks(dungeon, 1, 6, 6, tries);
@@ -1222,15 +1222,32 @@ void Level::create_dungeon_place_corridor (Dungeonp d, const std::string what, i
     }
 }
 
-void Level::create_dungeon_place_bridge (Dungeonp d, const std::string what, int floor_type)
+void Level::create_dungeon_place_bridge (Dungeonp d)
 {_
     for (auto x = MAP_BORDER_TOTAL; x < MAP_WIDTH - MAP_BORDER_TOTAL; x++) {
         for (auto y = MAP_BORDER_TOTAL; y < MAP_HEIGHT - MAP_BORDER_TOTAL; y++) {
-            if (!d->is_bridge(x, y)) {
-                continue;
-            }
+            if (d->is_bridge(x, y)) {
+                auto nebs = 0;
+                nebs += d->is_bridge(x - 1, y);
+                nebs += d->is_bridge(x + 1, y);
+                nebs += d->is_bridge(x, y - 1);
+                nebs += d->is_bridge(x, y + 1);
 
-            (void) thing_new(what, fpoint(x, y));
+                if (nebs > 2) {
+                    (void) thing_new("bridge_x", fpoint(x, y));
+                    continue;
+                }
+
+                if (d->is_bridge(x, y - 1) || d->is_bridge(x, y + 1)) {
+                    (void) thing_new("bridge_ud", fpoint(x, y));
+                    continue;
+                }
+
+                if (d->is_bridge(x - 1, y) || d->is_bridge(x + 1, y)) {
+                    (void) thing_new("bridge_lr", fpoint(x, y));
+                    continue;
+                }
+            }
         }
     }
 }

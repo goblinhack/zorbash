@@ -50,7 +50,6 @@ void Thing::blit_floor_chasm (point &tl, point &br, const ThingTiles *tiles)
         tl2.y += th;
         br2.y += th * depth;
         tl2.y -= dh;
-        br2.y -= 1; // adds a bit of shadow
         tile_blit_section_colored(tilen,
                           fpoint(0, 0),
                           fpoint(1, ((1.0 / maxdepth) * depth) + fdh),

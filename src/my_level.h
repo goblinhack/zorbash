@@ -493,7 +493,7 @@ public:
     void create_dungeon_game_mark_dungeon_tiles(Dungeonp d);
     void create_dungeon_place_chasm(Dungeonp d, const std::string &what);
     void create_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
-    void create_dungeon_place_bridge(Dungeonp d, const std::string what, int depth);
+    void create_dungeon_place_bridge(Dungeonp d);
     void create_dungeon_place_deep_water(Dungeonp d, const std::string &what);
     void create_dungeon_place_floor_under_objects(Dungeonp d, const std::string what, int depth);
     void create_dungeon_place_floors(Dungeonp d, const std::string what, int depth, int variant, int block_width, int block_height, int tries);
