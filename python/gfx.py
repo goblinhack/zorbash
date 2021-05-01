@@ -5862,6 +5862,7 @@ def init_tiles1_floor():
       "dirt3.18",
       "dirt3.19",
       #########################################################################
+      "bridge_x",
       "bridge_lr.1",
       "bridge_lr.2",
       "bridge_lr.3",
@@ -5880,7 +5881,6 @@ def init_tiles1_floor():
       "bridge_lr.16",
       "bridge_lr.17",
       "bridge_lr.18",
-      "bridge_lr.19",
       #########################################################################
       "bridge_ud.1",
       "bridge_ud.2",

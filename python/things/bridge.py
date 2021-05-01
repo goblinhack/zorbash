@@ -28,6 +28,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     x.update()
 
 def init():
+    tp_init(name="bridge_x", tiles=[ "bridge_x", ], bot3_tiles=[ "chasm1.1", ])
     tp_init(name="bridge_lr",
         tiles=[
             "bridge_lr.1", "bridge_lr.2", "bridge_lr.3", "bridge_lr.4",
@@ -35,7 +36,6 @@ def init():
             "bridge_lr.9", "bridge_lr.10", "bridge_lr.11", "bridge_lr.12",
             "bridge_lr.13", "bridge_lr.14", "bridge_lr.15", "bridge_lr.16",
             "bridge_lr.17", "bridge_lr.18", 
-            "bridge_lr.19",
         ],
         bot3_tiles=[ 
                     "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
