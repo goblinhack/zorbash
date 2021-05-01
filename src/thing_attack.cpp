@@ -221,6 +221,7 @@ _
         it->is_wall() ||
         it->is_rock() ||
         it->is_door() ||
+        it->is_bridge() ||
         it->is_brazier() ||
         it->is_barrel() ||
         it->is_player() ||

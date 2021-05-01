@@ -684,6 +684,7 @@ public:
     int is_cursor_path(void) const;
     int is_dangerous(Thingp);
     int is_dead_on_shove(void) const;
+    int is_dead_check(void) const;
     int is_deep_water(void) const;
     int is_descend_dungeon(void) const;
     int is_descend_sewer(void) const;

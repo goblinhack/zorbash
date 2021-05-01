@@ -87,10 +87,10 @@ int Thing::gfx_shown_in_bg(void) const                                  {_ retur
 int Thing::gfx_small_shadow_caster(void) const                          {_ return (tp()->gfx_small_shadow_caster()); }
 int Thing::gfx_water(void) const                                        {_ return (tp()->gfx_water()); }
 int Thing::gfx_weapon_carry_anim(void) const                            {_ return (tp()->gfx_weapon_carry_anim()); }
-int Thing::hates_acid(void) const                                      {_ return (tp()->hates_acid()); }
-int Thing::hates_fire(void) const                                      {_ return (tp()->hates_fire()); }
-int Thing::hates_poison(void) const                                    {_ return (tp()->hates_poison()); }
-int Thing::hates_water(void) const                                     {_ return (tp()->hates_water()); }
+int Thing::hates_acid(void) const                                       {_ return (tp()->hates_acid()); }
+int Thing::hates_fire(void) const                                       {_ return (tp()->hates_fire()); }
+int Thing::hates_poison(void) const                                     {_ return (tp()->hates_poison()); }
+int Thing::hates_water(void) const                                      {_ return (tp()->hates_water()); }
 int Thing::health_hunger_pct(void) const                                {_ return (tp()->health_hunger_pct()); }
 int Thing::health_starving_pct(void) const                              {_ return (tp()->health_starving_pct()); }
 int Thing::hunger_clock_freq_ms(void) const                             {_ return (tp()->hunger_clock_freq_ms()); }
@@ -110,12 +110,12 @@ int Thing::is_attackable_by_monst(void) const                           {_ retur
 int Thing::is_attackable_by_player(void) const                          {_ return (tp()->is_attackable_by_player()); }
 int Thing::is_auto_collect_item(void) const                             {_ return (tp()->is_auto_collect_item()); }
 int Thing::is_bag(void) const                                           {_ return (tp()->is_bag()); }
-int Thing::is_barrel(void) const                                         {_ return (tp()->is_barrel()); }
+int Thing::is_barrel(void) const                                        {_ return (tp()->is_barrel()); }
 int Thing::is_bleeder(void) const                                       {_ return (tp()->is_bleeder()); }
 int Thing::is_blood(void) const                                         {_ return (tp()->is_blood()); }
 int Thing::is_blood_splatter(void) const                                {_ return (tp()->is_blood_splatter()); }
 int Thing::is_brazier(void) const                                       {_ return (tp()->is_brazier()); }
-int Thing::is_burnable(void) const                                         {_ return (tp()->is_burnable()); }
+int Thing::is_burnable(void) const                                      {_ return (tp()->is_burnable()); }
 int Thing::is_carrier_of_treasure_class_a(void) const                   {_ return (tp()->is_carrier_of_treasure_class_a()); }
 int Thing::is_carrier_of_treasure_class_b(void) const                   {_ return (tp()->is_carrier_of_treasure_class_b()); }
 int Thing::is_carrier_of_treasure_class_c(void) const                   {_ return (tp()->is_carrier_of_treasure_class_c()); }
@@ -124,6 +124,7 @@ int Thing::is_collect_as_keys(void) const                               {_ retur
 int Thing::is_collectable(void) const                                   {_ return (tp()->is_collectable()); }
 int Thing::is_combustible(void) const                                   {_ return (tp()->is_combustible()); }
 int Thing::is_corpse (void) const                                       {_ return (is_dead && is_corpse_on_death()); }
+int Thing::is_dead_check (void) const                                   {_ return is_dead; }
 int Thing::is_corpse_on_death(void) const                               {_ return (tp()->is_corpse_on_death()); }
 int Thing::is_corridor(void) const                                      {_ return (tp()->is_corridor()); }
 int Thing::is_critical_to_level(void) const                             {_ return (tp()->is_critical_to_level()); }
