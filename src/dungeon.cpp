@@ -236,7 +236,7 @@ void Dungeon::make_dungeon (void)
     add_remaining();
 
     dry_grass_gen(20, // fill prob
-                  10,  // R1
+                  10, // R1
                   5,  // R2
                   4   /* generations */);
 
@@ -3653,7 +3653,34 @@ void Dungeon::cave_gen (uint8_t map_fill_prob,
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
             if (get(map_curr, x, y)) {
-                if (!is_anything_at(x, y)) {
+                if (is_anything_at(x, y)) {
+                    continue;
+                }
+
+                bool chasm_ok = true;
+                for (auto dx = -1; dx <= 1; dx++) {
+                    if (!chasm_ok) {
+                        break;
+                    }
+                    for (auto dy = -1; dy <= 1; dy++) {
+                        if (is_lava(x+dx, y+dy)) {
+                            chasm_ok = false;
+                            break;
+                        }
+                        if (is_shallow_water(x+dx, y+dy)) {
+                            chasm_ok = false;
+                            break;
+                        }
+                        if (is_deep_water(x+dx, y+dy)) {
+                            chasm_ok = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (chasm_ok) {
+                    putc(x, y, MAP_DEPTH_OBJ, Charmap::CHASM);
+                } else {
                     putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
                 }
             }
@@ -3776,6 +3803,9 @@ void Dungeon::dry_grass_gen (uint8_t map_fill_prob,
                 for (auto dx = -1; dx <= 1; dx++) {
                     for (auto dy = -1; dy <= 1; dy++) {
                         if (is_lava(x+dx, y+dy)) {
+                            goto next;
+                        }
+                        if (is_brazier(x+dx, y+dy)) {
                             goto next;
                         }
                         if (is_shallow_water(x+dx, y+dy)) {

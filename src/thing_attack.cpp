@@ -35,7 +35,7 @@ bool Thing::possible_to_attack (const Thingp it)
         }
     }
 
-    if (is_wand() || is_laser() || is_projectile() || is_explosion()) {
+    if (is_lava() || is_fire() || is_wand() || is_laser() || is_projectile() || is_explosion()) {
         // continue
     } else if (owner && owner->is_monst() && it->is_attackable_by_monst()) {
         // monst weapon, continue
@@ -203,7 +203,7 @@ _
                    it->is_very_combustible() ||
                    it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
-                log("Can attack as I am fire %s", it->to_string().c_str());
+                log("Can attack as I am firey %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -333,7 +333,7 @@ _
     }
 
     if (!possible_to_attack(it)) {
-	log("Attack failed, not possible to attack %s", it->to_string().c_str());
+	log("Attack failed, not possible to attack %s", it->to_string().c_str()              );
         return false;
     }
 
@@ -409,33 +409,35 @@ _
     //
     // See if we can bypass its defences
     //
-    if (!it->is_always_hit()) {
-        //it->topcon("att_mod %d def_mod %d", att_mod, def_mod);
-        if (!d20roll(att_mod, def_mod, fumble, crit)) {
-            if (is_player() || (owner && owner->is_player())) {
-                TOPCON("You miss %s.", it->text_the().c_str());
-                msg("!");
-            } else if (it->is_player()) {
-                if (owner) {
-                    TOPCON("%s misses with %s.", 
-                           owner->text_the().c_str(),
-                           text_The().c_str());
+    if (is_player() || is_alive_monst()) {
+        if (!it->is_always_hit()) {
+            //it->topcon("att_mod %d def_mod %d", att_mod, def_mod);
+            if (!d20roll(att_mod, def_mod, fumble, crit)) {
+                if (is_player() || (owner && owner->is_player())) {
+                    TOPCON("You miss %s.", it->text_the().c_str());
+                    msg("!");
+                } else if (it->is_player()) {
+                    if (owner) {
+                        TOPCON("%s misses with %s.", 
+                               owner->text_the().c_str(),
+                               text_The().c_str());
+                    } else {
+                        TOPCON("%s misses.", text_The().c_str());
+                    }
                 } else {
-                    TOPCON("%s misses.", text_The().c_str());
+                    log("The attack missed (att %d, def %d) on %s",
+                        att_mod, def_mod, it->to_string().c_str());
                 }
-            } else {
-                log("The attack missed (att %d, def %d) on %s",
-                    att_mod, def_mod, it->to_string().c_str());
-            }
 
-            if (attack_lunge()) {
-                lunge(it->get_interpolated_mid_at());
-            }
+                if (attack_lunge()) {
+                    lunge(it->get_interpolated_mid_at());
+                }
 
-            //
-            // We tried to attack, so do not move
-            //
-            return true;
+                //
+                // We tried to attack, so do not move
+                //
+                return true;
+            }
         }
     }
 
