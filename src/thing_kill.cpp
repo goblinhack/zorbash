@@ -47,22 +47,26 @@ void Thing::kill (Thingp killer, const char *reason)
     // but if being destroyed then its being garbage collected, like
     // at the end of the level.
     //
-    if (!level->is_being_destroyed) {
-        auto on_death = on_death_do();
-        if (!std::empty(on_death)) {
-            auto t = split_tokens(on_death, '.');
-            if (t.size() == 2) {
-                auto mod = t[0];
-                auto fn = t[1];
-                std::size_t found = fn.find("()");
-                if (found != std::string::npos) {
-                    fn = fn.replace(found, 2, "");
+    if (!is_dying) {
+        is_dying = true;
+
+        if (!level->is_being_destroyed) {
+            auto on_death = on_death_do();
+            if (!std::empty(on_death)) {
+                auto t = split_tokens(on_death, '.');
+                if (t.size() == 2) {
+                    auto mod = t[0];
+                    auto fn = t[1];
+                    std::size_t found = fn.find("()");
+                    if (found != std::string::npos) {
+                        fn = fn.replace(found, 2, "");
+                    }
+                    py_call_void_fn(mod.c_str(), fn.c_str(),
+                                    id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+                } else {
+                    ERR("Bad on_death call [%s] expected mod:function, got %d elems",
+                        on_death.c_str(), (int)on_death.size());
                 }
-                py_call_void_fn(mod.c_str(), fn.c_str(),
-                                id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
-            } else {
-                ERR("Bad on_death call [%s] expected mod:function, got %d elems",
-                    on_death.c_str(), (int)on_death.size());
             }
         }
     }

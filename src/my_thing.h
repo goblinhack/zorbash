@@ -87,6 +87,7 @@ public:
     uint64_t is_bouncing:1                   {};
     uint64_t is_changing_level:1             {};
     uint64_t is_dead:1                       {};
+    uint64_t is_dying:1                      {};
     uint64_t is_facing_left:1                {};
     uint64_t is_fadeup:1                     {};
     uint64_t is_falling:1                    {};
@@ -684,7 +685,7 @@ public:
     int is_cursor_path(void) const;
     int is_dangerous(Thingp);
     int is_dead_on_shove(void) const;
-    int is_dead_check(void) const;
+    int is_dead_or_dying(void) const;
     int is_deep_water(void) const;
     int is_descend_dungeon(void) const;
     int is_descend_sewer(void) const;

@@ -233,6 +233,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->is_bouncing                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_changing_level             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_dead                       = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_dying                      = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_facing_left                = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_fadeup                     = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_falling                    = (bits64 >> shift) & 1; shift++;

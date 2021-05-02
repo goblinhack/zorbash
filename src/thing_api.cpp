@@ -124,7 +124,7 @@ int Thing::is_collect_as_keys(void) const                               {_ retur
 int Thing::is_collectable(void) const                                   {_ return (tp()->is_collectable()); }
 int Thing::is_combustible(void) const                                   {_ return (tp()->is_combustible()); }
 int Thing::is_corpse (void) const                                       {_ return (is_dead && is_corpse_on_death()); }
-int Thing::is_dead_check (void) const                                   {_ return is_dead; }
+int Thing::is_dead_or_dying (void) const                                   {_ return is_dead || is_dying; }
 int Thing::is_corpse_on_death(void) const                               {_ return (tp()->is_corpse_on_death()); }
 int Thing::is_corridor(void) const                                      {_ return (tp()->is_corridor()); }
 int Thing::is_critical_to_level(void) const                             {_ return (tp()->is_critical_to_level()); }

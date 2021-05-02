@@ -12,8 +12,8 @@ def on_death(me, x, y):
 def on_open(me, x, y):
     zx.sound_play("door_open")
 
-def tp_init(name, text_name):
-    x = tp.Tp(name, text_name)
+def tp_init(name):
+    x = tp.Tp(name, "door")
     x.set_hates_fire(100)
     x.set_collision_attack(True)
     x.set_collision_check(True)
@@ -68,6 +68,6 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="door1", text_name="door")
+    tp_init(name="door1")
 
 init()
