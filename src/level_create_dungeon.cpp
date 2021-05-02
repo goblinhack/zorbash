@@ -240,8 +240,6 @@ have_dungeon_start:
 
         place_dirt(dungeon);
         if (g_errored) { return false; }
-        place_dry_grass(dungeon);
-        if (g_errored) { return false; }
         create_dungeon_place_chasm(dungeon, "chasm1");
         if (g_errored) { return false; }
         create_dungeon_place_deep_water(dungeon, "deep_water1");
@@ -375,6 +373,9 @@ _
         if (g_errored) { return false; }
 _
         create_dungeon_game_mark_dungeon_tiles(dungeon);
+        if (g_errored) { return false; }
+_
+        place_dry_grass(dungeon);
         if (g_errored) { return false; }
 _
         scroll_map_to_player();
@@ -1286,6 +1287,14 @@ void Level::place_dry_grass (Dungeonp d)
                 auto tp = tp_random_dry_grass();
                 if (!tp) {
                     return;
+                }
+
+                if (heatmap(x, y)) {
+                    continue;
+                }
+
+                if (is_brazier(x, y)) {
+                    continue;
                 }
 
                 (void) thing_new(tp->name(), fpoint(x, y));
