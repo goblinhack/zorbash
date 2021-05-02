@@ -368,7 +368,7 @@ void Thing::update_interpolated_position (void)
 #if 0
             do_location_check = true;
 #endif
-            log("Changed position (new %f, %f, old %f,%f); do location check",
+            log("Changed position (new %f, %f, old %f,%f)",
                 mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
 
             update_pos = true;
@@ -382,7 +382,7 @@ void Thing::update_interpolated_position (void)
 #if 0
             do_location_check = true;
 #endif
-            log("End of move position (new %f, %f, old %f,%f); do location check",
+            log("End of move position (new %f, %f, old %f,%f)",
                 mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
 
             update_pos = true;

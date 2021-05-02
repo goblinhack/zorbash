@@ -109,17 +109,23 @@ bool Thing::location_check_forced (void)
 
 bool Thing::location_check (void)
 {_
+    if (is_player()) {
+        log("Location check? last loc tick %d game tick %d",
+            get_tick_last_location_check(), game->tick_current);
+    }
+_
     if (get_tick_last_location_check() == game->tick_current) {
         if (is_player()) {
-            log("Location check, tick %d, too soon", get_tick_last_location_check());
+            log("No, too soon");
         }
         return false;
     }
 
-    set_tick_last_location_check(game->tick_current);
     if (is_player()) {
-        log("Location check, tick %d", get_tick_last_location_check());
+        log("Yes");
     }
+
+    set_tick_last_location_check(game->tick_current);
 
     return location_check_forced();
 }
