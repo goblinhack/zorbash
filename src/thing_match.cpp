@@ -237,7 +237,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr86() &&                                         (what == "is_rrr86"))                                         { return true; }
     if (is_rrr87() &&                                         (what == "is_rrr87"))                                         { return true; }
     if (is_rrr88() &&                                         (what == "is_rrr88"))                                         { return true; }
-    if (is_rrr89() &&                                         (what == "is_rrr89"))                                         { return true; }
+    if (is_dry_grass() &&                                         (what == "is_dry_grass"))                                         { return true; }
     if (is_rrr9() &&                                          (what == "is_rrr9"))                                          { return true; }
     if (is_bridge() &&                                         (what == "is_bridge"))                                         { return true; }
     if (is_barrel() &&                                         (what == "is_barrel"))                                         { return true; }
@@ -500,7 +500,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr86")                                         { return &Thing::is_rrr86; }
     if (what == "is_rrr87")                                         { return &Thing::is_rrr87; }
     if (what == "is_rrr88")                                         { return &Thing::is_rrr88; }
-    if (what == "is_rrr89")                                         { return &Thing::is_rrr89; }
+    if (what == "is_dry_grass")                                         { return &Thing::is_dry_grass; }
     if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }
     if (what == "is_bridge")                                         { return &Thing::is_bridge; }
     if (what == "is_barrel")                                         { return &Thing::is_barrel; }

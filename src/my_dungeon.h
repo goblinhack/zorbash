@@ -90,6 +90,7 @@ public:
     bool is_deep_water(const int x, const int y);
     bool is_deep_water_no_check(const int x, const int y);
     bool is_dirt(const int x, const int y);
+    bool is_dry_grass(const int x, const int y);
     bool is_dirt_no_check(const int x, const int y);
     bool is_door(const int x, const int y);
     bool is_door_no_check(const int x, const int y);
@@ -185,17 +186,21 @@ public:
     void water_fixup_shallows(void);
     void water_fixup(void);
     void cave_gen(uint8_t map_fill_prob,
-                   uint8_t map_r1,
-                   uint8_t map_r2,
-                   uint8_t map_generations);
+                  uint8_t map_r1,
+                  uint8_t map_r2,
+                  uint8_t map_generations);
     void dirt_gen(uint8_t map_fill_prob,
+                  uint8_t map_r1,
+                  uint8_t map_r2,
+                  uint8_t map_generations);
+    void dry_grass_gen(uint8_t map_fill_prob,
+                       uint8_t map_r1,
+                       uint8_t map_r2,
+                       uint8_t map_generations);
+    void water_gen(uint8_t map_fill_prob,
                    uint8_t map_r1,
                    uint8_t map_r2,
                    uint8_t map_generations);
-    void water_gen(uint8_t map_fill_prob,
-                    uint8_t map_r1,
-                    uint8_t map_r2,
-                    uint8_t map_generations);
 
     bool is_oob(const int x, const int y, const int z);
     bool is_oob(const int x, const int y);

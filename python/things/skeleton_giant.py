@@ -59,9 +59,9 @@ def tp_init(name, text_name):
     x.set_stat_constitution(15)
     x.set_stat_defence(13)
     x.set_stat_strength(13)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("A monstrous skeleton, possibly unfriendly.")
-    x.set_text_hits("claws");
+    x.set_text_hits("claws")
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

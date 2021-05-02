@@ -35,7 +35,7 @@ bool Thing::possible_to_attack (const Thingp it)
         }
     }
 
-    if (is_wand() || is_laser() || is_projectile()) {
+    if (is_wand() || is_laser() || is_projectile() || is_explosion()) {
         // continue
     } else if (owner && owner->is_monst() && it->is_attackable_by_monst()) {
         // monst weapon, continue
@@ -222,6 +222,7 @@ _
         it->is_rock() ||
         it->is_door() ||
         it->is_bridge() ||
+        it->is_dry_grass() ||
         it->is_brazier() ||
         it->is_barrel() ||
         it->is_player() ||
@@ -239,6 +240,11 @@ _
 
         if (is_wand()) {
             log("Can attack as wand %s", it->to_string().c_str());
+            return true;
+        }
+
+        if (is_explosion()) {
+            log("Can attack as explosion %s", it->to_string().c_str());
             return true;
         }
     }

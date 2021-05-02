@@ -69,9 +69,9 @@ def tp_init(name, text_name, short_text_name):
     x.set_on_idle_dice("1d0:cleaner.on_idle()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("A dungeon auto cleaner jelly thingy.")
-    x.set_text_hits("burns");
+    x.set_text_hits("burns")
     x.set_tick_rate_tenths(3)
     x.set_on_death_do("cleaner.on_death()")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

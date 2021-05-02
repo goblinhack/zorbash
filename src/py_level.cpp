@@ -58,6 +58,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             std::string floor_string;
+            std::string floor2_string;
             std::string water_string;
             std::string lava_string;
             std::string chasm_string;
@@ -67,8 +68,8 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
             for (auto& c : py_obj_to_string(o)) {
                 auto m = get(Charmap::all_charmaps, c);
 
-                if (m.is_floor ||
-                    m.is_bridge ||
+                if (m.is_floor           ||
+                    m.is_bridge          ||
                     m.is_secret_corridor ||
                     m.is_dirt) {
                     floor_string += c;
@@ -102,6 +103,12 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     floor_string += Charmap::FLOOR;
                 } else {
                     floor_string += Charmap::SPACE;
+                }
+
+                if (m.is_dry_grass) {
+                    floor2_string += Charmap::DRY_GRASS;
+                } else {
+                    floor2_string += Charmap::SPACE;
                 }
 
                 if (m.is_shallow_water || m.is_deep_water) {
@@ -160,32 +167,37 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             if (floor_string.size() != MAP_WIDTH){
-                ERR("Level floor width mismatch, %d, expected %d",
+                DIE("Level floor width mismatch, %d, expected %d",
                     (int)floor_string.size(), MAP_WIDTH);
                 Py_RETURN_FALSE;
             }
+            if (floor2_string.size() != MAP_WIDTH){
+                DIE("Room floor2 width mismatch, %d, expected %d",
+                    (int)floor2_string.size(), MAP_WIDTH);
+                Py_RETURN_FALSE;
+            }
             if (water_string.size() != MAP_WIDTH){
-                ERR("Level water width mismatch, %d, expected %d",
+                DIE("Level water width mismatch, %d, expected %d",
                     (int)water_string.size(), MAP_WIDTH);
                 Py_RETURN_FALSE;
             }
             if (lava_string.size() != MAP_WIDTH){
-                ERR("Level lava width mismatch, %d, expected %d",
+                DIE("Level lava width mismatch, %d, expected %d",
                     (int)lava_string.size(), MAP_WIDTH);
                 Py_RETURN_FALSE;
             }
             if (chasm_string.size() != MAP_WIDTH){
-                ERR("Level chasm width mismatch, %d, expected %d",
+                DIE("Level chasm width mismatch, %d, expected %d",
                     (int)chasm_string.size(), MAP_WIDTH);
                 Py_RETURN_FALSE;
             }
             if (walls_string.size() != MAP_WIDTH){
-                ERR("Level walls width mismatch, %d, expected %d",
+                DIE("Level walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), MAP_WIDTH);
                 Py_RETURN_FALSE;
             }
             if (obj_strings.size() != MAP_WIDTH){
-                ERR("Level items width mismatch, %d, expected %d",
+                DIE("Level items width mismatch, %d, expected %d",
                     (int)obj_strings.size(), MAP_WIDTH);
                 Py_RETURN_FALSE;
             }
@@ -193,6 +205,9 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 if (floor_string[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_FLOOR, floor_string[x]);
+                }
+                if (floor2_string[x] != ' ') {
+                    set(l->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[x]);
                 }
                 if (water_string[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_WATER, water_string[x]);
@@ -586,7 +601,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_rrr85_at, is_rrr85)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr86_at, is_rrr86)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr87_at, is_rrr87)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr88_at, is_rrr88)
-LEVEL_BODY_GET_BOOL_AT(level_is_rrr89_at, is_rrr89)
+LEVEL_BODY_GET_BOOL_AT(level_is_dry_grass_at, is_dry_grass)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr8_at, is_rrr8)
 LEVEL_BODY_GET_BOOL_AT(level_is_bridge_at, is_bridge)
 LEVEL_BODY_GET_BOOL_AT(level_is_barrel_at, is_barrel)

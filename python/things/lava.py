@@ -19,9 +19,9 @@ def lava_init(name, text_name, tiles=[]):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_light_color("red")
     x.set_light_strength(2)
-    x.set_text_a_or_an("");
+    x.set_text_a_or_an("")
     x.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto)")
-    x.set_text_hits("tickles");
+    x.set_text_hits("tickles")
     x.set_tick_catches_up_on_attack(True)
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_LAVA)

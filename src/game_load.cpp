@@ -270,6 +270,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_deep_water             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_shallow_water          = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_dirt                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_dry_grass              = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_door                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_ascend_dungeon         = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_descend_dungeon        = (bits64 >> shift) & 1; shift++;
@@ -374,6 +375,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};          */ in >> bits(my.t->_is_deep_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};       */ in >> bits(my.t->_is_shallow_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ in >> bits(my.t->_is_dirt);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};           */ in >> bits(my.t->_is_dry_grass);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ in >> bits(my.t->_is_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ in >> bits(my.t->_is_dungeon);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};      */ in >> bits(my.t->_is_ascend_dungeon);

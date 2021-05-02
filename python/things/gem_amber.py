@@ -23,7 +23,7 @@ def tp_init(name, text_name):
     x.set_long_text_description("A rough hunk of amber. Quite how it got here and from what tree it fell, no one knows.")
     x.set_normal_placement_rules(True)
     x.set_rarity(zx.RARITY_COMMON)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("%%fg=orange$Translucent amber, no flies in it.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

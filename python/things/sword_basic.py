@@ -27,7 +27,7 @@ def init_swing(name):
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_moveable(True)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("Thy shining pointy mechanism of justice.")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
@@ -76,7 +76,7 @@ def init_carry(name):
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_moveable(True)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("Thy shining pointy mechanism of justice.")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
@@ -121,7 +121,7 @@ def init_weapon(name, text_name, short_text_name):
     x.set_stat_defence(0)
     x.set_stat_strength(0)
     x.set_on_use_do("sword_basic.on_use()")
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("Thy pointy means of justice.")
     x.set_weapon_carry_anim("sword_basic_carry")
     x.set_weapon_use_delay_hundredths(5)

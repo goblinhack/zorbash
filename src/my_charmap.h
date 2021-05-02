@@ -22,6 +22,7 @@ public:
         DECO             =            '|',
         DEEP_WATER       =            'W',
         DIRT             =            ',',
+        DRY_GRASS        =            '\'',
         DOOR             =            'D',
         DOOR_DOWN        =            'v',
         DOOR_LEFT        =            '<',
@@ -61,6 +62,7 @@ public:
     bool                      is_bridge                       {false};
     bool                      is_deep_water                   {false};
     bool                      is_dirt                         {false};
+    bool                      is_dry_grass                    {false};
     bool                      is_door                         {false};
     bool                      is_ascend_dungeon               {false};
     bool                      is_descend_dungeon              {false};

@@ -89,9 +89,9 @@ def tp_init(name, text_name):
     x.set_stat_constitution(10)
     x.set_stat_defence(14)
     x.set_stat_strength(12)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("A writhing mass of tentacles and eyeballs.")
-    x.set_text_hits("slashes");
+    x.set_text_hits("slashes")
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

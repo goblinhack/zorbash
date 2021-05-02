@@ -83,9 +83,9 @@ def tp_init(name, text_name):
     x.set_on_miss_do("mummy.on_miss()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_resurrect_dice("1d10+30")
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("A staggering corpse, covered in tissue paper.")
-    x.set_text_hits("claws");
+    x.set_text_hits("claws")
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

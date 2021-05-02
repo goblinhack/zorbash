@@ -50,7 +50,7 @@ def tp_init(name):
     x.set_stat_constitution(0)
     x.set_stat_defence(20)
     x.set_stat_strength(0)
-    x.set_text_a_or_an("the");
+    x.set_text_a_or_an("the")
     x.set_text_description("A door covered in claw marks.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

@@ -88,6 +88,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             std::string floor_string;
+            std::string floor2_string;
             std::string water_string;
             std::string lava_string;
             std::string chasm_string;
@@ -97,40 +98,47 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             for (auto& c : py_obj_to_string(o)) {
                 auto m = get(Charmap::all_charmaps, c);
 
-                if (m.is_floor ||
-                    m.is_bridge ||
+                if (m.is_floor           ||
+                    m.is_bridge          ||
                     m.is_secret_corridor ||
                     m.is_dirt) {
                     floor_string += c;
                 } else if (m.is_blood                 ||
-                           m.is_deep_water            ||
-                           m.is_door                  ||
                            m.is_ascend_dungeon        ||
+                           m.is_barrel                ||
+                           m.is_brazier               ||
+                           m.is_deep_water            ||
                            m.is_descend_dungeon       ||
+                           m.is_door                  ||
+                           m.is_dry_grass             ||
                            m.is_floor_deco            ||
                            m.is_food                  ||
-                           m.is_minion_generator_easy ||
-                           m.is_minion_generator_hard ||
                            m.is_gold                  ||
                            m.is_key                   ||
                            m.is_lava                  ||
+                           m.is_minion_generator_easy ||
+                           m.is_minion_generator_hard ||
                            m.is_monst_easy            ||
                            m.is_monst_hard            ||
+                           m.is_potion                ||
+                           m.is_secret_door           ||
+                           m.is_shallow_water         ||
+                           m.is_trap                  ||
                            m.is_treasure_class_a      ||
                            m.is_treasure_class_b      ||
                            m.is_treasure_class_c      ||
-                           m.is_potion                ||
                            m.is_wand                  ||
-                           m.is_secret_door           ||
-                           m.is_brazier               ||
-                           m.is_barrel                ||
-                           m.is_trap                  ||
-                           m.is_shallow_water         ||
                            m.is_deep_water               
                            ) {
                     floor_string += Charmap::FLOOR;
                 } else {
                     floor_string += Charmap::SPACE;
+                }
+
+                if (m.is_dry_grass) {
+                    floor2_string += Charmap::DRY_GRASS;
+                } else {
+                    floor2_string += Charmap::SPACE;
                 }
 
                 if (m.is_shallow_water || m.is_deep_water) {
@@ -187,39 +195,47 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
             }
 
-            if (floor_string.size() != MAP_ROOM_WIDTH){
-                ERR("Room floor width mismatch, %d, expected %d",
+            if (floor_string.size() != MAP_ROOM_WIDTH) {
+                DIE("Room floor width mismatch, %d, expected %d",
                     (int)floor_string.size(), MAP_ROOM_WIDTH);
                 Py_RETURN_FALSE;
             }
-            if (water_string.size() != MAP_ROOM_WIDTH){
-                ERR("Room water width mismatch, %d, expected %d",
+            if (floor2_string.size() != MAP_ROOM_WIDTH) {
+                DIE("Room floor2 width mismatch, %d, expected %d",
+                    (int)floor2_string.size(), MAP_ROOM_WIDTH);
+                Py_RETURN_FALSE;
+            }
+            if (water_string.size() != MAP_ROOM_WIDTH) {
+                DIE("Room water width mismatch, %d, expected %d",
                     (int)water_string.size(), MAP_ROOM_WIDTH);
                 Py_RETURN_FALSE;
             }
-            if (lava_string.size() != MAP_ROOM_WIDTH){
-                ERR("Room lava width mismatch, %d, expected %d",
+            if (lava_string.size() != MAP_ROOM_WIDTH) {
+                DIE("Room lava width mismatch, %d, expected %d",
                     (int)lava_string.size(), MAP_ROOM_WIDTH);
                 Py_RETURN_FALSE;
             }
-            if (chasm_string.size() != MAP_ROOM_WIDTH){
-                ERR("Room chasm width mismatch, %d, expected %d",
+            if (chasm_string.size() != MAP_ROOM_WIDTH) {
+                DIE("Room chasm width mismatch, %d, expected %d",
                     (int)chasm_string.size(), MAP_ROOM_WIDTH);
                 Py_RETURN_FALSE;
             }
-            if (walls_string.size() != MAP_ROOM_WIDTH){
-                ERR("Room walls width mismatch, %d, expected %d",
+            if (walls_string.size() != MAP_ROOM_WIDTH) {
+                DIE("Room walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), MAP_ROOM_WIDTH);
                 Py_RETURN_FALSE;
             }
-            if (obj_strings.size() != MAP_ROOM_WIDTH){
-                ERR("Room items width mismatch, %d, expected %d",
+            if (obj_strings.size() != MAP_ROOM_WIDTH) {
+                DIE("Room items width mismatch, %d, expected %d",
                     (int)obj_strings.size(), MAP_ROOM_WIDTH);
                 Py_RETURN_FALSE;
             }
 
             for (auto x = 0; x < MAP_ROOM_WIDTH; x++) {
                 set(r->data, x, y, MAP_DEPTH_FLOOR,     floor_string[x]);
+                if (floor2_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[x]);
+                }
                 if (water_string[x] != ' ') {
                     set(r->data, x, y, MAP_DEPTH_WATER, water_string[x]);
                 }

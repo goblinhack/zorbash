@@ -81,9 +81,9 @@ def tp_init(name, text_name):
     x.set_on_miss_do("rat_giant.on_miss()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_stamina(100)
-    x.set_text_a_or_an("the");
+    x.set_text_a_or_an("the")
     x.set_text_description("%%fg=brown$A giant rat. Slightly cute. Likely rabid.")
-    x.set_text_hits("gores");
+    x.set_text_hits("gores")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
