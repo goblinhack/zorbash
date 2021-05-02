@@ -309,7 +309,7 @@ private:
     int _is_rrr86 {};
     int _is_rrr87 {};
     int _is_rrr88 {};
-    int _is_rrr89 {};
+    int _is_dry_grass {};
     int _is_bridge {};
     int _is_barrel {};
     int _is_burnable {};
@@ -772,7 +772,7 @@ public:
     int is_rrr86(void) const;
     int is_rrr87(void) const;
     int is_rrr88(void) const;
-    int is_rrr89(void) const;
+    int is_dry_grass(void) const;
     int is_rrr9(void) const;
     int is_bridge(void) const;
     int is_rrr99(void) const;
@@ -1104,7 +1104,7 @@ public:
     void set_is_rrr86(int);
     void set_is_rrr87(int);
     void set_is_rrr88(int);
-    void set_is_rrr89(int);
+    void set_is_dry_grass(int);
     void set_is_rrr9(int);
     void set_is_bridge(int);
     void set_is_rrr99(int);
@@ -1232,6 +1232,7 @@ class Tp* tp_random_blood_splatter(void);
 class Tp* tp_random_deco(void);
 class Tp* tp_random_descend_sewer(void);
 class Tp* tp_random_dirt(void);
+class Tp* tp_random_dry_grass(void);
 class Tp* tp_random_door(void);
 class Tp* tp_random_wall_dungeon(void);
 class Tp* tp_random_ascend_dungeon(void);

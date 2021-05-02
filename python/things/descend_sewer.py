@@ -22,7 +22,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_long_text_description("A filthy sewer pipe. Watch out, they can spawn surprises. Don't fall in!")
     x.set_minion_limit(5)
     x.set_on_idle_dice("1d50+50:descend_sewer.spawn()")
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("A slime coated sewer pipe.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

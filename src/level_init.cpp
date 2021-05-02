@@ -26,6 +26,7 @@ void Level::clear (void)
     _is_deep_water = {};
     _is_shallow_water = {};
     _is_dirt = {};
+    _is_dry_grass = {};
     _is_door = {};
     _is_dungeon = {};
     _is_ascend_dungeon = {};

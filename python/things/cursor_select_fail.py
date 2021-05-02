@@ -12,7 +12,7 @@ def tp_init(name):
     x.set_is_cursor(True)
     x.set_is_floating(True)
     x.set_is_moveable(True)
-    x.set_text_a_or_an("the");
+    x.set_text_a_or_an("the")
     x.set_text_description("Cursor.")
     x.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

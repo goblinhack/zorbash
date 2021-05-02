@@ -24,7 +24,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_no_tile(True)
     x.set_is_usable(True)
     x.set_is_fire(True)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_on_death_do("projectile_fire.on_death()")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

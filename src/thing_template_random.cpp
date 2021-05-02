@@ -19,6 +19,7 @@ static Tpidmap tp_blood;
 static Tpidmap tp_blood_splatter;
 static Tpidmap tp_deco;
 static Tpidmap tp_dirt;
+static Tpidmap tp_dry_grass;
 static Tpidmap tp_door;
 static Tpidmap tp_ascend_dungeon;
 static Tpidmap tp_descend_dungeon;
@@ -54,6 +55,7 @@ void tp_random_init (void)
         if (tp->is_blood())                     { tp_blood.push_back(tp); }
         if (tp->is_blood_splatter())            { tp_blood_splatter.push_back(tp); }
         if (tp->is_dirt())                      { tp_dirt.push_back(tp); }
+        if (tp->is_dry_grass())                 { tp_dry_grass.push_back(tp); }
         if (tp->is_door())                      { tp_door.push_back(tp); }
         if (tp->is_wall_dungeon())              { tp_wall_dungeon.push_back(tp); }
         if (tp->is_ascend_dungeon())            { tp_ascend_dungeon.push_back(tp); }
@@ -343,6 +345,15 @@ Tpp tp_random_dirt (void)
         return (nullptr);
     }
     return tp_get_with_no_rarity_filter(tp_dirt);
+}
+
+Tpp tp_random_dry_grass (void)
+{_
+    if (unlikely(!tp_dry_grass.size())) {
+        ERR("No dry_grasss found");
+        return (nullptr);
+    }
+    return tp_get_with_no_rarity_filter(tp_dry_grass);
 }
 
 Tpp tp_random_ripple (void)

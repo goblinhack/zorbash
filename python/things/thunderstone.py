@@ -42,7 +42,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_long_text_description("This most dangerous stone can devistate any are where it is thrown. Be careful where you drop it...")
     x.set_normal_placement_rules(True)
     x.set_on_use_do("thunderstone.on_use()")
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("A harmless looking brownish stone")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

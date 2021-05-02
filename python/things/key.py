@@ -24,7 +24,7 @@ def key_init(name, text_name):
     x.set_is_treasure_class_a(False)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
-    x.set_text_a_or_an("an");
+    x.set_text_a_or_an("an")
     x.set_text_description("A key that leadeth places undreamt, or next door.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

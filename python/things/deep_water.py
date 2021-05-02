@@ -16,7 +16,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_text_a_or_an("the");
+    x.set_text_a_or_an("the")
     x.set_text_description("A pool of deep dank water, with things in it.")
     x.set_z_depth(zx.MAP_DEPTH_WATER)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

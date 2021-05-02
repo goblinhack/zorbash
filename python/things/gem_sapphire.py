@@ -23,7 +23,7 @@ def tp_init(name, text_name):
     x.set_long_text_description("Magnificent and blessed sapphire, in all its celestial hues. It is a stone of wisdom, prophecy and divine good portents. Putting all that aside, it's worth a few bob. Grab it!") 
     x.set_normal_placement_rules(True)
     x.set_rarity(zx.RARITY_UNCOMMON)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("%%fg=blue$Polished blue sapphire.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

@@ -54,7 +54,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_on_fire_do("wand_descent.on_fire()")
     x.set_on_fall_do("wand_descent.on_fall()")
     x.set_range_max(7)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("%%fg=cyan$A wand of descent.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

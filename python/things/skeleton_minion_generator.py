@@ -52,7 +52,7 @@ def tp_init(name, text_name):
     x.set_stat_constitution(0)
     x.set_stat_defence(0)
     x.set_stat_strength(0)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("The dead rise again here.")
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

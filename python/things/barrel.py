@@ -50,7 +50,7 @@ def tp_init(name, text_name):
     x.set_on_fall_do("barrel.on_fall()")
     x.set_on_fire_do("barrel.on_fire()")
     x.set_on_hit_do("barrel.on_hit()")
-    x.set_text_a_or_an("the");
+    x.set_text_a_or_an("the")
     x.set_text_description("A barrel of oil. Why? Don't ask.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

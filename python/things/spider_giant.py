@@ -83,9 +83,9 @@ def tp_init(name, text_name):
     x.set_stat_constitution(12)
     x.set_stat_defence(14)
     x.set_stat_strength(16)
-    x.set_text_a_or_an("the");
+    x.set_text_a_or_an("the")
     x.set_text_description("%%fg=brown$A giant spider.")
-    x.set_text_hits("gores");
+    x.set_text_hits("gores")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 

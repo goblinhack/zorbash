@@ -37,7 +37,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_long_text_description("A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
     x.set_normal_placement_rules(True)
     x.set_on_lifespan_do("torch.on_lifespan()")
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("A small beacon of light in this blighted place.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

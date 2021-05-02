@@ -1,9 +1,9 @@
 import zx
 
-# BLOOD                         _
 # BARREL                        b
-# BRIDGE                        =
+# BLOOD                         _
 # BRAZIER                       B
+# BRIDGE                        =
 # CHASM                         C
 # CORRIDOR                      #
 # DECO                          |
@@ -14,18 +14,19 @@ import zx
 # DOOR_LEFT                     <
 # DOOR_RIGHT                    >
 # DOOR_UP                       ^
+# DRY GRASS                     '
 # ENTRANCE                      S
 # EXIT                          E
-# SEWER                         O
 # FLOOR                         .
 # KEY                           k
 # LAVA                          L
 # ROCK                          r
 # SECRET_CORRIDOR               ?
 # SECRET_DOOR                   s
+# SEWER                         O
+# SHALLOW_WATER                 w
 # TRAP                          t
 # WALL                          x
-# SHALLOW_WATER                 w
 # WAND                          /
 
 # MINION_GENERATOR_EASY         g  has a 50% chance of not heing generated

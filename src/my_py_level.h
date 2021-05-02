@@ -217,7 +217,7 @@ PyObject *level_is_rrr85_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr86_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr87_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr88_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr89_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_dry_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bridge_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_barrel_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_burnable_at(PyObject *obj, PyObject *args, PyObject *keywds);

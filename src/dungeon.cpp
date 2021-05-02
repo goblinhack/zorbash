@@ -235,6 +235,11 @@ void Dungeon::make_dungeon (void)
     add_border();
     add_remaining();
 
+    dry_grass_gen(20, // fill prob
+                  10,  // R1
+                  5,  // R2
+                  4   /* generations */);
+
     LOG("Final DUNGEON:");
     dump();
 }
@@ -556,6 +561,23 @@ bool Dungeon::is_dirt_no_check (const int x, const int y)
         auto v = get(Charmap::all_charmaps, c);
 
         if (v.is_dirt) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Dungeon::is_dry_grass (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_dry_grass) {
             return true;
         }
     }
@@ -3571,6 +3593,10 @@ void Dungeon::add_remaining (void)
             }
             putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
             putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
+
+            if (random_range(0, 100) < 20) {
+                putc(x, y, MAP_DEPTH_FLOOR, Charmap::DRY_GRASS);
+            }
         }
     }
 }
@@ -3688,6 +3714,83 @@ void Dungeon::dirt_gen (uint8_t map_fill_prob,
                     putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
                 }
             }
+        }
+    }
+}
+
+void Dungeon::dry_grass_gen (uint8_t map_fill_prob,
+                             uint8_t map_r1,
+                             uint8_t map_r2,
+                             uint8_t map_generations)
+
+{
+    map_save = {};
+    map_curr = {};
+
+    const int16_t maze_w = MAP_WIDTH - 2;
+    const int16_t maze_h = MAP_HEIGHT - 2;
+
+    if (map_fill_prob) {
+        MAP_FILL_PROB             = map_fill_prob;
+    }
+
+    if (map_r1) {
+        MAP_R1                    = map_r1;
+    }
+
+    if (map_r2) {
+        MAP_R2                    = map_r2;
+    }
+
+    if (map_generations) {
+        MAP_GENERATIONS           = map_generations;
+    }
+
+    int16_t x, y, i;
+
+    map_curr = {};
+
+    for (x=2; x < maze_w-2; x++) {
+        for (y=2; y < maze_h-2; y++) {
+            if ((myrand() % 100) < MAP_FILL_PROB) {
+                set(map_curr, x, y, (uint8_t)1);
+            }
+        }
+    }
+
+    for (i=0; i < MAP_GENERATIONS; i++) {
+        cave_generation();
+        std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+        map_save = {};
+    }
+
+    for (x=2; x < maze_w-2; x++) {
+        for (y=2; y < maze_h-2; y++) {
+            if (get(map_curr, x, y)) {
+                if (is_wall(x, y) || 
+                    is_rock(x, y) ||
+                    is_chasm(x, y)) {
+                    continue;
+                }
+
+                for (auto dx = -1; dx <= 1; dx++) {
+                    for (auto dy = -1; dy <= 1; dy++) {
+                        if (is_lava(x+dx, y+dy)) {
+                            goto next;
+                        }
+                        if (is_shallow_water(x+dx, y+dy)) {
+                            goto next;
+                        }
+                        if (is_deep_water(x+dx, y+dy)) {
+                            goto next;
+                        }
+                    }
+                }
+
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_GRASS);
+            }
+next:
+            continue;
         }
     }
 }

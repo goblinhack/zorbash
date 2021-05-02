@@ -21,7 +21,7 @@ def tp_init(name, text_name):
     x.set_is_removeable_if_out_of_slots(True)
     x.set_normal_placement_rules(True)
     x.set_nutrition_dice("1d4")
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("An artwork comprised mainly of blood.")
     x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

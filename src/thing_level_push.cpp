@@ -45,6 +45,8 @@ void Thing::level_push (void)
                                                    level->set_is_bridge(mx, my); }
     if (is_dirt())                               { i_set_is_dirt = true;
                                                    level->set_is_dirt(mx, my); }
+    if (is_dry_grass())                          { i_set_is_dry_grass = true;
+                                                   level->set_is_dry_grass(mx, my); }
     if (is_door() && !is_open)                   { i_set_is_door = true;
                                                    level->set_is_door(mx, my); }
     if (is_ascend_dungeon())                     { i_set_is_ascend_dungeon = true;

@@ -83,6 +83,8 @@ void Level::update_minimap (void)
                     c = BLUE3;
                 } else if (is_dirt(x, y)) {
                     c = GRAY20;
+                } else if (is_dry_grass(x, y)) {
+                    c = DARKGREEN;
                 } else {
                     c = BLACK;
                 }
@@ -188,6 +190,8 @@ void Level::update_minimap (void)
                 } else if (is_deep_water(x, y)) {
                     c = BLUE3;
                 } else if (is_dirt(x, y)) {
+                    c = GRAY20;
+                } else if (is_dry_grass(x, y)) {
                     c = GRAY20;
                 } else if (edge_of_sceen) {
                     c = GRAY10;

@@ -65,9 +65,9 @@ def tp_init(name, text_name):
     x.set_stat_constitution(9)
     x.set_stat_defence(9)
     x.set_stat_strength(9)
-    x.set_text_a_or_an("a");
+    x.set_text_a_or_an("a")
     x.set_text_description("The burning bones of one surprised to be moving again and literally on fire.")
-    x.set_text_hits("claws");
+    x.set_text_hits("claws")
     x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

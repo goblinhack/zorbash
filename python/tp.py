@@ -490,8 +490,8 @@ class Tp:
     def set_is_rrr88(self, value):
         zx.tp_set_is_rrr88(self, value)
 
-    def set_is_rrr89(self, value):
-        zx.tp_set_is_rrr89(self, value)
+    def set_is_dry_grass(self, value):
+        zx.tp_set_is_dry_grass(self, value)
 
     def set_is_bridge(self, value):
         zx.tp_set_is_bridge(self, value)
