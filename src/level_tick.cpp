@@ -82,9 +82,10 @@ void Level::tick (void)
     // generally do nothing or are hidden.
     //
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(t) {
-        if (t->is_player() || t->is_monst()) {
+        if (t->is_player() || t->is_alive_monst()) {
             if (t->get_tick() != game->tick_current) {
                 game->things_are_moving = true;
+                t->log("Is waiting to move");
             }
         }
         t->tick();
