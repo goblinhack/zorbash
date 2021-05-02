@@ -235,7 +235,7 @@ void Dungeon::make_dungeon (void)
     add_border();
     add_remaining();
 
-    dry_grass_gen(20, // fill prob
+    dry_grass_gen(15, // fill prob
                   10, // R1
                   5,  // R2
                   4   /* generations */);
