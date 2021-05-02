@@ -2,8 +2,9 @@ import zx
 import tp
 
 
-def on_death(me, x, y):
+def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     zx.level_spawn_at_thing(me, "small_fire")
+    zx.level_place_at(me, "dry_grass_dead", x, y)
     zx.topcon("The dry grass burns!")
 
 def tp_init(name, tiles=[]):
@@ -11,7 +12,7 @@ def tp_init(name, tiles=[]):
     x.set_gfx_shown_in_bg(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_gfx_very_small_shadow_caster(True)
-    x.set_is_able_to_fall(False)
+    x.set_is_able_to_fall(True)
     x.set_is_burnable(True)
     x.set_is_combustible(True)
     x.set_is_cursor_can_hover_over(True)
@@ -20,7 +21,7 @@ def tp_init(name, tiles=[]):
     x.set_is_interesting(True)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_on_death_do("dry_grass.on_death()")
+    x.set_on_hit_do("dry_grass.on_hit()")
     x.set_text_a_or_an("the")
     x.set_text_description("Brittle dry grass.")
     x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
