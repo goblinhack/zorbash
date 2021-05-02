@@ -72,6 +72,7 @@ bool Thing::open_door (Thingp it)
 
         it->on_open();
         update_light();
+        level->player_dmap_update();
         return true;
     }
 
