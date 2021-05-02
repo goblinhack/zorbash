@@ -5,15 +5,15 @@ import tp
 def on_death(me, x, y):
     zx.level_spawn_at_thing(me, "explosion_major")
     zx.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+    zx.topcon("The bridge collapses!")
 
     for bridge in zx.level_flood_fill_get_all_things(me, x, y, "is_bridge"):
         if bridge != me:
-            zx.topcon("target {} {}".format(zx.thing_get_name(bridge), zx.thing_get_health(bridge)))
-            #if not zx.thing_is_dead(bridge):
-            #    zx.thing_killed(bridge, "dead")
+            if not zx.thing_is_dead_or_dying(bridge):
+                zx.thing_killed(bridge, "dead")
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
-    x = tp.Tp(name)
+    x = tp.Tp(name, "bridge")
     x.set_gfx_shown_in_bg(True)
     x.set_is_able_to_fall(True)
     x.set_is_interesting(True)

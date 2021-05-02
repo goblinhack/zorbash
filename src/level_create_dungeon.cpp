@@ -553,8 +553,22 @@ void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int floor
                                          int block_height, int tries)
 {_
     while (tries--) {
-        auto x = random_range(0, MAP_WIDTH - block_width + 1);
-        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+        auto x = random_range(MAP_BORDER_TOTAL, 
+                              MAP_WIDTH - MAP_BORDER_TOTAL - block_width + 1);
+        auto y = random_range(MAP_BORDER_TOTAL, 
+                              MAP_HEIGHT - MAP_BORDER_TOTAL - block_height + 1);
+
+        //
+        // Place bridges instead of floor, if we have multiple bridge
+        // neighbors. This allows items to be placed on bridges.
+        //
+        auto bridge_count = 0;
+        if ((block_width == 1) && (block_height == 1)) {
+            bridge_count += d->is_bridge(x - 1, y);
+            bridge_count += d->is_bridge(x + 1, y);
+            bridge_count += d->is_bridge(x, y - 1);
+            bridge_count += d->is_bridge(x, y + 1);
+        }
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -595,6 +609,25 @@ void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int floor
             continue;
         }
 
+        if (bridge_count > 1) {
+            if ((block_width == 1) && (block_height == 1)) {
+                if (bridge_count > 2) {
+                    (void) thing_new("bridge_x", fpoint(x, y));
+                    continue;
+                }
+
+                if (d->is_bridge(x, y - 1) || d->is_bridge(x, y + 1)) {
+                    (void) thing_new("bridge_ud", fpoint(x, y));
+                    continue;
+                }
+
+                if (d->is_bridge(x - 1, y) || d->is_bridge(x + 1, y)) {
+                    (void) thing_new("bridge_lr", fpoint(x, y));
+                    continue;
+                }
+            }
+        }
+
         auto cnt = 1;
         for (auto dy = 0; dy < block_height; dy++) {
             auto Y = y + dy;
@@ -623,76 +656,6 @@ void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int floor
                     return;
                 }
                 t->tile_curr = tile->global_index;
-            }
-        }
-    }
-}
-
-void Level::create_dungeon_place_floor_under_objects (Dungeonp d, std::string what, int floor_type)
-{_
-    for (auto x = MAP_BORDER_TOTAL; x < MAP_WIDTH - MAP_BORDER_TOTAL; x++) {
-        for (auto y = MAP_BORDER_TOTAL; y < MAP_HEIGHT - MAP_BORDER_TOTAL; y++) {
-            if (!d->is_floor_no_check(x, y)) {
-                continue;
-            }
-
-            if (is_floor(x, y)) {
-                continue;
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-
-            if (d->is_monst_any(x, y + 1)        ||
-                d->is_food(x, y + 1)             ||
-                d->is_treasure(x, y + 1)         ||
-                d->is_treasure_class_a(x, y + 1) ||
-                d->is_treasure_class_b(x, y + 1) ||
-                d->is_treasure_class_c(x, y + 1) ||
-                d->is_wand(x, y + 1)             ||
-                d->is_potion(x, y + 1)           ||
-                d->is_key(x, y + 1)) {
-                if (!is_floor(x, y + 1)) {
-                    thing_new(what, fpoint(x, y + 1));
-                }
-            }
-            if (d->is_monst_any(x, y - 1)        ||
-                d->is_food(x, y - 1)             ||
-                d->is_treasure(x, y - 1)         ||
-                d->is_treasure_class_a(x, y - 1) ||
-                d->is_treasure_class_b(x, y - 1) ||
-                d->is_treasure_class_c(x, y - 1) ||
-                d->is_wand(x, y - 1)             ||
-                d->is_potion(x, y - 1)           ||
-                d->is_key(x, y - 1)) {
-                if (!is_floor(x, y - 1)) {
-                    thing_new(what, fpoint(x, y - 1));
-                }
-            }
-            if (d->is_monst_any(x + 1, y)        ||
-                d->is_food(x + 1, y)             ||
-                d->is_treasure(x + 1, y)         ||
-                d->is_treasure_class_a(x + 1, y) ||
-                d->is_treasure_class_b(x + 1, y) ||
-                d->is_treasure_class_c(x + 1, y) ||
-                d->is_wand(x + 1, y)             ||
-                d->is_potion(x + 1, y)           ||
-                d->is_key(x + 1, y)) {
-                if (!is_floor(x + 1, y)) {
-                    thing_new(what, fpoint(x + 1, y));
-                }
-            }
-            if (d->is_monst_any(x - 1, y)        ||
-                d->is_food(x - 1, y)             ||
-                d->is_treasure(x - 1, y)         ||
-                d->is_treasure_class_a(x - 1, y) ||
-                d->is_treasure_class_b(x - 1, y) ||
-                d->is_treasure_class_c(x - 1, y) ||
-                d->is_wand(x - 1, y)             ||
-                d->is_potion(x - 1, y)           ||
-                d->is_key(x - 1, y)) {
-                if (!is_floor(x - 1, y)) {
-                    thing_new(what, fpoint(x - 1, y));
-                }
             }
         }
     }
@@ -1201,9 +1164,39 @@ void Level::create_dungeon_place_remaining_floor (Dungeonp d, const std::string 
             if (!d->is_floor(x, y)) {
                 continue;
             }
-            if (!is_floor(x, y)) {
-                thing_new(what, fpoint(x, y));
+
+            if (is_floor(x, y)) {
+                continue;
             }
+
+            //
+            // Place bridges instead of floor, if we have multiple bridge
+            // neighbors. This allows items to be placed on bridges.
+            //
+            auto bridge_count = 0;
+            bridge_count += d->is_bridge(x - 1, y);
+            bridge_count += d->is_bridge(x + 1, y);
+            bridge_count += d->is_bridge(x, y - 1);
+            bridge_count += d->is_bridge(x, y + 1);
+
+            if (bridge_count > 1) {
+                if (bridge_count > 2) {
+                    (void) thing_new("bridge_x", fpoint(x, y));
+                    continue;
+                }
+
+                if (d->is_bridge(x, y - 1) || d->is_bridge(x, y + 1)) {
+                    (void) thing_new("bridge_ud", fpoint(x, y));
+                    continue;
+                }
+
+                if (d->is_bridge(x - 1, y) || d->is_bridge(x + 1, y)) {
+                    (void) thing_new("bridge_lr", fpoint(x, y));
+                    continue;
+                }
+            }
+
+            thing_new(what, fpoint(x, y));
         }
     }
 }
@@ -1227,13 +1220,13 @@ void Level::create_dungeon_place_bridge (Dungeonp d)
     for (auto x = MAP_BORDER_TOTAL; x < MAP_WIDTH - MAP_BORDER_TOTAL; x++) {
         for (auto y = MAP_BORDER_TOTAL; y < MAP_HEIGHT - MAP_BORDER_TOTAL; y++) {
             if (d->is_bridge(x, y)) {
-                auto nebs = 0;
-                nebs += d->is_bridge(x - 1, y);
-                nebs += d->is_bridge(x + 1, y);
-                nebs += d->is_bridge(x, y - 1);
-                nebs += d->is_bridge(x, y + 1);
+                auto bridge_count = 0;
+                bridge_count += d->is_bridge(x - 1, y);
+                bridge_count += d->is_bridge(x + 1, y);
+                bridge_count += d->is_bridge(x, y - 1);
+                bridge_count += d->is_bridge(x, y + 1);
 
-                if (nebs > 2) {
+                if (bridge_count > 2) {
                     (void) thing_new("bridge_x", fpoint(x, y));
                     continue;
                 }
