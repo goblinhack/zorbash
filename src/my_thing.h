@@ -1183,6 +1183,7 @@ public:
     void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
     void fall(float fall_height, timestamp_t ms);
     void fire_tick();
+    void grass_tick();
     void gc(void);
     void get_light_strength_including_torch_effect(int &light_strength);
     void get_tiles(void);

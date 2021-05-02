@@ -78,6 +78,10 @@ bool Thing::location_check_forced (void)
     if (is_dead) {
         return false;
     }
+    grass_tick();
+    if (is_dead) {
+        return false;
+    }
 
     if (descend_dungeon_tick()) {
         if (is_player()) {
