@@ -246,7 +246,7 @@ PyObject *thing_is_rrr84(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr85(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr86(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr87(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr88(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_very_small_shadow_caster(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dry_grass(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_barrel(PyObject *obj, PyObject *args, PyObject *keywds);

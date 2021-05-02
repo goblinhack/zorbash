@@ -9,6 +9,8 @@ def on_death(me, x, y):
 def tp_init(name, tiles=[]):
     x = tp.Tp(name, "dry grass")
     x.set_gfx_shown_in_bg(True)
+    x.set_gfx_small_shadow_caster(True)
+    x.set_gfx_very_small_shadow_caster(True)
     x.set_is_able_to_fall(False)
     x.set_is_burnable(True)
     x.set_is_combustible(True)

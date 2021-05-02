@@ -216,7 +216,7 @@ PyObject *level_is_rrr84_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr85_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr86_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr87_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr88_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_gfx_very_small_shadow_caster_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dry_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bridge_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_barrel_at(PyObject *obj, PyObject *args, PyObject *keywds);

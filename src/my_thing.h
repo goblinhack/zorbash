@@ -842,7 +842,7 @@ public:
     int is_rrr85(void) const;
     int is_rrr86(void) const;
     int is_rrr87(void) const;
-    int is_rrr88(void) const;
+    int gfx_very_small_shadow_caster(void) const;
     int is_dry_grass(void) const;
     int is_rrr9(void) const;
     int is_bridge(void) const;

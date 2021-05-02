@@ -335,7 +335,7 @@ int Tp::is_rrr84(void) const                                         { return _i
 int Tp::is_rrr85(void) const                                         { return _is_rrr85; }
 int Tp::is_rrr86(void) const                                         { return _is_rrr86; }
 int Tp::is_rrr87(void) const                                         { return _is_rrr87; }
-int Tp::is_rrr88(void) const                                         { return _is_rrr88; }
+int Tp::gfx_very_small_shadow_caster(void) const                                         { return _gfx_very_small_shadow_caster; }
 int Tp::is_dry_grass(void) const                                         { return _is_dry_grass; }
 int Tp::is_bridge(void) const                                         { return _is_bridge; }
 int Tp::is_barrel(void) const                                         { return _is_barrel; }
@@ -659,7 +659,7 @@ void Tp::set_is_rrr84(int v)                                         { _is_rrr84
 void Tp::set_is_rrr85(int v)                                         { _is_rrr85 = v; }
 void Tp::set_is_rrr86(int v)                                         { _is_rrr86 = v; }
 void Tp::set_is_rrr87(int v)                                         { _is_rrr87 = v; }
-void Tp::set_is_rrr88(int v)                                         { _is_rrr88 = v; }
+void Tp::set_gfx_very_small_shadow_caster(int v)                                         { _gfx_very_small_shadow_caster = v; }
 void Tp::set_is_dry_grass(int v)                                         { _is_dry_grass = v; }
 void Tp::set_is_bridge(int v)                                         { _is_bridge = v; }
 void Tp::set_is_barrel(int v)                                         { _is_barrel = v; }
