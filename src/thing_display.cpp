@@ -73,10 +73,17 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         dy = std::min(m, dy);
     }
 
-    shadow_tl.x += (float)TILE_WIDTH * dx * 10;
-    shadow_tr.x += (float)TILE_WIDTH * dx * 10;
-    shadow_tl.y += (float)TILE_WIDTH * dy * 10;
-    shadow_tr.y += (float)TILE_WIDTH * dy * 10;
+    if (unlikely(tpp->gfx_small_shadow_caster())) {
+        shadow_tl.x += (float)TILE_WIDTH * dx * 4;
+        shadow_tr.x += (float)TILE_WIDTH * dx * 4;
+        shadow_tl.y += (float)TILE_WIDTH * dy * 4;
+        shadow_tr.y += (float)TILE_WIDTH * dy * 4;
+    } else {
+        shadow_tl.x += (float)TILE_WIDTH * dx * 10;
+        shadow_tr.x += (float)TILE_WIDTH * dx * 10;
+        shadow_tl.y += (float)TILE_WIDTH * dy * 10;
+        shadow_tr.y += (float)TILE_WIDTH * dy * 10;
+    }
 
     if (shadow_tl.x > shadow_tr.x) {
         std::swap(shadow_tl, shadow_tr);

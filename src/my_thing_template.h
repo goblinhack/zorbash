@@ -308,7 +308,7 @@ private:
     int _is_rrr85 {};
     int _is_rrr86 {};
     int _is_rrr87 {};
-    int _is_rrr88 {};
+    int _gfx_very_small_shadow_caster {};
     int _is_dry_grass {};
     int _is_bridge {};
     int _is_barrel {};
@@ -771,7 +771,7 @@ public:
     int is_rrr85(void) const;
     int is_rrr86(void) const;
     int is_rrr87(void) const;
-    int is_rrr88(void) const;
+    int gfx_very_small_shadow_caster(void) const;
     int is_dry_grass(void) const;
     int is_rrr9(void) const;
     int is_bridge(void) const;
@@ -1103,7 +1103,7 @@ public:
     void set_is_rrr85(int);
     void set_is_rrr86(int);
     void set_is_rrr87(int);
-    void set_is_rrr88(int);
+    void set_gfx_very_small_shadow_caster(int);
     void set_is_dry_grass(int);
     void set_is_rrr9(int);
     void set_is_bridge(int);
