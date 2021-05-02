@@ -36,6 +36,13 @@ void Level::describe (fpoint p)
             continue;
         }
 
+        //
+        // Dead monst clog up the screen
+        //
+        if (t->is_monst() && t->is_dead) {
+            continue;
+        }
+
         if (t->get_immediate_owner() ||
             t->is_cursor() ||
             t->is_player() ||
@@ -61,6 +68,13 @@ void Level::describe (fpoint p)
         int x = p.x;
         int y = p.y;
         if (!is_lit(x, y) && !is_visited(x, y)) {_
+            continue;
+        }
+
+        //
+        // Dead monst clog up the screen
+        //
+        if (t->is_monst() && t->is_dead) {
             continue;
         }
 
@@ -97,6 +111,13 @@ void Level::describe (fpoint p)
         //
         if (hover_over_things.size()) {
             if(t->is_player()) {
+                continue;
+            }
+
+            //
+            // Dead monst clog up the screen. Unless we have nothing else.
+            //
+            if (t->is_monst() && t->is_dead) {
                 continue;
             }
         }

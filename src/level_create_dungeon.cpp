@@ -1029,6 +1029,21 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
             }
 
             //
+            // No braziers next to barrels
+            //
+            if (d->is_barrel(x, y) ||
+                d->is_barrel(x - 1, y) ||
+                d->is_barrel(x + 1, y) ||
+                d->is_barrel(x, y - 1) ||
+                d->is_barrel(x, y + 1) ||
+                d->is_barrel(x - 1, y - 1) ||
+                d->is_barrel(x + 1, y - 1) ||
+                d->is_barrel(x - 1, y + 1) ||
+                d->is_barrel(x + 1, y + 1)) {
+                continue;
+            }
+
+            //
             // Reset the seed for each cell to increase the chances
             // of repeatability if other small things change in the
             // game
