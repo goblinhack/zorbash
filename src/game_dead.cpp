@@ -85,7 +85,9 @@ void Game::dead_select (const char *reason)
     //
     wid_rightbar_init();
 
-    if (time_get_time_ms_cached() < level->player->get_timestamp_move_end()) {
+    if (level && 
+        level->player &&
+        (time_get_time_ms_cached() < level->player->get_timestamp_move_end())) {
         //
         // Allow the dead player move to finish and then pause.
         //

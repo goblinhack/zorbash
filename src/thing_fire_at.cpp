@@ -136,8 +136,30 @@ bool Thing::fire_at_target (void)
         int x = mid_at.x + dx;
         int y = mid_at.y + dy;
 
+        //
+        // Too far?
+        //
+        auto d = DISTANCE(x, y, mid_at.x, mid_at.y);
+        if (d > distance) {
+            continue;
+        }
+
+        //
+        // Too close, use melee
+        //
+        if (d < 2) {
+            continue;
+        }
+
         FOR_ALL_INTERESTING_THINGS(level, it, x, y) {
             if (this == it) {
+                continue;
+            }
+
+            //
+            // No point in shooting at the dead
+            //
+            if (it->is_dead) {
                 continue;
             }
 
