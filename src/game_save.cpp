@@ -200,7 +200,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_sleeping                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_starving                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_the_grid                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_tick_done                  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend_dungeon  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend_sewer    << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_dungeon << shift; shift++;

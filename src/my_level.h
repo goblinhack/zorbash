@@ -255,25 +255,25 @@ public:
 
     #define FOR_ALL_THINGS_END() } }
 
-    #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL(t) {                \
-        auto c = all_interesting_things;                            \
-        auto i = all_interesting_things.begin();                    \
-        while (i != all_interesting_things.end()) {                 \
+    #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {         \
+        auto c = level->all_interesting_things;                     \
+        auto i = level->all_interesting_things.begin();             \
+        while (i != level->all_interesting_things.end()) {          \
             auto t = i->second;                                     \
                                                                     \
             ThingId next_key {};                                    \
             i++;                                                    \
-            if (i != all_interesting_things.end()) {                \
+            if (i != level->all_interesting_things.end()) {         \
                 next_key = i->first;                                \
             }                                                       \
                                                                     \
             verify(t);                                              \
 
-    #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END()               \
-            if (i == all_interesting_things.end()) {                \
+    #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)          \
+            if (i == level->all_interesting_things.end()) {         \
                 break;                                              \
             }                                                       \
-            i = all_interesting_things.find(next_key);              \
+            i = level->all_interesting_things.find(next_key);       \
         } }
 
     //

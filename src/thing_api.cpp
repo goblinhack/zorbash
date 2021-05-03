@@ -4319,4 +4319,3 @@ const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * Thing::ge
         DIE("No bag");
     }
 }
-

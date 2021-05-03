@@ -75,7 +75,6 @@ _
     //
     // Ok our attempted move is done. We failed.
     //
-    is_tick_done = true;
     move_finish();
 
     //

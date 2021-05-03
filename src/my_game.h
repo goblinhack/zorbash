@@ -275,6 +275,11 @@ public:
     timestamp_t        last_mouse_down {};
     timestamp_t        last_pause {};
 
+    //
+    // When the last tick started. Used for looking at spikes in time.
+    //
+    timestamp_t        tick_begin_ms {};
+
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

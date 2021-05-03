@@ -16,7 +16,7 @@
 
 void Level::tick (void)
 {_
-    // log("Tick");
+    // LOG("Tick");
     // TOPCON("monsts %d.", monst_count);
     if (!game->started) {
         return;
@@ -27,8 +27,6 @@ void Level::tick (void)
     // look around.
     //
     cursor_move();
-
-    game->things_are_moving = false;
 
     //
     // Allows for debugging
@@ -41,8 +39,36 @@ void Level::tick (void)
         return;
     }
 
+    // LOG("-");
+
+    //
+    // For all things that move, like monsters, or those that do not, like
+    // wands, and even those that do not move but can be destroyed, like
+    // walls. Omits things like floors, corridors, the grid; those that
+    // generally do nothing or are hidden.
+    //
+    game->things_are_moving = false;
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+        if (t->get_timestamp_move_begin()) {
+            t->update_interpolated_position();
+            game->things_are_moving = true;
+        }
+    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+
+    player_tick();
+
+    if (game->things_are_moving) {
+        return;
+    }
+
+    if (game->paused()) {
+        return;
+    }
+
     //
     // Stop rapid pickup/drop events if particles are still in progress
+    // Don't move this priot to update_interpolated_position or see flicker
+    // in jumping.
     //
     if (player && player->particle_anim_exists()) {
         return;
@@ -67,29 +93,14 @@ void Level::tick (void)
         return;
     }
 
-    player_tick();
-
-    if (game->paused()) {
-        return;
-    }
-
-    // LOG("-");
-
-    //
-    // For all things that move, like monsters, or those that do not, like
-    // wands, and even those that do not move but can be destroyed, like
-    // walls. Omits things like floors, corridors, the grid; those that
-    // generally do nothing or are hidden.
-    //
-    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(t) {
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
         if (t->is_player() || t->is_alive_monst()) {
             if (t->get_tick() != game->tick_current) {
-                game->things_are_moving = true;
                 t->log("Is waiting to move");
             }
         }
         t->tick();
-    } FOR_ALL_THINGS_END()
+    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
     //
     // If things have stopped moving, perform location checks on where theuy
@@ -97,19 +108,10 @@ void Level::tick (void)
     // location checks on the ends of moves, but this is a backup and will
     // also handle things that do not move, like a wand that is now on fire.
     //
-    if (!game->things_are_moving) {
-        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(t) {
-            t->location_check();
-        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END()
-
-        game->tick_end();
-    }
-
-#if 0
-    if (g_opt_debug2){
-	sanity_check();
-    }
-#endif
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+        t->location_check();
+    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+    game->tick_end();
 }
 
 void Level::sanity_check (void)

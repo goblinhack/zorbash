@@ -12,6 +12,7 @@
 #include "my_array_bounds_check.h"
 #include "my_wid_thing_info.h"
 #include "my_sdl.h"
+#include "my_ptrcheck.h"
 
 void player_tick (void)
 {_
@@ -68,7 +69,6 @@ void player_tick (void)
     // Trying to scroll the map?
     //
     const float map_move_scroll_delta = 0.2;
-    bool some_key_event_was_pressed = false;
     const uint8_t *state = SDL_GetKeyboardState(0);
 
     if (state[game->config.key_map_left]) {
@@ -76,7 +76,6 @@ void player_tick (void)
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
-        some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_map_right]) {
@@ -84,7 +83,6 @@ void player_tick (void)
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
-        some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_map_up]) {
@@ -92,7 +90,6 @@ void player_tick (void)
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
-        some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_map_down]) {
@@ -100,7 +97,6 @@ void player_tick (void)
         level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
-        some_key_event_was_pressed = true;
     }
 
     if (player->is_dead || player->is_hidden) {
@@ -110,13 +106,17 @@ void player_tick (void)
         return;
     }
 
+    static uint32_t last_key_pressed_when;
+    if (!last_key_pressed_when) {
+        last_key_pressed_when = time_get_time_ms_cached();
+    } else if (time_get_time_ms_cached() - last_key_pressed_when < THING_MOVE_SPEED_MS) {
+        return;
+    }
+
     static bool left = false;
     static bool right = false;
     static bool up = false;
     static bool down = false;
-
-    static uint8_t pending_cnt = 0;
-    static const uint8_t pending_max_delay = 2;
 
     if (state[game->config.key_move_left]) {
         left = true;
@@ -184,21 +184,6 @@ void player_tick (void)
         }
     }
 
-    if (left || right || up || down) {
-        pending_cnt++;
-        if (pending_cnt < pending_max_delay) {
-            if (g_opt_debug4) {
-                LOG("Player tick; too fast");
-            }
-            return;
-        }
-    }
-
-    auto delay = player->tp()->move_speed_ms();
-    if (sdl_shift_held) {
-        delay = delay / 2;
-    }
-
     uint8_t attack = 0;
     uint8_t wait   = 0;
     uint8_t jump   = 0;
@@ -206,30 +191,6 @@ void player_tick (void)
     attack = state[game->config.key_attack] ? 1 : 0;
     wait   = state[game->config.key_wait_or_collect] ? 1 : 0;
     jump   = state[game->config.key_jump] ? 1 : 0;
-
-    if (some_key_event_was_pressed) {
-        if (g_opt_debug4) {
-            LOG("Player tick; too fast");
-        }
-        return;
-    }
-
-    static uint32_t last_key_pressed_when;
-    if (!last_key_pressed_when) {
-        last_key_pressed_when = time_get_time_ms_cached() - 1000;
-    }
-
-    if ((time_get_time_ms_cached() - last_key_pressed_when) < (uint)delay) {
-        left = false;
-        right = false;
-        up = false;
-        down = false;
-        pending_cnt = 0;
-        if (g_opt_debug4) {
-            LOG("Player tick; too fast");
-        }
-        return;
-    }
 
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
         up = true;
@@ -302,7 +263,35 @@ void player_tick (void)
         dy = d;
     }
 
+    //
+    // If things are almost done, then we can allow the player to move
+    // as it looks smoother
+    //
+    // Do this after saving the key states above else we can miss keys.
+    //
+    if (game->things_are_moving) {
+        LOG("Player move delayed while things are moving");
+
+        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {
+            if (t->get_timestamp_move_begin()) {
+                int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
+                if (time_left > 10) {
+                    t->log("Player delayed due to me (%d left)",
+                           t->get_timestamp_move_end() - time_get_time_ms_cached());
+                    return;
+                }
+            }
+        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
+
+        //
+        // This is a bit of a hack; but the tick is almost done and we
+        // want the game to be smooth.
+        //
+        game->tick_end();
+    }
+
     if (jump) {
+        last_key_pressed_when = time_get_time_ms_cached();
         game->tick_begin("player jumped");
         player->log("Jump");
 
@@ -338,11 +327,12 @@ void player_tick (void)
                 player->try_to_jump(p);
             }
         }
-        last_key_pressed_when = time_get_time_ms_cached();
         player->monstp->move_path.clear();
         game->cursor_move_path.clear();
         level->cursor_path_clear();
     } else if (up || down || left || right || attack || wait) {
+        last_key_pressed_when = time_get_time_ms_cached();
+
         if (attack) {
             player->log("Player attack");
         } else if (wait) {
@@ -374,7 +364,6 @@ void player_tick (void)
 
         fpoint future_pos = player->mid_at + fpoint(dx, dy);
         player->move(future_pos, up, down, left, right, attack, wait, true);
-        last_key_pressed_when = time_get_time_ms_cached();
 
         //
         // Update reachability for the player
@@ -386,5 +375,4 @@ void player_tick (void)
     right = false;
     up = false;
     down = false;
-    pending_cnt = 0;
 }

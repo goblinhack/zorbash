@@ -104,7 +104,6 @@ public:
     uint64_t is_sleeping:1                   {};
     uint64_t is_starving:1                   {};
     uint64_t is_the_grid:1                   {};
-    uint64_t is_tick_done:1                  {}; // has moved/hit and finished its move
     uint64_t is_waiting_to_ascend_dungeon:1  {};
     uint64_t is_waiting_to_ascend_sewer:1    {};
     uint64_t is_waiting_to_descend_dungeon:1 {};
@@ -199,8 +198,8 @@ public:
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void) const;
-    bool achieve_goals_in_death();
-    bool achieve_goals_in_life();
+    void achieve_goals_in_life();
+    void achieve_goals_in_death();
     bool add_kill(Thingp it);
     bool ai_blocked(void);
     bool ai_blocked_completely(void);
