@@ -4,16 +4,21 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_depth.h"
 #include "my_game.h"
-#include "my_thing.h"
-#include "my_sprintf.h"
 #include "my_gl.h"
+#include "my_level.h"
+#include "my_player.h"
+#include "my_ptrcheck.h"
+#include "my_python.h"
+#include "my_sprintf.h"
+#include "my_string.h"
+#include "my_thing.h"
+#include "my_thing_template.h"
+#include "my_wid_console.h"
 #include "my_wid_thing_collect.h"
 #include "my_array_bounds_check.h"
-#include "my_thing_template.h"
-#include "my_ptrcheck.h"
-#include "my_string.h"
-#include "my_python.h"
 
 void Thing::on_move (void)
 {_
@@ -66,7 +71,7 @@ void Thing::move_finish (void)
     set_where_i_dropped_an_item_last(point(-1, -1));
     move_reset_timestamps();
 
-    log("Move finish");
+    log("Move to %f,%f finished", mid_at.x, mid_at.y);
     update_interpolated_position();
 }
 
@@ -395,7 +400,7 @@ void Thing::update_interpolated_position (void)
             new_pos = mid_at;
             last_mid_at = mid_at;
 
-            move_reset_timestamps();
+            move_finish();
         }
 
         //
@@ -495,7 +500,7 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
         return;
     }
 
-    log("Move to %f,%f", to.x, to.y);
+    log("Move to %f,%f speed %d", to.x, to.y, move_speed);
     level_pop();
     mid_at = to;
     level_push();
@@ -689,7 +694,6 @@ _
                                           &target_attacked,
                                           &target_overlaps);
         if (target_attacked) {
-            is_tick_done = true;
             log("Cannot move to %d,%d, must attack", nh.x, nh.y);
             return true;
         } else {
@@ -706,7 +710,6 @@ _
             }
         }
 
-        is_tick_done = true;
         move(fnh);
         return true;
     }

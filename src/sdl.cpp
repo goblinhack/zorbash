@@ -1289,11 +1289,11 @@ void sdl_loop (void)
                     break;
                 }
             }
+        }
 
-            if (!g_errored) {
-                if (game->level) {
-                    game->level->tick();
-                }
+        if (!g_errored) {
+            if (game->level) {
+                game->level->tick();
             }
         }
 

@@ -53,7 +53,7 @@ void Thing::update_tick (void)
     set_tick(game->tick_current);
 }
 
-bool Thing::achieve_goals_in_life (void)
+void Thing::achieve_goals_in_life (void)
 {_
     if (is_changing_level ||
         is_falling || 
@@ -64,9 +64,8 @@ bool Thing::achieve_goals_in_life (void)
         is_waiting_to_fall || 
         is_the_grid || 
         is_jumping) { 
-        is_tick_done = true;
         log("Skip achieve goals in life");
-        return true;
+        return;
     }
 
     log("Achieve goals at tick %d, game is at tick %u",
@@ -76,21 +75,19 @@ bool Thing::achieve_goals_in_life (void)
     // Lifespan tick for carried torches must be before is_hidden check
     //
     lifespan_tick();
-    if (is_dead) { is_tick_done = true; return true; }
+    if (is_dead) { return; }
 
     if (is_hidden) { 
-        is_tick_done = true;
         log("Skip achieve goals in life");
-        return true;
+        return;
     }
 
     hunger_clock();
-    if (is_dead) { is_tick_done = true; return true; }
+    if (is_dead) { return; }
 
     collision_check_do();
     if (is_dead) {
-        is_tick_done = true;
-        return true;
+        return;
     }
 
     //
@@ -112,14 +109,12 @@ bool Thing::achieve_goals_in_life (void)
     //
     if (cursor_path_pop_next_and_move()) {
         log("Pop next move");
-        is_tick_done = true;
-        return true;
+        return;
     }
 
     if (try_to_escape()) {
         log("Try to escape");
-        is_tick_done = true;
-        return true;
+        return;
     }
 
     if (is_jumper()) {
@@ -127,26 +122,22 @@ bool Thing::achieve_goals_in_life (void)
         if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
             if (!collision_obstacle(level->player)) {
                 if (try_to_jump_towards_player()) {
-                    is_tick_done = true;
-                    return true;
+                    return;
                 }
             } else {
                 if (try_to_jump()) {
-                    is_tick_done = true;
-                    return true;
+                    return;
                 }
             }
         }
     }
 
     if (fire_at_target()) {
-        is_tick_done = true;
-        return true;
+        return;
     }
 
     if (on_tick()) {
-        is_tick_done = true;
-        return true;
+        return;
     }
 
     //
@@ -155,31 +146,17 @@ bool Thing::achieve_goals_in_life (void)
     if (get_dmap_scent()) {
         log("Get next hop");
         ai_get_next_hop();
-    } else {
-        is_tick_done = true;
     }
-
-    return true;
 }
 
-bool Thing::achieve_goals_in_death (void)
+void Thing::achieve_goals_in_death (void)
 {_
-    //
-    // Don't do stuff too often
-    //
-    if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
-                                         get_timestamp_unused2())) {
-        return false;
-    }
-
     log("Achieve death goals at tick %d, tick %u",
         get_tick(), game->tick_current);
 
     resurrect_tick();
 
     update_tick();
-
-    return true;
 }
 
 void Thing::collision_check_do (void)
@@ -220,12 +197,8 @@ _
             //
             auto tick = get_tick();
             if (tick < game->tick_current) {
-                is_tick_done = false;
-                if (achieve_goals_in_death()) {
-                    if (is_tick_done) {
-                        incr_tick();
-                    }
-                }
+                achieve_goals_in_death();
+                incr_tick();
             }
         }
         if (g_opt_debug4) {
@@ -241,6 +214,7 @@ _
         return;
     }
 
+#if 0
     bool is_waiting_to_tick = false;
 
     //
@@ -251,19 +225,18 @@ _
     }
 
     if (is_waiting_to_tick) {
+#endif
         //
         // Tick on player move/change of the current tick
         //
         auto tick = get_tick();
         if (tick < game->tick_current) {
-            is_tick_done = false;
-            if (achieve_goals_in_life()) {
-                if (is_tick_done) {
-                    incr_tick();
-                }
-            }
+            achieve_goals_in_life();
+            incr_tick();
         }
+#if 0
     }
+#endif
 
     //
     // Could be dead here.

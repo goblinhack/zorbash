@@ -17,7 +17,7 @@
 
 void Thing::lava_tick (void)
 {_
-    if (g_opt_debug4) {
+    if (is_player()) {
         log("Lava tick");
     }
 
@@ -30,23 +30,23 @@ void Thing::lava_tick (void)
         is_waiting_to_ascend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
-        if (g_opt_debug4) {
-            log("No, not relevent");
+        if (is_player()) {
+            log("Lava tick: no, not relevent");
         }
         return;
     }
 
     if (!hates_fire()) {
-        if (g_opt_debug4) {
-            log("No, not a fire avoider");
+        if (is_player()) {
+            log("Lava tick: no, not a fire avoider");
         }
         return;
     }
 
     fpoint at = get_interpolated_mid_at();
     if (!level->is_lava(at.x, at.y)) {
-        if (g_opt_debug4) {
-            log("No, no lava");
+        if (is_player()) {
+            log("Lava tick: no, no lava");
         }
         return;
     }

@@ -250,7 +250,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->is_sleeping                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_starving                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_the_grid                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_tick_done                  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_waiting_to_ascend_dungeon  = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_waiting_to_ascend_sewer    = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_waiting_to_descend_dungeon = (bits64 >> shift) & 1; shift++;
