@@ -47,8 +47,22 @@ void Level::tick (void)
     // walls. Omits things like floors, corridors, the grid; those that
     // generally do nothing or are hidden.
     //
+    bool update_tick = false;
     game->things_are_moving = false;
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+        //
+        // If something is still behind, we need to catch up.
+        // This can happen as we allow the player move to skip
+        // ahead to keep things smooth.
+        //
+        if (t->get_tick() < game->tick_current) {
+            update_tick = true;
+        }
+
+        //
+        // If something is still moving, do not progress any
+        // ticks.
+        //
         if (t->get_timestamp_move_begin()) {
             t->update_interpolated_position();
             game->things_are_moving = true;
@@ -57,7 +71,11 @@ void Level::tick (void)
 
     player_tick();
 
-    if (game->things_are_moving) {
+    if (update_tick) {
+        //
+        // continue
+        //
+    } else if (game->things_are_moving) {
         return;
     }
 

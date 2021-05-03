@@ -28,6 +28,17 @@ bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp targe
         die("No projectile name");
     }
 
+    auto start = last_blit_at;
+    auto end = target->last_blit_at;
+
+    if (!start.x && !start.y) {
+        return false;
+    }
+
+    if (!end.x && !end.y) {
+        return false;
+    }
+
     auto projectile = level->thing_new(projectile_name, mid_at);
     if (!projectile) {
         return false;
@@ -50,17 +61,6 @@ bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp targe
     if (is_player()) {
         game->tick_begin("player fired projectile");
         game->change_state(Game::STATE_NORMAL);
-    }
-
-    auto start = last_blit_at;
-    auto end = target->last_blit_at;
-
-    if (!start.x && !start.y) {
-        return false;
-    }
-
-    if (!end.x && !end.y) {
-        return false;
     }
 
     level->new_projectile(projectile->id, start, end, 200);

@@ -272,20 +272,11 @@ void player_tick (void)
     if (game->things_are_moving) {
         bool wait = false;
         FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {
-            if (t->is_player() || t->is_alive_monst()) {
-                if (t->get_tick() < game->tick_current - 1) {
-                    wait = true;
-                    break;
-                }
-            }
-
             if (t->get_timestamp_move_begin()) {
                 int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
                 if (time_left > 10) {
-#if 0
                     t->con("Player delayed due to me (%d left)",
                            t->get_timestamp_move_end() - time_get_time_ms_cached());
-#endif
                     wait = true;
                     break;
                 }
