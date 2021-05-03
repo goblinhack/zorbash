@@ -285,7 +285,7 @@ int Thing::is_rrr82(void) const                                         {_ retur
 int Thing::is_rrr83(void) const                                         {_ return (tp()->is_rrr83()); }
 int Thing::is_rrr84(void) const                                         {_ return (tp()->is_rrr84()); }
 int Thing::is_rrr85(void) const                                         {_ return (tp()->is_rrr85()); }
-int Thing::is_rrr86(void) const                                         {_ return (tp()->is_rrr86()); }
+int Thing::is_soft_body(void) const                                         {_ return (tp()->is_soft_body()); }
 int Thing::is_foilage(void) const                                         {_ return (tp()->is_foilage()); }
 int Thing::gfx_very_small_shadow_caster(void) const                                         {_ return (tp()->gfx_very_small_shadow_caster()); }
 int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }

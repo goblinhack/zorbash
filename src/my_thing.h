@@ -840,7 +840,7 @@ public:
     int is_rrr83(void) const;
     int is_rrr84(void) const;
     int is_rrr85(void) const;
-    int is_rrr86(void) const;
+    int is_soft_body(void) const;
     int is_foilage(void) const;
     int gfx_very_small_shadow_caster(void) const;
     int is_dry_fungus(void) const;

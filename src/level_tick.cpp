@@ -112,6 +112,10 @@ void Level::tick (void)
     }
 
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+        if (t->get_timestamp_move_begin()) {
+            continue;
+        }
+
         if (t->is_player() || t->is_alive_monst()) {
             if (t->get_tick() != game->tick_current) {
                 t->log("Is waiting to move");
@@ -127,6 +131,10 @@ void Level::tick (void)
     // also handle things that do not move, like a wand that is now on fire.
     //
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+        if (t->get_timestamp_move_begin()) {
+            continue;
+        }
+
         t->location_check();
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
     game->tick_end();

@@ -1016,9 +1016,21 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
             A_at.x, A_at.y, it->to_string().c_str());
     }
 _
-
     if (it->is_monst()) {
-        if (is_brazier()) {
+        if (is_barrel()) {
+            if (things_overlap(me, A_at, it)) {
+                if (it->is_soft_body()) {
+                    log("Overlaps; barrel can splat soft monst");
+                    return false;
+                } else if (it->is_ethereal()) {
+                    log("Overlaps; barrel can splat ethereal monst");
+                    return false;
+                } else {
+                    log("Overlaps; barrel cannot splat");
+                    return true;
+                }
+            }
+        } else if (is_brazier()) {
             //
             // Torches always hit monsters
             //
@@ -1076,7 +1088,7 @@ _
             // Allow movement away. This happens if you jump onto a brazier.
             //
         } else if (things_overlap_attack(me, A_at, it)) {
-            log("Yes; overlaps barrel");
+            log("Yes; overlaps brazier");
             return true;
         }
     }

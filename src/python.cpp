@@ -1535,7 +1535,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr83)
     TP_SET_DECL(is_rrr84)
     TP_SET_DECL(is_rrr85)
-    TP_SET_DECL(is_rrr86)
+    TP_SET_DECL(is_soft_body)
     TP_SET_DECL(is_foilage)
     TP_SET_DECL(gfx_very_small_shadow_caster)
     TP_SET_DECL(is_dry_fungus)
@@ -1876,7 +1876,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr83_at",                                      (PyCFunction)level_is_rrr83_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr84_at",                                      (PyCFunction)level_is_rrr84_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr85_at",                                      (PyCFunction)level_is_rrr85_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr86_at",                                      (PyCFunction)level_is_rrr86_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_soft_body_at",                                      (PyCFunction)level_is_soft_body_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_foilage_at",                                      (PyCFunction)level_is_foilage_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_gfx_very_small_shadow_caster_at",                                      (PyCFunction)level_gfx_very_small_shadow_caster_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr8_at",                                       (PyCFunction)level_is_rrr8_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2157,7 +2157,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr83",                                         (PyCFunction)thing_is_rrr83,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr84",                                         (PyCFunction)thing_is_rrr84,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr85",                                         (PyCFunction)thing_is_rrr85,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr86",                                         (PyCFunction)thing_is_rrr86,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_soft_body",                                         (PyCFunction)thing_is_soft_body,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_foilage",                                       (PyCFunction)thing_is_foilage,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_gfx_very_small_shadow_caster",                     (PyCFunction)thing_gfx_very_small_shadow_caster,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_dry_fungus",                                     (PyCFunction)thing_is_dry_fungus,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},

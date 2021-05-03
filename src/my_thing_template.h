@@ -306,7 +306,7 @@ private:
     int _is_rrr83 {};
     int _is_rrr84 {};
     int _is_rrr85 {};
-    int _is_rrr86 {};
+    int _is_soft_body {};
     int _is_foilage {};
     int _gfx_very_small_shadow_caster {};
     int _is_dry_fungus {};
@@ -769,7 +769,7 @@ public:
     int is_rrr83(void) const;
     int is_rrr84(void) const;
     int is_rrr85(void) const;
-    int is_rrr86(void) const;
+    int is_soft_body(void) const;
     int is_foilage(void) const;
     int gfx_very_small_shadow_caster(void) const;
     int is_dry_fungus(void) const;
@@ -1101,7 +1101,7 @@ public:
     void set_is_rrr83(int);
     void set_is_rrr84(int);
     void set_is_rrr85(int);
-    void set_is_rrr86(int);
+    void set_is_soft_body(int);
     void set_is_foilage(int);
     void set_gfx_very_small_shadow_caster(int);
     void set_is_dry_fungus(int);

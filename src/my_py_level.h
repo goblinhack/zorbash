@@ -214,7 +214,7 @@ PyObject *level_is_rrr82_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr83_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr84_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr85_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr86_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_soft_body_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_foilage_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_very_small_shadow_caster_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dry_fungus_at(PyObject *obj, PyObject *args, PyObject *keywds);
