@@ -244,7 +244,7 @@ PyObject *thing_is_rrr82(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr83(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr84(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr85(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr86(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_soft_body(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_foilage(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_very_small_shadow_caster(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dry_fungus(PyObject *obj, PyObject *args, PyObject *keywds);

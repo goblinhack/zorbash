@@ -98,8 +98,12 @@ void Game::dead_select (const char *reason)
         game->soft_pause();
     }
 
-    game->level->scroll_map_to_player();
-    game->level->cursor->hide();
+    if (level) {
+        level->scroll_map_to_player();
+        if (level->cursor) {
+            level->cursor->hide();
+        }
+    }
 
     auto h = TERM_HEIGHT / 2;
     point tl = make_point(0, h + 1);

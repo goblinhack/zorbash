@@ -481,8 +481,8 @@ class Tp:
     def set_is_rrr85(self, value):
         zx.tp_set_is_rrr85(self, value)
 
-    def set_is_rrr86(self, value):
-        zx.tp_set_is_rrr86(self, value)
+    def set_is_soft_body(self, value):
+        zx.tp_set_is_soft_body(self, value)
 
     def set_is_foilage(self, value):
         zx.tp_set_is_foilage(self, value)
