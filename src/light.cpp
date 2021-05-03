@@ -273,7 +273,7 @@ bool Light::calculate (int ray_casy_only)
                     level->set_is_lit_no_check(x, y); // allows lights to fade
                     rp++;
 
-                    if (step < TILE_WIDTH) {
+                    if (step < TILE_WIDTH / 2) {
                         continue;
                     }
 

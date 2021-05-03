@@ -281,7 +281,7 @@ void player_tick (void)
 
             if (t->get_timestamp_move_begin()) {
                 int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
-                if (time_left > 50) {
+                if (time_left > 10) {
 #if 0
                     t->con("Player delayed due to me (%d left)",
                            t->get_timestamp_move_end() - time_get_time_ms_cached());
@@ -293,7 +293,7 @@ void player_tick (void)
         } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
 
         if (wait) {
-            CON("Player move delayed while things are moving");
+            LOG("Player move delayed while things are moving");
             return;
         }
 
