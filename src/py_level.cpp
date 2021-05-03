@@ -105,8 +105,9 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     floor_string += Charmap::SPACE;
                 }
 
-                if (m.is_dry_grass) {
-                    floor2_string += Charmap::DRY_GRASS;
+                if (m.is_foilage ||
+                    m.is_dry_fungus) {
+                    floor2_string += c;
                 } else {
                     floor2_string += Charmap::SPACE;
                 }
@@ -599,9 +600,9 @@ LEVEL_BODY_GET_BOOL_AT(level_is_rrr83_at, is_rrr83)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr84_at, is_rrr84)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr85_at, is_rrr85)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr86_at, is_rrr86)
-LEVEL_BODY_GET_BOOL_AT(level_is_rrr87_at, is_rrr87)
+LEVEL_BODY_GET_BOOL_AT(level_is_foilage_at, is_foilage)
 LEVEL_BODY_GET_BOOL_AT(level_gfx_very_small_shadow_caster_at, gfx_very_small_shadow_caster)
-LEVEL_BODY_GET_BOOL_AT(level_is_dry_grass_at, is_dry_grass)
+LEVEL_BODY_GET_BOOL_AT(level_is_dry_fungus_at, is_dry_fungus)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr8_at, is_rrr8)
 LEVEL_BODY_GET_BOOL_AT(level_is_bridge_at, is_bridge)
 LEVEL_BODY_GET_BOOL_AT(level_is_barrel_at, is_barrel)

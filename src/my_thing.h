@@ -125,7 +125,8 @@ public:
     uint64_t i_set_is_deep_water:1             {};
     uint64_t i_set_is_shallow_water:1          {};
     uint64_t i_set_is_dirt:1                   {};
-    uint64_t i_set_is_dry_grass:1              {};
+    uint64_t i_set_is_dry_fungus:1              {};
+    uint64_t i_set_is_foilage:1                {};
     uint64_t i_set_is_door:1                   {};
     uint64_t i_set_is_ascend_dungeon:1         {};
     uint64_t i_set_is_descend_dungeon:1        {};
@@ -841,9 +842,9 @@ public:
     int is_rrr84(void) const;
     int is_rrr85(void) const;
     int is_rrr86(void) const;
-    int is_rrr87(void) const;
+    int is_foilage(void) const;
     int gfx_very_small_shadow_caster(void) const;
-    int is_dry_grass(void) const;
+    int is_dry_fungus(void) const;
     int is_rrr9(void) const;
     int is_bridge(void) const;
     int is_rrr99(void) const;
@@ -1183,7 +1184,7 @@ public:
     void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
     void fall(float fall_height, timestamp_t ms);
     void fire_tick();
-    void grass_tick();
+    void fungus_tick();
     void gc(void);
     void get_light_strength_including_torch_effect(int &light_strength);
     void get_tiles(void);

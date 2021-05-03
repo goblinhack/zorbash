@@ -38,7 +38,8 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_fungus {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};
@@ -412,8 +413,10 @@ public:
     uint8_t is_descend_sewer(const point &p);
     uint8_t is_dirt(const int x, const int y);
     uint8_t is_dirt(const point &p);
-    uint8_t is_dry_grass(const int x, const int y);
-    uint8_t is_dry_grass(const point &p);
+    uint8_t is_dry_fungus(const int x, const int y);
+    uint8_t is_dry_fungus(const point &p);
+    uint8_t is_foilage(const int x, const int y);
+    uint8_t is_foilage(const point &p);
     uint8_t is_door(const int x, const int y);
     uint8_t is_door(const point &p);
     uint8_t is_dungeon(const int x, const int y);
@@ -571,7 +574,8 @@ public:
     void new_laser(ThingId id, point start, point stop, uint32_t dur);
     void new_projectile(ThingId id, point start, point stop, uint32_t dur);
     void place_dirt(Dungeonp d);
-    void place_dry_grass(Dungeonp d);
+    void place_dry_fungus(Dungeonp d);
+    void place_foilage(Dungeonp d);
     void place_floor_deco(Dungeonp d);
     void place_the_grid(void);
     void player_dmap_update(void);
@@ -595,7 +599,8 @@ public:
     void set_is_descend_dungeon(const int x, const int y);
     void set_is_descend_sewer(const int x, const int y);
     void set_is_dirt(const int x, const int y);
-    void set_is_dry_grass(const int x, const int y);
+    void set_is_dry_fungus(const int x, const int y);
+    void set_is_foilage(const int x, const int y);
     void set_is_door(const int x, const int y);
     void set_is_extreme_hazard(const int x, const int y);
     void set_is_fire(const int x, const int y);
@@ -658,7 +663,8 @@ public:
     void unset_is_descend_dungeon(const int x, const int y);
     void unset_is_descend_sewer(const int x, const int y);
     void unset_is_dirt(const int x, const int y);
-    void unset_is_dry_grass(const int x, const int y);
+    void unset_is_dry_fungus(const int x, const int y);
+    void unset_is_foilage(const int x, const int y);
     void unset_is_door(const int x, const int y);
     void unset_is_extreme_hazard(const int x, const int y);
     void unset_is_fire(const int x, const int y);

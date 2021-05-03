@@ -83,7 +83,9 @@ void Level::update_minimap (void)
                     c = BLUE3;
                 } else if (is_dirt(x, y)) {
                     c = GRAY20;
-                } else if (is_dry_grass(x, y)) {
+                } else if (is_dry_fungus(x, y)) {
+                    c = BROWN;
+                } else if (is_foilage(x, y)) {
                     c = DARKGREEN;
                 } else {
                     c = BLACK;
@@ -191,8 +193,10 @@ void Level::update_minimap (void)
                     c = BLUE3;
                 } else if (is_dirt(x, y)) {
                     c = GRAY20;
-                } else if (is_dry_grass(x, y)) {
-                    c = GRAY20;
+                } else if (is_dry_fungus(x, y)) {
+                    c = BROWN;
+                } else if (is_foilage(x, y)) {
+                    c = DARKGREEN;
                 } else if (edge_of_sceen) {
                     c = GRAY10;
                 } else {

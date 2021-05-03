@@ -235,16 +235,16 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr84() &&                                         (what == "is_rrr84"))                                         { return true; }
     if (is_rrr85() &&                                         (what == "is_rrr85"))                                         { return true; }
     if (is_rrr86() &&                                         (what == "is_rrr86"))                                         { return true; }
-    if (is_rrr87() &&                                         (what == "is_rrr87"))                                         { return true; }
-    if (gfx_very_small_shadow_caster() &&                                         (what == "gfx_very_small_shadow_caster"))                                         { return true; }
-    if (is_dry_grass() &&                                         (what == "is_dry_grass"))                                         { return true; }
+    if (is_foilage() &&                                       (what == "is_foilage"))                                         { return true; }
+    if (gfx_very_small_shadow_caster() &&                     (what == "gfx_very_small_shadow_caster"))                                         { return true; }
+    if (is_dry_fungus() &&                                     (what == "is_dry_fungus"))                                         { return true; }
     if (is_rrr9() &&                                          (what == "is_rrr9"))                                          { return true; }
-    if (is_bridge() &&                                         (what == "is_bridge"))                                         { return true; }
-    if (is_barrel() &&                                         (what == "is_barrel"))                                         { return true; }
-    if (is_burnable() &&                                         (what == "is_burnable"))                                         { return true; }
-    if (is_wand_eater() &&                                         (what == "is_wand_eater"))                                         { return true; }
-    if (loves_fire() &&                                         (what == "loves_fire"))                                         { return true; }
-    if (is_projectile() &&                                         (what == "is_projectile"))                                         { return true; }
+    if (is_bridge() &&                                        (what == "is_bridge"))                                         { return true; }
+    if (is_barrel() &&                                        (what == "is_barrel"))                                         { return true; }
+    if (is_burnable() &&                                      (what == "is_burnable"))                                         { return true; }
+    if (is_wand_eater() &&                                    (what == "is_wand_eater"))                                         { return true; }
+    if (loves_fire() &&                                       (what == "loves_fire"))                                         { return true; }
+    if (is_projectile() &&                                    (what == "is_projectile"))                                         { return true; }
     if (is_secret_door() &&                                   (what == "is_secret_door"))                                   { return true; }
     if (is_sewer_wall() &&                                    (what == "is_sewer_wall"))                                    { return true; }
     if (is_shallow_water() &&                                 (what == "is_shallow_water"))                                 { return true; }
@@ -498,16 +498,16 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr84")                                         { return &Thing::is_rrr84; }
     if (what == "is_rrr85")                                         { return &Thing::is_rrr85; }
     if (what == "is_rrr86")                                         { return &Thing::is_rrr86; }
-    if (what == "is_rrr87")                                         { return &Thing::is_rrr87; }
-    if (what == "gfx_very_small_shadow_caster")                                         { return &Thing::gfx_very_small_shadow_caster; }
-    if (what == "is_dry_grass")                                         { return &Thing::is_dry_grass; }
+    if (what == "is_foilage")                                       { return &Thing::is_foilage; }
+    if (what == "gfx_very_small_shadow_caster")                     { return &Thing::gfx_very_small_shadow_caster; }
+    if (what == "is_dry_fungus")                                     { return &Thing::is_dry_fungus; }
     if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }
-    if (what == "is_bridge")                                         { return &Thing::is_bridge; }
-    if (what == "is_barrel")                                         { return &Thing::is_barrel; }
-    if (what == "is_burnable")                                         { return &Thing::is_burnable; }
-    if (what == "is_wand_eater")                                         { return &Thing::is_wand_eater; }
-    if (what == "loves_fire")                                         { return &Thing::loves_fire; }
-    if (what == "is_projectile")                                         { return &Thing::is_projectile; }
+    if (what == "is_bridge")                                        { return &Thing::is_bridge; }
+    if (what == "is_barrel")                                        { return &Thing::is_barrel; }
+    if (what == "is_burnable")                                      { return &Thing::is_burnable; }
+    if (what == "is_wand_eater")                                    { return &Thing::is_wand_eater; }
+    if (what == "loves_fire")                                       { return &Thing::loves_fire; }
+    if (what == "is_projectile")                                    { return &Thing::is_projectile; }
     if (what == "gfx_flickers")                                     { return &Thing::gfx_flickers; }
     if (what == "is_secret_door")                                   { return &Thing::is_secret_door; }
     if (what == "is_sewer_wall")                                    { return &Thing::is_sewer_wall; }

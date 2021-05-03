@@ -214,6 +214,13 @@ _
         return true;
     }
 
+    if (is_weapon()) {
+        if (it->is_foilage()) {
+            log("Can attack foilage %s", it->to_string().c_str());
+            return true;
+        }
+    }
+
     if (it->is_alive_monst() || 
         it->is_combustible() ||
         it->is_very_combustible() ||
@@ -222,7 +229,8 @@ _
         it->is_rock() ||
         it->is_door() ||
         it->is_bridge() ||
-        it->is_dry_grass() ||
+        it->is_dry_fungus() ||
+        it->is_foilage() ||
         it->is_brazier() ||
         it->is_barrel() ||
         it->is_player() ||

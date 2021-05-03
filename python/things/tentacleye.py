@@ -26,7 +26,7 @@ def on_tick(me, x, y): # Return True on doing an action
     return False
 
 def on_fire_at(me, target, x, y): # Return True on doing an action
-    if random.randint(1, 10) < 5:
+    if random.randint(1, 10) < 3:
         zx.thing_fire_at(me, "laser_energy", target)
         return True
     return False

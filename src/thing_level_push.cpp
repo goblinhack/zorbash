@@ -45,8 +45,10 @@ void Thing::level_push (void)
                                                    level->set_is_bridge(mx, my); }
     if (is_dirt())                               { i_set_is_dirt = true;
                                                    level->set_is_dirt(mx, my); }
-    if (is_dry_grass())                          { i_set_is_dry_grass = true;
-                                                   level->set_is_dry_grass(mx, my); }
+    if (is_dry_fungus())                          { i_set_is_dry_fungus = true;
+                                                   level->set_is_dry_fungus(mx, my); }
+    if (is_foilage())                            { i_set_is_foilage = true;
+                                                   level->set_is_foilage(mx, my); }
     if (is_door() && !is_open)                   { i_set_is_door = true;
                                                    level->set_is_door(mx, my); }
     if (is_ascend_dungeon())                     { i_set_is_ascend_dungeon = true;
@@ -81,13 +83,16 @@ void Thing::level_push (void)
                                                    level->set_is_key(mx, my); }
     if (is_lava())                               { i_set_is_lava = true;
                                                    level->set_is_lava(mx, my); }
-    if (is_light_blocker() && !is_open)          { i_set_is_light_blocker = true;
+    if (is_light_blocker() && !is_open && !is_dead) {
+                                                   i_set_is_light_blocker = true;
                                                    level->set_is_light_blocker(mx, my); }
     if (is_monst())                              { i_set_is_monst = true;
                                                    level->set_is_monst(mx, my); }
-    if (is_movement_blocking_hard() && !is_open) { i_set_is_movement_blocking_hard = true;
+    if (is_movement_blocking_hard() && !is_open && !is_dead) {
+                                                   i_set_is_movement_blocking_hard = true;
                                                    level->set_is_movement_blocking_hard(mx, my); }
-    if (is_movement_blocking_soft() && !is_open) { i_set_is_movement_blocking_soft = true;
+    if (is_movement_blocking_soft() && !is_open && !is_dead) {
+                                                   i_set_is_movement_blocking_soft = true;
                                                    level->set_is_movement_blocking_soft(mx, my); }
     if (is_potion())                             { i_set_is_potion = true;
                                                    level->set_is_potion(mx, my); }

@@ -12,47 +12,48 @@
 class Charmap {
 public:
     enum {
+        BARREL           =            'b',
         BLOOD            =            '_',
         BRAZIER          =            'B',
-        BARREL           =            'b',
+        BRIDGE           =            '=',
         CHASM            =            'C',
         CORRIDOR         =            '#',
-        BRIDGE           =            '=',
         DEBUG            =            '@',
         DECO             =            '|',
         DEEP_WATER       =            'W',
         DIRT             =            ',',
-        DRY_GRASS        =            '\'',
         DOOR             =            'D',
         DOOR_DOWN        =            'v',
         DOOR_LEFT        =            '<',
         DOOR_RIGHT       =            '>',
         DOOR_UP          =            '^',
+        DRY_FUNGUS        =            '\'',
         ENTRANCE         =            'S',
         EXIT             =            'E',
-        SEWER            =            'O',
         FLOOR            =            '.',
+        FOILAGE          =            '`',
         FOOD             =            'f',
-        MINION_GENERATOR_EASY =       'g',
-        MINION_GENERATOR_HARD =       'G',
         GOLD             =            'o',
         KEY              =            'k',
         LAVA             =            'L',
+        MINION_GENERATOR_EASY =       'g',
+        MINION_GENERATOR_HARD =       'G',
         MONST_EASY       =            'm',
         MONST_HARD       =            'M',
         NONE             =            '\0',
         POTION           =            '!',
-        WAND             =            '/',
         ROCK             =            'r',
         SECRET_CORRIDOR  =            '?',
         SECRET_DOOR      =            's',
+        SEWER            =            'O',
+        SHALLOW_WATER    =            'w',
         SPACE            =            ' ',
         TRAP             =            't',
         TREASURE_CLASS_A =            '$',
         TREASURE_CLASS_B =            '2',
         TREASURE_CLASS_C =            '3',
         WALL             =            'x',
-        SHALLOW_WATER    =            'w',
+        WAND             =            '/',
     };
 
     char                      c;
@@ -62,7 +63,8 @@ public:
     bool                      is_bridge                       {false};
     bool                      is_deep_water                   {false};
     bool                      is_dirt                         {false};
-    bool                      is_dry_grass                    {false};
+    bool                      is_dry_fungus                    {false};
+    bool                      is_foilage                      {false};
     bool                      is_door                         {false};
     bool                      is_ascend_dungeon               {false};
     bool                      is_descend_dungeon              {false};

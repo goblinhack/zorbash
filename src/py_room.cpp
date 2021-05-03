@@ -110,7 +110,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_deep_water            ||
                            m.is_descend_dungeon       ||
                            m.is_door                  ||
-                           m.is_dry_grass             ||
+                           m.is_foilage               ||
+                           m.is_dry_fungus             ||
                            m.is_floor_deco            ||
                            m.is_food                  ||
                            m.is_gold                  ||
@@ -135,8 +136,9 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     floor_string += Charmap::SPACE;
                 }
 
-                if (m.is_dry_grass) {
-                    floor2_string += Charmap::DRY_GRASS;
+                if (m.is_foilage ||
+                    m.is_dry_fungus) {
+                    floor2_string += c;
                 } else {
                     floor2_string += Charmap::SPACE;
                 }

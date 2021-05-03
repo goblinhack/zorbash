@@ -201,6 +201,15 @@ void Thing::kill (Thingp killer, const char *reason)
         return;
     }
 
+    //
+    // If this was blocking the way to the player, update that now
+    //
+    if (!level->is_being_destroyed) {
+        if (is_movement_blocking_hard()) {
+            level->player_dmap_update();
+        }
+    }
+
     level_pop();
 
     if (is_loggable_for_important_stuff()) {

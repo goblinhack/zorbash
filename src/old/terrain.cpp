@@ -817,7 +817,7 @@ redo:
 //                        d->weight *= 1.01;
 //                        d->velocity *= 1.01;
                 } else if (final_map[nx][ny] < 90)  {
-                    // over grass
+                    // over fungus
                     if (random_range(0, 100) < 40) {
                         auto delta = d->weight / 2;
                         deposit_water(point(nx, ny), delta);

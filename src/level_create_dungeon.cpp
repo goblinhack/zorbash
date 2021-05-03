@@ -375,7 +375,10 @@ _
         create_dungeon_game_mark_dungeon_tiles(dungeon);
         if (g_errored) { return false; }
 _
-        place_dry_grass(dungeon);
+        place_dry_fungus(dungeon);
+        if (g_errored) { return false; }
+_
+        place_foilage(dungeon);
         if (g_errored) { return false; }
 _
         scroll_map_to_player();
@@ -1279,12 +1282,36 @@ void Level::place_dirt (Dungeonp d)
     }
 }
 
-void Level::place_dry_grass (Dungeonp d)
+void Level::place_dry_fungus (Dungeonp d)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (!d->is_anything_at(x, y) || d->is_dry_grass(x, y)) {
-                auto tp = tp_random_dry_grass();
+            if (!d->is_anything_at(x, y) || d->is_dry_fungus(x, y)) {
+                auto tp = tp_random_dry_fungus();
+                if (!tp) {
+                    return;
+                }
+
+                if (heatmap(x, y)) {
+                    continue;
+                }
+
+                if (is_brazier(x, y)) {
+                    continue;
+                }
+
+                (void) thing_new(tp->name(), fpoint(x, y));
+            }
+        }
+    }
+}
+
+void Level::place_foilage (Dungeonp d)
+{_
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            if (!d->is_anything_at(x, y) || d->is_foilage(x, y)) {
+                auto tp = tp_random_foilage();
                 if (!tp) {
                     return;
                 }
