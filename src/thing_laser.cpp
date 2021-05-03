@@ -28,6 +28,17 @@ bool Thing::laser_fire_at (const std::string &laser_name, Thingp target)
         die("No laser name");
     }
 
+    auto start = last_blit_at;
+    auto end = target->last_blit_at;
+
+    if (!start.x && !start.y) {
+        return false;
+    }
+
+    if (!end.x && !end.y) {
+        return false;
+    }
+
     auto laser = level->thing_new(laser_name, mid_at);
     if (!laser) {
         return false;
@@ -50,17 +61,6 @@ bool Thing::laser_fire_at (const std::string &laser_name, Thingp target)
     if (is_player()) {
         game->tick_begin("player zapped laser");
         game->change_state(Game::STATE_NORMAL);
-    }
-
-    auto start = last_blit_at;
-    auto end = target->last_blit_at;
-
-    if (!start.x && !start.y) {
-        return false;
-    }
-
-    if (!end.x && !end.y) {
-        return false;
     }
 
     level->new_laser(laser->id, start, end, 150);
