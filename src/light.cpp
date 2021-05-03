@@ -273,6 +273,10 @@ bool Light::calculate (int ray_casy_only)
                     level->set_is_lit_no_check(x, y); // allows lights to fade
                     rp++;
 
+                    if (step < TILE_WIDTH) {
+                        continue;
+                    }
+
                     if (level->is_light_blocker_no_check(x, y)) {
                         //
                         // We hit a wall. Keep walking until we exit the wall or
