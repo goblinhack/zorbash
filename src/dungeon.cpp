@@ -234,11 +234,17 @@ void Dungeon::make_dungeon (void)
     water_fixup();
     add_border();
     add_remaining();
+    add_foilage_around_water();
 
-    dry_grass_gen(15, // fill prob
+    dry_fungus_gen(10, // fill prob
                   10, // R1
                   5,  // R2
                   4   /* generations */);
+
+    foilage_gen(10, // fill prob
+                10, // R1
+                5,  // R2
+                4   /* generations */);
 
     LOG("Final DUNGEON:");
     dump();
@@ -567,7 +573,7 @@ bool Dungeon::is_dirt_no_check (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_dry_grass (const int x, const int y)
+bool Dungeon::is_dry_fungus (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -577,7 +583,24 @@ bool Dungeon::is_dry_grass (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_dry_grass) {
+        if (v.is_dry_fungus) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Dungeon::is_foilage (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_foilage) {
             return true;
         }
     }
@@ -3582,8 +3605,8 @@ void Dungeon::water_fixup (void)
 
 void Dungeon::add_remaining (void)
 {
-    for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-        for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+    for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
+        for (auto x = 2; x < MAP_WIDTH - 2; x++) {
             if (is_anything_at(x, y)) {
                 continue;
             }
@@ -3591,11 +3614,74 @@ void Dungeon::add_remaining (void)
             if (random_range(0, 100) < 95) {
                 putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
             }
+
             putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
             putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
 
             if (random_range(0, 100) < 20) {
-                putc(x, y, MAP_DEPTH_FLOOR, Charmap::DRY_GRASS);
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_FUNGUS);
+            }
+
+            if (random_range(0, 100) < 20) {
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+            } else if (is_dirt(x, y)) {
+                if (random_range(0, 100) < 20) {
+                    putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+                }
+            }
+        }
+    }
+}
+
+void Dungeon::add_foilage_around_water (void)
+{
+    for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
+        for (auto x = 2; x < MAP_WIDTH - 2; x++) {
+
+            if (is_chasm(x, y) ||
+                is_bridge(x, y) ||
+                is_lava(x, y) ||
+                is_deep_water(x, y) ||
+                is_shallow_water(x, y)) {
+                continue;
+            }
+
+            if (is_dirt(x, y)) {
+                if (random_range(0, 100) > 80) {
+                    continue;
+                }
+            }
+
+            if (is_floor(x, y)) {
+                if (random_range(0, 100) > 20) {
+                    continue;
+                }
+            }
+
+            bool foilage_ok = false;
+            for (auto dx = -2; dx <= 2; dx++) {
+                if (!foilage_ok) {
+                    break;
+                }
+                for (auto dy = -2; dy <= 2; dy++) {
+                    if (is_lava(x+dx, y+dy)    ||
+                        is_bridge(x+dx, y+dy)  ||
+                        is_lava(x+dx, y+dy)    ||
+                        is_brazier(x+dx, y+dy) ||
+                        is_chasm(x+dx, y+dy)) {
+                        foilage_ok = false;
+                        goto next;
+                    }
+
+                    if (is_shallow_water(x+dx, y+dy) ||
+                        is_deep_water(x+dx, y+dy)) {
+                        foilage_ok = true;
+                    }
+                }
+            }
+next:
+            if (foilage_ok) {
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
             }
         }
     }
@@ -3745,7 +3831,7 @@ void Dungeon::dirt_gen (uint8_t map_fill_prob,
     }
 }
 
-void Dungeon::dry_grass_gen (uint8_t map_fill_prob,
+void Dungeon::dry_fungus_gen (uint8_t map_fill_prob,
                              uint8_t map_r1,
                              uint8_t map_r2,
                              uint8_t map_generations)
@@ -3817,7 +3903,84 @@ void Dungeon::dry_grass_gen (uint8_t map_fill_prob,
                     }
                 }
 
-                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_GRASS);
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_FUNGUS);
+            }
+next:
+            continue;
+        }
+    }
+}
+
+void Dungeon::foilage_gen (uint8_t map_fill_prob,
+                           uint8_t map_r1,
+                           uint8_t map_r2,
+                           uint8_t map_generations)
+
+{
+    map_save = {};
+    map_curr = {};
+
+    const int16_t maze_w = MAP_WIDTH - 2;
+    const int16_t maze_h = MAP_HEIGHT - 2;
+
+    if (map_fill_prob) {
+        MAP_FILL_PROB             = map_fill_prob;
+    }
+
+    if (map_r1) {
+        MAP_R1                    = map_r1;
+    }
+
+    if (map_r2) {
+        MAP_R2                    = map_r2;
+    }
+
+    if (map_generations) {
+        MAP_GENERATIONS           = map_generations;
+    }
+
+    int16_t x, y, i;
+
+    map_curr = {};
+
+    for (x=2; x < maze_w-2; x++) {
+        for (y=2; y < maze_h-2; y++) {
+            if ((myrand() % 100) < MAP_FILL_PROB) {
+                set(map_curr, x, y, (uint8_t)1);
+            }
+        }
+    }
+
+    for (i=0; i < MAP_GENERATIONS; i++) {
+        cave_generation();
+        std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+        map_save = {};
+    }
+
+    for (x=2; x < maze_w-2; x++) {
+        for (y=2; y < maze_h-2; y++) {
+            if (get(map_curr, x, y)) {
+                if (is_wall(x, y) || 
+                    is_rock(x, y) ||
+                    is_chasm(x, y)) {
+                    continue;
+                }
+
+                for (auto dx = -1; dx <= 1; dx++) {
+                    for (auto dy = -1; dy <= 1; dy++) {
+                        if (is_lava(x+dx, y+dy)) {
+                            goto next;
+                        }
+                        if (is_brazier(x+dx, y+dy)) {
+                            goto next;
+                        }
+                        if (is_deep_water(x+dx, y+dy)) {
+                            goto next;
+                        }
+                    }
+                }
+
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
             }
 next:
             continue;

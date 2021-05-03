@@ -90,7 +90,8 @@ public:
     bool is_deep_water(const int x, const int y);
     bool is_deep_water_no_check(const int x, const int y);
     bool is_dirt(const int x, const int y);
-    bool is_dry_grass(const int x, const int y);
+    bool is_dry_fungus(const int x, const int y);
+    bool is_foilage(const int x, const int y);
     bool is_dirt_no_check(const int x, const int y);
     bool is_door(const int x, const int y);
     bool is_door_no_check(const int x, const int y);
@@ -145,6 +146,7 @@ public:
     void add_border(void);
     void add_corridor_walls(void);
     void add_remaining(void);
+    void add_foilage_around_water(void);
     void add_room_walls(void);
     void assign_rooms_to_tiles(void);
     void block_secret_doors(void);
@@ -193,10 +195,14 @@ public:
                   uint8_t map_r1,
                   uint8_t map_r2,
                   uint8_t map_generations);
-    void dry_grass_gen(uint8_t map_fill_prob,
+    void dry_fungus_gen(uint8_t map_fill_prob,
                        uint8_t map_r1,
                        uint8_t map_r2,
                        uint8_t map_generations);
+    void foilage_gen(uint8_t map_fill_prob,
+                     uint8_t map_r1,
+                     uint8_t map_r2,
+                     uint8_t map_generations);
     void water_gen(uint8_t map_fill_prob,
                    uint8_t map_r1,
                    uint8_t map_r2,

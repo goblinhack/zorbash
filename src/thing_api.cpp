@@ -141,7 +141,7 @@ int Thing::is_described_when_hovering_over(void) const                  {_ retur
 int Thing::is_dirt(void) const                                          {_ return (tp()->is_dirt()); }
 int Thing::is_door(void) const                                          {_ return (tp()->is_door()); }
 int Thing::is_droppable(void) const                                     {_ return (tp()->is_droppable()); }
-int Thing::is_dry_grass(void) const                                     {_ return (tp()->is_dry_grass()); }
+int Thing::is_dry_fungus(void) const                                     {_ return (tp()->is_dry_fungus()); }
 int Thing::is_ethereal(void) const                                      {_ return (tp()->is_ethereal()); }
 int Thing::is_ethereal_minion_generator(void) const                     {_ return (tp()->is_ethereal_minion_generator()); }
 int Thing::is_explosion(void) const                                     {_ return (tp()->is_explosion()); }
@@ -286,7 +286,7 @@ int Thing::is_rrr83(void) const                                         {_ retur
 int Thing::is_rrr84(void) const                                         {_ return (tp()->is_rrr84()); }
 int Thing::is_rrr85(void) const                                         {_ return (tp()->is_rrr85()); }
 int Thing::is_rrr86(void) const                                         {_ return (tp()->is_rrr86()); }
-int Thing::is_rrr87(void) const                                         {_ return (tp()->is_rrr87()); }
+int Thing::is_foilage(void) const                                         {_ return (tp()->is_foilage()); }
 int Thing::gfx_very_small_shadow_caster(void) const                                         {_ return (tp()->gfx_very_small_shadow_caster()); }
 int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
 int Thing::is_rrr99(void) const                                         {_ return (tp()->is_rrr99()); }

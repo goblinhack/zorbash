@@ -14,10 +14,11 @@ import zx
 # DOOR_LEFT                     <
 # DOOR_RIGHT                    >
 # DOOR_UP                       ^
-# DRY GRASS                     '
+# DRY FUNGUS                    '
 # ENTRANCE                      S
 # EXIT                          E
 # FLOOR                         .
+# FOILAGE                       `
 # KEY                           k
 # LAVA                          L
 # ROCK                          r

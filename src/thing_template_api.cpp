@@ -334,14 +334,14 @@ int Tp::is_rrr83(void) const                                         { return _i
 int Tp::is_rrr84(void) const                                         { return _is_rrr84; }
 int Tp::is_rrr85(void) const                                         { return _is_rrr85; }
 int Tp::is_rrr86(void) const                                         { return _is_rrr86; }
-int Tp::is_rrr87(void) const                                         { return _is_rrr87; }
-int Tp::gfx_very_small_shadow_caster(void) const                                         { return _gfx_very_small_shadow_caster; }
-int Tp::is_dry_grass(void) const                                         { return _is_dry_grass; }
-int Tp::is_bridge(void) const                                         { return _is_bridge; }
-int Tp::is_barrel(void) const                                         { return _is_barrel; }
-int Tp::is_burnable(void) const                                         { return _is_burnable; }
-int Tp::is_wand_eater(void) const                                         { return _is_wand_eater; }
-int Tp::loves_fire(void) const                                { return _loves_fire; }
+int Tp::is_foilage(void) const                                       { return _is_foilage; }
+int Tp::gfx_very_small_shadow_caster(void) const                     { return _gfx_very_small_shadow_caster; }
+int Tp::is_dry_fungus(void) const                                     { return _is_dry_fungus; }
+int Tp::is_bridge(void) const                                        { return _is_bridge; }
+int Tp::is_barrel(void) const                                        { return _is_barrel; }
+int Tp::is_burnable(void) const                                      { return _is_burnable; }
+int Tp::is_wand_eater(void) const                                    { return _is_wand_eater; }
+int Tp::loves_fire(void) const                                       { return _loves_fire; }
 int Tp::gfx_flickers(void) const                                     { return _gfx_flickers; }
 int Tp::is_laser(void) const                                         { return _is_laser; }
 int Tp::is_able_to_fire_at(void) const                               { return _is_able_to_fire_at; }
@@ -658,14 +658,14 @@ void Tp::set_is_rrr83(int v)                                         { _is_rrr83
 void Tp::set_is_rrr84(int v)                                         { _is_rrr84 = v; }
 void Tp::set_is_rrr85(int v)                                         { _is_rrr85 = v; }
 void Tp::set_is_rrr86(int v)                                         { _is_rrr86 = v; }
-void Tp::set_is_rrr87(int v)                                         { _is_rrr87 = v; }
-void Tp::set_gfx_very_small_shadow_caster(int v)                                         { _gfx_very_small_shadow_caster = v; }
-void Tp::set_is_dry_grass(int v)                                         { _is_dry_grass = v; }
-void Tp::set_is_bridge(int v)                                         { _is_bridge = v; }
-void Tp::set_is_barrel(int v)                                         { _is_barrel = v; }
-void Tp::set_is_burnable(int v)                                         { _is_burnable = v; }
-void Tp::set_is_wand_eater(int v)                                         { _is_wand_eater = v; }
-void Tp::set_loves_fire(int v)                                { _loves_fire = v; }
+void Tp::set_is_foilage(int v)                                       { _is_foilage = v; }
+void Tp::set_gfx_very_small_shadow_caster(int v)                     { _gfx_very_small_shadow_caster = v; }
+void Tp::set_is_dry_fungus(int v)                                     { _is_dry_fungus = v; }
+void Tp::set_is_bridge(int v)                                        { _is_bridge = v; }
+void Tp::set_is_barrel(int v)                                        { _is_barrel = v; }
+void Tp::set_is_burnable(int v)                                      { _is_burnable = v; }
+void Tp::set_is_wand_eater(int v)                                    { _is_wand_eater = v; }
+void Tp::set_loves_fire(int v)                                       { _loves_fire = v; }
 void Tp::set_is_projectile(int v)                                    { _is_projectile = v; }
 void Tp::set_gfx_flickers(int v)                                     { _gfx_flickers = v; }
 void Tp::set_is_laser(int v)                                         { _is_laser = v; }
