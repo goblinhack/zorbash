@@ -149,6 +149,7 @@ void Level::display_lasers (void)
                 return true;
             }
 
+t->con("laser %f", dt);
             if (dt > 1) {
                 if (t) {
                     t->dead("End of laser");
