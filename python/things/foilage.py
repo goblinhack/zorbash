@@ -23,7 +23,7 @@ def tp_init(name, tiles=[]):
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_text_a_or_an("the")
     x.set_text_description("Thick and sicky looking foilage and roots.")
-    x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
+    x.set_z_depth(zx.MAP_DEPTH_WEAPON)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     for t in tiles:
@@ -38,6 +38,5 @@ def init():
             "foilage.5", "foilage.6", "foilage.7", "foilage.8",
             "foilage.9", "foilage.10", "foilage.11", "foilage.12",
             "foilage.13", "foilage.14", "foilage.15", "foilage.16",
-            "foilage.17", "foilage.18", 
         ])
 init()

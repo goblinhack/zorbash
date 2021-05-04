@@ -479,7 +479,6 @@ _
                                                       &target_attacked,
                                                       &target_overlaps)) {
                 lunge(best_hit_at);
-                TOPCON("alt hit");
             }
         } else {
             if (collision_check_and_handle_at(best_hit_at,
