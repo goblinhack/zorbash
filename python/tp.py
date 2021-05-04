@@ -478,8 +478,8 @@ class Tp:
     def set_is_rrr84(self, value):
         zx.tp_set_is_rrr84(self, value)
 
-    def set_is_rrr85(self, value):
-        zx.tp_set_is_rrr85(self, value)
+    def set_is_bones(self, value):
+        zx.tp_set_is_bones(self, value)
 
     def set_is_soft_body(self, value):
         zx.tp_set_is_soft_body(self, value)

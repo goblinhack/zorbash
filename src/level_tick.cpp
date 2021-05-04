@@ -71,10 +71,6 @@ void Level::tick (void)
 
     player_tick();
 
-    if (game->things_are_moving) {
-        return;
-    }
-
     if (game->paused()) {
         return;
     }

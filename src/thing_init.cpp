@@ -20,12 +20,29 @@
 
 Thingp Level::thing_new (Tpp tp, const point at)
 {_
+    if (!tp) {
+        err("No tp provided for thing creation");
+        return nullptr;
+    }
     return thing_new(tp->name(), at);
 }
 
 Thingp Level::thing_new (Tpp tp, const fpoint at)
 {_
+    if (!tp) {
+        err("No tp provided for thing creation");
+        return nullptr;
+    }
     return thing_new(tp->name(), at);
+}
+
+Thingp Level::thing_new (Tpp tp, const fpoint at, const fpoint jitter)
+{_
+    if (!tp) {
+        err("No tp provided for thing creation");
+        return nullptr;
+    }
+    return thing_new(tp->name(), at, jitter);
 }
 
 Thingp Level::thing_new (const std::string& tp_name, Thingp owner)
@@ -33,9 +50,16 @@ Thingp Level::thing_new (const std::string& tp_name, Thingp owner)
     return thing_new(tp_name, owner->mid_at);
 }
 
+static const fpoint no_jitter(0, 0);
+
 Thingp Level::thing_new (const std::string& name, const point at)
 {_
-    return thing_new(name, fpoint(at.x, at.y));
+    return thing_new(name, fpoint(at.x, at.y), no_jitter);
+}
+
+Thingp Level::thing_new (const std::string& name, const fpoint at)
+{_
+    return thing_new(name, at, no_jitter);
 }
 
 Thingp Level::thing_new (const std::string& name, const fpoint at, const fpoint jitter)

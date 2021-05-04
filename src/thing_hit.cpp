@@ -180,13 +180,18 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // Cruel to let things keep on hitting you when you're dead
     //
     if (is_dead) {
-        hitter->log("Hit fails, it's dead");
-        return false;
-    }
-
-    if (!damage) {
-        hitter->log("Hit fails, no damage");
-        return false;
+        if (real_hitter->can_eat(this)) {
+            hitter->log("Hit bypass, eat it");
+            damage = 0;
+        } else {
+            hitter->log("Hit fails, it's dead");
+            return false;
+        }
+    } else {
+        if (!damage) {
+            hitter->log("Hit fails, no damage");
+            return false;
+        }
     }
 
     //
@@ -521,19 +526,6 @@ int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int damage)
     hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
 _
     //
-    // Cruel to let things keep on hitting you when you're dead
-    //
-    if (is_dead) {
-        hitter->log("No, %s is dead", to_string().c_str());
-        return false;
-    }
-
-    if (is_resurrecting) {
-        hitter->log("No, %s is resurrecting", to_string().c_str());
-        return false;
-    }
-
-    //
     // If an arrow, who really fired it?
     //
     Thingp real_hitter = nullptr;
@@ -556,6 +548,24 @@ _
         if (!real_hitter) {
             real_hitter = hitter;
         }
+    }
+
+    //
+    // Cruel to let things keep on hitting you when you're dead
+    // Even worse, to let them eat you, but better if you are dead first.
+    //
+    if (is_dead) {
+        if (real_hitter->can_eat(this)) {
+            hitter->log("Cannot hit dead thing, but can eat: %s", to_string().c_str());
+        } else {
+            hitter->log("Cannot hit: %s is dead", to_string().c_str());
+            return false;
+        }
+    }
+
+    if (is_resurrecting) {
+        hitter->log("Cannot hit: %s is resurrecting", to_string().c_str());
+        return false;
     }
 
     if (hitter && hitter->is_dead) {

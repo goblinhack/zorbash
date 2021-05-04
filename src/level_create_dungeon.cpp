@@ -17,6 +17,8 @@ bool Level::create_dungeon (point3d at, int seed)
 {_
     log("Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
 
+    TOPCON("Dungeon level %d is coming into being...", (at.z / 2) + 1);
+
     is_dungeon_level = true;
 
     while (true) {

@@ -16,6 +16,7 @@
 #include "my_thing.h"
 
 static Tpidmap tp_blood;
+static Tpidmap tp_bones;
 static Tpidmap tp_blood_splatter;
 static Tpidmap tp_deco;
 static Tpidmap tp_dirt;
@@ -53,36 +54,37 @@ static Tpidmap tp_descend_sewer;
 void tp_random_init (void)
 {_
     for (auto& tp : tp_id_map) {
+        if (tp->is_ascend_dungeon())            { tp_ascend_dungeon.push_back(tp); }
+        if (tp->is_ascend_sewer())              { tp_ascend_sewer.push_back(tp); }
+        if (tp->is_barrel())                    { tp_barrel.push_back(tp); }
         if (tp->is_blood())                     { tp_blood.push_back(tp); }
         if (tp->is_blood_splatter())            { tp_blood_splatter.push_back(tp); }
-        if (tp->is_dirt())                      { tp_dirt.push_back(tp); }
-        if (tp->is_dry_fungus())                 { tp_dry_fungus.push_back(tp); }
-        if (tp->is_foilage())                   { tp_foilage.push_back(tp); }
-        if (tp->is_door())                      { tp_door.push_back(tp); }
-        if (tp->is_wall_dungeon())              { tp_wall_dungeon.push_back(tp); }
-        if (tp->is_ascend_dungeon())            { tp_ascend_dungeon.push_back(tp); }
+        if (tp->is_bones())                     { tp_bones.push_back(tp); }
+        if (tp->is_brazier())                   { tp_brazier.push_back(tp); }
         if (tp->is_descend_dungeon())           { tp_descend_dungeon.push_back(tp); }
+        if (tp->is_descend_sewer())             { tp_descend_sewer.push_back(tp); }
+        if (tp->is_dirt())                      { tp_dirt.push_back(tp); }
+        if (tp->is_door())                      { tp_door.push_back(tp); }
+        if (tp->is_dry_fungus())                { tp_dry_fungus.push_back(tp); }
+        if (tp->is_ethereal_minion_generator()) { tp_ethereal_generator.push_back(tp); }
         if (tp->is_floor())                     { tp_floor.push_back(tp); }
         if (tp->is_floor_deco())                { tp_deco.push_back(tp); }
+        if (tp->is_foilage())                   { tp_foilage.push_back(tp); }
         if (tp->is_food())                      { tp_food.push_back(tp); }
         if (tp->is_gold())                      { tp_gold.push_back(tp); }
         if (tp->is_key())                       { tp_key.push_back(tp); }
         if (tp->is_minion_generator())          { tp_generator.push_back(tp); }
-        if (tp->is_ethereal_minion_generator()) { tp_ethereal_generator.push_back(tp); }
         if (tp->is_potion())                    { tp_potion.push_back(tp); }
-        if (tp->is_wand())                      { tp_wand.push_back(tp); }
         if (tp->is_ripple())                    { tp_ripples.push_back(tp); }
         if (tp->is_rock())                      { tp_rock.push_back(tp); }
         if (tp->is_secret_door())               { tp_secret_door.push_back(tp); }
-        if (tp->is_ascend_sewer())              { tp_ascend_sewer.push_back(tp); }
-        if (tp->is_descend_sewer())             { tp_descend_sewer.push_back(tp); }
         if (tp->is_sewer_wall())                { tp_sewer_wall.push_back(tp); }
-        if (tp->is_brazier())                   { tp_brazier.push_back(tp); }
-        if (tp->is_barrel())                    { tp_barrel.push_back(tp); }
         if (tp->is_treasure())                  { tp_treasure.push_back(tp); }
         if (tp->is_treasure_class_a())          { tp_item_class_a.push_back(tp); }
         if (tp->is_treasure_class_b())          { tp_item_class_b.push_back(tp); }
         if (tp->is_treasure_class_c())          { tp_item_class_c.push_back(tp); }
+        if (tp->is_wall_dungeon())              { tp_wall_dungeon.push_back(tp); }
+        if (tp->is_wand())                      { tp_wand.push_back(tp); }
 
         if (tp->is_weapon()) {
             if (tp->is_treasure_class_a()) { tp_weapon_class_a.push_back(tp); }
@@ -526,6 +528,15 @@ Tpp tp_random_blood (void)
         return (nullptr);
     }
     return tp_get_with_no_rarity_filter(tp_blood);
+}
+
+Tpp tp_random_bones (void)
+{_
+    if (unlikely(!tp_bones.size())) {
+        ERR("No boness found");
+        return (nullptr);
+    }
+    return tp_get_with_no_rarity_filter(tp_bones);
 }
 
 Tpp tp_random_wall_dungeon (void)

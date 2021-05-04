@@ -332,7 +332,7 @@ int Tp::is_rrr81(void) const                                         { return _i
 int Tp::is_rrr82(void) const                                         { return _is_rrr82; }
 int Tp::is_rrr83(void) const                                         { return _is_rrr83; }
 int Tp::is_rrr84(void) const                                         { return _is_rrr84; }
-int Tp::is_rrr85(void) const                                         { return _is_rrr85; }
+int Tp::is_bones(void) const                                         { return _is_bones; }
 int Tp::is_soft_body(void) const                                         { return _is_soft_body; }
 int Tp::is_foilage(void) const                                       { return _is_foilage; }
 int Tp::gfx_very_small_shadow_caster(void) const                     { return _gfx_very_small_shadow_caster; }
@@ -656,7 +656,7 @@ void Tp::set_is_rrr81(int v)                                         { _is_rrr81
 void Tp::set_is_rrr82(int v)                                         { _is_rrr82 = v; }
 void Tp::set_is_rrr83(int v)                                         { _is_rrr83 = v; }
 void Tp::set_is_rrr84(int v)                                         { _is_rrr84 = v; }
-void Tp::set_is_rrr85(int v)                                         { _is_rrr85 = v; }
+void Tp::set_is_bones(int v)                                         { _is_bones = v; }
 void Tp::set_is_soft_body(int v)                                         { _is_soft_body = v; }
 void Tp::set_is_foilage(int v)                                       { _is_foilage = v; }
 void Tp::set_gfx_very_small_shadow_caster(int v)                     { _gfx_very_small_shadow_caster = v; }

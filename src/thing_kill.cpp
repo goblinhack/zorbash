@@ -177,8 +177,11 @@ void Thing::kill (Thingp killer, const char *reason)
         int splatters = random_range(2, 10);
         for (int splatter = 0; splatter < splatters; splatter++) {
             auto tpp = tp_random_blood();
-            (void) level->thing_new(tpp->name(),
-                                    mid_at, fpoint(0.25, 0.25));
+            (void) level->thing_new(tpp, mid_at, fpoint(0.25, 0.25));
+            if (!tpp) {
+                err("Could not place blood");
+                break;
+            }
         }
     }
 
@@ -189,6 +192,11 @@ void Thing::kill (Thingp killer, const char *reason)
         if (is_loggable_for_important_stuff()) {
             log("Already a corpse, clean it up");
         }
+        auto tpp = tp_random_bones();
+        if (!tpp) {
+            err("Could not place bones");
+        }
+        (void) level->thing_new(tpp, mid_at);
     } else if (is_corpse_on_death()) {
         //
         // Leaves a corpse

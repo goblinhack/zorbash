@@ -3,7 +3,6 @@ import tp
 
 
 def on_death(me, x, y):
-    zx.level_spawn_at_thing(me, "explosion_major")
     zx.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     zx.topcon("The bridge collapses!")
 

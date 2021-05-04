@@ -64,7 +64,7 @@ _
         }
     }
 
-    if (me->is_meat_eater() || me->attack_meat()) {
+    if (is_meat_eater() || attack_meat()) {
         //
         // Meat eaters eat you when you are dead!
         //
@@ -116,29 +116,65 @@ _
             }
         }
 
-        if (me->is_meat_eater() || me->attack_meat()) {
+        //
+        // Can we eats it?
+        //
+        if (me->is_meat_eater()) {
             if (!it->is_attackable_by_monst()) {
                 log("No, cannot attack %s, not is_attackable by meat eating monst",
                     it->to_string().c_str());
                 return false;
             }
+
+            //
+            // Doesn't matter if dead, if it can eat you...
+            //
+            if (it->is_dead) {
+                log("Can eat dead meat: %s", it->to_string().c_str());
+                return true;
+            }
+
             if (it->is_meat() || it->is_blood()) {
                 log("Can attack meat or blood: %s", it->to_string().c_str());
                 return true;
             }
         }
 
+        //
+        // Can we attack the meat? Only if it is alive.
+        //
+        if (me->attack_meat()) {
+            if (!it->is_attackable_by_monst()) {
+                log("No, cannot attack %s, not is_attackable by meat eating monst",
+                    it->to_string().c_str());
+                return false;
+            }
+            if (it->is_meat() || it->is_blood()) {
+                if (it->is_dead) {
+                    log("Can not attack dead meat: %s", it->to_string().c_str());
+                    return false;
+                }
+
+                log("Can attack living meat: %s", it->to_string().c_str());
+                return true;
+            }
+        }
+
         if (me->attack_humanoid()) {
             if (it->is_humanoid()) {
-                log("Can attack humanoid: %s", it->to_string().c_str());
-                return true;
+                if (it->is_dead) {
+                    log("Can attack humanoid: %s", it->to_string().c_str());
+                    return true;
+                }
             }
         }
 
         if (me->attack_living()) {
             if (it->is_living()) {
-                log("Can attack living: %s", it->to_string().c_str());
-                return true;
+                if (it->is_dead) {
+                    log("Can attack living: %s", it->to_string().c_str());
+                    return true;
+                }
             }
         }
 
@@ -295,6 +331,8 @@ _
             //
             // Eat corpse?
             //
+            owner->log("Can Eat %s", it->to_string().c_str());
+
             if (it->is_dead) {
                 if (owner->eat(it)) {
                     //
@@ -418,7 +456,15 @@ _
     // See if we can bypass its defences
     //
     if (is_player() || is_alive_monst()) {
-        if (!it->is_always_hit()) {
+        if (it->is_dead) {
+            //
+            // It's hard to miss a corpse.
+            //
+        } else if (it->is_always_hit()) {
+            //
+            // You just cannot miss this.
+            //
+        } else {
             //it->topcon("att_mod %d def_mod %d", att_mod, def_mod);
             if (!d20roll(att_mod, def_mod, fumble, crit)) {
                 if (is_player() || (owner && owner->is_player())) {
