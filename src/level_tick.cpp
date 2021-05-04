@@ -54,7 +54,7 @@ void Level::tick (void)
         //
         if (t->get_timestamp_move_begin()) {
             if (t->get_tick() < game->tick_current - 2) {
-                t->err("is lagging, time left %d",
+                t->log("is lagging, time left %d",
                        t->get_timestamp_move_end() - time_get_time_ms_cached());
             }
 
@@ -115,11 +115,8 @@ void Level::tick (void)
     //
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
         t->location_check();
-    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
-
-    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
-        if (t->is_player() || t->is_alive_monst()) {
-            t->log("Tick");
+        if (t->is_dead) {
+            continue;
         }
         t->tick();
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)

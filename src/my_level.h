@@ -260,14 +260,8 @@ public:
         auto i = level->all_interesting_things.begin();             \
         while (i != level->all_interesting_things.end()) {          \
             auto t = i->second;                                     \
-                                                                    \
-            if (t->is_hidden) { i++; continue; }                    \
-                                                                    \
-            ThingId next_key {};                                    \
             i++;                                                    \
-            if (i != level->all_interesting_things.end()) {         \
-                next_key = i->first;                                \
-            }                                                       \
+            if (t->is_hidden) {continue; }                          \
                                                                     \
             verify(t);                                              \
 
@@ -275,7 +269,6 @@ public:
             if (i == level->all_interesting_things.end()) {         \
                 break;                                              \
             }                                                       \
-            i = level->all_interesting_things.find(next_key);       \
         } }
 
     //
