@@ -9,6 +9,7 @@
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_ui.h"
+#include "my_sdl.h"
 
 static WidPopup *game_quit_window;
 
@@ -47,8 +48,10 @@ static uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
 
 static uint8_t game_quit_key_up (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     switch (key->mod) {
@@ -79,8 +82,10 @@ static uint8_t game_quit_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t game_quit_key_down (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     return true;

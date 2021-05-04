@@ -47,35 +47,31 @@ void Level::tick (void)
     // walls. Omits things like floors, corridors, the grid; those that
     // generally do nothing or are hidden.
     //
-    bool update_tick = false;
     game->things_are_moving = false;
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
         //
-        // If something is still behind, we need to catch up.
-        // This can happen as we allow the player move to skip
-        // ahead to keep things smooth.
-        //
-        if (t->get_tick() < game->tick_current) {
-            update_tick = true;
-        }
-
-        //
-        // If something is still moving, do not progress any
-        // ticks.
+        // If something is still moving, do not progress any ticks.
         //
         if (t->get_timestamp_move_begin()) {
+            if (t->get_tick() < game->tick_current - 2) {
+                t->err("is lagging, time left %d",
+                       t->get_timestamp_move_end() - time_get_time_ms_cached());
+            }
+
             t->update_interpolated_position();
-            game->things_are_moving = true;
+
+            //
+            // Check if we finished moving above. If not, keep waiting.
+            //
+            if (t->get_timestamp_move_begin()) {
+                game->things_are_moving = true;
+            }
         }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
     player_tick();
 
-    if (update_tick) {
-        //
-        // continue
-        //
-    } else if (game->things_are_moving) {
+    if (game->things_are_moving) {
         return;
     }
 
@@ -111,19 +107,6 @@ void Level::tick (void)
         return;
     }
 
-    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
-        if (t->get_timestamp_move_begin()) {
-            continue;
-        }
-
-        if (t->is_player() || t->is_alive_monst()) {
-            if (t->get_tick() != game->tick_current) {
-                t->log("Is waiting to move");
-            }
-        }
-        t->tick();
-    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
-
     //
     // If things have stopped moving, perform location checks on where theuy
     // are now. This handles things like shoving a monst into a chasm. We do
@@ -131,12 +114,16 @@ void Level::tick (void)
     // also handle things that do not move, like a wand that is now on fire.
     //
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
-        if (t->get_timestamp_move_begin()) {
-            continue;
-        }
-
         t->location_check();
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+        if (t->is_player() || t->is_alive_monst()) {
+            t->log("Tick");
+        }
+        t->tick();
+    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+
     game->tick_end();
 }
 

@@ -592,7 +592,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_drop                     */ in >> bits(my.t.key_drop                     );
     /* uint32_t           key_eat                      */ in >> bits(my.t.key_eat                      );
     /* uint32_t           key_help                     */ in >> bits(my.t.key_help                     );
-    /* uint32_t           key_inventory                */ in >> bits(my.t.key_inventory                  );
+    /* uint32_t           key_inventory                */ in >> bits(my.t.key_inventory                );
     /* uint32_t           key_jump                     */ in >> bits(my.t.key_jump                     );
     /* uint32_t           key_load                     */ in >> bits(my.t.key_load                     );
     /* uint32_t           key_map_down                 */ in >> bits(my.t.key_map_down                 );
@@ -902,8 +902,10 @@ static void wid_load_destroy (void)
 
 static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     switch (key->mod) {
@@ -949,8 +951,10 @@ static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_load_key_down (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     return true;

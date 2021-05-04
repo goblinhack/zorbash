@@ -18,6 +18,7 @@
 #include "my_random.h"
 #include "my_ui.h"
 #include "my_music.h"
+#include "my_sdl.h"
 
 static WidPopup *game_main_menu_window;
 
@@ -116,9 +117,11 @@ static uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t 
 
 static uint8_t game_main_menu_key_up (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
-    }
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
+    } 
 
     switch (key->mod) {
         case KMOD_LCTRL:
@@ -153,8 +156,10 @@ static uint8_t game_main_menu_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t game_main_menu_key_down (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     return true;

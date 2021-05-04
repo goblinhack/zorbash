@@ -81,8 +81,10 @@ static uint8_t game_config_other_sdl_delay_decr (Widp w, int32_t x, int32_t y, u
 
 static uint8_t game_config_other_key_up (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     switch (key->mod) {
@@ -113,8 +115,10 @@ static uint8_t game_config_other_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t game_config_other_key_down (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     return true;

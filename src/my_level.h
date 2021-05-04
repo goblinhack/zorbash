@@ -261,6 +261,8 @@ public:
         while (i != level->all_interesting_things.end()) {          \
             auto t = i->second;                                     \
                                                                     \
+            if (t->is_hidden) { i++; continue; }                    \
+                                                                    \
             ThingId next_key {};                                    \
             i++;                                                    \
             if (i != level->all_interesting_things.end()) {         \
