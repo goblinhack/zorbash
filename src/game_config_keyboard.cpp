@@ -915,8 +915,10 @@ static uint8_t game_config_key_screenshot (Widp w, int32_t x, int32_t y, uint32_
 
 static uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     switch (key->mod) {
@@ -941,8 +943,10 @@ static uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_Keysym *key
 
 static uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     return true;
@@ -2004,7 +2008,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Debug console");
+        wid_set_text(w, "Debug console (+shift)");
     }
     {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;

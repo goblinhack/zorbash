@@ -3544,8 +3544,10 @@ uint8_t wid_receive_input (Widp w, const SDL_Keysym *key)
     uint32_t origlen;
     uint32_t cnt;
 
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     newchar += wid_event_to_char(key);
@@ -3791,7 +3793,8 @@ static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
 
     w = wid_get_top_parent(wid_console_input_line);
 
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (sdl_shift_held && 
+        (key->scancode == (SDL_Scancode)game->config.key_console)) {
         wid_toggle_hidden(wid_console_window);
         wid_raise(wid_console_window);
 

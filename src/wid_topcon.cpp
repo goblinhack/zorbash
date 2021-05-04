@@ -68,8 +68,10 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         return false;
     }
 
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_out) {

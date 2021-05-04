@@ -1275,7 +1275,7 @@ void sdl_loop (void)
             //
             // Mouse held?
             //
-            if (!found) {
+            if (unlikely(!found)) {
                 auto mouse_down = sdl_get_mouse();
                 if (mouse_down) {
                     DBG("SDL: Mouse DOWN held: button %d", mouse_down);
@@ -1289,11 +1289,11 @@ void sdl_loop (void)
                     break;
                 }
             }
-        }
 
-        if (!g_errored) {
-            if (game->level) {
-                game->level->tick();
+            if (!g_errored) {
+                if (likely(game->level != nullptr)) {
+                    game->level->tick();
+                }
             }
         }
 

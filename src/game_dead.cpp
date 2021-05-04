@@ -15,6 +15,7 @@
 #include "my_random.h"
 #include "my_thing.h"
 #include "my_ui.h"
+#include "my_sdl.h"
 
 static WidPopup *wid_dead_window;
 
@@ -31,8 +32,10 @@ static void wid_dead_destroy (void)
 
 static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     switch (key->mod) {
@@ -57,8 +60,10 @@ static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_dead_key_down (Widp w, const struct SDL_Keysym *key)
 {_
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
-        return false;
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
     }
 
     return true;
