@@ -35,8 +35,8 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_hates_acid(True)
     x.set_hates_fire(100)
     x.set_hates_poison(True) # x.set_loves_poison(True) for some odd creature
-    x.set_bag_height(12)
-    x.set_bag_width(12)
+    x.set_bag_height(20)
+    x.set_bag_width(16)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)

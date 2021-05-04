@@ -59,7 +59,7 @@ bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp targe
     }
 
     if (is_player()) {
-        game->tick_begin("player fired projectile");
+        game->tick_begin("player fired " + projectile->text_the());
         game->change_state(Game::STATE_NORMAL);
     }
 

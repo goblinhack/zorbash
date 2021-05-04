@@ -151,14 +151,29 @@ _
 
             if (!got_one_this_tile) {
                 if (possible_to_attack(it)) {
-                    GOAL_ADD(- health_diff, "attack-monst");
+                    GOAL_ADD(- health_diff, "can-attack-monst");
                 }
             }
 
-            if (it->is_player()) {
-                if (distance(mid_at, level->player->mid_at) <
-                             ai_avoid_distance()) {
-                    avoid = true;
+            if (!it->is_dead) {
+                if (it->is_player()) {
+                    if (distance(mid_at, level->player->mid_at) <
+                                ai_avoid_distance()) {
+                        avoid = true;
+                    }
+                }
+
+                if (is_enemy(it)) {
+                    //
+                    // The closer an enemy is (something that attacked us), the
+                    // higher the scoree
+                    //
+                    float dist = distance(it->mid_at, mid_at);
+                    float max_dist = ai_scent_distance();
+
+                    if (dist < max_dist) {
+                        GOAL_ADD((int)(max_dist - dist) * 10, "attack-enemy");
+                    }
                 }
             }
 
@@ -169,19 +184,6 @@ _
                 auto age = get(age_map->val, p.x, p.y);
                 if (age - game->tick_current < 10) {
                     GOAL_ADD(1, "preferred-terrain");
-                }
-            }
-
-            if (is_enemy(it)) {
-                //
-                // The closer an enemy is (something that attacked us), the
-                // higher the scoree
-                //
-                float dist = distance(it->mid_at, mid_at);
-                float max_dist = ai_scent_distance();
-
-                if (dist < max_dist) {
-                    GOAL_ADD((int)(max_dist - dist) * 10, "attack-enemy");
                 }
             }
         } FOR_ALL_THINGS_END();

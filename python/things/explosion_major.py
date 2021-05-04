@@ -3,7 +3,6 @@ import tp
 
 def attack(me, thing):
     if zx.thing_possible_to_attack(me, thing):
-        zx.topcon("attack yes {} {}".format(zx.thing_get_name(thing), zx.thing_get_health(thing)))
         if thing != me:
             zx.thing_hit(me, thing)
 

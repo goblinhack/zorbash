@@ -305,7 +305,7 @@ private:
     int _is_rrr82 {};
     int _is_rrr83 {};
     int _is_rrr84 {};
-    int _is_rrr85 {};
+    int _is_bones {};
     int _is_soft_body {};
     int _is_foilage {};
     int _gfx_very_small_shadow_caster {};
@@ -768,7 +768,7 @@ public:
     int is_rrr82(void) const;
     int is_rrr83(void) const;
     int is_rrr84(void) const;
-    int is_rrr85(void) const;
+    int is_bones(void) const;
     int is_soft_body(void) const;
     int is_foilage(void) const;
     int gfx_very_small_shadow_caster(void) const;
@@ -1100,7 +1100,7 @@ public:
     void set_is_rrr82(int);
     void set_is_rrr83(int);
     void set_is_rrr84(int);
-    void set_is_rrr85(int);
+    void set_is_bones(int);
     void set_is_soft_body(int);
     void set_is_foilage(int);
     void set_gfx_very_small_shadow_caster(int);
@@ -1228,6 +1228,7 @@ class Tp* tp_find(uint32_t id);
 class Tp* tp_load(int id, const std::string & file, const std::string & text_name, const std::string & text_short_name);
 class Tp* tp_random_ascend_sewer(void);
 class Tp* tp_random_blood(void);
+class Tp* tp_random_bones(void);
 class Tp* tp_random_blood_splatter(void);
 class Tp* tp_random_deco(void);
 class Tp* tp_random_descend_sewer(void);

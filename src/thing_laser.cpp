@@ -59,7 +59,7 @@ bool Thing::laser_fire_at (const std::string &laser_name, Thingp target)
     }
 
     if (is_player()) {
-        game->tick_begin("player zapped laser");
+        game->tick_begin("player zapped " + laser->text_the());
         game->change_state(Game::STATE_NORMAL);
     }
 

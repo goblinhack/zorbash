@@ -149,8 +149,13 @@ bool Thing::move (fpoint future_pos,
         return false;
     }
 
+    //
+    // No rest for the undead.
+    //
     if (!attack) {
-        rest();
+        if (!is_undead() && !is_ethereal()) {
+            rest();
+        }
     }
 
     //

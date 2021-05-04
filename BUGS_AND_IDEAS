@@ -1,20 +1,13 @@
 
 Todo
 ----
-add barrel tick splat check
-if lasered should mark as enemy
-tenta is not eating spider, just sitting on it
 if nothing to hit in any dir should look around
-
-yak that eats foilage
-fungus death wakes monsters
+add barrel tick splat check
 add text like brogue on hit chance and how much percentage damage you might do
-mold growth
-darts / poison darts
-bloodfungus
 
 Level
 -----
+- totems are like generators, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does. 
 - exploding bogs
 - dry fungus that can burn
 - vaults
@@ -60,9 +53,7 @@ Poison
 
 Gasses
 ------
-- gasses that spread
-- fire
-- explosive interactions
+- gasses that spread however you will need to allow levels with gas or fire to tick so it can dissipate
 
 Doors
 -----
@@ -81,10 +72,20 @@ Food
 ----
 frogs next to lava should melt?
 
+Wands
+-----
+- staves that recharge
+- wand of death should stop regenerating monst
+
+Potions
+-------
+- potion of descent does not cause damage and floor reheals
+  throwing it has similar effect
+
 Weapons
 -------
+- darts / poison darts
 - axe hits all monsts around you ?
-- wand of death should stop regenerating monst
 - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)
 - blessed items resist explosion
 - warhammer should kill parent jelly in one go
@@ -103,6 +104,10 @@ Water
 
 Monsts
 ------
+- fungus death wakes monsters
+- mold growth
+- bloodfungus
+- yak that eats foilage
 - in a spider web every hit gets you
 - shove/lure monsters into webs?
 - rat pack and king rat
