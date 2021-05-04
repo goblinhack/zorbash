@@ -30,12 +30,6 @@ void tp_fixup (void)
             tp->set_is_combustible(true);
         }
 
-        if (tp->is_able_to_fall()) {
-            if (!tp->is_interesting()) {
-                DIE("Tp %s needs is_interesting set if it is_able_to_fall",
-                    tp->name().c_str());
-            }
-        }
         if (tp->is_able_to_fire_at()) {
             if (!tp->ai_vision_distance()) {
                 DIE("Tp %s needs vision distance if it is able to fire at things",
