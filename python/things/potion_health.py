@@ -24,7 +24,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_blast_max_radius(0)
     x.set_blast_min_radius(0)
     x.set_collision_circle(True)
-    x.set_collision_hit_priority(1)
+    x.set_collision_hit_priority(5)
     x.set_collision_radius(0.40)
     x.set_damage_doubled_from_fire(True)
     x.set_gfx_animated(True)

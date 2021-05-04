@@ -417,8 +417,6 @@ _
     //
     // Lunge at the target
     //
-    lunge(hit_at);
-
     decr_stamina();
 
     if (weapon) {
@@ -426,13 +424,69 @@ _
         if (weapon->collision_check_and_handle_at(hit_at,
                                                   &target_attacked,
                                                   &target_overlaps)) {
+            lunge(hit_at);
+            TOPCON("hit");
             return;
+        } else {
+            TOPCON("miss");
         }
     } else {
         if (collision_check_and_handle_at(hit_at,
                                           &target_attacked,
                                           &target_overlaps)) {
+            lunge(hit_at);
             return;
+        }
+    }
+
+    //
+    // We didn't hit anything. See if there's something else to hit.
+    //
+    static const std::vector<point> all_deltas = {
+        point(-1, -1),
+        point( 1, -1),
+        point(-1,  1),
+        point( 1,  1),
+        point(0, -1),
+        point(-1, 0),
+        point(1, 0),
+        point(0, 1),
+    };
+
+    bool found_best {};
+    fpoint best_hit_at;
+    int best_priority = -999;
+
+    for (const auto& d : all_deltas) {
+        auto hit_at = mid_at + fpoint(d.x, d.y);
+
+        FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y) {
+            auto prio = t->collision_hit_priority() + get_danger_level(t);
+            if (prio > best_priority) {
+                best_priority = prio;
+                best_hit_at = hit_at;
+                found_best = true;
+            }
+        } FOR_ALL_THINGS_END();
+    }
+
+    if (found_best) {
+        target_attacked = false;
+        target_overlaps = false;
+
+        if (weapon) {
+            if (weapon->collision_check_and_handle_at(best_hit_at,
+                                                      &target_attacked,
+                                                      &target_overlaps)) {
+                lunge(best_hit_at);
+                TOPCON("alt hit");
+            }
+        } else {
+            if (collision_check_and_handle_at(best_hit_at,
+                                              &target_attacked,
+                                              &target_overlaps)) {
+                lunge(best_hit_at);
+            }
         }
     }
 }

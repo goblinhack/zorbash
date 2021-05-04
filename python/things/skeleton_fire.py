@@ -21,7 +21,6 @@ def tp_init(name, text_name):
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
-    x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
     x.set_damage_bite_dice("1d4")
     x.set_damage_doubled_from_water(True)
