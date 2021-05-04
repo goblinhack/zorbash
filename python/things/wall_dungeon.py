@@ -24,7 +24,6 @@ def tp_init(name,
     x = tp.Tp(name, "dungeon wall")
     x.set_ai_obstacle(True)
     x.set_collision_circle(True)
-    x.set_collision_hit_priority(0)
     x.set_collision_radius(0.40)
     x.set_gfx_shown_in_bg(True)
     x.set_health_initial_dice("15d10")

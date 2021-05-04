@@ -11,7 +11,6 @@ def tp_init(name, text_name):
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
-    x.set_collision_hit_priority(100)
     x.set_collision_radius(0.40)
     x.set_damage_melee_dice("1d3+1")
     x.set_gfx_animated(True)

@@ -7,7 +7,7 @@ def tp_init(name, tiles=[]):
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
-    x.set_collision_hit_priority(0)
+    x.set_collision_hit_priority(2)
     x.set_collision_radius(0.40)
     x.set_gfx_show_outlined(True)
     x.set_gfx_shown_in_bg(True)

@@ -498,6 +498,13 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
     }
 
     //
+    // If moving things on the non game level, move non smoothly
+    //
+    if (level != game->level) {
+        immediately = true;
+    }
+
+    //
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
