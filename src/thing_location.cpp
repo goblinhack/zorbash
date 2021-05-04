@@ -140,7 +140,7 @@ _
 void Thing::location_check_all_things_at (void)
 {_
     log("Do location checks");
-    FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {_
+    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {_
         t->log("Do location check");
         t->location_check_forced();
     } FOR_ALL_THINGS_END()

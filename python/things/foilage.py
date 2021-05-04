@@ -13,7 +13,7 @@ def tp_init(name, tiles=[]):
     x.set_gfx_shown_in_bg(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_health_initial_dice("1d5")
-    # x.set_is_able_to_fall(True)
+    x.set_is_able_to_fall(True)
     x.set_is_attackable_by_player(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_described_when_hovering_over(True)
