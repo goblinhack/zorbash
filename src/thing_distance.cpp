@@ -12,8 +12,16 @@
 
 point Thing::get_random_scent_target (void)
 {
-    const int16_t d = ai_scent_distance();
+    int16_t d = ai_scent_distance();
     auto tries = 1000;
+
+    //
+    // Minions cannot wander too far
+    //
+    auto master = get_top_minion_owner();
+    if (master) {
+        d = minion_leash_distance();
+    }
 
     while (tries--) {
         point start(mid_at.x, mid_at.y);
