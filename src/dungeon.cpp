@@ -136,6 +136,7 @@ void Dungeon::make_dungeon (void)
     //
     // Create the high level blueprint of the level layout
     //
+    LOG("DUNGEON: Created node map");
     create_node_map();
 
     for (;;) {
@@ -143,27 +144,32 @@ void Dungeon::make_dungeon (void)
         // Reset the list of rooms we can place. We only place one of
         // each possible room once per level
         //
+        LOG("DUNGEON: Try to create");
         reset_possible_rooms();
 
         //
         // Create a cyclic dungeon map.
         //
+        LOG("DUNGEON: Create cyclic rooms");
         create_cyclic_rooms(&grid);
         _ debug("create cyclic rooms");
 
         //
         // Choose how rooms are linked
         //
+        LOG("DUNGEON: Choose room doors");
         choose_room_doors();
         _ debug("choose room doors");
 
         //
         // Drag rooms closer together
         //
+        LOG("DUNGEON: Move rooms closer");
         if (rooms_move_closer_together()) {
             break;
         }
 
+        LOG("DUNGEON: Failed, retry");
         debug("failed to place dungeon");
         failed = true;
         return;
@@ -172,12 +178,14 @@ void Dungeon::make_dungeon (void)
     //
     // Keep track of which tile has which room
     //
+    LOG("DUNGEON: Assign rooms to tiles");
     assign_rooms_to_tiles();
     _ debug("assigned rooms to tiles");
 
     //
     // Wall off secret doors
     //
+    LOG("DUNGEON: Block secret doors");
     block_secret_doors();
     _ debug("blocked secret doors");
 
@@ -185,6 +193,7 @@ void Dungeon::make_dungeon (void)
     // Remove all doors and then add them back in, but only between
     // depth changes
     //
+    LOG("DUNGEON: Remove all rooms");
     remove_all_doors();
     _ debug("remove all doors");
 
@@ -192,21 +201,25 @@ void Dungeon::make_dungeon (void)
     // Place the rooms back on the map, so if there were any intentional
     // doors removed above then they will reappear.
     //
+    LOG("DUNGEON: Place rooms with doors");
     room_print_only_doors(&grid);
     _ debug("only doors");
 
     //
     // Not sure we want this as rooms
     //
+    LOG("DUNGEON: Place doors between room depth changes");
     place_doors_between_depth_changes();
     _ debug("add doors between depth changes");
 
     //
     // Add a perimeter to the level. Helps avoid off by one bugs.
     //
+    LOG("DUNGEON: Add corridor walls");
     add_corridor_walls();
     _ debug("add corridor walls");
 
+    LOG("DUNGEON: Add room walls");
     add_room_walls();
     _ debug("add room walls");
 
@@ -216,31 +229,43 @@ void Dungeon::make_dungeon (void)
     //
     // Add a cave as the under-dungeon
     //
+    LOG("DUNGEON: Generate water");
     water_gen(20, // fill prob
               10,  // R1
               5,  // R2
               4   /* generations */);
 
+    LOG("DUNGEON: Generate caves");
     cave_gen(20, // fill prob
              10,  // R1
              5,  // R2
              3   /* generations */);
 
+    LOG("DUNGEON: Generate dirt");
     dirt_gen(20, // fill prob
              10,  // R1
              5,  // R2
              4   /* generations */);
 
+    LOG("DUNGEON: Add deepwater and islands of safety");
     water_fixup();
+
+    LOG("DUNGEON: Add border");
     add_border();
+
+    LOG("DUNGEON: Add remaining items");
     add_remaining();
+
+    LOG("DUNGEON: Add foilage around water");
     add_foilage_around_water();
 
+    LOG("DUNGEON: Generate fungus");
     dry_fungus_gen(10, // fill prob
                   10, // R1
                   5,  // R2
                   4   /* generations */);
 
+    LOG("DUNGEON: Generate foilage");
     foilage_gen(10, // fill prob
                 10, // R1
                 5,  // R2

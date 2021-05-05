@@ -1,15 +1,34 @@
 import zx
+import time
 
 
+timeme_enabled = True
+
+def timeme(py_function):
+    def timeme_wrapper(*args, **kwargs):
+        global timeme_enabled
+        if not timeme_enabled:
+            return py_function(*args, **kwargs)
+
+        start_time = time.time()
+        return_code = py_function(*args, **kwargs)
+        end_time = time.time()
+        print('PYC: perf {:s}({}) {:.3f} ms'.format(py_function.__name__, args, (end_time - start_time) * 1000.0))
+        return return_code
+    return timeme_wrapper
+
+@timeme
 def init_solid():
     zx.tex_load(file="data/gfx/solid.tga", name="solid")
 
 
+@timeme
 def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
     zx.tex_load(file="data/gfx/glow.tga", name="glow")
 
 
+@timeme
 def init_ui_circle():
     tiles = [
         "ui_circle"
@@ -18,6 +37,7 @@ def init_ui_circle():
         file="data/gfx/ui_circle.tga",
         name="ui_circle", width=32, height=32, arr=tiles)
 
+@timeme
 def init_ui_tile_bg():
     tiles = [
         "ui_tile_bg"
@@ -27,6 +47,7 @@ def init_ui_tile_bg():
         name="ui_tile_bg", width=128, height=128, arr=tiles)
 
 
+@timeme
 def init_ui_health_bar():
     tiles = [
       "health_bar_17",
@@ -52,6 +73,7 @@ def init_ui_health_bar():
         file="data/gfx/ui_health_bar.tga",
         name="ui_health_bar", width=128, height=8, arr=tiles)
 
+@timeme
 def init_ui_status_bar():
     tiles = [
       "ui_status_bar",
@@ -60,6 +82,7 @@ def init_ui_status_bar():
         file="data/gfx/ui_status_bar.tga",
         name="ui_status_bar", width=128, height=512, arr=tiles)
 
+@timeme
 def init_ui_blood():
     tiles = [
       "blood_0",
@@ -71,6 +94,7 @@ def init_ui_blood():
         file="data/gfx/blood.tga",
         name="blood", width=360, height=225, arr=tiles)
 
+@timeme
 def init_ui_credits_bg():
     tiles = [
       "ui_credits_bg",
@@ -79,6 +103,7 @@ def init_ui_credits_bg():
         file="data/gfx/ui_credits_bg.tga",
         name="ui_credits_bg", width=200, height=86, arr=tiles)
 
+@timeme
 def init_ui_credits_fg():
     tiles = [
       "ui_credits_fg",
@@ -87,6 +112,7 @@ def init_ui_credits_fg():
         file="data/gfx/ui_credits_fg.tga",
         name="ui_credits_fg", width=200, height=86, arr=tiles)
 
+@timeme
 def init_title_fg1():
     tiles = [
       "title_fg1_1",
@@ -95,6 +121,7 @@ def init_title_fg1():
         file="data/gfx/title_fg1.tga",
         name="title_fg1", width=200, height=86, arr=tiles)
 
+@timeme
 def init_title_fg2():
     tiles = [
       "title_fg2_1",
@@ -103,6 +130,7 @@ def init_title_fg2():
         file="data/gfx/title_fg2.tga",
         name="title_fg2", width=200, height=86, arr=tiles)
 
+@timeme
 def init_title_fg3():
     tiles = [
       "title_fg3_1",
@@ -111,6 +139,7 @@ def init_title_fg3():
         file="data/gfx/title_fg3.tga",
         name="title_fg3", width=200, height=86, arr=tiles)
 
+@timeme
 def init_title_fg4():
     tiles = [
       "title_fg4_1",
@@ -182,6 +211,7 @@ def init_title_fg4():
         file="data/gfx/title_fg4.tga",
         name="title_fg4", width=200, height=86, arr=tiles)
 
+@timeme
 def init_title_bg():
     tiles = [
       "title_bg",
@@ -190,6 +220,7 @@ def init_title_bg():
         file="data/gfx/title_bg.tga",
         name="title_bg", width=200, height=86, arr=tiles)
 
+@timeme
 def init_ui_dead():
     tiles = [
       "ui_dead",
@@ -198,6 +229,7 @@ def init_ui_dead():
         file="data/gfx/ui_dead.tga",
         name="ui_dead", width=304, height=248, arr=tiles)
 
+@timeme
 def init_tiles1_walls():
     tiles = [
       #########################################################################
@@ -2581,6 +2613,7 @@ def init_tiles1_walls():
         file="data/gfx/tiles1_walls.tga",
         name="tiles1_walls", width=16, height=16, arr=tiles)
 
+@timeme
 def init_tiles1_floor():
     tiles = [
       #########################################################################
@@ -5967,6 +6000,7 @@ def init_tiles1_floor():
         file="data/gfx/tiles1_floors.tga",
         name="tiles1_floor", width=16, height=16, arr=tiles)
 
+@timeme
 def init_tiles1_monsts_and_items():
     tiles = [
       "health5_icon",
@@ -8034,6 +8068,7 @@ def init_tiles1_monsts_and_items():
         file="data/gfx/tiles1_monsts_and_items.tga",
         name="tiles1_monsts_and_items", width=16, height=16, arr=tiles)
 
+@timeme
 def init_tiles2():
     tiles = [
       "jelly_parent.1.100",
@@ -8195,6 +8230,7 @@ def init_tiles2():
         file="data/gfx/tiles2.tga",
         name="tiles2", width=24, height=24, arr=tiles)
 
+@timeme
 def init_tiles3():
     tiles = [
       "exit1.1",
@@ -8406,6 +8442,7 @@ def init_tiles3():
         file="data/gfx/tiles3.tga",
         name="tiles3", width=32, height=32, arr=tiles)
 
+@timeme
 def init_tiles3_surface_effects():
     tiles = [
       "water1.1",
@@ -8494,6 +8531,7 @@ def init_tiles3_surface_effects():
         file="data/gfx/tiles3_surface_effects.tga",
         name="tiles3_surface_effects", width=32, height=32, arr=tiles)
 
+@timeme
 def init_tiles3_water():
     tiles = [
       "water1a",
@@ -8566,6 +8604,7 @@ def init_tiles3_water():
         file="data/gfx/tiles3_water.tga",
         name="tiles3_water", width=32, height=32, arr=tiles)
 
+@timeme
 def init_tiles3_sewer_water():
     tiles = [
       "sewer_water1a",
@@ -8638,6 +8677,7 @@ def init_tiles3_sewer_water():
         file="data/gfx/tiles3_sewer_water.tga",
         name="tiles3_sewer_water", width=32, height=32, arr=tiles)
 
+@timeme
 def init_tiles3_deep_water():
     tiles = [
       "deep_water1a",
@@ -8711,6 +8751,7 @@ def init_tiles3_deep_water():
         name="tiles3_deep_water", width=32, height=32, arr=tiles)
 
 
+@timeme
 def init_tiles3_lava():
     tiles = [
       "lava1a",
@@ -8784,6 +8825,7 @@ def init_tiles3_lava():
         name="tiles3_lava", width=32, height=32, arr=tiles)
 
 
+@timeme
 def init_chasm():
     tiles = [
       "chasm1.1",
@@ -8838,6 +8880,7 @@ def init_chasm():
         name="chasm2", width=16, height=512, arr=tiles)
 
 
+@timeme
 def init_weapons_tiles():
     tiles = [
       "",
@@ -8946,6 +8989,7 @@ def init_weapons_tiles():
         file="data/gfx/weapons.tga",
         name="weapons", width=48, height=48, arr=tiles)
 
+@timeme
 def init_claws_tiles():
     tiles = [
       "attack_claws.1",
@@ -8964,6 +9008,7 @@ def init_claws_tiles():
         file="data/gfx/attack.tga",
         name="claws", width=32, height=32, arr=tiles)
 
+@timeme
 def init_explosions():
     tiles = [
       "explosion_major.1",
@@ -8988,6 +9033,7 @@ def init_explosions():
         file="data/gfx/explosion.tga",
         name="explosion", width=32, height=64, arr=tiles)
 
+@timeme
 def init_laser_descent_tiles():
     tiles = [
       #########################################################################
@@ -9268,6 +9314,7 @@ def init_laser_descent_tiles():
         file="data/gfx/laser_descent.tga",
         name="laser_descent", width=32, height=32, arr=tiles)
 
+@timeme
 def init_laser_energy_tiles():
     tiles = [
       #########################################################################
@@ -9548,6 +9595,7 @@ def init_laser_energy_tiles():
         file="data/gfx/laser_energy.tga",
         name="laser_energy", width=32, height=32, arr=tiles)
 
+@timeme
 def init_laser_lightning_tiles():
     tiles = [
       #########################################################################
@@ -9828,6 +9876,7 @@ def init_laser_lightning_tiles():
         file="data/gfx/laser_lightning.tga",
         name="laser_lightning", width=32, height=32, arr=tiles)
 
+@timeme
 def init_laser_lightning_secondary_tiles():
     tiles = [
       #########################################################################
@@ -10108,6 +10157,7 @@ def init_laser_lightning_secondary_tiles():
         file="data/gfx/laser_lightning.tga",
         name="laser_lightning_secondary", width=32, height=32, arr=tiles)
 
+@timeme
 def init_projectile_fire_tiles():
     tiles = [
       "projectile_fire.1",
