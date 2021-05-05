@@ -252,6 +252,12 @@ have_dungeon_start:
         if (g_errored) { return false; }
 
         //
+        // Place braziers first and then update the heatmap
+        //
+        create_dungeon_place_braziers(dungeon, "brazier1");
+        if (g_errored) { return false; }
+
+        //
         // Update the heatmap to avoid placing monsts next to lava
         //
         update_heatmap();
@@ -746,10 +752,6 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 
-            if (d->is_brazier(x, y)) {
-                tp = tp_random_brazier();
-            }
-
             if (d->is_barrel(x, y)) {
                 tp = tp_random_barrel();
             }
@@ -794,9 +796,26 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 
-            if (tp) {
-                (void) thing_new(tp->name(), fpoint(x, y));
+            if (!tp) {
+                continue;
             }
+
+            //
+            // Don't place items where they would catch fire immediately.
+            //
+            if (heatmap(x, y)) {
+                if (tp->is_very_combustible()) {
+                    continue;
+                }
+            }
+
+            if (heatmap(x, y) > 2) {
+                if (tp->is_combustible()) {
+                    continue;
+                }
+            }
+
+            (void) thing_new(tp->name(), fpoint(x, y));
         }
     }
 }
@@ -858,6 +877,23 @@ void Level::create_dungeon_place_chasm (Dungeonp d, const std::string &what)
             }
 
             if (!d->is_chasm(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
+void Level::create_dungeon_place_braziers (Dungeonp d, const std::string &what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (is_brazier(x, y)) {
+                continue;
+            }
+
+            if (!d->is_brazier(x, y)) {
                 continue;
             }
 
@@ -1037,21 +1073,6 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
             }
 
             //
-            // No braziers next to barrels
-            //
-            if (d->is_barrel(x, y) ||
-                d->is_barrel(x - 1, y) ||
-                d->is_barrel(x + 1, y) ||
-                d->is_barrel(x, y - 1) ||
-                d->is_barrel(x, y + 1) ||
-                d->is_barrel(x - 1, y - 1) ||
-                d->is_barrel(x + 1, y - 1) ||
-                d->is_barrel(x - 1, y + 1) ||
-                d->is_barrel(x + 1, y + 1)) {
-                continue;
-            }
-
-            //
             // Reset the seed for each cell to increase the chances
             // of repeatability if other small things change in the
             // game
@@ -1061,6 +1082,21 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
             auto tp = tp_random_deco();
             if (!tp) {
                 return;
+            }
+
+            //
+            // Don't place items where they would catch fire immediately.
+            //
+            if (heatmap(x, y)) {
+                if (tp->is_very_combustible()) {
+                    continue;
+                }
+            }
+
+            if (heatmap(x, y) > 2) {
+                if (tp->is_combustible()) {
+                    continue;
+                }
             }
 
             thing_new(tp->name(), fpoint(x, y));
@@ -1298,10 +1334,6 @@ void Level::place_dry_fungus (Dungeonp d)
                     continue;
                 }
 
-                if (is_brazier(x, y)) {
-                    continue;
-                }
-
                 (void) thing_new(tp->name(), fpoint(x, y));
             }
         }
@@ -1319,10 +1351,6 @@ void Level::place_foilage (Dungeonp d)
                 }
 
                 if (heatmap(x, y)) {
-                    continue;
-                }
-
-                if (is_brazier(x, y)) {
                     continue;
                 }
 
