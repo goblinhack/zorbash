@@ -28,6 +28,7 @@ def tp_init(name, text_name):
     x.set_collision_hit_priority(1)
     x.set_collision_hit_priority(2)
     x.set_collision_radius(0.40)
+    x.set_damage_crush_dice("2d6")
     x.set_damage_doubled_from_fire(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)

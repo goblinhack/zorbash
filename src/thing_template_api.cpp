@@ -33,6 +33,11 @@ const int Tp::get_damage_melee(void) const { return _damage_melee_dice.roll(); }
 const std::string& Tp::get_damage_melee_dice_str(void) const { return _damage_melee_dice_str; }
 void Tp::set_damage_melee_dice(const std::string &v) { _damage_melee_dice = v; _damage_melee_dice_str = v; }
 
+const Dice& Tp::get_damage_crush_dice(void) const { return _damage_crush_dice; }
+const int Tp::get_damage_crush(void) const { return _damage_crush_dice.roll(); }
+const std::string& Tp::get_damage_crush_dice_str(void) const { return _damage_crush_dice_str; }
+void Tp::set_damage_crush_dice(const std::string &v) { _damage_crush_dice = v; _damage_crush_dice_str = v; }
+
 const Dice& Tp::get_damage_bite_dice(void) const { return _damage_bite_dice; }
 const int Tp::get_damage_bite(void) const { return _damage_bite_dice.roll(); }
 const std::string& Tp::get_damage_bite_dice_str(void) const { return _damage_bite_dice_str; }

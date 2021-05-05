@@ -1324,6 +1324,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(damage_doubled_from_poison)
     TP_SET_DECL(damage_doubled_from_water)
     TP_SET_DECL(damage_melee_dice)
+    TP_SET_DECL(damage_crush_dice)
     TP_SET_DECL(gfx_an_animation_only)
     TP_SET_DECL(gfx_anim_attack)
     TP_SET_DECL(gfx_animated)
