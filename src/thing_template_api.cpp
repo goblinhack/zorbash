@@ -336,7 +336,7 @@ int Tp::is_rrr80(void) const                                         { return _i
 int Tp::is_rrr81(void) const                                         { return _is_rrr81; }
 int Tp::is_rrr82(void) const                                         { return _is_rrr82; }
 int Tp::is_rrr83(void) const                                         { return _is_rrr83; }
-int Tp::is_rrr84(void) const                                         { return _is_rrr84; }
+int Tp::is_indestructible(void) const                                         { return _is_indestructible; }
 int Tp::is_bones(void) const                                         { return _is_bones; }
 int Tp::is_soft_body(void) const                                         { return _is_soft_body; }
 int Tp::is_foilage(void) const                                       { return _is_foilage; }
@@ -660,7 +660,7 @@ void Tp::set_is_rrr80(int v)                                         { _is_rrr80
 void Tp::set_is_rrr81(int v)                                         { _is_rrr81 = v; }
 void Tp::set_is_rrr82(int v)                                         { _is_rrr82 = v; }
 void Tp::set_is_rrr83(int v)                                         { _is_rrr83 = v; }
-void Tp::set_is_rrr84(int v)                                         { _is_rrr84 = v; }
+void Tp::set_is_indestructible(int v)                                         { _is_indestructible = v; }
 void Tp::set_is_bones(int v)                                         { _is_bones = v; }
 void Tp::set_is_soft_body(int v)                                         { _is_soft_body = v; }
 void Tp::set_is_foilage(int v)                                       { _is_foilage = v; }

@@ -9,7 +9,7 @@ import time
 import logging
 import datetime
 
-timeme_enabled = True
+timeme_enabled = False
 
 #
 # Unused

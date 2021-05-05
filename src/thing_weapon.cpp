@@ -425,10 +425,7 @@ _
                                                   &target_attacked,
                                                   &target_overlaps)) {
             lunge(hit_at);
-            TOPCON("hit");
             return;
-        } else {
-            TOPCON("miss");
         }
     } else {
         if (collision_check_and_handle_at(hit_at,

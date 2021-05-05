@@ -246,6 +246,10 @@ bool Thing::if_matches_then_kill (const std::string& what, const point &p)
     }
 
     FOR_ALL_THINGS(level, t, p.x, p.y) {
+        if (t->is_indestructible()) {
+            continue;
+        }
+
         if (t->matches(what)) {
             t->dead(this, "killed");
 

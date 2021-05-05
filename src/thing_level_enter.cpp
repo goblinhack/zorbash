@@ -12,6 +12,10 @@
 
 void Thing::level_enter (void)
 {_
+    if (is_player()) {
+        log("Level enter");
+    }
+
     auto result = level->all_things.insert(std::pair(id, this));
     if (result.second == false) {
         err("Failed to insert into thing map");
@@ -73,4 +77,8 @@ void Thing::level_enter (void)
     is_waiting_to_fall = false;
 
     game->request_update_rightbar = true;
+
+    if (is_player()) {
+        log("Level entered");
+    }
 }

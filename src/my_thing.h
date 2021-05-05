@@ -842,7 +842,7 @@ public:
     int is_rrr81(void) const;
     int is_rrr82(void) const;
     int is_rrr83(void) const;
-    int is_rrr84(void) const;
+    int is_indestructible(void) const;
     int is_bones(void) const;
     int is_soft_body(void) const;
     int is_foilage(void) const;

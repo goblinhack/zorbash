@@ -162,10 +162,5 @@ bool Thing::descend_dungeon (void)
         }
     }
 
-    if (is_player()) {
-        game->tick_begin("descend level");
-        level->timestamp_fade_in_begin = time_get_time_ms_cached();
-        level->update_new_level();
-    }
-    return true;
+    return false;
 }

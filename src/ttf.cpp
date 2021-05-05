@@ -369,8 +369,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
             for (y = 0; y < dst->h; y++) {
 
                 color c;
-
-                c = getPixel(dst, x, y);
+                getPixel(dst, x, y, c);
 
                 if ((c.a == 255) &&
                     (c.r == 255) &&

@@ -305,7 +305,7 @@ private:
     int _is_rrr81 {};
     int _is_rrr82 {};
     int _is_rrr83 {};
-    int _is_rrr84 {};
+    int _is_indestructible {};
     int _is_bones {};
     int _is_soft_body {};
     int _is_foilage {};
@@ -772,7 +772,7 @@ public:
     int is_rrr81(void) const;
     int is_rrr82(void) const;
     int is_rrr83(void) const;
-    int is_rrr84(void) const;
+    int is_indestructible(void) const;
     int is_bones(void) const;
     int is_soft_body(void) const;
     int is_foilage(void) const;
@@ -1105,7 +1105,7 @@ public:
     void set_is_rrr81(int);
     void set_is_rrr82(int);
     void set_is_rrr83(int);
-    void set_is_rrr84(int);
+    void set_is_indestructible(int);
     void set_is_bones(int);
     void set_is_soft_body(int);
     void set_is_foilage(int);

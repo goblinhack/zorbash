@@ -242,7 +242,7 @@ PyObject *thing_is_rrr80(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr81(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr82(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr83(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr84(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_indestructible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bones(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_soft_body(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_foilage(PyObject *obj, PyObject *args, PyObject *keywds);
