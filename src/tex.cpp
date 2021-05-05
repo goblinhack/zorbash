@@ -284,6 +284,11 @@ Texp tex_load (std::string file, std::string name, int mode)
     return (t);
 }
 
+//
+// Returns two textures
+// 1 - black and white tile used in backgrounds
+// 2 - mask for sprites
+//
 static std::pair<Texp, Texp> tex_sprite (SDL_Surface *in,
                                          std::string file,
                                          std::string name,
@@ -330,12 +335,12 @@ static std::pair<Texp, Texp> tex_sprite (SDL_Surface *in,
                                              rmask, gmask, bmask, amask);
     newptr(out2, "SDL_CreateRGBSurface18");
 
-    ox = 0;
-
-    for (ix = 0; ix < (int32_t) iwidth; ix++) {
-        oy = 0;
-        for (iy = 0; iy < (int32_t) iheight; iy++) {
-            color c1 = getPixel(in, ix, iy);
+    oy = 0;
+    for (iy = 0; iy < (int32_t) iheight; iy++) {
+        ox = 0;
+        for (ix = 0; ix < (int32_t) iwidth; ix++) {
+            color c1;
+            getPixelFast(in, ix, iy, c1);
             color c2 = c1;
             uint8_t avg = ((int)c1.r + (int)c1.g + (int)c1.b) / 3;
             c1.r = avg;
@@ -362,9 +367,9 @@ static std::pair<Texp, Texp> tex_sprite (SDL_Surface *in,
             }
 
             putPixel(out2, ox, oy, c2);
-            oy++;
+            ox++;
         }
-        ox++;
+        oy++;
     }
 
     SDL_FreeSurface(in);

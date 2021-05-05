@@ -15,10 +15,6 @@
 
 void Level::log_ (const char *fmt, va_list args)
 {
-    if (!g_opt_debug1) {
-        return;
-    }
-
     verify(this);
     auto l = this;
     char buf[MAXSTR];

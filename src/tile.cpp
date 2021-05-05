@@ -244,7 +244,8 @@ void tile_load_arr (std::string file, std::string name,
                             (pixel_size.h * y) + y1
                         );
 
-                        color p = getPixel(s, at.x, at.y);
+                        color p;
+                        getPixel(s, at.x, at.y, p);
 
                         //
                         // If solid...
@@ -405,7 +406,8 @@ void tile_load_arr (std::string file, std::string name,
                             (pixel_size.h * y) + y1
                         );
 
-                        color p = getPixel(s, at.x, at.y);
+                        color p;
+                        getPixel(s, at.x, at.y, p);
 
                         //
                         // If solid...
@@ -585,7 +587,8 @@ void tile_load_arr_sprites (std::string file,
                             (pixel_size.h * y) + y1
                         );
 
-                        color p = getPixel(s, at.x, at.y);
+                        color p;
+                        getPixel(s, at.x, at.y, p);
 
                         //
                         // If solid...
@@ -757,7 +760,8 @@ void tile_load_arr_sprites (std::string file,
                             (pixel_size.h * y) + y1
                         );
 
-                        color p = getPixel(s, at.x, at.y);
+                        color p;
+                        getPixel(s, at.x, at.y, p);
 
                         //
                         // If solid...

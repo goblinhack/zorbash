@@ -89,25 +89,25 @@ bool Thing::location_check_forced (void)
 
     if (descend_dungeon_tick()) {
         if (is_player()) {
-            log("Location check, descend dungeon");
+            log("Location check, descending dungeon");
         }
         return false;
     }
     if (ascend_dungeon_tick()) {
         if (is_player()) {
-            log("Location check, ascend dungeon");
+            log("Location check, ascending dungeon");
         }
         return false;
     }
     if (descend_sewer_tick()) {
         if (is_player()) {
-            log("Location check, descend sewer");
+            log("Location check, descending sewer");
         }
         return false;
     }
     if (ascend_sewer_tick()) {
         if (is_player()) {
-            log("Location check, ascend sewer");
+            log("Location check, ascending sewer");
         }
         return false;
     }
@@ -117,20 +117,17 @@ bool Thing::location_check_forced (void)
 
 bool Thing::location_check (void)
 {_
-    if (is_player()) {
-        log("Location check? last loc tick %d game tick %d",
-            get_tick_last_location_check(), game->tick_current);
-    }
-_
     if (get_tick_last_location_check() == game->tick_current) {
         if (is_player()) {
-            log("No, too soon");
+            log("Skip location check, already done. Last check %d, game tick %d",
+                get_tick_last_location_check(), game->tick_current);
         }
         return false;
     }
 
     if (is_player()) {
-        log("Yes");
+        log("Do location check. Last check %d, game tick %d",
+            get_tick_last_location_check(), game->tick_current);
     }
 
     set_tick_last_location_check(game->tick_current);

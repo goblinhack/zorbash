@@ -54,6 +54,10 @@ bool Thing::ascend_dungeon_tick (void)
         if (is_player()) {
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
             is_waiting_to_ascend_dungeon = true;
+
+            if (is_player()) {
+                log("Location check, is now waiting to ascend");
+            }
             return true;
         } else {
             return ascend_dungeon();
@@ -81,7 +85,7 @@ bool Thing::ascend_dungeon (void)
         return false;
     }
 
-    auto next_level = level->world_at + point3d(0, 0, -1);
+    auto next_level = level->world_at + point3d(0, 0, -2);
     game->init_level(next_level);
 
     if (is_player()) {
@@ -143,10 +147,5 @@ bool Thing::ascend_dungeon (void)
         }
     }
 
-    if (is_player()) {
-        game->tick_begin("ascend level");
-        level->timestamp_fade_in_begin = time_get_time_ms_cached();
-        level->update_new_level();
-    }
-    return true;
+    return false;
 }

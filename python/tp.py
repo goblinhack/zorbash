@@ -475,8 +475,8 @@ class Tp:
     def set_is_rrr83(self, value):
         zx.tp_set_is_rrr83(self, value)
 
-    def set_is_rrr84(self, value):
-        zx.tp_set_is_rrr84(self, value)
+    def set_is_indestructible(self, value):
+        zx.tp_set_is_indestructible(self, value)
 
     def set_is_bones(self, value):
         zx.tp_set_is_bones(self, value)

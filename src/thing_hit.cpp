@@ -563,6 +563,11 @@ _
         }
     }
 
+    if (is_indestructible()) {
+        hitter->log("Cannot hit: %s is indestructible", to_string().c_str());
+        return false;
+    }
+
     if (is_resurrecting) {
         hitter->log("Cannot hit: %s is resurrecting", to_string().c_str());
         return false;

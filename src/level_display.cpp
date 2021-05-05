@@ -286,7 +286,7 @@ void Level::display_map (void)
             minimap_valid = false;
             timestamp_fade_out_begin = 0;
             level_fade_out_finished = true;
-            log("Fade out of level finished");
+            player->log("Fade out of level finished");
         }
     }
 
@@ -295,7 +295,7 @@ void Level::display_map (void)
             (time_get_time_ms_cached() - timestamp_fade_in_begin > LEVEL_FADE_IN_MS)) {
             minimap_valid = false;
             timestamp_fade_in_begin = 0;
-            log("Fade in of level finished");
+            player->log("Fade in of level finished");
         }
     }
 
@@ -464,8 +464,11 @@ void Level::display_map (void)
 
     blit_fbo_unbind();
 
+    player->log("fade_out %d fade_in %d level_fade_out_finished %d",
+                fade_out, fade_in, level_fade_out_finished);
+
     if (level_fade_out_finished) {
-        log("Level fade out finished");
+        player->log("Level fade out finished");
 
         blit_fbo_bind(FBO_MAP_HIDDEN);
         glClear(GL_COLOR_BUFFER_BIT);

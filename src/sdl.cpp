@@ -1158,7 +1158,9 @@ void sdl_loop (void)
     //
     // Reset the fade in due to the above
     //
-    game->level->timestamp_fade_in_begin = time_get_time_ms_cached();
+    if (game->level) {
+        game->level->timestamp_fade_in_begin = time_get_time_ms_cached();
+    }
 
     for (;/*ever*/;) {
         frames++;
@@ -1306,7 +1308,7 @@ void sdl_loop (void)
         //
         // Draw the map
         //
-        if (game->level) {
+        if (likely(game->level != nullptr)) {
             game->level->display_minimap();
         }
 

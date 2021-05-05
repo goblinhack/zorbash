@@ -9,7 +9,6 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
 
 def tp_init(name, tiles=[]):
     x = tp.Tp(name, "dry fungus")
-    x.set_gfx_show_outlined(True)
     x.set_gfx_shown_in_bg(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_gfx_very_small_shadow_caster(True)

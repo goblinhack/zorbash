@@ -271,7 +271,7 @@ void Dungeon::make_dungeon (void)
                 5,  // R2
                 4   /* generations */);
 
-    LOG("Final DUNGEON:");
+    LOG("DUNGEON: Created, but not populated");
     dump();
 }
 
@@ -305,7 +305,7 @@ bool Dungeon::is_oob (const int x, const int y)
 void Dungeon::debug (const std::string s)
 {_
     if (g_opt_debug4) {
-        LOG("Dungeon (%u) %s", seed, s.c_str());
+        CON("DUNGEON (%u) %s", seed, s.c_str());
         LOG("===========================================================");
         dump();
     }
@@ -1298,56 +1298,58 @@ void Dungeon::create_node_map (void)
 
 void Dungeon::dump (void)
 {_
-    LOG("DUNGEON: Seed %u (with room depth)", seed);
-    for (auto y = 0; y < map_height; y++) {
-        std::string s;
-        for (auto x = 0; x < map_width; x++) {
-            bool got_one = false;
-            for (auto d = map_depth - 1; d >= 0; d--) {
-                if (!is_anything_at(x, y, d)) {
-                    continue;
-                }
+    if (g_opt_debug3) {
+        LOG("DUNGEON: Seed %u (with room depth)", seed);
+        for (auto y = 0; y < map_height; y++) {
+            std::string s;
+            for (auto x = 0; x < map_width; x++) {
+                bool got_one = false;
+                for (auto d = map_depth - 1; d >= 0; d--) {
+                    if (!is_anything_at(x, y, d)) {
+                        continue;
+                    }
 
-                auto m = getc(x, y, d);
-                auto cr = get(Charmap::all_charmaps, m);
-                auto c = cr.c;
+                    auto m = getc(x, y, d);
+                    auto cr = get(Charmap::all_charmaps, m);
+                    auto c = cr.c;
 
-                if (!c) {
-                    ERR("Unknown map char 0x%x/%c at x %d, y %d, depth %d",
-                        m, m, x, y, d);
-                }
+                    if (!c) {
+                        ERR("Unknown map char 0x%x/%c at x %d, y %d, depth %d",
+                            m, m, x, y, d);
+                    }
 
-                if (nodes) {
-                    if (!(x % 2) && !(y % 2)) {
-                        if (!is_wall(x, y) && is_floor(x, y)) {
-                            auto X = (x - MAP_BORDER_TOTAL) / MAP_ROOM_WIDTH;
-                            auto Y = (y - MAP_BORDER_TOTAL) / MAP_ROOM_HEIGHT;
-                            auto n = nodes->getn(X, Y);
-                            if (n) {
-                                c = '0' + n->depth;
+                    if (nodes) {
+                        if (!(x % 2) && !(y % 2)) {
+                            if (!is_wall(x, y) && is_floor(x, y)) {
+                                auto X = (x - MAP_BORDER_TOTAL) / MAP_ROOM_WIDTH;
+                                auto Y = (y - MAP_BORDER_TOTAL) / MAP_ROOM_HEIGHT;
+                                auto n = nodes->getn(X, Y);
+                                if (n) {
+                                    c = '0' + n->depth;
+                                }
                             }
                         }
                     }
-                }
 
-                if (!((x-MAP_BORDER_TOTAL) % MAP_ROOM_WIDTH) ||
-                    !((y-MAP_BORDER_TOTAL) % MAP_ROOM_HEIGHT)) {
-                    if (is_wall(x, y)) {
-                        c = 'X';
+                    if (!((x-MAP_BORDER_TOTAL) % MAP_ROOM_WIDTH) ||
+                        !((y-MAP_BORDER_TOTAL) % MAP_ROOM_HEIGHT)) {
+                        if (is_wall(x, y)) {
+                            c = 'X';
+                        }
                     }
-                }
 
-                s += c;
-                got_one = true;
-                break;
+                    s += c;
+                    got_one = true;
+                    break;
+                }
+                if (!got_one) {
+                    s += " ";
+                }
             }
-            if (!got_one) {
-                s += " ";
+            if (s != "") {
+                LOG("[%s]", s.c_str());
+                //printf("[%s]\n", s.c_str());
             }
-        }
-        if (s != "") {
-            LOG("[%s]", s.c_str());
-            //printf("[%s]\n", s.c_str());
         }
     }
 
