@@ -230,7 +230,8 @@ public:
     bool can_eat(const Thingp it);
     bool carry(Thingp w);
     bool change_owner(Thingp new_owner);
-    bool chasm_tick();
+    void chasm_tick();
+    void barrel_tick();
     bool check_anything_to_carry(void);
     bool collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
@@ -330,6 +331,7 @@ public:
     bool will_prefer_terrain(const Thingp it);
     const Dice& get_damage_bite_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;
+    const Dice& get_damage_crush_dice(void) const;
     const Dice& get_gold_value_dice(void) const;
     const Dice& get_health_initial_dice(void) const;
     const Dice& get_lifespan_dice(void) const;
@@ -349,6 +351,7 @@ public:
     const std::string get_danger_level_str(Thingp);
     const std::string& get_damage_bite_dice_str(void) const;
     const std::string& get_damage_melee_dice_str(void) const;
+    const std::string& get_damage_crush_dice_str(void) const;
     const std::string& get_gold_value_dice_str(void) const;
     const std::string& get_health_initial_dice_str(void) const;
     const std::string& get_lifespan_dice_str(void) const;
@@ -507,6 +510,7 @@ public:
     int get_damage_bite(void) const;
     int get_damage_max(void);
     int get_damage_melee(void) const;
+    int get_damage_crush(void) const;
     int get_damage_min(void);
     int get_danger_level(Thingp);
     int get_danger_level(void);

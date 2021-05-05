@@ -58,6 +58,10 @@ bool Thing::location_check_forced (void)
     if (is_dead) {
         return false;
     }
+    barrel_tick();
+    if (is_dead) {
+        return false;
+    }
     brazier_tick();
     if (is_dead) {
         return false;

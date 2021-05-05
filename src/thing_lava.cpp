@@ -68,17 +68,13 @@ void Thing::lava_tick (void)
 
     if (hit) {
         FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LAVA) {
-            auto tpp = t->tp();
-            if (!tpp->is_lava()) {
+            if (!is_lava()) {
                 continue;
             }
 
-            if (t->get_tick() < game->tick_current) {
-                log("Lava can attack as behind game tick %d", game->tick_current);
-                t->set_tick(game->tick_current);
-                is_hit_by(t, t->get_damage_melee());
-                break;
-            }
+            log("Lava can attack as behind game tick %d", game->tick_current);
+            is_hit_by(t, t->get_damage_melee());
+            break;
         } FOR_ALL_THINGS_END()
     } else {
         if (is_player()) {

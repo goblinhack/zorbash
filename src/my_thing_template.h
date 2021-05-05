@@ -51,6 +51,7 @@ public:
 private:
     Dice _damage_bite_dice {};
     Dice _damage_melee_dice {};
+    Dice _damage_crush_dice {};
     Dice _gold_value_dice {};
     Dice _health_initial_dice {};
     Dice _lifespan_dice {};
@@ -387,6 +388,7 @@ private:
     int _weapon_use_distance {};
     std::string _damage_bite_dice_str;
     std::string _damage_melee_dice_str;
+    std::string _damage_crush_dice_str;
     std::string _gfx_anim_attack;
     std::string _gold_value_dice_str;
     std::string _health_initial_dice_str;
@@ -434,6 +436,7 @@ public:
     bool will_avoid_threat(class Level*, point p) const;
     const Dice& get_damage_bite_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;
+    const Dice& get_damage_crush_dice(void) const;
     const Dice& get_health_initial_dice(void) const;
     const Dice& gold_value_dice(void) const;
     const Dice& lifespan_dice(void) const;
@@ -473,6 +476,7 @@ public:
     const int cash(void) const;
     const int get_damage_bite(void) const;
     const int get_damage_melee(void) const;
+    const int get_damage_crush(void) const;
     const int get_health_initial(void) const;
     const int idle_tick(void) const;
     const int lifespan(void) const;
@@ -480,6 +484,7 @@ public:
     const int resurrect(void) const;
     const std::string& get_damage_bite_dice_str(void) const;
     const std::string& get_damage_melee_dice_str(void) const;
+    const std::string& get_damage_crush_dice_str(void) const;
     const std::string& get_health_initial_dice_str(void) const;
     const std::string& gfx_anim_attack(void) const;
     const std::string& gold_value_dice_str(void) const;
@@ -882,6 +887,7 @@ public:
     void set_damage_doubled_from_poison(int);
     void set_damage_doubled_from_water(int);
     void set_damage_melee_dice(const std::string &);
+    void set_damage_crush_dice(const std::string &);
     void set_gfx_an_animation_only(int);
     void set_gfx_anim_attack(const std::string &);
     void set_gfx_animated(int);

@@ -32,6 +32,21 @@ int Thing::get_damage_melee (void) const {_
 }
 
 ///////////////////////////////////////////////////////////////////////////
+// crush
+///////////////////////////////////////////////////////////////////////////
+const Dice& Thing::get_damage_crush_dice (void) const {_ 
+    return (tp()->get_damage_crush_dice()); 
+}
+
+const std::string& Thing::get_damage_crush_dice_str (void) const {_ 
+    return (tp()->get_damage_crush_dice_str()); 
+}
+
+int Thing::get_damage_crush (void) const {_ 
+    return (tp()->get_damage_crush_dice().roll()); 
+}
+
+///////////////////////////////////////////////////////////////////////////
 // bite
 ///////////////////////////////////////////////////////////////////////////
 const Dice& Thing::get_damage_bite_dice (void) const {_ 
@@ -53,6 +68,9 @@ int Thing::get_damage_max (void)
 {_
     auto max_damage = get_damage_bite_dice().max_roll();
     max_damage = std::max(max_damage, get_damage_melee_dice().max_roll());
+    //
+    // Don't include crush damage as it is non typical
+    //
     return max_damage;
 }
 
@@ -60,5 +78,8 @@ int Thing::get_damage_min (void)
 {_
     auto min_damage = get_damage_bite_dice().min_roll();
     min_damage = std::min(min_damage, get_damage_melee_dice().min_roll());
+    //
+    // Don't include crush damage as it is non typical
+    //
     return min_damage;
 }
