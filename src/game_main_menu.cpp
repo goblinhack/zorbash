@@ -134,6 +134,7 @@ static uint8_t game_main_menu_credits_game (Widp w, int32_t x, int32_t y, uint32
 static uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->quit_select();
+    game_main_menu_destroy();
     return false;
 }
 
@@ -351,14 +352,14 @@ static void game_main_menu_tick (Widp w)
         game_main_menu_destroy();
     }
 
-    if (!g_opt_seed_name.empty()) {
-        auto seed_name = "Seed: '" + g_opt_seed_name + "'";
-        ascii_putf(1, TERM_HEIGHT - 4, YELLOW, BLACK, string_to_wstring(seed_name));
-    }
-
     if (!g_opt_player_name.empty()) {
         auto player_name = "Player name: '" + g_opt_player_name + "'";
-        ascii_putf(1, TERM_HEIGHT - 6, YELLOW, BLACK, string_to_wstring(player_name));
+        ascii_putf(1, TERM_HEIGHT - 4, YELLOW, BLACK, string_to_wstring(player_name));
+    }
+
+    if (!g_opt_seed_name.empty()) {
+        auto seed_name = "Seed: '" + g_opt_seed_name + "'";
+        ascii_putf(1, TERM_HEIGHT - 6, YELLOW, BLACK, string_to_wstring(seed_name));
     }
 }
 

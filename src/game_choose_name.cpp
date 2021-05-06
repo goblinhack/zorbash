@@ -48,5 +48,6 @@ void Game::choose_player_name_select (void)
     wid_thing_collect_fini();
 
     wid_keyboard_choose_player_name = 
-        wid_keyboard(L"", L"Choose a name for your hapless adventurer", selected, cancelled);
+        wid_keyboard(string_to_wstring(g_opt_player_name),
+                     L"Choose a name for your hapless adventurer", selected, cancelled);
 }

@@ -43,6 +43,9 @@ _
 static uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game_quit_destroy();
+    if (!game->level) {
+        game->main_menu_select();
+    }
     return false;
 }
 
