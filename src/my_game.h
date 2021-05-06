@@ -130,6 +130,7 @@ public:
     bool save(std::string save_file);
     bool wid_thing_info_push_popup(Thingp t);
     void config_gfx_select(void);
+    void hiscore_select(void);
     void config_keyboard_select(void);
     void config_other_select(void);
     void config_sound_select(void);

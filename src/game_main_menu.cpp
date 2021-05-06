@@ -138,6 +138,12 @@ static uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t 
     return false;
 }
 
+static uint8_t game_main_menu_hiscores (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    game->hiscore_select();
+    return false;
+}
+
 static uint8_t game_main_menu_key_up (Widp w, const struct SDL_Keysym *key)
 {_
     if (sdl_shift_held) {
@@ -381,7 +387,7 @@ void Game::main_menu_select (void)
 
     game->wid_thing_info_destroy_immediate();
 
-    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 26);
+    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 29);
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
@@ -477,6 +483,18 @@ void Game::main_menu_select (void)
         wid_set_on_mouse_up(w, game_main_menu_credits_game);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$C%%fg=reset$redits");
+    }
+    y_at += 3;
+    {_
+        auto p = game_main_menu_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Hiscores");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, game_main_menu_hiscores);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Hiscores");
     }
     y_at += 3;
     {_

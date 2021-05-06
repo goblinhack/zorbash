@@ -39,8 +39,8 @@ public:
     static const int max_displayed = 10;
 
 };
-std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my);
-std::istream& operator>>(std::istream &in, Bits<HiScore &> my);
+std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my); // save
+std::istream& operator>>(std::istream &in, Bits<HiScore &> my); // load
 
 class HiScores
 {
@@ -58,7 +58,7 @@ public:
     bool is_new_highest_hiscore(Thingp player);
     const char *place_str(Thingp player);
 };
-std::ostream& operator<<(std::ostream &out, Bits<const HiScores & > const my);
-std::istream& operator>>(std::istream &in, Bits<HiScores &> my);
+std::ostream& operator<<(std::ostream &out, Bits<const HiScores & > const my); // save
+std::istream& operator>>(std::istream &in, Bits<HiScores &> my); // load
 
 #endif // _MY_THING_H_

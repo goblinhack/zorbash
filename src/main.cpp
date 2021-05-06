@@ -648,6 +648,13 @@ int32_t main (int32_t argc, char *argv[])
     CON("INI: Load game config");
     game = new Game(std::string(appdata));
     game->load_config();
+#if 0
+    game->save_config();
+    int x = 1;
+    if (x) {
+    exit(0);
+    }
+#endif
 
     if (g_opt_debug2) {
         if (game) {
