@@ -84,8 +84,8 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     {_
         auto w = wid_new_plain(
                     wid_popup_window->wid_popup_container, "ui-circle");
-        point tl = make_point(12 + 1, 1);
-        point br = make_point(12 + 4, 4);
+        point tl = make_point(11 + 1, 1);
+        point br = make_point(11 + 6, 6);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "ui_circle");
@@ -96,8 +96,8 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     {_
         auto w = wid_new_plain(
                     wid_popup_window->wid_popup_container, "ui-circle");
-        point tl = make_point(12 + 2, 2);
-        point br = make_point(12 + 3, 3);
+        point tl = make_point(11 + 2, 2);
+        point br = make_point(11 + 5, 5);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "ui_tile_bg");
@@ -106,6 +106,8 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
     }
 
+    wid_popup_window->log(" ");
+    wid_popup_window->log(" ");
     wid_popup_window->log(" ");
     wid_popup_window->log(" ");
     wid_popup_window->log(" ");
@@ -202,7 +204,7 @@ bool Game::wid_thing_info_push_popup (Thingp t)
         return false;
     }
 
-    int height = 50;
+    auto height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT;
     point tl = make_point(0, TERM_HEIGHT - 2 - height);
     point br = make_point(29, TERM_HEIGHT - 2);
 
@@ -674,42 +676,66 @@ void Game::wid_thing_info_add_danger_level (WidPopup *w, Thingp t)
         return;
     }
 
-    if (t->is_alive_monst()) {
-        const std::string danger_level = player->get_danger_level_str(t);
-        w->log(" ");
-        w->log(danger_level);
+    if (!t->is_alive_monst()) {
+        return;
+    }
 
-        auto max_damage = t->get_damage_max();
-        if (max_damage > 0) {
-            auto kill_count = player->get_health() / max_damage;
+    const std::string danger_level = player->get_danger_level_str(t);
+    w->log(" ");
+    w->log(danger_level);
 
-            //
-            // Oh dear.
-            //
-            if (kill_count == 0) {
-                kill_count = 1;
-            }
+    auto monst_max_damage = t->get_damage_max();
+    if (monst_max_damage != 0) {
+        auto monst_kill_count = player->get_health() / monst_max_damage;
 
-            if (kill_count == 1) {
-                w->log(" ");
-                w->log("%%fg=red$Could kill you in");
-                w->log("%%fg=red$" + std::to_string(kill_count) + 
-                                      " hit!");
-            } else if (kill_count <= 2) {
-                w->log(" ");
-                w->log("%%fg=red$Could kill you in");
-                w->log("%%fg=red$" + std::to_string(kill_count) + 
-                                      " hits");
-            } else if (kill_count <= 5) {
-                w->log(" ");
-                w->log("%%fg=orange$Could kill you in");
-                w->log("%%fg=orange$" + std::to_string(kill_count) + 
-                                      " hits");
-            } else if (kill_count <= 10) {
-                w->log(" ");
-                w->log("Could kill you in");
-                w->log(std::to_string(kill_count) + " hits");
-            }
+        //
+        // Oh dear. You my friend are toast.
+        //
+        if (monst_kill_count == 0) {
+            monst_kill_count = 1;
+        }
+
+        if (monst_kill_count == 1) {
+            w->log(" ");
+            w->log("%%fg=red$Could kill you in " + std::to_string(monst_kill_count) + " hit!");
+        } else if (monst_kill_count <= 2) {
+            w->log(" ");
+            w->log("%%fg=red$Could kill you in " + std::to_string(monst_kill_count) + " hits");
+        } else if (monst_kill_count <= 10) {
+            w->log(" ");
+            w->log("%%fg=orange$Could kill you in " + std::to_string(monst_kill_count) + " hits");
+        } else {
+            w->log(" ");
+            w->log("Could kill you eventually...");
+        }
+    }
+
+    auto player_max_damage = t->get_damage_max();
+    if (player_max_damage != 0) {
+        auto player_kill_count = t->get_health() / player->get_damage_max();
+
+        //
+        // Oh dear. The monst is toast.
+        //
+        if (player_kill_count == 0) {
+            player_kill_count = 1;
+        }
+
+        if (player_kill_count == 1) {
+            w->log(" ");
+            w->log("You could kill it in " + std::to_string(player_kill_count) + " hit!");
+            w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits");
+        } else if (player_kill_count <= 2) {
+            w->log(" ");
+            w->log("You could kill it in " + std::to_string(player_kill_count) + " hits");
+            w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits");
+        } else if (player_kill_count <= 10) {
+            w->log(" ");
+            w->log("You could kill it in " + std::to_string(player_kill_count) + " hits");
+            w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits");
+        } else {
+            w->log(" ");
+            w->log("%%fg=red$It will take many hits to kill...");
         }
     }
 }
