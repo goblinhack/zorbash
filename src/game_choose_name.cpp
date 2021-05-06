@@ -20,25 +20,25 @@
 #include "my_wid.h"
 #include "my_ui.h"
 
-static Widp wid_keyboard_choose_seed;
+static Widp wid_keyboard_choose_player_name;
 
 static void selected (Widp w, const std::wstring& text)
 {
-    wid_destroy(&wid_keyboard_choose_seed);
-    g_opt_seed_name = wstring_to_string(text);
+    wid_destroy(&wid_keyboard_choose_player_name);
+    g_opt_player_name = wstring_to_string(text);
     game->save_config();
     game->main_menu_select();
 }
 
 static void cancelled (Widp w, const std::wstring& text)
 {
-    wid_destroy(&wid_keyboard_choose_seed);
+    wid_destroy(&wid_keyboard_choose_player_name);
     game->main_menu_select();
 }
 
-void Game::choose_seed_select (void)
+void Game::choose_player_name_select (void)
 {_
-    CON("Choose seed menu");
+    CON("Choose player name menu");
 
     wid_rightbar_fini();
     wid_leftbar_fini();
@@ -47,6 +47,6 @@ void Game::choose_seed_select (void)
     wid_thing_info_fini();
     wid_thing_collect_fini();
 
-    wid_keyboard_choose_seed = 
-        wid_keyboard(L"", L"Enter a name or number for the dungeon seed", selected, cancelled);
+    wid_keyboard_choose_player_name = 
+        wid_keyboard(L"", L"Choose a name for your hapless adventurer", selected, cancelled);
 }

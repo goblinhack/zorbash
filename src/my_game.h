@@ -129,6 +129,7 @@ public:
     void config_sound_select(void);
     void config_top_select(void);
     void choose_seed_select(void);
+    void choose_player_name_select(void);
     void credits_select(void);
     void dead_select(const char *reason);
     void display(void);

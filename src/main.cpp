@@ -531,6 +531,13 @@ static void parse_args (int32_t argc, char *argv[])
             continue;
         }
 
+        if (!strcasecmp(argv[i], "--player-name") ||
+            !strcasecmp(argv[i], "-player-name")) {
+            g_opt_player_name = argv[i + 1];
+            i++;
+            continue;
+        }
+
         //
         // Bad argument.
         //
