@@ -7,6 +7,8 @@
 #include <sstream>
 #include <vector>
 
+#undef DEBUG_C_PLUS_PLUS_SERIALIZER
+
 //
 // 64 bits for serializing is a bit overkill for serializing, so use int
 //
@@ -507,7 +509,7 @@ static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<std::pair<K, V> &> const wrapped)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-    std::cout << "read pair<K,V>" std::endl;
+    std::cout << "read pair<K,V>" << std::endl;
 #endif
     out << bits(wrapped.t.first);
     out << bits(wrapped.t.second);
@@ -519,7 +521,7 @@ static inline std::istream&
 operator>>(std::istream& in, Bits<std::pair<K, V> &> wrapped)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-    std::cout << "write pair<K,V>" std::endl;
+    std::cout << "write pair<K,V>" << std::endl;
 #endif
     in >> bits(wrapped.t.first);
     in >> bits(wrapped.t.second);

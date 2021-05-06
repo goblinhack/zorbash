@@ -144,6 +144,15 @@ std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my)
     return (out);
 }
 
+std::ostream& operator<<(std::ostream &out, Bits<HiScore &> const my)
+{_
+    out << bits(my.t.name);
+    out << bits(my.t.killed_by);
+    out << bits(my.t.score);
+    out << bits(my.t.level_reached);
+    return (out);
+}
+
 std::istream& operator>>(std::istream &in, Bits<HiScores &> my)
 {_
     in >> bits(my.t.hiscores);
