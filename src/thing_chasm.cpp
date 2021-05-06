@@ -15,36 +15,7 @@
 
 void Thing::chasm_tick (void)
 {_
-    if (is_player()) {
-        log("Chasm tick");
-    }
-
-    auto immediate_owner = get_immediate_owner();
-    if (immediate_owner) {
-        if (is_player()) {
-            log("Chasm tick: no, has owner %s", immediate_owner->to_string().c_str());
-        }
-        return;
-    }
-
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_chasm() || 
-        is_the_grid || 
-        is_jumping) { 
-        if (is_player()) {
-            log("Chasm tick: skip");
-        }
-        return;
-    }
-
-    if (is_floating()) {
+    if (is_floating() || is_ethereal()) {
         if (is_player()) {
             log("Chasm tick: no is floating");
         }

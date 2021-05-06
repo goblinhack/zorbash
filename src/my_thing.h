@@ -280,8 +280,8 @@ public:
     bool laser_anim_exists(void);
     bool laser_choose_target(Thingp item);
     bool laser_fire_at(const std::string &item, Thingp target);
-    bool location_check();
-    bool location_check_forced();
+    void location_check();
+    void location_check_forced();
     bool matches(const std::string& what) const;
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
@@ -360,6 +360,7 @@ public:
     const std::string& get_resurrect_dice_str(void) const;
     const std::string& gfx_anim_attack(void) const;
     const std::string& laser_name(void) const;
+    const std::string& name(void) const;
     const std::string& light_color(void) const;
     const std::string& long_text_description(void) const;
     const std::string& on_birth_do(void) const;
@@ -1214,6 +1215,7 @@ public:
     void lifespan_tick();
     void light_update_strength(void);
     void location_check_all_things_at();
+    void location_check_forced_all_things_at();
     void log(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args) const; // compile error without
     void lunge(fpoint tt);

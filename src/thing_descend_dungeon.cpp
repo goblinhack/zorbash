@@ -15,22 +15,6 @@
 
 bool Thing::descend_dungeon_tick (void)
 {_
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
-        return false;
-    }
-
-    if (get_immediate_owner()) {
-        return false;
-    }
-
     if (!is_able_to_change_levels()) {
         return false;
     }

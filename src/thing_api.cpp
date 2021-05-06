@@ -4269,38 +4269,39 @@ int Thing::incr_current_damage (void)
     return (n);
 }
 
+const std::string& Thing::gfx_anim_attack (void) const {_ return (tp()->gfx_anim_attack()); }
+const std::string& Thing::laser_name (void) const {_ return (tp()->laser_name()); }
+const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
+const std::string& Thing::long_text_description (void) const {_ return (tp()->long_text_description()); }
+const std::string& Thing::name (void) const {_ return (tp()->name()); }
+const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do()); }
+const std::string& Thing::on_bite_do (void) const {_ return (tp()->on_bite_do()); }
+const std::string& Thing::on_born_do (void) const {_ return (tp()->on_born_do()); }
+const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
+const std::string& Thing::on_fall_do (void) const {_ return (tp()->on_fall_do()); }
+const std::string& Thing::on_fire_at_do (void) const {_ return (tp()->on_fire_at_do()); }
+const std::string& Thing::on_fire_do (void) const {_ return (tp()->on_fire_do()); }
+const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
+const std::string& Thing::on_lifespan_do (void) const {_ return (tp()->on_lifespan_do()); }
+const std::string& Thing::on_miss_do (void) const {_ return (tp()->on_miss_do()); }
+const std::string& Thing::on_move_do (void) const {_ return (tp()->on_move_do()); }
+const std::string& Thing::on_open_do (void) const {_ return (tp()->on_open_do()); }
+const std::string& Thing::on_tick_do (void) const {_ return (tp()->on_tick_do()); }
+const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
+const std::string& Thing::projectile_name (void) const {_ return (tp()->projectile_name()); }
+const std::string& Thing::short_text_name (void) const {_ return (tp()->short_text_name()); }
+const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on_shoved()); }
 const std::string& Thing::str1 (void) const {_ return (tp()->str1()); }
 const std::string& Thing::str2 (void) const {_ return (tp()->str2()); }
 const std::string& Thing::str3 (void) const {_ return (tp()->str3()); }
 const std::string& Thing::str4 (void) const {_ return (tp()->str4()); }
 const std::string& Thing::str5 (void) const {_ return (tp()->str5()); }
-const std::string& Thing::projectile_name (void) const {_ return (tp()->projectile_name()); }
-const std::string& Thing::laser_name (void) const {_ return (tp()->laser_name()); }
-const std::string& Thing::long_text_description (void) const {_ return (tp()->long_text_description()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }
-const std::string& Thing::text_unused (void) const {_ return (tp()->text_unused()); }
-const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do()); }
-const std::string& Thing::on_use_do (void) const {_ return (tp()->on_use_do()); }
-const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
-const std::string& Thing::on_miss_do (void) const {_ return (tp()->on_miss_do()); }
-const std::string& Thing::on_fall_do (void) const {_ return (tp()->on_fall_do()); }
-const std::string& Thing::on_fire_do (void) const {_ return (tp()->on_fire_do()); }
-const std::string& Thing::on_fire_at_do (void) const {_ return (tp()->on_fire_at_do()); }
-const std::string& Thing::on_tick_do (void) const {_ return (tp()->on_tick_do()); }
-const std::string& Thing::on_lifespan_do (void) const {_ return (tp()->on_lifespan_do()); }
-const std::string& Thing::on_bite_do (void) const {_ return (tp()->on_bite_do()); }
-const std::string& Thing::on_move_do (void) const {_ return (tp()->on_move_do()); }
-const std::string& Thing::on_born_do (void) const {_ return (tp()->on_born_do()); }
-const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
-const std::string& Thing::on_open_do (void) const {_ return (tp()->on_open_do()); }
-const std::string& Thing::text_title (void) const {_ return (tp()->text_title()); }
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }
-const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on_shoved()); }
 const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }
-const std::string& Thing::short_text_name (void) const {_ return (tp()->short_text_name()); }
-const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
+const std::string& Thing::text_title (void) const {_ return (tp()->text_title()); }
+const std::string& Thing::text_unused (void) const {_ return (tp()->text_unused()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }
-const std::string& Thing::gfx_anim_attack (void) const {_ return (tp()->gfx_anim_attack()); }
 
 std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * Thing::get_bag (void)
 {_
