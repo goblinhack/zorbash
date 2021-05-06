@@ -446,7 +446,7 @@ static void usage (void)
 
     CON("zorbash, options:");
     CON(" ");
-    CON(" --new-game");
+    CON(" --quick-start");
     CON(" --debug                     // basic debug");
     CON(" --debug2                    // as above but includes log indentation and more detailed debugs");
     CON(" --debug3                    // as above but show the entire level");
@@ -477,8 +477,8 @@ static void parse_args (int32_t argc, char *argv[])
         //
         // Bad argument.
         //
-        if (!strcasecmp(argv[i], "--new-game") ||
-            !strcasecmp(argv[i], "-new-game")) {
+        if (!strcasecmp(argv[i], "--quick-start") ||
+            !strcasecmp(argv[i], "-quick-start")) {
             g_opt_new_game = true;
             continue;
         }
@@ -834,6 +834,7 @@ int32_t main (int32_t argc, char *argv[])
         CON("INI: Game menu");
         game->main_menu_select();
     }
+
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -5,6 +5,7 @@
 
 #include <math.h> // do not remove
 #include "my_sys.h"
+#include "my_random.h"
 
 double gaussrand (double mean, double stddev)
 {

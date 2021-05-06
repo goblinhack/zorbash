@@ -88,10 +88,10 @@ help()
     cat << %%
 Build options:
 
-usage $0 [options]
+Usage: $0 [options]
 
-        [--dev]  Enable development warnings
-        [--dev2] Enable stack checking
+  [--dev]  Enable development warnings
+  [--dev2] Enable stack checking (SLOW)
 %%
 }
 

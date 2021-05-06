@@ -115,6 +115,7 @@ uint8_t wid_is_always_hidden(Widp w);
 uint8_t wid_is_hidden(Widp w);
 uint8_t wid_receive_input(Widp, const SDL_Keysym *key);
 int wid_get_int_context(Widp);
+void *wid_get_void_context(Widp);
 ThingId wid_get_thing_id_context(Widp);
 ThingId wid_get_thing_id2_context(Widp);
 void wid_always_hidden(Widp, uint8_t value);
@@ -178,6 +179,7 @@ void wid_set_active(Widp);
 void wid_set_bg_tilename(Widp, std::string name);
 void wid_set_color(Widp, wid_color col, color val);
 void wid_set_int_context(Widp w, int);
+void wid_set_void_context(Widp w, void *);
 void wid_set_thing_id_context(Widp w, ThingId);
 void wid_set_thing_id2_context(Widp w, ThingId);
 void wid_set_cursor(Widp, uint32_t val);
@@ -478,6 +480,7 @@ public:
     // Client context
     //
     int int_context {-1};
+    void *void_context {};
     ThingId thing_id_context {NoThingId};
     ThingId thing_id2_context {NoThingId};
 

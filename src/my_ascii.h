@@ -50,8 +50,8 @@ struct ascii_ {
                     TERM_WIDTH_MAX> mouse_over {};
 };
 
-extern int TERM_WIDTH;
-extern int TERM_HEIGHT;
+extern int16_t TERM_WIDTH;
+extern int16_t TERM_HEIGHT;
 
 typedef struct {
     int x;
@@ -162,8 +162,8 @@ void pixel_to_ascii(int *x, int *y);
 
 extern float tile_pix_w;
 extern float tile_pix_h;
-extern int ascii_mouse_x;
-extern int ascii_mouse_y;
+extern int16_t ascii_mouse_x;
+extern int16_t ascii_mouse_y;
 extern struct ascii_ ascii;
 
 #endif
