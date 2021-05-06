@@ -283,11 +283,11 @@ int Thing::is_rrr80(void) const                                         {_ retur
 int Thing::is_rrr81(void) const                                         {_ return (tp()->is_rrr81()); }
 int Thing::is_rrr82(void) const                                         {_ return (tp()->is_rrr82()); }
 int Thing::is_rrr83(void) const                                         {_ return (tp()->is_rrr83()); }
-int Thing::is_indestructible(void) const                                         {_ return (tp()->is_indestructible()); }
+int Thing::is_indestructible(void) const                                {_ return (tp()->is_indestructible()); }
 int Thing::is_bones(void) const                                         {_ return (tp()->is_bones()); }
-int Thing::is_soft_body(void) const                                         {_ return (tp()->is_soft_body()); }
-int Thing::is_foilage(void) const                                         {_ return (tp()->is_foilage()); }
-int Thing::gfx_very_small_shadow_caster(void) const                                         {_ return (tp()->gfx_very_small_shadow_caster()); }
+int Thing::is_soft_body(void) const                                     {_ return (tp()->is_soft_body()); }
+int Thing::is_foilage(void) const                                       {_ return (tp()->is_foilage()); }
+int Thing::gfx_very_small_shadow_caster(void) const                     {_ return (tp()->gfx_very_small_shadow_caster()); }
 int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
 int Thing::is_rrr99(void) const                                         {_ return (tp()->is_rrr99()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
@@ -779,6 +779,29 @@ int Thing::incr_gold (void)
 //con("%s", __FUNCTION__);
     auto n = (monstp->gold++);
     return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// score
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_score (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->score);
+    } else {
+        return (0);
+    }
+}
+
+void Thing::set_score (int v)
+{_
+    if (is_player()) {
+        game->request_update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    monstp->score = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4318,5 +4341,14 @@ const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * Thing::ge
         return (&monstp->bag);
     } else {
         DIE("No bag");
+    }
+}
+
+const std::string &Thing::title (void) const
+{
+    if (g_opt_player_name.empty()) {
+        return text_title();
+    } else {
+        return g_opt_player_name;
     }
 }

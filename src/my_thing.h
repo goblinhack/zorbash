@@ -198,8 +198,6 @@ public:
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void) const;
-    void achieve_goals_in_life();
-    void achieve_goals_in_death();
     bool add_kill(Thingp it);
     bool ai_blocked(void);
     bool ai_blocked_completely(void);
@@ -230,8 +228,6 @@ public:
     bool can_eat(const Thingp it);
     bool carry(Thingp w);
     bool change_owner(Thingp new_owner);
-    void chasm_tick();
-    void barrel_tick();
     bool check_anything_to_carry(void);
     bool collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
@@ -280,8 +276,6 @@ public:
     bool laser_anim_exists(void);
     bool laser_choose_target(Thingp item);
     bool laser_fire_at(const std::string &item, Thingp target);
-    void location_check();
-    void location_check_forced();
     bool matches(const std::string& what) const;
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
@@ -304,8 +298,6 @@ public:
     bool skill_use(Thingp it);
     bool skillbox_id_insert(Thingp what);
     bool skillbox_id_remove(Thingp what);
-    bool thing_sound_play(const std::string &alias);
-    bool thing_sound_play_channel(int chan, const std::string &alias);
     bool spawn_at(const std::string& what);
     bool spawn_at_if_possible(const std::string& what);
     bool spawn_fire(const std::string& what);
@@ -315,6 +307,8 @@ public:
     bool steal_item_from(Thingp);
     bool steal_treasure_from(Thingp);
     bool target_select(Thingp item);
+    bool thing_sound_play(const std::string &alias);
+    bool thing_sound_play_channel(int chan, const std::string &alias);
     bool throw_item_choose_target(Thingp item);
     bool try_harder_to_jump(void);
     bool try_to_carry(Thingp w);
@@ -330,8 +324,8 @@ public:
     bool will_avoid_threat(const point &p);
     bool will_prefer_terrain(const Thingp it);
     const Dice& get_damage_bite_dice(void) const;
-    const Dice& get_damage_melee_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
+    const Dice& get_damage_melee_dice(void) const;
     const Dice& get_gold_value_dice(void) const;
     const Dice& get_health_initial_dice(void) const;
     const Dice& get_lifespan_dice(void) const;
@@ -350,8 +344,8 @@ public:
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
     const std::string get_danger_level_str(Thingp);
     const std::string& get_damage_bite_dice_str(void) const;
-    const std::string& get_damage_melee_dice_str(void) const;
     const std::string& get_damage_crush_dice_str(void) const;
+    const std::string& get_damage_melee_dice_str(void) const;
     const std::string& get_gold_value_dice_str(void) const;
     const std::string& get_health_initial_dice_str(void) const;
     const std::string& get_lifespan_dice_str(void) const;
@@ -360,9 +354,9 @@ public:
     const std::string& get_resurrect_dice_str(void) const;
     const std::string& gfx_anim_attack(void) const;
     const std::string& laser_name(void) const;
-    const std::string& name(void) const;
     const std::string& light_color(void) const;
     const std::string& long_text_description(void) const;
+    const std::string& name(void) const;
     const std::string& on_birth_do(void) const;
     const std::string& on_bite_do(void) const;
     const std::string& on_born_do(void) const;
@@ -390,6 +384,7 @@ public:
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;
     const std::string& text_unused(void) const;
+    const std::string& title(void) const;
     const std::string& weapon_carry_anim(void) const;
     float get_bounce(void);
     float get_bounce_fade(void) const;
@@ -509,9 +504,9 @@ public:
     int get_charge_count(void) const;
     int get_current_damage(void) const;
     int get_damage_bite(void) const;
+    int get_damage_crush(void) const;
     int get_damage_max(void);
     int get_damage_melee(void) const;
-    int get_damage_crush(void) const;
     int get_damage_min(void);
     int get_danger_level(Thingp);
     int get_danger_level(void);
@@ -533,6 +528,7 @@ public:
     int get_owned_count(void) const;
     int get_poison(void) const;
     int get_resurrect(void) const;
+    int get_score(void) const;
     int get_spawned_count(void) const;
     int get_stamina(void) const;
     int get_stamina_max(void) const;
@@ -575,6 +571,7 @@ public:
     int gfx_show_outlined(void) const;
     int gfx_shown_in_bg(void) const;
     int gfx_small_shadow_caster(void) const;
+    int gfx_very_small_shadow_caster(void) const;
     int gfx_water(void) const;
     int gfx_weapon_carry_anim(void) const;
     int hates_acid(void) const;
@@ -672,7 +669,9 @@ public:
     int is_bleeder(void) const;
     int is_blood(void) const;
     int is_blood_splatter(void) const;
+    int is_bones(void) const;
     int is_brazier(void) const;
+    int is_bridge(void) const;
     int is_burnable(void) const;
     int is_carrier_of_treasure_class_a(void) const;
     int is_carrier_of_treasure_class_b(void) const;
@@ -699,6 +698,7 @@ public:
     int is_dirt(void) const;
     int is_door(void) const;
     int is_droppable(void) const;
+    int is_dry_fungus(void) const;
     int is_ethereal(void) const;
     int is_ethereal_minion_generator(void) const;
     int is_explosion(void) const;
@@ -708,6 +708,7 @@ public:
     int is_floating(void) const;
     int is_floor(void) const;
     int is_floor_deco(void) const;
+    int is_foilage(void) const;
     int is_food(void) const;
     int is_food_eater(void) const;
     int is_gold(void) const;
@@ -717,6 +718,7 @@ public:
     int is_hit_by(Thingp hitter, int damage);
     int is_humanoid(void) const;
     int is_hunger_insatiable(void) const;
+    int is_indestructible(void) const;
     int is_intelligent(void) const;
     int is_interesting(void) const;
     int is_item(void) const;
@@ -843,14 +845,7 @@ public:
     int is_rrr81(void) const;
     int is_rrr82(void) const;
     int is_rrr83(void) const;
-    int is_indestructible(void) const;
-    int is_bones(void) const;
-    int is_soft_body(void) const;
-    int is_foilage(void) const;
-    int gfx_very_small_shadow_caster(void) const;
-    int is_dry_fungus(void) const;
     int is_rrr9(void) const;
-    int is_bridge(void) const;
     int is_rrr99(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
@@ -860,6 +855,7 @@ public:
     int is_shown_uniquely_on_leftbar(void) const;
     int is_skill(void) const;
     int is_smoke(void) const;
+    int is_soft_body(void) const;
     int is_spawner(void) const;
     int is_stamina_check(void) const;
     int is_steal_item_chance_d1000(void) const;
@@ -1128,10 +1124,13 @@ public:
     uint8_t is_less_preferred_terrain(point p);
     uint8_t is_visible() const;
     uint8_t z_prio (void) const;
+    void achieve_goals_in_death();
+    void achieve_goals_in_life();
     void acid_tick();
     void add_enemy(Thingp attacker);
     void ai_get_next_hop(void);
     void animate();
+    void barrel_tick();
     void blit(int fbo);
     void blit_end_reflection_submerged(uint8_t submerged) const;
     void blit_end_submerged(uint8_t submerged) const;
@@ -1148,6 +1147,7 @@ public:
     void botcon_(const char *fmt, va_list args) const; // compile error without
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
     void brazier_tick();
+    void chasm_tick();
     void clear_age_map(void);
     void clear_dmap_scent(void);
     void collision_check_do();
@@ -1214,7 +1214,9 @@ public:
     void level_push(void);
     void lifespan_tick();
     void light_update_strength(void);
+    void location_check();
     void location_check_all_things_at();
+    void location_check_forced();
     void location_check_forced_all_things_at();
     void log(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args) const; // compile error without
@@ -1264,6 +1266,7 @@ public:
     void set_minion_owner(Thingp minion_owner);
     void set_msg(const std::string&);
     void set_owner(Thingp owner);
+    void set_score(int);
     void set_spawned_owner(Thingp spawner_owner);
     void set_submerged_offset(int);
     void set_wobble(float);

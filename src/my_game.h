@@ -8,6 +8,7 @@
 #define _MY_GAME_H_
 
 #include "my_world.h"
+#include "my_hiscore.h"
 #include <list>
 
 class WidBag;
@@ -103,6 +104,11 @@ public:
     uint32_t           sound_volume                 = {};
     uint8_t            tile_height                  = {};
     uint8_t            tile_width                   = {};
+
+    //
+    // Ok, not really config...
+    //
+    HiScores hiscores;
 
     void fini(void);
     void reset(void);

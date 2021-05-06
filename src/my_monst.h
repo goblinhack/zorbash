@@ -58,6 +58,7 @@ public:
     int          bag_width {};
     int          bounce_count = {};
     int          gold = {};
+    int          score = {};
     int          health = {};
     int          health_max = {};
     int          keys = {};

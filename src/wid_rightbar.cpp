@@ -177,11 +177,7 @@ static void wid_rightbar_create (void)
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
 
         wid_set_pos(w, tl, br);
-        if (g_opt_player_name.empty()) {
-            wid_set_text(w, player->text_title());
-        } else {
-            wid_set_text(w, g_opt_player_name);
-        }
+        wid_set_text(w, player->title());
         wid_set_shape_none(w);
     }
 
