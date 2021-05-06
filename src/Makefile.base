@@ -26,6 +26,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/font.o                        \
     $(OBJDIR)/game.o                        \
     $(OBJDIR)/gauss.o                       \
+    $(OBJDIR)/hiscore.o                     \
     $(OBJDIR)/game_config.o                 \
     $(OBJDIR)/game_config_gfx.o             \
     $(OBJDIR)/game_config_keyboard.o        \

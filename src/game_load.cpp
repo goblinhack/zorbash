@@ -621,6 +621,8 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* std::string        player name                  */ in >> bits(g_opt_player_name);
     /* std::string        seed name                    */ in >> bits(g_opt_seed_name);
 
+    in >> bits(my.t.hiscores);
+
     if (!my.t.game_pix_zoom) {
         ERR("Loading, game_pix_zoom is zero");
         my.t.game_pix_zoom = 3;
