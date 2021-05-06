@@ -18,46 +18,50 @@ void Thing::brazier_tick (void)
     //
     // This is for if you land on a brazier
     //
-    if (level->is_brazier(mid_at.x, mid_at.y)) {
-        static const std::vector<fpoint> all_deltas = {
-            fpoint(-1, -1),
-            fpoint( 1, -1),
-            fpoint(-1,  1),
-            fpoint( 1,  1),
-            fpoint(0, -1),
-            fpoint(-1, 0),
-            fpoint(1, 0),
-            fpoint(0, 1),
-        };
-
-        FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_OBJ) {
-            auto tpp = t->tp();
-            if (!tpp->is_brazier()) {
-                continue;
-            }
-
-            if (t->is_dead) {
-                continue;
-            }
-
-            for (auto i = 0; i < 9; i++) {
-                auto delta = get(all_deltas, random_range(0, (int)all_deltas.size()));
-                if (try_to_shove(t, delta)) {
-                    if (!is_dead) {
-                        if (is_player()) {
-                            TOPCON("You knock over the brazier!");
-                        }
-                    }
-                    return;
-                }
-            }
-
-            if (!is_dead) {
-                if (random_range(0, 100) < 20) {
-                    TOPCON("You stumble into the flames!");
-                    set_on_fire("stumedled into flames");
-                }
-            }
-        } FOR_ALL_THINGS_END()
+    if (!level->is_brazier(mid_at.x, mid_at.y)) {
+        return;
     }
+
+    static const std::vector<fpoint> all_deltas = {
+        fpoint(-1, -1),
+        fpoint( 1, -1),
+        fpoint(-1,  1),
+        fpoint( 1,  1),
+        fpoint(0, -1),
+        fpoint(-1, 0),
+        fpoint(1, 0),
+        fpoint(0, 1),
+    };
+
+    FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_OBJ) {
+        if (!t->is_brazier()) {
+            continue;
+        }
+
+        //
+        // Ignore knocked over braziers.
+        //
+        if (t->is_dead) {
+            continue;
+        }
+
+        for (auto i = 0; i < 9; i++) {
+            auto delta = get(all_deltas, random_range(0, (int)all_deltas.size()));
+            if (try_to_shove(t, delta)) {
+                if (!is_dead) {
+                    if (is_player()) {
+                        TOPCON("You knock over the brazier!");
+                    }
+                }
+                return;
+            }
+        }
+
+        if (!is_dead) {
+            if (random_range(0, 100) < 20) {
+                TOPCON("You stumble into the flames!");
+                set_on_fire("stumedled into flames");
+            }
+        }
+    } FOR_ALL_THINGS_END()
 }

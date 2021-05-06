@@ -17,19 +17,6 @@
 
 void Thing::fungus_tick (void)
 {_
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_the_grid || 
-        is_jumping) { 
-        return;
-    }
-
     if (!level->is_dry_fungus(mid_at.x, mid_at.y)) {
         return;
     }
@@ -47,12 +34,11 @@ void Thing::fungus_tick (void)
     }
 
     FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2) {
-        auto tpp = t->tp();
-        if (!tpp->is_dry_fungus()) {
+        if (!t->is_dry_fungus()) {
             continue;
         }
 
-        if (tpp->name() != "dry_fungus") {
+        if (t->name() != "dry_fungus") {
             return;
         }
 

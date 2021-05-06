@@ -16,18 +16,6 @@
 
 void Thing::acid_tick (void)
 {_
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
-        return;
-    }
-
     if (!hates_acid()) {
         return;
     }
@@ -54,15 +42,11 @@ void Thing::acid_tick (void)
 
     if (hit) {
         FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2) {
-            auto tpp = t->tp();
-            if (!tpp->is_acid()) {
+            if (!t->is_acid()) {
                 continue;
             }
-            if (t->get_tick() < game->tick_current) {
-                t->set_tick(game->tick_current);
-                is_hit_by(t, t->get_damage_melee());
-                break;
-            }
+            is_hit_by(t, t->get_damage_melee());
+            break;
         } FOR_ALL_THINGS_END()
     } else {
         if (is_player()) {

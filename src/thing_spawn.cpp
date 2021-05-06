@@ -97,7 +97,7 @@ _
     // Check if we are newly spawned over a chasm
     // Or if something we spawned at needs to react to us
     //
-    c->location_check_all_things_at();
+    c->location_check_forced_all_things_at();
 
     return true;
 }
@@ -178,7 +178,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     // Check if we are newly spawned over a chasm
     // Or if something we spawned at needs to react to us
     //
-    c->location_check_all_things_at();
+    c->location_check_forced_all_things_at();
 
     return true;
 }
@@ -251,7 +251,7 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
             // Check if we are newly spawned over a chasm
             // Or if something we spawned at needs to react to us
             //
-            c->location_check_all_things_at();
+            c->location_check_forced_all_things_at();
         }
     }
 
@@ -311,7 +311,7 @@ bool Thing::spawn_fire (const std::string& what)
     // Check if we are newly spawned over a chasm
     // Or if something we spawned at needs to react to us
     //
-    c->location_check_all_things_at();
+    c->location_check_forced_all_things_at();
 
     return true;
 }
@@ -350,7 +350,7 @@ bool Thing::spawn_at_if_possible (const std::string& what)
     // Check if we are newly spawned over a chasm
     // Or if something we spawned at needs to react to us
     //
-    c->location_check_all_things_at();
+    c->location_check_forced_all_things_at();
 
     return true;
 }
@@ -383,7 +383,7 @@ bool Thing::spawn_at (const std::string& what)
     // Check if we are newly spawned over a chasm
     // Or if something we spawned at needs to react to us
     //
-    c->location_check_all_things_at();
+    c->location_check_forced_all_things_at();
 
     return true;
 }

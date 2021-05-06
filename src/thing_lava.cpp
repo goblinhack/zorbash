@@ -17,25 +17,6 @@
 
 void Thing::lava_tick (void)
 {_
-    if (is_player()) {
-        log("Lava tick");
-    }
-
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
-        if (is_player()) {
-            log("Lava tick: no, not relevent");
-        }
-        return;
-    }
-
     if (!hates_fire()) {
         if (is_player()) {
             log("Lava tick: no, not a fire avoider");
@@ -68,11 +49,10 @@ void Thing::lava_tick (void)
 
     if (hit) {
         FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LAVA) {
-            if (!is_lava()) {
+            if (!t->is_lava()) {
                 continue;
             }
 
-            log("Lava can attack as behind game tick %d", game->tick_current);
             is_hit_by(t, t->get_damage_melee());
             break;
         } FOR_ALL_THINGS_END()

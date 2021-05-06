@@ -15,26 +15,6 @@
 
 void Thing::fire_tick (void)
 {_
-    if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_the_grid || 
-        is_jumping) { 
-        if (g_opt_debug4) {
-            log("No, not relevent");
-        }
-        return;
-    }
-
-    if (g_opt_debug4) {
-        log("Fire tick");
-    }
-
     fpoint at = get_interpolated_mid_at();
     if (is_burnable() || is_combustible() || is_very_combustible()) {
         //

@@ -71,13 +71,18 @@ void Thing::move_finish (void)
     set_where_i_dropped_an_item_last(point(-1, -1));
     move_reset_timestamps();
 
-    log("Move to %f,%f finished", mid_at.x, mid_at.y);
+    if (!is_hidden) {
+        log("Move to %f,%f finished", mid_at.x, mid_at.y);
+    }
+
     update_interpolated_position();
 }
 
 bool Thing::move (fpoint future_pos)
 {_
-    log("Move to %f,%f", future_pos.x, future_pos.y);
+    if (!is_hidden) {
+        log("Move to %f,%f", future_pos.x, future_pos.y);
+    }
 
     //
     // Don't let minions wander too far
@@ -345,14 +350,6 @@ void Thing::update_interpolated_position (void)
         z_depth = tpp->z_depth;
     }
 
-#if 0
-    //
-    // We don't want to hit lava twice as we move onto it, so only do the location
-    // check if we really move.
-    //
-    bool do_location_check = false;
-#endif
-
     if (is_jumping) {
         float t = get_timestamp_jump_end() - get_timestamp_jump_begin();
         float dt = time_get_time_ms_cached() - get_timestamp_jump_begin();
@@ -370,16 +367,12 @@ void Thing::update_interpolated_position (void)
         update_pos = true;
         new_pos.x = last_mid_at.x + dx * step;
         new_pos.y = last_mid_at.y + dy * step;
-#if 0
-        do_location_check = false;
-#endif
     } else if (!get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
-#if 0
-            do_location_check = true;
-#endif
-            log("Changed position (new %f, %f, old %f,%f)",
-                mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+            if (!is_hidden) {
+                log("Changed position (new %f, %f, old %f,%f)",
+                    mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+            }
 
             update_pos = true;
             new_pos = mid_at;
@@ -389,11 +382,10 @@ void Thing::update_interpolated_position (void)
         }
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
-#if 0
-            do_location_check = true;
-#endif
-            log("End of move position (new %f, %f, old %f,%f)",
-                mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+            if (!is_hidden) {
+                log("End of move position (new %f, %f, old %f,%f)",
+                    mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+            }
 
             update_pos = true;
             new_pos = mid_at;
@@ -446,18 +438,14 @@ void Thing::update_interpolated_position (void)
         // For now only the player has a calculated light
         //
         update_light();
-
-#if 0
-        if (do_location_check) {
-            location_check();
-        }
-#endif
     }
 }
 
 void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
 {_
-    log("Update pos to %f,%f", to.x, to.y);
+    if (!is_hidden) {
+        log("Update pos to %f,%f", to.x, to.y);
+    }
 
     auto tpp = tp();
     point new_at((int)to.x, (int)to.y);
@@ -512,7 +500,9 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
         return;
     }
 
-    log("Move to %f,%f speed %d", to.x, to.y, move_speed);
+    if (!is_hidden) {
+        log("Move to %f,%f speed %d", to.x, to.y, move_speed);
+    }
     level_pop();
     mid_at = to;
     level_push();

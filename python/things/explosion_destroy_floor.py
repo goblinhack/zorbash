@@ -15,7 +15,6 @@ def tp_init(name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_able_to_fall(False)
     x.set_is_floating(True)
-    x.set_is_interesting(False)
     x.set_is_loggable_for_important_stuff(False)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_on_death_do("explosion_destroy_floor.on_death()")
