@@ -41,6 +41,7 @@ extern bool g_opt_new_game;           // Start in the game imediately
 extern bool g_quitting;               // Exitting the game
 extern bool g_render_black_and_white; // Rendering map in black and white
 extern std::string g_opt_seed_name;
+extern std::string g_opt_player_name;
 
 extern int TILES_ACROSS;
 extern int TILES_DOWN;

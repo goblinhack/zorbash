@@ -618,6 +618,8 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           music_volume                 */ in >> bits(my.t.music_volume                 );
     /* uint32_t           sdl_delay                    */ in >> bits(my.t.sdl_delay                    );
     /* uint32_t           sound_volume                 */ in >> bits(my.t.sound_volume                 );
+    /* std::string        player name                  */ in >> bits(g_opt_player_name);
+    /* std::string        seed name                    */ in >> bits(g_opt_seed_name);
 
     if (!my.t.game_pix_zoom) {
         ERR("Loading, game_pix_zoom is zero");

@@ -34,6 +34,7 @@ bool g_quitting;               // Exitting the game
 bool g_render_black_and_white; // Rendering map in black and white
 
 std::string g_opt_seed_name;
+std::string g_opt_player_name;
 
 int TILES_ACROSS;
 int TILES_DOWN;

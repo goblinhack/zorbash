@@ -117,6 +117,13 @@ static uint8_t game_main_menu_choose_seed (Widp w, int32_t x, int32_t y, uint32_
     return false;
 }
 
+static uint8_t game_main_menu_choose_player_name (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    game->choose_player_name_select();
+    game_main_menu_destroy();
+    return false;
+}
+
 static uint8_t game_main_menu_credits_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     game->credits_select();
@@ -348,6 +355,11 @@ static void game_main_menu_tick (Widp w)
         auto seed_name = "Seed: '" + g_opt_seed_name + "'";
         ascii_putf(1, TERM_HEIGHT - 4, YELLOW, BLACK, string_to_wstring(seed_name));
     }
+
+    if (!g_opt_player_name.empty()) {
+        auto player_name = "Player name: '" + g_opt_player_name + "'";
+        ascii_putf(1, TERM_HEIGHT - 6, YELLOW, BLACK, string_to_wstring(player_name));
+    }
 }
 
 void Game::main_menu_select (void)
@@ -368,8 +380,8 @@ void Game::main_menu_select (void)
 
     game->wid_thing_info_destroy_immediate();
 
-    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 24);
-    point br = make_point(TERM_WIDTH - 7, TERM_HEIGHT - 1);
+    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 26);
+    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
     game_main_menu_window = new WidPopup("Main menu",
@@ -416,6 +428,18 @@ void Game::main_menu_select (void)
         wid_set_on_mouse_up(w, game_main_menu_choose_seed);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose seed");
+    }
+    y_at += 3;
+    {_
+        auto p = game_main_menu_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Choose player name");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, game_main_menu_choose_player_name);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose player name");
     }
     y_at += 3;
     {_

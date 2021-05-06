@@ -510,6 +510,8 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* uint32_t           music_volume                 */ out << bits(my.t.music_volume                 );
     /* uint32_t           sdl_delay                    */ out << bits(my.t.sdl_delay                    );
     /* uint32_t           sound_volume                 */ out << bits(my.t.sound_volume                 );
+    /* std::string        player name                  */ out << bits(g_opt_player_name);
+    /* std::string        seed name                    */ out << bits(g_opt_seed_name);
     return (out);
 }
 
