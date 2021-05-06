@@ -16,10 +16,10 @@
 
 struct ascii_ ascii;
 
-int TERM_WIDTH;
-int TERM_HEIGHT;
-int ascii_mouse_x;
-int ascii_mouse_y;
+int16_t TERM_WIDTH;
+int16_t TERM_HEIGHT;
+int16_t ascii_mouse_x;
+int16_t ascii_mouse_y;
 
 class AsciiCell {
 public:

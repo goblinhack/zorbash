@@ -16,7 +16,6 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     x.set_gfx_shown_in_bg(True)
     x.set_is_able_to_fall(True)
     x.set_is_bridge(True)
-    x.set_is_combustible(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_described_when_hovering_over(True)
     x.set_is_interesting(True)

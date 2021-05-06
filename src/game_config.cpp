@@ -205,7 +205,7 @@ static uint8_t game_config_top_key_down (Widp w, const struct SDL_Keysym *key)
 
 void Game::config_top_select (void)
 {_
-    CON("Main menu");
+    CON("Config menu");
 
     if (game_config_top_window) {
         game_config_top_destroy();
@@ -225,7 +225,7 @@ void Game::config_top_select (void)
                 TERM_HEIGHT / 2 + 14);
     auto width = br.x - tl.x - 2;
 
-    game_config_top_window = new WidPopup("Main menu",
+    game_config_top_window = new WidPopup("Config menu",
                                           tl, br, nullptr, "nothing", false, false);
     {_
         Widp w = game_config_top_window->wid_popup_container;

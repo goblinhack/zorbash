@@ -36,7 +36,6 @@ def tp_init(name):
     x.set_is_described_when_hovering_over(True)
     x.set_is_door(True)
     x.set_is_burnable(True)
-    x.set_is_combustible(True)
     x.set_is_active(True) # So it can interact with fire
     x.set_is_light_blocker(True)
     x.set_is_movement_blocking_hard(True)

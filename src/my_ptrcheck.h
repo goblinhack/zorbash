@@ -6,6 +6,7 @@
 #include <string>
 #include <ctime>
 #include "my_globals.h"
+#include "my_callstack.h"
 
 //
 // __FUNCTION__ is not a preprocessor directive so we can't convert it into a
@@ -46,7 +47,7 @@ void ptrcheck_leak_print(void);
 
 #define newptr(__ptr__, __what__)                                 \
 {                                                                 \
-    if (g_opt_debug4) {_                                           \
+    if (g_opt_debug4) {_                                          \
         ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), \
                        PTRCHECK_AT);                              \
     }                                                             \
@@ -54,14 +55,14 @@ void ptrcheck_leak_print(void);
 
 #define oldptr(__ptr__)                                           \
 {                                                                 \
-    if (g_opt_debug4) {_                                           \
+    if (g_opt_debug4) {_                                          \
         ptrcheck_free((__ptr__), PTRCHECK_AT);                    \
     }                                                             \
 }
 
 #define verify(__ptr__)                                           \
 {                                                                 \
-    if (g_opt_debug4) {_                                           \
+    if (g_opt_debug4) {_                                          \
         static std::string a = std::string(__FILE__);             \
         static std::string b = std::string(__PRETTY_FUNCTION__);  \
         ptrcheck_verify((__ptr__), a, b, __LINE__);               \

@@ -379,6 +379,16 @@ int wid_get_int_context (Widp w)
     return (w->int_context);
 }
 
+void wid_set_void_context (Widp w, void *void_context)
+{_
+    w->void_context = void_context;
+}
+
+void *wid_get_void_context (Widp w)
+{_
+    return (w->void_context);
+}
+
 void wid_set_thing_id_context (Widp w, ThingId thing_id_context)
 {_
     w->thing_id_context = thing_id_context;
@@ -3943,6 +3953,10 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
         return nullptr;
     }
 
+    if (!w->visible) {
+        return nullptr;
+    }
+
     if (wid_ignore_events(w)) {
         return nullptr;
     }
@@ -4015,6 +4029,10 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
         return nullptr;
     }
 
+    if (!w->visible) {
+        return nullptr;
+    }
+
     if (wid_ignore_events(w)) {
         return nullptr;
     }
@@ -4077,6 +4095,10 @@ static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
         return nullptr;
     }
 
+    if (!w->visible) {
+        return nullptr;
+    }
+
     if (wid_ignore_events(w)) {
         return nullptr;
     }
@@ -4121,6 +4143,10 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
                                        uint8_t strict)
 {_
     if (!w) {
+        return nullptr;
+    }
+
+    if (!w->visible) {
         return nullptr;
     }
 
@@ -4193,6 +4219,10 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
 static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t strict)
 {_
     if (!w) {
+        return nullptr;
+    }
+
+    if (!w->visible) {
         return nullptr;
     }
 

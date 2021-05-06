@@ -25,11 +25,13 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/file_log.o                    \
     $(OBJDIR)/font.o                        \
     $(OBJDIR)/game.o                        \
+    $(OBJDIR)/gauss.o                       \
     $(OBJDIR)/game_config.o                 \
     $(OBJDIR)/game_config_gfx.o             \
     $(OBJDIR)/game_config_keyboard.o        \
     $(OBJDIR)/game_config_other.o           \
     $(OBJDIR)/game_config_sound.o           \
+    $(OBJDIR)/game_choose_seed.o            \
     $(OBJDIR)/game_credits.o                \
     $(OBJDIR)/game_dead.o                   \
     $(OBJDIR)/game_display.o                \
@@ -266,6 +268,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/util.o                        \
     $(OBJDIR)/wid.o                         \
     $(OBJDIR)/wid_bag.o                     \
+    $(OBJDIR)/wid_keyboard.o                \
     $(OBJDIR)/wid_botcon.o                  \
     $(OBJDIR)/wid_console.o                 \
     $(OBJDIR)/wid_inventory.o               \
