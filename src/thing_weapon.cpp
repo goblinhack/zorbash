@@ -457,8 +457,28 @@ _
     for (const auto& d : all_deltas) {
         auto hit_at = mid_at + fpoint(d.x, d.y);
 
+        //
+        // Find the alternative best thing to hit
+        //
         FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y) {
-            auto prio = t->collision_hit_priority() + get_danger_current_level(t);
+            int prio;
+            //
+            // Get the most important thing to hit.
+            //
+            if (t->is_dead) {
+                continue;
+            } else if (t->is_monst()) {
+                prio = t->collision_hit_priority() + get_danger_current_level(t);
+
+                //
+                // Make sure we prefer monsts over things like doors if there is
+                // a choice.
+                //
+                prio += 100;
+            } else {
+                prio = t->collision_hit_priority();
+            }
+
             if (prio > best_priority) {
                 best_priority = prio;
                 best_hit_at = hit_at;

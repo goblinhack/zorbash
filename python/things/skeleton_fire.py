@@ -59,6 +59,8 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
+    x.set_attack_humanoid(True)
+    x.set_attack_living(True)
     x.set_is_weapon_wielder(True)
     x.set_light_color("yellow")
     x.set_light_strength(2)

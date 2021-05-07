@@ -16,6 +16,18 @@ def on_use(owner, item, target, x, y):
         if zx.if_matches(owner, "is_player"):
             zx.topcon("Hm. That potion didn't seem to do anything.")
 
+def explode(me, x, y):
+    zx.thing_msg(me, "The potion of health explodes.")
+    zx.level_spawn_at_thing(me, "explosion_minor")
+    zx.level_spawn_fire_around_thing(me, "fire")
+    zx.thing_killed(me, "exploded")
+
+def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+    explode(me, x, y)
+
+def on_fall(me, x, y):
+    explode(me, x, y)
+
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_hates_fire(100)
@@ -52,6 +64,8 @@ def tp_init(name, text_name, short_text_name):
     x.set_long_text_description("Restores you to 80 percent health")
     x.set_normal_placement_rules(True)
     x.set_on_use_do("potion_health.on_use()")
+    x.set_on_hit_do("potion_health.on_hit()")
+    x.set_on_fall_do("potion_health.on_fall()")
     x.set_text_a_or_an("a")
     x.set_text_description("%%fg=pink$A potion of health restoration.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
