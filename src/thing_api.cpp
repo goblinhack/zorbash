@@ -804,6 +804,16 @@ void Thing::set_score (int v)
     monstp->score = v;
 }
 
+void Thing::incr_score (int v)
+{_
+    if (is_player()) {
+        game->request_update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    monstp->score += v;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // keys
 ////////////////////////////////////////////////////////////////////////////

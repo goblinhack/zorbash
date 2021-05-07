@@ -201,7 +201,7 @@ Tpp Level::tp_random_monst_easy (const point &p)
         }
     }
 
-    auto player_danger_level = current_player->get_danger_level();
+    auto player_danger_level = current_player->get_danger_initial_level();
 
     auto tries = 0U;
     for (;;) {
@@ -239,7 +239,7 @@ Tpp Level::tp_random_monst_hard (const point &p)
         }
     }
 
-    auto player_danger_level = current_player->get_danger_level();
+    auto player_danger_level = current_player->get_danger_initial_level();
 
     auto tries = 0U;
     for (;;) {

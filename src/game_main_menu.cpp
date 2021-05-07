@@ -387,7 +387,7 @@ void Game::main_menu_select (void)
 
     game->wid_thing_info_destroy_immediate();
 
-    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 29);
+    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 26);
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
@@ -412,6 +412,7 @@ void Game::main_menu_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$N%%fg=reset$ew game%%fg=reset$");
     }
+#if 0
     y_at += 3;
     {_
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
@@ -424,6 +425,7 @@ void Game::main_menu_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Quick %%fg=white$S%%fg=reset$tart");
     }
+#endif
     y_at += 3;
     {_
         auto p = game_main_menu_window->wid_text_area->wid_text_area;

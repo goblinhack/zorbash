@@ -50,7 +50,7 @@ def tp_init(name, text_name, short_text_name, title):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_health_hunger_pct(5)
-    x.set_health_initial_dice("20d10")
+    x.set_health_initial_dice("100")
     x.set_health_starving_pct(5)
     x.set_is_able_to_change_levels(True)
     x.set_is_able_to_fall(True)

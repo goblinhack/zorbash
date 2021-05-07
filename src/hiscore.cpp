@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_hiscore.h"
@@ -41,10 +43,11 @@ void HiScores::add_new_hiscore (Thingp player,
                     name,
                     player->get_score(),
                     (player->level->world_at.z + 1) / 2,
-                    player->title() + ", " + killed_by));
+                    killed_by));
 
             hiscores.resize(HiScore::max);
 
+            game->save_config();
             return;
         }
 
@@ -96,16 +99,16 @@ bool HiScores::is_new_highest_hiscore (Thingp player)
 const char *HiScores::place_str (Thingp player)
 {
     const char *which[HiScore::max_displayed] = {
-        "First!",
-        "Second",
-        "Third",
-        "Fourth",
-        "Fifth",
-        "Sixth",
-        "Seventh",
-        "Eighth",
-        "Nineth",
-        "Tenth",
+        "first",
+        "second",
+        "third",
+        "fourth",
+        "fifth",
+        "sixth",
+        "seventh",
+        "eighth",
+        "nineth",
+        "tenth",
     };
 
     if (!player->get_score()) {
@@ -155,7 +158,12 @@ std::ostream& operator<<(std::ostream &out, Bits<HiScore &> const my)
 
 std::istream& operator>>(std::istream &in, Bits<HiScores &> my)
 {_
+    my.t.hiscores.resize(0);
     in >> bits(my.t.hiscores);
+    for (auto h : my.t.hiscores) {
+        CON("Loaded Hiscore: %s, %d killed by %s", h.name.c_str(), h.score, h.killed_by.c_str());
+    }
+
     return in;
 }
 

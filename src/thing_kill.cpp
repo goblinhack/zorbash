@@ -26,7 +26,6 @@ void Thing::kill (Thingp killer, const char *reason)
     ///////////////////////////////////////////////////////////////
     // WARNING: killer can be nullptr
     ///////////////////////////////////////////////////////////////
-    //
     auto is_corpse_currently = is_corpse();
 
     //
@@ -109,6 +108,8 @@ void Thing::kill (Thingp killer, const char *reason)
                 } else {
                     TOPCON("%s is destroyed %s.", text_The().c_str(), reason);
                 }
+
+                killer->score_add(this);
             }
         }
     }
@@ -182,6 +183,17 @@ void Thing::kill (Thingp killer, const char *reason)
                 err("Could not place blood");
                 break;
             }
+        }
+    }
+
+    //
+    // Add to the hiscore table?
+    //
+    if (is_player()) {
+        if (game->config.hiscores.is_new_hiscore(this)) {
+            TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", 
+                   game->config.hiscores.place_str(this));
+            game->config.hiscores.add_new_hiscore(this, title(), reason);
         }
     }
 

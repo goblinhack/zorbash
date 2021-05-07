@@ -11,6 +11,7 @@
 #include "my_thing_template.h"
 #include "my_py_thing.h"
 #include "my_array_bounds_check.h"
+#include "my_hiscore.h"
 #include "my_ptrcheck.h"
 
 #define THING_BODY_SET_INT(__func__, __api__)                                       \
@@ -404,6 +405,7 @@ PyObject *thing_killed_by (PyObject *obj, PyObject *args, PyObject *keywds)
 
     owner->log("Killed by %s, reason %s", killer->to_string().c_str(), reason);
     owner->dead(killer, "%s", reason);
+
     Py_RETURN_NONE;	
 }
 
