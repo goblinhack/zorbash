@@ -118,7 +118,7 @@ PyObject *level_is_movement_blocking_hard_at(PyObject *obj, PyObject *args, PyOb
 PyObject *level_is_movement_blocking_soft_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_no_tile_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_on_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_on_firing_at_something(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_player_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_loves_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);

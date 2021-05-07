@@ -406,7 +406,7 @@ private:
     std::string _on_miss_do;
     std::string _on_fire_do;
     std::string _on_fall_do;
-    std::string _on_fire_at_do;
+    std::string _on_firing_at_something_do;
     std::string _on_tick_do;
     std::string _on_lifespan_do;
     std::string _on_bite_do;
@@ -499,7 +499,7 @@ public:
     const std::string& on_born_do(void) const;
     const std::string& on_death_do(void) const;
     const std::string& on_fall_do(void) const;
-    const std::string& on_fire_at_do(void) const;
+    const std::string& on_firing_at_something_do(void) const;
     const std::string& on_fire_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_idle_dice_str(void) const;
@@ -1169,7 +1169,7 @@ public:
     void set_on_death_drop_all_items(int);
     void set_on_death_is_open(int);
     void set_on_fall_do(const std::string &);
-    void set_on_fire_at_do(const std::string &);
+    void set_on_firing_at_something_do(const std::string &);
     void set_on_fire_do(const std::string &);
     void set_on_hit_do(const std::string &);
     void set_on_idle_dice(const std::string &);

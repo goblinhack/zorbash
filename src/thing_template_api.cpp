@@ -72,7 +72,7 @@ const std::string& Tp::on_lifespan_do(void) const        { return _on_lifespan_d
 const std::string& Tp::on_miss_do(void) const            { return _on_miss_do; }
 const std::string& Tp::on_fall_do(void) const            { return _on_fall_do; }
 const std::string& Tp::on_fire_do(void) const            { return _on_fire_do; }
-const std::string& Tp::on_fire_at_do(void) const         { return _on_fire_at_do; }
+const std::string& Tp::on_firing_at_something_do(void) const         { return _on_firing_at_something_do; }
 const std::string& Tp::on_tick_do(void) const            { return _on_tick_do; }
 const std::string& Tp::on_move_do(void) const            { return _on_move_do; }
 const std::string& Tp::on_open_do(void) const            { return _on_open_do; }
@@ -759,7 +759,7 @@ void Tp::set_on_lifespan_do(const std::string &v)        { _on_lifespan_do = v; 
 void Tp::set_on_miss_do(const std::string &v)            { _on_miss_do = v; }
 void Tp::set_on_fire_do(const std::string &v)            { _on_fire_do = v; }
 void Tp::set_on_fall_do(const std::string &v)            { _on_fall_do = v; }
-void Tp::set_on_fire_at_do(const std::string &v)         { _on_fire_at_do = v; }
+void Tp::set_on_firing_at_something_do(const std::string &v)         { _on_firing_at_something_do = v; }
 void Tp::set_on_tick_do(const std::string &v)            { _on_tick_do = v; }
 void Tp::set_on_move_do(const std::string &v)            { _on_move_do = v; }
 void Tp::set_on_open_do(const std::string &v)            { _on_open_do = v; }

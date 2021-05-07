@@ -25,7 +25,7 @@ def on_tick(me, x, y): # Return True on doing an action
     zx.topcon("tic")
     return False
 
-def on_fire_at(me, target, x, y): # Return True on doing an action
+def on_firing_at_something(me, target, x, y): # Return True on doing an action
     if random.randint(1, 10) < 3:
         zx.thing_fire_at(me, "laser_energy", target)
         return True
@@ -75,14 +75,14 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_attack_humanoid(True)
-    x.set_attack_living(True)
+    x.set_attack_living(False)
     x.set_long_text_description("A floating mass of tentacles and eyeballs. These creatures are often employed to monitor the dark and dank dungeons with their impressive vision. Beware their lightning gaze...")
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
     x.set_on_bite_do("tentacleye.on_bite()")
     x.set_on_death_do("tentacleye.on_death()")
-    x.set_on_fire_at_do("tentacleye.on_fire_at()")
+    x.set_on_firing_at_something_do("tentacleye.on_firing_at_something()")
     x.set_on_hit_do("tentacleye.on_hit()")
     x.set_on_miss_do("tentacleye.on_miss()")
     #x.set_on_tick_do("tentacleye.on_tick()")

@@ -4,7 +4,7 @@ import tp
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
     x.set_ai_scent_distance(40)
-    x.set_attack_living(True)
+    x.set_attack_living(False)
     x.set_attack_lunge(True)
     x.set_hates_water(100)
     x.set_collision_attack(True)
@@ -44,7 +44,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_attack_humanoid(True)
-    x.set_attack_living(True)
+    x.set_attack_living(False)
     x.set_long_text_description("A lesser reaper. You cannot kill what does not live!")
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
