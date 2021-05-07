@@ -58,39 +58,40 @@ const int Tp::resurrect(void) const { return _resurrect_dice.roll(); }
 const std::string& Tp::resurrect_dice_str(void) const { return _resurrect_dice_str; }
 void Tp::set_resurrect_dice(const std::string &v) { _resurrect_dice = v; _resurrect_dice_str = v; }
 
-const std::string& Tp::gfx_anim_attack(void) const       { return _gfx_anim_attack; }
-const std::string& Tp::laser_name(void) const            { return _laser_name; }
-const std::string& Tp::light_color(void) const           { return _light_color; }
-const std::string& Tp::long_text_description(void) const { return _long_text_description; }
-const std::string& Tp::name(void) const                  { return _name; }
-const std::string& Tp::on_birth_do(void) const           { return _on_birth_do; }
-const std::string& Tp::on_bite_do(void) const            { return _on_bite_do; }
-const std::string& Tp::on_born_do(void) const            { return _on_born_do; }
-const std::string& Tp::on_death_do(void) const           { return _on_death_do; }
-const std::string& Tp::on_hit_do(void) const             { return _on_hit_do; }
-const std::string& Tp::on_lifespan_do(void) const        { return _on_lifespan_do; }
-const std::string& Tp::on_miss_do(void) const            { return _on_miss_do; }
-const std::string& Tp::on_fall_do(void) const            { return _on_fall_do; }
-const std::string& Tp::on_fire_do(void) const            { return _on_fire_do; }
+const std::string& Tp::gfx_anim_attack(void) const                   { return _gfx_anim_attack; }
+const std::string& Tp::laser_name(void) const                        { return _laser_name; }
+const std::string& Tp::light_color(void) const                       { return _light_color; }
+const std::string& Tp::long_text_description(void) const             { return _long_text_description; }
+const std::string& Tp::name(void) const                              { return _name; }
+const std::string& Tp::on_birth_do(void) const                       { return _on_birth_do; }
+const std::string& Tp::on_bite_do(void) const                        { return _on_bite_do; }
+const std::string& Tp::on_born_do(void) const                        { return _on_born_do; }
+const std::string& Tp::on_death_do(void) const                       { return _on_death_do; }
+const std::string& Tp::on_hit_do(void) const                         { return _on_hit_do; }
+const std::string& Tp::on_lifespan_do(void) const                    { return _on_lifespan_do; }
+const std::string& Tp::on_miss_do(void) const                        { return _on_miss_do; }
+const std::string& Tp::on_fall_do(void) const                        { return _on_fall_do; }
+const std::string& Tp::on_enchant_do(void) const                     { return _on_enchant_do; }
+const std::string& Tp::on_fire_do(void) const                        { return _on_fire_do; }
 const std::string& Tp::on_firing_at_something_do(void) const         { return _on_firing_at_something_do; }
-const std::string& Tp::on_tick_do(void) const            { return _on_tick_do; }
-const std::string& Tp::on_move_do(void) const            { return _on_move_do; }
-const std::string& Tp::on_open_do(void) const            { return _on_open_do; }
-const std::string& Tp::on_use_do(void) const             { return _on_use_do; }
-const std::string& Tp::short_text_name(void) const       { return _short_text_name; }
-const std::string& Tp::spawn_on_shoved(void) const       { return _spawn_on_shoved; }
-const std::string& Tp::str1(void) const                  { return _str1; }
-const std::string& Tp::str2(void) const                  { return _str2; }
-const std::string& Tp::str3(void) const                  { return _str3; }
-const std::string& Tp::str4(void) const                  { return _str4; }
-const std::string& Tp::str5(void) const                  { return _str5; }
-const std::string& Tp::projectile_name(void) const       { return _projectile_name; }
-const std::string& Tp::text_description(void) const      { return _text_description; }
-const std::string& Tp::text_hits(void) const             { return _text_hits; }
-const std::string& Tp::text_name(void) const             { return _text_name; }
-const std::string& Tp::text_title(void) const            { return _text_title; }
-const std::string& Tp::text_unused(void) const           { return _text_unused; }
-const std::string& Tp::weapon_carry_anim(void) const     { return _weapon_carry_anim; }
+const std::string& Tp::on_tick_do(void) const                        { return _on_tick_do; }
+const std::string& Tp::on_move_do(void) const                        { return _on_move_do; }
+const std::string& Tp::on_open_do(void) const                        { return _on_open_do; }
+const std::string& Tp::on_use_do(void) const                         { return _on_use_do; }
+const std::string& Tp::short_text_name(void) const                   { return _short_text_name; }
+const std::string& Tp::spawn_on_shoved(void) const                   { return _spawn_on_shoved; }
+const std::string& Tp::str1(void) const                              { return _str1; }
+const std::string& Tp::str2(void) const                              { return _str2; }
+const std::string& Tp::text_enchant(void) const                      { return _text_enchant; }
+const std::string& Tp::str4(void) const                              { return _str4; }
+const std::string& Tp::str5(void) const                              { return _str5; }
+const std::string& Tp::projectile_name(void) const                   { return _projectile_name; }
+const std::string& Tp::text_description(void) const                  { return _text_description; }
+const std::string& Tp::text_hits(void) const                         { return _text_hits; }
+const std::string& Tp::text_name(void) const                         { return _text_name; }
+const std::string& Tp::text_title(void) const                        { return _text_title; }
+const std::string& Tp::text_unused(void) const                       { return _text_unused; }
+const std::string& Tp::weapon_carry_anim(void) const                 { return _weapon_carry_anim; }
 
 float Tp::collision_attack_radius(void) const                        { return _collision_attack_radius; }
 float Tp::collision_radius(void) const                               { return _collision_radius; }
@@ -104,10 +105,10 @@ int Tp::attack_lunge(void) const                                     { return _a
 int Tp::attack_meat(void) const                                      { return _attack_meat; }
 int Tp::attack_shove(void) const                                     { return _attack_shove; }
 int Tp::attack_shove_chance_d1000(void) const                        { return _attack_shove_chance_d1000; }
-int Tp::hates_acid(void) const                                      { return _hates_acid; }
-int Tp::hates_fire(void) const                                      { return _hates_fire; }
-int Tp::hates_poison(void) const                                    { return _hates_poison; }
-int Tp::hates_water(void) const                                     { return _hates_water; }
+int Tp::hates_acid(void) const                                       { return _hates_acid; }
+int Tp::hates_fire(void) const                                       { return _hates_fire; }
+int Tp::hates_poison(void) const                                     { return _hates_poison; }
+int Tp::hates_water(void) const                                      { return _hates_water; }
 int Tp::bag_height(void) const                                       { return _bag_height; }
 int Tp::bag_item_height(void) const                                  { return _bag_item_height; }
 int Tp::bag_item_width(void) const                                   { return _bag_item_width; }
@@ -335,7 +336,7 @@ int Tp::is_rrr79(void) const                                         { return _i
 int Tp::is_rrr80(void) const                                         { return _is_rrr80; }
 int Tp::is_rrr81(void) const                                         { return _is_rrr81; }
 int Tp::is_rrr82(void) const                                         { return _is_rrr82; }
-int Tp::is_rrr83(void) const                                         { return _is_rrr83; }
+int Tp::is_enchantable(void) const                                         { return _is_enchantable; }
 int Tp::is_indestructible(void) const                                         { return _is_indestructible; }
 int Tp::is_bones(void) const                                         { return _is_bones; }
 int Tp::is_soft_body(void) const                                         { return _is_soft_body; }
@@ -659,7 +660,7 @@ void Tp::set_is_rrr79(int v)                                         { _is_rrr79
 void Tp::set_is_rrr80(int v)                                         { _is_rrr80 = v; }
 void Tp::set_is_rrr81(int v)                                         { _is_rrr81 = v; }
 void Tp::set_is_rrr82(int v)                                         { _is_rrr82 = v; }
-void Tp::set_is_rrr83(int v)                                         { _is_rrr83 = v; }
+void Tp::set_is_enchantable(int v)                                         { _is_enchantable = v; }
 void Tp::set_is_indestructible(int v)                                         { _is_indestructible = v; }
 void Tp::set_is_bones(int v)                                         { _is_bones = v; }
 void Tp::set_is_soft_body(int v)                                         { _is_soft_body = v; }
@@ -745,38 +746,40 @@ void Tp::set_weapon_use_distance(int v)                              { _weapon_u
 void Tp::set_z_depth(int v)                                          { z_depth = v; }
 void Tp::set_z_prio(int v)                                           { z_prio = v; }
 
-void Tp::set_gfx_anim_attack(const std::string &v)       { _gfx_anim_attack = v; }
-void Tp::set_laser_name(const std::string &v)            { _laser_name = v; }
-void Tp::set_light_color(const std::string &v)           { _light_color = v; }
-void Tp::set_long_text_description(const std::string &v) { _long_text_description = v; }
-void Tp::set_name(const std::string &v)                  { _name = v; }
-void Tp::set_on_birth_do(const std::string &v)           { _on_birth_do = v; }
-void Tp::set_on_bite_do(const std::string &v)            { _on_bite_do = v; }
-void Tp::set_on_born_do(const std::string &v)            { _on_born_do = v; }
-void Tp::set_on_death_do(const std::string &v)           { _on_death_do = v; }
-void Tp::set_on_hit_do(const std::string &v)             { _on_hit_do = v; }
-void Tp::set_on_lifespan_do(const std::string &v)        { _on_lifespan_do = v; }
-void Tp::set_on_miss_do(const std::string &v)            { _on_miss_do = v; }
-void Tp::set_on_fire_do(const std::string &v)            { _on_fire_do = v; }
-void Tp::set_on_fall_do(const std::string &v)            { _on_fall_do = v; }
+void Tp::set_gfx_anim_attack(const std::string &v)                   { _gfx_anim_attack = v; }
+void Tp::set_laser_name(const std::string &v)                        { _laser_name = v; }
+void Tp::set_light_color(const std::string &v)                       { _light_color = v; }
+void Tp::set_long_text_description(const std::string &v)             { _long_text_description = v; }
+void Tp::set_name(const std::string &v)                              { _name = v; }
+void Tp::set_on_birth_do(const std::string &v)                       { _on_birth_do = v; }
+void Tp::set_on_bite_do(const std::string &v)                        { _on_bite_do = v; }
+void Tp::set_on_born_do(const std::string &v)                        { _on_born_do = v; }
+void Tp::set_on_death_do(const std::string &v)                       { _on_death_do = v; }
+void Tp::set_on_hit_do(const std::string &v)                         { _on_hit_do = v; }
+void Tp::set_on_lifespan_do(const std::string &v)                    { _on_lifespan_do = v; }
+void Tp::set_on_miss_do(const std::string &v)                        { _on_miss_do = v; }
+void Tp::set_on_fire_do(const std::string &v)                        { _on_fire_do = v; }
+void Tp::set_on_fall_do(const std::string &v)                        { _on_fall_do = v; }
+void Tp::set_on_enchant_do(const std::string &v)                     { _on_enchant_do = v; }
 void Tp::set_on_firing_at_something_do(const std::string &v)         { _on_firing_at_something_do = v; }
-void Tp::set_on_tick_do(const std::string &v)            { _on_tick_do = v; }
-void Tp::set_on_move_do(const std::string &v)            { _on_move_do = v; }
-void Tp::set_on_open_do(const std::string &v)            { _on_open_do = v; }
-void Tp::set_on_use_do(const std::string &v)             { _on_use_do = v; }
-void Tp::set_short_text_name(const std::string &v)       { _short_text_name = v; }
-void Tp::set_spawn_on_shoved(const std::string &v)       { _spawn_on_shoved = v; }
-void Tp::set_str1(const std::string &v)                  { _str1 = v; }
-void Tp::set_str2(const std::string &v)                  { _str2 = v; }
-void Tp::set_str3(const std::string &v)                  { _str3 = v; }
-void Tp::set_str4(const std::string &v)                  { _str4 = v; }
-void Tp::set_str5(const std::string &v)                  { _str5 = v; }
-void Tp::set_projectile_name(const std::string &v)       { _projectile_name = v; }
-void Tp::set_text_a_or_an(const std::string &v)          { _text_a_or_an = v; }
-void Tp::set_text_description(const std::string &v)      { _text_description = v; }
-void Tp::set_text_hits(const std::string &v)             { _text_hits = v; }
-void Tp::set_text_name(const std::string &v)             { _text_name = v; }
-void Tp::set_text_title(const std::string &v)            { _text_title = v; }
-void Tp::set_text_unused(const std::string &v)           { _text_unused = v; }
-void Tp::set_weapon_carry_anim(const std::string &v)     { _weapon_carry_anim = v; }
-int Tp::move_speed_ms(void) const                        { return 140; /* THING_MOVE_SPEED_MS; */ }
+void Tp::set_on_tick_do(const std::string &v)                        { _on_tick_do = v; }
+void Tp::set_on_move_do(const std::string &v)                        { _on_move_do = v; }
+void Tp::set_on_open_do(const std::string &v)                        { _on_open_do = v; }
+void Tp::set_on_use_do(const std::string &v)                         { _on_use_do = v; }
+void Tp::set_short_text_name(const std::string &v)                   { _short_text_name = v; }
+void Tp::set_spawn_on_shoved(const std::string &v)                   { _spawn_on_shoved = v; }
+void Tp::set_str1(const std::string &v)                              { _str1 = v; }
+void Tp::set_str2(const std::string &v)                              { _str2 = v; }
+void Tp::set_text_enchant(const std::string &v)                      { _text_enchant = v; }
+void Tp::set_str4(const std::string &v)                              { _str4 = v; }
+void Tp::set_str5(const std::string &v)                              { _str5 = v; }
+void Tp::set_projectile_name(const std::string &v)                   { _projectile_name = v; }
+void Tp::set_text_a_or_an(const std::string &v)                      { _text_a_or_an = v; }
+void Tp::set_text_description(const std::string &v)                  { _text_description = v; }
+void Tp::set_text_hits(const std::string &v)                         { _text_hits = v; }
+void Tp::set_text_name(const std::string &v)                         { _text_name = v; }
+void Tp::set_text_title(const std::string &v)                        { _text_title = v; }
+void Tp::set_text_unused(const std::string &v)                       { _text_unused = v; }
+void Tp::set_weapon_carry_anim(const std::string &v)                 { _weapon_carry_anim = v; }
+
+int Tp::move_speed_ms(void) const                                              { return THING_MOVE_SPEED_MS; }

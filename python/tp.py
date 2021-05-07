@@ -130,8 +130,8 @@ class Tp:
     def set_str_str2(self, value):
         zx.tp_set_str_str2(self, value)
 
-    def set_str_str3(self, value):
-        zx.tp_set_str_str3(self, value)
+    def set_text_enchant(self, value):
+        zx.tp_set_text_enchant(self, value)
 
     def set_str_str4(self, value):
         zx.tp_set_str_str4(self, value)
@@ -171,6 +171,9 @@ class Tp:
 
     def set_on_fall_do(self, value):
         zx.tp_set_on_fall_do(self, value)
+
+    def set_on_enchant_do(self, value):
+        zx.tp_set_on_enchant_do(self, value)
 
     def set_on_fire_do(self, value):
         zx.tp_set_on_fire_do(self, value)
@@ -472,8 +475,8 @@ class Tp:
     def set_is_rrr82(self, value):
         zx.tp_set_is_rrr82(self, value)
 
-    def set_is_rrr83(self, value):
-        zx.tp_set_is_rrr83(self, value)
+    def set_is_enchantable(self, value):
+        zx.tp_set_is_enchantable(self, value)
 
     def set_is_indestructible(self, value):
         zx.tp_set_is_indestructible(self, value)

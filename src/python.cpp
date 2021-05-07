@@ -1533,7 +1533,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr80)
     TP_SET_DECL(is_rrr81)
     TP_SET_DECL(is_rrr82)
-    TP_SET_DECL(is_rrr83)
+    TP_SET_DECL(is_enchantable)
     TP_SET_DECL(is_indestructible)
     TP_SET_DECL(is_bones)
     TP_SET_DECL(is_soft_body)
@@ -1608,6 +1608,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(on_miss_do)
     TP_SET_DECL(on_fire_do)
     TP_SET_DECL(on_fall_do)
+    TP_SET_DECL(on_enchant_do)
     TP_SET_DECL(on_firing_at_something_do)
     TP_SET_DECL(on_tick_do)
     TP_SET_DECL(on_move_do)
@@ -1639,7 +1640,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(stats17)
     TP_SET_DECL(str1)
     TP_SET_DECL(str2)
-    TP_SET_DECL(str3)
+    TP_SET_DECL(text_enchant)
     TP_SET_DECL(str4)
     TP_SET_DECL(str5)
     TP_SET_DECL(projectile_name)
@@ -1874,7 +1875,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr80_at",                                      (PyCFunction)level_is_rrr80_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr81_at",                                      (PyCFunction)level_is_rrr81_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr82_at",                                      (PyCFunction)level_is_rrr82_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr83_at",                                      (PyCFunction)level_is_rrr83_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_enchantable_at",                                      (PyCFunction)level_is_enchantable_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_indestructible_at",                                      (PyCFunction)level_is_indestructible_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_bones_at",                                      (PyCFunction)level_is_bones_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_soft_body_at",                                      (PyCFunction)level_is_soft_body_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1957,6 +1958,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_incr_current_damage",                              (PyCFunction)thing_incr_current_damage,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_incr_health",                                      (PyCFunction)thing_incr_health,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_incr_health_max",                                  (PyCFunction)thing_incr_health_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_incr_charge_count",                                (PyCFunction)thing_incr_charge_count,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_incr_stamina",                                     (PyCFunction)thing_incr_stamina,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_incr_stamina_max",                                 (PyCFunction)thing_incr_stamina_max,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_able_to_change_levels",                         (PyCFunction)thing_is_able_to_change_levels,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1972,13 +1974,13 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_ascend_sewer",                                  (PyCFunction)thing_is_ascend_sewer,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_auto_collect_item",                             (PyCFunction)thing_is_auto_collect_item,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_bag",                                           (PyCFunction)thing_is_bag,                                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_barrel",                                        (PyCFunction)thing_is_barrel,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_barrel",                                        (PyCFunction)thing_is_barrel,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_bleeder",                                       (PyCFunction)thing_is_bleeder,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_blood",                                         (PyCFunction)thing_is_blood,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_blood_splatter",                                (PyCFunction)thing_is_blood_splatter,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_bloodied",                                      (PyCFunction)thing_is_bloodied,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_brazier",                                       (PyCFunction)thing_is_brazier,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_burnable",                                      (PyCFunction)thing_is_burnable,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_burnable",                                      (PyCFunction)thing_is_burnable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_carrier_of_treasure_class_a",                   (PyCFunction)thing_is_carrier_of_treasure_class_a,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_carrier_of_treasure_class_b",                   (PyCFunction)thing_is_carrier_of_treasure_class_b,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_carrier_of_treasure_class_c",                   (PyCFunction)thing_is_carrier_of_treasure_class_c,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2155,7 +2157,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr80",                                         (PyCFunction)thing_is_rrr80,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr81",                                         (PyCFunction)thing_is_rrr81,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr82",                                         (PyCFunction)thing_is_rrr82,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr83",                                         (PyCFunction)thing_is_rrr83,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_enchantable",                                         (PyCFunction)thing_is_enchantable,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_indestructible",                                         (PyCFunction)thing_is_indestructible,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_bones",                                         (PyCFunction)thing_is_bones,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_soft_body",                                         (PyCFunction)thing_is_soft_body,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},

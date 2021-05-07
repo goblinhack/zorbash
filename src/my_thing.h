@@ -256,6 +256,7 @@ public:
     bool drop_from_ether(Thingp w);
     bool drop_into_ether(Thingp w);
     bool eat(Thingp it);
+    bool enchant(void);
     bool fall(void);
     bool fall_to_next_level(void);
     bool fire_at_and_choose_target(Thingp);
@@ -361,9 +362,10 @@ public:
     const std::string& on_bite_do(void) const;
     const std::string& on_born_do(void) const;
     const std::string& on_death_do(void) const;
+    const std::string& on_enchant_do(void) const;
     const std::string& on_fall_do(void) const;
-    const std::string& on_firing_at_something_do(void) const;
     const std::string& on_fire_do(void) const;
+    const std::string& on_firing_at_something_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_lifespan_do(void) const;
     const std::string& on_miss_do(void) const;
@@ -376,10 +378,10 @@ public:
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
     const std::string& str2(void) const;
-    const std::string& str3(void) const;
     const std::string& str4(void) const;
     const std::string& str5(void) const;
     const std::string& text_description(void) const;
+    const std::string& text_enchant(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;
@@ -508,10 +510,10 @@ public:
     int get_damage_max(void);
     int get_damage_melee(void) const;
     int get_damage_min(void);
-    int get_danger_initial_level(Thingp);
     int get_danger_current_level(Thingp);
-    int get_danger_initial_level(void);
     int get_danger_current_level(void);
+    int get_danger_initial_level(Thingp);
+    int get_danger_initial_level(void);
     int get_gold(void) const;
     int get_gold_value(void) const;
     int get_health(void) const;
@@ -531,7 +533,6 @@ public:
     int get_poison(void) const;
     int get_resurrect(void) const;
     int get_score(void) const;
-    void score_add(Thingp victim);
     int get_spawned_count(void) const;
     int get_stamina(void) const;
     int get_stamina_max(void) const;
@@ -702,6 +703,7 @@ public:
     int is_door(void) const;
     int is_droppable(void) const;
     int is_dry_fungus(void) const;
+    int is_enchantable(void) const;
     int is_ethereal(void) const;
     int is_ethereal_minion_generator(void) const;
     int is_explosion(void) const;
@@ -847,7 +849,6 @@ public:
     int is_rrr80(void) const;
     int is_rrr81(void) const;
     int is_rrr82(void) const;
-    int is_rrr83(void) const;
     int is_rrr9(void) const;
     int is_rrr99(void) const;
     int is_secret_door(void) const;
@@ -1199,6 +1200,7 @@ public:
     void hide();
     void hooks_remove();
     void hunger_clock();
+    void incr_score(int);
     void inherit_from(Thingp it);
     void init(Levelp, const std::string& name, fpoint at, fpoint jitter);
     void init_lights(void);
@@ -1241,6 +1243,7 @@ public:
     void new_monst(void);
     void on_bite(void);
     void on_born(void);
+    void on_enchant(void);
     void on_fall(void);
     void on_fire(void);
     void on_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
@@ -1258,6 +1261,7 @@ public:
     void remove_spawner_owner(void);
     void rest();
     void resurrect_tick();
+    void score_add(Thingp victim);
     void set_bounce_count(int);
     void set_bounce_fade(float);
     void set_bounce_height(float);
@@ -1270,7 +1274,6 @@ public:
     void set_msg(const std::string&);
     void set_owner(Thingp owner);
     void set_score(int);
-    void incr_score(int);
     void set_spawned_owner(Thingp spawner_owner);
     void set_submerged_offset(int);
     void set_wobble(float);

@@ -304,7 +304,7 @@ private:
     int _is_rrr80 {};
     int _is_rrr81 {};
     int _is_rrr82 {};
-    int _is_rrr83 {};
+    int _is_enchantable {};
     int _is_indestructible {};
     int _is_bones {};
     int _is_soft_body {};
@@ -406,6 +406,7 @@ private:
     std::string _on_miss_do;
     std::string _on_fire_do;
     std::string _on_fall_do;
+    std::string _on_enchant_do;
     std::string _on_firing_at_something_do;
     std::string _on_tick_do;
     std::string _on_lifespan_do;
@@ -417,7 +418,7 @@ private:
     std::string _spawn_on_shoved;
     std::string _str1;
     std::string _str2;
-    std::string _str3;
+    std::string _text_enchant;
     std::string _str4;
     std::string _str5;
     std::string _projectile_name;
@@ -499,6 +500,7 @@ public:
     const std::string& on_born_do(void) const;
     const std::string& on_death_do(void) const;
     const std::string& on_fall_do(void) const;
+    const std::string& on_enchant_do(void) const;
     const std::string& on_firing_at_something_do(void) const;
     const std::string& on_fire_do(void) const;
     const std::string& on_hit_do(void) const;
@@ -515,7 +517,7 @@ public:
     const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
     const std::string& str2(void) const;
-    const std::string& str3(void) const;
+    const std::string& text_enchant(void) const;
     const std::string& str4(void) const;
     const std::string& str5(void) const;
     const std::string& text_description(void) const;
@@ -771,7 +773,7 @@ public:
     int is_rrr80(void) const;
     int is_rrr81(void) const;
     int is_rrr82(void) const;
-    int is_rrr83(void) const;
+    int is_enchantable(void) const;
     int is_indestructible(void) const;
     int is_bones(void) const;
     int is_soft_body(void) const;
@@ -1104,7 +1106,7 @@ public:
     void set_is_rrr80(int);
     void set_is_rrr81(int);
     void set_is_rrr82(int);
-    void set_is_rrr83(int);
+    void set_is_enchantable(int);
     void set_is_indestructible(int);
     void set_is_bones(int);
     void set_is_soft_body(int);
@@ -1169,6 +1171,7 @@ public:
     void set_on_death_drop_all_items(int);
     void set_on_death_is_open(int);
     void set_on_fall_do(const std::string &);
+    void set_on_enchant_do(const std::string &);
     void set_on_firing_at_something_do(const std::string &);
     void set_on_fire_do(const std::string &);
     void set_on_hit_do(const std::string &);
@@ -1205,7 +1208,7 @@ public:
     void set_stats17(int);
     void set_str1(const std::string &);
     void set_str2(const std::string &);
-    void set_str3(const std::string &);
+    void set_text_enchant(const std::string &);
     void set_str4(const std::string &);
     void set_str5(const std::string &);
     void set_text_a_or_an(const std::string &);

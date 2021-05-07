@@ -1,13 +1,17 @@
 
 Todo
 ----
+enchant stone
 
 Level
 -----
 - totems are like generators, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does. 
 - exploding bogs
-- dry fungus that can burn
 - vaults
+- teleports
+- portable hunger - teleports you to a room full of digestive juices
+- moving floor
+- shove chocolate frog statue, get frog?
 
 Traps
 -----
@@ -37,7 +41,6 @@ Skills
 - skill, slash and roll
 - skill, slash and jump
 - skill, spring attack, give up a round for 2.5 times damage
-- tiny pixel effects that bounce?
 
 Poison
 ------
@@ -126,20 +129,13 @@ Gods
 ----
 - runes lean more torwards old gods
 
-Level
------
-- teleports
-- portable hunger - teleports you to a room full of digestive juices
-- moving floor
-- should the entrance in next level be close to the prev exit
-- add stuff in secret rooms
-- shove chocolate frog statue, get frog?
+Gfx
+---
+- tiny pixel effects that bounce?
 
 Player
 ------
-- choose name / player
 - weight factors into jumping
-- allow seed selection on menu
 - carry eat slime mold and gain acid resis?
 
 Spells
