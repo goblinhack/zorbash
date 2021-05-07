@@ -341,8 +341,8 @@ public:
     const Tpp tp(void) const;
     const Tpp tp_or_update(void);
     const fpoint &get_interpolated_mid_at (void) const;
-    const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag (void) const;
-    const std::string get_danger_level_str(Thingp);
+    const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag(void) const;
+    const std::string get_danger_level_str(Thingp); // Cannot return reference
     const std::string& get_damage_bite_dice_str(void) const;
     const std::string& get_damage_crush_dice_str(void) const;
     const std::string& get_damage_melee_dice_str(void) const;
@@ -508,8 +508,10 @@ public:
     int get_damage_max(void);
     int get_damage_melee(void) const;
     int get_damage_min(void);
-    int get_danger_level(Thingp);
-    int get_danger_level(void);
+    int get_danger_initial_level(Thingp);
+    int get_danger_current_level(Thingp);
+    int get_danger_initial_level(void);
+    int get_danger_current_level(void);
     int get_gold(void) const;
     int get_gold_value(void) const;
     int get_health(void) const;
@@ -529,6 +531,7 @@ public:
     int get_poison(void) const;
     int get_resurrect(void) const;
     int get_score(void) const;
+    void score_add(Thingp victim);
     int get_spawned_count(void) const;
     int get_stamina(void) const;
     int get_stamina_max(void) const;
@@ -1267,6 +1270,7 @@ public:
     void set_msg(const std::string&);
     void set_owner(Thingp owner);
     void set_score(int);
+    void incr_score(int);
     void set_spawned_owner(Thingp spawner_owner);
     void set_submerged_offset(int);
     void set_wobble(float);

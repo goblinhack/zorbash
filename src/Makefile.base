@@ -169,11 +169,11 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_attack.o                \
     $(OBJDIR)/thing_avoid.o                 \
     $(OBJDIR)/thing_bag.o                   \
+    $(OBJDIR)/thing_barrel.o                \
     $(OBJDIR)/thing_bounce.o                \
     $(OBJDIR)/thing_brazier.o               \
     $(OBJDIR)/thing_carry.o                 \
     $(OBJDIR)/thing_chasm.o                 \
-    $(OBJDIR)/thing_barrel.o                \
     $(OBJDIR)/thing_collision.o             \
     $(OBJDIR)/thing_cursor.o                \
     $(OBJDIR)/thing_cursor_path.o           \
@@ -195,8 +195,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_fall.o                  \
     $(OBJDIR)/thing_fini.o                  \
     $(OBJDIR)/thing_fire.o                  \
-    $(OBJDIR)/thing_fungus.o                 \
     $(OBJDIR)/thing_fire_at.o               \
+    $(OBJDIR)/thing_fungus.o                 \
     $(OBJDIR)/thing_gc.o                    \
     $(OBJDIR)/thing_health.o                \
     $(OBJDIR)/thing_hide.o                  \
@@ -235,6 +235,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_projectile.o            \
     $(OBJDIR)/thing_rest.o                  \
     $(OBJDIR)/thing_resurrect.o             \
+    $(OBJDIR)/thing_score.o                 \
     $(OBJDIR)/thing_shove.o                 \
     $(OBJDIR)/thing_skill.o                 \
     $(OBJDIR)/thing_skillbox.o              \
@@ -246,8 +247,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_string.o                \
     $(OBJDIR)/thing_target.o                \
     $(OBJDIR)/thing_template.o              \
-    $(OBJDIR)/thing_template_fixup.o        \
     $(OBJDIR)/thing_template_api.o          \
+    $(OBJDIR)/thing_template_fixup.o        \
     $(OBJDIR)/thing_template_random.o       \
     $(OBJDIR)/thing_terrain.o               \
     $(OBJDIR)/thing_text.o                  \
@@ -271,10 +272,10 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/util.o                        \
     $(OBJDIR)/wid.o                         \
     $(OBJDIR)/wid_bag.o                     \
-    $(OBJDIR)/wid_keyboard.o                \
     $(OBJDIR)/wid_botcon.o                  \
     $(OBJDIR)/wid_console.o                 \
     $(OBJDIR)/wid_inventory.o               \
+    $(OBJDIR)/wid_keyboard.o                \
     $(OBJDIR)/wid_leftbar.o                 \
     $(OBJDIR)/wid_log.o                     \
     $(OBJDIR)/wid_popup.o                   \

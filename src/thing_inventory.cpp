@@ -28,7 +28,7 @@ _
     }
 
     if (item->is_item_collected_as_gold()) {
-        std::string name = "gold";
+        std::string name = "gold and keys";
         auto w = wid_find(name);
         if (!w) {
             err("Could not find wid %s", name.c_str());
@@ -40,6 +40,11 @@ _
         p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
         int cnt = random_range(1, 10);
+        auto player = level->player;
+        if (player) {
+            player->incr_score(cnt * 10);
+        }
+
         for (int c = 0; c < cnt; c++) {
             point s = (last_blit_tl + last_blit_br) / 2;
             point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
@@ -56,7 +61,7 @@ _
     }
 
     if (item->is_collect_as_keys()) {
-        std::string name = "keys";
+        std::string name = "gold and keys";
         auto w = wid_find(name);
         if (!w) {
             err("Could not find wid %s", name.c_str());

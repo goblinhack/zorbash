@@ -74,7 +74,7 @@ Thingp Thing::get_best_fire_at_target (void)
         //
         // More dangerous things (to me) are preferred
         //
-        cand->priority += get_danger_level(cand->target);
+        cand->priority += get_danger_current_level(cand->target);
 
         //
         // Closer things are preferred

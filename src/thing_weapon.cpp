@@ -458,7 +458,7 @@ _
         auto hit_at = mid_at + fpoint(d.x, d.y);
 
         FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y) {
-            auto prio = t->collision_hit_priority() + get_danger_level(t);
+            auto prio = t->collision_hit_priority() + get_danger_current_level(t);
             if (prio > best_priority) {
                 best_priority = prio;
                 best_hit_at = hit_at;

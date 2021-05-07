@@ -184,31 +184,20 @@ static void wid_rightbar_create (void)
     y_at += 3;
 
     {_
-        auto w = wid_new_plain(wid_rightbar, "gold");
+        auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
         wid_set_ignore_events(w, true);
-        point tl = make_point(3, y_at-2);
+        point tl = make_point(1, y_at-2);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-2);
 
         wid_set_pos(w, tl, br);
-        auto g = dynprintf("%%fg=green$$%%fg=gray$%05d", player->get_gold());
+        auto g = dynprintf("%%fg=gray$%06d %%fg=green$$%%fg=gray$%03d %%fg=yellow$%%tile=key_icon$%%fg=gray$%d", 
+                           player->get_score(), player->get_gold(), player->get_keys());
         wid_set_text(w, g);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
         myfree(g);
     }
 
-    {_
-        auto w = wid_new_plain(wid_rightbar, "keys");
-        wid_set_ignore_events(w, true);
-        point tl = make_point(10, y_at-2);
-        point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-2);
-
-        wid_set_pos(w, tl, br);
-        auto k = std::to_string(player->get_keys());
-        wid_set_text(w, "%%fg=yellow$%%tile=key_icon$%%fg=gray$" + k);
-        wid_set_text_lhs(w, true);
-        wid_set_shape_none(w);
-    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Health
