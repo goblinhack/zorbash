@@ -175,8 +175,8 @@ class Tp:
     def set_on_fire_do(self, value):
         zx.tp_set_on_fire_do(self, value)
 
-    def set_on_fire_at_do(self, value):
-        zx.tp_set_on_fire_at_do(self, value)
+    def set_on_firing_at_something_do(self, value):
+        zx.tp_set_on_firing_at_something_do(self, value)
 
     def set_on_tick_do(self, value):
         zx.tp_set_on_tick_do(self, value)

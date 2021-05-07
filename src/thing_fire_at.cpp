@@ -27,14 +27,14 @@ static int thing_possible_hit_size;
 //
 // Python callback upon being fire_at
 //
-bool Thing::on_fire_at (Thingp hitter)
+bool Thing::on_firing_at_something (Thingp hitter)
 {_
-    auto on_fire_at = tp()->on_fire_at_do();
-    if (std::empty(on_fire_at)) {
+    auto on_firing_at_something = tp()->on_firing_at_something_do();
+    if (std::empty(on_firing_at_something)) {
         return false;
     }
 
-    auto t = split_tokens(on_fire_at, '.');
+    auto t = split_tokens(on_firing_at_something, '.');
     if (t.size() == 2) {
         auto mod = t[0];
         auto fn = t[1];
@@ -50,8 +50,8 @@ bool Thing::on_fire_at (Thingp hitter)
                               (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     }
 
-    ERR("Bad on_fire_at call [%s] expected mod:function, got %d elems",
-        on_fire_at.c_str(), (int)on_fire_at.size());
+    ERR("Bad on_firing_at_something call [%s] expected mod:function, got %d elems",
+        on_firing_at_something.c_str(), (int)on_firing_at_something.size());
     return false;
 }
 
@@ -175,7 +175,7 @@ bool Thing::fire_at_target (void)
         return false;
     }
 
-    return on_fire_at(target);
+    return on_firing_at_something(target);
 }
 
 bool Thing::fire_at_and_choose_target (Thingp item)

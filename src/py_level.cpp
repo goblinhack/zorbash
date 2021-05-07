@@ -505,7 +505,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_movement_blocking_hard_at, is_movement_blocking_
 LEVEL_BODY_GET_BOOL_AT(level_is_movement_blocking_soft_at, is_movement_blocking_soft)
 LEVEL_BODY_GET_BOOL_AT(level_is_msg_at, is_msg)
 LEVEL_BODY_GET_BOOL_AT(level_is_no_tile_at, is_no_tile)
-LEVEL_BODY_GET_BOOL_AT(level_is_on_fire_at, is_on_fire)
+LEVEL_BODY_GET_BOOL_AT(level_is_on_firing_at_something, is_on_fire)
 LEVEL_BODY_GET_BOOL_AT(level_is_player_at, is_player)
 LEVEL_BODY_GET_BOOL_AT(level_is_poison_at, is_poison)
 LEVEL_BODY_GET_BOOL_AT(level_loves_poison_at, loves_poison)

@@ -283,7 +283,7 @@ public:
     bool move_to_check(const point&, const bool escaping);
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
-    bool on_fire_at(Thingp hitter);
+    bool on_firing_at_something(Thingp hitter);
     bool on_tick(void);
     bool open_door(Thingp door);
     bool particle_anim_exists(void);
@@ -362,7 +362,7 @@ public:
     const std::string& on_born_do(void) const;
     const std::string& on_death_do(void) const;
     const std::string& on_fall_do(void) const;
-    const std::string& on_fire_at_do(void) const;
+    const std::string& on_firing_at_something_do(void) const;
     const std::string& on_fire_do(void) const;
     const std::string& on_hit_do(void) const;
     const std::string& on_lifespan_do(void) const;

@@ -2,7 +2,7 @@ import zx
 import tp
 import random
 
-def on_fire_at(me, target, x, y): # Return True on doing an action
+def on_firing_at_something(me, target, x, y): # Return True on doing an action
     if random.randint(1, 100) < 10:
         zx.thing_fire_at(me, "projectile_fire", target)
         zx.thing_sound_play_channel(me, zx.CHANNEL_EXPLOSION, "explosion_b")
@@ -60,7 +60,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_attack_humanoid(True)
-    x.set_attack_living(True)
+    x.set_attack_living(False)
     x.set_is_weapon_wielder(True)
     x.set_light_color("yellow")
     x.set_light_strength(2)
@@ -71,7 +71,7 @@ def tp_init(name, text_name):
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)
     x.set_normal_placement_rules(True)
-    x.set_on_fire_at_do("skeleton_fire.on_fire_at()")
+    x.set_on_firing_at_something_do("skeleton_fire.on_firing_at_something()")
     x.set_rarity(zx.RARITY_COMMON)
     x.set_resurrect_dice("1d10+30")
     x.set_stat_attack(10) # 10, means no bonus

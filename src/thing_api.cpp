@@ -4312,7 +4312,7 @@ const std::string& Thing::on_bite_do (void) const {_ return (tp()->on_bite_do())
 const std::string& Thing::on_born_do (void) const {_ return (tp()->on_born_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
 const std::string& Thing::on_fall_do (void) const {_ return (tp()->on_fall_do()); }
-const std::string& Thing::on_fire_at_do (void) const {_ return (tp()->on_fire_at_do()); }
+const std::string& Thing::on_firing_at_something_do (void) const {_ return (tp()->on_firing_at_something_do()); }
 const std::string& Thing::on_fire_do (void) const {_ return (tp()->on_fire_do()); }
 const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
 const std::string& Thing::on_lifespan_do (void) const {_ return (tp()->on_lifespan_do()); }

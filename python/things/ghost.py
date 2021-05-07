@@ -42,7 +42,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_attack_humanoid(True)
-    x.set_attack_living(True)
+    x.set_attack_living(False) # No, else it attacks spiders
     x.set_light_color("green")
     x.set_light_strength(1)
     x.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")

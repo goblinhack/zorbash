@@ -25,6 +25,9 @@ def explode(me, x, y):
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     explode(me, x, y)
 
+def on_fire(me, x, y):
+    explode(me, x, y)
+
 def on_fall(me, x, y):
     explode(me, x, y)
 
@@ -66,6 +69,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_on_use_do("potion_health.on_use()")
     x.set_on_hit_do("potion_health.on_hit()")
     x.set_on_fall_do("potion_health.on_fall()")
+    x.set_on_fire_do("potion_health.on_fire()")
     x.set_text_a_or_an("a")
     x.set_text_description("%%fg=pink$A potion of health restoration.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

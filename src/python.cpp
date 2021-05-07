@@ -1608,7 +1608,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(on_miss_do)
     TP_SET_DECL(on_fire_do)
     TP_SET_DECL(on_fall_do)
-    TP_SET_DECL(on_fire_at_do)
+    TP_SET_DECL(on_firing_at_something_do)
     TP_SET_DECL(on_tick_do)
     TP_SET_DECL(on_move_do)
     TP_SET_DECL(on_open_do)
@@ -1784,7 +1784,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_movement_blocking_soft_at",                     (PyCFunction)level_is_movement_blocking_soft_at,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_msg_at",                                        (PyCFunction)level_is_msg_at,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_no_tile_at",                                    (PyCFunction)level_is_no_tile_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_on_fire_at",                                    (PyCFunction)level_is_on_fire_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_on_firing_at_something",                                    (PyCFunction)level_is_on_firing_at_something,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_player_at",                                     (PyCFunction)level_is_player_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_poison_at",                                     (PyCFunction)level_is_poison_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_potion_at",                                     (PyCFunction)level_is_potion_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},

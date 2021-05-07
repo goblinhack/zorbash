@@ -50,7 +50,7 @@ def tp_init(name, text_name):
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
     x.set_attack_humanoid(True)
-    x.set_attack_living(True)
+    x.set_attack_living(False)
     x.set_long_text_description("A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
     x.set_monst_size(zx.MONST_SIZE_GIANT)
     x.set_move_speed_ms(150)
