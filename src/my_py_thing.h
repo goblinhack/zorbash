@@ -33,6 +33,8 @@ PyObject *thing_incr_current_damage(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_decr_current_damage(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_current_damage(PyObject *obj, PyObject *args, PyObject *keywds);
 
+PyObject *thing_incr_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
+
 PyObject *thing_get_name(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_skill_activate(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -241,7 +243,7 @@ PyObject *thing_is_rrr79(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr80(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr81(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr82(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr83(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_enchantable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_indestructible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bones(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_soft_body(PyObject *obj, PyObject *args, PyObject *keywds);

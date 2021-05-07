@@ -16,6 +16,9 @@ def on_fire(me, x, y):
 def on_fall(me, x, y):
     explode(me, x, y)
 
+def on_enchant(me, x, y):
+    me.thing_incr_charge_count(5)
+
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
     x.set_bag_item_height(2)
@@ -46,14 +49,17 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_treasure_class_b(True)
     x.set_is_usable(True)
     x.set_is_wand(True)
+    x.set_is_enchantable(True)
     x.set_laser_name("laser_energy")
     x.set_long_text_description("Discharges a powerful beam of energy upon an unwitting recipient...")
     x.set_normal_placement_rules(True)
     x.set_on_hit_do("wand_energy.on_hit()")
     x.set_on_fire_do("wand_energy.on_fire()")
     x.set_on_fall_do("wand_energy.on_fall()")
+    x.set_on_enchant_do("wand_energy.on_enchant()")
     x.set_range_max(7)
     x.set_text_a_or_an("a")
+    x.set_text_enchant("add 5 more charges")
     x.set_text_description("%%fg=yellow$A wand of energy.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

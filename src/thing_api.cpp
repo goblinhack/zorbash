@@ -282,7 +282,7 @@ int Thing::is_rrr8(void) const                                          {_ retur
 int Thing::is_rrr80(void) const                                         {_ return (tp()->is_rrr80()); }
 int Thing::is_rrr81(void) const                                         {_ return (tp()->is_rrr81()); }
 int Thing::is_rrr82(void) const                                         {_ return (tp()->is_rrr82()); }
-int Thing::is_rrr83(void) const                                         {_ return (tp()->is_rrr83()); }
+int Thing::is_enchantable(void) const                                         {_ return (tp()->is_enchantable()); }
 int Thing::is_indestructible(void) const                                {_ return (tp()->is_indestructible()); }
 int Thing::is_bones(void) const                                         {_ return (tp()->is_bones()); }
 int Thing::is_soft_body(void) const                                     {_ return (tp()->is_soft_body()); }
@@ -4312,6 +4312,7 @@ const std::string& Thing::on_bite_do (void) const {_ return (tp()->on_bite_do())
 const std::string& Thing::on_born_do (void) const {_ return (tp()->on_born_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
 const std::string& Thing::on_fall_do (void) const {_ return (tp()->on_fall_do()); }
+const std::string& Thing::on_enchant_do (void) const {_ return (tp()->on_enchant_do()); }
 const std::string& Thing::on_firing_at_something_do (void) const {_ return (tp()->on_firing_at_something_do()); }
 const std::string& Thing::on_fire_do (void) const {_ return (tp()->on_fire_do()); }
 const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
@@ -4326,7 +4327,7 @@ const std::string& Thing::short_text_name (void) const {_ return (tp()->short_te
 const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on_shoved()); }
 const std::string& Thing::str1 (void) const {_ return (tp()->str1()); }
 const std::string& Thing::str2 (void) const {_ return (tp()->str2()); }
-const std::string& Thing::str3 (void) const {_ return (tp()->str3()); }
+const std::string& Thing::text_enchant (void) const {_ return (tp()->text_enchant()); }
 const std::string& Thing::str4 (void) const {_ return (tp()->str4()); }
 const std::string& Thing::str5 (void) const {_ return (tp()->str5()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }

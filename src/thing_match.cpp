@@ -231,7 +231,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr80() &&                                         (what == "is_rrr80"))                                         { return true; }
     if (is_rrr81() &&                                         (what == "is_rrr81"))                                         { return true; }
     if (is_rrr82() &&                                         (what == "is_rrr82"))                                         { return true; }
-    if (is_rrr83() &&                                         (what == "is_rrr83"))                                         { return true; }
+    if (is_enchantable() &&                                         (what == "is_enchantable"))                                         { return true; }
     if (is_indestructible() &&                                         (what == "is_indestructible"))                                         { return true; }
     if (is_bones() &&                                         (what == "is_bones"))                                         { return true; }
     if (is_soft_body() &&                                         (what == "is_soft_body"))                                         { return true; }
@@ -494,7 +494,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr80")                                         { return &Thing::is_rrr80; }
     if (what == "is_rrr81")                                         { return &Thing::is_rrr81; }
     if (what == "is_rrr82")                                         { return &Thing::is_rrr82; }
-    if (what == "is_rrr83")                                         { return &Thing::is_rrr83; }
+    if (what == "is_enchantable")                                         { return &Thing::is_enchantable; }
     if (what == "is_indestructible")                                         { return &Thing::is_indestructible; }
     if (what == "is_bones")                                         { return &Thing::is_bones; }
     if (what == "is_soft_body")                                         { return &Thing::is_soft_body; }

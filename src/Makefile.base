@@ -2,7 +2,7 @@
 NAME=zorbash-game
 OBJDIR=.o
 
-GAME_OBJECTS=				    \
+GAME_OBJECTS=				                \
     $(OBJDIR)/ascii.o                       \
     $(OBJDIR)/ascii_box.o                   \
     $(OBJDIR)/audio.o                       \
@@ -25,22 +25,20 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/file_log.o                    \
     $(OBJDIR)/font.o                        \
     $(OBJDIR)/game.o                        \
-    $(OBJDIR)/gauss.o                       \
-    $(OBJDIR)/hiscore.o                     \
+    $(OBJDIR)/game_choose_name.o            \
+    $(OBJDIR)/game_choose_seed.o            \
     $(OBJDIR)/game_config.o                 \
-    $(OBJDIR)/game_hiscore.o                \
     $(OBJDIR)/game_config_gfx.o             \
     $(OBJDIR)/game_config_keyboard.o        \
     $(OBJDIR)/game_config_other.o           \
     $(OBJDIR)/game_config_sound.o           \
-    $(OBJDIR)/game_choose_seed.o            \
-    $(OBJDIR)/game_choose_name.o            \
     $(OBJDIR)/game_credits.o                \
     $(OBJDIR)/game_dead.o                   \
     $(OBJDIR)/game_display.o                \
     $(OBJDIR)/game_dump.o                   \
     $(OBJDIR)/game_error.o                  \
     $(OBJDIR)/game_fini.o                   \
+    $(OBJDIR)/game_hiscore.o                \
     $(OBJDIR)/game_id.o                     \
     $(OBJDIR)/game_init.o                   \
     $(OBJDIR)/game_load.o                   \
@@ -54,6 +52,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/game_save.o                   \
     $(OBJDIR)/game_state.o                  \
     $(OBJDIR)/game_tick.o                   \
+    $(OBJDIR)/gauss.o                       \
     $(OBJDIR)/gfx.o                         \
     $(OBJDIR)/gfx0.o                        \
     $(OBJDIR)/gfx1.o                        \
@@ -71,6 +70,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/gl.o                          \
     $(OBJDIR)/globals.o                     \
     $(OBJDIR)/hexdump.o                     \
+    $(OBJDIR)/hiscore.o                     \
     $(OBJDIR)/laser.o                       \
     $(OBJDIR)/level.o                       \
     $(OBJDIR)/level_create.o                \
@@ -189,6 +189,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_door.o                  \
     $(OBJDIR)/thing_drop.o                  \
     $(OBJDIR)/thing_eat.o                   \
+    $(OBJDIR)/thing_enchant.o               \
     $(OBJDIR)/thing_enemy.o                 \
     $(OBJDIR)/thing_escape.o                \
     $(OBJDIR)/thing_fadeup.o                \
@@ -196,7 +197,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_fini.o                  \
     $(OBJDIR)/thing_fire.o                  \
     $(OBJDIR)/thing_fire_at.o               \
-    $(OBJDIR)/thing_fungus.o                 \
+    $(OBJDIR)/thing_fungus.o                \
     $(OBJDIR)/thing_gc.o                    \
     $(OBJDIR)/thing_health.o                \
     $(OBJDIR)/thing_hide.o                  \
