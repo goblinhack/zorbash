@@ -47,6 +47,8 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
+    x.set_attack_humanoid(True)
+    x.set_attack_living(True)
     x.set_long_text_description("A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)

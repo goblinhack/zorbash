@@ -43,6 +43,8 @@ def tp_init(name, text_name):
     x.set_is_resurrectable(True)
     x.set_is_shown_on_leftbar(True)
     x.set_is_undead(True)
+    x.set_attack_humanoid(True)
+    x.set_attack_living(True)
     x.set_long_text_description("A lesser reaper. You cannot kill what does not live!")
     x.set_monst_size(zx.MONST_SIZE_NORMAL)
     x.set_move_speed_ms(150)

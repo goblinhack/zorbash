@@ -162,7 +162,7 @@ _
 
         if (me->attack_humanoid()) {
             if (it->is_humanoid()) {
-                if (it->is_dead) {
+                if (!it->is_dead) {
                     log("Can attack humanoid: %s", it->to_string().c_str());
                     return true;
                 }
@@ -171,7 +171,7 @@ _
 
         if (me->attack_living()) {
             if (it->is_living()) {
-                if (it->is_dead) {
+                if (!it->is_dead) {
                     log("Can attack living: %s", it->to_string().c_str());
                     return true;
                 }
