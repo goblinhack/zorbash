@@ -91,6 +91,7 @@ public:
     bool is_deep_water_no_check(const int x, const int y);
     bool is_dirt(const int x, const int y);
     bool is_dry_fungus(const int x, const int y);
+    bool is_enchantstone(const int x, const int y);
     bool is_foilage(const int x, const int y);
     bool is_dirt_no_check(const int x, const int y);
     bool is_door(const int x, const int y);

@@ -472,8 +472,8 @@ class Tp:
     def set_is_rrr81(self, value):
         zx.tp_set_is_rrr81(self, value)
 
-    def set_is_rrr82(self, value):
-        zx.tp_set_is_rrr82(self, value)
+    def set_is_enchantstone(self, value):
+        zx.tp_set_is_enchantstone(self, value)
 
     def set_is_enchantable(self, value):
         zx.tp_set_is_enchantable(self, value)

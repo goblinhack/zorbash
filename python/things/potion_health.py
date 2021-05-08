@@ -5,11 +5,22 @@ def on_use(owner, item, target, x, y):
     #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
     #zx.con("item    {} {:08X}".format(zx.thing_get_name(item), item))
     #zx.con("target  {} {:08X}".format(zx.thing_get_name(target), target))
+    did_something = False
+
     health = zx.thing_get_health(owner)
     new_health = int((zx.thing_get_health_max(owner) / 100.0) * 80)
     if new_health > health:
-        zx.level_spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
+        did_something = True
         zx.thing_set_health(owner, new_health)
+
+    stamina = zx.thing_get_stamina(owner)
+    new_stamina = int((zx.thing_get_stamina_max(owner) / 100.0) * 80)
+    if new_stamina > stamina:
+        did_something = True
+        zx.thing_set_stamina(owner, new_stamina)
+
+    if did_something:
+        zx.level_spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
         if zx.if_matches(owner, "is_player"):
             zx.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
     else:

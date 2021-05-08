@@ -335,14 +335,14 @@ int Tp::is_rrr78(void) const                                         { return _i
 int Tp::is_rrr79(void) const                                         { return _is_rrr79; }
 int Tp::is_rrr80(void) const                                         { return _is_rrr80; }
 int Tp::is_rrr81(void) const                                         { return _is_rrr81; }
-int Tp::is_rrr82(void) const                                         { return _is_rrr82; }
-int Tp::is_enchantable(void) const                                         { return _is_enchantable; }
-int Tp::is_indestructible(void) const                                         { return _is_indestructible; }
+int Tp::is_enchantstone(void) const                                  { return _is_enchantstone; }
+int Tp::is_enchantable(void) const                                   { return _is_enchantable; }
+int Tp::is_indestructible(void) const                                { return _is_indestructible; }
 int Tp::is_bones(void) const                                         { return _is_bones; }
-int Tp::is_soft_body(void) const                                         { return _is_soft_body; }
+int Tp::is_soft_body(void) const                                     { return _is_soft_body; }
 int Tp::is_foilage(void) const                                       { return _is_foilage; }
 int Tp::gfx_very_small_shadow_caster(void) const                     { return _gfx_very_small_shadow_caster; }
-int Tp::is_dry_fungus(void) const                                     { return _is_dry_fungus; }
+int Tp::is_dry_fungus(void) const                                    { return _is_dry_fungus; }
 int Tp::is_bridge(void) const                                        { return _is_bridge; }
 int Tp::is_barrel(void) const                                        { return _is_barrel; }
 int Tp::is_burnable(void) const                                      { return _is_burnable; }
@@ -659,14 +659,14 @@ void Tp::set_is_rrr78(int v)                                         { _is_rrr78
 void Tp::set_is_rrr79(int v)                                         { _is_rrr79 = v; }
 void Tp::set_is_rrr80(int v)                                         { _is_rrr80 = v; }
 void Tp::set_is_rrr81(int v)                                         { _is_rrr81 = v; }
-void Tp::set_is_rrr82(int v)                                         { _is_rrr82 = v; }
-void Tp::set_is_enchantable(int v)                                         { _is_enchantable = v; }
-void Tp::set_is_indestructible(int v)                                         { _is_indestructible = v; }
+void Tp::set_is_enchantstone(int v)                                  { _is_enchantstone = v; }
+void Tp::set_is_enchantable(int v)                                   { _is_enchantable = v; }
+void Tp::set_is_indestructible(int v)                                { _is_indestructible = v; }
 void Tp::set_is_bones(int v)                                         { _is_bones = v; }
-void Tp::set_is_soft_body(int v)                                         { _is_soft_body = v; }
+void Tp::set_is_soft_body(int v)                                     { _is_soft_body = v; }
 void Tp::set_is_foilage(int v)                                       { _is_foilage = v; }
 void Tp::set_gfx_very_small_shadow_caster(int v)                     { _gfx_very_small_shadow_caster = v; }
-void Tp::set_is_dry_fungus(int v)                                     { _is_dry_fungus = v; }
+void Tp::set_is_dry_fungus(int v)                                    { _is_dry_fungus = v; }
 void Tp::set_is_bridge(int v)                                        { _is_bridge = v; }
 void Tp::set_is_barrel(int v)                                        { _is_barrel = v; }
 void Tp::set_is_burnable(int v)                                      { _is_burnable = v; }

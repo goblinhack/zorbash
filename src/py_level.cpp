@@ -88,6 +88,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_lava                  ||
                            m.is_monst_easy            ||
                            m.is_monst_hard            ||
+                           m.is_enchantstone          ||
                            m.is_treasure_class_a      ||
                            m.is_treasure_class_b      ||
                            m.is_treasure_class_c      ||
@@ -152,6 +153,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_key                   ||
                     m.is_monst_easy            ||
                     m.is_monst_hard            ||
+                    m.is_enchantstone          ||
                     m.is_treasure_class_a      ||
                     m.is_treasure_class_b      ||
                     m.is_treasure_class_c      ||
@@ -595,7 +597,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_rrr79_at, is_rrr79)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr7_at, is_rrr7)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr80_at, is_rrr80)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr81_at, is_rrr81)
-LEVEL_BODY_GET_BOOL_AT(level_is_rrr82_at, is_rrr82)
+LEVEL_BODY_GET_BOOL_AT(level_is_enchantstone_at, is_enchantstone)
 LEVEL_BODY_GET_BOOL_AT(level_is_enchantable_at, is_enchantable)
 LEVEL_BODY_GET_BOOL_AT(level_is_indestructible_at, is_indestructible)
 LEVEL_BODY_GET_BOOL_AT(level_is_bones_at, is_bones)

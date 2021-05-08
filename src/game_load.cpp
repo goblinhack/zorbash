@@ -269,7 +269,8 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_deep_water             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_shallow_water          = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_dirt                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_dry_fungus              = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_dry_fungus             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_enchantstone           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_foilage                = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_door                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_ascend_dungeon         = (bits64 >> shift) & 1; shift++;
@@ -375,7 +376,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};          */ in >> bits(my.t->_is_deep_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};       */ in >> bits(my.t->_is_shallow_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ in >> bits(my.t->_is_dirt);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_fungus {};           */ in >> bits(my.t->_is_dry_fungus);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_fungus {};          */ in >> bits(my.t->_is_dry_fungus);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};        */ in >> bits(my.t->_is_enchantstone);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};             */ in >> bits(my.t->_is_foilage);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ in >> bits(my.t->_is_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ in >> bits(my.t->_is_dungeon);
@@ -619,7 +621,17 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           sdl_delay                    */ in >> bits(my.t.sdl_delay                    );
     /* uint32_t           sound_volume                 */ in >> bits(my.t.sound_volume                 );
     /* std::string        player name                  */ in >> bits(g_opt_player_name);
-    /* std::string        seed name                    */ in >> bits(g_opt_seed_name);
+
+    //
+    // Allow the command line to override.
+    //
+    {
+        std::string tmp;
+        in >> bits(tmp);
+        if (g_opt_seed_name.empty()) {
+            g_opt_seed_name = tmp;
+        }
+    }
 
     in >> bits(my.t.hiscores);
 

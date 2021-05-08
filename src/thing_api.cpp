@@ -141,7 +141,7 @@ int Thing::is_described_when_hovering_over(void) const                  {_ retur
 int Thing::is_dirt(void) const                                          {_ return (tp()->is_dirt()); }
 int Thing::is_door(void) const                                          {_ return (tp()->is_door()); }
 int Thing::is_droppable(void) const                                     {_ return (tp()->is_droppable()); }
-int Thing::is_dry_fungus(void) const                                     {_ return (tp()->is_dry_fungus()); }
+int Thing::is_dry_fungus(void) const                                    {_ return (tp()->is_dry_fungus()); }
 int Thing::is_ethereal(void) const                                      {_ return (tp()->is_ethereal()); }
 int Thing::is_ethereal_minion_generator(void) const                     {_ return (tp()->is_ethereal_minion_generator()); }
 int Thing::is_explosion(void) const                                     {_ return (tp()->is_explosion()); }
@@ -281,7 +281,7 @@ int Thing::is_rrr79(void) const                                         {_ retur
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
 int Thing::is_rrr80(void) const                                         {_ return (tp()->is_rrr80()); }
 int Thing::is_rrr81(void) const                                         {_ return (tp()->is_rrr81()); }
-int Thing::is_rrr82(void) const                                         {_ return (tp()->is_rrr82()); }
+int Thing::is_enchantstone(void) const                                         {_ return (tp()->is_enchantstone()); }
 int Thing::is_enchantable(void) const                                         {_ return (tp()->is_enchantable()); }
 int Thing::is_indestructible(void) const                                {_ return (tp()->is_indestructible()); }
 int Thing::is_bones(void) const                                         {_ return (tp()->is_bones()); }

@@ -21,6 +21,7 @@ static Tpidmap tp_blood_splatter;
 static Tpidmap tp_deco;
 static Tpidmap tp_dirt;
 static Tpidmap tp_dry_fungus;
+static Tpidmap tp_enchantstone;
 static Tpidmap tp_foilage;
 static Tpidmap tp_door;
 static Tpidmap tp_ascend_dungeon;
@@ -66,6 +67,7 @@ void tp_random_init (void)
         if (tp->is_dirt())                      { tp_dirt.push_back(tp); }
         if (tp->is_door())                      { tp_door.push_back(tp); }
         if (tp->is_dry_fungus())                { tp_dry_fungus.push_back(tp); }
+        if (tp->is_enchantstone())              { tp_enchantstone.push_back(tp); }
         if (tp->is_ethereal_minion_generator()) { tp_ethereal_generator.push_back(tp); }
         if (tp->is_floor())                     { tp_floor.push_back(tp); }
         if (tp->is_floor_deco())                { tp_deco.push_back(tp); }
@@ -358,6 +360,15 @@ Tpp tp_random_dry_fungus (void)
         return (nullptr);
     }
     return tp_get_with_no_rarity_filter(tp_dry_fungus);
+}
+
+Tpp tp_random_enchantstone (void)
+{_
+    if (unlikely(!tp_enchantstone.size())) {
+        ERR("No enchantstones found");
+        return (nullptr);
+    }
+    return tp_get_with_no_rarity_filter(tp_enchantstone);
 }
 
 Tpp tp_random_foilage (void)

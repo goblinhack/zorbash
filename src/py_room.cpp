@@ -111,7 +111,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_descend_dungeon       ||
                            m.is_door                  ||
                            m.is_foilage               ||
-                           m.is_dry_fungus             ||
+                           m.is_dry_fungus            ||
                            m.is_floor_deco            ||
                            m.is_food                  ||
                            m.is_gold                  ||
@@ -125,6 +125,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_secret_door           ||
                            m.is_shallow_water         ||
                            m.is_trap                  ||
+                           m.is_enchantstone          ||
                            m.is_treasure_class_a      ||
                            m.is_treasure_class_b      ||
                            m.is_treasure_class_c      ||
@@ -182,6 +183,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_key                   ||
                     m.is_monst_easy            ||
                     m.is_monst_hard            ||
+                    m.is_enchantstone          ||
                     m.is_treasure_class_a      ||
                     m.is_treasure_class_b      ||
                     m.is_treasure_class_c      ||

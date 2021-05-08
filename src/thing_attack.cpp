@@ -266,6 +266,8 @@ _
         it->is_door() ||
         it->is_bridge() ||
         it->is_dry_fungus() ||
+        it->is_treasure() ||
+        it->is_enchantstone() ||
         it->is_foilage() ||
         it->is_brazier() ||
         it->is_barrel() ||

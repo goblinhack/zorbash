@@ -303,7 +303,7 @@ private:
     int _is_rrr79 {};
     int _is_rrr80 {};
     int _is_rrr81 {};
-    int _is_rrr82 {};
+    int _is_enchantstone {};
     int _is_enchantable {};
     int _is_indestructible {};
     int _is_bones {};
@@ -772,7 +772,7 @@ public:
     int is_rrr8(void) const;
     int is_rrr80(void) const;
     int is_rrr81(void) const;
-    int is_rrr82(void) const;
+    int is_enchantstone(void) const;
     int is_enchantable(void) const;
     int is_indestructible(void) const;
     int is_bones(void) const;
@@ -1105,7 +1105,7 @@ public:
     void set_is_rrr8(int);
     void set_is_rrr80(int);
     void set_is_rrr81(int);
-    void set_is_rrr82(int);
+    void set_is_enchantstone(int);
     void set_is_enchantable(int);
     void set_is_indestructible(int);
     void set_is_bones(int);
@@ -1243,6 +1243,7 @@ class Tp* tp_random_deco(void);
 class Tp* tp_random_descend_sewer(void);
 class Tp* tp_random_dirt(void);
 class Tp* tp_random_dry_fungus(void);
+class Tp* tp_random_enchantstone(void);
 class Tp* tp_random_foilage(void);
 class Tp* tp_random_door(void);
 class Tp* tp_random_wall_dungeon(void);

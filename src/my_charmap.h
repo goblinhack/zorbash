@@ -22,12 +22,13 @@ public:
         DECO             =            '|',
         DEEP_WATER       =            'W',
         DIRT             =            ',',
+        ENCHANTSTONE     =            '*',
         DOOR             =            'D',
         DOOR_DOWN        =            'v',
         DOOR_LEFT        =            '<',
         DOOR_RIGHT       =            '>',
         DOOR_UP          =            '^',
-        DRY_FUNGUS        =            '\'',
+        DRY_FUNGUS       =            '\'',
         ENTRANCE         =            'S',
         EXIT             =            'E',
         FLOOR            =            '.',
@@ -63,7 +64,8 @@ public:
     bool                      is_bridge                       {false};
     bool                      is_deep_water                   {false};
     bool                      is_dirt                         {false};
-    bool                      is_dry_fungus                    {false};
+    bool                      is_dry_fungus                   {false};
+    bool                      is_enchantstone                 {false};
     bool                      is_foilage                      {false};
     bool                      is_door                         {false};
     bool                      is_ascend_dungeon               {false};
