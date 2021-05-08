@@ -291,10 +291,12 @@ have_dungeon_start:
                             t->carry(W);
                         }
 
+#if 0
                         {
                             auto W = thing_new("wand_lightning", fpoint(x, y));
                             t->carry(W);
                         }
+#endif
 
                         {
                             auto W = thing_new("wand_fire", fpoint(x, y));
@@ -324,10 +326,12 @@ have_dungeon_start:
                         auto s = thing_new("skill_devoted_thrust", fpoint(x, y));
                         t->skill_add(s);
 
+#if 0
                         {
                             auto i = thing_new("thunderstone", fpoint(x, y));
                             t->carry(i);
                         }
+#endif
 
                         goto placed_player;
                     }
