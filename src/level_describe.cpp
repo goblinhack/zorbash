@@ -19,8 +19,9 @@
 
 void Level::describe (fpoint p)
 {
-    if (game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+    if ((game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         return;
     }
 
@@ -149,8 +150,9 @@ void Level::describe (fpoint p)
 
 void Level::describe (Thingp t)
 {
-    if (game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+    if ((game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         return;
     }
 

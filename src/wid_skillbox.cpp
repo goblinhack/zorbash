@@ -19,18 +19,6 @@
 void wid_skillbox_fini (void)
 {_
     LOG("Skillbox: fini");
-
-    if (game->request_remake_skillbox) {
-        //
-        // continue
-        //
-    } else {
-        if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
-            return;
-        }
-    }
 }
 
 uint8_t wid_skillbox_init (void)
@@ -46,7 +34,8 @@ void wid_skillbox_mouse_over_b (Widp w,
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
         game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
         LOG("Skillbox: moving items; ignore");
         return;
     }
@@ -90,7 +79,8 @@ void wid_skillbox_mouse_over_e (Widp w)
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
         game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
         LOG("Skillbox: moving items; ignore");
         return;
     }

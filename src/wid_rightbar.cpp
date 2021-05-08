@@ -41,7 +41,8 @@ static void wid_rightbar_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
         game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
         LOG("rightbar: moving items; ignore");
         return;
     }
@@ -73,7 +74,8 @@ static void wid_rightbar_mouse_over_e (Widp w)
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
         game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
         LOG("rightbar: moving items; ignore");
         return;
     }

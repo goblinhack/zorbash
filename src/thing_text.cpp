@@ -175,6 +175,9 @@ void Thing::show_botcon_description (void) const
         case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
             skip_showing_keys_to_use = true;
             break;
+        case Game::STATE_ENCHANTING_ITEMS:
+            skip_showing_keys_to_use = true;
+            break;
         case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
             skip_showing_keys_to_use = true;
             break;
