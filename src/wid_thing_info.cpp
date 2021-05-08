@@ -532,7 +532,7 @@ void Game::wid_thing_info_add_melee_damage (WidPopup *w, Thingp t)
     char tmp[40];
     char tmp2[40];
 
-    if (t->is_alive_monst() || t->is_player() || t->is_weapon()) {
+    if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_wand()) {
         auto attack_melee_dice = t->get_damage_melee_dice();
         auto min_value = attack_melee_dice.min_roll();
         auto max_value = attack_melee_dice.max_roll();
@@ -541,7 +541,7 @@ void Game::wid_thing_info_add_melee_damage (WidPopup *w, Thingp t)
                 snprintf(tmp2, sizeof(tmp2) - 1, "%s",
                          t->get_damage_melee_dice_str().c_str());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=gray$Melee %15s ``````", tmp2);
+                         "%%fg=gray$Damage%15s ``````", tmp2);
             } else {
                 snprintf(tmp2, sizeof(tmp2) - 1,
                          "%d-%d(%s)",
@@ -549,7 +549,7 @@ void Game::wid_thing_info_add_melee_damage (WidPopup *w, Thingp t)
                          max_value,
                          t->get_damage_melee_dice_str().c_str());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=gray$Melee %15s ``````", tmp2);
+                         "%%fg=gray$Damage%15s ``````", tmp2);
             }
             w->log(tmp);
         }
