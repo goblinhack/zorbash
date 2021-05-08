@@ -108,6 +108,8 @@ def init_weapon(name, text_name, short_text_name):
     x.set_is_droppable(True)
     x.set_is_interesting(True)
     x.set_is_item(True)
+    x.set_is_enchantable(True)
+    x.set_text_enchant("increase damage by 1")
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_moveable(True)
