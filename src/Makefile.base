@@ -284,6 +284,7 @@ GAME_OBJECTS=				                \
     $(OBJDIR)/wid_skillbox.o                \
     $(OBJDIR)/wid_text_box.o                \
     $(OBJDIR)/wid_thing_collect.o           \
+    $(OBJDIR)/wid_thing_enchant.o           \
     $(OBJDIR)/wid_thing_info.o              \
     $(OBJDIR)/wid_tiles.o                   \
     $(OBJDIR)/wid_topcon.o                  \
