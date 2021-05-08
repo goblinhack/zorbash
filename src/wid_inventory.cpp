@@ -19,18 +19,6 @@
 void wid_inventory_fini (void)
 {_
     LOG("Inventory: fini");
-
-    if (game->request_remake_inventory) {
-        //
-        // continue
-        //
-    } else {
-        if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
-            return;
-        }
-    }
 }
 
 uint8_t wid_inventory_init (void)
@@ -44,7 +32,8 @@ void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t whe
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
         game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
         LOG("Inventory: moving items; ignore");
         return;
     }
@@ -88,7 +77,8 @@ void wid_inventory_mouse_over_e (Widp w)
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
         game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
         LOG("Inventory: moving items; ignore");
         return;
     }
@@ -133,7 +123,8 @@ uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
         game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
         return false;
     }
 

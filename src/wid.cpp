@@ -6029,6 +6029,13 @@ void wid_tick_all (void)
     }
 
     if (game->state == Game::STATE_COLLECTING_ITEMS) {
+        if (!game->bag_primary) {
+            LOG("Handle end of collecting items");
+            game->change_state(Game::STATE_NORMAL);
+        }
+    }
+
+    if (game->state == Game::STATE_ENCHANTING_ITEMS) {
         if (!game->bag_primary && !game->bag_secondary) {
             LOG("Handle end of collecting items");
             game->change_state(Game::STATE_NORMAL);

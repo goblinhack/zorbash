@@ -32,6 +32,9 @@ void Game::change_state (int new_state)
         case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
             LOG("State changed to STATE_COLLECTING_ITEMS");
             break;
+        case STATE_ENCHANTING_ITEMS: // Collecting en masse from the level
+            LOG("State changed to STATE_ENCHANTING_ITEMS");
+            break;
         case STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
             LOG("State changed to STATE_CHOOSING_TARGET");
             break;
@@ -55,6 +58,7 @@ void Game::change_state (int new_state)
         case STATE_NORMAL:
         case STATE_MOVING_ITEMS:     // Currently managing inventory
         case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+        case STATE_ENCHANTING_ITEMS:
             if (level) {
                 level->cursor_recreate();
                 level->cursor->cursor_path_stop();

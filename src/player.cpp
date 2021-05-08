@@ -39,7 +39,12 @@ void player_tick (void)
             return;
         case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
             if (g_opt_debug4) {
-                LOG("Ignore player action when collectin items");
+                LOG("Ignore player action when collecting items");
+            }
+            return;
+        case Game::STATE_ENCHANTING_ITEMS:
+            if (g_opt_debug4) {
+                LOG("Ignore player action when enchanting items");
             }
             return;
         case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at

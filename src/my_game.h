@@ -236,6 +236,7 @@ public:
         STATE_NORMAL,
         STATE_MOVING_ITEMS,     // Currently managing inventory
         STATE_COLLECTING_ITEMS, // Collecting en masse from the level
+        STATE_ENCHANTING_ITEMS, // Upgrading items
         STATE_CHOOSING_TARGET,  // Looking to somewhere to throw at
     };
     int                state {STATE_NORMAL};
