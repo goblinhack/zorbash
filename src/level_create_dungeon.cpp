@@ -268,7 +268,7 @@ have_dungeon_start:
                         auto b = thing_new("bag_small", fpoint(x, y));
                         t->carry(b);
 
-                        auto f = thing_new("food_frog", fpoint(x, y));
+                        auto f = thing_new("enchantstone", fpoint(x, y));
                         t->carry(f);
 
                         {
