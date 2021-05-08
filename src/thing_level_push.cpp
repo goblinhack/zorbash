@@ -45,8 +45,10 @@ void Thing::level_push (void)
                                                    level->set_is_bridge(mx, my); }
     if (is_dirt())                               { i_set_is_dirt = true;
                                                    level->set_is_dirt(mx, my); }
-    if (is_dry_fungus())                          { i_set_is_dry_fungus = true;
+    if (is_dry_fungus())                         { i_set_is_dry_fungus = true;
                                                    level->set_is_dry_fungus(mx, my); }
+    if (is_enchantstone())                       { i_set_is_enchantstone = true;
+                                                   level->set_is_enchantstone(mx, my); }
     if (is_foilage())                            { i_set_is_foilage = true;
                                                    level->set_is_foilage(mx, my); }
     if (is_door() && !is_open)                   { i_set_is_door = true;

@@ -85,6 +85,8 @@ void Level::update_minimap (void)
                     c = GRAY20;
                 } else if (is_dry_fungus(x, y)) {
                     c = BROWN;
+                } else if (is_enchantstone(x, y)) {
+                    c = YELLOW;
                 } else if (is_foilage(x, y)) {
                     c = DARKGREEN;
                 } else {
@@ -195,6 +197,8 @@ void Level::update_minimap (void)
                     c = GRAY20;
                 } else if (is_dry_fungus(x, y)) {
                     c = BROWN;
+                } else if (is_enchantstone(x, y)) {
+                    c = YELLOW;
                 } else if (is_foilage(x, y)) {
                     c = DARKGREEN;
                 } else if (edge_of_sceen) {

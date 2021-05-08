@@ -124,7 +124,8 @@ public:
     uint64_t i_set_is_deep_water:1             {};
     uint64_t i_set_is_shallow_water:1          {};
     uint64_t i_set_is_dirt:1                   {};
-    uint64_t i_set_is_dry_fungus:1              {};
+    uint64_t i_set_is_dry_fungus:1             {};
+    uint64_t i_set_is_enchantstone:1           {};
     uint64_t i_set_is_foilage:1                {};
     uint64_t i_set_is_door:1                   {};
     uint64_t i_set_is_ascend_dungeon:1         {};
@@ -848,7 +849,7 @@ public:
     int is_rrr8(void) const;
     int is_rrr80(void) const;
     int is_rrr81(void) const;
-    int is_rrr82(void) const;
+    int is_enchantstone(void) const;
     int is_rrr9(void) const;
     int is_rrr99(void) const;
     int is_secret_door(void) const;

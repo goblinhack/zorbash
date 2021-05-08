@@ -58,7 +58,12 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::DRY_FUNGUS;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_dry_fungus         = true;
+    c->is_dry_fungus        = true;
+
+    char_index              = Charmap::ENCHANTSTONE;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_enchantstone      = true;
 
     char_index              = Charmap::FOILAGE;
     c = &all_charmaps[char_index];
