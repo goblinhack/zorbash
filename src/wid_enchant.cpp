@@ -26,6 +26,22 @@ static void wid_enchant_destroy (void)
     delete wid_enchant;
     wid_enchant = nullptr;
     game->hard_unpause();
+    game->change_state(Game::STATE_NORMAL);
+}
+
+static void wid_enchant_slot (int slot)
+{_
+    if (slot >= (int)enchant_items.size()) {
+        wid_enchant_destroy();
+    }
+
+    auto player = game->level->player;
+    if (player) {
+        auto t = enchant_items[slot];
+        player->enchant(t);
+    }
+
+    wid_enchant_destroy();
 }
 
 static uint8_t wid_enchant_key_up (Widp w, const struct SDL_Keysym *key)
@@ -44,7 +60,6 @@ static uint8_t wid_enchant_key_up (Widp w, const struct SDL_Keysym *key)
             default: {
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case '0':
                     case '1':
                     case '2':
                     case '3':
@@ -53,11 +68,9 @@ static uint8_t wid_enchant_key_up (Widp w, const struct SDL_Keysym *key)
                     case '6':
                     case '7':
                     case '8':
-                    case '9': {
-                        int slot = c - '0';
-                        TOPCON("TODO %d",slot);
+                    case '9':
+                        wid_enchant_slot(c - '1');
                         return true;
-                    }
                     case 'b':
                     case SDLK_ESCAPE: {_
                         CON("PLAYER: Load game cancelled");
@@ -85,14 +98,14 @@ static uint8_t wid_enchant_key_down (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_enchant_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    auto slot = wid_get_int_context(w);
-    TOPCON("slot %d",slot);
+    wid_enchant_slot(wid_get_int_context(w));
     return true;
 }
 
 void Game::wid_enchant_create (void)
 {_
     LOG("Thing enchant create");
+    change_state(Game::STATE_ENCHANTING_ITEMS);
 
     auto player = game->level->player;
     if (!player){
@@ -100,6 +113,7 @@ void Game::wid_enchant_create (void)
         return;
     }
 
+    enchant_items.clear();
     std::map<Tpp, bool> found;
     for (auto id : player->monstp->carrying) {
         auto t = thing_find(id);
@@ -108,10 +122,16 @@ void Game::wid_enchant_create (void)
             if (found.find(tp) != found.end()) {
                 continue;
             }
-            if (t->is_enchantable()) {
-                found[tp] = true;
-                enchant_items.push_back(t);
+            if (!t->is_enchantable()) {
+                continue;
             }
+            if (t->get_enchant_max()) {
+                if (t->get_enchant() >= t->get_enchant_max()) {
+                    continue;
+                }
+            }
+            found[tp] = true;
+            enchant_items.push_back(t);
         }
     }
 
@@ -122,10 +142,16 @@ void Game::wid_enchant_create (void)
             if (found.find(tp) != found.end()) {
                 continue;
             }
-            if (t->is_enchantable()) {
-                found[tp] = true;
-                enchant_items.push_back(t);
+            if (!t->is_enchantable()) {
+                continue;
             }
+            if (t->get_enchant_max()) {
+                if (t->get_enchant() >= t->get_enchant_max()) {
+                    continue;
+                }
+            }
+            found[tp] = true;
+            enchant_items.push_back(t);
         }
     }
 
@@ -157,6 +183,9 @@ void Game::wid_enchant_create (void)
 
         {
             auto wid_icon = wid_new_square_button(w, "item icon");
+            wid_set_int_context(w, slot);
+            wid_set_on_mouse_up(w, wid_enchant_mouse_up);
+
             point tl = make_point(0, 0);
             point br = make_point(2, 2);
             wid_set_pos(wid_icon, tl, br);
@@ -175,14 +204,22 @@ void Game::wid_enchant_create (void)
 
         {
             auto wid_item = wid_new_square_button(w, "item name");
+            wid_set_int_context(w, slot);
+            wid_set_on_mouse_up(w, wid_enchant_mouse_up);
+
             point tl = make_point(3, 0);
             point br = make_point(width - 2, 2);
             wid_set_pos(wid_item, tl, br);
             wid_set_style(wid_item, UI_WID_STYLE_DARK);
-            wid_set_int_context(w, slot);
-            wid_set_text(wid_item, " " + t->text_name() + ", " + t->text_enchant());
+
+            if (slot < 9) {
+                wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + 
+                             t->text_name() + ", " + t->text_enchant());
+            } else {
+                wid_set_text(wid_item, t->text_name() + ", " + t->text_enchant());
+            }
+
             wid_set_text_lhs(wid_item, true);
-            wid_set_on_mouse_up(wid_item, wid_enchant_mouse_up);
             wid_update(wid_item);
         }
         wid_update(w);

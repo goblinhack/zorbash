@@ -333,8 +333,8 @@ int Tp::is_rrr76(void) const                                         { return _i
 int Tp::is_rrr77(void) const                                         { return _is_rrr77; }
 int Tp::is_rrr78(void) const                                         { return _is_rrr78; }
 int Tp::is_rrr79(void) const                                         { return _is_rrr79; }
-int Tp::is_rrr80(void) const                                         { return _is_rrr80; }
-int Tp::is_rrr81(void) const                                         { return _is_rrr81; }
+int Tp::enchant_level(void) const                                         { return _enchant_level; }
+int Tp::enchant_max(void) const                                         { return _enchant_max; }
 int Tp::is_enchantstone(void) const                                  { return _is_enchantstone; }
 int Tp::is_enchantable(void) const                                   { return _is_enchantable; }
 int Tp::is_indestructible(void) const                                { return _is_indestructible; }
@@ -657,8 +657,8 @@ void Tp::set_is_rrr76(int v)                                         { _is_rrr76
 void Tp::set_is_rrr77(int v)                                         { _is_rrr77 = v; }
 void Tp::set_is_rrr78(int v)                                         { _is_rrr78 = v; }
 void Tp::set_is_rrr79(int v)                                         { _is_rrr79 = v; }
-void Tp::set_is_rrr80(int v)                                         { _is_rrr80 = v; }
-void Tp::set_is_rrr81(int v)                                         { _is_rrr81 = v; }
+void Tp::set_enchant_level(int v)                                         { _enchant_level = v; }
+void Tp::set_enchant_max(int v)                                         { _enchant_max = v; }
 void Tp::set_is_enchantstone(int v)                                  { _is_enchantstone = v; }
 void Tp::set_is_enchantable(int v)                                   { _is_enchantable = v; }
 void Tp::set_is_indestructible(int v)                                { _is_indestructible = v; }

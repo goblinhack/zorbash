@@ -75,6 +75,8 @@ public:
     int          charge_count = {};          // How many things this thing spawned.
     int          stamina = {};
     int          stamina_max = {};
+    int          enchant = {};
+    int          enchant_max = {};
     int          poison = {};
     int          stats01 = {};
     int          stats02 = {};

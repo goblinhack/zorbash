@@ -28,6 +28,16 @@ PyObject *thing_incr_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_decr_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds);
 
+PyObject *thing_set_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_incr_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_decr_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
+
+PyObject *thing_set_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_incr_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_decr_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
+
 PyObject *thing_set_current_damage(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_current_damage(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_decr_current_damage(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -240,8 +250,8 @@ PyObject *thing_is_rrr76(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr77(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr78(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr79(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr80(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr81(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_enchant_level(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_indestructible(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -299,5 +309,9 @@ PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds);
+
+PyObject *thing_get_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_damage_melee(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #endif

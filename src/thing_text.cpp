@@ -157,6 +157,11 @@ std::string Thing::short_text_capitalized (void) const
         
         c++;
     }
+
+    if (get_enchant()) {
+        out += " +" + std::to_string(get_enchant());
+    }
+
     return out;
 }
 

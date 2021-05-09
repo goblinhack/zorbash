@@ -466,11 +466,11 @@ class Tp:
     def set_is_rrr79(self, value):
         zx.tp_set_is_rrr79(self, value)
 
-    def set_is_rrr80(self, value):
-        zx.tp_set_is_rrr80(self, value)
+    def set_enchant_level(self, value):
+        zx.tp_set_enchant_level(self, value)
 
-    def set_is_rrr81(self, value):
-        zx.tp_set_is_rrr81(self, value)
+    def set_enchant_max(self, value):
+        zx.tp_set_enchant_max(self, value)
 
     def set_is_enchantstone(self, value):
         zx.tp_set_is_enchantstone(self, value)

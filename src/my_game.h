@@ -176,6 +176,7 @@ public:
     void wid_thing_info_add_gold_value(WidPopup *w, Thingp t);
     void wid_thing_info_add_health(WidPopup *w, Thingp t);
     void wid_thing_info_add_item_rarity(WidPopup *w, Thingp t);
+    void wid_thing_info_add_enchant(WidPopup *w, Thingp t);
     void wid_thing_info_add_melee_damage(WidPopup *w, Thingp t);
     void wid_thing_info_add_monst_rarity(WidPopup *w, Thingp t);
     void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);

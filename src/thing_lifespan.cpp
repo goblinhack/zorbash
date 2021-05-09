@@ -76,6 +76,9 @@ void Thing::lifespan_tick (void)
         top_owner->on_lifespan(this);
     }
 
+    //
+    // This is for torches
+    //
     if (get_charge_count()) {
         decr_charge_count();
         if (get_charge_count()) {

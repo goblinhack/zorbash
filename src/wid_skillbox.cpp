@@ -122,6 +122,11 @@ uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
     auto slot = wid_get_int_context(w);
     LOG("Skillbox: mouse up on slot %d", slot);
 
+    if (game->state == Game::STATE_ENCHANTING_ITEMS) {
+        wid_thing_info_fini();
+        return false;
+    }
+
     if (game->state == Game::STATE_MOVING_ITEMS) {
         wid_thing_info_fini();
         return false;

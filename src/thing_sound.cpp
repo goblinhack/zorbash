@@ -82,7 +82,11 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
     }
 
     int distance = distance_to_player();
-    if (distance >= DMAP_IS_PASSABLE) {
+    if (distance == DMAP_IS_WALL) {
+        //
+        // Ok to hit walls
+        //
+    } else if (distance >= DMAP_IS_PASSABLE) {
         LOG("Cannot play sound %s on channel %d, cannot reach target", alias.c_str(), channel);
         return true;
     }
@@ -103,7 +107,12 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
 
     volume *= MIX_MAX_VOLUME;
 
-    volume -= distance;
+    if (distance == DMAP_IS_WALL) {
+        volume /= 2;
+    } else {
+        volume -= distance;
+    }
+
     if (volume <= 0) {
         return true;
     }

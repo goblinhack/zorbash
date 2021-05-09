@@ -23,6 +23,7 @@ def skill_devoted_thrust_init(name, text_name):
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_skill(True)
     x.set_is_enchantable(True)
+    x.set_enchant_max(2)
     x.set_text_enchant("increase damage by 50%")
     x.set_long_text_description("Uses half of your stamina points up in one mighty strike.\n\nCan be used multiple times, but beware, your stamina will rapidly drop to zero and you may end up unable to attack or jump away.")
     x.set_on_use_do("skill_devoted_thrust.on_use()")
