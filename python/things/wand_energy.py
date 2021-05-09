@@ -1,6 +1,8 @@
 import zx
 import tp
 
+mytp = None
+
 def on_use(owner, item, target, x, y):
     #zx.topcon("owner  {} {}".format(zx.thing_get_name(owner), zx.thing_get_health(owner)))
     #zx.topcon("item   {} {}".format(zx.thing_get_name(item), zx.thing_get_health(item)))
@@ -30,6 +32,9 @@ def on_enchant(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
+    global mytp
+    mytp = x
+
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
     x.set_charge_count(5)
