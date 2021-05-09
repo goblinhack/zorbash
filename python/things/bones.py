@@ -3,21 +3,21 @@ import tp
 
 
 def tp_init(name):
-    x = tp.Tp(name, "some bones and skin and stuff")
-    x.set_gfx_show_outlined(True)
-    x.set_is_able_to_fall(True)
-    x.set_is_bones(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_removeable_if_out_of_slots(True)
-    x.set_normal_placement_rules(True)
-    x.set_text_a_or_an("a")
-    x.set_text_description("Some poor creature's remants.")
-    x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
-    x.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp = tp.Tp(name, "some bones and skin and stuff")
+    mytp.set_gfx_show_outlined(True)
+    mytp.set_is_able_to_fall(True)
+    mytp.set_is_bones(True)
+    mytp.set_is_loggable_for_important_stuff(False)
+    mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_is_removeable_if_out_of_slots(True)
+    mytp.set_normal_placement_rules(True)
+    mytp.set_text_a_or_an("a")
+    mytp.set_text_description("Some poor creature's remants.")
+    mytp.set_z_depth(zx.MAP_DEPTH_FLOOR2)
+    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    x.set_tile(tile=name)
-    x.update()
+    mytp.set_tile(tile=name)
+    mytp.update()
 
 def init():
     tp_init(name="bones.1")

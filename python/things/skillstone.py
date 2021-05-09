@@ -2,7 +2,7 @@ import zx
 import tp
 
 def explode(me, x, y):
-    zx.thing_msg(me, "The enchantstone explodes.")
+    zx.thing_msg(me, "The skillstone explodes.")
     zx.level_spawn_at_thing(me, "explosion_major")
     zx.level_spawn_fire_around_thing(me, "fire")
     zx.level_spawn_at_thing(me, "fire")
@@ -41,16 +41,16 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_throwable(True)
     mytp.set_is_treasure(True)
     mytp.set_is_treasure_class_c(True)
-    mytp.set_is_enchantstone(True)
+    mytp.set_is_skillstone(True)
     mytp.set_is_usable(True)
     mytp.set_is_used_when_thrown(True)
-    mytp.set_long_text_description("Use this magical stone to bestow powers on other items you carry.")
-    mytp.set_on_fall_do("enchantstone.on_fall()")
-    mytp.set_on_fire_do("enchantstone.on_fire()")
-    mytp.set_on_hit_do("enchantstone.on_hit()")
+    mytp.set_long_text_description("Use this magical stone to learn me some new skills into your brain matter thing.")
+    mytp.set_on_fall_do("skillstone.on_fall()")
+    mytp.set_on_fire_do("skillstone.on_fire()")
+    mytp.set_on_hit_do("skillstone.on_hit()")
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("A glowing enchantstone")
+    mytp.set_text_description("A glowing skillstone")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
@@ -59,6 +59,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.update()
 
 def init():
-    tp_init(name="enchantstone", text_name="enchantstone", short_text_name="enchantstone")
+    tp_init(name="skillstone", text_name="skillstone", short_text_name="skillstone")
 
 init()

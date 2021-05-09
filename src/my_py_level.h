@@ -207,7 +207,7 @@ PyObject *level_is_rrr75_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr76_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr77_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr78_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr79_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_skillstone_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_enchant_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_enchant_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_enchantstone_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -3,31 +3,31 @@ import tp
 
 
 def tp_init(name, tiles=[]):
-    x = tp.Tp(name, "foilage")
-    x.set_collision_attack(True)
-    x.set_collision_check(True)
-    x.set_collision_circle(True)
-    x.set_collision_hit_priority(2)
-    x.set_collision_radius(0.40)
-    x.set_gfx_shown_in_bg(True)
-    x.set_health_initial_dice("1d5")
-    x.set_is_able_to_fall(True)
-    x.set_is_attackable_by_player(True)
-    x.set_is_cursor_can_hover_over(True)
-    x.set_is_described_when_hovering_over(True)
-    x.set_is_foilage(True)
-    x.set_is_light_blocker(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_text_a_or_an("the")
-    x.set_text_description("Thick and sicky looking foilage and roots.")
-    x.set_z_depth(zx.MAP_DEPTH_WEAPON)
-    x.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp = tp.Tp(name, "foilage")
+    mytp.set_collision_attack(True)
+    mytp.set_collision_check(True)
+    mytp.set_collision_circle(True)
+    mytp.set_collision_hit_priority(2)
+    mytp.set_collision_radius(0.40)
+    mytp.set_gfx_shown_in_bg(True)
+    mytp.set_health_initial_dice("1d5")
+    mytp.set_is_able_to_fall(True)
+    mytp.set_is_attackable_by_player(True)
+    mytp.set_is_cursor_can_hover_over(True)
+    mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_foilage(True)
+    mytp.set_is_light_blocker(True)
+    mytp.set_is_loggable_for_important_stuff(False)
+    mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_text_a_or_an("the")
+    mytp.set_text_description("Thick and sicky looking foilage and roots.")
+    mytp.set_z_depth(zx.MAP_DEPTH_WEAPON)
+    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     for t in tiles:
-        x.set_tile(t)
+        mytp.set_tile(t)
 
-    x.update()
+    mytp.update()
 
 def init():
     tp_init(name="foilage",

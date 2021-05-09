@@ -1,6 +1,8 @@
 import zx
 import tp
 
+mytp = None
+
 def on_use(owner, skill, target, x, y):
     zx.level_spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
     #zx.topcon("owner  {} {}".format(zx.thing_get_name(owner), zx.thing_get_health(owner)))
@@ -22,20 +24,21 @@ def on_use(owner, skill, target, x, y):
         zx.thing_skill_deactivate(owner, skill)
 
 def skill_devoted_thrust_init(name, text_name):
-    x = tp.Tp(name, text_name)
-    x.set_is_loggable_for_important_stuff(True)
-    x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_is_skill(True)
-    x.set_is_enchantable(True)
-    x.set_enchant_max(2)
-    x.set_text_enchant("+10 percent damage")
-    x.set_long_text_description("Uses half of your stamina points up in one mighty strike.\n\nCan be used multiple times, but beware, your stamina will rapidly drop to zero and you may end up unable to attack or jump away. Each enchant will add 10 percent to the damage, but will take the additional bonus off your stamina.")
-    x.set_on_use_do("skill_devoted_thrust.on_use()")
-    x.set_text_description("Devoted thrust skill.")
-    x.set_tile(tile=name)
-    x.set_tile(tile=name + "_inactive")
-    x.set_tile(tile=name + "_activated")
-    x.update()
+    global mytp
+    mytp = tp.Tp(name, text_name)
+    mytp.set_is_loggable_for_important_stuff(True)
+    mytp.set_is_loggable_for_unimportant_stuff(True)
+    mytp.set_is_skill(True)
+    mytp.set_is_enchantable(True)
+    mytp.set_enchant_max(2)
+    mytp.set_text_enchant("+10 percent damage")
+    mytp.set_long_text_description("Uses half of your stamina points up in one mighty strike.\n\nCan be used multiple times, but beware, your stamina will rapidly drop to zero and you may end up unable to attack or jump away. Each enchant will add 10 percent to the damage, but will take the additional bonus off your stamina.")
+    mytp.set_on_use_do("skill_devoted_thrust.on_use()")
+    mytp.set_text_description("Devoted thrust skill.")
+    mytp.set_tile(tile=name)
+    mytp.set_tile(tile=name + "_inactive")
+    mytp.set_tile(tile=name + "_activated")
+    mytp.update()
 
 def init():
     skill_devoted_thrust_init(name="skill_devoted_thrust", text_name="devoted thrust")

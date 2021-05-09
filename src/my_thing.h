@@ -854,7 +854,7 @@ public:
     int is_rrr76(void) const;
     int is_rrr77(void) const;
     int is_rrr78(void) const;
-    int is_rrr79(void) const;
+    int is_skillstone(void) const;
     int is_rrr8(void) const;
     int enchant_level(void) const;
     int enchant_max(void) const;
@@ -899,6 +899,8 @@ public:
     int item_count_excluding_charges(Tpp item);
     int item_count_including_charges(Tpp item);
     int item_slot_charge_count(const uint32_t slot);
+    int item_enchant_count(const uint32_t slot);
+    int skill_enchant_count(const uint32_t slot);
     int item_slot_count(const uint32_t slot);
     int light_strength(void);
     int loves_fire(void) const;

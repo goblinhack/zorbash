@@ -4,16 +4,16 @@ import tp
 
 def tp_init(name):
     text_name = "the grid"
-    x = tp.Tp(name, text_name)
-    x.set_is_able_to_fall(False)
-    x.set_is_the_grid(True)
-    x.set_text_a_or_an("the")
-    x.set_text_description("The grid.")
-    x.set_z_depth(zx.MAP_DEPTH_THE_GRID)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp = tp.Tp(name, text_name)
+    mytp.set_is_able_to_fall(False)
+    mytp.set_is_the_grid(True)
+    mytp.set_text_a_or_an("the")
+    mytp.set_text_description("The grid.")
+    mytp.set_z_depth(zx.MAP_DEPTH_THE_GRID)
+    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    x.set_tile(tile=name)
-    x.update()
+    mytp.set_tile(tile=name)
+    mytp.update()
 
 def init():
     tp_init(name="the_grid")

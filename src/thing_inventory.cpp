@@ -438,12 +438,12 @@ _
 
 int Thing::item_slot_charge_count (const uint32_t slot)
 {_
-    auto tp_id = get(monstp->inventory_id, slot);
-    if (!tp_id) {
+    if (!monstp) {
         return 0;
     }
 
-    if (!monstp) {
+    auto tp_id = get(monstp->inventory_id, slot);
+    if (!tp_id) {
         return 0;
     }
 
@@ -453,6 +453,29 @@ int Thing::item_slot_charge_count (const uint32_t slot)
     }
 
     return item_count_including_charges(tpp);
+}
+
+int Thing::item_enchant_count (const uint32_t slot)
+{_
+    if (!monstp) {
+        return 0;
+    }
+
+    auto tp_id = get(monstp->inventory_id, slot);
+    if (!tp_id) {
+        return 0;
+    }
+
+    for (auto oid : monstp->carrying) {
+        auto o = game->level->thing_find(oid);
+        if (o) {
+            if (o->tp()->id == tp_id) {
+                return o->get_enchant();
+            }
+        }
+    }
+
+    return 0;
 }
 
 int Thing::item_slot_count (const uint32_t slot)

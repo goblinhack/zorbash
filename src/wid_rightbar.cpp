@@ -406,13 +406,25 @@ static void wid_rightbar_create (void)
                 //
                 // Print item count
                 //
-                auto count = player->item_slot_charge_count(i);
-                if (count > 9) {
+                auto item_count = player->item_slot_charge_count(i);
+                if (item_count > 9) {
                     auto tile = tile_find_mand("item_count_N");
                     wid_set_fg3_tile(w, tile);
-                } else if (count > 1) {
-                    auto tile = tile_find_mand(
-                                    "item_count_" + std::to_string(count));
+                } else if (item_count > 1) {
+                    auto tile = tile_find_mand("item_count_" + std::to_string(item_count));
+                    wid_set_fg3_tile(w, tile);
+                }
+
+                //
+                // Print enchant count. This overrides the above. If you have
+                // both I'm not sure how to represent that.
+                //
+                auto enchant_count = player->item_enchant_count(i);
+                if (enchant_count > 9) {
+                    auto tile = tile_find_mand("item_enchant_N");
+                    wid_set_fg3_tile(w, tile);
+                } else if (enchant_count > 0) {
+                    auto tile = tile_find_mand("item_enchant_" + std::to_string(enchant_count));
                     wid_set_fg3_tile(w, tile);
                 }
 
@@ -507,6 +519,19 @@ static void wid_rightbar_create (void)
                 wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
 
                 wid_set_int_context(w, i);
+
+                //
+                // Print enchant count. This overrides the above. If you have
+                // both I'm not sure how to represent that.
+                //
+                auto enchant_count = player->skill_enchant_count(i);
+                if (enchant_count > 9) {
+                    auto tile = tile_find_mand("item_enchant_N");
+                    wid_set_fg3_tile(w, tile);
+                } else if (enchant_count > 0) {
+                    auto tile = tile_find_mand("item_enchant_" + std::to_string(enchant_count));
+                    wid_set_fg3_tile(w, tile);
+                }
             }
             item++;
         }

@@ -12,31 +12,31 @@ def on_death(me, x, y):
                 zx.thing_killed(bridge, "dead")
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
-    x = tp.Tp(name, "bridge")
-    x.set_gfx_shown_in_bg(True)
-    x.set_is_able_to_fall(True)
-    x.set_is_bridge(True)
-    x.set_is_cursor_can_hover_over(True)
-    x.set_is_described_when_hovering_over(True)
-    x.set_is_interesting(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_on_death_do("bridge.on_death()")
-    x.set_text_a_or_an("the")
-    x.set_text_description("Shaky bridge.")
-    x.set_z_depth(zx.MAP_DEPTH_FLOOR)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp = tp.Tp(name, "bridge")
+    mytp.set_gfx_shown_in_bg(True)
+    mytp.set_is_able_to_fall(True)
+    mytp.set_is_bridge(True)
+    mytp.set_is_cursor_can_hover_over(True)
+    mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_interesting(True)
+    mytp.set_is_loggable_for_important_stuff(False)
+    mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_on_death_do("bridge.on_death()")
+    mytp.set_text_a_or_an("the")
+    mytp.set_text_description("Shaky bridge.")
+    mytp.set_z_depth(zx.MAP_DEPTH_FLOOR)
+    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     for t in tiles:
-        x.set_tile(t)
+        mytp.set_tile(t)
 
     if bot3_tiles is not None:
         for t in bot3_tiles:
-            x.set_bot3_tile(t)
+            mytp.set_bot3_tile(t)
     else:
-        x.set_bot3_tile(bot3_tile=name)
+        mytp.set_bot3_tile(bot3_tile=name)
 
-    x.update()
+    mytp.update()
 
 def init():
     tp_init(name="bridge_x", tiles=[ "bridge_x", ], bot3_tiles=[ "chasm1.1", ])
