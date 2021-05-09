@@ -485,7 +485,7 @@ static void wid_rightbar_create (void)
                     continue;
                 }
 
-                auto tile = tile_n(tiles, activated ? 1 : 0);
+                auto tile = tile_n(tiles, activated ? 2 : 1);
                 if (!tile) {
                     item++;
                     continue;
