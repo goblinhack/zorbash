@@ -3,33 +3,33 @@ import tp
 
 
 def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
-    x = tp.Tp(name, text_name, short_text_name)
-    x.set_ai_obstacle(True)
-    x.set_damage_melee_dice("1d3+1")
-    x.set_gfx_show_outlined(True)
-    x.set_is_able_to_fall(True)
-    x.set_is_acid(True)
-    x.set_is_active(True) # for lifespan tick
-    x.set_is_hazard(True)
-    x.set_light_strength(1)
-    x.set_gfx_glows(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_meat_eater(True)
-    x.set_lifespan_dice("1d20+10")
-    x.set_light_color("green")
-    x.set_text_a_or_an("")
-    x.set_text_description("A pool of hissing acid.")
-    x.set_text_hits("burns")
-    x.set_tick_catches_up_on_attack(True)
-    x.set_tick_rate_tenths(1)
-    x.set_z_depth(zx.MAP_DEPTH_FLOOR2)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp = tp.Tp(name, text_name, short_text_name)
+    mytp.set_ai_obstacle(True)
+    mytp.set_damage_melee_dice("1d3+1")
+    mytp.set_gfx_show_outlined(True)
+    mytp.set_is_able_to_fall(True)
+    mytp.set_is_acid(True)
+    mytp.set_is_active(True) # for lifespan tick
+    mytp.set_is_hazard(True)
+    mytp.set_light_strength(1)
+    mytp.set_gfx_glows(True)
+    mytp.set_is_loggable_for_important_stuff(False)
+    mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_is_meat_eater(True)
+    mytp.set_lifespan_dice("1d20+10")
+    mytp.set_light_color("green")
+    mytp.set_text_a_or_an("")
+    mytp.set_text_description("A pool of hissing acid.")
+    mytp.set_text_hits("burns")
+    mytp.set_tick_catches_up_on_attack(True)
+    mytp.set_tick_rate_tenths(1)
+    mytp.set_z_depth(zx.MAP_DEPTH_FLOOR2)
+    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     for t in tiles:
-        x.set_tile(tile=t)
+        mytp.set_tile(tile=t)
 
-    x.update()
+    mytp.update()
 
 def init():
     acid_init(name="acid1", text_name="hissing acid", short_text_name="acid",

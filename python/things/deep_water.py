@@ -3,28 +3,28 @@ import tp
 
 
 def tp_init(name, text_name, tiles=[]):
-    x = tp.Tp(name, text_name)
-    x.set_ai_obstacle(True)
-    x.set_gfx_animated(True)
-    x.set_gfx_shown_in_bg(True)
-    x.set_gfx_water(True)
-    x.set_hates_fire(True)
-    x.set_is_able_to_fall(True)
-    x.set_is_deep_water(True)
-    x.set_is_described_when_hovering_over(True)
-    x.set_is_hazard(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_text_a_or_an("the")
-    x.set_text_description("A pool of deep dank water, with things in it.")
-    x.set_z_depth(zx.MAP_DEPTH_WATER)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp = tp.Tp(name, text_name)
+    mytp.set_ai_obstacle(True)
+    mytp.set_gfx_animated(True)
+    mytp.set_gfx_shown_in_bg(True)
+    mytp.set_gfx_water(True)
+    mytp.set_hates_fire(True)
+    mytp.set_is_able_to_fall(True)
+    mytp.set_is_deep_water(True)
+    mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_hazard(True)
+    mytp.set_is_loggable_for_important_stuff(False)
+    mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_text_a_or_an("the")
+    mytp.set_text_description("A pool of deep dank water, with things in it.")
+    mytp.set_z_depth(zx.MAP_DEPTH_WATER)
+    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     delay = 1250
     for t in tiles:
-        x.set_tile(tile=t, delay_ms=delay)
+        mytp.set_tile(tile=t, delay_ms=delay)
 
-    x.update()
+    mytp.update()
 
 def init():
     tp_init(name="deep_water1", text_name="deep water",

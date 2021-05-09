@@ -332,7 +332,7 @@ int Tp::is_rrr75(void) const                                         { return _i
 int Tp::is_rrr76(void) const                                         { return _is_rrr76; }
 int Tp::is_rrr77(void) const                                         { return _is_rrr77; }
 int Tp::is_rrr78(void) const                                         { return _is_rrr78; }
-int Tp::is_rrr79(void) const                                         { return _is_rrr79; }
+int Tp::is_skillstone(void) const                                         { return _is_skillstone; }
 int Tp::enchant_level(void) const                                         { return _enchant_level; }
 int Tp::enchant_max(void) const                                         { return _enchant_max; }
 int Tp::is_enchantstone(void) const                                  { return _is_enchantstone; }
@@ -656,7 +656,7 @@ void Tp::set_is_rrr75(int v)                                         { _is_rrr75
 void Tp::set_is_rrr76(int v)                                         { _is_rrr76 = v; }
 void Tp::set_is_rrr77(int v)                                         { _is_rrr77 = v; }
 void Tp::set_is_rrr78(int v)                                         { _is_rrr78 = v; }
-void Tp::set_is_rrr79(int v)                                         { _is_rrr79 = v; }
+void Tp::set_is_skillstone(int v)                                         { _is_skillstone = v; }
 void Tp::set_enchant_level(int v)                                         { _enchant_level = v; }
 void Tp::set_enchant_max(int v)                                         { _enchant_max = v; }
 void Tp::set_is_enchantstone(int v)                                  { _is_enchantstone = v; }

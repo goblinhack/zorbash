@@ -277,7 +277,7 @@ int Thing::is_rrr75(void) const                                         {_ retur
 int Thing::is_rrr76(void) const                                         {_ return (tp()->is_rrr76()); }
 int Thing::is_rrr77(void) const                                         {_ return (tp()->is_rrr77()); }
 int Thing::is_rrr78(void) const                                         {_ return (tp()->is_rrr78()); }
-int Thing::is_rrr79(void) const                                         {_ return (tp()->is_rrr79()); }
+int Thing::is_skillstone(void) const                                         {_ return (tp()->is_skillstone()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
 int Thing::enchant_level(void) const                                         {_ return (tp()->enchant_level()); }
 int Thing::enchant_max(void) const                                      {_ return (tp()->enchant_max()); }

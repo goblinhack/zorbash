@@ -27,22 +27,22 @@ def on_death(me, x, y):
 # This is an internal only object to fire lasers from monsters
 #
 def tp_init(name, text_name, short_text_name):
-    x = tp.Tp(name, text_name, short_text_name)
-    x.set_collision_circle(True)
-    x.set_collision_radius(0.40)
-    x.set_damage_melee_dice("1d10") # This is the damage when the monst fires
-    x.set_is_interesting(True)
-    x.set_is_laser(True)
-    x.set_is_loggable_for_important_stuff(True)
-    x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_is_no_tile(True)
-    x.set_is_usable(True)
-    x.set_on_death_do("laser_lightning.on_death()")
-    x.set_text_a_or_an("a")
-    x.set_z_depth(zx.MAP_DEPTH_OBJ)
-    x.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp = tp.Tp(name, text_name, short_text_name)
+    mytp.set_collision_circle(True)
+    mytp.set_collision_radius(0.40)
+    mytp.set_damage_melee_dice("1d10") # This is the damage when the monst fires
+    mytp.set_is_interesting(True)
+    mytp.set_is_laser(True)
+    mytp.set_is_loggable_for_important_stuff(True)
+    mytp.set_is_loggable_for_unimportant_stuff(True)
+    mytp.set_is_no_tile(True)
+    mytp.set_is_usable(True)
+    mytp.set_on_death_do("laser_lightning.on_death()")
+    mytp.set_text_a_or_an("a")
+    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    x.update()
+    mytp.update()
 
 def init():
     tp_init(name="laser_lightning", text_name="beam of lightning", short_text_name="laser.lightning")

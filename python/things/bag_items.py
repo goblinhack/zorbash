@@ -3,17 +3,17 @@ import tp
 
 
 def tp_init(name, text_name):
-    x = tp.Tp(name, text_name)
-    x.set_is_able_to_fall(False)
-    x.set_is_bag(True)
-    x.set_is_burnable(True)
-    x.set_is_temporary_bag(True)
-    x.set_long_text_description("Items found.")
-    x.set_text_a_or_an("a")
-    x.set_text_description("Items found.")
+    mytp = tp.Tp(name, text_name)
+    mytp.set_is_able_to_fall(False)
+    mytp.set_is_bag(True)
+    mytp.set_is_burnable(True)
+    mytp.set_is_temporary_bag(True)
+    mytp.set_long_text_description("Items found.")
+    mytp.set_text_a_or_an("a")
+    mytp.set_text_description("Items found.")
 
-    x.set_tile(tile="bag", delay_ms=1000)
-    x.update()
+    mytp.set_tile(tile="bag", delay_ms=1000)
+    mytp.update()
 
 def init():
     tp_init(name="bag_items", text_name="Items found")

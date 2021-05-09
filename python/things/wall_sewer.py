@@ -21,127 +21,127 @@ def tp_init(name,
             bl2_tiles=[],
             br2_tiles=[]):
 
-    x = tp.Tp(name)
-    x.set_ai_obstacle(True)
-    x.set_collision_circle(True)
-    x.set_collision_radius(0.40)
-    x.set_gfx_shown_in_bg(True)
-    x.set_is_able_to_fall(False)
-    x.set_is_cursor_can_hover_over(True)
-    x.set_is_light_blocker(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_is_movement_blocking_hard(True)
-    x.set_is_wall(True)
-    x.set_is_sewer_wall(True)
-    x.set_text_a_or_an("a")
-    x.set_text_description("A slime covered wall.")
-    x.set_z_depth(zx.MAP_DEPTH_OBJ)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp = tp.Tp(name)
+    mytp.set_ai_obstacle(True)
+    mytp.set_collision_circle(True)
+    mytp.set_collision_radius(0.40)
+    mytp.set_gfx_shown_in_bg(True)
+    mytp.set_is_able_to_fall(False)
+    mytp.set_is_cursor_can_hover_over(True)
+    mytp.set_is_light_blocker(True)
+    mytp.set_is_loggable_for_important_stuff(False)
+    mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_is_movement_blocking_hard(True)
+    mytp.set_is_wall(True)
+    mytp.set_is_sewer_wall(True)
+    mytp.set_text_a_or_an("a")
+    mytp.set_text_description("A slime covered wall.")
+    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     if tiles is not None:
         for t in tiles:
-            x.set_tile(t)
+            mytp.set_tile(t)
     else:
-        x.set_tile(tile=name)
+        mytp.set_tile(tile=name)
 
     if left1_tiles is not None:
         for t in left1_tiles:
-            x.set_left1_tile(t)
+            mytp.set_left1_tile(t)
     else:
-        x.set_left1_tile(left1_tile=name)
+        mytp.set_left1_tile(left1_tile=name)
 
     if right1_tiles is not None:
         for t in right1_tiles:
-            x.set_right1_tile(t)
+            mytp.set_right1_tile(t)
     else:
-        x.set_right1_tile(right1_tile=name)
+        mytp.set_right1_tile(right1_tile=name)
 
     if top1_tiles is not None:
         for t in top1_tiles:
-            x.set_top1_tile(t)
+            mytp.set_top1_tile(t)
     else:
-        x.set_top1_tile(top1_tile=name)
+        mytp.set_top1_tile(top1_tile=name)
 
     if bot1_tiles is not None:
         for t in bot1_tiles:
-            x.set_bot1_tile(t)
+            mytp.set_bot1_tile(t)
     else:
-        x.set_bot1_tile(bot1_tile=name)
+        mytp.set_bot1_tile(bot1_tile=name)
 
     if tl1_tiles is not None:
         for t in tl1_tiles:
-            x.set_tl1_tile(t)
+            mytp.set_tl1_tile(t)
     else:
-        x.set_tl1_tile(tl1_tile=name)
+        mytp.set_tl1_tile(tl1_tile=name)
 
     if tr1_tiles is not None:
         for t in tr1_tiles:
-            x.set_tr1_tile(t)
+            mytp.set_tr1_tile(t)
     else:
-        x.set_tr1_tile(tr1_tile=name)
+        mytp.set_tr1_tile(tr1_tile=name)
 
     if bl1_tiles is not None:
         for t in bl1_tiles:
-            x.set_bl1_tile(t)
+            mytp.set_bl1_tile(t)
     else:
-        x.set_bl1_tile(bl1_tile=name)
+        mytp.set_bl1_tile(bl1_tile=name)
 
     if br1_tiles is not None:
         for t in br1_tiles:
-            x.set_br1_tile(t)
+            mytp.set_br1_tile(t)
     else:
-        x.set_br1_tile(br1_tile=name)
+        mytp.set_br1_tile(br1_tile=name)
 
     if left2_tiles is not None:
         for t in left2_tiles:
-            x.set_left2_tile(t)
+            mytp.set_left2_tile(t)
     else:
-        x.set_left2_tile(left2_tile=name)
+        mytp.set_left2_tile(left2_tile=name)
 
     if right2_tiles is not None:
         for t in right2_tiles:
-            x.set_right2_tile(t)
+            mytp.set_right2_tile(t)
     else:
-        x.set_right2_tile(right2_tile=name)
+        mytp.set_right2_tile(right2_tile=name)
 
     if top2_tiles is not None:
         for t in top2_tiles:
-            x.set_top2_tile(t)
+            mytp.set_top2_tile(t)
     else:
-        x.set_top2_tile(top2_tile=name)
+        mytp.set_top2_tile(top2_tile=name)
 
     if bot2_tiles is not None:
         for t in bot2_tiles:
-            x.set_bot2_tile(t)
+            mytp.set_bot2_tile(t)
     else:
-        x.set_bot2_tile(bot2_tile=name)
+        mytp.set_bot2_tile(bot2_tile=name)
 
     if tl2_tiles is not None:
         for t in tl2_tiles:
-            x.set_tl2_tile(t)
+            mytp.set_tl2_tile(t)
     else:
-        x.set_tl2_tile(tl2_tile=name)
+        mytp.set_tl2_tile(tl2_tile=name)
 
     if tr2_tiles is not None:
         for t in tr2_tiles:
-            x.set_tr2_tile(t)
+            mytp.set_tr2_tile(t)
     else:
-        x.set_tr2_tile(tr2_tile=name)
+        mytp.set_tr2_tile(tr2_tile=name)
 
     if bl2_tiles is not None:
         for t in bl2_tiles:
-            x.set_bl2_tile(t)
+            mytp.set_bl2_tile(t)
     else:
-        x.set_bl2_tile(bl2_tile=name)
+        mytp.set_bl2_tile(bl2_tile=name)
 
     if br2_tiles is not None:
         for t in br2_tiles:
-            x.set_br2_tile(t)
+            mytp.set_br2_tile(t)
     else:
-        x.set_br2_tile(br2_tile=name)
+        mytp.set_br2_tile(br2_tile=name)
 
-    x.update()
+    mytp.update()
 
 def init():
     tp_init(name="sewer_wall",

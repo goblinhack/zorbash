@@ -10,6 +10,8 @@
 #include "my_monst.h"
 #include "my_wid_skillbox.h"
 #include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+#include "my_ui.h"
 #include "my_ptrcheck.h"
 
 bool Thing::skill_add (Thingp what)
@@ -127,4 +129,27 @@ void Thing::skill_activate (Thingp what)
 {_
     what->is_activated = true;
     game->request_remake_skillbox = true;
+}
+
+int Thing::skill_enchant_count (const uint32_t slot)
+{_
+    if (!monstp) {
+        return 0;
+    }
+
+    auto tp_id = get(monstp->skillbox_id, slot);
+    if (!tp_id) {
+        return 0;
+    }
+
+    for (auto oid : monstp->skills) {
+        auto o = game->level->thing_find(oid);
+        if (o) {
+            if (o->tp()->id == tp_id) {
+                return o->get_enchant();
+            }
+        }
+    }
+
+    return 0;
 }

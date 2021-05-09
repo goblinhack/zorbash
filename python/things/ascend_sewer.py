@@ -7,32 +7,32 @@ def spawn(me, x, y):
 
 def tp_init(name, tiles=[], left1_tiles=[]):
 
-    x = tp.Tp(name)
-    # x.set_is_minion_generator(True) # don't set to avoid auto place
-    x.set_gfx_animated(True)
-    x.set_gfx_show_outlined(True)
-    x.set_gfx_shown_in_bg(True)
-    x.set_is_able_to_fall(False)
-    x.set_is_active(True)
-    x.set_is_ascend_sewer(True)
-    x.set_is_described_when_hovering_over(True)
-    x.set_is_loggable_for_important_stuff(True)
-    x.set_is_loggable_for_unimportant_stuff(True)
-    x.set_light_color("lime")
-    x.set_light_strength(1)
-    x.set_long_text_description("A way out of these stinking sewers!")
-    x.set_minion_limit(5)
-    x.set_on_idle_dice("1d50+50:ascend_sewer.spawn()")
-    x.set_text_a_or_an("a")
-    x.set_text_description("A slime coated sewer pipe.")
-    x.set_z_depth(zx.MAP_DEPTH_OBJ)
-    x.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp = tp.Tp(name)
+    # mytp.set_is_minion_generator(True) # don't set to avoid auto place
+    mytp.set_gfx_animated(True)
+    mytp.set_gfx_show_outlined(True)
+    mytp.set_gfx_shown_in_bg(True)
+    mytp.set_is_able_to_fall(False)
+    mytp.set_is_active(True)
+    mytp.set_is_ascend_sewer(True)
+    mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_loggable_for_important_stuff(True)
+    mytp.set_is_loggable_for_unimportant_stuff(True)
+    mytp.set_light_color("lime")
+    mytp.set_light_strength(1)
+    mytp.set_long_text_description("A way out of these stinking sewers!")
+    mytp.set_minion_limit(5)
+    mytp.set_on_idle_dice("1d50+50:ascend_sewer.spawn()")
+    mytp.set_text_a_or_an("a")
+    mytp.set_text_description("A slime coated sewer pipe.")
+    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
     delay = 1000
     for t in tiles:
-        x.set_tile(tile=t, delay_ms=delay)
+        mytp.set_tile(tile=t, delay_ms=delay)
 
-    x.update()
+    mytp.update()
 
 def init():
     tp_init(name="ascend_sewer1", tiles=[ "ascend_sewer1.1", "ascend_sewer1.2", ])

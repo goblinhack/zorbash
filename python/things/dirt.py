@@ -7,26 +7,26 @@ import tp
 # will check for the presence of a chasm beneath it and blit the chasm
 #
 def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
-    x = tp.Tp(name)
-    x.set_is_cursor_can_hover_over(True)
-    x.set_is_dirt(True)
-    x.set_is_loggable_for_important_stuff(False)
-    x.set_is_loggable_for_unimportant_stuff(False)
-    x.set_text_a_or_an("the")
-    x.set_text_description("Some dirt, what more can I say?")
-    x.set_z_depth(zx.MAP_DEPTH_FLOOR)
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp = tp.Tp(name)
+    mytp.set_is_cursor_can_hover_over(True)
+    mytp.set_is_dirt(True)
+    mytp.set_is_loggable_for_important_stuff(False)
+    mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_text_a_or_an("the")
+    mytp.set_text_description("Some dirt, what more can I say?")
+    mytp.set_z_depth(zx.MAP_DEPTH_FLOOR)
+    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     for t in tiles:
-        x.set_tile(t)
+        mytp.set_tile(t)
 
     if bot3_tiles is not None:
         for t in bot3_tiles:
-            x.set_bot3_tile(t)
+            mytp.set_bot3_tile(t)
     else:
-        x.set_bot3_tile(bot3_tile=name)
+        mytp.set_bot3_tile(bot3_tile=name)
 
-    x.update()
+    mytp.update()
 
 def init():
     tp_init(name="dirt1",
