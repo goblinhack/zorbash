@@ -9,7 +9,6 @@
 #include "my_sdl.h"
 #include "my_ui.h"
 #include "my_wid_popup.h"
-#include "my_wid_enchant.h"
 #include "my_tile.h"
 #include "my_wid_console.h"
 #include "my_wid_thing_info.h"
@@ -33,6 +32,7 @@ static void wid_enchant_slot (int slot)
 {_
     if (slot >= (int)enchant_items.size()) {
         wid_enchant_destroy();
+        return;
     }
 
     auto player = game->level->player;
@@ -163,8 +163,8 @@ void Game::wid_enchant_an_item (void)
     }
 
     auto m = TERM_WIDTH / 2;
-    point tl = make_point(m - 30, UI_TOPCON_VIS_HEIGHT + 10);
-    point br = make_point(m + 30, tl.y + 25);
+    point tl = make_point(m - 35, UI_TOPCON_VIS_HEIGHT + 10);
+    point br = make_point(m + 35, tl.y + 25);
     auto width = br.x - tl.x;
 
     wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", 
@@ -215,7 +215,7 @@ void Game::wid_enchant_an_item (void)
             wid_set_on_mouse_up(w, wid_enchant_mouse_up);
 
             point tl = make_point(3, 0);
-            point br = make_point(width - 2, 2);
+            point br = make_point(width - 3, 2);
             wid_set_pos(wid_item, tl, br);
             wid_set_style(wid_item, UI_WID_STYLE_DARK);
 

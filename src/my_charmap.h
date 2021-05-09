@@ -23,6 +23,7 @@ public:
         DEEP_WATER       =            'W',
         DIRT             =            ',',
         ENCHANTSTONE     =            '*',
+        SKILLSTONE       =            '&',
         DOOR             =            'D',
         DOOR_DOWN        =            'v',
         DOOR_LEFT        =            '<',
@@ -66,6 +67,7 @@ public:
     bool                      is_dirt                         {false};
     bool                      is_dry_fungus                   {false};
     bool                      is_enchantstone                 {false};
+    bool                      is_skillstone                   {false};
     bool                      is_foilage                      {false};
     bool                      is_door                         {false};
     bool                      is_ascend_dungeon               {false};

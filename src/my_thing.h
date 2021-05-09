@@ -126,6 +126,7 @@ public:
     uint64_t i_set_is_dirt:1                   {};
     uint64_t i_set_is_dry_fungus:1             {};
     uint64_t i_set_is_enchantstone:1           {};
+    uint64_t i_set_is_skillstone:1             {};
     uint64_t i_set_is_foilage:1                {};
     uint64_t i_set_is_door:1                   {};
     uint64_t i_set_is_ascend_dungeon:1         {};
@@ -258,6 +259,7 @@ public:
     bool drop_into_ether(Thingp w);
     bool eat(Thingp it);
     bool enchant(Thingp);
+    bool add_skill(Tpp what);
     bool fall(void);
     bool fall_to_next_level(void);
     bool fire_at_and_choose_target(Thingp);
@@ -383,6 +385,7 @@ public:
     const std::string& str5(void) const;
     const std::string& text_description(void) const;
     const std::string& text_enchant(void) const;
+    const std::string& text_skill(void) const;
     const std::string& text_hits(void) const;
     const std::string& text_name(void) const;
     const std::string& text_title(void) const;

@@ -153,3 +153,36 @@ int Thing::skill_enchant_count (const uint32_t slot)
 
     return 0;
 }
+
+bool Thing::add_skill (Tpp what)
+{_
+    auto t = level->thing_new(what, mid_at);
+    if (!t) {
+        err("Cannot learn skill");
+        return false;
+    }
+
+    TOPCON("You learn %s skill.", t->text_the().c_str());
+    skill_add(t);
+
+    //
+    // Drop an skillstone
+    //
+    auto found = false;
+    for (auto id : monstp->carrying) {
+        auto t = level->thing_find(id);
+        if (!t) {
+            continue;
+        }
+        if (t->is_skillstone()) {
+            drop_into_ether(t);
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        err("no skillstone found");
+    }
+
+    return true;
+}

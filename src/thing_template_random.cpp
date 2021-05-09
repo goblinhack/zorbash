@@ -22,6 +22,7 @@ static Tpidmap tp_deco;
 static Tpidmap tp_dirt;
 static Tpidmap tp_dry_fungus;
 static Tpidmap tp_enchantstone;
+static Tpidmap tp_skillstone;
 static Tpidmap tp_foilage;
 static Tpidmap tp_door;
 static Tpidmap tp_ascend_dungeon;
@@ -41,6 +42,7 @@ static Tpidmap tp_ethereal_generator;
 static Tpidmap tp_brazier;
 static Tpidmap tp_barrel;
 static Tpidmap tp_treasure;
+static Tpidmap tp_skills;
 static Tpidmap tp_item_class_a;
 static Tpidmap tp_item_class_b;
 static Tpidmap tp_item_class_c;
@@ -68,6 +70,7 @@ void tp_random_init (void)
         if (tp->is_door())                      { tp_door.push_back(tp); }
         if (tp->is_dry_fungus())                { tp_dry_fungus.push_back(tp); }
         if (tp->is_enchantstone())              { tp_enchantstone.push_back(tp); }
+        if (tp->is_skillstone())                { tp_skillstone.push_back(tp); }
         if (tp->is_ethereal_minion_generator()) { tp_ethereal_generator.push_back(tp); }
         if (tp->is_floor())                     { tp_floor.push_back(tp); }
         if (tp->is_floor_deco())                { tp_deco.push_back(tp); }
@@ -81,6 +84,7 @@ void tp_random_init (void)
         if (tp->is_rock())                      { tp_rock.push_back(tp); }
         if (tp->is_secret_door())               { tp_secret_door.push_back(tp); }
         if (tp->is_sewer_wall())                { tp_sewer_wall.push_back(tp); }
+        if (tp->is_skill())                     { tp_skills.push_back(tp); }
         if (tp->is_treasure())                  { tp_treasure.push_back(tp); }
         if (tp->is_treasure_class_a())          { tp_item_class_a.push_back(tp); }
         if (tp->is_treasure_class_b())          { tp_item_class_b.push_back(tp); }
@@ -371,6 +375,15 @@ Tpp tp_random_enchantstone (void)
     return tp_get_with_no_rarity_filter(tp_enchantstone);
 }
 
+Tpp tp_random_skillstone (void)
+{_
+    if (unlikely(!tp_skillstone.size())) {
+        ERR("No skillstones found");
+        return (nullptr);
+    }
+    return tp_get_with_no_rarity_filter(tp_skillstone);
+}
+
 Tpp tp_random_foilage (void)
 {_
     if (unlikely(!tp_foilage.size())) {
@@ -612,3 +625,9 @@ Tpp tp_random_descend_sewer (void)
     }
     return tp_get_with_no_rarity_filter(tp_descend_sewer);
 }
+
+const Tpidmap& tp_get_skills (void)
+{_
+    return tp_skills;
+}
+

@@ -49,6 +49,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_dry_fungus(mx, my); }
     if (i_set_is_enchantstone)                         { i_set_is_enchantstone = false;
                                                          level->unset_is_enchantstone(mx, my); }
+    if (i_set_is_skillstone)                           { i_set_is_skillstone = false;
+                                                         level->unset_is_skillstone(mx, my); }
     if (i_set_is_foilage)                              { i_set_is_foilage = false;
                                                          level->unset_is_foilage(mx, my); }
     if (i_set_is_door)                                 { i_set_is_door = false;

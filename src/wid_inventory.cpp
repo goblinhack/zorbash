@@ -163,6 +163,11 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
         return false;
     }
 
+    if (game->state == Game::STATE_CHOOSING_SKILLS) {
+        wid_thing_info_fini();
+        return false;
+    }
+
     if (game->state == Game::STATE_MOVING_ITEMS) {
         wid_thing_info_fini();
     }

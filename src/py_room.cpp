@@ -126,6 +126,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_shallow_water         ||
                            m.is_trap                  ||
                            m.is_enchantstone          ||
+                           m.is_skillstone            ||
                            m.is_treasure_class_a      ||
                            m.is_treasure_class_b      ||
                            m.is_treasure_class_c      ||
@@ -184,6 +185,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_monst_easy            ||
                     m.is_monst_hard            ||
                     m.is_enchantstone          ||
+                    m.is_skillstone            ||
                     m.is_treasure_class_a      ||
                     m.is_treasure_class_b      ||
                     m.is_treasure_class_c      ||

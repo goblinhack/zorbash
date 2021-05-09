@@ -87,6 +87,8 @@ void Level::update_minimap (void)
                     c = BROWN;
                 } else if (is_enchantstone(x, y)) {
                     c = YELLOW;
+                } else if (is_skillstone(x, y)) {
+                    c = RED;
                 } else if (is_foilage(x, y)) {
                     c = DARKGREEN;
                 } else {
@@ -199,6 +201,8 @@ void Level::update_minimap (void)
                     c = BROWN;
                 } else if (is_enchantstone(x, y)) {
                     c = YELLOW;
+                } else if (is_skillstone(x, y)) {
+                    c = RED;
                 } else if (is_foilage(x, y)) {
                     c = DARKGREEN;
                 } else if (edge_of_sceen) {

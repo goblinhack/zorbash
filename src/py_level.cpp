@@ -89,6 +89,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_monst_easy            ||
                            m.is_monst_hard            ||
                            m.is_enchantstone          ||
+                           m.is_skillstone            ||
                            m.is_treasure_class_a      ||
                            m.is_treasure_class_b      ||
                            m.is_treasure_class_c      ||
@@ -154,6 +155,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_monst_easy            ||
                     m.is_monst_hard            ||
                     m.is_enchantstone          ||
+                    m.is_skillstone            ||
                     m.is_treasure_class_a      ||
                     m.is_treasure_class_b      ||
                     m.is_treasure_class_c      ||
