@@ -29,6 +29,7 @@ def skill_devoted_thrust_init(name, text_name):
     x.set_on_use_do("skill_devoted_thrust.on_use()")
     x.set_text_description("Devoted thrust skill.")
     x.set_tile(tile=name)
+    x.set_tile(tile=name + "_inactive")
     x.set_tile(tile=name + "_activated")
     x.update()
 

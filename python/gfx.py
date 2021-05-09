@@ -6026,12 +6026,12 @@ def init_tiles1_monsts_and_items():
       "",
       #########################################################################
       "skill_devoted_thrust",
+      "skill_devoted_thrust_inactive",
       "skill_devoted_thrust_activated",
       "skill_secondary_attack",
       "skill_secondary_attack_activated",
       "skill_heal",
       "skill_heal_active",
-      "",
       "",
       "",
       "",
