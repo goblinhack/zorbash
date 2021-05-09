@@ -997,18 +997,17 @@ void Game::load_select (void)
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
                           UI_TOPCON_VIS_HEIGHT + 10);
     point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
-                          tl.y + 29);
+                          tl.y + 30);
     auto width = br.x - tl.x;
 
-    wid_load = new WidPopup("Game load", tl, br, tile_find_mand("load"), "", false, false);
+    wid_load = new WidPopup("Game load", tl, br, 
+                            tile_find_mand("load"), "", 
+                            false, false);
     wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
     wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);
 
     game_load_headers_only = true;
 
-    wid_load->log(" ");
-    wid_load->log(" ");
-    wid_load->log(" ");
     wid_load->log(" ");
     wid_load->log("Choose a load slot. %%fg=red$ESC%%fg=reset$ to cancel");
 
@@ -1019,7 +1018,7 @@ void Game::load_select (void)
         auto p = wid_load->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "load slot");
         point tl = make_point(0, y_at);
-        point br = make_point(width - 3, y_at);
+        point br = make_point(width - 2, y_at);
 
         std::string s = std::to_string(slot) + ": ";
         if (!load(tmp_file, tmp)) {

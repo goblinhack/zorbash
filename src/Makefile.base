@@ -274,7 +274,9 @@ GAME_OBJECTS=				                \
     $(OBJDIR)/wid.o                         \
     $(OBJDIR)/wid_bag.o                     \
     $(OBJDIR)/wid_botcon.o                  \
+    $(OBJDIR)/wid_collect.o                 \
     $(OBJDIR)/wid_console.o                 \
+    $(OBJDIR)/wid_enchant.o                 \
     $(OBJDIR)/wid_inventory.o               \
     $(OBJDIR)/wid_keyboard.o                \
     $(OBJDIR)/wid_leftbar.o                 \
@@ -283,8 +285,6 @@ GAME_OBJECTS=				                \
     $(OBJDIR)/wid_rightbar.o                \
     $(OBJDIR)/wid_skillbox.o                \
     $(OBJDIR)/wid_text_box.o                \
-    $(OBJDIR)/wid_thing_collect.o           \
-    $(OBJDIR)/wid_thing_enchant.o           \
     $(OBJDIR)/wid_thing_info.o              \
     $(OBJDIR)/wid_tiles.o                   \
     $(OBJDIR)/wid_topcon.o                  \

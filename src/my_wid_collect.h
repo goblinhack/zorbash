@@ -4,8 +4,8 @@
 //
 
 #pragma once
-void wid_thing_collect_fini(void);
-uint8_t wid_thing_collect_init(void);
+void wid_collect_fini(void);
+uint8_t wid_collect_init(void);
 
 #include "my_wid.h"
 #include "my_wid_popup.h"
@@ -13,4 +13,4 @@ uint8_t wid_thing_collect_init(void);
 //
 // Global widgets.
 //
-extern WidPopup *wid_thing_collect_window;
+extern WidPopup *wid_collect_window;

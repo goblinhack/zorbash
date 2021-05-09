@@ -792,7 +792,9 @@ void Game::save_select (void)
                           tl.y + 29);
     auto width = br.x - tl.x;
 
-    wid_save = new WidPopup("Game save", tl, br, tile_find_mand("save"), "");
+    wid_save = new WidPopup("Game save", tl, br, 
+                            tile_find_mand("save"), "",
+                            false, false);
     wid_set_on_key_up(wid_save->wid_popup_container, wid_save_key_up);
     wid_set_on_key_down(wid_save->wid_popup_container, wid_save_key_down);
 
@@ -808,7 +810,7 @@ void Game::save_select (void)
         auto p = wid_save->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "save slot");
         point tl = make_point(0, y_at);
-        point br = make_point(width - 3, y_at);
+        point br = make_point(width - 2, y_at);
 
         std::string s = std::to_string(slot) + " ";
         if (!load(tmp_file, tmp)) {

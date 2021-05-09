@@ -158,24 +158,29 @@ void Game::credits_select (void)
     wid_credits_window->log(" ");
     wid_credits_window->log(" ");
     wid_credits_window->log(" ");
-    wid_credits_window->log("Development and bad graphics");
-    wid_credits_window->log("%%fg=cyan$Neil McGill (goblinhack@gmail.com)");
+    wid_credits_window->log("%%fg=white$Development");
+    wid_credits_window->log("Neil McGill (goblinhack@gmail.com)");
     wid_credits_window->log(" ");
-    wid_credits_window->log("Graphics");
-    wid_credits_window->log("%%fg=green$Oryx tileset https://www.oryxdesignlab.com/");
+    wid_credits_window->log("%%fg=white$Graphics");
+    wid_credits_window->log("Oryx tileset https://www.oryxdesignlab.com/");
     wid_credits_window->log(" ");
-    wid_credits_window->log("Sound");
-    wid_credits_window->log("%%fg=purple$Markus Heichelbech (deceased senior technician) http://nosoapradio.us");
+    wid_credits_window->log("%%fg=white$Music");
+    wid_credits_window->log("Markus Heichelbech");
     wid_credits_window->log(" ");
-    wid_credits_window->log("Testers");
-    wid_credits_window->log("%%fg=red$Stuicy, Goblinhack");
+    wid_credits_window->log("%%fg=white$Sounds");
+    wid_credits_window->log("Oryx, TiesWijnen, danielvj, Adam N, Deathscyp, Dersuperanton");
+    wid_credits_window->log("RobinHood76, uEffects, Konstati, Danjocross, XxChr0nosxX");
+    wid_credits_window->log("Rico Casazza. qubodup. tim.kahn, vmgraw, Michel88");
+    wid_credits_window->log(" ");
+    wid_credits_window->log("%%fg=white$Testers");
+    wid_credits_window->log("Stuicy, Goblinhack");
 
     {_
         auto p = wid_credits_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "credits");
 
-        point tl = make_point(40, 34);
-        point br = make_point(width - 41, 36);
+        point tl = make_point(40, 50);
+        point br = make_point(width - 41, 52);
 
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_credits_mouse_up);

@@ -10,7 +10,7 @@
 #include "my_wid_popup.h"
 #include "my_wid_leftbar.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_thing_collect.h"
+#include "my_wid_collect.h"
 #include "my_wid_rightbar.h"
 #include "my_random.h"
 #include "my_thing.h"

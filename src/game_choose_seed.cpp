@@ -13,7 +13,7 @@
 #include "my_wid_inventory.h"
 #include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_thing_collect.h"
+#include "my_wid_collect.h"
 #include "my_wid_keyboard.h"
 #include "my_string.h"
 #include "my_sdl.h"
@@ -45,7 +45,7 @@ void Game::choose_seed_select (void)
     wid_inventory_fini();
     wid_skillbox_fini();
     wid_thing_info_fini();
-    wid_thing_collect_fini();
+    wid_collect_fini();
 
     wid_keyboard_choose_seed = 
         wid_keyboard(string_to_wstring(g_opt_seed_name),

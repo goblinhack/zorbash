@@ -25,7 +25,7 @@
 #include "my_wid_rightbar.h"
 #include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_thing_collect.h"
+#include "my_wid_collect.h"
 #include "my_array_bounds_check.h"
 #include "my_ui.h"
 #include "my_sdl.h"
@@ -5520,25 +5520,22 @@ void wid_get_abs_coords (Widp w,
     *bry = wid_get_br_y(w);
 
     p = w->parent;
-    if (p) {
+    while (p) {
         *tlx += p->offset.x;
         *tly += p->offset.y;
         *brx += p->offset.x;
         *bry += p->offset.y;
+        p = p->parent;
     }
 
-    while (p) {
-        int32_t ptlx = wid_get_tl_x(p);
-        int32_t ptly = wid_get_tl_y(p);
-        int32_t pbrx = wid_get_br_x(p);
-        int32_t pbry = wid_get_br_y(p);
+#if 0
+    int32_t ptlx;
+    int32_t ptly;
+    int32_t pbrx;
+    int32_t pbry;
 
-        if (p->parent) {
-            ptlx += p->parent->offset.x;
-            ptly += p->parent->offset.y;
-            pbrx += p->parent->offset.x;
-            pbry += p->parent->offset.y;
-        }
+    if (w->parent) {
+        wid_get_abs_coords(w->parent, &ptlx, &ptly, &pbrx, &pbry);
 
         if (ptlx > *tlx) {
             *tlx = ptlx;
@@ -5555,9 +5552,8 @@ void wid_get_abs_coords (Widp w,
         if (pbry < *bry) {
             *bry = pbry;
         }
-
-        p = p->parent;
     }
+#endif
 
     w->abs_tl.x = *tlx;
     w->abs_tl.y = *tly;
@@ -5626,7 +5622,9 @@ static void wid_display (Widp w,
     int32_t tly;
     int32_t brx;
     int32_t bry;
+#if 0
     Widp p {};
+#endif
 
 #if 0
     if (!w->parent) {
@@ -5682,13 +5680,17 @@ static void wid_display (Widp w,
     obrx = wid_get_br_x(w);
     obry = wid_get_br_y(w);
 
+    wid_get_abs_coords(w, &otlx, &otly, &obrx, &obry);
+#if 0
     p = w->parent;
-    if (p) {
+    while (p) {
         otlx += p->offset.x;
         otly += p->offset.y;
         obrx += p->offset.x;
         obry += p->offset.y;
+        p = p->parent;
     }
+#endif
 
     //
     // Inclusive width
@@ -5739,8 +5741,58 @@ static void wid_display (Widp w,
             if (updated_scissors) {
                 *updated_scissors = true;
             }
+#if 0
 
-            wid_set_scissors(tlx, tly, brx, bry);
+    if (w->parent) {
+
+        if (ptlx > *tlx) {
+            *tlx = ptlx;
+        }
+
+        if (ptly > *tly) {
+            *tly = ptly;
+        }
+
+        if (pbrx < *brx) {
+            *brx = pbrx;
+        }
+
+        if (pbry < *bry) {
+            *bry = pbry;
+        }
+    }
+#endif
+
+        auto sciss_tlx = tlx;
+        auto sciss_tly = tly;
+        auto sciss_brx = brx;
+        auto sciss_bry = bry;
+
+        auto p = w->parent;
+        while (p) {
+            int32_t ptlx;
+            int32_t ptly;
+            int32_t pbrx;
+            int32_t pbry;
+            wid_get_abs_coords(p, &ptlx, &ptly, &pbrx, &pbry);
+
+            if (ptlx > sciss_tlx) {
+                sciss_tlx = ptlx;
+            }
+            if (pbrx < sciss_brx) {
+                sciss_brx = pbrx;
+            }
+            if (ptly > sciss_tly) {
+                sciss_tly = ptly;
+            }
+            if (pbry < sciss_bry) {
+                sciss_bry = pbry;
+            }
+
+            p = p->parent;
+        }
+
+        wid_set_scissors(sciss_tlx, sciss_tly, sciss_brx, sciss_bry);
 #if 0
         }
 #endif
@@ -6046,7 +6098,7 @@ void wid_tick_all (void)
         LOG("Handle destroy bags request");
         game->request_destroy_bags = false;
         wid_thing_info_fini();
-        wid_thing_collect_fini();
+        wid_collect_fini();
         wid_inventory_init();
     }
 }

@@ -17,7 +17,7 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 #include "my_wid_console.h"
-#include "my_wid_thing_collect.h"
+#include "my_wid_collect.h"
 #include "my_array_bounds_check.h"
 
 void Thing::on_move (void)
@@ -177,7 +177,7 @@ bool Thing::move (fpoint future_pos,
         auto items = anything_to_carry();
         if (!items.empty()) {
             if (items.size() > 1) {
-                game->wid_thing_collect_create(items);
+                game->wid_collect_create(items);
             } else {
                 try_to_carry(items);
             }

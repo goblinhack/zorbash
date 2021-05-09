@@ -7,7 +7,7 @@
 #include "my_game.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_thing_collect.h"
+#include "my_wid_collect.h"
 #include "my_wid_bag.h"
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
@@ -163,7 +163,7 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
     }
 
     if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        wid_thing_collect_fini();
+        wid_collect_fini();
     }
 
     if (game->in_transit_item) {
