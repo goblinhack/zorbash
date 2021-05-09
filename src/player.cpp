@@ -47,6 +47,11 @@ void player_tick (void)
                 LOG("Ignore player action when enchanting items");
             }
             return;
+        case Game::STATE_CHOOSING_SKILLS:
+            if (g_opt_debug4) {
+                LOG("Ignore player action when choosing skills");
+            }
+            return;
         case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
             if (g_opt_debug4) {
             }

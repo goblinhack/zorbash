@@ -28,6 +28,7 @@ void Level::clear (void)
     _is_dirt = {};
     _is_dry_fungus = {};
     _is_enchantstone = {};
+    _is_skillstone = {};
     _is_foilage = {};
     _is_door = {};
     _is_dungeon = {};

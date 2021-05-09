@@ -277,9 +277,9 @@ int Thing::is_rrr75(void) const                                         {_ retur
 int Thing::is_rrr76(void) const                                         {_ return (tp()->is_rrr76()); }
 int Thing::is_rrr77(void) const                                         {_ return (tp()->is_rrr77()); }
 int Thing::is_rrr78(void) const                                         {_ return (tp()->is_rrr78()); }
-int Thing::is_skillstone(void) const                                         {_ return (tp()->is_skillstone()); }
+int Thing::is_skillstone(void) const                                    {_ return (tp()->is_skillstone()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
-int Thing::enchant_level(void) const                                         {_ return (tp()->enchant_level()); }
+int Thing::enchant_level(void) const                                    {_ return (tp()->enchant_level()); }
 int Thing::enchant_max(void) const                                      {_ return (tp()->enchant_max()); }
 int Thing::is_enchantstone(void) const                                  {_ return (tp()->is_enchantstone()); }
 int Thing::is_enchantable(void) const                                   {_ return (tp()->is_enchantable()); }
@@ -4467,6 +4467,7 @@ const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on
 const std::string& Thing::str1 (void) const {_ return (tp()->str1()); }
 const std::string& Thing::str2 (void) const {_ return (tp()->str2()); }
 const std::string& Thing::text_enchant (void) const {_ return (tp()->text_enchant()); }
+const std::string& Thing::text_skill (void) const {_ return (tp()->text_skill()); }
 const std::string& Thing::str4 (void) const {_ return (tp()->str4()); }
 const std::string& Thing::str5 (void) const {_ return (tp()->str5()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }

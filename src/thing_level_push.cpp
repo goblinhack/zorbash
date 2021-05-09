@@ -49,6 +49,8 @@ void Thing::level_push (void)
                                                    level->set_is_dry_fungus(mx, my); }
     if (is_enchantstone())                       { i_set_is_enchantstone = true;
                                                    level->set_is_enchantstone(mx, my); }
+    if (is_skillstone())                         { i_set_is_skillstone = true;
+                                                   level->set_is_skillstone(mx, my); }
     if (is_foilage())                            { i_set_is_foilage = true;
                                                    level->set_is_foilage(mx, my); }
     if (is_door() && !is_open)                   { i_set_is_door = true;

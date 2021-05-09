@@ -65,6 +65,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_enchantstone      = true;
 
+    char_index              = Charmap::SKILLSTONE;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_skillstone        = true;
+
     char_index              = Charmap::FOILAGE;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

@@ -83,6 +83,7 @@ const std::string& Tp::spawn_on_shoved(void) const                   { return _s
 const std::string& Tp::str1(void) const                              { return _str1; }
 const std::string& Tp::str2(void) const                              { return _str2; }
 const std::string& Tp::text_enchant(void) const                      { return _text_enchant; }
+const std::string& Tp::text_skill(void) const                        { return _text_skill; }
 const std::string& Tp::str4(void) const                              { return _str4; }
 const std::string& Tp::str5(void) const                              { return _str5; }
 const std::string& Tp::projectile_name(void) const                   { return _projectile_name; }
@@ -332,9 +333,9 @@ int Tp::is_rrr75(void) const                                         { return _i
 int Tp::is_rrr76(void) const                                         { return _is_rrr76; }
 int Tp::is_rrr77(void) const                                         { return _is_rrr77; }
 int Tp::is_rrr78(void) const                                         { return _is_rrr78; }
-int Tp::is_skillstone(void) const                                         { return _is_skillstone; }
-int Tp::enchant_level(void) const                                         { return _enchant_level; }
-int Tp::enchant_max(void) const                                         { return _enchant_max; }
+int Tp::is_skillstone(void) const                                    { return _is_skillstone; }
+int Tp::enchant_level(void) const                                    { return _enchant_level; }
+int Tp::enchant_max(void) const                                      { return _enchant_max; }
 int Tp::is_enchantstone(void) const                                  { return _is_enchantstone; }
 int Tp::is_enchantable(void) const                                   { return _is_enchantable; }
 int Tp::is_indestructible(void) const                                { return _is_indestructible; }
@@ -656,9 +657,9 @@ void Tp::set_is_rrr75(int v)                                         { _is_rrr75
 void Tp::set_is_rrr76(int v)                                         { _is_rrr76 = v; }
 void Tp::set_is_rrr77(int v)                                         { _is_rrr77 = v; }
 void Tp::set_is_rrr78(int v)                                         { _is_rrr78 = v; }
-void Tp::set_is_skillstone(int v)                                         { _is_skillstone = v; }
-void Tp::set_enchant_level(int v)                                         { _enchant_level = v; }
-void Tp::set_enchant_max(int v)                                         { _enchant_max = v; }
+void Tp::set_is_skillstone(int v)                                    { _is_skillstone = v; }
+void Tp::set_enchant_level(int v)                                    { _enchant_level = v; }
+void Tp::set_enchant_max(int v)                                      { _enchant_max = v; }
 void Tp::set_is_enchantstone(int v)                                  { _is_enchantstone = v; }
 void Tp::set_is_enchantable(int v)                                   { _is_enchantable = v; }
 void Tp::set_is_indestructible(int v)                                { _is_indestructible = v; }
@@ -771,6 +772,7 @@ void Tp::set_spawn_on_shoved(const std::string &v)                   { _spawn_on
 void Tp::set_str1(const std::string &v)                              { _str1 = v; }
 void Tp::set_str2(const std::string &v)                              { _str2 = v; }
 void Tp::set_text_enchant(const std::string &v)                      { _text_enchant = v; }
+void Tp::set_text_skill(const std::string &v)                        { _text_skill = v; }
 void Tp::set_str4(const std::string &v)                              { _str4 = v; }
 void Tp::set_str5(const std::string &v)                              { _str5 = v; }
 void Tp::set_projectile_name(const std::string &v)                   { _projectile_name = v; }

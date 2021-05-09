@@ -632,6 +632,23 @@ bool Dungeon::is_enchantstone (const int x, const int y)
     return false;
 }
 
+bool Dungeon::is_skillstone (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_skillstone) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Dungeon::is_foilage (const int x, const int y)
 {
     if (is_oob(x, y)) {

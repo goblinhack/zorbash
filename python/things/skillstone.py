@@ -44,7 +44,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_skillstone(True)
     mytp.set_is_usable(True)
     mytp.set_is_used_when_thrown(True)
-    mytp.set_long_text_description("Use this magical stone to learn me some new skills into your brain matter thing.")
+    mytp.set_long_text_description("Use this magical stone to learn some new skills into your brain matter thing.")
     mytp.set_on_fall_do("skillstone.on_fall()")
     mytp.set_on_fire_do("skillstone.on_fire()")
     mytp.set_on_hit_do("skillstone.on_hit()")

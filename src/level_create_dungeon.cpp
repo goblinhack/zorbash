@@ -268,8 +268,20 @@ have_dungeon_start:
                         auto b = thing_new("bag_small", fpoint(x, y));
                         t->carry(b);
 
-                        auto f = thing_new("enchantstone", fpoint(x, y));
-                        t->carry(f);
+                        {
+                            auto f = thing_new("enchantstone", fpoint(x, y));
+                            t->carry(f);
+                        }
+
+                        {
+                            auto f = thing_new("skillstone", fpoint(x, y));
+                            t->carry(f);
+                        }
+
+                        {
+                            auto f = thing_new("skillstone", fpoint(x, y));
+                            t->carry(f);
+                        }
 
                         {
                             auto p = thing_new("potion_health", fpoint(x, y));
@@ -296,12 +308,12 @@ have_dungeon_start:
                             auto W = thing_new("wand_lightning", fpoint(x, y));
                             t->carry(W);
                         }
-#endif
 
                         {
                             auto W = thing_new("wand_fire", fpoint(x, y));
                             t->carry(W);
                         }
+#endif
 
                         {
                             auto W = thing_new("key", fpoint(x, y));
@@ -323,8 +335,10 @@ have_dungeon_start:
                             t->carry(W);
                         }
 
+#if 0
                         auto s = thing_new("skill_devoted_thrust", fpoint(x, y));
                         t->skill_add(s);
+#endif
 
 #if 0
                         {
@@ -796,6 +810,10 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
 
             if (d->is_enchantstone(x, y)) { 
                 tp = tp_random_enchantstone(); 
+            }
+
+            if (d->is_skillstone(x, y)) { 
+                tp = tp_random_skillstone(); 
             }
 
             if (!tp) {

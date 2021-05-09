@@ -227,6 +227,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_dirt                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_dry_fungus             << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_enchantstone           << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_skillstone             << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_foilage                << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_door                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_ascend_dungeon         << shift; shift++;
@@ -322,6 +323,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ out << bits(my.t->_is_dirt);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_fungus {};          */ out << bits(my.t->_is_dry_fungus);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};        */ out << bits(my.t->_is_enchantstone);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};          */ out << bits(my.t->_is_skillstone);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};             */ out << bits(my.t->_is_foilage);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ out << bits(my.t->_is_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ out << bits(my.t->_is_dungeon);

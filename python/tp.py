@@ -133,6 +133,9 @@ class Tp:
     def set_text_enchant(self, value):
         zx.tp_set_text_enchant(self, value)
 
+    def set_text_skill(self, value):
+        zx.tp_set_text_skill(self, value)
+
     def set_str_str4(self, value):
         zx.tp_set_str_str4(self, value)
 

@@ -32,6 +32,7 @@ def skill_devoted_thrust_init(name, text_name):
     mytp.set_is_enchantable(True)
     mytp.set_enchant_max(2)
     mytp.set_text_enchant("+10 percent damage")
+    mytp.set_text_skill("Redirect health to damage, costing stamina");
     mytp.set_long_text_description("Uses half of your stamina points up in one mighty strike.\n\nCan be used multiple times, but beware, your stamina will rapidly drop to zero and you may end up unable to attack or jump away. Each enchant will add 10 percent to the damage, but will take the additional bonus off your stamina.")
     mytp.set_on_use_do("skill_devoted_thrust.on_use()")
     mytp.set_text_description("Devoted thrust skill.")

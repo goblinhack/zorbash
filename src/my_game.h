@@ -166,7 +166,7 @@ public:
     void wid_collect_create(const std::list<Thingp> &items);
     void wid_collect_destroy(void);
     void wid_enchant_an_item(void);
-    void wid_enchant_destroy(void);
+    void wid_skill_choose(void);
     void wid_thing_info_add_attack(WidPopup *w, Thingp t);
     void wid_thing_info_add_bite_damage(WidPopup *w, Thingp t);
     void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
@@ -240,6 +240,7 @@ public:
         STATE_MOVING_ITEMS,     // Currently managing inventory
         STATE_COLLECTING_ITEMS, // Collecting en masse from the level
         STATE_ENCHANTING_ITEMS, // Upgrading items
+        STATE_CHOOSING_SKILLS,  // Choosing skills
         STATE_CHOOSING_TARGET,  // Looking to somewhere to throw at
     };
     int                state {STATE_NORMAL};
