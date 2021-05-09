@@ -14,7 +14,7 @@
 #include "my_wid_thing_info.h"
 #include "my_wid_inventory.h"
 #include "my_wid_skillbox.h"
-#include "my_wid_thing_collect.h"
+#include "my_wid_collect.h"
 #include "my_gl.h"
 #include "my_random.h"
 #include "my_ui.h"
@@ -47,7 +47,7 @@ static uint8_t game_menu_quick_start (Widp w, int32_t x, int32_t y, uint32_t but
     wid_topcon_init();
 
     wid_thing_info_fini();
-    wid_thing_collect_fini();
+    wid_collect_fini();
     wid_leftbar_fini();
 
     wid_inventory_fini();
@@ -383,7 +383,7 @@ void Game::main_menu_select (void)
     wid_inventory_fini();
     wid_skillbox_fini();
     wid_thing_info_fini();
-    wid_thing_collect_fini();
+    wid_collect_fini();
 
     game->wid_thing_info_destroy_immediate();
 

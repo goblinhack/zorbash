@@ -9,7 +9,7 @@
 #include "my_sdl.h"
 #include "my_ui.h"
 #include "my_wid_popup.h"
-#include "my_wid_thing_enchant.h"
+#include "my_wid_enchant.h"
 #include "my_tile.h"
 #include "my_wid_console.h"
 #include "my_wid_thing_info.h"
@@ -90,7 +90,7 @@ static uint8_t wid_enchant_mouse_up (Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
 }
 
-void Game::wid_thing_enchant_create (void)
+void Game::wid_enchant_create (void)
 {_
     LOG("Thing enchant create");
 
@@ -110,13 +110,6 @@ void Game::wid_thing_enchant_create (void)
             }
             if (t->is_enchantable()) {
                 found[tp] = true;
-                enchant_items.push_back(t);
-                enchant_items.push_back(t);
-                enchant_items.push_back(t);
-                enchant_items.push_back(t);
-                enchant_items.push_back(t);
-                enchant_items.push_back(t);
-                enchant_items.push_back(t);
                 enchant_items.push_back(t);
             }
         }
@@ -141,7 +134,10 @@ void Game::wid_thing_enchant_create (void)
     point br = make_point(m + 30, tl.y + 25);
     auto width = br.x - tl.x;
 
-    wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", false, true);
+    wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", 
+                               false, true, 
+                               enchant_items.size() * 3);
+
     wid_set_on_key_up(wid_enchant->wid_popup_container, wid_enchant_key_up);
     wid_set_on_key_down(wid_enchant->wid_popup_container, wid_enchant_key_down);
 
@@ -156,31 +152,29 @@ void Game::wid_thing_enchant_create (void)
         point br = make_point(width - 3, y_at + 2);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
-        //wid_set_style(w, UI_WID_STYLE_DARK);
-        //wid_set_text(w, "xxxxxxxxx");
-        //wid_set_on_mouse_up(w, wid_enchant_mouse_up);
 
         auto t = enchant_items[slot];
 
         {
-            auto icon = wid_new_square_button(w, "item slot");
+            auto wid_icon = wid_new_square_button(w, "item icon");
             point tl = make_point(0, 0);
             point br = make_point(2, 2);
-            wid_set_pos(icon, tl, br);
+            wid_set_pos(wid_icon, tl, br);
 
             auto tpp = t->tp();
             auto tiles = &tpp->tiles;
             if (tiles) {
                 auto tile = tile_first(tiles);
                 if (tile) {
-                    wid_set_style(icon, UI_WID_STYLE_DARK);
-                    wid_set_fg_tile(icon, tile);
+                    wid_set_style(wid_icon, UI_WID_STYLE_DARK);
+                    wid_set_fg_tile(wid_icon, tile);
                 }
             }
+            wid_update(wid_icon);
         }
 
         {
-            auto wid_item = wid_new_square_button(w, "item slot");
+            auto wid_item = wid_new_square_button(w, "item name");
             point tl = make_point(3, 0);
             point br = make_point(width - 2, 2);
             wid_set_pos(wid_item, tl, br);
@@ -189,7 +183,9 @@ void Game::wid_thing_enchant_create (void)
             wid_set_text(wid_item, " " + t->text_name() + ", " + t->text_enchant());
             wid_set_text_lhs(wid_item, true);
             wid_set_on_mouse_up(wid_item, wid_enchant_mouse_up);
+            wid_update(wid_item);
         }
+        wid_update(w);
 
         y_at += 3;
     }

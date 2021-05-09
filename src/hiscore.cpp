@@ -135,6 +135,9 @@ std::istream& operator>>(std::istream &in, Bits<HiScore &> my)
     in >> bits(my.t.killed_by);
     in >> bits(my.t.score);
     in >> bits(my.t.level_reached);
+    if (my.t.killed_by.empty()) {
+        my.t.killed_by = "No one";
+    }
     return in;
 }
 

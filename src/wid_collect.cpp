@@ -8,7 +8,7 @@
 #include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
-#include "my_wid_thing_collect.h"
+#include "my_wid_collect.h"
 #include "my_tile.h"
 #include "my_wid_console.h"
 #include "my_wid_thing_info.h"
@@ -17,9 +17,9 @@
 #include "my_thing.h"
 #include "my_monst.h"
 
-WidPopup *wid_thing_collect_window;
+WidPopup *wid_collect_window;
 
-void wid_thing_collect_fini (void)
+void wid_collect_fini (void)
 {_
     LOG("Thing collect fini");
 
@@ -33,16 +33,16 @@ void wid_thing_collect_fini (void)
         game->bag_secondary = nullptr;
     }
 
-    delete wid_thing_collect_window;
-    wid_thing_collect_window = nullptr;
+    delete wid_collect_window;
+    wid_collect_window = nullptr;
 }
 
-uint8_t wid_thing_collect_init (void)
+uint8_t wid_collect_init (void)
 {_
     return true;
 }
 
-void Game::wid_thing_collect_destroy (void)
+void Game::wid_collect_destroy (void)
 {_
     LOG("Thing collect destroy");
 
@@ -54,10 +54,10 @@ void Game::wid_thing_collect_destroy (void)
         return;
     }
 
-    wid_thing_collect_fini();
+    wid_collect_fini();
 }
 
-void Game::wid_thing_collect_create (const std::list<Thingp> &items)
+void Game::wid_collect_create (const std::list<Thingp> &items)
 {_
     LOG("Thing collect create");
 _
@@ -81,9 +81,9 @@ _
         return;
     }
 
-    if (wid_thing_collect_window) {
+    if (wid_collect_window) {
         LOG("Destroy window");
-        wid_thing_collect_destroy();
+        wid_collect_destroy();
     }
 
     auto player = game->level->player;

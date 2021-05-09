@@ -33,7 +33,8 @@ public:
     ~WidTextBox();
     WidTextBox(point tl, point br, Widp,
                bool horiz_scroll=true,
-               bool vert_scoll=true);
+               bool vert_scoll=true,
+               int scroll_height=-1);
 
 private:
     void log_(std::wstring str, bool lhs, bool rhs);

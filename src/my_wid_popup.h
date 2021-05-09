@@ -33,10 +33,13 @@ public:
               Tilep title_tile=nullptr,
               const std::string background = "",
               bool horiz_scroll=true,
-              bool vert_scoll=true);
+              bool vert_scoll=true,
+              int vert_scroll_size=-1);
 
 public:
     void log(std::string s, bool lhs = false, bool rhs = false);
     void log(std::wstring s, bool lhs = false, bool rhs = false);
 };
+
+void wid_popup_test(void);
 #endif

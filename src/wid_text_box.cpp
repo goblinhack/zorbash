@@ -31,18 +31,24 @@ WidTextBox::~WidTextBox()
 }
 
 WidTextBox::WidTextBox (point tl, point br, Widp parent,
-                        bool horiz_scroll, bool vert_scoll) :
-    tl(tl), br(br), wid_parent(parent)
+                        bool horiz_scroll, bool vert_scoll,
+                        int scroll_height_in) :
+    scroll_height(scroll_height_in),
+    tl(tl), br(br), 
+    wid_parent(parent)
 {_
     int w = br.x - tl.x;
     int h = br.y - tl.y;
     width = w;
 
-    if (vert_scoll) {
-        scroll_height = h * 2;
-    } else {
-        scroll_height = h;
+    if (scroll_height == -1) {
+        if (vert_scoll) {
+            scroll_height = h * 2;
+        } else {
+            scroll_height = h;
+        }
     }
+
     line_count = 0;
 
     {

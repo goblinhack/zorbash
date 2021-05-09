@@ -135,7 +135,7 @@ _
     if (what->is_skill()) {
         skill_use(what);
     } else if (what->is_enchantstone()) {
-        game->wid_thing_enchant_create();
+        game->wid_enchant_create();
     } else if (what->is_weapon()) {
         TOPCON("You wield the %s.", what->text_the().c_str());
         if (is_player()) {
