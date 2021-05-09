@@ -175,7 +175,7 @@ bool Thing::add_skill (Tpp what)
             continue;
         }
         if (t->is_skillstone()) {
-            drop_into_ether(t);
+            t->dead("used");
             found = true;
             break;
         }

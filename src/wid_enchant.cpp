@@ -111,6 +111,7 @@ void Game::wid_enchant_an_item (void)
 
     auto player = game->level->player;
     if (!player){
+        change_state(Game::STATE_NORMAL);
         ERR("No player");
         return;
     }

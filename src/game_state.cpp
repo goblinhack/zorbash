@@ -25,12 +25,15 @@ void Game::change_state (int new_state)
     switch (new_state) {
         case STATE_NORMAL:
             LOG("State changed to STATE_NORMAL");
+            wid_thing_info_fini();
             break;
         case STATE_MOVING_ITEMS:     // Currently managing inventory
             LOG("State changed to STATE_MOVING_ITEMS");
+            wid_thing_info_fini();
             break;
         case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
             LOG("State changed to STATE_COLLECTING_ITEMS");
+            wid_thing_info_fini();
             break;
         case STATE_ENCHANTING_ITEMS:
             LOG("State changed to STATE_ENCHANTING_ITEMS");
@@ -40,11 +43,11 @@ void Game::change_state (int new_state)
             break;
         case STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
             LOG("State changed to STATE_CHOOSING_TARGET");
+            wid_thing_info_fini();
             break;
     }
 
     wid_collect_fini();
-    wid_thing_info_fini();
 
     if (game->in_transit_item) {
         if (wid_in_transit_item_drop()) {
@@ -79,7 +82,6 @@ void Game::change_state (int new_state)
             }
             break;
     }
-
 
     wid_inventory_init();
 }
