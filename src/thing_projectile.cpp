@@ -22,7 +22,7 @@ bool Thing::projectile_choose_target (Thingp item)
     return target_select(item);
 }
 
-bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp target)
+Thingp Thing::projectile_fire_at (const std::string &projectile_name, Thingp target)
 {_
     if (projectile_name == "") {
         die("No projectile name");
@@ -32,16 +32,16 @@ bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp targe
     auto end = target->last_blit_at;
 
     if (!start.x && !start.y) {
-        return false;
+        return nullptr;
     }
 
     if (!end.x && !end.y) {
-        return false;
+        return nullptr;
     }
 
     auto projectile = level->thing_new(projectile_name, mid_at);
     if (!projectile) {
-        return false;
+        return nullptr;
     }
 
     projectile->set_owner(this);
@@ -55,7 +55,7 @@ bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp targe
             TOPCON("I don't know how to fire %s.", projectile->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
         }
-        return false;
+        return nullptr;
     }
 
     if (is_player()) {
@@ -67,5 +67,5 @@ bool Thing::projectile_fire_at (const std::string &projectile_name, Thingp targe
 
     on_use(projectile, target);
 
-    return true;
+    return projectile;
 }

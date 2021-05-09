@@ -272,6 +272,20 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
+    //
+    // If a wand is firing a laser, then get the damage from the
+    // wand so we can add in enchants.
+    //
+    if (hitter->is_laser()) {
+        auto owner = hitter->get_immediate_owner();
+        if (owner) {
+            if (owner->get_current_damage()) {
+                damage = owner->get_current_damage();
+                owner->set_current_damage(0);
+            }
+        }
+    }
+
     for (auto oid : real_hitter->monstp->skills) {
         auto skill = level->thing_find(oid);
         if (skill && skill->is_activated) {

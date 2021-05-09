@@ -71,6 +71,8 @@ void Thing::on_use (Thingp what, Thingp target)
 
 void Thing::used (Thingp what, Thingp target, bool remove_after_use)
 {_
+    log("Attempt to use %s", what->to_string().c_str());
+
     on_use(what, target);
 
     auto existing_owner = what->get_top_owner();

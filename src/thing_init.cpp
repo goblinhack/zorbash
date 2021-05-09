@@ -195,6 +195,21 @@ void Thing::init (Levelp level,
     }
 
     {_
+        auto v = tpp->enchant_level();
+        if (unlikely(v)) {
+            set_enchant(v);
+            set_enchant_max(v);
+        }
+    }
+
+    {_
+        auto v = tpp->enchant_max();
+        if (unlikely(v)) {
+            set_enchant_max(v);
+        }
+    }
+
+    {_
         auto v = tpp->stat_defence();
         if (unlikely(v)) {
             set_stat_defence(v);
@@ -332,13 +347,6 @@ void Thing::init (Levelp level,
         auto v = tpp->throw_distance();
         if (unlikely(v)) {
             set_throw_distance(v);
-        }
-    }
-
-    {_
-        auto v = tpp->stamina();
-        if (unlikely(v)) {
-            set_stamina(v);
         }
     }
 

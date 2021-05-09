@@ -1,6 +1,14 @@
 import zx
 import tp
 
+def on_use(owner, item, target, x, y):
+    #zx.topcon("owner  {} {}".format(zx.thing_get_name(owner), zx.thing_get_health(owner)))
+    #zx.topcon("item   {} {}".format(zx.thing_get_name(item), zx.thing_get_health(item)))
+    #zx.topcon("target {} {}".format(zx.thing_get_name(target), zx.thing_get_health(target)))
+    damage = zx.thing_get_damage_melee(item)
+    enchant = zx.thing_get_enchant(item)
+    zx.thing_set_current_damage(owner, damage + enchant)
+
 def explode(me, x, y):
     zx.thing_msg(me, "The wand of energy explodes in a blaze of power.")
     zx.level_spawn_at_thing(me, "explosion_minor")
@@ -17,7 +25,8 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 def on_enchant(me, x, y):
-    me.thing_incr_charge_count(5)
+    zx.topcon("The wand glows.")
+    zx.thing_incr_charge_count(me, 5)
 
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
@@ -50,16 +59,18 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_usable(True)
     x.set_is_wand(True)
     x.set_is_enchantable(True)
+    x.set_enchant_max(2)
     x.set_laser_name("laser_energy")
     x.set_long_text_description("Discharges a powerful beam of energy upon an unwitting recipient...")
     x.set_normal_placement_rules(True)
     x.set_on_hit_do("wand_energy.on_hit()")
     x.set_on_fire_do("wand_energy.on_fire()")
     x.set_on_fall_do("wand_energy.on_fall()")
+    x.set_on_use_do("wand_energy.on_use()")
     x.set_on_enchant_do("wand_energy.on_enchant()")
     x.set_range_max(7)
     x.set_text_a_or_an("a")
-    x.set_text_enchant("add 5 more charges")
+    x.set_text_enchant("+5 charges, +1 damage")
     x.set_text_description("%%fg=yellow$A wand of energy.")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_BEHIND)

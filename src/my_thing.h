@@ -257,7 +257,7 @@ public:
     bool drop_from_ether(Thingp w);
     bool drop_into_ether(Thingp w);
     bool eat(Thingp it);
-    bool enchant(void);
+    bool enchant(Thingp);
     bool fall(void);
     bool fall_to_next_level(void);
     bool fire_at_and_choose_target(Thingp);
@@ -277,7 +277,7 @@ public:
     bool is_on_fire(void) const;
     bool laser_anim_exists(void);
     bool laser_choose_target(Thingp item);
-    bool laser_fire_at(const std::string &item, Thingp target);
+    Thingp laser_fire_at(const std::string &item, Thingp target);
     bool matches(const std::string& what) const;
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
@@ -293,7 +293,7 @@ public:
     bool possible_to_attack(const Thingp it);
     bool projectile_anim_exists(void);
     bool projectile_choose_target(Thingp item);
-    bool projectile_fire_at(const std::string &item, Thingp target);
+    Thingp projectile_fire_at(const std::string &item, Thingp target);
     bool set_on_fire(const std::string &why);
     bool skill_add(Thingp it);
     bool skill_remove(Thingp it);
@@ -399,7 +399,6 @@ public:
     float get_fall_height(void) const;
     float get_health_pct(void);
     float get_lunge(void);
-    float get_stamina_health_pct(void);
     float get_wobble(void) const;
     float how_far_i_can_jump(void);
     float update_wobble(void);
@@ -461,6 +460,10 @@ public:
     int decr_stamina(void);
     int decr_stamina_max(int);
     int decr_stamina_max(void);
+    int decr_enchant(int);
+    int decr_enchant(void);
+    int decr_enchant_max(int);
+    int decr_enchant_max(void);
     int decr_stat_attack(int);
     int decr_stat_attack(void);
     int decr_stat_constitution(int);
@@ -537,6 +540,8 @@ public:
     int get_spawned_count(void) const;
     int get_stamina(void) const;
     int get_stamina_max(void) const;
+    int get_enchant(void) const;
+    int get_enchant_max(void) const;
     int get_stat_attack(void) const;
     int get_stat_constitution(void) const;
     int get_stat_defence(void) const;
@@ -614,6 +619,10 @@ public:
     int incr_stamina(void);
     int incr_stamina_max(int);
     int incr_stamina_max(void);
+    int incr_enchant(int);
+    int incr_enchant(void);
+    int incr_enchant_max(int);
+    int incr_enchant_max(void);
     int incr_stat_attack(int);
     int incr_stat_attack(void);
     int incr_stat_constitution(int);
@@ -847,8 +856,8 @@ public:
     int is_rrr78(void) const;
     int is_rrr79(void) const;
     int is_rrr8(void) const;
-    int is_rrr80(void) const;
-    int is_rrr81(void) const;
+    int enchant_level(void) const;
+    int enchant_max(void) const;
     int is_enchantstone(void) const;
     int is_rrr9(void) const;
     int is_rrr99(void) const;
@@ -916,6 +925,8 @@ public:
     int set_spawned_count(int);
     int set_stamina(int);
     int set_stamina_max(int);
+    int set_enchant(int);
+    int set_enchant_max(int);
     int set_stat_attack(int);
     int set_stat_constitution(int);
     int set_stat_defence(int);

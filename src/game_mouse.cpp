@@ -76,16 +76,25 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         if (game->request_to_fire_item) {
             auto item = game->request_to_fire_item;
 
+            player->used(item, level->cursor, true);
+
             //
             // The laser name is provided by the likes of wand
             //
+            Thingp new_item = nullptr;
             if (!item->laser_name().empty()) {
-                player->laser_fire_at(item->laser_name(), level->cursor);
+                new_item = player->laser_fire_at(item->laser_name(), level->cursor);
             } else if (!item->projectile_name().empty()) {
-                player->projectile_fire_at(item->projectile_name(), level->cursor);
+                new_item = player->projectile_fire_at(item->projectile_name(), level->cursor);
             } else {
                 TOPCON("Unknown beam weapon: %s.", item->text_the().c_str());
             }
+
+            //
+            // Get the damage from the enchanted wand, so the laser
+            // inflicts that damage.
+            //
+            player->set_current_damage(item->get_current_damage());
         }
         return true;
     }

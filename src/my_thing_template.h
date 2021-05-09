@@ -301,8 +301,8 @@ private:
     int _is_rrr77 {};
     int _is_rrr78 {};
     int _is_rrr79 {};
-    int _is_rrr80 {};
-    int _is_rrr81 {};
+    int _enchant_level {};
+    int _enchant_max {};
     int _is_enchantstone {};
     int _is_enchantable {};
     int _is_indestructible {};
@@ -770,8 +770,8 @@ public:
     int is_rrr78(void) const;
     int is_rrr79(void) const;
     int is_rrr8(void) const;
-    int is_rrr80(void) const;
-    int is_rrr81(void) const;
+    int enchant_level(void) const;
+    int enchant_max(void) const;
     int is_enchantstone(void) const;
     int is_enchantable(void) const;
     int is_indestructible(void) const;
@@ -1103,8 +1103,8 @@ public:
     void set_is_rrr78(int);
     void set_is_rrr79(int);
     void set_is_rrr8(int);
-    void set_is_rrr80(int);
-    void set_is_rrr81(int);
+    void set_enchant_level(int);
+    void set_enchant_max(int);
     void set_is_enchantstone(int);
     void set_is_enchantable(int);
     void set_is_indestructible(int);

@@ -279,10 +279,10 @@ int Thing::is_rrr77(void) const                                         {_ retur
 int Thing::is_rrr78(void) const                                         {_ return (tp()->is_rrr78()); }
 int Thing::is_rrr79(void) const                                         {_ return (tp()->is_rrr79()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
-int Thing::is_rrr80(void) const                                         {_ return (tp()->is_rrr80()); }
-int Thing::is_rrr81(void) const                                         {_ return (tp()->is_rrr81()); }
-int Thing::is_enchantstone(void) const                                         {_ return (tp()->is_enchantstone()); }
-int Thing::is_enchantable(void) const                                         {_ return (tp()->is_enchantable()); }
+int Thing::enchant_level(void) const                                         {_ return (tp()->enchant_level()); }
+int Thing::enchant_max(void) const                                      {_ return (tp()->enchant_max()); }
+int Thing::is_enchantstone(void) const                                  {_ return (tp()->is_enchantstone()); }
+int Thing::is_enchantable(void) const                                   {_ return (tp()->is_enchantable()); }
 int Thing::is_indestructible(void) const                                {_ return (tp()->is_indestructible()); }
 int Thing::is_bones(void) const                                         {_ return (tp()->is_bones()); }
 int Thing::is_soft_body(void) const                                     {_ return (tp()->is_soft_body()); }
@@ -1311,6 +1311,74 @@ int Thing::incr_stamina_max (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stamina_max++);
+    return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// enchant_max
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_enchant_max (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->enchant_max);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_enchant_max (int v)
+{_
+    if (is_player()) {
+        game->request_update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant_max = v);
+    return (n);
+}
+
+int Thing::decr_enchant_max (int v)
+{_
+    if (is_player()) {
+        game->request_update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant_max -= v);
+    return (n);
+}
+
+int Thing::incr_enchant_max (int v)
+{_
+    if (is_player()) {
+        game->request_update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant_max += v);
+    return (n);
+}
+
+int Thing::decr_enchant_max (void)
+{_
+    if (is_player()) {
+        game->request_update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant_max--);
+    return (n);
+}
+
+int Thing::incr_enchant_max (void)
+{_
+    if (is_player()) {
+        game->request_update_rightbar = true;
+    }
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant_max++);
     return (n);
 }
 
@@ -2561,6 +2629,77 @@ int Thing::incr_stamina (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->stamina++);
+    return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// enchant
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_enchant (void) const
+{_
+    int v = 0;
+    if (monstp) {
+        verify(monstp);
+        v = monstp->enchant;
+    }
+    auto owner = get_immediate_owner();
+    if (owner) {
+        auto owner = get_immediate_owner();
+        v += owner->get_enchant();
+    }
+    if (is_minion()) {
+        auto minion_owner = get_immediate_minion_owner();
+        if (minion_owner) {
+            auto minion_owner = get_immediate_minion_owner();
+            v += minion_owner->get_enchant();
+        }
+    }
+    return v;
+}
+
+int Thing::set_enchant (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant = v);
+    return (n);
+}
+
+int Thing::decr_enchant (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant -= v);
+    if (monstp->enchant < 0) {
+        monstp->enchant = 0;
+    }
+    return (n);
+}
+
+int Thing::incr_enchant (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant += v);
+    return (n);
+}
+
+int Thing::decr_enchant (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant--);
+    if (monstp->enchant < 0) {
+        monstp->enchant = 0;
+    }
+    return (n);
+}
+
+int Thing::incr_enchant (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->enchant++);
     return (n);
 }
 

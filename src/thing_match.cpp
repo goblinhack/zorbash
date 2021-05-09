@@ -228,8 +228,8 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr78() &&                                         (what == "is_rrr78"))                                         { return true; }
     if (is_rrr79() &&                                         (what == "is_rrr79"))                                         { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
-    if (is_rrr80() &&                                         (what == "is_rrr80"))                                         { return true; }
-    if (is_rrr81() &&                                         (what == "is_rrr81"))                                         { return true; }
+    if (enchant_level() &&                                         (what == "enchant_level"))                                         { return true; }
+    if (enchant_max() &&                                         (what == "enchant_max"))                                         { return true; }
     if (is_enchantstone() &&                                  (what == "is_enchantstone"))                                         { return true; }
     if (is_enchantable() &&                                   (what == "is_enchantable"))                                         { return true; }
     if (is_indestructible() &&                                (what == "is_indestructible"))                                         { return true; }
@@ -491,8 +491,8 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr78")                                         { return &Thing::is_rrr78; }
     if (what == "is_rrr79")                                         { return &Thing::is_rrr79; }
     if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
-    if (what == "is_rrr80")                                         { return &Thing::is_rrr80; }
-    if (what == "is_rrr81")                                         { return &Thing::is_rrr81; }
+    if (what == "enchant_level")                                         { return &Thing::enchant_level; }
+    if (what == "enchant_max")                                         { return &Thing::enchant_max; }
     if (what == "is_enchantstone")                                  { return &Thing::is_enchantstone; }
     if (what == "is_enchantable")                                   { return &Thing::is_enchantable; }
     if (what == "is_indestructible")                                { return &Thing::is_indestructible; }

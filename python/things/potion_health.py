@@ -64,6 +64,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_active(True) # So it can interact with fire
     x.set_is_item(True)
     x.set_is_enchantable(True)
+    x.set_enchant_max(2)
     x.set_text_enchant("increase effectiveness by 10%")
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)

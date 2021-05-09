@@ -118,9 +118,9 @@ thing_possible_hit_add (Thingp me, Thingp target)
     h->priority = target->collision_hit_priority();
 }
 
-/*
- * Try to find something to fire at.
- */
+//
+// Try to find something to fire at.
+//
 bool Thing::fire_at_target (void)
 {
     if (!is_able_to_fire_at()) {

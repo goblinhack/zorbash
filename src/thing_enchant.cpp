@@ -46,11 +46,30 @@ void Thing::on_enchant (void)
     }
 }
 
-bool Thing::enchant (void)
+bool Thing::enchant (Thingp what)
 {_
-    log("Enchant");
+    TOPCON("You enchant %s.", what->text_the().c_str());
+    what->incr_enchant(1);
+    what->on_enchant();
 
-    on_enchant();
+    //
+    // Drop an enchantstone
+    //
+    auto found = false;
+    for (auto id : monstp->carrying) {
+        auto t = level->thing_find(id);
+        if (!t) {
+            continue;
+        }
+        if (t->is_enchantstone()) {
+            drop_into_ether(t);
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        err("no enchantstone found");
+    }
 
     return true;
 }

@@ -22,7 +22,7 @@ bool Thing::laser_choose_target (Thingp item)
     return target_select(item);
 }
 
-bool Thing::laser_fire_at (const std::string &laser_name, Thingp target)
+Thingp Thing::laser_fire_at (const std::string &laser_name, Thingp target)
 {_
     if (laser_name == "") {
         die("No laser name");
@@ -32,16 +32,16 @@ bool Thing::laser_fire_at (const std::string &laser_name, Thingp target)
     auto end = target->last_blit_at;
 
     if (!start.x && !start.y) {
-        return false;
+        return nullptr;
     }
 
     if (!end.x && !end.y) {
-        return false;
+        return nullptr;
     }
 
     auto laser = level->thing_new(laser_name, mid_at);
     if (!laser) {
-        return false;
+        return nullptr;
     }
 
     laser->set_owner(this);
@@ -55,7 +55,7 @@ bool Thing::laser_fire_at (const std::string &laser_name, Thingp target)
             TOPCON("I don't know how to zap %s.", laser->text_the().c_str());
             game->tick_begin("player tried to use something they could not");
         }
-        return false;
+        return nullptr;
     }
 
     if (is_player()) {
@@ -67,5 +67,5 @@ bool Thing::laser_fire_at (const std::string &laser_name, Thingp target)
 
     on_use(laser, target);
 
-    return true;
+    return laser;
 }
