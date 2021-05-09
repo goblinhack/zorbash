@@ -102,7 +102,7 @@ static uint8_t wid_enchant_mouse_up (Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
 }
 
-void Game::wid_enchant_create (void)
+void Game::wid_enchant_an_item (void)
 {_
     LOG("Thing enchant create");
     change_state(Game::STATE_ENCHANTING_ITEMS);
