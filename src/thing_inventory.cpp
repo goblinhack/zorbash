@@ -611,6 +611,8 @@ _
         }
         game->change_state(Game::STATE_NORMAL);
         describe(item);
+    } else if (item->is_enchantstone()) {
+        game->wid_enchant_an_item();
     } else if (item->is_bag()) {
         game->wid_thing_info_create(item);
         item->log("Moving items flag set");

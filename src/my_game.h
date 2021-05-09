@@ -165,7 +165,7 @@ public:
     void tick_end();
     void wid_collect_create(const std::list<Thingp> &items);
     void wid_collect_destroy(void);
-    void wid_enchant_create(void);
+    void wid_enchant_an_item(void);
     void wid_enchant_destroy(void);
     void wid_thing_info_add_attack(WidPopup *w, Thingp t);
     void wid_thing_info_add_bite_damage(WidPopup *w, Thingp t);
