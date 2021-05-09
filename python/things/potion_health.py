@@ -7,14 +7,16 @@ def on_use(owner, item, target, x, y):
     #zx.con("target  {} {:08X}".format(zx.thing_get_name(target), target))
     did_something = False
 
+    enchant = zx.thing_get_enchant(item)
+
     health = zx.thing_get_health(owner)
-    new_health = int((zx.thing_get_health_max(owner) / 100.0) * 80)
+    new_health = int((zx.thing_get_health_max(owner) / 100.0) * 80 + enchant * 10)
     if new_health > health:
         did_something = True
         zx.thing_set_health(owner, new_health)
 
     stamina = zx.thing_get_stamina(owner)
-    new_stamina = int((zx.thing_get_stamina_max(owner) / 100.0) * 80)
+    new_stamina = int((zx.thing_get_stamina_max(owner) / 100.0) * 80 + enchant * 10)
     if new_stamina > stamina:
         did_something = True
         zx.thing_set_stamina(owner, new_stamina)
@@ -65,7 +67,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_is_item(True)
     x.set_is_enchantable(True)
     x.set_enchant_max(2)
-    x.set_text_enchant("increase effectiveness by 10%")
+    x.set_text_enchant("+10 percent health and stamina")
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_moveable(True)

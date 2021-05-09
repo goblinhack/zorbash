@@ -564,6 +564,7 @@ void wid_set_bg_tile(Widp w, Tilep tile);
 void wid_set_fg_tile(Widp w, Tilep tile);
 void wid_set_fg2_tile(Widp w, Tilep tile);
 void wid_set_fg3_tile(Widp w, Tilep tile);
+void wid_ignore_events_briefly();
 
 extern int wid_mouse_visible;
 extern Widp wid_mouse_template;
