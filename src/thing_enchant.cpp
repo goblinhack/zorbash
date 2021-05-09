@@ -49,8 +49,8 @@ void Thing::on_enchant (void)
 bool Thing::enchant (Thingp what)
 {_
     TOPCON("You enchant %s.", what->text_the().c_str());
-    what->incr_enchant(1);
     what->on_enchant();
+    what->incr_enchant(1);
 
     //
     // Drop an enchantstone

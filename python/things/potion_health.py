@@ -1,6 +1,8 @@
 import zx
 import tp
 
+mytp = None
+
 def on_use(owner, item, target, x, y):
     #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
     #zx.con("item    {} {:08X}".format(zx.thing_get_name(item), item))
@@ -44,8 +46,20 @@ def on_fire(me, x, y):
 def on_fall(me, x, y):
     explode(me, x, y)
 
+def on_enchant(me, x, y):
+    zx.topcon("The potion bubbles.")
+    enchant = zx.thing_get_enchant(me)
+    global mytp
+    if enchant == 0:
+        mytp.set_long_text_description("Restores you to 90 percent health")
+    else:
+        mytp.set_long_text_description("Restores you to full health")
+
 def tp_init(name, text_name, short_text_name):
     x = tp.Tp(name, text_name, short_text_name)
+    global mytp
+    mytp = x
+
     x.set_hates_fire(100)
     x.set_bag_item_height(2)
     x.set_bag_item_width(2)
@@ -85,6 +99,7 @@ def tp_init(name, text_name, short_text_name):
     x.set_on_use_do("potion_health.on_use()")
     x.set_on_hit_do("potion_health.on_hit()")
     x.set_on_fall_do("potion_health.on_fall()")
+    x.set_on_enchant_do("potion_health.on_enchant()")
     x.set_on_fire_do("potion_health.on_fire()")
     x.set_text_a_or_an("a")
     x.set_text_description("%%fg=pink$A potion of health restoration.")
