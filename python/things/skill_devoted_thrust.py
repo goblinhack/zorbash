@@ -7,6 +7,10 @@ def on_use(owner, skill, target, x, y):
     #zx.topcon("skill  {} {}".format(zx.thing_get_name(skill), zx.thing_get_health(skill)))
     #zx.topcon("target {} {}".format(zx.thing_get_name(target), zx.thing_get_health(target)))
     bonus = int(zx.thing_get_stamina(owner) / 2)
+
+    enchant = zx.thing_get_enchant(skill)
+    bonus += int((bonus / 10) * enchant)
+
     if bonus > 1:
         if zx.if_matches(owner, "is_player"):
             zx.topcon("%%fg=yellow$You strike with a mighty thrust of {}.%%fg=reset$".format(bonus))
@@ -24,7 +28,7 @@ def skill_devoted_thrust_init(name, text_name):
     x.set_is_skill(True)
     x.set_is_enchantable(True)
     x.set_enchant_max(2)
-    x.set_text_enchant("increase damage by 50%")
+    x.set_text_enchant("+10 pct damage but uses more stamina")
     x.set_long_text_description("Uses half of your stamina points up in one mighty strike.\n\nCan be used multiple times, but beware, your stamina will rapidly drop to zero and you may end up unable to attack or jump away.")
     x.set_on_use_do("skill_devoted_thrust.on_use()")
     x.set_text_description("Devoted thrust skill.")

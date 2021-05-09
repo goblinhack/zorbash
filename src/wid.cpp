@@ -66,6 +66,12 @@ static wid_key_map_int wid_top_level4;
 static wid_key_map_int wid_top_level5;
 
 //
+// Ignore events to avoid processing the same event twice if we
+// look at scancodes and bypass wid events
+//
+static timestamp_t wid_ignore_events_briefly_ts;
+
+//
 // Scope the focus to children of this widget and do not change it.
 // Good for popups.
 //
@@ -3961,6 +3967,15 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
         return nullptr;
     }
 
+    //
+    // Prevent newly created widgets grabbing events too soon; like
+    // for example a scancode causes a widget to be created but the
+    // same keypress is taken by the widget.
+    //
+    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
+        return nullptr;
+    }
+
     if (strict) {
         if ((x < w->abs_tl.x) ||
             (y < w->abs_tl.y) ||
@@ -4037,6 +4052,15 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
         return nullptr;
     }
 
+    //
+    // Prevent newly created widgets grabbing events too soon; like
+    // for example a scancode causes a widget to be created but the
+    // same keypress is taken by the widget.
+    //
+    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
+        return nullptr;
+    }
+
     if (strict) {
         if ((x < w->abs_tl.x) ||
             (y < w->abs_tl.y) ||
@@ -4103,6 +4127,15 @@ static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
         return nullptr;
     }
 
+    //
+    // Prevent newly created widgets grabbing events too soon; like
+    // for example a scancode causes a widget to be created but the
+    // same keypress is taken by the widget.
+    //
+    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
+        return nullptr;
+    }
+
     if (strict) {
         if ((x < w->abs_tl.x) ||
             (y < w->abs_tl.y) ||
@@ -4120,8 +4153,7 @@ static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
             continue;
         }
 
-        Widp closer_match = wid_joy_button_handler_at(child, x, y,
-                                                    true /* strict */);
+        Widp closer_match = wid_joy_button_handler_at(child, x, y, true /* strict */);
         if (closer_match) {
             return (closer_match);
         }
@@ -4155,6 +4187,15 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
     }
 
     if (wid_ignore_events(w)) {
+        return nullptr;
+    }
+
+    //
+    // Prevent newly created widgets grabbing events too soon; like
+    // for example a scancode causes a widget to be created but the
+    // same keypress is taken by the widget.
+    //
+    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
         return nullptr;
     }
 
@@ -4227,6 +4268,15 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
     }
 
     if (wid_ignore_events(w)) {
+        return nullptr;
+    }
+
+    //
+    // Prevent newly created widgets grabbing events too soon; like
+    // for example a scancode causes a widget to be created but the
+    // same keypress is taken by the widget.
+    //
+    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
         return nullptr;
     }
 
@@ -6031,12 +6081,7 @@ void wid_gc_all (void)
 //
 void wid_tick_all (void)
 {_
-//    wid_time = time_get_time_ms_cached();
-    if (!game->config.sdl_delay) {
-        wid_time += 100/1;
-    } else {
-        wid_time += 100/game->config.sdl_delay;
-    }
+    wid_time = time_get_time_ms_cached();
 
     std::list<Widp> work;
     for (auto& iter : wid_top_level5) {
@@ -6515,4 +6560,9 @@ uint8_t wid_is_moving (Widp w)
 void wid_set_style (Widp w, int style)
 {
     w->style = style;
+}
+
+void wid_ignore_events_briefly (void)
+{
+    wid_ignore_events_briefly_ts = time_get_time_ms_cached();
 }

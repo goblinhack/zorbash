@@ -425,7 +425,11 @@ void Game::wid_thing_info_create_when_hovering_over (const std::vector<Thingp> &
 void Game::wid_thing_info_add_enchant (WidPopup *w, Thingp t) 
 {_
     if (t->get_enchant()) {
-        w->log("%%fg=yellow$This item is enchanted!");
+        if (t->is_skill()) {
+            w->log("%%fg=yellow$This skill is enchanted!");
+        } else {
+            w->log("%%fg=yellow$This item is enchanted!");
+        }
         w->log(" ");
     }
 }
