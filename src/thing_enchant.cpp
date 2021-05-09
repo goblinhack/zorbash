@@ -62,7 +62,7 @@ bool Thing::enchant (Thingp what)
             continue;
         }
         if (t->is_enchantstone()) {
-            drop_into_ether(t);
+            t->dead("used");
             found = true;
             break;
         }

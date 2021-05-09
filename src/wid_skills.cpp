@@ -111,6 +111,7 @@ void Game::wid_skill_choose (void)
 
     auto player = game->level->player;
     if (!player){
+        change_state(Game::STATE_NORMAL);
         ERR("No player");
         return;
     }
@@ -140,6 +141,7 @@ void Game::wid_skill_choose (void)
 
     if (skills.empty()) {
         TOPCON("You have nothing left to learn. You are now the master.");
+        change_state(Game::STATE_NORMAL);
         return;
     }
 
