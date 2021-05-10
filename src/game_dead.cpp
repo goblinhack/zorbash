@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
@@ -77,6 +78,8 @@ static uint8_t wid_dead_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 
 void Game::dead_select (const char *reason)
 {_
+    LOG("Open dead select: %s", reason);
+
     wid_thing_info_fini();
     wid_collect_fini();
     wid_leftbar_fini();
@@ -90,6 +93,7 @@ void Game::dead_select (const char *reason)
     //
     wid_rightbar_init();
 
+    LOG("Open dead select: pause");
     if (level && 
         level->player &&
         (time_get_time_ms_cached() < level->player->get_timestamp_move_end())) {

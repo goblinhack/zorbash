@@ -713,7 +713,7 @@ public:
     void update_hazard_tile_map(void);
     void update_heatmap(void);
     void update_map(void);
-    void update_minimap(void);
+    void update_minimap(bool showing_two_levels, bool show_faded);
     void update_new_level(void);
     void update_same_level(void);
     void update_things_next_to_a_chasm(void);

@@ -13,7 +13,9 @@
 
 Level::~Level (void)
 {_
+    log("Delete level");
     if (game->level == this) {
+        log("Delete current game level");
         game->level = nullptr;
     }
     oldptr(this);

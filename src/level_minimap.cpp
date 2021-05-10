@@ -10,21 +10,43 @@
 #include "my_gl.h"
 #include "my_thing.h"
 
-void Level::update_minimap (void)
+void Level::update_minimap (bool showing_two_levels, bool show_faded)
 {_
     static int last_rendered;
-    if (!time_have_x_tenths_passed_since(1, last_rendered)) {
-        return;
+    if (showing_two_levels) {
+        if (show_faded) {
+            if (!time_have_x_tenths_passed_since(1, last_rendered)) {
+                return;
+            }
+            last_rendered = time_get_time_ms_cached();
+        }
+    } else {
+        if (!time_have_x_tenths_passed_since(1, last_rendered)) {
+            return;
+        }
+        last_rendered = time_get_time_ms_cached();
     }
-    last_rendered = time_get_time_ms_cached();
 
     gl_enter_2d_mode(MAP_WIDTH + 1, MAP_HEIGHT + 1);
 
     blit_fbo_bind(FBO_MINIMAP);
     glBlendFunc(GL_ONE, GL_ZERO);
-    glClear(GL_COLOR_BUFFER_BIT);
+
+    //
+    // If showing the sewer and the level above it, then don't clear
+    // the map when drawing the dungeon as the "overlay" for the sewer.
+    //
+    if (showing_two_levels) {
+        if (show_faded) {
+            glClear(GL_COLOR_BUFFER_BIT);
+        }
+    } else {
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+
     glDisable(GL_TEXTURE_2D);
     blit_init();
+
     float dx = 1;
     float dy = 1;
 
@@ -117,6 +139,22 @@ void Level::update_minimap (void)
                     if ((cursor_at.x == x) && (cursor_at.y == y)) {
                         c = YELLOW;
                     }
+                }
+
+                if (showing_two_levels) {
+                    if (show_faded) {
+                        // Showing the dungeon above the sewer here
+                    } else {
+                        // Showing the sewer here
+                        if ((c.r == 0) && (c.g == 0) && (c.b == 0)) {
+                            // Don't overwrite tiles from previous level
+                            continue;
+                        }
+                    }
+                }
+
+                if (show_faded) {
+                    c.a /= 2;
                 }
 
                 glcolor(c);
@@ -243,6 +281,22 @@ void Level::update_minimap (void)
                     if ((cursor_at.x == x) && (cursor_at.y == y)) {
                         c = YELLOW;
                     }
+                }
+
+                if (showing_two_levels) {
+                    if (show_faded) {
+                        // Showing the dungeon above the sewer here
+                    } else {
+                        // Showing the sewer here
+                        if ((c.r == 0) && (c.g == 0) && (c.b == 0)) {
+                            // Don't overwrite tiles from previous level
+                            continue;
+                        }
+                    }
+                }
+
+                if (show_faded) {
+                    c.a /= 2;
                 }
 
                 glcolor(c);

@@ -39,6 +39,13 @@ void Thing::kill (Thingp killer, const char *reason)
         if (!is_corpse_currently) {
             return;
         }
+
+        //
+        // You only die once
+        //
+        if (is_player()) {
+            return;
+        }
     }
 
     //
@@ -101,8 +108,8 @@ void Thing::kill (Thingp killer, const char *reason)
     if (is_player()) {
         TOPCON("RIP: Killed %s.", reason);
         TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
-        game->dead_select(reason);
         level->map_follow_player = false;
+        game->dead_select(reason);
     } else if (is_loggable_for_important_stuff()) {
         log("%s is dead, %s", text_The().c_str(), reason);
         if (killer && (killer != this)) {

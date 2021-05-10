@@ -234,11 +234,11 @@ int Dice::roll (void) const
 {
     auto n = ndice;
     auto tot = 0;
-    while (n--) {
+    LOG("roll %dd%d+%d => %d", ndice, sides, stat, tot);
+    while (n-- > 0) {
         tot += random_range(0, sides) + 1;
     }
     tot += stat;
-    // CON("roll %dd%d+%d => %d", ndice, sides, stat, tot);
     return (tot);
 }
 
