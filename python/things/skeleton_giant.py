@@ -1,5 +1,25 @@
 import zx
 import tp
+import random
+
+def on_bite(me, x, y):
+    sound = "growl{}".format(random.randint(1, 10))
+    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
+        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+
+def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+    sound = "hiss{}".format(random.randint(1, 10))
+    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
+        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+
+def on_miss(me, hitter, x, y):
+    sound = "hiss{}".format(random.randint(1, 10))
+    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
+        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+
+def on_death(me, x, y):
+    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "monst_death1"):
+        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "monst_death1")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -55,6 +75,10 @@ def tp_init(name, text_name):
     mytp.set_monst_size(zx.MONST_SIZE_GIANT)
     mytp.set_move_speed_ms(150)
     mytp.set_normal_placement_rules(True)
+    mytp.set_on_bite_do("skeleton_giant.on_bite()")
+    mytp.set_on_death_do("skeleton_giant.on_death()")
+    mytp.set_on_hit_do("skeleton_giant.on_hit()")
+    mytp.set_on_miss_do("skeleton_giant.on_miss()")
     mytp.set_rarity(zx.RARITY_COMMON)
     mytp.set_resurrect_dice("1d10+30")
     mytp.set_stat_attack(10) # 10, means no bonus

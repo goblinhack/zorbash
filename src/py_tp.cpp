@@ -782,9 +782,10 @@ PyObject *level_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_FALSE;
     }
 
-    t->spawn_next_to(std::string(what));
-
-    Py_RETURN_TRUE;
+    if (t->spawn_next_to(std::string(what))) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -822,9 +823,10 @@ PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObj
         Py_RETURN_FALSE;
     }
 
-    t->spawn_next_to_or_on_monst(std::string(what));
-
-    Py_RETURN_TRUE;
+    if (t->spawn_next_to_or_on_monst(std::string(what))) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -896,10 +898,11 @@ PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, 
         Py_RETURN_FALSE;
     }
 
-    t->spawn_radius_range(parent, target,
-                          std::string(what), radius_min, radius_max);
-
-    Py_RETURN_TRUE;
+    if (t->spawn_radius_range(parent, target,
+                              std::string(what), radius_min, radius_max)) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -937,9 +940,10 @@ PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject
         Py_RETURN_FALSE;
     }
 
-    t->spawn_fire(std::string(what));
-
-    Py_RETURN_TRUE;
+    if (t->spawn_fire(std::string(what))) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -977,9 +981,10 @@ PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_FALSE;
     }
 
-    t->spawn_at(std::string(what));
-
-    Py_RETURN_TRUE;
+    if (t->spawn_at(std::string(what))) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -1017,9 +1022,10 @@ PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObj
         Py_RETURN_FALSE;
     }
 
-    t->spawn_at_if_possible(std::string(what));
-
-    Py_RETURN_TRUE;
+    if (t->spawn_at_if_possible(std::string(what))) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -1069,9 +1075,10 @@ PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds
         Py_RETURN_FALSE;
     }
 
-    t->if_matches_then_kill(std::string(what), point(x, y));
-
-    Py_RETURN_TRUE;
+    if (t->if_matches_then_kill(std::string(what), point(x, y))) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -1109,9 +1116,10 @@ PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_FALSE;
     }
 
-    t->matches(std::string(what));
-
-    Py_RETURN_TRUE;
+    if (t->matches(std::string(what))) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 PyObject *level_place_at (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -1161,9 +1169,10 @@ PyObject *level_place_at (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_FALSE;
     }
 
-    t->place(std::string(what), point(x, y));
-
-    Py_RETURN_TRUE;
+    if (t->place(std::string(what), point(x, y))) {
+        Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
 }
 
 TP_BODY_SET_DOUBLE(collision_attack_radius)
