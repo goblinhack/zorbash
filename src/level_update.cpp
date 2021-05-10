@@ -15,6 +15,7 @@ void Level::update_new_level (void)
 
     lights_update_new_level();
     scroll_map_to_player();
+    player_dmap_update();
 }
 
 void Level::update_same_level (void)
@@ -23,4 +24,5 @@ void Level::update_same_level (void)
     heatmap_valid = false;
 
     lights_update_same_level();
+    player_dmap_update();
 }

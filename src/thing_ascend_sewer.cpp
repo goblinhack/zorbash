@@ -114,7 +114,7 @@ bool Thing::ascend_sewer (void)
     }
 
     is_changing_level = false;
-    log("Moved to previous level exit");
+    log("Moved to previous level sewer entrance");
     if (is_player()) {
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
         level->update_new_level();

@@ -63,8 +63,21 @@ void Level::display (void)
     }
 
     if (player) {
+        //
+        // If a sewer, then also show the level above as it helps navigation
+        //
         if (!minimap_valid) {
-            update_minimap();
+            if (game->level->is_sewer_level) {
+                bool showing_two_levels = true;
+                auto dungeon_level = world_at + point3d(0, 0, -1);
+                auto dungeon = get(game->world.levels, dungeon_level.x, dungeon_level.y, dungeon_level.z);
+                if (dungeon) {
+                    dungeon->update_minimap(showing_two_levels, true /* faded */);
+                }
+                update_minimap(showing_two_levels, false /* faded */);
+            } else {
+                update_minimap(false /* showing_two_levels */, false /* faded */);
+            }
         }
 
         if (!heatmap_valid) {

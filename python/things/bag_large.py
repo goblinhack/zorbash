@@ -4,7 +4,6 @@ import tp
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_is_attackable_by_player(True)
     mytp.set_bag_height(8)
     mytp.set_bag_item_height(4)
     mytp.set_bag_item_width(4)

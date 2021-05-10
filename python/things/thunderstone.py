@@ -10,7 +10,6 @@ def on_use(owner, item, target, x, y):
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_hates_fire(100)
     mytp.set_bag_item_height(2)
     mytp.set_bag_item_width(2)
     mytp.set_blast_max_radius(4)
@@ -22,8 +21,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_show_outlined(False)
     mytp.set_gfx_small_shadow_caster(True)
+    mytp.set_hates_fire(100)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_attackable_by_player(True)
     mytp.set_is_collectable(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)

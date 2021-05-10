@@ -35,23 +35,6 @@ bool Thing::possible_to_attack (const Thingp it)
         }
     }
 
-    if (is_lava() || is_fire() || is_wand() || is_laser() || is_projectile() || is_explosion()) {
-        // continue
-    } else if (owner && owner->is_monst() && it->is_attackable_by_monst()) {
-        // monst weapon, continue
-    } else if (is_monst() && it->is_attackable_by_monst()) {
-        // continue
-    } else if (is_player() && it->is_attackable_by_player()) {
-        // continue
-    } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
-        // continue
-    } else {
-        if (g_opt_debug4) { // very noisy
-            log("Cannot attack %s", it->to_string().c_str());
-        }
-        return false;
-    }
-
     log("Is possible to attack %s?", it->to_string().c_str());
 _
     //
@@ -297,6 +280,25 @@ _
     }
 
     log("Cannot attack %s, ignore", it->to_string().c_str());
+
+#if 0
+    if (is_lava() || is_fire() || is_wand() || is_laser() || is_projectile() || is_explosion()) {
+        // continue
+    } else if (owner && owner->is_monst() && it->is_attackable_by_monst()) {
+        // monst weapon, continue
+    } else if (is_monst() && it->is_attackable_by_monst()) {
+        // continue
+    } else if (is_player() && it->is_attackable_by_player()) {
+        // continue
+    } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
+        // continue
+    } else {
+        if (g_opt_debug4) { // very noisy
+            log("Cannot attack %s", it->to_string().c_str());
+        }
+        return false;
+    }
+#endif
     return false;
 }
 
@@ -361,7 +363,17 @@ _
             //
             // Eat corpse?
             //
-            if (it->is_dead) {
+            if ((is_jelly_eater()    && it->is_jelly())    ||
+                (is_food_eater()     && it->is_food())     ||
+                (is_treasure_eater() && it->is_treasure()) ||
+                (is_wand_eater()     && it->is_wand())     ||
+                (is_potion_eater()   && it->is_potion())) {
+                log("Don't eat, try to carry %s", it->to_string().c_str());
+                return try_to_carry(it);
+            } else if (it->is_dead && !it->is_player()) {
+                //
+                // Can only eat things when dead... But the player is gone once dead.
+                //
                 if (eat(it)) {
                     //
                     // Can't kill it twice, so hide it

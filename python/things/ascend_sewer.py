@@ -7,8 +7,8 @@ def spawn(me, x, y):
 
 def tp_init(name, tiles=[], left1_tiles=[]):
 
-    mytp = tp.Tp(name)
     # mytp.set_is_minion_generator(True) # don't set to avoid auto place
+    mytp = tp.Tp(name)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_gfx_shown_in_bg(True)

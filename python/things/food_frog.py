@@ -4,8 +4,6 @@ import tp
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_is_attackable_by_player(True)
-    mytp.set_is_attackable_by_monst(True)
     mytp.set_bag_item_height(2)
     mytp.set_bag_item_width(2)
     mytp.set_collision_circle(True)

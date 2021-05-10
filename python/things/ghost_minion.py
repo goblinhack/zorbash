@@ -8,6 +8,7 @@ def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_scent_distance(10)
     mytp.set_attack_humanoid(True)
+    mytp.set_attack_living(False) # No, else it attacks spiders
     mytp.set_attack_lunge(True)
     mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
@@ -33,7 +34,6 @@ def tp_init(name, text_name):
     mytp.set_is_fearless(True)
     mytp.set_is_floating(True)
     mytp.set_is_hunger_insatiable(True)
-    mytp.set_loves_poison(True)
     mytp.set_is_intelligent(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
@@ -42,11 +42,10 @@ def tp_init(name, text_name):
     mytp.set_is_moveable(True)
     mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_undead(True)
-    mytp.set_attack_humanoid(True)
-    mytp.set_attack_living(False) # No, else it attacks spiders
     mytp.set_light_color("green")
     mytp.set_light_strength(1)
     mytp.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
+    mytp.set_loves_poison(True)
     mytp.set_minion_leash_distance(8)
     mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
     mytp.set_move_speed_ms(150)

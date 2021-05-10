@@ -7,18 +7,18 @@ def spawn(me, x, y):
 
 def tp_init(name, tiles=[], left1_tiles=[]):
 
-    mytp = tp.Tp(name)
     # mytp.set_is_minion_generator(True) # don't set to avoid auto place
+    mytp = tp.Tp(name)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_is_able_to_fall(False)
     mytp.set_is_active(True)
+    mytp.set_is_descend_sewer(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_light_strength(1)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
-    mytp.set_is_descend_sewer(True)
     mytp.set_light_color("lime")
+    mytp.set_light_strength(1)
     mytp.set_long_text_description("A filthy sewer pipe. Watch out, they can spawn surprises. Don't fall in!")
     mytp.set_minion_limit(5)
     mytp.set_on_idle_dice("1d50+50:descend_sewer.spawn()")

@@ -249,8 +249,24 @@ _
             if (is_player()) {
                 game->level = next_level;
                 TOPCON("%%fg=red$You tumble into the void!%%fg=reset$");
-            } else if (is_monst() || is_item()) {
-                TOPCON("%s tumbles into the void!", text_The().c_str());
+            } else {
+                if (distance_to_player() >= DMAP_IS_PASSABLE) {
+                    if (is_monst()) {
+                        TOPCON("You hear the distant cry of some creature falling");
+                    } else if (is_item()) {
+                        TOPCON("You hear the distant crash of something falling");
+                    } else {
+                        TOPCON("You hear the distant sound of something falling");
+                    }
+                } else {
+                    if (is_monst()) {
+                        TOPCON("%s tumbles into the void!", text_The().c_str());
+                    } else if (is_item()) {
+                        TOPCON("%s is knocked into the void!", text_The().c_str());
+                    } else {
+                        TOPCON("%s slips into the void!", text_The().c_str());
+                    }
+                }
             }
 
             log("Land on the next level, change level then move to %d,%d", x, y);
