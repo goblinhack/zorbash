@@ -327,6 +327,7 @@ public:
     bool will_avoid_threat(const Thingp it);
     bool will_avoid_threat(const fpoint &p);
     bool will_avoid_threat(const point &p);
+    bool will_avoid_monst(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
     const Dice& get_damage_bite_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;

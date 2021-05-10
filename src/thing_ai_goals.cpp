@@ -156,9 +156,21 @@ _
             }
 
             if (!it->is_dead) {
-                if (it->is_player()) {
-                    if (distance(mid_at, level->player->mid_at) <
-                                ai_avoid_distance()) {
+                //
+                // If this is something we really want to avoid, like
+                // fire, then stay away from it
+                //
+                if (will_avoid_threat(it)) {
+                    if (distance(mid_at, it->mid_at) < 2) {
+                        avoid = true;
+                    }
+                }
+
+                //
+                // Monsters we avoid are more serious threats
+                //
+                if (will_avoid_monst(it)) {
+                    if (distance(mid_at, it->mid_at) < ai_avoid_distance()) {
                         avoid = true;
                     }
                 }
