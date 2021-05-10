@@ -39,6 +39,7 @@ Sound effects
 - Rat squeak sounds by tim.kahn, [found here](https://freesound.org/people/tim.kahn/)
 - Grunt squeak sounds by vmgraw, [found here](https://freesound.org/people/vmgraw/)
 - Monster death sounds by Michel88, [found here](https://freesound.org/people/Michel88/)
+- Water splash sounds by launemax, [found here](https://freesound.org/people/launemax/)
 
 Screenshots
 -----------
