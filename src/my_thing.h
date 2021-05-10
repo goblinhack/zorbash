@@ -259,6 +259,7 @@ public:
     bool drop_into_ether(Thingp w);
     bool eat(Thingp it);
     bool enchant(Thingp);
+    void enchant_randomly(void);
     bool add_skill(Tpp what);
     bool fall(void);
     bool fall_to_next_level(void);
@@ -856,7 +857,7 @@ public:
     int is_rrr75(void) const;
     int is_rrr76(void) const;
     int is_rrr77(void) const;
-    int is_rrr78(void) const;
+    int is_sword(void) const;
     int is_skillstone(void) const;
     int is_rrr8(void) const;
     int enchant_level(void) const;

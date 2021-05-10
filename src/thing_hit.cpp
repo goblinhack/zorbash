@@ -131,7 +131,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         return false;
     }
 
-    hitter->log("Hit for damage %d", damage);
+    hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage);
 
     auto delta = mid_at - hitter->mid_at;
 
@@ -434,11 +434,6 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     //
-    // Python callback
-    //
-    on_hit(hitter, real_hitter, crit, bite, damage);
-
-    //
     // Visible hit indication
     //
     if (is_player()) {
@@ -527,6 +522,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     } else {
         log("Is hit by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
+    }
+
+    //
+    // Python callback
+    //
+    if (!is_dead) {
+        on_hit(hitter, real_hitter, crit, bite, damage);
     }
 
     return true;

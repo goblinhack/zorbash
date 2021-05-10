@@ -232,9 +232,9 @@ Dice::Dice (std::string s)
 
 int Dice::roll (void) const
 {
-    auto n = ndice;
-    auto tot = 0;
-    LOG("roll %dd%d+%d => %d", ndice, sides, stat, tot);
+    int n = ndice;
+    int tot = 0;
+    // LOG("roll %dd%d+%d => %d", ndice, sides, stat, tot);
     while (n-- > 0) {
         tot += random_range(0, sides) + 1;
     }

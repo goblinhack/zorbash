@@ -119,6 +119,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_is_treasure(True)
     mytp.set_is_treasure_class_a(True)
     mytp.set_is_weapon(True)
+    mytp.set_is_sword(True)
     mytp.set_long_text_description("A rusting sword. Ideal for absolutely no one.")
     mytp.set_on_use_do("sword_rusty.on_use()")
     mytp.set_stat_attack(10) # 10, means no bonus

@@ -39,13 +39,21 @@ _
         p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
         p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
 
-        int cnt = random_range(1, 10);
-        auto player = level->player;
-        if (player) {
-            player->incr_score(cnt * 10);
+        int value = item->get_gold_value();
+        int particle_count;
+        if (is_gold()) {
+            particle_count = value;
+        } else {
+            particle_count = 1;
         }
 
-        for (int c = 0; c < cnt; c++) {
+        auto player = level->player;
+        if (player) {
+            player->incr_score(value * 10);
+            player->incr_gold(value);
+        }
+
+        for (int c = 0; c < particle_count; c++) {
             point s = (last_blit_tl + last_blit_br) / 2;
             point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
                     random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
@@ -192,7 +200,6 @@ _
     if (item->is_item_collected_as_gold()) {
         wid_inventory_init();
         wid_thing_info_fini();
-        incr_gold(item->get_gold_value());
         inventory_particle(item, monstp->inventory_id.size() - 1);
         item->dead("by being collected");
 

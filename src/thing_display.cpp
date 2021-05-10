@@ -541,6 +541,8 @@ bool Thing::get_coords (point &blit_tl,
     if (unlikely(is_in_water ||
                  is_monst() ||
                  is_item() ||
+                 is_treasure() ||
+                 is_skillstone() ||
                  is_player() ||
                  tpp->gfx_attack_anim() ||
                  tpp->gfx_on_fire_anim() ||
@@ -792,7 +794,7 @@ void Thing::blit_internal (int fbo,
 
     bool outline = tpp->gfx_show_outlined();
 
-    if (outline && !g_render_black_and_white) {
+    if (!g_render_black_and_white) {
         if (reflection) {
             if (auto submerged = blit_begin_reflection_submerged()) {
                 tile_blit(tile, blit_tl, blit_br);
@@ -815,17 +817,17 @@ void Thing::blit_internal (int fbo,
                 tile_blit(tile, blit_tl, blit_br);
             }
         } else if (auto submerged = blit_begin_submerged()) {
-            if (level->highlight == this) {
-                tile_blit_outline(tile, blit_tl, blit_br, c, RED);
-            } else {
+            if (outline) {
                 tile_blit_outline(tile, blit_tl, blit_br, c);
+            } else {
+                tile_blit(tile, blit_tl, blit_br);
             }
             blit_end_submerged(submerged);
         } else {
-            if (level->highlight == this) {
-                tile_blit_outline(tile, blit_tl, blit_br, c, RED);
-            } else {
+            if (outline) {
                 tile_blit_outline(tile, blit_tl, blit_br, c);
+            } else {
+                tile_blit(tile, blit_tl, blit_br);
             }
         }
     } else {

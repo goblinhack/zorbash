@@ -299,7 +299,7 @@ private:
     int _is_rrr75 {};
     int _is_rrr76 {};
     int _is_rrr77 {};
-    int _is_rrr78 {};
+    int _is_sword {};
     int _is_skillstone {};
     int _enchant_level {};
     int _enchant_max {};
@@ -769,7 +769,7 @@ public:
     int is_rrr75(void) const;
     int is_rrr76(void) const;
     int is_rrr77(void) const;
-    int is_rrr78(void) const;
+    int is_sword(void) const;
     int is_skillstone(void) const;
     int is_rrr8(void) const;
     int enchant_level(void) const;
@@ -1102,7 +1102,7 @@ public:
     void set_is_rrr75(int);
     void set_is_rrr76(int);
     void set_is_rrr77(int);
-    void set_is_rrr78(int);
+    void set_is_sword(int);
     void set_is_skillstone(int);
     void set_is_rrr8(int);
     void set_enchant_level(int);

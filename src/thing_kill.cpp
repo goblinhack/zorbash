@@ -121,6 +121,8 @@ void Thing::kill (Thingp killer, const char *reason)
                 }
 
                 killer->score_add(this);
+            } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
+                TOPCON("You hear a distant shriek");
             }
         }
     }

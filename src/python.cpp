@@ -1528,7 +1528,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr75)
     TP_SET_DECL(is_rrr76)
     TP_SET_DECL(is_rrr77)
-    TP_SET_DECL(is_rrr78)
+    TP_SET_DECL(is_sword)
     TP_SET_DECL(is_skillstone)
     TP_SET_DECL(enchant_level)
     TP_SET_DECL(enchant_max)
@@ -1870,7 +1870,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr75_at",                                      (PyCFunction)level_is_rrr75_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr76_at",                                      (PyCFunction)level_is_rrr76_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr77_at",                                      (PyCFunction)level_is_rrr77_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr78_at",                                      (PyCFunction)level_is_rrr78_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_sword_at",                                      (PyCFunction)level_is_sword_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_skillstone_at",                                 (PyCFunction)level_is_skillstone_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr7_at",                                       (PyCFunction)level_is_rrr7_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_enchant_level_at",                                 (PyCFunction)level_enchant_level_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2161,7 +2161,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr75",                                         (PyCFunction)thing_is_rrr75,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr76",                                         (PyCFunction)thing_is_rrr76,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr77",                                         (PyCFunction)thing_is_rrr77,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr78",                                         (PyCFunction)thing_is_rrr78,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_sword",                                         (PyCFunction)thing_is_sword,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_skillstone",                                    (PyCFunction)thing_is_skillstone,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr8",                                          (PyCFunction)thing_is_rrr8,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_enchant_level",                                    (PyCFunction)thing_enchant_level,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},

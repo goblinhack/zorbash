@@ -399,6 +399,10 @@ _
         place_foilage(dungeon);
         if (g_errored) { return false; }
 _
+        log("DUNGEON: Place dirt");
+        place_random_treasure(dungeon);
+        if (g_errored) { return false; }
+_
         log("DUNGEON: Scroll to player");
         scroll_map_to_player();
         if (g_errored) { return false; }
@@ -778,32 +782,50 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 
-            if (d->is_treasure_class_a(x, y)) { 
-                if (always_give_treasure) {
-                    tp = tp_random_item_class_a(); 
-                } else {
-                    if (random_range(0, 100) < 50) {
+            if (r && r->is_secret) {
+                //
+                // For secret rooms, be generous and place the good stuff first.
+                // We enchant this later after placing.
+                //
+                if (d->is_treasure_class_a(x, y) ||
+                    d->is_treasure_class_b(x, y) ||
+                    d->is_treasure_class_c(x, y)) { 
+                    if (random_range(0, 100) < 80) {
+                        tp = tp_random_item_class_c(); 
+                    } else if (random_range(0, 100) < 80) {
+                        tp = tp_random_item_class_b(); 
+                    } else {
                         tp = tp_random_item_class_a(); 
                     }
                 }
-            }
-
-            if (d->is_treasure_class_b(x, y)) { 
-                if (always_give_treasure) {
-                    tp = tp_random_item_class_b(); 
-                } else {
-                    if (random_range(0, 100) < 50) {
-                        tp = tp_random_item_class_b(); 
+            } else {
+                if (d->is_treasure_class_a(x, y)) { 
+                    if (always_give_treasure) {
+                        tp = tp_random_item_class_a(); 
+                    } else {
+                        if (random_range(0, 100) < 50) {
+                            tp = tp_random_item_class_a(); 
+                        }
                     }
                 }
-            }
 
-            if (d->is_treasure_class_c(x, y)) { 
-                if (always_give_treasure) {
-                    tp = tp_random_item_class_c(); 
-                } else {
-                    if (random_range(0, 100) < 50) {
+                if (d->is_treasure_class_b(x, y)) { 
+                    if (always_give_treasure) {
+                        tp = tp_random_item_class_b(); 
+                    } else {
+                        if (random_range(0, 100) < 50) {
+                            tp = tp_random_item_class_b(); 
+                        }
+                    }
+                }
+
+                if (d->is_treasure_class_c(x, y)) { 
+                    if (always_give_treasure) {
                         tp = tp_random_item_class_c(); 
+                    } else {
+                        if (random_range(0, 100) < 50) {
+                            tp = tp_random_item_class_c(); 
+                        }
                     }
                 }
             }
@@ -835,7 +857,15 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 
-            (void) thing_new(tp->name(), fpoint(x, y));
+            auto t = thing_new(tp->name(), fpoint(x, y));
+            if (t) {
+                if (t->is_treasure()) {
+                    if (r && r->is_secret) {
+                        t->enchant_randomly();
+                    }
+                    con("DUNGEON: Placed treasure %s", t->short_text_capitalized().c_str());
+                }
+            }
         }
     }
 }
@@ -1335,6 +1365,45 @@ void Level::place_dirt (Dungeonp d)
                 }
 
                 (void) thing_new(tp->name(), fpoint(x, y));
+            }
+        }
+    }
+}
+
+void Level::place_random_treasure (Dungeonp d)
+{_
+    int tries = 1000;
+    int treasure_max = random_range(1, 4);
+
+    while (tries--) {
+        auto x = random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
+        auto y = random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
+
+        if (d->is_dirt(x, y) || 
+            d->is_deep_water(x, y) || 
+            d->is_foilage(x, y)) {
+            auto tp = tp_random_treasure();
+            if (!tp) {
+                return;
+            }
+
+            //
+            // Be nice and enchant this lost treasure.
+            //
+            auto t = thing_new(tp->name(), fpoint(x, y));
+            t->enchant_randomly();
+
+            //
+            // Double enchant swords in lakes :)
+            //
+            if (t->is_sword()) {
+                if (d->is_deep_water(x, y)) {
+                    t->enchant_randomly();
+                }
+            }
+
+            if (treasure_max-- < 0) {
+                return;
             }
         }
     }

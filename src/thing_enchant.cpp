@@ -15,6 +15,7 @@
 #include "my_monst.h"
 #include "my_python.h"
 #include "my_string.h"
+#include "my_random.h"
 
 //
 // Python callback upon being enchant
@@ -72,4 +73,19 @@ bool Thing::enchant (Thingp what)
     }
 
     return true;
+}
+
+void Thing::enchant_randomly (void)
+{_
+    if (!is_enchantable()) {
+        return;
+    }
+
+    incr_enchant(1);
+    while (random_range(0, 100) < 20) {
+        if (get_enchant() >= get_enchant_max()) {
+            break;
+        }
+        incr_enchant(1);
+    }
 }
