@@ -1387,6 +1387,13 @@ void Level::place_random_treasure (Dungeonp d)
                 return;
             }
 
+            if (tp->is_torch()) {
+                if (d->is_deep_water(x, y) ||
+                    d->is_foilage(x, y)) {
+                    continue;
+                }
+            }
+
             //
             // Be nice and enchant this lost treasure.
             //
