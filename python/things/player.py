@@ -22,12 +22,21 @@ def on_born(me, x, y):
 last_footstep = 0
 def on_move(me, x, y):
     global last_footstep
-    footstep = random.randint(1, 8)
-    while footstep == last_footstep:
-        footstep = random.randint(1, 8)
 
-    if zx.thing_sound_play_channel(me, zx.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
-        last_footstep = footstep
+    if zx.level_is_water_at(me, x, y):
+        footstep = random.randint(1, 6)
+        while footstep == last_footstep:
+            footstep = random.randint(1, 6)
+
+        if zx.thing_sound_play_channel(me, zx.CHANNEL_FOOTSTEPS, "splash{}".format(footstep)):
+            last_footstep = footstep
+    else:
+        footstep = random.randint(1, 8)
+        while footstep == last_footstep:
+            footstep = random.randint(1, 8)
+
+        if zx.thing_sound_play_channel(me, zx.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
+            last_footstep = footstep
 
 def tp_init(name, text_name, short_text_name, title):
     mytp = tp.Tp(name, text_name, short_text_name)

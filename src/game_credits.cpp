@@ -170,7 +170,7 @@ void Game::credits_select (void)
     wid_credits_window->log("%%fg=white$Sounds");
     wid_credits_window->log("Oryx, TiesWijnen, danielvj, Adam N, Deathscyp, Dersuperanton");
     wid_credits_window->log("RobinHood76, uEffects, Konstati, Danjocross, XxChr0nosxX");
-    wid_credits_window->log("Rico Casazza. qubodup. tim.kahn, vmgraw, Michel88");
+    wid_credits_window->log("Rico Casazza. qubodup. tim.kahn, vmgraw, Michel88, launemax");
     wid_credits_window->log(" ");
     wid_credits_window->log("%%fg=white$Testers");
     wid_credits_window->log("Stuicy, Goblinhack");
