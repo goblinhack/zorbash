@@ -51,6 +51,8 @@ zx.sound_load(volume=1.0,  file="data/sounds/impacts/splash4.wav",              
 zx.sound_load(volume=1.0,  file="data/sounds/impacts/splash5.wav",                                          name="splash5")
 zx.sound_load(volume=1.0,  file="data/sounds/impacts/splash6.wav",                                          name="splash6")
 zx.sound_load(volume=0.25, file="data/sounds/creatures/148975__adam_n__squelch_1.wav",                      name="squelch")
+zx.sound_load(volume=0.25, file="data/sounds/creatures/bones1.wav",                                         name="bones1")
+zx.sound_load(volume=0.25, file="data/sounds/creatures/bones2.wav",                                         name="bones2")
 zx.sound_load(volume=0.25, file="data/sounds/creatures/slime1.wav",                                         name="slime1")
 zx.sound_load(volume=0.25, file="data/sounds/creatures/slime2.wav",                                         name="slime2")
 zx.sound_load(volume=0.25, file="data/sounds/creatures/slime3.wav",                                         name="slime3")

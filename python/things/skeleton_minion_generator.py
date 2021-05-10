@@ -4,11 +4,19 @@ import random
 
 def on_idle_dice(me, x, y):
     if random.randint(1, 100) < 10:
-        zx.level_spawn_next_to(me, "skeleton_minion_fire")
+        if zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones1"):
+            zx.level_spawn_next_to(me, "skeleton_minion_fire")
     else:
-        zx.level_spawn_next_to(me, "skeleton_minion")
+        if zx.level_spawn_next_to(me, "skeleton_minion"):
+            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones2")
 
 def on_death(me, x, y):
+    if random.randint(1, 2) == 1:
+        if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "bones1"):
+            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones1")
+    else:
+        if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "bones2"):
+            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones2")
     zx.level_spawn_at_thing(me, "generator_explosion")
 
 def tp_init(name, text_name):

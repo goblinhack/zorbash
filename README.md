@@ -40,6 +40,7 @@ Sound effects
 - Grunt squeak sounds by vmgraw, [found here](https://freesound.org/people/vmgraw/)
 - Monster death sounds by Michel88, [found here](https://freesound.org/people/Michel88/)
 - Water splash sounds by launemax, [found here](https://freesound.org/people/launemax/)
+- Bone sounds by ChrisReierson, [found here](https://freesound.org/people/ChrisReierson/)
 
 Screenshots
 -----------
