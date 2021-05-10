@@ -1373,7 +1373,7 @@ void Level::place_dirt (Dungeonp d)
 void Level::place_random_treasure (Dungeonp d)
 {_
     int tries = 1000;
-    int treasure_max = random_range(1, 4);
+    int treasure_max = random_range(1, 10);
 
     while (tries--) {
         auto x = random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
