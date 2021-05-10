@@ -225,7 +225,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr75() &&                                         (what == "is_rrr75"))                                         { return true; }
     if (is_rrr76() &&                                         (what == "is_rrr76"))                                         { return true; }
     if (is_rrr77() &&                                         (what == "is_rrr77"))                                         { return true; }
-    if (is_rrr78() &&                                         (what == "is_rrr78"))                                         { return true; }
+    if (is_sword() &&                                         (what == "is_sword"))                                         { return true; }
     if (is_skillstone() &&                                    (what == "is_skillstone"))                                         { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
     if (enchant_level() &&                                    (what == "enchant_level"))                                         { return true; }
@@ -488,7 +488,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr75")                                         { return &Thing::is_rrr75; }
     if (what == "is_rrr76")                                         { return &Thing::is_rrr76; }
     if (what == "is_rrr77")                                         { return &Thing::is_rrr77; }
-    if (what == "is_rrr78")                                         { return &Thing::is_rrr78; }
+    if (what == "is_sword")                                         { return &Thing::is_sword; }
     if (what == "is_skillstone")                                    { return &Thing::is_skillstone; }
     if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
     if (what == "enchant_level")                                    { return &Thing::enchant_level; }

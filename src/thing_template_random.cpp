@@ -224,7 +224,7 @@ Tpp Level::tp_random_monst_easy (const point &p)
             continue;
         }
 
-        log("DUNGEON: Placed easy monst %s", tpp->name().c_str());
+        con("DUNGEON: Placed easy monst %s", tpp->name().c_str());
         return tpp;
     }
 }
@@ -262,7 +262,7 @@ Tpp Level::tp_random_monst_hard (const point &p)
             continue;
         }
 
-        log("DUNGEON: Placed hard monst %s", tpp->name().c_str());
+        con("DUNGEON: Placed hard monst %s", tpp->name().c_str());
         return tpp;
     }
 }

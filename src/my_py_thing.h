@@ -248,7 +248,7 @@ PyObject *thing_is_rrr74(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr75(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr76(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr77(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr78(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_skillstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);

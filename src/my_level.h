@@ -578,6 +578,7 @@ public:
     void new_laser(ThingId id, point start, point stop, uint32_t dur);
     void new_projectile(ThingId id, point start, point stop, uint32_t dur);
     void place_dirt(Dungeonp d);
+    void place_random_treasure(Dungeonp d);
     void place_dry_fungus(Dungeonp d);
     void place_foilage(Dungeonp d);
     void place_floor_deco(Dungeonp d);
