@@ -15,3 +15,5 @@ zorbash-game.dSYM/
 src/zorbash-game.exe
 zorbash-game.exe
 zorbash-game.exe.dSYM/
+*.session
+*/*.session
