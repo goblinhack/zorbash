@@ -43,6 +43,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sticky {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};
@@ -423,6 +424,8 @@ public:
     uint8_t is_foilage(const point &p);
     uint8_t is_spiderweb(const int x, const int y);
     uint8_t is_spiderweb(const point &p);
+    uint8_t is_sticky(const int x, const int y);
+    uint8_t is_sticky(const point &p);
     uint8_t is_door(const int x, const int y);
     uint8_t is_door(const point &p);
     uint8_t is_dungeon(const int x, const int y);
@@ -613,6 +616,7 @@ public:
     void set_is_skillstone(const int x, const int y);
     void set_is_foilage(const int x, const int y);
     void set_is_spiderweb(const int x, const int y);
+    void set_is_sticky(const int x, const int y);
     void set_is_door(const int x, const int y);
     void set_is_extreme_hazard(const int x, const int y);
     void set_is_fire(const int x, const int y);
@@ -680,6 +684,7 @@ public:
     void unset_is_skillstone(const int x, const int y);
     void unset_is_foilage(const int x, const int y);
     void unset_is_spiderweb(const int x, const int y);
+    void unset_is_sticky(const int x, const int y);
     void unset_is_door(const int x, const int y);
     void unset_is_extreme_hazard(const int x, const int y);
     void unset_is_fire(const int x, const int y);

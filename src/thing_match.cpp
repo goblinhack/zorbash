@@ -34,7 +34,7 @@ bool Thing::matches (const std::string& what) const
     if (attack_meat() &&                                      (what == "attack_meat"))                                      { return true; }
     if (attack_shove() &&                                     (what == "attack_shove"))                                     { return true; }
     if (attack_shove_chance_d1000() &&                        (what == "attack_shove_chance_d1000"))                        { return true; }
-    if (hates_acid() &&                                      (what == "hates_acid"))                                      { return true; }
+    if (hates_acid() &&                                       (what == "hates_acid"))                                      { return true; }
     if (hates_fire() &&                                      (what == "hates_fire"))                                      { return true; }
     if (hates_poison() &&                                    (what == "hates_poison"))                                    { return true; }
     if (hates_water() &&                                     (what == "hates_water"))                                     { return true; }
@@ -142,7 +142,7 @@ bool Thing::matches (const std::string& what) const
     if (is_no_tile() &&                                       (what == "is_no_tile"))                                       { return true; }
     if (is_player() &&                                        (what == "is_player"))                                        { return true; }
     if (is_poison() &&                                        (what == "is_poison"))                                        { return true; }
-    if (loves_poison() &&                              (what == "loves_poison"))                                 { return true; }
+    if (loves_poison() &&                                     (what == "loves_poison"))                                 { return true; }
     if (is_potion() &&                                        (what == "is_potion"))                                        { return true; }
     if (is_potion_eater() &&                                  (what == "is_potion_eater"))                                  { return true; }
     if (is_projectile() &&                                    (what == "is_projectile"))                                    { return true; }
@@ -224,7 +224,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr74() &&                                         (what == "is_rrr74"))                                         { return true; }
     if (is_rrr75() &&                                         (what == "is_rrr75"))                                         { return true; }
     if (is_rrr76() &&                                         (what == "is_rrr76"))                                         { return true; }
-    if (is_sticky() &&                                         (what == "is_sticky"))                                         { return true; }
+    if (is_sticky() &&                                        (what == "is_sticky"))                                         { return true; }
     if (is_sword() &&                                         (what == "is_sword"))                                         { return true; }
     if (is_skillstone() &&                                    (what == "is_skillstone"))                                         { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }

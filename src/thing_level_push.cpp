@@ -55,6 +55,8 @@ void Thing::level_push (void)
                                                    level->set_is_foilage(mx, my); }
     if (is_spiderweb())                          { i_set_is_spiderweb = true;
                                                    level->set_is_spiderweb(mx, my); }
+    if (is_sticky())                             { i_set_is_sticky = true;
+                                                   level->set_is_sticky(mx, my); }
     if (is_door() && !is_open)                   { i_set_is_door = true;
                                                    level->set_is_door(mx, my); }
     if (is_ascend_dungeon())                     { i_set_is_ascend_dungeon = true;

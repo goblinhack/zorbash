@@ -60,7 +60,7 @@ void Thing::brazier_tick (void)
         if (!is_dead) {
             if (random_range(0, 100) < 20) {
                 TOPCON("You stumble into the flames!");
-                set_on_fire("stumedled into flames");
+                set_on_fire("stumbled into flames");
             }
         }
     } FOR_ALL_THINGS_END()

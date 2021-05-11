@@ -230,6 +230,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_skillstone             << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_foilage                << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_spiderweb              << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_sticky                 << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_door                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_ascend_dungeon         << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_descend_dungeon        << shift; shift++;
@@ -327,6 +328,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};          */ out << bits(my.t->_is_skillstone);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};             */ out << bits(my.t->_is_foilage);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};           */ out << bits(my.t->_is_spiderweb);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sticky {};              */ out << bits(my.t->_is_sticky);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ out << bits(my.t->_is_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ out << bits(my.t->_is_dungeon);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};      */ out << bits(my.t->_is_ascend_dungeon);

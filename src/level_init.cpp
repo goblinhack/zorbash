@@ -31,6 +31,7 @@ void Level::clear (void)
     _is_skillstone = {};
     _is_foilage = {};
     _is_spiderweb = {};
+    _is_sticky = {};
     _is_door = {};
     _is_dungeon = {};
     _is_ascend_dungeon = {};

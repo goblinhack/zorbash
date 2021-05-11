@@ -129,6 +129,7 @@ public:
     uint64_t i_set_is_skillstone:1             {};
     uint64_t i_set_is_foilage:1                {};
     uint64_t i_set_is_spiderweb:1              {};
+    uint64_t i_set_is_sticky:1                 {};
     uint64_t i_set_is_door:1                   {};
     uint64_t i_set_is_ascend_dungeon:1         {};
     uint64_t i_set_is_descend_dungeon:1        {};

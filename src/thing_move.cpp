@@ -92,6 +92,7 @@ bool Thing::move (fpoint future_pos)
         if (minion_leash_distance()) {
             if (distance(future_pos, master->mid_at) >= minion_leash_distance()) {
                 log("Minion cannot to %f,%f; it tugs at the leash", future_pos.x, future_pos.y);
+                lunge(future_pos);
                 return false;
             }
         }
@@ -151,6 +152,14 @@ bool Thing::move (fpoint future_pos,
     }
     if (is_jumping) { 
         log("Move; no, is jumping");
+        return false;
+    }
+
+    if (level->is_sticky(future_pos.x, future_pos.y)) {
+        if (is_player()) {
+            TOPCON("You cannot move!");
+        }
+        lunge(future_pos);
         return false;
     }
 
