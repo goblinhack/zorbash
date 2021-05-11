@@ -42,6 +42,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};
@@ -420,6 +421,8 @@ public:
     uint8_t is_skillstone(const point &p);
     uint8_t is_foilage(const int x, const int y);
     uint8_t is_foilage(const point &p);
+    uint8_t is_spiderweb(const int x, const int y);
+    uint8_t is_spiderweb(const point &p);
     uint8_t is_door(const int x, const int y);
     uint8_t is_door(const point &p);
     uint8_t is_dungeon(const int x, const int y);
@@ -581,6 +584,7 @@ public:
     void place_random_treasure(Dungeonp d);
     void place_dry_fungus(Dungeonp d);
     void place_foilage(Dungeonp d);
+    void place_spiderweb(Dungeonp d);
     void place_floor_deco(Dungeonp d);
     void place_the_grid(void);
     void player_dmap_update(void);
@@ -608,6 +612,7 @@ public:
     void set_is_enchantstone(const int x, const int y);
     void set_is_skillstone(const int x, const int y);
     void set_is_foilage(const int x, const int y);
+    void set_is_spiderweb(const int x, const int y);
     void set_is_door(const int x, const int y);
     void set_is_extreme_hazard(const int x, const int y);
     void set_is_fire(const int x, const int y);
@@ -674,6 +679,7 @@ public:
     void unset_is_enchantstone(const int x, const int y);
     void unset_is_skillstone(const int x, const int y);
     void unset_is_foilage(const int x, const int y);
+    void unset_is_spiderweb(const int x, const int y);
     void unset_is_door(const int x, const int y);
     void unset_is_extreme_hazard(const int x, const int y);
     void unset_is_fire(const int x, const int y);

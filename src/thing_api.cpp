@@ -275,7 +275,7 @@ int Thing::is_rrr73(void) const                                         {_ retur
 int Thing::is_rrr74(void) const                                         {_ return (tp()->is_rrr74()); }
 int Thing::is_rrr75(void) const                                         {_ return (tp()->is_rrr75()); }
 int Thing::is_rrr76(void) const                                         {_ return (tp()->is_rrr76()); }
-int Thing::is_rrr77(void) const                                         {_ return (tp()->is_rrr77()); }
+int Thing::is_sticky(void) const                                         {_ return (tp()->is_sticky()); }
 int Thing::is_sword(void) const                                         {_ return (tp()->is_sword()); }
 int Thing::is_skillstone(void) const                                    {_ return (tp()->is_skillstone()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
@@ -287,6 +287,7 @@ int Thing::is_indestructible(void) const                                {_ retur
 int Thing::is_bones(void) const                                         {_ return (tp()->is_bones()); }
 int Thing::is_soft_body(void) const                                     {_ return (tp()->is_soft_body()); }
 int Thing::is_foilage(void) const                                       {_ return (tp()->is_foilage()); }
+int Thing::is_spiderweb(void) const                                     {_ return (tp()->is_spiderweb()); }
 int Thing::gfx_very_small_shadow_caster(void) const                     {_ return (tp()->gfx_very_small_shadow_caster()); }
 int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
 int Thing::is_rrr99(void) const                                         {_ return (tp()->is_rrr99()); }

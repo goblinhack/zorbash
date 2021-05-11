@@ -298,7 +298,7 @@ private:
     int _is_rrr74 {};
     int _is_rrr75 {};
     int _is_rrr76 {};
-    int _is_rrr77 {};
+    int _is_sticky {};
     int _is_sword {};
     int _is_skillstone {};
     int _enchant_level {};
@@ -309,6 +309,7 @@ private:
     int _is_bones {};
     int _is_soft_body {};
     int _is_foilage {};
+    int _is_spiderweb {};
     int _gfx_very_small_shadow_caster {};
     int _is_dry_fungus {};
     int _is_bridge {};
@@ -768,7 +769,7 @@ public:
     int is_rrr74(void) const;
     int is_rrr75(void) const;
     int is_rrr76(void) const;
-    int is_rrr77(void) const;
+    int is_sticky(void) const;
     int is_sword(void) const;
     int is_skillstone(void) const;
     int is_rrr8(void) const;
@@ -780,6 +781,7 @@ public:
     int is_bones(void) const;
     int is_soft_body(void) const;
     int is_foilage(void) const;
+    int is_spiderweb(void) const;
     int gfx_very_small_shadow_caster(void) const;
     int is_dry_fungus(void) const;
     int is_rrr9(void) const;
@@ -1101,7 +1103,7 @@ public:
     void set_is_rrr74(int);
     void set_is_rrr75(int);
     void set_is_rrr76(int);
-    void set_is_rrr77(int);
+    void set_is_sticky(int);
     void set_is_sword(int);
     void set_is_skillstone(int);
     void set_is_rrr8(int);
@@ -1113,6 +1115,7 @@ public:
     void set_is_bones(int);
     void set_is_soft_body(int);
     void set_is_foilage(int);
+    void set_is_spiderweb(int);
     void set_gfx_very_small_shadow_caster(int);
     void set_is_dry_fungus(int);
     void set_is_rrr9(int);
@@ -1249,6 +1252,7 @@ class Tp* tp_random_dry_fungus(void);
 class Tp* tp_random_enchantstone(void);
 class Tp* tp_random_skillstone(void);
 class Tp* tp_random_foilage(void);
+class Tp* tp_random_spiderweb(void);
 class Tp* tp_random_door(void);
 class Tp* tp_random_wall_dungeon(void);
 class Tp* tp_random_ascend_dungeon(void);

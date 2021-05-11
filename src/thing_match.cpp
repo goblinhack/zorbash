@@ -224,7 +224,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr74() &&                                         (what == "is_rrr74"))                                         { return true; }
     if (is_rrr75() &&                                         (what == "is_rrr75"))                                         { return true; }
     if (is_rrr76() &&                                         (what == "is_rrr76"))                                         { return true; }
-    if (is_rrr77() &&                                         (what == "is_rrr77"))                                         { return true; }
+    if (is_sticky() &&                                         (what == "is_sticky"))                                         { return true; }
     if (is_sword() &&                                         (what == "is_sword"))                                         { return true; }
     if (is_skillstone() &&                                    (what == "is_skillstone"))                                         { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
@@ -236,6 +236,7 @@ bool Thing::matches (const std::string& what) const
     if (is_bones() &&                                         (what == "is_bones"))                                         { return true; }
     if (is_soft_body() &&                                     (what == "is_soft_body"))                                         { return true; }
     if (is_foilage() &&                                       (what == "is_foilage"))                                         { return true; }
+    if (is_spiderweb() &&                                     (what == "is_spiderweb"))                                         { return true; }
     if (gfx_very_small_shadow_caster() &&                     (what == "gfx_very_small_shadow_caster"))                                         { return true; }
     if (is_dry_fungus() &&                                    (what == "is_dry_fungus"))                                         { return true; }
     if (is_rrr9() &&                                          (what == "is_rrr9"))                                          { return true; }
@@ -487,7 +488,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr74")                                         { return &Thing::is_rrr74; }
     if (what == "is_rrr75")                                         { return &Thing::is_rrr75; }
     if (what == "is_rrr76")                                         { return &Thing::is_rrr76; }
-    if (what == "is_rrr77")                                         { return &Thing::is_rrr77; }
+    if (what == "is_sticky")                                         { return &Thing::is_sticky; }
     if (what == "is_sword")                                         { return &Thing::is_sword; }
     if (what == "is_skillstone")                                    { return &Thing::is_skillstone; }
     if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
@@ -499,6 +500,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_bones")                                         { return &Thing::is_bones; }
     if (what == "is_soft_body")                                     { return &Thing::is_soft_body; }
     if (what == "is_foilage")                                       { return &Thing::is_foilage; }
+    if (what == "is_spiderweb")                                     { return &Thing::is_spiderweb; }
     if (what == "gfx_very_small_shadow_caster")                     { return &Thing::gfx_very_small_shadow_caster; }
     if (what == "is_dry_fungus")                                    { return &Thing::is_dry_fungus; }
     if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }

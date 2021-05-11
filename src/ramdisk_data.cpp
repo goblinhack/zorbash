@@ -1169,6 +1169,17 @@ void ramdisk_init (void)
     }
 
     {
+        extern unsigned char *data_bones1_wav_start_ asm("data_bones1_wav_start_");
+        extern unsigned char *data_bones1_wav_end_ asm("data_bones1_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_bones1_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_bones1_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/bones1.wav"] = r;
+    }
+
+    {
         extern unsigned char *data_hiss9_wav_start_ asm("data_hiss9_wav_start_");
         extern unsigned char *data_hiss9_wav_end_ asm("data_hiss9_wav_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_hiss9_wav_start_;
@@ -1199,6 +1210,17 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/sounds/creatures/beetle.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_bones2_wav_start_ asm("data_bones2_wav_start_");
+        extern unsigned char *data_bones2_wav_end_ asm("data_bones2_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_bones2_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_bones2_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/creatures/bones2.wav"] = r;
     }
 
     {
@@ -1730,6 +1752,17 @@ void ramdisk_init (void)
     }
 
     {
+        extern unsigned char *data_splash2_wav_start_ asm("data_splash2_wav_start_");
+        extern unsigned char *data_splash2_wav_end_ asm("data_splash2_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_splash2_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_splash2_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/splash2.wav"] = r;
+    }
+
+    {
         extern unsigned char *data_hit_wav_start_ asm("data_hit_wav_start_");
         extern unsigned char *data_hit_wav_end_ asm("data_hit_wav_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_hit_wav_start_;
@@ -1738,6 +1771,17 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/sounds/impacts/hit.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_splash3_wav_start_ asm("data_splash3_wav_start_");
+        extern unsigned char *data_splash3_wav_end_ asm("data_splash3_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_splash3_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_splash3_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/splash3.wav"] = r;
     }
 
     {
@@ -1752,6 +1796,28 @@ void ramdisk_init (void)
     }
 
     {
+        extern unsigned char *data_splash1_wav_start_ asm("data_splash1_wav_start_");
+        extern unsigned char *data_splash1_wav_end_ asm("data_splash1_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_splash1_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_splash1_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/splash1.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_splash4_wav_start_ asm("data_splash4_wav_start_");
+        extern unsigned char *data_splash4_wav_end_ asm("data_splash4_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_splash4_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_splash4_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/splash4.wav"] = r;
+    }
+
+    {
         extern unsigned char *data_magic_dust_b_wav_start_ asm("data_magic_dust_b_wav_start_");
         extern unsigned char *data_magic_dust_b_wav_end_ asm("data_magic_dust_b_wav_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_magic_dust_b_wav_start_;
@@ -1760,6 +1826,17 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/sounds/impacts/magic_dust_b.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_splash5_wav_start_ asm("data_splash5_wav_start_");
+        extern unsigned char *data_splash5_wav_end_ asm("data_splash5_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_splash5_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_splash5_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/splash5.wav"] = r;
     }
 
     {
@@ -1782,6 +1859,17 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/sounds/impacts/magic_dust_a.wav"] = r;
+    }
+
+    {
+        extern unsigned char *data_splash6_wav_start_ asm("data_splash6_wav_start_");
+        extern unsigned char *data_splash6_wav_end_ asm("data_splash6_wav_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_splash6_wav_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_splash6_wav_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/sounds/impacts/splash6.wav"] = r;
     }
 
     {

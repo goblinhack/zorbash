@@ -111,6 +111,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_descend_dungeon       ||
                            m.is_door                  ||
                            m.is_foilage               ||
+                           m.is_spiderweb             ||
                            m.is_dry_fungus            ||
                            m.is_floor_deco            ||
                            m.is_food                  ||
@@ -139,6 +140,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
 
                 if (m.is_foilage ||
+                    m.is_spiderweb ||
                     m.is_dry_fungus) {
                     floor2_string += c;
                 } else {

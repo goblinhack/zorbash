@@ -34,6 +34,7 @@ public:
         EXIT             =            'E',
         FLOOR            =            '.',
         FOILAGE          =            '`',
+        SPIDERWEB        =            'X',
         FOOD             =            'f',
         GOLD             =            'o',
         KEY              =            'k',
@@ -69,6 +70,7 @@ public:
     bool                      is_enchantstone                 {false};
     bool                      is_skillstone                   {false};
     bool                      is_foilage                      {false};
+    bool                      is_spiderweb                    {false};
     bool                      is_door                         {false};
     bool                      is_ascend_dungeon               {false};
     bool                      is_descend_dungeon              {false};

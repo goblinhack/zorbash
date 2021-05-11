@@ -128,6 +128,7 @@ public:
     uint64_t i_set_is_enchantstone:1           {};
     uint64_t i_set_is_skillstone:1             {};
     uint64_t i_set_is_foilage:1                {};
+    uint64_t i_set_is_spiderweb:1              {};
     uint64_t i_set_is_door:1                   {};
     uint64_t i_set_is_ascend_dungeon:1         {};
     uint64_t i_set_is_descend_dungeon:1        {};
@@ -729,6 +730,7 @@ public:
     int is_floor(void) const;
     int is_floor_deco(void) const;
     int is_foilage(void) const;
+    int is_spiderweb(void) const;
     int is_food(void) const;
     int is_food_eater(void) const;
     int is_gold(void) const;
@@ -857,7 +859,7 @@ public:
     int is_rrr74(void) const;
     int is_rrr75(void) const;
     int is_rrr76(void) const;
-    int is_rrr77(void) const;
+    int is_sticky(void) const;
     int is_sword(void) const;
     int is_skillstone(void) const;
     int is_rrr8(void) const;

@@ -399,6 +399,10 @@ _
         place_foilage(dungeon);
         if (g_errored) { return false; }
 _
+        log("DUNGEON: Place spiderweb");
+        place_spiderweb(dungeon);
+        if (g_errored) { return false; }
+_
         log("DUNGEON: Place dirt");
         place_random_treasure(dungeon);
         if (g_errored) { return false; }
@@ -1381,6 +1385,7 @@ void Level::place_random_treasure (Dungeonp d)
 
         if (d->is_dirt(x, y) || 
             d->is_deep_water(x, y) || 
+            d->is_spiderweb(x, y) ||
             d->is_foilage(x, y)) {
             auto tp = tp_random_treasure();
             if (!tp) {
@@ -1442,6 +1447,26 @@ void Level::place_foilage (Dungeonp d)
         for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
             if (!d->is_anything_at(x, y) || d->is_foilage(x, y)) {
                 auto tp = tp_random_foilage();
+                if (!tp) {
+                    return;
+                }
+
+                if (heatmap(x, y)) {
+                    continue;
+                }
+
+                (void) thing_new(tp->name(), fpoint(x, y));
+            }
+        }
+    }
+}
+
+void Level::place_spiderweb (Dungeonp d)
+{_
+    for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+        for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+            if (!d->is_anything_at(x, y) || d->is_spiderweb(x, y)) {
+                auto tp = tp_random_spiderweb();
                 if (!tp) {
                     return;
                 }

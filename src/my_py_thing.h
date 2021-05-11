@@ -247,7 +247,7 @@ PyObject *thing_is_rrr73(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr74(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr75(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr76(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr77(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_skillstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_level(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -258,6 +258,7 @@ PyObject *thing_is_indestructible(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_bones(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_soft_body(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_foilage(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_spiderweb(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_very_small_shadow_caster(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dry_fungus(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -66,75 +66,81 @@ data_hiss10_wav_start_:
 .globl data_hiss10_wav_end_
 data_hiss10_wav_end_:
 
-.globl data_snake_wav_start_
-data_snake_wav_start_:
-.incbin "../data/sounds/creatures/snake.wav"
-.globl data_snake_wav_end_
-data_snake_wav_end_:
+.globl data_jelly_wav_start_
+data_jelly_wav_start_:
+.incbin "../data/sounds/creatures/jelly.wav"
+.globl data_jelly_wav_end_
+data_jelly_wav_end_:
 
-.globl data_slime7_wav_start_
-data_slime7_wav_start_:
-.incbin "../data/sounds/creatures/slime7.wav"
-.globl data_slime7_wav_end_
-data_slime7_wav_end_:
+.globl data_swarm_wav_start_
+data_swarm_wav_start_:
+.incbin "../data/sounds/creatures/swarm.wav"
+.globl data_swarm_wav_end_
+data_swarm_wav_end_:
 
-.globl data_437653__dersuperanton__moan_male_beat_punch_wav_start_
-data_437653__dersuperanton__moan_male_beat_punch_wav_start_:
-.incbin "../data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav"
-.globl data_437653__dersuperanton__moan_male_beat_punch_wav_end_
-data_437653__dersuperanton__moan_male_beat_punch_wav_end_:
+.globl data_59992__qubodup__swosh_sword_swing_wav_start_
+data_59992__qubodup__swosh_sword_swing_wav_start_:
+.incbin "../data/sounds/impacts/59992__qubodup__swosh-sword-swing.wav"
+.globl data_59992__qubodup__swosh_sword_swing_wav_end_
+data_59992__qubodup__swosh_sword_swing_wav_end_:
 
-.globl data_explosion_c_wav_start_
-data_explosion_c_wav_start_:
-.incbin "../data/sounds/impacts/explosion_c.wav"
-.globl data_explosion_c_wav_end_
-data_explosion_c_wav_end_:
+.globl data_sear_wav_start_
+data_sear_wav_start_:
+.incbin "../data/sounds/impacts/sear.wav"
+.globl data_sear_wav_end_
+data_sear_wav_end_:
 
-.globl data_area_effect_b_wav_start_
-data_area_effect_b_wav_start_:
-.incbin "../data/sounds/impacts/area_effect_b.wav"
-.globl data_area_effect_b_wav_end_
-data_area_effect_b_wav_end_:
+.globl data_268227__xxchr0nosxx__swing_wav_start_
+data_268227__xxchr0nosxx__swing_wav_start_:
+.incbin "../data/sounds/impacts/268227__xxchr0nosxx__swing.wav"
+.globl data_268227__xxchr0nosxx__swing_wav_end_
+data_268227__xxchr0nosxx__swing_wav_end_:
 
-.globl data_click2_wav_start_
-data_click2_wav_start_:
-.incbin "../data/sounds/interface/click2.wav"
-.globl data_click2_wav_end_
-data_click2_wav_end_:
+.globl data_splash1_wav_start_
+data_splash1_wav_start_:
+.incbin "../data/sounds/impacts/splash1.wav"
+.globl data_splash1_wav_end_
+data_splash1_wav_end_:
 
-.globl data_blip_wav_start_
-data_blip_wav_start_:
-.incbin "../data/sounds/interface/blip.wav"
-.globl data_blip_wav_end_
-data_blip_wav_end_:
+.globl data_end_turn_wav_start_
+data_end_turn_wav_start_:
+.incbin "../data/sounds/interface/end_turn.wav"
+.globl data_end_turn_wav_end_
+data_end_turn_wav_end_:
 
-.globl data_ding_wav_start_
-data_ding_wav_start_:
-.incbin "../data/sounds/interface/ding.wav"
-.globl data_ding_wav_end_
-data_ding_wav_end_:
+.globl data_1up_b_wav_start_
+data_1up_b_wav_start_:
+.incbin "../data/sounds/interface/1up_b.wav"
+.globl data_1up_b_wav_end_
+data_1up_b_wav_end_:
 
-.globl data_collect_a_wav_start_
-data_collect_a_wav_start_:
-.incbin "../data/sounds/misc/collect_a.wav"
-.globl data_collect_a_wav_end_
-data_collect_a_wav_end_:
+.globl data_step_wav_start_
+data_step_wav_start_:
+.incbin "../data/sounds/misc/step.wav"
+.globl data_step_wav_end_
+data_step_wav_end_:
 
-.globl data_chime_wav_start_
-data_chime_wav_start_:
-.incbin "../data/sounds/misc/chime.wav"
-.globl data_chime_wav_end_
-data_chime_wav_end_:
+.globl data_collect_b_wav_start_
+data_collect_b_wav_start_:
+.incbin "../data/sounds/misc/collect_b.wav"
+.globl data_collect_b_wav_end_
+data_collect_b_wav_end_:
 
-.globl data_blurb_wav_start_
-data_blurb_wav_start_:
-.incbin "../data/sounds/misc/blurb.wav"
-.globl data_blurb_wav_end_
-data_blurb_wav_end_:
+.globl data_close_wav_start_
+data_close_wav_start_:
+.incbin "../data/sounds/misc/close.wav"
+.globl data_close_wav_end_
+data_close_wav_end_:
 
-.globl data_footsteps2_wav_start_
-data_footsteps2_wav_start_:
-.incbin "../data/sounds/misc/footsteps2.wav"
-.globl data_footsteps2_wav_end_
-data_footsteps2_wav_end_:
+.globl data_scramble_wav_start_
+data_scramble_wav_start_:
+.incbin "../data/sounds/misc/scramble.wav"
+.globl data_scramble_wav_end_
+data_scramble_wav_end_:
+
+.globl data_freeze_wav_start_
+data_freeze_wav_start_:
+.incbin "../data/sounds/status/freeze.wav"
+.globl data_freeze_wav_end_
+data_freeze_wav_end_:
 
