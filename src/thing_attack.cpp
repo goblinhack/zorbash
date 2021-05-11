@@ -235,6 +235,7 @@ _
 
     if (is_weapon()) {
         if (it->is_foilage() ||
+            it->is_sticky() ||
             it->is_spiderweb()) {
             log("Can attack scenery %s", it->to_string().c_str());
             return true;
@@ -255,6 +256,7 @@ _
         it->is_skillstone() ||
         it->is_foilage() ||
         it->is_spiderweb() ||
+        it->is_sticky() ||
         it->is_brazier() ||
         it->is_barrel() ||
         it->is_player() ||
