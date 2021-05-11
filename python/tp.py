@@ -460,8 +460,8 @@ class Tp:
     def set_is_rrr76(self, value):
         zx.tp_set_is_rrr76(self, value)
 
-    def set_is_rrr77(self, value):
-        zx.tp_set_is_rrr77(self, value)
+    def set_is_sticky(self, value):
+        zx.tp_set_is_sticky(self, value)
 
     def set_is_sword(self, value):
         zx.tp_set_is_sword(self, value)
@@ -492,6 +492,9 @@ class Tp:
 
     def set_is_foilage(self, value):
         zx.tp_set_is_foilage(self, value)
+
+    def set_is_spiderweb(self, value):
+        zx.tp_set_is_spiderweb(self, value)
 
     def set_gfx_very_small_shadow_caster(self, value):
         zx.tp_set_gfx_very_small_shadow_caster(self, value)

@@ -870,6 +870,40 @@ void Level::unset_is_foilage (const int x, const int y)
     decr(_is_foilage, x, y, (uint8_t)1);
 }
 
+uint8_t Level::is_spiderweb (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_spiderweb, p.x, p.y));
+}
+
+uint8_t Level::is_spiderweb (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_spiderweb, x, y));
+}
+
+void Level::set_is_spiderweb (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    map_changed = true;
+    incr(_is_spiderweb, x, y, (uint8_t)1);
+}
+
+void Level::unset_is_spiderweb (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    map_changed = true;
+    decr(_is_spiderweb, x, y, (uint8_t)1);
+}
+
 uint8_t Level::is_floor (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {

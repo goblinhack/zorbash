@@ -75,6 +75,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_foilage           = true;
 
+    char_index              = Charmap::SPIDERWEB;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_spiderweb         = true;
+
     char_index              = Charmap::DOOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

@@ -259,6 +259,9 @@ void Dungeon::make_dungeon (void)
     LOG("DUNGEON: Add foilage around water");
     add_foilage_around_water();
 
+    LOG("DUNGEON: Add spiderwebs");
+    add_spiderweb();
+
     LOG("DUNGEON: Generate fungus");
     dry_fungus_gen(10, // fill prob
                   10, // R1
@@ -270,6 +273,12 @@ void Dungeon::make_dungeon (void)
                 10, // R1
                 5,  // R2
                 4   /* generations */);
+
+    LOG("DUNGEON: Generate spiderweb");
+    spiderweb_gen(2,  // fill prob
+                  10, // R1
+                  5,  // R2
+                  4   /* generations */);
 
     LOG("DUNGEON: Created, but not populated");
     dump();
@@ -660,6 +669,23 @@ bool Dungeon::is_foilage (const int x, const int y)
         auto v = get(Charmap::all_charmaps, c);
 
         if (v.is_foilage) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Dungeon::is_spiderweb (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_spiderweb) {
             return true;
         }
     }
@@ -3689,6 +3715,10 @@ void Dungeon::add_remaining (void)
                 if (random_range(0, 100) < 20) {
                     putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
                 }
+            } else if (is_corridor(x, y)) {
+                if (random_range(0, 100) < 20) {
+                    putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB);
+                }
             }
         }
     }
@@ -3700,28 +3730,32 @@ void Dungeon::add_foilage_around_water (void)
         for (auto x = 2; x < MAP_WIDTH - 2; x++) {
 
             if (is_chasm(x, y) ||
+                is_wall(x, y) ||
+                is_rock(x, y) ||
                 is_bridge(x, y) ||
+                is_chasm(x, y) ||
                 is_lava(x, y) ||
+                is_brazier(x, y) ||
                 is_deep_water(x, y) ||
                 is_shallow_water(x, y)) {
                 continue;
             }
 
             if (is_dirt(x, y)) {
-                if (random_range(0, 100) > 80) {
+                if (random_range(0, 100) > 50) {
                     continue;
                 }
             }
 
             if (is_floor(x, y)) {
-                if (random_range(0, 100) > 20) {
+                if (random_range(0, 100) > 5) {
                     continue;
                 }
             }
 
-            bool foilage_ok = false;
+            int foilage_ok = 0;
             for (auto dx = -2; dx <= 2; dx++) {
-                if (!foilage_ok) {
+                if (foilage_ok < 0) {
                     break;
                 }
                 for (auto dy = -2; dy <= 2; dy++) {
@@ -3730,19 +3764,78 @@ void Dungeon::add_foilage_around_water (void)
                         is_lava(x+dx, y+dy)    ||
                         is_brazier(x+dx, y+dy) ||
                         is_chasm(x+dx, y+dy)) {
-                        foilage_ok = false;
+                        foilage_ok = -1;
                         goto next;
                     }
 
                     if (is_shallow_water(x+dx, y+dy) ||
+                        is_foilage(x+dx, y+dy)       ||
                         is_deep_water(x+dx, y+dy)) {
-                        foilage_ok = true;
+                        foilage_ok = 1;
                     }
                 }
             }
 next:
-            if (foilage_ok) {
+            if (foilage_ok == 1) {
                 putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+            }
+        }
+    }
+}
+
+void Dungeon::add_spiderweb (void)
+{
+    for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
+        for (auto x = 2; x < MAP_WIDTH - 2; x++) {
+
+            if (is_lava(x, y) ||
+                is_wall(x, y) ||
+                is_rock(x, y) ||
+                is_deep_water(x, y) ||
+                is_brazier(x, y) ||
+                is_shallow_water(x, y)) {
+                continue;
+            }
+
+            if (is_corridor(x, y)) {
+                if (random_range(0, 1000) > 400) {
+                    continue;
+                }
+            } else if (is_floor(x, y)) {
+                if (random_range(0, 1000) > 1) {
+                    continue;
+                }
+            } else {
+                continue;
+            }
+
+            int spiderweb_ok = 0;
+            for (auto dx = -2; dx <= 2; dx++) {
+                if (spiderweb_ok == -1) {
+                    break;
+                }
+                for (auto dy = -1; dy <= 1; dy++) {
+                    if (is_lava(x+dx, y+dy)          ||
+                        is_shallow_water(x+dx, y+dy) ||
+                        is_deep_water(x+dx, y+dy)    ||
+                        is_brazier(x+dx, y+dy)) {
+                        spiderweb_ok = -1;
+                        goto next;
+                    }
+
+                    if (is_chasm(x+dx, y+dy)     ||
+                        is_bridge(x+dx, y+dy)    ||
+                        is_spiderweb(x+dx, y+dy) ||
+                        is_rock(x+dx, y+dy)      ||
+                        is_wall(x+dx, y+dy)) {
+                        spiderweb_ok = 1;
+                        goto next;
+                    }
+                }
+            }
+next:
+            if (spiderweb_ok == 1) {
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB);
             }
         }
     }
@@ -4042,6 +4135,86 @@ void Dungeon::foilage_gen (uint8_t map_fill_prob,
                 }
 
                 putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+            }
+next:
+            continue;
+        }
+    }
+}
+
+void Dungeon::spiderweb_gen (uint8_t map_fill_prob,
+                             uint8_t map_r1,
+                             uint8_t map_r2,
+                             uint8_t map_generations)
+
+{
+    map_save = {};
+    map_curr = {};
+
+    const int16_t maze_w = MAP_WIDTH - 2;
+    const int16_t maze_h = MAP_HEIGHT - 2;
+
+    if (map_fill_prob) {
+        MAP_FILL_PROB             = map_fill_prob;
+    }
+
+    if (map_r1) {
+        MAP_R1                    = map_r1;
+    }
+
+    if (map_r2) {
+        MAP_R2                    = map_r2;
+    }
+
+    if (map_generations) {
+        MAP_GENERATIONS           = map_generations;
+    }
+
+    int16_t x, y, i;
+
+    map_curr = {};
+
+    for (x=2; x < maze_w-2; x++) {
+        for (y=2; y < maze_h-2; y++) {
+            if ((myrand() % 100) < MAP_FILL_PROB) {
+                set(map_curr, x, y, (uint8_t)1);
+            }
+        }
+    }
+
+    for (i=0; i < MAP_GENERATIONS; i++) {
+        cave_generation();
+        std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+        map_save = {};
+    }
+
+    for (x=2; x < maze_w-2; x++) {
+        for (y=2; y < maze_h-2; y++) {
+            if (get(map_curr, x, y)) {
+                if (is_wall(x, y) || 
+                    is_rock(x, y) ||
+                    is_chasm(x, y)) {
+                    continue;
+                }
+
+                for (auto dx = -1; dx <= 1; dx++) {
+                    for (auto dy = -1; dy <= 1; dy++) {
+                        if (is_lava(x+dx, y+dy)) {
+                            goto next;
+                        }
+                        if (is_brazier(x+dx, y+dy)) {
+                            goto next;
+                        }
+                        if (is_shallow_water(x+dx, y+dy)) {
+                            goto next;
+                        }
+                        if (is_deep_water(x+dx, y+dy)) {
+                            goto next;
+                        }
+                    }
+                }
+
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB);
             }
 next:
             continue;

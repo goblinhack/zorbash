@@ -331,7 +331,7 @@ int Tp::is_rrr73(void) const                                         { return _i
 int Tp::is_rrr74(void) const                                         { return _is_rrr74; }
 int Tp::is_rrr75(void) const                                         { return _is_rrr75; }
 int Tp::is_rrr76(void) const                                         { return _is_rrr76; }
-int Tp::is_rrr77(void) const                                         { return _is_rrr77; }
+int Tp::is_sticky(void) const                                         { return _is_sticky; }
 int Tp::is_sword(void) const                                         { return _is_sword; }
 int Tp::is_skillstone(void) const                                    { return _is_skillstone; }
 int Tp::enchant_level(void) const                                    { return _enchant_level; }
@@ -342,6 +342,7 @@ int Tp::is_indestructible(void) const                                { return _i
 int Tp::is_bones(void) const                                         { return _is_bones; }
 int Tp::is_soft_body(void) const                                     { return _is_soft_body; }
 int Tp::is_foilage(void) const                                       { return _is_foilage; }
+int Tp::is_spiderweb(void) const                                     { return _is_spiderweb; }
 int Tp::gfx_very_small_shadow_caster(void) const                     { return _gfx_very_small_shadow_caster; }
 int Tp::is_dry_fungus(void) const                                    { return _is_dry_fungus; }
 int Tp::is_bridge(void) const                                        { return _is_bridge; }
@@ -655,7 +656,7 @@ void Tp::set_is_rrr73(int v)                                         { _is_rrr73
 void Tp::set_is_rrr74(int v)                                         { _is_rrr74 = v; }
 void Tp::set_is_rrr75(int v)                                         { _is_rrr75 = v; }
 void Tp::set_is_rrr76(int v)                                         { _is_rrr76 = v; }
-void Tp::set_is_rrr77(int v)                                         { _is_rrr77 = v; }
+void Tp::set_is_sticky(int v)                                         { _is_sticky = v; }
 void Tp::set_is_sword(int v)                                         { _is_sword = v; }
 void Tp::set_is_skillstone(int v)                                    { _is_skillstone = v; }
 void Tp::set_enchant_level(int v)                                    { _enchant_level = v; }
@@ -666,6 +667,7 @@ void Tp::set_is_indestructible(int v)                                { _is_indes
 void Tp::set_is_bones(int v)                                         { _is_bones = v; }
 void Tp::set_is_soft_body(int v)                                     { _is_soft_body = v; }
 void Tp::set_is_foilage(int v)                                       { _is_foilage = v; }
+void Tp::set_is_spiderweb(int v)                                     { _is_spiderweb = v; }
 void Tp::set_gfx_very_small_shadow_caster(int v)                     { _gfx_very_small_shadow_caster = v; }
 void Tp::set_is_dry_fungus(int v)                                    { _is_dry_fungus = v; }
 void Tp::set_is_bridge(int v)                                        { _is_bridge = v; }

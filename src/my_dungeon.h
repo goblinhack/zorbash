@@ -94,6 +94,7 @@ public:
     bool is_enchantstone(const int x, const int y);
     bool is_skillstone(const int x, const int y);
     bool is_foilage(const int x, const int y);
+    bool is_spiderweb(const int x, const int y);
     bool is_dirt_no_check(const int x, const int y);
     bool is_door(const int x, const int y);
     bool is_door_no_check(const int x, const int y);
@@ -149,6 +150,7 @@ public:
     void add_corridor_walls(void);
     void add_remaining(void);
     void add_foilage_around_water(void);
+    void add_spiderweb(void);
     void add_room_walls(void);
     void assign_rooms_to_tiles(void);
     void block_secret_doors(void);
@@ -205,6 +207,10 @@ public:
                      uint8_t map_r1,
                      uint8_t map_r2,
                      uint8_t map_generations);
+    void spiderweb_gen(uint8_t map_fill_prob,
+                       uint8_t map_r1,
+                       uint8_t map_r2,
+                       uint8_t map_generations);
     void water_gen(uint8_t map_fill_prob,
                    uint8_t map_r1,
                    uint8_t map_r2,

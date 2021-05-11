@@ -113,6 +113,8 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                     c = RED;
                 } else if (is_foilage(x, y)) {
                     c = DARKGREEN;
+                } else if (is_spiderweb(x, y)) {
+                    c = GRAY50;
                 } else {
                     c = BLACK;
                 }
@@ -243,6 +245,8 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                     c = RED;
                 } else if (is_foilage(x, y)) {
                     c = DARKGREEN;
+                } else if (is_spiderweb(x, y)) {
+                    c = GRAY50;
                 } else if (edge_of_sceen) {
                     c = GRAY10;
                 } else {

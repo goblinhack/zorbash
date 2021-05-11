@@ -24,6 +24,7 @@ static Tpidmap tp_dry_fungus;
 static Tpidmap tp_enchantstone;
 static Tpidmap tp_skillstone;
 static Tpidmap tp_foilage;
+static Tpidmap tp_spiderweb;
 static Tpidmap tp_door;
 static Tpidmap tp_ascend_dungeon;
 static Tpidmap tp_descend_dungeon;
@@ -75,6 +76,7 @@ void tp_random_init (void)
         if (tp->is_floor())                     { tp_floor.push_back(tp); }
         if (tp->is_floor_deco())                { tp_deco.push_back(tp); }
         if (tp->is_foilage())                   { tp_foilage.push_back(tp); }
+        if (tp->is_spiderweb())                 { tp_spiderweb.push_back(tp); }
         if (tp->is_food())                      { tp_food.push_back(tp); }
         if (tp->is_gold())                      { tp_gold.push_back(tp); }
         if (tp->is_key())                       { tp_key.push_back(tp); }
@@ -391,6 +393,15 @@ Tpp tp_random_foilage (void)
         return (nullptr);
     }
     return tp_get_with_no_rarity_filter(tp_foilage);
+}
+
+Tpp tp_random_spiderweb (void)
+{_
+    if (unlikely(!tp_spiderweb.size())) {
+        ERR("No spiderwebs found");
+        return (nullptr);
+    }
+    return tp_get_with_no_rarity_filter(tp_spiderweb);
 }
 
 Tpp tp_random_ripple (void)

@@ -1,6 +1,12 @@
 
 Todo
 ----
+- fpolage shadow
+- spiderweb hit
+- foilage hit
+- no burn damage from dead fire skel
+- spider that throws web?
+- wand recharge
 
 Level
 -----
@@ -45,7 +51,6 @@ Poison
 - holy water
 - add poison notify on screen from spider?
 - half damage from poison constitution save
-- spider that throws web?
 - antipoison potion
 
 Gasses
@@ -62,7 +67,7 @@ Doors
 AI
 --
 - rats steal keys ? shown visibly ?
-- throw gold to distract cleaner
+- throw treasure to distract cleaner
 
 Food
 ----

@@ -108,6 +108,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
 
                 if (m.is_foilage ||
+                    m.is_spiderweb ||
                     m.is_dry_fungus) {
                     floor2_string += c;
                 } else {
@@ -595,7 +596,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_rrr73_at, is_rrr73)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr74_at, is_rrr74)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr75_at, is_rrr75)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr76_at, is_rrr76)
-LEVEL_BODY_GET_BOOL_AT(level_is_rrr77_at, is_rrr77)
+LEVEL_BODY_GET_BOOL_AT(level_is_sticky_at, is_sticky)
 LEVEL_BODY_GET_BOOL_AT(level_is_sword_at, is_sword)
 LEVEL_BODY_GET_BOOL_AT(level_is_skillstone_at, is_skillstone)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr7_at, is_rrr7)
@@ -607,6 +608,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_indestructible_at, is_indestructible)
 LEVEL_BODY_GET_BOOL_AT(level_is_bones_at, is_bones)
 LEVEL_BODY_GET_BOOL_AT(level_is_soft_body_at, is_soft_body)
 LEVEL_BODY_GET_BOOL_AT(level_is_foilage_at, is_foilage)
+LEVEL_BODY_GET_BOOL_AT(level_is_spiderweb_at, is_spiderweb)
 LEVEL_BODY_GET_BOOL_AT(level_gfx_very_small_shadow_caster_at, gfx_very_small_shadow_caster)
 LEVEL_BODY_GET_BOOL_AT(level_is_dry_fungus_at, is_dry_fungus)
 LEVEL_BODY_GET_BOOL_AT(level_is_rrr8_at, is_rrr8)
