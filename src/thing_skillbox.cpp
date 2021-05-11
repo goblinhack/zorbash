@@ -270,12 +270,8 @@ _
     }
 
     Thingp what;
-    bool changed_highlight_slot = false;
-
     if (slot != game->skillbox_highlight_slot) {
         game->skillbox_highlight_slot = slot;
-        changed_highlight_slot = true;
-
         what = skillbox_describe(slot);
     } else {
         what = skillbox_describe(game->skillbox_highlight_slot);

@@ -455,6 +455,7 @@ C_FLAGS="$C_FLAGS `$Python_CONFIG --cflags | \
            grep -v strict-proto         | \
            grep -v no-strict-aliasing   | \
            tr '\n' ' '                  | \
+           sed 's/\-fstack-protector/ /g' | \
            sed 's/\-arch i386/ /g'      \
            `"
 #

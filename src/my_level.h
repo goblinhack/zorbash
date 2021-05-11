@@ -8,6 +8,9 @@
 #define _MY_LEVEL_H_
 
 #include <map>
+#include <deque>
+#include <functional>
+
 #include "my_time.h"
 #include "my_thing_defs.h"
 #include "my_particle.h"
