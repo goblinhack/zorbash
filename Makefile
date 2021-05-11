@@ -6,14 +6,14 @@ all: pre
 	@if [ ! -f src/Makefile ]; then \
 	    (RUNME;) \
 	fi
-	(cd src; make $@)
+	(cd src; $(MAKE) $@)
 
 clean:
-	(cd src; make $@)
+	(cd src; $(MAKE) $@)
 	/bin/rm -rf data/gfx
 
 clobber:
-	(cd src; make $@)
+	(cd src; $(MAKE) $@)
 	rm src/Makefile
 	/bin/rm -rf data/gfx
 

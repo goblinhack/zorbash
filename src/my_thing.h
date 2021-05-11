@@ -9,6 +9,8 @@
 
 #include <list>
 #include <array>
+#include <functional>
+
 #include "my_thing_defs.h"
 #include "my_dice.h"
 #include "my_thing_id.h"
