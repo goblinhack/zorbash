@@ -163,8 +163,13 @@ bool Thing::fire_at_target (void)
                 continue;
             }
 
-            if (possible_to_attack(it)) {
-                thing_possible_hit_add(this, it);
+            //
+            // No shooting at blood!
+            //
+            if (it->is_monst() || it->is_player()) {
+                if (possible_to_attack(it)) {
+                    thing_possible_hit_add(this, it);
+                }
             }
         }
         FOR_ALL_THINGS_END();

@@ -78,13 +78,14 @@ _
             continue;
         }
 
-        bool got_one = false;
-        uint8_t terrain_score = is_less_preferred_terrain(p);
+        bool got_a_goal = false;
+        bool avoiding = false;
+        int terrain_score = is_less_preferred_terrain(p);
         int total_score = -(int)terrain_score;
 
 #define GOAL_ADD(score, msg)                                                  \
         total_score += (score);                                               \
-        got_one = true;                                                       \
+        got_a_goal = true;                                                    \
         if (g_opt_debug2) {                                                   \
             log(" add goal (%d,%d) score %d %s, %s",                          \
                 p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
@@ -129,7 +130,7 @@ _
                     got_one_this_tile = true;
                 }
             } else if (is_hungry) {
-                if (can_eat(it)) {
+                if (can_eat(it) && !is_dangerous(it)) {
                     //
                     // Prefer easy food over attacking the player and prefer
                     // the player over a monster. Factor in health so we will
@@ -148,12 +149,6 @@ _
                 }
             }
 
-            if (!got_one_this_tile) {
-                if (possible_to_attack(it)) {
-                    GOAL_ADD(- health_diff, "can-attack-monst");
-                }
-            }
-
             if (!it->is_dead) {
                 bool avoid = false;
 
@@ -163,6 +158,7 @@ _
                 //
                 if (will_avoid_threat(it)) {
                     if (distance(mid_at, it->mid_at) < 2) {
+                        log("Need to avoid threat %s", it->to_string().c_str());
                         avoid = true;
                     }
                 }
@@ -172,6 +168,7 @@ _
                 //
                 if (will_avoid_monst(it)) {
                     if (distance(mid_at, it->mid_at) < ai_avoid_distance()) {
+                        log("Need to avoid monst %s", it->to_string().c_str());
                         avoid = true;
                     }
                 }
@@ -190,6 +187,10 @@ _
                 }
 
                 if (avoid) {
+                    log("Need to avoid %s", it->to_string().c_str());
+
+                    bool got_avoid = false;
+
                     auto d = ai_avoid_distance();
                     for (auto dx = -d; dx <= d; dx++) {
                         for (auto dy = -d; dy <= d; dy++) {
@@ -210,8 +211,48 @@ _
                             goals.insert(Goal(total_score, point(X + dx, Y + dy)));
                             set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
                             log("Add avoid location offset %d,%d score %d", dx, dy, total_score);
+
+                            got_avoid = true;
                         }
                     }
+
+                    if (!got_avoid) {
+                        for (auto dx = -d; dx <= d; dx++) {
+                            for (auto dy = -d; dy <= d; dy++) {
+
+                                auto dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                                point p(mid_at.x + dx, mid_at.y + dy);
+                                if (ai_obstacle_for_me(p)) {
+                                    continue;
+                                }
+
+                                int terrain_score = is_less_preferred_terrain(p);
+                                int total_score = -(int)terrain_score;
+                                total_score += dist * dist;
+                                goals.insert(Goal(total_score, point(X + dx, Y + dy)));
+                                set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
+                                log("Add avoid location offset %d,%d score %d", dx, dy, total_score);
+
+                                got_avoid = true;
+                            }
+                        }
+                    }
+
+                    //
+                    // This is an anti goal
+                    //
+                    if (got_avoid) {
+                        avoiding = true;
+                        break;
+                    } else {
+                        log("Could not avoid the monst!");
+                    }
+                }
+            }
+
+            if (!got_one_this_tile) {
+                if (possible_to_attack(it)) {
+                    GOAL_ADD(- health_diff, "can-attack-monst");
                 }
             }
 
@@ -226,11 +267,13 @@ _
             }
         } FOR_ALL_THINGS_END();
 
-        if (got_one) {
+        if (avoiding) {
+            set(dmap_scent->val, X, Y, DMAP_IS_WALL);
+        } else if (got_a_goal) {
             goals.insert(Goal(total_score, point(X, Y)));
             set(dmap_scent->val, X, Y, DMAP_IS_GOAL);
         } else if (terrain_score) {
-            set(dmap_scent->val, X, Y, terrain_score);
+            set(dmap_scent->val, X, Y, (uint8_t)terrain_score);
         } else {
             set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
         }
@@ -353,8 +396,14 @@ _
                                   astar_start,
                                   astar_end,
                                   dmap_scent);
-        paths.insert(result);
+        //
+        // Unreachable?
+        //
+        if (result.cost == std::numeric_limits<int>::max()) {
+            continue;
+        }
 
+        paths.insert(result);
         if (g_opt_debug2) {
             log(" goal (%d,%d) score %d -> cost %d", 
                 goal.at.x + minx, goal.at.y + miny,
@@ -390,7 +439,7 @@ _
             auto hop0 = get(hops, hops_len - 1);
             best = hop0;
             log("Best is %d,%d with cost %d, %d hops away",
-                best.x, best.y, result.cost, (int)hops_len);
+                best.x + minx, best.y + miny, result.cost, (int)hops_len);
         } else {
             log("Best is where we are, cost %d, %d hops away",
                 result.cost, (int)hops_len);
