@@ -412,18 +412,22 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     } else {
         if (real_hitter->is_player()) {
-            if (crit) {
-                TOPCON("%%fg=red$You CRIT hit the %s for %d damage!%%fg=reset$",
-                       text_the().c_str(), damage);
-            } else {
-                if (hitter && (hitter != real_hitter)) {
-                    TOPCON("You hit the %s for %d damage with %s!",
-                           text_the().c_str(), damage,
-                           hitter->text_a_or_an().c_str());
+            if (is_alive_monst()) {
+                if (crit) {
+                    TOPCON("%%fg=red$You CRIT hit the %s for %d damage!%%fg=reset$",
+                        text_the().c_str(), damage);
                 } else {
-                    TOPCON("You hit the %s for %d damage!",
-                           text_the().c_str(), damage);
+                    if (hitter && (hitter != real_hitter)) {
+                        TOPCON("You hit the %s for %d damage with %s!",
+                            text_the().c_str(), damage,
+                            hitter->text_a_or_an().c_str());
+                    } else {
+                        TOPCON("You hit the %s for %d damage!",
+                            text_the().c_str(), damage);
+                    }
                 }
+            } else {
+                TOPCON("You hit the %s!", text_the().c_str());
             }
         }
         if (real_hitter->is_fire() ||
