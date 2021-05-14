@@ -64,6 +64,13 @@ bool Thing::try_to_jump (point to)
         return false;
     }
 
+    if (level->is_sticky(mid_at.x, mid_at.y)) {
+        if (is_player()) {
+            TOPCON("You try to jump but are stuck fast.");
+        }
+        return false;
+    }
+
     //
     // Block jumping over doors
     //
