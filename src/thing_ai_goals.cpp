@@ -90,7 +90,6 @@ _
                 p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
         }
 
-        bool avoid = false;
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
 
@@ -156,6 +155,8 @@ _
             }
 
             if (!it->is_dead) {
+                bool avoid = false;
+
                 //
                 // If this is something we really want to avoid, like
                 // fire, then stay away from it
@@ -178,13 +179,38 @@ _
                 if (is_enemy(it)) {
                     //
                     // The closer an enemy is (something that attacked us), the
-                    // higher the scoree
+                    // higher the score
                     //
                     float dist = distance(it->mid_at, mid_at);
                     float max_dist = ai_scent_distance();
 
                     if (dist < max_dist) {
                         GOAL_ADD((int)(max_dist - dist) * 10, "attack-enemy");
+                    }
+                }
+
+                if (avoid) {
+                    auto d = ai_avoid_distance();
+                    for (auto dx = -d; dx <= d; dx++) {
+                        for (auto dy = -d; dy <= d; dy++) {
+
+                            auto dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                            if (dist < ai_avoid_distance()) {
+                                continue;
+                            }
+
+                            point p(mid_at.x + dx, mid_at.y + dy);
+                            if (ai_obstacle_for_me(p)) {
+                                continue;
+                            }
+
+                            int terrain_score = is_less_preferred_terrain(p);
+                            int total_score = -(int)terrain_score;
+                            total_score += dist * dist;
+                            goals.insert(Goal(total_score, point(X + dx, Y + dy)));
+                            set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
+                            log("Add avoid location offset %d,%d score %d", dx, dy, total_score);
+                        }
                     }
                 }
             }
@@ -207,31 +233,6 @@ _
             set(dmap_scent->val, X, Y, terrain_score);
         } else {
             set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
-        }
-
-        if (avoid) {
-            auto d = ai_avoid_distance();
-            for (auto dx = -d; dx <= d; dx++) {
-                for (auto dy = -d; dy <= d; dy++) {
-
-                    auto dist = distance(mid_at + fpoint(dx, dy),
-                                         level->player->mid_at);
-                    if (dist < ai_avoid_distance()) {
-                        continue;
-                    }
-
-                    point p(mid_at.x + dx, mid_at.y + dy);
-                    if (ai_obstacle_for_me(p)) {
-                        continue;
-                    }
-
-                    uint8_t terrain_score = is_less_preferred_terrain(p);
-                    int total_score = -(int)terrain_score;
-                    total_score += dist * dist;
-                    goals.insert(Goal(total_score, point(X + dx, Y + dy)));
-                    set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                }
-            }
         }
     } }
 

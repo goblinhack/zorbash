@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
@@ -159,6 +161,9 @@ int Thing::get_danger_current_level (void)
     //
     // Don't include crush damage as it is non typical
     //
+    if (g_opt_debug3) {
+        log("danger level %d", danger_level);
+    }
 
     // topcon("level %d", danger_level);
     return danger_level;

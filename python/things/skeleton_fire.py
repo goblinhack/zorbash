@@ -34,6 +34,7 @@ def on_firing_at_something(me, target, x, y): # Return True on doing an action
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
+    mytp.set_ai_avoid_distance(4)
     mytp.set_ai_scent_distance(10)
     mytp.set_ai_vision_distance(8)
     mytp.set_attack_eater(True)
@@ -41,8 +42,8 @@ def tp_init(name, text_name):
     mytp.set_attack_living(False)
     mytp.set_attack_lunge(True)
     mytp.set_attack_meat(True)
-    mytp.set_attack_shove(True)
     mytp.set_attack_shove_chance_d1000(200)
+    mytp.set_attack_shove(True)
     mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
     mytp.set_collision_circle(True)
@@ -50,9 +51,9 @@ def tp_init(name, text_name):
     mytp.set_damage_bite_dice("1d4")
     mytp.set_damage_doubled_from_water(True)
     mytp.set_damage_melee_dice("1d4")
-    mytp.set_gfx_anim_attack("attack_claws")
-    mytp.set_gfx_animated(True)
     mytp.set_gfx_animated_can_hflip(True)
+    mytp.set_gfx_animated(True)
+    mytp.set_gfx_anim_attack("attack_claws")
     mytp.set_gfx_bounce_on_move(True)
     mytp.set_gfx_glows(True)
     mytp.set_gfx_health_bar_shown(True)
@@ -71,7 +72,7 @@ def tp_init(name, text_name):
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_fearless(True)
+    mytp.set_is_fearless(False) # cannot enable as negates avoid_distance
     mytp.set_is_hunger_insatiable(True)
     mytp.set_is_intelligent(True)
     mytp.set_is_loggable_for_important_stuff(True)

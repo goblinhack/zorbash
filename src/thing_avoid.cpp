@@ -198,14 +198,21 @@ bool Thing::will_avoid_threat (const Thingp itp)
     return false;
 }
 
-bool Thing::will_avoid_monst (const Thingp itp)
+bool Thing::will_avoid_monst (const Thingp it)
 {_
     auto me = tp();
-    auto it = itp->tp();
+
+    if (me->is_monst()) {
+        if (it->is_player()) {
+            if (is_dangerous(it)) {
+                return true;
+            }
+        }
+    }
 
     if (me->is_meat()) {
         if (it->is_meat_eater() || it->attack_meat()) {
-            if (is_dangerous(itp)) {
+            if (is_dangerous(it)) {
                 return true;
             }
         }
@@ -213,7 +220,7 @@ bool Thing::will_avoid_monst (const Thingp itp)
 
     if (me->is_humanoid()) {
         if (it->attack_humanoid()) {
-            if (is_dangerous(itp)) {
+            if (is_dangerous(it)) {
                 return true;
             }
         }
@@ -221,7 +228,7 @@ bool Thing::will_avoid_monst (const Thingp itp)
 
     if (me->is_living()) {
         if (it->attack_living()) {
-            if (is_dangerous(itp)) {
+            if (is_dangerous(it)) {
                 return true;
             }
         }
