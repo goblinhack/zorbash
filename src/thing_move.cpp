@@ -155,12 +155,14 @@ bool Thing::move (fpoint future_pos,
         return false;
     }
 
-    if (level->is_sticky(future_pos.x, future_pos.y)) {
-        if (is_player()) {
-            TOPCON("You cannot move!");
+    if (up || down || left || right) {
+        if (level->is_sticky(mid_at.x, mid_at.y)) {
+            if (is_player()) {
+                TOPCON("You cannot move!");
+            }
+            lunge(future_pos);
+            return false;
         }
-        lunge(future_pos);
-        return false;
     }
 
     //

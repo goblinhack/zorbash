@@ -310,6 +310,7 @@ $(OBJDIR)/%.o: %.S
 #
 TARGET_GAME=$(NAME)$(EXE)
 $(TARGET_GAME): $(GAME_OBJECTS)
+	/bin/rm -f ../$(TARGET_GAME)
 	$(CC) $(LDFLAGS) $(GAME_OBJECTS) $(LDLIBS) -o $(TARGET_GAME)
 	cp $(TARGET_GAME) ..
 	#$(DSYM)

@@ -488,7 +488,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr74")                                         { return &Thing::is_rrr74; }
     if (what == "is_rrr75")                                         { return &Thing::is_rrr75; }
     if (what == "is_rrr76")                                         { return &Thing::is_rrr76; }
-    if (what == "is_sticky")                                         { return &Thing::is_sticky; }
+    if (what == "is_sticky")                                        { return &Thing::is_sticky; }
     if (what == "is_sword")                                         { return &Thing::is_sword; }
     if (what == "is_skillstone")                                    { return &Thing::is_skillstone; }
     if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
