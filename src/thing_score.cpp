@@ -36,7 +36,7 @@ void Thing::score_add (Thingp victim)
             //
             // Give something, but not a lot as it was not a challenge
             //
-            incr_score(1);
+            incr_score(victim->get_health_initial());
         }
     }
 }

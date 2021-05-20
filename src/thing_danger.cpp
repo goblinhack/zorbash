@@ -46,6 +46,9 @@ int Tp::get_danger_level (void)
     if (is_item_eater()) {
         danger_level += 20;
     }
+    if (is_able_to_fire_at()) {
+        danger_level += 20;
+    }
 
     danger_level += std::max(get_damage_melee_dice().max_roll(),
                              get_damage_bite_dice().max_roll());
@@ -100,6 +103,9 @@ int Thing::get_danger_initial_level (void)
     if (is_item_eater()) {
         danger_level += 20;
     }
+    if (is_able_to_fire_at()) {
+        danger_level += 20;
+    }
 
     danger_level += std::max(get_damage_melee_dice().max_roll(),
                              get_damage_bite_dice().max_roll());
@@ -152,6 +158,9 @@ int Thing::get_danger_current_level (void)
         danger_level += 5;
     }
     if (is_item_eater()) {
+        danger_level += 20;
+    }
+    if (is_able_to_fire_at()) {
         danger_level += 20;
     }
 
@@ -218,5 +227,6 @@ int Thing::get_danger_initial_level(Thingp it)
 {
     int a = get_danger_initial_level();
     int b = it->get_danger_initial_level();
+    con("danger level %d vs %s %d", a, it->to_string().c_str(), b);
     return b - a;
 }

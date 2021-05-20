@@ -35,9 +35,9 @@ bool Thing::matches (const std::string& what) const
     if (attack_shove() &&                                     (what == "attack_shove"))                                     { return true; }
     if (attack_shove_chance_d1000() &&                        (what == "attack_shove_chance_d1000"))                        { return true; }
     if (hates_acid() &&                                       (what == "hates_acid"))                                      { return true; }
-    if (hates_fire() &&                                      (what == "hates_fire"))                                      { return true; }
-    if (hates_poison() &&                                    (what == "hates_poison"))                                    { return true; }
-    if (hates_water() &&                                     (what == "hates_water"))                                     { return true; }
+    if (hates_fire() &&                                       (what == "hates_fire"))                                      { return true; }
+    if (hates_poison() &&                                     (what == "hates_poison"))                                    { return true; }
+    if (hates_water() &&                                      (what == "hates_water"))                                     { return true; }
     if (blast_max_radius() &&                                 (what == "blast_max_radius"))                                 { return true; }
     if (blast_min_radius() &&                                 (what == "blast_min_radius"))                                 { return true; }
     if (damage_doubled_from_acid() &&                         (what == "damage_doubled_from_acid"))                         { return true; }
