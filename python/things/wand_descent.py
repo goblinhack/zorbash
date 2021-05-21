@@ -1,6 +1,10 @@
 import zx
 import tp
 
+def on_idle(me, x, y):
+    if zx.thing_get_charge_count(me) < zx.thing_get_initial_charge_count(me):
+        zx.thing_incr_charge_count(me, 1)
+
 def explode(me, x, y):
     zx.thing_msg(me, "The wand of descent explodes. The earth tremors.")
     zx.level_spawn_at_thing(me, "explosion_major")
@@ -18,6 +22,7 @@ def on_fall(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
+    mytp.set_on_idle_dice("1d20:wand_descent.on_idle()")
     mytp.set_bag_item_height(2)
     mytp.set_bag_item_width(2)
     mytp.set_blast_max_radius(2)

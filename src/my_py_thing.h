@@ -44,6 +44,9 @@ PyObject *thing_decr_current_damage(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_get_current_damage(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_incr_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_decr_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_initial_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_get_name(PyObject *obj, PyObject *args, PyObject *keywds);
 
