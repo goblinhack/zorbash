@@ -26,7 +26,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
-    Thingp t = game->thing_find(id);	                                    \
+    Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
         ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
@@ -47,7 +47,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
-    Thingp t = game->thing_find(id);	                                    \
+    Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
         ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
@@ -68,7 +68,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
-    Thingp t = game->thing_find(id);	                                    \
+    Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
         ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
@@ -100,13 +100,13 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
-    Thingp t = game->thing_find(id);	                                    \
+    Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
         ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
                                                                                     \
-    Thingp o = game->thing_find(oid);	                                    \
+    Thingp o = game->thing_find(oid);	                                            \
     if (!t) {	                                                                    \
         ERR("%s: cannot find thing ID %u", __FUNCTION__, oid);	                    \
         Py_RETURN_FALSE;	                                                    \
@@ -132,7 +132,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
         return Py_BuildValue("I", 0);                                               \
     }	                                                                            \
 	                                                                            \
-    Thingp t = game->thing_find(id);	                                    \
+    Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
         ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
         return Py_BuildValue("I", 0);                                               \
@@ -830,6 +830,9 @@ THING_BODY_SET_INT(thing_incr_stamina_max, incr_stamina_max)
 THING_BODY_SET_INT(thing_incr_enchant, incr_enchant)
 THING_BODY_SET_INT(thing_incr_enchant_max, incr_enchant_max)
 THING_BODY_SET_INT(thing_incr_charge_count, incr_charge_count)
+THING_BODY_SET_INT(thing_decr_charge_count, decr_charge_count)
+THING_BODY_GET_INT(thing_get_charge_count, get_charge_count)
+THING_BODY_GET_INT(thing_get_initial_charge_count, get_initial_charge_count)
 THING_BODY_SET_INT(thing_set_current_damage, set_current_damage)
 THING_BODY_SET_INT(thing_set_health, set_health)
 THING_BODY_SET_INT(thing_set_health_max, set_health_max)
