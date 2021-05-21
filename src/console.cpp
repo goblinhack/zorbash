@@ -7,7 +7,7 @@
 #include "my_sys.h"
 #include "my_main.h"
 #include "my_console.h"
-// REMOVED #include "my_thing_template.h"
+#include "my_thing_template.h"
 
 static inline void term_puts_fg (unsigned char a)
 {_
