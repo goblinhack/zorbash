@@ -336,7 +336,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                                real_hitter->text_The().c_str(),
                                damage,
                                hitter->text_the().c_str());
-                    } else if (hitter->is_projectile()) {
+                    } else if (hitter->is_projectile() ||
+                               hitter->is_laser()) {
                         TOPCON("%%fg=red$%s blastd you for %d damage with %s!%%fg=reset$",
                                real_hitter->text_The().c_str(),
                                damage,
@@ -392,7 +393,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                                real_hitter->text_The().c_str(),
                                damage,
                                hitter->text_the().c_str());
-                    } else if (hitter->is_projectile()) {
+                    } else if (hitter->is_projectile() ||
+                               hitter->is_laser()) {
                         TOPCON("%%fg=yellow$%s blasts you for %d damage with %s!%%fg=reset$",
                                real_hitter->text_The().c_str(),
                                damage,
