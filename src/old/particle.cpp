@@ -466,8 +466,8 @@ void Level::move_particle (Particlep p, fpoint to)
     attach_particle(p);
 }
 
-void Level::blit_particles (const uint16_t minx, const uint16_t miny,
-                            const uint16_t maxx, const uint16_t maxy)
+void Level::blit_particles (const int16_t minx, const int16_t miny,
+                            const int16_t maxx, const int16_t maxy)
 {_
     static auto ptex = tile_find_mand("particle");
 

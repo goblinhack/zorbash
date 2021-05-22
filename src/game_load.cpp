@@ -645,8 +645,8 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 
     if (!my.t.game_pix_zoom) {
         ERR("Loading, game_pix_zoom is zero");
-        my.t.game_pix_zoom = 3;
-        my.t.ui_pix_zoom = 2;
+        my.t.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
+        my.t.ui_pix_zoom = GAME_DEFAULT_UI_ZOOM;
     }
 
     return (in);

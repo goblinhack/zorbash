@@ -16,8 +16,8 @@
 #include "my_ptrcheck.h"
 
 void Level::display_deep_water (int fbo,
-                                uint16_t minx, uint16_t miny,
-                                uint16_t maxx, uint16_t maxy)
+                                int16_t minx, int16_t miny,
+                                int16_t maxx, int16_t maxy)
 {_
     int fbo_mask1;
     int fbo_mask2;

@@ -50,7 +50,19 @@ void Level::cursor_move (void)
         if (wid_find_under_mouse_when_scrolling()) {
             return;
         }
-        map_wanted_at += fpoint(wheel_x, -wheel_y);
+
+        float dx = -wheel_x;
+        float dy = -wheel_y;
+
+        //
+        // Move faster when more zoomed out.
+        //
+        float z = GAME_MOST_ZOOMED_IN - game->config.game_pix_zoom;
+        float scale = pow(z + 1, 1.2);
+        dx *= scale;
+        dy *= scale;
+
+        map_wanted_at += fpoint(dx, dy);
         map_follow_player = false;
         return;
     }

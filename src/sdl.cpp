@@ -1006,8 +1006,8 @@ uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
 void config_game_pix_zoom_in (void)
 {_
     game->config.game_pix_zoom++;
-    if (game->config.game_pix_zoom > GAME_MAX_PIX_ZOOM) {
-        game->config.game_pix_zoom = GAME_MAX_PIX_ZOOM;
+    if (game->config.game_pix_zoom > GAME_MOST_ZOOMED_IN) {
+        game->config.game_pix_zoom = GAME_MOST_ZOOMED_IN;
     }
     TOPCON("Game zoom set to %f.", game->config.game_pix_zoom);
     sdl_config_update_all();
@@ -1016,8 +1016,8 @@ void config_game_pix_zoom_in (void)
 void config_game_pix_zoom_out (void)
 {_
     game->config.game_pix_zoom--;
-    if (game->config.game_pix_zoom < GAME_MIN_PIX_ZOOM) {
-        game->config.game_pix_zoom = GAME_MIN_PIX_ZOOM;
+    if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) {
+        game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT;
     }
     TOPCON("Game zoom set to %f.", game->config.game_pix_zoom);
     sdl_config_update_all();
@@ -1036,8 +1036,8 @@ uint8_t config_game_pix_zoom_set (tokens_t *tokens, void *context)
     } else {
         int val = strtol(s, 0, 10);
         game->config.game_pix_zoom = val;
-        if (game->config.game_pix_zoom < GAME_MIN_PIX_ZOOM) {
-            game->config.game_pix_zoom = GAME_MIN_PIX_ZOOM;
+        if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) {
+            game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT;
         }
         LOG("USERCFG: gfx zoom set to %d", val);
     }
