@@ -1,6 +1,14 @@
 import zx
 import tp
 
+def on_idle(me, x, y):
+    if zx.thing_get_charge_count(me) < zx.thing_get_initial_charge_count(me):
+        zx.thing_incr_charge_count(me, 1)
+        owner = zx.thing_get_top_owner_id(me)
+        if zx.thing_is_player(owner):
+            zx.topcon("%%fg=orange$The {} pulses.%%fg=reset$".format(
+                zx.thing_get_name(me)))
+
 def explode(me, x, y):
     zx.thing_msg(me, "The wand of fire explodes, predictably in a fireball.")
     zx.level_spawn_at_thing(me, "explosion_major")
@@ -19,7 +27,6 @@ def on_fall(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_hates_water(100)
     mytp.set_bag_item_height(2)
     mytp.set_bag_item_width(2)
     mytp.set_charge_count(5)
@@ -30,10 +37,10 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_gfx_small_shadow_caster(True)
+    mytp.set_hates_water(100)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_active(True) # So it can interact with fire
     mytp.set_is_collectable(True)
-    mytp.set_is_very_combustible(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)
     mytp.set_is_item(True)
@@ -41,15 +48,17 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_target_select_automatically_when_chosen(True)
-    mytp.set_is_treasure(True)
     mytp.set_is_treasure_class_b(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_usable(True)
+    mytp.set_is_very_combustible(True)
     mytp.set_is_wand(True)
     mytp.set_long_text_description("Discharges a powerful blast of fire upon an unwitting recipient...")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_fall_do("wand_fire.on_fall()")
     mytp.set_on_fire_do("wand_fire.on_fire()")
     mytp.set_on_hit_do("wand_fire.on_hit()")
+    mytp.set_on_idle_dice("1d200+200:wand_fire.on_idle()")
     mytp.set_projectile_name("projectile_fire")
     mytp.set_range_max(7)
     mytp.set_text_a_or_an("a")

@@ -3,6 +3,14 @@ import tp
 
 mytp = None
 
+def on_idle(me, x, y):
+    if zx.thing_get_charge_count(me) < zx.thing_get_initial_charge_count(me):
+        zx.thing_incr_charge_count(me, 1)
+        owner = zx.thing_get_top_owner_id(me)
+        if zx.thing_is_player(owner):
+            zx.topcon("%%fg=gold$The {} pulses.%%fg=reset$".format(
+                zx.thing_get_name(me)))
+
 def on_use(owner, item, target, x, y):
     #zx.topcon("owner  {} {}".format(zx.thing_get_name(owner), zx.thing_get_health(owner)))
     #zx.topcon("item   {} {}".format(zx.thing_get_name(item), zx.thing_get_health(item)))
@@ -58,8 +66,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_spawner(True)
     mytp.set_is_target_select_automatically_when_chosen(True)
-    mytp.set_is_treasure(True)
     mytp.set_is_treasure_class_b(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_usable(True)
     mytp.set_is_very_combustible(True)
     mytp.set_is_wand(True)
@@ -70,6 +78,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_fall_do("wand_energy.on_fall()")
     mytp.set_on_fire_do("wand_energy.on_fire()")
     mytp.set_on_hit_do("wand_energy.on_hit()")
+    mytp.set_on_idle_dice("1d200+200:wand_energy.on_idle()")
     mytp.set_on_use_do("wand_energy.on_use()")
     mytp.set_range_max(7)
     mytp.set_text_a_or_an("a")

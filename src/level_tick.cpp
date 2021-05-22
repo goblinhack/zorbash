@@ -109,13 +109,13 @@ void Level::tick (void)
     // location checks on the ends of moves, but this is a backup and will
     // also handle things that do not move, like a wand that is now on fire.
     //
-    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+    FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
         t->location_check();
         if (t->is_dead) {
             continue;
         }
         t->tick();
-    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+    } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 
     game->tick_end();
 }

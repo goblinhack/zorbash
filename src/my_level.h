@@ -268,11 +268,31 @@ public:
         while (i != level->all_interesting_things.end()) {          \
             auto t = i->second;                                     \
             i++;                                                    \
-            if (t->is_hidden) {continue; }                          \
+            if (t->is_hidden) { continue; }                         \
                                                                     \
             verify(t);                                              \
 
     #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)          \
+            if (i == level->all_interesting_things.end()) {         \
+                break;                                              \
+            }                                                       \
+        } }
+
+    #define FOR_ALL_TICKABLE_THINGS_ON_LEVEL(level, t) {            \
+        auto c = level->all_interesting_things;                     \
+        auto i = level->all_interesting_things.begin();             \
+        while (i != level->all_interesting_things.end()) {          \
+            auto t = i->second;                                     \
+            i++;                                                    \
+            if (t->is_hidden) {                                     \
+                if (!t->is_active()) { /* e.g. carried wand */      \
+                    continue;                                       \
+                }                                                   \
+            }                                                       \
+                                                                    \
+            verify(t);                                              \
+
+    #define FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(level)             \
             if (i == level->all_interesting_things.end()) {         \
                 break;                                              \
             }                                                       \

@@ -77,18 +77,17 @@ void Thing::achieve_goals_in_life (void)
     lifespan_tick();
     if (is_dead) { return; }
 
-    if (is_hidden) { 
-        log("Skip achieve goals in life");
-        return;
-    }
-
     hunger_clock();
     if (is_dead) { return; }
 
     collision_check_do();
-    if (is_dead) {
-        return;
-    }
+    if (is_dead) { return; }
+
+    //
+    // Roll the dice and see if we do anything
+    //
+    idle_check();
+    if (is_dead) { return; }
 
     //
     // Roll the dice and see if we do anything
