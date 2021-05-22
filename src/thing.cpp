@@ -69,6 +69,15 @@ const ThingId& Thing::get_immediate_owner_id (void) const
     }
 }
 
+const ThingId& Thing::get_top_owner_id (void) const
+{_
+    auto t = get_top_owner();
+    if (t) {
+        return t->id;
+    }
+    return (NoThingId);
+}
+
 const ThingId& Thing::set_owner_id (const ThingId &v)
 {_
     new_monst();

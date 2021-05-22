@@ -1960,6 +1960,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_get_health_max",                                   (PyCFunction)thing_get_health_max,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_immediate_minion_owner_id",                    (PyCFunction)thing_get_immediate_minion_owner_id,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_immediate_owner_id",                           (PyCFunction)thing_get_immediate_owner_id,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_get_top_owner_id",                                 (PyCFunction)thing_get_top_owner_id,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_immediate_spawned_owner_id",                   (PyCFunction)thing_get_immediate_spawned_owner_id,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_name",                                         (PyCFunction)thing_get_name,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_stamina",                                      (PyCFunction)thing_get_stamina,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},

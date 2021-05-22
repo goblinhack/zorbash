@@ -57,6 +57,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_immediate_spawned_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_immediate_minion_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_immediate_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_top_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_is_able_to_change_levels(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_fall(PyObject *obj, PyObject *args, PyObject *keywds);
