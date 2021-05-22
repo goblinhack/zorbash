@@ -40,7 +40,6 @@ public:
     void free_thing_id(Thingp t);
     Thingp test_thing_ptr(ThingId id);
     Thingp thing_find(ThingId id);
-
 };
 
 #endif

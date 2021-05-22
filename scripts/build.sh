@@ -559,14 +559,13 @@ log_info "VERSION (game)             : $VERSION"
 cd src
 
 # Example timings at -j12
-#     55 secs
+#     53 secs
 # -O0 53 secs
-# -O3 53 secs
 # -Og 131 secs
 # -O3 131 secs
 
 if [[ $OPT_DEV1 != "" ]]; then
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -Og # AUTOGEN" > .Makefile
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O0 # AUTOGEN" > .Makefile
 else
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O3 # AUTOGEN" > .Makefile
 fi
