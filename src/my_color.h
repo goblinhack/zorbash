@@ -9,79 +9,76 @@
 
 #include <string>
 
-template<class T> class my_acolor
+class color
 {
 public:
 
-    T r {};
-    T g {};
-    T b {};
-    T a {};
+    unsigned char r {};
+    unsigned char g {};
+    unsigned char b {};
+    unsigned char a {};
 
-    my_acolor (void) : r(0), g(0), b(0), a(0) { }
+    color (void) : r(0), g(0), b(0), a(0) { }
 
-    my_acolor (T r, T g, unsigned char b) : r(r), g(g), b(b), a(255) { }
+    color (unsigned char r, unsigned char g, unsigned char b) : r(r), g(g), b(b), a(255) { }
 
-    my_acolor (T r, T g, double b) : r(r), g(g), b(b), a(1.0) { }
+    color (unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a) { }
 
-    my_acolor (T r, T g, T b, T a) : r(r), g(g), b(b), a(a) { }
-
-    my_acolor (const my_acolor &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
+    color (const color &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
 
 #ifdef UNUSED
     friend std::ostream& operator<<(std::ostream &out,
-                                    Bits<const my_acolor & > const my)
+                                    Bits<const color & > const my)
     {
         out << bits(my.t.r) << bits(my.t.g) << bits(my.t.b) << bits(my.t.a);
         return (out);
     }
 
-    friend std::istream& operator>>(std::istream &in, Bits<my_acolor &> my)
+    friend std::istream& operator>>(std::istream &in, Bits<color &> my)
     {
         in >> bits(my.t.r) >> bits(my.t.g) >> bits(my.t.b) >> bits(my.t.a);
         return (in);
     }
 
-    friend std::ostream& operator << (std::ostream &out, const my_acolor &my)
+    friend std::ostream& operator << (std::ostream &out, const color &my)
     {
         out << "(" << my.r << ", " << my.g << ", " << my.b << ", " << my.a << ")";
         return (out);
     }
-#endif
 
-    void operator+= (my_acolor c)
+    void operator+= (color c)
     {
         r += c.r; g += c.g; b += c.b; a += c.a;
     }
 
-    void operator-= (my_acolor c)
+    void operator-= (color c)
     {
         c -= c.r; c -= c.g; c -= c.b; a -= c.a;
     }
 
-    friend my_acolor operator+ (my_acolor c, my_acolor b)
+    friend color operator+ (color c, color b)
     {
-        return (my_acolor(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a));
+        return (color(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a));
     }
 
-    friend my_acolor operator- (my_acolor c, my_acolor b)
+    friend color operator- (color c, color b)
     {
-        return (my_acolor(c.r - b.r, c.g - b.g, c.b - b.b, c.a - b.a));
+        return (color(c.r - b.r, c.g - b.g, c.b - b.b, c.a - b.a));
     }
 
-    friend my_acolor operator/ (my_acolor c, my_acolor b)
+    friend color operator/ (color c, color b)
     {
-        return (my_acolor(c.r / b.r, c.g / b.g, c.b / b.b, c.a / b.a));
+        return (color(c.r / b.r, c.g / b.g, c.b / b.b, c.a / b.a));
     }
 
-    friend my_acolor operator* (my_acolor c, my_acolor b)
+    friend color operator* (color c, color b)
     {
-        return (my_acolor(c.r * b.r, c.g * b.g, c.b * b.b, c.a * b.a));
+        return (color(c.r * b.r, c.g * b.g, c.b * b.b, c.a * b.a));
     }
 
-    friend my_acolor operator/ (my_acolor c, T b)
+    friend color operator/ (color c, T b)
     {
-        return (my_acolor(c.r / b, c.g / b, c.b / b, c.a / b));
+        return (color(c.r / b, c.g / b, c.b / b, c.a / b));
     }
 
     void operator*= (T c)
@@ -93,13 +90,14 @@ public:
     {
         r /= c; g /= c; b /= c; a /= c;
     }
+#endif
 
-    friend bool operator== (my_acolor c, my_acolor b)
+    friend bool operator== (const color &c, const color &b)
     {
         return (c.r == b.r) && (c.g == b.g) && (c.b == b.b) && (c.a == b.a);
     }
 
-    friend bool operator!= (my_acolor c, my_acolor b)
+    friend bool operator!= (const color &c, const color &b)
     {
         return (!(c==b));
     }
@@ -1022,9 +1020,6 @@ extern color YELLOWGREEN;
 #define CONST_YELLOW { 255, 255, 0, 255 }
 #define CONST_INK { 51, 54, 47, 47 }
 #endif
-
-typedef my_acolor<double> colorf;
-typedef my_acolor<unsigned char> color;
 
 extern color gl_last_color;
 extern color gl_save_color;

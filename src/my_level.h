@@ -19,6 +19,7 @@
 #include "my_dungeon.h"
 #include "my_fwd.h"
 #include "my_dmap.h"
+#include "my_point3d.h"
 
 class Level {
 public:
