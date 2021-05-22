@@ -1,14 +1,14 @@
 #!/bin/bash
 
 if [[ ! -d data/gfx ]]; then
-    echo $0: Need untar graphics tarball
-    tar zxf data/gfx.tgz
+    echo $0: Need to extract graphics archive
+    tar zxvf data/gfx.tgz
     DONE=1
 fi
 
 if [[ ! -d data/sounds ]]; then
-    echo $0: Need untar sounds tarball
-    tar zxf data/sounds.tgz
+    echo $0: Need to extract sounds archive
+    tar zxvf data/sounds.tgz
     DONE=1
 fi
 
