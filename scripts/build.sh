@@ -565,7 +565,7 @@ cd src
 # -O3 131 secs
 
 if [[ $OPT_DEV1 != "" ]]; then
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O0 # AUTOGEN" > .Makefile
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 # AUTOGEN" > .Makefile
 else
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O3 # AUTOGEN" > .Makefile
 fi
