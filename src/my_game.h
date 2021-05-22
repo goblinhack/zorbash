@@ -15,10 +15,10 @@ class WidBag;
 class WidPopup;
 
 #define GAME_MONST_HEALTH_BAR_STEPS  16
-#define GAME_DEFAULT_PIX_ZOOM        4
-#define GAME_MAX_PIX_ZOOM            5
-#define GAME_MIN_PIX_ZOOM            1
+#define GAME_MOST_ZOOMED_IN          5
+#define GAME_MOST_ZOOMED_OUT         1
 #define GAME_DEFAULT_UI_ZOOM         2
+#define GAME_DEFAULT_PIX_ZOOM        4
 
 typedef class Config_ {
 public:
@@ -269,7 +269,7 @@ public:
     //
     // Temporary. Tied to bag moving, so not saved
     //
-    std::list<class WidBag *> bags; // The below bags
+    std::list<class WidBag *> bags;       // The below bags
     class WidBag       *bag_primary {};   // The players inventory
     class WidBag       *bag_secondary {}; // A bag being carried, or a temp bag for collecting
 

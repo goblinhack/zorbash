@@ -17,8 +17,8 @@
 #include "my_sdl.h"
 
 void Level::cursor_find_on_visible_things (
-                        const uint16_t minx, const uint16_t miny,
-                        const uint16_t maxx, const uint16_t maxy)
+                        const int16_t minx, const int16_t miny,
+                        const int16_t maxx, const int16_t maxy)
 {
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
