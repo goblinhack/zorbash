@@ -155,6 +155,9 @@ bool Thing::move (fpoint future_pos,
         return false;
     }
 
+    //
+    // Check for being stuck in webs or something else sticky
+    //
     if (up || down || left || right) {
         if (loves_spiderwebs() && 
             level->is_spiderweb(mid_at.x, mid_at.y)) {
@@ -162,11 +165,16 @@ bool Thing::move (fpoint future_pos,
             // No getting stuck in webs
             //
         } else if (level->is_sticky(mid_at.x, mid_at.y)) {
-            if (is_player()) {
-                TOPCON("You cannot move!");
+            //
+            // Makes sure ghosts do not get stuck in webs.
+            //
+            if (!is_ethereal()) {
+                if (is_player()) {
+                    TOPCON("You cannot move!");
+                }
+                lunge(future_pos);
+                return false;
             }
-            lunge(future_pos);
-            return false;
         }
     }
 
