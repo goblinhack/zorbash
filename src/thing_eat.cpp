@@ -31,10 +31,24 @@ bool Thing::eat (Thingp it)
             (is_potion_eater()   && it->is_potion())) {
 
             log("Eats %s", it->text_the().c_str());
+
             //
             // For treasure what should the boost be?
             //
             health_boost(it->get_nutrition());
+
+            if (!is_player()) {
+                if (distance_to_player() < DMAP_IS_PASSABLE) {
+                    if (it->is_meat()) {
+                        level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+                    }
+
+                    TOPCON("%s eats %s.",
+                           text_The().c_str(),
+                           it->text_the().c_str());
+                }
+            }
+
             it->dead("by being eaten");
             return true;
         }

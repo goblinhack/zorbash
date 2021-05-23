@@ -80,7 +80,9 @@ void Thing::achieve_goals_in_life (void)
     hunger_clock();
     if (is_dead) { return; }
 
-    collision_check_do();
+    if (collision_check_do()) {
+        return;
+    }
     if (is_dead) { return; }
 
     //
@@ -158,23 +160,27 @@ void Thing::achieve_goals_in_death (void)
     update_tick();
 }
 
-void Thing::collision_check_do (void)
+//
+// Returns true if we attacked something
+//
+bool Thing::collision_check_do (void)
 {_
     if (!tp()->collision_check()) {
-        return;
+        return false;
     }
 
     bool target_attacked = false;
     bool target_overlaps = false;
     if (collision_check_and_handle_at(&target_attacked,
                                       &target_overlaps)) {
-        return;
+        return target_attacked;
     }
 
     if (target_attacked || target_overlaps) {
         move_finish();
         cursor_path_stop();
     }
+    return target_attacked;
 }
 
 void Thing::tick (void)

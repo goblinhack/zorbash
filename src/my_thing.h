@@ -1179,7 +1179,7 @@ public:
     void chasm_tick();
     void clear_age_map(void);
     void clear_dmap_scent(void);
-    void collision_check_do();
+    bool collision_check_do();
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
