@@ -842,7 +842,7 @@ public:
     int is_rrr76(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
-    int is_rrr99(void) const;
+    int loves_spiderwebs(void) const;
     int is_rrr9(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;

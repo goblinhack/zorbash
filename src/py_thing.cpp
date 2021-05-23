@@ -766,7 +766,7 @@ THING_BODY_GET_BOOL(thing_gfx_very_small_shadow_caster, gfx_very_small_shadow_ca
 THING_BODY_GET_BOOL(thing_is_dry_fungus, is_dry_fungus)
 THING_BODY_GET_BOOL(thing_is_rrr9, is_rrr9)
 THING_BODY_GET_BOOL(thing_is_bridge, is_bridge)
-THING_BODY_GET_BOOL(thing_is_rrr99, is_rrr99)
+THING_BODY_GET_BOOL(thing_loves_spiderwebs, loves_spiderwebs)
 THING_BODY_GET_BOOL(thing_is_secret_door, is_secret_door)
 THING_BODY_GET_BOOL(thing_is_sewer_wall, is_sewer_wall)
 THING_BODY_GET_BOOL(thing_is_shallow_water, is_shallow_water)

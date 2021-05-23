@@ -137,7 +137,7 @@ private:
     int _is_blood {};
     int _is_blood_splatter {};
     int _is_brazier {};
-    int _is_rrr99 {};
+    int _loves_spiderwebs {};
     int _is_carrier_of_treasure_class_a {};
     int _is_carrier_of_treasure_class_b {};
     int _is_carrier_of_treasure_class_c {};
@@ -786,7 +786,7 @@ public:
     int is_dry_fungus(void) const;
     int is_rrr9(void) const;
     int is_bridge(void) const;
-    int is_rrr99(void) const;
+    int loves_spiderwebs(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;
@@ -1120,7 +1120,7 @@ public:
     void set_is_dry_fungus(int);
     void set_is_rrr9(int);
     void set_is_bridge(int);
-    void set_is_rrr99(int);
+    void set_loves_spiderwebs(int);
     void set_is_secret_door(int);
     void set_is_sewer_wall(int);
     void set_is_shallow_water(int);

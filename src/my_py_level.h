@@ -32,7 +32,7 @@ PyObject *level_is_blood_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_blood_splatter_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bloodied_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_brazier_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr99_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_loves_spiderwebs_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_carrier_of_treasure_class_a_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_carrier_of_treasure_class_b_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_carrier_of_treasure_class_c_at(PyObject *obj, PyObject *args, PyObject *keywds);
