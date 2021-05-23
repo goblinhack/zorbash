@@ -156,7 +156,12 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (up || down || left || right) {
-        if (level->is_sticky(mid_at.x, mid_at.y)) {
+        if (loves_spiderwebs() && 
+            level->is_spiderweb(mid_at.x, mid_at.y)) {
+            //
+            // No getting stuck in webs
+            //
+        } else if (level->is_sticky(mid_at.x, mid_at.y)) {
             if (is_player()) {
                 TOPCON("You cannot move!");
             }

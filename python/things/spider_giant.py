@@ -69,6 +69,7 @@ def tp_init(name, text_name):
     mytp.set_is_shown_on_leftbar(True)
     mytp.set_long_text_description("An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
     mytp.set_loves_poison(True)
+    mytp.set_loves_spiderwebs(True)
     mytp.set_monst_size(zx.MONST_SIZE_GIANT)
     mytp.set_move_speed_ms(150)
     mytp.set_normal_placement_rules(True)

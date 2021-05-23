@@ -285,7 +285,7 @@ int Thing::is_rrr75(void) const                                         {_ retur
 int Thing::is_rrr76(void) const                                         {_ return (tp()->is_rrr76()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
 int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
-int Thing::is_rrr99(void) const                                         {_ return (tp()->is_rrr99()); }
+int Thing::loves_spiderwebs(void) const                                         {_ return (tp()->loves_spiderwebs()); }
 int Thing::is_secret_door(void) const                                   {_ return (tp()->is_secret_door()); }
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
 int Thing::is_shallow_water(void) const                                 {_ return (tp()->is_shallow_water()); }

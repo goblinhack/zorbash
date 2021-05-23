@@ -171,7 +171,7 @@ int Tp::is_bleeder(void) const                                       { return _i
 int Tp::is_blood(void) const                                         { return _is_blood; }
 int Tp::is_blood_splatter(void) const                                { return _is_blood_splatter; }
 int Tp::is_brazier(void) const                                       { return _is_brazier; }
-int Tp::is_rrr99(void) const                                         { return _is_rrr99; }
+int Tp::loves_spiderwebs(void) const                                         { return _loves_spiderwebs; }
 int Tp::is_carrier_of_treasure_class_a(void) const                   { return _is_carrier_of_treasure_class_a; }
 int Tp::is_carrier_of_treasure_class_b(void) const                   { return _is_carrier_of_treasure_class_b; }
 int Tp::is_carrier_of_treasure_class_c(void) const                   { return _is_carrier_of_treasure_class_c; }
@@ -672,7 +672,7 @@ void Tp::set_is_rrr75(int v)                                         { _is_rrr75
 void Tp::set_is_rrr76(int v)                                         { _is_rrr76 = v; }
 void Tp::set_is_rrr8(int v)                                          { _is_rrr8 = v; }
 void Tp::set_is_rrr9(int v)                                          { _is_rrr9 = v; }
-void Tp::set_is_rrr99(int v)                                         { _is_rrr99 = v; }
+void Tp::set_loves_spiderwebs(int v)                                         { _loves_spiderwebs = v; }
 void Tp::set_is_secret_door(int v)                                   { _is_secret_door = v; }
 void Tp::set_is_sewer_wall(int v)                                    { _is_sewer_wall = v; }
 void Tp::set_is_shallow_water(int v)                                 { _is_shallow_water = v; }
