@@ -1,6 +1,8 @@
 
 Todo
 ----
+- frog still appearing by lava
+- wip tough door
 - spider that throws web?
 
 Level
@@ -28,6 +30,7 @@ Skills
 - melee in shallow water should have advantage over something in deep water
 - challenging learning spot to acquire skills?
 - skills
+- skill, instakill, once per level
 - skill, heroic charge, rush enemy
 - skill, guaranteed hit, but you have no defense in the next move
 - skill, whirl attack, attack 2 or 3 enemies
@@ -63,10 +66,6 @@ AI
 --
 - rats steal keys ? shown visibly ?
 - throw treasure to distract cleaner
-
-Food
-----
-frogs next to lava should melt?
 
 Wands
 -----

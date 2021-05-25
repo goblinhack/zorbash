@@ -13,7 +13,7 @@ def on_open(me, x, y):
     zx.sound_play("door_open")
 
 def tp_init(name):
-    mytp = tp.Tp(name, "door")
+    mytp = tp.Tp(name, "wooden door")
     mytp.set_hates_fire(100)
     mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
@@ -24,7 +24,6 @@ def tp_init(name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_health_bar_shown_only_when_injured(True)
     mytp.set_gfx_oversized_but_sitting_on_the_ground(True)
-    mytp.set_gfx_show_outlined(True)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_gfx_small_shadow_caster(True)
     mytp.set_health_initial_dice("10d10")
