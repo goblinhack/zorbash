@@ -14,7 +14,6 @@ def on_open(me, x, y):
 
 def tp_init(name):
     mytp = tp.Tp(name, "wooden door")
-    mytp.set_hates_fire(100)
     mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
     mytp.set_collision_circle(True)
@@ -26,24 +25,25 @@ def tp_init(name):
     mytp.set_gfx_oversized_but_sitting_on_the_ground(True)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_gfx_small_shadow_caster(True)
+    mytp.set_hates_fire(100)
     mytp.set_health_initial_dice("10d10")
     mytp.set_is_able_to_fall(False)
+    mytp.set_is_active(True) # So it can interact with fire
     mytp.set_is_always_hit(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_burnable(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_door(True)
-    mytp.set_is_burnable(True)
-    mytp.set_is_active(True) # So it can interact with fire
     mytp.set_is_light_blocker(True)
     mytp.set_is_movement_blocking_hard(True)
     mytp.set_is_shown_on_leftbar(True)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_death_do("door.on_death()")
+    mytp.set_on_death_do("door_wood.on_death()")
     mytp.set_on_death_is_open(True)
-    mytp.set_on_hit_do("door.on_hit()")
-    mytp.set_on_open_do("door.on_open()")
+    mytp.set_on_hit_do("door_wood.on_hit()")
+    mytp.set_on_open_do("door_wood.on_open()")
     mytp.set_stat_attack(10) # 10, means no bonus
     mytp.set_stat_constitution(0)
     mytp.set_stat_defence(20)
