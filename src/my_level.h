@@ -126,14 +126,6 @@ public:
     point                      pixel_map_at;  // map pixel location
 
     //
-    // Update thing_fini.cpp when adding more references to Thingp
-    //
-    Thingp                     player = {};
-    Thingp                     cursor = {};
-    Thingp                     highlight = {};
-    Thingp                     hover_over = {};
-
-    //
     // Everything thing on the level. Not all in the game, just this level.
     //
     std::map<ThingId, Thingp> all_things {};
@@ -152,17 +144,6 @@ public:
     std::map<ThingId, Thingp> all_gc_things {};
 
     //
-    // Tile maps for rendering solid blocks of water etc...
-    //
-    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
-                    water_tile_map = {};
-    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
-                    deep_water_tile_map = {};
-    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
-                    lava_tile_map = {};
-    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
-                    chasm_tile_map = {};
-    //
     // All thing IDs
     //
     std::array<
@@ -175,11 +156,37 @@ public:
         std::vector<Thingp>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ptrs_at {};
 
+    //
+    // This is what we've lit on this level, so we can restore it
+    // when we return
+    //
+    std::vector<uint8_t> fbo_light;
+
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
+
+    //
+    // Update thing_fini.cpp when adding more references to Thingp
+    //
+    Thingp                     player = {};
+    Thingp                     cursor = {};
+    Thingp                     highlight = {};
+    Thingp                     hover_over = {};
+
+    //
+    // Tile maps for rendering solid blocks of water etc...
+    //
+    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    water_tile_map = {};
+    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    deep_water_tile_map = {};
+    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    lava_tile_map = {};
+    std::array<std::array<uint8_t, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    chasm_tile_map = {};
 
     bool                       is_being_destroyed {};
 

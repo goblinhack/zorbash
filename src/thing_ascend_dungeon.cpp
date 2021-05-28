@@ -12,6 +12,8 @@
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
+#include "my_sdl.h"
+#include "my_gl.h"
 
 bool Thing::ascend_dungeon_tick (void)
 {_
@@ -33,6 +35,7 @@ bool Thing::ascend_dungeon_tick (void)
     if (level->world_at.z > 1) {
         if (is_player()) {
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
+            level->fbo_light = sdl_fbo_save(FBO_FULLMAP_LIGHT);
             is_waiting_to_ascend_dungeon = true;
 
             if (is_player()) {

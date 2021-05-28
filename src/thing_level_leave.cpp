@@ -8,6 +8,7 @@
 #include "my_world.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_sdl.h"
 #include "my_gl.h"
 
 void Thing::level_leave (void)

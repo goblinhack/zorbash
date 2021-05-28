@@ -2,7 +2,6 @@
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
 //
-
 #pragma once
 #ifndef _MY_CALLSTACK_H_
 #define _MY_CALLSTACK_H_
@@ -57,10 +56,10 @@ struct tracer_t {
                      const char *func,
                      const unsigned short line)
     {
-        extern bool g_opt_debug2;
+        extern bool g_opt_debug1;
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-        if (unlikely(g_opt_debug2)) {
+        if (unlikely(g_opt_debug1)) {
             if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
                 callframe *c = &callframes[g_callframes_depth++];
                 c->file = file;
@@ -72,8 +71,8 @@ struct tracer_t {
 
     inline ~tracer_t()
     {
-        extern bool g_opt_debug2;
-        if (unlikely(g_opt_debug2)) {
+        extern bool g_opt_debug1;
+        if (unlikely(g_opt_debug1)) {
             if (g_callframes_depth > 0) {
                 g_callframes_depth--;
             }
