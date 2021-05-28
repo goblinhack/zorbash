@@ -445,6 +445,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* maxx */                  in >> bits(l->maxx);
     /* miny */                  in >> bits(l->miny);
     /* maxy */                  in >> bits(l->maxy);
+    /* fbo_light */             in >> bits(l->fbo_light);
 
     l->update_new_level();
     l->timestamp_redraw_bg = 1; // Force redraw

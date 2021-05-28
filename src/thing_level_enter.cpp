@@ -8,6 +8,7 @@
 #include "my_world.h"
 #include "my_level.h"
 #include "my_thing.h"
+#include "my_sdl.h"
 #include "my_gl.h"
 
 void Thing::level_enter (void)
@@ -80,5 +81,6 @@ void Thing::level_enter (void)
 
     if (is_player()) {
         log("Level entered");
+        sdl_fbo_load(FBO_FULLMAP_LIGHT, level->fbo_light);
     }
 }

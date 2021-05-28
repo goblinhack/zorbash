@@ -469,7 +469,7 @@ LDLIBS="$LDLIBS $Python_LIBS"
 #
 case `uname` in
     *MSYS*)
-        log_err "compile for ming64, not msys"
+        log_err "Please compile for ming64, not msys"
         exit 1
         ;;
     *MING*)
@@ -527,14 +527,20 @@ case `uname` in
             LDFLAGS+=" -fsanitize=address"
         fi
         ;;
-    *)
+    *inux*)
         EXE=""
-        LDLIBS="$LDLIBS -funwind-tables"
-        LDLIBS="$LDLIBS -lGL"
+        # These seem to make no difference
+        #C_FLAGS+='-fasynchronous-unwind-tables '
+        #C_FLAGS+='-funwind-tables '
+        LDFLAGS+='-rdynamic '
+        LDLIBS+="-lGL "
         if [[ $OPT_DEV2 != "" ]]; then
             C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer"
             LDFLAGS+=" -fsanitize=address"
         fi
+        ;;
+    *)
+        EXE=""
         ;;
 esac
 

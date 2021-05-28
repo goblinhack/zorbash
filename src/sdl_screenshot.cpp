@@ -20,8 +20,11 @@ void sdl_screenshot (void)
 
 void sdl_screenshot_do (void)
 {_
-    int w = game->config.window_pix_width;
-    int h = game->config.window_pix_height;
+    int fbo = FBO_FULLMAP;
+    int w;
+    int h;
+    fbo_get_size(fbo, w, h);
+    blit_fbo_bind(fbo);
 
     static int count = 1;
 
@@ -43,6 +46,63 @@ void sdl_screenshot_do (void)
     stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
     BOTCON("Screenshot: %s", png);
     myfree(png);
+    blit_fbo_unbind();
 
     count++;
+}
+
+std::vector<uint8_t> sdl_fbo_save (int fbo)
+{_
+    int w;
+    int h;
+    fbo_get_size(fbo, w, h);
+    GL_ERROR_CHECK();
+
+    blit_fbo_bind(fbo);
+    GL_ERROR_CHECK();
+
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    GL_ERROR_CHECK();
+
+    if (fbo == FBO_MAP) {
+        glReadBuffer(GL_BACK_LEFT);
+        GL_ERROR_CHECK();
+    }
+
+    std::vector<uint8_t> pixels;
+    pixels.resize(3 * w * h);
+
+    glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
+    GL_ERROR_CHECK();
+
+    blit_fbo_unbind();
+    GL_ERROR_CHECK();
+
+CON("FBO SAVE %d", (int)pixels.size());
+    return pixels;
+}
+
+void sdl_fbo_load (int fbo, const std::vector<uint8_t> &pixels)
+{_
+CON("FBO LOAD %d", (int)pixels.size());
+    if (pixels.empty()) {
+        return;
+    }
+
+    int w;
+    int h;
+    fbo_get_size(fbo, w, h);
+    GL_ERROR_CHECK();
+
+    blit_fbo_bind(fbo);
+    GL_ERROR_CHECK();
+
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    GL_ERROR_CHECK();
+
+    glDrawPixels(w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
+    GL_ERROR_CHECK();
+
+    blit_fbo_unbind();
+    GL_ERROR_CHECK();
 }

@@ -16,6 +16,7 @@
 #include "my_thing.h"
 #include "my_ui.h"
 #include "my_sdl.h"
+#include "my_gl.h"
 
 extern bool game_load_headers_only;
 bool game_save_config_only;
@@ -301,6 +302,10 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
         my.t->log("Save");
     }
 
+    if (game->level == my.t) {
+        game->level->fbo_light = sdl_fbo_save(FBO_FULLMAP_LIGHT);
+    }
+
     out << bits(my.t->timestamp_dungeon_created);
     timestamp_t timestamp_dungeon_saved = time_get_time_ms();
     out << bits(timestamp_dungeon_saved);
@@ -387,6 +392,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* maxx */                  out << bits(my.t->maxx);
     /* miny */                  out << bits(my.t->miny);
     /* maxy */                  out << bits(my.t->maxy);
+    /* fbo_light */             out << bits(my.t->fbo_light);
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
