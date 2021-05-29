@@ -1183,8 +1183,6 @@ void sdl_loop (void)
                 if (wid_console_window && !(wid_console_window->visible)) {
                     wid_visible(wid_console_window);
                     wid_raise(wid_console_window);
-                    wid_set_focus(wid_console_window);
-                    wid_focus_lock(wid_console_window);
                 }
             }
         }

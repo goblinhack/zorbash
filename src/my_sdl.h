@@ -107,5 +107,6 @@ void sdl_loop(void);
 void sdl_screenshot_do(void);
 void sdl_screenshot(void);
 void sdl_show_keyboard(void);
+void sdl_fbo_dump(int fbo, const std::string &name);
 
 #endif
