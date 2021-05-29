@@ -65,23 +65,13 @@ std::vector<uint8_t> sdl_fbo_save (int fbo)
     GL_ERROR_CHECK();
 
     std::vector<uint8_t> pixels;
-    pixels.resize(3 * w * h);
+    pixels.resize(4 * w * h);
 
-    glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
+    glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
     GL_ERROR_CHECK();
 
     blit_fbo_unbind();
     GL_ERROR_CHECK();
-
-#if 0
-    static int count = 0;
-    int components = 3;
-    char *png = dynprintf("screenshot.%d.png", count);
-    stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
-    BOTCON("Screenshot: %s", png);
-    myfree(png);
-    count++;
-#endif
 
     return pixels;
 }
@@ -103,7 +93,7 @@ void sdl_fbo_load (int fbo, const std::vector<uint8_t> &pixels)
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
     GL_ERROR_CHECK();
 
-    glDrawPixels(w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
+    glDrawPixels(w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
     GL_ERROR_CHECK();
 
     blit_fbo_unbind();
@@ -124,18 +114,18 @@ void sdl_fbo_dump (int fbo, const std::string &name)
     GL_ERROR_CHECK();
 
     std::vector<uint8_t> pixels;
-    pixels.resize(3 * w * h);
+    pixels.resize(4 * w * h);
 
-    glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
+    glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
     GL_ERROR_CHECK();
 
     blit_fbo_unbind();
     GL_ERROR_CHECK();
 
     static int count = 0;
-    int components = 3;
+    int components = 4;
     char *png = dynprintf("screenshot.%s.%03d.png", name.c_str(), count);
-    stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
+    stbi_write_png(png, w, h, components, pixels.data(), 4 * w);
     BOTCON("Screenshot: %s", png);
     myfree(png);
     count++;

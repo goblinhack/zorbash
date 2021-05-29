@@ -16,6 +16,7 @@
 #include "my_laser.h"
 #include "my_projectile.h"
 #include "my_ptrcheck.h"
+#include "my_sdl.h"
 
 void Level::display (void)
 {_
@@ -398,6 +399,7 @@ void Level::display_map (void)
 
         glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
         blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
+//sdl_fbo_dump(FBO_FULLMAP_LIGHT, "FULLMAP");
     }
 
     if (!frozen) {_
