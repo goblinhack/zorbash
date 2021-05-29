@@ -21,6 +21,11 @@ void Level::update_new_level (void)
     scroll_map_to_player_immediately();
     lights_update_new_level();
     player_dmap_update();
+
+    //
+    // Load what we were able to see previously
+    //
+    sdl_fbo_load(FBO_FULLMAP_LIGHT, fbo_light);
 }
 
 //
