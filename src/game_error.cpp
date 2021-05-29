@@ -77,11 +77,12 @@ void game_error (std::string error)
     }
     game->hard_pause();
 
-    point tl = make_point(1, 1);
-    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
+    point tl = make_point(5, 5);
+    point br = make_point(TERM_WIDTH - 5, TERM_HEIGHT - 5);
     auto width = br.x - tl.x;
 
-    game_error_window = new WidPopup("Game error", tl, br, tile_find_mand("bug"), "");
+    game_error_window = new WidPopup("Game error", tl, br, 
+                                     tile_find_mand("bug"), "");
     wid_set_on_key_up(
       game_error_window->wid_popup_container, game_error_key_up);
     wid_set_on_key_down(
@@ -109,10 +110,10 @@ void game_error (std::string error)
         auto p = game_error_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dismiss");
 
-        point tl = make_point(1, 4);
-        point br = make_point(width - 3, 4);
+        point tl = make_point(10, TERM_HEIGHT - 23);
+        point br = make_point(width - 10, TERM_HEIGHT - 19);
 
-        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_error_mouse_up);
 
         wid_set_pos(w, tl, br);

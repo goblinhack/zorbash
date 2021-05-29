@@ -109,3 +109,34 @@ void sdl_fbo_load (int fbo, const std::vector<uint8_t> &pixels)
     blit_fbo_unbind();
     GL_ERROR_CHECK();
 }
+
+void sdl_fbo_dump (int fbo, const std::string &name)
+{_
+    int w;
+    int h;
+    fbo_get_size(fbo, w, h);
+    GL_ERROR_CHECK();
+
+    blit_fbo_bind(fbo);
+    GL_ERROR_CHECK();
+
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    GL_ERROR_CHECK();
+
+    std::vector<uint8_t> pixels;
+    pixels.resize(3 * w * h);
+
+    glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
+    GL_ERROR_CHECK();
+
+    blit_fbo_unbind();
+    GL_ERROR_CHECK();
+
+    static int count = 0;
+    int components = 3;
+    char *png = dynprintf("screenshot.%s.%03d.png", name.c_str(), count);
+    stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
+    BOTCON("Screenshot: %s", png);
+    myfree(png);
+    count++;
+}
