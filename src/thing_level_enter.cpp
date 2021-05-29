@@ -81,6 +81,5 @@ void Thing::level_enter (void)
 
     if (is_player()) {
         log("Level entered");
-        sdl_fbo_load(FBO_FULLMAP_LIGHT, level->fbo_light);
     }
 }

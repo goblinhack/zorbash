@@ -164,7 +164,7 @@ std::istream& operator>>(std::istream &in, Bits<HiScores &> my)
     my.t.hiscores.resize(0);
     in >> bits(my.t.hiscores);
     for (auto h : my.t.hiscores) {
-        CON("Loaded Hiscore: %s, %d killed by %s", h.name.c_str(), h.score, h.killed_by.c_str());
+        LOG("Loaded Hiscore: %s, %d killed by %s", h.name.c_str(), h.score, h.killed_by.c_str());
     }
 
     return in;
