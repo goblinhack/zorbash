@@ -1098,7 +1098,7 @@ void sdl_config_update_all (void)
     gl_init_2d_mode();
 
     if (game->level) {
-        game->level->update_same_level();
+        game->level->update_same_level_immediately();
     }
 }
 

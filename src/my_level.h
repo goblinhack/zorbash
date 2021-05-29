@@ -628,6 +628,7 @@ public:
     void scroll_map_do(bool fast);
     void scroll_map_set_target(void);
     void scroll_map_to_player(void);
+    void scroll_map_to_player_immediately(void);
     void set_dungeon(const int x, const int y);
     void set_is_acid(const int x, const int y);
     void set_is_ascend_dungeon(const int x, const int y);
@@ -759,6 +760,7 @@ public:
     void update_minimap(bool showing_two_levels, bool show_faded);
     void update_new_level(void);
     void update_same_level(void);
+    void update_same_level_immediately(void);
     void update_things_next_to_a_chasm(void);
     void update_water_next_to_lava(void);
     bool can_see_obstacle(int x, int y);

@@ -13,8 +13,13 @@
 
 void Level::scroll_map_do (bool fast)
 {_
-    if (wid_find_under_mouse_when_scrolling()) {
-        return;
+    if (!fast) {
+        //
+        // Not sure why I have this :)
+        //
+        if (wid_find_under_mouse_when_scrolling()) {
+            return;
+        }
     }
 
     const float vbigstep = 1;
@@ -53,9 +58,9 @@ if (player) {
         } else {
             float step;
 
-            if (fabs(dx) > 15) {
+            if (fabs(dx) > 30) {
                 step = vbigstep;
-            } else if (fabs(dx) > 10) {
+            } else if (fabs(dx) > 20) {
                 step = bigstep;
             } else if (fabs(dx) > 5) {
                 step = medstep;
@@ -73,9 +78,9 @@ if (player) {
                 map_at.x += dx;
             }
 
-            if (fabs(dy) > 15) {
+            if (fabs(dy) > 30) {
                 step = vbigstep;
-            } else if (fabs(dy) > 10) {
+            } else if (fabs(dy) > 20) {
                 step = bigstep;
             } else if (fabs(dy) > 5) {
                 step = medstep;
@@ -149,6 +154,35 @@ void Level::scroll_map_to_player (void)
 
     scroll_map_set_target();
     scroll_map_do(true);
+}
+
+void Level::scroll_map_to_player_immediately (void)
+{_
+    if (!player) {
+        return;
+    }
+    scroll_map_to_player();
+
+    int tries = 0;
+    while (tries++ < 10000) {
+        auto dx = map_at.x - map_wanted_at.x;
+        auto dy = map_at.y - map_wanted_at.y;
+        if ((dx == 0) && (dy == 0)) {
+            return;
+        }
+
+        scroll_map_to_player();
+
+        //
+        // Can't move anymore?
+        //
+        auto ndx = map_at.x - map_wanted_at.x;
+        auto ndy = map_at.y - map_wanted_at.y;
+        if ((ndx == dx) && (ndy == dy)) {
+            return;
+        }
+    }
+    err("Could not scroll map to player");
 }
 
 //

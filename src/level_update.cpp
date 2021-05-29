@@ -10,22 +10,40 @@
 #include "my_sdl.h"
 #include "my_gl.h"
 
+//
+// New or loaded level
+//
 void Level::update_new_level (void)
 {_
     minimap_valid = false;
     heatmap_valid = false;
 
+    scroll_map_to_player_immediately();
     lights_update_new_level();
-    scroll_map_to_player();
     player_dmap_update();
-    sdl_fbo_load(FBO_FULLMAP_LIGHT, fbo_light);
 }
 
+//
+// Something changed on the level
+//
 void Level::update_same_level (void)
 {_
     minimap_valid = false;
     heatmap_valid = false;
 
     lights_update_same_level();
+    player_dmap_update();
+}
+
+// 
+// For example, a zoom change
+//
+void Level::update_same_level_immediately (void)
+{_
+    minimap_valid = false;
+    heatmap_valid = false;
+
+    scroll_map_to_player_immediately();
+    lights_update_new_level();
     player_dmap_update();
 }
