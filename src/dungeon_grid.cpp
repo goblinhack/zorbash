@@ -439,42 +439,42 @@ void Nodes::dump (void)
             auto node = getn(x, y);
             if (node->has_door_down) {
                 if (y == grid_height - 1) {
-                    ERR("Node %d,%d has exit down off end of map", x, y);
+                    ERR("DungeonNode %d,%d has exit down off end of map", x, y);
                 }
             }
             if (node->has_door_right) {
                 if (x == grid_width - 1) {
-                    ERR("Node %d,%d has exit right off end of map", x, y);
+                    ERR("DungeonNode %d,%d has exit right off end of map", x, y);
                 }
             }
             if (node->has_door_left) {
                 if (x == 0) {
-                    ERR("Node %d,%d has exit left off end of map", x, y);
+                    ERR("DungeonNode %d,%d has exit left off end of map", x, y);
                 }
             }
             if (node->has_door_up) {
                 if (y == 0) {
-                    ERR("Node %d,%d has exit up off end of map", x, y);
+                    ERR("DungeonNode %d,%d has exit up off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_down) {
                 if (y == grid_height - 1) {
-                    ERR("Node %d,%d has secret exit down off end of map", x, y);
+                    ERR("DungeonNode %d,%d has secret exit down off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_right) {
                 if (x == grid_width - 1) {
-                    ERR("Node %d,%d has secret exit right off end of map", x, y);
+                    ERR("DungeonNode %d,%d has secret exit right off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_left) {
                 if (x == 0) {
-                    ERR("Node %d,%d has secret exit left off end of map", x, y);
+                    ERR("DungeonNode %d,%d has secret exit left off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_up) {
                 if (y == 0) {
-                    ERR("Node %d,%d has secret exit up off end of map", x, y);
+                    ERR("DungeonNode %d,%d has secret exit up off end of map", x, y);
                 }
             }
         }
@@ -486,49 +486,49 @@ void Nodes::dump (void)
             if (node->has_door_down) {
                 auto o = getn(x, y + 1);
                 if (!o || !o->depth) {
-                    ERR("Node %d,%d has exit down but no node exists", x, y);
+                    ERR("DungeonNode %d,%d has exit down but no node exists", x, y);
                 }
             }
             if (node->has_door_right) {
                 auto o = getn(x + 1, y);
                 if (!o || !o->depth) {
-                    ERR("Node %d,%d has exit right but no node exists", x, y);
+                    ERR("DungeonNode %d,%d has exit right but no node exists", x, y);
                 }
             }
             if (node->has_door_left) {
                 auto o = getn(x - 1, y);
                 if (!o || !o->depth) {
-                    ERR("Node %d,%d has exit left but no node exists", x, y);
+                    ERR("DungeonNode %d,%d has exit left but no node exists", x, y);
                 }
             }
             if (node->has_door_up) {
                 auto o = getn(x, y - 1);
                 if (!o || !o->depth) {
-                    ERR("Node %d,%d has exit up but no node exists", x, y);
+                    ERR("DungeonNode %d,%d has exit up but no node exists", x, y);
                 }
             }
             if (node->has_secret_exit_down) {
                 auto o = getn(x, y + 1);
                 if (!o || !o->depth) {
-                    ERR("Node %d,%d has secret exit down but no node exists", x, y);
+                    ERR("DungeonNode %d,%d has secret exit down but no node exists", x, y);
                 }
             }
             if (node->has_secret_exit_right) {
                 auto o = getn(x + 1, y);
                 if (!o || !o->depth) {
-                    ERR("Node %d,%d has secret exit right but no node exists", x, y);
+                    ERR("DungeonNode %d,%d has secret exit right but no node exists", x, y);
                 }
             }
             if (node->has_secret_exit_left) {
                 auto o = getn(x - 1, y);
                 if (!o || !o->depth) {
-                    ERR("Node %d,%d has secret exit left but no node exists", x, y);
+                    ERR("DungeonNode %d,%d has secret exit left but no node exists", x, y);
                 }
             }
             if (node->has_secret_exit_up) {
                 auto o = getn(x, y - 1);
                 if (!o || !o->depth) {
-                    ERR("Node %d,%d has secret exit up but no node exists", x, y);
+                    ERR("DungeonNode %d,%d has secret exit up but no node exists", x, y);
                 }
             }
         }
@@ -540,49 +540,49 @@ void Nodes::dump (void)
             if (node->has_door_down) {
                 auto o = getn(x, y + 1);
                 if (o->depth == depth_obstacle) {
-                    ERR("Node %d,%d has exit down but that node is an obstacle", x, y);
+                    ERR("DungeonNode %d,%d has exit down but that node is an obstacle", x, y);
                 }
             }
             if (node->has_door_right) {
                 auto o = getn(x + 1, y);
                 if (o->depth == depth_obstacle) {
-                    ERR("Node %d,%d has exit right but that node is an obstacle", x, y);
+                    ERR("DungeonNode %d,%d has exit right but that node is an obstacle", x, y);
                 }
             }
             if (node->has_door_left) {
                 auto o = getn(x - 1, y);
                 if (o->depth == depth_obstacle) {
-                    ERR("Node %d,%d has exit left but that node is an obstacle", x, y);
+                    ERR("DungeonNode %d,%d has exit left but that node is an obstacle", x, y);
                 }
             }
             if (node->has_door_up) {
                 auto o = getn(x, y - 1);
                 if (o->depth == depth_obstacle) {
-                    ERR("Node %d,%d has exit up but that node is an obstacle", x, y);
+                    ERR("DungeonNode %d,%d has exit up but that node is an obstacle", x, y);
                 }
             }
             if (node->has_secret_exit_down) {
                 auto o = getn(x, y + 1);
                 if (o->depth == depth_obstacle) {
-                    ERR("Node %d,%d has secret exit down but that node is an obstacle", x, y);
+                    ERR("DungeonNode %d,%d has secret exit down but that node is an obstacle", x, y);
                 }
             }
             if (node->has_secret_exit_right) {
                 auto o = getn(x + 1, y);
                 if (o->depth == depth_obstacle) {
-                    ERR("Node %d,%d has secret exit right but that node is an obstacle", x, y);
+                    ERR("DungeonNode %d,%d has secret exit right but that node is an obstacle", x, y);
                 }
             }
             if (node->has_secret_exit_left) {
                 auto o = getn(x - 1, y);
                 if (o->depth == depth_obstacle) {
-                    ERR("Node %d,%d has secret exit left but that node is an obstacle", x, y);
+                    ERR("DungeonNode %d,%d has secret exit left but that node is an obstacle", x, y);
                 }
             }
             if (node->has_secret_exit_up) {
                 auto o = getn(x, y - 1);
                 if (o->depth == depth_obstacle) {
-                    ERR("Node %d,%d has secret exit up but that node is an obstacle", x, y);
+                    ERR("DungeonNode %d,%d has secret exit up but that node is an obstacle", x, y);
                 }
             }
         }
@@ -593,22 +593,22 @@ void Nodes::dump (void)
             auto node = getn(x, y);
             if (node->has_door_down) {
                 if (node->has_secret_exit_down) {
-                    ERR("Node %d,%d has both normal and secret exits down", x, y);
+                    ERR("DungeonNode %d,%d has both normal and secret exits down", x, y);
                 }
             }
             if (node->has_door_right) {
                 if (node->has_secret_exit_right) {
-                    ERR("Node %d,%d has both normal and secret exits right", x, y);
+                    ERR("DungeonNode %d,%d has both normal and secret exits right", x, y);
                 }
             }
             if (node->has_door_left) {
                 if (node->has_secret_exit_left) {
-                    ERR("Node %d,%d has both normal and secret exits left", x, y);
+                    ERR("DungeonNode %d,%d has both normal and secret exits left", x, y);
                 }
             }
             if (node->has_door_up) {
                 if (node->has_secret_exit_up) {
-                    ERR("Node %d,%d has both normal and secret exits up", x, y);
+                    ERR("DungeonNode %d,%d has both normal and secret exits up", x, y);
                 }
             }
         }
@@ -639,7 +639,7 @@ bool Nodes::is_oob (const int x, const int y)
             (y < 0) || (y >= grid_height));
 }
 
-Node *Nodes::node_addr (const int x, const int y)
+DungeonNode *Nodes::node_addr (const int x, const int y)
 {
     if (is_oob(x, y)) {
         return (nullptr);
@@ -648,7 +648,7 @@ Node *Nodes::node_addr (const int x, const int y)
     return (&nodes[offset(x, y)]);
 }
 
-void Nodes::putn (const int x, const int y, const Node n)
+void Nodes::putn (const int x, const int y, const DungeonNode n)
 {
     auto p = node_addr(x, y);
     if (p != nullptr) {
@@ -656,7 +656,7 @@ void Nodes::putn (const int x, const int y, const Node n)
     }
 }
 
-Node *Nodes::getn (const int x, const int y)
+DungeonNode *Nodes::getn (const int x, const int y)
 {
     auto p = node_addr(x, y);
     return (p);
@@ -739,12 +739,12 @@ void Nodes::init_nodes (void)
 // Walk the depth randomly, ala snake until you hit your own tail,
 // forking randomly also
 //
-bool Nodes::node_is_free (Node *n)
+bool Nodes::node_is_free (DungeonNode *n)
 {
     return (n && !n->depth);
 }
 
-bool Nodes::node_is_a_room (Node *n)
+bool Nodes::node_is_a_room (DungeonNode *n)
 {
     return (n && n->depth && (n->depth != depth_obstacle));
 }

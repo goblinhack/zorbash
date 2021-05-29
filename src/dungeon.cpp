@@ -1554,7 +1554,7 @@ void Dungeon::rooms_print_all (Grid *g)
     }
 }
 
-bool Dungeon::room_is_a_candidate (int x, int y, const Node *n, Roomp r)
+bool Dungeon::room_is_a_candidate (int x, int y, const DungeonNode *n, Roomp r)
 {
 #if 0
 CON("%d %d depth %d up %d down %d left %d right %d", x, y, 
@@ -1678,7 +1678,7 @@ r->dump();
     return true;
 }
 
-bool Dungeon::room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
+bool Dungeon::room_is_a_candidate_less_restrictive (const DungeonNode *n, Roomp r)
 {
     for (auto x = 0; x < nodes->grid_width; x++) {
         for (auto y = 0; y < nodes->grid_height; y++) {

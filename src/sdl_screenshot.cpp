@@ -64,11 +64,6 @@ std::vector<uint8_t> sdl_fbo_save (int fbo)
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
     GL_ERROR_CHECK();
 
-    if (fbo == FBO_MAP) {
-        glReadBuffer(GL_BACK_LEFT);
-        GL_ERROR_CHECK();
-    }
-
     std::vector<uint8_t> pixels;
     pixels.resize(3 * w * h);
 
@@ -78,13 +73,21 @@ std::vector<uint8_t> sdl_fbo_save (int fbo)
     blit_fbo_unbind();
     GL_ERROR_CHECK();
 
-CON("FBO SAVE %d", (int)pixels.size());
+#if 0
+    static int count = 0;
+    int components = 3;
+    char *png = dynprintf("screenshot.%d.png", count);
+    stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
+    BOTCON("Screenshot: %s", png);
+    myfree(png);
+    count++;
+#endif
+
     return pixels;
 }
 
 void sdl_fbo_load (int fbo, const std::vector<uint8_t> &pixels)
 {_
-CON("FBO LOAD %d", (int)pixels.size());
     if (pixels.empty()) {
         return;
     }

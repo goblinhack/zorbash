@@ -11,7 +11,7 @@
 #include "my_point.h"
 #include "my_fwd.h"
 
-class Node {
+class DungeonNode {
 public:
     //
     // Nodes have a depth number, optional key, start and exit and corridors
@@ -99,7 +99,7 @@ public:
 
 class Nodes {
 public:
-    std::vector<Node>                         nodes;
+    std::vector<DungeonNode>                  nodes;
     int grid_width                            {5};
     int grid_height                           {5};
     int max_depth                             {0};
@@ -128,9 +128,9 @@ public:
     void log(void);
     int offset(const int x, const int y);
     bool is_oob(const int x, const int y);
-    Node *node_addr(const int x, const int y);
-    void putn(const int x, const int y, const Node n);
-    Node *getn(const int x, const int y);
+    DungeonNode *node_addr(const int x, const int y);
+    void putn(const int x, const int y, const DungeonNode n);
+    DungeonNode *getn(const int x, const int y);
     point random_dir(void);
     void random_dir(int *dx, int *dy);
     void init_nodes(void);
@@ -144,8 +144,8 @@ public:
     bool place_entrance(void);
     bool place_exit(void);
     void set_max_depth(void);
-    bool node_is_free(Node *n);
-    bool node_is_a_room(Node *n);
+    bool node_is_free(DungeonNode *n);
+    bool node_is_a_room(DungeonNode *n);
     void remove_stubs();
     bool create_path_to_exit(int pass);
     void create_path_lock_to_key(int depth);
