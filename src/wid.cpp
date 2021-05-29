@@ -803,78 +803,56 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
 //
 char wid_event_to_char (const struct SDL_Keysym *evt)
 {_
-    switch (evt->mod) {
-        case KMOD_LSHIFT:
-        case KMOD_RSHIFT:
-            switch (evt->sym) {
-                case SDLK_a: return ('A');
-                case SDLK_b: return ('B');
-                case SDLK_c: return ('C');
-                case SDLK_d: return ('D');
-                case SDLK_e: return ('E');
-                case SDLK_f: return ('F');
-                case SDLK_g: return ('G');
-                case SDLK_h: return ('H');
-                case SDLK_i: return ('I');
-                case SDLK_j: return ('J');
-                case SDLK_k: return ('K');
-                case SDLK_l: return ('L');
-                case SDLK_m: return ('M');
-                case SDLK_n: return ('N');
-                case SDLK_o: return ('O');
-                case SDLK_p: return ('P');
-                case SDLK_q: return ('Q');
-                case SDLK_r: return ('R');
-                case SDLK_s: return ('S');
-                case SDLK_t: return ('T');
-                case SDLK_u: return ('U');
-                case SDLK_v: return ('V');
-                case SDLK_w: return ('W');
-                case SDLK_x: return ('X');
-                case SDLK_y: return ('Y');
-                case SDLK_z: return ('Z');
-                case SDLK_QUOTE: return ('"');
-                case SDLK_COMMA: return ('<');
-                case SDLK_MINUS: return ('_');
-                case SDLK_PERIOD: return ('>');
-                case SDLK_SLASH: return ('?');
-                case SDLK_EQUALS: return ('+');
-                case SDLK_0: return (')');
-                case SDLK_1: return ('!');
-                case SDLK_2: return ('@');
-                case SDLK_3: return ('#');
-                case SDLK_4: return ('$');
-                case SDLK_5: return ('%');
-                case SDLK_6: return ('^');
-                case SDLK_7: return ('&');
-                case SDLK_8: return ('*');
-                case SDLK_9: return ('(');
-                case SDLK_SEMICOLON: return (':');
-                case SDLK_LEFTBRACKET: return ('{');
-                case SDLK_BACKSLASH: return ('|');
-                case SDLK_RIGHTBRACKET: return ('}');
-                case SDLK_HASH: return ('~');
-
-            default:
-                break;
-            }
-
-        case KMOD_LALT:
-        case KMOD_RALT:
-            switch (evt->sym) {
-                default:
-                break;
-            }
-
-        case KMOD_LCTRL:
-        case KMOD_RCTRL:
-            switch (evt->sym) {
-                default:
-                break;
-            }
-
-        default:
-            break;
+    if ((evt->mod & KMOD_LSHIFT) || (evt->mod & KMOD_RSHIFT)) {
+        switch (evt->sym) {
+            case SDLK_a: return ('A');
+            case SDLK_b: return ('B');
+            case SDLK_c: return ('C');
+            case SDLK_d: return ('D');
+            case SDLK_e: return ('E');
+            case SDLK_f: return ('F');
+            case SDLK_g: return ('G');
+            case SDLK_h: return ('H');
+            case SDLK_i: return ('I');
+            case SDLK_j: return ('J');
+            case SDLK_k: return ('K');
+            case SDLK_l: return ('L');
+            case SDLK_m: return ('M');
+            case SDLK_n: return ('N');
+            case SDLK_o: return ('O');
+            case SDLK_p: return ('P');
+            case SDLK_q: return ('Q');
+            case SDLK_r: return ('R');
+            case SDLK_s: return ('S');
+            case SDLK_t: return ('T');
+            case SDLK_u: return ('U');
+            case SDLK_v: return ('V');
+            case SDLK_w: return ('W');
+            case SDLK_x: return ('X');
+            case SDLK_y: return ('Y');
+            case SDLK_z: return ('Z');
+            case SDLK_QUOTE: return ('"');
+            case SDLK_COMMA: return ('<');
+            case SDLK_MINUS: return ('_');
+            case SDLK_PERIOD: return ('>');
+            case SDLK_SLASH: return ('?');
+            case SDLK_EQUALS: return ('+');
+            case SDLK_0: return (')');
+            case SDLK_1: return ('!');
+            case SDLK_2: return ('@');
+            case SDLK_3: return ('#');
+            case SDLK_4: return ('$');
+            case SDLK_5: return ('%');
+            case SDLK_6: return ('^');
+            case SDLK_7: return ('&');
+            case SDLK_8: return ('*');
+            case SDLK_9: return ('(');
+            case SDLK_SEMICOLON: return (':');
+            case SDLK_LEFTBRACKET: return ('{');
+            case SDLK_BACKSLASH: return ('|');
+            case SDLK_RIGHTBRACKET: return ('}');
+            case SDLK_HASH: return ('~');
+        }
     }
 
     switch (evt->sym) {
@@ -3827,73 +3805,53 @@ static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
         return true;
     }
 
-    switch (key->mod) {
-        case KMOD_LCTRL:
-        case KMOD_RCTRL:
-            switch ((int32_t)key->sym) {
-                case 'r':
-                    TOPCON("Creating a new dungeon.");
-                    CON("USERCFG: reloading dungeon, destroy old");
-                    game->fini();
-                    game->init();
-                    CON("USERCFG: reloaded dungeon");
-                    break;
-            }
-        default:
-            if (key->scancode == (SDL_Scancode)game->config.key_screenshot) {
-                sdl_screenshot();
-                TOPCON("Screenshot taken.");
-                CON("USERCFG: screenshot taken");
-                return true;
+    if (key->scancode == (SDL_Scancode)game->config.key_screenshot) {
+        sdl_screenshot();
+        TOPCON("Screenshot taken.");
+        CON("USERCFG: screenshot taken");
+        return true;
+    }
+
+    switch ((int32_t)key->sym) {
+        case '?':
+            game->config_keyboard_select();
+            break;
+
+        case SDLK_ESCAPE:
+            if (w->visible) {
+                wid_not_visible(w);
             }
 
-            switch ((int32_t)key->sym) {
-                case '?':
-                    game->config_keyboard_select();
-                    break;
-
-                case SDLK_ESCAPE:
-                    if (w->visible) {
-                        wid_not_visible(w);
-                    }
-
-                    //
-                    // Need this so the console gets focus over the menu.
-                    //
-                    if (w->visible) {
-                        wid_set_focus(w);
-                        wid_focus_lock(w);
-                    } else {
-                        wid_unset_focus();
-                        wid_unset_focus_lock();
-                    }
-                    break;
-
-                case SDLK_TAB:
-                case SDLK_RETURN:
-                case SDLK_DOWN:
-                case SDLK_RIGHT:
-                    wid_find_next_focus();
-                    break;
-
-                case SDLK_UP:
-                case SDLK_LEFT:
-                    wid_find_prev_focus();
-                    break;
-
-                default: {
-                    if (wid_console_window && wid_console_window->visible) {
-                        wid_console_receive_input(wid_console_input_line, key);
-                    }
-                    break;
-                }
+            //
+            // Need this so the console gets focus over the menu.
+            //
+            if (w->visible) {
+                wid_set_focus(w);
+                wid_focus_lock(w);
+            } else {
+                wid_unset_focus();
+                wid_unset_focus_lock();
             }
             break;
 
-        case KMOD_LSHIFT:
-        case KMOD_RSHIFT:
-            switch ((int32_t)key->sym) {
+        case SDLK_TAB:
+        case SDLK_RETURN:
+        case SDLK_DOWN:
+        case SDLK_RIGHT:
+            wid_find_next_focus();
+            break;
+
+        case SDLK_UP:
+        case SDLK_LEFT:
+            wid_find_prev_focus();
+            break;
+
+        default: {
+            if (wid_console_window && wid_console_window->visible) {
+                wid_console_receive_input(wid_console_input_line, key);
             }
+            break;
+        }
     }
 
     return true;

@@ -453,31 +453,31 @@ static void sdl_event (SDL_Event * event)
             return;
         }
 
-        DBG("SDL: Keyboard: key pressed keycode 0x%" PRIx32 " = %s",
+        key = &event->key.keysym;
+
+        DBG("SDL: Keyboard: key pressed keycode 0x%" PRIx32 " = %s %d",
             event->key.keysym.sym,
-            SDL_GetKeyName(event->key.keysym.sym));
+            SDL_GetKeyName(event->key.keysym.sym), key->mod);
 
-            key = &event->key.keysym;
+        {
+            static struct SDL_Keysym last;
+            static timestamp_t last_time_for_key;
 
-            {
-                static struct SDL_Keysym last;
-                static timestamp_t last_time_for_key;
-
-                //
-                // SDL2 has no auto repeat.
-                //
-                if (!memcmp(&last, key, sizeof(*key))) {
-                    if (!time_have_x_hundredths_passed_since(5, last_time_for_key)) {
-                        return;
-                    }
-                    last_time_for_key = time_get_time_ms_cached();
+            //
+            // SDL2 has no auto repeat.
+            //
+            if (!memcmp(&last, key, sizeof(*key))) {
+                if (!time_have_x_hundredths_passed_since(5, last_time_for_key)) {
+                    return;
                 }
-                last = *key;
+                last_time_for_key = time_get_time_ms_cached();
             }
+            last = *key;
+        }
 
-            wid_key_down(key, mouse_x, mouse_y);
+        wid_key_down(key, mouse_x, mouse_y);
 
-            sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
+        sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
         break;
 
     case SDL_KEYUP:
@@ -485,11 +485,11 @@ static void sdl_event (SDL_Event * event)
             event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 
-            key = &event->key.keysym;
+    key = &event->key.keysym;
 
-            wid_key_up(key, mouse_x, mouse_y);
+        wid_key_up(key, mouse_x, mouse_y);
 
-            sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
+        sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
         break;
 
     case SDL_TEXTINPUT:
