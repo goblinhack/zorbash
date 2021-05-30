@@ -12,6 +12,7 @@ Comments and suggestions welcome at this early stage.
 Graphics
 --------
 - Various items and monsters by Oryx, [found here](https://www.oryxdesignlab.com/)
+- Various items and food by Henry Software, [found here](https://henrysoftware.itch.io)
 <!-- Oryx: Order Number: #102084 (placed on January 16, 2016 03:14PM EST) -->
 
 Music
