@@ -97,7 +97,7 @@ void Thing::location_check_forced (void)
     if (is_dead) {
         return;
     }
-    fungus_tick();
+    grass_tick();
     if (is_dead) {
         return;
     }

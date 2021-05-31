@@ -42,7 +42,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_fungus {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};
@@ -445,8 +445,8 @@ public:
     uint8_t is_descend_sewer(const point &p);
     uint8_t is_dirt(const int x, const int y);
     uint8_t is_dirt(const point &p);
-    uint8_t is_dry_fungus(const int x, const int y);
-    uint8_t is_dry_fungus(const point &p);
+    uint8_t is_dry_grass(const int x, const int y);
+    uint8_t is_dry_grass(const point &p);
     uint8_t is_enchantstone(const int x, const int y);
     uint8_t is_enchantstone(const point &p);
     uint8_t is_skillstone(const int x, const int y);
@@ -616,7 +616,7 @@ public:
     void new_projectile(ThingId id, point start, point stop, uint32_t dur);
     void place_dirt(Dungeonp d);
     void place_random_treasure(Dungeonp d);
-    void place_dry_fungus(Dungeonp d);
+    void place_dry_grass(Dungeonp d);
     void place_foilage(Dungeonp d);
     void place_spiderweb(Dungeonp d);
     void place_floor_deco(Dungeonp d);
@@ -643,7 +643,7 @@ public:
     void set_is_descend_dungeon(const int x, const int y);
     void set_is_descend_sewer(const int x, const int y);
     void set_is_dirt(const int x, const int y);
-    void set_is_dry_fungus(const int x, const int y);
+    void set_is_dry_grass(const int x, const int y);
     void set_is_enchantstone(const int x, const int y);
     void set_is_skillstone(const int x, const int y);
     void set_is_foilage(const int x, const int y);
@@ -711,7 +711,7 @@ public:
     void unset_is_descend_dungeon(const int x, const int y);
     void unset_is_descend_sewer(const int x, const int y);
     void unset_is_dirt(const int x, const int y);
-    void unset_is_dry_fungus(const int x, const int y);
+    void unset_is_dry_grass(const int x, const int y);
     void unset_is_enchantstone(const int x, const int y);
     void unset_is_skillstone(const int x, const int y);
     void unset_is_foilage(const int x, const int y);

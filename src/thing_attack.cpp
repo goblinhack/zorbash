@@ -250,7 +250,7 @@ _
         it->is_rock() ||
         it->is_door() ||
         it->is_bridge() ||
-        it->is_dry_fungus() ||
+        it->is_dry_grass() ||
         it->is_treasure() ||
         it->is_enchantstone() ||
         it->is_skillstone() ||

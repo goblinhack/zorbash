@@ -126,7 +126,7 @@ public:
     uint64_t i_set_is_deep_water:1             {};
     uint64_t i_set_is_shallow_water:1          {};
     uint64_t i_set_is_dirt:1                   {};
-    uint64_t i_set_is_dry_fungus:1             {};
+    uint64_t i_set_is_dry_grass:1             {};
     uint64_t i_set_is_enchantstone:1           {};
     uint64_t i_set_is_skillstone:1             {};
     uint64_t i_set_is_foilage:1                {};
@@ -700,7 +700,7 @@ public:
     int is_dirt(void) const;
     int is_door(void) const;
     int is_droppable(void) const;
-    int is_dry_fungus(void) const;
+    int is_dry_grass(void) const;
     int is_enchantable(void) const;
     int is_enchantstone(void) const;
     int is_ethereal_minion_generator(void) const;
@@ -1218,7 +1218,7 @@ public:
     void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
     void fall(float fall_height, timestamp_t ms);
     void fire_tick();
-    void fungus_tick();
+    void grass_tick();
     void gc(void);
     void get_light_strength_including_torch_effect(int &light_strength);
     void get_tiles(void);

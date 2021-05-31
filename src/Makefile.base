@@ -2,7 +2,7 @@
 NAME=zorbash-game
 OBJDIR=.o
 
-GAME_OBJECTS=				                \
+GAME_OBJECTS=				    \
     $(OBJDIR)/ascii.o                       \
     $(OBJDIR)/ascii_box.o                   \
     $(OBJDIR)/audio.o                       \
@@ -197,7 +197,7 @@ GAME_OBJECTS=				                \
     $(OBJDIR)/thing_fini.o                  \
     $(OBJDIR)/thing_fire.o                  \
     $(OBJDIR)/thing_fire_at.o               \
-    $(OBJDIR)/thing_fungus.o                \
+    $(OBJDIR)/thing_grass.o                \
     $(OBJDIR)/thing_gc.o                    \
     $(OBJDIR)/thing_health.o                \
     $(OBJDIR)/thing_hide.o                  \

@@ -145,7 +145,7 @@ int Thing::is_described_when_hovering_over(void) const                  {_ retur
 int Thing::is_dirt(void) const                                          {_ return (tp()->is_dirt()); }
 int Thing::is_door(void) const                                          {_ return (tp()->is_door()); }
 int Thing::is_droppable(void) const                                     {_ return (tp()->is_droppable()); }
-int Thing::is_dry_fungus(void) const                                    {_ return (tp()->is_dry_fungus()); }
+int Thing::is_dry_grass(void) const                                    {_ return (tp()->is_dry_grass()); }
 int Thing::is_enchantable(void) const                                   {_ return (tp()->is_enchantable()); }
 int Thing::is_enchantstone(void) const                                  {_ return (tp()->is_enchantstone()); }
 int Thing::is_ethereal(void) const                                      {_ return (tp()->is_ethereal()); }

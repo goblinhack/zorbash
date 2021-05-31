@@ -262,8 +262,8 @@ void Dungeon::make_dungeon (void)
     LOG("DUNGEON: Add spiderwebs");
     add_spiderweb();
 
-    LOG("DUNGEON: Generate fungus");
-    dry_fungus_gen(10, // fill prob
+    LOG("DUNGEON: Generate grass");
+    dry_grass_gen(10, // fill prob
                   10, // R1
                   5,  // R2
                   4   /* generations */);
@@ -607,7 +607,7 @@ bool Dungeon::is_dirt_no_check (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_dry_fungus (const int x, const int y)
+bool Dungeon::is_dry_grass (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -617,7 +617,7 @@ bool Dungeon::is_dry_fungus (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_dry_fungus) {
+        if (v.is_dry_grass) {
             return true;
         }
     }
@@ -3706,7 +3706,7 @@ void Dungeon::add_remaining (void)
             putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
 
             if (random_range(0, 100) < 20) {
-                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_FUNGUS);
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_GRASS);
             }
 
             if (random_range(0, 100) < 20) {
@@ -3985,7 +3985,7 @@ void Dungeon::dirt_gen (uint8_t map_fill_prob,
     }
 }
 
-void Dungeon::dry_fungus_gen (uint8_t map_fill_prob,
+void Dungeon::dry_grass_gen (uint8_t map_fill_prob,
                              uint8_t map_r1,
                              uint8_t map_r2,
                              uint8_t map_generations)
@@ -4057,7 +4057,7 @@ void Dungeon::dry_fungus_gen (uint8_t map_fill_prob,
                     }
                 }
 
-                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_FUNGUS);
+                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_GRASS);
             }
 next:
             continue;

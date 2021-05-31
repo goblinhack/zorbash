@@ -264,7 +264,7 @@ PyObject *thing_is_soft_body(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_foilage(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spiderweb(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_very_small_shadow_caster(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_dry_fungus(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_dry_grass(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_barrel(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_burnable(PyObject *obj, PyObject *args, PyObject *keywds);

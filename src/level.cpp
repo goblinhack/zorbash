@@ -734,38 +734,38 @@ void Level::unset_is_dirt (const int x, const int y)
     decr(_is_dirt, x, y, (uint8_t)1);
 }
 
-uint8_t Level::is_dry_fungus (const point &p)
+uint8_t Level::is_dry_grass (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
-    return (get(_is_dry_fungus, p.x, p.y));
+    return (get(_is_dry_grass, p.x, p.y));
 }
 
-uint8_t Level::is_dry_fungus (const int x, const int y)
+uint8_t Level::is_dry_grass (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (get(_is_dry_fungus, x, y));
+    return (get(_is_dry_grass, x, y));
 }
 
-void Level::set_is_dry_fungus (const int x, const int y)
+void Level::set_is_dry_grass (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
     }
     map_changed = true;
-    incr(_is_dry_fungus, x, y, (uint8_t)1);
+    incr(_is_dry_grass, x, y, (uint8_t)1);
 }
 
-void Level::unset_is_dry_fungus (const int x, const int y)
+void Level::unset_is_dry_grass (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
     }
     map_changed = true;
-    decr(_is_dry_fungus, x, y, (uint8_t)1);
+    decr(_is_dry_grass, x, y, (uint8_t)1);
 }
 
 uint8_t Level::is_enchantstone (const point &p)

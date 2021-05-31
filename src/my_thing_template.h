@@ -311,7 +311,7 @@ private:
     int _is_foilage {};
     int _is_spiderweb {};
     int _gfx_very_small_shadow_caster {};
-    int _is_dry_fungus {};
+    int _is_dry_grass {};
     int _is_bridge {};
     int _is_barrel {};
     int _is_burnable {};
@@ -783,7 +783,7 @@ public:
     int is_foilage(void) const;
     int is_spiderweb(void) const;
     int gfx_very_small_shadow_caster(void) const;
-    int is_dry_fungus(void) const;
+    int is_dry_grass(void) const;
     int is_rrr9(void) const;
     int is_bridge(void) const;
     int loves_spiderwebs(void) const;
@@ -1117,7 +1117,7 @@ public:
     void set_is_foilage(int);
     void set_is_spiderweb(int);
     void set_gfx_very_small_shadow_caster(int);
-    void set_is_dry_fungus(int);
+    void set_is_dry_grass(int);
     void set_is_rrr9(int);
     void set_is_bridge(int);
     void set_loves_spiderwebs(int);
@@ -1248,7 +1248,7 @@ class Tp* tp_random_blood_splatter(void);
 class Tp* tp_random_deco(void);
 class Tp* tp_random_descend_sewer(void);
 class Tp* tp_random_dirt(void);
-class Tp* tp_random_dry_fungus(void);
+class Tp* tp_random_dry_grass(void);
 class Tp* tp_random_enchantstone(void);
 class Tp* tp_random_skillstone(void);
 class Tp* tp_random_foilage(void);
