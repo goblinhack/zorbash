@@ -218,7 +218,7 @@ PyObject *level_is_soft_body_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_is_foilage_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spiderweb_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_very_small_shadow_caster_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_dry_fungus_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_dry_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bridge_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_barrel_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_burnable_at(PyObject *obj, PyObject *args, PyObject *keywds);

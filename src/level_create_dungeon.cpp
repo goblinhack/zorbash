@@ -391,8 +391,8 @@ _
         create_dungeon_game_mark_dungeon_tiles(dungeon);
         if (g_errored) { return false; }
 _
-        log("DUNGEON: Place fungus");
-        place_dry_fungus(dungeon);
+        log("DUNGEON: Place grass");
+        place_dry_grass(dungeon);
         if (g_errored) { return false; }
 _
         log("DUNGEON: Place foilage");
@@ -1421,12 +1421,12 @@ void Level::place_random_treasure (Dungeonp d)
     }
 }
 
-void Level::place_dry_fungus (Dungeonp d)
+void Level::place_dry_grass (Dungeonp d)
 {_
     for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
         for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-            if (!d->is_anything_at(x, y) || d->is_dry_fungus(x, y)) {
-                auto tp = tp_random_dry_fungus();
+            if (!d->is_anything_at(x, y) || d->is_dry_grass(x, y)) {
+                auto tp = tp_random_dry_grass();
                 if (!tp) {
                     return;
                 }

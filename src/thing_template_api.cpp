@@ -344,7 +344,7 @@ int Tp::is_soft_body(void) const                                     { return _i
 int Tp::is_foilage(void) const                                       { return _is_foilage; }
 int Tp::is_spiderweb(void) const                                     { return _is_spiderweb; }
 int Tp::gfx_very_small_shadow_caster(void) const                     { return _gfx_very_small_shadow_caster; }
-int Tp::is_dry_fungus(void) const                                    { return _is_dry_fungus; }
+int Tp::is_dry_grass(void) const                                    { return _is_dry_grass; }
 int Tp::is_bridge(void) const                                        { return _is_bridge; }
 int Tp::is_barrel(void) const                                        { return _is_barrel; }
 int Tp::is_burnable(void) const                                      { return _is_burnable; }
@@ -532,7 +532,7 @@ void Tp::set_is_described_when_hovering_over(int v)                  { _is_descr
 void Tp::set_is_dirt(int v)                                          { _is_dirt = v; }
 void Tp::set_is_door(int v)                                          { _is_door = v; }
 void Tp::set_is_droppable(int v)                                     { _is_droppable = v; }
-void Tp::set_is_dry_fungus(int v)                                    { _is_dry_fungus = v; }
+void Tp::set_is_dry_grass(int v)                                    { _is_dry_grass = v; }
 void Tp::set_is_enchantable(int v)                                   { _is_enchantable = v; }
 void Tp::set_is_enchantstone(int v)                                  { _is_enchantstone = v; }
 void Tp::set_is_ethereal(int v)                                      { _is_ethereal = v; }

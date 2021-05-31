@@ -499,8 +499,8 @@ class Tp:
     def set_gfx_very_small_shadow_caster(self, value):
         zx.tp_set_gfx_very_small_shadow_caster(self, value)
 
-    def set_is_dry_fungus(self, value):
-        zx.tp_set_is_dry_fungus(self, value)
+    def set_is_dry_grass(self, value):
+        zx.tp_set_is_dry_grass(self, value)
 
     def set_is_bridge(self, value):
         zx.tp_set_is_bridge(self, value)

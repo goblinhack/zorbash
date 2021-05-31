@@ -45,8 +45,8 @@ void Thing::level_push (void)
                                                    level->set_is_bridge(mx, my); }
     if (is_dirt())                               { i_set_is_dirt = true;
                                                    level->set_is_dirt(mx, my); }
-    if (is_dry_fungus())                         { i_set_is_dry_fungus = true;
-                                                   level->set_is_dry_fungus(mx, my); }
+    if (is_dry_grass())                         { i_set_is_dry_grass = true;
+                                                   level->set_is_dry_grass(mx, my); }
     if (is_enchantstone())                       { i_set_is_enchantstone = true;
                                                    level->set_is_enchantstone(mx, my); }
     if (is_skillstone())                         { i_set_is_skillstone = true;

@@ -14,7 +14,7 @@ import zx
 # DOOR_LEFT                     <
 # DOOR_RIGHT                    >
 # DOOR_UP                       ^
-# DRY FUNGUS                    '
+# DRY GRASS                    '
 # ENTRANCE                      S
 # EXIT                          E
 # ENCHANTSTONE                  *

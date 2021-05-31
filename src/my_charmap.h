@@ -29,7 +29,7 @@ public:
         DOOR_LEFT        =            '<',
         DOOR_RIGHT       =            '>',
         DOOR_UP          =            '^',
-        DRY_FUNGUS       =            '\'',
+        DRY_GRASS       =            '\'',
         ENTRANCE         =            'S',
         EXIT             =            'E',
         FLOOR            =            '.',
@@ -66,7 +66,7 @@ public:
     bool                      is_bridge                       {false};
     bool                      is_deep_water                   {false};
     bool                      is_dirt                         {false};
-    bool                      is_dry_fungus                   {false};
+    bool                      is_dry_grass                   {false};
     bool                      is_enchantstone                 {false};
     bool                      is_skillstone                   {false};
     bool                      is_foilage                      {false};

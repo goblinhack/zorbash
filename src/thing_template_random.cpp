@@ -20,7 +20,7 @@ static Tpidmap tp_bones;
 static Tpidmap tp_blood_splatter;
 static Tpidmap tp_deco;
 static Tpidmap tp_dirt;
-static Tpidmap tp_dry_fungus;
+static Tpidmap tp_dry_grass;
 static Tpidmap tp_enchantstone;
 static Tpidmap tp_skillstone;
 static Tpidmap tp_foilage;
@@ -69,7 +69,7 @@ void tp_random_init (void)
         if (tp->is_descend_sewer())             { tp_descend_sewer.push_back(tp); }
         if (tp->is_dirt())                      { tp_dirt.push_back(tp); }
         if (tp->is_door())                      { tp_door.push_back(tp); }
-        if (tp->is_dry_fungus())                { tp_dry_fungus.push_back(tp); }
+        if (tp->is_dry_grass())                { tp_dry_grass.push_back(tp); }
         if (tp->is_enchantstone())              { tp_enchantstone.push_back(tp); }
         if (tp->is_skillstone())                { tp_skillstone.push_back(tp); }
         if (tp->is_ethereal_minion_generator()) { tp_ethereal_generator.push_back(tp); }
@@ -359,13 +359,13 @@ Tpp tp_random_dirt (void)
     return tp_get_with_no_rarity_filter(tp_dirt);
 }
 
-Tpp tp_random_dry_fungus (void)
+Tpp tp_random_dry_grass (void)
 {_
-    if (unlikely(!tp_dry_fungus.size())) {
-        ERR("No dry_funguss found");
+    if (unlikely(!tp_dry_grass.size())) {
+        ERR("No dry_grasss found");
         return (nullptr);
     }
-    return tp_get_with_no_rarity_filter(tp_dry_fungus);
+    return tp_get_with_no_rarity_filter(tp_dry_grass);
 }
 
 Tpp tp_random_enchantstone (void)

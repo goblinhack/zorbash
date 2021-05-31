@@ -238,7 +238,7 @@ bool Thing::matches (const std::string& what) const
     if (is_foilage() &&                                       (what == "is_foilage"))                                         { return true; }
     if (is_spiderweb() &&                                     (what == "is_spiderweb"))                                         { return true; }
     if (gfx_very_small_shadow_caster() &&                     (what == "gfx_very_small_shadow_caster"))                                         { return true; }
-    if (is_dry_fungus() &&                                    (what == "is_dry_fungus"))                                         { return true; }
+    if (is_dry_grass() &&                                    (what == "is_dry_grass"))                                         { return true; }
     if (is_rrr9() &&                                          (what == "is_rrr9"))                                          { return true; }
     if (is_bridge() &&                                        (what == "is_bridge"))                                         { return true; }
     if (is_barrel() &&                                        (what == "is_barrel"))                                         { return true; }
@@ -502,7 +502,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_foilage")                                       { return &Thing::is_foilage; }
     if (what == "is_spiderweb")                                     { return &Thing::is_spiderweb; }
     if (what == "gfx_very_small_shadow_caster")                     { return &Thing::gfx_very_small_shadow_caster; }
-    if (what == "is_dry_fungus")                                    { return &Thing::is_dry_fungus; }
+    if (what == "is_dry_grass")                                    { return &Thing::is_dry_grass; }
     if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }
     if (what == "is_bridge")                                        { return &Thing::is_bridge; }
     if (what == "is_barrel")                                        { return &Thing::is_barrel; }

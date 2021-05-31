@@ -1540,7 +1540,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_foilage)
     TP_SET_DECL(is_spiderweb)
     TP_SET_DECL(gfx_very_small_shadow_caster)
-    TP_SET_DECL(is_dry_fungus)
+    TP_SET_DECL(is_dry_grass)
     TP_SET_DECL(is_bridge)
     TP_SET_DECL(is_barrel)
     TP_SET_DECL(is_burnable)
@@ -1738,7 +1738,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_dirt_at",                                       (PyCFunction)level_is_dirt_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_door_at",                                       (PyCFunction)level_is_door_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_droppable_at",                                  (PyCFunction)level_is_droppable_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_dry_fungus_at",                                  (PyCFunction)level_is_dry_fungus_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_dry_grass_at",                                  (PyCFunction)level_is_dry_grass_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_ethereal_at",                                   (PyCFunction)level_is_ethereal_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_ethereal_minion_generator_at",                  (PyCFunction)level_is_ethereal_minion_generator_at,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_explosion_at",                                  (PyCFunction)level_is_explosion_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2037,7 +2037,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_dirt",                                          (PyCFunction)thing_is_dirt,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_door",                                          (PyCFunction)thing_is_door,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_droppable",                                     (PyCFunction)thing_is_droppable,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_dry_fungus",                                    (PyCFunction)thing_is_dry_fungus,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_dry_grass",                                    (PyCFunction)thing_is_dry_grass,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_enchantable",                                   (PyCFunction)thing_is_enchantable,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_enchantstone",                                  (PyCFunction)thing_is_enchantstone,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_ethereal",                                      (PyCFunction)thing_is_ethereal,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
