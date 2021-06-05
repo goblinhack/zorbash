@@ -447,6 +447,7 @@ static void usage (void)
     CON("zorbash, options:");
     CON(" ");
     CON(" --quick-start");
+    CON(" --player-name 'disco bob'");
     CON(" --debug                     // basic debug");
     CON(" --debug2                    // as above but includes log indentation and more detailed debugs");
     CON(" --debug3                    // as above but show the entire level");
@@ -474,14 +475,31 @@ static void parse_args (int32_t argc, char *argv[])
     }
 
     for (i = 1; i < argc; i++) {
-        //
-        // Bad argument.
-        //
         if (!strcasecmp(argv[i], "--quick-start") ||
-            !strcasecmp(argv[i], "-quick-start")) {
+            !strcasecmp(argv[i], "-quick-start") ||
+            !strcasecmp(argv[i], "--quickstart") ||
+            !strcasecmp(argv[i], "-quickstart")) {
             g_opt_new_game = true;
             continue;
         }
+
+        if (!strcasecmp(argv[i], "--seed") ||
+            !strcasecmp(argv[i], "-seed") ||
+            !strcasecmp(argv[i], "-s")) {
+            g_opt_seed_name = argv[i + 1];
+            i++;
+            continue;
+        }
+
+        if (!strcasecmp(argv[i], "--player-name") ||
+            !strcasecmp(argv[i], "-player-name") ||
+            !strcasecmp(argv[i], "--playername") ||
+            !strcasecmp(argv[i], "-playername")) {
+            g_opt_player_name = argv[i + 1];
+            i++;
+            continue;
+        }
+
 
         if (!strcasecmp(argv[i], "--debug") ||
             !strcasecmp(argv[i], "-debug")) {
@@ -520,21 +538,6 @@ static void parse_args (int32_t argc, char *argv[])
             g_opt_debug3 = true;
             g_opt_debug4 = true;
             g_opt_debug5 = true;
-            continue;
-        }
-
-        if (!strcasecmp(argv[i], "--seed") ||
-            !strcasecmp(argv[i], "-seed") ||
-            !strcasecmp(argv[i], "-s")) {
-            g_opt_seed_name = argv[i + 1];
-            i++;
-            continue;
-        }
-
-        if (!strcasecmp(argv[i], "--player-name") ||
-            !strcasecmp(argv[i], "-player-name")) {
-            g_opt_player_name = argv[i + 1];
-            i++;
             continue;
         }
 
