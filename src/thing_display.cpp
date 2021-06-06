@@ -25,6 +25,10 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         return;
     }
 
+    if (unlikely(g_opt_debug3)) {
+        return;
+    }
+
     point shadow_bl(blit_tl.x, blit_br.y);
     point shadow_br(blit_br.x, blit_br.y);
     point shadow_tl = shadow_bl;
@@ -130,6 +134,10 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                       const point &blit_br)
 {_
     if (g_render_black_and_white) {
+        return;
+    }
+
+    if (unlikely(g_opt_debug3)) {
         return;
     }
 
