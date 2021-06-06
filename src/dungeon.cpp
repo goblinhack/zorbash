@@ -269,13 +269,13 @@ void Dungeon::make_dungeon (void)
                   4   /* generations */);
 
     LOG("DUNGEON: Generate foilage");
-    foilage_gen(5, // fill prob
+    foilage_gen(25, // fill prob
                 10, // R1
                 5,  // R2
                 4   /* generations */);
 
     LOG("DUNGEON: Generate spiderweb");
-    spiderweb_gen(2,  // fill prob
+    spiderweb_gen(1,  // fill prob
                   10, // R1
                   5,  // R2
                   4   /* generations */);

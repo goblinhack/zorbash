@@ -57,7 +57,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_bounce_on_move(True)
     mytp.set_gfx_show_outlined(True)
-    mytp.set_gfx_small_shadow_caster(True)
+    mytp.set_gfx_short_shadow_caster(True)
     mytp.set_health_hunger_pct(5)
     mytp.set_health_initial_dice("100")
     mytp.set_health_starving_pct(5)

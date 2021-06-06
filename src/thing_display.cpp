@@ -73,16 +73,21 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         dy = std::min(m, dy);
     }
 
-    if (unlikely(tpp->gfx_small_shadow_caster())) {
+    if (unlikely(tpp->gfx_very_short_shadow_caster())) {
         shadow_tl.x += (float)TILE_WIDTH * dx * 4;
         shadow_tr.x += (float)TILE_WIDTH * dx * 4;
         shadow_tl.y += (float)TILE_WIDTH * dy * 4;
         shadow_tr.y += (float)TILE_WIDTH * dy * 4;
-    } else {
+    } else if (unlikely(tpp->gfx_short_shadow_caster())) {
         shadow_tl.x += (float)TILE_WIDTH * dx * 10;
         shadow_tr.x += (float)TILE_WIDTH * dx * 10;
         shadow_tl.y += (float)TILE_WIDTH * dy * 10;
         shadow_tr.y += (float)TILE_WIDTH * dy * 10;
+    } else { /* long shadow */
+        shadow_tl.x += (float)TILE_WIDTH * dx * 20;
+        shadow_tr.x += (float)TILE_WIDTH * dx * 20;
+        shadow_tl.y += (float)TILE_WIDTH * dy * 20;
+        shadow_tr.y += (float)TILE_WIDTH * dy * 20;
     }
 
     if (shadow_tl.x > shadow_tr.x) {
@@ -111,7 +116,10 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     shadow_br.x -= bh;
 
     color c = BLACK;
-    c.a = 150;
+    if (likely(!tpp->gfx_solid_shadow())) {
+        c.a = 150;
+    }
+
     glcolor(c);
     tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
     glcolor(WHITE);
@@ -132,7 +140,9 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     float dy = game->config.one_pixel_width;
 
     color c = BLACK;
-    c.a = 100;
+    if (likely(!tpp->gfx_solid_shadow())) {
+        c.a = 150;
+    }
 
     dx *= -4;
     dy *= -4;
@@ -692,7 +702,9 @@ void Thing::blit_internal (int fbo,
     }
 
     if (!g_render_black_and_white) {
-        if (unlikely(tpp->gfx_small_shadow_caster())) {
+        if (unlikely(tpp->gfx_very_short_shadow_caster() ||
+                     tpp->gfx_short_shadow_caster() ||
+                     tpp->gfx_long_shadow_caster())) {
             if (auto submerged = blit_begin_submerged()) {
                 blit_shadow(tpp, tile, blit_tl, blit_br);
                 blit_end_submerged(submerged);

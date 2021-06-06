@@ -10,7 +10,7 @@ def tp_init(name, text_name):
     mytp.set_bag_width(8)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_show_outlined(False)
-    mytp.set_gfx_small_shadow_caster(True)
+    mytp.set_gfx_short_shadow_caster(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_bag(True)
     mytp.set_is_burnable(True)

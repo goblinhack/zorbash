@@ -112,7 +112,7 @@ private:
     int _gfx_oversized_but_sitting_on_the_ground {};
     int _gfx_show_outlined {};
     int _gfx_shown_in_bg {};
-    int _gfx_small_shadow_caster {};
+    int _gfx_short_shadow_caster {};
     int _gfx_weapon_carry_anim {};
     int _health_hunger_pct {};
     int _health_starving_pct {};
@@ -296,8 +296,8 @@ private:
     int _is_rrr72 {};
     int _is_rrr73 {};
     int _is_rrr74 {};
-    int _is_rrr75 {};
-    int _is_rrr76 {};
+    int _gfx_long_shadow_caster {};
+    int _gfx_solid_shadow {};
     int _is_sticky {};
     int _is_sword {};
     int _is_skillstone {};
@@ -310,7 +310,7 @@ private:
     int _is_soft_body {};
     int _is_foilage {};
     int _is_spiderweb {};
-    int _gfx_very_small_shadow_caster {};
+    int _gfx_very_short_shadow_caster {};
     int _is_dry_grass {};
     int _is_bridge {};
     int _is_barrel {};
@@ -581,7 +581,7 @@ public:
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;
     int gfx_shown_in_bg(void) const;
-    int gfx_small_shadow_caster(void) const;
+    int gfx_short_shadow_caster(void) const;
     int gfx_water(void) const;
     int gfx_weapon_carry_anim(void) const;
     int hates_acid(void) const;
@@ -767,8 +767,8 @@ public:
     int is_rrr72(void) const;
     int is_rrr73(void) const;
     int is_rrr74(void) const;
-    int is_rrr75(void) const;
-    int is_rrr76(void) const;
+    int gfx_long_shadow_caster(void) const;
+    int gfx_solid_shadow(void) const;
     int is_sticky(void) const;
     int is_sword(void) const;
     int is_skillstone(void) const;
@@ -782,7 +782,7 @@ public:
     int is_soft_body(void) const;
     int is_foilage(void) const;
     int is_spiderweb(void) const;
-    int gfx_very_small_shadow_caster(void) const;
+    int gfx_very_short_shadow_caster(void) const;
     int is_dry_grass(void) const;
     int is_rrr9(void) const;
     int is_bridge(void) const;
@@ -912,7 +912,7 @@ public:
     void set_gfx_oversized_but_sitting_on_the_ground(int);
     void set_gfx_show_outlined(int);
     void set_gfx_shown_in_bg(int);
-    void set_gfx_small_shadow_caster(int);
+    void set_gfx_short_shadow_caster(int);
     void set_gfx_water(int);
     void set_gfx_weapon_carry_anim(int);
     void set_gold_value_dice(const std::string &);
@@ -1101,8 +1101,8 @@ public:
     void set_is_rrr72(int);
     void set_is_rrr73(int);
     void set_is_rrr74(int);
-    void set_is_rrr75(int);
-    void set_is_rrr76(int);
+    void set_gfx_long_shadow_caster(int);
+    void set_gfx_solid_shadow(int);
     void set_is_sticky(int);
     void set_is_sword(int);
     void set_is_skillstone(int);
@@ -1116,7 +1116,7 @@ public:
     void set_is_soft_body(int);
     void set_is_foilage(int);
     void set_is_spiderweb(int);
-    void set_gfx_very_small_shadow_caster(int);
+    void set_gfx_very_short_shadow_caster(int);
     void set_is_dry_grass(int);
     void set_is_rrr9(int);
     void set_is_bridge(int);

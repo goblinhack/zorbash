@@ -5,7 +5,7 @@ import tp
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_gfx_shown_in_bg(True)
-    mytp.set_gfx_small_shadow_caster(True)
+    mytp.set_gfx_short_shadow_caster(True)
     mytp.set_is_able_to_fall(False)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)

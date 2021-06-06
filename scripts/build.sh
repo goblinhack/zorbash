@@ -447,6 +447,8 @@ fi
 C_FLAGS="$C_FLAGS `$Python_CONFIG --cflags | \
            tr ' ' '\n' | \
            grep -v specs                | \
+           grep -v flto                 | \
+           grep -v fat                  | \
            grep -v debug-prefix         | \
            grep -v O3                   | \
            grep -v O2                   | \
@@ -576,11 +578,6 @@ else
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O3 # AUTOGEN" > .Makefile
 fi
 
-echo "    " >> .Makefile
-echo "CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++1z -stdlib=libc++ # AUTOGEN" >> .Makefile
-echo "    " >> .Makefile
-echo "LDFLAGS=$LDFLAGS" >> .Makefile
-
 if [[ $OPT_DEV2 != "" ]]; then
     GCC_STACK_CHECK="-fstack-check -fstack-protector-all -D_FORTIFY_SOURCE=2"
     GCC_STACK_CHECK="-fstack-check -fstack-protector-all"
@@ -588,27 +585,24 @@ else
     GCC_STACK_CHECK=
 fi
 
-# c++2a for bitfield initialization in classes
+echo "    " >> .Makefile
+echo "CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++2a -ffast-math # AUTOGEN" >> .Makefile
 echo "GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a -ffast-math $GCC_STACK_CHECK # AUTOGEN" >> .Makefile
-# std++17 is not yet supported on my mac, henze c++1z
+echo "    " >> .Makefile
+echo "LDFLAGS=$LDFLAGS" >> .Makefile
+
 `g++ --version >/dev/null 2>/dev/null`
 if [ $? -eq 0 ]
 then
-    echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
     echo "COMPILER_WARNINGS=\$(GCC_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
-    echo "# CC=clang++ # AUTOGEN" >> .Makefile
     echo "CC=g++ # AUTOGEN" >> .Makefile
-    # -mp- is the mac ports version
-    #echo "CC=/opt/local/bin/g++-mp-6 # AUTOGEN" >> .Makefile
-else
-    `clang++ --version >/dev/null 2>/dev/null`
-    if [ $? -eq 0 ]
-    then
-        echo "COMPILER_WARNINGS=\$(GCC_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
-        echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
-        echo "CC=clang++ # AUTOGEN" >> .Makefile
-        echo "# CC=g++ # AUTOGEN" >> .Makefile
-    fi
+fi
+
+`clang++ --version >/dev/null 2>/dev/null`
+if [ $? -eq 0 ]
+then
+    echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+    echo "CC=clang++ # AUTOGEN" >> .Makefile
 fi
 
 case `uname` in
@@ -618,7 +612,6 @@ case `uname` in
         # To resolve WinMain, add these at the end again
         #
         LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /mingw64/lib/libSDL2main.a -L/mingw64/lib -lSDL2main -lSDL2"
-        # clang
     ;;
 esac
 

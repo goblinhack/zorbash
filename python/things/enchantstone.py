@@ -26,7 +26,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_collision_hit_priority(5)
     mytp.set_collision_radius(0.40)
     mytp.set_gfx_show_outlined(False)
-    mytp.set_gfx_small_shadow_caster(True)
+    mytp.set_gfx_short_shadow_caster(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_collectable(True)
     mytp.set_is_described_when_hovering_over(True)
