@@ -230,19 +230,19 @@ void Dungeon::make_dungeon (void)
     // Add a cave as the under-dungeon
     //
     LOG("DUNGEON: Generate water");
-    water_gen(20, // fill prob
+    water_gen(2000, // fill prob
               10,  // R1
               5,  // R2
               4   /* generations */);
 
     LOG("DUNGEON: Generate caves");
-    cave_gen(20, // fill prob
+    cave_gen(2000, // fill prob
              10,  // R1
              5,  // R2
              3   /* generations */);
 
     LOG("DUNGEON: Generate dirt");
-    dirt_gen(20, // fill prob
+    dirt_gen(2000, // fill prob
              10,  // R1
              5,  // R2
              4   /* generations */);
@@ -263,13 +263,13 @@ void Dungeon::make_dungeon (void)
     add_spiderweb();
 
     LOG("DUNGEON: Generate grass");
-    dry_grass_gen(10, // fill prob
+    dry_grass_gen(50, // fill prob
                   10, // R1
                   5,  // R2
                   4   /* generations */);
 
     LOG("DUNGEON: Generate foilage");
-    foilage_gen(5, // fill prob
+    foilage_gen(20, // fill prob
                 10, // R1
                 5,  // R2
                 4   /* generations */);
@@ -3844,10 +3844,10 @@ next:
 //
 // Generate a cave!
 //
-void Dungeon::cave_gen (uint8_t map_fill_prob,
-                        uint8_t map_r1,
-                        uint8_t map_r2,
-                        uint8_t map_generations)
+void Dungeon::cave_gen (unsigned int map_fill_prob,
+                        int map_r1,
+                        int map_r2,
+                        int map_generations)
 
 {
     map_save = {};
@@ -3855,10 +3855,6 @@ void Dungeon::cave_gen (uint8_t map_fill_prob,
 
     const int16_t maze_w = MAP_WIDTH - 2;
     const int16_t maze_h = MAP_HEIGHT - 2;
-
-    if (map_fill_prob) {
-        MAP_FILL_PROB             = map_fill_prob;
-    }
 
     if (map_r1) {
         MAP_R1                    = map_r1;
@@ -3878,7 +3874,7 @@ void Dungeon::cave_gen (uint8_t map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 100) < MAP_FILL_PROB) {
+            if ((myrand() % 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -3928,10 +3924,10 @@ void Dungeon::cave_gen (uint8_t map_fill_prob,
     }
 }
 
-void Dungeon::dirt_gen (uint8_t map_fill_prob,
-                        uint8_t map_r1,
-                        uint8_t map_r2,
-                        uint8_t map_generations)
+void Dungeon::dirt_gen (unsigned int map_fill_prob,
+                        int map_r1,
+                        int map_r2,
+                        int map_generations)
 
 {
     map_save = {};
@@ -3939,10 +3935,6 @@ void Dungeon::dirt_gen (uint8_t map_fill_prob,
 
     const int16_t maze_w = MAP_WIDTH - 2;
     const int16_t maze_h = MAP_HEIGHT - 2;
-
-    if (map_fill_prob) {
-        MAP_FILL_PROB             = map_fill_prob;
-    }
 
     if (map_r1) {
         MAP_R1                    = map_r1;
@@ -3962,7 +3954,7 @@ void Dungeon::dirt_gen (uint8_t map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 100) < MAP_FILL_PROB) {
+            if ((myrand() % 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -3985,10 +3977,10 @@ void Dungeon::dirt_gen (uint8_t map_fill_prob,
     }
 }
 
-void Dungeon::dry_grass_gen (uint8_t map_fill_prob,
-                             uint8_t map_r1,
-                             uint8_t map_r2,
-                             uint8_t map_generations)
+void Dungeon::dry_grass_gen (unsigned int map_fill_prob,
+                             int map_r1,
+                             int map_r2,
+                             int map_generations)
 
 {
     map_save = {};
@@ -3996,10 +3988,6 @@ void Dungeon::dry_grass_gen (uint8_t map_fill_prob,
 
     const int16_t maze_w = MAP_WIDTH - 2;
     const int16_t maze_h = MAP_HEIGHT - 2;
-
-    if (map_fill_prob) {
-        MAP_FILL_PROB             = map_fill_prob;
-    }
 
     if (map_r1) {
         MAP_R1                    = map_r1;
@@ -4019,7 +4007,7 @@ void Dungeon::dry_grass_gen (uint8_t map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 100) < MAP_FILL_PROB) {
+            if ((myrand() % 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -4065,10 +4053,10 @@ next:
     }
 }
 
-void Dungeon::foilage_gen (uint8_t map_fill_prob,
-                           uint8_t map_r1,
-                           uint8_t map_r2,
-                           uint8_t map_generations)
+void Dungeon::foilage_gen (unsigned int map_fill_prob,
+                           int map_r1,
+                           int map_r2,
+                           int map_generations)
 
 {
     map_save = {};
@@ -4077,9 +4065,6 @@ void Dungeon::foilage_gen (uint8_t map_fill_prob,
     const int16_t maze_w = MAP_WIDTH - 2;
     const int16_t maze_h = MAP_HEIGHT - 2;
 
-    if (map_fill_prob) {
-        MAP_FILL_PROB             = map_fill_prob;
-    }
 
     if (map_r1) {
         MAP_R1                    = map_r1;
@@ -4099,7 +4084,7 @@ void Dungeon::foilage_gen (uint8_t map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 100) < MAP_FILL_PROB) {
+            if ((myrand() % 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -4142,10 +4127,10 @@ next:
     }
 }
 
-void Dungeon::spiderweb_gen (uint8_t map_fill_prob,
-                             uint8_t map_r1,
-                             uint8_t map_r2,
-                             uint8_t map_generations)
+void Dungeon::spiderweb_gen (unsigned int map_fill_prob,
+                             int map_r1,
+                             int map_r2,
+                             int map_generations)
 
 {
     map_save = {};
@@ -4154,9 +4139,6 @@ void Dungeon::spiderweb_gen (uint8_t map_fill_prob,
     const int16_t maze_w = MAP_WIDTH - 2;
     const int16_t maze_h = MAP_HEIGHT - 2;
 
-    if (map_fill_prob) {
-        MAP_FILL_PROB             = map_fill_prob;
-    }
 
     if (map_r1) {
         MAP_R1                    = map_r1;
@@ -4176,7 +4158,7 @@ void Dungeon::spiderweb_gen (uint8_t map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 100) < MAP_FILL_PROB) {
+            if ((myrand() % 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -4222,20 +4204,16 @@ next:
     }
 }
 
-void Dungeon::water_gen (uint8_t map_fill_prob,
-                         uint8_t map_r1,
-                         uint8_t map_r2,
-                         uint8_t map_generations)
+void Dungeon::water_gen (unsigned int map_fill_prob,
+                         int map_r1,
+                         int map_r2,
+                         int map_generations)
 {
     map_save = {};
     map_curr = {};
 
     const int16_t maze_w = MAP_WIDTH - 2;
     const int16_t maze_h = MAP_HEIGHT - 2;
-
-    if (map_fill_prob) {
-        MAP_FILL_PROB             = map_fill_prob;
-    }
 
     if (map_r1) {
         MAP_R1                    = map_r1;
@@ -4255,7 +4233,7 @@ void Dungeon::water_gen (uint8_t map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 100) < MAP_FILL_PROB) {
+            if ((myrand() % 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }

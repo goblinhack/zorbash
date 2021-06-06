@@ -191,30 +191,30 @@ public:
     void cave_generation(void);
     void water_fixup_shallows(void);
     void water_fixup(void);
-    void cave_gen(uint8_t map_fill_prob,
-                  uint8_t map_r1,
-                  uint8_t map_r2,
-                  uint8_t map_generations);
-    void dirt_gen(uint8_t map_fill_prob,
-                  uint8_t map_r1,
-                  uint8_t map_r2,
-                  uint8_t map_generations);
-    void dry_grass_gen(uint8_t map_fill_prob,
-                       uint8_t map_r1,
-                       uint8_t map_r2,
-                       uint8_t map_generations);
-    void foilage_gen(uint8_t map_fill_prob,
-                     uint8_t map_r1,
-                     uint8_t map_r2,
-                     uint8_t map_generations);
-    void spiderweb_gen(uint8_t map_fill_prob,
-                       uint8_t map_r1,
-                       uint8_t map_r2,
-                       uint8_t map_generations);
-    void water_gen(uint8_t map_fill_prob,
-                   uint8_t map_r1,
-                   uint8_t map_r2,
-                   uint8_t map_generations);
+    void cave_gen(unsigned int map_fill_prob,
+                  int map_r1,
+                  int map_r2,
+                  int map_generations);
+    void dirt_gen(unsigned int map_fill_prob,
+                  int map_r1,
+                  int map_r2,
+                  int map_generations);
+    void dry_grass_gen(unsigned int map_fill_prob,
+                       int map_r1,
+                       int map_r2,
+                       int map_generations);
+    void foilage_gen(unsigned int map_fill_prob,
+                     int map_r1,
+                     int map_r2,
+                     int map_generations);
+    void spiderweb_gen(unsigned int map_fill_prob,
+                       int map_r1,
+                       int map_r2,
+                       int map_generations);
+    void water_gen(unsigned int map_fill_prob,
+                   int map_r1,
+                   int map_r2,
+                   int map_generations);
 
     bool is_oob(const int x, const int y, const int z);
     bool is_oob(const int x, const int y);
