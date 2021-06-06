@@ -269,7 +269,7 @@ void Dungeon::make_dungeon (void)
                   4   /* generations */);
 
     LOG("DUNGEON: Generate foilage");
-    foilage_gen(25, // fill prob
+    foilage_gen(5, // fill prob
                 10, // R1
                 5,  // R2
                 4   /* generations */);
