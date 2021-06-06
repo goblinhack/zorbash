@@ -86,8 +86,8 @@ int Thing::gfx_on_fire_anim(void) const                                 {_ retur
 int Thing::gfx_oversized_but_sitting_on_the_ground(void) const          {_ return (tp()->gfx_oversized_but_sitting_on_the_ground()); }
 int Thing::gfx_show_outlined(void) const                                {_ return (tp()->gfx_show_outlined()); }
 int Thing::gfx_shown_in_bg(void) const                                  {_ return (tp()->gfx_shown_in_bg()); }
-int Thing::gfx_small_shadow_caster(void) const                          {_ return (tp()->gfx_small_shadow_caster()); }
-int Thing::gfx_very_small_shadow_caster(void) const                     {_ return (tp()->gfx_very_small_shadow_caster()); }
+int Thing::gfx_short_shadow_caster(void) const                          {_ return (tp()->gfx_short_shadow_caster()); }
+int Thing::gfx_very_short_shadow_caster(void) const                     {_ return (tp()->gfx_very_short_shadow_caster()); }
 int Thing::gfx_water(void) const                                        {_ return (tp()->gfx_water()); }
 int Thing::gfx_weapon_carry_anim(void) const                            {_ return (tp()->gfx_weapon_carry_anim()); }
 int Thing::hates_acid(void) const                                       {_ return (tp()->hates_acid()); }
@@ -281,8 +281,8 @@ int Thing::is_rrr71(void) const                                         {_ retur
 int Thing::is_rrr72(void) const                                         {_ return (tp()->is_rrr72()); }
 int Thing::is_rrr73(void) const                                         {_ return (tp()->is_rrr73()); }
 int Thing::is_rrr74(void) const                                         {_ return (tp()->is_rrr74()); }
-int Thing::is_rrr75(void) const                                         {_ return (tp()->is_rrr75()); }
-int Thing::is_rrr76(void) const                                         {_ return (tp()->is_rrr76()); }
+int Thing::gfx_long_shadow_caster(void) const                                         {_ return (tp()->gfx_long_shadow_caster()); }
+int Thing::gfx_solid_shadow(void) const                                         {_ return (tp()->gfx_solid_shadow()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
 int Thing::is_rrr9(void) const                                          {_ return (tp()->is_rrr9()); }
 int Thing::loves_spiderwebs(void) const                                         {_ return (tp()->loves_spiderwebs()); }

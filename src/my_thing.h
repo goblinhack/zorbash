@@ -568,8 +568,8 @@ public:
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_shown_in_bg(void) const;
     int gfx_show_outlined(void) const;
-    int gfx_small_shadow_caster(void) const;
-    int gfx_very_small_shadow_caster(void) const;
+    int gfx_short_shadow_caster(void) const;
+    int gfx_very_short_shadow_caster(void) const;
     int gfx_water(void) const;
     int gfx_weapon_carry_anim(void) const;
     int hates_acid(void) const;
@@ -838,8 +838,8 @@ public:
     int is_rrr72(void) const;
     int is_rrr73(void) const;
     int is_rrr74(void) const;
-    int is_rrr75(void) const;
-    int is_rrr76(void) const;
+    int gfx_long_shadow_caster(void) const;
+    int gfx_solid_shadow(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int loves_spiderwebs(void) const;

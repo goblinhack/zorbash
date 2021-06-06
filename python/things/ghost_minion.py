@@ -21,7 +21,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_glows(True)
     mytp.set_gfx_health_bar_shown(True)
-    mytp.set_gfx_small_shadow_caster(True)
+    mytp.set_gfx_short_shadow_caster(True)
     mytp.set_health_hunger_pct(95)
     mytp.set_health_initial_dice("1")
     mytp.set_is_able_to_change_levels(True)

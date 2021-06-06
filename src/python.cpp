@@ -1342,7 +1342,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(gfx_oversized_but_sitting_on_the_ground)
     TP_SET_DECL(gfx_show_outlined)
     TP_SET_DECL(gfx_shown_in_bg)
-    TP_SET_DECL(gfx_small_shadow_caster)
+    TP_SET_DECL(gfx_short_shadow_caster)
     TP_SET_DECL(gfx_weapon_carry_anim)
     TP_SET_DECL(gold_value_dice)
     TP_SET_DECL(health_hunger_pct)
@@ -1525,8 +1525,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr72)
     TP_SET_DECL(is_rrr73)
     TP_SET_DECL(is_rrr74)
-    TP_SET_DECL(is_rrr75)
-    TP_SET_DECL(is_rrr76)
+    TP_SET_DECL(gfx_long_shadow_caster)
+    TP_SET_DECL(gfx_solid_shadow)
     TP_SET_DECL(is_sticky)
     TP_SET_DECL(is_sword)
     TP_SET_DECL(is_skillstone)
@@ -1539,7 +1539,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_soft_body)
     TP_SET_DECL(is_foilage)
     TP_SET_DECL(is_spiderweb)
-    TP_SET_DECL(gfx_very_small_shadow_caster)
+    TP_SET_DECL(gfx_very_short_shadow_caster)
     TP_SET_DECL(is_dry_grass)
     TP_SET_DECL(is_bridge)
     TP_SET_DECL(is_barrel)
@@ -1826,7 +1826,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr34_at",                                      (PyCFunction)level_is_rrr34_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_enchant_level_at",                                 (PyCFunction)level_enchant_level_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_enchant_max_at",                                   (PyCFunction)level_enchant_max_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_gfx_very_small_shadow_caster_at",                  (PyCFunction)level_gfx_very_small_shadow_caster_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_gfx_very_short_shadow_caster_at",                  (PyCFunction)level_gfx_very_short_shadow_caster_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_bones_at",                                      (PyCFunction)level_is_bones_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_enchantable_at",                                (PyCFunction)level_is_enchantable_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_enchantstone_at",                               (PyCFunction)level_is_enchantstone_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1876,8 +1876,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr72_at",                                      (PyCFunction)level_is_rrr72_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr73_at",                                      (PyCFunction)level_is_rrr73_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr74_at",                                      (PyCFunction)level_is_rrr74_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr75_at",                                      (PyCFunction)level_is_rrr75_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr76_at",                                      (PyCFunction)level_is_rrr76_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_gfx_long_shadow_caster_at",                                      (PyCFunction)level_gfx_long_shadow_caster_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_gfx_solid_shadow_at",                                      (PyCFunction)level_gfx_solid_shadow_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr7_at",                                       (PyCFunction)level_is_rrr7_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr8_at",                                       (PyCFunction)level_is_rrr8_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_loves_spiderwebs_at",                                      (PyCFunction)level_loves_spiderwebs_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1966,7 +1966,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_get_stamina",                                      (PyCFunction)thing_get_stamina,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_get_stamina_max",                                  (PyCFunction)thing_get_stamina_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_gfx_flickers",                                     (PyCFunction)thing_gfx_flickers,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_gfx_very_small_shadow_caster",                     (PyCFunction)thing_gfx_very_small_shadow_caster,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_gfx_very_short_shadow_caster",                     (PyCFunction)thing_gfx_very_short_shadow_caster,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_gfx_water",                                        (PyCFunction)thing_gfx_water,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_hit",                                              (PyCFunction)thing_hit,                                              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_incr_charge_count",                                (PyCFunction)thing_incr_charge_count,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2174,8 +2174,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr72",                                         (PyCFunction)thing_is_rrr72,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr73",                                         (PyCFunction)thing_is_rrr73,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr74",                                         (PyCFunction)thing_is_rrr74,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr75",                                         (PyCFunction)thing_is_rrr75,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr76",                                         (PyCFunction)thing_is_rrr76,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_gfx_long_shadow_caster",                                         (PyCFunction)thing_gfx_long_shadow_caster,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_gfx_solid_shadow",                                         (PyCFunction)thing_gfx_solid_shadow,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr8",                                          (PyCFunction)thing_is_rrr8,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr9",                                          (PyCFunction)thing_is_rrr9,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_loves_spiderwebs",                                         (PyCFunction)thing_loves_spiderwebs,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},

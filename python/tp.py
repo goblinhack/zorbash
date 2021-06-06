@@ -454,11 +454,11 @@ class Tp:
     def set_is_rrr74(self, value):
         zx.tp_set_is_rrr74(self, value)
 
-    def set_is_rrr75(self, value):
-        zx.tp_set_is_rrr75(self, value)
+    def set_gfx_long_shadow_caster(self, value):
+        zx.tp_set_gfx_long_shadow_caster(self, value)
 
-    def set_is_rrr76(self, value):
-        zx.tp_set_is_rrr76(self, value)
+    def set_gfx_solid_shadow(self, value):
+        zx.tp_set_gfx_solid_shadow(self, value)
 
     def set_is_sticky(self, value):
         zx.tp_set_is_sticky(self, value)
@@ -496,8 +496,8 @@ class Tp:
     def set_is_spiderweb(self, value):
         zx.tp_set_is_spiderweb(self, value)
 
-    def set_gfx_very_small_shadow_caster(self, value):
-        zx.tp_set_gfx_very_small_shadow_caster(self, value)
+    def set_gfx_very_short_shadow_caster(self, value):
+        zx.tp_set_gfx_very_short_shadow_caster(self, value)
 
     def set_is_dry_grass(self, value):
         zx.tp_set_is_dry_grass(self, value)
@@ -1192,5 +1192,5 @@ class Tp:
     def set_is_deep_water(self, value):
         zx.tp_set_is_deep_water(self, value)
 
-    def set_gfx_small_shadow_caster(self, value):
-        zx.tp_set_gfx_small_shadow_caster(self, value)
+    def set_gfx_short_shadow_caster(self, value):
+        zx.tp_set_gfx_short_shadow_caster(self, value)

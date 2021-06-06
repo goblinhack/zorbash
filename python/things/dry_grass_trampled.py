@@ -10,8 +10,8 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
 def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "trampled grass")
     mytp.set_gfx_shown_in_bg(True)
-    mytp.set_gfx_small_shadow_caster(False)
-    mytp.set_gfx_very_small_shadow_caster(False)
+    mytp.set_gfx_short_shadow_caster(False)
+    mytp.set_gfx_very_short_shadow_caster(False)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_burnable(True)
     mytp.set_is_combustible(True)

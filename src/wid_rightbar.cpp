@@ -164,7 +164,7 @@ static void wid_rightbar_create (void)
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
-        auto s = dynprintf("%%fg=gray$\"%s\"", game->seed_name.c_str());
+        auto s = dynprintf("%%fg=gray$%s", game->seed_name.c_str());
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);
         wid_set_shape_none(w);
