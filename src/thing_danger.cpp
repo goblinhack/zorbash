@@ -227,6 +227,6 @@ int Thing::get_danger_initial_level(Thingp it)
 {
     int a = get_danger_initial_level();
     int b = it->get_danger_initial_level();
-    con("danger level %d vs %s %d", a, it->to_string().c_str(), b);
+    // con("danger level %d vs %s %d", a, it->to_string().c_str(), b);
     return b - a;
 }

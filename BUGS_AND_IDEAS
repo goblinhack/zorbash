@@ -1,11 +1,8 @@
 
 Todo
 ----
-- foilage light
-- frog still appearing by lava
 - more food
 - frog still appearing by lava
-- ERROR: Thing L36,36,3 dc3bd608(fire T300 @54,26): Attempt to drop L36,36,3 99d9bc4a(enchantstone/hidden T232 @54,26) which is not carried and owned by L36,36,3 a2c69072(cleaner/onfire T300 @54,26) stack trace
 - spider that throws web?
 
 Level
