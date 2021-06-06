@@ -207,10 +207,6 @@ public:
                      int map_r1,
                      int map_r2,
                      int map_generations);
-    void spiderweb_gen(unsigned int map_fill_prob,
-                       int map_r1,
-                       int map_r2,
-                       int map_generations);
     void water_gen(unsigned int map_fill_prob,
                    int map_r1,
                    int map_r2,

@@ -274,12 +274,6 @@ void Dungeon::make_dungeon (void)
                 5,  // R2
                 4   /* generations */);
 
-    LOG("DUNGEON: Generate spiderweb");
-    spiderweb_gen(1,  // fill prob
-                  10, // R1
-                  5,  // R2
-                  4   /* generations */);
-
     LOG("DUNGEON: Created, but not populated");
     dump();
 }
@@ -3785,6 +3779,10 @@ next:
 
 void Dungeon::add_spiderweb (void)
 {
+    if (random_range(0, 10) > 1) {
+        return;
+    }
+
     for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
         for (auto x = 2; x < MAP_WIDTH - 2; x++) {
 
@@ -4120,83 +4118,6 @@ void Dungeon::foilage_gen (unsigned int map_fill_prob,
                 }
 
                 putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
-            }
-next:
-            continue;
-        }
-    }
-}
-
-void Dungeon::spiderweb_gen (unsigned int map_fill_prob,
-                             int map_r1,
-                             int map_r2,
-                             int map_generations)
-
-{
-    map_save = {};
-    map_curr = {};
-
-    const int16_t maze_w = MAP_WIDTH - 2;
-    const int16_t maze_h = MAP_HEIGHT - 2;
-
-
-    if (map_r1) {
-        MAP_R1                    = map_r1;
-    }
-
-    if (map_r2) {
-        MAP_R2                    = map_r2;
-    }
-
-    if (map_generations) {
-        MAP_GENERATIONS           = map_generations;
-    }
-
-    int16_t x, y, i;
-
-    map_curr = {};
-
-    for (x=2; x < maze_w-2; x++) {
-        for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 10000) < map_fill_prob) {
-                set(map_curr, x, y, (uint8_t)1);
-            }
-        }
-    }
-
-    for (i=0; i < MAP_GENERATIONS; i++) {
-        cave_generation();
-        std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
-        map_save = {};
-    }
-
-    for (x=2; x < maze_w-2; x++) {
-        for (y=2; y < maze_h-2; y++) {
-            if (get(map_curr, x, y)) {
-                if (is_wall(x, y) || 
-                    is_rock(x, y) ||
-                    is_chasm(x, y)) {
-                    continue;
-                }
-
-                for (auto dx = -1; dx <= 1; dx++) {
-                    for (auto dy = -1; dy <= 1; dy++) {
-                        if (is_lava(x+dx, y+dy)) {
-                            goto next;
-                        }
-                        if (is_brazier(x+dx, y+dy)) {
-                            goto next;
-                        }
-                        if (is_shallow_water(x+dx, y+dy)) {
-                            goto next;
-                        }
-                        if (is_deep_water(x+dx, y+dy)) {
-                            goto next;
-                        }
-                    }
-                }
-
-                putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB);
             }
 next:
             continue;
