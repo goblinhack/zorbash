@@ -29,104 +29,159 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         return;
     }
 
-    point shadow_bl(blit_tl.x, blit_br.y);
-    point shadow_br(blit_br.x, blit_br.y);
-    point shadow_tl = shadow_bl;
-    point shadow_tr = shadow_br;
+    if (is_foilage()) {
+        fpoint p = level->player->get_interpolated_mid_at();
+        fpoint o = get_interpolated_mid_at();
+        fpoint d = o - p;
+        float dx = d.x;
+        float dy = d.y;
 
-    float dx = 1.0;
-    float dy = 1.0;
-    if (level->player) {
-        if (get_immediate_owner_id() == level->player->id) {
-            // use default shadow for carried items
-        } else if (this != level->player) {
-            fpoint p = level->player->get_interpolated_mid_at();
-            fpoint o = get_interpolated_mid_at();
-            fpoint d = o - p;
-            const float D = 16.0;
-            dx = d.x / D;
-            dy = d.y / D;
+        color c = BLACK;
+        glcolor(c);
 
-            if (distance(o, p) > TILES_ACROSS / 2) {
-                return;
-            }
+        {
+            point shadow_bl(blit_tl.x, blit_br.y);
+            point shadow_br(blit_br.x, blit_br.y);
+            point shadow_tl = shadow_bl;
+            point shadow_tr = shadow_br;
+
+            shadow_tl.x += (float)TILE_WIDTH * dx;
+            shadow_tl.y += (float)TILE_WIDTH * dy;
+            shadow_tr.x += (float)TILE_WIDTH * dx;
+            shadow_tr.y += (float)TILE_WIDTH * dy;
+
+            tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
         }
+
+        if (dx < 0) {
+            point shadow_tr(blit_br.x, blit_tl.y);
+            point shadow_br(blit_br.x, blit_br.y);
+            point shadow_tl = shadow_tr;
+            point shadow_bl = shadow_br;
+
+            shadow_tl.x += (float)TILE_WIDTH * (dx - 1.5);
+            shadow_tl.y += (float)TILE_WIDTH * dy;
+            shadow_bl.x += (float)TILE_WIDTH * (dx - 1.5);
+            shadow_bl.y += (float)TILE_WIDTH * dy;
+
+            tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
+        }
+
+        if (dx > 0) {
+            point shadow_tl(blit_tl.x, blit_tl.y);
+            point shadow_bl(blit_tl.x, blit_br.y);
+            point shadow_tr = shadow_tl;
+            point shadow_br = shadow_bl;
+
+            shadow_tr.x += (float)TILE_WIDTH * (dx + 1.5);
+            shadow_tr.y += (float)TILE_WIDTH * dy;
+            shadow_br.x += (float)TILE_WIDTH * (dx + 1.5);
+            shadow_br.y += (float)TILE_WIDTH * dy;
+
+            tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
+        }
+
+        glcolor(WHITE);
     } else {
-        // use default shadow
+        point shadow_bl(blit_tl.x, blit_br.y);
+        point shadow_br(blit_br.x, blit_br.y);
+        point shadow_tl = shadow_bl;
+        point shadow_tr = shadow_br;
+
+        float dx = 1.0;
+        float dy = 1.0;
+        if (level->player) {
+            if (get_immediate_owner_id() == level->player->id) {
+                // use default shadow for carried items
+            } else if (this != level->player) {
+                fpoint p = level->player->get_interpolated_mid_at();
+                fpoint o = get_interpolated_mid_at();
+                fpoint d = o - p;
+                const float D = 16.0;
+                dx = d.x / D;
+                dy = d.y / D;
+
+                if (distance(o, p) > TILES_ACROSS / 2) {
+                    return;
+                }
+            }
+        } else {
+            // use default shadow
+        }
+
+        float n = 0.0;
+        if (dy < 0) {
+            dy = std::min(-n, dy);
+        } else {
+            dy = std::max(n, dy);
+        }
+
+        //
+        // Max length of shadow
+        //
+        float m = 3;
+        if (dx < 0) {
+            dx = std::max(-m, dx);
+        } else {
+            dx = std::min(m, dx);
+        }
+        if (dy < 0) {
+            dy = std::max(-m, dy);
+        } else {
+            dy = std::min(m, dy);
+        }
+
+        if (unlikely(tpp->gfx_very_short_shadow_caster())) {
+            shadow_tl.x += (float)TILE_WIDTH * dx * 4;
+            shadow_tr.x += (float)TILE_WIDTH * dx * 4;
+            shadow_tl.y += (float)TILE_WIDTH * dy * 4;
+            shadow_tr.y += (float)TILE_WIDTH * dy * 4;
+        } else if (unlikely(tpp->gfx_short_shadow_caster())) {
+            shadow_tl.x += (float)TILE_WIDTH * dx * 10;
+            shadow_tr.x += (float)TILE_WIDTH * dx * 10;
+            shadow_tl.y += (float)TILE_WIDTH * dy * 10;
+            shadow_tr.y += (float)TILE_WIDTH * dy * 10;
+        } else { /* long shadow */
+            shadow_tl.x += (float)TILE_WIDTH * dx * 20;
+            shadow_tr.x += (float)TILE_WIDTH * dx * 20;
+            shadow_tl.y += (float)TILE_WIDTH * dy * 20;
+            shadow_tr.y += (float)TILE_WIDTH * dy * 20;
+        }
+
+        if (shadow_tl.x > shadow_tr.x) {
+            std::swap(shadow_tl, shadow_tr);
+        }
+
+        float bounce = get_bounce();
+        float tileh = game->config.tile_pix_height;
+        float bh = (tileh / TILE_HEIGHT) * (int)(bounce * TILE_HEIGHT);
+
+        float fadeup = get_fadeup();
+        if (fadeup < 0) {
+            return;
+        }
+
+        bh += fadeup;
+
+        shadow_tl.y += bh;
+        shadow_tr.y += bh;
+        shadow_bl.y += bh;
+        shadow_br.y += bh;
+
+        shadow_tl.x -= bh;
+        shadow_tr.x -= bh;
+        shadow_bl.x -= bh;
+        shadow_br.x -= bh;
+
+        color c = BLACK;
+        if (likely(!tpp->gfx_solid_shadow())) {
+            c.a = 150;
+        }
+
+        glcolor(c);
+        tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
+        glcolor(WHITE);
     }
-
-    float n = 0.0;
-    if (dy < 0) {
-        dy = std::min(-n, dy);
-    } else {
-        dy = std::max(n, dy);
-    }
-
-    //
-    // Max length of shadow
-    //
-    float m = 3;
-    if (dx < 0) {
-        dx = std::max(-m, dx);
-    } else {
-        dx = std::min(m, dx);
-    }
-    if (dy < 0) {
-        dy = std::max(-m, dy);
-    } else {
-        dy = std::min(m, dy);
-    }
-
-    if (unlikely(tpp->gfx_very_short_shadow_caster())) {
-        shadow_tl.x += (float)TILE_WIDTH * dx * 4;
-        shadow_tr.x += (float)TILE_WIDTH * dx * 4;
-        shadow_tl.y += (float)TILE_WIDTH * dy * 4;
-        shadow_tr.y += (float)TILE_WIDTH * dy * 4;
-    } else if (unlikely(tpp->gfx_short_shadow_caster())) {
-        shadow_tl.x += (float)TILE_WIDTH * dx * 10;
-        shadow_tr.x += (float)TILE_WIDTH * dx * 10;
-        shadow_tl.y += (float)TILE_WIDTH * dy * 10;
-        shadow_tr.y += (float)TILE_WIDTH * dy * 10;
-    } else { /* long shadow */
-        shadow_tl.x += (float)TILE_WIDTH * dx * 20;
-        shadow_tr.x += (float)TILE_WIDTH * dx * 20;
-        shadow_tl.y += (float)TILE_WIDTH * dy * 20;
-        shadow_tr.y += (float)TILE_WIDTH * dy * 20;
-    }
-
-    if (shadow_tl.x > shadow_tr.x) {
-        std::swap(shadow_tl, shadow_tr);
-    }
-
-    float bounce = get_bounce();
-    float tileh = game->config.tile_pix_height;
-    float bh = (tileh / TILE_HEIGHT) * (int)(bounce * TILE_HEIGHT);
-
-    float fadeup = get_fadeup();
-    if (fadeup < 0) {
-        return;
-    }
-
-    bh += fadeup;
-
-    shadow_tl.y += bh;
-    shadow_tr.y += bh;
-    shadow_bl.y += bh;
-    shadow_br.y += bh;
-
-    shadow_tl.x -= bh;
-    shadow_tr.x -= bh;
-    shadow_bl.x -= bh;
-    shadow_br.x -= bh;
-
-    color c = BLACK;
-    if (likely(!tpp->gfx_solid_shadow())) {
-        c.a = 150;
-    }
-
-    glcolor(c);
-    tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
-    glcolor(WHITE);
 }
 
 void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
