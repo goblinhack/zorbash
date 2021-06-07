@@ -345,7 +345,13 @@ _
             score++;
         }
 
+        if (score >= DMAP_IS_PASSABLE) {
+            CON("most %f", most_preferred);
+            CON("least %f", least_preferred);
+            CON("score %f", score);
+        }
         assert(score <= DMAP_IS_PASSABLE);
+
         uint8_t score8 = (int)score;
         set(dmap_scent->val, goal_target.x, goal_target.y, score8);
 

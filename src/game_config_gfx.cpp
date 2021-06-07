@@ -108,6 +108,14 @@ static uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, ui
     return true;
 }
 
+static uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    CON("USERCFG: toggle fps_counter");
+    game->config.fps_counter = !game->config.fps_counter;
+    game->config_gfx_select();
+    return true;
+}
+
 static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: incr resolution");
@@ -359,7 +367,7 @@ void Game::config_gfx_select (void)
         auto w = wid_new_square_button(p, "Fullscreen value");
 
         point tl = make_point(width / 2 , y_at);
-        point br = make_point(width / 2 + 6, y_at);
+        point br = make_point(width / 2 + 10, y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_fullscreen_toggle);
@@ -391,7 +399,7 @@ void Game::config_gfx_select (void)
         auto w = wid_new_square_button(p, "Fullscreen value");
 
         point tl = make_point(width / 2 , y_at);
-        point br = make_point(width / 2 + 6, y_at);
+        point br = make_point(width / 2 + 10, y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_fullscreen_desktop_toggle);
@@ -423,7 +431,7 @@ void Game::config_gfx_select (void)
         auto w = wid_new_square_button(p, "High DPI value");
 
         point tl = make_point(width / 2 , y_at);
-        point br = make_point(width / 2 + 6, y_at);
+        point br = make_point(width / 2 + 10, y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_allow_highdpi_toggle);
@@ -455,7 +463,7 @@ void Game::config_gfx_select (void)
         auto w = wid_new_square_button(p, "Borderless");
 
         point tl = make_point(width / 2 , y_at);
-        point br = make_point(width / 2 + 6, y_at);
+        point br = make_point(width / 2 + 10, y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_borderless_toggle);
@@ -467,40 +475,69 @@ void Game::config_gfx_select (void)
         }
     }
 
-    /////////////////////////////////////////////////////////////////////////
-    // vsync
-    /////////////////////////////////////////////////////////////////////////
-    y_at += 1;
-    {_
-        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Vertical sync");
+    if (!game->config.gfx_vsync_locked) {
+        /////////////////////////////////////////////////////////////////////////
+        // vsync
+        /////////////////////////////////////////////////////////////////////////
+        y_at += 1;
+        {_
+            auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+            auto w = wid_new_square_button(p, "Vertical sync");
 
-        point tl = make_point(0, y_at);
-        point br = make_point(width / 2, y_at);
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Vertical sync");
-    }
-    {_
-        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Vertical sync value");
+            point tl = make_point(0, y_at);
+            point br = make_point(width / 2, y_at);
+            wid_set_shape_none(w);
+            wid_set_pos(w, tl, br);
+            wid_set_text_lhs(w, true);
+            wid_set_text(w, "Vertical sync");
+        }
+        {_
+            auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+            auto w = wid_new_square_button(p, "Vertical sync value");
 
-        point tl = make_point(width / 2 , y_at);
-        point br = make_point(width / 2 + 6, y_at);
-        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_gfx_vsync_enable_toggle);
+            point tl = make_point(width / 2 , y_at);
+            point br = make_point(width / 2 + 10, y_at);
+            wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+            wid_set_pos(w, tl, br);
+            wid_set_on_mouse_up(w, game_config_gfx_vsync_enable_toggle);
 
-        if (game->config.gfx_vsync_enable) {
-            wid_set_text(w, "True");
-        } else {
-            wid_set_text(w, "False");
+            if (game->config.gfx_vsync_enable) {
+                wid_set_text(w, "True");
+            } else {
+                wid_set_text(w, "False");
+            }
+        }
+    } else {
+        /////////////////////////////////////////////////////////////////////////
+        // vsync cannot be changed
+        /////////////////////////////////////////////////////////////////////////
+        y_at += 1;
+        {_
+            auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+            auto w = wid_new_square_button(p, "Vertical sync");
+
+            point tl = make_point(0, y_at);
+            point br = make_point(width / 2, y_at);
+            wid_set_shape_none(w);
+            wid_set_pos(w, tl, br);
+            wid_set_text_lhs(w, true);
+            wid_set_text(w, "Vertical sync");
+        }
+        {_
+            auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+            auto w = wid_new_square_button(p, "Vertical sync value");
+
+            point tl = make_point(width / 2 , y_at);
+            point br = make_point(width / 2 + 10, y_at);
+            wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+            wid_set_pos(w, tl, br);
+
+            wid_set_text(w, "Locked on");
         }
     }
 
     /////////////////////////////////////////////////////////////////////////
-    // inverted graphics
+    // Inverted graphics
     /////////////////////////////////////////////////////////////////////////
     y_at += 1;
     {_
@@ -519,12 +556,44 @@ void Game::config_gfx_select (void)
         auto w = wid_new_square_button(p, "Inverted graphics value");
 
         point tl = make_point(width / 2 , y_at);
-        point br = make_point(width / 2 + 6, y_at);
+        point br = make_point(width / 2 + 10, y_at);
         wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_inverted_toggle);
 
         if (game->config.gfx_inverted) {
+            wid_set_text(w, "True");
+        } else {
+            wid_set_text(w, "False");
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////
+    // fps
+    //////////////////////////////////////////////////////////////////////
+    y_at += 1;
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "FPS counter");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "FPS counter");
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "FPS counter value");
+
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 10, y_at);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_other_fps_counter_toggle);
+
+        if (game->config.fps_counter) {
             wid_set_text(w, "True");
         } else {
             wid_set_text(w, "False");

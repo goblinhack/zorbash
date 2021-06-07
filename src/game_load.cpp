@@ -631,6 +631,14 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           sound_volume                 */ in >> bits(my.t.sound_volume                 );
     /* std::string        player name                  */ in >> bits(g_opt_player_name);
 
+    if (my.t.debug_mode) {
+        g_opt_debug5 = false;
+        g_opt_debug4 = false;
+        g_opt_debug3 = true;
+        g_opt_debug2 = true;
+        g_opt_debug1 = true;
+    }
+
     //
     // Allow the command line to override.
     //
