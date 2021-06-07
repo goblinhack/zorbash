@@ -336,9 +336,14 @@ _
         auto goal_target = goal.at;
         float score = get(cell_totals, goal_target.x, goal_target.y);
         auto orig_score = score;
-        score /= (most_preferred - least_preferred);
-        score *= DMAP_IS_PASSABLE - 2;
-        score++;
+
+        if (most_preferred == least_preferred) {
+            score = 1;
+        } else {
+            score /= (most_preferred - least_preferred);
+            score *= DMAP_IS_PASSABLE - 2;
+            score++;
+        }
 
         assert(score <= DMAP_IS_PASSABLE);
         uint8_t score8 = (int)score;

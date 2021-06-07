@@ -92,11 +92,13 @@ Usage: $0 [options]
 
   [--dev]  Enable development warnings
   [--dev2] Enable stack checking (SLOW)
+  [--prof] Enable gprof
 %%
 }
 
 OPT_DEV1=
 OPT_DEV2=
+OPT_PROF=
 
 read_opts()
 {
@@ -115,6 +117,11 @@ read_opts()
             -*dev)
                 OPT_DEV1="yes"
                 export OPT_DEV1
+                shift
+                ;;
+            -*prof)
+                OPT_PROF="yes"
+                export OPT_PROF
                 shift
                 ;;
             *)

@@ -453,6 +453,9 @@ C_FLAGS="$C_FLAGS `$Python_CONFIG --cflags | \
            grep -v O3                   | \
            grep -v O2                   | \
            grep -v Os                   | \
+           grep -v "\-g"                | \
+           grep -v NDEBUG               | \
+           grep -v file-prefix          | \
            grep -v wrapv                | \
            grep -v strict-proto         | \
            grep -v no-strict-aliasing   | \
@@ -546,6 +549,10 @@ case `uname` in
         ;;
 esac
 
+if [[ $OPT_PROF != "" ]]; then
+    LD_FLAGS+=" -pg"
+fi
+
 GCC_WARN=""
 
 #
@@ -572,10 +579,14 @@ cd src
 # -Og 131 secs
 # -O3 131 secs
 
+if [[ $OPT_PROF != "" ]]; then
+    C_FLAGS+=" -pg"
+fi
+
 if [[ $OPT_DEV1 != "" ]]; then
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 # AUTOGEN" > .Makefile
 else
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O3 # AUTOGEN" > .Makefile
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O3 # AUTOGEN" > .Makefile
 fi
 
 if [[ $OPT_DEV2 != "" ]]; then
@@ -591,18 +602,18 @@ echo "GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a -ffast-math $GCC_S
 echo "    " >> .Makefile
 echo "LDFLAGS=$LDFLAGS" >> .Makefile
 
-`g++ --version >/dev/null 2>/dev/null`
-if [ $? -eq 0 ]
-then
-    echo "COMPILER_WARNINGS=\$(GCC_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
-    echo "CC=g++ # AUTOGEN" >> .Makefile
-fi
-
 `clang++ --version >/dev/null 2>/dev/null`
 if [ $? -eq 0 ]
 then
     echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
     echo "CC=clang++ # AUTOGEN" >> .Makefile
+fi
+
+`g++ --version >/dev/null 2>/dev/null`
+if [ $? -eq 0 ]
+then
+    echo "COMPILER_WARNINGS=\$(GCC_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+    echo "CC=g++ # AUTOGEN" >> .Makefile
 fi
 
 case `uname` in
