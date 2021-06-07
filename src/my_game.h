@@ -51,6 +51,7 @@ public:
     int                gfx_minimap                  = true;
     int                gfx_show_hidden              = false;
     int                gfx_vsync_enable             = true;
+    int                gfx_vsync_locked             = false;
     int32_t            config_pix_height            = {};
     int32_t            config_pix_width             = {};
     int32_t            game_pix_height              = {};

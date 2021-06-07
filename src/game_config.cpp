@@ -50,6 +50,7 @@ void Config::reset (void)
     gfx_minimap                  = true;
     gfx_show_hidden              = false;
     gfx_vsync_enable             = true;
+    gfx_vsync_locked             = false;
     config_pix_height            = {};
     config_pix_width             = {};
     game_pix_height              = {};

@@ -243,7 +243,9 @@ uint8_t sdl_init (void)
         video_height = game->config.config_pix_height;
     }
 
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    if (!game->config.gfx_vsync_locked) {
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    }
 
     //
     // Don't use this. It seemed to mess up graphics on FireGL.
@@ -396,6 +398,10 @@ uint8_t sdl_init (void)
     LOG("SDL: Hw Accel    : %d", value);
 
     LOG("SDL: Vsync       : %d", SDL_GL_GetSwapInterval());
+
+    if (game->config.gfx_vsync_locked) {
+        LOG("SDL: Vsync       : locked");
+    }
 
     return true;
 }
@@ -1051,6 +1057,10 @@ uint8_t config_game_pix_zoom_set (tokens_t *tokens, void *context)
 //
 uint8_t config_gfx_vsync_enable (tokens_t *tokens, void *context)
 {_
+    if (game->config.gfx_vsync_locked) {
+        return true;
+    }
+
     char *s = tokens->args[2];
 
     if (!s || (*s == '\0')) {
@@ -1066,17 +1076,23 @@ uint8_t config_gfx_vsync_enable (tokens_t *tokens, void *context)
         CON("USERCFG: Vsync disabled");
         SDL_GL_SetSwapInterval(0);
     }
+    GL_ERROR_CHECK();
 
     return true;
 }
 
 void config_gfx_vsync_update (void)
 {_
+    if (game->config.gfx_vsync_locked) {
+        return;
+    }
+
     if (game->config.gfx_vsync_enable) {
         SDL_GL_SetSwapInterval(1);
     } else {
         SDL_GL_SetSwapInterval(0);
     }
+    GL_ERROR_CHECK();
 }
 
 //
@@ -1135,14 +1151,22 @@ void sdl_loop (void)
 
     sdl_main_loop_running = true;
 
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+    game->config.gfx_vsync_locked = SDL_GL_GetSwapInterval();
 
-    if (game->config.gfx_vsync_enable) {
-        SDL_GL_SetSwapInterval(1);
-    } else {
-        SDL_GL_SetSwapInterval(0);
+    if (!game->config.gfx_vsync_locked) {
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+        GL_ERROR_CHECK();
+
+        if (game->config.gfx_vsync_enable) {
+            SDL_GL_SetSwapInterval(1);
+        } else {
+            SDL_GL_SetSwapInterval(0);
+        }
+        GL_ERROR_CHECK();
     }
+
+    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+    GL_ERROR_CHECK();
 
     gl_enter_2d_mode();
 
@@ -1171,8 +1195,6 @@ void sdl_loop (void)
         if (unlikely(sdl_joy_axes != nullptr)) {
             sdl_tick();
         }
-
-        //fluid_tick();
 
         static bool old_g_errored;
         if (g_errored) {
@@ -1204,10 +1226,9 @@ void sdl_loop (void)
         // Less frequent updates
         //
         int timestamp_now = time_update_time_milli();
-        auto update_slow = (timestamp_now - ui_timestamp_slow_last >=
-                              UI_UPDATE_SLOW_MS);
-        auto update_fast = (timestamp_now - ui_timestamp_fast_last >=
-                              UI_UPDATE_FAST_MS);
+        bool update_slow = (timestamp_now - ui_timestamp_slow_last >= UI_UPDATE_SLOW_MS);
+        bool update_fast = (timestamp_now - ui_timestamp_fast_last >= UI_UPDATE_FAST_MS);
+
         //
         // Less frequent updates
         //
@@ -1338,7 +1359,11 @@ void sdl_loop (void)
         //
         // Flip
         //
-        SDL_GL_SwapWindow(window);
+        if (game->config.gfx_vsync_locked) {
+            SDL_GL_SwapWindow(window);
+        } else {
+            glFlush();
+        }
 
         //
         // Optimization to only bother checking pointers if some kind of
@@ -1383,6 +1408,7 @@ void sdl_flush_display (void)
         glDisable(GL_COLOR_LOGIC_OP);
     }
     SDL_GL_SwapWindow(window);
+    GL_ERROR_CHECK();
 }
 
 void config_game_pix_zoom_update (void)
