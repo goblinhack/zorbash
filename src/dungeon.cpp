@@ -1,7 +1,7 @@
-/*
- * Copyright (C) 2018 goblinhack@gmail.com
- * See the LICENSE file for license.
- */
+//
+// Copyright (C) 2018 goblinhack@gmail.com
+// See the LICENSE file for license.
+//
 
 #include "my_dungeon.h"
 #include "my_charmap.h"
@@ -307,7 +307,7 @@ bool Dungeon::is_oob (const int x, const int y)
 
 void Dungeon::debug (const std::string s)
 {_
-    if (g_opt_debug4) {
+    if (g_opt_debug3) {
         CON("DUNGEON (%u) %s", seed, s.c_str());
         LOG("===========================================================");
         dump();

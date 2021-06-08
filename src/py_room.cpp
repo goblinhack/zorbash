@@ -100,6 +100,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
                 if (m.is_floor           ||
                     m.is_bridge          ||
+                    m.is_corridor        ||
                     m.is_secret_corridor ||
                     m.is_dirt) {
                     floor_string += c;
@@ -112,7 +113,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_door                  ||
                            m.is_foilage               ||
                            m.is_spiderweb             ||
-                           m.is_dry_grass            ||
+                           m.is_dry_grass             ||
                            m.is_floor_deco            ||
                            m.is_food                  ||
                            m.is_gold                  ||
