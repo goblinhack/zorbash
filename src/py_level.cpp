@@ -70,6 +70,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
                 if (m.is_floor           ||
                     m.is_bridge          ||
+                    m.is_corridor        ||
                     m.is_secret_corridor ||
                     m.is_dirt) {
                     floor_string += c;

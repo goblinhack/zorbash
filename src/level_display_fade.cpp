@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_tile.h"
 #include "my_tex.h"

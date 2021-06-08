@@ -29,7 +29,7 @@ public:
         DOOR_LEFT        =            '<',
         DOOR_RIGHT       =            '>',
         DOOR_UP          =            '^',
-        DRY_GRASS       =            '\'',
+        DRY_GRASS        =            '\'',
         ENTRANCE         =            'S',
         EXIT             =            'E',
         FLOOR            =            '.',
