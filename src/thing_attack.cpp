@@ -109,15 +109,15 @@ _
                 return false;
             }
 
-            //
-            // Doesn't matter if dead, if it can eat you...
-            //
-            if (it->is_dead) {
-                log("Can eat dead meat: %s", it->to_string().c_str());
-                return true;
-            }
-
             if (it->is_meat() || it->is_blood()) {
+                //
+                // Doesn't matter if dead, if it can eat you...
+                //
+                if (it->is_dead) {
+                    log("Can eat dead meat: %s", it->to_string().c_str());
+                    return true;
+                }
+
                 log("Can attack meat or blood: %s", it->to_string().c_str());
                 return true;
             }
@@ -132,6 +132,7 @@ _
                     it->to_string().c_str());
                 return false;
             }
+
             if (it->is_meat() || it->is_blood()) {
                 if (it->is_dead) {
                     log("Can not attack dead meat: %s", it->to_string().c_str());
@@ -336,11 +337,16 @@ _
         //
         // Owner eat food?
         //
-        if (owner->can_eat(it)) {
+        if (owner == it) {
+            //
+            // This is an odd one.
+            //
+            err("Trying to eat self");
+        } else if (owner->can_eat(it)) {
             //
             // Eat corpse?
             //
-            owner->log("Can Eat %s", it->to_string().c_str());
+            owner->log("Can eat %s", it->to_string().c_str());
 
             if (it->is_dead) {
                 if (owner->eat(it)) {
@@ -367,11 +373,12 @@ _
             //
             // Eat corpse?
             //
-            if ((is_jelly_eater()    && it->is_jelly())    ||
-                (is_food_eater()     && it->is_food())     ||
-                (is_treasure_eater() && it->is_treasure()) ||
-                (is_wand_eater()     && it->is_wand())     ||
-                (is_potion_eater()   && it->is_potion())) {
+            if (is_item_carrier() &&
+                ((is_jelly_eater()    && it->is_jelly())    ||
+                 (is_food_eater()     && it->is_food())     ||
+                 (is_treasure_eater() && it->is_treasure()) ||
+                 (is_wand_eater()     && it->is_wand())     ||
+                 (is_potion_eater()   && it->is_potion()))) {
                 log("Don't eat, try to carry %s", it->to_string().c_str());
                 return try_to_carry(it);
             } else if (it->is_dead && !it->is_player()) {
