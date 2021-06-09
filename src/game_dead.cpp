@@ -149,6 +149,7 @@ void Game::dead_select (const char *reason)
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
     wid_dead_window->log(" ");
+    wid_dead_window->log(" ");
     wid_dead_window->log("Killed...");
     wid_dead_window->log(" ");
     wid_dead_window->log(reason);
@@ -157,8 +158,8 @@ void Game::dead_select (const char *reason)
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 
-        point tl = make_point(1, 13);
-        point br = make_point(width - 1, 15);
+        point tl = make_point(1, 15);
+        point br = make_point(width - 1, 17);
 
         wid_set_shape_none(w);
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
