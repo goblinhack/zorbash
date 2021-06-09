@@ -205,11 +205,11 @@ void wid_dump (Widp w, int depth)
 
     wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-    printf("\n          %*s dump: [%s] text [%S] %d,%d to %d,%d %d children", 
-           depth * 2, "", 
-           wid_name(w).c_str(), 
-           wid_get_text(w).c_str(), 
-           tlx, tly, brx, bry, 
+    printf("\n          %*s dump: [%s] text [%S] %d,%d to %d,%d %d children",
+           depth * 2, "",
+           wid_name(w).c_str(),
+           wid_get_text(w).c_str(),
+           tlx, tly, brx, bry,
            wid_count(w, depth));
 
 #if 1
@@ -3259,17 +3259,18 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
             if (trough_height - scrollbar_height == 0.0f) {
                 pct = 0.0f;
             } else {
-                pct = (wid_get_tl_y(scrollbar) -
-                       wid_get_tl_y(scrollbar->parent)) /
-                        (trough_height - scrollbar_height);
+                pct = ((float) wid_get_tl_y(scrollbar) -
+                       (float) wid_get_tl_y(scrollbar->parent)) /
+                        (float) (trough_height - scrollbar_height);
             }
 
             owner->offset.y = -miny;
             owner->offset.y -= (pct * (child_height - height));
 
-            scrollbar->key.tl.y =
-                wid_get_tl_y(scrollbar->parent) +
-                pct * (trough_height - scrollbar_height);
+            float n =
+                (float) wid_get_tl_y(scrollbar->parent) +
+                pct * (float) (trough_height - scrollbar_height);
+            scrollbar->key.tl.y = (int)ceil(n);
 
             wid_tree_detach(scrollbar);
             scrollbar->key.br.y =
@@ -3296,9 +3297,10 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
             owner->offset.x = -minx;
             owner->offset.x -= (pct * (child_width - width));
 
-            scrollbar->key.tl.x =
-                wid_get_tl_x(scrollbar->parent) +
-                pct * (trough_width - scrollbar_width);
+            float n =
+                (float) wid_get_tl_x(scrollbar->parent) +
+                pct * (float) (trough_width - scrollbar_width);
+            scrollbar->key.tl.x = (int)ceil(n);
 
             wid_tree_detach(scrollbar);
             scrollbar->key.br.x =
@@ -3787,7 +3789,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
 
     w = wid_get_top_parent(wid_console_input_line);
 
-    if (sdl_shift_held && 
+    if (sdl_shift_held &&
         (key->scancode == (SDL_Scancode)game->config.key_console)) {
         wid_toggle_hidden(wid_console_window);
         wid_raise(wid_console_window);
@@ -5854,7 +5856,7 @@ static void wid_display (Widp w,
     }
 
     if (w->square) {
-        ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, 
+        ascii_put_box(w_box_args, w->style, bg_tile, fg_tile,
                       fg2_tile, fg3_tile, L"");
     } else {
         // shape none
@@ -6201,11 +6203,11 @@ printf("========================================= %d\n", wid_total_count);
 
 #ifdef ENABLE_DEBUG_UI_FOCUS
     if (wid_focus) {
-        ascii_putf(0, TERM_HEIGHT-4, WHITE, GRAY, L"focus %s", 
+        ascii_putf(0, TERM_HEIGHT-4, WHITE, GRAY, L"focus %s",
                    to_string(wid_focus).c_str());
     }
     if (wid_over) {
-        ascii_putf(0, TERM_HEIGHT-3, WHITE, GRAY, L"over  %s", 
+        ascii_putf(0, TERM_HEIGHT-3, WHITE, GRAY, L"over  %s",
                    to_string(wid_over).c_str());
     }
 #endif

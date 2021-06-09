@@ -55,7 +55,6 @@ ubuntu_help_full()
     log_warn "  apt install -y vim"
     log_warn "  apt install -y g++"
     log_warn "  apt install -y libsdl2-dev libsdl2-2.0-0"
-    log_warn "  apt install -y libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0"
     log_warn "  apt install -y libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev libsdl2-mixer-2.0-0"
     log_warn "  apt install -y libfreetype6-dev libsdl2-ttf-dev libsdl2-ttf-2.0-0"
     log_warn "  apt install -y python3 python3-dev python3-pip"
@@ -66,14 +65,14 @@ ubuntu_help_full()
 
 sdl_help()
 {
-    log_warn "Is SDL2 installed? (not SDL1) If not:"
+    log_err "No SDL2 found"
 
     case `uname` in
     *MING*|*MSYS*)
-        log_warn "Installed already:"
-        pacman -Ss | grep '^mingw64/' | grep SDL2 | sed 's/^mingw64.//g' | grep installed
-        log_err "Cannot find SDL2"
-        exit 1
+        log_warn "Try:"
+        log_warn "  pacman -S mingw-w64-x86_64-SDL2"
+        log_warn "  pacman -S mingw-w64-x86_64-SDL2_mixer"
+        log_warn "  pacman -S mingw-w64-x86_64-SDL2_ttf"
         ;;
     *Darwin*)
         log_warn "Install MAC ports then install:"
@@ -85,6 +84,29 @@ sdl_help()
         ubuntu_help_full
         ;;
     esac
+    exit 1
+}
+
+gcc_help()
+{
+    log_err "No g++ or clang compiler found"
+
+    case `uname` in
+    *MING*|*MSYS*)
+        log_warn "Try:"
+        log_warn "  pacman -S base-devel"
+        log_warn "  pacman -S mingw-w64-x86_64-gcc"
+        log_warn "  pacman -S mingw-w64-x86_64-gdb"
+        ;;
+    *Darwin*)
+        log_warn "Install MAC ports then install:"
+        log_warn "  sudo port install g++"
+        ;;
+    *)
+        ubuntu_help_full
+        ;;
+    esac
+    exit 1
 }
 
 SDL2_SCORE=0
@@ -265,14 +287,12 @@ esac
 
 python_help()
 {
-    log_warn "Is python3 installed ?"
+    log_warn "No python3 found"
 
     case `uname` in
     *MING*|*MSYS*)
-        log_warn "Installed already:"
-        pacman -Ss | grep '^mingw64/' | grep python3 | sed 's/^mingw64.//g' | grep installed
-        log_err "Cannot find python3"
-        exit 1
+        log_warn "Try:"
+        log_warn "  pacman -S mingw-w64-python3.9"
         ;;
     *Darwin*)
         log_warn "Install MAC ports then install:"
@@ -282,6 +302,7 @@ python_help()
         ubuntu_help_full
         ;;
     esac
+    exit 1
 }
 
 Python2_SCORE=0
@@ -602,18 +623,30 @@ echo "GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a -ffast-math $GCC_S
 echo "    " >> .Makefile
 echo "LDFLAGS=$LDFLAGS" >> .Makefile
 
-`clang++ --version >/dev/null 2>/dev/null`
-if [ $? -eq 0 ]
-then
-    echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
-    echo "CC=clang++ # AUTOGEN" >> .Makefile
-fi
+GOT_CC=
 
 `g++ --version >/dev/null 2>/dev/null`
 if [ $? -eq 0 ]
 then
     echo "COMPILER_WARNINGS=\$(GCC_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
     echo "CC=g++ # AUTOGEN" >> .Makefile
+    GOT_CC=1
+fi
+
+#
+# Prefer clang as its faster
+#
+`clang++ --version >/dev/null 2>/dev/null`
+if [ $? -eq 0 ]
+then
+    echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+    echo "CC=clang++ # AUTOGEN" >> .Makefile
+    GOT_CC=1
+fi
+
+if [[ $GOT_CC = "" ]]; then
+    gcc_help
+    exit 1
 fi
 
 case `uname` in
@@ -696,7 +729,6 @@ then
 else
     cd ..
     log_die "Build failed"
-    sdl_help
     exit 1
 fi
 

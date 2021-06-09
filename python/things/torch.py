@@ -31,7 +31,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_torch(True)
     mytp.set_is_treasure(True)
     mytp.set_is_treasure_class_a(True)
-    mytp.set_lifespan_dice("1d100+10")
+    mytp.set_lifespan_dice("1d300+10")
     mytp.set_light_color("orange")
     mytp.set_light_strength(2)
     mytp.set_long_text_description("A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
