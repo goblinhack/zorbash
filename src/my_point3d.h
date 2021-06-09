@@ -97,6 +97,7 @@ public:
         return (!(a==b));
     }
 
+#ifdef UNUSED
     void unit (void)
     {
         T length = sqrt(x*x + y*y + z*z);
@@ -104,12 +105,6 @@ public:
         x /= length;
         y /= length;
         z /= length;
-    }
-
-    friend T distance (my_apoint3d a, my_apoint3d b)
-    {
-        return ((T) DISTANCE3f((float)a.x,(float)a.y,(float)a.z,
-                                (float)b.x,(float)b.y,(float)b.z));
     }
 
     T length (void)
@@ -180,6 +175,7 @@ public:
     {
         return (my_apoint3d(a.x * b, a.y * b, a.z * b));
     }
+#endif
 
     std::string to_string(void)
     {

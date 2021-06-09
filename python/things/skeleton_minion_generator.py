@@ -4,11 +4,11 @@ import random
 
 def on_idle_dice(me, x, y):
     if random.randint(1, 100) < 10:
-        if zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones1"):
-            zx.level_spawn_next_to(me, "skeleton_minion_fire")
+        if zx.level_spawn_next_to(me, "skeleton_minion_fire"):
+            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones1")
     else:
         if zx.level_spawn_next_to(me, "skeleton_minion"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones2")
+            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones2")
 
 def on_death(me, x, y):
     if random.randint(1, 2) == 1:

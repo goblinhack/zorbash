@@ -2510,6 +2510,7 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "CHANNEL_EXPLOSION", CHANNEL_EXPLOSION);
     PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST", CHANNEL_MONST);
     PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST_DEATH", CHANNEL_MONST_DEATH);
+    PyModule_AddIntConstant(zx_mod, "CHANNEL_MONST_BIRTH", CHANNEL_MONST_BIRTH);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
     PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);
@@ -2526,7 +2527,7 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MONST_SIZE_LARGE", MONST_SIZE_LARGE);
     PyModule_AddIntConstant(zx_mod, "MONST_SIZE_GIANT", MONST_SIZE_GIANT);
     PyModule_AddIntConstant(zx_mod, "MONST_SIZE_GARGANTUAN", MONST_SIZE_GARGANTUAN);
-    PyModule_AddStringConstant(zx_mod, "VERSION", VERSION);
+    PyModule_AddStringConstant(zx_mod, "MYVER", MYVER);
 
     PyModule_AddIntConstant(zx_mod, "KMOD_LSHIFT", KMOD_LSHIFT);
     PyModule_AddIntConstant(zx_mod, "KMOD_RSHIFT", KMOD_RSHIFT);
@@ -3336,7 +3337,7 @@ static std::string get_env(const char* env)
 
 void python_init (char *argv[])
 {_
-    CON("INI: PYTHONVERSION %s", PYTHONVERSION);
+    CON("INI: PYVER %s", PYVER);
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3354,11 +3355,11 @@ void python_init (char *argv[])
     newpath += EXEC_DIR;
     newpath += PATHSEP;
 #ifdef INIT
-    newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION;
+    newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYVER;
     newpath += PATHSEP;
-    newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION DIR_SEP "lib-dynload";
+    newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYVER DIR_SEP "lib-dynload";
     newpath += PATHSEP;
-    newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION DIR_SEP "site-packages";
+    newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYVER DIR_SEP "site-packages";
     newpath += PATHSEP;
     newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "bin";
 #endif

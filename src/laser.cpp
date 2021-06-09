@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <vector>
 #include <iterator>
+#include <math.h>
+
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_laser.h"
@@ -167,7 +169,7 @@ void Level::display_lasers (void)
             float ninety_deg = RAD_360 / 4;
 
             fpoint perp = step;
-            perp = perp.rotate_radians(ninety_deg);
+            perp = rotate_radians(perp, ninety_deg);
             perp /= 2;
 
             point p1;

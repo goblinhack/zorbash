@@ -36,6 +36,21 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         float dx = d.x;
         float dy = d.y;
 
+        //
+        // Don't have shadows all the way across the level
+        //
+        float max_shadow = 10;
+        if (dx < -max_shadow) {
+            dx = -max_shadow;
+        } else if (dx > max_shadow) {
+            dx = max_shadow;
+        }
+        if (dy < -max_shadow) {
+            dy = -max_shadow;
+        } else if (dy > max_shadow) {
+            dy = max_shadow;
+        }
+
         color c = BLACK;
         glcolor(c);
 

@@ -664,15 +664,15 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 std::istream& operator>>(std::istream &in, Bits<class Game &> my)
 {_
     in >> bits(my.t.version);
-    if (my.t.version != VERSION) {
+    if (my.t.version != MYVER) {
         game_load_error =
-          "old version '" VERSION "' v '" + my.t.version + "'";
+          "old version '" MYVER "' v '" + my.t.version + "'";
         return (in);
     }
     in >> bits(my.t.header_size);
     if (my.t.header_size != (uint32_t) sizeof(Game)) {
         game_load_error =
-          "old version '" VERSION "' v '" + my.t.version + "'";
+          "old version '" MYVER "' v '" + my.t.version + "'";
         return (in);
     }
     in >> bits(my.t.save_slot);

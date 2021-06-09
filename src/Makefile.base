@@ -115,6 +115,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/map.o                         \
     $(OBJDIR)/minilzo.o                     \
     $(OBJDIR)/music.o                       \
+    $(OBJDIR)/point.o                       \
     $(OBJDIR)/particle.o                    \
     $(OBJDIR)/pcg_basic.o                   \
     $(OBJDIR)/player.o                      \
@@ -197,7 +198,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_fini.o                  \
     $(OBJDIR)/thing_fire.o                  \
     $(OBJDIR)/thing_fire_at.o               \
-    $(OBJDIR)/thing_grass.o                \
+    $(OBJDIR)/thing_grass.o                 \
     $(OBJDIR)/thing_gc.o                    \
     $(OBJDIR)/thing_health.o                \
     $(OBJDIR)/thing_hide.o                  \
@@ -314,7 +315,6 @@ $(TARGET_GAME): $(GAME_OBJECTS)
 	/bin/rm -f ../$(TARGET_GAME)
 	$(CC) $(LDFLAGS) $(GAME_OBJECTS) $(LDLIBS) -o $(TARGET_GAME)
 	cp $(TARGET_GAME) ..
-	#$(DSYM)
 
 #
 # To force clean and avoid "up to date" warning.

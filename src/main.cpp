@@ -371,7 +371,7 @@ static void find_data_dir (void)
 //
 static void find_python_dir (void)
 {_
-    EXEC_PYTHONPATH = dynprintf("%spython%s" DIR_SEP, EXEC_DIR, PYTHONVERSION);
+    EXEC_PYTHONPATH = dynprintf("%spython%s" DIR_SEP, EXEC_DIR, PYVER);
 }
 
 //
