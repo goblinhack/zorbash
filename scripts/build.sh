@@ -153,7 +153,7 @@ then
     exit 1
 fi
 
-C_FLAGS=`$SDL2_CONFIG --cflags`
+C_FLAGS=`$SDL2_CONFIG --cflags | sed -s 's/ \-D_REENTRANT//g'`
 if [ $? -ne 0 ]
 then
     log_err "Please install SDL2."
@@ -389,14 +389,14 @@ else
     fi
 fi
 
-PYTHONVERSION=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
-echo "PYTHONVERSION=$PYTHONVERSION" > windows/python.version.sh
+PYVER=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
+echo "PYVER=$PYVER" > windows/python.version.sh
 
-log_info "Python lib version         : $PYTHONVERSION"
+log_info "Python lib version         : $PYVER"
 
 cat windows/windows.xml.tmpl | \
-    sed -e "s/PYTHONVERSION/$PYTHONVERSION/g" \
-        -e "s/GAME_VERSION/$VERSION/g" \
+    sed -e "s/PYVER/$PYVER/g" \
+        -e "s/MYVER/$MYVER/g" \
     > windows/windows.xml
 
 /bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
@@ -466,23 +466,11 @@ fi
 # Filter some junk out of the python config that can cause link errors
 #
 C_FLAGS="$C_FLAGS `$Python_CONFIG --cflags | \
-           tr ' ' '\n' | \
-           grep -v specs                | \
-           grep -v flto                 | \
-           grep -v fat                  | \
-           grep -v debug-prefix         | \
-           grep -v O3                   | \
-           grep -v O2                   | \
-           grep -v Os                   | \
-           grep -v "\-g"                | \
-           grep -v NDEBUG               | \
-           grep -v file-prefix          | \
-           grep -v wrapv                | \
-           grep -v strict-proto         | \
-           grep -v no-strict-aliasing   | \
-           tr '\n' ' '                  | \
-           sed 's/\-fstack-protector/ /g' | \
-           sed 's/\-arch i386/ /g'      \
+           tr ' ' '\n' | sort | uniq       | \
+           grep  "\-I"                     | \
+           tr '\n' ' '                     | \
+           sed 's/\-fstack-protector/ /g'  | \
+           sed 's/\-arch i386/ /g'           \
            `"
 #
 # -funwind-tables and -rdynamic for backtrace info on linux.
@@ -585,12 +573,12 @@ if [[ $OPT_DEV1 != "" ]]; then
 fi
 
 PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
-C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
-C_FLAGS="$C_FLAGS -DPYTHONVERSION=\\\"$PYTHONVERSION\\\""
+C_FLAGS="$C_FLAGS -DMYVER=\\\"$MYVER\\\""
+C_FLAGS="$C_FLAGS -DPYVER=\\\"$PYVER\\\""
 
-log_info "PYTHONVERSION              : $PYTHONVERSION"
+log_info "PYVER                      : $PYVER"
 log_info "PYTHONPATH                 : $PYTHONPATH"
-log_info "VERSION (game)             : $VERSION"
+log_info "VERSION (game)             : $MYVER"
 
 cd src
 
@@ -605,7 +593,7 @@ if [[ $OPT_PROF != "" ]]; then
 fi
 
 if [[ $OPT_DEV1 != "" ]]; then
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 # AUTOGEN" > .Makefile
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g # AUTOGEN" > .Makefile
 else
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O3 # AUTOGEN" > .Makefile
 fi
@@ -618,8 +606,8 @@ else
 fi
 
 echo "    " >> .Makefile
-echo "CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++2a -ffast-math # AUTOGEN" >> .Makefile
-echo "GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a -ffast-math $GCC_STACK_CHECK # AUTOGEN" >> .Makefile
+echo "CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++2a # AUTOGEN" >> .Makefile
+echo "GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a $GCC_STACK_CHECK # AUTOGEN" >> .Makefile
 echo "    " >> .Makefile
 echo "LDFLAGS=$LDFLAGS" >> .Makefile
 
@@ -715,7 +703,7 @@ then
     case `uname` in
         *MING*)
             log_info "Run:"
-            echo "  export PYTHONPATH=/mingw64/lib/python${PYTHONVERSION}/:/mingw64/lib/python${PYTHONVERSION}/lib-dynload:/mingw64/lib/python${PYTHONVERSION}/site-packages"
+            echo "  export PYTHONPATH=/mingw64/lib/python${PYVER}/:/mingw64/lib/python${PYVER}/lib-dynload:/mingw64/lib/python${PYVER}/site-packages"
             echo "  export PYTHONHOME=/mingw64/bin"
             echo "  ./zorbash-game.exe"
             ;;

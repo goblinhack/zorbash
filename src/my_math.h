@@ -7,7 +7,6 @@
 #ifndef _MY_MATH_UTIL_H_
 #define _MY_MATH_UTIL_H_
 
-#include <math.h>
 double gauss(const double m, const double s);
 double gaussrand(double mean, double stddev);
 

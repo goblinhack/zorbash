@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <vector>
 #include <iterator>
+#include <math.h>
+
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_projectile.h"
@@ -157,7 +159,7 @@ void Level::display_projectiles (void)
             float ninety_deg = RAD_360 / 4;
 
             fpoint perp = step;
-            perp = perp.rotate_radians(ninety_deg);
+            perp = rotate_radians(perp, ninety_deg);
             perp /= 2;
 
             int frame = (int)((float)Projectile::max_frames * dt);

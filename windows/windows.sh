@@ -1,33 +1,33 @@
 
 source ./python.version.sh
-if [[ "$PYTHONVERSION" = "" ]]; then
-    echo "$0: python.version.sh does not have PYTHONVERSION set"
+if [[ "$PYVER" = "" ]]; then
+    echo "$0: python.version.sh does not have PYVER set"
     exit 1
 fi
 
-/bin/rm -rf python${PYTHONVERSION}.tar
-/bin/rm -rf python${PYTHONVERSION}
+/bin/rm -rf python${PYVER}.tar
+/bin/rm -rf python${PYVER}
 
 echo
 echo Zipping python files
 echo ====================
-tar -cf python${PYTHONVERSION}.tar \
+tar -cf python${PYVER}.tar \
   --exclude __pycache__ \
   --exclude /mingw64/lib/python3.8/test \
   --exclude /mingw64/lib/python3.8/tkinter \
   --exclude /mingw64/lib/python3.8/turtledemo \
   --exclude /mingw64/lib/python3.8/unittest \
-  /mingw64/lib/python${PYTHONVERSION}
+  /mingw64/lib/python${PYVER}
 
-ls -la python${PYTHONVERSION}.tar
+ls -la python${PYVER}.tar
 
 echo
 echo Unzipping python files
 echo ======================
-echo tar -xf python${PYTHONVERSION}.tar
-tar -xf python${PYTHONVERSION}.tar
+echo tar -xf python${PYVER}.tar
+tar -xf python${PYVER}.tar
 
-mv mingw64/lib/python${PYTHONVERSION} .
+mv mingw64/lib/python${PYVER} .
 /bin/rm -rf mingw64
 
 echo

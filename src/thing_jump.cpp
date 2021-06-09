@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include <math.h>
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_thing.h"

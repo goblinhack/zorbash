@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <vector>
 #include <iterator>
+#include <math.h>
+
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_particle.h"

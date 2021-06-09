@@ -77,7 +77,7 @@ static uint8_t game_menu_quick_start (Widp w, int32_t x, int32_t y, uint32_t but
     CON("%%fg=red$.  .      .     .    .  :  :           .   .        :%%fg=reset$");
     CON("%%fg=red$.         .                :     . :   .            :%%fg=reset$");
     CON("%%fg=red$.  . .  : . :   .  : .  :  ::   :. : . ..  .   .  : :%%fg=reset$");
-    CON("%%fg=green$Version " VERSION "%%fg=reset$");
+    CON("%%fg=green$Version " MYVER "%%fg=reset$");
     CON("Press %%fg=yellow$<tab>%%fg=reset$ to complete commands.");
     CON("Press %%fg=yellow$?%%fg=reset$ to show command options.");
     CON("You can also enter raw python code here.");
@@ -352,7 +352,7 @@ static void game_main_menu_tick (Widp w)
     game_display_title_fg3();
     game_display_title_fg4();
 
-    ascii_putf(1, TERM_HEIGHT - 2, GREEN, BLACK, L"Version " VERSION);
+    ascii_putf(1, TERM_HEIGHT - 2, GREEN, BLACK, L"Version " MYVER);
 
     if (game->started) {
         game_main_menu_destroy();

@@ -193,7 +193,7 @@ public:
     //
     //Save file name, contains the date and other useful save slot info
     //
-    std::string        version = "" VERSION "";
+    std::string        version = "" MYVER "";
     uint32_t           header_size {};
     int                save_slot {};
     std::string        save_meta;
