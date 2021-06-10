@@ -26,6 +26,11 @@ void Level::new_internal_particle (
                           bool hflip,
                           bool make_visible_at_end)
 {_
+    if (!tile) {
+        err("No particle tile");
+        return;
+    }
+
     if (id.ok()) {
         auto t = thing_find(id);
         if (t) {
@@ -55,6 +60,11 @@ void Level::new_internal_particle (
                           bool hflip,
                           bool make_visible_at_end)
 {_
+    if (!tile) {
+        err("No particle tile");
+        return;
+    }
+
     uint32_t now = time_update_time_milli();
     new_internal_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
@@ -130,7 +140,7 @@ void Level::display_internal_particles (void)
             point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
             point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-            int oy = sin(RAD_180 * dt) * p.height;
+            int oy = sin(RAD_180 * dt) * (float)p.height;
 
             blit_tl.y -= oy;
             blit_br.y -= oy;
@@ -198,6 +208,11 @@ void Level::new_external_particle (
                           const Tilep tile, bool hflip,
                           bool make_visible_at_end)
 {_
+    if (!tile) {
+        err("No particle tile");
+        return;
+    }
+
     //
     // We hit here for player jumps
     //
@@ -228,6 +243,11 @@ void Level::new_external_particle (point start, point stop, isize sz, uint32_t d
                                    const Tilep tile, bool hflip,
                                    bool make_visible_at_end)
 {_
+    if (!tile) {
+        err("No particle tile");
+        return;
+    }
+
     uint32_t now = time_update_time_milli();
     new_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile, hflip,
@@ -274,7 +294,7 @@ void Level::display_external_particles (void)
             // Different curve height for each particle
             //
             if (!p.height) {
-                p.height = random_range(30, 50);
+                p.height = random_range(30, 100);
             }
 
             float t = p.timestamp_stop - p.timestamp_start;
@@ -305,7 +325,7 @@ void Level::display_external_particles (void)
             point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
             point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-            int oy = sin(RAD_180 * dt) * p.height;
+            int oy = sin(RAD_180 * dt) * (float)p.height;
 
             blit_tl.y -= oy;
             blit_br.y -= oy;
