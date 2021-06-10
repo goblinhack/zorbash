@@ -294,7 +294,20 @@ void Level::display_external_particles (void)
             // Different curve height for each particle
             //
             if (!p.height) {
-                p.height = random_range(30, 100);
+                p.height = random_range(30, 50);
+
+                //
+                // Make a thing and its items jump the same height.
+                //
+                if (p.id.id) {
+                    auto t = thing_find(p.id);
+                    if (t) {
+                        auto owner = t->get_top_owner();
+                        if (t->is_player() || (owner && owner->is_player())) {
+                            p.height = 40;
+                        }
+                    }
+                }
             }
 
             float t = p.timestamp_stop - p.timestamp_start;

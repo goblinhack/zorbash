@@ -51,6 +51,8 @@ _
         if (player) {
             player->incr_score(value * 10);
             player->incr_gold(value);
+
+            TOPCON("You collect %d gold.", value);
         }
 
         for (int c = 0; c < particle_count; c++) {
@@ -75,6 +77,8 @@ _
             err("Could not find wid %s", name.c_str());
             return;
         }
+
+        TOPCON("You collect the key.");
 
         auto p = (w->abs_tl + w->abs_br) / 2;
 	p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
