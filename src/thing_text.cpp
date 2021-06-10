@@ -255,11 +255,14 @@ void Thing::show_botcon_description (void) const
 
     if (!is_hidden) {
         if (is_collectable()){
-            text += " %%fg=yellow$" +
-                std::string(
-                    SDL_GetScancodeName(
-                        (SDL_Scancode)game->config.key_wait_or_collect)) +
-                "%%fg=reset$ to collect.";
+            auto k = std::string(
+                SDL_GetScancodeName(
+                    (SDL_Scancode)game->config.key_wait_or_collect));
+            if (k == ".") {
+                text += " Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+            } else {
+                text += " %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+            }
         }
     }
 

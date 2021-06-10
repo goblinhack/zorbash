@@ -88,7 +88,9 @@ _
     it->set_owner(this);
     it->hide();
 
-    log("Yes; is now carrying %s", it->to_string().c_str());
+    if (is_player()) {
+        TOPCON("You carry %s.", it->text_the().c_str());
+    }
 
     //
     // If we have no weapon, wield it
