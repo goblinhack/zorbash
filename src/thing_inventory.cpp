@@ -41,7 +41,7 @@ _
 
         int value = item->get_gold_value();
         int particle_count;
-        if (is_gold()) {
+        if (item->is_gold()) {
             particle_count = value;
         } else {
             particle_count = 1;
@@ -57,11 +57,11 @@ _
             point s = (last_blit_tl + last_blit_br) / 2;
             point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
                     random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
-            std::string name = "gold." + std::to_string(random_range(1, 8));
+            std::string name = "gold1." + std::to_string(random_range(1, 8));
             level->new_external_particle(
                      s + j, p,
                      isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), 
-                     PARTICLE_SPEED_MS,
+                     2 * PARTICLE_SPEED_MS + c,
                      tile_find_mand(name), false,
                      false /* make_visible_at_end */);
         }
