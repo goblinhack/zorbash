@@ -6,7 +6,6 @@ def gold_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_collision_circle(True)
     mytp.set_collision_radius(0.40)
-    mytp.set_gfx_show_outlined(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_very_short_shadow_caster(True)
     mytp.set_gold_value_dice("1d100")
