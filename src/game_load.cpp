@@ -423,7 +423,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* cursor_at */             in >> bits(l->cursor_at);
     /* cursor_at_old */         in >> bits(l->cursor_at_old);
     /* cursor_found */          in >> bits(l->cursor_found);
-    /* cursor_needs_update */   in >> bits(l->cursor_needs_update);
     /* heatmap_valid */         in >> bits(l->heatmap_valid);
     /* is_starting */           in >> bits(l->is_starting);
     /* map_at */                in >> bits(l->map_at);
@@ -451,7 +450,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     l->timestamp_redraw_bg = 1; // Force redraw
     l->timestamp_fade_in_begin = time_get_time_ms_cached();
     l->map_changed = true;
-    l->cursor_needs_update = true;
     l->map_follow_player = true;
 
     auto p = l->world_at;

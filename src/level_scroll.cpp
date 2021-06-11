@@ -38,6 +38,10 @@ void Level::scroll_map_do (bool fast)
         dy = 0;
     }
 
+    if ((dx == 0) && (dy == 0)) {
+        return;
+    }
+
 #if 0
 if (player) {
     player->topcon("map_at %f %f map_wanted_at %f %f", 
@@ -58,11 +62,11 @@ if (player) {
         } else {
             float step;
 
-            if (fabs(dx) > 30) {
+            if (fabs(dx) > 32) {
                 step = vbigstep;
-            } else if (fabs(dx) > 20) {
+            } else if (fabs(dx) > 16) {
                 step = bigstep;
-            } else if (fabs(dx) > 5) {
+            } else if (fabs(dx) > 8) {
                 step = medstep;
             } else if (fabs(dx) > 0) {
                 step = smallstep;
@@ -72,17 +76,21 @@ if (player) {
 
             if (step > 0) {
                 auto dx = (map_wanted_at.x - map_at.x) / step;
-                dx *= TILE_WIDTH;
-                dx = (int) dx;
-                dx /= TILE_WIDTH;
+                //
+                // This used to be a thing when I did not have pixel
+                // accurate map and rounded pixels were a thing.
+                //
+                //dx *= TILE_WIDTH;
+                //dx = (int) ceil(dx);
+                //dx /= TILE_WIDTH;
                 map_at.x += dx;
             }
 
-            if (fabs(dy) > 30) {
+            if (fabs(dy) > 32) {
                 step = vbigstep;
-            } else if (fabs(dy) > 20) {
+            } else if (fabs(dy) > 16) {
                 step = bigstep;
-            } else if (fabs(dy) > 5) {
+            } else if (fabs(dy) > 8) {
                 step = medstep;
             } else if (fabs(dy) > 0) {
                 step = smallstep;
@@ -92,9 +100,13 @@ if (player) {
 
             if (step > 0) {
                 auto dy = (map_wanted_at.y - map_at.y) / step;
-                dy *= TILE_HEIGHT;
-                dy = (int) dy;
-                dy /= TILE_HEIGHT;
+                //
+                // This used to be a thing when I did not have pixel
+                // accurate map and rounded pixels were a thing.
+                //
+                //dy *= TILE_HEIGHT;
+                //dy = (int) ceil(dy);
+                //dy /= TILE_HEIGHT;
                 map_at.y += dy;
             }
         }
@@ -128,6 +140,19 @@ if (player) {
     map_at.x = std::min(map_at.x, (float)MAP_WIDTH - TILES_ACROSS);
     map_at.y = std::min(map_at.y, (float)MAP_HEIGHT - TILES_DOWN);
 #endif
+
+    {
+        auto dx = map_at.x - map_wanted_at.x;
+        auto dy = map_at.y - map_wanted_at.y;
+
+        if (fabs(dx) < 0.1) {
+            dx = 0;
+        }
+
+        if (fabs(dy) < 0.1) {
+            dy = 0;
+        }
+    }
 }
 
 void Level::scroll_map (void)

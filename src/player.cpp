@@ -83,28 +83,24 @@ void player_tick (void)
 
     if (state[game->config.key_map_left]) {
         level->map_wanted_at.x -= map_move_scroll_delta;
-        level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
     }
 
     if (state[game->config.key_map_right]) {
         level->map_wanted_at.x += map_move_scroll_delta;
-        level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
     }
 
     if (state[game->config.key_map_up]) {
         level->map_wanted_at.y -= map_move_scroll_delta;
-        level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
     }
 
     if (state[game->config.key_map_down]) {
         level->map_wanted_at.y += map_move_scroll_delta;
-        level->cursor_needs_update = true;
         level->cursor_found = false;
         level->map_follow_player = false;
     }

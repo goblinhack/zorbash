@@ -104,7 +104,6 @@ public:
     // All randomness jumps off of this as the root
     //
     bool                       cursor_found {};
-    bool                       cursor_needs_update {};
     bool                       heatmap_valid {};
     bool                       is_starting {}; // Loading level
     bool                       map_changed {}; // Something moved on the map
