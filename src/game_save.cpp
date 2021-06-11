@@ -370,7 +370,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* cursor_at */             out << bits(my.t->cursor_at);
     /* cursor_at_old */         out << bits(my.t->cursor_at_old);
     /* cursor_found */          out << bits(my.t->cursor_found);
-    /* cursor_needs_update */   out << bits(my.t->cursor_needs_update);
     /* heatmap_valid */         out << bits(my.t->heatmap_valid);
     /* is_starting */           out << bits(my.t->is_starting);
     /* map_at */                out << bits(my.t->map_at);

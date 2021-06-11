@@ -79,14 +79,12 @@ void Level::cursor_move (void)
         mouse = mouse_tick;
         if (mouse > mouse_old) {
             mouse_old = mouse;
-            cursor_needs_update = true;
             cursor_found = false;
         }
     } else {
         mouse = mouse_tick;
         mouse_old = mouse;
         map_follow_player = true;
-        cursor_needs_update = false;
     }
 
     if (cursor) {_
@@ -132,6 +130,11 @@ void Level::cursor_recreate (void)
     } else {
         cursor = thing_new("cursor", mid_at);
     }
-    cursor->hide();
+
+    //
+    // Why hide it? When scrolling to a new position it's nice to see
+    // the cursor pop up,
+    //
+    //cursor->hide();
     cursor_path_create();
 }

@@ -295,10 +295,9 @@ bool Thing::move (fpoint future_pos,
 
         if (!level->map_follow_player) {
             level->map_follow_player = true;
-            level->cursor_needs_update = true;
         }
     }
-_
+
     auto t = nearby_most_dangerous_thing_get();
     if (t) {
         auto free_attack =
@@ -684,7 +683,6 @@ void Thing::move_to_immediately (fpoint to)
     if (is_player()) {
         if (!level->map_follow_player) {
             level->map_follow_player = true;
-            level->cursor_needs_update = true;
         }
     }
 

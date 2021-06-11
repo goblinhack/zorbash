@@ -27,10 +27,6 @@ void Level::cursor_find_on_visible_things (
         return;
     }
 
-    if (!cursor_needs_update) {
-        return;
-    }
-
     if (wid_find_under_mouse()) {
         return;
     }
@@ -62,8 +58,6 @@ void Level::cursor_find_on_visible_things (
             }
         }
     }
-
-    cursor_needs_update = false;
 
     game->wid_thing_info_destroy_deferred();
 
