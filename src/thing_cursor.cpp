@@ -42,7 +42,6 @@ void Thing::cursor_hover_over_check (void)
 
             level->cursor_at = mid_at;
             level->cursor_found = true;
-con("over me");
         }
     }
 }
