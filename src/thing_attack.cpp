@@ -370,6 +370,7 @@ _
         // As above, but not for owner.
         //
         if (can_eat(it)) {
+            log("Try to eat instead of attacking %s", it->to_string().c_str());
             //
             // Eat corpse?
             //
@@ -378,23 +379,32 @@ _
                  (is_food_eater()     && it->is_food())     ||
                  (is_treasure_eater() && it->is_treasure()) ||
                  (is_wand_eater()     && it->is_wand())     ||
-                 (is_potion_eater()   && it->is_potion()))) {
+                 (is_potion_eater()   && it->is_potion())) &&
+                 try_to_carry(it)) {
                 log("Don't eat, try to carry %s", it->to_string().c_str());
-                return try_to_carry(it);
-            } else if (it->is_dead && !it->is_player()) {
+                return true;
+            } 
+
+            if (is_monst() && it->is_dead && !it->is_player() && eat(it)) {
                 //
-                // Can only eat things when dead... But the player is gone once dead.
+                // Can only eat once alive things when dead... But the player is gone once dead.
+                // Can't kill it twice, so hide it
                 //
-                if (eat(it)) {
-                    //
-                    // Can't kill it twice, so hide it
-                    //
-                    log("Eat corpse %s", it->to_string().c_str());
-                    it->hide();
-                    it->gc();
-                    return true;
-                }
-            } else if (is_player()) {
+                log("Eat corpse %s", it->to_string().c_str());
+                it->hide();
+                it->gc();
+                return true;
+            }
+
+            if (is_monst() && it->is_food() &&
+                ((is_jelly_eater() && it->is_jelly())    ||
+                 (is_meat_eater()  && it->is_meat())     ||
+                 (is_food_eater()  && it->is_food())) &&
+                eat(it)) {
+                return true;
+            }
+
+            if (is_player()) {
                 log("Don't attack, try to carry %s", it->to_string().c_str());
                 if (try_to_carry(it)) {
                     return true;
@@ -405,7 +415,7 @@ _
     }
 
     if (!possible_to_attack(it)) {
-	log("Attack failed, not possible to attack %s", it->to_string().c_str()              );
+	log("Attack failed, not possible to attack %s", it->to_string().c_str());
         return false;
     }
 

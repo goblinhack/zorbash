@@ -35,8 +35,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_damage_doubled_from_fire(True)
     mytp.set_damage_melee_dice("1d8+6")
     mytp.set_gfx_animated(True)
-    mytp.set_gfx_show_outlined(True)
     mytp.set_gfx_short_shadow_caster(True)
+    mytp.set_gfx_show_outlined(True)
     mytp.set_hates_water(100)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_active(True) # So it can interact with fire
