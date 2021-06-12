@@ -27,7 +27,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_used_automatically_when_selected(False)
     mytp.set_long_text_description("Frothy beer. Brewed locally. By something.")
     mytp.set_normal_placement_rules(True)
-    mytp.set_nutrition_dice("1d15")
+    mytp.set_nutrition_dice("1d30")
     mytp.set_rarity(zx.RARITY_COMMON)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("%%fg=brown$Frothy beer.")
@@ -38,6 +38,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.update()
 
 def init():
-    tp_init(name="food_beer", text_name="beer", short_text_name="beer")
+    tp_init(name="food_beer2", text_name="beer", short_text_name="beer")
 
 init()
