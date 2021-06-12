@@ -122,7 +122,7 @@ _
             bool got_one_this_tile = false;
 
             if (is_starving) {
-                if (can_eat(it)) {
+                if (worth_eating(it)) {
                     //
                     // If starving, prefer the thing with most health
                     //
@@ -130,7 +130,7 @@ _
                     got_one_this_tile = true;
                 }
             } else if (is_hungry) {
-                if (can_eat(it) && !is_dangerous(it)) {
+                if (worth_eating(it) && !is_dangerous(it)) {
                     //
                     // Prefer easy food over attacking the player and prefer
                     // the player over a monster. Factor in health so we will

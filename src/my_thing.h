@@ -220,6 +220,7 @@ public:
     bool collision_check_and_handle(fpoint, bool *, bool *, float radius);
     bool collision_check_and_handle_nearby(fpoint, bool *, bool *);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
+    bool collision_check_do();
     bool collision_check_only(fpoint);
     bool collision_check_only(Thingp it, fpoint future_pos, int x, int y);
     bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
@@ -249,6 +250,8 @@ public:
     bool fire_choose_target(Thingp item);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
     bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
+    bool health_boost(int v);
+    bool health_boost_would_occur(int v);
     bool idle_check(void);
     bool if_matches_then_kill(const std::string& what, const point &p);
     bool inventory_id_insert(Thingp what);
@@ -309,6 +312,7 @@ public:
     bool will_avoid_threat(const point &p);
     bool will_avoid_threat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
+    bool worth_eating(const Thingp it);
     const Dice& get_damage_bite_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;
@@ -564,11 +568,13 @@ public:
     int gfx_glows(void) const;
     int gfx_health_bar_shown_only_when_injured(void) const;
     int gfx_health_bar_shown(void) const;
+    int gfx_long_shadow_caster(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
+    int gfx_short_shadow_caster(void) const;
     int gfx_shown_in_bg(void) const;
     int gfx_show_outlined(void) const;
-    int gfx_short_shadow_caster(void) const;
+    int gfx_solid_shadow(void) const;
     int gfx_very_short_shadow_caster(void) const;
     int gfx_water(void) const;
     int gfx_weapon_carry_anim(void) const;
@@ -838,11 +844,8 @@ public:
     int is_rrr72(void) const;
     int is_rrr73(void) const;
     int is_rrr74(void) const;
-    int gfx_long_shadow_caster(void) const;
-    int gfx_solid_shadow(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
-    int loves_spiderwebs(void) const;
     int is_rrr9(void) const;
     int is_secret_door(void) const;
     int is_sewer_wall(void) const;
@@ -891,6 +894,7 @@ public:
     int light_strength(void);
     int loves_fire(void) const;
     int loves_poison(void) const;
+    int loves_spiderwebs(void) const;
     int minion_leash_distance(void) const;
     int minion_limit(void) const;
     int monst_size(void) const;
@@ -1179,7 +1183,6 @@ public:
     void chasm_tick();
     void clear_age_map(void);
     void clear_dmap_scent(void);
-    bool collision_check_do();
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
@@ -1218,11 +1221,10 @@ public:
     void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
     void fall(float fall_height, timestamp_t ms);
     void fire_tick();
-    void grass_tick();
     void gc(void);
     void get_light_strength_including_torch_effect(int &light_strength);
     void get_tiles(void);
-    void health_boost(int v);
+    void grass_tick();
     void hide();
     void hooks_remove();
     void hunger_clock();

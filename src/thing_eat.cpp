@@ -18,8 +18,7 @@ bool Thing::eat (Thingp it)
     //
     if (is_player()) {
         TOPCON("You munch %s.", it->text_the().c_str());
-        health_boost(it->get_nutrition());
-        return true;
+        return health_boost(it->get_nutrition());
     }
 
     if (attack_eater()) {
@@ -30,12 +29,15 @@ bool Thing::eat (Thingp it)
             (is_wand_eater()     && it->is_wand())     ||
             (is_potion_eater()   && it->is_potion())) {
 
-            log("Eats %s", it->text_the().c_str());
-
             //
             // For treasure what should the boost be?
             //
-            health_boost(it->get_nutrition());
+            if (!health_boost(it->get_nutrition())) {
+                log("No health boost from eating %s", it->text_the().c_str());
+                return false;
+            }
+
+            log("Eats %s", it->text_the().c_str());
 
             if (!is_player()) {
                 if (distance_to_player() < DMAP_IS_PASSABLE) {
@@ -54,6 +56,15 @@ bool Thing::eat (Thingp it)
         }
     }
     return false;
+}
+
+bool Thing::worth_eating (Thingp it)
+{_
+    if (!can_eat(it)) {
+        return false;
+    }
+
+    return health_boost_would_occur(it->get_nutrition());
 }
 
 bool Thing::can_eat (const Thingp itp)
