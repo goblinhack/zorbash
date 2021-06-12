@@ -7,8 +7,8 @@ def on_death(me, x, y):
 def tp_init(name):
     mytp = tp.Tp(name)
     mytp.set_gfx_animated(True)
-    mytp.set_gfx_show_outlined(True)
     mytp.set_gfx_short_shadow_caster(True)
+    mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(False)
     mytp.set_is_floating(True)
     mytp.set_is_loggable_for_important_stuff(False)

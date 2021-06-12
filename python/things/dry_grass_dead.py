@@ -4,8 +4,8 @@ import tp
 
 def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "dry trampled grass")
-    mytp.set_gfx_shown_in_bg(True)
     mytp.set_gfx_short_shadow_caster(True)
+    mytp.set_gfx_shown_in_bg(True)
     mytp.set_gfx_very_short_shadow_caster(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_cursor_can_hover_over(True)

@@ -4,9 +4,9 @@ import tp
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_gfx_animated(True)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated_can_vflip(True)
+    mytp.set_gfx_animated(True)
     mytp.set_gfx_attack_anim(True)
     mytp.set_gfx_dead_anim(False)
     mytp.set_gfx_show_outlined(True)

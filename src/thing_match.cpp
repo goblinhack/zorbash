@@ -65,7 +65,7 @@ bool Thing::matches (const std::string& what) const
     if (is_blood() &&                                         (what == "is_blood"))                                         { return true; }
     if (is_blood_splatter() &&                                (what == "is_blood_splatter"))                                { return true; }
     if (is_brazier() &&                                       (what == "is_brazier"))                                       { return true; }
-    if (loves_spiderwebs() &&                                         (what == "loves_spiderwebs"))                                      { return true; }
+    if (loves_spiderwebs() &&                                 (what == "loves_spiderwebs"))                                      { return true; }
     if (is_carrier_of_treasure_class_a() &&                   (what == "is_carrier_of_treasure_class_a"))                   { return true; }
     if (is_carrier_of_treasure_class_b() &&                   (what == "is_carrier_of_treasure_class_b"))                   { return true; }
     if (is_carrier_of_treasure_class_c() &&                   (what == "is_carrier_of_treasure_class_c"))                   { return true; }

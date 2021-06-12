@@ -10,8 +10,8 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     # mytp.set_is_minion_generator(True) # don't set to avoid auto place
     mytp = tp.Tp(name)
     mytp.set_gfx_animated(True)
-    mytp.set_gfx_show_outlined(True)
     mytp.set_gfx_shown_in_bg(True)
+    mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(False)
     mytp.set_is_active(True)
     mytp.set_is_descend_sewer(True)
