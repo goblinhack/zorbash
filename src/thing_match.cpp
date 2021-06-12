@@ -329,7 +329,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_blood")                                         { return &Thing::is_blood; }
     if (what == "is_blood_splatter")                                { return &Thing::is_blood_splatter; }
     if (what == "is_brazier")                                       { return &Thing::is_brazier; }
-    if (what == "loves_spiderwebs")                                         { return &Thing::loves_spiderwebs; }
+    if (what == "loves_spiderwebs")                                 { return &Thing::loves_spiderwebs; }
     if (what == "is_carrier_of_treasure_class_a")                   { return &Thing::is_carrier_of_treasure_class_a; }
     if (what == "is_carrier_of_treasure_class_b")                   { return &Thing::is_carrier_of_treasure_class_b; }
     if (what == "is_carrier_of_treasure_class_c")                   { return &Thing::is_carrier_of_treasure_class_c; }
