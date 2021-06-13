@@ -30,7 +30,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_nutrition_dice("1d20")
     mytp.set_rarity(zx.RARITY_COMMON)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=brown$Tomato.")
+    mytp.set_text_description("%%fg=red$Tomato.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
