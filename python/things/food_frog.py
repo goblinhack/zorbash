@@ -25,7 +25,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_used_automatically_when_selected(False)
     mytp.set_long_text_description("Chocolate frogs. The food of Gods. May seem out of place in a dungeon and you'd be correct. It is rumored a helpful god left them here for brave adventurers to assist them on their path.")
     mytp.set_normal_placement_rules(True)
-    mytp.set_nutrition_dice("1d100")
+    mytp.set_nutrition_dice("10+1d100")
     mytp.set_rarity(zx.RARITY_UNCOMMON)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("%%fg=brown$The food of the Gods: a chocolate frog.")

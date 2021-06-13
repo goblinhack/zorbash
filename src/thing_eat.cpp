@@ -17,8 +17,9 @@ bool Thing::eat (Thingp it)
     // Does the attacker feast on success?
     //
     if (is_player()) {
-        TOPCON("You munch %s.", it->text_the().c_str());
-        return health_boost(it->get_nutrition());
+        auto boost = health_boost(it->get_nutrition());
+        TOPCON("You munch %s for %d health.", it->text_the().c_str(), boost);
+        return true;
     }
 
     if (attack_eater()) {

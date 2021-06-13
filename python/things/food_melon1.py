@@ -27,7 +27,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_used_automatically_when_selected(False)
     mytp.set_long_text_description("Ripe slice of melon. With a dash of ginger and less dirt on it, this might be nice.")
     mytp.set_normal_placement_rules(True)
-    mytp.set_nutrition_dice("1d10")
+    mytp.set_nutrition_dice("10+1d10")
     mytp.set_rarity(zx.RARITY_COMMON)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("%%fg=yellow$Slice of melon.")
