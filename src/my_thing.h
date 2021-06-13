@@ -250,7 +250,7 @@ public:
     bool fire_choose_target(Thingp item);
     bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
     bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
-    bool health_boost(int v);
+    int health_boost(int v);
     bool health_boost_would_occur(int v);
     bool idle_check(void);
     bool if_matches_then_kill(const std::string& what, const point &p);

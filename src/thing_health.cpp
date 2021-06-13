@@ -7,7 +7,7 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
-bool Thing::health_boost (int v)
+int Thing::health_boost (int v)
 {_
     if (!v) {
         return false;
@@ -30,7 +30,7 @@ bool Thing::health_boost (int v)
     } else {
         log("Health boost by %d from %d to %d", v, old_health, new_health);
     }
-    return true;
+    return new_health - old_health;
 }
 
 bool Thing::health_boost_would_occur (int v)
