@@ -98,6 +98,10 @@ void Thing::destroy (void)
         game->request_to_fire_item = nullptr;
     }
 
+    if (game->current_wid_thing_info == this) {
+        game->current_wid_thing_info = nullptr;
+    }
+
     for (const auto w : wid_thing_info_window) {
         if (w->t == this) {
             game->wid_thing_info_destroy_immediate();

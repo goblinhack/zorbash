@@ -18,15 +18,16 @@
 #include "my_template.h"
 
 void Level::describe (fpoint p)
-{
+{_
+    log("Describe %f,%f", p.x, p.y);
+
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS)) {
+        log("Describe %f,%f; no wrong state", p.x, p.y);
         return;
     }
-
-    BOTCON(" ");
 
     std::vector<Thingp> hover_over_things;
     hover_over = nullptr;
@@ -145,29 +146,85 @@ void Level::describe (fpoint p)
     } FOR_ALL_THINGS_END()
 
     if (hover_over_things.size()) {
-        game->wid_thing_info_create_when_hovering_over(hover_over_things);
+        log("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
+        game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
+    } else {
+        log("Describe %f,%f; nothing found", p.x, p.y);
+_
+        if (game->current_wid_thing_info) {
+            log("Currently describing %s", 
+                game->current_wid_thing_info->to_string().c_str());
+            if (game->current_wid_thing_info->is_hidden) {
+                log("Currently describing %s; keep it", 
+                    game->current_wid_thing_info->to_string().c_str());
+            }
+        }
+
+        if (wid_thing_info_window.size()) {
+            auto o = wid_thing_info_window.front();
+            log("Describing %s", o->t->to_string().c_str());
+            if (o->t->is_hidden) {
+                log("Describing %s; keep it", o->t->to_string().c_str());
+                return;
+            }
+        }
+
+        wid_thing_info_fini();
     }
 }
 
 void Level::describe (Thingp t)
-{
+{_
+    log("Describe %s", t->to_string().c_str());
+
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+        log("Describe %s; no wrong state", t->to_string().c_str());
         return;
     }
 
     if (!t->is_described_when_hovering_over()) {
+        log("Describe %s; no not described", t->to_string().c_str());
         return;
     }
 
     if (t->long_text_description() == "") {
-        t->show_botcon_description();
+        log("Describe %s; has no text", t->to_string().c_str());
         return;
+    }
+
+    //
+    // If we're trying to show the player, then don't do that
+    // if we're showing something more interesting from the
+    // inventory.
+    //
+    if (game->current_wid_thing_info) {
+        log("Currently describing %s", 
+            game->current_wid_thing_info->to_string().c_str());
+
+        if (game->current_wid_thing_info->is_hidden) {
+            log("Describe %s; no showing something more interesting", 
+                t->to_string().c_str());
+            return;
+        }
+    }
+
+    if (wid_thing_info_window.size()) {
+        log("Currently showing %d things",
+            (int) wid_thing_info_window.size());
+        auto o = wid_thing_info_window.front();
+
+        log("Currently showing first thing: %s", o->t->to_string().c_str());
+        if (o->t->is_hidden) {
+            log("Describe %s; no, showing more interesting things", 
+                t->to_string().c_str());
+            return;
+        }
     }
 
     wid_thing_info_fini();
     std::vector<Thingp> hover_over_things;
     hover_over_things.push_back(t);
-    game->wid_thing_info_create_when_hovering_over(hover_over_things);
+    game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
 }
