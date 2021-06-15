@@ -168,7 +168,7 @@ std::string Thing::short_text_capitalized (void) const
 void Thing::show_botcon_description (void) const
 {_
     auto text = text_description();
-
+ 
     bool skip_showing_keys_to_use = true;
     switch (game->state) {
         case Game::STATE_NORMAL:
@@ -188,7 +188,27 @@ void Thing::show_botcon_description (void) const
             break;
     }
 
+    //
+    // Want to show that you can drop a bag if you select it.
+    //
+    if (get_immediate_owner()) {
+        if (is_droppable()){
+            text += " %%fg=orange$" +
+                std::string(
+                    SDL_GetScancodeName(
+                        (SDL_Scancode)game->config.key_drop)) +
+                "%%fg=reset$ to drop.";
+        }
+    }
+
+    //
+    // Unless a bag.
+    //
     if (skip_showing_keys_to_use) {
+        if (text.empty()) {
+            return;
+        }
+        BOTCON("%s", text.c_str());
         return;
     }
 
@@ -198,14 +218,6 @@ void Thing::show_botcon_description (void) const
     }
 
     if (get_immediate_owner()) {
-        if (is_droppable()){
-            text += " %%fg=orange$" +
-                std::string(
-                    SDL_GetScancodeName(
-                        (SDL_Scancode)game->config.key_drop)) +
-                "%%fg=reset$ to drop.";
-        }
-
         if (is_usable()){
             if (is_food()){
                 text += " %%fg=green$" +

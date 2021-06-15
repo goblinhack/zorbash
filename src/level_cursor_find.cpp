@@ -19,7 +19,9 @@
 void Level::cursor_find_on_visible_things (
                         const int16_t minx, const int16_t miny,
                         const int16_t maxx, const int16_t maxy)
-{
+{_
+    log("Cursor find on visible things");
+_
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS) ||
@@ -67,6 +69,4 @@ void Level::cursor_find_on_visible_things (
 
 done:
     game->wid_thing_info_destroy_deferred();
-
-    cursor_describe();
 }

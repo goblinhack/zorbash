@@ -188,6 +188,7 @@ public:
                     chasm_tile_map = {};
 
     bool                       is_being_destroyed {};
+    bool                       cursor_update_needed {};
 
     //
     // Animation loop counters for surface effects

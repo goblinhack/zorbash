@@ -93,6 +93,7 @@ void Level::cursor_move (void)
             cursor_at_old = cursor_at;
             cursor->move(cursor_at);
             cursor_recreate();
+            cursor_describe();
         }
     }
 }

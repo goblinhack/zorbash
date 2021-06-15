@@ -378,12 +378,18 @@ void player_tick (void)
         // }
 
         //
-        // IF something was being described and we moved, clear it now
+        // If something was being described and we moved, clear it now
         //
-        wid_thing_info_fini();
+        bool moving = player->is_moving;
 
         fpoint future_pos = player->mid_at + fpoint(dx, dy);
-        player->move(future_pos, up, down, left, right, attack, wait, true);
+        bool moved = player->move(future_pos, up, down, left, right, attack, wait, true);
+
+        if (moved) {
+            if (!moving) {
+                wid_thing_info_fini();
+            }
+        }
 
         //
         // Update reachability for the player
