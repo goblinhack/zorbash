@@ -20,10 +20,6 @@
 
 void Thing::log_ (const char *fmt, va_list args) const
 {
-    if (!g_opt_debug1) {
-        return;
-    }
-
     verify(this);
     auto t = this;
     char buf[MAXSTR];
@@ -45,10 +41,6 @@ void Thing::log_ (const char *fmt, va_list args) const
 
 void Thing::log (const char *fmt, ...) const
 {
-    if (!g_opt_debug1) {
-        return;
-    }
-
     verify(this);
     log_catchup_missing_indent_levels();
 
@@ -225,21 +217,6 @@ void Thing::err (const char *fmt, ...) const
     }
 
     nested_error = false;
-}
-
-void Thing::dbg (const char *fmt, ...) const
-{
-    verify(this);
-    if (!g_opt_debug2) {
-        return;
-    }
-    auto t = this;
-
-    va_list args;
-
-    va_start(args, fmt);
-    t->log_(fmt, args);
-    va_end(args);
 }
 
 void Thing::botcon_ (const char *fmt, va_list args) const

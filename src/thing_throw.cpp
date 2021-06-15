@@ -6,13 +6,15 @@
 #include <math.h>
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
 
 bool Thing::throw_item_choose_target (Thingp item)
 {_
-    log("Trying to use: %s", item->to_string().c_str());
+    dbg("Trying to use: %s", item->to_string().c_str());
 
     if (!item->is_throwable()) {
         if (is_player()) {
@@ -54,7 +56,7 @@ void Thing::throw_at (Thingp item, Thingp target)
         TOPCON("You throw %s.", item->text_the().c_str());
     }
 
-    log("Thrown %s", item->to_string().c_str());
+    dbg("Thrown %s", item->to_string().c_str());
     item->move_to_immediately(target->mid_at);
     item->visible();
 

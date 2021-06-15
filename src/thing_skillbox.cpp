@@ -17,7 +17,7 @@
 
 bool Thing::skillbox_id_insert (Thingp what)
 {_
-    log("Skillbox insert %s", what->to_string().c_str());
+    dbg("Skillbox insert %s", what->to_string().c_str());
 _
     auto player = level->player;
     if (!player) {
@@ -94,7 +94,7 @@ _
 
 bool Thing::skillbox_id_remove (Thingp what)
 {_
-    log("Skillbox remove %s", what->to_string().c_str());
+    dbg("Skillbox remove %s", what->to_string().c_str());
 _
     auto player = level->player;
     if (!player) {
@@ -128,7 +128,7 @@ _
         if (what->tp() == tpp) {
             game->request_remake_skillbox = true;
 
-            log("Remove slot");
+            dbg("Remove slot");
             monstp->skillbox_id[i] = 0;
 
             if (!monstp->skillbox_id.size()) {
@@ -155,7 +155,7 @@ _
 
 Thingp Level::skillbox_get (const uint32_t slot)
 {_
-    log("Skillbox get slot %d", slot);
+    dbg("Skillbox get slot %d", slot);
 _
     if (!player) {
         ERR("No player");
@@ -191,7 +191,9 @@ _
         auto o = thing_find(oid);
         if (o) {
             if (o->tp() == tpp) {
-                o->log("Got skillbox item %s", tpp->name().c_str());
+                if (unlikely(g_opt_debug2)) {
+                    o->log("Got skillbox item %s", tpp->name().c_str());
+                }
                 return o;
             }
         }
@@ -243,7 +245,9 @@ _
         return false;
     }
 
-    what->log("Over skillbox item");
+    if (unlikely(g_opt_debug2)) {
+        what->log("Over skillbox item");
+    }
     return true;
 }
 
@@ -283,7 +287,9 @@ _
     }
 
     what->is_activated = !what->is_activated;
-    what->log("Chosen skillbox item");
+    if (unlikely(g_opt_debug2)) {
+        what->log("Chosen skillbox item");
+    }
 
     if (what->is_activated) {
         TOPCON("You activate %s skill.", what->text_the().c_str());
@@ -300,7 +306,9 @@ Thingp Level::skillbox_describe (const uint32_t slot)
 _
     auto what = skillbox_get(slot);
     if (what) {
-        what->log("Skillbox: describe slot %d", slot);
+        if (unlikely(g_opt_debug2)) {
+            what->log("Skillbox: describe slot %d", slot);
+        }
         what->describe_when_hovered_over_in_rightbar();
     } else {
         LOG("Skillbox: describe slot %d => nothing there", slot);

@@ -26,27 +26,27 @@ void Thing::location_check_forced (void)
     //
     if (level->is_being_destroyed) {
         if (is_player()) {
-            log("Location check, skip, level is being destroyed");
+            dbg("Location check, skip, level is being destroyed");
         }
         return;
     }
 
     if (is_being_destroyed) {
         if (is_player()) {
-            log("Location check, skip, being destroyed");
+            dbg("Location check, skip, being destroyed");
         }
         return;
     }
 
     if (is_hidden) {
         if (is_player()) {
-            log("Location check, skip, is hidden");
+            dbg("Location check, skip, is hidden");
         }
         return;
     }
 
     if (is_player()) {
-        log("Location check, do");
+        dbg("Location check, do");
     }
 
     //
@@ -108,25 +108,25 @@ void Thing::location_check_forced (void)
 
     if (descend_dungeon_tick()) {
         if (is_player()) {
-            log("Location check, descending dungeon");
+            dbg("Location check, descending dungeon");
         }
         return;
     }
     if (ascend_dungeon_tick()) {
         if (is_player()) {
-            log("Location check, ascending dungeon");
+            dbg("Location check, ascending dungeon");
         }
         return;
     }
     if (descend_sewer_tick()) {
         if (is_player()) {
-            log("Location check, descending sewer");
+            dbg("Location check, descending sewer");
         }
         return;
     }
     if (ascend_sewer_tick()) {
         if (is_player()) {
-            log("Location check, ascending sewer");
+            dbg("Location check, ascending sewer");
         }
         return;
     }
@@ -136,14 +136,14 @@ void Thing::location_check (void)
 {_
     if (get_tick_last_location_check() == game->tick_current) {
         if (is_player()) {
-            log("Skip location check, already done. Last check %d, game tick %d",
+            dbg("Skip location check, already done. Last check %d, game tick %d",
                 get_tick_last_location_check(), game->tick_current);
         }
         return;
     }
 
     if (is_player()) {
-        log("Do location check. Last check %d, game tick %d",
+        dbg("Do location check. Last check %d, game tick %d",
             get_tick_last_location_check(), game->tick_current);
     }
 
@@ -159,9 +159,11 @@ void Thing::location_check (void)
 //
 void Thing::location_check_all_things_at (void)
 {_
-    log("Do location checks");
+    dbg("Do location checks");
     FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {_
-        t->log("Do location check");
+        if (unlikely(g_opt_debug2)) {
+            t->log("Do location check");
+        }
         t->location_check();
     } FOR_ALL_THINGS_END()
 }
@@ -171,9 +173,11 @@ void Thing::location_check_all_things_at (void)
 //
 void Thing::location_check_forced_all_things_at (void)
 {_
-    log("Do location checks");
+    dbg("Do location checks");
     FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {_
-        t->log("Do location check");
+        if (unlikely(g_opt_debug2)) {
+            t->log("Do location check");
+        }
         t->location_check_forced();
     } FOR_ALL_THINGS_END()
 }

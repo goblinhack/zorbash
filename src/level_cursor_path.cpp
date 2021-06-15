@@ -183,9 +183,7 @@ void Level::cursor_path_draw_line (point start, point end)
     set(d.val, end.x, end.y, DMAP_IS_GOAL);
     set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-    if (g_opt_debug4) {
-        log("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
-    }
+    dbg3("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
     dmap_process(&d, dmap_start, dmap_end);
     //dmap_print(&d, start, dmap_start, dmap_end);

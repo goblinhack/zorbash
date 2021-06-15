@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
@@ -119,7 +121,7 @@ void Thing::move_carried_items (void)
             if (level->is_shallow_water((int)mid_at.x, (int)mid_at.y) &&
                 !level->is_ripple((int)mid_at.x, (int)mid_at.y)) {
                 fpoint at(mid_at.x, mid_at.y);
-                log("Causes ripples");
+                dbg("Causes ripples");
                 if (random_range(0, 1000) > 500) {
                     level->thing_new(tp_random_ripple()->name(), at);
                 }
@@ -206,10 +208,10 @@ bool Thing::is_carrying_item (void)
 std::vector<Thingp> Thing::get_item_list (void)
 {_
     std::vector<Thingp> tr;
-    log("Carried items:");
+    dbg("Carried items:");
 _
     if (!monstp) {
-        log("Not carrying");
+        dbg("Not carrying");
         return tr;
     }
 
@@ -219,7 +221,7 @@ _
             continue;
         }
 
-        log("Item %s", t->to_string().c_str());
+        dbg("Item %s", t->to_string().c_str());
         if (t->monstp && t->monstp->carrying.size()) {
             auto tr2 = t->get_item_list();
             std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));

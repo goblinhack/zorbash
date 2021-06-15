@@ -90,7 +90,7 @@ void Thing::on_born (void)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+        dbg("call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
@@ -385,7 +385,7 @@ void Thing::init (Levelp level,
     }
 
     if (tpp->is_loggable_for_unimportant_stuff()) {
-        log("Created");
+        dbg("Created");
     }
 
 #if 0
@@ -539,7 +539,7 @@ void Thing::reinit (void)
     }
 
     if (is_loggable_for_unimportant_stuff()) {
-        log("Recreated");
+        dbg("Recreated");
     }
 
     //

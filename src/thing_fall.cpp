@@ -33,7 +33,7 @@ void Thing::on_fall (void)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%ss)", mod.c_str(), fn.c_str(),
+        dbg("call %s.%s(%ss)", mod.c_str(), fn.c_str(),
             to_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id,
@@ -46,7 +46,7 @@ void Thing::on_fall (void)
 
 void Thing::fall (float fall_height, timestamp_t ms)
 {_
-    log("Can fall?");
+    dbg("Can fall?");
 _
     if (is_changing_level ||
         is_hidden || 
@@ -57,22 +57,22 @@ _
         is_waiting_to_ascend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
-        log("No");
+        dbg("No");
         return;
     }
 
     if (is_critical_to_level()) {
-        log("No, critical");
+        dbg("No, critical");
         return;
     }
 
     if (!is_able_to_fall()) {
-        log("No, unable to fall");
+        dbg("No, unable to fall");
         return;
     }
 
     if (is_floating()) {
-        log("No, floating");
+        dbg("No, floating");
         return;
     }
 
@@ -81,7 +81,7 @@ _
 
     set_fall_height(fall_height);
 
-    log("Begin falling");
+    dbg("Begin falling");
     level_pop();
     is_falling = true;
     level_push();
@@ -119,7 +119,7 @@ float Thing::get_fall (void)
 
     if (t >= get_timestamp_fall_end()) {
         is_falling = false;
-        log("End of falling timestamp");
+        dbg("End of falling timestamp");
         level_push();
         fall_to_next_level();
         return (0);
@@ -136,7 +136,7 @@ float Thing::get_fall (void)
         is_changing_level = true;
 
         if (is_player()) {
-            log("Player is waiting to complete the fall");
+            dbg("Player is waiting to complete the fall");
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
             is_waiting_to_fall = true;
         }
@@ -153,7 +153,7 @@ bool Thing::fall_to_next_level (void)
         return false;
     }
 
-    log("Try to fall to next level");
+    dbg("Try to fall to next level");
 _
     //
     // Fall from a dungeon to the next dungeon, 2 levels down
@@ -176,7 +176,7 @@ _
         if (is_player()) {
             TOPCON("The chasm is permanently blocked!");
         }
-        log("No, no next level");
+        dbg("No, no next level");
         return false;
     }
 
@@ -210,13 +210,13 @@ _
         tries++;
 
         if (next_level->is_oob(x, y)) {
-            log("No, %d,%d is out of dungeon", x, y);
+            dbg("No, %d,%d is out of dungeon", x, y);
             continue;
         }
 
-        log("Try to fall to %d,%d", x, y);
+        dbg("Try to fall to %d,%d", x, y);
         if (!next_level->is_dungeon(x, y)) {
-            log("No, %d,%d is not a dungeon tile", x, y);
+            dbg("No, %d,%d is not a dungeon tile", x, y);
             continue;
         }
 
@@ -231,7 +231,7 @@ _
             next_level->is_ascend_sewer(x, y)     ||
             next_level->is_descend_sewer(x, y)    ||
             next_level->is_descend_dungeon(x, y)) {
-            log("No, %d,%d is a special tile", x, y);
+            dbg("No, %d,%d is a special tile", x, y);
             continue;
         }
 
@@ -243,7 +243,9 @@ _
             next_level->is_lava(x, y)) {
 
             FOR_ALL_THINGS(next_level, t, x, y) {
-                t->log("Landed under thing on new level");
+                if (unlikely(g_opt_debug1)) {
+                    t->log("Landed under thing on new level");
+                }
             } FOR_ALL_THINGS_END()
 
             if (is_player()) {
@@ -269,10 +271,10 @@ _
                 }
             }
 
-            log("Land on the next level, change level then move to %d,%d", x, y);
+            dbg("Land on the next level, change level then move to %d,%d", x, y);
             level_change(next_level);
 
-            log("Land on the next level, move to %d,%d", x, y);
+            dbg("Land on the next level, move to %d,%d", x, y);
             move_to_immediately(fpoint(x, y));
 
             if (is_player()) {
@@ -343,7 +345,7 @@ _
             //
             // Update the z depth when falling
             // 
-            log("End of falling to next level");
+            dbg("End of falling to next level");
             level_pop();
             is_falling = false;
             is_changing_level = false;
@@ -371,6 +373,6 @@ _
             return true;
         }
 
-        log("No, not floor or lava");
+        dbg("No, not floor or lava");
     }
 }

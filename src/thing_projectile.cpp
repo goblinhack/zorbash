@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
@@ -11,7 +13,7 @@
 
 bool Thing::projectile_choose_target (Thingp item)
 {_
-    log("Trying to target a projectile with: %s", item->to_string().c_str());
+    dbg("Trying to target a projectile with: %s", item->to_string().c_str());
 
     if (!target_select(item)) {
         return false;
@@ -47,7 +49,7 @@ Thingp Thing::projectile_fire_at (const std::string &projectile_name, Thingp tar
     projectile->set_owner(this);
     projectile->move_to_immediately(target->mid_at);
 
-    log("Firing named projectile with: %s at %s", projectile->to_string().c_str(),
+    dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(),
         target->to_string().c_str());
 
     if (!projectile->is_projectile()) {

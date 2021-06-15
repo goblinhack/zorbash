@@ -32,4 +32,10 @@ void quit(void);
 void restart(void);
 void segv_handler(int sig);
 
+#define dbg if (unlikely(g_opt_debug1)) log
+#define dbg2 if (unlikely(g_opt_debug2)) log
+#define dbg3 if (unlikely(g_opt_debug3)) log
+#define dbg4 if (unlikely(g_opt_debug4)) log
+#define dbg5 if (unlikely(g_opt_debug5)) log
+
 #endif

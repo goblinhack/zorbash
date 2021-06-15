@@ -33,7 +33,7 @@ void Thing::barrel_tick (void)
         return;
     }
 
-    log("Crushed by a barrel");
+    dbg("Crushed by a barrel");
 
     FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
         if (!t->is_barrel()) {

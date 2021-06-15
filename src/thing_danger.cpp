@@ -170,8 +170,8 @@ int Thing::get_danger_current_level (void)
     //
     // Don't include crush damage as it is non typical
     //
-    if (g_opt_debug3) {
-        log("danger level %d", danger_level);
+    if (unlikely(g_opt_debug3)) {
+        dbg("danger level %d", danger_level);
     }
 
     // topcon("level %d", danger_level);

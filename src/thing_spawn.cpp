@@ -20,7 +20,7 @@
 
 bool Thing::spawn_next_to (const std::string& what)
 {_
-    log("Spawn %s next to", what.c_str());
+    dbg("Spawn %s next to", what.c_str());
 _
     std::vector<point> possible;
     static const std::vector<point> all_deltas = {
@@ -45,7 +45,7 @@ _
     //
     if (tpp->is_monst()) {
         if (level->monst_count >= LEVELS_MONST_COUNT) {
-            log("Too many minions");
+            dbg("Too many minions");
             return false;
         }
     }
@@ -106,7 +106,7 @@ _
 
 bool Thing::spawn_next_to_or_on_monst (const std::string& what)
 {_
-    log("Spawn %s next to or on monst", what.c_str());
+    dbg("Spawn %s next to or on monst", what.c_str());
 
     std::vector<point> possible;
     static const std::vector<point> all_deltas = {
@@ -210,7 +210,7 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
         radius_max = item->tp()->blast_max_radius();
     }
 
-    log("Spawn %s in radius range %u to %u", 
+    dbg("Spawn %s in radius range %u to %u", 
         what.c_str(), radius_min, radius_max);
 
     //
@@ -262,7 +262,7 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
 
 bool Thing::spawn_fire (const std::string& what)
 {_
-    log("Spawn fire: %s", what.c_str());
+    dbg("Spawn fire: %s", what.c_str());
 
     std::vector<point> possible;
     static const std::vector<point> all_deltas = {
@@ -302,7 +302,9 @@ bool Thing::spawn_fire (const std::string& what)
     auto chosen = possible[random_range(0, cands)];
 
     auto c = level->thing_new(what, chosen);
-    c->log("Spawned");
+    if (unlikely(g_opt_debug2)) {
+        c->log("Spawned");
+    }
     c->inherit_from(this);
 
     if (is_spawner()) {
@@ -320,7 +322,7 @@ bool Thing::spawn_fire (const std::string& what)
 
 bool Thing::spawn_at_if_possible (const std::string& what)
 {_
-    log("Spawn under: %s", what.c_str());
+    dbg("Spawn under: %s", what.c_str());
 
     std::vector<point> possible;
     auto x = mid_at.x;
@@ -359,7 +361,7 @@ bool Thing::spawn_at_if_possible (const std::string& what)
 
 bool Thing::spawn_at (const std::string& what)
 {_
-    log("Spawn under: %s", what.c_str());
+    dbg("Spawn under: %s", what.c_str());
 
     std::vector<point> possible;
     auto x = mid_at.x;

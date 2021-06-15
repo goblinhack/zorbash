@@ -266,14 +266,16 @@ void Thing::show_botcon_description (void) const
     }
 
     if (!is_hidden) {
-        if (is_collectable()){
-            auto k = std::string(
-                SDL_GetScancodeName(
-                    (SDL_Scancode)game->config.key_wait_or_collect));
-            if (k == ".") {
-                text += " Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
-            } else {
-                text += " %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+        if (is_collectable() && level->player) {
+            if (mid_at == level->player->mid_at) {
+                auto k = std::string(
+                    SDL_GetScancodeName(
+                        (SDL_Scancode)game->config.key_wait_or_collect));
+                if (k == ".") {
+                    text += " Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+                } else {
+                    text += " %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+                }
             }
         }
     }

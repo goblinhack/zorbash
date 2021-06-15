@@ -68,7 +68,7 @@ void Thing::kill (Thingp killer, const char *reason)
                         fn = fn.replace(found, 2, "");
                     }
 
-                    log("call %s.%s(%s)", mod.c_str(), fn.c_str(),
+                    dbg("call %s.%s(%s)", mod.c_str(), fn.c_str(),
                         to_string().c_str());
 
                     py_call_void_fn(mod.c_str(), fn.c_str(),
@@ -111,7 +111,7 @@ void Thing::kill (Thingp killer, const char *reason)
         level->map_follow_player = false;
         game->dead_select(reason);
     } else if (is_loggable_for_important_stuff()) {
-        log("%s is dead, %s", text_The().c_str(), reason);
+        dbg("%s is dead, %s", text_The().c_str(), reason);
         if (killer && (killer != this)) {
             if (killer->is_player()) {
                 if (is_monst()) {
@@ -151,7 +151,7 @@ void Thing::kill (Thingp killer, const char *reason)
         // Drop everything!
         //
         if (on_death_drop_all_items()) {
-            log("Drop all items on death");
+            dbg("Drop all items on death");
             drop_all();
         }
 
@@ -159,7 +159,7 @@ void Thing::kill (Thingp killer, const char *reason)
     }
 
     if (on_death_is_open()) {
-        log("Killed, now open");
+        dbg("Killed, now open");
         level_pop();
         is_open = true;
         level_push();
@@ -215,7 +215,7 @@ void Thing::kill (Thingp killer, const char *reason)
         // Already a corpse
         //
         if (is_loggable_for_important_stuff()) {
-            log("Already a corpse, clean it up");
+            dbg("Already a corpse, clean it up");
         }
         auto tpp = tp_random_bones();
         if (!tpp) {
@@ -227,7 +227,7 @@ void Thing::kill (Thingp killer, const char *reason)
         // Leaves a corpse
         //
         if (is_loggable_for_important_stuff()) {
-            log("Killed, leaves corpse");
+            dbg("Killed, leaves corpse");
         }
 
         level->set_is_corpse(mid_at.x, mid_at.y);
@@ -246,7 +246,7 @@ void Thing::kill (Thingp killer, const char *reason)
     level_pop();
 
     if (is_loggable_for_important_stuff()) {
-        log("Killed, need to garbage collect");
+        dbg("Killed, need to garbage collect");
     }
 
     gc();

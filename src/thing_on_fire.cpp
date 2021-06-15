@@ -35,7 +35,7 @@ void Thing::on_fire (void)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s)", mod.c_str(), fn.c_str(),
+        dbg("call %s.%s(%s)", mod.c_str(), fn.c_str(),
             to_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id,
@@ -60,7 +60,7 @@ void Thing::unset_on_fire (void)
 
     auto fire_anim = level->thing_find(id);
     if (fire_anim) {
-        log("Unset on fire");
+        dbg("Unset on fire");
         fire_anim->dead("by removing fire");
         set_on_fire_anim_id(0);
     }
@@ -76,7 +76,7 @@ bool Thing::set_on_fire (const std::string &why)
         return false;
     }
 
-    log("Set on fire, %s", why.c_str());
+    dbg("Set on fire, %s", why.c_str());
     auto on_fire_anim = level->thing_new("fire", this);
     set_on_fire_anim_id(on_fire_anim->id);
     on_fire_anim->set_owner(this);
@@ -247,7 +247,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
             target = best;
             if (ai_create_on_fire_path(nh, start, target)) {
                 monstp->wander_target = target;
-                log("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+                dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
                 return true;
             }
         }
@@ -259,7 +259,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
 
 bool Thing::ai_on_fire (void)
 {_
-    log("Ai on fire");
+    dbg("Ai on fire");
     auto tries = 10;
     while (tries--) {
         point nh;

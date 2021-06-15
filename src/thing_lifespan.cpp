@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
 #include "my_game.h"
@@ -27,7 +29,7 @@ void Thing::on_lifespan (Thingp what)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
+        dbg("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
             to_string().c_str(),
             what->to_string().c_str());
 
@@ -82,7 +84,7 @@ void Thing::lifespan_tick (void)
     if (get_charge_count()) {
         decr_charge_count();
         if (get_charge_count()) {
-            log("Lifespan expired (but has %d charges left)", get_charge_count());
+            dbg("Lifespan expired (but has %d charges left)", get_charge_count());
             game->request_remake_inventory = true;
             set_lifespan(tpp->lifespan());
             return;

@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
@@ -14,7 +16,7 @@ void Thing::resurrect_tick (void)
     // Rise at the apointed time
     //
     if (game->tick_current < get_tick_resurrect_when()) {
-        log("Too soon to rise from the grave, at %d wait for %d",
+        dbg("Too soon to rise from the grave, at %d wait for %d",
             game->tick_current, get_tick_resurrect_when());
         return;
     }
@@ -24,7 +26,7 @@ void Thing::resurrect_tick (void)
     // Or no respawn if something we don't like is standing on us!
     //
     if (is_less_preferred_terrain(make_point(mid_at))) {
-        log("Do not resurrect, on bad terrain");
+        dbg("Do not resurrect, on bad terrain");
         return;
     }
 
@@ -38,7 +40,7 @@ void Thing::resurrect_tick (void)
             tile_curr = 0;
             animate();
 
-            log("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
+            dbg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
             set_health(v);
             set_health_max(v);
 
@@ -49,7 +51,7 @@ void Thing::resurrect_tick (void)
             set_tick(game->tick_current);
             is_dead = false;
         } else {
-            log("Too weak to rise from the grave");
+            dbg("Too weak to rise from the grave");
         }
     }
 }

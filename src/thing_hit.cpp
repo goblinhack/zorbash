@@ -37,7 +37,7 @@ void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(),
+        dbg("call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(),
             to_string().c_str(),
             hitter->to_string().c_str(),
             real_hitter->to_string().c_str(),
@@ -74,7 +74,7 @@ void Thing::on_miss (Thingp hitter)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
+        dbg("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
             to_string().c_str(), hitter->to_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id,
@@ -101,7 +101,7 @@ void Thing::on_bite (void)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
+        dbg("call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
@@ -131,7 +131,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         return false;
     }
 
-    hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage);
+    if (unlikely(g_opt_debug2)) {
+        hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage);
+    }
 
     auto delta = mid_at - hitter->mid_at;
 
@@ -181,15 +183,21 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     if (is_dead) {
         if (real_hitter->can_eat(this)) {
-            hitter->log("Hit bypass, eat it");
+            if (unlikely(g_opt_debug2)) {
+                hitter->log("Hit bypass, eat it");
+            }
             damage = 0;
         } else {
-            hitter->log("Hit fails, it's dead");
+            if (unlikely(g_opt_debug2)) {
+                hitter->log("Hit fails, it's dead");
+            }
             return false;
         }
     } else {
         if (!damage) {
-            hitter->log("Hit fails, no damage");
+            if (unlikely(g_opt_debug2)) {
+                hitter->log("Hit fails, no damage");
+            }
             return false;
         }
     }
@@ -229,7 +237,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->is_lava()) {
             if (damage_doubled_from_fire()) {
                 damage *= 2;
-                log("Double damage from fire");
+                dbg("Double damage from fire");
             }
         }
     }
@@ -238,7 +246,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_acid()) {
             if (damage_doubled_from_acid()) {
                 damage *= 2;
-                log("Double damage from acid");
+                dbg("Double damage from acid");
             }
         }
     }
@@ -247,7 +255,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_poison()) {
             if (damage_doubled_from_poison()) {
                 damage *= 2;
-                log("Double damage from poison");
+                dbg("Double damage from poison");
             }
         }
     }
@@ -256,7 +264,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
             if (damage_doubled_from_water()) {
                 damage *= 2;
-                log("Double damage from water");
+                dbg("Double damage from water");
             }
         }
     }
@@ -505,7 +513,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         //
         // Record who dun it.
         //
-        log("Is killed by (%s) %u damage, health now %d",
+        dbg("Is killed by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->text_a_or_an();
 
@@ -526,7 +534,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->eat(this);
         }
     } else {
-        log("Is hit by (%s) %u damage, health now %d",
+        dbg("Is hit by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
     }
 
@@ -545,7 +553,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int damage)
 {_
-    hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
+    if (unlikely(g_opt_debug2)) {
+        hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
+    }
 _
     //
     // If an arrow, who really fired it?
@@ -578,20 +588,28 @@ _
     //
     if (is_dead) {
         if (real_hitter->can_eat(this)) {
-            hitter->log("Cannot hit dead thing, but can eat: %s", to_string().c_str());
+            if (unlikely(g_opt_debug2)) {
+                hitter->log("Cannot hit dead thing, but can eat: %s", to_string().c_str());
+            }
         } else {
-            hitter->log("Cannot hit: %s is dead", to_string().c_str());
+            if (unlikely(g_opt_debug2)) {
+                hitter->log("Cannot hit: %s is dead", to_string().c_str());
+            }
             return false;
         }
     }
 
     if (is_indestructible()) {
-        hitter->log("Cannot hit: %s is indestructible", to_string().c_str());
+        if (unlikely(g_opt_debug2)) {
+            hitter->log("Cannot hit: %s is indestructible", to_string().c_str());
+        }
         return false;
     }
 
     if (is_resurrecting) {
-        hitter->log("Cannot hit: %s is resurrecting", to_string().c_str());
+        if (unlikely(g_opt_debug2)) {
+            hitter->log("Cannot hit: %s is resurrecting", to_string().c_str());
+        }
         return false;
     }
 
@@ -601,7 +619,9 @@ _
         // damage. We don't want the player to keep absorbing hits when
         // already dead though.
         //
-        hitter->log("No, hitter %s is already dead", to_string().c_str());
+        if (unlikely(g_opt_debug2)) {
+            hitter->log("No, hitter %s is already dead", to_string().c_str());
+        }
         return false;
     }
 
@@ -626,7 +646,9 @@ _
                 //
                 // Not something that typically damages walls.
                 //
-                hitter->log("No, %s is immune (1)", to_string().c_str());
+                if (unlikely(g_opt_debug2)) {
+                    hitter->log("No, %s is immune (1)", to_string().c_str());
+                }
                 return false;
             }
         }
@@ -640,17 +662,23 @@ _
                 //
                 // Not something that typically damages walls.
                 //
-                hitter->log("No, %s is immune (2)", to_string().c_str());
+                if (unlikely(g_opt_debug2)) {
+                    hitter->log("No, %s is immune (2)", to_string().c_str());
+                }
                 return false;
             }
         }
 
         if (hitter->is_fire()) {
-            hitter->log("Fire attack");
+            if (unlikely(g_opt_debug2)) {
+                hitter->log("Fire attack");
+            }
         }
     }
 
-    hitter->log("Hit succeeds");
+    if (unlikely(g_opt_debug2)) {
+        hitter->log("Hit succeeds");
+    }
     int hit_and_killed;
 
     hit_and_killed = ai_hit_actual(hitter, real_hitter, crit, bite, damage);

@@ -21,9 +21,9 @@ void Thing::poison_boost (int v)
     set_poison(new_poison);
 
     if (new_poison >= max_poison) {
-        log("poison boost not possible, maxxed at %d", new_poison);
+        dbg("poison boost not possible, maxxed at %d", new_poison);
     } else {
-        log("poison boost by %d from %d to %d", v, old_poison, new_poison);
+        dbg("poison boost by %d from %d to %d", v, old_poison, new_poison);
     }
 #endif
 }

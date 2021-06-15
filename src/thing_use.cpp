@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
@@ -28,7 +30,7 @@ void Thing::on_use (Thingp what)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
+        dbg("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
             to_string().c_str(),
             what->to_string().c_str());
 
@@ -54,7 +56,7 @@ void Thing::on_use (Thingp what, Thingp target)
                 fn = fn.replace(found, 2, "");
             }
 
-            log("call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(),
+            dbg("call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(),
                 to_string().c_str(),
                 what->to_string().c_str(),
                 target->to_string().c_str());
@@ -71,7 +73,7 @@ void Thing::on_use (Thingp what, Thingp target)
 
 void Thing::used (Thingp what, Thingp target, bool remove_after_use)
 {_
-    log("Attempt to use %s", what->to_string().c_str());
+    dbg("Attempt to use %s", what->to_string().c_str());
 
     on_use(what, target);
 
@@ -88,14 +90,14 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
     if (what->get_charge_count()) {
         what->decr_charge_count();
         if (what->get_charge_count()) {
-            log("Used %s (has %d charges left)", 
+            dbg("Used %s (has %d charges left)", 
                 what->to_string().c_str(), what->get_charge_count());
             game->request_remake_inventory = true;
             return;
         }
     }
 
-    log("Used %s", what->to_string().c_str());
+    dbg("Used %s", what->to_string().c_str());
 
     //
     // Remove the item from the inventory, possibly throwing it at the
@@ -132,7 +134,7 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
 
 bool Thing::use (Thingp what)
 {_
-    log("Trying to use: %s", what->to_string().c_str());
+    dbg("Trying to use: %s", what->to_string().c_str());
 _
     if (what->is_skill()) {
         skill_use(what);

@@ -19,7 +19,7 @@
 
 void Level::cursor_describe (void)
 {_
-    log("Cursor describe");
+    dbg("Cursor describe");
     if (!cursor) {
         return;
     }

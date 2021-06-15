@@ -568,8 +568,6 @@ public:
     void cursor_path_draw_circle(void);
     void cursor_path_draw_line(point start, point end);
     void cursor_recreate(void);
-    void dbg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-    void dbg_(const char *fmt, va_list args); // compile error without
     void describe(Thingp);
     void describe(fpoint at);
     void display(void);

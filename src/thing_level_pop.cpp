@@ -135,5 +135,5 @@ void Thing::level_pop (void)
     }
 #endif
 
-    // log("Is_monst count %d (after pop) at %d,%d", level->is_monst(mx, my), mx, my);
+    // dbg("Is_monst count %d (after pop) at %d,%d", level->is_monst(mx, my), mx, my);
 }

@@ -14,10 +14,10 @@
 
 bool Thing::carry (Thingp it)
 {_
-    log("Try to carry %s", it->to_string().c_str());
+    dbg("Try to carry %s", it->to_string().c_str());
 _
     if (!monstp) {
-        log("No; not a monst");
+        dbg("No; not a monst");
         return false;
     }
 
@@ -34,12 +34,12 @@ _
         // Stop fast loops in collecting things
         //
         if (particle_anim_exists()) {
-            log("No; particle anim exists");
+            dbg("No; particle anim exists");
             return false;
         }
 
         if (get_where_i_dropped_an_item_last() == make_point(mid_at)) {
-            log("No; was dropped here recently");
+            dbg("No; was dropped here recently");
             return false;
         }
     }
@@ -49,10 +49,10 @@ _
         // Always carry
         //
     } else if (bag_add(it)) {
-        log("Added to bag at %d,%d", 
+        dbg("Added to bag at %d,%d", 
             it->monstp->bag_position.x, it->monstp->bag_position.y);
     } else {
-        log("No; cannot store in a bag");
+        dbg("No; cannot store in a bag");
         set_where_i_failed_to_collect_last(make_point(it->mid_at));
 
         if (is_player()) {
@@ -64,7 +64,7 @@ _
     auto existing_owner = it->get_immediate_owner();
     if (existing_owner) {
         if (existing_owner == this) {
-            log("No; same owner");
+            dbg("No; same owner");
             return false;
         }
         existing_owner->drop(it);
@@ -72,14 +72,14 @@ _
 
     for (const auto& item : monstp->carrying) {
         if (item == it->id) {
-            log("No; already carried");
+            dbg("No; already carried");
             return false;
         }
     }
 
     if (is_player()) {
         if (!inventory_id_insert(it)) {
-            log("No; no space in inventory");
+            dbg("No; no space in inventory");
             return false;
         }
     }
@@ -110,7 +110,7 @@ _
 
 bool Thing::try_to_carry (Thingp it)
 {_
-    log("Try to carry: %s", it->to_string().c_str());
+    dbg("Try to carry: %s", it->to_string().c_str());
     return carry(it);
 }
 
@@ -120,30 +120,30 @@ std::list<Thingp> Thing::anything_to_carry (void)
 
     FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
         if (t->is_dead) {
-            log("Potential item to carry, no, is dead: %s",
+            dbg("Potential item to carry, no, is dead: %s",
                 t->to_string().c_str());
             continue;
         }
 
         if (t->get_immediate_owner()) {
-            log("Potential item to carry, no, has owner: %s",
+            dbg("Potential item to carry, no, has owner: %s",
                 t->to_string().c_str());
             continue;
         }
 
         if (!t->is_collectable()) {
-            log("Potential item to carry, no, not collectable: %s",
+            dbg("Potential item to carry, no, not collectable: %s",
                 t->to_string().c_str());
             continue;
         }
 
         if (t->is_hidden) {
-            log("Potential item to carry, no, is hidden: %s",
+            dbg("Potential item to carry, no, is hidden: %s",
                 t->to_string().c_str());
             continue;
         }
 
-        log("Potential item to carry: %s", t->to_string().c_str());
+        dbg("Potential item to carry: %s", t->to_string().c_str());
         items.push_back(t);
     } FOR_ALL_THINGS_END()
 

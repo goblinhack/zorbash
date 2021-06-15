@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_main.h"
 #include "my_tile.h"
@@ -34,11 +35,11 @@ bool Thing::eat (Thingp it)
             // For treasure what should the boost be?
             //
             if (!health_boost(it->get_nutrition())) {
-                log("No health boost from eating %s", it->text_the().c_str());
+                dbg("No health boost from eating %s", it->text_the().c_str());
                 return false;
             }
 
-            log("Eats %s", it->text_the().c_str());
+            dbg("Eats %s", it->text_the().c_str());
 
             if (!is_player()) {
                 if (distance_to_player() < DMAP_IS_PASSABLE) {

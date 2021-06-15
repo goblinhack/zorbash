@@ -43,7 +43,7 @@ bool Thing::on_firing_at_something (Thingp hitter)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
+        dbg("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
             to_string().c_str(), hitter->to_string().c_str());
 
         return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id,

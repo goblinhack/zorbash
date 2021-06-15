@@ -33,7 +33,7 @@ bool Thing::on_tick (void)
             fn = fn.replace(found, 2, "");
         }
 
-        log("call %s.%s(%s)", mod.c_str(), fn.c_str(),
+        dbg("call %s.%s(%s)", mod.c_str(), fn.c_str(),
             to_string().c_str());
 
         return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id,
@@ -64,11 +64,11 @@ void Thing::achieve_goals_in_life (void)
         is_waiting_to_fall || 
         is_the_grid || 
         is_jumping) { 
-        log("Skip achieve goals in life");
+        dbg("Skip achieve goals in life");
         return;
     }
 
-    log("Achieve goals at tick %d, game is at tick %u",
+    dbg("Achieve goals at tick %d, game is at tick %u",
         get_tick(), game->tick_current);
 
     //
@@ -109,17 +109,17 @@ void Thing::achieve_goals_in_life (void)
     // If there is a next hop to go to, do it.
     //
     if (cursor_path_pop_next_and_move()) {
-        log("Pop next move");
+        dbg("Pop next move");
         return;
     }
 
     if (try_to_escape()) {
-        log("Try to escape");
+        dbg("Try to escape");
         return;
     }
 
     if (is_jumper()) {
-        log("Try to jump");
+        dbg("Try to jump");
         if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
             if (!collision_obstacle(level->player)) {
                 if (try_to_jump_towards_player()) {
@@ -145,14 +145,14 @@ void Thing::achieve_goals_in_life (void)
     // If this thing has AI, it can try and reach goals
     //
     if (get_dmap_scent()) {
-        log("Get next hop");
+        dbg("Get next hop");
         ai_get_next_hop();
     }
 }
 
 void Thing::achieve_goals_in_death (void)
 {_
-    log("Achieve death goals at tick %d, tick %u",
+    dbg("Achieve death goals at tick %d, tick %u",
         get_tick(), game->tick_current);
 
     resurrect_tick();
@@ -185,8 +185,8 @@ bool Thing::collision_check_do (void)
 
 void Thing::tick (void)
 {_
-    if (g_opt_debug4) {
-        log("Tick");
+    if (unlikely(g_opt_debug4)) {
+        dbg("Tick");
     }
 _
     update_interpolated_position();
@@ -206,15 +206,15 @@ _
                 incr_tick();
             }
         }
-        if (g_opt_debug4) {
-            log("Tick; is dead");
+        if (unlikely(g_opt_debug4)) {
+            dbg("Tick; is dead");
         }
         return;
     }
 
     if (unlikely(is_dead)) {
-        if (g_opt_debug4) {
-            log("Tick; died");
+        if (unlikely(g_opt_debug4)) {
+            dbg("Tick; died");
         }
         return;
     }

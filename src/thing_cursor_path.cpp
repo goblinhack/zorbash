@@ -51,7 +51,7 @@ bool Thing::cursor_path_pop_first_move (void)
     auto cursor = level->cursor;
 
     if (game->cursor_move_path.size()) {
-        log("Cursor path exists");
+        dbg("Cursor path exists");
 
         //
         // A path to the target exists.
@@ -60,7 +60,7 @@ bool Thing::cursor_path_pop_first_move (void)
         monstp->move_path = game->cursor_move_path;
         game->cursor_move_path.clear();
         if (cursor_path_pop_next_and_move()) {
-            log("Move to cursor next hop");
+            dbg("Move to cursor next hop");
             if (!game->cursor_move_path.size()) {
                 level->cursor_path_create();
             }
@@ -73,7 +73,7 @@ bool Thing::cursor_path_pop_first_move (void)
         //
         // Or we click on a locked door and cannot pass through.
         //
-        log("Failed to move to cursor next hop");
+        dbg("Failed to move to cursor next hop");
         level->cursor_path_create();
         return false;
     }
@@ -91,7 +91,7 @@ bool Thing::cursor_path_pop_first_move (void)
     //
     if ((fabs(future_pos.x - mid_at.x) <= 1) &&
         (fabs(future_pos.y - mid_at.y) <= 1)) {
-        log("Target is adjacent, attack or move to %f,%F",
+        dbg("Target is adjacent, attack or move to %f,%F",
             cursor->mid_at.x, cursor->mid_at.y);
         attack(cursor->mid_at);
         level->cursor_path_create();

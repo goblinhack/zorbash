@@ -22,19 +22,19 @@ bool Thing::descend_sewer_tick (void)
     }
 
     if (is_player()) {
-        log("Location check, descend sewer");
+        dbg("Location check, descend sewer");
     }
 
     if (get_tick() - get_tick_last_level_change() < 1) {
         if (is_player()) {
-            log("Location check, descend sewer, no too soon");
+            dbg("Location check, descend sewer, no too soon");
         }
         return false;
     }
 
     if (is_player()) {
         if (level->world_at.z & 1) {
-            log("Descending sewer");
+            dbg("Descending sewer");
             level->timestamp_fade_out_begin = time_get_time_ms_cached();
             level->fbo_light = sdl_fbo_save(FBO_FULLMAP_LIGHT);
             is_waiting_to_descend_sewer = true;
@@ -45,17 +45,17 @@ bool Thing::descend_sewer_tick (void)
         //
         // Not sure if monsts should do this as they crawl out of sewers
         //
-        log("Monst cannot descend sewer");
+        dbg("Monst cannot descend sewer");
         return false;
     }
 
-    log("Cannot descend sewer");
+    dbg("Cannot descend sewer");
     return false;
 }
 
 bool Thing::descend_sewer (void)
 {_
-    log("Descend sewer");
+    dbg("Descend sewer");
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -63,7 +63,7 @@ bool Thing::descend_sewer (void)
         is_waiting_to_ascend_dungeon || 
         is_waiting_to_ascend_sewer || 
         is_jumping) { 
-        log("Descend sewer, no");
+        dbg("Descend sewer, no");
         return false;
     }
 
@@ -88,7 +88,7 @@ bool Thing::descend_sewer (void)
         game->current_level = next_level;
     }
 
-    log("Is trying to descend to the sewer");
+    dbg("Is trying to descend to the sewer");
 
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
@@ -106,7 +106,7 @@ bool Thing::descend_sewer (void)
         TOPCON("You climb into the sewer. Why though?");
     }
 
-    log("Move to next level sewer entrance");
+    dbg("Move to next level sewer entrance");
     is_changing_level = true;
 
     level_change(l);
@@ -135,7 +135,7 @@ bool Thing::descend_sewer (void)
     }
 
     is_changing_level = false;
-    log("Moved to next level sewer");
+    dbg("Moved to next level sewer");
     if (is_player()) {
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
         level->update_new_level();

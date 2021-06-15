@@ -23,13 +23,13 @@ void Level::describe (fpoint p)
         return;
     }
 
-    log("Describe %f,%f", p.x, p.y);
+    dbg3("Describe %f,%f", p.x, p.y);
 
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS)) {
-        log("Describe %f,%f; no wrong state", p.x, p.y);
+        dbg3("Describe %f,%f; no wrong state", p.x, p.y);
         return;
     }
 
@@ -153,20 +153,20 @@ void Level::describe (fpoint p)
     } FOR_ALL_THINGS_END()
 
     if (hover_over_things.size()) {
-        log("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
+        dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
         game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
     } else {
         //
         // If we found nothing, then check to see if we are already showing
         // something of interest and if so, keep it.
         //
-        log("Describe %f,%f; nothing found", p.x, p.y);
+        dbg3("Describe %f,%f; nothing found", p.x, p.y);
 _
         auto o = game->current_wid_thing_info;
         if (o) {
-            log("Currently describing %s", o->to_string().c_str()); 
+            dbg3("Currently describing %s", o->to_string().c_str()); 
             if (o->is_hidden) {
-                log("Currently describing %s; keep it", 
+                dbg3("Currently describing %s; prefer me over current", 
                     o->to_string().c_str());
             }
 
@@ -175,7 +175,7 @@ _
             // to keep showing that if nothing else.
             //
             if (o->mid_at == player->mid_at) {
-                log("Describing %s; keep it", o->to_string().c_str());
+                dbg3("Describe %s; prefer me over current", o->to_string().c_str());
                 return;
             }
         }
@@ -183,14 +183,14 @@ _
         if (wid_thing_info_window.size()) {
             auto o = wid_thing_info_window.front()->t;
             if (o) {
-                log("Describing %s", o->to_string().c_str());
+                dbg3("Describe %s", o->to_string().c_str());
                 if (o->is_hidden) {
-                    log("Describing %s; keep it", o->to_string().c_str());
+                    dbg3("Describe %s; prefer me over current", o->to_string().c_str());
                     return;
                 }
 
                 if (o->mid_at == player->mid_at) {
-                    log("Describing %s; keep it", o->to_string().c_str());
+                    dbg3("Describe %s; prefer me over current", o->to_string().c_str());
                     return;
                 }
             }
@@ -207,22 +207,22 @@ void Level::describe (Thingp t)
         return;
     }
 
-    log("Describe %s", t->to_string().c_str());
+    dbg3("Describe %s", t->to_string().c_str());
 
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        log("Describe %s; no wrong state", t->to_string().c_str());
+        dbg3("Describe %s; no wrong state", t->to_string().c_str());
         return;
     }
 
     if (!t->is_described_when_hovering_over()) {
-        log("Describe %s; no not described", t->to_string().c_str());
+        dbg3("Describe %s; no not described", t->to_string().c_str());
         return;
     }
 
     if (t->long_text_description().empty()) {
-        log("Describe %s; has no text", t->to_string().c_str());
+        dbg3("Describe %s; has no text", t->to_string().c_str());
         wid_thing_info_fini();
         t->show_botcon_description();
         return;
@@ -235,9 +235,9 @@ void Level::describe (Thingp t)
     //
     auto o = game->current_wid_thing_info;
     if (o) {
-        log("Currently describing %s", o->to_string().c_str()); 
+        dbg3("Currently Describe %s", o->to_string().c_str()); 
         if (o->is_hidden) {
-            log("Currently describing %s; keep it", 
+            dbg3("Currently Describe %s; prefer me over current", 
                 o->to_string().c_str());
         }
 
@@ -246,7 +246,7 @@ void Level::describe (Thingp t)
         // to keep showing that if nothing else.
         //
         if (o->mid_at == player->mid_at) {
-            log("Describing %s; keep it", o->to_string().c_str());
+            dbg3("Describe %s; prefer me over current", o->to_string().c_str());
             return;
         }
     }
@@ -254,14 +254,14 @@ void Level::describe (Thingp t)
     if (wid_thing_info_window.size()) {
         auto o = wid_thing_info_window.front()->t;
         if (o) {
-            log("Describing %s", o->to_string().c_str());
+            dbg3("Describe %s", o->to_string().c_str());
             if (o->is_hidden) {
-                log("Describing %s; keep it", o->to_string().c_str());
+                dbg3("Describe %s; prefer me over current", o->to_string().c_str());
                 return;
             }
 
             if (o->mid_at == player->mid_at) {
-                log("Describing %s; keep it", o->to_string().c_str());
+                dbg3("Describe %s; prefer me over current", o->to_string().c_str());
                 return;
             }
         }

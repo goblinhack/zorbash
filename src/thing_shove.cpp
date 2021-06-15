@@ -38,7 +38,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         }
     }
 
-    log("Try to shove, delta %d,%d", (int)delta.x, (int)delta.y);
+    dbg("Try to shove, delta %d,%d", (int)delta.x, (int)delta.y);
 
     bool was_dead = it->is_dead;
 
@@ -80,7 +80,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (!it->is_dead) {
-        log("Shove: it strength %d vs me %d",
+        dbg("Shove: it strength %d vs me %d",
             it->get_stat_strength(), get_stat_strength());
 
         if (!d20roll(get_stat_strength(), it->get_stat_strength())) {
@@ -149,7 +149,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     if (!it->is_dead) {
         if (it->is_dead_on_shove()) {
-            log("Shove and kill");
+            dbg("Shove and kill");
             it->dead("by being shoved");
             auto spawn_what = it->spawn_on_shoved();
             if (spawn_what != "") {
@@ -165,7 +165,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         }
     }
 
-    log("Handle location for shoved thing");
+    dbg("Handle location for shoved thing");
     it->location_check_forced();
 
     //
