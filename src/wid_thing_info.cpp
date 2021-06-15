@@ -84,6 +84,12 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         return nullptr;
     }
 
+    if (tp->long_text_description().empty()) {
+        wid_thing_info_fini();
+        t->show_botcon_description();
+        return nullptr;
+    }
+
     t->log("Create popup");
 
     auto wid_popup_window = new WidPopup("Thing info", tl, br, 
@@ -208,6 +214,11 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
 
 bool Game::wid_thing_info_push_popup (Thingp t)
 {_
+    if (t->long_text_description() == "") {
+        t->log("No; cannot push, no text");
+        return false;
+    }
+
     int existing_height = 0;
     for (const auto w : wid_thing_info_window) {
         existing_height += wid_get_height(w->wid_popup_container);
@@ -216,11 +227,6 @@ bool Game::wid_thing_info_push_popup (Thingp t)
             t->log("No; cannot push, already shown");
             return true;
         }
-    }
-
-    if (t->long_text_description() == "") {
-        t->log("No; cannot push, no text");
-        return false;
     }
 
     auto height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT;
@@ -377,11 +383,11 @@ _
         return;
     }
 
-    if (game->current_wid_thing_info) {
-        game->current_wid_thing_info->log("Existing thing info");
-        for (const auto w : wid_thing_info_window) {
-            w->t->log("Existing list thing info");
-        }
+    auto player = game->level->player;
+    if (!player) {
+        game->change_state(Game::STATE_NORMAL);
+        ERR("No player");
+        return;
     }
 
     //
@@ -389,23 +395,63 @@ _
     // if we're showing something more interesting.
     //
     if (ts.size() == 1) {
-        if (game->current_wid_thing_info) {
-            LOG("Currently describing %s", 
-                game->current_wid_thing_info->to_string().c_str());
-            if (game->current_wid_thing_info->is_hidden) {
+        auto o = game->current_wid_thing_info;
+        if (o) {
+            LOG("Currently describing %s", o->to_string().c_str());
+            if (o->is_hidden) {
                 LOG("Currently describing %s; keep it over player", 
-                    game->current_wid_thing_info->to_string().c_str());
+                    o->to_string().c_str());
                 return;
+            }
+
+            //
+            // If showing something under the player, then prefer
+            // to keep showing that if nothing else.
+            //
+            if (level->player) {
+                if (o->mid_at == level->player->mid_at) {
+                    LOG("Describing %s; keep it", o->to_string().c_str());
+                    return;
+                }
             }
         }
 
         if (wid_thing_info_window.size()) {
-            auto o = wid_thing_info_window.front();
-            LOG("Describing %s", o->t->to_string().c_str());
-            if (o->t->is_hidden) {
-                LOG("Describing %s; keep it over player", o->t->to_string().c_str());
-                return;
+            auto o = wid_thing_info_window.front()->t;
+            if (o) {
+                LOG("Describing %s", o->to_string().c_str());
+                if (o->is_hidden) {
+                    LOG("Describing %s; keep it over player", o->to_string().c_str());
+                    return;
+                }
+
+                if (level->player) {
+                    if (o->mid_at == level->player->mid_at) {
+                        LOG("Describing %s; keep it", o->to_string().c_str());
+                        return;
+                    }
+                }
             }
+        }
+    }
+
+    //
+    // If we cannot show anything with long text, just show a
+    // short description.
+    //
+    bool found_one_with_long_text = false;
+    for (auto t : ts) {
+        if (!t->long_text_description().empty()) {
+            found_one_with_long_text = true;
+            break;
+        }
+    }
+
+    if (!found_one_with_long_text) {
+        for (auto t : ts) {
+            wid_thing_info_fini();
+            t->show_botcon_description();
+            return;
         }
     }
 _
@@ -415,13 +461,6 @@ _
 
     wid_thing_info_destroy_immediate();
     request_destroy_thing_info = 0;
-
-    auto player = game->level->player;
-    if (!player) {
-        game->change_state(Game::STATE_NORMAL);
-        ERR("No player");
-        return;
-    }
 
     static bool recursion;
     if (recursion) {
@@ -440,6 +479,10 @@ _
     if (!compact) {
         int i = 0;
         for (auto t : ts) {
+            if (t->long_text_description().empty()) {
+                continue;
+            }
+
             i++;
             if (!wid_thing_info_push_popup(t)) {
                 wid_thing_info_fini();
@@ -636,7 +679,7 @@ void Game::wid_thing_info_add_bite_damage (WidPopup *w, Thingp t)
                 snprintf(tmp2, sizeof(tmp2) - 1, "%s",
                          t->get_damage_bite_dice_str().c_str());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=gray$Bite  %21s", tmp2);
+                         "%%fg=gray$Bite  %15s ``````", tmp2);
             } else {
                 snprintf(tmp2, sizeof(tmp2) - 1,
                          "%d-%d(%s)",
@@ -644,7 +687,7 @@ void Game::wid_thing_info_add_bite_damage (WidPopup *w, Thingp t)
                          max_value,
                          t->get_damage_bite_dice_str().c_str());
                 snprintf(tmp, sizeof(tmp) - 1,
-                         "%%fg=gray$Bite  %21s", tmp2);
+                         "%%fg=gray$Bite  %15s ``````", tmp2);
             }
             w->log(tmp);
         }
@@ -789,16 +832,16 @@ void Game::wid_thing_info_add_danger_level (WidPopup *w, Thingp t)
 
         if (player_kill_count == 1) {
             w->log(" ");
-            w->log("You could kill it in " + std::to_string(player_kill_count) + " hit!");
+            w->log("You could kill it in " + std::to_string(player_kill_count) + " hit.");
             w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits");
         } else if (player_kill_count <= 2) {
             w->log(" ");
-            w->log("You could kill it in " + std::to_string(player_kill_count) + " hits");
-            w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits");
+            w->log("You could kill it in " + std::to_string(player_kill_count) + " hits.");
+            w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits.");
         } else if (player_kill_count <= 10) {
             w->log(" ");
-            w->log("You could kill it in " + std::to_string(player_kill_count) + " hits");
-            w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits");
+            w->log("You could kill it in " + std::to_string(player_kill_count) + " hits.");
+            w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits.");
         } else {
             w->log(" ");
             w->log("%%fg=red$It will take many hits to kill...");
