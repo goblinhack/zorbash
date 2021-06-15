@@ -61,6 +61,8 @@ void Thing::move_reset_timestamps (void)
 
 void Thing::move_finish (void)
 {_
+    log("Move finish");
+
     if (get_timestamp_move_begin() == 0) {
         return;
     }
@@ -74,6 +76,8 @@ void Thing::move_finish (void)
     if (!is_hidden) {
         log("Move to %f,%f finished", mid_at.x, mid_at.y);
     }
+
+    is_moving = false;
 
     update_interpolated_position();
 }
@@ -166,9 +170,11 @@ bool Thing::move (fpoint future_pos,
             //
         } else if (level->is_sticky(mid_at.x, mid_at.y)) {
             //
-            // Makes sure ghosts do not get stuck in webs.
+            // Makes sure ghosts (or the cursor!) do not get stuck in webs.
             //
-            if (!is_ethereal()) {
+            if (!is_ethereal() &&
+                !is_cursor() &&
+                !is_cursor_path()) {
                 if (is_player()) {
                     TOPCON("You cannot move!");
                 }

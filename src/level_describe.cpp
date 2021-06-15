@@ -19,6 +19,10 @@
 
 void Level::describe (fpoint p)
 {_
+    if (!player) {
+        return;
+    }
+
     log("Describe %f,%f", p.x, p.y);
 
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
@@ -149,22 +153,40 @@ void Level::describe (fpoint p)
         log("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
         game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
     } else {
+        //
+        // If we found nothing, then check to see if we are already showing
+        // something of interest and if so, keep it.
+        //
         log("Describe %f,%f; nothing found", p.x, p.y);
 _
-        if (game->current_wid_thing_info) {
-            log("Currently describing %s", 
-                game->current_wid_thing_info->to_string().c_str());
-            if (game->current_wid_thing_info->is_hidden) {
+        auto o = game->current_wid_thing_info;
+        if (o) {
+            log("Currently describing %s", o->to_string().c_str()); 
+            if (o->is_hidden) {
                 log("Currently describing %s; keep it", 
-                    game->current_wid_thing_info->to_string().c_str());
+                    o->to_string().c_str());
+            }
+
+            //
+            // If showing something under the player, then prefer
+            // to keep showing that if nothing else.
+            //
+            if (o->mid_at == player->mid_at) {
+                log("Describing %s; keep it", o->to_string().c_str());
+                return;
             }
         }
 
         if (wid_thing_info_window.size()) {
-            auto o = wid_thing_info_window.front();
-            log("Describing %s", o->t->to_string().c_str());
-            if (o->t->is_hidden) {
-                log("Describing %s; keep it", o->t->to_string().c_str());
+            auto o = wid_thing_info_window.front()->t;
+            log("Describing %s", o->to_string().c_str());
+            if (o->is_hidden) {
+                log("Describing %s; keep it", o->to_string().c_str());
+                return;
+            }
+
+            if (o->mid_at == player->mid_at) {
+                log("Describing %s; keep it", o->to_string().c_str());
                 return;
             }
         }

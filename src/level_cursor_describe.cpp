@@ -18,7 +18,8 @@
 #include "my_template.h"
 
 void Level::cursor_describe (void)
-{
+{_
+    log("Cursor describe");
     if (!cursor) {
         return;
     }

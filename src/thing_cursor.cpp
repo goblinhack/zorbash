@@ -40,7 +40,10 @@ void Thing::cursor_hover_over_check (void)
                 return;
             }
 
-            level->cursor_at = mid_at;
+            if (level->cursor_at != mid_at) {
+                level->cursor_at = mid_at;
+                level->cursor_describe();
+            }
             level->cursor_found = true;
         }
     }
