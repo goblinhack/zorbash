@@ -17,13 +17,13 @@ void Thing::chasm_tick (void)
 {_
     if (is_floating() || is_ethereal()) {
         if (is_player()) {
-            log("Chasm tick: no is floating");
+            dbg("Chasm tick: no is floating");
         }
         return;
     }
 
     if (level->is_chasm(mid_at.x, mid_at.y)) {
-        log("Over a chasm");
+        dbg("Over a chasm");
         fall(1, 750);
     }
 }

@@ -20,7 +20,7 @@ void Level::cursor_find_on_visible_things (
                         const int16_t minx, const int16_t miny,
                         const int16_t maxx, const int16_t maxy)
 {_
-    log("Cursor find on visible things");
+    dbg3("Cursor find on visible things");
 _
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||

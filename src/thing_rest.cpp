@@ -4,11 +4,12 @@
 //
 
 #include "my_sys.h"
-#include "my_tile.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_thing.h"
 
 void Thing::rest (void)
 {_
-    log("Resting");
+    dbg("Resting");
     stamina_boost(1);
 }

@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_tile.h"
 #include "my_thing.h"
 
@@ -24,8 +26,8 @@ void Thing::stamina_boost (int v)
     set_stamina(new_stamina);
 
     if (new_stamina >= max_stamina) {
-        log("Stamina boost not possible, maxxed at %d", new_stamina);
+        dbg("Stamina boost not possible, maxxed at %d", new_stamina);
     } else {
-        log("Stamina boost by %d from %d to %d", v, old_stamina, new_stamina);
+        dbg("Stamina boost by %d from %d to %d", v, old_stamina, new_stamina);
     }
 }

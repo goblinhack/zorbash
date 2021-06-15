@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -38,5 +40,5 @@ void Thing::hide (void)
         if (w) { w->hide(); }
     }
 
-    log("Is now hidden");
+    dbg("Is now hidden");
 }

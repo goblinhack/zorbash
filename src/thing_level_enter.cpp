@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_world.h"
 #include "my_level.h"
@@ -14,7 +16,7 @@
 void Thing::level_enter (void)
 {_
     if (is_player()) {
-        log("Level enter");
+        dbg("Level enter");
     }
 
     auto result = level->all_things.insert(std::pair(id, this));
@@ -80,6 +82,6 @@ void Thing::level_enter (void)
     game->request_update_rightbar = true;
 
     if (is_player()) {
-        log("Level entered");
+        dbg("Level entered");
     }
 }

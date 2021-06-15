@@ -19,7 +19,7 @@ void Thing::lava_tick (void)
 {_
     if (!hates_fire()) {
         if (is_player()) {
-            log("Lava tick: no, not a fire avoider");
+            dbg("Lava tick: no, not a fire avoider");
         }
         return;
     }
@@ -27,7 +27,7 @@ void Thing::lava_tick (void)
     fpoint at = get_interpolated_mid_at();
     if (!level->is_lava(at.x, at.y)) {
         if (is_player()) {
-            log("Lava tick: no, no lava");
+            dbg("Lava tick: no, no lava");
         }
         return;
     }

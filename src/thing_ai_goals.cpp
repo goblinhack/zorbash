@@ -20,7 +20,7 @@
 
 int Thing::ai_choose_goal (void)
 {_
-    log("Choose goal");
+    dbg("Choose goal");
 _
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
@@ -62,7 +62,7 @@ _
     //
     std::multiset<Goal> goals;
 
-    log("Choose goals (higher scores, lower costs are preferred):");
+    dbg("Choose goals (higher scores, lower costs are preferred):");
 _
     auto tpp = tp();
     for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
@@ -83,13 +83,11 @@ _
         int terrain_score = is_less_preferred_terrain(p);
         int total_score = -(int)terrain_score;
 
-#define GOAL_ADD(score, msg)                                                  \
-        total_score += (score);                                               \
-        got_a_goal = true;                                                    \
-        if (g_opt_debug2) {                                                   \
-            log(" add goal (%d,%d) score %d %s, %s",                          \
-                p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
-        }
+#define GOAL_ADD(score, msg)                                               \
+        total_score += (score);                                            \
+        got_a_goal = true;                                                 \
+        dbg2(" add goal (%d,%d) score %d %s, %s",                          \
+             p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
 
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
@@ -98,17 +96,17 @@ _
                 it->is_hidden || 
                 it->is_falling || 
                 it->is_jumping) { 
-                if (g_opt_debug4) {
+                if (unlikely(g_opt_debug4)) {
                     if (it->is_loggable_for_unimportant_stuff()) {
-                        log(" ignore %s", it->to_string().c_str());
+                        dbg2(" ignore %s", it->to_string().c_str());
                     }
                 }
                 continue; 
             }
 
-            if (g_opt_debug4) {
+            if (unlikely(g_opt_debug4)) {
                 if (it->is_loggable_for_unimportant_stuff()) {
-                    log(" consider %s", it->to_string().c_str());
+                    dbg2(" consider %s", it->to_string().c_str());
                 }
             }
             _
@@ -158,7 +156,7 @@ _
                 //
                 if (will_avoid_threat(it)) {
                     if (distance(mid_at, it->mid_at) < 2) {
-                        log("Need to avoid threat %s", it->to_string().c_str());
+                        dbg2("Need to avoid threat %s", it->to_string().c_str());
                         avoid = true;
                     }
                 }
@@ -168,7 +166,7 @@ _
                 //
                 if (will_avoid_monst(it)) {
                     if (distance(mid_at, it->mid_at) < ai_avoid_distance()) {
-                        log("Need to avoid monst %s", it->to_string().c_str());
+                        dbg2("Need to avoid monst %s", it->to_string().c_str());
                         avoid = true;
                     }
                 }
@@ -187,7 +185,7 @@ _
                 }
 
                 if (avoid) {
-                    log("Need to avoid %s", it->to_string().c_str());
+                    dbg2("Need to avoid %s", it->to_string().c_str());
 
                     bool got_avoid = false;
 
@@ -210,7 +208,7 @@ _
                             total_score += dist * dist;
                             goals.insert(Goal(total_score, point(X + dx, Y + dy)));
                             set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                            log("Add avoid location offset %d,%d score %d", dx, dy, total_score);
+                            dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
                             got_avoid = true;
                         }
@@ -231,7 +229,7 @@ _
                                 total_score += dist * dist;
                                 goals.insert(Goal(total_score, point(X + dx, Y + dy)));
                                 set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                                log("Add avoid location offset %d,%d score %d", dx, dy, total_score);
+                                dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
                                 got_avoid = true;
                             }
@@ -245,7 +243,7 @@ _
                         avoiding = true;
                         break;
                     } else {
-                        log("Could not avoid the monst!");
+                        dbg2("Could not avoid the monst!");
                     }
                 }
             }
@@ -283,12 +281,12 @@ _
     // No goals?
     //
     if (goals.empty()) {
-        log("No goals found");
+        dbg2("No goals found");
         return false;
     }
 
 #ifdef ENABLE_DEBUG_AI_VERBOSE
-    log("Initial goal map derived:");
+    dbg2("Initial goal map derived:");
     dmap_print(dmap_scent,
                point(start.x - minx, start.y - miny),
                point(0, 0),
@@ -324,10 +322,8 @@ _
         }
     }
 
-    if (g_opt_debug4) {
-        log("Sorted goals, %d (best) .. %d (worst)",
-            (int)most_preferred, (int)least_preferred);
-    }
+    dbg4("Sorted goals, %d (best) .. %d (worst)",
+         (int)most_preferred, (int)least_preferred);
 
     //
     // Scale the goals so they will fit in the dmap.
@@ -353,11 +349,9 @@ _
         uint8_t score8 = (int)score;
         set(dmap_scent->val, goal_target.x, goal_target.y, score8);
 
-        if (g_opt_debug2) {
-            log(" scale goal (%d,%d) %d to %d",
-                (int)minx + goal.at.x, (int)miny + goal.at.y, 
-                (int)orig_score, (int)score8);
-        }
+        dbg2(" scale goal (%d,%d) %d to %d",
+            (int)minx + goal.at.x, (int)miny + goal.at.y, 
+            (int)orig_score, (int)score8);
     }
 
     //
@@ -368,8 +362,8 @@ _
     //
     // Find the best next-hop to the best goal.
     //
-    if (g_opt_debug4) {
-        log("Goals:");
+    if (unlikely(g_opt_debug4)) {
+        dbg("Goals:");
         dmap_print(dmap_scent,
                    point(start.x - minx, start.y - miny),
                    point(0, 0),
@@ -413,11 +407,9 @@ _
         }
 
         paths.insert(result);
-        if (g_opt_debug2) {
-            log(" goal (%d,%d) score %d -> cost %d", 
-                goal.at.x + minx, goal.at.y + miny,
-                (int)goal.score, (int)result.cost);
-        }
+        dbg2(" goal (%d,%d) score %d -> cost %d", 
+             goal.at.x + minx, goal.at.y + miny,
+             (int)goal.score, (int)result.cost);
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
         for (auto& p : result.path) {
@@ -442,23 +434,23 @@ _
             } else {
                 best = hop0;
             }
-            log("Best is %d,%d with cost %d, %d hops away",
-                best.x + minx, best.y + miny, result.cost, (int)hops_len);
+            dbg2("Best is %d,%d with cost %d, %d hops away",
+                 best.x + minx, best.y + miny, result.cost, (int)hops_len);
         } else if (hops_len >= 1) {
             auto hop0 = get(hops, hops_len - 1);
             best = hop0;
-            log("Best is %d,%d with cost %d, %d hops away",
-                best.x + minx, best.y + miny, result.cost, (int)hops_len);
+            dbg2("Best is %d,%d with cost %d, %d hops away",
+                 best.x + minx, best.y + miny, result.cost, (int)hops_len);
         } else {
-            log("Best is where we are, cost %d, %d hops away",
-                result.cost, (int)hops_len);
+            dbg2("Best is where we are, cost %d, %d hops away",
+                 result.cost, (int)hops_len);
             best = point(mid_at.x - minx, mid_at.y - miny);
         }
 
         auto nh = point(best.x + minx, best.y + miny);
 
         if (move_to_or_attack(nh)) {
-            log("We can move to or attack or eat this next-hop");
+            dbg2("We can move to or attack or eat this next-hop");
             return true;
         }
     }

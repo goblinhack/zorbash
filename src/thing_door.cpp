@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -61,7 +62,9 @@ bool Thing::open_door (Thingp it)
 
     if (get_keys()) {
         decr_keys();
-        it->log("Open");
+        if (unlikely(g_opt_debug1)) {
+            it->log("Open");
+        }
         it->level_pop();
         it->is_open = true;
         it->level_push();

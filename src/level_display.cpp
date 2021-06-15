@@ -483,11 +483,6 @@ void Level::display_map (void)
 
     blit_fbo_unbind();
 
-    if (player) {
-        player->log("fade_out %d fade_in %d level_fade_out_finished %d",
-                    fade_out, fade_in, level_fade_out_finished);
-    }
-
     if (level_fade_out_finished) {
         if (player) {
             player->log("Level fade out finished");

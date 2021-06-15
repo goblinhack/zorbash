@@ -30,12 +30,12 @@ void Thing::hooks_remove ()
 
     if (owner) {
         if (is_loggable_for_unimportant_stuff()) {
-            log("Detach %" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
+            dbg("Detach %" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
         }
 
         if (id == owner->get_on_fire_anim_id()) {
             if (is_loggable_for_unimportant_stuff()) {
-                log("Detach on_fire_anim_id from owner %s", owner->to_string().c_str());
+                dbg("Detach on_fire_anim_id from owner %s", owner->to_string().c_str());
             }
             owner->set_on_fire_anim_id(0);
         }
@@ -44,7 +44,7 @@ void Thing::hooks_remove ()
             owner->unwield("remove hooks for weapon id");
 
             if (is_loggable_for_unimportant_stuff()) {
-                log("Detach weapon_id from owner %s", owner->to_string().c_str());
+                dbg("Detach weapon_id from owner %s", owner->to_string().c_str());
             }
             owner->set_weapon_id(0);
         }
@@ -53,14 +53,14 @@ void Thing::hooks_remove ()
             owner->unwield("remove hooks for carry-anim");
 
             if (is_loggable_for_unimportant_stuff()) {
-                log("Detach carry-anim from owner %s", owner->to_string().c_str());
+                dbg("Detach carry-anim from owner %s", owner->to_string().c_str());
             }
             owner->weapon_set_carry_anim_id(0);
         }
 
         if (id == owner->get_weapon_id_use_anim()) {
             if (is_loggable_for_unimportant_stuff()) {
-                log("Detach use_anim from owner %s", owner->to_string().c_str());
+                dbg("Detach use_anim from owner %s", owner->to_string().c_str());
             }
             owner->weapon_set_use_anim_id(0);
 
@@ -69,26 +69,26 @@ void Thing::hooks_remove ()
             //
             auto carry_anim = owner->weapon_get_carry_anim();
             if (carry_anim) {
-                log("Make carry weapon visible %s", owner->to_string().c_str());
+                dbg("Make carry weapon visible %s", owner->to_string().c_str());
 _
                 //
                 // But only if the owner is visible.
                 //
                 if (owner->is_visible()) {
                     if (is_loggable_for_unimportant_stuff()) {
-                        log("Reapply carry-anim for owner %s",
+                        dbg("Reapply carry-anim for owner %s",
                              owner->to_string().c_str());
                     }
                     carry_anim->visible();
                 } else {
                     if (is_loggable_for_unimportant_stuff()) {
-                        log("Do not reapply carry-anim for invisible owner %s",
+                        dbg("Do not reapply carry-anim for invisible owner %s",
                              owner->to_string().c_str());
                     }
                 }
             } else {
                 if (is_loggable_for_unimportant_stuff()) {
-                    log("No carry-anim for owner %s", owner->to_string().c_str());
+                    dbg("No carry-anim for owner %s", owner->to_string().c_str());
                 }
                 auto id = owner->get_weapon_id();
                 if (id.ok()) {
@@ -120,7 +120,7 @@ _
         auto item = weapon_get_carry_anim();
         if (item) {
             if (is_loggable_for_unimportant_stuff()) {
-                log("Hooks remove carry-anim");
+                dbg("Hooks remove carry-anim");
             }
             weapon_set_carry_anim(nullptr);
             verify(item);
@@ -133,7 +133,7 @@ _
         auto item = weapon_get_use_anim();
         if (item) {
             if (is_loggable_for_unimportant_stuff()) {
-                log("Hooks remove use-anim");
+                dbg("Hooks remove use-anim");
             }
             weapon_set_use_anim(nullptr);
             verify(item);
@@ -149,7 +149,7 @@ void Thing::remove_all_references ()
     // Some things have lots of things they own
     //
     if (get_owned_count()) {
-        log("Remove all owner references, total %d", get_owned_count());
+        dbg("Remove all owner references, total %d", get_owned_count());
 
         //
         // Slow, but not used too often
@@ -164,7 +164,7 @@ void Thing::remove_all_references ()
     }
 
     if (get_minion_count()) {
-        log("Remove all minion references, total %d", get_minion_count());
+        dbg("Remove all minion references, total %d", get_minion_count());
 
         //
         // Slow, but not used too often
@@ -179,7 +179,7 @@ void Thing::remove_all_references ()
     }
 
     if (get_spawned_count()) {
-        log("Remove all spawner references, total %d", get_spawned_count());
+        dbg("Remove all spawner references, total %d", get_spawned_count());
 
         //
         // Slow, but not used too often

@@ -22,12 +22,12 @@ bool Thing::ascend_sewer_tick (void)
     }
 
     if (is_player()) {
-        log("Location check, ascend sewer");
+        dbg("Location check, ascend sewer");
     }
 
     if (get_tick() - get_tick_last_level_change() < 1) {
         if (is_player()) {
-            log("Location check, ascend sewer, no too soon");
+            dbg("Location check, ascend sewer, no too soon");
         }
 
         return false;
@@ -49,7 +49,7 @@ bool Thing::ascend_sewer_tick (void)
 
 bool Thing::ascend_sewer (void)
 {_
-    log("Ascend sewer");
+    dbg("Ascend sewer");
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -57,7 +57,7 @@ bool Thing::ascend_sewer (void)
         is_waiting_to_descend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
-        log("Ascend sewer; no");
+        dbg("Ascend sewer; no");
         return false;
     }
 
@@ -88,7 +88,7 @@ bool Thing::ascend_sewer (void)
         TOPCON("You ascend out of the wriggling filthy sewer.");
     }
 
-    log("Move to previous level exit");
+    dbg("Move to previous level exit");
     is_changing_level = true;
 
     level_change(l);
@@ -117,7 +117,7 @@ bool Thing::ascend_sewer (void)
     }
 
     is_changing_level = false;
-    log("Moved to previous level sewer entrance");
+    dbg("Moved to previous level sewer entrance");
     if (is_player()) {
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
         level->update_new_level();

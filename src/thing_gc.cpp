@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -18,6 +20,6 @@ void Thing::gc (void)
         //
         // Is this a problem?
         //
-        log("Failed to insert into gc thing map");
+        dbg("Failed to insert into gc thing map");
     }
 }

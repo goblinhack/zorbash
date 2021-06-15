@@ -91,11 +91,16 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
             //
             // Likely far away
             //
-            LOG("Cannot play sound %s on channel %d, cannot reach target", alias.c_str(), channel);
+            if (unlikely(g_opt_debug3)) {
+                LOG("Cannot play sound %s on channel %d, cannot reach target", 
+                    alias.c_str(), channel);
+            }
             return true;
         }
     } else if (distance >= DMAP_IS_PASSABLE) {
-        LOG("Cannot play sound %s on channel %d, too far", alias.c_str(), channel);
+        if (unlikely(g_opt_debug3)) {
+            LOG("Cannot play sound %s on channel %d, too far", alias.c_str(), channel);
+        }
         return true;
     }
 
@@ -106,7 +111,10 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
     }
 
     if (Mix_Playing(channel)) {
-        LOG("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
+        if (unlikely(g_opt_debug3)) {
+            LOG("Cannot play sound %s on channel %d, something else playing", 
+                alias.c_str(), channel);
+        }
         return false;
     }
 
@@ -134,7 +142,7 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
         return false;
     }
 
-    LOG("Play sound %s on channel %d", alias.c_str(), channel);
+    DBG("Play sound %s on channel %d", alias.c_str(), channel);
 
     return true;
 }

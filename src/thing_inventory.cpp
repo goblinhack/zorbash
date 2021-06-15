@@ -17,13 +17,13 @@
 
 void Thing::inventory_particle (Thingp item, uint32_t slot)
 {_
-    log("Inventory particle %s", item->to_string().c_str());
+    dbg("Inventory particle %s", item->to_string().c_str());
 _
     //
     // No animations at the start
     //
     if (level->is_starting) {
-        log("Not while starting the level");
+        dbg("Not while starting the level");
         return;
     }
 
@@ -128,7 +128,7 @@ void Thing::inventory_particle (Thingp item,
                                 uint32_t slot, 
                                 Thingp particle_target)
 {_
-    log("Inventory particle %s with target %s",
+    dbg("Inventory particle %s with target %s",
         item->to_string().c_str(), particle_target->to_string().c_str());
 _
     if (game->state == Game::STATE_MOVING_ITEMS || 
@@ -186,7 +186,7 @@ _
 
 bool Thing::inventory_id_insert (Thingp item)
 {_
-    log("Inventory insert %s", item->to_string().c_str());
+    dbg("Inventory insert %s", item->to_string().c_str());
 _
     auto player = level->player;
     if (!player) {
@@ -306,7 +306,7 @@ _
 
 bool Thing::inventory_id_remove (Thingp item)
 {_
-    log("Inventory remove %s", item->to_string().c_str());
+    dbg("Inventory remove %s", item->to_string().c_str());
 _
     auto player = level->player;
     if (!player) {
@@ -343,11 +343,11 @@ _
             inventory_particle(item, i, this);
 
             auto cnt = item_slot_count(i);
-            log("Remove slot %d, count %d", i, cnt);
+            dbg("Remove slot %d, count %d", i, cnt);
             if (cnt > 1) {_
-                log("Decrement slot count");
+                dbg("Decrement slot count");
             } else {_
-                log("Remove slot");
+                dbg("Remove slot");
                 monstp->inventory_id[i] = 0;
 
                 if (!monstp->inventory_id.size()) {
@@ -375,7 +375,7 @@ _
 
 bool Thing::inventory_id_remove (Thingp item, Thingp particle_target)
 {_
-    log("Inventory remove %s with target %s",
+    dbg("Inventory remove %s with target %s",
         item->to_string().c_str(), particle_target->to_string().c_str());
 _
     auto player = level->player;
@@ -415,11 +415,11 @@ _
             }
 
             auto cnt = item_slot_count(i);
-            log("Remove slot %d, count %d", i, cnt);
+            dbg("Remove slot %d, count %d", i, cnt);
             if (cnt > 1) {_
-                log("Decrement slot count");
+                dbg("Decrement slot count");
             } else {_
-                log("Remove slot");
+                dbg("Remove slot");
                 monstp->inventory_id.erase(monstp->inventory_id.begin() + i);
 
                 if (!monstp->inventory_id.size()) {
@@ -510,7 +510,7 @@ int Thing::item_slot_count (const uint32_t slot)
 
 Thingp Level::inventory_get (const uint32_t slot)
 {_
-    log("Inventory get slot %d", slot);
+    dbg("Inventory get slot %d", slot);
 _
     if (!player) {
         ERR("No player");
@@ -546,7 +546,9 @@ _
         auto o = thing_find(oid);
         if (o) {
             if (o->tp() == tpp) {
-                o->log("Got inventory item %s", tpp->name().c_str());
+                if (unlikely(g_opt_debug2)) {
+                    o->log("Got inventory item %s", tpp->name().c_str());
+                }
                 return o;
             }
         }
@@ -596,7 +598,9 @@ _
         return false;
     }
 
-    item->log("Over inventory item");
+    if (unlikely(g_opt_debug2)) {
+        item->log("Over inventory item");
+    }
     return true;
 }
 
@@ -636,7 +640,9 @@ _
         return false;
     }
 
-    item->log("Chosen inventory item");
+    if (unlikely(g_opt_debug2)) {
+        item->log("Chosen inventory item");
+    }
     if (item->is_weapon()) {
         if (player->wield(item)) {
             if (changed_highlight_slot) {
@@ -653,7 +659,9 @@ _
         describe(item);
     } else if (item->is_bag()) {
         game->wid_thing_info_create(item);
-        item->log("Moving items flag set");
+        if (unlikely(g_opt_debug2)) {
+            item->log("Moving items flag set");
+        }
         game->change_state(Game::STATE_MOVING_ITEMS);
     } else if (item->is_thrown_automatically_when_chosen()) {
         player->throw_item_choose_target(item);
@@ -678,7 +686,9 @@ Thingp Level::inventory_describe (const uint32_t slot)
 _
     auto item = inventory_get(slot);
     if (item) {
-        item->log("Inventory: describe slot %d", slot);
+        if (unlikely(g_opt_debug2)) {
+            item->log("Inventory: describe slot %d", slot);
+        }
         item->describe_when_hovered_over_in_rightbar();
     } else {
         LOG("Inventory: describe slot %d => nothing there", slot);

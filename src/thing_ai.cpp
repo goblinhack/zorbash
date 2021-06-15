@@ -4,6 +4,7 @@
 //
 
 #include <algorithm>
+#include "my_globals.h"
 #include "my_sys.h"
 #include "my_level.h"
 #include "my_dmap.h"
@@ -14,7 +15,7 @@
 
 void Thing::ai_get_next_hop (void)
 {_
-    log("AI");
+    dbg("AI");
 _
     point start((int)mid_at.x, (int)mid_at.y);
 
@@ -33,13 +34,13 @@ _
     // If somewhere bad, escape
     //
     if (is_less_preferred_terrain(start) >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
-        log("On bad terrain, escape");
+        dbg("On bad terrain, escape");
         if (ai_escape()) {
             return;
         }
 
         monstp->wander_target = point(0, 0);
-        log("Cannot escape, try to wander");
+        dbg("Cannot escape, try to wander");
         if (ai_wander()) {
             return;
         }
@@ -50,7 +51,7 @@ _
     //
     if (monstp->wander_target != point(0, 0)) {
         if (random_range(0, 100) < 50) {
-            log("Try to continue wander");
+            dbg("Try to continue wander");
             if (ai_wander()) {
                 return;
             }

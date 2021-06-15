@@ -64,7 +64,6 @@ public:
     void topcon(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void err_(const char *fmt, va_list args); // compile error without
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
-    void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 };
 
 extern Lightp light_new(Thingp owner,

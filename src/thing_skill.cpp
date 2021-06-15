@@ -16,17 +16,17 @@
 
 bool Thing::skill_add (Thingp what)
 {_
-    log("Try to add skill %s", what->to_string().c_str());
+    dbg("Try to add skill %s", what->to_string().c_str());
 _
     if (!monstp) {
-        log("No; not a monst");
+        dbg("No; not a monst");
         return false;
     }
 
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner) {
         if (existing_owner == this) {
-            log("No; same owner");
+            dbg("No; same owner");
             return false;
         }
         existing_owner->drop(what);
@@ -34,14 +34,14 @@ _
 
     for (const auto& item : monstp->skills) {
         if (item == what->id) {
-            log("No; already carried");
+            dbg("No; already carried");
             return false;
         }
     }
 
     if (is_player()) {
         if (!skillbox_id_insert(what)) {
-            log("No; no space in skillbox");
+            dbg("No; no space in skillbox");
             return false;
         }
     }
@@ -50,7 +50,7 @@ _
     what->set_owner(this);
     what->hide();
 
-    log("Add skill %s", what->to_string().c_str());
+    dbg("Add skill %s", what->to_string().c_str());
 
     if (is_player()) {
         wid_skillbox_init();
@@ -61,7 +61,7 @@ _
 
 bool Thing::skill_remove (Thingp what)
 {_
-    log("Removing skill %s", what->to_string().c_str());
+    dbg("Removing skill %s", what->to_string().c_str());
 _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
@@ -83,7 +83,7 @@ _
         }
     }
 
-    log("Update bag with drop of: %s", what->to_string().c_str());
+    dbg("Update bag with drop of: %s", what->to_string().c_str());
     bag_remove(what);
     while (bag_compress()) { }
 
@@ -91,7 +91,7 @@ _
     monstp->skills.remove(what->id);
     game->request_remake_skillbox = true;
 
-    log("Dropped %s into the ether", what->to_string().c_str());
+    dbg("Dropped %s into the ether", what->to_string().c_str());
 
     return true;
 }
@@ -114,7 +114,7 @@ void Thing::skill_remove_all (void)
 
 bool Thing::skill_use (Thingp what)
 {_
-    log("Try to use skill %s", what->to_string().c_str());
+    dbg("Try to use skill %s", what->to_string().c_str());
     used(what, this, false /* remove after use */);
     return true;
 }

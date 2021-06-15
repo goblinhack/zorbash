@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include "my_main.h"
+#include "my_globals.h"
 #include "my_sys.h"
 #include "my_level.h"
 #include "my_dmap.h"
@@ -180,7 +181,7 @@ bool Thing::ai_choose_wander (point& nh)
     //
     auto target = monstp->wander_target;
     if ((mid_at.x == target.x) && (mid_at.y == target.y)) {
-        log("Reached target");
+        dbg("Reached target");
         target = point(-1, -1);
     }
 
@@ -213,7 +214,7 @@ bool Thing::ai_choose_wander (point& nh)
 #ifdef ENABLE_DEBUG_AI_WANDER
     thing_new("ai_path2", fpoint(target.x , target.y));
 #endif
-    log("Wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+    dbg("Wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
     return true;
 }
 
@@ -225,7 +226,7 @@ bool Thing::ai_wander (void)
     if (game->fps_value < 40) {
         if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS * 4,
                                             get_timestamp_last_wander_try())) {
-            log("AI wander very damped; too frequent, last try %u, %u ms ago",
+            dbg("AI wander very damped; too frequent, last try %u, %u ms ago",
                 get_timestamp_last_wander_try(),
                 time_get_time_ms_cached() - get_timestamp_last_wander_try());
             return false;
@@ -233,7 +234,7 @@ bool Thing::ai_wander (void)
     } else if (game->fps_value < 50) {
         if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS * 2,
                                             get_timestamp_last_wander_try())) {
-            log("AI wander damped; too frequent, last try %u, %u ms ago",
+            dbg("AI wander damped; too frequent, last try %u, %u ms ago",
                 get_timestamp_last_wander_try(),
                 time_get_time_ms_cached() - get_timestamp_last_wander_try());
             return false;
@@ -241,7 +242,7 @@ bool Thing::ai_wander (void)
     } else {
         if (!time_have_x_tenths_passed_since(THING_AI_WANDER_FREQ_TENTHS,
                                              get_timestamp_last_wander_try())) {
-            log("AI wander blocked; too frequent, last try %u, %u ms ago",
+            dbg("AI wander blocked; too frequent, last try %u, %u ms ago",
                 get_timestamp_last_wander_try(),
                 time_get_time_ms_cached() - get_timestamp_last_wander_try());
             return false;
@@ -250,34 +251,34 @@ bool Thing::ai_wander (void)
     set_timestamp_last_wander_try(time_get_time_ms_cached());
 
     if (ai_blocked_completely()) {
-        log("Blocked on all sides, try escape");
+        dbg("Blocked on all sides, try escape");
         if (ai_escape()) {
             return true ;
         }
 
         if (is_jumper()) {
-            log("Blocked on all sides, try jumping");
+            dbg("Blocked on all sides, try jumping");
             if (try_harder_to_jump()) {
                 return true;
             }
         }
-        log("AI wander blocked");
+        dbg("AI wander blocked");
         return false;
     }
 
     if (ai_blocked()) {
-        log("Blocked on all sides except current pos, try jumping");
+        dbg("Blocked on all sides except current pos, try jumping");
         if (is_jumper()) {
             if (try_harder_to_jump()) {
                 return true;
             }
         }
 
-        log("AI wander blocked");
+        dbg("AI wander blocked");
         return false;
     }
 
-    log("AI wander");
+    dbg("AI wander");
     auto tries = 10;
     while (tries--) {
         point nh;
@@ -295,18 +296,18 @@ bool Thing::ai_wander (void)
         }
     }
 
-    log("No wander goal");
+    dbg("No wander goal");
     return false;
 }
 
 bool Thing::ai_escape (void)
 {_
     if (ai_blocked_completely()) {
-        log("AI escape blocked");
+        dbg("AI escape blocked");
         return false;
     }
 
-    log("AI escape");
+    dbg("AI escape");
     auto tries = 4;
     while (tries--) {
         point nh;
@@ -322,6 +323,6 @@ bool Thing::ai_escape (void)
         }
     }
 _
-    log("No escape goal");
+    dbg("No escape goal");
     return false;
 }

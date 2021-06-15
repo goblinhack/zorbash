@@ -158,7 +158,6 @@ void Level::update_deep_water (void)
                     bool removed_deep_water = false;
                     FOR_ALL_THINGS(this, t, x, y) {
                         if (t->is_deep_water()) {
-                            t->log("Removed, too shallow");
                             t->dead("by being too shallow");
                             removed_deep_water = true;
                         }
@@ -171,7 +170,7 @@ void Level::update_deep_water (void)
                         thing_new("water1", fpoint(x, y));
                     }
 
-                    if (g_opt_debug2) {
+                    if (unlikely(g_opt_debug3)) {
                         if (is_deep_water(x, y)) {
                             FOR_ALL_THINGS(this, t, x, y) {
                                 if (t->is_deep_water()) {

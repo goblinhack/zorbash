@@ -26,12 +26,12 @@ bool Thing::descend_dungeon_tick (void)
     }
 
     if (is_player()) {
-        log("Location check, descend");
+        dbg("Location check, descend");
     }
 
     if (get_tick() - get_tick_last_level_change() < 1) {
         if (is_player()) {
-            log("Location check, descend, no too soon");
+            dbg("Location check, descend, no too soon");
         }
         return false;
     }
@@ -48,7 +48,7 @@ bool Thing::descend_dungeon_tick (void)
 
 bool Thing::descend_dungeon (void)
 {_
-    log("Descend dungeon");
+    dbg("Descend dungeon");
     if (is_changing_level ||
         is_hidden || 
         is_falling || 
@@ -56,7 +56,7 @@ bool Thing::descend_dungeon (void)
         is_waiting_to_descend_sewer || 
         is_waiting_to_fall || 
         is_jumping) { 
-        log("Descend dungeon, no");
+        dbg("Descend dungeon, no");
         return false;
     }
 
@@ -80,7 +80,7 @@ bool Thing::descend_dungeon (void)
         game->current_level = next_level;
     }
 
-    log("Is trying to descend");
+    dbg("Is trying to descend");
 
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
@@ -98,22 +98,22 @@ bool Thing::descend_dungeon (void)
                     TOPCON("You bravely descend.");
                 }
 
-                log("Move to next level entrance");
+                dbg("Move to next level entrance");
                 is_changing_level = true;
 
-                log("Level change");
+                dbg("Level change");
                 level_change(l);
                 set_tick_last_level_change(get_tick());
 
-                log("Level change move to destination");
+                dbg("Level change move to destination");
                 move_to_immediately(fpoint(x, y));
 
-                log("Level change move carried items");
+                dbg("Level change move carried items");
                 move_carried_items_immediately();
 
                 if (is_player()) {
                     l->player = this;
-                    log("Level change scroll map");
+                    dbg("Level change scroll map");
                     l->scroll_map_to_player();
                     l->update_new_level();
                     //
@@ -123,14 +123,14 @@ bool Thing::descend_dungeon (void)
                     l->update_all_ticks();
                 }
 
-                log("Level change finish move");
+                dbg("Level change finish move");
                 move_finish();
 
-                log("Level change update interpolated position");
+                dbg("Level change update interpolated position");
                 set_interpolated_mid_at(mid_at);
                 update_interpolated_position();
 
-                log("Level change location check");
+                dbg("Level change location check");
                 location_check();
                 update_light();
 
@@ -139,7 +139,7 @@ bool Thing::descend_dungeon (void)
                 }
 
                 is_changing_level = false;
-                log("Moved to next level entrance");
+                dbg("Moved to next level entrance");
                 if (is_player()) {
                     level->timestamp_fade_in_begin = time_get_time_ms_cached();
                     level->update_new_level();

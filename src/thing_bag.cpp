@@ -49,7 +49,7 @@ bool Thing::bag_contains (Thingp item)
 //
 bool Thing::bag_add (Thingp item)
 {_
-    log("Bag: add %s", item->to_string().c_str());
+    dbg("Bag: add %s", item->to_string().c_str());
 
     //
     // Food might not have a monst pointer
@@ -108,7 +108,7 @@ bool Thing::bag_compress (void)
     auto bh = bag_height();
     auto did_something = false;
 
-    log("Bag: try to compress");
+    dbg("Bag: try to compress");
 
     for (auto x = 0; x < bw; x++) {
         for (auto y = 0; y < bh - 1; y++) {
@@ -162,20 +162,20 @@ bool Thing::bag_compress (void)
         if (!game->request_remake_inventory) {
             game->request_remake_inventory |= did_something;
             if (game->request_remake_inventory) {
-                log("Bag: request to remake inventory");
+                dbg("Bag: request to remake inventory");
             }
         }
     }
 
     if (did_something) {
-        log("Bag: was compressed");
+        dbg("Bag: was compressed");
     }
     return did_something;
 }
 
 bool Thing::bag_remove_at (Thingp item, point pos)
 {
-    log("Bag: remove %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
+    dbg("Bag: remove %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
 
     auto bag = get_bag();
     auto w = item->bag_item_width();
@@ -204,7 +204,7 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
 
 #if 0
     {
-        log("Bag: pre bag_can_place_at:");
+        dbg("Bag: pre bag_can_place_at:");
 _
         for (auto x = 0; x < bw; x++) {
             for (auto y = 0; y < bh; y++) {
@@ -214,7 +214,7 @@ _
                     if (!t) {
                         continue;
                     }
-                    log("- %d,%d has %s", x, y, t->to_string().c_str());
+                    dbg("- %d,%d has %s", x, y, t->to_string().c_str());
                 }
             }
         }
@@ -223,28 +223,28 @@ _
 
     if (pos.x < 0) {
 #if 0
-        log("Bag: cannot place %s at %d,%d (x<0)",
+        dbg("Bag: cannot place %s at %d,%d (x<0)",
             item->to_string().c_str(), pos.x, pos.y);
 #endif
         return false;
     }
     if (pos.y < 0) {
 #if 0
-        log("Bag: cannot place %s at %d,%d (y<0)",
+        dbg("Bag: cannot place %s at %d,%d (y<0)",
             item->to_string().c_str(), pos.x, pos.y);
 #endif
         return false;
     }
     if (pos.x + w >= bw) {
 #if 0
-        log("Bag: cannot place %s at %d,%d (x>width)",
+        dbg("Bag: cannot place %s at %d,%d (x>width)",
             item->to_string().c_str(), pos.x, pos.y);
 #endif
         return false;
     }
     if (pos.y + h >= bh) {
 #if 0
-        log("Bag: cannot place %s at %d,%d (y>height)",
+        dbg("Bag: cannot place %s at %d,%d (y>height)",
             item->to_string().c_str(), pos.x, pos.y);
 #endif
         return false;
@@ -264,7 +264,7 @@ _
             if (!o) {
                 continue;
             }
-            log("Bag: cannot place %s at %d,%d item %s is in the way",
+            dbg("Bag: cannot place %s at %d,%d item %s is in the way",
                 item->to_string().c_str(), pos.x, pos.y,
                 o->to_string().c_str());
 #endif
@@ -275,7 +275,7 @@ _
     //
     // Do not set pos here
     //
-    log("Bag: can place %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
+    dbg("Bag: can place %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
     return true;
 }
 
@@ -311,7 +311,7 @@ bool Thing::bag_place_at (Thingp item, point pos)
 
 bool Thing::bag_remove (Thingp item)
 {
-    log("Bag: remove %s", item->to_string().c_str());
+    dbg("Bag: remove %s", item->to_string().c_str());
 
     bool found = false;
     auto bag = get_bag();
@@ -328,7 +328,7 @@ bool Thing::bag_remove (Thingp item)
     }
 
 #if 0
-    log("Bag: post bag_remove:");
+    dbg("Bag: post bag_remove:");
 _
     for (auto x = 0; x < bw; x++) {
         for (auto y = 0; y < bh; y++) {
@@ -338,7 +338,7 @@ _
                 if (!t) {
                     continue;
                 }
-                log("- %d,%d has %s", x, y, t->to_string().c_str());
+                dbg("- %d,%d has %s", x, y, t->to_string().c_str());
 	    }
 	}
     }

@@ -659,7 +659,7 @@ int32_t main (int32_t argc, char *argv[])
     }
 #endif
 
-    if (g_opt_debug2) {
+    if (unlikely(g_opt_debug2)) {
         if (game) {
             game->config.debug_mode = g_opt_debug2;
         }

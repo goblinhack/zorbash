@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
@@ -42,10 +44,10 @@ bool Thing::is_carrying_treasure (void)
 std::vector<Thingp> Thing::get_treasure_list (void)
 {_
     std::vector<Thingp> tr;
-    log("Treasure:");
+    dbg("Treasure:");
 _
     if (!monstp) {
-        log("Not carrying");
+        dbg("Not carrying");
         return tr;
     }
 
@@ -55,7 +57,7 @@ _
             continue;
         }
 
-        log("Treasure %s", t->to_string().c_str());
+        dbg("Treasure %s", t->to_string().c_str());
 
         if (t->monstp && t->monstp->carrying.size()) {
             auto tr2 = t->get_treasure_list();

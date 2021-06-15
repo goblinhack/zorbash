@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -17,7 +19,7 @@ void Thing::visible (void)
         return;
     }
 
-    log("Is now visible");
+    dbg("Is now visible");
     is_hidden = false;
 
     //

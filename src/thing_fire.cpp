@@ -21,8 +21,8 @@ void Thing::fire_tick (void)
         // Keep going
         //
     } else if (!hates_fire()) {
-        if (g_opt_debug4) {
-            log("No, is not fire avoider");
+        if (unlikely(g_opt_debug4)) {
+            dbg("No, is not fire avoider");
         }
         return;
     }

@@ -26,7 +26,7 @@ void Thing::acid_tick (void)
 
     bool hit;
 
-    log("Acid tick");
+    dbg("Acid tick");
 
     //
     // Give the player a chance

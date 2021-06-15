@@ -29,10 +29,8 @@ void Thing::destroy (void)
 {_
     verify(this);
 
-    if (g_opt_debug2) {
-        if (is_loggable_for_important_stuff()) {
-            log("Is being destroyed");
-        }
+    if (is_loggable_for_important_stuff()) {
+        dbg2("Is being destroyed");
     }
 
     if (is_being_destroyed) {
@@ -69,7 +67,7 @@ void Thing::destroy (void)
     {
         auto f = level->all_gc_things.find(id);
         if (f != level->all_gc_things.end()) {
-            dbg("Remove from gc");
+            dbg2("Remove from gc");
             level->all_gc_things.erase(f);
         }
     }

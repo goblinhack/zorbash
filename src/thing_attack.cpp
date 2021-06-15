@@ -28,21 +28,21 @@ bool Thing::possible_to_attack (const Thingp it)
     if (is_weapon()) {
         if (owner && owner->is_player()) {
             if (it->is_attackable_by_player()) {
-                log("Owned by player");
+                dbg("Owned by player");
             } else {
-                log("Owned by player; not is_attackable by player");
+                dbg("Owned by player; not is_attackable by player");
             }
         }
     }
 
-    log("Is possible to attack %s?", it->to_string().c_str());
+    dbg("Is possible to attack %s?", it->to_string().c_str());
 _
     //
     // Fire attacks via tick so it can get you when you fall or jump into it.
     //
     if (is_fire()) {
         if (!is_monst() && !is_laser() && !is_projectile() && !is_weapon()) {
-            log("Cannot attack %s, I am fire", it->to_string().c_str());
+            dbg("Cannot attack %s, I am fire", it->to_string().c_str());
             return false;
         }
     }
@@ -53,7 +53,7 @@ _
         //
     } else {
         if (it->is_dead) {
-            log("Cannot attack %s, it's dead", it->to_string().c_str());
+            dbg("Cannot attack %s, it's dead", it->to_string().c_str());
             return false;
         }
     }
@@ -62,39 +62,39 @@ _
     // No attacking of open doors!
     //
     if (it->is_open) {
-        log("Cannot attack %s, it's open", it->to_string().c_str());
+        dbg("Cannot attack %s, it's open", it->to_string().c_str());
         return false;
     }
 
     if (is_alive_monst() || is_resurrected) {
         if (me->is_jelly_baby_eater()) {
             if (it->is_jelly_baby()) {
-                log("Can attack %s", it->to_string().c_str());
+                dbg("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_treasure_eater()) {
             if (it->is_treasure()) {
-                log("Can attack %s", it->to_string().c_str());
+                dbg("Can attack %s", it->to_string().c_str());
                 return true;
             }
             if (it->is_carrying_treasure()) {
-                log("Can steal from %s", it->to_string().c_str());
+                dbg("Can steal from %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_potion_eater()) {
             if (it->is_potion()) {
-                log("Can attack %s", it->to_string().c_str());
+                dbg("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
 
         if (me->is_wand_eater()) {
             if (it->is_wand()) {
-                log("Can attack %s", it->to_string().c_str());
+                dbg("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -104,7 +104,7 @@ _
         //
         if (me->is_meat_eater()) {
             if (!it->is_attackable_by_monst()) {
-                log("No, cannot attack %s, not is_attackable by meat eating monst",
+                dbg("No, cannot attack %s, not is_attackable by meat eating monst",
                     it->to_string().c_str());
                 return false;
             }
@@ -114,11 +114,11 @@ _
                 // Doesn't matter if dead, if it can eat you...
                 //
                 if (it->is_dead) {
-                    log("Can eat dead meat: %s", it->to_string().c_str());
+                    dbg("Can eat dead meat: %s", it->to_string().c_str());
                     return true;
                 }
 
-                log("Can attack meat or blood: %s", it->to_string().c_str());
+                dbg("Can attack meat or blood: %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -128,18 +128,18 @@ _
         //
         if (me->attack_meat()) {
             if (!it->is_attackable_by_monst()) {
-                log("No, cannot attack %s, not is_attackable by meat eating monst",
+                dbg("No, cannot attack %s, not is_attackable by meat eating monst",
                     it->to_string().c_str());
                 return false;
             }
 
             if (it->is_meat() || it->is_blood()) {
                 if (it->is_dead) {
-                    log("Can not attack dead meat: %s", it->to_string().c_str());
+                    dbg("Can not attack dead meat: %s", it->to_string().c_str());
                     return false;
                 }
 
-                log("Can attack living meat: %s", it->to_string().c_str());
+                dbg("Can attack living meat: %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -147,7 +147,7 @@ _
         if (me->attack_humanoid()) {
             if (it->is_humanoid()) {
                 if (!it->is_dead) {
-                    log("Can attack humanoid: %s", it->to_string().c_str());
+                    dbg("Can attack humanoid: %s", it->to_string().c_str());
                     return true;
                 }
             }
@@ -156,7 +156,7 @@ _
         if (me->attack_living()) {
             if (it->is_living()) {
                 if (!it->is_dead) {
-                    log("Can attack living: %s", it->to_string().c_str());
+                    dbg("Can attack living: %s", it->to_string().c_str());
                     return true;
                 }
             }
@@ -164,12 +164,12 @@ _
 
         if (me->is_food_eater()) {
             if (!it->is_attackable_by_monst()) {
-                log("No, cannot attack %s, not is_attackable by food eating monst",
+                dbg("No, cannot attack %s, not is_attackable by food eating monst",
                     it->to_string().c_str());
                 return false;
             }
             if (it->is_food()) {
-                log("Can attack food: %s", it->to_string().c_str());
+                dbg("Can attack food: %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -182,10 +182,10 @@ _
         //
         if (!weapon_get()) {
             if (!it->is_attackable_by_player()) {
-                log("No, cannot attack %s, not is_attackable", it->to_string().c_str());
+                dbg("No, cannot attack %s, not is_attackable", it->to_string().c_str());
                 return false;
             }
-            log("Can attack %s", it->to_string().c_str());
+            dbg("Can attack %s", it->to_string().c_str());
             return true;
         }
     }
@@ -196,19 +196,19 @@ _
             if (o->is_monst()) {
                 if (!it->is_attackable_by_monst()) {
                     // Too noisy
-                    // log("Cannot weapon attack %s, not is_attackable by monst",
+                    // dbg("Cannot weapon attack %s, not is_attackable by monst",
                     //     it->to_string().c_str());
                     return false;
                 }
-                log("Can attack %s", it->to_string().c_str());
+                dbg("Can attack %s", it->to_string().c_str());
                 return true;
             } else {
                 if (!it->is_attackable_by_player()) {
-                    log("Cannot weapon attack %s, not is_attackable by player",
+                    dbg("Cannot weapon attack %s, not is_attackable by player",
                         it->to_string().c_str());
                     return false;
                 }
-                log("Can attack %s", it->to_string().c_str());
+                dbg("Can attack %s", it->to_string().c_str());
                 return true;
             }
         }
@@ -223,14 +223,14 @@ _
                    it->is_very_combustible() ||
                    it->is_combustible()) {
             if (!it->is_fire() && !it->is_lava()) {
-                log("Can attack as I am firey %s", it->to_string().c_str());
+                dbg("Can attack as I am firey %s", it->to_string().c_str());
                 return true;
             }
         }
     }
 
     if (is_enemy(it)) {
-        log("Can attack enemy %s", it->to_string().c_str());
+        dbg("Can attack enemy %s", it->to_string().c_str());
         return true;
     }
 
@@ -238,7 +238,7 @@ _
         if (it->is_foilage() ||
             it->is_sticky() ||
             it->is_spiderweb()) {
-            log("Can attack scenery %s", it->to_string().c_str());
+            dbg("Can attack scenery %s", it->to_string().c_str());
             return true;
         }
     }
@@ -264,27 +264,27 @@ _
         it->is_item()) {
 
         if (is_laser()) {
-            log("Can attack as laser %s", it->to_string().c_str());
+            dbg("Can attack as laser %s", it->to_string().c_str());
             return true;
         }
 
         if (is_projectile()) {
-            log("Can attack as projectile %s", it->to_string().c_str());
+            dbg("Can attack as projectile %s", it->to_string().c_str());
             return true;
         }
 
         if (is_wand()) {
-            log("Can attack as wand %s", it->to_string().c_str());
+            dbg("Can attack as wand %s", it->to_string().c_str());
             return true;
         }
 
         if (is_explosion()) {
-            log("Can attack as explosion %s", it->to_string().c_str());
+            dbg("Can attack as explosion %s", it->to_string().c_str());
             return true;
         }
     }
 
-    log("Cannot attack %s, ignore", it->to_string().c_str());
+    dbg("Cannot attack %s, ignore", it->to_string().c_str());
 
 #if 0
     if (is_lava() || is_fire() || is_wand() || is_laser() || is_projectile() || is_explosion()) {
@@ -298,8 +298,8 @@ _
     } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
         // continue
     } else {
-        if (g_opt_debug4) { // very noisy
-            log("Cannot attack %s", it->to_string().c_str());
+        if (unlikely(g_opt_debug4)) { // very noisy
+            dbg("Cannot attack %s", it->to_string().c_str());
         }
         return false;
     }
@@ -322,7 +322,7 @@ bool Thing::attack (fpoint future_pos)
 
 bool Thing::attack (Thingp it)
 {_
-    log("Attack %s", it->to_string().c_str());
+    dbg("Attack %s", it->to_string().c_str());
 _
     //
     // Carry to eat later. Monsts attack their food.
@@ -346,14 +346,18 @@ _
             //
             // Eat corpse?
             //
-            owner->log("Can eat %s", it->to_string().c_str());
+            if (unlikely(g_opt_debug2)) {
+                owner->log("Can eat %s", it->to_string().c_str());
+            }
 
             if (it->is_dead) {
                 if (owner->eat(it)) {
                     //
                     // Can't kill it twice, so hide it
                     //
-                    owner->log("Eat corpse %s", it->to_string().c_str());
+                    if (unlikely(g_opt_debug1)) {
+                        owner->log("Eat corpse %s", it->to_string().c_str());
+                    }
                     it->hide();
                     return true;
                 }
@@ -370,7 +374,7 @@ _
         // As above, but not for owner.
         //
         if (can_eat(it)) {
-            log("Try to eat instead of attacking %s", it->to_string().c_str());
+            dbg("Try to eat instead of attacking %s", it->to_string().c_str());
             //
             // Eat corpse?
             //
@@ -381,7 +385,7 @@ _
                  (is_wand_eater()     && it->is_wand())     ||
                  (is_potion_eater()   && it->is_potion())) &&
                  try_to_carry(it)) {
-                log("Don't eat, try to carry %s", it->to_string().c_str());
+                dbg("Don't eat, try to carry %s", it->to_string().c_str());
                 return true;
             } 
 
@@ -390,7 +394,7 @@ _
                 // Can only eat once alive things when dead... But the player is gone once dead.
                 // Can't kill it twice, so hide it
                 //
-                log("Eat corpse %s", it->to_string().c_str());
+                dbg("Eat corpse %s", it->to_string().c_str());
                 it->hide();
                 it->gc();
                 return true;
@@ -405,7 +409,7 @@ _
             }
 
             if (is_player()) {
-                log("Don't attack, try to carry %s", it->to_string().c_str());
+                dbg("Don't attack, try to carry %s", it->to_string().c_str());
                 if (try_to_carry(it)) {
                     return true;
                 }
@@ -415,7 +419,7 @@ _
     }
 
     if (!possible_to_attack(it)) {
-	log("Attack failed, not possible to attack %s", it->to_string().c_str());
+	dbg("Attack failed, not possible to attack %s", it->to_string().c_str());
         return false;
     }
 
@@ -515,7 +519,7 @@ _
                         TOPCON("%s misses.", text_The().c_str());
                     }
                 } else {
-                    log("The attack missed (att %d, def %d) on %s",
+                    dbg("The attack missed (att %d, def %d) on %s",
                         att_mod, def_mod, it->to_string().c_str());
                 }
 
@@ -536,7 +540,7 @@ _
     }
 
     if (it->is_hit_by(this, crit, bite, total_damage)) {
-        log("The attack succeeded (dmg %d att, def %d) on %s",
+        dbg("The attack succeeded (dmg %d att, def %d) on %s",
             att_mod, def_mod, it->to_string().c_str());
 
         if (attack_lunge()) {
@@ -560,7 +564,7 @@ _
     //
     if (is_killed_on_hit_or_miss()) {
         if (is_loggable_for_unimportant_stuff()) {
-            log("Attack missed %s", it->to_string().c_str());
+            dbg("Attack missed %s", it->to_string().c_str());
         }
         if (attack_lunge()) {
             lunge(it->get_interpolated_mid_at());

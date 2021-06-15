@@ -18,17 +18,17 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
 {_
     if (stolen) {
         if (target) {
-            log("Drop (being stolen) %s at %s", what->to_string().c_str(),
+            dbg("Drop (being stolen) %s at %s", what->to_string().c_str(),
                 target->to_string().c_str());
         } else {
-            log("Drop (being stolen) %s", what->to_string().c_str());
+            dbg("Drop (being stolen) %s", what->to_string().c_str());
         }
     } else {
         if (target) {
-            log("Drop %s at %s", what->to_string().c_str(),
+            dbg("Drop %s at %s", what->to_string().c_str(),
                 target->to_string().c_str());
         } else {
-            log("Drop %s", what->to_string().c_str());
+            dbg("Drop %s", what->to_string().c_str());
         }
     }
 _
@@ -81,7 +81,7 @@ _
     }
 
     if (is_bag() || is_player()) {
-        log("Update bag with drop of: %s", what->to_string().c_str());
+        dbg("Update bag with drop of: %s", what->to_string().c_str());
         bag_remove(what);
         while (bag_compress()) { }
     }
@@ -92,9 +92,9 @@ _
     }
 
     if (stolen) {
-        log("Dropped (being stolen) %s", what->to_string().c_str());
+        dbg("Dropped (being stolen) %s", what->to_string().c_str());
     } else {
-        log("Dropped %s", what->to_string().c_str());
+        dbg("Dropped %s", what->to_string().c_str());
 
         if (is_player()) {
             sound_play("drop");
@@ -109,7 +109,7 @@ _
 //
 bool Thing::drop_into_ether (Thingp what)
 {_
-    log("Dropping %s into the ether", what->to_string().c_str());
+    dbg("Dropping %s into the ether", what->to_string().c_str());
 _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
@@ -145,7 +145,7 @@ _
         //
     }
 
-    log("Update bag with drop of: %s", what->to_string().c_str());
+    dbg("Update bag with drop of: %s", what->to_string().c_str());
     bag_remove(what);
     while (bag_compress()) { }
 
@@ -153,7 +153,7 @@ _
     monstp->carrying.remove(what->id);
     game->request_remake_inventory = true;
 
-    log("Dropped %s into the ether", what->to_string().c_str());
+    dbg("Dropped %s into the ether", what->to_string().c_str());
 
     return true;
 }
@@ -165,7 +165,7 @@ bool Thing::drop_from_ether (Thingp what)
 {_
     auto player = game->level->player;
 
-    log("Drop from ether %s", what->to_string().c_str());
+    dbg("Drop from ether %s", what->to_string().c_str());
 _
     what->hooks_remove();
     what->remove_owner();
@@ -202,7 +202,7 @@ _
                 (is_dir_br() || is_dir_right() || is_dir_tr()),
                 true /* make_visible_at_end */);
 
-    log("Dropped from ether %s", what->to_string().c_str());
+    dbg("Dropped from ether %s", what->to_string().c_str());
 
     return true;
 }

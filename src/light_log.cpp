@@ -143,18 +143,3 @@ void Light::err (const char *fmt, ...)
     t->err_(fmt, args);
     va_end(args);
 }
-
-void Light::dbg (const char *fmt, ...)
-{
-    verify(this);
-    if (!g_opt_debug2) {
-        return;
-    }
-    auto t = this;
-
-    va_list args;
-
-    va_start(args, fmt);
-    t->log_(fmt, args);
-    va_end(args);
-}

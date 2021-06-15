@@ -57,14 +57,14 @@ void Thing::set_owner (Thingp owner)
         }
 
         if (owner) {
-            log("Will change owner %s->%s", old_owner->to_string().c_str(),
+            dbg("Will change owner %s->%s", old_owner->to_string().c_str(),
                 owner->to_string().c_str());
         } else {
-            log("Will remove owner %s", old_owner->to_string().c_str());
+            dbg("Will remove owner %s", old_owner->to_string().c_str());
         }
     } else {
         if (owner) {
-            log("Will set owner to %s", owner->to_string().c_str());
+            dbg("Will set owner to %s", owner->to_string().c_str());
         }
     }
 
@@ -86,7 +86,7 @@ void Thing::remove_owner (void)
         return;
     }
 
-    log("Remove owner %s", old_owner->to_string().c_str());
+    dbg("Remove owner %s", old_owner->to_string().c_str());
 
     set_owner_id(0);
     old_owner->decr_owned_count();
@@ -114,7 +114,7 @@ bool Thing::change_owner (Thingp new_owner)
 	return true;
     }
 
-    log("Change owner from %s to %s",
+    dbg("Change owner from %s to %s",
 	old_owner->to_string().c_str(), new_owner->to_string().c_str());
 
     if (old_owner->is_player()) {

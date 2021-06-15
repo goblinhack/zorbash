@@ -333,7 +333,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
     READ_MAGIC("thing end", THING_MAGIC_END);
 
-    if (g_opt_debug4) {
+    if (unlikely(g_opt_debug4)) {
         auto diff = in.tellg() - start;
         LOG("LOAD %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p", 
             (int)diff, name.c_str(), my.t->tp_id, my.t->id.id, 
@@ -821,7 +821,7 @@ Game::load (std::string file_to_load, class Game &target)
     }
 
 #if 0
-    if (g_opt_debug4) {
+    if (unlikely(g_opt_debug4)) {
         std::cout << "decompressed as ";
         hexdump((const unsigned char *)uncompressed, uncompressed_len);
     }

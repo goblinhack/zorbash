@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_tile.h"
 #include "my_thing.h"
 #include "my_monst.h"
@@ -44,5 +46,5 @@ void Thing::add_enemy (Thingp attacker)
 
     auto enemy = attacker->id;
     monstp->enemies.push_back(enemy);
-    log("Add enemy %s", attacker->to_string().c_str());
+    dbg("Add enemy %s", attacker->to_string().c_str());
 }

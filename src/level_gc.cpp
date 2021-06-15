@@ -5,6 +5,7 @@
 
 #include "my_sys.h"
 #include "my_main.h"
+#include "my_globals.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -19,9 +20,9 @@ void Level::things_gc (bool force)
     }
 
     if (force) {
-        log("Begin forced thing garbage collection");
+        dbg("Begin forced thing garbage collection");
     } else {
-        log("Begin thing garbage collection");
+        dbg("Begin thing garbage collection");
     }
 _
     for (auto it = all_gc_things.cbegin(), next_it = it; 
@@ -40,22 +41,30 @@ _
             // Allow the particles to finish
             //
             if (t->has_internal_particle) {
-                t->log("Thing garbage collect delayed due to internal particle");
+                if (unlikely(g_opt_debug1)) {
+                    t->log("Thing garbage collect delayed due to internal particle");
+                }
                 continue;
             }
 
             if (t->has_external_particle) {
-                t->log("Thing garbage collect delayed due to external particle");
+                if (unlikely(g_opt_debug1)) {
+                    t->log("Thing garbage collect delayed due to external particle");
+                }
                 continue;
             }
 
             if (t->has_laser) {
-                t->log("Thing garbage collect delayed due to laser");
+                if (unlikely(g_opt_debug1)) {
+                    t->log("Thing garbage collect delayed due to laser");
+                }
                 continue;
             }
 
             if (t->has_projectile) {
-                t->log("Thing garbage collect delayed due to projectile");
+                if (unlikely(g_opt_debug1)) {
+                    t->log("Thing garbage collect delayed due to projectile");
+                }
                 continue;
             }
 	}
@@ -66,12 +75,14 @@ _
             monst_count--;
         }
 
-        t->log("Thing garbage collect");
+        if (unlikely(g_opt_debug1)) {
+            t->log("Thing garbage collect");
+        }
 
         delete t;
     }
 
-    log("End thing garbage collection");
+    dbg("End thing garbage collection");
 }
 
 void Level::things_gc_force (void)

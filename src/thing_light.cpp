@@ -123,7 +123,7 @@ void Thing::init_lights (void)
         }
 
         has_light = true;
-        log("Player created");
+        dbg("Player created");
     } else {
         if (unlikely(get_light_strength())) {
             std::string l = light_color();

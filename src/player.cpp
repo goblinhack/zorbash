@@ -20,7 +20,7 @@ void player_tick (void)
     // Trying to move when the console is visible.
     //
     if (wid_console_window && wid_console_window->visible) {
-        if (g_opt_debug4) {
+        if (unlikely(g_opt_debug4)) {
             LOG("Player tick; ignore, console open");
         }
         return;
@@ -33,27 +33,27 @@ void player_tick (void)
         case Game::STATE_NORMAL:
             break;
         case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
-            if (g_opt_debug4) {
+            if (unlikely(g_opt_debug4)) {
                 LOG("Ignore player action when moving items");
             }
             return;
         case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
-            if (g_opt_debug4) {
+            if (unlikely(g_opt_debug4)) {
                 LOG("Ignore player action when collecting items");
             }
             return;
         case Game::STATE_ENCHANTING_ITEMS:
-            if (g_opt_debug4) {
+            if (unlikely(g_opt_debug4)) {
                 LOG("Ignore player action when enchanting items");
             }
             return;
         case Game::STATE_CHOOSING_SKILLS:
-            if (g_opt_debug4) {
+            if (unlikely(g_opt_debug4)) {
                 LOG("Ignore player action when choosing skills");
             }
             return;
         case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
-            if (g_opt_debug4) {
+            if (unlikely(g_opt_debug4)) {
             }
             LOG("Ignore player action when choosing target");
             return;
@@ -61,7 +61,7 @@ void player_tick (void)
 
     auto level = game->level;
     if (!level) {
-        if (g_opt_debug4) {
+        if (unlikely(g_opt_debug4)) {
             LOG("Player tick; ignore, no level");
         }
         return;
@@ -69,7 +69,7 @@ void player_tick (void)
 
     auto player = level->player;
     if (!player) {
-        if (g_opt_debug4) {
+        if (unlikely(g_opt_debug4)) {
             LOG("Player tick; ignore, no player");
         }
         return;
@@ -106,7 +106,7 @@ void player_tick (void)
     }
 
     if (player->is_dead || player->is_hidden) {
-        if (g_opt_debug4) {
+        if (unlikely(g_opt_debug4)) {
             LOG("Player tick; ignore, is dead");
         }
         return;
@@ -290,8 +290,10 @@ void player_tick (void)
             if (t->get_timestamp_move_begin()) {
                 int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
                 if (time_left > 10) {
-                    t->log("Player delayed due to me (%d left)",
-                           t->get_timestamp_move_end() - time_get_time_ms_cached());
+                    if (unlikely(g_opt_debug3)) {
+                        t->log("Player move delayed due to player moving (%d ms left)",
+                               t->get_timestamp_move_end() - time_get_time_ms_cached());
+                    }
                     wait = true;
                     break;
                 }
@@ -299,7 +301,9 @@ void player_tick (void)
         } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
 
         if (wait) {
-            LOG("Player move delayed while things are moving");
+            if (unlikely(g_opt_debug3)) {
+                LOG("Player move delayed while things are moving");
+            }
             return;
         }
 

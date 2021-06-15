@@ -1187,7 +1187,6 @@ public:
     void con_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
     void cursor_path_stop(void);
-    void dbg(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void dead(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dead_(const char *fmt, va_list args); // compile error without
     void dead(std::string &);

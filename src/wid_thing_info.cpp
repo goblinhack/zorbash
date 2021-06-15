@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_globals.h"
 #include "my_game.h"
 #include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
@@ -22,7 +23,6 @@ std::list<WidPopup *> wid_thing_info_window;
 
 void wid_thing_info_fini (void)
 {_
-    LOG("Thing info fini");
     if (game->bag_primary) {
         delete game->bag_primary;
         game->bag_primary = nullptr;
@@ -50,7 +50,6 @@ uint8_t wid_thing_info_init (void)
 
 void Game::wid_thing_info_destroy_immediate (void)
 {_
-    LOG("Thing info destroy immediate");
     if (game->request_remake_inventory) {
         //
         // Continue
@@ -90,7 +89,9 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         return nullptr;
     }
 
-    t->log("Create popup");
+    if (unlikely(g_opt_debug1)) {
+        t->log("Create popup");
+    }
 
     auto wid_popup_window = new WidPopup("Thing info", tl, br, 
                                          nullptr, "", true, false);
@@ -215,7 +216,9 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
 bool Game::wid_thing_info_push_popup (Thingp t)
 {_
     if (t->long_text_description() == "") {
-        t->log("No; cannot push, no text");
+        if (unlikely(g_opt_debug1)) {
+            t->log("No; cannot push, no text");
+        }
         return false;
     }
 
@@ -224,7 +227,9 @@ bool Game::wid_thing_info_push_popup (Thingp t)
         existing_height += wid_get_height(w->wid_popup_container);
 
         if (w->t == t) {
-            t->log("No; cannot push, already shown");
+            if (unlikely(g_opt_debug1)) {
+                t->log("No; cannot push, already shown");
+            }
             return true;
         }
     }
@@ -235,7 +240,9 @@ bool Game::wid_thing_info_push_popup (Thingp t)
 
     auto w = game->wid_thing_info_create_popup(t, tl, br);
     if (!w) {
-        t->log("No; cannot create popup");
+        if (unlikely(g_opt_debug1)) {
+            t->log("No; cannot create popup");
+        }
         return false;
     }
 
@@ -249,11 +256,15 @@ bool Game::wid_thing_info_push_popup (Thingp t)
 
     if (wid_get_tl_y(w->wid_popup_container) <= UI_TOPCON_VIS_HEIGHT) {
         delete w;
-        t->log("No; cannot fit");
+        if (unlikely(g_opt_debug1)) {
+            t->log("No; cannot fit");
+        }
         return false;
     }
 
-    t->log("Yes; pushed");
+    if (unlikely(g_opt_debug1)) {
+        t->log("Yes; pushed");
+    }
     wid_thing_info_window.push_back(w);
     return true;
 }
@@ -272,29 +283,39 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         //
         // Continue
         //
-        t->log("Remake thing info");
+        if (unlikely(g_opt_debug1)) {
+            t->log("Remake thing info");
+        }
     } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
         t->err("Ignore, already collecting items");
         return;
     } else if (game->state == Game::STATE_MOVING_ITEMS) {
-        t->log("Ignore, already moving items");
+        if (unlikely(g_opt_debug1)) {
+            t->log("Ignore, already moving items");
+        }
         return;
     }
 _
     if (wid_console_window && wid_console_window->visible) {
-        t->log("No; console visible");
+        if (unlikely(g_opt_debug1)) {
+            t->log("No; console visible");
+        }
         return;
     }
 
     if (when_hovering_over) {
         if (!level->is_lit(t->mid_at.x, t->mid_at.y)) {
-            t->log("No; not lit");
+            if (unlikely(g_opt_debug1)) {
+                t->log("No; not lit");
+            }
             return;
         }
     }
 
     if (!wid_thing_info_window.empty()) {
-        t->log("Yes; destroy window");
+        if (unlikely(g_opt_debug1)) {
+            t->log("Yes; destroy window");
+        }
         wid_thing_info_destroy_immediate();
     }
 
@@ -313,7 +334,9 @@ _
     }
     recursion = true;
 _
-    t->log("Yes; create window");
+    if (unlikely(g_opt_debug1)) {
+        t->log("Yes; create window");
+    }
     wid_thing_info_push_popup(t);
 
     //
@@ -329,7 +352,9 @@ _
 
     auto tp = t->tp();
     if ((t->get_top_owner() == player) || (t == player)) {
-        t->log("Thing info create bags");
+        if (unlikely(g_opt_debug1)) {
+            t->log("Thing info create bags");
+        }
 
         point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 
@@ -455,8 +480,10 @@ _
         }
     }
 _
-    for (auto t : ts) {
-        t->log("- candidate");
+    if (unlikely(g_opt_debug1)) {
+        for (auto t : ts) {
+            t->log("- candidate");
+        }
     }
 
     wid_thing_info_destroy_immediate();
@@ -486,7 +513,9 @@ _
             i++;
             if (!wid_thing_info_push_popup(t)) {
                 wid_thing_info_fini();
-                t->log("No; cannot push");
+                if (unlikely(g_opt_debug1)) {
+                    t->log("No; cannot push");
+                }
                 compact = true;
                 break;
             }

@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_tile.h"
 #include "my_thing.h"
 
@@ -18,7 +20,7 @@ int Thing::health_boost (int v)
     auto max_health = get_health_max();
 
     if (old_health >= max_health) {
-        log("Health boost not possible, maxxed out already");
+        dbg("Health boost not possible, maxxed out already");
         return false;
     }
 
@@ -26,9 +28,9 @@ int Thing::health_boost (int v)
     set_health(new_health);
 
     if (new_health >= max_health) {
-        log("Health boost not possible, maxxed at %d", new_health);
+        dbg("Health boost not possible, maxxed at %d", new_health);
     } else {
-        log("Health boost by %d from %d to %d", v, old_health, new_health);
+        dbg("Health boost by %d from %d to %d", v, old_health, new_health);
     }
     return new_health - old_health;
 }

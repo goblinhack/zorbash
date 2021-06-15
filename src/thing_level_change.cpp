@@ -20,13 +20,13 @@
 void Thing::level_change (Levelp l)
 {_
     if (level == l) {
-        log("Change level; no, same level");
+        dbg("Change level; no, same level");
         return;
     }
 
     auto old_level = level;
 
-    log("Change level");
+    dbg("Change level");
     level_leave();
     level = l;
     level_enter();
@@ -95,7 +95,7 @@ void Thing::level_change (Levelp l)
         l->reset();
     }
 
-    log("Changed level");
+    dbg("Changed level");
 
     if (is_player()) {
         l->scroll_map_to_player();

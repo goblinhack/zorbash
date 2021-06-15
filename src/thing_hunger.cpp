@@ -4,6 +4,8 @@
 //
 
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_globals.h"
 #include "my_tile.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
@@ -54,15 +56,15 @@ void Thing::hunger_clock (void)
 
     if (old_is_starving != is_starving) {
         if (is_starving) {
-            log("Is starving");
+            dbg("Is starving");
         } else {
-            log("Is no longer starving");
+            dbg("Is no longer starving");
         }
     } else if (old_is_hungry != is_hungry) {
         if (is_hungry) {
-            log("Is hungry");
+            dbg("Is hungry");
         } else {
-            log("Is no longer hungry");
+            dbg("Is no longer hungry");
         }
     }
 }

@@ -56,16 +56,16 @@ void Thing::set_minion_owner (Thingp minion_owner)
         }
 
         if (minion_owner) {
-            log("Will change minion owner %s->%s", 
+            dbg("Will change minion owner %s->%s", 
                 old_minion_owner->to_string().c_str(),
                 minion_owner->to_string().c_str());
         } else {
-            log("Will remove minion owner %s", 
+            dbg("Will remove minion owner %s", 
                 old_minion_owner->to_string().c_str());
         }
     } else {
         if (minion_owner) {
-            log("Will set minion owner to %s", 
+            dbg("Will set minion owner to %s", 
                 minion_owner->to_string().c_str());
         }
     }
@@ -89,7 +89,7 @@ void Thing::remove_minion_owner (void)
         return;
     }
 
-    log("Remove minion owner %s", old_minion_owner->to_string().c_str());
+    dbg("Remove minion owner %s", old_minion_owner->to_string().c_str());
 
     set_minion_owner_id(0);
     old_minion_owner->decr_minion_count();
