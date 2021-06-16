@@ -136,6 +136,13 @@ public:
     // generally do nothing or are hidden.
     //
     std::map<ThingId, Thingp> all_interesting_things {};
+    //
+    // These are used to add/remove to all_interesting_things when walking
+    // is done; aboids the map becoming invalidated due to changes.
+    //
+    bool all_interesting_things_walk_in_progress {};
+    std::map<ThingId, Thingp> pending_add_all_interesting_things {};
+    std::map<ThingId, Thingp> pending_remove_all_interesting_things {};
 
     //
     // All things that are to be destroyed
@@ -271,6 +278,7 @@ public:
     #define FOR_ALL_THINGS_END() } }
 
     #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {         \
+        level->all_interesting_things_walk_in_progress = true;      \
         auto c = level->all_interesting_things;                     \
         auto i = level->all_interesting_things.begin();             \
         while (i != level->all_interesting_things.end()) {          \
@@ -284,9 +292,28 @@ public:
             if (i == level->all_interesting_things.end()) {         \
                 break;                                              \
             }                                                       \
-        } }
+        }                                                           \
+        level->all_interesting_things_walk_in_progress = false;     \
+    }
+
+#if 0
+            {                                                       \
+                bool got = false;                                   \
+                for (auto p : level->all_interesting_things) {      \
+                    if (p.second == t) {                            \
+                        got = true;                                 \
+                        break;                                      \
+                    }                                               \
+                }                                                   \
+                if (!got) {                                         \
+                    t->die("Found thing not on list");              \
+                }                                                   \
+            }                                                       \
+
+#endif
 
     #define FOR_ALL_TICKABLE_THINGS_ON_LEVEL(level, t) {            \
+        level->all_interesting_things_walk_in_progress = true;      \
         auto c = level->all_interesting_things;                     \
         auto i = level->all_interesting_things.begin();             \
         while (i != level->all_interesting_things.end()) {          \
@@ -304,7 +331,9 @@ public:
             if (i == level->all_interesting_things.end()) {         \
                 break;                                              \
             }                                                       \
-        } }
+        }                                                           \
+        level->all_interesting_things_walk_in_progress = false;     \
+    }
 
     //
     // NOTE: get is a lot safer than getptr, if the vector gets resized somehow

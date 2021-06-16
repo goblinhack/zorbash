@@ -353,6 +353,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     l->all_thing_ptrs_at = {};
     l->all_things = {};
     l->all_interesting_things = {};
+    l->pending_add_all_interesting_things = {};
+    l->pending_remove_all_interesting_things = {};
     l->all_gc_things = {};
 
     in >> bits(l->timestamp_dungeon_created); old_timestamp_dungeon_created = l->timestamp_dungeon_created;

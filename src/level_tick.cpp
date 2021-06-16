@@ -104,7 +104,7 @@ void Level::tick (void)
     }
 
     //
-    // If things have stopped moving, perform location checks on where theuy
+    // If things have stopped moving, perform location checks on where they
     // are now. This handles things like shoving a monst into a chasm. We do
     // location checks on the ends of moves, but this is a backup and will
     // also handle things that do not move, like a wand that is now on fire.
@@ -118,6 +118,16 @@ void Level::tick (void)
     } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 
     game->tick_end();
+
+    for (auto& i : pending_remove_all_interesting_things) {
+        all_interesting_things.erase(i.first);
+    }
+    pending_remove_all_interesting_things = {};
+
+    for (auto& i : pending_add_all_interesting_things) {
+        all_interesting_things.insert(i);
+    }
+    pending_add_all_interesting_things = {};
 }
 
 void Level::sanity_check (void)
