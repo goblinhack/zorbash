@@ -43,9 +43,14 @@ void Thing::level_leave (void)
     }
 
     if (is_interesting()) {
-        auto f = level->all_interesting_things.find(id);
-        if (f != level->all_interesting_things.end()) {
-            level->all_interesting_things.erase(f);
+        //
+        // If doing a walk, we must be careful and cannot modify the map
+        //
+        if (level->all_interesting_things_walk_in_progress) {
+            level->pending_add_all_interesting_things.erase(id);
+            level->pending_remove_all_interesting_things.insert(std::pair(id, this));
+        } else {
+            level->all_interesting_things.erase(id);
         }
     }
 
