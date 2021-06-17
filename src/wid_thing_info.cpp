@@ -23,6 +23,8 @@ std::list<WidPopup *> wid_thing_info_window;
 
 void wid_thing_info_fini (void)
 {_
+    LOG("Destroy wid thing info");
+
     if (game->bag_primary) {
         delete game->bag_primary;
         game->bag_primary = nullptr;

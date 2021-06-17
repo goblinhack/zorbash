@@ -19,6 +19,8 @@
 
 void Level::describe (fpoint p)
 {_
+    bool got_one_with_long_text = false;
+
     if (!player) {
         return;
     }
@@ -63,6 +65,7 @@ void Level::describe (fpoint p)
 
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
+                got_one_with_long_text |= t->long_text_description().empty();
                 push_back_if_unique(hover_over_things, t);
             }
         }
@@ -99,6 +102,7 @@ void Level::describe (fpoint p)
 
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
+                got_one_with_long_text |= t->long_text_description().empty();
                 push_back_if_unique(hover_over_things, t);
             }
         }
@@ -143,6 +147,7 @@ void Level::describe (fpoint p)
 
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
+                got_one_with_long_text |= t->long_text_description().empty();
                 push_back_if_unique(hover_over_things, t);
             }
         }
@@ -152,10 +157,7 @@ void Level::describe (fpoint p)
         }
     } FOR_ALL_THINGS_END()
 
-    if (hover_over_things.size()) {
-        dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
-        game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
-    } else {
+    if (!got_one_with_long_text || !hover_over_things.size()) {
         //
         // If we found nothing, then check to see if we are already showing
         // something of interest and if so, keep it.
@@ -198,6 +200,11 @@ _
 
         wid_thing_info_fini();
     }
+
+    if (hover_over_things.size()) {
+        dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
+        game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
+    }
 }
 
 void Level::describe (Thingp t)
@@ -218,13 +225,6 @@ void Level::describe (Thingp t)
 
     if (!t->is_described_when_hovering_over()) {
         dbg3("Describe %s; no not described", t->to_string().c_str());
-        return;
-    }
-
-    if (t->long_text_description().empty()) {
-        dbg3("Describe %s; has no text", t->to_string().c_str());
-        wid_thing_info_fini();
-        t->show_botcon_description();
         return;
     }
 
@@ -268,6 +268,13 @@ void Level::describe (Thingp t)
     }
 
     wid_thing_info_fini();
+
+    if (t->long_text_description().empty()) {
+        dbg3("Describe %s; has no text", t->to_string().c_str());
+        t->show_botcon_description();
+        return;
+    }
+
     std::vector<Thingp> hover_over_things;
     hover_over_things.push_back(t);
     game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
