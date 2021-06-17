@@ -52,6 +52,19 @@ static uint8_t wid_skills_key_up (Widp w, const struct SDL_Keysym *key)
         }
     }
 
+    if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        auto what = game->level->inventory_get();
+        if (what) {
+            if (game->level->player->drop(what)) {
+                game->tick_begin("drop");
+            }
+        }
+        CON("PLAYER: Skill choose cancelled");
+        game->change_state(Game::STATE_NORMAL);
+        wid_skill_choose_destroy();
+        return true;
+    }
+
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
@@ -73,7 +86,7 @@ static uint8_t wid_skills_key_up (Widp w, const struct SDL_Keysym *key)
                         return true;
                     case 'b':
                     case SDLK_ESCAPE: {_
-                        CON("PLAYER: Load game cancelled");
+                        CON("PLAYER: Skill choose cancelled");
                         wid_skill_choose_destroy();
                         return true;
                     }
