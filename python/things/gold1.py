@@ -27,6 +27,7 @@ def gold_init(name, text_name):
     mytp.set_light_strength(1)
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
+    mytp.set_is_described_when_hovering_over(True)
     mytp.set_text_description("A gold goin.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)

@@ -42,7 +42,7 @@ void Thing::log_ (const char *fmt, va_list args) const
 void Thing::log (const char *fmt, ...) const
 {
     verify(this);
-    log_catchup_missing_indent_levels();
+    //log_catchup_missing_indent_levels();
 
     auto t = this;
     va_list args;
