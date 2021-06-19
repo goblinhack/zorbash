@@ -31,7 +31,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_throwable(True)
     mytp.set_is_thrown_automatically_when_chosen(True)
     mytp.set_is_treasure_class_c(True)

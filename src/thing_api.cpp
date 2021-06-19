@@ -290,8 +290,6 @@ int Thing::is_secret_door(void) const                                   {_ retur
 int Thing::is_sewer_wall(void) const                                    {_ return (tp()->is_sewer_wall()); }
 int Thing::is_shallow_water(void) const                                 {_ return (tp()->is_shallow_water()); }
 int Thing::is_shovable(void) const                                      {_ return (tp()->is_shovable()); }
-int Thing::is_shown_on_leftbar(void) const                              {_ return (tp()->is_shown_on_leftbar()); }
-int Thing::is_shown_uniquely_on_leftbar(void) const                     {_ return (tp()->is_shown_uniquely_on_leftbar()); }
 int Thing::is_skill(void) const                                         {_ return (tp()->is_skill()); }
 int Thing::is_skillstone(void) const                                    {_ return (tp()->is_skillstone()); }
 int Thing::is_smoke(void) const                                         {_ return (tp()->is_smoke()); }

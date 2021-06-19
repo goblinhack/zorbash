@@ -73,7 +73,6 @@ def tp_init(name, text_name):
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_shovable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_undead(True)
     mytp.set_long_text_description("A floating mass of tentacles and eyeballs. These creatures are often employed to monitor the dark and dank dungeons with their impressive vision. Beware their lightning gaze...")
     mytp.set_monst_size(zx.MONST_SIZE_NORMAL)

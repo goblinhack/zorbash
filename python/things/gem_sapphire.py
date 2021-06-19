@@ -16,7 +16,6 @@ def tp_init(name, text_name):
     mytp.set_is_interesting(True)
     mytp.set_is_item_collected_as_gold(True)
     mytp.set_is_item(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_treasure_class_c(True)
     mytp.set_is_treasure(True)
     mytp.set_long_text_description("Magnificent and blessed sapphire, in all its celestial hues. It is a stone of wisdom, prophecy and divine good portents. Putting all that aside, it's worth a few bob. Grab it!") 

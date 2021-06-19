@@ -21,7 +21,6 @@ def tp_init(name, text_name):
     mytp.set_is_item_not_stackable(True)
     mytp.set_is_item(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_treasure_class_a(True)
     mytp.set_long_text_description("A large leathery brown bag.")
     mytp.set_normal_placement_rules(True)

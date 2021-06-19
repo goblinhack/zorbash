@@ -9,11 +9,9 @@
 #include "my_game.h"
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
-#include "my_wid_leftbar.h"
 #include "my_wid_inventory.h"
 #include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_collect.h"
 #include "my_sdl.h"
 #include "my_wid.h"
 #include "my_ui.h"
@@ -212,11 +210,9 @@ void Game::config_top_select (void)
         game_config_top_destroy();
     }
     wid_rightbar_fini();
-    wid_leftbar_fini();
     wid_inventory_fini();
     wid_skillbox_fini();
     wid_thing_info_fini();
-    wid_collect_fini();
 
     point tl = make_point(
                 TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2,

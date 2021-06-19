@@ -25,7 +25,6 @@
 #include "my_wid_rightbar.h"
 #include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_collect.h"
 #include "my_array_bounds_check.h"
 #include "my_ui.h"
 #include "my_sdl.h"
@@ -33,7 +32,7 @@
 #include "my_sound.h"
 #include <unistd.h> // usleep
 
-#define ENABLE_DEBUG_GFX_GL_BLEND
+#undef ENABLE_DEBUG_GFX_GL_BLEND
 
 //
 // Display sorted.
@@ -84,6 +83,7 @@ Widp wid_over {};
 //
 int wid_mouse_visible = 1;
 bool wid_mouse_double_click;
+timestamp_t wid_last_mouse_motion;
 
 //
 // Widget moving
@@ -4701,6 +4701,10 @@ void wid_mouse_motion (int32_t x, int32_t y,
     ascii_mouse_x = x;
     ascii_mouse_y = y;
 
+    if (relx || rely) {
+        wid_last_mouse_motion = time_get_time_ms_cached();
+    }
+
     wid_refresh_overlay_count += 1;
 
     if (wid_mouse_motion_recursion) {
@@ -6096,7 +6100,6 @@ void wid_tick_all (void)
         LOG("Handle destroy bags request");
         game->request_destroy_bags = false;
         wid_thing_info_fini();
-        wid_collect_fini();
         wid_inventory_init();
     }
 }

@@ -69,7 +69,6 @@ def tp_init(name, text_name):
     mytp.set_is_moveable(True)
     mytp.set_is_resurrectable(True)
     mytp.set_is_shovable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_undead(True)
     mytp.set_long_text_description("Possibly the corpse of one who ventured into this dungeon before. All life is gone now, and what remains is a corpse wrapped in rags. Death is no release for this poor creature.")
     mytp.set_loves_poison(True)

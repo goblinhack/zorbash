@@ -66,7 +66,6 @@ def tp_init(name, text_name):
     mytp.set_is_moveable(True)
     mytp.set_is_poison(2)
     mytp.set_is_shovable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_long_text_description("An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
     mytp.set_loves_poison(True)
     mytp.set_loves_spiderwebs(True)

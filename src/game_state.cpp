@@ -8,7 +8,6 @@
 #include "my_wid_topcon.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_collect.h"
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_thing.h"
@@ -46,8 +45,6 @@ void Game::change_state (int new_state)
             wid_thing_info_fini();
             break;
     }
-
-    wid_collect_fini();
 
     if (game->in_transit_item) {
         if (wid_in_transit_item_drop()) {

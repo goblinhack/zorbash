@@ -164,7 +164,7 @@ public:
     void soft_unpause(void);
     void tick_begin(const std::string &);
     void tick_end();
-    void wid_collect_create(const std::list<Thingp> &items);
+    void wid_collect_create(const std::list<Thingp> items);
     void wid_collect_destroy(void);
     void wid_enchant_an_item(void);
     void wid_skill_choose(void);
@@ -173,6 +173,7 @@ public:
     void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
     void wid_thing_info_add_constitution(WidPopup *w, Thingp t);
     void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);
+    void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
     void wid_thing_info_add_defence(WidPopup *w, Thingp t);
     void wid_thing_info_add_gold_value(WidPopup *w, Thingp t);
     void wid_thing_info_add_health(WidPopup *w, Thingp t);

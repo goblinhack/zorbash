@@ -851,8 +851,6 @@ public:
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;
     int is_shovable(void) const;
-    int is_shown_on_leftbar(void) const;
-    int is_shown_uniquely_on_leftbar(void) const;
     int is_skillstone(void) const;
     int is_skill(void) const;
     int is_smoke(void) const;

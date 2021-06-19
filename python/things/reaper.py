@@ -40,7 +40,6 @@ def tp_init(name, text_name):
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_resurrectable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_undead(True)
     mytp.set_long_text_description("A lesser reaper. You cannot kill what does not live!")
     mytp.set_loves_poison(True)

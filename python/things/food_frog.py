@@ -19,7 +19,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_item(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_throwable(True)
     mytp.set_is_usable(True)
     mytp.set_is_used_automatically_when_selected(False)

@@ -234,8 +234,6 @@ PyObject *level_is_sewer_wall_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_is_shallow_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_shovable_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_shown_on_leftbar_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_shown_uniquely_on_leftbar_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_skill_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_smoke_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spawner_at(PyObject *obj, PyObject *args, PyObject *keywds);

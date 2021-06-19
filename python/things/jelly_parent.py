@@ -59,7 +59,6 @@ def tp_init(name, text_name):
     mytp.set_is_meat_eater(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_soft_body(True)
     mytp.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened and dividing when killed. This is an adult. It will eat its own children!")
     mytp.set_monst_size(zx.MONST_SIZE_LARGE)

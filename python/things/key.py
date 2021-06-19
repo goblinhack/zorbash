@@ -18,7 +18,6 @@ def key_init(name, text_name):
     mytp.set_is_item(False)
     mytp.set_is_key(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_treasure_class_a(False)
     mytp.set_light_color("yellow")
     mytp.set_light_strength(2)

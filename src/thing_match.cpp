@@ -243,8 +243,6 @@ bool Thing::matches (const std::string& what) const
     if (is_sewer_wall() &&                                    (what == "is_sewer_wall"))                                    { return true; }
     if (is_shallow_water() &&                                 (what == "is_shallow_water"))                                 { return true; }
     if (is_shovable() &&                                      (what == "is_shovable"))                                      { return true; }
-    if (is_shown_on_leftbar() &&                              (what == "is_shown_on_leftbar"))                              { return true; }
-    if (is_shown_uniquely_on_leftbar() &&                     (what == "is_shown_uniquely_on_leftbar"))                     { return true; }
     if (is_skillstone() &&                                    (what == "is_skillstone"))                                         { return true; }
     if (is_skill() &&                                         (what == "is_skill"))                                         { return true; }
     if (is_smoke() &&                                         (what == "is_smoke"))                                         { return true; }
@@ -508,8 +506,6 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_sewer_wall")                                    { return &Thing::is_sewer_wall; }
     if (what == "is_shallow_water")                                 { return &Thing::is_shallow_water; }
     if (what == "is_shovable")                                      { return &Thing::is_shovable; }
-    if (what == "is_shown_on_leftbar")                              { return &Thing::is_shown_on_leftbar; }
-    if (what == "is_shown_uniquely_on_leftbar")                     { return &Thing::is_shown_uniquely_on_leftbar; }
     if (what == "is_skill")                                         { return &Thing::is_skill; }
     if (what == "is_skillstone")                                    { return &Thing::is_skillstone; }
     if (what == "is_smoke")                                         { return &Thing::is_smoke; }

@@ -47,7 +47,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_item(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_spawner(True)
     mytp.set_is_target_select_automatically_when_chosen(True)
     mytp.set_is_treasure_class_c(True)

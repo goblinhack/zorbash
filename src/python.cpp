@@ -1556,8 +1556,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_sewer_wall)
     TP_SET_DECL(is_shallow_water)
     TP_SET_DECL(is_shovable)
-    TP_SET_DECL(is_shown_on_leftbar)
-    TP_SET_DECL(is_shown_uniquely_on_leftbar)
     TP_SET_DECL(is_skill)
     TP_SET_DECL(is_smoke)
     TP_SET_DECL(is_spawner)
@@ -1886,8 +1884,6 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_sewer_wall_at",                                 (PyCFunction)level_is_sewer_wall_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_shallow_water_at",                              (PyCFunction)level_is_shallow_water_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_shovable_at",                                   (PyCFunction)level_is_shovable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_shown_on_leftbar_at",                           (PyCFunction)level_is_shown_on_leftbar_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_shown_uniquely_on_leftbar_at",                  (PyCFunction)level_is_shown_uniquely_on_leftbar_at,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_skill_at",                                      (PyCFunction)level_is_skill_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_skillstone_at",                                 (PyCFunction)level_is_skillstone_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_smoke_at",                                      (PyCFunction)level_is_smoke_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2183,8 +2179,6 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_sewer_wall",                                    (PyCFunction)thing_is_sewer_wall,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_shallow_water",                                 (PyCFunction)thing_is_shallow_water,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_shovable",                                      (PyCFunction)thing_is_shovable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_shown_on_leftbar",                              (PyCFunction)thing_is_shown_on_leftbar,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_shown_uniquely_on_leftbar",                     (PyCFunction)thing_is_shown_uniquely_on_leftbar,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_skill",                                         (PyCFunction)thing_is_skill,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_skillstone",                                    (PyCFunction)thing_is_skillstone,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_smoke",                                         (PyCFunction)thing_is_smoke,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},

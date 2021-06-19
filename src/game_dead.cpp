@@ -9,9 +9,7 @@
 #include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
-#include "my_wid_leftbar.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_collect.h"
 #include "my_wid_rightbar.h"
 #include "my_random.h"
 #include "my_thing.h"
@@ -81,8 +79,6 @@ void Game::dead_select (const char *reason)
     LOG("Open dead select: %s", reason);
 
     wid_thing_info_fini();
-    wid_collect_fini();
-    wid_leftbar_fini();
 
     if (wid_dead_window) {
         wid_dead_destroy();
