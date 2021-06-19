@@ -30,7 +30,7 @@ void Level::describe (fpoint p)
     }
 
     dbg3("Describe %f,%f", p.x, p.y);
-
+_
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS) ||
@@ -45,7 +45,24 @@ void Level::describe (fpoint p)
     FOR_ALL_ACTIVE_THINGS(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
+        if (g_opt_debug3) {
+            t->log("Active thing cand for describe");
+        }
+_
         if (!is_lit(x, y) && !is_visited(x, y)) {_
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, not lit or visited");
+            }
+            continue;
+        }
+
+        if (t->is_cursor() ||
+            t->is_player() ||
+            t->is_cursor_path() ||
+            t->is_the_grid) {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, boring");
+            }
             continue;
         }
 
@@ -53,24 +70,36 @@ void Level::describe (fpoint p)
         // Dead monst clog up the screen
         //
         if (t->is_monst() && t->is_dead) {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, monst or dead");
+            }
             continue;
         }
 
-        if (t->get_immediate_owner() ||
-            t->is_cursor() ||
-            t->is_player() ||
-            t->is_cursor_path() ||
-            t->is_the_grid) {
+        if (t->get_immediate_owner()) {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, has owner");
+            }
             continue;
         }
 
         if (t->is_described_when_hovering_over()) {
-            t->describe_when_hovering_over();
-
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
-                got_one_with_long_text |= t->long_text_description().empty();
+
+                if (g_opt_debug3) {
+                    t->log("Add to describe");
+                }
+                got_one_with_long_text |= !t->long_text_description().empty();
                 push_back_if_unique(hover_over_things, t);
+            } else {
+                if (g_opt_debug3) {
+                    t->log("Ignore for describe, no text");
+                }
+            }
+        } else {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, not described");
             }
         }
 
@@ -82,7 +111,24 @@ void Level::describe (fpoint p)
     FOR_ALL_INTERESTING_THINGS(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
+        if (g_opt_debug3) {
+            t->log("Interesting thing cand for describe");
+        }
+_
         if (!is_lit(x, y) && !is_visited(x, y)) {_
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, not lit or visited");
+            }
+            continue;
+        }
+
+        if (t->is_cursor() ||
+            t->is_player() ||
+            t->is_cursor_path() ||
+            t->is_the_grid) {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, boring");
+            }
             continue;
         }
 
@@ -90,24 +136,35 @@ void Level::describe (fpoint p)
         // Dead monst clog up the screen
         //
         if (t->is_monst() && t->is_dead) {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, monst or dead");
+            }
             continue;
         }
 
-        if (t->get_immediate_owner() ||
-            t->is_cursor() ||
-            t->is_player() ||
-            t->is_cursor_path() ||
-            t->is_the_grid) {
+        if (t->get_immediate_owner()) {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, has owner");
+            }
             continue;
         }
 
         if (t->is_described_when_hovering_over()) {
-            t->describe_when_hovering_over();
-
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
-                got_one_with_long_text |= t->long_text_description().empty();
+                if (g_opt_debug3) {
+                    t->log("Add to describe");
+                }
+                got_one_with_long_text |= !t->long_text_description().empty();
                 push_back_if_unique(hover_over_things, t);
+            } else {
+                if (g_opt_debug3) {
+                    t->log("Ignore for describe, no text");
+                }
+            }
+        } else {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, not described");
             }
         }
 
@@ -119,7 +176,24 @@ void Level::describe (fpoint p)
     FOR_ALL_THINGS(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
+        if (g_opt_debug3) {
+            t->log("All thing cand for describe");
+        }
+_
         if (!is_lit(x, y) && !is_visited(x, y)) {_
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, not lit or visited");
+            }
+            continue;
+        }
+
+        if (t->get_immediate_owner() ||
+            t->is_cursor() ||
+            t->is_cursor_path() ||
+            t->is_the_grid) {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, boring");
+            }
             continue;
         }
 
@@ -128,6 +202,9 @@ void Level::describe (fpoint p)
         //
         if (hover_over_things.size()) {
             if(t->is_player()) {
+                if (g_opt_debug3) {
+                    t->log("Ignore for describe, showing something better");
+                }
                 continue;
             }
 
@@ -135,24 +212,29 @@ void Level::describe (fpoint p)
             // Dead monst clog up the screen. Unless we have nothing else.
             //
             if (t->is_monst() && t->is_dead) {
+                if (g_opt_debug3) {
+                    t->log("Ignore for describe, showing something better");
+                }
                 continue;
             }
         }
 
-        if (t->get_immediate_owner() ||
-            t->is_cursor() ||
-            t->is_cursor_path() ||
-            t->is_the_grid) {
-            continue;
-        }
-
         if (t->is_described_when_hovering_over()) {
-            t->describe_when_hovering_over();
-
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
-                got_one_with_long_text |= t->long_text_description().empty();
+                got_one_with_long_text |= !t->long_text_description().empty();
+                if (g_opt_debug3) {
+                    t->log("Add to describe");
+                }
                 push_back_if_unique(hover_over_things, t);
+            } else {
+                if (g_opt_debug3) {
+                    t->log("Ignore for describe, no text");
+                }
+            }
+        } else {
+            if (g_opt_debug3) {
+                t->log("Ignore for describe, not described");
             }
         }
 
@@ -161,18 +243,25 @@ void Level::describe (fpoint p)
         }
     } FOR_ALL_THINGS_END()
 
+    if (!got_one_with_long_text) {
+        dbg3("Describe %f,%f; found nothing with long text", p.x, p.y);
+    }
+
+    if (!got_one_with_long_text) {
+        dbg3("Describe %f,%f; found %d things", p.x, p.y, 
+                (int)hover_over_things.size());
+    }
+
     if (!got_one_with_long_text || !hover_over_things.size()) {
         //
         // If we found nothing, then check to see if we are already showing
         // something of interest and if so, keep it.
         //
-        dbg3("Describe %f,%f; nothing found", p.x, p.y);
-_
         auto o = game->current_wid_thing_info;
         if (o) {
             dbg3("Currently describing %s", o->to_string().c_str()); 
             if (o->is_hidden) {
-                dbg3("Currently describing %s; prefer me over current", 
+                dbg3("Currently describing %s; prefer me over current1", 
                     o->to_string().c_str());
             }
 
@@ -181,7 +270,7 @@ _
             // to keep showing that if nothing else.
             //
             if (o->mid_at == player->mid_at) {
-                dbg3("Describe %s; prefer me over current", o->to_string().c_str());
+                dbg3("Describe %s; prefer me over current2", o->to_string().c_str());
                 return;
             }
         }
@@ -189,14 +278,14 @@ _
         if (wid_thing_info_window.size()) {
             auto o = wid_thing_info_window.front()->t;
             if (o) {
-                dbg3("Describe %s", o->to_string().c_str());
+                dbg3("Currently describing %s", o->to_string().c_str());
                 if (o->is_hidden) {
-                    dbg3("Describe %s; prefer me over current", o->to_string().c_str());
+                    dbg3("Describe %s; prefer me over current3", o->to_string().c_str());
                     return;
                 }
 
                 if (o->mid_at == player->mid_at) {
-                    dbg3("Describe %s; prefer me over current", o->to_string().c_str());
+                    dbg3("Describe %s; prefer me over current4", o->to_string().c_str());
                     return;
                 }
             }
@@ -245,7 +334,7 @@ void Level::describe (Thingp t)
     if (o) {
         dbg3("Currently Describe %s", o->to_string().c_str()); 
         if (o->is_hidden) {
-            dbg3("Currently Describe %s; prefer me over current", 
+            dbg3("Currently Describe %s; prefer me over current5", 
                 o->to_string().c_str());
         }
 
@@ -254,7 +343,7 @@ void Level::describe (Thingp t)
         // to keep showing that if nothing else.
         //
         if (o->mid_at == player->mid_at) {
-            dbg3("Describe %s; prefer me over current", o->to_string().c_str());
+            dbg3("Describe %s; prefer me over current6", o->to_string().c_str());
             return;
         }
     }
@@ -264,12 +353,12 @@ void Level::describe (Thingp t)
         if (o) {
             dbg3("Describe %s", o->to_string().c_str());
             if (o->is_hidden) {
-                dbg3("Describe %s; prefer me over current", o->to_string().c_str());
+                dbg3("Describe %s; prefer me over current7", o->to_string().c_str());
                 return;
             }
 
             if (o->mid_at == player->mid_at) {
-                dbg3("Describe %s; prefer me over current", o->to_string().c_str());
+                dbg3("Describe %s; prefer me over current8", o->to_string().c_str());
                 return;
             }
         }

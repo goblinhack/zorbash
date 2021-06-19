@@ -93,6 +93,12 @@ void Level::cursor_move (void)
             cursor_at_old = cursor_at;
             cursor->move(cursor_at);
             cursor_recreate();
+
+            //
+            // If we've moved, likely we want to look at something else
+            //
+            wid_thing_info_fini();
+
             cursor_describe();
         }
     }
