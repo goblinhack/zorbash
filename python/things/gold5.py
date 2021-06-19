@@ -17,7 +17,6 @@ def gold_init(name, text_name):
     mytp.set_is_item_collected_as_gold(True)
     mytp.set_is_item(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_treasure_class_c(True)
     mytp.set_is_treasure(True)
     mytp.set_light_color("yellow")

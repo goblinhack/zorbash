@@ -50,7 +50,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_potion_eater(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_steal_item_chance_d1000(200)
     mytp.set_is_treasure_eater(True)
     mytp.set_light_color("green")

@@ -9,11 +9,9 @@
 #include "my_globals.h"
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
-#include "my_wid_leftbar.h"
 #include "my_wid_inventory.h"
 #include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_collect.h"
 #include "my_wid_keyboard.h"
 #include "my_string.h"
 #include "my_sdl.h"
@@ -41,11 +39,9 @@ void Game::choose_player_name_select (void)
     CON("Choose player name menu");
 
     wid_rightbar_fini();
-    wid_leftbar_fini();
     wid_inventory_fini();
     wid_skillbox_fini();
     wid_thing_info_fini();
-    wid_collect_fini();
 
     wid_keyboard_choose_player_name = 
         wid_keyboard(string_to_wstring(g_opt_player_name),

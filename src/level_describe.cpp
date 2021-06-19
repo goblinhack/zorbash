@@ -5,6 +5,7 @@
 
 #include "my_sys.h"
 #include "my_game.h"
+#include "my_main.h"
 #include "my_tile.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
@@ -247,10 +248,8 @@ _
         dbg3("Describe %f,%f; found nothing with long text", p.x, p.y);
     }
 
-    if (!got_one_with_long_text) {
-        dbg3("Describe %f,%f; found %d things", p.x, p.y, 
-                (int)hover_over_things.size());
-    }
+    dbg3("Describe %f,%f; found %d things", p.x, p.y, 
+         (int)hover_over_things.size());
 
     if (!got_one_with_long_text || !hover_over_things.size()) {
         //
@@ -297,6 +296,18 @@ _
     if (hover_over_things.size()) {
         dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
         game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
+        if (hover_over_things.size() > 1) {
+            auto k = std::string(
+                SDL_GetScancodeName(
+                    (SDL_Scancode)game->config.key_wait_or_collect));
+            std::string text;
+            if (k == ".") {
+                text = "Multiple things here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+            } else {
+                text = "Multiple things here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+            }
+            BOTCON("%s", text.c_str());
+        }
     }
 }
 

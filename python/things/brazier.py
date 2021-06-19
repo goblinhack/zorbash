@@ -26,8 +26,6 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)
     mytp.set_is_shovable(True)
-    mytp.set_is_shown_on_leftbar(True)
-    mytp.set_is_shown_uniquely_on_leftbar(True)
     mytp.set_light_color("orange")
     mytp.set_light_strength(2)
     mytp.set_normal_placement_rules(True)

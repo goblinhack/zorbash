@@ -12,7 +12,6 @@
 #include "my_wid_inventory.h"
 #include "my_wid_rightbar.h"
 #include "my_wid_thing_info.h"
-#include "my_wid_collect.h"
 #include "my_ttf.h"
 #include "my_string.h"
 #include "my_wid.h"

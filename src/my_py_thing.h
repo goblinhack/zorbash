@@ -280,8 +280,6 @@ PyObject *thing_is_sewer_wall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shallow_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shovable(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_shown_on_leftbar(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_shown_uniquely_on_leftbar(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_skill(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_smoke(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spawner(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -282,7 +282,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/wid_skills.o                  \
     $(OBJDIR)/wid_inventory.o               \
     $(OBJDIR)/wid_keyboard.o                \
-    $(OBJDIR)/wid_leftbar.o                 \
     $(OBJDIR)/wid_log.o                     \
     $(OBJDIR)/wid_popup.o                   \
     $(OBJDIR)/wid_rightbar.o                \

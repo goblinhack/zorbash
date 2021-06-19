@@ -571,6 +571,7 @@ extern Widp wid_mouse_template;
 extern Widp wid_over;
 extern Widp wid_focus;
 extern bool wid_mouse_double_click;
+extern timestamp_t wid_last_mouse_motion;
 extern const int32_t wid_destroy_delay_ms;
 extern std::array<
          std::array<Widp, TERM_HEIGHT_MAX>,

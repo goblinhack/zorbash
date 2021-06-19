@@ -34,7 +34,6 @@ def tp_init(name):
     mytp.set_is_door(True)
     mytp.set_is_light_blocker(True)
     mytp.set_is_movement_blocking_hard(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("door_metal.on_death()")
     mytp.set_on_death_is_open(True)

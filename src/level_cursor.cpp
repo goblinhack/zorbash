@@ -96,8 +96,12 @@ void Level::cursor_move (void)
 
             //
             // If we've moved, likely we want to look at something else
+            // But only do this if it is the result of a real mouse move
+            // and not just the level auto scrolling.:w
             //
-            wid_thing_info_fini();
+            if (!time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
+                wid_thing_info_fini();
+            }
 
             cursor_describe();
         }

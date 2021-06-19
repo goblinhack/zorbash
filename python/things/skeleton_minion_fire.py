@@ -68,7 +68,6 @@ def tp_init(name, text_name):
     mytp.set_is_moveable(True)
     mytp.set_is_resurrectable(True)
     mytp.set_is_shovable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_undead(True)
     mytp.set_is_weapon_wielder(True)
     mytp.set_light_color("yellow")

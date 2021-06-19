@@ -352,8 +352,6 @@ int Tp::is_secret_door(void) const                                   { return _i
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const                                 { return _is_shallow_water; }
 int Tp::is_shovable(void) const                                      { return _is_shovable; }
-int Tp::is_shown_on_leftbar(void) const                              { return _is_shown_on_leftbar; }
-int Tp::is_shown_uniquely_on_leftbar(void) const                     { return _is_shown_uniquely_on_leftbar; }
 int Tp::is_skillstone(void) const                                    { return _is_skillstone; }
 int Tp::is_skill(void) const                                         { return _is_skill; }
 int Tp::is_smoke(void) const                                         { return _is_smoke; }
@@ -677,8 +675,6 @@ void Tp::set_is_secret_door(int v)                                   { _is_secre
 void Tp::set_is_sewer_wall(int v)                                    { _is_sewer_wall = v; }
 void Tp::set_is_shallow_water(int v)                                 { _is_shallow_water = v; }
 void Tp::set_is_shovable(int v)                                      { _is_shovable = v; }
-void Tp::set_is_shown_on_leftbar(int v)                              { _is_shown_on_leftbar = v; }
-void Tp::set_is_shown_uniquely_on_leftbar(int v)                     { _is_shown_uniquely_on_leftbar = v; }
 void Tp::set_is_skill(int v)                                         { _is_skill = v; }
 void Tp::set_is_skillstone(int v)                                    { _is_skillstone = v; }
 void Tp::set_is_smoke(int v)                                         { _is_smoke = v; }

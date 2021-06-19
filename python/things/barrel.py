@@ -49,7 +49,6 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_floor_deco(False) # Else it can be placed next to lava and starts a firestorm
     mytp.set_is_shovable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_is_very_combustible(True)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("barrel.on_death()")

@@ -49,7 +49,6 @@ def tp_init(name, text_name):
     mytp.set_is_movement_blocking_soft(True)
     mytp.set_is_resurrectable(True)
     mytp.set_is_shovable(True)
-    mytp.set_is_shown_on_leftbar(True)
     mytp.set_light_color("cyan")
     mytp.set_light_strength(1)
     mytp.set_long_text_description("A grave portal from which the dead crawl out.")

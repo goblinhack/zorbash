@@ -156,6 +156,7 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     wid_thing_info_add_constitution(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
+    wid_thing_info_add_carry_info(wid_popup_window, t);
     t->show_botcon_description();
 
     return wid_popup_window;
@@ -876,6 +877,36 @@ void Game::wid_thing_info_add_danger_level (WidPopup *w, Thingp t)
         } else {
             w->log(" ");
             w->log("%%fg=red$It will take many hits to kill...");
+        }
+    }
+}
+
+void Game::wid_thing_info_add_carry_info (WidPopup *w, Thingp t) 
+{_
+    auto player = game->level->player;
+    if (!player) {
+        return;
+    }
+
+    if (!t->monstp) {
+        return;
+    }
+
+    auto items = t->monstp->carrying.size();
+
+    if (t->is_bag()) {
+        if (items > 3) {
+            w->log(" ");
+            w->log("Looks to be bulging with presents.", true);
+        } else if (items > 1) {
+            w->log(" ");
+            w->log("Looks like it contains a few things.", true);
+        } else if (items > 0) {
+            w->log(" ");
+            w->log("Looks like it contains something.", true);
+        } else {
+            w->log(" ");
+            w->log("Looks like is is empty.", true);
         }
     }
 }

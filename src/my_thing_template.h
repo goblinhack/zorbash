@@ -326,8 +326,6 @@ private:
     int _is_sewer_wall {};
     int _is_shallow_water {};
     int _is_shovable {};
-    int _is_shown_on_leftbar {};
-    int _is_shown_uniquely_on_leftbar {};
     int _is_skill {};
     int _is_smoke {};
     int _is_spawner {};
@@ -791,8 +789,6 @@ public:
     int is_sewer_wall(void) const;
     int is_shallow_water(void) const;
     int is_shovable(void) const;
-    int is_shown_on_leftbar(void) const;
-    int is_shown_uniquely_on_leftbar(void) const;
     int is_skill(void) const;
     int is_smoke(void) const;
     int is_spawner(void) const;
@@ -1125,8 +1121,6 @@ public:
     void set_is_sewer_wall(int);
     void set_is_shallow_water(int);
     void set_is_shovable(int);
-    void set_is_shown_on_leftbar(int);
-    void set_is_shown_uniquely_on_leftbar(int);
     void set_is_skill(int);
     void set_is_smoke(int);
     void set_is_spawner(int);
