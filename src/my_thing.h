@@ -275,6 +275,7 @@ public:
     bool on_firing_at_something(Thingp hitter);
     bool on_tick(void);
     bool open_door(Thingp door);
+    bool open(Thingp it);
     bool particle_anim_exists(void);
     bool place(const std::string& what, const point &p);
     bool possible_to_attack(const Thingp it);
