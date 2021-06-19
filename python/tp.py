@@ -445,14 +445,14 @@ class Tp:
     def set_is_rrr71(self, value):
         zx.tp_set_is_rrr71(self, value)
 
-    def set_is_rrr72(self, value):
-        zx.tp_set_is_rrr72(self, value)
+    def set_is_item_container(self, value):
+        zx.tp_set_is_item_container(self, value)
 
-    def set_is_rrr73(self, value):
-        zx.tp_set_is_rrr73(self, value)
+    def set_is_treasure_chest(self, value):
+        zx.tp_set_is_treasure_chest(self, value)
 
-    def set_is_rrr74(self, value):
-        zx.tp_set_is_rrr74(self, value)
+    def set_is_openable(self, value):
+        zx.tp_set_is_openable(self, value)
 
     def set_gfx_long_shadow_caster(self, value):
         zx.tp_set_gfx_long_shadow_caster(self, value)
@@ -670,17 +670,17 @@ class Tp:
     def set_is_treasure_class_c(self, value):
         zx.tp_set_is_treasure_class_c(self, value)
 
-    def set_bag_item_height(self, value):
-        zx.tp_set_bag_item_height(self, value)
+    def set_item_height(self, value):
+        zx.tp_set_item_height(self, value)
 
-    def set_bag_item_width(self, value):
-        zx.tp_set_bag_item_width(self, value)
+    def set_item_width(self, value):
+        zx.tp_set_item_width(self, value)
 
-    def set_bag_height(self, value):
-        zx.tp_set_bag_height(self, value)
+    def set_capacity_height(self, value):
+        zx.tp_set_capacity_height(self, value)
 
-    def set_bag_width(self, value):
-        zx.tp_set_bag_width(self, value)
+    def set_capacity_width(self, value):
+        zx.tp_set_capacity_width(self, value)
 
     def set_monst_size(self, value):
         zx.tp_set_monst_size(self, value)

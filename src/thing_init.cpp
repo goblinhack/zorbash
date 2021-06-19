@@ -479,7 +479,26 @@ void Thing::init (Levelp level,
         }
     }
 
-    if (is_item_carrier()) {
+    if (is_item_container()) {
+        if (is_carrier_of_treasure_class_a()) {
+            auto W = level->thing_new(tp_random_item_not_a_container_class_a(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
+        if (is_carrier_of_treasure_class_b()) {
+            auto W = level->thing_new(tp_random_item_not_a_container_class_b(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
+        if (is_carrier_of_treasure_class_c()) {
+            auto W = level->thing_new(tp_random_item_not_a_container_class_c(), mid_at);
+            if (W) {
+                carry(W);
+            }
+        }
+    } else if (is_item_carrier()) {
         if (is_carrier_of_treasure_class_a()) {
             auto W = level->thing_new(tp_random_item_class_a(), mid_at);
             if (W) {

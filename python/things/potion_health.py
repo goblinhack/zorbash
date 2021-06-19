@@ -58,8 +58,8 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     global mytp
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_bag_item_height(2)
-    mytp.set_bag_item_width(2)
+    mytp.set_item_height(2)
+    mytp.set_item_width(2)
     mytp.set_blast_max_radius(0)
     mytp.set_blast_min_radius(0)
     mytp.set_collision_circle(True)

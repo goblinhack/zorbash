@@ -80,7 +80,7 @@ _
         set_where_i_dropped_an_item_last(make_point(mid_at));
     }
 
-    if (is_bag() || is_player()) {
+    if (is_item_container() || is_player()) {
         dbg("Update bag with drop of: %s", what->to_string().c_str());
         bag_remove(what);
         while (bag_compress()) { }

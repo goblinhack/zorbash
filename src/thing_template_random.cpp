@@ -47,6 +47,9 @@ static Tpidmap tp_skills;
 static Tpidmap tp_item_class_a;
 static Tpidmap tp_item_class_b;
 static Tpidmap tp_item_class_c;
+static Tpidmap tp_item_not_a_container_class_a;
+static Tpidmap tp_item_not_a_container_class_b;
+static Tpidmap tp_item_not_a_container_class_c;
 static Tpidmap tp_weapon_class_a;
 static Tpidmap tp_weapon_class_b;
 static Tpidmap tp_weapon_class_c;
@@ -69,7 +72,7 @@ void tp_random_init (void)
         if (tp->is_descend_sewer())             { tp_descend_sewer.push_back(tp); }
         if (tp->is_dirt())                      { tp_dirt.push_back(tp); }
         if (tp->is_door())                      { tp_door.push_back(tp); }
-        if (tp->is_dry_grass())                { tp_dry_grass.push_back(tp); }
+        if (tp->is_dry_grass())                 { tp_dry_grass.push_back(tp); }
         if (tp->is_enchantstone())              { tp_enchantstone.push_back(tp); }
         if (tp->is_skillstone())                { tp_skillstone.push_back(tp); }
         if (tp->is_ethereal_minion_generator()) { tp_ethereal_generator.push_back(tp); }
@@ -88,9 +91,21 @@ void tp_random_init (void)
         if (tp->is_sewer_wall())                { tp_sewer_wall.push_back(tp); }
         if (tp->is_skill())                     { tp_skills.push_back(tp); }
         if (tp->is_treasure())                  { tp_treasure.push_back(tp); }
-        if (tp->is_treasure_class_a())          { tp_item_class_a.push_back(tp); }
-        if (tp->is_treasure_class_b())          { tp_item_class_b.push_back(tp); }
-        if (tp->is_treasure_class_c())          { tp_item_class_c.push_back(tp); }
+
+        //
+        // Keep bags and treasure chests seperate so we don't end up with
+        // chests containing chests forever
+        //
+        if (tp->is_item_container()) {
+            if (tp->is_treasure_class_a())      { tp_item_class_a.push_back(tp); }
+            if (tp->is_treasure_class_b())      { tp_item_class_b.push_back(tp); }
+            if (tp->is_treasure_class_c())      { tp_item_class_c.push_back(tp); }
+        } else {
+            if (tp->is_treasure_class_a())      { tp_item_not_a_container_class_a.push_back(tp); }
+            if (tp->is_treasure_class_b())      { tp_item_not_a_container_class_b.push_back(tp); }
+            if (tp->is_treasure_class_c())      { tp_item_not_a_container_class_c.push_back(tp); }
+        }
+
         if (tp->is_wall_dungeon())              { tp_wall_dungeon.push_back(tp); }
         if (tp->is_wand())                      { tp_wand.push_back(tp); }
 
@@ -321,6 +336,33 @@ Tpp tp_random_item_class_c (void)
         return (nullptr);
     }
     return tp_get_with_rarity_filter(tp_item_class_c);
+}
+
+Tpp tp_random_item_not_a_container_class_a (void)
+{_
+    if (unlikely(!tp_item_not_a_container_class_a.size())) {
+        ERR("No item_not_a_container_class_a found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_item_not_a_container_class_a);
+}
+
+Tpp tp_random_item_not_a_container_class_b (void)
+{_
+    if (unlikely(!tp_item_not_a_container_class_b.size())) {
+        ERR("No item_not_a_container_class_b found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_item_not_a_container_class_b);
+}
+
+Tpp tp_random_item_not_a_container_class_c (void)
+{_
+    if (unlikely(!tp_item_not_a_container_class_c.size())) {
+        ERR("No item_not_a_container_class_c found");
+        return (nullptr);
+    }
+    return tp_get_with_rarity_filter(tp_item_not_a_container_class_c);
 }
 
 Tpp tp_random_weapon_class_a (void)

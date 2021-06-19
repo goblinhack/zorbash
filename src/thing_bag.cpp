@@ -25,10 +25,10 @@ static std::list<WidBag *> bags;
 bool Thing::bag_contains (Thingp item)
 {
     auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
+    auto bw = capacity_width();
+    auto bh = capacity_height();
+    auto w = item->item_width();
+    auto h = item->item_height();
 
     for (auto x = 0; x < bw - w; x++) {
         for (auto y = 0; y < bh - h; y++) {
@@ -66,10 +66,10 @@ bool Thing::bag_add (Thingp item)
 	}
     }
 
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
+    auto bw = capacity_width();
+    auto bh = capacity_height();
+    auto w = item->item_width();
+    auto h = item->item_height();
     int tries = 0;
 
     while (tries < bw * bh) {
@@ -104,8 +104,8 @@ bool Thing::bag_add (Thingp item)
 bool Thing::bag_compress (void)
 {_
     auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
+    auto bw = capacity_width();
+    auto bh = capacity_height();
     auto did_something = false;
 
     dbg("Bag: try to compress");
@@ -124,8 +124,8 @@ bool Thing::bag_compress (void)
 
 #if 0
             bool bottom = 
-                    (t->monstp->bag_position.y + t->bag_item_height() < 
-                     bh - t->bag_item_height());
+                    (t->monstp->bag_position.y + t->item_height() < 
+                     bh - t->item_height());
 #endif
 
 	    if (bag_remove_at(t, t->monstp->bag_position)) {
@@ -178,8 +178,8 @@ bool Thing::bag_remove_at (Thingp item, point pos)
     dbg("Bag: remove %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
 
     auto bag = get_bag();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
+    auto w = item->item_width();
+    auto h = item->item_height();
 
     for (auto x = pos.x; x < pos.x + w; x++) {
 	for (auto y = pos.y; y < pos.y + h; y++) {
@@ -197,10 +197,10 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
     }
 
     auto bag = get_const_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
+    auto bw = capacity_width();
+    auto bh = capacity_height();
+    auto w = item->item_width();
+    auto h = item->item_height();
 
 #if 0
     {
@@ -282,10 +282,10 @@ _
 bool Thing::bag_place_at (Thingp item, point pos)
 {
     auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
-    auto w = item->bag_item_width();
-    auto h = item->bag_item_height();
+    auto bw = capacity_width();
+    auto bh = capacity_height();
+    auto w = item->item_width();
+    auto h = item->item_height();
 
     if (pos.x < 0) {
         return false;
@@ -315,8 +315,8 @@ bool Thing::bag_remove (Thingp item)
 
     bool found = false;
     auto bag = get_bag();
-    auto bw = bag_width();
-    auto bh = bag_height();
+    auto bw = capacity_width();
+    auto bh = capacity_height();
 
     for (auto x = 0; x < bw; x++) {
         for (auto y = 0; y < bh; y++) {
@@ -351,7 +351,7 @@ int bag_estimate_volume (const std::list<Thingp> &items)
 {_
     int volume = 0;
     for (auto t : items) {
-        volume += t->bag_item_width() * t->bag_item_height();
+        volume += t->item_width() * t->item_height();
     }
 
     return volume + volume / 2;
