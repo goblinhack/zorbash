@@ -188,6 +188,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_display.o               \
     $(OBJDIR)/thing_distance.o              \
     $(OBJDIR)/thing_door.o                  \
+    $(OBJDIR)/thing_open.o                  \
     $(OBJDIR)/thing_drop.o                  \
     $(OBJDIR)/thing_eat.o                   \
     $(OBJDIR)/thing_enchant.o               \
