@@ -110,10 +110,10 @@ int Tp::hates_acid(void) const                                       { return _h
 int Tp::hates_fire(void) const                                       { return _hates_fire; }
 int Tp::hates_poison(void) const                                     { return _hates_poison; }
 int Tp::hates_water(void) const                                      { return _hates_water; }
-int Tp::bag_height(void) const                                       { return _bag_height; }
-int Tp::bag_item_height(void) const                                  { return _bag_item_height; }
-int Tp::bag_item_width(void) const                                   { return _bag_item_width; }
-int Tp::bag_width(void) const                                        { return _bag_width; }
+int Tp::capacity_height(void) const                                       { return _capacity_height; }
+int Tp::item_height(void) const                                  { return _item_height; }
+int Tp::item_width(void) const                                   { return _item_width; }
+int Tp::capacity_width(void) const                                        { return _capacity_width; }
 int Tp::blast_max_radius(void) const                                 { return _blast_max_radius; }
 int Tp::blast_min_radius(void) const                                 { return _blast_min_radius; }
 int Tp::blit_bot_off(void) const                                     { return _blit_bot_off; }
@@ -171,7 +171,7 @@ int Tp::is_bleeder(void) const                                       { return _i
 int Tp::is_blood(void) const                                         { return _is_blood; }
 int Tp::is_blood_splatter(void) const                                { return _is_blood_splatter; }
 int Tp::is_brazier(void) const                                       { return _is_brazier; }
-int Tp::loves_spiderwebs(void) const                                         { return _loves_spiderwebs; }
+int Tp::loves_spiderwebs(void) const                                 { return _loves_spiderwebs; }
 int Tp::is_carrier_of_treasure_class_a(void) const                   { return _is_carrier_of_treasure_class_a; }
 int Tp::is_carrier_of_treasure_class_b(void) const                   { return _is_carrier_of_treasure_class_b; }
 int Tp::is_carrier_of_treasure_class_c(void) const                   { return _is_carrier_of_treasure_class_c; }
@@ -345,9 +345,9 @@ int Tp::is_rrr68(void) const                                         { return _i
 int Tp::is_rrr69(void) const                                         { return _is_rrr69; }
 int Tp::is_rrr70(void) const                                         { return _is_rrr70; }
 int Tp::is_rrr71(void) const                                         { return _is_rrr71; }
-int Tp::is_rrr72(void) const                                         { return _is_rrr72; }
-int Tp::is_rrr73(void) const                                         { return _is_rrr73; }
-int Tp::is_rrr74(void) const                                         { return _is_rrr74; }
+int Tp::is_item_container(void) const                                         { return _is_item_container; }
+int Tp::is_treasure_chest(void) const                                         { return _is_treasure_chest; }
+int Tp::is_openable(void) const                                         { return _is_openable; }
 int Tp::is_secret_door(void) const                                   { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const                                 { return _is_shallow_water; }
@@ -431,10 +431,10 @@ void Tp::set_attack_lunge(int v)                                     { _attack_l
 void Tp::set_attack_meat(int v)                                      { _attack_meat = v; }
 void Tp::set_attack_shove(int v)                                     { _attack_shove = v; }
 void Tp::set_attack_shove_chance_d1000(int v)                        { _attack_shove_chance_d1000 = v; }
-void Tp::set_bag_height(int v)                                       { _bag_height = v; }
-void Tp::set_bag_item_height(int v)                                  { _bag_item_height = v; }
-void Tp::set_bag_item_width(int v)                                   { _bag_item_width = v; }
-void Tp::set_bag_width(int v)                                        { _bag_width = v; }
+void Tp::set_capacity_height(int v)                                       { _capacity_height = v; }
+void Tp::set_item_height(int v)                                  { _item_height = v; }
+void Tp::set_item_width(int v)                                   { _item_width = v; }
+void Tp::set_capacity_width(int v)                                        { _capacity_width = v; }
 void Tp::set_blast_max_radius(int v)                                 { _blast_max_radius = v; }
 void Tp::set_blast_min_radius(int v)                                 { _blast_min_radius = v; }
 void Tp::set_blit_bot_off(int v)                                     { _blit_bot_off = v; }
@@ -663,9 +663,9 @@ void Tp::set_is_rrr69(int v)                                         { _is_rrr69
 void Tp::set_is_rrr7(int v)                                          { _is_rrr7 = v; }
 void Tp::set_is_rrr70(int v)                                         { _is_rrr70 = v; }
 void Tp::set_is_rrr71(int v)                                         { _is_rrr71 = v; }
-void Tp::set_is_rrr72(int v)                                         { _is_rrr72 = v; }
-void Tp::set_is_rrr73(int v)                                         { _is_rrr73 = v; }
-void Tp::set_is_rrr74(int v)                                         { _is_rrr74 = v; }
+void Tp::set_is_item_container(int v)                                         { _is_item_container = v; }
+void Tp::set_is_treasure_chest(int v)                                         { _is_treasure_chest = v; }
+void Tp::set_is_openable(int v)                                         { _is_openable = v; }
 void Tp::set_gfx_long_shadow_caster(int v)                                         { _gfx_long_shadow_caster = v; }
 void Tp::set_gfx_solid_shadow(int v)                                         { _gfx_solid_shadow = v; }
 void Tp::set_is_rrr8(int v)                                          { _is_rrr8 = v; }

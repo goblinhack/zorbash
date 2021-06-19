@@ -657,7 +657,7 @@ _
     } else if (item->is_skillstone()) {
         game->wid_skill_choose();
         describe(item);
-    } else if (item->is_bag()) {
+    } else if (item->is_item_container()) {
         game->wid_thing_info_create(item);
         if (unlikely(g_opt_debug2)) {
             item->log("Moving items flag set");

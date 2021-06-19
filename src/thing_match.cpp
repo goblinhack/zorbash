@@ -233,9 +233,9 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
     if (is_rrr70() &&                                         (what == "is_rrr70"))                                         { return true; }
     if (is_rrr71() &&                                         (what == "is_rrr71"))                                         { return true; }
-    if (is_rrr72() &&                                         (what == "is_rrr72"))                                         { return true; }
-    if (is_rrr73() &&                                         (what == "is_rrr73"))                                         { return true; }
-    if (is_rrr74() &&                                         (what == "is_rrr74"))                                         { return true; }
+    if (is_item_container() &&                                         (what == "is_item_container"))                                         { return true; }
+    if (is_treasure_chest() &&                                         (what == "is_treasure_chest"))                                         { return true; }
+    if (is_openable() &&                                         (what == "is_openable"))                                         { return true; }
     if (is_rrr7() &&                                          (what == "is_rrr7"))                                          { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
     if (is_rrr9() &&                                          (what == "is_rrr9"))                                          { return true; }
@@ -496,9 +496,9 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
     if (what == "is_rrr70")                                         { return &Thing::is_rrr70; }
     if (what == "is_rrr71")                                         { return &Thing::is_rrr71; }
-    if (what == "is_rrr72")                                         { return &Thing::is_rrr72; }
-    if (what == "is_rrr73")                                         { return &Thing::is_rrr73; }
-    if (what == "is_rrr74")                                         { return &Thing::is_rrr74; }
+    if (what == "is_item_container")                                         { return &Thing::is_item_container; }
+    if (what == "is_treasure_chest")                                         { return &Thing::is_treasure_chest; }
+    if (what == "is_openable")                                         { return &Thing::is_openable; }
     if (what == "is_rrr7")                                          { return &Thing::is_rrr7; }
     if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
     if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }

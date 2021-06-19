@@ -14,7 +14,7 @@
 
 float Thing::how_far_i_can_jump (void)
 {_
-    auto d = (float) is_jumper_distance() + 0.5 + (random_range(0, 100) / 100.0);
+    auto d = (float) is_jumper_distance() + ceil(0.5 + (random_range(0, 100) / 100.0));
 
     if (get_stamina() < get_stamina_max() / 2) {
         d /= 2;

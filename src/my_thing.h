@@ -407,10 +407,10 @@ public:
     int attack_shove_chance_d1000(void) const;
     int attack_shove(void) const;
     int attack(void) const;
-    int bag_height(void);
-    int bag_item_height(void) const;
-    int bag_item_width(void) const;
-    int bag_width(void);
+    int capacity_height(void);
+    int item_height(void) const;
+    int item_width(void) const;
+    int capacity_width(void);
     int blast_max_radius(void) const;
     int blast_min_radius(void) const;
     int collision_attack(void) const;
@@ -841,9 +841,9 @@ public:
     int is_rrr6(void) const;
     int is_rrr70(void) const;
     int is_rrr71(void) const;
-    int is_rrr72(void) const;
-    int is_rrr73(void) const;
-    int is_rrr74(void) const;
+    int is_item_container(void) const;
+    int is_treasure_chest(void) const;
+    int is_openable(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
     int is_rrr9(void) const;

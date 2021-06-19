@@ -372,15 +372,15 @@ _
         }
 
         {
-            point tl = mid - point(player->bag_width() + 5, player->bag_height() + 1);
-            point br = tl +  point(player->bag_width(), player->bag_height());
+            point tl = mid - point(player->capacity_width() + 5, player->capacity_height() + 1);
+            point br = tl +  point(player->capacity_width(), player->capacity_height());
             bag_primary = new WidBag(player, tl, br, "Inventory");
         }
 
-        if (t->is_bag()) {
-            point tl = mid + point(0, - (t->bag_height() + 1));
-            point br = tl +  point(t->bag_width(), t->bag_height());
-            if (tp->bag_width() * tp->bag_height() < 100) {
+        if (t->is_item_container()) {
+            point tl = mid + point(0, - (t->capacity_height() + 1));
+            point br = tl +  point(t->capacity_width(), t->capacity_height());
+            if (tp->capacity_width() * tp->capacity_height() < 100) {
                 bag_secondary = new WidBag(t, tl, br, "Small bag");
             } else {
                 bag_secondary = new WidBag(t, tl, br, "Big bag");

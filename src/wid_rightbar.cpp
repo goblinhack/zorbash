@@ -431,7 +431,7 @@ static void wid_rightbar_create (void)
                 wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
                 wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
 
-                if (tpp->is_bag()) {
+                if (tpp->is_item_container()) {
                     wid_set_on_mouse_up(w, wid_inventory_item_mouse_up_on_bag);
                 } else {
                     wid_set_on_mouse_up(w, wid_inventory_item_mouse_up);

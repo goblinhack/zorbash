@@ -57,7 +57,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
             continue;
         }
 
-        auto br = tl + point(t->bag_item_width() - 1, t->bag_item_height() - 1);
+        auto br = tl + point(t->item_width() - 1, t->item_height() - 1);
 
         auto w = wid_new_square_button(wid_bag_container, "wid_bag item");
         wid_set_pos(w, tl, br);
@@ -158,7 +158,7 @@ _
         bag->carry(t);
         t->monstp->preferred_bag_position = point(-1, -1);
 
-        if (t->is_bag()) {
+        if (t->is_item_container()) {
             game->inventory_highlight_slot = game->previous_slot;
         }
 
@@ -263,7 +263,7 @@ _
     }
 
     auto tl = point(ascii_mouse_x, ascii_mouse_y);
-    auto br = tl + point(t->bag_item_width() - 1, t->bag_item_height() - 1);
+    auto br = tl + point(t->item_width() - 1, t->item_height() - 1);
 
     game->in_transit_item = wid_new_square_window("wid_bag in transit item");
     wid_set_ignore_scroll_events(game->in_transit_item, true);

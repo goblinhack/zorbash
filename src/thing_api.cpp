@@ -278,9 +278,9 @@ int Thing::is_rrr69(void) const                                         {_ retur
 int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
 int Thing::is_rrr70(void) const                                         {_ return (tp()->is_rrr70()); }
 int Thing::is_rrr71(void) const                                         {_ return (tp()->is_rrr71()); }
-int Thing::is_rrr72(void) const                                         {_ return (tp()->is_rrr72()); }
-int Thing::is_rrr73(void) const                                         {_ return (tp()->is_rrr73()); }
-int Thing::is_rrr74(void) const                                         {_ return (tp()->is_rrr74()); }
+int Thing::is_item_container(void) const                                         {_ return (tp()->is_item_container()); }
+int Thing::is_treasure_chest(void) const                                         {_ return (tp()->is_treasure_chest()); }
+int Thing::is_openable(void) const                                         {_ return (tp()->is_openable()); }
 int Thing::gfx_long_shadow_caster(void) const                                         {_ return (tp()->gfx_long_shadow_caster()); }
 int Thing::gfx_solid_shadow(void) const                                         {_ return (tp()->gfx_solid_shadow()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
@@ -461,32 +461,32 @@ void Thing::clear_dmap_scent (void)
     }
 }
 
-int Thing::bag_item_height(void) const
+int Thing::item_height(void) const
 {_
-    return (tp()->bag_item_height());
+    return (tp()->item_height());
 }
 
-int Thing::bag_item_width(void) const
+int Thing::item_width(void) const
 {_
-    return (tp()->bag_item_width());
+    return (tp()->item_width());
 }
 
-int Thing::bag_height(void)
+int Thing::capacity_height(void)
 {_
     new_monst();
-    if (monstp->bag_height) {
-        return monstp->bag_height;
+    if (monstp->capacity_height) {
+        return monstp->capacity_height;
     }
-    return (tp()->bag_height());
+    return (tp()->capacity_height());
 }
 
-int Thing::bag_width(void)
+int Thing::capacity_width(void)
 {_
     new_monst();
-    if (monstp->bag_width) {
-        return monstp->bag_width;
+    if (monstp->capacity_width) {
+        return monstp->capacity_width;
     }
-    return (tp()->bag_width());
+    return (tp()->capacity_width());
 }
 
 int Thing::monst_size(void) const

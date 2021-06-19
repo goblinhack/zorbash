@@ -54,8 +54,8 @@ public:
     float        fall_height = {};           // y offset for falling
     float        wobble = {};                // Fades when set
     fpoint       lunge_to;                   // When a monst attacks something
-    int          bag_height {};
-    int          bag_width {};
+    int          capacity_height {};
+    int          capacity_width {};
     int          bounce_count = {};
     int          gold = {};
     int          score = {};
