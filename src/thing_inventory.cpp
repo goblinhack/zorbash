@@ -217,7 +217,7 @@ _
             }
         }
 
-        return false;
+        return true;
     }
 
     if (item->is_collect_as_keys()) {
@@ -237,7 +237,7 @@ _
             }
         }
 
-        return false;
+        return true;
     }
 
     int free_slot = -1;

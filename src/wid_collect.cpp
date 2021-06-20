@@ -32,6 +32,8 @@ static void wid_collect_destroy (void)
 
 static void wid_collect_slot (int slot)
 {_
+    LOG("Collect slot %d", slot);
+_
     if (slot >= (int)collect_items.size()) {
         wid_collect_destroy();
         return;
@@ -42,6 +44,7 @@ static void wid_collect_slot (int slot)
         auto t = collect_items[slot];
         if (t) {
             if (!player->try_to_carry(t)) {
+                LOG("Failed to collect slot %d", slot);
                 return;
             }
 
@@ -59,6 +62,10 @@ static void wid_collect_slot (int slot)
                                 collect_items[slot] = nullptr;
                             }
                         }
+                    }
+
+                    if (!o->is_item()) {
+                        player->try_to_carry(o);
                     }
                 }
             }

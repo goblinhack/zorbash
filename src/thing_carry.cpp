@@ -14,8 +14,13 @@
 
 bool Thing::carry (Thingp it)
 {_
+    if (!it) {
+        err("No thing to carry");
+        return false;
+    }
+
     dbg("Try to carry %s", it->to_string().c_str());
-_
+
     if (!monstp) {
         dbg("No; not a monst");
         return false;
@@ -48,6 +53,12 @@ _
         //
         // Always carry
         //
+        dbg("Monsts always carry items");
+    } else if (!it->is_item()) {
+        //
+        // A key for example, does not go in a bad
+        //
+        dbg("Non item not added to bag");
     } else if (bag_add(it)) {
         dbg("Added to bag at %d,%d", 
             it->monstp->bag_position.x, it->monstp->bag_position.y);
@@ -103,6 +114,19 @@ _
 
     if (is_player()) {
         wid_inventory_init();
+    }
+
+    if (it->is_item_container()) {
+        for (const auto& item : it->monstp->carrying) {
+            auto t = level->thing_find(item.id);
+            if (t) {
+                if (!t->is_item()) {
+                    if (!carry(t)) {
+                        err("Could not auto carry non item");
+                    }
+                }
+            }
+        }
     }
 
     return true;

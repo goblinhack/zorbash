@@ -110,10 +110,10 @@ int Tp::hates_acid(void) const                                       { return _h
 int Tp::hates_fire(void) const                                       { return _hates_fire; }
 int Tp::hates_poison(void) const                                     { return _hates_poison; }
 int Tp::hates_water(void) const                                      { return _hates_water; }
-int Tp::capacity_height(void) const                                       { return _capacity_height; }
-int Tp::item_height(void) const                                  { return _item_height; }
-int Tp::item_width(void) const                                   { return _item_width; }
-int Tp::capacity_width(void) const                                        { return _capacity_width; }
+int Tp::capacity_height(void) const                                  { return _capacity_height; }
+int Tp::item_height(void) const                                      { return _item_height ? _item_height : 1; }
+int Tp::item_width(void) const                                       { return _item_width ? _item_width : 1; }
+int Tp::capacity_width(void) const                                   { return _capacity_width; }
 int Tp::blast_max_radius(void) const                                 { return _blast_max_radius; }
 int Tp::blast_min_radius(void) const                                 { return _blast_min_radius; }
 int Tp::blit_bot_off(void) const                                     { return _blit_bot_off; }
@@ -431,10 +431,10 @@ void Tp::set_attack_lunge(int v)                                     { _attack_l
 void Tp::set_attack_meat(int v)                                      { _attack_meat = v; }
 void Tp::set_attack_shove(int v)                                     { _attack_shove = v; }
 void Tp::set_attack_shove_chance_d1000(int v)                        { _attack_shove_chance_d1000 = v; }
-void Tp::set_capacity_height(int v)                                       { _capacity_height = v; }
-void Tp::set_item_height(int v)                                  { _item_height = v; }
-void Tp::set_item_width(int v)                                   { _item_width = v; }
-void Tp::set_capacity_width(int v)                                        { _capacity_width = v; }
+void Tp::set_capacity_height(int v)                                  { _capacity_height = v; }
+void Tp::set_item_height(int v)                                      { _item_height = v; }
+void Tp::set_item_width(int v)                                       { _item_width = v; }
+void Tp::set_capacity_width(int v)                                   { _capacity_width = v; }
 void Tp::set_blast_max_radius(int v)                                 { _blast_max_radius = v; }
 void Tp::set_blast_min_radius(int v)                                 { _blast_min_radius = v; }
 void Tp::set_blit_bot_off(int v)                                     { _blit_bot_off = v; }

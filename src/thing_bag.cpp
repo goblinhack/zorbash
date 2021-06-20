@@ -30,10 +30,10 @@ bool Thing::bag_contains (Thingp item)
     auto w = item->item_width();
     auto h = item->item_height();
 
-    for (auto x = 0; x < bw - w; x++) {
-        for (auto y = 0; y < bh - h; y++) {
-            for (auto i = 0; i < w; i++) {
-                for (auto j = 0; j < h; j++) {
+    for (auto x = 0; x < bw - w - 1; x++) {
+        for (auto y = 0; y < bh - h - 1; y++) {
+            for (auto i = 0; i <= w; i++) {
+                for (auto j = 0; j <= h; j++) {
                     if (get(bag, x + i, y + j) == item->id) {
 			return true;
                     }
@@ -50,6 +50,11 @@ bool Thing::bag_contains (Thingp item)
 bool Thing::bag_add (Thingp item)
 {_
     dbg("Bag: add %s", item->to_string().c_str());
+
+    if (!item->is_item()) {
+        dbg("Bag: add %s; no, is not an item", item->to_string().c_str());
+        return false;
+    }
 
     //
     // Food might not have a monst pointer
@@ -74,8 +79,8 @@ bool Thing::bag_add (Thingp item)
 
     while (tries < bw * bh) {
 	tries++;
-	auto x = random_range(0, bw - w);
-	auto y = random_range(0, bh - h);
+	auto x = random_range(0, bw - w - 1);
+	auto y = random_range(0, bh - h - 1);
 	point at(x, y);
 
 	if (bag_can_place_at(item, at)) {
@@ -111,7 +116,7 @@ bool Thing::bag_compress (void)
     dbg("Bag: try to compress");
 
     for (auto x = 0; x < bw; x++) {
-        for (auto y = 0; y < bh - 1; y++) {
+        for (auto y = 0; y < bh; y++) {
 	    auto id = get(bag, x, y);
 	    if (id == NoThingId) {
 		continue;
@@ -192,7 +197,7 @@ bool Thing::bag_remove_at (Thingp item, point pos)
 bool Thing::bag_can_place_at (Thingp item, point pos)
 {_
     if (item == this) {
-        TOPCON("Cannot place a bag inside itself!");
+        TOPCON("Cannot place an item inside itself!");
         return false;
     }
 
@@ -235,14 +240,14 @@ _
 #endif
         return false;
     }
-    if (pos.x + w >= bw) {
+    if (pos.x + w - 1 >= bw) {
 #if 0
         dbg("Bag: cannot place %s at %d,%d (x>width)",
             item->to_string().c_str(), pos.x, pos.y);
 #endif
         return false;
     }
-    if (pos.y + h >= bh) {
+    if (pos.y + h - 1 >= bh) {
 #if 0
         dbg("Bag: cannot place %s at %d,%d (y>height)",
             item->to_string().c_str(), pos.x, pos.y);
@@ -293,10 +298,10 @@ bool Thing::bag_place_at (Thingp item, point pos)
     if (pos.y < 0) {
         return false;
     }
-    if (pos.y + h >= bh) {
+    if (pos.y + h - 1 >= bh) {
         return false;
     }
-    if (pos.x + w >= bw) {
+    if (pos.x + w - 1 >= bw) {
         return false;
     }
 
