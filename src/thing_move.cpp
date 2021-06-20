@@ -213,7 +213,6 @@ bool Thing::move (fpoint future_pos,
         } else {
             TOPCON("You wait...");
         }
-
 #if 0
         location_check();
 #endif

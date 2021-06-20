@@ -37,7 +37,7 @@ void Level::log_ (const char *fmt, va_list args)
 void Level::log (const char *fmt, ...)
 {
     verify(this);
-    //log_catchup_missing_indent_levels();
+    log_catchup_missing_indent_levels();
     auto l = this;
     va_list args;
     va_start(args, fmt);

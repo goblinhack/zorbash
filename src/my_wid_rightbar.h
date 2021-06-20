@@ -5,7 +5,7 @@
 
 #pragma once
 void wid_rightbar_fini(void);
-uint8_t wid_rightbar_init(void);
+bool wid_rightbar_init(void);
 
 #include "my_wid.h"
 

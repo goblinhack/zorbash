@@ -6067,9 +6067,10 @@ void wid_tick_all (void)
     if (game->request_remake_inventory ||
         game->request_remake_skillbox) {
         LOG("Handle request to remake inventory");
-        wid_rightbar_init();
-        game->request_remake_inventory = false;
-        game->request_remake_skillbox = false;
+        if (wid_rightbar_init()) {
+            game->request_remake_inventory = false;
+            game->request_remake_skillbox = false;
+        }
     }
 
     if (game->request_destroy_thing_info) {

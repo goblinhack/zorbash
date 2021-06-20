@@ -17,7 +17,7 @@
 #include "my_ptrcheck.h"
 #include "my_vector_bounds_check.h"
 
-static void wid_rightbar_create(void);
+static bool wid_rightbar_create(void);
 
 Widp wid_item_popup {};
 Widp wid_rightbar {};
@@ -28,11 +28,9 @@ void wid_rightbar_fini (void)
     wid_destroy(&wid_rightbar);
 }
 
-uint8_t wid_rightbar_init (void)
+bool wid_rightbar_init (void)
 {_
-    wid_rightbar_create();
-
-    return true;
+    return wid_rightbar_create();
 }
 
 static void wid_rightbar_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
@@ -106,22 +104,26 @@ _
 //
 // Create the test
 //
-static void wid_rightbar_create (void)
+static bool wid_rightbar_create (void)
 {_
+    LOG("Remake rightbar");
+
     auto level = game->level;
     if (!level) {
-        return;
+        return false;
     }
+
     auto player = level->player;
     if (!player) {
-        return;
+        return false;
     }
 
     //
     // Stop this window popping on top of dialogs like when setting keys
     //
     if (game->paused()) {
-        return;
+        LOG("Remake rightbar; paused");
+        return false;
     }
 
     wid_rightbar_fini();
@@ -579,6 +581,9 @@ static void wid_rightbar_create (void)
             }
         }
     }
+
+    LOG("Remade rightbar");
+    return true;
 }
 
 bool is_mouse_over_rightbar (void)

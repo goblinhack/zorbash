@@ -145,6 +145,15 @@ std::list<Thingp> Thing::anything_to_carry (void)
 
         dbg("Potential item to carry: %s", t->to_string().c_str());
         items.push_back(t);
+
+        if (t->is_item_container()) {
+            for (const auto& item : t->monstp->carrying) {
+                auto t = level->thing_find(item.id);
+                if (t) {
+                    items.push_back(t);
+                }
+            }
+        }
     } FOR_ALL_THINGS_END()
 
     return items;
