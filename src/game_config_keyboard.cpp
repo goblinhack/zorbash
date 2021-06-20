@@ -1067,7 +1067,7 @@ void Game::config_keyboard_select (void)
         point br = make_point(45, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "(SHIFT to run, double click to jump in chasms)");
+        wid_set_text(w, "(Use double click to jump in chasms or lava)");
     }
 
     ///////////////////////////////////////////////////////////////////////

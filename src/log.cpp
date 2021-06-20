@@ -21,6 +21,10 @@
 //
 void log_catchup_missing_indent_levels (void)
 {
+    //
+    // Seems to need more work - not reliable
+    //
+#if 0
     if (!g_opt_debug2) {
         return;
     }
@@ -42,6 +46,7 @@ void log_catchup_missing_indent_levels (void)
         LOG_MISSING("%s", func);
     }
     g_last_logged_callframes_depth = g_callframes_depth;
+#endif
 }
 
 static void log_ (const char *fmt, va_list args)

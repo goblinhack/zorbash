@@ -40,8 +40,28 @@ static void wid_collect_slot (int slot)
     auto player = game->level->player;
     if (player) {
         auto t = collect_items[slot];
-        if (!player->try_to_carry(t)) {
-            return;
+        if (t) {
+            if (!player->try_to_carry(t)) {
+                return;
+            }
+
+            //
+            // If we just picked up a bag, then we just also
+            // pick up all the items in the bag, so remove them
+            // from the choice.
+            //
+            if (t->is_item_container()) {
+                for (auto id : t->monstp->carrying) {
+                    auto o = game->level->thing_find(id);
+                    if (o->get_immediate_owner() == t) {
+                        for (auto slot = 0; slot < (int)collect_items.size(); slot++) {
+                            if (collect_items[slot] == o) {
+                                collect_items[slot] = nullptr;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         //
@@ -145,7 +165,7 @@ static uint8_t wid_collect_mouse_up (Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
 }
 
-void Game::wid_collect_create(const std::list<Thingp> items /* intentional copy */)
+void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy */)
 {_
     BOTCON("You lucky thing. Choose an item to collect.");
 
