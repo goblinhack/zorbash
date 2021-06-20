@@ -377,7 +377,7 @@ _
             bag_primary = new WidBag(player, tl, br, "Inventory");
         }
 
-        if (t->is_item_container()) {
+        if (t->is_bag_item_container()) {
             point tl = mid + point(1, - (t->capacity_height() + 2));
             point br = tl +  point(t->capacity_width() + 1, t->capacity_height() + 1);
 
@@ -565,7 +565,7 @@ void Game::wid_thing_info_add_enchant (WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_item_rarity (WidPopup *w, Thingp t) 
 {_
     auto tp = t->tp();
-    if (t->is_item()) {
+    if (t->is_collectable()) {
         if (tp->rarity() == THING_RARITY_UNCOMMON) {
             w->log("Uncommon item");
         } else if (tp->rarity() == THING_RARITY_RARE) {

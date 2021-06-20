@@ -53,7 +53,7 @@ _
             // pick up all the items in the bag, so remove them
             // from the choice.
             //
-            if (t->is_item_container()) {
+            if (t->is_bag_item_container()) {
                 for (auto id : t->monstp->carrying) {
                     auto o = game->level->thing_find(id);
                     if (o->get_immediate_owner() == t) {
@@ -64,7 +64,7 @@ _
                         }
                     }
 
-                    if (!o->is_item()) {
+                    if (!o->is_bag_item()) {
                         player->try_to_carry(o);
                     }
                 }

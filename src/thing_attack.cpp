@@ -261,7 +261,8 @@ _
         it->is_brazier() ||
         it->is_barrel() ||
         it->is_player() ||
-        it->is_item()) {
+        it->is_food() ||
+        it->is_bag_item()) {
 
         if (is_laser()) {
             dbg("Can attack as laser %s", it->to_string().c_str());

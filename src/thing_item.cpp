@@ -22,7 +22,7 @@ int Thing::item_count_including_charges (Tpp tp)
         }
 
         if (o->tp() == tp) {
-            if (o->is_item_not_stackable()) {
+            if (o->is_bag_item_not_stackable()) {
                 count = 1;
             } else {
                 if (o->get_charge_count()) {
@@ -47,7 +47,7 @@ int Thing::item_count_excluding_charges (Tpp tp)
         }
 
         if (o->tp() == tp) {
-            if (o->is_item_not_stackable()) {
+            if (o->is_bag_item_not_stackable()) {
                 count = 1;
             } else {
                 count++;
@@ -227,7 +227,7 @@ _
             std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));
         }
 
-        if (t->is_item()) {
+        if (t->is_bag_item()) {
             tr.push_back(t);
         }
     }

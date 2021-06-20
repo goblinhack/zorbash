@@ -875,7 +875,7 @@ _
         }
     }
 
-    if (is_player() && it->is_item()) {
+    if (is_player() && it->is_collectable()) {
         dbg("No; allow items to be collected manually");
     } else if (!it->is_dead && possible_to_attack(it)) {
         if (things_overlap_attack(me, future_pos, it)) {
@@ -1137,7 +1137,7 @@ _
             dbg("No; overlaps but can exit via sewer exit");
             return false;
         }
-    } else if (is_player() && it->is_item()) {
+    } else if (is_player() && it->is_collectable()) {
         dbg("No; allow manual collect instead");
         return false;
     } else if (possible_to_attack(it)) {
