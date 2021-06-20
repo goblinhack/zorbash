@@ -212,11 +212,11 @@ int Tp::is_humanoid(void) const                                      { return _i
 int Tp::is_hunger_insatiable(void) const                             { return _is_hunger_insatiable; }
 int Tp::is_intelligent(void) const                                   { return _is_intelligent; }
 int Tp::is_interesting(void) const                                   { return _is_interesting; }
-int Tp::is_item(void) const                                          { return _is_item; }
+int Tp::is_bag_item(void) const                                      { return _is_bag_item; }
 int Tp::is_item_carrier(void) const                                  { return _is_item_carrier; }
-int Tp::is_item_collected_as_gold(void) const                        { return _is_item_collected_as_gold; }
+int Tp::is_collected_as_gold(void) const                             { return _is_collected_as_gold; }
 int Tp::is_item_eater(void) const                                    { return _is_item_eater; }
-int Tp::is_item_not_stackable(void) const                            { return _is_item_not_stackable; }
+int Tp::is_bag_item_not_stackable(void) const                        { return _is_bag_item_not_stackable; }
 int Tp::is_jelly(void) const                                         { return _is_jelly; }
 int Tp::is_jelly_baby(void) const                                    { return _is_jelly_baby; }
 int Tp::is_jelly_baby_eater(void) const                              { return _is_jelly_baby_eater; }
@@ -344,10 +344,10 @@ int Tp::is_rrr67(void) const                                         { return _i
 int Tp::is_rrr68(void) const                                         { return _is_rrr68; }
 int Tp::is_rrr69(void) const                                         { return _is_rrr69; }
 int Tp::is_rrr70(void) const                                         { return _is_rrr70; }
-int Tp::is_rrr71(void) const                                         { return _is_rrr71; }
-int Tp::is_item_container(void) const                                         { return _is_item_container; }
-int Tp::is_treasure_chest(void) const                                         { return _is_treasure_chest; }
-int Tp::is_openable(void) const                                         { return _is_openable; }
+int Tp::is_item(void) const                                         { return _is_item; }
+int Tp::is_bag_item_container(void) const                            { return _is_bag_item_container; }
+int Tp::is_treasure_chest(void) const                                { return _is_treasure_chest; }
+int Tp::is_openable(void) const                                      { return _is_openable; }
 int Tp::is_secret_door(void) const                                   { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const                                 { return _is_shallow_water; }
@@ -530,7 +530,7 @@ void Tp::set_is_described_when_hovering_over(int v)                  { _is_descr
 void Tp::set_is_dirt(int v)                                          { _is_dirt = v; }
 void Tp::set_is_door(int v)                                          { _is_door = v; }
 void Tp::set_is_droppable(int v)                                     { _is_droppable = v; }
-void Tp::set_is_dry_grass(int v)                                    { _is_dry_grass = v; }
+void Tp::set_is_dry_grass(int v)                                     { _is_dry_grass = v; }
 void Tp::set_is_enchantable(int v)                                   { _is_enchantable = v; }
 void Tp::set_is_enchantstone(int v)                                  { _is_enchantstone = v; }
 void Tp::set_is_ethereal(int v)                                      { _is_ethereal = v; }
@@ -552,11 +552,11 @@ void Tp::set_is_hunger_insatiable(int v)                             { _is_hunge
 void Tp::set_is_indestructible(int v)                                { _is_indestructible = v; }
 void Tp::set_is_intelligent(int v)                                   { _is_intelligent = v; }
 void Tp::set_is_interesting(int v)                                   { _is_interesting = v; }
-void Tp::set_is_item(int v)                                          { _is_item = v; }
+void Tp::set_is_bag_item(int v)                                      { _is_bag_item = v; }
 void Tp::set_is_item_carrier(int v)                                  { _is_item_carrier = v; }
-void Tp::set_is_item_collected_as_gold(int v)                        { _is_item_collected_as_gold = v; }
+void Tp::set_is_collected_as_gold(int v)                             { _is_collected_as_gold = v; }
 void Tp::set_is_item_eater(int v)                                    { _is_item_eater = v; }
-void Tp::set_is_item_not_stackable(int v)                            { _is_item_not_stackable = v; }
+void Tp::set_is_bag_item_not_stackable(int v)                        { _is_bag_item_not_stackable = v; }
 void Tp::set_is_jelly(int v)                                         { _is_jelly = v; }
 void Tp::set_is_jelly_baby(int v)                                    { _is_jelly_baby = v; }
 void Tp::set_is_jelly_baby_eater(int v)                              { _is_jelly_baby_eater = v; }
@@ -662,15 +662,15 @@ void Tp::set_is_rrr68(int v)                                         { _is_rrr68
 void Tp::set_is_rrr69(int v)                                         { _is_rrr69 = v; }
 void Tp::set_is_rrr7(int v)                                          { _is_rrr7 = v; }
 void Tp::set_is_rrr70(int v)                                         { _is_rrr70 = v; }
-void Tp::set_is_rrr71(int v)                                         { _is_rrr71 = v; }
-void Tp::set_is_item_container(int v)                                         { _is_item_container = v; }
-void Tp::set_is_treasure_chest(int v)                                         { _is_treasure_chest = v; }
-void Tp::set_is_openable(int v)                                         { _is_openable = v; }
-void Tp::set_gfx_long_shadow_caster(int v)                                         { _gfx_long_shadow_caster = v; }
-void Tp::set_gfx_solid_shadow(int v)                                         { _gfx_solid_shadow = v; }
+void Tp::set_is_item(int v)                                         { _is_item = v; }
+void Tp::set_is_bag_item_container(int v)                            { _is_bag_item_container = v; }
+void Tp::set_is_treasure_chest(int v)                                { _is_treasure_chest = v; }
+void Tp::set_is_openable(int v)                                      { _is_openable = v; }
+void Tp::set_gfx_long_shadow_caster(int v)                           { _gfx_long_shadow_caster = v; }
+void Tp::set_gfx_solid_shadow(int v)                                 { _gfx_solid_shadow = v; }
 void Tp::set_is_rrr8(int v)                                          { _is_rrr8 = v; }
 void Tp::set_is_rrr9(int v)                                          { _is_rrr9 = v; }
-void Tp::set_loves_spiderwebs(int v)                                         { _loves_spiderwebs = v; }
+void Tp::set_loves_spiderwebs(int v)                                 { _loves_spiderwebs = v; }
 void Tp::set_is_secret_door(int v)                                   { _is_secret_door = v; }
 void Tp::set_is_sewer_wall(int v)                                    { _is_sewer_wall = v; }
 void Tp::set_is_shallow_water(int v)                                 { _is_shallow_water = v; }

@@ -106,11 +106,11 @@ bool Thing::matches (const std::string& what) const
     if (is_hunger_insatiable() &&                             (what == "is_hunger_insatiable"))                             { return true; }
     if (is_intelligent() &&                                   (what == "is_intelligent"))                                   { return true; }
     if (is_interesting() &&                                   (what == "is_interesting"))                                   { return true; }
-    if (is_item() &&                                          (what == "is_item"))                                          { return true; }
+    if (is_bag_item() &&                                      (what == "is_bag_item"))                                          { return true; }
     if (is_item_carrier() &&                                  (what == "is_item_carrier"))                                  { return true; }
-    if (is_item_collected_as_gold() &&                        (what == "is_item_collected_as_gold"))                        { return true; }
+    if (is_collected_as_gold() &&                             (what == "is_collected_as_gold"))                        { return true; }
     if (is_item_eater() &&                                    (what == "is_item_eater"))                                    { return true; }
-    if (is_item_not_stackable() &&                            (what == "is_item_not_stackable"))                            { return true; }
+    if (is_bag_item_not_stackable() &&                        (what == "is_bag_item_not_stackable"))                            { return true; }
     if (is_jelly() &&                                         (what == "is_jelly"))                                         { return true; }
     if (is_jelly_baby() &&                                    (what == "is_jelly_baby"))                                    { return true; }
     if (is_jelly_baby_eater() &&                              (what == "is_jelly_baby_eater"))                              { return true; }
@@ -232,10 +232,10 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr69() &&                                         (what == "is_rrr69"))                                         { return true; }
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
     if (is_rrr70() &&                                         (what == "is_rrr70"))                                         { return true; }
-    if (is_rrr71() &&                                         (what == "is_rrr71"))                                         { return true; }
-    if (is_item_container() &&                                         (what == "is_item_container"))                                         { return true; }
-    if (is_treasure_chest() &&                                         (what == "is_treasure_chest"))                                         { return true; }
-    if (is_openable() &&                                         (what == "is_openable"))                                         { return true; }
+    if (is_item() &&                                         (what == "is_item"))                                         { return true; }
+    if (is_bag_item_container() &&                            (what == "is_bag_item_container"))                                         { return true; }
+    if (is_treasure_chest() &&                                (what == "is_treasure_chest"))                                         { return true; }
+    if (is_openable() &&                                      (what == "is_openable"))                                         { return true; }
     if (is_rrr7() &&                                          (what == "is_rrr7"))                                          { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
     if (is_rrr9() &&                                          (what == "is_rrr9"))                                          { return true; }
@@ -368,11 +368,11 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_hunger_insatiable")                             { return &Thing::is_hunger_insatiable; }
     if (what == "is_intelligent")                                   { return &Thing::is_intelligent; }
     if (what == "is_interesting")                                   { return &Thing::is_interesting; }
-    if (what == "is_item")                                          { return &Thing::is_item; }
+    if (what == "is_bag_item")                                      { return &Thing::is_bag_item; }
     if (what == "is_item_carrier")                                  { return &Thing::is_item_carrier; }
-    if (what == "is_item_collected_as_gold")                        { return &Thing::is_item_collected_as_gold; }
+    if (what == "is_collected_as_gold")                             { return &Thing::is_collected_as_gold; }
     if (what == "is_item_eater")                                    { return &Thing::is_item_eater; }
-    if (what == "is_item_not_stackable")                            { return &Thing::is_item_not_stackable; }
+    if (what == "is_bag_item_not_stackable")                        { return &Thing::is_bag_item_not_stackable; }
     if (what == "is_jelly")                                         { return &Thing::is_jelly; }
     if (what == "is_jelly_baby")                                    { return &Thing::is_jelly_baby; }
     if (what == "is_jelly_baby_eater")                              { return &Thing::is_jelly_baby_eater; }
@@ -495,10 +495,10 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr69")                                         { return &Thing::is_rrr69; }
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
     if (what == "is_rrr70")                                         { return &Thing::is_rrr70; }
-    if (what == "is_rrr71")                                         { return &Thing::is_rrr71; }
-    if (what == "is_item_container")                                         { return &Thing::is_item_container; }
-    if (what == "is_treasure_chest")                                         { return &Thing::is_treasure_chest; }
-    if (what == "is_openable")                                         { return &Thing::is_openable; }
+    if (what == "is_item")                                         { return &Thing::is_item; }
+    if (what == "is_bag_item_container")                            { return &Thing::is_bag_item_container; }
+    if (what == "is_treasure_chest")                                { return &Thing::is_treasure_chest; }
+    if (what == "is_openable")                                      { return &Thing::is_openable; }
     if (what == "is_rrr7")                                          { return &Thing::is_rrr7; }
     if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
     if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }

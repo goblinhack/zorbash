@@ -54,7 +54,7 @@ bool Thing::carry (Thingp it)
         // Always carry
         //
         dbg("Monsts always carry items");
-    } else if (!it->is_item()) {
+    } else if (!it->is_bag_item()) {
         //
         // A key for example, does not go in a bad
         //
@@ -116,11 +116,11 @@ bool Thing::carry (Thingp it)
         wid_inventory_init();
     }
 
-    if (it->is_item_container()) {
+    if (it->is_bag_item_container()) {
         for (const auto& item : it->monstp->carrying) {
             auto t = level->thing_find(item.id);
             if (t) {
-                if (!t->is_item()) {
+                if (!t->is_bag_item()) {
                     if (!carry(t)) {
                         err("Could not auto carry non item");
                     }
@@ -170,7 +170,7 @@ std::list<Thingp> Thing::anything_to_carry (void)
         dbg("Potential item to carry: %s", t->to_string().c_str());
         items.push_back(t);
 
-        if (t->is_item_container()) {
+        if (t->is_bag_item_container()) {
             for (const auto& item : t->monstp->carrying) {
                 auto t = level->thing_find(item.id);
                 if (t) {

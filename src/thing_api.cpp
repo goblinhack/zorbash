@@ -145,7 +145,7 @@ int Thing::is_described_when_hovering_over(void) const                  {_ retur
 int Thing::is_dirt(void) const                                          {_ return (tp()->is_dirt()); }
 int Thing::is_door(void) const                                          {_ return (tp()->is_door()); }
 int Thing::is_droppable(void) const                                     {_ return (tp()->is_droppable()); }
-int Thing::is_dry_grass(void) const                                    {_ return (tp()->is_dry_grass()); }
+int Thing::is_dry_grass(void) const                                     {_ return (tp()->is_dry_grass()); }
 int Thing::is_enchantable(void) const                                   {_ return (tp()->is_enchantable()); }
 int Thing::is_enchantstone(void) const                                  {_ return (tp()->is_enchantstone()); }
 int Thing::is_ethereal(void) const                                      {_ return (tp()->is_ethereal()); }
@@ -167,11 +167,11 @@ int Thing::is_hunger_insatiable(void) const                             {_ retur
 int Thing::is_indestructible(void) const                                {_ return (tp()->is_indestructible()); }
 int Thing::is_intelligent(void) const                                   {_ return (tp()->is_intelligent()); }
 int Thing::is_interesting(void) const                                   {_ return (tp()->is_interesting()); }
-int Thing::is_item(void) const                                          {_ return (tp()->is_item()); }
+int Thing::is_bag_item(void) const                                      {_ return (tp()->is_bag_item()); }
 int Thing::is_item_carrier(void) const                                  {_ return (tp()->is_item_carrier()); }
-int Thing::is_item_collected_as_gold(void) const                        {_ return (tp()->is_item_collected_as_gold()); }
+int Thing::is_collected_as_gold(void) const                             {_ return (tp()->is_collected_as_gold()); }
 int Thing::is_item_eater(void) const                                    {_ return (tp()->is_item_eater()); }
-int Thing::is_item_not_stackable(void) const                            {_ return (tp()->is_item_not_stackable()); }
+int Thing::is_bag_item_not_stackable(void) const                        {_ return (tp()->is_bag_item_not_stackable()); }
 int Thing::is_jelly(void) const                                         {_ return (tp()->is_jelly()); }
 int Thing::is_jelly_baby(void) const                                    {_ return (tp()->is_jelly_baby()); }
 int Thing::is_jelly_baby_eater(void) const                              {_ return (tp()->is_jelly_baby_eater()); }
@@ -277,8 +277,8 @@ int Thing::is_rrr68(void) const                                         {_ retur
 int Thing::is_rrr69(void) const                                         {_ return (tp()->is_rrr69()); }
 int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
 int Thing::is_rrr70(void) const                                         {_ return (tp()->is_rrr70()); }
-int Thing::is_rrr71(void) const                                         {_ return (tp()->is_rrr71()); }
-int Thing::is_item_container(void) const                                {_ return (tp()->is_item_container()); }
+int Thing::is_item(void) const                                         {_ return (tp()->is_item()); }
+int Thing::is_bag_item_container(void) const                            {_ return (tp()->is_bag_item_container()); }
 int Thing::is_treasure_chest(void) const                                {_ return (tp()->is_treasure_chest()); }
 int Thing::is_openable(void) const                                      {_ return (tp()->is_openable()); }
 int Thing::gfx_long_shadow_caster(void) const                           {_ return (tp()->gfx_long_shadow_caster()); }

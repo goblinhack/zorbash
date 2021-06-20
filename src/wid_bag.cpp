@@ -161,7 +161,7 @@ _
         bag->carry(t);
         t->monstp->preferred_bag_position = point(-1, -1);
 
-        if (t->is_item_container()) {
+        if (t->is_bag_item_container()) {
             game->inventory_highlight_slot = game->previous_slot;
         }
 

@@ -49,7 +49,7 @@ _
         }
 
         if (what->tp() == tpp) {
-            if (what->is_item_not_stackable()) {
+            if (what->is_bag_item_not_stackable()) {
                 //
                 // Needs its own slot
                 //

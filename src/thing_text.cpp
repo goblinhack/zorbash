@@ -254,7 +254,7 @@ void Thing::show_botcon_description (void) const
                     "%%fg=reset$ to throw.";
         }
 
-        if (is_item_container()) {
+        if (is_bag_item_container()) {
             text += " Select to open. Use mouse to drag items.";
         }
     }

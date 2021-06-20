@@ -51,7 +51,7 @@ bool Thing::bag_add (Thingp item)
 {_
     dbg("Bag: add %s", item->to_string().c_str());
 
-    if (!item->is_item()) {
+    if (!item->is_bag_item()) {
         dbg("Bag: add %s; no, is not an item", item->to_string().c_str());
         return false;
     }

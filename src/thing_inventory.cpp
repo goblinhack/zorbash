@@ -27,7 +27,7 @@ _
         return;
     }
 
-    if (item->is_item_collected_as_gold()) {
+    if (item->is_collected_as_gold()) {
         std::string name = "gold and keys";
         auto w = wid_find(name);
         if (!w) {
@@ -201,7 +201,7 @@ _
         return false;
     }
 
-    if (item->is_item_collected_as_gold()) {
+    if (item->is_collected_as_gold()) {
         wid_inventory_init();
         wid_thing_info_fini();
         inventory_particle(item, monstp->inventory_id.size() - 1);
@@ -257,7 +257,7 @@ _
         }
 
         if (item->tp() == tpp) {
-            if (item->is_item_not_stackable()) {
+            if (item->is_bag_item_not_stackable()) {
                 //
                 // Needs its own slot
                 //
@@ -657,7 +657,7 @@ _
     } else if (item->is_skillstone()) {
         game->wid_skill_choose();
         describe(item);
-    } else if (item->is_item_container()) {
+    } else if (item->is_bag_item_container()) {
         game->wid_thing_info_create(item);
         if (unlikely(g_opt_debug2)) {
             item->log("Moving items flag set");

@@ -733,10 +733,10 @@ public:
     int is_intelligent(void) const;
     int is_interesting(void) const;
     int is_item_carrier(void) const;
-    int is_item_collected_as_gold(void) const;
+    int is_collected_as_gold(void) const;
     int is_item_eater(void) const;
-    int is_item_not_stackable(void) const;
-    int is_item(void) const;
+    int is_bag_item_not_stackable(void) const;
+    int is_bag_item(void) const;
     int is_jelly_baby_eater(void) const;
     int is_jelly_baby(void) const;
     int is_jelly_eater(void) const;
@@ -841,8 +841,8 @@ public:
     int is_rrr69(void) const;
     int is_rrr6(void) const;
     int is_rrr70(void) const;
-    int is_rrr71(void) const;
-    int is_item_container(void) const;
+    int is_item(void) const;
+    int is_bag_item_container(void) const;
     int is_treasure_chest(void) const;
     int is_openable(void) const;
     int is_rrr7(void) const;

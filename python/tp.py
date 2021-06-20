@@ -442,11 +442,11 @@ class Tp:
     def set_is_rrr70(self, value):
         zx.tp_set_is_rrr70(self, value)
 
-    def set_is_rrr71(self, value):
-        zx.tp_set_is_rrr71(self, value)
+    def set_is_item(self, value):
+        zx.tp_set_is_item(self, value)
 
-    def set_is_item_container(self, value):
-        zx.tp_set_is_item_container(self, value)
+    def set_is_bag_item_container(self, value):
+        zx.tp_set_is_bag_item_container(self, value)
 
     def set_is_treasure_chest(self, value):
         zx.tp_set_is_treasure_chest(self, value)
@@ -704,8 +704,8 @@ class Tp:
     def set_is_weapon_wielder(self, value):
         zx.tp_set_is_weapon_wielder(self, value)
 
-    def set_is_item(self, value):
-        zx.tp_set_is_item(self, value)
+    def set_is_bag_item(self, value):
+        zx.tp_set_is_bag_item(self, value)
 
     def set_is_attackable_by_player(self, value):
         zx.tp_set_is_attackable_by_player(self, value)
@@ -761,8 +761,8 @@ class Tp:
     def set_is_droppable(self, value):
         zx.tp_set_is_droppable(self, value)
 
-    def set_is_item_not_stackable(self, value):
-        zx.tp_set_is_item_not_stackable(self, value)
+    def set_is_bag_item_not_stackable(self, value):
+        zx.tp_set_is_bag_item_not_stackable(self, value)
 
     def set_is_treasure_class_a(self, value):
         zx.tp_set_is_treasure_class_a(self, value)
@@ -834,8 +834,8 @@ class Tp:
     def set_is_able_to_change_levels(self, value):
         zx.tp_set_is_able_to_change_levels(self, value)
 
-    def set_is_item_collected_as_gold(self, value):
-        zx.tp_set_is_item_collected_as_gold(self, value)
+    def set_is_collected_as_gold(self, value):
+        zx.tp_set_is_collected_as_gold(self, value)
 
     def set_is_gold(self, value):
         zx.tp_set_is_gold(self, value)

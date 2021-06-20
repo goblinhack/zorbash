@@ -96,7 +96,7 @@ void tp_random_init (void)
         // Keep bags and treasure chests seperate so we don't end up with
         // chests containing chests forever
         //
-        if (tp->is_item_container()) {
+        if (tp->is_bag_item_container()) {
             if (tp->is_treasure_class_a())      { tp_item_class_a.push_back(tp); }
             if (tp->is_treasure_class_b())      { tp_item_class_b.push_back(tp); }
             if (tp->is_treasure_class_c())      { tp_item_class_c.push_back(tp); }
