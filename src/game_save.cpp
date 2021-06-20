@@ -49,8 +49,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* float        fall_height               */ out << bits(my.t->fall_height);
     /* float        wobble                    */ out << bits(my.t->wobble);
     /* fpoint       lunge_to                  */ out << bits(my.t->lunge_to);
-    /* int          capacity_height                */ out << bits(my.t->capacity_height);
-    /* int          capacity_width                 */ out << bits(my.t->capacity_width);
+    /* int          capacity_height           */ out << bits(my.t->capacity_height);
+    /* int          capacity_width            */ out << bits(my.t->capacity_width);
     /* int          bounce_count              */ out << bits(my.t->bounce_count);
     /* int          gold                      */ out << bits(my.t->gold);
     /* int          health                    */ out << bits(my.t->health);

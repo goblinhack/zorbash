@@ -84,6 +84,9 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         auto tile = tile_first(tiles);
         if (tile) {
             wid_set_fg_tile(w, tile);
+        } else {
+            bag->err("+ no tile item %s at %d,%d", t->to_string().c_str(),
+                     t->monstp->bag_position.x, t->monstp->bag_position.y);
         }
     }
 
