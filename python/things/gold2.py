@@ -8,7 +8,7 @@ def gold_init(name, text_name):
     mytp.set_collision_radius(0.40)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_very_short_shadow_caster(True)
-    mytp.set_gold_value_dice("1d6")
+    mytp.set_gold_value_dice("2+1d6")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_auto_collect_item(True)
     mytp.set_is_collectable(True)
@@ -34,6 +34,6 @@ def gold_init(name, text_name):
     mytp.update()
 
 def init():
-    gold_init(name="gold2", text_name="gold2")
+    gold_init(name="gold2", text_name="handful of gold coins")
 
 init()

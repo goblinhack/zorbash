@@ -40,6 +40,6 @@ def tp_init(name, text_name):
     mytp.update()
 
 def init():
-    tp_init(name="bag_large", text_name="large bag")
+    tp_init(name="bag_large", text_name="huge sack")
 
 init()
