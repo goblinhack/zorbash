@@ -8,8 +8,8 @@ def on_lifespan(owner, me, x, y):
 
 def tp_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
-    mytp.set_item_height(2)
-    mytp.set_item_width(2)
+    mytp.set_item_height(4)
+    mytp.set_item_width(4)
     mytp.set_charge_count(4)
     mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(1)

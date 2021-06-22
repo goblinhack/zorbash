@@ -41,8 +41,8 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     global mytp
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_item_height(2)
-    mytp.set_item_width(2)
+    mytp.set_item_height(4)
+    mytp.set_item_width(4)
     mytp.set_charge_count(5)
     mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(5)

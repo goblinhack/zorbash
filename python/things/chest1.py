@@ -3,7 +3,7 @@ import tp
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_capacity_height(6)
+    mytp.set_capacity_height(8)
     mytp.set_capacity_width(8)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
@@ -30,8 +30,8 @@ def tp_init(name, text_name):
     mytp.set_is_treasure_class_a(True)
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure(True)
-    mytp.set_item_height(4)
-    mytp.set_item_width(4)
+    mytp.set_item_height(8)
+    mytp.set_item_width(8)
     mytp.set_long_text_description("A small treasure chest.")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_is_open(True)
