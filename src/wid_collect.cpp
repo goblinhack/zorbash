@@ -39,61 +39,64 @@ _
         return;
     }
 
-    auto player = game->level->player;
-    if (player) {
-        auto t = collect_items[slot];
-        if (t) {
-            if (!player->try_to_carry(t)) {
-                LOG("Failed to collect slot %d", slot);
-                return;
-            }
+    auto level = game->level;
+    if (!level) {
+        return;
+    }
 
-            //
-            // If we just picked up a bag, then we just also
-            // pick up all the items in the bag, so remove them
-            // from the choice.
-            //
-            if (t->is_bag_item_container()) {
-                for (auto id : t->monstp->carrying) {
-                    auto o = game->level->thing_find(id);
-                    if (o->get_immediate_owner() == t) {
-                        for (auto slot = 0; slot < (int)collect_items.size(); slot++) {
-                            if (collect_items[slot] == o) {
-                                collect_items[slot] = nullptr;
-                            }
-                        }
-                    }
+    auto player = level->player;
+    if (!player) {
+        return;
+    }
 
-                    if (!o->is_bag_item()) {
-                        player->try_to_carry(o);
+    auto t = collect_items[slot];
+    if (t) {
+        auto carrying_copy = t->monstp->carrying;
+
+        if (!player->try_to_carry(t)) {
+            LOG("Failed to collect slot %d", slot);
+            return;
+        }
+
+        //
+        // If we just picked up a bag, then we just also
+        // pick up all the items in the bag, so remove them
+        // from the choice.
+        //
+        if (t->is_bag_item_container()) {
+            for (const auto& item : carrying_copy) {
+                auto o = level->thing_find(item.id);
+                for (auto slot = 0; slot < (int)collect_items.size(); slot++) {
+                    if (collect_items[slot] == o) {
+                        collect_items[slot] = nullptr;
                     }
                 }
             }
         }
+    }
 
-        //
-        // Null out this item so the key numbers do not change
-        //
-        collect_items[slot] = nullptr;
-        wid_collect_destroy();
+    //
+    // Null out this item so the key numbers do not change
+    //
+    collect_items[slot] = nullptr;
+    wid_collect_destroy();
 
-        //
-        // If no items left, leave this state
-        //
-        auto remaining_items = false;
-        for (auto t : collect_items) {
-            if (t) {
-                remaining_items = true;
-                break;
-            }
+    //
+    // If no items left, leave this state
+    //
+    auto remaining_items = false;
+    for (auto t : collect_items) {
+        if (t) {
+            remaining_items = true;
+            break;
         }
+    }
 
-        if (remaining_items) {
-            std::list<Thingp> new_collect_items;
-            std::copy(collect_items.begin(), collect_items.end(), std::back_inserter(new_collect_items));
-            game->wid_collect_create(new_collect_items);
-            return;
-        }
+    if (remaining_items) {
+        std::list<Thingp> new_collect_items;
+        std::copy(collect_items.begin(), collect_items.end(), std::back_inserter(new_collect_items));
+        game->wid_collect_create(new_collect_items);
+        return;
     }
 
     if (collect_items.empty()) {
