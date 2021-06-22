@@ -135,10 +135,6 @@ void Thing::location_check_forced (void)
 void Thing::location_check (void)
 {_
     if (get_tick_last_location_check() == game->tick_current) {
-        if (is_player()) {
-            dbg("Skip location check, already done. Last check %d, game tick %d",
-                get_tick_last_location_check(), game->tick_current);
-        }
         return;
     }
 

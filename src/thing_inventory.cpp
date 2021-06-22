@@ -28,6 +28,9 @@ _
     }
 
     if (item->is_collected_as_gold()) {
+        dbg("Inventory particle %s is collected as gold",
+            item->to_string().c_str());
+
         std::string name = "gold and keys";
         auto w = wid_find(name);
         if (!w) {
@@ -36,8 +39,10 @@ _
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-        p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
-        p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+        p.x = (int)(((float)game->config.game_pix_width /
+                     (float)TERM_WIDTH) * (float)p.x);
+        p.y = (int)(((float)game->config.game_pix_height /
+                     (float)TERM_HEIGHT) * (float)p.y);
 
         int value = item->get_gold_value();
         int particle_count;
@@ -71,6 +76,9 @@ _
     }
 
     if (item->is_collect_as_keys()) {
+        dbg("Inventory particle %s is collected as key",
+            item->to_string().c_str());
+
         std::string name = "gold and keys";
         auto w = wid_find(name);
         if (!w) {
@@ -81,8 +89,10 @@ _
         TOPCON("You collect the key.");
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-	p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
-	p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+	p.x = (int)(((float)game->config.game_pix_width /
+                     (float)TERM_WIDTH) * (float)p.x);
+	p.y = (int)(((float)game->config.game_pix_height /
+                     (float)TERM_HEIGHT) * (float)p.y);
 
         point s = (last_blit_tl + last_blit_br) / 2;
         point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
@@ -107,8 +117,10 @@ _
         }
 
         auto p = (w->abs_tl + w->abs_br) / 2;
-        p.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)p.x);
-        p.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)p.y);
+        p.x = (int)(((float)game->config.game_pix_width /
+                     (float)TERM_WIDTH) * (float)p.x);
+        p.y = (int)(((float)game->config.game_pix_height /
+                     (float)TERM_HEIGHT) * (float)p.y);
 
         level->new_external_particle(
                  item->id,

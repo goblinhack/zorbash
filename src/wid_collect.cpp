@@ -92,10 +92,17 @@ _
         }
     }
 
+    for (auto t : collect_items) {
+        if (t) {
+            player->log("Old collect items: %s", t->to_string().c_str());
+        } else {
+            player->log("Old collect items: <empty slot>");
+        }
+    }
+
     if (remaining_items) {
-        std::list<Thingp> new_collect_items;
-        std::copy(collect_items.begin(), collect_items.end(), std::back_inserter(new_collect_items));
-        game->wid_collect_create(new_collect_items);
+        std::list<Thingp> empty_collect_items;
+        game->wid_collect_create(empty_collect_items);
         return;
     }
 
@@ -175,6 +182,35 @@ static uint8_t wid_collect_mouse_up (Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
 }
 
+static void wid_collect_mouse_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    int slot = wid_get_int_context(w);
+
+    LOG("Describe collect slot %d", slot);
+_
+    if (slot >= (int)collect_items.size()) {
+        wid_collect_destroy();
+        return;
+    }
+
+    auto level = game->level;
+    if (!level) {
+        return;
+    }
+
+    auto player = level->player;
+    if (!player) {
+        return;
+    }
+
+    auto t = collect_items[slot];
+    if (t) {
+        wid_thing_info_fini();
+        game->wid_thing_info_create(t);
+    }
+}
+
 void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy */)
 {_
     BOTCON("You lucky thing. Choose an item to collect.");
@@ -194,38 +230,56 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
     //
     wid_ignore_events_briefly();
 
-    collect_items.clear();
-    std::map<Tpp, bool> found;
-    for (auto t : items) {
-        if (!t) {
+    if (items.size()) {
+        for (auto t : items) {
+            if (t) {
+                player->log("Collect items: %s", t->to_string().c_str());
+            } else {
+                player->log("Collect items: <empty slot>");
+            }
+        }
+
+        collect_items.clear();
+        std::map<Tpp, bool> found;
+        for (auto t : items) {
+            if (!t) {
+                collect_items.push_back(t);
+                continue;
+            }
+
+            auto tp = t->tp();
+            if (found.find(tp) != found.end()) {
+                continue;
+            }
+            if (!t->is_collectable()) {
+                continue;
+            }
+            found[tp] = true;
             collect_items.push_back(t);
-            continue;
-        }
 
-        auto tp = t->tp();
-        if (found.find(tp) != found.end()) {
-            continue;
-        }
-        if (!t->is_collectable()) {
-            continue;
-        }
-        found[tp] = true;
-        collect_items.push_back(t);
-
-        if (t->monstp) {
-            for (auto id : t->monstp->carrying) {
-                auto t = thing_find(id);
-                if (t) {
-                    auto tp = t->tp();
-                    if (found.find(tp) != found.end()) {
-                        continue;
+            if (t->monstp) {
+                for (auto id : t->monstp->carrying) {
+                    auto t = thing_find(id);
+                    if (t) {
+                        auto tp = t->tp();
+                        if (found.find(tp) != found.end()) {
+                            continue;
+                        }
+                        if (!t->is_collectable()) {
+                            continue;
+                        }
+                        found[tp] = true;
+                        collect_items.push_back(t);
                     }
-                    if (!t->is_collectable()) {
-                        continue;
-                    }
-                    found[tp] = true;
-                    collect_items.push_back(t);
                 }
+            }
+        }
+
+        for (auto t : collect_items) {
+            if (t) {
+                player->log("Final collect items: %s", t->to_string().c_str());
+            } else {
+                player->log("Final collect items: <empty slot>");
             }
         }
     }
@@ -258,8 +312,9 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
 
         {
             auto wid_icon = wid_new_square_button(w, "item icon");
-            wid_set_int_context(w, slot);
-            wid_set_on_mouse_up(w, wid_collect_mouse_up);
+            wid_set_int_context(wid_icon, slot);
+            wid_set_on_mouse_up(wid_icon, wid_collect_mouse_up);
+            wid_set_on_mouse_over_b(wid_icon, wid_collect_mouse_over_b);
 
             point tl = make_point(0, 0);
             point br = make_point(2, 2);
@@ -284,8 +339,9 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
 
         {
             auto wid_item = wid_new_square_button(w, "item name");
-            wid_set_int_context(w, slot);
-            wid_set_on_mouse_up(w, wid_collect_mouse_up);
+            wid_set_int_context(wid_item, slot);
+            wid_set_on_mouse_up(wid_item, wid_collect_mouse_up);
+            wid_set_on_mouse_over_b(wid_item, wid_collect_mouse_over_b);
 
             point tl = make_point(3, 0);
             point br = make_point(width - 3, 2);

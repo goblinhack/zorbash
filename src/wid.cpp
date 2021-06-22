@@ -6090,13 +6090,6 @@ void wid_tick_all (void)
         }
     }
 
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        if (!game->bag_primary) {
-            LOG("Handle end of collecting items");
-            game->change_state(Game::STATE_NORMAL);
-        }
-    }
-
     if (game->request_destroy_bags) {
         LOG("Handle destroy bags request");
         game->request_destroy_bags = false;
