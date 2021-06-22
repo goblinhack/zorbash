@@ -116,13 +116,28 @@ bool Thing::carry (Thingp it)
         wid_inventory_init();
     }
 
+    //
+    // Auto carry items in the bag? like keys?
+    //
     if (it->is_bag_item_container()) {
-        for (const auto& item : it->monstp->carrying) {
+        auto carrying_copy = it->monstp->carrying;
+        for (const auto& item : carrying_copy) {
+            auto t = level->thing_find(item.id);
+            if (t) {
+                log("Carrying %s that contains: %s",
+                    it->to_string().c_str(),
+                    t->to_string().c_str());
+            }
+        }
+
+        for (const auto& item : carrying_copy) {
             auto t = level->thing_find(item.id);
             if (t) {
                 if (!t->is_bag_item()) {
                     if (!carry(t)) {
-                        err("Could not auto carry non item");
+                        err("Could not auto carry %s's non item: %s",
+                            it->to_string().c_str(),
+                            t->to_string().c_str());
                     }
                 }
             }
