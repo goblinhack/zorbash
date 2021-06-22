@@ -289,9 +289,6 @@ void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
         if (unlikely(g_opt_debug1)) {
             t->log("Remake thing info");
         }
-    } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        t->err("Ignore, already collecting items");
-        return;
     } else if (game->state == Game::STATE_MOVING_ITEMS) {
         if (unlikely(g_opt_debug1)) {
             t->log("Ignore, already moving items");

@@ -99,6 +99,14 @@ bool Thing::carry (Thingp it)
             dbg("No; no space in inventory");
             return false;
         }
+
+        if (it->is_collected_as_gold()) {
+            return true;
+        }
+
+        if (it->is_collect_as_keys()) {
+            return true;
+        }
     }
 
     monstp->carrying.push_front(it->id);

@@ -20,8 +20,6 @@ void Level::cursor_find_on_visible_things (
                         const int16_t minx, const int16_t miny,
                         const int16_t maxx, const int16_t maxy)
 {_
-    dbg3("Cursor find on visible things");
-_
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS) ||
@@ -33,6 +31,8 @@ _
         return;
     }
 
+    dbg3("Cursor find on visible things");
+_
     if ((game->minimap_over.x > 0) && (game->minimap_over.y > 0)) {
         //
         // Don't move onto lava unless double click
