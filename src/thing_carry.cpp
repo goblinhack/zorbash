@@ -78,7 +78,13 @@ bool Thing::carry (Thingp it)
             dbg("No; same owner");
             return false;
         }
-        existing_owner->drop(it);
+
+        //
+        // Can't use drop as that can cause things to interact with
+        // the level. If this is moving between bags, this is safer.
+        //
+        dbg("Drop from existing owner");
+        existing_owner->drop_into_ether(it);
     }
 
     for (const auto& item : monstp->carrying) {

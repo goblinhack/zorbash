@@ -295,9 +295,9 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
             if (t) {
                 if (slot < 9) {
                     wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + 
-                                t->text_name() + ", " + t->text_description());
+                                 t->text_description());
                 } else {
-                    wid_set_text(wid_item, t->text_name() + ", " + t->text_description());
+                    wid_set_text(wid_item, t->text_description());
                 }
             }
 
