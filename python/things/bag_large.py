@@ -4,8 +4,8 @@ import tp
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_capacity_height(8)
-    mytp.set_capacity_width(8)
+    mytp.set_capacity_height(12)
+    mytp.set_capacity_width(12)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(False)
@@ -27,8 +27,8 @@ def tp_init(name, text_name):
     mytp.set_is_item(True)
     mytp.set_is_moveable(True)
     mytp.set_is_treasure_class_a(True)
-    mytp.set_item_height(4)
-    mytp.set_item_width(4)
+    mytp.set_item_height(8)
+    mytp.set_item_width(8)
     mytp.set_long_text_description("A large leathery brown bag.")
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
