@@ -84,7 +84,6 @@ static uint8_t wid_enchant_key_up (Widp w, const struct SDL_Keysym *key)
                     case '9':
                         wid_enchant_slot(c - '1');
                         return true;
-                    case 'b':
                     case SDLK_ESCAPE: {_
                         CON("PLAYER: Enchant cancelled");
                         wid_enchant_destroy();

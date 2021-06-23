@@ -151,7 +151,6 @@ static uint8_t wid_collect_key_up (Widp w, const struct SDL_Keysym *key)
                     case '9':
                         wid_collect_slot(c - '1');
                         return true;
-                    case 'b':
                     case SDLK_ESCAPE: {_
                         CON("PLAYER: collect cancelled");
                         wid_collect_destroy();
