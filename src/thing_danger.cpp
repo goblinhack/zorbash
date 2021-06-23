@@ -111,6 +111,17 @@ int Thing::get_danger_initial_level (void)
                              get_damage_bite_dice().max_roll());
 
     //
+    // Low on health, reduce the level
+    //
+    if (get_health() < get_health_max() / 5) {
+        danger_level /= 2;
+    }
+
+    if (get_health() < get_health_max() / 10) {
+        danger_level /= 2;
+    }
+
+    //
     // Don't include crush damage as it is non typical
     //
 
@@ -166,6 +177,17 @@ int Thing::get_danger_current_level (void)
 
     danger_level += std::max(get_damage_melee_dice().max_roll(),
                              get_damage_bite_dice().max_roll());
+
+    //
+    // Low on health, reduce the level
+    //
+    if (get_health() < get_health_max() / 5) {
+        danger_level /= 2;
+    }
+
+    if (get_health() < get_health_max() / 10) {
+        danger_level /= 2;
+    }
 
     //
     // Don't include crush damage as it is non typical
