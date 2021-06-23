@@ -57,7 +57,11 @@ _
             player->incr_score(value * 10);
             player->incr_gold(value);
 
-            TOPCON("You collect %d gold.", value);
+            if (value > 1) {
+                TOPCON("You collect %d gold coins.", value);
+            } else {
+                TOPCON("You collect a lone piece of gold.");
+            }
         }
 
         for (int c = 0; c < particle_count; c++) {
