@@ -25,10 +25,12 @@
 #include "my_game.h"
 #include "slre.h"
 
-static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-static void wid_bag_item_mouse_over_e(Widp w);
-static void wid_bag_tick(Widp w);
 static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button);
+static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely);
+static void wid_bag_item_mouse_over_e(Widp w);
+static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key);
+static void wid_bag_tick(Widp w);
 
 static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 {_
@@ -74,6 +76,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 
         wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
+        wid_set_on_key_up(w, wid_bag_item_key_down);
         wid_set_thing_id_context(w, item.id);
         wid_set_thing_id2_context(w, bag->id);
         wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
@@ -294,7 +297,8 @@ _
     return true;
 }
 
-static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, 
+                                       int32_t wheelx, int32_t wheely)
 {
     if (game->in_transit_item) {
         return;
@@ -320,6 +324,60 @@ static void wid_bag_item_mouse_over_e (Widp w)
     }
 
     BOTCON(" ");
+}
+
+static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
+{_
+    LOG("Bag item key down");
+
+    if (sdl_shift_held) {
+        if (key->scancode == (SDL_Scancode)game->config.key_console) {
+            return false;
+        }
+    }
+
+    auto id = wid_get_thing_id_context(w);
+    auto t = game->thing_find(id);
+    if (!t) {
+        LOG("Cannot find thing");
+        return false;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        if (game->level->player->drop(t)) {
+            game->tick_begin("drop");
+        }
+        return true;
+    }
+
+    switch (key->mod) {
+        case KMOD_LCTRL:
+        case KMOD_RCTRL:
+        default:
+        switch (key->sym) {
+            default: {
+                auto c = wid_event_to_char(key);
+                switch (c) {
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        // wid_collect_slot(c - '1');
+                        return true;
+                    case SDLK_ESCAPE: {_
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    return false;
 }
 
 static void wid_bag_tick (Widp w)
