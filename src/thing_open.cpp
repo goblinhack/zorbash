@@ -54,6 +54,7 @@ bool Thing::open (Thingp it)
     if (unlikely(g_opt_debug1)) {
         it->log("Open");
     }
+
     it->level_pop();
     it->is_open = true;
     it->level_push();

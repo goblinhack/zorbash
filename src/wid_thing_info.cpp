@@ -382,11 +382,7 @@ _
                                    t->capacity_height() + 1);
 
             if (tp->is_bag()) {
-                if (tp->capacity_width() * tp->capacity_height() < 200) {
-                    bag_secondary = new WidBag(t, tl, br, "Velvet bag");
-                } else {
-                    bag_secondary = new WidBag(t, tl, br, "Big bag");
-                }
+                bag_secondary = new WidBag(t, tl, br, "Bag");
             } else {
                 bag_secondary = new WidBag(t, tl, br, "Chest");
             }
@@ -899,19 +895,46 @@ void Game::wid_thing_info_add_carry_info (WidPopup *w, Thingp t)
 
     auto items = t->monstp->carrying.size();
 
-    if (t->is_bag()) {
-        if (items > 3) {
-            w->log(" ");
-            w->log("Looks to be bulging with presents.", true);
-        } else if (items > 1) {
-            w->log(" ");
-            w->log("Looks like it contains a few things.", true);
-        } else if (items > 0) {
-            w->log(" ");
-            w->log("Looks like it contains something.", true);
-        } else {
-            w->log(" ");
-            w->log("Looks like is is empty.", true);
+    if (t->is_open) {
+        w->log(" ");
+        w->log("It's open.", true);
+
+        //
+        // Can see inside bags or chests, so log.
+        //
+        if (t->is_bag_item_container()) {
+            if (items > 3) {
+                w->log(" ");
+                w->log("Looks to be full of presents.", true);
+            } else if (items > 1) {
+                w->log(" ");
+                w->log("Looks like it contains a few things.", true);
+            } else if (items > 0) {
+                w->log(" ");
+                w->log("Looks like it contains something.", true);
+            } else {
+                w->log(" ");
+                w->log("Is empty.", true);
+            }
+        }
+    } else {
+        //
+        // Cannot see inside a chest, so no log
+        //
+        if (t->is_bag()) {
+            if (items > 3) {
+                w->log(" ");
+                w->log("Looks to be bulging with presents.", true);
+            } else if (items > 1) {
+                w->log(" ");
+                w->log("Looks like it contains a few things.", true);
+            } else if (items > 0) {
+                w->log(" ");
+                w->log("Looks like it contains something.", true);
+            } else {
+                w->log(" ");
+                w->log("Looks like it is empty.", true);
+            }
         }
     }
 }
