@@ -113,8 +113,14 @@ bool Thing::carry (Thingp it)
     it->set_owner(this);
     it->hide();
 
-    if (is_player()) {
-        TOPCON("You carry %s.", it->text_the().c_str());
+    if (game->state == Game::STATE_MOVING_ITEMS) {
+        //
+        // Avoid dup message
+        //
+    } else {
+        if (is_player()) {
+            TOPCON("You carry %s.", it->text_the().c_str());
+        }
     }
 
     //
@@ -200,6 +206,11 @@ std::list<Thingp> Thing::anything_to_carry (void)
         items.push_back(t);
 
         if (t->is_bag_item_container()) {
+            //
+            // Open chests etc...
+            //
+            open(t);
+
             for (const auto& item : t->monstp->carrying) {
                 auto t = level->thing_find(item.id);
                 if (t) {
