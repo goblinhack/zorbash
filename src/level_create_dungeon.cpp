@@ -1052,6 +1052,25 @@ void Level::place_floor_deco (Dungeonp d)
                 continue;
             }
 
+            if (d->is_food(x, y)                 ||
+                d->is_blood(x, y)                ||
+                d->is_door(x, y)                 ||
+                d->is_ascend_dungeon(x, y)       ||
+                d->is_descend_dungeon(x, y)      ||
+                d->is_minion_generator_any(x, y) ||
+                d->is_key(x, y)                  ||
+                d->is_potion(x, y)               ||
+                d->is_barrel(x, y)               ||
+                d->is_wand(x, y)                 ||
+                d->is_secret_door(x, y)          ||
+                d->is_treasure(x, y)             ||
+                d->is_treasure_class_a(x, y)     ||
+                d->is_treasure_class_b(x, y)     ||
+                d->is_treasure_class_c(x, y)     ||
+                d->is_monst_any(x, y)) {
+                continue;
+            }
+
             //
             // Reset the seed for each cell to increase the chances
             // of repeatability if other small things change in the
@@ -1093,6 +1112,7 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
                 d->is_minion_generator_any(x, y) ||
                 d->is_key(x, y)                  ||
                 d->is_potion(x, y)               ||
+                d->is_barrel(x, y)               ||
                 d->is_wand(x, y)                 ||
                 d->is_secret_door(x, y)          ||
                 d->is_treasure(x, y)             ||
