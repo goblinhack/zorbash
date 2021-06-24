@@ -13,7 +13,6 @@ void BOTCON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void BOTCON(const wchar_t *fmt, ...);
 void CON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CON(const wchar_t *fmt, ...);
-void DBG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void GAME_UI_MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void LOG_MISSING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
@@ -37,5 +36,11 @@ void segv_handler(int sig);
 #define dbg3 if (unlikely(g_opt_debug3)) log
 #define dbg4 if (unlikely(g_opt_debug4)) log
 #define dbg5 if (unlikely(g_opt_debug5)) log
+
+#define DBG if (unlikely(g_opt_debug1)) LOG
+#define DBG2 if (unlikely(g_opt_debug2)) LOG
+#define DBG3 if (unlikely(g_opt_debug3)) LOG
+#define DBG4 if (unlikely(g_opt_debug4)) LOG
+#define DBG5 if (unlikely(g_opt_debug5)) LOG
 
 #endif

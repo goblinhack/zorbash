@@ -2983,6 +2983,25 @@ std::list<Widp> wid_find_all (Widp w, const std::string& name)
     return out;
 }
 
+static void wid_find_all_containing_ (Widp w, const std::string& name, std::list<Widp> &out)
+{_
+    if (strstr(w->name.c_str(), name.c_str())) {
+        out.push_back(w);
+    }
+
+    for (auto& iter : w->children_display_sorted) {
+        auto child = iter.second;
+        wid_find_all_containing_(child, name, out);
+    }
+}
+
+std::list<Widp> wid_find_all_containing (Widp w, const std::string& name)
+{
+    std::list<Widp> out;
+    wid_find_all_containing_(w, name, out);
+    return out;
+}
+
 Widp wid_find (const std::string& name)
 {_
     for (auto& iter : wid_top_level) {
@@ -5360,6 +5379,13 @@ void wid_key_down (const struct SDL_Keysym *key, int32_t x, int32_t y)
 {_
     Widp w {};
 
+    pixel_to_ascii(&x, &y);
+    if (!ascii_ok(x, y)) {
+        return;
+    }
+    ascii_mouse_x = x;
+    ascii_mouse_y = y;
+
 #ifdef ENABLE_DEBUG_GFX_GL_BLEND
     if (wid_event_to_char(key) == '+') {
         CON("ENABLE_DEBUG_GFX_GL_BLEND +");
@@ -5456,6 +5482,13 @@ try_parent:
 void wid_key_up (const struct SDL_Keysym *key, int32_t x, int32_t y)
 {_
     Widp w {};
+
+    pixel_to_ascii(&x, &y);
+    if (!ascii_ok(x, y)) {
+        return;
+    }
+    ascii_mouse_x = x;
+    ascii_mouse_y = y;
 
     if (wid_focus &&
         !wid_is_hidden(wid_focus) &&

@@ -35,7 +35,8 @@ static void wid_bag_tick(Widp w);
 static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 {_
     bag->log("Empty bag");
-    for (auto item : wid_find_all(wid_bag_container, "wid_bag item")) {
+    for (auto item : wid_find_all_containing(wid_bag_container, "wid_bag item")) {
+        bag->log("+ destroy item %s", wid_get_name(item).c_str());
         wid_destroy_nodelay(&item);
     }
 
@@ -61,7 +62,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 
         auto br = tl + point(t->item_width() - 1, t->item_height() - 1);
 
-        auto w = wid_new_square_button(wid_bag_container, "wid_bag item");
+        auto w = wid_new_square_button(wid_bag_container, "wid_bag item" + t->to_string());
         wid_set_pos(w, tl, br);
         wid_set_style(w, UI_WID_STYLE_DARK);
 
@@ -76,7 +77,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 
         wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
-        wid_set_on_key_up(w, wid_bag_item_key_down);
+        wid_set_on_key_down(w, wid_bag_item_key_down);
         wid_set_thing_id_context(w, item.id);
         wid_set_thing_id2_context(w, bag->id);
         wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
@@ -205,6 +206,11 @@ _
         t->log("In transit item place failed");
     }
 
+    //
+    // Moving things around your bag has a cost...
+    //
+    game->tick_begin("moved an in transit item");
+
     return true;
 }
 
@@ -229,12 +235,17 @@ _
     wid_destroy(&game->in_transit_item);
     game->request_remake_inventory = true;
 
+    //
+    // Moving things around your bag has a cost...
+    //
+    game->tick_begin("dropped an in transit item");
+
     return true;
 }
 
 static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Collect in transit item");
+    LOG("Mouse down, pickup up an item and make it in transit");
 _
     if (game->in_transit_item) {
         return false;
@@ -255,7 +266,7 @@ _
 
     auto old_owner = t->get_immediate_owner();
     if (!old_owner) {
-        TOPCON("%s has no owner so cannot move it!", t->text_The().c_str());
+        ERR("%s has no owner so cannot move it!", t->text_The().c_str());
         return true;
     }
 
@@ -290,6 +301,8 @@ _
 
     wid_set_moveable(game->in_transit_item, true);
     wid_update(game->in_transit_item);
+
+    LOG("Remake the bag without the transit item");
     wid_bag_add_items(wid_bag_container, bag);
 
     wid_update(wid_bag_container);
@@ -368,9 +381,12 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
                     case '8':
                     case '9':
                         // wid_collect_slot(c - '1');
+                        LOG("Bag item key down handled");
                         return true;
                     case SDLK_ESCAPE: {_
-                        return false;
+                        LOG("Escape pressed, clear moving items state");
+                        game->change_state(Game::STATE_NORMAL);
+                        return true;
                     }
                 }
             }

@@ -337,7 +337,10 @@ _
     if (unlikely(g_opt_debug1)) {
         t->log("Yes; create window");
     }
-    wid_thing_info_push_popup(t);
+
+    if (!game->in_transit_item) {
+        wid_thing_info_push_popup(t);
+    }
 
     //
     // Prefer to show the thing we are moving

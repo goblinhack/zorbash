@@ -546,9 +546,9 @@ static void sdl_event (SDL_Event * event)
     case SDL_MOUSEMOTION:
         mouse_down = sdl_get_mouse();
 
-        DBG("SDL: Mouse: moved to %d,%d (%d,%d) state %d",
-            event->motion.x, event->motion.y,
-            event->motion.xrel, event->motion.yrel, mouse_down);
+        DBG4("SDL: Mouse: moved to %d,%d (%d,%d) state %d",
+             event->motion.x, event->motion.y,
+             event->motion.xrel, event->motion.yrel, mouse_down);
 
         wid_mouse_visible = 1;
         mouse_tick++;
