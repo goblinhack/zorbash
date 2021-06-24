@@ -39,6 +39,7 @@ static void wid_skills_slot (int slot)
     if (player) {
         auto tpp = skills[slot];
         player->add_skill(tpp);
+        game->tick_begin("learned a skill");
     }
 
     wid_skill_choose_destroy();
