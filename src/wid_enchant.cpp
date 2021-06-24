@@ -39,6 +39,7 @@ static void wid_enchant_slot (int slot)
     if (player) {
         auto t = enchant_items[slot];
         player->enchant(t);
+        game->tick_begin("enchant an item");
     }
 
     wid_enchant_destroy();
