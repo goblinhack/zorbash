@@ -21,6 +21,7 @@
 #include "my_array_bounds_check.h"
 
 static std::list<WidBag *> bags;
+static bool bag_debug;
 
 bool Thing::bag_contains (Thingp item)
 {
@@ -49,10 +50,10 @@ bool Thing::bag_contains (Thingp item)
 //
 bool Thing::bag_add (Thingp item)
 {_
-    dbg("Bag: add %s", item->to_string().c_str());
+    dbg3("Bag: add %s", item->to_string().c_str());
 
     if (!item->is_bag_item()) {
-        dbg("Bag: add %s; no, is not an item", item->to_string().c_str());
+        dbg3("Bag: add %s; no, is not an item", item->to_string().c_str());
         return false;
     }
 
@@ -113,7 +114,9 @@ bool Thing::bag_compress (void)
     auto bh = capacity_height();
     auto did_something = false;
 
-    dbg("Bag: try to compress");
+    dbg3("Bag: try to compress");
+
+    bag_debug = false;
 
     for (auto x = 0; x < bw; x++) {
         for (auto y = 0; y < bh; y++) {
@@ -127,12 +130,6 @@ bool Thing::bag_compress (void)
                 continue;
             }
 
-#if 0
-            bool bottom = 
-                    (t->monstp->bag_position.y + t->item_height() < 
-                     bh - t->item_height());
-#endif
-
 	    if (bag_remove_at(t, t->monstp->bag_position)) {
                 if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
                     if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
@@ -140,23 +137,7 @@ bool Thing::bag_compress (void)
                     } else {
                         bag_place_at(t, t->monstp->bag_position);
                     }
-                }
-#if 0
-                else if (bottom && bag_can_place_at(t, t->monstp->bag_position + point(1, 0))) {
-                    if (bag_place_at(t, t->monstp->bag_position + point(1, 0))) {
-                        // did_something = true;
-                    } else {
-                        bag_place_at(t, t->monstp->bag_position);
-                    }
-                } else if (bottom && bag_can_place_at(t, t->monstp->bag_position + point(-1, 0))) {
-                    if (bag_place_at(t, t->monstp->bag_position + point(-1, 0))) {
-                        // did_something = true;
-                    } else {
-                        bag_place_at(t, t->monstp->bag_position);
-                    }
-                } 
-#endif
-                else {
+                } else {
                     bag_place_at(t, t->monstp->bag_position);
                 }
 	    }
@@ -167,27 +148,37 @@ bool Thing::bag_compress (void)
         if (!game->request_remake_inventory) {
             game->request_remake_inventory |= did_something;
             if (game->request_remake_inventory) {
-                dbg("Bag: request to remake inventory");
+                dbg3("Bag: request to remake inventory");
             }
         }
     }
 
     if (did_something) {
-        dbg("Bag: was compressed");
+        dbg3("Bag: was compressed");
+    } else {
+        dbg3("Bag: could not be compressed");
     }
+
+    bag_debug = true;
+
     return did_something;
 }
 
 bool Thing::bag_remove_at (Thingp item, point pos)
 {
-    dbg("Bag: remove %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
-
     auto bag = get_bag();
     auto w = item->item_width();
     auto h = item->item_height();
+    bool logged = false;
 
     for (auto x = pos.x; x < pos.x + w; x++) {
 	for (auto y = pos.y; y < pos.y + h; y++) {
+            if (!logged && bag_debug) {
+                if (get(bag, x, y) == item->id) {
+                    logged = true;
+                    dbg3("Bag: remove %s at %d,%d", item->to_string().c_str(), x, y);
+                }
+            }
 	    set(bag, x, y, NoThingId);
 	}
     }
@@ -207,51 +198,24 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
     auto w = item->item_width();
     auto h = item->item_height();
 
-#if 0
-    {
-        dbg("Bag: pre bag_can_place_at:");
-_
-        for (auto x = 0; x < bw; x++) {
-            for (auto y = 0; y < bh; y++) {
-                auto id = get(bag, x, y);
-                if (id != NoThingId) {
-                    auto t = game->thing_find(id);
-                    if (!t) {
-                        continue;
-                    }
-                    dbg("- %d,%d has %s", x, y, t->to_string().c_str());
-                }
-            }
-        }
-    }
-#endif
-
     if (pos.x < 0) {
-#if 0
-        dbg("Bag: cannot place %s at %d,%d (x<0)",
+        dbg3("Bag: cannot place %s at %d,%d (x<0)",
             item->to_string().c_str(), pos.x, pos.y);
-#endif
         return false;
     }
     if (pos.y < 0) {
-#if 0
-        dbg("Bag: cannot place %s at %d,%d (y<0)",
+        dbg3("Bag: cannot place %s at %d,%d (y<0)",
             item->to_string().c_str(), pos.x, pos.y);
-#endif
         return false;
     }
     if (pos.x + w - 1 >= bw) {
-#if 0
-        dbg("Bag: cannot place %s at %d,%d (x>width)",
+        dbg3("Bag: cannot place %s at %d,%d (x>width)",
             item->to_string().c_str(), pos.x, pos.y);
-#endif
         return false;
     }
     if (pos.y + h - 1 >= bh) {
-#if 0
-        dbg("Bag: cannot place %s at %d,%d (y>height)",
+        dbg3("Bag: cannot place %s at %d,%d (y>height)",
             item->to_string().c_str(), pos.x, pos.y);
-#endif
         return false;
     }
 
@@ -264,15 +228,6 @@ _
 	    if (id == item->id) {
 		continue;
 	    }
-#if 0
-	    auto o = game->thing_find(id);
-            if (!o) {
-                continue;
-            }
-            dbg("Bag: cannot place %s at %d,%d item %s is in the way",
-                item->to_string().c_str(), pos.x, pos.y,
-                o->to_string().c_str());
-#endif
 	    return false;
 	}
     }
@@ -280,7 +235,9 @@ _
     //
     // Do not set pos here
     //
-    dbg("Bag: can place %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
+    if (bag_debug) {
+        dbg3("Bag: can place %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
+    }
     return true;
 }
 
@@ -316,7 +273,9 @@ bool Thing::bag_place_at (Thingp item, point pos)
 
 bool Thing::bag_remove (Thingp item)
 {
-    dbg("Bag: remove %s", item->to_string().c_str());
+    if (bag_debug) {
+        dbg3("Bag: remove %s", item->to_string().c_str());
+    }
 
     bool found = false;
     auto bag = get_bag();
@@ -331,23 +290,6 @@ bool Thing::bag_remove (Thingp item)
 	    }
 	}
     }
-
-#if 0
-    dbg("Bag: post bag_remove:");
-_
-    for (auto x = 0; x < bw; x++) {
-        for (auto y = 0; y < bh; y++) {
-            auto id = get(bag, x, y);
-	    if (id != NoThingId) {
-                auto t = game->thing_find(id);
-                if (!t) {
-                    continue;
-                }
-                dbg("- %d,%d has %s", x, y, t->to_string().c_str());
-	    }
-	}
-    }
-#endif
 
     return found;
 }

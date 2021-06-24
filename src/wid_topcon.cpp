@@ -135,14 +135,6 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
 
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
         //
-        // Drop whatever we are moving between bags
-        //
-        if (game->state == Game::STATE_COLLECTING_ITEMS) {
-            game->change_state(Game::STATE_NORMAL);
-            return true;
-        }
-
-        //
         // If we are moving an item, prefer to drop that.
         // Else drop whatever we have highlighted in the inventory
         //

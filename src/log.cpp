@@ -473,18 +473,6 @@ void DYING (const char *fmt, ...)
     va_end(args);
 }
 
-void DBG (const char *fmt, ...)
-{
-    if (!g_opt_debug2) {
-        return;
-    }
-    va_list args;
-
-    va_start(args, fmt);
-    log_(fmt, args);
-    va_end(args);
-}
-
 void myerr (const char *fmt, ...)
 {
     static bool nested_error;
