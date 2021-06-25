@@ -570,7 +570,7 @@ static bool wid_rightbar_create (void)
     if (game->request_remake_inventory) {
         if (game->state == Game::STATE_MOVING_ITEMS) {
             auto slot = game->inventory_highlight_slot;
-            LOG("Inventory: remaking inventory for slot %d", slot);
+            LOG("Inventory: remaking inventory for highlight slot %d", slot);
 
             auto t = level->inventory_get(slot);
             if (t) {

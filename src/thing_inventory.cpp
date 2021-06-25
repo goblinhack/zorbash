@@ -696,6 +696,67 @@ _
     return true;
 }
 
+bool Level::inventory_assign (const uint32_t slot, Thingp item)
+{_
+    LOG("Inventory: assign inventory slot %d", slot);
+_
+    if (!player) {
+        return false;
+    }
+
+    if (slot >= player->monstp->inventory_id.size()) {
+        player->monstp->inventory_id.resize(slot + 1);
+    }
+
+    LOG("Inventory: request to remake inventory");
+    game->request_remake_inventory = true;
+
+    auto inventory_items = player->monstp->inventory_id.size();
+    for (auto i = 0U; i < inventory_items; i++) {
+        auto tp_id = player->monstp->inventory_id[i];
+        if (!tp_id) {
+            continue;
+        }
+        auto tpp = tp_find(tp_id);
+        if (!tpp) {
+            continue;
+        }
+
+        if (item->tp() == tpp) {
+            player->monstp->inventory_id[i] = 0;
+            if (i == game->inventory_highlight_slot) {
+                game->inventory_highlight_slot = slot;
+            }
+        }
+    }
+
+    player->monstp->inventory_id[slot] = item->tp_id;
+    game->request_remake_inventory = true;
+
+    return true;
+}
+
+int Level::inventory_get_slot (Thingp item)
+{_
+    auto inventory_items = player->monstp->inventory_id.size();
+    for (auto i = 0U; i < inventory_items; i++) {
+        auto tp_id = player->monstp->inventory_id[i];
+        if (!tp_id) {
+            continue;
+        }
+        auto tpp = tp_find(tp_id);
+        if (!tpp) {
+            continue;
+        }
+
+        if (item->tp() == tpp) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 Thingp Level::inventory_describe (const uint32_t slot)
 {_
     LOG("Inventory: describe slot %d", slot);

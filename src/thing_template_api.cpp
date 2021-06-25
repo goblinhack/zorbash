@@ -784,4 +784,4 @@ void Tp::set_text_title(const std::string &v)                        { _text_tit
 void Tp::set_text_unused(const std::string &v)                       { _text_unused = v; }
 void Tp::set_weapon_carry_anim(const std::string &v)                 { _weapon_carry_anim = v; }
 
-int Tp::move_speed_ms(void) const                                              { return THING_MOVE_SPEED_MS; }
+int Tp::move_speed_ms(void) const                                    { return THING_MOVE_SPEED_MS; }

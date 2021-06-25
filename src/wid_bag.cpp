@@ -82,6 +82,13 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         wid_set_thing_id2_context(w, bag->id);
         wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
 
+        auto slot = game->level->inventory_get_slot(t);
+        if (slot != -1) {
+            wid_set_text(w, std::to_string(slot + 1));
+            wid_set_text_lhs(w, true);
+            wid_set_text_top(w, true);
+        }
+
         auto tpp = t->tp();
         auto tiles = &tpp->tiles;
 
@@ -188,7 +195,8 @@ _
                (int) game->bag_primary->bag->monstp->carrying.size());
 
             if (game->bag_primary->bag->monstp->carrying.empty()) {
-                game->bag_primary->bag->log("Request cleanup, temporary bag_primary is empty");
+                game->bag_primary->bag->log(
+                        "Request cleanup, temporary bag_primary is empty");
                 game->request_destroy_bags = true;
             }
 
@@ -197,7 +205,8 @@ _
                     (int) game->bag_secondary->bag->monstp->carrying.size());
 
                 if (game->bag_secondary->bag->monstp->carrying.empty()) {
-                    game->bag_secondary->bag->log("Request cleanup, temporary bag_secondary is empty");
+                    game->bag_secondary->bag->log(
+                            "Request cleanup, temporary bag_secondary is empty");
                     game->request_destroy_bags = true;
                 }
             }
@@ -367,30 +376,60 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
-        switch (key->sym) {
-            default: {
-                auto c = wid_event_to_char(key);
-                switch (c) {
-                    case '1':
-                    case '2':
-                    case '3':
-                    case '4':
-                    case '5':
-                    case '6':
-                    case '7':
-                    case '8':
-                    case '9':
-                        // wid_collect_slot(c - '1');
-                        LOG("Bag item key down handled");
-                        return true;
-                    case SDLK_ESCAPE: {_
-                        LOG("Escape pressed, clear moving items state");
-                        game->change_state(Game::STATE_NORMAL);
-                        return true;
+            if (key->scancode == (SDL_Scancode)game->config.key_action0) {
+                game->level->inventory_assign(9, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action1) {
+                game->level->inventory_assign(0, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action2) {
+                game->level->inventory_assign(1, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action3) {
+                game->level->inventory_assign(2, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action4) {
+                game->level->inventory_assign(3, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action5) {
+                game->level->inventory_assign(4, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action6) {
+                game->level->inventory_assign(5, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action7) {
+                game->level->inventory_assign(6, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action8) {
+                game->level->inventory_assign(7, t);
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+                game->level->inventory_assign(8, t);
+                return true;
+            }
+
+            switch (key->sym) {
+                default: {
+                    auto c = wid_event_to_char(key);
+                    switch (c) {
+                        case SDLK_ESCAPE: {_
+                            LOG("Escape pressed, clear moving items state");
+                            game->change_state(Game::STATE_NORMAL);
+                            return true;
+                        }
                     }
                 }
             }
-        }
+            break;
     }
 
     return false;

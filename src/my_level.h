@@ -419,6 +419,8 @@ public:
     bool create_sewer_pipes(point3d at);
     bool create_sewer_pools(void);
     bool inventory_chosen(const uint32_t slot);
+    bool inventory_assign(const uint32_t slot, Thingp);
+    int inventory_get_slot(Thingp item);
     bool inventory_over(const uint32_t slot);
     bool skillbox_chosen(const uint32_t slot);
     bool skillbox_over(const uint32_t slot);
