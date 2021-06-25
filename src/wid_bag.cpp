@@ -82,13 +82,6 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         wid_set_thing_id2_context(w, bag->id);
         wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
 
-        auto slot = game->level->inventory_get_slot(t);
-        if (slot != -1) {
-            wid_set_text(w, std::to_string(slot + 1));
-            wid_set_text_lhs(w, true);
-            wid_set_text_top(w, true);
-        }
-
         auto tpp = t->tp();
         auto tiles = &tpp->tiles;
 
@@ -98,6 +91,26 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         } else {
             bag->err("+ no tile item %s at %d,%d", t->to_string().c_str(),
                      t->monstp->bag_position.x, t->monstp->bag_position.y);
+        }
+
+        //
+        // Show a small visible button key
+        //
+        auto slot = game->level->inventory_get_slot(t);
+        if (slot != -1) {
+            auto w = wid_new_square_button(wid_bag_container, 
+                                           "wid_bag button" + t->to_string());
+            wid_set_pos(w, tl, tl);
+            wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
+            wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
+            wid_set_on_key_down(w, wid_bag_item_key_down);
+            wid_set_thing_id_context(w, item.id);
+            wid_set_thing_id2_context(w, bag->id);
+            wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
+
+            wid_set_fg_tilename(w, "key_" + std::to_string(slot + 1));
+            wid_set_text_lhs(w, true);
+            wid_set_text_top(w, true);
         }
     }
 
