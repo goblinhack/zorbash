@@ -193,6 +193,7 @@ _
         wid_bag_add_items(wid_bag_container, bag);
     } else {
         t->log("In transit item place failed");
+        TOPCON("Could not fit that item. You can always drop the item if needed.");
     }
 
     //

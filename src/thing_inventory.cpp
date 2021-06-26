@@ -34,7 +34,7 @@ _
         std::string name = "gold and keys";
         auto w = wid_find(name);
         if (!w) {
-            err("Could not find wid %s", name.c_str());
+            log("Could not find wid %s", name.c_str());
             return;
         }
 
@@ -87,7 +87,7 @@ _
         std::string name = "gold and keys";
         auto w = wid_find(name);
         if (!w) {
-            err("Could not find wid %s", name.c_str());
+            log("Could not find wid %s", name.c_str());
             return;
         }
 
@@ -118,7 +118,7 @@ _
         std::string name = "inventory slot" + std::to_string(slot);
         auto w = wid_find(name);
         if (!w) {
-            err("Could not find wid %s", name.c_str());
+            log("Could not find wid %s", name.c_str());
             return;
         }
 
@@ -189,7 +189,7 @@ _
         std::string name = "inventory slot" + std::to_string(slot);
         auto w = wid_find(name);
         if (!w) {
-            err("Could not find wid %s", name.c_str());
+            log("Could not find wid %s", name.c_str());
             return;
         }
 
@@ -300,7 +300,12 @@ _
                     game->state != Game::STATE_COLLECTING_ITEMS) {
                     wid_thing_info_fini();
                 }
-                inventory_particle(item, i);
+                if (game->state != Game::STATE_CHOOSING_TARGET &&
+                    game->state != Game::STATE_MOVING_ITEMS) {
+                    inventory_particle(item, i);
+                } else {
+                    // no particle, too noisy
+                }
                 return true;
             }
         }
@@ -310,18 +315,14 @@ _
     if (free_slot != -1) {
         monstp->inventory_id[free_slot] = item->tp_id;
         item_slot = free_slot;
+        game->previous_slot = item_slot;
     } else {
-        if (inventory_items >= UI_ACTIONBAR_MAX_ITEMS) {
-            TOPCON("No space to carry %s.",
-                    item->text_the().c_str());
-            return false;
+        if (inventory_items < UI_ACTIONBAR_MAX_ITEMS) {
+            monstp->inventory_id.push_back(item->tp_id);
+            item_slot = monstp->inventory_id.size() - 1;
+            game->previous_slot = item_slot;
         }
-
-        monstp->inventory_id.push_back(item->tp_id);
-        item_slot = monstp->inventory_id.size() - 1;
     }
-
-    game->previous_slot = item_slot;
 
     wid_inventory_init();
     if (game->state != Game::STATE_CHOOSING_TARGET &&
@@ -330,7 +331,13 @@ _
         wid_thing_info_fini();
     }
 
-    inventory_particle(item, item_slot);
+    if (game->state != Game::STATE_CHOOSING_TARGET &&
+        game->state != Game::STATE_MOVING_ITEMS) {
+        inventory_particle(item, item_slot);
+    } else {
+        // no particle, too noisy
+    }
+
     level->inventory_describe(item_slot);
 
     return true;
