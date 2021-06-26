@@ -257,16 +257,26 @@ have_dungeon_start:
 #if 0
                         auto w = thing_new("scythe", fpoint(x, y));
                         t->carry(w);
+#endif
 
                         auto w3 = thing_new("axe_basic", fpoint(x, y));
                         t->carry(w3);
-#endif
 
                         auto w2 = thing_new("sword_basic", fpoint(x, y));
                         t->carry(w2);
 
                         auto b = thing_new("bag_small", fpoint(x, y));
                         t->carry(b);
+
+                        {
+                            auto b = thing_new("bag_small", fpoint(x, y));
+                            t->carry(b);
+                        }
+
+                        {
+                            auto b = thing_new("chest1", fpoint(x, y));
+                            t->carry(b);
+                        }
 
                         {
                             auto f = thing_new("enchantstone", fpoint(x, y));

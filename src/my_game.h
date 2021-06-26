@@ -274,7 +274,7 @@ public:
     //
     std::list<class WidBag *> bags;       // The below bags
     class WidBag       *bag_primary {};   // The players inventory
-    class WidBag       *bag_secondary {}; // A bag being carried, or a temp bag for collecting
+    std::list<class WidBag *> bag_secondary {}; // Bags other than the inventory
 
     //
     // Temporary. Last cursor path shown.

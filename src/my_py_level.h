@@ -239,7 +239,6 @@ PyObject *level_is_smoke_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spawner_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_stamina_check_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_steal_item_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_temporary_bag_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_throwable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_thrown_automatically_when_chosen_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_torch_at(PyObject *obj, PyObject *args, PyObject *keywds);

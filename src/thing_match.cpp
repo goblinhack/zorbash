@@ -253,7 +253,6 @@ bool Thing::matches (const std::string& what) const
     if (is_steal_item_chance_d1000() &&                       (what == "is_steal_item_chance_d1000"))                       { return true; }
     if (is_sticky() &&                                        (what == "is_sticky"))                                         { return true; }
     if (is_sword() &&                                         (what == "is_sword"))                                         { return true; }
-    if (is_temporary_bag() &&                                 (what == "is_temporary_bag"))                                 { return true; }
     if (is_throwable() &&                                     (what == "is_throwable"))                                     { return true; }
     if (is_thrown_automatically_when_chosen() &&              (what == "is_thrown_automatically_when_chosen"))              { return true; }
     if (is_torch() &&                                         (what == "is_torch"))                                         { return true; }
@@ -516,7 +515,6 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_steal_item_chance_d1000")                       { return &Thing::is_steal_item_chance_d1000; }
     if (what == "is_sticky")                                        { return &Thing::is_sticky; }
     if (what == "is_sword")                                         { return &Thing::is_sword; }
-    if (what == "is_temporary_bag")                                 { return &Thing::is_temporary_bag; }
     if (what == "is_throwable")                                     { return &Thing::is_throwable; }
     if (what == "is_thrown_automatically_when_chosen")              { return &Thing::is_thrown_automatically_when_chosen; }
     if (what == "is_torch")                                         { return &Thing::is_torch; }

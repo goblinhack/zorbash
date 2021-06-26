@@ -1561,7 +1561,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_spawner)
     TP_SET_DECL(is_stamina_check)
     TP_SET_DECL(is_steal_item_chance_d1000)
-    TP_SET_DECL(is_temporary_bag)
     TP_SET_DECL(is_the_grid)
     TP_SET_DECL(is_throwable)
     TP_SET_DECL(is_thrown_automatically_when_chosen)
@@ -1894,7 +1893,6 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_steal_item_chance_d1000_at",                    (PyCFunction)level_is_steal_item_chance_d1000_at,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_sticky_at",                                     (PyCFunction)level_is_sticky_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_sword_at",                                      (PyCFunction)level_is_sword_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_temporary_bag_at",                              (PyCFunction)level_is_temporary_bag_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_throwable_at",                                  (PyCFunction)level_is_throwable_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_torch_at",                                      (PyCFunction)level_is_torch_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_treasure_at",                                   (PyCFunction)level_is_treasure_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2190,7 +2188,6 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_sticky",                                        (PyCFunction)thing_is_sticky,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_sword",                                         (PyCFunction)thing_is_sword,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_target_select_automatically_when_chosen",       (PyCFunction)thing_is_target_select_automatically_when_chosen, METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_temporary_bag",                                 (PyCFunction)thing_is_temporary_bag,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_throwable",                                     (PyCFunction)thing_is_throwable,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_thrown_automatically_when_chosen",              (PyCFunction)thing_is_thrown_automatically_when_chosen,              METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_torch",                                         (PyCFunction)thing_is_torch,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},

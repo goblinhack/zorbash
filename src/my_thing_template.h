@@ -331,7 +331,6 @@ private:
     int _is_spawner {};
     int _is_stamina_check {};
     int _is_steal_item_chance_d1000 {};
-    int _is_temporary_bag {};
     int _is_the_grid {};
     int _is_throwable {};
     int _is_thrown_automatically_when_chosen {};
@@ -795,7 +794,6 @@ public:
     int is_stamina_check(void) const;
     int is_steal_item_chance_d1000(void) const;
     int is_target_select_automatically_when_chosen(void) const;
-    int is_temporary_bag(void) const;
     int is_the_grid(void) const;
     int is_throwable(void) const;
     int is_thrown_automatically_when_chosen(void) const;
@@ -1127,7 +1125,6 @@ public:
     void set_is_stamina_check(int);
     void set_is_steal_item_chance_d1000(int);
     void set_is_target_select_automatically_when_chosen(int);
-    void set_is_temporary_bag(int);
     void set_is_the_grid(int);
     void set_is_throwable(int);
     void set_is_thrown_automatically_when_chosen(int);

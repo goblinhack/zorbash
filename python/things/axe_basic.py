@@ -92,8 +92,8 @@ def init_carry(name):
 
 def init_weapon(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_item_height(8)
-    mytp.set_item_width(8)
+    mytp.set_item_height(6)
+    mytp.set_item_width(6)
     mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
     mytp.set_collision_circle(True)

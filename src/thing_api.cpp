@@ -301,7 +301,6 @@ int Thing::is_steal_item_chance_d1000(void) const                       {_ retur
 int Thing::is_sticky(void) const                                        {_ return (tp()->is_sticky()); }
 int Thing::is_sword(void) const                                         {_ return (tp()->is_sword()); }
 int Thing::is_target_select_automatically_when_chosen(void) const       {_ return (tp()->is_target_select_automatically_when_chosen()); }
-int Thing::is_temporary_bag(void) const                                 {_ return (tp()->is_temporary_bag()); }
 int Thing::is_throwable(void) const                                     {_ return (tp()->is_throwable()); }
 int Thing::is_thrown_automatically_when_chosen(void) const              {_ return (tp()->is_thrown_automatically_when_chosen()); }
 int Thing::is_torch(void) const                                         {_ return (tp()->is_torch()); }
