@@ -282,6 +282,8 @@ void Game::wid_thing_info_clear_popup (void)
 
 void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 {_
+    LOG("Create wid thing info for %s", t->to_string().c_str());
+_
     if (game->request_remake_inventory) {
         //
         // Continue
@@ -353,22 +355,17 @@ _
         }
     }
 
+    point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
+
     auto tp = t->tp();
     if ((t->get_top_owner() == player) || (t == player)) {
         if (unlikely(g_opt_debug1)) {
             t->log("Thing info create bags");
         }
 
-        point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
-
         if (bag_primary) {
             delete bag_primary;
             bag_primary = nullptr;
-        }
-
-        if (bag_secondary) {
-            delete bag_secondary;
-            bag_secondary = nullptr;
         }
 
         {
@@ -378,17 +375,31 @@ _
                                    player->capacity_height() + 1);
             bag_primary = new WidBag(player, tl, br, "Inventory");
         }
+    }
 
-        if (t->is_bag_item_container()) {
-            point tl = mid + point(1, - (t->capacity_height() + 2));
-            point br = tl +  point(t->capacity_width() + 1,
-                                   t->capacity_height() + 1);
+    for (const auto& item : player->monstp->carrying) {
+        auto t = game->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
 
-            if (tp->is_bag()) {
-                bag_secondary = new WidBag(t, tl, br, "Bag");
-            } else {
-                bag_secondary = new WidBag(t, tl, br, "Chest");
-            }
+        if (!t->is_bag_item_container()) {
+            continue;
+        }
+
+        if (bag_secondary) {
+            delete bag_secondary;
+            bag_secondary = nullptr;
+        }
+
+        point tl = mid + point(1, - (t->capacity_height() + 2));
+        point br = tl +  point(t->capacity_width() + 1,
+                            t->capacity_height() + 1);
+
+        if (tp->is_bag()) {
+            bag_secondary = new WidBag(t, tl, br, "Bag");
+        } else {
+            bag_secondary = new WidBag(t, tl, br, "Chest");
         }
     }
 

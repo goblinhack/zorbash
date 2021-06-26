@@ -62,6 +62,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         return false;
     }
 
+    LOG("Unhandled input");
+_
     auto level = game->level;
     if (!level) {
         return false;
@@ -74,13 +76,13 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_out) {
-        CON("USERCFG: zoom out");
+        LOG("Zoom out.");
         config_game_pix_zoom_out();
         return true;
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_zoom_in) {
-        TOPCON("Zoom in.");
+        LOG("Zoom in.");
         config_game_pix_zoom_in();
         return true;
     }
@@ -128,12 +130,15 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
     if (game->state == Game::STATE_MOVING_ITEMS) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
             LOG("Escape pressed, clear moving items state");
+_
             game->change_state(Game::STATE_NORMAL);
             return true;
         }
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        LOG("Pressed drop key");
+_
         //
         // If we are moving an item, prefer to drop that.
         // Else drop whatever we have highlighted in the inventory
@@ -158,6 +163,7 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
     if (game->state == Game::STATE_COLLECTING_ITEMS) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
             LOG("Escape pressed, clear collecting items state");
+_
             game->change_state(Game::STATE_NORMAL);
             return true;
         }
@@ -166,12 +172,15 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
     if (game->state == Game::STATE_ENCHANTING_ITEMS) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
             LOG("Escape pressed, clear enchanting items state");
+_
             game->change_state(Game::STATE_NORMAL);
             return true;
         }
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_eat) {
+        LOG("Pressed eat key");
+_
         if (game->state == Game::STATE_CHOOSING_TARGET) {
             game->change_state(Game::STATE_NORMAL);
         }
@@ -190,12 +199,15 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
     if (game->state == Game::STATE_CHOOSING_TARGET) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
             LOG("Escape pressed, clear choosing target flag");
+_
             game->change_state(Game::STATE_NORMAL);
             return true;
         }
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_load) {
+        LOG("Pressed load key");
+_
         if (game->state == Game::STATE_CHOOSING_TARGET ||
             game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -207,6 +219,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_save) {
+        LOG("Pressed save key");
+_
         if (game->state == Game::STATE_CHOOSING_TARGET ||
             game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -218,6 +232,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_pause) {
+        LOG("Pressed pause key");
+_
         if (game->state == Game::STATE_CHOOSING_TARGET ||
             game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -230,6 +246,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_help) {
+        LOG("Pressed help key");
+_
         if (game->state == Game::STATE_CHOOSING_TARGET ||
             game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -239,6 +257,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_quit) {
+        LOG("Pressed quit key");
+_
         if (game->state == Game::STATE_CHOOSING_TARGET ||
             game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -252,6 +272,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         // If shift is held, select skills
         //
         if (key->scancode == (SDL_Scancode)game->config.key_action0) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(9);
@@ -259,6 +281,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action1) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(0);
@@ -266,6 +290,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action2) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(1);
@@ -273,6 +299,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action3) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(2);
@@ -280,6 +308,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action4) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(3);
@@ -287,6 +317,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action5) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(4);
@@ -294,6 +326,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action6) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(5);
@@ -301,6 +335,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action7) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(6);
@@ -308,6 +344,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action8) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(7);
@@ -315,6 +353,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+            LOG("Pressed skill action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->skillbox_chosen(8);
@@ -326,6 +366,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         // If shift is not held, select inventory
         //
         if (key->scancode == (SDL_Scancode)game->config.key_action0) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(9);
@@ -333,6 +375,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action1) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(0);
@@ -340,6 +384,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action2) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(1);
@@ -347,6 +393,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action3) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(2);
@@ -354,6 +402,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action4) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(3);
@@ -361,6 +411,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action5) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(4);
@@ -368,6 +420,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action6) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(5);
@@ -375,6 +429,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action7) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(6);
@@ -382,6 +438,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action8) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(7);
@@ -389,6 +447,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
             return true;
         }
         if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+            LOG("Pressed action key");
+_
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
             level->inventory_chosen(8);
@@ -397,6 +457,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         }
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
+        LOG("Pressed use key");
+_
         if (game->state == Game::STATE_CHOOSING_TARGET ||
             game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -409,6 +471,8 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_throw) {
+        LOG("Pressed throw key");
+_
         if (game->state == Game::STATE_CHOOSING_TARGET ||
             game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -421,8 +485,10 @@ static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_inventory) {
+        LOG("Pressed inventory key");
         game->wid_thing_info_create(game->level->player, false);
         game->request_remake_inventory = true;
+        LOG("Pressed inventory key; change state");
         game->change_state(Game::STATE_MOVING_ITEMS);
         return true;
     }

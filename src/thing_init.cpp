@@ -19,7 +19,7 @@
 #include "my_string.h"
 
 Thingp Level::thing_new (Tpp tp, const point at)
-{_
+{
     if (!tp) {
         err("No tp provided for thing creation");
         return nullptr;
@@ -28,7 +28,7 @@ Thingp Level::thing_new (Tpp tp, const point at)
 }
 
 Thingp Level::thing_new (Tpp tp, const fpoint at)
-{_
+{
     if (!tp) {
         err("No tp provided for thing creation");
         return nullptr;
@@ -37,7 +37,7 @@ Thingp Level::thing_new (Tpp tp, const fpoint at)
 }
 
 Thingp Level::thing_new (Tpp tp, const fpoint at, const fpoint jitter)
-{_
+{
     if (!tp) {
         err("No tp provided for thing creation");
         return nullptr;
@@ -46,31 +46,31 @@ Thingp Level::thing_new (Tpp tp, const fpoint at, const fpoint jitter)
 }
 
 Thingp Level::thing_new (const std::string& tp_name, Thingp owner)
-{_
+{
     return thing_new(tp_name, owner->mid_at);
 }
 
 static const fpoint no_jitter(0, 0);
 
 Thingp Level::thing_new (const std::string& name, const point at)
-{_
+{
     return thing_new(name, fpoint(at.x, at.y), no_jitter);
 }
 
 Thingp Level::thing_new (const std::string& name, const fpoint at)
-{_
+{
     return thing_new(name, at, no_jitter);
 }
 
 Thingp Level::thing_new (const std::string& name, const fpoint at, const fpoint jitter)
-{_
+{
     auto t = new struct Thing_();
     t->init(this, name, at, jitter);
     return (t);
 }
 
 Thing::Thing_ (void)
-{_
+{
     newptr(this, "thing");
 }
 
@@ -90,9 +90,11 @@ void Thing::on_born (void)
             fn = fn.replace(found, 2, "");
         }
 
-        dbg("call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+        dbg("call %s.%s(%s, %d, %d)", 
+            mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
 
-        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, 
+                        (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {
         ERR("Bad on_born call [%s] expected mod:function, got %d elems",
             on_born.c_str(), (int)on_born.size());
@@ -102,7 +104,7 @@ void Thing::on_born (void)
 void Thing::init (Levelp level,
                   const std::string& name,
                   const fpoint born, const fpoint jitter)
-{_
+{
     verify(this);
 
     this->level = level;
@@ -123,6 +125,10 @@ void Thing::init (Levelp level,
     tp_id = tpp->id;
     tp_or_update();
 
+    if (tpp->is_loggable_for_unimportant_stuff()) {
+        dbg("Creating");
+    }
+_
     //
     // Init the z depth
     //

@@ -54,9 +54,15 @@ bool Thing::carry (Thingp it)
         // Always carry
         //
         dbg("Monsts always carry items");
+    } else if (it->is_bag_item_container() && bag_add(it)) {
+        //
+        // Bag being carried
+        //
+        dbg("Added bag to bag at %d,%d", 
+            it->monstp->bag_position.x, it->monstp->bag_position.y);
     } else if (!it->is_bag_item()) {
         //
-        // A key for example, does not go in a bad
+        // A key for example, does not go in a bag
         //
         dbg("Non item not added to bag");
     } else if (bag_add(it)) {

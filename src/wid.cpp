@@ -6095,6 +6095,17 @@ void wid_tick_all (void)
     }
 
     //
+    // If we need to destroy the thing indo, do so
+    //
+    if (game->request_destroy_thing_info) {
+        if (time_have_x_tenths_passed_since(1, game->request_destroy_thing_info)) {
+            LOG("Handle request to destroy thing info");
+            game->request_destroy_thing_info = false;
+            wid_thing_info_fini();
+        }
+    }
+
+    //
     // If we need to remake the inventory, do so
     //
     if (game->request_remake_inventory ||
@@ -6103,13 +6114,6 @@ void wid_tick_all (void)
         if (wid_rightbar_init()) {
             game->request_remake_inventory = false;
             game->request_remake_skillbox = false;
-        }
-    }
-
-    if (game->request_destroy_thing_info) {
-        if (time_have_x_tenths_passed_since(1, game->request_destroy_thing_info)) {
-            game->request_destroy_thing_info = false;
-            wid_thing_info_fini();
         }
     }
 

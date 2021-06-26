@@ -172,9 +172,9 @@ public:
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
-    //
-    // Fields not saved
+    // Fields not worth saving
     uint64_t debug:1                           {};
+    uint64_t is_being_dropped:1                {};
 private:
     //
     // As this is called a lot, probably worth the memory

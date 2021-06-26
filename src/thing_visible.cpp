@@ -19,9 +19,6 @@ void Thing::visible (void)
         return;
     }
 
-    dbg("Is now visible");
-    is_hidden = false;
-
     //
     // If this thing has an owner, should the thing stay hidden?
     //
@@ -32,10 +29,14 @@ void Thing::visible (void)
                 //
                 // Stay hidden until the weapon use is done.
                 //
+                dbg("Stay hidden until weapon use is done");
                 return;
             }
         }
     }
+
+    dbg("Is now visible");
+    is_hidden = false;
 
     //
     // Reveal the weapon again too.

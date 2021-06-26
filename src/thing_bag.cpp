@@ -199,22 +199,22 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
     auto h = item->item_height();
 
     if (pos.x < 0) {
-        dbg3("Bag: cannot place %s at %d,%d (x<0)",
+        dbg4("Bag: cannot place %s at %d,%d (x<0)",
             item->to_string().c_str(), pos.x, pos.y);
         return false;
     }
     if (pos.y < 0) {
-        dbg3("Bag: cannot place %s at %d,%d (y<0)",
+        dbg4("Bag: cannot place %s at %d,%d (y<0)",
             item->to_string().c_str(), pos.x, pos.y);
         return false;
     }
     if (pos.x + w - 1 >= bw) {
-        dbg3("Bag: cannot place %s at %d,%d (x>width)",
+        dbg4("Bag: cannot place %s at %d,%d (x>width)",
             item->to_string().c_str(), pos.x, pos.y);
         return false;
     }
     if (pos.y + h - 1 >= bh) {
-        dbg3("Bag: cannot place %s at %d,%d (y>height)",
+        dbg4("Bag: cannot place %s at %d,%d (y>height)",
             item->to_string().c_str(), pos.x, pos.y);
         return false;
     }

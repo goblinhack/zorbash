@@ -360,57 +360,57 @@ placed_player:
         log("DUNGEON: Place items");
         create_dungeon_place_objects_with_normal_placement_rules(dungeon);
         if (g_errored) { return false; }
-_
+
         //
         // Scary non essential stuff
         //
         log("DUNGEON: Place blood");
         create_dungeon_place_random_blood(dungeon);
         if (g_errored) { return false; }
-_
+
         //
         // Less important stuff
         //
         log("DUNGEON: Place smoke");
         create_dungeon_place_lava_smoke(dungeon);
         if (g_errored) { return false; }
-_
+
         log("DUNGEON: Place floor deco");
         place_floor_deco(dungeon);
         if (g_errored) { return false; }
-_
+
         log("DUNGEON: Place random floor deco");
         create_dungeon_place_random_floor_deco(dungeon);
         if (g_errored) { return false; }
-_
+
         log("DUNGEON: Place sewer pipes");
         create_dungeon_place_sewer_pipes(dungeon);
         if (g_errored) { return false; }
-_
+
         log("DUNGEON: Mark dungeon tiles");
         create_dungeon_game_mark_dungeon_tiles(dungeon);
         if (g_errored) { return false; }
-_
+
         log("DUNGEON: Place grass");
         place_dry_grass(dungeon);
         if (g_errored) { return false; }
-_
+
         log("DUNGEON: Place foilage");
         place_foilage(dungeon);
         if (g_errored) { return false; }
-_
+
         log("DUNGEON: Place spiderweb");
         place_spiderweb(dungeon);
         if (g_errored) { return false; }
-_
-        log("DUNGEON: Place dirt");
+
+        log("DUNGEON: Place random treasure");
         place_random_treasure(dungeon);
         if (g_errored) { return false; }
-_
+
         log("DUNGEON: Scroll to player");
         scroll_map_to_player();
         if (g_errored) { return false; }
-_
+
         break;
     }
 
@@ -861,13 +861,14 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 
+            log("DUNGEON: Creating %s", tp->name().c_str());
             auto t = thing_new(tp->name(), fpoint(x, y));
             if (t) {
                 if (t->is_treasure()) {
                     if (r && r->is_secret) {
                         t->enchant_randomly();
                     }
-                    con("DUNGEON: Placed treasure %s", t->short_text_capitalized().c_str());
+                    con("DUNGEON: Placed %s", t->short_text_capitalized().c_str());
                 }
             }
         }

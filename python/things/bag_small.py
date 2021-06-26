@@ -20,6 +20,7 @@ def tp_init(name, text_name):
     mytp.set_is_item_carrier(True)
     mytp.set_is_bag_item_container(True)
     mytp.set_is_item(True)
+    mytp.set_is_bag_item(True)
     mytp.set_is_bag_item_not_stackable(True)
     mytp.set_is_item(True)
     mytp.set_is_moveable(True)
