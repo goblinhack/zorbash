@@ -26,6 +26,8 @@ void Level::new_internal_particle (
                           bool hflip,
                           bool make_visible_at_end)
 {_
+    log("Create new internal particle");
+_
     if (!tile) {
         err("No particle tile");
         return;
@@ -60,6 +62,8 @@ void Level::new_internal_particle (
                           bool hflip,
                           bool make_visible_at_end)
 {_
+    log("Create new internal particle");
+_
     if (!tile) {
         err("No particle tile");
         return;
@@ -208,6 +212,8 @@ void Level::new_external_particle (
                           const Tilep tile, bool hflip,
                           bool make_visible_at_end)
 {_
+    log("Create new external particle");
+_
     if (!tile) {
         err("No particle tile");
         return;
@@ -243,6 +249,8 @@ void Level::new_external_particle (point start, point stop, isize sz, uint32_t d
                                    const Tilep tile, bool hflip,
                                    bool make_visible_at_end)
 {_
+    log("Create new external particle");
+_
     if (!tile) {
         err("No particle tile");
         return;

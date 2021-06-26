@@ -18,7 +18,7 @@ void Game::change_state (int new_state)
     if (game->state == new_state) {
         return;
     }
-
+_
     auto old_state = state;
 
     switch (new_state) {
@@ -28,7 +28,6 @@ void Game::change_state (int new_state)
             break;
         case STATE_MOVING_ITEMS:     // Currently managing inventory
             LOG("State changed to STATE_MOVING_ITEMS");
-            wid_thing_info_fini();
             break;
         case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
             LOG("State changed to STATE_COLLECTING_ITEMS");

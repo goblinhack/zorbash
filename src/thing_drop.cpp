@@ -32,9 +32,16 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
         }
     }
 _
+    auto top_owner = what->get_top_owner();
     auto existing_owner = what->get_immediate_owner();
-    if (existing_owner != this) {
+    if (top_owner != this) {
         if (existing_owner) {
+            log("Immediate owner of %s is %s", 
+                what->to_string().c_str(),
+                top_owner->to_string().c_str());
+            log("Top owner of %s is %s", 
+                what->to_string().c_str(),
+                what->get_top_owner()->to_string().c_str());
             err("Attempt to drop %s which is not carried and owned by %s", 
                 what->to_string().c_str(),
                 existing_owner->to_string().c_str());
@@ -45,6 +52,7 @@ _
         return false;
     }
 
+    what->is_being_dropped = true;
     if (is_player()) {
         if (target) {
             inventory_id_remove(what, target);
@@ -56,12 +64,24 @@ _
     what->hooks_remove();
     what->remove_owner();
 
-    //
-    // Hide as the particle drop will reveal it
-    //
     if (is_player()) {
-        what->hide();
+        if (has_external_particle || has_internal_particle) {
+            //
+            // Hide as the particle drop will reveal it
+            //
+            dbg("Defer making dropped player item visible: %s",
+                what->to_string().c_str());
+            what->hide();
+        } else {
+            //
+            // No particle?
+            //
+            dbg("Make dropped player item visible: %s",
+                what->to_string().c_str());
+            what->visible();
+        }
     } else {
+        dbg("Make dropped item visible: %s", what->to_string().c_str());
         what->visible();
     }
 
@@ -100,6 +120,7 @@ _
             sound_play("drop");
         }
     }
+    what->is_being_dropped = false;
 
     return true;
 }

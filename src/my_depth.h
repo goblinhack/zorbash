@@ -29,6 +29,7 @@ enum {
 };
 
 enum {
+    MAP_PRIO_ALWAYS_BEHIND,
     MAP_PRIO_BEHIND,
     MAP_PRIO_NORMAL,
     MAP_PRIO_INFRONT,

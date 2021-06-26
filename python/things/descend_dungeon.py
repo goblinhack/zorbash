@@ -22,7 +22,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("%%fg=gold$The way down.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_prio(zx.MAP_PRIO_ALWAYS_BEHIND)
 
     delay = 50
     mytp.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=delay)

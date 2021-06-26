@@ -31,7 +31,7 @@ void Level::cursor_find_on_visible_things (
         return;
     }
 
-    dbg3("Cursor find on visible things");
+    dbg4("Cursor find on visible things");
 _
     if ((game->minimap_over.x > 0) && (game->minimap_over.y > 0)) {
         //

@@ -17,7 +17,7 @@
 
 void Thing::inventory_particle (Thingp item, uint32_t slot)
 {_
-    dbg("Inventory particle %s", item->to_string().c_str());
+    dbg("Create inventory particle? %s", item->to_string().c_str());
 _
     //
     // No animations at the start
@@ -64,6 +64,7 @@ _
             }
         }
 
+        dbg("Yes; create inventory particles");
         for (int c = 0; c < particle_count; c++) {
             point s = (last_blit_tl + last_blit_br) / 2;
             point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
@@ -102,6 +103,7 @@ _
         point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
                 random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
 
+        dbg("Yes; create inventory particle");
         std::string tile_name = "key.1";
         level->new_external_particle(
                  s + j, p,
@@ -126,6 +128,7 @@ _
         p.y = (int)(((float)game->config.game_pix_height /
                      (float)TERM_HEIGHT) * (float)p.y);
 
+        dbg("Yes; create inventory particle");
         level->new_external_particle(
                  item->id,
                  (last_blit_tl + last_blit_br) / 2, p,
@@ -144,21 +147,34 @@ void Thing::inventory_particle (Thingp item,
                                 uint32_t slot, 
                                 Thingp particle_target)
 {_
-    dbg("Inventory particle %s with target %s",
+    dbg("Create inventory particle %s with target %s",
         item->to_string().c_str(), particle_target->to_string().c_str());
 _
-    if (game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS) {
-        //
-        // No animations when moving stuff around
-        //
+    if (game->in_transit_item) {
+        dbg("No; not while moving an item");
         return;
+    }
+
+    if (item->is_being_dropped) {
+        //
+        // Always show
+        //
+    } else {
+        if (game->state == Game::STATE_MOVING_ITEMS || 
+            game->state == Game::STATE_COLLECTING_ITEMS) {
+            //
+            // No animations when moving stuff around
+            //
+            dbg("No; not whil moving items");
+            return;
+        }
     }
 
     //
     // No animations at the start
     //
     if (level->is_starting) {
+        dbg("No; not while level is starting");
         return;
     }
 

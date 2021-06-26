@@ -239,35 +239,33 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
         }
 
         collect_items.clear();
-        std::map<Tpp, bool> found;
+        std::map<Thingp, bool> found;
         for (auto t : items) {
             if (!t) {
                 collect_items.push_back(t);
                 continue;
             }
 
-            auto tp = t->tp();
-            if (found.find(tp) != found.end()) {
+            if (found.find(t) != found.end()) {
                 continue;
             }
             if (!t->is_collectable()) {
                 continue;
             }
-            found[tp] = true;
+            found[t] = true;
             collect_items.push_back(t);
 
             if (t->monstp) {
                 for (auto id : t->monstp->carrying) {
                     auto t = thing_find(id);
                     if (t) {
-                        auto tp = t->tp();
-                        if (found.find(tp) != found.end()) {
+                        if (found.find(t) != found.end()) {
                             continue;
                         }
                         if (!t->is_collectable()) {
                             continue;
                         }
-                        found[tp] = true;
+                        found[t] = true;
                         collect_items.push_back(t);
                     }
                 }

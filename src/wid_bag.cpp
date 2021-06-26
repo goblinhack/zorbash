@@ -55,7 +55,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         auto tl = t->monstp->bag_position + point(1, 1);
 
         if (t->monstp->bag_position == point(-1, -1)) {
-            bag->log("+ item %s at %d,%d (not in bag)", t->to_string().c_str(),
+            bag->log("+ item %s at %d,%d (not carried in bag)", t->to_string().c_str(),
                      t->monstp->bag_position.x, t->monstp->bag_position.y);
             continue;
         }
@@ -345,9 +345,6 @@ static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely,
         t->describe_when_hovered_over_in_rightbar();
     }
 
-    //
-    // Show the thing we are moving
-    //
     game->wid_thing_info_clear_popup();
     game->wid_thing_info_push_popup(t);
 }
@@ -382,6 +379,11 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
         if (game->level->player->drop(t)) {
             game->tick_begin("drop");
         }
+
+        game->wid_thing_info_create(game->level->player, false);
+        game->request_remake_inventory = true;
+        LOG("Recreate inventory");
+        game->change_state(Game::STATE_MOVING_ITEMS);
         return true;
     }
 
