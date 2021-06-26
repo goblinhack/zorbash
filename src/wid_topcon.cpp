@@ -130,7 +130,6 @@ _
     if (game->state == Game::STATE_MOVING_ITEMS) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
             LOG("Escape pressed, clear moving items state");
-_
             game->change_state(Game::STATE_NORMAL);
             return true;
         }
@@ -154,6 +153,10 @@ _
                 }
             } else {
                 TOPCON("Nothing to drop.");
+                game->wid_thing_info_create(game->level->player, false);
+                game->request_remake_inventory = true;
+                game->change_state(Game::STATE_MOVING_ITEMS);
+                return true;
             }
         }
         wid_rightbar_init();
