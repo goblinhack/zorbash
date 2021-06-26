@@ -67,10 +67,6 @@ void Level::cursor_move (void)
         return;
     }
 
-    if (game->paused()) {
-        return;
-    }
-
     //
     // Dampen mouse moves at level start
     //

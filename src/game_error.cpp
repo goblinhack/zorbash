@@ -19,7 +19,6 @@ static void game_error_destroy (void)
 {_
     delete game_error_window;
     game_error_window = nullptr;
-    game->hard_unpause();
 }
 
 static uint8_t game_error_key_up (Widp w, const struct SDL_Keysym *key)
@@ -75,7 +74,6 @@ void game_error (std::string error)
     if (game_error_window) {
         game_error_destroy();
     }
-    game->hard_pause();
 
     point tl = make_point(5, 5);
     point br = make_point(TERM_WIDTH - 5, TERM_HEIGHT - 5);

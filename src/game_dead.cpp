@@ -22,7 +22,6 @@ static void wid_dead_destroy (void)
 {_
     delete wid_dead_window;
     wid_dead_window = nullptr;
-    game->soft_unpause();
     game->fini();
     game->main_menu_select();
     wid_not_visible(wid_topcon_window);
@@ -90,19 +89,6 @@ void Game::dead_select (const char *reason)
     wid_rightbar_init();
 
     LOG("Open dead select: pause");
-    if (level && 
-        level->player &&
-        (time_get_time_ms_cached() < level->player->get_timestamp_move_end())) {
-        //
-        // Allow the dead player move to finish and then pause.
-        //
-    } else {
-        //
-        // Stop everything. A moment of silence please.
-        //
-        game->soft_pause();
-    }
-
     if (level) {
         level->scroll_map_to_player();
         if (level->cursor) {

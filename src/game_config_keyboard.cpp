@@ -158,12 +158,6 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
             game->config.key_move_up = 0;
         }
     }
-    if (game->config.key_pause) {
-        if (game->config.key_pause == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key pause.%%fg=reset$");
-            game->config.key_pause = 0;
-        }
-    }
     if (game->config.key_quit) {
         if (game->config.key_quit == code) {
             TOPCON("%%fg=orange$Conflicting key, disabling key quit.%%fg=reset$");
@@ -257,7 +251,6 @@ static void game_config_keyboard_destroy (void)
 
     delete game_config_keyboard_window;
     game_config_keyboard_window = nullptr;
-    game->soft_unpause();
 }
 
 static uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -541,14 +534,6 @@ static void game_config_key_zoom_out_set (SDL_Scancode code)
     game->config.key_zoom_out = 0;
     game_config_check_for_conflicts(code);
     game->config.key_zoom_out = code;
-    game->config_keyboard_select();
-}
-
-static void game_config_key_pause_set (SDL_Scancode code)
-{_
-    game->config.key_pause = 0;
-    game_config_check_for_conflicts(code);
-    game->config.key_pause = code;
     game->config_keyboard_select();
 }
 
@@ -878,13 +863,6 @@ static uint8_t game_config_key_zoom_out (Widp w, int32_t x, int32_t y, uint32_t 
     return true;
 }
 
-static uint8_t game_config_key_pause (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    grab_key("pause game");
-    on_sdl_key_grab = game_config_key_pause_set;
-    return true;
-}
-
 static uint8_t game_config_key_help (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key("help");
@@ -959,7 +937,6 @@ void Game::config_keyboard_select (void)
     if (game_config_keyboard_window) {
         game_config_keyboard_destroy();
     }
-    game->soft_pause();
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2,
@@ -1939,34 +1916,6 @@ void Game::config_keyboard_select (void)
     ///////////////////////////////////////////////////////////////////////
     y_at++;
     ///////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////////
-    // pause
-    ///////////////////////////////////////////////////////////////////////
-    y_at += 1;
-    {_
-        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "pause");
-
-        point tl = make_point(0, y_at);
-        point br = make_point(width / 2,y_at);
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Pause game");
-    }
-    {_
-        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "value");
-
-        point tl = make_point(width / 2 + 8, y_at);
-        point br = make_point(width / 2 + 20,y_at);
-        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_pause));
-        wid_set_on_mouse_up(w, game_config_key_pause);
-    }
 
     ///////////////////////////////////////////////////////////////////////
     // quit

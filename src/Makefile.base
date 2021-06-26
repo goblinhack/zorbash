@@ -47,7 +47,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/game_menu_flames.o            \
     $(OBJDIR)/game_mouse.o                  \
     $(OBJDIR)/game_notice.o                 \
-    $(OBJDIR)/game_paused.o                 \
     $(OBJDIR)/game_quit.o                   \
     $(OBJDIR)/game_save.o                   \
     $(OBJDIR)/game_state.o                  \

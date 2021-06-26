@@ -42,11 +42,6 @@ _
         return;
     }
 
-    if (game->paused()) {
-        LOG("Inventory: game paused; ignore");
-        return;
-    }
-
     auto level = game->level;
     if (!level) {
         LOG("Inventory: no level; ignore");
@@ -84,11 +79,6 @@ _
 
     if (game->in_transit_item) {
         LOG("Inventory: in transit item; ignore");
-        return;
-    }
-
-    if (game->paused()) {
-        LOG("Inventory: paused; ignore");
         return;
     }
 
@@ -178,10 +168,6 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
 
     if (game->in_transit_item) {
         return wid_in_transit_item_place(w, x, y, button);
-    }
-
-    if (game->paused()) {
-        return false;
     }
 
     auto level = game->level;

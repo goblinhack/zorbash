@@ -88,7 +88,6 @@ public:
     uint32_t           key_move_left                = {};
     uint32_t           key_move_right               = {};
     uint32_t           key_move_up                  = {};
-    uint32_t           key_pause                    = {};
     uint32_t           key_quit                     = {};
     uint32_t           key_save                     = {};
     uint32_t           key_screenshot               = {};
@@ -142,8 +141,6 @@ public:
     void dead_select(const char *reason);
     void display(void);
     void fini(void);
-    void hard_pause(void);
-    void hard_unpause(void);
     void help_select(void);
     void init(void);
     void init_level(point3d);
@@ -154,14 +151,11 @@ public:
     void load_select(void);
     void main_menu_select(void);
     void new_game(void);
-    void pause_select(void);
     void quit_select(void);
     void save(int slot);
     void save(void);
     void save_config(void);
     void save_select(void);
-    void soft_pause(void);
-    void soft_unpause(void);
     void tick_begin(const std::string &);
     void tick_end();
     void wid_collect_create(const std::list<Thingp> items);
@@ -208,8 +202,6 @@ public:
     //
     // Keep all in order:
     //
-    bool               hard_paused {};      // Hard is when a menu is on screen
-    bool               soft_paused {};      // Soft pause is user initiated
     bool               started {};          // Game is afoot
     bool               things_are_moving {};
     fpoint             mouse_over;          // Mouse cursor

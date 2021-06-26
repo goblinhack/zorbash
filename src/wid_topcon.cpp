@@ -234,20 +234,6 @@ _
         game->save_select();
         return true;
     }
-    if (key->scancode == (SDL_Scancode)game->config.key_pause) {
-        LOG("Pressed pause key");
-_
-        if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
-            return false;
-        }
-        wid_thing_info_fini(); // To remove bag or other info
-        TOPCON("Pausing the game.");
-        CON("USERCFG: pausing the game");
-        game->pause_select();
-        return true;
-    }
     if (key->scancode == (SDL_Scancode)game->config.key_help) {
         LOG("Pressed help key");
 _

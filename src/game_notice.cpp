@@ -17,7 +17,6 @@ void game_notice_destroy (void)
 {_
     delete game_notice_window;
     game_notice_window = nullptr;
-    game->soft_unpause();
 }
 
 static uint8_t game_notice_ok (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -48,7 +47,6 @@ void game_notice (std::string s)
     if (game_notice_window) {
         game_notice_destroy();
     }
-    game->soft_pause();
 
     auto m = TERM_WIDTH / 2;
     auto n = TERM_HEIGHT / 2;

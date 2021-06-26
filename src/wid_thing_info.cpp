@@ -430,6 +430,12 @@ _
         return;
     }
 
+    auto level = game->level;
+    if (!level) {
+        game->change_state(Game::STATE_NORMAL);
+        ERR("No level");
+        return;
+    }
     auto player = game->level->player;
     if (!player) {
         game->change_state(Game::STATE_NORMAL);

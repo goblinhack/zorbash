@@ -30,6 +30,10 @@ void Level::describe (fpoint p)
         return;
     }
 
+    if (is_starting) {
+        return;
+    }
+
     dbg3("Describe %f,%f", p.x, p.y);
 _
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
@@ -313,7 +317,15 @@ _
 
 void Level::describe (Thingp t)
 {_
-    if (player && player->is_dead) {
+    if (!player) {
+        return;
+    }
+
+    if (player->is_dead) {
+        return;
+    }
+
+    if (is_starting) {
         return;
     }
 

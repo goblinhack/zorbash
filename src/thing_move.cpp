@@ -426,13 +426,6 @@ void Thing::update_interpolated_position (void)
 
             move_finish();
         }
-
-        //
-        // If the dead widget popped up, it waited for our move to end
-        //
-        if (is_player() && is_dead) {
-            game->soft_pause();
-        }
     } else {
         float t = get_timestamp_move_end() - get_timestamp_move_begin();
         float dt = time_get_time_ms_cached() - get_timestamp_move_begin();

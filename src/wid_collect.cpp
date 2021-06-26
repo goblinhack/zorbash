@@ -26,7 +26,6 @@ static void wid_collect_destroy (void)
 {_
     delete wid_collect;
     wid_collect = nullptr;
-    game->hard_unpause();
     game->change_state(Game::STATE_NORMAL);
 }
 

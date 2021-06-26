@@ -44,11 +44,6 @@ _
         return;
     }
 
-    if (game->paused()) {
-        LOG("Skillbox: game paused; ignore");
-        return;
-    }
-
     auto level = game->level;
     if (!level) {
         LOG("Skillbox: no level; ignore");
@@ -86,11 +81,6 @@ _
 
     if (game->in_transit_item) {
         LOG("Skillbox: in transit item; ignore");
-        return;
-    }
-
-    if (game->paused()) {
-        LOG("Skillbox: paused; ignore");
         return;
     }
 
@@ -138,10 +128,6 @@ uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
 
     if (game->state == Game::STATE_COLLECTING_ITEMS) {
         wid_thing_info_fini();
-        return false;
-    }
-
-    if (game->paused()) {
         return false;
     }
 
