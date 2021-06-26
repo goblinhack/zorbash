@@ -40,11 +40,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         wid_destroy_nodelay(&item);
     }
 
-    if (bag->is_temporary_bag()) {
-        bag->log("Populate the temporary bag");
-    } else {
-        bag->log("Populate the bag");
-    }
+    bag->log("Populate the bag");
 
     for (const auto& item : bag->monstp->carrying) {
         auto t = game->thing_find(item.id);
@@ -195,35 +191,6 @@ _
 
         t->log("In transit item place completed");
         wid_bag_add_items(wid_bag_container, bag);
-
-        //
-        // Finished moving all items from a temporary bag?
-        //
-        if (game->bag_primary->bag->is_temporary_bag() ||
-            (game->bag_secondary && game->bag_secondary->bag->is_temporary_bag())) {
-
-            bag->log("Check if temporary bag is empty");
-
-            game->bag_primary->bag->log("Primary bag contains %d items",
-               (int) game->bag_primary->bag->monstp->carrying.size());
-
-            if (game->bag_primary->bag->monstp->carrying.empty()) {
-                game->bag_primary->bag->log(
-                        "Request cleanup, temporary bag_primary is empty");
-                game->request_destroy_bags = true;
-            }
-
-            if (game->bag_secondary) {
-                game->bag_secondary->bag->log("Secondary bag contains %d items",
-                    (int) game->bag_secondary->bag->monstp->carrying.size());
-
-                if (game->bag_secondary->bag->monstp->carrying.empty()) {
-                    game->bag_secondary->bag->log(
-                            "Request cleanup, temporary bag_secondary is empty");
-                    game->request_destroy_bags = true;
-                }
-            }
-        }
     } else {
         t->log("In transit item place failed");
     }
@@ -325,9 +292,10 @@ _
     wid_update(game->in_transit_item);
 
     LOG("Remake the bag without the transit item");
-    wid_bag_add_items(wid_bag_container, bag);
-
-    wid_update(wid_bag_container);
+    game->request_remake_inventory = true;
+    game->wid_thing_info_create(game->level->player, false);
+    LOG("Recreate inventory");
+    game->change_state(Game::STATE_MOVING_ITEMS);
 
     return true;
 }
@@ -380,8 +348,8 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
             game->tick_begin("drop");
         }
 
-        game->wid_thing_info_create(game->level->player, false);
         game->request_remake_inventory = true;
+        game->wid_thing_info_create(game->level->player, false);
         LOG("Recreate inventory");
         game->change_state(Game::STATE_MOVING_ITEMS);
         return true;
@@ -459,35 +427,10 @@ static void wid_bag_tick (Widp w)
 
 WidBag::~WidBag()
 {
-    if (bag->is_temporary_bag()) {
-        bag->log("Destroy temporary bag");
-    } else {
-        bag->log("Destroy bag");
-    }
+    bag->log("Destroy bag");
 _
     wid_destroy(&wid_bag_container);
     wid_destroy(&wid_bag_title);
-
-    if (bag->is_temporary_bag()) {
-        if (bag->monstp) {
-            bag->log("Drop bag items");
-
-            for (;;) {
-                if (bag->monstp->carrying.empty()) {
-                    break;
-                }
-
-                const auto& item = bag->monstp->carrying.begin();
-                auto t = game->thing_find(item->id);
-                if (!t) {
-                    break;
-                }
-                bag->drop(t);
-            }
-        } else {
-            bag->err("No monstp for temporary bag");
-        }
-    }
 
     auto b = std::find(game->bags.begin(), game->bags.end(), this);
     if (b != game->bags.end()) {

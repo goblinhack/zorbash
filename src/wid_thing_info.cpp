@@ -30,10 +30,10 @@ void wid_thing_info_fini (void)
         game->bag_primary = nullptr;
     }
 
-    if (game->bag_secondary) {
-        delete game->bag_secondary;
-        game->bag_secondary = nullptr;
+    for (auto b : game->bag_secondary) {
+        delete b;
     }
+    game->bag_secondary.clear();
 
     game->wid_thing_info_clear_popup();
 
@@ -357,7 +357,6 @@ _
 
     point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 
-    auto tp = t->tp();
     if ((t->get_top_owner() == player) || (t == player)) {
         if (unlikely(g_opt_debug1)) {
             t->log("Thing info create bags");
@@ -377,6 +376,12 @@ _
         }
     }
 
+    for (auto b : game->bag_secondary) {
+        delete b;
+    }
+    game->bag_secondary.clear();
+    int existing_bags_height = 0;
+
     for (const auto& item : player->monstp->carrying) {
         auto t = game->thing_find(item.id);
         if (!t) {
@@ -387,19 +392,18 @@ _
             continue;
         }
 
-        if (bag_secondary) {
-            delete bag_secondary;
-            bag_secondary = nullptr;
-        }
-
         point tl = mid + point(1, - (t->capacity_height() + 2));
         point br = tl +  point(t->capacity_width() + 1,
-                            t->capacity_height() + 1);
+                               t->capacity_height() + 1);
 
-        if (tp->is_bag()) {
-            bag_secondary = new WidBag(t, tl, br, "Bag");
+        tl.y -= existing_bags_height;
+        br.y -= existing_bags_height;
+        existing_bags_height += t->capacity_height() + 3;
+
+        if (t->is_bag()) {
+            game->bag_secondary.push_back(new WidBag(t, tl, br, "Bag"));
         } else {
-            bag_secondary = new WidBag(t, tl, br, "Chest");
+            game->bag_secondary.push_back(new WidBag(t, tl, br, "Chest"));
         }
     }
 

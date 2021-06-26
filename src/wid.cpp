@@ -6121,7 +6121,7 @@ void wid_tick_all (void)
     // Just in case the window cannot be remade, clean up
     //
     if (game->state == Game::STATE_MOVING_ITEMS) {
-        if (!game->bag_primary && !game->bag_secondary) {
+        if (!game->bag_primary && game->bag_secondary.empty()) {
             LOG("Handle end of moving items");
             game->change_state(Game::STATE_NORMAL);
         }

@@ -863,7 +863,6 @@ public:
     int is_sticky(void) const;
     int is_sword(void) const;
     int is_target_select_automatically_when_chosen(void) const;
-    int is_temporary_bag(void) const;
     int is_throwable(void) const;
     int is_thrown_automatically_when_chosen(void) const;
     int is_torch(void) const;

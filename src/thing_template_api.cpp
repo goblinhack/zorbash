@@ -362,7 +362,6 @@ int Tp::is_stamina_check(void) const                                 { return _i
 int Tp::is_steal_item_chance_d1000(void) const                       { return _is_steal_item_chance_d1000; }
 int Tp::is_sticky(void) const                                        { return _is_sticky; }
 int Tp::is_sword(void) const                                         { return _is_sword; }
-int Tp::is_temporary_bag(void) const                                 { return _is_temporary_bag; }
 int Tp::is_the_grid(void) const                                      { return _is_the_grid; }
 int Tp::is_throwable(void) const                                     { return _is_throwable; }
 int Tp::is_thrown_automatically_when_chosen(void) const              { return _is_thrown_automatically_when_chosen; }
@@ -686,7 +685,6 @@ void Tp::set_is_steal_item_chance_d1000(int v)                       { _is_steal
 void Tp::set_is_sticky(int v)                                        { _is_sticky = v; }
 void Tp::set_is_sword(int v)                                         { _is_sword = v; }
 void Tp::set_is_target_select_automatically_when_chosen(int v)       { _is_target_select_automatically_when_chosen = v; }
-void Tp::set_is_temporary_bag(int v)                                 { _is_temporary_bag = v; }
 void Tp::set_is_the_grid(int v)                                      { _is_the_grid = v; }
 void Tp::set_is_throwable(int v)                                     { _is_throwable = v; }
 void Tp::set_is_thrown_automatically_when_chosen(int v)              { _is_thrown_automatically_when_chosen = v; }

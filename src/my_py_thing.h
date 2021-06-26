@@ -285,7 +285,6 @@ PyObject *thing_is_smoke(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spawner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_stamina_check(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_steal_item_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_temporary_bag(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_throwable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_thrown_automatically_when_chosen(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_torch(PyObject *obj, PyObject *args, PyObject *keywds);

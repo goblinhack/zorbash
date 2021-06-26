@@ -125,7 +125,9 @@ bool Thing::carry (Thingp it)
         //
     } else {
         if (is_player()) {
-            TOPCON("You carry %s.", it->text_the().c_str());
+            if (!level->is_starting) {
+                TOPCON("You carry %s.", it->text_the().c_str());
+            }
         }
     }
 
