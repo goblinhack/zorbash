@@ -24,7 +24,6 @@ static void wid_enchant_destroy (void)
 {_
     delete wid_enchant;
     wid_enchant = nullptr;
-    game->hard_unpause();
     game->change_state(Game::STATE_NORMAL);
 }
 

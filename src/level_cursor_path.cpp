@@ -254,10 +254,6 @@ void Level::cursor_path_draw (void)
 //
 void Level::cursor_path_create (void)
 {_
-    if (game->paused()) {
-        return;
-    }
-
     if (!cursor) {
         return;
     }
@@ -290,10 +286,6 @@ void Level::cursor_path_create (void)
 //
 void Level::cursor_path_clear (void)
 {_
-    if (game->paused()) {
-        return;
-    }
-
     auto level = game->level;
     if (!level) {
         return;

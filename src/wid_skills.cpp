@@ -24,7 +24,6 @@ static void wid_skill_choose_destroy (void)
 {_
     delete wid_skills;
     wid_skills = nullptr;
-    game->hard_unpause();
     game->change_state(Game::STATE_NORMAL);
 }
 

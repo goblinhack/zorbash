@@ -1239,23 +1239,19 @@ void sdl_loop (void)
             // Update status and rightbars
             //
             if (game) {
-                if (game->paused()) {
+                if (wid_console_window && wid_console_window->visible) {
                     wid_display_all();
                 } else {
-                    if (wid_console_window && wid_console_window->visible) {
-                        wid_display_all();
-                    } else {
-                        //
-                        // Must do this before wid_display_all so that the
-                        // on screen widgets are updated with the new wid
-                        // we are about to make.
-                        //
-                        if (game->request_update_rightbar) {
-                            game->request_update_rightbar = false;
-                            wid_rightbar_init();
-                        }
-                        wid_display_all();
+                    //
+                    // Must do this before wid_display_all so that the
+                    // on screen widgets are updated with the new wid
+                    // we are about to make.
+                    //
+                    if (game->request_update_rightbar) {
+                        game->request_update_rightbar = false;
+                        wid_rightbar_init();
                     }
+                    wid_display_all();
                 }
             }
 

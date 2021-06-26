@@ -91,7 +91,6 @@ void Config::reset (void)
     key_move_left                = {SDL_SCANCODE_A};
     key_move_right               = {SDL_SCANCODE_D};
     key_move_up                  = {SDL_SCANCODE_W};
-    key_pause                    = {SDL_SCANCODE_P};
     key_quit                     = {SDL_SCANCODE_Q};
     key_save                     = {SDL_SCANCODE_F12};
     key_screenshot               = {SDL_SCANCODE_F10};

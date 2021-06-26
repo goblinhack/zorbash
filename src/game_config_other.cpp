@@ -17,7 +17,6 @@ static void game_config_other_destroy (void)
 {_
     delete game_config_other_window;
     game_config_other_window = nullptr;
-    game->soft_unpause();
 }
 
 static uint8_t game_config_other_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -121,7 +120,6 @@ void Game::config_other_select (void)
     if (game_config_other_window) {
         game_config_other_destroy();
     }
-    game->soft_pause();
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_TOPCON_VIS_HEIGHT + 2);

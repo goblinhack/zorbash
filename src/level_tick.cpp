@@ -23,8 +23,7 @@ void Level::tick (void)
     }
 
     //
-    // Update the cursor position. Allow this even when paused so you can
-    // look around.
+    // Update the cursor position.
     //
     cursor_move();
 
@@ -32,10 +31,6 @@ void Level::tick (void)
     // Allows for debugging
     //
     if (wid_console_window && wid_console_window->visible) {
-        return;
-    }
-
-    if (game->paused()) {
         return;
     }
 
@@ -70,10 +65,6 @@ void Level::tick (void)
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
     player_tick();
-
-    if (game->paused()) {
-        return;
-    }
 
     //
     // Stop rapid pickup/drop events if particles are still in progress

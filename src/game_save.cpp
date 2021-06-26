@@ -510,7 +510,6 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     /* uint32_t           key_move_left                */ out << bits(my.t.key_move_left                );
     /* uint32_t           key_move_right               */ out << bits(my.t.key_move_right               );
     /* uint32_t           key_move_up                  */ out << bits(my.t.key_move_up                  );
-    /* uint32_t           key_pause                    */ out << bits(my.t.key_pause                    );
     /* uint32_t           key_quit                     */ out << bits(my.t.key_quit                     );
     /* uint32_t           key_save                     */ out << bits(my.t.key_save                     );
     /* uint32_t           key_screenshot               */ out << bits(my.t.key_screenshot               );
@@ -547,8 +546,6 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.config);
     out << bits(my.t.world);
 
-    /* bool               hard_paused                  */ out << bits(my.t.hard_paused);
-    /* bool               soft_paused                  */ out << bits(my.t.soft_paused);
     /* bool               started                      */ out << bits(my.t.started);
     /* bool               things_are_moving            */ out << bits(my.t.things_are_moving);
     /* fpoint             mouse_over                   */ out << bits(my.t.mouse_over);
@@ -724,7 +721,6 @@ static void wid_save_destroy (void)
 {_
     delete wid_save;
     wid_save = nullptr;
-    game->hard_unpause();
 }
 
 static uint8_t wid_save_key_up (Widp w, const struct SDL_Keysym *key)
@@ -796,7 +792,6 @@ void Game::save_select (void)
     if (wid_save) {
         return;
     }
-    game->hard_pause();
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,

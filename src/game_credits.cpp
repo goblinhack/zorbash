@@ -18,7 +18,6 @@ static void wid_credits_destroy (void)
 {_
     delete wid_credits_window;
     wid_credits_window = nullptr;
-    game->soft_unpause();
     game->fini();
     game->main_menu_select();
     wid_not_visible(wid_topcon_window);
@@ -113,7 +112,6 @@ void Game::credits_select (void)
     if (wid_credits_window) {
         wid_credits_destroy();
     }
-    game->soft_pause();
 
     point tl = make_point(1, 0);
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);

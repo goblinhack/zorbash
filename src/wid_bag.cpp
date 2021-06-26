@@ -362,42 +362,52 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
         default:
             if (key->scancode == (SDL_Scancode)game->config.key_action0) {
                 game->level->inventory_assign(9, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action1) {
                 game->level->inventory_assign(0, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action2) {
                 game->level->inventory_assign(1, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action3) {
                 game->level->inventory_assign(2, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action4) {
                 game->level->inventory_assign(3, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action5) {
                 game->level->inventory_assign(4, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action6) {
                 game->level->inventory_assign(5, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action7) {
                 game->level->inventory_assign(6, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action8) {
                 game->level->inventory_assign(7, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action9) {
                 game->level->inventory_assign(8, t);
+                game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
 

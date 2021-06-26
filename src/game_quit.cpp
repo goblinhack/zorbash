@@ -17,7 +17,6 @@ static void game_quit_destroy (void)
 {_
     delete game_quit_window;
     game_quit_window = nullptr;
-    game->soft_unpause();
 }
 
 static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -99,7 +98,6 @@ void Game::quit_select (void)
     if (game_quit_window) {
         game_quit_destroy();
     }
-    game->soft_pause();
 
     auto m = TERM_WIDTH / 2;
     auto n = TERM_HEIGHT / 2;

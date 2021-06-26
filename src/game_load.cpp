@@ -614,7 +614,6 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           key_move_left                */ in >> bits(my.t.key_move_left                );
     /* uint32_t           key_move_right               */ in >> bits(my.t.key_move_right               );
     /* uint32_t           key_move_up                  */ in >> bits(my.t.key_move_up                  );
-    /* uint32_t           key_pause                    */ in >> bits(my.t.key_pause                    );
     /* uint32_t           key_quit                     */ in >> bits(my.t.key_quit                     );
     /* uint32_t           key_save                     */ in >> bits(my.t.key_save                     );
     /* uint32_t           key_screenshot               */ in >> bits(my.t.key_screenshot               );
@@ -689,8 +688,6 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
         return in;
     }
 
-    /* bool               hard_paused                  */ in >> bits(my.t.hard_paused);
-    /* bool               soft_paused                  */ in >> bits(my.t.soft_paused);
     /* bool               started                      */ in >> bits(my.t.started);
     /* bool               things_are_moving            */ in >> bits(my.t.things_are_moving);
     /* fpoint             mouse_over                   */ in >> bits(my.t.mouse_over);
@@ -930,7 +927,6 @@ static void wid_load_destroy (void)
 {_
     delete wid_load;
     wid_load = nullptr;
-    game->hard_unpause();
 }
 
 static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
@@ -1008,7 +1004,6 @@ void Game::load_select (void)
     if (wid_load) {
         return;
     }
-    game->hard_pause();
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,

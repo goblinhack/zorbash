@@ -18,7 +18,6 @@ static void game_config_sound_destroy (void)
 {_
     delete game_config_sound_window;
     game_config_sound_window = nullptr;
-    game->soft_unpause();
 }
 
 static uint8_t game_config_sound_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -144,7 +143,6 @@ void Game::config_sound_select (void)
     if (game_config_sound_window) {
         game_config_sound_destroy();
     }
-    game->soft_pause();
 
     auto m = TERM_WIDTH / 2;
     point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_TOPCON_VIS_HEIGHT + 2);

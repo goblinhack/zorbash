@@ -50,11 +50,6 @@ _
         return;
     }
 
-    if (game->paused()) {
-        LOG("rightbar: game paused; ignore");
-        return;
-    }
-
     auto level = game->level;
     if (!level) {
         LOG("rightbar: no level; ignore");
@@ -80,11 +75,6 @@ _
 
     if (game->in_transit_item) {
         LOG("rightbar: in transit item; ignore");
-        return;
-    }
-
-    if (game->paused()) {
-        LOG("rightbar: paused; ignore");
         return;
     }
 
@@ -115,14 +105,6 @@ static bool wid_rightbar_create (void)
 
     auto player = level->player;
     if (!player) {
-        return false;
-    }
-
-    //
-    // Stop this window popping on top of dialogs like when setting keys
-    //
-    if (game->paused()) {
-        LOG("Remake rightbar; paused");
         return false;
     }
 
@@ -567,6 +549,7 @@ static bool wid_rightbar_create (void)
 
     wid_update(wid_rightbar);
 
+#if 0
     if (game->request_remake_inventory) {
         if (game->state == Game::STATE_MOVING_ITEMS) {
             auto slot = game->inventory_highlight_slot;
@@ -581,6 +564,7 @@ static bool wid_rightbar_create (void)
             }
         }
     }
+#endif
 
     LOG("Remade rightbar");
     return true;

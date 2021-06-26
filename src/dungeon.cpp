@@ -308,7 +308,7 @@ bool Dungeon::is_oob (const int x, const int y)
 void Dungeon::debug (const std::string s)
 {_
     if (unlikely(g_opt_debug3)) {
-        CON("DUNGEON (%u) %s", seed, s.c_str());
+        LOG("DUNGEON (%u) %s", seed, s.c_str());
         LOG("===========================================================");
         dump();
     }
