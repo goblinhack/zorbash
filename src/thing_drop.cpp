@@ -32,24 +32,33 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
         }
     }
 _
-    auto top_owner = what->get_top_owner();
-    auto existing_owner = what->get_immediate_owner();
-    if (top_owner != this) {
-        if (existing_owner) {
-            log("Immediate owner of %s is %s", 
-                what->to_string().c_str(),
-                top_owner->to_string().c_str());
-            log("Top owner of %s is %s", 
-                what->to_string().c_str(),
-                what->get_top_owner()->to_string().c_str());
-            err("Attempt to drop %s which is not carried and owned by %s", 
-                what->to_string().c_str(),
-                existing_owner->to_string().c_str());
-        } else {
-            err("Attempt to drop %s which is not carried and not owned", 
-                what->to_string().c_str());
+    if (game->in_transit_item) {
+        //
+        // Such items are not owned by anyone
+        //
+    } else {
+        //
+        // Check we own it
+        //
+        auto top_owner = what->get_top_owner();
+        auto existing_owner = what->get_immediate_owner();
+        if (top_owner != this) {
+            if (existing_owner) {
+                log("Immediate owner of %s is %s", 
+                    what->to_string().c_str(),
+                    top_owner->to_string().c_str());
+                log("Top owner of %s is %s", 
+                    what->to_string().c_str(),
+                    what->get_top_owner()->to_string().c_str());
+                err("Attempt to drop %s which is not carried and owned by %s", 
+                    what->to_string().c_str(),
+                    existing_owner->to_string().c_str());
+            } else {
+                err("Attempt to drop %s which is not carried and not owned", 
+                    what->to_string().c_str());
+            }
+            return false;
         }
-        return false;
     }
 
     what->is_being_dropped = true;
