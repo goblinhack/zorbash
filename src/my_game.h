@@ -159,6 +159,7 @@ public:
     void tick_begin(const std::string &);
     void tick_end();
     void wid_collect_create(const std::list<Thingp> items);
+    void wid_items_options_create(Thingp chosen);
     void wid_collect_destroy(void);
     void wid_enchant_an_item(void);
     void wid_skill_choose(void);
@@ -231,6 +232,7 @@ public:
     //
     enum {
         STATE_NORMAL,
+        STATE_ITEM_OPTIONS,     // Drop, throw etc and item
         STATE_MOVING_ITEMS,     // Currently managing inventory
         STATE_COLLECTING_ITEMS, // Collecting en masse from the level
         STATE_ENCHANTING_ITEMS, // Upgrading items

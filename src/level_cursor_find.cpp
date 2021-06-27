@@ -21,6 +21,7 @@ void Level::cursor_find_on_visible_things (
                         const int16_t maxx, const int16_t maxy)
 {_
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_ITEM_OPTIONS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS)) {

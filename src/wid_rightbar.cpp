@@ -38,6 +38,7 @@ static void wid_rightbar_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
     LOG("rightbar: begin over rightbar");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
         game->state == Game::STATE_MOVING_ITEMS || 
         game->state == Game::STATE_COLLECTING_ITEMS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
@@ -66,6 +67,7 @@ static void wid_rightbar_mouse_over_e (Widp w)
     LOG("rightbar: end over rightbar");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
         game->state == Game::STATE_MOVING_ITEMS || 
         game->state == Game::STATE_COLLECTING_ITEMS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {

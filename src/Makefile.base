@@ -275,6 +275,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/util.o                        \
     $(OBJDIR)/wid.o                         \
     $(OBJDIR)/wid_bag.o                     \
+    $(OBJDIR)/wid_item_options.o            \
     $(OBJDIR)/wid_botcon.o                  \
     $(OBJDIR)/wid_collect.o                 \
     $(OBJDIR)/wid_console.o                 \
