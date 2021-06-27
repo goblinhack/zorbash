@@ -179,6 +179,8 @@ void Game::wid_items_options_create (Widp w, Thingp t)
 {_
     CON("Config menu");
 
+    auto was_moving_items = (game->state == Game::STATE_MOVING_ITEMS);
+
     change_state(Game::STATE_ITEM_OPTIONS);
 
     auto player = game->level->player;
@@ -200,7 +202,7 @@ void Game::wid_items_options_create (Widp w, Thingp t)
         wid_item_options_destroy();
     }
 
-    int options = 3;
+    int options = 2;
     if (chosen_thing->is_usable()) {_
         options++;
     }
@@ -208,6 +210,9 @@ void Game::wid_items_options_create (Widp w, Thingp t)
         options++;
     }
     if (player->can_eat(chosen_thing)) {_
+        options++;
+    }
+    if (was_moving_items) {
         options++;
     }
 
@@ -282,7 +287,7 @@ void Game::wid_items_options_create (Widp w, Thingp t)
         wid_set_text(w, "%%fg=white$D%%fg=reset$rop");
     }
     y_at += 3;
-    {_
+    if (was_moving_items) {_
         auto p = wid_item_options_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "move");
 
@@ -292,8 +297,8 @@ void Game::wid_items_options_create (Widp w, Thingp t)
         wid_set_on_mouse_up(w, wid_item_options_move);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$M%%fg=reset$ove");
+        y_at += 3;
     }
-    y_at += 3;
     {_
         auto p = wid_item_options_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
