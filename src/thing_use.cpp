@@ -4,6 +4,7 @@
 //
 
 #include "my_sys.h"
+#include "my_game.h"
 #include "my_main.h"
 #include "my_globals.h"
 #include "my_game.h"
@@ -136,6 +137,10 @@ bool Thing::use (Thingp what)
 {_
     dbg("Trying to use: %s", what->to_string().c_str());
 _
+    if (!is_player()) {
+        return false;
+    }
+
     if (what->is_skill()) {
         skill_use(what);
     } else if (what->is_enchantstone()) {
@@ -143,22 +148,27 @@ _
     } else if (what->is_skillstone()) {
         game->wid_skill_choose();
     } else if (what->is_weapon()) {
-        TOPCON("You wield the %s.", what->text_the().c_str());
-        if (is_player()) {
-            game->tick_begin("player used an item");
+        if (wield(what)) {
+            TOPCON("You wield the %s.", what->text_the().c_str());
+            game->tick_begin("player changed weapon");
         }
+    } else if (what->is_thrown_automatically_when_chosen()) {
+        throw_item_choose_target(what);
+        level->describe(what);
+    } else if (what->is_target_select_automatically_when_chosen()) {
+        fire_at_and_choose_target(what);
+        level->describe(what);
+    } else if (what->is_used_automatically_when_selected()) {
+        use(what);
+        level->describe(what);
     } else if (what->is_food()) {
         eat(what);
         used(what, this, true /* remove after use */);
-        if (is_player()) {
-            game->tick_begin("player ate an item");
-        }
+        game->tick_begin("player ate an item");
     } else if (what->is_potion()) {
         TOPCON("You quaff the %s.", what->text_the().c_str());
         used(what, this, true /* remove after use */);
-        if (is_player()) {
-            game->tick_begin("player drunk an item");
-        }
+        game->tick_begin("player drunk an item");
     } else if (what->is_wand()) {
         TOPCON("You wave the %s.", what->text_the().c_str());
         used(what, this, true /* remove after use */);
@@ -166,12 +176,8 @@ _
             game->tick_begin("player drunk an item");
         }
     } else if (!what->is_usable()) {
-        if (is_player()) {
-            TOPCON("I don't know how to use %s.", what->text_the().c_str());
-        }
-        if (is_player()) {
-            game->tick_begin("player tried to use something they could not");
-        }
+        TOPCON("I don't know how to use %s.", what->text_the().c_str());
+        game->tick_begin("player tried to use something they could not");
     }
     return true;
 }

@@ -119,6 +119,7 @@ void Game::wid_skill_choose (void)
     BOTCON("You lucky thing. Time to learn some new skill.");
 
     LOG("Thing skills create");
+    wid_thing_info_fini();
     change_state(Game::STATE_CHOOSING_SKILLS);
 
     auto player = game->level->player;

@@ -331,7 +331,7 @@ static void wid_bag_item_mouse_over_e (Widp w)
 static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     LOG("Bag item key down");
-
+_
     auto level = game->level;
     if (!level) {
         return false;
@@ -348,6 +348,16 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
         return wid_topcon_input(w, key);
 
     }
+
+    if (game->state == Game::STATE_COLLECTING_ITEMS) {
+        if (key->scancode == SDL_SCANCODE_ESCAPE) {
+            LOG("Escape pressed, clear collecting items state");
+_
+            game->change_state(Game::STATE_NORMAL);
+            return true;
+        }
+    }
+
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -368,8 +378,6 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
 
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
-        LOG("Recreate inventory");
-        game->change_state(Game::STATE_MOVING_ITEMS);
         return true;
     }
 
@@ -379,51 +387,61 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
         default:
             if (key->scancode == (SDL_Scancode)game->config.key_action0) {
                 game->level->inventory_assign(9, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action1) {
                 game->level->inventory_assign(0, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action2) {
                 game->level->inventory_assign(1, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action3) {
                 game->level->inventory_assign(2, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action4) {
                 game->level->inventory_assign(3, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action5) {
                 game->level->inventory_assign(4, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action6) {
                 game->level->inventory_assign(5, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action7) {
                 game->level->inventory_assign(6, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action8) {
                 game->level->inventory_assign(7, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action9) {
                 game->level->inventory_assign(8, what);
+                game->request_remake_inventory = true;
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
@@ -436,29 +454,29 @@ _
         if (player->drop(what)) {
             game->tick_begin("drop");
         }
+        game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
         return true;
-    }
-
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        if (key->scancode == SDL_SCANCODE_ESCAPE) {
-            LOG("Escape pressed, clear collecting items state");
-_
-            game->change_state(Game::STATE_NORMAL);
-            return true;
-        }
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_eat) {
         LOG("Pressed eat key");
 _
         player->use(what);
+        if (game->state == Game::STATE_MOVING_ITEMS) {
+            game->request_remake_inventory = true;
+            game->wid_thing_info_create(game->level->player, false);
+        }
         return true;
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
         LOG("Pressed use key");
         player->use(what);
+        if (game->state == Game::STATE_MOVING_ITEMS) {
+            game->request_remake_inventory = true;
+            game->wid_thing_info_create(game->level->player, false);
+        }
         return true;
     }
 
