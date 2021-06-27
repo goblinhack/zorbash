@@ -29,6 +29,10 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         return;
     }
 
+    if (!level->player) {
+        return;
+    }
+
     if (is_foilage()) {
         fpoint p = level->player->get_interpolated_mid_at();
         fpoint o = get_interpolated_mid_at();

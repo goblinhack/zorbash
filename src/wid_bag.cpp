@@ -118,6 +118,16 @@ uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button
 {_
     LOG("Place in transit item");
 _
+    auto level = game->level;
+    if (!level) {
+        return false;
+    }
+
+    auto player = level->player;
+    if (player && player->is_dead) {
+        LOG("Ignore input; player is dead");
+        return false;
+    }
     //
     // Allow click to move and then click to drop / or drag and drop
     //
@@ -154,6 +164,7 @@ _
     auto wid_bag_container = is_mouse_over_any_bag();
     if (!wid_bag_container) {
         t->log("Is not over any bag");
+        player->drop(t);
         return false;
     }
 
@@ -346,7 +357,6 @@ _
     if (wid_over != w) {
         LOG("Pass key to topcon as not over wid");
         return wid_topcon_input(w, key);
-
     }
 
     if (game->state == Game::STATE_COLLECTING_ITEMS) {
