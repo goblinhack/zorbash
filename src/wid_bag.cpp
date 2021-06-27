@@ -259,12 +259,21 @@ _
         return false;
     }
 
-    game->wid_items_options_create(t);
-#if 0
+    game->wid_items_options_create(w, t);
+    return true;
+}
+
+bool Game::wid_bag_move_item (Widp w, Thingp t)
+{_
+    LOG("Chosen to move item");
+_
+    game->change_state(Game::STATE_MOVING_ITEMS);
+
     auto wid_bag_container = wid_get_parent(w);
     auto bag_id = wid_get_thing_id_context(wid_bag_container);
     auto bag = game->thing_find(bag_id);
     if (!bag) {
+        ERR("No bag for thing; cannot move");
         return false;
     }
 
@@ -292,7 +301,7 @@ _
     wid_set_style(game->in_transit_item, UI_WID_STYLE_GRAY);
     wid_set_do_not_lower(game->in_transit_item, true);
 
-    wid_set_thing_id_context(game->in_transit_item, id);
+    wid_set_thing_id_context(game->in_transit_item, t->id);
     wid_set_on_mouse_up(game->in_transit_item, wid_in_transit_item_place);
 
     auto tpp = t->tp();
@@ -312,7 +321,6 @@ _
     LOG("Recreate inventory");
     game->change_state(Game::STATE_MOVING_ITEMS);
 
-#endif
     return true;
 }
 

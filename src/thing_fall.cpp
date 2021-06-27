@@ -264,7 +264,7 @@ _
                     if (is_monst()) {
                         TOPCON("%s tumbles into the void!", text_The().c_str());
                     } else if (is_item()) {
-                        TOPCON("%s is knocked into the void!", text_The().c_str());
+                        TOPCON("%s falls into the void!", text_The().c_str());
                     } else {
                         TOPCON("%s slips into the void!", text_The().c_str());
                     }

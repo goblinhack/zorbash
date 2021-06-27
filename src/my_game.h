@@ -159,7 +159,8 @@ public:
     void tick_begin(const std::string &);
     void tick_end();
     void wid_collect_create(const std::list<Thingp> items);
-    void wid_items_options_create(Thingp chosen);
+    void wid_items_options_create(Widp w, Thingp chosen);
+    bool wid_bag_move_item(Widp w, Thingp t);
     void wid_collect_destroy(void);
     void wid_enchant_an_item(void);
     void wid_skill_choose(void);
