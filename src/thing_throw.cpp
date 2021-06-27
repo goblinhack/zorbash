@@ -58,7 +58,6 @@ void Thing::throw_at (Thingp item, Thingp target)
 
     dbg("Thrown %s", item->to_string().c_str());
     item->move_to_immediately(target->mid_at);
-    item->visible();
 
     //
     // Potions for example are used when thrown. Chocolate frogs, no.
@@ -73,6 +72,30 @@ void Thing::throw_at (Thingp item, Thingp target)
             used(item, target, true /* remove_after_use */);
         } else {
             drop(item, target);
+        }
+    }
+
+    item->hide();
+
+    {
+        auto src = (last_blit_tl + last_blit_br) / 2;
+        auto dst = (target->last_blit_tl + target->last_blit_br) / 2;
+        auto sz = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
+        auto delay = PARTICLE_SPEED_MS;
+
+        if (is_player()) {
+            //
+            // So the player is visible above light
+            //
+            level->new_external_particle(item->id, src, dst, sz, delay,
+                                         tile_index_to_tile(item->tile_curr),
+                                         false,
+                                         true /* make_visible_at_end */);
+        } else {
+            level->new_internal_particle(item->id, src, dst, sz, delay,
+                                         tile_index_to_tile(item->tile_curr),
+                                         false,
+                                         true /* make_visible_at_end */);
         }
     }
 

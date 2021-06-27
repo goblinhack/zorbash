@@ -115,7 +115,9 @@ static uint8_t wid_item_options_move (Widp w, int32_t x, int32_t y, uint32_t but
 static uint8_t wid_item_options_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_item_options_destroy();
-    game->change_state(Game::STATE_NORMAL);
+    game->change_state(Game::STATE_MOVING_ITEMS);
+    game->request_remake_inventory = true;
+    game->wid_thing_info_create(game->level->player, false);
     return true;
 }
 

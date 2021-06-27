@@ -354,6 +354,14 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     LOG("Bag item key down");
 _
+    if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
+        LOG("Ignore");
+        return false;
+    }
+
     auto level = game->level;
     if (!level) {
         return false;
