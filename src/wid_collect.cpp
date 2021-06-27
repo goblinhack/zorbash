@@ -214,6 +214,7 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
     BOTCON("You lucky thing. Choose an item to collect.");
 
     LOG("Thing collect create");
+    wid_thing_info_fini();
     change_state(Game::STATE_COLLECTING_ITEMS);
 
     auto player = game->level->player;

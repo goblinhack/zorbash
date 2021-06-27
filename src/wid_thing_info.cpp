@@ -357,7 +357,7 @@ _
 
     point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
 
-    if ((t->get_top_owner() == player) || (t == player)) {
+    if (t->is_player() || t->is_bag_item_container()) {
         if (unlikely(g_opt_debug1)) {
             t->log("Thing info create bags");
         }
@@ -380,30 +380,33 @@ _
         delete b;
     }
     game->bag_secondary.clear();
-    int existing_bags_height = 0;
 
-    for (const auto& item : player->monstp->carrying) {
-        auto t = game->thing_find(item.id);
-        if (!t) {
-            continue;
-        }
+    if (t->is_player() || t->is_bag_item_container()) {
+        int existing_bags_height = 0;
 
-        if (!t->is_bag_item_container()) {
-            continue;
-        }
+        for (const auto& item : player->monstp->carrying) {
+            auto t = game->thing_find(item.id);
+            if (!t) {
+                continue;
+            }
 
-        point tl = mid + point(1, - (t->capacity_height() + 2));
-        point br = tl +  point(t->capacity_width() + 1,
-                               t->capacity_height() + 1);
+            if (!t->is_bag_item_container()) {
+                continue;
+            }
 
-        tl.y -= existing_bags_height;
-        br.y -= existing_bags_height;
-        existing_bags_height += t->capacity_height() + 3;
+            point tl = mid + point(1, - (t->capacity_height() + 2));
+            point br = tl +  point(t->capacity_width() + 1,
+                                t->capacity_height() + 1);
 
-        if (t->is_bag()) {
-            game->bag_secondary.push_back(new WidBag(t, tl, br, "Bag"));
-        } else {
-            game->bag_secondary.push_back(new WidBag(t, tl, br, "Chest"));
+            tl.y -= existing_bags_height;
+            br.y -= existing_bags_height;
+            existing_bags_height += t->capacity_height() + 3;
+
+            if (t->is_bag()) {
+                game->bag_secondary.push_back(new WidBag(t, tl, br, "Bag"));
+            } else {
+                game->bag_secondary.push_back(new WidBag(t, tl, br, "Chest"));
+            }
         }
     }
 

@@ -119,6 +119,7 @@ void Game::wid_enchant_an_item (void)
     BOTCON("You lucky thing. Choose an item to enchant.");
 
     LOG("Thing enchant create");
+    wid_thing_info_fini();
     change_state(Game::STATE_ENCHANTING_ITEMS);
 
     auto player = game->level->player;
