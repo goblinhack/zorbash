@@ -269,11 +269,33 @@ bool Game::wid_bag_move_item (Widp w, Thingp t)
 _
     game->change_state(Game::STATE_MOVING_ITEMS);
 
-    auto wid_bag_container = wid_get_parent(w);
-    auto bag_id = wid_get_thing_id_context(wid_bag_container);
-    auto bag = game->thing_find(bag_id);
+    Widp wid_bag_container;
+    ThingId bag_id;
+    Thingp bag;
+
+    if (game->bag_primary) {
+        auto b = game->bag_primary;
+        for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
+            if (wid_get_thing_id_context(w).id == t->id) {
+                wid_bag_container = wid_get_parent(w);
+                bag_id = wid_get_thing_id_context(wid_bag_container);
+                bag = game->thing_find(bag_id);
+            }
+        }
+    }
+
+    for (auto b : game->bag_secondary) {
+        for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
+            if (wid_get_thing_id_context(w).id == t->id) {
+                wid_bag_container = wid_get_parent(w);
+                bag_id = wid_get_thing_id_context(wid_bag_container);
+                bag = game->thing_find(bag_id);
+            }
+        }
+    }
+
     if (!bag) {
-        ERR("No bag for thing; cannot move");
+        ERR("%s has no bag so cannot it!", t->text_The().c_str());
         return false;
     }
 
