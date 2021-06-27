@@ -18,6 +18,7 @@
 #include "my_level.h"
 #include "my_wid_rightbar.h"
 #include "my_wid_thing_info.h"
+#include "my_wid_topcon.h"
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 #include "my_ui.h"
@@ -331,6 +332,22 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     LOG("Bag item key down");
 
+    auto level = game->level;
+    if (!level) {
+        return false;
+    }
+
+    auto player = level->player;
+    if (player && player->is_dead) {
+        LOG("Ignore input; player is dead");
+        return false;
+    }
+
+    if (wid_over != w) {
+        LOG("Pass key to topcon as not over wid");
+        return wid_topcon_input(w, key);
+
+    }
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -338,14 +355,14 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
     }
 
     auto id = wid_get_thing_id_context(w);
-    auto t = game->thing_find(id);
-    if (!t) {
+    auto what = game->thing_find(id);
+    if (!what) {
         LOG("Cannot find thing");
         return false;
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
-        if (game->level->player->drop(t)) {
+        if (game->level->player->drop(what)) {
             game->tick_begin("drop");
         }
 
@@ -361,72 +378,101 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
         case KMOD_RCTRL:
         default:
             if (key->scancode == (SDL_Scancode)game->config.key_action0) {
-                game->level->inventory_assign(9, t);
+                game->level->inventory_assign(9, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action1) {
-                game->level->inventory_assign(0, t);
+                game->level->inventory_assign(0, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action2) {
-                game->level->inventory_assign(1, t);
+                game->level->inventory_assign(1, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action3) {
-                game->level->inventory_assign(2, t);
+                game->level->inventory_assign(2, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action4) {
-                game->level->inventory_assign(3, t);
+                game->level->inventory_assign(3, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action5) {
-                game->level->inventory_assign(4, t);
+                game->level->inventory_assign(4, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action6) {
-                game->level->inventory_assign(5, t);
+                game->level->inventory_assign(5, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action7) {
-                game->level->inventory_assign(6, t);
+                game->level->inventory_assign(6, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action8) {
-                game->level->inventory_assign(7, t);
+                game->level->inventory_assign(7, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
             }
             if (key->scancode == (SDL_Scancode)game->config.key_action9) {
-                game->level->inventory_assign(8, t);
+                game->level->inventory_assign(8, what);
                 game->wid_thing_info_create(game->level->player, false);
                 return true;
-            }
-
-            switch (key->sym) {
-                default: {
-                    auto c = wid_event_to_char(key);
-                    switch (c) {
-                        case SDLK_ESCAPE: {_
-                            LOG("Escape pressed, clear moving items state");
-                            game->change_state(Game::STATE_NORMAL);
-                            return true;
-                        }
-                    }
-                }
             }
             break;
     }
 
-    return false;
+    if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        LOG("Pressed drop key");
+_
+        if (player->drop(what)) {
+            game->tick_begin("drop");
+        }
+        game->wid_thing_info_create(game->level->player, false);
+        return true;
+    }
+
+    if (game->state == Game::STATE_COLLECTING_ITEMS) {
+        if (key->scancode == SDL_SCANCODE_ESCAPE) {
+            LOG("Escape pressed, clear collecting items state");
+_
+            game->change_state(Game::STATE_NORMAL);
+            return true;
+        }
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_eat) {
+        LOG("Pressed eat key");
+_
+        player->use(what);
+        return true;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_use) {
+        LOG("Pressed use key");
+        player->use(what);
+        return true;
+    }
+
+    if (key->scancode == (SDL_Scancode)game->config.key_throw) {
+        LOG("Pressed throw key");
+_
+        game->change_state(Game::STATE_NORMAL);
+        wid_thing_info_fini(); // To remove bag or other info
+        player->throw_item_choose_target(what);
+        return true;
+    }
+
+    LOG("Pass key to topcon");
+    return wid_topcon_input(w, key);
 }
 
 static void wid_bag_tick (Widp w)

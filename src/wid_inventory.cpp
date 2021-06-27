@@ -30,8 +30,8 @@ void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t whe
     LOG("Inventory: begin over inventory");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_MOVING_ITEMS || 
         game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_CHOOSING_SKILLS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
         LOG("Inventory: moving items; ignore");
         return;
@@ -70,8 +70,8 @@ void wid_inventory_mouse_over_e (Widp w)
     LOG("Inventory: end over inventory");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_MOVING_ITEMS || 
         game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_CHOOSING_SKILLS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
         LOG("Inventory: moving items; ignore");
         return;
@@ -111,10 +111,10 @@ uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
     LOG("Inventory: mouse up over bag");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_MOVING_ITEMS || 
         game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_CHOOSING_SKILLS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
-        return false;
+        return true;
     }
 
     if (game->in_transit_item) {
@@ -147,19 +147,12 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
                                      int32_t y,
                                      uint32_t button)
 {_
-    if (game->state == Game::STATE_ENCHANTING_ITEMS) {
-        wid_thing_info_fini();
-        return false;
-    }
-
-    if (game->state == Game::STATE_CHOOSING_SKILLS) {
-        wid_thing_info_fini();
-        return false;
-    }
-
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        wid_thing_info_fini();
-        return false;
+    if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_COLLECTING_ITEMS ||
+        game->state == Game::STATE_CHOOSING_SKILLS ||
+        game->state == Game::STATE_ENCHANTING_ITEMS) {
+        LOG("Inventory: moving items; ignore");
+        return true;
     }
 
     if (game->state == Game::STATE_MOVING_ITEMS) {
