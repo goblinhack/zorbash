@@ -180,7 +180,7 @@ static void con_ (const wchar_t *fmt, va_list args)
             fprintf(stderr, "Failed to console log: [%S]\n", fmt);
         }
 
-        fwprintf(MY_STDOUT, L"%S\n", buf);
+        fprintf(MY_STDOUT, "%s\n", wstring_to_string(buf).c_str());
         term_log(buf);
         wid_console_log(buf);
     }
@@ -201,7 +201,7 @@ void con (const wchar_t *fmt)
     }
 
     {
-        fwprintf(MY_STDOUT, L"%S\n", fmt);
+        fprintf(MY_STDOUT, "%s\n", wstring_to_string(fmt).c_str());
         term_log(fmt);
         wid_console_log(fmt);
     }
@@ -255,7 +255,7 @@ static void topcon_ (const wchar_t *fmt, va_list args)
             fprintf(stderr, "Failed to topcon log: [%S]\n", fmt);
         }
 
-        fwprintf(MY_STDOUT, L"%S\n", buf);
+        fprintf(MY_STDOUT, "%s\n", wstring_to_string(buf).c_str());
         term_log(buf);
         wid_topcon_log(buf);
         //wid_console_log(buf);
@@ -268,18 +268,18 @@ static void topcon_ (const wchar_t *fmt, va_list args)
 void topcon (const wchar_t *fmt)
 {
     {
-        char buf[MAXSTR];
-
-        buf[0] = '\0';
-        get_timestamp(buf, MAXSTR);
-        fprintf(MY_STDOUT, "%s", buf);
-        term_log(buf);
+        char ts[MAXSTR];
+        ts[0] = '\0';
+        get_timestamp(ts, MAXSTR);
+        fprintf(MY_STDOUT, "%sPY TOPCON: ", ts);
+        term_log(ts);
     }
 
     {
-        fwprintf(MY_STDOUT, L"%S\n", fmt);
+        fprintf(MY_STDOUT, "%s\n", wstring_to_string(fmt).c_str());
         term_log(fmt);
         wid_topcon_log(fmt);
+        wid_console_log(fmt);
         //wid_console_log(fmt);
     }
     putchar('\n');

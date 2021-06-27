@@ -549,23 +549,6 @@ static bool wid_rightbar_create (void)
 
     wid_update(wid_rightbar);
 
-#if 0
-    if (game->request_remake_inventory) {
-        if (game->state == Game::STATE_MOVING_ITEMS) {
-            auto slot = game->inventory_highlight_slot;
-            LOG("Inventory: remaking inventory for highlight slot %d", slot);
-
-            auto t = level->inventory_get(slot);
-            if (t) {
-                LOG("Inventory: remaking inventory, remake thing info too");
-                game->wid_thing_info_create(t);
-            } else {
-                LOG("Inventory: remaking inventory, no thing info");
-            }
-        }
-    }
-#endif
-
     LOG("Remade rightbar");
     return true;
 }

@@ -56,7 +56,7 @@ uint8_t wid_topcon_init (void)
 //
 // Key down etc...
 //
-static uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
+uint8_t wid_topcon_input (Widp w, const SDL_Keysym *key)
 {_
     if (!game) {
         return false;
@@ -188,14 +188,14 @@ _
             game->change_state(Game::STATE_NORMAL);
         }
 
-        if (game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
+        if (game->state == Game::STATE_COLLECTING_ITEMS) {
             return false;
         }
         auto what = level->inventory_get();
         if (what) {
             player->use(what);
         }
+        wid_rightbar_init();
         return true;
     }
 
@@ -211,11 +211,7 @@ _
     if (key->scancode == (SDL_Scancode)game->config.key_load) {
         LOG("Pressed load key");
 _
-        if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
-            return false;
-        }
+        game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
         CON("USERCFG: loading game");
         game->load_select();
@@ -224,11 +220,7 @@ _
     if (key->scancode == (SDL_Scancode)game->config.key_save) {
         LOG("Pressed save key");
 _
-        if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
-            return false;
-        }
+        game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
         CON("USERCFG: saving the game");
         game->save_select();
@@ -237,22 +229,16 @@ _
     if (key->scancode == (SDL_Scancode)game->config.key_help) {
         LOG("Pressed help key");
 _
-        if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
-            return false;
-        }
+        game->change_state(Game::STATE_NORMAL);
+        wid_thing_info_fini(); // To remove bag or other info
         game->config_keyboard_select();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_quit) {
         LOG("Pressed quit key");
 _
-        if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
-            return false;
-        }
+        game->change_state(Game::STATE_NORMAL);
+        wid_thing_info_fini(); // To remove bag or other info
         game->quit_select();
         return true;
     }
@@ -447,9 +433,7 @@ _
     }
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
         LOG("Pressed use key");
-_
         if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
             return false;
         }
@@ -463,7 +447,6 @@ _
         LOG("Pressed throw key");
 _
         if (game->state == Game::STATE_CHOOSING_TARGET ||
-            game->state == Game::STATE_MOVING_ITEMS || 
             game->state == Game::STATE_COLLECTING_ITEMS) {
             return false;
         }

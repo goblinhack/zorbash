@@ -175,7 +175,7 @@ void Thing::show_botcon_description (void) const
             skip_showing_keys_to_use = false;
             break;
         case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
-            skip_showing_keys_to_use = true;
+            skip_showing_keys_to_use = false;
             break;
         case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
             skip_showing_keys_to_use = true;
