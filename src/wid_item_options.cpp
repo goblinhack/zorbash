@@ -19,6 +19,7 @@
 static WidPopup *wid_item_options_window;
 static Thingp chosen_thing;
 static Widp chosen_wid;
+static bool came_from_inventory;
 
 static void wid_item_options_destroy (void)
 {_
@@ -39,11 +40,7 @@ static uint8_t wid_item_options_use (Widp w, int32_t x, int32_t y, uint32_t butt
 
     player->use(chosen_thing);
 
-    if (game->state == Game::STATE_ITEM_OPTIONS) {
-        game->change_state(Game::STATE_MOVING_ITEMS);
-        game->request_remake_inventory = true;
-        game->wid_thing_info_create(game->level->player, false);
-    }
+    game->change_state(Game::STATE_NORMAL);
     return true;
 }
 
@@ -59,6 +56,11 @@ static uint8_t wid_item_options_eat (Widp w, int32_t x, int32_t y, uint32_t butt
     }
 
     player->use(chosen_thing);
+
+    if (came_from_inventory) {
+        game->change_state(Game::STATE_NORMAL);
+        return true;
+    }
 
     if (game->state == Game::STATE_ITEM_OPTIONS) {
         game->change_state(Game::STATE_MOVING_ITEMS);
@@ -98,6 +100,12 @@ static uint8_t wid_item_options_drop (Widp w, int32_t x, int32_t y, uint32_t but
     }
 
     player->drop(chosen_thing);
+
+    if (came_from_inventory) {
+        game->change_state(Game::STATE_NORMAL);
+        return true;
+    }
+
     game->change_state(Game::STATE_MOVING_ITEMS);
     game->request_remake_inventory = true;
     game->wid_thing_info_create(game->level->player, false);
@@ -115,6 +123,13 @@ static uint8_t wid_item_options_move (Widp w, int32_t x, int32_t y, uint32_t but
 static uint8_t wid_item_options_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_item_options_destroy();
+
+    if (came_from_inventory) {
+        game->change_state(Game::STATE_NORMAL);
+        wid_thing_info_fini(); // To remove bag or other info
+        return true;
+    }
+
     game->change_state(Game::STATE_MOVING_ITEMS);
     game->request_remake_inventory = true;
     game->wid_thing_info_create(game->level->player, false);
@@ -175,7 +190,7 @@ static uint8_t wid_item_options_key_down (Widp w, const struct SDL_Keysym *key)
     return true;
 }
 
-void Game::wid_items_options_create (Widp w, Thingp t)
+void Game::wid_items_options_create (Widp w, Thingp t, bool source_came_from_inventory)
 {_
     CON("Config menu");
 
@@ -197,19 +212,19 @@ void Game::wid_items_options_create (Widp w, Thingp t)
 
     chosen_thing = t;
     chosen_wid = w;
+    came_from_inventory = source_came_from_inventory;
 
     if (wid_item_options_window) {
         wid_item_options_destroy();
     }
 
     int options = 2;
-    if (chosen_thing->is_usable()) {_
-        options++;
-    }
     if (chosen_thing->is_throwable()) {_
         options++;
     }
     if (player->can_eat(chosen_thing)) {_
+        options++;
+    } else if (chosen_thing->is_usable()) {_
         options++;
     }
     if (was_moving_items) {
@@ -239,7 +254,18 @@ void Game::wid_items_options_create (Widp w, Thingp t)
 
     int y_at = 0;
 
-    if (chosen_thing->is_usable()) {_
+    if (player->can_eat(chosen_thing)) {_
+        auto p = wid_item_options_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "eat");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_item_options_eat);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "%%fg=white$E%%fg=reset$at");
+        y_at += 3;
+    } else if (chosen_thing->is_usable()) {_
         auto p = wid_item_options_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "use");
 
@@ -248,7 +274,15 @@ void Game::wid_items_options_create (Widp w, Thingp t)
         wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, wid_item_options_use);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "%%fg=white$U%%fg=reset$se");
+        if (chosen_thing->is_weapon()) {
+            wid_set_text(w, "%%fg=white$U%%fg=reset$se (wield it)");
+        } else if (chosen_thing->is_potion()) {
+            wid_set_text(w, "%%fg=white$U%%fg=reset$se (drink it)");
+        } else if (chosen_thing->is_wand()) {
+            wid_set_text(w, "%%fg=white$U%%fg=reset$se (fire it)");
+        } else {
+            wid_set_text(w, "%%fg=white$U%%fg=reset$se");
+        }
         y_at += 3;
     }
     if (chosen_thing->is_throwable()) {_
@@ -261,18 +295,6 @@ void Game::wid_items_options_create (Widp w, Thingp t)
         wid_set_on_mouse_up(w, wid_item_options_throw);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$T%%fg=reset$hrow");
-        y_at += 3;
-    }
-    if (player->can_eat(chosen_thing)) {_
-        auto p = wid_item_options_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "eat");
-
-        point tl = make_point(0, y_at);
-        point br = make_point(width, y_at + 2);
-        wid_set_style(w, UI_WID_STYLE_NORMAL);
-        wid_set_on_mouse_up(w, wid_item_options_eat);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, "%%fg=white$E%%fg=reset$at");
         y_at += 3;
     }
     {_

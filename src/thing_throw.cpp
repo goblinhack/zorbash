@@ -14,12 +14,12 @@
 
 bool Thing::throw_item_choose_target (Thingp item)
 {_
-    dbg("Trying to use: %s", item->to_string().c_str());
+    dbg("Trying to throw: %s", item->to_string().c_str());
 
     if (!item->is_throwable()) {
         if (is_player()) {
             TOPCON("I don't know how to throw %s.", item->text_the().c_str());
-            game->tick_begin("player tried to use something they could not");
+            game->tick_begin("player tried to throw something they could not");
         }
         return false;
     }
