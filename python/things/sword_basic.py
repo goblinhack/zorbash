@@ -119,6 +119,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_is_treasure(True)
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_weapon(True)
+    mytp.set_is_usable(True)
     mytp.set_is_sword(True)
     mytp.set_long_text_description("A gleaming entry-level sword. Ideal for beginners or the occasional weekend dungeoneer.")
     mytp.set_on_use_do("sword_basic.on_use()")

@@ -18,6 +18,7 @@
 
 static WidPopup *wid_item_options_window;
 static Thingp chosen_thing;
+static Widp chosen_wid;
 
 static void wid_item_options_destroy (void)
 {_
@@ -28,42 +29,93 @@ static void wid_item_options_destroy (void)
 static uint8_t wid_item_options_use (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_item_options_destroy();
-    game->config_gfx_select();
+
+    auto player = game->level->player;
+    if (!player){
+        game->change_state(Game::STATE_NORMAL);
+        ERR("No player");
+        return false;
+    }
+
+    player->use(chosen_thing);
+
+    if (game->state == Game::STATE_ITEM_OPTIONS) {
+        game->change_state(Game::STATE_MOVING_ITEMS);
+        game->request_remake_inventory = true;
+        game->wid_thing_info_create(game->level->player, false);
+    }
     return true;
 }
 
 static uint8_t wid_item_options_eat (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_item_options_destroy();
-    TOPCON("eat");
+
+    auto player = game->level->player;
+    if (!player){
+        game->change_state(Game::STATE_NORMAL);
+        ERR("No player");
+        return false;
+    }
+
+    player->use(chosen_thing);
+
+    if (game->state == Game::STATE_ITEM_OPTIONS) {
+        game->change_state(Game::STATE_MOVING_ITEMS);
+        game->request_remake_inventory = true;
+        game->wid_thing_info_create(game->level->player, false);
+    }
     return true;
 }
 
 static uint8_t wid_item_options_throw (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_item_options_destroy();
-    TOPCON("throw");
+
+    auto player = game->level->player;
+    if (!player){
+        game->change_state(Game::STATE_NORMAL);
+        ERR("No player");
+        return false;
+    }
+
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    player->throw_item_choose_target(chosen_thing);
+
     return true;
 }
 
 static uint8_t wid_item_options_drop (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_item_options_destroy();
-    TOPCON("drio");
+
+    auto player = game->level->player;
+    if (!player){
+        game->change_state(Game::STATE_NORMAL);
+        ERR("No player");
+        return false;
+    }
+
+    player->drop(chosen_thing);
+    game->change_state(Game::STATE_MOVING_ITEMS);
+    game->request_remake_inventory = true;
+    game->wid_thing_info_create(game->level->player, false);
+
     return true;
 }
 
 static uint8_t wid_item_options_move (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_item_options_destroy();
-    TOPCON("move");
+    game->wid_bag_move_item(chosen_wid, chosen_thing);
     return true;
 }
 
 static uint8_t wid_item_options_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_item_options_destroy();
-    game->main_menu_select();
+    game->change_state(Game::STATE_NORMAL);
     return true;
 }
 
@@ -121,11 +173,10 @@ static uint8_t wid_item_options_key_down (Widp w, const struct SDL_Keysym *key)
     return true;
 }
 
-void Game::wid_items_options_create (Thingp chosen)
+void Game::wid_items_options_create (Widp w, Thingp t)
 {_
     CON("Config menu");
 
-    wid_thing_info_fini();
     change_state(Game::STATE_ITEM_OPTIONS);
 
     auto player = game->level->player;
@@ -140,18 +191,34 @@ void Game::wid_items_options_create (Thingp chosen)
     //
     wid_ignore_events_briefly();
 
-    chosen_thing = chosen;
+    chosen_thing = t;
+    chosen_wid = w;
 
     if (wid_item_options_window) {
         wid_item_options_destroy();
     }
 
+    int options = 3;
+    if (chosen_thing->is_usable()) {_
+        options++;
+    }
+    if (chosen_thing->is_throwable()) {_
+        options++;
+    }
+    if (player->can_eat(chosen_thing)) {_
+        options++;
+    }
+
+    int h = (options * 3) + 2;
+    int top_half = h / 2;
+    int bot_half = h - top_half;
+
     point tl = make_point(
                 TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2,
-                TERM_HEIGHT / 2 - 4);
+                TERM_HEIGHT / 2 - top_half);
     point br = make_point(
                 TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1,
-                TERM_HEIGHT / 2 + 14);
+                TERM_HEIGHT / 2 + bot_half - 1);
     auto width = br.x - tl.x - 2;
 
     wid_item_options_window = new WidPopup("Item option",
@@ -160,6 +227,7 @@ void Game::wid_items_options_create (Thingp chosen)
         Widp w = wid_item_options_window->wid_popup_container;
         wid_set_on_key_up(w, wid_item_options_key_up);
         wid_set_on_key_down(w, wid_item_options_key_down);
+        wid_set_style(w, UI_WID_STYLE_DARK);
     }
 
     int y_at = 0;
@@ -176,7 +244,6 @@ void Game::wid_items_options_create (Thingp chosen)
         wid_set_text(w, "%%fg=white$U%%fg=reset$se");
         y_at += 3;
     }
-
     if (chosen_thing->is_throwable()) {_
         auto p = wid_item_options_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "throw");
@@ -189,7 +256,6 @@ void Game::wid_items_options_create (Thingp chosen)
         wid_set_text(w, "%%fg=white$T%%fg=reset$hrow");
         y_at += 3;
     }
-
     if (player->can_eat(chosen_thing)) {_
         auto p = wid_item_options_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "eat");
@@ -211,7 +277,7 @@ void Game::wid_items_options_create (Thingp chosen)
         wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, wid_item_options_drop);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "%%fg=white$O%%fg=reset$rop");
+        wid_set_text(w, "%%fg=white$D%%fg=reset$rop");
     }
     y_at += 3;
     {_
