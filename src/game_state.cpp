@@ -26,6 +26,9 @@ _
             LOG("State changed to STATE_NORMAL");
             wid_thing_info_fini();
             break;
+        case STATE_ITEM_OPTIONS:
+            LOG("State changed to STATE_ITEM_OPTIONS");
+            break;
         case STATE_MOVING_ITEMS:     // Currently managing inventory
             LOG("State changed to STATE_MOVING_ITEMS");
             break;

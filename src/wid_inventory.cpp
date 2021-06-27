@@ -30,6 +30,7 @@ void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t whe
     LOG("Inventory: begin over inventory");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
         game->state == Game::STATE_COLLECTING_ITEMS ||
         game->state == Game::STATE_CHOOSING_SKILLS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
@@ -70,6 +71,7 @@ void wid_inventory_mouse_over_e (Widp w)
     LOG("Inventory: end over inventory");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
         game->state == Game::STATE_COLLECTING_ITEMS ||
         game->state == Game::STATE_CHOOSING_SKILLS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
@@ -111,6 +113,7 @@ uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
     LOG("Inventory: mouse up over bag");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
         game->state == Game::STATE_COLLECTING_ITEMS ||
         game->state == Game::STATE_CHOOSING_SKILLS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
@@ -148,6 +151,7 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
                                      uint32_t button)
 {_
     if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
         game->state == Game::STATE_COLLECTING_ITEMS ||
         game->state == Game::STATE_CHOOSING_SKILLS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {

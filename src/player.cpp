@@ -32,6 +32,11 @@ void player_tick (void)
     switch (game->state) {
         case Game::STATE_NORMAL:
             break;
+        case Game::STATE_ITEM_OPTIONS:
+            if (unlikely(g_opt_debug4)) {
+                LOG("Ignore player action when choosing item options");
+            }
+            return;
         case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
             if (unlikely(g_opt_debug4)) {
                 LOG("Ignore player action when moving items");

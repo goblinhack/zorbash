@@ -37,6 +37,7 @@ void Level::describe (fpoint p)
     dbg3("Describe %f,%f", p.x, p.y);
 _
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_ITEM_OPTIONS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS)) {
@@ -337,6 +338,7 @@ void Level::describe (Thingp t)
     dbg3("Describe %s", t->to_string().c_str());
 
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_ITEM_OPTIONS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         dbg3("Describe %s; no wrong state", t->to_string().c_str());

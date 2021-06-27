@@ -32,6 +32,7 @@ void wid_skillbox_mouse_over_b (Widp w,
     LOG("Skillbox: begin over skillbox");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
         game->state == Game::STATE_MOVING_ITEMS || 
         game->state == Game::STATE_COLLECTING_ITEMS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
@@ -72,6 +73,7 @@ void wid_skillbox_mouse_over_e (Widp w)
     LOG("Skillbox: end over skillbox");
 _
     if (game->state == Game::STATE_CHOOSING_TARGET ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
         game->state == Game::STATE_MOVING_ITEMS || 
         game->state == Game::STATE_COLLECTING_ITEMS ||
         game->state == Game::STATE_ENCHANTING_ITEMS) {
@@ -111,22 +113,11 @@ uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
     auto slot = wid_get_int_context(w);
     LOG("Skillbox: mouse up on slot %d", slot);
 
-    if (game->state == Game::STATE_ENCHANTING_ITEMS) {
-        wid_thing_info_fini();
-        return false;
-    }
-
-    if (game->state == Game::STATE_CHOOSING_SKILLS) {
-        wid_thing_info_fini();
-        return false;
-    }
-
-    if (game->state == Game::STATE_MOVING_ITEMS) {
-        wid_thing_info_fini();
-        return false;
-    }
-
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
+    if (game->state == Game::STATE_ENCHANTING_ITEMS ||
+        game->state == Game::STATE_ITEM_OPTIONS ||
+        game->state == Game::STATE_CHOOSING_SKILLS ||
+        game->state == Game::STATE_MOVING_ITEMS ||
+        game->state == Game::STATE_COLLECTING_ITEMS) {
         wid_thing_info_fini();
         return false;
     }
