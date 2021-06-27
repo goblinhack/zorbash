@@ -259,7 +259,7 @@ _
         return false;
     }
 
-    game->wid_items_options_create(w, t);
+    game->wid_items_options_create(w, t, false /* came from inventory */);
     return true;
 }
 

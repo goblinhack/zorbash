@@ -682,6 +682,7 @@ _
     if (unlikely(g_opt_debug2)) {
         item->log("Chosen inventory item");
     }
+#if 0
     if (item->is_weapon()) {
         if (player->wield(item)) {
             if (changed_highlight_slot) {
@@ -715,6 +716,8 @@ _
         game->change_state(Game::STATE_NORMAL);
         describe(item);
     }
+#endif
+    describe(item);
 
     return true;
 }

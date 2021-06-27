@@ -205,11 +205,15 @@ bool Thing::move (fpoint future_pos,
         dbg("Check if there is anything to carry here");
         auto items = anything_to_carry();
         if (!items.empty()) {
+#if 0
             if (items.size() > 1) {
                 game->wid_collect_create(items);
             } else {
                 try_to_carry(items);
             }
+#else
+            game->wid_collect_create(items);
+#endif
         } else {
             TOPCON("You wait...");
         }

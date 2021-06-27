@@ -274,6 +274,11 @@ have_dungeon_start:
                         }
 
                         {
+                            auto b = thing_new("food_frog", fpoint(x, y));
+                            t->carry(b);
+                        }
+
+                        {
                             auto b = thing_new("chest1", fpoint(x, y));
                             t->carry(b);
                         }

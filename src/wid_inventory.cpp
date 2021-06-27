@@ -182,12 +182,12 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
         auto t = level->inventory_get(slot);
         if (t) {
             game->wid_thing_info_create(t);
-            game->wid_items_options_create(w, t);
+            game->wid_items_options_create(w, t, true /* came from inventory */);
         }
     } else {
         auto t = level->inventory_get(slot);
         if (t) {
-            game->wid_items_options_create(w, t);
+            game->wid_items_options_create(w, t, true /* came from inventory */);
         }
     }
 

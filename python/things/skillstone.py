@@ -42,7 +42,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_treasure_class_c(True)
     mytp.set_is_treasure(True)
     mytp.set_is_usable(True)
-    mytp.set_is_used_when_thrown(True)
+    mytp.set_is_used_when_thrown(False)
     mytp.set_long_text_description("Use this magical stone to learn some new skills into your brain matter thing.")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_fall_do("skillstone.on_fall()")
