@@ -21,8 +21,7 @@ static Widp wid_actionbar;
 
 void wid_actionbar_fini (void)
 {_
-    delete wid_actionbar;
-    wid_actionbar = nullptr;
+    wid_destroy_nodelay(&wid_actionbar);
 }
 
 #if 0
@@ -112,13 +111,6 @@ static uint8_t wid_actionbar_drop (Widp w, int32_t x, int32_t y, uint32_t button
     return true;
 }
 
-static uint8_t wid_actionbar_move (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    wid_actionbar_fini();
-    game->wid_bag_move_item(chosen_wid, chosen_thing);
-    return true;
-}
-
 static uint8_t wid_actionbar_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_actionbar_fini();
@@ -190,6 +182,15 @@ static uint8_t wid_actionbar_key_down (Widp w, const struct SDL_Keysym *key)
 }
 #endif
 
+static uint8_t wid_actionbar_mouse_quit (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+TOPCON("quit");
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    game->quit_select();
+    return true;
+}
+
 void wid_actionbar_init (void)
 {_
     LOG("Actionbar");
@@ -258,6 +259,7 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_quit");
+        wid_set_on_mouse_up(w, wid_actionbar_mouse_quit);
 #if 0
         wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);

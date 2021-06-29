@@ -38,7 +38,7 @@ _
     } else {
         DIE_CLEAN("USERCFG: quit");
     }
-    return false;
+    return true;
 }
 
 static uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -47,7 +47,7 @@ static uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
     if (!game->level) {
         game->main_menu_select();
     }
-    return false;
+    return true;
 }
 
 static uint8_t game_quit_key_up (Widp w, const struct SDL_Keysym *key)

@@ -298,7 +298,7 @@ _
         wid_thing_info_fini();
     }
 
-    if (hover_over_things.size()) {
+    if (hover_over_things.size() > 1) {
         dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
         game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
         if (hover_over_things.size() > 1) {
@@ -310,6 +310,21 @@ _
                 text = "Multiple things here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
             } else {
                 text = "Multiple things here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+            }
+            BOTCON("%s", text.c_str());
+        }
+    } else if (hover_over_things.size()) {
+        dbg3("Describe %f,%f; found %d thing", p.x, p.y, (int) hover_over_things.size());
+        game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
+        if (hover_over_things.size() > 1) {
+            auto k = std::string(
+                SDL_GetScancodeName(
+                    (SDL_Scancode)game->config.key_wait_or_collect));
+            std::string text;
+            if (k == ".") {
+                text = "Something is here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+            } else {
+                text = "Something is here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
             }
             BOTCON("%s", text.c_str());
         }
