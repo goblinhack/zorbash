@@ -5171,8 +5171,8 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
 
 //TOPCON("wid [%s] mouse up.", w->name.c_str());
     if ((w->on_mouse_up && (w->on_mouse_up)(w, x, y, button)) ||
-        sound_play("click");
         wid_get_moveable(w)) {
+        sound_play("click");
 
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
