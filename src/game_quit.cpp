@@ -8,6 +8,7 @@
 #include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
+#include "my_wid_actionbar.h"
 #include "my_ui.h"
 #include "my_sdl.h"
 
@@ -27,6 +28,7 @@ _
         LOG("USERCFG: restart game");
         wid_topcon_fini();
         wid_topcon_init();
+        wid_actionbar_fini();
         wid_botcon_fini();
         wid_botcon_init();
 _

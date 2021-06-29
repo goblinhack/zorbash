@@ -23,6 +23,7 @@
 #include "my_gl.h"
 #include "my_wid_inventory.h"
 #include "my_wid_rightbar.h"
+#include "my_wid_actionbar.h"
 #include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
 #include "my_array_bounds_check.h"
@@ -6115,6 +6116,7 @@ void wid_tick_all (void)
             game->request_remake_inventory = false;
             game->request_remake_skillbox = false;
         }
+        wid_actionbar_init();
     }
 
     //

@@ -355,7 +355,7 @@ _
         }
     }
 
-    point mid(TERM_WIDTH / 2, TERM_HEIGHT - 1);
+    point mid(TERM_WIDTH / 2, TERM_HEIGHT - 5);
 
     if (t->is_player() || t->is_bag_item_container()) {
         if (unlikely(g_opt_debug1)) {
@@ -396,7 +396,7 @@ _
 
             point tl = mid + point(1, - (t->capacity_height() + 2));
             point br = tl +  point(t->capacity_width() + 1,
-                                t->capacity_height() + 1);
+                                   t->capacity_height() + 1);
 
             tl.y -= existing_bags_height;
             br.y -= existing_bags_height;

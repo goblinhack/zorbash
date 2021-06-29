@@ -3,6 +3,8 @@ Todo
 ----
 - icon for inventory / wait / quit
 - need collect icon
+- if popup with focus, disable other widgets to make code simpler?
+- if (U)se is remapped - show key?
 
 Level
 -----
