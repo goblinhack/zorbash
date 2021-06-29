@@ -26,6 +26,7 @@ std::default_random_engine rng;
 #include "my_wid_console.h"
 #include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
+#include "my_wid_actionbar.h"
 #include "my_font.h"
 #include "my_dir.h"
 #include "my_file.h"
@@ -789,6 +790,11 @@ int32_t main (int32_t argc, char *argv[])
     if (!wid_topcon_init()) {
         ERR("Wid_topcon init");
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    CON("INI: Load UI actionar");
+    wid_actionbar_init();
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     CON("INI: Load UI botcon");

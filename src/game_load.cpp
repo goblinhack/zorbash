@@ -12,6 +12,7 @@
 #include "my_wid_popup.h"
 #include "my_game_error.h"
 #include "my_wid_rightbar.h"
+#include "my_wid_actionbar.h"
 #include "my_alloc.h"
 #include "my_sprintf.h"
 #include "my_file.h"
@@ -848,6 +849,8 @@ Game::load (std::string file_to_load, class Game &target)
         wid_visible(wid_botcon_window);
         wid_rightbar_fini();
         wid_rightbar_init();
+        wid_actionbar_init();
+        wid_actionbar_fini();
     }
 
     free(uncompressed);

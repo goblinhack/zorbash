@@ -17,6 +17,7 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 #include "my_wid_console.h"
+#include "my_wid_actionbar.h"
 #include "my_array_bounds_check.h"
 
 void Thing::on_move (void)
@@ -53,6 +54,10 @@ void Thing::move_reset_timestamps (void)
                         (SDL_Scancode)game->config.key_wait_or_collect));
             level->describe(mid_at);
         }
+#if 0
+        wid_actionbar_fini();
+        wid_actionbar_init();
+#endif
     }
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);

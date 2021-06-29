@@ -192,8 +192,8 @@ static uint8_t wid_item_options_key_down (Widp w, const struct SDL_Keysym *key)
 
 void Game::wid_items_options_create (Widp w, Thingp t, bool source_came_from_inventory)
 {_
-    CON("Config menu");
-
+    LOG("Item options");
+_
     auto was_moving_items = (game->state == Game::STATE_MOVING_ITEMS);
 
     change_state(Game::STATE_ITEM_OPTIONS);
