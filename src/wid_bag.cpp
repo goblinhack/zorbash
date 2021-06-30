@@ -19,6 +19,7 @@
 #include "my_wid_rightbar.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_topcon.h"
+#include "my_wid_actionbar.h"
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 #include "my_ui.h"
@@ -376,10 +377,13 @@ static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
 {_
     LOG("Bag item key down");
 _
-    if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_ITEM_OPTIONS ||
-        game->state == Game::STATE_COLLECTING_ITEMS ||
-        game->state == Game::STATE_ENCHANTING_ITEMS) {
+    if ((game->state == Game::STATE_CHOOSING_TARGET) ||
+        (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         LOG("Ignore");
         return false;
     }
@@ -593,6 +597,8 @@ _
     wid_update(wid_bag_title);
 
     game->bags.push_back(this);
+
+    wid_actionbar_init();
 }
 
 Widp is_mouse_over_any_bag (void)

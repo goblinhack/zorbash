@@ -54,7 +54,6 @@ void Thing::move_reset_timestamps (void)
                         (SDL_Scancode)game->config.key_wait_or_collect));
             level->describe(mid_at);
         }
-        wid_actionbar_fini();
         wid_actionbar_init();
     }
     set_timestamp_move_begin(0);

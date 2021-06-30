@@ -9,6 +9,7 @@
 #include "my_wid_topcon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
+#include "my_wid_actionbar.h"
 #include "my_alloc.h"
 #include "my_array_bounds_check.h"
 #include "my_monst.h"
@@ -17,6 +18,9 @@
 #include "my_ui.h"
 #include "my_sdl.h"
 #include "my_gl.h"
+
+WidPopup *wid_save;
+void wid_save_destroy(void);
 
 extern bool game_load_headers_only;
 bool game_save_config_only;
@@ -715,12 +719,11 @@ Game::save_config (void)
     game->config.dump("WROTE:");
 }
 
-static WidPopup *wid_save;
-
-static void wid_save_destroy (void)
+void wid_save_destroy (void)
 {_
     delete wid_save;
     wid_save = nullptr;
+    game->change_state(Game::STATE_NORMAL);
 }
 
 static uint8_t wid_save_key_up (Widp w, const struct SDL_Keysym *key)
@@ -809,7 +812,7 @@ void Game::save_select (void)
     game_load_headers_only = true;
 
     wid_save->log(" ");
-    wid_save->log("Choose a save slot. %%fg=red$ESC%%fg=reset$ to cancel");
+    wid_save->log("Choose a save slot.");
 
     int y_at = 3;
     for (auto slot = 0; slot < UI_WID_SAVE_SLOTS; slot++) {
@@ -837,4 +840,7 @@ void Game::save_select (void)
     }
     game_load_headers_only = false;
     wid_update(wid_save->wid_text_area->wid_text_area);
+
+    wid_actionbar_init();
+    game->change_state(Game::STATE_SAVE_MENU);
 }

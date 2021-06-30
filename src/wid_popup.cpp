@@ -15,6 +15,7 @@
 #include "my_ascii.h"
 #include "my_wid_popup.h"
 #include "my_wid_text_box.h"
+#include "my_wid_actionbar.h"
 #include "my_ui.h"
 
 WidPopup::~WidPopup()
@@ -174,4 +175,6 @@ void wid_popup_test (void)
     }
 
     wid_update(wid_enchant->wid_text_area->wid_text_area);
+
+    wid_actionbar_init();
 }

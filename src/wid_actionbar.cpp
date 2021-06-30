@@ -182,12 +182,98 @@ static uint8_t wid_actionbar_key_down (Widp w, const struct SDL_Keysym *key)
 }
 #endif
 
-static uint8_t wid_actionbar_mouse_quit (Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_quit (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-TOPCON("quit");
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
     game->quit_select();
+    return true;
+}
+
+static uint8_t wid_actionbar_close (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    if (!game->level) {
+        return true;
+    }
+
+    auto player = game->level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
+    wid_thing_info_fini();
+    wid_collect_destroy();
+    wid_enchant_destroy();
+    wid_skill_choose_destroy();
+    wid_item_options_destroy();
+    wid_load_destroy();
+    wid_save_destroy();
+    game_quit_destroy();
+
+    game->change_state(Game::STATE_NORMAL);
+    wid_actionbar_init();
+    return true;
+}
+
+static uint8_t wid_actionbar_load (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    if (!game->level) {
+        return true;
+    }
+
+    auto player = game->level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
+    wid_thing_info_fini();
+    wid_collect_destroy();
+    wid_enchant_destroy();
+    wid_skill_choose_destroy();
+    wid_item_options_destroy();
+    wid_load_destroy();
+    wid_save_destroy();
+    game_quit_destroy();
+
+    game->load_select();
+    wid_actionbar_init();
+    return true;
+}
+
+static uint8_t wid_actionbar_save (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    if (!game->level) {
+        return true;
+    }
+
+    auto player = game->level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
+    wid_thing_info_fini();
+    wid_collect_destroy();
+    wid_enchant_destroy();
+    wid_skill_choose_destroy();
+    wid_item_options_destroy();
+    wid_load_destroy();
+    wid_save_destroy();
+    game_quit_destroy();
+
+    game->save_select();
+    wid_actionbar_init();
     return true;
 }
 
@@ -201,6 +287,10 @@ _
 
     auto player = game->level->player;
     if (!player){
+        return;
+    }
+
+    if (player->is_dead){
         return;
     }
 
@@ -219,7 +309,14 @@ _
     }
 
     bool icon_close = false;
-    if (game->bags.size()) {
+    if (game->bags.size() ||
+        wid_collect ||
+        wid_skills ||
+        wid_item_options_window ||
+        wid_enchant ||
+        wid_load ||
+        wid_save ||
+        game_quit_window) {
         icon_close = true;
     }
 
@@ -259,7 +356,7 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_quit");
-        wid_set_on_mouse_up(w, wid_actionbar_mouse_quit);
+        wid_set_on_mouse_up(w, wid_actionbar_quit);
 #if 0
         wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
@@ -286,6 +383,7 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_save");
+        wid_set_on_mouse_up(w, wid_actionbar_save);
 #if 0
         wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
@@ -299,6 +397,7 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_load");
+        wid_set_on_mouse_up(w, wid_actionbar_load);
 #if 0
         wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
@@ -390,6 +489,7 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_close");
+        wid_set_on_mouse_up(w, wid_actionbar_close);
 #if 0
         wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);

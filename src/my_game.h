@@ -161,7 +161,6 @@ public:
     void wid_collect_create(const std::list<Thingp> items);
     void wid_items_options_create(Widp w, Thingp chosen, bool came_from_inventory);
     bool wid_bag_move_item(Widp w, Thingp t);
-    void wid_collect_destroy(void);
     void wid_enchant_an_item(void);
     void wid_skill_choose(void);
     void wid_thing_info_add_attack(WidPopup *w, Thingp t);
@@ -233,12 +232,15 @@ public:
     //
     enum {
         STATE_NORMAL,
-        STATE_ITEM_OPTIONS,     // Drop, throw etc and item
+        STATE_OPTIONS_FOR_ITEM_MENU,     // Drop, throw etc and item
         STATE_MOVING_ITEMS,     // Currently managing inventory
         STATE_COLLECTING_ITEMS, // Collecting en masse from the level
         STATE_ENCHANTING_ITEMS, // Upgrading items
         STATE_CHOOSING_SKILLS,  // Choosing skills
         STATE_CHOOSING_TARGET,  // Looking to somewhere to throw at
+        STATE_LOAD_MENU,
+        STATE_SAVE_MENU,
+        STATE_QUIT_MENU,
     };
     int                state {STATE_NORMAL};
 

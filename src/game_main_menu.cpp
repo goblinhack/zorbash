@@ -45,9 +45,6 @@ static uint8_t game_menu_quick_start (Widp w, int32_t x, int32_t y, uint32_t but
     wid_topcon_fini();
     wid_topcon_init();
 
-    wid_actionbar_init();
-    wid_actionbar_fini();
-
     wid_thing_info_fini();
 
     wid_inventory_fini();
@@ -57,6 +54,8 @@ static uint8_t game_menu_quick_start (Widp w, int32_t x, int32_t y, uint32_t but
     wid_skillbox_init();
 
     game->init();
+
+    wid_actionbar_init();
 
     wid_visible(wid_topcon_window);
     TOPCON("Welcome to the lair of the dread monster, %%fg=red$Zorbash%%fg=reset$.");

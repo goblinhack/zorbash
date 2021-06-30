@@ -10,21 +10,23 @@
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
 #include "my_wid_inventory.h"
+#include "my_wid_actionbar.h"
 #include "my_wid_skillbox.h"
 #include "my_wid_thing_info.h"
 #include "my_sdl.h"
 #include "my_wid.h"
 #include "my_ui.h"
 
-static WidPopup *wid_item_options_window;
+WidPopup *wid_item_options_window;
 static Thingp chosen_thing;
 static Widp chosen_wid;
 static bool came_from_inventory;
 
-static void wid_item_options_destroy (void)
+void wid_item_options_destroy (void)
 {_
     delete wid_item_options_window;
     wid_item_options_window = nullptr;
+    game->change_state(Game::STATE_NORMAL);
 }
 
 static uint8_t wid_item_options_use (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -62,7 +64,7 @@ static uint8_t wid_item_options_eat (Widp w, int32_t x, int32_t y, uint32_t butt
         return true;
     }
 
-    if (game->state == Game::STATE_ITEM_OPTIONS) {
+    if (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) {
         game->change_state(Game::STATE_MOVING_ITEMS);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
@@ -196,7 +198,7 @@ void Game::wid_items_options_create (Widp w, Thingp t, bool source_came_from_inv
 _
     auto was_moving_items = (game->state == Game::STATE_MOVING_ITEMS);
 
-    change_state(Game::STATE_ITEM_OPTIONS);
+    change_state(Game::STATE_OPTIONS_FOR_ITEM_MENU);
 
     auto player = game->level->player;
     if (!player){

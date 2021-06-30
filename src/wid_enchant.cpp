@@ -12,15 +12,16 @@
 #include "my_tile.h"
 #include "my_wid_console.h"
 #include "my_wid_thing_info.h"
+#include "my_wid_actionbar.h"
 #include "my_wid_bag.h"
 #include "my_level.h"
 #include "my_thing.h"
 #include "my_monst.h"
 
-static WidPopup *wid_enchant;
+WidPopup *wid_enchant;
 static std::vector<Thingp> enchant_items;
 
-static void wid_enchant_destroy (void)
+void wid_enchant_destroy (void)
 {_
     delete wid_enchant;
     wid_enchant = nullptr;
@@ -46,6 +47,20 @@ static void wid_enchant_slot (int slot)
 
 static uint8_t wid_enchant_key_up (Widp w, const struct SDL_Keysym *key)
 {_
+    auto level = game->level;
+    if (!level) {
+        return true;
+    }
+
+    auto player = level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -99,6 +114,20 @@ static uint8_t wid_enchant_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_enchant_key_down (Widp w, const struct SDL_Keysym *key)
 {_
+    auto level = game->level;
+    if (!level) {
+        return true;
+    }
+
+    auto player = level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -110,6 +139,20 @@ static uint8_t wid_enchant_key_down (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_enchant_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    auto level = game->level;
+    if (!level) {
+        return true;
+    }
+
+    auto player = level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
     wid_enchant_slot(wid_get_int_context(w));
     return true;
 }
@@ -249,4 +292,5 @@ void Game::wid_enchant_an_item (void)
     }
 
     wid_update(wid_enchant->wid_text_area->wid_text_area);
+    wid_actionbar_init();
 }
