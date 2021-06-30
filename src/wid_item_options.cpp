@@ -24,13 +24,16 @@ static bool came_from_inventory;
 
 void wid_item_options_destroy (void)
 {_
+    LOG("Item options destroy");
+_
     delete wid_item_options_window;
     wid_item_options_window = nullptr;
-    game->change_state(Game::STATE_NORMAL);
 }
 
 static uint8_t wid_item_options_use (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Item options use");
+_
     wid_item_options_destroy();
 
     auto player = game->level->player;
@@ -48,6 +51,8 @@ static uint8_t wid_item_options_use (Widp w, int32_t x, int32_t y, uint32_t butt
 
 static uint8_t wid_item_options_eat (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Item options eat");
+_
     wid_item_options_destroy();
 
     auto player = game->level->player;
@@ -74,6 +79,8 @@ static uint8_t wid_item_options_eat (Widp w, int32_t x, int32_t y, uint32_t butt
 
 static uint8_t wid_item_options_throw (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Item options throw");
+_
     wid_item_options_destroy();
 
     auto player = game->level->player;
@@ -92,6 +99,8 @@ static uint8_t wid_item_options_throw (Widp w, int32_t x, int32_t y, uint32_t bu
 
 static uint8_t wid_item_options_drop (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Item options drop");
+_
     wid_item_options_destroy();
 
     auto player = game->level->player;
@@ -117,6 +126,8 @@ static uint8_t wid_item_options_drop (Widp w, int32_t x, int32_t y, uint32_t but
 
 static uint8_t wid_item_options_move (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Item options move");
+_
     wid_item_options_destroy();
     game->wid_bag_move_item(chosen_wid, chosen_thing);
     return true;
@@ -124,6 +135,8 @@ static uint8_t wid_item_options_move (Widp w, int32_t x, int32_t y, uint32_t but
 
 static uint8_t wid_item_options_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Item options back");
+_
     wid_item_options_destroy();
 
     if (came_from_inventory) {
@@ -140,6 +153,8 @@ static uint8_t wid_item_options_back (Widp w, int32_t x, int32_t y, uint32_t but
 
 static uint8_t wid_item_options_key_up (Widp w, const struct SDL_Keysym *key)
 {_
+    LOG("Item options key up");
+_
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -183,6 +198,8 @@ static uint8_t wid_item_options_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_item_options_key_down (Widp w, const struct SDL_Keysym *key)
 {_
+    LOG("Item options key down");
+_
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;

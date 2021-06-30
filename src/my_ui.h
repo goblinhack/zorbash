@@ -70,5 +70,6 @@
 #define UI_WID_STYLE_HORIZ_DARK    10
 #define UI_WID_STYLE_HORIZ_LIGHT   11
 #define UI_WID_STYLE_BAG           12
-#define UI_WID_STYLE_MAX           13
+#define UI_WID_STYLE_BAG_HIGHLIGHT 13
+#define UI_WID_STYLE_MAX           14
 #endif
