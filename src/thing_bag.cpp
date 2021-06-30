@@ -8,6 +8,7 @@
 #include "my_sys.h"
 #include "my_sdl.h"
 #include "my_wid_bag.h"
+#include "my_ptrcheck.h"
 #include "my_ttf.h"
 #include "my_string.h"
 #include "my_wid.h"
@@ -176,7 +177,9 @@ bool Thing::bag_compress (void)
 }
 
 bool Thing::bag_remove_at (Thingp item, point pos)
-{
+{_
+    verify(item);
+
     auto bag = get_bag();
     auto w = item->item_width();
     auto h = item->item_height();
@@ -202,6 +205,8 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
         TOPCON("Cannot place an item inside itself!");
         return false;
     }
+
+    verify(item);
 
     auto bag = get_const_bag();
     auto bw = capacity_width();
@@ -273,7 +278,7 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
 }
 
 bool Thing::bag_place_at (Thingp item, point pos)
-{
+{_
     auto bag = get_bag();
     auto bw = capacity_width();
     auto bh = capacity_height();
@@ -303,7 +308,12 @@ bool Thing::bag_place_at (Thingp item, point pos)
 }
 
 bool Thing::bag_remove (Thingp item)
-{
+{_
+    if (!item) {
+        err("No item to remove");
+        return false;
+    }
+
     if (bag_debug) {
         dbg3("Bag: remove %s", item->to_string().c_str());
     }

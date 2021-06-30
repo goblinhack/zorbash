@@ -7,6 +7,7 @@
 
 #include "my_sys.h"
 #include "my_sdl.h"
+#include "my_ptrcheck.h"
 #include "my_wid_bag.h"
 #include "my_main.h"
 #include "my_ttf.h"
@@ -267,16 +268,24 @@ _
 bool Game::wid_bag_move_item (Widp w, Thingp t)
 {_
     LOG("Chosen to move item");
-_
+
+    if (!t) {
+        ERR("No thing to move");
+        return false;
+    }
+
+    verify(t);
+
     game->change_state(Game::STATE_MOVING_ITEMS);
 
     Widp wid_bag_container;
     ThingId bag_id;
-    Thingp bag;
+    Thingp bag = nullptr;
 
     if (game->bag_primary) {
         auto b = game->bag_primary;
         for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
+            t->log("+ current item %s", wid_get_name(w).c_str());
             if (wid_get_thing_id_context(w).id == t->id) {
                 wid_bag_container = wid_get_parent(w);
                 bag_id = wid_get_thing_id_context(wid_bag_container);
@@ -284,9 +293,10 @@ _
             }
         }
     }
-
+_
     for (auto b : game->bag_secondary) {
         for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
+            t->log("+ current item %s", wid_get_name(w).c_str());
             if (wid_get_thing_id_context(w).id == t->id) {
                 wid_bag_container = wid_get_parent(w);
                 bag_id = wid_get_thing_id_context(wid_bag_container);
@@ -296,9 +306,10 @@ _
     }
 
     if (!bag) {
-        ERR("%s has no bag so cannot it!", t->text_The().c_str());
+        ERR("%s has no bag so cannot move it!", t->text_The().c_str());
         return false;
     }
+    verify(bag);
 
     auto old_owner = t->get_immediate_owner();
     if (!old_owner) {
@@ -308,6 +319,7 @@ _
 
     bag->bag_remove(t);
     old_owner->drop_into_ether(t);
+
     while (bag->bag_compress()) { }
 
     t->describe_when_hovered_over_in_rightbar();
@@ -570,7 +582,7 @@ _
 
 WidBag::WidBag (Thingp bag_, point tl, point br, const std::string &title) : tl(tl), br(br)
 {_
-    LOG("Create bag");
+    bag->log("Create bag");
 _
     bag = bag_;
 
@@ -578,7 +590,15 @@ _
         wid_bag_container = wid_new_square_window("wid_bag " + title);
         wid_set_ignore_scroll_events(wid_bag_container, true);
         wid_set_pos(wid_bag_container, tl, br);
-        wid_set_style(wid_bag_container, UI_WID_STYLE_BAG);
+
+        if (game->level->inventory_get() == bag) {
+            bag->log("Highlighted");
+            wid_set_style(wid_bag_container, UI_WID_STYLE_BAG_HIGHLIGHT);
+        } else {
+            bag->log("Not highlighted");
+            wid_set_style(wid_bag_container, UI_WID_STYLE_BAG);
+        }
+
         wid_set_on_tick(wid_bag_container, wid_bag_tick);
         wid_set_thing_id_context(wid_bag_container, bag->id);
     }

@@ -212,17 +212,6 @@ void ramdisk_init (void)
     }
 
     {
-        extern unsigned char *data___explosion_tga_start_ asm("data___explosion_tga_start_");
-        extern unsigned char *data___explosion_tga_end_ asm("data___explosion_tga_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data___explosion_tga_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data___explosion_tga_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/gfx/._explosion.tga"] = r;
-    }
-
-    {
         extern unsigned char *data_tiles1_walls_tga_start_ asm("data_tiles1_walls_tga_start_");
         extern unsigned char *data_tiles1_walls_tga_end_ asm("data_tiles1_walls_tga_end_");
         static const unsigned char *const start = (const unsigned char *const) (char*)&data_tiles1_walls_tga_start_;
@@ -297,6 +286,17 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/gfx/chasm2.tga"] = r;
+    }
+
+    {
+        extern unsigned char *data_ui_bag_highlighted_tga_start_ asm("data_ui_bag_highlighted_tga_start_");
+        extern unsigned char *data_ui_bag_highlighted_tga_end_ asm("data_ui_bag_highlighted_tga_end_");
+        static const unsigned char *const start = (const unsigned char *const) (char*)&data_ui_bag_highlighted_tga_start_;
+        static const unsigned char *const end   = (const unsigned char *const) (char*)&data_ui_bag_highlighted_tga_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/gfx/ui_bag_highlighted.tga"] = r;
     }
 
     {
@@ -539,17 +539,6 @@ void ramdisk_init (void)
         r.data = start;
         r.len = end - start;
         ramdisk_data["data/gfx/explosion.tga"] = r;
-    }
-
-    {
-        extern unsigned char *data___tiles3_tga_start_ asm("data___tiles3_tga_start_");
-        extern unsigned char *data___tiles3_tga_end_ asm("data___tiles3_tga_end_");
-        static const unsigned char *const start = (const unsigned char *const) (char*)&data___tiles3_tga_start_;
-        static const unsigned char *const end   = (const unsigned char *const) (char*)&data___tiles3_tga_end_;
-        ramdisk_t r;
-        r.data = start;
-        r.len = end - start;
-        ramdisk_data["data/gfx/._tiles3.tga"] = r;
     }
 
     {

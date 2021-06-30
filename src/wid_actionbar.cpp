@@ -42,77 +42,10 @@ static uint8_t wid_actionbar_use (Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
 }
 
-static uint8_t wid_actionbar_eat (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    wid_actionbar_fini();
-
-    auto player = game->level->player;
-    if (!player){
-        game->change_state(Game::STATE_NORMAL);
-        ERR("No player");
-        return false;
-    }
-
-    player->use(chosen_thing);
-
-    if (came_from_inventory) {
-        game->change_state(Game::STATE_NORMAL);
-        return true;
-    }
-
-    if (game->state == Game::STATE_actionbar) {
-        game->change_state(Game::STATE_MOVING_ITEMS);
-        game->request_remake_inventory = true;
-        game->wid_thing_info_create(game->level->player, false);
-    }
-    return true;
-}
-
-static uint8_t wid_actionbar_throw (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    wid_actionbar_fini();
-
-    auto player = game->level->player;
-    if (!player){
-        game->change_state(Game::STATE_NORMAL);
-        ERR("No player");
-        return false;
-    }
-
-    game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
-    player->throw_item_choose_target(chosen_thing);
-
-    return true;
-}
-
-static uint8_t wid_actionbar_drop (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    wid_actionbar_fini();
-
-    auto player = game->level->player;
-    if (!player){
-        game->change_state(Game::STATE_NORMAL);
-        ERR("No player");
-        return false;
-    }
-
-    player->drop(chosen_thing);
-
-    if (came_from_inventory) {
-        game->change_state(Game::STATE_NORMAL);
-        return true;
-    }
-
-    game->change_state(Game::STATE_MOVING_ITEMS);
-    game->request_remake_inventory = true;
-    game->wid_thing_info_create(game->level->player, false);
-
-    return true;
-}
-
 static uint8_t wid_actionbar_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Actionbar back");
+_
     wid_actionbar_fini();
 
     if (came_from_inventory) {
@@ -129,6 +62,8 @@ static uint8_t wid_actionbar_back (Widp w, int32_t x, int32_t y, uint32_t button
 
 static uint8_t wid_actionbar_key_up (Widp w, const struct SDL_Keysym *key)
 {_
+    LOG("Actionbar key up");
+_
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -172,6 +107,8 @@ static uint8_t wid_actionbar_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_actionbar_key_down (Widp w, const struct SDL_Keysym *key)
 {_
+    LOG("Actionbar key down");
+_
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -184,6 +121,8 @@ static uint8_t wid_actionbar_key_down (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_actionbar_quit (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Actionbar quit");
+_
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
     game->quit_select();
@@ -192,6 +131,8 @@ static uint8_t wid_actionbar_quit (Widp w, int32_t x, int32_t y, uint32_t button
 
 static uint8_t wid_actionbar_close (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Actionbar close");
+_
     if (!game->level) {
         return true;
     }
@@ -221,6 +162,8 @@ static uint8_t wid_actionbar_close (Widp w, int32_t x, int32_t y, uint32_t butto
 
 static uint8_t wid_actionbar_load (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Actionbar load");
+_
     if (!game->level) {
         return true;
     }
@@ -250,6 +193,8 @@ static uint8_t wid_actionbar_load (Widp w, int32_t x, int32_t y, uint32_t button
 
 static uint8_t wid_actionbar_save (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    LOG("Actionbar save");
+_
     if (!game->level) {
         return true;
     }
