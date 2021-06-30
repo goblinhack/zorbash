@@ -12,12 +12,13 @@
 #include "my_ui.h"
 #include "my_sdl.h"
 
-static WidPopup *game_quit_window;
+WidPopup *game_quit_window;
 
-static void game_quit_destroy (void)
+void game_quit_destroy (void)
 {_
     delete game_quit_window;
     game_quit_window = nullptr;
+    game->change_state(Game::STATE_NORMAL);
 }
 
 static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -46,6 +47,8 @@ static uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
     game_quit_destroy();
     if (!game->level) {
         game->main_menu_select();
+    } else {
+        wid_actionbar_init();
     }
     return true;
 }
@@ -155,4 +158,7 @@ void Game::quit_select (void)
     }
 
     wid_update(game_quit_window->wid_text_area->wid_text_area);
+    wid_actionbar_init();
+
+    game->change_state(Game::STATE_QUIT_MENU);
 }

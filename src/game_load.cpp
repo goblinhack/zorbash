@@ -23,6 +23,9 @@
 #include "my_thing.h"
 #include "my_sdl.h"
 
+WidPopup *wid_load;
+void wid_load_destroy(void);
+
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
 static timestamp_t T;
@@ -850,7 +853,6 @@ Game::load (std::string file_to_load, class Game &target)
         wid_rightbar_fini();
         wid_rightbar_init();
         wid_actionbar_init();
-        wid_actionbar_fini();
     }
 
     free(uncompressed);
@@ -924,12 +926,11 @@ Game::load (int slot)
     TOPCON("Loaded the game from %s.", save_file.c_str());
 }
 
-static WidPopup *wid_load;
-
-static void wid_load_destroy (void)
+void wid_load_destroy (void)
 {_
     delete wid_load;
     wid_load = nullptr;
+    game->change_state(Game::STATE_NORMAL);
 }
 
 static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
@@ -1024,7 +1025,7 @@ void Game::load_select (void)
     game_load_headers_only = true;
 
     wid_load->log(" ");
-    wid_load->log("Choose a load slot. %%fg=red$ESC%%fg=reset$ to cancel");
+    wid_load->log("Choose a load slot.");
 
     int y_at = 3;
     for (auto slot = 0; slot < UI_WID_SAVE_SLOTS; slot++) {
@@ -1058,4 +1059,7 @@ void Game::load_select (void)
     }
     game_load_headers_only = false;
     wid_update(wid_load->wid_text_area->wid_text_area);
+
+    wid_actionbar_init();
+    game->change_state(Game::STATE_LOAD_MENU);
 }

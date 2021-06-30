@@ -31,11 +31,14 @@ void wid_skillbox_mouse_over_b (Widp w,
 {_
     LOG("Skillbox: begin over skillbox");
 _
-    if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_ITEM_OPTIONS ||
-        game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS ||
-        game->state == Game::STATE_ENCHANTING_ITEMS) {
+    if ((game->state == Game::STATE_CHOOSING_TARGET) ||
+        (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         LOG("Skillbox: moving items; ignore");
         return;
     }
@@ -72,11 +75,14 @@ void wid_skillbox_mouse_over_e (Widp w)
 {_
     LOG("Skillbox: end over skillbox");
 _
-    if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_ITEM_OPTIONS ||
-        game->state == Game::STATE_MOVING_ITEMS || 
-        game->state == Game::STATE_COLLECTING_ITEMS ||
-        game->state == Game::STATE_ENCHANTING_ITEMS) {
+    if ((game->state == Game::STATE_CHOOSING_TARGET) ||
+        (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         LOG("Skillbox: moving items; ignore");
         return;
     }
@@ -113,17 +119,29 @@ uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
     auto slot = wid_get_int_context(w);
     LOG("Skillbox: mouse up on slot %d", slot);
 
-    if (game->state == Game::STATE_ENCHANTING_ITEMS ||
-        game->state == Game::STATE_ITEM_OPTIONS ||
-        game->state == Game::STATE_CHOOSING_SKILLS ||
-        game->state == Game::STATE_MOVING_ITEMS ||
-        game->state == Game::STATE_COLLECTING_ITEMS) {
+    if ((game->state == Game::STATE_ENCHANTING_ITEMS) ||
+        (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_CHOOSING_SKILLS) ||
+        (game->state == Game::STATE_MOVING_ITEMS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
         return false;
     }
 
     auto level = game->level;
     if (!level) {
+        return true;
+    }
+
+    auto player = level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
         return true;
     }
 

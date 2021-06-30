@@ -41,5 +41,22 @@ public:
     void log(std::wstring s, bool lhs = false, bool rhs = false);
 };
 
-void wid_popup_test(void);
+extern void wid_popup_test(void);
+
+extern void wid_collect_destroy(void);
+extern void wid_enchant_destroy(void);
+extern void wid_skill_choose_destroy(void);
+extern void wid_item_options_destroy(void);
+extern void wid_load_destroy(void);
+extern void wid_save_destroy(void);
+extern void game_quit_destroy(void);
+
+extern WidPopup *wid_collect;
+extern WidPopup *wid_skills;
+extern WidPopup *wid_enchant;
+extern WidPopup *wid_item_options_window;
+extern WidPopup *wid_load;
+extern WidPopup *wid_save;
+extern WidPopup *game_quit_window;
+
 #endif

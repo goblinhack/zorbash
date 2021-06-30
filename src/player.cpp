@@ -32,7 +32,7 @@ void player_tick (void)
     switch (game->state) {
         case Game::STATE_NORMAL:
             break;
-        case Game::STATE_ITEM_OPTIONS:
+        case Game::STATE_OPTIONS_FOR_ITEM_MENU:
             if (unlikely(g_opt_debug4)) {
                 LOG("Ignore player action when choosing item options");
             }
@@ -59,8 +59,15 @@ void player_tick (void)
             return;
         case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
             if (unlikely(g_opt_debug4)) {
+                LOG("Ignore player action when choosing target");
             }
-            LOG("Ignore player action when choosing target");
+            return;
+        case Game::STATE_LOAD_MENU:
+        case Game::STATE_SAVE_MENU:
+        case Game::STATE_QUIT_MENU:
+            if (unlikely(g_opt_debug4)) {
+                LOG("Ignore player action when in menu");
+            }
             return;
     }
 

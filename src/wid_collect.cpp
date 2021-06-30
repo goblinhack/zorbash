@@ -18,11 +18,12 @@
 #include "my_wid_popup.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_topcon.h"
+#include "my_wid_actionbar.h"
 
-static WidPopup *wid_collect;
+WidPopup *wid_collect;
 static std::vector<Thingp> collect_items;
 
-static void wid_collect_destroy (void)
+void wid_collect_destroy (void)
 {_
     delete wid_collect;
     wid_collect = nullptr;
@@ -112,6 +113,20 @@ _
 
 static uint8_t wid_collect_key_up (Widp w, const struct SDL_Keysym *key)
 {_
+    auto level = game->level;
+    if (!level) {
+        return true;
+    }
+
+    auto player = level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -165,6 +180,19 @@ static uint8_t wid_collect_key_up (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_collect_key_down (Widp w, const struct SDL_Keysym *key)
 {_
+    auto level = game->level;
+    if (!level) {
+        return true;
+    }
+
+    auto player = level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
@@ -176,6 +204,20 @@ static uint8_t wid_collect_key_down (Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_collect_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
+    auto level = game->level;
+    if (!level) {
+        return true;
+    }
+
+    auto player = level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
     wid_collect_slot(wid_get_int_context(w));
     return true;
 }
@@ -363,4 +405,5 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
     }
 
     wid_update(wid_collect->wid_text_area->wid_text_area);
+    wid_actionbar_init();
 }

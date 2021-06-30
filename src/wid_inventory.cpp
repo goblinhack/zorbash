@@ -29,11 +29,14 @@ void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t whe
 {_
     LOG("Inventory: begin over inventory");
 _
-    if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_ITEM_OPTIONS ||
-        game->state == Game::STATE_COLLECTING_ITEMS ||
-        game->state == Game::STATE_CHOOSING_SKILLS ||
-        game->state == Game::STATE_ENCHANTING_ITEMS) {
+    if ((game->state == Game::STATE_CHOOSING_TARGET) ||
+        (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_CHOOSING_SKILLS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         LOG("Inventory: moving items; ignore");
         return;
     }
@@ -70,11 +73,14 @@ void wid_inventory_mouse_over_e (Widp w)
 {_
     LOG("Inventory: end over inventory");
 _
-    if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_ITEM_OPTIONS ||
-        game->state == Game::STATE_COLLECTING_ITEMS ||
-        game->state == Game::STATE_CHOOSING_SKILLS ||
-        game->state == Game::STATE_ENCHANTING_ITEMS) {
+    if ((game->state == Game::STATE_CHOOSING_TARGET) ||
+        (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_CHOOSING_SKILLS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         LOG("Inventory: moving items; ignore");
         return;
     }
@@ -112,11 +118,14 @@ uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
 {_
     LOG("Inventory: mouse up over bag");
 _
-    if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_ITEM_OPTIONS ||
-        game->state == Game::STATE_COLLECTING_ITEMS ||
-        game->state == Game::STATE_CHOOSING_SKILLS ||
-        game->state == Game::STATE_ENCHANTING_ITEMS) {
+    if ((game->state == Game::STATE_CHOOSING_TARGET) ||
+        (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_CHOOSING_SKILLS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         return true;
     }
 
@@ -150,11 +159,14 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
                                      int32_t y,
                                      uint32_t button)
 {_
-    if (game->state == Game::STATE_CHOOSING_TARGET ||
-        game->state == Game::STATE_ITEM_OPTIONS ||
-        game->state == Game::STATE_COLLECTING_ITEMS ||
-        game->state == Game::STATE_CHOOSING_SKILLS ||
-        game->state == Game::STATE_ENCHANTING_ITEMS) {
+    if ((game->state == Game::STATE_CHOOSING_TARGET) ||
+        (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_CHOOSING_SKILLS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         LOG("Inventory: moving items; ignore");
         return true;
     }

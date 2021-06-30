@@ -1,6 +1,8 @@
 
 Todo
 ----
+- no space to carry in red
+- close icon for enchant/collect
 - icon for inventory / wait / quit
 - if popup with focus, disable other widgets to make code simpler?
 - highlight which bag is over in invenroey
