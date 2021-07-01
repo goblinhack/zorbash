@@ -268,6 +268,7 @@ static bool wid_rightbar_create (void)
         auto w = wid_new_plain(wid_rightbar, "stats1-value");
         wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+        wid_set_on_mouse_up(w, wid_inventory_item_mouse_up_on_bag);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
@@ -291,6 +292,7 @@ static bool wid_rightbar_create (void)
         auto w = wid_new_plain(wid_rightbar, "stats2-value");
         wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+        wid_set_on_mouse_up(w, wid_inventory_item_mouse_up_on_bag);
         point tl = make_point(0, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
