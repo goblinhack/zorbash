@@ -580,18 +580,18 @@ _
     }
 }
 
-WidBag::WidBag (Thingp bag_, point tl, point br, const std::string &title) : tl(tl), br(br)
+WidBag::WidBag (Thingp bag_, bool highlight, point tl, point br, const std::string &title) : tl(tl), br(br)
 {_
+    bag = bag_;
     bag->log("Create bag");
 _
-    bag = bag_;
 
     {
         wid_bag_container = wid_new_square_window("wid_bag " + title);
         wid_set_ignore_scroll_events(wid_bag_container, true);
         wid_set_pos(wid_bag_container, tl, br);
 
-        if (game->level->inventory_get() == bag) {
+        if (highlight || (game->level->inventory_get() == bag)) {
             bag->log("Highlighted");
             wid_set_style(wid_bag_container, UI_WID_STYLE_BAG_HIGHLIGHT);
         } else {

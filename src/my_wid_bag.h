@@ -23,7 +23,7 @@ public:
 
 public:
     ~WidBag();
-    WidBag (Thingp bag, point tl, point br, const std::string &title);
+    WidBag (Thingp bag, bool highlight, point tl, point br, const std::string &title);
 };
 
 Widp is_mouse_over_any_bag(void);

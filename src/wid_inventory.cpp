@@ -32,6 +32,7 @@ _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
@@ -76,6 +77,7 @@ _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
@@ -133,7 +135,6 @@ _
         return wid_in_transit_item_place(w, x, y, button);
     }
 
-    BOTCON("Press %%fg=red$ESCAPE%%fg=reset$ when done moving items around.");
     game->change_state(Game::STATE_MOVING_ITEMS);
 
     auto level = game->level;
