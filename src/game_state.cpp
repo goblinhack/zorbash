@@ -34,6 +34,7 @@ _
             wid_load_destroy();
             wid_save_destroy();
             game_quit_destroy();
+            wid_actionbar_init();
             break;
         case STATE_OPTIONS_FOR_ITEM_MENU:
             LOG("State changed to STATE_OPTIONS_FOR_ITEM_MENU");
