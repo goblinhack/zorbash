@@ -222,6 +222,34 @@ _
     return true;
 }
 
+static uint8_t wid_actionbar_inventory (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar inventory");
+_
+    if (!game->level) {
+        return true;
+    }
+
+    auto player = game->level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
+    if (game->in_transit_item) {
+        return true;
+    }
+
+    game->change_state(Game::STATE_MOVING_ITEMS);
+    game->request_remake_inventory = true;
+    game->wid_thing_info_create(player, false);
+
+    return true;
+}
+
 void wid_actionbar_init (void)
 {_
     LOG("Actionbar");
@@ -395,6 +423,7 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_inventory");
+        wid_set_on_mouse_up(w, wid_actionbar_inventory);
 #if 0
         wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);

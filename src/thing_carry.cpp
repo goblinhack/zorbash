@@ -73,7 +73,7 @@ bool Thing::carry (Thingp it)
         set_where_i_failed_to_collect_last(make_point(it->mid_at));
 
         if (is_player()) {
-            TOPCON("No space to carry %s.", it->text_the().c_str());
+            TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", it->text_the().c_str());
         }
         return false;
     }
