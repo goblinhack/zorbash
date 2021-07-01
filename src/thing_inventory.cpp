@@ -581,12 +581,34 @@ _
 
     LOG("Slot %d has %s", slot, tpp->name().c_str());
 
+    //
+    // If stackable, then get the nth item
+    //
+    int nth = 0;
+    if (tpp->is_bag_item_not_stackable()) {
+        for (auto i = 0U; i < slot; i++) {
+            auto tp_id = player->monstp->inventory_id[i];
+            if (!tp_id) {
+                continue;
+            }
+            auto otpp = tp_find(tp_id);
+            if (otpp == tpp) {
+                nth++;
+            }
+        }
+    }
+
     for (auto oid : monstp->carrying) {
         auto o = thing_find(oid);
         if (o) {
             if (o->tp() == tpp) {
                 if (unlikely(g_opt_debug2)) {
                     o->log("Got inventory item %s", tpp->name().c_str());
+                }
+
+                if (nth) {
+                    nth--;
+                    continue;
                 }
                 return o;
             }
@@ -599,6 +621,7 @@ _
 
 Thingp Level::inventory_get (void)
 {
+    LOG("Inventory: get highlight slot %d", game->inventory_highlight_slot);
     return inventory_get(game->inventory_highlight_slot);
 }
 
@@ -628,6 +651,7 @@ _
         LOG("Inventory: request to remake inventory");
         game->request_remake_inventory = true;
         game->inventory_highlight_slot = slot;
+        LOG("Inventory: highlight slot %d", slot);
         item = inventory_describe(slot);
     } else {
         item = inventory_describe(game->inventory_highlight_slot);
@@ -669,6 +693,7 @@ _
     if (slot != game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
         changed_highlight_slot = true;
+        LOG("Inventory: highlight slot %d", slot);
 
         item = inventory_describe(slot);
     } else {
@@ -752,6 +777,7 @@ _
             player->monstp->inventory_id[i] = 0;
             if (i == game->inventory_highlight_slot) {
                 game->inventory_highlight_slot = slot;
+                LOG("Inventory: highlight slot %d", slot);
             }
         }
     }

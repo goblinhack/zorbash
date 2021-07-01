@@ -159,6 +159,19 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     wid_thing_info_add_carry_info(wid_popup_window, t);
     t->show_botcon_description();
 
+    if (t->is_bag_item_container()) {
+        for (auto b : game->bag_secondary) {
+            auto w = b->wid_bag_container;
+            wid_set_style(w, UI_WID_STYLE_BAG);
+        }
+        for (auto b : game->bag_secondary) {
+            auto w = b->wid_bag_container;
+            if (wid_get_thing_id_context(w).id == t->id) {
+                wid_set_style(w, UI_WID_STYLE_BAG_HIGHLIGHT);
+            }
+        }
+    }
+
     return wid_popup_window;
 }
 
@@ -372,7 +385,7 @@ _
                                    player->capacity_height() + 2);
             point br = tl +  point(player->capacity_width() + 1, 
                                    player->capacity_height() + 1);
-            bag_primary = new WidBag(player, tl, br, "Inventory");
+            bag_primary = new WidBag(player, false, tl, br, "Inventory");
         }
     }
 
@@ -385,27 +398,27 @@ _
         int existing_bags_height = 0;
 
         for (const auto& item : player->monstp->carrying) {
-            auto t = game->thing_find(item.id);
-            if (!t) {
+            auto b = game->thing_find(item.id);
+            if (!b) {
                 continue;
             }
 
-            if (!t->is_bag_item_container()) {
+            if (!b->is_bag_item_container()) {
                 continue;
             }
 
-            point tl = mid + point(1, - (t->capacity_height() + 2));
-            point br = tl +  point(t->capacity_width() + 1,
-                                   t->capacity_height() + 1);
+            point tl = mid + point(1, - (b->capacity_height() + 2));
+            point br = tl +  point(b->capacity_width() + 1,
+                                   b->capacity_height() + 1);
 
             tl.y -= existing_bags_height;
             br.y -= existing_bags_height;
-            existing_bags_height += t->capacity_height() + 3;
+            existing_bags_height += b->capacity_height() + 3;
 
-            if (t->is_bag()) {
-                game->bag_secondary.push_back(new WidBag(t, tl, br, "Bag"));
+            if (b->is_bag()) {
+                game->bag_secondary.push_back(new WidBag(b, b == t, tl, br, "Bag"));
             } else {
-                game->bag_secondary.push_back(new WidBag(t, tl, br, "Chest"));
+                game->bag_secondary.push_back(new WidBag(b, b == t, tl, br, "Chest"));
             }
         }
     }
