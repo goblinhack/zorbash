@@ -210,6 +210,11 @@ _
         TOPCON("Could not fit that item. You can always drop the item if needed.");
     }
 
+    game->wid_thing_info_create(game->level->player, false);
+    game->request_remake_inventory = true;
+    LOG("Pressed in transit item; change state");
+    game->change_state(Game::STATE_MOVING_ITEMS);
+
     //
     // Moving things around your bag has a cost...
     //
@@ -237,7 +242,11 @@ _
     t->log("Drop from ether");
     game->level->player->drop_from_ether(t);
     wid_destroy(&game->in_transit_item);
+
+    game->wid_thing_info_create(game->level->player, false);
     game->request_remake_inventory = true;
+    LOG("Pressed in transit item; change state");
+    game->change_state(Game::STATE_MOVING_ITEMS);
 
     //
     // Moving things around your bag has a cost...

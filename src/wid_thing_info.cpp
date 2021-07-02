@@ -159,11 +159,11 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
     wid_thing_info_add_carry_info(wid_popup_window, t);
     t->show_botcon_description();
 
+    for (auto b : game->bag_secondary) {
+        auto w = b->wid_bag_container;
+        wid_set_style(w, UI_WID_STYLE_BAG);
+    }
     if (t->is_bag_item_container()) {
-        for (auto b : game->bag_secondary) {
-            auto w = b->wid_bag_container;
-            wid_set_style(w, UI_WID_STYLE_BAG);
-        }
         for (auto b : game->bag_secondary) {
             auto w = b->wid_bag_container;
             if (wid_get_thing_id_context(w).id == t->id) {

@@ -234,6 +234,10 @@ _
 
     dbg("Dropped from ether %s", what->to_string().c_str());
 
+    if (is_player()) {
+        sound_play("drop");
+    }
+
     return true;
 }
 
