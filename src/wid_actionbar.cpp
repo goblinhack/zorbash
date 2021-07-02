@@ -19,114 +19,45 @@
 
 static Widp wid_actionbar;
 
+static timestamp_t wid_last_wait;
+static timestamp_t wid_last_wait_repeat;
+
+void wid_actionbar_close_all_popups (void)
+{_
+    wid_thing_info_fini();
+    wid_collect_destroy();
+    wid_enchant_destroy();
+    wid_skill_choose_destroy();
+    wid_item_options_destroy();
+    wid_load_destroy();
+    wid_save_destroy();
+    game_quit_destroy();
+    game->change_state(Game::STATE_NORMAL);
+}
+
 void wid_actionbar_fini (void)
 {_
     wid_destroy_nodelay(&wid_actionbar);
 }
 
-#if 0
-static uint8_t wid_actionbar_use (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    wid_actionbar_fini();
-
-    auto player = game->level->player;
-    if (!player){
-        game->change_state(Game::STATE_NORMAL);
-        ERR("No player");
-        return false;
-    }
-
-    player->use(chosen_thing);
-
-    game->change_state(Game::STATE_NORMAL);
-    return true;
-}
-
-static uint8_t wid_actionbar_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    LOG("Actionbar back");
-_
-    wid_actionbar_fini();
-
-    if (came_from_inventory) {
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini(); // To remove bag or other info
-        return true;
-    }
-
-    game->change_state(Game::STATE_MOVING_ITEMS);
-    game->request_remake_inventory = true;
-    game->wid_thing_info_create(game->level->player, false);
-    return true;
-}
-
-static uint8_t wid_actionbar_key_up (Widp w, const struct SDL_Keysym *key)
-{_
-    LOG("Actionbar key up");
-_
-    if (sdl_shift_held) {
-        if (key->scancode == (SDL_Scancode)game->config.key_console) {
-            return false;
-        }
-    }
-
-    switch (key->mod) {
-        case KMOD_LCTRL:
-        case KMOD_RCTRL:
-        default:
-        switch (key->sym) {
-            default: {_
-                auto c = wid_event_to_char(key);
-                switch (c) {
-                    case 'u':
-                        wid_actionbar_use(nullptr, 0, 0, 0);
-                        return true;
-                    case 't':
-                        wid_actionbar_throw(nullptr, 0, 0, 0);
-                        return true;
-                    case 'e':
-                        wid_actionbar_eat(nullptr, 0, 0, 0);
-                        return true;
-                    case 'd':
-                        wid_actionbar_drop(nullptr, 0, 0, 0);
-                        return true;
-                    case 'm':
-                        wid_actionbar_move(nullptr, 0, 0, 0);
-                        return true;
-                    case 'b':
-                    case SDLK_ESCAPE:
-                        wid_actionbar_back(nullptr, 0, 0, 0);
-                        return true;
-                }
-            }
-        }
-    }
-
-    return false;
-}
-
-static uint8_t wid_actionbar_key_down (Widp w, const struct SDL_Keysym *key)
-{_
-    LOG("Actionbar key down");
-_
-    if (sdl_shift_held) {
-        if (key->scancode == (SDL_Scancode)game->config.key_console) {
-            return false;
-        }
-    }
-
-    return true;
-}
-#endif
-
 static uint8_t wid_actionbar_quit (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     LOG("Actionbar quit");
 _
-    game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_actionbar_close_all_popups();
     game->quit_select();
     return true;
+}
+
+static void wid_actionbar_quit_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to quit the dungeon.");
+}
+
+static void wid_actionbar_quit_over_e (Widp w)
+{_
+    BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_close (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -146,18 +77,20 @@ _
         return true;
     }
 
-    wid_thing_info_fini();
-    wid_collect_destroy();
-    wid_enchant_destroy();
-    wid_skill_choose_destroy();
-    wid_item_options_destroy();
-    wid_load_destroy();
-    wid_save_destroy();
-    game_quit_destroy();
-
-    game->change_state(Game::STATE_NORMAL);
+    wid_actionbar_close_all_popups();
     wid_actionbar_init();
     return true;
+}
+
+static void wid_actionbar_close_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to close any popups.");
+}
+
+static void wid_actionbar_close_over_e (Widp w)
+{_
+    BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_load (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -177,18 +110,21 @@ _
         return true;
     }
 
-    wid_thing_info_fini();
-    wid_collect_destroy();
-    wid_enchant_destroy();
-    wid_skill_choose_destroy();
-    wid_item_options_destroy();
-    wid_load_destroy();
-    wid_save_destroy();
-    game_quit_destroy();
-
+    wid_actionbar_close_all_popups();
     game->load_select();
     wid_actionbar_init();
     return true;
+}
+
+static void wid_actionbar_load_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to load a previously saved dungeon.");
+}
+
+static void wid_actionbar_load_over_e (Widp w)
+{_
+    BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_save (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -208,18 +144,21 @@ _
         return true;
     }
 
-    wid_thing_info_fini();
-    wid_collect_destroy();
-    wid_enchant_destroy();
-    wid_skill_choose_destroy();
-    wid_item_options_destroy();
-    wid_load_destroy();
-    wid_save_destroy();
-    game_quit_destroy();
-
+    wid_actionbar_close_all_popups();
     game->save_select();
     wid_actionbar_init();
     return true;
+}
+
+static void wid_actionbar_save_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to save the current dungeon.");
+}
+
+static void wid_actionbar_save_over_e (Widp w)
+{_
+    BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_inventory (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -243,11 +182,195 @@ _
         return true;
     }
 
+    wid_actionbar_close_all_popups();
     game->change_state(Game::STATE_MOVING_ITEMS);
     game->request_remake_inventory = true;
     game->wid_thing_info_create(player, false);
 
     return true;
+}
+
+static void wid_actionbar_inventory_over_b (Widp w, int32_t relx, int32_t rely, 
+                                           int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to see what you are carrying.");
+}
+
+static void wid_actionbar_inventory_over_e (Widp w)
+{_
+    BOTCON(" ");
+}
+
+static uint8_t wid_actionbar_collect (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar collect");
+_
+    if (!game->level) {
+        return true;
+    }
+
+    auto player = game->level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
+    if (game->in_transit_item) {
+        return true;
+    }
+
+    wid_actionbar_close_all_popups();
+
+    auto items = player->anything_to_carry();
+    if (items.empty()) {
+        TOPCON("Nothing to carry here.");
+    } else {
+        game->wid_collect_create(items);
+    }
+    return true;
+}
+
+static void wid_actionbar_collect_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to collect any loot you are over.");
+}
+
+static void wid_actionbar_collect_over_e (Widp w)
+{_
+    BOTCON(" ");
+}
+
+static uint8_t wid_actionbar_wait (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar wait");
+_
+    if (!game->level) {
+        return true;
+    }
+
+    auto player = game->level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
+    if (game->in_transit_item) {
+        return true;
+    }
+
+    wid_last_wait = time_get_time_ms_cached();
+
+    wid_actionbar_close_all_popups();
+
+    TOPCON("You pass the time...");
+    game->tick_begin("wait");
+
+    return true;
+}
+
+static uint8_t wid_actionbar_repeat_wait (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar wait");
+_
+    if (!game->level) {
+        return true;
+    }
+
+    auto player = game->level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
+    if (game->in_transit_item) {
+        return true;
+    }
+
+    if (!time_have_x_tenths_passed_since(5, wid_last_wait)) {
+        return true;
+    }
+
+    if (!time_have_x_tenths_passed_since(1, wid_last_wait_repeat)) {
+        return true;
+    }
+
+    wid_last_wait_repeat = time_get_time_ms_cached();
+
+    wid_actionbar_close_all_popups();
+
+    TOPCON("You continue to pass the time...");
+    game->tick_begin("wait");
+
+    return true;
+}
+
+static void wid_actionbar_wait_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to happily pass the time of day.");
+}
+
+static void wid_actionbar_wait_over_e (Widp w)
+{_
+    BOTCON(" ");
+}
+
+static uint8_t wid_actionbar_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar zoom out");
+_
+    if (!game->level) {
+        return true;
+    }
+
+    wid_actionbar_close_all_popups();
+    config_game_pix_zoom_out();
+    return true;
+}
+
+static void wid_actionbar_zoom_out_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to zoom out the map.");
+}
+
+static void wid_actionbar_zoom_out_over_e (Widp w)
+{_
+    BOTCON(" ");
+}
+
+static uint8_t wid_actionbar_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar zoom in");
+_
+    if (!game->level) {
+        return true;
+    }
+
+    wid_actionbar_close_all_popups();
+    config_game_pix_zoom_in();
+    return true;
+}
+
+static void wid_actionbar_zoom_in_over_b (Widp w, int32_t relx, int32_t rely, 
+                                      int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to zoom in the map.");
+}
+
+static void wid_actionbar_zoom_in_over_e (Widp w)
+{_
+    BOTCON(" ");
 }
 
 void wid_actionbar_init (void)
@@ -330,10 +453,8 @@ _
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_quit");
         wid_set_on_mouse_up(w, wid_actionbar_quit);
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_over_b(w, wid_actionbar_quit_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_quit_over_e);
         x_at += option_width;
     }
 
@@ -344,8 +465,8 @@ _
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_config");
 #if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
+        wid_set_on_mouse_over_b(w, wid_actionbar_config_over_b);
+        wid_set_on_mouse_over_b(w, wid_actionbar_config_over_e);
 #endif
         x_at += option_width;
     }
@@ -357,10 +478,8 @@ _
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_save");
         wid_set_on_mouse_up(w, wid_actionbar_save);
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_over_b(w, wid_actionbar_save_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_save_over_e);
         x_at += option_width;
     }
 
@@ -371,10 +490,8 @@ _
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_load");
         wid_set_on_mouse_up(w, wid_actionbar_load);
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_over_b(w, wid_actionbar_load_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_load_over_e);
         x_at += option_width;
     }
 
@@ -384,10 +501,9 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_zoom_in");
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_up(w, wid_actionbar_zoom_in);
+        wid_set_on_mouse_over_b(w, wid_actionbar_zoom_in_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_zoom_in_over_e);
         x_at += option_width;
     }
 
@@ -397,10 +513,9 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_zoom_out");
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_up(w, wid_actionbar_zoom_out);
+        wid_set_on_mouse_over_b(w, wid_actionbar_zoom_out_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_zoom_out_over_e);
         x_at += option_width;
     }
 
@@ -411,8 +526,8 @@ _
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_wield");
 #if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
+        wid_set_on_mouse_over_b(w, wid_actionbar_wield_over_b);
+        wid_set_on_mouse_over_b(w, wid_actionbar_wield_over_e);
 #endif
         x_at += option_width;
     }
@@ -424,10 +539,8 @@ _
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_inventory");
         wid_set_on_mouse_up(w, wid_actionbar_inventory);
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_over_b(w, wid_actionbar_inventory_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_inventory_over_e);
         x_at += option_width;
     }
 
@@ -437,10 +550,10 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_wait");
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_down(w, wid_actionbar_wait);
+        wid_set_on_mouse_held_down(w, wid_actionbar_repeat_wait);
+        wid_set_on_mouse_over_b(w, wid_actionbar_wait_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_wait_over_e);
         x_at += option_width;
     }
 
@@ -450,10 +563,9 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_collect");
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_up(w, wid_actionbar_collect);
+        wid_set_on_mouse_over_b(w, wid_actionbar_collect_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_collect_over_e);
         x_at += option_width;
     }
 
@@ -464,10 +576,8 @@ _
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_close");
         wid_set_on_mouse_up(w, wid_actionbar_close);
-#if 0
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-#endif
+        wid_set_on_mouse_over_b(w, wid_actionbar_close_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_close_over_e);
         x_at += option_width;
     }
 

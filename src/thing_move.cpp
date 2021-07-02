@@ -103,12 +103,12 @@ bool Thing::move (fpoint future_pos)
         }
     }
 
-    bool up     = future_pos.y < mid_at.y;
-    bool down   = future_pos.y > mid_at.y;
-    bool left   = future_pos.x < mid_at.x;
-    bool right  = future_pos.x > mid_at.x;
-    bool attack = false;
-    bool wait_or_collect   = false;
+    bool up              = future_pos.y < mid_at.y;
+    bool down            = future_pos.y > mid_at.y;
+    bool left            = future_pos.x < mid_at.x;
+    bool right           = future_pos.x > mid_at.x;
+    bool attack          = false;
+    bool wait_or_collect = false;
 
     verify(this);
     return (move(future_pos, up, down, left, right, attack, wait_or_collect, true));
@@ -117,12 +117,12 @@ bool Thing::move (fpoint future_pos)
 bool Thing::move_no_shove (fpoint future_pos)
 {
     dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
-    bool up     = future_pos.y < mid_at.y;
-    bool down   = future_pos.y > mid_at.y;
-    bool left   = future_pos.x < mid_at.x;
-    bool right  = future_pos.x > mid_at.x;
-    bool attack = false;
-    bool wait_or_collect   = false;
+    bool up              = future_pos.y < mid_at.y;
+    bool down            = future_pos.y > mid_at.y;
+    bool left            = future_pos.x < mid_at.x;
+    bool right           = future_pos.x > mid_at.x;
+    bool attack          = false;
+    bool wait_or_collect = false;
 
     verify(this);
     return (move(future_pos, up, down, left, right, attack, wait_or_collect, false));

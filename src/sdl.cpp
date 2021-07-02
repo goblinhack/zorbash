@@ -1477,10 +1477,10 @@ void config_game_pix_zoom_update (void)
                                                game->config.config_pix_height);
     CON("SDL: - window pixel size    : %dx%d", game->config.window_pix_width,
                                                game->config.window_pix_height);
-    CON("SDL: Game graphics zoom     : %f", game->config.game_pix_zoom);
+    CON("SDL: Game graphics zoom     : %f",    game->config.game_pix_zoom);
     CON("SDL: - game pixel size      : %dx%d", game->config.game_pix_width,
                                                game->config.game_pix_height);
-    CON("SDL: UI zoom                : %f", game->config.ui_pix_zoom);
+    CON("SDL: UI zoom                : %f",    game->config.ui_pix_zoom);
     CON("SDL: - UI pixel size        : %dx%d", game->config.ui_pix_width,
                                                game->config.ui_pix_height);
 
