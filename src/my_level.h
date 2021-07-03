@@ -658,7 +658,7 @@ public:
     void scroll_map_set_target(void);
     void scroll_map_to_player(void);
     void scroll_map_to_player_immediately(void);
-    void set_dungeon(const int x, const int y);
+    void set_is_dungeon(const int x, const int y);
     void set_is_acid(const int x, const int y);
     void set_is_ascend_dungeon(const int x, const int y);
     void set_is_ascend_sewer(const int x, const int y);
@@ -720,7 +720,7 @@ public:
     void things_gc_if_possible(void);
     void things_tick(void);
     void tick(void);
-    void unset_dungeon(const int x, const int y);
+    void unset_is_dungeon(const int x, const int y);
     void unset_fade_in(const int x, const int y);
     void unset_fade_in_no_check(const int x, const int y);
     void unset_heatmap(const int x, const int y);

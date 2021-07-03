@@ -130,6 +130,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         FOR_ALL_THINGS(level, t, to.x, to.y) {
             if (t->is_cursor_can_hover_over_but_needs_double_click()) {
                 player->log("Needs double click");
+                TOPCON("Double click to move.");
                 return true;
             }
         } FOR_ALL_THINGS_END()

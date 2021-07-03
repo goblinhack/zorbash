@@ -1580,7 +1580,7 @@ void Level::create_dungeon_game_mark_dungeon_tiles (Dungeonp d)
                 is_floor(x, y)       ||
                 is_corridor(x, y)    ||
                 is_bridge(x, y)) {
-                set_dungeon(x, y);
+                set_is_dungeon(x, y);
             }
         }
     }
