@@ -62,3 +62,42 @@ bool Thing::open_door (Thingp it)
 
     return false;
 }
+
+bool Thing::close_door (Thingp it)
+{_
+    if (is_on_fire()) {
+        if (!it->is_on_fire()) {
+            if (is_player()) {
+                TOPCON("The door is ablaze!");
+            }
+            it->set_on_fire("closed flaming door");
+        }
+    }
+
+    if (!it->is_door()) {
+        return false;
+    }
+
+    if (!it->is_open) {
+        return false;
+    }
+
+    if (it->is_dead) {
+        return false;
+    }
+
+    if (unlikely(g_opt_debug1)) {
+        it->log("Close");
+    }
+    it->level_pop();
+    it->is_open = false;
+    it->level_push();
+
+    if (is_player()) {
+        TOPCON("The door creaks open.");
+    }
+
+    update_light();
+    level->player_dmap_update();
+    return true;
+}
