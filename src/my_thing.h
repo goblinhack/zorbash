@@ -951,6 +951,7 @@ public:
     static std::function<int(Thingp)> matches_to_func(const std::string& what);
     std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_bag (void);
     std::list<Thingp> anything_to_carry(void);
+    std::list<Thingp> anything_to_carry_at(fpoint);
     std::size_t get_light_count (void) const;
     std::string get_msg(void) const;
     std::string short_text_a_or_an(void) const;
