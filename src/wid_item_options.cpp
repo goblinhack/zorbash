@@ -161,6 +161,23 @@ _
         }
     }
 
+    if (key->scancode == (SDL_Scancode)game->config.key_use) {
+        wid_item_options_use(nullptr, 0, 0, 0);
+        return true;
+    }
+    if (key->scancode == (SDL_Scancode)game->config.key_throw) {
+        wid_item_options_throw(nullptr, 0, 0, 0);
+        return true;
+    }
+    if (key->scancode == (SDL_Scancode)game->config.key_eat) {
+        wid_item_options_eat(nullptr, 0, 0, 0);
+        return true;
+    }
+    if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+        wid_item_options_drop(nullptr, 0, 0, 0);
+        return true;
+    }
+
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
