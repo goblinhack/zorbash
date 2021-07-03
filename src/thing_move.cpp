@@ -294,6 +294,9 @@ bool Thing::move (fpoint future_pos,
                 dbg("Cannot move; try to shove");
                 if (shove_allowed) {
                     try_to_shove(future_pos);
+                } else {
+                    dbg("Cannot shove; try to attack");
+                    use_weapon();
                 }
                 lunge(future_pos);
                 dbg("Move failed");
