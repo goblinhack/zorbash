@@ -429,11 +429,11 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 } else {
                     if (hitter && (hitter != real_hitter)) {
                         TOPCON("You hit the %s for %d damage with %s!",
-                            text_the().c_str(), damage,
-                            hitter->text_a_or_an().c_str());
+                               text_the().c_str(), damage,
+                               hitter->text_the().c_str());
                     } else {
                         TOPCON("You hit the %s for %d damage!",
-                            text_the().c_str(), damage);
+                               text_the().c_str(), damage);
                     }
                 }
             } else {
