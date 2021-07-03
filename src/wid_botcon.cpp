@@ -138,6 +138,8 @@ void wid_botcon_flush (void)
 //
 void wid_botcon_log (std::string s)
 {_
+    LOG("BOTCON: %s", s.c_str());
+
     int chars_per_line = UI_BOTCON_WIDTH;
 
     auto d = split(s, chars_per_line);

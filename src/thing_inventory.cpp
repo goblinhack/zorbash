@@ -160,8 +160,9 @@ _
         // Always show
         //
     } else {
-        if (game->state == Game::STATE_MOVING_ITEMS || 
-            game->state == Game::STATE_COLLECTING_ITEMS) {
+        if ((game->state == Game::STATE_MOVING_ITEMS) || 
+            (game->state == Game::STATE_WIELDING_ITEMS) ||
+            (game->state == Game::STATE_COLLECTING_ITEMS)) {
             //
             // No animations when moving stuff around
             //
@@ -295,9 +296,10 @@ _
                 //
             } else {
                 wid_inventory_init();
-                if (game->state != Game::STATE_CHOOSING_TARGET &&
-                    game->state != Game::STATE_MOVING_ITEMS &&
-                    game->state != Game::STATE_COLLECTING_ITEMS) {
+                if ((game->state != Game::STATE_CHOOSING_TARGET) &&
+                    (game->state != Game::STATE_MOVING_ITEMS) &&
+                    (game->state != Game::STATE_WIELDING_ITEMS) &&
+                    (game->state != Game::STATE_COLLECTING_ITEMS)) {
                     wid_thing_info_fini();
                 }
                 if (game->state != Game::STATE_CHOOSING_TARGET &&
@@ -325,9 +327,10 @@ _
     }
 
     wid_inventory_init();
-    if (game->state != Game::STATE_CHOOSING_TARGET &&
-        game->state != Game::STATE_MOVING_ITEMS &&
-        game->state != Game::STATE_COLLECTING_ITEMS) {
+    if ((game->state != Game::STATE_CHOOSING_TARGET) &&
+        (game->state != Game::STATE_MOVING_ITEMS) &&
+        (game->state != Game::STATE_WIELDING_ITEMS) &&
+        (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
     }
 
@@ -401,9 +404,10 @@ _
 
             level->inventory_describe(game->inventory_highlight_slot);
             wid_inventory_init();
-            if (game->state != Game::STATE_CHOOSING_TARGET &&
-                game->state != Game::STATE_MOVING_ITEMS && 
-                game->state != Game::STATE_COLLECTING_ITEMS) {
+            if ((game->state != Game::STATE_CHOOSING_TARGET) &&
+                (game->state != Game::STATE_MOVING_ITEMS) && 
+                (game->state != Game::STATE_WIELDING_ITEMS) &&
+                (game->state != Game::STATE_COLLECTING_ITEMS)) {
                 wid_thing_info_fini();
             }
             return true;
@@ -474,9 +478,10 @@ _
             }
 
             wid_inventory_init();
-            if (game->state != Game::STATE_CHOOSING_TARGET &&
-                game->state != Game::STATE_MOVING_ITEMS &&
-                game->state != Game::STATE_COLLECTING_ITEMS) {
+            if ((game->state != Game::STATE_CHOOSING_TARGET) &&
+                (game->state != Game::STATE_MOVING_ITEMS) &&
+                (game->state != Game::STATE_WIELDING_ITEMS) &&
+                (game->state != Game::STATE_COLLECTING_ITEMS)) {
                 wid_thing_info_fini();
             }
             return true;

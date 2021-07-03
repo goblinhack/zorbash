@@ -7,6 +7,8 @@
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_thing.h"
+#include "my_monst.h"
+#include "my_thing_template.h"
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
 #include "my_wid_inventory.h"
@@ -26,12 +28,14 @@ void wid_actionbar_close_all_popups (void)
 {_
     wid_thing_info_fini();
     wid_collect_destroy();
+    wid_wield_destroy();
     wid_enchant_destroy();
     wid_skill_choose_destroy();
     wid_item_options_destroy();
     wid_load_destroy();
     wid_save_destroy();
     game_quit_destroy();
+    game_config_keyboard_destroy();
     game->change_state(Game::STATE_NORMAL);
 }
 
@@ -50,7 +54,7 @@ _
 }
 
 static void wid_actionbar_quit_over_b (Widp w, int32_t relx, int32_t rely, 
-                                      int32_t wheelx, int32_t wheely)
+                                       int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to quit the dungeon.");
 }
@@ -83,7 +87,7 @@ _
 }
 
 static void wid_actionbar_close_over_b (Widp w, int32_t relx, int32_t rely, 
-                                      int32_t wheelx, int32_t wheely)
+                                        int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to close any popups.");
 }
@@ -117,7 +121,7 @@ _
 }
 
 static void wid_actionbar_load_over_b (Widp w, int32_t relx, int32_t rely, 
-                                      int32_t wheelx, int32_t wheely)
+                                       int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to load a previously saved dungeon.");
 }
@@ -151,7 +155,7 @@ _
 }
 
 static void wid_actionbar_save_over_b (Widp w, int32_t relx, int32_t rely, 
-                                      int32_t wheelx, int32_t wheely)
+                                       int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to save the current dungeon.");
 }
@@ -191,7 +195,7 @@ _
 }
 
 static void wid_actionbar_inventory_over_b (Widp w, int32_t relx, int32_t rely, 
-                                           int32_t wheelx, int32_t wheely)
+                                            int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to see what you are carrying.");
 }
@@ -234,12 +238,58 @@ _
 }
 
 static void wid_actionbar_collect_over_b (Widp w, int32_t relx, int32_t rely, 
-                                      int32_t wheelx, int32_t wheely)
+                                          int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to collect any loot you are over.");
 }
 
 static void wid_actionbar_collect_over_e (Widp w)
+{_
+    BOTCON(" ");
+}
+
+static uint8_t wid_actionbar_wield (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar wield");
+_
+    if (!game->level) {
+        return true;
+    }
+
+    auto player = game->level->player;
+    if (!player){
+        return true;
+    }
+
+    if (player->is_dead){
+        return true;
+    }
+
+    if (game->in_transit_item) {
+        return true;
+    }
+
+    wid_actionbar_close_all_popups();
+
+    for (const auto& item : player->monstp->carrying) {
+        auto t = game->level->thing_find(item.id);
+        if (t->is_weapon()) {
+            game->wid_wield_create();
+            return true;
+        }
+    }
+
+    TOPCON("You have no weapon to wield!");
+    return true;
+}
+
+static void wid_actionbar_wield_over_b (Widp w, int32_t relx, int32_t rely, 
+                                        int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to wield a new weapon.");
+}
+
+static void wid_actionbar_wield_over_e (Widp w)
 {_
     BOTCON(" ");
 }
@@ -315,7 +365,7 @@ _
 }
 
 static void wid_actionbar_wait_over_b (Widp w, int32_t relx, int32_t rely, 
-                                      int32_t wheelx, int32_t wheely)
+                                       int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to happily pass the time of day.");
 }
@@ -339,7 +389,7 @@ _
 }
 
 static void wid_actionbar_zoom_out_over_b (Widp w, int32_t relx, int32_t rely, 
-                                      int32_t wheelx, int32_t wheely)
+                                           int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to zoom out the map.");
 }
@@ -363,12 +413,38 @@ _
 }
 
 static void wid_actionbar_zoom_in_over_b (Widp w, int32_t relx, int32_t rely, 
-                                      int32_t wheelx, int32_t wheely)
+                                          int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to zoom in the map.");
 }
 
 static void wid_actionbar_zoom_in_over_e (Widp w)
+{_
+    BOTCON(" ");
+}
+
+static uint8_t wid_actionbar_configure (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar configure");
+_
+    if (!game->level) {
+        return true;
+    }
+
+    wid_actionbar_close_all_popups();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    game->config_keyboard_select();
+    return true;
+}
+
+static void wid_actionbar_configure_over_b (Widp w, int32_t relx, int32_t rely, 
+                                            int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to change key settings.");
+}
+
+static void wid_actionbar_configure_over_e (Widp w)
 {_
     BOTCON(" ");
 }
@@ -407,11 +483,13 @@ _
     bool icon_close = false;
     if (game->bags.size() ||
         wid_collect ||
+        wid_wield ||
         wid_skills ||
         wid_item_options_window ||
         wid_enchant ||
         wid_load ||
         wid_save ||
+        game_config_keyboard_window ||
         game_quit_window) {
         icon_close = true;
     }
@@ -464,10 +542,9 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_config");
-#if 0
-        wid_set_on_mouse_over_b(w, wid_actionbar_config_over_b);
-        wid_set_on_mouse_over_b(w, wid_actionbar_config_over_e);
-#endif
+        wid_set_on_mouse_up(w, wid_actionbar_configure);
+        wid_set_on_mouse_over_b(w, wid_actionbar_configure_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_configure_over_e);
         x_at += option_width;
     }
 
@@ -525,10 +602,22 @@ _
         point br = make_point(x_at + option_width - 1, option_width - 1);
         wid_set_pos(w, tl, br);
         wid_set_bg_tilename(w, "icon_wield");
-#if 0
+
+        auto weapon = player->weapon_get();
+        if (weapon) {
+            auto tpp = weapon->tp();
+            auto tiles = &tpp->tiles;
+            if (tiles) {
+                auto tile = tile_first(tiles);
+                if (tile) {
+                    wid_set_bg_tilename(w, "icon_none");
+                    wid_set_fg_tile(w, tile);
+                }
+            }
+        }
+        wid_set_on_mouse_up(w, wid_actionbar_wield);
         wid_set_on_mouse_over_b(w, wid_actionbar_wield_over_b);
-        wid_set_on_mouse_over_b(w, wid_actionbar_wield_over_e);
-#endif
+        wid_set_on_mouse_over_e(w, wid_actionbar_wield_over_e);
         x_at += option_width;
     }
 

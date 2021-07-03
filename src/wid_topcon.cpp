@@ -163,6 +163,15 @@ _
         return true;
     }
 
+    if (game->state == Game::STATE_WIELDING_ITEMS) {
+        if (key->scancode == SDL_SCANCODE_ESCAPE) {
+            LOG("Escape pressed, clear wielding items state");
+_
+            game->change_state(Game::STATE_NORMAL);
+            return true;
+        }
+    }
+
     if (game->state == Game::STATE_COLLECTING_ITEMS) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
             LOG("Escape pressed, clear collecting items state");

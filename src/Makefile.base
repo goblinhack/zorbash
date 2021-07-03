@@ -279,6 +279,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/wid_actionbar.o               \
     $(OBJDIR)/wid_botcon.o                  \
     $(OBJDIR)/wid_collect.o                 \
+    $(OBJDIR)/wid_wield.o                   \
     $(OBJDIR)/wid_console.o                 \
     $(OBJDIR)/wid_enchant.o                 \
     $(OBJDIR)/wid_skills.o                  \

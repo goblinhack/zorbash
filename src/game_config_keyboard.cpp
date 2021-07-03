@@ -6,12 +6,13 @@
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_wid_popup.h"
+#include "my_wid_actionbar.h"
 #include "my_game_notice.h"
 #include "my_sdl.h"
 #include "my_ui.h"
 
 static int last_vert_scroll_offset = -1;
-static WidPopup *game_config_keyboard_window;
+WidPopup *game_config_keyboard_window;
 
 //
 // Check for saving keys to config can fit
@@ -244,13 +245,21 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
     }
 }
 
-static void game_config_keyboard_destroy (void)
+void game_config_keyboard_destroy (void)
 {_
+    if (!game_config_keyboard_window) {
+        return;
+    }
+
     auto w = game_config_keyboard_window->wid_text_area->wid_vert_scroll;
     last_vert_scroll_offset = wid_get_tl_y(w) - wid_get_tl_y(w->parent);
 
     delete game_config_keyboard_window;
     game_config_keyboard_window = nullptr;
+
+    if (game->level) {
+        wid_actionbar_init();
+    }
 }
 
 static uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -2004,5 +2013,9 @@ void Game::config_keyboard_select (void)
     if (last_vert_scroll_offset != -1) {
         auto w = game_config_keyboard_window->wid_text_area->wid_vert_scroll;
         wid_move_to_y_off(w, last_vert_scroll_offset);
+    }
+
+    if (game->level) {
+        wid_actionbar_init();
     }
 }

@@ -21,20 +21,25 @@ void Game::change_state (int new_state)
     }
 _
     auto old_state = state;
+
+    //
+    // Set here to stop recursion.
+    //
     state = new_state;
 
     switch (new_state) {
         case STATE_NORMAL:
-            LOG("State changed to STATE_NORMAL");
+            LOG("State changing to STATE_NORMAL");
             wid_thing_info_fini();
             wid_collect_destroy();
+            wid_wield_destroy();
             wid_enchant_destroy();
             wid_skill_choose_destroy();
             wid_item_options_destroy();
             wid_load_destroy();
             wid_save_destroy();
             game_quit_destroy();
-            wid_actionbar_init();
+            LOG("State changed to STATE_NORMAL");
             break;
         case STATE_OPTIONS_FOR_ITEM_MENU:
             LOG("State changed to STATE_OPTIONS_FOR_ITEM_MENU");
@@ -43,21 +48,31 @@ _
             LOG("State changed to STATE_MOVING_ITEMS");
             break;
         case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
-            LOG("State changed to STATE_COLLECTING_ITEMS");
+            LOG("State changing to STATE_COLLECTING_ITEMS");
             wid_thing_info_fini();
             wid_collect_destroy();
+            LOG("State changed to STATE_COLLECTING_ITEMS");
+            break;
+        case STATE_WIELDING_ITEMS:
+            LOG("State changing to STATE_WIELDING_ITEMS");
+            wid_thing_info_fini();
+            wid_wield_destroy();
+            LOG("State changed to STATE_WIELDING_ITEMS");
             break;
         case STATE_ENCHANTING_ITEMS:
-            LOG("State changed to STATE_ENCHANTING_ITEMS");
+            LOG("State changing to STATE_ENCHANTING_ITEMS");
             wid_enchant_destroy();
+            LOG("State changed to STATE_ENCHANTING_ITEMS");
             break;
         case STATE_CHOOSING_SKILLS:
-            LOG("State changed to STATE_CHOOSING_SKILLS");
+            LOG("State changing to STATE_CHOOSING_SKILLS");
             wid_skill_choose_destroy();
+            LOG("State changed to STATE_CHOOSING_SKILLS");
             break;
         case STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
-            LOG("State changed to STATE_CHOOSING_TARGET");
+            LOG("State changing to STATE_CHOOSING_TARGET");
             wid_thing_info_fini();
+            LOG("State changed to STATE_CHOOSING_TARGET");
             break;
         case STATE_LOAD_MENU:
         case STATE_SAVE_MENU:
@@ -65,6 +80,12 @@ _
             wid_thing_info_fini();
             break;
     }
+
+    //
+    // In case some cleanup above changed state
+    //
+    state = new_state;
+    wid_actionbar_init();
 
     if (game->in_transit_item) {
         if (wid_in_transit_item_drop()) {
@@ -80,6 +101,7 @@ _
         case STATE_NORMAL:
         case STATE_MOVING_ITEMS:     // Currently managing inventory
         case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+        case STATE_WIELDING_ITEMS:
         case STATE_ENCHANTING_ITEMS:
         case STATE_CHOOSING_SKILLS:
             if (level) {

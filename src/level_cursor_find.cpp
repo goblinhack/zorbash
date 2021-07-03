@@ -23,6 +23,7 @@ void Level::cursor_find_on_visible_things (
     if ((game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
