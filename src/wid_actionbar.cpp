@@ -64,6 +64,26 @@ static void wid_actionbar_quit_over_e (Widp w)
     BOTCON(" ");
 }
 
+static uint8_t wid_actionbar_robot (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    LOG("Actionbar robot");
+_
+    wid_actionbar_close_all_popups();
+    //game->robot_select();
+    return true;
+}
+
+static void wid_actionbar_robot_over_b (Widp w, int32_t relx, int32_t rely, 
+                                        int32_t wheelx, int32_t wheely)
+{_
+    BOTCON("Select this to explore the dungeon like a robot.");
+}
+
+static void wid_actionbar_robot_over_e (Widp w)
+{_
+    BOTCON(" ");
+}
+
 static uint8_t wid_actionbar_close (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     LOG("Actionbar close");
@@ -494,7 +514,7 @@ _
         icon_close = true;
     }
 
-    int options = 9;
+    int options = 10;
 
     if (icon_collect) {
         options++;
@@ -545,6 +565,18 @@ _
         wid_set_on_mouse_up(w, wid_actionbar_configure);
         wid_set_on_mouse_over_b(w, wid_actionbar_configure_over_b);
         wid_set_on_mouse_over_e(w, wid_actionbar_configure_over_e);
+        x_at += option_width;
+    }
+
+    {
+        auto w = wid_new_square_button(wid_actionbar, "wid actionbar robot");
+        point tl = make_point(x_at, 0);
+        point br = make_point(x_at + option_width - 1, option_width - 1);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "icon_robot");
+        wid_set_on_mouse_up(w, wid_actionbar_robot);
+        wid_set_on_mouse_over_b(w, wid_actionbar_robot_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_robot_over_e);
         x_at += option_width;
     }
 

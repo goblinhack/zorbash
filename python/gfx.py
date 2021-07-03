@@ -6497,7 +6497,7 @@ def init_tiles1_monsts_and_items():
       "icon_wait",
       "icon_collect",
       "icon_close",
-      "icon_3",
+      "icon_robot",
       "icon_4",
       "icon_5",
       "icon_6",
