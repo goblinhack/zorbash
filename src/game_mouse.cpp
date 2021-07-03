@@ -142,21 +142,20 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     //
     if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
         (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
-        int x = level->cursor->mid_at.x;
-        int y = level->cursor->mid_at.y;
-        FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
-            if (t == level->player) {
-                continue;
-            }
-            if (t->is_item()) {
+        //
+        // If more than one item, best to let the player move their and
+        // open the collect popup.
+        //
+        auto items = player->anything_to_carry_at(player->mid_at);
+        if (items.size() == 1) {
+            for (auto item : items) {
                 player->log("Close enough to collect");
-                player->try_to_carry(t);
-                return true;
+                if (player->try_to_carry(item)) {
+                    return true;
+                }
             }
         }
-        FOR_ALL_THINGS_END()
     }
-
     //
     // Grab the current move path and start walking toward it. This will
     // consume one move by the player.

@@ -43,9 +43,13 @@ _
         return false;
     }
 
-    player->use(chosen_thing);
-
+    //
+    // Change state before as this might be a wand that wants to change state
+    // to target.
+    //
     game->change_state(Game::STATE_NORMAL);
+
+    player->use(chosen_thing);
     return true;
 }
 

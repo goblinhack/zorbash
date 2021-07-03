@@ -181,11 +181,11 @@ bool Thing::try_to_carry (Thingp it)
     return carry(it);
 }
 
-std::list<Thingp> Thing::anything_to_carry (void)
+std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
 {_
     std::list<Thingp> items;
 
-    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+    FOR_ALL_THINGS(level, t, at.x, at.y) {
         if (t->is_dead) {
             dbg("Potential item to carry, no, is dead: %s",
                 t->to_string().c_str());
@@ -229,6 +229,11 @@ std::list<Thingp> Thing::anything_to_carry (void)
     } FOR_ALL_THINGS_END()
 
     return items;
+}
+
+std::list<Thingp> Thing::anything_to_carry (void)
+{_
+    return anything_to_carry_at(mid_at);
 }
 
 bool Thing::check_anything_to_carry (void)
