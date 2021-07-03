@@ -100,4 +100,10 @@ void Thing::level_change (Levelp l)
     if (is_player()) {
         l->scroll_map_to_player();
     }
+
+    //
+    // Update the cursor position.
+    //
+    l->cursor_recreate();
+    l->cursor_path_clear();
 }

@@ -1014,7 +1014,7 @@ uint8_t Level::is_dungeon (const int x, const int y)
     return (get(_is_dungeon, x, y));
 }
 
-void Level::set_dungeon (const int x, const int y)
+void Level::set_is_dungeon (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
@@ -1023,7 +1023,7 @@ void Level::set_dungeon (const int x, const int y)
     incr(_is_dungeon, x, y, (uint8_t)1);
 }
 
-void Level::unset_dungeon (const int x, const int y)
+void Level::unset_is_dungeon (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
