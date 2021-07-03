@@ -401,6 +401,7 @@ _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||

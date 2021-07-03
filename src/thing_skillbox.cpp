@@ -55,9 +55,10 @@ _
                 //
             } else {
                 wid_skillbox_init();
-                if (game->state != Game::STATE_CHOOSING_TARGET &&
-                    game->state != Game::STATE_MOVING_ITEMS &&
-                    game->state != Game::STATE_COLLECTING_ITEMS) {
+                if ((game->state != Game::STATE_CHOOSING_TARGET) &&
+                    (game->state != Game::STATE_MOVING_ITEMS) &&
+                    (game->state != Game::STATE_WIELDING_ITEMS) &&
+                    (game->state != Game::STATE_COLLECTING_ITEMS)) {
                     wid_thing_info_fini();
                 }
                 return true;
@@ -83,9 +84,10 @@ _
     game->previous_slot = item_slot;
 
     wid_skillbox_init();
-    if (game->state != Game::STATE_CHOOSING_TARGET &&
-        game->state != Game::STATE_MOVING_ITEMS &&
-        game->state != Game::STATE_COLLECTING_ITEMS) {
+    if ((game->state != Game::STATE_CHOOSING_TARGET) &&
+        (game->state != Game::STATE_MOVING_ITEMS) &&
+        (game->state != Game::STATE_WIELDING_ITEMS) &&
+        (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
     }
     level->skillbox_describe(item_slot);
@@ -142,9 +144,10 @@ _
 
             level->skillbox_describe(game->skillbox_highlight_slot);
             wid_skillbox_init();
-            if (game->state != Game::STATE_CHOOSING_TARGET &&
-                game->state != Game::STATE_MOVING_ITEMS && 
-                game->state != Game::STATE_COLLECTING_ITEMS) {
+            if ((game->state != Game::STATE_CHOOSING_TARGET) &&
+                (game->state != Game::STATE_MOVING_ITEMS) && 
+                (game->state != Game::STATE_WIELDING_ITEMS) &&
+                (game->state != Game::STATE_COLLECTING_ITEMS)) {
                 wid_thing_info_fini();
             }
             return true;

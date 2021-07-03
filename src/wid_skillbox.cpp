@@ -35,6 +35,7 @@ _
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
@@ -79,6 +80,7 @@ _
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_MOVING_ITEMS) || 
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
@@ -126,6 +128,7 @@ uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
         return false;

@@ -6485,6 +6485,7 @@ def init_tiles1_monsts_and_items():
       "",
       "",
       #########################################################################
+      "icon_none",
       "icon_quit",
       "icon_config",
       "icon_save",
@@ -6496,7 +6497,6 @@ def init_tiles1_monsts_and_items():
       "icon_wait",
       "icon_collect",
       "icon_close",
-      "icon_2",
       "icon_3",
       "icon_4",
       "icon_5",

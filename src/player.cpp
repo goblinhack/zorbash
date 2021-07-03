@@ -42,6 +42,11 @@ void player_tick (void)
                 LOG("Ignore player action when moving items");
             }
             return;
+        case Game::STATE_WIELDING_ITEMS: 
+            if (unlikely(g_opt_debug4)) {
+                LOG("Ignore player action when wielding items");
+            }
+            return;
         case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
             if (unlikely(g_opt_debug4)) {
                 LOG("Ignore player action when collecting items");

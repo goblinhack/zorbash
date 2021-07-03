@@ -24,7 +24,7 @@ std::list<WidPopup *> wid_thing_info_window;
 void wid_thing_info_fini (void)
 {_
     LOG("Destroy wid thing info");
-
+_
     if (game->bag_primary) {
         delete game->bag_primary;
         game->bag_primary = nullptr;
@@ -42,7 +42,6 @@ void wid_thing_info_fini (void)
     //
     // Clear out any text shown from the above
     //
-    BOTCON(" ");
 }
 
 uint8_t wid_thing_info_init (void)
@@ -287,6 +286,12 @@ bool Game::wid_thing_info_push_popup (Thingp t)
 
 void Game::wid_thing_info_clear_popup (void)
 {_
+    if (wid_thing_info_window.empty()) {
+        return;
+    }
+
+    BOTCON(" ");
+
     for (auto w : wid_thing_info_window) {
         delete w;
     }

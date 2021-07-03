@@ -32,6 +32,7 @@ _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
@@ -77,6 +78,7 @@ _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
@@ -123,6 +125,7 @@ _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
@@ -163,6 +166,7 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_CHOOSING_SKILLS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
         (game->state == Game::STATE_LOAD_MENU) ||
