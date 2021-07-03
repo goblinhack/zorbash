@@ -105,8 +105,10 @@ void Level::cursor_move (void)
 
 void Level::cursor_recreate (void)
 {_
+    //
+    // Player might be on another level
+    //
     if (!cursor) {
-        err("no cursor");
         return;
     }
 
