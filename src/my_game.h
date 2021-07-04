@@ -89,10 +89,10 @@ public:
     uint32_t           key_move_right               = {};
     uint32_t           key_move_up                  = {};
     uint32_t           key_quit                     = {};
+    uint32_t           key_robot_mode               = {};
     uint32_t           key_save                     = {};
     uint32_t           key_screenshot               = {};
     uint32_t           key_throw                    = {};
-    uint32_t           key_unused3                  = {};
     uint32_t           key_unused4                  = {};
     uint32_t           key_unused5                  = {};
     uint32_t           key_use                      = {};
@@ -158,6 +158,7 @@ public:
     void save_select(void);
     void tick_begin(const std::string &);
     void tick_end();
+    void robot_mode_tick();
     void wid_collect_create(const std::list<Thingp> items);
     void wid_wield_create(void);
     void wid_items_options_create(Widp w, Thingp chosen, bool came_from_inventory);
@@ -188,7 +189,7 @@ public:
     void wid_thing_info_destroy_immediate(void);
 
     //
-    //Save file name, contains the date and other useful save slot info
+    // Save file name, contains the date and other useful save slot info
     //
     std::string        version = "" MYVER "";
     uint32_t           header_size {};
@@ -211,10 +212,12 @@ public:
     int                seed {};             // All randomness jumps off of this
     std::string        seed_name {};        // Human readable version of the above
     point3d            current_level;       // Where we are in the world.
-    uint32_t           inventory_highlight_slot {};
-    uint32_t           skillbox_highlight_slot {};
-    uint32_t           previous_slot {};
     uint32_t           fps_value = {};      // Current framerate
+    uint32_t           inventory_highlight_slot {};
+    uint32_t           previous_slot {};
+    uint32_t           robot_mode {};
+    uint32_t           robot_delay_ms {100};
+    uint32_t           skillbox_highlight_slot {};
     uint32_t           tick_completed {1};
     uint32_t           tick_current {1};
 

@@ -12,6 +12,7 @@
 #include "my_wid_inventory.h"
 #include "my_wid_rightbar.h"
 #include "my_wid_thing_info.h"
+#include "my_wid_actionbar.h"
 #include "my_ttf.h"
 #include "my_string.h"
 #include "my_wid.h"
@@ -233,6 +234,14 @@ _
         wid_thing_info_fini(); // To remove bag or other info
         CON("USERCFG: saving the game");
         game->save_select();
+        return true;
+    }
+    if (key->scancode == (SDL_Scancode)game->config.key_robot_mode) {
+        LOG("Pressed robot mode key");
+_
+        game->change_state(Game::STATE_NORMAL);
+        wid_thing_info_fini(); // To remove bag or other info
+        wid_actionbar_robot_mode();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_help) {

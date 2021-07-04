@@ -26,6 +26,10 @@ enum {
     MONST_SIZE_GARGANTUAN,
 };
 
+enum {
+    ROBOT_STATE_WANDER,
+};
+
 typedef struct Monst_ {
 public:
     AgeMap       *_age_map = {};             // How old a cell is
@@ -54,30 +58,30 @@ public:
     float        fall_height = {};           // y offset for falling
     float        wobble = {};                // Fades when set
     fpoint       lunge_to;                   // When a monst attacks something
+    int          bounce_count = {};
     int          capacity_height {};
     int          capacity_width {};
-    int          bounce_count = {};
+    int          charge_count = {};          // How many things this thing spawned.
+    int          enchant = {};
+    int          enchant_max = {};
     int          gold = {};
-    int          score = {};
     int          health = {};
     int          health_max = {};
     int          keys = {};
     int          lifespan = {};              // How many things this thing owns.
     int          light_quality {};
     int          light_strength {};          // Current strength, including torches
+    int          minion_count = {};          // How many things this thing spawned.
+    int          owned_count = {};           // How many things this thing owns.
+    int          poison = {};
+    int          robot_state {};
+    int          score = {};
+    int          spawned_count = {};         // How many things this thing owns.
+    int          stamina = {};
+    int          stamina_max = {};
     int          stat_attack = {};
     int          stat_constitution = {};
     int          stat_defence = {};
-    int          stat_strength = {};
-    int          owned_count = {};           // How many things this thing owns.
-    int          spawned_count = {};         // How many things this thing owns.
-    int          minion_count = {};          // How many things this thing spawned.
-    int          charge_count = {};          // How many things this thing spawned.
-    int          stamina = {};
-    int          stamina_max = {};
-    int          enchant = {};
-    int          enchant_max = {};
-    int          poison = {};
     int          stats01 = {};
     int          stats02 = {};
     int          stats03 = {};
@@ -92,6 +96,7 @@ public:
     int          stats12 = {};
     int          stats17 = {};
     int          stats_stats19 = {};
+    int          stat_strength = {};
     int          submerged_offset = {};      // GL co-orids
     int          throw_distance = {};
     int          tick_rate_tenths = {};
