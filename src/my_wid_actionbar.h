@@ -8,6 +8,7 @@
 
 void wid_actionbar_fini(void);
 void wid_actionbar_init(void);
+void wid_actionbar_robot_mode(void);
 void wid_actionbar_close_all_popups(void);
 
 #include "my_wid.h"

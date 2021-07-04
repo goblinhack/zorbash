@@ -97,7 +97,7 @@ void Config::reset (void)
     key_throw                    = {SDL_SCANCODE_T};
     key_inventory                = {SDL_SCANCODE_I};
     key_console                  = {SDL_SCANCODE_TAB};
-    key_unused3                  = 0;
+    key_robot_mode               = {SDL_SCANCODE_R};
     key_unused4                  = 0;
     key_unused5                  = 0;
     key_use                      = {SDL_SCANCODE_U};

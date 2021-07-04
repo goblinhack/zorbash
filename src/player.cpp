@@ -14,7 +14,7 @@
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
 
-void player_tick (void)
+void player_tick (bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
 {_
     //
     // Trying to move when the console is visible.
@@ -136,11 +136,6 @@ void player_tick (void)
         return;
     }
 
-    static bool left = false;
-    static bool right = false;
-    static bool up = false;
-    static bool down = false;
-
     if (state[game->config.key_move_left]) {
         left = true;
     }
@@ -207,13 +202,9 @@ void player_tick (void)
         }
     }
 
-    uint8_t attack = 0;
-    uint8_t wait   = 0;
-    uint8_t jump   = 0;
-
-    attack = state[game->config.key_attack] ? 1 : 0;
-    wait   = state[game->config.key_wait_or_collect] ? 1 : 0;
-    jump   = state[game->config.key_jump] ? 1 : 0;
+    attack |= state[game->config.key_attack] ? true : false;
+    wait   |= state[game->config.key_wait_or_collect] ? true : false;
+    jump   |= state[game->config.key_jump] ? true : false;
 
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
         up = true;

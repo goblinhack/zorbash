@@ -64,12 +64,18 @@ static void wid_actionbar_quit_over_e (Widp w)
     BOTCON(" ");
 }
 
-static uint8_t wid_actionbar_robot (Widp w, int32_t x, int32_t y, uint32_t button)
+void wid_actionbar_robot_mode (void)
 {_
     LOG("Actionbar robot");
 _
     wid_actionbar_close_all_popups();
-    //game->robot_select();
+    game->robot_mode = !game->robot_mode;
+    wid_actionbar_init();
+}
+
+static uint8_t wid_actionbar_robot (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    wid_actionbar_robot_mode();
     return true;
 }
 
@@ -82,6 +88,11 @@ static void wid_actionbar_robot_over_b (Widp w, int32_t relx, int32_t rely,
 static void wid_actionbar_robot_over_e (Widp w)
 {_
     BOTCON(" ");
+}
+
+static void wid_actionbar_robot_tick (Widp w)
+{_
+    game->robot_mode_tick();
 }
 
 static uint8_t wid_actionbar_close (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -577,6 +588,11 @@ _
         wid_set_on_mouse_up(w, wid_actionbar_robot);
         wid_set_on_mouse_over_b(w, wid_actionbar_robot_over_b);
         wid_set_on_mouse_over_e(w, wid_actionbar_robot_over_e);
+        if (game->robot_mode) {
+            wid_set_bg_tilename(w, "icon_robot_on");
+            wid_set_on_tick(w, wid_actionbar_robot_tick);
+        }
+            wid_set_style(w, UI_WID_STYLE_RED);
         x_at += option_width;
     }
 

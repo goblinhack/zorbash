@@ -51,6 +51,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/game_save.o                   \
     $(OBJDIR)/game_state.o                  \
     $(OBJDIR)/game_tick.o                   \
+    $(OBJDIR)/game_robot.o                  \
     $(OBJDIR)/gauss.o                       \
     $(OBJDIR)/gfx.o                         \
     $(OBJDIR)/gfx0.o                        \

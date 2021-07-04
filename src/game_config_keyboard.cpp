@@ -195,10 +195,10 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
             game->config.key_console = 0;
         }
     }
-    if (game->config.key_unused3) {
-        if (game->config.key_unused3 == code) {
-            TOPCON("%%fg=orange$Conflicting key, disabling key unused3%%fg=reset$");
-            game->config.key_unused3 = 0;
+    if (game->config.key_robot_mode) {
+        if (game->config.key_robot_mode == code) {
+            TOPCON("%%fg=orange$Conflicting key, disabling key robot mode%%fg=reset$");
+            game->config.key_robot_mode = 0;
         }
     }
     if (game->config.key_unused4) {
@@ -530,6 +530,14 @@ static void game_config_key_load_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
+static void game_config_key_robot_mode_set (SDL_Scancode code)
+{_
+    game->config.key_robot_mode = 0;
+    game_config_check_for_conflicts(code);
+    game->config.key_robot_mode = code;
+    game->config_keyboard_select();
+}
+
 static void game_config_key_zoom_in_set (SDL_Scancode code)
 {_
     game->config.key_zoom_in = 0;
@@ -855,6 +863,13 @@ static uint8_t game_config_key_load (Widp w, int32_t x, int32_t y, uint32_t butt
 {_
     grab_key("load game");
     on_sdl_key_grab = game_config_key_load_set;
+    return true;
+}
+
+static uint8_t game_config_key_robot_mode (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    grab_key("robot_mode game");
+    on_sdl_key_grab = game_config_key_robot_mode_set;
     return true;
 }
 
@@ -1829,6 +1844,33 @@ void Game::config_keyboard_select (void)
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_load));
         wid_set_on_mouse_up(w, game_config_key_load);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // robot_mode
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 1;
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "robot_mode");
+
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2,y_at);
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "robot mode");
+    }
+    {_
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 20,y_at);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_robot_mode));
+        wid_set_on_mouse_up(w, game_config_key_robot_mode);
     }
 
     ///////////////////////////////////////////////////////////////////////
