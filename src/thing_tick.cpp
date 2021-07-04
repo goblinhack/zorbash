@@ -144,7 +144,7 @@ void Thing::achieve_goals_in_life (void)
     //
     // If this thing has AI, it can try and reach goals
     //
-    if (get_dmap_scent()) {
+    if (is_monst() && get_dmap_scent()) {
         dbg("Get next hop");
         ai_get_next_hop();
     }

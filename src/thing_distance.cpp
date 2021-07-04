@@ -15,6 +15,10 @@ point Thing::get_random_scent_target (void)
     int16_t d = ai_scent_distance();
     auto tries = 1000;
 
+    if (is_player()) {
+        d = MAP_WIDTH / 2;
+    }
+
     //
     // Minions cannot wander too far
     //
@@ -30,10 +34,17 @@ point Thing::get_random_scent_target (void)
         if (!dx && !dy) {
             continue;
         }
+
         auto x = std::min(
                  std::max(MAP_BORDER_TOTAL, start.x + dx), MAP_WIDTH - MAP_BORDER_TOTAL);
         auto y = std::min(
                  std::max(MAP_BORDER_TOTAL, start.y + dy), MAP_HEIGHT - MAP_BORDER_TOTAL);
+
+        if (level->is_hazard(x,y) ||
+            level->is_rock(x, y)  ||
+            level->is_wall(x, y)) {
+            continue;
+        }
 
         if (collision_obstacle(point(x, y))) {
             continue;
@@ -42,6 +53,12 @@ point Thing::get_random_scent_target (void)
             if (c >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
                 continue;
             } else {
+                if (is_player()) {
+                    if (!level->is_lit(x, y)) {
+                        continue;
+                    }
+                }
+
                 return point(x, y);
             }
         }
@@ -69,6 +86,13 @@ point Thing::get_random_scent_target (void)
             level->is_wall(x, y)) {
             continue;
         }
+
+        if (is_player()) {
+            if (!level->is_lit(x, y)) {
+                continue;
+            }
+        }
+
         return point(x, y);
     }
 
@@ -85,5 +109,12 @@ point Thing::get_random_scent_target (void)
                 std::max(MAP_BORDER_TOTAL, start.x + dx), MAP_WIDTH - MAP_BORDER_TOTAL);
     auto y = std::min(
                 std::max(MAP_BORDER_TOTAL, start.y + dy), MAP_HEIGHT - MAP_BORDER_TOTAL);
+
+    if (is_player()) {
+        if (!level->is_lit(x, y)) {
+            return point(x, y);
+        }
+    }
+
     return point(x, y);
 }

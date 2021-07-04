@@ -269,9 +269,11 @@ public:
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
     bool move_no_shove(fpoint future_pos);
-    bool move_to_check(const point&, const bool escaping);
+    bool move_to_try(const point&, const bool escaping, bool check_only);
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
+    bool move_to_or_attack_check_only(const point& nh);
+    bool move_to_or_escape_check_only(const point& nh);
     bool on_firing_at_something(Thingp hitter);
     bool on_tick(void);
     bool open_door(Thingp door);
@@ -1326,6 +1328,7 @@ public:
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void update_tick(void);
     void robot_tick(void);
+    bool robot_choose_ai_goal(point &p);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();

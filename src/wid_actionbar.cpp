@@ -92,6 +92,13 @@ static void wid_actionbar_robot_over_e (Widp w)
 
 static void wid_actionbar_robot_tick (Widp w)
 {_
+    if (game->level && game->level->player && game->level->player->is_dead) {
+        game->robot_mode = false;
+        wid_actionbar_init();
+        TOPCON("Robot is dead");
+        return;
+    }
+
     game->robot_mode_tick();
 }
 
