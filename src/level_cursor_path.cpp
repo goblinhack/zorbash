@@ -198,6 +198,18 @@ void Level::cursor_path_draw_line (point start, point end)
     }
 }
 
+void Level::cursor_path_draw_line (const std::vector<point> &move_path)
+{_
+    game->cursor_move_path = move_path;
+
+    for (auto& c : move_path) {
+        if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
+            continue;
+        }
+        thing_new("cursor_path", fpoint(c.x , c.y));
+    }
+}
+
 //
 // Create the cursor path, avoiding things like lava
 //
@@ -221,6 +233,34 @@ void Level::cursor_path_draw (point start, point end)
         }
     } else {
         cursor_path_draw_line(start, end);
+    }
+
+    //
+    // Let's see the path
+    //
+    minimap_valid = false;
+}
+
+void Level::cursor_path_draw (const std::vector<point> &move_path)
+{_
+    if (!player) {
+        return;
+    }
+
+    if (game->request_to_throw_item) {
+        cursor_path_draw_circle();
+    } else if (game->request_to_fire_item) {
+        //
+        // Draw a line instead
+        //
+        if (game->request_to_fire_item->blast_max_radius()) {
+            //
+            // For wands with a blast effect, show both line and radius
+            //
+            cursor_path_draw_circle();
+        }
+    } else {
+        cursor_path_draw_line(move_path);
     }
 
     //
@@ -277,6 +317,32 @@ void Level::cursor_path_create (void)
         cursor_path_draw(
             point(player->mid_at.x, player->mid_at.y),
             point(cursor_at.x, cursor_at.y));
+    }
+}
+
+void Level::cursor_path_create (const std::vector<point> &move_path)
+{_
+    if (!cursor) {
+        return;
+    }
+
+    cursor_path_clear();
+
+    //
+    // For lasers do not show the cursor (circle) unless the item has a 
+    // blast radius
+    //
+    if (game->request_to_fire_item) {
+        if (!game->request_to_fire_item->blast_max_radius()) {
+            return;
+        }
+    }
+
+    //
+    // If not following the player, draw the path
+    //
+    if (player) {
+        cursor_path_draw(move_path);
     }
 }
 

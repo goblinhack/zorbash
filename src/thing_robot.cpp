@@ -21,7 +21,7 @@
 #include "my_wid_popup.h"
 #include "my_player.h"
 
-bool Thing::robot_choose_ai_goal (point &nh)
+bool Thing::robot_choose_ai_goal (void)
 {_
     dbg("Choose goal");
 _
@@ -426,35 +426,31 @@ _
     }
 
     for (auto& result : paths) {
-        auto hops = result.path;
-        auto hops_len = hops.size();
-        point best;
-
-        if (hops_len >= 2) {
-            auto hop0 = get(hops, hops_len - 1);
-            auto hop1 = get(hops, hops_len - 2);
-            if (dmap_can_i_move_diagonally(dmap_scent, astar_start, hop0, hop1)) {
-                best = hop1;
-            } else {
-                best = hop0;
+        std::vector<point> new_move_path;
+        for (point p : result.path) {
+            p.x += minx;
+            p.y += miny;
+            if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
+                continue;
             }
-            dbg2("Best is %d,%d with cost %d, %d hops away",
-                 best.x + minx, best.y + miny, result.cost, (int)hops_len);
-        } else if (hops_len >= 1) {
-            auto hop0 = get(hops, hops_len - 1);
-            best = hop0;
-            dbg2("Best is %d,%d with cost %d, %d hops away",
-                 best.x + minx, best.y + miny, result.cost, (int)hops_len);
-        } else {
-            dbg2("Best is where we are, cost %d, %d hops away",
-                 result.cost, (int)hops_len);
-            best = point(mid_at.x - minx, mid_at.y - miny);
+CON("%d,%d",p.x,p.y);
+            new_move_path.push_back(p);
         }
 
-        nh = point(best.x + minx, best.y + miny);
+        if (new_move_path.empty()) {
+            continue;
+        }
 
-        if (move_to_or_attack_check_only(nh)) {
-            dbg2("We can move to or attack or eat this next-hop");
+        std::reverse(new_move_path.begin(), new_move_path.end());
+        if (is_player()) {
+            level->cursor_path_create(new_move_path);
+
+            if (cursor_path_pop_first_move()) {
+                return true;
+            }
+            DIE("x");
+        } else {
+            monstp->move_path = new_move_path;
             return true;
         }
     }
@@ -491,14 +487,9 @@ void Thing::robot_tick (void)
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
-            point nh;
-            if (robot_choose_ai_goal(nh)) {
-                left = nh.x < mid_at.x;
-                right = nh.x > mid_at.x;
-                up = nh.y < mid_at.y;
-                down = nh.y > mid_at.y;
-                do_something = true;
-                // monstp->robot_state = ROBOT_STATE_MOVING;
+            if (robot_choose_ai_goal()) {
+                monstp->robot_state = ROBOT_STATE_MOVING;
+                game->tick_begin("move");
             }
         }
         break;
