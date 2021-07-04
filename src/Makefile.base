@@ -3,15 +3,15 @@ NAME=zorbash-game
 OBJDIR=.o
 
 GAME_OBJECTS=				    \
-    $(OBJDIR)/ascii.o                       \
     $(OBJDIR)/ascii_box.o                   \
+    $(OBJDIR)/ascii.o                       \
     $(OBJDIR)/audio.o                       \
     $(OBJDIR)/charmap.o                     \
-    $(OBJDIR)/color.o                       \
     $(OBJDIR)/color1.o                      \
     $(OBJDIR)/color2.o                      \
     $(OBJDIR)/color3.o                      \
     $(OBJDIR)/color4.o                      \
+    $(OBJDIR)/color.o                       \
     $(OBJDIR)/command.o                     \
     $(OBJDIR)/console.o                     \
     $(OBJDIR)/dice.o                        \
@@ -19,17 +19,16 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/dict2.o                       \
     $(OBJDIR)/dir.o                         \
     $(OBJDIR)/dmap.o                        \
-    $(OBJDIR)/dungeon.o                     \
     $(OBJDIR)/dungeon_grid.o                \
-    $(OBJDIR)/file.o                        \
+    $(OBJDIR)/dungeon.o                     \
     $(OBJDIR)/file_log.o                    \
+    $(OBJDIR)/file.o                        \
     $(OBJDIR)/font.o                        \
-    $(OBJDIR)/game.o                        \
     $(OBJDIR)/game_choose_name.o            \
     $(OBJDIR)/game_choose_seed.o            \
-    $(OBJDIR)/game_config.o                 \
     $(OBJDIR)/game_config_gfx.o             \
     $(OBJDIR)/game_config_keyboard.o        \
+    $(OBJDIR)/game_config.o                 \
     $(OBJDIR)/game_config_other.o           \
     $(OBJDIR)/game_config_sound.o           \
     $(OBJDIR)/game_credits.o                \
@@ -47,18 +46,18 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/game_menu_flames.o            \
     $(OBJDIR)/game_mouse.o                  \
     $(OBJDIR)/game_notice.o                 \
+    $(OBJDIR)/game.o                        \
     $(OBJDIR)/game_quit.o                   \
+    $(OBJDIR)/game_robot.o                  \
     $(OBJDIR)/game_save.o                   \
     $(OBJDIR)/game_state.o                  \
     $(OBJDIR)/game_tick.o                   \
-    $(OBJDIR)/game_robot.o                  \
     $(OBJDIR)/gauss.o                       \
-    $(OBJDIR)/gfx.o                         \
     $(OBJDIR)/gfx0.o                        \
-    $(OBJDIR)/gfx1.o                        \
     $(OBJDIR)/gfx10.o                       \
     $(OBJDIR)/gfx11.o                       \
     $(OBJDIR)/gfx12.o                       \
+    $(OBJDIR)/gfx1.o                        \
     $(OBJDIR)/gfx2.o                        \
     $(OBJDIR)/gfx3.o                        \
     $(OBJDIR)/gfx4.o                        \
@@ -67,21 +66,20 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/gfx7.o                        \
     $(OBJDIR)/gfx8.o                        \
     $(OBJDIR)/gfx9.o                        \
+    $(OBJDIR)/gfx.o                         \
     $(OBJDIR)/gl.o                          \
     $(OBJDIR)/globals.o                     \
     $(OBJDIR)/hexdump.o                     \
     $(OBJDIR)/hiscore.o                     \
     $(OBJDIR)/laser.o                       \
-    $(OBJDIR)/level.o                       \
-    $(OBJDIR)/level_create.o                \
     $(OBJDIR)/level_create_dungeon.o        \
+    $(OBJDIR)/level_create.o                \
     $(OBJDIR)/level_create_sewer.o          \
-    $(OBJDIR)/level_cursor.o                \
     $(OBJDIR)/level_cursor_describe.o       \
     $(OBJDIR)/level_cursor_find.o           \
+    $(OBJDIR)/level_cursor.o                \
     $(OBJDIR)/level_cursor_path.o           \
     $(OBJDIR)/level_describe.o              \
-    $(OBJDIR)/level_display.o               \
     $(OBJDIR)/level_display_anim.o          \
     $(OBJDIR)/level_display_blood.o         \
     $(OBJDIR)/level_display_chasm.o         \
@@ -89,6 +87,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_display_fade.o          \
     $(OBJDIR)/level_display_lava.o          \
     $(OBJDIR)/level_display_minimap.o       \
+    $(OBJDIR)/level_display.o               \
     $(OBJDIR)/level_display_shake.o         \
     $(OBJDIR)/level_display_target.o        \
     $(OBJDIR)/level_display_wall.o          \
@@ -103,23 +102,24 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_map_things.o            \
     $(OBJDIR)/level_map_update.o            \
     $(OBJDIR)/level_minimap.o               \
+    $(OBJDIR)/level.o                       \
     $(OBJDIR)/level_scroll.o                \
     $(OBJDIR)/level_static.o                \
     $(OBJDIR)/level_tick.o                  \
     $(OBJDIR)/level_update.o                \
-    $(OBJDIR)/light.o                       \
     $(OBJDIR)/light_log.o                   \
+    $(OBJDIR)/light.o                       \
     $(OBJDIR)/log.o                         \
     $(OBJDIR)/log_util.o                    \
     $(OBJDIR)/main.o                        \
     $(OBJDIR)/map.o                         \
     $(OBJDIR)/minilzo.o                     \
     $(OBJDIR)/music.o                       \
-    $(OBJDIR)/point.o                       \
     $(OBJDIR)/particle.o                    \
     $(OBJDIR)/pcg_basic.o                   \
-    $(OBJDIR)/player.o                      \
     $(OBJDIR)/player_dmap.o                 \
+    $(OBJDIR)/player.o                      \
+    $(OBJDIR)/point.o                       \
     $(OBJDIR)/projectile.o                  \
     $(OBJDIR)/ptrcheck.o                    \
     $(OBJDIR)/py_level.o                    \
@@ -130,11 +130,10 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/py_sound.o                    \
     $(OBJDIR)/py_tex.o                      \
     $(OBJDIR)/py_thing.o                    \
+    $(OBJDIR)/python.o                      \
     $(OBJDIR)/py_tile.o                     \
     $(OBJDIR)/py_tp.o                       \
     $(OBJDIR)/py_ttf.o                      \
-    $(OBJDIR)/python.o                      \
-    $(OBJDIR)/ramdisk_data.o                \
     $(OBJDIR)/ramdisk_data_0.o              \
     $(OBJDIR)/ramdisk_data_1.o              \
     $(OBJDIR)/ramdisk_data_2.o              \
@@ -145,6 +144,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/ramdisk_data_7.o              \
     $(OBJDIR)/ramdisk_data_8.o              \
     $(OBJDIR)/ramdisk_data_9.o              \
+    $(OBJDIR)/ramdisk_data.o                \
     $(OBJDIR)/ramdisk_read.o                \
     $(OBJDIR)/random_name.o                 \
     $(OBJDIR)/room.o                        \
@@ -157,10 +157,9 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/stb_image.o                   \
     $(OBJDIR)/string.o                      \
     $(OBJDIR)/tex.o                         \
-    $(OBJDIR)/thing.o                       \
     $(OBJDIR)/thing_acid.o                  \
-    $(OBJDIR)/thing_ai.o                    \
     $(OBJDIR)/thing_ai_goals.o              \
+    $(OBJDIR)/thing_ai.o                    \
     $(OBJDIR)/thing_ai_wander.o             \
     $(OBJDIR)/thing_anim.o                  \
     $(OBJDIR)/thing_api.o                   \
@@ -188,7 +187,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_display.o               \
     $(OBJDIR)/thing_distance.o              \
     $(OBJDIR)/thing_door.o                  \
-    $(OBJDIR)/thing_open.o                  \
     $(OBJDIR)/thing_drop.o                  \
     $(OBJDIR)/thing_eat.o                   \
     $(OBJDIR)/thing_enchant.o               \
@@ -197,15 +195,16 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_fadeup.o                \
     $(OBJDIR)/thing_fall.o                  \
     $(OBJDIR)/thing_fini.o                  \
-    $(OBJDIR)/thing_fire.o                  \
     $(OBJDIR)/thing_fire_at.o               \
-    $(OBJDIR)/thing_grass.o                 \
+    $(OBJDIR)/thing_fire.o                  \
     $(OBJDIR)/thing_gc.o                    \
+    $(OBJDIR)/thing_grass.o                 \
     $(OBJDIR)/thing_health.o                \
     $(OBJDIR)/thing_hide.o                  \
     $(OBJDIR)/thing_hit.o                   \
     $(OBJDIR)/thing_hooks.o                 \
     $(OBJDIR)/thing_hunger.o                \
+    $(OBJDIR)/thing_idle.o                  \
     $(OBJDIR)/thing_inherit.o               \
     $(OBJDIR)/thing_init.o                  \
     $(OBJDIR)/thing_inventory.o             \
@@ -226,38 +225,40 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_lunge.o                 \
     $(OBJDIR)/thing_match.o                 \
     $(OBJDIR)/thing_minion_owner.o          \
-    $(OBJDIR)/thing_move.o                  \
     $(OBJDIR)/thing_move_dir.o              \
+    $(OBJDIR)/thing_move.o                  \
     $(OBJDIR)/thing_msg.o                   \
     $(OBJDIR)/thing_nearby.o                \
+    $(OBJDIR)/thing.o                       \
     $(OBJDIR)/thing_obstacle.o              \
     $(OBJDIR)/thing_on_fire.o               \
+    $(OBJDIR)/thing_open.o                  \
     $(OBJDIR)/thing_owner.o                 \
     $(OBJDIR)/thing_place.o                 \
     $(OBJDIR)/thing_poison.o                \
     $(OBJDIR)/thing_projectile.o            \
     $(OBJDIR)/thing_rest.o                  \
     $(OBJDIR)/thing_resurrect.o             \
+    $(OBJDIR)/thing_robot.o                 \
     $(OBJDIR)/thing_score.o                 \
     $(OBJDIR)/thing_shove.o                 \
-    $(OBJDIR)/thing_skill.o                 \
     $(OBJDIR)/thing_skillbox.o              \
+    $(OBJDIR)/thing_skill.o                 \
     $(OBJDIR)/thing_sound.o                 \
-    $(OBJDIR)/thing_spawn.o                 \
     $(OBJDIR)/thing_spawned_owner.o         \
+    $(OBJDIR)/thing_spawn.o                 \
     $(OBJDIR)/thing_stamina.o               \
     $(OBJDIR)/thing_steal.o                 \
     $(OBJDIR)/thing_string.o                \
     $(OBJDIR)/thing_target.o                \
-    $(OBJDIR)/thing_template.o              \
     $(OBJDIR)/thing_template_api.o          \
     $(OBJDIR)/thing_template_fixup.o        \
+    $(OBJDIR)/thing_template.o              \
     $(OBJDIR)/thing_template_random.o       \
     $(OBJDIR)/thing_terrain.o               \
     $(OBJDIR)/thing_text.o                  \
     $(OBJDIR)/thing_throw.o                 \
     $(OBJDIR)/thing_tick.o                  \
-    $(OBJDIR)/thing_idle.o                  \
     $(OBJDIR)/thing_tile.o                  \
     $(OBJDIR)/thing_torch.o                 \
     $(OBJDIR)/thing_treasure.o              \
@@ -274,30 +275,30 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/traceback.o                   \
     $(OBJDIR)/ttf.o                         \
     $(OBJDIR)/util.o                        \
-    $(OBJDIR)/wid.o                         \
-    $(OBJDIR)/wid_bag.o                     \
-    $(OBJDIR)/wid_item_options.o            \
     $(OBJDIR)/wid_actionbar.o               \
+    $(OBJDIR)/wid_bag.o                     \
     $(OBJDIR)/wid_botcon.o                  \
     $(OBJDIR)/wid_collect.o                 \
-    $(OBJDIR)/wid_wield.o                   \
     $(OBJDIR)/wid_console.o                 \
     $(OBJDIR)/wid_enchant.o                 \
-    $(OBJDIR)/wid_skills.o                  \
     $(OBJDIR)/wid_inventory.o               \
+    $(OBJDIR)/wid_item_options.o            \
     $(OBJDIR)/wid_keyboard.o                \
     $(OBJDIR)/wid_log.o                     \
+    $(OBJDIR)/wid.o                         \
     $(OBJDIR)/wid_popup.o                   \
     $(OBJDIR)/wid_rightbar.o                \
     $(OBJDIR)/wid_skillbox.o                \
+    $(OBJDIR)/wid_skills.o                  \
     $(OBJDIR)/wid_text_box.o                \
     $(OBJDIR)/wid_thing_info.o              \
     $(OBJDIR)/wid_tiles.o                   \
     $(OBJDIR)/wid_topcon.o                  \
-    $(OBJDIR)/world.o                       \
+    $(OBJDIR)/wid_wield.o                   \
     $(OBJDIR)/world_fini.o                  \
     $(OBJDIR)/world_id.o                    \
     $(OBJDIR)/world_init.o                  \
+    $(OBJDIR)/world.o                       \
 
 #
 # compile
