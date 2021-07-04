@@ -126,7 +126,7 @@ public:
     uint64_t i_set_is_deep_water:1             {};
     uint64_t i_set_is_shallow_water:1          {};
     uint64_t i_set_is_dirt:1                   {};
-    uint64_t i_set_is_dry_grass:1             {};
+    uint64_t i_set_is_dry_grass:1              {};
     uint64_t i_set_is_enchantstone:1           {};
     uint64_t i_set_is_skillstone:1             {};
     uint64_t i_set_is_foilage:1                {};
@@ -1325,6 +1325,7 @@ public:
     void update_light(void);
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void update_tick(void);
+    void robot_tick(void);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();
