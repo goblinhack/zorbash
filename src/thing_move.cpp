@@ -695,12 +695,12 @@ void Thing::move_to_immediately (fpoint to)
     update_interpolated_position();
 }
 
-bool Thing::move_to_check (const point& nh, const bool escaping)
+bool Thing::move_to_try (const point& nh, const bool escaping, bool check_only)
 {_
     if (escaping) {
-        dbg("Escape to check %d,%d", nh.x, nh.y);
+        dbg("Escape to try %d,%d", nh.x, nh.y);
     } else {
-        dbg("Move to check %d,%d", nh.x, nh.y);
+        dbg("Move to try %d,%d", nh.x, nh.y);
     }
 
     //
@@ -740,7 +740,9 @@ _
             }
         }
 
-        move(fnh);
+        if (!check_only) {
+            move(fnh);
+        }
         return true;
     }
 }
@@ -748,11 +750,23 @@ _
 bool Thing::move_to_or_attack (const point& nh)
 {_
     dbg("Move to or attack");
-    return move_to_check(nh, false);
+    return move_to_try(nh, false, false);
 }
 
 bool Thing::move_to_or_escape (const point& nh)
 {_
     dbg("Move to or escape");
-    return move_to_check(nh, true);
+    return move_to_try(nh, true, false);
+}
+
+bool Thing::move_to_or_attack_check_only (const point& nh)
+{_
+    dbg("Move to or attack");
+    return move_to_try(nh, false, true);
+}
+
+bool Thing::move_to_or_escape_check_only (const point& nh)
+{_
+    dbg("Move to or escape");
+    return move_to_try(nh, true, true);
 }

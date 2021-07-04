@@ -160,7 +160,7 @@ _
     //
     // Add AI ability
     //
-    if (tpp->is_monst()) {
+    if (tpp->is_monst() || tpp->is_player()) {
         new_dmap_scent();
         new_age_map();
     }

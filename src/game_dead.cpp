@@ -9,6 +9,7 @@
 #include "my_wid_topcon.h"
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
+#include "my_wid_actionbar.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_rightbar.h"
 #include "my_random.h"
@@ -76,6 +77,10 @@ static uint8_t wid_dead_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 void Game::dead_select (const char *reason)
 {_
     LOG("Open dead select: %s", reason);
+
+    game->robot_mode = false;
+    wid_actionbar_init();
+    TOPCON("Robot is dead");
 
     wid_thing_info_fini();
 

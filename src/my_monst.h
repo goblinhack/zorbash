@@ -27,7 +27,8 @@ enum {
 };
 
 enum {
-    ROBOT_STATE_WANDER,
+    ROBOT_STATE_IDLE,
+    ROBOT_STATE_MOVING,
 };
 
 typedef struct Monst_ {
