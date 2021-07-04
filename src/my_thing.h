@@ -1328,7 +1328,7 @@ public:
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void update_tick(void);
     void robot_tick(void);
-    bool robot_choose_ai_goal(point &p);
+    bool robot_choose_ai_goal(void);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();

@@ -593,11 +593,14 @@ public:
     void cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy);
     void cursor_move(void);
     void cursor_path_clear(void);
+    void cursor_path_create(const std::vector<point> &move_path);
     void cursor_path_create(void);
     void cursor_path_draw(point start, point end);
+    void cursor_path_draw(const std::vector<point> &move_path);
     void cursor_path_draw(void);
     void cursor_path_draw_circle(void);
     void cursor_path_draw_line(point start, point end);
+    void cursor_path_draw_line(const std::vector<point> &move_path);
     void cursor_recreate(void);
     void describe(Thingp);
     void describe(fpoint at);
