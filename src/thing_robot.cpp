@@ -32,6 +32,10 @@ _
 
     point start((int)mid_at.x, (int)mid_at.y);
 
+    if (is_player()) {
+        level->player_dmap_update();
+    }
+
     auto dmap_scent = get_dmap_scent();
     auto age_map = get_age_map();
 
@@ -41,9 +45,16 @@ _
             auto X = x - minx;
             auto Y = y - miny;
 
-            if (!level->is_lit(x, y)) {
+            if (!level->is_lit(X, Y)) {
                 set(dmap_scent->val, X, Y, DMAP_IS_WALL);
                 continue;
+            }
+
+            if (is_player()) {
+                if (get(level->player_dmap.val, X, Y) == DMAP_IS_WALL) {
+                    set(dmap_scent->val, X, Y, DMAP_IS_WALL);
+                    continue;
+                }
             }
 
             if (ai_obstacle_for_me(p)) {
@@ -54,12 +65,32 @@ _
         }
     }
 
+#ifdef ENABLE_DEBUG_AI_VERBOSE
+    if (unlikely(g_opt_debug4)) {
+        dbg("Pre process goal dmap:");
+        dmap_print(dmap_scent,
+                   point(start.x - minx, start.y - miny),
+                   point(0, 0),
+                   point(maxx - minx, maxy - miny));
+    }
+#endif
+
     //
     // We want to find how far everything is from us.
     //
     set(dmap_scent->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
 
     dmap_process(dmap_scent, point(0, 0), point(maxx - minx, maxy - miny));
+
+#ifdef ENABLE_DEBUG_AI_VERBOSE
+    if (unlikely(g_opt_debug4)) {
+        dbg("Pre goal dmap:");
+        dmap_print(dmap_scent,
+                   point(start.x - minx, start.y - miny),
+                   point(0, 0),
+                   point(maxx - minx, maxy - miny));
+    }
+#endif
 
     //
     // Find all the possible goals we can smell.
@@ -72,6 +103,10 @@ _
         point p(x, y);
         auto X = x - minx;
         auto Y = y - miny;
+
+        if (get(dmap_scent->val, X, Y) == DMAP_IS_WALL) {
+            continue;
+        }
 
         bool got_a_goal = false;
         bool avoiding = false;
@@ -257,16 +292,6 @@ _
                     GOAL_ADD(1, "preferred-terrain");
                 }
             }
-
-            if (!level->is_hazard(p.x, p.y)) {
-                if (!level->is_visited(p.x, p.y)) {
-                    //
-                    // The further an non visited tile is the higher the score
-                    //
-                    int dist = (int)distance(fpoint(x, y), mid_at);
-                    GOAL_ADD(-100 + dist, "wander");
-                }
-            }
         } FOR_ALL_THINGS_END();
 
         if (avoiding) {
@@ -366,6 +391,7 @@ _
     //
     // Find the best next-hop to the best goal.
     //
+#ifdef ENABLE_DEBUG_AI_VERBOSE
     if (unlikely(g_opt_debug4)) {
         dbg("Goals:");
         dmap_print(dmap_scent,
@@ -373,6 +399,7 @@ _
                    point(0, 0),
                    point(maxx - minx, maxy - miny));
     }
+#endif
 
     //
     // Make sure we do not want to stay in the same position by making
@@ -433,7 +460,7 @@ _
             if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
                 continue;
             }
-CON("%d,%d",p.x,p.y);
+CON("ZZZ %d,%d",p.x,p.y);
             new_move_path.push_back(p);
         }
 
@@ -444,11 +471,9 @@ CON("%d,%d",p.x,p.y);
         std::reverse(new_move_path.begin(), new_move_path.end());
         if (is_player()) {
             level->cursor_path_create(new_move_path);
-
             if (cursor_path_pop_first_move()) {
                 return true;
             }
-            DIE("x");
         } else {
             monstp->move_path = new_move_path;
             return true;
