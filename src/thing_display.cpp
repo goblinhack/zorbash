@@ -807,7 +807,7 @@ void Thing::blit_internal (int fbo,
     auto m = get_health_max();
 
     auto lit = (fbo == FBO_FULLMAP) || 
-                    level->is_lit_no_check(mid_at.x, mid_at.y);
+                    level->is_lit_ever_no_check(mid_at.x, mid_at.y);
     if (unlikely(g_opt_debug3)) {
         lit = true;
     }
@@ -862,7 +862,7 @@ void Thing::blit_internal (int fbo,
         c = fire_color;
     }
 
-    uint8_t fade = level->is_lit(mid_at.x, mid_at.y);
+    uint8_t fade = level->is_lit_ever(mid_at.x, mid_at.y);
     if (fbo == FBO_FULLMAP) {
         c.a = 255;
     } else if (get_light_strength()) {

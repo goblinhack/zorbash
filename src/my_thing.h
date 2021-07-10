@@ -1330,10 +1330,10 @@ public:
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void update_tick(void);
     void robot_tick(void);
-    bool robot_ai_create_path_to_goal(const struct Dmap_ *d);
-    void robot_ai_init_can_see_dmap(const struct Dmap_ *d, int minx, int miny, int maxx, int maxy);
-    void robot_ai_choose_initial_goals(const struct Dmap_ *d, std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
-    void robot_ai_choose_search_goals(const struct Dmap_ *d, std::multiset<Goal> &goals);
+    bool robot_ai_create_path_to_goal(void);
+    void robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
+    void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
+    void robot_ai_choose_search_goals(std::multiset<Goal> &goals);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();

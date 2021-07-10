@@ -5,7 +5,9 @@
 
 #include <algorithm>
 #include <set>
+
 #include "my_sys.h"
+#include "my_game.h"
 #include "my_level.h"
 #include "my_dmap.h"
 #include "my_math.h"
@@ -222,14 +224,7 @@ bool Thing::ai_obstacle (Thingp it)
         }
     }
 
-    if (is_player()) {
-        if (it->is_alive_monst()) {
-            //
-            // Ignore is_ethereal to make it easier to attack ghosts
-            //
-            return true;
-        }
-    } else if (is_monst()) {
+    if (is_monst() || (is_player() && game->robot_mode)) {
         if (it->is_chasm()) {
             if (!is_floating()) {
                 return true;
@@ -245,6 +240,13 @@ bool Thing::ai_obstacle (Thingp it)
         // }
  
         if (will_avoid_threat(it)) {
+            return true;
+        }
+    } else if (is_player()) {
+        if (it->is_alive_monst()) {
+            //
+            // Ignore is_ethereal to make it easier to attack ghosts
+            //
             return true;
         }
     }

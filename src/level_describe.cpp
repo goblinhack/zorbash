@@ -59,7 +59,7 @@ _
             t->log("Active thing cand for describe");
         }
 _
-        if (!is_lit(x, y) && !is_visited(x, y)) {_
+        if (!is_lit_ever(x, y) && !is_visited(x, y)) {_
             if (g_opt_debug3) {
                 t->log("Ignore for describe, not lit or visited");
             }
@@ -125,7 +125,7 @@ _
             t->log("Interesting thing cand for describe");
         }
 _
-        if (!is_lit(x, y) && !is_visited(x, y)) {_
+        if (!is_lit_ever(x, y) && !is_visited(x, y)) {_
             if (g_opt_debug3) {
                 t->log("Ignore for describe, not lit or visited");
             }
@@ -190,7 +190,7 @@ _
             t->log("All thing cand for describe");
         }
 _
-        if (!is_lit(x, y) && !is_visited(x, y)) {_
+        if (!is_lit_ever(x, y) && !is_visited(x, y)) {_
             if (g_opt_debug3) {
                 t->log("Ignore for describe, not lit or visited");
             }

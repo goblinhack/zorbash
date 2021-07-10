@@ -61,7 +61,7 @@ bool Thing::open (Thingp it)
 
     it->on_open();
     update_light();
-    level->player_dmap_update();
+    level->dmap_to_player_update();
 
     return true;
 }

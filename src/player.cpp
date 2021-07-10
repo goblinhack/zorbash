@@ -408,7 +408,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         //
         // Update reachability for the player
         //
-        level->player_dmap_update();
+        level->dmap_to_player_update();
     }
 
     left = false;

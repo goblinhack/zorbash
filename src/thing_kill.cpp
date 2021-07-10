@@ -239,7 +239,7 @@ void Thing::kill (Thingp killer, const char *reason)
     //
     if (!level->is_being_destroyed) {
         if (is_movement_blocking_hard()) {
-            level->player_dmap_update();
+            level->dmap_to_player_update();
         }
     }
 
