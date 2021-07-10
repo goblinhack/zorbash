@@ -460,6 +460,57 @@ void Thing::clear_dmap_can_see (void)
     }
 }
 
+////////////////////////////////////////////////////////////////////////////
+// _dmap_can_jump
+////////////////////////////////////////////////////////////////////////////
+Dmap *Thing::get_dmap_can_jump (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->_dmap_can_jump);
+    } else {
+        return (0);
+    }
+}
+
+void Thing::new_dmap_can_jump (void)
+{_
+    new_monst();
+    if (!monstp->_dmap_can_jump) {
+        monstp->_dmap_can_jump = new Dmap();
+        newptr(monstp->_dmap_can_jump, "AgeMap");
+
+        auto dmap = monstp->_dmap_can_jump->val;
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                set(dmap, x, y, DMAP_IS_WALL);
+            }
+        }
+    }
+}
+
+void Thing::delete_dmap_can_jump (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        if (monstp->_dmap_can_jump) {
+            oldptr(monstp->_dmap_can_jump);
+            delete monstp->_dmap_can_jump;
+            monstp->_dmap_can_jump = 0;
+        }
+    }
+}
+
+void Thing::clear_dmap_can_jump (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        if (monstp->_dmap_can_jump) {
+            *monstp->_dmap_can_jump = {};
+        }
+    }
+}
+
 int Thing::item_height(void) const
 {_
     return (tp()->item_height());

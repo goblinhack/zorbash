@@ -216,7 +216,7 @@ public:
     uint32_t           inventory_highlight_slot {};
     uint32_t           previous_slot {};
     uint32_t           robot_mode {};
-    uint32_t           robot_delay_ms {100};
+    uint32_t           robot_delay_ms {ROBOT_SPEED_MS};
     uint32_t           skillbox_highlight_slot {};
     uint32_t           tick_completed {1};
     uint32_t           tick_current {1};

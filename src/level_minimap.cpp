@@ -75,26 +75,26 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                 } else if (is_lava(x, y)) {
                     c = ORANGE;
                 } else if (is_wall(x, y)) {
-                       if (is_visited(x, y)) {
+                       if (is_lit_ever(x, y)) {
                         c = GRAY80;
                     } else {
                         c = GRAY70;
                     }
                 } else if (is_rock(x, y)) {
-                       if (is_visited(x, y)) {
+                       if (is_lit_ever(x, y)) {
                         c = GRAY70;
                     } else {
                         c = GRAY60;
                     }
                 } else if (is_floor(x, y) ||
                            is_corridor(x, y)) {
-                    if (is_visited(x, y)) {
+                    if (is_lit_ever(x, y)) {
                         c = GRAY40;
                     } else {
                         c = GRAY20;
                     }
                 } else if (is_bridge(x, y)) {
-                    if (is_visited(x, y)) {
+                    if (is_lit_ever(x, y)) {
                         c = BROWN1;
                     } else {
                         c = BROWN2;
@@ -119,7 +119,7 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                     c = BLACK;
                 }
 
-                if (!is_lit_ever(x, y)) {
+                if (!is_lit_currently(x, y)) {
                     c.r /= 2;
                     c.g /= 2;
                     c.b /= 2;
@@ -186,7 +186,7 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
 
                 edge_of_sceen = false; // Not sure I like seeing this
 
-                if (!is_visited(x, y)) {
+                if (!is_lit_ever(x, y)) {
                     if (edge_of_sceen) {
                         c = DARKRED;
                         c.a = 100;
@@ -207,26 +207,26 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                 } else if (is_lava(x, y)) {
                     c = ORANGE;
                 } else if (is_wall(x, y)) {
-                       if (is_visited(x, y)) {
+                       if (is_lit_ever(x, y)) {
                         c = GRAY50;
                     } else {
                         c = GRAY20;
                     }
                 } else if (is_rock(x, y)) {
-                       if (is_visited(x, y)) {
+                       if (is_lit_ever(x, y)) {
                         c = GRAY70;
                     } else {
                         c = GRAY60;
                     }
                 } else if (is_floor(x, y) ||
                            is_corridor(x, y)) {
-                    if (is_visited(x, y)) {
+                    if (is_lit_ever(x, y)) {
                         c = GRAY20;
                     } else {
                         c = GRAY10;
                     }
                 } else if (is_bridge(x, y)) {
-                    if (is_visited(x, y)) {
+                    if (is_lit_ever(x, y)) {
                         c = BROWN1;
                     } else {
                         c = BROWN2;
@@ -259,7 +259,7 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                     }
                 }
 
-                if (!is_lit_ever(x, y)) {
+                if (!is_lit_currently(x, y)) {
                     c.r /= 2;
                     c.g /= 2;
                     c.b /= 2;

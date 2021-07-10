@@ -270,7 +270,7 @@ bool Light::calculate (int ray_casy_only)
 
                     AVOID_LOOKING_AT_THE_SAME_TILE()
                     level->set_visited_no_check(x, y); // for AI and jumping
-                    level->set_is_lit_ever_no_check(x, y); // allows lights to fade
+                    level->set_is_lit_currently_no_check(x, y); // allows lights to fade
                     rp++;
 
                     //
@@ -366,7 +366,7 @@ bool Light::calculate (int ray_casy_only)
                 AVOID_LOOKING_AT_THE_SAME_TILE()
                 if (level->is_oob(x, y)) { break; }
                 level->set_visited(x, y); // for AI and jumping
-                level->set_is_lit_ever(x, y); // allows lights to fade
+                level->set_is_lit_currently(x, y); // allows lights to fade
                 rp++;
 
                 if (level->is_light_blocker(x, y)) {
@@ -570,7 +570,7 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
                         continue;
                     }
 
-                    if (!is_lit_ever_no_check(t->mid_at.x, t->mid_at.y)) {
+                    if (!is_lit_currently_no_check(t->mid_at.x, t->mid_at.y)) {
                         continue;
                     }
 
@@ -631,7 +631,7 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
                         continue;
                     }
 
-                    if (!is_lit_ever_no_check(t->mid_at.x, t->mid_at.y)) {
+                    if (!is_lit_currently_no_check(t->mid_at.x, t->mid_at.y)) {
                         continue;
                     }
 
@@ -674,9 +674,9 @@ void Level::lights_fade (void)
 {_
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            auto v = is_lit_ever_no_check(x, y);
+            auto v = is_lit_currently_no_check(x, y);
             if (v) {
-                set_is_lit_ever_no_check(x, y, v - 1);
+                set_is_lit_currently_no_check(x, y, v - 1);
             }
         }
     }

@@ -74,6 +74,7 @@ _
     if (goals.empty()) {
         if (is_player()) {
             robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
+            robot_ai_init_can_jump_dmap(minx, miny, maxx, maxy);
             robot_ai_choose_search_goals(goals);
         }
     }
@@ -245,6 +246,7 @@ _
             if (cursor_path_pop_first_move()) {
                 return true;
             }
+            return false;
         } else {
             monstp->move_path = new_move_path;
             return true;
@@ -269,7 +271,7 @@ void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
             auto Y = y - miny;
 
             if (is_player()) {
-                if (!level->is_lit_ever(X, Y)) {
+                if (!level->is_lit_currently(X, Y)) {
                     set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
                     continue;
                 }
@@ -283,31 +285,57 @@ void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
         }
     }
 
-#ifdef ENABLE_DEBUG_AI_VERBOSE
-    if (unlikely(g_opt_debug4)) {
-        dbg("Pre process goal dmap:");
-        dmap_print(dmap_can_see,
-                   point(start.x - minx, start.y - miny),
-                   point(0, 0),
-                   point(maxx - minx, maxy - miny));
-    }
-#endif
-
     //
     // We want to find how far everything is from us.
     //
     set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
     dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
+}
 
-#ifdef ENABLE_DEBUG_AI_VERBOSE
-    if (unlikely(g_opt_debug4)) {
-        dbg("Pre goal dmap:");
-        dmap_print(dmap_can_see,
-                   point(start.x - minx, start.y - miny),
-                   point(0, 0),
-                   point(maxx - minx, maxy - miny));
+//
+// Initialize basic visibility and things that are lit and can be seen
+//
+void Thing::robot_ai_init_can_jump_dmap (int minx, int miny, int maxx, int maxy)
+{_
+    point start((int)mid_at.x, (int)mid_at.y);
+    auto dmap_can_jump = get_dmap_can_jump();
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            point p(x, y);
+            auto X = x - minx;
+            auto Y = y - miny;
+
+            if (is_player()) {
+                if (!level->is_lit_currently(X, Y)) {
+                    set(dmap_can_jump->val, X, Y, DMAP_IS_WALL);
+                    continue;
+                }
+            }
+
+            if (level->is_movement_blocking_hard(X, Y)) {
+                set(dmap_can_jump->val, X, Y, DMAP_IS_WALL);
+                continue;
+            }
+
+            if (will_avoid_threat(p)) {
+                set(dmap_can_jump->val, X, Y, DMAP_IS_PASSABLE);
+                continue;
+            }
+
+            if (ai_obstacle_for_me(p)) {
+                set(dmap_can_jump->val, X, Y, DMAP_IS_WALL);
+            } else {
+                set(dmap_can_jump->val, X, Y, DMAP_IS_PASSABLE);
+            }
+        }
     }
-#endif
+
+    //
+    // We want to find how far everything is from us.
+    //
+    set(dmap_can_jump->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
+    dmap_process(dmap_can_jump, point(0, 0), point(maxx - minx, maxy - miny));
 }
 
 //
@@ -530,7 +558,6 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 //
 void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
 {_  
-    auto dmap_can_see = get_dmap_can_see();
     point start((int)mid_at.x, (int)mid_at.y);
 
     std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
@@ -544,8 +571,14 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
     log("Dmap, to player:");
     auto dmap_to_player = &level->dmap_to_player;
     dmap_print(dmap_to_player);
+
     log("Dmap, can see:");
+    auto dmap_can_see = get_dmap_can_see();
     dmap_print(dmap_can_see);
+
+    log("Dmap, can jump:");
+    auto dmap_can_jump = get_dmap_can_jump();
+    dmap_print(dmap_can_jump);
 
     while (!in.empty()) {
         auto p = in.front();
@@ -556,9 +589,6 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
         }
         set(walked, p.x, p.y, true);
 
-        if (get(dmap_to_player->val, p.x, p.y) == DMAP_IS_WALL) {
-            continue;
-        }
         if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
             continue;
         }
@@ -593,29 +623,68 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
         }
 
         //
-        // If an unvisited tile is next to a visited one, consider that.
+        // If an unvisited tile is next to a visited one, consider that tile.
         //
-        if (level->is_visited(p.x, p.y)) {
+        if (level->is_lit_ever(p.x, p.y)) {
             for (int dx = -1; dx <= 1; dx++) {
                 for (int dy = -1; dy <= 1; dy++) {
                     if (!dx && !dy) {
                         continue;
                     }
 
-                    if (get(walked, p.x + dx, p.y + dy)) {
+                    point o(p.x + dx, p.y + dy);
+
+                    if (get(walked, o.x, o.y)) {
                         continue;
                     }
 
-                    if (level->is_visited(p.x + dx, p.y + dy)) {
+                    if (level->is_lit_ever(o)) {
                         continue;
                     }
 
-                    if (get(dmap_to_player->val, p.x + dx, p.y + dy) == DMAP_IS_WALL) {
+                    if (level->is_movement_blocking_hard(o)) {
+                        continue;
+                    }
+
+                    set(walked, o.x, o.y, true);
+                    cands.push_back(o);
+                }
+            }
+
+            int jump_distance = MAP_BORDER_ROCK;
+            for (int dx = -jump_distance; dx <= jump_distance; dx++) {
+                for (int dy = -jump_distance; dy <= jump_distance; dy++) {
+                    if (!dx && !dy) {
+                        continue;
+                    }
+
+                    point o(p.x + dx, p.y + dy);
+
+                    if (get(walked, o.x, o.y)) {
+                        continue;
+                    }
+
+                    //
+                    // Looking for something we can see but cannot get to
+                    //
+                    if (!level->is_lit_ever(o)) {
+                        continue;
+                    }
+
+                    if (level->is_movement_blocking_hard(o)) {
+                        continue;
+                    }
+
+                    if (get(dmap_can_see->val, o.x, o.y) != DMAP_IS_WALL) {
+                        continue;
+                    }
+
+                    if (get(dmap_can_jump->val, o.x, o.y) == DMAP_IS_WALL) {
                         continue;
                     }
 
                     set(walked, p.x + dx, p.y + dy, true);
-                    cands.push_back(point(p.x + dx, p.y + dy));
+                    cands.push_back(o);
                 }
             }
         }
@@ -689,7 +758,9 @@ void Thing::robot_tick (void)
         break;
         case ROBOT_STATE_MOVING:
         {
-            monstp->robot_state = ROBOT_STATE_IDLE;
+            if (monstp->move_path.empty()) {
+                monstp->robot_state = ROBOT_STATE_IDLE;
+            }
         }
         break;
     }
