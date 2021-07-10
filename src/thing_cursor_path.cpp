@@ -44,19 +44,17 @@ bool Thing::cursor_path_pop_next_and_move (void)
         if (will_avoid_threat(future_pos)) {
             if (monstp->move_path.size()) {
                 auto to = monstp->move_path[0];
-topcon("jump to %d,%d", to.x, to.y);
-game->robot_mode = false;
                 monstp->move_path.erase(monstp->move_path.begin());
                 if (try_to_jump(to)) {
+                    game->tick_begin("player tried to jump");
                     cursor_path_stop();
+                    game->robot_mode = false;
                     return false;
                     return true;
                 } else {
                     cursor_path_stop();
                     return false;
                 }
-            } else {
-TOPCON("cannot jump");
             }
         }
 
