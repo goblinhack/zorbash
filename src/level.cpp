@@ -1859,35 +1859,35 @@ void Level::unset_is_movement_blocking_soft_no_check (const int x, const int y)
     set_no_check(_is_movement_blocking_soft, x, y, false);
 }
 
-uint8_t Level::is_lit (const point &p)
+uint8_t Level::is_lit_ever (const point &p)
 {
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
-    return (get(_is_lit, p.x, p.y));
+    return (get(_is_lit_ever, p.x, p.y));
 }
 
-uint8_t Level::is_lit_no_check (const point &p)
+uint8_t Level::is_lit_ever_no_check (const point &p)
 {
-    return (get_no_check(_is_lit, p.x, p.y));
+    return (get_no_check(_is_lit_ever, p.x, p.y));
 }
 
-uint8_t Level::is_lit (const int x, const int y)
+uint8_t Level::is_lit_ever (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (get(_is_lit, x, y));
+    return (get(_is_lit_ever, x, y));
 }
 
-uint8_t Level::is_lit_no_check (const int x, const int y)
+uint8_t Level::is_lit_ever_no_check (const int x, const int y)
 {
-    return (get_no_check(_is_lit, x, y));
+    return (get_no_check(_is_lit_ever, x, y));
 }
 
-void Level::set_is_lit_no_check (const int x, const int y)
+void Level::set_is_lit_ever_no_check (const int x, const int y)
 {
-    auto l = getptr_no_check(_is_lit, x, y);
+    auto l = getptr_no_check(_is_lit_ever, x, y);
     if (*l == 0) {
         *l = 255;
     } else if (*l < 255) {
@@ -1895,9 +1895,9 @@ void Level::set_is_lit_no_check (const int x, const int y)
     }
 }
 
-void Level::set_is_lit (const int x, const int y)
+void Level::set_is_lit_ever (const int x, const int y)
 {
-    auto l = getptr(_is_lit, x, y);
+    auto l = getptr(_is_lit_ever, x, y);
     if (*l == 0) {
         *l = 255;
     } else if (*l < 255) {
@@ -1905,20 +1905,20 @@ void Level::set_is_lit (const int x, const int y)
     }
 }
 
-void Level::set_is_lit_no_check (const int x, const int y, uint8_t v)
+void Level::set_is_lit_ever_no_check (const int x, const int y, uint8_t v)
 {
-    set_no_check(_is_lit, x, y, v);
+    set_no_check(_is_lit_ever, x, y, v);
 }
 
-void Level::unset_is_lit (const int x, const int y)
+void Level::unset_is_lit_ever (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_lit, x, y, (uint8_t)0);
+    set(_is_lit_ever, x, y, (uint8_t)0);
 }
 
-void Level::unset_is_lit_no_check (const int x, const int y)
+void Level::unset_is_lit_ever_no_check (const int x, const int y)
 {
-    set_no_check(_is_lit, x, y, (uint8_t)0);
+    set_no_check(_is_lit_ever, x, y, (uint8_t)0);
 }

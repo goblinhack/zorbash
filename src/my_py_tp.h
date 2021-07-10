@@ -20,14 +20,14 @@ PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds);
 
-#define TP_SET_PROTO(__field__)                                                     \
+#define TP_SET_PROTO(__field__) \
 PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds);
 
-#define TP_SET_DECL(__field__)                                                      \
-    {"tp_set_" #__field__,                                                      \
-        (PyCFunction)tp_set_ ## __field__,                                      \
-        METH_VARARGS | METH_KEYWORDS,                                           \
-        "set a " #__field__ " in a thing template"},                            \
+#define TP_SET_DECL(__field__)                       \
+    {"tp_set_" #__field__,                           \
+        (PyCFunction)tp_set_ ## __field__,           \
+        METH_VARARGS | METH_KEYWORDS,                \
+        "set a " #__field__ " in a thing template"}, \
 
 TP_SET_PROTO(ai_avoid_distance)
 TP_SET_PROTO(ai_obstacle)

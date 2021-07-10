@@ -66,7 +66,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit_ever {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};
@@ -240,7 +240,7 @@ public:
     // We regenerate this map every player move, and indicates the shortest
     // path to the player. Used for sound effects and lighting checks.
     //
-    Dmap                       player_dmap;
+    Dmap                       dmap_to_player;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
@@ -509,10 +509,10 @@ public:
     uint8_t is_key(const point &p);
     uint8_t is_lava(const int x, const int y);
     uint8_t is_lava(const point &p);
-    uint8_t is_lit(const int x, const int y);
-    uint8_t is_lit(const point &p);
-    uint8_t is_lit_no_check(const int x, const int y);
-    uint8_t is_lit_no_check(const point &p);
+    uint8_t is_lit_ever(const int x, const int y);
+    uint8_t is_lit_ever(const point &p);
+    uint8_t is_lit_ever_no_check(const int x, const int y);
+    uint8_t is_lit_ever_no_check(const point &p);
     uint8_t is_minion_generator(const int x, const int y);
     uint8_t is_minion_generator(const point &p);
     uint8_t is_monst(const int x, const int y);
@@ -653,7 +653,7 @@ public:
     void place_spiderweb(Dungeonp d);
     void place_floor_deco(Dungeonp d);
     void place_the_grid(void);
-    void player_dmap_update(void);
+    void dmap_to_player_update(void);
     void sanity_check(void);
     void screen_shake_end(void);
     void scroll_map(void);
@@ -693,9 +693,9 @@ public:
     void set_is_lava(const int x, const int y);
     void set_is_light_blocker(const int x, const int y);
     void set_is_light_blocker_no_check(const int x, const int y);
-    void set_is_lit(const int x, const int y);
-    void set_is_lit_no_check(const int x, const int y);
-    void set_is_lit_no_check(const int x, const int y, uint8_t v);
+    void set_is_lit_ever(const int x, const int y);
+    void set_is_lit_ever_no_check(const int x, const int y);
+    void set_is_lit_ever_no_check(const int x, const int y, uint8_t v);
     void set_is_minion_generator(const int x, const int y);
     void set_is_monst(const int x, const int y);
     void set_is_movement_blocking_hard(const int x, const int y);
@@ -761,8 +761,8 @@ public:
     void unset_is_lava(const int x, const int y);
     void unset_is_light_blocker(const int x, const int y);
     void unset_is_light_blocker_no_check(const int x, const int y);
-    void unset_is_lit(const int x, const int y);
-    void unset_is_lit_no_check(const int x, const int y);
+    void unset_is_lit_ever(const int x, const int y);
+    void unset_is_lit_ever_no_check(const int x, const int y);
     void unset_is_minion_generator(const int x, const int y);
     void unset_is_monst(const int x, const int y);
     void unset_is_movement_blocking_hard(const int x, const int y);

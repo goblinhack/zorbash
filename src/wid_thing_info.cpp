@@ -324,7 +324,7 @@ _
     }
 
     if (when_hovering_over) {
-        if (!level->is_lit(t->mid_at.x, t->mid_at.y)) {
+        if (!level->is_lit_ever(t->mid_at.x, t->mid_at.y)) {
             if (unlikely(g_opt_debug1)) {
                 t->log("No; not lit");
             }

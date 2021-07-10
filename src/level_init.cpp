@@ -56,7 +56,7 @@ void Level::clear (void)
     _is_treasure_class_b = {};
     _is_treasure_class_c = {};
     _is_visited = {};
-    _is_lit = {};
+    _is_lit_ever = {};
     _is_wall = {};
     _gfx_water = {};
 

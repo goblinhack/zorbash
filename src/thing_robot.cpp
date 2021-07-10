@@ -32,7 +32,7 @@
 // have touched them) and choose the best goal. Create a path to that goal for
 // the thing to walk.
 //
-bool Thing::robot_ai_create_path_to_goal (const Dmap *dmap)
+bool Thing::robot_ai_create_path_to_goal (void)
 {_
     dbg("Choose goal");
 _
@@ -68,12 +68,14 @@ _
     // Initialize basic visibility and things that are lit and can be seen
     //
     dbg("Choose goals (higher scores, lower costs are preferred):");
-    robot_ai_init_can_see_dmap(dmap, minx, miny, maxx, maxy);
-    robot_ai_choose_initial_goals(dmap, goals, minx, miny, maxx, maxy);
+    robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
+    robot_ai_choose_initial_goals(goals, minx, miny, maxx, maxy);
 
     if (goals.empty()) {
-        robot_ai_init_can_see_dmap(dmap, minx, miny, maxx, maxy);
-        robot_ai_choose_search_goals(dmap, goals);
+        if (is_player()) {
+            robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
+            robot_ai_choose_search_goals(goals);
+        }
     }
 
     //
@@ -255,9 +257,8 @@ _
 //
 // Initialize basic visibility and things that are lit and can be seen
 //
-void Thing::robot_ai_init_can_see_dmap (const Dmap *dmap, 
-                                        int minx, int miny, int maxx, int maxy)
-{
+void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
+{_
     point start((int)mid_at.x, (int)mid_at.y);
     auto dmap_can_see = get_dmap_can_see();
 
@@ -267,13 +268,8 @@ void Thing::robot_ai_init_can_see_dmap (const Dmap *dmap,
             auto X = x - minx;
             auto Y = y - miny;
 
-            if (!level->is_lit(X, Y)) {
-                set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
-                continue;
-            }
-
-            if (dmap) {
-                if (get(dmap->val, X, Y) == DMAP_IS_WALL) {
+            if (is_player()) {
+                if (!level->is_lit_ever(X, Y)) {
                     set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
                     continue;
                 }
@@ -319,10 +315,9 @@ void Thing::robot_ai_init_can_see_dmap (const Dmap *dmap,
 // have touched them) and choose the best goal. Create a path to that goal for
 // the thing to walk.
 //
-void Thing::robot_ai_choose_initial_goals (const Dmap *dmap, 
-                                           std::multiset<Goal> &goals,
+void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                            int minx, int miny, int maxx, int maxy)
-{
+{_
     auto dmap_can_see = get_dmap_can_see();
     auto age_map = get_age_map();
 
@@ -533,9 +528,8 @@ void Thing::robot_ai_choose_initial_goals (const Dmap *dmap,
 // what is currently visible and find the most interesting point at that edge
 // and then create a path to that edge.
 //
-void Thing::robot_ai_choose_search_goals (const Dmap *dmap, 
-                                          std::multiset<Goal> &goals)
-{
+void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
+{_  
     auto dmap_can_see = get_dmap_can_see();
     point start((int)mid_at.x, (int)mid_at.y);
 
@@ -547,7 +541,12 @@ void Thing::robot_ai_choose_search_goals (const Dmap *dmap,
     in.push_back(start);
     set(pushed, start.x, start.y, true);
 
-    dmap_print(dmap);
+    log("Dmap, to player:");
+    auto dmap_to_player = &level->dmap_to_player;
+    dmap_print(dmap_to_player);
+    log("Dmap, can see:");
+    dmap_print(dmap_can_see);
+
     while (!in.empty()) {
         auto p = in.front();
         in.pop_front();
@@ -557,7 +556,7 @@ void Thing::robot_ai_choose_search_goals (const Dmap *dmap,
         }
         set(walked, p.x, p.y, true);
 
-        if (get(dmap->val, p.x, p.y) == DMAP_IS_WALL) {
+        if (get(dmap_to_player->val, p.x, p.y) == DMAP_IS_WALL) {
             continue;
         }
         if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
@@ -611,7 +610,7 @@ void Thing::robot_ai_choose_search_goals (const Dmap *dmap,
                         continue;
                     }
 
-                    if (get(dmap->val, p.x + dx, p.y + dy) == DMAP_IS_WALL) {
+                    if (get(dmap_to_player->val, p.x + dx, p.y + dy) == DMAP_IS_WALL) {
                         continue;
                     }
 
@@ -676,12 +675,10 @@ void Thing::robot_tick (void)
     bool jump = false;
     bool do_something = false;
 
-    const Dmap *dmap = &level->player_dmap;
-
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
-            if (robot_ai_create_path_to_goal(dmap)) {
+            if (robot_ai_create_path_to_goal()) {
                 monstp->robot_state = ROBOT_STATE_MOVING;
                 game->tick_begin("move");
                 do_something = true;

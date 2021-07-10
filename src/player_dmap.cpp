@@ -28,10 +28,10 @@ int Thing::distance_to_player (void)
         return DMAP_IS_WALL;
     }
 
-    return get(&game->level->player_dmap.val, (int)mid_at.x, (int)mid_at.y);
+    return get(&game->level->dmap_to_player.val, (int)mid_at.x, (int)mid_at.y);
 }
 
-void Level::player_dmap_update (void)
+void Level::dmap_to_player_update (void)
 {_
     if (!player) {
         return;
@@ -53,21 +53,21 @@ void Level::player_dmap_update (void)
         for (auto x = 0; x < MAP_WIDTH; x++) {
             if ((x >= x1) && (x <= x2) && (y >= y1) && (y <= y2)) {
                 if (is_movement_blocking_hard(point(x, y))) {
-                    set(player_dmap.val, x, y, DMAP_IS_WALL);
+                    set(dmap_to_player.val, x, y, DMAP_IS_WALL);
                 } else {
-                    set(player_dmap.val, x, y, DMAP_IS_PASSABLE);
+                    set(dmap_to_player.val, x, y, DMAP_IS_PASSABLE);
                 }
             } else {
-                set(player_dmap.val, x, y, DMAP_IS_WALL);
+                set(dmap_to_player.val, x, y, DMAP_IS_WALL);
             }
         }
     }
 
-    set(player_dmap.val, player->mid_at.x, player->mid_at.y, DMAP_IS_GOAL);
+    set(dmap_to_player.val, player->mid_at.x, player->mid_at.y, DMAP_IS_GOAL);
 
-    dmap_process(&player_dmap);
+    dmap_process(&dmap_to_player);
     if (unlikely(g_opt_debug4)) {
         LOG("Player dmap:");
-        dmap_print(&player_dmap);
+        dmap_print(&dmap_to_player);
     }
 }
