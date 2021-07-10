@@ -410,26 +410,26 @@ void Thing::clear_age_map (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// _dmap_scent
+// _dmap_can_see
 ////////////////////////////////////////////////////////////////////////////
-Dmap *Thing::get_dmap_scent (void)
+Dmap *Thing::get_dmap_can_see (void)
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->_dmap_scent);
+        return (monstp->_dmap_can_see);
     } else {
         return (0);
     }
 }
 
-void Thing::new_dmap_scent (void)
+void Thing::new_dmap_can_see (void)
 {_
     new_monst();
-    if (!monstp->_dmap_scent) {
-        monstp->_dmap_scent = new Dmap();
-        newptr(monstp->_dmap_scent, "AgeMap");
+    if (!monstp->_dmap_can_see) {
+        monstp->_dmap_can_see = new Dmap();
+        newptr(monstp->_dmap_can_see, "AgeMap");
 
-        auto dmap = monstp->_dmap_scent->val;
+        auto dmap = monstp->_dmap_can_see->val;
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 set(dmap, x, y, DMAP_IS_WALL);
@@ -438,24 +438,24 @@ void Thing::new_dmap_scent (void)
     }
 }
 
-void Thing::delete_dmap_scent (void)
+void Thing::delete_dmap_can_see (void)
 {_
     if (monstp) {
         verify(monstp);
-        if (monstp->_dmap_scent) {
-            oldptr(monstp->_dmap_scent);
-            delete monstp->_dmap_scent;
-            monstp->_dmap_scent = 0;
+        if (monstp->_dmap_can_see) {
+            oldptr(monstp->_dmap_can_see);
+            delete monstp->_dmap_can_see;
+            monstp->_dmap_can_see = 0;
         }
     }
 }
 
-void Thing::clear_dmap_scent (void)
+void Thing::clear_dmap_can_see (void)
 {_
     if (monstp) {
         verify(monstp);
-        if (monstp->_dmap_scent) {
-            *monstp->_dmap_scent = {};
+        if (monstp->_dmap_can_see) {
+            *monstp->_dmap_can_see = {};
         }
     }
 }

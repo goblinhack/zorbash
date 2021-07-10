@@ -207,7 +207,7 @@ TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const &container,
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
 static inline
-TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const *container,
+TYPE get(const std::array<std::array<TYPE,YDIM>,XDIM> *container,
          std::size_t X, std::size_t Y) {
     DODEBUG(std::cerr << "get [" << X << "][" << Y << "] = ");
     if (unlikely(g_opt_debug5)) {
