@@ -6560,5 +6560,9 @@ void wid_set_style (Widp w, int style)
 
 void wid_ignore_events_briefly (void)
 {
+    if (!time_have_x_tenths_passed_since(10, wid_ignore_events_briefly_ts)) {
+        return;
+    }
+
     wid_ignore_events_briefly_ts = time_get_time_ms_cached();
 }

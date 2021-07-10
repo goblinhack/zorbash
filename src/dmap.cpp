@@ -32,7 +32,7 @@ void dmap_print (const Dmap *d, point at, point start, point end)
                 continue;
             }
             if (e == DMAP_IS_PASSABLE) {
-                debug += (".  ");
+                debug += ("p  ");
                 continue;
             }
 

@@ -80,7 +80,6 @@ void Game::dead_select (const char *reason)
 
     game->robot_mode = false;
     wid_actionbar_init();
-    TOPCON("Robot is dead");
 
     wid_thing_info_fini();
 

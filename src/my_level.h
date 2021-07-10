@@ -496,6 +496,7 @@ public:
     uint8_t is_extreme_hazard(const point &p);
     uint8_t is_fire(const int x, const int y);
     uint8_t is_fire(const point &p);
+    uint8_t is_floor(const point &p);
     uint8_t is_floor(const int x, const int y);
     uint8_t is_food(const int x, const int y);
     uint8_t is_food(const point &p);

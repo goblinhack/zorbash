@@ -7,9 +7,7 @@
 #ifndef _MY_THING_AI_H
 #define _MY_THING_AI_H
 
-//#include <unordered_map>
-//#include <memory>
-//#include <set>
+#include <set>
 #include "my_dmap.h"
 
 typedef struct AgeMap_* AgeMapp;
@@ -74,6 +72,13 @@ extern void astar_dump(const Dmap *dmap,
                        const point &at,
                        const point &start,
                        const point &end);
+
+class GoalMap
+{
+public:
+     std::multiset<class Goal> goals;
+     Dmap *dmap;
+};
 
 typedef struct AgeMap_ {
     std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> val {};

@@ -8,7 +8,6 @@
 #define _MY_THING_H_
 
 #include <list>
-#include <set>
 #include <array>
 #include <functional>
 
@@ -1339,6 +1338,7 @@ public:
     void robot_ai_init_can_jump_dmap(int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_search_goals(std::multiset<Goal> &goals);
+    void robot_ai_choose_jump_goals(std::multiset<Goal> &goals);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();

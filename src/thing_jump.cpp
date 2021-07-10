@@ -444,12 +444,13 @@ void Thing::jump_end (void)
         return;
     }
 
-    dbg("End of jump");
+    topcon("End of jump");
     is_jumping = false;
 
     set_timestamp_jump_begin(0);
     set_timestamp_jump_end(0);
     move_finish();
+    update_interpolated_position();
 
     //
     // Weapons follow also.
