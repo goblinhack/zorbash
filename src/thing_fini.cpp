@@ -60,6 +60,7 @@ void Thing::destroy (void)
     point old_at((int)mid_at.x, (int)mid_at.y);
 
     delete_dmap_can_see();
+    delete_dmap_can_jump();
     delete_age_map();
     delete_lights();
     delete_particle();

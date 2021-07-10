@@ -18,12 +18,13 @@
 #define MAP_GRID_HEIGHT            4
 #define MAP_GRID_WIDTH             4 // Rooms across and down
 #define MAP_HEIGHT                 ((MAP_GRID_HEIGHT*MAP_ROOM_HEIGHT) + (MAP_BORDER_TOTAL*2))
-#define MAP_BORDER_ROCK            1  // Map rock border
+#define MAP_BORDER_ROCK            3  // Map rock border; keep at 3 as jump AI looks 2 tiles adjacent
 #define MAP_ROOM_HEIGHT            13
 #define MAP_ROOM_WIDTH             13
 #define MAP_SLOTS                  32 // Max things per map slot
 #define MAP_WIDTH                  ((MAP_GRID_WIDTH*MAP_ROOM_WIDTH) + (MAP_BORDER_TOTAL*2))
 #define PARTICLE_SPEED_MS          450
+#define ROBOT_SPEED_MS             100
 #define THING_MOVE_SPEED_MS        150
 #define THING_AI_WANDER_FREQ_TENTHS 3   // How often we can wander
 #define THING_DAMAGE_SHAKE_ABOVE   10   // Damage above this causes shakes

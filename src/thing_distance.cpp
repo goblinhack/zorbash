@@ -54,7 +54,7 @@ point Thing::get_random_scent_target (void)
                 continue;
             } else {
                 if (is_player()) {
-                    if (!level->is_lit_ever(x, y)) {
+                    if (!level->is_lit_currently(x, y)) {
                         continue;
                     }
                 }
@@ -88,7 +88,7 @@ point Thing::get_random_scent_target (void)
         }
 
         if (is_player()) {
-            if (!level->is_lit_ever(x, y)) {
+            if (!level->is_lit_currently(x, y)) {
                 continue;
             }
         }
@@ -111,7 +111,7 @@ point Thing::get_random_scent_target (void)
                 std::max(MAP_BORDER_TOTAL, start.y + dy), MAP_HEIGHT - MAP_BORDER_TOTAL);
 
     if (is_player()) {
-        if (!level->is_lit_ever(x, y)) {
+        if (!level->is_lit_currently(x, y)) {
             return point(x, y);
         }
     }

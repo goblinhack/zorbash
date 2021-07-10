@@ -75,7 +75,7 @@ bool Thing::try_to_jump (point to)
     //
     // Block jumping over doors
     //
-    if (!level->is_lit_ever(x, y) && !level->is_visited(x, y)) {_
+    if (!level->is_lit_currently(x, y) && !level->is_lit_ever(x, y)) {_
         if (unlikely(g_opt_debug2)) {
             dbg("No, is not lit or visited");
         }

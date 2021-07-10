@@ -35,6 +35,9 @@ void Thing::level_change (Levelp l)
         monstp->move_path = {};
         clear_age_map();
         clear_dmap_can_see();
+        if (is_jumper()) {
+            clear_dmap_can_jump();
+        }
         move_finish();
     }
 

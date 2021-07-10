@@ -219,6 +219,15 @@ _
         return;
     }
 
+    if (is_player() && game->robot_mode) {
+        static uint32_t last_tick;
+        if (!time_have_x_ms_passed_since(game->robot_delay_ms, last_tick)) {
+            return;
+        }
+
+        last_tick = time_get_time_ms_cached();
+    }
+
 #if 0
     bool is_waiting_to_tick = false;
 

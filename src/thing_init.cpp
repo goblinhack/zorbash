@@ -162,6 +162,9 @@ _
     //
     if (tpp->is_monst() || tpp->is_player()) {
         new_dmap_can_see();
+        if (tpp->is_jumper()) {
+            new_dmap_can_jump();
+        }
         new_age_map();
     }
 
@@ -580,6 +583,9 @@ void Thing::reinit (void)
     //
     if (tpp->is_monst()) {
         new_dmap_can_see();
+        if (tpp->is_jumper()) {
+            new_dmap_can_jump();
+        }
         new_age_map();
     }
 
