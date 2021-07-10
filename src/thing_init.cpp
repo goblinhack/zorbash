@@ -161,7 +161,7 @@ _
     // Add AI ability
     //
     if (tpp->is_monst() || tpp->is_player()) {
-        new_dmap_scent();
+        new_dmap_can_see();
         new_age_map();
     }
 
@@ -579,7 +579,7 @@ void Thing::reinit (void)
     // Add AI ability
     //
     if (tpp->is_monst()) {
-        new_dmap_scent();
+        new_dmap_can_see();
         new_age_map();
     }
 

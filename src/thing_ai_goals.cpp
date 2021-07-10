@@ -33,7 +33,7 @@ _
 
     point start((int)mid_at.x, (int)mid_at.y);
 
-    auto dmap_scent = get_dmap_scent();
+    auto dmap_can_see = get_dmap_can_see();
     auto age_map = get_age_map();
 
     for (auto y = miny; y < maxy; y++) {
@@ -43,9 +43,9 @@ _
             auto Y = y - miny;
 
             if (ai_obstacle_for_me(p)) {
-                set(dmap_scent->val, X, Y, DMAP_IS_WALL);
+                set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
             } else {
-                set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
+                set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
             }
         }
     }
@@ -53,9 +53,9 @@ _
     //
     // We want to find how far everything is from us.
     //
-    set(dmap_scent->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
+    set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
 
-    dmap_process(dmap_scent, point(0, 0), point(maxx - minx, maxy - miny));
+    dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
 
     //
     // Find all the possible goals we can smell.
@@ -73,8 +73,8 @@ _
         //
         // Too far away to sense?
         //
-        if (get(dmap_scent->val, X, Y) > tpp->ai_scent_distance()) {
-            set(dmap_scent->val, X, Y, DMAP_IS_WALL);
+        if (get(dmap_can_see->val, X, Y) > tpp->ai_scent_distance()) {
+            set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
             continue;
         }
 
@@ -207,7 +207,7 @@ _
                             int total_score = -(int)terrain_score;
                             total_score += dist * dist;
                             goals.insert(Goal(total_score, point(X + dx, Y + dy)));
-                            set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
+                            set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
                             dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
                             got_avoid = true;
@@ -228,7 +228,7 @@ _
                                 int total_score = -(int)terrain_score;
                                 total_score += dist * dist;
                                 goals.insert(Goal(total_score, point(X + dx, Y + dy)));
-                                set(dmap_scent->val, X + dx, Y + dy, DMAP_IS_GOAL);
+                                set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
                                 dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
                                 got_avoid = true;
@@ -266,14 +266,14 @@ _
         } FOR_ALL_THINGS_END();
 
         if (avoiding) {
-            set(dmap_scent->val, X, Y, DMAP_IS_WALL);
+            set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
         } else if (got_a_goal) {
             goals.insert(Goal(total_score, point(X, Y)));
-            set(dmap_scent->val, X, Y, DMAP_IS_GOAL);
+            set(dmap_can_see->val, X, Y, DMAP_IS_GOAL);
         } else if (terrain_score) {
-            set(dmap_scent->val, X, Y, (uint8_t)terrain_score);
+            set(dmap_can_see->val, X, Y, (uint8_t)terrain_score);
         } else {
-            set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
+            set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
         }
     } }
 
@@ -287,7 +287,7 @@ _
 
 #ifdef ENABLE_DEBUG_AI_VERBOSE
     dbg2("Initial goal map derived:");
-    dmap_print(dmap_scent,
+    dmap_print(dmap_can_see,
                point(start.x - minx, start.y - miny),
                point(0, 0),
                point(maxx - minx, maxy - miny));
@@ -347,7 +347,7 @@ _
 
         assert(score <= DMAP_IS_PASSABLE);
         uint8_t score8 = (int)score;
-        set(dmap_scent->val, goal_target.x, goal_target.y, score8);
+        set(dmap_can_see->val, goal_target.x, goal_target.y, score8);
 
         dbg2(" scale goal (%d,%d) %d to %d",
             (int)minx + goal.at.x, (int)miny + goal.at.y, 
@@ -364,7 +364,7 @@ _
     //
     if (unlikely(g_opt_debug4)) {
         dbg("Goals:");
-        dmap_print(dmap_scent,
+        dmap_print(dmap_can_see,
                    point(start.x - minx, start.y - miny),
                    point(0, 0),
                    point(maxx - minx, maxy - miny));
@@ -374,8 +374,8 @@ _
     // Make sure we do not want to stay in the same position by making
     // our current cell passable but the very least preferred it can be.
     //
-    if (get(dmap_scent->val, start.x - minx, start.y - miny) > 0) {
-        set(dmap_scent->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
+    if (get(dmap_can_see->val, start.x - minx, start.y - miny) > 0) {
+        set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
     }
 
     //
@@ -398,7 +398,7 @@ _
         auto result = astar_solve(path_debug,
                                   astar_start,
                                   astar_end,
-                                  dmap_scent);
+                                  dmap_can_see);
         //
         // Unreachable?
         //
@@ -417,7 +417,7 @@ _
         }
         auto start = point(0, 0);
         auto end = point(maxx - minx, maxy - miny);
-        astar_dump(dmap_scent, goal.at, start, end);
+        astar_dump(dmap_can_see, goal.at, start, end);
 #endif
     }
 
@@ -429,7 +429,7 @@ _
         if (hops_len >= 2) {
             auto hop0 = get(hops, hops_len - 1);
             auto hop1 = get(hops, hops_len - 2);
-            if (dmap_can_i_move_diagonally(dmap_scent, astar_start, hop0, hop1)) {
+            if (dmap_can_i_move_diagonally(dmap_can_see, astar_start, hop0, hop1)) {
                 best = hop1;
             } else {
                 best = hop0;

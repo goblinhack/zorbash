@@ -8,10 +8,12 @@
 #define _MY_THING_H_
 
 #include <list>
+#include <set>
 #include <array>
 #include <functional>
 
 #include "my_thing_defs.h"
+#include "my_thing_ai.h"
 #include "my_dice.h"
 #include "my_thing_id.h"
 #include "my_fwd.h"
@@ -969,7 +971,7 @@ public:
     std::vector<Thingp> get_item_list(void);
     std::vector<Thingp> get_treasure_list(void);
     struct AgeMap_ *get_age_map(void);
-    struct Dmap_ *get_dmap_scent(void);
+    struct Dmap_ *get_dmap_can_see(void);
     ThingId get_on_fire_anim_id(void) const;
     ThingId get_weapon_id_carry_anim(void) const;
     ThingId get_weapon_id_use_anim(void) const;
@@ -1184,7 +1186,7 @@ public:
     void brazier_tick();
     void chasm_tick();
     void clear_age_map(void);
-    void clear_dmap_scent(void);
+    void clear_dmap_can_see(void);
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
@@ -1196,7 +1198,7 @@ public:
     void dead_(Thingp killer, const char *fmt, va_list args); // compile error without
     void dead(Thingp killer, std::string &);
     void delete_age_map(void);
-    void delete_dmap_scent(void);
+    void delete_dmap_can_see(void);
     void delete_laser();
     void delete_lights(void);
     void delete_particle();
@@ -1266,7 +1268,7 @@ public:
     void move_to_immediately(fpoint to);
     void msg(const std::string&);
     void new_age_map(void);
-    void new_dmap_scent(void);
+    void new_dmap_can_see(void);
     void new_light(point offset, int strength);
     void new_light(point offset, int strength, color col, int fbo);
     void new_monst(void);
@@ -1328,7 +1330,10 @@ public:
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void update_tick(void);
     void robot_tick(void);
-    bool robot_choose_ai_goal(void);
+    bool robot_ai_create_path_to_goal(const struct Dmap_ *d);
+    void robot_ai_init_can_see_dmap(const struct Dmap_ *d, int minx, int miny, int maxx, int maxy);
+    void robot_ai_choose_initial_goals(const struct Dmap_ *d, std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
+    void robot_ai_choose_search_goals(const struct Dmap_ *d, std::multiset<Goal> &goals);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();
