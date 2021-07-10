@@ -50,9 +50,9 @@ _
 
     if (is_player()) {
         minx = 0;
-        maxx = MAP_WIDTH - 1;
+        maxx = MAP_WIDTH;
         miny = 0;
-        maxy = MAP_HEIGHT - 1;
+        maxy = MAP_HEIGHT;
     }
 
     point start((int)mid_at.x, (int)mid_at.y);
@@ -60,8 +60,10 @@ _
     //
     // Find all the possible goals. Higher scores, lower costs are preferred
     //
-    std::multiset<Goal> goals;
+    std::multiset<Goal> walk_goals;
+    std::multiset<Goal> jump_goals;
     auto dmap_can_see = get_dmap_can_see();
+    auto dmap_can_jump = get_dmap_can_jump();
     auto age_map = get_age_map();
 
     //
@@ -69,187 +71,190 @@ _
     //
     dbg("Choose goals (higher scores, lower costs are preferred):");
     robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
-    robot_ai_choose_initial_goals(goals, minx, miny, maxx, maxy);
+    robot_ai_choose_initial_goals(walk_goals, minx, miny, maxx, maxy);
 
-    if (goals.empty()) {
+    if (walk_goals.empty()) {
         if (is_player()) {
             robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
             robot_ai_init_can_jump_dmap(minx, miny, maxx, maxy);
-            robot_ai_choose_search_goals(goals);
+            robot_ai_choose_search_goals(walk_goals);
+            robot_ai_choose_jump_goals(jump_goals);
         }
+    }
+
+    std::list<GoalMap> goalmaps;
+
+    if (!walk_goals.empty()) {
+        goalmaps.push_back(GoalMap{walk_goals, dmap_can_see});
+    }
+    if (!jump_goals.empty()) {
+        goalmaps.push_back(GoalMap{jump_goals, dmap_can_jump});
     }
 
     //
     // No goals?
     //
-    if (goals.empty()) {
+    if (goalmaps.empty()) {
         dbg2("No goals found");
         return false;
     }
 
-#ifdef ENABLE_DEBUG_AI_VERBOSE
-    dbg2("Initial goal map derived:");
-    dmap_print(dmap_can_see,
-               point(start.x - minx, start.y - miny),
-               point(0, 0),
-               point(maxx - minx, maxy - miny));
-#endif
+    for (auto &g : goalmaps) {
+        //
+        // Find the highest/least preferred score so we can scale all the goals
+        // later so they fit in one byte (makes it easier to debug).
+        //
+        std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> cell_totals = {};
+        float least_preferred = 0;
+        float most_preferred = 0;
+        bool least_preferred_set = false;
+        bool most_preferred_set = false;
 
-    //
-    // Find the highest/least preferred score so we can scale all the goals
-    // later so they fit in one byte (makes it easier to debug).
-    //
-    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> cell_totals = {};
-    float least_preferred = 0;
-    float most_preferred = 0;
-    bool least_preferred_set = false;
-    bool most_preferred_set = false;
+        for (auto& goal : g.goals) {
+            auto goal_target = goal.at;
+            incr(cell_totals, goal_target.x, goal_target.y, goal.score);
+            auto score = get(cell_totals, goal_target.x, goal_target.y);
 
-    for (auto& goal : goals) {
-        auto goal_target = goal.at;
-        incr(cell_totals, goal_target.x, goal_target.y, goal.score);
-        auto score = get(cell_totals, goal_target.x, goal_target.y);
-
-        if (least_preferred_set) {
-            least_preferred = std::min(least_preferred, score);
-        } else {
-            least_preferred = score;
-            least_preferred_set = true;
-        }
-        if (most_preferred_set) {
-            most_preferred = std::max(most_preferred, score);
-        } else {
-            most_preferred = score;
-            most_preferred_set = true;
-        }
-    }
-
-    dbg4("Sorted goals, %d (best) .. %d (worst)",
-         (int)most_preferred, (int)least_preferred);
-
-    //
-    // Scale the goals so they will fit in the dmap.
-    //
-    for (auto& goal : goals) {
-        auto goal_target = goal.at;
-        float score = get(cell_totals, goal_target.x, goal_target.y);
-        auto orig_score = score;
-
-        if (most_preferred == least_preferred) {
-            score = 1;
-        } else {
-            if (least_preferred < 0) {
-                score /= most_preferred - least_preferred;
+            if (least_preferred_set) {
+                least_preferred = std::min(least_preferred, score);
             } else {
-                score /= most_preferred;
+                least_preferred = score;
+                least_preferred_set = true;
             }
-            score *= DMAP_IS_PASSABLE - 2;
-            score++;
+            if (most_preferred_set) {
+                most_preferred = std::max(most_preferred, score);
+            } else {
+                most_preferred = score;
+                most_preferred_set = true;
+            }
         }
 
-        assert(score <= DMAP_IS_PASSABLE);
-        uint8_t score8 = (int)score;
-        set(dmap_can_see->val, goal_target.x, goal_target.y, score8);
+        dbg4("Sorted goals, %d (best) .. %d (worst)",
+            (int)most_preferred, (int)least_preferred);
 
-        dbg2(" scale goal (%d,%d) %d to %d",
-            (int)minx + goal.at.x, (int)miny + goal.at.y, 
-            (int)orig_score, (int)score8);
-    }
+        //
+        // Scale the goals so they will fit in the dmap.
+        //
+        for (auto& goal : g.goals) {
+            auto goal_target = goal.at;
+            float score = get(cell_totals, goal_target.x, goal_target.y);
+            auto orig_score = score;
 
-    //
-    // Record we've been here.
-    //
-    set(age_map->val, start.x, start.y, game->tick_current);
+            if (most_preferred == least_preferred) {
+                score = 1;
+            } else {
+                if (least_preferred < 0) {
+                    score /= most_preferred - least_preferred;
+                } else {
+                    score /= most_preferred;
+                }
+                score *= DMAP_IS_PASSABLE - 2;
+                score++;
+            }
 
-    //
-    // Find the best next-hop to the best goal.
-    //
+            assert(score <= DMAP_IS_PASSABLE);
+            uint8_t score8 = (int)score;
+            set(g.dmap->val, goal_target.x, goal_target.y, score8);
+
+            dbg2(" scale goal (%d,%d) %d to %d",
+                (int)minx + goal.at.x, (int)miny + goal.at.y, 
+                (int)orig_score, (int)score8);
+        }
+
+        //
+        // Record we've been here.
+        //
+        set(age_map->val, start.x, start.y, game->tick_current);
+
+        //
+        // Find the best next-hop to the best goal.
+        //
 #ifdef ENABLE_DEBUG_AI_VERBOSE
-    if (unlikely(g_opt_debug4)) {
-        dbg("Goals:");
-        dmap_print(dmap_can_see,
-                   point(start.x - minx, start.y - miny),
-                   point(0, 0),
-                   point(maxx - minx, maxy - miny));
-    }
+        if (unlikely(g_opt_debug4)) {
+            dbg("Goals:");
+            dmap_print(g.dmap,
+                    point(start.x - minx, start.y - miny),
+                    point(0, 0),
+                    point(maxx - minx, maxy - miny));
+        }
 #endif
 
-    //
-    // Make sure we do not want to stay in the same position by making
-    // our current cell passable but the very least preferred it can be.
-    //
-    if (get(dmap_can_see->val, start.x - minx, start.y - miny) > 0) {
-        set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
-    }
-
-    //
-    // Move diagonally if not blocked by walls
-    //
-    point astar_start(start.x - minx, start.y - miny);
-
-    //
-    // Modify the given goals with scores that indicate the cost of the
-    // path to that goal. The result should be a sorted set of goals.
-    //
-    std::multiset<Path> paths;
-    char path_debug = '\0'; // astart path debug
-
-    for (auto& goal : goals) {
-#ifdef ENABLE_DEBUG_AI_ASTAR
-        astar_debug = {};
-#endif
-        auto astar_end = goal.at;
-        auto result = astar_solve(path_debug,
-                                  astar_start,
-                                  astar_end,
-                                  dmap_can_see);
         //
-        // Unreachable?
+        // Make sure we do not want to stay in the same position by making
+        // our current cell passable but the very least preferred it can be.
         //
-        if (result.cost == std::numeric_limits<int>::max()) {
-            continue;
+        if (get(g.dmap->val, start.x - minx, start.y - miny) > 0) {
+            set(g.dmap->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
         }
 
-        paths.insert(result);
-        dbg2(" goal (%d,%d) score %d -> cost %d", 
-             goal.at.x + minx, goal.at.y + miny,
-             (int)goal.score, (int)result.cost);
+        //
+        // Move diagonally if not blocked by walls
+        //
+        point astar_start(start.x - minx, start.y - miny);
 
+        //
+        // Modify the given goals with scores that indicate the cost of the
+        // path to that goal. The result should be a sorted set of goals.
+        //
+        std::multiset<Path> paths;
+        char path_debug = '\0'; // astart path debug
+
+        for (auto& goal : g.goals) {
 #ifdef ENABLE_DEBUG_AI_ASTAR
-        for (auto& p : result.path) {
-            set(astar_debug, p.x, p.y, '*');
-        }
-        auto start = point(0, 0);
-        auto end = point(maxx - minx, maxy - miny);
-        astar_dump(dmap_can_see, goal.at, start, end);
+            astar_debug = {};
 #endif
-    }
-
-    for (auto& result : paths) {
-        std::vector<point> new_move_path;
-        for (point p : result.path) {
-            p.x += minx;
-            p.y += miny;
-            if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
+            auto astar_end = goal.at;
+            auto result = astar_solve(path_debug,
+                                    astar_start,
+                                    astar_end,
+                                    g.dmap);
+            //
+            // Unreachable?
+            //
+            if (result.cost == std::numeric_limits<int>::max()) {
                 continue;
             }
-            new_move_path.push_back(p);
+
+            paths.insert(result);
+            dbg2(" goal (%d,%d) score %d -> cost %d", 
+                goal.at.x + minx, goal.at.y + miny,
+                (int)goal.score, (int)result.cost);
+
+#ifdef ENABLE_DEBUG_AI_ASTAR
+            for (auto& p : result.path) {
+                set(astar_debug, p.x, p.y, '*');
+            }
+            auto start = point(0, 0);
+            auto end = point(maxx - minx, maxy - miny);
+            astar_dump(g.dmap, goal.at, start, end);
+#endif
         }
 
-        if (new_move_path.empty()) {
-            continue;
-        }
+        for (auto& result : paths) {
+            std::vector<point> new_move_path;
+            for (point p : result.path) {
+                p.x += minx;
+                p.y += miny;
+                if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
+                    continue;
+                }
+                new_move_path.push_back(p);
+            }
 
-        std::reverse(new_move_path.begin(), new_move_path.end());
-        if (is_player()) {
-            level->cursor_path_create(new_move_path);
-            if (cursor_path_pop_first_move()) {
+            if (new_move_path.empty()) {
+                continue;
+            }
+
+            std::reverse(new_move_path.begin(), new_move_path.end());
+            if (is_player()) {
+                level->cursor_path_create(new_move_path);
+                if (cursor_path_pop_first_move()) {
+                    return true;
+                }
+            } else {
+                monstp->move_path = new_move_path;
                 return true;
             }
-            return false;
-        } else {
-            monstp->move_path = new_move_path;
-            return true;
         }
     }
 
@@ -563,7 +568,8 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
     std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
     std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pushed = {};
     std::deque<point> in;
-    std::deque<point> cands;
+    std::deque<point> can_walk_to_cands;
+    std::deque<point> can_jump_to_cands;
     std::deque<Thingp> out;
     in.push_back(start);
     set(pushed, start.x, start.y, true);
@@ -575,10 +581,6 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
     log("Dmap, can see:");
     auto dmap_can_see = get_dmap_can_see();
     dmap_print(dmap_can_see);
-
-    log("Dmap, can jump:");
-    auto dmap_can_jump = get_dmap_can_jump();
-    dmap_print(dmap_can_jump);
 
     while (!in.empty()) {
         auto p = in.front();
@@ -647,13 +649,105 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
                     }
 
                     set(walked, o.x, o.y, true);
-                    cands.push_back(o);
+                    can_walk_to_cands.push_back(o);
                 }
             }
+        }
+    }
 
-            int jump_distance = MAP_BORDER_ROCK;
-            for (int dx = -jump_distance; dx <= jump_distance; dx++) {
-                for (int dy = -jump_distance; dy <= jump_distance; dy++) {
+    //
+    // Choose goals (higher scores, lower costs are preferred)
+    //
+    for (auto p : can_walk_to_cands) {
+        //
+        // Prefer easier terrain
+        //
+        int terrain_score = is_less_preferred_terrain(p);
+        int total_score = -(int)terrain_score;
+
+        //
+        // Prefer closer
+        //
+        float dist = distance(start, p);
+        total_score -= dist * dist;
+
+        //
+        // Prefer to look at doors last
+        //
+        if (level->is_door(p.x, p.y)) {
+            total_score -= 5;
+        }
+
+        goals.insert(Goal(total_score, p));
+    }
+}
+
+void Thing::robot_ai_choose_jump_goals (std::multiset<Goal> &goals)
+{_  
+    point start((int)mid_at.x, (int)mid_at.y);
+
+    std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
+    std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pushed = {};
+    std::deque<point> in;
+    std::deque<point> can_walk_to_cands;
+    std::deque<point> can_jump_to_cands;
+    std::deque<Thingp> out;
+    in.push_back(start);
+    set(pushed, start.x, start.y, true);
+
+    log("Dmap, can jump:");
+    auto dmap_can_jump = get_dmap_can_jump();
+    auto dmap_can_see = get_dmap_can_see();
+    dmap_print(dmap_can_jump);
+
+    while (!in.empty()) {
+        auto p = in.front();
+        in.pop_front();
+
+        if (get(walked, p.x, p.y)) {
+            continue;
+        }
+        set(walked, p.x, p.y, true);
+
+        if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+            continue;
+        }
+        if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+            continue;
+        }
+        if (p.x <= MAP_BORDER_ROCK) {
+            continue;
+        }
+        if (p.y <= MAP_BORDER_ROCK) {
+            continue;
+        }
+
+        if (!get(pushed, p.x + 1, p.y)) {
+            set(pushed, p.x + 1, p.y, true);
+            in.push_back(point(p.x + 1, p.y));
+        }
+
+        if (!get(pushed, p.x - 1, p.y)) {
+            set(pushed, p.x - 1, p.y, true);
+            in.push_back(point(p.x - 1, p.y));
+        }
+
+        if (!get(pushed, p.x, p.y + 1)) {
+            set(pushed, p.x, p.y + 1, true);
+            in.push_back(point(p.x, p.y + 1));
+        }
+
+        if (!get(pushed, p.x, p.y - 1)) {
+            set(pushed, p.x, p.y - 1, true);
+            in.push_back(point(p.x, p.y - 1));
+        }
+
+        //
+        // If an unvisited tile is next to a visited one, consider that tile.
+        //
+        if (level->is_lit_ever(p.x, p.y)) {
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
                     if (!dx && !dy) {
                         continue;
                     }
@@ -675,6 +769,9 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
                         continue;
                     }
 
+                    //
+                    // Ignore things we can walk to
+                    //
                     if (get(dmap_can_see->val, o.x, o.y) != DMAP_IS_WALL) {
                         continue;
                     }
@@ -683,8 +780,41 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
                         continue;
                     }
 
-                    set(walked, p.x + dx, p.y + dy, true);
-                    cands.push_back(o);
+                    if (!level->is_hazard(o)) {
+                        continue;
+                    }
+
+                    int jump_distance = MAP_BORDER_ROCK - 1;
+                    for (int dx = -jump_distance; dx <= jump_distance; dx++) {
+                        for (int dy = -jump_distance; dy <= jump_distance; dy++) {
+                            point o2(o.x + dx, o.y + dy);
+
+                            //
+                            // Looking for something we can see but cannot get to
+                            //
+                            if (!level->is_lit_ever(o2)) {
+                                continue;
+                            }
+
+                            if (level->is_movement_blocking_hard(o2)) {
+                                continue;
+                            }
+
+                            //
+                            // Ignore things we can walk to
+                            //
+                            if (get(dmap_can_see->val, o2.x, o2.y) < DMAP_IS_PASSABLE) {
+                                continue;
+                            }
+
+                            if (!level->is_floor(o2) && !level->is_corridor(o2)) {
+                                continue;
+                            }
+
+                            set(walked, o2.x, o2.y, true);
+                            can_jump_to_cands.push_back(o2);
+                        }
+                    }
                 }
             }
         }
@@ -693,7 +823,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
     //
     // Choose goals (higher scores, lower costs are preferred)
     //
-    for (auto p : cands) {
+    for (auto p : can_jump_to_cands) {
         //
         // Prefer easier terrain
         //
@@ -706,15 +836,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
         float dist = distance(start, p);
         total_score -= dist * dist;
 
-        //
-        // Prefer to look at doors last
-        //
-        if (level->is_door(p.x, p.y)) {
-            total_score -= 5;
-        }
-
         goals.insert(Goal(total_score, p));
-        set(dmap_can_see->val, p.x, p.y, DMAP_IS_GOAL);
     }
 }
 

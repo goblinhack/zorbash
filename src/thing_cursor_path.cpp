@@ -36,6 +36,30 @@ bool Thing::cursor_path_pop_next_and_move (void)
         }
 
         monstp->move_path.erase(monstp->move_path.begin());
+
+        //
+        // If in robot mode, or player mode? jump over obstacles if they
+        // appear in the path
+        //
+        if (will_avoid_threat(future_pos)) {
+            if (monstp->move_path.size()) {
+                auto to = monstp->move_path[0];
+topcon("jump to %d,%d", to.x, to.y);
+game->robot_mode = false;
+                monstp->move_path.erase(monstp->move_path.begin());
+                if (try_to_jump(to)) {
+                    cursor_path_stop();
+                    return false;
+                    return true;
+                } else {
+                    cursor_path_stop();
+                    return false;
+                }
+            } else {
+TOPCON("cannot jump");
+            }
+        }
+
         if (move_no_shove(future_pos)) {
             return true;
         }

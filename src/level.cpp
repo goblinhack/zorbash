@@ -938,6 +938,14 @@ void Level::unset_is_sticky (const int x, const int y)
     decr(_is_sticky, x, y, (uint8_t)1);
 }
 
+uint8_t Level::is_floor (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_floor, p.x, p.y));
+}
+
 uint8_t Level::is_floor (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
