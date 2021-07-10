@@ -874,7 +874,7 @@ void Thing::robot_tick (void)
                 game->tick_begin("move");
                 do_something = true;
             } else {
-                TOPCON("Nothing to do.");
+                TOPCON("Nothing for robot to do.");
             }
         }
         break;

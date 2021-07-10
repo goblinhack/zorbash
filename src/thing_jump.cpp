@@ -444,7 +444,7 @@ void Thing::jump_end (void)
         return;
     }
 
-    topcon("End of jump");
+    log("End of jump");
     is_jumping = false;
 
     set_timestamp_jump_begin(0);
