@@ -130,7 +130,7 @@ bool Thing::try_to_jump (point to)
         level->is_movement_blocking_soft(x, y)) {_
         dbg("No, jump failed, into obstacle");
         if (is_player()) {
-            TOPCON("You can't jump quite into solid objects.");
+            TOPCON("You can't jump into solid objects.");
         }
         return false;
     }

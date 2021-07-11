@@ -221,6 +221,7 @@ _
     if (key->scancode == (SDL_Scancode)game->config.key_load) {
         LOG("Pressed load key");
 _
+        wid_actionbar_robot_mode_off();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
         CON("USERCFG: loading game");
@@ -230,6 +231,7 @@ _
     if (key->scancode == (SDL_Scancode)game->config.key_save) {
         LOG("Pressed save key");
 _
+        wid_actionbar_robot_mode_off();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
         CON("USERCFG: saving the game");
@@ -239,14 +241,15 @@ _
     if (key->scancode == (SDL_Scancode)game->config.key_robot_mode) {
         LOG("Pressed robot mode key");
 _
+        wid_actionbar_robot_mode();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
-        wid_actionbar_robot_mode();
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_help) {
         LOG("Pressed help key");
 _
+        wid_actionbar_robot_mode_off();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
         game->config_keyboard_select();
@@ -255,6 +258,7 @@ _
     if (key->scancode == (SDL_Scancode)game->config.key_quit) {
         LOG("Pressed quit key");
 _
+        wid_actionbar_robot_mode_off();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
         game->quit_select();

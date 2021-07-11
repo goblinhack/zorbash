@@ -73,6 +73,15 @@ _
     wid_actionbar_init();
 }
 
+void wid_actionbar_robot_mode_off (void)
+{_
+    LOG("Actionbar robot");
+_
+    wid_actionbar_close_all_popups();
+    game->robot_mode = false;
+    wid_actionbar_init();
+}
+
 static uint8_t wid_actionbar_robot (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     wid_actionbar_robot_mode();
