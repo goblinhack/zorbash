@@ -45,7 +45,7 @@ void Thing::level_pop (void)
                                                          level->unset_is_deep_water(mx, my); }
     if (i_set_is_dirt)                                 { i_set_is_dirt = false;
                                                          level->unset_is_dirt(mx, my); }
-    if (i_set_is_dry_grass)                           { i_set_is_dry_grass = false;
+    if (i_set_is_dry_grass)                            { i_set_is_dry_grass = false;
                                                          level->unset_is_dry_grass(mx, my); }
     if (i_set_is_enchantstone)                         { i_set_is_enchantstone = false;
                                                          level->unset_is_enchantstone(mx, my); }

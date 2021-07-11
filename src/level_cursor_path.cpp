@@ -301,6 +301,13 @@ void Level::cursor_path_create (void)
     cursor_path_clear();
 
     //
+    // The robot makes its own paths
+    //
+    if (game->robot_mode) {
+        return;
+    }
+
+    //
     // For lasers do not show the cursor (circle) unless the item has a 
     // blast radius
     //

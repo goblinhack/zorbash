@@ -403,7 +403,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_no_tile")                                       { return &Thing::is_no_tile; }
     if (what == "is_player")                                        { return &Thing::is_player; }
     if (what == "is_poison")                                        { return &Thing::is_poison; }
-    if (what == "loves_poison")                              { return &Thing::loves_poison; }
+    if (what == "loves_poison")                                     { return &Thing::loves_poison; }
     if (what == "is_potion")                                        { return &Thing::is_potion; }
     if (what == "is_potion_eater")                                  { return &Thing::is_potion_eater; }
     if (what == "is_projectile")                                    { return &Thing::is_projectile; }

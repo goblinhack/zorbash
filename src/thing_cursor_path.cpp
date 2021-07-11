@@ -57,8 +57,6 @@ bool Thing::cursor_path_pop_next_and_move (void)
                     if (try_to_jump(jump_pos)) {
                         game->tick_begin("player tried a long jump");
                         cursor_path_stop();
-                        game->robot_mode = false;
-                        return false;
                         return true;
                     } else {
                         cursor_path_stop();
@@ -67,8 +65,6 @@ bool Thing::cursor_path_pop_next_and_move (void)
                 } else if (try_to_jump(jump_pos)) {
                     game->tick_begin("player tried to jump");
                     cursor_path_stop();
-                    game->robot_mode = false;
-                    return false;
                     return true;
                 } else {
                     cursor_path_stop();

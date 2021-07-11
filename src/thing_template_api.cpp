@@ -247,7 +247,7 @@ int Tp::is_msg(void) const                                           { return _i
 int Tp::is_no_tile(void) const                                       { return _is_no_tile; }
 int Tp::is_player(void) const                                        { return _is_player; }
 int Tp::is_poison(void) const                                        { return _is_poison; }
-int Tp::loves_poison(void) const                              { return _loves_poison; }
+int Tp::loves_poison(void) const                                     { return _loves_poison; }
 int Tp::is_potion(void) const                                        { return _is_potion; }
 int Tp::is_potion_eater(void) const                                  { return _is_potion_eater; }
 int Tp::is_projectile(void) const                                    { return _is_projectile; }

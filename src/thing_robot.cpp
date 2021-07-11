@@ -640,12 +640,18 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
                         continue;
                     }
 
-                    if (level->is_lit_ever(o)) {
-                        continue;
-                    }
+                    if (level->is_door(o)) {
+                        //
+                        // A locked door is worth investigating
+                        //
+                    } else {
+                        if (level->is_lit_ever(o)) {
+                            continue;
+                        }
 
-                    if (level->is_movement_blocking_hard(o)) {
-                        continue;
+                        if (level->is_movement_blocking_hard(o)) {
+                            continue;
+                        }
                     }
 
                     set(walked, o.x, o.y, true);
@@ -857,6 +863,18 @@ void Thing::robot_tick (void)
         return;
     }
 
+    if (is_changing_level ||
+        is_falling || 
+        is_waiting_to_ascend_dungeon || 
+        is_waiting_to_descend_sewer || 
+        is_waiting_to_descend_dungeon || 
+        is_waiting_to_ascend_sewer || 
+        is_waiting_to_fall || 
+        is_the_grid || 
+        is_jumping) { 
+        return;
+    }
+
     bool left = false;
     bool right = false;
     bool up = false;
@@ -869,10 +887,45 @@ void Thing::robot_tick (void)
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
+            log("Robot idle: create path");
+
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    fpoint at(mid_at.x + dx, mid_at.y + dy);
+
+                    FOR_ALL_THINGS(level, it, at.x, at.y) {
+
+                        if (it->is_door() && !it->is_open) {
+                            if (open_door(it)) {
+                                game->tick_begin("Robot opened a door");
+                                return;
+                            }
+
+                            //
+                            // Try hitting the door
+                            //
+                            if (!do_something) {
+                                do_something = true;
+                                attack = true;
+                            }
+                        }
+
+                        auto items = anything_to_carry_at(at);
+                        if (items.size() == 1) {
+                            for (auto item : items) {
+                                if (try_to_carry(item)) {
+                                    game->tick_begin("Robot collected an item");
+                                    return;
+                                }
+                            }
+                        }
+                    } FOR_ALL_THINGS_END();
+                }
+            }
+
             if (robot_ai_create_path_to_goal()) {
                 monstp->robot_state = ROBOT_STATE_MOVING;
-                game->tick_begin("move");
-                do_something = true;
+                return;
             } else {
                 TOPCON("Nothing for robot to do.");
             }
@@ -881,15 +934,19 @@ void Thing::robot_tick (void)
         case ROBOT_STATE_MOVING:
         {
             if (monstp->move_path.empty()) {
+                log("Robot moving: move finished");
                 monstp->robot_state = ROBOT_STATE_IDLE;
+                return;
+            } else {
+                log("Robot moving");
+                return;
             }
         }
         break;
     }
 
+    log("Robot: do something");
     if (do_something) {
-        if (is_player()) {
-            player_tick(left, right, up, down, attack, wait, jump);
-        }
+        player_tick(left, right, up, down, attack, wait, jump);
     }
 }
