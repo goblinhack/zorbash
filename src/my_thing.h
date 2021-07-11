@@ -1159,6 +1159,7 @@ public:
     uint8_t is_dir_tr(void) const;
     uint8_t is_dir_up(void) const;
     uint8_t is_less_preferred_terrain(point p);
+    void dmap_modify_terrain_cost(point p, uint8_t *d);
     uint8_t is_visible() const;
     uint8_t z_prio (void) const;
     void achieve_goals_in_death();

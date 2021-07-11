@@ -79,8 +79,8 @@ void Game::dead_select (const char *reason)
     LOG("Open dead select: %s", reason);
 
     game->robot_mode = false;
-    wid_actionbar_init();
 
+    wid_actionbar_fini();
     wid_thing_info_fini();
 
     if (wid_dead_window) {

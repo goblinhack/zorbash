@@ -381,6 +381,7 @@ void Game::main_menu_select (void)
     wid_inventory_fini();
     wid_skillbox_fini();
     wid_thing_info_fini();
+    wid_actionbar_fini();
 
     game->wid_thing_info_destroy_immediate();
 

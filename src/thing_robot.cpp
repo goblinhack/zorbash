@@ -19,6 +19,7 @@
 #include "my_ptrcheck.h"
 #include "my_monst.h"
 #include "my_wid_popup.h"
+#include "my_wid_actionbar.h"
 #include "my_player.h"
 
 #define GOAL_ADD(score, msg)                                               \
@@ -78,7 +79,12 @@ _
             robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
             robot_ai_init_can_jump_dmap(minx, miny, maxx, maxy);
             robot_ai_choose_search_goals(walk_goals);
-            robot_ai_choose_jump_goals(jump_goals);
+            if (walk_goals.empty()) {
+                robot_ai_choose_jump_goals(jump_goals);
+                if (!walk_goals.empty()) {
+                topcon("jump goals");
+                }
+            }
         }
     }
 
@@ -109,6 +115,16 @@ _
         float most_preferred = 0;
         bool least_preferred_set = false;
         bool most_preferred_set = false;
+
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                point p(x, y);
+                auto c = getptr(g.dmap->val, x, y);
+                if ((*c < DMAP_IS_PASSABLE) && (*c > DMAP_IS_GOAL)) {
+                    dmap_modify_terrain_cost(p, c);
+                }
+            }
+        }
 
         for (auto& goal : g.goals) {
             auto goal_target = goal.at;
@@ -205,9 +221,9 @@ _
 #endif
             auto astar_end = goal.at;
             auto result = astar_solve(path_debug,
-                                    astar_start,
-                                    astar_end,
-                                    g.dmap);
+                                      astar_start,
+                                      astar_end,
+                                      g.dmap);
             //
             // Unreachable?
             //
@@ -896,9 +912,11 @@ void Thing::robot_tick (void)
                     FOR_ALL_THINGS(level, it, at.x, at.y) {
 
                         if (it->is_door() && !it->is_open) {
-                            if (open_door(it)) {
-                                game->tick_begin("Robot opened a door");
-                                return;
+                            if (get_keys()) {
+                                if (open_door(it)) {
+                                    game->tick_begin("Robot opened a door");
+                                    return;
+                                }
                             }
 
                             //
@@ -907,6 +925,7 @@ void Thing::robot_tick (void)
                             if (!do_something) {
                                 do_something = true;
                                 attack = true;
+                                break;
                             }
                         }
 
@@ -919,15 +938,25 @@ void Thing::robot_tick (void)
                                 }
                             }
                         }
+
+                        if (do_something) {
+                            break;
+                        }
                     } FOR_ALL_THINGS_END();
+                }
+
+                if (do_something) {
+                    break;
                 }
             }
 
-            if (robot_ai_create_path_to_goal()) {
-                monstp->robot_state = ROBOT_STATE_MOVING;
-                return;
-            } else {
-                TOPCON("Nothing for robot to do.");
+            if (!do_something) {
+                if (robot_ai_create_path_to_goal()) {
+                    monstp->robot_state = ROBOT_STATE_MOVING;
+                    return;
+                } else {
+                    TOPCON("Nothing for robot to do.");
+                }
             }
         }
         break;
@@ -936,6 +965,8 @@ void Thing::robot_tick (void)
             if (monstp->move_path.empty()) {
                 log("Robot moving: move finished");
                 monstp->robot_state = ROBOT_STATE_IDLE;
+                game->robot_mode = false;
+                wid_actionbar_init();
                 return;
             } else {
                 log("Robot moving");

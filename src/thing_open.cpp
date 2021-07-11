@@ -39,6 +39,10 @@ void Thing::on_open (void)
 
 bool Thing::open (Thingp it)
 {_
+    if (!is_monst() && !is_player()) {
+        return false;
+    }
+
     if (!it->is_openable()) {
         return false;
     }
