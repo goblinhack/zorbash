@@ -627,16 +627,18 @@ _
         // We hit this path if you click on a door and attack it.
         // However, try to open the door if you have a key.
         //
-        if (it->is_door() && !it->is_open) {
-            auto owner = get_immediate_owner();
-            if (owner) {
-                if (owner->open_door(it)) {
+        if (!game->robot_mode) {
+            if (it->is_door() && !it->is_open) {
+                auto owner = get_immediate_owner();
+                if (owner) {
+                    if (owner->open_door(it)) {
+                        *target_attacked = false;
+                        ret = true;
+                    }
+                } else if (open_door(it)) {
                     *target_attacked = false;
                     ret = true;
                 }
-            } else if (open_door(it)) {
-                *target_attacked = false;
-                ret = true;
             }
         }
 

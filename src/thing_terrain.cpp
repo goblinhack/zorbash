@@ -12,6 +12,29 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
+void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
+{_
+    int pref = *d;
+
+    if (collision_obstacle(p)) {
+        pref++;
+    }
+
+    int heat = level->heatmap(p);
+    if (heat > 4) {
+        if (hates_fire()) {
+            int hate_how_much = hates_fire();
+            pref += hate_how_much + heat;
+        }
+    }
+
+    if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+        pref = DMAP_MAX_LESS_PREFERRED_TERRAIN;
+    }
+
+    *d = (uint8_t) pref;
+}
+
 uint8_t Thing::is_less_preferred_terrain (point p)
 {_
     int pref = 0;

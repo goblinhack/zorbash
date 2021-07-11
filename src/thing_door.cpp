@@ -16,6 +16,10 @@
 
 bool Thing::open_door (Thingp it)
 {_
+    if (!is_monst() && !is_player()) {
+        return false;
+    }
+
     if (is_on_fire()) {
         if (!it->is_on_fire()) {
             if (is_player()) {
