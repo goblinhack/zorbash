@@ -78,23 +78,19 @@ _
         if (is_player()) {
             robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
             robot_ai_init_can_jump_dmap(minx, miny, maxx, maxy);
+
             robot_ai_choose_search_goals(walk_goals);
-            if (walk_goals.empty()) {
-                robot_ai_choose_jump_goals(jump_goals);
-                if (!walk_goals.empty()) {
-                topcon("jump goals");
-                }
-            }
+            robot_ai_choose_jump_goals(jump_goals);
         }
     }
 
     std::list<GoalMap> goalmaps;
 
-    if (!walk_goals.empty()) {
-        goalmaps.push_back(GoalMap{walk_goals, dmap_can_see});
-    }
     if (!jump_goals.empty()) {
         goalmaps.push_back(GoalMap{jump_goals, dmap_can_jump});
+    }
+    if (!walk_goals.empty()) {
+        goalmaps.push_back(GoalMap{walk_goals, dmap_can_see});
     }
 
     //
