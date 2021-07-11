@@ -113,21 +113,23 @@ void Thing::achieve_goals_in_life (void)
         return;
     }
 
-    if (try_to_escape()) {
-        dbg("Try to escape");
-        return;
-    }
+    if (!is_player()) {
+        if (try_to_escape()) {
+            dbg("Try to escape");
+            return;
+        }
 
-    if (is_jumper()) {
-        dbg("Try to jump");
-        if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
-            if (!collision_obstacle(level->player)) {
-                if (try_to_jump_towards_player()) {
-                    return;
-                }
-            } else {
-                if (try_to_jump()) {
-                    return;
+        if (is_jumper()) {
+            if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
+                dbg("Try to randomly jump");
+                if (!collision_obstacle(level->player)) {
+                    if (try_to_jump_towards_player()) {
+                        return;
+                    }
+                } else {
+                    if (try_to_jump()) {
+                        return;
+                    }
                 }
             }
         }
