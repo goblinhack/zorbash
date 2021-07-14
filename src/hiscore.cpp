@@ -36,6 +36,13 @@ void HiScores::add_new_hiscore (Thingp player,
 {_
     std::vector<HiScore>::iterator h = hiscores.begin();
 
+    //
+    // Poor player
+    //
+    if (!player->get_score()) {
+        player->incr_score(1);
+    }
+
     while (h != hiscores.end()) {
         if (player->get_score() > h->score) {
             hiscores.insert(h,
