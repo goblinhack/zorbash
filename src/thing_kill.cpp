@@ -203,10 +203,22 @@ void Thing::kill (Thingp killer, const char *reason)
     // Add to the hiscore table?
     //
     if (is_player()) {
+        //
+        // Poor player
+        //
+        if (!get_score()) {
+            incr_score(1);
+        }
+
         if (game->config.hiscores.is_new_hiscore(this)) {
             TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", 
                    game->config.hiscores.place_str(this));
-            game->config.hiscores.add_new_hiscore(this, title(), reason);
+            if (game->robot_mode) {
+                game->config.hiscores.add_new_hiscore(this, title(),
+                  "ROBOT: " + std::string(reason));
+            } else {
+                game->config.hiscores.add_new_hiscore(this, title(), reason);
+            }
         }
     }
 
