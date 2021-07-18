@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_game.h"
 #include "my_sys.h"
 #include "my_main.h"
 #include "my_globals.h"
@@ -29,7 +30,13 @@ bool Thing::is_enemy (Thingp attacker) const
 void Thing::add_enemy (Thingp attacker)
 {_
     if (unlikely(!is_monst())) {
-        return;
+        if (is_player() && game->robot_mode) {
+            //
+            // Allow the robot to make enemies
+            //
+        } else {
+            return;
+        }
     }
 
     if (unlikely(!attacker->is_monst())) {
@@ -42,6 +49,10 @@ void Thing::add_enemy (Thingp attacker)
 
     if (is_enemy(attacker)) {
         return;
+    }
+
+    if (monstp->enemies.size() > 10) {
+        monstp->enemies.clear();
     }
 
     auto enemy = attacker->id;

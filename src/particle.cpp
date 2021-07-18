@@ -328,7 +328,6 @@ void Level::display_external_particles (void)
 
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
-            CON("        p %d,%d to %d,%d %s dt %f", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str(), dt);
             if (dt > 1) {
                 if (p.id.id) {
                     auto t = thing_find(p.id);

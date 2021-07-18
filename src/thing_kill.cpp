@@ -105,28 +105,6 @@ void Thing::kill (Thingp killer, const char *reason)
         kill_spawned(killer);
     }
 
-    if (is_player()) {
-        TOPCON("RIP: Killed %s.", reason);
-        TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
-        level->map_follow_player = false;
-        game->dead_select(reason);
-    } else if (is_loggable_for_important_stuff()) {
-        dbg("%s is dead, %s", text_The().c_str(), reason);
-        if (killer && (killer != this)) {
-            if (killer->is_player()) {
-                if (is_monst()) {
-                    TOPCON("%s is dead, %s.", text_The().c_str(), reason);
-                } else {
-                    TOPCON("%s is destroyed %s.", text_The().c_str(), reason);
-                }
-
-                killer->score_add(this);
-            } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
-                TOPCON("You hear a distant shriek!");
-            }
-        }
-    }
-
     //
     // Set is_dead after the log message or we print it as dead
     //
@@ -211,13 +189,33 @@ void Thing::kill (Thingp killer, const char *reason)
         }
 
         if (game->config.hiscores.is_new_hiscore(this)) {
-            TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", 
-                   game->config.hiscores.place_str(this));
             if (game->robot_mode) {
-                game->config.hiscores.add_new_hiscore(this, title(),
-                  "ROBOT: " + std::string(reason));
+                TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", 
+                       game->config.hiscores.place_str(this));
             } else {
-                game->config.hiscores.add_new_hiscore(this, title(), reason);
+                TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", 
+                       game->config.hiscores.place_str(this));
+            }
+            game->config.hiscores.add_new_hiscore(this, title(), reason);
+        }
+
+        TOPCON("RIP: Robot killed %s.", reason);
+        TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
+        level->map_follow_player = false;
+        game->dead_select(reason);
+    } else if (is_loggable_for_important_stuff()) {
+        dbg("%s is dead, %s", text_The().c_str(), reason);
+        if (killer && (killer != this)) {
+            if (killer->is_player()) {
+                if (is_monst()) {
+                    TOPCON("%s is dead, %s.", text_The().c_str(), reason);
+                } else {
+                    TOPCON("%s is destroyed %s.", text_The().c_str(), reason);
+                }
+
+                killer->score_add(this);
+            } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
+                TOPCON("You hear a distant shriek!");
             }
         }
     }

@@ -35,12 +35,19 @@ void HiScores::add_new_hiscore (Thingp player,
                                 const std::string &killed_by)
 {_
     std::vector<HiScore>::iterator h = hiscores.begin();
+    std::string hiscore_name;
+
+    if (game->robot_mode) {
+        hiscore_name = std::string("Robot ") + name;
+    } else {
+        hiscore_name = name;
+    }
 
     while (h != hiscores.end()) {
         if (player->get_score() > h->score) {
             hiscores.insert(h,
                 HiScore(
-                    name,
+                    hiscore_name,
                     player->get_score(),
                     (player->level->world_at.z + 1) / 2,
                     killed_by));
