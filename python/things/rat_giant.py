@@ -81,7 +81,7 @@ def tp_init(name, text_name):
     mytp.set_stat_constitution(11)
     mytp.set_stat_defence(12)
     mytp.set_stat_strength(7)
-    mytp.set_text_a_or_an("the")
+    mytp.set_text_a_or_an("a")
     mytp.set_text_description("%%fg=brown$A giant rat. Slightly cute. Likely rabid.")
     mytp.set_text_hits("gores")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)

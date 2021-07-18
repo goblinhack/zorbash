@@ -186,6 +186,14 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
     std::list<Thingp> items;
 
     FOR_ALL_THINGS(level, t, at.x, at.y) {
+        if (t->is_hidden) {
+            continue;
+        }
+
+        if (!t->is_collectable()) {
+            continue;
+        }
+
         if (t->is_dead) {
             dbg("Potential item to carry, no, is dead: %s",
                 t->to_string().c_str());
@@ -194,18 +202,6 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
 
         if (t->get_immediate_owner()) {
             dbg("Potential item to carry, no, has owner: %s",
-                t->to_string().c_str());
-            continue;
-        }
-
-        if (!t->is_collectable()) {
-            dbg("Potential item to carry, no, not collectable: %s",
-                t->to_string().c_str());
-            continue;
-        }
-
-        if (t->is_hidden) {
-            dbg("Potential item to carry, no, is hidden: %s",
                 t->to_string().c_str());
             continue;
         }

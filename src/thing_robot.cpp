@@ -333,7 +333,7 @@ void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
                 // Trace all possible jump paths to see if we can jump over
                 //
                 if (jump_check) {
-                    auto jump_dist = is_jumper_distance();
+                    auto jump_dist = how_far_i_can_jump();
                     for (const auto &jp : game->jump_paths) {
                         point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
                         point jump_end(p.x + jp.end.x, p.y + jp.end.y);
@@ -1101,7 +1101,7 @@ void Thing::robot_tick (void)
             if (monstp->move_path.empty()) {
                 log("Robot moving: move finished");
                 monstp->robot_state = ROBOT_STATE_IDLE;
-                game->robot_mode = false;
+                //game->robot_mode = false;
                 wid_actionbar_init();
                 return;
             } else {

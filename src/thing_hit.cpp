@@ -369,7 +369,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             if (real_hitter == this) {
                 if (bite) {
                     TOPCON("%%fg=yellow$You bite yourself for %d damage!%%fg=reset$",
-                            damage);
+                           damage);
                 } else {
                     if (hitter->is_weapon()) {
                         TOPCON("%%fg=yellow$You hit yourself for %d damage with %s!%%fg=reset$",
@@ -388,8 +388,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             } else {
                 if (bite) {
                     TOPCON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$",
-                            real_hitter->text_The().c_str(),
-                            damage);
+                           real_hitter->text_The().c_str(),
+                           damage);
                 } else {
                     if (hitter->is_weapon()) {
                         TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$",
@@ -424,20 +424,20 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_player()) {
             if (is_alive_monst()) {
                 if (crit) {
-                    TOPCON("%%fg=red$You CRIT hit the %s for %d damage!%%fg=reset$",
-                        text_the().c_str(), damage);
+                    TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$",
+                           text_the().c_str(), damage);
                 } else {
                     if (hitter && (hitter != real_hitter)) {
-                        TOPCON("You hit the %s for %d damage with %s!",
+                        TOPCON("You hit %s for %d damage with %s!",
                                text_the().c_str(), damage,
                                hitter->text_the().c_str());
                     } else {
-                        TOPCON("You hit the %s for %d damage!",
+                        TOPCON("You hit %s for %d damage!",
                                text_the().c_str(), damage);
                     }
                 }
             } else {
-                TOPCON("You hit the %s!", text_the().c_str());
+                TOPCON("You hit %s!", text_the().c_str());
             }
         }
         if (real_hitter->is_fire() ||
