@@ -145,6 +145,7 @@ public:
     void init(void);
     void init_level(point3d);
     void init_levels(void);
+    void init_jump_paths(void);
     void load(int slot);
     void load(void);
     void load_config(void);
@@ -298,6 +299,11 @@ public:
     // When the last tick started. Used for looking at spikes in time.
     //
     timestamp_t        tick_begin_ms {};
+
+    //
+    // Auto generated
+    //
+    std::vector< std::vector <point> > jump_paths;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving

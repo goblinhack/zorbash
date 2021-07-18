@@ -74,7 +74,7 @@ _
     robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
     robot_ai_choose_initial_goals(walk_goals, minx, miny, maxx, maxy);
 
-    if (walk_goals.empty()) {
+    if (0 && walk_goals.empty()) {
         if (is_player()) {
             robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
             robot_ai_init_can_jump_dmap(minx, miny, maxx, maxy);
@@ -278,6 +278,7 @@ _
 //
 void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
 {_
+    std::array< std::array<uint8_t, MAP_WIDTH>, MAP_HEIGHT> can_jump = {};
     point start((int)mid_at.x, (int)mid_at.y);
     auto dmap_can_see = get_dmap_can_see();
 
@@ -288,16 +289,143 @@ void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
             auto Y = y - miny;
 
             if (is_player()) {
-                if (!level->is_lit_currently(X, Y)) {
+                if (!level->is_lit_currently(p)) {
                     set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
                     continue;
                 }
             }
 
-            if (ai_obstacle_for_me(p)) {
-                set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
-            } else {
+            if (!ai_obstacle_for_me(p)) {
                 set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
+                continue;
+            }
+
+            if (is_jumper()) {
+                bool jump_check = false;
+                if (level->is_chasm(p)) {
+                    jump_check = true;
+                }
+
+                int heat = level->heatmap(p);
+                if (heat > 4) {
+                    if (hates_fire()) {
+                        jump_check = true;
+                    }
+                }
+
+                if (level->is_shallow_water(p) || level->is_deep_water(p)) {
+                    if (hates_water()) {
+                        jump_check = true;
+                    }
+                }
+
+                if (level->is_acid(p)) {
+                    if (hates_acid()) {
+                        jump_check = true;
+                    }
+                }
+
+                if (level->is_chasm(p)) {
+                    jump_check = true;
+CON("is chasm");
+                }
+
+                //
+                // Can we pass this point by jumping through this center point?
+                //
+                if (jump_check) {
+                    auto jump_dist = is_jumper_distance();
+
+                    for (auto dx = -jump_dist; dx <= jump_dist; dx++) {
+                        for (auto dy = -jump_dist; dy <= jump_dist; dy++) {
+                            point jump_start(p.x - dx, p.y + dy);
+                            point jump_end(p.x + dx, p.y - dy);
+
+                            if (level->is_oob(jump_start)) {
+                                continue;
+                            }
+
+
+                            if (level->is_oob(jump_end)) {
+                                continue;
+                            }
+
+                            if (ai_obstacle_for_me(jump_start)) {
+                                continue;
+                            }
+
+                            if (ai_obstacle_for_me(jump_end)) {
+                                continue;
+                            }
+
+                            if (!level->is_lit_currently(jump_start)) {
+                                continue;
+                            }
+
+                            if (!level->is_lit_currently(jump_end)) {
+                                continue;
+                            }
+
+                            auto dist = DISTANCE(jump_start.x, jump_start.y,
+                                                 jump_end.x, jump_end.y);
+                            if (dist <= 1) {
+                                continue;
+                            }
+
+                            if (dist > jump_dist) {
+CON("%d %d can too far %d %d dist %f", p.x, p.y, dx, dy, dist);
+                                continue;
+                            }
+CON("%d %d can jump over %d %d (X %d Y %d)", p.x, p.y, dx, dy, X, Y);
+
+                            //
+                            // Draw a solid line with no diagonals between the
+                            // jump start and end.
+                            //
+                            auto j = jump_start;
+CON("jump start %d %d", jump_start.x, jump_start.y);
+CON("jump end   %d %d", jump_end.x, jump_end.y);
+                            for (;;) {
+                                if (level->is_movement_blocking_hard(j.x, j.y)) {
+                                    break;
+                                }
+
+CON("jump path  (X %d Y %d)", j.x - minx, j.y - miny);
+                                set(can_jump, j.x - minx, j.y - miny, DMAP_IS_PASSABLE);
+                                if (j.x < jump_end.x) {
+                                    j.x++;
+                                    continue;
+                                }
+                                if (j.x > jump_end.x) {
+                                    j.x--;
+                                    continue;
+                                }
+                                if (j.y < jump_end.y) {
+                                    j.y++;
+                                    continue;
+                                }
+                                if (j.y > jump_end.y) {
+                                    j.y--;
+                                    continue;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+            continue;
+        }
+    }
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            auto X = x - minx;
+            auto Y = y - miny;
+            if (get(can_jump, X, Y)) {
+                set(dmap_can_see->val, X, Y, (uint8_t)0);
             }
         }
     }
@@ -306,7 +434,10 @@ void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
     // We want to find how far everything is from us.
     //
     set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
+    dmap_print(dmap_can_see);
     dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
+    dmap_print(dmap_can_see);
+    DIE("xxx");
 }
 
 //
