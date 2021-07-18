@@ -74,13 +74,13 @@ _
     robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
     robot_ai_choose_initial_goals(walk_goals, minx, miny, maxx, maxy);
 
-    if (0 && walk_goals.empty()) {
+    if (walk_goals.empty()) {
         if (is_player()) {
             robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
-            robot_ai_init_can_jump_dmap(minx, miny, maxx, maxy);
+            if (0) robot_ai_init_can_jump_dmap(minx, miny, maxx, maxy);
 
             robot_ai_choose_search_goals(walk_goals);
-            robot_ai_choose_jump_goals(jump_goals);
+            if (0) robot_ai_choose_jump_goals(jump_goals);
         }
     }
 
@@ -327,88 +327,83 @@ void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
 
                 if (level->is_chasm(p)) {
                     jump_check = true;
-CON("is chasm");
                 }
 
                 //
-                // Can we pass this point by jumping through this center point?
+                // Trace all possible jump paths to see if we can jump over
                 //
                 if (jump_check) {
                     auto jump_dist = is_jumper_distance();
+                    for (const auto &jp : game->jump_paths) {
+                        point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
+                        point jump_end(p.x + jp.end.x, p.y + jp.end.y);
 
-                    for (auto dx = -jump_dist; dx <= jump_dist; dx++) {
-                        for (auto dy = -jump_dist; dy <= jump_dist; dy++) {
-                            point jump_start(p.x - dx, p.y + dy);
-                            point jump_end(p.x + dx, p.y - dy);
+                        if (level->is_oob(jump_begin)) {
+                            continue;
+                        }
 
-                            if (level->is_oob(jump_start)) {
+                        if (level->is_oob(jump_end)) {
+                            continue;
+                        }
+
+                        //
+                        // No jump begin/end from a chasm for example
+                        //
+                        if (ai_obstacle_for_me(jump_begin)) {
+                            continue;
+                        }
+
+                        if (ai_obstacle_for_me(jump_end)) {
+                            continue;
+                        }
+
+                        //
+                        // Must be able to see the begin/end.
+                        //
+                        if (!level->is_lit_currently(jump_begin)) {
+                            continue;
+                        }
+
+                        if (!level->is_lit_currently(jump_end)) {
+                            continue;
+                        }
+
+                        //
+                        // Too close?
+                        //
+                        float dist = DISTANCE(jump_begin.x, jump_begin.y,
+                                              jump_end.x, jump_end.y);
+                        if (dist > jump_dist + 1) {
+                            continue;
+                        }
+
+                        //
+                        // Check we really need to jump over all things in
+                        // the path.
+                        //
+                        // Also check for walls. Is it fair to jump over
+                        // walls?
+                        //
+                        bool jump = true;
+                        for (const auto &jump_over : jp.path) {
+                            auto j = jump_over + p;
+                            if (j == p) {
                                 continue;
                             }
-
-
-                            if (level->is_oob(jump_end)) {
-                                continue;
-                            }
-
-                            if (ai_obstacle_for_me(jump_start)) {
-                                continue;
-                            }
-
-                            if (ai_obstacle_for_me(jump_end)) {
-                                continue;
-                            }
-
-                            if (!level->is_lit_currently(jump_start)) {
-                                continue;
-                            }
-
-                            if (!level->is_lit_currently(jump_end)) {
-                                continue;
-                            }
-
-                            auto dist = DISTANCE(jump_start.x, jump_start.y,
-                                                 jump_end.x, jump_end.y);
-                            if (dist <= 1) {
-                                continue;
-                            }
-
-                            if (dist > jump_dist) {
-CON("%d %d can too far %d %d dist %f", p.x, p.y, dx, dy, dist);
-                                continue;
-                            }
-CON("%d %d can jump over %d %d (X %d Y %d)", p.x, p.y, dx, dy, X, Y);
-
-                            //
-                            // Draw a solid line with no diagonals between the
-                            // jump start and end.
-                            //
-                            auto j = jump_start;
-CON("jump start %d %d", jump_start.x, jump_start.y);
-CON("jump end   %d %d", jump_end.x, jump_end.y);
-                            for (;;) {
-                                if (level->is_movement_blocking_hard(j.x, j.y)) {
-                                    break;
-                                }
-
-CON("jump path  (X %d Y %d)", j.x - minx, j.y - miny);
-                                set(can_jump, j.x - minx, j.y - miny, DMAP_IS_PASSABLE);
-                                if (j.x < jump_end.x) {
-                                    j.x++;
-                                    continue;
-                                }
-                                if (j.x > jump_end.x) {
-                                    j.x--;
-                                    continue;
-                                }
-                                if (j.y < jump_end.y) {
-                                    j.y++;
-                                    continue;
-                                }
-                                if (j.y > jump_end.y) {
-                                    j.y--;
-                                    continue;
-                                }
+                            if (level->is_movement_blocking_hard(j)) {
+                                jump = false;
                                 break;
+                            }
+                            if (!ai_obstacle_for_me(j)) {
+                                jump = false;
+                                break;
+                            }
+                        }
+
+                        if (jump) {
+                            for (const auto &jump_over : jp.path) {
+                                auto j = jump_over + p;
+                                set(can_jump, j.x - minx, j.y - miny, DMAP_IS_PASSABLE);
                             }
                         }
                     }
@@ -437,7 +432,6 @@ CON("jump path  (X %d Y %d)", j.x - minx, j.y - miny);
     dmap_print(dmap_can_see);
     dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
     dmap_print(dmap_can_see);
-    DIE("xxx");
 }
 
 //
@@ -519,18 +513,12 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 it->is_falling || 
                 it->is_jumping) { 
                 if (unlikely(g_opt_debug4)) {
-                    if (it->is_loggable_for_unimportant_stuff()) {
-                        dbg2(" ignore %s", it->to_string().c_str());
-                    }
+                    dbg2(" ignore %s", it->to_string().c_str());
                 }
                 continue; 
             }
 
-            if (unlikely(g_opt_debug4)) {
-                if (it->is_loggable_for_unimportant_stuff()) {
-                    dbg2(" consider %s", it->to_string().c_str());
-                }
-            }
+            dbg2(" consider %s", it->to_string().c_str());
 
             //
             // Worse terrain, less preferred. Higher score, more preferred.
@@ -565,6 +553,27 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         GOAL_ADD(it_health / 2, "eat-food");
                         got_one_this_tile = true;
                     }
+                }
+            }
+
+            if (is_treasure_collector()) {
+                if (it->is_treasure()) {
+                    auto score = worth_collecting(it);
+                    if (score) {
+                        GOAL_ADD(score, "collect-treasure");
+                        got_one_this_tile = true;
+                    }
+                }
+            }
+
+            //
+            // Need more work before monsts can collect keys
+            // as they will be auto collected.
+            //
+            if (is_key_collector()) {
+                if (it->is_key()) {
+                    GOAL_ADD(1, "collect-key");
+                    got_one_this_tile = true;
                 }
             }
 

@@ -119,6 +119,64 @@ bool Thing::bag_add (Thingp item)
     return false;
 }
 
+bool Thing::bag_add_test (Thingp item)
+{_
+    dbg3("Bag: add test %s", item->to_string().c_str());
+
+    if (!item->is_bag_item()) {
+        dbg3("Bag: add %s; no, is not an item", item->to_string().c_str());
+        return false;
+    }
+
+    //
+    // Food might not have a monst pointer
+    //
+    item->new_monst();
+
+    if (item->monstp->preferred_bag_position != point(-1, -1)) {
+        dbg3("Bag: add test %s at preferred position", item->to_string().c_str());
+        auto at = item->monstp->preferred_bag_position;
+	if (bag_can_place_at(item, at)) {
+            return true;
+	}
+    }
+
+    auto bw = capacity_width();
+    auto bh = capacity_height();
+    auto w = item->item_width();
+    auto h = item->item_height();
+    dbg3("Bag: capacity %dx%d item %dx%d", bw, bh, w, h);
+
+    if ((w < bw) && (h < bh)) {
+        int tries = 0;
+
+        dbg3("Bag: try to add %s randomly", item->to_string().c_str());
+        while (tries < bw * bh) {
+            tries++;
+            auto x = random_range(0, bw - w);
+            auto y = random_range(0, bh - h);
+            point at(x, y);
+
+            if (bag_can_place_at(item, at)) {
+                return true;
+            }
+        }
+    }
+
+    dbg3("Bag: add test %s last chance", item->to_string().c_str());
+    for (auto x = 0; x <= bw - w; x++) {
+        for (auto y = 0; y <= bh - h; y++) {
+	    point at(x, y);
+	    if (bag_can_place_at(item, at)) {
+                return true;
+	    }
+	}
+    }
+
+    dbg3("Bag: add test %s failed", item->to_string().c_str());
+    return false;
+}
+
 bool Thing::bag_compress (void)
 {_
     auto bag = get_bag();

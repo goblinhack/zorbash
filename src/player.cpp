@@ -301,7 +301,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                 int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
                 if (time_left > 10) {
                     if (unlikely(g_opt_debug3)) {
-                        t->log("Player move delayed due to player moving (%d ms left)",
+                        t->log("Player move delayed due to monst moving (%d ms left)",
                                t->get_timestamp_move_end() - time_get_time_ms_cached());
                     }
                     wait = true;

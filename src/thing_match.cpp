@@ -229,9 +229,9 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr66() &&                                         (what == "is_rrr66"))                                         { return true; }
     if (is_rrr67() &&                                         (what == "is_rrr67"))                                         { return true; }
     if (is_rrr68() &&                                         (what == "is_rrr68"))                                         { return true; }
-    if (is_rrr69() &&                                         (what == "is_rrr69"))                                         { return true; }
+    if (is_key_collector() &&                                         (what == "is_key_collector"))                                         { return true; }
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
-    if (is_rrr70() &&                                         (what == "is_rrr70"))                                         { return true; }
+    if (is_treasure_collector() &&                                         (what == "is_treasure_collector"))                                         { return true; }
     if (is_item() &&                                         (what == "is_item"))                                         { return true; }
     if (is_bag_item_container() &&                            (what == "is_bag_item_container"))                                         { return true; }
     if (is_treasure_chest() &&                                (what == "is_treasure_chest"))                                         { return true; }
@@ -491,9 +491,9 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr66")                                         { return &Thing::is_rrr66; }
     if (what == "is_rrr67")                                         { return &Thing::is_rrr67; }
     if (what == "is_rrr68")                                         { return &Thing::is_rrr68; }
-    if (what == "is_rrr69")                                         { return &Thing::is_rrr69; }
+    if (what == "is_key_collector")                                         { return &Thing::is_key_collector; }
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
-    if (what == "is_rrr70")                                         { return &Thing::is_rrr70; }
+    if (what == "is_treasure_collector")                                         { return &Thing::is_treasure_collector; }
     if (what == "is_item")                                         { return &Thing::is_item; }
     if (what == "is_bag_item_container")                            { return &Thing::is_bag_item_container; }
     if (what == "is_treasure_chest")                                { return &Thing::is_treasure_chest; }

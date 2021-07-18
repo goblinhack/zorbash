@@ -274,9 +274,9 @@ int Thing::is_rrr65(void) const                                         {_ retur
 int Thing::is_rrr66(void) const                                         {_ return (tp()->is_rrr66()); }
 int Thing::is_rrr67(void) const                                         {_ return (tp()->is_rrr67()); }
 int Thing::is_rrr68(void) const                                         {_ return (tp()->is_rrr68()); }
-int Thing::is_rrr69(void) const                                         {_ return (tp()->is_rrr69()); }
+int Thing::is_key_collector(void) const                                         {_ return (tp()->is_key_collector()); }
 int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
-int Thing::is_rrr70(void) const                                         {_ return (tp()->is_rrr70()); }
+int Thing::is_treasure_collector(void) const                                         {_ return (tp()->is_treasure_collector()); }
 int Thing::is_item(void) const                                         {_ return (tp()->is_item()); }
 int Thing::is_bag_item_container(void) const                            {_ return (tp()->is_bag_item_container()); }
 int Thing::is_treasure_chest(void) const                                {_ return (tp()->is_treasure_chest()); }

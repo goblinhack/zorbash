@@ -26,8 +26,6 @@ def on_fall(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_item_height(4)
-    mytp.set_item_width(4)
     mytp.set_blast_max_radius(2)
     mytp.set_blast_min_radius(0)
     mytp.set_charge_count(3)
@@ -38,13 +36,14 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
+    mytp.set_gold_value_dice("500")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_active(True) # So it can interact with fire
+    mytp.set_is_bag_item(True)
     mytp.set_is_collectable(True)
     mytp.set_is_combustible(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)
-    mytp.set_is_bag_item(True)
     mytp.set_is_item(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
@@ -55,6 +54,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_usable(True)
     mytp.set_is_very_combustible(True)
     mytp.set_is_wand(True)
+    mytp.set_item_height(4)
+    mytp.set_item_width(4)
     mytp.set_laser_name("laser_descent")
     mytp.set_long_text_description("This most dangerous wand can transport its target to the next level by the most efficacious means possible...")
     mytp.set_normal_placement_rules(True)

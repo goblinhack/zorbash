@@ -5,6 +5,7 @@
 
 #include "my_sys.h"
 #include "my_game.h"
+#include "my_thing.h"
 #include "my_dungeon.h"
 
 void Game::tick_begin (const std::string &why)
@@ -14,7 +15,22 @@ void Game::tick_begin (const std::string &why)
     //
     game->tick_current++;
     CON("-");
-    CON("Game tick %d begin (%s)", game->tick_current, why.c_str());
+
+    auto level = game->level;
+    if (level) {
+        auto player = level->player;
+        if (player) {
+            CON("Game tick %d begin (%s): %s",
+                game->tick_current, why.c_str(),
+                player->to_string().c_str());
+        } else {
+            CON("Game tick %d begin (%s): %s",
+                game->tick_current, why.c_str(),
+                level->to_string().c_str());
+        }
+    } else {
+        CON("Game tick %d begin (%s)", game->tick_current, why.c_str());
+    }
 
     game->tick_begin_ms = time_get_time_ms_cached();
 
@@ -32,7 +48,24 @@ void Game::tick_end (void)
         return;
     }
     game->tick_completed = game->tick_current;
-    CON("Game tick %d end, duration %d", 
-        game->tick_current, 
-        time_get_time_ms_cached() - game->tick_begin_ms);
+
+    auto level = game->level;
+    if (level) {
+        auto player = level->player;
+        if (player) {
+            CON("Game tick %d end, duration %d ms: %s", 
+                game->tick_current, 
+                time_get_time_ms_cached() - game->tick_begin_ms,
+                player->to_string().c_str());
+        } else {
+            CON("Game tick %d end, duration %d ms: %s", 
+                game->tick_current, 
+                time_get_time_ms_cached() - game->tick_begin_ms,
+                level->to_string().c_str());
+        }
+    } else {
+        CON("Game tick %d end, duration %d ms", 
+            game->tick_current, 
+            time_get_time_ms_cached() - game->tick_begin_ms);
+    }
 }

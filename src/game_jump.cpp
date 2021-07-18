@@ -145,7 +145,7 @@ static std::string jump_data [] = {
 
 void Game::init_jump_paths()
 {
-    bool debug = true;
+    bool debug = false;
 
     jump_paths.clear();
 
@@ -212,17 +212,23 @@ void Game::init_jump_paths()
             DIE("bad derived jump data 2");
         }
 
+        //
+        // Path must have a start and end.
+        //
         std::size_t start = s.find("s");
         if (start == std::string::npos) {
             DIE("no start jump char");
         }
+
         std::size_t end = s.find("e");
         if (end == std::string::npos) {
             DIE("no end jump char");
         }
 
-        std::vector<char> cs = { 's', '1', '2', '3', 'e' };
-
+        //
+        // Copy the current jump path to an array we can walk to get
+        // the jump offsets
+        //
         std::array< std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp {};
         int x = 0;
         int y = 0;
@@ -234,20 +240,37 @@ void Game::init_jump_paths()
             }
         }
 
+        //
+        // Everything is offset from the center tile which will be
+        // the onbstacle.
+        //
         auto offset = (int) std::floor(JUMP_WIDTH / 2);
 
-        std::vector<point> ps;
+        //
+        // Find each of the symbols in the path and build the jump path.
+        //
+        Game::JumpPath jp;
+        std::vector<char> cs = { 's', '1', '2', '3', 'e' };
+
         for (auto c : cs) {
             for (auto y = 0; y < JUMP_WIDTH; y++) {
                 for (auto x = 0; x < JUMP_WIDTH; x++) {
-                    if (get(tmp, x, y) == c) {
-                        point p(point(x - offset, y - offset));
-                        ps.push_back(p);
-                        if (debug) {
-                            std::cout << "(" << p.x << "," << p.y << ")" << " ";
-                        }
-                        goto next;
+                    auto ch = get(tmp, x, y);
+                    if (ch != c) {
+                        continue;
                     }
+                    point p(point(x - offset, y - offset));
+                    if (debug) {
+                        std::cout << "(" << p.x << "," << p.y << ")" << " ";
+                    }
+                    if (ch == 's') {
+                        jp.begin = p;
+                    } else if (ch == 'e') {
+                        jp.end = p;
+                    } else {
+                        jp.path.push_back(p);
+                    }
+                    goto next;
                 }
             }
 next:
@@ -258,6 +281,6 @@ next:
             std::cout << std::endl;
         }
 
-        jump_paths.push_back(ps);
+        jump_paths.push_back(jp);
     }
 }

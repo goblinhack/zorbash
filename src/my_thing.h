@@ -205,6 +205,7 @@ public:
     bool attack(fpoint future_pos);
     bool attack(Thingp it);
     bool bag_add(Thingp);
+    bool bag_add_test(Thingp);
     bool bag_can_place_at(Thingp item, point pos);
     bool bag_compress(void);
     bool bag_contains(Thingp item);
@@ -318,6 +319,7 @@ public:
     bool will_avoid_threat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
     bool worth_eating(const Thingp it);
+    int worth_collecting(const Thingp it);
     const Dice& get_damage_bite_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;
@@ -842,9 +844,9 @@ public:
     int is_rrr66(void) const;
     int is_rrr67(void) const;
     int is_rrr68(void) const;
-    int is_rrr69(void) const;
+    int is_key_collector(void) const;
     int is_rrr6(void) const;
-    int is_rrr70(void) const;
+    int is_treasure_collector(void) const;
     int is_item(void) const;
     int is_bag_item_container(void) const;
     int is_treasure_chest(void) const;

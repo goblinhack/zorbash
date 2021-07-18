@@ -278,6 +278,7 @@ have_dungeon_start:
                             t->carry(b);
                         }
 
+#if 0
                         {
                             auto b = thing_new("chest1", fpoint(x, y));
                             t->carry(b);
@@ -318,7 +319,6 @@ have_dungeon_start:
                             t->carry(W);
                         }
 
-#if 0
                         {
                             auto W = thing_new("wand_lightning", fpoint(x, y));
                             t->carry(W);
