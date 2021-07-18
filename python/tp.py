@@ -436,11 +436,11 @@ class Tp:
     def set_is_rrr68(self, value):
         zx.tp_set_is_rrr68(self, value)
 
-    def set_is_rrr69(self, value):
-        zx.tp_set_is_rrr69(self, value)
+    def set_is_key_collector(self, value):
+        zx.tp_set_is_key_collector(self, value)
 
-    def set_is_rrr70(self, value):
-        zx.tp_set_is_rrr70(self, value)
+    def set_is_treasure_collector(self, value):
+        zx.tp_set_is_treasure_collector(self, value)
 
     def set_is_item(self, value):
         zx.tp_set_is_item(self, value)

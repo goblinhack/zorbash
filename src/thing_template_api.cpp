@@ -342,8 +342,8 @@ int Tp::is_rrr65(void) const                                         { return _i
 int Tp::is_rrr66(void) const                                         { return _is_rrr66; }
 int Tp::is_rrr67(void) const                                         { return _is_rrr67; }
 int Tp::is_rrr68(void) const                                         { return _is_rrr68; }
-int Tp::is_rrr69(void) const                                         { return _is_rrr69; }
-int Tp::is_rrr70(void) const                                         { return _is_rrr70; }
+int Tp::is_key_collector(void) const                                         { return _is_key_collector; }
+int Tp::is_treasure_collector(void) const                                         { return _is_treasure_collector; }
 int Tp::is_item(void) const                                         { return _is_item; }
 int Tp::is_bag_item_container(void) const                            { return _is_bag_item_container; }
 int Tp::is_treasure_chest(void) const                                { return _is_treasure_chest; }
@@ -658,9 +658,9 @@ void Tp::set_is_rrr65(int v)                                         { _is_rrr65
 void Tp::set_is_rrr66(int v)                                         { _is_rrr66 = v; }
 void Tp::set_is_rrr67(int v)                                         { _is_rrr67 = v; }
 void Tp::set_is_rrr68(int v)                                         { _is_rrr68 = v; }
-void Tp::set_is_rrr69(int v)                                         { _is_rrr69 = v; }
+void Tp::set_is_key_collector(int v)                                         { _is_key_collector = v; }
 void Tp::set_is_rrr7(int v)                                          { _is_rrr7 = v; }
-void Tp::set_is_rrr70(int v)                                         { _is_rrr70 = v; }
+void Tp::set_is_treasure_collector(int v)                                         { _is_treasure_collector = v; }
 void Tp::set_is_item(int v)                                         { _is_item = v; }
 void Tp::set_is_bag_item_container(int v)                            { _is_bag_item_container = v; }
 void Tp::set_is_treasure_chest(int v)                                { _is_treasure_chest = v; }

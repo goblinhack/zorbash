@@ -303,7 +303,13 @@ public:
     //
     // Auto generated
     //
-    std::vector< std::vector <point> > jump_paths;
+    struct JumpPath {
+public:
+        point begin;
+        point end;
+        std::vector<point> path;
+    };
+    std::vector< JumpPath > jump_paths;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving

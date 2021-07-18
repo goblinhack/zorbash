@@ -290,8 +290,8 @@ private:
     int _is_rrr66 {};
     int _is_rrr67 {};
     int _is_rrr68 {};
-    int _is_rrr69 {};
-    int _is_rrr70 {};
+    int _is_key_collector {};
+    int _is_treasure_collector {};
     int _is_item {};
     int _is_bag_item_container {};
     int _is_treasure_chest {};
@@ -757,9 +757,9 @@ public:
     int is_rrr66(void) const;
     int is_rrr67(void) const;
     int is_rrr68(void) const;
-    int is_rrr69(void) const;
+    int is_key_collector(void) const;
     int is_rrr7(void) const;
-    int is_rrr70(void) const;
+    int is_treasure_collector(void) const;
     int is_item(void) const;
     int is_bag_item_container(void) const;
     int is_treasure_chest(void) const;
@@ -1088,9 +1088,9 @@ public:
     void set_is_rrr66(int);
     void set_is_rrr67(int);
     void set_is_rrr68(int);
-    void set_is_rrr69(int);
+    void set_is_key_collector(int);
     void set_is_rrr7(int);
-    void set_is_rrr70(int);
+    void set_is_treasure_collector(int);
     void set_is_item(int);
     void set_is_bag_item_container(int);
     void set_is_treasure_chest(int);

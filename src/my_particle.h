@@ -60,6 +60,7 @@ public:
     class Tile* tile {};
     bool hflip {};
     bool make_visible_at_end {};
+    bool removed {};
     int height {};
 } Particle;
 

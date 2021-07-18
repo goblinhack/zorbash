@@ -110,6 +110,10 @@ void Level::display_internal_particles (void)
     auto e = std::remove_if(all_internal_particles.begin(),
                             all_internal_particles.end(),
         [=, this] (Particle &p) {
+            if (p.removed) {
+                return true;
+            }
+
             //
             // Different curve height for each particle
             //
@@ -298,6 +302,10 @@ void Level::display_external_particles (void)
     auto e = std::remove_if(all_external_particles.begin(),
                             all_external_particles.end(),
         [=, this] (Particle &p) {
+            if (p.removed) {
+                return true;
+            }
+
             //
             // Different curve height for each particle
             //
@@ -320,15 +328,18 @@ void Level::display_external_particles (void)
 
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
+            CON("        p %d,%d to %d,%d %s dt %f", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str(), dt);
             if (dt > 1) {
                 if (p.id.id) {
                     auto t = thing_find(p.id);
                     if (t) {
+                        t->log("Particle dt %f", dt);
                         if (p.make_visible_at_end) {
                             if (!t->get_immediate_owner_id().ok()) {
                                 t->visible();
                             }
                         }
+                        t->log("Particle end");
                         t->jump_end();
                         t->has_external_particle = false;
                     }
@@ -397,6 +408,12 @@ void Level::display_external_particles (void)
     all_external_particles.erase(e, all_external_particles.end());
 
     blit_flush();
+
+#if 0
+    for (auto p : all_external_particles) {
+        CON("end ext p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    }
+#endif
 }
 
 bool Thing::particle_anim_exists (void)
@@ -406,49 +423,34 @@ bool Thing::particle_anim_exists (void)
 
 void Thing::delete_particle (void)
 {_
+    //
+    // Don't remove immediately in case we are walking the particles.
+    //
     if (has_internal_particle) {
         log("Delete particle: has internal particle");
-        auto e = std::remove_if(level->all_internal_particles.begin(),
-                                level->all_internal_particles.end(),
-            [=, this] (Particle &p) { 
-                if (p.id == id) {
-                    log("Remove particle");
-                    return true;
-                } else {
-                    return false;
-                }
+        for (auto &p : level->all_internal_particles) {
+            if (p.id == id) {
+                log("Remove particle");
+                p.id = NoThingId;
+                p.removed = true;
+                break;
             }
-        );
-
-        if (e == level->all_internal_particles.end()) {
-            err("Delete internal particle failed");
         }
 
-        level->all_internal_particles.erase(e, 
-                                            level->all_internal_particles.end());
         has_internal_particle = false;
     }
 
     if (has_external_particle) {
         log("Delete particle: has external particle");
-        auto e = std::remove_if(level->all_external_particles.begin(),
-                                level->all_external_particles.end(),
-            [=, this] (Particle &p) { 
-                if (p.id == id) {
-                    log("Remove particle");
-                    return true;
-                } else {
-                    return false;
-                }
+        for (auto &p : level->all_external_particles) {
+            if (p.id == id) {
+                log("Remove particle");
+                p.id = NoThingId;
+                p.removed = true;
+                break;
             }
-        );
-
-        if (e == level->all_external_particles.end()) {
-            err("Delete internal particle failed");
         }
 
-        level->all_external_particles.erase(e, 
-                                            level->all_external_particles.end());
         has_external_particle = false;
     }
 }

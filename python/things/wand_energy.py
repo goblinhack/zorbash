@@ -82,6 +82,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_use_do("wand_energy.on_use()")
     mytp.set_range_max(7)
     mytp.set_text_a_or_an("a")
+    mytp.set_gold_value_dice("200")
     mytp.set_text_description("%%fg=yellow$A wand of energy.")
     mytp.set_text_enchant("+5 charges, +1 damage")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)

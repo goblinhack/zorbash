@@ -8,7 +8,6 @@ def tp_init(name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(False)
-    mytp.set_is_active(True)
     mytp.set_is_cursor(True)
     mytp.set_is_floating(True)
     mytp.set_is_moveable(True)

@@ -173,6 +173,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_barrel.o                \
     $(OBJDIR)/thing_bounce.o                \
     $(OBJDIR)/thing_brazier.o               \
+    $(OBJDIR)/thing_collect.o               \
     $(OBJDIR)/thing_carry.o                 \
     $(OBJDIR)/thing_chasm.o                 \
     $(OBJDIR)/thing_collision.o             \
