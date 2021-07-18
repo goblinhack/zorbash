@@ -73,3 +73,61 @@ std::string Thing::to_string (void) const
                                mid_at.x, mid_at.y));
     }
 }
+
+std::string Thing::to_short_string (void) const
+{_
+    auto tpp = tp();
+    verify(this);
+
+    if (unlikely(!level)) {
+        return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s @%g,%g)",
+                               is_dead ? "/dead" : "",
+                               is_on_fire() ? "/onfire" : "",
+                               is_hidden ? "/hidden" : "",
+                               is_jumping ? "/jumping" : "",
+                               is_falling ? "/falling" : "",
+                               mid_at.x, mid_at.y));
+    }
+
+    if (unlikely(!tpp)) {_
+        return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s @%g,%g)",
+                               level->world_at.x,
+                               level->world_at.y,
+                               level->world_at.z,
+                               is_dead ? "/dead" : "",
+                               is_on_fire() ? "/onfire" : "",
+                               is_hidden ? "/hidden" : "",
+                               is_jumping ? "/jumping" : "",
+                               is_falling ? "/falling" : "",
+                               mid_at.x, mid_at.y));
+    } else if (get_health_max() || is_active() || is_interesting()) {_
+        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
+                               level->world_at.x,
+                               level->world_at.y,
+                               level->world_at.z,
+                               tpp->name().c_str(),
+                               is_dead                       ? "/dead" : "",
+                               is_on_fire()                  ? "/onfire" : "",
+                               is_hidden                     ? "/hidden" : "",
+                               is_jumping                    ? "/jumping" : "",
+                               is_falling                    ? "/falling" : "",
+                               is_changing_level             ? "/chg-level" : "",
+                               is_waiting_to_ascend_dungeon  ? "/asc-dung" : "",
+                               is_waiting_to_descend_dungeon ? "/des-dung" : "",
+                               is_waiting_to_descend_sewer   ? "/des-sewer" : "",
+                               is_waiting_to_ascend_sewer    ? "/asc-sewer" : "",
+                               mid_at.x, mid_at.y));
+    } else {_
+        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s @%g,%g)",
+                               level->world_at.x,
+                               level->world_at.y,
+                               level->world_at.z,
+                               id, tpp->name().c_str(),
+                               is_dead ? "/dead" : "",
+                               is_on_fire() ? "/onfire" : "",
+                               is_hidden ? "/hidden" : "",
+                               is_jumping ? "/jumping" : "",
+                               is_falling ? "/falling" : "",
+                               mid_at.x, mid_at.y));
+    }
+}

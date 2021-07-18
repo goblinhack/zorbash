@@ -22,7 +22,7 @@ void Game::tick_begin (const std::string &why)
         if (player) {
             CON("Game tick %d begin (%s): %s",
                 game->tick_current, why.c_str(),
-                player->to_string().c_str());
+                player->to_short_string().c_str());
         } else {
             CON("Game tick %d begin (%s): %s",
                 game->tick_current, why.c_str(),
@@ -56,7 +56,7 @@ void Game::tick_end (void)
             CON("Game tick %d end, duration %d ms: %s", 
                 game->tick_current, 
                 time_get_time_ms_cached() - game->tick_begin_ms,
-                player->to_string().c_str());
+                player->to_short_string().c_str());
         } else {
             CON("Game tick %d end, duration %d ms: %s", 
                 game->tick_current, 
