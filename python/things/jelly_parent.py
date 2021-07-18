@@ -50,7 +50,7 @@ def tp_init(name, text_name):
     mytp.set_is_jelly_parent(True)
     mytp.set_is_jelly(True)
     mytp.set_is_jumper_chance_d1000(2)
-    mytp.set_is_jumper_distance(10)
+    mytp.set_is_jumper_distance(5)
     mytp.set_is_jumper_on_low_hp_chance_d1000(500)
     mytp.set_is_jumper(True)
     mytp.set_is_living(True)

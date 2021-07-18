@@ -40,6 +40,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/game_hiscore.o                \
     $(OBJDIR)/game_id.o                     \
     $(OBJDIR)/game_init.o                   \
+    $(OBJDIR)/game_jump.o                   \
     $(OBJDIR)/game_load.o                   \
     $(OBJDIR)/game_log.o                    \
     $(OBJDIR)/game_main_menu.o              \
