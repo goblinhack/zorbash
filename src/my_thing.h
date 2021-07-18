@@ -968,6 +968,7 @@ public:
     std::string text_the(void) const;
     std::string text_The(void) const;
     std::string to_string(void) const;
+    std::string to_short_string(void) const;
     std::vector<Lightp> &get_light(void);
     std::vector<Thingp> get_item_list(void);
     std::vector<Thingp> get_treasure_list(void);
