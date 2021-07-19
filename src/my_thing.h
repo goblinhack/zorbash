@@ -1339,10 +1339,8 @@ public:
     void robot_tick(void);
     bool robot_ai_create_path_to_goal(void);
     void robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
-    void robot_ai_init_can_jump_dmap(int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_search_goals(std::multiset<Goal> &goals);
-    void robot_ai_choose_jump_goals(std::multiset<Goal> &goals);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();
