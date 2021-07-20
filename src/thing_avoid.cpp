@@ -6,11 +6,15 @@
 #include <algorithm>
 #include <set>
 #include "my_sys.h"
+#include "my_main.h"
+#include "my_ptrcheck.h"
 #include "my_level.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
 
 bool Tp::will_avoid_threat (Levelp level, point p) const
 {_
@@ -100,6 +104,13 @@ bool Thing::will_avoid_threat (const point &p)
             }
         }
     }
+
+    FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+        if (it == this) { continue; }
+        if (is_dangerous(it)) {
+            return true;
+        }
+    } FOR_ALL_THINGS_END()
 
     return false;
 }
@@ -194,6 +205,13 @@ bool Thing::will_avoid_threat (const Thingp itp)
             }
         }
     }
+
+    FOR_ALL_INTERESTING_THINGS(level, it, itp->mid_at.x, itp->mid_at.y) {
+        if (it == this) { continue; }
+        if (is_dangerous(it)) {
+            return true;
+        }
+    } FOR_ALL_THINGS_END()
 
     return false;
 }

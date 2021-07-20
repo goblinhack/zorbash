@@ -43,7 +43,8 @@ bool Thing::cursor_path_pop_next_and_move (void)
         //
         if (is_player() && game->robot_mode) {
             if (will_avoid_threat(future_pos)) {
-                log("Next position %d,%d is a threat", (int)future_pos.x, (int)future_pos.y);
+                log("Next position %d,%d is a threat",
+                    (int)future_pos.x, (int)future_pos.y);
 _
                 if (monstp->move_path.size()) {
                     auto jump_pos = monstp->move_path[0];
@@ -53,13 +54,20 @@ _
                     // If the thing we are going to land on is also a threat,
                     // can we jump further?
                     //
-                    log("Next next position %d,%d is also a threat", (int)future_pos.x, (int)future_pos.y);
+                    log("Next next position %d,%d is also a threat",
+                        (int)future_pos.x, (int)future_pos.y);
 _
                     if (will_avoid_threat(jump_pos) && monstp->move_path.size()) {
                         auto jump_pos = monstp->move_path[0];
                         monstp->move_path.erase(monstp->move_path.begin());
 
-                        if (try_to_jump(jump_pos)) {
+                        if (will_avoid_threat(jump_pos)) {
+                            //
+                            // Give up
+                            //
+                            cursor_path_stop();
+                            return false;
+                        } else if (try_to_jump(jump_pos)) {
                             game->tick_begin("player tried a long jump");
                             cursor_path_stop();
                             return true;
