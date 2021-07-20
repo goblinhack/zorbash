@@ -222,7 +222,9 @@ _
     }
 
     if (is_moving) {
-        return;
+        if (is_player() && game->robot_mode) {
+            return;
+        }
     }
 
     if (is_player() && game->robot_mode) {
