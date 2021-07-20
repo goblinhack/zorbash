@@ -17,15 +17,25 @@
 //
 int Thing::worth_collecting (Thingp it)
 {_
-    int gold_value = it->get_gold_value();
+    if (it->is_treasure()) {
+        int gold_value = it->get_gold_value();
 
-    if (it->is_collected_as_gold()) {
-        return gold_value;
+        if (it->is_collected_as_gold()) {
+            return gold_value;
+        }
+
+        if (it->is_bag_item()) {
+            if (bag_add_test(it)) {
+                return gold_value;
+            }
+        }
     }
 
-    if (it->is_bag_item()) {
-        if (bag_add_test(it)) {
-            return gold_value;
+    if (it->is_food()) {
+        if (it->is_bag_item()) {
+            if (bag_add_test(it)) {
+                return it->get_nutrition();
+            }
         }
     }
 

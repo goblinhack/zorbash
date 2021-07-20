@@ -42,10 +42,10 @@ _
     //
     // Find all the possible goals. Higher scores, lower costs are preferred
     //
-    std::multiset<Goal> walk_goals;
-    std::multiset<Goal> jump_goals;
+    std::multiset<Goal> main_goals;
+    std::multiset<Goal> search_goals;
+    std::multiset<Goal> open_door_goals;
     auto dmap_can_see = get_dmap_can_see();
-    auto dmap_unused = get_dmap_unused();
     auto age_map = get_age_map();
 
     //
@@ -53,22 +53,26 @@ _
     //
     dbg("Choose goals (higher scores, lower costs are preferred):");
     robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
-    robot_ai_choose_initial_goals(walk_goals, minx, miny, maxx, maxy);
-
-    if (walk_goals.empty()) {
-        if (is_player()) {
-            robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
-            robot_ai_choose_search_goals(walk_goals);
-        }
-    }
+    robot_ai_choose_initial_goals(main_goals, minx, miny, maxx, maxy);
 
     std::list<GoalMap> goalmaps;
+    goalmaps.push_back(GoalMap{main_goals, dmap_can_see});
 
-    if (!jump_goals.empty()) {
-        goalmaps.push_back(GoalMap{jump_goals, dmap_unused});
-    }
-    if (!walk_goals.empty()) {
-        goalmaps.push_back(GoalMap{walk_goals, dmap_can_see});
+    //
+    // Even if we found main goals we need to add backup ones in case any
+    // of the main ones are not reachable.
+    //
+    if (is_player()) {
+        robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
+        robot_ai_choose_search_goals(search_goals);
+        goalmaps.push_back(GoalMap{search_goals, dmap_can_see});
+
+        //
+        // Add open door goes in case all of the wander goals are also not
+        // reachable.
+        //
+        robot_ai_choose_search_goals(open_door_goals, true);
+        goalmaps.push_back(GoalMap{open_door_goals, dmap_can_see});
     }
 
     //
@@ -146,7 +150,7 @@ _
             uint8_t score8 = (int)score;
             set(g.dmap->val, goal_target.x, goal_target.y, score8);
 
-            dbg2(" scale goal (%d,%d) %d to %d",
+            dbg2(" scale goal (%d,%d) score %d to dmap score %d",
                 (int)minx + goal.at.x, (int)miny + goal.at.y, 
                 (int)orig_score, (int)score8);
         }
@@ -202,6 +206,16 @@ _
             // Unreachable?
             //
             if (result.cost == std::numeric_limits<int>::max()) {
+                dbg2(" goal (%d,%d) score %d -> unreachable", 
+                    goal.at.x + minx, goal.at.y + miny,
+                    (int)goal.score);
+#ifdef ENABLE_DEBUG_AI_ASTAR
+#if 0
+                auto start = point(0, 0);
+                auto end = point(maxx - minx, maxy - miny);
+                astar_dump(g.dmap, goal.at, start, end);
+#endif
+#endif
                 continue;
             }
 
@@ -518,7 +532,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
             }
 
             if (is_treasure_collector()) {
-                if (it->is_treasure()) {
+                if (it->is_treasure() || it->is_food()) {
                     auto score = worth_collecting(it);
                     if (score) {
                         GOAL_ADD(score, "collect-treasure");
@@ -674,15 +688,14 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 // what is currently visible and find the most interesting point at that edge
 // and then create a path to that edge.
 //
-void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
+void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_doors)
 {_  
     point start((int)mid_at.x, (int)mid_at.y);
 
     std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
     std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pushed = {};
     std::deque<point> in;
-    std::deque<point> can_walk_to_cands;
-    std::deque<point> can_jump_to_cands;
+    std::deque<point> can_reach_cands;
     std::deque<Thingp> out;
     in.push_back(start);
     set(pushed, start.x, start.y, true);
@@ -768,7 +781,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
                     }
 
                     set(walked, o.x, o.y, true);
-                    can_walk_to_cands.push_back(o);
+                    can_reach_cands.push_back(o);
                 }
             }
         }
@@ -777,7 +790,17 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
     //
     // Choose goals (higher scores, lower costs are preferred)
     //
-    for (auto p : can_walk_to_cands) {
+    for (auto p : can_reach_cands) {
+        if (!open_doors) {
+            if (level->is_door(p.x, p.y)) {
+                continue;
+            }
+        } else {
+            if (!level->is_door(p.x, p.y)) {
+                continue;
+            }
+        }
+
         //
         // Prefer easier terrain
         //
@@ -794,7 +817,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
         // Prefer to look at doors last
         //
         if (level->is_door(p.x, p.y)) {
-            total_score -= 100;
+            total_score -= 1000;
         }
 
         goals.insert(Goal(total_score, p));
@@ -924,9 +947,10 @@ void Thing::robot_tick (void)
             // Check for interrupts
             //
             if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy)) {
+                CON("something changed");
                 monstp->move_path.clear();
                 monstp->robot_state = ROBOT_STATE_IDLE;
-                game->robot_mode = false;
+                //game->robot_mode = false;
                 wid_actionbar_init();
                 return;
             }
@@ -934,7 +958,7 @@ void Thing::robot_tick (void)
             if (monstp->move_path.empty()) {
                 log("Robot moving: move finished");
                 monstp->robot_state = ROBOT_STATE_IDLE;
-                game->robot_mode = false;
+                //game->robot_mode = false;
                 wid_actionbar_init();
                 return;
             } else {
