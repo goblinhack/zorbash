@@ -221,6 +221,10 @@ _
         return;
     }
 
+    if (is_moving) {
+        return;
+    }
+
     if (is_player() && game->robot_mode) {
         static uint32_t last_tick;
         if (!time_have_x_ms_passed_since(game->robot_delay_ms, last_tick)) {

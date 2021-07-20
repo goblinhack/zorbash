@@ -410,6 +410,61 @@ void Thing::clear_age_map (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// seen_map
+////////////////////////////////////////////////////////////////////////////
+AgeMap *Thing::get_seen_map (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->_seen_map);
+    } else {
+        return (0);
+    }
+}
+
+void Thing::new_seen_map (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    if (!monstp->_seen_map) {
+        monstp->_seen_map = new AgeMap();
+        newptr(monstp->_seen_map, "age map");
+
+        //
+        // Setup random ages
+        //
+        auto _seen_map = monstp->_seen_map->val;
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                set(_seen_map, x, y, 0U);
+            }
+        }
+    }
+}
+
+void Thing::delete_seen_map (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        if (monstp->_seen_map) {
+            oldptr(monstp->_seen_map);
+            delete monstp->_seen_map;
+            monstp->_seen_map = 0;
+        }
+    }
+}
+
+void Thing::clear_seen_map (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        if (monstp->_seen_map) {
+            *monstp->_seen_map = {};
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////
 // _dmap_can_see
 ////////////////////////////////////////////////////////////////////////////
 Dmap *Thing::get_dmap_can_see (void)
@@ -461,26 +516,26 @@ void Thing::clear_dmap_can_see (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// _dmap_can_jump
+// _dmap_unused
 ////////////////////////////////////////////////////////////////////////////
-Dmap *Thing::get_dmap_can_jump (void)
+Dmap *Thing::get_dmap_unused (void)
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->_dmap_can_jump);
+        return (monstp->_dmap_unused);
     } else {
         return (0);
     }
 }
 
-void Thing::new_dmap_can_jump (void)
+void Thing::new_dmap_unused (void)
 {_
     new_monst();
-    if (!monstp->_dmap_can_jump) {
-        monstp->_dmap_can_jump = new Dmap();
-        newptr(monstp->_dmap_can_jump, "AgeMap");
+    if (!monstp->_dmap_unused) {
+        monstp->_dmap_unused = new Dmap();
+        newptr(monstp->_dmap_unused, "AgeMap");
 
-        auto dmap = monstp->_dmap_can_jump->val;
+        auto dmap = monstp->_dmap_unused->val;
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 set(dmap, x, y, DMAP_IS_WALL);
@@ -489,24 +544,24 @@ void Thing::new_dmap_can_jump (void)
     }
 }
 
-void Thing::delete_dmap_can_jump (void)
+void Thing::delete_dmap_unused (void)
 {_
     if (monstp) {
         verify(monstp);
-        if (monstp->_dmap_can_jump) {
-            oldptr(monstp->_dmap_can_jump);
-            delete monstp->_dmap_can_jump;
-            monstp->_dmap_can_jump = 0;
+        if (monstp->_dmap_unused) {
+            oldptr(monstp->_dmap_unused);
+            delete monstp->_dmap_unused;
+            monstp->_dmap_unused = 0;
         }
     }
 }
 
-void Thing::clear_dmap_can_jump (void)
+void Thing::clear_dmap_unused (void)
 {_
     if (monstp) {
         verify(monstp);
-        if (monstp->_dmap_can_jump) {
-            *monstp->_dmap_can_jump = {};
+        if (monstp->_dmap_unused) {
+            *monstp->_dmap_unused = {};
         }
     }
 }

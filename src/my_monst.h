@@ -34,8 +34,9 @@ enum {
 typedef struct Monst_ {
 public:
     AgeMap       *_age_map = {};             // How old a cell is
+    AgeMap       *_seen_map = {};            // If we've ever seen this tile and when
     Dmap         *_dmap_can_see = {};        // What the monster can reach during AI
-    Dmap         *_dmap_can_jump = {};       // As above, but allows jumping
+    Dmap         *_dmap_unused = {};         // As above, but allows jumping
     std::vector<Lightp> light = {};          // Has light sources?
 
     /////////////////////////////////////////////////////////////////////////
