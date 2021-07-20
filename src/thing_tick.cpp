@@ -221,13 +221,20 @@ _
         return;
     }
 
-    if (is_moving) {
-        if (is_player() && game->robot_mode) {
+    //
+    // If in robot mode, get the next move.
+    //
+    if (is_player() && game->robot_mode) {
+        //
+        // Stop the robot racing around too fast.
+        //
+        if (is_moving) {
             return;
         }
-    }
 
-    if (is_player() && game->robot_mode) {
+        //
+        // Is this redundant with the above?
+        //
         static uint32_t last_tick;
         if (!time_have_x_ms_passed_since(game->robot_delay_ms, last_tick)) {
             return;
@@ -236,31 +243,16 @@ _
         last_tick = time_get_time_ms_cached();
     }
 
-#if 0
-    bool is_waiting_to_tick = false;
-
     //
-    // Completed moving?
+    // Tick on player move/change of the current tick
     //
-    if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
-        is_waiting_to_tick = true;
+    auto tick = get_tick();
+    if (tick < game->tick_current) {
+        achieve_goals_in_life();
+        incr_tick();
     }
 
-    if (is_waiting_to_tick) {
-#endif
-        //
-        // Tick on player move/change of the current tick
-        //
-        auto tick = get_tick();
-        if (tick < game->tick_current) {
-            achieve_goals_in_life();
-            incr_tick();
-        }
-#if 0
-    }
-#endif
-
     //
-    // Could be dead here.
+    // Could be dead here. Sadly.
     //
 }
