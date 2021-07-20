@@ -33,38 +33,19 @@
 // have touched them) and choose the best goal. Create a path to that goal for
 // the thing to walk.
 //
-bool Thing::robot_ai_create_path_to_goal (void)
+bool Thing::robot_ai_create_path_to_goal (int minx, int miny, int maxx, int maxy)
 {_
-    dbg("Choose goal");
-_
-    //
-    // Set up the extent of the AI, choosing smaller areas for monsters for
-    // speed.
-    //
-    const float dx = (MAP_WIDTH / 6);
-    const float dy = (MAP_HEIGHT / 6);
-
-    int minx = std::max(0,         (int)(mid_at.x - dx));
-    int maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
-    int miny = std::max(0,          (int)(mid_at.y - dy));
-    int maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
-
-    if (is_player()) {
-        minx = 0;
-        maxx = MAP_WIDTH;
-        miny = 0;
-        maxy = MAP_HEIGHT;
-    }
-
     point start((int)mid_at.x, (int)mid_at.y);
 
+    dbg("Choose goal");
+_
     //
     // Find all the possible goals. Higher scores, lower costs are preferred
     //
     std::multiset<Goal> walk_goals;
     std::multiset<Goal> jump_goals;
     auto dmap_can_see = get_dmap_can_see();
-    auto dmap_can_jump = get_dmap_can_jump();
+    auto dmap_unused = get_dmap_unused();
     auto age_map = get_age_map();
 
     //
@@ -84,7 +65,7 @@ _
     std::list<GoalMap> goalmaps;
 
     if (!jump_goals.empty()) {
-        goalmaps.push_back(GoalMap{jump_goals, dmap_can_jump});
+        goalmaps.push_back(GoalMap{jump_goals, dmap_unused});
     }
     if (!walk_goals.empty()) {
         goalmaps.push_back(GoalMap{walk_goals, dmap_can_see});
@@ -273,11 +254,12 @@ _
 //
 // Initialize basic visibility and things that are lit and can be seen
 //
-void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
+int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
 {_
     std::array< std::array<uint8_t, MAP_WIDTH>, MAP_HEIGHT> can_jump = {};
     point start((int)mid_at.x, (int)mid_at.y);
     auto dmap_can_see = get_dmap_can_see();
+    auto seen_map = get_seen_map();
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -412,12 +394,38 @@ void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
         }
     }
 
+    int something_changed = 0;
+
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             auto X = x - minx;
             auto Y = y - miny;
             if (get(can_jump, X, Y)) {
-                set(dmap_can_see->val, X, Y, (uint8_t)0);
+                set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
+            }
+
+            //
+            // Did anything of interest change worthy of interrupting
+            // a walk?
+            //
+            auto dmap_score = get(dmap_can_see->val, x, y);
+            auto seen_when = get(seen_map->val, x, y);
+            if (dmap_score == DMAP_IS_PASSABLE) {
+                //
+                // Is now seen; did something open?
+                //
+                if (!seen_when) {
+                    something_changed++;
+                }
+                set(seen_map->val, x, y, game->tick_current);
+            } else if (dmap_score == DMAP_IS_WALL) {
+                //
+                // Was seen but now cannot see; did something close?
+                //
+                if (seen_when) {
+                    something_changed++;
+                }
+                set(seen_map->val, x, y, 0U);
             }
         }
     }
@@ -429,6 +437,8 @@ void Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
     dmap_print(dmap_can_see);
     dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
     dmap_print(dmap_can_see);
+
+    return something_changed;
 }
 
 //
@@ -784,7 +794,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
         // Prefer to look at doors last
         //
         if (level->is_door(p.x, p.y)) {
-            total_score -= 5;
+            total_score -= 100;
         }
 
         goals.insert(Goal(total_score, p));
@@ -818,6 +828,25 @@ void Thing::robot_tick (void)
         is_the_grid || 
         is_jumping) { 
         return;
+    }
+
+    //
+    // Set up the extent of the AI, choosing smaller areas for monsters for
+    // speed.
+    //
+    const float dx = (MAP_WIDTH / 6);
+    const float dy = (MAP_HEIGHT / 6);
+
+    int minx = std::max(0,         (int)(mid_at.x - dx));
+    int maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
+    int miny = std::max(0,          (int)(mid_at.y - dy));
+    int maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
+
+    if (is_player()) {
+        minx = 0;
+        maxx = MAP_WIDTH;
+        miny = 0;
+        maxy = MAP_HEIGHT;
     }
 
     bool left = false;
@@ -880,7 +909,7 @@ void Thing::robot_tick (void)
             }
 
             if (!do_something) {
-                if (robot_ai_create_path_to_goal()) {
+                if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy)) {
                     monstp->robot_state = ROBOT_STATE_MOVING;
                     return;
                 } else {
@@ -891,10 +920,21 @@ void Thing::robot_tick (void)
         break;
         case ROBOT_STATE_MOVING:
         {
+            //
+            // Check for interrupts
+            //
+            if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy)) {
+                monstp->move_path.clear();
+                monstp->robot_state = ROBOT_STATE_IDLE;
+                game->robot_mode = false;
+                wid_actionbar_init();
+                return;
+            }
+
             if (monstp->move_path.empty()) {
                 log("Robot moving: move finished");
                 monstp->robot_state = ROBOT_STATE_IDLE;
-                //game->robot_mode = false;
+                game->robot_mode = false;
                 wid_actionbar_init();
                 return;
             } else {
