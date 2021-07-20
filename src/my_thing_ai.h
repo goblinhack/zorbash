@@ -86,8 +86,6 @@ typedef struct AgeMap_ {
 std::ostream& operator<<(std::ostream &out, Bits<const AgeMap & > const my);
 std::istream& operator>>(std::istream &in, Bits<AgeMap &> my);
 
-#ifdef ENABLE_DEBUG_AI_ASTAR
 extern std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> astar_debug;
-#endif
 
 #endif
