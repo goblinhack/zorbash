@@ -853,6 +853,10 @@ void Thing::robot_tick (void)
         return;
     }
 
+    if (level->cursor) {
+        level->cursor->hide();
+    }
+
     //
     // Set up the extent of the AI, choosing smaller areas for monsters for
     // speed.
