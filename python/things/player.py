@@ -40,6 +40,7 @@ def on_move(me, x, y):
 
 def tp_init(name, text_name, short_text_name, title):
     mytp = tp.Tp(name, text_name, short_text_name)
+    mytp.set_ai_scent_distance(10) # Used in enemy calculations
     mytp.set_attack_shove(True)
     mytp.set_capacity_height(20)
     mytp.set_capacity_width(20)
@@ -72,6 +73,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_humanoid(True)
     mytp.set_is_jumper_distance(2)
     mytp.set_is_jumper(True)
+    mytp.set_is_key_collector(True)
     mytp.set_is_living(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
@@ -80,7 +82,6 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_player(True)
     mytp.set_is_shovable(True)
     mytp.set_is_treasure_collector(True)
-    mytp.set_is_key_collector(True)
     mytp.set_is_weapon_wielder(True)
     mytp.set_light_strength(8)
     mytp.set_long_text_description("Our most noble adventurer or no particular race or gender. Devoid of fear and stout of heart. Likes kittens.")

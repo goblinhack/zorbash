@@ -289,24 +289,29 @@ bool Thing::move (fpoint future_pos,
         _
 
         if (mid_at != future_pos) {
-            dbg("Try to move; collision check");
+            if (up) {
+                dbg("Try to move up; collision check");
+            } else if (down) {
+                dbg("Try to move down; collision check");
+            } else if (left) {
+                dbg("Try to move left; collision check");
+            } else if (right) {
+                dbg("Try to move right; collision check");
+            } else if (attack) {
+                dbg("Try to move (attack); collision check");
+            }
+
             if (collision_check_only(future_pos)) {
-                if (game->robot_mode) {
-                    lunge(future_pos);
-                    dbg("Move failed");
-                    return false;
+                dbg("Cannot move; try to shove");
+                if (shove_allowed) {
+                    try_to_shove(future_pos);
                 } else {
-                    dbg("Cannot move; try to shove");
-                    if (shove_allowed) {
-                        try_to_shove(future_pos);
-                    } else {
-                        dbg("Cannot shove; try to attack");
-                        use_weapon();
-                    }
-                    lunge(future_pos);
-                    dbg("Move failed");
-                    return false;
+                    dbg("Cannot shove; try to attack");
+                    use_weapon();
                 }
+                lunge(future_pos);
+                dbg("Move failed");
+                return false;
             }
         }
 

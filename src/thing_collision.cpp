@@ -627,27 +627,27 @@ _
         // We hit this path if you click on a door and attack it.
         // However, try to open the door if you have a key.
         //
-        if (!game->robot_mode) {
-            if (it->is_door() && !it->is_open) {
-                auto owner = get_immediate_owner();
-                if (owner) {
-                    if (owner->open_door(it)) {
-                        *target_attacked = false;
-                        ret = true;
-                    }
-                } else if (open_door(it)) {
+        if (it->is_door() && !it->is_open) {
+            auto owner = get_immediate_owner();
+            if (owner) {
+                if (owner->open_door(it)) {
                     *target_attacked = false;
                     ret = true;
                 }
+            } else if (open_door(it)) {
+                *target_attacked = false;
+                ret = true;
             }
         }
 
-        if (attack(it)) {
-            *target_attacked = true;
-            ret = true;
-        } else {
-            if (is_loggable_for_unimportant_stuff()) {
-                dbg("Collision: cannot hit %s", it->to_string().c_str());
+        if (!*target_attacked) {
+            if (attack(it)) {
+                *target_attacked = true;
+                ret = true;
+            } else {
+                if (is_loggable_for_unimportant_stuff()) {
+                    dbg("Collision: cannot hit %s", it->to_string().c_str());
+                }
             }
         }
     }
@@ -1112,7 +1112,7 @@ _
             if (things_overlap(me, A_at, it)) {
                 dbg("Yes; overlaps and can open");
                 if (open_door(it)) {
-                    return true;
+                    return false;
                 } else if (things_overlap_attack(me, A_at, it)) {
                     dbg("Yes; overlaps and can attack");
                     return true;
