@@ -112,6 +112,13 @@ void Level::cursor_recreate (void)
         return;
     }
 
+    //
+    // Distracting when in robot mode
+    //
+    if (game->robot_mode) {
+        return;
+    }
+
     auto mid_at = cursor->mid_at;
 
     auto what = game->request_to_throw_item;
