@@ -884,8 +884,9 @@ void Thing::robot_tick (void)
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
-            log("Robot idle: create path");
-
+            //
+            // Look for doors or things to collect, if not being attacked.
+            //
             for (int dx = -1; dx <= 1; dx++) {
                 for (int dy = -1; dy <= 1; dy++) {
                     fpoint at(mid_at.x + dx, mid_at.y + dy);
@@ -933,10 +934,11 @@ void Thing::robot_tick (void)
 
             if (!do_something) {
                 if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy)) {
+                    CON("Robot: found a path to a goal");
                     monstp->robot_state = ROBOT_STATE_MOVING;
                     return;
                 } else {
-                    TOPCON("Nothing for robot to do.");
+                    CON("Robot: nothing to do");
                 }
             }
         }
@@ -947,7 +949,7 @@ void Thing::robot_tick (void)
             // Check for interrupts
             //
             if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy)) {
-                CON("something changed");
+                CON("Robot: detected a change; stop moving and look around");
                 monstp->move_path.clear();
                 monstp->robot_state = ROBOT_STATE_IDLE;
                 //game->robot_mode = false;
@@ -956,13 +958,13 @@ void Thing::robot_tick (void)
             }
 
             if (monstp->move_path.empty()) {
-                log("Robot moving: move finished");
+                CON("Robot: move finished");
                 monstp->robot_state = ROBOT_STATE_IDLE;
                 //game->robot_mode = false;
                 wid_actionbar_init();
                 return;
             } else {
-                log("Robot moving");
+                CON("Robot: moving");
                 return;
             }
         }

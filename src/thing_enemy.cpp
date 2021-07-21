@@ -29,16 +29,6 @@ bool Thing::is_enemy (Thingp attacker) const
 
 void Thing::add_enemy (Thingp attacker)
 {_
-    if (unlikely(!is_monst())) {
-        if (is_player() && game->robot_mode) {
-            //
-            // Allow the robot to make enemies
-            //
-        } else {
-            return;
-        }
-    }
-
     if (unlikely(!attacker->is_monst())) {
         return;
     }
@@ -48,6 +38,20 @@ void Thing::add_enemy (Thingp attacker)
     }
 
     if (is_enemy(attacker)) {
+        return;
+    }
+
+    if (unlikely(is_player())) {
+        //
+        // Allow the robot to make enemies
+        //
+        if (game->robot_mode) {
+            CON("Robo: add enemy: %s", attacker->to_string().c_str());
+        }
+    } else if (unlikely(!is_monst())) {
+        //
+        // Only monsts make enemies
+        //
         return;
     }
 

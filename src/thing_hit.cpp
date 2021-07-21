@@ -444,8 +444,12 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->is_lava()) {
             set_on_fire("hit by fire or lava");
         }
-        add_enemy(real_hitter);
     }
+
+    //
+    // In player robot mode we want to keep track of enemies also
+    //
+    add_enemy(real_hitter);
 
     //
     // Visible hit indication
