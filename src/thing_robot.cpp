@@ -210,11 +210,9 @@ _
                     goal.at.x + minx, goal.at.y + miny,
                     (int)goal.score);
 #ifdef ENABLE_DEBUG_AI_ASTAR
-#if 0
                 auto start = point(0, 0);
                 auto end = point(maxx - minx, maxy - miny);
                 astar_dump(g.dmap, goal.at, start, end);
-#endif
 #endif
                 continue;
             }
@@ -294,38 +292,10 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
             }
 
             if (is_jumper()) {
-                bool jump_check = false;
-                if (level->is_chasm(p)) {
-                    jump_check = true;
-                }
-
-                int heat = level->heatmap(p);
-                if (heat > 4) {
-                    if (hates_fire()) {
-                        jump_check = true;
-                    }
-                }
-
-                if (level->is_shallow_water(p) || level->is_deep_water(p)) {
-                    if (hates_water()) {
-                        jump_check = true;
-                    }
-                }
-
-                if (level->is_acid(p)) {
-                    if (hates_acid()) {
-                        jump_check = true;
-                    }
-                }
-
-                if (level->is_chasm(p)) {
-                    jump_check = true;
-                }
-
                 //
                 // Trace all possible jump paths to see if we can jump over
                 //
-                if (jump_check) {
+                if (is_hazardous_to_me(p)) {
                     auto jump_dist = how_far_i_can_jump();
                     for (const auto &jp : game->jump_paths) {
                         point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
@@ -826,10 +796,6 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
 
 void Thing::robot_tick (void)
 {_
-    if (!monstp) {
-        return;
-    }
-
     static uint32_t last_tick;
     if (!time_have_x_ms_passed_since(game->robot_delay_ms, last_tick)) {
         return;
@@ -864,8 +830,8 @@ void Thing::robot_tick (void)
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
 
-    int minx = std::max(0,         (int)(mid_at.x - dx));
-    int maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
+    int minx = std::max(0,          (int)(mid_at.x - dx));
+    int maxx = std::min(MAP_WIDTH,  (int)(mid_at.x + dx - 1));
     int miny = std::max(0,          (int)(mid_at.y - dy));
     int maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
 
@@ -938,8 +904,7 @@ void Thing::robot_tick (void)
 
             if (!do_something) {
                 if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy)) {
-                    CON("Robot: found a path to a goal");
-                    monstp->robot_state = ROBOT_STATE_MOVING;
+                    robot_change_state(ROBOT_STATE_MOVING, "found goal");
                     return;
                 } else {
                     CON("Robot: nothing to do");
@@ -953,18 +918,13 @@ void Thing::robot_tick (void)
             // Check for interrupts
             //
             if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy)) {
-                CON("Robot: detected a change; stop moving and look around");
-                monstp->move_path.clear();
-                monstp->robot_state = ROBOT_STATE_IDLE;
-                //game->robot_mode = false;
+                robot_change_state(ROBOT_STATE_IDLE, "move interrupted by a change");
                 wid_actionbar_init();
                 return;
             }
 
             if (monstp->move_path.empty()) {
-                CON("Robot: move finished");
-                monstp->robot_state = ROBOT_STATE_IDLE;
-                //game->robot_mode = false;
+                robot_change_state(ROBOT_STATE_IDLE, "move finished");
                 wid_actionbar_init();
                 return;
             } else {
@@ -979,4 +939,41 @@ void Thing::robot_tick (void)
     if (do_something) {
         player_tick(left, right, up, down, attack, wait, jump);
     }
+}
+
+void Thing::robot_change_state (int new_state, const std::string &why)
+{_
+    if (monstp->robot_state == new_state) {
+        return;
+    }
+
+    std::string to;
+    std::string from;
+    switch (new_state) {
+        case ROBOT_STATE_IDLE:
+            to = "IDLE";
+            break;
+        case ROBOT_STATE_MOVING:
+            to = "MOVING";
+            break;
+    }
+    switch (monstp->robot_state) {
+        case ROBOT_STATE_IDLE:
+            from = "IDLE";
+            break;
+        case ROBOT_STATE_MOVING:
+            from = "MOVING";
+            break;
+    }
+
+    CON("Robot: %s -> %s: %s", from.c_str(), to.c_str(), why.c_str());
+    
+    switch (monstp->robot_state) {
+        case ROBOT_STATE_IDLE:
+            monstp->move_path.clear();
+            break;
+        case ROBOT_STATE_MOVING:
+            break;
+    }
+    monstp->robot_state = new_state;
 }

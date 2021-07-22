@@ -704,6 +704,7 @@ public:
     int is_cursor_path(void) const;
     int is_cursor(void) const;
     int is_dangerous(Thingp);
+    int is_hazardous_to_me(point p);
     int is_dead_on_shove(void) const;
     int is_dead_or_dying(void) const;
     int is_deep_water(void) const;
@@ -1341,6 +1342,7 @@ public:
     void update_pos(fpoint, bool immediately, uint32_t speed = 0);
     void update_tick(void);
     void robot_tick(void);
+    void robot_change_state(int new_state, const std::string &why);
     bool robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy);
     int robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);

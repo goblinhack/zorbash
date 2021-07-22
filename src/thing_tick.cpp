@@ -8,6 +8,7 @@
 #include "my_depth.h"
 #include "my_wid_console.h"
 #include "my_thing.h"
+#include "my_monst.h"
 #include "my_python.h"
 #include "my_random.h"
 #include "my_thing_template.h"
@@ -111,6 +112,12 @@ void Thing::achieve_goals_in_life (void)
     if (cursor_path_pop_next_and_move()) {
         dbg("Pop next move");
         return;
+    }
+
+    if (monstp->move_path.empty()) {
+        if (is_player()) {
+            robot_change_state(ROBOT_STATE_IDLE, "reached goal");
+        }
     }
 
     if (!is_player()) {

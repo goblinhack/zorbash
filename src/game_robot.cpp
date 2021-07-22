@@ -7,6 +7,7 @@
 #include "my_game.h"
 #include "my_dungeon.h"
 #include "my_thing.h"
+#include "my_monst.h"
 #include "my_wid_popup.h"
 
 void Game::robot_mode_tick (void)
@@ -15,9 +16,14 @@ void Game::robot_mode_tick (void)
         return;
     }
 
-    if (!level->player) {
+    auto player = level->player;
+    if (!player) {
         return;
     }
 
-    level->player->robot_tick();
+    if (player->monstp->robot_state != ROBOT_STATE_IDLE) {
+        return;
+    }
+
+    player->robot_tick();
 }

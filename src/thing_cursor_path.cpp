@@ -112,7 +112,7 @@ bool Thing::cursor_path_pop_first_move (void)
         game->cursor_move_path.clear();
         if (cursor_path_pop_next_and_move()) {
             dbg("Move to cursor next hop");
-            if (!game->cursor_move_path.size()) {
+            if (game->cursor_move_path.empty()) {
                 level->cursor_path_create();
             }
             return true;
