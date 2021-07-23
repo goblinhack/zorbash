@@ -844,7 +844,7 @@ public:
     int is_rrr65(void) const;
     int is_rrr66(void) const;
     int is_rrr67(void) const;
-    int is_rrr68(void) const;
+    int is_debug_path(void) const;
     int is_key_collector(void) const;
     int is_rrr6(void) const;
     int is_treasure_collector(void) const;

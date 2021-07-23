@@ -228,7 +228,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr65() &&                                         (what == "is_rrr65"))                                         { return true; }
     if (is_rrr66() &&                                         (what == "is_rrr66"))                                         { return true; }
     if (is_rrr67() &&                                         (what == "is_rrr67"))                                         { return true; }
-    if (is_rrr68() &&                                         (what == "is_rrr68"))                                         { return true; }
+    if (is_debug_path() &&                                         (what == "is_debug_path"))                                         { return true; }
     if (is_key_collector() &&                                         (what == "is_key_collector"))                                         { return true; }
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
     if (is_treasure_collector() &&                                         (what == "is_treasure_collector"))                                         { return true; }
@@ -490,7 +490,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr65")                                         { return &Thing::is_rrr65; }
     if (what == "is_rrr66")                                         { return &Thing::is_rrr66; }
     if (what == "is_rrr67")                                         { return &Thing::is_rrr67; }
-    if (what == "is_rrr68")                                         { return &Thing::is_rrr68; }
+    if (what == "is_debug_path")                                         { return &Thing::is_debug_path; }
     if (what == "is_key_collector")                                         { return &Thing::is_key_collector; }
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
     if (what == "is_treasure_collector")                                         { return &Thing::is_treasure_collector; }

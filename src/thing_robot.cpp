@@ -250,6 +250,7 @@ _
             std::reverse(new_move_path.begin(), new_move_path.end());
             if (is_player()) {
                 level->cursor_path_create(new_move_path);
+                level->debug_path_create(new_move_path);
                 if (cursor_path_pop_first_move()) {
                     return true;
                 }

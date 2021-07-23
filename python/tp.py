@@ -433,8 +433,8 @@ class Tp:
     def set_is_rrr67(self, value):
         zx.tp_set_is_rrr67(self, value)
 
-    def set_is_rrr68(self, value):
-        zx.tp_set_is_rrr68(self, value)
+    def set_is_debug_path(self, value):
+        zx.tp_set_is_debug_path(self, value)
 
     def set_is_key_collector(self, value):
         zx.tp_set_is_key_collector(self, value)

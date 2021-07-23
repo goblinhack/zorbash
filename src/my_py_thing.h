@@ -242,7 +242,7 @@ PyObject *thing_is_rrr64(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr65(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr66(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr67(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr68(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_debug_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_key_collector(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_collector(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item(PyObject *obj, PyObject *args, PyObject *keywds);

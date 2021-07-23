@@ -402,6 +402,12 @@ public:
                     continue;                                       \
                 }                                                   \
 
+    #define FOR_ALL_DEBUG_PATH_THINGS(level, t, x, y)               \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
+                if (!t->is_debug_path()) {                          \
+                    continue;                                       \
+                }                                                   \
+
     Thingp inventory_get(const uint32_t slot);
     Thingp inventory_get(void);
     Thingp skillbox_get(const uint32_t slot);
@@ -602,6 +608,10 @@ public:
     void cursor_path_draw_circle(void);
     void cursor_path_draw_line(point start, point end);
     void cursor_path_draw_line(const std::vector<point> &move_path);
+    void debug_path_clear(void);
+    void debug_path_create(const std::vector<point> &move_path);
+    void debug_path_draw(const std::vector<point> &move_path);
+    void debug_path_draw_line(const std::vector<point> &move_path);
     void cursor_recreate(void);
     void describe(Thingp);
     void describe(fpoint at);

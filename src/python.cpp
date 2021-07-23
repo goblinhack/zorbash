@@ -1518,7 +1518,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr65)
     TP_SET_DECL(is_rrr66)
     TP_SET_DECL(is_rrr67)
-    TP_SET_DECL(is_rrr68)
+    TP_SET_DECL(is_debug_path)
     TP_SET_DECL(is_key_collector)
     TP_SET_DECL(is_treasure_collector)
     TP_SET_DECL(is_item)
@@ -1865,7 +1865,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr65_at",                                      (PyCFunction)level_is_rrr65_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr66_at",                                      (PyCFunction)level_is_rrr66_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr67_at",                                      (PyCFunction)level_is_rrr67_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr68_at",                                      (PyCFunction)level_is_rrr68_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_debug_path_at",                                      (PyCFunction)level_is_debug_path_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_key_collector_at",                                      (PyCFunction)level_is_key_collector_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr6_at",                                       (PyCFunction)level_is_rrr6_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_treasure_collector_at",                                      (PyCFunction)level_is_treasure_collector_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2160,7 +2160,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr65",                                         (PyCFunction)thing_is_rrr65,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr66",                                         (PyCFunction)thing_is_rrr66,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr67",                                         (PyCFunction)thing_is_rrr67,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr68",                                         (PyCFunction)thing_is_rrr68,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_debug_path",                                         (PyCFunction)thing_is_debug_path,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_key_collector",                                         (PyCFunction)thing_is_key_collector,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr7",                                          (PyCFunction)thing_is_rrr7,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_treasure_collector",                                         (PyCFunction)thing_is_treasure_collector,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},

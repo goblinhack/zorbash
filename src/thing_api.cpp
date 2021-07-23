@@ -273,7 +273,7 @@ int Thing::is_rrr64(void) const                                         {_ retur
 int Thing::is_rrr65(void) const                                         {_ return (tp()->is_rrr65()); }
 int Thing::is_rrr66(void) const                                         {_ return (tp()->is_rrr66()); }
 int Thing::is_rrr67(void) const                                         {_ return (tp()->is_rrr67()); }
-int Thing::is_rrr68(void) const                                         {_ return (tp()->is_rrr68()); }
+int Thing::is_debug_path(void) const                                         {_ return (tp()->is_debug_path()); }
 int Thing::is_key_collector(void) const                                         {_ return (tp()->is_key_collector()); }
 int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
 int Thing::is_treasure_collector(void) const                                         {_ return (tp()->is_treasure_collector()); }

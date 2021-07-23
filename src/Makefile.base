@@ -80,6 +80,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/level_cursor_find.o           \
     $(OBJDIR)/level_cursor.o                \
     $(OBJDIR)/level_cursor_path.o           \
+    $(OBJDIR)/level_debug_path.o            \
     $(OBJDIR)/level_describe.o              \
     $(OBJDIR)/level_display_anim.o          \
     $(OBJDIR)/level_display_blood.o         \
