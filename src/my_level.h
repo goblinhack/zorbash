@@ -633,6 +633,7 @@ public:
     void incr_fade_in(const int x, const int y);
     void incr_fade_in_no_check(const int x, const int y);
     void incr_heatmap(const int x, const int y);
+    void incr_heatmap_no_check(const int x, const int y, int dv);
     void incr_heatmap_no_check(const int x, const int y);
     void lights_fade(void);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);

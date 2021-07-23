@@ -164,12 +164,12 @@ _
         // Find the best next-hop to the best goal.
         //
 #ifdef ENABLE_DEBUG_AI_VERBOSE
-        if (unlikely(g_opt_debug4)) {
+        if (unlikely(g_opt_debug3)) {
             dbg("Goals:");
             dmap_print(g.dmap,
-                    point(start.x - minx, start.y - miny),
-                    point(0, 0),
-                    point(maxx - minx, maxy - miny));
+                       point(start.x - minx, start.y - miny),
+                       point(0, 0),
+                       point(maxx - minx, maxy - miny));
         }
 #endif
 
@@ -700,6 +700,17 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
             continue;
         }
 
+        //
+        // If an unvisited tile is next to a visited one, consider that tile.
+        //
+        if (!level->is_lit_ever(p.x, p.y)) {
+            continue;
+        }
+
+        if (level->is_movement_blocking_hard(p.x, p.y)) {
+            continue;
+        }
+
         if (!get(pushed, p.x + 1, p.y)) {
             set(pushed, p.x + 1, p.y, true);
             in.push_back(point(p.x + 1, p.y));
@@ -720,42 +731,75 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
             in.push_back(point(p.x, p.y - 1));
         }
 
-        //
-        // If an unvisited tile is next to a visited one, consider that tile.
-        //
-        if (level->is_lit_ever(p.x, p.y)) {
-            for (int dx = -1; dx <= 1; dx++) {
-                for (int dy = -1; dy <= 1; dy++) {
-                    if (!dx && !dy) {
-                        continue;
-                    }
-
-                    point o(p.x + dx, p.y + dy);
-
-                    if (get(walked, o.x, o.y)) {
-                        continue;
-                    }
-
-                    if (level->is_door(o)) {
-                        //
-                        // A locked door is worth investigating
-                        //
-                    } else {
-                        if (level->is_lit_ever(o)) {
-                            continue;
-                        }
-
-                        if (level->is_movement_blocking_hard(o)) {
-                            continue;
-                        }
-                    }
-
-                    set(walked, o.x, o.y, true);
-                    can_reach_cands.push_back(o);
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                if (!dx && !dy) {
+                    continue;
                 }
+
+                point o(p.x + dx, p.y + dy);
+
+                if (get(walked, o.x, o.y)) {
+                    continue;
+                }
+
+                if (level->is_door(o)) {
+                    //
+                    // A locked door is worth investigating
+                    //
+                } else {
+                    //
+                    // If lit then we can already see it, so not worth
+                    // exploring.
+                    //
+                    if (level->is_lit_ever(o)) {
+                        continue;
+                    }
+
+                    if (level->is_movement_blocking_hard(o)) {
+                        continue;
+                    }
+                }
+
+                set(walked, o.x, o.y, true);
+                can_reach_cands.push_back(o);
             }
         }
     }
+
+#if 0
+    printf("\n");
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            if ((x == mid_at.x) && (y == mid_at.y)) {
+                printf("*");
+                continue;
+            }
+            for (auto p : can_reach_cands) {
+                if ((x == p.x) && (y == p.y)) {
+                    printf("c");
+                    goto next;
+                }
+            }
+            if (get(walked, x, y)) {
+                if (level->is_movement_blocking_hard(x, y)) {
+                    printf("W");
+                } else {
+                    printf("w");
+                }
+            } else {
+                if (level->is_movement_blocking_hard(x, y)) {
+                    printf("X");
+                } else {
+                    printf(".");
+                }
+            }
+next:
+            continue;
+        }
+        printf("\n");
+    }
+#endif
 
     //
     // Choose goals (higher scores, lower costs are preferred)

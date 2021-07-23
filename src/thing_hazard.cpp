@@ -13,15 +13,19 @@
 int Thing::is_hazardous_to_me (point p)
 {
     if (level->is_chasm(p)) {
-        return true;
+        if (!is_floating()) {
+            return true;
+        }
     }
 
     if (level->is_lava(p)) {
-        return true;
+        if (hates_fire()) {
+            return true;
+        }
     }
 
     int heat = level->heatmap(p);
-    if (heat > 4) {
+    if (heat >= 10) {
         if (hates_fire()) {
             return true;
         }

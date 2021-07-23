@@ -43,6 +43,14 @@ void Level::incr_heatmap (const int x, const int y)
     }
 }
 
+void Level::incr_heatmap_no_check (const int x, const int y, int dv)
+{
+    uint8_t v = get_no_check(_heatmap, x, y);
+    if (v < 255) {
+        set_no_check(_heatmap, x, y, (uint8_t)(v + dv));
+    }
+}
+
 void Level::incr_heatmap_no_check (const int x, const int y)
 {
     uint8_t v = get_no_check(_heatmap, x, y);
@@ -75,8 +83,7 @@ void Level::update_heatmap (void)
                 incr_heatmap_no_check(x  , y+1);
                 incr_heatmap_no_check(x-1, y+1);
                 incr_heatmap_no_check(x+1, y  );
-                incr_heatmap_no_check(x  , y  );
-                incr_heatmap_no_check(x  , y  ); // intentional
+                incr_heatmap_no_check(x  , y, 10);
                 incr_heatmap_no_check(x-1, y  );
                 incr_heatmap_no_check(x+1, y-1);
                 incr_heatmap_no_check(x  , y-1);
@@ -86,4 +93,26 @@ void Level::update_heatmap (void)
     }
 
     heatmap_valid = true;
+
+#if 0
+    printf("\n");
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            if (is_movement_blocking_hard(x, y)) {
+                printf("X");
+                continue;
+            }
+            if (get(_heatmap, x, y)) {
+                if (get(_heatmap, x, y) < 10) {
+                    printf("*");
+                    continue;
+                }
+                printf("%c", '1' + get(_heatmap, x, y));
+                continue;
+            }
+            printf(".");
+        }
+        printf("\n");
+    }
+#endif
 }

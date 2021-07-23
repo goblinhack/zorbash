@@ -20,12 +20,8 @@ void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
         pref++;
     }
 
-    int heat = level->heatmap(p);
-    if (heat > 4) {
-        if (hates_fire()) {
-            int hate_how_much = hates_fire();
-            pref += hate_how_much + heat;
-        }
+    if (is_hazardous_to_me(p)) {
+        pref += DMAP_LESS_PREFERRED_TERRAIN;
     }
 
     if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
@@ -44,7 +40,7 @@ uint8_t Thing::is_less_preferred_terrain (point p)
     }
 
     if (is_hazardous_to_me(p)) {
-        pref = DMAP_MAX_LESS_PREFERRED_TERRAIN;
+        pref += DMAP_LESS_PREFERRED_TERRAIN;
     }
 
     if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {

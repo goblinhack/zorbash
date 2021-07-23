@@ -49,7 +49,8 @@ extern bool dmap_can_i_move_diagonally(const Dmap *D,
 
 #define DMAP_IS_WALL                     ((uint8_t)255)
 #define DMAP_IS_PASSABLE                 ((uint8_t)254)
-#define DMAP_MAX_LESS_PREFERRED_TERRAIN  ((uint8_t)200)
+#define DMAP_LESS_PREFERRED_TERRAIN      ((uint8_t)100)
+#define DMAP_MAX_LESS_PREFERRED_TERRAIN  ((uint8_t)253)
 #define DMAP_IS_GOAL                     ((uint8_t)0)
 
 #endif

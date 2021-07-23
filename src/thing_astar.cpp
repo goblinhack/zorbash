@@ -114,7 +114,8 @@ public:
     // Manhattan distance.
     int heuristic (const point at)
     {
-        return (abs(goal.x - at.x) + abs(goal.y - at.y));
+        //return (abs(goal.x - at.x) + abs(goal.y - at.y));
+        return 1;
     }
 
     // Evaluate a neighbor for adding to the open set

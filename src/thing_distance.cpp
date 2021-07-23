@@ -50,7 +50,7 @@ point Thing::get_random_scent_target (void)
             continue;
         } else {
             auto c = is_less_preferred_terrain(point(x, y));
-            if (c >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+            if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
                 continue;
             } else {
                 if (is_player()) {

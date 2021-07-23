@@ -116,7 +116,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
                 set(dmap.val, x, y, DMAP_IS_WALL);
             } else {
                 auto c = is_less_preferred_terrain(point(x, y));
-                if (c >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+                if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
                     set(dmap.val, x, y, c);
                 } else {
                     set(dmap.val, x, y, DMAP_IS_PASSABLE);
