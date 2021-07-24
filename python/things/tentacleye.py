@@ -76,7 +76,6 @@ def tp_init(name, text_name):
     mytp.set_is_undead(True)
     mytp.set_long_text_description("A floating mass of tentacles and eyeballs. These creatures are often employed to monitor the dark and dank dungeons with their impressive vision. Beware their lightning gaze...")
     mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
-    mytp.set_move_speed_ms(150)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_bite_do("tentacleye.on_bite()")
     mytp.set_on_death_do("tentacleye.on_death()")

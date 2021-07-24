@@ -79,6 +79,9 @@ void wid_actionbar_robot_mode_off (void)
 _
     wid_actionbar_close_all_popups();
     game->robot_mode = false;
+    if (game->level) {
+        game->level->debug_path_clear();
+    }
     wid_actionbar_init();
 }
 

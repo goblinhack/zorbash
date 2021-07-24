@@ -712,7 +712,6 @@ void Tp::set_loves_poison(int v)                                     { _loves_po
 void Tp::set_minion_leash_distance(int v)                            { _minion_leash_distance = v; }
 void Tp::set_minion_limit(int v)                                     { _minion_limit = v; }
 void Tp::set_monst_size(int v)                                       { _monst_size = v; }
-void Tp::set_move_speed_ms(int v)                                    { _move_speed_ms = v; }
 void Tp::set_normal_placement_rules(int v)                           { _normal_placement_rules = v; }
 void Tp::set_on_death_drop_all_items(int v)                          { _on_death_drop_all_items = v; }
 void Tp::set_on_death_is_open(int v)                                 { _on_death_is_open = v; }
@@ -781,5 +780,3 @@ void Tp::set_text_name(const std::string &v)                         { _text_nam
 void Tp::set_text_title(const std::string &v)                        { _text_title = v; }
 void Tp::set_text_unused(const std::string &v)                       { _text_unused = v; }
 void Tp::set_weapon_carry_anim(const std::string &v)                 { _weapon_carry_anim = v; }
-
-int Tp::move_speed_ms(void) const                                    { return THING_MOVE_SPEED_MS; }

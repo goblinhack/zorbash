@@ -129,7 +129,6 @@ public:
     timestamp_t  timestamp_jump_end {};
     timestamp_t  timestamp_unused2 {};
     timestamp_t  timestamp_unused1 {};
-    timestamp_t  timestamp_last_wander_try {};
     timestamp_t  timestamp_lunge_begin {};
     timestamp_t  timestamp_lunge_end {};
     timestamp_t  timestamp_move_begin {};

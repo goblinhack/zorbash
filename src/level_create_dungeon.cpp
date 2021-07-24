@@ -426,6 +426,12 @@ placed_player:
         scroll_map_to_player();
         if (g_errored) { return false; }
 
+        //
+        // Final update of the heatmap to account placement of braziers
+        //
+        log("DUNGEON: Final update heatmap");
+        update_heatmap();
+
         break;
     }
 

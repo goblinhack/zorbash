@@ -133,7 +133,8 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     if (!game->robot_mode) {
         if (!last_key_pressed_when) {
             last_key_pressed_when = time_get_time_ms_cached();
-        } else if (time_get_time_ms_cached() - last_key_pressed_when < THING_MOVE_SPEED_MS) {
+        } else if (time_get_time_ms_cached() - last_key_pressed_when < 
+                     game->get_move_speed()) {
             return;
         }
     }

@@ -1023,8 +1023,6 @@ public:
     timestamp_t decr_timestamp_jump_begin(void);
     timestamp_t decr_timestamp_jump_end(timestamp_t);
     timestamp_t decr_timestamp_jump_end(void);
-    timestamp_t decr_timestamp_last_wander_try(timestamp_t);
-    timestamp_t decr_timestamp_last_wander_try(void);
     timestamp_t decr_timestamp_lunge_begin(timestamp_t);
     timestamp_t decr_timestamp_lunge_begin(void);
     timestamp_t decr_timestamp_lunge_end(timestamp_t);
@@ -1050,7 +1048,6 @@ public:
     timestamp_t get_timestamp_hunger_tick(void) const;
     timestamp_t get_timestamp_jump_begin(void) const;
     timestamp_t get_timestamp_jump_end(void) const;
-    timestamp_t get_timestamp_last_wander_try(void) const;
     timestamp_t get_timestamp_lunge_begin(void) const;
     timestamp_t get_timestamp_lunge_end(void) const;
     timestamp_t get_timestamp_move_begin(void) const;
@@ -1080,8 +1077,6 @@ public:
     timestamp_t incr_timestamp_jump_begin(void);
     timestamp_t incr_timestamp_jump_end(timestamp_t);
     timestamp_t incr_timestamp_jump_end(void);
-    timestamp_t incr_timestamp_last_wander_try(timestamp_t);
-    timestamp_t incr_timestamp_last_wander_try(void);
     timestamp_t incr_timestamp_lunge_begin(timestamp_t);
     timestamp_t incr_timestamp_lunge_begin(void);
     timestamp_t incr_timestamp_lunge_end(timestamp_t);
@@ -1107,7 +1102,6 @@ public:
     timestamp_t set_timestamp_hunger_tick(timestamp_t);
     timestamp_t set_timestamp_jump_begin(timestamp_t);
     timestamp_t set_timestamp_jump_end(timestamp_t);
-    timestamp_t set_timestamp_last_wander_try(timestamp_t);
     timestamp_t set_timestamp_lunge_begin(timestamp_t);
     timestamp_t set_timestamp_lunge_end(timestamp_t);
     timestamp_t set_timestamp_move_begin(timestamp_t);
@@ -1274,7 +1268,6 @@ public:
     void move_reset_timestamps(void);
     void move_set_dir_from_delta(fpoint);
     void move_to(fpoint to);
-    void move_to(fpoint to, uint32_t speed);
     void move_to_immediately(fpoint to);
     void msg(const std::string&);
     void new_age_map(void);
@@ -1339,7 +1332,7 @@ public:
     void update_all(void);
     void update_interpolated_position(void);
     void update_light(void);
-    void update_pos(fpoint, bool immediately, uint32_t speed = 0);
+    void update_pos(fpoint, bool immediately);
     void update_tick(void);
     void robot_tick(void);
     void robot_change_state(int new_state, const std::string &why);

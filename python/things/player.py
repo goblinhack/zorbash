@@ -86,7 +86,6 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_light_strength(8)
     mytp.set_long_text_description("Our most noble adventurer or no particular race or gender. Devoid of fear and stout of heart. Likes kittens.")
     mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
-    mytp.set_move_speed_ms(100)
     mytp.set_on_bite_do("player.on_bite()")
     mytp.set_on_born_do("player.on_born()")
     mytp.set_on_hit_do("player.on_hit()")

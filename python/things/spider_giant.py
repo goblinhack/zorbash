@@ -70,7 +70,6 @@ def tp_init(name, text_name):
     mytp.set_loves_poison(True)
     mytp.set_loves_spiderwebs(True)
     mytp.set_monst_size(zx.MONST_SIZE_GIANT)
-    mytp.set_move_speed_ms(150)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d6")
     mytp.set_on_bite_do("spider_giant.on_bite()")

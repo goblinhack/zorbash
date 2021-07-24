@@ -68,7 +68,6 @@ def tp_init(name, text_name):
     mytp.set_is_shovable(True)
     mytp.set_long_text_description("An enormous rat. Blood drips from its teeth. Will eat almost anything, especially you. Answers to the name of Mr Squeekles.")
     mytp.set_monst_size(zx.MONST_SIZE_LARGE)
-    mytp.set_move_speed_ms(50)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d6")
     mytp.set_on_bite_do("rat_giant.on_bite()")

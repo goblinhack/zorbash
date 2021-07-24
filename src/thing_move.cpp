@@ -481,7 +481,7 @@ void Thing::update_interpolated_position (void)
     }
 }
 
-void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
+void Thing::update_pos (fpoint to, bool immediately)
 {_
     if (!is_hidden) {
         dbg("Update pos to %f,%f", to.x, to.y);
@@ -513,18 +513,6 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
         }
     }
 
-    int move_speed;
-    if (speed) {
-        move_speed = speed;
-    } else {
-        auto owner = get_top_owner();
-        if (owner) {
-            move_speed = owner->tp()->move_speed_ms();
-        } else{
-            move_speed = tpp->move_speed_ms();
-        }
-    }
-
     //
     // If moving things on the non game level, move non smoothly
     //
@@ -540,6 +528,7 @@ void Thing::update_pos (fpoint to, bool immediately, uint32_t speed)
         return;
     }
 
+    int move_speed = game->get_move_speed();
     if (!is_hidden) {
         dbg("Move to %f,%f speed %d", to.x, to.y, move_speed);
     }
@@ -632,15 +621,6 @@ void Thing::move_to (fpoint to)
     move_set_dir_from_delta(delta);
 
     update_pos(to, false);
-}
-
-void Thing::move_to (fpoint to, uint32_t speed)
-{_
-    move_finish();
-    auto delta = to - mid_at;
-    move_set_dir_from_delta(delta);
-
-    update_pos(to, false, speed);
 }
 
 void Thing::move_delta (fpoint delta)

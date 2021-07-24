@@ -354,7 +354,6 @@ private:
     int _minion_leash_distance {};
     int _minion_limit {};
     int _monst_size {};
-    int _move_speed_ms {};
     int _normal_placement_rules {};
     int _on_death_drop_all_items {};
     int _on_death_is_open {};
@@ -821,7 +820,6 @@ public:
     int minion_leash_distance(void) const;
     int minion_limit(void) const;
     int monst_size(void) const;
-    int move_speed_ms(void) const;
     int normal_placement_rules(void) const;
     int on_death_drop_all_items(void) const;
     int on_death_is_open(void) const;
@@ -1156,7 +1154,6 @@ public:
     void set_minion_leash_distance(int);
     void set_minion_limit(int);
     void set_monst_size(int);
-    void set_move_speed_ms(int);
     void set_name(const std::string &);
     void set_normal_placement_rules(int);
     void set_nutrition_dice(const std::string &);

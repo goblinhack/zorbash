@@ -119,7 +119,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t  timestamp_jump_end        */ out << bits(my.t->timestamp_jump_end);
     /* timestamp_t  timestamp_unused2         */ out << bits(my.t->timestamp_unused2);
     /* timestamp_t  timestamp_unused1         */ out << bits(my.t->timestamp_unused1);
-    /* timestamp_t  timestamp_last_wander_try */ out << bits(my.t->timestamp_last_wander_try);
     /* timestamp_t  timestamp_lunge_begin     */ out << bits(my.t->timestamp_lunge_begin);
     /* timestamp_t  timestamp_lunge_end       */ out << bits(my.t->timestamp_lunge_end);
     /* timestamp_t  timestamp_move_begin      */ out << bits(my.t->timestamp_move_begin);
@@ -562,7 +561,6 @@ std::ostream& operator<<(std::ostream &out,
     /* uint32_t           inventory_highlight_slot     */ out << bits(my.t.inventory_highlight_slot);
     /* uint32_t           previous_slot                */ out << bits(my.t.previous_slot);
     /* uint32_t           robot_mode                   */ out << bits(my.t.robot_mode);
-    /* uint32_t           robot_delay_ms               */ out << bits(my.t.robot_delay_ms);
     /* uint32_t           skillbox_highlight_slot      */ out << bits(my.t.skillbox_highlight_slot);
     /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ out << bits(my.t.tick_current);

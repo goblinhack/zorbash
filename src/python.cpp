@@ -1590,7 +1590,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(minion_leash_distance)
     TP_SET_DECL(minion_limit)
     TP_SET_DECL(monst_size)
-    TP_SET_DECL(move_speed_ms)
     TP_SET_DECL(name)
     TP_SET_DECL(normal_placement_rules)
     TP_SET_DECL(nutrition_dice)

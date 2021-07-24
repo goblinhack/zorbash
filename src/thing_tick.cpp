@@ -243,7 +243,7 @@ _
         // Is this redundant with the above?
         //
         static uint32_t last_tick;
-        if (!time_have_x_ms_passed_since(game->robot_delay_ms, last_tick)) {
+        if (!time_have_x_ms_passed_since(game->get_move_speed(), last_tick)) {
             return;
         }
 

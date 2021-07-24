@@ -104,7 +104,7 @@ void Level::update_heatmap (void)
             }
             if (get(_heatmap, x, y)) {
                 if (get(_heatmap, x, y) < 10) {
-                    printf("*");
+                    printf("_");
                     continue;
                 }
                 printf("%c", '1' + get(_heatmap, x, y));

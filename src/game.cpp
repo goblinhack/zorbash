@@ -18,3 +18,11 @@ Game::Game (std::string appdata)
     save_meta = string_timestamp();
     save_file = saved_dir + "saved-slot-" + std::to_string(save_slot);
 }
+
+int Game::get_move_speed (void)
+{_
+    if (game->robot_mode) {
+        return move_speed / 3;
+    }
+    return move_speed;
+}

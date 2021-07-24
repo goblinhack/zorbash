@@ -145,7 +145,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t  timestamp_jump_end        */ in >> bits(T); my.t->timestamp_jump_end = load(T);
     /* timestamp_t  timestamp_unused2         */ in >> bits(T); my.t->timestamp_unused2 = load(T);
     /* timestamp_t  timestamp_unused1         */ in >> bits(T); my.t->timestamp_unused1 = load(T);
-    /* timestamp_t  timestamp_last_wander_try */ in >> bits(T); my.t->timestamp_last_wander_try = load(T);
     /* timestamp_t  timestamp_lunge_begin     */ in >> bits(T); my.t->timestamp_lunge_begin = load(T);
     /* timestamp_t  timestamp_lunge_end       */ in >> bits(T); my.t->timestamp_lunge_end = load(T);
     /* timestamp_t  timestamp_move_begin      */ in >> bits(T); my.t->timestamp_move_begin = load(T);
@@ -704,7 +703,6 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* uint32_t           inventory_highlight_slot     */ in >> bits(my.t.inventory_highlight_slot);
     /* uint32_t           previous_slot                */ in >> bits(my.t.previous_slot);
     /* uint32_t           robot_mode                   */ in >> bits(my.t.robot_mode);
-    /* uint32_t           robot_delay_ms               */ in >> bits(my.t.robot_delay_ms);
     /* uint32_t           skillbox_highlight_slot      */ in >> bits(my.t.skillbox_highlight_slot);
     /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);

@@ -114,7 +114,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
                 if (is_player()) {
                     TOPCON("The brazier falls back on you!");
                 }
-                it->move_to(mid_at, THING_MOVE_SPEED_MS);
+                it->move_to(mid_at);
             }
         } else if (it->is_barrel()) {
             if (is_player()) {
@@ -144,7 +144,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
             TOPCON("%s shoves you!", text_The().c_str());
         }
 
-        it->move_to(shove_pos, THING_MOVE_SPEED_MS);
+        it->move_to(shove_pos);
     }
 
     if (!it->is_dead) {

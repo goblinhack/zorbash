@@ -217,7 +217,6 @@ public:
     uint32_t           inventory_highlight_slot {};
     uint32_t           previous_slot {};
     uint32_t           robot_mode {};
-    uint32_t           robot_delay_ms {ROBOT_SPEED_MS};
     uint32_t           skillbox_highlight_slot {};
     uint32_t           tick_completed {1};
     uint32_t           tick_current {1};
@@ -249,6 +248,7 @@ public:
         STATE_QUIT_MENU,
     };
     int                state {STATE_NORMAL};
+    int                move_speed {THING_MOVE_SPEED_MS}; // Speed of all things that move
 
     //
     // Make sure to update thing_fini.cpp to remove these pointers
@@ -322,6 +322,7 @@ public:
     void dump(std::string prefix, std::ostream &out);
     void dump(std::string prefix);
     void change_state(int state);
+    int get_move_speed(void);
 };
 
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);

@@ -198,6 +198,12 @@ _
             astar_debug = {};
 #endif
             auto astar_end = goal.at;
+            {
+                dbg2("ASTAR pre solve:");
+                auto start = point(0, 0);
+                auto end = point(maxx - minx, maxy - miny);
+                astar_dump(g.dmap, goal.at, start, end);
+            }
             auto result = astar_solve(path_debug,
                                       astar_start,
                                       astar_end,
@@ -564,10 +570,17 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     dbg2("Need to avoid %s", it->to_string().c_str());
 
                     bool got_avoid = false;
-
                     auto d = ai_avoid_distance();
+                    if (!d) {
+                        d = 2;
+                    }
+
                     for (auto dx = -d; dx <= d; dx++) {
                         for (auto dy = -d; dy <= d; dy++) {
+
+                            if (!dx && !dy) {
+                                continue;
+                            }
 
                             auto dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                             if (dist < ai_avoid_distance()) {
@@ -842,7 +855,7 @@ next:
 void Thing::robot_tick (void)
 {_
     static uint32_t last_tick;
-    if (!time_have_x_ms_passed_since(game->robot_delay_ms, last_tick)) {
+    if (!time_have_x_ms_passed_since(game->get_move_speed(), last_tick)) {
         return;
     }
 

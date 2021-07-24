@@ -18,12 +18,6 @@ int Thing::is_hazardous_to_me (point p)
         }
     }
 
-    if (level->is_lava(p)) {
-        if (hates_fire()) {
-            return true;
-        }
-    }
-
     int heat = level->heatmap(p);
     if (heat >= 10) {
         if (hates_fire()) {

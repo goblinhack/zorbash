@@ -185,6 +185,13 @@ bool Thing::ai_obstacle (Thingp it)
     }
 
     //
+    // Lava, acid etc...
+    //
+    if (is_hazardous_to_me(make_point(it->mid_at))) {
+        return true;
+    }
+
+    //
     // Stop tentacleyes piling on top of each other
     //
     if (it->is_floating()) {

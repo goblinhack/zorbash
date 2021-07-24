@@ -69,7 +69,6 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
     mytp.set_loves_poison(True)
     mytp.set_monst_size(zx.MONST_SIZE_GIANT)
-    mytp.set_move_speed_ms(150)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_bite_do("skeleton_giant.on_bite()")
     mytp.set_on_death_do("skeleton_giant.on_death()")

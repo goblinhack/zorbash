@@ -1098,9 +1098,6 @@ class Tp:
     def set_is_ascend_dungeon(self, value):
         zx.tp_set_is_ascend_dungeon(self, value)
 
-    def set_move_speed_ms(self, value):
-        zx.tp_set_move_speed_ms(self, value)
-
     def set_weapon_use_delay_hundredths(self, value):
         zx.tp_set_weapon_use_delay_hundredths(self, value)
 

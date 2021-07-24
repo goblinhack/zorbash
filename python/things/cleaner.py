@@ -56,7 +56,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_light_strength(2)
     mytp.set_long_text_description("Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners leave a trail of corrosive slime in their wake. Avoid this. Cleaners also have a habit of eating your hard fought items.")
     mytp.set_monst_size(zx.MONST_SIZE_LARGE)
-    mytp.set_move_speed_ms(150)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d4")
     mytp.set_on_death_do("cleaner.on_death()")
