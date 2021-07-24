@@ -430,8 +430,8 @@ class Tp:
     def set_is_rrr66(self, value):
         zx.tp_set_is_rrr66(self, value)
 
-    def set_is_rrr67(self, value):
-        zx.tp_set_is_rrr67(self, value)
+    def set_ai_enemy_memory(self, value):
+        zx.tp_set_ai_enemy_memory(self, value)
 
     def set_is_debug_path(self, value):
         zx.tp_set_is_debug_path(self, value)

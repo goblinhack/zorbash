@@ -55,7 +55,7 @@ void Thing::add_enemy (Thingp attacker)
         return;
     }
 
-    if (is_enemy(attacker)) {
+    if (!ai_enemy_memory()) {
         return;
     }
 
@@ -76,7 +76,7 @@ void Thing::add_enemy (Thingp attacker)
         } else {
             dbg("Add new enemy %s", attacker->to_string().c_str());
         }
-        monstp->enemies[attacker->id] = 10;
+        monstp->enemies[attacker->id] = ai_enemy_memory();
     } else {
         if (is_player() && game->robot_mode) {
             CON("Robo: Increment new enemy %s", attacker->to_string().c_str());

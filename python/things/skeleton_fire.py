@@ -35,6 +35,7 @@ def on_firing_at_something(me, target, x, y): # Return True on doing an action
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_avoid_distance(4)
+    mytp.set_ai_enemy_memory(10)
     mytp.set_ai_scent_distance(10)
     mytp.set_ai_vision_distance(8)
     mytp.set_attack_humanoid(True)

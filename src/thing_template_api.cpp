@@ -340,7 +340,7 @@ int Tp::is_rrr63(void) const                                         { return _i
 int Tp::is_rrr64(void) const                                         { return _is_rrr64; }
 int Tp::is_rrr65(void) const                                         { return _is_rrr65; }
 int Tp::is_rrr66(void) const                                         { return _is_rrr66; }
-int Tp::is_rrr67(void) const                                         { return _is_rrr67; }
+int Tp::ai_enemy_memory(void) const                                         { return _ai_enemy_memory; }
 int Tp::is_debug_path(void) const                                         { return _is_debug_path; }
 int Tp::is_key_collector(void) const                                         { return _is_key_collector; }
 int Tp::is_treasure_collector(void) const                                         { return _is_treasure_collector; }
@@ -656,7 +656,7 @@ void Tp::set_is_rrr63(int v)                                         { _is_rrr63
 void Tp::set_is_rrr64(int v)                                         { _is_rrr64 = v; }
 void Tp::set_is_rrr65(int v)                                         { _is_rrr65 = v; }
 void Tp::set_is_rrr66(int v)                                         { _is_rrr66 = v; }
-void Tp::set_is_rrr67(int v)                                         { _is_rrr67 = v; }
+void Tp::set_ai_enemy_memory(int v)                                         { _ai_enemy_memory = v; }
 void Tp::set_is_debug_path(int v)                                         { _is_debug_path = v; }
 void Tp::set_is_key_collector(int v)                                         { _is_key_collector = v; }
 void Tp::set_is_rrr7(int v)                                          { _is_rrr7 = v; }

@@ -41,6 +41,7 @@ def on_move(me, x, y):
 def tp_init(name, text_name, short_text_name, title):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_ai_scent_distance(10) # Used in enemy calculations
+    mytp.set_ai_enemy_memory(10)
     mytp.set_attack_shove(True)
     mytp.set_capacity_height(20)
     mytp.set_capacity_width(20)

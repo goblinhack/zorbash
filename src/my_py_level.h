@@ -195,7 +195,7 @@ PyObject *level_is_rrr63_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr64_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr65_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr66_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr67_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_ai_enemy_memory_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_debug_path_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_collector_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_collector_at(PyObject *obj, PyObject *args, PyObject *keywds);

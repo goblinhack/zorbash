@@ -10,6 +10,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
+    mytp.set_ai_enemy_memory(0)
     mytp.set_ai_scent_distance(5)
     mytp.set_attack_lunge(True)
     mytp.set_collision_attack_radius(0.60)
