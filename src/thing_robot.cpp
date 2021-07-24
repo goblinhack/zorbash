@@ -198,12 +198,14 @@ _
             astar_debug = {};
 #endif
             auto astar_end = goal.at;
+#if 0
             {
                 dbg2("ASTAR pre solve:");
                 auto start = point(0, 0);
                 auto end = point(maxx - minx, maxy - miny);
                 astar_dump(g.dmap, goal.at, start, end);
             }
+#endif
             auto result = astar_solve(path_debug,
                                       astar_start,
                                       astar_end,

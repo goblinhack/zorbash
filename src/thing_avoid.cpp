@@ -193,6 +193,9 @@ bool Thing::will_avoid_threat (const Thingp itp)
 
     if (!is_on_fire()) {
         if (me->hates_fire()) {
+            if (it->is_brazier()) {
+                return false;
+            }
             if (it->is_fire()) {
                 return true;
             }
