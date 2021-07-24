@@ -18,13 +18,31 @@ bool Thing::is_enemy (Thingp attacker) const
         return false;
     }
 
-    auto enemy = attacker->id;
-    for (const auto& e : monstp->enemies) {
-        if (e == enemy) {
-            return true;
-        }
+    if (monstp->enemies.find(attacker->id) != monstp->enemies.end()) {
+        return true;
     }
     return false;
+}
+
+//
+// Timeout enemies so we don't resent them forever.
+//
+void Thing::enemies_tick (void)
+{_
+    for (auto &p : monstp->enemies) {
+        if (--p.second <= 0) {
+            monstp->enemies.erase(p.first);
+            if (is_player()) {
+                if (game->robot_mode) {
+                    auto attacker = level->thing_find(p.first);
+                    if (attacker) {
+                        CON("Robo: remove enemy: %s", attacker->to_string().c_str());
+                    }
+                }
+            }
+            return;
+        }
+    }
 }
 
 void Thing::add_enemy (Thingp attacker)
@@ -45,9 +63,6 @@ void Thing::add_enemy (Thingp attacker)
         //
         // Allow the robot to make enemies
         //
-        if (game->robot_mode) {
-            CON("Robo: add enemy: %s", attacker->to_string().c_str());
-        }
     } else if (unlikely(!is_monst())) {
         //
         // Only monsts make enemies
@@ -55,11 +70,19 @@ void Thing::add_enemy (Thingp attacker)
         return;
     }
 
-    if (monstp->enemies.size() > 10) {
-        monstp->enemies.clear();
+    if (!monstp->enemies[attacker->id]) {
+        if (is_player() && game->robot_mode) {
+            CON("Robo: Add new enemy %s", attacker->to_string().c_str());
+        } else {
+            dbg("Add new enemy %s", attacker->to_string().c_str());
+        }
+        monstp->enemies[attacker->id] = 10;
+    } else {
+        if (is_player() && game->robot_mode) {
+            CON("Robo: Increment new enemy %s", attacker->to_string().c_str());
+        } else {
+            dbg("Increment new enemy %s", attacker->to_string().c_str());
+        }
+        monstp->enemies[attacker->id]++;
     }
-
-    auto enemy = attacker->id;
-    monstp->enemies.push_back(enemy);
-    dbg("Add enemy %s", attacker->to_string().c_str());
 }

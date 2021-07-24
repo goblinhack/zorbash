@@ -1285,68 +1285,68 @@ int Thing::incr_stat_defence (void)
 ////////////////////////////////////////////////////////////////////////////
 // stats19
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_stats19 (void) const
+int Thing::get_stats19 (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_stats19);
+        return (monstp->stats19);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats_stats19 (int v)
+int Thing::set_stats19 (int v)
 {_
     if (is_player()) {
         game->request_update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stats19 = v);
+    auto n = (monstp->stats19 = v);
     return (n);
 }
 
-int Thing::decr_stats_stats19 (int v)
+int Thing::decr_stats19 (int v)
 {_
     if (is_player()) {
         game->request_update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stats19 -= v);
+    auto n = (monstp->stats19 -= v);
     return (n);
 }
 
-int Thing::incr_stats_stats19 (int v)
+int Thing::incr_stats19 (int v)
 {_
     if (is_player()) {
         game->request_update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stats19 += v);
+    auto n = (monstp->stats19 += v);
     return (n);
 }
 
-int Thing::decr_stats_stats19 (void)
+int Thing::decr_stats19 (void)
 {_
     if (is_player()) {
         game->request_update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stats19--);
+    auto n = (monstp->stats19--);
     return (n);
 }
 
-int Thing::incr_stats_stats19 (void)
+int Thing::incr_stats19 (void)
 {_
     if (is_player()) {
         game->request_update_rightbar = true;
     }
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_stats19++);
+    auto n = (monstp->stats19++);
     return (n);
 }
 

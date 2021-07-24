@@ -81,6 +81,11 @@ void Thing::achieve_goals_in_life (void)
     hunger_clock();
     if (is_dead) { return; }
 
+    //
+    // Timeout enemies
+    //
+    enemies_tick();
+
     if (collision_check_do()) {
         return;
     }

@@ -98,9 +98,9 @@ public:
     int          stats11 = {};
     int          stats12 = {};
     int          stats17 = {};
-    int          stats_stats19 = {};
+    int          stats19 = {};
     int          stat_strength = {};
-    int          submerged_offset = {};      // GL co-orids
+    int          submerged_offset = {};      // Pixels
     int          throw_distance = {};
     int          tick_rate_tenths = {};
     int          tick_resurrect_when = {};
@@ -112,7 +112,7 @@ public:
     std::list<ThingId>    carrying;
     std::list<ThingId>    skills;
     std::string           msg;               // Text that floats on screen
-    std::vector<ThingId>  enemies;           // List of things that wronged us
+    std::map<ThingId, int> enemies {};       // List of things that wronged us
     std::vector<point>    move_path;
     std::vector<uint16_t> inventory_id;      // Vector of tp_id
     std::vector<uint16_t> skillbox_id;       // Vector of tp_id

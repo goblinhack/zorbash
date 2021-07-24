@@ -223,7 +223,7 @@ _
         auto v = tpp->stat_defence();
         if (unlikely(v)) {
             set_stat_defence(v);
-            set_stats_stats19(v);
+            set_stats19(v);
         }
     }
 

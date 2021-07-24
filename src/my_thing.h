@@ -493,8 +493,8 @@ public:
     int decr_stats12(void);
     int decr_stats17(int);
     int decr_stats17(void);
-    int decr_stats_stats19(int);
-    int decr_stats_stats19(void);
+    int decr_stats19(int);
+    int decr_stats19(void);
     int decr_stat_strength(int);
     int decr_stat_strength(void);
     int decr_throw_distance(int);
@@ -557,7 +557,7 @@ public:
     int get_stats11(void) const;
     int get_stats12(void) const;
     int get_stats17(void) const;
-    int get_stats_stats19(void) const;
+    int get_stats19(void) const;
     int get_stat_strength(void) const;
     int get_submerged_offset(void) const;
     int get_throw_distance(void) const;
@@ -656,8 +656,8 @@ public:
     int incr_stats12(void);
     int incr_stats17(int);
     int incr_stats17(void);
-    int incr_stats_stats19(int);
-    int incr_stats_stats19(void);
+    int incr_stats19(int);
+    int incr_stats19(void);
     int incr_stat_strength(int);
     int incr_stat_strength(void);
     int incr_throw_distance(int);
@@ -940,7 +940,7 @@ public:
     int set_stats11(int);
     int set_stats12(int);
     int set_stats17(int);
-    int set_stats_stats19(int);
+    int set_stats19(int);
     int set_stat_strength(int);
     int set_throw_distance(int);
     int set_tick_rate_tenths(int);
@@ -1335,6 +1335,7 @@ public:
     void update_pos(fpoint, bool immediately);
     void update_tick(void);
     void robot_tick(void);
+    void enemies_tick(void);
     void robot_change_state(int new_state, const std::string &why);
     bool robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy);
     int robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
