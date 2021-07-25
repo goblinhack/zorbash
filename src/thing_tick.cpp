@@ -198,7 +198,7 @@ bool Thing::collision_check_do (void)
 
 void Thing::tick (void)
 {_
-    if (unlikely(g_opt_debug4)) {
+    if (unlikely(g_opt_debug3)) {
         dbg("Tick");
     }
 _
@@ -219,14 +219,14 @@ _
                 incr_tick();
             }
         }
-        if (unlikely(g_opt_debug4)) {
+        if (unlikely(g_opt_debug3)) {
             dbg("Tick; is dead");
         }
         return;
     }
 
     if (unlikely(is_dead)) {
-        if (unlikely(g_opt_debug4)) {
+        if (unlikely(g_opt_debug3)) {
             dbg("Tick; died");
         }
         return;
@@ -240,6 +240,9 @@ _
         // Stop the robot racing around too fast.
         //
         if (is_moving) {
+            if (unlikely(g_opt_debug3)) {
+                dbg("Tick; robot is moving, wait");
+            }
             return;
         }
 

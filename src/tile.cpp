@@ -1160,7 +1160,7 @@ Tilep tile_random (Tilemap *tmap)
     if (unlikely(tiles->empty())) {
         return (0);
     }
-    auto tile = ((*tiles)[myrand() % tiles->size()]);
+    auto tile = ((*tiles)[sysrand() % tiles->size()]);
     return tile_index_to_tile(tile->global_index);
 }
 

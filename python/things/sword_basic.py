@@ -1,12 +1,11 @@
 import zx
 import tp
-import random
 
 def on_use(owner, item, target, x, y):
     #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
     #zx.con("item    {} {:08X}".format(zx.thing_get_name(item), item))
     #zx.con("target  {} {:08X}".format(zx.thing_get_name(target), target))
-    zx.thing_sound_play_channel(owner, zx.CHANNEL_WEAPON, "sword_swing{}".format(random.randint(1,3)))
+    zx.thing_sound_play_channel(owner, zx.CHANNEL_WEAPON, "sword_swing{}".format(zx.randint(1,3)))
     damage = zx.thing_get_damage_melee(item)
     enchant = zx.thing_get_enchant(item)
     zx.thing_set_current_damage(owner, damage + enchant)

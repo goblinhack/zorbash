@@ -222,6 +222,7 @@ public:
     uint32_t           skillbox_highlight_slot {};
     uint32_t           tick_completed {1};
     uint32_t           tick_current {1};
+    uint32_t           frame_count {0};
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving

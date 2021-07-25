@@ -8,6 +8,7 @@
 #include "my_depth.h"
 #include "my_sys.h"
 #include "my_wid_console.h"
+#include "my_random.h"
 #include "my_thing.h"
 #include "my_python.h"
 #include "my_player.h"
@@ -16,6 +17,8 @@
 
 void Level::tick (void)
 {_
+    mysrand(game->seed);
+
     // LOG("Tick");
     // TOPCON("monsts %d.", monst_count);
     if (!game->started) {
@@ -109,8 +112,12 @@ _
             continue;
         }
         t->tick();
+
         if (t->get_tick() < game->tick_current) {
-            wait = true;
+            if (!wait) {
+                wait = true;
+                t->log("Has not finished tick yet");
+            }
         }
     } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 _
@@ -126,6 +133,7 @@ _
 _
     if (!wait) {
         game->tick_end();
+        update();
     }
 }
 

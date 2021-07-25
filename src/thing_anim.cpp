@@ -422,7 +422,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
     //
     timestamp_t delay = tile_delay_ms(tile);
     if (delay) {
-        delay = delay + (myrand() % delay) / 5;
+        delay = delay + (sysrand() % delay) / 5;
     }
 
     timestamp_next_frame = time_get_time_ms_cached() + delay;

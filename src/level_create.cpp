@@ -12,6 +12,8 @@
 
 void Level::create (point3d at, int seed)
 {_
+    mysrand(game->seed);
+
     is_starting = true;
     clear();
 
@@ -20,7 +22,6 @@ void Level::create (point3d at, int seed)
 
     this->seed = seed;
     world_at = at;
-    mysrand(seed);
 
     log("-");
     log("Creating, seed %u", seed);

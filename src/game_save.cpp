@@ -564,6 +564,7 @@ std::ostream& operator<<(std::ostream &out,
     /* uint32_t           skillbox_highlight_slot      */ out << bits(my.t.skillbox_highlight_slot);
     /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ out << bits(my.t.tick_current);
+    /* uint32_t           frame_count                  */ out << bits(my.t.frame_count);
 
     out << bits(wid_topcon_serialize());
     out << bits(wid_console_serialize());

@@ -1,6 +1,5 @@
 import zx
 import tp
-import random
 
 
 def explode(me, x, y):

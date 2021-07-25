@@ -17,4 +17,9 @@
 #define random_range(a, b)           (pcg32_boundedrand((b) - (a)) + (a))
 #define random_range_inclusive(a, b) (pcg32_boundedrand((b) - (a) + 1) + (a))
 
+//
+// Use this for display related randomness, not things
+//
+#define sysrand()                    rand()
+
 #endif

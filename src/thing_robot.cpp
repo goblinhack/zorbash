@@ -982,7 +982,10 @@ void Thing::robot_tick (void)
                     for (auto p : monstp->move_path) {
                         s += p.to_string() + " ";
                     }
-                    robot_change_state(ROBOT_STATE_MOVING, s.c_str());
+
+                    if (monstp->move_path.size()) {
+                        robot_change_state(ROBOT_STATE_MOVING, s.c_str());
+                    }
                     return;
                 } else {
                     CON("Robot: nothing to do");

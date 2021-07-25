@@ -1136,7 +1136,7 @@ void sdl_loop (void)
     SDL_Event events[10];
     int found;
     int i;
-    uint16_t frames = 0;
+    int frames = 0;
 
     sdl_mouse_center();
     SDL_SetEventFilter(sdl_filter_events, 0);
@@ -1188,6 +1188,7 @@ void sdl_loop (void)
 
     for (;/*ever*/;) {
         frames++;
+        game->frame_count++;
 
         //
         // Reset joystick handling before we poll and update.

@@ -1,19 +1,18 @@
 import zx
 import tp
-import random
 
 def on_bite(me, x, y):
-    sound = "growl{}".format(random.randint(1, 10))
+    sound = "growl{}".format(zx.randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    sound = "hiss{}".format(random.randint(1, 10))
+    sound = "hiss{}".format(zx.randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_miss(me, hitter, x, y):
-    sound = "hiss{}".format(random.randint(1, 10))
+    sound = "hiss{}".format(zx.randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 

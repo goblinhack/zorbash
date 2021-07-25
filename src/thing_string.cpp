@@ -21,11 +21,12 @@ std::string Thing::to_string (void) const
     if (unlikely(!level)) {
         return (string_sprintf("<not in level> %" PRIx32 "(<no tp>%s%s%s%s%s @%g,%g)",
                                id,
-                               is_dead ? "/dead" : "",
-                               is_on_fire() ? "/onfire" : "",
-                               is_hidden ? "/hidden" : "",
-                               is_jumping ? "/jumping" : "",
-                               is_falling ? "/falling" : "",
+                               is_dead                       ? "/dead" : "",
+                               is_on_fire()                  ? "/onfire" : "",
+                               is_hidden                     ? "/hidden" : "",
+                               is_jumping                    ? "/jumping" : "",
+                               is_moving                     ? "/moving" : "",
+                               is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     }
 
@@ -35,11 +36,12 @@ std::string Thing::to_string (void) const
                                level->world_at.y,
                                level->world_at.z,
                                id,
-                               is_dead ? "/dead" : "",
-                               is_on_fire() ? "/onfire" : "",
-                               is_hidden ? "/hidden" : "",
-                               is_jumping ? "/jumping" : "",
-                               is_falling ? "/falling" : "",
+                               is_dead                       ? "/dead" : "",
+                               is_on_fire()                  ? "/onfire" : "",
+                               is_hidden                     ? "/hidden" : "",
+                               is_jumping                    ? "/jumping" : "",
+                               is_moving                     ? "/moving" : "",
+                               is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     } else if (get_health_max() || is_active() || is_interesting()) {_
         return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s T%u @%g,%g)",
@@ -51,6 +53,7 @@ std::string Thing::to_string (void) const
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
+                               is_moving                     ? "/moving" : "",
                                is_falling                    ? "/falling" : "",
                                is_changing_level             ? "/chg-level" : "",
                                is_waiting_to_ascend_dungeon  ? "/asc-dung" : "",
@@ -65,11 +68,12 @@ std::string Thing::to_string (void) const
                                level->world_at.y,
                                level->world_at.z,
                                id, tpp->name().c_str(),
-                               is_dead ? "/dead" : "",
-                               is_on_fire() ? "/onfire" : "",
-                               is_hidden ? "/hidden" : "",
-                               is_jumping ? "/jumping" : "",
-                               is_falling ? "/falling" : "",
+                               is_dead                       ? "/dead" : "",
+                               is_on_fire()                  ? "/onfire" : "",
+                               is_hidden                     ? "/hidden" : "",
+                               is_jumping                    ? "/jumping" : "",
+                               is_moving                     ? "/moving" : "",
+                               is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     }
 }
@@ -80,28 +84,30 @@ std::string Thing::to_short_string (void) const
     verify(this);
 
     if (unlikely(!level)) {
-        return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s @%g,%g)",
-                               is_dead ? "/dead" : "",
-                               is_on_fire() ? "/onfire" : "",
-                               is_hidden ? "/hidden" : "",
-                               is_jumping ? "/jumping" : "",
-                               is_falling ? "/falling" : "",
+        return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s%s @%g,%g)",
+                               is_dead                       ? "/dead" : "",
+                               is_on_fire()                  ? "/onfire" : "",
+                               is_hidden                     ? "/hidden" : "",
+                               is_jumping                    ? "/jumping" : "",
+                               is_moving                     ? "/moving" : "",
+                               is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     }
 
     if (unlikely(!tpp)) {_
-        return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
-                               is_dead ? "/dead" : "",
-                               is_on_fire() ? "/onfire" : "",
-                               is_hidden ? "/hidden" : "",
-                               is_jumping ? "/jumping" : "",
-                               is_falling ? "/falling" : "",
+                               is_dead                       ? "/dead" : "",
+                               is_on_fire()                  ? "/onfire" : "",
+                               is_hidden                     ? "/hidden" : "",
+                               is_jumping                    ? "/jumping" : "",
+                               is_moving                     ? "/moving" : "",
+                               is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     } else if (get_health_max() || is_active() || is_interesting()) {_
-        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -110,6 +116,7 @@ std::string Thing::to_short_string (void) const
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
+                               is_moving                     ? "/moving" : "",
                                is_falling                    ? "/falling" : "",
                                is_changing_level             ? "/chg-level" : "",
                                is_waiting_to_ascend_dungeon  ? "/asc-dung" : "",
@@ -118,16 +125,17 @@ std::string Thing::to_short_string (void) const
                                is_waiting_to_ascend_sewer    ? "/asc-sewer" : "",
                                mid_at.x, mid_at.y));
     } else {_
-        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id, tpp->name().c_str(),
-                               is_dead ? "/dead" : "",
-                               is_on_fire() ? "/onfire" : "",
-                               is_hidden ? "/hidden" : "",
-                               is_jumping ? "/jumping" : "",
-                               is_falling ? "/falling" : "",
+                               is_dead                       ? "/dead" : "",
+                               is_on_fire()                  ? "/onfire" : "",
+                               is_hidden                     ? "/hidden" : "",
+                               is_jumping                    ? "/jumping" : "",
+                               is_moving                     ? "/moving" : "",
+                               is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     }
 }

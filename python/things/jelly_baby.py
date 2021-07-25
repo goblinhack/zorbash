@@ -1,6 +1,5 @@
 import zx
 import tp
-import random
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "squelch"):
@@ -8,7 +7,7 @@ def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
 
 def on_death(me, x, y):
     zx.level_spawn_at_thing(me, "pink_splatter")
-    zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "slime{}".format(random.randint(1, 9)))
+    zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "slime{}".format(zx.randint(1, 9)))
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)

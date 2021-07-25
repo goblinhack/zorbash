@@ -709,7 +709,6 @@ int32_t main (int32_t argc, char *argv[])
     std::normal_distribution<double> distribution;
     distribution.param(std::normal_distribution<double>(mean, std).param());
     rng.seed(std::random_device{}());
-    mysrand(time(0));
 
 #ifdef ENABLE_CRASH_HANDLER
     //

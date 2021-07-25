@@ -34,18 +34,26 @@ void Thing::enemies_tick (void)
     }
 
     for (auto &p : monstp->enemies) {
-        if (--p.second <= 0) {
-            monstp->enemies.erase(p.first);
-            if (is_player()) {
-                if (game->robot_mode) {
-                    auto attacker = level->thing_find_optional(p.first);
-                    if (attacker) {
-                        CON("Robot: remove enemy: %s", attacker->to_string().c_str());
-                    }
-                }
-            }
-            return;
+        if (--p.second > 0) {
+            continue;
         }
+
+        auto attacker = level->thing_find_optional(p.first);
+        if (attacker) {
+            //
+            // If far enough away start to forget this enemy
+            //
+            if (distance(attacker->mid_at, mid_at) > 4) {
+                monstp->enemies.erase(p.first);
+            }
+
+            if (is_player() && game->robot_mode) {
+                CON("Robot: remove enemy: %s", attacker->to_string().c_str());
+            }
+        } else {
+            monstp->enemies.erase(p.first);
+        }
+        return;
     }
 }
 

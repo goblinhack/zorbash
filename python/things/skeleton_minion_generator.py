@@ -1,9 +1,8 @@
 import zx
 import tp
-import random
 
 def on_idle_dice(me, x, y):
-    if random.randint(1, 100) < 10:
+    if zx.randint(1, 100) < 10:
         if zx.level_spawn_next_to(me, "skeleton_minion_fire"):
             zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones1")
     else:
@@ -11,7 +10,7 @@ def on_idle_dice(me, x, y):
             zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones2")
 
 def on_death(me, x, y):
-    if random.randint(1, 2) == 1:
+    if zx.randint(1, 2) == 1:
         if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "bones1"):
             zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones1")
     else:

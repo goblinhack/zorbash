@@ -706,6 +706,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* uint32_t           skillbox_highlight_slot      */ in >> bits(my.t.skillbox_highlight_slot);
     /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);
+    /* uint32_t           frame_count                  */ in >> bits(my.t.frame_count);
 
     std::vector<std::wstring> s; in >> bits(s); wid_topcon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);

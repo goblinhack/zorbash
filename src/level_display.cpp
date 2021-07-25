@@ -20,20 +20,6 @@
 
 void Level::display (void)
 {_
-    if (map_changed) {
-        static int last_done;
-        if (time_have_x_secs_passed_since(1, last_done)) {
-            map_changed = false;
-            last_done = time_get_time_ms_cached();
-            update_map();
-        }
-    }
-
-    if (game->request_update_same_level) {
-        game->request_update_same_level = false;
-        update_same_level();
-    }
-
     bool shake = screen_shake_begin();
     display_map();
     if (shake) {
@@ -84,6 +70,19 @@ void Level::display (void)
         if (!heatmap_valid) {
             update_heatmap();
         }
+    }
+}
+
+void Level::update (void)
+{_
+    if (map_changed) {
+        map_changed = false;
+        update_map();
+    }
+
+    if (game->request_update_same_level) {
+        game->request_update_same_level = false;
+        update_same_level();
     }
 }
 

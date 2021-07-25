@@ -1,19 +1,18 @@
 import zx
 import tp
-import random
 
 def on_bite(me, x, y):
-    sound = "growl{}".format(random.randint(1, 10))
+    sound = "growl{}".format(zx.randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    sound = "hiss{}".format(random.randint(1, 10))
+    sound = "hiss{}".format(zx.randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_miss(me, hitter, x, y):
-    sound = "hiss{}".format(random.randint(1, 10))
+    sound = "hiss{}".format(zx.randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
@@ -22,7 +21,7 @@ def on_death(me, x, y):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "monst_death1")
 
 def on_firing_at_something(me, target, x, y): # Return True on doing an action
-    if random.randint(1, 10) < 3:
+    if zx.randint(1, 10) < 3:
         zx.thing_fire_at(me, "laser_energy", target)
         return True
     return False

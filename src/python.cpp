@@ -10,6 +10,7 @@
 #include <frameobject.h>
 
 #include "my_main.h"
+#include "my_random.h"
 #include "my_callstack.h"
 #include "my_depth.h"
 #include "my_python.h"
@@ -1666,16 +1667,17 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(z_prio)
 
     {"abs_to_pct",                                             (PyCFunction)abs_to_pct_,                                            METH_VARARGS | METH_KEYWORDS, "abs to pct "},
+    {"randint",                                                (PyCFunction)randint,                                                METH_VARARGS | METH_KEYWORDS, "rand int "},
     {"con",                                                    (PyCFunction)con_,                                                   METH_VARARGS,                 "log to the console"},
     {"die",                                                    (PyCFunction)die_,                                                   METH_VARARGS,                 "exit game with error"},
     {"err",                                                    (PyCFunction)err_,                                                   METH_VARARGS,                 "error to the log file"},
     {"if_matches",                                             (PyCFunction)if_matches_,                                            METH_VARARGS | METH_KEYWORDS, "if matches"},
     {"if_matches_then_kill",                                   (PyCFunction)if_matches_then_kill_,                                  METH_VARARGS | METH_KEYWORDS, "if matches then kill"},
-    {"level_add",                                              (PyCFunction)level_add_,                                        METH_VARARGS | METH_KEYWORDS, "load a level"},
-    {"level_flood_fill_get_all_things",                        (PyCFunction)level_flood_fill_get_all_things,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_add",                                              (PyCFunction)level_add_,                                             METH_VARARGS | METH_KEYWORDS, "load a level"},
+    {"level_flood_fill_get_all_things",                        (PyCFunction)level_flood_fill_get_all_things,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_get_all",                                          (PyCFunction)level_get_all,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_gfx_flickers_at",                                  (PyCFunction)level_gfx_flickers_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_gfx_water_at",                                     (PyCFunction)level_gfx_water_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_gfx_flickers_at",                                  (PyCFunction)level_gfx_flickers_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_gfx_water_at",                                     (PyCFunction)level_gfx_water_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_able_to_change_levels_at",                      (PyCFunction)level_is_able_to_change_levels_at,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_able_to_fall_at",                               (PyCFunction)level_is_able_to_fall_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_able_to_fire_at",                               (PyCFunction)level_is_able_to_fire_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1693,14 +1695,14 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_attackable_by_player_at",                       (PyCFunction)level_is_attackable_by_player_at,                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_auto_collect_item_at",                          (PyCFunction)level_is_auto_collect_item_at,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_bag_at",                                        (PyCFunction)level_is_bag_at,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_barrel_at",                                     (PyCFunction)level_is_barrel_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_barrel_at",                                     (PyCFunction)level_is_barrel_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_bleeder_at",                                    (PyCFunction)level_is_bleeder_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_blood_at",                                      (PyCFunction)level_is_blood_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_blood_splatter_at",                             (PyCFunction)level_is_blood_splatter_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_bloodied_at",                                   (PyCFunction)level_is_bloodied_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_brazier_at",                                    (PyCFunction)level_is_brazier_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_bridge_at",                                     (PyCFunction)level_is_bridge_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_burnable_at",                                   (PyCFunction)level_is_burnable_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_bridge_at",                                     (PyCFunction)level_is_bridge_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_burnable_at",                                   (PyCFunction)level_is_burnable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_carrier_of_treasure_class_a_at",                (PyCFunction)level_is_carrier_of_treasure_class_a_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_carrier_of_treasure_class_b_at",                (PyCFunction)level_is_carrier_of_treasure_class_b_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_carrier_of_treasure_class_c_at",                (PyCFunction)level_is_carrier_of_treasure_class_c_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2456,6 +2458,27 @@ PyObject *abs_to_pct_ (PyObject *obj, PyObject *args, PyObject *keywds)
     y /= (double) TERM_HEIGHT;
 
     return (Py_BuildValue("dd", x, y));
+}
+
+PyObject *randint (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    int x = 0;
+    int y = 0;
+
+    static char *kwlist[] = {
+        (char*) "x",
+        (char*) "y",
+        0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
+        return (0);
+    }
+
+    //
+    // Python style. We don't use pythons so we can get consistent random
+    // numbers with the one C uses.
+    //
+    return (Py_BuildValue("i", random_range_inclusive(x, y)));
 }
 
 PyObject *pct_to_abs_ (PyObject *obj, PyObject *args, PyObject *keywds)

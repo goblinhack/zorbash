@@ -45,6 +45,7 @@ static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
+                    case 'q': 
                     case SDLK_ESCAPE: {_
                         wid_dead_destroy();
                         return true;

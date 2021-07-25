@@ -667,6 +667,7 @@ public:
     void place_floor_deco(Dungeonp d);
     void place_the_grid(void);
     void dmap_to_player_update(void);
+    void update(void);
     void sanity_check(void);
     void screen_shake_end(void);
     void scroll_map(void);

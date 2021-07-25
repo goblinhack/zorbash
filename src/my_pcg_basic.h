@@ -33,6 +33,8 @@
 #define _MY_PCG_BASIC_H_INCLUDED 1
 
 #include <inttypes.h>
+//#include "my_main.h"
+
 
 #if __cplusplus
 extern "C" {
@@ -80,9 +82,11 @@ static inline void pcg32_srandom(uint64_t seed, uint64_t seq)
 
 static inline uint32_t pcg32_random()
 {
-    return pcg32_random_r(&pcg32_global);
+    uint32_t r = pcg32_random_r(&pcg32_global);
+    // For debugging randomness
+    // CON("RAND %u", r);
+    return r;
 }
-
 
 // pcg32_boundedrand(bound):
 // pcg32_boundedrand_r(rng, bound):
