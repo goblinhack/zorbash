@@ -350,6 +350,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                  i != game->cursor_move_path.rend(); i++) {
                 auto p = *i;
                 if (player->try_to_jump(make_point(p.x, p.y))) {
+                    player->log("Jump; clear move path");
                     game->cursor_move_path.clear();
                     break;
                 }
@@ -374,6 +375,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                 player->try_to_jump(p);
             }
         }
+        player->log("Jump; clear move path");
         player->monstp->move_path.clear();
         game->cursor_move_path.clear();
         level->cursor_path_clear();

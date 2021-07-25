@@ -1248,6 +1248,11 @@ _
         }
     }
 
+    if (thing_colls.empty()) {
+        dbg("Collision check, clear");
+        return false;
+    }
+
     return (collision_find_best_target(target_attacked, target_overlaps));
 }
 

@@ -978,7 +978,7 @@ void Thing::robot_tick (void)
 
             if (!do_something) {
                 if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy)) {
-                    std::string s = "found goal: ";
+                    std::string s = "new goal: ";
                     for (auto p : monstp->move_path) {
                         s += p.to_string() + " ";
                     }
@@ -1049,8 +1049,9 @@ void Thing::robot_change_state (int new_state, const std::string &why)
 
     CON("Robot: %s -> %s: %s", from.c_str(), to.c_str(), why.c_str());
     
-    switch (monstp->robot_state) {
+    switch (new_state) {
         case ROBOT_STATE_IDLE:
+            log("Robot idle: clear move path");
             monstp->move_path.clear();
             break;
         case ROBOT_STATE_MOVING:

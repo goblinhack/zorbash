@@ -17,8 +17,6 @@
 
 void Level::debug_path_draw_line (const std::vector<point> &move_path)
 {_
-    game->cursor_move_path = move_path;
-
     for (auto& c : move_path) {
         if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
             continue;
@@ -57,8 +55,6 @@ void Level::debug_path_clear (void)
     if (!level) {
         return;
     }
-
-    game->cursor_move_path.clear();
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {

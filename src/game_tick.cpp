@@ -76,4 +76,12 @@ void Game::tick_end (void)
             time_get_time_ms_cached() - game->tick_begin_ms);
     }
     CON("-");
+
+    if (level) {
+        level->update();
+
+        if (level->player) {
+            level->player->cursor_path_pop_next_and_move();
+        }
+    }
 }

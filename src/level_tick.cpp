@@ -133,7 +133,6 @@ _
 _
     if (!wait) {
         game->tick_end();
-        update();
     }
 }
 

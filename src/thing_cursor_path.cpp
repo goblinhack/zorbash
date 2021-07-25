@@ -19,6 +19,14 @@
 bool Thing::cursor_path_pop_next_and_move (void)
 {_
     if (monstp && monstp->move_path.size()) {
+        if (g_opt_debug3) {
+            std::string s = "";
+            for (auto p : monstp->move_path) {
+                s += p.to_string() + " ";
+            }
+            log("Move path: %s", s.c_str());
+        }
+
         auto to = monstp->move_path[0];
         auto future_pos = fpoint(to.x, to.y);
 
@@ -110,6 +118,7 @@ bool Thing::cursor_path_pop_first_move (void)
         new_monst();
         monstp->move_path = game->cursor_move_path;
         game->cursor_move_path.clear();
+
         if (cursor_path_pop_next_and_move()) {
             dbg("Move to cursor next hop");
             if (game->cursor_move_path.empty()) {
@@ -167,5 +176,6 @@ bool Thing::cursor_path_pop_first_move (void)
 void Thing::cursor_path_stop (void)
 {_
     new_monst();
+    log("Clear move path");
     monstp->move_path.clear();
 }

@@ -364,6 +364,7 @@ void Level::cursor_path_clear (void)
         return;
     }
 
+    log("Clear cursor path");
     game->cursor_move_path.clear();
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {

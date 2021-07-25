@@ -113,9 +113,18 @@ void Thing::achieve_goals_in_life (void)
     //
     // If there is a next hop to go to, do it.
     //
-    if (cursor_path_pop_next_and_move()) {
-        dbg("Pop next move");
-        return;
+    if (is_player()) {
+        //
+        // Pop the next player move at the end of the game tick
+        //
+    } else {
+        //
+        // Pop the next monst move.
+        //
+        if (cursor_path_pop_next_and_move()) {
+            dbg("Pop next move");
+            return;
+        }
     }
 
     if (monstp->move_path.empty()) {
