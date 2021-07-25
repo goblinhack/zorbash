@@ -38,7 +38,7 @@ public:
     void alloc_thing_id(Thingp t);
     void realloc_thing_id(Thingp t);
     void free_thing_id(Thingp t);
-    Thingp test_thing_ptr(ThingId id);
+    Thingp thing_find_optional(ThingId id);
     Thingp thing_find(ThingId id);
 };
 

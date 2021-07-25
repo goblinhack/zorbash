@@ -856,6 +856,20 @@ next:
 
 void Thing::robot_tick (void)
 {_
+    //
+    // For game smoothness we allow the player to run a bit ahead of the
+    // monsters.
+    //
+    // Do not let the robot do this.
+    //
+    if (game->things_are_moving) {
+        return;
+    }
+
+    if (game->tick_completed != game->tick_current) {
+        return;
+    }
+
     static uint32_t last_tick;
     if (!time_have_x_ms_passed_since(game->get_move_speed(), last_tick)) {
         return;
@@ -964,7 +978,11 @@ void Thing::robot_tick (void)
 
             if (!do_something) {
                 if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy)) {
-                    robot_change_state(ROBOT_STATE_MOVING, "found goal");
+                    std::string s = "found goal: ";
+                    for (auto p : monstp->move_path) {
+                        s += p.to_string() + " ";
+                    }
+                    robot_change_state(ROBOT_STATE_MOVING, s.c_str());
                     return;
                 } else {
                     CON("Robot: nothing to do");

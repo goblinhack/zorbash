@@ -123,6 +123,7 @@ public:
     Game(std::string appdata);
     Game(void) {}
     Thingp thing_find(const ThingId id);
+    Thingp thing_find_optional(const ThingId id);
     WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
     WidPopup *wid_thing_info_create_popup_compact(const std::vector<Thingp> &);
     bool load(std::string save_file, class Game &target);
@@ -158,6 +159,7 @@ public:
     void save_config(void);
     void save_select(void);
     void tick_begin(const std::string &);
+    void tick_begin_now(void);
     void tick_end();
     void robot_mode_tick();
     void wid_collect_create(const std::list<Thingp> items);

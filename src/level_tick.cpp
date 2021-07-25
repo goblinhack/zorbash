@@ -64,7 +64,9 @@ void Level::tick (void)
         }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
-    player_tick();
+    if (!game->robot_mode) {
+        player_tick();
+    }
 
     //
     // Stop rapid pickup/drop events if particles are still in progress

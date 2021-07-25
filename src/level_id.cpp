@@ -21,3 +21,8 @@ Thingp Level::thing_find (const ThingId id)
     //
     return game->world.thing_find(id);
 }
+
+Thingp Level::thing_find_optional (const ThingId id)
+{_
+    return game->world.thing_find_optional(id);
+}

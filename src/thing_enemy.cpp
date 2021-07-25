@@ -34,9 +34,9 @@ void Thing::enemies_tick (void)
             monstp->enemies.erase(p.first);
             if (is_player()) {
                 if (game->robot_mode) {
-                    auto attacker = level->thing_find(p.first);
+                    auto attacker = level->thing_find_optional(p.first);
                     if (attacker) {
-                        CON("Robo: remove enemy: %s", attacker->to_string().c_str());
+                        CON("Robot: remove enemy: %s", attacker->to_string().c_str());
                     }
                 }
             }
@@ -72,16 +72,16 @@ void Thing::add_enemy (Thingp attacker)
 
     if (!monstp->enemies[attacker->id]) {
         if (is_player() && game->robot_mode) {
-            CON("Robo: Add new enemy %s", attacker->to_string().c_str());
+            CON("Robot: Add new enemy %s", attacker->to_string().c_str());
         } else {
             dbg("Add new enemy %s", attacker->to_string().c_str());
         }
         monstp->enemies[attacker->id] = ai_enemy_memory();
     } else {
         if (is_player() && game->robot_mode) {
-            CON("Robo: Increment new enemy %s", attacker->to_string().c_str());
+            CON("Robot: Increment old enemy %s", attacker->to_string().c_str());
         } else {
-            dbg("Increment new enemy %s", attacker->to_string().c_str());
+            dbg("Increment old enemy %s", attacker->to_string().c_str());
         }
         monstp->enemies[attacker->id]++;
     }

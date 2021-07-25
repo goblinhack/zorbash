@@ -48,7 +48,6 @@ bool Thing::on_tick (void)
 
 void Thing::update_tick (void)
 {
-    set_timestamp_unused2(time_get_time_ms_cached());
     set_tick_last_did_something(game->tick_current);
     set_tick_last_location_check(game->tick_current);
     set_tick(game->tick_current);
@@ -121,7 +120,7 @@ void Thing::achieve_goals_in_life (void)
 
     if (monstp->move_path.empty()) {
         if (is_player()) {
-            robot_change_state(ROBOT_STATE_IDLE, "reached goal");
+            robot_change_state(ROBOT_STATE_IDLE, "reached goal  " + std::to_string(get_tick()));
         }
     }
 

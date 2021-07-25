@@ -431,14 +431,6 @@ _
         bounce(0.2, 1.0, 500 + random_range(0, 50), 99999);
     }
 
-    //
-    // Jitter the initial ticks so things don't all tick the same time
-    //
-    if (is_active()) {
-        set_timestamp_unused2(time_get_time_ms_cached() +
-                                random_range(0, get_tick_rate_tenths() * 100));
-    }
-
     init_lights();
 
     auto on_birth = on_birth_do();

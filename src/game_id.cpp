@@ -15,3 +15,8 @@ Thingp Game::thing_find (const ThingId id)
     //
     return world.thing_find(id);
 }
+
+Thingp Game::thing_find_optional (const ThingId id)
+{_
+    return world.thing_find_optional(id);
+}

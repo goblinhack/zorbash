@@ -413,6 +413,7 @@ public:
     Thingp skillbox_get(const uint32_t slot);
     Thingp skillbox_get(void);
     Thingp thing_find(const ThingId id);
+    Thingp thing_find_optional(const ThingId id);
     Thingp thing_new(Tpp, const point at);
     Thingp thing_new(Tpp, const fpoint at);
     Thingp thing_new(Tpp, const fpoint at, const fpoint jitter);

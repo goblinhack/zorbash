@@ -12,7 +12,7 @@
 #include "my_thing.h"
 #include "my_random.h"
 
-Thingp World::test_thing_ptr (ThingId id)
+Thingp World::thing_find_optional (ThingId id)
 {_
     auto f = all_thing_ptrs.find(id);
     if (f == all_thing_ptrs.end()) {
@@ -37,7 +37,7 @@ void World::alloc_thing_id (Thingp t)
 {_
     for (;;) {
         auto id = myrand();
-        if (test_thing_ptr(id)) {
+        if (thing_find_optional(id)) {
             continue;
         }
 

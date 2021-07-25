@@ -14,6 +14,8 @@
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
 
+static auto smoother_movement_but_cheats_a_bit = false;
+
 void player_tick (bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
 {_
     //
@@ -130,6 +132,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     }
 
     static uint32_t last_key_pressed_when;
+#if 0
     if (!game->robot_mode) {
         if (!last_key_pressed_when) {
             last_key_pressed_when = time_get_time_ms_cached();
@@ -138,6 +141,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
             return;
         }
     }
+#endif
 
     if (state[game->config.key_move_left]) {
         left = true;
@@ -287,42 +291,50 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     // Do this after saving the key states above else we can miss keys.
     //
     if (game->things_are_moving) {
-        bool wait = false;
-        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {
-            //
-            // As we allow the player to skip ahead a little bit, make
-            // sure no monster is lagging by one move
-            //
-            if (t->get_tick() < game->tick_current - 1) {
-                wait = true;
-                break;
-            }
-
-            if (t->get_timestamp_move_begin()) {
-                int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
-                if (time_left > 10) {
-                    if (unlikely(g_opt_debug3)) {
-                        t->log("Player move delayed due to monst moving (%d ms left)",
-                               t->get_timestamp_move_end() - time_get_time_ms_cached());
-                    }
-                    wait = true;
-                    break;
-                }
-            }
-        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
-
-        if (wait) {
-            if (unlikely(g_opt_debug3)) {
-                LOG("Player move delayed while things are moving");
-            }
+        if (game->robot_mode) {
             return;
         }
 
-        //
-        // This is a bit of a hack; but the tick is almost done and we
-        // want the game to be smooth.
-        //
-        game->tick_end();
+        if (smoother_movement_but_cheats_a_bit) {
+            bool wait = false;
+            FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {
+                //
+                // As we allow the player to skip ahead a little bit, make
+                // sure no monster is lagging by one move
+                //
+                if (t->get_tick() < game->tick_current - 1) {
+                    wait = true;
+                    break;
+                }
+
+                if (t->get_timestamp_move_begin()) {
+                    int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
+                    if (time_left > 10) {
+                        if (unlikely(g_opt_debug3)) {
+                            t->log("Player move delayed due to monst moving (%d ms left)",
+                                t->get_timestamp_move_end() - time_get_time_ms_cached());
+                        }
+                        wait = true;
+                        break;
+                    }
+                }
+            } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
+
+            if (wait) {
+                if (unlikely(g_opt_debug3)) {
+                    LOG("Player move delayed while things are moving");
+                }
+                return;
+            }
+
+            //
+            // This is a bit of a hack; but the tick is almost done and we
+            // want the game to be smooth.
+            //
+            game->tick_end();
+        } else {
+            return;
+        }
     }
 
     if (jump) {

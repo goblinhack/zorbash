@@ -14,7 +14,6 @@ void Game::tick_begin (const std::string &why)
     // Move when all things are done moving
     //
     game->tick_current++;
-    CON("-");
 
     auto level = game->level;
     if (level) {
@@ -41,6 +40,10 @@ void Game::tick_begin (const std::string &why)
 
 void Game::tick_end (void)
 {
+    if (game->things_are_moving) {
+        return;
+    }
+
     //
     // Move when all things are done moving
     //
@@ -68,4 +71,5 @@ void Game::tick_end (void)
             game->tick_current, 
             time_get_time_ms_cached() - game->tick_begin_ms);
     }
+    CON("-");
 }

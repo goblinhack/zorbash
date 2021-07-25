@@ -454,6 +454,7 @@ static void usage (void)
     CON(" --debug3                    // as above but show the entire level");
     CON(" --debug4                    // as above but include memory checks");
     CON(" --debug5                    // as above but include out of bounds checks");
+    CON(" --no-debug                  // disable debug");
     CON(" --seed <name/number>");
     CON(" ");
     CON("Written by goblinhack@gmail.com");
@@ -501,6 +502,17 @@ static void parse_args (int32_t argc, char *argv[])
             continue;
         }
 
+        if (!strcasecmp(argv[i], "--no-debug") ||
+            !strcasecmp(argv[i], "-no-debug") ||
+            !strcasecmp(argv[i], "--nodebug") ||
+            !strcasecmp(argv[i], "-nodebug")) {
+            g_opt_debug1 = false;
+            g_opt_debug2 = false;
+            g_opt_debug3 = false;
+            g_opt_debug4 = false;
+            g_opt_debug5 = false;
+            continue;
+        }
 
         if (!strcasecmp(argv[i], "--debug") ||
             !strcasecmp(argv[i], "-debug")) {
