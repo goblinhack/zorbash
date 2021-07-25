@@ -245,7 +245,7 @@ _
         // ground that are not auto collected, then describe them
         //
         if (game->state == Game::STATE_NORMAL) {
-            if (is_player()) {
+            if (is_player() && check_anything_to_carry()) {
                 level->describe(mid_at);
             }
         }
@@ -261,11 +261,11 @@ _
         item->dead("by being collected");
 
         //
-        // If we just picked up some keys snd other items are on the
+        // If we just picked up some keys and other items are on the
         // ground that are not auto collected, then describe them
         //
         if (game->state == Game::STATE_NORMAL) {
-            if (is_player()) {
+            if (is_player() && check_anything_to_carry()) {
                 level->describe(mid_at);
             }
         }
@@ -712,41 +712,7 @@ _
     if (unlikely(g_opt_debug2)) {
         item->log("Chosen inventory item");
     }
-#if 0
-    if (item->is_weapon()) {
-        if (player->wield(item)) {
-            if (changed_highlight_slot) {
-                game->tick_begin("player changed weapon");
-            }
-        }
-        game->change_state(Game::STATE_NORMAL);
-        describe(item);
-    } else if (item->is_enchantstone()) {
-        game->wid_enchant_an_item();
-        describe(item);
-    } else if (item->is_skillstone()) {
-        game->wid_skill_choose();
-        describe(item);
-    } else if (item->is_bag_item_container()) {
-        game->wid_thing_info_create(item);
-        if (unlikely(g_opt_debug2)) {
-            item->log("Moving items flag set");
-        }
-        game->change_state(Game::STATE_MOVING_ITEMS);
-    } else if (item->is_thrown_automatically_when_chosen()) {
-        player->throw_item_choose_target(item);
-        describe(item);
-    } else if (item->is_target_select_automatically_when_chosen()) {
-        player->fire_at_and_choose_target(item);
-        describe(item);
-    } else if (item->is_used_automatically_when_selected()) {
-        player->use(item);
-        describe(item);
-    } else {
-        game->change_state(Game::STATE_NORMAL);
-        describe(item);
-    }
-#endif
+
     describe(item);
 
     return true;

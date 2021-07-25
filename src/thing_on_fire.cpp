@@ -48,7 +48,12 @@ void Thing::on_fire (void)
 
 bool Thing::is_on_fire (void) const
 {_
-    return get_on_fire_anim_id().ok();
+    auto id = get_on_fire_anim_id();
+    if (!id) {
+        return false;
+    }
+
+    return id.ok();
 }
 
 void Thing::unset_on_fire (void)

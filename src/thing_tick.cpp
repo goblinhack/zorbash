@@ -120,7 +120,7 @@ void Thing::achieve_goals_in_life (void)
 
     if (monstp->move_path.empty()) {
         if (is_player()) {
-            robot_change_state(ROBOT_STATE_IDLE, "reached goal  " + std::to_string(get_tick()));
+            robot_change_state(ROBOT_STATE_IDLE, "move path is empty");
         }
     }
 

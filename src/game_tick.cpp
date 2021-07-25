@@ -5,18 +5,20 @@
 
 #include "my_sys.h"
 #include "my_game.h"
+#include "my_level.h"
 #include "my_thing.h"
 #include "my_dungeon.h"
+#include "my_ptrcheck.h"
 
 void Game::tick_begin (const std::string &why)
-{
+{_
     //
     // Move when all things are done moving
     //
     game->tick_current++;
 
     auto level = game->level;
-    if (level) {
+    if (level) {_
         auto player = level->player;
         if (player) {
             CON("Game tick %d begin (%s): %s",
@@ -39,7 +41,9 @@ void Game::tick_begin (const std::string &why)
 }
 
 void Game::tick_end (void)
-{
+{_
+    auto level = game->level;
+
     if (game->things_are_moving) {
         return;
     }
@@ -52,8 +56,7 @@ void Game::tick_end (void)
     }
     game->tick_completed = game->tick_current;
 
-    auto level = game->level;
-    if (level) {
+    if (level) {_
         auto player = level->player;
         if (player) {
             CON("Game tick %d end, duration %d ms: %s", 

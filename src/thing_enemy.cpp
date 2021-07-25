@@ -29,6 +29,10 @@ bool Thing::is_enemy (Thingp attacker) const
 //
 void Thing::enemies_tick (void)
 {_
+    if (!monstp) {
+        return;
+    }
+
     for (auto &p : monstp->enemies) {
         if (--p.second <= 0) {
             monstp->enemies.erase(p.first);

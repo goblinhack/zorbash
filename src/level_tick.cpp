@@ -35,7 +35,7 @@ void Level::tick (void)
     }
 
     // LOG("-");
-
+_
     //
     // For all things that move, like monsters, or those that do not, like
     // wands, and even those that do not move but can be destroyed, like
@@ -63,7 +63,7 @@ void Level::tick (void)
             }
         }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
-
+_
     if (!game->robot_mode) {
         player_tick();
     }
@@ -95,23 +95,25 @@ void Level::tick (void)
     if (new_lasers.size()) {
         return;
     }
-
+_
     //
     // If things have stopped moving, perform location checks on where they
     // are now. This handles things like shoving a monst into a chasm. We do
     // location checks on the ends of moves, but this is a backup and will
     // also handle things that do not move, like a wand that is now on fire.
     //
+    bool wait = false;
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
         t->location_check();
         if (t->is_dead) {
             continue;
         }
         t->tick();
+        if (t->get_tick() < game->tick_current) {
+            wait = true;
+        }
     } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
-
-    game->tick_end();
-
+_
     for (auto& i : pending_remove_all_interesting_things) {
         all_interesting_things.erase(i.first);
     }
@@ -121,6 +123,10 @@ void Level::tick (void)
         all_interesting_things.insert(i);
     }
     pending_add_all_interesting_things = {};
+_
+    if (!wait) {
+        game->tick_end();
+    }
 }
 
 void Level::sanity_check (void)
