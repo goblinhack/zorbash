@@ -12,6 +12,8 @@
 
 typedef int32_t timestamp_t;
 
+#include <string>
+
 bool time_have_x_hundredths_passed_since(timestamp_t tenths, timestamp_t since);
 bool time_have_x_ms_passed_since(timestamp_t tenths, timestamp_t since);
 bool time_have_x_secs_passed_since(timestamp_t tenths, timestamp_t since);
@@ -25,5 +27,6 @@ timestamp_t time_get_time_ms(void);
 timestamp_t time_get_time_ms_cached(void);
 timestamp_t time_update_time_milli(void);
 void get_timestamp(char *buf, int32_t len);
+std::string current_date(void);
 
 #endif

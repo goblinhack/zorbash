@@ -12,6 +12,7 @@ class HiScore
 public:
     HiScore (void) {}
     HiScore (std::string name, 
+             std::string when,
              int score, 
              int level_reached,
              std::string killed_by)
@@ -28,6 +29,7 @@ public:
     // Who made the score?
     //
     std::string  name;
+    std::string  when;
     std::string  killed_by;
     int          score;
     int          level_reached;

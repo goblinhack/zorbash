@@ -199,3 +199,16 @@ timestamp_t time_update_time_milli (void)
     time_now = SDL_GetTicks();
     return (time_now);
 }
+
+std::string current_date (void)
+{
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer[MAXSTR];
+
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S", timeinfo);
+    return std::string(buffer);
+}

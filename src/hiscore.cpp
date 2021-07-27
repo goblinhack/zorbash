@@ -11,6 +11,7 @@
 #include "my_hiscore.h"
 #include "my_monst.h"
 #include "my_ptrcheck.h"
+#include "my_time.h"
 
 HiScores::HiScores (void)
 {_
@@ -19,6 +20,7 @@ HiScores::HiScores (void)
     } else {
         while ((int)hiscores.size() < HiScore::max) {
             hiscores.push_back(HiScore("Thy place awaits thee",
+                                       "",
                                        0, // score
                                        0, // level_reached
                                        ""));
@@ -48,6 +50,7 @@ void HiScores::add_new_hiscore (Thingp player,
             hiscores.insert(h,
                 HiScore(
                     hiscore_name,
+                    current_date(),
                     player->get_score(),
                     (player->level->world_at.z + 1) / 2,
                     killed_by));
@@ -139,6 +142,7 @@ const char *HiScores::place_str (Thingp player)
 std::istream& operator>>(std::istream &in, Bits<HiScore &> my)
 {_
     in >> bits(my.t.name);
+    in >> bits(my.t.when);
     in >> bits(my.t.killed_by);
     in >> bits(my.t.score);
     in >> bits(my.t.level_reached);
@@ -151,6 +155,7 @@ std::istream& operator>>(std::istream &in, Bits<HiScore &> my)
 std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my)
 {_
     out << bits(my.t.name);
+    out << bits(my.t.when);
     out << bits(my.t.killed_by);
     out << bits(my.t.score);
     out << bits(my.t.level_reached);
@@ -160,6 +165,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my)
 std::ostream& operator<<(std::ostream &out, Bits<HiScore &> const my)
 {_
     out << bits(my.t.name);
+    out << bits(my.t.when);
     out << bits(my.t.killed_by);
     out << bits(my.t.score);
     out << bits(my.t.level_reached);
@@ -171,7 +177,8 @@ std::istream& operator>>(std::istream &in, Bits<HiScores &> my)
     my.t.hiscores.resize(0);
     in >> bits(my.t.hiscores);
     for (auto h : my.t.hiscores) {
-        LOG("Loaded Hiscore: %s, %d killed by %s", h.name.c_str(), h.score, h.killed_by.c_str());
+        CON("Loaded Hiscore: %s, %d killed by %s, %s",
+            h.name.c_str(), h.score, h.killed_by.c_str(), h.when.c_str());
     }
 
     return in;

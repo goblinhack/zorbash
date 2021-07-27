@@ -14,8 +14,8 @@ def timeme(py_function):
         return_code = py_function(*args, **kwargs)
         end_time = time.time()
         diff = (end_time - start_time) * 1000.0
-        if diff > 100:
-            print('PYC: perf {:s}({}) {:.3f} ms'.format(py_function.__name__, args, diff))
+        #if diff > 100:
+        #    print('PYC: perf {:s}({}) {:.3f} ms'.format(py_function.__name__, args, diff))
         return return_code
     return timeme_wrapper
 
