@@ -269,6 +269,7 @@ bool Thing::move (fpoint future_pos,
     }
 
     move_set_dir_from_delta(delta);
+    is_moving = true;
 
     if (attack) {
         if (is_player()) {
@@ -569,7 +570,6 @@ void Thing::move_set_dir_from_delta (fpoint delta)
         } else {
             dir_set_left();
         }
-        is_moving = true;
         has_ever_moved = true;
         return;
     }
@@ -582,7 +582,6 @@ void Thing::move_set_dir_from_delta (fpoint delta)
         } else {
             dir_set_right();
         }
-        is_moving = true;
         has_ever_moved = true;
         return;
     }
@@ -595,7 +594,6 @@ void Thing::move_set_dir_from_delta (fpoint delta)
         } else {
             dir_set_down();
         }
-        is_moving = true;
         has_ever_moved = true;
         return;
     }
@@ -608,7 +606,6 @@ void Thing::move_set_dir_from_delta (fpoint delta)
         } else {
             dir_set_up();
         }
-        is_moving = true;
         has_ever_moved = true;
         return;
     }
@@ -619,6 +616,7 @@ void Thing::move_to (fpoint to)
     move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
+    is_moving = true;
 
     update_pos(to, false);
 }
@@ -627,6 +625,7 @@ void Thing::move_delta (fpoint delta)
 {_
     move_finish();
     move_set_dir_from_delta(delta);
+    is_moving = true;
 
     //
     // If the move finish ended up doing something like moving into

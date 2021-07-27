@@ -318,6 +318,14 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
                             continue;
                         }
 
+                        if (is_hazardous_to_me(jump_end)) {
+                            continue;
+                        }
+
+                        if (is_hazardous_to_me(jump_begin)) {
+                            continue;
+                        }
+
                         //
                         // No jump begin/end from a chasm for example
                         //
@@ -756,6 +764,10 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
                 point o(p.x + dx, p.y + dy);
 
                 if (get(walked, o.x, o.y)) {
+                    continue;
+                }
+
+                if (is_hazardous_to_me(o)) {
                     continue;
                 }
 

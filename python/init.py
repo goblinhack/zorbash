@@ -52,7 +52,7 @@ def timeme(py_function):
         start_time = time.time()
         return_code = py_function(*args, **kwargs)
         end_time = time.time()
-        print('PYC: perf {:s}({}) {:.3f} ms'.format(py_function.__name__, args, (end_time - start_time) * 1000.0))
+        # print('PYC: perf {:s}({}) {:.3f} ms'.format(py_function.__name__, args, (end_time - start_time) * 1000.0))
         return return_code
     return timeme_wrapper
 
