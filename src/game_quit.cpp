@@ -9,6 +9,7 @@
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_wid_actionbar.h"
+#include "my_thing.h"
 #include "my_ui.h"
 #include "my_sdl.h"
 
@@ -100,6 +101,13 @@ static uint8_t game_quit_key_down (Widp w, const struct SDL_Keysym *key)
 
 void Game::quit_select (void)
 {_
+    LOG("Quit select");
+
+    if (level && level->player) {
+        wid_actionbar_robot_mode_off();
+        level->player->cursor_path_stop();
+    }
+
     if (game_quit_window) {
         game_quit_destroy();
     }

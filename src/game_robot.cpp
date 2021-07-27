@@ -12,6 +12,10 @@
 
 void Game::robot_mode_tick (void)
 {_
+    if (!game->robot_mode) {
+        return;
+    }
+
     if (!level) {
         return;
     }

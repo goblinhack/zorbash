@@ -189,4 +189,3 @@ std::ostream& operator<<(std::ostream &out, Bits<const HiScores & > const my)
     out << bits(my.t.hiscores);
     return (out);
 }
-
