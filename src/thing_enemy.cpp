@@ -43,7 +43,7 @@ void Thing::enemies_tick (void)
             //
             // If far enough away start to forget this enemy
             //
-            if (distance(attacker->mid_at, mid_at) > 4) {
+            if (distance(attacker->mid_at, mid_at) > ai_scent_distance()) {
                 monstp->enemies.erase(p.first);
             }
 
@@ -84,14 +84,14 @@ void Thing::add_enemy (Thingp attacker)
 
     if (!monstp->enemies[attacker->id]) {
         if (is_player() && game->robot_mode) {
-            CON("Robot: Add new enemy %s", attacker->to_string().c_str());
+            CON("Robot: add new enemy %s", attacker->to_string().c_str());
         } else {
             dbg("Add new enemy %s", attacker->to_string().c_str());
         }
         monstp->enemies[attacker->id] = ai_enemy_memory();
     } else {
         if (is_player() && game->robot_mode) {
-            CON("Robot: Increment old enemy %s", attacker->to_string().c_str());
+            CON("Robot: increment old enemy %s", attacker->to_string().c_str());
         } else {
             dbg("Increment old enemy %s", attacker->to_string().c_str());
         }

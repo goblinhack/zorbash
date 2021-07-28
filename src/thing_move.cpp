@@ -78,9 +78,8 @@ void Thing::move_finish (void)
         dbg("Move to %f,%f finished", mid_at.x, mid_at.y);
     }
 
-    is_moving = false;
-
     update_interpolated_position();
+    is_moving = false;
 }
 
 bool Thing::move (fpoint future_pos)
@@ -269,7 +268,6 @@ bool Thing::move (fpoint future_pos,
     }
 
     move_set_dir_from_delta(delta);
-    is_moving = true;
 
     if (attack) {
         if (is_player()) {
@@ -417,6 +415,7 @@ void Thing::update_interpolated_position (void)
         new_pos.y = last_mid_at.y + dy * step;
     } else if (!get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
+            is_moving = true;
             if (!is_hidden) {
                 dbg("Changed position (new %f, %f, old %f,%f)",
                     mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
@@ -427,6 +426,7 @@ void Thing::update_interpolated_position (void)
             last_mid_at = mid_at;
             set_timestamp_move_end(time_get_time_ms_cached());
             on_move();
+            is_moving = false;
         }
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
@@ -540,6 +540,7 @@ void Thing::update_pos (fpoint to, bool immediately)
     if (!immediately) {
         set_timestamp_move_begin(time_get_time_ms_cached());
         set_timestamp_move_end(get_timestamp_move_begin() + move_speed);
+        is_moving = true;
         on_move();
     }
 
@@ -616,7 +617,6 @@ void Thing::move_to (fpoint to)
     move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
-    is_moving = true;
 
     update_pos(to, false);
 }
@@ -625,7 +625,6 @@ void Thing::move_delta (fpoint delta)
 {_
     move_finish();
     move_set_dir_from_delta(delta);
-    is_moving = true;
 
     //
     // If the move finish ended up doing something like moving into

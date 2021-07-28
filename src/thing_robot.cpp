@@ -259,7 +259,18 @@ _
             if (is_player()) {
                 level->cursor_path_create(new_move_path);
                 level->debug_path_create(new_move_path);
+
+                //
+                // Try to move. It might not work and we end up attacking.
+                //
                 if (cursor_path_pop_first_move()) {
+                    return true;
+                }
+
+                //
+                // Did we try to do something?
+                //
+                if (game->tick_completed != game->tick_current) {
                     return true;
                 }
             } else {
