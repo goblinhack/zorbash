@@ -200,14 +200,14 @@ bool Thing::collision_check_do (void)
 
     if (target_attacked || target_overlaps) {
         move_finish();
-        cursor_path_stop();
+        clear_move_path("Collision");
     }
     return target_attacked;
 }
 
 void Thing::tick (void)
 {_
-    if (unlikely(g_opt_debug3)) {
+    if (unlikely(g_opt_debug4)) {
         dbg("Tick");
     }
 _
@@ -228,14 +228,14 @@ _
                 incr_tick();
             }
         }
-        if (unlikely(g_opt_debug3)) {
+        if (unlikely(g_opt_debug4)) {
             dbg("Tick; is dead");
         }
         return;
     }
 
     if (unlikely(is_dead)) {
-        if (unlikely(g_opt_debug3)) {
+        if (unlikely(g_opt_debug4)) {
             dbg("Tick; died");
         }
         return;
@@ -249,7 +249,7 @@ _
         // Stop the robot racing around too fast.
         //
         if (is_moving) {
-            if (unlikely(g_opt_debug3)) {
+            if (unlikely(g_opt_debug4)) {
                 dbg("Tick; robot is moving, wait");
             }
             return;

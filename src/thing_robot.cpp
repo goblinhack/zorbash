@@ -450,6 +450,11 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
     dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
     dmap_print(dmap_can_see);
 
+    auto t = nearby_most_dangerous_thing_get();
+    if (t) {
+        something_changed = true;
+    }
+
     return something_changed;
 }
 
@@ -1072,13 +1077,12 @@ void Thing::robot_change_state (int new_state, const std::string &why)
 
     CON("Robot: %s -> %s: %s", from.c_str(), to.c_str(), why.c_str());
     
+    monstp->robot_state = new_state;
     switch (new_state) {
         case ROBOT_STATE_IDLE:
-            log("Robot idle: clear move path");
-            monstp->move_path.clear();
+            clear_move_path("Robot is idle");
             break;
         case ROBOT_STATE_MOVING:
             break;
     }
-    monstp->robot_state = new_state;
 }

@@ -233,6 +233,7 @@ public:
     //
     // Temporary
     //
+    uint32_t           robot_mode_requested {};
 
     //
     // Temporary. Global states

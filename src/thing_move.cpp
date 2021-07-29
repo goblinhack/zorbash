@@ -15,6 +15,7 @@
 #include "my_sprintf.h"
 #include "my_string.h"
 #include "my_thing.h"
+#include "my_monst.h"
 #include "my_thing_template.h"
 #include "my_wid_console.h"
 #include "my_wid_actionbar.h"
@@ -336,11 +337,9 @@ bool Thing::move (fpoint future_pos,
                 //
                 // Too noisy?
                 //
-                if ((0)) {
-                    if (is_player()) {
-                        std::string s = t->text_The() + " attacks as you run";
-                        TOPCON("%s.", s.c_str());
-                    }
+                if (is_player()) {
+                    std::string s = t->text_The() + " attacks as you move";
+                    TOPCON("%s.", s.c_str());
                 }
             }
 
@@ -758,4 +757,24 @@ bool Thing::move_to_or_escape_check_only (const point& nh)
 {_
     dbg("Move to or escape");
     return move_to_try(nh, true, true);
+}
+
+void Thing::clear_move_path (const std::string &why)
+{
+    if (!monstp) {
+        return;
+    }
+
+    if (is_player()) {
+        game->cursor_move_path.clear();
+        if (level) {
+            level->cursor_path_clear();
+        }
+
+        if (game->robot_mode) {
+            robot_change_state(ROBOT_STATE_IDLE, why);
+        }
+    }
+
+    monstp->move_path.clear();
 }

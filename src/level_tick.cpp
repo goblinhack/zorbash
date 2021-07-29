@@ -13,6 +13,7 @@
 #include "my_python.h"
 #include "my_player.h"
 #include "my_array_bounds_check.h"
+#include "my_wid_actionbar.h"
 #include "my_ptrcheck.h"
 
 void Level::tick (void)
@@ -131,8 +132,23 @@ _
     }
     pending_add_all_interesting_things = {};
 _
+    //
+    // If we've finished waiting on all things, bump the game tick.
+    //
     if (!wait) {
         game->tick_end();
+    }
+
+    //
+    // Only update robot mode if things have stopped moving so we get
+    // consitent random behaviour.
+    //
+    if (game->tick_completed == game->tick_current) {
+        if (game->robot_mode_requested != game->robot_mode) {
+            LOG("Update robot mode");
+            game->robot_mode = game->robot_mode_requested;
+            wid_actionbar_robot_mode_update();
+        }
     }
 }
 

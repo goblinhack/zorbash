@@ -241,7 +241,7 @@ _
     if (key->scancode == (SDL_Scancode)game->config.key_robot_mode) {
         LOG("Pressed robot mode key");
 _
-        wid_actionbar_robot_mode();
+        wid_actionbar_robot_mode_toggle();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
         return true;

@@ -340,7 +340,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     if (jump) {
         last_key_pressed_when = time_get_time_ms_cached();
         game->tick_begin("player jumped");
-        player->log("Jump");
 
         if (game->cursor_move_path.size()) {
             //
@@ -350,8 +349,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                  i != game->cursor_move_path.rend(); i++) {
                 auto p = *i;
                 if (player->try_to_jump(make_point(p.x, p.y))) {
-                    player->log("Jump; clear move path");
-                    game->cursor_move_path.clear();
+                    player->clear_move_path("Tried to jump");
                     break;
                 }
             }
@@ -375,10 +373,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                 player->try_to_jump(p);
             }
         }
-        player->log("Jump; clear move path");
-        player->monstp->move_path.clear();
-        game->cursor_move_path.clear();
-        level->cursor_path_clear();
+        player->clear_move_path("Tried to jump");
     } else if (up || down || left || right || attack || wait) {
         last_key_pressed_when = time_get_time_ms_cached();
 

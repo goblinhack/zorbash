@@ -18,6 +18,7 @@ public:
              std::string killed_by)
     {
         this->name = name;
+        this->name = name;
         this->score = score;
         this->level_reached = level_reached;
         this->killed_by = killed_by;

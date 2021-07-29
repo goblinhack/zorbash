@@ -39,7 +39,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
 	// for a single move, then reset it.
 	//
         if ((fabs(to.x - mid_at.x) > 1) || (fabs(to.x - mid_at.x) > 1)) {
-	    cursor_path_stop();
+	    clear_move_path("Cursor next-hop is too far away");
 	    return false;
         }
 
@@ -73,22 +73,22 @@ _
                             //
                             // Give up
                             //
-                            cursor_path_stop();
+                            clear_move_path("Cannot jump over all threats");
                             return false;
                         } else if (try_to_jump(jump_pos)) {
                             game->tick_begin("player tried a long jump");
-                            cursor_path_stop();
+                            clear_move_path("Player tried a long jump");
                             return true;
                         } else {
-                            cursor_path_stop();
+                            clear_move_path("Player tried a jump but cannot pass");
                             return false;
                         }
                     } else if (try_to_jump(jump_pos)) {
                         game->tick_begin("player tried to jump");
-                        cursor_path_stop();
+                        clear_move_path("Player tried to jump");
                         return true;
                     } else {
-                        cursor_path_stop();
+                        clear_move_path("Player cannot pass");
                         return false;
                     }
                 }
@@ -171,11 +171,4 @@ bool Thing::cursor_path_pop_first_move (void)
     //
     // game->tick_begin("not sure about this one");
     return false;
-}
-
-void Thing::cursor_path_stop (void)
-{_
-    new_monst();
-    log("Clear move path");
-    monstp->move_path.clear();
 }

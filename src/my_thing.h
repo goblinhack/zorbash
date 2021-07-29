@@ -212,6 +212,7 @@ public:
     bool bag_place_at(Thingp item, point pos);
     bool bag_remove_at(Thingp item, point pos);
     bool bag_remove(Thingp);
+    void clear_move_path(const std::string &why);
     bool can_eat(const Thingp it);
     bool carry(Thingp w);
     bool change_owner(Thingp new_owner);
@@ -1192,7 +1193,6 @@ public:
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
-    void cursor_path_stop(void);
     void dead(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dead_(const char *fmt, va_list args); // compile error without
     void dead(std::string &);

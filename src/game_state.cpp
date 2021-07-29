@@ -106,7 +106,7 @@ _
         case STATE_CHOOSING_SKILLS:
             if (level) {
                 level->cursor_recreate();
-                level->cursor->cursor_path_stop();
+                level->cursor->clear_move_path("State change");
             }
             break;
         case STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at

@@ -105,7 +105,6 @@ void Game::quit_select (void)
 
     if (level && level->player) {
         wid_actionbar_robot_mode_off();
-        level->player->cursor_path_stop();
     }
 
     if (game_quit_window) {

@@ -64,12 +64,20 @@ static void wid_actionbar_quit_over_e (Widp w)
     BOTCON(" ");
 }
 
-void wid_actionbar_robot_mode (void)
+void wid_actionbar_robot_mode_toggle (void)
 {_
     LOG("Actionbar robot");
 _
     wid_actionbar_close_all_popups();
-    game->robot_mode = !game->robot_mode;
+    game->robot_mode_requested = !game->robot_mode_requested;
+    wid_actionbar_init();
+}
+
+void wid_actionbar_robot_mode_update (void)
+{_
+    LOG("Actionbar robot update");
+_
+    wid_actionbar_close_all_popups();
     wid_actionbar_init();
 }
 
@@ -78,16 +86,21 @@ void wid_actionbar_robot_mode_off (void)
     LOG("Actionbar robot");
 _
     wid_actionbar_close_all_popups();
-    game->robot_mode = false;
+
     if (game->level) {
+        if (game->level->player) {
+            game->level->player->clear_move_path("Quit selected");
+        }
         game->level->debug_path_clear();
     }
+    game->robot_mode_requested = false;
+    game->robot_mode = false;
     wid_actionbar_init();
 }
 
 static uint8_t wid_actionbar_robot (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    wid_actionbar_robot_mode();
+    wid_actionbar_robot_mode_toggle();
     return true;
 }
 

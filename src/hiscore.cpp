@@ -159,6 +159,8 @@ std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my)
     out << bits(my.t.killed_by);
     out << bits(my.t.score);
     out << bits(my.t.level_reached);
+    // CON("Saved Hiscore: %s, %d killed by %s, %s",
+    //     my.t.name.c_str(), my.t.score, my.t.killed_by.c_str(), my.t.when.c_str());
     return (out);
 }
 
@@ -169,6 +171,8 @@ std::ostream& operator<<(std::ostream &out, Bits<HiScore &> const my)
     out << bits(my.t.killed_by);
     out << bits(my.t.score);
     out << bits(my.t.level_reached);
+    // CON("Read Hiscore: %s, %d killed by %s, %s",
+    //     my.t.name.c_str(), my.t.score, my.t.killed_by.c_str(), my.t.when.c_str());
     return (out);
 }
 
