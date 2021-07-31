@@ -12,7 +12,7 @@
 
 void Level::create (point3d at, int seed)
 {_
-    mysrand(game->seed + at.z);
+    pcq_srand(game->seed + at.z);
 
     is_starting = true;
     clear();

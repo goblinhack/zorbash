@@ -82,7 +82,7 @@ void Thing::enchant_randomly (void)
     }
 
     incr_enchant(1);
-    while (random_range(0, 100) < 20) {
+    while (pcq_random_range(0, 100) < 20) {
         if (get_enchant() >= get_enchant_max()) {
             break;
         }

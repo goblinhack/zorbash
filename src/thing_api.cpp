@@ -96,7 +96,6 @@ int Thing::hates_poison(void) const                                     {_ retur
 int Thing::hates_water(void) const                                      {_ return (tp()->hates_water()); }
 int Thing::health_hunger_pct(void) const                                {_ return (tp()->health_hunger_pct()); }
 int Thing::health_starving_pct(void) const                              {_ return (tp()->health_starving_pct()); }
-int Thing::hunger_clock_freq_ms(void) const                             {_ return (tp()->hunger_clock_freq_ms()); }
 int Thing::is_able_to_change_levels(void) const                         {_ return (tp()->is_able_to_change_levels()); }
 int Thing::is_able_to_fall(void) const                                  {_ return (tp()->is_able_to_fall()); }
 int Thing::is_able_to_fire_at(void) const                               {_ return (tp()->is_able_to_fire_at()); }
@@ -332,7 +331,6 @@ int Thing::on_death_is_open(void) const                                 {_ retur
 int Thing::range_max(void) const                                        {_ return (tp()->range_max()); }
 int Thing::tick_catches_up_on_attack(void) const                        {_ return (tp()->tick_catches_up_on_attack()); }
 int Thing::weapon_damage(void) const                                    {_ return (tp()->weapon_damage()); }
-int Thing::weapon_use_delay_hundredths(void) const                      {_ return (tp()->weapon_use_delay_hundredths()); }
 int Thing::weapon_use_distance(void) const                              {_ return (tp()->weapon_use_distance()); }
 
 void Thing::new_monst (void)
@@ -1483,59 +1481,6 @@ int Thing::incr_enchant_max (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->enchant_max++);
-    return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// attack_rate_tenths
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_tick_rate_tenths (void) const
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->tick_rate_tenths);
-    } else {
-        return (0);
-    }
-}
-
-int Thing::set_tick_rate_tenths (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->tick_rate_tenths = v);
-    return (n);
-}
-
-int Thing::decr_tick_rate_tenths (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->tick_rate_tenths -= v);
-    return (n);
-}
-
-int Thing::incr_tick_rate_tenths (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->tick_rate_tenths += v);
-    return (n);
-}
-
-int Thing::decr_tick_rate_tenths (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->tick_rate_tenths--);
-    return (n);
-}
-
-int Thing::incr_tick_rate_tenths (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->tick_rate_tenths++);
     return (n);
 }
 
@@ -4104,54 +4049,6 @@ timestamp_t Thing::incr_timestamp_born (void)
     new_monst();
 //con("%s", __FUNCTION__);
     return (monstp->timestamp_born++);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// timestamp_hunger_tick
-////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_hunger_tick (void) const
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->timestamp_hunger_tick);
-    } else {
-        return (0);
-    }
-}
-
-timestamp_t Thing::set_timestamp_hunger_tick (timestamp_t v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->timestamp_hunger_tick = v);
-}
-
-timestamp_t Thing::decr_timestamp_hunger_tick (timestamp_t v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->timestamp_hunger_tick -= v);
-}
-
-timestamp_t Thing::incr_timestamp_hunger_tick (timestamp_t v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->timestamp_hunger_tick += v);
-}
-
-timestamp_t Thing::decr_timestamp_hunger_tick (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->timestamp_hunger_tick--);
-}
-
-timestamp_t Thing::incr_timestamp_hunger_tick (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->timestamp_hunger_tick++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

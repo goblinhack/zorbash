@@ -34,6 +34,7 @@
 
 #include <inttypes.h>
 //#include "my_main.h"
+//#include "my_traceback.h"
 
 
 #if __cplusplus
@@ -59,7 +60,10 @@ static inline uint32_t pcg32_random_r(pcg32_random_t* rng)
     rng->state = oldstate * 6364136223846793005ULL + rng->inc;
     uint32_t xorshifted = ((oldstate >> 18u) ^ oldstate) >> 27u;
     uint32_t rot = oldstate >> 59u;
-    return (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
+    uint32_t r =  (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
+    //LOG("RAND %u ", r);
+    //traceback_dump();
+    return r;
 }
 
 static inline void pcg32_srandom_r(pcg32_random_t* rng, uint64_t initstate, uint64_t initseq)
@@ -82,10 +86,7 @@ static inline void pcg32_srandom(uint64_t seed, uint64_t seq)
 
 static inline uint32_t pcg32_random()
 {
-    uint32_t r = pcg32_random_r(&pcg32_global);
-    // For debugging randomness
-    // CON("RAND %u", r);
-    return r;
+    return pcg32_random_r(&pcg32_global);
 }
 
 // pcg32_boundedrand(bound):

@@ -511,11 +511,14 @@ static void parse_args (int32_t argc, char *argv[])
             g_opt_debug3 = false;
             g_opt_debug4 = false;
             g_opt_debug5 = false;
+            g_opt_nodebug = true;
             continue;
         }
 
-        if (!strcasecmp(argv[i], "--debug") ||
-            !strcasecmp(argv[i], "-debug")) {
+        if (!strcasecmp(argv[i], "--debug")  ||
+            !strcasecmp(argv[i], "-debug")   ||
+            !strcasecmp(argv[i], "--debug1") ||
+            !strcasecmp(argv[i], "-debug1")) {
             g_opt_debug1 = true;
             continue;
         }

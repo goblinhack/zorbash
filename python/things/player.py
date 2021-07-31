@@ -7,7 +7,7 @@ import tp
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     # zx.topcon("player hit damage {}".format(damage))
     if damage <= 5:
-        zx.thing_sound_play_channel(me, zx.CHANNEL_IMPACT, "player_hit{}".format(zx.randint(1, 4)))
+        zx.thing_sound_play_channel(me, zx.CHANNEL_IMPACT, "player_hit{}".format(zx.non_pcq_randint(1, 4)))
     else:
         zx.thing_sound_play_channel(me, zx.CHANNEL_IMPACT, "player_hit5")
 
@@ -23,16 +23,16 @@ def on_move(me, x, y):
     global last_footstep
 
     if zx.level_is_water_at(me, x, y):
-        footstep = zx.randint(1, 6)
+        footstep = zx.non_pcq_randint(1, 6)
         while footstep == last_footstep:
-            footstep = zx.randint(1, 6)
+            footstep = zx.non_pcq_randint(1, 6)
 
         if zx.thing_sound_play_channel(me, zx.CHANNEL_FOOTSTEPS, "splash{}".format(footstep)):
             last_footstep = footstep
     else:
-        footstep = zx.randint(1, 8)
+        footstep = zx.non_pcq_randint(1, 8)
         while footstep == last_footstep:
-            footstep = zx.randint(1, 8)
+            footstep = zx.non_pcq_randint(1, 8)
 
         if zx.thing_sound_play_channel(me, zx.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
             last_footstep = footstep
@@ -100,7 +100,6 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_text_hits("hits")
     mytp.set_text_title(title)
     mytp.set_throw_distance(5)
-    mytp.set_tick_rate_tenths(1)
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 

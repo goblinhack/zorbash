@@ -851,9 +851,9 @@ void Thing::blit_internal (int fbo,
         static color fire_color;
         if (time_have_x_tenths_passed_since(2, ts)) {
             ts = time_get_time_ms_cached();
-            if (random_range(0, 100) < 20) {
+            if (non_pcq_random_range(0, 100) < 20) {
                 fire_color = YELLOW;
-            } else if (random_range(0, 100) < 50) {
+            } else if (non_pcq_random_range(0, 100) < 50) {
                 fire_color = ORANGE;
             } else {
                 fire_color = RED;

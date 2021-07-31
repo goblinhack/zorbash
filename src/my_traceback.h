@@ -8,6 +8,7 @@
 #define _MY_TRACEBACK_H_
 
 #include <array>
+#include <string>
 
 class Traceback {
     static const int max_traceback = 63;

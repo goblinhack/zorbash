@@ -1349,7 +1349,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(health_hunger_pct)
     TP_SET_DECL(health_initial_dice)
     TP_SET_DECL(health_starving_pct)
-    TP_SET_DECL(hunger_clock_freq_ms)
     TP_SET_DECL(is_able_to_change_levels)
     TP_SET_DECL(is_able_to_fall)
     TP_SET_DECL(is_able_to_see_through_doors)
@@ -1651,7 +1650,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(text_unused)
     TP_SET_DECL(throw_distance)
     TP_SET_DECL(tick_catches_up_on_attack)
-    TP_SET_DECL(tick_rate_tenths)
     TP_SET_DECL(tile)
     TP_SET_DECL(tl1_tile)
     TP_SET_DECL(tl2_tile)
@@ -1661,13 +1659,13 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(tr2_tile)
     TP_SET_DECL(weapon_carry_anim)
     TP_SET_DECL(weapon_damage)
-    TP_SET_DECL(weapon_use_delay_hundredths)
     TP_SET_DECL(weapon_use_distance)
     TP_SET_DECL(z_depth)
     TP_SET_DECL(z_prio)
 
     {"abs_to_pct",                                             (PyCFunction)abs_to_pct_,                                            METH_VARARGS | METH_KEYWORDS, "abs to pct "},
-    {"randint",                                                (PyCFunction)randint,                                                METH_VARARGS | METH_KEYWORDS, "rand int "},
+    {"pcq_randint",                                            (PyCFunction)pcq_randint,                                            METH_VARARGS | METH_KEYWORDS, "rand int "},
+    {"non_pcq_randint",                                        (PyCFunction)non_pcq_randint,                                        METH_VARARGS | METH_KEYWORDS, "rand int "},
     {"con",                                                    (PyCFunction)con_,                                                   METH_VARARGS,                 "log to the console"},
     {"die",                                                    (PyCFunction)die_,                                                   METH_VARARGS,                 "exit game with error"},
     {"err",                                                    (PyCFunction)err_,                                                   METH_VARARGS,                 "error to the log file"},
@@ -2460,7 +2458,7 @@ PyObject *abs_to_pct_ (PyObject *obj, PyObject *args, PyObject *keywds)
     return (Py_BuildValue("dd", x, y));
 }
 
-PyObject *randint (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *pcq_randint (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     int x = 0;
     int y = 0;
@@ -2478,7 +2476,28 @@ PyObject *randint (PyObject *obj, PyObject *args, PyObject *keywds)
     // Python style. We don't use pythons so we can get consistent random
     // numbers with the one C uses.
     //
-    return (Py_BuildValue("i", random_range_inclusive(x, y)));
+    return (Py_BuildValue("i", pcq_random_range_inclusive(x, y)));
+}
+
+PyObject *non_pcq_randint (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    int x = 0;
+    int y = 0;
+
+    static char *kwlist[] = {
+        (char*) "x",
+        (char*) "y",
+        0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
+        return (0);
+    }
+
+    //
+    // Python style. We don't use pythons so we can get consistent random
+    // numbers with the one C uses.
+    //
+    return (Py_BuildValue("i", non_pcq_random_range_inclusive(x, y)));
 }
 
 PyObject *pct_to_abs_ (PyObject *obj, PyObject *args, PyObject *keywds)

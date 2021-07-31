@@ -2,17 +2,17 @@ import zx
 import tp
 
 def on_bite(me, x, y):
-    sound = "growl{}".format(zx.randint(1, 10))
+    sound = "growl{}".format(zx.non_pcq_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    sound = "hiss{}".format(zx.randint(1, 10))
+    sound = "hiss{}".format(zx.non_pcq_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_miss(me, hitter, x, y):
-    sound = "hiss{}".format(zx.randint(1, 10))
+    sound = "hiss{}".format(zx.non_pcq_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
@@ -21,7 +21,7 @@ def on_death(me, x, y):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "monst_death1")
 
 def on_firing_at_something(me, target, x, y): # Return True on doing an action
-    if zx.randint(1, 10) < 3:
+    if zx.pcq_randint(1, 10) < 3:
         zx.thing_fire_at(me, "laser_energy", target)
         return True
     return False
@@ -90,7 +90,6 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A writhing mass of tentacles and eyeballs.")
     mytp.set_text_hits("slashes")
-    mytp.set_tick_rate_tenths(3)
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 

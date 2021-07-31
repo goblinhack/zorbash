@@ -3,7 +3,7 @@ import tp
 
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    zx.sound_play("door_hit{}".format(zx.randint(1, 2)))
+    zx.sound_play("door_hit{}".format(zx.non_pcq_randint(1, 2)))
 
 def on_death(me, x, y):
     zx.sound_play("door_break")

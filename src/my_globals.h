@@ -36,6 +36,7 @@ extern bool g_opt_debug2;             // As above but includes log indentation a
 extern bool g_opt_debug3;             // As above but show the entire level
 extern bool g_opt_debug4;             // As above but include memory checks
 extern bool g_opt_debug5;             // As above but include out of bounds checks
+extern bool g_opt_nodebug;            // Temporary, used to disable existing debugs
 extern bool g_opt_fast_start;         // Do not flush after each console log at start
 extern bool g_opt_new_game;           // Start in the game imediately
 extern bool g_quitting;               // Exitting the game

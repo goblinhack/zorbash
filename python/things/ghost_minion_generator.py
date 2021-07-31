@@ -52,7 +52,6 @@ def tp_init(name, text_name):
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A cursed pile of bones, spawning spirits.")
-    mytp.set_tick_rate_tenths(2)
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 

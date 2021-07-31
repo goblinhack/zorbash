@@ -129,7 +129,7 @@ const std::string stat_to_bonus_slash_str (int stat)
 bool
 d20roll (int stat_a, int stat_b, bool &fumble, bool &critical)
 {
-    auto roll_a = random_range_inclusive(1, 20);
+    auto roll_a = pcq_random_range_inclusive(1, 20);
 
     critical = false;
     fumble = false;
@@ -144,7 +144,7 @@ d20roll (int stat_a, int stat_b, bool &fumble, bool &critical)
         return false;
     }
 
-    auto roll_b = random_range_inclusive(1, 20);
+    auto roll_b = pcq_random_range_inclusive(1, 20);
 //TOPCON("a %d b %d", roll_a, roll_b);
 
     return roll_a + stat_to_bonus(stat_a) >= 
@@ -157,7 +157,7 @@ d20roll (int stat_a, int stat_b, bool &fumble, bool &critical)
 bool
 d20roll (int stat_a, int stat_b)
 {
-    auto roll_a = random_range_inclusive(1, 20);
+    auto roll_a = pcq_random_range_inclusive(1, 20);
 
     if (roll_a == 20) {
         return true;
@@ -167,7 +167,7 @@ d20roll (int stat_a, int stat_b)
         return false;
     }
 
-    auto roll_b = random_range_inclusive(1, 20);
+    auto roll_b = pcq_random_range_inclusive(1, 20);
 
     roll_a += stat_to_bonus(stat_a);
     roll_b += stat_to_bonus(stat_b);
@@ -236,7 +236,7 @@ int Dice::roll (void) const
     int tot = 0;
     // LOG("roll %dd%d+%d => %d", ndice, sides, stat, tot);
     while (n-- > 0) {
-        tot += random_range(0, sides) + 1;
+        tot += pcq_random_range(0, sides) + 1;
     }
     tot += stat;
     return (tot);

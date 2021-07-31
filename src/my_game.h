@@ -234,6 +234,7 @@ public:
     // Temporary
     //
     uint32_t           robot_mode_requested {};
+    uint32_t           robot_mode_tick_requested {};
 
     //
     // Temporary. Global states

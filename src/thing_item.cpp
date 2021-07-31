@@ -122,7 +122,7 @@ void Thing::move_carried_items (void)
                 !level->is_ripple((int)mid_at.x, (int)mid_at.y)) {
                 fpoint at(mid_at.x, mid_at.y);
                 dbg("Causes ripples");
-                if (random_range(0, 1000) > 500) {
+                if (pcq_random_range(0, 1000) > 500) {
                     level->thing_new(tp_random_ripple()->name(), at);
                 }
             }

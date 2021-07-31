@@ -18,8 +18,6 @@
 
 void Level::tick (void)
 {_
-    mysrand(game->seed);
-
     // LOG("Tick");
     // TOPCON("monsts %d.", monst_count);
     if (!game->started) {
@@ -137,17 +135,33 @@ _
     //
     if (!wait) {
         game->tick_end();
+#if 0
+        //
+        // For debugging consistent randomness
+        //
+        uint32_t h = 0;
+        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+            h += (int)t->mid_at.x;
+            h += (int)t->mid_at.y;
+        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+        CON("TICK %d hash %u", game->tick_current, h);
+#endif
     }
 
     //
     // Only update robot mode if things have stopped moving so we get
-    // consitent random behaviour.
+    // consistent random behaviour.
     //
     if (game->tick_completed == game->tick_current) {
         if (game->robot_mode_requested != game->robot_mode) {
             LOG("Update robot mode");
             game->robot_mode = game->robot_mode_requested;
             wid_actionbar_robot_mode_update();
+        }
+
+        if (game->robot_mode_tick_requested) {
+            game->robot_mode_tick_requested = false;
+            game->robot_mode_tick();
         }
     }
 }

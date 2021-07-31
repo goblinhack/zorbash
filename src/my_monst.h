@@ -102,7 +102,6 @@ public:
     int          stat_strength = {};
     int          submerged_offset = {};      // Pixels
     int          throw_distance = {};
-    int          tick_rate_tenths = {};
     int          tick_resurrect_when = {};
     point        bag_position{-1, -1};
     point        wander_target{-1, -1};
@@ -124,7 +123,6 @@ public:
     timestamp_t  timestamp_fall_begin {};
     timestamp_t  timestamp_fall_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
-    timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
     timestamp_t  timestamp_jump_begin {};
     timestamp_t  timestamp_jump_end {};
     timestamp_t  timestamp_unused2 {};

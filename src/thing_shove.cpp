@@ -33,7 +33,8 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (!is_player()) {
-        if ((int)random_range(0, 1000) > tp()->attack_shove_chance_d1000()) {
+        if ((int)pcq_random_range(0, 1000) > 
+                tp()->attack_shove_chance_d1000()) {
             return (THING_SHOVE_NEVER_TRIED);
         }
     }
@@ -173,7 +174,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     //
     if (!was_dead) {
         if (it->is_fire()) {
-            if (random_range(0, 100) < 5) {
+            if (pcq_random_range(0, 100) < 5) {
                 if (is_player()) {
                     if (set_on_fire("set yourself on fire")) {
                         TOPCON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");

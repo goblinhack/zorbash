@@ -117,7 +117,7 @@ static void wid_actionbar_robot_over_e (Widp w)
 
 static void wid_actionbar_robot_tick (Widp w)
 {_
-    game->robot_mode_tick();
+    game->robot_mode_tick_requested = true;
 }
 
 static uint8_t wid_actionbar_close (Widp w, int32_t x, int32_t y, uint32_t button)

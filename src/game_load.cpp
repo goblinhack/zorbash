@@ -118,7 +118,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int          stat_strength             */ in >> bits(my.t->stat_strength);
     /* int          submerged_offset          */ in >> bits(my.t->submerged_offset);
     /* int          throw_distance            */ in >> bits(my.t->throw_distance);
-    /* int          tick_rate_tenths          */ in >> bits(my.t->tick_rate_tenths);
     /* int          tick_resurrect_when       */ in >> bits(my.t->tick_resurrect_when);
     /* point        bag_position              */ in >> bits(my.t->bag_position);
     /* point        wander_target             */ in >> bits(my.t->wander_target);
@@ -140,7 +139,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t  timestamp_fall_begin      */ in >> bits(T); my.t->timestamp_fall_begin = load(T);
     /* timestamp_t  timestamp_fall_end        */ in >> bits(T); my.t->timestamp_fall_end = load(T);
     /* timestamp_t  timestamp_flip_start      */ in >> bits(T); my.t->timestamp_flip_start = load(T);
-    /* timestamp_t  timestamp_hunger_tick     */ in >> bits(T); my.t->timestamp_hunger_tick = load(T);
     /* timestamp_t  timestamp_jump_begin      */ in >> bits(T); my.t->timestamp_jump_begin = load(T);
     /* timestamp_t  timestamp_jump_end        */ in >> bits(T); my.t->timestamp_jump_end = load(T);
     /* timestamp_t  timestamp_unused2         */ in >> bits(T); my.t->timestamp_unused2 = load(T);
@@ -640,6 +638,15 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
         g_opt_debug3 = true;
         g_opt_debug2 = true;
         g_opt_debug1 = true;
+    }
+
+    if (g_opt_nodebug) {
+        g_opt_debug5 = false;
+        g_opt_debug4 = false;
+        g_opt_debug3 = false;
+        g_opt_debug2 = false;
+        g_opt_debug1 = false;
+        g_opt_nodebug = false;
     }
 
     //

@@ -128,8 +128,8 @@ static Tpp tp_get_with_rarity_filter (Tpidmap &m)
 {_
     int tries = 10000;
     while (tries--) {
-        auto tp = get(m, myrand() % m.size());
-        auto r = random_range(0, 1000);
+        auto tp = get(m, pcq_rand() % m.size());
+        auto r = pcq_random_range(0, 1000);
         if (r < 800) {
             if (tp->rarity() != THING_RARITY_COMMON) {
                 continue;
@@ -159,12 +159,12 @@ static Tpp tp_get_with_rarity_filter (Tpidmap &m)
         return tp;
     }
     ERR("Could not find a thing according to rarity");
-    return get(m, myrand() % m.size());
+    return get(m, pcq_rand() % m.size());
 }
 
 static Tpp tp_get_with_no_rarity_filter (Tpidmap &m)
 {_
-    return get(m, myrand() % m.size());
+    return get(m, pcq_rand() % m.size());
 }
 
 Tpp tp_random_monst (void)

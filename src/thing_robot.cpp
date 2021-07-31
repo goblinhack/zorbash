@@ -898,13 +898,6 @@ void Thing::robot_tick (void)
         return;
     }
 
-    static uint32_t last_tick;
-    if (!time_have_x_ms_passed_since(game->get_move_speed(), last_tick)) {
-        return;
-    }
-
-    last_tick = time_get_time_ms_cached();
-
     if (is_dead) {
         return;
     }

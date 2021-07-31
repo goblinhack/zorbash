@@ -228,13 +228,6 @@ _
     }
 
     {_
-        auto v = tpp->tick_rate_tenths();
-        if (unlikely(v)) {
-            set_tick_rate_tenths(v);
-        }
-    }
-
-    {_
         auto v = tpp->lifespan();
         if (unlikely(v)) {
             set_lifespan(v);
@@ -403,8 +396,8 @@ _
     // Jitter makes the eating of blood by monsts problematic
     //
     if (unlikely(jitter != fpoint(0.0, 0.0))) {
-        double dx = random_range(0, TILE_WIDTH);
-        double dy = random_range(0, TILE_WIDTH);
+        double dx = pcq_random_range(0, TILE_WIDTH);
+        double dy = pcq_random_range(0, TILE_WIDTH);
 
         dx -= TILE_WIDTH / 2;
         dy -= TILE_WIDTH / 2;
@@ -428,7 +421,7 @@ _
     }
 
     if (gfx_bounce_always()) {
-        bounce(0.2, 1.0, 500 + random_range(0, 50), 99999);
+        bounce(0.2, 1.0, 500 + pcq_random_range(0, 50), 99999);
     }
 
     init_lights();

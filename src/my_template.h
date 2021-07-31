@@ -42,6 +42,7 @@ template <class T, template <typename ELEM, typename ALLOC = std::allocator<ELEM
         c.push_back(d);
     }
 
+#ifdef NO_ONE_USES_YET_AND_COINCERNED_ABOUT_WHICH_RAND_SHOULD_BE_USED
 template <class T, template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
 
     T one_of (C<T> &c)
@@ -52,5 +53,6 @@ template <class T, template <typename ELEM, typename ALLOC = std::allocator<ELEM
         size_t sz = eo - so;
         return *(so + (myrand() % sz));
     }
+#endif
 
 #endif

@@ -14,7 +14,8 @@
 
 float Thing::how_far_i_can_jump (void)
 {_
-    auto d = (float) is_jumper_distance() + ceil(0.5 + (random_range(0, 100) / 100.0));
+    auto d = (float) is_jumper_distance() +
+                ceil(0.5 + (pcq_random_range(0, 100) / 100.0));
 
     if (get_stamina() < get_stamina_max() / 2) {
         d /= 2;
@@ -287,7 +288,7 @@ bool Thing::try_to_jump (point to)
             if (level->is_shallow_water((int)mid_at.x, (int)mid_at.y)) {
                 fpoint at(mid_at.x, mid_at.y);
                 dbg("Causes ripples");
-                if (random_range(0, 1000) > 500) {
+                if (pcq_random_range(0, 1000) > 500) {
                     level->thing_new(tp_random_ripple()->name(), at);
                 }
             }
@@ -319,8 +320,8 @@ bool Thing::try_to_jump (void)
     int tries = d * d;
 
     while (tries-- > 0) {
-        int x = random_range(mid_at.x - d, mid_at.x + d);
-        int y = random_range(mid_at.y - d, mid_at.y + d);
+        int x = pcq_random_range(mid_at.x - d, mid_at.x + d);
+        int y = pcq_random_range(mid_at.y - d, mid_at.y + d);
         if (try_to_jump(point(x, y))) {
             return true;
         }
@@ -350,8 +351,8 @@ bool Thing::try_to_jump_towards_player (void)
     auto curr_dist = DISTANCE(mid_at.x, mid_at.y, player_at.x, player_at.y);
 
     while (tries-- > 0) {
-        int x = random_range(mid_at.x - d, mid_at.x + d);
-        int y = random_range(mid_at.y - d, mid_at.y + d);
+        int x = pcq_random_range(mid_at.x - d, mid_at.x + d);
+        int y = pcq_random_range(mid_at.y - d, mid_at.y + d);
 
         auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
         if (new_dist > curr_dist) {
@@ -394,8 +395,8 @@ bool Thing::try_to_jump_away_from_player (void)
     auto curr_dist = DISTANCE(mid_at.x, mid_at.y, player_at.x, player_at.y);
 
     while (tries-- > 0) {
-        int x = random_range(mid_at.x - d, mid_at.x + d);
-        int y = random_range(mid_at.y - d, mid_at.y + d);
+        int x = pcq_random_range(mid_at.x - d, mid_at.x + d);
+        int y = pcq_random_range(mid_at.y - d, mid_at.y + d);
 
         auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
         if (new_dist < curr_dist) {
@@ -428,8 +429,8 @@ bool Thing::try_harder_to_jump (void)
     int tries = 100;
 
     while (tries-- > 0) {
-        int x = random_range(mid_at.x - d, mid_at.x + d);
-        int y = random_range(mid_at.y - d, mid_at.y + d);
+        int x = pcq_random_range(mid_at.x - d, mid_at.x + d);
+        int y = pcq_random_range(mid_at.y - d, mid_at.y + d);
         if (try_to_jump(point(x, y))) {
             return true;
         }

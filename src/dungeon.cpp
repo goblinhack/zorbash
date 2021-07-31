@@ -1777,7 +1777,7 @@ bool Dungeon::solve (int x, int y, Grid *g)
         }
     }
 
-    auto ri = random_range(0, ncandidates);
+    auto ri = pcq_random_range(0, ncandidates);
     auto r = get(candidates, ri);
     set(g->node_rooms, x, y, r);
 
@@ -1985,8 +1985,8 @@ void Dungeon::choose_room_doors (void)
                     _ debug("bug");
                     ERR("Had exit down at %d,%d, but no node exists", x, y);
                 }
-                auto rdoori = random_range(0, r->doors_down.size());
-                auto odoori = random_range(0, o->doors_up.size());
+                auto rdoori = pcq_random_range(0, r->doors_down.size());
+                auto odoori = pcq_random_range(0, o->doors_up.size());
                 if (rdoori >= r->doors_down.size()) {
                     _ debug("bug");
                     ERR("Bug");
@@ -2009,8 +2009,8 @@ void Dungeon::choose_room_doors (void)
                     _ debug("bug");
                     ERR("Had exit right at %d,%d, but no node exists", x, y);
                 }
-                auto rdoori = random_range(0, r->doors_right.size());
-                auto odoori = random_range(0, o->doors_left.size());
+                auto rdoori = pcq_random_range(0, r->doors_right.size());
+                auto odoori = pcq_random_range(0, o->doors_left.size());
                 if (rdoori >= r->doors_right.size()) {
                     _ debug("bug");
                     ERR("Bug");
@@ -2033,8 +2033,8 @@ void Dungeon::choose_room_doors (void)
                     _ debug("bug");
                     ERR("Had secret exit down at %d,%d, but no node exists", x, y);
                 }
-                auto rdoori = random_range(0, r->doors_down.size());
-                auto odoori = random_range(0, o->doors_up.size());
+                auto rdoori = pcq_random_range(0, r->doors_down.size());
+                auto odoori = pcq_random_range(0, o->doors_up.size());
                 if (rdoori >= r->doors_down.size()) {
                     _ debug("bug");
                     ERR("Bug, room %d, down door index %d size %d",
@@ -2059,8 +2059,8 @@ void Dungeon::choose_room_doors (void)
                     _ debug("bug");
                     ERR("Had secret exit right at %d,%d, but no node exists", x, y);
                 }
-                auto rdoori = random_range(0, r->doors_right.size());
-                auto odoori = random_range(0, o->doors_left.size());
+                auto rdoori = pcq_random_range(0, r->doors_right.size());
+                auto odoori = pcq_random_range(0, o->doors_left.size());
                 if (rdoori >= r->doors_right.size()) {
                     _ debug("bug");
                     ERR("Bug, room %d, right door index %d size %d",
@@ -2728,7 +2728,7 @@ bool Dungeon::rooms_move_closer_together (void)
 
                     auto r = get(grid.node_rooms, x, y);
                     if (r) {
-                        r->skip = (random_range(0, 100) < 50);
+                        r->skip = (pcq_random_range(0, 100) < 50);
                     }
                 }
             }
@@ -2773,10 +2773,10 @@ bool Dungeon::rooms_move_closer_together (void)
                         continue;
                     }
 
-                    delta = 1 + random_range(0, 2);
+                    delta = 1 + pcq_random_range(0, 2);
 
                     auto moved_one = false;
-                    switch (random_range(0, 4)) {
+                    switch (pcq_random_range(0, 4)) {
                     case 0:
                         if (can_place_room(r, r->at.x - delta, r->at.y)) {
                             r->at.x -= delta;
@@ -3673,7 +3673,7 @@ void Dungeon::water_fixup (void)
     for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
         for (auto x = 1; x < MAP_WIDTH - 1; x++) {
             if (get(cand, x, y)) {
-                if (random_range(0, 100) < 95) {
+                if (pcq_random_range(0, 100) < 95) {
                     putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
                 } else {
                     putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
@@ -3692,25 +3692,25 @@ void Dungeon::add_remaining (void)
                 continue;
             }
 
-            if (random_range(0, 100) < 95) {
+            if (pcq_random_range(0, 100) < 95) {
                 putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
             }
 
             putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
             putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
 
-            if (random_range(0, 100) < 20) {
+            if (pcq_random_range(0, 100) < 20) {
                 putc(x, y, MAP_DEPTH_FLOOR2, Charmap::DRY_GRASS);
             }
 
-            if (random_range(0, 100) < 20) {
+            if (pcq_random_range(0, 100) < 20) {
                 putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
             } else if (is_dirt(x, y)) {
-                if (random_range(0, 100) < 20) {
+                if (pcq_random_range(0, 100) < 20) {
                     putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
                 }
             } else if (is_corridor(x, y)) {
-                if (random_range(0, 100) < 20) {
+                if (pcq_random_range(0, 100) < 20) {
                     putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB);
                 }
             }
@@ -3736,13 +3736,13 @@ void Dungeon::add_foilage_around_water (void)
             }
 
             if (is_dirt(x, y)) {
-                if (random_range(0, 100) > 50) {
+                if (pcq_random_range(0, 100) > 50) {
                     continue;
                 }
             }
 
             if (is_floor(x, y)) {
-                if (random_range(0, 100) > 5) {
+                if (pcq_random_range(0, 100) > 5) {
                     continue;
                 }
             }
@@ -3779,7 +3779,7 @@ next:
 
 void Dungeon::add_spiderweb (void)
 {
-    if (random_range(0, 10) > 1) {
+    if (pcq_random_range(0, 10) > 1) {
         return;
     }
 
@@ -3796,11 +3796,11 @@ void Dungeon::add_spiderweb (void)
             }
 
             if (is_corridor(x, y)) {
-                if (random_range(0, 1000) > 400) {
+                if (pcq_random_range(0, 1000) > 400) {
                     continue;
                 }
             } else if (is_floor(x, y)) {
-                if (random_range(0, 1000) > 1) {
+                if (pcq_random_range(0, 1000) > 1) {
                     continue;
                 }
             } else {
@@ -3872,7 +3872,7 @@ void Dungeon::cave_gen (unsigned int map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 10000) < map_fill_prob) {
+            if (pcq_random_range(0, 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -3952,7 +3952,7 @@ void Dungeon::dirt_gen (unsigned int map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 10000) < map_fill_prob) {
+            if (pcq_random_range(0, 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -4005,7 +4005,7 @@ void Dungeon::dry_grass_gen (unsigned int map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 10000) < map_fill_prob) {
+            if (pcq_random_range(0, 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -4082,7 +4082,7 @@ void Dungeon::foilage_gen (unsigned int map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 10000) < map_fill_prob) {
+            if (pcq_random_range(0, 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -4154,7 +4154,7 @@ void Dungeon::water_gen (unsigned int map_fill_prob,
 
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
-            if ((myrand() % 10000) < map_fill_prob) {
+            if (pcq_random_range(0, 10000) < map_fill_prob) {
                 set(map_curr, x, y, (uint8_t)1);
             }
         }
@@ -4192,7 +4192,7 @@ Dungeonp dungeon_test (void)
     return (nullptr);
 #else
     int x = 663;
-    mysrand(x);
+    pcq_srand(x);
     auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH, MAP_GRID_HEIGHT, x);
 
     return (d);

@@ -152,7 +152,7 @@ void Game::dead_select (const char *reason)
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
 
         wid_set_pos(w, tl, br);
-        auto r = random_range(0, 100);
+        auto r = non_pcq_random_range(0, 100);
         if (r < 10) {
             wid_set_text(w, "Lived large, too short...");
         } else if (r < 20) {

@@ -83,5 +83,16 @@ void Game::tick_end (void)
         if (level->player) {
             level->player->cursor_path_pop_next_and_move();
         }
+#if 0
+        //
+        // For debugging consistent randomness
+        //
+        uint32_t h = 0;
+        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {
+            h += (int)t->mid_at.x;
+            h += (int)t->mid_at.y;
+        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
+        CON("TICK %d hash %u rand %d", tick_current, h, pcq_random_range(1, 10000));
+#endif
     }
 }

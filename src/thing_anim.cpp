@@ -3,8 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_thing.h"
+#include "my_game.h"
 #include "my_main.h"
+#include "my_thing.h"
 #include "my_callstack.h"
 #include "my_random.h"
 #include "my_thing_template.h"
@@ -421,8 +422,15 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
     // When does this tile expire ?
     //
     timestamp_t delay = tile_delay_ms(tile);
-    if (delay) {
-        delay = delay + (sysrand() % delay) / 5;
+
+    //
+    // Worried this might cause things to move to destinations at slightly
+    // different times and break repeatability.
+    //
+    if (!game->robot_mode) {
+        if (delay) {
+            delay = delay + (non_pcq_rand() % delay) / 5;
+        }
     }
 
     timestamp_next_frame = time_get_time_ms_cached() + delay;

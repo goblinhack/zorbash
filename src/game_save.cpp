@@ -92,7 +92,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int          stat_strength             */ out << bits(my.t->stat_strength);
     /* int          submerged_offset          */ out << bits(my.t->submerged_offset);
     /* int          throw_distance            */ out << bits(my.t->throw_distance);
-    /* int          tick_rate_tenths          */ out << bits(my.t->tick_rate_tenths);
     /* int          tick_resurrect_when       */ out << bits(my.t->tick_resurrect_when);
     /* point        bag_position              */ out << bits(my.t->bag_position);
     /* point        wander_target             */ out << bits(my.t->wander_target);
@@ -114,7 +113,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t  timestamp_fall_begin      */ out << bits(my.t->timestamp_fall_begin);
     /* timestamp_t  timestamp_fall_end        */ out << bits(my.t->timestamp_fall_end);
     /* timestamp_t  timestamp_flip_start      */ out << bits(my.t->timestamp_flip_start);
-    /* timestamp_t  timestamp_hunger_tick     */ out << bits(my.t->timestamp_hunger_tick);
     /* timestamp_t  timestamp_jump_begin      */ out << bits(my.t->timestamp_jump_begin);
     /* timestamp_t  timestamp_jump_end        */ out << bits(my.t->timestamp_jump_end);
     /* timestamp_t  timestamp_unused2         */ out << bits(my.t->timestamp_unused2);

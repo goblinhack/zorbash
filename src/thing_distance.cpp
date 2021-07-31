@@ -29,8 +29,8 @@ point Thing::get_random_scent_target (void)
 
     while (tries--) {
         point start(mid_at.x, mid_at.y);
-        int16_t dx = random_range(-d, d);
-        int16_t dy = random_range(-d, d);
+        int16_t dx = pcq_random_range(-d, d);
+        int16_t dy = pcq_random_range(-d, d);
         if (!dx && !dy) {
             continue;
         }
@@ -71,8 +71,8 @@ point Thing::get_random_scent_target (void)
 
     while (tries--) {
         point start(mid_at.x, mid_at.y);
-        int16_t dx = random_range(-d, d);
-        int16_t dy = random_range(-d, d);
+        int16_t dx = pcq_random_range(-d, d);
+        int16_t dy = pcq_random_range(-d, d);
         if (!dx && !dy) {
             continue;
         }
@@ -100,8 +100,8 @@ point Thing::get_random_scent_target (void)
     // Any point will do
     //
     point start(mid_at.x, mid_at.y);
-    int16_t dx = random_range(-d, d);
-    int16_t dy = random_range(-d, d);
+    int16_t dx = pcq_random_range(-d, d);
+    int16_t dy = pcq_random_range(-d, d);
     if (!dx && !dy) {
         return start;
     }

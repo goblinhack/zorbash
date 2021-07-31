@@ -98,7 +98,7 @@ have_dungeon_start:
 
         log("DUNGEON: Place random floors");
         {
-            auto floor_type = random_range_inclusive(1, 11);
+            auto floor_type = pcq_random_range_inclusive(1, 11);
 
             int nloops = 100;
             auto s = "floor";
@@ -161,7 +161,7 @@ have_dungeon_start:
                 if (g_errored) { return false; }
                 create_dungeon_place_floors(dungeon, s, floor_type, 4, 1, 2, tries);
                 if (g_errored) { return false; }
-                create_dungeon_place_floors(dungeon, s, floor_type, random_range_inclusive(1, 38), 1, 1, tries);
+                create_dungeon_place_floors(dungeon, s, floor_type, pcq_random_range_inclusive(1, 38), 1, 1, tries);
                 if (g_errored) { return false; }
             }
 
@@ -445,8 +445,8 @@ void Level::create_dungeon_place_walls (Dungeonp d, Tpp tp, int variant,
     auto what = tp->name();
 
     while (tries--) {
-        auto x = random_range(0, MAP_WIDTH - block_width + 1);
-        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+        auto x = pcq_random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = pcq_random_range(0, MAP_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -530,8 +530,8 @@ void Level::create_dungeon_place_rocks (Dungeonp d, int variant,
     auto what = tp->name();
 
     while (tries--) {
-        auto x = random_range(0, MAP_WIDTH - block_width + 1);
-        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+        auto x = pcq_random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = pcq_random_range(0, MAP_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -608,10 +608,10 @@ void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int floor
                                          int block_height, int tries)
 {_
     while (tries--) {
-        auto x = random_range(MAP_BORDER_ROCK, 
-                              MAP_WIDTH - MAP_BORDER_ROCK - block_width + 1);
-        auto y = random_range(MAP_BORDER_ROCK, 
-                              MAP_HEIGHT - MAP_BORDER_ROCK - block_height + 1);
+        auto x = pcq_random_range(MAP_BORDER_ROCK, 
+                                  MAP_WIDTH - MAP_BORDER_ROCK - block_width + 1);
+        auto y = pcq_random_range(MAP_BORDER_ROCK, 
+                                  MAP_HEIGHT - MAP_BORDER_ROCK - block_height + 1);
 
         //
         // Place bridges instead of floor, if we have multiple bridge
@@ -726,7 +726,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             // of repeatability if other small things change in the
             // game
             //
-            mysrand(seed + x + (y * MAP_WIDTH));
+            pcq_srand(seed + x + (y * MAP_WIDTH));
 
             point p(x, y);
 
@@ -742,7 +742,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
 
             if (d->is_monst_easy(x, y)) { 
-                if (random_range(0, 100) < 75) {
+                if (pcq_random_range(0, 100) < 75) {
                     tp = tp_random_monst_easy(p);
                 }
             }
@@ -784,7 +784,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                     if (always_give_treasure) {
                         tp = tp_random_minion_generator_easy(p); 
                     } else {
-                        if (random_range(0, 100) < 50) {
+                        if (pcq_random_range(0, 100) < 50) {
                             tp = tp_random_minion_generator_easy(p); 
                         }
                     }
@@ -801,7 +801,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 if (always_give_treasure) {
                     tp = tp_random_treasure(); 
                 } else {
-                    if (random_range(0, 100) < 50) {
+                    if (pcq_random_range(0, 100) < 50) {
                         tp = tp_random_treasure(); 
                     }
                 }
@@ -815,9 +815,9 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 if (d->is_treasure_class_a(x, y) ||
                     d->is_treasure_class_b(x, y) ||
                     d->is_treasure_class_c(x, y)) { 
-                    if (random_range(0, 100) < 80) {
+                    if (pcq_random_range(0, 100) < 80) {
                         tp = tp_random_item_class_c(); 
-                    } else if (random_range(0, 100) < 80) {
+                    } else if (pcq_random_range(0, 100) < 80) {
                         tp = tp_random_item_class_b(); 
                     } else {
                         tp = tp_random_item_class_a(); 
@@ -828,7 +828,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                     if (always_give_treasure) {
                         tp = tp_random_item_class_a(); 
                     } else {
-                        if (random_range(0, 100) < 50) {
+                        if (pcq_random_range(0, 100) < 50) {
                             tp = tp_random_item_class_a(); 
                         }
                     }
@@ -838,7 +838,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                     if (always_give_treasure) {
                         tp = tp_random_item_class_b(); 
                     } else {
-                        if (random_range(0, 100) < 50) {
+                        if (pcq_random_range(0, 100) < 50) {
                             tp = tp_random_item_class_b(); 
                         }
                     }
@@ -848,7 +848,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                     if (always_give_treasure) {
                         tp = tp_random_item_class_c(); 
                     } else {
-                        if (random_range(0, 100) < 50) {
+                        if (pcq_random_range(0, 100) < 50) {
                             tp = tp_random_item_class_c(); 
                         }
                     }
@@ -925,7 +925,7 @@ void Level::create_dungeon_place_lava_smoke (Dungeonp d)
             // Place smoke over lava but not if next to water as it will
             // just boil off anyway
             //
-            if (random_range(0, 100) < 20) {
+            if (pcq_random_range(0, 100) < 20) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
                         if (is_shallow_water(x + dx, y + dy)) {
@@ -1010,7 +1010,7 @@ void Level::create_dungeon_place_random_blood (Dungeonp d)
                 continue;
             }
 
-            if (random_range(0, 1000) > 20) {
+            if (pcq_random_range(0, 1000) > 20) {
                 continue;
             }
 
@@ -1098,7 +1098,7 @@ void Level::place_floor_deco (Dungeonp d)
             // of repeatability if other small things change in the
             // game
             //
-            mysrand(seed + x + (y * MAP_WIDTH));
+            pcq_srand(seed + x + (y * MAP_WIDTH));
 
             auto tp = tp_random_deco();
             if (!tp) {
@@ -1122,7 +1122,7 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
                 continue;
             }
 
-            if (random_range(0, 100) < 99) {
+            if (pcq_random_range(0, 100) < 99) {
                 continue;
             }
 
@@ -1173,7 +1173,7 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
             // of repeatability if other small things change in the
             // game
             //
-            mysrand(seed + x + (y * MAP_WIDTH));
+            pcq_srand(seed + x + (y * MAP_WIDTH));
 
             auto tp = tp_random_deco();
             if (!tp) {
@@ -1205,14 +1205,14 @@ void Level::create_dungeon_place_sewer_pipes (Dungeonp d)
     //
     // Sometimes we have sewer pipes
     //
-    auto r = random_range(0, 100);
+    auto r = pcq_random_range(0, 100);
     if (r < 80) {
         return;
     }
 
     int sewer_count = 0;
     int min_sewer_dist = 10;
-    int sewer_count_target = 2 + random_range(0, 5);
+    int sewer_count_target = 2 + pcq_random_range(0, 5);
     auto tries = 10000;
 
     while (sewer_count < sewer_count_target) {
@@ -1221,8 +1221,8 @@ redo:
             return;
         }
 
-        auto x = random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
-        auto y = random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
+        auto x = pcq_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
+        auto y = pcq_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
 
         if (d->is_wall(x, y)) {
             continue;
@@ -1300,7 +1300,7 @@ redo:
         // of repeatability if other small things change in the
         // game
         //
-        mysrand(seed + x + (y * MAP_WIDTH));
+        pcq_srand(seed + x + (y * MAP_WIDTH));
 
         auto tp = tp_random_descend_sewer();
         if (!tp) {
@@ -1419,11 +1419,11 @@ void Level::place_dirt (Dungeonp d)
 void Level::place_random_treasure (Dungeonp d)
 {_
     int tries = 1000;
-    int treasure_max = random_range(1, 10);
+    int treasure_max = pcq_random_range(1, 10);
 
     while (tries--) {
-        auto x = random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
-        auto y = random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
+        auto x = pcq_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
+        auto y = pcq_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
         if (d->is_dirt(x, y) || 
             d->is_deep_water(x, y) || 
@@ -1535,7 +1535,7 @@ void Level::create_dungeon_place_remaining_walls (Dungeonp d, const std::string 
                 continue;
             }
 
-            if (random_range(0, 100) < 50) {
+            if (pcq_random_range(0, 100) < 50) {
                 continue;
             }
 

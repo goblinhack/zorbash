@@ -116,7 +116,6 @@ private:
     int _gfx_weapon_carry_anim {};
     int _health_hunger_pct {};
     int _health_starving_pct {};
-    int _hunger_clock_freq_ms {};
     int _internal_has_dir_anim {};
     int _internal_has_hp_anim {};
     int _is_able_to_change_levels {};
@@ -379,9 +378,7 @@ private:
     int _stats17 {};
     int _throw_distance {};
     int _tick_catches_up_on_attack {};
-    int _tick_rate_tenths {};
     int _weapon_damage {};
-    int _weapon_use_delay_hundredths {};
     int _weapon_use_distance {};
     std::string _damage_bite_dice_str;
     std::string _damage_melee_dice_str;
@@ -586,7 +583,6 @@ public:
     int hates_water(void) const;
     int health_hunger_pct(void) const;
     int health_starving_pct(void) const;
-    int hunger_clock_freq_ms(void) const;
     int internal_has_dir_anim(void) const;
     int internal_has_hp_anim(void) const;
     int is_able_to_change_levels(void) const;
@@ -845,9 +841,7 @@ public:
     int stats17(void) const;
     int throw_distance(void) const;
     int tick_catches_up_on_attack(void) const;
-    int tick_rate_tenths(void) const;
     int weapon_damage(void) const;
-    int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
     std::string text_a_or_an(void) const;
     void set_ai_avoid_distance(int);
@@ -915,7 +909,6 @@ public:
     void set_health_hunger_pct(int);
     void set_health_initial_dice(const std::string &);
     void set_health_starving_pct(int);
-    void set_hunger_clock_freq_ms(int);
     void set_internal_has_dir_anim(int);
     void set_internal_has_hp_anim(int);
     void set_is_able_to_change_levels(int);
@@ -1213,10 +1206,8 @@ public:
     void set_text_unused(const std::string &);
     void set_throw_distance(int);
     void set_tick_catches_up_on_attack(int);
-    void set_tick_rate_tenths(int);
     void set_weapon_carry_anim(const std::string &);
     void set_weapon_damage(int);
-    void set_weapon_use_delay_hundredths(int);
     void set_weapon_use_distance(int);
     void set_z_depth(int);
     void set_z_prio(int);

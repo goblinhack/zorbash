@@ -140,7 +140,7 @@ void Thing::achieve_goals_in_life (void)
         }
 
         if (is_jumper()) {
-            if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
+            if ((int)pcq_random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
                 dbg("Try to randomly jump");
                 if (!collision_obstacle(level->player)) {
                     if (try_to_jump_towards_player()) {
@@ -254,16 +254,6 @@ _
             }
             return;
         }
-
-        //
-        // Is this redundant with the above?
-        //
-        static uint32_t last_tick;
-        if (!time_have_x_ms_passed_since(game->get_move_speed(), last_tick)) {
-            return;
-        }
-
-        last_tick = time_get_time_ms_cached();
     }
 
     //

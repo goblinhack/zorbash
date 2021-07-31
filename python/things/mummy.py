@@ -2,17 +2,17 @@ import zx
 import tp
 
 def on_bite(me, x, y):
-    sound = "growl{}".format(zx.randint(1, 10))
+    sound = "growl{}".format(zx.non_pcq_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    sound = "hiss{}".format(zx.randint(1, 10))
+    sound = "hiss{}".format(zx.non_pcq_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_miss(me, hitter, x, y):
-    sound = "hiss{}".format(zx.randint(1, 10))
+    sound = "hiss{}".format(zx.non_pcq_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
@@ -87,7 +87,6 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A staggering corpse, covered in tissue paper.")
     mytp.set_text_hits("claws")
-    mytp.set_tick_rate_tenths(3)
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 

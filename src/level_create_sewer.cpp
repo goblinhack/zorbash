@@ -81,14 +81,14 @@ bool Level::create_sewer_pipes (point3d at)
     auto min_pipe_distance = 10;
     auto max_pipe_distance = 20;
     for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; 
-         x+=random_range(min_pipe_distance,max_pipe_distance)) {
+         x += pcq_random_range(min_pipe_distance, max_pipe_distance)) {
         for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
             set(pipes_template, x, y, true);
         }
     }
 
     for (auto y = MAP_BORDER_ROCK; y < MAP_WIDTH - MAP_BORDER_ROCK; 
-         y+=random_range(min_pipe_distance,max_pipe_distance)) {
+         y += pcq_random_range(min_pipe_distance, max_pipe_distance)) {
         for (auto x = MAP_BORDER_ROCK; x < MAP_HEIGHT - MAP_BORDER_ROCK; x++) {
             set(pipes_template, x, y, true);
         }
@@ -114,9 +114,12 @@ bool Level::create_sewer_pipes (point3d at)
     }
 
     if (got_count <= 1) {
-        sewers.push_back(point(random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT)));
-        sewers.push_back(point(random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT)));
-        sewers.push_back(point(random_range(0, MAP_WIDTH), random_range(0, MAP_HEIGHT)));
+        sewers.push_back(point(pcq_random_range(0, MAP_WIDTH),
+                               pcq_random_range(0, MAP_HEIGHT)));
+        sewers.push_back(point(pcq_random_range(0, MAP_WIDTH),
+                               pcq_random_range(0, MAP_HEIGHT)));
+        sewers.push_back(point(pcq_random_range(0, MAP_WIDTH),
+                               pcq_random_range(0, MAP_HEIGHT)));
     }
 
     //
@@ -125,7 +128,7 @@ bool Level::create_sewer_pipes (point3d at)
     for (auto n = 0U; n < sewers.size(); n++) {
         auto p = sewers[n];
         int dx = 0, dy = 0;
-        switch (random_range_inclusive(0, 3)) {
+        switch (pcq_random_range_inclusive(0, 3)) {
             case 0: dx = -1; dy = 0; break;
             case 1: dx =  1; dy = 0; break;
             case 2: dx =  0; dy = -1; break;
@@ -163,9 +166,9 @@ bool Level::create_sewer_pipes (point3d at)
     //
     for (auto n = 0U; n < sewers.size(); n++) {
         auto a = sewers[n];
-        auto b = sewers[random_range(0, sewers.size())];
+        auto b = sewers[pcq_random_range(0, sewers.size())];
         while (a == b) {
-            b = sewers[random_range(0, sewers.size())];
+            b = sewers[pcq_random_range(0, sewers.size())];
         }
 
         std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
@@ -247,7 +250,7 @@ bool Level::create_sewer_pipes (point3d at)
             point p(x, y);
             if (get(final_pipes, x, y)) {
                 (void) thing_new("corridor2", p);
-                if (random_range(0, 100) < 25) {
+                if (pcq_random_range(0, 100) < 25) {
                     (void) thing_new("water1", p);
                 }
             }
@@ -289,8 +292,8 @@ void Level::create_sewer_place_walls (int variant, int block_width, int block_he
     auto what = tp->name();
 
     while (tries--) {
-        auto x = random_range(0, MAP_WIDTH - block_width + 1);
-        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+        auto x = pcq_random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = pcq_random_range(0, MAP_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {

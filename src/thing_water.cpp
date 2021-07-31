@@ -27,7 +27,7 @@ void Thing::water_tick (void)
         }
 
         auto smoke = level->thing_new("smoke", mid_at);
-        smoke->set_lifespan(random_range(1, 10));
+        smoke->set_lifespan(pcq_random_range(1, 10));
         return;
     }
 
@@ -37,5 +37,5 @@ void Thing::water_tick (void)
 
     dead("by a watery end");
     auto smoke = level->thing_new("smoke", mid_at);
-    smoke->set_lifespan(random_range(1, 10));
+    smoke->set_lifespan(pcq_random_range(1, 10));
 }

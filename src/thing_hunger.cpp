@@ -12,24 +12,10 @@
 
 void Thing::hunger_clock (void)
 {_
+    // TODO
+    return;
+
     auto tpp = tp();
-
-    //
-    // Does this thing hunger?
-    //
-    if (!tpp->hunger_clock_freq_ms()) {
-        return;
-    }
-
-    //
-    // Update the hunger clock.
-    //
-    if (!time_have_x_ms_passed_since(tpp->hunger_clock_freq_ms(),
-                                     get_timestamp_hunger_tick())) {
-        return;
-    }
-
-    set_timestamp_hunger_tick(time_get_time_ms_cached());
 
     if (get_health() > 1) {
         decr_health();

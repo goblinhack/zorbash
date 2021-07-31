@@ -44,7 +44,7 @@ static void game_display_flames_tiles (int w, int h)
             } else if (r < 10) {
                 cn = BLACK;
             } else if (r < 15) {
-                if (random_range(0, 100) < 50) {
+                if (non_pcq_random_range(0, 100) < 50) {
                     cn = BLACK;
                 } else {
                     cn = DARKRED;
@@ -78,8 +78,8 @@ static void game_display_flames_change (int w, int h)
     int flames = 3;
     while (flames--) 
     {
-        auto xr = random_range(w / 4, w - w / 4);
-        auto r = random_range(0, 100);
+        auto xr = non_pcq_random_range(w / 4, w - w / 4);
+        auto r = non_pcq_random_range(0, 100);
 
         if (r < 60) {
             bg[ xr - 3 ][ h - 1 ] = GRAY10;
@@ -99,7 +99,7 @@ static void game_display_flames_change (int w, int h)
     }
 
     for (auto x = 0; x < w; x++) {
-        if (random_range(0, 100) < 99) {
+        if (non_pcq_random_range(0, 100) < 99) {
             continue;
         }
 
@@ -119,7 +119,7 @@ static void game_display_flames_change (int w, int h)
     }
 
     for (auto x = 0; x < w; x++) {
-        if (random_range(0, 100) < 99) {
+        if (non_pcq_random_range(0, 100) < 99) {
             continue;
         }
 
@@ -133,7 +133,7 @@ static void game_display_flames_change (int w, int h)
     }
 
     for (auto x = 0; x < w; x++) {
-        if (random_range(0, 100) < 95) {
+        if (non_pcq_random_range(0, 100) < 95) {
             continue;
         }
 
@@ -147,7 +147,7 @@ static void game_display_flames_change (int w, int h)
     }
 
     for (auto x = 0; x < w; x++) {
-        if (random_range(0, 100) < 50) {
+        if (non_pcq_random_range(0, 100) < 50) {
             continue;
         }
         int scroll = 3;

@@ -20,6 +20,7 @@
 #include "my_wid_console.h"
 #include "my_wid_actionbar.h"
 #include "my_array_bounds_check.h"
+#include "my_random.h"
 
 void Thing::on_move (void)
 {_
@@ -61,7 +62,7 @@ void Thing::move_reset_timestamps (void)
     set_timestamp_move_end(0);
 }
 
-void Thing::move_finish (void)
+void Thing::move_finish_internal (void)
 {_
     dbg("Move finish");
 
@@ -79,7 +80,12 @@ void Thing::move_finish (void)
         dbg("Move to %f,%f finished", mid_at.x, mid_at.y);
     }
 
-    update_interpolated_position();
+    is_moving = false;
+}
+
+void Thing::move_finish (void)
+{_
+    move_finish_internal();
     is_moving = false;
 }
 
@@ -444,7 +450,7 @@ void Thing::update_interpolated_position (void)
             new_pos = mid_at;
             last_mid_at = mid_at;
 
-            move_finish();
+            move_finish_internal();
         }
     } else {
         float t = get_timestamp_move_end() - get_timestamp_move_begin();

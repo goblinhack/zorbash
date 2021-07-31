@@ -500,8 +500,6 @@ public:
     int decr_stat_strength(void);
     int decr_throw_distance(int);
     int decr_throw_distance(void);
-    int decr_tick_rate_tenths(int);
-    int decr_tick_rate_tenths(void);
     int defence(void) const;
     int distance_to_player(void);
     int enchant_level(void) const;
@@ -562,7 +560,6 @@ public:
     int get_stat_strength(void) const;
     int get_submerged_offset(void) const;
     int get_throw_distance(void) const;
-    int get_tick_rate_tenths(void) const;
     int gfx_an_animation_only(void) const;
     int gfx_animated_can_hflip(void) const;
     int gfx_animated_can_vflip(void) const;
@@ -592,7 +589,6 @@ public:
     int hates_water(void) const;
     int health_hunger_pct(void) const;
     int health_starving_pct(void) const;
-    int hunger_clock_freq_ms(void) const;
     int incr_charge_count(int);
     int incr_charge_count(void);
     int incr_current_damage(int);
@@ -663,8 +659,6 @@ public:
     int incr_stat_strength(void);
     int incr_throw_distance(int);
     int incr_throw_distance(void);
-    int incr_tick_rate_tenths(int);
-    int incr_tick_rate_tenths(void);
     int is_able_to_change_levels(void) const;
     int is_able_to_fall(void) const;
     int is_able_to_fire_at(void) const;
@@ -944,11 +938,9 @@ public:
     int set_stats19(int);
     int set_stat_strength(int);
     int set_throw_distance(int);
-    int set_tick_rate_tenths(int);
     int skill_enchant_count(const uint32_t slot);
     int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
-    int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
     point dir_to_direction() const;
     point get_random_scent_target(void);
@@ -1018,8 +1010,6 @@ public:
     timestamp_t decr_timestamp_fall_end(void);
     timestamp_t decr_timestamp_flip_start(timestamp_t);
     timestamp_t decr_timestamp_flip_start(void);
-    timestamp_t decr_timestamp_hunger_tick(timestamp_t);
-    timestamp_t decr_timestamp_hunger_tick(void);
     timestamp_t decr_timestamp_jump_begin(timestamp_t);
     timestamp_t decr_timestamp_jump_begin(void);
     timestamp_t decr_timestamp_jump_end(timestamp_t);
@@ -1046,7 +1036,6 @@ public:
     timestamp_t get_timestamp_fall_begin(void) const;
     timestamp_t get_timestamp_fall_end(void) const;
     timestamp_t get_timestamp_flip_start(void) const;
-    timestamp_t get_timestamp_hunger_tick(void) const;
     timestamp_t get_timestamp_jump_begin(void) const;
     timestamp_t get_timestamp_jump_end(void) const;
     timestamp_t get_timestamp_lunge_begin(void) const;
@@ -1072,8 +1061,6 @@ public:
     timestamp_t incr_timestamp_fall_end(void);
     timestamp_t incr_timestamp_flip_start(timestamp_t);
     timestamp_t incr_timestamp_flip_start(void);
-    timestamp_t incr_timestamp_hunger_tick(timestamp_t);
-    timestamp_t incr_timestamp_hunger_tick(void);
     timestamp_t incr_timestamp_jump_begin(timestamp_t);
     timestamp_t incr_timestamp_jump_begin(void);
     timestamp_t incr_timestamp_jump_end(timestamp_t);
@@ -1100,7 +1087,6 @@ public:
     timestamp_t set_timestamp_fall_begin(timestamp_t);
     timestamp_t set_timestamp_fall_end(timestamp_t);
     timestamp_t set_timestamp_flip_start(timestamp_t);
-    timestamp_t set_timestamp_hunger_tick(timestamp_t);
     timestamp_t set_timestamp_jump_begin(timestamp_t);
     timestamp_t set_timestamp_jump_end(timestamp_t);
     timestamp_t set_timestamp_lunge_begin(timestamp_t);
@@ -1265,6 +1251,7 @@ public:
     void move_carried_items(void);
     void move_delta(fpoint);
     void move_finish(void);
+    void move_finish_internal(void);
     void move_reset_timestamps(void);
     void move_set_dir_from_delta(fpoint);
     void move_to(fpoint to);

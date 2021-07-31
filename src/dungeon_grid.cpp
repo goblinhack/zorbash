@@ -666,7 +666,7 @@ point Nodes::random_dir (void)
 {
     auto dx = 0, dy = 0;
 
-    switch (random_range(0, 4)) {
+    switch (pcq_random_range(0, 4)) {
         case 0: dx = -1; dy =  0; break;
         case 1: dx =  1; dy =  0; break;
         case 2: dx =  0; dy = -1; break;
@@ -677,7 +677,7 @@ point Nodes::random_dir (void)
 
 void Nodes::random_dir (int *dx, int *dy)
 {
-    switch (random_range(0, 4)) {
+    switch (pcq_random_range(0, 4)) {
         case 0: *dx = -1; *dy =  0; break;
         case 1: *dx =  1; *dy =  0; break;
         case 2: *dx =  0; *dy = -1; break;
@@ -724,8 +724,8 @@ void Nodes::init_nodes (void)
     auto obstacles = ((grid_width * grid_height) / 6) * 4;
 
     while (obstacles--) {
-        auto x = random_range(0, grid_width);
-        auto y = random_range(1, grid_height);
+        auto x = pcq_random_range(0, grid_width);
+        auto y = pcq_random_range(1, grid_height);
 
         auto o = getn(x, y);
         o->depth = depth_obstacle;
@@ -736,8 +736,8 @@ void Nodes::init_nodes (void)
 }
 
 //
-// Walk the depth randomly, ala snake until you hit your own tail,
-// forking randomly also
+// Walk the depth pcq_randomly, ala snake until you hit your own tail,
+// forking pcq_randomly also
 //
 bool Nodes::node_is_free (DungeonNode *n)
 {
@@ -765,7 +765,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             //
             auto tries = 100;
             while (tries--) {
-                x = random_range(0, grid_width);
+                x = pcq_random_range(0, grid_width);
                 y = 0;
 
                 auto o = getn(x, y);
@@ -786,8 +786,8 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             //
             auto tries = 100;
             while (tries--) {
-                x = random_range(0, grid_width);
-                y = random_range(0, grid_height);
+                x = pcq_random_range(0, grid_width);
+                y = pcq_random_range(0, grid_height);
                 random_dir(&dx, &dy);
 
                 auto o = getn(x, y);
@@ -830,7 +830,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             //
             auto tries = 100;
             while (tries--) {
-                x = random_range(0, grid_width);
+                x = pcq_random_range(0, grid_width);
                 y = max_vdepth;
 
                 random_dir(&dx, &dy);
@@ -874,8 +874,8 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             //
             auto tries = 100;
             while (tries--) {
-                x = random_range(0, grid_width);
-                y = random_range(0, grid_height);
+                x = pcq_random_range(0, grid_width);
+                y = pcq_random_range(0, grid_height);
                 random_dir(&dx, &dy);
 
                 auto o = getn(x, y);
@@ -945,12 +945,12 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         //
         random_dir(&dx, &dy);
         if (dy < 0) {
-            if (random_range(0, 100) < 20) {
+            if (pcq_random_range(0, 100) < 20) {
                 dy = 0;
             }
         }
         if (dy > 0) {
-            if (random_range(0, 100) < 20) {
+            if (pcq_random_range(0, 100) < 20) {
                 dy = 0;
             }
         }
@@ -977,7 +977,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                 }
             }
 
-            if (random_range(0, 100) < 5) {
+            if (pcq_random_range(0, 100) < 5) {
                 if (y < grid_height - 1) {
                     auto f = getn(x, y + 1);
                     if (node_is_free(f)) {
@@ -988,7 +988,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             }
 
             if (y < depth + 2) {
-                if (random_range(0, 100) < 5) {
+                if (pcq_random_range(0, 100) < 5) {
                     if (y > 0){
                         auto f = getn(x, y - 1);
                         if (node_is_free(f)) {
@@ -1148,14 +1148,14 @@ void Nodes::join_depth_to_next_depth (int depth, int pass)
         return;
     }
 
-    auto r = random_range(0, s.size());
+    auto r = pcq_random_range(0, s.size());
 
     if (!r) {
         r = 1;
     }
 
     while (r--) {
-        auto i = random_range(0, s.size());
+        auto i = pcq_random_range(0, s.size());
         auto p = s[i];
         auto a = p.first;
         auto b = p.second;
@@ -1264,7 +1264,7 @@ void Nodes::join_depth_secret (int depth, int pass)
         return;
     }
 
-    auto r = random_range(0, s.size());
+    auto r = pcq_random_range(0, s.size());
     if (!r) {
         r = 1;
     }
@@ -1274,7 +1274,7 @@ void Nodes::join_depth_secret (int depth, int pass)
     }
 
     while (r--) {
-        auto i = random_range(0, s.size());
+        auto i = pcq_random_range(0, s.size());
         auto p = s[i];
         auto a = p.first;
         auto b = p.second;
@@ -1367,7 +1367,7 @@ bool Nodes::place_lock (int depth, int pass)
         return false;
     }
 
-    auto i = random_range(0, s.size());
+    auto i = pcq_random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
     n->is_lock = true;
@@ -1465,7 +1465,7 @@ bool Nodes::place_key (int depth, int pass)
         return false;
     }
 
-    auto i = random_range(0, s.size());
+    auto i = pcq_random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
     n->is_key = true;
@@ -1507,7 +1507,7 @@ bool Nodes::place_entrance (void)
         return false;
     }
 
-    auto i = random_range(0, s.size());
+    auto i = pcq_random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
     n->is_ascend_dungeon = true;
@@ -1549,7 +1549,7 @@ bool Nodes::place_exit (void)
         return false;
     }
 
-    auto i = random_range(0, s.size());
+    auto i = pcq_random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
     n->is_descend_dungeon = true;

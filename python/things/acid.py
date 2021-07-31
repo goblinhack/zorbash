@@ -22,7 +22,6 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     mytp.set_text_description("A pool of hissing acid.")
     mytp.set_text_hits("burns")
     mytp.set_tick_catches_up_on_attack(True)
-    mytp.set_tick_rate_tenths(1)
     mytp.set_z_depth(zx.MAP_DEPTH_FLOOR2)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 

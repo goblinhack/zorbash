@@ -83,7 +83,7 @@ _
         return false;
     }
 
-    auto chosen = possible[random_range(0, cands)];
+    auto chosen = possible[pcq_random_range(0, cands)];
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);
 
@@ -168,7 +168,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
         return false;
     }
 
-    auto chosen = possible[random_range(0, cands)];
+    auto chosen = possible[pcq_random_range(0, cands)];
 
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);
@@ -299,7 +299,7 @@ bool Thing::spawn_fire (const std::string& what)
         return false;
     }
 
-    auto chosen = possible[random_range(0, cands)];
+    auto chosen = possible[pcq_random_range(0, cands)];
 
     auto c = level->thing_new(what, chosen);
     if (unlikely(g_opt_debug2)) {
@@ -342,7 +342,7 @@ bool Thing::spawn_at_if_possible (const std::string& what)
         return false;
     }
 
-    auto chosen = possible[random_range(0, cands)];
+    auto chosen = possible[pcq_random_range(0, cands)];
 
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);
@@ -375,7 +375,7 @@ bool Thing::spawn_at (const std::string& what)
         return false;
     }
 
-    auto chosen = possible[random_range(0, cands)];
+    auto chosen = possible[pcq_random_range(0, cands)];
 
     auto c = level->thing_new(what, chosen);
     c->inherit_from(this);

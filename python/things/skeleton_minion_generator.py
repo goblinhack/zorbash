@@ -2,7 +2,7 @@ import zx
 import tp
 
 def on_idle_dice(me, x, y):
-    if zx.randint(1, 100) < 10:
+    if zx.pcq_randint(1, 100) < 10:
         if zx.level_spawn_next_to(me, "skeleton_minion_fire"):
             zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones1")
     else:
@@ -10,7 +10,7 @@ def on_idle_dice(me, x, y):
             zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones2")
 
 def on_death(me, x, y):
-    if zx.randint(1, 2) == 1:
+    if zx.non_pcq_randint(1, 2) == 1:
         if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "bones1"):
             zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones1")
     else:
@@ -61,7 +61,6 @@ def tp_init(name, text_name):
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("The dead rise again here.")
-    mytp.set_tick_rate_tenths(3)
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 

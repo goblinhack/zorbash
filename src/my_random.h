@@ -11,15 +11,20 @@
 //
 #include "my_pcg_basic.h"
 
-#define myrand()                     pcg32_random()
-#define mysrand(a)                   pcg32_srandom(a, a)
-
-#define random_range(a, b)           (pcg32_boundedrand((b) - (a)) + (a))
-#define random_range_inclusive(a, b) (pcg32_boundedrand((b) - (a) + 1) + (a))
+//
+// For randomness that matters for reproducability.
+//
+#define pcq_rand()                        pcg32_random()
+#define pcq_srand(a)                      pcg32_srandom(a, a)
+#define pcq_random_range(a, b)           (pcg32_boundedrand((b) - (a)) + (a))
+#define pcq_random_range_inclusive(a, b) (pcg32_boundedrand((b) - (a) + 1) + (a))
 
 //
-// Use this for display related randomness, not things
+// For randomness that does not matter for reproducability.
 //
-#define sysrand()                    rand()
+#define non_pcq_rand()                       rand()
+#define non_pcq_srand(a)                     srand(a)
+#define non_pcq_random_range(a, b)           (rand() % ((b) - (a)) + (a))
+#define non_pcq_random_range_inclusive(a, b) (rand() % ((b) - (a) + 1) + (a))
 
 #endif
