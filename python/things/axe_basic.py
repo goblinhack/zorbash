@@ -34,7 +34,7 @@ def init_swing(name):
     mytp.set_z_depth(zx.MAP_DEPTH_WEAPON)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    delay = 20
+    delay = 10
     mytp.set_tile(tile=name + "_left.1", delay_ms=delay, is_dir_left=True)
     mytp.set_tile(tile=name + "_left.2", delay_ms=delay, is_dir_left=True)
     mytp.set_tile(tile=name + "_left.3", delay_ms=delay, is_dir_left=True)

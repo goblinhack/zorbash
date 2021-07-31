@@ -11,8 +11,8 @@
 #define LEVELS_DEEP                52 // divided by 2 for sewer levels
 #define LEVELS_DOWN                MAP_HEIGHT
 #define LEVELS_MONST_COUNT         100
-#define LEVEL_FADE_IN_MS           (g_opt_debug3 ? 10 : 1000)
-#define LEVEL_FADE_OUT_MS          (g_opt_debug3 ? 10 : 500)
+#define LEVEL_FADE_IN_MS           1000
+#define LEVEL_FADE_OUT_MS          500
 #define LIGHT_MAX_RAYS             180  // Max light rays cast
 #define MAP_BORDER_TOTAL           10   // Room border padding
 #define MAP_GRID_HEIGHT            4

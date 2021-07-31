@@ -19,7 +19,7 @@
 #undef  ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS // (SLOW)
 
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
-#define ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
+#undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
 #undef  ENABLE_DEBUG_AI_WANDER     // AI wander path selection
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
 #undef  ENABLE_DEBUG_PTRCHECK      // (VERY SLOW) Debug ptrcheck itself

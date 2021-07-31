@@ -808,9 +808,6 @@ void Thing::blit_internal (int fbo,
 
     auto lit = (fbo == FBO_FULLMAP) || 
                     level->is_lit_currently_no_check(mid_at.x, mid_at.y);
-    if (unlikely(g_opt_debug3)) {
-        lit = true;
-    }
 
     if (tile &&
         !tile->is_invisible &&

@@ -453,20 +453,22 @@ void Level::display_map (void)
         glcolor(WHITE);
         blit_fbo_game_pix(FBO_MAP_VISIBLE);
 
-        if (fade_out) {
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            display_fade_out();
-            blit_fbo_bind(FBO_MAP);
-            glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
-            blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
-        }
+        if (!g_opt_debug3) {
+            if (fade_out) {
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                display_fade_out();
+                blit_fbo_bind(FBO_MAP);
+                glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
+                blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
+            }
 
-        if (fade_in) {
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            display_fade_in();
-            blit_fbo_bind(FBO_MAP);
-            glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
-            blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
+            if (fade_in) {
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                display_fade_in();
+                blit_fbo_bind(FBO_MAP);
+                glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
+                blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
+            }
         }
     }
 
