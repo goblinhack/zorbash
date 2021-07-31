@@ -133,16 +133,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         return;
     }
 
-    static uint32_t last_key_pressed_when;
-    if (!game->robot_mode) {
-        if (!last_key_pressed_when) {
-            last_key_pressed_when = time_get_time_ms_cached();
-        } else if (time_get_time_ms_cached() - last_key_pressed_when < 
-                     game->get_move_speed()) {
-            return;
-        }
-    }
-
     if (state[game->config.key_move_left]) {
         left = true;
     }
@@ -301,7 +291,15 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
             // As we allow the player to skip ahead a little bit, make
             // sure no monster is lagging by one move
             //
+            if (t->is_dead) {
+                continue;
+            }
+
             if (t->get_tick() < game->tick_current - 1) {
+                if (unlikely(g_opt_debug3)) {
+                    t->log("Player move delayed due to monst tick lagging (%d is hehind %d)",
+                           t->get_tick(), game->tick_current - 1);
+                }
                 wait = true;
                 break;
             }
@@ -311,7 +309,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                 if (time_left > 10) {
                     if (unlikely(g_opt_debug3)) {
                         t->log("Player move delayed due to monst moving (%d ms left)",
-                            t->get_timestamp_move_end() - time_get_time_ms_cached());
+                               t->get_timestamp_move_end() - time_get_time_ms_cached());
                     }
                     wait = true;
                     break;
@@ -320,9 +318,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
 
         if (wait) {
-            if (unlikely(g_opt_debug3)) {
-                LOG("Player move delayed while things are moving");
-            }
             return;
         }
 
@@ -334,7 +329,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     }
 
     if (jump) {
-        last_key_pressed_when = time_get_time_ms_cached();
         game->tick_begin("player jumped");
 
         if (game->cursor_move_path.size()) {
@@ -371,8 +365,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         }
         player->clear_move_path("Tried to jump");
     } else if (up || down || left || right || attack || wait) {
-        last_key_pressed_when = time_get_time_ms_cached();
-
         if (attack) {
             player->log("Player attack");
         } else if (wait) {
