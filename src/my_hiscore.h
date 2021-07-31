@@ -38,8 +38,8 @@ public:
     //
     // The number of scores in the table.
     //
-    static const int max = 10;
-    static const int max_displayed = 10;
+    static const int max = 20;
+    static const int max_displayed = 20;
 
 };
 std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my); // save

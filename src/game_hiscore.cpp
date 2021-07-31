@@ -76,8 +76,8 @@ void Game::hiscore_select (void)
     }
 
     auto m = TERM_WIDTH / 2;
-    point tl = make_point(m - 45, UI_TOPCON_VIS_HEIGHT + 2);
-    point br = make_point(m + 45, tl.y + 42);
+    point tl = make_point(m - 50, UI_TOPCON_VIS_HEIGHT + 2);
+    point br = make_point(m + 50, tl.y + 52);
     auto width = br.x - tl.x;
 
     wid_hiscore_window = new WidPopup("Gone, but not forgotten...",
@@ -105,13 +105,23 @@ void Game::hiscore_select (void)
     auto index = 0;
 
     const char *colors[HiScore::max_displayed] = {
+        "green",
+        "yellow",
+        "yellow",
+        "yellow",
+        "gold",
+        "gold",
+        "gold",
         "white",
         "white",
         "white",
-        "yellow",
-        "yellow",
-        "yellow",
-        "yellow",
+        "gray",
+        "gray",
+        "gray",
+        "gray",
+        "gray",
+        "gray",
+        "gray",
         "gray",
         "gray",
         "gray",
@@ -125,8 +135,8 @@ void Game::hiscore_select (void)
 
         char tmp[200];
 
-        int name_field_len = 20;
-        int when_field_len = 20;
+        int name_field_len = 25;
+        int when_field_len = 25;
         int killed_by_field_len = 30;
 
         if (first) {
@@ -138,7 +148,7 @@ void Game::hiscore_select (void)
             auto when = "When";
 
             snprintf(tmp, sizeof(tmp)-1,
-                    "%%%%fg=%s$%7s %-*s %-*s %-5s %*s",
+                    "%%%%fg=%s$%7s  %-*s %-*s %-5s %*s",
                     color,
                     "Score",
                     name_field_len,
@@ -173,7 +183,7 @@ void Game::hiscore_select (void)
 
         auto color = colors[index++];
         snprintf(tmp, sizeof(tmp)-1,
-                 "%%%%fg=%s$%07u %-*s %-*s %-5u %*s",
+                 "%%%%fg=%s$%07u  %-*s %-*s %-5u %*s",
                  color,
                  h->score,
                  name_field_len,
@@ -185,7 +195,6 @@ void Game::hiscore_select (void)
                  killed_by.c_str());
 
         wid_hiscore_window->log(" ");
-        wid_hiscore_window->log(" ");
         wid_hiscore_window->log(tmp);
         h++;
     }
@@ -194,8 +203,8 @@ void Game::hiscore_select (void)
         auto p = wid_hiscore_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "hiscore");
 
-        point tl = make_point(28, 37);
-        point br = make_point(width - 28, 39);
+        point tl = make_point(28, 47);
+        point br = make_point(width - 28, 49);
 
         wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_hiscore_mouse_up);

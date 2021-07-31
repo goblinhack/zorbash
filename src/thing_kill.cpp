@@ -192,14 +192,15 @@ void Thing::kill (Thingp killer, const char *reason)
             if (game->robot_mode) {
                 TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", 
                        game->config.hiscores.place_str(this));
+                TOPCON("RIP: Robot killed %s.", reason);
             } else {
                 TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", 
                        game->config.hiscores.place_str(this));
+                TOPCON("RIP: Player killed %s.", reason);
             }
             game->config.hiscores.add_new_hiscore(this, title(), reason);
         }
 
-        TOPCON("RIP: Robot killed %s.", reason);
         TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         level->map_follow_player = false;
         game->dead_select(reason);
