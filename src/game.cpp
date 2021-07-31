@@ -21,8 +21,5 @@ Game::Game (std::string appdata)
 
 int Game::get_move_speed (void)
 {_
-    if (game->robot_mode) {
-        return move_speed / 2;
-    }
-    return move_speed;
+    return current_move_speed;
 }

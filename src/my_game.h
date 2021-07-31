@@ -253,7 +253,9 @@ public:
         STATE_QUIT_MENU,
     };
     int                state {STATE_NORMAL};
-    int                move_speed {THING_MOVE_SPEED_MS}; // Speed of all things that move
+    int                fast_move_speed {THING_FAST_MOVE_SPEED_MS};    // Robot and/or move via cursor
+    int                slow_move_speed {THING_SLOW_MOVE_SPEED_MS};    // Normal speed of all things
+    int                current_move_speed {THING_SLOW_MOVE_SPEED_MS}; // Current speed
 
     //
     // Make sure to update thing_fini.cpp to remove these pointers

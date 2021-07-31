@@ -18,6 +18,14 @@ void Game::tick_begin (const std::string &why)
     //
     game->tick_current++;
 
+    if (game->robot_mode) {
+        game->current_move_speed = game->fast_move_speed;
+    } else if (!game->cursor_move_path.empty()) {
+        game->current_move_speed = game->fast_move_speed;
+    } else {
+        game->current_move_speed = game->slow_move_speed;
+    }
+
     auto level = game->level;
     if (level) {_
         auto player = level->player;
@@ -43,8 +51,6 @@ void Game::tick_begin (const std::string &why)
 
 void Game::tick_end (void)
 {_
-    auto level = game->level;
-
     if (game->things_are_moving) {
         return;
     }
@@ -57,6 +63,7 @@ void Game::tick_end (void)
     }
     game->tick_completed = game->tick_current;
 
+    auto level = game->level;
     if (level) {_
         auto player = level->player;
         if (player) {
