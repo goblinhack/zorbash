@@ -341,12 +341,12 @@ _
             } else {
                 score /= most_preferred;
             }
-            score *= DMAP_IS_PASSABLE - 2;
+            score *= DMAP_LESS_PREFERRED_TERRAIN - 2;
             score++;
         }
 
-        assert(score <= DMAP_IS_PASSABLE);
-        uint8_t score8 = (int)score;
+        assert(score <= DMAP_LESS_PREFERRED_TERRAIN);
+        uint8_t score8 = DMAP_LESS_PREFERRED_TERRAIN - (int)score;
         set(dmap_can_see->val, goal_target.x, goal_target.y, score8);
 
         dbg2(" scale goal (%d,%d) %d to %d",

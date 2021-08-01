@@ -145,11 +145,6 @@ bool sound_play_channel (int channel, const std::string &alias)
         return false;
     }
 
-    if (Mix_Playing(channel)) {
-        LOG("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
-        return false;
-    }
-
     float volume = sound->second->volume *
         ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
 
@@ -157,11 +152,26 @@ bool sound_play_channel (int channel, const std::string &alias)
 
     Mix_VolumeChunk(sound->second->chunk, volume);
 
+    if (Mix_Playing(channel)) {
+        if (Mix_PlayChannel(-1,
+                            sound->second->chunk, 
+                            0 /* loops */) == -1) {
+            LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
+            return false;
+        }
+        return true;
+    }
+
     if (Mix_PlayChannel(channel,
                         sound->second->chunk, 
                         0 /* loops */) == -1) {
-        LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
-        return false;
+
+        if (Mix_PlayChannel(-1,
+                            sound->second->chunk, 
+                            0 /* loops */) == -1) {
+            LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
+            return false;
+        }
     }
 
     LOG("Play sound %s on channel %d", alias.c_str(), channel);

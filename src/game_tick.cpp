@@ -25,7 +25,7 @@ void Game::tick_begin (const std::string &why)
     // pcq_srand(game->tick_current);
 
     if (game->robot_mode) {
-        game->current_move_speed = game->fast_move_speed;
+        game->current_move_speed = game->fast_move_speed * 2;
     } else if (!game->cursor_move_path.empty()) {
         game->current_move_speed = game->fast_move_speed;
     } else {

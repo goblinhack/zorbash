@@ -24,6 +24,13 @@
 
 void Thing::on_move (void)
 {_
+    if (is_player()) {
+        //
+        // Update reachability for the player
+        //
+        level->dmap_to_player_update();
+    }
+
     auto on_move = tp()->on_move_do();
     if (std::empty(on_move)) {
         return;

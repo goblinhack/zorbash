@@ -123,7 +123,7 @@ _
             }
         }
 
-        dbg4("Sorted goals, %d (best) .. %d (worst)",
+        dbg2("Sorted goals, %d (best) .. %d (worst)",
             (int)most_preferred, (int)least_preferred);
 
         //
@@ -142,12 +142,12 @@ _
                 } else {
                     score /= most_preferred;
                 }
-                score *= DMAP_IS_PASSABLE - 2;
+                score *= DMAP_LESS_PREFERRED_TERRAIN - 2;
                 score++;
             }
 
-            assert(score <= DMAP_IS_PASSABLE);
-            uint8_t score8 = (int)score;
+            assert(score <= DMAP_LESS_PREFERRED_TERRAIN);
+            uint8_t score8 = DMAP_LESS_PREFERRED_TERRAIN - (int)score;
             set(g.dmap->val, goal_target.x, goal_target.y, score8);
 
             dbg2(" scale goal (%d,%d) score %d to dmap score %d",
@@ -564,7 +564,6 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 //
                 if (will_avoid_threat(it)) {
                     if (distance(mid_at, it->mid_at) < 2) {
-                        dbg2("Need to avoid threat %s", it->to_string().c_str());
                         avoid = true;
                     }
                 }
@@ -574,7 +573,6 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 //
                 if (will_avoid_monst(it)) {
                     if (distance(mid_at, it->mid_at) < ai_avoid_distance()) {
-                        dbg2("Need to avoid monst %s", it->to_string().c_str());
                         avoid = true;
                     }
                 }
@@ -587,13 +585,23 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     float dist = distance(it->mid_at, mid_at);
                     float max_dist = ai_scent_distance();
 
+                    if (is_player()) {
+                        con("Robot needs to attack %s", it->to_string().c_str());
+                    } else {
+                        log("Need to avoid %s", it->to_string().c_str());
+                    }
+
                     if (dist < max_dist) {
-                        GOAL_ADD((int)(max_dist - dist) * 10, "attack-enemy");
+                        GOAL_ADD((int)(max_dist - dist) * 100, "attack-enemy");
                     }
                 }
 
                 if (avoid) {
-                    dbg2("Need to avoid %s", it->to_string().c_str());
+                    if (is_player()) {
+                        con("Robot needs to avoid %s", it->to_string().c_str());
+                    } else {
+                        log("Need to avoid %s", it->to_string().c_str());
+                    }
 
                     bool got_avoid = false;
                     auto d = ai_avoid_distance();

@@ -113,10 +113,17 @@ _
         }
         t->tick();
 
-        if (t->get_tick() < game->tick_current) {
-            if (!wait_for_end_of_game_tick) {
+        if (!wait_for_end_of_game_tick) {
+            if (t->get_weapon_id_use_anim().ok()) {
+                wait_for_end_of_game_tick = true;
+                t->log("Has not finished swinging yet");
+                continue;
+            }
+
+            if (t->get_tick() < game->tick_current) {
                 wait_for_end_of_game_tick = true;
                 t->log("Has not finished tick yet");
+                continue;
             }
         }
     } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
