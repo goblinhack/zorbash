@@ -116,7 +116,7 @@ _
         if (t->get_tick() < game->tick_current) {
             if (!wait_for_end_of_game_tick) {
                 wait_for_end_of_game_tick = true;
-                t->con("Has not finished tick yet");
+                t->log("Has not finished tick yet");
             }
         }
     } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)

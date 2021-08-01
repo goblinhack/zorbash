@@ -100,6 +100,12 @@ _
         what->move_to_immediately(mid_at);
     }
 
+    //
+    // Catch up on game ticks
+    //
+    set_tick_last_did_something(game->tick_current);
+    set_tick(game->tick_current);
+
     monstp->carrying.remove(what->id);
 
     if (!stolen) {

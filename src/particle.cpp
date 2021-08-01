@@ -118,7 +118,7 @@ void Level::display_internal_particles (void)
             // Different curve height for each particle
             //
             if (!p.height) {
-                p.height = non_pcq_random_range(30, 50);
+                p.height = pcq_random_range(30, 50);
             }
 
             float t = p.timestamp_stop - p.timestamp_start;
@@ -310,7 +310,7 @@ void Level::display_external_particles (void)
             // Different curve height for each particle
             //
             if (!p.height) {
-                p.height = non_pcq_random_range(30, 50);
+                p.height = pcq_random_range(30, 50);
 
                 //
                 // Make a thing and its items jump the same height.
