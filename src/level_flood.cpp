@@ -50,7 +50,7 @@ std::deque<point> Level::flood_fill (point p) const
             }
         }
 
-        if (p.x > MAP_BORDER_ROCK) {
+        if (p.x >= MAP_BORDER_ROCK) {
             if (!get(pushed, p.x - 1, p.y)) {
                 set(pushed, p.x - 1, p.y, true);
                 in.push_back(point(p.x - 1, p.y));
@@ -64,7 +64,7 @@ std::deque<point> Level::flood_fill (point p) const
             }
         }
 
-        if (p.y > MAP_BORDER_ROCK) {
+        if (p.y >= MAP_BORDER_ROCK) {
             if (!get(pushed, p.x, p.y - 1)) {
                 set(pushed, p.x, p.y - 1, true);
                 in.push_back(point(p.x, p.y - 1));
@@ -119,7 +119,7 @@ std::deque<point> Level::flood_fill_points (point p, std::function<int(Thingp)> 
             }
         }
 
-        if (p.x > MAP_BORDER_ROCK) {
+        if (p.x >= MAP_BORDER_ROCK) {
             if (!get(pushed, p.x - 1, p.y)) {
                 set(pushed, p.x - 1, p.y, true);
                 in.push_back(point(p.x - 1, p.y));
@@ -133,7 +133,7 @@ std::deque<point> Level::flood_fill_points (point p, std::function<int(Thingp)> 
             }
         }
 
-        if (p.y > MAP_BORDER_ROCK) {
+        if (p.y >= MAP_BORDER_ROCK) {
             if (!get(pushed, p.x, p.y - 1)) {
                 set(pushed, p.x, p.y - 1, true);
                 in.push_back(point(p.x, p.y - 1));
@@ -187,7 +187,7 @@ std::deque<Thingp> Level::flood_fill_things (point p, std::function<int(Thingp)>
             }
         }
 
-        if (p.x > MAP_BORDER_ROCK) {
+        if (p.x >= MAP_BORDER_ROCK) {
             if (!get(pushed, p.x - 1, p.y)) {
                 set(pushed, p.x - 1, p.y, true);
                 in.push_back(point(p.x - 1, p.y));
@@ -201,7 +201,7 @@ std::deque<Thingp> Level::flood_fill_things (point p, std::function<int(Thingp)>
             }
         }
 
-        if (p.y > MAP_BORDER_ROCK) {
+        if (p.y >= MAP_BORDER_ROCK) {
             if (!get(pushed, p.x, p.y - 1)) {
                 set(pushed, p.x, p.y - 1, true);
                 in.push_back(point(p.x, p.y - 1));

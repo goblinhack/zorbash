@@ -48,7 +48,7 @@ static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
                         TOPCON("RIP: Player quit the game");
                     }
                     game->config.hiscores.add_new_hiscore(player,
-                                                          player->title(), "Quit the game");
+                                                          player->title(), "went home early");
                     CON("Player quit the game; new hiscore");
                 } else {
                     CON("Player quit the game; no hiscore change");

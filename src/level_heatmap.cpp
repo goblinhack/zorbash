@@ -76,8 +76,8 @@ void Level::update_heatmap (void)
 {
     _heatmap = {};
 
-    for (auto y = MAP_BORDER_TOTAL; y < MAP_HEIGHT - MAP_BORDER_TOTAL; y++) {
-        for (auto x = MAP_BORDER_TOTAL; x < MAP_WIDTH - MAP_BORDER_TOTAL; x++) {
+    for (auto y = MAP_BORDER_ROOM; y < MAP_HEIGHT - MAP_BORDER_ROOM; y++) {
+        for (auto x = MAP_BORDER_ROOM; x < MAP_WIDTH - MAP_BORDER_ROOM; x++) {
             if (is_lava(x, y) || is_fire(x, y)) {
                 incr_heatmap_no_check(x+1, y+1);
                 incr_heatmap_no_check(x  , y+1);

@@ -18,6 +18,12 @@ void Game::tick_begin (const std::string &why)
     //
     game->tick_current++;
 
+    //
+    // Helps to maintain randomness if the user say scrolls around the level we
+    // do not want that to change the randomness of the monsters.
+    //
+    // pcq_srand(game->tick_current);
+
     if (game->robot_mode) {
         game->current_move_speed = game->fast_move_speed;
     } else if (!game->cursor_move_path.empty()) {

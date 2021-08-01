@@ -720,6 +720,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
 
     while (!in.empty()) {
         auto p = in.front();
+//con("in %d %d", p.x,p.y);
         in.pop_front();
 
         if (get(walked, p.x, p.y)) {
@@ -733,10 +734,10 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
         if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
             continue;
         }
-        if (p.x <= MAP_BORDER_ROCK) {
+        if (p.x < MAP_BORDER_ROCK) {
             continue;
         }
-        if (p.y <= MAP_BORDER_ROCK) {
+        if (p.y < MAP_BORDER_ROCK) {
             continue;
         }
 
@@ -744,31 +745,37 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
         // If an unvisited tile is next to a visited one, consider that tile.
         //
         if (!level->is_lit_ever(p.x, p.y)) {
+//con("in %d %d not lit", p.x,p.y);
             continue;
         }
 
         if (level->is_movement_blocking_hard(p.x, p.y)) {
+//con("in %d %d blocking", p.x,p.y);
             continue;
         }
 
         if (!get(pushed, p.x + 1, p.y)) {
             set(pushed, p.x + 1, p.y, true);
             in.push_back(point(p.x + 1, p.y));
+//con("try %d %d blocking", p.x+1,p.y);
         }
 
         if (!get(pushed, p.x - 1, p.y)) {
             set(pushed, p.x - 1, p.y, true);
             in.push_back(point(p.x - 1, p.y));
+//con("try %d %d blocking", p.x-1,p.y);
         }
 
         if (!get(pushed, p.x, p.y + 1)) {
             set(pushed, p.x, p.y + 1, true);
             in.push_back(point(p.x, p.y + 1));
+//con("try %d %d blocking", p.x,p.y+1);
         }
 
         if (!get(pushed, p.x, p.y - 1)) {
             set(pushed, p.x, p.y - 1, true);
             in.push_back(point(p.x, p.y - 1));
+//con("try %d %d blocking", p.x,p.y-1);
         }
 
         for (int dx = -1; dx <= 1; dx++) {

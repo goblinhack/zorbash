@@ -142,10 +142,10 @@ bool Level::create_sewer_pipes (point3d at)
             if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
                 break;
             }
-            if (p.x <= MAP_BORDER_ROCK) {
+            if (p.x < MAP_BORDER_ROCK) {
                 break;
             }
-            if (p.y <= MAP_BORDER_ROCK) {
+            if (p.y < MAP_BORDER_ROCK) {
                 break;
             }
 
@@ -182,10 +182,10 @@ bool Level::create_sewer_pipes (point3d at)
             if (a.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
                 break;
             }
-            if (a.x <= MAP_BORDER_ROCK) {
+            if (a.x < MAP_BORDER_ROCK) {
                 break;
             }
-            if (a.y <= MAP_BORDER_ROCK) {
+            if (a.y < MAP_BORDER_ROCK) {
                 break;
             }
 

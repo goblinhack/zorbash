@@ -245,6 +245,11 @@ bool Light::calculate (int ray_casy_only)
     }
 
     //
+    // Make sure the current tile is always marked visited.
+    //
+    level->set_visited(player->mid_at.x, player->mid_at.y);
+
+    //
     // Walk the light rays in a circle. Find the nearest walls and then let
     // the light leak a little.
     //
