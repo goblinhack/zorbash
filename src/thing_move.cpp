@@ -444,12 +444,6 @@ void Thing::update_interpolated_position (void)
             new_pos = mid_at;
             last_mid_at = mid_at;
 
-            //
-            // In case we changed level, update these
-            //
-            new_pos = mid_at;
-            last_mid_at = mid_at;
-
             move_finish_internal();
         }
     } else {
@@ -501,10 +495,7 @@ void Thing::update_pos (fpoint to, bool immediately)
 
     point old_at((int)mid_at.x, (int)mid_at.y);
 
-    if (!has_ever_moved) {
-        last_mid_at = to;
-    }
-
+    last_mid_at = mid_at;
     has_ever_moved = true;
 
     //
@@ -547,15 +538,13 @@ void Thing::update_pos (fpoint to, bool immediately)
         set_timestamp_move_end(get_timestamp_move_begin() + move_speed);
         is_moving = true;
         on_move();
+
+        if (tpp->is_loggable_for_unimportant_stuff()) {
+            dbg("Moving");
+        }
     }
 
     move_carried_items();
-
-    if (!is_hidden) {
-        if (tpp->is_loggable_for_unimportant_stuff()) {
-            dbg("Moved");
-        }
-    }
 }
 
 void Thing::move_set_dir_from_delta (fpoint delta)

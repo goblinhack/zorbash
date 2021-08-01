@@ -37,7 +37,7 @@ void Level::tick (void)
     }
 
     // LOG("-");
-_
+
     //
     // For all things that move, like monsters, or those that do not, like
     // wands, and even those that do not move but can be destroyed, like
@@ -62,6 +62,7 @@ _
             //
             if (t->get_timestamp_move_begin()) {
                 game->things_are_moving = true;
+                t->log("is moving");
             }
         }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
@@ -97,14 +98,14 @@ _
     if (new_lasers.size()) {
         return;
     }
-_
+
     //
     // If things have stopped moving, perform location checks on where they
     // are now. This handles things like shoving a monst into a chasm. We do
     // location checks on the ends of moves, but this is a backup and will
     // also handle things that do not move, like a wand that is now on fire.
     //
-    bool wait = false;
+    bool wait_for_end_of_game_tick = false;
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
         t->location_check();
         if (t->is_dead) {
@@ -113,13 +114,13 @@ _
         t->tick();
 
         if (t->get_tick() < game->tick_current) {
-            if (!wait) {
-                wait = true;
-                t->log("Has not finished tick yet");
+            if (!wait_for_end_of_game_tick) {
+                wait_for_end_of_game_tick = true;
+                t->con("Has not finished tick yet");
             }
         }
     } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
-_
+
     for (auto& i : pending_remove_all_interesting_things) {
         all_interesting_things.erase(i.first);
     }
@@ -129,11 +130,11 @@ _
         all_interesting_things.insert(i);
     }
     pending_add_all_interesting_things = {};
-_
+
     //
     // If we've finished waiting on all things, bump the game tick.
     //
-    if (!wait) {
+    if (!wait_for_end_of_game_tick) {
         game->tick_end();
 #if 0
         //
