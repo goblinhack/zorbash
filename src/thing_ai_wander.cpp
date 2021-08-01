@@ -115,7 +115,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
             if (collision_obstacle(point(x, y))) {
                 set(dmap.val, x, y, DMAP_IS_WALL);
             } else {
-                auto c = is_less_preferred_terrain(point(x, y));
+                auto c = get_terrain_cost(point(x, y));
                 if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
                     set(dmap.val, x, y, c);
                 } else {
@@ -132,12 +132,17 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
 
     set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-    dmap_process(&dmap, dmap_start, dmap_end);
 #if 0
+    con("before:");
     dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
 
-    auto p = dmap_solve(&dmap, start);
+    dmap_process(&dmap, dmap_start, dmap_end);
+
+#if 0
+    con("after:");
+    dmap_print(&dmap, start, dmap_start, dmap_end);
+#endif
 
     char path_debug = '\0'; // astart path debug
     auto result = astar_solve(path_debug, start, end, &dmap);
@@ -253,7 +258,7 @@ bool Thing::ai_wander (void)
     while (tries--) {
         point nh;
         if (ai_choose_wander(nh)) {
-            if (!is_less_preferred_terrain(nh)) {
+            if (get_terrain_cost(nh) < DMAP_LESS_PREFERRED_TERRAIN) {
                 if (move_to_or_attack(nh)) {
                     return true;
                 }

@@ -728,7 +728,7 @@ _
         dbg("Move to %d,%d is ok", nh.x, nh.y);
 
         if (!escaping) {
-            if (is_less_preferred_terrain(nh)) {_
+            if (get_terrain_cost(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {_
                 dbg("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
                 return false;
             }

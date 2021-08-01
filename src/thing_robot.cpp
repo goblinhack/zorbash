@@ -480,8 +480,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
         bool got_a_goal = false;
         bool avoiding = false;
-        int terrain_score = is_less_preferred_terrain(p);
-        int total_score = -(int)terrain_score;
+        int terrain_cost = get_terrain_cost(p);
+        int total_score = -(int)terrain_cost;
 
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
@@ -618,8 +618,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                 continue;
                             }
 
-                            int terrain_score = is_less_preferred_terrain(p);
-                            int total_score = -(int)terrain_score;
+                            int terrain_cost = get_terrain_cost(p);
+                            int total_score = -(int)terrain_cost;
                             total_score += dist * dist;
                             goals.insert(Goal(total_score, point(X + dx, Y + dy)));
                             set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
@@ -639,8 +639,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                     continue;
                                 }
 
-                                int terrain_score = is_less_preferred_terrain(p);
-                                int total_score = -(int)terrain_score;
+                                int terrain_cost = get_terrain_cost(p);
+                                int total_score = -(int)terrain_cost;
                                 total_score += dist * dist;
                                 goals.insert(Goal(total_score, point(X + dx, Y + dy)));
                                 set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
@@ -685,8 +685,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
         } else if (got_a_goal) {
             goals.insert(Goal(total_score, point(X, Y)));
             set(dmap_can_see->val, X, Y, DMAP_IS_GOAL);
-        } else if (terrain_score) {
-            set(dmap_can_see->val, X, Y, (uint8_t)terrain_score);
+        } else if (terrain_cost) {
+            set(dmap_can_see->val, X, Y, (uint8_t)terrain_cost);
         } else {
             set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
         }
@@ -862,8 +862,8 @@ next:
         //
         // Prefer easier terrain
         //
-        int terrain_score = is_less_preferred_terrain(p);
-        int total_score = -(int)terrain_score;
+        int terrain_cost = get_terrain_cost(p);
+        int total_score = -(int)terrain_cost;
 
         //
         // Prefer closer

@@ -33,7 +33,7 @@ _
     //
     // If somewhere bad, escape
     //
-    if (is_less_preferred_terrain(start) >= DMAP_LESS_PREFERRED_TERRAIN) {
+    if (get_terrain_cost(start) >= DMAP_LESS_PREFERRED_TERRAIN) {
         dbg("On bad terrain, escape");
         if (ai_escape()) {
             return;

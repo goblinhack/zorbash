@@ -80,7 +80,7 @@ _
 
         bool got_a_goal = false;
         bool avoiding = false;
-        int terrain_score = is_less_preferred_terrain(p);
+        int terrain_score = get_terrain_cost(p);
         int total_score = -(int)terrain_score;
 
 #define GOAL_ADD(score, msg)                                               \
@@ -203,7 +203,7 @@ _
                                 continue;
                             }
 
-                            int terrain_score = is_less_preferred_terrain(p);
+                            int terrain_score = get_terrain_cost(p);
                             int total_score = -(int)terrain_score;
                             total_score += dist * dist;
                             goals.insert(Goal(total_score, point(X + dx, Y + dy)));
@@ -224,7 +224,7 @@ _
                                     continue;
                                 }
 
-                                int terrain_score = is_less_preferred_terrain(p);
+                                int terrain_score = get_terrain_cost(p);
                                 int total_score = -(int)terrain_score;
                                 total_score += dist * dist;
                                 goals.insert(Goal(total_score, point(X + dx, Y + dy)));

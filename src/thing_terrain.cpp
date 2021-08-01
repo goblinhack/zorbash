@@ -74,7 +74,7 @@ void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
     *d = (uint8_t) pref;
 }
 
-uint8_t Thing::is_less_preferred_terrain (point p)
+uint8_t Thing::get_terrain_cost (point p)
 {_
     uint8_t pref = 0;
 

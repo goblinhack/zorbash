@@ -13,7 +13,7 @@
 point Thing::get_random_scent_target (void)
 {
     int16_t d = ai_scent_distance();
-    auto tries = 1000;
+    auto tries = 100;
 
     if (is_player()) {
         d = MAP_WIDTH / 2;
@@ -49,7 +49,7 @@ point Thing::get_random_scent_target (void)
         if (collision_obstacle(point(x, y))) {
             continue;
         } else {
-            auto c = is_less_preferred_terrain(point(x, y));
+            auto c = get_terrain_cost(point(x, y));
             if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
                 continue;
             } else {
