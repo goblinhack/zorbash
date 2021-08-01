@@ -7,7 +7,7 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define ERR _ myerr
+#include "my_globals.h"
 
 void BOTCON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void BOTCON(const wchar_t *fmt, ...);
@@ -20,6 +20,7 @@ void TOPCON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void TOPCON(const wchar_t *fmt, ...);
 void SDL_MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void WARN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+
 void botcon(const wchar_t *fmt);
 void con(const wchar_t *fmt);
 void ctrlc_handler(int sig);
@@ -31,16 +32,21 @@ void quit(void);
 void restart(void);
 void segv_handler(int sig);
 
-#define dbg if (unlikely(g_opt_debug1)) log
-#define dbg2 if (unlikely(g_opt_debug2)) log
-#define dbg3 if (unlikely(g_opt_debug3)) log
-#define dbg4 if (unlikely(g_opt_debug4)) log
-#define dbg5 if (unlikely(g_opt_debug5)) log
+//
+// _ adds recording of this traceback
+//
+#define ERR _ myerr
 
-#define DBG if (unlikely(g_opt_debug1)) LOG
-#define DBG2 if (unlikely(g_opt_debug2)) LOG
-#define DBG3 if (unlikely(g_opt_debug3)) LOG
-#define DBG4 if (unlikely(g_opt_debug4)) LOG
-#define DBG5 if (unlikely(g_opt_debug5)) LOG
+#define dbg _ if (unlikely(g_opt_debug1)) log
+#define dbg2 _ if (unlikely(g_opt_debug2)) log
+#define dbg3 _ if (unlikely(g_opt_debug3)) log
+#define dbg4 _ if (unlikely(g_opt_debug4)) log
+#define dbg5 _ if (unlikely(g_opt_debug5)) log
+
+#define DBG _ if (unlikely(g_opt_debug1)) LOG
+#define DBG2 _ if (unlikely(g_opt_debug2)) LOG
+#define DBG3 _ if (unlikely(g_opt_debug3)) LOG
+#define DBG4 _ if (unlikely(g_opt_debug4)) LOG
+#define DBG5 _ if (unlikely(g_opt_debug5)) LOG
 
 #endif

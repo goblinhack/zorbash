@@ -32,7 +32,7 @@ void wid_collect_destroy (void)
 
 static void wid_collect_slot (int slot)
 {_
-    LOG("Collect slot %d", slot);
+    DBG3("Collect slot %d", slot);
 _
     if (slot >= (int)collect_items.size()) {
         wid_collect_destroy();
@@ -54,7 +54,7 @@ _
         auto carrying_copy = t->monstp->carrying;
 
         if (!player->try_to_carry(t)) {
-            LOG("Failed to collect slot %d", slot);
+            DBG3("Failed to collect slot %d", slot);
             return;
         }
 
@@ -227,7 +227,7 @@ static void wid_collect_mouse_over_b (Widp w, int32_t relx, int32_t rely,
 {_
     int slot = wid_get_int_context(w);
 
-    LOG("Describe collect slot %d", slot);
+    DBG3("Describe collect slot %d", slot);
 _
     if (slot >= (int)collect_items.size()) {
         wid_collect_destroy();
@@ -255,7 +255,7 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
 {_
     BOTCON("You lucky thing. Choose an item to collect.");
 
-    LOG("Thing collect create");
+    DBG3("Thing collect create");
     wid_thing_info_fini();
     change_state(Game::STATE_COLLECTING_ITEMS);
 

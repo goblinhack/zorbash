@@ -118,7 +118,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 
 uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Place in transit item");
+    DBG3("Place in transit item");
 _
     auto level = game->level;
     if (!level) {
@@ -127,26 +127,26 @@ _
 
     auto player = level->player;
     if (player && player->is_dead) {
-        LOG("Ignore input; player is dead");
+        DBG3("Ignore input; player is dead");
         return false;
     }
     //
     // Allow click to move and then click to drop / or drag and drop
     //
     if (!time_have_x_tenths_passed_since(2, game->last_mouse_down)) {
-        LOG("Mouse up too soon; ignore");
+        DBG3("Mouse up too soon; ignore");
         return true;
     }
 
     if (!game->in_transit_item) {
-        LOG("No in transit item");
+        DBG3("No in transit item");
         return false;
     }
 
     auto id = wid_get_thing_id_context(game->in_transit_item);
     auto t = game->thing_find(id);
     if (!t) {
-        LOG("Cannot find thing");
+        DBG3("Cannot find thing");
         return false;
     }
 
@@ -212,7 +212,7 @@ _
 
     game->wid_thing_info_create(game->level->player, false);
     game->request_remake_inventory = true;
-    LOG("Pressed in transit item; change state");
+    DBG3("Pressed in transit item; change state");
     game->change_state(Game::STATE_MOVING_ITEMS);
 
     //
@@ -225,10 +225,10 @@ _
 
 uint8_t wid_in_transit_item_drop (void)
 {_
-    LOG("Drop in transit item");
+    DBG3("Drop in transit item");
 _
     if (!game->in_transit_item) {
-        LOG("No in transit item");
+        DBG3("No in transit item");
         return false;
     }
 
@@ -245,7 +245,7 @@ _
 
     game->wid_thing_info_create(game->level->player, false);
     game->request_remake_inventory = true;
-    LOG("Pressed in transit item; change state");
+    DBG3("Pressed in transit item; change state");
     game->change_state(Game::STATE_MOVING_ITEMS);
 
     //
@@ -258,7 +258,7 @@ _
 
 static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Mouse down, pickup up an item and make it in transit");
+    DBG3("Mouse down, pickup up an item and make it in transit");
 _
     if (game->in_transit_item) {
         return false;
@@ -276,7 +276,7 @@ _
 
 bool Game::wid_bag_move_item (Widp w, Thingp t)
 {_
-    LOG("Chosen to move item");
+    DBG3("Chosen to move item");
 
     if (!t) {
         ERR("No thing to move");
@@ -359,10 +359,10 @@ _
     wid_set_moveable(game->in_transit_item, true);
     wid_update(game->in_transit_item);
 
-    LOG("Remake the bag without the transit item");
+    DBG3("Remake the bag without the transit item");
     game->request_remake_inventory = true;
     game->wid_thing_info_create(game->level->player, false);
-    LOG("Recreate inventory");
+    DBG3("Recreate inventory");
     game->change_state(Game::STATE_MOVING_ITEMS);
 
     return true;
@@ -396,7 +396,7 @@ static void wid_bag_item_mouse_over_e (Widp w)
 
 static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
 {_
-    LOG("Bag item key down");
+    DBG3("Bag item key down");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -406,7 +406,7 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        LOG("Ignore");
+        DBG3("Ignore");
         return false;
     }
 
@@ -417,18 +417,18 @@ _
 
     auto player = level->player;
     if (player && player->is_dead) {
-        LOG("Ignore input; player is dead");
+        DBG3("Ignore input; player is dead");
         return false;
     }
 
     if (wid_over != w) {
-        LOG("Pass key to topcon as not over wid");
+        DBG3("Pass key to topcon as not over wid");
         return wid_topcon_input(w, key);
     }
 
     if (game->state == Game::STATE_COLLECTING_ITEMS) {
         if (key->scancode == SDL_SCANCODE_ESCAPE) {
-            LOG("Escape pressed, clear collecting items state");
+            DBG3("Escape pressed, clear collecting items state");
 _
             game->change_state(Game::STATE_NORMAL);
             return true;
@@ -444,7 +444,7 @@ _
     auto id = wid_get_thing_id_context(w);
     auto what = game->thing_find(id);
     if (!what) {
-        LOG("Cannot find thing");
+        DBG3("Cannot find thing");
         return false;
     }
 
@@ -526,7 +526,7 @@ _
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_drop) {
-        LOG("Pressed drop key");
+        DBG3("Pressed drop key");
 _
         if (player->drop(what)) {
             game->tick_begin("drop");
@@ -537,7 +537,7 @@ _
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_eat) {
-        LOG("Pressed eat key");
+        DBG3("Pressed eat key");
 _
         player->use(what);
         if (game->state == Game::STATE_MOVING_ITEMS) {
@@ -548,7 +548,7 @@ _
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_use) {
-        LOG("Pressed use key");
+        DBG3("Pressed use key");
         player->use(what);
         if (game->state == Game::STATE_MOVING_ITEMS) {
             game->request_remake_inventory = true;
@@ -558,7 +558,7 @@ _
     }
 
     if (key->scancode == (SDL_Scancode)game->config.key_throw) {
-        LOG("Pressed throw key");
+        DBG3("Pressed throw key");
 _
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -566,7 +566,7 @@ _
         return true;
     }
 
-    LOG("Pass key to topcon");
+    DBG3("Pass key to topcon");
     return wid_topcon_input(w, key);
 }
 

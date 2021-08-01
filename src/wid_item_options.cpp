@@ -24,7 +24,7 @@ static bool came_from_inventory;
 
 void wid_item_options_destroy (void)
 {_
-    LOG("Item options destroy");
+    DBG3("Item options destroy");
 _
     delete wid_item_options_window;
     wid_item_options_window = nullptr;
@@ -32,7 +32,7 @@ _
 
 static uint8_t wid_item_options_use (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Item options use");
+    DBG3("Item options use");
 _
     wid_item_options_destroy();
 
@@ -55,7 +55,7 @@ _
 
 static uint8_t wid_item_options_eat (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Item options eat");
+    DBG3("Item options eat");
 _
     wid_item_options_destroy();
 
@@ -83,7 +83,7 @@ _
 
 static uint8_t wid_item_options_throw (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Item options throw");
+    DBG3("Item options throw");
 _
     wid_item_options_destroy();
 
@@ -103,7 +103,7 @@ _
 
 static uint8_t wid_item_options_drop (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Item options drop");
+    DBG3("Item options drop");
 _
     wid_item_options_destroy();
 
@@ -130,7 +130,7 @@ _
 
 static uint8_t wid_item_options_move (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Item options move");
+    DBG3("Item options move");
 _
     wid_item_options_destroy();
     game->wid_bag_move_item(chosen_wid, chosen_thing);
@@ -139,7 +139,7 @@ _
 
 static uint8_t wid_item_options_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Item options back");
+    DBG3("Item options back");
 _
     wid_item_options_destroy();
 
@@ -157,7 +157,7 @@ _
 
 static uint8_t wid_item_options_key_up (Widp w, const struct SDL_Keysym *key)
 {_
-    LOG("Item options key up");
+    DBG3("Item options key up");
 _
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
@@ -219,7 +219,7 @@ _
 
 static uint8_t wid_item_options_key_down (Widp w, const struct SDL_Keysym *key)
 {_
-    LOG("Item options key down");
+    DBG3("Item options key down");
 _
     if (sdl_shift_held) {
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
@@ -232,7 +232,7 @@ _
 
 void Game::wid_items_options_create (Widp w, Thingp t, bool source_came_from_inventory)
 {_
-    LOG("Item options");
+    DBG3("Item options");
 _
     auto was_moving_items = (game->state == Game::STATE_MOVING_ITEMS);
 

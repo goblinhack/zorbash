@@ -2392,7 +2392,7 @@ static void py_add_to_path (const char *path)
     wchar_t *wc_new_path;
     char *item;
 
-    LOG("Current system python path: (adding %s)", path);
+    DBG3("Current system python path: (adding %s)", path);
 
     new_path = dupstr(path, __FUNCTION__);
     py_cur_path = PySys_GetObject("path");
@@ -2413,7 +2413,7 @@ static void py_add_to_path (const char *path)
             continue;
         }
 
-        LOG("  %s", item);
+        DBG3("  %s", item);
 
         tmp = strappend(new_path, item);
         myfree(new_path);
@@ -2430,7 +2430,7 @@ static void py_add_to_path (const char *path)
         ERR("Path alloc fail");
     }
 
-    LOG("Set python path: %s", new_path);
+    DBG3("Set python path: %s", new_path);
 
     mbstowcs(wc_new_path, new_path, wc_len);
     PySys_SetPath(wc_new_path);
@@ -3425,7 +3425,7 @@ void python_init (char *argv[])
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    LOG("INI: Calling PyImport_ImportModule for zx module");
+    DBG3("INI: Calling PyImport_ImportModule for zx module");
 
     zx_mod = PyImport_ImportModule("zx");
     if (!zx_mod) {
@@ -3436,7 +3436,7 @@ void python_init (char *argv[])
 
     python_add_consts();
 
-    LOG("INI: Calling PyImport_ImportModule for init module");
+    DBG3("INI: Calling PyImport_ImportModule for init module");
 
     zx_mod = PyImport_ImportModule("init");
     if (!zx_mod) {

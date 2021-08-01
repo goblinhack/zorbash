@@ -322,8 +322,6 @@ bool Thing::wield (Thingp weapon)
     //
     carry_anim->set_owner(this);
 
-    // Needed?
-    // move_carried_items();
     return true;
 }
 

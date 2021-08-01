@@ -95,7 +95,7 @@ bool music_load (uint32_t rate, const std::string &file,
         return false;
     }
 
-    DBG("Load %s", file.c_str());
+    // DBG("Load %s", file.c_str());
 
     return (true);
 }

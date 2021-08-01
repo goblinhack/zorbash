@@ -33,7 +33,7 @@ void wid_wield_destroy (void)
 
 static void wid_wield_slot (int slot)
 {_
-    LOG("Wield slot %d", slot);
+    DBG3("Wield slot %d", slot);
 _
     if (slot >= (int)wield_items.size()) {
         wid_wield_destroy();
@@ -162,7 +162,7 @@ static void wid_wield_mouse_over_b (Widp w, int32_t relx, int32_t rely,
 {_
     int slot = wid_get_int_context(w);
 
-    LOG("Describe wield slot %d", slot);
+    DBG3("Describe wield slot %d", slot);
 _
     if (slot >= (int)wield_items.size()) {
         wid_wield_destroy();
@@ -190,7 +190,7 @@ void Game::wid_wield_create (void)
 {_
     BOTCON("Choose a weapon to wield.");
 
-    LOG("Thing wield create");
+    DBG3("Thing wield create");
     change_state(Game::STATE_WIELDING_ITEMS);
 
     auto player = game->level->player;

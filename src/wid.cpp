@@ -3012,7 +3012,7 @@ Widp wid_find (const std::string& name)
             return (r);
         }
     }
-    // LOG("Wid [%s] not found", name.c_str());
+    // DBG3("Wid [%s] not found", name.c_str());
     return (nullptr);
 }
 
@@ -6100,7 +6100,7 @@ void wid_tick_all (void)
     //
     if (game->request_destroy_thing_info) {
         if (time_have_x_tenths_passed_since(1, game->request_destroy_thing_info)) {
-            LOG("Handle request to destroy thing info");
+            DBG3("Handle request to destroy thing info");
             game->request_destroy_thing_info = false;
             wid_thing_info_fini();
         }
@@ -6111,7 +6111,7 @@ void wid_tick_all (void)
     //
     if (game->request_remake_inventory ||
         game->request_remake_skillbox) {
-        LOG("Handle request to remake inventory");
+        DBG3("Handle request to remake inventory");
         if (wid_rightbar_init()) {
             game->request_remake_inventory = false;
             game->request_remake_skillbox = false;
@@ -6124,13 +6124,13 @@ void wid_tick_all (void)
     //
     if (game->state == Game::STATE_MOVING_ITEMS) {
         if (!game->bag_primary && game->bag_secondary.empty()) {
-            LOG("Handle end of moving items");
+            DBG3("Handle end of moving items");
             game->change_state(Game::STATE_NORMAL);
         }
     }
 
     if (game->request_destroy_bags) {
-        LOG("Handle destroy bags request");
+        DBG3("Handle destroy bags request");
         game->request_destroy_bags = false;
         wid_thing_info_fini();
         wid_inventory_init();

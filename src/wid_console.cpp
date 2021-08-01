@@ -283,14 +283,14 @@ std::vector<std::wstring> wid_console_serialize (void)
 
 void wid_console_deserialize(std::vector<std::wstring> r)
 {_
-    LOG("Start of replaying old logs");
-    LOG("Vvvvvvvvvvvvvvvvvvvvvvvvvvv");
+    DBG3("Start of replaying old logs");
+    DBG3("Vvvvvvvvvvvvvvvvvvvvvvvvvvv");
     for (auto s : r) {
         auto tmp = wstring_to_string(s);
         if (tmp.size()) {
             wid_console_log(s);
         }
     }
-    LOG("^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-    LOG("End of replaying of old log");
+    DBG3("^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    DBG3("End of replaying of old log");
 }

@@ -384,8 +384,7 @@ bool Thing::move (fpoint future_pos,
 
 void Thing::update_interpolated_position (void)
 {_
-    bool update_pos = false;
-    fpoint new_pos;
+    fpoint new_pos = mid_at;
     auto tpp = tp();
 
     auto p = get_top_owner();
@@ -422,7 +421,6 @@ void Thing::update_interpolated_position (void)
         float dx = mid_at.x - last_mid_at.x;
         float dy = mid_at.y - last_mid_at.y;
 
-        update_pos = true;
         new_pos.x = last_mid_at.x + dx * step;
         new_pos.y = last_mid_at.y + dy * step;
     } else if (!get_timestamp_move_end()) {
@@ -433,7 +431,6 @@ void Thing::update_interpolated_position (void)
                     mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
             }
 
-            update_pos = true;
             new_pos = mid_at;
             last_mid_at = mid_at;
             set_timestamp_move_end(time_get_time_ms_cached());
@@ -447,7 +444,6 @@ void Thing::update_interpolated_position (void)
                     mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
             }
 
-            update_pos = true;
             new_pos = mid_at;
             last_mid_at = mid_at;
 
@@ -469,23 +465,16 @@ void Thing::update_interpolated_position (void)
 
         new_pos.x = last_mid_at.x + dx * step;
         new_pos.y = last_mid_at.y + dy * step;
-        update_pos = true;
     }
 
-    if (update_pos) {
-        if (unlikely(g_opt_debug4)) {
-            dbg("Update interpolated pos");
-        }
+    level_pop();
+    set_interpolated_mid_at(new_pos);
+    level_push();
 
-        level_pop();
-        set_interpolated_mid_at(new_pos);
-        level_push();
-
-        //
-        // For now only the player has a calculated light
-        //
-        update_light();
-    }
+    //
+    // For now only the player has a calculated light
+    //
+    update_light();
 }
 
 void Thing::update_pos (fpoint to, bool immediately)

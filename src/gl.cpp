@@ -231,19 +231,19 @@ static void gl_init_fbo_ (int fbo,
                           GLuint tex_width,
                           GLuint tex_height)
 {_
-    LOG("GFX: create FBO, size %dx%d", tex_width, tex_height);
+    DBG4("GFX: create FBO, size %dx%d", tex_width, tex_height);
     GL_ERROR_CHECK();
 
-    LOG("OpenGl: - glGenTextures");
+    DBG4("OpenGl: - glGenTextures");
     if (*fbo_tex_id) {
-        LOG("OpenGl: - glDeleteTextures");
+        DBG4("OpenGl: - glDeleteTextures");
         glDeleteTextures(1, fbo_tex_id);
         GL_ERROR_CHECK();
         *fbo_tex_id = 0;
     }
 
     if (*fbo_id) {
-        LOG("OpenGl: - glDeleteRenderbuffers");
+        DBG4("OpenGl: - glDeleteRenderbuffers");
         glDeleteRenderbuffers(1, fbo_id);
         GL_ERROR_CHECK();
         *fbo_id = 0;
@@ -252,11 +252,11 @@ static void gl_init_fbo_ (int fbo,
     glGenTextures(1, fbo_tex_id);
     GL_ERROR_CHECK();
 
-    DBG("OpenGl: - glBindTexture");
+    DBG4("OpenGl: - glBindTexture");
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
     GL_ERROR_CHECK();
 
-    DBG("OpenGl: - glTexParameterf");
+    DBG4("OpenGl: - glTexParameterf");
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     GL_ERROR_CHECK();
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -266,7 +266,7 @@ static void gl_init_fbo_ (int fbo,
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     GL_ERROR_CHECK();
 
-    DBG("OpenGl: - glTexImage2D");
+    DBG4("OpenGl: - glTexImage2D");
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
                  tex_width, tex_height, 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, 0);
@@ -284,38 +284,38 @@ static void gl_init_fbo_ (int fbo,
     }
 #endif
 
-    DBG("OpenGl: - glGenRenderbuffers_EXT");
+    DBG4("OpenGl: - glGenRenderbuffers_EXT");
     glGenRenderbuffers_EXT(1, render_buf_id);
     GL_ERROR_CHECK();
 
-    DBG("OpenGl: - glBindRenderbuffer_EXT");
+    DBG4("OpenGl: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, *render_buf_id);
     GL_ERROR_CHECK();
 
-    DBG("OpenGl: - glRenderbufferStorage_EXT");
+    DBG4("OpenGl: - glRenderbufferStorage_EXT");
     glRenderbufferStorage_EXT(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
                               tex_width, tex_height);
     GL_ERROR_CHECK();
 
-    DBG("OpenGl: - glBindRenderbuffer_EXT");
+    DBG4("OpenGl: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, 0);
     GL_ERROR_CHECK();
 
     //
     // Create a frame buffer object.
     //
-    DBG("OpenGl: - glGenFramebuffers_EXT");
+    DBG4("OpenGl: - glGenFramebuffers_EXT");
     glGenFramebuffers_EXT(1, fbo_id);
     GL_ERROR_CHECK();
 
-    DBG("OpenGl: - glBindFramebuffer_EXT");
+    DBG4("OpenGl: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, *fbo_id);
     GL_ERROR_CHECK();
 
     //
     // Attach the texture to FBO color attachment point
     //
-    DBG("OpenGl: - glFramebufferTexture2D_EXT");
+    DBG4("OpenGl: - glFramebufferTexture2D_EXT");
     glFramebufferTexture2D_EXT(GL_FRAMEBUFFER,        // 1. fbo target: GL_FRAMEBUFFER
                                GL_COLOR_ATTACHMENT0,  // 2. attachment point
                                GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
@@ -326,7 +326,7 @@ static void gl_init_fbo_ (int fbo,
     //
     // Attach the renderbuffer to depth attachment point
     //
-    DBG("OpenGl: - glFramebufferRenderbuffer_EXT");
+    DBG4("OpenGl: - glFramebufferRenderbuffer_EXT");
     glFramebufferRenderbuffer_EXT(GL_FRAMEBUFFER,      // 1. fbo target: GL_FRAMEBUFFER
                                   GL_DEPTH_ATTACHMENT, // 2. attachment point
                                   GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
@@ -336,7 +336,7 @@ static void gl_init_fbo_ (int fbo,
     //
     // Check FBO status
     //
-    DBG("OpenGl: - glCheckFramebufferStatus_EXT");
+    DBG4("OpenGl: - glCheckFramebufferStatus_EXT");
     GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
     if (status && (status != GL_FRAMEBUFFER_COMPLETE)) {
         ERR("Failed to create framebuffer, error: %d", status);
@@ -378,7 +378,7 @@ static void gl_init_fbo_ (int fbo,
     GL_ERROR_CHECK();
 
     // switch back to window-system-provided framebuffer
-    DBG("OpenGl: - glBindFramebuffer_EXT");
+    DBG4("OpenGl: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
     GL_ERROR_CHECK();
 }
@@ -401,7 +401,7 @@ void gl_init_fbo (void)
         // If no change in size (minimap, bg map) then do not reset the FBO
         //
         if (fbo_size[i] == isize(tex_width, tex_height)) {
-            LOG("GFX: skip init of FBO %d", i);
+            DBG4("GFX: skip init of FBO %d", i);
             continue;
         }
 

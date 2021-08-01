@@ -303,10 +303,10 @@ cleanup:
     myfree(EXEC_DIR);
     EXEC_DIR = new_EXEC_DIR;
 
-    LOG("INI: EXEC_DIR set to %s", EXEC_DIR);
-    DBG("Parent dir  : \"%s\"", parent_dir);
-    DBG("Curr dir    : \"%s\"", curr_dir);
-    DBG("Full name   : \"%s\"", exec_expanded_name);
+    DBG3("INI: EXEC_DIR set to %s", EXEC_DIR);
+    DBG3("Parent dir  : \"%s\"", parent_dir);
+    DBG3("Curr dir    : \"%s\"", curr_dir);
+    DBG3("Full name   : \"%s\"", exec_expanded_name);
 
     if (path) {
         myfree(path);
@@ -511,7 +511,7 @@ static void parse_args (int32_t argc, char *argv[])
             g_opt_debug3 = false;
             g_opt_debug4 = false;
             g_opt_debug5 = false;
-            g_opt_nodebug = true;
+            g_opt_override_debug_level = true;
             continue;
         }
 
@@ -520,6 +520,7 @@ static void parse_args (int32_t argc, char *argv[])
             !strcasecmp(argv[i], "--debug1") ||
             !strcasecmp(argv[i], "-debug1")) {
             g_opt_debug1 = true;
+            g_opt_override_debug_level = true;
             continue;
         }
 
@@ -527,6 +528,7 @@ static void parse_args (int32_t argc, char *argv[])
             !strcasecmp(argv[i], "-debug2")) {
             g_opt_debug1 = true;
             g_opt_debug2 = true;
+            g_opt_override_debug_level = true;
             continue;
         }
 
@@ -535,6 +537,7 @@ static void parse_args (int32_t argc, char *argv[])
             g_opt_debug1 = true;
             g_opt_debug2 = true;
             g_opt_debug3 = true;
+            g_opt_override_debug_level = true;
             continue;
         }
 
@@ -544,6 +547,7 @@ static void parse_args (int32_t argc, char *argv[])
             g_opt_debug2 = true;
             g_opt_debug3 = true;
             g_opt_debug4 = true;
+            g_opt_override_debug_level = true;
             continue;
         }
 
@@ -554,6 +558,7 @@ static void parse_args (int32_t argc, char *argv[])
             g_opt_debug3 = true;
             g_opt_debug4 = true;
             g_opt_debug5 = true;
+            g_opt_override_debug_level = true;
             continue;
         }
 

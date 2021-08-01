@@ -89,7 +89,7 @@ bool sound_load (float volume, const std::string &file,
         return false;
     }
 
-    DBG("Load %s", file.c_str());
+    // DBG("Load %s", file.c_str());
 
     return (true);
 }

@@ -160,7 +160,7 @@ void Game::wid_skill_choose (void)
 {_
     BOTCON("You lucky thing. Time to learn some new skill.");
 
-    LOG("Thing skills create");
+    DBG3("Thing skills create");
     wid_thing_info_fini();
     change_state(Game::STATE_CHOOSING_SKILLS);
 

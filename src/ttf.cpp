@@ -35,7 +35,7 @@ Fontp ttf_new (std::string name, int pointSize, int style)
 
     auto f = new Font();
 
-    DBG("Load TTF: %s", name.c_str());
+    // DBG("Load TTF: %s", name.c_str());
 
     f->foreground.r = 255;
     f->foreground.g = 255;

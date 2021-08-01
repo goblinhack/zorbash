@@ -35,7 +35,7 @@ bool wid_rightbar_init (void)
 
 static void wid_rightbar_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {_
-    LOG("rightbar: begin over rightbar");
+    DBG3("rightbar: begin over rightbar");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -46,18 +46,18 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        LOG("rightbar: moving items; ignore");
+        DBG3("rightbar: moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        LOG("rightbar: in transit item; ignore");
+        DBG3("rightbar: in transit item; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        LOG("rightbar: no level; ignore");
+        DBG3("rightbar: no level; ignore");
         return;
     }
 
@@ -68,7 +68,7 @@ _
 
 static void wid_rightbar_mouse_over_e (Widp w)
 {_
-    LOG("rightbar: end over rightbar");
+    DBG3("rightbar: end over rightbar");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -79,18 +79,18 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        LOG("rightbar: moving items; ignore");
+        DBG3("rightbar: moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        LOG("rightbar: in transit item; ignore");
+        DBG3("rightbar: in transit item; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        LOG("rightbar: no level; ignore");
+        DBG3("rightbar: no level; ignore");
         return;
     }
 
@@ -106,7 +106,7 @@ _
 //
 static bool wid_rightbar_create (void)
 {_
-    LOG("Remake rightbar");
+    DBG3("Remake rightbar");
 
     auto level = game->level;
     if (!level) {
@@ -560,7 +560,7 @@ static bool wid_rightbar_create (void)
 
     wid_update(wid_rightbar);
 
-    LOG("Remade rightbar");
+    DBG3("Remade rightbar");
     return true;
 }
 

@@ -387,31 +387,6 @@ _
         }
     }
 
-    if (tpp->is_loggable_for_unimportant_stuff()) {
-        dbg("Created");
-    }
-
-#if 0
-    //
-    // Jitter makes the eating of blood by monsts problematic
-    //
-    if (unlikely(jitter != fpoint(0.0, 0.0))) {
-        double dx = pcq_random_range(0, TILE_WIDTH);
-        double dy = pcq_random_range(0, TILE_WIDTH);
-
-        dx -= TILE_WIDTH / 2;
-        dy -= TILE_WIDTH / 2;
-
-        dx /= TILE_WIDTH;
-        dy /= TILE_WIDTH;
-
-        dx *= jitter.x;
-        dy *= jitter.y;
-
-        move_to_immediately(fpoint(mid_at.x + dx, mid_at.y + dy));
-    }
-#endif
-
     //
     // Set position prior to attach
     //

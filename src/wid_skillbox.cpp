@@ -17,7 +17,7 @@
 
 void wid_skillbox_fini (void)
 {_
-    LOG("Skillbox: fini");
+    DBG3("Skillbox: fini");
 }
 
 uint8_t wid_skillbox_init (void)
@@ -29,7 +29,7 @@ void wid_skillbox_mouse_over_b (Widp w,
                                 int32_t relx, int32_t rely, 
                                 int32_t wheelx, int32_t wheely)
 {_
-    LOG("Skillbox: begin over skillbox");
+    DBG3("Skillbox: begin over skillbox");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -40,27 +40,27 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        LOG("Skillbox: moving items; ignore");
+        DBG3("Skillbox: moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        LOG("Skillbox: in transit item; ignore");
+        DBG3("Skillbox: in transit item; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        LOG("Skillbox: no level; ignore");
+        DBG3("Skillbox: no level; ignore");
         return;
     }
 
     auto slot = wid_get_int_context(w);
 
-    LOG("Skillbox: begin over skillbox slot %d", slot);
+    DBG3("Skillbox: begin over skillbox slot %d", slot);
 _
     if (!level->skillbox_over(slot)) {
-        LOG("Skillbox: not over anything");
+        DBG3("Skillbox: not over anything");
         return;
     }
 
@@ -74,7 +74,7 @@ _
 
 void wid_skillbox_mouse_over_e (Widp w)
 {_
-    LOG("Skillbox: end over skillbox");
+    DBG3("Skillbox: end over skillbox");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -85,24 +85,24 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        LOG("Skillbox: moving items; ignore");
+        DBG3("Skillbox: moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        LOG("Skillbox: in transit item; ignore");
+        DBG3("Skillbox: in transit item; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        LOG("Skillbox: no level; ignore");
+        DBG3("Skillbox: no level; ignore");
         return;
     }
 
     auto slot = wid_get_int_context(w);
 
-    LOG("Skillbox: over skillbox slot %d", slot);
+    DBG3("Skillbox: over skillbox slot %d", slot);
 _
     if (!level->skillbox_over(slot)) {
         return;
@@ -119,7 +119,7 @@ uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
                                     uint32_t button)
 {_
     auto slot = wid_get_int_context(w);
-    LOG("Skillbox: mouse up on slot %d", slot);
+    DBG3("Skillbox: mouse up on slot %d", slot);
 
     if ((game->state == Game::STATE_ENCHANTING_ITEMS) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -149,7 +149,7 @@ uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
     }
 
     if (!level->skillbox_chosen(slot)) {
-        LOG("Skillbox: nothing on skill slot %d", slot);
+        DBG3("Skillbox: nothing on skill slot %d", slot);
         return true;
     }
 

@@ -4,8 +4,10 @@
 //
 
 #include <SDL_mixer.h>
+
 #include "my_sys.h"
 #include "my_game.h"
+#include "my_main.h"
 #include "my_thing.h"
 #include "my_monst.h"
 #include "my_thing_template.h"
@@ -46,7 +48,7 @@ void wid_actionbar_fini (void)
 
 static uint8_t wid_actionbar_quit (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar quit");
+    DBG3("Actionbar quit");
 _
     wid_actionbar_close_all_popups();
     game->quit_select();
@@ -66,7 +68,7 @@ static void wid_actionbar_quit_over_e (Widp w)
 
 void wid_actionbar_robot_mode_toggle (void)
 {_
-    LOG("Actionbar robot");
+    DBG3("Actionbar robot");
 _
     wid_actionbar_close_all_popups();
     game->robot_mode_requested = !game->robot_mode_requested;
@@ -75,7 +77,7 @@ _
 
 void wid_actionbar_robot_mode_update (void)
 {_
-    LOG("Actionbar robot update");
+    DBG3("Actionbar robot update");
 _
     wid_actionbar_close_all_popups();
     wid_actionbar_init();
@@ -83,7 +85,7 @@ _
 
 void wid_actionbar_robot_mode_off (void)
 {_
-    LOG("Actionbar robot");
+    DBG3("Actionbar robot");
 _
     wid_actionbar_close_all_popups();
 
@@ -122,7 +124,7 @@ static void wid_actionbar_robot_tick (Widp w)
 
 static uint8_t wid_actionbar_close (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar close");
+    DBG3("Actionbar close");
 _
     if (!game->level) {
         return true;
@@ -155,7 +157,7 @@ static void wid_actionbar_close_over_e (Widp w)
 
 static uint8_t wid_actionbar_load (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar load");
+    DBG3("Actionbar load");
 _
     if (!game->level) {
         return true;
@@ -189,7 +191,7 @@ static void wid_actionbar_load_over_e (Widp w)
 
 static uint8_t wid_actionbar_save (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar save");
+    DBG3("Actionbar save");
 _
     if (!game->level) {
         return true;
@@ -223,7 +225,7 @@ static void wid_actionbar_save_over_e (Widp w)
 
 static uint8_t wid_actionbar_inventory (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar inventory");
+    DBG3("Actionbar inventory");
 _
     if (!game->level) {
         return true;
@@ -263,7 +265,7 @@ static void wid_actionbar_inventory_over_e (Widp w)
 
 static uint8_t wid_actionbar_collect (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar collect");
+    DBG3("Actionbar collect");
 _
     if (!game->level) {
         return true;
@@ -306,7 +308,7 @@ static void wid_actionbar_collect_over_e (Widp w)
 
 static uint8_t wid_actionbar_wield (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar wield");
+    DBG3("Actionbar wield");
 _
     if (!game->level) {
         return true;
@@ -352,7 +354,7 @@ static void wid_actionbar_wield_over_e (Widp w)
 
 static uint8_t wid_actionbar_wait (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar wait");
+    DBG3("Actionbar wait");
 _
     if (!game->level) {
         return true;
@@ -383,7 +385,7 @@ _
 
 static uint8_t wid_actionbar_repeat_wait (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar wait");
+    DBG3("Actionbar wait");
 _
     if (!game->level) {
         return true;
@@ -433,7 +435,7 @@ static void wid_actionbar_wait_over_e (Widp w)
 
 static uint8_t wid_actionbar_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar zoom out");
+    DBG3("Actionbar zoom out");
 _
     if (!game->level) {
         return true;
@@ -457,7 +459,7 @@ static void wid_actionbar_zoom_out_over_e (Widp w)
 
 static uint8_t wid_actionbar_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar zoom in");
+    DBG3("Actionbar zoom in");
 _
     if (!game->level) {
         return true;
@@ -481,7 +483,7 @@ static void wid_actionbar_zoom_in_over_e (Widp w)
 
 static uint8_t wid_actionbar_configure (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    LOG("Actionbar configure");
+    DBG3("Actionbar configure");
 _
     if (!game->level) {
         return true;
@@ -507,7 +509,7 @@ static void wid_actionbar_configure_over_e (Widp w)
 
 void wid_actionbar_init (void)
 {_
-    LOG("Actionbar");
+    DBG3("Actionbar init");
 _
     if (!game->level) {
         return;

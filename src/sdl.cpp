@@ -444,274 +444,280 @@ static void sdl_event (SDL_Event * event)
     wid_mouse_double_click = false;
 
     switch (event->type) {
-    case SDL_KEYDOWN:
-        if (g_grab_next_key) {
-            DBG("SDL: Keyboard: grabbed 0x%" PRIx32 " = %s / %s",
+        case SDL_KEYDOWN: {
+            if (g_grab_next_key) {
+                DBG("SDL: Keyboard: grabbed 0x%" PRIx32 " = %s / %s",
+                    event->key.keysym.sym,
+                    SDL_GetKeyName(event->key.keysym.sym),
+                    SDL_GetScancodeName(event->key.keysym.scancode));
+
+                g_grab_next_key = false;
+                sdl_grabbed_scancode = event->key.keysym.scancode;
+                if (on_sdl_key_grab) {
+                    (*on_sdl_key_grab)(sdl_grabbed_scancode);
+                }
+                return;
+            }
+
+            key = &event->key.keysym;
+
+            DBG("SDL: Keyboard: key pressed keycode 0x%" PRIx32 " = %s %d",
                 event->key.keysym.sym,
-                SDL_GetKeyName(event->key.keysym.sym),
-                SDL_GetScancodeName(event->key.keysym.scancode));
+                SDL_GetKeyName(event->key.keysym.sym), key->mod);
 
-            g_grab_next_key = false;
-            sdl_grabbed_scancode = event->key.keysym.scancode;
-            if (on_sdl_key_grab) {
-                (*on_sdl_key_grab)(sdl_grabbed_scancode);
-            }
-            return;
-        }
+            {
+                static struct SDL_Keysym last;
+                static timestamp_t last_time_for_key;
 
-        key = &event->key.keysym;
-
-        DBG("SDL: Keyboard: key pressed keycode 0x%" PRIx32 " = %s %d",
-            event->key.keysym.sym,
-            SDL_GetKeyName(event->key.keysym.sym), key->mod);
-
-        {
-            static struct SDL_Keysym last;
-            static timestamp_t last_time_for_key;
-
-            //
-            // SDL2 has no auto repeat.
-            //
-            if (!memcmp(&last, key, sizeof(*key))) {
-                if (!time_have_x_hundredths_passed_since(5, last_time_for_key)) {
-                    return;
+                //
+                // SDL2 has no auto repeat.
+                //
+                if (!memcmp(&last, key, sizeof(*key))) {
+                    if (!time_have_x_hundredths_passed_since(5, last_time_for_key)) {
+                        return;
+                    }
+                    last_time_for_key = time_get_time_ms_cached();
                 }
-                last_time_for_key = time_get_time_ms_cached();
+                last = *key;
             }
-            last = *key;
+
+            wid_key_down(key, mouse_x, mouse_y);
+
+            sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
+            break;
         }
+        case SDL_KEYUP: {
+            DBG("SDL: Keyboard: key released keycode 0x%" PRIx32 " = %s",
+                event->key.keysym.sym,
+                SDL_GetKeyName(event->key.keysym.sym));
 
-        wid_key_down(key, mouse_x, mouse_y);
+            key = &event->key.keysym;
 
-        sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
-        break;
+            wid_key_up(key, mouse_x, mouse_y);
 
-    case SDL_KEYUP:
-        DBG("SDL: Keyboard: key released keycode 0x%" PRIx32 " = %s",
-            event->key.keysym.sym,
-            SDL_GetKeyName(event->key.keysym.sym));
+            sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
+            break;
+        }
+        case SDL_TEXTINPUT: {
+            DBG("SDL: Keyboard: text input \"%s\" in window %d",
+                event->text.text, event->text.windowID);
+            break;
+        }
+        case SDL_MOUSEWHEEL: {
+            DBG("SDL: Mouse: wheel scrolled %d in x and %d in y in window %d",
+                event->wheel.x, event->wheel.y, event->wheel.windowID);
 
-    key = &event->key.keysym;
+            sdl_get_mouse();
 
-        wid_key_up(key, mouse_x, mouse_y);
+            static double accel = 1.0;
 
-        sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
-        break;
+            {
+                static timestamp_t ts;
 
-    case SDL_TEXTINPUT:
-        DBG("SDL: Keyboard: text input \"%s\" in window %d",
-            event->text.text, event->text.windowID);
-        break;
+                if (time_have_x_tenths_passed_since(5, ts)) {
+                    accel = 1.0;
+                } else {
+                    accel *= UI_MOUSE_WHEEL_SCALE;
 
-    case SDL_MOUSEWHEEL: {
-        DBG("SDL: Mouse: wheel scrolled %d in x and %d in y in window %d",
-            event->wheel.x, event->wheel.y, event->wheel.windowID);
+                    if (accel > UI_MOUSE_WHEEL_SCALE_MAX) {
+                        accel = UI_MOUSE_WHEEL_SCALE_MAX;
+                    }
+                }
 
-        sdl_get_mouse();
+                ts = time_get_time_ms_cached();
+            }
 
-        static double accel = 1.0;
+            wheel_x = event->wheel.x;
+            wheel_y = event->wheel.y;
 
-        {
-            static timestamp_t ts;
+            wheel_x *= accel;
+            wheel_y *= accel;
 
-            if (time_have_x_tenths_passed_since(5, ts)) {
-                accel = 1.0;
+            //
+            // Negative wheel x so side scrolls seem natural. Could just be
+            // a dumb macos thing to ifdef?
+            //
+            wid_mouse_visible = 1;
+            mouse_tick ++;
+            wid_mouse_motion(mouse_x, mouse_y, 0, 0, -wheel_x, wheel_y);
+            break;
+        }
+        case SDL_MOUSEMOTION: {
+            mouse_down = sdl_get_mouse();
+
+            DBG4("SDL: Mouse: moved to %d,%d (%d,%d) state %d",
+                event->motion.x, event->motion.y,
+                event->motion.xrel, event->motion.yrel, mouse_down);
+
+            wid_mouse_visible = 1;
+            mouse_tick++;
+            wid_mouse_motion(mouse_x, mouse_y,
+                            event->motion.xrel, event->motion.yrel,
+                            0, 0);
+            break;
+        }
+        case SDL_MOUSEBUTTONDOWN: {
+            mouse_down = sdl_get_mouse();
+
+            DBG("SDL: Mouse DOWN: button %d pressed at %d,%d state %x",
+                event->button.button, event->button.x, event->button.y,
+                mouse_down);
+
+            auto now = time_get_time_ms_cached();
+            wid_mouse_visible = 1;
+            wid_mouse_double_click =
+            (now - mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
+
+            wid_mouse_down(event->button.button, mouse_x, mouse_y);
+            mouse_down_when = now;
+            break;
+        }
+        case SDL_MOUSEBUTTONUP: {
+            mouse_down = sdl_get_mouse();
+
+            DBG("SDL: Mouse UP: button %d released at %d,%d state %d",
+                event->button.button, event->button.x, event->button.y,
+                mouse_down);
+
+            wid_mouse_up(event->button.button, mouse_x, mouse_y);
+            break;
+        }
+        case SDL_JOYAXISMOTION: {
+            DBG("SDL: Joystick %d: axis %d moved by %d",
+                event->jaxis.which, event->jaxis.axis, event->jaxis.value);
+
+            int axis = event->jaxis.axis;
+            int value = event->jaxis.value;
+
+            if (!sdl_joy_axes) {
+                sdl_joy_axes = (int*) myzalloc(sizeof(int) * joy_naxes, "joy axes");
+            }
+
+            sdl_joy_axes[axis] = value;
+
+            sdl_left_fire = false;
+            sdl_right_fire = false;
+
+            if (sdl_joy_axes[2] > sdl_joy_deadzone) {
+                DBG("SDL: left fire");
+                sdl_left_fire = true;
+                set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t)1);
             } else {
-                accel *= UI_MOUSE_WHEEL_SCALE;
-
-                if (accel > UI_MOUSE_WHEEL_SCALE_MAX) {
-                    accel = UI_MOUSE_WHEEL_SCALE_MAX;
-                }
+                set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t)0);
             }
 
-            ts = time_get_time_ms_cached();
+
+            if (sdl_joy_axes[5] > sdl_joy_deadzone) {
+                DBG("SDL: right fire");
+                sdl_right_fire = true;
+                set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t)1);
+            } else {
+                set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t)0);
+            }
+
+            if (sdl_right_fire || sdl_left_fire) {
+                sdl_get_mouse();
+                wid_joy_button(mouse_x, mouse_y);
+            }
+
+            break;
         }
-
-        wheel_x = event->wheel.x;
-        wheel_y = event->wheel.y;
-
-        wheel_x *= accel;
-        wheel_y *= accel;
-
-        //
-        // Negative wheel x so side scrolls seem natural. Could just be
-        // a dumb macos thing to ifdef?
-        //
-        wid_mouse_visible = 1;
-        mouse_tick ++;
-        wid_mouse_motion(mouse_x, mouse_y, 0, 0, -wheel_x, wheel_y);
-        break;
-    }
-
-    case SDL_MOUSEMOTION:
-        mouse_down = sdl_get_mouse();
-
-        DBG4("SDL: Mouse: moved to %d,%d (%d,%d) state %d",
-             event->motion.x, event->motion.y,
-             event->motion.xrel, event->motion.yrel, mouse_down);
-
-        wid_mouse_visible = 1;
-        mouse_tick++;
-        wid_mouse_motion(mouse_x, mouse_y,
-                         event->motion.xrel, event->motion.yrel,
-                         0, 0);
-        break;
-
-    case SDL_MOUSEBUTTONDOWN: {
-        mouse_down = sdl_get_mouse();
-
-        DBG("SDL: Mouse DOWN: button %d pressed at %d,%d state %x",
-            event->button.button, event->button.x, event->button.y,
-            mouse_down);
-
-        auto now = time_get_time_ms_cached();
-        wid_mouse_visible = 1;
-        wid_mouse_double_click =
-          (now - mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
-
-        wid_mouse_down(event->button.button, mouse_x, mouse_y);
-        mouse_down_when = now;
-        break;
-    }
-
-    case SDL_MOUSEBUTTONUP:
-        mouse_down = sdl_get_mouse();
-
-        DBG("SDL: Mouse UP: button %d released at %d,%d state %d",
-            event->button.button, event->button.x, event->button.y,
-            mouse_down);
-
-        wid_mouse_up(event->button.button, mouse_x, mouse_y);
-        break;
-
-    case SDL_JOYAXISMOTION: {
-        DBG("SDL: Joystick %d: axis %d moved by %d",
-            event->jaxis.which, event->jaxis.axis, event->jaxis.value);
-
-        int axis = event->jaxis.axis;
-        int value = event->jaxis.value;
-
-        if (!sdl_joy_axes) {
-            sdl_joy_axes = (int*) myzalloc(sizeof(int) * joy_naxes, "joy axes");
+        case SDL_JOYBALLMOTION: {
+            DBG("SDL: Joystick %d: ball %d moved by %d,%d",
+                event->jball.which, event->jball.ball, event->jball.xrel,
+                event->jball.yrel);
+            break;
         }
+        case SDL_JOYHATMOTION: {
+            DBG("SDL: Joystick %d: hat %d moved to ", event->jhat.which,
+                event->jhat.hat);
 
-        sdl_joy_axes[axis] = value;
-
-        sdl_left_fire = false;
-        sdl_right_fire = false;
-
-        if (sdl_joy_axes[2] > sdl_joy_deadzone) {
-            DBG("SDL: left fire");
-            sdl_left_fire = true;
-            set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t)1);
-        } else {
-            set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t)0);
+            switch (event->jhat.value) {
+            case SDL_HAT_CENTERED:
+                break;
+            case SDL_HAT_UP: {
+                DBG("SDL: UP");
+                sdl_joy2_up = true;
+                break;
+            }
+            case SDL_HAT_RIGHTUP: {
+                DBG("SDL: RIGHTUP");
+                sdl_joy2_right = true;
+                sdl_joy2_up = true;
+                break;
+            }
+            case SDL_HAT_RIGHT: {
+                DBG("SDL: RIGHT");
+                sdl_joy2_right = true;
+                break;
+            }
+            case SDL_HAT_RIGHTDOWN: {
+                DBG("SDL: RIGHTDOWN");
+                sdl_joy2_right = true;
+                sdl_joy2_down = true;
+                break;
+            }
+            case SDL_HAT_DOWN: {
+                DBG("SDL: DOWN");
+                sdl_joy2_down = true;
+                break;
+            }
+            case SDL_HAT_LEFTDOWN: {
+                DBG("SDL: LEFTDOWN");
+                sdl_joy2_left = true;
+                sdl_joy2_down = true;
+                break;
+            }
+            case SDL_HAT_LEFT: {
+                DBG("SDL: LEFT");
+                sdl_joy2_left = true;
+                break;
+            }
+            case SDL_HAT_LEFTUP: {
+                sdl_joy2_left = true;
+                sdl_joy2_up = true;
+                DBG("SDL: LEFTUP");
+                break;
+            }
+            default:
+                DBG("SDL: UNKNOWN");
+                break;
+            }
+            break;
         }
-
-
-        if (sdl_joy_axes[5] > sdl_joy_deadzone) {
-            DBG("SDL: right fire");
-            sdl_right_fire = true;
-            set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t)1);
-        } else {
-            set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t)0);
-        }
-
-        if (sdl_right_fire || sdl_left_fire) {
+        case SDL_JOYBUTTONDOWN: {
+            DBG("SDL: Joystick %d: button %d pressed",
+                event->jbutton.which, event->jbutton.button);
+            set(sdl_joy_buttons, event->jbutton.button, (uint8_t)1);
             sdl_get_mouse();
             wid_joy_button(mouse_x, mouse_y);
-        }
-
-        break;
-    }
-
-    case SDL_JOYBALLMOTION:
-        DBG("SDL: Joystick %d: ball %d moved by %d,%d",
-            event->jball.which, event->jball.ball, event->jball.xrel,
-            event->jball.yrel);
-        break;
-
-    case SDL_JOYHATMOTION:
-        DBG("SDL: Joystick %d: hat %d moved to ", event->jhat.which,
-            event->jhat.hat);
-
-        switch (event->jhat.value) {
-        case SDL_HAT_CENTERED:
-            break;
-        case SDL_HAT_UP:
-            DBG("SDL: UP");
-            sdl_joy2_up = true;
-            break;
-        case SDL_HAT_RIGHTUP:
-            DBG("SDL: RIGHTUP");
-            sdl_joy2_right = true;
-            sdl_joy2_up = true;
-            break;
-        case SDL_HAT_RIGHT:
-            DBG("SDL: RIGHT");
-            sdl_joy2_right = true;
-            break;
-        case SDL_HAT_RIGHTDOWN:
-            DBG("SDL: RIGHTDOWN");
-            sdl_joy2_right = true;
-            sdl_joy2_down = true;
-            break;
-        case SDL_HAT_DOWN:
-            DBG("SDL: DOWN");
-            sdl_joy2_down = true;
-            break;
-        case SDL_HAT_LEFTDOWN:
-            DBG("SDL: LEFTDOWN");
-            sdl_joy2_left = true;
-            sdl_joy2_down = true;
-            break;
-        case SDL_HAT_LEFT:
-            DBG("SDL: LEFT");
-            sdl_joy2_left = true;
-            break;
-        case SDL_HAT_LEFTUP:
-            sdl_joy2_left = true;
-            sdl_joy2_up = true;
-            DBG("SDL: LEFTUP");
-            break;
-        default:
-            DBG("SDL: UNKNOWN");
             break;
         }
-        break;
-
-    case SDL_JOYBUTTONDOWN:
-        DBG("SDL: Joystick %d: button %d pressed",
-            event->jbutton.which, event->jbutton.button);
-        set(sdl_joy_buttons, event->jbutton.button, (uint8_t)1);
-        sdl_get_mouse();
-        wid_joy_button(mouse_x, mouse_y);
-        break;
-
-    case SDL_JOYBUTTONUP:
-        DBG("SDL: Joystick %d: button %d released",
-            event->jbutton.which, event->jbutton.button);
-        set(sdl_joy_buttons, event->jbutton.button, (uint8_t)0);
-        break;
-
-    case SDL_CLIPBOARDUPDATE:
-        DBG("SDL: Clipboard updated");
-        break;
-
-    case SDL_QUIT: {
+        case SDL_JOYBUTTONUP: {
+            DBG("SDL: Joystick %d: button %d released",
+                event->jbutton.which, event->jbutton.button);
+            set(sdl_joy_buttons, event->jbutton.button, (uint8_t)0);
+            break;
+        }
+        case SDL_CLIPBOARDUPDATE: {
+            DBG("SDL: Clipboard updated");
+            break;
+        }
+        case SDL_QUIT: {
 #ifdef ENABLE_UI_ASCII_MOUSE
-        SDL_ShowCursor(1);
+            SDL_ShowCursor(1);
 #endif
-        DIE("Quit requested");
-    }
-
-    case SDL_USEREVENT:
-        DBG("SDL: User event %d", event->user.code);
-        break;
-
-    default:
-        DBG("SDL: Unknown event %d", event->type);
-        break;
+            DIE("Quit requested");
+            break;
+        }
+        case SDL_USEREVENT: {
+            DBG("SDL: User event %d", event->user.code);
+            break;
+        }
+        default: {
+            DBG("SDL: Unknown event %d", event->type);
+            break;
+        }
     }
 }
 

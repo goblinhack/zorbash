@@ -98,7 +98,7 @@ static unsigned char *load_raw_image (std::string filename,
         DIE("Could not read memory for file, '%s'", filename.c_str());
     }
 
-    DBG("loaded '%s', %ux%u", filename.c_str(), *x, *y);
+    DBG4("loaded '%s', %ux%u", filename.c_str(), *x, *y);
 
     myfree(file_data);
 
@@ -153,7 +153,7 @@ static SDL_Surface *load_image (std::string filename)
 
     if (comp == 2) {
         SDL_Surface *old_surf = surf;
-        LOG("- SDL_ConvertSurfaceFormat");
+        DBG4("- SDL_ConvertSurfaceFormat");
         surf = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
         newptr(surf, "SDL_CreateRGBSurface4");
         oldptr(old_surf);
@@ -224,7 +224,7 @@ static void load_images (SDL_Surface **surf1_out,
 
     if (comp == 2) {
         SDL_Surface *old_surf = surf1;
-        LOG("- SDL_ConvertSurfaceFormat");
+        DBG4("- SDL_ConvertSurfaceFormat");
         surf1 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
         newptr(surf1, "SDL_CreateRGBSurface14");
         oldptr(old_surf);
@@ -234,7 +234,7 @@ static void load_images (SDL_Surface **surf1_out,
 
     if (comp == 2) {
         SDL_Surface *old_surf = surf2;
-        LOG("- SDL_ConvertSurfaceFormat");
+        DBG4("- SDL_ConvertSurfaceFormat");
         surf2 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
         newptr(surf2, "SDL_CreateRGBSurface15");
         oldptr(old_surf);
@@ -259,7 +259,7 @@ Texp tex_load (std::string file, std::string name, int mode)
         return (t);
     }
 
-    LOG("Loading texture '%s', '%s'", file.c_str(), name.c_str());
+    DBG4("Loading texture '%s', '%s'", file.c_str(), name.c_str());
     if (file == "") {
         if (name == "") {
             ERR("No file for tex");
@@ -279,7 +279,7 @@ Texp tex_load (std::string file, std::string name, int mode)
 
     t = tex_from_surface(surface, file, name, mode);
 
-    LOG("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
+    DBG4("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
 
     return (t);
 }
@@ -393,7 +393,7 @@ void tex_load (Texp *tex,
         ERR("Tex already eciste '%s'", name.c_str());
     }
 
-    LOG("Loading texture '%s', '%s'", file.c_str(), name.c_str());
+    DBG4("Loading texture '%s', '%s'", file.c_str(), name.c_str());
     if (file == "") {
         if (name == "") {
             ERR("No file for tex");
@@ -402,7 +402,7 @@ void tex_load (Texp *tex,
         }
     }
 
-    LOG("- create textures '%s', '%s'", file.c_str(), name.c_str());
+    DBG4("- create textures '%s', '%s'", file.c_str(), name.c_str());
     SDL_Surface *surface = 0;
     SDL_Surface *surface_black_and_white = 0;
 
@@ -422,7 +422,7 @@ void tex_load (Texp *tex,
     *tex_black_and_white = p.first;
     *tex_mask = p.second;
 
-    LOG("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
+    DBG4("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
 }
 
 //
@@ -454,7 +454,7 @@ Texp tex_from_surface (SDL_Surface *surface,
         ERR("Could not make surface from file, '%s'", file.c_str());
     }
 
-    DBG("Texture: '%s', %dx%d", file.c_str(), surface->w, surface->h);
+    DBG4("Texture: '%s', %dx%d", file.c_str(), surface->w, surface->h);
 
     //
     // Get the number of channels in the SDL surface

@@ -23,7 +23,7 @@ std::list<WidPopup *> wid_thing_info_window;
 
 void wid_thing_info_fini (void)
 {_
-    LOG("Destroy wid thing info");
+    DBG3("Destroy wid thing info");
 _
     if (game->bag_primary) {
         delete game->bag_primary;
@@ -300,7 +300,7 @@ void Game::wid_thing_info_clear_popup (void)
 
 void Game::wid_thing_info_create (Thingp t, bool when_hovering_over)
 {_
-    LOG("Create wid thing info for %s", t->to_string().c_str());
+    DBG3("Create wid thing info for %s", t->to_string().c_str());
 _
     if (game->request_remake_inventory) {
         //
@@ -437,17 +437,17 @@ void Game::wid_thing_info_create_list (const std::vector<Thingp> &ts)
         //
         // Continue
         //
-        LOG("Remake thing info from list");
+        DBG3("Remake thing info from list");
     } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
         ERR("Ignore, already collecting items");
         return;
     } else if (game->state == Game::STATE_MOVING_ITEMS) {
-        LOG("Ignore, already moving items");
+        DBG3("Ignore, already moving items");
         return;
     }
 _
     if (wid_console_window && wid_console_window->visible) {
-        LOG("No; console visible");
+        DBG3("No; console visible");
         return;
     }
 
@@ -471,9 +471,9 @@ _
     if (ts.size() == 1) {
         auto o = game->current_wid_thing_info;
         if (o) {
-            LOG("Currently describing %s", o->to_string().c_str());
+            DBG3("Currently describing %s", o->to_string().c_str());
             if (o->is_hidden) {
-                LOG("Currently describing %s; keep it over player", 
+                DBG3("Currently describing %s; keep it over player", 
                     o->to_string().c_str());
                 return;
             }
@@ -484,7 +484,7 @@ _
             //
             if (level->player) {
                 if (o->mid_at == level->player->mid_at) {
-                    LOG("Describing %s; keep it", o->to_string().c_str());
+                    DBG3("Describing %s; keep it", o->to_string().c_str());
                     return;
                 }
             }
@@ -493,15 +493,15 @@ _
         if (wid_thing_info_window.size()) {
             auto o = wid_thing_info_window.front()->t;
             if (o) {
-                LOG("Describing %s", o->to_string().c_str());
+                DBG3("Describing %s", o->to_string().c_str());
                 if (o->is_hidden) {
-                    LOG("Describing %s; keep it over player", o->to_string().c_str());
+                    DBG3("Describing %s; keep it over player", o->to_string().c_str());
                     return;
                 }
 
                 if (level->player) {
                     if (o->mid_at == level->player->mid_at) {
-                        LOG("Describing %s; keep it", o->to_string().c_str());
+                        DBG3("Describing %s; keep it", o->to_string().c_str());
                         return;
                     }
                 }
@@ -572,7 +572,7 @@ _
     }
 
     if (compact) {
-        LOG("Create compact");
+        DBG3("Create compact");
         if (!wid_thing_info_create_popup_compact(ts)) {
             wid_thing_info_fini();
         }

@@ -632,21 +632,14 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     /* uint32_t           sound_volume                 */ in >> bits(my.t.sound_volume                 );
     /* std::string        player name                  */ in >> bits(g_opt_player_name);
 
-    if (my.t.debug_mode) {
-        g_opt_debug5 = false;
-        g_opt_debug4 = false;
-        g_opt_debug3 = true;
-        g_opt_debug2 = true;
-        g_opt_debug1 = true;
-    }
-
-    if (g_opt_nodebug) {
-        g_opt_debug5 = false;
-        g_opt_debug4 = false;
-        g_opt_debug3 = false;
-        g_opt_debug2 = false;
-        g_opt_debug1 = false;
-        g_opt_nodebug = false;
+    if (!g_opt_override_debug_level) {
+        if (my.t.debug_mode) {
+            g_opt_debug5 = false;
+            g_opt_debug4 = false;
+            g_opt_debug3 = true;
+            g_opt_debug2 = true;
+            g_opt_debug1 = true;
+        }
     }
 
     //

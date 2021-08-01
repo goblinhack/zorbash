@@ -161,7 +161,7 @@ void Game::wid_enchant_an_item (void)
 {_
     BOTCON("You lucky thing. Choose an item to enchant.");
 
-    LOG("Thing enchant create");
+    DBG3("Thing enchant create");
     wid_thing_info_fini();
     change_state(Game::STATE_ENCHANTING_ITEMS);
 
