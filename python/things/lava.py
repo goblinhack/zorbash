@@ -26,7 +26,6 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_text_a_or_an("")
     mytp.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto)")
     mytp.set_text_hits("tickles")
-    mytp.set_tick_catches_up_on_attack(True)
     mytp.set_z_depth(zx.MAP_DEPTH_LAVA)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 

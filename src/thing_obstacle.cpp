@@ -221,7 +221,9 @@ bool Thing::ai_obstacle (Thingp it)
     //
     // Allow movement through open doors only
     //
-    if (it->is_movement_blocking_hard()) {
+    if (it->is_brazier() ||
+        it->is_barrel() ||
+        it->is_movement_blocking_hard()) {
         if (is_able_to_walk_through_walls()) {
             return false;
         }

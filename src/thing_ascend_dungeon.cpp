@@ -25,12 +25,14 @@ bool Thing::ascend_dungeon_tick (void)
         dbg("Location check, ascend");
     }
 
+#if 0
     if (get_tick() - get_tick_last_level_change() < 1) {
         if (is_player()) {
             dbg("Location check, ascend, no too soon");
         }
         return false;
     }
+#endif
 
     if (level->world_at.z > 1) {
         if (is_player()) {
@@ -95,7 +97,7 @@ bool Thing::ascend_dungeon (void)
                 is_changing_level = true;
 
                 level_change(l);
-                set_tick_last_level_change(get_tick());
+                set_tick_last_level_change(game->tick_current);
                 move_to_immediately(fpoint(x, y));
                 move_carried_items_immediately();
                 if (is_player()) {

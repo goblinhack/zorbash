@@ -50,7 +50,6 @@ void Thing::update_tick (void)
 {
     set_tick_last_did_something(game->tick_current);
     set_tick_last_location_check(game->tick_current);
-    set_tick(game->tick_current);
 }
 
 void Thing::achieve_goals_in_life (void)
@@ -68,8 +67,7 @@ void Thing::achieve_goals_in_life (void)
         return;
     }
 
-    dbg("Achieve goals at tick %d, game is at tick %u",
-        get_tick(), game->tick_current);
+    dbg("Achieve goals tick %u", game->tick_current);
 
     //
     // Lifespan tick for carried torches must be before is_hidden check
@@ -101,12 +99,12 @@ void Thing::achieve_goals_in_life (void)
     //
     if (!std::empty(get_on_idle_dice_str())) {
         auto roll = get_idle_tick();
-        if (get_tick() - get_tick_last_did_something() >= (unsigned int)roll) {
+        if (game->tick_current - get_tick_last_did_something() >= (unsigned int)roll) {
             auto d = get_on_idle_dice();
             py_call_void_fn(d.python_mod.c_str(),
                             d.python_func.c_str(),
                             id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
-            set_tick_last_did_something(get_tick());
+            set_tick_last_did_something(game->tick_current);
         }
     }
 
@@ -124,12 +122,6 @@ void Thing::achieve_goals_in_life (void)
         if (cursor_path_pop_next_and_move()) {
             dbg("Pop next move");
             return;
-        }
-    }
-
-    if (monstp->move_path.empty()) {
-        if (is_player()) {
-            robot_change_state(ROBOT_STATE_IDLE, "move path is empty");
         }
     }
 
@@ -170,12 +162,17 @@ void Thing::achieve_goals_in_life (void)
         dbg("Get next hop");
         ai_get_next_hop();
     }
+
+    if (monstp->move_path.empty()) {
+        if (is_player()) {
+            robot_change_state(ROBOT_STATE_IDLE, "move path is empty");
+        }
+    }
 }
 
 void Thing::achieve_goals_in_death (void)
 {_
-    dbg("Achieve death goals at tick %d, tick %u",
-        get_tick(), game->tick_current);
+    dbg("Achieve death goals at tick %u", game->tick_current);
 
     resurrect_tick();
 
@@ -222,12 +219,9 @@ _
             //
             // Tick on player move/change of the current tick
             //
-            auto tick = get_tick();
-            if (tick < game->tick_current) {
-                achieve_goals_in_death();
-                incr_tick();
-            }
+            achieve_goals_in_death();
         }
+
         if (unlikely(g_opt_debug4)) {
             dbg("Tick; is dead");
         }
@@ -242,28 +236,9 @@ _
     }
 
     //
-    // If in robot mode, get the next move.
-    //
-    if (is_player() && game->robot_mode) {
-        //
-        // Stop the robot racing around too fast.
-        //
-        if (is_moving) {
-            if (unlikely(g_opt_debug4)) {
-                dbg("Tick; robot is moving, wait");
-            }
-            return;
-        }
-    }
-
-    //
     // Tick on player move/change of the current tick
     //
-    auto tick = get_tick();
-    if (tick < game->tick_current) {
-        achieve_goals_in_life();
-        incr_tick();
-    }
+    achieve_goals_in_life();
 
     //
     // Could be dead here. Sadly.

@@ -198,16 +198,22 @@ void Level::display_lasers (void)
                     continue;
                 }
 
+                Tilep tile;
+
                 if (animstep == 1) {
-                    tile_blit(get(p.tiles, frame, 0),
-                              old_p1, p1, old_p2, p2);
+                    tile = get(p.tiles, frame, 0);
                 } else if (animstep == steps) {
-                    tile_blit(get(p.tiles, frame, Laser::max_frames - 1), 
-                              old_p1, p1, old_p2, p2);
+                    tile = get(p.tiles, frame, Laser::max_frames - 1);
                 } else {
-                    tile_blit(get(p.tiles, frame, animstep), 
-                              old_p1, p1, old_p2, p2);
+                    tile = get(p.tiles, frame, animstep);
                 }
+
+                if (!tile) {
+                    t->err("No tile for laser, animstep %d, frame %d, steps %d",
+                           animstep, frame, steps);
+                    break;
+                }
+                tile_blit(tile, old_p1, p1, old_p2, p2);
             }
 
             return false;

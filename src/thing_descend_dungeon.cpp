@@ -29,12 +29,14 @@ bool Thing::descend_dungeon_tick (void)
         dbg("Location check, descend");
     }
 
+#if 0
     if (get_tick() - get_tick_last_level_change() < 1) {
         if (is_player()) {
             dbg("Location check, descend, no too soon");
         }
         return false;
     }
+#endif
 
     if (is_player()) {
         level->timestamp_fade_out_begin = time_get_time_ms_cached();
@@ -103,7 +105,7 @@ bool Thing::descend_dungeon (void)
 
                 dbg("Level change");
                 level_change(l);
-                set_tick_last_level_change(get_tick());
+                set_tick_last_level_change(game->tick_current);
 
                 dbg("Level change move to destination");
                 move_to_immediately(fpoint(x, y));

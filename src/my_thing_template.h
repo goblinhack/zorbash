@@ -377,7 +377,6 @@ private:
     int _stats12 {};
     int _stats17 {};
     int _throw_distance {};
-    int _tick_catches_up_on_attack {};
     int _weapon_damage {};
     int _weapon_use_distance {};
     std::string _damage_bite_dice_str;
@@ -840,7 +839,6 @@ public:
     int stats12(void) const;
     int stats17(void) const;
     int throw_distance(void) const;
-    int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
     int weapon_use_distance(void) const;
     std::string text_a_or_an(void) const;
@@ -1205,7 +1203,6 @@ public:
     void set_text_title(const std::string &);
     void set_text_unused(const std::string &);
     void set_throw_distance(int);
-    void set_tick_catches_up_on_attack(int);
     void set_weapon_carry_anim(const std::string &);
     void set_weapon_damage(int);
     void set_weapon_use_distance(int);

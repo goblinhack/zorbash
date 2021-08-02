@@ -25,6 +25,7 @@ bool Thing::ascend_sewer_tick (void)
         dbg("Location check, ascend sewer");
     }
 
+#if 0
     if (get_tick() - get_tick_last_level_change() < 1) {
         if (is_player()) {
             dbg("Location check, ascend sewer, no too soon");
@@ -32,6 +33,7 @@ bool Thing::ascend_sewer_tick (void)
 
         return false;
     }
+#endif
 
     if (level->world_at.z > 1) {
         if (is_player()) {
@@ -92,7 +94,7 @@ bool Thing::ascend_sewer (void)
     is_changing_level = true;
 
     level_change(l);
-    set_tick_last_level_change(get_tick());
+    set_tick_last_level_change(game->tick_current);
     move_to_immediately(fpoint(x, y));
     move_carried_items_immediately();
     if (is_player()) {

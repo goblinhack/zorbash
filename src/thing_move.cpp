@@ -338,7 +338,6 @@ bool Thing::move (fpoint future_pos,
     auto t = nearby_most_dangerous_thing_get();
     if (t) {
         auto free_attack =
-             (t->get_tick() < game->tick_current) &&
              (((t->mid_at.x >= mid_at.x) && left) ||
               ((t->mid_at.x <= mid_at.x) && right) ||
               ((t->mid_at.y >= mid_at.y) && up) ||
@@ -351,7 +350,7 @@ bool Thing::move (fpoint future_pos,
                 // Too noisy?
                 //
                 if (is_player()) {
-                    std::string s = t->text_The() + " attacks as you move";
+                    std::string s = t->text_The() + " free attacks as you move";
                     TOPCON("%s.", s.c_str());
                 }
             }
@@ -402,6 +401,7 @@ void Thing::update_interpolated_position (void)
             // Stops monsts falling over the floor tiles
             //
             z_depth = MAP_DEPTH_FLOOR;
+topcon("Z");
         }
     } else {
         z_depth = tpp->z_depth;

@@ -58,23 +58,6 @@ int Thing::item_count_excluding_charges (Tpp tp)
     return count;
 }
 
-//
-// Used so that only one torch that is carried ticks in lifespan
-//
-void Thing::update_all_carried_items_tick (Tpp tp)
-{_
-    for (auto oid : monstp->carrying) {
-        auto o = level->thing_find(oid);
-        if (!o) {
-            continue;
-        }
-
-        if (o->tp() == tp) {
-            o->update_tick();
-        }
-    }
-}
-
 void Thing::move_carried_items (void)
 {_
     //

@@ -3,6 +3,8 @@
 // See the README.md file for license info.
 //
 
+#include "my_game.h"
+#include "my_main.h"
 #include "my_sys.h"
 #include "my_level.h"
 #include "my_depth.h"
@@ -60,7 +62,7 @@ std::string Thing::to_string (void) const
                                is_waiting_to_descend_dungeon ? "/des-dung" : "",
                                is_waiting_to_descend_sewer   ? "/des-sewer" : "",
                                is_waiting_to_ascend_sewer    ? "/asc-sewer" : "",
-                               get_tick_const(),
+                               game->tick_current,
                                mid_at.x, mid_at.y));
     } else {_
         return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s%s%s @%g,%g)",

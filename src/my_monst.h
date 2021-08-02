@@ -133,10 +133,6 @@ public:
     timestamp_t  timestamp_move_end {};
     timestamp_t  timestamp_sleep_end {};
     //
-    // Current tick compared to the game. Increments on move completion.
-    //
-    uint32_t     tick = {};
-    //
     // Used for calling on_idle()
     //
     uint32_t     tick_last_did_something {};

@@ -285,11 +285,7 @@ public:
             auto t = i->second;                                     \
             i++;                                                    \
             if (t->is_hidden) {                                     \
-                /*                                                  \
-                 * Catch up on game ticks if carried                \
-                 */                                                 \
                 t->set_tick_last_did_something(game->tick_current); \
-                t->set_tick(game->tick_current);                    \
                 continue;                                           \
             }                                                       \
                                                                     \

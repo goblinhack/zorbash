@@ -138,8 +138,6 @@ _
     // Start off up to data with the player
     //
     if (is_active()) {
-        set_tick(game->tick_current);
-
         //
         // Newly spawned things, don't make them do something immediately
         // This can lead to recursion

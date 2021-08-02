@@ -148,7 +148,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t  timestamp_move_begin      */ in >> bits(T); my.t->timestamp_move_begin = load(T);
     /* timestamp_t  timestamp_move_end        */ in >> bits(T); my.t->timestamp_move_end = load(T);
     /* timestamp_t  timestamp_sleep_end       */ in >> bits(T); my.t->timestamp_sleep_end = load(T);
-    /* uint32_t     tick                      */ in >> bits(my.t->tick);
     /* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_location_check  */ in >> bits(my.t->tick_last_location_check);
     /* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);
@@ -698,6 +697,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* point              minimap_over                 */ in >> bits(my.t.minimap_over);
     /* int                seed                         */ in >> bits(my.t.seed);
     /* std::string        seed_name                    */ in >> bits(my.t.seed_name);
+    /* std::string        tick_requested               */ in >> bits(my.t.tick_requested);
     /* point3d            current_level                */ in >> bits(my.t.current_level);
     /* uint32_t           fps_value                    */ in >> bits(my.t.fps_value);
     /* uint32_t           inventory_highlight_slot     */ in >> bits(my.t.inventory_highlight_slot);

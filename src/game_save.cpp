@@ -122,7 +122,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t  timestamp_move_begin      */ out << bits(my.t->timestamp_move_begin);
     /* timestamp_t  timestamp_move_end        */ out << bits(my.t->timestamp_move_end);
     /* timestamp_t  timestamp_sleep_end       */ out << bits(my.t->timestamp_sleep_end);
-    /* uint32_t     tick                      */ out << bits(my.t->tick);
     /* uint32_t     tick_last_did_something   */ out << bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_location_check  */ out << bits(my.t->tick_last_location_check);
     /* uint32_t     tick_last_escape          */ out << bits(my.t->tick_last_escape);
@@ -554,6 +553,7 @@ std::ostream& operator<<(std::ostream &out,
     /* point              minimap_over                 */ out << bits(my.t.minimap_over);
     /* int                seed                         */ out << bits(my.t.seed);
     /* std::string        seed_name                    */ out << bits(my.t.seed_name);
+    /* std::string        tick_requested               */ out << bits(my.t.tick_requested);
     /* point3d            current_level                */ out << bits(my.t.current_level);
     /* uint32_t           fps_value                    */ out << bits(my.t.fps_value);
     /* uint32_t           inventory_highlight_slot     */ out << bits(my.t.inventory_highlight_slot);

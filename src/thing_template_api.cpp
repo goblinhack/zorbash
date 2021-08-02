@@ -410,7 +410,6 @@ int Tp::stats11(void) const                                          { return _s
 int Tp::stats12(void) const                                          { return _stats12; }
 int Tp::stats17(void) const                                          { return _stats17; }
 int Tp::throw_distance(void) const                                   { return _throw_distance; }
-int Tp::tick_catches_up_on_attack(void) const                        { return _tick_catches_up_on_attack; }
 int Tp::weapon_damage(void) const                                    { return _weapon_damage; }
 int Tp::weapon_use_distance(void) const                              { return _weapon_use_distance; }
 
@@ -767,7 +766,6 @@ void Tp::set_text_skill(const std::string &v)                        { _text_ski
 void Tp::set_text_title(const std::string &v)                        { _text_title = v; }
 void Tp::set_text_unused(const std::string &v)                       { _text_unused = v; }
 void Tp::set_throw_distance(int v)                                   { _throw_distance = v; }
-void Tp::set_tick_catches_up_on_attack(int v)                        { _tick_catches_up_on_attack = v; }
 void Tp::set_weapon_carry_anim(const std::string &v)                 { _weapon_carry_anim = v; }
 void Tp::set_weapon_damage(int v)                                    { _weapon_damage = v; }
 void Tp::set_weapon_use_distance(int v)                              { _weapon_use_distance = v; }

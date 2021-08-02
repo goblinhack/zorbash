@@ -939,7 +939,6 @@ public:
     int set_stat_strength(int);
     int set_throw_distance(int);
     int skill_enchant_count(const uint32_t slot);
-    int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
     int weapon_use_distance(void) const;
     point dir_to_direction() const;
@@ -1106,15 +1105,11 @@ public:
     uint32_t decr_tick_last_location_check(void);
     uint32_t decr_tick_resurrect_when(int);
     uint32_t decr_tick_resurrect_when(void);
-    uint32_t decr_tick(uint32_t);
-    uint32_t decr_tick(void);
-    uint32_t get_tick_const(void) const;
     uint32_t get_tick_last_did_something(void) const;
     uint32_t get_tick_last_escape(void) const;
     uint32_t get_tick_last_level_change(void) const;
     uint32_t get_tick_last_location_check(void) const;
     uint32_t get_tick_resurrect_when(void) const;
-    uint32_t get_tick(void);
     uint32_t incr_tick_last_did_something(uint32_t);
     uint32_t incr_tick_last_did_something(void);
     uint32_t incr_tick_last_escape(uint32_t);
@@ -1125,14 +1120,11 @@ public:
     uint32_t incr_tick_last_location_check(void);
     uint32_t incr_tick_resurrect_when(int);
     uint32_t incr_tick_resurrect_when(void);
-    uint32_t incr_tick(uint32_t);
-    uint32_t incr_tick(void);
     uint32_t set_tick_last_did_something(uint32_t);
     uint32_t set_tick_last_escape(uint32_t);
     uint32_t set_tick_last_level_change(uint32_t);
     uint32_t set_tick_last_location_check(uint32_t);
     uint32_t set_tick_resurrect_when(int);
-    uint32_t set_tick(uint32_t);
     uint8_t blit_begin_reflection_submerged(void) const;
     uint8_t blit_begin_submerged(void) const;
     uint8_t is_dir_bl(void) const;
@@ -1315,7 +1307,6 @@ public:
     void unleash_spawners_things(void);
     void unset_on_fire(void);
     void unwield(const char *why);
-    void update_all_carried_items_tick(Tpp);
     void update_all(void);
     void update_interpolated_position(void);
     void update_light(void);

@@ -129,10 +129,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         return;
     }
 
-    if (player->is_moving) {
-        return;
-    }
-
     if (state[game->config.key_move_left]) {
         left = true;
     }
@@ -295,20 +291,11 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                 continue;
             }
 
-            if (t->get_tick() < game->tick_current - 1) {
-                if (unlikely(g_opt_debug3)) {
-                    t->log("Player move delayed due to monst tick lagging (%d is hehind %d)",
-                           t->get_tick(), game->tick_current - 1);
-                }
-                wait = true;
-                break;
-            }
-
             if (t->get_timestamp_move_begin()) {
                 int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
-                if (time_left > 10) {
+                if (time_left > 20) {
                     if (unlikely(g_opt_debug3)) {
-                        t->log("Player move delayed due to monst moving (%d ms left)",
+                        t->con("Player move delayed due to monst moving (%d ms left)",
                                t->get_timestamp_move_end() - time_get_time_ms_cached());
                     }
                     wait = true;
@@ -320,12 +307,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         if (wait) {
             return;
         }
-
-        //
-        // This is a bit of a hack; but the tick is almost done and we
-        // want the game to be smooth.
-        //
-        game->tick_end();
     }
 
     if (jump) {

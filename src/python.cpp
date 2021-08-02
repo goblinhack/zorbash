@@ -1649,7 +1649,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(text_title)
     TP_SET_DECL(text_unused)
     TP_SET_DECL(throw_distance)
-    TP_SET_DECL(tick_catches_up_on_attack)
     TP_SET_DECL(tile)
     TP_SET_DECL(tl1_tile)
     TP_SET_DECL(tl2_tile)

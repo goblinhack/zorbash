@@ -329,7 +329,6 @@ int Thing::normal_placement_rules(void) const                           {_ retur
 int Thing::on_death_drop_all_items(void) const                          {_ return (tp()->on_death_drop_all_items()); }
 int Thing::on_death_is_open(void) const                                 {_ return (tp()->on_death_is_open()); }
 int Thing::range_max(void) const                                        {_ return (tp()->range_max()); }
-int Thing::tick_catches_up_on_attack(void) const                        {_ return (tp()->tick_catches_up_on_attack()); }
 int Thing::weapon_damage(void) const                                    {_ return (tp()->weapon_damage()); }
 int Thing::weapon_use_distance(void) const                              {_ return (tp()->weapon_use_distance()); }
 
@@ -988,69 +987,6 @@ int Thing::incr_keys (void)
 //con("%s", __FUNCTION__);
     auto n = (monstp->keys++);
     return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// tick
-////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick (void)
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->tick);
-    } else {
-        return (0);
-    }
-}
-
-uint32_t Thing::get_tick_const (void) const
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->tick);
-    } else {
-        return (0);
-    }
-}
-
-uint32_t Thing::set_tick (uint32_t v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    monstp->tick = v;
-    return (monstp->tick);
-}
-
-uint32_t Thing::decr_tick (uint32_t v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    monstp->tick -= v;
-    return (monstp->tick);
-}
-
-uint32_t Thing::incr_tick (uint32_t v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    monstp->tick += v;
-    return (monstp->tick);
-}
-
-uint32_t Thing::decr_tick (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    monstp->tick--;
-    return (monstp->tick);
-}
-
-uint32_t Thing::incr_tick (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    monstp->tick++;
-    return (monstp->tick);
 }
 
 ////////////////////////////////////////////////////////////////////////////

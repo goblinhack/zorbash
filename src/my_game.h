@@ -213,6 +213,7 @@ public:
     fpoint             mouse_over;          // Mouse cursor
     point              minimap_over;        // Which tile in the minimap
     int                seed {};             // All randomness jumps off of this
+    std::string        tick_requested {};   // Something has requested a game tick
     std::string        seed_name {};        // Human readable version of the above
     point3d            current_level;       // Where we are in the world.
     uint32_t           fps_value = {};      // Current framerate

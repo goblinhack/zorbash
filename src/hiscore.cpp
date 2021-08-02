@@ -119,6 +119,16 @@ const char *HiScores::place_str (Thingp player)
         "eighth",
         "nineth",
         "tenth",
+        "11th",
+        "12th",
+        "13th",
+        "14th",
+        "15th",
+        "16th",
+        "17th",
+        "18th",
+        "19th",
+        "20th",
     };
 
     if (!player->get_score()) {

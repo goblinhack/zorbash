@@ -483,14 +483,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    //
-    // Don't have things like lava doing catchup ticks when you
-    // run around and then stop on top of lava!
-    //
-    if (real_hitter->tick_catches_up_on_attack()) {
-        real_hitter->set_tick_last_did_something(game->tick_current);
-        real_hitter->set_tick(game->tick_current);
-    }
+    real_hitter->set_tick_last_did_something(game->tick_current);
 
     //
     // Blood splat

@@ -58,17 +58,6 @@ void Thing::lifespan_tick (void)
 
     decr_lifespan();
 
-    //
-    // Used so that only one torch that is carried ticks in lifespan
-    //
-    auto tpp = tp();
-    if (owner) {
-        if (owner->item_count_excluding_charges(tpp) > 1) {
-            owner->update_all_carried_items_tick(tpp);
-            decr_tick();
-        }
-    }
-
     if (get_lifespan()) {
         return;
     }
@@ -86,7 +75,7 @@ void Thing::lifespan_tick (void)
         if (get_charge_count()) {
             dbg("Lifespan expired (but has %d charges left)", get_charge_count());
             game->request_remake_inventory = true;
-            set_lifespan(tpp->lifespan());
+            set_lifespan(tp()->lifespan());
             return;
         }
     }

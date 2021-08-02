@@ -831,7 +831,11 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
             if ((x == mid_at.x) && (y == mid_at.y)) {
-                printf("*");
+                if (level->is_lit_ever(x, y)) {
+                    printf("*");
+                } else {
+                    printf("o");
+                }
                 continue;
             }
             for (auto p : can_reach_cands) {
@@ -850,7 +854,11 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
                 if (level->is_movement_blocking_hard(x, y)) {
                     printf("X");
                 } else {
-                    printf(".");
+                    if (level->is_lit_ever(x, y)) {
+                        printf("l");
+                    } else {
+                        printf(".");
+                    }
                 }
             }
 next:

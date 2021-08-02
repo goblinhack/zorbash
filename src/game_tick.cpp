@@ -10,9 +10,18 @@
 #include "my_random.h"
 #include "my_dungeon.h"
 #include "my_ptrcheck.h"
+#include "my_wid_actionbar.h"
 
 void Game::tick_begin (const std::string &why)
 {_
+    tick_requested = why;
+}
+
+void Game::tick_begin_now (void)
+{_
+    std::string why = tick_requested;
+    why = tick_requested = "";
+
     //
     // Move when all things are done moving
     //
@@ -22,10 +31,10 @@ void Game::tick_begin (const std::string &why)
     // Helps to maintain randomness if the user say scrolls around the level we
     // do not want that to change the randomness of the monsters.
     //
-    // pcq_srand(game->tick_current);
+    pcq_srand(game->tick_current);
 
     if (game->robot_mode) {
-        game->current_move_speed = game->fast_move_speed * 2;
+        game->current_move_speed = game->fast_move_speed / 2;
     } else if (!game->cursor_move_path.empty()) {
         game->current_move_speed = game->fast_move_speed;
     } else {

@@ -25,14 +25,14 @@ bool Thing::try_to_escape (void)
         // Don't try and escape too often else the player can never kill the
         // monst!
         //
-        if (get_tick() - get_tick_last_escape() < 20) {
+        if (game->tick_current - get_tick_last_escape() < 20) {
             return false;
         }
 
         if ((int)pcq_random_range(0, 1000) < 
                 tp()->is_jumper_on_low_hp_chance_d1000()) {
             if (try_to_jump_away_from_player()) {
-                set_tick_last_escape(get_tick());
+                set_tick_last_escape(game->tick_current);
                 return true;
             }
         }
