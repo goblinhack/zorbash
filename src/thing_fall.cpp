@@ -242,11 +242,11 @@ _
             next_level->is_fire(x, y) ||
             next_level->is_lava(x, y)) {
 
-            FOR_ALL_THINGS(next_level, t, x, y) {
-                if (unlikely(g_opt_debug1)) {
+            if (unlikely(g_opt_debug1)) {
+                FOR_ALL_THINGS(next_level, t, x, y) {
                     t->log("Landed under thing on new level");
-                }
-            } FOR_ALL_THINGS_END()
+                } FOR_ALL_THINGS_END()
+            }
 
             if (is_player()) {
                 game->level = next_level;
