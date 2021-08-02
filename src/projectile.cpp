@@ -87,7 +87,7 @@ void Level::new_projectile (ThingId id, point start, point stop, uint32_t dur)
                 return;
             }
             t->has_projectile = true;
-            t->log("new internal projectile");
+            t->log("New internal projectile");
         }
     }
 

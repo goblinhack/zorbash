@@ -97,7 +97,7 @@ void Level::new_laser (ThingId id, point start, point stop, uint32_t dur)
                 return;
             }
             t->has_laser = true;
-            t->log("new internal laser");
+            t->log("New internal laser");
         }
     }
 

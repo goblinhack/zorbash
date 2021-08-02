@@ -866,10 +866,6 @@ void Thing::blit_internal (int fbo,
         c.a = fade;
     }
 
-    if (unlikely(g_opt_debug3)) {
-        c.a = 255;
-    }
-
     glcolor(c);
 
     auto wobble = update_wobble();
