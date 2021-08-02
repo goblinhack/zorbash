@@ -78,7 +78,7 @@ bool Thing::try_to_jump (point to)
     //
     if (!level->is_lit_currently(x, y) && !level->is_lit_ever(x, y)) {_
         if (unlikely(g_opt_debug2)) {
-            dbg("No, is not lit or visited");
+            log("No, is not lit or visited");
         }
 
         if (is_player()) {

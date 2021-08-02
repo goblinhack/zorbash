@@ -132,10 +132,8 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
                             sound->second->chunk, 
                             0 /* loops */) == -1) {
 
-            if (unlikely(g_opt_debug3)) {
-                dbg2("Cannot play sound %s on channel %d, something else playing", 
-                     alias.c_str(), channel);
-            }
+            dbg2("Cannot play sound %s on channel %d, something else playing", 
+                 alias.c_str(), channel);
             return false;
         }
     } else if (Mix_PlayChannel(channel,

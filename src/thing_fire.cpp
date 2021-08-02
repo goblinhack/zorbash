@@ -22,7 +22,7 @@ void Thing::fire_tick (void)
         //
     } else if (!hates_fire()) {
         if (unlikely(g_opt_debug4)) {
-            dbg("No, is not fire avoider");
+            log("No, is not fire avoider");
         }
         return;
     }

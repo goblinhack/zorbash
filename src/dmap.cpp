@@ -248,20 +248,7 @@ void dmap_process (Dmap *D, point tl, point br)
 
 void dmap_process (Dmap *D)
 {
-    //
-    // Sanity check the dmap does not take too much time
-    //
-    if (unlikely(g_opt_debug1)) {
-        auto before = SDL_GetTicks();
-        dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
-        auto after = SDL_GetTicks();
-        if (after - before > 50) {
-            ERR("DMAP is taking too long, %d ms", after - before);
-            dmap_print(D);
-        }
-    } else {
-        dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
-    }
+    dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
 }
 
 static bool is_movement_blocking_hard_at (const Dmap *D, int x, int y)

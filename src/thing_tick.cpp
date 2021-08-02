@@ -223,14 +223,14 @@ _
         }
 
         if (unlikely(g_opt_debug4)) {
-            dbg("Tick; is dead");
+            log("Tick; is dead");
         }
         return;
     }
 
     if (unlikely(is_dead)) {
         if (unlikely(g_opt_debug4)) {
-            dbg("Tick; died");
+            log("Tick; died");
         }
         return;
     }
