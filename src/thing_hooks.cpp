@@ -203,7 +203,7 @@ void Thing::remove_all_references ()
         }
     }
 
-    if (g_opt_debug4) {
+    if (unlikely(g_opt_debug4)) {
         for (auto p : level->all_things) {
             auto t = p.second;
             if (!t->monstp) {

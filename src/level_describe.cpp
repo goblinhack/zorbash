@@ -55,12 +55,12 @@ _
     FOR_ALL_ACTIVE_THINGS(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
-        if (g_opt_debug3) {
+        if (unlikely(g_opt_debug3)) {
             t->log("Active thing cand for describe");
         }
 _
         if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, not lit or visited");
             }
             continue;
@@ -70,7 +70,7 @@ _
             t->is_player() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, boring");
             }
             continue;
@@ -80,14 +80,14 @@ _
         // Dead monst clog up the screen
         //
         if (t->is_monst() && t->is_dead) {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, monst or dead");
             }
             continue;
         }
 
         if (t->get_immediate_owner()) {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, has owner");
             }
             continue;
@@ -97,18 +97,18 @@ _
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
 
-                if (g_opt_debug3) {
+                if (unlikely(g_opt_debug3)) {
                     t->log("Add to describe");
                 }
                 got_one_with_long_text |= !t->long_text_description().empty();
                 push_back_if_unique(hover_over_things, t);
             } else {
-                if (g_opt_debug3) {
+                if (unlikely(g_opt_debug3)) {
                     t->log("Ignore for describe, no text");
                 }
             }
         } else {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, not described");
             }
         }
@@ -121,12 +121,12 @@ _
     FOR_ALL_INTERESTING_THINGS(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
-        if (g_opt_debug3) {
+        if (unlikely(g_opt_debug3)) {
             t->log("Interesting thing cand for describe");
         }
 _
         if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, not lit or visited");
             }
             continue;
@@ -136,7 +136,7 @@ _
             t->is_player() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, boring");
             }
             continue;
@@ -146,14 +146,14 @@ _
         // Dead monst clog up the screen
         //
         if (t->is_monst() && t->is_dead) {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, monst or dead");
             }
             continue;
         }
 
         if (t->get_immediate_owner()) {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, has owner");
             }
             continue;
@@ -162,18 +162,18 @@ _
         if (t->is_described_when_hovering_over()) {
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
-                if (g_opt_debug3) {
+                if (unlikely(g_opt_debug3)) {
                     t->log("Add to describe");
                 }
                 got_one_with_long_text |= !t->long_text_description().empty();
                 push_back_if_unique(hover_over_things, t);
             } else {
-                if (g_opt_debug3) {
+                if (unlikely(g_opt_debug3)) {
                     t->log("Ignore for describe, no text");
                 }
             }
         } else {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, not described");
             }
         }
@@ -186,12 +186,12 @@ _
     FOR_ALL_THINGS(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
-        if (g_opt_debug3) {
+        if (unlikely(g_opt_debug3)) {
             t->log("All thing cand for describe");
         }
 _
         if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, not lit or visited");
             }
             continue;
@@ -201,7 +201,7 @@ _
             t->is_cursor() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, boring");
             }
             continue;
@@ -212,7 +212,7 @@ _
         //
         if (hover_over_things.size()) {
             if(t->is_player()) {
-                if (g_opt_debug3) {
+                if (unlikely(g_opt_debug3)) {
                     t->log("Ignore for describe, showing something better");
                 }
                 continue;
@@ -222,7 +222,7 @@ _
             // Dead monst clog up the screen. Unless we have nothing else.
             //
             if (t->is_monst() && t->is_dead) {
-                if (g_opt_debug3) {
+                if (unlikely(g_opt_debug3)) {
                     t->log("Ignore for describe, showing something better");
                 }
                 continue;
@@ -233,17 +233,17 @@ _
             if (!t->text_description().empty() ||
                 !t->long_text_description().empty()) {
                 got_one_with_long_text |= !t->long_text_description().empty();
-                if (g_opt_debug3) {
+                if (unlikely(g_opt_debug3)) {
                     t->log("Add to describe");
                 }
                 push_back_if_unique(hover_over_things, t);
             } else {
-                if (g_opt_debug3) {
+                if (unlikely(g_opt_debug3)) {
                     t->log("Ignore for describe, no text");
                 }
             }
         } else {
-            if (g_opt_debug3) {
+            if (unlikely(g_opt_debug3)) {
                 t->log("Ignore for describe, not described");
             }
         }
