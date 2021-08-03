@@ -154,6 +154,7 @@ def tp_init(name, text_name):
     mytp.set_tile("skeleton_fire.3", is_dir_none=True, delay_ms=delay)
     mytp.set_tile("skeleton_fire.4", is_dir_none=True, delay_ms=delay)
 
+    delay = 20
     mytp.set_tile("skeleton_fire.1.dead", is_dead=True, delay_ms=delay)
     mytp.set_tile("skeleton_fire.2.dead", is_dead=True, delay_ms=delay)
     mytp.set_tile("skeleton_fire.3.dead", is_dead=True, delay_ms=delay)

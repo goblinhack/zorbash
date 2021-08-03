@@ -113,6 +113,7 @@ void Game::tick_end (void)
         FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {
             h += (int)t->mid_at.x;
             h += (int)t->mid_at.y;
+            t->con("THING AT");
         } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
         CON("TICK %d hash %u rand %d", tick_current, h, pcq_random_range(1, 10000));
 #endif

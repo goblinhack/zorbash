@@ -132,6 +132,7 @@ def tp_init(name, text_name):
     mytp.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".4", is_dir_none=True, delay_ms=delay)
 
+    delay = 20
     mytp.set_tile(tile=name + ".1.dead", is_dead=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".2.dead", is_dead=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".3.dead", is_dead=True, delay_ms=delay)

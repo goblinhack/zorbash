@@ -225,8 +225,8 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr62() &&                                         (what == "is_rrr62"))                                         { return true; }
     if (is_rrr63() &&                                         (what == "is_rrr63"))                                         { return true; }
     if (is_rrr64() &&                                         (what == "is_rrr64"))                                         { return true; }
-    if (is_rrr65() &&                                         (what == "is_rrr65"))                                         { return true; }
-    if (is_rrr66() &&                                         (what == "is_rrr66"))                                         { return true; }
+    if (is_alive_on_end_of_anim() &&                                         (what == "is_alive_on_end_of_anim"))                                         { return true; }
+    if (is_dead_on_end_of_anim() &&                                         (what == "is_dead_on_end_of_anim"))                                         { return true; }
     if (ai_enemy_memory() &&                                         (what == "ai_enemy_memory"))                                         { return true; }
     if (is_debug_path() &&                                         (what == "is_debug_path"))                                         { return true; }
     if (is_key_collector() &&                                         (what == "is_key_collector"))                                         { return true; }
@@ -487,8 +487,8 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr62")                                         { return &Thing::is_rrr62; }
     if (what == "is_rrr63")                                         { return &Thing::is_rrr63; }
     if (what == "is_rrr64")                                         { return &Thing::is_rrr64; }
-    if (what == "is_rrr65")                                         { return &Thing::is_rrr65; }
-    if (what == "is_rrr66")                                         { return &Thing::is_rrr66; }
+    if (what == "is_alive_on_end_of_anim")                                         { return &Thing::is_alive_on_end_of_anim; }
+    if (what == "is_dead_on_end_of_anim")                                         { return &Thing::is_dead_on_end_of_anim; }
     if (what == "ai_enemy_memory")                                         { return &Thing::ai_enemy_memory; }
     if (what == "is_debug_path")                                         { return &Thing::is_debug_path; }
     if (what == "is_key_collector")                                         { return &Thing::is_key_collector; }

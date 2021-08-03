@@ -575,7 +575,13 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
             tile->is_dead = is_dead;
             tile->is_end_of_anim = is_end_of_anim;
             tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
+            if (is_dead_on_end_of_anim) {
+                tp->set_is_dead_on_end_of_anim(true);
+            }
             tile->is_alive_on_end_of_anim = is_alive_on_end_of_anim;
+            if (is_alive_on_end_of_anim) {
+                tp->set_is_alive_on_end_of_anim(true);
+            }
             tile->is_resurrecting = is_resurrecting;
 
             if (tile->is_hp_25_percent ||
@@ -1409,8 +1415,8 @@ TP_BODY_SET_INT(is_rrr61)
 TP_BODY_SET_INT(is_rrr62)
 TP_BODY_SET_INT(is_rrr63)
 TP_BODY_SET_INT(is_rrr64)
-TP_BODY_SET_INT(is_rrr65)
-TP_BODY_SET_INT(is_rrr66)
+TP_BODY_SET_INT(is_alive_on_end_of_anim)
+TP_BODY_SET_INT(is_dead_on_end_of_anim)
 TP_BODY_SET_INT(ai_enemy_memory)
 TP_BODY_SET_INT(is_debug_path)
 TP_BODY_SET_INT(is_key_collector)

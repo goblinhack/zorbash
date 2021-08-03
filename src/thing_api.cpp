@@ -269,8 +269,8 @@ int Thing::is_rrr61(void) const                                         {_ retur
 int Thing::is_rrr62(void) const                                         {_ return (tp()->is_rrr62()); }
 int Thing::is_rrr63(void) const                                         {_ return (tp()->is_rrr63()); }
 int Thing::is_rrr64(void) const                                         {_ return (tp()->is_rrr64()); }
-int Thing::is_rrr65(void) const                                         {_ return (tp()->is_rrr65()); }
-int Thing::is_rrr66(void) const                                         {_ return (tp()->is_rrr66()); }
+int Thing::is_alive_on_end_of_anim(void) const                                         {_ return (tp()->is_alive_on_end_of_anim()); }
+int Thing::is_dead_on_end_of_anim(void) const                                         {_ return (tp()->is_dead_on_end_of_anim()); }
 int Thing::ai_enemy_memory(void) const                                         {_ return (tp()->ai_enemy_memory()); }
 int Thing::is_debug_path(void) const                                         {_ return (tp()->is_debug_path()); }
 int Thing::is_key_collector(void) const                                         {_ return (tp()->is_key_collector()); }

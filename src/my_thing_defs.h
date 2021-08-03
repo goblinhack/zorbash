@@ -33,6 +33,6 @@
 #define THING_HEALTH_BLOODIED_PCT2 15   // More...
 #define THING_HEALTH_BLOODIED_PCT3 15   // More...
 #define THING_HEALTH_BLOODIED_PCT4 5    // Lots of blood on screen
-#define THING_SLOW_MOVE_SPEED_MS   125
+#define THING_SLOW_MOVE_SPEED_MS   150
 
 #endif

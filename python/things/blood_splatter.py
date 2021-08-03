@@ -9,8 +9,8 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_fall(True)
     mytp.set_is_active(True) # for lifespan tick
     mytp.set_is_blood_splatter(True)
-    mytp.set_is_loggable_for_important_stuff(False)
-    mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_is_loggable_for_important_stuff(True)
+    mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_lifespan_dice("1d10+10")
     mytp.set_text_a_or_an("a")
@@ -18,7 +18,7 @@ def tp_init(name, text_name):
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    delay = 10
+    delay = 5
     mytp.set_tile(tile=name + ".1", delay_ms=delay)
     mytp.set_tile(tile=name + ".2", delay_ms=delay)
     mytp.set_tile(tile=name + ".3", delay_ms=delay)

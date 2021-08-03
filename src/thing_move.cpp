@@ -521,9 +521,17 @@ void Thing::update_pos (fpoint to, bool immediately)
     }
 
     int move_speed = game->get_move_speed();
+
+    auto p = get_top_owner();
+    if (is_player() || (p && p->is_player())) {
+    } else {
+        //move_speed /= 2;
+    }
+
     if (!is_hidden) {
         dbg("Move to %f,%f speed %d", to.x, to.y, move_speed);
     }
+
     level_pop();
     mid_at = to;
     level_push();

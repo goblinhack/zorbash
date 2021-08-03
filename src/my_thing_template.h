@@ -285,8 +285,8 @@ private:
     int _is_rrr62 {};
     int _is_rrr63 {};
     int _is_rrr64 {};
-    int _is_rrr65 {};
-    int _is_rrr66 {};
+    int _is_alive_on_end_of_anim {};
+    int _is_dead_on_end_of_anim {};
     int _ai_enemy_memory {};
     int _is_debug_path {};
     int _is_key_collector {};
@@ -747,8 +747,8 @@ public:
     int is_rrr62(void) const;
     int is_rrr63(void) const;
     int is_rrr64(void) const;
-    int is_rrr65(void) const;
-    int is_rrr66(void) const;
+    int is_alive_on_end_of_anim(void) const;
+    int is_dead_on_end_of_anim(void) const;
     int ai_enemy_memory(void) const;
     int is_debug_path(void) const;
     int is_key_collector(void) const;
@@ -1073,8 +1073,8 @@ public:
     void set_is_rrr62(int);
     void set_is_rrr63(int);
     void set_is_rrr64(int);
-    void set_is_rrr65(int);
-    void set_is_rrr66(int);
+    void set_is_alive_on_end_of_anim(int);
+    void set_is_dead_on_end_of_anim(int);
     void set_ai_enemy_memory(int);
     void set_is_debug_path(int);
     void set_is_key_collector(int);

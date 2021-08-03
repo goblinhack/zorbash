@@ -424,11 +424,11 @@ class Tp:
     def set_is_rrr64(self, value):
         zx.tp_set_is_rrr64(self, value)
 
-    def set_is_rrr65(self, value):
-        zx.tp_set_is_rrr65(self, value)
+    def set_is_alive_on_end_of_anim(self, value):
+        zx.tp_set_is_alive_on_end_of_anim(self, value)
 
-    def set_is_rrr66(self, value):
-        zx.tp_set_is_rrr66(self, value)
+    def set_is_dead_on_end_of_anim(self, value):
+        zx.tp_set_is_dead_on_end_of_anim(self, value)
 
     def set_ai_enemy_memory(self, value):
         zx.tp_set_ai_enemy_memory(self, value)

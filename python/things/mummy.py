@@ -104,6 +104,7 @@ def tp_init(name, text_name):
     mytp.set_tile(tile=name + ".2.100", is_hp_25_percent=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".3.100", is_hp_25_percent=True, delay_ms=delay)
 
+    delay = 20
     mytp.set_tile(tile=name + ".1.dead", is_dead=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".2.dead", is_dead=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".3.dead", is_dead=True, delay_ms=delay)

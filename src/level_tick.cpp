@@ -73,7 +73,28 @@ _
             //
             t->update_interpolated_position();
             if (t->get_timestamp_move_begin()) {
-                game->things_are_moving = true;
+                if (game->robot_mode) {
+                    //
+                    // If in robot mode, always wait
+                    //
+                    game->things_are_moving = true;
+                } else {
+                    int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
+                    //
+                    // Allow the player to move ahead of the monsters a bit to
+                    // make the game look smoother.
+                    //
+                    if (time_left > 60) {
+                        auto p = t->get_top_owner();
+                        if (t->is_player() || (p && p->is_player())) {
+                            //
+                            // Allow smoother movement if not in strict robot mode
+                            //
+                        } else {
+                            game->things_are_moving = true;
+                        }
+                    }
+                }
             }
         } else if (t->is_falling) {
             //
@@ -86,15 +107,41 @@ _
             // If swinging we need to wait.
             //
             game->things_are_moving = true;
+t->con("weapon wait");
+        } else if (t->is_dead_on_end_of_anim() && !t->is_dead) {
+            //
+            // Wait for animation end
+            //
+            if (game->robot_mode) {
+                game->things_are_moving = true;
+t->con("dead wait");
+            }
+        } else if (t->is_alive_on_end_of_anim() && t->is_resurrecting) {
+            //
+            // Wait for animation end
+            //
+            if (game->robot_mode) {
+t->con("alive wait");
+                game->things_are_moving = true;
+            }
         }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
-    if (!game->robot_mode) {
-        player_tick();
-    }
-
     if (game->things_are_moving) {
         return;
+    }
+
+#if 0
+    if (game->robot_mode) {
+        if (game->tick_completed >= game->tick_current - 1) {
+            player_tick();
+        }
+    } else {
+        player_tick();
+    }
+#endif
+    if (!game->robot_mode) {
+        player_tick();
     }
 
     //

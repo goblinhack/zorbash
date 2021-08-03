@@ -12,7 +12,7 @@
 #include "my_tile.h"
 #include "my_ptrcheck.h"
 
-#undef DEBUG_ANIM
+#define DEBUG_ANIM
 
 void Thing::animate (void)
 {_
@@ -20,11 +20,14 @@ void Thing::animate (void)
     auto tpp = tp();
 
     if (time_get_time_ms_cached() <= get_timestamp_sleep_end()) {
+#ifdef DEBUG_ANIM
+if (is_blood_splatter()) { con("Waiting on anim frame"); }
+#endif
         return;
     }
 
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg("Animate"); }
+if (is_blood_splatter()) { con("Animate"); }
 #endif
 
     auto tmap = &tpp->tiles;
@@ -34,7 +37,7 @@ if (is_gold()) { dbg("Animate"); }
     std::vector<Tilep> *tiles = &((*tmap));
     if (unlikely(!tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg("Has no tiles"); }
+if (is_blood_splatter()) { con("Has no tiles"); }
 #endif
         return;
     }
@@ -45,6 +48,9 @@ if (is_gold()) { dbg("Has no tiles"); }
         // If within the animate time of this frame, keep with it.
         //
         if (timestamp_next_frame > time_get_time_ms_cached()) {
+#ifdef DEBUG_ANIM
+if (is_blood_splatter()) { con("Same frame"); }
+#endif
             return;
         }
 
@@ -53,6 +59,9 @@ if (is_gold()) { dbg("Has no tiles"); }
         //
         if (tile_is_end_of_anim(tile)) {
             if (tile_is_dead_on_end_of_anim(tile)) {
+#ifdef DEBUG_ANIM
+if (is_blood_splatter()) { con("Mark as dead"); }
+#endif
                 dead("by end of anim");
             }
 
@@ -65,6 +74,9 @@ if (is_gold()) { dbg("Has no tiles"); }
                 //
                 // Stay dead
                 //
+#ifdef DEBUG_ANIM
+if (is_blood_splatter()) { con("Stay dead"); }
+#endif
                 return;
             }
         }
@@ -122,7 +134,7 @@ if (is_gold()) { dbg("Has no tiles"); }
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg("Choose tiles hp %d "
+if (is_blood_splatter()) { con("Choose tiles hp %d "
                       "is_attached %d "
                       "is_being_destroyed %d "
                       "is_blitted %d "
@@ -175,7 +187,7 @@ if (is_gold()) { dbg("Choose tiles hp %d "
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg("Tile %s moving %d up %d down %d left %d right %d dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
+if (is_blood_splatter()) { con("Tile %s moving %d up %d down %d left %d right %d dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
                        tile_is_moving(tile),
                        tile_is_dir_up(tile),
                        tile_is_dir_down(tile),
@@ -209,7 +221,7 @@ if (is_gold()) { dbg("Tile %s moving %d up %d down %d left %d right %d dir none 
                         if (!tile_is_hp_25_percent(tile)) {
                             tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
@@ -217,7 +229,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                         if (!tile_is_hp_50_percent(tile)) {
                             tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
@@ -225,14 +237,14 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                         if (!tile_is_hp_75_percent(tile)) {
                             tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
                     } else {
                         if (!tile_is_hp_100_percent(tile)) {
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             tile = tile_next(tmap, tile);
                             continue;
@@ -244,7 +256,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                     if (tile_is_moving(tile)) {
                         tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                         continue;
                     }
@@ -255,7 +267,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_resurrecting(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -263,7 +275,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dead(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -271,7 +283,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_sleeping(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -279,7 +291,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_up(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -287,7 +299,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_down(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -295,7 +307,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_left(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -303,7 +315,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_right(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -311,7 +323,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_dir_none(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -319,7 +331,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (!tile_is_open(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -327,7 +339,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_sleeping(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -335,7 +347,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_dead(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -343,7 +355,7 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
                 if (tile_is_open(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -409,11 +421,14 @@ if (is_gold()) { dbg(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
     }
 
     if (!tile) {
+#ifdef DEBUG_ANIM
+if (is_blood_splatter()) { con("No tile"); }
+#endif
         return;
     }
 
 #ifdef DEBUG_ANIM
-    if (is_gold()) { dbg("Set %s", tile_name(tile).c_str()); }
+    if (is_blood_splatter()) { con("Set %s", tile_name(tile).c_str()); }
 #endif
 
     tile_curr = tile->global_index;

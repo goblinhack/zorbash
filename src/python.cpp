@@ -1515,8 +1515,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr62)
     TP_SET_DECL(is_rrr63)
     TP_SET_DECL(is_rrr64)
-    TP_SET_DECL(is_rrr65)
-    TP_SET_DECL(is_rrr66)
+    TP_SET_DECL(is_alive_on_end_of_anim)
+    TP_SET_DECL(is_dead_on_end_of_anim)
     TP_SET_DECL(ai_enemy_memory)
     TP_SET_DECL(is_debug_path)
     TP_SET_DECL(is_key_collector)
@@ -1860,8 +1860,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr62_at",                                      (PyCFunction)level_is_rrr62_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr63_at",                                      (PyCFunction)level_is_rrr63_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr64_at",                                      (PyCFunction)level_is_rrr64_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr65_at",                                      (PyCFunction)level_is_rrr65_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr66_at",                                      (PyCFunction)level_is_rrr66_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_alive_on_end_of_anim_at",                                      (PyCFunction)level_is_alive_on_end_of_anim_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_dead_on_end_of_anim_at",                                      (PyCFunction)level_is_dead_on_end_of_anim_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_ai_enemy_memory_at",                                      (PyCFunction)level_ai_enemy_memory_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_debug_path_at",                                      (PyCFunction)level_is_debug_path_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_key_collector_at",                                      (PyCFunction)level_is_key_collector_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2155,8 +2155,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr62",                                         (PyCFunction)thing_is_rrr62,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr63",                                         (PyCFunction)thing_is_rrr63,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr64",                                         (PyCFunction)thing_is_rrr64,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr65",                                         (PyCFunction)thing_is_rrr65,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr66",                                         (PyCFunction)thing_is_rrr66,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_alive_on_end_of_anim",                                         (PyCFunction)thing_is_alive_on_end_of_anim,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_dead_on_end_of_anim",                                         (PyCFunction)thing_is_dead_on_end_of_anim,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_ai_enemy_memory",                                         (PyCFunction)thing_ai_enemy_memory,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_debug_path",                                         (PyCFunction)thing_is_debug_path,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_key_collector",                                         (PyCFunction)thing_is_key_collector,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
