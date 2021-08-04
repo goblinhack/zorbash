@@ -1204,7 +1204,7 @@ void sdl_loop (void)
         }
 
         static bool old_g_errored;
-        if (g_errored) {
+        if (unlikely(g_errored)) {
             if (g_errored != old_g_errored) {
                 ERR("An error occurred. Check the logs above.");
                 CON("To dismiss this console, press TAB.");
@@ -1313,11 +1313,11 @@ void sdl_loop (void)
                     break;
                 }
             }
+        }
 
-            if (!g_errored) {
-                if (likely(game->level != nullptr)) {
-                    game->level->tick();
-                }
+        if (likely(!g_errored)) {
+            if (likely(game->level != nullptr)) {
+                game->level->tick();
             }
         }
 
@@ -1362,7 +1362,7 @@ void sdl_loop (void)
         //
         // Flip
         //
-        if (game->config.gfx_vsync_locked) {
+        if (likely(game->config.gfx_vsync_locked)) {
             SDL_GL_SwapWindow(window);
         } else {
             glFlush();

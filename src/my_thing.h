@@ -54,6 +54,7 @@ public:
     Monstp      monstp               {};
     Levelp      level                {};
     int16_t     tp_id                {-1};  // Common settings
+    uint16_t    frame_count          {};
     ThingId     id                   {};    // Unique per thing.
     ThingTiles  tiles                {};
     fpoint      interpolated_mid_at;

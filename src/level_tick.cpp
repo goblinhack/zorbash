@@ -102,27 +102,18 @@ _
             //
             t->update_interpolated_position();
             game->things_are_moving = true;
-        } else if (t->get_weapon_id_use_anim().ok()) {
+        } else if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
+                   (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
+                   (t->get_weapon_id_use_anim().ok())) {
             //
-            // If swinging we need to wait.
+            // Wait for animation end. Only if the thing is onscreen
             //
-            game->things_are_moving = true;
-t->con("weapon wait");
-        } else if (t->is_dead_on_end_of_anim() && !t->is_dead) {
-            //
-            // Wait for animation end
-            //
-            if (game->robot_mode) {
-                game->things_are_moving = true;
-t->con("dead wait");
-            }
-        } else if (t->is_alive_on_end_of_anim() && t->is_resurrecting) {
-            //
-            // Wait for animation end
-            //
-            if (game->robot_mode) {
-t->con("alive wait");
-                game->things_are_moving = true;
+            if (t->frame_count == game->frame_count) {
+                if (game->robot_mode) {
+                    game->things_are_moving = true;
+                }
+            } else if (!t->is_dead) {
+                t->dead("offscreen");
             }
         }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
@@ -131,15 +122,6 @@ t->con("alive wait");
         return;
     }
 
-#if 0
-    if (game->robot_mode) {
-        if (game->tick_completed >= game->tick_current - 1) {
-            player_tick();
-        }
-    } else {
-        player_tick();
-    }
-#endif
     if (!game->robot_mode) {
         player_tick();
     }

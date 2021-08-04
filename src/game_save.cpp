@@ -155,6 +155,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // Keep these in the same order as my_thing.h and save/load
     /////////////////////////////////////////////////////////////////////////
     out << bits(my.t->tp_id);
+    out << bits(my.t->frame_count);
     out << bits(my.t->id);
     out << bits(my.t->interpolated_mid_at);
     out << bits(my.t->last_mid_at);
@@ -562,7 +563,7 @@ std::ostream& operator<<(std::ostream &out,
     /* uint32_t           skillbox_highlight_slot      */ out << bits(my.t.skillbox_highlight_slot);
     /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ out << bits(my.t.tick_current);
-    /* uint32_t           frame_count                  */ out << bits(my.t.frame_count);
+    /* uint16_t           frame_count                  */ out << bits(my.t.frame_count);
 
     out << bits(wid_topcon_serialize());
     out << bits(wid_console_serialize());

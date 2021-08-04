@@ -943,6 +943,8 @@ void Thing::blit (int fbo)
     point blit_tl, blit_br;
     Tilep tile = {};
 
+    frame_count = game->frame_count;
+
     //
     // If blitting to the background, ignore scroll
     //

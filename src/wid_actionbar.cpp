@@ -80,6 +80,12 @@ void wid_actionbar_robot_mode_update (void)
     DBG3("Actionbar robot update");
 _
     wid_actionbar_close_all_popups();
+    if (game->level) {
+        if (game->level->player) {
+            game->level->player->clear_move_path("Quit selected");
+        }
+        game->level->debug_path_clear();
+    }
     wid_actionbar_init();
 }
 
@@ -88,7 +94,6 @@ void wid_actionbar_robot_mode_off (void)
     DBG3("Actionbar robot");
 _
     wid_actionbar_close_all_popups();
-
     if (game->level) {
         if (game->level->player) {
             game->level->player->clear_move_path("Quit selected");

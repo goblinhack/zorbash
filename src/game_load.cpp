@@ -204,6 +204,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
         game_load_error = "loaded a thing with no ID";
         return in;
     }
+    in >> bits(my.t->frame_count);
     in >> bits(my.t->interpolated_mid_at);
     in >> bits(my.t->last_mid_at);
     in >> bits(my.t->mid_at);
@@ -706,7 +707,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     /* uint32_t           skillbox_highlight_slot      */ in >> bits(my.t.skillbox_highlight_slot);
     /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
     /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);
-    /* uint32_t           frame_count                  */ in >> bits(my.t.frame_count);
+    /* uint16_t           frame_count                  */ in >> bits(my.t.frame_count);
 
     std::vector<std::wstring> s; in >> bits(s); wid_topcon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
