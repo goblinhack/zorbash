@@ -14,6 +14,7 @@
 #include "my_globals.h"
 #include "my_ptrcheck.h"
 #include "my_dmap.h"
+#include "my_wid.h"
 
 void Level::cursor_path_draw_circle (void)
 {_
@@ -304,6 +305,21 @@ void Level::cursor_path_create (void)
     // The robot makes its own paths
     //
     if (game->robot_mode) {
+        return;
+    }
+
+    if (wid_some_recent_event_occurred()) {
+        return;
+    }
+ 
+    if ((game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+        (game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_COLLECTING_ITEMS) ||
+        (game->state == Game::STATE_WIELDING_ITEMS) ||
+        (game->state == Game::STATE_SAVE_MENU) ||
+        (game->state == Game::STATE_LOAD_MENU) ||
+        (game->state == Game::STATE_QUIT_MENU) ||
+        (game->state == Game::STATE_ENCHANTING_ITEMS)) {
         return;
     }
 

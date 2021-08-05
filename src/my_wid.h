@@ -565,16 +565,18 @@ void wid_set_bg_tile(Widp w, Tilep tile);
 void wid_set_fg_tile(Widp w, Tilep tile);
 void wid_set_fg2_tile(Widp w, Tilep tile);
 void wid_set_fg3_tile(Widp w, Tilep tile);
-void wid_ignore_events_briefly();
+void wid_ignore_events_briefly(void);
+bool wid_some_recent_event_occurred(void);
 
+extern bool wid_mouse_double_click;
+extern const int32_t wid_destroy_delay_ms;
 extern int wid_mouse_visible;
+extern std::array<std::array<Widp, TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> wid_on_screen_at;
+extern timestamp_t wid_ignore_events_briefly_ts;
+extern timestamp_t wid_last_mouse_motion;
+extern timestamp_t wid_last_over_event;
+extern Widp wid_focus;
 extern Widp wid_mouse_template;
 extern Widp wid_over;
-extern Widp wid_focus;
-extern bool wid_mouse_double_click;
-extern timestamp_t wid_last_mouse_motion;
-extern const int32_t wid_destroy_delay_ms;
-extern std::array<
-         std::array<Widp, TERM_HEIGHT_MAX>,
-            TERM_WIDTH_MAX> wid_on_screen_at;
+
 #endif

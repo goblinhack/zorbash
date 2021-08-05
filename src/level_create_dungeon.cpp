@@ -318,6 +318,7 @@ have_dungeon_start:
                             auto W = thing_new("wand_energy", fpoint(x, y));
                             t->carry(W);
                         }
+#endif
 
                         {
                             auto W = thing_new("wand_lightning", fpoint(x, y));
@@ -328,7 +329,6 @@ have_dungeon_start:
                             auto W = thing_new("wand_fire", fpoint(x, y));
                             t->carry(W);
                         }
-#endif
 
                         {
                             auto W = thing_new("key", fpoint(x, y));

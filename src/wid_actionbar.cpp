@@ -38,12 +38,16 @@ void wid_actionbar_close_all_popups (void)
     wid_save_destroy();
     game_quit_destroy();
     game_config_keyboard_destroy();
+_
     game->change_state(Game::STATE_NORMAL);
 }
 
 void wid_actionbar_fini (void)
 {_
-    wid_destroy_nodelay(&wid_actionbar);
+    if (wid_actionbar) {
+        LOG("Actionbar fini");
+        wid_destroy_nodelay(&wid_actionbar);
+    }
 }
 
 static uint8_t wid_actionbar_quit (Widp w, int32_t x, int32_t y, uint32_t button)
@@ -230,8 +234,10 @@ static void wid_actionbar_save_over_e (Widp w)
 
 static uint8_t wid_actionbar_inventory (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    DBG3("Actionbar inventory");
+    LOG("Actionbar inventory");
 _
+    game->request_destroy_thing_info = false;
+
     if (!game->level) {
         return true;
     }
@@ -250,6 +256,8 @@ _
     }
 
     wid_actionbar_close_all_popups();
+_
+    LOG("Actionbar inventory create");
     game->change_state(Game::STATE_MOVING_ITEMS);
     game->request_remake_inventory = true;
     game->wid_thing_info_create(player, false);
@@ -495,6 +503,7 @@ _
     }
 
     wid_actionbar_close_all_popups();
+_
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
     game->config_keyboard_select();
@@ -514,8 +523,8 @@ static void wid_actionbar_configure_over_e (Widp w)
 
 void wid_actionbar_init (void)
 {_
-    DBG3("Actionbar init");
-_
+    LOG("Actionbar init");
+
     if (!game->level) {
         return;
     }
@@ -528,21 +537,23 @@ _
     if (player->is_dead){
         return;
     }
-
+_
     //
     // In case a scancode was used to open this widget
     //
     wid_ignore_events_briefly();
-
+_
     if (wid_actionbar) {
+    LOG("Actionbar init exists close it and recreate");
         wid_actionbar_fini();
     }
-
+_
+    LOG("Actionbar init create");
     bool icon_collect = false;
     if (player->check_anything_to_carry()) {
         icon_collect = true;
     }
-
+_
     bool icon_close = false;
     if (game->bags.size() ||
         wid_collect ||
@@ -565,8 +576,9 @@ _
 
     if (icon_close) {
         options++;
+        options++;
     }
-
+_
     int option_width = 4;
     int w = options * option_width;
     int left_half = w / 2;
@@ -586,6 +598,18 @@ _
     }
 
     int x_at = 0;
+
+    if (icon_close) {
+        auto w = wid_new_square_button(wid_actionbar, "wid actionbar close");
+        point tl = make_point(x_at, 0);
+        point br = make_point(x_at + option_width - 1, option_width - 1);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "icon_close");
+        wid_set_on_mouse_up(w, wid_actionbar_close);
+        wid_set_on_mouse_over_b(w, wid_actionbar_close_over_b);
+        wid_set_on_mouse_over_e(w, wid_actionbar_close_over_e);
+        x_at += option_width;
+    }
 
     {
         auto w = wid_new_square_button(wid_actionbar, "wid actionbar quit");
@@ -749,6 +773,6 @@ _
         wid_set_on_mouse_over_e(w, wid_actionbar_close_over_e);
         x_at += option_width;
     }
-
+_
     wid_update(wid_actionbar);
 }

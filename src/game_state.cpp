@@ -16,6 +16,12 @@
 
 void Game::change_state (int new_state)
 {
+    if (wid_over) {
+        if (game->level) {
+            game->level->cursor_path_clear();
+        }
+    }
+
     if (game->state == new_state) {
         return;
     }

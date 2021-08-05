@@ -15,27 +15,6 @@
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
-    //
-    // If over the minimap allows clicks to move us
-    //
-    // Else, ignore clicks as they should go to a widget
-    //
-    if (game->minimap_over == point(-1, -1)) {
-        auto w = wid_find_under_mouse();
-        if (w) {
-            if (w->name != "wid topcon window") {
-                return false;
-            }
-        }
-
-        w = wid_find_under_mouse_when_scrolling();
-        if (w) {
-            if (w->name != "wid topcon window") {
-                return false;
-            }
-        }
-    }
-
     if (!game || !game->started) {
         return false;
     }
@@ -62,6 +41,10 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     }
 
     if (!level->cursor) {_
+        return false;
+    }
+
+    if (wid_some_recent_event_occurred()) {
         return false;
     }
 
@@ -188,11 +171,8 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
         return false;
     }
 
-    auto w = wid_find_under_mouse();
-    if (w) {
-        if (w->name != "wid topcon window") {
-            level->cursor_path_clear();
-        }
+    if (wid_some_recent_event_occurred()) {
+        return false;
     }
 
     if (level->timestamp_dungeon_created &&
@@ -203,6 +183,8 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
             }
         }
     }
+
+    level->cursor_path_create();
 
 #if 0
 {

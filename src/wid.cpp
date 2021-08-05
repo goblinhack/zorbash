@@ -31,6 +31,7 @@
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
 #include "my_sound.h"
+#include "my_traceback.h"
 #include <unistd.h> // usleep
 
 #undef ENABLE_DEBUG_GFX_GL_BLEND
@@ -69,7 +70,12 @@ static wid_key_map_int wid_top_level5;
 // Ignore events to avoid processing the same event twice if we
 // look at scancodes and bypass wid events
 //
-static timestamp_t wid_ignore_events_briefly_ts;
+timestamp_t wid_ignore_events_briefly_ts;
+
+//
+// Last time we changed what we were over.
+//
+timestamp_t wid_last_over_event;
 
 //
 // Scope the focus to children of this widget and do not change it.
@@ -575,6 +581,29 @@ uint8_t wid_ignore_events (Widp w)
     return false;
 }
 
+uint8_t wid_ignore_events_only (Widp w)
+{_
+    Widp top {};
+
+    if (!w) {
+        return true;
+    }
+
+    if (w->ignore_events) {
+        return true;
+    }
+
+    if (w->parent) {
+        top = wid_get_top_parent(w);
+
+        if (top->moving) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 uint8_t wid_ignore_scroll_events (Widp w)
 {_
     Widp top {};
@@ -717,6 +746,9 @@ static void wid_m_over_e (void)
     }
 
     w = wid_over;
+    if (wid_over) {
+        wid_last_over_event = time_get_time_ms_cached();
+    }
     wid_over = nullptr;
 
     if (!w) {
@@ -788,6 +820,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
     wid_m_over_e();
 
     wid_over = w;
+    wid_last_over_event = time_get_time_ms_cached();
     // TOPCON("mouse over %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
 
     wid_set_mode(w, WID_MODE_OVER);
@@ -2051,6 +2084,7 @@ static void wid_destroy_immediate (Widp w)
 
     if (w == wid_over) {
         wid_over = nullptr;
+        wid_last_over_event = time_get_time_ms_cached();
     }
 
     if (w == wid_moving) {
@@ -3903,7 +3937,7 @@ Widp wid_find_under_mouse (void)
     auto w = wid_find_at(ascii_mouse_x, ascii_mouse_y);
     if (w) {
         w = wid_get_top_parent(w);
-        if (wid_ignore_events(w)) {
+        if (wid_ignore_events_only(w)) {
             return nullptr;
         } else {
             return w;
@@ -3952,7 +3986,7 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
     // for example a scancode causes a widget to be created but the
     // same keypress is taken by the widget.
     //
-    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
+    if (!time_have_x_tenths_passed_since(1, wid_ignore_events_briefly_ts)) {
         return nullptr;
     }
 
@@ -4037,7 +4071,7 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
     // for example a scancode causes a widget to be created but the
     // same keypress is taken by the widget.
     //
-    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
+    if (!time_have_x_tenths_passed_since(1, wid_ignore_events_briefly_ts)) {
         return nullptr;
     }
 
@@ -4112,7 +4146,7 @@ static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
     // for example a scancode causes a widget to be created but the
     // same keypress is taken by the widget.
     //
-    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
+    if (!time_have_x_tenths_passed_since(1, wid_ignore_events_briefly_ts)) {
         return nullptr;
     }
 
@@ -4175,7 +4209,7 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
     // for example a scancode causes a widget to be created but the
     // same keypress is taken by the widget.
     //
-    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
+    if (!time_have_x_tenths_passed_since(1, wid_ignore_events_briefly_ts)) {
         return nullptr;
     }
 
@@ -4256,7 +4290,7 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
     // for example a scancode causes a widget to be created but the
     // same keypress is taken by the widget.
     //
-    if (!time_have_x_tenths_passed_since(2, wid_ignore_events_briefly_ts)) {
+    if (!time_have_x_tenths_passed_since(1, wid_ignore_events_briefly_ts)) {
         return nullptr;
     }
 
@@ -6135,6 +6169,12 @@ void wid_tick_all (void)
         wid_thing_info_fini();
         wid_inventory_init();
     }
+
+    if (wid_over) {
+        if (game->level) {
+            game->level->cursor_path_clear();
+        }
+    }
 }
 
 static int saved_mouse_x;
@@ -6565,4 +6605,43 @@ void wid_ignore_events_briefly (void)
     }
 
     wid_ignore_events_briefly_ts = time_get_time_ms_cached();
+}
+
+bool wid_some_recent_event_occurred (void)
+{
+    //
+    // If a widget has just closed for example or been recreated, don't
+    // immediately allow a double click on a chasm that was behind the
+    // widget for example.
+    //
+    if (!time_have_x_tenths_passed_since(2, wid_last_over_event)) {
+        return true;
+    }
+
+    if (!time_have_x_tenths_passed_since(1, wid_ignore_events_briefly_ts)) {
+        return true;
+    }
+
+    //
+    // If over the minimap allows clicks to move us
+    //
+    // Else, ignore clicks as they should go to a widget
+    //
+    if (game->minimap_over == point(-1, -1)) {
+        auto w = wid_find_under_mouse();
+        if (w) {
+            if (w->name != "wid topcon window") {
+                return true;
+            }
+        }
+
+        w = wid_find_under_mouse_when_scrolling();
+        if (w) {
+            if (w->name != "wid topcon window") {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
