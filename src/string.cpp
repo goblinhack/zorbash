@@ -109,8 +109,8 @@ static char *substr (const char *in, int32_t pos, int32_t len)
 //
 // strsub("foo.zip", ".zip", ""); -> "foo"
 //
-char *strsub_ (const char *in, 
-               const char *look_for, 
+char *strsub_ (const char *in,
+               const char *look_for,
                const char *replace_with,
                std::string what, std::string file, std::string func, int line)
 {_
@@ -828,7 +828,7 @@ shared_vector_wstring split (const std::wstring &text, int max_line_len)
     if (!text.length()) {
         return (0);
     }
-//printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(), 
+//printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(),
 //max_line_len);
 
     auto result = std::make_shared< std::vector< std::wstring > > ();
@@ -968,7 +968,7 @@ shared_vector_wstring split (const std::wstring &text, int max_line_len)
         line_len = (int)(line_end - line_start);
         auto tmp = std::wstring(line_start, line_start + line_len);
 
-//printf("OUT [%s] max_line_len %d\n", wstring_to_string(tmp).c_str(), 
+//printf("OUT [%s] max_line_len %d\n", wstring_to_string(tmp).c_str(),
 //line_len);
         result->push_back(tmp);
 

@@ -30,7 +30,7 @@ void Game::init (void)
     init_levels();
     init_jump_paths();
 
-    auto l = get(world.levels, current_level.x, current_level.y, 
+    auto l = get(world.levels, current_level.x, current_level.y,
                  current_level.z);
     if (!l) {
         return;

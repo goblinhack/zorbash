@@ -31,7 +31,7 @@ Projectile_::Projectile_(
     stop(stop),
     pixel_map_at(pixel_map_at),
     timestamp_start(timestamp_start),
-    timestamp_stop(timestamp_stop) 
+    timestamp_stop(timestamp_stop)
 {_
     auto t = level->thing_find(id);
     if (!t) {
@@ -92,7 +92,7 @@ void Level::new_projectile (ThingId id, point start, point stop, uint32_t dur)
     }
 
     uint32_t now = time_update_time_milli();
-    new_projectiles.push_back(Projectile(this, id, 
+    new_projectiles.push_back(Projectile(this, id,
                                start, stop, pixel_map_at, now, now + dur));
 }
 
@@ -108,8 +108,8 @@ void Level::display_projectiles (void)
     }
 #endif
 
-    all_projectiles.insert(std::end(all_projectiles), 
-                      std::begin(new_projectiles), 
+    all_projectiles.insert(std::end(all_projectiles),
+                      std::begin(new_projectiles),
                       std::end(new_projectiles));
     new_projectiles.clear();
 
@@ -167,7 +167,7 @@ void Level::display_projectiles (void)
                 frame = Projectile::max_frames - 1;
             }
 
-            fpoint mid(start.x + (diff.x * dt), 
+            fpoint mid(start.x + (diff.x * dt),
                        start.y + (diff.y * dt));
 
             point tl = make_point(mid - perp - step / 2);
@@ -202,7 +202,7 @@ void Thing::delete_projectile (void)
 {_
     auto e = std::remove_if(level->all_projectiles.begin(),
                             level->all_projectiles.end(),
-        [=, this] (Projectile &p) { 
+        [=, this] (Projectile &p) {
             if (p.id == id) {
                 log("Remove projectile");
                 return true;

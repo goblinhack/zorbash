@@ -123,7 +123,7 @@ void Level::display_map_bg_things (void)
 
         blit_fbo_bind(fbo);
         blit_init();
-        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; 
+        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1;
              z < MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
                 for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -140,7 +140,7 @@ void Level::display_map_bg_things (void)
         blit_fbo_unbind();
     }
 
-    gl_enter_2d_mode(game->config.game_pix_width, 
+    gl_enter_2d_mode(game->config.game_pix_width,
                      game->config.game_pix_height);
 }
 
@@ -329,7 +329,7 @@ void Level::display_map (void)
         // Render the player light sources - but also render the point
         // light sources on a dark background to make things look more
         // dramatic
-        // 
+        //
         lights_render(light_minx, light_miny, light_maxx, light_maxy,
                       FBO_PLAYER_VISIBLE_LIGHTING);
         //
@@ -338,7 +338,7 @@ void Level::display_map (void)
         //
         lights_render_small_lights(
                       light_minx, light_miny, light_maxx, light_maxy,
-                      FBO_SMALL_POINT_LIGHTS, 
+                      FBO_SMALL_POINT_LIGHTS,
                       false /* include player lights */);
 
         //
@@ -379,7 +379,7 @@ void Level::display_map (void)
         blit_init();
         blit(fbo_tex_id[FBO_FULLMAP],
              left, top, right, bot,
-             0, 
+             0,
              0,
              game->config.game_pix_width,
              game->config.game_pix_height);
@@ -390,7 +390,7 @@ void Level::display_map (void)
         blit_init();
         blit(fbo_tex_id[FBO_FULLMAP_LIGHT],
              left, top, right, bot,
-             0, 
+             0,
              0,
              game->config.game_pix_width,
              game->config.game_pix_height);

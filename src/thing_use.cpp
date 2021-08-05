@@ -80,7 +80,7 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
 
     auto existing_owner = what->get_top_owner();
     if (existing_owner != this) {
-        err("Attempt to use %s which is not carried", 
+        err("Attempt to use %s which is not carried",
             what->to_string().c_str());
         return;
     }
@@ -91,7 +91,7 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
     if (what->get_charge_count()) {
         what->decr_charge_count();
         if (what->get_charge_count()) {
-            dbg("Used %s (has %d charges left)", 
+            dbg("Used %s (has %d charges left)",
                 what->to_string().c_str(), what->get_charge_count());
             game->request_remake_inventory = true;
             return;

@@ -39,7 +39,7 @@ static void wid_rightbar_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-        (game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
@@ -72,7 +72,7 @@ static void wid_rightbar_mouse_over_e (Widp w)
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-        (game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
@@ -133,7 +133,7 @@ static bool wid_rightbar_create (void)
     }
 
     int y_at = 6;
-    
+   
     {_
         auto w = wid_new_plain(wid_rightbar, "level no");
         wid_set_ignore_events(w, true);
@@ -186,7 +186,7 @@ static bool wid_rightbar_create (void)
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-2);
 
         wid_set_pos(w, tl, br);
-        auto g = dynprintf("%%fg=gray$%06d %%fg=white$$%%fg=gray$%03d %%fg=yellow$%%tile=key_icon$%%fg=gray$%d", 
+        auto g = dynprintf("%%fg=gray$%06d %%fg=white$$%%fg=gray$%03d %%fg=yellow$%%tile=key_icon$%%fg=gray$%d",
                            player->get_score(), player->get_gold(), player->get_keys());
         wid_set_text(w, g);
         wid_set_text_lhs(w, true);
@@ -326,7 +326,7 @@ static bool wid_rightbar_create (void)
             auto slot(std::to_string(i));
 
             //
-            // Always create the slot even if empty as we use this for 
+            // Always create the slot even if empty as we use this for
             // particles when dropping items.
             //
             auto x = (i % 5) * 3 + 1;

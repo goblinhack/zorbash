@@ -54,7 +54,7 @@ void music_fini (void)
     }
 }
 
-bool music_load (uint32_t rate, const std::string &file, 
+bool music_load (uint32_t rate, const std::string &file,
                  const std::string &name_alias)
 {_
     if (name_alias == "") {

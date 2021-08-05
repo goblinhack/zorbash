@@ -36,7 +36,7 @@ void Level::describe (fpoint p)
 
     dbg3("Describe %f,%f", p.x, p.y);
 _
-    if ((game->state == Game::STATE_MOVING_ITEMS) || 
+    if ((game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_WIELDING_ITEMS) ||
@@ -257,7 +257,7 @@ _
         dbg3("Describe %f,%f; found nothing with long text", p.x, p.y);
     }
 
-    dbg3("Describe %f,%f; found %d things", p.x, p.y, 
+    dbg3("Describe %f,%f; found %d things", p.x, p.y,
          (int)hover_over_things.size());
 
     if (!got_one_with_long_text || !hover_over_things.size()) {
@@ -267,9 +267,9 @@ _
         //
         auto o = game->current_wid_thing_info;
         if (o) {
-            dbg3("Currently describing %s", o->to_string().c_str()); 
+            dbg3("Currently describing %s", o->to_string().c_str());
             if (o->is_hidden) {
-                dbg3("Currently describing %s; prefer me over current1", 
+                dbg3("Currently describing %s; prefer me over current1",
                     o->to_string().c_str());
             }
 
@@ -356,7 +356,7 @@ void Level::describe (Thingp t)
 
     dbg3("Describe %s", t->to_string().c_str());
 
-    if ((game->state == Game::STATE_MOVING_ITEMS) || 
+    if ((game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_WIELDING_ITEMS) ||
@@ -380,9 +380,9 @@ void Level::describe (Thingp t)
     //
     auto o = game->current_wid_thing_info;
     if (o) {
-        dbg3("Currently Describe %s", o->to_string().c_str()); 
+        dbg3("Currently Describe %s", o->to_string().c_str());
         if (o->is_hidden) {
-            dbg3("Currently Describe %s; prefer me over current5", 
+            dbg3("Currently Describe %s; prefer me over current5",
                 o->to_string().c_str());
         }
 

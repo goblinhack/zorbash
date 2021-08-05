@@ -205,8 +205,8 @@ void Game::wid_skill_choose (void)
     point br = make_point(m + 35, tl.y + 25);
     auto width = br.x - tl.x;
 
-    wid_skills = new WidPopup("skills", tl, br, nullptr, "", 
-                              false, true, 
+    wid_skills = new WidPopup("skills", tl, br, nullptr, "",
+                              false, true,
                               skills.size() * 3);
 
     wid_set_on_key_up(wid_skills->wid_popup_container, wid_skills_key_up);
@@ -257,7 +257,7 @@ void Game::wid_skill_choose (void)
             wid_set_style(wid_skill, UI_WID_STYLE_DARK);
 
             if (slot < 9) {
-                wid_set_text(wid_skill, " " + std::to_string(slot + 1) + ". " + 
+                wid_set_text(wid_skill, " " + std::to_string(slot + 1) + ". " +
                              tpp->text_name() + ", " + tpp->text_skill());
             } else {
                 wid_set_text(wid_skill, tpp->text_name() + ", " + tpp->text_skill());

@@ -56,16 +56,16 @@ void Thing::set_minion_owner (Thingp minion_owner)
         }
 
         if (minion_owner) {
-            dbg("Will change minion owner %s->%s", 
+            dbg("Will change minion owner %s->%s",
                 old_minion_owner->to_string().c_str(),
                 minion_owner->to_string().c_str());
         } else {
-            dbg("Will remove minion owner %s", 
+            dbg("Will remove minion owner %s",
                 old_minion_owner->to_string().c_str());
         }
     } else {
         if (minion_owner) {
-            dbg("Will set minion owner to %s", 
+            dbg("Will set minion owner to %s",
                 minion_owner->to_string().c_str());
         }
     }
@@ -104,7 +104,7 @@ void Thing::kill_minions (Thingp killer)
     // Warning killer can be nullptr - e.g. when a generator falls to
     // a new level
     //
- 
+
     if (!is_minion_generator()) {
         return;
     }

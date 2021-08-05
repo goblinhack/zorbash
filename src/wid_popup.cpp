@@ -68,7 +68,7 @@ WidPopup::WidPopup (const std::string name,
     }
 
     if (title_tile) {
-        auto w = wid_new_square_button(wid_popup_container, 
+        auto w = wid_new_square_button(wid_popup_container,
                                        "wid title " + name);
         wid_title = w;
         auto title_x = (outer_w - tile_size) / 2;

@@ -311,9 +311,9 @@ void Level::cursor_path_create (void)
     if (wid_some_recent_event_occurred()) {
         return;
     }
- 
+
     if ((game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-        (game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
@@ -324,7 +324,7 @@ void Level::cursor_path_create (void)
     }
 
     //
-    // For lasers do not show the cursor (circle) unless the item has a 
+    // For lasers do not show the cursor (circle) unless the item has a
     // blast radius
     //
     if (game->request_to_fire_item) {
@@ -352,7 +352,7 @@ void Level::cursor_path_create (const std::vector<point> &move_path)
     cursor_path_clear();
 
     //
-    // For lasers do not show the cursor (circle) unless the item has a 
+    // For lasers do not show the cursor (circle) unless the item has a
     // blast radius
     //
     if (game->request_to_fire_item) {

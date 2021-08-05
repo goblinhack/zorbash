@@ -3360,7 +3360,7 @@ static void python_add_consts (void)
 
 }
 
-static std::string get_env(const char* env) 
+static std::string get_env(const char* env)
 {
     auto t = std::getenv(env);
     if (t) return t;

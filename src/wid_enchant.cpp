@@ -224,8 +224,8 @@ void Game::wid_enchant_an_item (void)
     point br = make_point(m + 35, tl.y + 25);
     auto width = br.x - tl.x;
 
-    wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", 
-                               false, true, 
+    wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "",
+                               false, true,
                                enchant_items.size() * 3);
 
     wid_set_on_key_up(wid_enchant->wid_popup_container, wid_enchant_key_up);
@@ -277,7 +277,7 @@ void Game::wid_enchant_an_item (void)
             wid_set_style(wid_item, UI_WID_STYLE_DARK);
 
             if (slot < 9) {
-                wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + 
+                wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " +
                              t->text_name() + ", " + t->text_enchant());
             } else {
                 wid_set_text(wid_item, t->text_name() + ", " + t->text_enchant());

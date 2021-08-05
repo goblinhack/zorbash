@@ -34,7 +34,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
                         bool horiz_scroll, bool vert_scoll,
                         int scroll_height_in) :
     scroll_height(scroll_height_in),
-    tl(tl), br(br), 
+    tl(tl), br(br),
     wid_parent(parent)
 {_
     int w = br.x - tl.x;

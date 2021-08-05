@@ -172,7 +172,7 @@ void Level::remove_thing (int x, int y, ThingId id)
 
                         for (auto i = b; i < e; i++) {
                             if (*i == t) {
-                                t->err("Thing ptr still exists after removal %" PRIx32 " at %u,%u slot %u", 
+                                t->err("Thing ptr still exists after removal %" PRIx32 " at %u,%u slot %u",
                                     id.id, x, y, slot);
                             }
                         }

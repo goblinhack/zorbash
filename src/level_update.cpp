@@ -40,7 +40,7 @@ void Level::update_same_level (void)
     dmap_to_player_update();
 }
 
-// 
+//
 // For example, a zoom change
 //
 void Level::update_same_level_immediately (void)

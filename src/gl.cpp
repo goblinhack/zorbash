@@ -744,7 +744,7 @@ void gl_blitquad (GLushort left, GLushort top, GLushort right, GLushort bottom)
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitquad (const point &tl, const point &tr, 
+void gl_blitquad (const point &tl, const point &tr,
                   const point &bl, const point &br)
 {
     GLushort xy[4*2];
@@ -1592,10 +1592,10 @@ void blit (int tex, point tl, point tr, point bl, point br)
     blit(tex, 0, 0, 1, 1, tl, tr, bl, br);
 }
 
-void blit_colored (int tex, 
-                   GLushort left, 
-                   GLushort top, 
-                   GLushort right, 
+void blit_colored (int tex,
+                   GLushort left,
+                   GLushort top,
+                   GLushort right,
                    float bottom,
                    color color_bl, color color_br,
                    color color_tl, color color_tr)

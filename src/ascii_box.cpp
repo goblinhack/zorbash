@@ -10,8 +10,8 @@
 #include "my_ui.h"
 #include "my_main.h"
 
-static void ascii_put_box__ (int style, 
-                             Tilep bg_tile, 
+static void ascii_put_box__ (int style,
+                             Tilep bg_tile,
                              Tilep fg_tile,
                              Tilep fg2_tile,
                              Tilep fg3_tile,
@@ -197,11 +197,11 @@ static void ascii_put_box_ (int style,
                             va_list args)
 {_
     if (!*fmt) {
-        ascii_put_box__(style, 
-                        bg_tile, 
-                        fg_tile, 
-                        fg2_tile, 
-                        fg3_tile, 
+        ascii_put_box__(style,
+                        bg_tile,
+                        fg_tile,
+                        fg2_tile,
+                        fg3_tile,
                         x, y,
                         x + width - 1, y + height - 1,
                         col_bg, col_text, 0 /* context */);
@@ -219,11 +219,11 @@ static void ascii_put_box_ (int style,
         auto b = std::wstring(buf);
         int len = ascii_strlen(b);
 
-        ascii_put_box__(style, 
-                        bg_tile, 
-                        fg_tile, 
-                        fg2_tile, 
-                        fg3_tile, 
+        ascii_put_box__(style,
+                        bg_tile,
+                        fg_tile,
+                        fg2_tile,
+                        fg3_tile,
                         x, y,
                         x + width - 1, y + height - 1,
                         col_bg, col_text, 0 /* context */);
@@ -232,11 +232,11 @@ static void ascii_put_box_ (int style,
     }
 }
 
-void ascii_put_box (box_args b, int style, 
-                    Tilep bg_tile, 
-                    Tilep fg_tile, 
-                    Tilep fg2_tile, 
-                    Tilep fg3_tile, 
+void ascii_put_box (box_args b, int style,
+                    Tilep bg_tile,
+                    Tilep fg_tile,
+                    Tilep fg2_tile,
+                    Tilep fg3_tile,
                     const wchar_t *fmt, ...)
 {_
     va_list args;

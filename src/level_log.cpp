@@ -95,7 +95,7 @@ void Level::err_ (const char *fmt, va_list args)
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "ERROR: Level %s: ", 
+    snprintf(buf + len, MAXSTR - len, "ERROR: Level %s: ",
              l->to_string().c_str());
 
     len = (int)strlen(buf);

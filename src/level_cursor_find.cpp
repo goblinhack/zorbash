@@ -20,7 +20,7 @@ void Level::cursor_find_on_visible_things (
                         const int16_t minx, const int16_t miny,
                         const int16_t maxx, const int16_t maxy)
 {_
-    if ((game->state == Game::STATE_MOVING_ITEMS) || 
+    if ((game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_WIELDING_ITEMS) ||

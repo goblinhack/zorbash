@@ -133,7 +133,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_treasure_class_b      ||
                            m.is_treasure_class_c      ||
                            m.is_wand                  ||
-                           m.is_deep_water               
+                           m.is_deep_water              
                            ) {
                     floor_string += Charmap::FLOOR;
                 } else {

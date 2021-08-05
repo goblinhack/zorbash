@@ -58,7 +58,7 @@ bool Thing::carry (Thingp it)
         //
         // Bag being carried
         //
-        dbg("Added bag to bag at %d,%d", 
+        dbg("Added bag to bag at %d,%d",
             it->monstp->bag_position.x, it->monstp->bag_position.y);
     } else if (!it->is_bag_item()) {
         //
@@ -66,7 +66,7 @@ bool Thing::carry (Thingp it)
         //
         dbg("Non item not added to bag");
     } else if (bag_add(it)) {
-        dbg("Added to bag at %d,%d", 
+        dbg("Added to bag at %d,%d",
             it->monstp->bag_position.x, it->monstp->bag_position.y);
     } else {
         dbg("No; cannot store in a bag");

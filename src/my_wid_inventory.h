@@ -12,7 +12,7 @@ uint8_t wid_inventory_init(void);
 //
 // Global widgets.
 //
-void wid_inventory_mouse_over_b(Widp w, int32_t relx, int32_t rely, 
+void wid_inventory_mouse_over_b(Widp w, int32_t relx, int32_t rely,
                                 int32_t wheelx, int32_t wheely);
 void wid_inventory_mouse_over_e(Widp w);
 uint8_t wid_inventory_item_mouse_up_on_bag(Widp w,

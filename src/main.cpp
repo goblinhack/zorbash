@@ -625,7 +625,7 @@ int32_t main (int32_t argc, char *argv[])
 
     //////////////////////////////////////////////////////////////////////////////
     // Use LOG instead of CON until we set stdout or you see two logs
-    // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v 
+    // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     //////////////////////////////////////////////////////////////////////////////
 #ifdef _WIN32
     LOG("INI: Platform is _WIN32");
@@ -649,7 +649,7 @@ int32_t main (int32_t argc, char *argv[])
     ramdisk_init();
 
     //////////////////////////////////////////////////////////////////////////////
-    // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ Use LOG 
+    // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ Use LOG
     // instead of CON until we set stdout or you see two logs
     //////////////////////////////////////////////////////////////////////////////
 
@@ -850,7 +850,7 @@ int32_t main (int32_t argc, char *argv[])
     CON("INI: Load dungeon rooms");
     room_init();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-   
+  
 #if 0
     game->init();
     game->load();

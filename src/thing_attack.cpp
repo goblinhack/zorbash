@@ -243,7 +243,7 @@ _
         }
     }
 
-    if (it->is_alive_monst() || 
+    if (it->is_alive_monst() ||
         it->is_combustible() ||
         it->is_very_combustible() ||
         it->is_burnable() ||
@@ -334,7 +334,7 @@ _
         // We hit this path for swords. We don't really want the sword to
         // do the eating, so pass control to the owner.
         //
-       
+      
         //
         // Owner eat food?
         //
@@ -388,7 +388,7 @@ _
                  try_to_carry(it)) {
                 dbg("Don't eat, try to carry %s", it->to_string().c_str());
                 return true;
-            } 
+            }
 
             if (is_monst() && it->is_dead && !it->is_player() && eat(it)) {
                 //
@@ -513,7 +513,7 @@ _
                     msg("!");
                 } else if (it->is_player()) {
                     if (owner) {
-                        TOPCON("%s misses with %s.", 
+                        TOPCON("%s misses with %s.",
                                owner->text_the().c_str(),
                                text_The().c_str());
                     } else {

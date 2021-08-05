@@ -64,7 +64,7 @@ static void game_display_flames_tiles (int w, int h)
             }
 
             glcolor(cn);
-        
+       
             tile_blit(tile,
                       point(tw * x, th * (y + 3)),
                       point(tw * (x + 1), th * (y + 4)));
@@ -76,7 +76,7 @@ static void game_display_flames_tiles (int w, int h)
 static void game_display_flames_change (int w, int h)
 {_
     int flames = 3;
-    while (flames--) 
+    while (flames--)
     {
         auto xr = non_pcq_random_range(w / 4, w - w / 4);
         auto r = non_pcq_random_range(0, 100);

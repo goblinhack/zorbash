@@ -1195,7 +1195,7 @@ Tilep tile_next (Tilemap *tmap, Tilep in)
     return tile_index_to_tile(tile->global_index);
 }
 
-int32_t Tile::gl_binding (void) const 
+int32_t Tile::gl_binding (void) const
 {
     if (g_render_black_and_white) {
         if (_gl_binding_black_and_white) {
@@ -1208,27 +1208,27 @@ int32_t Tile::gl_binding (void) const
     }
 }
 
-void Tile::set_gl_binding (int32_t v) 
+void Tile::set_gl_binding (int32_t v)
 {
     _gl_binding = v;
 }
 
-int32_t Tile::gl_binding_black_and_white (void) const 
+int32_t Tile::gl_binding_black_and_white (void) const
 {
     return (_gl_binding_black_and_white);
 }
 
-void Tile::set_gl_binding_black_and_white (int32_t v) 
+void Tile::set_gl_binding_black_and_white (int32_t v)
 {
     _gl_binding_black_and_white = v;
 }
 
-int32_t Tile::gl_binding_mask (void) const 
+int32_t Tile::gl_binding_mask (void) const
 {
     return (_gl_binding_mask);
 }
 
-void Tile::set_gl_binding_mask (int32_t v) 
+void Tile::set_gl_binding_mask (int32_t v)
 {
     _gl_binding_mask = v;
 }

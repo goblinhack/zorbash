@@ -52,7 +52,7 @@ bool Thing::thing_sound_play (const std::string &alias)
     Mix_VolumeChunk(sound->second->chunk, volume);
 
     if (Mix_PlayChannel(-1 /* first free channel */,
-                        sound->second->chunk, 
+                        sound->second->chunk,
                         0 /* loops */) == -1) {
 
         LOG("Cannot play sound %s on any channel", alias.c_str());
@@ -60,7 +60,7 @@ bool Thing::thing_sound_play (const std::string &alias)
         SDL_ClearError();
 
         if (Mix_PlayChannel(-1 /* first free channel */,
-                            sound->second->chunk, 
+                            sound->second->chunk,
                             0 /* loops */) == -1) {
             ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
             SDL_ClearError();
@@ -92,7 +92,7 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
             // Likely far away
             //
             if (unlikely(g_opt_debug3)) {
-                LOG("Cannot play sound %s on channel %d, cannot reach target", 
+                LOG("Cannot play sound %s on channel %d, cannot reach target",
                     alias.c_str(), channel);
             }
             return true;
@@ -129,15 +129,15 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
 
     if (Mix_Playing(channel)) {
         if (Mix_PlayChannel(-1,
-                            sound->second->chunk, 
+                            sound->second->chunk,
                             0 /* loops */) == -1) {
 
-            dbg2("Cannot play sound %s on channel %d, something else playing", 
+            dbg2("Cannot play sound %s on channel %d, something else playing",
                  alias.c_str(), channel);
             return false;
         }
     } else if (Mix_PlayChannel(channel,
-                               sound->second->chunk, 
+                               sound->second->chunk,
                                0 /* loops */) == -1) {
         dbg2("Cannot play sound %s on channel %d", alias.c_str(), channel);
         return false;

@@ -155,7 +155,7 @@ public:
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
- 
+
     //
     // Things not worth saving
     //

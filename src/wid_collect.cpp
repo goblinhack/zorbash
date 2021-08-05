@@ -222,7 +222,7 @@ static uint8_t wid_collect_mouse_up (Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
 }
 
-static void wid_collect_mouse_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_collect_mouse_over_b (Widp w, int32_t relx, int32_t rely,
                                       int32_t wheelx, int32_t wheely)
 {_
     int slot = wid_get_int_context(w);
@@ -328,8 +328,8 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
     point br = make_point(m + 35, tl.y + 25);
     auto width = br.x - tl.x;
 
-    wid_collect = new WidPopup("collect", tl, br, nullptr, "", 
-                               false, true, 
+    wid_collect = new WidPopup("collect", tl, br, nullptr, "",
+                               false, true,
                                collect_items.size() * 3);
 
     wid_set_on_key_up(wid_collect->wid_popup_container, wid_collect_key_up);
@@ -389,7 +389,7 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
 
             if (t) {
                 if (slot < 9) {
-                    wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + 
+                    wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " +
                                  t->text_description());
                 } else {
                     wid_set_text(wid_item, t->text_description());

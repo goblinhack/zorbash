@@ -152,7 +152,7 @@ bool Thing::collision_obstacle (Thingp it)
         // if (it->is_alive_monst()) {
         //     return true;
         // }
- 
+
         if (will_avoid_threat(it)) {
             return true;
         }
@@ -247,7 +247,7 @@ bool Thing::ai_obstacle (Thingp it)
         // if (it->is_alive_monst()) {
         //     return true;
         // }
- 
+
         if (will_avoid_threat(it)) {
             return true;
         }

@@ -46,7 +46,7 @@ bool sound_load (float volume, const char *file_in, const char *alias_in)
     return sound_load(volume, file, alias);
 }
 
-bool sound_load (float volume, const std::string &file, 
+bool sound_load (float volume, const std::string &file,
                  const std::string &alias)
 {_
     if (alias == "") {
@@ -69,7 +69,7 @@ bool sound_load (float volume, const std::string &file,
 
     rw = SDL_RWFromMem(s->data, s->len);
     if (!rw) {
-        ERR("SDL_RWFromMem fail %s: %s %s", 
+        ERR("SDL_RWFromMem fail %s: %s %s",
             file.c_str(), Mix_GetError(), SDL_GetError());
         SDL_ClearError();
         return false;
@@ -77,7 +77,7 @@ bool sound_load (float volume, const std::string &file,
 
     s->chunk = Mix_LoadWAV_RW(rw, false /* A non-zero value mean is will automatically close/free the src for you. */);
     if (!s->chunk) {
-        ERR("Mix_LoadWAV_RW fail %s: %s %s", 
+        ERR("Mix_LoadWAV_RW fail %s: %s %s",
             file.c_str(), Mix_GetError(), SDL_GetError());
         SDL_ClearError();
         return false;
@@ -119,7 +119,7 @@ bool sound_play (const std::string &alias)
     Mix_VolumeChunk(sound->second->chunk, volume);
 
     if (Mix_PlayChannel(-1 /* first free channel */,
-                        sound->second->chunk, 
+                        sound->second->chunk,
                         0 /* loops */) == -1) {
 
         LOG("Cannot play sound %s on any channel", alias.c_str());
@@ -127,7 +127,7 @@ bool sound_play (const std::string &alias)
         SDL_ClearError();
 
         if (Mix_PlayChannel(-1 /* first free channel */,
-                            sound->second->chunk, 
+                            sound->second->chunk,
                             0 /* loops */) == -1) {
             ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
             SDL_ClearError();
@@ -154,7 +154,7 @@ bool sound_play_channel (int channel, const std::string &alias)
 
     if (Mix_Playing(channel)) {
         if (Mix_PlayChannel(-1,
-                            sound->second->chunk, 
+                            sound->second->chunk,
                             0 /* loops */) == -1) {
             LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
             return false;
@@ -163,11 +163,11 @@ bool sound_play_channel (int channel, const std::string &alias)
     }
 
     if (Mix_PlayChannel(channel,
-                        sound->second->chunk, 
+                        sound->second->chunk,
                         0 /* loops */) == -1) {
 
         if (Mix_PlayChannel(-1,
-                            sound->second->chunk, 
+                            sound->second->chunk,
                             0 /* loops */) == -1) {
             LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
             return false;

@@ -25,7 +25,7 @@ void Level::things_gc (bool force)
         dbg("Begin thing garbage collection");
     }
 _
-    for (auto it = all_gc_things.cbegin(), next_it = it; 
+    for (auto it = all_gc_things.cbegin(), next_it = it;
          it != all_gc_things.cend(); it = next_it) {
 	++next_it;
 

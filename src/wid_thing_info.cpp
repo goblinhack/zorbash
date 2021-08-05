@@ -94,7 +94,7 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         t->log("Create popup");
     }
 
-    auto wid_popup_window = new WidPopup("Thing info", tl, br, 
+    auto wid_popup_window = new WidPopup("Thing info", tl, br,
                                          nullptr, "", true, false);
 
     wid_popup_window->t = t;
@@ -185,7 +185,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
     point tl = make_point(0, TERM_HEIGHT - 1 - height);
     point br = make_point(29, TERM_HEIGHT - 1);
 
-    auto wid_popup_window = new WidPopup("Thing info", tl, br, 
+    auto wid_popup_window = new WidPopup("Thing info", tl, br,
                                          nullptr, "", false, false /* vert */);
 
     wid_raise(wid_popup_window->wid_popup_container);
@@ -386,9 +386,9 @@ _
         }
 
         {
-            point tl = mid - point(player->capacity_width() + 6, 
+            point tl = mid - point(player->capacity_width() + 6,
                                    player->capacity_height() + 2);
-            point br = tl +  point(player->capacity_width() + 1, 
+            point br = tl +  point(player->capacity_width() + 1,
                                    player->capacity_height() + 1);
             bag_primary = new WidBag(player, false, tl, br, "Inventory");
         }
@@ -473,7 +473,7 @@ _
         if (o) {
             DBG3("Currently describing %s", o->to_string().c_str());
             if (o->is_hidden) {
-                DBG3("Currently describing %s; keep it over player", 
+                DBG3("Currently describing %s; keep it over player",
                     o->to_string().c_str());
                 return;
             }
@@ -591,7 +591,7 @@ void Game::wid_thing_info_create_when_hovering_over_list (const std::vector<Thin
     wid_thing_info_create_list(ts);
 }
 
-void Game::wid_thing_info_add_enchant (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_enchant (WidPopup *w, Thingp t)
 {_
     if (t->get_enchant()) {
         if (t->is_skill()) {
@@ -603,7 +603,7 @@ void Game::wid_thing_info_add_enchant (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_item_rarity (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_item_rarity (WidPopup *w, Thingp t)
 {_
     auto tp = t->tp();
     if (t->is_collectable()) {
@@ -619,7 +619,7 @@ void Game::wid_thing_info_add_item_rarity (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_monst_rarity (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_monst_rarity (WidPopup *w, Thingp t)
 {_
     auto tp = t->tp();
     if (t->is_monst()) {
@@ -635,7 +635,7 @@ void Game::wid_thing_info_add_monst_rarity (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_gold_value (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_gold_value (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
     char tmp2[MAXSHORTSTR];
@@ -661,7 +661,7 @@ void Game::wid_thing_info_add_gold_value (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_nutrition (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_nutrition (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
     char tmp2[MAXSHORTSTR];
@@ -693,7 +693,7 @@ void Game::wid_thing_info_add_nutrition (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_health (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_health (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
     char tmp2[MAXSHORTSTR];
@@ -714,7 +714,7 @@ void Game::wid_thing_info_add_health (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_melee_damage (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_melee_damage (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
     char tmp2[MAXSHORTSTR];
@@ -743,7 +743,7 @@ void Game::wid_thing_info_add_melee_damage (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_bite_damage (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_bite_damage (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
     char tmp2[MAXSHORTSTR];
@@ -772,7 +772,7 @@ void Game::wid_thing_info_add_bite_damage (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_attack (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_attack (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
 
@@ -793,7 +793,7 @@ void Game::wid_thing_info_add_attack (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_defence (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_defence (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
 
@@ -814,7 +814,7 @@ void Game::wid_thing_info_add_defence (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_strength (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_strength (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
 
@@ -835,7 +835,7 @@ void Game::wid_thing_info_add_strength (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_constitution (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_constitution (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
 
@@ -856,7 +856,7 @@ void Game::wid_thing_info_add_constitution (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_danger_level (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_danger_level (WidPopup *w, Thingp t)
 {_
     auto player = game->level->player;
     if (!player) {
@@ -927,7 +927,7 @@ void Game::wid_thing_info_add_danger_level (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_carry_info (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_carry_info (WidPopup *w, Thingp t)
 {_
     auto player = game->level->player;
     if (!player) {
@@ -984,7 +984,7 @@ void Game::wid_thing_info_add_carry_info (WidPopup *w, Thingp t)
     }
 }
 
-void Game::wid_thing_info_add_charge_count (WidPopup *w, Thingp t) 
+void Game::wid_thing_info_add_charge_count (WidPopup *w, Thingp t)
 {_
     char tmp[MAXSHORTSTR];
     char tmp2[MAXSHORTSTR];

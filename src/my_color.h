@@ -777,7 +777,7 @@ extern color YELLOWGREEN;
 #define CONST_GRAY92 { 235, 235, 235, 255 }
 #define CONST_GRAY93 { 237, 237, 237, 255 }
 #define CONST_GRAY94 { 240, 240, 240, 255 }
-#define CONST_GRAY95 { 242, 242, 242, 255 } 
+#define CONST_GRAY95 { 242, 242, 242, 255 }
 #define CONST_GRAY96 { 245, 245, 245, 255 }
 #define CONST_GRAY97 { 247, 247, 247, 255 }
 #define CONST_GRAY98 { 250, 250, 250, 255 }

@@ -59,7 +59,7 @@ _
     return true;
 }
 
-static void wid_actionbar_quit_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_quit_over_b (Widp w, int32_t relx, int32_t rely,
                                        int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to quit the dungeon.");
@@ -115,7 +115,7 @@ static uint8_t wid_actionbar_robot (Widp w, int32_t x, int32_t y, uint32_t butto
     return true;
 }
 
-static void wid_actionbar_robot_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_robot_over_b (Widp w, int32_t relx, int32_t rely,
                                         int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to explore the dungeon like a robot.");
@@ -153,7 +153,7 @@ _
     return true;
 }
 
-static void wid_actionbar_close_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_close_over_b (Widp w, int32_t relx, int32_t rely,
                                         int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to close any popups.");
@@ -187,7 +187,7 @@ _
     return true;
 }
 
-static void wid_actionbar_load_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_load_over_b (Widp w, int32_t relx, int32_t rely,
                                        int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to load a previously saved dungeon.");
@@ -221,7 +221,7 @@ _
     return true;
 }
 
-static void wid_actionbar_save_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_save_over_b (Widp w, int32_t relx, int32_t rely,
                                        int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to save the current dungeon.");
@@ -265,7 +265,7 @@ _
     return true;
 }
 
-static void wid_actionbar_inventory_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_inventory_over_b (Widp w, int32_t relx, int32_t rely,
                                             int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to see what you are carrying.");
@@ -308,7 +308,7 @@ _
     return true;
 }
 
-static void wid_actionbar_collect_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_collect_over_b (Widp w, int32_t relx, int32_t rely,
                                           int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to collect any loot you are over.");
@@ -354,7 +354,7 @@ _
     return true;
 }
 
-static void wid_actionbar_wield_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_wield_over_b (Widp w, int32_t relx, int32_t rely,
                                         int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to wield a new weapon.");
@@ -435,7 +435,7 @@ _
     return true;
 }
 
-static void wid_actionbar_wait_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_wait_over_b (Widp w, int32_t relx, int32_t rely,
                                        int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to happily pass the time of day.");
@@ -459,7 +459,7 @@ _
     return true;
 }
 
-static void wid_actionbar_zoom_out_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_zoom_out_over_b (Widp w, int32_t relx, int32_t rely,
                                            int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to zoom out the map.");
@@ -483,7 +483,7 @@ _
     return true;
 }
 
-static void wid_actionbar_zoom_in_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_zoom_in_over_b (Widp w, int32_t relx, int32_t rely,
                                           int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to zoom in the map.");
@@ -510,7 +510,7 @@ _
     return true;
 }
 
-static void wid_actionbar_configure_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_actionbar_configure_over_b (Widp w, int32_t relx, int32_t rely,
                                             int32_t wheelx, int32_t wheely)
 {_
     BOTCON("Select this to change key settings.");

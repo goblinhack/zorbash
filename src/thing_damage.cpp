@@ -19,46 +19,46 @@
 ///////////////////////////////////////////////////////////////////////////
 // melee
 ///////////////////////////////////////////////////////////////////////////
-const Dice& Thing::get_damage_melee_dice (void) const {_ 
-    return (tp()->get_damage_melee_dice()); 
+const Dice& Thing::get_damage_melee_dice (void) const {_
+    return (tp()->get_damage_melee_dice());
 }
 
-const std::string& Thing::get_damage_melee_dice_str (void) const {_ 
-    return (tp()->get_damage_melee_dice_str()); 
+const std::string& Thing::get_damage_melee_dice_str (void) const {_
+    return (tp()->get_damage_melee_dice_str());
 }
 
-int Thing::get_damage_melee (void) const {_ 
-    return (tp()->get_damage_melee_dice().roll()); 
+int Thing::get_damage_melee (void) const {_
+    return (tp()->get_damage_melee_dice().roll());
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // crush
 ///////////////////////////////////////////////////////////////////////////
-const Dice& Thing::get_damage_crush_dice (void) const {_ 
-    return (tp()->get_damage_crush_dice()); 
+const Dice& Thing::get_damage_crush_dice (void) const {_
+    return (tp()->get_damage_crush_dice());
 }
 
-const std::string& Thing::get_damage_crush_dice_str (void) const {_ 
-    return (tp()->get_damage_crush_dice_str()); 
+const std::string& Thing::get_damage_crush_dice_str (void) const {_
+    return (tp()->get_damage_crush_dice_str());
 }
 
-int Thing::get_damage_crush (void) const {_ 
-    return (tp()->get_damage_crush_dice().roll()); 
+int Thing::get_damage_crush (void) const {_
+    return (tp()->get_damage_crush_dice().roll());
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // bite
 ///////////////////////////////////////////////////////////////////////////
-const Dice& Thing::get_damage_bite_dice (void) const {_ 
-    return (tp()->get_damage_bite_dice()); 
+const Dice& Thing::get_damage_bite_dice (void) const {_
+    return (tp()->get_damage_bite_dice());
 }
 
-const std::string& Thing::get_damage_bite_dice_str (void) const {_ 
-    return (tp()->get_damage_bite_dice_str()); 
+const std::string& Thing::get_damage_bite_dice_str (void) const {_
+    return (tp()->get_damage_bite_dice_str());
 }
 
-int Thing::get_damage_bite (void) const {_ 
-    return (tp()->get_damage_bite_dice().roll()); 
+int Thing::get_damage_bite (void) const {_
+    return (tp()->get_damage_bite_dice().roll());
 }
 
 ///////////////////////////////////////////////////////////////////////////

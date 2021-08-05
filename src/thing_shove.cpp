@@ -33,7 +33,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (!is_player()) {
-        if ((int)pcq_random_range(0, 1000) > 
+        if ((int)pcq_random_range(0, 1000) >
                 tp()->attack_shove_chance_d1000()) {
             return (THING_SHOVE_NEVER_TRIED);
         }

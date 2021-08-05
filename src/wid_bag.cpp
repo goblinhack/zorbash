@@ -29,7 +29,7 @@
 #include "slre.h"
 
 static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button);
-static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, 
+static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely,
                                       int32_t wheelx, int32_t wheely);
 static void wid_bag_item_mouse_over_e(Widp w);
 static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key);
@@ -97,7 +97,7 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
         //
         auto slot = game->level->inventory_get_slot(t);
         if (slot != -1) {
-            auto w = wid_new_square_button(wid_bag_container, 
+            auto w = wid_new_square_button(wid_bag_container,
                                            "wid_bag button" + t->to_string());
             wid_set_pos(w, tl, tl);
             wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
@@ -368,7 +368,7 @@ _
     return true;
 }
 
-static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely, 
+static void wid_bag_item_mouse_over_b (Widp w, int32_t relx, int32_t rely,
                                        int32_t wheelx, int32_t wheely)
 {
     if (game->in_transit_item) {

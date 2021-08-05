@@ -55,14 +55,14 @@ void Thing::update_tick (void)
 void Thing::achieve_goals_in_life (void)
 {_
     if (is_changing_level ||
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_the_grid || 
-        is_jumping) { 
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
+        is_the_grid ||
+        is_jumping) {
         dbg("Skip achieve goals in life");
         return;
     }

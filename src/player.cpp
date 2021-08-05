@@ -42,7 +42,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                 LOG("Ignore player action when moving items");
             }
             return;
-        case Game::STATE_WIELDING_ITEMS: 
+        case Game::STATE_WIELDING_ITEMS:
             if (unlikely(g_opt_debug4)) {
                 LOG("Ignore player action when wielding items");
             }

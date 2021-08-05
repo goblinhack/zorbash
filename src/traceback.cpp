@@ -303,7 +303,7 @@ void _backtrace (void)
     HANDLE thread = GetCurrentThread();
 
     if (!SymInitialize(process, 0, true)) {
-        wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", 
+        wprintf(L"SymInitialize unable to find process!! Error: %d\r\n",
                 GetLastError());
     }
 
@@ -324,7 +324,7 @@ void _backtrace (void)
 #if _MSC_VER >= 1400
     maxLen = _TRUNCATE;
 #endif
-    _snprintf_s(search_path_debug, maxLen, 
+    _snprintf_s(search_path_debug, maxLen,
                 "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
                 szSearchPath, symOptions, szUserName);
     search_path_debug[MAX_SYMBOL_LEN - 1] = 0;
@@ -356,14 +356,14 @@ void _backtrace (void)
 #error "platform not supported!"
 #endif
     for (ULONG frame = 0; ; frame++) {
-        BOOL result = StackWalk(machine, 
-                                process, 
-                                thread, 
+        BOOL result = StackWalk(machine,
+                                process,
+                                thread,
                                 &stack,
                                 &context,
                                 0,
-                                SymFunctionTableAccess, 
-                                SymGetModuleBase, 
+                                SymFunctionTableAccess,
+                                SymGetModuleBase,
                                 0);
 
         CallstackEntry csEntry;
@@ -383,18 +383,18 @@ void _backtrace (void)
         symbol.MaxNameLength = MAX_SYMBOL_LEN;
 
         // Initalize more memory and clear it out
-        if (SymGetSymFromAddr64(process, 
+        if (SymGetSymFromAddr64(process,
                                 stack.AddrPC.Offset,
-                                &csEntry.offsetFromSmybol, 
+                                &csEntry.offsetFromSmybol,
                                 &symbol)) {
         }
 
         IMAGEHLP_LINE64 line {};
         line.SizeOfStruct = sizeof(line);
 
-        if (SymGetLineFromAddr64(process, 
+        if (SymGetLineFromAddr64(process,
                                  stack.AddrPC.Offset,
-                                 &csEntry.offsetFromLine, 
+                                 &csEntry.offsetFromLine,
                                  &line)) {
         }
 

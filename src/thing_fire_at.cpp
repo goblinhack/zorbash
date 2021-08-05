@@ -101,7 +101,7 @@ Thingp Thing::get_best_fire_at_target (void)
 /*
  * Add a thing to the list of things that could be hit on this attack.
  */
-static void 
+static void
 thing_possible_hit_add (Thingp me, Thingp target)
 {
     if (!game->level->can_see(me->mid_at.x, me->mid_at.y, target->mid_at.x, target->mid_at.y)) {
@@ -130,7 +130,7 @@ bool Thing::fire_at_target (void)
     int dx, dy;
     int distance = ai_vision_distance();
 
-    for (dx = -distance; dx <= distance; dx++) 
+    for (dx = -distance; dx <= distance; dx++)
     for (dy = -distance; dy <= distance; dy++) {
 
         int x = mid_at.x + dx;

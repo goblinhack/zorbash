@@ -32,8 +32,8 @@ HiScores::~HiScores (void)
 {_
 }
 
-void HiScores::add_new_hiscore (Thingp player, 
-                                const std::string &name, 
+void HiScores::add_new_hiscore (Thingp player,
+                                const std::string &name,
                                 const std::string &killed_by)
 {_
     std::vector<HiScore>::iterator h = hiscores.begin();

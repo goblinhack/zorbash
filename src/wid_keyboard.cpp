@@ -43,7 +43,7 @@ int wid_keyboard_visible;
 static void wid_keyboard_destroy(Widp w);
 static void wid_keyboard_set_focus(wid_keyboard_ctx *ctx,
                                    int focusx, int focusy);
-static uint8_t wid_keyboard_text_input_key_event(Widp w, 
+static uint8_t wid_keyboard_text_input_key_event(Widp w,
                                                  const SDL_Keysym *key);
 
 static void wid_keyboard_update_buttons (Widp w)
@@ -239,7 +239,7 @@ static void wid_keyboard_first_focus (wid_keyboard_ctx *ctx)
     wid_keyboard_update_buttons(ctx->w);
 }
 
-static void wid_keyboard_set_focus (wid_keyboard_ctx *ctx, 
+static void wid_keyboard_set_focus (wid_keyboard_ctx *ctx,
                                     int focusx, int focusy)
 {
     ctx->focusx = focusx;
@@ -248,14 +248,14 @@ static void wid_keyboard_set_focus (wid_keyboard_ctx *ctx,
     wid_keyboard_update_buttons(ctx->w);
 }
 
-static uint8_t wid_keyboard_parent_key_down (Widp w, 
+static uint8_t wid_keyboard_parent_key_down (Widp w,
                                              const SDL_Keysym *key)
 {
     wid_keyboard_ctx *ctx = (wid_keyboard_ctx*)wid_get_void_context(w);
     verify(ctx);
 
     /*
-     * Don't process events too soon. Else the menu might not even have 
+     * Don't process events too soon. Else the menu might not even have
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
@@ -307,7 +307,7 @@ static uint8_t wid_keyboard_parent_key_down (Widp w,
     return (true);
 }
 
-static uint8_t wid_keyboard_parent_joy_button (Widp w, 
+static uint8_t wid_keyboard_parent_joy_button (Widp w,
                                                int32_t x,
                                                int32_t y)
 {
@@ -316,7 +316,7 @@ static uint8_t wid_keyboard_parent_joy_button (Widp w,
     int ret = false;
 
     /*
-     * Don't process events too soon. Else the menu might not even have 
+     * Don't process events too soon. Else the menu might not even have
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
@@ -396,7 +396,7 @@ static uint8_t wid_keyboard_button_key_event (Widp w, const SDL_Keysym *key)
     verify(ctx);
 
     /*
-     * Don't process events too soon. Else the menu might not even have 
+     * Don't process events too soon. Else the menu might not even have
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
@@ -433,7 +433,7 @@ static uint8_t wid_keyboard_button_key_event (Widp w, const SDL_Keysym *key)
     return (false);
 }
 
-static uint8_t wid_keyboard_button_joy_button_event (Widp w, 
+static uint8_t wid_keyboard_button_joy_button_event (Widp w,
                                                      int32_t x, int32_t y)
 {
     wid_keyboard_ctx *ctx = (wid_keyboard_ctx*)wid_get_void_context(w);
@@ -441,7 +441,7 @@ static uint8_t wid_keyboard_button_joy_button_event (Widp w,
     int ret = false;
 
     /*
-     * Don't process events too soon. Else the menu might not even have 
+     * Don't process events too soon. Else the menu might not even have
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
@@ -525,7 +525,7 @@ static uint8_t wid_keyboard_text_input_key_event (Widp w, const SDL_Keysym *key)
     verify(ctx);
 
     /*
-     * Don't process events too soon. Else the menu might not even have 
+     * Don't process events too soon. Else the menu might not even have
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
@@ -682,7 +682,7 @@ Widp wid_keyboard (const std::wstring &text,
     wid_keyboard_visible = true;
 
     /*
-     * Create a context to hold button info so we can update it when the focus 
+     * Create a context to hold button info so we can update it when the focus
      * changes
      */
     wid_keyboard_ctx *ctx = (wid_keyboard_ctx*) myzalloc(sizeof(*ctx), "wid keyboard");
@@ -762,7 +762,7 @@ Widp wid_keyboard (const std::wstring &text,
      * Create the button container
      */
     {
-        Widp button_container = wid_new_square_button(window, 
+        Widp button_container = wid_new_square_button(window,
                                                       "wid keyboard buttons");
         wid_set_shape_none(button_container);
         wid_set_on_tick(button_container, wid_keyboard_tick);

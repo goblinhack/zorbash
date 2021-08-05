@@ -482,7 +482,7 @@ bool Thing::get_coords (point &blit_tl,
     if (likely(!falling)) {
         if (unlikely(tpp->gfx_animated_can_hflip())) {
             if (is_player() ||
-                (level->player && 
+                (level->player &&
                  (get_immediate_owner_id() == level->player->id))) {
                 if (get_timestamp_flip_start()) {
                     //
@@ -767,7 +767,7 @@ void Thing::blit_internal (int fbo,
                            bool reflection)
 {_
     auto tpp = tp();
- 
+
     //
     // Displayed as a particles
     //
@@ -798,7 +798,7 @@ void Thing::blit_internal (int fbo,
     auto h = get_health();
     auto m = get_health_max();
 
-    auto lit = (fbo == FBO_FULLMAP) || 
+    auto lit = (fbo == FBO_FULLMAP) ||
                     level->is_lit_currently_no_check(mid_at.x, mid_at.y);
 
     if (tile &&
@@ -811,7 +811,7 @@ void Thing::blit_internal (int fbo,
          (gfx_health_bar_shown_only_when_injured() && (h < m))
         )) {
 
-        int h_step = (1.0 - ((float)h / (float)m)) * 
+        int h_step = (1.0 - ((float)h / (float)m)) *
                         GAME_MONST_HEALTH_BAR_STEPS;
         h_step = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
         h_step = std::max(h_step, 1);

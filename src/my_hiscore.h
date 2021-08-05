@@ -8,12 +8,12 @@
 #define _MY_HISCORE_H_
 
 class HiScore
-{   
+{  
 public:
     HiScore (void) {}
-    HiScore (std::string name, 
+    HiScore (std::string name,
              std::string when,
-             int score, 
+             int score,
              int level_reached,
              std::string killed_by)
     {

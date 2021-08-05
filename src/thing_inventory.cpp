@@ -72,7 +72,7 @@ _
             std::string name = "gold1." + std::to_string(pcq_random_range(1, 8));
             level->new_external_particle(
                      s + j, p,
-                     isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), 
+                     isize(TILE_WIDTH / 2, TILE_HEIGHT / 2),
                      2 * PARTICLE_SPEED_MS + c,
                      tile_find_mand(name), false,
                      false /* make_visible_at_end */);
@@ -107,7 +107,7 @@ _
         std::string tile_name = "key.1";
         level->new_external_particle(
                  s + j, p,
-                 isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), 
+                 isize(TILE_WIDTH / 2, TILE_HEIGHT / 2),
                  PARTICLE_SPEED_MS,
                  tile_find_mand(tile_name), false,
                  false /* make_visible_at_end */);
@@ -132,7 +132,7 @@ _
         level->new_external_particle(
                  item->id,
                  (last_blit_tl + last_blit_br) / 2, p,
-                 isize(TILE_WIDTH, TILE_HEIGHT), 
+                 isize(TILE_WIDTH, TILE_HEIGHT),
                  PARTICLE_SPEED_MS,
                  tile_index_to_tile(item->tile_curr),
                  (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()),
@@ -143,8 +143,8 @@ _
 //
 // Particle from the inventory to tp_id target
 //
-void Thing::inventory_particle (Thingp item, 
-                                uint32_t slot, 
+void Thing::inventory_particle (Thingp item,
+                                uint32_t slot,
                                 Thingp particle_target)
 {_
     dbg("Create inventory particle %s with target %s",
@@ -160,7 +160,7 @@ _
         // Always show
         //
     } else {
-        if ((game->state == Game::STATE_MOVING_ITEMS) || 
+        if ((game->state == Game::STATE_MOVING_ITEMS) ||
             (game->state == Game::STATE_WIELDING_ITEMS) ||
             (game->state == Game::STATE_COLLECTING_ITEMS)) {
             //
@@ -195,9 +195,9 @@ _
         }
 
         where_from = (w->abs_tl + w->abs_br) / 2;
-        where_from.x = (int)(((float)game->config.game_pix_width / 
+        where_from.x = (int)(((float)game->config.game_pix_width /
                              (float)TERM_WIDTH) * (float)where_from.x);
-        where_from.y = (int)(((float)game->config.game_pix_height / 
+        where_from.y = (int)(((float)game->config.game_pix_height /
                              (float)TERM_HEIGHT) * (float)where_from.y);
     } else {
         where_from = (last_blit_tl + last_blit_br) / 2;
@@ -208,11 +208,11 @@ _
 
 
     level->new_external_particle(item->id, where_from, where_to,
-                                 isize(TILE_WIDTH, TILE_HEIGHT), 
+                                 isize(TILE_WIDTH, TILE_HEIGHT),
                                  PARTICLE_SPEED_MS,
                                  tile_index_to_tile(item->tile_curr),
-                                 (item->is_dir_br() || 
-                                  item->is_dir_right() || 
+                                 (item->is_dir_br() ||
+                                  item->is_dir_right() ||
                                   item->is_dir_tr()),
                                  true /* make_visible_at_end */);
 }
@@ -395,7 +395,7 @@ _
                 if (!monstp->inventory_id.size()) {
                     game->inventory_highlight_slot = {};
                 } else {
-                    while (game->inventory_highlight_slot >= 
+                    while (game->inventory_highlight_slot >=
                         monstp->inventory_id.size()) {
                         game->inventory_highlight_slot--;
                     }
@@ -405,7 +405,7 @@ _
             level->inventory_describe(game->inventory_highlight_slot);
             wid_inventory_init();
             if ((game->state != Game::STATE_CHOOSING_TARGET) &&
-                (game->state != Game::STATE_MOVING_ITEMS) && 
+                (game->state != Game::STATE_MOVING_ITEMS) &&
                 (game->state != Game::STATE_WIELDING_ITEMS) &&
                 (game->state != Game::STATE_COLLECTING_ITEMS)) {
                 wid_thing_info_fini();
@@ -468,7 +468,7 @@ _
                 if (!monstp->inventory_id.size()) {
                     game->inventory_highlight_slot = {};
                 } else {
-                    while (game->inventory_highlight_slot >= 
+                    while (game->inventory_highlight_slot >=
                         monstp->inventory_id.size()) {
                         game->inventory_highlight_slot--;
                     }

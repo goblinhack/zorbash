@@ -19,7 +19,7 @@ PyObject *music_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     static char *kwlist[] = {(char*)"rate", (char*) "file", (char*) "name", 0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iss", kwlist, 
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iss", kwlist,
                                      &rate, &file, &name)) {
         ERR("music_load: bad arguments");
         Py_RETURN_FALSE;

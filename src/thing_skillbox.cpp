@@ -136,7 +136,7 @@ _
             if (!monstp->skillbox_id.size()) {
                 game->skillbox_highlight_slot = {};
             } else {
-                while (game->skillbox_highlight_slot >= 
+                while (game->skillbox_highlight_slot >=
                     monstp->skillbox_id.size()) {
                     game->skillbox_highlight_slot--;
                 }
@@ -145,7 +145,7 @@ _
             level->skillbox_describe(game->skillbox_highlight_slot);
             wid_skillbox_init();
             if ((game->state != Game::STATE_CHOOSING_TARGET) &&
-                (game->state != Game::STATE_MOVING_ITEMS) && 
+                (game->state != Game::STATE_MOVING_ITEMS) &&
                 (game->state != Game::STATE_WIELDING_ITEMS) &&
                 (game->state != Game::STATE_COLLECTING_ITEMS)) {
                 wid_thing_info_fini();
@@ -202,7 +202,7 @@ _
         }
     }
 
-    LOG("Slot %d has skill tp %s that is not carried", slot, 
+    LOG("Slot %d has skill tp %s that is not carried", slot,
         tpp->name().c_str());
     return nullptr;
 }

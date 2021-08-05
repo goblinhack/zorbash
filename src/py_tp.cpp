@@ -844,16 +844,16 @@ PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, 
     uint32_t radius_min = 0;
     uint32_t radius_max = 0;
 
-    static char *kwlist[] = {(char*) "id", 
-                             (char*) "parent_id", 
-                             (char*) "target_id", 
-                             (char*) "what", 
-                             (char*) "min", 
-                             (char*) "max", 
+    static char *kwlist[] = {(char*) "id",
+                             (char*) "parent_id",
+                             (char*) "target_id",
+                             (char*) "what",
+                             (char*) "min",
+                             (char*) "max",
                              0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, 
-                                     &parent_id, &target_id, &what, 
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id,
+                                     &parent_id, &target_id, &what,
                                      &radius_min, &radius_max)) {
         ERR("%s: bad args", __FUNCTION__);
         Py_RETURN_FALSE;

@@ -87,8 +87,8 @@ void Level::display_internal_particles (void)
     }
 #endif
 
-    all_internal_particles.insert(std::end(all_internal_particles), 
-                                  std::begin(new_internal_particles), 
+    all_internal_particles.insert(std::end(all_internal_particles),
+                                  std::begin(new_internal_particles),
                                   std::end(new_internal_particles));
     new_internal_particles.clear();
 
@@ -278,8 +278,8 @@ void Level::display_external_particles (void)
     }
 #endif
 
-    all_external_particles.insert(std::end(all_external_particles), 
-                                  std::begin(new_external_particles), 
+    all_external_particles.insert(std::end(all_external_particles),
+                                  std::begin(new_external_particles),
                                   std::end(new_external_particles));
     new_external_particles.clear();
 

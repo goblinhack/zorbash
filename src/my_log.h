@@ -19,7 +19,7 @@ void putf(FILE *fp, const char *s);
 
 #ifdef _WIN32
 //
-// windows is such utter garbage that if the program crashes it does not flush 
+// windows is such utter garbage that if the program crashes it does not flush
 // the goddamned console! So we need this...
 //
 #define FLUSH_THE_CONSOLE() FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS()

@@ -291,8 +291,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 
     if (unlikely(g_opt_debug4)) {
         auto diff = out.tellp() - start;
-        LOG("SAVE %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p", 
-            (int)diff, name.c_str(), my.t->tp_id, my.t->id.id, 
+        LOG("SAVE %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p",
+            (int)diff, name.c_str(), my.t->tp_id, my.t->id.id,
             my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
     }
     return (out);
@@ -804,7 +804,7 @@ void Game::save_select (void)
                           tl.y + 29);
     auto width = br.x - tl.x;
 
-    wid_save = new WidPopup("Game save", tl, br, 
+    wid_save = new WidPopup("Game save", tl, br,
                             tile_find_mand("save"), "",
                             false, false);
     wid_set_on_key_up(wid_save->wid_popup_container, wid_save_key_up);

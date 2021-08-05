@@ -34,8 +34,8 @@ void Thing::blit_floor_chasm (point &tl, point &br, const ThingTiles *tiles)
     auto tile = tile_index_to_tile(tilen);
     auto maxdepth = tex_get_height(tile->tex) / TILE_HEIGHT;
     auto depth = 0U;
-    while ((y < MAP_HEIGHT - 1) && 
-           level->is_chasm(x, y + 1) && 
+    while ((y < MAP_HEIGHT - 1) &&
+           level->is_chasm(x, y + 1) &&
            (depth < maxdepth)) {
         depth++;
         y++;

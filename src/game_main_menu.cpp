@@ -149,7 +149,7 @@ static uint8_t game_main_menu_key_up (Widp w, const struct SDL_Keysym *key)
         if (key->scancode == (SDL_Scancode)game->config.key_console) {
             return false;
         }
-    } 
+    }
 
     switch (key->mod) {
         case KMOD_LCTRL:

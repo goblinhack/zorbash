@@ -31,14 +31,14 @@ float Thing::how_far_i_can_jump (void)
 bool Thing::try_to_jump (point to)
 {_
     if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
+        is_hidden ||
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
+        is_jumping) {
         return false;
     }
 
@@ -207,13 +207,13 @@ bool Thing::try_to_jump (point to)
             if (is_player()) {
                 level->new_external_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || 
+                                             (w->is_dir_br() || w->is_dir_right() ||
                                               w->is_dir_tr()),
                                              true /* make_visible_at_end */);
             } else {
                 level->new_internal_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || 
+                                             (w->is_dir_br() || w->is_dir_right() ||
                                               w->is_dir_tr()),
                                              true /* make_visible_at_end */);
             }
@@ -232,13 +232,13 @@ bool Thing::try_to_jump (point to)
             if (is_player()) {
                 level->new_external_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || 
+                                             (w->is_dir_br() || w->is_dir_right() ||
                                               w->is_dir_tr()),
                                              true /* make_visible_at_end */);
             } else {
                 level->new_internal_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || 
+                                             (w->is_dir_br() || w->is_dir_right() ||
                                               w->is_dir_tr()),
                                              true /* make_visible_at_end */);
             }
@@ -267,13 +267,13 @@ bool Thing::try_to_jump (point to)
             if (is_player()) {
                 level->new_external_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() || 
+                                             (w->is_dir_br() || w->is_dir_right() ||
                                               w->is_dir_tr()),
                                              false /* make_visible_at_end */);
             } else {
                 level->new_internal_particle(id, src, dst, sz, delay_shorter,
                                              tile_index_to_tile(w->tile_curr),
-                                             (w->is_dir_br() || w->is_dir_right() 
+                                             (w->is_dir_br() || w->is_dir_right()
                                               || w->is_dir_tr()),
                                              false /* make_visible_at_end */);
             }
@@ -305,14 +305,14 @@ bool Thing::try_to_jump (point to)
 bool Thing::try_to_jump (void)
 {_
     if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
+        is_hidden ||
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
+        is_jumping) {
         return false;
     }
 
@@ -333,14 +333,14 @@ bool Thing::try_to_jump (void)
 bool Thing::try_to_jump_towards_player (void)
 {_
     if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
+        is_hidden ||
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
+        is_jumping) {
         return false;
     }
 
@@ -377,14 +377,14 @@ bool Thing::try_to_jump_towards_player (void)
 bool Thing::try_to_jump_away_from_player (void)
 {_
     if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
+        is_hidden ||
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
+        is_jumping) {
         return false;
     }
 
@@ -414,14 +414,14 @@ bool Thing::try_to_jump_away_from_player (void)
 bool Thing::try_harder_to_jump (void)
 {_
     if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
+        is_hidden ||
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
+        is_jumping) {
         return false;
     }
 

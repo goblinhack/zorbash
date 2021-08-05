@@ -439,7 +439,7 @@ placed_player:
     return true;
 }
 
-void Level::create_dungeon_place_walls (Dungeonp d, Tpp tp, int variant, 
+void Level::create_dungeon_place_walls (Dungeonp d, Tpp tp, int variant,
                                         int block_width, int block_height, int tries)
 {_
     auto what = tp->name();
@@ -519,7 +519,7 @@ void Level::create_dungeon_place_walls (Dungeonp d, Tpp tp, int variant,
     }
 }
 
-void Level::create_dungeon_place_rocks (Dungeonp d, int variant, 
+void Level::create_dungeon_place_rocks (Dungeonp d, int variant,
                                         int block_width, int block_height, int tries)
 {_
     auto tp = tp_random_rock();
@@ -608,9 +608,9 @@ void Level::create_dungeon_place_floors (Dungeonp d, std::string what, int floor
                                          int block_height, int tries)
 {_
     while (tries--) {
-        auto x = pcq_random_range(MAP_BORDER_ROCK, 
+        auto x = pcq_random_range(MAP_BORDER_ROCK,
                                   MAP_WIDTH - MAP_BORDER_ROCK - block_width + 1);
-        auto y = pcq_random_range(MAP_BORDER_ROCK, 
+        auto y = pcq_random_range(MAP_BORDER_ROCK,
                                   MAP_HEIGHT - MAP_BORDER_ROCK - block_height + 1);
 
         //
@@ -741,14 +741,14 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_wand(x, y))             { tp = tp_random_wand(); }
             if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
 
-            if (d->is_monst_easy(x, y)) { 
+            if (d->is_monst_easy(x, y)) {
                 if (pcq_random_range(0, 100) < 75) {
                     tp = tp_random_monst_easy(p);
                 }
             }
 
-            if (d->is_monst_hard(x, y)) { 
-                tp = tp_random_monst_hard(p); 
+            if (d->is_monst_hard(x, y)) {
+                tp = tp_random_monst_hard(p);
             }
 
             //
@@ -774,7 +774,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 d->is_hazard(x + 1, y + 1)) {
 
                 if (d->is_minion_generator_easy(x, y) || d->is_minion_generator_hard(x, y)) {
-                    tp = tp_random_ethereal_minion_generator(); 
+                    tp = tp_random_ethereal_minion_generator();
                 }
             } else {
                 //
@@ -782,14 +782,14 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 //
                 if (d->is_minion_generator_easy(x, y)) {
                     if (always_give_treasure) {
-                        tp = tp_random_minion_generator_easy(p); 
+                        tp = tp_random_minion_generator_easy(p);
                     } else {
                         if (pcq_random_range(0, 100) < 50) {
-                            tp = tp_random_minion_generator_easy(p); 
+                            tp = tp_random_minion_generator_easy(p);
                         }
                     }
                 } else if (d->is_minion_generator_hard(x, y)) {
-                    tp = tp_random_minion_generator_hard(p); 
+                    tp = tp_random_minion_generator_hard(p);
                 }
             }
 
@@ -797,12 +797,12 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 tp = tp_random_barrel();
             }
 
-            if (d->is_treasure(x, y)) { 
+            if (d->is_treasure(x, y)) {
                 if (always_give_treasure) {
-                    tp = tp_random_treasure(); 
+                    tp = tp_random_treasure();
                 } else {
                     if (pcq_random_range(0, 100) < 50) {
-                        tp = tp_random_treasure(); 
+                        tp = tp_random_treasure();
                     }
                 }
             }
@@ -814,53 +814,53 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 //
                 if (d->is_treasure_class_a(x, y) ||
                     d->is_treasure_class_b(x, y) ||
-                    d->is_treasure_class_c(x, y)) { 
+                    d->is_treasure_class_c(x, y)) {
                     if (pcq_random_range(0, 100) < 80) {
-                        tp = tp_random_item_class_c(); 
+                        tp = tp_random_item_class_c();
                     } else if (pcq_random_range(0, 100) < 80) {
-                        tp = tp_random_item_class_b(); 
+                        tp = tp_random_item_class_b();
                     } else {
-                        tp = tp_random_item_class_a(); 
+                        tp = tp_random_item_class_a();
                     }
                 }
             } else {
-                if (d->is_treasure_class_a(x, y)) { 
+                if (d->is_treasure_class_a(x, y)) {
                     if (always_give_treasure) {
-                        tp = tp_random_item_class_a(); 
+                        tp = tp_random_item_class_a();
                     } else {
                         if (pcq_random_range(0, 100) < 50) {
-                            tp = tp_random_item_class_a(); 
+                            tp = tp_random_item_class_a();
                         }
                     }
                 }
 
-                if (d->is_treasure_class_b(x, y)) { 
+                if (d->is_treasure_class_b(x, y)) {
                     if (always_give_treasure) {
-                        tp = tp_random_item_class_b(); 
+                        tp = tp_random_item_class_b();
                     } else {
                         if (pcq_random_range(0, 100) < 50) {
-                            tp = tp_random_item_class_b(); 
+                            tp = tp_random_item_class_b();
                         }
                     }
                 }
 
-                if (d->is_treasure_class_c(x, y)) { 
+                if (d->is_treasure_class_c(x, y)) {
                     if (always_give_treasure) {
-                        tp = tp_random_item_class_c(); 
+                        tp = tp_random_item_class_c();
                     } else {
                         if (pcq_random_range(0, 100) < 50) {
-                            tp = tp_random_item_class_c(); 
+                            tp = tp_random_item_class_c();
                         }
                     }
                 }
             }
 
-            if (d->is_enchantstone(x, y)) { 
-                tp = tp_random_enchantstone(); 
+            if (d->is_enchantstone(x, y)) {
+                tp = tp_random_enchantstone();
             }
 
-            if (d->is_skillstone(x, y)) { 
-                tp = tp_random_skillstone(); 
+            if (d->is_skillstone(x, y)) {
+                tp = tp_random_skillstone();
             }
 
             if (!tp) {
@@ -1425,8 +1425,8 @@ void Level::place_random_treasure (Dungeonp d)
         auto x = pcq_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
         auto y = pcq_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
-        if (d->is_dirt(x, y) || 
-            d->is_deep_water(x, y) || 
+        if (d->is_dirt(x, y) ||
+            d->is_deep_water(x, y) ||
             d->is_spiderweb(x, y) ||
             d->is_foilage(x, y)) {
             auto tp = tp_random_treasure();

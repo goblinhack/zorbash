@@ -1551,7 +1551,7 @@ void Dungeon::rooms_print_all (Grid *g)
 bool Dungeon::room_is_a_candidate (int x, int y, const DungeonNode *n, Roomp r)
 {
 #if 0
-CON("%d %d depth %d up %d down %d left %d right %d", x, y, 
+CON("%d %d depth %d up %d down %d left %d right %d", x, y,
     n->depth, n->has_door_up, n->has_door_down, n->has_door_left, n->has_door_right);
 #endif
     for (auto x = 0; x < nodes->grid_width; x++) {
@@ -2936,7 +2936,7 @@ bool Dungeon::rooms_move_closer_together (void)
                 restore_level();
             } else {
                 corridor_count = new_total_corridor_len;
-                DBG("moved rooms closer, new_total_corridor_len now %d", 
+                DBG("moved rooms closer, new_total_corridor_len now %d",
                     new_total_corridor_len);
                 failed_to_place_all_corridors = 0;
                 failed_to_make_shorter_corridors = 0;
@@ -4020,7 +4020,7 @@ void Dungeon::dry_grass_gen (unsigned int map_fill_prob,
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
             if (get(map_curr, x, y)) {
-                if (is_wall(x, y) || 
+                if (is_wall(x, y) ||
                     is_rock(x, y) ||
                     is_chasm(x, y)) {
                     continue;
@@ -4097,7 +4097,7 @@ void Dungeon::foilage_gen (unsigned int map_fill_prob,
     for (x=2; x < maze_w-2; x++) {
         for (y=2; y < maze_h-2; y++) {
             if (get(map_curr, x, y)) {
-                if (is_wall(x, y) || 
+                if (is_wall(x, y) ||
                     is_rock(x, y) ||
                     is_chasm(x, y)) {
                     continue;

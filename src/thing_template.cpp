@@ -79,7 +79,7 @@ void tp_fini (void)
     }
 }
 
-Tpp tp_load (int id, std::string const& name, 
+Tpp tp_load (int id, std::string const& name,
              const std::string &text_name,
              const std::string &short_text_name)
 {_

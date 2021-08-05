@@ -740,7 +740,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
             return (things_tile_overlap(A, B));
         }
         return false;
-    
+   
 
     if (!tp_collision_circle(A->tp) &&
          tp_collision_circle(B->tp)) {
@@ -904,7 +904,7 @@ _
         // Continue walking by falling through to return true
         //
         dbg("No; ignore corpse");
-    } else if (is_fire() && (it->is_burnable() || 
+    } else if (is_fire() && (it->is_burnable() ||
                              it->is_very_combustible() ||
                              it->is_combustible())) {
         //
@@ -916,7 +916,7 @@ _
         } else {
             dbg("No; cannot butn %s, no overlap", it->to_string().c_str());
         }
-    } else if (is_lava() && (it->is_burnable() || 
+    } else if (is_lava() && (it->is_burnable() ||
                              it->is_very_combustible() ||
                              it->is_combustible())) {
         //

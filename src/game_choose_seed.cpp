@@ -43,7 +43,7 @@ void Game::choose_seed_select (void)
     wid_skillbox_fini();
     wid_thing_info_fini();
 
-    wid_keyboard_choose_seed = 
+    wid_keyboard_choose_seed =
         wid_keyboard(string_to_wstring(g_opt_seed_name),
                      L"Enter a name or number for the dungeon seed", selected, cancelled);
 }

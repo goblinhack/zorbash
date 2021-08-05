@@ -25,15 +25,15 @@ uint8_t wid_skillbox_init (void)
     return true;
 }
 
-void wid_skillbox_mouse_over_b (Widp w, 
-                                int32_t relx, int32_t rely, 
+void wid_skillbox_mouse_over_b (Widp w,
+                                int32_t relx, int32_t rely,
                                 int32_t wheelx, int32_t wheely)
 {_
     DBG3("Skillbox: begin over skillbox");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-        (game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||
@@ -78,7 +78,7 @@ void wid_skillbox_mouse_over_e (Widp w)
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-        (game->state == Game::STATE_MOVING_ITEMS) || 
+        (game->state == Game::STATE_MOVING_ITEMS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS) ||
         (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_SAVE_MENU) ||

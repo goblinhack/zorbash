@@ -134,7 +134,7 @@ void Thing::level_push (void)
         }
     }
 
-    if (is_deep_water()) { 
+    if (is_deep_water()) {
         if (!is_falling) {
             i_set_is_deep_water = true;
             level->set_is_deep_water(mx, my);

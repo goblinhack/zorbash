@@ -44,7 +44,7 @@ void Level::scroll_map_do (bool fast)
 
 #if 0
 if (player) {
-    player->topcon("map_at %f %f map_wanted_at %f %f", 
+    player->topcon("map_at %f %f map_wanted_at %f %f",
                     map_at.x,
                     map_at.y,
                     map_wanted_at.x,
@@ -112,7 +112,7 @@ if (player) {
         }
     } else {
         //
-        // Else following the cursor or mouse. Bigger chunks are less sick 
+        // Else following the cursor or mouse. Bigger chunks are less sick
         // inducing.
         //
         if (fast) {

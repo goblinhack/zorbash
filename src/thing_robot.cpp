@@ -151,7 +151,7 @@ _
             set(g.dmap->val, goal_target.x, goal_target.y, score8);
 
             dbg2(" scale goal (%d,%d) score %d to dmap score %d",
-                (int)minx + goal.at.x, (int)miny + goal.at.y, 
+                (int)minx + goal.at.x, (int)miny + goal.at.y,
                 (int)orig_score, (int)score8);
         }
 
@@ -214,7 +214,7 @@ _
             // Unreachable?
             //
             if (result.cost == std::numeric_limits<int>::max()) {
-                dbg2(" goal (%d,%d) score %d -> unreachable", 
+                dbg2(" goal (%d,%d) score %d -> unreachable",
                     goal.at.x + minx, goal.at.y + miny,
                     (int)goal.score);
 #ifdef ENABLE_DEBUG_AI_ASTAR
@@ -226,7 +226,7 @@ _
             }
 
             paths.insert(result);
-            dbg2(" goal (%d,%d) score %d -> cost %d", 
+            dbg2(" goal (%d,%d) score %d -> cost %d",
                 goal.at.x + minx, goal.at.y + miny,
                 (int)goal.score, (int)result.cost);
 
@@ -487,13 +487,13 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
             if (it == this) { continue; }
 
             if (it->is_changing_level ||
-                it->is_hidden || 
-                it->is_falling || 
-                it->is_jumping) { 
+                it->is_hidden ||
+                it->is_falling ||
+                it->is_jumping) {
                 if (unlikely(g_opt_debug4)) {
                     dbg2(" ignore %s", it->to_string().c_str());
                 }
-                continue; 
+                continue;
             }
 
             dbg2(" consider %s", it->to_string().c_str());
@@ -707,7 +707,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 // and then create a path to that edge.
 //
 void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_doors)
-{_  
+{_ 
     point start((int)mid_at.x, (int)mid_at.y);
 
     std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
@@ -926,14 +926,14 @@ void Thing::robot_tick (void)
     }
 
     if (is_changing_level ||
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_the_grid || 
-        is_jumping) { 
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
+        is_the_grid ||
+        is_jumping) {
         return;
     }
 
@@ -1092,7 +1092,7 @@ void Thing::robot_change_state (int new_state, const std::string &why)
     }
 
     CON("Robot: %s -> %s: %s", from.c_str(), to.c_str(), why.c_str());
-    
+   
     monstp->robot_state = new_state;
     switch (new_state) {
         case ROBOT_STATE_IDLE:

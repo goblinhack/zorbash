@@ -114,7 +114,7 @@ debug_crash_handler(int sig)
 #ifdef __APPLE__
         execl("/usr/bin/lldb", "lldb", "-p", pid.c_str(), nullptr);
 #else
-        execl("/usr/bin/gdb", "gdb", "--batch", "-n", 
+        execl("/usr/bin/gdb", "gdb", "--batch", "-n",
               "-ex", "thread apply all bt", prog_name, pid.c_str(), nullptr);
 #endif
         assert(false && "Debugger failed to exec");

@@ -31,7 +31,7 @@ Laser_::Laser_(
     stop(stop),
     pixel_map_at(pixel_map_at),
     timestamp_start(timestamp_start),
-    timestamp_stop(timestamp_stop) 
+    timestamp_stop(timestamp_stop)
 {_
     auto t = level->thing_find(id);
     if (!t) {
@@ -80,7 +80,7 @@ Laser_::Laser_(
             tile_find_mand(name + "." + std::to_string(frame + 1) + ".start"));
         for (int mid = 0; mid < max_frames - 2; mid++) {
             tiles[frame].push_back(
-                tile_find_mand(name + "." + std::to_string(frame + 1) + 
+                tile_find_mand(name + "." + std::to_string(frame + 1) +
                                ".mid." + std::to_string(mid + 1)));
         }
         tiles[frame].push_back(
@@ -102,7 +102,7 @@ void Level::new_laser (ThingId id, point start, point stop, uint32_t dur)
     }
 
     uint32_t now = time_update_time_milli();
-    new_lasers.push_back(Laser(this, id, 
+    new_lasers.push_back(Laser(this, id,
                                start, stop, pixel_map_at, now, now + dur));
 }
 
@@ -118,8 +118,8 @@ void Level::display_lasers (void)
     }
 #endif
 
-    all_lasers.insert(std::end(all_lasers), 
-                      std::begin(new_lasers), 
+    all_lasers.insert(std::end(all_lasers),
+                      std::begin(new_lasers),
                       std::end(new_lasers));
     new_lasers.clear();
 
@@ -183,7 +183,7 @@ void Level::display_lasers (void)
             }
 
             for (int animstep = 0; animstep <= steps; animstep++) {
-                fpoint mid(start.x + step.x * animstep, 
+                fpoint mid(start.x + step.x * animstep,
                            start.y + step.y * animstep);
 
                 old_p1 = p1;
@@ -232,7 +232,7 @@ void Thing::delete_laser (void)
 {_
     auto e = std::remove_if(level->all_lasers.begin(),
                             level->all_lasers.end(),
-        [=, this] (Laser &p) { 
+        [=, this] (Laser &p) {
             if (p.id == id) {
                 log("Remove laser");
                 return true;

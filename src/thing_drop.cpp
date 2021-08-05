@@ -44,17 +44,17 @@ _
         auto existing_owner = what->get_immediate_owner();
         if (top_owner != this) {
             if (existing_owner) {
-                log("Immediate owner of %s is %s", 
+                log("Immediate owner of %s is %s",
                     what->to_string().c_str(),
                     top_owner->to_string().c_str());
-                log("Top owner of %s is %s", 
+                log("Top owner of %s is %s",
                     what->to_string().c_str(),
                     what->get_top_owner()->to_string().c_str());
-                err("Attempt to drop %s which is not carried and owned by %s", 
+                err("Attempt to drop %s which is not carried and owned by %s",
                     what->to_string().c_str(),
                     existing_owner->to_string().c_str());
             } else {
-                err("Attempt to drop %s which is not carried and not owned", 
+                err("Attempt to drop %s which is not carried and not owned",
                     what->to_string().c_str());
             }
             return false;
@@ -144,11 +144,11 @@ _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
         if (existing_owner) {
-            err("Attempt to drop %s into the ether which is not carried and owned by %s", 
+            err("Attempt to drop %s into the ether which is not carried and owned by %s",
                 what->to_string().c_str(),
                 existing_owner->to_string().c_str());
         } else {
-            err("Attempt to drop %s into the ether which is not carried and not owned", 
+            err("Attempt to drop %s into the ether which is not carried and not owned",
                 what->to_string().c_str());
         }
         return false;
@@ -226,7 +226,7 @@ _
     game->level->new_external_particle(
                 id,
                 s, e,
-                isize(TILE_WIDTH, TILE_HEIGHT), 
+                isize(TILE_WIDTH, TILE_HEIGHT),
                 PARTICLE_SPEED_MS,
                 tile_index_to_tile(what->tile_curr),
                 (is_dir_br() || is_dir_right() || is_dir_tr()),

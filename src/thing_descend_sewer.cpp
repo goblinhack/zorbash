@@ -59,12 +59,12 @@ bool Thing::descend_sewer (void)
 {_
     dbg("Descend sewer");
     if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_fall || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_jumping) { 
+        is_hidden ||
+        is_falling ||
+        is_waiting_to_fall ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_jumping) {
         dbg("Descend sewer, no");
         return false;
     }

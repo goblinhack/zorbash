@@ -65,7 +65,7 @@ bool Thing::skill_remove (Thingp what)
 _
     auto existing_owner = what->get_immediate_owner();
     if (existing_owner != this) {
-        err("Attempt to remove skill %s which is not owned", 
+        err("Attempt to remove skill %s which is not owned",
             what->to_string().c_str());
         return false;
     }

@@ -178,7 +178,7 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
 
-                bool edge_of_sceen = 
+                bool edge_of_sceen =
                     ((y == miny) && (x >= minx) && (x <= maxx)) ||
                     ((y == maxy) && (x >= minx) && (x <= maxx)) ||
                     ((x == minx) && (y >= miny) && (y <= maxy)) ||

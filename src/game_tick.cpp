@@ -82,19 +82,19 @@ void Game::tick_end (void)
     if (level) {_
         auto player = level->player;
         if (player) {
-            CON("Game tick %d end, duration %d ms: %s", 
-                game->tick_current, 
+            CON("Game tick %d end, duration %d ms: %s",
+                game->tick_current,
                 time_get_time_ms_cached() - game->tick_begin_ms,
                 player->to_short_string().c_str());
         } else {
-            CON("Game tick %d end, duration %d ms: %s", 
-                game->tick_current, 
+            CON("Game tick %d end, duration %d ms: %s",
+                game->tick_current,
                 time_get_time_ms_cached() - game->tick_begin_ms,
                 level->to_string().c_str());
         }
     } else {
-        CON("Game tick %d end, duration %d ms", 
-            game->tick_current, 
+        CON("Game tick %d end, duration %d ms",
+            game->tick_current,
             time_get_time_ms_cached() - game->tick_begin_ms);
     }
     CON("-");

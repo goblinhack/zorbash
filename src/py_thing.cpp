@@ -289,15 +289,15 @@ PyObject *thing_possible_to_attack (PyObject *obj, PyObject *args, PyObject *key
         Py_RETURN_NONE;	
     }	
 
-    hitter->log("Check if possible to attack target %s", 
+    hitter->log("Check if possible to attack target %s",
                 target->to_string().c_str());
 
     if (hitter->possible_to_attack(target)) {
-        hitter->log("Check if possible to target %s; yes", 
+        hitter->log("Check if possible to target %s; yes",
                 target->to_string().c_str());
         Py_RETURN_TRUE;	
     } else {
-        hitter->log("Check if possible to attack %s; no", 
+        hitter->log("Check if possible to attack %s; no",
                     target->to_string().c_str());
         Py_RETURN_FALSE;	
     }

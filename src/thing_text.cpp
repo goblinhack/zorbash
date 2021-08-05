@@ -154,7 +154,7 @@ std::string Thing::short_text_capitalized (void) const
         } else if (*c == ' ') {
             word_start = true;
         }
-        
+       
         c++;
     }
 
@@ -168,7 +168,7 @@ std::string Thing::short_text_capitalized (void) const
 void Thing::show_botcon_description (void) const
 {_
     auto text = text_description();
- 
+
     bool skip_showing_keys_to_use = true;
     switch (game->state) {
         case Game::STATE_NORMAL:

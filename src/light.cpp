@@ -50,7 +50,7 @@ void Light::draw_line (int16_t index, const point &p0, const point &p1)
 {
     points[index].resize(0);
 
-    const point start = p0; 
+    const point start = p0;
     auto x = p0.x;
     auto y = p0.y;
     auto x2 = p1.x;
@@ -468,7 +468,7 @@ void Light::render_triangle_fans (void)
     }
 
     if (fbo == FBO_FULLMAP_LIGHT) {
-        gl_enter_2d_mode(game->config.game_pix_width, 
+        gl_enter_2d_mode(game->config.game_pix_width,
                          game->config.game_pix_height);
     }
 }
@@ -530,7 +530,7 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
     }
     glBlendFunc(GL_ONE, GL_ZERO);
     glDisable(GL_TEXTURE_2D);
-    gl_blitquad(0, 0, 
+    gl_blitquad(0, 0,
                 game->config.game_pix_width, game->config.game_pix_height);
     glEnable(GL_TEXTURE_2D);
     glcolor(WHITE);
@@ -545,7 +545,7 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
 }
 
 //
-// Draw point source lights 
+// Draw point source lights
 //
 void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
                                         int fbo, bool include_player_lights)

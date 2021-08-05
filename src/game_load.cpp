@@ -337,8 +337,8 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
     if (unlikely(g_opt_debug4)) {
         auto diff = in.tellg() - start;
-        LOG("LOAD %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p", 
-            (int)diff, name.c_str(), my.t->tp_id, my.t->id.id, 
+        LOG("LOAD %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p",
+            (int)diff, name.c_str(), my.t->tp_id, my.t->id.id,
             my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
     }
 
@@ -1019,8 +1019,8 @@ void Game::load_select (void)
                           tl.y + 30);
     auto width = br.x - tl.x;
 
-    wid_load = new WidPopup("Game load", tl, br, 
-                            tile_find_mand("load"), "", 
+    wid_load = new WidPopup("Game load", tl, br,
+                            tile_find_mand("load"), "",
                             false, false);
     wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
     wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);

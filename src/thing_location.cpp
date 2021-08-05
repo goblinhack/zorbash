@@ -53,16 +53,16 @@ void Thing::location_check_forced (void)
     // Put chasm checks first as you can still fall when dead!
     //
     if (is_changing_level ||
-        is_the_grid || 
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
+        is_the_grid ||
+        is_hidden ||
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
         get_immediate_owner() ||
-        is_jumping) { 
+        is_jumping) {
         //
         // Skip interactions
         //

@@ -147,7 +147,7 @@ d20roll (int stat_a, int stat_b, bool &fumble, bool &critical)
     auto roll_b = pcq_random_range_inclusive(1, 20);
 //TOPCON("a %d b %d", roll_a, roll_b);
 
-    return roll_a + stat_to_bonus(stat_a) >= 
+    return roll_a + stat_to_bonus(stat_a) >=
            roll_b + stat_to_bonus(stat_b);
 }
 

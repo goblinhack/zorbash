@@ -49,14 +49,14 @@ void Thing::fall (float fall_height, timestamp_t ms)
     dbg("Can fall?");
 _
     if (is_changing_level ||
-        is_hidden || 
-        is_falling || 
-        is_waiting_to_ascend_dungeon || 
-        is_waiting_to_descend_sewer || 
-        is_waiting_to_descend_dungeon || 
-        is_waiting_to_ascend_sewer || 
-        is_waiting_to_fall || 
-        is_jumping) { 
+        is_hidden ||
+        is_falling ||
+        is_waiting_to_ascend_dungeon ||
+        is_waiting_to_descend_sewer ||
+        is_waiting_to_descend_dungeon ||
+        is_waiting_to_ascend_sewer ||
+        is_waiting_to_fall ||
+        is_jumping) {
         dbg("No");
         return;
     }
@@ -335,7 +335,7 @@ _
 
             if (is_monst() || is_player()) {
                 bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
-                next_level->thing_new(tp_random_blood_splatter()->name(), 
+                next_level->thing_new(tp_random_blood_splatter()->name(),
                                       new_pos);
             }
 
@@ -344,7 +344,7 @@ _
 
             //
             // Update the z depth when falling
-            // 
+            //
             dbg("End of falling to next level");
             level_pop();
             is_falling = false;

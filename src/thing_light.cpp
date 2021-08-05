@@ -62,7 +62,7 @@ void Thing::init_lights (void)
     if (unlikely(is_player())) {
         if (level->player && (level->player != this)) {
             DIE("Player exists in multiple places on map, %f, %f and %f, %f",
-                level->player->mid_at.x, level->player->mid_at.y, 
+                level->player->mid_at.x, level->player->mid_at.y,
                 mid_at.x, mid_at.y);
             return;
         }

@@ -269,7 +269,7 @@ uint8_t sdl_init (void)
     if (game->config.gfx_fullscreen) {
         LOG("SDL: Set SDL_WINDOW_FULLSCREEN");
         video_flags |= SDL_WINDOW_FULLSCREEN;
-    } 
+    }
 
     if (game->config.gfx_fullscreen_desktop) {
         LOG("SDL: Set SDL_WINDOW_FULLSCREEN_DESKTOP");
@@ -1513,7 +1513,7 @@ void config_game_pix_zoom_update (void)
             (float)game->config.ui_pix_height / (float)TERM_HEIGHT;
     }
 
-    CON("SDL: - ascii gl size        : %ux%u", 
+    CON("SDL: - ascii gl size        : %ux%u",
         game->config.ascii_gl_width, game->config.ascii_gl_height);
     CON("SDL: - ascii size           : %dx%d", TERM_WIDTH, TERM_HEIGHT);
     CON("SDL: - width to height ratio: %f", game->config.video_w_h_ratio);

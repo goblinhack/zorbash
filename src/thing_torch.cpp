@@ -57,7 +57,7 @@ void Thing::get_light_strength_including_torch_effect (int &out_light_strength)
             }
 
             //
-            // This causes a flicker and I slightly like that without 
+            // This causes a flicker and I slightly like that without
             // this you see a bit more of the level before it goes dark.
             //
             game->request_update_same_level = true;

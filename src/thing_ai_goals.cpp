@@ -93,15 +93,15 @@ _
             if (it == this) { continue; }
 
             if (it->is_changing_level ||
-                it->is_hidden || 
-                it->is_falling || 
-                it->is_jumping) { 
+                it->is_hidden ||
+                it->is_falling ||
+                it->is_jumping) {
                 if (unlikely(g_opt_debug4)) {
                     if (it->is_loggable_for_unimportant_stuff()) {
                         dbg2(" ignore %s", it->to_string().c_str());
                     }
                 }
-                continue; 
+                continue;
             }
 
             if (unlikely(g_opt_debug4)) {
@@ -350,7 +350,7 @@ _
         set(dmap_can_see->val, goal_target.x, goal_target.y, score8);
 
         dbg2(" scale goal (%d,%d) %d to %d",
-            (int)minx + goal.at.x, (int)miny + goal.at.y, 
+            (int)minx + goal.at.x, (int)miny + goal.at.y,
             (int)orig_score, (int)score8);
     }
 
@@ -407,7 +407,7 @@ _
         }
 
         paths.insert(result);
-        dbg2(" goal (%d,%d) score %d -> cost %d", 
+        dbg2(" goal (%d,%d) score %d -> cost %d",
              goal.at.x + minx, goal.at.y + miny,
              (int)goal.score, (int)result.cost);
 
