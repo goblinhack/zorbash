@@ -255,8 +255,15 @@ _
         return true;
     }
 
+    if (game->state == Game::STATE_MOVING_ITEMS) {
+        wid_actionbar_close_all_popups();
+        wid_actionbar_init();
+        return true;
+    }
+
     wid_actionbar_close_all_popups();
 _
+
     LOG("Actionbar inventory create");
     game->change_state(Game::STATE_MOVING_ITEMS);
     game->request_remake_inventory = true;
