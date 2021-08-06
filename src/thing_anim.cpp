@@ -12,7 +12,7 @@
 #include "my_tile.h"
 #include "my_ptrcheck.h"
 
-#define DEBUG_ANIM
+#undef DEBUG_ANIM
 
 void Thing::animate (void)
 {_
