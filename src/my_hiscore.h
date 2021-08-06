@@ -8,7 +8,7 @@
 #define _MY_HISCORE_H_
 
 class HiScore
-{  
+{
 public:
     HiScore (void) {}
     HiScore (std::string name,

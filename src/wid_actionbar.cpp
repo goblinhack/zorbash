@@ -54,6 +54,12 @@ static uint8_t wid_actionbar_quit (Widp w, int32_t x, int32_t y, uint32_t button
 {_
     DBG3("Actionbar quit");
 _
+    if (game_quit_window) {
+        wid_actionbar_close_all_popups();
+        wid_actionbar_init();
+        return true;
+    }
+
     wid_actionbar_close_all_popups();
     game->quit_select();
     return true;
@@ -181,6 +187,12 @@ _
         return true;
     }
 
+    if (wid_load) {
+        wid_actionbar_close_all_popups();
+        wid_actionbar_init();
+        return true;
+    }
+
     wid_actionbar_close_all_popups();
     game->load_select();
     wid_actionbar_init();
@@ -215,7 +227,12 @@ _
         return true;
     }
 
-    wid_actionbar_close_all_popups();
+    if (wid_save) {
+        wid_actionbar_close_all_popups();
+        wid_actionbar_init();
+        return true;
+    }
+
     game->save_select();
     wid_actionbar_init();
     return true;
@@ -262,7 +279,6 @@ _
     }
 
     wid_actionbar_close_all_popups();
-_
 
     LOG("Actionbar inventory create");
     game->change_state(Game::STATE_MOVING_ITEMS);
@@ -301,6 +317,12 @@ _
     }
 
     if (game->in_transit_item) {
+        return true;
+    }
+
+    if (wid_collect) {
+        wid_actionbar_close_all_popups();
+        wid_actionbar_init();
         return true;
     }
 
@@ -349,6 +371,12 @@ _
 
     wid_actionbar_close_all_popups();
 
+    if (wid_wield) {
+        wid_actionbar_close_all_popups();
+        wid_actionbar_init();
+        return true;
+    }
+
     for (const auto& item : player->monstp->carrying) {
         auto t = game->level->thing_find(item.id);
         if (t->is_weapon()) {
@@ -374,7 +402,7 @@ static void wid_actionbar_wield_over_e (Widp w)
 
 static uint8_t wid_actionbar_wait (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    DBG3("Actionbar wait");
+    LOG("Actionbar wait");
 _
     if (!game->level) {
         return true;
@@ -509,8 +537,13 @@ _
         return true;
     }
 
+    if (game_config_keyboard_window) {
+        wid_actionbar_close_all_popups();
+        wid_actionbar_init();
+        return true;
+    }
+
     wid_actionbar_close_all_popups();
-_
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
     game->config_keyboard_select();

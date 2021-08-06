@@ -850,7 +850,7 @@ int32_t main (int32_t argc, char *argv[])
     CON("INI: Load dungeon rooms");
     room_init();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
 #if 0
     game->init();
     game->load();

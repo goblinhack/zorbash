@@ -5096,8 +5096,10 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     //
     // Raise on mouse.
     //
-    if ((w->on_mouse_down && (w->on_mouse_down)(w, x, y, button)) ||
-        wid_get_moveable(w)) {
+    if ((w->on_mouse_down &&
+         (w->on_mouse_down)(w, x, y, button)) ||
+            wid_get_moveable(w)) {
+        sound_play("click");
 
         wid_set_focus(w);
         wid_set_mode(w, WID_MODE_ACTIVE);
@@ -5126,10 +5128,10 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     }
 
     if (game_mouse_down(x, y, button)) {
+        sound_play("click");
         if (game) {
             game->last_mouse_down = time_get_time_ms_cached();
         }
-
         return;
     }
 }

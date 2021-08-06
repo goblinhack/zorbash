@@ -133,7 +133,7 @@ static bool wid_rightbar_create (void)
     }
 
     int y_at = 6;
-   
+
     {_
         auto w = wid_new_plain(wid_rightbar, "level no");
         wid_set_ignore_events(w, true);

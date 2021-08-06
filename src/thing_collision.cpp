@@ -740,7 +740,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
             return (things_tile_overlap(A, B));
         }
         return false;
-   
+
 
     if (!tp_collision_circle(A->tp) &&
          tp_collision_circle(B->tp)) {

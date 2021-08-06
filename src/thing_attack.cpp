@@ -334,7 +334,7 @@ _
         // We hit this path for swords. We don't really want the sword to
         // do the eating, so pass control to the owner.
         //
-      
+
         //
         // Owner eat food?
         //

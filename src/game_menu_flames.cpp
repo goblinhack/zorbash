@@ -64,7 +64,7 @@ static void game_display_flames_tiles (int w, int h)
             }
 
             glcolor(cn);
-       
+
             tile_blit(tile,
                       point(tw * x, th * (y + 3)),
                       point(tw * (x + 1), th * (y + 4)));

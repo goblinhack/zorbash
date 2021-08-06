@@ -707,7 +707,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 // and then create a path to that edge.
 //
 void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_doors)
-{_ 
+{_
     point start((int)mid_at.x, (int)mid_at.y);
 
     std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
@@ -1092,7 +1092,7 @@ void Thing::robot_change_state (int new_state, const std::string &why)
     }
 
     CON("Robot: %s -> %s: %s", from.c_str(), to.c_str(), why.c_str());
-   
+
     monstp->robot_state = new_state;
     switch (new_state) {
         case ROBOT_STATE_IDLE:

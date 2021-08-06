@@ -154,7 +154,7 @@ std::string Thing::short_text_capitalized (void) const
         } else if (*c == ' ') {
             word_start = true;
         }
-       
+
         c++;
     }
 
