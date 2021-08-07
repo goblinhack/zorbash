@@ -9,7 +9,6 @@
 
 #include <map>
 #include <vector> // linux
-#include <unordered_map>
 #include <string>
 
 extern std::map<std::string, class Tile* > all_tiles;
