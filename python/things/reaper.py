@@ -35,6 +35,7 @@ def tp_init(name, text_name):
     mytp.set_is_ethereal(True)
     mytp.set_is_fearless(True)
     mytp.set_is_floating(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_intelligent(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)

@@ -13,15 +13,15 @@
 
 static void file_log_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "FILE: ");
+    snprintf(buf + len, MAXLONGSTR - len, "FILE: ");
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 }

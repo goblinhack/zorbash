@@ -30,7 +30,7 @@ typedef struct {
     /*
      * Entered text.
      */
-    char text[MAXSTR];
+    char text[MAXLONGSTR];
 
     /*
      * Item currently in focus

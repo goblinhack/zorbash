@@ -284,7 +284,7 @@ private:
     int _is_rrr61 {};
     int _is_rrr62 {};
     int _is_rrr63 {};
-    int _is_rrr64 {};
+    int _is_hittable {};
     int _is_alive_on_end_of_anim {};
     int _is_dead_on_end_of_anim {};
     int _ai_enemy_memory {};
@@ -746,7 +746,7 @@ public:
     int is_rrr61(void) const;
     int is_rrr62(void) const;
     int is_rrr63(void) const;
-    int is_rrr64(void) const;
+    int is_hittable(void) const;
     int is_alive_on_end_of_anim(void) const;
     int is_dead_on_end_of_anim(void) const;
     int ai_enemy_memory(void) const;
@@ -1072,7 +1072,7 @@ public:
     void set_is_rrr61(int);
     void set_is_rrr62(int);
     void set_is_rrr63(int);
-    void set_is_rrr64(int);
+    void set_is_hittable(int);
     void set_is_alive_on_end_of_anim(int);
     void set_is_dead_on_end_of_anim(int);
     void set_ai_enemy_memory(int);

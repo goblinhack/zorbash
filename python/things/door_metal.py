@@ -31,6 +31,7 @@ def tp_init(name):
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_door(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_light_blocker(True)
     mytp.set_is_movement_blocking_hard(True)
     mytp.set_normal_placement_rules(True)

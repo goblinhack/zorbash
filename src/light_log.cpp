@@ -17,16 +17,16 @@
 void Light::log_ (const char *fmt, va_list args)
 {
     verify(this);
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "light: ");
+    snprintf(buf + len, MAXLONGSTR - len, "light: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 }
@@ -45,16 +45,16 @@ void Light::log (const char *fmt, ...)
 void Light::die_ (const char *fmt, va_list args)
 {
     verify(this);
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "light: ");
+    snprintf(buf + len, MAXLONGSTR - len, "light: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     DIE("%s",buf);
 }
@@ -75,16 +75,16 @@ void Light::die (const char *fmt, ...)
 void Light::con_ (const char *fmt, va_list args)
 {
     verify(this);
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "light: ");
+    snprintf(buf + len, MAXLONGSTR - len, "light: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -107,16 +107,16 @@ void Light::con (const char *fmt, ...)
 void Light::err_ (const char *fmt, va_list args)
 {
     verify(this);
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "ERROR: Light: ");
+    snprintf(buf + len, MAXLONGSTR - len, "ERROR: Light: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 

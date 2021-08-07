@@ -336,7 +336,7 @@ int Tp::is_rrr60(void) const                                         { return _i
 int Tp::is_rrr61(void) const                                         { return _is_rrr61; }
 int Tp::is_rrr62(void) const                                         { return _is_rrr62; }
 int Tp::is_rrr63(void) const                                         { return _is_rrr63; }
-int Tp::is_rrr64(void) const                                         { return _is_rrr64; }
+int Tp::is_hittable(void) const                                         { return _is_hittable; }
 int Tp::is_alive_on_end_of_anim(void) const                                         { return _is_alive_on_end_of_anim; }
 int Tp::is_dead_on_end_of_anim(void) const                                         { return _is_dead_on_end_of_anim; }
 int Tp::ai_enemy_memory(void) const                                         { return _ai_enemy_memory; }
@@ -654,7 +654,7 @@ void Tp::set_is_rrr60(int v)                                         { _is_rrr60
 void Tp::set_is_rrr61(int v)                                         { _is_rrr61 = v; }
 void Tp::set_is_rrr62(int v)                                         { _is_rrr62 = v; }
 void Tp::set_is_rrr63(int v)                                         { _is_rrr63 = v; }
-void Tp::set_is_rrr64(int v)                                         { _is_rrr64 = v; }
+void Tp::set_is_hittable(int v)                                         { _is_hittable = v; }
 void Tp::set_is_alive_on_end_of_anim(int v)                                         { _is_alive_on_end_of_anim = v; }
 void Tp::set_is_dead_on_end_of_anim(int v)                                         { _is_dead_on_end_of_anim = v; }
 void Tp::set_is_rrr6(int v)                                          { _is_rrr6 = v; }

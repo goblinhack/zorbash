@@ -421,8 +421,8 @@ class Tp:
     def set_is_rrr63(self, value):
         zx.tp_set_is_rrr63(self, value)
 
-    def set_is_rrr64(self, value):
-        zx.tp_set_is_rrr64(self, value)
+    def set_is_hittable(self, value):
+        zx.tp_set_is_hittable(self, value)
 
     def set_is_alive_on_end_of_anim(self, value):
         zx.tp_set_is_alive_on_end_of_anim(self, value)

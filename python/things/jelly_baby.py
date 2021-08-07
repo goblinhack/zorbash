@@ -37,6 +37,7 @@ def tp_init(name, text_name):
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_hunger_insatiable(True)
     mytp.set_is_jelly_baby_eater(True)
     mytp.set_is_jelly_baby(True)

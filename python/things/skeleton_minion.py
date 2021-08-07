@@ -60,6 +60,7 @@ def tp_init(name, text_name):
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_fearless(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_intelligent(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)

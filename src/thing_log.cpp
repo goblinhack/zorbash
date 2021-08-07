@@ -22,19 +22,19 @@ void Thing::log_ (const char *fmt, va_list args) const
 {
     verify(this);
     auto t = this;
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSTR - len, "%60s: %*s",
+    snprintf(buf + len, MAXLONGSTR - len, "%60s: %*s",
              t->to_string().c_str(),
              g_callframes_depth, "");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 }
@@ -55,17 +55,17 @@ void Thing::die_ (const char *fmt, va_list args)
 {
     verify(this);
     auto t = this;
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%s: ",
+    snprintf(buf + len, MAXLONGSTR - len, "%s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     DIE("%s",buf);
 }
@@ -87,17 +87,17 @@ void Thing::con_ (const char *fmt, va_list args) const
 {
     verify(this);
     auto t = this;
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%s: ",
+    snprintf(buf + len, MAXLONGSTR - len, "%s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -111,17 +111,17 @@ void Thing::topcon_ (const char *fmt, va_list args) const
 {
     verify(this);
     auto t = this;
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%s: ",
+    snprintf(buf + len, MAXLONGSTR - len, "%s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -164,17 +164,17 @@ void Thing::err_ (const char *fmt, va_list args) const
 
     verify(this);
     auto t = this;
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "ERROR: Thing %s: ",
+    snprintf(buf + len, MAXLONGSTR - len, "ERROR: Thing %s: ",
              t->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -223,17 +223,17 @@ void Thing::botcon_ (const char *fmt, va_list args) const
 {
     verify(this);
     auto t = this;
-    char buf[MAXSTR];
+    char buf[MAXLONGSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSTR);
+    get_timestamp(buf, MAXLONGSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%s: ",
+    snprintf(buf + len, MAXLONGSTR - len, "%s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 

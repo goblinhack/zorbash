@@ -238,7 +238,7 @@ PyObject *thing_is_rrr60(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr61(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr62(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr63(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr64(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_hittable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_enemy_memory(PyObject *obj, PyObject *args, PyObject *keywds);

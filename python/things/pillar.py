@@ -3,7 +3,6 @@ import tp
 
 
 def tp_init(name, text_name, tiles=[]):
-
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
     mytp.set_collision_circle(True)

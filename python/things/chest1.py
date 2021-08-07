@@ -19,6 +19,7 @@ def tp_init(name, text_name):
     mytp.set_is_collectable(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_interesting(True)
     mytp.set_is_item_carrier(True)
     mytp.set_is_item(True)

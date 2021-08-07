@@ -54,6 +54,7 @@ def tp_init(name, text_name):
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_food_eater(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_hunger_insatiable(True)
     mytp.set_is_jumper_chance_d1000(200)
     mytp.set_is_jumper_distance(2)

@@ -206,13 +206,13 @@ static void ascii_put_box_ (int style,
                         x + width - 1, y + height - 1,
                         col_bg, col_text, 0 /* context */);
     } else {
-        wchar_t buf[MAXSTR];
-        auto wrote = vswprintf(buf, MAXSTR, fmt, args);
+        wchar_t buf[MAXLONGSTR];
+        auto wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
         //
         // Only a single nul is written, but as we read 2 at a time...
         //
-        if (wrote && (wrote < MAXSTR - 1)) {
+        if (wrote && (wrote < MAXLONGSTR - 1)) {
             buf[wrote+1] = '\0';
         }
 

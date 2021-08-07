@@ -26,6 +26,7 @@ strlcat_(char * dst, const char * src, size_t size);
 //
 // Max long string size
 //
+#define MAXLONGSTR                      4096
 #define MAXSTR                          1024
 #define MAXSHORTSTR                     128
 

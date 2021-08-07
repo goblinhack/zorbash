@@ -1514,7 +1514,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr61)
     TP_SET_DECL(is_rrr62)
     TP_SET_DECL(is_rrr63)
-    TP_SET_DECL(is_rrr64)
+    TP_SET_DECL(is_hittable)
     TP_SET_DECL(is_alive_on_end_of_anim)
     TP_SET_DECL(is_dead_on_end_of_anim)
     TP_SET_DECL(ai_enemy_memory)
@@ -1859,7 +1859,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr61_at",                                      (PyCFunction)level_is_rrr61_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr62_at",                                      (PyCFunction)level_is_rrr62_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr63_at",                                      (PyCFunction)level_is_rrr63_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr64_at",                                      (PyCFunction)level_is_rrr64_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_hittable_at",                                      (PyCFunction)level_is_hittable_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_alive_on_end_of_anim_at",                                      (PyCFunction)level_is_alive_on_end_of_anim_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_dead_on_end_of_anim_at",                                      (PyCFunction)level_is_dead_on_end_of_anim_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_ai_enemy_memory_at",                                      (PyCFunction)level_ai_enemy_memory_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2154,7 +2154,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr61",                                         (PyCFunction)thing_is_rrr61,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr62",                                         (PyCFunction)thing_is_rrr62,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr63",                                         (PyCFunction)thing_is_rrr63,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr64",                                         (PyCFunction)thing_is_rrr64,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_hittable",                                         (PyCFunction)thing_is_hittable,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_alive_on_end_of_anim",                                         (PyCFunction)thing_is_alive_on_end_of_anim,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_dead_on_end_of_anim",                                         (PyCFunction)thing_is_dead_on_end_of_anim,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_ai_enemy_memory",                                         (PyCFunction)thing_ai_enemy_memory,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},

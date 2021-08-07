@@ -836,7 +836,7 @@ public:
     int is_rrr61(void) const;
     int is_rrr62(void) const;
     int is_rrr63(void) const;
-    int is_rrr64(void) const;
+    int is_hittable(void) const;
     int is_alive_on_end_of_anim(void) const;
     int is_dead_on_end_of_anim(void) const;
     int ai_enemy_memory(void) const;

@@ -55,6 +55,7 @@ def tp_init(name, text_name):
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_humanoid(True)
     mytp.set_is_intelligent(True)
     mytp.set_is_item_carrier(True)

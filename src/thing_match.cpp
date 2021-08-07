@@ -224,7 +224,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr61() &&                                         (what == "is_rrr61"))                                         { return true; }
     if (is_rrr62() &&                                         (what == "is_rrr62"))                                         { return true; }
     if (is_rrr63() &&                                         (what == "is_rrr63"))                                         { return true; }
-    if (is_rrr64() &&                                         (what == "is_rrr64"))                                         { return true; }
+    if (is_hittable() &&                                         (what == "is_hittable"))                                         { return true; }
     if (is_alive_on_end_of_anim() &&                                         (what == "is_alive_on_end_of_anim"))                                         { return true; }
     if (is_dead_on_end_of_anim() &&                                         (what == "is_dead_on_end_of_anim"))                                         { return true; }
     if (ai_enemy_memory() &&                                         (what == "ai_enemy_memory"))                                         { return true; }
@@ -296,10 +296,10 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "attack_meat")                                      { return &Thing::attack_meat; }
     if (what == "attack_shove")                                     { return &Thing::attack_shove; }
     if (what == "attack_shove_chance_d1000")                        { return &Thing::attack_shove_chance_d1000; }
-    if (what == "hates_acid")                                      { return &Thing::hates_acid; }
-    if (what == "hates_fire")                                      { return &Thing::hates_fire; }
-    if (what == "hates_poison")                                    { return &Thing::hates_poison; }
-    if (what == "hates_water")                                     { return &Thing::hates_water; }
+    if (what == "hates_acid")                                       { return &Thing::hates_acid; }
+    if (what == "hates_fire")                                       { return &Thing::hates_fire; }
+    if (what == "hates_poison")                                     { return &Thing::hates_poison; }
+    if (what == "hates_water")                                      { return &Thing::hates_water; }
     if (what == "blast_max_radius")                                 { return &Thing::blast_max_radius; }
     if (what == "blast_min_radius")                                 { return &Thing::blast_min_radius; }
     if (what == "damage_doubled_from_acid")                         { return &Thing::damage_doubled_from_acid; }
@@ -486,15 +486,15 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr61")                                         { return &Thing::is_rrr61; }
     if (what == "is_rrr62")                                         { return &Thing::is_rrr62; }
     if (what == "is_rrr63")                                         { return &Thing::is_rrr63; }
-    if (what == "is_rrr64")                                         { return &Thing::is_rrr64; }
-    if (what == "is_alive_on_end_of_anim")                                         { return &Thing::is_alive_on_end_of_anim; }
-    if (what == "is_dead_on_end_of_anim")                                         { return &Thing::is_dead_on_end_of_anim; }
-    if (what == "ai_enemy_memory")                                         { return &Thing::ai_enemy_memory; }
-    if (what == "is_debug_path")                                         { return &Thing::is_debug_path; }
-    if (what == "is_key_collector")                                         { return &Thing::is_key_collector; }
+    if (what == "is_hittable")                                      { return &Thing::is_hittable; }
+    if (what == "is_alive_on_end_of_anim")                          { return &Thing::is_alive_on_end_of_anim; }
+    if (what == "is_dead_on_end_of_anim")                           { return &Thing::is_dead_on_end_of_anim; }
+    if (what == "ai_enemy_memory")                                  { return &Thing::ai_enemy_memory; }
+    if (what == "is_debug_path")                                    { return &Thing::is_debug_path; }
+    if (what == "is_key_collector")                                 { return &Thing::is_key_collector; }
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
-    if (what == "is_treasure_collector")                                         { return &Thing::is_treasure_collector; }
-    if (what == "is_item")                                         { return &Thing::is_item; }
+    if (what == "is_treasure_collector")                            { return &Thing::is_treasure_collector; }
+    if (what == "is_item")                                          { return &Thing::is_item; }
     if (what == "is_bag_item_container")                            { return &Thing::is_bag_item_container; }
     if (what == "is_treasure_chest")                                { return &Thing::is_treasure_chest; }
     if (what == "is_openable")                                      { return &Thing::is_openable; }

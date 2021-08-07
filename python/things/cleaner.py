@@ -41,6 +41,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_combustible(True)
     mytp.set_is_critical_to_level(True)
     mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_hunger_insatiable(True)
     mytp.set_is_item_eater(True)
     mytp.set_is_jelly_baby_eater(True)

@@ -20,6 +20,7 @@ def tp_init(name,
             tr2_tiles=[],
             bl2_tiles=[],
             br2_tiles=[]):
+
     mytp = tp.Tp(name, "rock")
     mytp.set_ai_obstacle(True)
     mytp.set_collision_circle(True)

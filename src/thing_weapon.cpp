@@ -475,7 +475,7 @@ _
                 //
                 prio += 100;
             } else {
-                prio = t->collision_hit_priority();
+                continue;
             }
 
             if (prio > best_priority) {
@@ -495,12 +495,122 @@ _
                                                       &target_attacked,
                                                       &target_overlaps)) {
                 lunge(best_hit_at);
+                return;
             }
         } else {
             if (collision_check_and_handle_at(best_hit_at,
                                               &target_attacked,
                                               &target_overlaps)) {
                 lunge(best_hit_at);
+                return;
+            }
+        }
+    }
+
+    //
+    // Try again but include doors
+    //
+    found_best = false;
+    best_priority = -999;
+
+    for (const auto& d : all_deltas) {
+        auto hit_at = mid_at + fpoint(d.x, d.y);
+
+        //
+        // Find the alternative best thing to hit
+        //
+        FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y) {
+            int prio;
+            //
+            // Get the most important thing to hit.
+            //
+            if (t->is_dead) {
+                continue;
+            } else if (t->is_door()) {
+                prio = t->collision_hit_priority();
+            } else {
+                continue;
+            }
+
+            if (prio > best_priority) {
+                best_priority = prio;
+                best_hit_at = hit_at;
+                found_best = true;
+            }
+        } FOR_ALL_THINGS_END();
+    }
+
+    if (found_best) {
+        target_attacked = false;
+        target_overlaps = false;
+
+        if (weapon) {
+            if (weapon->collision_check_and_handle_at(best_hit_at,
+                                                      &target_attacked,
+                                                      &target_overlaps)) {
+                lunge(best_hit_at);
+                return;
+            }
+        } else {
+            if (collision_check_and_handle_at(best_hit_at,
+                                              &target_attacked,
+                                              &target_overlaps)) {
+                lunge(best_hit_at);
+                return;
+            }
+        }
+    }
+
+    //
+    // Try again for anything we might want to hit.
+    //
+    found_best = false;
+    best_priority = -999;
+
+    for (const auto& d : all_deltas) {
+        auto hit_at = mid_at + fpoint(d.x, d.y);
+
+        //
+        // Find the alternative best thing to hit
+        //
+        FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y) {
+            int prio;
+            //
+            // Get the most important thing to hit.
+            //
+            if (t->is_dead) {
+                continue;
+            } else if (t->is_hittable()) {
+                prio = t->collision_hit_priority() + get_danger_current_level(t);
+            } else {
+                continue;
+            }
+
+            if (prio > best_priority) {
+                best_priority = prio;
+                best_hit_at = hit_at;
+                found_best = true;
+            }
+        } FOR_ALL_THINGS_END();
+    }
+
+    if (found_best) {
+        target_attacked = false;
+        target_overlaps = false;
+
+        if (weapon) {
+            if (weapon->collision_check_and_handle_at(best_hit_at,
+                                                      &target_attacked,
+                                                      &target_overlaps)) {
+                lunge(best_hit_at);
+                return;
+            }
+        } else {
+            if (collision_check_and_handle_at(best_hit_at,
+                                              &target_attacked,
+                                              &target_overlaps)) {
+                lunge(best_hit_at);
+                return;
             }
         }
     }
