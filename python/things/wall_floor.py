@@ -35,7 +35,7 @@ def init():
                         "floor1.13", "floor1.14", "floor1.15", "floor1.16",
                         "floor1.17", "floor1.18", "floor1.19",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm2.1", "chasm2.2", "chasm2.3", "chasm2.4", "chasm2.5",
                         "chasm2.6", "chasm2.7", "chasm2.8", "chasm2.9", "chasm2.10",
                         "chasm2.11", "chasm2.12", "chasm2.13", "chasm2.14", "chasm2.15",

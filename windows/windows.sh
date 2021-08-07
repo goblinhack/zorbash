@@ -38,7 +38,7 @@ ls -la
 echo
 echo Package with bitrock
 echo ====================
-"/c/Program Files (x86)/BitRock InstallBuilder Enterprise 19.12.0/bin/builder-cli.exe" build windows.xml 
+"/c/Program Files (x86)/BitRock InstallBuilder Enterprise 19.12.0/bin/builder-cli.exe" build windows.xml
 if [[ $? -ne 0 ]];
 then
     exit 1

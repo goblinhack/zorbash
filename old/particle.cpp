@@ -1081,7 +1081,7 @@ void Level::tick_particles (void)
                     fpoint delta = p->at - q->at;
                     float r = delta.length();
                     if (r < SMOOTHING_LENGTH) {
-                        density_sum += 
+                        density_sum +=
                            PARTICLE_MASS * /* poly6 kernel */ 315.f *
                            pow(SMOOTHING_LENGTH * SMOOTHING_LENGTH - r * r, 3) /
                            (64.f * PI_FLOAT * pow(SMOOTHING_LENGTH, 9));

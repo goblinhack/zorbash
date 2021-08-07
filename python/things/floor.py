@@ -43,7 +43,7 @@ def init():
                         "floor1.33", "floor1.34", "floor1.35", "floor1.36",
                         "floor1.37", "floor1.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -62,7 +62,7 @@ def init():
                         "floor2.33", "floor2.34", "floor2.35", "floor2.36",
                         "floor2.37", "floor2.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -81,7 +81,7 @@ def init():
                         "floor3.33", "floor3.34", "floor3.35", "floor3.36",
                         "floor3.37", "floor3.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -100,7 +100,7 @@ def init():
                         "floor4.33", "floor4.34", "floor4.35", "floor4.36",
                         "floor4.37", "floor4.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -119,7 +119,7 @@ def init():
                         "floor5.33", "floor5.34", "floor5.35", "floor5.36",
                         "floor5.37", "floor5.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -138,7 +138,7 @@ def init():
                         "floor6.33", "floor6.34", "floor6.35", "floor6.36",
                         "floor6.37", "floor6.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -157,7 +157,7 @@ def init():
                         "floor7.33", "floor7.34", "floor7.35", "floor7.36",
                         "floor7.37", "floor7.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -176,7 +176,7 @@ def init():
                         "floor8.33", "floor8.34", "floor8.35", "floor8.36",
                         "floor8.37", "floor8.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -195,7 +195,7 @@ def init():
                         "floor9.33", "floor9.34", "floor9.35", "floor9.36",
                         "floor9.37", "floor9.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -214,7 +214,7 @@ def init():
                         "floor10.33", "floor10.34", "floor10.35", "floor10.36",
                         "floor10.37", "floor10.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -233,7 +233,7 @@ def init():
                         "floor11.33", "floor11.34", "floor11.35", "floor11.36",
                         "floor11.37", "floor11.38",
                   ],
-            bot3_tiles=[ 
+            bot3_tiles=[
                         "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                         "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                         "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",

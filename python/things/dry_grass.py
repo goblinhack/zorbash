@@ -39,6 +39,6 @@ def init():
             "dry_grass.5", "dry_grass.6", "dry_grass.7", "dry_grass.8",
             "dry_grass.9", "dry_grass.10", "dry_grass.11", "dry_grass.12",
             "dry_grass.13", "dry_grass.14", "dry_grass.15", "dry_grass.16",
-            "dry_grass.17", "dry_grass.18", 
+            "dry_grass.17", "dry_grass.18",
         ])
 init()

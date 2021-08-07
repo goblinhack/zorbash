@@ -21,14 +21,14 @@ timeme_enabled = False
 #     format_string += "%(levelname)4s: "
 #     format_string += "%(message)s"
 #     return logging.Formatter(format_string, datefmt=datefmt)
-# 
+#
 # def my_logger:
 #     log_handler = logging.StreamHandler()
 #     log_handler.setLevel(logging.INFO)
 #     log_handler.setFormatter(my_formatter(logging.DEBUG))
 #     log_handler.setFormatter(my_formatter(logging.ERROR))
 #     log_handler.setFormatter(my_formatter(logging.INFO))
-# 
+#
 #     logger = logging.getLogger(__name__)
 #     logger.addHandler(log_handler)
 #     logger.setLevel(logging.INFO)
@@ -38,7 +38,7 @@ timeme_enabled = False
 #     arger = argparse.ArgumentParser()
 #     arger.add_argument("--debug", default=False, action='store_true')
 #     args = arger.parse_args(args)
-# 
+#
 # def unused:
 #     my_logger()
 #     my_arger()

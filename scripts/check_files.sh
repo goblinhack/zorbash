@@ -18,7 +18,7 @@ fi
 
 COUNT=$(find data/gfx -newer data/gfx.tgz -type f | wc -l)
 if [[ $COUNT -gt 0 ]];
-then 
+then
     echo $0: Need to retar graphics tarball due to updates
     (
         tar zcvf data/gfx.tgz data/gfx
@@ -32,7 +32,7 @@ fi
 
 COUNT=$(find data/sounds -newer data/sounds.tgz -type f | wc -l)
 if [[ $COUNT -gt 0 ]];
-then 
+then
     echo $0: Need to retar sounds tarball due to updates
     (
         tar zcvf data/sounds.tgz data/sounds

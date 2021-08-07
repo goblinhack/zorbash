@@ -64,7 +64,7 @@ for ram_file in range(number_of_ramdisk_files):
 count = 0
 for record_number, (folder, filenames) in enumerate(sorted(files.items())):
     for filename in enumerate(filenames):
-        ram_file = count % number_of_ramdisk_files 
+        ram_file = count % number_of_ramdisk_files
         count += 1
 
         rec, orig_filename = filename
@@ -95,7 +95,7 @@ with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
     count = 0
     for record_number, (folder, filenames) in enumerate(sorted(files.items())):
         for filename in enumerate(filenames):
-            ram_file = count % number_of_ramdisk_files 
+            ram_file = count % number_of_ramdisk_files
             count += 1
 
             rec, orig_filename = filename

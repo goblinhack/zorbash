@@ -33,7 +33,7 @@ def init():
             "corridor1.5", "corridor1.6", "corridor1.7", "corridor1.8",
             "corridor1.9", "corridor1.10", "corridor1.11", "corridor1.12",
             "corridor1.13", "corridor1.14", "corridor1.15", "corridor1.16",
-            "corridor1.17", "corridor1.18", 
+            "corridor1.17", "corridor1.18",
             "corridor1.19",
             "corridor1.20",
             "corridor1.21",
@@ -74,7 +74,7 @@ def init():
             "corridor1.56",
             "corridor1.57",
         ],
-        bot3_tiles=[ 
+        bot3_tiles=[
                     "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                     "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                     "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -86,7 +86,7 @@ def init():
             "corridor2.5", "corridor2.6", "corridor2.7", "corridor2.8",
             "corridor2.9", "corridor2.10", "corridor2.11", "corridor2.12",
             "corridor2.13", "corridor2.14", "corridor2.15", "corridor2.16",
-            "corridor2.17", "corridor2.18", 
+            "corridor2.17", "corridor2.18",
             "corridor2.19",
             "corridor2.20",
             "corridor2.21",
@@ -127,7 +127,7 @@ def init():
             "corridor2.56",
             "corridor2.57",
         ],
-        bot3_tiles=[ 
+        bot3_tiles=[
                     "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                     "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                     "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",

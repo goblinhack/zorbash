@@ -46,9 +46,9 @@ def init():
             "bridge_lr.5", "bridge_lr.6", "bridge_lr.7", "bridge_lr.8",
             "bridge_lr.9", "bridge_lr.10", "bridge_lr.11", "bridge_lr.12",
             "bridge_lr.13", "bridge_lr.14", "bridge_lr.15", "bridge_lr.16",
-            "bridge_lr.17", "bridge_lr.18", 
+            "bridge_lr.17", "bridge_lr.18",
         ],
-        bot3_tiles=[ 
+        bot3_tiles=[
                     "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                     "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                     "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
@@ -60,10 +60,10 @@ def init():
             "bridge_ud.5", "bridge_ud.6", "bridge_ud.7", "bridge_ud.8",
             "bridge_ud.9", "bridge_ud.10", "bridge_ud.11", "bridge_ud.12",
             "bridge_ud.13", "bridge_ud.14", "bridge_ud.15", "bridge_ud.16",
-            "bridge_ud.17", "bridge_ud.18", 
+            "bridge_ud.17", "bridge_ud.18",
             "bridge_ud.19",
         ],
-        bot3_tiles=[ 
+        bot3_tiles=[
                     "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5",
                     "chasm1.6", "chasm1.7", "chasm1.8", "chasm1.9", "chasm1.10",
                     "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15",
