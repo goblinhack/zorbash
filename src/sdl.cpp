@@ -1344,7 +1344,7 @@ void sdl_loop (void)
             }
         }
 
-        pcg_random_allowed = false; 
+        pcg_random_allowed = false;
         {
             blit_fbo_bind(FBO_FINAL);
             glClear(GL_COLOR_BUFFER_BIT);

@@ -292,7 +292,7 @@ void Level::display_map (void)
     bool fade_in = timestamp_fade_in_begin != 0;
     bool frozen = player ? player->is_changing_level : false;
     fade_out_finished = false;
- 
+
      if (fade_out) {
         if ((time_get_time_ms_cached() < timestamp_fade_out_begin) ||
             (time_get_time_ms_cached() - timestamp_fade_out_begin > LEVEL_FADE_OUT_MS)) {
