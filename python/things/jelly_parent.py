@@ -11,7 +11,7 @@ def on_death(me, x, y):
     zx.level_spawn_next_to(me, "jelly_baby")
     zx.level_spawn_next_to(me, "jelly_baby")
     zx.level_spawn_next_to(me, "jelly_baby")
-    zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "slime{}".format(zx.non_pcq_randint(1, 9)))
+    zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "slime{}".format(zx.non_pcg_randint(1, 9)))
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)

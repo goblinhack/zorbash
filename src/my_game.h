@@ -160,6 +160,7 @@ public:
     void save_select(void);
     void tick_begin(const std::string &);
     void tick_begin_now(void);
+    void tick_update(void);
     void tick_end();
     void robot_mode_tick();
     void wid_collect_create(const std::list<Thingp> items);
@@ -236,6 +237,7 @@ public:
     //
     uint32_t           robot_mode_requested {};
     uint32_t           robot_mode_tick_requested {};
+    float              tick_dt {0};         // Used for timesteps within a game tick
 
     //
     // Temporary. Global states

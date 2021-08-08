@@ -38,7 +38,7 @@ void Thing::lava_tick (void)
     // Give the player a chance
     //
     if (!level->is_smoke(at.x, at.y)) {
-        hit = ((int)pcq_random_range(0, 100) < 80);
+        hit = ((int)pcg_random_range(0, 100) < 80);
     } else {
         hit = true;
     }
@@ -65,6 +65,6 @@ void Thing::lava_tick (void)
 
     if (!level->is_smoke(at.x, at.y)) {
         auto smoke = level->thing_new("smoke", at);
-        smoke->set_lifespan(pcq_random_range(1, 10));
+        smoke->set_lifespan(pcg_random_range(1, 10));
     }
 }

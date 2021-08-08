@@ -16,12 +16,12 @@
 #include "my_wid_actionbar.h"
 #include "my_ptrcheck.h"
 
-void Level::tick (void)
+bool Level::tick (void)
 {_
     // LOG("Tick");
     // TOPCON("monsts %d.", monst_count);
     if (!game->started) {
-        return;
+        return false;
     }
 
     //
@@ -45,6 +45,8 @@ void Level::tick (void)
         pending_add_all_interesting_things = {};
     }
 
+    game->tick_update();
+
     //
     // Update the cursor position.
     //
@@ -54,7 +56,7 @@ void Level::tick (void)
     // Allows for debugging
     //
     if (wid_console_window && wid_console_window->visible) {
-        return;
+        return false;
     }
 _
     // LOG("-");
@@ -67,41 +69,22 @@ _
     //
     game->things_are_moving = false;
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
-        if (t->get_timestamp_move_begin()) {
+        if (t->is_moving) {
             //
             // Check if we finished moving above. If not, keep waiting.
             //
             t->update_interpolated_position();
-            if (t->get_timestamp_move_begin()) {
-                if (game->robot_mode) {
-                    //
-                    // If in robot mode, always wait
-                    //
-                    game->things_are_moving = true;
-                } else {
-                    int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
-                    //
-                    // Allow the player to move ahead of the monsters a bit to
-                    // make the game look smoother.
-                    //
-                    if (time_left > 60) {
-                        auto p = t->get_top_owner();
-                        if (t->is_player() || (p && p->is_player())) {
-                            //
-                            // Allow smoother movement if not in strict robot mode
-                            //
-                        } else {
-                            game->things_are_moving = true;
-                        }
-                    }
-                }
+            if (t->is_moving) {
+                game->things_are_moving = true;
             }
         } else if (t->is_falling) {
             //
             // If falling we need to update the z depth and position; and wait.
             //
             t->update_interpolated_position();
-            game->things_are_moving = true;
+            if (t->is_falling) {
+                game->things_are_moving = true;
+            }
         } else if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
                    (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
                    (t->get_weapon_id_use_anim().ok())) {
@@ -109,9 +92,7 @@ _
             // Wait for animation end. Only if the thing is onscreen
             //
             if (t->frame_count == game->frame_count) {
-                if (game->robot_mode) {
-                    game->things_are_moving = true;
-                }
+                game->things_are_moving = true;
             } else if (!t->is_dead) {
                 t->dead("offscreen");
             }
@@ -119,7 +100,7 @@ _
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
     if (game->things_are_moving) {
-        return;
+        return false;
     }
 
     if (!game->robot_mode) {
@@ -150,26 +131,26 @@ _
     // in jumping.
     //
     if (player && player->particle_anim_exists()) {
-        return;
+        return false;
     }
 
     //
     // No moving if weapons have not finished firing
     //
     if (all_projectiles.size()) {
-        return;
+        return false;
     }
 
     if (new_projectiles.size()) {
-        return;
+        return false;
     }
 
     if (all_lasers.size()) {
-        return;
+        return false;
     }
 
     if (new_lasers.size()) {
-        return;
+        return false;
     }
 
     //
@@ -212,6 +193,11 @@ _
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
     CON("TICK %d hash %u", game->tick_current, h);
 #endif
+    if (!game->tick_requested.empty()) {
+        return true;
+    }
+
+    return false;
 }
 
 void Level::sanity_check (void)

@@ -32,6 +32,7 @@
 #include "my_ptrcheck.h"
 #include "my_sound.h"
 #include "my_traceback.h"
+#include "my_random.h"
 #include <unistd.h> // usleep
 
 #undef ENABLE_DEBUG_GFX_GL_BLEND
@@ -4922,9 +4923,7 @@ void wid_mouse_motion (int32_t x, int32_t y,
     wid_mouse_motion_recursion = 0;
 
     if (relx || rely || wheelx || wheely) {
-        if (game_mouse_motion(x, y, relx, rely, wheelx, wheely)) {_
-            return;
-        }
+        game_mouse_motion(x, y, relx, rely, wheelx, wheely);
     }
 }
 
@@ -5132,7 +5131,6 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
         if (game) {
             game->last_mouse_down = time_get_time_ms_cached();
         }
-        return;
     }
 }
 
@@ -5179,12 +5177,6 @@ void wid_mouse_held_down (uint32_t button, int32_t x, int32_t y)
         wid_mouse_motion_begin(w, x, y);
         return;
     }
-
-#if 0
-    if (game_mouse_down(x, y, button)) {
-        return;
-    }
-#endif
 }
 
 void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
@@ -5215,9 +5207,7 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
         return;
     }
 
-    if (game_mouse_up(x, y, button)) {
-        return;
-    }
+    game_mouse_up(x, y, button);
 }
 
 static Widp wid_key_down_handler (int32_t x, int32_t y)
@@ -6310,7 +6300,6 @@ printf("========================================= %d\n", wid_total_count);
     gl_leave_2d_mode();
     gl_enter_2d_mode(game->config.window_pix_width,
                      game->config.window_pix_height);
-
 }
 
 uint8_t wid_is_hidden (Widp w)

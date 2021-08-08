@@ -11,8 +11,8 @@
 #include <Python.h>
 
 PyObject *abs_to_pct_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *pcq_randint(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *non_pcq_randint(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *py_add_module(const char *mod);

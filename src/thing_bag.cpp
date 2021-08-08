@@ -87,8 +87,8 @@ bool Thing::bag_add (Thingp item)
         dbg3("Bag: try to add %s randomly", item->to_string().c_str());
         while (tries < bw * bh) {
             tries++;
-            auto x = pcq_random_range(0, bw - w);
-            auto y = pcq_random_range(0, bh - h);
+            auto x = pcg_random_range(0, bw - w);
+            auto y = pcg_random_range(0, bh - h);
             point at(x, y);
 
             if (bag_can_place_at(item, at)) {
@@ -153,8 +153,8 @@ bool Thing::bag_add_test (Thingp item)
         dbg3("Bag: try to add %s randomly", item->to_string().c_str());
         while (tries < bw * bh) {
             tries++;
-            auto x = pcq_random_range(0, bw - w);
-            auto y = pcq_random_range(0, bh - h);
+            auto x = pcg_random_range(0, bw - w);
+            auto y = pcg_random_range(0, bh - h);
             point at(x, y);
 
             if (bag_can_place_at(item, at)) {

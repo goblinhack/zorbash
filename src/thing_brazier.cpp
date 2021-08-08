@@ -46,7 +46,7 @@ void Thing::brazier_tick (void)
         }
 
         for (auto i = 0; i < 9; i++) {
-            auto delta = get(all_deltas, pcq_random_range(0, (int)all_deltas.size()));
+            auto delta = get(all_deltas, pcg_random_range(0, (int)all_deltas.size()));
             if (try_to_shove(t, delta)) {
                 if (!is_dead) {
                     if (is_player()) {
@@ -58,7 +58,7 @@ void Thing::brazier_tick (void)
         }
 
         if (!is_dead) {
-            if (pcq_random_range(0, 100) < 20) {
+            if (pcg_random_range(0, 100) < 20) {
                 TOPCON("You stumble into the flames!");
                 set_on_fire("stumbled into flames");
             }

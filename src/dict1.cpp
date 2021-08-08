@@ -192,5 +192,5 @@ static const char *dict1_names[] = {
 };
 
 const char * dict1_name(void) {
-    return dict1_names[pcq_random_range(0, ARRAY_SIZE(dict1_names))];
+    return dict1_names[pcg_random_range(0, ARRAY_SIZE(dict1_names))];
 }

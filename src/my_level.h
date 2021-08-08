@@ -739,7 +739,7 @@ public:
     void things_gc_force(void);
     void things_gc_if_possible(void);
     void things_tick(void);
-    void tick(void);
+    bool tick(void);
     void unset_is_dungeon(const int x, const int y);
     void unset_fade_in(const int x, const int y);
     void unset_fade_in_no_check(const int x, const int y);

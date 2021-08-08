@@ -16,6 +16,7 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 #include "my_ui.h"
+#include "my_random.h"
 
 static int sdl_get_mouse(void);
 
@@ -945,10 +946,10 @@ void config_gfx_inverted_toggle (void)
 {_
     if (!game->config.gfx_inverted) {
         game->config.gfx_inverted = true;
-        CON("gfx inverted enabled");
+        CON("GFX inverted enabled");
     } else {
         game->config.gfx_inverted = false;
-        CON("gfx inverted disabled");
+        CON("GFX inverted disabled");
     }
 }
 
@@ -961,14 +962,14 @@ uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
 
     if (!s || (*s == '\0')) {
         game->config.gfx_inverted = true;
-        CON("gfx inverted enabled (default)");
+        CON("GFX inverted enabled (default)");
     } else {
         int val = strtol(s, 0, 10) ? 1 : 0;
         game->config.gfx_inverted = val;
         if (game->config.gfx_inverted) {
-            CON("gfx inverted enabled");
+            CON("GFX inverted enabled");
         } else {
-            CON("gfx inverted disabled");
+            CON("GFX inverted disabled");
         }
     }
 
@@ -982,10 +983,10 @@ void config_gfx_minimap_toggle (void)
 {_
     if (!game->config.gfx_minimap) {
         game->config.gfx_minimap = true;
-        CON("gfx map enabled");
+        CON("GFX map enabled");
     } else {
         game->config.gfx_minimap = false;
-        CON("gfx map disabled");
+        CON("GFX map disabled");
     }
 }
 
@@ -998,14 +999,14 @@ uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
 
     if (!s || (*s == '\0')) {
         game->config.gfx_minimap = true;
-        CON("gfx map enabled (default)");
+        CON("GFX map enabled (default)");
     } else {
         int val = strtol(s, 0, 10) ? 1 : 0;
         game->config.gfx_minimap = val;
         if (game->config.gfx_minimap) {
-            CON("gfx map enabled");
+            CON("GFX map enabled");
         } else {
-            CON("gfx map disabled");
+            CON("GFX map disabled");
         }
     }
 
@@ -1044,14 +1045,14 @@ uint8_t config_game_pix_zoom_set (tokens_t *tokens, void *context)
 
     if (!s || (*s == '\0')) {
         game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
-        CON("USERCFG: gfx zoom enabled (default)");
+        CON("GFX: gfx zoom enabled (default)");
     } else {
         int val = strtol(s, 0, 10);
         game->config.game_pix_zoom = val;
         if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) {
             game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT;
         }
-        LOG("USERCFG: gfx zoom set to %d", val);
+        LOG("GFX: zoom set to %d", val);
     }
 
     sdl_config_update_all();
@@ -1217,17 +1218,21 @@ void sdl_loop (void)
         }
         old_g_errored = g_errored;
 
-        gl_leave_2d_mode();
-        gl_enter_2d_mode(game->config.game_pix_width,
-                         game->config.game_pix_height);
+        pcg_random_allowed = false;
+        {
+            gl_leave_2d_mode();
+            gl_enter_2d_mode(game->config.game_pix_width,
+                            game->config.game_pix_height);
 
-        glcolor(WHITE);
-        game->display();
-        blit_fbo_unbind();
+            glcolor(WHITE);
+            game->display();
+            blit_fbo_unbind();
 
-        gl_leave_2d_mode();
-        gl_enter_2d_mode(game->config.window_pix_width,
-                         game->config.window_pix_height);
+            gl_leave_2d_mode();
+            gl_enter_2d_mode(game->config.window_pix_width,
+                            game->config.window_pix_height);
+        }
+        pcg_random_allowed = true;
 
         //
         // Less frequent updates
@@ -1247,7 +1252,11 @@ void sdl_loop (void)
             //
             if (game) {
                 if (wid_console_window && wid_console_window->visible) {
-                    wid_display_all();
+                    pcg_random_allowed = false;
+                    {
+                        wid_display_all();
+                    }
+                    pcg_random_allowed = true;
                 } else {
                     //
                     // Must do this before wid_display_all so that the
@@ -1258,7 +1267,12 @@ void sdl_loop (void)
                         game->request_update_rightbar = false;
                         wid_rightbar_init();
                     }
-                    wid_display_all();
+
+                    pcg_random_allowed = false;
+                    {
+                        wid_display_all();
+                    }
+                    pcg_random_allowed = true;
                 }
             }
 
@@ -1279,7 +1293,11 @@ void sdl_loop (void)
             //
             // Clean up dead widgets.
             //
-            wid_gc_all();
+            pcg_random_allowed = false;
+            {
+                wid_gc_all();
+            }
+            pcg_random_allowed = true;
 
             //
             // Read events
@@ -1317,63 +1335,73 @@ void sdl_loop (void)
 
         if (likely(!g_errored)) {
             if (likely(game->level != nullptr)) {
-                game->level->tick();
+                //
+                // If the tick ends, start the new tick asap for smoothness.
+                //
+                if (game->level->tick()) {
+                    game->level->tick();
+                }
             }
         }
 
-        blit_fbo_bind(FBO_FINAL);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(WHITE);
-        glBlendFunc(GL_ONE, GL_ZERO);
-        blit_fbo_window_pix(FBO_MAP);
+        pcg_random_allowed = false; 
+        {
+            blit_fbo_bind(FBO_FINAL);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glcolor(WHITE);
+            glBlendFunc(GL_ONE, GL_ZERO);
+            blit_fbo_window_pix(FBO_MAP);
 
-        //
-        // Draw the map
-        //
-        if (likely(game->level != nullptr)) {
-            game->level->display_minimap();
+            //
+            // Draw the map
+            //
+            if (likely(game->level != nullptr)) {
+                game->level->display_minimap();
+            }
+
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            blit_fbo_window_pix(FBO_WID);
+            blit_fbo_unbind();
+
+            glBlendFunc(GL_ONE, GL_ZERO);
+            if (unlikely(game->config.gfx_inverted)) {
+                glLogicOp(GL_COPY_INVERTED);
+                glEnable(GL_COLOR_LOGIC_OP);
+                blit_fbo_window_pix(FBO_FINAL);
+                glLogicOp(GL_COPY);
+                glDisable(GL_COLOR_LOGIC_OP);
+            } else {
+                blit_fbo_window_pix(FBO_FINAL);
+            }
+
+            //
+            // Screenshot?
+            //
+            if (unlikely(g_do_screenshot)) {
+                g_do_screenshot = 0;
+                sdl_screenshot_do();
+            }
+
+            SDL_Delay(game->config.sdl_delay);
+
+            //
+            // Flip
+            //
+            if (likely(game->config.gfx_vsync_locked)) {
+                SDL_GL_SwapWindow(window);
+            } else {
+                glFlush();
+            }
+
+            //
+            // Optimization to only bother checking pointers if some kind of
+            // allocation occurred.
+            //
+            extern bool ptr_check_some_pointers_changed;
+            ptr_check_some_pointers_changed = false;
         }
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        blit_fbo_window_pix(FBO_WID);
-        blit_fbo_unbind();
-
-        glBlendFunc(GL_ONE, GL_ZERO);
-        if (unlikely(game->config.gfx_inverted)) {
-            glLogicOp(GL_COPY_INVERTED);
-            glEnable(GL_COLOR_LOGIC_OP);
-            blit_fbo_window_pix(FBO_FINAL);
-            glLogicOp(GL_COPY);
-            glDisable(GL_COLOR_LOGIC_OP);
-        } else {
-            blit_fbo_window_pix(FBO_FINAL);
-        }
-
-        //
-        // Screenshot?
-        //
-        if (unlikely(g_do_screenshot)) {
-            g_do_screenshot = 0;
-            sdl_screenshot_do();
-        }
-
-        SDL_Delay(game->config.sdl_delay);
-
-        //
-        // Flip
-        //
-        if (likely(game->config.gfx_vsync_locked)) {
-            SDL_GL_SwapWindow(window);
-        } else {
-            glFlush();
-        }
-
-        //
-        // Optimization to only bother checking pointers if some kind of
-        // allocation occurred.
-        //
-        extern bool ptr_check_some_pointers_changed;
-        ptr_check_some_pointers_changed = false;
+        pcg_random_allowed = true;
 
         //
         // Config change?

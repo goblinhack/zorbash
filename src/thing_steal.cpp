@@ -14,7 +14,7 @@
 
 bool Thing::steal_treasure_from (Thingp it)
 {_
-    if ((int)pcq_random_range(0, 1000) >
+    if ((int)pcg_random_range(0, 1000) >
             tp()->is_steal_item_chance_d1000()) {
         return false;
     }
@@ -26,7 +26,7 @@ _
         dbg("No, nothing to steal");
         return false;
     }
-    auto chosen = cands[pcq_random_range(0, cands.size())];
+    auto chosen = cands[pcg_random_range(0, cands.size())];
 
     dbg("Steal treasure %s", chosen->to_string().c_str());
     if (!it->drop(chosen, this, true /* stolen */)) {
@@ -48,7 +48,7 @@ _
 bool Thing::steal_item_from (Thingp it)
 {_
     dbg("Try to steal item from %s?", it->to_string().c_str());
-    if ((int)pcq_random_range(0, 1000) >
+    if ((int)pcg_random_range(0, 1000) >
             tp()->is_steal_item_chance_d1000()) {
         dbg("No");
         return false;
@@ -61,7 +61,7 @@ _
         return false;
     }
 
-    auto chosen = cands[pcq_random_range(0, cands.size())];
+    auto chosen = cands[pcg_random_range(0, cands.size())];
 
     dbg("Yes, steal: %s", chosen->to_string().c_str());
 

@@ -270,45 +270,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         dy = d;
     }
 
-    //
-    // If things are almost done, then we can allow the player to move
-    // as it looks smoother
-    //
-    // Do this after saving the key states above else we can miss keys.
-    //
-    if (game->things_are_moving) {
-        if (game->robot_mode) {
-            return;
-        }
-
-        bool wait = false;
-        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {
-            //
-            // As we allow the player to skip ahead a little bit, make
-            // sure no monster is lagging by one move
-            //
-            if (t->is_dead) {
-                continue;
-            }
-
-            if (t->get_timestamp_move_begin()) {
-                int time_left = t->get_timestamp_move_end() - time_get_time_ms_cached();
-                if (time_left > 20) {
-                    if (unlikely(g_opt_debug3)) {
-                        t->con("Player move delayed due to monst moving (%d ms left)",
-                               t->get_timestamp_move_end() - time_get_time_ms_cached());
-                    }
-                    wait = true;
-                    break;
-                }
-            }
-        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
-
-        if (wait) {
-            return;
-        }
-    }
-
     if (jump) {
         game->tick_begin("player jumped");
 

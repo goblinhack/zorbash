@@ -34,3 +34,4 @@
 
 pcg32_random_t pcg32_global = PCG32_INITIALIZER;
 
+bool pcg_random_allowed = true;

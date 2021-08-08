@@ -54,8 +54,19 @@ void Thing::on_move (void)
     }
 }
 
-void Thing::move_reset_timestamps (void)
+void Thing::move_finish (void)
 {_
+    if (!is_moving) {
+        return;
+    }
+
+    dbg("Move finish");
+
+    //
+    // Set this so that we can pick up items again at the last location.
+    //
+    set_where_i_dropped_an_item_last(point(-1, -1));
+
     if (is_player()) {
         if (check_anything_to_carry()) {
             BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items.",
@@ -65,35 +76,13 @@ void Thing::move_reset_timestamps (void)
         }
         wid_actionbar_init();
     }
-    set_timestamp_move_begin(0);
-    set_timestamp_move_end(0);
-}
-
-void Thing::move_finish_internal (void)
-{_
-    dbg("Move finish");
-
-    if (get_timestamp_move_begin() == 0) {
-        return;
-    }
-
-    //
-    // Set this so that we can pick up items again at the last location.
-    //
-    set_where_i_dropped_an_item_last(point(-1, -1));
-    move_reset_timestamps();
 
     if (!is_hidden) {
         dbg("Move to %f,%f finished", mid_at.x, mid_at.y);
     }
 
     is_moving = false;
-}
-
-void Thing::move_finish (void)
-{_
-    move_finish_internal();
-    is_moving = false;
+    on_move();
 }
 
 bool Thing::move (fpoint future_pos)
@@ -385,6 +374,7 @@ void Thing::update_interpolated_position (void)
 {_
     fpoint new_pos = mid_at;
     auto tpp = tp();
+    float step = game->tick_dt;
 
     auto p = get_top_owner();
     if ((p && p->is_falling) || is_falling) {
@@ -407,24 +397,13 @@ void Thing::update_interpolated_position (void)
     }
 
     if (is_jumping) {
-        float t = get_timestamp_jump_end() - get_timestamp_jump_begin();
-        float dt = time_get_time_ms_cached() - get_timestamp_jump_begin();
-
-        float step;
-        if (!t) {
-            step = 1.0;
-        } else {
-            step = dt / t;
-        }
-
         float dx = mid_at.x - last_mid_at.x;
         float dy = mid_at.y - last_mid_at.y;
 
         new_pos.x = last_mid_at.x + dx * step;
         new_pos.y = last_mid_at.y + dy * step;
-    } else if (!get_timestamp_move_end()) {
+    } else if (!is_moving) {
         if (mid_at != last_mid_at) {
-            is_moving = true;
             if (!is_hidden) {
                 dbg("Changed position (new %f, %f, old %f,%f)",
                     mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
@@ -432,11 +411,8 @@ void Thing::update_interpolated_position (void)
 
             new_pos = mid_at;
             last_mid_at = mid_at;
-            set_timestamp_move_end(time_get_time_ms_cached());
-            on_move();
-            is_moving = false;
         }
-    } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
+    } else if (game->tick_dt >= 1) {
         if (mid_at != last_mid_at) {
             if (!is_hidden) {
                 dbg("End of move position (new %f, %f, old %f,%f)",
@@ -446,19 +422,9 @@ void Thing::update_interpolated_position (void)
             new_pos = mid_at;
             last_mid_at = mid_at;
 
-            move_finish_internal();
+            move_finish();
         }
     } else {
-        float t = get_timestamp_move_end() - get_timestamp_move_begin();
-        float dt = time_get_time_ms_cached() - get_timestamp_move_begin();
-
-        float step;
-        if (!t) {
-            step = 1.0;
-        } else {
-            step = dt / t;
-        }
-
         float dx = mid_at.x - last_mid_at.x;
         float dy = mid_at.y - last_mid_at.y;
 
@@ -482,7 +448,6 @@ void Thing::update_pos (fpoint to, bool immediately)
         dbg("Update pos to %f,%f", to.x, to.y);
     }
 
-    auto tpp = tp();
     point new_at((int)to.x, (int)to.y);
     if (level->is_oob(new_at)) {
         return;
@@ -494,18 +459,6 @@ void Thing::update_pos (fpoint to, bool immediately)
     has_ever_moved = true;
 
     //
-    // Keep track of where this thing is on the grid
-    //
-    if (old_at != new_at) {
-        if (is_player()) {
-            if (((int)old_at.x != (int)new_at.x) ||
-                ((int)old_at.y != (int)new_at.y)) {
-                level->minimap_valid = false;
-            }
-        }
-    }
-
-    //
     // If moving things on the non game level, move non smoothly
     //
     if (level != game->level) {
@@ -513,23 +466,21 @@ void Thing::update_pos (fpoint to, bool immediately)
     }
 
     //
-    // Moves are immediate, but we render the move in steps, hence keep
-    // track of when we moved.
+    // Keep track of where this thing is on the grid
     //
-    if (to == mid_at) {
+    if (old_at == new_at) {
         return;
     }
 
-    int move_speed = game->get_move_speed();
-
-    auto p = get_top_owner();
-    if (is_player() || (p && p->is_player())) {
-    } else {
-        //move_speed /= 2;
+    if (!is_hidden) {
+        dbg("Move to %f,%f", to.x, to.y);
     }
 
-    if (!is_hidden) {
-        dbg("Move to %f,%f speed %d", to.x, to.y, move_speed);
+    if (is_player()) {
+        if (((int)old_at.x != (int)new_at.x) ||
+            ((int)old_at.y != (int)new_at.y)) {
+            level->minimap_valid = false;
+        }
     }
 
     level_pop();
@@ -537,14 +488,7 @@ void Thing::update_pos (fpoint to, bool immediately)
     level_push();
 
     if (!immediately) {
-        set_timestamp_move_begin(time_get_time_ms_cached());
-        set_timestamp_move_end(get_timestamp_move_begin() + move_speed);
         is_moving = true;
-        on_move();
-
-        if (tpp->is_loggable_for_unimportant_stuff()) {
-            dbg("Moving");
-        }
     }
 
     move_carried_items();

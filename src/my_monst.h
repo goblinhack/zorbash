@@ -115,7 +115,6 @@ public:
     std::vector<point>    move_path;
     std::vector<uint16_t> inventory_id;      // Vector of tp_id
     std::vector<uint16_t> skillbox_id;       // Vector of tp_id
-    timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
     timestamp_t  timestamp_fadeup_begin {};
@@ -123,15 +122,9 @@ public:
     timestamp_t  timestamp_fall_begin {};
     timestamp_t  timestamp_fall_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
-    timestamp_t  timestamp_jump_begin {};
-    timestamp_t  timestamp_jump_end {};
-    timestamp_t  timestamp_unused2 {};
-    timestamp_t  timestamp_unused1 {};
     timestamp_t  timestamp_lunge_begin {};
     timestamp_t  timestamp_lunge_end {};
-    timestamp_t  timestamp_move_begin {};
-    timestamp_t  timestamp_move_end {};
-    timestamp_t  timestamp_sleep_end {};
+    timestamp_t  timestamp_anim_delay_end {};
     //
     // Used for calling on_idle()
     //

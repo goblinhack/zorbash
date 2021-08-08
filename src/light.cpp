@@ -649,8 +649,8 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
                     }
 
                     if (t->gfx_flickers()) {
-                        if (non_pcq_random_range(0, 100) < 10) {
-                            l->flicker = non_pcq_random_range(0, 10);
+                        if (non_pcg_random_range(0, 100) < 10) {
+                            l->flicker = non_pcg_random_range(0, 10);
                         }
                     }
 

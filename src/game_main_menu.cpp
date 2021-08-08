@@ -230,7 +230,7 @@ static void game_display_title_fg2 (void)
     static int delta = 10;
     static int red = 255;
 
-    if (non_pcq_random_range(0, 100) < 50) {
+    if (non_pcg_random_range(0, 100) < 50) {
         red += delta;
         if (red > 255) {
             delta = - delta;

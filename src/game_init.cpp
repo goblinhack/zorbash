@@ -7,6 +7,7 @@
 #include "my_game.h"
 #include "my_world.h"
 #include "my_level.h"
+#include "my_random.h"
 #include "my_random_name.h"
 #include "my_array_bounds_check.h"
 #include "my_globals.h"

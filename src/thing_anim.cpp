@@ -19,7 +19,7 @@ void Thing::animate (void)
     Tilep tile;
     auto tpp = tp();
 
-    if (time_get_time_ms_cached() <= get_timestamp_sleep_end()) {
+    if (time_get_time_ms_cached() <= get_timestamp_anim_delay_end()) {
 #ifdef DEBUG_ANIM
 if (is_blood_splatter()) { con("Waiting on anim frame"); }
 #endif
@@ -91,9 +91,7 @@ if (is_blood_splatter()) { con("Stay dead"); }
         //
         // If walking and now we've stopped, choose the idle no dir tile.
         //
-        if (is_player() && !is_dead && !is_moving &&
-            (time_get_time_ms() >= get_timestamp_move_begin() + 500)) {
-
+        if (is_player() && !is_dead && !is_moving) {
             Tilep new_tile;
 
             {_
@@ -444,7 +442,7 @@ if (is_blood_splatter()) { con("No tile"); }
     //
     if (!game->robot_mode) {
         if (delay) {
-            delay = delay + (non_pcq_rand() % delay) / 5;
+            delay = delay + (non_pcg_rand() % delay) / 5;
         }
     }
 

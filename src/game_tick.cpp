@@ -15,6 +15,8 @@
 void Game::tick_begin (const std::string &why)
 {_
     tick_requested = why;
+    game->tick_dt = 0;
+    CON("Game tick requested");
 }
 
 void Game::tick_begin_now (void)
@@ -31,10 +33,10 @@ void Game::tick_begin_now (void)
     // Helps to maintain randomness if the user say scrolls around the level we
     // do not want that to change the randomness of the monsters.
     //
-    pcq_srand(game->tick_current);
+    pcg_srand(game->tick_current);
 
     if (game->robot_mode) {
-        game->current_move_speed = game->fast_move_speed / 2;
+        game->current_move_speed = game->fast_move_speed;
     } else if (!game->cursor_move_path.empty()) {
         game->current_move_speed = game->fast_move_speed;
     } else {
@@ -115,7 +117,25 @@ void Game::tick_end (void)
             h += (int)t->mid_at.y;
             t->con("THING AT");
         } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
-        CON("TICK %d hash %u rand %d", tick_current, h, pcq_random_range(1, 10000));
+        CON("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));
 #endif
     }
+}
+
+void Game::tick_update (void)
+{_
+    //
+    // Work out the current timestep in this move
+    //
+    if (game->tick_begin_ms) {
+        float move_at = time_get_time_ms_cached() - game->tick_begin_ms;
+        float move_duration = game->current_move_speed;
+        game->tick_dt = move_at / move_duration;
+        if (game->tick_dt > 1) {
+            game->tick_dt = 1;
+        }
+    } else {
+        game->tick_dt = 0;
+    }
+    // CON("DT %f at %u %u",game->tick_dt, time_get_time_ms_cached() - game->tick_begin_ms, game->current_move_speed);
 }

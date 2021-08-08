@@ -33,9 +33,11 @@
 #define _MY_PCG_BASIC_H_INCLUDED 1
 
 #include <inttypes.h>
-//#include "my_main.h"
+#include "my_main.h"
+#include "my_sys.h"
 //#include "my_traceback.h"
 
+extern bool pcg_random_allowed;
 
 #if __cplusplus
 extern "C" {
@@ -56,6 +58,10 @@ extern pcg32_random_t pcg32_global;
 
 static inline uint32_t pcg32_random_r(pcg32_random_t* rng)
 {
+    if (!pcg_random_allowed) {
+        DIE("Trying to use pcg randomness outside of game logic part");
+    }
+
     uint64_t oldstate = rng->state;
     rng->state = oldstate * 6364136223846793005ULL + rng->inc;
     uint32_t xorshifted = ((oldstate >> 18u) ^ oldstate) >> 27u;
@@ -129,7 +135,6 @@ static inline uint32_t pcg32_boundedrand_r(pcg32_random_t* rng, uint32_t bound)
         }
     }
 }
-
 
 static inline uint32_t pcg32_boundedrand(uint32_t bound)
 {

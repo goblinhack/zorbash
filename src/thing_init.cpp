@@ -172,10 +172,6 @@ _
         level->dmap_to_player_update();
     }
 
-    if (tpp->is_monst() || tpp->is_player() || tpp->is_moveable()) {
-        set_timestamp_born(time_get_time_ms_cached());
-    }
-
     if (tpp->gfx_animated_can_hflip()) {
         dir            = THING_DIR_LEFT;
         is_facing_left = true;
@@ -394,7 +390,7 @@ _
     }
 
     if (gfx_bounce_always()) {
-        bounce(0.2, 1.0, 500 + pcq_random_range(0, 50), 99999);
+        bounce(0.2, 1.0, 500 + pcg_random_range(0, 50), 99999);
     }
 
     init_lights();
@@ -505,9 +501,6 @@ void Thing::reinit (void)
     // Probably safest to reset this else things might expire on load
     //
     timestamp_next_frame = 0;
-    if (is_monst() || is_player()) {
-        set_timestamp_born(time_get_time_ms_cached());
-    }
 
     if (unlikely(is_player())) {
         if (level->player && (level->player != this)) {

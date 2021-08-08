@@ -2,17 +2,17 @@ import zx
 import tp
 
 def on_bite(me, x, y):
-    sound = "growl{}".format(zx.non_pcq_randint(1, 10))
+    sound = "growl{}".format(zx.non_pcg_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
-    sound = "hiss{}".format(zx.non_pcq_randint(1, 10))
+    sound = "hiss{}".format(zx.non_pcg_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
 def on_miss(me, hitter, x, y):
-    sound = "hiss{}".format(zx.non_pcq_randint(1, 10))
+    sound = "hiss{}".format(zx.non_pcg_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
@@ -21,7 +21,7 @@ def on_death(me, x, y):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "monst_death1")
 
 def on_firing_at_something(me, target, x, y): # Return True on doing an action
-    if zx.pcq_randint(1, 10) < 3:
+    if zx.pcg_randint(1, 10) < 3:
         zx.thing_fire_at(me, "laser_energy", target)
         return True
     return False

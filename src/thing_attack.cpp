@@ -458,7 +458,7 @@ _
     auto bite = false;
     auto bite_damage = get_damage_bite();
     if (bite_damage) {
-        if (pcq_random_range(0, 100) < 50) {
+        if (pcg_random_range(0, 100) < 50) {
             total_damage = bite_damage;
             bite = true;
         }

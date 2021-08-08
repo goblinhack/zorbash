@@ -67,9 +67,9 @@ _
         dbg("Yes; create inventory particles");
         for (int c = 0; c < particle_count; c++) {
             point s = (last_blit_tl + last_blit_br) / 2;
-            point j(pcq_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
-                    pcq_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
-            std::string name = "gold1." + std::to_string(pcq_random_range(1, 8));
+            point j(pcg_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
+                    pcg_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
+            std::string name = "gold1." + std::to_string(pcg_random_range(1, 8));
             level->new_external_particle(
                      s + j, p,
                      isize(TILE_WIDTH / 2, TILE_HEIGHT / 2),
@@ -100,8 +100,8 @@ _
                      (float)TERM_HEIGHT) * (float)p.y);
 
         point s = (last_blit_tl + last_blit_br) / 2;
-        point j(pcq_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
-                pcq_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
+        point j(pcg_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
+                pcg_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
 
         dbg("Yes; create inventory particle");
         std::string tile_name = "key.1";

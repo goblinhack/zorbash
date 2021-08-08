@@ -9,6 +9,7 @@
 #include "my_wid_botcon.h"
 #include "my_wid_popup.h"
 #include "my_wid_actionbar.h"
+#include "my_random.h"
 #include "my_thing.h"
 #include "my_ui.h"
 #include "my_sdl.h"

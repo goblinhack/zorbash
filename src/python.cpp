@@ -1663,8 +1663,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(z_prio)
 
     {"abs_to_pct",                                             (PyCFunction)abs_to_pct_,                                            METH_VARARGS | METH_KEYWORDS, "abs to pct "},
-    {"pcq_randint",                                            (PyCFunction)pcq_randint,                                            METH_VARARGS | METH_KEYWORDS, "rand int "},
-    {"non_pcq_randint",                                        (PyCFunction)non_pcq_randint,                                        METH_VARARGS | METH_KEYWORDS, "rand int "},
+    {"pcg_randint",                                            (PyCFunction)pcg_randint,                                            METH_VARARGS | METH_KEYWORDS, "rand int "},
+    {"non_pcg_randint",                                        (PyCFunction)non_pcg_randint,                                        METH_VARARGS | METH_KEYWORDS, "rand int "},
     {"con",                                                    (PyCFunction)con_,                                                   METH_VARARGS,                 "log to the console"},
     {"die",                                                    (PyCFunction)die_,                                                   METH_VARARGS,                 "exit game with error"},
     {"err",                                                    (PyCFunction)err_,                                                   METH_VARARGS,                 "error to the log file"},
@@ -2457,7 +2457,7 @@ PyObject *abs_to_pct_ (PyObject *obj, PyObject *args, PyObject *keywds)
     return (Py_BuildValue("dd", x, y));
 }
 
-PyObject *pcq_randint (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *pcg_randint (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     int x = 0;
     int y = 0;
@@ -2475,10 +2475,10 @@ PyObject *pcq_randint (PyObject *obj, PyObject *args, PyObject *keywds)
     // Python style. We don't use pythons so we can get consistent random
     // numbers with the one C uses.
     //
-    return (Py_BuildValue("i", pcq_random_range_inclusive(x, y)));
+    return (Py_BuildValue("i", pcg_random_range_inclusive(x, y)));
 }
 
-PyObject *non_pcq_randint (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *non_pcg_randint (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     int x = 0;
     int y = 0;
@@ -2496,7 +2496,7 @@ PyObject *non_pcq_randint (PyObject *obj, PyObject *args, PyObject *keywds)
     // Python style. We don't use pythons so we can get consistent random
     // numbers with the one C uses.
     //
-    return (Py_BuildValue("i", non_pcq_random_range_inclusive(x, y)));
+    return (Py_BuildValue("i", non_pcg_random_range_inclusive(x, y)));
 }
 
 PyObject *pct_to_abs_ (PyObject *obj, PyObject *args, PyObject *keywds)

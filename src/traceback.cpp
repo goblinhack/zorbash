@@ -109,7 +109,7 @@ std::string Traceback::to_string (void)
     const char *prefix = " >";
 
     // address of this function.
-    for (int i = 1; i < size; i++) {
+    for (int i = size - 1; i >= 0; i--) {
 
         char *p = symbollist[i];
         char *cur = p;
@@ -147,7 +147,7 @@ std::string Traceback::to_string (void)
 
             auto demangled = cppDemangle(cur);
             if (demangled) {
-                sout += string_sprintf("%s%u %s\n", prefix, i, demangled.get());
+                sout += string_sprintf("%s %s\n", prefix, demangled.get());
                 done = true;
                 break;
             }

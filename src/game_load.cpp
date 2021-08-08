@@ -131,7 +131,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* std::vector<point>   move_path         */ in >> bits(my.t->move_path);
     /* std::vector<uint16_t> inventory_id     */ in >> bits(my.t->inventory_id);
     /* std::vector<uint16_t> skillbox_id      */ in >> bits(my.t->skillbox_id);
-    /* timestamp_t  timestamp_born            */ in >> bits(T); my.t->timestamp_born = load(T);
     /* timestamp_t  timestamp_bounce_begin    */ in >> bits(T); my.t->timestamp_bounce_begin = load(T);
     /* timestamp_t  timestamp_bounce_end      */ in >> bits(T); my.t->timestamp_bounce_end = load(T);
     /* timestamp_t  timestamp_fadeup_begin    */ in >> bits(T); my.t->timestamp_fadeup_begin = load(T);
@@ -139,15 +138,9 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t  timestamp_fall_begin      */ in >> bits(T); my.t->timestamp_fall_begin = load(T);
     /* timestamp_t  timestamp_fall_end        */ in >> bits(T); my.t->timestamp_fall_end = load(T);
     /* timestamp_t  timestamp_flip_start      */ in >> bits(T); my.t->timestamp_flip_start = load(T);
-    /* timestamp_t  timestamp_jump_begin      */ in >> bits(T); my.t->timestamp_jump_begin = load(T);
-    /* timestamp_t  timestamp_jump_end        */ in >> bits(T); my.t->timestamp_jump_end = load(T);
-    /* timestamp_t  timestamp_unused2         */ in >> bits(T); my.t->timestamp_unused2 = load(T);
-    /* timestamp_t  timestamp_unused1         */ in >> bits(T); my.t->timestamp_unused1 = load(T);
     /* timestamp_t  timestamp_lunge_begin     */ in >> bits(T); my.t->timestamp_lunge_begin = load(T);
     /* timestamp_t  timestamp_lunge_end       */ in >> bits(T); my.t->timestamp_lunge_end = load(T);
-    /* timestamp_t  timestamp_move_begin      */ in >> bits(T); my.t->timestamp_move_begin = load(T);
-    /* timestamp_t  timestamp_move_end        */ in >> bits(T); my.t->timestamp_move_end = load(T);
-    /* timestamp_t  timestamp_sleep_end       */ in >> bits(T); my.t->timestamp_sleep_end = load(T);
+    /* timestamp_t  timestamp_anim_delay_end  */ in >> bits(T); my.t->timestamp_anim_delay_end = load(T);
     /* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_location_check  */ in >> bits(my.t->tick_last_location_check);
     /* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);

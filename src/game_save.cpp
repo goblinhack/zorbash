@@ -105,7 +105,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* std::vector<point>   move_path         */ out << bits(my.t->move_path);
     /* std::vector<uint16_t> inventory_id     */ out << bits(my.t->inventory_id);
     /* std::vector<uint16_t> skillbox_id      */ out << bits(my.t->skillbox_id);
-    /* timestamp_t  timestamp_born            */ out << bits(my.t->timestamp_born);
     /* timestamp_t  timestamp_bounce_begin    */ out << bits(my.t->timestamp_bounce_begin);
     /* timestamp_t  timestamp_bounce_end      */ out << bits(my.t->timestamp_bounce_end);
     /* timestamp_t  timestamp_fadeup_begin    */ out << bits(my.t->timestamp_fadeup_begin);
@@ -113,15 +112,9 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t  timestamp_fall_begin      */ out << bits(my.t->timestamp_fall_begin);
     /* timestamp_t  timestamp_fall_end        */ out << bits(my.t->timestamp_fall_end);
     /* timestamp_t  timestamp_flip_start      */ out << bits(my.t->timestamp_flip_start);
-    /* timestamp_t  timestamp_jump_begin      */ out << bits(my.t->timestamp_jump_begin);
-    /* timestamp_t  timestamp_jump_end        */ out << bits(my.t->timestamp_jump_end);
-    /* timestamp_t  timestamp_unused2         */ out << bits(my.t->timestamp_unused2);
-    /* timestamp_t  timestamp_unused1         */ out << bits(my.t->timestamp_unused1);
     /* timestamp_t  timestamp_lunge_begin     */ out << bits(my.t->timestamp_lunge_begin);
     /* timestamp_t  timestamp_lunge_end       */ out << bits(my.t->timestamp_lunge_end);
-    /* timestamp_t  timestamp_move_begin      */ out << bits(my.t->timestamp_move_begin);
-    /* timestamp_t  timestamp_move_end        */ out << bits(my.t->timestamp_move_end);
-    /* timestamp_t  timestamp_sleep_end       */ out << bits(my.t->timestamp_sleep_end);
+    /* timestamp_t  timestamp_anim_delay_end  */ out << bits(my.t->timestamp_anim_delay_end);
     /* uint32_t     tick_last_did_something   */ out << bits(my.t->tick_last_did_something);
     /* uint32_t     tick_last_location_check  */ out << bits(my.t->tick_last_location_check);
     /* uint32_t     tick_last_escape          */ out << bits(my.t->tick_last_escape);
