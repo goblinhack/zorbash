@@ -118,8 +118,8 @@ void Thing::level_push (void)
                                                    level->set_is_brazier(mx, my); }
     if (is_barrel())                             { i_set_is_barrel = true;
                                                    level->set_is_barrel(mx, my); }
-    if (is_treasure())                           { i_set_is_treasure = true;
-                                                   level->set_is_treasure(mx, my); }
+    if (is_treasure_type())                           { i_set_is_treasure_type = true;
+                                                   level->set_is_treasure_type(mx, my); }
     if (is_wall())                               { i_set_is_wall = true;
                                                    level->set_is_wall(mx, my); }
     if (is_shallow_water() || is_deep_water()) {
@@ -141,7 +141,7 @@ void Thing::level_push (void)
         }
     }
 
-    if (is_lava() || is_fire()) { level->heatmap_valid = false; }
+    if (is_lava() || is_fire()) { level->is_heatmap_valid = false; }
 
     if (!is_hidden) {
         if (gfx_shown_in_bg()) { level->timestamp_redraw_bg = time_get_time_ms_cached() + 1000; }

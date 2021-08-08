@@ -23,7 +23,7 @@ bool Thing::is_carrying_treasure (void)
         if (!t) {
             continue;
         }
-        if (t->is_treasure()) {
+        if (t->is_treasure_type()) {
             return true;
         }
         if (t->monstp && t->monstp->carrying.size()) {
@@ -64,7 +64,7 @@ _
             std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));
         }
 
-        if (t->is_treasure()) {
+        if (t->is_treasure_type()) {
             tr.push_back(t);
         }
     }

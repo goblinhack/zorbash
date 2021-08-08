@@ -162,10 +162,10 @@ public:
     uint64_t i_set_is_smoke:1                  {};
     uint64_t i_set_is_spiderweb:1              {};
     uint64_t i_set_is_sticky:1                 {};
-    uint64_t i_set_is_treasure:1               {};
     uint64_t i_set_is_treasure_class_a:1       {};
     uint64_t i_set_is_treasure_class_b:1       {};
     uint64_t i_set_is_treasure_class_c:1       {};
+    uint64_t i_set_is_treasure_type:1          {};
     uint64_t i_set_is_wall:1                   {};
     uint64_t i_set_is_wand:1                   {};
 
@@ -845,10 +845,10 @@ public:
     int is_debug_path(void) const;
     int is_key_collector(void) const;
     int is_rrr6(void) const;
-    int is_treasure_collector(void) const;
+    int is_treasure_type_collector(void) const;
     int is_item(void) const;
     int is_bag_item_container(void) const;
-    int is_treasure_chest(void) const;
+    int is_treasure_type_chest(void) const;
     int is_openable(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
@@ -874,8 +874,8 @@ public:
     int is_treasure_class_a(void) const;
     int is_treasure_class_b(void) const;
     int is_treasure_class_c(void) const;
-    int is_treasure_eater(void) const;
-    int is_treasure(void) const;
+    int is_treasure_type_eater(void) const;
+    int is_treasure_type(void) const;
     int is_undead(void) const;
     int is_usable(void) const;
     int is_used_automatically_when_selected(void) const;

@@ -342,10 +342,10 @@ int Tp::is_dead_on_end_of_anim(void) const                                      
 int Tp::ai_enemy_memory(void) const                                         { return _ai_enemy_memory; }
 int Tp::is_debug_path(void) const                                         { return _is_debug_path; }
 int Tp::is_key_collector(void) const                                         { return _is_key_collector; }
-int Tp::is_treasure_collector(void) const                                         { return _is_treasure_collector; }
+int Tp::is_treasure_type_collector(void) const                                         { return _is_treasure_type_collector; }
 int Tp::is_item(void) const                                         { return _is_item; }
 int Tp::is_bag_item_container(void) const                            { return _is_bag_item_container; }
-int Tp::is_treasure_chest(void) const                                { return _is_treasure_chest; }
+int Tp::is_treasure_type_chest(void) const                                { return _is_treasure_type_chest; }
 int Tp::is_openable(void) const                                      { return _is_openable; }
 int Tp::is_secret_door(void) const                                   { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
@@ -368,8 +368,8 @@ int Tp::is_torch(void) const                                         { return _i
 int Tp::is_treasure_class_a(void) const                              { return _is_treasure_class_a; }
 int Tp::is_treasure_class_b(void) const                              { return _is_treasure_class_b; }
 int Tp::is_treasure_class_c(void) const                              { return _is_treasure_class_c; }
-int Tp::is_treasure_eater(void) const                                { return _is_treasure_eater; }
-int Tp::is_treasure(void) const                                      { return _is_treasure; }
+int Tp::is_treasure_type_eater(void) const                                { return _is_treasure_type_eater; }
+int Tp::is_treasure_type(void) const                                      { return _is_treasure_type; }
 int Tp::is_wand_eater(void) const                                    { return _is_wand_eater; }
 int Tp::loves_fire(void) const                                       { return _loves_fire; }
 int Tp::is_undead(void) const                                        { return _is_undead; }
@@ -680,13 +680,13 @@ void Tp::set_is_the_grid(int v)                                      { _is_the_g
 void Tp::set_is_throwable(int v)                                     { _is_throwable = v; }
 void Tp::set_is_thrown_automatically_when_chosen(int v)              { _is_thrown_automatically_when_chosen = v; }
 void Tp::set_is_torch(int v)                                         { _is_torch = v; }
-void Tp::set_is_treasure_chest(int v)                                { _is_treasure_chest = v; }
+void Tp::set_is_treasure_type_chest(int v)                                { _is_treasure_type_chest = v; }
 void Tp::set_is_treasure_class_a(int v)                              { _is_treasure_class_a = v; }
 void Tp::set_is_treasure_class_b(int v)                              { _is_treasure_class_b = v; }
 void Tp::set_is_treasure_class_c(int v)                              { _is_treasure_class_c = v; }
-void Tp::set_is_treasure_collector(int v)                            { _is_treasure_collector = v; }
-void Tp::set_is_treasure_eater(int v)                                { _is_treasure_eater = v; }
-void Tp::set_is_treasure(int v)                                      { _is_treasure = v; }
+void Tp::set_is_treasure_type_collector(int v)                            { _is_treasure_type_collector = v; }
+void Tp::set_is_treasure_type_eater(int v)                                { _is_treasure_type_eater = v; }
+void Tp::set_is_treasure_type(int v)                                      { _is_treasure_type = v; }
 void Tp::set_is_undead(int v)                                        { _is_undead = v; }
 void Tp::set_is_usable(int v)                                        { _is_usable = v; }
 void Tp::set_is_used_automatically_when_selected(int v)              { _is_used_automatically_when_selected = v; }

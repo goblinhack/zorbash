@@ -149,8 +149,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // Keep these in the same order as my_thing.h and save/load
     /////////////////////////////////////////////////////////////////////////
     out << bits(my.t->tp_id);
-    out << bits(my.t->frame_count);
     out << bits(my.t->id);
+    out << bits(my.t->frame_count);
     out << bits(my.t->interpolated_mid_at);
     out << bits(my.t->last_mid_at);
     out << bits(my.t->mid_at);
@@ -194,6 +194,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_in_water                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_jumping                    << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_moving                     << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_offscreen                  << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_open                       << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_resurrected                << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_resurrecting               << shift; shift++;
@@ -258,9 +259,10 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_a       << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_b       << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_c       << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_treasure               << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->i_set_is_treasure_type          << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_wall                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->i_set_is_wand                   << shift; shift++;
+
     if (shift >= (int)(sizeof(bits64) * 8)) {
         ERR("Ran out of bits in serialization");
     }
@@ -310,64 +312,67 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     out << bits(my.t->timestamp_fade_in_begin);
 
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};          */ out << bits(my.t->_is_light_blocker);
+    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit_ever {};               */ out << bits(my.t->_is_lit_ever);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {}; */ out << bits(my.t->_is_movement_blocking_hard);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_soft {}; */ out << bits(my.t->_is_movement_blocking_soft);
-    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit_ever {};               */ out << bits(my.t->_is_lit_ever);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};            */ out << bits(my.t->_fade_in_map);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};              */ out << bits(my.t->_gfx_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};                */ out << bits(my.t->_heatmap);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};                */ out << bits(my.t->_is_acid);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};              */ out << bits(my.t->_is_poison);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};      */ out << bits(my.t->_is_ascend_dungeon);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_sewer {};        */ out << bits(my.t->_is_ascend_sewer);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_barrel {};              */ out << bits(my.t->_is_barrel);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};               */ out << bits(my.t->_is_blood);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};             */ out << bits(my.t->_is_brazier);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_bridge {};              */ out << bits(my.t->_is_bridge);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};               */ out << bits(my.t->_is_chasm);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};              */ out << bits(my.t->_is_corpse);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_bridge {};              */ out << bits(my.t->_is_bridge);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};            */ out << bits(my.t->_is_corridor);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};          */ out << bits(my.t->_is_deep_water);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};       */ out << bits(my.t->_is_shallow_water);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ out << bits(my.t->_is_dirt);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};           */ out << bits(my.t->_is_dry_grass);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};        */ out << bits(my.t->_is_enchantstone);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};          */ out << bits(my.t->_is_skillstone);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};             */ out << bits(my.t->_is_foilage);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};           */ out << bits(my.t->_is_spiderweb);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sticky {};              */ out << bits(my.t->_is_sticky);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ out << bits(my.t->_is_door);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ out << bits(my.t->_is_dungeon);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};      */ out << bits(my.t->_is_ascend_dungeon);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_dungeon {};     */ out << bits(my.t->_is_descend_dungeon);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_sewer {};        */ out << bits(my.t->_is_ascend_sewer);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_sewer {};       */ out << bits(my.t->_is_descend_sewer);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ out << bits(my.t->_is_dirt);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ out << bits(my.t->_is_door);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};           */ out << bits(my.t->_is_dry_grass);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ out << bits(my.t->_is_dungeon);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};        */ out << bits(my.t->_is_enchantstone);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};      */ out << bits(my.t->_is_extreme_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};                */ out << bits(my.t->_is_fire);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};               */ out << bits(my.t->_is_floor);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};             */ out << bits(my.t->_is_foilage);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};                */ out << bits(my.t->_is_food);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_minion_generator {};    */ out << bits(my.t->_is_minion_generator);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};                */ out << bits(my.t->_is_gold);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};              */ out << bits(my.t->_is_hazard);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};      */ out << bits(my.t->_is_extreme_hazard);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};    */ out << bits(my.t->_is_treasure_class_a);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};    */ out << bits(my.t->_is_treasure_class_b);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};    */ out << bits(my.t->_is_treasure_class_c);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};                 */ out << bits(my.t->_is_key);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};                */ out << bits(my.t->_is_lava);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit_currently {};       */ out << bits(my.t->_is_lit_currently);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_minion_generator {};    */ out << bits(my.t->_is_minion_generator);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};               */ out << bits(my.t->_is_monst);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};              */ out << bits(my.t->_is_poison);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};              */ out << bits(my.t->_is_potion);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};                */ out << bits(my.t->_is_wand);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};              */ out << bits(my.t->_is_ripple);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};                */ out << bits(my.t->_is_rock);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};         */ out << bits(my.t->_is_secret_door);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};       */ out << bits(my.t->_is_shallow_water);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};          */ out << bits(my.t->_is_skillstone);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};               */ out << bits(my.t->_is_smoke);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};             */ out << bits(my.t->_is_brazier);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_barrel {};              */ out << bits(my.t->_is_barrel);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};            */ out << bits(my.t->_is_treasure);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};           */ out << bits(my.t->_is_spiderweb);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sticky {};              */ out << bits(my.t->_is_sticky);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};    */ out << bits(my.t->_is_treasure_class_a);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};    */ out << bits(my.t->_is_treasure_class_b);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};    */ out << bits(my.t->_is_treasure_class_c);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_type {};       */ out << bits(my.t->_is_treasure_type);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};                */ out << bits(my.t->_is_wall);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};              */ out << bits(my.t->_gfx_water);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};                */ out << bits(my.t->_is_wand);
 
     /* all_thing_ids_at */      out << bits(my.t->all_thing_ids_at);
-    /* cursor_at */             out << bits(my.t->cursor_at);
     /* cursor_at_old */         out << bits(my.t->cursor_at_old);
+    /* cursor_at */             out << bits(my.t->cursor_at);
     /* cursor_found */          out << bits(my.t->cursor_found);
-    /* heatmap_valid */         out << bits(my.t->heatmap_valid);
+    /* fbo_light */             out << bits(my.t->fbo_light);
+    /* is_dungeon_level */      out << bits(my.t->is_dungeon_level);
+    /* is_heatmap_valid */      out << bits(my.t->is_heatmap_valid);
+    /* is_sewer_level */        out << bits(my.t->is_sewer_level);
     /* is_starting */           out << bits(my.t->is_starting);
     /* map_at */                out << bits(my.t->map_at);
     /* map_br */                out << bits(my.t->map_br);
@@ -375,20 +380,17 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* map_follow_player */     out << bits(my.t->map_follow_player);
     /* map_tl */                out << bits(my.t->map_tl);
     /* map_wanted_at */         out << bits(my.t->map_wanted_at);
+    /* maxx */                  out << bits(my.t->maxx);
+    /* maxy */                  out << bits(my.t->maxy);
     /* minimap_valid */         out << bits(my.t->minimap_valid);
-    /* is_dungeon_level */      out << bits(my.t->is_dungeon_level);
-    /* is_sewer_level */        out << bits(my.t->is_sewer_level);
+    /* minx */                  out << bits(my.t->minx);
+    /* miny */                  out << bits(my.t->miny);
     /* monst_count */           out << bits(my.t->monst_count);
-    /* mouse */                 out << bits(my.t->mouse);
+    /* mouse_at */              out << bits(my.t->mouse_at);
     /* mouse_old */             out << bits(my.t->mouse_old);
     /* pixel_map_at */          out << bits(my.t->pixel_map_at);
     /* seed */                  out << bits(my.t->seed);
     /* world_at */              out << bits(my.t->world_at);
-    /* minx */                  out << bits(my.t->minx);
-    /* maxx */                  out << bits(my.t->maxx);
-    /* miny */                  out << bits(my.t->miny);
-    /* maxy */                  out << bits(my.t->maxy);
-    /* fbo_light */             out << bits(my.t->fbo_light);
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {

@@ -67,7 +67,7 @@ void Level::display (void)
             }
         }
 
-        if (!heatmap_valid) {
+        if (!is_heatmap_valid) {
             update_heatmap();
         }
     }

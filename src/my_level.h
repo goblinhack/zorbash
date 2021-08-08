@@ -76,7 +76,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_barrel {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_type {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};
 
@@ -104,7 +104,7 @@ public:
     // All randomness jumps off of this as the root
     //
     bool                       cursor_found {};
-    bool                       heatmap_valid {};
+    bool                       is_heatmap_valid {};
     bool                       is_starting {}; // Loading level
     bool                       map_changed {}; // Something moved on the map
     bool                       map_follow_player {};
@@ -116,7 +116,7 @@ public:
     fpoint                     map_at;        // map tile location
     fpoint                     map_wanted_at; // map scroll desired at
     float                      wobble = {};   // Fades when set
-    int                        mouse {-1};    // ticks for every move
+    int                        mouse_at {-1};    // ticks for every move
     int                        mouse_old {-1};
     int                        seed {};
     int                        monst_count {};
@@ -551,7 +551,7 @@ public:
     uint8_t is_brazier(const point &p);
     uint8_t is_barrel(const int x, const int y);
     uint8_t is_barrel(const point &p);
-    uint8_t is_treasure(const int x, const int y);
+    uint8_t is_treasure_type(const int x, const int y);
     Thingp inventory_describe(const uint32_t slot);
     Thingp skillbox_describe(const uint32_t slot);
     Tpp tp_random_minion_generator(const point &p);
@@ -562,7 +562,7 @@ public:
     Tpp tp_random_monst_hard(const point &p);
     friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);
     friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
-    uint8_t is_treasure(const point &p);
+    uint8_t is_treasure_type(const point &p);
     uint8_t is_treasure_class_a(const int x, const int y);
     uint8_t is_treasure_class_a(const point &p);
     uint8_t is_treasure_class_b(const int x, const int y);
@@ -728,7 +728,7 @@ public:
     void set_is_secret_door(const int x, const int y);
     void set_is_shallow_water(const int x, const int y);
     void set_is_smoke(const int x, const int y);
-    void set_is_treasure(const int x, const int y);
+    void set_is_treasure_type(const int x, const int y);
     void set_is_treasure_class_a(const int x, const int y);
     void set_is_treasure_class_b(const int x, const int y);
     void set_is_treasure_class_c(const int x, const int y);
@@ -795,7 +795,7 @@ public:
     void unset_is_secret_door(const int x, const int y);
     void unset_is_shallow_water(const int x, const int y);
     void unset_is_smoke(const int x, const int y);
-    void unset_is_treasure(const int x, const int y);
+    void unset_is_treasure_type(const int x, const int y);
     void unset_is_treasure_class_a(const int x, const int y);
     void unset_is_treasure_class_b(const int x, const int y);
     void unset_is_treasure_class_c(const int x, const int y);

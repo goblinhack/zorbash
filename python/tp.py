@@ -439,8 +439,8 @@ class Tp:
     def set_is_key_collector(self, value):
         zx.tp_set_is_key_collector(self, value)
 
-    def set_is_treasure_collector(self, value):
-        zx.tp_set_is_treasure_collector(self, value)
+    def set_is_treasure_type_collector(self, value):
+        zx.tp_set_is_treasure_type_collector(self, value)
 
     def set_is_item(self, value):
         zx.tp_set_is_item(self, value)
@@ -448,8 +448,8 @@ class Tp:
     def set_is_bag_item_container(self, value):
         zx.tp_set_is_bag_item_container(self, value)
 
-    def set_is_treasure_chest(self, value):
-        zx.tp_set_is_treasure_chest(self, value)
+    def set_is_treasure_type_chest(self, value):
+        zx.tp_set_is_treasure_type_chest(self, value)
 
     def set_is_openable(self, value):
         zx.tp_set_is_openable(self, value)
@@ -792,8 +792,8 @@ class Tp:
     def set_is_minion_generator(self, value):
         zx.tp_set_is_minion_generator(self, value)
 
-    def set_is_treasure_eater(self, value):
-        zx.tp_set_is_treasure_eater(self, value)
+    def set_is_treasure_type_eater(self, value):
+        zx.tp_set_is_treasure_type_eater(self, value)
 
     def set_damage_doubled_from_acid(self, value):
         zx.tp_set_damage_doubled_from_acid(self, value)
@@ -855,8 +855,8 @@ class Tp:
     def set_hates_fire(self, value):
         zx.tp_set_hates_fire(self, value)
 
-    def set_is_treasure(self, value):
-        zx.tp_set_is_treasure(self, value)
+    def set_is_treasure_type(self, value):
+        zx.tp_set_is_treasure_type(self, value)
 
     def set_is_collectable(self, value):
         zx.tp_set_is_collectable(self, value)
@@ -1158,8 +1158,8 @@ class Tp:
     def set_is_movement_blocking_hard(self, value):
         zx.tp_set_is_movement_blocking_hard(self, value)
 
-    def set_is_treasure(self, value):
-        zx.tp_set_is_treasure(self, value)
+    def set_is_treasure_type(self, value):
+        zx.tp_set_is_treasure_type(self, value)
 
     def set_is_wall(self, value):
         zx.tp_set_is_wall(self, value)

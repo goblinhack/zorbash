@@ -164,8 +164,8 @@ bool Thing::will_avoid_threat (const Thingp itp)
         }
     }
 
-    if (me->is_treasure()) {
-        if (it->is_treasure_eater()) {
+    if (me->is_treasure_type()) {
+        if (it->is_treasure_type_eater()) {
             return true;
         }
     }

@@ -72,14 +72,14 @@ void Level::cursor_move (void)
     //
     if (timestamp_dungeon_created &&
         time_have_x_tenths_passed_since(2, timestamp_dungeon_created)) {
-        mouse = mouse_tick;
-        if (mouse > mouse_old) {
-            mouse_old = mouse;
+        mouse_at = mouse_tick;
+        if (mouse_at > mouse_old) {
+            mouse_old = mouse_at;
             cursor_found = false;
         }
     } else {
-        mouse = mouse_tick;
-        mouse_old = mouse;
+        mouse_at = mouse_tick;
+        mouse_old = mouse_at;
         map_follow_player = true;
     }
 

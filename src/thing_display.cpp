@@ -637,7 +637,7 @@ bool Thing::get_coords (point &blit_tl,
     if (unlikely(is_in_water ||
                  is_monst() ||
                  is_item() ||
-                 is_treasure() ||
+                 is_treasure_type() ||
                  is_skillstone() ||
                  is_player() ||
                  tpp->gfx_attack_anim() ||

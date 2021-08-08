@@ -27,7 +27,7 @@ bool Thing::eat (Thingp it)
         if ((is_jelly_eater()    && it->is_jelly())    ||
             (is_meat_eater()     && it->is_meat())     ||
             (is_food_eater()     && it->is_food())     ||
-            (is_treasure_eater() && it->is_treasure()) ||
+            (is_treasure_type_eater() && it->is_treasure_type()) ||
             (is_wand_eater()     && it->is_wand())     ||
             (is_potion_eater()   && it->is_potion())) {
 
@@ -84,8 +84,8 @@ bool Thing::can_eat (const Thingp itp)
             return true;
         }
     }
-    if (me->is_treasure_eater()) {
-        if (it->is_treasure()) {
+    if (me->is_treasure_type_eater()) {
+        if (it->is_treasure_type()) {
             return true;
         }
     }

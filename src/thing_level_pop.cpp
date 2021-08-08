@@ -115,15 +115,15 @@ void Thing::level_pop (void)
                                                          level->unset_is_brazier(mx, my); }
     if (i_set_is_barrel)                               { i_set_is_barrel = false;
                                                          level->unset_is_barrel(mx, my); }
-    if (i_set_is_treasure)                             { i_set_is_treasure = false;
-                                                         level->unset_is_treasure(mx, my); }
+    if (i_set_is_treasure_type)                             { i_set_is_treasure_type = false;
+                                                         level->unset_is_treasure_type(mx, my); }
     if (i_set_is_wall)                                 { i_set_is_wall = false;
                                                          level->unset_is_wall(mx, my); }
     if (i_set_gfx_water)                               { i_set_gfx_water = false;
                                                          level->unset_gfx_water(mx, my); }
     level->remove_thing(last_attached.x, last_attached.y, id);
 
-    if (is_lava() || is_fire()) { level->heatmap_valid = false; }
+    if (is_lava() || is_fire()) { level->is_heatmap_valid = false; }
 
     if (gfx_shown_in_bg()) {
         level->timestamp_redraw_bg = time_get_time_ms_cached() + 500;

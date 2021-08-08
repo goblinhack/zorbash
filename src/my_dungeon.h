@@ -129,7 +129,7 @@ public:
     bool is_secret_door(const int x, const int y);
     bool is_brazier(const int x, const int y);
     bool is_barrel(const int x, const int y);
-    bool is_treasure(const int x, const int y);
+    bool is_treasure_type(const int x, const int y);
     bool is_wall(const int x, const int y);
     bool is_descend_sewer_at(const int x, const int y);
     bool is_wall_no_check(const int x, const int y);

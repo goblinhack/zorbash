@@ -17,7 +17,7 @@ def tp_init(name, text_name):
     mytp.set_is_interesting(True)
     mytp.set_is_item(True)
     mytp.set_is_treasure_class_c(True)
-    mytp.set_is_treasure(True)
+    mytp.set_is_treasure_type(True)
     mytp.set_long_text_description("Blood red ruby. A bit too red if you ask me. Actually it looks wet and red. Anyway, best pick it up and clean it off.")
     mytp.set_normal_placement_rules(True)
     mytp.set_rarity(zx.RARITY_UNCOMMON)

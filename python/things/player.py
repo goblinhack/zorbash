@@ -81,7 +81,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_moveable(True)
     mytp.set_is_player(True)
     mytp.set_is_shovable(True)
-    mytp.set_is_treasure_collector(True)
+    mytp.set_is_treasure_type_collector(True)
     mytp.set_is_weapon_wielder(True)
     mytp.set_light_strength(8)
     mytp.set_long_text_description("Our most noble adventurer or no particular race or gender. Devoid of fear and stout of heart. Likes kittens.")

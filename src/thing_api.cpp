@@ -275,10 +275,10 @@ int Thing::ai_enemy_memory(void) const                                  {_ retur
 int Thing::is_debug_path(void) const                                    {_ return (tp()->is_debug_path()); }
 int Thing::is_key_collector(void) const                                 {_ return (tp()->is_key_collector()); }
 int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
-int Thing::is_treasure_collector(void) const                            {_ return (tp()->is_treasure_collector()); }
+int Thing::is_treasure_type_collector(void) const                            {_ return (tp()->is_treasure_type_collector()); }
 int Thing::is_item(void) const                                          {_ return (tp()->is_item()); }
 int Thing::is_bag_item_container(void) const                            {_ return (tp()->is_bag_item_container()); }
-int Thing::is_treasure_chest(void) const                                {_ return (tp()->is_treasure_chest()); }
+int Thing::is_treasure_type_chest(void) const                                {_ return (tp()->is_treasure_type_chest()); }
 int Thing::is_openable(void) const                                      {_ return (tp()->is_openable()); }
 int Thing::gfx_long_shadow_caster(void) const                           {_ return (tp()->gfx_long_shadow_caster()); }
 int Thing::gfx_solid_shadow(void) const                                 {_ return (tp()->gfx_solid_shadow()); }
@@ -303,11 +303,11 @@ int Thing::is_target_select_automatically_when_chosen(void) const       {_ retur
 int Thing::is_throwable(void) const                                     {_ return (tp()->is_throwable()); }
 int Thing::is_thrown_automatically_when_chosen(void) const              {_ return (tp()->is_thrown_automatically_when_chosen()); }
 int Thing::is_torch(void) const                                         {_ return (tp()->is_torch()); }
-int Thing::is_treasure(void) const                                      {_ return (tp()->is_treasure()); }
+int Thing::is_treasure_type(void) const                                      {_ return (tp()->is_treasure_type()); }
 int Thing::is_treasure_class_a(void) const                              {_ return (tp()->is_treasure_class_a()); }
 int Thing::is_treasure_class_b(void) const                              {_ return (tp()->is_treasure_class_b()); }
 int Thing::is_treasure_class_c(void) const                              {_ return (tp()->is_treasure_class_c()); }
-int Thing::is_treasure_eater(void) const                                {_ return (tp()->is_treasure_eater()); }
+int Thing::is_treasure_type_eater(void) const                                {_ return (tp()->is_treasure_type_eater()); }
 int Thing::is_undead(void) const                                        {_ return (tp()->is_undead()); }
 int Thing::is_usable(void) const                                        {_ return (tp()->is_usable()); }
 int Thing::is_used_automatically_when_selected(void) const              {_ return (tp()->is_used_automatically_when_selected()); }

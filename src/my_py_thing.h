@@ -244,10 +244,10 @@ PyObject *thing_is_dead_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_ai_enemy_memory(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debug_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_key_collector(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_treasure_collector(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_treasure_type_collector(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bag_item_container(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_treasure_chest(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_treasure_type_chest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_openable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_long_shadow_caster(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_solid_shadow(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -288,11 +288,11 @@ PyObject *thing_is_steal_item_chance_d1000(PyObject *obj, PyObject *args, PyObje
 PyObject *thing_is_throwable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_thrown_automatically_when_chosen(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_torch(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_treasure_type(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_class_a(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_class_b(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_class_c(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_treasure_eater(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_treasure_type_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_undead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_automatically_when_selected(PyObject *obj, PyObject *args, PyObject *keywds);

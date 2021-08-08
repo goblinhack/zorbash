@@ -534,8 +534,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 }
             }
 
-            if (is_treasure_collector()) {
-                if (it->is_treasure() || it->is_food()) {
+            if (is_treasure_type_collector()) {
+                if (it->is_treasure_type() || it->is_food()) {
                     auto score = worth_collecting(it);
                     if (score) {
                         GOAL_ADD(score, "collect-treasure");

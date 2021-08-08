@@ -198,10 +198,10 @@ PyObject *level_is_dead_on_end_of_anim_at(PyObject *obj, PyObject *args, PyObjec
 PyObject *level_ai_enemy_memory_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_debug_path_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_collector_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_treasure_collector_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_treasure_type_collector_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_item_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bag_item_container_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_treasure_chest_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_treasure_type_chest_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_openable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_long_shadow_caster_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_solid_shadow_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -242,11 +242,11 @@ PyObject *level_is_steal_item_chance_d1000_at(PyObject *obj, PyObject *args, PyO
 PyObject *level_is_throwable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_thrown_automatically_when_chosen_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_torch_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_treasure_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_treasure_type_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_class_a_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_class_b_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_class_c_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_treasure_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_treasure_type_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_usable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_used_automatically_when_selected_at(PyObject *obj, PyObject *args, PyObject *keywds);

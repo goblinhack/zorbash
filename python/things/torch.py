@@ -29,7 +29,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_torch(True)
     mytp.set_is_treasure_class_a(True)
-    mytp.set_is_treasure(True)
+    mytp.set_is_treasure_type(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_lifespan_dice("1d300+10")

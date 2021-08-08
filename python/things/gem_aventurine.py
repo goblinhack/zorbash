@@ -17,7 +17,7 @@ def tp_init(name, text_name):
     mytp.set_is_interesting(True)
     mytp.set_is_item(True)
     mytp.set_is_treasure_class_b(True)
-    mytp.set_is_treasure(True)
+    mytp.set_is_treasure_type(True)
     mytp.set_long_text_description("If you are need of luck, adventurine is the stone for you. It has a few drops of blood on it, ignore those. You will be more lucky.")
     mytp.set_normal_placement_rules(True)
     mytp.set_rarity(zx.RARITY_COMMON)

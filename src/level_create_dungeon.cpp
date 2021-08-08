@@ -796,7 +796,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 tp = tp_random_barrel();
             }
 
-            if (d->is_treasure(x, y)) {
+            if (d->is_treasure_type(x, y)) {
                 if (always_give_treasure) {
                     tp = tp_random_treasure();
                 } else {
@@ -884,7 +884,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             dbg2("DUNGEON: Creating %s", tp->name().c_str());
             auto t = thing_new(tp->name(), fpoint(x, y));
             if (t) {
-                if (t->is_treasure()) {
+                if (t->is_treasure_type()) {
                     if (r && r->is_secret) {
                         t->enchant_randomly();
                     }
@@ -1084,7 +1084,7 @@ void Level::place_floor_deco (Dungeonp d)
                 d->is_barrel(x, y)               ||
                 d->is_wand(x, y)                 ||
                 d->is_secret_door(x, y)          ||
-                d->is_treasure(x, y)             ||
+                d->is_treasure_type(x, y)             ||
                 d->is_treasure_class_a(x, y)     ||
                 d->is_treasure_class_b(x, y)     ||
                 d->is_treasure_class_c(x, y)     ||
@@ -1136,7 +1136,7 @@ void Level::create_dungeon_place_random_floor_deco (Dungeonp d)
                 d->is_barrel(x, y)               ||
                 d->is_wand(x, y)                 ||
                 d->is_secret_door(x, y)          ||
-                d->is_treasure(x, y)             ||
+                d->is_treasure_type(x, y)             ||
                 d->is_treasure_class_a(x, y)     ||
                 d->is_treasure_class_b(x, y)     ||
                 d->is_treasure_class_c(x, y)     ||

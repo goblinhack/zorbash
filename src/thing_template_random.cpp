@@ -90,7 +90,7 @@ void tp_random_init (void)
         if (tp->is_secret_door())               { tp_secret_door.push_back(tp); }
         if (tp->is_sewer_wall())                { tp_sewer_wall.push_back(tp); }
         if (tp->is_skill())                     { tp_skills.push_back(tp); }
-        if (tp->is_treasure())                  { tp_treasure.push_back(tp); }
+        if (tp->is_treasure_type())                  { tp_treasure.push_back(tp); }
 
         //
         // Keep bags and treasure chests seperate so we don't end up with

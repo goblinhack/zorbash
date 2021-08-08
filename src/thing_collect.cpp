@@ -17,7 +17,7 @@
 //
 int Thing::worth_collecting (Thingp it)
 {_
-    if (it->is_treasure()) {
+    if (it->is_treasure_type()) {
         int gold_value = it->get_gold_value();
 
         if (it->is_collected_as_gold()) {

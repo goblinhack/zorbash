@@ -1121,7 +1121,7 @@ bool Dungeon::is_hazard (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_treasure (const int x, const int y)
+bool Dungeon::is_treasure_type (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);

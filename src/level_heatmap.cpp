@@ -92,7 +92,7 @@ void Level::update_heatmap (void)
         }
     }
 
-    heatmap_valid = true;
+    is_heatmap_valid = true;
 
 #if 0
     printf("\n");

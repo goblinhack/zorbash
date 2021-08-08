@@ -74,8 +74,8 @@ _
             }
         }
 
-        if (me->is_treasure_eater()) {
-            if (it->is_treasure()) {
+        if (me->is_treasure_type_eater()) {
+            if (it->is_treasure_type()) {
                 dbg("Can attack %s", it->to_string().c_str());
                 return true;
             }
@@ -252,7 +252,7 @@ _
         it->is_door() ||
         it->is_bridge() ||
         it->is_dry_grass() ||
-        it->is_treasure() ||
+        it->is_treasure_type() ||
         it->is_enchantstone() ||
         it->is_skillstone() ||
         it->is_foilage() ||
@@ -382,7 +382,7 @@ _
             if (is_item_carrier() &&
                 ((is_jelly_eater()    && it->is_jelly())    ||
                  (is_food_eater()     && it->is_food())     ||
-                 (is_treasure_eater() && it->is_treasure()) ||
+                 (is_treasure_type_eater() && it->is_treasure_type()) ||
                  (is_wand_eater()     && it->is_wand())     ||
                  (is_potion_eater()   && it->is_potion())) &&
                  try_to_carry(it)) {

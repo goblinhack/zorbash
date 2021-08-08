@@ -1232,36 +1232,36 @@ void Level::unset_is_food (const int x, const int y)
     decr(_is_food, x, y, (uint8_t)1);
 }
 
-uint8_t Level::is_treasure (const point &p)
+uint8_t Level::is_treasure_type (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
-    return (get(_is_treasure, p.x, p.y));
+    return (get(_is_treasure_type, p.x, p.y));
 }
 
-uint8_t Level::is_treasure (const int x, const int y)
+uint8_t Level::is_treasure_type (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (get(_is_treasure, x, y));
+    return (get(_is_treasure_type, x, y));
 }
 
-void Level::set_is_treasure (const int x, const int y)
+void Level::set_is_treasure_type (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    incr(_is_treasure, x, y, (uint8_t)1);
+    incr(_is_treasure_type, x, y, (uint8_t)1);
 }
 
-void Level::unset_is_treasure (const int x, const int y)
+void Level::unset_is_treasure_type (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    decr(_is_treasure, x, y, (uint8_t)1);
+    decr(_is_treasure_type, x, y, (uint8_t)1);
 }
 
 uint8_t Level::is_treasure_class_a (const point &p)
