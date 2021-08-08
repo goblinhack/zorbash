@@ -263,7 +263,7 @@ void Thing::kill (Thingp killer, const char *reason)
     gc();
 }
 
-void Thing::kill (Thingp killer, std::string &reason)
+void Thing::kill (Thingp killer, const std::string &reason)
 {_
     kill(killer, reason.c_str());
 }

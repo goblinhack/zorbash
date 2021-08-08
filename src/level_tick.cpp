@@ -31,6 +31,11 @@ bool Level::tick (void)
         game->tick_begin_now();
 
         FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
+            if (t->is_dead_scheduled) {
+                t->is_dead_scheduled = false;
+                t->dead(t->get_dead_reason());
+                continue;
+            }
             t->tick();
         } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 

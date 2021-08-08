@@ -91,6 +91,7 @@ public:
     uint64_t is_bouncing:1                   {};
     uint64_t is_changing_level:1             {};
     uint64_t is_dead:1                       {};
+    uint64_t is_dead_scheduled:1             {};
     uint64_t is_dying:1                      {};
     uint64_t is_facing_left:1                {};
     uint64_t is_fadeup:1                     {};
@@ -953,7 +954,8 @@ public:
     std::list<Thingp> anything_to_carry(void);
     std::list<Thingp> anything_to_carry_at(fpoint);
     std::size_t get_light_count (void) const;
-    std::string get_msg(void) const;
+    const std::string& get_dead_reason(void) const;
+    const std::string& get_msg(void) const;
     std::string short_text_a_or_an(void) const;
     std::string short_text_capitalized(void) const;
     std::string short_text_the(void) const;
@@ -1132,10 +1134,13 @@ public:
     void cursor_hover_over_check(void);
     void dead(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dead_(const char *fmt, va_list args); // compile error without
-    void dead(std::string &);
+    void dead(const std::string &);
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
     void dead_(Thingp killer, const char *fmt, va_list args); // compile error without
     void dead(Thingp killer, std::string &);
+    void dead_scheduled(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void dead_scheduled_(const char *fmt, va_list args); // compile error without
+    void dead_scheduled(const std::string &);
     void delete_age_map(void);
     void delete_seen_map(void);
     void delete_dmap_can_see(void);
@@ -1182,7 +1187,7 @@ public:
     void kill_minions(Thingp killer);
     void kill_spawned(Thingp killer);
     void kill(Thingp killer, const char *reason);
-    void kill(Thingp killer, std::string &reason);
+    void kill(Thingp killer, const std::string &reason);
     void lava_tick();
     void level_change(Levelp);
     void level_enter(void);
@@ -1244,6 +1249,7 @@ public:
     void set_lunge_to(fpoint);
     void set_minion_owner(Thingp minion_owner);
     void set_msg(const std::string&);
+    void set_dead_reason(const std::string&);
     void set_owner(Thingp owner);
     void set_score(int);
     void set_spawned_owner(Thingp spawner_owner);

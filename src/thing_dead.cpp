@@ -48,7 +48,7 @@ void Thing::dead (Thingp killer, std::string &reason)
     kill(killer, reason);
 }
 
-void Thing::dead (std::string &reason)
+void Thing::dead (const std::string &reason)
 {
     verify(this);
     kill(nullptr, reason);
@@ -62,5 +62,31 @@ void Thing::dead (const char *fmt, ...)
 
     va_start(args, fmt);
     t->dead_(fmt, args);
+    va_end(args);
+}
+
+void Thing::dead_scheduled_ (const char *fmt, va_list args)
+{
+    verify(this);
+    char reason[MAXSTR];
+    vsnprintf(reason, MAXSTR, fmt, args);
+    is_dead_scheduled = true;
+    set_dead_reason(std::string(reason));
+}
+
+void Thing::dead_scheduled (const std::string &reason)
+{
+    verify(this);
+    kill(nullptr, reason);
+}
+
+void Thing::dead_scheduled (const char *fmt, ...)
+{
+    verify(this);
+    auto t = this;
+    va_list args;
+
+    va_start(args, fmt);
+    t->dead_scheduled_(fmt, args);
     va_end(args);
 }

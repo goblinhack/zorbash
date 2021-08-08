@@ -127,6 +127,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* std::list<ThingId>   carrying          */ in >> bits(my.t->carrying);
     /* std::list<ThingId>   skills            */ in >> bits(my.t->skills);
     /* std::string          msg               */ in >> bits(my.t->msg);
+    /* std::string          dead_reason       */ in >> bits(my.t->dead_reason);
     /* std::vector<ThingId> enemies           */ in >> bits(my.t->enemies);
     /* std::vector<point>   move_path         */ in >> bits(my.t->move_path);
     /* std::vector<uint16_t> inventory_id     */ in >> bits(my.t->inventory_id);
@@ -230,6 +231,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->is_bouncing                   = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_changing_level             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_dead                       = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->is_dead_scheduled             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_dying                      = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_facing_left                = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->is_fadeup                     = (bits64 >> shift) & 1; shift++;
@@ -266,7 +268,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */ my.t->i_set_is_deep_water             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_shallow_water          = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_dirt                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_dry_grass             = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */ my.t->i_set_is_dry_grass              = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_enchantstone           = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_skillstone             = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->i_set_is_foilage                = (bits64 >> shift) & 1; shift++;

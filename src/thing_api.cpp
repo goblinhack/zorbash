@@ -764,13 +764,14 @@ void Thing::set_wobble (float v)
 ////////////////////////////////////////////////////////////////////////////
 // msg
 ////////////////////////////////////////////////////////////////////////////
-std::string Thing::get_msg (void) const
+const std::string& Thing::get_msg (void) const
 {_
     if (monstp) {
         verify(monstp);
         return (monstp->msg);
     } else {
-        return ("");
+        static std::string empty;
+        return (empty);
     }
 }
 
@@ -779,6 +780,27 @@ void Thing::set_msg (const std::string& v)
     new_monst();
 //con("%s", __FUNCTION__);
     monstp->msg = v;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// dead_reason
+////////////////////////////////////////////////////////////////////////////
+const std::string& Thing::get_dead_reason (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->dead_reason);
+    } else {
+        static std::string empty;
+        return (empty);
+    }
+}
+
+void Thing::set_dead_reason (const std::string& v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    monstp->dead_reason = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////

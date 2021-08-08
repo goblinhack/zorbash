@@ -153,7 +153,11 @@ void Level::display_lasers (void)
 
             if (dt > 1) {
                 if (t) {
-                    t->dead("End of laser");
+                    //
+                    // Cannot kill at this point as will be in the display loop and
+                    // that will break repeatable randomness.
+                    //
+                    t->dead_scheduled("End of laser");
                     t->has_laser = false;
                 }
                 return true;

@@ -101,6 +101,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* std::list<ThingId>   carrying          */ out << bits(my.t->carrying);
     /* std::list<ThingId>   skills            */ out << bits(my.t->skills);
     /* std::string          msg               */ out << bits(my.t->msg);
+    /* std::string          dead_reason       */ out << bits(my.t->dead_reason);
     /* std::vector<ThingId> enemies           */ out << bits(my.t->enemies);
     /* std::vector<point>   move_path         */ out << bits(my.t->move_path);
     /* std::vector<uint16_t> inventory_id     */ out << bits(my.t->inventory_id);
@@ -182,6 +183,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_bouncing                   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_changing_level             << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_dead                       << shift; shift++;
+    /* uint64_t */ bits64 |= my.t->is_dead_scheduled             << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_dying                      << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_facing_left                << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_fadeup                     << shift; shift++;

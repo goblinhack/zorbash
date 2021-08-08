@@ -111,6 +111,7 @@ public:
     std::list<ThingId>    carrying;
     std::list<ThingId>    skills;
     std::string           msg;               // Text that floats on screen
+    std::string           dead_reason;       // What killed me
     std::map<ThingId, int> enemies {};       // List of things that wronged us
     std::vector<point>    move_path;
     std::vector<uint16_t> inventory_id;      // Vector of tp_id
