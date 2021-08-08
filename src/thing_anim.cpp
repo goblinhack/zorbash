@@ -62,7 +62,7 @@ if (is_blood_splatter()) { con("Same frame"); }
 #ifdef DEBUG_ANIM
 if (is_blood_splatter()) { con("Mark as dead"); }
 #endif
-                dead("by end of anim");
+                dead_scheduled("by end of anim");
             }
 
             if (tile_is_alive_on_end_of_anim(tile)) {

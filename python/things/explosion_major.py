@@ -27,6 +27,7 @@ def tp_init(name):
     mytp.set_is_floating(True)
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)
+    mytp.set_is_tickable(True)
     mytp.set_light_color("yellow")
     mytp.set_light_strength(4)
     mytp.set_on_death_do("explosion_major.on_death()")

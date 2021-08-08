@@ -31,11 +31,6 @@ bool Level::tick (void)
         game->tick_begin_now();
 
         FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
-            if (t->is_dead_scheduled) {
-                t->is_dead_scheduled = false;
-                t->dead(t->get_dead_reason());
-                continue;
-            }
             t->tick();
         } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 
@@ -49,6 +44,13 @@ bool Level::tick (void)
         }
         pending_add_all_interesting_things = {};
     }
+
+    FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
+        if (t->is_dead_scheduled) {
+            t->is_dead_scheduled = false;
+            t->dead(t->get_dead_reason());
+        }
+    } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 
     game->tick_update();
 
@@ -90,6 +92,8 @@ _
             if (t->is_falling) {
                 game->things_are_moving = true;
             }
+        } else if (t->is_dead_scheduled) {
+            game->things_are_moving = true;
         } else if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
                    (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
                    (t->get_weapon_id_use_anim().ok())) {
@@ -99,10 +103,45 @@ _
             if (t->frame_count == game->frame_count) {
                 game->things_are_moving = true;
             } else if (!t->is_dead) {
-                t->dead("offscreen");
+                if (t->is_offscreen) {
+                    t->dead("offscreen");
+                } else {
+                    t->is_offscreen = true;
+                }
             }
         }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+
+    if (fade_out_finished) {
+        if (player && player->is_waiting_to_descend_dungeon) {
+            if (!player->descend_dungeon()) {
+                player->err("Failed to descend dungeon");
+            }
+            game->things_are_moving = true;
+        }
+        if (player && player->is_waiting_to_ascend_dungeon) {
+            if (!player->ascend_dungeon()) {
+                player->err("Failed to ascend dungeon");
+            }
+            game->things_are_moving = true;
+        }
+        if (player && player->is_waiting_to_descend_sewer) {
+            if (!player->descend_sewer()) {
+                player->err("Failed to descend sewer");
+            }
+            game->things_are_moving = true;
+        }
+        if (player && player->is_waiting_to_ascend_sewer) {
+            if (!player->ascend_sewer()) {
+                player->err("Failed to ascend sewer");
+            }
+            game->things_are_moving = true;
+        }
+        if (player && player->is_waiting_to_fall) {
+            player->fall_to_next_level();
+            game->things_are_moving = true;
+        }
+    }
 
     if (game->things_are_moving) {
         return false;

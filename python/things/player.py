@@ -64,7 +64,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_health_starving_pct(5)
     mytp.set_is_able_to_change_levels(True)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_active(True)
+    mytp.set_is_tickable(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_bleeder(True)
     mytp.set_is_burnable(True)

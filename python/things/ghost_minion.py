@@ -27,7 +27,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_change_levels(True)
     mytp.set_is_able_to_fall(False)
     mytp.set_is_able_to_walk_through_walls(True)
-    mytp.set_is_active(True)
+    mytp.set_is_tickable(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_ethereal(True)

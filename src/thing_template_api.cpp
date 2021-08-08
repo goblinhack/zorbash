@@ -158,7 +158,7 @@ int Tp::is_able_to_see_through_doors(void) const                     { return _i
 int Tp::is_able_to_walk_through_walls(void) const                    { return _is_able_to_walk_through_walls; }
 int Tp::is_acid(void) const                                          { return _is_acid; }
 int Tp::is_acid_lover(void) const                                    { return _is_acid_lover; }
-int Tp::is_active(void) const                                        { return _is_active; }
+int Tp::is_tickable(void) const                                        { return _is_tickable; }
 int Tp::is_always_hit(void) const                                    { return _is_always_hit; }
 int Tp::is_ascend_dungeon(void) const                                { return _is_ascend_dungeon; }
 int Tp::is_ascend_sewer(void) const                                  { return _is_ascend_sewer; }
@@ -488,7 +488,7 @@ void Tp::set_is_able_to_see_through_doors(int v)                     { _is_able_
 void Tp::set_is_able_to_walk_through_walls(int v)                    { _is_able_to_walk_through_walls = v; }
 void Tp::set_is_acid(int v)                                          { _is_acid = v; }
 void Tp::set_is_acid_lover(int v)                                    { _is_acid_lover = v; }
-void Tp::set_is_active(int v)                                        { _is_active = v; }
+void Tp::set_is_tickable(int v)                                        { _is_tickable = v; }
 void Tp::set_is_always_hit(int v)                                    { _is_always_hit = v; }
 void Tp::set_is_ascend_dungeon(int v)                                { _is_ascend_dungeon = v; }
 void Tp::set_is_ascend_sewer(int v)                                  { _is_ascend_sewer = v; }

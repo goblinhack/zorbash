@@ -30,6 +30,10 @@ void Level::describe (fpoint p)
         return;
     }
 
+    if (game->robot_mode) {
+        return;
+    }
+
     if (is_starting) {
         return;
     }
@@ -52,7 +56,7 @@ _
     std::vector<Thingp> hover_over_things;
     hover_over = nullptr;
 
-    FOR_ALL_ACTIVE_THINGS(this, t, p.x, p.y) {
+    FOR_ALL_TICKABLE_THINGS(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
         if (unlikely(g_opt_debug3)) {
@@ -342,6 +346,10 @@ void Level::describe (Thingp t)
     }
 
     if (player->is_dead) {
+        return;
+    }
+
+    if (game->robot_mode) {
         return;
     }
 

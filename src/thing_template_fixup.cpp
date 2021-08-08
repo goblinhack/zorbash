@@ -22,7 +22,7 @@ void tp_fixup (void)
             tp->set_is_stamina_check(true);
         }
 
-        if (tp->is_active()) {
+        if (tp->is_tickable()) {
             tp->set_is_interesting(true);
         }
 

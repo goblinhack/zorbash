@@ -39,7 +39,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gfx_show_outlined(True)
     mytp.set_gold_value_dice("300")
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_active(True) # So it can interact with fire
+    mytp.set_is_tickable(True) # So it can interact with fire
     mytp.set_is_bag_item(True)
     mytp.set_is_collectable(True)
     mytp.set_is_combustible(True)

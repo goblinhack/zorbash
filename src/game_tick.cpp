@@ -16,13 +16,27 @@ void Game::tick_begin (const std::string &why)
 {_
     tick_requested = why;
     game->tick_dt = 0;
-    CON("Game tick requested");
+
+    auto level = game->level;
+    if (level) {_
+        auto player = level->player;
+
+        if (player) {
+            CON("Game tick %d requested (%s): %s",
+                game->tick_current, why.c_str(),
+                player->to_short_string().c_str());
+        } else {
+            CON("Game tick %d requested (%s): %s",
+                game->tick_current, why.c_str(),
+                level->to_string().c_str());
+        }
+    }
 }
 
 void Game::tick_begin_now (void)
 {_
     std::string why = tick_requested;
-    why = tick_requested = "";
+    tick_requested = "";
 
     //
     // Move when all things are done moving

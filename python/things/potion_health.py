@@ -71,7 +71,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gold_value_dice("50")
     mytp.set_hates_fire(100)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_active(True) # So it can interact with fire
+    mytp.set_is_tickable(True) # So it can interact with fire
     mytp.set_is_bag_item(True)
     mytp.set_is_collectable(True)
     mytp.set_is_combustible(True)

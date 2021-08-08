@@ -18,7 +18,7 @@ PyObject *level_is_able_to_see_through_doors_at(PyObject *obj, PyObject *args, P
 PyObject *level_is_able_to_walk_through_walls_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_acid_lover_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_active_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_tickable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_alive_monst_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_always_hit_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ascend_dungeon_at(PyObject *obj, PyObject *args, PyObject *keywds);

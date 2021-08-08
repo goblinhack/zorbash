@@ -81,8 +81,8 @@ public:
     uint64_t has_external_particle:1         {}; // current in motion particle
     uint64_t has_internal_particle:1         {}; // current in motion particle
     uint64_t has_laser:1                     {}; // current laser being fired
-    uint64_t has_projectile:1                {}; // current projectile being fired
     uint64_t has_light:1                     {};
+    uint64_t has_projectile:1                {}; // current projectile being fired
     uint64_t inited_tiles:1                  {};
     uint64_t is_activated:1                  {};
     uint64_t is_attached:1                   {};
@@ -102,6 +102,7 @@ public:
     uint64_t is_in_water:1                   {};
     uint64_t is_jumping:1                    {};
     uint64_t is_moving:1                     {};
+    uint64_t is_offscreen:1                  {};
     uint64_t is_open:1                       {};
     uint64_t is_resurrected:1                {}; // has finished resurrecting
     uint64_t is_resurrecting:1               {}; // is currently resurrecing
@@ -113,60 +114,60 @@ public:
     uint64_t is_waiting_to_ascend_sewer:1    {};
     uint64_t is_waiting_to_descend_dungeon:1 {};
     uint64_t is_waiting_to_descend_sewer:1   {};
-    uint64_t is_waiting_to_fall:1      {};
+    uint64_t is_waiting_to_fall:1            {};
 
     //
     // These are flags used to make sure we set or unset flags onto
     // the level only once.
     //
+    uint64_t i_set_gfx_water:1                 {};
     uint64_t i_set_is_acid:1                   {};
-    uint64_t i_set_is_poison:1                 {};
+    uint64_t i_set_is_ascend_dungeon:1         {};
+    uint64_t i_set_is_ascend_sewer:1           {};
+    uint64_t i_set_is_barrel:1                 {};
     uint64_t i_set_is_blood:1                  {};
+    uint64_t i_set_is_brazier:1                {};
+    uint64_t i_set_is_bridge:1                 {};
     uint64_t i_set_is_chasm:1                  {};
     uint64_t i_set_is_corpse:1                 {};
     uint64_t i_set_is_corridor:1               {};
-    uint64_t i_set_is_bridge:1                 {};
     uint64_t i_set_is_deep_water:1             {};
-    uint64_t i_set_is_shallow_water:1          {};
+    uint64_t i_set_is_descend_dungeon:1        {};
+    uint64_t i_set_is_descend_sewer:1          {};
     uint64_t i_set_is_dirt:1                   {};
+    uint64_t i_set_is_door:1                   {};
     uint64_t i_set_is_dry_grass:1              {};
     uint64_t i_set_is_enchantstone:1           {};
-    uint64_t i_set_is_skillstone:1             {};
-    uint64_t i_set_is_foilage:1                {};
-    uint64_t i_set_is_spiderweb:1              {};
-    uint64_t i_set_is_sticky:1                 {};
-    uint64_t i_set_is_door:1                   {};
-    uint64_t i_set_is_ascend_dungeon:1         {};
-    uint64_t i_set_is_descend_dungeon:1        {};
-    uint64_t i_set_is_ascend_sewer:1           {};
-    uint64_t i_set_is_descend_sewer:1          {};
+    uint64_t i_set_is_extreme_hazard:1         {};
     uint64_t i_set_is_fire:1                   {};
     uint64_t i_set_is_floor:1                  {};
+    uint64_t i_set_is_foilage:1                {};
     uint64_t i_set_is_food:1                   {};
-    uint64_t i_set_is_minion_generator:1       {};
     uint64_t i_set_is_gold:1                   {};
     uint64_t i_set_is_hazard:1                 {};
-    uint64_t i_set_is_extreme_hazard:1         {};
-    uint64_t i_set_is_treasure_class_a:1       {};
-    uint64_t i_set_is_treasure_class_b:1       {};
-    uint64_t i_set_is_treasure_class_c:1       {};
     uint64_t i_set_is_key:1                    {};
     uint64_t i_set_is_lava:1                   {};
     uint64_t i_set_is_light_blocker:1          {};
+    uint64_t i_set_is_minion_generator:1       {};
     uint64_t i_set_is_monst:1                  {};
     uint64_t i_set_is_movement_blocking_hard:1 {};
     uint64_t i_set_is_movement_blocking_soft:1 {};
+    uint64_t i_set_is_poison:1                 {};
     uint64_t i_set_is_potion:1                 {};
-    uint64_t i_set_is_wand:1                   {};
     uint64_t i_set_is_ripple:1                 {};
     uint64_t i_set_is_rock:1                   {};
     uint64_t i_set_is_secret_door:1            {};
+    uint64_t i_set_is_shallow_water:1          {};
+    uint64_t i_set_is_skillstone:1             {};
     uint64_t i_set_is_smoke:1                  {};
-    uint64_t i_set_is_brazier:1                {};
-    uint64_t i_set_is_barrel:1                 {};
+    uint64_t i_set_is_spiderweb:1              {};
+    uint64_t i_set_is_sticky:1                 {};
     uint64_t i_set_is_treasure:1               {};
+    uint64_t i_set_is_treasure_class_a:1       {};
+    uint64_t i_set_is_treasure_class_b:1       {};
+    uint64_t i_set_is_treasure_class_c:1       {};
     uint64_t i_set_is_wall:1                   {};
-    uint64_t i_set_gfx_water:1                 {};
+    uint64_t i_set_is_wand:1                   {};
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -668,7 +669,7 @@ public:
     int is_able_to_walk_through_walls(void) const;
     int is_acid_lover(void) const;
     int is_acid(void) const;
-    int is_active(void) const;
+    int is_tickable(void) const;
     int is_alive_monst(void) const;
     int is_always_hit(void) const;
     int is_ascend_dungeon(void) const;

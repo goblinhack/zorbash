@@ -9,7 +9,7 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_acid(True)
-    mytp.set_is_active(True) # for lifespan tick
+    mytp.set_is_tickable(True) # for lifespan tick
     mytp.set_is_hazard(True)
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)

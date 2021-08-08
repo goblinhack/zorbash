@@ -38,7 +38,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_show_outlined(True)
     mytp.set_hates_fire(100)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_active(True) # So it can interact with fire
+    mytp.set_is_tickable(True) # So it can interact with fire
     mytp.set_is_always_hit(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
@@ -55,7 +55,7 @@ def tp_init(name, text_name):
     mytp.set_on_fall_do("barrel.on_fall()")
     mytp.set_on_fire_do("barrel.on_fire()")
     mytp.set_on_hit_do("barrel.on_hit()")
-    mytp.set_text_a_or_an("the")
+    mytp.set_text_a_or_an("a")
     mytp.set_text_description("A barrel of oil. Why? Don't ask.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)

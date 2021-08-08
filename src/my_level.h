@@ -196,6 +196,7 @@ public:
 
     bool                       is_being_destroyed {};
     bool                       cursor_update_needed {};
+    bool                       fade_out_finished {};
 
     //
     // Animation loop counters for surface effects
@@ -323,7 +324,7 @@ public:
             auto t = i->second;                                     \
             i++;                                                    \
             if (t->is_hidden) {                                     \
-                if (!t->is_active()) { /* e.g. carried wand */      \
+                if (!t->is_tickable()) { /* e.g. carried wand */    \
                     continue;                                       \
                 }                                                   \
             }                                                       \
@@ -361,11 +362,11 @@ public:
     //
     // Things that move around
     //
-    #define FOR_ALL_ACTIVE_THINGS(level, t, x, y)                   \
+    #define FOR_ALL_TICKABLE_THINGS(level, t, x, y)                 \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \
-                if (!t->is_active()) {                              \
+                if (!t->is_tickable()) {                            \
                     continue;                                       \
                 }                                                   \
 

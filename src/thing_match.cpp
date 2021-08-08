@@ -52,7 +52,7 @@ bool Thing::matches (const std::string& what) const
     if (is_able_to_walk_through_walls() &&                    (what == "is_able_to_walk_through_walls"))                    { return true; }
     if (is_acid() &&                                          (what == "is_acid"))                                          { return true; }
     if (is_acid_lover() &&                                    (what == "is_acid_lover"))                                    { return true; }
-    if (is_active() &&                                        (what == "is_active"))                                        { return true; }
+    if (is_tickable() &&                                        (what == "is_tickable"))                                        { return true; }
     if (is_alive_monst() &&                                   (what == "is_alive_monst"))                                   { return true; }
     if (is_always_hit() &&                                    (what == "is_always_hit"))                                    { return true; }
     if (is_ascend_dungeon() &&                                (what == "is_ascend_dungeon"))                                { return true; }
@@ -313,7 +313,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_able_to_walk_through_walls")                    { return &Thing::is_able_to_walk_through_walls; }
     if (what == "is_acid")                                          { return &Thing::is_acid; }
     if (what == "is_acid_lover")                                    { return &Thing::is_acid_lover; }
-    if (what == "is_active")                                        { return &Thing::is_active; }
+    if (what == "is_tickable")                                        { return &Thing::is_tickable; }
     if (what == "is_alive_monst")                                   { return &Thing::is_alive_monst; }
     if (what == "is_always_hit")                                    { return &Thing::is_always_hit; }
     if (what == "is_ascend_dungeon")                                { return &Thing::is_ascend_dungeon; }

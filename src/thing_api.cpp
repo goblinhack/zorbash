@@ -103,7 +103,7 @@ int Thing::is_able_to_see_through_doors(void) const                     {_ retur
 int Thing::is_able_to_walk_through_walls(void) const                    {_ return (tp()->is_able_to_walk_through_walls()); }
 int Thing::is_acid(void) const                                          {_ return (tp()->is_acid()); }
 int Thing::is_acid_lover(void) const                                    {_ return (tp()->is_acid_lover()); }
-int Thing::is_active(void) const                                        {_ return (tp()->is_active()); }
+int Thing::is_tickable(void) const                                        {_ return (tp()->is_tickable()); }
 int Thing::is_alive_monst(void) const                                   {_ return (tp()->is_monst() && !is_dead); }
 int Thing::is_always_hit(void) const                                    {_ return (tp()->is_always_hit()); }
 int Thing::is_ascend_dungeon(void) const                                {_ return (tp()->is_ascend_dungeon()); }

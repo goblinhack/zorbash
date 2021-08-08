@@ -49,7 +49,7 @@ def tp_init(name, text_name):
     mytp.set_health_initial_dice("2d6")
     mytp.set_is_able_to_change_levels(True)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_active(True)
+    mytp.set_is_tickable(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_carrier_of_treasure_class_a(True)

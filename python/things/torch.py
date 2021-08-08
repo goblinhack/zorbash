@@ -18,7 +18,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_active(True) # for pushing and falling
+    mytp.set_is_tickable(True) # for pushing and falling
     mytp.set_is_bag_item(True)
     mytp.set_is_collectable(True)
     mytp.set_is_described_when_hovering_over(True)

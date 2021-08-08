@@ -124,7 +124,7 @@ private:
     int _is_able_to_walk_through_walls {};
     int _is_acid {};
     int _is_acid_lover {};
-    int _is_active {}; // e.g. a monst or player or something moveable
+    int _is_tickable {}; // e.g. a monst or player or something moveable
     int _is_always_hit {};
     int _is_ascend_dungeon {};
     int _is_ascend_sewer {};
@@ -591,7 +591,7 @@ public:
     int is_able_to_walk_through_walls(void) const;
     int is_acid(void) const;
     int is_acid_lover(void) const;
-    int is_active(void) const;
+    int is_tickable(void) const;
     int is_always_hit(void) const;
     int is_ascend_dungeon(void) const;
     int is_ascend_sewer(void) const;
@@ -916,7 +916,7 @@ public:
     void set_is_able_to_walk_through_walls(int);
     void set_is_acid(int);
     void set_is_acid_lover(int);
-    void set_is_active(int);
+    void set_is_tickable(int);
     void set_is_always_hit(int);
     void set_is_ascend_dungeon(int);
     void set_is_ascend_sewer(int);

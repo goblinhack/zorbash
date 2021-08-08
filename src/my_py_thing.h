@@ -65,7 +65,7 @@ PyObject *thing_is_able_to_see_through_doors(PyObject *obj, PyObject *args, PyOb
 PyObject *thing_is_able_to_walk_through_walls(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_acid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_acid_lover(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_active(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_tickable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ascend_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);

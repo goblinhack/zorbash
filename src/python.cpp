@@ -1355,7 +1355,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_able_to_walk_through_walls)
     TP_SET_DECL(is_acid)
     TP_SET_DECL(is_acid_lover)
-    TP_SET_DECL(is_active)
+    TP_SET_DECL(is_tickable)
     TP_SET_DECL(is_always_hit)
     TP_SET_DECL(is_ascend_dungeon)
     TP_SET_DECL(is_ascend_sewer)
@@ -1683,7 +1683,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_able_to_walk_through_walls_at",                 (PyCFunction)level_is_able_to_walk_through_walls_at,                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_acid_at",                                       (PyCFunction)level_is_acid_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_acid_lover_at",                                 (PyCFunction)level_is_acid_lover_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_active_at",                                     (PyCFunction)level_is_active_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_tickable_at",                                     (PyCFunction)level_is_tickable_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_alive_monst_at",                                (PyCFunction)level_is_alive_monst_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_always_hit_at",                                 (PyCFunction)level_is_always_hit_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_ascend_dungeon_at",                             (PyCFunction)level_is_ascend_dungeon_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1978,7 +1978,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_able_to_walk_through_walls",                    (PyCFunction)thing_is_able_to_walk_through_walls,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_acid",                                          (PyCFunction)thing_is_acid,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_acid_lover",                                    (PyCFunction)thing_is_acid_lover,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_active",                                        (PyCFunction)thing_is_active,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_tickable",                                        (PyCFunction)thing_is_tickable,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_alive_monst",                                   (PyCFunction)thing_is_alive_monst,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_always_hit",                                    (PyCFunction)thing_is_always_hit,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_ascend_dungeon",                                (PyCFunction)thing_is_ascend_dungeon,                                METH_VARARGS | METH_KEYWORDS, "thing api"},

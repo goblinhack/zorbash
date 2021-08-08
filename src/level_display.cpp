@@ -291,14 +291,14 @@ void Level::display_map (void)
     bool fade_out = timestamp_fade_out_begin != 0;
     bool fade_in = timestamp_fade_in_begin != 0;
     bool frozen = player ? player->is_changing_level : false;
-    bool level_fade_out_finished = false;
-
-    if (fade_out) {
+    fade_out_finished = false;
+ 
+     if (fade_out) {
         if ((time_get_time_ms_cached() < timestamp_fade_out_begin) ||
             (time_get_time_ms_cached() - timestamp_fade_out_begin > LEVEL_FADE_OUT_MS)) {
             minimap_valid = false;
             timestamp_fade_out_begin = 0;
-            level_fade_out_finished = true;
+            fade_out_finished = true;
             if (player) {
                 player->log("Fade out of level finished");
             }
@@ -484,7 +484,7 @@ void Level::display_map (void)
 
     blit_fbo_unbind();
 
-    if (level_fade_out_finished) {
+    if (fade_out_finished) {
         if (player) {
             player->log("Level fade out finished");
         }
@@ -502,31 +502,5 @@ void Level::display_map (void)
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
         blit_fbo_unbind();
-
-        if (player && player->is_waiting_to_descend_dungeon) {
-            if (!player->descend_dungeon()) {
-                player->err("Failed to descend dungeon");
-            }
-        }
-        if (player && player->is_waiting_to_ascend_dungeon) {
-            if (!player->ascend_dungeon()) {
-                player->err("Failed to ascend dungeon");
-            }
-        }
-
-        if (player && player->is_waiting_to_descend_sewer) {
-            if (!player->descend_sewer()) {
-                player->err("Failed to descend sewer");
-            }
-        }
-        if (player && player->is_waiting_to_ascend_sewer) {
-            if (!player->ascend_sewer()) {
-                player->err("Failed to ascend sewer");
-            }
-        }
-
-        if (player && player->is_waiting_to_fall) {
-            player->fall_to_next_level();
-        }
     }
 }

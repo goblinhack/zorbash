@@ -16,7 +16,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_active(True) # for pushing and falling
+    mytp.set_is_tickable(True) # for pushing and falling
     mytp.set_is_brazier(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_dead_on_shove(True)

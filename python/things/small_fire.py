@@ -21,7 +21,7 @@ def tp_init(name, text_name):
     mytp.set_hates_water(100)
     mytp.set_health_initial_dice("5")
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_active(True)
+    mytp.set_is_tickable(True)
     mytp.set_is_fire(True)
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)

@@ -27,7 +27,7 @@ def tp_init(name):
     mytp.set_hates_fire(100)
     mytp.set_health_initial_dice("10d10")
     mytp.set_is_able_to_fall(False)
-    mytp.set_is_active(True) # So it can interact with fire
+    mytp.set_is_tickable(True) # So it can interact with fire
     mytp.set_is_always_hit(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_burnable(True)

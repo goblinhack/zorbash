@@ -943,6 +943,7 @@ void Thing::blit (int fbo)
     point blit_tl, blit_br;
     Tilep tile = {};
 
+    is_offscreen = false;
     frame_count = game->frame_count;
 
     //

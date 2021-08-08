@@ -12,7 +12,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(False)
-    mytp.set_is_active(True)
+    mytp.set_is_tickable(True)
     mytp.set_is_ascend_sewer(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_loggable_for_important_stuff(True)

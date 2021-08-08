@@ -566,7 +566,7 @@ THING_BODY_GET_BOOL(thing_is_able_to_see_through_doors, is_able_to_see_through_d
 THING_BODY_GET_BOOL(thing_is_able_to_walk_through_walls, is_able_to_walk_through_walls)
 THING_BODY_GET_BOOL(thing_is_acid, is_acid)
 THING_BODY_GET_BOOL(thing_is_acid_lover, is_acid_lover)
-THING_BODY_GET_BOOL(thing_is_active, is_active)
+THING_BODY_GET_BOOL(thing_is_tickable, is_tickable)
 THING_BODY_GET_BOOL(thing_is_alive_monst, is_alive_monst)
 THING_BODY_GET_BOOL(thing_is_always_hit, is_always_hit)
 THING_BODY_GET_BOOL(thing_is_ascend_dungeon, is_ascend_dungeon)

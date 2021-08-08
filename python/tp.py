@@ -1044,8 +1044,8 @@ class Tp:
     def set_is_meat(self, value):
         zx.tp_set_is_meat(self, value)
 
-    def set_is_active(self, value):
-        zx.tp_set_is_active(self, value)
+    def set_is_tickable(self, value):
+        zx.tp_set_is_tickable(self, value)
 
     def set_health_starving_pct(self, value):
         zx.tp_set_health_starving_pct(self, value)

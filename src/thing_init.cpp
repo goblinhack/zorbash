@@ -137,7 +137,7 @@ _
     //
     // Start off up to data with the player
     //
-    if (is_active()) {
+    if (is_tickable()) {
         //
         // Newly spawned things, don't make them do something immediately
         // This can lead to recursion

@@ -411,7 +411,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_able_to_see_through_doors_at, is_able_to_see_thr
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_walk_through_walls_at, is_able_to_walk_through_walls)
 LEVEL_BODY_GET_BOOL_AT(level_is_acid_at, is_acid)
 LEVEL_BODY_GET_BOOL_AT(level_is_acid_lover_at, is_acid_lover)
-LEVEL_BODY_GET_BOOL_AT(level_is_active_at, is_active)
+LEVEL_BODY_GET_BOOL_AT(level_is_tickable_at, is_tickable)
 LEVEL_BODY_GET_BOOL_AT(level_is_alive_monst_at, is_alive_monst)
 LEVEL_BODY_GET_BOOL_AT(level_is_always_hit_at, is_always_hit)
 LEVEL_BODY_GET_BOOL_AT(level_is_ascend_dungeon_at, is_ascend_dungeon)

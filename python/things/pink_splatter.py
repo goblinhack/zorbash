@@ -11,7 +11,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_dead_anim(False)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(False)
-    mytp.set_is_active(True) # for lifespan tick
+    mytp.set_is_tickable(True) # for lifespan tick
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)
     mytp.set_is_moveable(True)
