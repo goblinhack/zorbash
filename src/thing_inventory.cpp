@@ -693,11 +693,9 @@ _
     }
 
     Thingp item;
-    bool changed_highlight_slot = false;
 
     if (slot != game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
-        changed_highlight_slot = true;
         LOG("Inventory: highlight slot %d", slot);
 
         item = inventory_describe(slot);

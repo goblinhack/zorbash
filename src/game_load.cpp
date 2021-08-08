@@ -173,7 +173,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
     my.t->id = tpp->id;
 
-    uint64_t bits64;
+    uint64_t bits64 = 0;
     bool monst = (my.t->monstp != nullptr);
     in >> bits(monst);
     if (monst) {
@@ -225,6 +225,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /////////////////////////////////////////////////////////////////////////
     in >> bits(bits64);
     int shift = 0;
+//CON("LOAD %lu ",bits64);
     /* uint64_t */ my.t->has_ever_moved                = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->has_light                     = (bits64 >> shift) & 1; shift++;
     /* uint64_t */ my.t->inited_tiles                  = (bits64 >> shift) & 1; shift++;
@@ -359,6 +360,9 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     l->pending_remove_all_interesting_things = {};
     l->all_gc_things = {};
 
+    uint32_t csum_in = 0;
+    in >> bits(csum_in);
+
     in >> bits(l->timestamp_dungeon_created); old_timestamp_dungeon_created = l->timestamp_dungeon_created;
     in >> bits(l->timestamp_dungeon_saved);
     auto dungeon_age = l->timestamp_dungeon_saved -
@@ -425,7 +429,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
     /* all_thing_ids_at */      in >> bits(l->all_thing_ids_at);
     /* cursor_at */             in >> bits(l->cursor_at);
-    /* cursor_old */         in >> bits(l->cursor_old);
+    /* cursor_old */            in >> bits(l->cursor_old);
     /* cursor_found */          in >> bits(l->cursor_found);
     /* fbo_light */             in >> bits(l->fbo_light);
     /* is_dungeon_level */      in >> bits(l->is_dungeon_level);
@@ -488,9 +492,24 @@ _
                     }
 
                     t->reinit();
+                    //t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
                 }
             }
         }
+    }
+
+    uint32_t csum = 0;
+    for (auto p : l->all_things) {
+        auto t = p.second;
+        csum += t->mid_at.x + t->mid_at.y + t->id.id;
+        //t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+    }
+
+    if (csum != csum_in) {
+        game_load_error =
+            string_sprintf("found different thing checksum %u expected %u",
+                           csum, csum_in);
+        return in;
     }
 
     l->update_new_level();

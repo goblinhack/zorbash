@@ -213,6 +213,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
         ERR("Ran out of bits in serialization");
     }
     out << bits(bits64);
+//CON("SAVE %lu ",bits64);
 
     bits64 = 0;
     shift = 0;
@@ -307,6 +308,14 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
         game->level->fbo_light = sdl_fbo_save(FBO_FULLMAP_LIGHT);
     }
 
+    uint32_t csum = 0;
+    for (auto p : my.t->all_things) {
+        auto t = p.second;
+        csum += t->mid_at.x + t->mid_at.y + t->id.id;
+        // t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+    }
+    out << bits(csum);
+
     out << bits(my.t->timestamp_dungeon_created);
     timestamp_t timestamp_dungeon_saved = time_get_time_ms();
     out << bits(timestamp_dungeon_saved);
@@ -369,7 +378,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
 
     /* all_thing_ids_at */      out << bits(my.t->all_thing_ids_at);
     /* cursor_at */             out << bits(my.t->cursor_at);
-    /* cursor_old */         out << bits(my.t->cursor_old);
+    /* cursor_old */            out << bits(my.t->cursor_old);
     /* cursor_found */          out << bits(my.t->cursor_found);
     /* fbo_light */             out << bits(my.t->fbo_light);
     /* is_dungeon_level */      out << bits(my.t->is_dungeon_level);
