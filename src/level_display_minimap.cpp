@@ -53,8 +53,8 @@ void Level::display_minimap (void)
         if (cursor) {_
             verify(cursor);
             cursor_at = to;
-            if (cursor_at != cursor_at_old) {
-                cursor_at_old = to;
+            if (cursor_at != cursor_old) {
+                cursor_old = to;
                 cursor->move(make_fpoint(game->minimap_over));
                 cursor_recreate();
             }

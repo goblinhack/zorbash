@@ -15,7 +15,7 @@ void Level::dump (std::string pfx)
     pfx += "  ";
 
     LOG("%s cursor_at                 %s", pfx.c_str(), cursor_at.to_string().c_str());
-    LOG("%s cursor_at_old             %s", pfx.c_str(), cursor_at_old.to_string().c_str());
+    LOG("%s cursor_old             %s", pfx.c_str(), cursor_old.to_string().c_str());
     LOG("%s map_at                    %s", pfx.c_str(), map_at.to_string().c_str());
     LOG("%s map_follow_player         %u", pfx.c_str(), map_follow_player);
     LOG("%s map_wanted_at             %s", pfx.c_str(), map_wanted_at.to_string().c_str());

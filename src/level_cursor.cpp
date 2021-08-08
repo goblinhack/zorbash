@@ -85,8 +85,8 @@ void Level::cursor_move (void)
 
     if (cursor) {_
         verify(cursor);
-        if (cursor_at != cursor_at_old) {
-            cursor_at_old = cursor_at;
+        if (cursor_at != cursor_old) {
+            cursor_old = cursor_at;
             cursor->move(cursor_at);
             cursor_recreate();
 

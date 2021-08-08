@@ -145,11 +145,12 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
         out << bits(my.t->monstp);
     }
 
+    out << bits(my.t->tp_id);
+    out << bits(my.t->id);
+
     /////////////////////////////////////////////////////////////////////////
     // Keep these in the same order as my_thing.h and save/load
     /////////////////////////////////////////////////////////////////////////
-    out << bits(my.t->tp_id);
-    out << bits(my.t->id);
     out << bits(my.t->frame_count);
     out << bits(my.t->interpolated_mid_at);
     out << bits(my.t->last_mid_at);
@@ -207,6 +208,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_dungeon << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_sewer   << shift; shift++;
     /* uint64_t */ bits64 |= my.t->is_waiting_to_fall            << shift; shift++;
+
     if (shift >= (int)(sizeof(bits64) * 8)) {
         ERR("Ran out of bits in serialization");
     }
@@ -288,7 +290,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 
     if (unlikely(g_opt_debug4)) {
         auto diff = out.tellp() - start;
-        LOG("SAVE %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p",
+        LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p",
             (int)diff, name.c_str(), my.t->tp_id, my.t->id.id,
             my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
     }
@@ -366,8 +368,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};                */ out << bits(my.t->_is_wand);
 
     /* all_thing_ids_at */      out << bits(my.t->all_thing_ids_at);
-    /* cursor_at_old */         out << bits(my.t->cursor_at_old);
     /* cursor_at */             out << bits(my.t->cursor_at);
+    /* cursor_old */         out << bits(my.t->cursor_old);
     /* cursor_found */          out << bits(my.t->cursor_found);
     /* fbo_light */             out << bits(my.t->fbo_light);
     /* is_dungeon_level */      out << bits(my.t->is_dungeon_level);

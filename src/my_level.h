@@ -112,7 +112,7 @@ public:
     bool                       is_sewer_level {};
     bool                       is_dungeon_level {};
     fpoint                     cursor_at;
-    fpoint                     cursor_at_old;
+    fpoint                     cursor_old;
     fpoint                     map_at;        // map tile location
     fpoint                     map_wanted_at; // map scroll desired at
     float                      wobble = {};   // Fades when set

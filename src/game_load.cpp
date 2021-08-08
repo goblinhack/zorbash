@@ -198,6 +198,10 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
         game_load_error = "loaded a thing with no ID";
         return in;
     }
+
+    /////////////////////////////////////////////////////////////////////////
+    // Keep these in the same order as my_thing.h and save/load
+    /////////////////////////////////////////////////////////////////////////
     in >> bits(my.t->frame_count);
     in >> bits(my.t->interpolated_mid_at);
     in >> bits(my.t->last_mid_at);
@@ -333,7 +337,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
     if (unlikely(g_opt_debug4)) {
         auto diff = in.tellg() - start;
-        LOG("LOAD %dbytes %s TP %d ID %x last_mid_at %f,%f monstp %p",
+        LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p",
             (int)diff, name.c_str(), my.t->tp_id, my.t->id.id,
             my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
     }
@@ -421,7 +425,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
     /* all_thing_ids_at */      in >> bits(l->all_thing_ids_at);
     /* cursor_at */             in >> bits(l->cursor_at);
-    /* cursor_at_old */         in >> bits(l->cursor_at_old);
+    /* cursor_old */         in >> bits(l->cursor_old);
     /* cursor_found */          in >> bits(l->cursor_found);
     /* fbo_light */             in >> bits(l->fbo_light);
     /* is_dungeon_level */      in >> bits(l->is_dungeon_level);
