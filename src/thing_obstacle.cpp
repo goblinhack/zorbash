@@ -30,9 +30,6 @@ bool Thing::ai_obstacle_for_me (const point &p)
         // "true" on collision
         //
         if (ai_obstacle(t)) {
-            if (t->is_loggable_for_unimportant_stuff()) {
-                dbg(" is an obstacle for me %s", t->to_string().c_str());
-            }
             return true;
         }
     }

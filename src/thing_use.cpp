@@ -31,7 +31,7 @@ void Thing::on_use (Thingp what)
             fn = fn.replace(found, 2, "");
         }
 
-        dbg("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
+        dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
             to_string().c_str(),
             what->to_string().c_str());
 
@@ -57,7 +57,7 @@ void Thing::on_use (Thingp what, Thingp target)
                 fn = fn.replace(found, 2, "");
             }
 
-            dbg("call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(),
+            dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(),
                 to_string().c_str(),
                 what->to_string().c_str(),
                 target->to_string().c_str());

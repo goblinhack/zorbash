@@ -34,7 +34,7 @@ bool Thing::on_tick (void)
             fn = fn.replace(found, 2, "");
         }
 
-        dbg("call %s.%s(%s)", mod.c_str(), fn.c_str(),
+        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(),
             to_string().c_str());
 
         return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id,

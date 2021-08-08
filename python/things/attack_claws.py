@@ -21,7 +21,7 @@ def tp_init(name, text_name):
     mytp.set_z_depth(zx.MAP_DEPTH_WEAPON)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    delay = 20
+    delay = 5
     mytp.set_tile(tile=name + ".1", delay_ms=delay, is_dir_left=True)
     mytp.set_tile(tile=name + ".2", delay_ms=delay, is_dir_left=True)
     mytp.set_tile(tile=name + ".3", delay_ms=delay, is_dir_left=True)

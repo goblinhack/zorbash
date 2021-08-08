@@ -37,7 +37,7 @@ void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
             fn = fn.replace(found, 2, "");
         }
 
-        dbg("call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(),
+        dbg("Call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(),
             to_string().c_str(),
             hitter->to_string().c_str(),
             real_hitter->to_string().c_str(),
@@ -74,7 +74,7 @@ void Thing::on_miss (Thingp hitter)
             fn = fn.replace(found, 2, "");
         }
 
-        dbg("call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
+        dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
             to_string().c_str(), hitter->to_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id,
@@ -101,7 +101,7 @@ void Thing::on_bite (void)
             fn = fn.replace(found, 2, "");
         }
 
-        dbg("call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
+        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {

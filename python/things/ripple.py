@@ -9,12 +9,13 @@ def tp_init(name):
     mytp.set_is_loggable_for_unimportant_stuff(False)
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_is_ripple(True)
+    mytp.set_is_tickable(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("An ominous ripple.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    delay = 100
+    delay = 25
     mytp.set_tile(tile=name + ".1", delay_ms=delay)
     mytp.set_tile(tile=name + ".2", delay_ms=delay)
     mytp.set_tile(tile=name + ".3", delay_ms=delay)

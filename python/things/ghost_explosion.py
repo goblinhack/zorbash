@@ -14,7 +14,7 @@ def tp_init(name):
     mytp.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
     mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
 
-    delay = 150
+    delay = 25
     mytp.set_tile(tile=name + ".1", delay_ms=delay)
     mytp.set_tile(tile=name + ".2", delay_ms=delay)
     mytp.set_tile(tile=name + ".3", delay_ms=delay)

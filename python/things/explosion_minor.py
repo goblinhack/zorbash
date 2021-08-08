@@ -19,10 +19,11 @@ def tp_init(name):
     mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
 
     mytp.set_tile(tile="nothing")
-    mytp.set_tile("explosion_minor.1", delay_ms=50)
-    mytp.set_tile("explosion_minor.2", delay_ms=50)
-    mytp.set_tile("explosion_minor.3", delay_ms=50)
-    mytp.set_tile("explosion_minor.4", delay_ms=50, is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    delay = 25
+    mytp.set_tile("explosion_minor.1", delay_ms=delay)
+    mytp.set_tile("explosion_minor.2", delay_ms=delay)
+    mytp.set_tile("explosion_minor.3", delay_ms=delay)
+    mytp.set_tile("explosion_minor.4", delay_ms=delay, is_end_of_anim = True, is_dead_on_end_of_anim=True)
 
     mytp.update()
 

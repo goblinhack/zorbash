@@ -90,7 +90,7 @@ void Thing::on_born (void)
             fn = fn.replace(found, 2, "");
         }
 
-        dbg("call %s.%s(%s, %d, %d)",
+        dbg("Call %s.%s(%s, %d, %d)",
             mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id,

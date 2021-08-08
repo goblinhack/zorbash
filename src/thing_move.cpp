@@ -45,7 +45,7 @@ void Thing::on_move (void)
             fn = fn.replace(found, 2, "");
         }
 
-        dbg("call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+        dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
     } else {

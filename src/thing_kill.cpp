@@ -68,7 +68,7 @@ void Thing::kill (Thingp killer, const char *reason)
                         fn = fn.replace(found, 2, "");
                     }
 
-                    dbg("call %s.%s(%s)", mod.c_str(), fn.c_str(),
+                    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(),
                         to_string().c_str());
 
                     py_call_void_fn(mod.c_str(), fn.c_str(),

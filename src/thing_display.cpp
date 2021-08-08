@@ -21,6 +21,10 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                           const point &blit_tl,
                                           const point &blit_br)
 {_
+    if (g_opt_debug3) {
+        return;
+    }
+
     if (g_render_black_and_white) {
         return;
     }
@@ -203,6 +207,10 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                       const point &blit_tl,
                                       const point &blit_br)
 {_
+    if (g_opt_debug3) {
+        return;
+    }
+
     if (g_render_black_and_white) {
         return;
     }
@@ -236,6 +244,10 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
                          const point &blit_tl, const point &blit_br)
 {_
+    if (g_opt_debug3) {
+        return;
+    }
+
     if (g_render_black_and_white) {
         return;
     }
