@@ -59,6 +59,7 @@ void Thing::move_finish (void)
     if (!is_moving) {
         return;
     }
+    is_moving = false;
 
     dbg("Move finish");
 
@@ -81,8 +82,13 @@ void Thing::move_finish (void)
         dbg("Move to %f,%f finished", mid_at.x, mid_at.y);
     }
 
+    //
+    // Make sure that things that declare they are finished moving really
+    // are where they should be.
+    //
+    update_pos(mid_at, true);
     update_interpolated_position();
-    is_moving = false;
+
     on_move();
 }
 

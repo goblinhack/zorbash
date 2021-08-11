@@ -214,7 +214,7 @@ _
     //
     if (game->tick_completed == game->tick_current) {
         if (game->robot_mode_requested != game->robot_mode) {
-            TOPCON("Update robot mode");
+            LOG("Update robot mode");
             game->robot_mode = game->robot_mode_requested;
             wid_actionbar_robot_mode_update();
         }

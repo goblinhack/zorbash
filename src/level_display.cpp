@@ -225,7 +225,7 @@ void Level::display_map_fg_things (int fbo,
                     // Sanity checks
                     //
                     if (DEBUG3) {
-                        if (!t->is_moving) {
+                        if (!t->is_moving && !t->is_jumping && !t->is_falling) {
                             if (t->mid_at != t->get_interpolated_mid_at()) {
                                 t->err("Thing is not where its interpolated to be");
                             }
