@@ -111,10 +111,6 @@ _
 
 float Thing::get_fall (void)
 {
-    if (!is_falling) {
-        return (0.0);
-    }
-
     auto t = time_get_time_ms_cached();
 
     if (t >= get_timestamp_fall_end()) {

@@ -570,7 +570,13 @@ bool Thing::get_coords (point &blit_tl,
     // Waaaaaaah
     //
     if (falling) {
-        float fall = get_fall();
+        float fall = 0;
+
+        if (is_falling) {
+            fall = get_fall();
+        } else {
+            update_interpolated_position();
+        }
         if (owner) {
             fall = owner->get_fall();
         }
