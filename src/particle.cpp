@@ -131,7 +131,7 @@ void Level::display_internal_particles (void)
                             t->visible();
                         }
                         t->log("End of jump particle");
-                        t->is_jumping = false;
+                        t->jump_end();
                         t->has_internal_particle = false;
                     }
                 }
