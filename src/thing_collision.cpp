@@ -1015,7 +1015,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
         return false;
     }
 
-    if (unlikely(g_opt_debug2)) {
+    if (DEBUG2) {
         dbg("Collision check only? @%f,%f with %s",
             A_at.x, A_at.y, it->to_string().c_str());
     }

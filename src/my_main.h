@@ -32,21 +32,4 @@ void quit(void);
 void restart(void);
 void segv_handler(int sig);
 
-//
-// _ adds recording of this traceback
-//
-#define ERR _ myerr
-
-#define dbg _ if (unlikely(g_opt_debug1)) log
-#define dbg2 _ if (unlikely(g_opt_debug2)) log
-#define dbg3 _ if (unlikely(g_opt_debug3)) log
-#define dbg4 _ if (unlikely(g_opt_debug4)) log
-#define dbg5 _ if (unlikely(g_opt_debug5)) log
-
-#define DBG _ if (unlikely(g_opt_debug1)) LOG
-#define DBG2 _ if (unlikely(g_opt_debug2)) LOG
-#define DBG3 _ if (unlikely(g_opt_debug3)) LOG
-#define DBG4 _ if (unlikely(g_opt_debug4)) LOG
-#define DBG5 _ if (unlikely(g_opt_debug5)) LOG
-
 #endif

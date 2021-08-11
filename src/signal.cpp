@@ -15,7 +15,7 @@
 
 void callstack_dump (void)
 {_
-    if (!g_opt_debug2) {
+    if (NODEBUG2) {
         return;
     }
 
@@ -30,14 +30,14 @@ void callstack_dump (void)
     fprintf(MY_STDERR, "==========\n");
     for (auto depth = 0; depth < g_callframes_depth; depth++) {
         auto iter = &callframes[depth];
-        fprintf(MY_STDERR, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
+        fprintf(MY_STDERR, "(stack) %d %s, line %u\n", depth, iter->func, iter->line);
     }
 
     CON("code trace");
     CON("==========");
     for (auto depth = 0; depth < g_callframes_depth; depth++) {
         auto iter = &callframes[depth];
-        CON("(stack) %d %s %s, line %u", depth, iter->file, iter->func, iter->line);
+        CON("(stack) %d %s, line %u", depth, iter->func, iter->line);
     }
     done = false;
 }

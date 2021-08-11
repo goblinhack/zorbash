@@ -43,7 +43,7 @@ void WID_DBG (Widp t, const char *fmt, ...)
 {
     va_list args;
 
-    if (!g_opt_debug4) {
+    if (NODEBUG4) {
         return;
     }
 

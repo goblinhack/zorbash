@@ -19,7 +19,7 @@
 bool Thing::cursor_path_pop_next_and_move (void)
 {_
     if (monstp && monstp->move_path.size()) {
-        if (unlikely(g_opt_debug3)) {
+        if (DEBUG3) {
             std::string s = "";
             for (auto p : monstp->move_path) {
                 s += p.to_string() + " ";

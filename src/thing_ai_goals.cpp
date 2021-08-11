@@ -96,7 +96,7 @@ _
                 it->is_hidden ||
                 it->is_falling ||
                 it->is_jumping) {
-                if (unlikely(g_opt_debug4)) {
+                if (DEBUG4) {
                     if (it->is_loggable_for_unimportant_stuff()) {
                         dbg2(" ignore %s", it->to_string().c_str());
                     }
@@ -104,7 +104,7 @@ _
                 continue;
             }
 
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 if (it->is_loggable_for_unimportant_stuff()) {
                     dbg2(" consider %s", it->to_string().c_str());
                 }
@@ -362,7 +362,7 @@ _
     //
     // Find the best next-hop to the best goal.
     //
-    if (unlikely(g_opt_debug4)) {
+    if (DEBUG4) {
         dbg("Goals:");
         dmap_print(dmap_can_see,
                    point(start.x - minx, start.y - miny),

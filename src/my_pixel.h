@@ -79,7 +79,7 @@ static inline void getPixel (SDL_Surface * surface, uint16_t x, uint16_t y, colo
     uint32_t rgb;
 
     extern bool g_opt_debug3;
-    if (unlikely(g_opt_debug3)) {
+    if (DEBUG3) {
         if (unlikely((x >= (uint32_t)surface->w) || (y >= (uint32_t)surface->h))) {
             DIE("getPixel out of range, pix %d,%d in size %d,%d",
                 x, y, surface->w, surface->h);

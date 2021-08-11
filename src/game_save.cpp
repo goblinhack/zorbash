@@ -284,7 +284,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 
     WRITE_MAGIC(THING_MAGIC_END);
 
-    if (unlikely(g_opt_debug4)) {
+    if (DEBUG4) {
         auto diff = out.tellp() - start;
         LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p",
             (int)diff, name.c_str(), my.t->tp_id, my.t->id.id,
@@ -295,7 +295,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 
 std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
 {_
-    if (unlikely(g_opt_debug4)) {
+    if (DEBUG4) {
         my.t->log("Save");
     }
 
@@ -410,7 +410,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
                     if (!t) {
                         continue;
                     }
-                    if (unlikely(g_opt_debug4)) {
+                    if (DEBUG4) {
                         t->log("Save");
                     }
                     out << bits(t);
@@ -597,7 +597,7 @@ bool Game::save (std::string file_to_save)
     memcpy(uncompressed, data.c_str(), uncompressed_len);
 
 #if 0
-    if (unlikely(g_opt_debug4)) {
+    if (DEBUG4) {
         std::cout << "before compression ";
         (void) hexdump((const unsigned char*)uncompressed, uncompressed_len);
     }
@@ -625,7 +625,7 @@ bool Game::save (std::string file_to_save)
     //
     // Uncompress and check the data matches
     //
-    if (unlikely(g_opt_debug4)) {
+    if (DEBUG4) {
         HEAP_ALLOC(tmp_compressed, compressed_len);
         HEAP_ALLOC(tmp_uncompressed, uncompressed_len);
         memcpy(tmp_compressed, compressed, compressed_len);
@@ -648,7 +648,7 @@ bool Game::save (std::string file_to_save)
     // Dump the post compress buffer
     //
 #if 0
-    if (unlikely(g_opt_debug4)) {
+    if (DEBUG4) {
         std::cout << "after compression ";
         (void) hexdump((const unsigned char *)compressed, compressed_len);
     }

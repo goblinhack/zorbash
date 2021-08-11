@@ -194,7 +194,7 @@ _
         auto o = thing_find(oid);
         if (o) {
             if (o->tp() == tpp) {
-                if (unlikely(g_opt_debug2)) {
+                if (DEBUG2) {
                     o->log("Got skillbox item %s", tpp->name().c_str());
                 }
                 return o;
@@ -248,7 +248,7 @@ _
         return false;
     }
 
-    if (unlikely(g_opt_debug2)) {
+    if (DEBUG2) {
         what->log("Over skillbox item");
     }
     return true;
@@ -290,7 +290,7 @@ _
     }
 
     what->is_activated = !what->is_activated;
-    if (unlikely(g_opt_debug2)) {
+    if (DEBUG2) {
         what->log("Chosen skillbox item");
     }
 
@@ -309,7 +309,7 @@ Thingp Level::skillbox_describe (const uint32_t slot)
 _
     auto what = skillbox_get(slot);
     if (what) {
-        if (unlikely(g_opt_debug2)) {
+        if (DEBUG2) {
             what->log("Skillbox: describe slot %d", slot);
         }
         what->describe_when_hovered_over_in_rightbar();

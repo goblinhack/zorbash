@@ -91,14 +91,14 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
             //
             // Likely far away
             //
-            if (unlikely(g_opt_debug3)) {
+            if (DEBUG3) {
                 LOG("Cannot play sound %s on channel %d, cannot reach target",
                     alias.c_str(), channel);
             }
             return true;
         }
     } else if (distance >= DMAP_IS_PASSABLE) {
-        if (unlikely(g_opt_debug3)) {
+        if (DEBUG3) {
             LOG("Cannot play sound %s on channel %d, too far", alias.c_str(), channel);
         }
         return true;

@@ -81,6 +81,7 @@ void Thing::move_finish (void)
         dbg("Move to %f,%f finished", mid_at.x, mid_at.y);
     }
 
+    update_interpolated_position();
     is_moving = false;
     on_move();
 }

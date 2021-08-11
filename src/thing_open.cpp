@@ -55,7 +55,7 @@ bool Thing::open (Thingp it)
         return false;
     }
 
-    if (unlikely(g_opt_debug1)) {
+    if (DEBUG1) {
         it->log("Open");
     }
 

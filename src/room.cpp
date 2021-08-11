@@ -194,7 +194,7 @@ void Room::finalize (void)
 {
     find_doors();
 
-    if (unlikely(g_opt_debug4)) {
+    if (DEBUG4) {
         dump();
     }
 }

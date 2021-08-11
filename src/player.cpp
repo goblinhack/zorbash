@@ -20,7 +20,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     // Trying to move when the console is visible.
     //
     if (wid_console_window && wid_console_window->visible) {
-        if (unlikely(g_opt_debug4)) {
+        if (DEBUG4) {
             LOG("Player tick; ignore, console open");
         }
         return;
@@ -33,44 +33,44 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         case Game::STATE_NORMAL:
             break;
         case Game::STATE_OPTIONS_FOR_ITEM_MENU:
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 LOG("Ignore player action when choosing item options");
             }
             return;
         case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 LOG("Ignore player action when moving items");
             }
             return;
         case Game::STATE_WIELDING_ITEMS:
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 LOG("Ignore player action when wielding items");
             }
             return;
         case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 LOG("Ignore player action when collecting items");
             }
             return;
         case Game::STATE_ENCHANTING_ITEMS:
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 LOG("Ignore player action when enchanting items");
             }
             return;
         case Game::STATE_CHOOSING_SKILLS:
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 LOG("Ignore player action when choosing skills");
             }
             return;
         case Game::STATE_CHOOSING_TARGET:  // Looking to somewhere to throw at
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 LOG("Ignore player action when choosing target");
             }
             return;
         case Game::STATE_LOAD_MENU:
         case Game::STATE_SAVE_MENU:
         case Game::STATE_QUIT_MENU:
-            if (unlikely(g_opt_debug4)) {
+            if (DEBUG4) {
                 LOG("Ignore player action when in menu");
             }
             return;
@@ -78,7 +78,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
 
     auto level = game->level;
     if (!level) {
-        if (unlikely(g_opt_debug4)) {
+        if (DEBUG4) {
             LOG("Player tick; ignore, no level");
         }
         return;
@@ -86,7 +86,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
 
     auto player = level->player;
     if (!player) {
-        if (unlikely(g_opt_debug4)) {
+        if (DEBUG4) {
             LOG("Player tick; ignore, no player");
         }
         return;
@@ -123,7 +123,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     }
 
     if (player->is_dead || player->is_hidden) {
-        if (unlikely(g_opt_debug4)) {
+        if (DEBUG4) {
             LOG("Player tick; ignore, is dead");
         }
         return;

@@ -299,7 +299,7 @@ _
     } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
         // continue
     } else {
-        if (unlikely(g_opt_debug4)) { // very noisy
+        if (DEBUG4) { // very noisy
             dbg("Cannot attack %s", it->to_string().c_str());
         }
         return false;
@@ -347,7 +347,7 @@ _
             //
             // Eat corpse?
             //
-            if (unlikely(g_opt_debug2)) {
+            if (DEBUG2) {
                 owner->log("Can eat %s", it->to_string().c_str());
             }
 
@@ -356,7 +356,7 @@ _
                     //
                     // Can't kill it twice, so hide it
                     //
-                    if (unlikely(g_opt_debug1)) {
+                    if (DEBUG1) {
                         owner->log("Eat corpse %s", it->to_string().c_str());
                     }
                     it->hide();

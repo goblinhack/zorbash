@@ -46,6 +46,35 @@ extern std::string g_opt_player_name;
 extern int TILES_ACROSS;
 extern int TILES_DOWN;
 
+#define DEBUG1 (unlikely(g_opt_debug1))
+#define DEBUG2 (unlikely(g_opt_debug2))
+#define DEBUG3 (unlikely(g_opt_debug3))
+#define DEBUG4 (unlikely(g_opt_debug4))
+#define DEBUG5 (unlikely(g_opt_debug5))
+
+#define NODEBUG1 (likely(!g_opt_debug1))
+#define NODEBUG2 (likely(!g_opt_debug2))
+#define NODEBUG3 (likely(!g_opt_debug3))
+#define NODEBUG4 (likely(!g_opt_debug4))
+#define NODEBUG5 (likely(!g_opt_debug5))
+
+//
+// _ adds recording of this traceback
+//
+#define ERR _ myerr
+
+#define dbg _ if (DEBUG1) log
+#define dbg2 _ if (DEBUG2) log
+#define dbg3 _ if (DEBUG3) log
+#define dbg4 _ if (DEBUG4) log
+#define dbg5 _ if (DEBUG5) log
+
+#define DBG _ if (DEBUG1) LOG
+#define DBG2 _ if (DEBUG2) LOG
+#define DBG3 _ if (DEBUG3) LOG
+#define DBG4 _ if (DEBUG4) LOG
+#define DBG5 _ if (DEBUG5) LOG
+
 //
 // Used to fill in gaps in log depth
 //

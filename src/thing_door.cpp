@@ -43,7 +43,7 @@ bool Thing::open_door (Thingp it)
 
     if (get_keys()) {
         decr_keys();
-        if (unlikely(g_opt_debug1)) {
+        if (DEBUG1) {
             it->log("Open");
         }
         it->level_pop();
@@ -90,7 +90,7 @@ bool Thing::close_door (Thingp it)
         return false;
     }
 
-    if (unlikely(g_opt_debug1)) {
+    if (DEBUG1) {
         it->log("Close");
     }
     it->level_pop();

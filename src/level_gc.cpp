@@ -41,28 +41,28 @@ _
             // Allow the particles to finish
             //
             if (t->has_internal_particle) {
-                if (unlikely(g_opt_debug1)) {
+                if (DEBUG1) {
                     t->log("Thing garbage collect delayed due to internal particle");
                 }
                 continue;
             }
 
             if (t->has_external_particle) {
-                if (unlikely(g_opt_debug1)) {
+                if (DEBUG1) {
                     t->log("Thing garbage collect delayed due to external particle");
                 }
                 continue;
             }
 
             if (t->has_laser) {
-                if (unlikely(g_opt_debug1)) {
+                if (DEBUG1) {
                     t->log("Thing garbage collect delayed due to laser");
                 }
                 continue;
             }
 
             if (t->has_projectile) {
-                if (unlikely(g_opt_debug1)) {
+                if (DEBUG1) {
                     t->log("Thing garbage collect delayed due to projectile");
                 }
                 continue;
@@ -75,7 +75,7 @@ _
             monst_count--;
         }
 
-        if (unlikely(g_opt_debug1)) {
+        if (DEBUG1) {
             t->log("Thing garbage collect");
         }
 

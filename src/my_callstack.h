@@ -7,6 +7,7 @@
 #define _MY_CALLSTACK_H_
 
 #include "my_sys.h"
+#include "my_globals.h"
 
 #define CAT(A, B) A ## B
 #define CAT2(A, B) CAT(A, B)
@@ -14,13 +15,12 @@
 #undef _
 
 #ifdef ENABLE_DEBUG_TRACE
-#define _ tracer_t CAT2(__my_trace__, __LINE__) (__FILE__, __PRETTY_FUNCTION__, __LINE__);
+#define _ tracer_t CAT2(__my_trace__, __LINE__) (__PRETTY_FUNCTION__, __LINE__);
 #else
 #define _
 #endif
 
 struct callframe {
-    const char *file;
     const char *func;
     unsigned short line;
 };
@@ -52,17 +52,14 @@ extern unsigned char g_callframes_depth;
 extern void callstack_dump(void);
 
 struct tracer_t {
-    inline tracer_t (const char *file,
-                     const char *func,
+    inline tracer_t (const char *func,
                      const unsigned short line)
     {
-        extern bool g_opt_debug1;
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-        if (unlikely(g_opt_debug1)) {
+        if (DEBUG1) {
             if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
                 callframe *c = &callframes[g_callframes_depth++];
-                c->file = file;
                 c->func = func;
                 c->line = line;
             }
@@ -71,8 +68,7 @@ struct tracer_t {
 
     inline ~tracer_t()
     {
-        extern bool g_opt_debug1;
-        if (unlikely(g_opt_debug1)) {
+        if (DEBUG1) {
             if (g_callframes_depth > 0) {
                 g_callframes_depth--;
             }

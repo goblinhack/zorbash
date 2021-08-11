@@ -607,7 +607,7 @@ _
         auto o = thing_find(oid);
         if (o) {
             if (o->tp() == tpp) {
-                if (unlikely(g_opt_debug2)) {
+                if (DEBUG2) {
                     o->log("Got inventory item %s", tpp->name().c_str());
                 }
 
@@ -666,7 +666,7 @@ _
         return false;
     }
 
-    if (unlikely(g_opt_debug2)) {
+    if (DEBUG2) {
         item->log("Over inventory item");
     }
     return true;
@@ -707,7 +707,7 @@ _
         return false;
     }
 
-    if (unlikely(g_opt_debug2)) {
+    if (DEBUG2) {
         item->log("Chosen inventory item");
     }
 
@@ -784,7 +784,7 @@ Thingp Level::inventory_describe (const uint32_t slot)
 _
     auto item = inventory_get(slot);
     if (item) {
-        if (unlikely(g_opt_debug2)) {
+        if (DEBUG2) {
             item->log("Inventory: describe slot %d", slot);
         }
         item->describe_when_hovered_over_in_rightbar();

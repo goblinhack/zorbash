@@ -157,7 +157,7 @@ void Thing::location_check_all_things_at (void)
 {_
     dbg("Do location checks");
     FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {_
-        if (unlikely(g_opt_debug2)) {
+        if (DEBUG2) {
             t->log("Do location check");
         }
         t->location_check();
@@ -171,7 +171,7 @@ void Thing::location_check_forced_all_things_at (void)
 {_
     dbg("Do location checks");
     FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {_
-        if (unlikely(g_opt_debug2)) {
+        if (DEBUG2) {
             t->log("Do location check");
         }
         t->location_check_forced();

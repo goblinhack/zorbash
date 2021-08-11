@@ -66,7 +66,7 @@ void Level::dmap_to_player_update (void)
     set(dmap_to_player.val, player->mid_at.x, player->mid_at.y, DMAP_IS_GOAL);
 
     dmap_process(&dmap_to_player);
-    if (unlikely(g_opt_debug4)) {
+    if (DEBUG4) {
         LOG("Player dmap:");
         dmap_print(&dmap_to_player);
     }

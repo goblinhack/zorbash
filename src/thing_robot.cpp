@@ -164,7 +164,7 @@ _
         // Find the best next-hop to the best goal.
         //
 #ifdef ENABLE_DEBUG_AI_VERBOSE
-        if (unlikely(g_opt_debug3)) {
+        if (DEBUG3) {
             dbg("Goals:");
             dmap_print(g.dmap,
                        point(start.x - minx, start.y - miny),
@@ -490,7 +490,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 it->is_hidden ||
                 it->is_falling ||
                 it->is_jumping) {
-                if (unlikely(g_opt_debug4)) {
+                if (DEBUG4) {
                     dbg2(" ignore %s", it->to_string().c_str());
                 }
                 continue;

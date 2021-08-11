@@ -71,7 +71,7 @@ _
     }
     chosen->hide();
 
-    if (unlikely(g_opt_debug2)) {
+    if (DEBUG2) {
         it->log("New carried list:");
     }
     it->get_item_list();
