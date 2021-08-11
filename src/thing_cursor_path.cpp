@@ -51,7 +51,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
         //
         if (is_player() && game->robot_mode) {
             if (will_avoid_threat(future_pos)) {
-                CON("Next position %d,%d is a threat",
+                log("Next position %d,%d is a threat",
                     (int)future_pos.x, (int)future_pos.y);
 _
                 if (monstp->move_path.size()) {
@@ -62,7 +62,7 @@ _
                     // If the thing we are going to land on is also a threat,
                     // can we jump further?
                     //
-                    CON("Next next position %d,%d is also a threat",
+                    log("Next next position %d,%d is also a threat",
                         (int)future_pos.x, (int)future_pos.y);
 _
                     if (will_avoid_threat(jump_pos) && monstp->move_path.size()) {
