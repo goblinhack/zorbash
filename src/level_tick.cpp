@@ -152,24 +152,6 @@ _
     }
 
     //
-    // Only update robot mode if things have stopped moving so we get
-    // consistent random behaviour.
-    //
-    if (game->tick_completed == game->tick_current) {
-        if (game->robot_mode_requested != game->robot_mode) {
-            LOG("Update robot mode");
-            game->robot_mode = game->robot_mode_requested;
-            wid_actionbar_robot_mode_update();
-        }
-
-        if (game->robot_mode_tick_requested) {
-            LOG("Tick robot mode");
-            game->robot_mode_tick_requested = false;
-            game->robot_mode_tick();
-        }
-    }
-_
-    //
     // Stop rapid pickup/drop events if particles are still in progress
     // Don't move this priot to update_interpolated_position or see flicker
     // in jumping.
@@ -226,6 +208,24 @@ _
     //
     game->tick_end();
 
+    //
+    // Only update robot mode if things have stopped moving so we get
+    // consistent random behaviour.
+    //
+    if (game->tick_completed == game->tick_current) {
+        if (game->robot_mode_requested != game->robot_mode) {
+            TOPCON("Update robot mode");
+            game->robot_mode = game->robot_mode_requested;
+            wid_actionbar_robot_mode_update();
+        }
+
+        if (game->robot_mode_tick_requested) {
+            LOG("Tick robot mode");
+            game->robot_mode_tick_requested = false;
+            game->robot_mode_tick();
+        }
+    }
+_
 #if 0
     //
     // For debugging consistent randomness
