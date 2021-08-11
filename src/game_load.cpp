@@ -225,93 +225,92 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /////////////////////////////////////////////////////////////////////////
     in >> bits(bits64);
     int shift = 0;
-//CON("LOAD %lu ",bits64);
-    /* uint64_t */ my.t->has_ever_moved                = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->has_light                     = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->inited_tiles                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_activated                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_attached                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_being_destroyed            = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_blitted                    = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_bouncing                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_changing_level             = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_dead                       = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_dead_scheduled             = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_dying                      = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_facing_left                = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_fadeup                     = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_falling                    = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_hidden                     = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_hungry                     = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_in_lava                    = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_in_water                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_jumping                    = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_moving                     = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_offscreen                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_open                       = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_resurrected                = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_resurrecting               = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_resurrection_blocked       = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_sleeping                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_starving                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_the_grid                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_waiting_to_ascend_dungeon  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_waiting_to_ascend_sewer    = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_waiting_to_descend_dungeon = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_waiting_to_descend_sewer   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->is_waiting_to_fall            = (bits64 >> shift) & 1; shift++;
+//CON("LOAD %016LX ",bits64);
+    /* uint64_t */            my.t->has_ever_moved                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->has_light                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_activated                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_attached                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_being_destroyed            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_bouncing                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_changing_level             = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_dead                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_dying                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_facing_left                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_fadeup                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_falling                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_hidden                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_hungry                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_in_lava                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_in_water                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_jumping                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_moving                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_offscreen                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_open                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_resurrected                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_resurrecting               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_resurrection_blocked       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_scheduled_for_death        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_sleeping                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_starving                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_the_grid                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_waiting_to_ascend_dungeon  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_waiting_to_ascend_sewer    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_waiting_to_descend_dungeon = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_waiting_to_descend_sewer   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_waiting_to_fall            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
 
     in >> bits(bits64);
+//CON("LOAD %016LX ",bits64);
     shift = 0;
 
-    /* uint64_t */ my.t->i_set_gfx_water                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_acid                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_ascend_dungeon         = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_ascend_sewer           = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_barrel                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_blood                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_brazier                = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_bridge                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_chasm                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_corpse                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_corridor               = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_deep_water             = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_descend_dungeon        = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_descend_sewer          = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_dirt                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_door                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_dry_grass              = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_enchantstone           = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_extreme_hazard         = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_fire                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_floor                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_foilage                = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_food                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_gold                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_hazard                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_key                    = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_lava                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_light_blocker          = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_minion_generator       = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_monst                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_movement_blocking_hard = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_movement_blocking_soft = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_poison                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_potion                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_ripple                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_rock                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_secret_door            = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_shallow_water          = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_skillstone             = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_smoke                  = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_spiderweb              = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_sticky                 = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_treasure_class_a       = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_treasure_class_b       = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_treasure_class_c       = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_treasure_type          = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_wall                   = (bits64 >> shift) & 1; shift++;
-    /* uint64_t */ my.t->i_set_is_wand                   = (bits64 >> shift) & 1; shift++;
+    /* uint64_t */            my.t->i_set_gfx_water                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_acid                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_ascend_dungeon         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_ascend_sewer           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_barrel                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_blood                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_brazier                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_bridge                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_chasm                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_corpse                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_corridor               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_deep_water             = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_descend_dungeon        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_descend_sewer          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_dirt                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_door                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_dry_grass              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_enchantstone           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_extreme_hazard         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_fire                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_floor                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_foilage                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_food                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_gold                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_hazard                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_key                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_lava                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_light_blocker          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_minion_generator       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_monst                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_movement_blocking_hard = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_movement_blocking_soft = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_poison                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_potion                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_ripple                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_rock                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_secret_door            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_shallow_water          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_skillstone             = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_smoke                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_spiderweb              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_sticky                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_treasure_class_a       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_treasure_class_b       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_treasure_class_c       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_treasure_type          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_wall                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_wand                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -321,18 +320,9 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
 
-    //
-    // Need to reinit tiles
-    //
-    my.t->inited_tiles          = false;
-
-    //
-    // We do not save particles or lasers
-    //
-    my.t->has_external_particle = false;
-    my.t->has_internal_particle = false;
-    my.t->has_laser             = false;
-    my.t->has_projectile        = false;
+#ifdef ENABLE_DEBUG_THING_SER
+    in >> bits(my.t->debug_str);
+#endif
 
     READ_MAGIC("thing end", THING_MAGIC_END);
 
@@ -493,6 +483,19 @@ _
 
                     t->reinit();
                     //t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+
+                    // CON("From save file  : %s", t->debug_str.c_str());
+                    // CON("Newly created as: %s", t->to_dbg_string().c_str());
+#ifdef ENABLE_DEBUG_THING_SER
+                    if (t->to_dbg_string() != t->debug_str) {
+                        if (!t->is_cursor()) {
+                            CON("From save file  : %s", t->debug_str.c_str());
+                            CON("Newly created as: %s", t->to_dbg_string().c_str());
+                            game_load_error = "loaded thing is corrupt";
+                            return in;
+                        }
+                    }
+#endif
                 }
             }
         }
@@ -501,6 +504,9 @@ _
     uint32_t csum = 0;
     for (auto p : l->all_things) {
         auto t = p.second;
+        if (t->is_cursor()) {
+            continue;
+        }
         csum += t->mid_at.x + t->mid_at.y + t->id.id;
         //t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
     }

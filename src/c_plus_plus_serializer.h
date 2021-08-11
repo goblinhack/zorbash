@@ -107,7 +107,7 @@ static inline std::istream& operator>> (std::istream& in, Bits<std::wstring &> v
             wchar_t tmp;
             in >> bits(tmp);
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-            std::cout << "read '" << tmp << "'" << std::endl;
+            std::wcout << "read '" << tmp << "'" << std::endl;
 #endif
             v.t += tmp;
         }
@@ -124,7 +124,7 @@ static inline std::ostream& operator<< (std::ostream &out,
     for (auto tmp : v.t) {
         out << bits(tmp);
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-        std::cout << "write const '" << tmp << "'" << std::endl;
+        std::wcout << "write const '" << tmp << "'" << std::endl;
 #endif
     }
     return out;
@@ -138,7 +138,7 @@ std::ostream& operator<< (std::ostream &out, Bits<std::wstring &> const v)
     for (auto tmp : v.t) {
         out << bits(tmp);
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-        std::cout << "write '" << tmp << "'" << std::endl;
+        std::wcout << "write '" << tmp << "'" << std::endl;
 #endif
     }
     return out;
@@ -182,7 +182,7 @@ static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<const wchar_t &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-    std::cout << "write const '" << v.t << "'" << std::endl;
+    std::wcout << "write const '" << v.t << "'" << std::endl;
 #endif
     if (sizeof(wchar_t) == 4) {
         unsigned char _a, _b, _c, _d;
@@ -214,7 +214,7 @@ static inline
 std::ostream& operator<< (std::ostream &out, Bits<wchar_t &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-    std::cout << "write const '" << v.t << "'" << std::endl;
+    std::wcout << "write const '" << v.t << "'" << std::endl;
 #endif
     if (sizeof(wchar_t) == 4) {
         unsigned char _a, _b, _c, _d;

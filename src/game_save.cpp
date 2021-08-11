@@ -174,102 +174,101 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /////////////////////////////////////////////////////////////////////////
     uint64_t bits64 = 0;
     int shift = 0;
-    /* uint64_t */ bits64 |= my.t->has_ever_moved                << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->has_light                     << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->inited_tiles                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_activated                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_attached                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_being_destroyed            << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_blitted                    << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_bouncing                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_changing_level             << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_dead_scheduled             << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_dead                       << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_dying                      << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_facing_left                << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_fadeup                     << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_falling                    << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_hidden                     << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_hungry                     << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_in_lava                    << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_in_water                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_jumping                    << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_moving                     << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_offscreen                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_open                       << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_resurrected                << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_resurrecting               << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_resurrection_blocked       << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_sleeping                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_starving                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_the_grid                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend_dungeon  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_waiting_to_ascend_sewer    << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_dungeon << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_waiting_to_descend_sewer   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->is_waiting_to_fall            << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->has_ever_moved               ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->has_light                    ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_activated                 ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_attached                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_being_destroyed           ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_bouncing                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_changing_level            ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_dead                      ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_dying                     ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_facing_left               ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_fadeup                    ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_falling                   ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_hidden                    ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_hungry                    ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_in_lava                   ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_in_water                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_jumping                   ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_moving                    ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_offscreen                 ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_open                      ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_resurrected               ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_resurrecting              ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_resurrection_blocked      ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_scheduled_for_death       ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_sleeping                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_starving                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_the_grid                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_waiting_to_ascend_dungeon ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_waiting_to_ascend_sewer   ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_waiting_to_descend_dungeon? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_waiting_to_descend_sewer  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_waiting_to_fall           ? 1LLU : 0LLU) << shift; shift++;
 
     if (shift >= (int)(sizeof(bits64) * 8)) {
         ERR("Ran out of bits in serialization");
     }
     out << bits(bits64);
-//CON("SAVE %lu ",bits64);
+//CON("SAVE %016LX ",bits64);
 
     bits64 = 0;
     shift = 0;
-    /* uint64_t */ bits64 |= my.t->i_set_gfx_water                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_acid                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_ascend_dungeon         << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_ascend_sewer           << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_barrel                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_blood                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_brazier                << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_bridge                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_chasm                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_corpse                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_corridor               << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_deep_water             << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_descend_dungeon        << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_descend_sewer          << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_dirt                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_door                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_dry_grass              << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_enchantstone           << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_extreme_hazard         << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_fire                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_floor                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_foilage                << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_food                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_gold                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_hazard                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_key                    << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_lava                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_light_blocker          << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_minion_generator       << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_monst                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_movement_blocking_hard << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_movement_blocking_soft << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_poison                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_potion                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_ripple                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_rock                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_secret_door            << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_shallow_water          << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_skillstone             << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_smoke                  << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_spiderweb              << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_sticky                 << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_a       << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_b       << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_treasure_class_c       << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_treasure_type          << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_wall                   << shift; shift++;
-    /* uint64_t */ bits64 |= my.t->i_set_is_wand                   << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_gfx_water                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_acid                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_ascend_dungeon        ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_ascend_sewer          ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_barrel                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_blood                 ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_brazier               ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_bridge                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_chasm                 ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_corpse                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_corridor              ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_deep_water            ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_descend_dungeon       ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_descend_sewer         ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_dirt                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_door                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_dry_grass             ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_enchantstone          ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_extreme_hazard        ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_fire                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_floor                 ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_foilage               ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_food                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_gold                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_hazard                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_key                   ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_lava                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_light_blocker         ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_minion_generator      ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_monst                 ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_movement_blocking_hard? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_movement_blocking_soft? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_poison                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_potion                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_ripple                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_rock                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_secret_door           ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_shallow_water         ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_skillstone            ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_smoke                 ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_spiderweb             ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_sticky                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_a      ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_b      ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_c      ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_type         ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_wall                  ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_wand                  ? 1LLU : 0LLU) << shift; shift++;
 
     if (shift >= (int)(sizeof(bits64) * 8)) {
         ERR("Ran out of bits in serialization");
     }
     out << bits(bits64);
+//CON("SAVE %016LX ",bits64);
 
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -279,13 +278,9 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
 
-    //
-    // Not worth saving as temporary
-    //
-    // /* uint64_t */ bits64 |= my.t->has_external_particle << shift; shift++;
-    // /* uint64_t */ bits64 |= my.t->has_internal_particle << shift; shift++;
-    // /* uint64_t */ bits64 |= my.t->has_laser << shift; shift++;
-    // /* uint64_t */ bits64 |= my.t->has_projectile << shift; shift++;
+#ifdef ENABLE_DEBUG_THING_SER
+    out << bits(my.t->to_dbg_string());
+#endif
 
     WRITE_MAGIC(THING_MAGIC_END);
 
@@ -311,6 +306,9 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     uint32_t csum = 0;
     for (auto p : my.t->all_things) {
         auto t = p.second;
+        if (t->is_cursor()) {
+            continue;
+        }
         csum += t->mid_at.x + t->mid_at.y + t->id.id;
         // t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
     }

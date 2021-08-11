@@ -46,8 +46,8 @@ bool Level::tick (void)
     }
 
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
-        if (t->is_dead_scheduled) {
-            t->is_dead_scheduled = false;
+        if (t->is_scheduled_for_death) {
+            t->is_scheduled_for_death = false;
             t->dead(t->get_dead_reason());
         }
     } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
@@ -92,7 +92,7 @@ _
             if (t->is_falling) {
                 game->things_are_moving = true;
             }
-        } else if (t->is_dead_scheduled) {
+        } else if (t->is_scheduled_for_death) {
             game->things_are_moving = true;
         } else if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
                    (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||

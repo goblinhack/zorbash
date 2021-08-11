@@ -77,44 +77,42 @@ public:
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
-    uint64_t has_ever_moved:1                {};
-    uint64_t has_external_particle:1         {}; // current in motion particle
-    uint64_t has_internal_particle:1         {}; // current in motion particle
-    uint64_t has_laser:1                     {}; // current laser being fired
-    uint64_t has_light:1                     {};
-    uint64_t has_projectile:1                {}; // current projectile being fired
-    uint64_t inited_tiles:1                  {};
-    uint64_t is_activated:1                  {};
-    uint64_t is_attached:1                   {};
-    uint64_t is_being_destroyed:1            {};
-    uint64_t is_blitted:1                    {};
-    uint64_t is_bouncing:1                   {};
-    uint64_t is_changing_level:1             {};
-    uint64_t is_dead:1                       {};
-    uint64_t is_dead_scheduled:1             {};
-    uint64_t is_dying:1                      {};
-    uint64_t is_facing_left:1                {};
-    uint64_t is_fadeup:1                     {};
-    uint64_t is_falling:1                    {};
-    uint64_t is_hidden:1                     {};
-    uint64_t is_hungry:1                     {};
-    uint64_t is_in_lava:1                    {};
-    uint64_t is_in_water:1                   {};
-    uint64_t is_jumping:1                    {};
-    uint64_t is_moving:1                     {};
-    uint64_t is_offscreen:1                  {};
-    uint64_t is_open:1                       {};
-    uint64_t is_resurrected:1                {}; // has finished resurrecting
-    uint64_t is_resurrecting:1               {}; // is currently resurrecing
-    uint64_t is_resurrection_blocked:1       {}; // blocked from resurrection
-    uint64_t is_sleeping:1                   {};
-    uint64_t is_starving:1                   {};
-    uint64_t is_the_grid:1                   {};
-    uint64_t is_waiting_to_ascend_dungeon:1  {};
-    uint64_t is_waiting_to_ascend_sewer:1    {};
-    uint64_t is_waiting_to_descend_dungeon:1 {};
-    uint64_t is_waiting_to_descend_sewer:1   {};
-    uint64_t is_waiting_to_fall:1            {};
+    uint64_t has_ever_moved:1                  {};
+    uint64_t has_external_particle:1           {}; // current in motion particle
+    uint64_t has_internal_particle:1           {}; // current in motion particle
+    uint64_t has_laser:1                       {}; // current laser being fired
+    uint64_t has_light:1                       {};
+    uint64_t has_projectile:1                  {}; // current projectile being fired
+    uint64_t is_activated:1                    {}; // this skill is activated
+    uint64_t is_attached:1                     {}; // is attached to the level
+    uint64_t is_being_destroyed:1              {};
+    uint64_t is_bouncing:1                     {};
+    uint64_t is_changing_level:1               {}; // is in the process of changing level
+    uint64_t is_dead:1                         {};
+    uint64_t is_scheduled_for_death:1          {}; // will die in next game loop
+    uint64_t is_dying:1                        {}; // is currently in the throes of death
+    uint64_t is_facing_left:1                  {};
+    uint64_t is_fadeup:1                       {};
+    uint64_t is_falling:1                      {};
+    uint64_t is_hidden:1                       {};
+    uint64_t is_hungry:1                       {};
+    uint64_t is_in_lava:1                      {};
+    uint64_t is_in_water:1                     {};
+    uint64_t is_jumping:1                      {};
+    uint64_t is_moving:1                       {}; // is currently moving tiles
+    uint64_t is_offscreen:1                    {};
+    uint64_t is_open:1                         {};
+    uint64_t is_resurrected:1                  {}; // has finished resurrecting
+    uint64_t is_resurrecting:1                 {}; // is currently resurrecing
+    uint64_t is_resurrection_blocked:1         {}; // blocked from resurrection
+    uint64_t is_sleeping:1                     {};
+    uint64_t is_starving:1                     {};
+    uint64_t is_the_grid:1                     {}; // is the backbone of the level
+    uint64_t is_waiting_to_ascend_dungeon:1    {};
+    uint64_t is_waiting_to_ascend_sewer:1      {};
+    uint64_t is_waiting_to_descend_dungeon:1   {};
+    uint64_t is_waiting_to_descend_sewer:1     {};
+    uint64_t is_waiting_to_fall:1              {};
 
     //
     // These are flags used to make sure we set or unset flags onto
@@ -179,6 +177,11 @@ public:
     // Fields not worth saving
     uint64_t debug:1                           {};
     uint64_t is_being_dropped:1                {};
+    uint64_t is_blitted:1                      {};
+    uint64_t inited_tiles:1                    {};
+#ifdef ENABLE_DEBUG_THING_SER
+    std::string debug_str;
+#endif
 private:
     //
     // As this is called a lot, probably worth the memory
@@ -965,6 +968,7 @@ public:
     std::string text_the(void) const;
     std::string text_The(void) const;
     std::string to_string(void) const;
+    std::string to_dbg_string(void) const;
     std::string to_short_string(void) const;
     std::vector<Lightp> &get_light(void);
     std::vector<Thingp> get_item_list(void);

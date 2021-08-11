@@ -70,7 +70,7 @@ void Thing::dead_scheduled_ (const char *fmt, va_list args)
     verify(this);
     char reason[MAXSTR];
     vsnprintf(reason, MAXSTR, fmt, args);
-    is_dead_scheduled = true;
+    is_scheduled_for_death = true;
     set_dead_reason(std::string(reason));
 }
 
