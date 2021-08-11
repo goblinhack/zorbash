@@ -110,6 +110,10 @@ _
                 }
             }
         }
+        if (t->is_waiting_to_fall) {
+            t->fall_to_next_level();
+            game->things_are_moving = true;
+        }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
     if (fade_out_finished) {

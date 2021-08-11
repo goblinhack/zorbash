@@ -117,7 +117,7 @@ float Thing::get_fall (void)
         is_falling = false;
         dbg("End of falling timestamp");
         level_push();
-        fall_to_next_level();
+        is_waiting_to_fall = true;
         return (0);
     }
 

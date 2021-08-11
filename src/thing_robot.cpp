@@ -1033,6 +1033,7 @@ void Thing::robot_tick (void)
                     return;
                 } else {
                     CON("Robot: nothing to do");
+                    wid_actionbar_robot_mode_off();
                 }
             }
         }
