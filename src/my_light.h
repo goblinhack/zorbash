@@ -49,7 +49,7 @@ public:
     void reset(void);
     void update(int strength);
     void update(void);
-    bool calculate(int last);
+    bool calculate(void);
     void render_triangle_fans(void);
     void render(int ray_cast_only);
     void draw_line(const int16_t index, const point &p0, const point &p1);

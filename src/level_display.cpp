@@ -278,7 +278,7 @@ void Level::display_map (void)
     //
     // Get the bounds. Needs to be a bit off-map for reflections.
     //
-    int border = 5;
+    int border = MAP_BORDER_ROCK;
     minx = std::max(0, (int) map_at.x - border);
     maxx = std::min(MAP_WIDTH, (int)map_at.x + TILES_ACROSS + border);
 

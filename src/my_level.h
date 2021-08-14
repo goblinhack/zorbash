@@ -733,8 +733,8 @@ public:
     void set_is_treasure_class_b(const int x, const int y);
     void set_is_treasure_class_c(const int x, const int y);
     void set_is_wall(const int x, const int y);
-    void set_visited(const int x, const int y);
-    void set_visited_no_check(const int x, const int y);
+    void set_is_lit_ever(const int x, const int y);
+    void set_is_lit_ever_no_check(const int x, const int y);
     void set_wobble(float);
     void things_gc(bool force);
     void things_gc_force(void);
@@ -800,8 +800,8 @@ public:
     void unset_is_treasure_class_b(const int x, const int y);
     void unset_is_treasure_class_c(const int x, const int y);
     void unset_is_wall(const int x, const int y);
-    void unset_visited(const int x, const int y);
-    void unset_visited_no_check(const int x, const int y);
+    void unset_is_lit_ever(const int x, const int y);
+    void unset_is_lit_ever_no_check(const int x, const int y);
     void update_all_ticks(void);
     void update_deep_water(void);
     void update_hazard_tile_map(void);

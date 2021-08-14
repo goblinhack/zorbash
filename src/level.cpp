@@ -1670,7 +1670,7 @@ uint8_t Level::is_lit_ever_no_check (const int x, const int y)
     return (get_no_check(_is_lit_ever, x, y));
 }
 
-void Level::set_visited (const int x, const int y)
+void Level::set_is_lit_ever (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return;
@@ -1679,9 +1679,10 @@ void Level::set_visited (const int x, const int y)
     if (!get(_is_lit_ever, x, y)) {
         set(_fade_in_map, x, y, (uint8_t)1);
     }
+    set(_is_lit_ever, x, y, true);
 }
 
-void Level::set_visited_no_check (const int x, const int y)
+void Level::set_is_lit_ever_no_check (const int x, const int y)
 {
     if (!get_no_check(_is_lit_ever, x, y)) {
         set_no_check(_fade_in_map, x, y, (uint8_t)1);
@@ -1689,7 +1690,7 @@ void Level::set_visited_no_check (const int x, const int y)
     set_no_check(_is_lit_ever, x, y, true);
 }
 
-void Level::unset_visited (const int x, const int y)
+void Level::unset_is_lit_ever (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return;
@@ -1697,7 +1698,7 @@ void Level::unset_visited (const int x, const int y)
     set(_is_lit_ever, x, y, false);
 }
 
-void Level::unset_visited_no_check (const int x, const int y)
+void Level::unset_is_lit_ever_no_check (const int x, const int y)
 {
     set_no_check(_is_lit_ever, x, y, false);
 }

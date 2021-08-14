@@ -826,11 +826,11 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
         }
     }
 
-#if 0
-    printf("\n");
+#if 1
+    printf("\nrobot\n");
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            if ((x == mid_at.x) && (y == mid_at.y)) {
+            if ((x == (int)mid_at.x) && (y == (int)mid_at.y)) {
                 if (level->is_lit_ever(x, y)) {
                     printf("*");
                 } else {
