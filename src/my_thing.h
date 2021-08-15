@@ -328,6 +328,7 @@ public:
     bool will_prefer_terrain(const Thingp it);
     bool worth_eating(const Thingp it);
     int worth_collecting(const Thingp it);
+    int item_value(const Thingp it);
     const Dice& get_damage_bite_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;

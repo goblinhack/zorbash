@@ -26,7 +26,7 @@ int Thing::worth_collecting (Thingp it)
 
         if (it->is_bag_item()) {
             if (bag_add_test(it)) {
-                return true;
+                return item_value(it);
             }
         }
     }

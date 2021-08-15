@@ -160,6 +160,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/string.o                      \
     $(OBJDIR)/tex.o                         \
     $(OBJDIR)/thing_acid.o                  \
+    $(OBJDIR)/thing_value.o                 \
     $(OBJDIR)/thing_ai_goals.o              \
     $(OBJDIR)/thing_hazard.o                \
     $(OBJDIR)/thing_ai.o                    \

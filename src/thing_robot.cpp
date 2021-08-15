@@ -530,6 +530,11 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     if (score) {
                         GOAL_ADD(score, "collect-treasure");
                         got_one_this_tile = true;
+                        if (is_player()) {
+                            CON("Robot decided %s is worth collecting", it->to_string().c_str());
+                        } else {
+                            con("Decided %s is worth collecting", it->to_string().c_str());
+                        }
                     } else {
                         if (is_player()) {
                             CON("Robot decided %s is not worth collecting", it->to_string().c_str());
@@ -986,7 +991,7 @@ void Thing::robot_tick (void)
                         if (items.size() == 1) {
                             for (auto item : items) {
                                 if (try_to_carry(item)) {
-                                    game->tick_begin("Robot collected an item");
+                                    game->tick_begin("Robot collected " + item->to_string());
                                     return;
                                 }
                             }
