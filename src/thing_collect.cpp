@@ -13,7 +13,7 @@
 #include "my_sprintf.h"
 
 //
-// Return a score, higher is better for value to you
+// Return a score, higher is better for perceived value to you
 //
 int Thing::worth_collecting (Thingp it)
 {_
@@ -26,7 +26,7 @@ int Thing::worth_collecting (Thingp it)
 
         if (it->is_bag_item()) {
             if (bag_add_test(it)) {
-                return gold_value;
+                return true;
             }
         }
     }
