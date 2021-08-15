@@ -131,7 +131,7 @@ void Level::display_internal_particles (void)
                             t->visible();
                         }
                         t->log("End of jump particle");
-                        t->jump_end();
+                        t->is_scheduled_for_jump_end = true;
                         t->has_internal_particle = false;
                     }
                 }
@@ -339,7 +339,7 @@ void Level::display_external_particles (void)
                             }
                         }
                         t->log("Particle end");
-                        t->jump_end();
+                        t->is_scheduled_for_jump_end = true;
                         t->has_external_particle = false;
                     }
                 }

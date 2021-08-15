@@ -198,6 +198,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= (my.t->is_resurrecting              ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->is_resurrection_blocked      ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->is_scheduled_for_death       ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->is_scheduled_for_jump_end    ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->is_sleeping                  ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->is_starving                  ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->is_the_grid                  ? 1LLU : 0LLU) << shift; shift++;

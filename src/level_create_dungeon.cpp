@@ -262,6 +262,7 @@ have_dungeon_start:
                         auto w3 = thing_new("axe_basic", fpoint(x, y));
                         t->carry(w3);
 
+#if 0
                         auto w2 = thing_new("sword_basic", fpoint(x, y));
                         t->carry(w2);
 
@@ -278,7 +279,6 @@ have_dungeon_start:
                             t->carry(b);
                         }
 
-#if 0
                         {
                             auto b = thing_new("chest1", fpoint(x, y));
                             t->carry(b);
@@ -313,7 +313,6 @@ have_dungeon_start:
                             auto W = thing_new("wand_energy", fpoint(x, y));
                             t->carry(W);
                         }
-#endif
                         {
                             auto W = thing_new("wand_descent", fpoint(x, y));
                             t->carry(W);
@@ -333,6 +332,7 @@ have_dungeon_start:
                             auto W = thing_new("key", fpoint(x, y));
                             t->carry(W);
                         }
+#endif
 
                         {
                             auto W = thing_new("key", fpoint(x, y));
@@ -352,9 +352,7 @@ have_dungeon_start:
 #if 0
                         auto s = thing_new("skill_devoted_thrust", fpoint(x, y));
                         t->skill_add(s);
-#endif
 
-#if 0
                         {
                             auto i = thing_new("thunderstone", fpoint(x, y));
                             t->carry(i);

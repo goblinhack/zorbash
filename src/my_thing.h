@@ -89,7 +89,6 @@ public:
     uint64_t is_bouncing:1                     {};
     uint64_t is_changing_level:1               {}; // is in the process of changing level
     uint64_t is_dead:1                         {};
-    uint64_t is_scheduled_for_death:1          {}; // will die in next game loop
     uint64_t is_dying:1                        {}; // is currently in the throes of death
     uint64_t is_facing_left:1                  {};
     uint64_t is_fadeup:1                       {};
@@ -105,6 +104,8 @@ public:
     uint64_t is_resurrected:1                  {}; // has finished resurrecting
     uint64_t is_resurrecting:1                 {}; // is currently resurrecing
     uint64_t is_resurrection_blocked:1         {}; // blocked from resurrection
+    uint64_t is_scheduled_for_death:1          {}; // will die in next game loop
+    uint64_t is_scheduled_for_jump_end:1       {};
     uint64_t is_sleeping:1                     {};
     uint64_t is_starving:1                     {};
     uint64_t is_the_grid:1                     {}; // is the backbone of the level
@@ -1286,7 +1287,7 @@ public:
     bool robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy);
     int robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
-    void robot_ai_choose_search_goals(std::multiset<Goal> &goals, bool open_doors = false);
+    void robot_ai_choose_search_goals(std::multiset<Goal> &goals);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();

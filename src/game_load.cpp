@@ -250,6 +250,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */            my.t->is_resurrecting               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->is_resurrection_blocked       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->is_scheduled_for_death        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->is_scheduled_for_jump_end     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->is_sleeping                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->is_starving                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->is_the_grid                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

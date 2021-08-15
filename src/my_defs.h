@@ -16,7 +16,7 @@
 // RUN with --debug2 for out of bounds checks
 //
 #define ENABLE_DEBUG_TRACE               // (SLOW) Function tracing
-#undef  ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS // (SLOW)
+#define ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS // (SLOW)
 
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
 #undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs

@@ -38,9 +38,11 @@ bool Thing::cursor_path_pop_next_and_move (void)
 	// Just in case the cursor next hop ends up too far away
 	// for a single move, then reset it.
 	//
-        if ((fabs(to.x - mid_at.x) > 1) || (fabs(to.x - mid_at.x) > 1)) {
-	    clear_move_path("Cursor next-hop is too far away");
-	    return false;
+        if (!game->robot_mode) {
+            if ((fabs(to.x - mid_at.x) > 1) || (fabs(to.x - mid_at.x) > 1)) {
+                clear_move_path("Cursor next-hop is too far away");
+                return false;
+            }
         }
 
         monstp->move_path.erase(monstp->move_path.begin());

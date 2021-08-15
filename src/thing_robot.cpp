@@ -64,15 +64,9 @@ _
     //
     if (is_player()) {
         robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
+
         robot_ai_choose_search_goals(search_goals);
         goalmaps.push_back(GoalMap{search_goals, dmap_can_see});
-
-        //
-        // Add open door goes in case all of the wander goals are also not
-        // reachable.
-        //
-        robot_ai_choose_search_goals(open_door_goals, true);
-        goalmaps.push_back(GoalMap{open_door_goals, dmap_can_see});
     }
 
     //
@@ -94,8 +88,8 @@ _
         bool least_preferred_set = false;
         bool most_preferred_set = false;
 
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
+        for (int y = miny; y < maxy; y++) {
+            for (int x = minx; x < maxx; x++) {
                 point p(x, y);
                 auto c = getptr(g.dmap->val, x, y);
                 if ((*c < DMAP_IS_PASSABLE) && (*c > DMAP_IS_GOAL)) {
@@ -293,14 +287,14 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
     auto dmap_can_see = get_dmap_can_see();
     auto seen_map = get_seen_map();
 
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
+    for (int y = miny; y < maxy; y++) {
+        for (int x = minx; x < maxx; x++) {
             point p(x, y);
-            auto X = x - minx;
-            auto Y = y - miny;
+            int X = x - minx;
+            int Y = y - miny;
 
             if (is_player()) {
-                if (!level->is_lit_currently(p)) {
+                if (!level->is_lit_ever(p)) {
                     set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
                     continue;
                 }
@@ -351,11 +345,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
                         //
                         // Must be able to see the begin/end.
                         //
-                        if (!level->is_lit_currently(jump_begin)) {
-                            continue;
-                        }
-
-                        if (!level->is_lit_currently(jump_end)) {
+                        if (!level->is_lit_ever(jump_begin)) {
                             continue;
                         }
 
@@ -408,10 +398,10 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
 
     int something_changed = 0;
 
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            auto X = x - minx;
-            auto Y = y - miny;
+    for (int y = miny; y < maxy; y++) {
+        for (int x = minx; x < maxx; x++) {
+            int X = x - minx;
+            int Y = y - miny;
             if (get(can_jump, X, Y)) {
                 set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
             }
@@ -469,10 +459,10 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
     auto dmap_can_see = get_dmap_can_see();
     auto age_map = get_age_map();
 
-    for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
+    for (int y = miny; y < maxy; y++) { for (int x = minx; x < maxx; x++) {
         point p(x, y);
-        auto X = x - minx;
-        auto Y = y - miny;
+        int X = x - minx;
+        int Y = y - miny;
 
         if (get(dmap_can_see->val, X, Y) == DMAP_IS_WALL) {
             continue;
@@ -540,6 +530,12 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     if (score) {
                         GOAL_ADD(score, "collect-treasure");
                         got_one_this_tile = true;
+                    } else {
+                        if (is_player()) {
+                            CON("Robot decided %s is not worth collecting", it->to_string().c_str());
+                        } else {
+                            con("Decided %s is not worth collecting", it->to_string().c_str());
+                        }
                     }
                 }
             }
@@ -586,7 +582,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     float max_dist = ai_scent_distance();
 
                     if (is_player()) {
-                        con("Robot needs to attack %s", it->to_string().c_str());
+                        CON("Robot needs to attack %s", it->to_string().c_str());
                     } else {
                         log("Need to avoid %s", it->to_string().c_str());
                     }
@@ -598,7 +594,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
                 if (avoid) {
                     if (is_player()) {
-                        con("Robot needs to avoid %s", it->to_string().c_str());
+                        CON("Robot needs to avoid %s", it->to_string().c_str());
                     } else {
                         log("Need to avoid %s", it->to_string().c_str());
                     }
@@ -616,7 +612,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                 continue;
                             }
 
-                            auto dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                            int dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                             if (dist < ai_avoid_distance()) {
                                 continue;
                             }
@@ -641,7 +637,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         for (auto dx = -d; dx <= d; dx++) {
                             for (auto dy = -d; dy <= d; dy++) {
 
-                                auto dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                                int dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                                 point p(mid_at.x + dx, mid_at.y + dy);
                                 if (ai_obstacle_for_me(p)) {
                                     continue;
@@ -706,7 +702,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 // what is currently visible and find the most interesting point at that edge
 // and then create a path to that edge.
 //
-void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_doors)
+void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
 {_
     point start((int)mid_at.x, (int)mid_at.y);
 
@@ -728,7 +724,6 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
 
     while (!in.empty()) {
         auto p = in.front();
-//con("in %d %d", p.x,p.y);
         in.pop_front();
 
         if (get(walked, p.x, p.y)) {
@@ -753,46 +748,44 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
         // If an unvisited tile is next to a visited one, consider that tile.
         //
         if (!level->is_lit_ever(p.x, p.y)) {
-//con("in %d %d not lit", p.x,p.y);
             continue;
         }
 
         if (level->is_movement_blocking_hard(p.x, p.y)) {
-//con("in %d %d blocking", p.x,p.y);
             continue;
         }
 
         if (!get(pushed, p.x + 1, p.y)) {
             set(pushed, p.x + 1, p.y, true);
             in.push_back(point(p.x + 1, p.y));
-//con("try %d %d blocking", p.x+1,p.y);
         }
 
         if (!get(pushed, p.x - 1, p.y)) {
             set(pushed, p.x - 1, p.y, true);
             in.push_back(point(p.x - 1, p.y));
-//con("try %d %d blocking", p.x-1,p.y);
         }
 
         if (!get(pushed, p.x, p.y + 1)) {
             set(pushed, p.x, p.y + 1, true);
             in.push_back(point(p.x, p.y + 1));
-//con("try %d %d blocking", p.x,p.y+1);
         }
 
         if (!get(pushed, p.x, p.y - 1)) {
             set(pushed, p.x, p.y - 1, true);
             in.push_back(point(p.x, p.y - 1));
-//con("try %d %d blocking", p.x,p.y-1);
         }
 
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
+        int dist = how_far_i_can_jump();
+        for (int dx = -dist; dx <= dist; dx++) {
+            for (int dy = -dist; dy <= dist; dy++) {
                 if (!dx && !dy) {
                     continue;
                 }
 
                 point o(p.x + dx, p.y + dy);
+                if (level->is_oob(o)) {
+                    continue;
+                }
 
                 if (get(walked, o.x, o.y)) {
                     continue;
@@ -826,10 +819,10 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals, bool open_
         }
     }
 
-#if 1
+#if 0
     printf("\nrobot\n");
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_WIDTH; x++) {
+    for (int y = 0; y < MAP_HEIGHT; y++) {
+        for (int x = 0; x < MAP_WIDTH; x++) {
             if ((x == (int)mid_at.x) && (y == (int)mid_at.y)) {
                 if (level->is_lit_ever(x, y)) {
                     printf("*");
@@ -872,16 +865,6 @@ next:
     // Choose goals (higher scores, lower costs are preferred)
     //
     for (auto p : can_reach_cands) {
-        if (!open_doors) {
-            if (level->is_door(p.x, p.y)) {
-                continue;
-            }
-        } else {
-            if (!level->is_door(p.x, p.y)) {
-                continue;
-            }
-        }
-
         //
         // Prefer easier terrain
         //
@@ -895,10 +878,10 @@ next:
         total_score -= dist * dist;
 
         //
-        // Prefer to look at doors last
+        // Be curious
         //
         if (level->is_door(p.x, p.y)) {
-            total_score -= 1000;
+            total_score += 10;
         }
 
         goals.insert(Goal(total_score, p));

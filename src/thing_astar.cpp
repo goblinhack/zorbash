@@ -207,7 +207,7 @@ public:
             auto c = open_nodes.begin();
             Node *current = c->second;
 
-            // set(astar_debug, current->at.x, current->at.y, (char)('?'));
+            set(astar_debug, current->at.x, current->at.y, (char)('?'));
             if (current->at == goal) {
                 auto [path, cost] = create_path(dmap, current);
 

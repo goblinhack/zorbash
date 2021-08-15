@@ -37,21 +37,28 @@ void Level::dmap_to_player_update (void)
         return;
     }
 
+#if 0
     //
-    // Limit the size of the dmap for performance
+    // Limit the size of the dmap for performance?
     //
     auto max_dist = 20;
-    int x1 = player->mid_at.x - max_dist;
-    int x2 = player->mid_at.x + max_dist;
-    int y1 = player->mid_at.y - max_dist;
-    int y2 = player->mid_at.y + max_dist;
+    int minx = player->mid_at.x - max_dist;
+    int maxx = player->mid_at.x + max_dist;
+    int miny = player->mid_at.y - max_dist;
+    int maxy = player->mid_at.y + max_dist;
+#endif
+
+    int minx = 0;
+    int maxx = MAP_WIDTH;
+    int miny = 0;
+    int maxy = MAP_HEIGHT;
 
     //
     // Set up obstacles for the search
     //
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            if ((x >= x1) && (x <= x2) && (y >= y1) && (y <= y2)) {
+            if ((x >= minx) && (x <= maxx) && (y >= miny) && (y <= maxy)) {
                 if (is_movement_blocking_hard(point(x, y))) {
                     set(dmap_to_player.val, x, y, DMAP_IS_WALL);
                 } else {

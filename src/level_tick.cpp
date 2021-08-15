@@ -46,6 +46,10 @@ bool Level::tick (void)
     }
 
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
+        if (t->is_scheduled_for_jump_end) {
+            t->is_scheduled_for_jump_end = false;
+            t->jump_end();
+        }
         if (t->is_scheduled_for_death) {
             t->is_scheduled_for_death = false;
             t->dead(t->get_dead_reason());
