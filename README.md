@@ -9,6 +9,8 @@ Liberate the Orb of Zorb and defeat Zorbash to win.
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.
 
+[![goblinhack's GitHub stats](https://github-readme-stats.vercel.app/api?username=goblinhack)](https://github.com/anuraghazra/github-readme-stats)
+
 Graphics
 --------
 - Various items and monsters by Oryx, [found here](https://www.oryxdesignlab.com/)
