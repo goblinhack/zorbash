@@ -130,10 +130,16 @@ bool music_play (const std::string &name)
     music_update_volume();
 
     auto music = all_music.find(name);
+    if (music == all_music.end()) {
+        ERR("Cannot find music %s: %s", name.c_str(), Mix_GetError());
+        SDL_ClearError();
+        return false;
+    }
 
     if (Mix_FadeInMusicPos(music->second->m, -1, 2000, 0) == -1) {
         ERR("Cannot play music %s: %s", name.c_str(), Mix_GetError());
         SDL_ClearError();
+        return false;
     }
 
     return true;
