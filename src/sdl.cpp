@@ -1109,6 +1109,7 @@ uint8_t config_errored (tokens_t *tokens, void *context)
 {_
     g_errored = false;
     CON("USERCFG: Errored mode cleared");
+    wid_hide(wid_console_window);
     return true;
 }
 

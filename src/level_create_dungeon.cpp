@@ -65,7 +65,8 @@ have_dungeon_start:
 
         auto wall_type = tp_random_wall_dungeon();
         if (!wall_type) {
-            DIE("No dungeon walls found");
+            ERR("No dungeon walls found");
+            return false;
         }
 
         dbg2("DUNGEON: Place random walls");

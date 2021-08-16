@@ -133,8 +133,8 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
     wid_update(wid_text_box_container);
 
     if (horiz_scroll) {
-        wid_not_visible(wid_get_parent(wid_horiz_scroll));
-        wid_not_visible(wid_horiz_scroll);
+        wid_hide(wid_get_parent(wid_horiz_scroll));
+        wid_hide(wid_horiz_scroll);
     }
 
     if (vert_scoll) {

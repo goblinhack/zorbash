@@ -138,7 +138,7 @@ void wid_get_abs_coords_unclipped(Widp w, int32_t *tlx, int32_t *tly, int32_t *b
 void wid_get_children_size(Widp, int32_t *width, int32_t *height);
 void wid_get_pct(Widp w, double *x, double *y);
 void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int32_t *tl_x, int32_t *tl_y, int32_t *br_x, int32_t *br_y);
-void wid_not_visible(Widp);
+void wid_hide(Widp);
 void wid_joy_button(int32_t x, int32_t y);
 void wid_key_down(const struct SDL_Keysym *, int32_t x, int32_t y);
 void wid_key_up(const struct SDL_Keysym *, int32_t x, int32_t y);

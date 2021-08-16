@@ -46,7 +46,7 @@ void wid_topcon_fini (void)
 uint8_t wid_topcon_init (void)
 {_
     wid_topcon_wid_create();
-    wid_not_visible(wid_topcon_window);
+    wid_hide(wid_topcon_window);
 
     last_msg = L"";
     last_msg_count = 0;
@@ -100,7 +100,7 @@ _
     //
     // Stop rapid pickup/drop events if particles are still in progress
     //
-    if (player->particle_anim_exists()) {
+    if (player && player->particle_anim_exists()) {
         DBG3("Ignore input; anim exists");
         return false;
     }
@@ -154,7 +154,9 @@ _
                 }
             } else {
                 TOPCON("Nothing to drop.");
-                game->wid_thing_info_create(game->level->player, false);
+                if (player) {
+                    game->wid_thing_info_create(player, false);
+                }
                 game->request_remake_inventory = true;
                 game->change_state(Game::STATE_MOVING_ITEMS);
                 return true;
@@ -560,7 +562,9 @@ _
     }
     if (key->scancode == (SDL_Scancode)game->config.key_inventory) {
         DBG3("Pressed inventory key");
-        game->wid_thing_info_create(game->level->player, false);
+        if (player) {
+            game->wid_thing_info_create(player, false);
+        }
         game->request_remake_inventory = true;
         DBG3("Pressed inventory key; change state");
         game->change_state(Game::STATE_MOVING_ITEMS);

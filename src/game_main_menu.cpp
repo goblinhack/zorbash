@@ -30,7 +30,7 @@ void game_main_menu_destroy (void)
 
 void game_main_menu_hide (void)
 {_
-    wid_not_visible(game_main_menu_window->wid_text_area->wid_text_area);
+    wid_hide(game_main_menu_window->wid_text_area->wid_text_area);
 }
 
 static uint8_t game_menu_quick_start (Widp w, int32_t x, int32_t y, uint32_t button)

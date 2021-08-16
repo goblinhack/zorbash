@@ -25,8 +25,8 @@ static void wid_dead_destroy (void)
     wid_dead_window = nullptr;
     game->fini();
     game->main_menu_select();
-    wid_not_visible(wid_topcon_window);
-    wid_not_visible(wid_botcon_window);
+    wid_hide(wid_topcon_window);
+    wid_hide(wid_botcon_window);
 }
 
 static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)

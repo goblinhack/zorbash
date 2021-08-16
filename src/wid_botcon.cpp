@@ -40,7 +40,7 @@ void wid_botcon_fini (void)
 uint8_t wid_botcon_init (void)
 {_
     wid_botcon_wid_create();
-    wid_not_visible(wid_botcon_window);
+    wid_hide(wid_botcon_window);
 
     last_msg = L"";
     last_msg_count = 0;
@@ -233,7 +233,7 @@ static void wid_botcon_wid_create (void)
     wid_botcon_vert_scroll =
         wid_new_vert_scroll_bar(wid_botcon_window, "", wid_botcon_container);
 
-    wid_not_visible(wid_get_parent(wid_botcon_vert_scroll));
+    wid_hide(wid_get_parent(wid_botcon_vert_scroll));
 
     wid_update(wid_botcon_window);
 }

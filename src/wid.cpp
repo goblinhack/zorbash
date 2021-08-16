@@ -2700,7 +2700,7 @@ void wid_toggle_hidden (Widp w)
     if (w->hidden) {
         wid_visible(w);
     } else {
-        wid_not_visible(w);
+        wid_hide(w);
     }
 }
 
@@ -3084,7 +3084,7 @@ void wid_this_visible (Widp w)
     w->hidden = false;
 }
 
-void wid_not_visible (Widp w)
+void wid_hide (Widp w)
 {_
     if (!w) {
         return;
@@ -3116,7 +3116,7 @@ void wid_not_visible (Widp w)
     std::vector<Widp> worklist;
     for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
-        wid_not_visible(child);
+        wid_hide(child);
     }
 }
 
@@ -3876,7 +3876,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
 
         case SDLK_ESCAPE:
             if (w->visible) {
-                wid_not_visible(w);
+                wid_hide(w);
             }
 
             //

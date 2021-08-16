@@ -20,8 +20,8 @@ static void wid_credits_destroy (void)
     wid_credits_window = nullptr;
     game->fini();
     game->main_menu_select();
-    wid_not_visible(wid_topcon_window);
-    wid_not_visible(wid_botcon_window);
+    wid_hide(wid_topcon_window);
+    wid_hide(wid_botcon_window);
 }
 
 static uint8_t wid_credits_key_up (Widp w, const struct SDL_Keysym *key)
