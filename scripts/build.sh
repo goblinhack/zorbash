@@ -112,7 +112,7 @@ gcc_help()
 SDL2_SCORE=0
 
 if [ "$SDL2_CONFIG" != "" ]; then
-    SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
+    SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
 
     if [[ "$SDL2_INC_PATH" != "" ]]; then
         find $SDL2_INC_PATH | grep -q SDL_mixer.h
@@ -309,7 +309,7 @@ Python2_SCORE=0
 Python3_SCORE=0
 
 if [ "$Python2_CONFIG" != "" ]; then
-    Python2_INC_PATH=`$Python2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
+    Python2_INC_PATH=`$Python2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
 
     if [[ "$Python2_INC_PATH" != "" ]]; then
         find $Python2_INC_PATH | grep -q Python.h
@@ -320,7 +320,7 @@ if [ "$Python2_CONFIG" != "" ]; then
 fi
 
 if [ "$Python3_CONFIG" != "" ]; then
-    Python3_INC_PATH=`$Python3_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
+    Python3_INC_PATH=`$Python3_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
 
     if [[ "$Python3_INC_PATH" != "" ]]; then
         find $Python3_INC_PATH | grep -q Python.h
