@@ -430,6 +430,7 @@ placed_player:
         dbg2("DUNGEON: Final update heatmap");
         update_heatmap();
 
+        delete dungeon;
         break;
     }
 

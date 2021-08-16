@@ -126,7 +126,6 @@ static void croak_ (const char *fmt, va_list args)
     die();
 }
 
-void CROAK(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CROAK (const char *fmt, ...)
 {
     va_list args;

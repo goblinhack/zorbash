@@ -387,7 +387,7 @@ static void croak_ (const char *fmt, va_list args)
         fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
         exit(1);
     }
-    g_die_occurred = 1;
+    g_die_occurred = true;
 
     char buf[MAXLONGSTR];
     int len;
@@ -407,16 +407,10 @@ static void croak_ (const char *fmt, va_list args)
     ERR("%s", buf + tslen);
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
-    if (g_die_occurred) {
-        return;
-    }
-
     //
     // Seems to hang on crashes. Is it useful?
     //
     py_trace();
-
-    g_die_occurred = true;
 
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
     die();
@@ -429,8 +423,6 @@ void CROAK (const char *fmt, ...)
     va_start(args, fmt);
     croak_(fmt, args);
     va_end(args);
-
-    // quit();
 }
 
 static void croak_clean_ (const char *fmt, va_list args)
@@ -439,17 +431,10 @@ static void croak_clean_ (const char *fmt, va_list args)
         fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
         exit(1);
     }
-    g_die_occurred = 1;
-
-    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
-
-    if (g_die_occurred) {
-        return;
-    }
-
     g_die_occurred = true;
 
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
+
     die();
 }
 
@@ -460,8 +445,6 @@ void CROAK_CLEAN (const char *fmt, ...)
     va_start(args, fmt);
     croak_clean_(fmt, args);
     va_end(args);
-
-    // quit();
 }
 
 void DYING (const char *fmt, ...)

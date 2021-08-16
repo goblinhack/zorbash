@@ -22,6 +22,8 @@ bool sound_init (void)
 {_
     Mix_AllocateChannels(16);
 
+    sound_init_done = true;
+
     return (true);
 }
 
@@ -33,8 +35,11 @@ void sound_fini (void)
         auto iter = all_sound.begin();
 
         while (iter != all_sound.end()) {
+            delete iter->second;
             iter = all_sound.erase(iter);
         }
+
+        Mix_Quit();
     }
 }
 
@@ -62,6 +67,7 @@ bool sound_load (float volume, const std::string &file,
     s->data = file_load(file.c_str(), &s->len);
     if (!s->data) {
         ERR("Cannot load sound %s", file.c_str());
+        delete s;
         return false;
     }
 
@@ -72,6 +78,7 @@ bool sound_load (float volume, const std::string &file,
         ERR("SDL_RWFromMem fail %s: %s %s",
             file.c_str(), Mix_GetError(), SDL_GetError());
         SDL_ClearError();
+        delete s;
         return false;
     }
 
@@ -80,12 +87,14 @@ bool sound_load (float volume, const std::string &file,
         ERR("Mix_LoadWAV_RW fail %s: %s %s",
             file.c_str(), Mix_GetError(), SDL_GetError());
         SDL_ClearError();
+        delete s;
         return false;
     }
 
     auto result = all_sound.insert(std::make_pair(alias, s));
     if (result.second == false) {
         ERR("Cannot insert sound name [%s] failed", alias.c_str());
+        delete s;
         return false;
     }
 

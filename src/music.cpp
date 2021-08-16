@@ -47,6 +47,8 @@ bool music_init (void)
     if ((initted & flags) != flags) {
         ERR("Mix_Init: Failed to init required OGG support");
     }
+
+    music_init_done = true;
     return (true);
 }
 
@@ -58,8 +60,11 @@ void music_fini (void)
         auto iter = all_music.begin();
 
         while (iter != all_music.end()) {
+            delete iter->second;
             iter = all_music.erase(iter);
         }
+
+        Mix_Quit();
     }
 }
 

@@ -69,6 +69,7 @@ public:
     Dungeon(int map_width, int map_height,
             int grid_width, int grid_height, int seed);
     Dungeon(int level);
+    ~Dungeon();
 
     Roomp *cell_rooms_addr(const int x, const int y);
     Roomp *cell_rooms_addr_no_check(const int x, const int y);

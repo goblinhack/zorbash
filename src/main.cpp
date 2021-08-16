@@ -47,11 +47,8 @@ void quit (void)
 {_
     LOG("FINI: Quitting, start cleanup");
 
-    if (g_die_occurred) {
-        return;
-    }
-
     if (g_quitting) {
+        LOG("FINI: Quitting, nested");
         return;
     }
 
@@ -73,9 +70,6 @@ void quit (void)
 
     LOG("FINI: level_fini");
     level_fini();
-
-    LOG("FINI: python_fini");
-    python_fini();
 
     LOG("FINI: sdl_exit");
     sdl_exit();
@@ -168,7 +162,14 @@ void quit (void)
         ptrcheck_leak_print();
     }
 #endif
-    LOG("FINI: Clenup done");
+
+    LOG("FINI: Cleanup done");
+
+    LOG("FINI: python_fini");
+    //
+    // This might exit
+    //
+    python_fini();
 }
 
 void restart (void)
@@ -185,7 +186,7 @@ void restart (void)
 
 void die (void)
 {_
-    // quit();
+    quit();
 
     LOG("Bye, error exit");
     fprintf(MY_STDERR, "exit(1) error\n");

@@ -328,6 +328,11 @@ Dungeon::Dungeon (int map_width, int map_height,
     make_dungeon();
 }
 
+Dungeon::~Dungeon ()
+{
+    delete nodes;
+}
+
 //
 // Make a dungeon from a single level
 //
