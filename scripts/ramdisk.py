@@ -74,6 +74,7 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
         rel_path_filename = os.path.join(folder, orig_filename)
 
         with open("src/ramdisk_data_{}.S".format(ram_file), "a") as myfile:
+            myfile.write(".align 16\n")
             myfile.write(".globl data_{}_start_\n".format(c_filename))
             myfile.write("data_{}_start_:\n".format(c_filename))
             myfile.write(".incbin \"../{}\"\n".format(rel_path_filename))
