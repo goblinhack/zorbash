@@ -38,10 +38,14 @@ bool music_init_done;
 
 bool music_init (void)
 {_
-    int flags = MIX_INIT_OGG|MIX_INIT_MP3;
+    //
+    // MP3 is a pain to use, use OGG instead
+    // int flags = MIX_INIT_OGG|MIX_INIT_MP3;
+    //
+    int flags = MIX_INIT_OGG;
     int initted = Mix_Init(flags);
     if ((initted & flags) != flags) {
-        ERR("Mix_Init: Failed to init required ogg and mp3 support");
+        ERR("Mix_Init: Failed to init required OGG support");
     }
     return (true);
 }
