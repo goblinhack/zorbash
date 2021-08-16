@@ -140,7 +140,12 @@ void segv_handler (int sig)
     traceback_dump();
     ERR("Crashed");
 
+#if defined __linux__
+    //
+    // Seems to cause hang issues on mac M1
+    //
     debug_crash_handler(sig);
+#endif
 }
 
 void ctrlc_handler (int sig)
