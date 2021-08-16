@@ -285,7 +285,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                     break;
                 }
             }
-        } else if (level->cursor->mid_at == player->mid_at) {
+        } else if (level->cursor && (level->cursor->mid_at == player->mid_at)) {
             auto player_move_delta = player->dir_to_direction();
             point p = make_point(player->mid_at.x + player_move_delta.x,
                                  player->mid_at.y + player_move_delta.y);

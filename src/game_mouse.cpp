@@ -86,27 +86,29 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     // Have we moved close enough to attack? Do this prior to checking for
     // double click so we can attack monsts sitting in lava
     //
-    if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
-        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
-        int x = level->cursor->mid_at.x;
-        int y = level->cursor->mid_at.y;
-        FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
-            if (t == level->player) {
-                continue;
-            }
+    if (level->cursor) {
+        if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
+            (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+            int x = level->cursor->mid_at.x;
+            int y = level->cursor->mid_at.y;
+            FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
+                if (t == level->player) {
+                    continue;
+                }
 
-            if (t->is_door() && t->is_open) {
-                t->close_door(t);
-                return true;
-            }
+                if (t->is_door() && t->is_open) {
+                    t->close_door(t);
+                    return true;
+                }
 
-            if (t->is_door() || t->is_alive_monst() || t->is_minion_generator()) {
-                player->log("Close enough to attack");
-                player->attack(level->cursor->mid_at);
-                return true;
+                if (t->is_door() || t->is_alive_monst() || t->is_minion_generator()) {
+                    player->log("Close enough to attack");
+                    player->attack(level->cursor->mid_at);
+                    return true;
+                }
             }
+            FOR_ALL_THINGS_END()
         }
-        FOR_ALL_THINGS_END()
     }
 
     //
@@ -128,18 +130,20 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     // Have we moved close enough to collect? Do this after the double
     // click check so we do not try to collect things in lava.
     //
-    if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
-        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
-        //
-        // If more than one item, best to let the player move their and
-        // open the collect popup.
-        //
-        auto items = player->anything_to_carry_at(player->mid_at);
-        if (items.size() == 1) {
-            for (auto item : items) {
-                player->log("Close enough to collect");
-                if (player->try_to_carry(item)) {
-                    return true;
+    if (level->cursor) {
+        if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
+            (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+            //
+            // If more than one item, best to let the player move their and
+            // open the collect popup.
+            //
+            auto items = player->anything_to_carry_at(player->mid_at);
+            if (items.size() == 1) {
+                for (auto item : items) {
+                    player->log("Close enough to collect");
+                    if (player->try_to_carry(item)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -175,9 +179,9 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
         return false;
     }
 
-    if (level->timestamp_dungeon_created &&
-      time_have_x_tenths_passed_since(10, level->timestamp_dungeon_created)) {
-        if (level->cursor) {_
+    if (level->cursor) {_
+        if (level->timestamp_dungeon_created &&
+            time_have_x_tenths_passed_since(10, level->timestamp_dungeon_created)) {
             if (level->player && !level->player->is_dead) {
                 level->cursor->visible();
             }
