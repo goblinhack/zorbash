@@ -114,7 +114,7 @@ bool Thing::ascend_sewer (void)
     location_check();
     update_light();
 
-    if (is_player()) {
+    if (is_player() && level->cursor) {
         level->cursor->move_to_immediately(mid_at);
     }
 

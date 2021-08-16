@@ -339,7 +339,7 @@ static void hash_free (hash_t *hash_table, void *ptr)
         *slot = elem->next;
     }
 
-    local_free(elem->pc);
+    delete elem->pc;
     local_free(elem);
 
     ptr_check_some_pointers_changed = true;

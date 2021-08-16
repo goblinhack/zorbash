@@ -136,7 +136,7 @@ bool Thing::descend_dungeon (void)
                 location_check();
                 update_light();
 
-                if (is_player()) {
+                if (is_player() && level->cursor) {
                     level->cursor->move_to_immediately(mid_at);
                 }
 
