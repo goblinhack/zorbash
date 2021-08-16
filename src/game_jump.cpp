@@ -244,7 +244,7 @@ void Game::init_jump_paths()
         // Everything is offset from the center tile which will be
         // the onbstacle.
         //
-        auto offset = (int) std::floor(JUMP_WIDTH / 2);
+        auto offset = (int) floor(JUMP_WIDTH / 2);
 
         //
         // Find each of the symbols in the path and build the jump path.
