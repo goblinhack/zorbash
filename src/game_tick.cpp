@@ -61,16 +61,22 @@ void Game::tick_begin_now (void)
     if (level) {_
         auto player = level->player;
         if (player) {
-            CON("Game tick %d begin (%s): %s",
-                game->tick_current, why.c_str(),
+            CON("Game (%s) tick %d begin (%s): %s",
+                game->seed_name.c_str(), 
+                game->tick_current,
+                why.c_str(),
                 player->to_short_string().c_str());
         } else {
-            CON("Game tick %d begin (%s): %s",
-                game->tick_current, why.c_str(),
+            CON("Game (%s) tick %d begin (%s): %s",
+                game->seed_name.c_str(), 
+                game->tick_current,
+                why.c_str(),
                 level->to_string().c_str());
         }
     } else {
-        CON("Game tick %d begin (%s)", game->tick_current, why.c_str());
+        CON("Game (%s) tick %d begin (%s)",
+            game->seed_name.c_str(), 
+            game->tick_current, why.c_str());
     }
 
     game->tick_begin_ms = time_get_time_ms_cached();
