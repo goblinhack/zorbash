@@ -3865,7 +3865,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
     if (key->scancode == (SDL_Scancode)game->config.key_screenshot) {
         sdl_screenshot();
         TOPCON("Screenshot taken.");
-        CON("USERCFG: screenshot taken");
+        CON("USERCFG: Screenshot taken");
         return true;
     }
 

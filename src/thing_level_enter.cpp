@@ -91,5 +91,8 @@ void Thing::level_enter (void)
 
     if (is_player()) {
         dbg("Level entered");
+
+        level->player = this;
+        game->set_meta_data(level);
     }
 }

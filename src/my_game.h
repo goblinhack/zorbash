@@ -333,6 +333,7 @@ public:
     void dump(std::string prefix);
     void change_state(int state);
     int get_move_speed(void);
+    void set_meta_data(Levelp);
 };
 
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);

@@ -805,10 +805,8 @@ void Game::save_select (void)
     }
 
     auto m = TERM_WIDTH / 2;
-    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2,
-                          UI_TOPCON_VIS_HEIGHT + 10);
-    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2,
-                          tl.y + 29);
+    point tl = make_point(m - 50, UI_TOPCON_VIS_HEIGHT + 2);
+    point br = make_point(m + 50, tl.y + 52);
     auto width = br.x - tl.x;
 
     wid_save = new WidPopup("Game save", tl, br,

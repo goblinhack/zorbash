@@ -226,7 +226,7 @@ _
         wid_actionbar_robot_mode_off();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
-        CON("USERCFG: loading game");
+        CON("USERCFG: Loading game");
         game->load_select();
         return true;
     }
@@ -236,7 +236,7 @@ _
         wid_actionbar_robot_mode_off();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
-        CON("USERCFG: saving the game");
+        CON("USERCFG: Saving the game");
         game->save_select();
         return true;
     }

@@ -110,4 +110,11 @@ void Thing::level_change (Levelp l)
     //
     l->cursor_recreate();
     l->cursor_path_clear();
+
+    //
+    // For auto and normal save
+    //
+    if (is_player()) {
+        game->set_meta_data(l);
+    }
 }

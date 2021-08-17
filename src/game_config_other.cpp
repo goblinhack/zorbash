@@ -21,7 +21,7 @@ static void game_config_other_destroy (void)
 
 static uint8_t game_config_other_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: reload config");
+    CON("USERCFG: Reload config");
     game->load_config();
     game_config_other_destroy();
     game->config_top_select();
@@ -30,7 +30,7 @@ static uint8_t game_config_other_cancel (Widp w, int32_t x, int32_t y, uint32_t 
 
 static uint8_t game_config_other_save (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: save config");
+    CON("USERCFG: Save config");
     game->save_config();
     game_config_other_destroy();
     game->config_top_select();
@@ -46,9 +46,9 @@ static uint8_t game_config_other_back (Widp w, int32_t x, int32_t y, uint32_t bu
 
 static uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: toggle debug_mode");
+    CON("USERCFG: Toggle debug_mode");
     game->config.debug_mode = !game->config.debug_mode;
-    CON("USERCFG: save config");
+    CON("USERCFG: Save config");
     game->save_config();
     g_need_restart = true;
     return true;
@@ -56,7 +56,7 @@ static uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint
 
 static uint8_t game_config_other_sdl_delay_incr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: incr sdl_delay");
+    CON("USERCFG: Increment sdl_delay");
     game->config.sdl_delay++;
     game->config_other_select();
     return true;
@@ -64,7 +64,7 @@ static uint8_t game_config_other_sdl_delay_incr (Widp w, int32_t x, int32_t y, u
 
 static uint8_t game_config_other_sdl_delay_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: incr sdl_delay");
+    CON("USERCFG: Decrement sdl_delay");
     game->config.sdl_delay--;
     game->config_other_select();
     return true;

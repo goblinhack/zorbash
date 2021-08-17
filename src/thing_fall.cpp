@@ -274,7 +274,6 @@ _
             move_to_immediately(fpoint(x, y));
 
             if (is_player()) {
-                next_level->player = this;
                 next_level->scroll_map_to_player();
                 next_level->update_new_level();
                 //
