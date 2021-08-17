@@ -21,7 +21,7 @@ static void game_config_gfx_destroy (void)
 
 static uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Reload config");
+    CON("USR: Reload config");
     game->load_config();
     sdl_config_update_all();
     game_config_gfx_destroy();
@@ -31,7 +31,7 @@ static uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t bu
 
 static uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Save config");
+    CON("USR: Save config");
     game->save_config();
     game_config_gfx_destroy();
     game->config_top_select();
@@ -50,7 +50,7 @@ static uint8_t game_config_gfx_back (Widp w, int32_t x, int32_t y, uint32_t butt
 
 static uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Toggle vsync");
+    CON("USR: Toggle vsync");
     game->config.gfx_vsync_enable = !game->config.gfx_vsync_enable;
     config_gfx_vsync_update();
     game->config_gfx_select();
@@ -59,7 +59,7 @@ static uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y
 
 static uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Toggle gfx_fullscreen");
+    CON("USR: Toggle gfx_fullscreen");
     game->config.gfx_fullscreen = !game->config.gfx_fullscreen;
     if (game->config.gfx_fullscreen) {
         game->config.gfx_fullscreen_desktop = false;
@@ -71,7 +71,7 @@ static uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, 
 
 static uint8_t game_config_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Toggle gfx_fullscreen_desktop");
+    CON("USR: Toggle gfx_fullscreen_desktop");
     game->config.gfx_fullscreen_desktop = !game->config.gfx_fullscreen_desktop;
     if (game->config.gfx_fullscreen_desktop) {
         game->config.gfx_fullscreen = false;
@@ -83,7 +83,7 @@ static uint8_t game_config_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int
 
 static uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Toggle gfx_allow_highdpi");
+    CON("USR: Toggle gfx_allow_highdpi");
     game->config.gfx_allow_highdpi = !game->config.gfx_allow_highdpi;
     game->config_gfx_select();
     local_g_need_restart = true;
@@ -92,7 +92,7 @@ static uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t 
 
 static uint8_t game_config_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Toggle gfx_borderless");
+    CON("USR: Toggle gfx_borderless");
     game->config.gfx_borderless = !game->config.gfx_borderless;
     game->config_gfx_select();
     local_g_need_restart = true;
@@ -101,7 +101,7 @@ static uint8_t game_config_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, 
 
 static uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Toggle inverted");
+    CON("USR: Toggle inverted");
     game->config.gfx_inverted = !game->config.gfx_inverted;
     game->config_gfx_select();
     return true;
@@ -109,7 +109,7 @@ static uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, ui
 
 static uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Toggle fps_counter");
+    CON("USR: Toggle fps_counter");
     game->config.fps_counter = !game->config.fps_counter;
     game->config_gfx_select();
     return true;
@@ -117,7 +117,7 @@ static uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t 
 
 static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Increment resolution");
+    CON("USR: Increment resolution");
     auto res = std::to_string(game->config.window_pix_width) + "x" +
                std::to_string(game->config.window_pix_height);
     auto n = SDL_GetNumDisplayModes(0);
@@ -150,7 +150,7 @@ static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, ui
 
 static uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("USERCFG: Decrement resolution");
+    CON("USR: Decrement resolution");
     auto res = std::to_string(game->config.window_pix_width) + "x" +
                std::to_string(game->config.window_pix_height);
     auto n = SDL_GetNumDisplayModes(0);

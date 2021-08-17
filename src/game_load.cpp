@@ -1032,7 +1032,7 @@ static uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 
 void Game::load_select (void)
 {_
-    CON("USERCFG: Loading a saved game, destroy old");
+    CON("USR: Loading a saved game, destroy old");
 
     if (wid_load) {
         return;

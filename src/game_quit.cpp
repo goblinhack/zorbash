@@ -26,7 +26,7 @@ void game_quit_destroy (void)
 static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     if (game->started) {
-        LOG("USERCFG: Restart game");
+        LOG("USR: Restart game");
 
         auto level = game->level;
         if (level) {
@@ -68,7 +68,7 @@ static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
         game->main_menu_select();
     } else {
         game_quit_destroy();
-        DIE_CLEAN("USERCFG: Quit");
+        DIE_CLEAN("USR: Quit");
     }
     return true;
 }
