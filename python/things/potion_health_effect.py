@@ -7,6 +7,7 @@ def tp_init(name):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(False)
     mytp.set_is_able_to_fall(False)
+    mytp.set_is_tickable(True)
     mytp.set_is_floating(True)
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)
