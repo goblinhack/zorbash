@@ -335,7 +335,11 @@ void Game::wid_collect_create (const std::list<Thingp> items /* intentional copy
     wid_set_on_key_up(wid_collect->wid_popup_container, wid_collect_key_up);
     wid_set_on_key_down(wid_collect->wid_popup_container, wid_collect_key_down);
 
-    wid_collect->log("Choose something to collect");
+    if (items.size() == 1) {
+        wid_collect->log("Want to collect this?");
+    } else {
+        wid_collect->log("Choose something to collect");
+    }
 
     int y_at = 3;
     for (auto slot = 0; slot < (int)collect_items.size(); slot++) {

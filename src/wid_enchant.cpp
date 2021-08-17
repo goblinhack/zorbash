@@ -231,7 +231,11 @@ void Game::wid_enchant_an_item (void)
     wid_set_on_key_up(wid_enchant->wid_popup_container, wid_enchant_key_up);
     wid_set_on_key_down(wid_enchant->wid_popup_container, wid_enchant_key_down);
 
-    wid_enchant->log("Choose something to enchant");
+    if (enchant_items.size() == 1) {
+        wid_collect->log("Want to enchant this?");
+    } else {
+        wid_collect->log("Choose something to enchant");
+    }
 
     int y_at = 3;
     for (auto slot = 0; slot < (int)enchant_items.size(); slot++) {

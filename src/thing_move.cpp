@@ -70,7 +70,7 @@ void Thing::move_finish (void)
 
     if (is_player()) {
         if (check_anything_to_carry()) {
-            BOTCON("Press %%fg=yellow$%s%%fg=reset$ to collect items.",
+            BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
                    SDL_GetScancodeName(
                         (SDL_Scancode)game->config.key_wait_or_collect));
             level->describe(mid_at);
@@ -216,6 +216,10 @@ bool Thing::move (fpoint future_pos,
         dbg("Check if there is anything to carry here");
         auto items = anything_to_carry();
         if (!items.empty()) {
+            //
+            // In mouse mode, it really is better to open a window to allow
+            // choosing
+            //
 #if 0
             if (items.size() > 1) {
                 game->wid_collect_create(items);

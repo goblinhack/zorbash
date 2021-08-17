@@ -287,9 +287,9 @@ void Thing::show_botcon_description (void) const
                     SDL_GetScancodeName(
                         (SDL_Scancode)game->config.key_wait_or_collect));
                 if (k == ".") {
-                    text += " Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+                    text += " Press %%fg=yellow$" + k + "%%fg=reset$ or click to collect.";
                 } else {
-                    text += " %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+                    text += " %%fg=yellow$" + k + "%%fg=reset$ or click to collect.";
                 }
             }
         }
