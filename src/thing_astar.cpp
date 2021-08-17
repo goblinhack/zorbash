@@ -159,7 +159,7 @@ public:
         if (cost < neighbor->cost.cost) {
             remove_from_open(neighbor);
             neighbor->came_from = current;
-            neighbor->cost = cost;;
+            neighbor->cost = cost;
             add_to_open(neighbor);
         }
     }
@@ -229,6 +229,7 @@ public:
 #endif
                 }
                 remove_from_open(current);
+                add_to_closed(current);
                 continue;
             }
 
