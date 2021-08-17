@@ -136,7 +136,8 @@ static bool wid_rightbar_create (void)
 
     {_
         auto w = wid_new_plain(wid_rightbar, "level no");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(0, y_at - 1);
 
         //
@@ -154,7 +155,8 @@ static bool wid_rightbar_create (void)
     y_at += 1;
     {_
         auto w = wid_new_plain(wid_rightbar, "Seed");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
@@ -168,7 +170,8 @@ static bool wid_rightbar_create (void)
     y_at += 2;
     {_
         auto w = wid_new_plain(wid_rightbar, "title name");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(0, y_at - 1);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
 
@@ -181,7 +184,8 @@ static bool wid_rightbar_create (void)
 
     {_
         auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(1, y_at-2);
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at-2);
 
@@ -200,7 +204,8 @@ static bool wid_rightbar_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_rightbar, "Health-bar");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(0, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
         wid_set_pos(w, tl, br);
@@ -215,7 +220,8 @@ static bool wid_rightbar_create (void)
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "health-value");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
         wid_set_pos(w, tl, br);
@@ -234,7 +240,8 @@ static bool wid_rightbar_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_plain(wid_rightbar, "stamina-bar");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(0, y_at);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
         wid_set_pos(w, tl, br);
@@ -249,7 +256,8 @@ static bool wid_rightbar_create (void)
     }
     {_
         auto w = wid_new_plain(wid_rightbar, "stamina-value");
-        wid_set_ignore_events(w, true);
+        wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
         point tl = make_point(3, y_at + 1);
         point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
         wid_set_pos(w, tl, br);

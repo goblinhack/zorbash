@@ -202,6 +202,7 @@ _
         }
 
         if (t->get_immediate_owner() ||
+            t->is_player() ||
             t->is_cursor() ||
             t->is_cursor_path() ||
             t->is_the_grid) {
