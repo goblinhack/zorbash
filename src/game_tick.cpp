@@ -140,6 +140,15 @@ void Game::tick_end (void)
         CON("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));
 #endif
     }
+
+    static int move_count;
+
+    if (game->request_snapshot || (move_count++ > 100)) {
+        game->request_snapshot = false;
+        move_count = 0;
+        TOPCON("Save snapshot.");
+        game->save_snapshot();
+    }
 }
 
 void Game::tick_update (void)

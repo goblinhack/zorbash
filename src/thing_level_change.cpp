@@ -117,4 +117,6 @@ void Thing::level_change (Levelp l)
     if (is_player()) {
         game->set_meta_data(l);
     }
+
+    game->request_snapshot = true;
 }

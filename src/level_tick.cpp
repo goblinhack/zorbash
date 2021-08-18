@@ -86,6 +86,7 @@ _
             //
             t->update_interpolated_position();
             if (t->is_moving) {
+                // if (!game->things_are_moving) { t->con("wait"); }
                 game->things_are_moving = true;
             }
         } else if (t->is_falling) {
@@ -94,9 +95,11 @@ _
             //
             t->update_interpolated_position();
             if (t->is_falling) {
+                // if (!game->things_are_moving) { t->con("wait"); }
                 game->things_are_moving = true;
             }
         } else if (t->is_scheduled_for_death) {
+            // if (!game->things_are_moving) { t->con("wait"); }
             game->things_are_moving = true;
         } else if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
                    (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
@@ -105,7 +108,10 @@ _
             // Wait for animation end. Only if the thing is onscreen
             //
             if (t->frame_count == game->frame_count) {
-                game->things_are_moving = true;
+                if (game->robot_mode) {
+                    // if (!game->things_are_moving) { t->con("wait"); }
+                    game->things_are_moving = true;
+                }
             } else if (!t->is_dead) {
                 if (t->is_offscreen) {
                     t->dead("offscreen");
@@ -115,6 +121,7 @@ _
             }
         }
         if (t->is_waiting_to_fall) {
+            // if (!game->things_are_moving) { t->con("wait"); }
             t->fall_to_next_level();
             game->things_are_moving = true;
         }
@@ -125,28 +132,33 @@ _
             if (!player->descend_dungeon()) {
                 player->err("Failed to descend dungeon");
             }
+            // if (!game->things_are_moving) { player->con("wait"); }
             game->things_are_moving = true;
         }
         if (player && player->is_waiting_to_ascend_dungeon) {
             if (!player->ascend_dungeon()) {
                 player->err("Failed to ascend dungeon");
             }
+            // if (!game->things_are_moving) { player->con("wait"); }
             game->things_are_moving = true;
         }
         if (player && player->is_waiting_to_descend_sewer) {
             if (!player->descend_sewer()) {
                 player->err("Failed to descend sewer");
             }
+            // if (!game->things_are_moving) { player->con("wait"); }
             game->things_are_moving = true;
         }
         if (player && player->is_waiting_to_ascend_sewer) {
             if (!player->ascend_sewer()) {
                 player->err("Failed to ascend sewer");
             }
+            // if (!game->things_are_moving) { player->con("wait"); }
             game->things_are_moving = true;
         }
         if (player && player->is_waiting_to_fall) {
             player->fall_to_next_level();
+            // if (!game->things_are_moving) { player->con("wait"); }
             game->things_are_moving = true;
         }
     }

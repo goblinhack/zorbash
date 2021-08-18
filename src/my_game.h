@@ -148,6 +148,7 @@ public:
     void init_levels(void);
     void init_jump_paths(void);
     void load(int slot);
+    void load_snapshot(void);
     void load(void);
     void load_config(void);
     void load_select(void);
@@ -155,6 +156,7 @@ public:
     void new_game(void);
     void quit_select(void);
     void save(int slot);
+    void save_snapshot(void);
     void save(void);
     void save_config(void);
     void save_select(void);
@@ -209,22 +211,22 @@ public:
     //
     // Keep all in order:
     //
-    bool               started {};          // Game is afoot
+    bool               started {};            // Game is afoot
     bool               things_are_moving {};
-    fpoint             mouse_over;          // Mouse cursor
-    point              minimap_over;        // Which tile in the minimap
-    int                seed {};             // All randomness jumps off of this
-    std::string        tick_requested {};   // Something has requested a game tick
-    std::string        seed_name {};        // Human readable version of the above
-    point3d            current_level;       // Where we are in the world.
-    uint32_t           fps_value = {};      // Current framerate
+    fpoint             mouse_over;            // Mouse cursor
+    point              minimap_over;          // Which tile in the minimap
+    int                seed {};               // All randomness jumps off of this
+    std::string        tick_requested {};     // Something has requested a game tick
+    std::string        seed_name {};          // Human readable version of the above
+    point3d            current_level;         // Where we are in the world.
+    uint32_t           fps_value = {};        // Current framerate
     uint32_t           inventory_highlight_slot {};
     uint32_t           previous_slot {};
     uint32_t           robot_mode {};
     uint32_t           skillbox_highlight_slot {};
     uint32_t           tick_completed {1};
     uint32_t           tick_current {1};
-    uint16_t           frame_count {0};     // Used to know if things have been displayed
+    uint16_t           frame_count {0};       // Used to know if things have been displayed
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
@@ -237,7 +239,7 @@ public:
     //
     uint32_t           robot_mode_requested {};
     uint32_t           robot_mode_tick_requested {};
-    float              tick_dt {0};         // Used for timesteps within a game tick
+    float              tick_dt {0};           // Used for timesteps within a game tick
 
     //
     // Temporary. Global states
@@ -275,6 +277,7 @@ public:
     bool               request_destroy_bags {};   // Finished emptying temporary bag
     bool               request_update_rightbar {};
     bool               request_update_same_level {};
+    bool               request_snapshot {};     // Something has requested a game snapshot
     uint32_t           request_destroy_thing_info {}; // Timestamp
 
     //

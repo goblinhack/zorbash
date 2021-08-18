@@ -955,6 +955,30 @@ Game::load (int slot)
     TOPCON("Loaded the game from %s.", save_file.c_str());
 }
 
+void
+Game::load_snapshot (void)
+{_
+    game->fini();
+
+    auto save_file = saved_dir + "saved-snapshot";
+
+    LOG("-");
+    CON("DUNGEON: Loading %s", save_file.c_str());
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+
+    load(save_file, *this);
+
+    sdl_config_update_all();
+
+    LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    CON("DUNGEON: Loaded %s, seed %d", save_file.c_str(), seed);
+    LOG("-");
+
+    TOPCON("Loaded the game from %s.", save_file.c_str());
+}
+
 void wid_load_destroy (void)
 {_
     delete wid_load;
@@ -1030,6 +1054,13 @@ static uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
 }
 
+static uint8_t wid_load_saved_snapshot (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    game->load_snapshot();
+    wid_load_destroy();
+    return true;
+}
+
 void Game::load_select (void)
 {_
     CON("USR: Loading a saved game, destroy old");
@@ -1058,6 +1089,11 @@ void Game::load_select (void)
     for (auto slot = 0; slot < UI_WID_SAVE_SLOTS; slot++) {
         Game tmp;
         auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
+
+        if (slot == UI_WID_SAVE_SLOTS - 1) {
+            tmp_file = saved_dir + "saved-snapshot";
+        }
+
         auto p = wid_load->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "load slot");
         point tl = make_point(0, y_at);
@@ -1068,14 +1104,26 @@ void Game::load_select (void)
             if (game_load_error != "") {
                 s += game_load_error;
             } else {
-                s += "<empty>";
+                if (slot == UI_WID_SAVE_SLOTS - 1) {
+                    s += "<no-snapshot>";
+                } else {
+                    s += "<empty>";
+                }
             }
             set(slot_valid, slot, false);
             wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         } else {
-            s += tmp.save_meta;
+            if (slot == UI_WID_SAVE_SLOTS - 1) {
+                s += "snapshot: " + tmp.save_meta;
+            } else {
+                s += tmp.save_meta;
+            }
             wid_set_style(w, UI_WID_STYLE_HORIZ_LIGHT);
-            wid_set_on_mouse_up(w, wid_load_mouse_up);
+            if (slot == UI_WID_SAVE_SLOTS - 1) {
+                wid_set_on_mouse_up(w, wid_load_saved_snapshot);
+            } else {
+                wid_set_on_mouse_up(w, wid_load_mouse_up);
+            }
             set(slot_valid, slot, true);
         }
         wid_set_int_context(w, slot);

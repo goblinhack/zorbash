@@ -718,6 +718,26 @@ Game::save (int slot)
 }
 
 void
+Game::save_snapshot (void)
+{_
+    auto save_file = saved_dir + "saved-snapshot";
+
+    LOG("-");
+    CON("DUNGEON: Saving %s", save_file.c_str());
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+
+    save(save_file);
+
+    LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    CON("DUNGEON: Saved %s, seed %u", save_file.c_str(), seed);
+    LOG("-");
+
+    TOPCON("Saved the game to %s.", save_file.c_str());
+}
+
+void
 Game::save_config (void)
 {_
     auto filename = saved_dir + "config";
@@ -824,6 +844,11 @@ void Game::save_select (void)
     for (auto slot = 0; slot < UI_WID_SAVE_SLOTS; slot++) {
         Game tmp;
         auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
+
+        if (slot == UI_WID_SAVE_SLOTS - 1) {
+            tmp_file = saved_dir + "saved-snapshot";
+        }
+
         auto p = wid_save->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "save slot");
         point tl = make_point(0, y_at);
@@ -831,14 +856,29 @@ void Game::save_select (void)
 
         std::string s = std::to_string(slot) + " ";
         if (!load(tmp_file, tmp)) {
-            s += "<empty>";
+            if (slot == UI_WID_SAVE_SLOTS - 1) {
+                s += "<no snapshot>";
+            } else {
+                s += "<empty>";
+            }
             wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
         } else {
-            s += tmp.save_meta;
+            if (slot == UI_WID_SAVE_SLOTS - 1) {
+                s += "snapshot: " + tmp.save_meta;
+            } else {
+                s += tmp.save_meta;
+            }
             wid_set_style(w, UI_WID_STYLE_HORIZ_LIGHT);
         }
-        wid_set_on_mouse_up(w, wid_save_mouse_up);
-        wid_set_int_context(w, slot);
+
+        if (slot == UI_WID_SAVE_SLOTS - 1) {
+            //
+            // Cannot save over
+            //
+        } else {
+            wid_set_on_mouse_up(w, wid_save_mouse_up);
+            wid_set_int_context(w, slot);
+        }
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);
