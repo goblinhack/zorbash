@@ -141,14 +141,7 @@ void Game::tick_end (void)
 #endif
     }
 
-    static int move_count;
-
-    if (game->request_snapshot || (move_count++ > 100)) {
-        game->request_snapshot = false;
-        move_count = 0;
-        TOPCON("Save snapshot.");
-        game->save_snapshot();
-    }
+    save_snapshot_check();
 }
 
 void Game::tick_update (void)

@@ -452,7 +452,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     l->map_follow_player = true;
 
     auto p = l->world_at;
-    LOG("DUNGEON: Loading things for level %d,%d,%d", p.x, p.y, p.z);
+    LOG("DGN: Loading things for level %d,%d,%d", p.x, p.y, p.z);
 _
     //
     // Operate on a copy, not live data that might change as we add things
@@ -522,10 +522,10 @@ _
     l->update_new_level();
 
     READ_MAGIC("level end", THING_MAGIC_FINAL);
-    LOG("DUNGEON: Loaded things for level %d,%d,%d", p.x, p.y, p.z);
+    LOG("DGN: Loaded things for level %d,%d,%d", p.x, p.y, p.z);
 
     my.t->update_map();
-    LOG("DUNGEON: updated map for level %d,%d,%d", p.x, p.y, p.z);
+    LOG("DGN: updated map for level %d,%d,%d", p.x, p.y, p.z);
     return (in);
 }
 
@@ -549,7 +549,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
                 }
 
                 if (exists) {
-                    CON("DUNGEON: Loading level %d,%d,%d", p.x, p.y, p.z);
+                    CON("DGN: Loading level %d,%d,%d", p.x, p.y, p.z);
                     auto l = new Level();
                     set(my.t.levels, x, y, z, l);
                     in >> bits(l);
@@ -565,7 +565,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
                                            x, y, z);
                         return (in);
                     }
-                    CON("DUNGEON: Loaded level %d,%d,%d", p.x, p.y, p.z);
+                    CON("DGN: Loaded level %d,%d,%d", p.x, p.y, p.z);
                 }
             }
         }
@@ -835,7 +835,7 @@ Game::load (std::string file_to_load, class Game &target)
                              (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
         if (!game_load_headers_only) {
-            CON("DUNGEON: Loading %s, decompress %luMb -> %luMb",
+            CON("DGN: Loading %s, decompress %luMb -> %luMb",
                 file_to_load.c_str(),
                 (unsigned long) compressed_len / (1024 * 1024),
                 (unsigned long) uncompressed_len / (1024 * 1024));
@@ -904,7 +904,7 @@ void
 Game::load (void)
 {_
     LOG("-");
-    CON("DUNGEON: Loading %s", save_file.c_str());
+    CON("DGN: Loading %s", save_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -914,7 +914,7 @@ Game::load (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: Loaded %s, seed %u", save_file.c_str(), seed);
+    CON("DGN: Loaded %s, seed %u", save_file.c_str(), seed);
     LOG("-");
 }
 
@@ -939,7 +939,7 @@ Game::load (int slot)
     auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
     LOG("-");
-    CON("DUNGEON: Loading %s", save_file.c_str());
+    CON("DGN: Loading %s", save_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -949,7 +949,7 @@ Game::load (int slot)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: Loaded %s, seed %d", save_file.c_str(), seed);
+    CON("DGN: Loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 
     TOPCON("Loaded the game from %s.", save_file.c_str());
@@ -963,7 +963,7 @@ Game::load_snapshot (void)
     auto save_file = saved_dir + "saved-snapshot";
 
     LOG("-");
-    CON("DUNGEON: Loading %s", save_file.c_str());
+    CON("DGN: Loading %s", save_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -973,7 +973,7 @@ Game::load_snapshot (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: Loaded %s, seed %d", save_file.c_str(), seed);
+    CON("DGN: Loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 
     TOPCON("Loaded the game from %s.", save_file.c_str());

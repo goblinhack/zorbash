@@ -136,7 +136,7 @@ void Dungeon::make_dungeon (void)
     //
     // Create the high level blueprint of the level layout
     //
-    DBG2("DUNGEON: Created node map");
+    DBG2("DGN: Created node map");
     create_node_map();
 
     for (;;) {
@@ -144,32 +144,32 @@ void Dungeon::make_dungeon (void)
         // Reset the list of rooms we can place. We only place one of
         // each possible room once per level
         //
-        DBG2("DUNGEON: Try to create");
+        DBG2("DGN: Try to create");
         reset_possible_rooms();
 
         //
         // Create a cyclic dungeon map.
         //
-        DBG2("DUNGEON: Create cyclic rooms");
+        DBG2("DGN: Create cyclic rooms");
         create_cyclic_rooms(&grid);
         _ debug("create cyclic rooms");
 
         //
         // Choose how rooms are linked
         //
-        DBG2("DUNGEON: Choose room doors");
+        DBG2("DGN: Choose room doors");
         choose_room_doors();
         _ debug("choose room doors");
 
         //
         // Drag rooms closer together
         //
-        DBG2("DUNGEON: Move rooms closer");
+        DBG2("DGN: Move rooms closer");
         if (rooms_move_closer_together()) {
             break;
         }
 
-        DBG2("DUNGEON: Failed, retry");
+        DBG2("DGN: Failed, retry");
         debug("failed to place dungeon");
         failed = true;
         return;
@@ -178,14 +178,14 @@ void Dungeon::make_dungeon (void)
     //
     // Keep track of which tile has which room
     //
-    DBG2("DUNGEON: Assign rooms to tiles");
+    DBG2("DGN: Assign rooms to tiles");
     assign_rooms_to_tiles();
     _ debug("assigned rooms to tiles");
 
     //
     // Wall off secret doors
     //
-    DBG2("DUNGEON: Block secret doors");
+    DBG2("DGN: Block secret doors");
     block_secret_doors();
     _ debug("blocked secret doors");
 
@@ -193,7 +193,7 @@ void Dungeon::make_dungeon (void)
     // Remove all doors and then add them back in, but only between
     // depth changes
     //
-    DBG2("DUNGEON: Remove all rooms");
+    DBG2("DGN: Remove all rooms");
     remove_all_doors();
     _ debug("remove all doors");
 
@@ -201,25 +201,25 @@ void Dungeon::make_dungeon (void)
     // Place the rooms back on the map, so if there were any intentional
     // doors removed above then they will reappear.
     //
-    DBG2("DUNGEON: Place rooms with doors");
+    DBG2("DGN: Place rooms with doors");
     room_print_only_doors(&grid);
     _ debug("only doors");
 
     //
     // Not sure we want this as rooms
     //
-    DBG2("DUNGEON: Place doors between room depth changes");
+    DBG2("DGN: Place doors between room depth changes");
     place_doors_between_depth_changes();
     _ debug("add doors between depth changes");
 
     //
     // Add a perimeter to the level. Helps avoid off by one bugs.
     //
-    DBG2("DUNGEON: Add corridor walls");
+    DBG2("DGN: Add corridor walls");
     add_corridor_walls();
     _ debug("add corridor walls");
 
-    DBG2("DUNGEON: Add room walls");
+    DBG2("DGN: Add room walls");
     add_room_walls();
     _ debug("add room walls");
 
@@ -229,52 +229,52 @@ void Dungeon::make_dungeon (void)
     //
     // Add a cave as the under-dungeon
     //
-    DBG2("DUNGEON: Generate water");
+    DBG2("DGN: Generate water");
     water_gen(2000, // fill prob
               10,  // R1
               5,  // R2
               4   /* generations */);
 
-    DBG2("DUNGEON: Generate caves");
+    DBG2("DGN: Generate caves");
     cave_gen(2000, // fill prob
              10,  // R1
              5,  // R2
              3   /* generations */);
 
-    DBG2("DUNGEON: Generate dirt");
+    DBG2("DGN: Generate dirt");
     dirt_gen(2000, // fill prob
              10,  // R1
              5,  // R2
              4   /* generations */);
 
-    DBG2("DUNGEON: Add deepwater and islands of safety");
+    DBG2("DGN: Add deepwater and islands of safety");
     water_fixup();
 
-    DBG2("DUNGEON: Add border");
+    DBG2("DGN: Add border");
     add_border();
 
-    DBG2("DUNGEON: Add remaining items");
+    DBG2("DGN: Add remaining items");
     add_remaining();
 
-    DBG2("DUNGEON: Add foilage around water");
+    DBG2("DGN: Add foilage around water");
     add_foilage_around_water();
 
-    DBG2("DUNGEON: Add spiderwebs");
+    DBG2("DGN: Add spiderwebs");
     add_spiderweb();
 
-    DBG2("DUNGEON: Generate grass");
+    DBG2("DGN: Generate grass");
     dry_grass_gen(50, // fill prob
                   10, // R1
                   5,  // R2
                   4   /* generations */);
 
-    DBG2("DUNGEON: Generate foilage");
+    DBG2("DGN: Generate foilage");
     foilage_gen(10, // fill prob
                 10, // R1
                 5,  // R2
                 4   /* generations */);
 
-    LOG("DUNGEON: Created, but not populated");
+    LOG("DGN: Created, but not populated");
     dump();
 }
 
@@ -1358,7 +1358,7 @@ void Dungeon::create_node_map (void)
 void Dungeon::dump (void)
 {_
     if (DEBUG2) {
-        LOG("DUNGEON: Seed %u (with room depth)", seed);
+        LOG("DGN: Seed %u (with room depth)", seed);
         for (auto y = 0; y < map_height; y++) {
             std::string s;
             for (auto x = 0; x < map_width; x++) {
@@ -1415,8 +1415,8 @@ void Dungeon::dump (void)
     //
     // Pass 2 without room depths
     //
-    LOG("DUNGEON: Seed %u", seed);
-    //printf("DUNGEON: Seed %u\n", seed);
+    LOG("DGN: Seed %u", seed);
+    //printf("DGN: Seed %u\n", seed);
     for (auto y = 0; y < map_height; y++) {
         std::string s;
         for (auto x = 0; x < map_width; x++) {
@@ -2286,7 +2286,7 @@ int Dungeon::draw_corridor (point start, point end, char w)
         putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DEBUG);
 
 #if 0
-        DBG("DUNGEON: cannot create corridor, end not found between %d,%d and %d,%d",
+        DBG("DGN: cannot create corridor, end not found between %d,%d and %d,%d",
             start.x, start.y, end.x, end.y);
         dump();
 #endif
@@ -2301,7 +2301,7 @@ int Dungeon::draw_corridor (point start, point end, char w)
     putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
 
 #if 0
-    DBG("DUNGEON: placed corridor len %d", (int)p.size());
+    DBG("DGN: placed corridor len %d", (int)p.size());
     dump();
 #endif
 

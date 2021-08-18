@@ -15,17 +15,17 @@
 
 bool Level::create_dungeon (point3d at, int seed)
 {_
-    log("DUNGEON: Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
+    log("DGN: Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
     TOPCON("Dungeon level %d is coming into being...", (at.z / 2) + 1);
 
     is_dungeon_level = true;
 
     while (true) {
-        log("DUNGEON: Create dungeon");
+        log("DGN: Create dungeon");
         auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH,
                                    MAP_GRID_HEIGHT, seed);
         if (dungeon->failed) {
-            log("DUNGEON: create dungeon, failed, retry");
+            log("DGN: create dungeon, failed, retry");
             seed++;
             delete dungeon;
             continue;
@@ -34,7 +34,7 @@ bool Level::create_dungeon (point3d at, int seed)
         //
         // Check we have a dungeon start
         //
-        dbg2("DUNGEON: Look for entrance");
+        dbg2("DGN: Look for entrance");
         {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -51,7 +51,7 @@ have_dungeon_start:
         //
         // The grid is the basis of all reality.
         //
-        dbg2("DUNGEON: Place the grid");
+        dbg2("DGN: Place the grid");
         place_the_grid();
         if (g_errored) { return false; }
 #if 0
@@ -69,7 +69,7 @@ have_dungeon_start:
             return false;
         }
 
-        dbg2("DUNGEON: Place random walls");
+        dbg2("DGN: Place random walls");
         create_dungeon_place_walls(dungeon, wall_type, 1, 6, 6, tries);
         if (g_errored) { return false; }
         create_dungeon_place_walls(dungeon, wall_type, 2, 6, 6, tries);
@@ -97,7 +97,7 @@ have_dungeon_start:
         create_dungeon_place_walls(dungeon, wall_type, 2, 1, 2, tries);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place random floors");
+        dbg2("DGN: Place random floors");
         {
             auto floor_type = pcg_random_range_inclusive(1, 11);
 
@@ -170,15 +170,15 @@ have_dungeon_start:
             if (g_errored) { return false; }
         }
 
-        dbg2("DUNGEON: Place corridors");
+        dbg2("DGN: Place corridors");
         create_dungeon_place_corridor(dungeon, "corridor1", 0);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place bridges");
+        dbg2("DGN: Place bridges");
         create_dungeon_place_bridge(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place rocks");
+        dbg2("DGN: Place rocks");
         create_dungeon_place_rocks(dungeon, 1, 6, 6, tries);
         if (g_errored) { return false; }
         create_dungeon_place_rocks(dungeon, 1, 6, 3, tries);
@@ -204,52 +204,52 @@ have_dungeon_start:
         create_dungeon_place_rocks(dungeon, 2, 1, 2, tries);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place remaining rocks");
+        dbg2("DGN: Place remaining rocks");
         create_dungeon_place_remaining_rocks(dungeon, "rock1");
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place remaining walls");
+        dbg2("DGN: Place remaining walls");
         create_dungeon_place_remaining_walls(dungeon, wall_type->name());
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place dirt");
+        dbg2("DGN: Place dirt");
         place_dirt(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place chasms");
+        dbg2("DGN: Place chasms");
         create_dungeon_place_chasm(dungeon, "chasm1");
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place deep water");
+        dbg2("DGN: Place deep water");
         create_dungeon_place_deep_water(dungeon, "deep_water1");
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place shallow water");
+        dbg2("DGN: Place shallow water");
         create_dungeon_place_place_shallow_water(dungeon, "water1");
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place lava");
+        dbg2("DGN: Place lava");
         create_dungeon_place_lava(dungeon, "lava1");
         if (g_errored) { return false; }
 
         //
         // Place braziers first and then update the heatmap
         //
-        dbg2("DUNGEON: Place braziers");
+        dbg2("DGN: Place braziers");
         create_dungeon_place_braziers(dungeon, "brazier1");
         if (g_errored) { return false; }
 
         //
         // Update the heatmap to avoid placing monsts next to lava
         //
-        dbg2("DUNGEON: Update heatmap");
+        dbg2("DGN: Update heatmap");
         update_heatmap();
 
         //
         // Place the player if we do not have one.
         //
         if (!game->level) {
-            dbg2("DUNGEON: Place player");
+            dbg2("DGN: Place player");
             for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
                 for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
                     if (dungeon->is_ascend_dungeon(x, y)) {
@@ -370,71 +370,71 @@ placed_player:
         //
         // Items that have no special placement rules
         //
-        dbg2("DUNGEON: Place items");
+        dbg2("DGN: Place items");
         create_dungeon_place_objects_with_normal_placement_rules(dungeon);
         if (g_errored) { return false; }
 
         //
         // Scary non essential stuff
         //
-        dbg2("DUNGEON: Place blood");
+        dbg2("DGN: Place blood");
         create_dungeon_place_random_blood(dungeon);
         if (g_errored) { return false; }
 
         //
         // Less important stuff
         //
-        dbg2("DUNGEON: Place smoke");
+        dbg2("DGN: Place smoke");
         create_dungeon_place_lava_smoke(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place floor deco");
+        dbg2("DGN: Place floor deco");
         place_floor_deco(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place random floor deco");
+        dbg2("DGN: Place random floor deco");
         create_dungeon_place_random_floor_deco(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place sewer pipes");
+        dbg2("DGN: Place sewer pipes");
         create_dungeon_place_sewer_pipes(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Mark dungeon tiles");
+        dbg2("DGN: Mark dungeon tiles");
         create_dungeon_game_mark_dungeon_tiles(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place grass");
+        dbg2("DGN: Place grass");
         place_dry_grass(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place foilage");
+        dbg2("DGN: Place foilage");
         place_foilage(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place spiderweb");
+        dbg2("DGN: Place spiderweb");
         place_spiderweb(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Place random treasure");
+        dbg2("DGN: Place random treasure");
         place_random_treasure(dungeon);
         if (g_errored) { return false; }
 
-        dbg2("DUNGEON: Scroll to player");
+        dbg2("DGN: Scroll to player");
         scroll_map_to_player();
         if (g_errored) { return false; }
 
         //
         // Final update of the heatmap to account placement of braziers
         //
-        dbg2("DUNGEON: Final update heatmap");
+        dbg2("DGN: Final update heatmap");
         update_heatmap();
 
         delete dungeon;
         break;
     }
 
-    dbg2("DUNGEON: Done");
+    dbg2("DGN: Done");
     return true;
 }
 
@@ -881,14 +881,14 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 
-            dbg2("DUNGEON: Creating %s", tp->name().c_str());
+            dbg2("DGN: Creating %s", tp->name().c_str());
             auto t = thing_new(tp->name(), fpoint(x, y));
             if (t) {
                 if (t->is_treasure_type()) {
                     if (r && r->is_secret) {
                         t->enchant_randomly();
                     }
-                    con("DUNGEON: Placed %s", t->short_text_capitalized().c_str());
+                    con("DGN: Placed %s", t->short_text_capitalized().c_str());
                 }
             }
         }

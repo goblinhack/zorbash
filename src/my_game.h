@@ -164,6 +164,7 @@ public:
     void tick_begin_now(void);
     void tick_update(void);
     void tick_end();
+    void save_snapshot_check();
     void robot_mode_tick();
     void wid_collect_create(const std::list<Thingp> items);
     void wid_wield_create(void);
@@ -278,6 +279,7 @@ public:
     bool               request_update_rightbar {};
     bool               request_update_same_level {};
     bool               request_snapshot {};     // Something has requested a game snapshot
+    bool               saving_snapshot {};
     uint32_t           request_destroy_thing_info {}; // Timestamp
 
     //

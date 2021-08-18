@@ -34,4 +34,6 @@
 #undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
 
+#define ENABLE_SAVE_SNAPSHOT_FREQ  42 // How often/move count, to save a snapshot
+
 #endif
