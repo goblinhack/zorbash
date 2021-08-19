@@ -81,7 +81,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (!it->is_dead) {
-        dbg("Shove: it strength %d vs me %d",
+        dbg("Shove: It strength %d vs me %d",
             it->get_stat_strength(), get_stat_strength());
 
         if (!d20roll(get_stat_strength(), it->get_stat_strength())) {

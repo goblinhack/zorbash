@@ -22,13 +22,13 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
     static char *kwlist[] = {(char*)"id", (char*)"value", 0};	                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "Ii", kwlist, &id, &value)) {    \
-        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
-        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -43,13 +43,13 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
     static char *kwlist[] = {(char*)"id", 0};	                                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
-        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
-        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -64,13 +64,13 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
     static char *kwlist[] = {(char*)"id", 0};	                                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
-        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
-        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -86,29 +86,29 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
     static char *kwlist[] = {(char*)"id", (char*)"oid", 0};	                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &oid)) {      \
-        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     if (!id) {	                                                                    \
-        ERR("%s: no thing ID set", __FUNCTION__);	                            \
+        ERR("%s: No thing ID set", __FUNCTION__);	                            \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     if (!oid) {	                                                                    \
-        ERR("%s: no oid thing ID set", __FUNCTION__);	                            \
+        ERR("%s: No oid thing ID set", __FUNCTION__);	                            \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
-        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
                                                                                     \
     Thingp o = game->thing_find(oid);	                                            \
     if (!t) {	                                                                    \
-        ERR("%s: cannot find thing ID %u", __FUNCTION__, oid);	                    \
+        ERR("%s: Cannot find thing ID %u", __FUNCTION__, oid);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -123,18 +123,18 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
     static char *kwlist[] = {(char*)"id", 0};	                                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
-        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     if (!id) {	                                                                    \
-        ERR("%s: no thing ID set", __FUNCTION__);	                            \
+        ERR("%s: No thing ID set", __FUNCTION__);	                            \
         return Py_BuildValue("I", 0);                                               \
     }	                                                                            \
 	                                                                            \
     Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
-        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
         return Py_BuildValue("I", 0);                                               \
     }	                                                                            \
 	                                                                            \
@@ -149,18 +149,18 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
     static char *kwlist[] = {(char*)"id", 0};	                                    \
 	                                                                            \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
-        ERR("%s: failed parsing keywords", __FUNCTION__);	                    \
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     if (!id) {	                                                                    \
-        ERR("%s: no thing ID set", __FUNCTION__);	                            \
+        ERR("%s: No thing ID set", __FUNCTION__);	                            \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
     Thingp t = game->thing_find(id);	                                            \
     if (!t) {	                                                                    \
-        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	                    \
+        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
         Py_RETURN_FALSE;	                                                    \
     }	                                                                            \
 	                                                                            \
@@ -177,37 +177,37 @@ PyObject *thing_get_coords (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*)"id", 0};	
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
-        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!id) {	
-        ERR("%s: no thing ID set", __FUNCTION__);	
+        ERR("%s: No thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp t = game->thing_find(id);	
     if (!t) {	
-        ERR("%s: cannot find thing ID %u", __FUNCTION__, id);	
+        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	
         Py_RETURN_NONE;	
     }	
 	
     Py_ssize_t size = 2;
     auto the_tuple = PyTuple_New(size);
     if (!the_tuple) {
-        ERR("%s: cannot create tuple for ID %u", __FUNCTION__, id);	
+        ERR("%s: Cannot create tuple for ID %u", __FUNCTION__, id);	
         Py_RETURN_NONE;	
     }	
 
     auto err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 0, PyLong_FromLong((long) t->mid_at.x));
     if (err < 0) {
-        ERR("%s: cannot create tuple (a) for ID %u", __FUNCTION__, id);	
+        ERR("%s: Cannot create tuple (a) for ID %u", __FUNCTION__, id);	
         Py_RETURN_NONE;	
     }
 
     err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 1, PyLong_FromLong((long) t->mid_at.y));
     if (err < 0) {
-        ERR("%s: cannot create tuple (a) for ID %u", __FUNCTION__, id);	
+        ERR("%s: Cannot create tuple (a) for ID %u", __FUNCTION__, id);	
         Py_RETURN_NONE;	
     }
 
@@ -221,29 +221,29 @@ PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*)"hitter", (char*)"target", 0};	
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &target_id)) {
-        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!hitter_id) {	
-        ERR("%s: no hitter thing ID set", __FUNCTION__);	
+        ERR("%s: No hitter thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp hitter = game->thing_find(hitter_id);	
     if (!hitter) {	
-        ERR("%s: cannot find hitter thing ID %u", __FUNCTION__, hitter_id);	
+        ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);	
         Py_RETURN_NONE;	
     }	
 
     if (!target_id) {	
-        ERR("%s: no target thing ID set", __FUNCTION__);	
+        ERR("%s: No target thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp target = game->thing_find(target_id);	
     if (!target) {	
-        ERR("%s: cannot find target thing ID %u", __FUNCTION__, target_id);	
+        ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);	
         Py_RETURN_NONE;	
     }	
 
@@ -263,29 +263,29 @@ PyObject *thing_possible_to_attack (PyObject *obj, PyObject *args, PyObject *key
     static char *kwlist[] = {(char*)"hitter", (char*)"target", 0};	
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &target_id)) {
-        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!hitter_id) {	
-        ERR("%s: no hitter thing ID set", __FUNCTION__);	
+        ERR("%s: No hitter thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp hitter = game->thing_find(hitter_id);	
     if (!hitter) {	
-        ERR("%s: cannot find hitter thing ID %u", __FUNCTION__, hitter_id);	
+        ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);	
         Py_RETURN_NONE;	
     }	
 
     if (!target_id) {	
-        ERR("%s: no target thing ID set", __FUNCTION__);	
+        ERR("%s: No target thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp target = game->thing_find(target_id);	
     if (!target) {	
-        ERR("%s: cannot find target thing ID %u", __FUNCTION__, target_id);	
+        ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);	
         Py_RETURN_NONE;	
     }	
 
@@ -311,34 +311,34 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*)"owner", (char*)"item", (char*)"target", 0};	
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &target_id)) {
-        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!owner_id) {	
-        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        ERR("%s: No owner thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp owner = game->thing_find(owner_id);	
     if (!owner) {	
-        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
         Py_RETURN_NONE;	
     }	
 
     if (!item) {	
-        ERR("%s: no item thing ID set", __FUNCTION__);	
+        ERR("%s: No item thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!target_id) {	
-        ERR("%s: no target thing ID set", __FUNCTION__);	
+        ERR("%s: No target thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp target = game->thing_find(target_id);	
     if (!target) {	
-        ERR("%s: cannot find target thing ID %u", __FUNCTION__, target_id);	
+        ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);	
         Py_RETURN_NONE;	
     }	
 
@@ -372,34 +372,34 @@ PyObject *thing_killed_by (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*)"owner", (char*)"reason", (char*)"killer", 0};	
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &reason, &killer_id)) {
-        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!owner_id) {	
-        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        ERR("%s: No owner thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp owner = game->thing_find(owner_id);	
     if (!owner) {	
-        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
         Py_RETURN_NONE;	
     }	
 
     if (!reason) {	
-        ERR("%s: no reason thing ID set", __FUNCTION__);	
+        ERR("%s: No reason thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!killer_id) {	
-        ERR("%s: no killer thing ID set", __FUNCTION__);	
+        ERR("%s: No killer thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp killer = game->thing_find(killer_id);	
     if (!killer) {	
-        ERR("%s: cannot find killer thing ID %u", __FUNCTION__, killer_id);	
+        ERR("%s: Cannot find killer thing ID %u", __FUNCTION__, killer_id);	
         Py_RETURN_NONE;	
     }	
 
@@ -416,27 +416,27 @@ PyObject *thing_killed (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*)"owner", (char*)"reason", 0};	
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &reason)) {
-        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!owner_id) {	
-        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        ERR("%s: No owner thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp owner = game->thing_find(owner_id);	
     if (!owner) {	
-        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
         Py_RETURN_NONE;	
     }	
 
     if (!reason) {	
-        ERR("%s: no reason thing ID set", __FUNCTION__);	
+        ERR("%s: No reason thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
-    owner->log("Killed: reason %s", reason);
+    owner->log("Killed: Reason %s", reason);
     owner->dead("%s", reason);
     Py_RETURN_NONE;	
 }
@@ -448,23 +448,23 @@ PyObject *thing_msg (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*)"owner", (char*)"msg", 0};	
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
-        ERR("%s: failed parsing keywords", __FUNCTION__);	
+        ERR("%s: Failed parsing keywords", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     if (!owner_id) {	
-        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        ERR("%s: No owner thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp owner = game->thing_find(owner_id);	
     if (!owner) {	
-        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
         Py_RETURN_NONE;	
     }	
 
     if (!msg) {	
-        ERR("%s: no msg thing ID set", __FUNCTION__);	
+        ERR("%s: No msg thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
@@ -486,23 +486,23 @@ PyObject *thing_sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*)"owner", (char*) "name", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &name)) {
-        ERR("thing_sound_play: bad arguments");
+        ERR("thing_sound_play: Bad arguments");
         Py_RETURN_FALSE;
     }
 
     if (!owner_id) {	
-        ERR("%s: no owner thing ID set", __FUNCTION__);	
+        ERR("%s: No owner thing ID set", __FUNCTION__);	
         Py_RETURN_NONE;	
     }	
 	
     Thingp owner = game->thing_find(owner_id);	
     if (!owner) {	
-        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
         Py_RETURN_NONE;	
     }	
 
     if (!name) {
-        ERR("thing_sound_play: missing name attr");
+        ERR("thing_sound_play: Missing name attr");
         Py_RETURN_FALSE;
     }
 
@@ -525,22 +525,22 @@ PyObject *thing_sound_play_channel_ (PyObject *obj, PyObject *args, PyObject *ke
     static char *kwlist[] = {(char*)"owner", (char*) "channel", (char*) "name", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iis", kwlist, &owner_id, &channel, &name)) {
-        ERR("thing_sound_play_channel: bad arguments");
+        ERR("thing_sound_play_channel: Bad arguments");
         Py_RETURN_FALSE;
     }
 
     Thingp owner = game->thing_find(owner_id);	
     if (!owner) {	
-        ERR("%s: cannot find owner thing ID %u", __FUNCTION__, owner_id);	
+        ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
         Py_RETURN_NONE;	
     }	
 
     if (!name) {
-        ERR("thing_sound_play: missing name attr");
+        ERR("thing_sound_play: Missing name attr");
         Py_RETURN_FALSE;
     }
     if (!name) {
-        ERR("thing_sound_play_channel: missing name attr");
+        ERR("thing_sound_play_channel: Missing name attr");
         Py_RETURN_FALSE;
     }
 

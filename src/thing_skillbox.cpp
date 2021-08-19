@@ -214,28 +214,28 @@ Thingp Level::skillbox_get (void)
 
 bool Level::skillbox_over (const uint32_t slot)
 {_
-    LOG("Skillbox: over skillbox slot %d", slot);
+    LOG("Skillbox: Over skillbox slot %d", slot);
 _
     if (!player) {
-        LOG("Skillbox: ignore; no player");
+        LOG("Skillbox: Ignore; no player");
         return false;
     }
 
     if (slot >= player->monstp->skillbox_id.size()) {
-        LOG("Skillbox: ignore; slot out of range");
+        LOG("Skillbox: Ignore; slot out of range");
         return false;
     }
 
     auto oid = get(player->monstp->skillbox_id, slot);
     if (!oid) {
-        LOG("Skillbox: ignore; nothing at that slot");
+        LOG("Skillbox: Ignore; nothing at that slot");
         return false;
     }
 
     Thingp what;
 
     if (slot != game->skillbox_highlight_slot) {
-        LOG("Skillbox: request to remake skillbox due to highlight");
+        LOG("Skillbox: Request to remake skillbox due to highlight");
         game->request_remake_skillbox = true;
         game->skillbox_highlight_slot = slot;
         what = skillbox_describe(slot);
@@ -244,7 +244,7 @@ _
     }
 
     if (!what) {
-        LOG("Skillbox: no skill chosen");
+        LOG("Skillbox: No skill chosen");
         return false;
     }
 
@@ -256,23 +256,23 @@ _
 
 bool Level::skillbox_chosen (const uint32_t slot)
 {_
-    LOG("Skillbox: chosen skillbox slot %d", slot);
+    LOG("Skillbox: Chosen skillbox slot %d", slot);
 _
     if (!player) {
         return false;
     }
 
     if (slot >= player->monstp->skillbox_id.size()) {
-        LOG("Skillbox: nothing in slot %d", slot);
+        LOG("Skillbox: Nothing in slot %d", slot);
         return false;
     }
 
-    LOG("Skillbox: request to remake skillbox");
+    LOG("Skillbox: Request to remake skillbox");
     game->request_remake_skillbox = true;
 
     auto oid = get(player->monstp->skillbox_id, slot);
     if (!oid) {
-        LOG("Skillbox: no skill at slot %d", slot);
+        LOG("Skillbox: No skill at slot %d", slot);
         return false;
     }
 
@@ -285,7 +285,7 @@ _
     }
 
     if (!what) {
-        LOG("Skillbox: no thing at slot %d", slot);
+        LOG("Skillbox: No thing at slot %d", slot);
         return false;
     }
 
@@ -305,16 +305,16 @@ _
 
 Thingp Level::skillbox_describe (const uint32_t slot)
 {_
-    LOG("Skillbox: describe slot %d", slot);
+    LOG("Skillbox: Describe slot %d", slot);
 _
     auto what = skillbox_get(slot);
     if (what) {
         if (DEBUG2) {
-            what->log("Skillbox: describe slot %d", slot);
+            what->log("Skillbox: Describe slot %d", slot);
         }
         what->describe_when_hovered_over_in_rightbar();
     } else {
-        LOG("Skillbox: describe slot %d => nothing there", slot);
+        LOG("Skillbox: Describe slot %d => nothing there", slot);
     }
     return what;
 }

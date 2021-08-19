@@ -68,12 +68,12 @@ void Level::fini (void)
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y, z);
                 if (id.ok()) {
-                    err("Level fini: did not detach thing id %" PRIx32 " at %d,%d,%d", id.id, x, y, z);
+                    err("Level fini: Did not detach thing id %" PRIx32 " at %d,%d,%d", id.id, x, y, z);
                     auto t = thing_find(id);
                     if (!t) {
                         continue;
                     }
-                    t->err("Level fini: did not detach thing id from all_thing_ids_at");
+                    t->err("Level fini: Did not detach thing id from all_thing_ids_at");
                 }
             }
         }
@@ -83,7 +83,7 @@ void Level::fini (void)
     // And finally the player
     //
     if (player) {
-        err("Level fini: did not detach player, player %p still set on level", player);
+        err("Level fini: Did not detach player, player %p still set on level", player);
     }
 
     log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");

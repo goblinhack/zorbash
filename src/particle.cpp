@@ -426,7 +426,7 @@ void Thing::delete_particle (void)
     // Don't remove immediately in case we are walking the particles.
     //
     if (has_internal_particle) {
-        log("Delete particle: has internal particle");
+        log("Delete particle: Has internal particle");
         for (auto &p : level->all_internal_particles) {
             if (p.id == id) {
                 log("Remove particle");
@@ -440,7 +440,7 @@ void Thing::delete_particle (void)
     }
 
     if (has_external_particle) {
-        log("Delete particle: has external particle");
+        log("Delete particle: Has external particle");
         for (auto &p : level->all_external_particles) {
             if (p.id == id) {
                 log("Remove particle");

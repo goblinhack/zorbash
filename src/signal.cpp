@@ -71,7 +71,7 @@ void callstack_dump (void)
 static void
 debug_crash_handler(int sig)
 {
-    fprintf(stderr, "debug_crash_handler: Error: signal %d:\n", sig);
+    fprintf(stderr, "debug_crash_handler: Error: Signal %d:\n", sig);
 
     std::string pid(std::to_string(getpid()));
 
@@ -87,12 +87,12 @@ debug_crash_handler(int sig)
 #elif defined __linux__
     int ret = readlink("/proc/self/exe", prog_name, max_path - 1);
     if (ret == -1) {
-        ERR("Debug_crash_handler: read process name failed");
+        ERR("Debug_crash_handler: Read process name failed");
         return;
     }
 
     if ((size_t)ret >= max_path) {
-        ERR("Debug_crash_handler: symlink too long");
+        ERR("Debug_crash_handler: Symlink too long");
 	return;
     }
 #else

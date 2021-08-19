@@ -94,7 +94,7 @@ void Game::dead_select (const char *reason)
     //
     wid_rightbar_init();
 
-    LOG("Open dead select: pause");
+    LOG("Open dead select: Pause");
     if (level) {
         level->scroll_map_to_player();
         if (level->cursor) {

@@ -59,7 +59,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                                      &is_key,
                                      &is_secret,
                                      &depth)) {
-        ERR("map_load_room: bad args");
+        ERR("map_load_room: Bad args");
         Py_RETURN_FALSE;
     }
 

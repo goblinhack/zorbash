@@ -135,7 +135,7 @@ redo:
         auto placed = snake_walk(depth, 5, pass);
 
         if (debug_enabled) {
-            LOG("Node-grid: level depth %d placed %d nodes", depth, placed);
+            LOG("Node-grid: Level depth %d placed %d nodes", depth, placed);
         }
 
         if (!placed) {
@@ -153,7 +153,7 @@ redo:
             if (placed < 3) {
                 debug("failed initial level, did not place enough nodes");
                 if (debug_enabled) {
-                    LOG("Node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
+                    LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
                 }
                 goto redo;
             }
@@ -161,7 +161,7 @@ redo:
             if (placed < 2) {
                 debug("failed level, did not place enough nodes at depth");
                 if (debug_enabled) {
-                    LOG("Node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
+                    LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
                 }
                 goto redo;
             }
@@ -208,7 +208,7 @@ redo:
         auto placed = snake_walk(secret_depth, 10, pass);
 
         if (debug_enabled) {
-            LOG("Node-grid: level depth %d placed %d secret nodes", secret_depth, placed);
+            LOG("Node-grid: Level depth %d placed %d secret nodes", secret_depth, placed);
         }
 
         if (!placed) {

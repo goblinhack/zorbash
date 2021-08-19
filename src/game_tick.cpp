@@ -102,6 +102,8 @@ void Game::tick_end (void)
     }
     game->tick_completed = game->tick_current;
 
+    save_snapshot_check();
+
     auto level = game->level;
     if (level) {_
         auto player = level->player;
@@ -124,14 +126,11 @@ void Game::tick_end (void)
             game->tick_current,
             time_get_time_ms_cached() - game->tick_begin_ms);
     }
+
     CON("-");
 
     if (level) {
         level->update();
-
-        if (level->player) {
-            level->player->cursor_path_pop_next_and_move();
-        }
 #if 0
         //
         // For debugging consistent randomness
@@ -145,8 +144,6 @@ void Game::tick_end (void)
         CON("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));
 #endif
     }
-
-    save_snapshot_check();
 }
 
 void Game::tick_update (void)

@@ -226,7 +226,7 @@ void Room::dump (void)
     }
 
     LOG("ROOM(%d): depth %d", roomno, depth);
-    LOG("ROOM(%d): direction: up %d down %d left %d right %d",
+    LOG("ROOM(%d): direction: Up %d down %d left %d right %d",
         roomno, dir_up, dir_down, dir_left, dir_right);
     LOG("ROOM(%d): doors:     up %d down %d left %d right %d",
         roomno, has_door_up, has_door_down, has_door_left, has_door_right);
@@ -267,7 +267,7 @@ void Room::con (void)
     }
 
     CON("ROOM(%d): depth %d", roomno, depth);
-    CON("ROOM(%d): direction: up %d down %d left %d right %d",
+    CON("ROOM(%d): direction: Up %d down %d left %d right %d",
         roomno, dir_up, dir_down, dir_left, dir_right);
     CON("ROOM(%d): doors:     up %d down %d left %d right %d",
         roomno, has_door_up, has_door_down, has_door_left, has_door_right);

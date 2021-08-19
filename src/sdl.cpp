@@ -447,7 +447,7 @@ static void sdl_event (SDL_Event * event)
     switch (event->type) {
         case SDL_KEYDOWN: {
             if (g_grab_next_key) {
-                DBG("SDL: Keyboard: grabbed 0x%" PRIx32 " = %s / %s",
+                DBG("SDL: Keyboard: Grabbed 0x%" PRIx32 " = %s / %s",
                     event->key.keysym.sym,
                     SDL_GetKeyName(event->key.keysym.sym),
                     SDL_GetScancodeName(event->key.keysym.scancode));
@@ -462,7 +462,7 @@ static void sdl_event (SDL_Event * event)
 
             key = &event->key.keysym;
 
-            DBG("SDL: Keyboard: key pressed keycode 0x%" PRIx32 " = %s %d",
+            DBG("SDL: Keyboard: Key pressed keycode 0x%" PRIx32 " = %s %d",
                 event->key.keysym.sym,
                 SDL_GetKeyName(event->key.keysym.sym), key->mod);
 
@@ -488,7 +488,7 @@ static void sdl_event (SDL_Event * event)
             break;
         }
         case SDL_KEYUP: {
-            DBG("SDL: Keyboard: key released keycode 0x%" PRIx32 " = %s",
+            DBG("SDL: Keyboard: Key released keycode 0x%" PRIx32 " = %s",
                 event->key.keysym.sym,
                 SDL_GetKeyName(event->key.keysym.sym));
 
@@ -500,12 +500,12 @@ static void sdl_event (SDL_Event * event)
             break;
         }
         case SDL_TEXTINPUT: {
-            DBG("SDL: Keyboard: text input \"%s\" in window %d",
+            DBG("SDL: Keyboard: Text input \"%s\" in window %d",
                 event->text.text, event->text.windowID);
             break;
         }
         case SDL_MOUSEWHEEL: {
-            DBG("SDL: Mouse: wheel scrolled %d in x and %d in y in window %d",
+            DBG("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d",
                 event->wheel.x, event->wheel.y, event->wheel.windowID);
 
             sdl_get_mouse();
@@ -546,7 +546,7 @@ static void sdl_event (SDL_Event * event)
         case SDL_MOUSEMOTION: {
             mouse_down = sdl_get_mouse();
 
-            DBG4("SDL: Mouse: moved to %d,%d (%d,%d) state %d",
+            DBG4("SDL: Mouse: Moved to %d,%d (%d,%d) state %d",
                 event->motion.x, event->motion.y,
                 event->motion.xrel, event->motion.yrel, mouse_down);
 
@@ -584,7 +584,7 @@ static void sdl_event (SDL_Event * event)
             break;
         }
         case SDL_JOYAXISMOTION: {
-            DBG("SDL: Joystick %d: axis %d moved by %d",
+            DBG("SDL: Joystick %d: Axis %d moved by %d",
                 event->jaxis.which, event->jaxis.axis, event->jaxis.value);
 
             int axis = event->jaxis.axis;
@@ -624,13 +624,13 @@ static void sdl_event (SDL_Event * event)
             break;
         }
         case SDL_JOYBALLMOTION: {
-            DBG("SDL: Joystick %d: ball %d moved by %d,%d",
+            DBG("SDL: Joystick %d: Ball %d moved by %d,%d",
                 event->jball.which, event->jball.ball, event->jball.xrel,
                 event->jball.yrel);
             break;
         }
         case SDL_JOYHATMOTION: {
-            DBG("SDL: Joystick %d: hat %d moved to ", event->jhat.which,
+            DBG("SDL: Joystick %d: Hat %d moved to ", event->jhat.which,
                 event->jhat.hat);
 
             switch (event->jhat.value) {
@@ -687,7 +687,7 @@ static void sdl_event (SDL_Event * event)
             break;
         }
         case SDL_JOYBUTTONDOWN: {
-            DBG("SDL: Joystick %d: button %d pressed",
+            DBG("SDL: Joystick %d: Button %d pressed",
                 event->jbutton.which, event->jbutton.button);
             set(sdl_joy_buttons, event->jbutton.button, (uint8_t)1);
             sdl_get_mouse();
@@ -695,7 +695,7 @@ static void sdl_event (SDL_Event * event)
             break;
         }
         case SDL_JOYBUTTONUP: {
-            DBG("SDL: Joystick %d: button %d released",
+            DBG("SDL: Joystick %d: Button %d released",
                 event->jbutton.which, event->jbutton.button);
             set(sdl_joy_buttons, event->jbutton.button, (uint8_t)0);
             break;
@@ -1321,7 +1321,7 @@ void sdl_loop (void)
             if (unlikely(!found)) {
                 auto mouse_down = sdl_get_mouse();
                 if (mouse_down) {
-                    DBG("SDL: Mouse DOWN held: button %d", mouse_down);
+                    DBG("SDL: Mouse DOWN held: Button %d", mouse_down);
                     wid_mouse_held_down(mouse_down, mouse_x, mouse_y);
                 }
             }

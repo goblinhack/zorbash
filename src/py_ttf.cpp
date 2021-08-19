@@ -18,7 +18,7 @@ PyObject *text_size_ (PyObject *obj, PyObject *args, PyObject *keywds)
     };
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "u", kwlist, &text)) {
-        ERR("text_size: bad args");
+        ERR("text_size: Bad args");
         Py_RETURN_NONE;
     }
 

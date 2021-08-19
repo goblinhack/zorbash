@@ -53,7 +53,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
         //
         if (is_player() && game->robot_mode) {
             if (will_avoid_threat(future_pos)) {
-                log("Next position %d,%d is a threat",
+                CON("Robot: Next position %d,%d is a threat",
                     (int)future_pos.x, (int)future_pos.y);
 _
                 if (monstp->move_path.size()) {
@@ -64,7 +64,7 @@ _
                     // If the thing we are going to land on is also a threat,
                     // can we jump further?
                     //
-                    log("Next next position %d,%d is also a threat",
+                    CON("Robot: Next-next position %d,%d is a threat",
                         (int)future_pos.x, (int)future_pos.y);
 _
                     if (will_avoid_threat(jump_pos) && monstp->move_path.size()) {
@@ -75,31 +75,40 @@ _
                             //
                             // Give up
                             //
+                            CON("Robot: Cannot jump over threats");
                             clear_move_path("Cannot jump over all threats");
                             return false;
                         } else if (try_to_jump(jump_pos)) {
+                            CON("Robot: Try a long jump");
                             game->tick_begin("player tried a long jump");
                             clear_move_path("Player tried a long jump");
                             return true;
                         } else {
+                            CON("Robot: Failed to try a long jump");
                             clear_move_path("Player tried a jump but cannot pass");
                             return false;
                         }
                     } else if (try_to_jump(jump_pos)) {
+                        CON("Robot: Try to jump");
                         game->tick_begin("player tried to jump");
                         clear_move_path("Player tried to jump");
                         return true;
                     } else {
+                        CON("Robot: Failed to jump");
                         clear_move_path("Player cannot pass");
                         return false;
                     }
                 } else {
+                    CON("Robot: Cannot pass");
                     clear_move_path("Player cannot pass");
                     return false;
                 }
             }
         }
 
+        if (game->robot_mode) {
+            CON("Robot: Try to move without shoving to %s", future_pos.to_string().c_str());
+        }
         if (move_no_shove(future_pos)) {
             return true;
         }

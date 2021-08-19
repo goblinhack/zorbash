@@ -3139,16 +3139,16 @@ Cellular Automata Method for Generating Random Cave-Like LevelsStatic
 
     From RogueBasin
 
-Jump to: navigation < #column-one>, search < #searchInput>
+Jump to: Navigation < #column-one>, search < #searchInput>
 
 By Jim Babcock < /index.php?title=Jim_Babcock&action=edit>
 
 It is an old and fairly well documented trick to use cellular automata
 < /index.php?title=Cellular_automata > to generate cave-like structures.
 The basic idea is to fill the map randomly, then repeatedly apply the
-4-5 rule: a tile is a wall if it is a wall and has 4 neighbors that are
+4-5 rule: A tile is a wall if it is a wall and has 4 neighbors that are
 walls, or if it is not a wall and has 5 neighbors that are. This rule
-can be stated more simply: a tile becomes or remains a wall if the 3x3
+can be stated more simply: A tile becomes or remains a wall if the 3x3
 region centered on it contains at least 5 walls. (/Note: It is important
 to do this for each tile simultaneously. If you update one, then use its
 value when you update the next, your results won't look as good, and the
@@ -3358,7 +3358,7 @@ Repeat 5: W? (p) = R1 (p) ? 5 || R2 (p) ? 1
 
 This is more interesting - it doesn't have any big open areas, it has a
 decent layout. It's almost fully connected. Still, it has some new
-problems: there are isolated single-tile walls in places, and in general
+problems: There are isolated single-tile walls in places, and in general
 it's not very smooth. But with a little tweaking:
 
 Winit (p) = rand[0,100) <  40

@@ -646,7 +646,7 @@ _
                 ret = true;
             } else {
                 if (is_loggable_for_unimportant_stuff()) {
-                    dbg("Collision: cannot hit %s", it->to_string().c_str());
+                    dbg("Collision: Cannot hit %s", it->to_string().c_str());
                 }
             }
         }

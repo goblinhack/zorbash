@@ -19,17 +19,17 @@ PyObject *tex_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*) "file", (char*) "name", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "ss", kwlist, &file, &name)) {
-        ERR("tex_load: bad arguments");
+        ERR("tex_load: Bad arguments");
         Py_RETURN_FALSE;
     }
 
     if (!file) {
-        ERR("tex_load: missing file attr");
+        ERR("tex_load: Missing file attr");
         Py_RETURN_FALSE;
     }
 
     if (!name) {
-        ERR("tex_load: missing name attr");
+        ERR("tex_load: Missing name attr");
         Py_RETURN_FALSE;
     }
 

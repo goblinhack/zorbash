@@ -48,7 +48,7 @@ void Thing::enemies_tick (void)
             }
 
             if (is_player() && game->robot_mode) {
-                CON("Robot: remove enemy: %s", attacker->to_string().c_str());
+                CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
             }
         } else {
             monstp->enemies.erase(p.first);
@@ -84,7 +84,7 @@ void Thing::add_enemy (Thingp attacker)
 
     if (!monstp->enemies[attacker->id]) {
         if (is_player() && game->robot_mode) {
-            CON("Robot: add new enemy %s", attacker->to_string().c_str());
+            CON("Robot: Add new enemy %s", attacker->to_string().c_str());
         } else {
             dbg("Add new enemy %s", attacker->to_string().c_str());
         }

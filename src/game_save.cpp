@@ -304,7 +304,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
         /*
          * Faster
          */
-        CON("DGN: Save level snapshot");
+        LOG("DGN: Save level snapshot");
         game->level->fbo_light.clear();
     } else if (game->level == my.t) {
         LOG("DGN: Save lightmap");
@@ -516,7 +516,7 @@ std::ostream& operator<<(std::ostream &out,
                     out << bits(l);
                     auto eol = GAME_SAVE_MARKER_EOL;
                     out << bits(eol);
-                    CON("DGN: Saved level %d,%d,%d", p.x, p.y, p.z);
+                    LOG("DGN: Saved level %d,%d,%d", p.x, p.y, p.z);
                 } else {
                     exists = false;
                     out << bits(p);
@@ -680,7 +680,7 @@ bool Game::save (std::string file_to_save)
 #endif
 
     if (lzo_init() != LZO_E_OK) {
-        ERR("LZO init fail: enable '-DLZO_DEBUG' for diagnostics)");
+        ERR("LZO init fail: Enable '-DLZO_DEBUG' for diagnostics)");
     }
 
     HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);
@@ -689,7 +689,7 @@ bool Game::save (std::string file_to_save)
     int r = lzo1x_1_compress((lzo_bytep)uncompressed, uncompressed_len,
                              (lzo_bytep)compressed, &compressed_len, wrkmem);
     if (r == LZO_E_OK) {
-        CON("DGN: Saved as %s, compress %luMb -> %luMb",
+        LOG("DGN: Saved as %s, compress %luMb -> %luMb",
             file_to_save.c_str(),
             (unsigned long) uncompressed_len / (1024 * 1024),
             (unsigned long) compressed_len / (1024 * 1024));

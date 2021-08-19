@@ -86,7 +86,7 @@ _
             //
             t->update_interpolated_position();
             if (t->is_moving) {
-                // if (!game->things_are_moving) { t->con("wait"); }
+                //if (!game->things_are_moving) { t->con("wait"); }
                 game->things_are_moving = true;
             }
         } else if (t->is_falling) {
@@ -104,19 +104,22 @@ _
         } else if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
                    (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
                    (t->get_weapon_id_use_anim().ok())) {
+
+            if (game->robot_mode) {
+                // if (!game->things_are_moving) { t->con("wait"); }
+                game->things_are_moving = true;
+            }
+
             //
             // Wait for animation end. Only if the thing is onscreen
             //
-            if (t->frame_count == game->frame_count) {
-                if (game->robot_mode) {
-                    // if (!game->things_are_moving) { t->con("wait"); }
-                    game->things_are_moving = true;
-                }
-            } else if (!t->is_dead) {
-                if (t->is_offscreen) {
-                    t->dead("offscreen");
-                } else {
-                    t->is_offscreen = true;
+            if (t->frame_count != game->frame_count) {
+                if (!t->is_dead) {
+                    if (t->is_offscreen) {
+                        t->dead("offscreen");
+                    } else {
+                        t->is_offscreen = true;
+                    }
                 }
             }
         }
@@ -240,9 +243,15 @@ _
         }
 
         if (game->robot_mode_tick_requested) {
-            LOG("Tick robot mode");
+            CON("Robot: Try to do something");
             game->robot_mode_tick_requested = false;
-            game->robot_mode_tick();
+            if (player) {
+                player->cursor_path_pop_next_and_move();
+                
+                if (game->tick_requested.empty()) {
+                    game->robot_mode_tick();
+                }
+            }
         }
     }
 _

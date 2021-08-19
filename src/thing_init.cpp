@@ -113,7 +113,7 @@ void Thing::init (Levelp level,
 
     timestamp_next_frame = 0;
     if (name == "") {
-        DIE("Thing template cannot be created: no name given");
+        DIE("Thing template cannot be created: No name given");
     }
 
     const auto tpp = tp_find(name);

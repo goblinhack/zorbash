@@ -1184,7 +1184,7 @@ static PyObject *con_ (PyObject *obj, PyObject *args, PyObject *keywds)
     wchar_t *a = 0;
 
     if (!PyArg_ParseTuple(args, "u", &a)) {
-        ERR("con: bad args");
+        ERR("con: Bad args");
         Py_RETURN_FALSE;
     }
 
@@ -1200,7 +1200,7 @@ static PyObject *topcon_ (PyObject *obj, PyObject *args, PyObject *keywds)
     wchar_t *a = 0;
 
     if (!PyArg_ParseTuple(args, "u", &a)) {
-        ERR("topcon: bad args");
+        ERR("topcon: Bad args");
         Py_RETURN_FALSE;
     }
 
@@ -1216,7 +1216,7 @@ static PyObject *puts_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *a = 0;
 
     if (!PyArg_ParseTuple(args, "s", &a)) {
-        ERR("puts: bad args");
+        ERR("puts: Bad args");
         Py_RETURN_FALSE;
     }
 
@@ -1232,7 +1232,7 @@ static PyObject *log_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *a = 0;
 
     if (!PyArg_ParseTuple(args, "s", &a)) {
-        ERR("log: bad args");
+        ERR("log: Bad args");
         Py_RETURN_FALSE;
     }
 
@@ -1248,7 +1248,7 @@ static PyObject *err_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *a = 0;
 
     if (!PyArg_ParseTuple(args, "s", &a)) {
-        ERR("err: bad args");
+        ERR("err: Bad args");
         Py_RETURN_FALSE;
     }
 
@@ -1264,7 +1264,7 @@ static PyObject *die_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *a = 0;
 
     if (!PyArg_ParseTuple(args, "s", &a)) {
-        ERR("die: bad args");
+        ERR("die: Bad args");
         Py_RETURN_FALSE;
     }
 

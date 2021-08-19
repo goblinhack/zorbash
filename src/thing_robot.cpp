@@ -531,15 +531,15 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         GOAL_ADD(score, "collect-treasure");
                         got_one_this_tile = true;
                         if (is_player()) {
-                            CON("Robot decided %s is worth collecting", it->to_string().c_str());
+                            CON("Robot thinks it is worth collecting %s", it->to_string().c_str());
                         } else {
-                            con("Decided %s is worth collecting", it->to_string().c_str());
+                            con("Monst thinks it is worth collecting %s", it->to_string().c_str());
                         }
                     } else {
                         if (is_player()) {
-                            CON("Robot decided %s is not worth collecting", it->to_string().c_str());
+                            CON("Robot thinks it is not worth collecting %s", it->to_string().c_str());
                         } else {
-                            con("Decided %s is not worth collecting", it->to_string().c_str());
+                            con("Monst thinks it is not worth collecting %s", it->to_string().c_str());
                         }
                     }
                 }
@@ -578,9 +578,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     avoid = false;
 
                     if (is_player()) {
-                        CON("Robot needs to attack %s", it->to_string().c_str());
+                        CON("Robot thinks it needs to attack %s", it->to_string().c_str());
                     } else {
-                        log("Need to avoid %s", it->to_string().c_str());
+                        log("Monst thinks it needs to avoid %s", it->to_string().c_str());
                     }
 
                     //
@@ -599,14 +599,14 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         //
                         // Very close, high priority attack
                         //
-                        CON("Robot should attack nearby %s", it->to_string().c_str());
+                        CON("Robot thinks it should attack nearby %s", it->to_string().c_str());
                         GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-enemy");
                         got_one_this_tile = true;
                     } else if (dist < max_dist) {
                         //
                         // Further away close, lower priority attack
                         //
-                        CON("Robot might attack %s", it->to_string().c_str());
+                        CON("Robot thinks it might attack %s", it->to_string().c_str());
                         GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-enemy");
                         got_one_this_tile = true;
                     }
@@ -614,9 +614,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
                 if (avoid) {
                     if (is_player()) {
-                        CON("Robot needs to avoid %s", it->to_string().c_str());
+                        CON("Robot thinks it needs to avoid %s", it->to_string().c_str());
                     } else {
-                        log("Need to avoid %s", it->to_string().c_str());
+                        log("Monst thinks it needs to avoid %s", it->to_string().c_str());
                     }
 
                     bool got_avoid = false;
@@ -939,7 +939,7 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                     up = dy < 0;
                     down = dy > 0;
                     attack = true;
-                    CON("Robot: try hitting the door");
+                    CON("Robot: Try hitting the door");
                     player_tick(left, right, up, down, attack, wait, jump);
                     return true;
                 }
@@ -947,7 +947,7 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                 auto items = anything_to_carry_at(at);
                 if (items.size() >= 1) {
                     for (auto item : items) {
-                        CON("Robot: try to carry %s", item->to_string().c_str());
+                        CON("Robot: Try to carry %s", item->to_string().c_str());
                         if (try_to_carry(item)) {
                             game->tick_begin("Robot collected " + item->to_string());
                             return true;
@@ -1027,12 +1027,14 @@ void Thing::robot_tick (void)
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
+            CON("Robot: Look for something new to do");
+
             //
             // Look for doors or things to collect, if not being attacked.
             //
             auto threat = nearby_most_dangerous_thing_get();
             if (threat && is_dangerous(threat)){
-                CON("Robot: a threat is nearby");
+                CON("Robot: A threat is nearby");
             } else {
                 if (robot_ai_choose_nearby_goal()) {
                     return;
@@ -1048,21 +1050,24 @@ void Thing::robot_tick (void)
                 if (monstp->move_path.size()) {
                     robot_change_state(ROBOT_STATE_MOVING, s.c_str());
                 } else {
-                    CON("Robot: found goal at current location");
+                    CON("Robot: Found goal at current location");
                 }
                 return;
             }
 
-            CON("Robot: nothing to do");
+            CON("Robot: Nothing to do");
             wid_actionbar_robot_mode_off();
         }
         break;
         case ROBOT_STATE_MOVING:
         {
+            CON("Robot: Continue moving");
+
             //
             // Check for interrupts
             //
             if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy)) {
+                CON("Robot: Something interrupted me");
                 robot_change_state(ROBOT_STATE_IDLE, "move interrupted by a change");
                 wid_actionbar_init();
                 return;
@@ -1073,14 +1078,14 @@ void Thing::robot_tick (void)
                 wid_actionbar_init();
                 return;
             } else {
-                CON("Robot: moving");
+                CON("Robot: Moving");
                 return;
             }
         }
         break;
     }
 
-    log("Robot: do something");
+    log("Robot: Do something");
     if (do_something) {
         player_tick(left, right, up, down, attack, wait, jump);
     }

@@ -626,37 +626,37 @@ _
 
 Thingp Level::inventory_get (void)
 {
-    LOG("Inventory: get highlight slot %d", game->inventory_highlight_slot);
+    LOG("Inventory: Get highlight slot %d", game->inventory_highlight_slot);
     return inventory_get(game->inventory_highlight_slot);
 }
 
 bool Level::inventory_over (const uint32_t slot)
 {_
-    LOG("Inventory: over inventory slot %d", slot);
+    LOG("Inventory: Over inventory slot %d", slot);
 _
     if (!player) {
-        LOG("Inventory: ignore; no player");
+        LOG("Inventory: Ignore; no player");
         return false;
     }
 
     if (slot >= player->monstp->inventory_id.size()) {
-        LOG("Inventory: ignore; slot out of range");
+        LOG("Inventory: Ignore; slot out of range");
         return false;
     }
 
     auto oid = get(player->monstp->inventory_id, slot);
     if (!oid) {
-        LOG("Inventory: ignore; nothing at that slot");
+        LOG("Inventory: Ignore; nothing at that slot");
         return false;
     }
 
     Thingp item;
 
     if (slot != game->inventory_highlight_slot) {
-        LOG("Inventory: request to remake inventory");
+        LOG("Inventory: Request to remake inventory");
         game->request_remake_inventory = true;
         game->inventory_highlight_slot = slot;
-        LOG("Inventory: highlight slot %d", slot);
+        LOG("Inventory: Highlight slot %d", slot);
         item = inventory_describe(slot);
     } else {
         item = inventory_describe(game->inventory_highlight_slot);
@@ -674,7 +674,7 @@ _
 
 bool Level::inventory_chosen (const uint32_t slot)
 {_
-    LOG("Inventory: chosen inventory slot %d", slot);
+    LOG("Inventory: Chosen inventory slot %d", slot);
 _
     if (!player) {
         return false;
@@ -684,7 +684,7 @@ _
         return false;
     }
 
-    LOG("Inventory: request to remake inventory");
+    LOG("Inventory: Request to remake inventory");
     game->request_remake_inventory = true;
 
     auto oid = get(player->monstp->inventory_id, slot);
@@ -696,7 +696,7 @@ _
 
     if (slot != game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
-        LOG("Inventory: highlight slot %d", slot);
+        LOG("Inventory: Highlight slot %d", slot);
 
         item = inventory_describe(slot);
     } else {
@@ -718,7 +718,7 @@ _
 
 bool Level::inventory_assign (const uint32_t slot, Thingp item)
 {_
-    LOG("Inventory: assign inventory slot %d", slot);
+    LOG("Inventory: Assign inventory slot %d", slot);
 _
     if (!player) {
         return false;
@@ -728,7 +728,7 @@ _
         player->monstp->inventory_id.resize(slot + 1);
     }
 
-    LOG("Inventory: request to remake inventory");
+    LOG("Inventory: Request to remake inventory");
     game->request_remake_inventory = true;
 
     auto inventory_items = player->monstp->inventory_id.size();
@@ -746,7 +746,7 @@ _
             player->monstp->inventory_id[i] = 0;
             if (i == game->inventory_highlight_slot) {
                 game->inventory_highlight_slot = slot;
-                LOG("Inventory: highlight slot %d", slot);
+                LOG("Inventory: Highlight slot %d", slot);
             }
         }
     }
@@ -780,16 +780,16 @@ int Level::inventory_get_slot (Thingp item)
 
 Thingp Level::inventory_describe (const uint32_t slot)
 {_
-    LOG("Inventory: describe slot %d", slot);
+    LOG("Inventory: Describe slot %d", slot);
 _
     auto item = inventory_get(slot);
     if (item) {
         if (DEBUG2) {
-            item->log("Inventory: describe slot %d", slot);
+            item->log("Inventory: Describe slot %d", slot);
         }
         item->describe_when_hovered_over_in_rightbar();
     } else {
-        LOG("Inventory: describe slot %d => nothing there", slot);
+        LOG("Inventory: Describe slot %d => nothing there", slot);
     }
     return item;
 }

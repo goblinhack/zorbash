@@ -35,7 +35,7 @@ bool wid_rightbar_init (void)
 
 static void wid_rightbar_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {_
-    DBG3("rightbar: begin over rightbar");
+    DBG3("rightbar: Begin over rightbar");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -46,18 +46,18 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        DBG3("rightbar: moving items; ignore");
+        DBG3("rightbar: Moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        DBG3("rightbar: in transit item; ignore");
+        DBG3("rightbar: In transit item; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        DBG3("rightbar: no level; ignore");
+        DBG3("rightbar: No level; ignore");
         return;
     }
 
@@ -68,7 +68,7 @@ _
 
 static void wid_rightbar_mouse_over_e (Widp w)
 {_
-    DBG3("rightbar: end over rightbar");
+    DBG3("rightbar: End over rightbar");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -79,18 +79,18 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        DBG3("rightbar: moving items; ignore");
+        DBG3("rightbar: Moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        DBG3("rightbar: in transit item; ignore");
+        DBG3("rightbar: In transit item; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        DBG3("rightbar: no level; ignore");
+        DBG3("rightbar: No level; ignore");
         return;
     }
 

@@ -17,7 +17,7 @@
 
 void wid_inventory_fini (void)
 {_
-    DBG3("Inventory: fini");
+    DBG3("Inventory: Fini");
 }
 
 uint8_t wid_inventory_init (void)
@@ -27,7 +27,7 @@ uint8_t wid_inventory_init (void)
 
 void wid_inventory_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {_
-    DBG3("Inventory: begin over inventory");
+    DBG3("Inventory: Begin over inventory");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -39,27 +39,27 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        DBG3("Inventory: moving items; ignore");
+        DBG3("Inventory: Moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        DBG3("Inventory: in transit item; ignore");
+        DBG3("Inventory: In transit item; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        DBG3("Inventory: no level; ignore");
+        DBG3("Inventory: No level; ignore");
         return;
     }
 
     auto slot = wid_get_int_context(w);
 
-    DBG3("Inventory: begin over inventory slot %d", slot);
+    DBG3("Inventory: Begin over inventory slot %d", slot);
 _
     if (!level->inventory_over(slot)) {
-        DBG3("Inventory: not over anything");
+        DBG3("Inventory: Not over anything");
         return;
     }
 
@@ -73,7 +73,7 @@ _
 
 void wid_inventory_mouse_over_e (Widp w)
 {_
-    DBG3("Inventory: end over inventory");
+    DBG3("Inventory: End over inventory");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -85,24 +85,24 @@ _
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        DBG3("Inventory: moving items; ignore");
+        DBG3("Inventory: Moving items; ignore");
         return;
     }
 
     if (game->in_transit_item) {
-        DBG3("Inventory: in transit item; ignore");
+        DBG3("Inventory: In transit item; ignore");
         return;
     }
 
     auto level = game->level;
     if (!level) {
-        DBG3("Inventory: no level; ignore");
+        DBG3("Inventory: No level; ignore");
         return;
     }
 
     auto slot = wid_get_int_context(w);
 
-    DBG3("Inventory: over inventory slot %d", slot);
+    DBG3("Inventory: Over inventory slot %d", slot);
 _
     if (!level->inventory_over(slot)) {
         return;
@@ -120,7 +120,7 @@ uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
                                             int32_t y,
                                             uint32_t button)
 {_
-    DBG3("Inventory: mouse up over bag");
+    DBG3("Inventory: Mouse up over bag");
 _
     if ((game->state == Game::STATE_CHOOSING_TARGET) ||
         (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -172,7 +172,7 @@ uint8_t wid_inventory_item_mouse_up (Widp w,
         (game->state == Game::STATE_LOAD_MENU) ||
         (game->state == Game::STATE_QUIT_MENU) ||
         (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-        DBG3("Inventory: moving items; ignore");
+        DBG3("Inventory: Moving items; ignore");
         return true;
     }
 

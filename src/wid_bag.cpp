@@ -157,7 +157,7 @@ _
         if (game->level->player->carry(t)) {
             t->log("Placed in inventory");
             wid_destroy(&game->in_transit_item);
-            t->log("Placed item: request to remake inventory");
+            t->log("Placed item: Request to remake inventory");
             game->request_remake_inventory = true;
         }
         return true;

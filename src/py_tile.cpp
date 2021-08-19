@@ -23,32 +23,32 @@ PyObject *tile_load_arr_ (PyObject *obj, PyObject *args, PyObject *keywds)
         (char*) "name", (char*) "width", (char*) "height", (char*) "arr", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
-        ERR("tile_load_arr: bad args");
+        ERR("tile_load_arr: Bad args");
         Py_RETURN_FALSE;
     }
 
     if (!file) {
-        ERR("tile_load_arr: missing file attr");
+        ERR("tile_load_arr: Missing file attr");
         Py_RETURN_FALSE;
     }
 
     if (!name) {
-        ERR("tile_load_arr: missing name attr");
+        ERR("tile_load_arr: Missing name attr");
         Py_RETURN_FALSE;
     }
 
     if (!width) {
-        ERR("tile_load_arr: missing width attr");
+        ERR("tile_load_arr: Missing width attr");
         Py_RETURN_FALSE;
     }
 
     if (!height) {
-        ERR("tile_load_arr: missing height attr");
+        ERR("tile_load_arr: Missing height attr");
         Py_RETURN_FALSE;
     }
 
     if (!e) {
-        ERR("tile_load_arr: missing arr attr");
+        ERR("tile_load_arr: Missing arr attr");
         Py_RETURN_FALSE;
     }
 
@@ -98,32 +98,32 @@ PyObject *tile_load_arr_sprites_ (PyObject *obj, PyObject *args, PyObject *keywd
         (char*) "name", (char*) "width", (char*) "height", (char*) "arr", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
-        ERR("tile_load_arr: bad args");
+        ERR("tile_load_arr: Bad args");
         Py_RETURN_FALSE;
     }
 
     if (!file) {
-        ERR("tile_load_arr: sprites, missing file attr");
+        ERR("tile_load_arr: Sprites, missing file attr");
         Py_RETURN_FALSE;
     }
 
     if (!name) {
-        ERR("tile_load_arr: sprites, missing name attr");
+        ERR("tile_load_arr: Sprites, missing name attr");
         Py_RETURN_FALSE;
     }
 
     if (!width) {
-        ERR("tile_load_arr: sprites, missing width attr");
+        ERR("tile_load_arr: Sprites, missing width attr");
         Py_RETURN_FALSE;
     }
 
     if (!height) {
-        ERR("tile_load_arr: sprites, missing height attr");
+        ERR("tile_load_arr: Sprites, missing height attr");
         Py_RETURN_FALSE;
     }
 
     if (!e) {
-        ERR("tile_load_arr: sprites, missing arr attr");
+        ERR("tile_load_arr: Sprites, missing arr attr");
         Py_RETURN_FALSE;
     }
 
