@@ -150,7 +150,7 @@ std::string Thing::to_dbg_string (void) const
                             level->world_at.x,
                             level->world_at.y,
                             level->world_at.z,
-                            id, 
+                            id,
                             tp() ? tp()->name().c_str() : "notp",
                             mid_at.x, mid_at.y,
                             has_ever_moved                  ?  ", has_ever_moved" : "",

@@ -593,7 +593,6 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     //
                     // Monsters we avoid are more serious threats
                     //
-                    CON("Robot should avoid %s", it->to_string().c_str());
                     avoid = true;
                 } else if (!avoid && it->is_monst()) {
                     if (dist < 2) {
