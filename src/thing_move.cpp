@@ -334,7 +334,7 @@ bool Thing::move (fpoint future_pos,
     }
 
     auto t = nearby_most_dangerous_thing_get();
-    if (t) {
+    if (is_monst() && t) {
         auto free_attack =
              (((t->mid_at.x >= mid_at.x) && left) ||
               ((t->mid_at.x <= mid_at.x) && right) ||

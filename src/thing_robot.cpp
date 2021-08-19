@@ -560,8 +560,6 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 bool avoid = false;
                 auto dist = distance(mid_at, it->mid_at);
                 float max_dist = ai_scent_distance();
-CON("max d %f", max_dist); 
-CON("    d %f", dist); 
 
                 //
                 // If this is something we really want to avoid, like
@@ -574,7 +572,6 @@ CON("    d %f", dist);
                 }
 
                 if (is_enemy(it) && (dist < max_dist)) {
-
                     //
                     // Cannot avoid if this thing is beating on us
                     //
@@ -590,8 +587,8 @@ CON("    d %f", dist);
                     // The closer an enemy is (something that attacked us), the
                     // higher the score
                     //
-CON("score %f", (max_dist - dist) * 200);
                     GOAL_ADD((int)(max_dist - dist) * 200, "attack-enemy");
+                    got_one_this_tile = true;
                 } else if (!avoid && (dist < ai_avoid_distance() && will_avoid_monst(it))) {
                     //
                     // Monsters we avoid are more serious threats
@@ -605,12 +602,14 @@ CON("score %f", (max_dist - dist) * 200);
                         //
                         CON("Robot should attack nearby %s", it->to_string().c_str());
                         GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-enemy");
+                        got_one_this_tile = true;
                     } else if (dist < max_dist) {
                         //
                         // Further away close, lower priority attack
                         //
                         CON("Robot might attack %s", it->to_string().c_str());
                         GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-enemy");
+                        got_one_this_tile = true;
                     }
                 }
 
