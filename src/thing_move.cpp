@@ -297,11 +297,9 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (is_player()) {
-        game->tick_begin("player moved");
-        dbg("Player move");
-        _
-
         if (mid_at != future_pos) {
+            game->tick_begin("player moved");
+
             if (up) {
                 dbg("Try to move up; collision check");
             } else if (down) {
@@ -323,7 +321,7 @@ bool Thing::move (fpoint future_pos,
                     use_weapon();
                 }
                 lunge(future_pos);
-                dbg("Move failed");
+                clear_move_path("Move failed");
                 return false;
             }
         }

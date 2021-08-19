@@ -1289,6 +1289,7 @@ public:
     int robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_search_goals(std::multiset<Goal> &goals);
+    bool robot_ai_choose_nearby_goal(void);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);
     void visible();

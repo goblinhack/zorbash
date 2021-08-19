@@ -91,6 +91,6 @@ void Thing::add_enemy (Thingp attacker)
         monstp->enemies[attacker->id] = ai_enemy_memory();
     } else {
         dbg("Increment old enemy %s", attacker->to_string().c_str());
-        monstp->enemies[attacker->id]++;
+        monstp->enemies[attacker->id] *= 2;
     }
 }

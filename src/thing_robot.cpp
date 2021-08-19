@@ -551,40 +551,34 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
             //
             if (is_key_collector()) {
                 if (it->is_key()) {
-                    GOAL_ADD(1, "collect-key");
+                    GOAL_ADD(100, "collect-key");
                     got_one_this_tile = true;
                 }
             }
 
             if (!it->is_dead) {
                 bool avoid = false;
+                auto dist = distance(mid_at, it->mid_at);
+                float max_dist = ai_scent_distance();
+CON("max d %f", max_dist); 
+CON("    d %f", dist); 
 
                 //
                 // If this is something we really want to avoid, like
                 // fire, then stay away from it
                 //
                 if (will_avoid_threat(it)) {
-                    if (distance(mid_at, it->mid_at) < 2) {
+                    if (dist < 2) {
                         avoid = true;
                     }
                 }
 
-                //
-                // Monsters we avoid are more serious threats
-                //
-                if (will_avoid_monst(it)) {
-                    if (distance(mid_at, it->mid_at) < ai_avoid_distance()) {
-                        avoid = true;
-                    }
-                }
+                if (is_enemy(it) && (dist < max_dist)) {
 
-                if (is_enemy(it)) {
                     //
-                    // The closer an enemy is (something that attacked us), the
-                    // higher the score
+                    // Cannot avoid if this thing is beating on us
                     //
-                    float dist = distance(it->mid_at, mid_at);
-                    float max_dist = ai_scent_distance();
+                    avoid = false;
 
                     if (is_player()) {
                         CON("Robot needs to attack %s", it->to_string().c_str());
@@ -592,8 +586,31 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         log("Need to avoid %s", it->to_string().c_str());
                     }
 
-                    if (dist < max_dist) {
-                        GOAL_ADD((int)(max_dist - dist) * 100, "attack-enemy");
+                    //
+                    // The closer an enemy is (something that attacked us), the
+                    // higher the score
+                    //
+CON("score %f", (max_dist - dist) * 200);
+                    GOAL_ADD((int)(max_dist - dist) * 200, "attack-enemy");
+                } else if (!avoid && (dist < ai_avoid_distance() && will_avoid_monst(it))) {
+                    //
+                    // Monsters we avoid are more serious threats
+                    //
+                    CON("Robot should avoid %s", it->to_string().c_str());
+                    avoid = true;
+                } else if (!avoid && it->is_monst()) {
+                    if (dist < 2) {
+                        //
+                        // Very close, high priority attack
+                        //
+                        CON("Robot should attack nearby %s", it->to_string().c_str());
+                        GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-enemy");
+                    } else if (dist < max_dist) {
+                        //
+                        // Further away close, lower priority attack
+                        //
+                        CON("Robot might attack %s", it->to_string().c_str());
+                        GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-enemy");
                     }
                 }
 
@@ -667,7 +684,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         avoiding = true;
                         break;
                     } else {
-                        dbg2("Could not avoid the monst!");
+                        CON("Robot could not avoid, so attack %s", it->to_string().c_str());
                     }
                 }
             }
@@ -893,6 +910,58 @@ next:
     }
 }
 
+bool Thing::robot_ai_choose_nearby_goal (void)
+{_
+    bool left;
+    bool right;
+    bool up;
+    bool down;
+    bool wait = false;
+    bool jump = false;
+    bool attack = false;
+
+    for (int dx = -1; dx <= 1; dx++) {
+        for (int dy = -1; dy <= 1; dy++) {
+            fpoint at(mid_at.x + dx, mid_at.y + dy);
+
+            FOR_ALL_THINGS(level, it, at.x, at.y) {
+                if (it->is_door() && !it->is_open) {
+                    if (get_keys()) {
+                        if (open_door(it)) {
+                            game->tick_begin("Robot opened a door");
+                            return true;
+                        }
+                    }
+
+                    //
+                    // Try hitting the door
+                    //
+                    left = dx < 0;
+                    right = dx > 0;
+                    up = dy < 0;
+                    down = dy > 0;
+                    attack = true;
+                    CON("Robot: try hitting the door");
+                    player_tick(left, right, up, down, attack, wait, jump);
+                    return true;
+                }
+
+                auto items = anything_to_carry_at(at);
+                if (items.size() >= 1) {
+                    for (auto item : items) {
+                        CON("Robot: try to carry %s", item->to_string().c_str());
+                        if (try_to_carry(item)) {
+                            game->tick_begin("Robot collected " + item->to_string());
+                            return true;
+                        }
+                    }
+                }
+            } FOR_ALL_THINGS_END();
+        }
+    }
+    return false;
+}
+
 void Thing::robot_tick (void)
 {_
     //
@@ -963,67 +1032,31 @@ void Thing::robot_tick (void)
             //
             // Look for doors or things to collect, if not being attacked.
             //
-            for (int dx = -1; dx <= 1; dx++) {
-                for (int dy = -1; dy <= 1; dy++) {
-                    fpoint at(mid_at.x + dx, mid_at.y + dy);
-
-                    FOR_ALL_THINGS(level, it, at.x, at.y) {
-
-                        if (it->is_door() && !it->is_open) {
-                            if (get_keys()) {
-                                if (open_door(it)) {
-                                    game->tick_begin("Robot opened a door");
-                                    return;
-                                }
-                            }
-
-                            //
-                            // Try hitting the door
-                            //
-                            if (!do_something) {
-                                do_something = true;
-                                attack = true;
-                                break;
-                            }
-                        }
-
-                        auto items = anything_to_carry_at(at);
-                        if (items.size() == 1) {
-                            for (auto item : items) {
-                                if (try_to_carry(item)) {
-                                    game->tick_begin("Robot collected " + item->to_string());
-                                    return;
-                                }
-                            }
-                        }
-
-                        if (do_something) {
-                            break;
-                        }
-                    } FOR_ALL_THINGS_END();
-                }
-
-                if (do_something) {
-                    break;
-                }
-            }
-
-            if (!do_something) {
-                if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy)) {
-                    std::string s = "new goal: ";
-                    for (auto p : monstp->move_path) {
-                        s += p.to_string() + " ";
-                    }
-
-                    if (monstp->move_path.size()) {
-                        robot_change_state(ROBOT_STATE_MOVING, s.c_str());
-                    }
+            auto threat = nearby_most_dangerous_thing_get();
+            if (threat && is_dangerous(threat)){
+                CON("Robot: a threat is nearby");
+            } else {
+                if (robot_ai_choose_nearby_goal()) {
                     return;
-                } else {
-                    CON("Robot: nothing to do");
-                    wid_actionbar_robot_mode_off();
                 }
             }
+
+            if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy)) {
+                std::string s = "new goal: ";
+                for (auto p : monstp->move_path) {
+                    s += p.to_string() + " ";
+                }
+
+                if (monstp->move_path.size()) {
+                    robot_change_state(ROBOT_STATE_MOVING, s.c_str());
+                } else {
+                    CON("Robot: found goal at current location");
+                }
+                return;
+            }
+
+            CON("Robot: nothing to do");
+            wid_actionbar_robot_mode_off();
         }
         break;
         case ROBOT_STATE_MOVING:

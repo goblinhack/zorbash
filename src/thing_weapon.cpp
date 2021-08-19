@@ -327,12 +327,13 @@ bool Thing::wield (Thingp weapon)
 
 void Thing::use_weapon (void)
 {_
-    dbg("Use something");
+    dbg("Try to use weapon");
 _
     if (get_weapon_id_use_anim().ok()) {
         //
         // Still using.
         //
+        dbg("Try to use weapon; no still using");
         return;
     }
 
