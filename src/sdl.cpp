@@ -447,7 +447,7 @@ static void sdl_event (SDL_Event * event)
     switch (event->type) {
         case SDL_KEYDOWN: {
             if (g_grab_next_key) {
-                DBG("SDL: Keyboard: Grabbed 0x%" PRIx32 " = %s / %s",
+                DBG("SDL: Keyboard: Grabbed 0x%08" PRIx32 " = %s / %s",
                     event->key.keysym.sym,
                     SDL_GetKeyName(event->key.keysym.sym),
                     SDL_GetScancodeName(event->key.keysym.scancode));
@@ -462,7 +462,7 @@ static void sdl_event (SDL_Event * event)
 
             key = &event->key.keysym;
 
-            DBG("SDL: Keyboard: Key pressed keycode 0x%" PRIx32 " = %s %d",
+            DBG("SDL: Keyboard: Key pressed keycode 0x%08" PRIx32 " = %s %d",
                 event->key.keysym.sym,
                 SDL_GetKeyName(event->key.keysym.sym), key->mod);
 
@@ -488,7 +488,7 @@ static void sdl_event (SDL_Event * event)
             break;
         }
         case SDL_KEYUP: {
-            DBG("SDL: Keyboard: Key released keycode 0x%" PRIx32 " = %s",
+            DBG("SDL: Keyboard: Key released keycode 0x%08" PRIx32 " = %s",
                 event->key.keysym.sym,
                 SDL_GetKeyName(event->key.keysym.sym));
 

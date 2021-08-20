@@ -194,7 +194,7 @@ public:
         return {l, cost};
     }
 
-    Path solve (char *path_debug)
+    Path solve (const Goal *goalp, char *path_debug)
     {
         auto distance_to_next_hop = 0;
         auto ncost = Nodecost(distance_to_next_hop + heuristic(start));
@@ -212,6 +212,9 @@ public:
                 auto [path, cost] = create_path(dmap, current);
 
                 if (cost < best.cost) {
+                    if (goalp) {
+                        best.goal = *goalp;
+                    }
                     best.path = path;
                     best.cost = cost;
 #ifdef ENABLE_DEBUG_AI_ASTAR
@@ -288,9 +291,13 @@ void astar_dump (const Dmap *dmap,
     }
 }
 
-Path astar_solve (char path_debug, point s, point g, const Dmap *d)
+Path astar_solve (const Goal *goal,
+                  char path_debug, 
+                  point s, 
+                  point g,
+                  const Dmap *d)
 {
     char tmp = path_debug;
     auto a = Astar(s, g, d);
-    return (a.solve(&tmp));
+    return (a.solve(goal, &tmp));
 }

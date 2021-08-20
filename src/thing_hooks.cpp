@@ -32,7 +32,7 @@ void Thing::hooks_remove ()
 
     if (owner) {
         if (is_loggable_for_unimportant_stuff()) {
-            dbg("Detach %" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
+            dbg("Detach %08" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
         }
 
         if (id == owner->get_on_fire_anim_id()) {

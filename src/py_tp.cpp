@@ -784,7 +784,7 @@ PyObject *level_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
@@ -825,7 +825,7 @@ PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObj
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
@@ -888,19 +888,19 @@ PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, 
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find 'me' thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find 'me' thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
     auto parent = level->thing_find(ThingId(parent_id));
     if (!parent) {
-        ERR("%s: Cannot find parent thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find parent thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
     auto target = level->thing_find(ThingId(target_id));
     if (!target) {
-        ERR("%s: Cannot find target thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find target thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
@@ -942,7 +942,7 @@ PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
@@ -983,7 +983,7 @@ PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
@@ -1024,7 +1024,7 @@ PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObj
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
@@ -1077,7 +1077,7 @@ PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
@@ -1118,7 +1118,7 @@ PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 
@@ -1171,7 +1171,7 @@ PyObject *level_place_at (PyObject *obj, PyObject *args, PyObject *keywds)
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s: Cannot find thing %" PRIx32 "", __FUNCTION__, id);
+        ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_FALSE;
     }
 

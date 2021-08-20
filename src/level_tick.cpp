@@ -10,6 +10,7 @@
 #include "my_wid_console.h"
 #include "my_random.h"
 #include "my_thing.h"
+#include "my_monst.h"
 #include "my_python.h"
 #include "my_player.h"
 #include "my_array_bounds_check.h"
@@ -243,10 +244,13 @@ _
         }
 
         if (game->robot_mode_tick_requested) {
-            CON("Robot: Try to do something");
             game->robot_mode_tick_requested = false;
             if (player) {
-                player->cursor_path_pop_next_and_move();
+                if (player->monstp &&
+                    player->monstp->move_path.size()) {
+                    CON("Robot: Try the next move");
+                    player->cursor_path_pop_next_and_move();
+                }
                 
                 if (game->tick_requested.empty()) {
                     game->robot_mode_tick();

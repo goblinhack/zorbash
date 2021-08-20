@@ -25,6 +25,12 @@
 #define GOAL_ADD(score, msg)                                               \
         total_score += (score);                                            \
         got_a_goal = true;                                                 \
+        if (last_msg.empty()) {                                            \
+            last_msg = msg;                                                \
+        } else {                                                           \
+            last_msg += ", ";                                              \
+            last_msg += msg;                                               \
+        }                                                                  \
         dbg2(" add goal (%d,%d) score %d %s, %s",                          \
              p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
 
@@ -200,7 +206,8 @@ _
                 astar_dump(g.dmap, goal.at, start, end);
             }
 #endif
-            auto result = astar_solve(path_debug,
+            auto result = astar_solve(&goal,
+                                      path_debug,
                                       astar_start,
                                       astar_end,
                                       g.dmap);
@@ -236,6 +243,7 @@ _
 
         for (auto& result : paths) {
             std::vector<point> new_move_path;
+
             for (point p : result.path) {
                 p.x += minx;
                 p.y += miny;
@@ -250,6 +258,32 @@ _
             }
 
             std::reverse(new_move_path.begin(), new_move_path.end());
+
+            auto p = new_move_path[new_move_path.size() - 1];
+
+            FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+                if (it == this) { continue; }
+
+                if (it->is_changing_level ||
+                    it->is_hidden ||
+                    it->is_falling ||
+                    it->is_jumping) {
+                    continue;
+                }
+
+                if (it->get_immediate_spawned_owner_id().ok()) {
+                    continue;
+                }
+
+                if (is_player()) {
+                    CON("Robot: Found a goal: %s %s",
+                        it->to_string().c_str(), result.goal.msg.c_str());
+                } else {
+                    log("Monst: Fouud a goal %s %s",
+                        it->to_string().c_str(), result.goal.msg.c_str());
+                }
+            } FOR_ALL_THINGS_END();
+
             if (is_player()) {
                 level->cursor_path_create(new_move_path);
                 level->debug_path_create(new_move_path);
@@ -262,9 +296,9 @@ _
                 }
 
                 //
-                // Did we try to do something?
+                // Did we try or attempt to try to do something?
                 //
-                if (game->tick_completed != game->tick_current) {
+                if (!game->tick_requested.empty()) {
                     return true;
                 }
             } else {
@@ -473,6 +507,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
         int terrain_cost = get_terrain_cost(p);
         int total_score = -(int)terrain_cost;
 
+        std::string last_msg;
+
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
 
@@ -486,7 +522,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 continue;
             }
 
-            dbg2(" consider %s", it->to_string().c_str());
+            if (it->get_immediate_spawned_owner_id().ok()) {
+                continue;
+            }
 
             //
             // Worse terrain, less preferred. Higher score, more preferred.
@@ -531,15 +569,15 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         GOAL_ADD(score, "collect-treasure");
                         got_one_this_tile = true;
                         if (is_player()) {
-                            CON("Robot thinks it is worth collecting %s", it->to_string().c_str());
+                            CON("Robot: Is considering collecting %s", it->to_string().c_str());
                         } else {
-                            con("Monst thinks it is worth collecting %s", it->to_string().c_str());
+                            con("Monst: Is considering collecting %s", it->to_string().c_str());
                         }
                     } else {
                         if (is_player()) {
-                            CON("Robot thinks it is not worth collecting %s", it->to_string().c_str());
+                            CON("Robot: Is not considering collecting %s", it->to_string().c_str());
                         } else {
-                            con("Monst thinks it is not worth collecting %s", it->to_string().c_str());
+                            con("Monst: Is not considering collecting %s", it->to_string().c_str());
                         }
                     }
                 }
@@ -577,12 +615,6 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     //
                     avoid = false;
 
-                    if (is_player()) {
-                        CON("Robot thinks it needs to attack %s", it->to_string().c_str());
-                    } else {
-                        log("Monst thinks it needs to avoid %s", it->to_string().c_str());
-                    }
-
                     //
                     // The closer an enemy is (something that attacked us), the
                     // higher the score
@@ -599,14 +631,12 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         //
                         // Very close, high priority attack
                         //
-                        CON("Robot thinks it should attack nearby %s", it->to_string().c_str());
                         GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-enemy");
                         got_one_this_tile = true;
                     } else if (dist < max_dist) {
                         //
                         // Further away close, lower priority attack
                         //
-                        CON("Robot thinks it might attack %s", it->to_string().c_str());
                         GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-enemy");
                         got_one_this_tile = true;
                     }
@@ -614,9 +644,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
                 if (avoid) {
                     if (is_player()) {
-                        CON("Robot thinks it needs to avoid %s", it->to_string().c_str());
+                        CON("Robot: Thinks it needs to avoid %s", it->to_string().c_str());
                     } else {
-                        log("Monst thinks it needs to avoid %s", it->to_string().c_str());
+                        log("Monst: Thinks it needs to avoid %s", it->to_string().c_str());
                     }
 
                     bool got_avoid = false;
@@ -645,7 +675,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                             int terrain_cost = get_terrain_cost(p);
                             int total_score = -(int)terrain_cost;
                             total_score += dist * dist;
-                            goals.insert(Goal(total_score, point(X + dx, Y + dy)));
+                            goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                             set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
                             dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
@@ -666,7 +696,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                 int terrain_cost = get_terrain_cost(p);
                                 int total_score = -(int)terrain_cost;
                                 total_score += dist * dist;
-                                goals.insert(Goal(total_score, point(X + dx, Y + dy)));
+                                goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                                 set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
                                 dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
@@ -702,12 +732,27 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     GOAL_ADD(1, "preferred-terrain");
                 }
             }
+
+            if (got_one_this_tile) {
+                if (is_player()) {
+                    CON("Robot: Is considering: %s %s", it->to_string().c_str(), last_msg.c_str());
+                } else {
+                    log("Monst: Is considering %s %s", it->to_string().c_str(), last_msg.c_str());
+                }
+            } else {
+                if (is_player()) {
+                    CON("Robot: Is not considering: %s %s", it->to_string().c_str(), last_msg.c_str());
+                } else {
+                    log("Monst: Is not considering %s %s", it->to_string().c_str(), last_msg.c_str());
+                }
+            }
+
         } FOR_ALL_THINGS_END();
 
         if (avoiding) {
             set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
         } else if (got_a_goal) {
-            goals.insert(Goal(total_score, point(X, Y)));
+            goals.insert(Goal(total_score, point(X, Y), last_msg));
             set(dmap_can_see->val, X, Y, DMAP_IS_GOAL);
         } else if (terrain_cost) {
             set(dmap_can_see->val, X, Y, (uint8_t)terrain_cost);
@@ -904,7 +949,7 @@ next:
             total_score += 10;
         }
 
-        goals.insert(Goal(total_score, p));
+        goals.insert(Goal(total_score, p, "search cand"));
     }
 }
 
@@ -1027,7 +1072,7 @@ void Thing::robot_tick (void)
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
-            CON("Robot: Look for something new to do");
+            CON("Robot: Is idle, look for something to do");
 
             //
             // Look for doors or things to collect, if not being attacked.
@@ -1050,7 +1095,7 @@ void Thing::robot_tick (void)
                 if (monstp->move_path.size()) {
                     robot_change_state(ROBOT_STATE_MOVING, s.c_str());
                 } else {
-                    CON("Robot: Found goal at current location");
+                    CON("Robot: Did something");
                 }
                 return;
             }

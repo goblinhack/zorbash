@@ -230,11 +230,11 @@ void Thing::unwield (const char *why)
         return;
     }
 
-    dbg("Unwielding %" PRIx32 ", why: %s", get_weapon_id().id, why);
+    dbg("Unwielding %08" PRIx32 ", why: %s", get_weapon_id().id, why);
 
     auto weapon = weapon_get();
     if (!weapon) {
-        dbg("Could not unwield %" PRIx32 ", why: %s", get_weapon_id().id, why);
+        dbg("Could not unwield %08" PRIx32 ", why: %s", get_weapon_id().id, why);
         return;
     }
 
@@ -364,7 +364,7 @@ _
 
         swung_as = weapon_tp->gfx_anim_attack();
         if (swung_as == "") {
-            die("Could not use %s/%" PRIx32 " has no 'use' animation frame",
+            die("Could not use %s/%08" PRIx32 " has no 'use' animation frame",
                 weapon_tp->name().c_str(), weapon->id.id);
             return;
         }

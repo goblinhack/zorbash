@@ -22,12 +22,12 @@ void Level::put_thing (int x, int y, ThingId id)
     }
 
     if (!t) {
-        t->err("Oob at map (%d,%d) for put of %" PRIx32 "", x, y, id.id);
+        t->err("Oob at map (%d,%d) for put of %08" PRIx32 "", x, y, id.id);
         return;
     }
 
     if (is_oob(x, y)) {
-        t->err("Oob at map (%d,%d) for put of %" PRIx32 "", x, y, id.id);
+        t->err("Oob at map (%d,%d) for put of %08" PRIx32 "", x, y, id.id);
         return;
     }
 
@@ -39,7 +39,7 @@ do_retry:
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (idp->id == id.id) {
             if (DEBUG5) {
-                t->log("Found %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
+                t->log("Found %08" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
             }
             return;
         }
@@ -60,7 +60,7 @@ do_retry:
              });
 
         if (DEBUG5) {
-            t->log("Put thing %p %" PRIx32 " at %u,%u slot %u", t, id.id, x, y, free_slot);
+            t->log("Put thing %p %08" PRIx32 " at %u,%u slot %u", t, id.id, x, y, free_slot);
         }
 
         *idp = id;
@@ -71,7 +71,7 @@ do_retry:
     // Try to clean up some slots
     //
     if (retry < MAP_SLOTS) {
-        t->log("Out of thing slots at map (%d,%d) for put of %" PRIx32 ", try to cleanup", x, y, id.id);
+        t->log("Out of thing slots at map (%d,%d) for put of %08" PRIx32 ", try to cleanup", x, y, id.id);
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
             auto idp = &getref(all_thing_ids_at, x, y, slot);
             if (idp->id) {
@@ -90,11 +90,11 @@ do_retry:
         }
     }
 
-    t->log("Out of thing slots at map (%d,%d) for put of %" PRIx32 ", see below:", x, y, id.id);
+    t->log("Out of thing slots at map (%d,%d) for put of %08" PRIx32 ", see below:", x, y, id.id);
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
-        LOG("- slot %u %" PRIx32 "", slot, idp->id);
+        LOG("- slot %u %08" PRIx32 "", slot, idp->id);
     }
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
@@ -109,7 +109,7 @@ do_retry:
             t->log("- empty slot %u", slot);
         }
     }
-    t->err("Out of thing slots at map (%d,%d) for put of %" PRIx32 "", x, y, id.id);
+    t->err("Out of thing slots at map (%d,%d) for put of %08" PRIx32 "", x, y, id.id);
 }
 
 void Level::put_thing (point p, ThingId id)
@@ -121,12 +121,12 @@ void Level::remove_thing (int x, int y, ThingId id)
 {_
     auto t = thing_find(id);
     if (!t) {
-        ERR("Oob at map (%d,%d) for remove of %" PRIx32 "", x, y, id.id);
+        ERR("Oob at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
         return;
     }
 
     if (is_oob(x, y)) {
-        t->err("Oob at map (%d,%d) for remove of %" PRIx32 "", x, y, id.id);
+        t->err("Oob at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
         return;
     }
 
@@ -139,7 +139,7 @@ void Level::remove_thing (int x, int y, ThingId id)
             auto e = v->end();
 
             if (DEBUG5) {
-                t->log("Rem thing %p %" PRIx32 " at %u,%u slot %u", t, id.id, x, y, slot);
+                t->log("Rem thing %p %08" PRIx32 " at %u,%u slot %u", t, id.id, x, y, slot);
             }
 
 #ifdef SLOWER_BUT_USES_FANCY_STL
@@ -158,7 +158,7 @@ void Level::remove_thing (int x, int y, ThingId id)
             if (!found) {
                 // This happens when loading a fresh level
                 //
-                // t->err("Failed to remove thing %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
+                // t->err("Failed to remove thing %08" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
             }
 #endif
 
@@ -172,7 +172,7 @@ void Level::remove_thing (int x, int y, ThingId id)
 
                         for (auto i = b; i < e; i++) {
                             if (*i == t) {
-                                t->err("Thing ptr still exists after removal %" PRIx32 " at %u,%u slot %u",
+                                t->err("Thing ptr still exists after removal %08" PRIx32 " at %u,%u slot %u",
                                     id.id, x, y, slot);
                             }
                         }
@@ -183,7 +183,7 @@ void Level::remove_thing (int x, int y, ThingId id)
             return;
         }
     }
-    t->err("Did not find thing in any slot at map (%d,%d) for remove of %" PRIx32 "", x, y, id.id);
+    t->err("Did not find thing in any slot at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
 }
 
 void Level::remove_thing (point p, ThingId id)

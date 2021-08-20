@@ -21,7 +21,7 @@ std::string Thing::to_string (void) const
     verify(this);
 
     if (unlikely(!level)) {
-        return (string_sprintf("<not in level> %" PRIx32 "(<no tp>%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("<not in level> %08" PRIx32 "(<no tp>%s%s%s%s%s%s @%g,%g)",
                                id,
                                is_dead                       ? "/dead" : "",
                                is_on_fire()                  ? "/onfire" : "",
@@ -33,7 +33,7 @@ std::string Thing::to_string (void) const
     }
 
     if (unlikely(!tpp)) {_
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(<no tp>%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -46,7 +46,7 @@ std::string Thing::to_string (void) const
                                is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     } else if (get_health_max() || is_tickable() || is_interesting()) {_
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s T%u @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -62,10 +62,9 @@ std::string Thing::to_string (void) const
                                is_waiting_to_descend_dungeon ? "/des-dung" : "",
                                is_waiting_to_descend_sewer   ? "/des-sewer" : "",
                                is_waiting_to_ascend_sewer    ? "/asc-sewer" : "",
-                               game->tick_current,
                                mid_at.x, mid_at.y));
     } else {_
-        return (string_sprintf("L%d,%d,%d %" PRIx32 "(%s%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -146,7 +145,7 @@ std::string Thing::to_dbg_string (void) const
 {_
     verify(this);
 
-    return (string_sprintf("L%d,%d,%d %" PRIx32 " %s (@%g,%g)%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
+    return (string_sprintf("L%d,%d,%d %08" PRIx32 " %s (@%g,%g)%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
                             level->world_at.x,
                             level->world_at.y,
                             level->world_at.z,

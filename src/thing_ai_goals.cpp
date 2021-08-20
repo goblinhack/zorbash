@@ -86,8 +86,16 @@ _
 #define GOAL_ADD(score, msg)                                               \
         total_score += (score);                                            \
         got_a_goal = true;                                                 \
+        if (last_msg.empty()) {                                            \
+            last_msg = msg;                                                \
+        } else {                                                           \
+            last_msg += ", ";                                              \
+            last_msg += msg;                                               \
+        }                                                                  \
         dbg2(" add goal (%d,%d) score %d %s, %s",                          \
              p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
+
+        std::string last_msg;
 
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
@@ -206,7 +214,7 @@ _
                             int terrain_score = get_terrain_cost(p);
                             int total_score = -(int)terrain_score;
                             total_score += dist * dist;
-                            goals.insert(Goal(total_score, point(X + dx, Y + dy)));
+                            goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                             set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
                             dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
@@ -227,7 +235,7 @@ _
                                 int terrain_score = get_terrain_cost(p);
                                 int total_score = -(int)terrain_score;
                                 total_score += dist * dist;
-                                goals.insert(Goal(total_score, point(X + dx, Y + dy)));
+                                goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                                 set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
                                 dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
@@ -268,7 +276,7 @@ _
         if (avoiding) {
             set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
         } else if (got_a_goal) {
-            goals.insert(Goal(total_score, point(X, Y)));
+            goals.insert(Goal(total_score, point(X, Y), last_msg));
             set(dmap_can_see->val, X, Y, DMAP_IS_GOAL);
         } else if (terrain_score) {
             set(dmap_can_see->val, X, Y, (uint8_t)terrain_score);
@@ -395,7 +403,8 @@ _
         astar_debug = {};
 #endif
         auto astar_end = goal.at;
-        auto result = astar_solve(path_debug,
+        auto result = astar_solve(&goal,
+                                  path_debug,
                                   astar_start,
                                   astar_end,
                                   dmap_can_see);

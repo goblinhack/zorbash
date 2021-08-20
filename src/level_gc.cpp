@@ -32,7 +32,7 @@ _
         auto id = it->first;
         auto t = thing_find(id);
         if (!t) {
-            ERR("Thing %" PRIx32 " not found to garbage collect", id.id);
+            ERR("Thing %08" PRIx32 " not found to garbage collect", id.id);
             continue;
         }
 

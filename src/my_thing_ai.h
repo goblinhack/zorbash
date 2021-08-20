@@ -21,9 +21,10 @@ class Goal
 public:
     float score = {0};
     point at;
+    std::string msg;
 
     Goal () {}
-    Goal (float score, point at) : score(score), at(at) {}
+    Goal (float score, point at, const std::string &msg) : score(score), at(at), msg(msg) {}
 
     friend bool operator<(const class Goal & lhs, const class Goal & rhs) {
         return lhs.score > rhs.score; // Higher scores at the head
@@ -52,10 +53,11 @@ public:
 class Path {
 public:
     Path () {}
-    Path (std::vector<point> &p, int c) : path(p), cost(c) { }
+    Path (std::vector<point> &p, int c, const Goal &g) : path(p), cost(c), goal(g) { }
 
     std::vector<point> path;
     int                cost {};
+    Goal               goal;
 
     friend bool operator<(const class Path & lhs, const class Path & rhs) {
         if (lhs.cost == rhs.cost) {
@@ -66,9 +68,14 @@ public:
     }
 };
 
-extern Path astar_solve(char path_debug, point s, point g, const Dmap *d);
+extern Path astar_solve(const class Goal *goal,
+                        char path_debug,
+                        point s,
+                        point g,
+                        const Dmap *d);
 
-extern void astar_dump(const Dmap *dmap,
+extern void astar_dump(
+                       const Dmap *dmap,
                        const point &at,
                        const point &start,
                        const point &end);

@@ -298,8 +298,6 @@ bool Thing::move (fpoint future_pos,
 
     if (is_player()) {
         if (mid_at != future_pos) {
-            game->tick_begin("player moved");
-
             if (up) {
                 dbg("Try to move up; collision check");
             } else if (down) {
@@ -313,16 +311,18 @@ bool Thing::move (fpoint future_pos,
             }
 
             if (collision_check_only(future_pos)) {
-                dbg("Cannot move; try to shove");
                 if (shove_allowed) {
+                    game->tick_begin("player tried to shove");
                     try_to_shove(future_pos);
                 } else {
-                    dbg("Cannot shove; try to attack");
+                    game->tick_begin("player tried to attack");
                     use_weapon();
                 }
                 lunge(future_pos);
                 clear_move_path("Move failed");
                 return false;
+            } else {
+                game->tick_begin("player moved");
             }
         }
 
