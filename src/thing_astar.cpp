@@ -292,8 +292,8 @@ void astar_dump (const Dmap *dmap,
 }
 
 Path astar_solve (const Goal *goal,
-                  char path_debug, 
-                  point s, 
+                  char path_debug,
+                  point s,
                   point g,
                   const Dmap *d)
 {
