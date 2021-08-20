@@ -339,6 +339,11 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
                 continue;
             }
 
+            if (level->is_movement_blocking_hard(p)) {
+                set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                continue;
+            }
+
             if (is_jumper()) {
                 //
                 // Trace all possible jump paths to see if we can jump over
@@ -472,7 +477,6 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
     set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
     dmap_print(dmap_can_see);
     dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
-    dmap_print(dmap_can_see);
 
     auto t = nearby_most_dangerous_thing_get();
     if (t) {

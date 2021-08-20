@@ -243,6 +243,10 @@ public:
             eval_neighbor(current, point( 1,  0));
             eval_neighbor(current, point( 0, -1));
             eval_neighbor(current, point( 0,  1));
+            eval_neighbor(current, point(-1, -1));
+            eval_neighbor(current, point(-1,  1));
+            eval_neighbor(current, point( 1, -1));
+            eval_neighbor(current, point( 1,  1));
         }
 
         cleanup();

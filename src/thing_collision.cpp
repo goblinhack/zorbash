@@ -1299,23 +1299,59 @@ bool Thing::collision_check_only (fpoint future_pos)
     }
 _
     int minx = future_pos.x - thing_collision_tiles;
-    while (minx < 0) {
-        minx++;
+    if (minx < MAP_BORDER_ROCK) {
+        minx = MAP_BORDER_ROCK;
     }
 
     int miny = future_pos.y - thing_collision_tiles;
-    while (miny < 0) {
-        miny++;
+    if (miny < MAP_BORDER_ROCK) {
+        miny = MAP_BORDER_ROCK;
     }
 
     int maxx = future_pos.x + thing_collision_tiles;
-    while (maxx >= MAP_WIDTH) {
-        maxx--;
+    if (maxx >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        maxx = MAP_WIDTH - MAP_BORDER_ROCK;
     }
 
     int maxy = future_pos.y + thing_collision_tiles;
-    while (maxy >= MAP_HEIGHT) {
-        maxy--;
+    if (maxy >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        maxy = MAP_HEIGHT - MAP_BORDER_ROCK;
+    }
+
+    //
+    // We allow for diagonal movement like when you are in a corridor and
+    // turning a corner. It just helps the game look smoother and is easier to
+    // play. However, don't allow shortcuts that bypass doors!
+    //
+    auto diff = future_pos - mid_at;
+    if (diff.x == -1) {
+        if (diff.y == -1) {
+            if (level->is_door(mid_at.x, mid_at.y - 1) ||
+                level->is_door(mid_at.x - 1, mid_at.y)) {
+                dbg("Cannot move diagonally");
+                return true;
+            }
+        } else if (diff.y == 1) {
+            if (level->is_door(mid_at.x, mid_at.y + 1) ||
+                level->is_door(mid_at.x - 1, mid_at.y)) {
+                dbg("Cannot move diagonally");
+                return true;
+            }
+        }
+    } else if (diff.x == 1) {
+        if (diff.y == -1) {
+            if (level->is_door(mid_at.x, mid_at.y - 1) ||
+                level->is_door(mid_at.x + 1, mid_at.y)) {
+                dbg("Cannot move diagonally");
+                return true;
+            }
+        } else if (diff.y == 1) {
+            if (level->is_door(mid_at.x, mid_at.y + 1) ||
+                level->is_door(mid_at.x + 1, mid_at.y)) {
+                dbg("Cannot move diagonally");
+                return true;
+            }
+        }
     }
 
     for (int16_t x = minx; x <= maxx; x++) {
