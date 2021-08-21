@@ -21,9 +21,11 @@ std::string Thing::to_string (void) const
     verify(this);
 
     if (unlikely(!level)) {
-        return (string_sprintf("<not in level> %08" PRIx32 "(<no tp>%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("<not in level> %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%g,%g)",
                                id,
                                is_dead                       ? "/dead" : "",
+                               is_resurrecting               ? "/resurrecting" : "",
+                               is_offscreen                  ? "/offscreen" : "",
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
@@ -33,12 +35,14 @@ std::string Thing::to_string (void) const
     }
 
     if (unlikely(!tpp)) {_
-        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id,
                                is_dead                       ? "/dead" : "",
+                               is_resurrecting               ? "/resurrecting" : "",
+                               is_offscreen                  ? "/offscreen" : "",
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
@@ -46,12 +50,14 @@ std::string Thing::to_string (void) const
                                is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     } else if (get_health_max() || is_tickable() || is_interesting()) {_
-        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id, tpp->name().c_str(),
                                is_dead                       ? "/dead" : "",
+                               is_resurrecting               ? "/resurrecting" : "",
+                               is_offscreen                  ? "/offscreen" : "",
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
@@ -64,12 +70,14 @@ std::string Thing::to_string (void) const
                                is_waiting_to_ascend_sewer    ? "/asc-sewer" : "",
                                mid_at.x, mid_at.y));
     } else {_
-        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id, tpp->name().c_str(),
                                is_dead                       ? "/dead" : "",
+                               is_resurrecting               ? "/resurrecting" : "",
+                               is_offscreen                  ? "/offscreen" : "",
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
@@ -85,8 +93,10 @@ std::string Thing::to_short_string (void) const
     verify(this);
 
     if (unlikely(!level)) {
-        return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s%s%s%s @%g,%g)",
                                is_dead                       ? "/dead" : "",
+                               is_resurrecting               ? "/resurrecting" : "",
+                               is_offscreen                  ? "/offscreen" : "",
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
@@ -96,11 +106,13 @@ std::string Thing::to_short_string (void) const
     }
 
     if (unlikely(!tpp)) {_
-        return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                is_dead                       ? "/dead" : "",
+                               is_resurrecting               ? "/resurrecting" : "",
+                               is_offscreen                  ? "/offscreen" : "",
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
@@ -108,12 +120,14 @@ std::string Thing::to_short_string (void) const
                                is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     } else if (get_health_max() || is_tickable() || is_interesting()) {_
-        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                tpp->name().c_str(),
                                is_dead                       ? "/dead" : "",
+                               is_resurrecting               ? "/resurrecting" : "",
+                               is_offscreen                  ? "/offscreen" : "",
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
@@ -126,12 +140,14 @@ std::string Thing::to_short_string (void) const
                                is_waiting_to_ascend_sewer    ? "/asc-sewer" : "",
                                mid_at.x, mid_at.y));
     } else {_
-        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d (%s%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
                                id, tpp->name().c_str(),
                                is_dead                       ? "/dead" : "",
+                               is_resurrecting               ? "/resurrecting" : "",
+                               is_offscreen                  ? "/offscreen" : "",
                                is_on_fire()                  ? "/onfire" : "",
                                is_hidden                     ? "/hidden" : "",
                                is_jumping                    ? "/jumping" : "",
@@ -164,7 +180,7 @@ std::string Thing::to_dbg_string (void) const
                             is_bouncing                     ?  ", is_bouncing" : "",
                             is_changing_level               ?  ", is_changing_level" : "",
                             is_dead                         ?  ", is_dead" : "",
-                            is_scheduled_for_death               ?  ", is_scheduled_for_death" : "",
+                            is_scheduled_for_death          ?  ", is_scheduled_for_death" : "",
                             is_dying                        ?  ", is_dying" : "",
                             is_facing_left                  ?  ", is_facing_left" : "",
                             is_fadeup                       ?  ", is_fadeup" : "",

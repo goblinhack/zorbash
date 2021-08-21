@@ -232,7 +232,7 @@ std::list<Thingp> Thing::anything_to_carry (void)
     return anything_to_carry_at(mid_at);
 }
 
-bool Thing::check_anything_to_carry (void)
+bool Thing::check_anything_to_carry (bool auto_collect_allowed)
 {
     FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
         if (t->is_dead) {
@@ -252,8 +252,10 @@ bool Thing::check_anything_to_carry (void)
         }
 
         if (t->is_auto_collect_item()) {
-            carry(t);
-            continue;
+            if (auto_collect_allowed) {
+                carry(t);
+                continue;
+            }
         }
 
         return true;

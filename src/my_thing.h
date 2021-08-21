@@ -223,7 +223,7 @@ public:
     bool can_eat(const Thingp it);
     bool carry(Thingp w);
     bool change_owner(Thingp new_owner);
-    bool check_anything_to_carry(void);
+    bool check_anything_to_carry(bool auto_collect_allowed);
     bool collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle_at(bool *, bool *);
     bool collision_check_and_handle_at(fpoint, bool *, bool *);
@@ -842,7 +842,7 @@ public:
     int is_rrr60(void) const;
     int is_rrr61(void) const;
     int is_rrr62(void) const;
-    int is_rrr63(void) const;
+    int is_debug_type(void) const;
     int is_hittable(void) const;
     int is_alive_on_end_of_anim(void) const;
     int is_dead_on_end_of_anim(void) const;

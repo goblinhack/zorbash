@@ -80,6 +80,10 @@ _
     // generally do nothing or are hidden.
     //
     game->things_are_moving = false;
+
+    static int wait_count;
+    wait_count++;
+
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
         if (t->is_moving) {
             //
@@ -87,7 +91,9 @@ _
             //
             t->update_interpolated_position();
             if (t->is_moving) {
-                //if (!game->things_are_moving) { t->con("wait"); }
+                if ((wait_count > 100) && !game->things_are_moving) {
+                    t->con("Waiting on moving thing longer than expected");
+                }
                 game->things_are_moving = true;
             }
         } else if (t->is_falling) {
@@ -96,18 +102,24 @@ _
             //
             t->update_interpolated_position();
             if (t->is_falling) {
-                // if (!game->things_are_moving) { t->con("wait"); }
+                if ((wait_count > 100) && !game->things_are_moving) {
+                    t->con("Waiting on falling thing longer than expected");
+                }
                 game->things_are_moving = true;
             }
         } else if (t->is_scheduled_for_death) {
-            // if (!game->things_are_moving) { t->con("wait"); }
+            if ((wait_count > 100) && !game->things_are_moving) {
+                t->con("Waiting on scheduled for death thing longer than expected");
+            }
             game->things_are_moving = true;
         } else if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
                    (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
                    (t->get_weapon_id_use_anim().ok())) {
 
             if (game->robot_mode) {
-                // if (!game->things_are_moving) { t->con("wait"); }
+                if ((wait_count > 100) && !game->things_are_moving) {
+                    t->con("Waiting on animated thing longer than expected");
+                }
                 game->things_are_moving = true;
             }
 
@@ -121,12 +133,22 @@ _
                     } else {
                         t->is_offscreen = true;
                     }
+                } else {
+                    //
+                    // Make sure offscreen resurrection occurs.
+                    //
+                    auto tpp = t->tp();
+                    if (unlikely(tpp->gfx_animated())) {
+                        t->animate();
+                    }
                 }
             }
         }
         if (t->is_waiting_to_fall) {
-            // if (!game->things_are_moving) { t->con("wait"); }
             t->fall_to_next_level();
+            if ((wait_count > 100) && !game->things_are_moving) {
+                t->con("Waiting on waiting to fall thing longer than expected");
+            }
             game->things_are_moving = true;
         }
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
@@ -136,33 +158,40 @@ _
             if (!player->descend_dungeon()) {
                 player->err("Failed to descend dungeon");
             }
-            // if (!game->things_are_moving) { player->con("wait"); }
+            if ((wait_count > 100) && !game->things_are_moving) {
+                player->con("Waiting on descending player thing longer than expected");
+            }
             game->things_are_moving = true;
         }
         if (player && player->is_waiting_to_ascend_dungeon) {
             if (!player->ascend_dungeon()) {
                 player->err("Failed to ascend dungeon");
             }
-            // if (!game->things_are_moving) { player->con("wait"); }
+            if ((wait_count > 100) && !game->things_are_moving) {
+                player->con("Waiting on ascending player thing longer than expected");
+            }
             game->things_are_moving = true;
         }
         if (player && player->is_waiting_to_descend_sewer) {
             if (!player->descend_sewer()) {
                 player->err("Failed to descend sewer");
             }
-            // if (!game->things_are_moving) { player->con("wait"); }
+            if ((wait_count > 100) && !game->things_are_moving) {
+                player->con("Waiting on descending sewer player thing longer than expected");
+            }
             game->things_are_moving = true;
         }
         if (player && player->is_waiting_to_ascend_sewer) {
             if (!player->ascend_sewer()) {
                 player->err("Failed to ascend sewer");
             }
-            // if (!game->things_are_moving) { player->con("wait"); }
+            if ((wait_count > 100) && !game->things_are_moving) {
+                player->con("Waiting on ascending sewer player thing longer than expected");
+            }
             game->things_are_moving = true;
         }
         if (player && player->is_waiting_to_fall) {
             player->fall_to_next_level();
-            // if (!game->things_are_moving) { player->con("wait"); }
             game->things_are_moving = true;
         }
     }
@@ -170,6 +199,8 @@ _
     if (game->things_are_moving) {
         return false;
     }
+
+    wait_count = 0;
 
     if (!game->robot_mode) {
         player_tick();

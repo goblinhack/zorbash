@@ -245,7 +245,7 @@ _
         // ground that are not auto collected, then describe them
         //
         if (game->state == Game::STATE_NORMAL) {
-            if (is_player() && check_anything_to_carry()) {
+            if (is_player() && check_anything_to_carry(false)) {
                 level->describe(mid_at);
             }
         }
@@ -265,7 +265,7 @@ _
         // ground that are not auto collected, then describe them
         //
         if (game->state == Game::STATE_NORMAL) {
-            if (is_player() && check_anything_to_carry()) {
+            if (is_player() && check_anything_to_carry(false)) {
                 level->describe(mid_at);
             }
         }

@@ -69,7 +69,7 @@ void Thing::move_finish (void)
     set_where_i_dropped_an_item_last(point(-1, -1));
 
     if (is_player()) {
-        if (check_anything_to_carry()) {
+        if (check_anything_to_carry(true)) {
             BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
                    SDL_GetScancodeName(
                         (SDL_Scancode)game->config.key_wait_or_collect));

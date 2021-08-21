@@ -21,13 +21,13 @@ void Thing::animate (void)
 
     if (time_get_time_ms_cached() <= get_timestamp_anim_delay_end()) {
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("Waiting on anim frame"); }
+if (is_debug_type()) { con("Waiting on anim frame"); }
 #endif
         return;
     }
 
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("Animate"); }
+if (is_debug_type()) { con("Animate"); }
 #endif
 
     auto tmap = &tpp->tiles;
@@ -37,7 +37,7 @@ if (is_blood_splatter()) { con("Animate"); }
     std::vector<Tilep> *tiles = &((*tmap));
     if (unlikely(!tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("Has no tiles"); }
+if (is_debug_type()) { con("Has no tiles"); }
 #endif
         return;
     }
@@ -49,7 +49,7 @@ if (is_blood_splatter()) { con("Has no tiles"); }
         //
         if (timestamp_next_frame > time_get_time_ms_cached()) {
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("Same frame"); }
+if (is_debug_type()) { con("Same frame"); }
 #endif
             return;
         }
@@ -60,12 +60,15 @@ if (is_blood_splatter()) { con("Same frame"); }
         if (tile_is_end_of_anim(tile)) {
             if (tile_is_dead_on_end_of_anim(tile)) {
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("Mark as dead"); }
+if (is_debug_type()) { con("Mark as dead"); }
 #endif
                 dead_scheduled("by end of anim");
             }
 
             if (tile_is_alive_on_end_of_anim(tile)) {
+#ifdef DEBUG_ANIM
+if (is_debug_type()) { con("Mark as alive"); }
+#endif
                 is_resurrecting = false;
                 is_resurrected = true;
                 is_dead = false;
@@ -75,7 +78,7 @@ if (is_blood_splatter()) { con("Mark as dead"); }
                 // Stay dead
                 //
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("Stay dead"); }
+if (is_debug_type()) { con("Stay dead"); }
 #endif
                 return;
             }
@@ -132,7 +135,7 @@ if (is_blood_splatter()) { con("Stay dead"); }
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("Choose tiles hp %d "
+if (is_debug_type()) { con("Choose tiles hp %d "
                       "is_attached %d "
                       "is_being_destroyed %d "
                       "is_blitted %d "
@@ -185,7 +188,7 @@ if (is_blood_splatter()) { con("Choose tiles hp %d "
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("Tile %s moving %d up %d down %d left %d right %d dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
+if (is_debug_type()) { con("Tile %s moving %d up %d down %d left %d right %d dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
                        tile_is_moving(tile),
                        tile_is_dir_up(tile),
                        tile_is_dir_down(tile),
@@ -219,7 +222,7 @@ if (is_blood_splatter()) { con("Tile %s moving %d up %d down %d left %d right %d
                         if (!tile_is_hp_25_percent(tile)) {
                             tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
@@ -227,7 +230,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                         if (!tile_is_hp_50_percent(tile)) {
                             tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
@@ -235,14 +238,14 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                         if (!tile_is_hp_75_percent(tile)) {
                             tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             continue;
                         }
                     } else {
                         if (!tile_is_hp_100_percent(tile)) {
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                             tile = tile_next(tmap, tile);
                             continue;
@@ -254,7 +257,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                     if (tile_is_moving(tile)) {
                         tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                         continue;
                     }
@@ -265,7 +268,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_resurrecting(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -273,7 +276,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_dead(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -281,7 +284,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_sleeping(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -289,7 +292,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_dir_up(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -297,7 +300,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_dir_down(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -305,7 +308,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_dir_left(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -313,7 +316,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_dir_right(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -321,7 +324,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_dir_none(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -329,7 +332,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (!tile_is_open(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -337,7 +340,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (tile_is_sleeping(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -345,7 +348,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (tile_is_dead(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -353,7 +356,7 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
                 if (tile_is_open(tile)) {
                     tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
+if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
                     continue;
                 }
@@ -420,13 +423,13 @@ if (is_blood_splatter()) { con(" skip %s line %d", tile_name(tile).c_str(), __LI
 
     if (!tile) {
 #ifdef DEBUG_ANIM
-if (is_blood_splatter()) { con("No tile"); }
+if (is_debug_type()) { con("No tile"); }
 #endif
         return;
     }
 
 #ifdef DEBUG_ANIM
-    if (is_blood_splatter()) { con("Set %s", tile_name(tile).c_str()); }
+    if (is_debug_type()) { con("Set %s", tile_name(tile).c_str()); }
 #endif
 
     tile_curr = tile->global_index;

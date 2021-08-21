@@ -418,8 +418,8 @@ class Tp:
     def set_is_rrr62(self, value):
         zx.tp_set_is_rrr62(self, value)
 
-    def set_is_rrr63(self, value):
-        zx.tp_set_is_rrr63(self, value)
+    def set_is_debug_type(self, value):
+        zx.tp_set_is_debug_type(self, value)
 
     def set_is_hittable(self, value):
         zx.tp_set_is_hittable(self, value)

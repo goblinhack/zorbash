@@ -590,7 +590,7 @@ _
 _
     LOG("Actionbar init create");
     bool icon_collect = false;
-    if (player->check_anything_to_carry()) {
+    if (player->check_anything_to_carry(false)) {
         icon_collect = true;
     }
 _

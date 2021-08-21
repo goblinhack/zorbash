@@ -283,7 +283,7 @@ private:
     int _is_rrr60 {};
     int _is_rrr61 {};
     int _is_rrr62 {};
-    int _is_rrr63 {};
+    int _is_debug_type {};
     int _is_hittable {};
     int _is_alive_on_end_of_anim {};
     int _is_dead_on_end_of_anim {};
@@ -745,7 +745,7 @@ public:
     int is_rrr60(void) const;
     int is_rrr61(void) const;
     int is_rrr62(void) const;
-    int is_rrr63(void) const;
+    int is_debug_type(void) const;
     int is_hittable(void) const;
     int is_alive_on_end_of_anim(void) const;
     int is_dead_on_end_of_anim(void) const;
@@ -1071,7 +1071,7 @@ public:
     void set_is_rrr60(int);
     void set_is_rrr61(int);
     void set_is_rrr62(int);
-    void set_is_rrr63(int);
+    void set_is_debug_type(int);
     void set_is_hittable(int);
     void set_is_alive_on_end_of_anim(int);
     void set_is_dead_on_end_of_anim(int);

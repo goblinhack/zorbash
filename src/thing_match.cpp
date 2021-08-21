@@ -223,7 +223,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr60() &&                                         (what == "is_rrr60"))                                         { return true; }
     if (is_rrr61() &&                                         (what == "is_rrr61"))                                         { return true; }
     if (is_rrr62() &&                                         (what == "is_rrr62"))                                         { return true; }
-    if (is_rrr63() &&                                         (what == "is_rrr63"))                                         { return true; }
+    if (is_debug_type() &&                                         (what == "is_debug_type"))                                         { return true; }
     if (is_hittable() &&                                         (what == "is_hittable"))                                         { return true; }
     if (is_alive_on_end_of_anim() &&                                         (what == "is_alive_on_end_of_anim"))                                         { return true; }
     if (is_dead_on_end_of_anim() &&                                         (what == "is_dead_on_end_of_anim"))                                         { return true; }
@@ -485,7 +485,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr60")                                         { return &Thing::is_rrr60; }
     if (what == "is_rrr61")                                         { return &Thing::is_rrr61; }
     if (what == "is_rrr62")                                         { return &Thing::is_rrr62; }
-    if (what == "is_rrr63")                                         { return &Thing::is_rrr63; }
+    if (what == "is_debug_type")                                         { return &Thing::is_debug_type; }
     if (what == "is_hittable")                                      { return &Thing::is_hittable; }
     if (what == "is_alive_on_end_of_anim")                          { return &Thing::is_alive_on_end_of_anim; }
     if (what == "is_dead_on_end_of_anim")                           { return &Thing::is_dead_on_end_of_anim; }

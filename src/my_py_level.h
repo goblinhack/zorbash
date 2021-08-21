@@ -191,7 +191,7 @@ PyObject *level_is_rrr59_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr60_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr61_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr62_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr63_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_debug_type_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_hittable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_alive_on_end_of_anim_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_end_of_anim_at(PyObject *obj, PyObject *args, PyObject *keywds);
