@@ -272,10 +272,10 @@ _
     // also handle things that do not move, like a wand that is now on fire.
     //
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
-        if (t->is_dead) {
-            continue;
-        }
-
+        //
+        // Need to do this even for dead things, so corpses don't hover over
+        // chasms.
+        //
         t->location_check();
     } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 

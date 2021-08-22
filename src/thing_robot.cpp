@@ -588,9 +588,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         }
                     } else {
                         if (is_player()) {
-                            CON("Robot: Is not considering collecting %s", it->to_string().c_str());
+                            CON("Robot: Is not collecting %s", it->to_string().c_str());
                         } else {
-                            con("Monst: Is not considering collecting %s", it->to_string().c_str());
+                            con("Monst: Is not collecting %s", it->to_string().c_str());
                         }
                     }
                 }
@@ -921,7 +921,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
         }
     }
 
-#if 0
+#if 1
     printf("\nrobot\n");
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
@@ -1136,19 +1136,27 @@ void Thing::robot_tick (void)
     bool jump = false;
     bool do_something = false;
 
+    //
+    // See if anything dangerous is close
+    //
+    auto threat = nearby_most_dangerous_thing_get();
+    if (threat) {
+        CON("Robot: Nearest thing: %s", threat->to_string().c_str());
+    }
+
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
             CON("Robot: Is idle, look for something to do");
+            if (!get_stamina()) {
+                game->tick_begin("Robot needs to rest");
+                robot_change_state(ROBOT_STATE_RESTING, "need to rest");
+                return;
+            }
 
             //
             // Look for doors or things to collect, if not being attacked.
             //
-            auto threat = nearby_most_dangerous_thing_get();
-            if (threat) {
-                CON("Robot: Nearest thing: %s", threat->to_string().c_str());
-            }
-
             if (threat && (is_dangerous(threat) || is_enemy(threat))) {
                 CON("Robot: A threat is nearby");
             } else {
@@ -1199,6 +1207,27 @@ void Thing::robot_tick (void)
             }
         }
         break;
+        case ROBOT_STATE_RESTING:
+        {
+            if (get_stamina() >= get_stamina_max() / 2) {
+                robot_change_state(ROBOT_STATE_IDLE, "rested enough");
+                return;
+            }
+
+            if (get_stamina()) {
+                if (threat && (is_dangerous(threat) || is_enemy(threat))) {
+                    robot_change_state(ROBOT_STATE_IDLE, "threat nearby, stop resting");
+                    return;
+                }
+            }
+
+            do_something = true;
+            CON("Robot: Wait and rest");
+            wait = true;
+            break;
+        }
+
+        break;
     }
 
     log("Robot: Do something");
@@ -1222,6 +1251,9 @@ void Thing::robot_change_state (int new_state, const std::string &why)
         case ROBOT_STATE_MOVING:
             to = "MOVING";
             break;
+        case ROBOT_STATE_RESTING:
+            to = "RESTING";
+            break;
     }
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
@@ -1229,6 +1261,9 @@ void Thing::robot_change_state (int new_state, const std::string &why)
             break;
         case ROBOT_STATE_MOVING:
             from = "MOVING";
+            break;
+        case ROBOT_STATE_RESTING:
+            from = "RESTING";
             break;
     }
 
@@ -1240,6 +1275,8 @@ void Thing::robot_change_state (int new_state, const std::string &why)
             clear_move_path("Robot is idle");
             break;
         case ROBOT_STATE_MOVING:
+            break;
+        case ROBOT_STATE_RESTING:
             break;
     }
 }
