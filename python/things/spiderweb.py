@@ -18,6 +18,7 @@ def tp_init(name, tiles=[]):
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_hittable(True)
+    mytp.set_is_interesting(True) # So robot can see and break out
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)
     mytp.set_is_spiderweb(True)

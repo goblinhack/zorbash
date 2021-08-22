@@ -81,6 +81,7 @@ _
     //
     game->things_are_moving = false;
 
+    static const int wait_count_max = 100;
     static int wait_count;
     wait_count++;
 
@@ -91,7 +92,7 @@ _
             //
             t->update_interpolated_position();
             if (t->is_moving) {
-                if ((wait_count > 100) && !game->things_are_moving) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
                     t->con("Waiting on moving thing longer than expected");
                 }
                 game->things_are_moving = true;
@@ -104,7 +105,7 @@ _
             //
             t->update_interpolated_position();
             if (t->is_falling) {
-                if ((wait_count > 100) && !game->things_are_moving) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
                     t->con("Waiting on falling thing longer than expected");
                 }
                 game->things_are_moving = true;
@@ -112,7 +113,7 @@ _
         }
 
         if (t->is_scheduled_for_death) {
-            if ((wait_count > 100) && !game->things_are_moving) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
                 t->con("Waiting on scheduled for death thing longer than expected");
             }
             game->things_are_moving = true;
@@ -124,7 +125,7 @@ _
             (t->get_weapon_id_use_anim().ok())) {
 
             if (game->robot_mode) {
-                if ((wait_count > 100) && !game->things_are_moving) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
                     t->con("Waiting on animated thing longer than expected");
                 }
                 game->things_are_moving = true;
@@ -155,7 +156,7 @@ _
         }
         if (t->is_waiting_to_fall) {
             t->fall_to_next_level();
-            if ((wait_count > 100) && !game->things_are_moving) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
                 t->con("Waiting on waiting to fall thing longer than expected");
             }
             game->things_are_moving = true;
@@ -167,7 +168,7 @@ _
             if (!player->descend_dungeon()) {
                 player->err("Failed to descend dungeon");
             }
-            if ((wait_count > 100) && !game->things_are_moving) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
                 player->con("Waiting on descending player thing longer than expected");
             }
             game->things_are_moving = true;
@@ -176,7 +177,7 @@ _
             if (!player->ascend_dungeon()) {
                 player->err("Failed to ascend dungeon");
             }
-            if ((wait_count > 100) && !game->things_are_moving) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
                 player->con("Waiting on ascending player thing longer than expected");
             }
             game->things_are_moving = true;
@@ -185,7 +186,7 @@ _
             if (!player->descend_sewer()) {
                 player->err("Failed to descend sewer");
             }
-            if ((wait_count > 100) && !game->things_are_moving) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
                 player->con("Waiting on descending sewer player thing longer than expected");
             }
             game->things_are_moving = true;
@@ -194,7 +195,7 @@ _
             if (!player->ascend_sewer()) {
                 player->err("Failed to ascend sewer");
             }
-            if ((wait_count > 100) && !game->things_are_moving) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
                 player->con("Waiting on ascending sewer player thing longer than expected");
             }
             game->things_are_moving = true;

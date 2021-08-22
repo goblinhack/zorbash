@@ -186,7 +186,13 @@ bool Thing::move (fpoint future_pos,
                 !is_cursor() &&
                 !is_cursor_path()) {
                 if (is_player()) {
-                    TOPCON("You cannot move!");
+                    if (level->is_spiderweb(mid_at.x, mid_at.y)) {
+                        TOPCON("You are trapped in a web!");
+                        game->tick_begin("trapped in a web");
+                    } else {
+                        TOPCON("You cannot move!");
+                        game->tick_begin("trapped in something sticky");
+                    }
                 }
                 lunge(future_pos);
                 return false;

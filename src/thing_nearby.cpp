@@ -27,19 +27,33 @@ Thingp Thing::nearby_most_dangerous_thing_get (void)
         point(-1, 0),
         point(1, 0),
         point(0, 1),
+        point(0, 0), // For spiderwebs
     };
 
     for (const auto& d : all_deltas) {
         auto x = mid_at.x + d.x;
         auto y = mid_at.y + d.y;
 
-        FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, MAP_DEPTH_OBJ) {
-            auto tpp = t->tp();
-            if (!tpp->is_monst()) {
+        FOR_ALL_THINGS(level, t, x, y) {
+            if (t == this) {
                 continue;
             }
 
             if (t->is_dead) {
+                continue;
+            }
+
+            //
+            // Treat as a threat so they attack
+            //
+            if (t->is_spiderweb()) {
+                if (t->mid_at == mid_at) {
+                    possible.push_back(std::make_pair(t, 666));
+                    continue;
+                }
+            }
+
+            if (!t->is_monst()) {
                 continue;
             }
 

@@ -254,6 +254,11 @@ _
             }
 
             if (new_move_path.empty()) {
+                if (level->is_sticky(mid_at.x, mid_at.y)) {
+                    CON("Robot: Try to break free from the web");
+                    return true;
+                }
+                CON("Robot: Empty move path");
                 continue;
             }
 
@@ -276,11 +281,13 @@ _
                 }
 
                 if (is_player()) {
-                    CON("Robot: Found a goal: %s %s",
-                        it->to_string().c_str(), result.goal.msg.c_str());
+                    CON("Robot: Found a goal: %s %s, score %d",
+                        it->to_string().c_str(), result.goal.msg.c_str(),
+                        (int)result.goal.score);
                 } else {
-                    log("Monst: Fouud a goal %s %s",
-                        it->to_string().c_str(), result.goal.msg.c_str());
+                    log("Monst: Found a goal: %s %s, score %d",
+                        it->to_string().c_str(), result.goal.msg.c_str(),
+                        (int)result.goal.score);
                 }
             } FOR_ALL_THINGS_END();
 
@@ -514,6 +521,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
         std::string last_msg;
 
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+            last_msg = "";
+
             if (it == this) { continue; }
 
             if (it->is_changing_level ||
@@ -601,8 +610,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
             if (!it->is_dead) {
                 bool avoid = false;
                 auto dist = distance(mid_at, it->mid_at);
-                float max_dist = get_light_strength();
-                //float max_dist = ai_scent_distance();
+                float max_dist = ai_scent_distance();
 
                 //
                 // If this is something we really want to avoid, like
@@ -651,6 +659,12 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-monst");
                         got_one_this_tile = true;
                     }
+                } else if (!avoid && it->is_spiderweb() && !dist) {
+                    //
+                    // Very close, high priority attack
+                    //
+                    GOAL_ADD(666, "get-out-of-web");
+                    got_one_this_tile = true;
                 }
 
                 if (avoid) {
@@ -875,6 +889,10 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
                     //
                     // Worth investigating
                     //
+                } else if (level->is_ascend_sewer(o)) {
+                    //
+                    // Worth investigating
+                    //
                 } else if (level->is_descend_dungeon(o)) {
                     //
                     // Worth investigating
@@ -972,6 +990,10 @@ next:
             total_score += 10;
         }
 
+        if (level->is_ascend_sewer(p.x, p.y)) {
+            total_score += 10;
+        }
+
         if (level->is_descend_dungeon(p.x, p.y)) {
             total_score += 10;
         }
@@ -1005,6 +1027,20 @@ bool Thing::robot_ai_choose_nearby_goal (void)
 
                     //
                     // Try hitting the door
+                    //
+                    left = dx < 0;
+                    right = dx > 0;
+                    up = dy < 0;
+                    down = dy > 0;
+                    attack = true;
+                    CON("Robot: Try hitting the door");
+                    player_tick(left, right, up, down, attack, wait, jump);
+                    return true;
+                }
+
+                if (it->is_spiderweb() && (it->mid_at == mid_at)) {
+                    //
+                    // Try hitting the web
                     //
                     left = dx < 0;
                     right = dx > 0;
@@ -1061,6 +1097,10 @@ void Thing::robot_tick (void)
         is_waiting_to_fall ||
         is_the_grid ||
         is_jumping) {
+        return;
+    }
+
+    if (level->timestamp_fade_in_begin) {
         return;
     }
 
