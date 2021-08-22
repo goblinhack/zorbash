@@ -601,7 +601,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
             if (!it->is_dead) {
                 bool avoid = false;
                 auto dist = distance(mid_at, it->mid_at);
-                float max_dist = ai_scent_distance();
+                float max_dist = get_light_strength();
+                //float max_dist = ai_scent_distance();
 
                 //
                 // If this is something we really want to avoid, like
@@ -870,7 +871,15 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
                     continue;
                 }
 
-                if (level->is_door(o)) {
+                if (level->is_descend_sewer(o)) {
+                    //
+                    // Worth investigating
+                    //
+                } else if (level->is_descend_dungeon(o)) {
+                    //
+                    // Worth investigating
+                    //
+                } else if (level->is_door(o)) {
                     //
                     // A locked door is worth investigating
                     //
@@ -956,6 +965,14 @@ next:
         // Be curious
         //
         if (level->is_door(p.x, p.y)) {
+            total_score += 10;
+        }
+
+        if (level->is_descend_sewer(p.x, p.y)) {
+            total_score += 10;
+        }
+
+        if (level->is_descend_dungeon(p.x, p.y)) {
             total_score += 10;
         }
 
@@ -1088,7 +1105,11 @@ void Thing::robot_tick (void)
             // Look for doors or things to collect, if not being attacked.
             //
             auto threat = nearby_most_dangerous_thing_get();
-            if (threat && is_dangerous(threat)){
+            if (threat) {
+                CON("Robot: Nearest thing: %s", threat->to_string().c_str());
+            }
+
+            if (threat && (is_dangerous(threat) || is_enemy(threat))) {
                 CON("Robot: A threat is nearby");
             } else {
                 if (robot_ai_choose_nearby_goal()) {

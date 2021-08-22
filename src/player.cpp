@@ -26,6 +26,14 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         return;
     }
 
+    if (game->level->timestamp_fade_in_begin ||
+        game->level->timestamp_fade_out_begin) {
+        if (DEBUG4) {
+            LOG("Player tick; ignore, level fading im/out");
+        }
+        return;
+    }
+
     //
     // Trying to move when moving items?
     //

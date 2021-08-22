@@ -17,9 +17,8 @@
 #include "my_thing_template.h"
 #include "my_monst.h"
 
-void Thing::get_light_strength_including_torch_effect (int &out_light_strength)
+void Thing::get_light_strength_including_torch_effect (int &out_light_strength) const
 {_
-    auto orig_light_strength = out_light_strength;
     auto light_strength = get_initial_light_strength();
 
     auto torch_count = 0;
@@ -47,6 +46,14 @@ void Thing::get_light_strength_including_torch_effect (int &out_light_strength)
     if (torch_count == 0) {
         light_strength = 1;
     }
+}
+
+void Thing::update_light_strength_including_torch_effect (int &out_light_strength)
+{_
+    auto orig_light_strength = out_light_strength;
+    int light_strength;
+
+    get_light_strength_including_torch_effect (light_strength);
 
     if (orig_light_strength) {
         if (light_strength != orig_light_strength) {

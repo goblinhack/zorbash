@@ -771,3 +771,29 @@ void Tp::set_weapon_damage(int v)                                    { _weapon_d
 void Tp::set_weapon_use_distance(int v)                              { _weapon_use_distance = v; }
 void Tp::set_z_depth(int v)                                          { z_depth = v; }
 void Tp::set_z_prio(int v)                                           { z_prio = v; }
+
+//
+// foo bar -> Foo Bar
+//
+std::string Tp::short_text_capitalized (void) const
+{_
+    std::string out = text_name();
+    char *b = (char*)out.c_str();
+    char *e = b + out.size();
+    char *c = b;
+    bool word_start = true;
+    while (c < e) {
+        if (word_start) {
+            if (islower(*c)) {
+                *c = toupper(*c);
+            }
+            word_start = false;
+        } else if (*c == ' ') {
+            word_start = true;
+        }
+
+        c++;
+    }
+
+    return out;
+}

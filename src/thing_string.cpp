@@ -64,10 +64,10 @@ std::string Thing::to_string (void) const
                                is_moving                     ? "/moving" : "",
                                is_falling                    ? "/falling" : "",
                                is_changing_level             ? "/chg-level" : "",
-                               is_waiting_to_ascend_dungeon  ? "/asc-dung" : "",
-                               is_waiting_to_descend_dungeon ? "/des-dung" : "",
-                               is_waiting_to_descend_sewer   ? "/des-sewer" : "",
-                               is_waiting_to_ascend_sewer    ? "/asc-sewer" : "",
+                               is_waiting_to_ascend_dungeon  ? "/ascend-dungeon" : "",
+                               is_waiting_to_descend_dungeon ? "/descend-dungeon" : "",
+                               is_waiting_to_ascend_sewer    ? "/ascend-sewer" : "",
+                               is_waiting_to_descend_sewer   ? "/descend-sewer" : "",
                                mid_at.x, mid_at.y));
     } else {_
         return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s @%g,%g)",

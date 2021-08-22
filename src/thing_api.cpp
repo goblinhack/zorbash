@@ -2911,7 +2911,7 @@ int Thing::get_initial_light_strength (void) const
     return (tp()->light_strength());
 }
 
-int Thing::get_light_strength (void)
+int Thing::get_light_strength (void) const
 {_
     if (!monstp) {
         return get_initial_light_strength();
@@ -2926,6 +2926,27 @@ int Thing::get_light_strength (void)
 
     if (is_player()) {
         get_light_strength_including_torch_effect(light_strength);
+    }
+
+    monstp->light_strength = light_strength;
+    return light_strength;
+}
+
+int Thing::update_light_strength (void)
+{_
+    if (!monstp) {
+        return get_initial_light_strength();
+    }
+
+    verify(monstp);
+    auto light_strength = monstp->light_strength;
+
+    if (!light_strength) {
+        light_strength = get_initial_light_strength();
+    }
+
+    if (is_player()) {
+        update_light_strength_including_torch_effect(light_strength);
     }
 
     monstp->light_strength = light_strength;

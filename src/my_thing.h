@@ -538,7 +538,8 @@ public:
     int get_lifespan_initial(void) const;
     int get_lifespan(void) const;
     int get_light_strength_initial(void) const;
-    int get_light_strength(void);
+    int get_light_strength(void) const;
+    int update_light_strength(void);
     int get_minion_count(void) const;
     int get_nutrition(void) const;
     int get_owned_count(void) const;
@@ -1178,7 +1179,8 @@ public:
     void fall(float fall_height, timestamp_t ms);
     void fire_tick();
     void gc(void);
-    void get_light_strength_including_torch_effect(int &light_strength);
+    void get_light_strength_including_torch_effect(int &light_strength) const;
+    void update_light_strength_including_torch_effect(int &light_strength);
     void get_tiles(void);
     void grass_tick();
     void hide();

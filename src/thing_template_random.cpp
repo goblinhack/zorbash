@@ -244,7 +244,7 @@ Tpp Level::tp_random_monst_easy (const point &p)
             continue;
         }
 
-        con("DGN: Placed easy monst %s", tpp->name().c_str());
+        con("DGN: Placed easy monst %s", tpp->short_text_capitalized().c_str());
         return tpp;
     }
 }
@@ -282,7 +282,7 @@ Tpp Level::tp_random_monst_hard (const point &p)
             continue;
         }
 
-        con("DGN: Placed hard monst %s", tpp->name().c_str());
+        con("DGN: Placed hard monst %s", tpp->short_text_capitalized().c_str());
         return tpp;
     }
 }

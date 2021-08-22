@@ -7,7 +7,7 @@
 #ifndef _MY_THING_DEFS_H_
 #define _MY_THING_DEFS_H_
 
-#define LEVEL_FADE_IN_MS           1000
+#define LEVEL_FADE_IN_MS           500
 #define LEVEL_FADE_OUT_MS          500
 #define LEVELS_ACROSS              MAP_WIDTH // World size
 #define LEVELS_DEEP                52  // Divided by 2 for sewer levels

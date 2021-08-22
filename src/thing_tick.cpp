@@ -69,6 +69,8 @@ void Thing::achieve_goals_in_life (void)
 
     dbg("Achieve goals tick %u", game->tick_current);
 
+    update_light_strength();
+
     //
     // Lifespan tick for carried torches must be before is_hidden check
     //
