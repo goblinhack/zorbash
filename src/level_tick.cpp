@@ -287,6 +287,11 @@ _
                     game->robot_mode_tick();
                 }
             }
+        } else if (player) {
+            if (player->monstp &&
+                player->monstp->move_path.size()) {
+                player->cursor_path_pop_next_and_move();
+            }
         }
     }
 _

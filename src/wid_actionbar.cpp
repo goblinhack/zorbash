@@ -101,6 +101,10 @@ _
 
 void wid_actionbar_robot_mode_off (void)
 {_
+    if (!game->robot_mode) {
+        return;
+    }
+
     DBG3("Actionbar robot");
 _
     wid_actionbar_close_all_popups();
