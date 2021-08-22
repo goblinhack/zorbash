@@ -630,18 +630,24 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     // Monsters we avoid are more serious threats
                     //
                     avoid = true;
+                } else if (!avoid && it->is_minion_generator()) {
+                    //
+                    // Very close, high priority attack
+                    //
+                    GOAL_ADD((int)(max_dist - dist) * 200, "attack-nearby-generator");
+                    got_one_this_tile = true;
                 } else if (!avoid && it->is_monst()) {
                     if (dist < 2) {
                         //
                         // Very close, high priority attack
                         //
-                        GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-enemy");
+                        GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-monst");
                         got_one_this_tile = true;
                     } else if (dist < max_dist) {
                         //
                         // Further away close, lower priority attack
                         //
-                        GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-enemy");
+                        GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-monst");
                         got_one_this_tile = true;
                     }
                 }
